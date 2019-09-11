@@ -35,33 +35,30 @@ const panelSolo = {
 
 const showMyNotes = state => {
   const yours = true;
-  const highlight = Object.assign({}, state.visibilityFilters.highlight, {
-    yours
-  });
-  const annotation = Object.assign({}, state.visibilityFilters.highlight, {
-    yours
-  });
-  const visibilityFilters = Object.assign({}, state.visibilityFilters, {
+  const highlight = { ...state.visibilityFilters.highlight, yours };
+  const annotation = { ...state.visibilityFilters.highlight, yours };
+  const visibilityFilters = {
+    ...state.visibilityFilters,
     highlight,
     annotation
-  });
-  return Object.assign({}, state, { visibilityFilters });
+  };
+  return { ...state, visibilityFilters };
 };
 
 const visibilityChange = (state, action) => {
-  return Object.assign({}, state, action.payload);
+  return { ...state, ...action.payload };
 };
 
 const visibilityToggle = (state, action) => {
-  return Object.assign({}, state, { [action.payload]: !state[action.payload] });
+  return { ...state, [action.payload]: !state[action.payload] };
 };
 
 const visibilityShow = (state, action) => {
-  return Object.assign({}, state, { [action.payload]: true });
+  return { ...state, [action.payload]: true };
 };
 
 const visibilityHide = (state, action) => {
-  return Object.assign({}, state, { [action.payload]: false });
+  return { ...state, [action.payload]: false };
 };
 
 const panelToggle = (state, action) => {
@@ -81,7 +78,7 @@ const panelToggle = (state, action) => {
     if (soloSwitch) return false;
     return value;
   });
-  return Object.assign({}, state, { uiPanels: switchedPanels });
+  return { ...state, uiPanels: switchedPanels };
 };
 
 const panelShow = (state, action) => {
@@ -90,7 +87,7 @@ const panelShow = (state, action) => {
     if (panelSolo[action.payload] === true) return false;
     return value;
   });
-  return Object.assign({}, state, { uiPanels: switchedPanels });
+  return { ...state, uiPanels: switchedPanels };
 };
 
 const panelHide = (state, action) => {
@@ -98,12 +95,12 @@ const panelHide = (state, action) => {
     if (key === action.payload) return false;
     return value;
   });
-  return Object.assign({}, state, { uiPanels: switchedPanels });
+  return { ...state, uiPanels: switchedPanels };
 };
 
 const allPanelsHide = state => {
   if (!Object.values(state.uiPanels).includes(true)) return state;
-  return Object.assign({}, state, { uiPanels: initialState.uiPanels });
+  return { ...state, uiPanels: initialState.uiPanels };
 };
 
 export default handleActions(

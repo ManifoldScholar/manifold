@@ -578,8 +578,8 @@ const buildEntity = (entityType, id = null, attributes, relationships) => {
   const out = {
     type: entity.type,
     id: id || uuid.v1(),
-    attributes: Object.assign({}, entity.attributes, attributes),
-    relationships: Object.assign({}, entity.relationships, relationships)
+    attributes: { ...entity.attributes, ...attributes },
+    relationships: { ...entity.relationships, ...relationships }
   };
   if (has(out.attributes, "slug")) out.attributes.slug = `slug-${out.id}`;
   return out;

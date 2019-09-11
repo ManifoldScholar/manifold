@@ -92,7 +92,7 @@ export default class ReadingGroupForm extends React.PureComponent {
         notificationScope="drawer"
       >
         {getModelValue => (
-          <React.Fragment>
+          <>
             <Form.TextInput
               wide
               label="Group Name"
@@ -162,7 +162,7 @@ export default class ReadingGroupForm extends React.PureComponent {
               theme="checkbox"
             />
             <Form.Save text="Save" />
-          </React.Fragment>
+          </>
         )}
       </FormContainer.Form>
     );

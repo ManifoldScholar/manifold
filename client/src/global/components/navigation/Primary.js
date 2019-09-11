@@ -70,7 +70,7 @@ export class NavigationPrimary extends PureComponent {
       ) : null;
 
     return (
-      <React.Fragment>
+      <>
         <Static
           backendButton={backendButton}
           {...this.props}
@@ -82,7 +82,7 @@ export class NavigationPrimary extends PureComponent {
           style={this.props.mobileStyle}
           mode={this.props.mode}
         />
-      </React.Fragment>
+      </>
     );
   }
 }

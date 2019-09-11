@@ -58,7 +58,7 @@ class Annotation extends PureComponent {
   render() {
     const { annotation, displayFormat } = this.props;
     return (
-      <React.Fragment>
+      <>
         <div className="annotation-selection">
           <TextContent
             {...annotation.attributes}
@@ -76,7 +76,7 @@ class Annotation extends PureComponent {
             includeComments={false}
           />
         </ul>
-      </React.Fragment>
+      </>
     );
   }
 }

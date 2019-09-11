@@ -96,7 +96,7 @@ export class HomeProjectsContainer extends Component {
               </Authorize>
             </ContentPlaceholder.Title>
             <ContentPlaceholder.Body>
-              <React.Fragment>
+              <>
                 <Authorize entity="project" ability="create">
                   {this.renderAdminMessage()}
                 </Authorize>
@@ -111,7 +111,7 @@ export class HomeProjectsContainer extends Component {
                   icon="BooksOnShelfColorUnique"
                   size={205}
                 />
-              </React.Fragment>
+              </>
             </ContentPlaceholder.Body>
             <ContentPlaceholder.Actions>
               <Authorize entity="project" ability="create">

@@ -48,7 +48,7 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
       slideshowResources: select(requests.feSlideshow, state.entityStore),
       slideshowResourcesMeta: meta(requests.feSlideshow, state.entityStore)
     };
-    return Object.assign({}, newState, ownProps);
+    return { ...newState, ...ownProps };
   };
 
   static displayName = "ReaderContainer.Notation.ResourceCollection.Detail";

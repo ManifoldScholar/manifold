@@ -12,5 +12,5 @@ export default function hydrate(route, registry) {
       properties.routes.push(hydrate(childRoute, registry));
     });
   }
-  return Object.assign({}, route, properties);
+  return { ...route, ...properties };
 }

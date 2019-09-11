@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { annotationsAPI, requests } from "api";
@@ -132,14 +132,12 @@ export class Annotatable extends Component {
 
   setActiveAnnotation = (annotationId, event = null, eventInfo = {}) => {
     this.setState({
-      activeEvent: Object.assign(
-        {
-          type: event.type,
-          clientX: event.clientX,
-          clientY: event.clientY
-        },
-        eventInfo
-      ),
+      activeEvent: {
+        type: event.type,
+        clientX: event.clientX,
+        clientY: event.clientY,
+        ...eventInfo
+      },
       annotation: annotationId,
       annotationState: "active"
     });
@@ -167,18 +165,15 @@ export class Annotatable extends Component {
 
   createHighlight = () => {
     const { currentReadingGroup } = this.props;
-    const attributes = Object.assign(
-      {},
-      this.state.selectionState.selectionAnnotation,
-      {
-        format: "highlight",
-        private: currentReadingGroup === "private",
-        readingGroupId:
-          currentReadingGroup !== "private" && currentReadingGroup !== "public"
-            ? currentReadingGroup
-            : null
-      }
-    );
+    const attributes = {
+      ...this.state.selectionState.selectionAnnotation,
+      format: "highlight",
+      private: currentReadingGroup === "private",
+      readingGroupId:
+        currentReadingGroup !== "private" && currentReadingGroup !== "public"
+          ? currentReadingGroup
+          : null
+    };
     this.createAnnotation({ attributes });
   };
 
@@ -283,7 +278,7 @@ export class Annotatable extends Component {
 
   render() {
     return (
-      <Fragment>
+      <>
         {this.debuggable && (
           <AnnotatableDebug
             annotatableProps={this.props}
@@ -342,7 +337,7 @@ export class Annotatable extends Component {
           containerSize={this.props.containerSize}
           bodySelector={this.props.bodySelector}
         />
-      </Fragment>
+      </>
     );
   }
 }

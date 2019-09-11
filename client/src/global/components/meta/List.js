@@ -77,7 +77,7 @@ export default class List extends Component {
   renderList() {
     const useMap = !!this.props.map;
     const { long, short } = this.state;
-    const metadata = Object.assign({}, long, short);
+    const metadata = { ...long, ...short };
     const metadataKeys = useMap
       ? this.props.map
       : Array.from(long, short).sort();
@@ -99,7 +99,7 @@ export default class List extends Component {
     const longKeys = useMap ? this.props.map : Object.keys(long).sort();
 
     return (
-      <React.Fragment>
+      <>
         {!isEmpty(longKeys) && (
           <ul className={`meta-list-${this.props.level}`}>
             {longKeys.map(key => {
@@ -115,7 +115,7 @@ export default class List extends Component {
             {this.renderDoi()}
           </ul>
         )}
-      </React.Fragment>
+      </>
     );
   }
 

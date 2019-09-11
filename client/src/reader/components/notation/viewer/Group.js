@@ -9,7 +9,7 @@ import Link from "./Link";
 export default class NotationViewerGroup extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
     const activeNotation = state.ui.transitory.reader.activeNotation;
-    return Object.assign({}, { activeNotation }, ownProps);
+    return { activeNotation, ...ownProps };
   };
 
   static displayName = "NotationViewer.Group";

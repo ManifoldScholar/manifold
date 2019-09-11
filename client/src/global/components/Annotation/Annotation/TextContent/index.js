@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Truncated from "./Truncated";
 import nl2br from "nl2br";
@@ -84,7 +84,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
           />
         </div>
         {this.annotatable && (
-          <Fragment>
+          <>
             <Authorize kind="any">
               <button
                 className="annotation-selection__button"
@@ -103,7 +103,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
                 </button>
               </Authorize>
             )}
-          </Fragment>
+          </>
         )}
       </div>
     );

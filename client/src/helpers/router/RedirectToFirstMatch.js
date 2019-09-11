@@ -42,9 +42,7 @@ class RedirectToFirstMatch extends React.PureComponent {
       return;
 
     this.props.candidates.find(candidate => {
-      const props = Object.assign({}, candidate, {
-        authentication: this.props.authentication
-      });
+      const props = { ...candidate, authentication: this.props.authentication };
       if (!props.ability || this.authorization.authorize(props)) {
         let path = null;
         if (candidate.path) {

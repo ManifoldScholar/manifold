@@ -51,13 +51,13 @@ export default function withScreenReaderStatus(WrappedComponent) {
     }
 
     render() {
-      const props = Object.assign({}, this.props, this.childProps);
+      const props = { ...this.props, ...this.childProps };
 
       return (
-        <React.Fragment>
+        <>
           {this.renderLiveRegion()}
           {React.createElement(WrappedComponent, props)}
-        </React.Fragment>
+        </>
       );
     }
   }

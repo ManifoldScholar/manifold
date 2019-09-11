@@ -37,7 +37,7 @@ export default class FormUploadEmpty extends PureComponent {
                 {"% Complete."}
               </span>
             ) : (
-              <React.Fragment>
+              <>
                 <button
                   type="button"
                   className="form-dropzone__inline-button"
@@ -53,7 +53,7 @@ export default class FormUploadEmpty extends PureComponent {
                 {this.props.uploadError ? (
                   <span className="error">{this.props.uploadError}</span>
                 ) : null}
-              </React.Fragment>
+              </>
             )}
           </p>
           {this.extensions ? (

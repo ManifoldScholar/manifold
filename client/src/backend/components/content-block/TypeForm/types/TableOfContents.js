@@ -30,7 +30,7 @@ export default class ProjectContentTypeFormTableOfContents extends PureComponent
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <Form.TextInput label="Title" name="attributes[title]" focusOnMount />
         <Form.Select
           label="Text"
@@ -44,7 +44,7 @@ export default class ProjectContentTypeFormTableOfContents extends PureComponent
           name="attributes[showTextTitle]"
           wide
         />
-      </React.Fragment>
+      </>
     );
   }
 }

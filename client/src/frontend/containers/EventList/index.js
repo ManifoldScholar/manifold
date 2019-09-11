@@ -56,7 +56,7 @@ export class ProjectEventsContainer extends Component {
     const eventsMeta = this.props.meta;
     if (!events) return null;
     return (
-      <React.Fragment>
+      <>
         <BackLink.Register
           backText="Back to Project"
           link={this.projectUrl()}
@@ -67,7 +67,7 @@ export class ProjectEventsContainer extends Component {
           events={events}
           pagination={eventsMeta.pagination}
         />
-      </React.Fragment>
+      </>
     );
   }
 }

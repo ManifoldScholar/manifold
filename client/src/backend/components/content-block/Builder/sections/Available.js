@@ -46,7 +46,7 @@ export default class ProjectContentSectionsAvailable extends PureComponent {
               isDropDisabled
             >
               {provided => (
-                <React.Fragment>
+                <>
                   <div ref={provided.innerRef}>
                     <Block
                       currentBlocks={this.props.currentBlocks}
@@ -57,7 +57,7 @@ export default class ProjectContentSectionsAvailable extends PureComponent {
                     />
                   </div>
                   {provided.placeholder}
-                </React.Fragment>
+                </>
               )}
             </Droppable>
           ))}

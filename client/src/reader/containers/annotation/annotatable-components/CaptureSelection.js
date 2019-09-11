@@ -68,17 +68,14 @@ export default class AnnotatableCaptureSelection extends Component {
   }
 
   emptySelection(merge = {}) {
-    return Object.assign(
-      {},
-      {
-        selection: null,
-        selectionComplete: false,
-        selectionAnnotation: null,
-        popupTriggerX: null,
-        popupTriggerY: null
-      },
-      merge
-    );
+    return {
+      selection: null,
+      selectionComplete: false,
+      selectionAnnotation: null,
+      popupTriggerX: null,
+      popupTriggerY: null,
+      ...merge
+    };
   }
 
   validateNativeSelection(nativeSelection) {

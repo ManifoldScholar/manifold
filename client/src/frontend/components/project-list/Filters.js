@@ -25,7 +25,7 @@ export class ProjectListFilters extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.initialFilterState !== prevState.filters) {
-      return Object.assign({}, nextProps.initialFilterState);
+      return { ...nextProps.initialFilterState };
     }
 
     return null;
@@ -46,7 +46,7 @@ export class ProjectListFilters extends Component {
   setFilters = (event, label) => {
     event.preventDefault();
     const value = event.target.value;
-    let filters = Object.assign({}, this.state.filters);
+    let filters = { ...this.state.filters };
     filters[label] = value;
     if (label === "keyword") return this.setState({ filters });
     if (label === "order") {
@@ -64,7 +64,7 @@ export class ProjectListFilters extends Component {
   };
 
   initialState(init) {
-    const filters = Object.assign({}, init);
+    const filters = { ...init };
     return { filters };
   }
 
@@ -119,7 +119,7 @@ export class ProjectListFilters extends Component {
         </button>
         <UID name={id => `${this.idPrefix}-${id}`}>
           {id => (
-            <React.Fragment>
+            <>
               <label htmlFor={id} className="screen-reader-text">
                 Enter Search Criteria
               </label>
@@ -131,7 +131,7 @@ export class ProjectListFilters extends Component {
                 onChange={event => this.setFilters(event, "keyword")}
                 placeholder="Search…"
               />
-            </React.Fragment>
+            </>
           )}
         </UID>
       </div>

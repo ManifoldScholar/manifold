@@ -53,14 +53,14 @@ class ResourceCard extends Component {
     const text = attr.downloadable ? (
       this.renderDownloadablePreview(type)
     ) : (
-      <React.Fragment>
+      <>
         <span className="resource-card__view-text">{"View"}</span>
         <IconComposer
           icon="arrowRight16"
           size="default"
           iconClass="resource-card__view-icon"
         />
-      </React.Fragment>
+      </>
     );
     return text;
   }
@@ -133,50 +133,50 @@ class ResourceCard extends Component {
       case "image":
       case "interactive":
         out = (
-          <React.Fragment>
+          <>
             <span className="resource-card__view-text">{"Preview"}</span>
             <IconComposer
               icon="eyeOpen16"
               size={21.333}
               iconClass="resource-card__view-icon"
             />
-          </React.Fragment>
+          </>
         );
         break;
       case "link":
         out = (
-          <React.Fragment>
+          <>
             <span className="resource-card__view-text">{"Visit"}</span>
             <IconComposer
               icon="arrowRight16"
               size="default"
               iconClass="resource-card__view-icon"
             />
-          </React.Fragment>
+          </>
         );
         break;
       case "video":
         out = (
-          <React.Fragment>
+          <>
             <span className="resource-card__view-text">{"Play"}</span>
             <IconComposer
               icon="play16"
               size={19.2}
               iconClass="resource-card__view-icon"
             />
-          </React.Fragment>
+          </>
         );
         break;
       default:
         out = (
-          <React.Fragment>
+          <>
             <span className="resource-card__view-text">{"Download"}</span>
             <IconComposer
               icon="arrowDown16"
               size="default"
               iconClass="resource-card__view-icon"
             />
-          </React.Fragment>
+          </>
         );
     }
     return out;

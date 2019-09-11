@@ -3,15 +3,15 @@ const initialState = {
 };
 
 const addNotification = (state, action) => {
-  const notification = Object.assign({}, action.payload);
+  const notification = { ...action.payload };
   const notifications = state.notifications.slice(0);
   const index = notifications.findIndex(n => n.id === notification.id);
   if (index >= 0) {
     notifications[index] = notification;
-    return Object.assign({}, state, { notifications });
+    return { ...state, notifications };
   }
   notifications.unshift(notification);
-  return Object.assign({}, state, { notifications });
+  return { ...state, notifications };
 };
 
 const removeNotification = (state, action) => {
@@ -24,7 +24,7 @@ const removeNotification = (state, action) => {
     }
   });
   const output = found ? arrayClone : state.notifications;
-  return Object.assign({}, state, { notifications: output });
+  return { ...state, notifications: output };
 };
 
 const removeNotificationsByScope = (state, action) => {
@@ -37,7 +37,7 @@ const removeNotificationsByScope = (state, action) => {
     }
   });
   const output = found ? arrayClone : state.notifications;
-  return Object.assign({}, state, { notifications: output });
+  return { ...state, notifications: output };
 };
 
 const clearDrawerNotifications = (state, action) => {
@@ -46,7 +46,7 @@ const clearDrawerNotifications = (state, action) => {
 };
 
 const removeAllNotifications = state => {
-  return Object.assign({}, state, { notifications: [] });
+  return { ...state, notifications: [] };
 };
 
 const notificationReducer = (state = initialState, action) => {

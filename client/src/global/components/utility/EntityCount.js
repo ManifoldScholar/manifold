@@ -21,7 +21,7 @@ export default class EntityCount extends PureComponent {
 
   renderRange(start, end, totalCount, label) {
     return (
-      <React.Fragment>
+      <>
         <p className="list-total" aria-hidden>
           {"Showing "}
           <span>{this.props.showRange ? `${start}-${end}` : end}</span>
@@ -39,7 +39,7 @@ export default class EntityCount extends PureComponent {
           {`${totalCount} ${label &&
             label}. Showing results ${start} through ${end}.`}
         </div>
-      </React.Fragment>
+      </>
     );
   }
 

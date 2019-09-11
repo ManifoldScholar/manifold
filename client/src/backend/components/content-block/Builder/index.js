@@ -148,7 +148,7 @@ export class ProjectContent extends PureComponent {
   };
 
   toggleBlockVisibility(block, visible) {
-    const adjusted = Object.assign({}, block);
+    const adjusted = { ...block };
     adjusted.attributes.visible = visible;
 
     this.updateBlock(adjusted);

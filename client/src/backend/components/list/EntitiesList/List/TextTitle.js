@@ -60,14 +60,14 @@ export default class ListEntitiesListTextTitle extends PureComponent {
         {...this.ariaAttributes}
       >
         {this.link(
-          <React.Fragment>
+          <>
             {this.titleIcon && (
               <figure className="entity-list__title-icon">
                 <Utility.IconComposer icon={this.titleIcon} />
               </figure>
             )}
             {this.title}
-          </React.Fragment>
+          </>
         )}
       </h2>
     );

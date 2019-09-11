@@ -69,9 +69,7 @@ class ReadingGroupsListContainer extends Component {
   }
 
   handlePageChange = pageParam => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: pageParam
-    });
+    const pagination = { ...this.state.pagination, number: pageParam };
     this.setState({ pagination }, this.doUpdate);
   };
 
@@ -127,7 +125,7 @@ class ReadingGroupsListContainer extends Component {
   render() {
     if (!this.props.readingGroups) return null;
     return (
-      <React.Fragment>
+      <>
         <section>
           <div className="container">
             {this.renderRoutes()}
@@ -151,7 +149,7 @@ class ReadingGroupsListContainer extends Component {
             />
           </div>
         </section>
-      </React.Fragment>
+      </>
     );
   }
 }

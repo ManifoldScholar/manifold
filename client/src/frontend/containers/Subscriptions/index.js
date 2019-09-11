@@ -36,19 +36,17 @@ export class SubscriptionsContainer extends Component {
   }
 
   handlePreferenceChange = event => {
-    const notifications = Object.assign(
-      {},
-      this.state.notificationPreferencesByKind
-    );
+    const notifications = {
+      ...this.state.notificationPreferencesByKind
+    };
     notifications[event.target.name] = event.target.value;
     this.setState({ notificationPreferencesByKind: notifications });
   };
 
   handleProjectsPreferenceChange = event => {
-    const notifications = Object.assign(
-      {},
-      this.state.notificationPreferencesByKind
-    );
+    const notifications = {
+      ...this.state.notificationPreferencesByKind
+    };
 
     const toInclude = event.target.name;
     const toExclude =

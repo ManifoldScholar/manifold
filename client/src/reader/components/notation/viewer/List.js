@@ -26,7 +26,7 @@ class NotationViewerList extends PureComponent {
       activeAnnotationPassive:
         state.ui.transitory.reader.activeAnnotationPassive
     };
-    return Object.assign({}, newState, ownProps);
+    return { ...newState, ...ownProps };
   };
 
   static displayName = "NotationViewer.List";

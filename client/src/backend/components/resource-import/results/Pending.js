@@ -45,14 +45,14 @@ export default class ResourceImportResultsPending extends PureComponent {
     if (!resourceImportRow) return null;
 
     return (
-      <React.Fragment>
+      <>
         <IconComposer
           icon={this.icon}
           size={18}
           iconClass="results-header__icon"
         />
         {this.renderMessage(resourceImportRow)}
-      </React.Fragment>
+      </>
     );
   }
 }

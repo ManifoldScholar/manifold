@@ -11,7 +11,7 @@ export default class LowLevelApiClient {
   }
 
   _adjustedOptions(options) {
-    return Object.assign({}, this.defaultOptions, options);
+    return { ...this.defaultOptions, ...options };
   }
 
   _adjustedMethod(method) {

@@ -32,11 +32,11 @@ export default class BlurOnLocationChange extends PureComponent {
     const Tag = this.props.tag;
 
     return (
-      <React.Fragment>
+      <>
         <Tag className={this.props.className} ref={this.wrapperRef}>
           {this.props.children}
         </Tag>
-      </React.Fragment>
+      </>
     );
   }
 }

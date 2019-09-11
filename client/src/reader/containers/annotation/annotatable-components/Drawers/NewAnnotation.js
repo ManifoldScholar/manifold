@@ -11,12 +11,11 @@ export default class NewAnnotation extends PureComponent {
 
   saveAnnotation = annotation => {
     const { pendingAnnotation } = this.props;
-    const attributes = Object.assign(
-      {},
-      pendingAnnotation,
-      annotation.attributes
-    );
-    const toCreate = Object.assign({}, pendingAnnotation, { attributes });
+    const attributes = {
+      ...pendingAnnotation,
+      ...annotation.attributes
+    };
+    const toCreate = { ...pendingAnnotation, attributes };
     return this.props.actions.createAnnotation(toCreate);
   };
 

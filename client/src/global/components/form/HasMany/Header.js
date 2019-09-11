@@ -23,12 +23,12 @@ export default class FormHasManyHeader extends PureComponent {
 
   renderLabelHeader(label, instructions, idForInstructions) {
     return (
-      <React.Fragment>
+      <>
         <header className="section-heading-secondary">
           <h3>{label}</h3>
         </header>
         <Instructions instructions={instructions} id={idForInstructions} />
-      </React.Fragment>
+      </>
     );
   }
 
@@ -40,10 +40,10 @@ export default class FormHasManyHeader extends PureComponent {
     );
 
     return (
-      <React.Fragment>
+      <>
         <Header>{label}</Header>
         <Instructions instructions={instructions} id={idForInstructions} />
-      </React.Fragment>
+      </>
     );
   }
 

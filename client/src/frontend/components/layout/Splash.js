@@ -64,7 +64,7 @@ export default class Splash extends Component {
   }
 
   stripNullStyles(style) {
-    const newStyle = Object.assign({}, style);
+    const newStyle = { ...style };
     Object.keys(newStyle).forEach(
       key => newStyle[key] == null && delete newStyle[key]
     );

@@ -103,7 +103,7 @@ class DashboardsAdminContainerImplementation extends PureComponent {
 
   filterParams(name = null, additionalParams = {}) {
     const filterState = this.props.entitiesListSearchParams[name] || {};
-    const out = Object.assign({}, filterState, additionalParams);
+    const out = { ...filterState, ...additionalParams };
     const currentUser = this.props.authentication.currentUser;
     if (!currentUser) return out;
     if (currentUser.attributes.abilities.viewDrafts) return out;

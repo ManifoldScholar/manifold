@@ -55,16 +55,10 @@ class SearchResultsTypeTextSection extends PureComponent {
     const model = this.model;
     if (!this.hasExcerpts) return [];
     const { hits } = this.textNodes;
-    return hits.map(h =>
-      Object.assign({}, h, {
-        url: lh.link(
-          "readerSection",
-          text.slug,
-          model.id,
-          `#node-${h.nodeUuid}`
-        )
-      })
-    );
+    return hits.map(h => ({
+      ...h,
+      url: lh.link("readerSection", text.slug, model.id, `#node-${h.nodeUuid}`)
+    }));
   }
 
   render() {

@@ -39,7 +39,7 @@ export default class ProjectHeroCalloutList extends PureComponent {
     const layoutClass = this.props.layoutClass;
 
     return (
-      <React.Fragment>
+      <>
         <div
           className={classNames(`${calloutClass}`, {
             [`${calloutClass}--${layoutClass}`]: layoutClass
@@ -54,7 +54,7 @@ export default class ProjectHeroCalloutList extends PureComponent {
             />
           ))}
         </div>
-      </React.Fragment>
+      </>
     );
   }
 

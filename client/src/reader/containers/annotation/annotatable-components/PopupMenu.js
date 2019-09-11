@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Popup from "reader/components/annotation/Popup";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
@@ -68,7 +68,7 @@ class AnnotatablePopup extends PureComponent {
     const { activePanel } = this.state;
 
     return (
-      <Fragment>
+      <>
         <ReactCSSTransitionGroup
           transitionName="panel"
           transitionEnterTimeout={300}
@@ -112,7 +112,7 @@ class AnnotatablePopup extends PureComponent {
             />
           )}
         </ReactCSSTransitionGroup>
-      </Fragment>
+      </>
     );
   }
 }

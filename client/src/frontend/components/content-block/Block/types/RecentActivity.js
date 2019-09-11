@@ -28,7 +28,7 @@ export default class ProjectContentBlockRecentActivityBlock extends PureComponen
     const baseClass = "entity-section-wrapper";
 
     return (
-      <React.Fragment>
+      <>
         <AllLink
           count={attributes.eventCount}
           threshold={6}
@@ -38,7 +38,7 @@ export default class ProjectContentBlockRecentActivityBlock extends PureComponen
         <div className={`${baseClass}__body ${baseClass}__body--pad-top`}>
           <List project={this.project} events={events} limit={6} columns={3} />
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

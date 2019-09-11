@@ -24,9 +24,7 @@ export default function fetchData(WrappedComponent) {
     };
 
     render() {
-      const props = Object.assign({}, this.props, {
-        fetchData: this.fetchData
-      });
+      const props = { ...this.props, fetchData: this.fetchData };
       return React.createElement(WrappedComponent, props);
     }
   }

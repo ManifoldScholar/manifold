@@ -97,7 +97,7 @@ class UsersListContainerImplementation extends PureComponent {
     };
 
     return (
-      <React.Fragment>
+      <>
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
         <EntitiesList
           entityComponent={UserRow}
@@ -121,7 +121,7 @@ class UsersListContainerImplementation extends PureComponent {
             />
           ]}
         />
-      </React.Fragment>
+      </>
     );
   }
 }

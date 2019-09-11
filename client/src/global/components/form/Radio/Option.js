@@ -55,7 +55,7 @@ export default class FormRadioOption extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <label className={this.inputClassNames}>
           <input
             type="radio"
@@ -74,7 +74,7 @@ export default class FormRadioOption extends PureComponent {
         {this.instructions && !this.inline && (
           <span className="toggle-instructions">{this.instructions}</span>
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

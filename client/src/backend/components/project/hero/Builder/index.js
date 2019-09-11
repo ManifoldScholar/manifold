@@ -62,7 +62,7 @@ export default class Builder extends PureComponent {
     const DrawerContents = this.drawerComponent;
 
     return (
-      <React.Fragment>
+      <>
         <section className="hero-builder form-secondary">
           <UID name={id => `hero-builder-${id}`}>
             {id => (
@@ -119,7 +119,7 @@ export default class Builder extends PureComponent {
         >
           {this.isDrawerOpen ? <DrawerContents project={this.project} /> : null}
         </Drawer.Wrapper>
-      </React.Fragment>
+      </>
     );
   }
 }

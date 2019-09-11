@@ -18,7 +18,7 @@ export default class SmartAttributes extends Component {
           if (!formProps.getModelValue("attributes[smart]")) return null;
 
           return (
-            <React.Fragment>
+            <>
               <Form.NumberInput
                 label="Number of Projects:"
                 name="attributes[numberOfProjects]"
@@ -44,7 +44,7 @@ export default class SmartAttributes extends Component {
                 label="Tags:"
                 tagScope="Project"
               />
-            </React.Fragment>
+            </>
           );
         }}
       </FormContext.Consumer>

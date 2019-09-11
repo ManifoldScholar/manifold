@@ -181,7 +181,7 @@ export class ProjectTextsContainer extends Component {
         failureNotification
         failureRedirect={lh.link("backendProject", this.project.id)}
       >
-        <React.Fragment>
+        <>
           {this.childRoutes()}
 
           <div className="buttons-icon-horizontal maintain">
@@ -234,7 +234,7 @@ export class ProjectTextsContainer extends Component {
             project={this.project}
             callbacks={this.callbacks}
           />
-        </React.Fragment>
+        </>
       </Authorize>
     );
   }

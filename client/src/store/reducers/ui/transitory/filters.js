@@ -5,7 +5,7 @@ const initialState = {
 };
 
 const setProjectFilters = (state, action) => {
-  return Object.assign({}, state, { project: action.payload });
+  return { ...state, project: action.payload };
 };
 
 export default handleActions(

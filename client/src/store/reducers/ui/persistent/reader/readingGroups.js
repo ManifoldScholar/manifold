@@ -5,7 +5,7 @@ const getInitialState = () => ({
 });
 
 const setReadingGroup = (state, action) => {
-  return Object.assign({}, state, { currentReadingGroup: action.payload });
+  return { ...state, currentReadingGroup: action.payload };
 };
 
 const resetReadingGroup = () => {
@@ -13,7 +13,7 @@ const resetReadingGroup = () => {
 };
 
 const setPersistentUI = (state, action) => {
-  return Object.assign({}, getInitialState(), action.payload.readingGroups);
+  return { ...getInitialState(), ...action.payload.readingGroups };
 };
 
 export default handleActions(

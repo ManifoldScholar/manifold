@@ -59,7 +59,7 @@ export default function withFormSession(WrappedComponent, sessionKey) {
           getModelValue: name => this.lookupValue(name, this.props)
         }
       };
-      const props = Object.assign({}, childProps);
+      const props = { ...childProps };
       return React.createElement(WrappedComponent, props);
     }
   }

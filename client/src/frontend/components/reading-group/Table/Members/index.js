@@ -99,7 +99,7 @@ export default class MembersTable extends PureComponent {
         >
           {({ model }) => {
             return (
-              <React.Fragment>
+              <>
                 <Avatar
                   iconSize={24}
                   url={this.avatarUrl(model)}
@@ -116,7 +116,7 @@ export default class MembersTable extends PureComponent {
                     readingGroupMembership: model.id
                   })}
                 />
-              </React.Fragment>
+              </>
             );
           }}
         </Column>
@@ -125,7 +125,7 @@ export default class MembersTable extends PureComponent {
         </Column>
         <Column header="Notations" align="center">
           {({ model }) => (
-            <React.Fragment>
+            <>
               <InlineValue
                 label={model.attributes.annotationsCount}
                 icon="comment24"
@@ -136,7 +136,7 @@ export default class MembersTable extends PureComponent {
                 icon="annotate24"
                 srLabel={`${model.attributes.highlightsCount} highlights.`}
               />
-            </React.Fragment>
+            </>
           )}
         </Column>
         <Column key="actions" columnPosition={"left"} cellSize={"cellMedium"}>

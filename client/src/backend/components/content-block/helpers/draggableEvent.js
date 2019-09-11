@@ -5,11 +5,10 @@ import cloneDeep from "lodash/cloneDeep";
 
 export default class DraggableEventHelper {
   static syntheticDraggable = (blockType, opts = {}) => {
-    const options = Object.assign(
-      {},
-      DraggableEventHelper.defaultOptions(),
-      opts
-    );
+    const options = {
+      ...DraggableEventHelper.defaultOptions(),
+      ...opts
+    };
     return {
       type: DraggableEventHelper.isTopType(blockType) ? "TOP" : "BOTTOM",
       draggableId: blockType,
@@ -39,7 +38,7 @@ export default class DraggableEventHelper {
   };
 
   constructor(draggable, blocks, options = {}) {
-    this.options = Object.assign({}, this.defaultOptions, options);
+    this.options = { ...this.defaultOptions, ...options };
     this.draggable = draggable;
     this._blocks = blocks;
   }

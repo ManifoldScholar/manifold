@@ -38,7 +38,7 @@ function imageMeta() {
 
 function mergeAttributes(entity, attr) {
   /* eslint-disable no-param-reassign */
-  entity.attributes = Object.assign({}, entity.attributes, attr);
+  entity.attributes = { ...entity.attributes, ...attr };
   /* eslint-enable no-param-reassign */
   return entity;
 }

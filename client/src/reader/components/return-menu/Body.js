@@ -41,7 +41,7 @@ export default class ReturnMenuBody extends PureComponent {
             </Link>
           </li>
           {this.context.isLibrary && (
-            <React.Fragment>
+            <>
               <li className="reader-return-menu__item">
                 <Link
                   to={lh.link("frontend")}
@@ -74,7 +74,7 @@ export default class ReturnMenuBody extends PureComponent {
                   </Link>
                 </li>
               </Authorize>
-            </React.Fragment>
+            </>
           )}
           <Authorize kind="unauthenticated">
             <li className="reader-return-menu__item">

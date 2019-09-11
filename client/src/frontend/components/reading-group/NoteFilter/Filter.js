@@ -22,7 +22,7 @@ export default class SelectFilter extends React.PureComponent {
       <div className={"notes-filter__select-container"}>
         <UID name={id => `${this.idPrefix}-${id}`}>
           {id => (
-            <React.Fragment>
+            <>
               <label htmlFor={id} className="screen-reader-text">
                 {this.labelName}
               </label>
@@ -46,7 +46,7 @@ export default class SelectFilter extends React.PureComponent {
                 size={22}
                 iconClass="notes-filter__icon"
               />
-            </React.Fragment>
+            </>
           )}
         </UID>
       </div>

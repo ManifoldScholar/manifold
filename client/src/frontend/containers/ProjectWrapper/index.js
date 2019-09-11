@@ -89,7 +89,7 @@ export class ProjectWrapper extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <RedirectToFirstMatch
           from={lh.link("frontendProject")}
           candidates={[
@@ -100,7 +100,7 @@ export class ProjectWrapper extends Component {
           ]}
         />
         {this.renderRoutes()}
-      </React.Fragment>
+      </>
     );
   }
 }

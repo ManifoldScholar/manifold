@@ -168,7 +168,7 @@ export default class ResourceSlideshow extends PureComponent {
     collectionResources.forEach((collectionResource, index) => {
       updates[start + index] = collectionResource;
     });
-    return Object.assign({}, this.state.map, updates);
+    return { ...this.state.map, ...updates };
   }
 
   renderSlideShow() {

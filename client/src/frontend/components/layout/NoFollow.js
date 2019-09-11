@@ -21,7 +21,7 @@ export default class NoFollow extends Component {
               You’re not following any projects yet
             </ContentPlaceholder.Title>
             <ContentPlaceholder.Body>
-              <React.Fragment>
+              <>
                 <p>
                   {"But don't fret, it's easy to start following projects. " +
                     "Just browse through the available projects, and when you find" +
@@ -40,7 +40,7 @@ export default class NoFollow extends Component {
                     " blue checkmark."
                   }
                 />
-              </React.Fragment>
+              </>
             </ContentPlaceholder.Body>
             <ContentPlaceholder.Actions>
               <Link

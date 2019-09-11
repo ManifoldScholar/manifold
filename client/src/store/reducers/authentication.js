@@ -12,41 +12,42 @@ const initialState = {
 
 const deleteFavorite = (state, action) => {
   if (action.error === true) return state;
-  const favorites = Object.assign({}, state.currentUser.favorites);
+  const favorites = { ...state.currentUser.favorites };
   delete favorites[action.payload];
-  const currentUser = Object.assign({}, state.currentUser, { favorites });
-  return Object.assign({}, state, { currentUser });
+  const currentUser = { ...state.currentUser, favorites };
+  return { ...state, currentUser };
 };
 
 const setError = (state, action) => {
   const error = action.payload;
-  return Object.assign({}, state, { error });
+  return { ...state, error };
 };
 
 const logout = () => {
-  return Object.assign({}, initialState);
+  return { ...initialState };
 };
 
 const setAuthToken = (state, action) => {
   const authToken = action.payload;
   if (!authToken) return state;
   const newState = { authToken };
-  return Object.assign({}, state, newState);
+  return { ...state, ...newState };
 };
 
 const endLogin = state => {
-  return Object.assign({}, state, {
+  return {
+    ...state,
     authenticating: false,
     authenticated: Boolean(state.authToken)
-  });
+  };
 };
 
 const startLogin = state => {
-  return Object.assign({}, state, { authenticating: true });
+  return { ...state, authenticating: true };
 };
 
 const updateStateFromUser = (state, payload) => {
-  const adjustedUser = Object.assign({}, payload.data);
+  const adjustedUser = { ...payload.data };
   const favorites = {};
   if (payload.included) {
     payload.included
@@ -65,7 +66,7 @@ const updateStateFromUser = (state, payload) => {
     currentUser: adjustedUser,
     error: null
   };
-  return Object.assign({}, state, newState);
+  return { ...state, ...newState };
 };
 
 const setCurrentUser = (state, action) => {

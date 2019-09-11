@@ -111,7 +111,7 @@ export class ActionCalloutForm extends Component {
   }
 
   create = model => {
-    const adjusted = Object.assign({}, model);
+    const adjusted = { ...model };
     return actionCalloutsAPI.create(this.project.id, adjusted);
   };
 
@@ -126,7 +126,7 @@ export class ActionCalloutForm extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <Navigation.DrawerHeader
           icon="touch64"
           title={this.drawerTitle}
@@ -142,7 +142,7 @@ export class ActionCalloutForm extends Component {
           notificationScope="drawer"
         >
           {getModelValue => (
-            <React.Fragment>
+            <>
               <Form.TextInput
                 label="Title"
                 name="attributes[title]"
@@ -180,10 +180,10 @@ export class ActionCalloutForm extends Component {
                 />
               )}
               <Form.Save text="Save" />
-            </React.Fragment>
+            </>
           )}
         </FormContainer.Form>
-      </React.Fragment>
+      </>
     );
   }
 }

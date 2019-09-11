@@ -35,9 +35,10 @@ function handleApiResponseAction(dispatch, action) {
   if (!notifications.hasOwnProperty(action.meta)) return;
   const key = action.error === true ? `${action.meta}-error` : action.meta;
   if (!notifications[key]) return;
-  const notification = Object.assign({}, notifications[key](action.payload), {
+  const notification = {
+    ...notifications[key](action.payload),
     id: action.meta
-  });
+  };
   let scope = "global";
   if (action.payload && action.payload.notificationScope)
     scope = action.payload.notificationScope;

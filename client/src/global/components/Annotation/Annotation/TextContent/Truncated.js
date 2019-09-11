@@ -67,7 +67,7 @@ export default class AnnotationSelectionTruncated extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <div
           className={this.truncatedWrapperClassNames}
           ref={wrapper => {
@@ -88,7 +88,7 @@ export default class AnnotationSelectionTruncated extends PureComponent {
         >
           {"Read Full Passage"}
         </button>
-      </React.Fragment>
+      </>
     );
   }
 }

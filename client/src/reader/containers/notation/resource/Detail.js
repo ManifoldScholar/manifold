@@ -16,7 +16,7 @@ export class NotationResourceDetailContainer extends PureComponent {
       resource: select(requests.rResource, state.entityStore),
       resourceMeta: meta(requests.rResource, state.entityStore)
     };
-    return Object.assign({}, newState, ownProps);
+    return { ...newState, ...ownProps };
   };
 
   static fetchData = (getState, dispatch, location, match) => {

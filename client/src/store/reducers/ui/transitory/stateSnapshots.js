@@ -4,12 +4,12 @@ const initialState = {};
 
 const takeSnapshot = (state, action) => {
   const { key, snapshot } = action.payload;
-  return Object.assign({}, state, { [key]: snapshot });
+  return { ...state, [key]: snapshot };
 };
 
 const resetSnapshot = (state, action) => {
   const key = action.payload;
-  const newState = Object.assign({}, state);
+  const newState = { ...state };
   delete newState[key];
   return newState;
 };

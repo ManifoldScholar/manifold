@@ -232,7 +232,7 @@ export default class DrawerWrapper extends PureComponent {
     const hasClose = props.closeCallback || props.closeUrl;
 
     return (
-      <React.Fragment>
+      <>
         {props.includeDrawerFrontMatter && (
           <div className={this.drawerBarClasses}>
             {hasTitle ? (
@@ -281,7 +281,7 @@ export default class DrawerWrapper extends PureComponent {
             Close
           </button>
         )}
-      </React.Fragment>
+      </>
     );
   }
 

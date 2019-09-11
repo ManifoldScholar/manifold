@@ -18,7 +18,7 @@ import Authorize from "hoc/authorize";
 export class CommentEditor extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
     const newState = {};
-    return Object.assign({}, newState, ownProps);
+    return { ...newState, ...ownProps };
   };
 
   static displayName = "Comment.Editor";

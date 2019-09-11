@@ -69,7 +69,7 @@ export default class GroupsTable extends PureComponent {
 
         <Column header="Notations" align="center">
           {({ model }) => (
-            <React.Fragment>
+            <>
               <InlineValue
                 label={model.attributes.annotationsCount}
                 icon="comment24"
@@ -80,7 +80,7 @@ export default class GroupsTable extends PureComponent {
                 icon="annotate24"
                 srLabel={`${model.attributes.highlightsCount} highlights.`}
               />
-            </React.Fragment>
+            </>
           )}
         </Column>
       </Table>

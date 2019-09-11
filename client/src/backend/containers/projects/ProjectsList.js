@@ -73,7 +73,7 @@ class ProjectsListContainerImplementation extends PureComponent {
 
   filterParams(additionalParams = {}) {
     const filterState = this.props.entitiesListSearchParams.projectsList || {};
-    const out = Object.assign({}, filterState, additionalParams);
+    const out = { ...filterState, ...additionalParams };
     const currentUser = this.props.authentication.currentUser;
     if (!currentUser) return out;
     if (currentUser.attributes.abilities.viewDrafts) return out;

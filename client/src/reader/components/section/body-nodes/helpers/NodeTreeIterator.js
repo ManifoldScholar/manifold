@@ -67,8 +67,8 @@ export default class NodeTreeIterator {
     if (Array.isArray(children)) {
       const childElements = [];
       children.forEach((child, index) => {
-        const adjustedChild = Object.assign({}, child);
-        adjustedChild.attributes = Object.assign({}, adjustedChild.attributes);
+        const adjustedChild = { ...child };
+        adjustedChild.attributes = { ...adjustedChild.attributes };
         adjustedChild.key = index;
         const childNode = this.visit(adjustedChild, node);
         if (childNode) {
@@ -139,7 +139,7 @@ export default class NodeTreeIterator {
       this.startAnnotations(node.nodeUuid);
     }
 
-    const openAnnotations = Object.assign({}, this.openAnnotations);
+    const openAnnotations = { ...this.openAnnotations };
     const scrollElement = !!(
       this.elementScrollTarget &&
       node.nodeType === "element" &&
@@ -156,13 +156,14 @@ export default class NodeTreeIterator {
       node.nodeType === "text" && this.nodeScrollTarget === node.nodeUuid;
     const scrollToView = !!(scrollAnnotation || scrollNode || scrollElement);
     const scrollKey = scrollToView ? this.scrollKey : null;
-    const adjustedNode = Object.assign({}, node, {
+    const adjustedNode = {
+      ...node,
       openAnnotations,
       scrollAnnotation,
       scrollNode,
       scrollToView,
       scrollKey
-    });
+    };
     let out;
 
     switch (node.nodeType) {

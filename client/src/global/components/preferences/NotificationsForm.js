@@ -81,7 +81,7 @@ export default class NotificationsForm extends Component {
       options.unshift({ key: "projects", label: "All Projects" });
 
     return (
-      <React.Fragment>
+      <>
         <fieldset
           className="subscriptions__radio-group form-input"
           key="digest-projects"
@@ -128,7 +128,7 @@ export default class NotificationsForm extends Component {
             !digestOpen
           );
         })}
-      </React.Fragment>
+      </>
     );
   }
 
