@@ -55,7 +55,9 @@ export default function buildWebpackConfiguration(target = "web") {
             styleLoader(),
             {
               loader: "css-loader",
-              options: "importLoaders=2"
+              options: {
+                importLoaders: 2
+              }
             },
             {
               loader: "postcss-loader",
