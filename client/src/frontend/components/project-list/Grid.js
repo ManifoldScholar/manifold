@@ -108,7 +108,7 @@ export default class ProjectListGrid extends Component {
     const hideDesc = true;
 
     return (
-      <React.Fragment>
+      <>
         <div className="project-list grid entity-section-wrapper__body">
           <ReactCSSTransitionGroup
             transitionName="project-list grid"
@@ -136,7 +136,7 @@ export default class ProjectListGrid extends Component {
         {this.props.pagination
           ? this.renderPagination(this.props)
           : this.renderViewAll(this.props)}
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -167,10 +167,10 @@ export default class SVGProjectPlaceholder extends Component {
 
       default:
         out = (
-          <React.Fragment>
+          <>
             {this.large("desktop")}
             {this.small("mobile")}
-          </React.Fragment>
+          </>
         );
     }
 

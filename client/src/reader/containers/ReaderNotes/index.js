@@ -31,7 +31,7 @@ export class ReaderNotesContainer extends Component {
         state.entityStore
       )
     };
-    return Object.assign({}, newState, ownProps);
+    return { ...newState, ...ownProps };
   };
 
   static displayName = "Reader.ReaderNotes";
@@ -124,7 +124,7 @@ export class ReaderNotesContainer extends Component {
   };
 
   handleFilterChange = (key, filters) => {
-    const filter = Object.assign({}, this.state.filter);
+    const filter = { ...this.state.filter };
     filter[key] = filters;
     this.setState({ filter }, () =>
       this.fetchAnnotations(this.state, this.props)

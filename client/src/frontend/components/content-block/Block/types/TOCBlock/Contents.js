@@ -91,7 +91,7 @@ export default class TocBlockToc extends PureComponent {
 
   renderEmpty() {
     return (
-      <React.Fragment>
+      <>
         <div
           className={classNames(
             `${this.props.blockClass}__list`,
@@ -100,7 +100,7 @@ export default class TocBlockToc extends PureComponent {
         >
           This text does not have a table of contents.
         </div>
-      </React.Fragment>
+      </>
     );
   }
 

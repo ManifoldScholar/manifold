@@ -67,8 +67,8 @@ class VisibilityMenuBody extends PureComponent {
 
   handleFilterClick = (event, group, property) => {
     const checked = event.target.checked;
-    const filter = Object.assign({}, this.props.filter);
-    const filterGroup = Object.assign({}, filter[group]);
+    const filter = { ...this.props.filter };
+    const filterGroup = { ...filter[group] };
     if (property === "all") {
       if (checked) {
         Object.keys(filterGroup).forEach(p => {
@@ -126,14 +126,13 @@ class VisibilityMenuBody extends PureComponent {
     const { readingGroups, filter } = this.props;
     if (!readingGroups) return null;
     /* eslint-disable no-param-reassign */
-    const options = Object.assign(
-      {},
-      readingGroups.reduce((map, obj) => {
+    const options = {
+      ...readingGroups.reduce((map, obj) => {
         map[obj.id] = false;
         return map;
       }, {}),
-      filter.readingGroups
-    );
+      ...filter.readingGroups
+    };
     /* eslint-enable no-param-reassign */
     const children = readingGroups.map((readingGroup, index) => {
       return this.renderCheckbox(

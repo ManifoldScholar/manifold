@@ -430,7 +430,7 @@ storiesOf("Backend/List/Entities", module)
     };
 
     return (
-      <React.Fragment>
+      <>
         {wrap(
           <EntitiesList
             {...baseProps}
@@ -441,6 +441,6 @@ storiesOf("Backend/List/Entities", module)
             showCount
           />
         )}
-      </React.Fragment>
+      </>
     );
   });

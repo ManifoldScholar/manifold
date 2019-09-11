@@ -180,7 +180,7 @@ export default class ListEntitiesListSearch extends PureComponent {
               <div className={`${baseClass}__keyword-input-wrapper`}>
                 <UID name={id => `${this.idPrefix}-${id}`}>
                   {id => (
-                    <React.Fragment>
+                    <>
                       <label htmlFor={id} className="screen-reader-text">
                         Enter Search Criteria
                       </label>
@@ -193,7 +193,7 @@ export default class ListEntitiesListSearch extends PureComponent {
                         placeholder={this.paramLabel(this.keywordParam)}
                         onChange={e => this.setKeywordState(e)}
                       />
-                    </React.Fragment>
+                    </>
                   )}
                 </UID>
               </div>

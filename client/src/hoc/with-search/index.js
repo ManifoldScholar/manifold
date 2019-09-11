@@ -109,7 +109,7 @@ function withSearch(WrappedComponent) {
 
     doSearch(page = 1) {
       const pagination = { number: page };
-      const query = Object.assign({}, this.props.searchQueryState);
+      const query = { ...this.props.searchQueryState };
       query.page = pagination;
       const call = searchResultsAPI.index(query);
       const { promise: one } = this.props.dispatch(
@@ -127,10 +127,10 @@ function withSearch(WrappedComponent) {
     }
 
     render() {
-      return React.createElement(
-        WrappedComponent,
-        Object.assign({}, this.props, this.childProps)
-      );
+      return React.createElement(WrappedComponent, {
+        ...this.props,
+        ...this.childProps
+      });
     }
   }
 

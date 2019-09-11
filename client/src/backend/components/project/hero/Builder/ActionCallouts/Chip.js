@@ -47,7 +47,7 @@ export default class Chip extends PureComponent {
         type="actionCallout"
       >
         {provided => (
-          <React.Fragment>
+          <>
             <div
               ref={provided.innerRef}
               {...provided.draggableProps}
@@ -75,7 +75,7 @@ export default class Chip extends PureComponent {
               </div>
             </div>
             {provided.placeholder}
-          </React.Fragment>
+          </>
         )}
       </Draggable>
     );

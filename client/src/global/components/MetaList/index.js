@@ -16,8 +16,8 @@ const regenerateState = metadata => {
   });
 
   return {
-    long: Object.assign({}, long),
-    short: Object.assign({}, short)
+    long: { ...long },
+    short: { ...short }
   };
 };
 

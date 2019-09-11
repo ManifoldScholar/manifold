@@ -91,7 +91,7 @@ export class UsersEditContainer extends PureComponent {
     const message =
       "This user will be unsubscribed from all Manifold email notifications.";
     this.props.confirm(heading, message, () => {
-      const adjustedUser = Object.assign({}, this.user);
+      const adjustedUser = { ...this.user };
       adjustedUser.attributes.unsubscribe = true;
 
       const call = usersAPI.update(this.user.id, adjustedUser);

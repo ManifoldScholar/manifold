@@ -215,7 +215,7 @@ export class IngestionIngest extends Component {
 
   displayError() {
     const body = (
-      <React.Fragment>
+      <>
         {config.services.cable ? (
           <span>
             {"The client application is unable to connect to the server's websocket. " +
@@ -237,7 +237,7 @@ export class IngestionIngest extends Component {
           {"After the problem has been corrected, this ingestion can be resumed at the " +
             "current URL."}
         </span>
-      </React.Fragment>
+      </>
     );
 
     const notification = {

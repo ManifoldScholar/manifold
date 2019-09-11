@@ -56,43 +56,43 @@ export default class ProjectContentBlockIncomplete extends PureComponent {
     return {
       "Content::TableOfContentsBlock": {
         text: (
-          <React.Fragment>
+          <>
             Specify a text to{" "}
             <Link to={this.blockEditLink}>fix this block</Link>.
-          </React.Fragment>
+          </>
         )
       },
       "Content::RecentActivityBlock": {
         has_activity: (
-          <React.Fragment>
+          <>
             No activity has been recorded for this project. This warning will
             disappear once there is project activity.
-          </React.Fragment>
+          </>
         )
       },
       "Content::MarkdownBlock": {
         body: (
-          <React.Fragment>
+          <>
             Add Markdown content to{" "}
             <Link to={this.blockEditLink}>fix this block</Link>.
-          </React.Fragment>
+          </>
         )
       },
       "Content::TextsBlock": {
         texts: (
-          <React.Fragment>
+          <>
             <Link to={this.projectEditLink("backendProjectTexts")}>
               Add texts to the project
             </Link>{" "}
             or{" "}
             <Link to={this.blockEditLink}>adjust the block configuration</Link>{" "}
             to fix this block.
-          </React.Fragment>
+          </>
         )
       },
       "Content::ResourcesBlock": {
         resources_or_collections: (
-          <React.Fragment>
+          <>
             Add{" "}
             <Link to={this.projectEditLink("backendProjectResources")}>
               resources
@@ -104,17 +104,17 @@ export default class ProjectContentBlockIncomplete extends PureComponent {
               resource collections
             </Link>{" "}
             to the project to fix this block.
-          </React.Fragment>
+          </>
         )
       },
       "Content::MetadataBlock": {
         has_metadata: (
-          <React.Fragment>
+          <>
             <Link to={this.projectEditLink("backendProjectMetadata")}>
               Add project metadata
             </Link>{" "}
             to fix this block.
-          </React.Fragment>
+          </>
         )
       }
     };

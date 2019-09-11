@@ -89,7 +89,7 @@ export default class SearchQueryForm extends PureComponent {
     if (scope === "project") newState.project = this.props.projectId;
     if (scope === "text") newState.text = this.props.textId;
     if (scope === "section") newState.textSection = this.props.sectionId;
-    return Object.assign({}, state, newState);
+    return { ...state, ...newState };
   }
 
   setScope(scope) {
@@ -142,10 +142,12 @@ export default class SearchQueryForm extends PureComponent {
   }
 
   internalStateFromIncomingState(initialState) {
-    let newState = Object.assign(
-      { facets: [], scope: null, keyword: "" },
-      initialState
-    );
+    let newState = {
+      facets: [],
+      scope: null,
+      keyword: "",
+      ...initialState
+    };
     newState = this.setDefaultScope(newState);
     newState = this.setScopeIdFromScopeString(newState);
     newState = this.setFacetsFromAllFacets(newState);
@@ -252,7 +254,7 @@ export default class SearchQueryForm extends PureComponent {
         <div className="search-query__input-magnify">
           <UID name={id => `${this.searchIdPrefix}-${id}`}>
             {id => (
-              <React.Fragment>
+              <>
                 <label htmlFor={id} className="screen-reader-text">
                   Enter Search Criteria
                 </label>
@@ -265,7 +267,7 @@ export default class SearchQueryForm extends PureComponent {
                   placeholder={"Search…"}
                   className="search-query__input"
                 />
-              </React.Fragment>
+              </>
             )}
           </UID>
           <button type="submit" className="search-query__submit">

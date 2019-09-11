@@ -13,7 +13,7 @@ export class AnnotationList extends PureComponent {
     const newState = {
       annotations: select(requests.rDrawerAnnotations, state.entityStore) || []
     };
-    return Object.assign({}, newState, ownProps);
+    return { ...newState, ...ownProps };
   };
 
   static displayName = "Annotation.List";
@@ -54,8 +54,8 @@ export class AnnotationList extends PureComponent {
   }
 
   saveAnnotation = (model, group) => {
-    const attributes = Object.assign({}, group.selection, model.attributes);
-    const newModel = Object.assign({}, model, { attributes });
+    const attributes = { ...group.selection, ...model.attributes };
+    const newModel = { ...model, attributes };
     return this.props.createHandler(newModel);
   };
 

@@ -128,10 +128,10 @@ export default class CategoryListTexts extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         {!this.hasTexts && this.renderEmpty()}
         {this.hasTexts && this.renderTexts()}
-      </React.Fragment>
+      </>
     );
   }
 }

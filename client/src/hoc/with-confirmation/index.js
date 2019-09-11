@@ -43,15 +43,15 @@ function withConfirmation(WrappedComponent) {
 
     render() {
       return (
-        <React.Fragment>
+        <>
           {this.state.confirmation && (
             <Dialog.Confirm {...this.state.confirmation} />
           )}
-          {React.createElement(
-            WrappedComponent,
-            Object.assign({}, this.props, { confirm: this.confirm })
-          )}
-        </React.Fragment>
+          {React.createElement(WrappedComponent, {
+            ...this.props,
+            confirm: this.confirm
+          })}
+        </>
       );
     }
   }

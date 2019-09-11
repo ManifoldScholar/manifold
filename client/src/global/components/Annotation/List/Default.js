@@ -45,7 +45,7 @@ export default class AnnotationListDefault extends PureComponent {
   render() {
     const { annotations, pagination, paginationClickHandler } = this.props;
     return (
-      <React.Fragment>
+      <>
         <ul className={this.notesListClassNames}>
           {annotations.map(annotation => {
             return (
@@ -63,7 +63,7 @@ export default class AnnotationListDefault extends PureComponent {
             pagination={pagination}
           />
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

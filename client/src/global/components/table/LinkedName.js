@@ -21,7 +21,7 @@ export default class LinkedName extends React.PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <span className="table__name">
           {this.props.to && (
             <Link to={this.props.to} className="table__sr-link">
@@ -31,7 +31,7 @@ export default class LinkedName extends React.PureComponent {
           <span className="table__name-container">{this.name}</span>
           {this.tag && <span className="table__tag">{this.tag}</span>}
         </span>
-      </React.Fragment>
+      </>
     );
   }
 }

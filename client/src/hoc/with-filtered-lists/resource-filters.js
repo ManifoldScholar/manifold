@@ -58,7 +58,7 @@ function dynamicParams(searchProps, project) {
     return params;
   };
 
-  return Object.assign({}, searchProps, { params: searchParams() });
+  return { ...searchProps, params: searchParams() };
 }
 
 export default {

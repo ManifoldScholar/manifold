@@ -36,7 +36,7 @@ class Fields extends Component {
       : [];
 
     return (
-      <React.Fragment>
+      <>
         <Navigation.DrawerHeader buttons={buttons}>
           <Form.TextInput
             wide
@@ -71,7 +71,7 @@ class Fields extends Component {
           name="attributes[homepage]"
         />
         {this.homepageVisible && (
-          <React.Fragment>
+          <>
             <Form.Instructions
               className="form-input"
               instructions="If dates set, project collection will automatically appear on homepage during specified time period."
@@ -89,11 +89,11 @@ class Fields extends Component {
               name="attributes[homepageCount]"
               instructions="Number of projects shown in homepage blade (0 - 40).  Will show all if none is set."
             />
-          </React.Fragment>
+          </>
         )}
         <IconPicker {...this.props} />
         <SmartAttributes {...this.props} />
-      </React.Fragment>
+      </>
     );
   }
 }

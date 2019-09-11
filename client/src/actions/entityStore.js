@@ -15,10 +15,7 @@ export const flush = createAction("ENTITY_STORE_FLUSH", passedMetas => {
 export const request = createAction(
   "API_REQUEST",
   (requestConfig, meta = null, options = {}) => {
-    return Object.assign({}, options, {
-      request: requestConfig,
-      state: 0
-    });
+    return { ...options, request: requestConfig, state: 0 };
   },
   (apiConfig, meta = null) => {
     return meta || uuid.v1();

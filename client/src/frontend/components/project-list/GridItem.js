@@ -125,7 +125,7 @@ export default class ProjectGridItem extends Component {
     });
 
     return (
-      <React.Fragment>
+      <>
         <Link to={lh.link("frontendProjectDetail", project.attributes.slug)}>
           <figure className={figureClass}>
             <GlobalProject.Avatar project={project} />
@@ -138,7 +138,7 @@ export default class ProjectGridItem extends Component {
           favorites={this.props.favorites}
           dispatch={this.props.dispatch}
         />
-      </React.Fragment>
+      </>
     );
   }
 }

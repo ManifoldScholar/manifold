@@ -24,7 +24,7 @@ export class CommentThread extends PureComponent {
         state.entityStore
       )
     };
-    return Object.assign({}, ownProps, newState);
+    return { ...ownProps, ...newState };
   };
 
   static propTypes = {

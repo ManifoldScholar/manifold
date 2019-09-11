@@ -25,7 +25,7 @@ export default class SkipLink extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <a
           className="skip-to-main screen-reader-text"
           href={`#${this.props.skipId}`}
@@ -38,7 +38,7 @@ export default class SkipLink extends PureComponent {
             {this.props.skipMessage}
           </span>
         ) : null}
-      </React.Fragment>
+      </>
     );
   }
 }

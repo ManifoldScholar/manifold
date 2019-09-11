@@ -19,23 +19,38 @@
       "enforceForRenamedProperties": false
     }],
 
+    "react/jsx-curly-newline": 0,
+    "react/static-property-placement": 0,
+    "react/jsx-props-no-spreading": 0,
     "react/destructuring-assignment": 0,
     "react/button-has-type": 0,
     "react/default-props-match-prop-types": 0,
-    "jsx-a11y/label-has-associated-control": 0,
-    "import/order": 0,
     "react/prop-types": 0,
     "react/sort-comp": 0,
     "react/no-access-state-in-setstate": 0,
     "react/jsx-one-expression-per-line": 0,
     "react/jsx-curly-brace-presence": 0,
     "react/no-unused-state": 0,
+
+    "import/order": 0,
     "no-restricted-globals": 0,
     "getter-return": 0,
     "prefer-promise-reject-errors": 0,
     "no-else-return": 0,
 
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/control-has-associated-label": 0,
+
     ///////// END NEW //////////////////
+
+    "camelcase": ['error', {
+      "properties": "never",
+      "ignoreDestructuring": false,
+      "allow": [
+        "UNSAFE_componentDidMount",
+        "UNSAFE_componentWillMount"
+      ]
+    }],
 
     "prettier/prettier": "error",
 

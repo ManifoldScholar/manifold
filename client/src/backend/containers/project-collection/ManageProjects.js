@@ -181,7 +181,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     const total = projectsMeta.pagination.totalCount || 0;
 
     return (
-      <React.Fragment>
+      <>
         <p className="list-total" aria-hidden>
           You have added <span>{added}</span> of <span>{total}</span> available
           projects
@@ -195,7 +195,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
         >
           {`You have added ${added} of ${total} available projects.`}
         </div>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -203,7 +203,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     if (!this.props.projectsMeta) return null;
 
     return (
-      <React.Fragment>
+      <>
         <Navigation.DrawerHeader
           icon="BECollectionManual64"
           title={this.props.projectCollection.attributes.title}
@@ -246,7 +246,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
             />
           </button>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const clearError = state => {
-  return Object.assign({}, state, initialState);
+  return { ...state, ...initialState };
 };
 
 const mapAPIError = ({ status, error, exception, traces }) => {
@@ -48,7 +48,7 @@ const setError = (state, { payload: { error: rawError, type } }) => {
         return e;
     }
   })(rawError);
-  return Object.assign({}, state, { error, type });
+  return { ...state, error, type };
 };
 
 const fatalErrorReducer = (state = initialState, action) => {

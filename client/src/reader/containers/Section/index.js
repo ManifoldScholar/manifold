@@ -215,7 +215,7 @@ export class SectionContainer extends Component {
       sectionDescription = `Start reading this text on ${append}.`;
 
     return (
-      <React.Fragment>
+      <>
         {this.renderStyles(this.props)}
         <HeadContent
           title={metaTitle}
@@ -242,7 +242,7 @@ export class SectionContainer extends Component {
             label={get(text, "relationships.category.attributes.title")}
           />
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

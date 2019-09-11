@@ -14,7 +14,7 @@ export default class ProjectContentSectionsPartsHeader extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         {this.props.title && (
           <header className="form-section-label">
             <h2 id={this.props.headerId}>{this.props.title}</h2>
@@ -30,7 +30,7 @@ export default class ProjectContentSectionsPartsHeader extends PureComponent {
             <h3>{this.props.subtitle}</h3>
           </header>
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

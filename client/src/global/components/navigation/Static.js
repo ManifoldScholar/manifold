@@ -192,10 +192,10 @@ export class NavigationStatic extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         {this.hasLinks && this.renderSiteNav()}
         {this.renderUserMenu(this.props)}
-      </React.Fragment>
+      </>
     );
   }
 }

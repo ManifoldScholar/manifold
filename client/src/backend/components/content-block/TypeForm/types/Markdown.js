@@ -15,7 +15,7 @@ export default class ProjectContentTypeFormMarkdown extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <Form.TextArea
           focusOnMount
           label="Body"
@@ -33,7 +33,7 @@ export default class ProjectContentTypeFormMarkdown extends PureComponent {
           inline
           wide
         />
-      </React.Fragment>
+      </>
     );
   }
 }

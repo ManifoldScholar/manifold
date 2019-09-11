@@ -199,7 +199,7 @@ class StandaloneHeader extends PureComponent {
       : {};
 
     return (
-      <React.Fragment>
+      <>
         <div className={wrapperClasses}>
           <SetCSSProperty
             measurement="height"
@@ -241,7 +241,7 @@ class StandaloneHeader extends PureComponent {
           <div className="standalone-header__shim" ref={this.shimRef} />
         )}
         <HeaderNotifications scope="global" />
-      </React.Fragment>
+      </>
     );
   }
 }

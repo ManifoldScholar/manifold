@@ -16,10 +16,10 @@ export default class SourceSummary extends React.PureComponent {
   renderUser() {
     if (!this.props.user) return null;
     return (
-      <React.Fragment>
+      <>
         <i>{this.props.user}</i>
         {" highlighted "}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -28,22 +28,22 @@ export default class SourceSummary extends React.PureComponent {
     if (!projectTitle && !sectionTitle) return null;
 
     return (
-      <React.Fragment>
+      <>
         {!user && "from "}
         {sectionTitle && `“${sectionTitle}”`}
         {sectionTitle && projectTitle && " in "}
         {projectTitle && <i>{projectTitle}</i>}
-      </React.Fragment>
+      </>
     );
   }
 
   renderDate() {
     if (!this.props.highlightDate) return null;
     return (
-      <React.Fragment>
+      <>
         {" on "}
         <FormattedDate date={this.props.highlightDate} />
-      </React.Fragment>
+      </>
     );
   }
 

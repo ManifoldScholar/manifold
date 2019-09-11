@@ -5,14 +5,14 @@ export default function pluginMiddleware({ dispatchIgnored, getStateIgnored }) {
     let adjustedAction = action;
 
     if (action.type === "REGISTER_COMPONENT") {
-      const payload = Object.assign({}, action.payload);
+      const payload = { ...action.payload };
       const { component } = payload;
       const id = pluginRegistry.add(component);
 
       payload.id = id;
       payload.component =
         component.displayName || component.name || "unnamedComponent";
-      adjustedAction = Object.assign({}, action, { payload });
+      adjustedAction = { ...action, payload };
     }
 
     return next(adjustedAction);

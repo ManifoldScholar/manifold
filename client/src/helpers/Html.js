@@ -92,7 +92,7 @@ export default class Html extends Component {
       );
     }
     return (
-      <React.Fragment>
+      <>
         <link
           rel="shortcut icon"
           type="image/png"
@@ -111,7 +111,7 @@ export default class Html extends Component {
           sizes="96x96"
           href={favicons.large}
         />
-      </React.Fragment>
+      </>
     );
   };
 
@@ -141,10 +141,10 @@ export default class Html extends Component {
           />
 
           {helmetContext && helmetContext.helmet && (
-            <React.Fragment>
+            <>
               {helmetContext.helmet.title.toComponent()}
               {helmetContext.helmet.meta.toComponent()}
-            </React.Fragment>
+            </>
           )}
 
           <script src="/browser.config.js" charSet="UTF-8" />

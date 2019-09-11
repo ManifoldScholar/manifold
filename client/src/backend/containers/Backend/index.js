@@ -79,7 +79,7 @@ export class BackendContainer extends PureComponent {
   render() {
     return (
       <BodyClass className={"backend bg-neutral90"}>
-        <React.Fragment>
+        <>
           <RedirectToFirstMatch
             from={lh.link("backend")}
             candidates={[
@@ -111,7 +111,7 @@ export class BackendContainer extends PureComponent {
             commonActions={this.commonActions}
             settings={this.props.settings}
           />
-        </React.Fragment>
+        </>
       </BodyClass>
     );
   }

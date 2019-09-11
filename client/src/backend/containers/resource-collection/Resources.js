@@ -177,7 +177,7 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
           switchValue: this.isInCollection
         }}
         title={
-          <React.Fragment>
+          <>
             Resources
             <button
               style={{ marginLeft: 3 }}
@@ -186,7 +186,7 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
             >
               <span className="utility-button__text">{toggleLabel}</span>
             </button>
-          </React.Fragment>
+          </>
         }
         titleIcon="resourceCollection64"
         entities={this.props.resources}

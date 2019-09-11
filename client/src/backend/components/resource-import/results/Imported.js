@@ -18,7 +18,7 @@ export default class ResourceImportResultsImported extends PureComponent {
     const verb = resourceImportRow.isUpdate ? "updated" : "created";
 
     return (
-      <React.Fragment>
+      <>
         <IconComposer
           icon="checkmark16"
           size={18}
@@ -31,7 +31,7 @@ export default class ResourceImportResultsImported extends PureComponent {
           </Link>
           .
         </span>
-      </React.Fragment>
+      </>
     );
   }
 }

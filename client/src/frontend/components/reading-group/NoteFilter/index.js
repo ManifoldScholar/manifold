@@ -59,15 +59,13 @@ export default class SelectFilter extends React.PureComponent {
 
   updateTextFilter = event => {
     const text = event.target.value;
-    const filter = Object.assign({}, this.state.filter, { text });
+    const filter = { ...this.state.filter, text };
     this.setState({ filter });
   };
 
   updateMemberFilter = event => {
     const readingGroupMembership = event.target.value;
-    const filter = Object.assign({}, this.state.filter, {
-      readingGroupMembership
-    });
+    const filter = { ...this.state.filter, readingGroupMembership };
     this.setState({ filter });
   };
 

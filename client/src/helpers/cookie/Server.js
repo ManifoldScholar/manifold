@@ -27,7 +27,7 @@ export default class ServerCookie {
   }
 
   adjustedOptions(options) {
-    const out = Object.assign({}, options);
+    const out = { ...options };
     if (out.expires) {
       out.expires = new Date(new Date() * 1 + out.expires * 864e5);
     }

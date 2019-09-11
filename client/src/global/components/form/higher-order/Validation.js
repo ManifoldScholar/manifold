@@ -69,7 +69,7 @@ export default class FormHigherOrderValidation extends Component {
   }
 
   removeError(key) {
-    const errors = Object.assign({}, this.state.errors);
+    const errors = { ...this.state.errors };
     delete errors[key];
     this.setState({ errors });
   }
@@ -81,7 +81,7 @@ export default class FormHigherOrderValidation extends Component {
         pointer: this.pointerFor(this.props.name)
       }
     };
-    const errors = Object.assign({}, this.state.errors, { [key]: error });
+    const errors = { ...this.state.errors, [key]: error };
     this.setState({ errors });
   }
 

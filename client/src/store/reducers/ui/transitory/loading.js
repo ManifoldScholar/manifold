@@ -41,13 +41,10 @@ const startLoader = (state, action) => {
   ) {
     const pendingRemovals = state.pendingRemovals.slice(0);
     pendingRemovals.splice(pendingRemovals.indexOf(action.payload), 1);
-    return Object.assign({}, state, { pendingRemovals });
+    return { ...state, pendingRemovals };
   }
   const activeLoaders = maybeAddLoader(state.activeLoaders, action.payload);
-  return Object.assign({}, state, {
-    active: getLoadingState(activeLoaders),
-    activeLoaders
-  });
+  return { ...state, active: getLoadingState(activeLoaders), activeLoaders };
 };
 
 const stopLoader = (state, action) => {
@@ -55,15 +52,12 @@ const stopLoader = (state, action) => {
     const pendingRemovals = state.pendingRemovals.slice(0);
     if (pendingRemovals.indexOf(action.payload) === -1) {
       pendingRemovals.push(action.payload);
-      return Object.assign({}, state, { pendingRemovals });
+      return { ...state, pendingRemovals };
     }
     return state;
   }
   const activeLoaders = maybeRemoveLoader(state.activeLoaders, action.payload);
-  return Object.assign({}, state, {
-    active: getLoadingState(activeLoaders),
-    activeLoaders
-  });
+  return { ...state, active: getLoadingState(activeLoaders), activeLoaders };
 };
 
 export default handleActions(

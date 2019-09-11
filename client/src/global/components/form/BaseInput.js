@@ -127,10 +127,10 @@ class FormBaseInput extends PureComponent {
           id={idForInstructions}
         />
         {this.state.notification && (
-          <React.Fragment>
+          <>
             {!this.props.instructions && <span />}
             <span className="notification">{this.state.notification}</span>
-          </React.Fragment>
+          </>
         )}
       </Errorable>
     );

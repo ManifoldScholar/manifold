@@ -100,7 +100,7 @@ export class ProjectCollectionDetailContainer extends Component {
     const filter = omitBy(init, (vIgnored, k) => k === "page");
 
     return {
-      filter: Object.assign({}, filter),
+      filter: { ...filter },
       pagination: {
         number: init.page || page,
         size: perPage
@@ -109,9 +109,10 @@ export class ProjectCollectionDetailContainer extends Component {
   }
 
   updateResults(filter = this.state.filter) {
-    const updatedFilter = Object.assign({}, filter, {
+    const updatedFilter = {
+      ...filter,
       collectionOrder: this.props.projectCollection.id
-    });
+    };
 
     const action = request(
       projectsAPI.index(updatedFilter, this.state.pagination),
@@ -127,9 +128,7 @@ export class ProjectCollectionDetailContainer extends Component {
   };
 
   handlePageChange = pageParam => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: pageParam
-    });
+    const pagination = { ...this.state.pagination, number: pageParam };
     this.setState({ pagination }, this.updateResults);
   };
 

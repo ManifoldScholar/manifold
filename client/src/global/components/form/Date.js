@@ -75,13 +75,13 @@ class FormDate extends Component {
   }
 
   setInputDay = event => {
-    const input = Object.assign({}, this.state.input);
+    const input = { ...this.state.input };
     input.day = event.target.value;
     this.setState({ input });
   };
 
   setInputMonth = event => {
-    const input = Object.assign({}, this.state.input);
+    const input = { ...this.state.input };
     input.month = event.target.value;
     const max = this.maxDayForMonthAndYear(input.month, input.year);
     input.day = input.day > max ? max : input.day;
@@ -89,7 +89,7 @@ class FormDate extends Component {
   };
 
   setInputYear = event => {
-    const input = Object.assign({}, this.state.input);
+    const input = { ...this.state.input };
     input.year = event.target.value;
     const max = this.maxDayForMonthAndYear(input.month, input.year);
     input.day = input.day > max ? max : input.day;

@@ -21,7 +21,7 @@ export default function withDispatch(WrappedComponent) {
     static displayName = displayName;
 
     render() {
-      const props = Object.assign({}, this.props);
+      const props = { ...this.props };
       return React.createElement(WrappedComponent, props);
     }
   }

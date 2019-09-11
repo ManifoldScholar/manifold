@@ -34,7 +34,7 @@ export default function withFormContext(WrappedComponent) {
       return (
         <FormContext.Consumer>
           {formProps => {
-            const props = Object.assign({}, mockProps, formProps, this.props);
+            const props = { ...mockProps, ...formProps, ...this.props };
             return React.createElement(WrappedComponent, props);
           }}
         </FormContext.Consumer>

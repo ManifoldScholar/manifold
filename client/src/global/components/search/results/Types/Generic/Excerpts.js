@@ -57,7 +57,7 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
     });
 
     return (
-      <React.Fragment>
+      <>
         <div className="search-result__excerpts" ref={this.scrollTarget}>
           {this.excerpts.map(excerpt => (
             <blockquote
@@ -109,7 +109,7 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
               : "Only show most relevant excerpts"}
           </button>
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

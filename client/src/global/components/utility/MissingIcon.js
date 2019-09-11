@@ -68,7 +68,7 @@ export default class MissingIcon extends Component {
     };
 
     return (
-      <React.Fragment>
+      <>
         <svg {...svgProps} style={{ backgroundColor: "yellow" }}>
           <g fill="none" fillRule="evenodd">
             <path
@@ -85,7 +85,7 @@ export default class MissingIcon extends Component {
         </svg>
         <br />
         <span style={{ fontSize: 10 }}>{this.props.icon}</span>
-      </React.Fragment>
+      </>
     );
   }
 }

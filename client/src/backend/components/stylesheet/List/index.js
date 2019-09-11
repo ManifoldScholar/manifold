@@ -24,10 +24,10 @@ export default class CategoryList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = Object.assign(
-      { dragging: false },
-      this.constructor.getDerivedStateFromProps(props)
-    );
+    this.state = {
+      dragging: false,
+      ...this.constructor.getDerivedStateFromProps(props)
+    };
   }
 
   onDragStart = draggableIgnored => {

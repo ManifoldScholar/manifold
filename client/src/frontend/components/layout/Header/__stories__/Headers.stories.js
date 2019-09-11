@@ -82,11 +82,12 @@ const adjustSettings = (dispatch, showPressHeader) => {
   settings.meta = { partial: false };
 
   if (showPressHeader) {
-    settings.attributes.theme = Object.assign({}, baseTheme, {
+    settings.attributes.theme = {
+      ...baseTheme,
       topBarColor: "#7B2E00",
       topBarUrl: "http://manifoldapp.org",
       topBarText: "University of Minnesota Press"
-    });
+    };
   } else {
     settings.theme = baseTheme;
   }

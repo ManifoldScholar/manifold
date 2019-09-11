@@ -14,7 +14,7 @@ export default class ResourceImportResultsSkipped extends PureComponent {
     if (!resourceImportRow) return null;
 
     return (
-      <React.Fragment>
+      <>
         <IconComposer
           icon="arrowRight16"
           size={18}
@@ -23,7 +23,7 @@ export default class ResourceImportResultsSkipped extends PureComponent {
         <span>
           {`Row #${resourceImportRow.lineNumber} was skipped as marked.`}
         </span>
-      </React.Fragment>
+      </>
     );
   }
 }

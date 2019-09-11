@@ -28,7 +28,7 @@ class KindPicker extends PureComponent {
 
   renderSelect(kindList, id) {
     return (
-      <React.Fragment>
+      <>
         <label htmlFor={id}>Kind</label>
         <div className={this.selectClasses}>
           <div className="form-select">
@@ -56,7 +56,7 @@ class KindPicker extends PureComponent {
             </select>
           </div>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 

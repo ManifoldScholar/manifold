@@ -130,7 +130,7 @@ export class FormContainer extends PureComponent {
 
   adjustedRelationships(relationships) {
     if (!relationships) return {};
-    const adjusted = Object.assign({}, relationships);
+    const adjusted = { ...relationships };
     forEach(adjusted, (value, key) => {
       const adjustedValue = isArray(value)
         ? value.map(relation => pick(relation, ["id", "type"]))
@@ -163,15 +163,16 @@ export class FormContainer extends PureComponent {
   }
 
   requestOptions() {
-    return Object.assign({}, this.props.options, {
+    return {
+      ...this.props.options,
       notificationScope: this.props.notificationScope
-    });
+    };
   }
 
   create() {
     const { dirty, source } = this.props.session;
     const call = this.props.create({
-      attributes: Object.assign({}, source.attributes, dirty.attributes),
+      attributes: { ...source.attributes, ...dirty.attributes },
       relationships: this.adjustedRelationships(dirty.relationships)
     });
     const action = request(call, this.props.name, this.requestOptions());

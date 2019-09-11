@@ -15,30 +15,28 @@ function _openChannel(state, channelName) {
     message: null
   };
   const channel = { [channelName]: defaultChannelState };
-  const channels = Object.assign({}, state.channels, channel);
-  return Object.assign({}, state, { channels });
+  const channels = { ...state.channels, ...channel };
+  return { ...state, channels };
 }
 
 function _updateChannels(state, channels) {
-  return Object.assign({}, state, { channels });
+  return { ...state, channels };
 }
 
 function _updateChannel(state, channelName, overlay) {
-  const channel = Object.assign({}, state.channels[channelName], overlay);
-  const channels = Object.assign({}, state.channels, {
-    [channelName]: channel
-  });
+  const channel = { ...state.channels[channelName], ...overlay };
+  const channels = { ...state.channels, [channelName]: channel };
   return _updateChannels(state, channels);
 }
 
 function _closeChannel(state, channelName) {
-  const channels = Object.assign({}, state.channels);
+  const channels = { ...state.channels };
   delete channels[channelName];
   return _updateChannels(state, channels);
 }
 
 function _addMessage(state, channelName, message) {
-  const channel = Object.assign({}, state.channels[channelName]);
+  const channel = { ...state.channels[channelName] };
   const id = has(channel, "message.id") ? channel.message.id + 1 : 1;
   channel.message = { type: message.type, payload: message.payload, id };
   return _updateChannel(state, channelName, channel);
@@ -46,7 +44,7 @@ function _addMessage(state, channelName, message) {
 
 function activateChannel(state, action) {
   const channelName = action.payload.channel;
-  const channel = Object.assign({}, state.channels[channelName]);
+  const channel = { ...state.channels[channelName] };
   channel.active = true;
   return _updateChannel(state, channelName, channel);
 }
@@ -66,31 +64,34 @@ function receiveMessage(currentState, action) {
 }
 
 function startConnecting(currentState) {
-  return Object.assign({}, currentState, {
+  return {
+    ...currentState,
     connecting: true,
     failure: false,
     connected: false
-  });
+  };
 }
 
 function connect(currentState) {
-  return Object.assign({}, currentState, {
+  return {
+    ...currentState,
     connected: true,
     failure: false,
     connecting: false
-  });
+  };
 }
 
 function disconnect(currentState) {
-  return Object.assign({}, currentState, { connected: false });
+  return { ...currentState, connected: false };
 }
 
 function handleFailure(currentState) {
-  return Object.assign({}, currentState, {
+  return {
+    ...currentState,
     connected: false,
     connecting: false,
     failure: true
-  });
+  };
 }
 
 export default handleActions(

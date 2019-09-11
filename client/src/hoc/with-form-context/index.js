@@ -19,10 +19,10 @@ function withFormContext(WrappedComponent) {
       return (
         <FormContext.Consumer>
           {formProps =>
-            React.createElement(
-              WrappedComponent,
-              Object.assign({}, this.props, formProps)
-            )
+            React.createElement(WrappedComponent, {
+              ...this.props,
+              ...formProps
+            })
           }
         </FormContext.Consumer>
       );

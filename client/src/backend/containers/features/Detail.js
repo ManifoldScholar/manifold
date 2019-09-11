@@ -111,14 +111,11 @@ class FeatureDetailContainer extends PureComponent {
     const { session } = props;
     if (!session) return null;
     const { source, dirty } = session;
-    const previewAttributes = Object.assign(
-      {},
-      source.attributes,
-      dirty.attributes
-    );
-    const preview = Object.assign({}, source, {
-      attributes: previewAttributes
-    });
+    const previewAttributes = {
+      ...source.attributes,
+      ...dirty.attributes
+    };
+    const preview = { ...source, attributes: previewAttributes };
     return preview;
   }
 

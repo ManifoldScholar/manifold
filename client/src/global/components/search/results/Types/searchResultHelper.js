@@ -44,10 +44,10 @@ export default function withSearchResultHelper(WrappedComponent) {
     };
 
     render() {
-      return React.createElement(
-        WrappedComponent,
-        Object.assign({}, this.props, this.childProps)
-      );
+      return React.createElement(WrappedComponent, {
+        ...this.props,
+        ...this.childProps
+      });
     }
   }
 

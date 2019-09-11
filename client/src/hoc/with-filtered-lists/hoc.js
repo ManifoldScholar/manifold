@@ -67,14 +67,12 @@ function withFilters(WrappedComponent, filteredLists = {}) {
             name: paramDefinition.name
           };
           if (paramDefinition.options) {
-            param.options = paramDefinition.options.map(o =>
-              Object.assign({}, o)
-            );
+            param.options = paramDefinition.options.map(o => ({ ...o }));
           }
           listState.params.push(param);
           listState.values[param.name] = paramDefinition.value || "";
         });
-        listState.initialValues = Object.assign({}, listState.values);
+        listState.initialValues = { ...listState.values };
         state[listKey] = listState;
       });
       return state;
@@ -92,8 +90,8 @@ function withFilters(WrappedComponent, filteredLists = {}) {
     setValues(key, updatedValues, isReset) {
       const listState = this.listState(key);
       const values = listState.values;
-      const newValues = Object.assign({}, values, updatedValues);
-      const newListState = Object.assign({}, listState, { values: newValues });
+      const newValues = { ...values, ...updatedValues };
+      const newListState = { ...listState, values: newValues };
       this.setState({
         [key]: newListState,
         message: isReset ? this.resetMessage : null
@@ -208,7 +206,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
 
     render() {
       return (
-        <React.Fragment>
+        <>
           {this.renderLiveRegion()}
           <WrappedComponent
             {...this.props}
@@ -217,7 +215,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
             saveSearchState={this.saveSearchState}
             savedSearchPaginationState={this.savedSearchPaginationState}
           />
-        </React.Fragment>
+        </>
       );
     }
   }

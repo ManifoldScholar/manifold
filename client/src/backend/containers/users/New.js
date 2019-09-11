@@ -26,7 +26,7 @@ export class UsersNewContainer extends PureComponent {
 
   createUser(user) {
     const meta = { createdByAdmin: true };
-    return usersAPI.create(Object.assign({}, user, { meta }));
+    return usersAPI.create({ ...user, meta });
   }
 
   handleSuccess = user => {
