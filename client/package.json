@@ -85,7 +85,7 @@
     "cli-spinner": "^0.2.8",
     "compression": "^1.6.0",
     "connect": "^3.6.6",
-    "cookie": "^0.3.1",
+    "cookie": "^0.x",
     "core-js": "2.6.9",
     "date-fns": "^1.29.0",
     "dotenv": "^6.0",
