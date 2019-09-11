@@ -36,7 +36,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       this.state = this.initialState;
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
       this.managedLists.forEach(listKey => {
         if (!this.state[listKey].config.snapshotState) return null;
         const snapshot = this.props.snapshots[this.snapshotKey(listKey)];

@@ -34,7 +34,7 @@ class AnnotationEditor extends PureComponent {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const { annotation } = this.props;
     if (annotation.id) {
       this.setReadingGroupFromAnnotationEdit();
