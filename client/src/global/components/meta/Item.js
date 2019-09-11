@@ -38,10 +38,10 @@ export default class Item extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         {this.renderLabel(this.props.label)}
         {this.renderValue(this.props.children, this.props.value)}
-      </React.Fragment>
+      </>
     );
   }
 }

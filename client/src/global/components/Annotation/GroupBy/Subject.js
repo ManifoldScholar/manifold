@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { hash } from "utils/string";
 
@@ -39,8 +39,6 @@ export default class AnnotationGroupedBySubject extends PureComponent {
   /* eslint-enable no-param-reassign */
 
   render() {
-    return (
-      <Fragment>{this.grouped.map(group => this.props.render(group))}</Fragment>
-    );
+    return <>{this.grouped.map(group => this.props.render(group))}</>;
   }
 }

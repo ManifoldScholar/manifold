@@ -27,14 +27,14 @@ export class LayoutButtonNavigation extends Component {
 
   renderButtonInner(icon, label) {
     return (
-      <React.Fragment>
+      <>
         <IconComposer
           icon={icon}
           size={48}
           iconClass="button-icon-primary__icon"
         />
         <span className="button-icon-primary__text">{label}</span>
-      </React.Fragment>
+      </>
     );
   }
 

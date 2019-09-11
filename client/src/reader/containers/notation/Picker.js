@@ -29,7 +29,7 @@ export class NotationPickerContainerImplementation extends PureComponent {
         state.entityStore
       )
     };
-    return Object.assign({}, newState, ownProps);
+    return { ...newState, ...ownProps };
   };
 
   static displayName = "ReaderContainer.Notation.Picker";

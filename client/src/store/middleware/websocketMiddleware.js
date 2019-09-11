@@ -114,7 +114,7 @@ if (__BROWSER__) {
           ).start();
         }
         const subscription = cable.subscriptions.create(
-          Object.assign({}, { channel }, { token }, options),
+          { channel, token, ...options },
           socketHandler(dispatch, channel)
         );
         openSubscriptions[channel] = subscription;

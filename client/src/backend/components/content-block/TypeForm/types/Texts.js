@@ -27,7 +27,7 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <Form.TextInput label="Title" name="attributes[title]" focusOnMount />
         <Form.TextArea label="Description" name="attributes[description]" />
         <div className="form-section form-section--primary">
@@ -69,7 +69,7 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
             wide
           />
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

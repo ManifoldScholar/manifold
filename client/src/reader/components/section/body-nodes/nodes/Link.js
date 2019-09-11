@@ -43,7 +43,7 @@ class LinkNode extends Component {
     if (!this.hasUri() || this.isAbsoluteUri()) {
       return React.createElement(
         this.props.tag,
-        Object.assign({}, this.props.attributes, { target: "_blank" }),
+        { ...this.props.attributes, target: "_blank" },
         this.props.children
       );
     }

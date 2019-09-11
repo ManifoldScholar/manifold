@@ -50,7 +50,7 @@ class IframeNode extends Component {
 
   get style() {
     let base = this.props.attributes.styles || {};
-    base = Object.assign({}, base);
+    base = { ...base };
     delete base.width;
     delete base.height;
     return base;

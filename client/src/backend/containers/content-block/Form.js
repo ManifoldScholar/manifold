@@ -37,7 +37,7 @@ export class ProjectContentFormContainer extends Component {
 
   get initializeContentBlock() {
     if (this.isPendingBlock) {
-      return Object.assign({}, this.props.contentBlock, { id: null });
+      return { ...this.props.contentBlock, id: null };
     }
     return this.props.contentBlock;
   }
@@ -70,7 +70,7 @@ export class ProjectContentFormContainer extends Component {
   // source model. Since those values aren't changed, they are not passed to the update request
   // on their own.
   create = model => {
-    const adjusted = Object.assign({}, model);
+    const adjusted = { ...model };
     adjusted.attributes.position = this.contentBlock.attributes.position;
     adjusted.attributes.type = this.contentBlock.attributes.type;
 

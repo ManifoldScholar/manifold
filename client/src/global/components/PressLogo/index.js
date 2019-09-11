@@ -12,10 +12,10 @@ export default class PressLogo extends Component {
 
   getDefaultIcon() {
     return (
-      <React.Fragment>
+      <>
         <Utility.IconComposer size={26} icon="manifoldLogo32" />
         <span className="screen-reader-text">{"Manifold Logo"}</span>
-      </React.Fragment>
+      </>
     );
   }
 

@@ -101,14 +101,12 @@ class AnnotationEditor extends PureComponent {
       annotation
     } = this.props;
     const { errorsIgnored, ...attributes } = this.state;
-    const mutableAttributes = Object.assign({}, attributes);
+    const mutableAttributes = { ...attributes };
     mutableAttributes.private = currentReadingGroup === "private";
     if (currentReadingGroup !== "private" && currentReadingGroup !== "public") {
       mutableAttributes.readingGroupId = currentReadingGroup;
     }
-    const updatedAnnotation = Object.assign({}, annotation, {
-      attributes: mutableAttributes
-    });
+    const updatedAnnotation = { ...annotation, attributes: mutableAttributes };
 
     const promise = saveAnnotation(updatedAnnotation);
     if (closeOnSave && promise) {

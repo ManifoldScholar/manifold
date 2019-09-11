@@ -36,10 +36,9 @@ export default class AnnotatableDebug extends PureComponent {
     }
 
     const out = { ...this.props.annotatableState };
-    out.selectionState = Object.assign(
-      {},
-      this.props.annotatableState.selectionState
-    );
+    out.selectionState = {
+      ...this.props.annotatableState.selectionState
+    };
     out.selectionState.selection = newSelection;
     out.annotatableProps = this.props.annotatableProps;
     return out;

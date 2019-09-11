@@ -103,9 +103,10 @@ export class CreateContainer extends Component {
   };
 
   handleInputChange = event => {
-    const user = Object.assign({}, this.state.user, {
+    const user = {
+      ...this.state.user,
       [event.target.name]: event.target.value
-    });
+    };
     this.setState({ user });
   };
 
@@ -229,7 +230,7 @@ export class CreateContainer extends Component {
           </div>
         </form>
         {this.OAuthProviderNames && (
-          <React.Fragment>
+          <>
             <p className="login-links">
               {`You can also create a ${installationName} account using your ${this.OAuthProviderNames} credentials.`}
             </p>
@@ -237,7 +238,7 @@ export class CreateContainer extends Component {
               settings={this.props.settings}
               dispatch={this.props.dispatch}
             />
-          </React.Fragment>
+          </>
         )}
         {this.renderTermsAndConditions(this.props)}
         <p className="login-links">

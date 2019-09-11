@@ -97,7 +97,7 @@ class ProjectResourceCollectionsContainer extends Component {
           </Authorize>
         </ContentPlaceholder.Title>
         <ContentPlaceholder.Body>
-          <React.Fragment>
+          <>
             <Authorize entity="project" ability="create">
               <p>
                 Resource collections are groupings of resources that can be used
@@ -108,7 +108,7 @@ class ProjectResourceCollectionsContainer extends Component {
             <Authorize entity="project" ability="create" successBehavior="hide">
               <p>Please check back soon!</p>
             </Authorize>
-          </React.Fragment>
+          </>
         </ContentPlaceholder.Body>
         <ContentPlaceholder.Actions>
           <Authorize entity="project" ability="create">

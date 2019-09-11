@@ -42,14 +42,14 @@ const open = (state, action) => {
     source: model,
     changed: false
   };
-  const newSessions = Object.assign({}, state.session, { [key]: newSession });
-  const newState = Object.assign({}, state, { sessions: newSessions });
+  const newSessions = { ...state.session, [key]: newSession };
+  const newState = { ...state, sessions: newSessions };
   return newState;
 };
 
 const close = (state, action) => {
   const key = action.payload;
-  const newSessions = Object.assign({}, state.sessions);
+  const newSessions = { ...state.sessions };
   delete newSessions[key];
   return update(state, { sessions: { $set: newSessions } });
 };
@@ -66,7 +66,7 @@ const removeChangedFlag = (state, action) => {
     }
   });
   if (clear.length === 0) return state;
-  let newState = Object.assign({}, state);
+  let newState = { ...state };
   Object.keys(clear).forEach(sessionKey => {
     newState = update(newState, {
       sessions: {
@@ -84,7 +84,7 @@ const set = (state, action) => {
   if (value === undefined) return state; // undefined values are noops.
   const setPath = lodashSet({}, path, value);
   const sourceValue = getSourceValue(path, state.sessions[id].source);
-  const dirty = Object.assign({}, state.sessions[id].dirty);
+  const dirty = { ...state.sessions[id].dirty };
   let newDirty;
   if (value === sourceValue) {
     lodashUnset(dirty, setPathToGetPath(path));

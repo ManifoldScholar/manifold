@@ -63,7 +63,7 @@ export default class LayoutLibraryHeader extends PureComponent {
       logoUrl;
 
     return (
-      <React.Fragment>
+      <>
         <div className="library-header library-header--light">
           <SetCSSProperty
             measurement="height"
@@ -95,7 +95,7 @@ export default class LayoutLibraryHeader extends PureComponent {
         </div>
         <div className="header-border" />
         <BackLink.Render />
-      </React.Fragment>
+      </>
     );
   }
 }

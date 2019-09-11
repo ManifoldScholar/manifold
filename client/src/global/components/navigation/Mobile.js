@@ -289,7 +289,7 @@ export class NavigationMobile extends Component {
     });
 
     return (
-      <React.Fragment>
+      <>
         {this.hasLinks && (
           <MobileBreadcrumb
             links={this.props.links}
@@ -314,7 +314,7 @@ export class NavigationMobile extends Component {
             iconClass="mobile-nav-trigger__icon"
           />
         </button>
-      </React.Fragment>
+      </>
     );
   }
 }

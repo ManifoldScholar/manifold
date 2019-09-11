@@ -16,7 +16,7 @@ class DrawerSwitch extends React.PureComponent {
   };
 
   drawerProps() {
-    const props = Object.assign({}, this.props.wrapperProps);
+    const props = { ...this.props.wrapperProps };
     if (!props.closeUrl && !props.closeCallback) {
       props.closeCallback = this.defaultCloseCallback;
     }

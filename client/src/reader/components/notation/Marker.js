@@ -11,7 +11,7 @@ class NotationMarker extends Component {
     const newState = {
       activeAnnotation: state.ui.transitory.reader.activeAnnotation
     };
-    return Object.assign({}, newState, ownProps);
+    return { ...newState, ...ownProps };
   };
 
   static propTypes = {

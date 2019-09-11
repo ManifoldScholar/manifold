@@ -16,21 +16,21 @@ const renderChildRoutes = (route, renderOptions) => {
     factory: null
   };
   const routeOptions = route.options || {};
-  const options = Object.assign(
-    {},
-    defaultOptions,
-    routeOptions,
-    renderOptions
-  );
+  const options = {
+    ...defaultOptions,
+    ...routeOptions,
+    ...renderOptions
+  };
   const childRoutes = route.routes;
 
   const defaultRender = childRoute => props => {
-    const adjustedProps = Object.assign({}, props);
+    const adjustedProps = { ...props };
 
     if (options.drawer) {
-      adjustedProps.location.state = Object.assign({}, props.location.state, {
+      adjustedProps.location.state = {
+        ...props.location.state,
         noScroll: true
-      });
+      };
     }
 
     let rendered = (
@@ -90,7 +90,7 @@ const renderChildRoutes = (route, renderOptions) => {
   // If a drawer is requested, we wrap the children in a drawer version of the switch.
   if (options.drawer) {
     Wrapper = DrawerSwitch;
-    wrapperProps = Object.assign({}, wrapperProps, options.drawerProps);
+    wrapperProps = { ...wrapperProps, ...options.drawerProps };
   }
   return <Wrapper {...wrapperProps}>{mapped}</Wrapper>;
 };

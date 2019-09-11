@@ -5,11 +5,11 @@ const initialState = {
 };
 
 const setColorScheme = (state, action) => {
-  return Object.assign({}, state, { colorScheme: action.payload });
+  return { ...state, colorScheme: action.payload };
 };
 
 const setPersistentUI = (state, action) => {
-  return Object.assign({}, state, action.payload.colors);
+  return { ...state, ...action.payload.colors };
 };
 
 export default handleActions(

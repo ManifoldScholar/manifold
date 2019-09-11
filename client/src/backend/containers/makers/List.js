@@ -102,7 +102,7 @@ class MakersListContainerImplementation extends PureComponent {
     };
 
     return (
-      <React.Fragment>
+      <>
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
         {makers && (
           <EntitiesList
@@ -130,7 +130,7 @@ class MakersListContainerImplementation extends PureComponent {
             }}
           />
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

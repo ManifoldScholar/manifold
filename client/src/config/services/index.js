@@ -38,14 +38,15 @@ const serviceConfig = {
 };
 
 if (isServer) {
-  serviceConfig.client = Object.assign({}, serviceConfig.client, {
+  serviceConfig.client = {
+    ...serviceConfig.client,
     port,
     socket: process.env.CLIENT_SERVER_SOCKET,
     sparePort: port + 1,
     assetPort: port + 2,
     rescueEnabled: toBoolean(process.env.SSR_RESCUE),
     proxiesEnabled: toBoolean(process.env.CLIENT_SERVER_PROXIES)
-  });
+  };
 }
 
 export default serviceConfig;

@@ -74,9 +74,7 @@ class ReadingGroupsMembersContainer extends Component {
   }
 
   handlePageChange = pageParam => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: pageParam
-    });
+    const pagination = { ...this.state.pagination, number: pageParam };
     this.setState({ pagination }, this.doUpdate);
   };
 
@@ -88,9 +86,7 @@ class ReadingGroupsMembersContainer extends Component {
   };
 
   handlePageChange = pageParam => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: pageParam
-    });
+    const pagination = { ...this.state.pagination, number: pageParam };
     this.setState({ pagination }, this.doUpdate);
   };
 
@@ -172,7 +168,7 @@ class ReadingGroupsMembersContainer extends Component {
     if (!readingGroupMembers) return null;
 
     return (
-      <React.Fragment>
+      <>
         <BackLink.Register
           title={readingGroup.attributes.name}
           link={lh.link("frontendReadingGroupDetail", readingGroup.id)}
@@ -190,7 +186,7 @@ class ReadingGroupsMembersContainer extends Component {
             onRemoveMember={this.removeMember}
           />
         </div>
-      </React.Fragment>
+      </>
     );
   }
   /* eslint-enable no-console */

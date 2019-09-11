@@ -16,7 +16,7 @@ export default class H5p extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <div style={{ maxWidth: "100%" }}>
           <iframe
             title={this.props.title}
@@ -31,7 +31,7 @@ export default class H5p extends Component {
             charSet="UTF-8"
           />
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

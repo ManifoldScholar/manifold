@@ -25,7 +25,7 @@ export default class ResourceImportControlsImported extends PureComponent {
     if (!resourceImport) return null;
 
     return (
-      <React.Fragment>
+      <>
         <header className="form-section-label">
           <span>Step 4. Import Resources</span>
         </header>
@@ -66,7 +66,7 @@ export default class ResourceImportControlsImported extends PureComponent {
             <span>Reset Import</span>
           </button>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -17,7 +17,7 @@ const getInitialState = () => ({
 export const initialState = getInitialState();
 
 const selectFont = (state, action) => {
-  return Object.assign({}, state, { font: action.payload });
+  return { ...state, font: action.payload };
 };
 
 // TODO: get nested attributes to reset to initialState
@@ -28,7 +28,7 @@ const incrementAttribute = (state, attribute) => {
   if (parameter.current < parameter.max) {
     parameter.current += 1;
   }
-  return Object.assign({}, state, { [attribute]: parameter });
+  return { ...state, [attribute]: parameter };
 };
 
 const decrementAttribute = (state, attribute) => {
@@ -36,11 +36,11 @@ const decrementAttribute = (state, attribute) => {
   if (parameter.current > parameter.min) {
     parameter.current -= 1;
   }
-  return Object.assign({}, state, { [attribute]: parameter });
+  return { ...state, [attribute]: parameter };
 };
 
 const setPersistentUI = (state, action) => {
-  return Object.assign({}, getInitialState(), action.payload.typography);
+  return { ...getInitialState(), ...action.payload.typography };
 };
 
 export default handleActions(

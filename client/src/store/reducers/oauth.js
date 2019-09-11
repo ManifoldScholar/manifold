@@ -9,21 +9,21 @@ const initialState = {
 function oauthStarted(state, { payload }) {
   const { popup } = payload;
 
-  return Object.assign({}, state, { popup, started: true, errors: null });
+  return { ...state, popup, started: true, errors: null };
 }
 
 function oauthCancelled(state) {
-  return Object.assign({}, state, { popup: null, started: false });
+  return { ...state, popup: null, started: false };
 }
 
 function oauthFailed(state, { payload }) {
   const { errors } = payload;
 
-  return Object.assign({}, state, { errors });
+  return { ...state, errors };
 }
 
 function oauthDone(state) {
-  return Object.assign({}, state, { started: false });
+  return { ...state, started: false };
 }
 
 export default handleActions(

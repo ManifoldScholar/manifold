@@ -106,12 +106,12 @@ class Toc extends PureComponent {
 
   renderEmpty() {
     return (
-      <React.Fragment>
+      <>
         <div className="toc-empty">
           This text does not have a table of contents.
         </div>
         <hr />
-      </React.Fragment>
+      </>
     );
   }
 

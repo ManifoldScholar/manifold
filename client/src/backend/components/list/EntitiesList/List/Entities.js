@@ -28,9 +28,7 @@ export default class ListEntitiesListEntities extends PureComponent {
   }
 
   get entityComponentProps() {
-    return Object.assign({}, this.props.entityComponentProps, {
-      listStyle: this.listStyle
-    });
+    return { ...this.props.entityComponentProps, listStyle: this.listStyle };
   }
 
   get className() {

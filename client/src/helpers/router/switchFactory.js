@@ -66,12 +66,12 @@ export default function switchFactory(Wrapper) {
       const children = match
         ? React.cloneElement(child, { location, computedMatch: match })
         : null;
-      const props = Object.assign(
-        {},
-        this.props,
-        { match, children },
-        { wrapperProps: this.wrapperProps() }
-      );
+      const props = {
+        ...this.props,
+        match,
+        children,
+        wrapperProps: this.wrapperProps()
+      };
       return React.createElement(Wrapper, props);
     }
   }

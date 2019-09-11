@@ -26,7 +26,7 @@ export class ResourceListFilters extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.initialFilterState !== prevState.filters) {
-      return Object.assign({}, nextProps.initialFilterState);
+      return { ...nextProps.initialFilterState };
     }
 
     return null;
@@ -47,7 +47,7 @@ export class ResourceListFilters extends Component {
   setFilters = (event, label) => {
     event.preventDefault();
     const value = event.target.value;
-    const filters = Object.assign({}, this.state.filters);
+    const filters = { ...this.state.filters };
     filters[label] = value;
     if (label === "keyword") return this.setState({ filters });
     this.setState({ filters }, this.updateResults);
@@ -60,7 +60,7 @@ export class ResourceListFilters extends Component {
   };
 
   initialState(init) {
-    const filters = Object.assign({}, init);
+    const filters = { ...init };
     return { filters };
   }
 
@@ -90,7 +90,7 @@ export class ResourceListFilters extends Component {
           </button>
           <UID name={id => `${this.idPrefix}-${id}`}>
             {id => (
-              <React.Fragment>
+              <>
                 <label htmlFor={id} className="screen-reader-text">
                   Enter Search Criteria
                 </label>
@@ -102,7 +102,7 @@ export class ResourceListFilters extends Component {
                   onChange={event => this.setFilters(event, "keyword")}
                   placeholder="Search"
                 />
-              </React.Fragment>
+              </>
             )}
           </UID>
         </div>

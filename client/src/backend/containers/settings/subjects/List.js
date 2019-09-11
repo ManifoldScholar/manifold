@@ -98,7 +98,7 @@ export class SettingsSubjectsListContainer extends PureComponent {
     };
 
     return (
-      <React.Fragment>
+      <>
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
         {subjects && (
           <EntitiesList
@@ -123,7 +123,7 @@ export class SettingsSubjectsListContainer extends PureComponent {
             ]}
           />
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

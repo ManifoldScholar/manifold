@@ -9,13 +9,13 @@ function registerPlugin(state, { payload }) {
   if (state.plugins.includes(payload.plugin)) return state;
   const plugins = state.plugins.slice(0);
   plugins.push(payload.plugin);
-  return Object.assign({}, state, { plugins });
+  return { ...state, plugins };
 }
 
 function registerComponent(state, { payload }) {
-  const components = Object.assign({}, state.components);
+  const components = { ...state.components };
   components[payload.region] = payload;
-  return Object.assign({}, state, { components });
+  return { ...state, components };
 }
 
 export default handleActions(

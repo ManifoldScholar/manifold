@@ -19,7 +19,7 @@ function hydrateEntity({ id, type }, entities, hydrationMap = {}) {
   if (has(hydrationMap, entityPath)) {
     entity = get(hydrationMap, entityPath);
   } else {
-    entity = Object.assign({}, source);
+    entity = { ...source };
     // setWith is like mkdir deep for objects. The "with" part ensures that each segment
     // of the path is an object, rather than an array.
     setWith(hydrationMap, entityPath, entity, Object);

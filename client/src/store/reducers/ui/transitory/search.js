@@ -8,13 +8,13 @@ const initialState = {
 };
 
 const setSearchQuery = (state, action) => {
-  const newState = Object.assign({}, action.payload);
+  const newState = { ...action.payload };
   newState.searchNum = state.searchNum + 1;
-  return Object.assign({}, state, newState);
+  return { ...state, ...newState };
 };
 
 const resetSearch = () => {
-  return Object.assign({}, initialState);
+  return { ...initialState };
 };
 
 export default handleActions(

@@ -96,9 +96,10 @@ export default class ActionCallouts extends PureComponent {
 
   updateCallout(id, slotId, index) {
     const baseAttributes = this.findSlot(slotId).attributes;
-    const attributes = Object.assign({}, baseAttributes, {
+    const attributes = {
+      ...baseAttributes,
       position: index === 0 ? "top" : index + 1
-    });
+    };
     const call = actionCalloutsAPI.update(id, { attributes });
     const options = { noTouch: true };
     const updateRequest = request(
@@ -119,9 +120,7 @@ export default class ActionCallouts extends PureComponent {
 
   replaceSlotInState(slotId, slotCallouts, callback = null) {
     const state = {
-      slotCallouts: Object.assign({}, this.state.slotCallouts, {
-        [slotId]: slotCallouts
-      })
+      slotCallouts: { ...this.state.slotCallouts, [slotId]: slotCallouts }
     };
     this.setState(state, callback);
   }

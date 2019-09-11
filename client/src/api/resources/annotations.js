@@ -2,7 +2,7 @@ import isString from "lodash/isString";
 
 export default {
   forSection(sectionId, filter = {}, page = {}) {
-    const filterParams = Object.assign({}, filter);
+    const filterParams = { ...filter };
     filterParams.orphaned = false;
 
     return {

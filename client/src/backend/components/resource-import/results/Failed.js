@@ -13,7 +13,7 @@ export default class ResourceImportResultsFailed extends PureComponent {
     const resourceImportRow = this.props.resourceImportRow;
 
     return (
-      <React.Fragment>
+      <>
         <IconComposer
           icon="close16"
           size={18}
@@ -22,7 +22,7 @@ export default class ResourceImportResultsFailed extends PureComponent {
         <span>
           {`Row #${resourceImportRow.lineNumber} failed with errors.`}
         </span>
-      </React.Fragment>
+      </>
     );
   }
 }

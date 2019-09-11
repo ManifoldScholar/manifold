@@ -20,7 +20,7 @@ export default class ProjectContentTypeFormResources extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <Form.TextInput
           label="Title"
           name="attributes[title]"
@@ -43,7 +43,7 @@ export default class ProjectContentTypeFormResources extends PureComponent {
             wide
           />
         ) : null}
-      </React.Fragment>
+      </>
     );
   }
 }

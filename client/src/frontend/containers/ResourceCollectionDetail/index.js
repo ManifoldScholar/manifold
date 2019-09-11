@@ -139,7 +139,7 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     const filter = omitBy(init, (vIgnored, k) => k === "page");
 
     return {
-      filter: Object.assign({}, filter),
+      filter: { ...filter },
       pagination: {
         number: init.page || page,
         size: perPage
@@ -176,7 +176,7 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     const filters = this.state.filter;
     if (filters.collection_order) delete filters.collection_order;
     const pageParam = this.state.pagination.number;
-    const params = Object.assign({}, filters);
+    const params = { ...filters };
     if (pageParam !== 1) params.page = pageParam;
 
     const search = queryString.stringify(params);
@@ -184,16 +184,12 @@ export class ResourceCollectionDetailContainer extends PureComponent {
   }
 
   filterChange = filter => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: page
-    });
+    const pagination = { ...this.state.pagination, number: page };
     this.setState({ filter, pagination }, this.doUpdate);
   };
 
   handlePageChange = pageParam => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: pageParam
-    });
+    const pagination = { ...this.state.pagination, number: pageParam };
     this.setState({ pagination }, this.doUpdate);
   };
 

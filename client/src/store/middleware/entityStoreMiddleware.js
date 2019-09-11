@@ -7,7 +7,7 @@ function sendRequest(request, authToken) {
   const client = new ApiClient();
   const token = authToken;
   const { endpoint, method } = request;
-  const options = Object.assign({}, request.options, { authToken: token });
+  const options = { ...request.options, authToken: token };
   return client.call(endpoint, method, options);
 }
 
@@ -92,7 +92,7 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     // We add the promise to the payload so that it can be used in fetch data to delay
     // loading.
     const withState = { state: 1, promise: requestPromise };
-    const requestPayload = Object.assign({}, action.payload, withState);
+    const requestPayload = { ...action.payload, ...withState };
 
     let newMeta = action.meta;
     if (!Array.isArray(newMeta)) newMeta = [action.meta];

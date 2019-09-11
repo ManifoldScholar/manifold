@@ -76,7 +76,7 @@ class ReadingGroupsDetailContainer extends Component {
     const filter = omitBy(init, (vIgnored, k) => k === "page");
 
     return {
-      filter: Object.assign({}, filter),
+      filter: { ...filter },
       pagination: {
         number: init.page || defaultPage,
         size: perPage
@@ -85,9 +85,7 @@ class ReadingGroupsDetailContainer extends Component {
   }
 
   handlePageChange = pageParam => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: pageParam
-    });
+    const pagination = { ...this.state.pagination, number: pageParam };
     this.setState({ pagination }, this.doUpdate);
   };
 
@@ -154,7 +152,7 @@ class ReadingGroupsDetailContainer extends Component {
     const pathname = this.props.location.pathname;
     const filters = this.state.filter;
     const pageParam = this.state.pagination.number;
-    const params = Object.assign({}, filters);
+    const params = { ...filters };
     if (pageParam !== 1) params.page = pageParam;
     const search = queryString.stringify(params);
     this.props.history.push({ pathname, search });
@@ -171,7 +169,7 @@ class ReadingGroupsDetailContainer extends Component {
     if (!annotations || !readingGroup || !annotationsMeta) return null;
 
     return (
-      <React.Fragment>
+      <>
         {this.renderRoutes()}
         <BackLink.Register
           link={lh.link("frontendReadingGroups")}
@@ -211,7 +209,7 @@ class ReadingGroupsDetailContainer extends Component {
             </ContentPlaceholder.Body>
           </ContentPlaceholder.Wrapper>
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

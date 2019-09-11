@@ -45,10 +45,10 @@ class SearchResultsTypeAnnotation extends PureComponent {
   get title() {
     const name = this.creatorAttributes.fullName;
     return (
-      <React.Fragment>
+      <>
         {name} <span className="search-result__subtitle">annotated</span>{" "}
         {this.parent}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -66,7 +66,7 @@ class SearchResultsTypeAnnotation extends PureComponent {
         description={this.description}
         label="Annotation"
         figure={
-          <React.Fragment>
+          <>
             {this.creatorAttributes.avatarStyles.smallSquare ? (
               <img
                 className="search-result__avatar"
@@ -78,16 +78,16 @@ class SearchResultsTypeAnnotation extends PureComponent {
                 <Utility.IconComposer icon="avatar64" />
               </div>
             )}
-          </React.Fragment>
+          </>
         }
         meta={
-          <React.Fragment>
+          <>
             <FormattedDate
               format="distanceInWords"
               date={this.model.attributes.createdAt}
             />{" "}
             ago
-          </React.Fragment>
+          </>
         }
       />
     );

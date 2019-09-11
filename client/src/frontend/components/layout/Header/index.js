@@ -44,7 +44,7 @@ export default class LayoutHeader extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <BlurOnLocationChange
           tag="header"
           className="header-app header-app--sticky"
@@ -65,7 +65,7 @@ export default class LayoutHeader extends PureComponent {
             <StandaloneHeader {...this.props} />
           </BlurOnLocationChange>
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -19,4 +19,4 @@ const environmentSpecificConfig = {
   }
 }[name];
 
-export default Object.assign({}, baseConfig, environmentSpecificConfig);
+export default { ...baseConfig, ...environmentSpecificConfig };

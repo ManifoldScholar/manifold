@@ -58,11 +58,11 @@ function setMode(state, action) {
 }
 
 function setIsProjectSubpage(state) {
-  return Object.assign({}, state, { isProjectHomepage: false });
+  return { ...state, isProjectHomepage: false };
 }
 
 function setIsProjectHomepage(state) {
-  return Object.assign({}, state, { isProjectHomepage: true });
+  return { ...state, isProjectHomepage: true };
 }
 
 export default handleActions(

@@ -14,14 +14,14 @@ export default class ResourceImportResultsImporting extends PureComponent {
     if (!resourceImportRow) return null;
 
     return (
-      <React.Fragment>
+      <>
         <IconComposer
           icon="plus16"
           size={18}
           iconClass="results-header__icon"
         />
         <span>{`Row #${resourceImportRow.lineNumber} is being imported.`}</span>
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -115,12 +115,12 @@ export class AuthorizeComponent extends PureComponent {
 
   renderHide(props) {
     if (this.authorization.authorize(props)) return null;
-    return <React.Fragment>{this.props.children}</React.Fragment>;
+    return <>{this.props.children}</>;
   }
 
   renderShow(props) {
     if (!this.authorization.authorize(props)) return null;
-    return <React.Fragment>{this.props.children}</React.Fragment>;
+    return <>{this.props.children}</>;
   }
 
   render() {

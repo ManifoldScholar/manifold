@@ -16,7 +16,7 @@ const setActiveAnnotation = (state, action) => {
       activeAnnotationPassive: payload.passive
     };
   }
-  return Object.assign({}, state, newState);
+  return { ...state, ...newState };
 };
 
 export default handleActions(

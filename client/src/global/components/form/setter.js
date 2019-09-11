@@ -121,14 +121,14 @@ export default function setter(WrappedComponent) {
         value: this.currentValue(props),
         initialValue: this.sourceValue(props)
       };
-      return Object.assign({}, this.passthroughProps(props), additional);
+      return { ...this.passthroughProps(props), ...additional };
     }
 
     disconnectedProps(props) {
       const additional = {
         setOther: this.buildSetOtherHandler(props)
       };
-      return Object.assign({}, additional, this.passthroughProps(props));
+      return { ...additional, ...this.passthroughProps(props) };
     }
 
     buildOnChangeHandler(props) {

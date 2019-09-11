@@ -87,7 +87,7 @@ export class ProjectsCollectionsContainer extends Component {
 
   handlePageChange = (event, page) => {
     event.preventDefault();
-    const query = Object.assign({}, this.currentQuery(), { page });
+    const query = { ...this.currentQuery(), page };
     this.doQuery(query);
   };
 

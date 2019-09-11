@@ -22,13 +22,13 @@ export default class ProjectAvatar extends Component {
   renderPlaceholderImage(project) {
     if (!project.attributes.avatarColor) return null;
     return (
-      <React.Fragment>
+      <>
         <UniqueIcons.ProjectPlaceholderUnique
           mode="responsive"
           color={project.attributes.avatarColor}
           ariaLabel={false}
         />
-      </React.Fragment>
+      </>
     );
   }
 

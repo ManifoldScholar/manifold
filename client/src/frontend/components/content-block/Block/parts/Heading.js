@@ -16,7 +16,7 @@ export default class ProjectContentBlockHeading extends PureComponent {
     if (!title || !icon) return null;
 
     return (
-      <React.Fragment>
+      <>
         <header className="entity-section-wrapper__heading section-heading">
           <div className="main">
             <Utility.IconComposer icon={icon} />
@@ -35,7 +35,7 @@ export default class ProjectContentBlockHeading extends PureComponent {
             />
           </div>
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

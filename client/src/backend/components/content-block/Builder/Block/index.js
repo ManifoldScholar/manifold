@@ -108,7 +108,7 @@ export default class ProjectContentBlock extends PureComponent {
       >
         {(provided, snapshot) => {
           return (
-            <React.Fragment>
+            <>
               <div
                 {...provided.draggableProps}
                 ref={provided.innerRef}
@@ -144,7 +144,7 @@ export default class ProjectContentBlock extends PureComponent {
                 </div>
               )}
               {this.inCurrentList && provided.placeholder}
-            </React.Fragment>
+            </>
           );
         }}
       </Draggable>

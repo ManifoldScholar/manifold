@@ -246,7 +246,7 @@ export default class ResourcePlayerAudio extends Component {
               />
               <UID name={id => `${this.progressBarIdPrefix}-${id}`}>
                 {id => (
-                  <React.Fragment>
+                  <>
                     <label htmlFor={id} className="screen-reader-text">
                       Progress Bar
                     </label>
@@ -258,7 +258,7 @@ export default class ResourcePlayerAudio extends Component {
                       value={this.state.percent}
                       onChange={this.handleProgressClick}
                     />
-                  </React.Fragment>
+                  </>
                 )}
               </UID>
             </div>
@@ -284,7 +284,7 @@ export default class ResourcePlayerAudio extends Component {
               />
               <UID name={id => `${this.volumeBarIdPrefix}-${id}`}>
                 {id => (
-                  <React.Fragment>
+                  <>
                     <label htmlFor={id} className="screen-reader-text">
                       Adjust Volume
                     </label>
@@ -296,7 +296,7 @@ export default class ResourcePlayerAudio extends Component {
                       value={volume}
                       onChange={this.setVolume}
                     />
-                  </React.Fragment>
+                  </>
                 )}
               </UID>
             </div>

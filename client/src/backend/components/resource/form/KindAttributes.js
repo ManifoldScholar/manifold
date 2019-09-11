@@ -9,7 +9,7 @@ export default class KindAttributes extends PureComponent {
     return (
       <FormContext.Consumer>
         {formProps => {
-          const props = Object.assign({}, this.props, formProps);
+          const props = { ...this.props, ...formProps };
 
           switch (formProps.getModelValue("attributes[kind]")) {
             case "image":

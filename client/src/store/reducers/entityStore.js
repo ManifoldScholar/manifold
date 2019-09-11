@@ -74,13 +74,12 @@ function mergeSlugMap(stateSlugMap, payloadSlugMap) {
   if (!payloadSlugMap) return stateSlugMap;
   const mergedSlugMap = {};
   Object.keys(payloadSlugMap).forEach(type => {
-    mergedSlugMap[type] = Object.assign(
-      {},
-      stateSlugMap[type],
-      payloadSlugMap[type]
-    );
+    mergedSlugMap[type] = {
+      ...stateSlugMap[type],
+      ...payloadSlugMap[type]
+    };
   });
-  return Object.assign({}, stateSlugMap, mergedSlugMap);
+  return { ...stateSlugMap, ...mergedSlugMap };
 }
 
 function mergeEntities(
@@ -97,9 +96,9 @@ function mergeEntities(
       if (get(e, "meta.partial") === false) return true; // pick it if new entity is not partial
       return get(stateEntity, "meta.partial") === true; // pick it if the state entity is partial
     });
-    mergedEntities[type] = Object.assign({}, stateEntities[type], adjusted);
+    mergedEntities[type] = { ...stateEntities[type], ...adjusted };
   });
-  return Object.assign({}, stateEntities, mergedEntities);
+  return { ...stateEntities, ...mergedEntities };
 }
 
 function mergeCollections(stateResponse, payloadResults) {
@@ -119,9 +118,7 @@ function deriveType(entityOrCollection) {
 }
 
 function buildMeta(object, baseMeta = {}) {
-  const meta = Object.assign({}, get(object, "meta"), baseMeta, {
-    relationships: {}
-  });
+  const meta = { ...get(object, "meta"), ...baseMeta, relationships: {} };
   const relationships = get(object, "data.relationships") || {};
   Object.keys(relationships).forEach(relationship => {
     if (!relationships[relationship].meta) return null;
@@ -133,7 +130,8 @@ function buildMeta(object, baseMeta = {}) {
 
 function errorResponse(state, action) {
   const meta = action.meta;
-  const responses = Object.assign({}, state.responses, {
+  const responses = {
+    ...state.responses,
     [meta]: {
       status: action.payload.status,
       statusText: action.payload.statusText,
@@ -141,8 +139,8 @@ function errorResponse(state, action) {
       request: get(action, "payload.request"),
       loaded: true
     }
-  });
-  return Object.assign({}, state, { responses });
+  };
+  return { ...state, responses };
 }
 
 function touchResponses(responses, entities) {
@@ -159,10 +157,10 @@ function touchResponses(responses, entities) {
       responseIds = responseIds.concat(collectionIds);
     }
     if (intersection(touched, responseIds).length > 0) {
-      newResponses[meta] = Object.assign({}, response);
+      newResponses[meta] = { ...response };
     }
   });
-  return Object.assign({}, responses, newResponses);
+  return { ...responses, ...newResponses };
 }
 
 function successResponse(state, action) {
@@ -176,7 +174,8 @@ function successResponse(state, action) {
   const baseResponses = shouldTouchResponses
     ? touchResponses(state.responses, payload.entities)
     : state.responses;
-  const responses = Object.assign({}, baseResponses, {
+  const responses = {
+    ...baseResponses,
     [meta]: {
       entity: isEntity ? payload.results : null,
       collection: isCollection
@@ -189,9 +188,9 @@ function successResponse(state, action) {
       loaded: true,
       appends: get(baseResponses[meta], "appends", false)
     }
-  });
+  };
   if (isNull) {
-    return Object.assign({}, state, { responses });
+    return { ...state, responses };
   }
   const entities = responses[meta].appends
     ? Object.assign(
@@ -200,7 +199,7 @@ function successResponse(state, action) {
       )
     : mergeEntities(state.entities, payload.entities, overwritePartials);
   const slugMap = mergeSlugMap(state.slugMap, payload.slugMap);
-  return Object.assign({}, state, { responses, entities, slugMap });
+  return { ...state, responses, entities, slugMap };
 }
 
 function handleResponse(state, action) {
@@ -213,19 +212,20 @@ function handleResponse(state, action) {
 function handleRequest(state, action) {
   const meta = action.meta;
   if (state.responses[meta]) return state;
-  const responses = Object.assign({}, state.responses, {
+  const responses = {
+    ...state.responses,
     [meta]: {
       entities: null,
       loaded: false,
       appends: action.payload.appends || false
     }
-  });
-  return Object.assign({}, state, { responses });
+  };
+  return { ...state, responses };
 }
 
 function handleFlush(state, action) {
   const metasToFlush = action.payload;
-  const responses = Object.assign({}, state.responses);
+  const responses = { ...state.responses };
   metasToFlush.forEach(meta => {
     delete responses[meta];
   });
@@ -233,18 +233,19 @@ function handleFlush(state, action) {
   if (Object.keys(responses).length === 0) {
     entities = {};
   }
-  return Object.assign({}, state, { responses, entities });
+  return { ...state, responses, entities };
 }
 
 function flushAll(state, actionIgnored) {
-  return Object.assign({}, initialState, {
+  return {
+    ...initialState,
     responses: {
       settings: state.responses.settings
     },
     entities: {
       settings: state.entities.settings
     }
-  });
+  };
 }
 
 function handleRemove(state, action) {
@@ -259,14 +260,15 @@ function handleRemove(state, action) {
     const newCollection = response.collection.slice();
     newCollection.splice(index, 1);
     const newMeta = buildMeta(response, { modified: true });
-    const newResponse = Object.assign({}, response, {
+    const newResponse = {
+      ...response,
       collection: newCollection,
       meta: newMeta
-    });
+    };
     responsesOverlay[key] = newResponse;
   });
-  const responses = Object.assign({}, state.responses, responsesOverlay);
-  return Object.assign({}, state, { responses });
+  const responses = { ...state.responses, ...responsesOverlay };
+  return { ...state, responses };
 }
 
 function handleAdd(state, action) {
@@ -277,12 +279,10 @@ function handleAdd(state, action) {
   if (!Array.isArray(meta.collection)) return state;
   if (meta.collection.find(entity => entity.id === addEntity.id)) return state;
   const newCollection = [...meta.collection, addEntity];
-  const newMeta = Object.assign({}, meta, { collection: newCollection });
+  const newMeta = { ...meta, collection: newCollection };
   if (!get(newMeta, "type")) newMeta.type = addEntity.type;
-  const responses = Object.assign({}, state.responses, {
-    [targetMeta]: newMeta
-  });
-  return Object.assign({}, state, { responses });
+  const responses = { ...state.responses, [targetMeta]: newMeta };
+  return { ...state, responses };
 }
 
 export default (state = initialState, action) => {

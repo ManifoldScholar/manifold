@@ -34,7 +34,7 @@ export default class Login extends Component {
   updateInput = event => {
     const key = event.target.name;
     const value = event.target.value;
-    this.setState(Object.assign({}, this.state, { [key]: value }));
+    this.setState({ ...this.state, [key]: value });
   };
 
   handleLogin = event => {
