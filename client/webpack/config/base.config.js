@@ -6,7 +6,7 @@ import paths from "../helpers/paths";
 
 const nameTemplate = environment.production ? "[name]-[hash]" : "[name]";
 
-const postcssFocusVisible = require('postcss-focus-visible');
+const postcssFocusVisible = require("postcss-focus-visible");
 
 /* eslint-disable  global-require */
 export default function buildWebpackConfiguration(target = "web") {
@@ -73,7 +73,11 @@ export default function buildWebpackConfiguration(target = "web") {
             },
             {
               loader: "sass-loader",
-              options: "outputStyle=expanded"
+              options: {
+                sassOptions: {
+                  outputStyle: "expanded"
+                }
+              }
             }
           ].filter(loader => loader !== null)
         },
