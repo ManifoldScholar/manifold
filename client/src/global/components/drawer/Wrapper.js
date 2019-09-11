@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import Utility from "global/components/utility";
 import Notifications from "global/containers/Notifications";
 import isString from "lodash/isString";
@@ -342,14 +342,14 @@ export default class DrawerWrapper extends PureComponent {
 
   render() {
     return (
-      <ReactCSSTransitionGroup
-        transitionName="drawer"
-        // True value required to enable transform
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={300}
+      <CSSTransition
+        in={this.props.open}
+        classNames="drawer"
+        timeout={{ enter: 500, exit: 300 }}
+        unmountOnExit
       >
-        {this.props.open ? this.renderDrawerWrapper() : null}
-      </ReactCSSTransitionGroup>
+        {this.renderDrawerWrapper()}
+      </CSSTransition>
     );
   }
 }

@@ -28,12 +28,12 @@
       opacity: 1;
     }
 
-    .panel-leave & {
+    .panel-exit & {
       opaicty: 1;
       animation: drawerOverlayFade $duration $timing backwards;
     }
 
-    .panel-leave.panel-leave-active & {
+    .panel-exit.panel-exit-active & {
       opacity: 0;
     }
   }
@@ -53,13 +53,13 @@
       animation: notesSlide $duration $timing forwards;
     }
 
-    .panel-leave & {
+    .panel-exit & {
       transform: translateX(0);
 
       animation: notesSlide $duration $timing backwards;
     }
 
-    .panel-leave.panel-leave-active & {
+    .panel-exit.panel-exit-active & {
       transform: translateX(100%);
     }
   }

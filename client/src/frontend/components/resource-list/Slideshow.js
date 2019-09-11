@@ -1,7 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
-import { Swipeable } from "react-swipeable";
+import {
+  TransitionGroup as ReactTransitionGroup,
+  CSSTransition
+} from "react-transition-group";
+import Swipeable from "react-swipeable";
 import includes from "lodash/includes";
 import classNames from "classnames";
 import ResourceSlide from "frontend/components/resource-slide";
@@ -176,18 +179,32 @@ export default class ResourceSlideshow extends PureComponent {
     const collectionResource = this.state.map[position];
 
     return (
-      <div key={position}>
-        {this.isLoaded(position) ? (
-          this.getFigureByType(collectionResource)
-        ) : (
-          <ResourceSlide.SlideLoading />
-        )}
-      </div>
+      <CSSTransition
+        key={position}
+        classNames={`slide-${this.state.slideDirection}`}
+        timeout={{ enter: 500, exit: 500 }}
+      >
+        <div>
+          {this.isLoaded(position) ? (
+            this.getFigureByType(collectionResource)
+          ) : (
+            <ResourceSlide.SlideLoading />
+          )}
+        </div>
+      </CSSTransition>
     );
   }
 
   renderPlaceholder() {
-    return <ResourceSlide.SlidePlaceholder />;
+    return (
+      <CSSTransition
+        key="placeholder"
+        classNames={`slide-${this.state.slideDirection}`}
+        timeout={{ enter: 500, exit: 500 }}
+      >
+        <ResourceSlide.SlidePlaceholder />
+      </CSSTransition>
+    );
   }
 
   render() {
@@ -206,17 +223,12 @@ export default class ResourceSlideshow extends PureComponent {
             onSwipedLeft={this.handleSlideNext}
             onSwipedRight={this.handleSlidePrev}
           >
-            {/* Concatenate a reactive transition name */}
             <div className="resource-slide-figure">
-              <ReactCSSTransitionGroup
-                transitionName={`slide-${this.state.slideDirection}`}
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={500}
-              >
+              <ReactTransitionGroup>
                 {this.props.collectionResources.length > 0
                   ? this.renderSlideShow()
                   : this.renderPlaceholder()}
-              </ReactCSSTransitionGroup>
+              </ReactTransitionGroup>
             </div>
           </Swipeable>
           <div className="resource-slideshow__footer">

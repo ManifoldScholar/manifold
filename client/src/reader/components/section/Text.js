@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import classNames from "classnames";
 import Body from "./Body";
 import Annotation from "reader/containers/annotation";
@@ -154,15 +154,15 @@ export default class Text extends Component {
               )}
             />
           </section>
-          <ReactCSSTransitionGroup
-            transitionName="text-child"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={500}
+          <CSSTransition
+            appear
+            classNames="text-child"
+            timeout={{ enter: 500, exit: 500 }}
+            unmountOnExit
           >
-            {this.props.children
-              ? React.cloneElement(this.props.children, { key: page })
-              : null}
-          </ReactCSSTransitionGroup>
+            /* eslint-disable-next-line no-unused-vars */
+            {state => React.cloneElement(this.props.children, { key: page })}
+          </CSSTransition>
         </div>
       </HtmlClass>
     );

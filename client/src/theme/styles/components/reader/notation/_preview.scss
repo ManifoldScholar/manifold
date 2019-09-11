@@ -25,7 +25,7 @@
     }
   }
 
-  &.notation-leave {
+  &.notation-exit {
     bottom: 44px;
 
     @include respond($break50) {
@@ -33,7 +33,7 @@
     }
   }
 
-  &.notation-leave-active {
+  &.notation-exit-active {
     bottom: -100px;
     transition: bottom $duration $timing;
   }

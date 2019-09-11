@@ -81,15 +81,15 @@
     animation: menuSlideFade $duration $timing forwards;
   }
 
-  .panel-leave .search-menu,
-  .panel-leave .user-menu {
+  .panel-exit .search-menu,
+  .panel-exit .user-menu {
     opacity: 1;
     transform: translateY(0);
     animation: menuSlideFade $duration $timing backwards;
   }
 
-  .panel-leave.panel-leave-active .search-menu,
-  .panel-leave.panel-leave-active .user-menu {
+  .panel-exit.panel-exit-active .search-menu,
+  .panel-exit.panel-exit-active .user-menu {
     opacity: 0;
     transform: translateY(-1 * header-layout(menu-slide-distance));
   }

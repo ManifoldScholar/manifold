@@ -134,7 +134,7 @@
     }
   }
 
-  &.highlight-leave {
+  &.highlight-exit {
     opacity: 1;
 
     .icon-thumbnail-title {
@@ -142,7 +142,7 @@
     }
   }
 
-  &.highlight-leave-active {
+  &.highlight-exit-active {
     opacity: 0.01;
 
     figure {

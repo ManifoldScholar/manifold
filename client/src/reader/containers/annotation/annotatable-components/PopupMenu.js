@@ -1,7 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Popup from "reader/components/annotation/Popup";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import {
+  TransitionGroup as ReactTransitionGroup,
+  CSSTransition
+} from "react-transition-group";
 
 import withReadingGroups from "hoc/with-reading-groups";
 
@@ -66,52 +69,59 @@ class AnnotatablePopup extends PureComponent {
     if (this.showLinkMenu()) return this.renderLinkMenu();
 
     const { activePanel } = this.state;
+    const Transition = props => (
+      <CSSTransition
+        {...props}
+        classNames="panel"
+        timeout={{ enter: 300, exit: 300 }}
+      />
+    );
 
     return (
       <>
-        <ReactCSSTransitionGroup
-          transitionName="panel"
-          transitionEnterTimeout={300}
-          transitionLeaveTimeout={300}
-          component="div"
-          className="annotation-popup__panel--secondary-group"
-        >
+        <ReactTransitionGroup className="annotation-popup__panel--secondary-group">
           {activePanel === "primary" && (
-            <Popup.Annotate
-              primary
-              direction={this.props.direction}
-              visible
-              actions={this.props.actions}
-              showShare={this.openSecondary}
-              showReadingGroups={this.openReadingGroups}
-              activeAnnotation={this.props.activeAnnotation}
-              text={this.props.text}
-              readingGroups={this.props.readingGroups}
-              currentReadingGroup={this.props.currentReadingGroup}
-            />
+            <Transition>
+              <Popup.Annotate
+                primary
+                direction={this.props.direction}
+                visible
+                actions={this.props.actions}
+                showShare={this.openSecondary}
+                showReadingGroups={this.openReadingGroups}
+                activeAnnotation={this.props.activeAnnotation}
+                text={this.props.text}
+                readingGroups={this.props.readingGroups}
+                currentReadingGroup={this.props.currentReadingGroup}
+              />
+            </Transition>
           )}
           {activePanel === "secondary" && (
-            <Popup.Share
-              visible
-              direction={this.props.direction}
-              onBackClick={this.closeSecondary}
-              onCiteClick={this.props.actions.openCitationDrawer}
-              selection={this.props.selection}
-              text={this.props.text}
-              section={this.props.section}
-            />
+            <Transition>
+              <Popup.Share
+                visible
+                direction={this.props.direction}
+                onBackClick={this.closeSecondary}
+                onCiteClick={this.props.actions.openCitationDrawer}
+                selection={this.props.selection}
+                text={this.props.text}
+                section={this.props.section}
+              />
+            </Transition>
           )}
           {activePanel === "readingGroups" && (
-            <Popup.ReadingGroups
-              visible
-              direction={this.props.direction}
-              onBackClick={this.closeSecondary}
-              onSelect={this.handleReadingGroupSelect}
-              readingGroups={this.props.readingGroups}
-              currentReadingGroup={this.props.currentReadingGroup}
-            />
+            <Transition>
+              <Popup.ReadingGroups
+                visible
+                direction={this.props.direction}
+                onBackClick={this.closeSecondary}
+                onSelect={this.handleReadingGroupSelect}
+                readingGroups={this.props.readingGroups}
+                currentReadingGroup={this.props.currentReadingGroup}
+              />
+            </Transition>
           )}
-        </ReactCSSTransitionGroup>
+        </ReactTransitionGroup>
       </>
     );
   }

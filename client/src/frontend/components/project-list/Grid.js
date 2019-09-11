@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import GridItem from "./GridItem";
 import Utility from "global/components/utility";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import {
+  TransitionGroup as ReactTransitionGroup,
+  CSSTransition
+} from "react-transition-group";
 import difference from "lodash/difference";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
@@ -110,28 +113,28 @@ export default class ProjectListGrid extends Component {
     return (
       <>
         <div className="project-list grid entity-section-wrapper__body">
-          <ReactCSSTransitionGroup
-            transitionName="project-list grid"
-            transitionEnter={this.enableAnimation}
-            transitionLeave={this.enableAnimation}
-            transitionEnterTimeout={250}
-            transitionLeaveTimeout={250}
-            component="ul"
-          >
+          <ReactTransitionGroup className="project-list grid" component="ul">
             {projects.map(project => {
               return (
-                <li key={project.id} className="project-list__item--pos-rel">
-                  <GridItem
-                    authenticated={this.props.authenticated}
-                    favorites={this.props.favorites}
-                    dispatch={this.props.dispatch}
-                    project={project}
-                    hideDesc={hideDesc}
-                  />
-                </li>
+                <CSSTransition
+                  key={project.id}
+                  enter={this.enableAnimation}
+                  exit={this.enableAnimation}
+                  timeout={{ enter: 250, exit: 250 }}
+                >
+                  <li className="project-list__item--pos-rel">
+                    <GridItem
+                      authenticated={this.props.authenticated}
+                      favorites={this.props.favorites}
+                      dispatch={this.props.dispatch}
+                      project={project}
+                      hideDesc={hideDesc}
+                    />
+                  </li>
+                </CSSTransition>
               );
             })}
-          </ReactCSSTransitionGroup>
+          </ReactTransitionGroup>
         </div>
         {this.props.pagination
           ? this.renderPagination(this.props)

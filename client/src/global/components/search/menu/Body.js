@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Query from "../query";
 import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 
 export class SearchMenuBody extends PureComponent {
   static propTypes = {
@@ -81,26 +81,25 @@ export class SearchMenuBody extends PureComponent {
   render() {
     return (
       <nav className={this.containerClass}>
-        <ReactCSSTransitionGroup
-          transitionName="visibility"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
+        <CSSTransition
+          in={this.props.visibility.search}
+          classNames="visibility"
+          timeout={{ enter: 500, exit: 500 }}
+          unmountOnExit
         >
-          {this.props.visibility.search ? (
-            <Query.Form
-              projectId={this.props.projectId}
-              sectionId={this.props.sectionId}
-              textId={this.props.textId}
-              facets={this.props.facets}
-              initialState={this.props.initialState}
-              scopes={this.props.scopes}
-              searchType={this.props.searchType}
-              description={this.props.description}
-              searchOnScopeChange={false}
-              setQueryState={this.setQueryState}
-            />
-          ) : null}
-        </ReactCSSTransitionGroup>
+          <Query.Form
+            projectId={this.props.projectId}
+            sectionId={this.props.sectionId}
+            textId={this.props.textId}
+            facets={this.props.facets}
+            initialState={this.props.initialState}
+            scopes={this.props.scopes}
+            searchType={this.props.searchType}
+            description={this.props.description}
+            searchOnScopeChange={false}
+            setQueryState={this.setQueryState}
+          />
+        </CSSTransition>
       </nav>
     );
   }
