@@ -47,9 +47,7 @@ export default class NextSection extends PureComponent {
     const { typography } = this.props;
 
     // Apply a conditional container class that maps to a size in CSS
-    const containerClass = `container-focus container-width-${
-      typography.margins.current
-    }`;
+    const containerClass = `container-focus container-width-${typography.margins.current}`;
 
     if (!this.props.sectionsMap) return null;
     if (!this.props.sectionId) return null;

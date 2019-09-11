@@ -42,9 +42,8 @@ export default class ProjectHeroCalloutLink extends PureComponent {
 
   get calloutClass() {
     return classNames({
-      [`${this.blockClass}__button ${this.blockClass}__button--secondary ${
-        this.blockClass
-      }__button--centered`]: this.isButton,
+      [`${this.blockClass}__button ${this.blockClass}__button--secondary ${this.blockClass}__button--centered`]: this
+        .isButton,
       [`${this.blockClass}__link`]: !this.isButton
     });
   }

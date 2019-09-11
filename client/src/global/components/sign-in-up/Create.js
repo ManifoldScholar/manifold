@@ -231,9 +231,7 @@ export class CreateContainer extends Component {
         {this.OAuthProviderNames && (
           <React.Fragment>
             <p className="login-links">
-              {`You can also create a ${installationName} account using your ${
-                this.OAuthProviderNames
-              } credentials.`}
+              {`You can also create a ${installationName} account using your ${this.OAuthProviderNames} credentials.`}
             </p>
             <LoginExternal
               settings={this.props.settings}

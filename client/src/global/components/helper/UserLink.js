@@ -56,9 +56,7 @@ class UserLink extends PureComponent {
 
   get renderUrl() {
     if (this.isLocalUrl)
-      return `${this.parsedUrl.pathname}${this.parsedUrl.query}${
-        this.parsedUrl.hash
-      }`;
+      return `${this.parsedUrl.pathname}${this.parsedUrl.query}${this.parsedUrl.hash}`;
     return this.rawUrl;
   }
 
