@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom/server";
 import serialize from "serialize-javascript";
-import Helmet from "react-helmet";
 import reduce from "lodash/reduce";
 import isString from "lodash/isString";
 import isArray from "lodash/isArray";
@@ -24,7 +23,12 @@ export default class Html extends Component {
     stats: PropTypes.object,
     component: PropTypes.node,
     store: PropTypes.object,
-    disableBrowserRender: PropTypes.bool
+    disableBrowserRender: PropTypes.bool,
+    helmetContext: PropTypes.object
+  };
+
+  static defaultProps = {
+    helmetContext: {}
   };
 
   get settings() {
@@ -112,9 +116,13 @@ export default class Html extends Component {
   };
 
   render() {
-    const { component, store, disableBrowserRender } = this.props;
+    const {
+      component,
+      store,
+      disableBrowserRender,
+      helmetContext
+    } = this.props;
     const content = component ? ReactDOM.renderToString(component) : null;
-    const helmet = Helmet.renderStatic();
     const bodyClasses = BodyClass.rewind() || [];
     const bodyClass = bodyClasses.filter(Boolean).join(" ");
     const contentProps = {};
@@ -131,8 +139,13 @@ export default class Html extends Component {
             name="viewport"
             content="width=device-width, initial-scale=1, user-scalable=0"
           />
-          {helmet.title.toComponent()}
-          {helmet.meta.toComponent()}
+
+          {helmetContext && helmetContext.helmet && (
+            <React.Fragment>
+              {helmetContext.helmet.title.toComponent()}
+              {helmetContext.helmet.meta.toComponent()}
+            </React.Fragment>
+          )}
 
           <script src="/browser.config.js" charSet="UTF-8" />
 

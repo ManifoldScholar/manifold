@@ -63,15 +63,28 @@ const render = (req, res, store) => {
   const routingContext = {
     fetchDataPromises: []
   };
+
+  const helmetContext = {};
   const appComponent = (
-    <App staticContext={routingContext} staticRequest={req} store={store} />
+    <App
+      helmetContext={helmetContext}
+      staticContext={routingContext}
+      staticRequest={req}
+      store={store}
+    />
   );
 
   let renderString = "";
   let isError = false;
+
   try {
     renderString = ReactDOM.renderToString(
-      <Html component={appComponent} stats={stats} store={store} />
+      <Html
+        helmetContext={helmetContext}
+        component={appComponent}
+        stats={stats}
+        store={store}
+      />
     );
   } catch (renderError) {
     isError = true;
