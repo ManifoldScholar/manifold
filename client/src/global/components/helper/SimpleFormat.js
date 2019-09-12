@@ -12,7 +12,11 @@ const formattedText = props => {
     loader: () => import(/* webpackChunkName: "autolinker" */ "autolinker"),
     render(autolinker) {
       return (
-        <p dangerouslySetInnerHTML={{ __html: autolinker.link(formatted) }} />
+        <p
+          dangerouslySetInnerHTML={{
+            __html: autolinker.default.link(formatted)
+          }}
+        />
       );
     },
     loading: () => <p dangerouslySetInnerHTML={{ __html: sanitized }} />
