@@ -149,7 +149,7 @@
       }
 
       @include respond($break75) {
-        padding-top: 74px;
+        padding-top: 60px;
         padding-bottom: 70px;
       }
     }
@@ -185,7 +185,7 @@
       padding-bottom: 0;
 
       @include respond($break75) {
-        padding-top: 74px;
+        padding-top: 60px;
         padding-bottom: 0;
       }
     }
