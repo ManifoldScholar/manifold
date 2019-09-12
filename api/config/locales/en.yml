@@ -20,6 +20,33 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  attributes:
+    descriptions:
+      slug: "A unique identifier that the user requests"
+      pendingSlug: "The unique identifier that the user requests. It may or may not be available, in which case, characters will be appended to make it unique"
+      avatarMeta: "An object with data about the avatar image"
+  swagger:
+    access_denied: "Access denied for unauthorized users"
+    not_found: "Record not found"
+    get:
+      all:
+        description: "Returns all %{type}"
+        200: "Returns an array of %{type} objects"
+      one:
+        description: "Returns the %{type} with the given %{attribute}"
+        200: "Returns the %{type} with the matching %{attribute}"
+    post:
+      description: "Creates a %{type}"
+      201: "Returns the created %{type} object"
+    put:
+      description: "Updates the %{type} with the given %{attribute}"
+      200: "Returns the updated %{type}"
+    patch:
+      description: "Updates the %{type} with the given %{attribute}"
+      200: "Returns the updated %{type}"
+    delete:
+      description: "Removes the %{type} with the given %{attribute}"
+      204: "Removes the %{type}"
   activerecord:
     attributes:
     errors:
