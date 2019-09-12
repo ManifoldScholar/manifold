@@ -42,9 +42,7 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
     <div
       className="project-list grid entity-section-wrapper__body"
     >
-      <ul
-        className="project-list grid"
-      >
+      <ul>
         <li
           className="project-list__item--pos-rel"
         >

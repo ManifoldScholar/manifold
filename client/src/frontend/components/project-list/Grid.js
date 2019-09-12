@@ -113,7 +113,7 @@ export default class ProjectListGrid extends Component {
     return (
       <>
         <div className="project-list grid entity-section-wrapper__body">
-          <ReactTransitionGroup className="project-list grid" component="ul">
+          <ReactTransitionGroup component="ul">
             {projects.map(project => {
               return (
                 <CSSTransition
