@@ -4,10 +4,9 @@ class ProjectFullSerializer < ProjectSerializer
 
   meta(partial: false)
 
-  attributes :hashtag, :description, :featured, :purchase_url, :purchase_price_money,
-             :purchase_price_currency, :purchase_price, :purchase_call_to_action,
-             :twitter_id, :instagram_id, :facebook_id, :cover_styles,
-             :description_formatted, :resource_kinds, :resource_tags, :dark_mode,
+  attributes :hashtag, :description, :featured, :purchase_url, :purchase_price_currency,
+             :purchase_price, :purchase_call_to_action, :twitter_id, :instagram_id, :facebook_id,
+             :cover_styles, :description_formatted, :resource_kinds, :resource_tags, :dark_mode,
              :image_credits, :image_credits_formatted, :tag_list
 
   attributes :event_count, :metadata, :resource_collections_count, :resources_count,
