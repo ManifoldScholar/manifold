@@ -6,8 +6,48 @@ exports[`Backend.Dialog.Confirm Component renders correctly 1`] = `
     <Dialog.Confirm heading=\\"Player\\\\'s Ball\\" message=\\"All the players came from far and wide\\" reject={[Function: mockConstructor]} resolve={[Function: mockConstructor]} options={{...}}>
       <withRouter(Dialog.Wrapper) className=\\"dialog-confirm\\" maxWidth={400} showCloseButton={false} closeOnOverlayClick={false}>
         <Dialog.Wrapper className=\\"dialog-confirm\\" maxWidth={400} showCloseButton={false} closeOnOverlayClick={false} history={{...}} location={{...}} match={{...}} staticContext={[undefined]}>
-          <CSSTransition in={false} classNames=\\"dialog\\" appear={true} enter={false} timeout={{...}} unmountOnExit={true}>
-            <Transition in={false} appear={true} enter={false} timeout={{...}} unmountOnExit={true} onEnter={[Function]} onEntered={[Function]} onEntering={[Function]} onExit={[Function]} onExiting={[Function]} onExited={[Function]} mountOnEnter={false} exit={true} />
+          <CSSTransition in={true} classNames=\\"dialog\\" appear={true} enter={false} timeout={{...}} unmountOnExit={true}>
+            <Transition in={true} appear={true} enter={false} timeout={{...}} unmountOnExit={true} onEnter={[Function]} onEntered={[Function]} onEntering={[Function]} onExit={[Function]} onExiting={[Function]} onExited={[Function]} mountOnEnter={false} exit={true}>
+              <focus-trap-react className=\\"dialog-primary dialog-appear\\">
+                <div className=\\"dialog-overlay\\" onClick={[Function]} role=\\"button\\" />
+                <div className=\\"dialog-box dialog-confirm\\" style={{...}}>
+                  <header className=\\"dialog-header-small\\">
+                    <h2>
+                      Player&#39;s Ball
+                    </h2>
+                  </header>
+                  <p>
+                    All the players came from far and wide
+                  </p>
+                  <div className=\\"buttons-icon-horizontal\\">
+                    <button onClick={[Function]} className=\\"buttons-icon-horizontal__button button-icon-secondary\\" data-id=\\"accept\\">
+                      <IconComposer icon=\\"checkmark16\\" size=\\"default\\" iconClass=\\"button-icon-secondary__icon\\" fill=\\"currentColor\\" svgProps={{...}}>
+                        <Checkmark svgProps={{...}} iconClass=\\"button-icon-secondary__icon svg-icon--checkmark16\\" icon=\\"checkmark16\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                          <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg button-icon-secondary__icon svg-icon--checkmark16\\" width={16} height={16} viewBox=\\"0 0 16 16\\" aria-hidden={true}>
+                            <polygon fill=\\"currentColor\\" fillRule=\\"nonzero\\" points=\\"14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122\\" />
+                          </svg>
+                        </Checkmark>
+                      </IconComposer>
+                      <span>
+                        Yes
+                      </span>
+                    </button>
+                    <button className=\\"buttons-icon-horizontal__button button-icon-secondary button-icon-secondary--dull\\" onClick={[Function]} data-id=\\"reject\\">
+                      <IconComposer icon=\\"close16\\" size=\\"default\\" iconClass=\\"button-icon-secondary__icon\\" fill=\\"currentColor\\" svgProps={{...}}>
+                        <Close svgProps={{...}} iconClass=\\"button-icon-secondary__icon svg-icon--close16\\" icon=\\"close16\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                          <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg button-icon-secondary__icon svg-icon--close16\\" width={16} height={16} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
+                            <path d=\\"M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z\\" />
+                          </svg>
+                        </Close>
+                      </IconComposer>
+                      <span>
+                        No
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </focus-trap-react>
+            </Transition>
           </CSSTransition>
         </Dialog.Wrapper>
       </withRouter(Dialog.Wrapper)>
