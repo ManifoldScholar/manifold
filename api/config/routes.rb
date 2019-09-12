@@ -2,6 +2,8 @@ require "sidekiq/web"
 
 # rubocop:disable Metrics/BlockLength, Metrics/LineLength
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => "/api-docs"
+  mount Rswag::Api::Engine => "/api-docs"
   concern :permissible do
     resources :permissions,
               only: [:create, :index, :show, :update, :destroy],
