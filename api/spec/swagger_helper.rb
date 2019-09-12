@@ -1,6 +1,8 @@
 require 'rails_helper'
 
+require_relative 'swagger_definitions/base_types'
 require_relative 'swagger_definitions/errors'
+require_relative 'swagger_definitions/projects'
 
 RSpec.configure do |config|
 
@@ -26,6 +28,12 @@ RSpec.configure do |config|
       basePath: '/api/v1',
       schemes: ['http'],
       paths: {},
+      tags: [
+        {
+          name: "Projects",
+          description: "Info on the manifold projects",
+        },
+      ],
       securityDefinitions: {
         apiKey: {
           type: "apiKey",
@@ -34,6 +42,34 @@ RSpec.configure do |config|
         }
       },
       definitions: {
+
+        #####################################
+        ## Frequently Used Data Structures ##
+        #####################################
+
+        Attachment: Type.attachment_attributes,
+        Image: Type.image_attributes,
+        RelationshipData: Type.relationship_data_attributes,
+
+        ######################
+        ##      Models      ##
+        ######################
+
+        Maker: { description: "TKTKTK placeholder text for Maker" }, # TODO a maker definition
+
+        Project: Projects.response,
+        ProjectRequestCreate: Projects.request_create,
+        ProjectRequestUpdate: Projects.request_update,
+        ProjectResponse: Projects.response,
+        ProjectResponseFull: Projects.response_full,
+        ProjectsResponse: Type.all( Type.reference('#/definitions/ProjectResponse') ),
+
+        Subject: { description: "TKTKTK placeholder text for Subject" }, # TODO a subject definition
+
+        #########################
+        ##      Responses      ##
+        #########################
+
         NotFound: Errors.not_found,
       }
     }
