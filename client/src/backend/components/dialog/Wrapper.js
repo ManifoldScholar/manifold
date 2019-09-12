@@ -106,7 +106,7 @@ class DialogWrapper extends PureComponent {
   render() {
     const output = (
       <CSSTransition
-        in={this.state.leaving}
+        in={!this.state.leaving}
         classNames="dialog"
         appear
         enter={false}
