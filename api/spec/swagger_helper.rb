@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+require_relative 'swagger_definitions/errors'
+
 RSpec.configure do |config|
 
   # Specify a root folder where Swagger JSON files are generated
@@ -17,10 +19,23 @@ RSpec.configure do |config|
     'v1/swagger.json' => {
       swagger: '2.0',
       info: {
-        title: 'API V1',
+        title: 'Manifold',
         version: 'v1'
       },
-      paths: {}
+      host: 'localhost:3020', # TODO base this off the .env file
+      basePath: '/api/v1',
+      schemes: ['http'],
+      paths: {},
+      securityDefinitions: {
+        apiKey: {
+          type: "apiKey",
+          name: "Authorization",
+          in: "header"
+        }
+      },
+      definitions: {
+        NotFound: Errors.not_found,
+      }
     }
   }
 end
