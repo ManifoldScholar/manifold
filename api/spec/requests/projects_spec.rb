@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'swagger_helper'
 
 RSpec.describe "Projects API", type: :request do
   include_context("authenticated request")
@@ -6,26 +6,169 @@ RSpec.describe "Projects API", type: :request do
 
   let(:project) { FactoryBot.create(:project, draft: false, purchase_price: "10.00") }
 
-  describe "responds with a list of projects" do
-    before(:each) { get api_v1_projects_path, headers: reader_headers }
-    describe "the response" do
-      it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+  path '/projects' do
+    get I18n.t('swagger.get.all.description', type: 'projects') do
+      produces 'application/json'
+      security [ apiKey: [] ]
+      tags 'Projects'
+
+      response '200', I18n.t('swagger.get.all.200', type: 'projects') do
+        let(:Authorization) { reader_auth }
+        schema '$ref' => '#/definitions/ProjectsResponse'
+        run_test!
+      end
+    end
+
+    post I18n.t('swagger.post.description', type: 'project') do
+      consumes 'application/json'
+      produces 'application/json'
+      parameter name: :project, in: :body, schema: { '$ref' => '#/definitions/ProjectRequestCreate' }
+      security [ apiKey: [] ]
+      tags 'Projects'
+
+      response '201', I18n.t('swagger.post.201', type: 'project') do
+        let(:Authorization) { admin_auth }
+        let(:project) {
+          {
+            data: {
+              attributes: {
+                title: "Type.string",
+                featured: "Type.string",
+                hashtag: "Type.string",
+                description: "Type.string",
+                purchaseUrl: "http://website.com",
+                purchasePriceCurrency: "USD",
+                facebookId: "Type.id",
+                purchaseCallToAction: "Type.string",
+                twitterId: "Type.id",
+                hideActivity: "Type.string",
+                instagramId: "Type.id",
+                downloadUrl: "Type.url",
+                draft: "Type.string",
+                downloadCallToAction: "Type.string",
+                publicationDate: "Type.string",
+                avatarColor: "primary",
+                pendingSlug: "string",
+                tagList: "Type.array( type: Type.string )",
+                darkMode: true,
+                imageCredits: "Type.string",
+                standaloneModePressBarUrl: "http://url.com",
+              }
+            }
+          }
+        }
+        schema '$ref' => '#/definitions/ProjectResponse'
+        run_test!
+      end
+    end
+  end
+
+  path '/projects/{id_or_slug}' do
+    get I18n.t('swagger.get.one.description', type: 'project', attribute: 'ID or slug') do
+      produces 'application/json'
+      security [ apiKey: [] ]
+      parameter name: :id_or_slug, :in => :path, :type => :string
+      tags 'Projects'
+
+      response '200', I18n.t('swagger.get.one.200', type: 'project', attribute: 'ID or slug') do
+        let(:Authorization) { reader_auth }
+        let(:id_or_slug) { project["slug"] }
+        schema '$ref' => '#/definitions/ProjectResponseFull'
+        run_test!
+      end
+
+      response '404', I18n.t('swagger.not_found') do
+        let(:Authorization) { reader_auth }
+        let(:id_or_slug) { 'a' }
+        schema '$ref' => '#/definitions/NotFound'
+        run_test!
+      end
+    end
+
+    patch I18n.t('swagger.patch.description', type: 'project', attribute: 'ID or slug') do
+      parameter name: :id_or_slug, :in => :path, :type => :string
+
+      parameter name: :project_patch, in: :body, schema: { '$ref' => '#/definitions/ProjectRequestUpdate' }
+      let(:project_patch) {
+        {
+          data: {
+            attributes: {
+              title: "Type.string",
+              featured: "Type.string",
+              hashtag: "Type.string",
+              description: "Type.string",
+              purchaseUrl: "http://website.com",
+              purchasePriceCurrency: "USD",
+              facebookId: "Type.id",
+              purchaseCallToAction: "Type.string",
+              twitterId: "Type.id",
+              hideActivity: "Type.string",
+              instagramId: "Type.id",
+              downloadUrl: "Type.url",
+              draft: "Type.string",
+              downloadCallToAction: "Type.string",
+              publicationDate: "Type.string",
+              avatarColor: "primary",
+              pendingSlug: "string",
+              tagList: "Type.array( type: Type.string )",
+              darkMode: true,
+              imageCredits: "Type.string",
+              standaloneModePressBarUrl: "http://url.com",
+              removeAvatar: true,
+              removeHero: true,
+              removeCover: true,
+            }
+          }
+        }
+      }
+
+      consumes 'application/json'
+      produces 'application/json'
+      security [ apiKey: [] ]
+      tags 'Projects'
+
+      response '200', I18n.t('swagger.patch.200', type: 'project', attribute: 'ID or slug') do
+        let(:Authorization) { admin_auth }
+        let(:id_or_slug) { project["slug"] }
+        schema '$ref' => '#/definitions/ProjectResponseFull'
+        run_test!
+      end
+
+      response '403', I18n.t('swagger.access_denied') do
+        let(:Authorization) { reader_auth }
+        let(:id_or_slug) { project["slug"] }
+        run_test!
+      end
+
+      response '404', I18n.t('swagger.not_found') do
+        let(:Authorization) { reader_auth }
+        let(:id_or_slug) { 'a' }
+        schema '$ref' => '#/definitions/NotFound'
+        run_test!
+      end
+    end
+
+    delete I18n.t('swagger.delete.description', type: 'project', attribute: 'ID or slug') do
+      parameter name: :id_or_slug, :in => :path, :type => :string
+      let(:id_or_slug) { project["slug"] }
+
+      security [ apiKey: [] ]
+      tags 'Projects'
+
+      response '204', I18n.t('swagger.delete.204', type: 'project', attribute: 'ID or slug') do
+        let(:Authorization) { admin_auth }
+        run_test!
+      end
+
+      response '403', I18n.t('swagger.access_denied') do
+        let(:Authorization) { author_auth }
+        run_test!
       end
     end
   end
 
   describe "sends a single project" do
     let(:path) { api_v1_project_path(project) }
-
-    context "when the user is an reader" do
-      before(:each) { get path, headers: reader_headers }
-      describe "the response" do
-        it "has a 200 status code" do
-          expect(response).to have_http_status(200)
-        end
-      end
-    end
 
     context "when the user is an admin" do
       before(:each) { get path, headers: admin_headers }

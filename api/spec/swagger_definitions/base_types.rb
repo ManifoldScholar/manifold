@@ -44,11 +44,11 @@ module Type
   end
 
   def self.object(contents)
-    { type: :object, properties: contents }
+    { type: :object, properties: contents.sort.to_h }
   end
 
   def self.object(contents, params = {})
-    { type: :object, properties: contents }.merge(params)
+    { type: :object, properties: contents.sort.to_h }.merge(params)
   end
 
   def self.reference(path)
@@ -91,7 +91,7 @@ module Type
   end
 
 
-  def self.currencyCode()
+  def self.currency_code()
     { example: "USD", description: "International currency codes (see http://www2.1010data.com/documentationcenter/discover/FunctionReference/DataTypesAndFormats/currencyUnitCodes.html)"}
   end
 
@@ -230,9 +230,9 @@ module Type
   ###########################################
 
   def self.slug() { description: I18n.t('attributes.descriptions.slug') } end
-  def self.pendingSlug() { description: I18n.t('attributes.descriptions.pendingSlug') } end
-  def self.standaloneMode() { enum: ['enabled', 'disabled', 'enforced'] } end
-  def self.avatarColor()
+  def self.pending_slug() { description: I18n.t('attributes.descriptions.pending_slug') } end
+  def self.standalone_mode() { enum: ['enabled', 'disabled', 'enforced'] } end
+  def self.avatar_color()
     {
       enum: [
         "primary",
