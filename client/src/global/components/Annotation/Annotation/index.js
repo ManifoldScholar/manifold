@@ -74,6 +74,7 @@ class Annotation extends PureComponent {
             creator={annotation.relationships.creator}
             annotation={annotation}
             includeComments={false}
+            includeMarkers={false}
           />
         </ul>
       </>

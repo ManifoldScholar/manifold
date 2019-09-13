@@ -117,7 +117,11 @@ class AnnotationDetail extends PureComponent {
 
     return (
       <li className="annotation-comments">
-        <Meta annotation={annotation} creator={creator} />
+        <Meta
+          annotation={annotation}
+          creator={creator}
+          includeMarkers={this.props.includeMarkers}
+        />
         {this.state.action === "editing" ? (
           <Editor
             annotation={annotation}
