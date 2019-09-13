@@ -1,4 +1,4 @@
-require "rails_helper"
+require "swagger_helper"
 
 RSpec.describe "Action Callout API", type: :request do
   include_context("authenticated request")
@@ -7,6 +7,84 @@ RSpec.describe "Action Callout API", type: :request do
   let(:action_callout) { FactoryBot.create(:action_callout) }
   let(:path) { api_v1_action_callout_path(action_callout) }
   let(:api_response) { JSON.parse(response.body) }
+
+  path '/action_callouts/{id}' do
+    get I18n.t('swagger.get.one.description', type: 'action callout', attribute: 'ID') do
+      parameter name: :id, :in => :path, :type => :string
+      let(:id) { action_callout[:id] }
+
+      produces 'application/json'
+      tags 'Action Callouts'
+
+      response '200', I18n.t('swagger.get.one.200', type: 'action callout', attribute: 'ID') do
+        schema '$ref' => '#/definitions/ActionCalloutResponse'
+        run_test!
+      end
+    end
+
+    patch I18n.t('swagger.patch.description', type: 'action callout', attribute: 'ID') do
+      parameter name: :id, :in => :path, :type => :string
+
+      parameter name: :action_callout_patch, in: :body, schema: { '$ref' => '#/definitions/ActionCalloutRequestUpdate' }
+      let(:action_callout_patch) {
+        {
+          data:{
+            attributes: {
+              title: "this",
+              kind: "link",
+              location: "left",
+              button: "String",
+              position: "top",
+              url: "http://this.that",
+              removeAttachment: true,
+            }
+          }
+        }
+      }
+
+      consumes 'application/json'
+      produces 'application/json'
+      security [ apiKey: [] ]
+      tags 'Action Callouts'
+
+      response '200', I18n.t('swagger.patch.200', type: 'action callout', attribute: 'ID') do
+        let(:Authorization) { admin_auth }
+        let(:id) { action_callout[:id] }
+        schema '$ref' => '#/definitions/ProjectResponseFull'
+        run_test!
+      end
+
+      response '403', I18n.t('swagger.access_denied') do
+        let(:Authorization) { reader_auth }
+        let(:id) { action_callout[:id] }
+        run_test!
+      end
+
+      response '404', I18n.t('swagger.not_found') do
+        let(:Authorization) { reader_auth }
+        let(:id) { 'a' }
+        schema '$ref' => '#/definitions/NotFound'
+        run_test!
+      end
+    end
+
+    delete I18n.t('swagger.delete.description', type: 'action callout', attribute: 'ID') do
+      parameter name: :id, :in => :path, :type => :string
+      let(:id) { action_callout[:id] }
+      security [ apiKey: [] ]
+      tags 'Action Callouts'
+
+      response '204', I18n.t('swagger.delete.204', type: 'action callout', attribute: 'ID') do
+        let(:Authorization) { admin_auth }
+        run_test!
+      end
+
+      response '403', I18n.t('swagger.access_denied') do
+        let(:Authorization) { author_auth }
+        run_test!
+      end
+    end
+  end
 
   describe "updates a call to action" do
     context "when the user is an admin" do
