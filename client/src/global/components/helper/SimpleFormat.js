@@ -14,7 +14,7 @@ const formattedText = props => {
       return (
         <p
           dangerouslySetInnerHTML={{
-            __html: autolinker.default.link(formatted)
+            __html: autolinker.link(formatted)
           }}
         />
       );
