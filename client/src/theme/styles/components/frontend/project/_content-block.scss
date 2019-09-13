@@ -9,7 +9,7 @@
     margin-bottom: 65px;
   }
 
-  & + &:not(:last-of-type) {
+  & + &:not(:last-child) {
     margin-bottom: 0;
   }
 

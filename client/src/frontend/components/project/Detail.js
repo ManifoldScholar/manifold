@@ -25,11 +25,13 @@ class Detail extends Component {
     if (!project) return <LoadingBlock />;
 
     return (
-      <div>
-        <Hero project={project} />
-        <ContentBlock project={project} />
+      <>
+        <section>
+          <Hero project={project} />
+          <ContentBlock project={project} />
+        </section>
         {!this.context.isStandalone && <Layout.ButtonNavigation />}
-      </div>
+      </>
     );
   }
 }
