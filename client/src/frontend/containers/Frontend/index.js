@@ -41,7 +41,7 @@ export class FrontendContainer extends Component {
       visibility: state.ui.transitory.visibility,
       loading: state.ui.transitory.loading.active,
       notifications: state.notifications,
-      frontendMode: state.ui.persistent.frontendMode,
+      frontendMode: state.ui.transitory.frontendMode,
       pages: select(requests.gPages, state.entityStore),
       settings: select(requests.settings, state.entityStore)
     };
