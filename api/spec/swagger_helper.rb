@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+require_relative 'swagger_definitions/action_callouts'
 require_relative 'swagger_definitions/base_types'
 require_relative 'swagger_definitions/errors'
 require_relative 'swagger_definitions/projects'
@@ -33,6 +34,10 @@ RSpec.configure do |config|
           name: "Projects",
           description: "Info on the manifold projects",
         },
+        {
+          name: "Action Callouts",
+          description: "TKTKTKT",
+        },
       ],
       securityDefinitions: {
         apiKey: {
@@ -55,6 +60,10 @@ RSpec.configure do |config|
         ##      Models      ##
         ######################
 
+        ActionCalloutRequestCreate: ActionCallouts.request_create,
+        ActionCalloutRequestUpdate: ActionCallouts.request_update,
+        ActionCalloutResponse: ActionCallouts.response,
+
         Maker: { description: "TKTKTK placeholder text for Maker" }, # TODO a maker definition
 
         Project: Projects.response,
@@ -65,6 +74,7 @@ RSpec.configure do |config|
         ProjectsResponse: Type.all( Type.reference('#/definitions/ProjectResponse') ),
 
         Subject: { description: "TKTKTK placeholder text for Subject" }, # TODO a subject definition
+        Text: { description: "TKTKTK placeholder text for Text" }, # TODO a subject definition
 
         #########################
         ##      Responses      ##
