@@ -68,5 +68,19 @@
 
   .marker {
     @include blockLabel;
+    max-width: 240px;
+  }
+
+  .marker__link {
+    overflow: hidden;
+    color: inherit;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color $duration;
+
+    &:hover {
+      color: $accentPrimaryDark;
+    }
   }
 }

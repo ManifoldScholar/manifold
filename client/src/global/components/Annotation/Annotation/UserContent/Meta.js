@@ -13,7 +13,12 @@ export default class AnnotationMeta extends PureComponent {
   static propTypes = {
     creator: PropTypes.object,
     annotation: PropTypes.object.isRequired,
-    subject: PropTypes.string
+    subject: PropTypes.string,
+    includeMarkers: PropTypes.bool
+  };
+
+  static defaultProps = {
+    includeMarkers: true
   };
 
   get isAnonymous() {
@@ -97,6 +102,7 @@ export default class AnnotationMeta extends PureComponent {
                   text: annotation.attributes.textId
                 }
               )}
+              className="marker__link"
             >
               {annotation.relationships.readingGroup.attributes.name}
             </Link>
@@ -107,7 +113,7 @@ export default class AnnotationMeta extends PureComponent {
   }
 
   render() {
-    const { annotation } = this.props;
+    const { annotation, includeMarkers } = this.props;
 
     return (
       <section className="annotation-meta">
@@ -119,7 +125,7 @@ export default class AnnotationMeta extends PureComponent {
           <h4 className="annotation-meta__author-name">{this.name}</h4>
           {this.subtitle}
         </div>
-        {this.renderMarkers(annotation)}
+        {includeMarkers && this.renderMarkers(annotation)}
       </section>
     );
   }
