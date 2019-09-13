@@ -106,9 +106,9 @@ export default class ReadingGroupForm extends React.PureComponent {
               name="attributes[privacy]"
               defaultValue={"private"}
               instructions={`Annotations in public groups can be viewed by everyone.
-              Annotations in private groups can only be viewed by group members. In
-              anonymous groups, only the group creator can see the identity of each
-              annotation's author.`}
+              Annotations in private groups can only be viewed by group members. In 
+              anonymous groups, comments are private and only the group creator can see 
+              the identity of each annotation's author.`}
               options={[
                 { label: "Public", value: "public" },
                 { label: "Private", value: "private" },
