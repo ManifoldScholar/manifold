@@ -15,6 +15,7 @@ import { commonActions } from "actions/helpers";
 import { textsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import locationHelper from "helpers/location";
+import { FrontendModeContext } from "helpers/contexts";
 import { childRoutes } from "helpers/router";
 import { Redirect } from "react-router-dom";
 import { matchRoutes } from "react-router-config";
@@ -56,6 +57,8 @@ export class ReaderContainer extends Component {
     }
     return Promise.all(promises);
   };
+
+  static contextType = FrontendModeContext;
 
   static mapStateToProps = (state, ownProps) => {
     const appearance = state.ui.persistent.reader;
@@ -128,13 +131,16 @@ export class ReaderContainer extends Component {
     if (prevText === text) return;
     if (prevText && text && prevText.id === text.id) return;
     if (!text.relationships.project) return;
-    this.props.dispatch(
-      uiFrontendModeActions.setMode(
-        text.relationships.project.attributes.standaloneMode,
-        text.relationships.project,
-        this.props.location.search
-      )
-    );
+    if (
+      text.relationships.project.attributes.standaloneMode !== "enforced" ||
+      this.context.lastStandaloneId === text.relationships.project.id
+    ) {
+      this.props.dispatch(
+        uiFrontendModeActions.setFrontendModeToStandalone({
+          project: text.relationships.project
+        })
+      );
+    }
   }
 
   componentWillUnmount() {

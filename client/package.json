@@ -76,7 +76,7 @@
   },
   "dependencies": {
     "actioncable": "~5.0.2",
-    "autolinker": "^3",
+    "autolinker": "^1.x",
     "autoprefixer": "^9.0",
     "babel-polyfill": "^6.23.0",
     "body-scroll-lock": "^2.6.4",

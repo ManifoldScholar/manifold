@@ -33,7 +33,7 @@ class ManifoldContainer extends PureComponent {
     return {
       authentication: state.authentication,
       visibility: state.ui.transitory.visibility,
-      frontendMode: state.ui.persistent.frontendMode,
+      frontendMode: state.ui.transitory.frontendMode,
       loading: state.ui.transitory.loading.active,
       fatalError: state.fatalError,
       routing: state.routing,

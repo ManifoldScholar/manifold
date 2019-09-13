@@ -55,8 +55,15 @@ export class ProjectWrapper extends Component {
   }
 
   checkStandaloneMode(prevProject, project) {
+    if (!project) return;
     if (prevProject === project) return;
     if (prevProject && project && prevProject.id === project.id) return;
+    if (
+      this.context.isStandalone &&
+      this.context.project &&
+      this.context.project.id === project.id
+    )
+      return;
     this.props.dispatch(
       uiFrontendModeActions.setMode(
         project.attributes.standaloneMode,

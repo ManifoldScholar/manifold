@@ -7,8 +7,12 @@ const buildState = (
   payload = null
 ) => {
   const isLibrary = mode === "library";
-  if (isLibrary && state.isLibrary) return state;
   const isStandalone = mode === "standalone";
+
+  if (isLibrary && state.isLibrary) return state;
+  const lastStandaloneId =
+    isLibrary && state.project && state.project.id ? state.project.id : null;
+
   if (isStandalone && state.isStandalone && payload.project === state.project)
     return state;
   if (isStandalone)
@@ -16,6 +20,7 @@ const buildState = (
       isProjectHomepage: state.isProjectHomepage,
       isLibrary,
       isStandalone,
+      lastStandaloneId,
       project: {
         id: payload.project.id,
         slug: payload.project.attributes.slug,
@@ -34,6 +39,7 @@ const buildState = (
   return {
     isLibrary,
     isStandalone,
+    lastStandaloneId,
     project: null
   };
 };
