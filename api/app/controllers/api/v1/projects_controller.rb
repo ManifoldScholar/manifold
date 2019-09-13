@@ -31,7 +31,9 @@ module Api
       end
 
       def create
-        @project = authorize_and_create_project(project_params)
+        @project = ::Updaters::Project.new(project_params).update(Project.new)
+        @project.creator = current_user
+        authorize_action_for @project
         Content::ScaffoldProjectContent.run project: @project,
                                             configuration: params.to_unsafe_h.dig(:data, :attributes, :configuration)
         render_single_resource @project

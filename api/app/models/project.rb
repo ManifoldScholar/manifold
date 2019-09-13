@@ -284,6 +284,8 @@ class Project < ApplicationRecord
   end
 
   def updated?
+    return false unless updated_at
+
     updated_at.strftime("%F") != created_at.strftime("%F")
   end
 
