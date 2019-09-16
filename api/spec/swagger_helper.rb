@@ -2,6 +2,7 @@ require 'rails_helper'
 
 require_relative 'swagger_definitions/action_callouts'
 require_relative 'swagger_definitions/base_types'
+require_relative 'swagger_definitions/categories'
 require_relative 'swagger_definitions/errors'
 require_relative 'swagger_definitions/projects'
 
@@ -38,6 +39,10 @@ RSpec.configure do |config|
           name: "Action Callouts",
           description: "TKTKTKT",
         },
+        {
+          name: "Categories",
+          description: "TKTKTKT",
+        },
       ],
       securityDefinitions: {
         apiKey: {
@@ -63,6 +68,9 @@ RSpec.configure do |config|
         ActionCalloutRequestCreate: ActionCallouts.request_create,
         ActionCalloutRequestUpdate: ActionCallouts.request_update,
         ActionCalloutResponse: ActionCallouts.response,
+
+        CategoryResponse: Categories.response,
+        CategoryRequestUpdate: Categories.request_update,
 
         Maker: { description: "TKTKTK placeholder text for Maker" }, # TODO a maker definition
 

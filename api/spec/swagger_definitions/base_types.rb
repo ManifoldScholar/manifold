@@ -101,12 +101,12 @@ module Type
   end
 
   def self.crud
-    self.object({
+    {
       create: self.boolean,
       read: self.boolean,
       update: self.boolean,
       delete: self.boolean
-    })
+    }
   end
 
   def self.permissions
