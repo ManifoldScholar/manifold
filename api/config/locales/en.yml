@@ -28,6 +28,7 @@ en:
   swagger:
     access_denied: "Access denied for unauthorized users"
     not_found: "Record not found"
+    unprocessable: "Invalid or missing data in request"
     get:
       all:
         description: "Returns all %{type}"
