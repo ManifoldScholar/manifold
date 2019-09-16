@@ -113,7 +113,7 @@ module Type
       read: self.boolean,
       update: self.boolean,
       delete: self.boolean
-    })
+    }
   end
 
   def self.permissions
