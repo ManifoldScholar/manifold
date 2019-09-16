@@ -83,7 +83,7 @@ module Type
   end
 
   def self.email(params = {})
-    self.merge_params_with_nullable({ type: :string }, params)
+    self.merge_params_with_nullable({ type: :string, example: 'address@email.com' }, params)
   end
 
   def self.date_time(params = {})
