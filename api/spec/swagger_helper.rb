@@ -3,6 +3,7 @@ require 'rails_helper'
 require_relative 'swagger_definitions/action_callouts'
 require_relative 'swagger_definitions/base_types'
 require_relative 'swagger_definitions/categories'
+require_relative 'swagger_definitions/comments'
 require_relative 'swagger_definitions/errors'
 require_relative 'swagger_definitions/projects'
 
@@ -43,6 +44,10 @@ RSpec.configure do |config|
           name: "Categories",
           description: "TKTKTKT",
         },
+        {
+          name: "Comments",
+          description: "TKTKTKT",
+        },
       ],
       securityDefinitions: {
         apiKey: {
@@ -72,6 +77,9 @@ RSpec.configure do |config|
         CategoryResponse: Categories.response,
         CategoryRequestUpdate: Categories.request_update,
 
+        CommentResponse: Comments.response,
+        CommentRequestUpdate: Comments.request_update,
+
         Maker: { description: "TKTKTK placeholder text for Maker" }, # TODO a maker definition
 
         Project: Projects.response,
@@ -83,6 +91,7 @@ RSpec.configure do |config|
 
         Subject: { description: "TKTKTK placeholder text for Subject" }, # TODO a subject definition
         Text: { description: "TKTKTK placeholder text for Text" }, # TODO a subject definition
+        User: { description: "TKTKTK placeholder for User" },
 
         #########################
         ##      Responses      ##
