@@ -4,6 +4,7 @@ require_relative 'swagger_definitions/action_callouts'
 require_relative 'swagger_definitions/base_types'
 require_relative 'swagger_definitions/categories'
 require_relative 'swagger_definitions/comments'
+require_relative 'swagger_definitions/content_blocks'
 require_relative 'swagger_definitions/contacts'
 require_relative 'swagger_definitions/errors'
 require_relative 'swagger_definitions/projects'
@@ -80,6 +81,9 @@ RSpec.configure do |config|
 
         CommentResponse: Comments.response,
         CommentRequestUpdate: Comments.request_update,
+
+        ContentBlockResponse: ContentBlocks.response,
+        ContentBlockRequestUpdate: ContentBlocks.request_update,
 
         ContactRequestCreate: Contacts.request_create,
         ContactResponseError: Contacts.error,

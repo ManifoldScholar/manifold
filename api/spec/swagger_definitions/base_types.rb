@@ -44,11 +44,11 @@ module Type
   end
 
   def self.object(contents)
-    { type: :object, properties: contents.sort.to_h }
+    { type: :object, properties: contents }
   end
 
   def self.object(contents, params = {})
-    { type: :object, properties: contents.sort.to_h }.merge(params)
+    { type: :object, properties: contents }.merge(params)
   end
 
   def self.reference(path)
