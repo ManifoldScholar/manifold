@@ -25,6 +25,7 @@ en:
           log:
             new: 'Created new %{role} "%{name}"'
             updated: 'Updated %{role} "%{name}"'
+            invalid: 'Unable to parse maker name for "%{name}"'
         title:
           log:
             new: 'Created new %{kind} title "%{name}"'
