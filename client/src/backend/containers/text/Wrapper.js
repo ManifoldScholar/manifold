@@ -135,7 +135,6 @@ export class TextWrapperContainer extends PureComponent {
             href={text.attributes.ingestionExternalSourceUrl}
             rel="noopener noreferrer"
             target="_blank"
-            download
             className="utility-button"
           >
             <IconComposer
