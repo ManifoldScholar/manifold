@@ -1,10 +1,51 @@
-require "rails_helper"
+require "swagger_helper"
 
 RSpec.describe "Me API", type: :request do
 
   include_context("authenticated request")
   include_context("param helpers")
   let(:path) { api_v1_me_path }
+
+  path '/me' do
+    get 'Returns information about the current user' do
+      produces 'application/json'
+      security [ apiKey: [] ]
+      tags 'Me'
+
+      response '200', 'Returns a single Me object with info about the user' do
+        let(:Authorization) { admin_auth }
+        schema '$ref' => '#/definitions/MeResponse'
+        run_test!
+      end
+
+      response '401', I18n.t('swagger.access_denied') do
+        let(:Authorization) { }
+        schema '$ref' => '#/definitions/MeResponse'
+        run_test!
+      end
+    end
+
+    patch 'Update my info' do
+      parameter name: :me_attributes, in: :body, schema: { '$ref' => '#/definitions/MeRequestUpdate' }
+      let(:me_attributes) {{ data: { attributes: FactoryBot.attributes_for(:user) } }}
+
+      consumes 'application/json'
+      produces 'application/json'
+      security [ apiKey: [] ]
+      tags 'Me'
+
+      response '200', 'Update my info success' do
+        let(:Authorization) { admin_auth }
+        schema '$ref' => '#/definitions/MeResponse'
+        run_test!
+      end
+
+      response '401', I18n.t('swagger.access_denied') do
+        let(:Authorization) { }
+        run_test!
+      end
+    end
+  end
 
   describe "updates the current user" do
 
@@ -63,16 +104,6 @@ RSpec.describe "Me API", type: :request do
         end
         it "contains the logged in user ID" do
           expect(api_response["data"]["id"]).to eq reader.id
-        end
-      end
-    end
-
-    context "when there is not an authenticated user" do
-      before(:each) { get path }
-
-      describe "the response" do
-        it "has a 401 status code" do
-          expect(response).to have_http_status(401)
         end
       end
     end
