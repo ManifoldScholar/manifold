@@ -36,7 +36,7 @@ $accentPrimaryDark: darken(desaturate($accentPrimary, 20.97), 18.82) !default; /
 $accentPrimaryMedium: darken(desaturate($accentPrimary, 20.94), 11.57) !default; // #3dbd8c
 $accentPrimaryLight: lighten(saturate($accentPrimary, 0.36), 8.04) !default; // #75e9bd
 $accentPrimaryDull: lighten(desaturate(adjust-hue($accentPrimary, -3), 14.56), 20) !default; // #b1ead2
-$accentPrimaryPale: lighten(saturate(adjust-hue($accentPrimary, 2), 5), 25.69) !default; // #c1f7e4
+$accentPrimaryPale: lighten(desaturate($accentPrimary, 1.55), 19.41) !default; // #a8f0d5
 $accentPrimaryOffWhite: lighten(desaturate(adjust-hue($accentPrimary, 5), 22.14), 35.49) !default; // #f0faf7
 
 $focusPrimary: lighten(saturate(adjust-hue($accentPrimary, 2), 7.86), 25.69) !default; // #c0f8e5

@@ -8,11 +8,13 @@ export default class FormSave extends Component {
 
   static propTypes = {
     text: PropTypes.string,
-    cancelRoute: PropTypes.string
+    cancelRoute: PropTypes.string,
+    theme: PropTypes.oneOf(["frontend", "backend", "reader"])
   };
 
   static defaultProps = {
-    text: "Save"
+    text: "Save",
+    theme: "backend"
   };
 
   render() {
@@ -21,20 +23,22 @@ export default class FormSave extends Component {
         {this.props.cancelRoute ? (
           <Link
             to={this.props.cancelRoute}
-            className={classNames(
-              "button-secondary",
-              "button-secondary--outlined",
-              "button-secondary--dull"
-            )}
+            className={classNames({
+              "button-secondary": true,
+              "button-secondary--dull": true,
+              "button-secondary--outlined": this.props.theme === "backend",
+              "button-secondary--accent-pale": this.props.theme === "frontend"
+            })}
           >
             {"Cancel"}
           </Link>
         ) : null}
         <input
-          className={classNames(
-            "button-secondary",
-            "button-secondary--outlined"
-          )}
+          className={classNames({
+            "button-secondary": true,
+            "button-secondary--outlined": this.props.theme === "backend",
+            "button-secondary--accent-pale": this.props.theme === "frontend"
+          })}
           type="submit"
           value={this.props.text}
         />
