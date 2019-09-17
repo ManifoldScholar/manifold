@@ -736,7 +736,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                             </div>
                           </mockConstructor>
                         </FieldGroup>
-                        <Form.Save text=\\"Save Metadata\\">
+                        <Form.Save text=\\"Save Metadata\\" theme=\\"backend\\">
                           <div className=\\"form-input submit wide\\">
                             <input className=\\"button-secondary button-secondary--outlined\\" type=\\"submit\\" value=\\"Save Metadata\\" />
                           </div>

@@ -552,7 +552,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
               className="form-input submit wide"
             >
               <a
-                className="button-secondary button-secondary--outlined button-secondary--dull"
+                className="button-secondary button-secondary--dull button-secondary--outlined"
                 href="/backend/projects"
                 onClick={[Function]}
               >

@@ -534,6 +534,26 @@
     }
   }
 
+  &--accent-pale {
+    @include focusVisibleFill($accentPrimary);
+    padding: 1em 30px 1.2em;
+    color: $neutral90;
+    background-color: $accentPrimaryPale;
+
+    &:hover {
+      background-color: $accentPrimary;
+    }
+
+    &.button-secondary--dull {
+      @include focusVisibleFill($neutral30);
+      background-color: $neutral10;
+
+      &:hover {
+        background-color: $neutral20;
+      }
+    }
+  }
+
   &--dark {
     justify-content: flex-start;
     color: $neutral40;
@@ -599,32 +619,18 @@
   display: inline-block;
   padding: 0.76em 1.7em;
   font-size: 11.18px;
-  color: $accentPrimary;
+  color: $neutral90;
+  text-align: center;
   text-decoration: none;
   letter-spacing: 0.134em;
   white-space: nowrap;
-  border: 1px solid $accentPrimary;
+  background-color: $accentPrimaryPale;
   border-radius: 4px;
-  transition: color $duration $timing,
-    background-color $duration $timing;
+  transition: background-color $duration $timing;
 
   &:hover, &:focus-visible {
-    color: $neutralWhite;
     background-color: $accentPrimary;
     outline: 0;
-  }
-
-  .bg-neutral90 & {
-    &:hover {
-      color: $neutral90;
-      background-color: $accentPrimary;
-    }
-
-    &:focus-visible {
-      color: $accentPrimary;
-      background-color: $neutral95;
-      outline: 0;
-    }
   }
 }
 

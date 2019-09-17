@@ -61,10 +61,10 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
                                 <Connect(Stylesheet.Form.TextSections) stylesheet={{...}} wide={true} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} dispatch={[Function]} fetchData={[Function]}>
                                   <Stylesheet.Form.TextSections stylesheet={{...}} wide={true} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} dispatch={[Function]} fetchData={[Function]} updateStylesheets={[undefined]} authentication={{...}} />
                                 </Connect(Stylesheet.Form.TextSections)>
-                                <Form.Save cancelRoute=\\"/backend/projects/text/undefined/styles\\" text=\\"Save Stylesheet\\">
+                                <Form.Save cancelRoute=\\"/backend/projects/text/undefined/styles\\" text=\\"Save Stylesheet\\" theme=\\"backend\\">
                                   <div className=\\"form-input submit wide\\">
-                                    <Link to=\\"/backend/projects/text/undefined/styles\\" className=\\"button-secondary button-secondary--outlined button-secondary--dull\\">
-                                      <a className=\\"button-secondary button-secondary--outlined button-secondary--dull\\" onClick={[Function: onClick]} href=\\"/backend/projects/text/undefined/styles\\">
+                                    <Link to=\\"/backend/projects/text/undefined/styles\\" className=\\"button-secondary button-secondary--dull button-secondary--outlined\\">
+                                      <a className=\\"button-secondary button-secondary--dull button-secondary--outlined\\" onClick={[Function: onClick]} href=\\"/backend/projects/text/undefined/styles\\">
                                         Cancel
                                       </a>
                                     </Link>

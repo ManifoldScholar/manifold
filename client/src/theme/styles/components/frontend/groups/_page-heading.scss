@@ -49,18 +49,6 @@
 
   &__nav-button {
     @include buttonTertiary;
-    text-align: center;
-    background-color: $neutralWhite;
-    transition:
-      color $duration $timing,
-      background-color $duration $timing;
-
-    &:hover,
-    &:focus-visible {
-      color: $neutral90;
-      background-color: $accentPrimary;
-      outline: 0;
-    }
 
     &:not(:first-child) {
       margin-left: 10px;
