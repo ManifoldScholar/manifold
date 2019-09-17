@@ -9,6 +9,7 @@ require_relative 'swagger_definitions/contacts'
 require_relative 'swagger_definitions/errors'
 require_relative 'swagger_definitions/makers'
 require_relative 'swagger_definitions/me'
+require_relative 'swagger_definitions/pages'
 require_relative 'swagger_definitions/projects'
 
 RSpec.configure do |config|
@@ -98,6 +99,12 @@ RSpec.configure do |config|
 
         MeResponse: Me.response,
         MeRequestUpdate: Me.request_update,
+
+        PageResponse: Pages.response,
+        PageResponseFull: Pages.response_full,
+        PagesResponse: Pages.responses,
+        PageRequestCreate: Pages.request_create,
+        PageRequestUpdate: Pages.request_update,
 
         Project: Projects.response,
         ProjectRequestCreate: Projects.request_create,
