@@ -8,6 +8,7 @@ require_relative 'swagger_definitions/content_blocks'
 require_relative 'swagger_definitions/contacts'
 require_relative 'swagger_definitions/errors'
 require_relative 'swagger_definitions/makers'
+require_relative 'swagger_definitions/me'
 require_relative 'swagger_definitions/projects'
 
 RSpec.configure do |config|
@@ -94,6 +95,9 @@ RSpec.configure do |config|
         MakersResponse: Type.all( Makers.response ),
         MakerRequestCreate: Makers.request_create,
         MakerRequestUpdate: Makers.request_update,
+
+        MeResponse: Me.response,
+        MeRequestUpdate: Me.request_update,
 
         Project: Projects.response,
         ProjectRequestCreate: Projects.request_create,

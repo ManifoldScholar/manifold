@@ -100,13 +100,13 @@ module Type
     })
   end
 
-  def self.crud
+  def self.crud(params = {})
     {
       create: self.boolean,
       read: self.boolean,
       update: self.boolean,
       delete: self.boolean
-    }
+    }.merge(params)
   end
 
   def self.permissions
