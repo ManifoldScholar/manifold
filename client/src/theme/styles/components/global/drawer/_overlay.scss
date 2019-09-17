@@ -10,7 +10,7 @@
     opacity: 0.01;
   }
 
-  .drawer-enter.drawer-enter-active & {
+  .drawer-enter-active & {
     opacity: 1;
     transition: opacity $duration $timing;
   }
@@ -19,7 +19,7 @@
     opacity: 1;
   }
 
-  .drawer-exit.drawer-exit-active & {
+  .drawer-exit-active & {
     opacity: 0.01;
     transition: opacity $duration $timing;
   }

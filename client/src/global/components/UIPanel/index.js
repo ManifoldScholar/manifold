@@ -38,8 +38,7 @@ export default class UIPanel extends Component {
         key={this.props.id}
         in={visibility}
         classNames="panel"
-        enter={false}
-        timeout={{ enter: 0, exit: 200 }}
+        timeout={200}
         unmountOnExit
       >
         <div className={visibilityClass}>
@@ -61,6 +60,5 @@ export default class UIPanel extends Component {
         </div>
       </CSSTransition>
     );
-    /* eslint-enable react/jsx-boolean-value */
   }
 }

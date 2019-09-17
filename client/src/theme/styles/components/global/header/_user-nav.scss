@@ -49,7 +49,6 @@
 
   @keyframes menuSlideFade {
     from {
-      opacity: 0;
       transform: translateY(-1 * header-layout(menu-slide-distance));
     }
 
@@ -62,9 +61,6 @@
   .search-menu,
   .user-menu {
     top: 100%;
-    opacity: 0;
-    transition: opacity $duration $timing, transform $duration $timing;
-    transform: translateY(-1 * header-layout(menu-slide-distance));
   }
 
   .search-menu {
@@ -75,22 +71,29 @@
     }
   }
 
-  .panel-visible .search-menu,
-  .panel-visible .user-menu {
+  .panel-enter .search-menu,
+  .panel-enter .user-menu {
+    opacity: 0;
+    transform: translateY(-1 * header-layout(menu-slide-distance));
+  }
+
+  .panel-enter-active .search-menu,
+  .panel-enter-active .user-menu {
     opacity: 1;
-    animation: menuSlideFade $duration $timing forwards;
+    transition: opacity $duration $timing, transform $duration $timing;
+    transform: translateY(0);
   }
 
   .panel-exit .search-menu,
   .panel-exit .user-menu {
     opacity: 1;
     transform: translateY(0);
-    animation: menuSlideFade $duration $timing backwards;
   }
 
-  .panel-exit.panel-exit-active .search-menu,
-  .panel-exit.panel-exit-active .user-menu {
+  .panel-exit-active .search-menu,
+  .panel-exit-active .user-menu {
     opacity: 0;
+    transition: opacity $duration $timing, transform $duration $timing;
     transform: translateY(-1 * header-layout(menu-slide-distance));
   }
 }
