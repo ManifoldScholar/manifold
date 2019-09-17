@@ -7,6 +7,7 @@ require_relative 'swagger_definitions/comments'
 require_relative 'swagger_definitions/content_blocks'
 require_relative 'swagger_definitions/contacts'
 require_relative 'swagger_definitions/errors'
+require_relative 'swagger_definitions/makers'
 require_relative 'swagger_definitions/projects'
 
 RSpec.configure do |config|
@@ -88,7 +89,11 @@ RSpec.configure do |config|
         ContactRequestCreate: Contacts.request_create,
         ContactResponseError: Contacts.error,
 
-        Maker: { description: "TKTKTK placeholder text for Maker" }, # TODO a maker definition
+        Maker: Makers.relationship,
+        MakerResponse: Makers.response,
+        MakersResponse: Type.paginated( Makers.response ),
+        MakerRequestCreate: Makers.request_create,
+        MakerRequestUpdate: Makers.request_update,
 
         Project: Projects.response,
         ProjectRequestCreate: Projects.request_create,
