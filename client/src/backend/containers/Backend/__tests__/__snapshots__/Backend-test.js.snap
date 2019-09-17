@@ -116,8 +116,8 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                           </button>
                                         </UserMenuButton>
                                         <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: C]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
-                                          <CSSTransition in={[undefined]} classNames=\\"panel\\" enter={false} timeout={{...}} unmountOnExit={true}>
-                                            <Transition in={false} enter={false} timeout={{...}} unmountOnExit={true} onEnter={[Function]} onEntered={[Function]} onEntering={[Function]} onExit={[Function]} onExiting={[Function]} onExited={[Function]} mountOnEnter={false} appear={false} exit={true} />
+                                          <CSSTransition in={[undefined]} classNames=\\"panel\\" timeout={200} unmountOnExit={true}>
+                                            <Transition in={false} timeout={200} unmountOnExit={true} onEnter={[Function]} onEntered={[Function]} onEntering={[Function]} onExit={[Function]} onExiting={[Function]} onExited={[Function]} mountOnEnter={false} appear={false} enter={true} exit={true} />
                                           </CSSTransition>
                                         </UIPanel>
                                       </li>

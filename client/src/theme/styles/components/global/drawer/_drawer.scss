@@ -41,32 +41,16 @@
     top: 0;
   }
 
-  &--right,
-  &--left {
-    .drawer-enter.drawer-enter-active &,
-    .drawer-exit & {
-      transform: translateX(0);
-    }
-  }
-
   &--right {
+    @include reactSlideTransition('right', '&', 'drawer');
     right: 0;
     left: auto;
-
-    .drawer-enter &,
-    .drawer-exit.drawer-exit-active & {
-      transform: translateX(100%);
-    }
   }
 
   &--left {
+    @include reactSlideTransition('left', '&', 'drawer');
     right: auto;
     left: 0;
-
-    .drawer-enter &,
-    .drawer-exit.drawer-exit-active & {
-      transform: translateX(-100%);
-    }
   }
 
   // size
