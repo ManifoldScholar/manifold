@@ -59,6 +59,10 @@ RSpec.configure do |config|
           name: "users",
           description: "Readers, authors, admins and other user info",
         },
+        {
+          name: "tokens",
+          description: "Getting tokens to grant users access to more personalized elements of the site",
+        },
       ],
       securityDefinitions: {
         apiKey: {
@@ -136,6 +140,7 @@ RSpec.configure do |config|
         #########################
 
         NotFound: Errors.not_found,
+        TokenErrors: Errors.token,
       }
     }
   }
