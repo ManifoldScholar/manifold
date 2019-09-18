@@ -11,6 +11,7 @@ require_relative 'swagger_definitions/makers'
 require_relative 'swagger_definitions/me'
 require_relative 'swagger_definitions/pages'
 require_relative 'swagger_definitions/projects'
+require_relative 'swagger_definitions/project_collections'
 require_relative 'swagger_definitions/users'
 
 RSpec.configure do |config|
@@ -117,6 +118,11 @@ RSpec.configure do |config|
         ProjectResponse: Projects.response,
         ProjectResponseFull: Projects.response_full,
         ProjectsResponse: Type.all( Type.reference('#/definitions/ProjectResponse') ),
+
+        ProjectCollectionResponse: ProjectCollections.response,
+        ProjectCollectionResponseFull: ProjectCollections.response_full,
+        ProjectCollectionRequestCreate: ProjectCollections.request_create,
+        ProjectCollectionRequestUpdate: ProjectCollections.request_update,
 
         UserRequestCreate: Users.request_create,
         User: Users.response,

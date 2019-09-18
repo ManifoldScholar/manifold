@@ -83,9 +83,8 @@ module Type
     self.merge_params_with_nullable({ type: :string, format: "date-time" }, params)
   end
 
-
-  def self.currency_code()
-    { example: "USD", description: "International currency codes (see http://www2.1010data.com/documentationcenter/discover/FunctionReference/DataTypesAndFormats/currencyUnitCodes.html)"}
+  def self.date(params = {})
+    self.merge_params_with_nullable({ type: :string, format: "date" }, params)
   end
 
   ####################################
@@ -248,5 +247,9 @@ module Type
         "sentary"
       ]
     }
+  end
+
+  def self.currency_code()
+    { example: "USD", description: "International currency codes (see http://www2.1010data.com/documentationcenter/discover/FunctionReference/DataTypesAndFormats/currencyUnitCodes.html)"}
   end
 end
