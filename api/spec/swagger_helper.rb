@@ -11,6 +11,7 @@ require_relative 'swagger_definitions/makers'
 require_relative 'swagger_definitions/me'
 require_relative 'swagger_definitions/pages'
 require_relative 'swagger_definitions/projects'
+require_relative 'swagger_definitions/users'
 
 RSpec.configure do |config|
 
@@ -52,6 +53,10 @@ RSpec.configure do |config|
         {
           name: "Comments",
           description: "TKTKTKT",
+        },
+        {
+          name: "users",
+          description: "Readers, authors, admins and other user info",
         },
       ],
       securityDefinitions: {
@@ -113,10 +118,13 @@ RSpec.configure do |config|
         ProjectResponseFull: Projects.response_full,
         ProjectsResponse: Type.paginated( Type.reference('#/definitions/ProjectResponse') ),
 
+        UserRequestCreate: Users.request_create,
+        User: Users.response,
+        UserResponse: Users.response,
+        UsersResponse: Type.paginated( Users.response ),
+
         Subject: { description: "TKTKTK placeholder text for Subject" }, # TODO a subject definition
         Text: { description: "TKTKTK placeholder text for Text" }, # TODO a subject definition
-        User: { description: "TKTKTK placeholder for User" },
-
         #########################
         ##      Responses      ##
         #########################
