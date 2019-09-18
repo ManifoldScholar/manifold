@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { entityStoreActions, uiFrontendModeActions } from "actions";
+import { entityStoreActions } from "actions";
 import { grab } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import { RedirectToFirstMatch, childRoutes } from "helpers/router";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
-import { FrontendModeContext } from "helpers/contexts";
+import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import withSettings from "hoc/with-settings";
 
 const { request } = entityStoreActions;
@@ -29,8 +29,6 @@ export class ProjectWrapper extends Component {
     };
   };
 
-  static contextType = FrontendModeContext;
-
   static propTypes = {
     route: PropTypes.object,
     project: PropTypes.object,
@@ -42,35 +40,10 @@ export class ProjectWrapper extends Component {
 
   componentDidMount() {
     window.addEventListener("keyup", this.maybeReloadProject);
-    this.checkStandaloneMode(null, this.props.project);
   }
 
   componentWillUnmount() {
     window.removeEventListener("keyup", this.maybeReloadProject);
-    this.props.dispatch(uiFrontendModeActions.setFrontendModeToLibrary());
-  }
-
-  componentDidUpdate(prevProps) {
-    this.checkStandaloneMode(prevProps.project, this.props.project);
-  }
-
-  checkStandaloneMode(prevProject, project) {
-    if (!project) return;
-    if (prevProject === project) return;
-    if (prevProject && project && prevProject.id === project.id) return;
-    if (
-      this.context.isStandalone &&
-      this.context.project &&
-      this.context.project.id === project.id
-    )
-      return;
-    this.props.dispatch(
-      uiFrontendModeActions.setMode(
-        project.attributes.standaloneMode,
-        project,
-        this.props.location.search
-      )
-    );
   }
 
   renderRoutes() {
@@ -94,9 +67,18 @@ export class ProjectWrapper extends Component {
     });
   }
 
+  get isProjectHomepage() {
+    return this.props.location.pathname === this.props.match.url;
+  }
+
   render() {
     return (
       <>
+        <CheckFrontendMode
+          debugLabel="ProjectWrapper"
+          project={this.props.project}
+          isProjectHomePage={this.isProjectHomepage}
+        />
         <RedirectToFirstMatch
           from={lh.link("frontendProject")}
           candidates={[

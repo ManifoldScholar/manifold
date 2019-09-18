@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import ResourceCollection from "frontend/components/resource-collection";
-import { entityStoreActions, uiFrontendModeActions } from "actions";
+import { entityStoreActions } from "actions";
 import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
 import { resourceCollectionsAPI, requests } from "api";
 import HeadContent from "global/components/HeadContent";
@@ -13,6 +13,7 @@ import isNull from "lodash/isNull";
 import lh from "helpers/linkHandler";
 import BackLink from "frontend/components/back-link";
 import withSettings from "hoc/with-settings";
+import CheckFrontendMode from "global/containers/CheckFrontendMode";
 
 const { request, flush } = entityStoreActions;
 const page = 1;
@@ -119,10 +120,6 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
-  componentDidMount() {
-    this.props.dispatch(uiFrontendModeActions.isProjectSubpage());
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps.location.search === this.props.location.search) return null;
     this.setState(
@@ -213,6 +210,11 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     );
     return (
       <div>
+        <CheckFrontendMode
+          debugLabel="ResourceCollectionDetail"
+          isProjectSubpage
+        />
+
         <HeadContent
           title={`\u201c${resourceCollection.attributes.title}\u201d on ${settings.attributes.general.installationName}`}
           description={resourceCollection.attributes.description}

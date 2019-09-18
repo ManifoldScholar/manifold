@@ -3,11 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Utility from "frontend/components/utility";
 import Resource from "frontend/components/resource";
-import {
-  entityStoreActions,
-  uiFrontendModeActions,
-  fatalErrorActions
-} from "actions";
+import { entityStoreActions, fatalErrorActions } from "actions";
 import { select } from "utils/entityUtils";
 import { resourcesAPI, resourceCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
@@ -16,6 +12,7 @@ import BackLink from "frontend/components/back-link";
 import HeadContent from "global/components/HeadContent";
 import some from "lodash/some";
 import withSettings from "hoc/with-settings";
+import CheckFrontendMode from "global/containers/CheckFrontendMode";
 
 const { request, flush } = entityStoreActions;
 
@@ -58,10 +55,6 @@ export class ResourceDetailContainer extends PureComponent {
     dispatch: PropTypes.func,
     visibility: PropTypes.object
   };
-
-  componentDidMount() {
-    this.props.dispatch(uiFrontendModeActions.isProjectSubpage());
-  }
 
   UNSAFE_componentWillMount() {
     if (this.props.resource && this.props.resourceCollection) {
@@ -118,6 +111,8 @@ export class ResourceDetailContainer extends PureComponent {
 
     return (
       <div>
+        <CheckFrontendMode debugLabel="ResourceDetail" isProjectSubpage />
+
         <HeadContent
           title={`\u201c${resource.attributes.titlePlaintext}\u201d Resource on ${settings.attributes.general.installationName}`}
           description={resource.attributes.captionPlaintext}

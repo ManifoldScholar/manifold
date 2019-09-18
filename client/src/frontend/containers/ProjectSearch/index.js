@@ -4,8 +4,8 @@ import lh from "helpers/linkHandler";
 import BackLink from "frontend/components/back-link";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
-import { uiFrontendModeActions } from "actions";
 import withSearch from "hoc/with-search";
+import CheckFrontendMode from "global/containers/CheckFrontendMode";
 
 class ProjectSearch extends Component {
   static propTypes = {
@@ -19,10 +19,6 @@ class ProjectSearch extends Component {
   constructor(props) {
     super(props);
     this.state = props.searchQueryState;
-  }
-
-  componentDidMount() {
-    this.props.dispatch(uiFrontendModeActions.isProjectSubpage());
   }
 
   get facets() {
@@ -39,6 +35,8 @@ class ProjectSearch extends Component {
 
     return (
       <div>
+        <CheckFrontendMode debugLabel="ProjectSearch" isProjectSubpage />
+
         <BackLink.Register
           link={lh.link("frontendProjectDetail", this.project.attributes.slug)}
           title={this.project.attributes.titlePlaintext}

@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Redirect } from "react-router-dom";
 import Project from "frontend/components/project";
-import { entityStoreActions, uiFrontendModeActions } from "actions";
+import CheckFrontendMode from "global/containers/CheckFrontendMode";
+import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import BackLink from "frontend/components/back-link";
@@ -36,10 +37,6 @@ export class ProjectEventsContainer extends Component {
     meta: PropTypes.object
   };
 
-  componentDidMount() {
-    this.props.dispatch(uiFrontendModeActions.isProjectSubpage());
-  }
-
   projectUrl() {
     return lh.link("frontendProjectDetail", this.props.project.attributes.slug);
   }
@@ -57,6 +54,11 @@ export class ProjectEventsContainer extends Component {
     if (!events) return null;
     return (
       <>
+        <CheckFrontendMode
+          debugLabel="EventList"
+          project={project}
+          isProjectSubpage
+        />
         <BackLink.Register
           backText="Back to Project"
           link={this.projectUrl()}

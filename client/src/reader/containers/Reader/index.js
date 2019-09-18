@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { bindActionCreators } from "redux";
 import Overlay from "global/components/Overlay";
+import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import TextMeta from "reader/components/TextMeta";
 import Layout from "reader/components/layout";
 import Notes from "reader/components/notes";
@@ -15,15 +16,13 @@ import { commonActions } from "actions/helpers";
 import { textsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import locationHelper from "helpers/location";
-import { FrontendModeContext } from "helpers/contexts";
 import { childRoutes } from "helpers/router";
 import { Redirect } from "react-router-dom";
 import { matchRoutes } from "react-router-config";
 import {
   uiColorActions,
   uiTypographyActions,
-  entityStoreActions,
-  uiFrontendModeActions
+  entityStoreActions
 } from "actions";
 import { setPersistentUI } from "actions/ui/persistentUi";
 import { CSSTransition } from "react-transition-group";
@@ -57,8 +56,6 @@ export class ReaderContainer extends Component {
     }
     return Promise.all(promises);
   };
-
-  static contextType = FrontendModeContext;
 
   static mapStateToProps = (state, ownProps) => {
     const appearance = state.ui.persistent.reader;
@@ -112,7 +109,6 @@ export class ReaderContainer extends Component {
 
   componentDidMount() {
     this.setPersistentUI(this.props);
-    this.checkStandaloneMode(null, this.props.text);
   }
 
   componentDidUpdate(prevProps) {
@@ -123,23 +119,6 @@ export class ReaderContainer extends Component {
       )
     ) {
       window.scrollTo(0, 0);
-    }
-    this.checkStandaloneMode(prevProps.text, this.props.text);
-  }
-
-  checkStandaloneMode(prevText, text) {
-    if (prevText === text) return;
-    if (prevText && text && prevText.id === text.id) return;
-    if (!text.relationships.project) return;
-    if (
-      text.relationships.project.attributes.standaloneMode !== "enforced" ||
-      this.context.lastStandaloneId === text.relationships.project.id
-    ) {
-      this.props.dispatch(
-        uiFrontendModeActions.setFrontendModeToStandalone({
-          project: text.relationships.project
-        })
-      );
     }
   }
 
@@ -264,6 +243,10 @@ export class ReaderContainer extends Component {
     return (
       <BodyClass className={this.bodyClass}>
         <div>
+          <CheckFrontendMode
+            debugLabel="ReaderWrapper"
+            project={this.props.text.relationships.project}
+          />
           <ScrollAware>
             {/* Header inside scroll-aware HOC */}
             <Header
