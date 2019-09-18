@@ -1,6 +1,11 @@
-require "rails_helper"
+require "swagger_helper"
 
 RSpec.describe "Users API", type: :request do
+  model_name = "user"
+  model_name_plural = "users"
+  request_create_schema = { '$ref' => '#/definitions/UserRequestCreate' }
+  request_update_schema = { '$ref' => '#/definitions/UserRequestUpdate' }
+  response_schema = { '$ref' => '#/definitions/UserResponse' }
 
   include_context("authenticated request")
   include_context("param helpers")
@@ -20,22 +25,116 @@ RSpec.describe "Users API", type: :request do
   let(:valid_params) {
     json_payload(attributes: attributes)
   }
+  let(:existing_user) { FactoryBot.create(:user) }
 
-  describe "sends a list of users" do
-    let(:path) { api_v1_users_path }
-    context "when the user is an reader" do
-      before(:each) { get path, headers: reader_headers }
-      describe "the response" do
-        it "has a 403 status code" do
-          expect(@response).to have_http_status(403)
-        end
+  path "/#{model_name_plural}" do
+    get I18n.t('swagger.get.all.description', type: model_name_plural) do
+      produces 'application/json'
+      security [ apiKey: [] ]
+      tags model_name_plural
+
+      response '200', I18n.t('swagger.get.all.200', type: model_name_plural) do
+        let(:Authorization) { admin_auth }
+        schema '$ref' => '#/definitions/UsersResponse'
+        run_test!
+      end
+
+      response '403', I18n.t('swagger.access_denied') do
+        let(:Authorization) { author_auth }
+        run_test!
       end
     end
 
-    context "when the user is an admin" do
-      before(:each) { get path, headers: admin_headers}
-      it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+    post I18n.t('swagger.post.description', type: model_name) do
+      consumes 'application/json'
+      produces 'application/json'
+      parameter name: :user, in: :body, schema: request_create_schema
+      tags model_name_plural
+
+      response '201', I18n.t('swagger.post.201', type: model_name) do
+        let(:user) { { data: { attributes: FactoryBot.attributes_for(model_name) }} }
+        schema response_schema
+        run_test!
+      end
+    end
+  end
+
+  path "/#{model_name_plural}/{id}" do
+    get I18n.t('swagger.get.one.description', type: model_name, attribute: 'id') do
+      produces 'application/json'
+
+      parameter name: :id, in: :path, :type => :string
+      let(:id) { reader[:id] }
+
+      security [ apiKey: [] ]
+      tags model_name_plural
+
+      response '200', I18n.t('swagger.get.one.200', type: model_name, attribute: 'id') do
+        let(:Authorization) { admin_auth }
+        schema response_schema
+        run_test!
+      end
+
+      response '403', I18n.t('swagger.access_denied') do
+        let(:Authorization) { author_auth }
+        run_test!
+      end
+    end
+
+    patch I18n.t('swagger.patch.description', type: model_name, attribute: 'id') do
+      consumes 'application/json'
+      produces 'application/json'
+
+      parameter name: :id, in: :path, :type => :string
+      let(:id) { reader[:id] }
+
+      parameter name: :user, in: :body, schema: response_schema
+      let(:user) { { data: { attributes: { first_name: first_name } } } }
+
+      security [ apiKey: [] ]
+      tags model_name_plural
+
+      response '200', I18n.t('swagger.patch.200', type: model_name, attribute: 'id') do
+        let(:Authorization) { admin_auth }
+        schema response_schema
+        run_test!
+      end
+
+      response '403', I18n.t('swagger.access_denied') do
+        let(:Authorization) { author_auth }
+        run_test!
+      end
+    end
+
+    delete 'User removed' do
+
+      parameter name: :id, in: :path, :type => :string
+      let(:id) { reader[:id] }
+
+      security [ apiKey: [] ]
+      tags model_name_plural
+
+      response '204', I18n.t('swagger.delete.description', type: model_name, attribute: 'id') do
+        let(:Authorization) { admin_auth }
+        run_test!
+      end
+
+      response '403', I18n.t('swagger.access_denied') do
+        let(:Authorization) { author_auth }
+        run_test!
+      end
+    end
+  end
+
+  path '/users/whoami' do
+    get 'Return information on the current user' do
+      security [ apiKey: [] ]
+      tags model_name_plural
+
+      response '200', 'Returns the user with the matching authorization token' do
+        let(:Authorization) { admin_auth }
+        schema response_schema
+        run_test!
       end
     end
   end
@@ -74,7 +173,6 @@ RSpec.describe "Users API", type: :request do
       post path, headers: anonymous_headers, params: valid_params
       expect(AccountMailer).to have_received(:welcome).with(anything, false)
     end
-
   end
 
   describe "sends a user" do
@@ -124,30 +222,6 @@ RSpec.describe "Users API", type: :request do
 
         it "contains the correct user" do
           expect(api_response["data"]["id"]).to eq(reader.id)
-        end
-      end
-    end
-  end
-
-  describe "destroys a user" do
-
-    let(:path) { api_v1_user_path(reader) }
-    let(:api_response) { JSON.parse(response.body) }
-
-    context "when the user is an admin" do
-      before(:each) { delete path, headers: admin_headers }
-      describe "the response" do
-        it "has a 204 status code" do
-          expect(@response).to have_http_status(204)
-        end
-      end
-    end
-
-    context "when the user is a reader" do
-      before(:each) { delete path, headers: reader_headers }
-      describe "the response" do
-        it "has a 403 status code" do
-          expect(@response).to have_http_status(403)
         end
       end
     end

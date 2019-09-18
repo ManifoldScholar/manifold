@@ -41,7 +41,7 @@ module Comments
             author_created: Type.boolean,
           }),
           relationships: Type.object({
-            creator: Type.reference('#/definitions/User')
+            creator: Type.reference('#/definitions/User') # TODO what kind of user information is in a creator
           })
         }),
         meta: Type.meta_partial
