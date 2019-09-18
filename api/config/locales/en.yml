@@ -22,7 +22,7 @@
 en:
   attributes:
     descriptions:
-      slug: "A unique identifier that the user requests"
+      slug: "A unique identifier that the user requests. It will be set to the pendingSlug or the title if it is not already taken."
       pending_slug: "The unique identifier that the user requests. It may or may not be available, in which case, characters will be appended to make it unique"
       avatar_meta: "An object with data about the avatar image"
   swagger:
