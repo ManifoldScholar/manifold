@@ -4,8 +4,8 @@ import Project from "frontend/components/project";
 import { Redirect } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
-import { uiFrontendModeActions } from "actions";
 import Schema from "global/components/schema";
+import CheckFrontendMode from "global/containers/CheckFrontendMode";
 
 export default class ProjectDetailContainer extends Component {
   static propTypes = {
@@ -16,10 +16,6 @@ export default class ProjectDetailContainer extends Component {
     fetchData: PropTypes.func
   };
 
-  UNSAFE_componentWillMount() {
-    this.props.dispatch(uiFrontendModeActions.isProjectHomepage());
-  }
-
   render() {
     if (!this.props.projectResponse) return null;
     if (this.props.projectResponse.status === 401)
@@ -29,6 +25,7 @@ export default class ProjectDetailContainer extends Component {
 
     return (
       <div className="project-detail">
+        <CheckFrontendMode debugLabel="ProjectDetail" isProjectHomePage />
         <HeadContent
           title={`\u201c${this.props.project.attributes.titlePlaintext}\u201d on ${settings.attributes.general.installationName}`}
           description={this.props.project.attributes.description}

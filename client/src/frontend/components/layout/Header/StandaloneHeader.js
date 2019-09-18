@@ -138,13 +138,6 @@ class StandaloneHeader extends PureComponent {
     return this.context.project.heroStyles;
   }
 
-  get hasBackgroundImage() {
-    return (
-      this.backgroundImage.mediumLandscape &&
-      this.backgroundImage.largeLandscape
-    );
-  }
-
   get lightTheme() {
     if (this.alwaysVisible && !this.darkMode) return true;
     if (!this.darkMode) return true;

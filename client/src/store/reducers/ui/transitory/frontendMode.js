@@ -11,7 +11,9 @@ const buildState = (
 
   if (isLibrary && state.isLibrary) return state;
   const lastStandaloneId =
-    isLibrary && state.project && state.project.id ? state.project.id : null;
+    isLibrary && state.project && state.project.id
+      ? state.project.id
+      : state.lastStandaloneId;
 
   if (isStandalone && state.isStandalone && payload.project === state.project)
     return state;

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import connectAndFetch from "utils/connectAndFetch";
-import { entityStoreActions, uiFrontendModeActions } from "actions";
+import { entityStoreActions } from "actions";
+import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { projectsAPI, requests } from "api";
 import { select, meta } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
@@ -50,10 +51,6 @@ class ProjectResourceCollectionsContainer extends Component {
     settings: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired
   };
-
-  componentDidMount() {
-    this.props.dispatch(uiFrontendModeActions.isProjectSubpage());
-  }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.feResourceCollections));
@@ -132,6 +129,10 @@ class ProjectResourceCollectionsContainer extends Component {
 
     return (
       <div>
+        <CheckFrontendMode
+          debugLabel="ProjectResourceCollections"
+          isProjectSubpage
+        />
         <HeadContent
           title={`View \u201c${project.attributes.titlePlaintext}\u201d Resource Collections on ${settings.attributes.general.installationName}`}
           description={project.attributes.description}

@@ -1,10 +1,5 @@
 import { createAction } from "redux-actions";
 
-export const setMode = createAction(
-  "SET_FRONTEND_MODE",
-  (mode, project, search) => ({ mode, project, search })
-);
-
 export const isProjectSubpage = createAction(
   "SET_FRONTEND_MODE_IS_PROJECT_SUBPAGE"
 );
