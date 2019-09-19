@@ -157,6 +157,10 @@ class AnnotationEditor extends PureComponent {
     return false;
   }
 
+  isPrivateGroup(privacy) {
+    return privacy === "private" || privacy === "anonymous";
+  }
+
   renderSRSelect(id) {
     return (
       <select
@@ -207,7 +211,7 @@ class AnnotationEditor extends PureComponent {
                 key={rg.id}
                 label={rg.attributes.name}
                 onClick={() => this.setReadingGroup(rg.id)}
-                privateGroup={rg.attributes.privacy === "private"}
+                privateGroup={this.isPrivateGroup(rg.attributes.privacy)}
                 selected={this.isSelected(rg.id)}
               />
             ))}
