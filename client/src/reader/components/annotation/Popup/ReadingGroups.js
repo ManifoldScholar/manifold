@@ -35,6 +35,10 @@ export default class AnnotationPopupSecondaryReadingGroup extends PureComponent 
     return this.readingGroups && this.readingGroups.length > 0;
   }
 
+  isPrivateGroup(privacy) {
+    return privacy === "private" || privacy === "anonymous";
+  }
+
   isSelected(id) {
     return id === this.props.currentReadingGroup;
   }
@@ -82,7 +86,7 @@ export default class AnnotationPopupSecondaryReadingGroup extends PureComponent 
               key={rg.id}
               label={rg.attributes.name}
               onClick={() => onSelect(rg.id)}
-              privateGroup={rg.attributes.privacy === "private"}
+              privateGroup={this.isPrivateGroup(rg.attributes.privacy)}
               selected={currentReadingGroup === rg.id}
             />
           ))}
