@@ -1,4 +1,3 @@
-require "faker"
 # A reading group is a cohort of users who are collaboratively consuming Manifold content.
 class ReadingGroupMembership < ApplicationRecord
 
@@ -21,6 +20,17 @@ class ReadingGroupMembership < ApplicationRecord
   before_validation :ensure_anonymous_label
   after_commit :enqueue_notification, on: [:create]
 
+  ANONYMOUS_LABELS = ["Folio", "Bifolium", "Broadside", "Catchword", "Colophon",
+                      "Compositor", "Coucher", "Deckle", "Printer’s Devil", "Font",
+                      "Forme", "Typeface", "Incunabula", "Leaf", "Mould", "Paratext",
+                      "Recto", "Running-Title", "Shelfmark", "Quire", "Sheet", "Verso",
+                      "Watermark", "Witness", "Binding", "Boards", "Book Jacket",
+                      "Broadsheet", "Binding", "Conjugate Leaf", "Dust Jacket", "Edition",
+                      "End Paper", "Flyleaf", "Foxing", "Frontispiece", "Gathering",
+                      "Hinge", "Imprint", "Marbled Edge", "Octavo", "Presentation Copy",
+                      "Quarter Binding", "Quarto", "Slipcase", "Variant", "Wrapper",
+                      "Duodecimo", "Serif", "Engraving", "Intaglio", "Woodcut",
+                      "Lithograph"].freeze
   class << self
 
     def visible_reading_group_ids_for(user)
@@ -35,6 +45,10 @@ class ReadingGroupMembership < ApplicationRecord
 
   def creator?
     reading_group.creator_id == user_id
+  end
+
+  def regenerate_anonymous_label
+    self.anonymous_label = generate_anonymous_label
   end
 
   private
@@ -53,7 +67,7 @@ class ReadingGroupMembership < ApplicationRecord
   end
 
   def generate_anonymous_label
-    base_label = "Anonymous #{::Faker::Creature::Animal.name.titleize}"
+    base_label = "Anonymous #{ANONYMOUS_LABELS.sample.titleize}"
     label = base_label
     i = 1
     while ReadingGroupMembership.exists?(anonymous_label: label, reading_group_id: reading_group_id)
