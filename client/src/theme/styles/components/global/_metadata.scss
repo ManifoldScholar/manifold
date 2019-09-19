@@ -15,11 +15,11 @@
     font-size: 13px;
 
     + li {
-      margin-top: 5px;
+      margin-top: 10px;
     }
 
     .meta-label {
-      color: $neutral40;
+      color: $neutral70;
 
       &::after {
         display: inline;
@@ -28,8 +28,11 @@
     }
 
     .meta-value {
+      margin-top: 3px;
+      color: $neutral80;
+
       .bg-neutral90 & {
-        color: $neutral50;
+        color: $neutral40;
       }
 
       a {
