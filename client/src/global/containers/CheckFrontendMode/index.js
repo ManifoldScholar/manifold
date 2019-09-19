@@ -14,19 +14,24 @@ class CheckFrontendMode extends PureComponent {
   };
 
   componentDidMount() {
-    const { project } = this.props;
-    this.checkStandaloneMode(null, project);
+    this.log("componentDidMount");
+    this.checkStandaloneMode(this.props.project);
     if (this.props.isProjectHomePage) this.setIsProjectHomepage();
     if (this.props.isProjectSubpage) this.setIsProjectSubpage();
   }
 
   componentDidUpdate(prevProps) {
-    const { project } = this.props;
-    this.checkStandaloneMode(prevProps.project, project);
+    this.log("componentDidUpdate");
+    if (
+      this.sameProject(prevProps, this.props) &&
+      this.sameFrontendMode(prevProps, this.props)
+    )
+      return;
+    this.checkStandaloneMode(this.props.project);
   }
 
   componentWillUnmount() {
-    this.log("unmounting, setting mode to library");
+    this.log("componentWillUnmount");
     this.props.dispatch(uiFrontendModeActions.setFrontendModeToLibrary());
   }
 
@@ -75,16 +80,23 @@ class CheckFrontendMode extends PureComponent {
     return query.mode === "standalone";
   }
 
-  sameProject(prevProject, project) {
-    if (prevProject === project) return true;
-    if (
+  sameFrontendMode(prevProps, props) {
+    const { frontendMode: prevFrontendMode } = prevProps;
+    const { frontendMode: currentFrontendMode } = props;
+    if (prevFrontendMode === currentFrontendMode) return true;
+    return prevFrontendMode.isStandalone === currentFrontendMode.isStandalone;
+  }
+
+  sameProject(prevProps, props) {
+    const { project: prevProject } = prevProps;
+    const { project: currentProject } = props;
+    if (prevProject === currentProject) return true;
+    return (
       prevProject &&
       prevProject.id &&
-      project &&
-      prevProject.id === project.id
-    )
-      return true;
-    return false;
+      currentProject &&
+      prevProject.id === currentProject.id
+    );
   }
 
   log(arg, label = "") {
@@ -95,13 +107,9 @@ class CheckFrontendMode extends PureComponent {
     /* eslint-enable no-console */
   }
 
-  checkStandaloneMode(prevProject, project) {
-    if (!this.canShowStandalone) return;
-    if (this.sameProject(prevProject, project)) return;
-
-    this.log("mounting, checking standalone mode");
+  checkStandaloneMode(project) {
     this.log(this.canShowStandalone, "canShowStandalone?");
-    this.log(this.sameProject(prevProject, project), "sameProject?");
+    this.log("mounting, checking standalone mode");
     this.log(this.isStandaloneEnforced, "isStandaloneEnforced?");
     this.log(this.lastStandaloneId, "lastStandaloneId");
     this.log(this.standaloneModeRequested, "standaloneModeRequested");
