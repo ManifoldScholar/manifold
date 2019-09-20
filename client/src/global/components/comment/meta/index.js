@@ -21,8 +21,6 @@ export default class CommentMeta extends PureComponent {
   get avatarClassNames() {
     return classNames({
       "annotation-meta__avatar": true,
-      "annotation-meta__avatar--dull": !this.props.creator.attributes
-        .isCurrentUser,
       "annotation-meta__avatar-placeholder-container": !this.avatarUrl,
       "annotation-meta__avatar-image-container": this.avatarUrl
     });

@@ -68,15 +68,8 @@ export default class AnnotationMeta extends PureComponent {
   }
 
   get avatarClassNames() {
-    const {
-      annotation: {
-        attributes: { currentUserIsCreator }
-      }
-    } = this.props;
     return classNames({
       "annotation-meta__avatar": true,
-      "annotation-meta__avatar--dull":
-        !this.isAnonymous && !currentUserIsCreator,
       "annotation-meta__avatar-placeholder-container": !this.avatarUrl,
       "annotation-meta__avatar-image-container": this.avatarUrl
     });
