@@ -117,43 +117,37 @@ export default class ReadingGroupForm extends React.PureComponent {
               inline
               wide
             />
-            <Form.FieldGroup
-              label="Invitations"
-              labelTag="span"
-              instructions="Create and copy invitation codes and URLs to invite new members"
-              theme="secondary"
-            >
-              <Form.TextInput
-                wide
-                label="Invitation Code"
-                name="attributes[invitationCode]"
-                buttons={[
-                  {
-                    label: "regenerate",
-                    onClick: this.handleRegenerate
-                  },
-                  {
-                    label: "copy",
-                    onClick: this.handleCopy
-                  }
-                ]}
-              />
-              <Form.TextInput
-                wide
-                isDisabled
-                label="Invitation URL"
-                value={this.urlForToken(
-                  getModelValue("attributes[invitationCode]")
-                )}
-                instructions="Share the invitation URL with users so they can join the group. Share the invitation URL with users so they can join the group."
-                buttons={[
-                  {
-                    label: "copy",
-                    onClick: this.handleCopy
-                  }
-                ]}
-              />
-            </Form.FieldGroup>
+            <Form.TextInput
+              wide
+              label="Invitation Code"
+              name="attributes[invitationCode]"
+              buttons={[
+                {
+                  label: "regenerate",
+                  onClick: this.handleRegenerate
+                },
+                {
+                  label: "copy",
+                  onClick: this.handleCopy
+                }
+              ]}
+              instructions={`Users can enter the invitation code on the "Manage Reading Groups" page to join this group. You may change this code at any time, but previous codes will no longer work.`}
+            />
+            <Form.TextInput
+              wide
+              isDisabled
+              label="Invitation URL"
+              value={this.urlForToken(
+                getModelValue("attributes[invitationCode]")
+              )}
+              instructions="The URL above is based on the invitation code. Readers can also join the group by visiting this URL."
+              buttons={[
+                {
+                  label: "copy",
+                  onClick: this.handleCopy
+                }
+              ]}
+            />
             <Form.Switch
               wide
               label="Notifications"
