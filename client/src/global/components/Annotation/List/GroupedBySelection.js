@@ -31,7 +31,7 @@ export default class GroupedList extends PureComponent {
   };
 
   render() {
-    const { annotations, saveAnnotation, loginHandler, dispatch } = this.props;
+    const { annotations, saveAnnotation, loginHandler } = this.props;
 
     return (
       <div className="annotation-selection">
@@ -41,7 +41,7 @@ export default class GroupedList extends PureComponent {
             render={group => (
               <li key={group.selection.hash} className="annotation-detail">
                 <TextContent
-                  subject={group.selection.subject}
+                  selection={group.selection.subject}
                   onAnnotate={this.showEditor}
                   onLogin={loginHandler}
                   truncate={250}
@@ -57,11 +57,9 @@ export default class GroupedList extends PureComponent {
                   {group.annotations.map(annotation => {
                     return (
                       <UserContent
-                        dispatch={dispatch}
                         key={annotation.id}
-                        creator={annotation.relationships.creator}
-                        showLogin={loginHandler}
                         annotation={annotation}
+                        showLogin={loginHandler}
                       />
                     );
                   })}

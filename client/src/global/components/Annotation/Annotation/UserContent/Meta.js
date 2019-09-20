@@ -11,7 +11,6 @@ export default class AnnotationMeta extends PureComponent {
   static displayName = "Annotation.Meta";
 
   static propTypes = {
-    creator: PropTypes.object,
     annotation: PropTypes.object.isRequired,
     subject: PropTypes.string,
     includeMarkers: PropTypes.bool
@@ -21,21 +20,19 @@ export default class AnnotationMeta extends PureComponent {
     includeMarkers: true
   };
 
-  get isAnonymous() {
-    const { creator } = this.props;
-    if (!creator) return true;
-  }
-
   get subtitle() {
     if (!this.props.subject) return this.dateSubtitle;
     return this.subjectSubtitle;
   }
 
   get name() {
-    const { creator, annotation } = this.props;
-    if (annotation.attributes.currentUserIsCreator) return "Me";
-    if (this.isAnonymous) return "Anonymous";
-    return creator.attributes.fullName;
+    const {
+      annotation: {
+        attributes: { currentUserIsCreator, creatorName }
+      }
+    } = this.props;
+    if (currentUserIsCreator) return "Me";
+    return creatorName;
   }
 
   get subjectSubtitle() {
@@ -61,15 +58,25 @@ export default class AnnotationMeta extends PureComponent {
   }
 
   get avatarUrl() {
-    if (this.isAnonymous) return null;
-    return this.props.creator.attributes.avatarStyles.smallSquare;
+    const {
+      annotation: {
+        attributes: { creatorAvatarStyles }
+      }
+    } = this.props;
+
+    return creatorAvatarStyles.smallSquare;
   }
 
   get avatarClassNames() {
+    const {
+      annotation: {
+        attributes: { currentUserIsCreator }
+      }
+    } = this.props;
     return classNames({
       "annotation-meta__avatar": true,
       "annotation-meta__avatar--dull":
-        !this.isAnonymous && !this.props.creator.attributes.isCurrentUser,
+        !this.isAnonymous && !currentUserIsCreator,
       "annotation-meta__avatar-placeholder-container": !this.avatarUrl,
       "annotation-meta__avatar-image-container": this.avatarUrl
     });
@@ -114,7 +121,7 @@ export default class AnnotationMeta extends PureComponent {
 
   render() {
     const { annotation, includeMarkers } = this.props;
-
+    if (!annotation) return null;
     return (
       <section className="annotation-meta">
         {/* NB: Empty div required for flex-positioning of private/author marker */}

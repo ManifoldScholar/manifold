@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Annotation from "../Annotation";
-import Highlight from "../Highlight";
 import Utility from "global/components/utility";
 
 export default class AnnotationListDefault extends PureComponent {
@@ -13,26 +12,6 @@ export default class AnnotationListDefault extends PureComponent {
     annotations: PropTypes.array,
     handleVisitAnnotation: PropTypes.func
   };
-
-  renderHighlight(annotation) {
-    return (
-      <Highlight
-        visitHandler={this.props.handleVisitAnnotation}
-        annotation={annotation}
-        displayFormat="fullPage"
-      />
-    );
-  }
-
-  renderAnnotation(annotation) {
-    return (
-      <Annotation
-        visitHandler={this.props.handleVisitAnnotation}
-        annotation={annotation}
-        displayFormat="fullPage"
-      />
-    );
-  }
 
   get notesListClassNames() {
     return "notes-list";
@@ -50,9 +29,11 @@ export default class AnnotationListDefault extends PureComponent {
           {annotations.map(annotation => {
             return (
               <li key={annotation.id} className={this.selectionListClassNames}>
-                {annotation.attributes.format === "annotation"
-                  ? this.renderAnnotation(annotation)
-                  : this.renderHighlight(annotation)}
+                <Annotation
+                  visitHandler={this.props.handleVisitAnnotation}
+                  annotation={annotation}
+                  displayFormat="fullPage"
+                />
               </li>
             );
           })}

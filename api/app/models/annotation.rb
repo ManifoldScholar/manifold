@@ -35,6 +35,9 @@ class Annotation < ApplicationRecord
   belongs_to :resource, optional: true
   belongs_to :resource_collection, optional: true
   has_many :reading_group_memberships, through: :reading_group
+  has_one :reading_group_membership,
+          ->(annotation) { where user_id: annotation.creator_id },
+          class_name: "ReadingGroupMembership"
   has_many :comments, as: :subject, dependent: :destroy, inverse_of: :subject,
                       counter_cache: :comments_count
   has_one :text, through: :text_section
@@ -61,9 +64,24 @@ class Annotation < ApplicationRecord
   validates :body, presence: true, if: :annotation?
 
   # Delegations
+  delegate :id, to: :project, allow_nil: true, prefix: true
+  delegate :slug, to: :project, allow_nil: true, prefix: true
+  delegate :title, to: :project, allow_nil: true, prefix: true
+
   delegate :text, to: :text_section, allow_nil: true
+  delegate :text_id, to: :text_section, allow_nil: true
+  delegate :title, to: :text_section, allow_nil: true, prefix: true
+
+  delegate :slug, to: :text, allow_nil: true, prefix: true
   delegate :title, to: :text, prefix: true
-  delegate :project, to: :text, allow_nil: true
+  delegate :title_formatted, to: :text, prefix: true
+
+  delegate :privacy, to: :reading_group, allow_nil: true, prefix: true
+
+  delegate :avatar_styles, to: :creator, allow_nil: true, prefix: true
+
+  delegate :anonymous_label, to: :reading_group_membership, allow_nil: true
+
   delegate :text_node_for, to: :text_section, prefix: true
   delegate :text_nodes, to: :text_section, prefix: true
 

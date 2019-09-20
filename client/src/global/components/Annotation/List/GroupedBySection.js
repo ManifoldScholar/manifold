@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import Annotation from "../Annotation";
-import Highlight from "../Highlight";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
@@ -13,26 +12,6 @@ export default class GroupedBySection extends PureComponent {
     handleUpdateAnnotation: PropTypes.func,
     handleDeleteAnnotation: PropTypes.func
   };
-
-  renderHighlight(annotation) {
-    return (
-      <Highlight
-        visitHandler={this.props.handleVisitAnnotation}
-        annotation={annotation}
-        displayFormat="fullPage"
-      />
-    );
-  }
-
-  renderAnnotation(annotation) {
-    return (
-      <Annotation
-        visitHandler={this.props.handleVisitAnnotation}
-        annotation={annotation}
-        displayFormat="fullPage"
-      />
-    );
-  }
 
   get notesListClassNames() {
     return "notes-list";
@@ -60,9 +39,11 @@ export default class GroupedBySection extends PureComponent {
                 {group.annotations.map(annotation => {
                   return (
                     <li key={annotation.id}>
-                      {annotation.attributes.format === "annotation"
-                        ? this.renderAnnotation(annotation)
-                        : this.renderHighlight(annotation)}
+                      <Annotation
+                        visitHandler={this.props.handleVisitAnnotation}
+                        annotation={annotation}
+                        displayFormat="fullPage"
+                      />
                     </li>
                   );
                 })}

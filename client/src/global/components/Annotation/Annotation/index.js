@@ -1,85 +1,77 @@
 import React, { PureComponent } from "react";
-import TextContent from "./TextContent";
-import UserContent from "./UserContent";
-import classNames from "classnames";
+import PropTypes from "prop-types";
+import TextAnnotation from "./TextAnnotation";
+import HighlightAnnotation from "./HighlightAnnotation";
+import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
-import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
+import { annotationsAPI, requests } from "api";
+const { request } = entityStoreActions;
 
 class Annotation extends PureComponent {
   static displayName = "Annotation.Annotation";
 
-  defaultVisitHandler(annotation) {
-    const {
-      relationships: {
-        textSection: {
-          id,
-          attributes: { textSlug }
-        }
-      }
-    } = annotation;
-    const { history } = this.props;
-    const url = lh.link(
-      "readerSection",
-      textSlug,
-      id,
-      `#annotation-${annotation.id}`
+  static propTypes = {
+    annotation: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    visitHandler: PropTypes.func
+  };
+
+  deleteHandler = () => {
+    const { annotation } = this.props;
+    const call = annotationsAPI.destroy(annotation.id);
+    const options = { removes: { type: "annotations", id: annotation.id } };
+    const res = this.props.dispatch(
+      request(call, requests.rAnnotationDestroy, options)
     );
-    return history.push(url);
-  }
+    return res.promise;
+  };
 
   visitHandler = event => {
     event.preventDefault();
     const { annotation, visitHandler } = this.props;
     if (visitHandler) return visitHandler(annotation);
-    this.defaultVisitHandler(annotation);
+    return this.props.history.push(this.linkFor(annotation));
   };
 
-  get annotationListClassNames() {
-    return classNames({
-      "annotation-list": true,
-      "annotation-list--dark": this.props.displayFormat === "fullPage"
-    });
+  linkFor(annotation) {
+    const {
+      attributes: { textSlug, textSectionId }
+    } = annotation;
+    return lh.link(
+      "readerSection",
+      textSlug,
+      textSectionId,
+      `#annotation-${annotation.id}`
+    );
   }
 
-  get textSection() {
-    return this.props.annotation.relationships.textSection;
+  get highlightAnnotation() {
+    return <HighlightAnnotation {...this.props} {...this.injectedProps} />;
   }
 
-  get projectTitle() {
-    if (!this.textSection || !this.textSection.attributes) return null;
-    return this.props.annotation.relationships.textSection.attributes.textTitle;
+  get textAnnotation() {
+    return <TextAnnotation {...this.props} {...this.injectedProps} />;
   }
 
-  get sectionTitle() {
-    if (!this.textSection || !this.textSection.attributes) return null;
-    return this.props.annotation.relationships.textSection.attributes.name;
+  get injectedProps() {
+    return {
+      deleteHandler: this.deleteHandler,
+      visitHandler: this.visitHandler
+    };
+  }
+
+  get isTextAnnotation() {
+    const { annotation } = this.props;
+    return annotation.attributes.format === "annotation";
   }
 
   render() {
-    const { annotation, displayFormat } = this.props;
-    return (
-      <>
-        <div className="annotation-selection">
-          <TextContent
-            {...annotation.attributes}
-            projectTitle={this.projectTitle}
-            sectionTitle={this.sectionTitle}
-            truncate={250}
-            onViewInText={this.visitHandler}
-            displayFormat={displayFormat}
-          />
-        </div>
-        <ul className={this.annotationListClassNames}>
-          <UserContent
-            creator={annotation.relationships.creator}
-            annotation={annotation}
-            includeComments={false}
-            includeMarkers={false}
-          />
-        </ul>
-      </>
-    );
+    return this.isTextAnnotation
+      ? this.textAnnotation
+      : this.highlightAnnotation;
   }
 }
 
-export default withRouter(Annotation);
+export default connect()(withRouter(Annotation));
