@@ -110,6 +110,10 @@ class TextSection < ApplicationRecord
     text.section_after(position)
   end
 
+  def title
+    name
+  end
+
   def toc?
     kind == KIND_NAVIGATION
   end

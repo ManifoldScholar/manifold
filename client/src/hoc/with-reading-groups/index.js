@@ -61,6 +61,7 @@ export default function withReadingGroups(WrappedComponent) {
     };
 
     render() {
+      if (!this.props.readingGroups) return null;
       const props = { ...this.props, ...this.childProps };
       return React.createElement(WrappedComponent, props);
     }

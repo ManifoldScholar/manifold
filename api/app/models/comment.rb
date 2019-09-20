@@ -36,6 +36,7 @@ class Comment < ApplicationRecord
           as: :subject,
           dependent: :destroy,
           inverse_of: :subject
+
   delegate :project, to: :subject
 
   # Validations

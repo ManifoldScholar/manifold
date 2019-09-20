@@ -5,19 +5,19 @@ import nl2br from "nl2br";
 import classNames from "classnames";
 import Authorize from "hoc/authorize";
 import IconComposer from "global/components/utility/IconComposer";
-import SourceSummary from "../../SourceSummary/index";
+import SourceSummary from "../SourceSummary";
 
 export default class AnnotationSelectionWrapper extends PureComponent {
   static displayName = "Annotation.Annotation.TextContent";
 
   static propTypes = {
+    annotation: PropTypes.object,
+    selection: PropTypes.string.isRequired,
+    displayFormat: PropTypes.string,
     truncate: PropTypes.number,
-    subject: PropTypes.string,
-    onViewInText: PropTypes.func,
+    visitHandler: PropTypes.func,
     onAnnotate: PropTypes.func,
-    onLogin: PropTypes.func,
-    projectTitle: PropTypes.string,
-    sectionTitle: PropTypes.string
+    onLogin: PropTypes.func
   };
 
   constructor(props) {
@@ -45,21 +45,21 @@ export default class AnnotationSelectionWrapper extends PureComponent {
   };
 
   maybeTruncateSelection() {
-    const { subject, truncate, displayFormat } = this.props;
-    if (truncate && subject && subject.length > truncate) {
+    const { truncate, displayFormat, selection } = this.props;
+    if (truncate && selection && selection.length > truncate) {
       return (
         <Truncated
-          selection={subject}
+          selection={selection}
           truncate={truncate}
           displayFormat={displayFormat}
         />
       );
     }
-    return <div dangerouslySetInnerHTML={{ __html: nl2br(subject) }} />;
+    return <div dangerouslySetInnerHTML={{ __html: nl2br(selection) }} />;
   }
 
   render() {
-    const { projectTitle, sectionTitle } = this.props;
+    const { annotation } = this.props;
     const wrapperClasses = classNames({
       "annotation-selection__text-container": true,
       "annotation-selection__text-container--dark": this.fullPageFormat,
@@ -77,9 +77,8 @@ export default class AnnotationSelectionWrapper extends PureComponent {
           />
           {this.maybeTruncateSelection()}
           <SourceSummary
-            projectTitle={projectTitle}
-            sectionTitle={sectionTitle}
-            onClick={this.props.onViewInText}
+            annotation={annotation}
+            onClick={this.props.visitHandler}
             onHover={this.hoverHandler}
           />
         </div>
