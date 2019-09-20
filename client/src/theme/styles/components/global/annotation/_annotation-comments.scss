@@ -21,11 +21,10 @@
     @include listHorizontal;
     @include drawerIndent(padding-left);
     display: flex;
+    flex-wrap: wrap;
 
-    > li {
-      + li {
-        margin-left: 26px;
-      }
+    > li:not(:last-child) {
+      margin-right: 26px;
     }
   }
 

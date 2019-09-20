@@ -1,13 +1,18 @@
 .annotation-meta {
   @include drawerIndent(padding-left);
   position: relative;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 10px;
   color: $neutral90;
 
   @include respond($break50) {
-    display: flex;
-    align-items: flex-start;
+    flex-direction: row;
     justify-content: space-between;
+  }
+
+  &:only-child {
+    margin-bottom: 0;
   }
 
   &__avatar {
@@ -47,9 +52,10 @@
     hyphens: none;
   }
 
-  .deleted-notification {
+  &__deleted-message {
     @include subtitlePrimary;
     margin-top: 8px;
+    margin-bottom: 11px;
   }
 
   &__datetime, &__subtitle {
