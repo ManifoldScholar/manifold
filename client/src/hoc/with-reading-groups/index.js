@@ -20,6 +20,7 @@ export default function withReadingGroups(WrappedComponent) {
   class WithReadingGroups extends React.PureComponent {
     static mapStateToProps = state => {
       return {
+        _authentication: state.authentication,
         readingGroups: select(requests.feMyReadingGroups, state.entityStore),
         readingGroupsLoaded: loaded(
           requests.feMyReadingGroups,
@@ -46,6 +47,14 @@ export default function withReadingGroups(WrappedComponent) {
     }
 
     componentDidUpdate(prevProps) {
+      // Refetch reading groups if the user logged in.
+      if (
+        prevProps._authentication.authenticated === false &&
+        this.props._authentication.authenticated === true
+      ) {
+        this.fetchReadingGroups();
+      }
+
       // When the groups are loaded, we need to validate that the selected group is still
       // available to the user.
       if (
@@ -82,7 +91,8 @@ export default function withReadingGroups(WrappedComponent) {
 
     render() {
       if (!this.props.readingGroups) return null;
-      const props = { ...this.props, ...this.childProps };
+      const { _authentication, ...otherProps } = this.props;
+      const props = { ...otherProps, ...this.childProps };
       return React.createElement(WrappedComponent, props);
     }
   }
