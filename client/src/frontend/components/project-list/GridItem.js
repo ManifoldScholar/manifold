@@ -26,6 +26,11 @@ export default class ProjectGridItem extends Component {
     hideDesc: false
   };
 
+  shouldShowUpdated(project) {
+    const { updated, finished } = project.attributes;
+    return !finished && Boolean(updated);
+  }
+
   renderPublishedDate(project) {
     const attr = project.attributes;
     if (attr.publicationDate && !this.props.hideDate) {
@@ -111,7 +116,7 @@ export default class ProjectGridItem extends Component {
             {this.renderProjectStatusMarker(project)}
           </h3>
           {this.renderProjectMakers(project)}
-          {project.attributes.updated
+          {this.shouldShowUpdated(project)
             ? this.renderUpdatedDate(project)
             : this.renderPublishedDate(project)}
           {this.renderProjectDesc(project)}
