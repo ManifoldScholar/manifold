@@ -9,7 +9,6 @@ export default class CommentDeleted extends PureComponent {
     subject: PropTypes.object.isRequired
   };
 
-
   render() {
     const { comment } = this.props;
     return (
@@ -19,7 +18,9 @@ export default class CommentDeleted extends PureComponent {
             <div className="annotation-meta__avatar annotation-meta__avatar annotation-meta__avatar-placeholder-container">
               <Avatar />
             </div>
-            <h4 className="annotation-meta__deleted-message">This comment was deleted.</h4>
+            <h4 className="annotation-meta__deleted-message">
+              This comment was deleted.
+            </h4>
           </div>
         </section>
         <CommentContainer.Thread

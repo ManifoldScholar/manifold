@@ -7,6 +7,7 @@ import lh from "helpers/linkHandler";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { annotationsAPI, requests } from "api";
+
 const { request } = entityStoreActions;
 
 class Annotation extends PureComponent {
