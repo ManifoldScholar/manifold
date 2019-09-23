@@ -19,7 +19,9 @@
     transition: color $duration $duration $timing;
 
     &:hover,
-    &.button-active {
+    &.button-active,
+    &:focus-visible {
+      outline: 0;
       color: $accentPrimary;
       transition: color $duration $timing;
     }
