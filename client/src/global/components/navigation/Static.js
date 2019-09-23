@@ -148,6 +148,7 @@ export class NavigationStatic extends PureComponent {
               active={props.visibility.uiPanels.user}
               showLoginOverlay={props.commonActions.toggleSignInUpOverlay}
               toggleUserMenu={props.commonActions.toggleUserPanel}
+              context={props.mode}
             />
             <UIPanel
               id="user"

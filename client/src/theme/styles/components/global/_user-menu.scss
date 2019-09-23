@@ -27,6 +27,17 @@
     }
   }
 
+  &--frontend {
+    &:focus-visible {
+      outline: 0;
+
+      .avatar {
+        color: $accentPrimary;
+        transition: color $duration $timing;
+      }
+    }
+  }
+
   &--reader {
     .avatar {
       color: inherit;
