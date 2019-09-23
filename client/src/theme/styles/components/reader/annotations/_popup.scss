@@ -48,11 +48,11 @@
       bottom: 0;
     }
 
-    &.panel-enter {
+    &.panel-appear {
       opacity: 0.01;
       transform: translateX(25%);
 
-      &.panel-enter-active {
+      &.panel-appear-active {
         opacity: 1;
         transition:
           opacity $duration $timing,
