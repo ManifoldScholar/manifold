@@ -4,6 +4,7 @@ import isNumber from "lodash/isNumber";
 import isString from "lodash/isString";
 import isBoolean from "lodash/isBoolean";
 import setter from "global/components/form/setter";
+import { isPromise } from "utils/promise";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -75,7 +76,25 @@ function withFormOptions(WrappedComponent) {
     }
 
     handleChange = event => {
-      return this.props.set(this.byInternalValue(event.target.value));
+      const promises = [];
+      const newValue = event.target.value;
+      if (this.props.beforeOnChange) {
+        const res = this.props.beforeOnChange(
+          this.props.initialValue,
+          this.props.value,
+          newValue,
+          event
+        );
+        if (isPromise(res)) promises.push(res);
+      }
+      Promise.all(promises).then(
+        () => {
+          return this.props.set(this.byInternalValue(newValue));
+        },
+        () => {
+          // Do nothing!
+        }
+      );
     };
 
     render() {

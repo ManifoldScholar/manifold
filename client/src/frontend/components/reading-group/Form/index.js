@@ -5,8 +5,9 @@ import FormContainer from "global/containers/form";
 import { readingGroupsAPI, requests } from "api";
 import config from "config";
 import memoize from "lodash/memoize";
+import withConfirmation from "hoc/with-confirmation";
 
-export default class ReadingGroupForm extends React.PureComponent {
+class ReadingGroupForm extends React.PureComponent {
   static propTypes = {
     mode: PropTypes.oneOf(["new", "edit"]),
     group: PropTypes.object,
@@ -78,6 +79,23 @@ export default class ReadingGroupForm extends React.PureComponent {
   };
   /* eslint-enable no-param-reassign */
 
+  warnOnPrivacyChange = (initialValue, oldValueIgnored, newValue) => {
+    let msg = null;
+    const {
+      heading,
+      privateToPublic,
+      anonymousToPublic,
+      anonymousToPrivate
+    } = config.app.locale.dialogs.readingGroup.warn.privacyChange;
+    if (initialValue === "private" && newValue === "public")
+      msg = privateToPublic;
+    if (initialValue === "anonymous" && newValue === "public")
+      msg = anonymousToPublic;
+    if (initialValue === "anonymous" && newValue === "private")
+      msg = anonymousToPrivate;
+    if (msg !== null) return this.props.confirm(heading, msg, () => {});
+  };
+
   render() {
     const { group, onSuccess } = this.props;
     return (
@@ -105,6 +123,7 @@ export default class ReadingGroupForm extends React.PureComponent {
               prompt="Set privacy for all annotations from this group."
               name="attributes[privacy]"
               defaultValue={"private"}
+              beforeOnChange={this.warnOnPrivacyChange}
               instructions={`Annotations in public groups can be viewed by everyone.
               Annotations in private groups can only be viewed by group members. In
               anonymous groups, comments are private and only the group creator can see
@@ -162,3 +181,5 @@ export default class ReadingGroupForm extends React.PureComponent {
     );
   }
 }
+
+export default withConfirmation(ReadingGroupForm);

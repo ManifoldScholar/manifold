@@ -27,6 +27,7 @@ class FormRadios extends Component {
     name: PropTypes.string,
     value: PropTypes.any,
     set: PropTypes.func,
+    beforeOnChange: PropTypes.func,
     inputClasses: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     focusOnMount: PropTypes.bool
