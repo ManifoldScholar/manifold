@@ -23,14 +23,11 @@ export default class SourceSummary extends React.PureComponent {
   }
 
   get source() {
-    const {
-      textTitle,
-      textSectionTitle,
-      createdAt
-    } = this.props.annotation.attributes;
+    const { textTitle, textSectionTitle } = this.props.annotation.attributes;
     return (
       <>
-        "{textSectionTitle}" in{" "}
+        {" "}
+        &quot;{textSectionTitle}&quot; in{" "}
         <i dangerouslySetInnerHTML={{ __html: textTitle }} />
       </>
     );
