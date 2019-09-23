@@ -6,7 +6,7 @@
   }
 
   /* stylelint-disable length-zero-no-unit */
-  // TODO: re-enable once [830b46b](https://github.com/stylelint/stylelint/commit/830b46be8921edc4ff2fb5c6d4c5569037b0b855) is included in stable release
+  // Need to disable as long as stylelint has this exception: https://github.com/stylelint/stylelint/pull/4175/files/338bb1fea158e28cc206458e30bd645f44471d68#diff-d0eea4c4a9c766167087750060bea32eR270
   &--context-header {
     position: fixed;
     top: calc(var(--library-header-height, 50px) + var(--press-header-height, 0px));
