@@ -78,6 +78,8 @@ class AnnotationEditor extends PureComponent {
     const currentGroup = this.readingGroups.find(
       group => group.id === this.props.currentReadingGroup
     );
+
+    if (!currentGroup) return this.setReadingGroup("private");
     return currentGroup.attributes.name;
   }
 
@@ -105,6 +107,8 @@ class AnnotationEditor extends PureComponent {
     mutableAttributes.private = currentReadingGroup === "private";
     if (currentReadingGroup !== "private" && currentReadingGroup !== "public") {
       mutableAttributes.readingGroupId = currentReadingGroup;
+    } else {
+      mutableAttributes.readingGroupId = null;
     }
     const updatedAnnotation = { ...annotation, attributes: mutableAttributes };
 

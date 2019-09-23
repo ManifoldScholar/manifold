@@ -77,6 +77,7 @@ class Annotation < ApplicationRecord
   delegate :title_formatted, to: :text, prefix: true
 
   delegate :privacy, to: :reading_group, allow_nil: true, prefix: true
+  delegate :name, to: :reading_group, allow_nil: true, prefix: true
 
   delegate :avatar_styles, to: :creator, allow_nil: true, prefix: true
 

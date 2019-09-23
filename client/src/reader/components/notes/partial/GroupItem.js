@@ -13,21 +13,27 @@ class GroupItem extends Component {
     readingGroups: PropTypes.array
   };
 
-  get currentGroup() {
-    const { readingGroupId } = this.props.annotation.attributes;
-    if (!this.props.readingGroups) return null;
-    if (this.isPrivate) return "private";
-    if (!readingGroupId) return "public";
-    return this.props.readingGroups.find(group => group.id === readingGroupId);
-  }
-
-  get isPrivate() {
-    return this.props.annotation.attributes.private;
+  get currentGroupName() {
+    const {
+      readingGroupId,
+      readingGroupName,
+      private: isPrivate
+    } = this.props.annotation.attributes;
+    if (isPrivate) return this.privateLabel;
+    if (!readingGroupId) return this.publicLabel;
+    return readingGroupName;
   }
 
   get showLock() {
-    if (this.currentGroup === "public") return false;
-    return this.isPrivate || this.currentGroup.attributes.privacy === "private";
+    const {
+      readingGroupPrivacy,
+      private: isPrivate
+    } = this.props.annotation.attributes;
+    return (
+      readingGroupPrivacy === "private" ||
+      readingGroupPrivacy === "anonymous" ||
+      isPrivate
+    );
   }
 
   get publicLabel() {
@@ -36,12 +42,6 @@ class GroupItem extends Component {
 
   get privateLabel() {
     return "My Private Annotations";
-  }
-
-  get currentGroupName() {
-    if (this.isPrivate) return this.privateLabel;
-    if (this.currentGroup === "public") return this.publicLabel;
-    return this.currentGroup.attributes.name;
   }
 
   getIcon(format) {
@@ -68,7 +68,6 @@ class GroupItem extends Component {
   };
 
   renderReadingGroupTag() {
-    if (!this.currentGroup) return null;
     return (
       <span className="notes-filtered-list__tag">
         <span className="notes-filtered-list__tag-text">

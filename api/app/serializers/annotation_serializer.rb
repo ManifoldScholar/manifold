@@ -8,10 +8,11 @@ class AnnotationSerializer < ApplicationSerializer
   attributes :created_at, :updated_at, :start_char, :start_node, :end_char,
              :end_node, :id, :flagged, :flags_count, :format, :subject, :body, :private,
              :comments_count, :author_created, :current_user_is_creator, :orphaned,
-             :reading_group_privacy, :reading_group_id, :creator_id, :project_id, :text_id,
-             :text_section_id, :resource_id, :resource_collection_id, :text_slug,
-             :project_title, :text_title, :text_title_formatted, :text_section_title,
-             :creator_name, :creator_avatar_styles, :abilities, :is_anonymous
+             :reading_group_name, :reading_group_privacy, :reading_group_id,
+             :creator_id, :project_id, :text_id, :text_section_id, :resource_id,
+             :resource_collection_id, :text_slug, :project_title, :text_title,
+             :text_title_formatted, :text_section_title, :creator_name,
+             :creator_avatar_styles, :abilities, :is_anonymous
 
   def creator_name
     creator_identity_visible? ? object.creator.full_name : object.anonymous_label
