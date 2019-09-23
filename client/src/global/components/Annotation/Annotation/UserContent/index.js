@@ -82,6 +82,12 @@ class AnnotationDetail extends PureComponent {
     return res.promise;
   };
 
+  get showComments() {
+    const { annotation } = this.props;
+    if (!this.props.includeComments) return false;
+    return annotation.attributes.readingGroupPrivacy !== "anonymous";
+  }
+
   get listButtonBaseClassNames() {
     return "annotation-comments__list-button";
   }
@@ -136,7 +142,7 @@ class AnnotationDetail extends PureComponent {
             <Authorize kind={"any"}>
               <div className="annotation-comments__utility">
                 <ul className="annotation-comments__utility-list">
-                  {this.props.includeComments ? (
+                  {this.showComments ? (
                     <li>
                       <button
                         className={this.replyButtonClassNames}
@@ -210,7 +216,7 @@ class AnnotationDetail extends PureComponent {
             )}
           </div>
         )}
-        {this.props.includeComments ? (
+        {this.showComments ? (
           <CommentContainer.Thread subject={annotation} />
         ) : null}
       </li>
