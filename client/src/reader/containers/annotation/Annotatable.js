@@ -71,6 +71,7 @@ export class Annotatable extends Component {
   }
 
   get actions() {
+    if (this.cachedActions) return this.cachedActions;
     const actions = [
       "openNewNotationDrawer",
       "destroyAnnotation",
@@ -83,11 +84,12 @@ export class Annotatable extends Component {
       "closeDrawer"
     ];
     /* eslint-disable no-param-reassign */
-    return actions.reduce((map, action) => {
+    this.cachedActions = actions.reduce((map, action) => {
       map[action] = this[action];
       return map;
     }, {});
     /* eslint-enable no-param-reassign */
+    return this.cachedActions;
   }
 
   get activeAnnotationObject() {
