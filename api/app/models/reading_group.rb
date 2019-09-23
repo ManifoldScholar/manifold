@@ -36,6 +36,14 @@ class ReadingGroup < ApplicationRecord
   scope :non_public, -> { where.not(privacy: "public") }
   scope :visible_to_public, -> { where(privacy: "public") }
 
+  class << self
+
+    def arel_id_is_null_or_within_scope(scope)
+      arel_table[:id].eq(nil).or(arel_table[:id].in(Arel.sql(scope.to_sql)))
+    end
+
+  end
+
   def private?
     privacy == "private"
   end

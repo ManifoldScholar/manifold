@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Annotation, type: :model do
-
   before(:each) do
     @annotation = FactoryBot.build(:annotation)
   end
@@ -117,7 +116,6 @@ RSpec.describe Annotation, type: :model do
   end
 
   context "when part of a reading group" do
-
     before(:each) do
       @reading_group = FactoryBot.create(:reading_group)
       @creator = FactoryBot.create(:user)
@@ -136,14 +134,11 @@ RSpec.describe Annotation, type: :model do
 
     it "increments the reading group memberships highlights_count" do
       expect { FactoryBot.create(:annotation, creator: @creator, reading_group: @reading_group) }
-        .to change { @reading_group_membership.reload.annotations_count}.from(0).to(1)
+        .to change { @reading_group_membership.reload.annotations_count }.from(0).to(1)
     end
-
   end
 
   describe "the with_read_ability scope" do
-
-
     let(:private_group) { FactoryBot.create(:reading_group, privacy: "private") }
     let(:private_group_member) do
       user = FactoryBot.create(:user)
@@ -183,7 +178,6 @@ RSpec.describe Annotation, type: :model do
     let(:reader) { FactoryBot.create(:user) }
 
     shared_examples_for "a readable annotation" do |label, annotation_sym|
-
       it "when the annotation is a #{label}" do
         annotation = send(annotation_sym)
         expect(Annotation.with_read_ability(user).pluck(:id)).to include annotation.id
@@ -198,14 +192,25 @@ RSpec.describe Annotation, type: :model do
     end
 
     context "when filtering, the annotation" do
-
       context "when the user is not in any groups" do
         let(:user) { reader }
+        let(:private_group_annotation_by_former_group_member) do
+          FactoryBot.create(:annotation, private: false, reading_group: private_group, creator: user)
+        end
+        let(:public_group_annotation_by_former_group_member) do
+          FactoryBot.create(:annotation, private: false, reading_group: public_group, creator: user)
+        end
+        let(:anonymous_group_annotation_by_former_group_member) do
+          FactoryBot.create(:annotation, private: false, reading_group: anonymous_group, creator: user)
+        end
         it_behaves_like "a readable annotation", "public annotation", :public_annotation
         it_behaves_like "a readable annotation", "public group annotation", :public_group_annotation
         it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
         it_behaves_like "a non-readable annotation", "private group annotation", :private_group_annotation
         it_behaves_like "a non-readable annotation", "anonymous group annotation", :anonymous_group_annotation
+        it_behaves_like "a readable annotation", "private group annotation authored by the user who does not belong to the private group", :private_group_annotation_by_former_group_member
+        it_behaves_like "a readable annotation", "public group annotation authored by the user who does not belong to the public group", :public_group_annotation_by_former_group_member
+        it_behaves_like "a readable annotation", "anonymous group annotation authored by the user who does not belong to the anonymous group", :anonymous_group_annotation_by_former_group_member
       end
 
       context "when the user is the creator of the annotation" do
@@ -248,9 +253,6 @@ RSpec.describe Annotation, type: :model do
         it_behaves_like "a readable annotation", "private group annotation", :private_group_annotation
         it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
       end
-
     end
-
   end
-
 end
