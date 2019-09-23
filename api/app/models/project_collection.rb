@@ -82,6 +82,12 @@ class ProjectCollection < ApplicationRecord
     sort_order == "manual"
   end
 
+  def projects=(projects)
+    self.collection_projects = projects.map do |project, index|
+      CollectionProject.new(project: project, project_collection: self, position: index)
+    end
+  end
+
   private
 
   def valid_homepage_start_date!
