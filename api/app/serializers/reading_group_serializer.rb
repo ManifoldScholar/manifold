@@ -15,7 +15,7 @@ class ReadingGroupSerializer < ApplicationSerializer
   end
 
   def current_user_role
-    current_user_is_creator ? "owner" : "member"
+    current_user_is_creator ? "moderator" : "member"
   end
 
   def invitation_url
