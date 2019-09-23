@@ -121,7 +121,7 @@ class Annotation < ApplicationRecord
     if user.present?
       left_outer_joins(:reading_group)
         .sans_private_annotations_not_owned_by(user)
-        .where(reading_groups: { id: [nil, ReadingGroupMembership.visible_reading_group_ids_for(user)] })
+        .where(arel_reading_groups_for_user(user))
     else
       left_outer_joins(:reading_group)
         .non_private
@@ -145,6 +145,12 @@ class Annotation < ApplicationRecord
     # @return [Arel::Nodes::Not]
     def arel_exclude_private_annotations_not_owned_by(user)
       Arel::Nodes::Not.new(arel_table[:creator_id].not_eq(user&.id).and(arel_table[:private].eq(true)))
+    end
+
+    def arel_reading_groups_for_user(user)
+      id_scope = ReadingGroupMembership.visible_reading_group_ids_for(user)
+
+      ReadingGroup.arel_id_is_null_or_within_scope(id_scope).or(arel_table[:creator_id].eq(user.id))
     end
   end
 
