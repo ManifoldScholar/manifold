@@ -26,7 +26,7 @@ function withConfirmation(WrappedComponent) {
     }
 
     confirm = (heading, message, callback = null, options = {}) => {
-      new Promise((resolve, reject) => {
+      return new Promise((resolve, reject) => {
         const confirmation = { reject, heading, message, options };
         if (callback) confirmation.resolve = resolve;
         this.setState({ confirmation });
@@ -37,6 +37,7 @@ function withConfirmation(WrappedComponent) {
         },
         () => {
           this.closeDialog();
+          reject();
         }
       );
     };

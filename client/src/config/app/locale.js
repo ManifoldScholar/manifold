@@ -47,6 +47,17 @@ export default {
       }
     },
     readingGroup: {
+      warn: {
+        privacyChange: {
+          heading: "Confirm Privacy Change.",
+          privateToPublic:
+            "Changing this group from private to public will immediately make all annotations in the group visible to all readers. Are you sure you want to do this?",
+          anonymousToPublic:
+            "Changing this group from anonymous to public will immediately make all annotations in the group visible to all readers, and will reveal annotation authors. Are you sure you want to do this?",
+          anonymousToPrivate:
+            "Changing this group from anonymous to private will reveal the identity of annotation authors. Are you sure you want to do this?"
+        }
+      },
       join: {
         heading: "Please Confirm",
         message: `You are about to join the "<%= readingGroup.attributes.name %>" reading group. Please press yes to confirm.`
