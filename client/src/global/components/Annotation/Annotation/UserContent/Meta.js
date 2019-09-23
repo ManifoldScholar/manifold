@@ -92,19 +92,19 @@ export default class AnnotationMeta extends PureComponent {
             </div>
           </Authorize>
         )}
-        {annotation.relationships.readingGroup && (
+        {annotation.attributes.readingGroupId && (
           <div className="marker tertiary">
             <Link
               to={lh.link(
                 "frontendReadingGroupDetail",
-                annotation.relationships.readingGroup.id,
+                annotation.attributes.readingGroupId,
                 {
                   text: annotation.attributes.textId
                 }
               )}
               className="marker__link"
             >
-              {annotation.relationships.readingGroup.attributes.name}
+              {annotation.attributes.readingGroupName}
             </Link>
           </div>
         )}
