@@ -1,7 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ProjectCollection, type: :model do
-
   it "has a valid factory" do
     expect(FactoryBot.build(:project_collection)).to be_valid
   end
@@ -31,6 +30,16 @@ RSpec.describe ProjectCollection, type: :model do
       let(:sort_order) { "title_desc" }
 
       it { is_expected.to eq [project_d, project_c, project_b, project_a] }
+    end
+
+    it "allows projects to be removed" do
+      project_collection.projects = []
+      expect(project_collection.reload.projects.count).to be 0
+    end
+
+    it "allows projects to be replaced" do
+      project_collection.projects = [project_a, project_b]
+      expect(project_collection.reload.projects.count).to be 2
     end
   end
 
@@ -118,5 +127,4 @@ RSpec.describe ProjectCollection, type: :model do
       end
     end
   end
-
 end
