@@ -36,6 +36,10 @@ export default function withReadingGroups(WrappedComponent) {
     static mapStateToProps = state => {
       return {
         readingGroups: select(requests.feMyReadingGroups, state.entityStore),
+        readingGroupsLoaded: loaded(
+          requests.feMyReadingGroups,
+          state.entityStore
+        ),
         currentReadingGroup:
           state.ui.persistent.reader.readingGroups.currentReadingGroup
       };
@@ -49,6 +53,22 @@ export default function withReadingGroups(WrappedComponent) {
       readingGroups: PropTypes.array,
       currentReadingGroup: PropTypes.string
     };
+
+    componentDidUpdate(prevProps) {
+      // When the groups are loaded, we need to validate that the selected group is still
+      // available to the user.
+      if (
+        !prevProps.readingGroupsLoaded &&
+        this.props.readingGroupsLoaded &&
+        this.props.currentReadingGroup
+      ) {
+        const currentGroup = this.props.readingGroups.find(
+          group => group.id === this.props.currentReadingGroup
+        );
+        if (!currentGroup)
+          this.props.dispatch(uiReadingGroupActions.setReadingGroup("public"));
+      }
+    }
 
     get childProps() {
       return {
