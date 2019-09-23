@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { CSSTransition } from "react-transition-group";
 
 export default class Panel extends PureComponent {
   static displayName = "Annotation.Popup.Panel";
@@ -19,10 +20,6 @@ export default class Panel extends PureComponent {
 
   get isSecondary() {
     return !this.isPrimary;
-  }
-
-  get isHidden() {
-    return !this.props.visible;
   }
 
   renderChild(child, position) {
@@ -46,7 +43,6 @@ export default class Panel extends PureComponent {
     const pageClass = classNames({
       "annotation-popup__panel": true,
       "annotation-popup__panel--secondary": this.isSecondary,
-      "annotation-popup__panel--hidden": this.isHidden,
       "annotation-popup__panel--bottom": this.props.direction === "up",
       "annotation-popup__panel--top": this.props.direction === "down"
     });
@@ -59,10 +55,17 @@ export default class Panel extends PureComponent {
     });
 
     return (
-      <section className={pageClass}>
-        {this.renderChildren()}
-        <div className={tailClass} />
-      </section>
+      <CSSTransition
+        in={this.props.visible}
+        classNames="panel"
+        appear
+        timeout={{ appear: 300, exit: 300 }}
+      >
+        <section className={pageClass}>
+          {this.renderChildren()}
+          <div className={tailClass} />
+        </section>
+      </CSSTransition>
     );
   }
 }
