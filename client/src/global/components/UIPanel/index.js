@@ -8,7 +8,7 @@ export default class UIPanel extends Component {
   static propTypes = {
     id: PropTypes.string,
     visibility: PropTypes.object,
-    bodyComponent: PropTypes.func,
+    bodyComponent: PropTypes.elementType,
     hidePanel: PropTypes.func
   };
 
