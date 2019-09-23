@@ -39,10 +39,6 @@ export default class AnnotationPopupSecondaryReadingGroup extends PureComponent 
     return privacy === "private" || privacy === "anonymous";
   }
 
-  isSelected(id) {
-    return id === this.props.currentReadingGroup;
-  }
-
   renderBackButton() {
     return (
       <Button
