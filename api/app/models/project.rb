@@ -186,6 +186,12 @@ class Project < ApplicationRecord
     order(by)
   }
 
+  scope :by_standalone_mode_enforced, lambda { |enforced|
+    next where(standalone_mode: :enforced) if to_boolean(enforced)
+
+    where.not(standalone_mode: :enforced)
+  }
+
   scope :with_creator_role, ->(user = nil) { where(creator: user) if user.present? }
 
   scope :with_read_ability, lambda { |user = nil|
