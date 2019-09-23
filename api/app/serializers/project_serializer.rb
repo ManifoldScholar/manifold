@@ -8,7 +8,7 @@ class ProjectSerializer < ApplicationSerializer
              :recently_updated, :updated, :slug, :pending_slug, :avatar_color,
              :avatar_meta, :draft, :abilities, :subtitle_formatted, :title_formatted,
              :title_plaintext, :standalone_mode, :standalone_mode_press_bar_text,
-             :standalone_mode_press_bar_url
+             :standalone_mode_press_bar_url, :finished
 
   has_many :creators, serializer: MakerSerializer
 

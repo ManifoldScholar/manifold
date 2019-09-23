@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_144954) do
+ActiveRecord::Schema.define(version: 2019_09_23_205942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -460,6 +460,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_144954) do
     t.integer "standalone_mode", default: 0, null: false
     t.string "standalone_mode_press_bar_text"
     t.string "standalone_mode_press_bar_url"
+    t.boolean "finished", default: false
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 

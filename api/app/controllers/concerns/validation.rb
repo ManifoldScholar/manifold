@@ -64,7 +64,8 @@ module Validation
                   attachment(:cover), :remove_hero, :draft, :remove_cover,
                   :download_call_to_action, :publication_date, metadata(Project),
                   :avatar_color, :pending_slug, :tag_list, :dark_mode, :image_credits,
-                  :standalone_mode, :standalone_mode_press_bar_text, :standalone_mode_press_bar_url]
+                  :standalone_mode, :standalone_mode_press_bar_text,
+                  :standalone_mode_press_bar_url, :finished]
     relationships = [:collaborators, :creators, :contributors, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

@@ -77,6 +77,12 @@ export default class ProjectGeneralContainer extends PureComponent {
                 name="attributes[featured]"
                 instructions="Featured projects are highlighted on the home page."
               />
+              <Form.Switch
+                className="form-toggle-secondary"
+                label="Finished"
+                name="attributes[finished]"
+                instructions="In lists, Manifold will show the publication date for finished projects."
+              />
               <Form.Select
                 label="Standalone Mode"
                 name="attributes[standaloneMode]"
