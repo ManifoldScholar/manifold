@@ -20,13 +20,21 @@ const perPage = 20;
 export class ProjectsContainer extends Component {
   static fetchData = (getState, dispatch, location) => {
     const search = queryString.parse(location.search);
+
+    const baseFilters = {
+      standaloneModeEnforced: false
+    };
+
     const { page, ...filters } = search;
     const pagination = {
       number: page || defaultPage,
       size: perPage
     };
 
-    const projectsFetch = projectsAPI.index(filters, pagination);
+    const projectsFetch = projectsAPI.index(
+      Object.assign(baseFilters, filters),
+      pagination
+    );
     const projectsAction = request(projectsFetch, requests.feProjectsFiltered);
     const { promise: one } = dispatch(projectsAction);
     const promises = [one];

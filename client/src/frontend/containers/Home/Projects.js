@@ -22,6 +22,7 @@ export class HomeProjectsContainer extends Component {
   // actually used.
   static fetchProjects(getState, dispatch) {
     const filters = {
+      standaloneModeEnforced: false,
       order: "sort_title, title"
     };
     const pagination = {

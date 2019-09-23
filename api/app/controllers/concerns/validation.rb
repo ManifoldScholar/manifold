@@ -464,7 +464,8 @@ module Validation
   def project_filter_params
     params.permit(
       filter: [:draft, :featured, :subject, :keyword, :order, :typeahead,
-               :with_update_ability, :collection_order, :with_creator_role]
+               :with_update_ability, :collection_order, :with_creator_role,
+               :standalone_mode_enforced]
     )[:filter]
   end
 
