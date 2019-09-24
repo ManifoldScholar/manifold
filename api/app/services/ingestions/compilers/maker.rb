@@ -31,11 +31,13 @@ module Ingestions
 
       def initialize_collaborator
         return unless maker
+
         ::Collaborator.find_or_initialize_by maker: maker, collaboratable: text
       end
 
       def update_or_create
         return unless collaborator
+
         collaborator.update collaborator_attributes
       end
 

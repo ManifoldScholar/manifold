@@ -7,7 +7,8 @@ export default class ApiClient {
       /\/api\/v1\/projects\/\w*\/relationships\/resources/,
       /\/api\/v1\/projects\/\w*\/relationships\/twitter_queries/,
       /\/api\/v1\/annotations\/\w*\/relationships\/comments/,
-      /\/api\/v1\/resources\/\w*\/relationships\/comments/
+      /\/api\/v1\/resources\/\w*\/relationships\/comments/,
+      /\/api\/v1\/me\/relationships\/reading_groups/
     ];
 
     let response;

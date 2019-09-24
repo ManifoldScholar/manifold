@@ -40,13 +40,21 @@ exports[`Reader ReaderNotes Container renders correctly 1`] = `
                 <i>
                   Harry Henderson
                 </i>
-                 highlighted 
-                “Title Page”
-                 in 
-                <i>
-                  Hail Seitan
-                </i>
-                 on 
+                 highlighted
+                undefined annotated 
+                 
+                "
+                " in
+                 
+                <i
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": undefined,
+                    }
+                  }
+                />
+                 
+                on 
                 <time
                   dateTime="2017-04-24"
                 >
@@ -110,13 +118,21 @@ exports[`Reader ReaderNotes Container renders correctly 1`] = `
                 <i>
                   Harry Henderson
                 </i>
-                 highlighted 
-                “Title Page”
-                 in 
-                <i>
-                  Hail Seitan
-                </i>
-                 on 
+                 highlighted
+                undefined annotated 
+                 
+                "
+                " in
+                 
+                <i
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": undefined,
+                    }
+                  }
+                />
+                 
+                on 
                 <time
                   dateTime="2017-04-24"
                 >

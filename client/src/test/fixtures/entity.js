@@ -470,6 +470,7 @@ const defaults = {
         "Hands on your boxes, turn 'em up like seven notches." +
         " Your Magnavoxes amplify my super conscious.",
       startNode: "some-node",
+      creatorAvatarStyles: {},
       endNode: "another-node",
       startChar: 4,
       endChar: 13,

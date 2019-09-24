@@ -2,22 +2,28 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Link from "../Link";
 import build from "test/fixtures/build";
-import { Provider } from "react-redux";
-import { wrapWithRouter } from "test/helpers/routing";
+import wrapWithContext from "test/helpers/wrapWithContext";
+
+jest.mock("react-transition-group", () => {
+  return {
+    CSSTransition: jest.fn(({ children, in: show }) => (show ? children : null))
+  };
+});
 
 describe("Reader.Annotation.Popup.Menu.Link Component", () => {
   const store = build.store();
 
   it("renders correctly", () => {
-    const component = renderer.create(wrapWithRouter(
-      <Provider store={store}>
+    const component = renderer.create(
+      wrapWithContext(
         <Link
           selectedLink={<a href="www.dailyrowan.com" />}
           annotations={[]}
           showAnnotationsInDrawer={() => {}}
-        />
-      </Provider>
-    ));
+        />,
+        store
+      )
+    );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

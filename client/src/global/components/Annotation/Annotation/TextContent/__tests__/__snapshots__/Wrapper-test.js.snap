@@ -23,7 +23,7 @@ exports[`Reader.Annotation.Selection.Wrapper component renders correctly 1`] = `
     <div
       dangerouslySetInnerHTML={
         Object {
-          "__html": "Gods, Earths, and 85ers",
+          "__html": "undefined",
         }
       }
     />

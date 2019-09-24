@@ -7,7 +7,8 @@ export default function withPropsChecker(WrappedComponent) {
         .filter(key => {
           return nextProps[key] !== this.props[key];
         })
-        .map(key => {
+        .forEach(key => {
+          /* eslint-disable no-console */
           console.log(
             "changed property:",
             key,
@@ -16,8 +17,10 @@ export default function withPropsChecker(WrappedComponent) {
             "to",
             nextProps[key]
           );
+          /* eslint-enable no-console */
         });
     }
+
     render() {
       return <WrappedComponent {...this.props} />;
     }

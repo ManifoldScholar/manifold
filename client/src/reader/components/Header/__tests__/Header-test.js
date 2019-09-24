@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import Header from "../";
 import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
+import { FrontendModeContext } from "helpers/contexts";
 import { Provider } from "react-redux";
 
 describe("Reader.Header Component", () => {
@@ -18,7 +19,8 @@ describe("Reader.Header Component", () => {
 
   const appearance = {
     typography: {
-      fontSize: {}
+      fontSize: {},
+      margins: {}
     },
     colors: {}
   };
@@ -40,13 +42,17 @@ describe("Reader.Header Component", () => {
 
   const root = wrapWithRouter(
     <Provider store={store}>
-      <Header
-        appearance={appearance}
-        visibility={visibility}
-        commonActions={commonActions}
-        notifications={notifications}
-        text={text}
-      />
+      <FrontendModeContext.Provider
+        value={{ isLibrary: true, isStandalone: false }}
+      >
+        <Header
+          appearance={appearance}
+          visibility={visibility}
+          commonActions={commonActions}
+          notifications={notifications}
+          text={text}
+        />
+      </FrontendModeContext.Provider>
     </Provider>
   );
 
@@ -60,13 +66,17 @@ describe("Reader.Header Component", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
-          <Header
-            appearance={appearance}
-            visibility={visibility}
-            commonActions={commonActions}
-            notifications={notifications}
-            text={textWithoutContents}
-          />
+          <FrontendModeContext.Provider
+            value={{ isLibrary: true, isStandalone: false }}
+          >
+            <Header
+              appearance={appearance}
+              visibility={visibility}
+              commonActions={commonActions}
+              notifications={notifications}
+              text={textWithoutContents}
+            />
+          </FrontendModeContext.Provider>
         </Provider>
       )
     );

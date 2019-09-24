@@ -8,11 +8,13 @@ import { Provider } from "react-redux";
 describe("Reader.Notes.Partial.GroupItem Component", () => {
   const annotation = build.entity.annotation("1");
   const store = build.store();
-  const component = renderer.create(wrapWithRouter(
-    <Provider store={store}>
-      <GroupItem annotation={annotation} />
-    </Provider>
-  ));
+  const component = renderer.create(
+    wrapWithRouter(
+      <Provider store={store}>
+        <GroupItem annotation={annotation} />
+      </Provider>
+    )
+  );
 
   it("renders correctly", () => {
     let tree = component.toJSON();

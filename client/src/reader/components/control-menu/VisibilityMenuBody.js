@@ -178,7 +178,7 @@ class VisibilityMenuBody extends PureComponent {
     return this.renderFilter("reading group", "Reading Groups", children);
   }
 
-  renderCheckboxGroup(format, filterState, block) {
+  renderCheckboxGroup(format, filterState = {}, block) {
     const label = `${capitalize(format)}s`;
     return this.renderFilter(
       format,

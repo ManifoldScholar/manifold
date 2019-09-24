@@ -9,8 +9,7 @@ class GroupItem extends Component {
 
   static propTypes = {
     annotation: PropTypes.object,
-    visitHandler: PropTypes.func,
-    readingGroups: PropTypes.array
+    visitHandler: PropTypes.func
   };
 
   get currentGroupName() {
