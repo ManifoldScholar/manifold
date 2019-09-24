@@ -15,9 +15,43 @@ exports[`Backend Project Social Wrapper Container renders correctly 1`] = `
                       <Connect(withRouter(Drawer.Wrapper)) open={false} parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\">
                         <withRouter(Drawer.Wrapper) open={false} parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\" connected={true} dispatch={[Function]}>
                           <Drawer.Wrapper open={false} parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\" connected={true} dispatch={[Function]} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} lockScroll=\\"hover\\" lockScrollClickCloses={true} context=\\"backend\\" size=\\"default\\" padding=\\"default\\" position=\\"default\\" entrySide=\\"right\\" includeDrawerFrontMatter={true} returnFocusOnDeactivate={true} focusTrap={true} includeSRCloseButton={false}>
-                            <CSSTransition in={false} classNames=\\"drawer\\" timeout={{...}} unmountOnExit={true}>
-                              <Transition in={false} timeout={{...}} unmountOnExit={true} onEnter={[Function]} onEntered={[Function]} onEntering={[Function]} onExit={[Function]} onExiting={[Function]} onExited={[Function]} mountOnEnter={false} appear={false} enter={true} exit={true} />
-                            </CSSTransition>
+                            <Component in={false} classNames=\\"drawer\\" timeout={{...}} unmountOnExit={true}>
+                              <div className={[undefined]}>
+                                <Utility.EdgeLockScroll>
+                                  <div className=\\"edge-lock-scroll\\">
+                                    <div className=\\"drawer drawer--backend drawer--right drawer--default drawer--pad-default drawer--pos-default\\">
+                                      <focus-trap-react active={false} focusTrapOptions={{...}}>
+                                        <div className=\\"drawer-bar drawer-bar--default\\">
+                                          <button onClick={[Function]} tabIndex=\\"0\\" className=\\"drawer-bar__close-button drawer-bar__close-button--light\\">
+                                            <span className=\\"drawer-bar__close-text\\">
+                                              Close
+                                            </span>
+                                            <IconComposer icon=\\"close16\\" size={24} iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--small\\" fill=\\"currentColor\\" svgProps={{...}}>
+                                              <Close svgProps={{...}} iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--small svg-icon--close16\\" icon=\\"close16\\" size={24} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                                <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg drawer-bar__close-icon drawer-bar__close-icon--small svg-icon--close16\\" width={24} height={24} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
+                                                  <path d=\\"M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z\\" />
+                                                </svg>
+                                              </Close>
+                                            </IconComposer>
+                                          </button>
+                                        </div>
+                                        <Connect(NotificationsComponent) scope=\\"drawer\\" style=\\"drawer\\" animate={false}>
+                                          <NotificationsComponent scope=\\"drawer\\" style=\\"drawer\\" animate={false} notifications={{...}} dispatch={[Function]}>
+                                            <section className=\\"notifications-container\\" role=\\"alert\\">
+                                              <div className=\\"notifications-list--context-drawer notifications-list\\">
+                                                <TransitionGroup component=\\"div\\" childFactory={[Function: childFactory]}>
+                                                  <div />
+                                                </TransitionGroup>
+                                              </div>
+                                            </section>
+                                          </NotificationsComponent>
+                                        </Connect(NotificationsComponent)>
+                                      </focus-trap-react>
+                                    </div>
+                                  </div>
+                                </Utility.EdgeLockScroll>
+                              </div>
+                            </Component>
                           </Drawer.Wrapper>
                         </withRouter(Drawer.Wrapper)>
                       </Connect(withRouter(Drawer.Wrapper))>

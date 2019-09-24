@@ -21,7 +21,7 @@ RSpec.describe ReadingGroup, type: :model do
     expect(reading_group.reload.invitation_code).to eq "AAACCC123"
   end
 
-  fcontext "when it is destroyed" do
+  context "when it is destroyed" do
     before(:each) do
       @public_annotation = FactoryBot.create(:annotation, reading_group: reading_group, private: false)
       @private_annotation = FactoryBot.create(:annotation, reading_group: reading_group, private: true)

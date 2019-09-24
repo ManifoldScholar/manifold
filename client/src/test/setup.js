@@ -1,5 +1,6 @@
 import "@babel/polyfill";
 import { HelmetProvider } from "react-helmet-async";
+import React from "react";
 
 HelmetProvider.canUseDOM = false;
 
@@ -7,6 +8,7 @@ HelmetProvider.canUseDOM = false;
 // support DOM refs, which breaks our tests.
 jest.mock("react-dropzone", () => "react-dropzone");
 jest.mock("react-text-mask", () => "react-text-mask");
+
 jest.mock("helpers/passwordGenerator", () => {
   return jest.fn(() => "testtest123");
 });
@@ -34,3 +36,9 @@ jest.mock("hoc/with-form-context");
 jest.mock("api/client");
 
 jest.mock("services/plugin/initializer");
+
+const reactTransitionGroup = jest.requireActual("react-transition-group");
+reactTransitionGroup.CSSTransition = ({ children }) => {
+  return <>{children}</>;
+};
+jest.setMock("react-transition-group", reactTransitionGroup);

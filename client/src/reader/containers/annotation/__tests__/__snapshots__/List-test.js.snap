@@ -83,9 +83,7 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
               </div>
               <h4
                 className="annotation-meta__author-name"
-              >
-                Rowan Ida
-              </h4>
+              />
               <span
                 className="annotation-meta__datetime"
               >
@@ -170,9 +168,7 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
               </div>
               <h4
                 className="annotation-meta__author-name"
-              >
-                Rowan Ida
-              </h4>
+              />
               <span
                 className="annotation-meta__datetime"
               >

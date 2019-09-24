@@ -5,30 +5,28 @@ exports[`Backend.Dialog.Wrapper Component renders correctly 1`] = `
   <Router history={{...}}>
     <withRouter(Dialog.Wrapper) className=\\"dialog-confirm\\" maxWidth={400}>
       <Dialog.Wrapper className=\\"dialog-confirm\\" maxWidth={400} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} showCloseButton={true} closeOnOverlayClick={true}>
-        <CSSTransition in={true} classNames=\\"dialog\\" appear={true} enter={false} timeout={{...}} unmountOnExit={true}>
-          <Transition in={true} appear={true} enter={false} timeout={{...}} unmountOnExit={true} onEnter={[Function]} onEntered={[Function]} onEntering={[Function]} onExit={[Function]} onExiting={[Function]} onExited={[Function]} mountOnEnter={false} exit={true}>
-            <focus-trap-react className=\\"dialog-primary dialog-appear\\">
-              <div className=\\"dialog-overlay\\" onClick={[Function]} role=\\"button\\" />
-              <div className=\\"dialog-box dialog-confirm\\" style={{...}}>
-                <div onClick={[Function]} className=\\"close-button-primary\\" role=\\"button\\" tabIndex=\\"0\\">
-                  <IconComposer icon=\\"close16\\" size=\\"default\\" fill=\\"currentColor\\" svgProps={{...}}>
-                    <Close svgProps={{...}} iconClass=\\"svg-icon--close16\\" icon=\\"close16\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
-                      <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--close16\\" width={16} height={16} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
-                        <path d=\\"M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z\\" />
-                      </svg>
-                    </Close>
-                  </IconComposer>
-                  <span className=\\"screen-reader-text\\">
-                    Close Dialog
-                  </span>
-                </div>
-                <div>
-                  How is babby formed?
-                </div>
+        <Component in={true} classNames=\\"dialog\\" appear={true} enter={false} timeout={{...}} unmountOnExit={true}>
+          <focus-trap-react className=\\"dialog-primary dialog-appear\\">
+            <div className=\\"dialog-overlay\\" onClick={[Function]} role=\\"button\\" />
+            <div className=\\"dialog-box dialog-confirm\\" style={{...}}>
+              <div onClick={[Function]} className=\\"close-button-primary\\" role=\\"button\\" tabIndex=\\"0\\">
+                <IconComposer icon=\\"close16\\" size=\\"default\\" fill=\\"currentColor\\" svgProps={{...}}>
+                  <Close svgProps={{...}} iconClass=\\"svg-icon--close16\\" icon=\\"close16\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                    <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--close16\\" width={16} height={16} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
+                      <path d=\\"M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z\\" />
+                    </svg>
+                  </Close>
+                </IconComposer>
+                <span className=\\"screen-reader-text\\">
+                  Close Dialog
+                </span>
               </div>
-            </focus-trap-react>
-          </Transition>
-        </CSSTransition>
+              <div>
+                How is babby formed?
+              </div>
+            </div>
+          </focus-trap-react>
+        </Component>
       </Dialog.Wrapper>
     </withRouter(Dialog.Wrapper)>
   </Router>

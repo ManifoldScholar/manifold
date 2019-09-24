@@ -891,6 +891,39 @@ exports[`Backend Project General Container renders correctly 1`] = `
             </label>
           </div>
           <div
+            className="form-input form-toggle-secondary"
+          >
+            <label
+              className="form-switch"
+              htmlFor="switch-input-1"
+            >
+              <span
+                className="form-input-heading toggle above"
+              >
+                Finished
+              </span>
+              <input
+                checked={false}
+                id="switch-input-1"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <span
+                className="toggle-indicator"
+              >
+                <span
+                  aria-hidden="true"
+                  className="boolean-primary"
+                />
+              </span>
+              <span
+                className="instructions"
+              >
+                In lists, Manifold will show the publication date for finished projects.
+              </span>
+            </label>
+          </div>
+          <div
             className="form-input"
           >
             <div

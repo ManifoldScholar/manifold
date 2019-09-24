@@ -37,9 +37,7 @@ exports[`Reader.Annotation.Annotation component renders correctly 1`] = `
       </div>
       <h4
         className="annotation-meta__author-name"
-      >
-        Rowan Ida
-      </h4>
+      />
       <span
         className="annotation-meta__datetime"
       >

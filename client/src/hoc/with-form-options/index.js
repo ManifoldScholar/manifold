@@ -76,18 +76,18 @@ function withFormOptions(WrappedComponent) {
     }
 
     handleChange = event => {
-      const promises = [];
       const newValue = event.target.value;
-      if (this.props.beforeOnChange) {
-        const res = this.props.beforeOnChange(
-          this.props.initialValue,
-          this.props.value,
-          newValue,
-          event
-        );
-        if (isPromise(res)) promises.push(res);
-      }
-      Promise.all(promises).then(
+      if (!this.props.beforeOnChange)
+        return this.props.set(this.byInternalValue(newValue));
+      const res = this.props.beforeOnChange(
+        this.props.initialValue,
+        this.props.value,
+        newValue,
+        event
+      );
+      if (!isPromise(res))
+        return this.props.set(this.byInternalValue(newValue));
+      res.then(
         () => {
           return this.props.set(this.byInternalValue(newValue));
         },

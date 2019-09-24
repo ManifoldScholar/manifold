@@ -134,7 +134,7 @@ export class AuthorizeComponent extends PureComponent {
       };
       return <Redirect to={to} />;
     }
-    if (!this.props.children) return false;
+    if (!this.props.children) return null;
     const successBehavior = this.successBehavior(this.props);
     if (successBehavior === "hide") return this.renderHide(this.props);
     if (successBehavior === "show") return this.renderShow(this.props);

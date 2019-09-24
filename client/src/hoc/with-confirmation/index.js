@@ -37,7 +37,6 @@ function withConfirmation(WrappedComponent) {
         },
         () => {
           this.closeDialog();
-          reject();
         }
       );
     };
