@@ -76,11 +76,6 @@ export default class SourceSummary extends React.PureComponent {
           className="annotation-selection__source-summary-link"
         >
           <span className="annotation-selection__source-summary-text">
-            {this.creatorName && (
-              <>
-                <i>{this.creatorName}</i> highlighted
-              </>
-            )}
             {this.includeCreator && `${this.creator} ${this.action} `}
             {this.source}
             {this.includeDate && (

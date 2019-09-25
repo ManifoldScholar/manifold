@@ -37,10 +37,6 @@ exports[`Reader ReaderNotes Container renders correctly 1`] = `
               <span
                 className="annotation-selection__source-summary-text"
               >
-                <i>
-                  Harry Henderson
-                </i>
-                 highlighted
                 undefined annotated 
                  
                 "
@@ -115,10 +111,6 @@ exports[`Reader ReaderNotes Container renders correctly 1`] = `
               <span
                 className="annotation-selection__source-summary-text"
               >
-                <i>
-                  Harry Henderson
-                </i>
-                 highlighted
                 undefined annotated 
                  
                 "
