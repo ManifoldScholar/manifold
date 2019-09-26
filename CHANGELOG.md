@@ -1,11 +1,116 @@
 # Changelog
 
+## [v4.0.0](https://github.com/ManifoldScholar/manifold/tree/v4.0.0) - 09/26/19
+
+### Features
+
+-  Backend users can download ingestion sources [#2334](https://github.com/ManifoldScholar/manifold/pull/2334) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Implement reading groups [#2339](https://github.com/ManifoldScholar/manifold/pull/2339) ([zdavis](https://api.github.com/users/zdavis))
+-  Include JSON-LD metadata for Projects [#2332](https://github.com/ManifoldScholar/manifold/pull/2332) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Implement standalone mode [#2296](https://github.com/ManifoldScholar/manifold/pull/2296) ([zdavis](https://api.github.com/users/zdavis))
+-  Replace Manifold icon font with SVGs [#2301](https://github.com/ManifoldScholar/manifold/pull/2301) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Refactor footer for use with plugin replacement components [#2154](https://github.com/ManifoldScholar/manifold/pull/2154) ([MollyJeanB](https://api.github.com/users/MollyJeanB))
+
+### Bugs
+
+-  Improve transitioning to and from standalone [#2366](https://github.com/ManifoldScholar/manifold/pull/2366) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve handling of unparsable maker names [#2364](https://github.com/ManifoldScholar/manifold/pull/2364) ([zdavis](https://api.github.com/users/zdavis))
+-  Fix regressions in UIPanel transitions [#2361](https://github.com/ManifoldScholar/manifold/pull/2361) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix content block margins [#2358](https://github.com/ManifoldScholar/manifold/pull/2358) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Revise annotation markers [#2357](https://github.com/ManifoldScholar/manifold/pull/2357) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix react-transition-group regression in BE dialog [#2354](https://github.com/ManifoldScholar/manifold/pull/2354) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix react-transition-group style regression [#2351](https://github.com/ManifoldScholar/manifold/pull/2351) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix content block margin regression [#2330](https://github.com/ManifoldScholar/manifold/pull/2330) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix regressions in FE project hero styles [#2331](https://github.com/ManifoldScholar/manifold/pull/2331) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix implementation of radio button groups [#2328](https://github.com/ManifoldScholar/manifold/pull/2328) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Improve scroll-locking in drawers [#2319](https://github.com/ManifoldScholar/manifold/pull/2319) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Auto-fill columns for grid entity lists [#2318](https://github.com/ManifoldScholar/manifold/pull/2318) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix alignment regression in library header [#2314](https://github.com/ManifoldScholar/manifold/pull/2314) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix style issues in reader appearance drawer [#2315](https://github.com/ManifoldScholar/manifold/pull/2315) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Remove hyphenation from key text content [#2313](https://github.com/ManifoldScholar/manifold/pull/2313) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Improve Annotation.SourceSummary rendering [#2312](https://github.com/ManifoldScholar/manifold/pull/2312) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix padding between FE project content blocks [#2308](https://github.com/ManifoldScholar/manifold/pull/2308) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Don&#39;t preserve :focus-visible class in polyfill [#2311](https://github.com/ManifoldScholar/manifold/pull/2311) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Allow Elder as last name [#2272](https://github.com/ManifoldScholar/manifold/pull/2272) ([zdavis](https://api.github.com/users/zdavis))
+-  Fix text-wrapping in search filters [#2231](https://github.com/ManifoldScholar/manifold/pull/2231) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Remove incorrect BE resource filter [#2228](https://github.com/ManifoldScholar/manifold/pull/2228) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix padding collapse on BE dashboard filters [#2226](https://github.com/ManifoldScholar/manifold/pull/2226) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Show overflow of project cover placeholders [#2225](https://github.com/ManifoldScholar/manifold/pull/2225) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Restore hero styles in project serializer [#2219](https://github.com/ManifoldScholar/manifold/pull/2219) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve SR experience for search forms [#2210](https://github.com/ManifoldScholar/manifold/pull/2210) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Improve SR experience for project lists [#2206](https://github.com/ManifoldScholar/manifold/pull/2206) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix PC Manual Collection bugs [#2205](https://github.com/ManifoldScholar/manifold/pull/2205) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Correct project collection project sorting [#2165](https://github.com/ManifoldScholar/manifold/pull/2165) ([zdavis](https://api.github.com/users/zdavis))
+-  Fix incorrect icon prop value [#2197](https://github.com/ManifoldScholar/manifold/pull/2197) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix vertical alignment of list filter icon [#2196](https://github.com/ManifoldScholar/manifold/pull/2196) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix regression in mobile nav overlay [#2175](https://github.com/ManifoldScholar/manifold/pull/2175) ([dananjohnson](https://api.github.com/users/dananjohnson))
+
+### Refactored
+
+-  Minor CSS improvements to FE [#2369](https://github.com/ManifoldScholar/manifold/pull/2369) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Revise global padding for section containers [#2352](https://github.com/ManifoldScholar/manifold/pull/2352) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Revise notification styles [#2333](https://github.com/ManifoldScholar/manifold/pull/2333) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Create global ContentPlaceholder component [#2322](https://github.com/ManifoldScholar/manifold/pull/2322) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Replace remaining FE icon font instances [#2234](https://github.com/ManifoldScholar/manifold/pull/2234) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Replace labelId helper with react-uid [#2224](https://github.com/ManifoldScholar/manifold/pull/2224) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Improve usage of headings &amp; landmarks [#2200](https://github.com/ManifoldScholar/manifold/pull/2200) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Improve a11y of radio groups [#2199](https://github.com/ManifoldScholar/manifold/pull/2199) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Replace all icon font instances with SVG icons [#2113](https://github.com/ManifoldScholar/manifold/pull/2113) ([dananjohnson](https://api.github.com/users/dananjohnson))
+
+### Accessibility
+
+-  Improve color contrast for some FE buttons [#2362](https://github.com/ManifoldScholar/manifold/pull/2362) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Improve a11y of HasMany lists [#2298](https://github.com/ManifoldScholar/manifold/pull/2298) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Improve markup of file upload components [#2299](https://github.com/ManifoldScholar/manifold/pull/2299) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Improve a11y of ColorPicker &amp; KindPicker [#2297](https://github.com/ManifoldScholar/manifold/pull/2297) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Improve a11y of Utility.Toggle [#2291](https://github.com/ManifoldScholar/manifold/pull/2291) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix drawer close with keyboard [#2290](https://github.com/ManifoldScholar/manifold/pull/2290) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Revise focus styles [#2269](https://github.com/ManifoldScholar/manifold/pull/2269) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Accessibility improvements to reader, collapsed content, form controls [#2265](https://github.com/ManifoldScholar/manifold/pull/2265) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Use section element to wrap FE content blocks [#2264](https://github.com/ManifoldScholar/manifold/pull/2264) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Associate form inputs and instructions with &quot;aria-describedby&quot; [#2232](https://github.com/ManifoldScholar/manifold/pull/2232) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Improve a11y of Form.Date [#2233](https://github.com/ManifoldScholar/manifold/pull/2233) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Improve header nav accessibility [#2203](https://github.com/ManifoldScholar/manifold/pull/2203) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Revise alt-text for NoFollow graphic [#2211](https://github.com/ManifoldScholar/manifold/pull/2211) ([dananjohnson](https://api.github.com/users/dananjohnson))
+
+## [v3.0.1](https://github.com/ManifoldScholar/manifold/tree/v3.0.1) - 08/22/19
+
+### Features
+
+-  Further relax user stylesheet validation [#2254](https://github.com/ManifoldScholar/manifold/pull/2254) ([zdavis](https://api.github.com/users/zdavis))
+-  Do not exclude CSS from user stylesheets [#2245](https://github.com/ManifoldScholar/manifold/pull/2245) ([zdavis](https://api.github.com/users/zdavis))
+
+### Bugs
+
+-  Include middle names in collaborative concern [#2288](https://github.com/ManifoldScholar/manifold/pull/2288) ([zdavis](https://api.github.com/users/zdavis))
+-  Correctly set text slugs during ingestion [#2281](https://github.com/ManifoldScholar/manifold/pull/2281) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve call-to-action absolute link behavior [#2274](https://github.com/ManifoldScholar/manifold/pull/2274) ([zdavis](https://api.github.com/users/zdavis))
+-  Correctly handle hashes in manifest ingest URLs [#2243](https://github.com/ManifoldScholar/manifold/pull/2243) ([zdavis](https://api.github.com/users/zdavis))
+-  Ensure early resource notations are visible [#2230](https://github.com/ManifoldScholar/manifold/pull/2230) ([zdavis](https://api.github.com/users/zdavis))
+-  Format resource titles in BE lists [#2229](https://github.com/ManifoldScholar/manifold/pull/2229) ([zdavis](https://api.github.com/users/zdavis))
+-  Prevent CTAs with deleted texts causing exceptions [#2222](https://github.com/ManifoldScholar/manifold/pull/2222) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve p. collection and project serialization [#2202](https://github.com/ManifoldScholar/manifold/pull/2202) ([zdavis](https://api.github.com/users/zdavis))
+-  Fix hidden resource thumbnails [#2163](https://github.com/ManifoldScholar/manifold/pull/2163) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
+-  Fix IE11 content block issues [#2171](https://github.com/ManifoldScholar/manifold/pull/2171) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Handle deleted associations in content blocks [#2174](https://github.com/ManifoldScholar/manifold/pull/2174) ([zdavis](https://api.github.com/users/zdavis))
+-  Fix typo in project general form [#2160](https://github.com/ManifoldScholar/manifold/pull/2160) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Fix citations not being generated on children [#2159](https://github.com/ManifoldScholar/manifold/pull/2159) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Open relative CTA links in same tab [#2153](https://github.com/ManifoldScholar/manifold/pull/2153) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Require paperclip migrator in missed files [#2152](https://github.com/ManifoldScholar/manifold/pull/2152) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Do not show collections link of no collections exist [#2143](https://github.com/ManifoldScholar/manifold/pull/2143) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Prevent hyphens in FE resource &amp; event tiles [#2142](https://github.com/ManifoldScholar/manifold/pull/2142) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Standardize FE project list markup [#2141](https://github.com/ManifoldScholar/manifold/pull/2141) ([dananjohnson](https://api.github.com/users/dananjohnson))
+
 ## [v3.0.0](https://github.com/ManifoldScholar/manifold/tree/v3.0.0) - 04/09/19
 
 ### Features
 
 -  Generate thumbnail images for PDF resources [#2073](https://github.com/ManifoldScholar/manifold/pull/2073) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Improve performance for ingestions with many sources [#1955](https://github.com/ManifoldScholar/manifold/pull/1955) ([zdavis](https://api.github.com/users/zdavis))
+
+### Bugs
+
+-  Fix hero image credit link style [#2135](https://github.com/ManifoldScholar/manifold/pull/2135) ([dananjohnson](https://api.github.com/users/dananjohnson))
 
 ## [v3.0.0-rc.3](https://github.com/ManifoldScholar/manifold/tree/v3.0.0-rc.3) - 04/08/19
 
@@ -56,6 +161,21 @@
 -  Admins can unsubscribe a user from notifications [#1945](https://github.com/ManifoldScholar/manifold/pull/1945) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Improve &#39;restart ingestion&#39; icon [#1966](https://github.com/ManifoldScholar/manifold/pull/1966) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Improve radio button UX design [#1962](https://github.com/ManifoldScholar/manifold/pull/1962) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Add original publication date to texts meta [#1944](https://github.com/ManifoldScholar/manifold/pull/1944) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Implement project content block scaffolding [#1916](https://github.com/ManifoldScholar/manifold/pull/1916) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Make project placeholder SVG mobile responsive [#1930](https://github.com/ManifoldScholar/manifold/pull/1930) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve projects endpoint performance [#1891](https://github.com/ManifoldScholar/manifold/pull/1891) ([zdavis](https://api.github.com/users/zdavis))
+-  Support keyboard movements for action callouts [#1888](https://github.com/ManifoldScholar/manifold/pull/1888) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Upgrade Rails from 5.0 to 5.1 [#1886](https://github.com/ManifoldScholar/manifold/pull/1886) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve manifest ingestion TOC control [#1863](https://github.com/ManifoldScholar/manifold/pull/1863) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Add image credits to project hero [#1878](https://github.com/ManifoldScholar/manifold/pull/1878) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Make reader iframes responsive; support H5P embeds [#1861](https://github.com/ManifoldScholar/manifold/pull/1861) ([zdavis](https://api.github.com/users/zdavis))
+-  Enable project page customization with content blocks [#1747](https://github.com/ManifoldScholar/manifold/pull/1747) ([zdavis](https://api.github.com/users/zdavis))
+-  Allow drag/drop reording of texts, stylesheets [#1801](https://github.com/ManifoldScholar/manifold/pull/1801) ([zdavis](https://api.github.com/users/zdavis))
+-  User can configure # of visible projects on HP for a given PC [#1791](https://github.com/ManifoldScholar/manifold/pull/1791) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Add programatic project collection visibility [#1788](https://github.com/ManifoldScholar/manifold/pull/1788) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Add DatePicker form component [#1795](https://github.com/ManifoldScholar/manifold/pull/1795) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Expose plugin and style override interfaces [#1755](https://github.com/ManifoldScholar/manifold/pull/1755) ([zdavis](https://api.github.com/users/zdavis))
 
 ### Bugs
 
@@ -91,38 +211,6 @@
 -  Adjust permissions authorization [#1982](https://github.com/ManifoldScholar/manifold/pull/1982) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Fix content block HasMany form fields [#1977](https://github.com/ManifoldScholar/manifold/pull/1977) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Don&#39;t show warnings on pending blocks [#1978](https://github.com/ManifoldScholar/manifold/pull/1978) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
-
-### Refactored
-
--  Restore persistent project list states [#2111](https://github.com/ManifoldScholar/manifold/pull/2111) ([zdavis](https://api.github.com/users/zdavis))
--  Refactor DrawerHeader buttons [#2090](https://github.com/ManifoldScholar/manifold/pull/2090) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Improve ingestion UI [#2103](https://github.com/ManifoldScholar/manifold/pull/2103) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Dump STACSS and reorganize sass partials [#2070](https://github.com/ManifoldScholar/manifold/pull/2070) ([zdavis](https://api.github.com/users/zdavis))
--  Refactor activity stats to not use table [#2007](https://github.com/ManifoldScholar/manifold/pull/2007) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Refactor icons and IconComposer [#2030](https://github.com/ManifoldScholar/manifold/pull/2030) ([zdavis](https://api.github.com/users/zdavis))
-
-## [v3.0.0-beta.1](https://github.com/ManifoldScholar/manifold/tree/v3.0.0-beta.1) - 02/24/19
-
-### Features
-
--  Add original publication date to texts meta [#1944](https://github.com/ManifoldScholar/manifold/pull/1944) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Implement project content block scaffolding [#1916](https://github.com/ManifoldScholar/manifold/pull/1916) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Make project placeholder SVG mobile responsive [#1930](https://github.com/ManifoldScholar/manifold/pull/1930) ([zdavis](https://api.github.com/users/zdavis))
--  Improve projects endpoint performance [#1891](https://github.com/ManifoldScholar/manifold/pull/1891) ([zdavis](https://api.github.com/users/zdavis))
--  Support keyboard movements for action callouts [#1888](https://github.com/ManifoldScholar/manifold/pull/1888) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Upgrade Rails from 5.0 to 5.1 [#1886](https://github.com/ManifoldScholar/manifold/pull/1886) ([zdavis](https://api.github.com/users/zdavis))
--  Improve manifest ingestion TOC control [#1863](https://github.com/ManifoldScholar/manifold/pull/1863) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Add image credits to project hero [#1878](https://github.com/ManifoldScholar/manifold/pull/1878) ([dananjohnson](https://api.github.com/users/dananjohnson))
--  Make reader iframes responsive; support H5P embeds [#1861](https://github.com/ManifoldScholar/manifold/pull/1861) ([zdavis](https://api.github.com/users/zdavis))
--  Enable project page customization with content blocks [#1747](https://github.com/ManifoldScholar/manifold/pull/1747) ([zdavis](https://api.github.com/users/zdavis))
--  Allow drag/drop reording of texts, stylesheets [#1801](https://github.com/ManifoldScholar/manifold/pull/1801) ([zdavis](https://api.github.com/users/zdavis))
--  User can configure # of visible projects on HP for a given PC [#1791](https://github.com/ManifoldScholar/manifold/pull/1791) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Add programatic project collection visibility [#1788](https://github.com/ManifoldScholar/manifold/pull/1788) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Add DatePicker form component [#1795](https://github.com/ManifoldScholar/manifold/pull/1795) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Expose plugin and style override interfaces [#1755](https://github.com/ManifoldScholar/manifold/pull/1755) ([zdavis](https://api.github.com/users/zdavis))
-
-### Bugs
-
 -  Fix proptype error in Login component test [#1946](https://github.com/ManifoldScholar/manifold/pull/1946) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Exclude blank headers from Doc TOC generation [#1942](https://github.com/ManifoldScholar/manifold/pull/1942) ([zdavis](https://api.github.com/users/zdavis))
 -  Generate PDF thumbnails [#1940](https://github.com/ManifoldScholar/manifold/pull/1940) ([zdavis](https://api.github.com/users/zdavis))
@@ -130,8 +218,8 @@
 -  Fix event preventing project destruction [#1937](https://github.com/ManifoldScholar/manifold/pull/1937) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Fix OAuth sessions not setting cookie [#1932](https://github.com/ManifoldScholar/manifold/pull/1932) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Fix issue with deleted log items throwing error [#1934](https://github.com/ManifoldScholar/manifold/pull/1934) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Correct body class application on SSR [#1929](https://github.com/ManifoldScholar/manifold/pull/1929) ([zdavis](https://api.github.com/users/zdavis))
 -  Fix video thumbnail attachments not saving [#1764](https://github.com/ManifoldScholar/manifold/pull/1764) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Correct body class application on SSR [#1929](https://github.com/ManifoldScholar/manifold/pull/1929) ([zdavis](https://api.github.com/users/zdavis))
 -  Fix Reader crashing when updating notations [#1845](https://github.com/ManifoldScholar/manifold/pull/1845) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Fix OAuth login options text [#1905](https://github.com/ManifoldScholar/manifold/pull/1905) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Fix current content blocks cursor styles [#1909](https://github.com/ManifoldScholar/manifold/pull/1909) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
@@ -160,6 +248,12 @@
 
 ### Refactored
 
+-  Restore persistent project list states [#2111](https://github.com/ManifoldScholar/manifold/pull/2111) ([zdavis](https://api.github.com/users/zdavis))
+-  Refactor DrawerHeader buttons [#2090](https://github.com/ManifoldScholar/manifold/pull/2090) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Improve ingestion UI [#2103](https://github.com/ManifoldScholar/manifold/pull/2103) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Dump STACSS and reorganize sass partials [#2070](https://github.com/ManifoldScholar/manifold/pull/2070) ([zdavis](https://api.github.com/users/zdavis))
+-  Refactor activity stats to not use table [#2007](https://github.com/ManifoldScholar/manifold/pull/2007) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Refactor icons and IconComposer [#2030](https://github.com/ManifoldScholar/manifold/pull/2030) ([zdavis](https://api.github.com/users/zdavis))
 -  Make Text#toc_section an AR relationship [#1869](https://github.com/ManifoldScholar/manifold/pull/1869) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Refactor drawer headers [#1810](https://github.com/ManifoldScholar/manifold/pull/1810) ([zdavis](https://api.github.com/users/zdavis))
 -  Refactor component confirmation into HOC [#1772](https://github.com/ManifoldScholar/manifold/pull/1772) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
@@ -266,6 +360,7 @@
 -  Report file conversion during ingestion [#1628](https://github.com/ManifoldScholar/manifold/pull/1628) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Use PredictiveInput on TagList component [#1626](https://github.com/ManifoldScholar/manifold/pull/1626) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Migrate Paperclip to Shrine for attachments [#1524](https://github.com/ManifoldScholar/manifold/pull/1524) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Link URLs in comments and annotations [#1545](https://github.com/ManifoldScholar/manifold/pull/1545) ([zdavis](https://api.github.com/users/zdavis))
 -  Implement message for empty project collections [#1534](https://github.com/ManifoldScholar/manifold/pull/1534) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Projects can be grouped into collections [#1231](https://github.com/ManifoldScholar/manifold/pull/1231) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Add text section management to stylesheet edit [#1423](https://github.com/ManifoldScholar/manifold/pull/1423) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
@@ -308,7 +403,6 @@
 -  Miscellaneous CSS bug fixes [#1558](https://github.com/ManifoldScholar/manifold/pull/1558) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Fix focus appearance of close button in annotation drawer [#1550](https://github.com/ManifoldScholar/manifold/pull/1550) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Normalize appearance of search inputs [#1548](https://github.com/ManifoldScholar/manifold/pull/1548) ([dananjohnson](https://api.github.com/users/dananjohnson))
--  Link URLs in comments and annotations [#1545](https://github.com/ManifoldScholar/manifold/pull/1545) ([zdavis](https://api.github.com/users/zdavis))
 -  Handle API 502 errors in client [#1542](https://github.com/ManifoldScholar/manifold/pull/1542) ([zdavis](https://api.github.com/users/zdavis))
 -  Improve appearance of project cover button [#1541](https://github.com/ManifoldScholar/manifold/pull/1541) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Show project collections without projects [#1540](https://github.com/ManifoldScholar/manifold/pull/1540) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
@@ -665,543 +759,4 @@
 -  Correct me/relationships/favorites serializer [#806](https://github.com/ManifoldScholar/manifold/pull/806) ([zdavis](https://api.github.com/users/zdavis))
 -  Swap resource cube inline svgs for icon font [#798](https://github.com/ManifoldScholar/manifold/pull/798) ([naomiyaki](https://api.github.com/users/naomiyaki))
 -  Coerce ASCII epub body to UTF-8 during transform [#805](https://github.com/ManifoldScholar/manifold/pull/805) ([zdavis](https://api.github.com/users/zdavis))
--  Correct handling of encoded URIs in EPUBs [#797](https://github.com/ManifoldScholar/manifold/pull/797) ([zdavis](https://api.github.com/users/zdavis))## [v0.4.2](https://github.com/ManifoldScholar/manifold/tree/v0.4.2) - 03/13/2018
-
-### Bugs
-
-- EPUB Ingestion fails when a section includes an empty body tag. [\#821](https://github.com/ManifoldScholar/manifold/issues/821)
-- Updating texts with many text sections is too slow [\#802](https://github.com/ManifoldScholar/manifold/issues/802)
-- Address reingest edge case when sections have been removed. [\#829](https://github.com/ManifoldScholar/manifold/issues/829)
-
-## [v0.4.1](https://github.com/ManifoldScholar/manifold/tree/v0.4.1) - 02/14/2018
-
-### Bugs
-
-- Some texts fail to generate citations properly [\#709](https://github.com/ManifoldScholar/manifold/issues/709)
-- Backend subject list pagination does not paginate [\#769](https://github.com/ManifoldScholar/manifold/issues/769)
-- Subject API results should not be paginated [\#770](https://github.com/ManifoldScholar/manifold/issues/770)
-- Replace FactoryGirl with FactoryBot [\#779](https://github.com/ManifoldScholar/manifold/issues/779)
-- Start reading link on new text event is incorrect [\#776](https://github.com/ManifoldScholar/manifold/issues/776)
-- Maker creation sometimes fails during text ingestion [\#766](https://github.com/ManifoldScholar/manifold/issues/766)
-- Allow links in metadata markdown [\#763](https://github.com/ManifoldScholar/manifold/issues/763)
-- Address broken footnote/endnote links [\#764](https://github.com/ManifoldScholar/manifold/issues/764)
-- Manifold fails to ingest items in EPUB manifest with encoded URLs [\#795](https://github.com/ManifoldScholar/manifold/issues/795)
-- EPUB Ingestion: ASCII characters in a text section can break ingestion[\#803](https://github.com/ManifoldScholar/manifold/issues/803)
-
-## [v0.4.0](https://github.com/ManifoldScholar/manifold/tree/v0.4.0) - 01/29/2018
-
-### Enhancements
-
-- Improve management of maker records [\#754](https://github.com/ManifoldScholar/manifold/issues/754)
-- Update Paperclip gem to address CVE-2017-0889 [\#743](https://github.com/ManifoldScholar/manifold/issues/743)
-- Improve child route rendering [\#737](https://github.com/ManifoldScholar/manifold/issues/737)
-- Implement upgrade CLI task for major releases [\#734](https://github.com/ManifoldScholar/manifold/issues/734)
-- Manifold should manage ElasticSearch service in development [\#727](https://github.com/ManifoldScholar/manifold/issues/727)
-- Update redis-rails to address CVE-2017-1000248 [\#720](https://github.com/ManifoldScholar/manifold/issues/720)
-- Admin users can set google service credentials from config file [\#719](https://github.com/ManifoldScholar/manifold/issues/719)
-- Add image size guidance for hero images and other images in the Admin \> Appearance tab [\#713](https://github.com/ManifoldScholar/manifold/issues/713)
-- Support markdown in all model metadata fields [\#674](https://github.com/ManifoldScholar/manifold/issues/674)
-- Editors can fully manage twitter queries on projects [\#672](https://github.com/ManifoldScholar/manifold/issues/672)
-- Update rubyzip dependency to address CVE-2017-5946 [\#664](https://github.com/ManifoldScholar/manifold/issues/664)
-- Widespread adjustments to record metadata fields [\#649](https://github.com/ManifoldScholar/manifold/issues/649)
-- Implement full-text project text and annotation search in reader [\#644](https://github.com/ManifoldScholar/manifold/issues/644)
-- Implement "your notes" for listing and navigating between highlights and annotations [\#643](https://github.com/ManifoldScholar/manifold/issues/643)
-- Allow backend editors to manage project subjects [\#612](https://github.com/ManifoldScholar/manifold/issues/612)
-- Allow users to choose action when clicking on an annotated link [\#529](https://github.com/ManifoldScholar/manifold/issues/529)
-- Persist reader settings in user preferences [\#516](https://github.com/ManifoldScholar/manifold/issues/516)
-- Allow admins to choose a name for the sections within a text. [\#503](https://github.com/ManifoldScholar/manifold/issues/503)
-- Support interactive resources via iFrame [\#408](https://github.com/ManifoldScholar/manifold/issues/408)
-- Style \(and improve\) forgot password email [\#306](https://github.com/ManifoldScholar/manifold/issues/306)
-- Implement semantic URLs [\#275](https://github.com/ManifoldScholar/manifold/issues/275)
-
-### Bugs
-
-- External video in preview overlay is too small [\#755](https://github.com/ManifoldScholar/manifold/issues/755)
-- Correct minor CSS regressions [\#751](https://github.com/ManifoldScholar/manifold/issues/751)
-- Use drawer for backend new user [\#745](https://github.com/ManifoldScholar/manifold/issues/745)
-- Drive resource import failing [\#731](https://github.com/ManifoldScholar/manifold/issues/731)
-- Project rake tasks fail with incorrect arg call [\#730](https://github.com/ManifoldScholar/manifold/issues/730)
-- Placeholder/label mismatch on login [\#724](https://github.com/ManifoldScholar/manifold/issues/724)
-- Potential issue with maker/user relations [\#716](https://github.com/ManifoldScholar/manifold/issues/716)
-- Throw an error message when someone tries to upload a private google doc [\#715](https://github.com/ManifoldScholar/manifold/issues/715)
-- Issues with sharing text to Twitter [\#708](https://github.com/ManifoldScholar/manifold/issues/708)
-- Edit profile form puts existing values in as placeholder, not value attribute [\#701](https://github.com/ManifoldScholar/manifold/issues/701)
-- Manifold sends a sign-up email even if registration fails [\#700](https://github.com/ManifoldScholar/manifold/issues/700)
-- Opening reader menu should close reader TOC. [\#699](https://github.com/ManifoldScholar/manifold/issues/699)
-- Users should be prompted to confirm before destroying an annotation [\#698](https://github.com/ManifoldScholar/manifold/issues/698)
-- When highlighting link annotation popup buttons are separated [\#697](https://github.com/ManifoldScholar/manifold/issues/697)
-- Reader code block font-size is massive [\#692](https://github.com/ManifoldScholar/manifold/issues/692)
-- Resource card grid layout should be consistent across modern browsers [\#690](https://github.com/ManifoldScholar/manifold/issues/690)
-- Resource link grid layout \(on the project detail page\) should be consistent across modern browsers [\#689](https://github.com/ManifoldScholar/manifold/issues/689)
-- Welcome email is sent before account is created [\#684](https://github.com/ManifoldScholar/manifold/issues/684)
-- User validations are broken [\#683](https://github.com/ManifoldScholar/manifold/issues/683)
-- Adding a profile picture with an upper case attachment fails silently [\#682](https://github.com/ManifoldScholar/manifold/issues/682)
-- In IE11 selecting text should pop up annotation menu [\#678](https://github.com/ManifoldScholar/manifold/issues/678)
-- After login, successful login alert should disappear without user intervention [\#676](https://github.com/ManifoldScholar/manifold/issues/676)
-- Collections can be saved blank [\#660](https://github.com/ManifoldScholar/manifold/issues/660)
-- Correct twitter share image; use project images when texts are shared [\#658](https://github.com/ManifoldScholar/manifold/issues/658)
-- Resource detail view scrolls to bottom after load [\#656](https://github.com/ManifoldScholar/manifold/issues/656)
-- /foo/bar shows home page instead of 404 [\#654](https://github.com/ManifoldScholar/manifold/issues/654)
-- Change "metadata" label on project detail blade to "about" [\#648](https://github.com/ManifoldScholar/manifold/issues/648)
-- Correct the backend collection header icon [\#642](https://github.com/ManifoldScholar/manifold/issues/642)
-- Improve margin between label and input on all backend form fields [\#641](https://github.com/ManifoldScholar/manifold/issues/641)
-- Use settings.installationName in the new project event text [\#640](https://github.com/ManifoldScholar/manifold/issues/640)
-- Destroying a resource should destroy the associated event. [\#638](https://github.com/ManifoldScholar/manifold/issues/638)
-- Edge: Hover state artifact in annotation popup [\#637](https://github.com/ManifoldScholar/manifold/issues/637)
-- Scrolling should not occur on all route changes [\#617](https://github.com/ManifoldScholar/manifold/issues/617)
-- Weird link hover state in reader about [\#596](https://github.com/ManifoldScholar/manifold/issues/596)
-- Rendering and display inconsistencies in resource icons [\#557](https://github.com/ManifoldScholar/manifold/issues/557)
-- Address mobile style issues on user highlights/annotation [\#515](https://github.com/ManifoldScholar/manifold/issues/515)
-- Resource list item thumbnails aren't showing in Firefox & IE Edge [\#483](https://github.com/ManifoldScholar/manifold/issues/483)
-- Annotating over an inline resource leaves big gap in text [\#297](https://github.com/ManifoldScholar/manifold/issues/297)
-
-### Other
-
-- Replace calls to `renderRoutes` with `childRoutes` [\#736](https://github.com/ManifoldScholar/manifold/issues/736)
-- Improve changelog generation [\#721](https://github.com/ManifoldScholar/manifold/issues/721)
-- Refactor resource overlay classes to be generic [\#283](https://github.com/ManifoldScholar/manifold/issues/283)
-
-### Accepted Pull Requests
-
-- \[B\] Fix sizing of external videos in preview overlay [\#759](https://github.com/ManifoldScholar/manifold/pull/759) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Improvements to User/Maker [\#758](https://github.com/ManifoldScholar/manifold/pull/758) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Update project Readme [\#756](https://github.com/ManifoldScholar/manifold/pull/756) ([zdavis](https://github.com/zdavis))
-- \[B\] Fix misc. issues for v0.4.0 release [\#753](https://github.com/ManifoldScholar/manifold/pull/753) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Bug fixes and improvements prior to 0.4.0 release [\#752](https://github.com/ManifoldScholar/manifold/pull/752) ([zdavis](https://github.com/zdavis))
-- \[C\] Updates and Gemfile maintenance [\#750](https://github.com/ManifoldScholar/manifold/pull/750) ([zdavis](https://github.com/zdavis))
-- \[F\] Allow metadata values to be formatted with markdown [\#749](https://github.com/ManifoldScholar/manifold/pull/749) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Update paperclip to address CVE-2017-0889 [\#748](https://github.com/ManifoldScholar/manifold/pull/748) ([zdavis](https://github.com/zdavis))
-- \[F\] Support interactive resources via iFrame [\#747](https://github.com/ManifoldScholar/manifold/pull/747) ([zdavis](https://github.com/zdavis))
-- \[C\] Render new user route in drawer [\#746](https://github.com/ManifoldScholar/manifold/pull/746) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Update paperclip to address CVE-2017-0889 [\#744](https://github.com/ManifoldScholar/manifold/pull/744) ([zdavis](https://github.com/zdavis))
-- \[F\] Add popup menu for annotations on a link [\#742](https://github.com/ManifoldScholar/manifold/pull/742) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Add image size guide to project hero image input [\#741](https://github.com/ManifoldScholar/manifold/pull/741) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Use childRoutes instead of renderRoutes [\#740](https://github.com/ManifoldScholar/manifold/pull/740) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Fail with error if google doc is unavailable [\#739](https://github.com/ManifoldScholar/manifold/pull/739) ([zdavis](https://github.com/zdavis))
-- \[F\] Refactor child route rendering [\#735](https://github.com/ManifoldScholar/manifold/pull/735) ([zdavis](https://github.com/zdavis))
-- \[F\] Style email templates [\#733](https://github.com/ManifoldScholar/manifold/pull/733) ([naomiyaki](https://github.com/naomiyaki))
-- \[B\] Fix drive resource importing [\#732](https://github.com/ManifoldScholar/manifold/pull/732) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Fix project rake task argument references [\#729](https://github.com/ManifoldScholar/manifold/pull/729) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Include managed Elasticsearch service [\#728](https://github.com/ManifoldScholar/manifold/pull/728) ([zdavis](https://github.com/zdavis))
-- \[F\] Implement reader search [\#726](https://github.com/ManifoldScholar/manifold/pull/726) ([zdavis](https://github.com/zdavis))
-- \[C\] Add text field for google private key to backend settings [\#725](https://github.com/ManifoldScholar/manifold/pull/725) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Improve Changelog generation [\#722](https://github.com/ManifoldScholar/manifold/pull/722) ([zdavis](https://github.com/zdavis))
-- \[F\] Set Google service credentials from file [\#717](https://github.com/ManifoldScholar/manifold/pull/717) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Fixes Twitter share text; Fix incorrect Text slugs [\#712](https://github.com/ManifoldScholar/manifold/pull/712) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Add task and service to upgrade a Manifold installation [\#710](https://github.com/ManifoldScholar/manifold/pull/710) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Remove login notification [\#703](https://github.com/ManifoldScholar/manifold/pull/703) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Use values instead of placeholders in edit form [\#702](https://github.com/ManifoldScholar/manifold/pull/702) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Adjust base font-size used in stylesheet validator [\#696](https://github.com/ManifoldScholar/manifold/pull/696) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Fix typos in manifold task output [\#695](https://github.com/ManifoldScholar/manifold/pull/695) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Add backend project social page [\#694](https://github.com/ManifoldScholar/manifold/pull/694) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Address inconsistent icon sizes [\#691](https://github.com/ManifoldScholar/manifold/pull/691) ([blnkt](https://github.com/blnkt))
-- \[B\] Don't send welcome email if user validation fails [\#687](https://github.com/ManifoldScholar/manifold/pull/687) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Fix attachment extension validation [\#686](https://github.com/ManifoldScholar/manifold/pull/686) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] User validation fixes [\#685](https://github.com/ManifoldScholar/manifold/pull/685) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Update manifold CLI rake task references [\#681](https://github.com/ManifoldScholar/manifold/pull/681) ([blnkt](https://github.com/blnkt))
-- \[C\] Switch manifold tld in client allowedHosts [\#680](https://github.com/ManifoldScholar/manifold/pull/680) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Fix annotation popup bugs in ie [\#679](https://github.com/ManifoldScholar/manifold/pull/679) ([blnkt](https://github.com/blnkt))
-- \[F\] Implement updated reader control design and functionality [\#677](https://github.com/ManifoldScholar/manifold/pull/677) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Improve project, text, & resource metadata [\#673](https://github.com/ManifoldScholar/manifold/pull/673) ([zdavis](https://github.com/zdavis))
-- \[B\] Backend collection icon fixes [\#670](https://github.com/ManifoldScholar/manifold/pull/670) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Allow text section type to be changed [\#669](https://github.com/ManifoldScholar/manifold/pull/669) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Prevent scroll to top on reader route change [\#668](https://github.com/ManifoldScholar/manifold/pull/668) ([zdavis](https://github.com/zdavis))
-- \[C\] Restructure backend containers [\#667](https://github.com/ManifoldScholar/manifold/pull/667) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Update rubyzip to address CVE-2017-5946 [\#666](https://github.com/ManifoldScholar/manifold/pull/666) ([zdavis](https://github.com/zdavis))
-- \[B\] Improve Open Graph tags in multiple containers [\#663](https://github.com/ManifoldScholar/manifold/pull/663) ([zdavis](https://github.com/zdavis))
-- \[B\] Add title validation to collections [\#661](https://github.com/ManifoldScholar/manifold/pull/661) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Rename project detail metadata section label [\#659](https://github.com/ManifoldScholar/manifold/pull/659) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Make reader UI settings persistent for user [\#657](https://github.com/ManifoldScholar/manifold/pull/657) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Fully implement semantic URLs on frontend [\#655](https://github.com/ManifoldScholar/manifold/pull/655) ([zdavis](https://github.com/zdavis))
-- \[B\] Resources should destroy associated added event [\#652](https://github.com/ManifoldScholar/manifold/pull/652) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Use installation name in project created event [\#651](https://github.com/ManifoldScholar/manifold/pull/651) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Implement interface to manage/assign subjects [\#650](https://github.com/ManifoldScholar/manifold/pull/650) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Highlight "learn more..." in reader menu [\#628](https://github.com/ManifoldScholar/manifold/pull/628) ([naomiyaki](https://github.com/naomiyaki))
-
-## [v0.3.5](https://github.com/ManifoldScholar/manifold/tree/v0.3.5) - 1/26/2018
-
-### Bugs
-
-- Do not force UTF8 epub source encoding during ingestion
-
-## [v0.3.4](https://github.com/ManifoldScholar/manifold/tree/v0.3.4) - 1/6/2018
-
-### Features
-
-- Set Google service credentials from file
-
-## [v0.3.3](https://github.com/ManifoldScholar/manifold/tree/v0.3.3) - 12/28/2017
-
-### Bugs
-
-- Improve custom logo layout
-- Align project figures to grid
-
-## [v0.3.2](https://github.com/ManifoldScholar/manifold/tree/v0.3.2) - 12/06/2017
-
-### Bugs
-
-- Update redis-rails to address CVE-2017-1000248
-- Check revision before deploy
-- Restore source maps to production build
-
-## [v0.3.1](https://github.com/ManifoldScholar/manifold/tree/v0.3.1) - 11/17/2017
-
-### Bugs
-
-- Update rubyzip dependency to address CVE-2017-5946 [\#664](https://github.com/ManifoldScholar/manifold/issues/664)
-- Improve Open Graph tags in multiple containers
-- Pass path rather than URL to router on SSR
-- Adjust production log level
-
-## [v0.3.0](https://github.com/ManifoldScholar/manifold/tree/v0.3.0) - 10/13/2017
-
-### Features
-
-- Manifold supports SSL [\#631](https://github.com/ManifoldScholar/manifold/issues/631)
-- Users can remove their highlights from a text [\#618](https://github.com/ManifoldScholar/manifold/issues/618)
-- Admins can create simple content pages in Manifold [\#586](https://github.com/ManifoldScholar/manifold/issues/586)
-- Admin can manage the home page hero and text. [\#574](https://github.com/ManifoldScholar/manifold/issues/574)
-- Update reader header to match new comps [\#567](https://github.com/ManifoldScholar/manifold/issues/567)
-- Update TOC design to match latest comps [\#566](https://github.com/ManifoldScholar/manifold/issues/566)
-- Update hero layout with draft button, streamlined makers list [\#501](https://github.com/ManifoldScholar/manifold/issues/501)
-- Improve copy and style of transaction account emails [\#474](https://github.com/ManifoldScholar/manifold/issues/474)
-- Admins can name their Manifold installation [\#472](https://github.com/ManifoldScholar/manifold/issues/472)
-- Manifold settings model has sensible default settings [\#471](https://github.com/ManifoldScholar/manifold/issues/471)
-- Manifold supports the EPUB3 epub:type namespaced attribute [\#460](https://github.com/ManifoldScholar/manifold/issues/460)
-- Preliminary work allowing a user to see all their annotations of a text [\#450](https://github.com/ManifoldScholar/manifold/issues/450)
-- Admins can specify email delivery method and settings [\#440](https://github.com/ManifoldScholar/manifold/issues/440)
-- Manifold can ingest an EPUB from a URL [\#420](https://github.com/ManifoldScholar/manifold/issues/420)
-- Activity can be hidden on a project-by-project basis. [\#419](https://github.com/ManifoldScholar/manifold/issues/419)
-- React is updated to version 15.5 [\#417](https://github.com/ManifoldScholar/manifold/issues/417)
-- Backend users can create a new user [\#411](https://github.com/ManifoldScholar/manifold/issues/411)
-- Zoom is enabled for image resources [\#407](https://github.com/ManifoldScholar/manifold/issues/407)
-- Resource notations are usable on mobile devices [\#406](https://github.com/ManifoldScholar/manifold/issues/406)
-- Admins can add resource collection annotations [\#405](https://github.com/ManifoldScholar/manifold/issues/405)
-- Every annotation has a permalink [\#404](https://github.com/ManifoldScholar/manifold/issues/404)
-- Webpack is upgraded to v3. Babel is upgraded. [\#402](https://github.com/ManifoldScholar/manifold/issues/402)
-- Improve GDoc Ingestion Styles [\#388](https://github.com/ManifoldScholar/manifold/issues/388)
-- Include draft/live toggle for projects. Only admins can see projects in draft mode. [\#371](https://github.com/ManifoldScholar/manifold/issues/371)
-- Manifold has correct page titles, open graph tags; social metadata is more robust [\#345](https://github.com/ManifoldScholar/manifold/issues/345)
-
-### Bugs
-
-- If no OAUTH providers are configured, don't show the external auth message on the login screen [\#633](https://github.com/ManifoldScholar/manifold/issues/633)
-- Firefox shows router error \(on all pages?\) [\#630](https://github.com/ManifoldScholar/manifold/issues/630)
-- Prevent letter spacing CSS in reader [\#623](https://github.com/ManifoldScholar/manifold/issues/623)
-- Manifold can fail when cookie is missing. [\#621](https://github.com/ManifoldScholar/manifold/issues/621)
-- Ingestion uploader is not responding to files [\#609](https://github.com/ManifoldScholar/manifold/issues/609)
-- Only the SSR checks the cookie for an authenticated session. [\#605](https://github.com/ManifoldScholar/manifold/issues/605)
-- Regression in backend lists [\#599](https://github.com/ManifoldScholar/manifold/issues/599)
-- Reader text title and section title no longer appears in header [\#598](https://github.com/ManifoldScholar/manifold/issues/598)
-- Tighten up spacing on mobile person overlay [\#595](https://github.com/ManifoldScholar/manifold/issues/595)
-- Add spacing to the end of backend horizontal secondary menu [\#594](https://github.com/ManifoldScholar/manifold/issues/594)
-- iOS style needs to be removed from login overlay [\#593](https://github.com/ManifoldScholar/manifold/issues/593)
-- Update Texts button and table [\#592](https://github.com/ManifoldScholar/manifold/issues/592)
-- Reduce person picker UI on mobile [\#591](https://github.com/ManifoldScholar/manifold/issues/591)
-- Cover picker is a bit too crowded on iPhone 4/5 size [\#590](https://github.com/ManifoldScholar/manifold/issues/590)
-- Update backend form styles to be slightly lighter on mobile [\#589](https://github.com/ManifoldScholar/manifold/issues/589)
-- Padding issue on tablet sizes [\#585](https://github.com/ManifoldScholar/manifold/issues/585)
-- Group notation titles are not formatted [\#577](https://github.com/ManifoldScholar/manifold/issues/577)
-- Back link text wraps incorrectly on mobile [\#573](https://github.com/ManifoldScholar/manifold/issues/573)
-- Reader nav text too large on mobile [\#570](https://github.com/ManifoldScholar/manifold/issues/570)
-- Vertical alignment off on text count icons [\#564](https://github.com/ManifoldScholar/manifold/issues/564)
-- rake development:load crashes [\#562](https://github.com/ManifoldScholar/manifold/issues/562)
-- Add comment icon and header missing from resource detail comments [\#560](https://github.com/ManifoldScholar/manifold/issues/560)
-- Add "purchase version label" to backend project form. [\#559](https://github.com/ManifoldScholar/manifold/issues/559)
-- Resource collection notations are missing thumbnail if none is set. [\#558](https://github.com/ManifoldScholar/manifold/issues/558)
-- Display error in backend select inputs [\#556](https://github.com/ManifoldScholar/manifold/issues/556)
-- Backend header links should have a hover state [\#555](https://github.com/ManifoldScholar/manifold/issues/555)
-- Null date values show as Dec 31, 1969 in the backend [\#554](https://github.com/ManifoldScholar/manifold/issues/554)
-- Manifold Footer / Copyright Dates [\#553](https://github.com/ManifoldScholar/manifold/issues/553)
-- UX for ingestion is confusing [\#551](https://github.com/ManifoldScholar/manifold/issues/551)
-- Searching for projects before projects exist triggers error [\#547](https://github.com/ManifoldScholar/manifold/issues/547)
-- Correct hard coded reply count in view. [\#546](https://github.com/ManifoldScholar/manifold/issues/546)
-- Draft projects shouldn't show updated timestamp on frontend. [\#541](https://github.com/ManifoldScholar/manifold/issues/541)
-- Warning with the file upload form component [\#540](https://github.com/ManifoldScholar/manifold/issues/540)
-- Long title in resource list should be wrapped or cropped [\#539](https://github.com/ManifoldScholar/manifold/issues/539)
-- Reader footer is stacked above overlays [\#533](https://github.com/ManifoldScholar/manifold/issues/533)
-- Improve usability of backend projects list [\#531](https://github.com/ManifoldScholar/manifold/issues/531)
-- Remove "chapter" from next and previous links in reader [\#530](https://github.com/ManifoldScholar/manifold/issues/530)
-- Removing a maker's avatar in the backend does not work. [\#527](https://github.com/ManifoldScholar/manifold/issues/527)
-- Correct category footer display issues in reader. [\#526](https://github.com/ManifoldScholar/manifold/issues/526)
-- Ingestion does not correctly identify EPUB2 titles [\#523](https://github.com/ManifoldScholar/manifold/issues/523)
-- Backend project list doesn't always show correct thumbnail [\#522](https://github.com/ManifoldScholar/manifold/issues/522)
-- Malformed URIs in ingested texts breaks ingestion [\#519](https://github.com/ManifoldScholar/manifold/issues/519)
-- If no results are found, backend project search breaks [\#518](https://github.com/ManifoldScholar/manifold/issues/518)
-- Nav button redundancy on mobile layout [\#512](https://github.com/ManifoldScholar/manifold/issues/512)
-- Error on user creation [\#509](https://github.com/ManifoldScholar/manifold/issues/509)
-- Remove normal font-weight declarations from ingested texts [\#507](https://github.com/ManifoldScholar/manifold/issues/507)
-- In production, Manifold sometimes erroneously returns an auth error message [\#504](https://github.com/ManifoldScholar/manifold/issues/504)
-- Stylesheet create/edit views in backend do not show errors [\#502](https://github.com/ManifoldScholar/manifold/issues/502)
-- The path to resources from project activity cards is incorrect. [\#498](https://github.com/ManifoldScholar/manifold/issues/498)
-- When annotation drawer opens, the textarea should have focus. [\#495](https://github.com/ManifoldScholar/manifold/issues/495)
-- Webpack config not extracting CSS in production build [\#492](https://github.com/ManifoldScholar/manifold/issues/492)
-- Prevent padding on text section pagination when not showing [\#490](https://github.com/ManifoldScholar/manifold/issues/490)
-- Remove placeholder features container from settings [\#488](https://github.com/ManifoldScholar/manifold/issues/488)
-- New User form throws an error in production [\#487](https://github.com/ManifoldScholar/manifold/issues/487)
-- Resource slideshow controls don't match comps for mobile [\#482](https://github.com/ManifoldScholar/manifold/issues/482)
-- Hero BG gray on projects is incorrect [\#480](https://github.com/ManifoldScholar/manifold/issues/480)
-- EPUB ingestion not recognizing start section in V2 and V3 due to path changes [\#479](https://github.com/ManifoldScholar/manifold/issues/479)
-- Footer subject bar in reader isn't positioned correctly [\#478](https://github.com/ManifoldScholar/manifold/issues/478)
-- Ingestion strategies are not detecting table of contents [\#477](https://github.com/ManifoldScholar/manifold/issues/477)
-- Pressing return in any text field on the new user form in the backend reveals the password [\#476](https://github.com/ManifoldScholar/manifold/issues/476)
-- Edit profile view is briefly flashed after login, which shouldn't happen [\#473](https://github.com/ManifoldScholar/manifold/issues/473)
-- Start reading event link opens in new tab. It shouldn't. [\#468](https://github.com/ManifoldScholar/manifold/issues/468)
-- Ingestor spec is failing [\#465](https://github.com/ManifoldScholar/manifold/issues/465)
-- EPUB ingestion fails if text section doesn't have a name [\#464](https://github.com/ManifoldScholar/manifold/issues/464)
-- HP Projects list should be paginated [\#454](https://github.com/ManifoldScholar/manifold/issues/454)
-- When typekit is disabled, read button wraps [\#453](https://github.com/ManifoldScholar/manifold/issues/453)
-- HP Featured projects block shouldn't appear if there are no featured projects [\#452](https://github.com/ManifoldScholar/manifold/issues/452)
-- Overlap on see more projects button [\#444](https://github.com/ManifoldScholar/manifold/issues/444)
-- Checkboxes in user \(and maker?\) lists don't do anything.  [\#441](https://github.com/ManifoldScholar/manifold/issues/441)
-- Frontend dropdown styles aren't right in Firefox. [\#439](https://github.com/ManifoldScholar/manifold/issues/439)
-- Saving settings clears all but changed fields [\#438](https://github.com/ManifoldScholar/manifold/issues/438)
-- Commenting on a resource requires a reload before the comment is visible [\#435](https://github.com/ManifoldScholar/manifold/issues/435)
-- Render error in SlideshowCaption [\#433](https://github.com/ManifoldScholar/manifold/issues/433)
-- Dropdown arrows are misaligned; Browser dropdown shows [\#432](https://github.com/ManifoldScholar/manifold/issues/432)
-- Text ingestion cancel doesn't work [\#415](https://github.com/ManifoldScholar/manifold/issues/415)
-- Unfollowing a project throws an exception. [\#412](https://github.com/ManifoldScholar/manifold/issues/412)
-- GDoc Encoding Error [\#409](https://github.com/ManifoldScholar/manifold/issues/409)
-- Long titles break event layout [\#401](https://github.com/ManifoldScholar/manifold/issues/401)
-- Viewing a resource in the reader resets the scroll position. [\#381](https://github.com/ManifoldScholar/manifold/issues/381)
-- The user should be notified when there is a failed websocket connection. [\#351](https://github.com/ManifoldScholar/manifold/issues/351)
-- Highlighting near the reader fade highlights entire top portion [\#255](https://github.com/ManifoldScholar/manifold/issues/255)
-
-**Other Revisions**
-
-- Manifold CLI \(rake\) interface needs to be cleaned up [\#552](https://github.com/ManifoldScholar/manifold/issues/552)
-- Puppet manifests need some love [\#550](https://github.com/ManifoldScholar/manifold/issues/550)
-- Switch style linting to Stylelint [\#545](https://github.com/ManifoldScholar/manifold/issues/545)
-- Add tests for the frontend user create components [\#461](https://github.com/ManifoldScholar/manifold/issues/461)
-- Replace Social component with compatible version [\#418](https://github.com/ManifoldScholar/manifold/issues/418)
-- Add reader meta overlay "About this Text" [\#601](https://github.com/ManifoldScholar/manifold/issues/601)
-- Prevent API logging of base64 encoded uploads [\#528](https://github.com/ManifoldScholar/manifold/issues/528)
-- Invalid ingestion source attachments break ingestion. [\#521](https://github.com/ManifoldScholar/manifold/issues/521)
-
-### Accepted Pull Requests
-
-- \[F\] Manifold supports SSL [\#632](https://github.com/ManifoldScholar/manifold/pull/632) ([zdavis](https://github.com/zdavis))
-- \[F\] Notify user of failed websocket connection [\#616](https://github.com/ManifoldScholar/manifold/pull/616) ([zdavis](https://github.com/zdavis))
-- \[B\] Correct regresion in ingestion uploading [\#614](https://github.com/ManifoldScholar/manifold/pull/614) ([zdavis](https://github.com/zdavis))
-- \[B\] Fix project sorting in two places [\#613](https://github.com/ManifoldScholar/manifold/pull/613) ([zdavis](https://github.com/zdavis))
-- \[B\] Improve ingestion UX [\#608](https://github.com/ManifoldScholar/manifold/pull/608) ([zdavis](https://github.com/zdavis))
-- \[B\] Correct session restoration when SSR is missing. [\#606](https://github.com/ManifoldScholar/manifold/pull/606) ([zdavis](https://github.com/zdavis))
-- \[F\] Improve feature layout capabilities [\#602](https://github.com/ManifoldScholar/manifold/pull/602) ([zdavis](https://github.com/zdavis))
-- \[C\] Refactor client script organization; deployment [\#600](https://github.com/ManifoldScholar/manifold/pull/600) ([zdavis](https://github.com/zdavis))
-- \[C\] Replace SCSS-Lint with Stylelint [\#597](https://github.com/ManifoldScholar/manifold/pull/597) ([zdavis](https://github.com/zdavis))
-- \[F\] Admins can manage page and feature content [\#588](https://github.com/ManifoldScholar/manifold/pull/588) ([zdavis](https://github.com/zdavis))
-- \[C\] Reorganize rake tasks; move cap tasks [\#569](https://github.com/ManifoldScholar/manifold/pull/569) ([zdavis](https://github.com/zdavis))
-- \[F\] Improve and refactor Node client servers. [\#544](https://github.com/ManifoldScholar/manifold/pull/544) ([zdavis](https://github.com/zdavis))
-- \[F\] EPUB Ingestion bugfixes and improvements [\#524](https://github.com/ManifoldScholar/manifold/pull/524) ([zdavis](https://github.com/zdavis))
-- \[B\] Strip normal font weights during ingestion [\#508](https://github.com/ManifoldScholar/manifold/pull/508) ([zdavis](https://github.com/zdavis))
-- \[B\] Correct event urls [\#500](https://github.com/ManifoldScholar/manifold/pull/500) ([zdavis](https://github.com/zdavis))
-- \[F\] List all highlights and annotations for a given text [\#497](https://github.com/ManifoldScholar/manifold/pull/497) ([zdavis](https://github.com/zdavis))
-- \[B\] Extract styles to css file in prod build [\#493](https://github.com/ManifoldScholar/manifold/pull/493) ([zdavis](https://github.com/zdavis))
-- \[C\] Adjust deployment approach [\#486](https://github.com/ManifoldScholar/manifold/pull/486) ([zdavis](https://github.com/zdavis))
-- \[B\] Correct ingestion regressions [\#481](https://github.com/ManifoldScholar/manifold/pull/481) ([zdavis](https://github.com/zdavis))
-- \[B\] Squish TextSection title in epub ingestion [\#446](https://github.com/ManifoldScholar/manifold/pull/446) ([zdavis](https://github.com/zdavis))
-- \[B\] Fix SSR fetchData regression [\#436](https://github.com/ManifoldScholar/manifold/pull/436) ([zdavis](https://github.com/zdavis))
-- \[B\] Correct ingestion cancel button behavior [\#431](https://github.com/ManifoldScholar/manifold/pull/431) ([zdavis](https://github.com/zdavis))
-- \[C\] Add prettier; update eslint; lint all the things [\#429](https://github.com/ManifoldScholar/manifold/pull/429) ([zdavis](https://github.com/zdavis))
-- \[C\] Speed up client tests on Travis [\#428](https://github.com/ManifoldScholar/manifold/pull/428) ([zdavis](https://github.com/zdavis))
-- \[F\] Update Webpack and Babel; improve client tests [\#421](https://github.com/ManifoldScholar/manifold/pull/421) ([zdavis](https://github.com/zdavis))
-- \[F\] Admins can create new user accounts [\#413](https://github.com/ManifoldScholar/manifold/pull/413) ([SMaxOwok](https://github.com/SMaxOwok))
-
-## [v0.2.0](https://github.com/ManifoldScholar/manifold/tree/v0.2.0) - 06/20/2017
-
-### Features
-
-- All ingestion strategies can support a .zip or a directory [\#398](https://github.com/ManifoldScholar/manifold/issues/398)
-- Backend users can edit text stylesheets [\#367](https://github.com/ManifoldScholar/manifold/issues/367)
-- Manifold can ingest a single HTML file as a text [\#360](https://github.com/ManifoldScholar/manifold/issues/360)
-- Manifold supports Node 6.10.x [\#343](https://github.com/ManifoldScholar/manifold/issues/343)
-- Render a consistently styled confirmation box when leaving unsaved forms [\#309](https://github.com/ManifoldScholar/manifold/issues/309)
-- Add keyboard inputs to all modal dialogs [\#302](https://github.com/ManifoldScholar/manifold/issues/302)
-- Backend users can create, update, edit, and delete resource collections [\#281](https://github.com/ManifoldScholar/manifold/issues/281)
-- Youtube and Vimeo resources import thumbnails from providers [\#278](https://github.com/ManifoldScholar/manifold/issues/278)
-- React-router updated from 2.x to 4.x [\#276](https://github.com/ManifoldScholar/manifold/issues/276)
-- Manifold renders sensible fallback fonts when Typekit is not enabled [\#274](https://github.com/ManifoldScholar/manifold/issues/274)
-- Backend text ingestion user interface is more user friendly [\#273](https://github.com/ManifoldScholar/manifold/issues/273)
-- Texts can be re-ingested [\#272](https://github.com/ManifoldScholar/manifold/issues/272)
-- Readers can comment on resources [\#271](https://github.com/ManifoldScholar/manifold/issues/271)
-- Backend users can configure a generic project avatar or upload a thumbnail [\#270](https://github.com/ManifoldScholar/manifold/issues/270)
-- Readers can generate a citation \(MLA, APA, Chicago, etc.\) for the selected passage [\#269](https://github.com/ManifoldScholar/manifold/issues/269)
-- Manifold utilizes Postgres JSONB field for storing text section content [\#258](https://github.com/ManifoldScholar/manifold/issues/258)
-- Installation instructions are included in manifold/manifold-docs [\#245](https://github.com/ManifoldScholar/manifold/issues/245)
-
-### Bugs
-
-- Markdown ingestion fails if there's no stylesheet [\#399](https://github.com/ManifoldScholar/manifold/issues/399)
-- HTML ingestion fails if there is no \<style\> tag in the document head. [\#397](https://github.com/ManifoldScholar/manifold/issues/397)
-- If an API request triggers a fatal error \(500 or 404\), client app should return the correct status code. [\#396](https://github.com/ManifoldScholar/manifold/issues/396)
-- Following page crashes when not logged in [\#391](https://github.com/ManifoldScholar/manifold/issues/391)
-- Link to resource detail from activity feed is incorrect and 404s [\#380](https://github.com/ManifoldScholar/manifold/issues/380)
-- Deleting a resource should trigger deletion of associated resource annotations [\#379](https://github.com/ManifoldScholar/manifold/issues/379)
-- Project thumbnail is stretched on frontend [\#378](https://github.com/ManifoldScholar/manifold/issues/378)
-- Removing text should destroy "TEXT\_CREATED" event [\#374](https://github.com/ManifoldScholar/manifold/issues/374)
-- Removing a resource annotation doesn't remove it from margin until page reload. [\#373](https://github.com/ManifoldScholar/manifold/issues/373)
-- Missing margin in backend project detail form [\#370](https://github.com/ManifoldScholar/manifold/issues/370)
-- Project avatar thumbnail field is missing margin [\#369](https://github.com/ManifoldScholar/manifold/issues/369)
-- Text in google doc ingestion is too small and not responsive [\#368](https://github.com/ManifoldScholar/manifold/issues/368)
-- Manifold reader appears to apply default paragraph margin of 0 [\#366](https://github.com/ManifoldScholar/manifold/issues/366)
-- Press logo doesn't show in backend after its set. [\#365](https://github.com/ManifoldScholar/manifold/issues/365)
-- Metadata header on project page should not appear if a project has no metadata. [\#364](https://github.com/ManifoldScholar/manifold/issues/364)
-- Unable to update text title in backend [\#362](https://github.com/ManifoldScholar/manifold/issues/362)
-- SSR mismatch when enabling download link in Slide.Caption [\#354](https://github.com/ManifoldScholar/manifold/issues/354)
-- Empty collections slideshow should be adjusted or hidden [\#353](https://github.com/ManifoldScholar/manifold/issues/353)
-- Inconsistent scale of social icons on project hero [\#341](https://github.com/ManifoldScholar/manifold/issues/341)
-- Ingestion builder does not remove text sections during reingestion [\#338](https://github.com/ManifoldScholar/manifold/issues/338)
-- ProjectDetail.Texts reordering isn't working [\#336](https://github.com/ManifoldScholar/manifold/issues/336)
-- Project images are converted to jpegs, don't allow transparent backgrounds [\#335](https://github.com/ManifoldScholar/manifold/issues/335)
-- Move annotation and resource fetching to refactored Section container [\#331](https://github.com/ManifoldScholar/manifold/issues/331)
-- Improve responsive behavior of backend header delete/preview buttons [\#327](https://github.com/ManifoldScholar/manifold/issues/327)
-- Improve responsive behavior of backend date field [\#326](https://github.com/ManifoldScholar/manifold/issues/326)
-- Entering an invalid project or text URL should 404 [\#319](https://github.com/ManifoldScholar/manifold/issues/319)
-- Updating metadata on texts \(in backend\) doesn't save [\#317](https://github.com/ManifoldScholar/manifold/issues/317)
-- Managing contributors on texts seems not to work. [\#316](https://github.com/ManifoldScholar/manifold/issues/316)
-- Style issues on users list [\#313](https://github.com/ManifoldScholar/manifold/issues/313)
-- Investigate why Manifold can't ingest this google doc [\#311](https://github.com/ManifoldScholar/manifold/issues/311)
-- Typekit fonts should load \(if configured\) when SSR is absent [\#310](https://github.com/ManifoldScholar/manifold/issues/310)
-- Footer text nav has incorrect top margin [\#308](https://github.com/ManifoldScholar/manifold/issues/308)
-- Tags in dropdowns should be sorted alphabetically [\#307](https://github.com/ManifoldScholar/manifold/issues/307)
-- Component FetchData methods should not be triggered by URL hash changes [\#304](https://github.com/ManifoldScholar/manifold/issues/304)
-- Vertical alignment of mobile backend secondary nav is off by a few pixels [\#303](https://github.com/ManifoldScholar/manifold/issues/303)
-- Model filter loses scope after validating paginated results [\#299](https://github.com/ManifoldScholar/manifold/issues/299)
-- Variance in backend resource icon size [\#294](https://github.com/ManifoldScholar/manifold/issues/294)
-- Backend project nav clips on smaller screens [\#293](https://github.com/ManifoldScholar/manifold/issues/293)
-- Modal dialog buttons are missing a hover state [\#291](https://github.com/ManifoldScholar/manifold/issues/291)
-- Changing pages in resources list breaks filters [\#288](https://github.com/ManifoldScholar/manifold/issues/288)
-- Collection resource count shows all resources in project [\#287](https://github.com/ManifoldScholar/manifold/issues/287)
-- Visibility nav overlaps TOC in reader \(on mobile screen\) [\#284](https://github.com/ManifoldScholar/manifold/issues/284)
-- Form upload component does not remove attachment [\#266](https://github.com/ManifoldScholar/manifold/issues/266)
-- Improve scroll behavior on route change [\#264](https://github.com/ManifoldScholar/manifold/issues/264)
-- Filtering resource collections doesn't update URL params [\#257](https://github.com/ManifoldScholar/manifold/issues/257)
-- Resource preview doesn't update when resource cube is highlighted in Firefox [\#256](https://github.com/ManifoldScholar/manifold/issues/256)
-- Remove excess left margin in backend entity header [\#254](https://github.com/ManifoldScholar/manifold/issues/254)
-- Add &rel=0 to Youtube video URLs to prevent related videos from displaying [\#253](https://github.com/ManifoldScholar/manifold/issues/253)
-- Marginal resource thumbnails aren't displaying until hovering over the icon [\#252](https://github.com/ManifoldScholar/manifold/issues/252)
-- Backend resource search input submit does not preventDefault [\#251](https://github.com/ManifoldScholar/manifold/issues/251)
-- Issues parsing Manifold-Docs TOC [\#248](https://github.com/ManifoldScholar/manifold/issues/248)
-- Ingesting Markdown Files fails if the sources include a zero k file. [\#247](https://github.com/ManifoldScholar/manifold/issues/247)
-- CSS Validator throws an exception with invalid CSS [\#246](https://github.com/ManifoldScholar/manifold/issues/246)
-
-**Accepted Pull Requests**
-
-- \[F\] Refactor and improve ingestion; add specs [\#400](https://github.com/ManifoldScholar/manifold/pull/400) ([zdavis](https://github.com/zdavis))
-- \[F\] Backend users can manage text stylesheets [\#395](https://github.com/ManifoldScholar/manifold/pull/395) ([zdavis](https://github.com/zdavis))
-- \[B\] Make followed projects into a component [\#394](https://github.com/ManifoldScholar/manifold/pull/394) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Correct ProjectDetailGeneral test [\#386](https://github.com/ManifoldScholar/manifold/pull/386) ([zdavis](https://github.com/zdavis))
-- \[B\] Fix missing margin in BackendProjectDetail form [\#377](https://github.com/ManifoldScholar/manifold/pull/377) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Fix Ruby linting issues [\#375](https://github.com/ManifoldScholar/manifold/pull/375) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Allow text title to be set in backend [\#363](https://github.com/ManifoldScholar/manifold/pull/363) ([zdavis](https://github.com/zdavis))
-- \[F\] Add HTML ingestion strategy [\#361](https://github.com/ManifoldScholar/manifold/pull/361) ([zdavis](https://github.com/zdavis))
-- \[B\] Makes date form field responsive [\#359](https://github.com/ManifoldScholar/manifold/pull/359) ([blnkt](https://github.com/blnkt))
-- \[C\] Improve react-server console messages [\#358](https://github.com/ManifoldScholar/manifold/pull/358) ([zdavis](https://github.com/zdavis))
-- \[B\] Destroy stale text sections on reingestion [\#357](https://github.com/ManifoldScholar/manifold/pull/357) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Enable download link and fix SSR mismatch [\#356](https://github.com/ManifoldScholar/manifold/pull/356) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Add fallback fonts [\#350](https://github.com/ManifoldScholar/manifold/pull/350) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Fix issue with project text position not updating [\#349](https://github.com/ManifoldScholar/manifold/pull/349) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Enable keyboard controls for modals [\#348](https://github.com/ManifoldScholar/manifold/pull/348) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Fix manifold attachments to preserve transparency [\#347](https://github.com/ManifoldScholar/manifold/pull/347) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Add snapshot tests for container components [\#346](https://github.com/ManifoldScholar/manifold/pull/346) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Upgrade Node to v6.10.3 [\#344](https://github.com/ManifoldScholar/manifold/pull/344) ([zdavis](https://github.com/zdavis))
-- \[B\] Fix social icon sizing on project detail hero [\#342](https://github.com/ManifoldScholar/manifold/pull/342) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Footer text nav has incorrect top margin [\#340](https://github.com/ManifoldScholar/manifold/pull/340) ([naomiyaki](https://github.com/naomiyaki))
-- \[F\] Improve ingestion UX; allow text reingestion [\#339](https://github.com/ManifoldScholar/manifold/pull/339) ([zdavis](https://github.com/zdavis))
-- \[B\] Fixes issue with a text's contributors/authors not updating [\#337](https://github.com/ManifoldScholar/manifold/pull/337) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Add project avatar selector to backend project view [\#334](https://github.com/ManifoldScholar/manifold/pull/334) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Correct firefox resource icon hover in FF [\#333](https://github.com/ManifoldScholar/manifold/pull/333) ([zdavis](https://github.com/zdavis))
-- \[B\] Correct router refactor annotation regression [\#332](https://github.com/ManifoldScholar/manifold/pull/332) ([zdavis](https://github.com/zdavis))
-- \[F\] Implement reader passage citation generator [\#330](https://github.com/ManifoldScholar/manifold/pull/330) ([zdavis](https://github.com/zdavis))
-- \[B\] Move reader visibility to footer on mobile [\#324](https://github.com/ManifoldScholar/manifold/pull/324) ([naomiyaki](https://github.com/naomiyaki))
-- \[B\] Make BE secondary nav scrollable [\#323](https://github.com/ManifoldScholar/manifold/pull/323) ([naomiyaki](https://github.com/naomiyaki))
-- \[B\] Bump active background on BE list to the right [\#322](https://github.com/ManifoldScholar/manifold/pull/322) ([naomiyaki](https://github.com/naomiyaki))
-- \[B\] Remove generic \<span\> styles in entity header [\#321](https://github.com/ManifoldScholar/manifold/pull/321) ([naomiyaki](https://github.com/naomiyaki))
-- \[B\] Fix alignment in backend secondary nav [\#320](https://github.com/ManifoldScholar/manifold/pull/320) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Add hover states to modal buttons [\#318](https://github.com/ManifoldScholar/manifold/pull/318) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Fix variance in backend list icon size [\#315](https://github.com/ManifoldScholar/manifold/pull/315) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Sort resource tags alphabetically [\#314](https://github.com/ManifoldScholar/manifold/pull/314) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Ensure valid UTF-8 encoding for google doc ingestion [\#312](https://github.com/ManifoldScholar/manifold/pull/312) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Add tests for components [\#305](https://github.com/ManifoldScholar/manifold/pull/305) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Maintain scope for paginated result sets [\#301](https://github.com/ManifoldScholar/manifold/pull/301) ([zdavis](https://github.com/zdavis))
-- \[F\] Implement comments on resource detail [\#296](https://github.com/ManifoldScholar/manifold/pull/296) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Add job to fetch external video thumbnails [\#295](https://github.com/ManifoldScholar/manifold/pull/295) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Marginal resource thumbnails aren't displaying until hovering over the icon [\#292](https://github.com/ManifoldScholar/manifold/pull/292) ([zdavis](https://github.com/zdavis))
-- \[B\] Fix resource count for collections [\#290](https://github.com/ManifoldScholar/manifold/pull/290) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Fix resource pagination losing filters [\#289](https://github.com/ManifoldScholar/manifold/pull/289) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[C\] Merge development fixes to master [\#279](https://github.com/ManifoldScholar/manifold/pull/279) ([zdavis](https://github.com/zdavis))
-- \[B\] Correct attachment upload removal behavior [\#268](https://github.com/ManifoldScholar/manifold/pull/268) ([zdavis](https://github.com/zdavis))
-- \[F\] Append collection resource filters as url params [\#265](https://github.com/ManifoldScholar/manifold/pull/265) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Fix ingestion of serialized body nodes [\#263](https://github.com/ManifoldScholar/manifold/pull/263) ([scryptmouse](https://github.com/scryptmouse))
-- \[B\] Don't show related videos in youtube player [\#262](https://github.com/ManifoldScholar/manifold/pull/262) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Convert `TextSection\#body\_json` to JSONB [\#261](https://github.com/ManifoldScholar/manifold/pull/261) ([scryptmouse](https://github.com/scryptmouse))
-- \[F\] Improve CSS Validator parsing [\#260](https://github.com/ManifoldScholar/manifold/pull/260) ([zdavis](https://github.com/zdavis))
-- \[F\] Minor Markdown ingestion improvements [\#259](https://github.com/ManifoldScholar/manifold/pull/259) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Update project README [\#250](https://github.com/ManifoldScholar/manifold/pull/250) ([zdavis](https://github.com/zdavis))
-- \[F\] Update Project README [\#249](https://github.com/ManifoldScholar/manifold/pull/249) ([zdavis](https://github.com/zdavis))
-- \[F\] Add toggleable filters to backend search [\#232](https://github.com/ManifoldScholar/manifold/pull/232) ([SMaxOwok](https://github.com/SMaxOwok))
-
-## [v0.1.3](https://github.com/ManifoldScholar/manifold/tree/v0.1.3) - 04/13/2017
-
-### Bugs
-
-- Recent event CSS changes broke mobile event layout [\#241](https://github.com/ManifoldScholar/manifold/issues/241)
-
-### Other Revisions
-
-- Missing Favicon in production env. [\#242](https://github.com/ManifoldScholar/manifold/issues/242)
-
-### Accepted Pull Requests
-
-- \[B\] Fix events list responsive regressions [\#244](https://github.com/ManifoldScholar/manifold/pull/244) ([naomiyaki](https://github.com/naomiyaki))
-- \[B\] Add root dir detection in Gitbook ingestion [\#243](https://github.com/ManifoldScholar/manifold/pull/243) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Add support for OAuth authentication [\#208](https://github.com/ManifoldScholar/manifold/pull/208) ([scryptmouse](https://github.com/scryptmouse))
-
-## [v0.1.2](https://github.com/ManifoldScholar/manifold/tree/v0.1.2) - 04/08/2017
-
-### Features
-
-- Editors can manage project events in the backend [\#285](https://github.com/ManifoldScholar/manifold/issues/285)
-
-### Bugs
-
-- Night mode renders user links as white in the annotation drawer [\#226](https://github.com/ManifoldScholar/manifold/issues/226)
-
-### Accepted Pull Requests
-
-- \[F\]  Editors can manage project events in the backend [\#286](https://github.com/ManifoldScholar/manifold/pull/286) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Fix upload display in FF/Safari [\#240](https://github.com/ManifoldScholar/manifold/pull/240) ([naomiyaki](https://github.com/naomiyaki))
-- \[B\] Fix Statistics caching / fetching [\#239](https://github.com/ManifoldScholar/manifold/pull/239) ([scryptmouse](https://github.com/scryptmouse))
-- \[B\] Fix popup position in Firefox [\#238](https://github.com/ManifoldScholar/manifold/pull/238) ([naomiyaki](https://github.com/naomiyaki))
-- \[B\] Remove text transition on resource previews [\#237](https://github.com/ManifoldScholar/manifold/pull/237) ([naomiyaki](https://github.com/naomiyaki))
-- \[C\] Add Changelog to project [\#236](https://github.com/ManifoldScholar/manifold/pull/236) ([zdavis](https://github.com/zdavis))
-- \[B\] Fix backend drawer scroll-to-bottom [\#235](https://github.com/ManifoldScholar/manifold/pull/235) ([naomiyaki](https://github.com/naomiyaki))
-- \[B\] Fix mismatched resource icons [\#234](https://github.com/ManifoldScholar/manifold/pull/234) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Address lingering resource sub-kind issues [\#233](https://github.com/ManifoldScholar/manifold/pull/233) ([SMaxOwok](https://github.com/SMaxOwok))
-
-## [v0.1.1](https://github.com/ManifoldScholar/manifold/tree/v0.1.1) - 04/06/2017
-
-### Features
-
-- Resource card tags should link to filtered resource list [\#572](https://github.com/ManifoldScholar/manifold/issues/572)
-
-### Bugs
-
-- The toggle on the light and dark schemes on touch displays requires two taps [\#225](https://github.com/ManifoldScholar/manifold/issues/225)
-
-### Accepted Pull Requests
-
-- \[F\] Upgrade react-router to v4; refactor fetchData [\#329](https://github.com/ManifoldScholar/manifold/pull/329) ([zdavis](https://github.com/zdavis))
-- \[F\] Allow admin to change a user's role [\#231](https://github.com/ManifoldScholar/manifold/pull/231) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Reset default text color in dark reading mode [\#230](https://github.com/ManifoldScholar/manifold/pull/230) ([naomiyaki](https://github.com/naomiyaki))
-- \[B\] Fix BG color on highlighted resource markers [\#222](https://github.com/ManifoldScholar/manifold/pull/222) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Only show FE mobile nav when logged in [\#221](https://github.com/ManifoldScholar/manifold/pull/221) ([naomiyaki](https://github.com/naomiyaki))
-- \[B\] Correct pagination, slideshow nav, and BE form [\#220](https://github.com/ManifoldScholar/manifold/pull/220) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Store formatted attributes in Redis [\#219](https://github.com/ManifoldScholar/manifold/pull/219) ([scryptmouse](https://github.com/scryptmouse))
-- \[F\] Improve project event list functionality [\#218](https://github.com/ManifoldScholar/manifold/pull/218) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[F\] Add sub\_kind property to resources [\#204](https://github.com/ManifoldScholar/manifold/pull/204) ([SMaxOwok](https://github.com/SMaxOwok))
-
-## [v0.1.0](https://github.com/ManifoldScholar/manifold/tree/v0.1.0) - 2017-04-04
-
-Initial Release: A Manifold is Born!
+-  Correct handling of encoded URIs in EPUBs [#797](https://github.com/ManifoldScholar/manifold/pull/797) ([zdavis](https://api.github.com/users/zdavis))
