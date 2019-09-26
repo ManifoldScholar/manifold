@@ -203,10 +203,12 @@ class ReadingGroupsDetailContainer extends Component {
             </ContentPlaceholder.Title>
             <ContentPlaceholder.Body>
               <p>
-                Consider removing the text or member filter above to see more
-                annotations.
+                {this.isFiltered
+                  ? "Consider removing the text or member filter above to see more annotations."
+                  : "While reading, you can associate a new or existing annotation with this group."}
               </p>
             </ContentPlaceholder.Body>
+            {!this.isFiltered && <ContentPlaceholder.Actions />}
           </ContentPlaceholder.Wrapper>
         )}
       </>

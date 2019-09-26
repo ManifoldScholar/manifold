@@ -107,7 +107,7 @@
     }
   }
 
-  &__ext-link-wrapper {
+  &__ext-link-wrapper:not(:only-child) {
     margin-top: 40px;
   }
 
