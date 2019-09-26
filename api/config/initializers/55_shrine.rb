@@ -11,7 +11,7 @@ Shrine.storages[:tus] =
   if Rails.env.test?
     Shrine::Storage::Memory.new
   else
-    Shrine::Storage::Tus.new(tus_storage: Tus::Server.opts[:storage])
+    Shrine::Storage::FileSystem.new("data")
   end
 
 Shrine.plugin :activerecord
