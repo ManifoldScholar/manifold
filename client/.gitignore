@@ -1,7 +1,6 @@
 *.iml
 .idea/
 node_modules/
-dist
 webpack-assets.json
 webpack-stats.json
 npm-debug.log
@@ -10,3 +9,6 @@ tmp/*
 !tmp/.gitkeep
 !tmp/sockets/
 !tmp/sockets/.gitkeep
+
+dist/manifold/www/browser.config.js
+dist/manifold/ssr/ssr.config.js
