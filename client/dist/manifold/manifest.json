@@ -1,0 +1,22 @@
+{
+  "assetsByChunkName": {
+    "ace-editor": [
+      "build/chunk-ace-editor-998c61b761fcf721d9a1.js",
+      "build/chunk-ace-editor-998c61b761fcf721d9a1.js.map"
+    ],
+    "build/manifold-client-browser": [
+      "build/manifold-client-browser-998c61b761fcf721d9a1.css",
+      "build/manifold-client-browser-998c61b761fcf721d9a1.js",
+      "build/manifold-client-browser-998c61b761fcf721d9a1.css.map",
+      "build/manifold-client-browser-998c61b761fcf721d9a1.js.map"
+    ],
+    "vendors~ace-editor": [
+      "build/chunk-vendors~ace-editor-998c61b761fcf721d9a1.js",
+      "build/chunk-vendors~ace-editor-998c61b761fcf721d9a1.js.map"
+    ],
+    "vendors~autolinker": [
+      "build/chunk-vendors~autolinker-998c61b761fcf721d9a1.js",
+      "build/chunk-vendors~autolinker-998c61b761fcf721d9a1.js.map"
+    ]
+  }
+}
