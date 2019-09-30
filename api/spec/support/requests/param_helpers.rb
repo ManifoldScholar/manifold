@@ -8,6 +8,10 @@ RSpec.shared_context "param helpers" do
     json_structure(attributes: attributes)
   end
 
+  def json_structure_for(model)
+    json_for(model)
+  end
+
   def json_structure(attributes: {}, relationships: {}, meta: {})
     {
       data: {
