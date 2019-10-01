@@ -12,6 +12,7 @@ require_relative 'swagger_definitions/me'
 require_relative 'swagger_definitions/pages'
 require_relative 'swagger_definitions/projects'
 require_relative 'swagger_definitions/project_collections'
+require_relative 'swagger_definitions/resources'
 require_relative 'swagger_definitions/resource_collections'
 require_relative 'swagger_definitions/subjects'
 require_relative 'swagger_definitions/tags'
@@ -132,7 +133,10 @@ RSpec.configure do |config|
         ProjectCollectionRequestCreate: ProjectCollections.request_create,
         ProjectCollectionRequestUpdate: ProjectCollections.request_update,
 
-        ResourceCollectionsResponse: Type.paginated( ResourceCollections.response ),
+        ResourceResponse: Resources.response_full,
+        ResourceRequestUpdate: Resources.request_update,
+        ResourcesResponse: Type.paginated( Resources.response ),
+
         ResourceCollectionResponse: ResourceCollections.response,
         ResourceCollectionsResponse: ResourceCollections.get_models,
         ResourceCollectionRequestCreate: ResourceCollections.request_create,
