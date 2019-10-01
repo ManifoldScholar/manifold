@@ -1,17 +1,23 @@
-require "rails_helper"
+require "swagger_helper"
 
 RSpec.describe "Tag API", type: :request do
+
+  model_name_plural = 'tags'
+  response_schema_all = { '$ref' => '#/definitions/TagsResponse' }
 
   include_context("authenticated request")
   include_context("param helpers")
 
   before(:each) { 5.times { FactoryBot.create(:tag, name: Faker::Creature::Dog.unique.breed) } }
 
-  describe "responds with a list of tags" do
-    describe "the response" do
-      it "has a 200 status code" do
-        get api_v1_tags_path
-        expect(response).to have_http_status(200)
+  path "/#{model_name_plural}" do
+    get I18n.t('swagger.get.all.description', type: model_name_plural) do
+      produces 'application/json'
+      tags model_name_plural
+
+      response '200', I18n.t('swagger.get.all.200', type: model_name_plural) do
+        schema response_schema_all
+        run_test!
       end
     end
   end

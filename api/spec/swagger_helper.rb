@@ -14,6 +14,7 @@ require_relative 'swagger_definitions/projects'
 require_relative 'swagger_definitions/project_collections'
 require_relative 'swagger_definitions/resource_collections'
 require_relative 'swagger_definitions/subjects'
+require_relative 'swagger_definitions/tags'
 require_relative 'swagger_definitions/texts'
 require_relative 'swagger_definitions/users'
 
@@ -141,6 +142,8 @@ RSpec.configure do |config|
         SubjectsResponse: Type.paginated( Subjects.response ),
         SubjectRequestCreate: Subjects.request_create,
         SubjectRequestUpdate: Subjects.request_update,
+
+        TagsResponse: Tags.responses,
 
         TextResponse: Texts.response,
         TextResponseFull: Texts.response_full,
