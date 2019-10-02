@@ -147,7 +147,8 @@ Array [
               <div
                 className="event-tile"
                 onClick={[Function]}
-                role="link"
+                role={null}
+                tabIndex={null}
               >
                 <div
                   className="event-tile__inner"
@@ -227,7 +228,8 @@ Array [
               <div
                 className="event-tile"
                 onClick={[Function]}
-                role="link"
+                role={null}
+                tabIndex={null}
               >
                 <div
                   className="event-tile__inner"
