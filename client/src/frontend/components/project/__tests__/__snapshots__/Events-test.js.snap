@@ -49,6 +49,7 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
               className="event-tile event-tile--linked"
               onClick={[Function]}
               role="link"
+              tabIndex="0"
             >
               <div
                 className="event-tile__inner"
@@ -99,6 +100,7 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
               className="event-tile event-tile--linked"
               onClick={[Function]}
               role="link"
+              tabIndex="0"
             >
               <div
                 className="event-tile__inner"

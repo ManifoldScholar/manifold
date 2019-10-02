@@ -35,19 +35,19 @@ export class EventTile extends Component {
     itemClass: ""
   };
 
+  get hasLink() {
+    const { linkHref, hideLink } = this.props;
+    return !hideLink && linkHref;
+  }
+
   handleTileClick = event => {
     if (event.target.href) return;
-    if (!this.hasLink()) return;
+    if (!this.hasLink) return;
     const { linkHref, linkTarget } = this.props;
     if (linkTarget !== "_self" && window)
       return window.open(linkHref, "_blank");
     if (this.props.history) this.props.history.push(linkHref);
   };
-
-  hasLink() {
-    const { linkHref, hideLink } = this.props;
-    return !hideLink && linkHref;
-  }
 
   render() {
     if (!this.props.visible) return null;
@@ -66,12 +66,17 @@ export class EventTile extends Component {
 
     const baseClass = "event-tile";
     const tileClass = classNames(baseClass, this.props.tileClass, {
-      [`${baseClass}--linked`]: this.hasLink()
+      [`${baseClass}--linked`]: this.hasLink
     });
 
     return (
       <div className={this.props.itemClass}>
-        <div role="link" className={tileClass} onClick={this.handleTileClick}>
+        <div
+          role={this.hasLink ? "link" : null}
+          tabIndex={this.hasLink ? "0" : null}
+          className={tileClass}
+          onClick={this.handleTileClick}
+        >
           <div className={`${baseClass}__inner`}>
             {icon && (
               <Utility.IconComposer
