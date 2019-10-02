@@ -27,8 +27,7 @@
     padding: 18px 10px;
     margin-bottom: $grid-gap;
     margin-left: $grid-gap;
-    color: $neutral50;
-    border: 1px solid $neutral80;
+    border: 1px solid $neutralUIDullLight;
     transition: background-color $durationFast $timing,
       border-color $duration $timing;
 
@@ -41,13 +40,14 @@
     }
 
     &--active {
+      color: $neutralTextExtraLight;
       background-color: $neutral80;
       border-color: $neutral80;
     }
 
     &:hover,
     &:focus-within {
-      border-color: $accentPrimary;
+      border-color: $defaultHoverColor;
       outline: 0;
     }
   }
@@ -58,10 +58,8 @@
     font-size: 14px;
     font-weight: $medium;
     line-height: 1.2;
-    color: $neutral50;
     text-decoration: none;
     text-transform: uppercase;
-    transition: color $duration $timing;
   }
 
   &__input {

@@ -1,7 +1,6 @@
 .list-total {
   @include utilityPrimary;
   font-size: 14px;
-  color: $neutral50;
   transition: color $duration $timing;
 
   &--extra-bottom {
@@ -13,24 +12,11 @@
     border-bottom: 0;
   }
 
-  .drawer-backend & {
-    span {
-      color: $neutral30;
-    }
-  }
-
-  .backend & {
-    span {
-      color: $neutral30;
-    }
-  }
-
   .section-heading-secondary & {
     float: right;
-    color: $neutral75;
   }
 
   .section-heading-secondary a:hover & {
-    color: $accentPrimary;
+    color: $defaultHoverColor;
   }
 }

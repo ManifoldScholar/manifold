@@ -24,7 +24,7 @@
   }
 
   .aside {
-    @include panelRounded;
+    @include panelRoundedDark;
     display: none;
     float: left;
     width: 192px;

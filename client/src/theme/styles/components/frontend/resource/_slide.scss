@@ -1,5 +1,6 @@
 .resource-slide-figure {
-  --default-focus-color: #{$accentPrimary};
+  --default-focus-color: #{$accentInteractionLight};
+  --default-hover-color: #{$accentInteractionLight};
 
   position: relative;
   width: 100%;
@@ -7,6 +8,7 @@
   min-height: 350px;
   max-height: 52vh;
   overflow: hidden;
+  color: $neutralTextExtraLight;
   background-color: $neutralBlack;
 
   figure {
@@ -98,17 +100,6 @@
       height: 100%;
       background-color: $neutralBlack;
     }
-
-    button {
-      &:hover, &:focus-visible {
-        color: $accentPrimary;
-        outline: 0;
-
-        svg {
-          fill: $accentPrimary;
-        }
-      }
-    }
   }
 
   .figure-interactive {
@@ -146,13 +137,11 @@
       padding-bottom: 6px;
       font-size: 21px;
       font-weight: $regular;
-      color: $neutral40;
     }
 
     .resource-date {
       @include utilityPrimary;
       font-size: 12px;
-      color: $neutral50;
     }
   }
 
@@ -166,7 +155,6 @@
     align-items: center;
     padding: 5.5px 11px 7.5px 13px;
     font-size: 12px;
-    color: $neutral30;
     cursor: pointer;
     background-color: $neutral95;
     opacity: 0.9;
@@ -175,8 +163,7 @@
       background-color $duration $timing;
 
     &:hover {
-      color: $accentPrimary;
-      outline: 0;
+      @include defaultHoverStyle;
     }
 
     &__text {}
@@ -200,7 +187,6 @@
 
   &__resource-icon {
     margin-bottom: 4px;
-    color: $neutral40;
 
     @include respond($break50) {
       width: 21.34vw;

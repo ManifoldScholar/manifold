@@ -8,7 +8,7 @@
   .no-results {
     @include utilityPrimary;
     font-size: 15px;
-    color: $neutral70;
+    color: $neutralUIDullLight;
   }
 
   + .list-pagination-primary {
@@ -25,7 +25,6 @@
       justify-content: space-between;
       width: 100%;
       padding: 10px 0 14px;
-      color: $neutral30;
 
       @include respond($break60) {
         flex-direction: row;
@@ -33,7 +32,7 @@
       }
 
       + li {
-        border-top: 1px solid $neutral80;
+        border-top: 1px solid $neutralUIDullLight;
       }
 
       &:last-child {
@@ -44,7 +43,7 @@
         padding: 6px 0 14px;
       }
 
-      &.state-pending{
+      &.state-pending {
         color: $sp30Primary;
 
         a {
@@ -53,7 +52,7 @@
       }
 
       &.state-failed {
-        color: $sp40Tertiary;
+        color: $defaultNoticeColor;
       }
 
       &.state-queued, &.state-importing {
@@ -65,7 +64,7 @@
       }
 
       &.state-skipped {
-        color: $neutral70;
+        color: $neutralUIDullLight;
       }
 
       &.state-imported {
@@ -126,7 +125,6 @@
       @include subtitlePrimary;
       padding-left: 25px;
       margin-top: 5px;
-      color: $neutral50;
 
       &.flush {
         padding-left: 0;
@@ -134,7 +132,6 @@
 
       .specifier {
         padding-left: 5px;
-        color: $neutral30;
       }
     }
 
@@ -143,7 +140,7 @@
       order: 0;
       margin-bottom: 2px; // NP
       font-size: 14px;
-      color: $neutral70;
+      color: $neutralTextLight;
       white-space: nowrap;
       vertical-align: middle;
 
@@ -159,9 +156,7 @@
       }
 
       a {
-        color: $neutral50;
         text-decoration: none;
-        transition: color $duration $timing;
 
         &:hover {
           color: $neutral20;

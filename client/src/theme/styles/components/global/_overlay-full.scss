@@ -59,13 +59,10 @@
   // Button
   .overlay-close {
     @include buttonClose;
-    @include focusVisibleOutline;
+    @include outlineOnFocusVisible;
     position: absolute;
     top: 8px;
     right: 8px;
-    color: $neutral50;
-    cursor: pointer;
-    transition: color $duration $timing;
 
     @include respond($break70) {
       top: 4.444vh;
@@ -74,10 +71,6 @@
       @include respond($hbreak90, min, height) {
         top: 40px;
       }
-    }
-
-    &:hover {
-      color: $accentPrimary;
     }
 
     &__icon {

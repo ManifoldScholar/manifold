@@ -46,14 +46,13 @@
     display: block;
     color: $neutral80;
     text-decoration: none;
-    transition: color $duration $timing;
 
     &:hover, &.active, &:focus-visible {
-      color: $accentPrimary;
+      @include defaultHoverStyle;
       outline: 0;
 
       .icon-thumbnail-primary {
-        background-color: $accentPrimary;
+        background-color: $defaultHoverColor;
 
         &::after {
           opacity: 0.5;
@@ -96,8 +95,9 @@
         width: 100%;
         height: 100%;
         content: '';
-        background-color: $accentPrimary;
+        background-color: $defaultHoverColor;
         opacity: 0;
+        transition: opacity $duration $timing;
       }
 
       &.icon-only.bg-image {

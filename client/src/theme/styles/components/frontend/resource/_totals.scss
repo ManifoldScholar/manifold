@@ -25,21 +25,18 @@
   &__link {
     @include templateHead;
     font-size: 20px;
-    color: $neutral70;
     text-decoration: none;
-    transition: color $duration $timing;
 
     &:hover {
-      color: $accentPrimaryDark;
-
       .resource-total__value {
-        color: inherit;
+        @include defaultHoverStyle;
+        transition: color $duration $timing;
       }
     }
   }
 
   &__value {
-    color: $neutral90;
+    color: $neutralTextExtraDark;
   }
 
   &__icon {

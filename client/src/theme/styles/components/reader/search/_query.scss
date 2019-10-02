@@ -1,11 +1,14 @@
 .search-query {
+  --default-hover-color: #{$accentInteractionDark};
+
+  color: $neutralTextDark;
+
   // Input defaults
   &__input {
     @include templateHead;
     width: 100%;
     padding: 0.444em 0.889em;
     font-size: 16px;
-    color: $neutralOffBlack;
     background-color: $neutral05;
     border: 3px solid transparent;
     outline: none;
@@ -15,7 +18,7 @@
       outline: 0;
 
       &::placeholder {
-        color: $accentPrimary;
+        color: $neutralTextExtraDark;
       }
     }
 
@@ -51,13 +54,6 @@
     left: 20px;
     margin-top: -9px;
     line-height: 0;
-    color: $neutral50;
-    transition: color $duration $timing;
-
-    &:hover,
-    &:focus-visible {
-      color: $accentPrimary;
-    }
   }
 
   &__filters {
@@ -67,7 +63,6 @@
   &__checkbox {
     @include utilityPrimary;
     font-size: 13px;
-    color: $neutral75;
   }
 
   &__checkbox-group {
@@ -84,7 +79,6 @@
     margin-right: 30px;
     margin-bottom: 13px;
     font-size: 13px;
-    color: $neutral75;
   }
 
   &__checkbox {
@@ -123,7 +117,6 @@
     @include templateCopy;
     font-size: 14px;
     font-style: italic;
-    color: $neutral80;
   }
 
   &__button-primary {

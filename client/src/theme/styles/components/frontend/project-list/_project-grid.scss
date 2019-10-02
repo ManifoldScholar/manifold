@@ -2,8 +2,7 @@
 .project-list {
   .browse & {
     li {
-
-      border-color: $neutral40;
+      border-color: $neutralUIDullDark;
       opacity: 1;
       transition: opacity $duration $timing;
     }
@@ -17,13 +16,13 @@
     }
 
     .name {
-      color: $neutralOffBlack;
+      color: $neutralTextExtraDark;
     }
 
     .relations-list {
       padding-top: 0.4em;
       font-size: 15px;
-      color: $neutral80;
+      color: $neutralUIExtraDark;
     }
 
     .date {
@@ -38,7 +37,7 @@
       margin-bottom: 2px;
       color: $neutralWhite;
       content: '';
-      background-color: $sp40Tertiary;
+      background-color: $defaultNoticeColor;
       border-radius: 50%;
     }
 
@@ -47,7 +46,7 @@
     }
 
     &.empty {
-      @include panelRounded;
+      @include panelRoundedDark;
       width: 100%;
       padding: 20px 22px;
       background-color: $neutral10;
@@ -60,7 +59,7 @@
         @include templateHead;
         font-size: 16px;
         line-height: 1.313;
-        color: $neutral90;
+        color: $neutralTextExtraDark;
 
         @include respond($break75) {
           font-size: 18px;
@@ -89,7 +88,7 @@
           background-color: $neutral05;
 
           .title-text {
-            color: $neutral90;
+            color: $neutralTextExtraDark;
           }
         }
 

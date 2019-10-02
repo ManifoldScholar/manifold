@@ -1,8 +1,7 @@
 .text-categories {
   &__category {
-    @include panelRounded;
+    @include panelRoundedDark;
     margin-bottom: 16px;
-    color: $neutral20;
     background: $neutral95;
   }
 
@@ -14,7 +13,7 @@
     font-size: 14px;
     font-weight: $medium;
     line-height: 1;
-    color: $neutral30;
+    color: $neutralTextExtraLight;
     background: $neutral100;
     border-radius: 8px 8px 0 0;
   }
@@ -26,14 +25,14 @@
     line-height: 1.3em;
 
     &--notice {
-      color: $sp40Tertiary;
+      color: $defaultNoticeColor;
     }
 
   }
 
   &__label-type {
     &--light {
-      color: $neutral50;
+      color: $neutralTextLight;
     }
   }
 
@@ -53,22 +52,17 @@
     @include buttonUnstyled;
     display: inline;
     padding: 0;
-    color: $neutral50;
-    transition: color $duration $timing;
-
-    &:hover {
-      color: $accentPrimary;
-    }
+    color: $neutralTextLight;
 
     &--notice {
       &:hover {
-        color: $sp40Tertiary;
+        color: $defaultNoticeColor;
       }
     }
   }
 
   &__dropzone {
-    @include panelRounded;
+    @include panelRoundedDark;
     padding: 16px 16px 4px;
     margin-right: -16px;
     margin-bottom: 16px;
@@ -79,7 +73,5 @@
     &--active {
       background-color: lighten($neutral90, 3%);
     }
-
   }
-
 }

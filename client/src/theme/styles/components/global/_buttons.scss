@@ -12,18 +12,17 @@
   &__icon:not(.utility-button__icon--light),
   &__text:not(.utility-button__text--light) {
     .backend .utility-button:not(:disabled):hover & {
-      color: $neutral20;
+      color: $neutralTextExtraLight;
     }
 
     .utility-button:disabled & {
-      color: $neutral50;
+      color: $neutralUILight;
       opacity: 0.5;
     }
   }
 
   &__icon {
     margin-left: -3px;
-    color: $neutral50;
     transition: color $duration $timing;
 
     &--highlight {
@@ -31,7 +30,7 @@
     }
 
     &--notice {
-      color: $sp40Tertiary;
+      color: $defaultNoticeColor;
     }
 
     &--download {
@@ -41,7 +40,6 @@
 
   &__text {
     display: none;
-    color: $neutral50;
     transition: color $duration $timing;
 
     @include respond($break40) {
@@ -57,7 +55,7 @@
     }
 
     &--dark-green {
-      color: $accentPrimaryDark;
+      color: $accentInteractionDark;
     }
 
     &--large {
@@ -66,6 +64,10 @@
 
     &--underlined {
       text-decoration: underline;
+    }
+
+    .utility-button:hover & {
+      @include defaultHoverStyle;
     }
 
     .utility-button__icon + & {
@@ -113,14 +115,16 @@
   justify-content: center;
   padding: 14px 23px 16px;
   font-size: 14px;
-  color: $neutral95;
+  color: $neutralTextExtraDark;
   text-decoration: none;
   letter-spacing: 0.089em;
-  border: 2px solid $accentPrimary;
-  transition: background-color $duration $timing,
-    color $duration $timing;
+  border: 1px solid $defaultHoverColor;
+  transition:
+    color $duration $timing,
+    background-color $duration $timing;
 
   &:hover {
+    color: $neutral95;
     background-color: $accentPrimaryOffWhite;
   }
 
@@ -144,11 +148,13 @@
     border-color: $neutral10;
 
     &:hover {
+      color: $neutral95;
       background-color: $neutral20;
       border-color: $neutral20;
     }
 
     &:focus-visible {
+      color: $neutral95;
       background-color: $neutral30;
       border-color: $neutral30;
     }
@@ -200,45 +206,33 @@
   padding-left: 28px;
   font-size: 12px;
   font-weight: $bold;
-  color: $neutral75;
   text-align: center;
   text-decoration: none;
-  border: 2px solid $accentPrimary;
-  transition: color $duration $timing, background-color $duration $timing;
+  border: 1px solid $defaultHoverColor;
+  transition:
+    color $duration $timing,
+    background-color $duration $timing,
+    border-color $duration $timing;
 
   @include respond($break60) {
     min-height: 58px;
     font-size: 14px;
   }
 
-  &:hover {
-    color: $neutralWhite;
-    background-color: $accentPrimary;
-  }
-
+  &:hover,
   &:active {
     color: $neutralWhite;
-    background-color: $accentPrimary;
-  }
-
-  .bg-neutral05 & {
-    &:hover {
-      color: $neutralWhite;
-      background-color: $accentPrimary;
-    }
+    background-color: $defaultHoverColor;
+    border-color: $defaultHoverColor;
   }
 
   .browse & {
-    @include focusVisibleFill($accentPrimaryDull);
-
-    &:focus-visible {
-      outline: 0;
-    }
+    @include fillOnFocusVisible($accentPrimaryDull);
   }
 
   &__icon {
     margin-right: 7px;
-    color: $neutral40;
+    color: $neutral50;
     transition: color $duration $timing;
 
     .button-icon-primary:hover & {
@@ -297,8 +291,9 @@
   }
 
   &:disabled {
-    color: $neutral80;
-    border: 1px solid $neutral80;
+    color: $neutralUIDullLight;
+    border: 1px solid;
+    cursor: not-allowed;
   }
 
   &:focus-visible:not([disabled]) {
@@ -309,7 +304,7 @@
   &:hover:not([disabled]),
   &:active:not([disabled]) {
     color: $neutral90;
-    background-color: $accentPrimary;
+    background-color: $defaultHoverColor;
   }
 
   &:focus-visible:disabled {
@@ -317,14 +312,14 @@
   }
 
   &--dull {
-    color: $neutral50;
-    border-color: $neutral50;
+    color: $neutralTextLight;
+    border-color: $neutralTextLight;
 
     &:hover:not([disabled]),
     &:active:not([disabled]) {
-      color: $accentPrimary;
+      color: $defaultHoverColor;
       background-color: transparent;
-      border-color: $accentPrimary;
+      border-color: $defaultHoverColor;
     }
 
     &:focus-visible:not([disabled]) {
@@ -432,13 +427,14 @@
   padding: 1.214em 16px 1.286em;
   font-size: 12px;
   font-weight: $semibold;
-  color: $neutral80;
+  color: $neutralTextExtraDark;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.089em;
   background-color: $accentPrimary;
-  transition: color $duration $timing,
+  transition:
+    color $duration $timing,
     background-color $duration $timing;
 
   @include respond($break60) {
@@ -446,6 +442,7 @@
   }
 
   &:hover {
+    color: $neutral80;
     background-color: $accentPrimaryDull;
   }
 
@@ -516,7 +513,7 @@
     .bg-neutral90 &,
     .bg-neutral100 &,
     .drawer-backend & {
-      @include focusVisibleFill(rgba($accentPrimary, 0.2));
+      @include fillOnFocusVisible(rgba($accentPrimary, 0.2));
       color: $neutralWhite;
 
       &:hover {
@@ -526,30 +523,30 @@
     }
 
     &.button-secondary--dull {
-      @include focusVisibleFill(rgba($neutral70, 0.2));
-      color: $neutral70;
-      border-color: $neutral70;
+      @include fillOnFocusVisible(rgba($neutral70, 0.2));
+      color: $neutral45;
+      border-color: $neutral45;
 
       &:hover {
         color: $neutral90;
-        background-color: $neutral70;
+        background-color: $neutral45;
         outline: 0;
       }
     }
   }
 
   &--accent-pale {
-    @include focusVisibleFill($accentPrimary);
+    @include fillOnFocusVisible($accentPrimary);
     padding: 1em 30px 1.2em;
     color: $neutral90;
     background-color: $accentPrimaryPale;
 
     &:hover {
-      background-color: $accentPrimary;
+      background-color: $defaultHoverColor;
     }
 
     &.button-secondary--dull {
-      @include focusVisibleFill($neutral30);
+      @include fillOnFocusVisible($neutral30);
       background-color: $neutral10;
 
       &:hover {
@@ -630,16 +627,15 @@
   white-space: nowrap;
   background-color: $accentPrimaryPale;
   border-radius: 4px;
-  transition: background-color $duration $timing;
+  transition:
+    color $duration $timing,
+    background-color $duration $timing;
 
   &:hover, &:focus-visible {
-    background-color: $accentPrimary;
+    color: $neutralWhite;
+    background-color: $defaultHoverColor;
     outline: 0;
   }
-}
-
-.button-tertiary {
-  @include buttonTertiary;
 }
 
 // Text only button with full width bottom border
@@ -662,7 +658,7 @@
   }
 
   &:active {
-    color: $accentPrimary;
+    color: $defaultHoverColor;
   }
 }
 
@@ -736,7 +732,7 @@
   height: 100%;
   overflow: hidden;
   font-size: 16px;
-  color: $neutralWhite;
+  color: $neutral90;
   text-align: left;
   white-space: nowrap;
   cursor: pointer;
@@ -752,7 +748,7 @@
   &--sr-only {
     &:focus-visible ~ .project-cover-button-wrapper {
       @include defaultFocusStyle;
-      outline-color: $accentPrimary;
+      outline-color: $defaultFocusColor;
     }
   }
 
@@ -790,7 +786,7 @@
   }
 
   .remove-active &, .remove-confirm-active & {
-    background-color: $neutral75;
+    background-color: $neutral40;
   }
 
   .icons {
@@ -847,7 +843,6 @@
   padding: 16px 0 15px;
   font-size: 13px;
   line-height: 1.4;
-  color: $neutral70 !important;
   text-decoration: none !important;
   background-color: $neutral05;
   transition: color $duration $timing,
@@ -866,7 +861,6 @@
     background-color: $neutral95;
 
     &:hover, &:focus-visible {
-      color: $accentPrimary !important;
       background-color: $neutral95;
       outline: 0;
     }
@@ -877,7 +871,6 @@
   }
 
   &:focus-visible {
-    color: $neutral80 !important;
     background-color: $focusTertiary;
     outline: 0;
   }

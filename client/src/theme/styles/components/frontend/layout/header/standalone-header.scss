@@ -12,7 +12,8 @@
   }
 
   &--dark {
-    --default-focus-color: #{$accentPrimary};
+    --default-hover-color: #{$accentInteractionLight};
+    --default-focus-color: #{$accentInteractionLight};
   }
 
   &--light:not(.standalone-header--hidden) {
@@ -73,9 +74,6 @@
     opacity: 1;
     transition: opacity $duration $timing;
 
-    @include respond($break75) {
-    }
-
     .standalone-header--hidden & {
       opacity: 0;
       transition: opacity $duration $timing;
@@ -83,8 +81,18 @@
   }
 
   &__title-link {
+    --default-hover-color: #{$neutralWhite};
+
     hyphens: none;
     line-height: 1.45;
+
+    &:focus-visible {
+      outline: 0;
+    }
+
+    .standalone-header--light & {
+      --default-hover-color: #{$neutral80};
+    }
   }
 
   &__title {
@@ -94,7 +102,8 @@
     font-size: 18px;
     font-weight: $semibold;
 
-    a:hover & {
+    a:hover &,
+    a:focus-visible & {
       text-decoration: underline;
     }
 

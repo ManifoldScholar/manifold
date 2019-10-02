@@ -1,6 +1,5 @@
 .label-with-icon {
   @include formLabelPrimary;
-  color: $neutral70;
   white-space: nowrap;
 
   &__icon {

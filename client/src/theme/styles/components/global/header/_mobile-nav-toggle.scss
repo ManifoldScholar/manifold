@@ -1,16 +1,13 @@
 .mobile-nav-toggle {
   @include buttonUnstyled;
   position: relative;
-  color: $neutral50;
-  transition: color $duration $timing;
 
   @include respond($break75) {
     display: none;
   }
 
-  &:hover,
-  &:focus {
-    color: $accentPrimary;
+  &:focus-visible {
+    @include defaultHoverStyle;
     outline: 0;
   }
 }

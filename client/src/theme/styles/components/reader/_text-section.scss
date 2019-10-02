@@ -1,20 +1,3 @@
-@mixin chapterHeading {
-  @include readerHead;
-  // NB: All styles within text-sections use relative font sizes
-  font-size: 2.682em;
-  font-weight: $semibold;
-  line-height: 1.288;
-
-  a {
-    color: inherit;
-    text-decoration: none;
-
-    &:hover {
-      color: $accentPrimary;
-    }
-  }
-}
-
 .reader-window {
   @include resetWordWrap;
   padding: 60px 0;
@@ -53,7 +36,7 @@
   }
 
   a {
-    color: $accentPrimaryDark;
+    color: $defaultHoverColor;
   }
 
   .cn {

@@ -1,5 +1,4 @@
 .texts-list {
-
   @include listUnstyled;
   @include templateHead;
   display: flex;
@@ -23,7 +22,6 @@
       width: 100%;
       padding: 16px;
       font-size: 14px;
-      color: $neutral80;
       text-align: center;
       border: 1px solid $neutral80;
     }
@@ -58,6 +56,10 @@
     display: flex;
     flex-direction: row;
     text-decoration: none;
+
+    &:hover {
+      color: inherit;
+    }
   }
 
   &__title-wrapper {
@@ -68,13 +70,12 @@
     margin: 0 0 0.4em;
     font-size: 17px;
     hyphens: none;
-    color: $neutral30;
+    color: $neutralTextExtraLight;
     transition: color $duration $timing;
   }
 
   &__subtitle {
     margin: 7px 0 0 15px;
-    color: $neutral50;
     transition: color $duration $timing;
   }
 
@@ -83,7 +84,6 @@
     display: inline-block;
     font-size: 12px;
     font-weight: $medium;
-    color: $neutral70;
   }
 
   &__icon {
@@ -111,19 +111,13 @@
 
   &__button {
     @include buttonUnstyled;
-    @include focusVisibleOutline($accentPrimary);
+    @include outlineOnFocusVisible($defaultFocusColor);
     display: block;
     padding: 0;
-    color: $neutral50;
-    transition: color $duration $timing;
-
-    &:hover {
-      color: $accentPrimary;
-    }
 
     &--notice {
       &:hover {
-        color: $sp40Tertiary;
+        color: $defaultNoticeColor;
       }
     }
   }

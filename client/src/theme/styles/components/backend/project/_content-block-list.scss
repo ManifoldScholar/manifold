@@ -2,7 +2,7 @@
 .content-block-list {
   $list-margin: 9px;
 
-  @include panelRounded;
+  @include panelRoundedDark;
   display: block;
   padding: 0 $list-margin;
   margin-top: 16px;

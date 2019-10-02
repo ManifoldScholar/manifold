@@ -26,25 +26,27 @@
     .icon-thumbnail-primary {
       background-color: $neutral05;
       border-radius: $panelRoundedRadius;
-      transition: box-shadow $duration ease-out;
+      transition:
+        color $duration $timing,
+        box-shadow $duration $timing;
 
       &.bg-image::before {
         border-radius: $panelRoundedRadius;
       }
     }
 
-    &:hover, &:focus-visible {
+    &:hover,
+    &:focus-visible {
       outline: none;
 
       .icon-thumbnail-primary {
         @include boxShadow(0, 20px, 30px, 2px);
-      }
-
-      .icon-thumbnail-type,
-      .icon-thumbnail-icon,
-      .icon-thumbnail-title {
-        color: $accentPrimary;
+        @include defaultHoverStyle;
       }
     }
+  }
+
+  .bg-image {
+    --default-hover-color: #{$accentInteractionLight};
   }
 }

@@ -69,16 +69,10 @@
   }
 
   a {
-    color: $accentPrimaryMedium;
-    text-decoration: none;
+    text-decoration: underline;
 
     &:visited {
-      color: $accentPrimaryMedium;
-    }
-
-    &:hover {
       color: $accentPrimaryDark;
-      text-decoration: underline;
     }
   }
 

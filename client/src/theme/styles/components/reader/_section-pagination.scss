@@ -21,10 +21,8 @@
     align-items: center;
     padding: 20px 0;
     font-size: 14px;
-    color: $neutral50;
     text-decoration: none;
     vertical-align: middle;
-    transition: color $duration $timing;
 
     @include respond($break40) {
       padding: 28px 0;
@@ -32,10 +30,6 @@
 
     @include respond($break75) {
       padding: 26px 0;
-    }
-
-    &:hover {
-      color: $accentPrimary;
     }
 
     &--next {

@@ -1,5 +1,4 @@
 .entity-row {
-
   list-style: none;
   user-select: none;
 
@@ -8,7 +7,7 @@
     display: flex;
     align-items: flex-start;
     padding: 14px 19px 14px 0;
-    border-bottom: 1px solid $neutral80;
+    border-bottom: 1px solid $neutralUIDullLight;
     transition: background-color $duration ease-out,
       box-shadow $duration ease-out;
 
@@ -41,18 +40,23 @@
     }
 
     .entity-row__row-link--in-grid {
-
       padding: 0 14px;
       background-color: $neutral95;
       border: 1px solid $neutral80;
       outline: 0;
 
       @include respond($break65) {
-        @include panelRounded;
+        @include panelRoundedDark;
         @include boxShadow(0, 31px, 26px, -13px, $neutralBlack, 0.33);
         padding: 0;
         border: 0;
       }
+    }
+  }
+
+  &__row-link {
+    &:hover {
+      color: $neutralTextLight;
     }
   }
 
@@ -62,14 +66,13 @@
     text-decoration: none;
 
     &:focus-visible {
-      background-color: lighten($neutral90, 2%);
-      border-color: lighten($neutral90, 2%);
+      background-color: lighten($neutralTextExtraDark, 2%);
+      border-color: lighten($neutralTextExtraDark, 2%);
       outline: none;
-      box-shadow: -21px 0 0 1px lighten($neutral90, 2%), 21px 0 0 1px lighten($neutral90, 2%);
+      box-shadow: -21px 0 0 1px lighten($neutralTextExtraDark, 2%), 21px 0 0 1px lighten($neutralTextExtraDark, 2%);
     }
 
     &.entity-row__row-link--in-grid {
-
       transition: background-color $duration ease-out,
         box-shadow $duration ease-out;
 
@@ -78,8 +81,9 @@
         outline: 0;
 
         @include respond($break65) {
-          @include panelRounded;
+          @include panelRoundedDark;
           @include boxShadow(0, 31px, 26px, -13px, $neutralBlack, 0.33);
+          color: inherit;
         }
       }
     }
@@ -93,13 +97,13 @@
     font-size: 17px;
     font-weight: $regular;
     hyphens: none;
-    color: $neutral50;
 
     a {
       text-decoration: none;
 
       &:hover {
         text-decoration: underline;
+        color: inherit;
       }
     }
 
@@ -108,7 +112,7 @@
         text-decoration: underline;
 
         &:hover {
-          color: $accentPrimary;
+          @include defaultHoverStyle;
         }
       }
     }
@@ -141,9 +145,9 @@
     margin: -3px 0 0;
     font-size: 9px;
     line-height: 1.2em;
-    color: $neutral85;
+    color: $neutralUIExtraDark;
     vertical-align: middle;
-    background-color: $neutral30;
+    background-color: $neutralTextExtraLight;
 
     + .entity-row__label {
       margin-left: 14px;
@@ -156,7 +160,6 @@
 
   &__utility-button {
     @include buttonUnstyled;
-    color: $neutral50;
   }
 
   &__figure {
@@ -164,7 +167,6 @@
     align-self: flex-start;
     margin-top: 4px;
     margin-right: 18px;
-    color: $neutral45;
 
     button {
       @include buttonUnstyled;
@@ -289,7 +291,7 @@
     font-size: 18px;
     font-weight: $medium;
     line-height: 1.4em;
-    color: $neutral20;
+    color: $neutralTextExtraLight;
 
     // in grids, labels are on a new line.
     &--in-grid {
@@ -374,7 +376,6 @@
 
     em {
       font-style: normal;
-      color: $neutral30;
     }
   }
 

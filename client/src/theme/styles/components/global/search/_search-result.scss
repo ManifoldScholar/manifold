@@ -1,15 +1,13 @@
 .search-result {
-
   @include templateCopy;
   padding: 29px 20px 23px;
-  color: $neutral90;
 
   mark {
     background-color: $sp30Secondary;
   }
 
   a, a:visited {
-    color: $neutral90;
+    color: $neutralTextExtraDark;
     text-decoration: none;
   }
 
@@ -18,7 +16,7 @@
   }
 
   & + & {
-    border-top: 1px solid $neutral40;
+    border-top: 1px solid $neutralUIDullDark;
   }
 
   &__wrapper-link {
@@ -60,10 +58,10 @@
 
   &__label {
     @include blockLabel;
-    color: $neutral75;
     text-decoration: none;
     white-space: nowrap;
     border-radius: 3px;
+    color: inherit;
   }
 
   &__title {
@@ -74,7 +72,7 @@
   }
 
   &__subtitle {
-    color: $neutral50;
+    color: $neutralTextDark;
   }
 
   &__parent {
@@ -82,10 +80,10 @@
     margin: 0 0 12px;
     font-size: 18px;
     font-weight: $semibold;
-    color: $neutral50;
+    color: $neutralTextDark;
 
     a, a:visited {
-      color: $neutral50;
+      color: inherit;
     }
   }
 
@@ -121,7 +119,7 @@
 
     img, svg {
       max-width: 56px;
-      color: $neutral40;
+      color: $neutralUIDark;
     }
 
   }
@@ -146,11 +144,6 @@
     margin-top: 30px;
     font-size: 13px;
     font-weight: $semibold;
-    color: $neutral75;
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 
   &__excerpt-shim {
@@ -161,9 +154,11 @@
     margin: 0;
     font-size: 16px;
     line-height: 23px;
-    border-left: 4px solid $neutral40;
+    border-left: 4px solid $neutralUIDullDark;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
+      outline: 0;
       background-color: $neutral05;
     }
 

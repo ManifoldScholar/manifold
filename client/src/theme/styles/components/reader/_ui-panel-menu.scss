@@ -1,4 +1,6 @@
 @mixin uiPanelMenu {
+  --default-hover-color: #{$accentInteractionDark};
+
   @include reactSlideTransition;
   position: absolute;
   top: 0;

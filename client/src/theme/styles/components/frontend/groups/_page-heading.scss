@@ -1,4 +1,6 @@
 .group-page-heading {
+  color: $neutralTextExtraDark;
+
   @include respond($break80) {
     display: flex;
     align-items: center;
@@ -7,7 +9,6 @@
 
   &__text-container {
     display: flex;
-    color: $neutral90;
 
     &--narrow {
       @include respond($break80) {
@@ -36,7 +37,7 @@
   }
 
   &__subtitle {
-    color: $neutral70;
+    color: $neutralTextDark;
   }
 
   &__button-container {

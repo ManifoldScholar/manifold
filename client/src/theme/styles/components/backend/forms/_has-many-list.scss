@@ -1,4 +1,6 @@
 .has-many-list {
+  color: $neutralTextExtraLight;
+
   @include respond($break90) {
     margin-top: 20px;
   }
@@ -13,11 +15,11 @@
       align-items: center;
 
       &.add-button:hover {
-        color: $accentPrimary;
+        @include defaultHoverStyle;
       }
 
       &.remove-button:hover {
-        color: $sp40Tertiary;
+        color: $defaultNoticeColor;
       }
 
       + button {
@@ -51,7 +53,6 @@
       .placeholder {
         @include utilityPrimary;
         font-size: 14px;
-        color: $neutral70;
       }
 
       li {
@@ -62,7 +63,7 @@
         padding: 5px 15px;
         margin: 10px 10px 0 0;
         line-height: 1;
-        border: 1px solid $neutral70;
+        border: 1px solid $neutralUILight;
         border-radius: 5px;
 
         &:last-child {
@@ -97,7 +98,7 @@
       }
 
       + li {
-        border-top: 1px solid $neutral80;
+        border-top: 1px solid $neutralUIDullLight;
       }
 
       &:last-child {
@@ -122,7 +123,6 @@
         left: -1.5px;
         width: 29px;
         height: 29px;
-        color: $neutral40;
       }
 
       img {
@@ -144,7 +144,6 @@
       font-size: 18px;
       hyphens: none;
       line-height: 29px;
-      color: $neutral40;
       vertical-align: middle;
 
       @include respond($break60) {
@@ -165,22 +164,18 @@
       button,
       &__button {
         @include buttonUnstyled;
-        @include focusVisibleOutline($accentPrimary);
+        @include outlineOnFocusVisible($defaultHoverColor);
         margin-left: 7px;
         font-size: 15px;
-        color: $neutral70;
-        transition: color $duration $timing;
       }
 
-      &__icon--default {
-        &:hover {
-          color: $accentPrimary;
-        }
-      }
+      &__icon {
+        @include defaultHoverState;
 
-      &__icon--close {
-        &:hover {
-          color: $sp40Tertiary;
+        &--close {
+          &:hover {
+            color: $defaultNoticeColor;
+          }
         }
       }
     }

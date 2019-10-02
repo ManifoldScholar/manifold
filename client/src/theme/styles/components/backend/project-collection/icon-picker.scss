@@ -22,38 +22,26 @@
       height: 60px;
       margin-top: -1px;
       margin-left: -1px;
-      color: $neutral70;
-      border: 1px solid $neutral70;
-      transition: color $duration $timing, background-color $duration $timing, border-color $duration $timing;
-
-      + li {
-        border-left: 1px solid;
-      }
 
       button {
         @include buttonUnstyled;
         width: 100%;
         height: 100%;
-        transition: background-color $duration $timing, color $duration $timing, border-color $duration $timing;
+        border: 1px solid $neutralUIDullLight;
+        transition:
+          color $duration $timing,
+          background-color $duration $timing;
 
+        &:hover,
         &:focus-visible {
           color: $neutral110;
-          background-color: $accentPrimaryPale;
-          border-color: $accentPrimaryPale;
-        }
-
-        &:hover {
-          color: $neutral110;
-          cursor: pointer;
-          background-color: $accentPrimary;
-          border-color: $accentPrimary;
+          background-color: $defaultFocusColor;
         }
       }
 
       &.selected button {
         color: $neutral110;
-        background-color: $accentPrimary;
-        border-color: $accentPrimary;
+        background-color: $defaultFocusColor;
       }
     }
   }

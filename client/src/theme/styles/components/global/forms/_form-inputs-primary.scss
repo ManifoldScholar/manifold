@@ -61,19 +61,18 @@
   &__action {
     @include buttonUnstyled;
     @include utilityPrimary;
-    @include focusVisibleFill(rgba($accentPrimary, 0.35));
+    @include fillOnFocusVisible(rgba($accentPrimary, 0.35));
     padding: 0.333em 1em;
     font-size: 12px;
     font-weight: $semibold;
-    color: $neutral75;
     text-decoration: none;
     letter-spacing: 0.125em;
     background-color: $neutral10;
     border: 1px solid $neutral10;
     border-radius: 16px;
     transition:
-      color $duration ease-out,
-      background-color $duration ease-out;
+      color $duration $timing,
+      background-color $duration $timing;
 
     &:hover {
       background-color: $neutral20;
@@ -89,11 +88,6 @@
     @include formLabelPrimary;
     display: block;
     margin-bottom: 1em;
-    color: $neutral50;
-
-    .bg-neutral90 & {
-      color: $neutral30;
-    }
 
     &.has-instructions {
       margin-bottom: 0.5em;
@@ -106,7 +100,6 @@
     margin-bottom: 1em;
     font-size: 17px;
     font-style: italic;
-    color: $neutral50;
     text-transform: none;
 
     a:visited {
@@ -125,7 +118,6 @@
     height: 60px;
     // Declared in em as it should change with font size
     padding: 0.7em 1em;
-    color: $neutral80;
     background-color: $neutral05;
     border: 1px solid transparent;
     border-radius: 0;
@@ -133,16 +125,16 @@
     transition: border-color $duration $timing;
     appearance: none;
 
-    &::placeholder {
-      color: $neutral50;
-    }
-
     &:focus-visible {
-      border-color: $accentPrimary;
+      border-color: $defaultHoverColor;
     }
 
     .bg-neutral05 & {
       background-color: $neutralWhite;
+    }
+
+    .overlay-full-primary & {
+      color: $neutralTextDark;
     }
   }
 
@@ -150,7 +142,6 @@
     @include formInputPrimary;
     width: 100%;
     padding: 1.2em 1.5em;
-    color: $neutral70;
     resize: vertical;
     background-color: $neutral05;
     border: 1px solid transparent;
@@ -158,19 +149,11 @@
     transition: border-color $duration $timing;
 
     &:focus-visible {
-      border-color: $accentPrimary;
+      border-color: $defaultHoverColor;
     }
 
     .bg-neutral05 & {
       background-color: $neutralWhite;
-    }
-
-    &.dark-placeholder {
-      color: $neutral80;
-
-      &::placeholder {
-        color: $neutral50;
-      }
     }
 
     &.wide {
@@ -210,7 +193,6 @@
       @include formLabelPrimary;
       display: inline-block;
       margin-bottom: 1em;
-      color: $neutral70;
     }
 
     &__prompt {
@@ -218,13 +200,8 @@
       display: block;
       font-size: 18px;
       font-weight: $regular;
-      color: $neutral30;
       text-transform: none;
       letter-spacing: 0;
-
-      .browse & {
-        color: $neutral80;
-      }
     }
   }
 
@@ -239,7 +216,7 @@
     @include formInputMessage;
     display: inline-block;
     margin-top: 15px;
-    color: $sp40Tertiary;
+    color: $defaultNoticeColor;
   }
 }
 
@@ -266,7 +243,7 @@
     position: absolute;
     top: 50%;
     right: 12px;
-    color: $accentPrimary;
+    color: $defaultHoverColor;
     pointer-events: none;
     transform: translateY(-50%);
 
@@ -283,7 +260,6 @@
     height: 4.286em;
     padding: 1.286em 55px 1.286em 2.214em;
     margin: 0;
-    color: $neutral70;
     cursor: pointer;
     background-color: $neutral05;
     border: 1px solid transparent;
@@ -297,7 +273,7 @@
     }
 
     &:focus-visible {
-      border-color: $accentPrimary;
+      border-color: $defaultHoverColor;
     }
 
     /* Undo the Firefox inner focus ring */
@@ -310,7 +286,7 @@
     }
 
     option {
-      color: $neutralBlack;
+      color: $neutralTextExtraDark;
     }
   }
 }
@@ -322,15 +298,10 @@
   padding-left: 33px;
   margin-bottom: 0; // OD
   font-size: 13px;
-  color: $neutral70;
   cursor: pointer;
 
   @include respond($break60) {
     font-size: 16px;
-  }
-
-  .bg-neutral90 & {
-    color: $neutral50;
   }
 
   + .form-toggle {
@@ -348,7 +319,7 @@
 
   &.annotated {
     @include formInputPrimary;
-    color: $neutralOffBlack;
+    color: $neutralTextExtraDark;
     text-transform: none;
   }
 
@@ -371,7 +342,7 @@
     transition: background-color $duration $timing;
 
     .bg-neutral90 &, .form-callout & {
-      background-color: $neutral70;
+      background-color: $neutralUIDark;
     }
   }
 
@@ -392,17 +363,13 @@
     input[type='radio'] {
       &:focus-visible ~ .toggle-label {
         @include defaultFocusStyle;
-        outline-color: $accentPrimary;
+        outline-color: $defaultFocusColor;
         outline-offset: 2px;
       }
     }
 
     .toggle-label {
       font-size: 14px;
-
-      .backend & {
-        color: $neutral30;
-      }
     }
 
     + .toggle-instructions {
@@ -412,7 +379,6 @@
       margin-top: 6px;
       font-size: 16px;
       font-style: italic;
-      color: $neutral50;
       text-transform: none;
 
       + .form-toggle.radio {
@@ -488,7 +454,7 @@
 
     &:focus-visible ~ .toggle-indicator {
       @include defaultFocusStyle;
-      outline-color: var(--default-focus-color, $accentPrimary);
+      outline-color: $defaultFocusColor;
       outline-offset: 2px;
     }
   }
@@ -535,12 +501,6 @@
     bottom: 1em;
     z-index: 10;
     font-size: 12px;
-    color: $neutral70;
-    transition: color $duration $timing;
-
-    &:hover {
-      color: $accentPrimary;
-    }
 
     @include respond($break60) {
       bottom: 1.45em;
@@ -550,6 +510,7 @@
   .react-datepicker {
     @include templateHead;
     @include boxShadow;
+    color: $neutralTextLight;
     background-color: transparent;
     border: none;
 
@@ -567,15 +528,9 @@
       height: auto;
       font-size: 16px;
       line-height: 1;
-      color: $neutral50;
       text-indent: unset;
       background-color: transparent;
       border: none;
-      transition: color $duration $timing;
-
-      &:hover {
-        color: $accentPrimary;
-      }
 
       &--previous {
         left: 20px;
@@ -600,11 +555,11 @@
     }
 
     &__current-month {
-      color: $neutral40;
+      color: $neutralTextExtraLight;
     }
 
     &__day-name {
-      color: $neutral70;
+      color: inherit;
     }
 
     &__month-container {
@@ -614,19 +569,21 @@
 
     &__day {
       height: 1.7rem;
-      color: $neutral70;
+      color: inherit;
       border: 1px solid transparent;
       border-radius: 50%;
-      transition: border-color $duration $timing,
+      transition:
+        color $duration $timing,
+        border-color $duration $timing,
         background-color $duration $timing;
 
       &--keyboard-selected, &--selected {
-        color: $accentPrimary;
+        @include defaultHoverStyle;
         background-color: $neutral80;
       }
 
       &:hover {
-        color: $accentPrimary;
+        @include defaultHoverStyle;
         background-color: $neutral90;
       }
     }
@@ -720,7 +677,7 @@
     margin-top: 10px;
     overflow-y: scroll;
     font-size: 14px;
-    background-color: $neutral85;
+    background-color: $neutralUIExtraDark;
 
     @include respond($break50) {
       margin-top: 15px;
@@ -746,7 +703,7 @@
         width: 50%;
         padding: 0.6em 0.8em;
         font-weight: $medium;
-        color: $neutral90;
+        color: $neutralTextExtraDark;
         background-color: $neutral40;
 
         @include respond($break80) {
@@ -809,7 +766,7 @@
         pointer-events: none;
         content: '';
         background: transparent;
-        border: 2px solid $neutral85;
+        border: 2px solid $neutralUIExtraDark;
       }
 
       &.drag-over::before {
@@ -861,19 +818,18 @@
 
   .cancel {
     @include buttonUnstyled;
-    @include focusVisibleOutline($sp40Tertiary);
+    @include outlineOnFocusVisible($defaultNoticeColor);
     position: absolute;
     top: 50%;
     right: 0;
     width: 38px;
     height: 100%;
     font-size: 0;
-    color: $neutral90;
-    transition: color $duration $timing;
+    color: $neutralTextExtraDark;
     transform: translateY(-50%);
 
     &:hover {
-      color: $sp40Tertiary;
+      color: $defaultNoticeColor;
     }
 
     &:focus-visible {
@@ -908,7 +864,7 @@
     padding: 0.6em 0.8em;
     overflow: hidden;
     font-weight: $semibold;
-    color: $neutral90;
+    color: $neutralTextExtraDark;
     text-overflow: ellipsis;
     white-space: nowrap;
     background-color: $neutral05;

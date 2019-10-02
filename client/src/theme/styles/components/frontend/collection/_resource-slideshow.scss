@@ -1,6 +1,7 @@
 .resource-slideshow {
   $slideCopyFocus: 570px;
-  --default-focus-color: #{$accentPrimary};
+  --default-focus-color: #{$accentInteractionLight};
+  --default-hover-color: #{$accentInteractionLight};
 
   padding-bottom: 38px;
 
@@ -21,12 +22,14 @@
   &__footer {
     position: relative;
     padding: 10px $containerPaddingResp;
+    color: $neutralTextDark;
 
     @include respond($break60) {
       display: flex;
       justify-content: flex-end;
       width: 100%;
       padding: 17px 23px;
+      color: $neutralTextLight;
       background-color: $neutral90;
     }
   }
@@ -42,6 +45,7 @@
     left: 0;
     width: 100%;
     text-align: center;
+    color: $neutralTextLight;
     background-color: transparentize($neutral90, 0.1);
 
     @include respond($break60) {
@@ -58,7 +62,6 @@
     display: inline-block;
     padding: 11px 0 13px;
     font-size: 13px;
-    color: $neutral50;
     letter-spacing: 0.05em;
 
     @include respond($break60) {
@@ -76,7 +79,6 @@
     align-items: center;
     margin-top: -9px;
     font-size: 13px;
-    color: $neutral40;
     letter-spacing: 0.05em;
 
     @include respond($break60) {
@@ -86,10 +88,10 @@
 
     &:disabled {
       opacity: 0.4;
-    }
 
-    &:not(:disabled):hover {
-      color: $accentPrimary;
+      &:hover {
+        color: $neutral40;
+      }
     }
 
     &--previous {
@@ -144,7 +146,7 @@
     font-size: 20px;
     font-weight: $regular;
     hyphens: none;
-    color: $neutralOffBlack;
+    color: $neutral90;
 
     @include respond($break60) {
       margin-bottom: 0.364em;
@@ -164,11 +166,6 @@
     padding-bottom: 5em;
     overflow: visible;
     font-size: 15px;
-    color: $neutral70;
-
-    @include respond($break60) {
-      color: $neutral40;
-    }
 
     @include respond($break40) {
       padding-bottom: 3.5em;
@@ -187,11 +184,7 @@
     }
 
     a {
-      color: $neutral40;
-
-      &:visited {
-        color: $neutral40;
-      }
+      text-decoration: underline;
     }
   }
 
@@ -248,41 +241,18 @@
     display: block;
     margin-top: 7px;
     font-size: 13px;
-    color: $neutral70;
     text-decoration: none;
-    transition: color $duration $timing;
 
     @include respond($break40) {
       display: inline;
       margin-top: 0;
       margin-right: 22px;
     }
-
-    @include respond($break60) {
-      color: $neutral50;
-    }
-
-    .overlay-full & {
-      color: $neutral50;
-    }
-
-    &:hover {
-      color: $accentPrimary;
-    }
   }
 
   &__more-link {
     // Only show more link when expandable (see above)
     display: none;
-    color: $neutral50;
-
-    @include respond($break60) {
-      color: $neutral40;
-    }
-
-    .overlay-full & {
-      color: $neutral40;
-    }
 
     .resource-slideshow__utility--expandable & {
       display: block;

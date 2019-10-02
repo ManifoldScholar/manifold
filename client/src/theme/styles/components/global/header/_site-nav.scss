@@ -24,17 +24,10 @@
     @include templateHead;
     position: relative;
     font-size: 14px;
-    color: $neutral50;
     text-decoration: none;
 
     @include respond($break40) {
       font-size: 16px;
-    }
-
-    &:not(.site-nav__link--active):hover,
-    &:not(.site-nav__link--active):focus {
-      color: $accentPrimary;
-      outline: 0;
     }
 
     &--active {
@@ -59,8 +52,8 @@
         }
       }
 
-      &:focus {
-        @include focusVisibleOutline;
+      &:focus-visible {
+        @include outlineOnFocusVisible;
         outline-offset: 2px;
       }
     }

@@ -20,7 +20,6 @@
     margin: 0;
     font-size: 22px;
     font-weight: $medium;
-    color: $neutral75;
 
     @include respond($break65) {
       justify-content: center;
@@ -41,7 +40,6 @@
     position: absolute;
     top: 50%;
     right: 17px;
-    color: $neutral75;
     transform: translateY(-50%);
 
     &__icon {}

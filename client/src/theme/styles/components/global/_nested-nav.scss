@@ -1,9 +1,14 @@
 /* stylelint-disable property-no-vendor-prefix */
 .nested-nav {
+  --default-hover-color: #{$accentInteractionDark};
+
   display: none;
   background-color: $neutralWhite;
 
   &--dark {
+    --default-hover-color: #{$accentInteractionLight};
+    --button-color: #{$accentInteractionLight};
+
     background-color: $neutral110;
   }
 
@@ -24,7 +29,7 @@
     width: 100%;
     padding: 0;
     margin-top: 20px;
-    border: 1px solid $neutral50;
+    border: 1px solid;
 
     .search-query {
       input[type='text'] {
@@ -111,7 +116,6 @@
     @include templateHead;
     position: relative;
     font-size: 17px;
-    color: $neutral50;
     text-decoration: none;
     transition: color $duration $timing;
 
@@ -163,11 +167,8 @@
   &__link,
   &__button,
   &__disclosure-button {
-    &:hover,
-    &:focus,
-    .nested-nav--dark &:hover,
-    .nested-nav--dark &:hover {
-      color: $accentPrimary;
+    &:focus-visible {
+      @include defaultHoverStyle;
       outline: 0;
     }
   }
@@ -203,7 +204,7 @@
     transform: rotate(0deg);
 
     .nested-nav__disclosure-button:hover & {
-      color: $accentPrimary;
+      @include defaultHoverStyle;
     }
 
     .nested-nav__item--open & {

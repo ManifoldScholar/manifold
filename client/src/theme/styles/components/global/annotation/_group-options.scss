@@ -91,7 +91,7 @@
       &:hover,
       &:focus-visible {
         color: $darkBgColor;
-        background-color: $accentPrimary;
+        background-color: $accentInteractionLight;
         outline: 0;
       }
     }
@@ -191,8 +191,8 @@
     &:hover,
     &:focus-visible {
       color: $neutral85;
-      background-color: $accentPrimary;
-      border-color: $accentPrimary;
+      background-color: $accentInteractionLight;
+      border-color: $accentInteractionLight;
       outline: 0;
     }
   }

@@ -54,7 +54,7 @@
         height: 56px;
         margin-right: 6px;
         margin-left: -4px;
-        color: $neutral40;
+        color: $neutralUIDullDark;
 
         @include respond($break60) {
           width: 60px;
@@ -224,6 +224,7 @@
 
     &--incomplete-header {
       margin-bottom: 20px;
+      color: $neutral90;
 
       @include respond($break40) {
         margin-bottom: 0;
@@ -317,10 +318,9 @@
       align-items: center;
       color: $neutral80;
       text-decoration: none;
-      transition: color $duration $timing;
 
       &:hover {
-        color: $accentPrimary;
+        @include defaultHoverStyle;
       }
 
       .manicon-svg {

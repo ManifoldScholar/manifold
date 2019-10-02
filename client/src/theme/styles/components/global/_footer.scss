@@ -1,6 +1,10 @@
 .app-footer {
+  --default-hover-color: #{$accentInteractionLight};
+  --default-focus-color: #{$accentInteractionLight};
+  color: $neutralTextLight;
+
   padding-top: 32px;
-  background-color: $neutral75;
+  background-color: $neutral85;
 
   @include respond($break50) {
     padding-top: 40px;
@@ -28,7 +32,7 @@
   }
 
   &--standalone {
-    --default-focus-color: #{$accentPrimary};
+    --default-focus-color: #{$accentInteractionLight};
 
     padding-top: 0;
   }
@@ -70,9 +74,12 @@
   &__socials-item {
     padding: 0;
 
-    &:hover {
+    a:hover,
+    a:focus-visible {
+      outline: 0;
+
       svg {
-        color: $accentPrimary;
+        @include defaultHoverStyle;
       }
     }
 
@@ -107,7 +114,6 @@
     position: relative;
     padding-bottom: 20px;
     font-size: 14px;
-    color: $neutral50;
     @include templateCopy;
 
     @include respond($break30) {
@@ -217,29 +223,11 @@
     position: relative;
     top: -1px;
     margin-right: 14px;
-    color: $neutral50;
-    transition: color $duration $timing;
-
-    .app-footer-navigation__link:hover &,
-    .app-footer-navigation__link:focus & {
-      color: $accentPrimary;
-    }
   }
 
   &__link {
-    color: $neutralWhite;
     text-decoration: none;
     cursor: pointer;
-    transition: color $duration $timing;
-
-    &:hover, &:focus {
-      color: $accentPrimary;
-      outline: 0;
-    }
-  }
-
-  &__link-text {
-
   }
 }
 
@@ -247,12 +235,8 @@
   display: block;
   padding-top: 30px;
   padding-bottom: 30px;
-  background-color: $neutral80;
+  background-color: $neutral90;
   transition: background-color $duration $timing;
-
-  &--standalone {
-    background-color: $neutral90;
-  }
 
   &--reader {
     padding-top: 42px;
@@ -261,9 +245,15 @@
 
   &--with-hover {
     &:hover,
-    &:focus {
-      background-color: $accentPrimary;
+    &:focus-visible {
+      background-color: $defaultHoverColor;
       outline: 0;
+
+      .app-footer-powered-by__logo-icon,
+      .app-footer-powered-by__logo-text--neutral,
+      .app-footer-powered-by__logo-text--white {
+        color: $neutralTextExtraDark;
+      }
     }
   }
 
@@ -307,6 +297,19 @@
         flex-direction: row;
       }
     }
+
+    &--with-hover {
+      &:hover,
+      &:focus-visible {
+        outline: 0;
+
+        .app-footer-powered-by__logo-icon,
+        .app-footer-powered-by__logo-text--neutral,
+        .app-footer-powered-by__logo-text--white {
+          color: $neutralWhite;
+        }
+      }
+    }
   }
 
   &__logo-icon {
@@ -317,11 +320,6 @@
     color: $accentPrimary;
     transition: color $duration $timing;
 
-    .app-footer-powered-by--with-hover:hover &,
-    .app-footer-powered-by__logo--with-hover:hover & {
-      color: $neutralWhite;
-    }
-
     &--dull {
       @include respond($break65) {
         color: $neutral70;
@@ -330,14 +328,6 @@
   }
 
   &__logo-text {
-    a, a:visited {
-      color: $accentPrimary;
-    }
-
-    a:hover {
-      color: $accentPrimaryPale;
-    }
-
     display: inline-block;
 
     &--tiny {
@@ -351,25 +341,12 @@
     }
 
     &--neutral {
-      color: $neutral70;
+      color: $neutralTextLight;
       transition: color $duration $timing;
-
-      .app-footer-powered-by--with-hover:hover &,
-      .app-footer-powered-by__logo--with-hover:hover & {
-        color: $neutralWhite;
-      }
     }
 
     &--white {
       transition: color $duration $timing;
-
-      .app-footer-powered-by--with-hover:hover & {
-        color: $neutral80;
-      }
-
-      .app-footer-powered-by__logo--with-hover:hover & {
-        color: $accentPrimary;
-      }
     }
   }
 
@@ -382,13 +359,8 @@
 
 .app-footer-search-form {
   input {
-    border: 1px solid;
-  }
-
-  @include respond($break65) {
-    input {
-      border: 2px solid;
-    }
+    border-width: 1px;
+    border-radius: 8px;
   }
 
   &--with-top-margin {

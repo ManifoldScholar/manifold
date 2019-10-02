@@ -2,21 +2,20 @@
 .hero-builder-block {
   $heroBlockPadding: 24px;
 
-  @include panelRounded;
+  @include panelRoundedDark;
   padding: $heroBlockPadding $heroBlockPadding $heroBlockPadding / 2;
   margin-top: 18px;
   margin-bottom: 21px;
-  color: $neutral30;
 
 
   &__header {
     display: flex;
     margin-bottom: $heroBlockPadding / 2;
     cursor: pointer;
-  }
 
-  &__header:hover {
-    color: $accentPrimary;
+    &:hover {
+      color: $neutralTextLight;
+    }
   }
 
   &__header-details {
@@ -29,43 +28,44 @@
     margin-bottom: 8px;
     font-size: 18px;
     font-weight: $medium;
+    color: $neutralTextExtraLight;
+    transition: color $duration $timing;
+
+    .hero-builder-block__header:hover & {
+      @include defaultHoverStyle;
+    }
   }
 
   &__description {
     @include templateCopy;
     font-style: italic;
-    color: $neutral45;
   }
 
   &__button {
     @include buttonUnstyled;
-    color: $neutral50;
 
     &:focus-visible {
       svg {
-        color: $accentPrimary;
+        color: $defaultHoverColor;
       }
 
       .hero-builder-block__button-label {
         @include respond($break40) {
-          color: $accentPrimary;
+          color: $defaultHoverColor;
           visibility: visible;
+          opacity: 1;
         }
       }
-
-    }
-
-    svg {
-      transition: color $duration $timing;
     }
   }
 
   &__header:hover &__button {
-    color: $accentPrimary;
+    @include defaultHoverStyle;
 
     .hero-builder-block__button-label {
       @include respond($break40) {
         visibility: visible;
+        opacity: 1;
       }
     }
   }
@@ -77,8 +77,9 @@
     text-transform: uppercase;
     letter-spacing: 0.125em;
     white-space: nowrap;
+    opacity: 0;
     visibility: hidden;
-    transition: color $duration $timing;
+    transition: opacity $duration $timing;
   }
 
   &__body {

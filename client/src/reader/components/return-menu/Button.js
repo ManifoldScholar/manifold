@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 export default class ReturnMenuButton extends Component {
   static displayName = "ReturnMenuButton";
@@ -15,15 +16,19 @@ export default class ReturnMenuButton extends Component {
   };
 
   render() {
-    // NB: An active prop is passed to the button by default and can be used
-    // to set a classname here.
+    const { expanded } = this.props;
+    const buttonClasses = classNames({
+      "reader-header__button": true,
+      "reader-header__button--pad-default": true,
+      "button-active": expanded
+    })
     return (
       <button
-        className="reader-header__button reader-header__button--pad-default"
+        className={buttonClasses}
         onClick={this.clickHandler}
         data-id="toggle-menu"
         aria-haspopup
-        aria-expanded={this.props.expanded}
+        aria-expanded={expanded}
       >
         Menu
       </button>

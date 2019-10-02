@@ -1,8 +1,8 @@
 // Search Menu button and panel global styles (see header styles for context specific styles)
 .button-search {
   height: 100%;
-  color: $neutral70;
-  color: var(--button-color, $neutral70);
+  color: $neutralTextDark;
+  color: var(--button-color, $neutralTextDark);
   vertical-align: middle;
   background: transparent;
   border: 0;
@@ -10,20 +10,14 @@
   outline: none;
   appearance: none;
 
-  .header-reader & {
-    transition: background-color $duration $timing;
-  }
-
   .header-app & {
     $tailHeight: 17px;
-    transition: color $duration $duration $timing;
+    transition: color $duration $timing;
 
-    &:hover,
     &.button-active,
     &:focus-visible {
+      @include defaultHoverStyle;
       outline: 0;
-      color: $accentPrimary;
-      transition: color $duration $timing;
     }
 
     &::after {
@@ -49,6 +43,8 @@
 }
 
 .search-menu {
+  --default-focus-color: #{$neutralUIDark};
+
   // browse styles
   position: absolute;
   right: -$containerPaddingRespGlobal;

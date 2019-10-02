@@ -1,10 +1,6 @@
 .content-placeholder {
   text-align: center;
 
-  &--frontend {}
-
-  &--backend {}
-
   &__header {
     display: flex;
     flex-direction: column;
@@ -31,7 +27,7 @@
     }
 
     .content-placeholder--frontend & {
-      color: $neutral75;
+      color: $neutralTextDark;
       background-color: $neutral10;
     }
   }
@@ -45,12 +41,12 @@
     @include headingPrimary;
     margin-bottom: 0;
 
-    .content-placeholder--backend & {
-      color: $neutral30;
+    .content-placeholder--frontend & {
+      color: $neutralTextExtraDark;
     }
 
-    .content-placeholder--frontend & {
-      color: $neutral75;
+    .content-placeholder--backend & {
+      color: $neutralTextExtraLight;
     }
   }
 
@@ -62,26 +58,19 @@
       @include templateHead;
       font-size: 16px;
       line-height: 1.5;
-      color: $neutral50;
     }
 
     .content-placeholder--frontend & {
       @include templateCopy;
       font-size: 19px;
       line-height: 1.3;
-      color: $neutral75;
     }
 
     a {
-      color: $accentPrimaryMedium;
-      transition: color $durationFast $timing;
+      text-decoration: underline;
 
       &:visited {
-        color: $accentPrimaryMedium;
-      }
-
-      &:hover {
-        color: $accentPrimaryDark;
+        color: $defaultHoverColor;
       }
     }
   }
@@ -111,5 +100,7 @@
     margin-top: 40px;
   }
 
-  &__ext-link {}
+  &__ext-link:hover {
+    @include defaultHoverStyle;
+  }
 }

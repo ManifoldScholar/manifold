@@ -10,16 +10,14 @@
 
   .backend & {
     height: 100%;
-    color: $neutral30;
 
     @include respond(event-entity(panel-breakpoint)) {
-      @include panelRounded;
+      @include panelRoundedDark;
     }
   }
 
   .browse & {
     @include panelRoundedLight;
-    color: $neutral90;
   }
 
   &--linked {
@@ -32,10 +30,6 @@
 
       @include respond($break60) {
         @include boxShadow(0, 20px, 30px, 2px);
-      }
-
-      .event-tile__icon {
-        color: $accentPrimary;
       }
     }
   }
@@ -71,20 +65,24 @@
     left: 0;
     width: event-entity(icon-size-small);
     height: event-entity(icon-size-small);
-    color: $neutral30;
+    color: $neutralUILight;
     background-color: $neutralWhite;
     border-radius: 100%;
-    transition: color $duration ease-out;
+    transition: color $duration $timing;
     transform: translateX(-50%);
 
     .backend & {
       display: none;
-      color: $neutral50;
       background-color: transparent;
 
       @include respond($break60) {
         display: block;
       }
+    }
+
+    .event-tile--linked:hover &,
+    .event-tile--linked:focus-visible & {
+      @include defaultHoverStyle;
     }
 
     @include respond($break60) {
@@ -105,9 +103,14 @@
     font-size: 16px;
     font-weight: $regular;
     hyphens: none;
+    color: $neutralTextExtraLight;
 
     @include respond($break40) {
       font-size: 17px;
+    }
+
+    .browse & {
+      color: $neutralTextExtraDark;
     }
   }
 
@@ -120,9 +123,7 @@
   &__user, &__user a {
     @include templateHead;
     font-size: 15px;
-    color: $neutral70;
     text-decoration: none;
-    transition: color $duration ease-out;
 
     + .event-tile__footer {
       margin-top: 3px;
@@ -140,7 +141,7 @@
     letter-spacing: 0.03em;
 
     a {
-      color: $accentPrimaryDark;
+      color: $defaultHoverColor;
       text-decoration: none;
     }
   }
@@ -165,9 +166,7 @@
     display: block;
     font-size: 12px;
     font-weight: $semibold;
-    color: $neutral70;
     letter-spacing: 0.115em;
-    transition: color $duration ease-out;
 
     @include respond($break40) {
       font-size: 13px;

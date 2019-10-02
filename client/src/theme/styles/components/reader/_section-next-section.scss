@@ -17,12 +17,6 @@
     @include respond($break120) {
       padding: 64px 0 130px;
     }
-
-    &:hover {
-      h3 {
-        color: $accentPrimary;
-      }
-    }
   }
 
   &__header {
@@ -30,7 +24,6 @@
     display: inline-block;
     padding-bottom: 5px;
     font-size: 14px;
-    color: $neutral75;
     border-bottom: 2px solid $neutral40;
   }
 
@@ -41,7 +34,7 @@
     font-size: 24px;
     font-weight: $semibold;
     hyphens: none;
-    color: $neutral80;
+    color: $neutralTextExtraDark;
     transition: color $duration $timing;
 
     @include respond($break70) {
@@ -49,12 +42,12 @@
     }
 
     .scheme-dark & {
-      color: $neutral20;
+      color: $neutralTextExtraLight;
     }
 
     .section-next-section__link:hover &,
     .section-next-section__link:focus-visible & {
-      color: $accentPrimary;
+      @include defaultHoverStyle;
     }
   }
 }

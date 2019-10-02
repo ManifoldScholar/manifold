@@ -9,7 +9,7 @@
 
     &:hover {
       .title {
-        color: $accentPrimary;
+        @include defaultHoverStyle;
       }
     }
   }

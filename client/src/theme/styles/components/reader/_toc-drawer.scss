@@ -42,14 +42,12 @@
         width: 100%;
         hyphens: none;
         line-height: 1.2;
-        color: $neutral90;
+        color: $neutralTextExtraDark;
         text-decoration: none;
         border-bottom: 1px solid $neutral40;
-        transition: color $duration $timing,
-          background-color $duration $timing;
+        transition: background-color $duration $timing;
 
         &:hover, &:focus-visible {
-          color: $neutral75;
           background-color: $accentPrimaryPale;
           outline: 0;
         }
@@ -106,7 +104,6 @@
     padding: 50px 40px;
     margin: 0;
     font-style: italic;
-    color: $neutral50;
 
     @include respond($break50) {
       padding: 60px 85px;
@@ -129,13 +126,14 @@
       width: 100%;
       padding-top: 29px;
       padding-bottom: 70px;
-      color: $neutral50;
       text-decoration: none;
-      transition: color $duration $timing,
+      color: $neutralTextDark;
+      transition:
+        color $duration $timing,
         background-color $duration $timing;
 
       &:hover, &:focus-visible {
-        color: $neutral75;
+        color: $neutralTextExtraDark;
         background-color: $accentPrimaryPale;
         outline: 0;
       }
@@ -149,7 +147,6 @@
     &__icon {
       position: relative;
       top: 1px;
-      color: inherit;
     }
 
     &__text {

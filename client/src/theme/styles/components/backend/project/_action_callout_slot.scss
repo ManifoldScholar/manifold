@@ -13,7 +13,7 @@
   }
 
   &__content {
-    @include panelRounded;
+    @include panelRoundedDark;
     display: flex;
     flex: 1;
     flex-direction: column;

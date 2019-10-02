@@ -26,7 +26,6 @@
 
   .instructional-copy {
     @include formInstructions;
-    color: $neutral50;
   }
 }
 
@@ -75,14 +74,10 @@
 
   &__button {
     @include buttonUnstyled;
-    transition: color $duration $timing;
 
     &--drag-handle {
       cursor: grab;
-    }
-
-    &:hover {
-      color: $accentPrimary;
+      @include defaultHoverState;
     }
 
     .project-collection-list-item--selected & {

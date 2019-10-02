@@ -1,15 +1,6 @@
-.button-appearance {
-  @include buttonUnstyled;
-  height: 100%;
-  color: $neutral50;
-  transition: background-color $duration $timing;
-
-  &.button-active {
-    background-color: $neutral10;
-  }
-}
-
 .appearance-menu {
+  --default-focus-color: #{$defaultHoverColor};
+
   @include uiPanelMenu;
 
   &__list {
@@ -61,19 +52,18 @@
   }
 
   &__radio-label {
-    color: $neutral70;
     border-bottom: 2px solid transparent;
     transition: color $durationFast $timing, border-color $durationFast $timing;
 
     .appearance-menu__font-style--active & {
-      color: $neutralOffBlack;
-      border-color: $neutralOffBlack;
+      color: $neutralTextExtraDark;
+      border-color: $neutralTextExtraDark;
     }
 
     .appearance-menu__font-style:hover &,
     .appearance-menu__radio-input:focus-visible ~ & {
-      color: $accentPrimary;
-      border-color: $accentPrimary;
+      @include defaultHoverStyle;
+      border-color: $defaultHoverColor;
     }
   }
 
@@ -86,11 +76,14 @@
   }
 
   &__primary-hover-button {
-    transition: all $durationFast $timing;
+    transition:
+      color $duration $timing,
+      background-color $duration $timing,
+      border-color $duration $timing;
 
     &:hover:not(:disabled):not([aria-disabled='true']) {
       color: $neutralWhite;
-      background-color: $accentPrimary;
+      background-color: $defaultHoverColor;
     }
   }
 
@@ -146,21 +139,9 @@
     margin-top: 3px;
     margin-bottom: 3px;
 
-    &--active {
-      color: $neutralOffBlack;
-      border-color: $neutralOffBlack;
-    }
-
     &:not(:first-of-type) {
       margin-left: 0;
     }
-
-    &:hover, &:focus-visible {
-      color: $accentPrimary;
-      border-color: $accentPrimary;
-      outline: 0;
-    }
-
     &--serif {
       @include templateCopy;
       font-size: 25px;
@@ -185,25 +166,18 @@
     @include buttonUnstyled;
     width: 44px;
     height: 44px;
-    color: $neutral80;
+    color: $neutralTextExtraDark;
     vertical-align: top;
     background-color: $neutralWhite;
     border-radius: 100%;
-    transition: color $durationFast $timing, background-color $durationFast $timing;
 
     @include respond($break50) {
       width: 35px;
       height: 35px;
     }
 
-    &:hover, &:focus-visible {
-      color: $neutralWhite;
-      background-color: $accentPrimary;
-      outline: 0;
-    }
-
     &:disabled {
-      color: $neutral40;
+      color: $neutralTextLight;
       background-color: $neutral20;
     }
 
@@ -212,13 +186,9 @@
       height: 35px;
     }
 
-    &:hover {
-      outline: 0;
-    }
-
     &:disabled,
     &[aria-disabled='true'] {
-      color: $neutral40;
+      color: $neutralTextLight;
       cursor: default;
       background-color: $neutral20;
     }
@@ -239,20 +209,22 @@
     width: calc(50% - 10px);
     height: 39px;
     border: 3px solid transparent;
-    transition: border-color $durationFast $timing;
+    transition: border-color $duration $timing;
 
     @include respond($break50) {
       width: 96px;
     }
 
     &--light {
-      color: $neutralOffBlack;
+      color: $neutralTextExtraDark;
       background-color: $neutralWhite;
     }
 
     &--dark {
+      --default-hover-color: #{$accentInteractionLight};
+
       color: $neutralWhite;
-      background-color: $neutral80;
+      background-color: $neutralUIExtraDark;
     }
 
     &--active {
@@ -269,14 +241,14 @@
     }
 
     &:hover, &:focus-visible {
-      border-color: $accentPrimary;
+      border-color: $defaultHoverColor;
       outline: 0;
     }
   }
 
   &__color-scheme-icon {
     .appearance-menu__radio-input:focus-visible ~ & {
-      color: $accentPrimary;
+      @include defaultHoverStyle;
       opacity: 1;
     }
   }

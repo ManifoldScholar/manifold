@@ -13,9 +13,9 @@
     margin-bottom: 0;
     font-size: 13px;
     font-weight: $semibold;
-    color: $neutral75;
     text-transform: uppercase;
     letter-spacing: 0.107em;
+    color: $neutralTextExtraDark;
     background-color: $neutral10;
 
     @include respond($break80) {
@@ -29,12 +29,12 @@
     flex-direction: column;
 
     &--no-label {
-      border-top: 1px solid $neutral40;
+      border-top: 1px solid $neutralUIDullDark;
     }
   }
 
   &__item {
     padding: 30px 0;
-    border-bottom: 1px solid $neutral40;
+    border-bottom: 1px solid $neutralUIDullDark;
   }
 }

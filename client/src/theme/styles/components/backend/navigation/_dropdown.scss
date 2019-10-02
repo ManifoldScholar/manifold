@@ -2,7 +2,6 @@
   @include templateHead;
   position: relative;
   font-weight: $semibold;
-  color: $neutralWhite;
   text-align: center;
   text-transform: none;
   background-color: $neutral100;
@@ -10,10 +9,8 @@
   &__trigger {
     @include buttonUnstyled;
     width: 100%;
-    transition: color $duration $timing;
 
     &:hover {
-      color: $accentPrimary;
       cursor: pointer;
     }
 
@@ -22,11 +19,11 @@
     }
 
     .dropdown-nav--open & {
-      color: $accentPrimary;
+      @include defaultHoverStyle;
     }
 
     .dropdown-nav--static:hover & {
-      color: $neutralWhite;
+      color: $neutralTextExtraLight;
       cursor: default;
     }
   }
@@ -73,16 +70,10 @@
     width: 100%;
     padding-top: 7px;
     padding-bottom: 7px;
-    color: $neutral45;
     text-decoration: none;
-    transition: color $duration $timing;
-
-    &:hover {
-      color: $accentPrimary;
-    }
 
     &--active {
-      color: $accentPrimary;
+      color: $neutralTextExtraLight;
     }
   }
 }

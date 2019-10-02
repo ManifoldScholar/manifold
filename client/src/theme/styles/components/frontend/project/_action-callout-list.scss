@@ -47,11 +47,11 @@
     align-items: center;
     padding-right: 13px;
     padding-left: 13px;
-    color: $neutral90;
+    color: $neutral95;
     border: 2px solid transparent;
     transition:
       background-color $duration $timing,
-      border-color background-color $duration $timing;
+      border-color $duration $timing;
     -ms-flex-align: center;
     -ms-grid-rows: auto;
     -ms-grid-columns: 1fr 9px auto 9px auto 9px 1fr;
@@ -65,6 +65,7 @@
 
       &:hover,
       &:focus-visible {
+        color: $neutral90;
         background-color: $accentPrimaryDull;
       }
 
@@ -74,10 +75,11 @@
     }
 
     &--secondary {
-      background-color: $neutral20;
+      background-color: $neutral30;
 
       &:hover {
-        background-color: rgba($neutral20, 0.6);
+        color: inherit;
+        background-color: rgba($neutral30, 0.7);
       }
 
       &:focus-visible {
@@ -85,13 +87,14 @@
       }
 
       .project-hero--dark & {
-        color: $neutral45;
-        background-color: #424242;
-        border-color: #424242;
+        color: $neutral95;
+        background-color: $neutralUILight;
+        border-color: $neutralUILight;
 
         &:hover,
         &:focus-visible {
-          background-color: $neutral75;
+          background-color: $neutral30;
+          border-color: $neutral30;
         }
 
         &:focus-visible {
@@ -127,7 +130,7 @@
     -ms-grid-row-align: center;
 
     .action-callout-list__button--secondary & {
-      color: $neutral50;
+      color: $neutral90;
     }
   }
 
@@ -154,13 +157,10 @@
   &__link {
     display: block;
     min-height: 17.33px;
-    transition: color $duration $timing;
 
     &:hover {
-      color: $accentPrimary;
-
       .action-callout-list__link-icon {
-        color: inherit;
+        @include defaultHoverStyle;
       }
     }
 
@@ -174,13 +174,10 @@
     }
   }
 
-
-
-  &__link-text {}
-
   &__link-icon {
     margin-right: 8px;
     color: $neutral50;
+    transition: color $duration $timing;
 
     .project-hero--dark & {
       color: $neutral45;

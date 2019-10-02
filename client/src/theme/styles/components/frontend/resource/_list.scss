@@ -5,7 +5,6 @@
     @include utilityPrimary;
     margin-bottom: 24px;
     font-size: 13px;
-    color: $neutral50;
 
     @include respond($break60) {
       display: flex;
@@ -15,18 +14,10 @@
     .meta-value {
       @include utilityPrimary;
       font-size: 12px;
-      color: $neutral30;
 
       a {
-        color: $neutral30;
-        transition: color $durationFast $timing;
-
         &:visited {
-          color: $neutral30;
-        }
-
-        &:hover {
-          color: $accentPrimary;
+          @include defaultFocusStyle;
         }
       }
     }

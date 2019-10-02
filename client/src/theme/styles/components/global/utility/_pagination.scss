@@ -1,20 +1,12 @@
 // Element wrapping a <ul>
 .list-pagination {
-
   @include utilityPrimary;
   font-size: 14px;
   font-weight: $semibold;
-  color: $neutral50;
   text-align: center;
 
   a, a:visited {
-    color: $neutral50;
     text-decoration: none;
-    transition: color $duration $timing;
-  }
-
-  a:hover {
-    color: $accentPrimary;
   }
 
   ul {
@@ -63,7 +55,7 @@
 
     &--disabled {
       a, a:visited {
-        color: $neutral80;
+        opacity: 0.6;
         pointer-events: none;
       }
     }

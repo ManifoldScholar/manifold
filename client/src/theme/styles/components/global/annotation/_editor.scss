@@ -30,7 +30,6 @@
     margin: 0; // OD
     margin-bottom: 1.313em;
     font-size: 14px;
-    color: $neutral70;
 
     @include respond($break60) {
       font-size: 16px;
@@ -40,7 +39,7 @@
   &__label-icon {
     margin-right: 7px;
     margin-left: -3px;
-    color: $neutral40;
+    color: $neutralUIDark;
 
     @include respond($break60) {
       width: 54px;
@@ -54,7 +53,7 @@
     width: 100%;
     padding: 1em 1.5em;
     font-size: 16px;
-    color: $neutral90;
+    color: $neutralTextExtraDark;
     resize: vertical;
     background-color: $neutral10;
     border: 0;
@@ -70,11 +69,11 @@
     }
 
     &::placeholder {
-      color: $neutral75;
+      color: $neutralTextDark;
     }
 
     &:focus-visible::placeholder {
-      color: $neutral90;
+      color: $neutralTextExtraDark;
     }
   }
 
@@ -94,41 +93,6 @@
 
       @include respond($break95) {
         width: auto;
-      }
-    }
-
-    .checkbox {
-      padding-left: 0;
-      font-size: 14px;
-      color: $neutral50;
-      transition: color $duration $timing;
-
-      &:hover {
-        color: $neutral75;
-      }
-
-      &__indicator {
-        background-color: $neutralWhite;
-      }
-
-      &__icon {
-        color: $neutral70;
-        opacity: 0;
-        transition: opacity $durationFast $timing;
-      }
-
-      &.checked {
-        .checkbox__indicator {
-          background-color: $neutralWhite;
-        }
-
-        .checkbox__icon {
-          opacity: 1;
-        }
-      }
-
-      input:focus-visible ~ .checkbox__indicator {
-        background-color: $accentPrimaryLight;
       }
     }
   }
@@ -164,6 +128,7 @@
 
   &__group-picker {
     position: relative;
+    color: $neutralTextExtraDark;
   }
 
   &__group-picker-toggle {
@@ -175,13 +140,13 @@
     width: 250px;
     padding: 7.5px 16px 9.5px 18px;
     font-size: 17px;
-    color: $neutral90;
     background-color: $neutral10;
     border-radius: 20px;
     transition: background-color $duration $timing;
 
     &:hover {
-      background-color: $neutral10;
+      color: inherit;
+      background-color: $neutral20;
     }
 
     &:focus-visible {
@@ -234,6 +199,7 @@
     .button-secondary {
       &[disabled='disabled'],
       &.button-secondary:disabled {
+        color: $neutralTextExtraDark;
         background-color: $accentPrimaryDull;
       }
 

@@ -1,12 +1,8 @@
 .checkbox {
+  @include defaultHoverState;
   position: relative;
   display: block;
   cursor: pointer;
-  transition: color $duration $timing;
-
-  &:hover {
-    color: $accentPrimary;
-  }
 
   &--white {
     &:hover {
