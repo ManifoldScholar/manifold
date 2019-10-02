@@ -3,36 +3,32 @@
   display: inline-block;
   padding: 0.76em 1.7em;
   font-size: 11.18px;
-  color: $neutral70;
-  color: var(--button-color, $neutral70);
+  color: $neutral75;
+  color: var(--button-color, $neutral75);
   text-decoration: none;
   letter-spacing: 0.134em;
   white-space: nowrap;
-  border: 1px solid $neutral70;
-  border: 1px solid var(--button-color, $neutral70);
+  border: 1px solid;
   border-radius: 4px;
-  transition: color $duration $timing,
+  transition:
+    color $duration $timing,
     background-color $duration $timing,
     border-color $duration $timing;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus-visible {
     color: $neutralWhite;
-    background-color: $accentPrimary;
-    border-color: $accentPrimary;
+    background-color: $defaultHoverColor;
+    border-color: $defaultHoverColor;
     outline: 0;
   }
 
   .bg-neutral90 &,
-  .user-links--dark & {
-    &:hover {
+  .user-links--dark &,
+  .user-nav--dark & {
+    &:hover,
+    &:focus-visible {
       color: $neutral90;
-      background-color: $accentPrimary;
-    }
-
-    &:focus {
-      color: $accentPrimary;
-      background-color: $neutral95;
-      outline: 0;
     }
   }
 }

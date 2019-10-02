@@ -1,5 +1,4 @@
 .ordered-records {
-
   @include listUnstyled;
   display: flex;
   flex-direction: column;
@@ -10,7 +9,6 @@
   }
 
   &--empty {
-    //background: blue;
     position: relative;
     min-height: 87px;
 
@@ -19,9 +17,8 @@
       width: 100%;
       padding: 16px;
       font-size: 14px;
-      color: $neutral80;
       text-align: center;
-      border: 1px solid $neutral80;
+      border: 1px solid;
     }
   }
 

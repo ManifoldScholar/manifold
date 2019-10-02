@@ -5,7 +5,7 @@
   vertical-align: middle;
 
   .avatar {
-    @include buttonAvatar(32, var(--button-color, $neutral70));
+    @include buttonAvatar(32, var(--button-color, $neutralTextDark));
   }
 
   &--frontend,
@@ -14,14 +14,13 @@
     padding-bottom: 5px;
 
     .avatar {
-      transition: color $duration $duration $timing;
+      transition: color $duration $timing;
     }
 
     &:hover,
     &.button-active {
       .avatar {
-        color: $accentPrimary;
-        transition: color $duration $timing;
+        @include defaultHoverStyle;
       }
     }
   }
@@ -31,8 +30,7 @@
       outline: 0;
 
       .avatar {
-        color: $accentPrimary;
-        transition: color $duration $timing;
+        @include defaultHoverStyle;
       }
     }
   }
@@ -57,6 +55,7 @@
   position: absolute;
   right: -20px;
   white-space: nowrap;
+  color: $neutralTextDark;
   background-color: $neutral10;
 
   &--frontend,
@@ -97,7 +96,6 @@
     align-items: center;
     width: 100%;
     padding: 9px 20px;
-    color: $neutral75;
     text-decoration: none;
     transition:
       color $duration $timing,
@@ -128,7 +126,7 @@
 
     .user-menu--frontend &,
     .user-menu--backend & {
-      color: $neutral50;
+      color: $neutralUIDark;
     }
 
     .user-menu__link:hover &,

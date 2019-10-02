@@ -50,7 +50,7 @@
       text-decoration: none;
 
       .image-overlay {
-        background-color: $accentPrimary;
+        background-color: $defaultHoverColor;
         opacity: 0;
       }
 
@@ -58,7 +58,7 @@
         outline: 0;
 
         .icon-thumbnail-title {
-          color: $accentPrimary;
+          @include defaultHoverStyle;
         }
 
         .image-overlay {
@@ -66,7 +66,7 @@
         }
 
         .icon-thumbnail-icon {
-          background-color: $accentPrimary;
+          background-color: $defaultHoverColor;
         }
 
         svg {
@@ -152,7 +152,7 @@
 
   .notation-viewer .viewer-list &.highlighted {
     .icon-thumbnail-title {
-      color: $accentPrimary;
+      color: $defaultHoverColor;
     }
 
     .image-overlay {
@@ -175,13 +175,13 @@
     z-index: 10;
     width: 17px;
     height: 17px;
-    color: $neutralOffBlack;
     cursor: pointer;
+    color: $neutralTextExtraDark;
     background-color: $neutral40;
     transition: background-color $duration $timing;
 
     &:hover, &:focus-visible {
-      background-color: $sp30Tertiary;
+      background-color: $defaultNoticeColor;
       outline: 0;
     }
 
@@ -202,22 +202,20 @@
     font-size: 14px;
     font-weight: $light;
     line-height: 1.3;
-    color: $neutral50;
     transition: color $duration $timing;
 
     a {
-      color: $neutral50;
       text-decoration: none;
 
       &:hover {
-        color: $accentPrimary;
+        @include defaultHoverStyle;
       }
 
     }
 
     &.highlighted {
       a {
-        color: $accentPrimary;
+        @include defaultHoverStyle;
       }
     }
   }
@@ -255,7 +253,7 @@
         }
 
         .icon-thumbnail-icon {
-          background-color: $accentPrimary;
+          background-color: $defaultHoverColor;
         }
 
         svg {

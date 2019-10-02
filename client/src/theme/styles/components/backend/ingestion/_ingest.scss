@@ -4,7 +4,6 @@
     margin-top: 20px;
     font-size: 12px;
     font-weight: $semibold;
-    color: $neutral70;
     letter-spacing: 0.125em;
   }
 
@@ -13,7 +12,7 @@
     margin-top: 12px;
     font-size: 17px;
     font-style: normal;
-    color: $neutral30;
+    color: $neutralTextExtraLight;
   }
 
   &__properties {
@@ -38,10 +37,10 @@
     font-size: 14px;
     font-weight: normal;
     line-height: 1.45em;
-    color: $neutral30;
+    color: $neutralTextExtraLight;
     text-transform: none;
     white-space: pre-line;
-    border: 1px solid $neutral50;
+    border: 1px solid $neutralUIDullLight;
 
     @include respond($break90) {
       height: 50vh;

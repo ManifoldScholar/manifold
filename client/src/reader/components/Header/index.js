@@ -146,7 +146,7 @@ export default class Header extends Component {
       "reader-header__button": true,
       "reader-header__button--gray": true,
       "reader-header__button--pad-default": true,
-      "reader-header__button--active": this.props.visibility.uiPanels.tocDrawer
+      "button-active": this.props.visibility.uiPanels.tocDrawer
     });
 
     return (

@@ -4,12 +4,10 @@
   padding: 20px 0 18px;
   text-align: center;
   background-color: $sp20Quinary;
-  transition: opacity $durationFast $timing,
-    background-color $duration $timing,
-    visibility $duration $timing;
+  transition: background-color $duration $timing;
 
   .scheme-dark & {
-    background-color: $neutral75;
+    background-color: $neutralTextDark;
   }
 
   &__label {
@@ -18,13 +16,12 @@
     padding: 0.786em 0.8em;
     font-size: 14px;
     font-weight: $light;
-    color: $neutral80;
-    border: 1px solid $neutral80;
-    transition: color $duration $timing, border $duration $timing;
+    color: $neutralTextExtraDark;
+    border: 1px solid;
+    transition: color $duration $timing;
 
     .scheme-dark & {
-      color: $neutral30;
-      border: 1px solid $neutral30;
+      color: $neutralTextExtraLight;
     }
   }
 }

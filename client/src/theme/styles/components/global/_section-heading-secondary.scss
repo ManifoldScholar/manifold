@@ -15,20 +15,9 @@
     margin: 0;
     // Sized relative to parent so padding can follow suit
     font-size: 1em;
-    color: $neutral30;
+    color: $neutralTextExtraLight;
     text-transform: uppercase;
     letter-spacing: 0.125em;
-  }
-
-  a {
-    display: block;
-    color: $neutral30;
-    text-decoration: none;
-    transition: color $duration $timing;
-
-    &:hover {
-      color: $accentPrimary;
-    }
   }
 
   .manicon-svg {

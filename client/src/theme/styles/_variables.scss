@@ -46,6 +46,24 @@ $focusTertiary: $neutral30;
 // ---> For SVG interpolation
 $accentPrimaryHex: str-slice(#{$accentPrimary}, 2);
 
+// Default colors that meet WCAG AA color contrast guidelines
+$neutralTextExtraLight: $neutral10; // for $neutral75 bg
+$neutralUIExtraLight: $neutral40; // ""
+$neutralTextLight: $neutral45; // for $neutral80 ↑ bg
+$neutralUILight: $neutral50; // ""
+$neutralUIDullLight: $neutral70; // decorative or inactive elements against dark bgs
+
+$neutralUIDullDark: $neutral45; // decorative or inactive elements against dark bgs
+$neutralTextDark: $neutral75; // for $neutral10 ↓ bg
+$neutralUIDark: $neutral70; // ""
+$neutralTextExtraDark: $neutral90; // for informational hierarchy with $neutralTextDark
+$neutralUIExtraDark: $neutral85; // ""
+
+$accentInteractionLight: $accentPrimary !default;
+$accentInteractionDark: darken(saturate(adjust-hue($accentPrimary, 4), 17.01), 35.29) !default; // #077A57
+$accentNoticeLight: #f75884;
+$accentNoticeDark: #f75884;
+
 // Spectra
 // Color spectra are number by group and then given ordinal names, attributes
 

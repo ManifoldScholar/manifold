@@ -2,11 +2,10 @@
   @include templateHead;
 
   & + & {
-    border-top: 1px solid $neutral80;
+    border-top: 1px solid $neutralUIDullLight;
   }
 
   &__inner {
-
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -32,6 +31,10 @@
     display: flex;
     flex-direction: row;
     text-decoration: none;
+
+    &:hover {
+      color: inherit;
+    }
   }
 
   &__title-wrapper {
@@ -42,7 +45,7 @@
     margin: 0 0 0.6em;
     font-size: 17px;
     font-weight: $semibold;
-    color: $neutral30;
+    color: $neutralTextExtraLight;
     transition: color $duration $timing;
   }
 
@@ -50,7 +53,6 @@
     @include subtitlePrimary;
     margin-top: 7px;
     margin-left: 7px;
-    color: $neutral50;
     text-transform: none;
     transition: color $duration $timing;
   }
@@ -60,17 +62,12 @@
     display: inline-block;
     font-size: 12px;
     font-weight: $medium;
-    color: $neutral70;
   }
 
   &__icon {
     svg {
       width: 50px;
       height: 50px;
-
-      path {
-        fill: $neutral20;
-      }
     }
   }
 
@@ -89,18 +86,11 @@
     @include buttonUnstyled;
     display: block;
     padding: 0;
-    color: $neutral50;
-    transition: color $duration $timing;
-
-    &:hover {
-      color: $accentPrimary;
-    }
 
     &--notice {
       &:hover {
-        color: $sp40Tertiary;
+        color: $defaultNoticeColor;
       }
     }
   }
-
 }

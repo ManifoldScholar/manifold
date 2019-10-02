@@ -19,8 +19,6 @@
     }
 
     .meta-label {
-      color: $neutral70;
-
       &::after {
         display: inline;
         content: ': ';
@@ -29,23 +27,14 @@
 
     .meta-value {
       margin-top: 3px;
-      color: $neutral80;
+      color: $neutralTextExtraDark;
 
       .bg-neutral90 & {
-        color: $neutral40;
+        color: $neutralTextExtraLight;
       }
 
       a {
-        color: $neutral80;
-        transition: color $durationFast $timing;
-
-        &:visited {
-          color: $neutral80;
-        }
-
-        &:hover {
-          color: $neutral90;
-        }
+        text-decoration: underline;
       }
     }
   }
@@ -85,7 +74,6 @@
     @include utilityPrimary;
     display: block;
     font-size: 12px;
-    color: $neutral70;
 
     @include respond($break60) {
       font-size: 14px;
@@ -97,7 +85,7 @@
     margin-top: 7px;
     margin-bottom: 1.667em;
     font-size: 15px;
-    color: $neutral80;
+    color: $neutralTextExtraDark;
 
     @include respond($break60) {
       margin-top: 10px;
@@ -105,32 +93,7 @@
     }
 
     .bg-neutral90 & {
-      color: $neutral40;
-    }
-
-    a {
-      color: $neutral80;
-      transition: color $durationFast $timing;
-
-      &:visited {
-        color: $neutral80;
-      }
-
-      &:hover {
-        color: $accentPrimaryDark;
-      }
-
-      .bg-neutral90 & {
-        color: $neutral40;
-
-        &:visited {
-          color: $neutral40;
-        }
-
-        &:hover {
-          color: $neutral50;
-        }
-      }
+      color: $neutralTextExtraLight;
     }
 
     @include respond($break40) {

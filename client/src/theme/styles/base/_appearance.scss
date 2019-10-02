@@ -25,11 +25,19 @@
 
 // Interactions
 // --------------------
+$defaultFocusColor: var(--default-focus-color, #{$accentInteractionLight});
+$defaultHoverColor: var(--default-hover-color, #{$accentInteractionLight});
+$defaultNoticeColor: var(--default-notice-color, #{$accentNoticeLight});
+
 @mixin defaultFocusStyle {
   outline: solid 2px;
 }
 
-@mixin focusVisible($property: 'outline', $value: 'solid 2px') {
+@mixin defaultHoverStyle {
+  color: $defaultHoverColor;
+}
+
+@mixin defaultFocusState($property: 'outline', $value: 'solid 2px') {
   &:focus:not(:focus-visible) {
     outline: 0;
   }
@@ -39,24 +47,49 @@
   }
 }
 
-@mixin focusVisibleOutline($color: var(--default-focus-color, $accentPrimary)) {
-  @include focusVisible('outline', 'solid 2px #{$color}');
+@mixin defaultHoverState($property: 'color', $value: $defaultHoverColor) {
+  transition: #{$property} $duration $timing;
+
+  &:hover {
+    #{$property}: #{$value};
+  }
 }
 
-@mixin focusVisibleFill($color: $accentPrimary) {
-  @include focusVisible('background-color', $color);
+@mixin outlineOnFocusVisible($color: $defaultFocusColor) {
+  @include defaultFocusState('outline', 'solid 2px #{$color}');
+}
+
+@mixin fillOnFocusVisible($color: $accentPrimary) {
+  @include defaultFocusState('background-color', $color);
 
   &:focus-visible {
     outline: 0;
   }
 }
 
+@mixin fillOnHover($color: $defaultHoverColor) {
+  @include defaultHoverState('background-color', $color);
+}
+
 .browse, .reader.scheme-light {
-  --default-focus-color: #{$neutral80};
+  --default-focus-color: #{$neutralUIDark};
+  --default-hover-color: #{$accentInteractionDark};
+  --default-notice-color: #{$accentNoticeDark};
+  color: $neutralTextDark;
 }
 
 .backend, .reader.scheme-dark, .bg-neutral90, .bg-neutral95 {
-  --default-focus-color: #{$accentPrimary};
+  --default-focus-color: #{$accentInteractionLight};
+  --default-hover-color: #{$accentInteractionLight};
+  --default-notice-color: #{$accentNoticeLight};
+  color: $neutralTextLight;
+
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  select {
+    color: $neutralTextExtraLight;
+  }
 }
 
 
@@ -144,7 +177,7 @@
   border-radius: 7px;
 }
 
-@mixin buttonAvatar($size: 36, $color: $neutral70) {
+@mixin buttonAvatar($size: 36, $color: inherit) {
   @include buttonUnstyled;
   // Default size from browse view that may be
   // changed in scope
@@ -189,7 +222,7 @@
   background-color: $neutral10;
 
   &.secondary {
-    color: $sp40Tertiary;
+    color: $defaultNoticeColor;
   }
 
   &.tertiary {
@@ -334,16 +367,11 @@
 @mixin inputQuaternary {
   @include templateHead;
   padding: 0.438em 1.125em 0.563em;
-  color: $neutral40;
   background: transparent;
-  border: 1px solid $neutral80;
+  border: 1px solid $neutralUILight;
   border-radius: 0;
   appearance: none;
   outline: none;
-
-  &::placeholder {
-    color: $neutral75;
-  }
 
   &:focus-visible {
     outline: none;
@@ -356,7 +384,8 @@
 
 // Dark panel with rounded corners
 // used widely on the backend
-@mixin panelRounded {
+@mixin panelRoundedDark {
+  color: $neutralUILight;
   background-color: $neutral95;
   border-radius: $panelRoundedRadius;
 }
@@ -364,11 +393,11 @@
 // Light panel with rounded corners
 @mixin panelRoundedLight {
   background-color: $neutral05;
-  border-radius: 8px;
+  border-radius: $panelRoundedRadius;
 }
 
 @mixin roundedHeader {
-  @include panelRounded;
+  @include panelRoundedDark;
   display: table;
   width: 100%;
   padding: 0.75em 1.5em 0.875em;
@@ -499,7 +528,6 @@
     @include templateCopy;
     font-size: 14px;
     font-style: italic;
-    color: $neutral75;
 
 
     @include respond($break75) {

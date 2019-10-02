@@ -21,12 +21,8 @@
       &:hover, &:focus-visible {
         outline: 0;
 
-        figure > img {
-          border-color: $accentPrimary;
-        }
-
         .title-text, .label {
-          color: $accentPrimary;
+          @include defaultHoverStyle;
         }
       }
     }
@@ -61,14 +57,11 @@
 
       a, .orderable-list-item .item-wrapper {
         &:hover, &:focus-visible {
-          @include panelRounded;
+          @include panelRoundedDark;
+          color: inherit;
 
           figure > img {
             border-color: transparent;
-          }
-
-          .title-text, .label {
-            color: initial;
           }
         }
       }

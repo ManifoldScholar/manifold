@@ -1,24 +1,24 @@
 .content-block {
-  $inactiveBlockColor: #424242;
   padding-top: 9px;
   padding-bottom: 9px;
 
   &--inactive {
-    color: $inactiveBlockColor;
+    color: $neutralUIDullLight;
   }
 
   &--active {
-    color: $neutral30;
+    color: $neutralTextLight;
   }
 
   &__inner {
-    @include panelRounded;
+    @include panelRoundedDark;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 14px 9px 14px 11px;
     cursor: move; // fallback for older browsers
     cursor: grab;
+    color: inherit;
     border: 1px solid transparent;
     transition: border-color 0.2s;
 
@@ -33,6 +33,10 @@
 
     .content-block--is-dragging & {
       @include boxShadow(0, 31px, 26px, -13px, $neutralBlack, 0.33);
+    }
+
+    .content-block--inactive & {
+      cursor: not-allowed;
     }
 
     &:focus-visible {
@@ -51,6 +55,7 @@
     display: flex; // use flexbox as fallback
     flex-grow: 1;
     align-items: center;
+    color: $neutralUILight;
     transition: color $duration $timing;
 
     // enhance with grid if browser supports
@@ -59,34 +64,16 @@
       grid-template-columns: max-content auto;
     }
 
-    &:hover {
-      .content-block--available.content-block--active & {
-        color: $accentPrimary;
-      }
+    .content-block--active & {
+      color: $neutralTextExtraLight;
+    }
+
+    .content-block--active.content-block--available &:hover {
+      @include defaultHoverStyle;
     }
   }
 
   &__icon {
-    transition: color $duration $timing;
-    // if block is inactive, or icon needs to inherit color via hover of parent,
-    // inherit fill color from element.
-    // otherwise use a modifier to set a different color.
-    .content-block--inactive &,
-    .content-block--available .content-block__heading:hover &,
-    .content-block--available .content-block__inner:focus-visible &
-     {
-      color: inherit;
-      transition: none;
-    }
-
-    &--light {
-      color: $neutral50;
-    }
-
-    &--dark {
-      color: $neutral75;
-    }
-
     &--large {
       width: 36px;
       height: 36px;
@@ -98,13 +85,7 @@
     }
 
     &--incomplete {
-      color: $sp40Secondary;
-    }
-
-    &:hover {
-      .content-block__icon--add {
-        color: $accentPrimary;
-      }
+      color: $defaultNoticeColor;
     }
   }
 
@@ -157,10 +138,9 @@
 
   &__button {
     @include buttonUnstyled;
-    --hover-color: #{$accentPrimary};
 
     &--delete {
-      --hover-color: #{$sp40Tertiary};
+      --default-hover-color: #{$sp40Tertiary};
     }
 
     &--draggable {
@@ -170,11 +150,11 @@
       -webkit-touch-callout: none;
     }
 
-    &:not(:disabled):hover,
-    &:not(:disabled):focus-visible {
-      > .content-block__icon {
-        color: $accentPrimary; // fallback
-        color: var(--hover-color, $accentPrimary);
+    &:disabled {
+      cursor: not-allowed;
+
+      &:hover {
+        color: inherit;
       }
     }
   }

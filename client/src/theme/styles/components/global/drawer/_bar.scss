@@ -35,25 +35,6 @@
     min-height: 24px;
     font-size: 13px;
     letter-spacing: 0.125em;
-
-    .drawer-bar--default & {
-      color: $neutral50;
-    }
-
-    .drawer-bar--reader & {
-      color: $neutral90;
-    }
-  }
-
-  &__title-button {
-    color: $neutral90;
-    cursor: pointer;
-    border: 0;
-    transition: color $duration $timing;
-
-    &:hover {
-      color: $neutral70;
-    }
   }
 
   &__title-icon {
@@ -67,35 +48,23 @@
     display: inline-flex;
     align-items: center;
     justify-content: flex-end;
-    transition: color $duration $timing;
 
     &--light {
-      color: $neutral70;
       cursor: pointer;
 
       &:hover {
-        color: $accentPrimary;
+        @include defaultHoverStyle;
         outline: 0;
       }
 
       &:focus-visible {
-        color: $focusPrimary;
+        color: $defaultFocusColor;
       }
     }
 
     &--dark {
       font-size: 17px;
-      color: $neutral50;
       cursor: pointer;
-      transition: color $duration $timing;
-
-      &:hover {
-        color: $neutral75;
-      }
-    }
-
-    .drawer-bar--reader & {
-      color: $neutral90;
     }
   }
 
@@ -105,12 +74,6 @@
     font-size: 13px;
     font-weight: $semibold;
     letter-spacing: 0.125em;
-  }
-
-  &__close-icon {
-    &--large {
-      // display: none;
-    }
   }
 
   &__close-icon {

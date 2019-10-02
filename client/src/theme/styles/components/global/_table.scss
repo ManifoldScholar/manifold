@@ -76,7 +76,7 @@
     position: relative;
     top: -2.5px;
     margin-left: 10px;
-    color: $neutral70;
+    color: $neutralUIDark;
   }
 
   &__nested-link {
@@ -93,6 +93,7 @@
 
     &:hover,
     &:focus-visible {
+      color: inherit;
       background-color: $neutral05;
 
       .table__nested-link-arrow {
@@ -153,7 +154,7 @@
     @include templateHead;
     position: relative;
     margin: 0;
-    color: $neutral90;
+    color: $neutralTextExtraDark;
     vertical-align: baseline;
   }
 
@@ -182,7 +183,7 @@
     position: relative;
     top: -1px;
     margin-right: 5px;
-    color: $neutral70;
+    color: $neutralUIDark;
   }
 
   &__name-container {
@@ -208,7 +209,7 @@
     margin-left: 1em;
     font-size: 11px;
     line-height: 1.2em;
-    color: $neutral85;
+    color: $neutralTextExtraDark;
     vertical-align: middle;
     background-color: $neutral20;
   }
@@ -304,7 +305,7 @@
     &--placeholder {
       margin-right: 6px;
       margin-left: -3px;
-      color: $neutral50;
+      color: $neutralUIDark;
 
       @include respond($layoutBreakpoint) {
         margin-right: -3px;
@@ -321,7 +322,6 @@
     width: 38px;
     margin-right: 8px;
     margin-left: -2px;
-    color: $neutral50;
   }
 
   &__hide-desktop {

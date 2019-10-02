@@ -54,6 +54,8 @@
   }
 
   .dialog-box {
+    --default-hover-color: #{$accentInteractionLight};
+
     position: relative;
     width: 100%;
     max-width: 880px;
@@ -72,7 +74,7 @@
       h1, h2, h3, h4, h5, h6 {
         @include headingQuaternary;
         padding: 11px 0 1.1em;
-        color: $neutralWhite;
+        color: $neutralTextExtraLight;
       }
     }
 
@@ -89,13 +91,13 @@
     }
 
     .utility-primary {
-      color: $neutralWhite;
+      color: $neutralTextExtraLight;
     }
 
     p {
       @include utilityPrimary;
       padding-bottom: 34px;
-      color: $neutral50;
+      color: $neutralTextLight;
       text-transform: none;
     }
 

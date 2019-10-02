@@ -42,12 +42,13 @@
     width: 100%;
     padding-top: 11px;
     padding-bottom: 13px;
-    color: $neutral90;
+    color: $neutralTextExtraDark;
     text-align: left;
     background-color: $neutral05;
     transition: background-color $duration $timing;
 
     &:hover, &:focus-visible {
+      color: $neutralTextExtraDark;
       background-color: $neutral10;
       outline: 0;
     }
@@ -120,13 +121,12 @@
     padding-top: 11px;
     padding-bottom: 11px;
     font-size: 16px;
-    color: $neutral90;
+    color: $neutralTextExtraDark;
     text-align: left;
-    transition:
-      color $duration $timing,
-      background-color $duration $timing;
+    transition: background-color $duration $timing;
 
     &:hover, &:focus-visible {
+      color: $neutralTextExtraDark;
       background-color: $neutral10;
       outline: 0;
     }
@@ -156,7 +156,7 @@
     grid-area: icon;
     -ms-grid-row: 1;
     -ms-grid-column: 1;
-    color: $neutral70;
+    color: $neutralUIDark;
   }
 
   &__item-inner {
@@ -188,7 +188,6 @@
     padding: 2px 15px 3px;
     margin-top: 12px;
     line-height: 1.4;
-    color: $neutral75;
     background-color: $neutral05;
     border-radius: 12px;
 

@@ -1,11 +1,13 @@
 .audio-player {
+  --default-hover-color: #{$accentInteractionLight};
+
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
 
   .cover {
-    @include focusVisible;
+    @include defaultFocusState;
     position: absolute;
     top: 0;
     left: 0;
@@ -46,8 +48,6 @@
       background-color: $accentPrimary;
       border: 0;
       border-radius: 50%;
-
-      &__icon {}
     }
   }
 
@@ -80,7 +80,7 @@
 
       &:hover, &:focus-visible {
         .audio-player__icon {
-          color: $accentPrimary;
+          @include defaultHoverStyle;
         }
       }
     }

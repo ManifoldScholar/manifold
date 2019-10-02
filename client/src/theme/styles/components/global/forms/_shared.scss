@@ -7,33 +7,31 @@
   // <button>
   .icon {
     @include buttonUnstyled;
+    @include outlineOnFocusVisible;
     position: absolute;
     top: 50%;
     left: 10px;
     margin-top: -11px;
     font-size: 17px;
-    color: $neutral50;
-    transition: color $duration $timing;
   }
 
   input {
-    @include inputSecondary;
+    @include inputQuaternary;
     // Width can be controlled in wrapper
     width: 100%;
     padding-left: 40px;
-    color: $neutral50;
-    border-color: $neutral50;
+    border-color: $neutral40;
     border-radius: 0;
     appearance: none;
     transition: color $duration $timing, border-color $duration $timing;
 
     &::placeholder {
-      color: $neutral40;
+      color: $neutral30;
     }
 
     &:focus-visible {
       color: $neutralWhite;
-      border-color: $accentPrimary;
+      border-color: $defaultFocusColor;
     }
   }
 }
@@ -56,9 +54,8 @@
     padding: 25px 15px;
     font-weight: $regular;
     line-height: 1.761;
-    color: $neutral50;
     text-align: center;
-    border: 2px solid $neutral50;
+    border: 2px solid;
 
     &__text {
       display: block;
@@ -136,7 +133,6 @@
   align-items: center;
   justify-content: space-between;
   padding: 40px 0;
-  color: $neutral50;
   white-space: nowrap;
 
   &::before {
@@ -153,6 +149,6 @@
     width: 45%;
     height: 1px;
     content: '';
-    background-color: $neutral80;
+    background-color: $neutralUIDullLight;
   }
 }

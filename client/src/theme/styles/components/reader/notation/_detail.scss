@@ -13,32 +13,6 @@
     }
   }
 
-  .collection-detail {
-    .collection-description {
-      color: $neutral40;
-    }
-
-    .utility {
-      justify-content: flex-end;
-      padding: 26px 0 0;
-
-      .meta-value {
-        a {
-          color: $neutral75;
-          transition: color $durationFast $timing;
-
-          &:visited {
-            color: $neutral75;
-          }
-
-          &:hover {
-            color: $accentPrimary;
-          }
-        }
-      }
-    }
-  }
-
   .resource-slideshow {
     margin-top: 14px;
 

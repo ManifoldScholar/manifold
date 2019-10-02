@@ -55,7 +55,7 @@ exports[`Frontend.Layout.Splash component renders correctly 1`] = `
           target="blank"
         >
           <span
-            className="utility-button__text utility-button__text--large utility-button__text--light"
+            className="utility-button__text utility-button__text--large"
           >
             Click it, dog
           </span>

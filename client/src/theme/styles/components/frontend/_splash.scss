@@ -12,11 +12,22 @@
   }
 
   &.feature-dark-style {
+    --default-hover-color: #{$neutralTextExtraDark};
+    --default-focus-color: #{$neutralTextExtraDark};
+
+    color: $neutralTextExtraDark;
     background-color: $accentPrimary;
   }
 
   &.feature-light-style {
+    --default-hover-color: #{$accentInteractionDark};
+    --default-focus-color: #{$accentInteractionDark};
+
     background-color: $accentPrimaryOffWhite;
+
+    .heading-primary, .heading-secondary {
+      color: $accentInteractionDark;
+    }
   }
 
   .left {
@@ -73,10 +84,6 @@
     margin-top: 1.5em;
   }
 
-  .buttons {
-    margin-top: 1.5em;
-  }
-
   .heading-primary {
     font-size: 22px;
 
@@ -101,27 +108,11 @@
     margin-top: 0.3em;
   }
 
-  &.feature-dark-style {
-    .heading-primary, .heading-secondary {
-      color: $neutralWhite;
-    }
-  }
-
-  &.feature-light-style {
-    .heading-primary, .heading-secondary {
-      color: $accentPrimaryDark;
-    }
-  }
-
   .feature-body {
     margin-top: 1.5em;
 
     a {
-      color: $neutralBlack;
-
-      &:visited {
-        color: $neutralBlack;
-      }
+      text-decoration: underline;
     }
   }
 }

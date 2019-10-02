@@ -12,11 +12,11 @@
 
     .text-block__cover--svg,
     .text-block__name {
-      color: $accentPrimary;
+      @include defaultHoverStyle;
     }
 
     .text-block__cover-image {
-      border-color: $accentPrimary;
+      border-color: $defaultHoverColor;
     }
   }
 
@@ -61,7 +61,7 @@
     &--svg {
       margin-right: 5px;
       margin-left: -10px;
-      color: $neutral40;
+      color: $neutralUIDullDark;
       transition: color $duration $timing;
     }
   }
@@ -91,7 +91,7 @@
     font-size: 16px;
     font-weight: $semibold;
     line-height: 1.188;
-    color: $neutral90;
+    color: $neutralTextExtraDark;
     white-space: normal;
     transition: color $duration $timing;
 
@@ -132,7 +132,7 @@
 
   &__creators {
     line-height: 1.25;
-    color: $neutral90;
+    color: $neutralTextExtraDark;
 
     @include respond($break80) {
       padding-top: 0.6em;
@@ -196,7 +196,6 @@
     @include utilityPrimary;
     display: block;
     font-size: 12px;
-    color: $neutral75;
     letter-spacing: 0.107em;
 
     @include respond($break80) {
@@ -215,7 +214,7 @@
     text-transform: uppercase;
     letter-spacing: 0.134em;
     vertical-align: middle;
-    background-color: $accentPrimary;
+    background-color: $defaultHoverColor;
     border-radius: 3px;
 
     @include respond($break80) {
@@ -241,7 +240,6 @@
   &__interaction {
     @include utilityPrimary;
     font-size: 14px;
-    color: $neutral75;
     letter-spacing: 0.107em;
     border-bottom: none;
 
@@ -252,6 +250,6 @@
 
   &__interaction-icon {
     margin-right: 5px;
-    color: $accentPrimary;
+    color: $defaultHoverColor;
   }
 }

@@ -36,7 +36,7 @@ body {
   line-height: $baseLineHeight;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  // color: $something;
+  color: $neutralTextDark;
   &.no-scroll {
     overflow: hidden;
   }
@@ -51,10 +51,19 @@ p {
   margin: 0;
 }
 
-// Normalize focus outlines
+// Default hover styles
 button,
 [role='button'],
 a,
-input {
-  @include focusVisibleOutline;
+[data-react-beautiful-dnd-drag-handle] {
+  @include defaultHoverState;
+}
+
+// Default focus outlines
+button,
+[role='button'],
+a,
+input,
+[data-react-beautiful-dnd-drag-handle] {
+  @include outlineOnFocusVisible;
 }

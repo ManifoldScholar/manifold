@@ -7,7 +7,6 @@
     margin-right: 8px;
     font-size: 14px;
     line-height: 15px;
-    color: $neutral50;
   }
 
   &__list {
@@ -16,18 +15,11 @@
     align-items: center;
   }
 
-  &__item {}
-
   &__link {
     @include buttonUnstyled;
     padding-right: 8px;
     padding-left: 8px;
-    color: $neutral40;
     text-decoration: none;
-    transition: color $duration $timing;
-
-    &:hover {
-      color: $accentPrimary;
-    }
+    color: $neutralUIDark;
   }
 }

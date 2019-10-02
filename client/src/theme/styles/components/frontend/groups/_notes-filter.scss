@@ -17,7 +17,6 @@
 
   &__select-container {
     position: relative;
-    color: $neutral70;
 
     @include respond($break65) {
       width: 200px;
@@ -35,15 +34,16 @@
 
   &__select {
     @include filterSelectBase;
+    @include outlineOnFocusVisible;
     position: relative;
     width: 100%;
     height: 40px;
     font-size: 13px;
-    border: 1px solid $neutral70;
+    border: 1px solid;
     border-radius: 8px;
 
     &:focus-visible {
-      border-color: $accentPrimary;
+      border-color: $defaultFocusColor;
     }
 
     @include respond($break65) {

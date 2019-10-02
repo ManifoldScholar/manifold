@@ -1,23 +1,23 @@
 .header-logo {
   grid-area: logo;
+  /* stylelint-disable property-no-vendor-prefix */
   -ms-grid-row: 1;
   -ms-grid-column: 1;
-  /* stylelint-disable property-no-vendor-prefix */
+  /* stylelint-enable property-no-vendor-prefix */
   align-self: center;
   max-width: 300px;
   color: $accentPrimary;
   text-decoration: none;
   vertical-align: middle;
-  /* stylelint-enable property-no-vendor-prefix */
 
-  .header-app--dark & {
-    color: $neutral50;
-    transition: color $duration $timing;
+  .library-header--dark & {
+    color: $neutralUILight;
+  }
 
-    &:hover, &:focus {
-      color: $accentPrimary;
-      outline: 0;
-    }
+  &:hover,
+  &:focus-visible {
+    color: $defaultHoverColor;
+    outline: 0;
   }
 
   .manicon-svg {

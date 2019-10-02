@@ -17,15 +17,13 @@
     // CABS create a new mixin for this if repeated
     @include utilityPrimary;
     font-size: 14px;
-    color: $neutral75;
     text-decoration: none;
     text-transform: none;
     letter-spacing: 0;
-    transition: color $duration $timing;
 
     &:hover,
     &.active {
-      color: $neutral20;
+      color: $neutralTextExtraLight;
     }
   }
 

@@ -9,18 +9,21 @@
   // Declared in em as it should change with font size
   padding: 0 0 0.75em;
   font-size: 16px;
-  color: $neutral40;
   vertical-align: top;
   background-color: transparent;
   // Override border
   border: 0;
-  border-bottom: 1px solid $neutral80;
+  border-bottom: 1px solid $neutralUIDullLight;
   outline: 0;
   transition: border-color $duration $timing;
 
   @include respond($break60) {
     height: 42px;
     font-size: 18px;
+  }
+
+  &::placeholder {
+    color: $neutralUILight;
   }
 
   .bg-neutral90 & {
@@ -31,10 +34,6 @@
       -webkit-text-fill-color: $accentPrimaryPale !important;
       /* stylelint-enable declaration-no-important */
     }
-  }
-
-  &::placeholder {
-    color: $neutral75;
   }
 }
 
@@ -68,7 +67,6 @@
     margin-top: 0.75em;
     font-size: 15px;
     font-style: italic;
-    color: $neutral50;
     text-transform: none;
 
     @include respond($break60) {
@@ -102,7 +100,7 @@
     margin-top: 0.75em;
     font-size: 17px;
     font-style: italic;
-    color: $accentPrimary;
+    color: $accentInteractionLight;
     text-align: right;
     text-transform: none;
   }
@@ -113,7 +111,6 @@
       display: block;
       margin-top: 0;
       margin-bottom: 1em;
-      color: $neutral70;
 
       &.below {
         margin-top: 0.6em;
@@ -130,7 +127,7 @@
       transition: border-color $duration $timing;
 
       &:focus-visible {
-        border-color: $accentPrimaryLight;
+        border-color: $defaultFocusColor;
       }
     }
 
@@ -139,16 +136,20 @@
       width: 100%;
       padding: 1.2em;
       font-size: 16px;
-      color: $neutral30;
       resize: vertical;
+      color: $neutralTextExtraLight;
       background-color: transparent;
-      border: 1px solid $neutral80;
+      border: 1px solid $neutralUIDullLight;
       outline: none;
       transition: border-color $duration $timing;
 
       @include respond($break70) {
         padding: 1.579em;
         font-size: 18px;
+      }
+
+      &::placeholder {
+        color: $neutralUILight;
       }
 
       &:focus-visible {
@@ -174,7 +175,7 @@
       }
 
       &.checked .toggle-label {
-        color: $accentPrimary;
+        color: $defaultHoverColor;
       }
     }
 
@@ -194,7 +195,7 @@
         }
 
         &.toggle {
-          color: $neutral40;
+          color: $neutralTextExtraLight;
         }
       }
 
@@ -294,7 +295,6 @@
       text-transform: none; // OD
 
       &:focus-visible {
-        color: $neutral40;
         border-color: $accentPrimaryLight;
       }
     }
@@ -308,7 +308,7 @@
     justify-content: center;
     max-width: 350px;
     min-height: 200px;
-    border: 1px solid $neutral80;
+    border: 1px solid $neutralUIDullLight;
     transition: border-color 0.2s;
 
     &:focus-within {
@@ -321,14 +321,13 @@
       font-size: 13px;
       font-weight: $semibold;
       line-height: 1.5em;
-      color: $neutral50;
       text-align: center;
     }
 
     .error {
       display: block;
       margin-top: 10px;
-      color: $sp30Tertiary;
+      color: $defaultNoticeColor;
     }
 
     .secondary {
@@ -336,19 +335,13 @@
       padding-bottom: 0;
       margin-top: 10px;
       line-height: 1.5em;
-      color: $neutral75;
       text-align: center;
-
-      a, a:visited {
-        color: $neutral75;
-      }
     }
 
     a, .fake-link {
-      transition: color $duration $timing;
+      @include defaultHoverState;
 
-      &:hover, &:focus-visible {
-        color: $accentPrimary;
+      &:focus-visible {
         outline: 0;
       }
     }
@@ -369,7 +362,6 @@
       &__icon {
         display: block;
         margin: 0 auto 20px;
-        color: $neutral10;
       }
     }
 
@@ -385,20 +377,6 @@
         max-width: 100%;
         max-height: 200px;
         background: $neutral20;
-      }
-
-      .secondary {
-        color: $neutral70;
-
-        a, a:visited {
-          color: $neutral70;
-
-          transition: color $duration $timing;
-
-          &:hover {
-            color: $accentPrimary;
-          }
-        }
       }
 
       .message {
@@ -432,7 +410,6 @@
       bottom: 4px;
       z-index: 2;
       font-size: 12px;
-      color: $neutral50;
     }
 
     // Default height
@@ -471,23 +448,5 @@
 
   .checkbox {
     margin-top: 5px;
-  }
-
-  // Contextual color variations
-  .browse & {
-    input[type='text'],
-    input[type='email'],
-    input[type='password'],
-    input[type='number'],
-    .instructions {
-      color: $neutral90;
-    }
-
-    .form-toggle,
-    .form-toggle.checked {
-      .toggle-label {
-        color: $neutral90;
-      }
-    }
   }
 }

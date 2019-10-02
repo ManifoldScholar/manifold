@@ -21,7 +21,6 @@
 
     .instructional-copy {
       @include formInstructions;
-      color: $neutral50;
     }
 
     .select-group {
@@ -77,7 +76,6 @@
         margin-right: 12px;
         margin-bottom: 0;
         font-size: 14px;
-        color: $neutral50;
         letter-spacing: 0.075em;
       }
 

@@ -200,8 +200,7 @@ export default class Splash extends Component {
                       "utility-button__text",
                       "utility-button__text--large",
                       {
-                        "utility-button__text--dark-green": this.isLightStyle(),
-                        "utility-button__text--light": this.isDarkStyle()
+                        "utility-button__text--dark-green": this.isLightStyle()
                       }
                     )}
                   >
@@ -222,8 +221,7 @@ export default class Splash extends Component {
                       "utility-button__text",
                       "utility-button__text--large",
                       {
-                        "utility-button__text--dark-green": this.isLightStyle(),
-                        "utility-button__text--light": this.isDarkStyle()
+                        "utility-button__text--dark-green": this.isLightStyle()
                       }
                     )}
                   >

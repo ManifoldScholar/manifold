@@ -3,7 +3,7 @@
 .backend-header {
   $border-radius: 8px;
 
-  @include panelRounded;
+  @include panelRoundedDark;
 
   // layout elements
   &__inner {
@@ -135,7 +135,6 @@
     &--large {
       margin-top: -0.133em;
       font-size: 20px;
-      color: $neutral70;
 
       @include respond($break60) {
         font-size: 30px;
@@ -158,7 +157,7 @@
     @include templateCopy;
     margin-left: 0.433em;
     font-size: 1.071em;
-    color: $neutral50;
+    color: $neutralTextLight;
   }
 
   &__emphasis {
@@ -169,7 +168,6 @@
   &__empty-text {
     @include templateHead;
     font-weight: $semibold;
-    color: $neutral30;
     text-align: center;
   }
 
@@ -177,7 +175,6 @@
     @include templateCopy;
     font-size: 14px;
     line-height: initial;
-    color: $neutral50;
 
     @include respond($break65) {
       font-size: 17px;
@@ -185,8 +182,6 @@
   }
 
   &__figure {
-    color: $neutral50;
-
     &--rounded {
       display: flex;
       align-items: center;

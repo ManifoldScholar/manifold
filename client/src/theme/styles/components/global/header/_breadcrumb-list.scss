@@ -1,6 +1,5 @@
 .breadcrumb-list {
   @include templateHead;
-  color: $neutral75;
 
   &__link {
     display: inline;
@@ -10,20 +9,6 @@
     @include respond($break40) {
       font-size: 20px;
     }
-
-    &--active {
-      .header-app.dark & {
-        color: $neutral75;
-
-        &:last-child {
-          color: $neutral50;
-        }
-      }
-
-      &:last-child {
-        color: $neutral50;
-      }
-    }
   }
 
   &__icon {
@@ -32,9 +17,5 @@
     margin-right: 5px;
     margin-left: 5px;
     transform: rotate(-90deg);
-
-    .header-app.dark & {
-      color: $neutral75;
-    }
   }
 }

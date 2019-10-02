@@ -10,15 +10,10 @@
   margin-bottom: 15px;
   font-size: 17px;
   font-style: italic;
-  color: $neutral50;
   text-transform: none;
 
   a {
-    color: $neutral30;
-
-    &:hover {
-      color: $neutral20;
-    }
+    text-decoration: underline;
   }
 
   &.margin-top {

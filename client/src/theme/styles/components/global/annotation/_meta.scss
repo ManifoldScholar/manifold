@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-  color: $neutral90;
 
   @include respond($break50) {
     flex-direction: row;
@@ -21,7 +20,7 @@
     left: 0;
     width: 32px;
     height: 32px;
-    color: $neutral70;
+    color: $neutralUIDark;
 
     &--dull {
       color: $neutral20;
@@ -50,6 +49,7 @@
     margin: 0;
     font-weight: $semibold;
     hyphens: none;
+    color: $neutralTextExtraDark;
   }
 
   &__deleted-message {
@@ -79,14 +79,8 @@
 
   .marker__link {
     overflow: hidden;
-    color: inherit;
     text-decoration: none;
     text-overflow: ellipsis;
     white-space: nowrap;
-    transition: color $duration;
-
-    &:hover {
-      color: $accentPrimaryDark;
-    }
   }
 }

@@ -1,6 +1,6 @@
 .notification {
   width: 100%;
-  color: $neutralOffBlack;
+  color: $neutralTextExtraDark;
 
   &--context-header {
     &.notification--notice {
@@ -109,18 +109,17 @@
       right: auto;
       margin: 8px 0 0;
       font-size: inherit;
+      color: $neutral50;
+
+      &:hover {
+        color: $neutral20;
+      }
 
       .screen-reader-text {
         @include utilityPrimary;
         position: relative;
         overflow: visible;
         font-size: 12px;
-        color: $neutral50;
-        transition: color $duration $timing;
-
-        &:hover {
-          color: $neutral20;
-        }
       }
     }
   }

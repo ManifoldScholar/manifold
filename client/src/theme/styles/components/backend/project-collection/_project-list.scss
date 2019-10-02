@@ -28,7 +28,7 @@
 .project-collection-grid-item.orderable-list-item.dragging {
   .item-wrapper {
     @include projectGridItem;
-    @include panelRounded;
+    @include panelRoundedDark;
     background-color: $neutral95;
 
     .name {

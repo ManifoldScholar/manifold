@@ -17,21 +17,20 @@
     @include headingQuaternary;
     display: flex;
     min-width: 0;
-    color: $neutralWhite;
-
-    .browse & {
-      color: $neutral80;
-    }
   }
 
   &__title-icon {
     margin-right: 10px;
     margin-left: -8px;
-    color: $neutral75;
   }
 
   &__title-text {
     padding-top: 2px;
+    color: $neutralTextExtraLight;
+
+    .browse & {
+      color: $neutralTextExtraDark;
+    }
   }
 
   &__utility {
@@ -45,14 +44,12 @@
     margin-bottom: 0;
     font-size: 17px;
     font-style: italic;
-    color: $neutral50;
     text-transform: none;
   }
 
   .subtitle {
     @include subtitlePrimary;
     padding: 5px 0;
-    color: $neutralWhite;
   }
 
   .form-input {

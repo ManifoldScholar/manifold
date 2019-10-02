@@ -3,7 +3,6 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  color: $neutral75;
   text-align: center;
   background-color: $neutral10;
 
@@ -18,11 +17,6 @@
       height: 100%;
       content: '';
       background-color: transparentize($neutralOffBlack, 0.3);
-    }
-
-    .icon-thumbnail-type,
-    .icon-thumbnail-icon {
-      color: $neutralWhite;
     }
   }
 
@@ -113,7 +107,7 @@
       }
 
       &::before {
-        background-color: $accentPrimary;
+        background-color: $defaultHoverColor;
         opacity: 0;
       }
     }
@@ -145,8 +139,8 @@
       height: 50px;
       padding: 0;
       margin: 0 0 0 auto;
-      color: $neutral50;
       text-align: center;
+      color: $neutralTextExtraDark;
       background-color: $neutral10;
 
       svg {
@@ -173,7 +167,6 @@
       font-weight: $light;
       hyphens: none;
       line-height: 1.1;
-      color: $neutral50;
     }
   }
 
@@ -201,7 +194,6 @@
     @include templateHead;
     font-size: 13px;
     font-weight: $semibold;
-    color: #B3B3B3;
     text-transform: uppercase;
     letter-spacing: 0.096em;
 
@@ -216,14 +208,11 @@
     font-size: 17px;
     font-weight: $medium;
     hyphens: none;
-    transition: color $duration ease-out;
   }
 
   .icon-thumbnail-icon {
     display: block;
     padding: 18px 0 0;
     margin: 0 auto;
-    color: $neutral75;
-    transition: color $duration ease-out;
   }
 }

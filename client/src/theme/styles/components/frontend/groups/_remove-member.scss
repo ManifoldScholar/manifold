@@ -3,15 +3,15 @@
   @include formLabelPrimary;
   position: relative;
   padding: 4px 15px 5px;
-  color: $sp40Tertiary;
-  border: 1px solid $sp40Tertiary;
+  color: $defaultNoticeColor;
+  border: 1px solid;
   border-radius: 12px;
   transition: all $duration $timing;
 
   &:hover,
   &:focus-visible {
     color: $neutralWhite;
-    background-color: $sp40Tertiary;
+    background-color: $defaultNoticeColor;
     outline: 0;
   }
 }

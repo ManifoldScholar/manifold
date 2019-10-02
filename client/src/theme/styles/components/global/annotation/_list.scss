@@ -5,7 +5,6 @@
     @include templateHead;
     margin: 0;
     font-size: 24px;
-    color: $neutral70;
 
     @include respond($break65) {
       font-size: 32px;

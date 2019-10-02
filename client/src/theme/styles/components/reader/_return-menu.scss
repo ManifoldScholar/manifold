@@ -24,19 +24,18 @@
     width: 100%;
     padding: 16px 20px;
     font-size: 18px;
-    color: $neutral75;
     text-align: left;
     text-decoration: none;
     letter-spacing: 0.004em;
-    transition: color $duration $timing;
 
     @include respond($break60) {
       padding: 17px 26px;
       font-size: 22px;
     }
 
-    &:hover, &:focus-visible {
-      color: $accentPrimary;
+    &:focus-visible {
+      @include defaultHoverStyle;
+      outline: 0;
     }
 
     &--flush-bottom {
@@ -45,20 +44,19 @@
   }
 
   &__link-icon,
-  &__logo-icon {
-    color: $neutral50;
+  &__logo-icon,
+  &__link-text,
+  &__small-text {
     transition: color $duration $timing;
 
     .reader-return-menu__link:hover &,
     .reader-return-menu__link:focus-visible & {
-      color: $accentPrimary;
+      @include defaultHoverStyle;
     }
   }
 
   &__link-icon {
     margin-right: 14px;
-    color: $neutral50;
-    transition: color $duration $timing;
 
     @include respond($break60) {
       width: 45.538px;
@@ -92,14 +90,7 @@
     padding-left: 51px;
     font-size: 17px;
     hyphens: none;
-    color: $neutral50;
     text-decoration: underline;
-    transition: color $duration $timing;
-
-    .reader-return-menu__link:hover &,
-    .reader-return-menu__link:focus-visible & {
-      color: $accentPrimary;
-    }
 
     @include respond($break60) {
       padding-left: 61px;
@@ -112,13 +103,12 @@
     padding: 0.5em 1.688em 1.75em 24.5px;
     font-size: 16px;
     line-height: 1.5;
-    color: $neutral50;
     text-decoration: underline;
     transition: color $duration $timing;
 
     &:hover,
     &:focus-visible {
-      color: $accentPrimary;
+      @include defaultHoverStyle;
     }
 
     @include respond($break60) {
@@ -129,12 +119,11 @@
   &__note-bold {
     display: inline;
     padding-left: 0; // OD
-    color: $neutral75;
     transition: color $duration $timing;
 
     .reader-return-menu__note:hover &,
     .reader-return-menu__note:focus-visible & {
-      color: $accentPrimary;
+      color: $defaultHoverColor;
     }
   }
 }

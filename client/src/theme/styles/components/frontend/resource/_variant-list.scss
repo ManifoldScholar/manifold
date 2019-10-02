@@ -19,7 +19,6 @@
 
   &__section-title {
     margin-bottom: 10px;
-    color: $neutral40;
   }
 
   &__list {
@@ -37,13 +36,8 @@
   &__link {
     display: inline-flex;
     align-items: center;
-    color: $neutralBlack;
+    color: $neutralTextExtraDark;
     text-decoration: none;
-    transition: color $duration $timing;
-
-    &:hover {
-      color: $accentPrimary;
-    }
   }
 
   &__link-text {
@@ -55,6 +49,6 @@
     top: 1px;
     margin-right: 6px;
     margin-left: -1px;
-    color: $accentPrimary;
+    color: $defaultHoverColor;
   }
 }

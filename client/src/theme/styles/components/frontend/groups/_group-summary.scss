@@ -101,7 +101,7 @@
   &__value {
     @include formLabelPrimary;
     font-size: 13px;
-    color: $neutral90;
+    color: $neutralTextExtraDark;
 
     @include respond($break85) {
       padding-left: 10px;
@@ -120,6 +120,6 @@
     position: relative;
     top: -2.5px;
     margin-left: 10px;
-    color: $neutral70;
+    color: $neutralUIDark;
   }
 }

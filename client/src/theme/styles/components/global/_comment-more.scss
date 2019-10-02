@@ -9,11 +9,6 @@
   font-size: 13px;
   color: $neutral90;
   text-align: left;
-  transition: color $duration $timing;
-
-  &:hover {
-    color: $accentPrimary;
-  }
 
   &__icon {
     margin-bottom: 2px;

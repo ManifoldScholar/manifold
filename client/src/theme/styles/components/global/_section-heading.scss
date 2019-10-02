@@ -24,17 +24,16 @@
       .title {
         @include headingPrimary;
         margin-bottom: 2px;
-        color: $neutral80;
+        color: $neutralTextExtraDark;
 
         .bg-neutral90 & {
-          color: $neutral30;
+          color: $neutralTextExtraLight;
         }
       }
 
       .date {
         @include subtitlePrimary;
         font-size: 14px;
-        color: $neutral70;
       }
 
       .meta-value {
@@ -97,7 +96,6 @@
 .form-heading {
   @include headingPrimary;
   margin-bottom: 25px;
-  color: $neutral50;
 
   .instructions {
     @include templateCopy;
@@ -105,7 +103,6 @@
     margin-bottom: 1em;
     font-size: 17px;
     font-style: italic;
-    color: $neutral50;
     text-transform: none;
 
     a:visited {

@@ -3,7 +3,7 @@
   $entity-row-gap: 28px;
 
   position: relative;
-  border-bottom: 1px solid $neutral80;
+  border-bottom: 1px solid $neutralUIDullLight;
 
   @include respond(event-entity(panel-breakpoint)) {
     border-bottom: 0;

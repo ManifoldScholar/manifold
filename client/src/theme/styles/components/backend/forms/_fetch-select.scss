@@ -9,13 +9,14 @@
     padding: 12px 24px;
     color: $accentPrimary;
     border: 1px solid $accentPrimary;
-    transition: color $duration $timing,
+    transition:
+      color $duration $timing,
       background-color $duration $timing;
 
     &:hover {
       color: $neutral90;
       cursor: pointer;
-      background-color: $accentPrimary;
+      background-color: $defaultHoverColor;
     }
   }
 

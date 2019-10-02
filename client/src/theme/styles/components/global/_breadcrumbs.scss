@@ -4,7 +4,6 @@
   padding: 0.5em 1em 0.6em;
   font-size: 16px;
   line-height: 1.4;
-  color: $neutral70;
   text-decoration: none;
   text-transform: none;
   letter-spacing: 0;
@@ -28,12 +27,9 @@
   }
 
   &__link {
-    color: $neutral70;
     text-decoration: none;
-    transition: color $duration $timing;
 
-    &:hover, &:focus-visible {
-      color: $accentPrimary;
+    &:focus-visible {
       outline: 0;
     }
   }

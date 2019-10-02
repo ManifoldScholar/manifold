@@ -11,6 +11,7 @@
   position: fixed;
   top: 0;
   width: 100%;
+  color: $neutralTextDark;
 
   /* stylelint-disable property-no-vendor-prefix */
   &__inner {
@@ -19,7 +20,6 @@
     display: grid;
     grid-template: 'menu-group-left title-bar menu-group-right' 46px / max-content 1fr max-content;
     width: 200vw;
-    color: $neutral75;
     background-color: $neutral05;
     transition: transform $duration ease-out;
     -ms-grid-rows: 46px;
@@ -115,7 +115,8 @@
     padding-top: 2px;
     padding-bottom: 2px;
     font-size: 13px;
-    transition: color $duration $timing,
+    transition:
+      color $duration $timing,
       background-color $duration $timing;
 
     @include respond($break50) {
@@ -127,7 +128,7 @@
     &:hover,
     &:focus-visible {
       color: $neutralWhite;
-      background-color: $accentPrimaryLight;
+      background-color: $defaultHoverColor;
       outline: 0;
     }
 
@@ -143,10 +144,6 @@
 
     &--gray {
       background-color: $neutral10;
-
-      &:hover {
-        background-color: $accentPrimary;
-      }
     }
   }
 
@@ -179,7 +176,6 @@
     align-items: center;
     justify-content: flex-end;
     width: 110px;
-    color: $neutral75;
 
     @include respond($break50) {
       display: none;

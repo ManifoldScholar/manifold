@@ -26,26 +26,12 @@
     padding-right: 15px;
     padding-left: 15px;
     font-size: 14px;
-    color: $neutral75;
     letter-spacing: 0.01em;
-    background-color: $neutral05;
-    border: 0;
+    background-color: transparent;
+    border: 1px solid $neutralUIDark;
 
     &:focus-visible::placeholder {
-      color: $accentPrimary;
-    }
-
-    .bg-neutral05 & {
-      background-color: transparent;
-      border: 2px solid $neutral30;
-
-      &:focus-visible {
-        border-color: $accentPrimary;
-
-        &::placeholder {
-          color: inherit;
-        }
-      }
+      color: $defaultFocusColor;
     }
   }
 
@@ -64,14 +50,14 @@
 
     .search-button {
       @include buttonUnstyled;
+      @include outlineOnFocusVisible;
       position: absolute;
       top: 10px;
       left: 14px;
       font-size: 13px;
-      color: $neutral75;
 
-      &:focus-visible {
-        color: $accentPrimary;
+      &:hover {
+        @include defaultHoverStyle;
       }
     }
 
@@ -163,20 +149,18 @@
         width: 100%;
         height: $inputHeight;
         font-size: 14px;
-        color: $neutral50;
-        border: 2px solid $neutral30;
+        border: 1px solid $neutralUIDark;
         transition: border-color $duration $timing;
 
         &:focus-visible {
-          border-color: $accentPrimary;
+          border-color: $defaultFocusColor;
         }
 
         .form-search-filter & {
           font-size: 13px;
-          border: 1px solid #555;
 
           &:focus-visible {
-            border-color: $accentPrimary;
+            border-color: $defaultFocusColor;
           }
         }
 
@@ -189,7 +173,7 @@
         position: absolute;
         top: 50%;
         right: 12px;
-        color: $accentPrimary;
+        color: $defaultHoverColor;
         pointer-events: none;
         transform: translateY(-50%);
 
@@ -206,10 +190,9 @@
     @include utilityPrimary;
     margin-top: 8px;
     font-size: 14px;
-    color: $neutral40;
 
     &:focus-visible {
-      color: $accentPrimary;
+      color: $defaultFocusColor;
     }
   }
 }

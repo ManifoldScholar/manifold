@@ -20,7 +20,6 @@
     margin: 0;
     font-size: 15px;
     font-weight: $medium;
-    color: $neutral75;
   }
 
   &__button {
@@ -30,7 +29,6 @@
     min-height: 48px;
     padding: 12px 10px 10px;
     font-size: 13px;
-    color: $neutral75;
     background-color: $neutral10;
     transition:
       color $duration $timing,
@@ -39,12 +37,12 @@
     &:hover:not(:disabled):not([aria-disabled='true']),
     &:focus-visible {
       color: $neutralWhite;
-      background-color: $accentPrimary;
+      background-color: $defaultHoverColor;
       outline: 0;
     }
 
     &:disabled {
-      color: transparentize($neutral75, 0.5);
+      color: transparentize($neutralTextDark, 0.5);
     }
   }
 }
