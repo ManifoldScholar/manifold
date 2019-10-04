@@ -1,11 +1,112 @@
-require "rails_helper"
+require "swagger_helper"
 
 RSpec.describe "Reading Groups API", type: :request do
+
+  model_name = 'reading_group'
+  model_name_plural = 'reading_groups'
+
+  create_request_schema = { '$ref' => '#/definitions/ReadingGroupRequestCreate' }
+  create_response_schema = { '$ref' => '#/definitions/ReadingGroupUpdateResponse' }
+
+  update_request_schema = { '$ref' => '#/definitions/ReadingGroupRequestUpdate' }
+  update_response_schema = { '$ref' => '#/definitions/ReadingGroupUpdateResponse' }
+
+  single_record_response = { '$ref' => '#/definitions/ReadingGroupResponse' }
+  multiple_record_response = { '$ref' => '#/definitions/ReadingGroupsResponse' }
 
   include_context("authenticated request")
   include_context("param helpers")
 
   let(:reading_group) { FactoryBot.create(:reading_group, creator: reader) }
+
+  path "/#{model_name_plural}" do
+    get I18n.t('swagger.get.all.description', type: model_name_plural) do
+      produces 'application/json'
+      security [ apiKey: [] ]
+      tags model_name_plural
+
+      response '200', I18n.t('swagger.get.all.200', type: model_name_plural) do
+        let(:Authorization) { admin_auth }
+        schema multiple_record_response
+        run_test!
+      end
+    end
+
+    post I18n.t('swagger.post.description', type: model_name) do
+
+      parameter name: :body, in: :body, schema: update_request_schema
+      let(:body) { json_structure_for(model_name) }
+
+      consumes 'application/json'
+      produces 'application/json'
+      security [ apiKey: [] ]
+      tags model_name_plural
+
+      response '201', I18n.t('swagger.post.201', type: model_name) do
+        let(:Authorization) { admin_auth }
+        schema create_response_schema
+        run_test!
+      end
+    end
+  end
+
+  path "/#{model_name_plural}/{id}" do
+    accessor_attribute = 'ID'
+    let(:id) { reading_group[:id] }
+
+    get I18n.t('swagger.get.one.description', type: model_name_plural, attribute: accessor_attribute) do
+      parameter name: :id, in: :path, :type => :string
+      produces 'application/json'
+      security [ apiKey: [] ]
+      tags model_name_plural
+
+      response '200', I18n.t('swagger.get.one.200', type: model_name_plural, attribute: accessor_attribute) do
+        let(:Authorization) { admin_auth }
+        schema single_record_response
+        run_test!
+      end
+    end
+
+    patch I18n.t('swagger.patch.description', type: model_name, attribute: accessor_attribute) do
+      parameter name: :id, in: :path, :type => :string
+
+      parameter name: :body, in: :body, schema: update_request_schema
+      let(:body) { json_structure_for(model_name) }
+
+      consumes 'application/json'
+      produces 'application/json'
+      security [ apiKey: [] ]
+      tags model_name_plural
+
+      response '200', I18n.t('swagger.patch.200', type: model_name, attribute: accessor_attribute) do
+        let(:Authorization) { admin_auth }
+        schema update_response_schema
+        run_test!
+      end
+
+      response '403', I18n.t("swagger.access_denied") do
+        let(:Authorization) { author_auth }
+        run_test!
+      end
+    end
+
+    delete I18n.t('swagger.delete.description', type: model_name, attribute: accessor_attribute) do
+      parameter name: :id, :in => :path, :type => :string
+
+      security [ apiKey: [] ]
+      tags model_name_plural
+
+      response '204', I18n.t('swagger.delete.204', type: model_name, attribute: accessor_attribute) do
+        let(:Authorization) { admin_auth }
+        run_test!
+      end
+
+      response '403', I18n.t("swagger.access_denied") do
+        let(:Authorization) { author_auth }
+        run_test!
+      end
+    end
+  end
 
   describe "responds with a list of reading groups" do
 
