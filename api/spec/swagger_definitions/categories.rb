@@ -4,6 +4,14 @@ require_relative 'base_types'
 module Categories
   class << self
 
+    def response_attributes
+      {
+        title: Type.string,
+        position: Type.integer,
+        abilities: Type.object( Type.crud )
+      }
+    end
+
     def request_create
       Type.object({
         data: Type.object({
@@ -27,14 +35,17 @@ module Categories
         data: Type.object({
           id: Type.id,
           type: Type.string,
-          attributes: Type.object({
-            title: Type.string,
-            position: Type.integer,
-            abilities: Type.object( Type.crud )
-          })
+          attributes: Type.object(self.response_attributes)
         }),
         meta: Type.meta_partial
       })
+    end
+
+
+    def responses
+      Type.data_array(
+        Type.response(self.response_attributes)
+      )
     end
   end
 end

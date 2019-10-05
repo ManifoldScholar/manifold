@@ -96,7 +96,9 @@ RSpec.configure do |config|
         ActionCalloutResponse: ActionCallouts.response,
 
         CategoryResponse: Categories.response,
+        CategoryResponses: Categories.responses,
         CategoryRequestUpdate: Categories.request_update,
+        CategoryRequestCreate: Categories.request_create,
 
         CommentResponse: Comments.response,
         CommentRequestUpdate: Comments.request_update,

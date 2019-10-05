@@ -1,51 +1,59 @@
-require "rails_helper"
+require "swagger_helper"
 
 RSpec.describe "Project Text Categories API", type: :request do
 
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:project) { FactoryBot.create(:project) }
-  let(:text_category) { FactoryBot.create(:text_category) }
-  let(:path) { api_v1_project_relationships_text_categories_path(project) }
+  let(:model) { FactoryBot.create(:project) }
 
-  describe "sends project text categories" do
-    before(:each) { get path }
-    describe "the response" do
-      it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+  tags = 'category'
+  model_name = 'text_category'
+  model_name_plural = 'text_categories'
+
+  response = { '$ref' => '#/definitions/CategoryResponses' }
+
+  create_request = { '$ref' => '#/definitions/CategoryRequestCreate' }
+  create_response = { '$ref' => '#/definitions/CategoryResponse' }
+
+  path "/projects/{project_id}/relationships/#{model_name_plural}" do
+    get I18n.t('swagger.get.all.description', type: model_name_plural) do
+
+      parameter name: :project_id, :in => :path, :type => :string
+      let(:project_id) { model[:id] }
+
+      produces 'application/json'
+      tags tags
+
+      response '200', I18n.t('swagger.get.all.200', type: model_name_plural) do
+        schema response
+        run_test!
+      end
+    end
+
+    post I18n.t('swagger.post.description', type: model_name) do
+
+      parameter name: :project_id, :in => :path, :type => :string
+      let(:project_id) { model[:id] }
+
+      parameter name: :body, in: :body, schema: create_request
+      let(:body) { json_structure_for(:project) }
+
+      consumes 'application/json'
+      produces 'application/json'
+      security [ apiKey: [] ]
+      tags tags
+
+      response '201', I18n.t('swagger.post.201', type: model_name) do
+        let(:Authorization) { admin_auth }
+        schema create_response
+        run_test!
+      end
+
+      response '403', I18n.t('swagger.access_denied') do
+        let(:Authorization) { author_auth }
+        run_test!
       end
     end
   end
-
-  describe "creates a new project text category" do
-
-    let(:post_model) { { attributes: { title: "A new hope" } } }
-
-    context "when the user is an admin" do
-      let(:headers) { admin_headers }
-      before(:each) { post path, headers: headers, params: json_payload(post_model) }
-
-      describe "the response" do
-        it "has a 201 CREATED status code" do
-          expect(response).to have_http_status(201)
-        end
-      end
-    end
-
-    context "when the user is an reader" do
-      let(:headers) { reader_headers }
-      before(:each) { post path, headers: headers, params: json_payload(post_model) }
-
-      describe "the response" do
-        it "has a 403 FORBIDDEN status code" do
-          expect(response).to have_http_status(403)
-        end
-      end
-
-    end
-
-
-  end
-
 end
