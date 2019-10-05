@@ -1,52 +1,54 @@
-require "rails_helper"
+require "swagger_helper"
 
 RSpec.describe "Project Resources API", type: :request do
 
   include_context("authenticated request")
   include_context("param helpers")
-  let(:project) { FactoryBot.create(:project) }
 
-  describe "sends a list of project resources" do
-    let(:path) { api_v1_project_relationships_resources_path(project) }
-    before(:each) { get path }
-    describe "the response" do
-      it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+  let(:model) { FactoryBot.create(:project) }
+
+  tags = 'resources'
+  model_name = 'resource'
+  model_name_plural = 'resources'
+
+  response = { '$ref' => '#/definitions/ResourcesResponse' }
+
+  create_request = { '$ref' => '#/definitions/ResourceRequestUpdate' }
+  create_response = { '$ref' => '#/definitions/ResourceResponse' }
+
+  path "/projects/{project_id}/relationships/#{model_name_plural}" do
+    get I18n.t('swagger.get.all.description', type: model_name_plural) do
+
+      parameter name: :project_id, :in => :path, :type => :string
+      let(:project_id) { model[:id] }
+
+      produces 'application/json'
+      tags tags
+
+      response '200', I18n.t('swagger.get.all.200', type: model_name_plural) do
+        schema response
+        run_test!
+      end
+    end
+
+    post I18n.t('swagger.post.description', type: model_name) do
+
+      parameter name: :project_id, :in => :path, :type => :string
+      let(:project_id) { model[:id] }
+
+      parameter name: :body, in: :body, schema: create_request
+      let(:body) { json_structure_for(model_name) }
+
+      consumes 'application/json'
+      produces 'application/json'
+      security [ apiKey: [] ]
+      tags tags
+
+      response '201', I18n.t('swagger.post.201', type: model_name) do
+        let(:Authorization) { admin_auth }
+        schema create_response
+        run_test!
       end
     end
   end
-
-  describe "creates a new project resource" do
-
-    let(:path) { api_v1_project_relationships_resources_path(project) }
-    let(:resource) { { attributes: {
-      title: "A new hope",
-      externalType: "vimeo",
-      externalId: "abc123",
-      sub_kind: "external_video"
-    }, relationships: { project: { data: { type: "projects", id: project.id } } } } }
-
-    context "when the user is an admin" do
-      let(:headers) { admin_headers }
-
-      describe "the response" do
-        it "has a 201 CREATED status code" do
-          post path, headers: headers, params: json_payload(resource)
-          expect(response).to have_http_status(201)
-        end
-      end
-    end
-
-    context "when the user is a reader" do
-      let(:headers) { reader_headers }
-
-      describe "the response" do
-        it "has a 403 FORBIDDEN status code" do
-          post path, headers: headers, params: json_payload(resource)
-          expect(response).to have_http_status(403)
-        end
-      end
-    end
-  end
-
 end
