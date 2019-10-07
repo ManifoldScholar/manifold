@@ -3,20 +3,23 @@ require_relative 'base_types'
 
 module ContentBlocks
   class << self
-    def request_create
-      Type.object({
-        data: Type.object({
-          attributes: Type.object({
-            type: Type.string,
-            position: Type.integer,
-            visible: Type.boolean,
-            configurable: Type.boolean,
-            orderable: Type.boolean,
-            hideable: Type.boolean,
-            renderable: Type.boolean,
-            incomplete_render_attributes: Type.array( type: Type.string ),
-          })
-        })
+    def create_request_params
+      {
+        type: Type.string,
+        position: Type.integer,
+        visible: Type.boolean,
+        configurable: Type.boolean,
+        orderable: Type.boolean,
+        hideable: Type.boolean,
+        renderable: Type.boolean,
+        incompleteRenderAttributes: Type.array( type: Type.string ),
+      }
+    end
+
+    def create_response_attributes
+      create_request_params.merge({
+        showAllCollections: Type.boolean,
+        title: Type.string( nullable: true )
       })
     end
 
@@ -42,44 +45,14 @@ module ContentBlocks
     end
 
     def response
-      Type.object({
-        data: Type.object({
-          id: Type.id,
-          type: Type.string,
-          attributes: Type.object({
-            type: Type.string,
-            position: Type.integer,
-            visible: Type.boolean,
-            configurable: Type.boolean,
-            orderable: Type.boolean,
-            hideable: Type.boolean,
-            abilities: Type.object( Type.crud ),
-            renderable: Type.boolean,
-            incompleteRenderAttributes: Type.array( type: Type.string ),
-            showAllCollections: Type.boolean,
-            title: Type.string( nullable: true )
-          }),
-          relationships: Type.object({
-            project: Type.object({
-              data: Type.object({
-                id: Type.id,
-                type: Type.string,
-              })
-            }),
-            featuredCollections: Type.object({
-              data: Type.array({
-                type: Type.object({
-                  id: Type.id,
-                  type: Type.string({ example: "resourceCollections" })
-                })
-              })
-            })
-          }),
-          meta: Type.object({
-            partial: Type.boolean
-          })
-        })
-      })
+      Type.response_with_relationships(
+        create_response_attributes,
+        Type.relationships(['project', 'featuredCollections'])
+      )
+    end
+
+    def responses
+      Type.data_array( response )
     end
   end
 end

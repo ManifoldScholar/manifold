@@ -105,7 +105,10 @@ RSpec.configure do |config|
         CommentRequestUpdate: Comments.request_update,
 
         ContentBlockResponse: ContentBlocks.response,
-        ContentBlockRequestUpdate: ContentBlocks.request_update,
+        ContentBlockRequestUpdate: ContentBlocks.update_request,
+        ContentBlocksResponse: ContentBlocks.responses,
+        ContentBlockCreateRequest: ContentBlocks.create_request,
+        ContentBlockCreateResponse: ContentBlocks.response,
 
         ContactRequestCreate: Contacts.request_create,
         ContactResponseError: Contacts.error,
