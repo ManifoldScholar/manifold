@@ -3,6 +3,7 @@ require 'rails_helper'
 require_relative 'swagger_definitions/action_callouts'
 require_relative 'swagger_definitions/base_types'
 require_relative 'swagger_definitions/categories'
+require_relative 'swagger_definitions/collaborators'
 require_relative 'swagger_definitions/comments'
 require_relative 'swagger_definitions/content_blocks'
 require_relative 'swagger_definitions/contacts'
@@ -95,6 +96,13 @@ RSpec.configure do |config|
         ActionCalloutRequestUpdate: ActionCallouts.request_update,
         ActionCalloutResponse: ActionCallouts.response,
         ActionCalloutResponses: ActionCallouts.responses,
+
+        CollaboratorGet: Collaborators.get_model,
+        CollaboratorsGet: Collaborators.get_models,
+        CollaboratorCreateRequest: Collaborators.create_request,
+        CollaboratorCreateResponse: Collaborators.create_response,
+        # CollaboratorUpdateRequest: Collaborators.update_request,
+        # CollaboratorUpdateResponse: Collaborators.update_response,
 
         CategoryResponse: Categories.response,
         CategoryResponses: Categories.responses,
