@@ -5,7 +5,6 @@
   vertical-align: middle;
 
   .avatar {
-    color: $neutral70; // fallback
     @include buttonAvatar(32, var(--button-color, $neutral70));
   }
 

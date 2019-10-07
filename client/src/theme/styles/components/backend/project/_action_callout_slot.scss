@@ -57,7 +57,6 @@
     }
 
     &:not(:disabled):hover {
-      color: $accentPrimary; // fallback
       color: var(--hover-color, $accentPrimary);
     }
   }
