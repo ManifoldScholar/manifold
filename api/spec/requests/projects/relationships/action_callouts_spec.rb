@@ -1,54 +1,58 @@
-require "rails_helper"
+require "swagger_helper"
 
 RSpec.describe "Project ActionCallout API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:project) { FactoryBot.create(:project) }
+  let(:model) { FactoryBot.create(:project) }
 
-  describe "sends a list of project call to actions" do
-    let(:path) { api_v1_project_relationships_action_callouts_path(project) }
+  tags = 'category'
+  model_name = 'action_callout'
+  model_name_plural = 'action_callouts'
 
-    before(:each) { 2.times { FactoryBot.create(:action_callout, project: project) } }
+  multiple_response = { '$ref' => '#/definitions/ActionCalloutResponses' }
 
-    describe "the response" do
-      it "has a 200 status code" do
-        get path
-        expect(response).to have_http_status(200)
+  create_request = { '$ref' => '#/definitions/ActionCalloutRequestCreate' }
+  create_response = { '$ref' => '#/definitions/ActionCalloutResponse' }
+
+  path "/projects/{project_id}/relationships/#{model_name_plural}" do
+    get I18n.t('swagger.get.all.description', type: model_name_plural) do
+
+      parameter name: :project_id, :in => :path, :type => :string
+      let(:project_id) { model[:id] }
+
+      produces 'application/json'
+      tags tags
+
+      response '200', I18n.t('swagger.get.all.200', type: model_name_plural) do
+        schema multiple_response
+        run_test!
+      end
+    end
+
+    post I18n.t('swagger.post.description', type: model_name) do
+
+      parameter name: :project_id, :in => :path, :type => :string
+      let(:project_id) { model[:id] }
+
+      parameter name: :body, in: :body, schema: create_request
+      let(:body) { json_structure_for(model_name) }
+
+      consumes 'application/json'
+      produces 'application/json'
+      security [ apiKey: [] ]
+      tags tags
+
+      response '201', I18n.t('swagger.post.201', type: model_name) do
+        let(:Authorization) { admin_auth }
+        schema create_response
+        run_test!
+      end
+
+      response '403', I18n.t('swagger.access_denied') do
+        let(:Authorization) { author_auth }
+        run_test!
       end
     end
   end
-
-  describe "creates a content block" do
-    let(:path) { api_v1_project_relationships_action_callouts_path(project) }
-    let(:text) { FactoryBot.create(:text, project: project) }
-    let(:params) { {
-      attributes: { kind: "toc", title: "DO IT", location: "left" },
-      relationships: { text: { data: { id: text.id, type: "texts" } } }
-    } }
-
-
-    context "when the user is an admin" do
-      let(:headers) { admin_headers }
-
-      describe "the response" do
-        it "has a 201 CREATED status code" do
-          post path, headers: headers, params: json_payload(params)
-          expect(response).to have_http_status(201)
-        end
-      end
-    end
-
-    context "when the user is a reader" do
-      let(:headers) { reader_headers }
-
-      describe "the response" do
-        it "has a 403 FORBIDDEN status code" do
-          post path, headers: headers, params: json_payload(params)
-          expect(response).to have_http_status(403)
-        end
-      end
-    end
-  end
-
 end

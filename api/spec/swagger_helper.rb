@@ -94,6 +94,7 @@ RSpec.configure do |config|
         ActionCalloutRequestCreate: ActionCallouts.request_create,
         ActionCalloutRequestUpdate: ActionCallouts.request_update,
         ActionCalloutResponse: ActionCallouts.response,
+        ActionCalloutResponses: ActionCallouts.responses,
 
         CategoryResponse: Categories.response,
         CategoryResponses: Categories.responses,

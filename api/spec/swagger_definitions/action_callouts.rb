@@ -18,6 +18,18 @@ module ActionCallouts
       }
     end
 
+    def request_create_params
+      {
+        title: Type.string,
+        kind: Type.enum( ['link', 'read', 'toc', 'download'] ),
+        location: Type.enum( ['left', 'right'] ),
+        button: Type.boolean,
+        position: Type.integer,
+        url: Type.url({ description: 'Required if the kind is "link"' }),
+        attachmentStyles: Type.image,
+      }
+    end
+
     def request_update_attributes
       request_create_attributes.merge({
         removeAttachment: Type.boolean,
@@ -41,30 +53,17 @@ module ActionCallouts
     end
 
     def response
-      Type.object({
-        data: Type.object({
-          id: Type.id,
-          type: Type.string,
-          attributes: Type.object({
-            title: Type.string,
-            kind: Type.enum( ['link', 'read', 'toc', 'download'] ),
-            location: Type.enum( ['left', 'right'] ),
-            button: Type.boolean,
-            position: Type.integer,
-            url: Type.url({ description: 'Required if the kind is "link"' }),
-            attachmentStyles: Type.image,
-            relationships: Type.object({
-              project: Type.relationship_data,
-              text: Type.object({
-                data: Type.string( nullable: true ) # TODO Find out what data type this is
-              })
-            }),
-            meta: Type.object({
-              partial: Type.boolean
-            })
-          })
-        })
-      })
+      Type.response_with_relationships(
+        self.request_create_params,
+        {
+          project: Type.relationship_data,
+          text: Type.relationship_data
+        }
+      )
+    end
+
+    def responses
+      Type.data_array( self.response() )
     end
   end
 end
