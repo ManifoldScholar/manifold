@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import Utility from "global/components/utility";
 import Authorize from "hoc/authorize";
+import ContentPlaceholder from "global/components/ContentPlaceholder";
 
-const helpLink = "https://manifoldapp.org/docs/";
+export default class ProjectCollectionPlaceholder extends Component {
+  static displayName = "ProjectCollection.Placeholder";
 
-export default class ProjectListPlaceholder extends Component {
-  static displayName = "ProjectList.Placeholder";
-
-  adminMessage() {
+  renderAdminMessage() {
+    const helpLink = "https://manifoldapp.org/docs/";
     const adminLink = lh.link("backendProjectCollections");
 
     return (
-      <div className="centered-message">
+      <p>
         {
           "But it’s easy to create new project collections with Manifold. If you have backend access, "
         }
@@ -27,55 +27,59 @@ export default class ProjectListPlaceholder extends Component {
           here
         </a>
         .
-      </div>
+      </p>
     );
-  }
-
-  defaultMessage() {
-    return <div className="centered-message">Please check back soon!</div>;
   }
 
   render() {
     return (
       <section className="bg-neutral05">
         <div className="container">
-          <div className="project-list-placeholder">
-            <header className="section-heading">
-              <div className="main">
-                <div className="body">
-                  <h2 className="title">
-                    <Authorize entity="projectCollection" ability="create">
-                      Oh no. There are no project collections in this Manifold
-                      library.
-                    </Authorize>
-                    <Authorize
-                      entity="project"
-                      ability="create"
-                      successBehavior="hide"
-                    >
-                      There are no project collections in this Manifold library.
-                    </Authorize>
-                  </h2>
-                </div>
-              </div>
-            </header>
-            <Authorize entity="projectCollection" ability="create">
-              {this.adminMessage()}
-            </Authorize>
-            <Authorize entity="project" ability="create" successBehavior="hide">
-              {this.defaultMessage()}
-            </Authorize>
-            <Utility.IconComposer icon="BooksOnShelfColorUnique" />
-            <Authorize entity="projectCollection" ability="create">
-              <div className="project-list-placeholder__button-nav button-nav">
-                <Link to={lh.link("backend")} className="button-icon-primary">
+          <ContentPlaceholder.Wrapper context="frontend">
+            <ContentPlaceholder.Title>
+              <Authorize entity="projectCollection" ability="create">
+                Oh no. There are no project collections in this Manifold
+                library.
+              </Authorize>
+              <Authorize
+                entity="project"
+                ability="create"
+                successBehavior="hide"
+              >
+                There are no project collections in this Manifold library.
+              </Authorize>
+            </ContentPlaceholder.Title>
+            <ContentPlaceholder.Body>
+              <>
+                <Authorize entity="project" ability="create">
+                  {this.renderAdminMessage()}
+                </Authorize>
+                <Authorize
+                  entity="project"
+                  ability="create"
+                  successBehavior="hide"
+                >
+                  <p>Please check back soon!</p>
+                </Authorize>
+                <Utility.IconComposer
+                  icon="BooksOnShelfColorUnique"
+                  size={205}
+                />
+              </>
+            </ContentPlaceholder.Body>
+            <ContentPlaceholder.Actions>
+              <Authorize entity="project" ability="create">
+                <Link
+                  to={lh.link("backendProjectCollections")}
+                  className="button-icon-primary"
+                >
                   <span className="button-icon-primary__text">
                     {"Create a collection Now"}
                   </span>
                 </Link>
-              </div>
-            </Authorize>
-          </div>
+              </Authorize>
+            </ContentPlaceholder.Actions>
+          </ContentPlaceholder.Wrapper>
         </div>
       </section>
     );
