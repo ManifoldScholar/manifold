@@ -208,4 +208,11 @@
       }
     }
   }
+
+  .placeholder button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    font-size: 14px;
+    border: 0;
+  }
 }

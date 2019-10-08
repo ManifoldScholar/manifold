@@ -70,9 +70,11 @@ exports[`Global.Comment.Detail component renders correctly 1`] = `
     </div>
   </section>
   <nav
-    className="utility"
+    className="annotation-reply__utility"
   >
-    <ul>
+    <ul
+      className="annotation-reply__utility-list"
+    >
       <li>
         <button
           className="annotation-reply__list-button"
