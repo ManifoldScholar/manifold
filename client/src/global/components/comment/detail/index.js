@@ -215,8 +215,8 @@ export default class CommentDetail extends PureComponent {
           </nav>
         </Authorize>
         <Authorize kind="unauthenticated">
-          <nav className="utility">
-            <ul>
+          <nav className="annotation-reply__utility">
+            <ul className="annotation-reply__utility-list">
               <li>
                 <button
                   onClick={this.props.showLogin}
