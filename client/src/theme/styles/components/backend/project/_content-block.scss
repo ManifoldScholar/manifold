@@ -16,9 +16,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 14px 9px 14px 11px;
+    color: inherit;
     cursor: move; // fallback for older browsers
     cursor: grab;
-    color: inherit;
     border: 1px solid transparent;
     transition: border-color 0.2s;
 

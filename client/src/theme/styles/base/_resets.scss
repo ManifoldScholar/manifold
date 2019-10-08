@@ -34,9 +34,10 @@ body {
   font-weight: $regular;
   hyphens: auto;
   line-height: $baseLineHeight;
+  color: $neutralTextDark;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  color: $neutralTextDark;
+
   &.no-scroll {
     overflow: hidden;
   }

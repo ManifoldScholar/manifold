@@ -77,8 +77,8 @@
     text-transform: uppercase;
     letter-spacing: 0.125em;
     white-space: nowrap;
-    opacity: 0;
     visibility: hidden;
+    opacity: 0;
     transition: opacity $duration $timing;
   }
 

@@ -292,8 +292,8 @@
 
   &:disabled {
     color: $neutralUIDullLight;
-    border: 1px solid;
     cursor: not-allowed;
+    border: 1px solid;
   }
 
   &:focus-visible:not([disabled]) {

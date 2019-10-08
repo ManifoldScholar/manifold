@@ -44,8 +44,8 @@
     bottom: 100%;
     left: 0;
     width: 100%;
-    text-align: center;
     color: $neutralTextLight;
+    text-align: center;
     background-color: transparentize($neutral90, 0.1);
 
     @include respond($break60) {
