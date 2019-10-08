@@ -142,6 +142,7 @@
     &:not(:first-of-type) {
       margin-left: 0;
     }
+
     &--serif {
       @include templateCopy;
       font-size: 25px;

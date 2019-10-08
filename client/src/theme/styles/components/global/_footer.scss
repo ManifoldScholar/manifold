@@ -1,9 +1,9 @@
 .app-footer {
   --default-hover-color: #{$accentInteractionLight};
   --default-focus-color: #{$accentInteractionLight};
-  color: $neutralTextLight;
 
   padding-top: 32px;
+  color: $neutralTextLight;
   background-color: $neutral85;
 
   @include respond($break50) {
@@ -209,7 +209,7 @@
   }
 
   &__item {
-    & + .app-footer-navigation__item {
+    + .app-footer-navigation__item {
       margin-top: 0.8em;
     }
 

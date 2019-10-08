@@ -3,6 +3,7 @@
 
 // <div> wrapper around form fields
 .form-input {
+  /* stylelint-disable property-no-vendor-prefix */
   &--with-actions {
     @include respond($break60) {
       display: -ms-grid;
@@ -33,6 +34,7 @@
       -ms-grid-column: 2;
     }
   }
+  /* stylelint-enable property-no-vendor-prefix */
 
   & + & {
     margin-top: 40px;

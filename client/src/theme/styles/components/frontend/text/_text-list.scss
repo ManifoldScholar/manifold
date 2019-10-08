@@ -13,9 +13,9 @@
     margin-bottom: 0;
     font-size: 13px;
     font-weight: $semibold;
+    color: $neutralTextExtraDark;
     text-transform: uppercase;
     letter-spacing: 0.107em;
-    color: $neutralTextExtraDark;
     background-color: $neutral10;
 
     @include respond($break80) {
