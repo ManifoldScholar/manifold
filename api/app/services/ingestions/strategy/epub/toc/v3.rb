@@ -61,8 +61,8 @@ module Ingestions
             items = []
             if nodes.count
               nodes.each do |node|
-                if node.at_xpath("xmlns:a")
-                  a_node = node.at_xpath("xmlns:a")
+                if node.at_xpath("descendant::xmlns:a")
+                  a_node = node.at_xpath("descendant::xmlns:a")
                   label = a_node.text
                   href = a_node.attribute("href")&.value
                   type = a_node.attribute("type")&.value
@@ -71,6 +71,7 @@ module Ingestions
                   href = nil
                   type = nil
                 end
+
                 item = make_structure_item(label, href, type)
 
                 if node.at_xpath("xmlns:ol/xmlns:li")
