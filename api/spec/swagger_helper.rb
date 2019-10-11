@@ -13,6 +13,7 @@ require_relative 'swagger_definitions/me'
 require_relative 'swagger_definitions/pages'
 require_relative 'swagger_definitions/projects'
 require_relative 'swagger_definitions/project_collections'
+require_relative 'swagger_definitions/project_events'
 require_relative 'swagger_definitions/reading_groups'
 require_relative 'swagger_definitions/resources'
 require_relative 'swagger_definitions/resource_collections'
@@ -142,6 +143,8 @@ RSpec.configure do |config|
         ProjectResponse: Projects.response,
         ProjectResponseFull: Projects.response_full,
         ProjectsResponse: Type.paginated( Type.reference('#/definitions/ProjectResponse') ),
+
+        ProjectEventsResponse: ProjectEvents.get_models,
 
         ProjectCollectionResponse: ProjectCollections.response,
         ProjectCollectionResponseFull: ProjectCollections.response_full,
