@@ -98,6 +98,9 @@ module Type
   # frequently used data structures  #
   ####################################
 
+  # this does not automatically wrap attributes in an object method
+  # incase the developer wants to define required attributes or other
+  # fields not available in the default object method
   def self.request(contents)
     self.object({
       data: self.object({

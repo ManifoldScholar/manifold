@@ -20,6 +20,7 @@ require_relative 'swagger_definitions/resource_collections'
 require_relative 'swagger_definitions/subjects'
 require_relative 'swagger_definitions/tags'
 require_relative 'swagger_definitions/texts'
+require_relative 'swagger_definitions/twitter_queries'
 require_relative 'swagger_definitions/users'
 
 RSpec.configure do |config|
@@ -172,6 +173,10 @@ RSpec.configure do |config|
         SubjectRequestUpdate: Subjects.request_update,
 
         TagsResponse: Tags.responses,
+
+        TwitterQueriesGet: TwitterQuerySchema.get_models,
+        TwitterQueryCreateRequest: TwitterQuerySchema.create_request,
+        TwitterQueryCreateResponse: TwitterQuerySchema.create_response,
 
         TextResponse: Texts.response,
         TextResponseFull: Texts.response_full,
