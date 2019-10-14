@@ -75,8 +75,8 @@ module MODEL_NAME
     end
 
     def get_model
-      Type.response_with_relationships()
-      Type.response() # no relationships
+      Type.response_with_relationships( get_model_attributes )
+      Type.response( get_model_attributes ) # no relationships
     end
 
     def get_models
