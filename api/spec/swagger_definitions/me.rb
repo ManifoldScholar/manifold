@@ -159,7 +159,7 @@ module Me
           }),
           meta: Type.meta_partial
         }),
-        included: included
+        included: Type.array({ type: included })
       })
     end
 
