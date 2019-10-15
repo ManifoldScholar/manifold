@@ -8,6 +8,7 @@ require_relative 'swagger_definitions/comments'
 require_relative 'swagger_definitions/content_blocks'
 require_relative 'swagger_definitions/contacts'
 require_relative 'swagger_definitions/errors'
+require_relative 'swagger_definitions/favorites'
 require_relative 'swagger_definitions/makers'
 require_relative 'swagger_definitions/me'
 require_relative 'swagger_definitions/pages'
@@ -122,6 +123,10 @@ RSpec.configure do |config|
 
         ContactRequestCreate: Contacts.request_create,
         ContactResponseError: Contacts.error,
+
+        FavoriteGet: Favorites.get_model,
+        FavoriteCreateRequest: Favorites.create_request,
+        FavoriteCreateResponse: Favorites.create_response,
 
         Maker: Makers.relationship,
         MakerResponse: Makers.response,
