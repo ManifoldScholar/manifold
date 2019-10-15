@@ -13,6 +13,7 @@ RSpec.describe "NAME OF RESOURCE", type: :request do
   include_context("param helpers")             # path generator helpers for non-swagger tests
 
   let(:model) { FactoryBot.create(RESOURCE) }
+  let(:model_id) { model[:id] }
 
   tags = 'TAG'
   model_name = 'MODEL_NAME'
@@ -78,29 +79,27 @@ RSpec.describe "NAME OF RESOURCE", type: :request do
 
   # '#{model_name_plural}' will be replaced by the variable at the top of the page
   # '{id}' will be set as a variable in the test
-  path "/#{model_name_plural}/{id}" do
+  path "/#{model_name_plural}/{model_id}" do
     attribute = 'ID'  # a handy variable for passing into the translation strings
 
     # eg "Returns the %{type} with the given %{attribute}"
     get I18n.t('swagger.get.one.description', type: model_name, attribute: attribute) do
 
-      # tell rswag that whatever you decalre as let(:id) in the test
-      # will be associated with the {id} in the path
-      parameter name: :id, :in => :path, :type => :string
+      # tell rswag that whatever you decalre as let(:model_id) in the test
+      # will be associated with the {model_id} in the path
+      parameter name: :model_id, :in => :path, :type => :string
 
       produces 'application/json'
       tags tags
 
       response '200', I18n.t('swagger.get.one.200', type: model_name, attribute: attribute) do
-        let(:id) { model[:id] }
         schema get_model
         run_test!
       end
     end
 
     patch I18n.t('swagger.patch.description', type: model_name, attribute: attribute) do
-      parameter name: :id, :in => :path, :type => :string
-      let(:id) { model[:id] }
+      parameter name: :model_id, :in => :path, :type => :string
 
       parameter name: :body, in: :body, schema: update_request
       let(:body) { json_structure_for(model_name) }
@@ -124,8 +123,7 @@ RSpec.describe "NAME OF RESOURCE", type: :request do
     end
 
     delete I18n.t('swagger.delete.description', type: model_name, attribute: attribute) do
-      parameter name: :id, :in => :path, :type => :string
-      let(:id) { model[:id] }
+      parameter name: :model_id, :in => :path, :type => :string
 
       security [ apiKey: [] ]
       tags tags
