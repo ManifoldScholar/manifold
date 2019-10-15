@@ -53,6 +53,14 @@ module MODEL_NAME
       }
     end
 
+    def model
+      Type.response_with_relationships(
+        get_model_attributes,
+        relationship_attributes
+      )
+      Type.response( get_model_attributes ) # no relationships
+    end
+
     ##############################
     ##  CRUD OPERATION SCHEMAS  ##
     ##############################
@@ -61,27 +69,26 @@ module MODEL_NAME
     end
 
     def create_response
-      Type.response_with_relationships()
-      Type.response() # no relationships
+      Type.object({ data: model })
     end
 
     def update_request
-      Type.request()
+      Type.request(
+        Type.object({})
+      )
     end
 
     def update_response
-      Type.response_with_relationships()
-      Type.response() # no relationships
+      Type.object({ data: model })
     end
 
     def get_model
-      Type.response_with_relationships( get_model_attributes )
-      Type.response( get_model_attributes ) # no relationships
+      Type.object({ data: model })
     end
 
     def get_models
-      Type.data_array( get_model ) # it could be just a data array of models
-      Type.paginated( get_model )  # or maybe it is a data array with pagination
+      Type.data_array( model ) # it could be just a data array of models
+      Type.paginated( model )  # or maybe it is a data array with pagination
     end
   end
 end

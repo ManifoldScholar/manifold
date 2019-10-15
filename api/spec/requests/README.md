@@ -14,9 +14,9 @@ RSpec.describe "NAME OF RESOURCE", type: :request do
 
   let(:model) { FactoryBot.create(RESOURCE) }
 
-  tags = 'category'
-  model_name = 'action_callout'
-  model_name_plural = 'action_callouts'
+  tags = 'TAG'
+  model_name = 'MODEL_NAME'
+  model_name_plural = 'MODEL_NAME_PLURAL'
 
   # each variable is likely only used once, but it makes it easier to modify the
   # schemas from a single location in the file
