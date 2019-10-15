@@ -5,6 +5,7 @@ RSpec.describe "Me API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
   let(:path) { api_v1_me_path }
+  let(:user) { FactoryBot.create(:user) }
 
   path '/me' do
     get 'Returns information about the current user' do
@@ -20,7 +21,6 @@ RSpec.describe "Me API", type: :request do
 
       response '401', I18n.t('swagger.access_denied') do
         let(:Authorization) { }
-        schema '$ref' => '#/definitions/MeResponse'
         run_test!
       end
     end
