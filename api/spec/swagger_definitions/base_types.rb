@@ -222,9 +222,17 @@ module Type
       id: self.id,
       type: self.string,
       attributes: self.object( attributes ),
-      meta: self.meta_partial,
-      relationships: self.object( relationships )
+      relationships: self.object( relationships ),
+      meta: self.meta_partial
     })
+  end
+
+  def self.attributes_with_crud(array)
+    hash = Hash.new
+    array.each { |attribute|
+      hash["#{attribute}"] = Type.object( Type.crud )
+    }
+    return hash
   end
 
   ###########################################
