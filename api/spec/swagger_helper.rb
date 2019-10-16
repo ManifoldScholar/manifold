@@ -1,28 +1,9 @@
 require 'rails_helper'
 
-require_relative 'swagger_definitions/action_callouts'
-require_relative 'swagger_definitions/base_types'
-require_relative 'swagger_definitions/categories'
-require_relative 'swagger_definitions/collaborators'
-require_relative 'swagger_definitions/comments'
-require_relative 'swagger_definitions/content_blocks'
-require_relative 'swagger_definitions/contacts'
-require_relative 'swagger_definitions/errors'
-require_relative 'swagger_definitions/favorites'
-require_relative 'swagger_definitions/makers'
-require_relative 'swagger_definitions/me'
-require_relative 'swagger_definitions/pages'
-require_relative 'swagger_definitions/projects'
-require_relative 'swagger_definitions/project_collections'
-require_relative 'swagger_definitions/project_events'
-require_relative 'swagger_definitions/reading_groups'
-require_relative 'swagger_definitions/resources'
-require_relative 'swagger_definitions/resource_collections'
-require_relative 'swagger_definitions/subjects'
-require_relative 'swagger_definitions/tags'
-require_relative 'swagger_definitions/texts'
-require_relative 'swagger_definitions/twitter_queries'
-require_relative 'swagger_definitions/users'
+# get all definitions in the swagger_definitions folder
+Dir[ File.join(File.dirname(__FILE__), "swagger_definitions/*.rb") ].each {
+  |file| require file
+}
 
 RSpec.configure do |config|
 
@@ -98,9 +79,9 @@ RSpec.configure do |config|
         CategoryResource:       Categories.get_resource,
         CategoryCollection:     Categories.get_collection,
         CategoryCreateRequest:  Categories.create_request,
-        CategoryCreateResponse: Categories.create_response,
-        CategoryUpdateRequest:  Categories.update_request,
-        CategoryUpdateResponse: Categories.update_response,
+        CategoryCreateResponse: Type.reference('#/definitions/CategoryResource'),
+        CategoryUpdateRequest:  Type.reference('#/definitions/CategoryCreateRequest'),
+        CategoryUpdateResponse: Type.reference('#/definitions/CategoryResource'),
 
         CommentResponse: Comments.response,
         CommentRequestUpdate: Comments.request_update,

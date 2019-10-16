@@ -26,18 +26,6 @@ module Categories
       })
     end
 
-    def create_response
-      get_resource
-    end
-
-    def update_request
-      create_request
-    end
-
-    def update_response
-      get_resource
-    end
-
     def get_resource
       Type.object({
         data: Type.object({
