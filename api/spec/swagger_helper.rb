@@ -54,18 +54,6 @@ RSpec.configure do |config|
           description: "Info on the manifold projects",
         },
         {
-          name: "Action Callouts",
-          description: "TKTKTKT",
-        },
-        {
-          name: "Categories",
-          description: "TKTKTKT",
-        },
-        {
-          name: "Comments",
-          description: "TKTKTKT",
-        },
-        {
           name: "users",
           description: "Readers, authors, admins and other user info",
         },
@@ -107,8 +95,8 @@ RSpec.configure do |config|
         # CollaboratorUpdateRequest: Collaborators.update_request,
         # CollaboratorUpdateResponse: Collaborators.update_response,
 
-        CategoryResponse: Categories.response,
-        CategoryResponses: Categories.responses,
+        CategoryResponse: Categories.get_resource,
+        CategoryResponses: Categories.get_collection,
         CategoryRequestUpdate: Categories.request_update,
         CategoryRequestCreate: Categories.request_create,
 

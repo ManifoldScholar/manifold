@@ -30,21 +30,21 @@ module Categories
       request_create()
     end
 
-    def response
+    def get_resource
       Type.object({
         data: Type.object({
           id: Type.id,
           type: Type.string,
-          attributes: Type.object(self.response_attributes)
+          attributes: Type.object( response_attributes )
         }),
         meta: Type.meta_partial
       })
     end
 
 
-    def responses
+    def get_collection
       Type.data_array(
-        Type.response(self.response_attributes)
+        Type.response( response_attributes )
       )
     end
   end
