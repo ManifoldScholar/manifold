@@ -26,7 +26,7 @@ shared_examples_for "an API create request" do |options|
 
   let(:create) { json_structure_for(conf.factory) }
 
-  post I18n.t("swagger.post.description", type: conf.resource_name_plural) do
+  post I18n.t("swagger.post.description", type: conf.resource_name) do
     conf.parameters.each do |parameter_options|
       parameter(parameter_options)
     end
@@ -35,7 +35,7 @@ shared_examples_for "an API create request" do |options|
     security [apiKey: []]
     tags conf.tags
 
-    response "201", I18n.t("swagger.post.201", type: conf.resource_name_plural) do
+    response "201", I18n.t("swagger.post.201", type: conf.resource_name) do
       let(:Authorization) { admin_auth }
       schema conf.response
       run_test!
