@@ -181,7 +181,7 @@
     transition: background-color $duration $timing;
 
     &:hover, &:focus-visible {
-      background-color: $defaultNoticeColor;
+      background-color: $spErrorLight;
       outline: 0;
     }
 

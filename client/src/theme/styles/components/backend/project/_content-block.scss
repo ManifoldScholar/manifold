@@ -85,7 +85,7 @@
     }
 
     &--incomplete {
-      color: $defaultNoticeColor;
+      color: $defaultErrorColor;
     }
   }
 
@@ -140,7 +140,7 @@
     @include buttonUnstyled;
 
     &--delete {
-      --default-hover-color: #{$sp40Tertiary};
+      --default-hover-color: #{$spErrorLight};
     }
 
     &--draggable {

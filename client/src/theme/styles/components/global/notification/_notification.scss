@@ -2,34 +2,20 @@
   width: 100%;
   color: $neutralTextExtraDark;
 
-  &--context-header {
-    &.notification--notice {
-      background-color: $sp30Primary;
-    }
+  &--notice {
+    background-color: $spNoticeLight;
+  }
 
-    &.notification--warning {
-      background-color: $sp30Secondary;
-    }
+  &--warning {
+    background-color: $spWarningLight;
+  }
 
-    &.notification--error {
-      background-color: $sp30Tertiary;
-    }
+  &--error {
+    background-color: $spErrorLight;
   }
 
   &--context-drawer {
     background-color: $neutral90;
-
-    &.notification--notice {
-      color: $sp20Primary;
-    }
-
-    &.notification--warning {
-      color: $sp20Quaternary;
-    }
-
-    &.notification--error {
-      color: $sp40Tertiary;
-    }
   }
 
   &__container {
@@ -101,6 +87,10 @@
       &:focus-visible {
         outline-color: $neutralOffBlack;
       }
+
+      &:hover {
+        color: inherit;
+      }
     }
 
     .notification--context-drawer & {
@@ -125,11 +115,6 @@
   }
 
   &__button-icon {
-    @include respond($break70) {
-      width: 49.778px;
-      height: 49.778px;
-    }
-
     .notification--context-drawer & {
       display: none;
     }

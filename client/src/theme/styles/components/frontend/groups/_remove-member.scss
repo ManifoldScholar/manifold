@@ -3,7 +3,7 @@
   @include formLabelPrimary;
   position: relative;
   padding: 4px 15px 5px;
-  color: $defaultNoticeColor;
+  color: $defaultErrorColor;
   border: 1px solid;
   border-radius: 12px;
   transition: all $duration $timing;
@@ -11,7 +11,7 @@
   &:hover,
   &:focus-visible {
     color: $neutralWhite;
-    background-color: $defaultNoticeColor;
+    background-color: $defaultErrorColor;
     outline: 0;
   }
 }

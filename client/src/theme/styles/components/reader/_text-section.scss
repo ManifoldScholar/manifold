@@ -23,10 +23,10 @@
   line-height: 1.761;
 
   *::selection, .annotation-locked-selected {
-    background: $sp20Quaternary;
+    background: $spYellow20;
 
     .scheme-dark & {
-      background: $neutral80;
+      background: $neutralUIExtraDark;
     }
   }
 
@@ -96,15 +96,5 @@
   // Link with notation marker cube
   .notation-marker {
     cursor: pointer;
-  }
-
-  .node-flash {
-    background-color: transparent;
-    transition: background-color 1s ease;
-  }
-
-  .node-flash-active {
-    background-color: $sp20SecondaryLight;
-    transition: background-color 1s ease;
   }
 }

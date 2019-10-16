@@ -49,7 +49,7 @@
 
   &__notice {
     @include formInputMessage;
-    color: $sp40Tertiary;
+    color: $defaultErrorColor;
   }
 
   &__copyable {

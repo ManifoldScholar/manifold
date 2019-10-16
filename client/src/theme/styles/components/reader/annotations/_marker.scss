@@ -1,45 +1,20 @@
 // Annotation Marker Components
 // ----------------------------
+// Blue
+$spHighlightPrimaryLight: lighten(desaturate($spHighlightPrimary, 13.25), 20.59); // #99e3f5;
+$spHighlightPrimaryPaleLowContrast: darken(desaturate(adjust-hue($spHighlightPrimary, 15), 83.5), 1.96); // #808f9b;
 
-// A grouping of components used to mark/signal existing annotations
+// Green
+$spHighlightSecondary: #70c930;
+$spHighlightSecondaryLight: #c6eaac;
+$spHighlightSecondaryPale: #eaf7e0;
+$spHighlightSecondaryPaleLowContrast: #677b61;
 
-//.annotation-comment {
-//  border-bottom: 2px solid $sp20Primary;
-//
-//  .annotation-marker {
-//    @include buttonUnstyled;
-//    @include templateHead;
-//    position: absolute;
-//    right: 10%;
-//    padding: 0 8px 3px;
-//    font-size: $type70;
-//    letter-spacing: 0.075em;
-//    color: $neutralWhite;
-//    background-color: $sp20Primary;
-//
-//    &::before {
-//      position: absolute;
-//      top: 100%;
-//      left: 8px;
-//      width: 0;
-//      height: 0;
-//      border-color: $sp20Primary transparent transparent;
-//      border-style: solid;
-//      border-width: 8px 9px 0 0;
-//      content: '';
-//    }
-//  }
-//}
-//
-//.annotation-highlight {
-//  background-color: $sp20PrimaryPale;
-//}
-
-//.annotation-locked-selected {
-//  &.primary {
-//    background-color: red;
-//  }
-//}
+// Pink
+$spHighlightTertiary: #ff12ff;
+$spHighlightTertiaryLight: #edaaed;
+$spHighlightTertiaryPale: #f4dcf4;
+$spHighlightTertiaryPaleLowContrast: #775e77;
 
 .annotation-underline {
   cursor: pointer;
@@ -50,21 +25,21 @@
   &.primary {
     // Built in css function
     // scss-lint:disable NameFormat
-    background-image: linear-gradient($sp20PrimaryLight, $sp20PrimaryLight);
+    background-image: linear-gradient($spHighlightPrimaryLight, $spHighlightPrimaryLight);
 
     .scheme-dark & {
-      background-image: linear-gradient($sp20PrimaryPaleLowContrast, $sp20PrimaryPaleLowContrast);
+      background-image: linear-gradient($spHighlightPrimaryPaleLowContrast, $spHighlightPrimaryPaleLowContrast);
     }
 
     .multiple {
       // Adds an additional background image
-      background-image: linear-gradient($sp20Primary, $sp20Primary);
+      background-image: linear-gradient($spHighlightPrimary, $spHighlightPrimary);
       background-repeat: repeat-x;
       background-position: 0 100%;
       background-size: 2px 2px;
 
       .scheme-dark & {
-        background-image: linear-gradient($sp20PrimaryPaleLowContrast, $sp20PrimaryPaleLowContrast);
+        background-image: linear-gradient($spHighlightPrimaryPaleLowContrast, $spHighlightPrimaryPaleLowContrast);
       }
     }
   }
@@ -72,17 +47,17 @@
   &.secondary {
     // Built in css function
     // scss-lint:disable NameFormat
-    background-image: linear-gradient($sp20SecondaryLight, $sp20SecondaryLight);
+    background-image: linear-gradient($spNoticeExtraLight, $spNoticeExtraLight);
 
     .scheme-dark & {
-      background-image: linear-gradient($sp20SecondaryPaleLowContrast, $sp20SecondaryPaleLowContrast);
+      background-image: linear-gradient($spHighlightSecondaryPaleLowContrast, $spHighlightSecondaryPaleLowContrast);
     }
 
     .multiple {
       // Adds an additional background image
       // Built in css function
       // scss-lint:disable NameFormat
-      background-image: linear-gradient($sp20Secondary, $sp20Secondary);
+      background-image: linear-gradient($spHighlightSecondary, $spHighlightSecondary);
       background-repeat: repeat-x;
       background-position: 0% 100%;
       background-size: 2px 2px;
@@ -92,17 +67,17 @@
   &.tertiary {
     // Built in css function
     // scss-lint:disable NameFormat
-    background-image: linear-gradient($sp20TertiaryLight, $sp20TertiaryLight);
+    background-image: linear-gradient($spHighlightTertiaryLight, $spHighlightTertiaryLight);
 
     .scheme-dark & {
-      background-image: linear-gradient($sp20TertiaryPaleLowContrast, $sp20TertiaryPaleLowContrast);
+      background-image: linear-gradient($spHighlightTertiaryPaleLowContrast, $spHighlightTertiaryPaleLowContrast);
     }
 
     .multiple {
       // Adds an additional background image
       // Built in css function
       // scss-lint:disable NameFormat
-      background-image: linear-gradient($sp20Tertiary, $sp20Tertiary);
+      background-image: linear-gradient($spHighlightTertiary, $spHighlightTertiary);
       background-repeat: repeat-x;
       background-position: 0% 100%;
       background-size: 2px 2px;
@@ -112,42 +87,42 @@
 
 .annotation-highlight {
   &.primary {
-    background-color: $sp20PrimaryPale;
+    background-color: $spHighlightPrimaryPale;
 
     .scheme-dark & {
-      background-color: $sp20PrimaryPaleLowContrast;
+      background-color: $spHighlightPrimaryPaleLowContrast;
     }
 
     .multiple {
-      background-color: $sp20PrimaryLight;
+      background-color: $spHighlightPrimaryLight;
     }
   }
 
   &.secondary {
-    background-color: $sp20SecondaryPale;
+    background-color: $spHighlightSecondaryPale;
 
     .scheme-dark & {
-      background-color: $sp20SecondaryPaleLowContrast;
+      background-color: $spHighlightSecondaryPaleLowContrast;
     }
 
     .multiple {
-      background-color: $sp20SecondaryLight;
+      background-color: $spHighlightSecondaryLight;
     }
   }
 
   &.tertiary {
-    background-color: $sp20TertiaryPale;
+    background-color: $spHighlightTertiaryPale;
 
     .scheme-dark & {
-      background-color: $sp20TertiaryPaleLowContrast;
+      background-color: $spHighlightTertiaryPaleLowContrast;
     }
 
     .multiple {
-      background-color: $sp20SecondaryLight;
+      background-color: $spHighlightSecondaryLight;
     }
   }
 
   &.mixed {
-    background-color: darken(mix($sp20PrimaryPale, $sp20SecondaryPale), 20%);
+    background-color: darken(mix($spHighlightPrimaryPale, $spHighlightSecondaryPale), 20%);
   }
 }

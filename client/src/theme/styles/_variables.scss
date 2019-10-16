@@ -37,6 +37,7 @@ $accentPrimaryMedium: darken(desaturate($accentPrimary, 20.94), 11.57) !default;
 $accentPrimaryLight: lighten(saturate($accentPrimary, 0.36), 8.04) !default; // #75e9bd
 $accentPrimaryDull: lighten(desaturate(adjust-hue($accentPrimary, -3), 14.56), 20) !default; // #b1ead2
 $accentPrimaryPale: lighten(desaturate($accentPrimary, 1.55), 19.41) !default; // #a8f0d5
+$accentPrimaryExtraPale: lighten(saturate($accentPrimary, 1.19), 27.65); // #cbf7e6
 $accentPrimaryOffWhite: lighten(desaturate(adjust-hue($accentPrimary, 5), 22.14), 35.49) !default; // #f0faf7
 
 $focusPrimary: lighten(saturate(adjust-hue($accentPrimary, 2), 7.86), 25.69) !default; // #c0f8e5
@@ -46,12 +47,49 @@ $focusTertiary: $neutral30;
 // ---> For SVG interpolation
 $accentPrimaryHex: str-slice(#{$accentPrimary}, 2);
 
+// Spectra
+// Additional global accent colors
+$spBlue20: #D4EDFA;
+$spBlue45: #61CAFF;
+$spBlue75: #19678F;
+
+$spGreen20: #C7F2A7;
+$spGreen45: #87C930;
+$spGreen75: #3C6E1A;
+
+$spOrange20: #FFEBCE;
+$spOrange45: #FAB048;
+$spOrange75: #875F27;
+
+$spPink20: #FFD6E4;
+$spPink45: #FF8AB1;
+$spPink75: #99536A;
+
+$spRed20: #FFD1D1;
+$spRed45: #FF9191;
+$spRed75: #C42929;
+
+$spTeal20: #C0FAF5;
+$spTeal45: #38D6C9;
+$spTeal75: #1D756E;
+
+$spViolet20: #F7DCF6;
+$spViolet45: #F58CEE;
+$spViolet75: #9C4A96;
+
+$spYellow20: #FFF799;
+$spYellow45: #F5E425;
+$spYellow75: #706B2C;
+
 // Default colors that meet WCAG AA color contrast guidelines
+// Namespaced functionally by usage and context (light/dark modes)
+// --------------------------------------------------------
+// Neutral text and UI elements
+$neutralUIDullLight: $neutral70; // decorative or inactive elements against dark bgs
 $neutralTextExtraLight: $neutral10; // for $neutral75 bg
 $neutralUIExtraLight: $neutral40; // ""
 $neutralTextLight: $neutral45; // for $neutral80 ↑ bg
 $neutralUILight: $neutral50; // ""
-$neutralUIDullLight: $neutral70; // decorative or inactive elements against dark bgs
 
 $neutralUIDullDark: $neutral45; // decorative or inactive elements against dark bgs
 $neutralTextDark: $neutral75; // for $neutral10 ↓ bg
@@ -59,51 +97,29 @@ $neutralUIDark: $neutral70; // ""
 $neutralTextExtraDark: $neutral90; // for informational hierarchy with $neutralTextDark
 $neutralUIExtraDark: $neutral85; // ""
 
+// User Interactions
 $accentInteractionLight: $accentPrimary !default;
 $accentInteractionDark: darken(saturate(adjust-hue($accentPrimary, 4), 17.01), 35.29) !default; // #077A57
-$accentNoticeLight: #f75884;
-$accentNoticeDark: #f75884;
 
-// Spectra
-// Color spectra are number by group and then given ordinal names, attributes
+// Errors (plus delete icons/messages)
+$spErrorExtraLight: $spRed20;
+$spErrorLight: $spRed45;
+$spErrorDark: $spRed75;
 
-// SP 20 Reader Annotations, Highlighting, Labels
-$sp20Primary: #2bd1fa !default; // #2bd1fa;
-$sp20PrimaryLight: lighten(desaturate($sp20Primary, 13.25), 20.59); // #99e3f5;
-$sp20PrimaryPale: lighten(desaturate(adjust-hue($sp20Primary, -1), 14.44), 34.31); // #d9f5fb;
-$sp20PrimaryPaleLowContrast: darken(desaturate(adjust-hue($sp20Primary, 15), 83.5), 1.96); // #808f9b;
+// Warnings
+$spWarningExtraLight: $spYellow20;
+$spWarningLight: $spYellow45;
+$spWarningDark: $spYellow75;
 
-$sp20Secondary: #70c930;
-$sp20SecondaryLight: #c6eaac;
-$sp20SecondaryPale: #eaf7e0;
-$sp20SecondaryPaleLowContrast: #677b61;
+// Notices
+$spNoticeExtraLight: $spBlue20;
+$spNoticeLight: $spBlue45;
+$spNoticeDark: $spBlue75;
 
-$sp20Tertiary: #ff12ff;
-$sp20TertiaryLight: #edaaed;
-$sp20TertiaryPale: #f4dcf4;
-$sp20TertiaryPaleLowContrast: #775e77;
-
-$sp20Quaternary: #fffd73;
-
-$sp20Quinary: #faffdb;
-
-// SP 30 Notifications
-$sp30Primary: #d4f2ff;
-$sp30Secondary: #fff799;
-$sp30Tertiary: #ffbdbd;
-
-// SP 40 Template Notices, Warnings, Acceptance, Errata
-$sp40Secondary: #ffa74a;
-$sp40Tertiary: #f75884;
-
-// SP 50 Project Placeholder tile backgrounds
-$sp50Primary: lighten(saturate($accentPrimary, 1.19), 27.65); // #cbf7e6;
-$sp50Secondary: #ebebeb;
-$sp50Tertiary: #deecf9;
-$sp50Quaternary: #ffebce;
-$sp50Quinary: #f5e4f4;
-
-
+// Reader Annotations, Highlighting, Labels
+// additional variables defined locally in components/reader/annotations/_marker.scss
+$spHighlightPrimary: #2bd1fa !default; // #2bd1fa;
+$spHighlightPrimaryPale: lighten(desaturate(adjust-hue($spHighlightPrimary, -1), 14.44), 34.31); // #d9f5fb;
 
 // Typographic Hierarchy
 // Commonly used font-sizes for template typography

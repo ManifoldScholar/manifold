@@ -1,9 +1,11 @@
 .section-category-label {
+  $labelBgColor: $spYellow20;
+
   position: sticky;
   bottom: 0;
   padding: 20px 0 18px;
   text-align: center;
-  background-color: $sp20Quinary;
+  background-color: $labelBgColor;
   transition: background-color $duration $timing;
 
   .scheme-dark & {

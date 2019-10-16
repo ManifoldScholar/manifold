@@ -19,7 +19,7 @@
       }
 
       &.remove-button:hover {
-        color: $defaultNoticeColor;
+        color: $defaultErrorColor;
       }
 
       + button {
@@ -174,7 +174,7 @@
 
         &--close {
           &:hover {
-            color: $defaultNoticeColor;
+            color: $defaultErrorColor;
           }
         }
       }
