@@ -85,8 +85,7 @@ class ApiRequestConfig
   def response_ref
     return @options[:response_ref] if @options.key?(:response_ref)
 
-    base = @action == :index ? resource_name.pluralize : resource_name
-    segment = base.camelize.capitalize
+    segment = resource_name.camelize.capitalize
 
     return (@options[:response_ref] || "#/definitions/#{segment}Resource") if @action == :show
     return (@options[:response_ref] || "#/definitions/#{segment}Collection") if @action == :index
