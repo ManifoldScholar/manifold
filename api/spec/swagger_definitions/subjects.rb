@@ -2,7 +2,7 @@ require_relative 'base_types'
 
 module Subjects
   class << self
-    def request_create
+    def create_request
       Type.request(
         Type.object({
           name: Type.string
@@ -10,11 +10,7 @@ module Subjects
       )
     end
 
-    def request_update
-      request_create()
-    end
-
-    def response
+    def get_resource
       Type.object(
         Type.data_response_hash(
           Type.object({
@@ -22,6 +18,10 @@ module Subjects
           })
         )
       )
+    end
+
+    def get_collection
+      Type.paginated( get_resource )
     end
   end
 end
