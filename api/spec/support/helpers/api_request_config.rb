@@ -30,12 +30,19 @@ class ApiRequestConfig
   end
 
   def parameters
-    return @options[:parameters] if @options.key?(:parameters)
-    return default_create_parameters if @action == :create
-    return default_update_parameters if @action == :update
-    return default_show_parameters if @action == :show
+    return merge_additional_parameters(@options[:parameters]) if @options.key?(:parameters)
+    return merge_additional_parameters(default_create_parameters) if @action == :create
+    return merge_additional_parameters(default_update_parameters) if @action == :update
+    return merge_additional_parameters(default_show_parameters) if @action == :show
 
-    []
+    merge_additional_parameters([])
+  end
+
+  def merge_additional_parameters(parameters)
+    return parameters unless @options.key?(:additional_parameters)
+
+    keys = @options[:additional_parameters].map { |p| p[:name] }
+    parameters.reject { |p| keys.include? p } + @options[:additional_parameters]
   end
 
   def default_show_parameters
@@ -46,14 +53,14 @@ class ApiRequestConfig
 
   def default_create_parameters
     [
-      { name: :create, in: :body, schema: request_ref }
+      { name: :create, in: :body, schema: { "$ref" => request_ref } }
     ]
   end
 
   def default_update_parameters
     [
       { name: :id, in: :path, type: :string },
-      { name: :update, in: :body, schema: request_ref }
+      { name: :update, in: :body, schema: { "$ref" => request_ref } }
     ]
   end
 
