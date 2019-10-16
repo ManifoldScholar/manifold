@@ -33,7 +33,7 @@ shared_examples_for "an API create request" do |options|
     produces conf.content_type
     consumes conf.content_type
     security [apiKey: []]
-    tags tags
+    tags conf.tags
 
     response "201", I18n.t("swagger.post.201", type: conf.resource_name_plural) do
       let(:Authorization) { admin_auth }
@@ -62,7 +62,7 @@ shared_examples_for "an API show request" do |options|
     end
     produces conf.content_type
     consumes conf.content_type
-    tags tags
+    tags conf.tags
 
     response "200", I18n.t("swagger.get.one.200", type: conf.resource_name, attribute: "ID") do
       schema conf.response
@@ -91,7 +91,7 @@ shared_examples_for "an API update request" do |options|
     produces conf.content_type
     consumes conf.content_type
     security [apiKey: []]
-    tags tags
+    tags conf.tags
 
     response "200", I18n.t("swagger.patch.200", type: conf.resource_name, attribute: "ID") do
       let(:Authorization) { admin_auth }
@@ -120,7 +120,7 @@ shared_examples_for "an API destroy request" do |options|
     end
 
     security [apiKey: []]
-    tags tags
+    tags conf.tags
 
     response "204", I18n.t("swagger.delete.204", type: conf.resource_name, attribute: "ID") do
       let(:Authorization) { admin_auth }
