@@ -6,7 +6,7 @@ shared_examples_for "an API index request" do |options|
 
   get I18n.t("swagger.get.all.description", type: conf.resource_name_plural) do
     conf.parameters.each do |parameter_options|
-      parameter(**parameter_options)
+      parameter(parameter_options)
     end
     produces conf.content_type
     tags conf.tags
@@ -28,7 +28,7 @@ shared_examples_for "an API create request" do |options|
 
   post I18n.t("swagger.post.description", type: conf.resource_name_plural) do
     conf.parameters.each do |parameter_options|
-      parameter(**parameter_options)
+      parameter(parameter_options)
     end
     produces conf.content_type
     consumes conf.content_type
@@ -58,7 +58,7 @@ shared_examples_for "an API show request" do |options|
 
   get I18n.t("swagger.get.one.description", type: conf.resource_name_plural, attribute: "ID") do
     conf.parameters.each do |parameter_options|
-      parameter(**parameter_options)
+      parameter(parameter_options)
     end
     produces conf.content_type
     consumes conf.content_type
@@ -86,7 +86,7 @@ shared_examples_for "an API update request" do |options|
 
   patch I18n.t("swagger.patch.description", type: conf.resource_name_plural, attribute: "ID") do
     conf.parameters.each do |parameter_options|
-      parameter(**parameter_options)
+      parameter(parameter_options)
     end
     produces conf.content_type
     consumes conf.content_type
@@ -116,7 +116,7 @@ shared_examples_for "an API destroy request" do |options|
 
   delete I18n.t("swagger.delete.description", type: conf.resource_name_plural, attribute: "ID") do
     conf.parameters.each do |parameter_options|
-      parameter(**parameter_options)
+      parameter(parameter_options)
     end
 
     security [apiKey: []]
