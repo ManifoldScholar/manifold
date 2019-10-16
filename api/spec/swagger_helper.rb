@@ -95,10 +95,12 @@ RSpec.configure do |config|
         # CollaboratorUpdateRequest: Collaborators.update_request,
         # CollaboratorUpdateResponse: Collaborators.update_response,
 
-        CategoryResponse: Categories.get_resource,
-        CategoryResponses: Categories.get_collection,
-        CategoryRequestUpdate: Categories.request_update,
-        CategoryRequestCreate: Categories.request_create,
+        CategoryResource:       Categories.get_resource,
+        CategoryCollection:     Categories.get_collection,
+        CategoryCreateRequest:  Categories.create_request,
+        CategoryCreateResponse: Categories.create_response,
+        CategoryUpdateRequest:  Categories.update_request,
+        CategoryUpdateResponse: Categories.update_response,
 
         CommentResponse: Comments.response,
         CommentRequestUpdate: Comments.request_update,

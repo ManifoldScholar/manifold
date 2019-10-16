@@ -12,7 +12,7 @@ module Categories
       }
     end
 
-    def request_create
+    def create_request
       Type.object({
         data: Type.object({
           attributes: Type.object({
@@ -26,8 +26,16 @@ module Categories
       })
     end
 
-    def request_update
-      request_create()
+    def create_response
+      get_resource
+    end
+
+    def update_request
+      create_request
+    end
+
+    def update_response
+      get_resource
     end
 
     def get_resource
