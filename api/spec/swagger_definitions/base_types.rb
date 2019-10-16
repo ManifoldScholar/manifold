@@ -98,13 +98,10 @@ module Type
   # frequently used data structures  #
   ####################################
 
-  # this does not automatically wrap attributes in an object method
-  # incase the developer wants to define required attributes or other
-  # fields not available in the default object method
-  def self.request(contents)
+  def self.request(contents, params = {})
     self.object({
       data: self.object({
-        attributes: contents
+        attributes: Type.object( contents, params )
       })
     })
   end
@@ -150,6 +147,7 @@ module Type
     self.reference( '#/definitions/Attachment' )
   end
 
+  # TODO refactor out for collection_response
   def self.data_array(dataType)
     self.object({
       data: self.array( type: dataType )
@@ -197,17 +195,16 @@ module Type
     return base
   end
 
-  # TODO refactor this out in favor of the response and
-  # response_with_relationships methods
   def self.data_response_hash(attributes)
-    {
+    self.object({
       id: self.id,
       type: self.string,
-      attributes: attributes,
+      attributes: Type.object( attributes ),
       meta: self.meta_partial
-    }
+    }, { required: [ 'id', 'type', 'attributes', 'meta' ]})
   end
 
+  # TODO refactor out for resource_response and collection_response
   def self.response(attributes)
     self.object({
       id: self.id,
@@ -215,6 +212,30 @@ module Type
       attributes: self.object( attributes ),
       meta: self.meta_partial
     })
+  end
+
+  def self.resource_response(params = {})
+    self.object data: self.data_response_hash( params[:attributes] ), required: [ 'data' ]
+  end
+
+  def self.collection_response(params = {})
+    return self.paginated( self.data_response_hash( params[:attributes] )) if params[:paginated]
+
+    if params[:relationships]
+      return self.object({
+        id: self.id,
+        type: self.string,
+        attributes: self.object( params[:attributes] ),
+        relationships: self.object( params[:relationships] ),
+        meta: self.meta_partial
+      }, { required: [ 'id', 'type', 'attributes', 'meta' ]})
+    end
+
+    self.object({
+      data: self.array({
+        type: self.data_response_hash( params[:attributes] )
+      })
+    }, { required: [ 'data' ] })
   end
 
   def self.response_with_relationships(attributes, relationships)
