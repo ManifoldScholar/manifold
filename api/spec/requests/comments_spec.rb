@@ -7,61 +7,17 @@ RSpec.describe "Comments API", type: :request do
 
   let(:annotation) { FactoryBot.create(:annotation) }
   let(:resource) { FactoryBot.create(:resource) }
+  let(:subject) { FactoryBot.create(:comment, creator: reader, subject: annotation) }
+  let(:id) { subject.id }
+
+  path "/comments/{id}" do
+    include_examples "an API show request", model: Comment
+    include_examples "an API update request", model: Comment
+    include_examples "an API destroy request", model: Comment
+  end
+
   let(:comment_a) { FactoryBot.create(:comment, creator: reader, subject: annotation) }
   let(:comment_b) { FactoryBot.create(:comment, creator: reader, subject: resource) }
-
-  path '/comments/{id}' do
-    get I18n.t('swagger.get.one.description', type: 'comment', attribute: 'ID') do
-      produces 'application/json'
-
-      parameter name: :id, :in => :path, :type => :string
-      let(:id) { comment_a[:id] }
-
-      tags 'Comments'
-
-      response '200', I18n.t('swagger.get.one.200', type: 'comment', attribute: 'ID') do
-        schema '$ref' => '#/definitions/CommentResponse'
-        run_test!
-      end
-    end
-
-    patch I18n.t('swagger.patch.description', type: 'comment', attribute: 'ID') do
-      parameter name: :comment_patch, in: :body, schema: { '$ref' => '#/definitions/CommentRequestUpdate' }
-      let(:comment_patch) {{ data: { attributes: FactoryBot.attributes_for(:comment) } }}
-
-      parameter name: :id, :in => :path, :type => :string
-      let(:id) { comment_a[:id] }
-
-      consumes 'application/json'
-      produces 'application/json'
-      security [ apiKey: [] ]
-      tags 'Comments'
-
-      response '200', I18n.t('swagger.patch.200', type: 'comment', attribute: 'ID') do
-        let(:Authorization) { admin_auth }
-        schema '$ref' => '#/definitions/CommentResponse'
-        run_test!
-      end
-    end
-
-    delete I18n.t('swagger.delete.description', type: 'comment', attribute: 'ID') do
-      parameter name: :id, :in => :path, :type => :string
-      let(:id) { comment_a[:id] }
-
-      security [ apiKey: [] ]
-      tags 'Comments'
-
-      response '204', I18n.t('swagger.delete.204', type: 'commet', attribute: 'ID') do
-        let(:Authorization) { admin_auth }
-        run_test!
-      end
-
-      response '403', I18n.t('swagger.access_denied') do
-        let(:Authorization) { author_auth }
-        run_test!
-      end
-    end
-  end
 
   context "when subject is an annotation" do
     describe "sends a list of comments" do

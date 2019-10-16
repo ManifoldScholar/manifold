@@ -33,6 +33,7 @@ class ApiRequestConfig
     return merge_additional_parameters(@options[:parameters]) if @options.key?(:parameters)
     return merge_additional_parameters(default_create_parameters) if @action == :create
     return merge_additional_parameters(default_update_parameters) if @action == :update
+    return merge_additional_parameters(default_delete_parameters) if @action == :delete
     return merge_additional_parameters(default_show_parameters) if @action == :show
 
     merge_additional_parameters([])
@@ -43,6 +44,12 @@ class ApiRequestConfig
 
     keys = @options[:additional_parameters].map { |p| p[:name] }
     parameters.reject { |p| keys.include? p } + @options[:additional_parameters]
+  end
+
+  def default_delete_parameters
+    [
+      { name: :id, in: :path, type: :string }
+    ]
   end
 
   def default_show_parameters
