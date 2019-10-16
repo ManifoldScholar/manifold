@@ -53,14 +53,14 @@ class ApiRequestConfig
 
   def default_create_parameters
     [
-      { name: :create, in: :body, schema: { "$ref" => request_ref } }
+      { name: :create, in: :body, schema: request }
     ]
   end
 
   def default_update_parameters
     [
       { name: :id, in: :path, type: :string },
-      { name: :update, in: :body, schema: { "$ref" => request_ref } }
+      { name: :update, in: :body, schema: request }
     ]
   end
 
@@ -69,6 +69,10 @@ class ApiRequestConfig
 
     segment = resource_name.camelize.capitalize
     @options[:response_ref] || "#/definitions/#{segment}Request#{@action.to_s.capitalize}"
+  end
+
+  def request
+    { "$ref" => request_ref }
   end
 
   def response_ref
