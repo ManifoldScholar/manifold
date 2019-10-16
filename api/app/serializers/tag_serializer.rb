@@ -2,5 +2,5 @@
 class TagSerializer < ApplicationSerializer
   meta(partial: false)
 
-  attributes :id, :name, :taggings_count
+  attributes :name, :taggings_count
 end
