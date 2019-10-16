@@ -162,10 +162,10 @@ RSpec.configure do |config|
         ResourceCollectionRequestCreate: ResourceCollections.request_create,
         ResourceCollectionRequestUpdate: ResourceCollections.request_update,
 
-        SubjectResponse: Subjects.response,
-        SubjectsResponse: Type.paginated( Subjects.response ),
-        SubjectRequestCreate: Subjects.request_create,
-        SubjectRequestUpdate: Subjects.request_update,
+        SubjectResource: Subjects.response,
+        SubjectCollection: Type.paginated( Subjects.response ),
+        SubjectCreateRequest: Subjects.request_create,
+        SubjectUpdateRequest: Subjects.request_update,
 
         TagsResponse: Tags.responses,
 
