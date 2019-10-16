@@ -41,7 +41,7 @@
 
     .notifications-list--context-header & {
       + .notifications-list__inner {
-        border-top: 1px solid $neutral50;
+        border-top: 1px solid $neutralUIExtraDark;
       }
 
       &.notification-exit {

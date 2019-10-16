@@ -13,7 +13,7 @@ body.fatal-error-page {
 
 .fatal-error {
   height: 100%;
-  border: 20px solid $sp40Tertiary;
+  border: 20px solid $defaultErrorColor;
 
   .error-wrapper {
     padding: 10vh 4vh 4vh;
@@ -27,7 +27,7 @@ body.fatal-error-page {
 
   &__stop-icon {
     margin-bottom: 20px;
-    color: $sp40Tertiary;
+    color: $defaultErrorColor;
   }
 
   header {
@@ -120,7 +120,7 @@ body.fatal-error-page {
       }
 
       span.highlight {
-        color: $sp40Tertiary;
+        color: $defaultErrorColor;
       }
 
       span.location {

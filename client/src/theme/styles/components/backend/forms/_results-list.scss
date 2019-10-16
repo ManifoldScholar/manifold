@@ -44,22 +44,22 @@
       }
 
       &.state-pending {
-        color: $sp30Primary;
+        color: $defaultNoticeColor;
 
         a {
-          color: $sp30Primary;
+          color: inherit;
         }
       }
 
       &.state-failed {
-        color: $defaultNoticeColor;
+        color: $defaultErrorColor;
       }
 
       &.state-queued, &.state-importing {
-        color: $sp30Secondary;
+        color: $defaultWarningColor;
 
         a {
-          color: $sp30Secondary;
+          color: inherit;
         }
       }
 
@@ -71,7 +71,7 @@
         color: $accentPrimaryDull;
 
         a {
-          color: $accentPrimaryDull;
+          color: inherit;
         }
       }
     }

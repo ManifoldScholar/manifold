@@ -58,7 +58,7 @@ export default class Notification extends Component {
           >
             <IconComposer
               icon="close32"
-              size={42.667}
+              size={36}
               iconClass="notification__button-icon"
             />
             <span className="screen-reader-text">{"Dismiss"}</span>

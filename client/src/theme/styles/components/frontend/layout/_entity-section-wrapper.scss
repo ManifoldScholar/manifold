@@ -224,7 +224,6 @@
 
     &--incomplete-header {
       margin-bottom: 20px;
-      color: $neutral90;
 
       @include respond($break40) {
         margin-bottom: 0;
@@ -243,7 +242,8 @@
       justify-content: center;
       padding: 15px;
       font-weight: $medium;
-      background-color: $sp30Secondary;
+      color: $neutralTextExtraDark;
+      background-color: $spWarningExtraLight;
       border-radius: 8px;
 
       > div {
@@ -252,13 +252,12 @@
       }
 
       svg {
-        color: $sp40Secondary;
+        color: $defaultWarningColor;
       }
 
       .entity-section-wrapper__link-container {
         @include templateCopy;
         font-weight: $regular;
-        color: $neutralOffBlack;
         text-align: center;
       }
 
@@ -271,10 +270,9 @@
       }
 
       a {
-        color: $neutralOffBlack;
-
+        &:hover,
         &:visited {
-          color: $neutralOffBlack;
+          color: inherit;
         }
       }
 

@@ -42,10 +42,10 @@
     }
 
     &--secondary {
-      color: $sp40Tertiary;
+      color: $defaultErrorColor;
 
       &--active, &:focus-visible {
-        color: $sp40Tertiary;
+        color: $defaultErrorColor;
       }
     }
   }

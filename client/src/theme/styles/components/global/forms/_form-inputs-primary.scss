@@ -218,7 +218,7 @@
     @include formInputMessage;
     display: inline-block;
     margin-top: 15px;
-    color: $defaultNoticeColor;
+    color: $defaultErrorColor;
   }
 }
 
@@ -820,7 +820,7 @@
 
   .cancel {
     @include buttonUnstyled;
-    @include outlineOnFocusVisible($defaultNoticeColor);
+    @include outlineOnFocusVisible($defaultErrorColor);
     position: absolute;
     top: 50%;
     right: 0;
@@ -831,7 +831,7 @@
     transform: translateY(-50%);
 
     &:hover {
-      color: $defaultNoticeColor;
+      color: $defaultErrorColor;
     }
 
     &:focus-visible {

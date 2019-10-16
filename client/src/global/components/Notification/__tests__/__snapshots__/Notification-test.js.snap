@@ -34,9 +34,9 @@ exports[`Global.HeaderNotification component renders correctly 1`] = `
         aria-hidden={true}
         className="manicon-svg notification__button-icon svg-icon--close32"
         fill="currentColor"
-        height={42.667}
+        height={36}
         viewBox="0 0 32 32"
-        width={42.667}
+        width={36}
         xmlns="http://www.w3.org/2000/svg"
       >
         <path

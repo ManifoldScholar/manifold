@@ -47,7 +47,7 @@
     align-items: center;
     padding-right: 13px;
     padding-left: 13px;
-    color: $neutral95;
+    color: $neutralTextExtraDark;
     border: 2px solid transparent;
     transition:
       background-color $duration $timing,
@@ -104,12 +104,12 @@
     }
 
     &--error {
-      color: $neutral90;
-      background-color: $sp30Secondary;
+      background-color: $spWarningLight;
 
       &:hover,
       &:focus-visible {
-        background-color: $sp20Quaternary;
+        color: $neutralTextExtraDark;
+        background-color: $spWarningExtraLight;
       }
 
     }
@@ -130,7 +130,7 @@
     -ms-grid-row-align: center;
 
     .action-callout-list__button--secondary & {
-      color: $neutral90;
+      color: $neutralTextExtraDark;
     }
   }
 
@@ -165,11 +165,11 @@
     }
 
     &--error {
-      color: $sp30Secondary;
+      color: $spWarningLight;
 
       &:hover,
       &:focus-visible {
-        color: $sp20Quaternary;
+        color: $spWarningExtraLight;
       }
     }
   }
