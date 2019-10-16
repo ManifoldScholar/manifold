@@ -100,7 +100,7 @@ shared_examples_for "an API update request" do |options|
     end
 
     response "403", I18n.t("swagger.access_denied") do
-      let(:Authorization) { reader_auth }
+      let(:Authorization) { }
       run_test!
     end
   end
@@ -110,9 +110,7 @@ shared_examples_for "an API destroy request" do |options|
   include_context("authenticated request")
   include_context("param helpers")
 
-  conf = ApiRequestConfig.new(options, :update)
-
-  let(:update) { json_structure_for(conf.factory) }
+  conf = ApiRequestConfig.new(options, :delete)
 
   delete I18n.t("swagger.delete.description", type: conf.resource_name, attribute: "ID") do
     conf.parameters.each do |parameter_options|
@@ -122,13 +120,13 @@ shared_examples_for "an API destroy request" do |options|
     security [apiKey: []]
     tags conf.tags
 
-    response "204", I18n.t("swagger.delete.204", type: conf.resource_name, attribute: "ID") do
+    response "204", I18n.t("swagger.delete.204", type: conf.resource_name) do
       let(:Authorization) { admin_auth }
       run_test!
     end
 
     response "403", I18n.t("swagger.access_denied") do
-      let(:Authorization) { reader_auth }
+      let(:Authorization) { }
       run_test!
     end
   end
