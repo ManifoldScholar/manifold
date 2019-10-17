@@ -58,7 +58,6 @@ RSpec.configure do |config|
 
         Attachment: Type.attachment_attributes,
         Image: Type.image_attributes,
-        RelationshipData: Type.relationship_data_attributes,
 
         ######################
         ##      Models      ##
@@ -83,7 +82,7 @@ RSpec.configure do |config|
         CategoryUpdateRequest:  Type.reference('#/definitions/CategoryCreateRequest'),
         CategoryUpdateResponse: Type.reference('#/definitions/CategoryResource'),
 
-        CommentResponse: Comments.response,
+        CommentResource:      Comments.get_resource,
         CommentRequestUpdate: Comments.request_update,
 
         ContentBlockResponse: ContentBlocks.response,

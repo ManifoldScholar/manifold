@@ -45,10 +45,11 @@ module ContentBlocks
     end
 
     def response
-      Type.response_with_relationships(
-        create_response_attributes,
-        Type.relationships(['project', 'featuredCollections'])
-      )
+      Type.object({})
+      # Type.response_with_relationships(
+      #   create_response_attributes,
+      #   Type.relationships(['project', 'featuredCollections'])
+      # )
     end
 
     def responses
