@@ -40,6 +40,7 @@ module Comments
 
     def get_resource
       Type.response({
+        type: :resource,
         attributes: comment,
         relationships: {
           singular: [ :creator ]
