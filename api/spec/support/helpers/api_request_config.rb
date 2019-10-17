@@ -9,6 +9,10 @@ class ApiRequestConfig
     @action = action
   end
 
+  def description
+    @options[:description]
+  end
+
   def model
     @options[:model]
   end

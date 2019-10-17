@@ -8,6 +8,7 @@ shared_examples_for "an API index request" do |options|
     conf.parameters.each do |parameter_options|
       parameter(parameter_options)
     end
+    description conf.description if conf.description
     produces conf.content_type
     tags conf.tags
 
@@ -30,6 +31,7 @@ shared_examples_for "an API create request" do |options|
     conf.parameters.each do |parameter_options|
       parameter(parameter_options)
     end
+    description conf.description if conf.description
     produces conf.content_type
     consumes conf.content_type
     security [apiKey: []]
@@ -60,6 +62,7 @@ shared_examples_for "an API show request" do |options|
     conf.parameters.each do |parameter_options|
       parameter(parameter_options)
     end
+    description conf.description if conf.description
     produces conf.content_type
     consumes conf.content_type
     tags conf.tags
@@ -88,6 +91,7 @@ shared_examples_for "an API update request" do |options|
     conf.parameters.each do |parameter_options|
       parameter(parameter_options)
     end
+    description conf.description if conf.description
     produces conf.content_type
     consumes conf.content_type
     security [apiKey: []]
@@ -116,7 +120,7 @@ shared_examples_for "an API destroy request" do |options|
     conf.parameters.each do |parameter_options|
       parameter(parameter_options)
     end
-
+    description conf.description if conf.description
     security [apiKey: []]
     tags conf.tags
 
