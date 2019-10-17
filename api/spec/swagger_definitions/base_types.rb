@@ -167,7 +167,7 @@ module Type
           type: string,
           attributes: object( params[:attributes] ),
           relationships: relationships( params[:relationships] ),
-          meta: 'meta_partial'
+          meta: meta_partial
         }, { required: [ 'id', 'type', 'attributes', 'meta' ]})
       end
 
