@@ -37,14 +37,14 @@ export default class Heading extends React.PureComponent {
             size={32}
             iconClass={"group-page-heading__icon"}
           />
-          <h2 className={"heading-primary group-page-heading__text"}>
+          <h1 className={"heading-primary group-page-heading__text"}>
             {children}
             {subtitle && (
               <span className={"group-page-heading__subtitle"}>
                 {": Members"}
               </span>
             )}
-          </h2>
+          </h1>
         </div>
         {this.hasButtons && <GroupNavButtons links={buttons} />}
       </div>
