@@ -13,12 +13,12 @@ RSpec.describe "Project Text Categories API", type: :request do
                     model: Category,
                     additional_parameters: additional_parameters,
                     resource_name: "text_category",
-                    response_ref: "#/definitions/CategoryResponses"
+                    response_ref: "#/definitions/CategoryCollection"
 
     it_behaves_like "an API create request",
                     model: Category,
                     additional_parameters: additional_parameters,
                     resource_name: "text_category",
-                    response_ref: "#/definitions/CategoryRequestCreate"
+                    response_ref: "#/definitions/CategoryCreateRequest"
   end
 end
