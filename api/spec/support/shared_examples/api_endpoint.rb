@@ -44,7 +44,7 @@ shared_examples_for "an API create request" do |options|
     end
 
     response "403", I18n.t("swagger.access_denied") do
-      let(:Authorization) { author_auth }
+      let(:Authorization) { }
       run_test!
     end
   end
