@@ -1,9 +1,17 @@
 .notation-marker {
-  color: $neutral40;
+  color: $neutralUIDark;
   transition: color $duration $timing;
 
+  .scheme-dark & {
+    color: $neutralUILight;
+  }
+
   &--active {
-    color: $accentPrimary;
+    color: $defaultHoverColor;
+
+    .scheme-dark & {
+      color: $defaultHoverColor;
+    }
   }
 
   &__icon {

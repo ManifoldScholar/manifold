@@ -17,9 +17,9 @@
 
   &:hover,
   &:focus-visible {
-    color: $neutralWhite;
-    background-color: $defaultHoverColor;
-    border-color: $defaultHoverColor;
+    color: $neutralTextExtraDark;
+    background-color: $accentInteractionLight;
+    border-color: $accentInteractionLight;
     outline: 0;
   }
 

@@ -82,8 +82,8 @@
       border-color $duration $timing;
 
     &:hover:not(:disabled):not([aria-disabled='true']) {
-      color: $neutralWhite;
-      background-color: $defaultHoverColor;
+      color: $neutralTextExtraDark;
+      background-color: $accentInteractionLight;
     }
   }
 
@@ -278,12 +278,16 @@
     height: 46px;
     background-color: $neutralWhite;
 
+    > svg path {
+      transition: fill $duration $timing;
+    }
+
     &:hover {
       &:not([aria-disabled='true']) {
         outline: 0;
 
         > svg path {
-          fill: $neutralWhite;
+          fill: $neutralTextExtraDark;
         }
       }
     }

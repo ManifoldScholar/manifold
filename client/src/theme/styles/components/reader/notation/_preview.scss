@@ -44,7 +44,6 @@
 
   &__link {
     display: block;
-    color: $neutral80;
     text-decoration: none;
 
     &:hover, &.active, &:focus-visible {
@@ -138,11 +137,11 @@
 
   &__cube-icon {
     margin-right: 0.375em;
-    color: $accentPrimary;
+    color: $defaultHoverColor;
   }
 
   &__caret-icon {
-    color: $accentPrimary;
+    color: $defaultHoverColor;
     transform: rotate(-90deg);
   }
 }
