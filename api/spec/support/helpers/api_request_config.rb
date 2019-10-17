@@ -75,6 +75,12 @@ class ApiRequestConfig
     ]
   end
 
+  #### REQUESTS ####
+
+  def request_schema
+    @options[:request_schema] if @options.key?(:request_schema)
+  end
+
   def request_ref
     return @options[:request_ref] if @options.key?(:request_ref)
 
@@ -83,7 +89,13 @@ class ApiRequestConfig
   end
 
   def request
-    { "$ref" => request_ref }
+    request_schema || { "$ref" => request_ref }
+  end
+
+  #### RESPONSES ####
+
+  def response_schema
+    @options[:response_schema] if @options.key?(:response_schema)
   end
 
   def response_ref
@@ -97,7 +109,7 @@ class ApiRequestConfig
   end
 
   def response
-    { "$ref" => response_ref }
+    response_schema || { "$ref" => response_ref }
   end
 
 end
