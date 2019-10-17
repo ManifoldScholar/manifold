@@ -98,14 +98,6 @@ module Type
     # frequently used data structures  #
     ####################################
 
-    def request(contents, params = {})
-      object({
-        data: object({
-          attributes: Type.object( contents, params )
-        })
-      })
-    end
-
     def crud(params = {})
       {
         create: boolean,
@@ -147,16 +139,64 @@ module Type
       reference( '#/definitions/Attachment' )
     end
 
-    # TODO refactor out for collection_response
-    def data_array(dataType)
+    def meta_partial()
       object({
-        data: array( type: dataType )
+        partial: boolean
       })
     end
 
-    def paginated(dataType)
+    def attributes_with_crud(array)
+      hash = Hash.new
+      array.each { |attribute|
+        hash["#{attribute}"] = Type.object( Type.crud )
+      }
+      return hash
+    end
+
+    def relationships(params)
+      singular = multiple = {}
+      singular = params[:singular].map{ |x| [x, relationship_data_attribute] }.to_h if params[:singular]
+      multiple = params[:multiple].map{ |x| [x, relationship_data_attributes] }.to_h if params[:multiple]
+      return singular.merge(multiple)
+    end
+
+    def data_contents(params)
+      if params.key?(:relationships)
+        return object({
+          id: id,
+          type: string,
+          attributes: object( params[:attributes] ),
+          relationships: relationships( params[:relationships] ),
+          meta: 'meta_partial'
+        }, { required: [ 'id', 'type', 'attributes', 'meta' ]})
+      end
+
+      return object({
+        id: id,
+        type: string,
+        attributes: object( params[:attributes] ),
+        meta: meta_partial
+      }, { required: [ 'id', 'type', 'attributes', 'meta' ]})
+    end
+
+
+    def data_object(contents, params = {})
+      return object({ data: contents }, { required: [ 'data' ] })
+    end
+
+    def data_array(contents, params = {})
+      return object({
+        data: array(
+          type: contents
+        )}, {
+          required: [ 'data' ]
+        }
+      )
+    end
+
+    def paginated(contents)
       object({
-        data: array( type: dataType ),
+        data: array( type: contents ),
         links: object({
           self: url( nullable: true ),
           first: url( nullable: true ),
@@ -177,83 +217,51 @@ module Type
       })
     end
 
-    def meta_partial()
-      object({
-        partial: boolean
-      })
-    end
+    ### REQUEST ###
 
-    def relationship_data
-      reference( '#/definitions/RelationshipData' )
-    end
+    def request(params = {})
+      attributes = params.delete(:attributes)
+      relation = params.delete(:relationships)
 
-    def relationships(array)
-      base = {}
-      array.each do |item|
-        base = base.merge({ "#{item}" => relationship_data })
-      end
-      return base
-    end
-
-    def data_response_hash(attributes)
-      object({
-        id: id,
-        type: string,
-        attributes: Type.object( attributes ),
-        meta: meta_partial
-      }, { required: [ 'id', 'type', 'attributes', 'meta' ]})
-    end
-
-    # TODO refactor out for resource_response and collection_response
-    def response(attributes)
-      object({
-        id: id,
-        type: string,
-        attributes: object( attributes ),
-        meta: meta_partial
-      })
-    end
-
-    def resource_response(params = {})
-      object data: data_response_hash( params[:attributes] ), required: [ 'data' ]
-    end
-
-    def collection_response(params = {})
-      return paginated( data_response_hash( params[:attributes] )) if params[:paginated]
-
-      if params[:relationships]
-        return object({
-          id: id,
-          type: string,
-          attributes: object( params[:attributes] ),
-          relationships: object( params[:relationships] ),
-          meta: meta_partial
-        }, { required: [ 'id', 'type', 'attributes', 'meta' ]})
+      if relation
+        return data_object(
+          object({
+            attributes: attributes,
+            relationships: relationships( relation )
+          })
+        )
       end
 
-      object({
-        data: array({
-          type: data_response_hash( params[:attributes] )
+      data_object(
+        object({
+          attributes: object( attributes, params )
         })
-      }, { required: [ 'data' ] })
+      )
     end
 
-    def response_with_relationships(attributes, relationships)
-      object({
-        id: id,
-        type: string,
-        attributes: object( attributes ),
-        relationships: object( relationships ),
-        meta: meta_partial
-      })
+    ### RESPONSE ###
+
+    def resource_response(params)
+      data_object(
+        data_contents( params )
+      )
     end
 
-    def attributes_with_crud(array)
-      hash = Hash.new
-      array.each { |attribute|
-        hash["#{attribute}"] = Type.object( Type.crud )
-      }
-      return hash
+    def collection_response(params)
+      is_paginated = params.delete(:paginated)
+      is_array = params.delete(:array)
+
+      return paginated( data_contents( params )) if is_paginated
+      return data_array( data_contents( params )) if is_array
+      # raise "Error: array or pagniated value required for collection type"
+    end
+
+    def response(params = {})
+      type = params.delete(:type)
+
+      return resource_response(params) if type == :resource
+      return collection_response(params) if type == :collection
+      # raise "Error: resource or collection type must be specified"
     end
 
     ###########################################
@@ -325,6 +333,30 @@ module Type
         largeLandscape: url( nullable: true ),
         original: url( nullable: true )
       })
+    end
+
+    ###### DEPRECATED #######
+    def relationship_data
+      reference( '#/definitions/RelationshipData' )
+    end
+
+    def response_with_relationships(attributes, relationships)
+      object({
+        id: id,
+        type: string,
+        attributes: object( attributes ),
+        relationships: object( relationships ),
+        meta: meta_partial
+      })
+    end
+
+    def data_response_hash(contents)
+      return object({
+        id: id,
+        type: string,
+        attributes: object( contents ),
+        meta: 'meta_partial'
+      }, { required: [ 'id', 'type', 'attributes', 'meta' ]})
     end
   end
 end
