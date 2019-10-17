@@ -82,8 +82,7 @@ RSpec.configure do |config|
         CategoryUpdateRequest:  Type.reference('#/definitions/CategoryCreateRequest'),
         CategoryUpdateResponse: Type.reference('#/definitions/CategoryResource'),
 
-        CommentResource:      Comments.get_resource,
-        CommentRequestUpdate: Comments.request_update,
+        Comment: Comments.get_resource,
 
         ContentBlockResponse: ContentBlocks.response,
         ContentBlockRequestUpdate: ContentBlocks.update_request,
@@ -173,6 +172,12 @@ RSpec.configure do |config|
 
         NotFound: Errors.not_found,
         TokenErrors: Errors.token,
+      },
+      parameters: {
+        CommentUpdate: Comments.request_update,
+      },
+      responses: {
+
       }
     }
   }
