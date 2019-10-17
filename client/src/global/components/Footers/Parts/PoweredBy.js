@@ -69,7 +69,7 @@ class PoweredBy extends PureComponent {
           "app-footer-powered-by--reader": this.isReaderFooter
         })}
       >
-        <section aria-hidden="true">
+        <section>
           <div className="container flush">
             <LogoWrapper
               {...logoWrapperProps}
@@ -126,9 +126,6 @@ class PoweredBy extends PureComponent {
             )}
           </div>
         </section>
-        <span className="screen-reader-text">
-          Learn more about the Manifold App
-        </span>
       </Wrapper>
     );
   }

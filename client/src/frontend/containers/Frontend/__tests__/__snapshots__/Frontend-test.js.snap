@@ -738,9 +738,7 @@ Array [
       rel="noopener noreferrer"
       target="_blank"
     >
-      <section
-        aria-hidden="true"
-      >
+      <section>
         <div
           className="container flush"
         >
@@ -779,11 +777,6 @@ Array [
           </span>
         </div>
       </section>
-      <span
-        className="screen-reader-text"
-      >
-        Learn more about the Manifold App
-      </span>
     </a>
   </footer>,
 ]
