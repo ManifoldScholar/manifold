@@ -115,17 +115,19 @@
   justify-content: center;
   padding: 14px 23px 16px;
   font-size: 14px;
-  color: $neutralTextExtraDark;
   text-decoration: none;
   letter-spacing: 0.089em;
   border: 1px solid $defaultHoverColor;
   transition:
     color $duration $timing,
-    background-color $duration $timing;
+    background-color $duration $timing,
+    border-color $duration $timing;
 
-  &:hover {
-    color: $neutral95;
-    background-color: $accentPrimaryOffWhite;
+  &:hover,
+  &:active {
+    color: $neutralTextExtraDark;
+    background-color: $accentInteractionLight;
+    border-color: $accentInteractionLight;
   }
 
   &:focus-visible {
@@ -135,11 +137,6 @@
     .browse & {
       outline: 0;
     }
-  }
-
-  &:active {
-    color: $neutralWhite;
-    background-color: $accentPrimary;
   }
 
   &--gray {
@@ -161,11 +158,11 @@
   }
 
   &--dull {
-    color: $neutral50;
-    border-color: $neutral50;
+    border-color: $neutralUIDark;
 
     &:hover {
-      background-color: $neutral05;
+      background-color: $neutral10;
+      border-color: $neutralUIDark;
     }
 
     &:focus-visible {
@@ -221,9 +218,9 @@
 
   &:hover,
   &:active {
-    color: $neutralWhite;
-    background-color: $defaultHoverColor;
-    border-color: $defaultHoverColor;
+    color: $neutralTextExtraDark;
+    background-color: $accentInteractionLight;
+    border-color: $accentInteractionLight;
   }
 
   .browse & {
@@ -236,7 +233,7 @@
     transition: color $duration $timing;
 
     .button-icon-primary:hover & {
-      color: $neutralWhite;
+      color: $neutralUIExtraDark;
     }
 
     @include respond($break60) {
@@ -632,8 +629,8 @@
     background-color $duration $timing;
 
   &:hover, &:focus-visible {
-    color: $neutralWhite;
-    background-color: $defaultHoverColor;
+    color: $neutralTextExtraDark;
+    background-color: $accentInteractionLight;
     outline: 0;
   }
 }

@@ -36,8 +36,8 @@
 
     &:hover:not(:disabled):not([aria-disabled='true']),
     &:focus-visible {
-      color: $neutralWhite;
-      background-color: $defaultHoverColor;
+      color: $neutralTextExtraDark;
+      background-color: $accentInteractionLight;
       outline: 0;
     }
 

@@ -3,6 +3,7 @@
   $paddingLateralNarrow: 11px;
 
   --button-color: #{$neutral75};
+  --default-hover-color: #{$accentInteractionDark};
 
   @include reactSlideTransition('left', '.reader-return-menu');
   @include reactSlideTransition('right', '.user-menu');
@@ -127,8 +128,8 @@
     &.button-active,
     &:hover,
     &:focus-visible {
-      color: $neutralWhite;
-      background-color: $defaultHoverColor;
+      color: $neutralTextExtraDark;
+      background-color: $accentInteractionLight;
       outline: 0;
     }
 
