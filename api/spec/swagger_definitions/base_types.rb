@@ -2,328 +2,329 @@
 require 'rails_helper'
 
 module Type
+  class << self
+    # A helper function to handle merging params while making a special case for nullable attributes.
+    # Rswag currently generates OpenAPI v2 documentation, and the method for declaring nullable
+    # values changes in OpenAPI v3. To make the change easier whenever it happens, this helper function
+    # will make it so passing a { nullable: true } value into any of these base Types will set the
+    # nullable swagger definition properly
+    def merge_params_with_nullable(base, params = {})
+      nullable = params.delete(:nullable)
+      base = base.merge({'x-nullable': true }) if nullable
+      base = base.merge(params)
+      return base
+    end
 
-  # A helper function to handle merging params while making a special case for nullable attributes.
-  # Rswag currently generates OpenAPI v2 documentation, and the method for declaring nullable
-  # values changes in OpenAPI v3. To make the change easier whenever it happens, this helper function
-  # will make it so passing a { nullable: true } value into any of these base Types will set the
-  # nullable swagger definition properly
-  def self.merge_params_with_nullable(base, params = {})
-    nullable = params.delete(:nullable)
-    base = base.merge({'x-nullable': true }) if nullable
-    base = base.merge(params)
-    return base
-  end
+    ######################
+    # general data types #
+    ######################
 
-  ######################
-  # general data types #
-  ######################
+    def boolean(params = {})
+      merge_params_with_nullable({ type: :boolean }, params)
+    end
 
-  def self.boolean(params = {})
-    self.merge_params_with_nullable({ type: :boolean }, params)
-  end
+    def number(params = {})
+      merge_params_with_nullable({ type: :integer }, params)
+    end
 
-  def self.number(params = {})
-    self.merge_params_with_nullable({ type: :integer }, params)
-  end
+    def id(params = {})
+      merge_params_with_nullable({ type: :string }, params)
+    end
 
-  def self.id(params = {})
-    self.merge_params_with_nullable({ type: :string }, params)
-  end
+    def integer(params = {})
+      merge_params_with_nullable({ type: :number }, params)
+    end
 
-  def self.integer(params = {})
-    self.merge_params_with_nullable({ type: :number }, params)
-  end
+    def url(params = {})
+      merge_params_with_nullable({ type: :string, example: 'http://url.com' }, params)
+    end
 
-  def self.url(params = {})
-    self.merge_params_with_nullable({ type: :string, example: 'http://url.com' }, params)
-  end
+    def nullable_string(params = {})
+      { type: :string, 'x-nullable': true }.merge(params)
+    end
 
-  def self.nullable_string(params = {})
-    { type: :string, 'x-nullable': true }.merge(params)
-  end
+    def object(contents)
+      { type: :object, properties: contents }
+    end
 
-  def self.object(contents)
-    { type: :object, properties: contents }
-  end
+    def object(contents, params = {})
+      { type: :object, properties: contents }.merge(params)
+    end
 
-  def self.object(contents, params = {})
-    { type: :object, properties: contents }.merge(params)
-  end
+    def reference(path)
+      { '$ref': path }
+    end
 
-  def self.reference(path)
-    { '$ref': path }
-  end
+    # 'type' is a required param for the array
+    def array(params = {})
+      items = params.delete(:type)
+      base = { type: :array }
+      base = base.merge({ items: items })
+      base = base.merge(params)
+      return base
+    end
 
-  # 'type' is a required param for the array
-  def self.array(params = {})
-    items = params.delete(:type)
-    base = { type: :array }
-    base = base.merge({ items: items })
-    base = base.merge(params)
-    return base
-  end
+    def enum(array)
+      {
+        type: :string,
+        enum: array
+      }
+    end
 
-  def self.enum(array)
-    {
-      type: :string,
-      enum: array
-    }
-  end
+    def enum(array, params = {})
+      {
+        type: :string,
+        enum: array
+      }.merge(params)
+    end
 
-  def self.enum(array, params = {})
-    {
-      type: :string,
-      enum: array
-    }.merge(params)
-  end
+    def string(params = {})
+      merge_params_with_nullable({ type: :string }, params)
+    end
 
-  def self.string(params = {})
-    self.merge_params_with_nullable({ type: :string }, params)
-  end
+    def email(params = {})
+      merge_params_with_nullable({ type: :string, example: 'address@email.com' }, params)
+    end
 
-  def self.email(params = {})
-    self.merge_params_with_nullable({ type: :string, example: 'address@email.com' }, params)
-  end
+    def date_time(params = {})
+      merge_params_with_nullable({ type: :string, format: "date-time" }, params)
+    end
 
-  def self.date_time(params = {})
-    self.merge_params_with_nullable({ type: :string, format: "date-time" }, params)
-  end
+    def date(params = {})
+      merge_params_with_nullable({ type: :string, format: "date" }, params)
+    end
 
-  def self.date(params = {})
-    self.merge_params_with_nullable({ type: :string, format: "date" }, params)
-  end
+    ####################################
+    # frequently used data structures  #
+    ####################################
 
-  ####################################
-  # frequently used data structures  #
-  ####################################
-
-  def self.request(contents, params = {})
-    self.object({
-      data: self.object({
-        attributes: Type.object( contents, params )
-      })
-    })
-  end
-
-  def self.crud(params = {})
-    {
-      create: self.boolean,
-      read: self.boolean,
-      update: self.boolean,
-      delete: self.boolean
-    }.merge(params)
-  end
-
-  def self.permissions
-    self.object({
-      readDrafts: self.boolean,
-      readLog: self.boolean,
-      manageResources: self.boolean,
-      createResources: self.boolean,
-      manageResourceCollections: self.boolean,
-      createResourceCollections: self.boolean,
-      managePermissions: self.boolean,
-      createPermissions: self.boolean,
-      manageTexts: self.boolean,
-      createTexts: self.boolean,
-      manageTwitterQueries: self.boolean,
-      createTwitterQueries: self.boolean,
-      manageEvents: self.boolean,
-      manageSocials: self.boolean,
-      updateMakers: self.boolean,
-      create: self.boolean,
-      read: self.boolean,
-      update: self.boolean,
-      delete: self.boolean
-    })
-  end
-
-  def self.image
-    self.reference( '#/definitions/Image' )
-  end
-
-  def self.attachment
-    self.reference( '#/definitions/Attachment' )
-  end
-
-  # TODO refactor out for collection_response
-  def self.data_array(dataType)
-    self.object({
-      data: self.array( type: dataType )
-    })
-  end
-
-  def self.paginated(dataType)
-    self.object({
-      data: self.array( type: dataType ),
-      links: self.object({
-        self: self.url( nullable: true ),
-        first: self.url( nullable: true ),
-        prev: self.url( nullable: true ),
-        next: self.url( nullable: true ),
-        last: self.url( nullable: true )
-      }),
-      meta: self.object({
-        pagination: self.object({
-          perPage: self.number,
-          currentPage: self.number,
-          nextPage: self.number,
-          prevPage: self.number,
-          totalPages: self.number,
-          totalCount: self.number
+    def request(contents, params = {})
+      object({
+        data: object({
+          attributes: Type.object( contents, params )
         })
       })
-    })
-  end
-
-  def self.meta_partial()
-    self.object({
-      partial: self.boolean
-    })
-  end
-
-  def self.relationship_data
-    self.reference( '#/definitions/RelationshipData' )
-  end
-
-  def self.relationships(array)
-    base = {}
-    array.each do |item|
-      base = base.merge({ "#{item}" => self.relationship_data })
     end
-    return base
-  end
 
-  def self.data_response_hash(attributes)
-    self.object({
-      id: self.id,
-      type: self.string,
-      attributes: Type.object( attributes ),
-      meta: self.meta_partial
-    }, { required: [ 'id', 'type', 'attributes', 'meta' ]})
-  end
+    def crud(params = {})
+      {
+        create: boolean,
+        read: boolean,
+        update: boolean,
+        delete: boolean
+      }.merge(params)
+    end
 
-  # TODO refactor out for resource_response and collection_response
-  def self.response(attributes)
-    self.object({
-      id: self.id,
-      type: self.string,
-      attributes: self.object( attributes ),
-      meta: self.meta_partial
-    })
-  end
+    def permissions
+      object({
+        readDrafts: boolean,
+        readLog: boolean,
+        manageResources: boolean,
+        createResources: boolean,
+        manageResourceCollections: boolean,
+        createResourceCollections: boolean,
+        managePermissions: boolean,
+        createPermissions: boolean,
+        manageTexts: boolean,
+        createTexts: boolean,
+        manageTwitterQueries: boolean,
+        createTwitterQueries: boolean,
+        manageEvents: boolean,
+        manageSocials: boolean,
+        updateMakers: boolean,
+        create: boolean,
+        read: boolean,
+        update: boolean,
+        delete: boolean
+      })
+    end
 
-  def self.resource_response(params = {})
-    self.object data: self.data_response_hash( params[:attributes] ), required: [ 'data' ]
-  end
+    def image
+      reference( '#/definitions/Image' )
+    end
 
-  def self.collection_response(params = {})
-    return self.paginated( self.data_response_hash( params[:attributes] )) if params[:paginated]
+    def attachment
+      reference( '#/definitions/Attachment' )
+    end
 
-    if params[:relationships]
-      return self.object({
-        id: self.id,
-        type: self.string,
-        attributes: self.object( params[:attributes] ),
-        relationships: self.object( params[:relationships] ),
-        meta: self.meta_partial
+    # TODO refactor out for collection_response
+    def data_array(dataType)
+      object({
+        data: array( type: dataType )
+      })
+    end
+
+    def paginated(dataType)
+      object({
+        data: array( type: dataType ),
+        links: object({
+          self: url( nullable: true ),
+          first: url( nullable: true ),
+          prev: url( nullable: true ),
+          next: url( nullable: true ),
+          last: url( nullable: true )
+        }),
+        meta: object({
+          pagination: object({
+            perPage: number,
+            currentPage: number,
+            nextPage: number,
+            prevPage: number,
+            totalPages: number,
+            totalCount: number
+          })
+        })
+      })
+    end
+
+    def meta_partial()
+      object({
+        partial: boolean
+      })
+    end
+
+    def relationship_data
+      reference( '#/definitions/RelationshipData' )
+    end
+
+    def relationships(array)
+      base = {}
+      array.each do |item|
+        base = base.merge({ "#{item}" => relationship_data })
+      end
+      return base
+    end
+
+    def data_response_hash(attributes)
+      object({
+        id: id,
+        type: string,
+        attributes: Type.object( attributes ),
+        meta: meta_partial
       }, { required: [ 'id', 'type', 'attributes', 'meta' ]})
     end
 
-    self.object({
-      data: self.array({
-        type: self.data_response_hash( params[:attributes] )
+    # TODO refactor out for resource_response and collection_response
+    def response(attributes)
+      object({
+        id: id,
+        type: string,
+        attributes: object( attributes ),
+        meta: meta_partial
       })
-    }, { required: [ 'data' ] })
-  end
+    end
 
-  def self.response_with_relationships(attributes, relationships)
-    self.object({
-      id: self.id,
-      type: self.string,
-      attributes: self.object( attributes ),
-      relationships: self.object( relationships ),
-      meta: self.meta_partial
-    })
-  end
+    def resource_response(params = {})
+      object data: data_response_hash( params[:attributes] ), required: [ 'data' ]
+    end
 
-  def self.attributes_with_crud(array)
-    hash = Hash.new
-    array.each { |attribute|
-      hash["#{attribute}"] = Type.object( Type.crud )
-    }
-    return hash
-  end
+    def collection_response(params = {})
+      return paginated( data_response_hash( params[:attributes] )) if params[:paginated]
 
-  ###########################################
-  ## Attributes located across the project ##
-  ###########################################
+      if params[:relationships]
+        return object({
+          id: id,
+          type: string,
+          attributes: object( params[:attributes] ),
+          relationships: object( params[:relationships] ),
+          meta: meta_partial
+        }, { required: [ 'id', 'type', 'attributes', 'meta' ]})
+      end
 
-  def self.slug() { description: I18n.t('attributes.descriptions.slug') } end
-  def self.pending_slug() { description: I18n.t('attributes.descriptions.pending_slug') } end
-  def self.standalone_mode() { enum: ['enabled', 'disabled', 'enforced'] } end
-  def self.avatar_color()
-    {
-      enum: [
-        "primary",
-        "secondary",
-        "tertiary",
-        "quaternary",
-        "quinary",
-        "sentary"
-      ]
-    }
-  end
-
-  def self.currency_code()
-    { example: "USD", description: "International currency codes (see http://www2.1010data.com/documentationcenter/discover/FunctionReference/DataTypesAndFormats/currencyUnitCodes.html)"}
-  end
-
-  ############################
-  ## Helper data structures ##
-  ############################
-
-  def self.relationship_data_attribute
-    self.object({
-      data: self.object({
-        id: self.id,
-        type: self.string
-      })
-    })
-  end
-
-  def self.relationship_data_attributes
-    self.object({
-      data: self.array(
-        type: self.object({
-          id: self.id,
-          type: self.string
+      object({
+        data: array({
+          type: data_response_hash( params[:attributes] )
         })
-      )
-    })
-  end
+      }, { required: [ 'data' ] })
+    end
 
-  def self.attachment_attributes
-    Type.object({
-      data: self.string,
-      filename: self.string,
-      content_type: self.string,
-    })
-  end
+    def response_with_relationships(attributes, relationships)
+      object({
+        id: id,
+        type: string,
+        attributes: object( attributes ),
+        relationships: object( relationships ),
+        meta: meta_partial
+      })
+    end
 
-  def self.image_attributes
-    self.object({
-      small: self.url( nullable: true ),
-      smallSquare: self.url( nullable: true ),
-      smallLandscape: self.url( nullable: true ),
-      smallPortrait: self.url( nullable: true ),
-      medium: self.url( nullable: true ),
-      mediumSquare: self.url( nullable: true ),
-      mediumLandscape: self.url( nullable: true ),
-      mediumPortrait: self.url( nullable: true ),
-      largeLandscape: self.url( nullable: true ),
-      original: self.url( nullable: true )
-    })
+    def attributes_with_crud(array)
+      hash = Hash.new
+      array.each { |attribute|
+        hash["#{attribute}"] = Type.object( Type.crud )
+      }
+      return hash
+    end
+
+    ###########################################
+    ## Attributes located across the project ##
+    ###########################################
+
+    def slug() { description: I18n.t('attributes.descriptions.slug') } end
+    def pending_slug() { description: I18n.t('attributes.descriptions.pending_slug') } end
+    def standalone_mode() { enum: ['enabled', 'disabled', 'enforced'] } end
+    def avatar_color()
+      {
+        enum: [
+          "primary",
+          "secondary",
+          "tertiary",
+          "quaternary",
+          "quinary",
+          "sentary"
+        ]
+      }
+    end
+
+    def currency_code()
+      { example: "USD", description: "International currency codes (see http://www2.1010data.com/documentationcenter/discover/FunctionReference/DataTypesAndFormats/currencyUnitCodes.html)"}
+    end
+
+    ############################
+    ## Helper data structures ##
+    ############################
+
+    def relationship_data_attribute
+      object({
+        data: object({
+          id: id,
+          type: string
+        })
+      })
+    end
+
+    def relationship_data_attributes
+      object({
+        data: array(
+          type: object({
+            id: id,
+            type: string
+          })
+        )
+      })
+    end
+
+    def attachment_attributes
+      Type.object({
+        data: string,
+        filename: string,
+        content_type: string,
+      })
+    end
+
+    def image_attributes
+      object({
+        small: url( nullable: true ),
+        smallSquare: url( nullable: true ),
+        smallLandscape: url( nullable: true ),
+        smallPortrait: url( nullable: true ),
+        medium: url( nullable: true ),
+        mediumSquare: url( nullable: true ),
+        mediumLandscape: url( nullable: true ),
+        mediumPortrait: url( nullable: true ),
+        largeLandscape: url( nullable: true ),
+        original: url( nullable: true )
+      })
+    end
   end
 end
