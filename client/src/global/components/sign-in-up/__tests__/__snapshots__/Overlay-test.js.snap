@@ -11,7 +11,7 @@ exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
       }
     }
   >
-    <header
+    <div
       className="overlay-header"
     >
       <div
@@ -65,7 +65,7 @@ exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
           </button>
         </div>
       </div>
-    </header>
+    </div>
     <div
       className="overlay-content focus"
     >

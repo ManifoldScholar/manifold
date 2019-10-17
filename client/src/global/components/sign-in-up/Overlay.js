@@ -99,7 +99,7 @@ class Overlay extends Component {
               onDeactivate: this.props.hideSignInUpOverlay
             }}
           >
-            <header className="overlay-header">
+            <div className="overlay-header">
               <div className="container">
                 <div className="rel">
                   <figure className="header-logo" aria-hidden="true">
@@ -119,7 +119,7 @@ class Overlay extends Component {
                   </button>
                 </div>
               </div>
-            </header>
+            </div>
             <div className="overlay-content focus">
               <div className="container">
                 <div className="inner">{this.renderChild()}</div>

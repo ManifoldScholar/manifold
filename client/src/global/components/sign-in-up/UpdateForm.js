@@ -204,6 +204,9 @@ class UpdateFormContainer extends Component {
               name="attributes[avatar]"
               errors={errors}
             >
+              <label htmlFor="avatar-update" className="screen-reader-text">
+                Profile image
+              </label>
               <Dropzone
                 inputProps={{
                   id: "avatar-update",
@@ -239,6 +242,9 @@ class UpdateFormContainer extends Component {
                         className="dropzone-button__cancel-button"
                       >
                         <IconComposer icon="close16" size="default" />
+                        <span className="screen-reader-text">
+                          Remove current avatar
+                        </span>
                       </button>
                     )}
                     <Avatar style={{ margin: 0 }} url={this.displayAvatar()} />
