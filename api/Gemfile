@@ -134,6 +134,7 @@ group :development, :test do
   gem "rspec-rails", "~> 3.0"
   gem "rspec-retry", "~> 0.6.2"
   gem "rspec-support", "~> 3.0"
+  gem "rswag", "~> 2.0"
   gem "timecop", "~> 0.9"
 end
 
