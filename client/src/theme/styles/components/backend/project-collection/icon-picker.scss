@@ -1,48 +1,46 @@
 .icon-picker {
   &.form-input .form-input-heading {
-    @include formInputSecondary;
-    text-transform: none;
-
-    @include respond($break60) {
-      height: 38px;
-    }
+    padding-bottom: 1em;
   }
 
-  .icon-row {
+  &__list {
     display: flex;
     flex-flow: row wrap;
     align-content: center;
     padding: 0;
+  }
 
-    li {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 60px;
-      height: 60px;
-      margin-top: -1px;
-      margin-left: -1px;
+  &__item {
+    /* stylelint-disable declaration-no-important */
+    // need to use `!important` until form inputs are refactored
+    // due to specificity of selectors
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin-top: -1px !important;
+    margin-bottom: 0 !important;
+    margin-left: -1px;
+    cursor: pointer;
+    border: 1px solid $neutralUIDullLight;
+    transition:
+      color $duration $timing,
+      background-color $duration $timing;
+    /* stylelint-enable declaration-no-important */
 
-      button {
-        @include buttonUnstyled;
-        width: 100%;
-        height: 100%;
-        border: 1px solid $neutralUIDullLight;
-        transition:
-          color $duration $timing,
-          background-color $duration $timing;
-
-        &:hover,
-        &:focus-visible {
-          color: $neutral110;
-          background-color: $defaultFocusColor;
-        }
-      }
-
-      &.selected button {
-        color: $neutral110;
-        background-color: $defaultFocusColor;
-      }
+    &--active,
+    &:hover,
+    &:focus-within {
+      color: $neutral110;
+      background-color: $defaultFocusColor;
+      outline: 0;
     }
+  }
+
+  &__input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
   }
 }

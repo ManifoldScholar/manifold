@@ -50,34 +50,39 @@ export default class IconPicker extends Component {
     this.props.setOther(icon, "attributes[icon]");
   };
 
-  renderIcon(icon) {
-    const selected = this.selected;
-    const iconClasses = classNames({
-      selected: selected === icon
+  renderIcon(icon, id) {
+    const selected = this.selected === icon;
+    const labelClasses = classNames({
+      "icon-picker__item": true,
+      "icon-picker__item--active": selected
     });
     return (
-      <li key={icon} className={iconClasses}>
-        <button
-          onClick={() => this.handleIconChange(icon)}
-          type="button"
-          aria-describedby={`collection-form-icon-${icon}`}
-        >
-          <IconComputed.ProjectCollection icon={icon} size={48} />
-        </button>
-        <span className="aria-describedby" id={`collection-form-icon-${icon}`}>
-          {`Set project collection icon to ${icon}`}
-        </span>
-      </li>
+      <label key={icon} className={labelClasses}>
+        <span className="screen-reader-text">{icon}</span>
+        <input
+          type="radio"
+          value={icon}
+          name={`${this.idPrefix}-${id}`}
+          checked={selected}
+          onChange={() => this.handleIconChange(icon)}
+          className="icon-picker__input"
+        />
+        <IconComputed.ProjectCollection icon={icon} size={48} />
+      </label>
     );
   }
 
   renderIconList(id) {
     return (
-      <ul className="icon-row" id={`${this.idPrefix}-${id}`}>
+      <div
+        role="group"
+        id={`${this.idPrefix}-${id}`}
+        className="icon-picker__list"
+      >
         {this.icons.map(icon => {
-          return this.renderIcon(icon);
+          return this.renderIcon(icon, id);
         })}
-      </ul>
+      </div>
     );
   }
 
