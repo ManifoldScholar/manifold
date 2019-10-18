@@ -33,4 +33,8 @@ RSpec.shared_context "authenticated request" do
   let(:reader_headers) { build_headers(reader_token) }
   let(:another_reader_headers) { build_headers(another_reader_token) }
   let(:anonymous_headers) { { "content-type" => "application/json" } }
+
+  let(:admin_auth) { "Bearer #{admin_token}" }
+  let(:author_auth) { "Bearer #{author_token}" }
+  let(:reader_auth) { "Bearer #{reader_token}" }
 end
