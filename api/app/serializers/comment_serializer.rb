@@ -9,7 +9,7 @@ class CommentSerializer < ApplicationSerializer
   belongs_to :creator
 
   def flagged
-    return 0 unless authenticated?
+    return false unless authenticated?
 
     object.flags.where(creator: current_user).count.positive?
   end
