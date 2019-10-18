@@ -165,9 +165,9 @@ class FormSwitch extends Component {
                 checked={this.checked}
                 onChange={eventIgnored => this.handleChange()}
               />
-              {this.props.labelPos === "below" && this.renderLabelText()}
               {this.showCheckbox && this.renderCheckboxIndicator()}
               {this.showSwitch && this.renderSwitchIndicator()}
+              {this.props.labelPos === "below" && this.renderLabelText()}
               <Instructions
                 instructions={this.props.instructions}
                 className={this.instructionClasses}
