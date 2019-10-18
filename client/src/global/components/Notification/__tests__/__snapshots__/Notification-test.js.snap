@@ -7,21 +7,17 @@ exports[`Global.HeaderNotification component renders correctly 1`] = `
   <div
     className="notification__container"
   >
-    <header
-      aria-atomic="true"
-      aria-live="polite"
+    <div
       role="status"
     >
-      <h5
+      <p
         className="notification__heading"
       >
         Welcome to the Terrordome
-      </h5>
-    </header>
+      </p>
+    </div>
     <p
-      aria-live="polite"
       className="notification__body"
-      role="status"
     >
       Here's your ticket.  Every time I get wicked.
     </p>

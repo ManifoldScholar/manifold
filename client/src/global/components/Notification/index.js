@@ -32,11 +32,7 @@ export default class Notification extends Component {
   bodyCopy() {
     let output = null;
     if (this.props.body) {
-      output = (
-        <p className="notification__body" role="status" aria-live="polite">
-          {this.props.body}
-        </p>
-      );
+      output = <p className="notification__body">{this.props.body}</p>;
     }
 
     return output;
@@ -46,9 +42,9 @@ export default class Notification extends Component {
     return (
       <div className={this.wrapperClass} key={this.props.id}>
         <div className="notification__container">
-          <header role="status" aria-live="polite" aria-atomic="true">
-            <h5 className="notification__heading">{this.props.heading}</h5>
-          </header>
+          <div role="status">
+            <p className="notification__heading">{this.props.heading}</p>
+          </div>
           {this.bodyCopy()}
 
           <button
