@@ -40,7 +40,7 @@ export class ProjectListFilters extends Component {
   }
 
   get idPrefix() {
-    return "filters-search";
+    return "project-filter";
   }
 
   setFilters = (event, label) => {
@@ -140,21 +140,31 @@ export class ProjectListFilters extends Component {
 
   renderSort() {
     return (
-      <div className="select">
-        <select
-          onChange={event => this.setFilters(event, "order")}
-          value={this.state.filters.order || ""}
-        >
-          <option value="">Sort</option>
-          <option value="sort_title ASC">A-Z</option>
-          <option value="sort_title DESC">Z-A</option>
-        </select>
-        <Utility.IconComposer
-          icon="disclosureDown16"
-          size={20}
-          iconClass="select__icon"
-        />
-      </div>
+      <UID name={id => `${this.idPrefix}-${id}`}>
+        {id => (
+          <>
+            <div className="select">
+              <label htmlFor={id} className="screen-reader-text">
+                Sort results
+              </label>
+              <select
+                id={id}
+                onChange={event => this.setFilters(event, "order")}
+                value={this.state.filters.order || ""}
+              >
+                <option value="">Sort</option>
+                <option value="sort_title ASC">A-Z</option>
+                <option value="sort_title DESC">Z-A</option>
+              </select>
+              <Utility.IconComposer
+                icon="disclosureDown16"
+                size={20}
+                iconClass="select__icon"
+              />
+            </div>
+          </>
+        )}
+      </UID>
     );
   }
 
@@ -162,18 +172,31 @@ export class ProjectListFilters extends Component {
     if (!this.featuredOptions() && !this.subjectOptions()) return null;
 
     return (
-      <div className="select">
-        <select value={this.filterValue()} onChange={this.setFilters}>
-          <option value="">Show All</option>
-          {this.featuredOptions()}
-          {this.subjectOptions()}
-        </select>
-        <Utility.IconComposer
-          icon="disclosureDown16"
-          size={20}
-          iconClass="select__icon"
-        />
-      </div>
+      <UID name={id => `${this.idPrefix}-${id}`}>
+        {id => (
+          <>
+            <div className="select">
+              <label htmlFor={id} className="screen-reader-text">
+                Filter results
+              </label>
+              <select
+                id={id}
+                value={this.filterValue()}
+                onChange={this.setFilters}
+              >
+                <option value="">Show All</option>
+                {this.featuredOptions()}
+                {this.subjectOptions()}
+              </select>
+              <Utility.IconComposer
+                icon="disclosureDown16"
+                size={20}
+                iconClass="select__icon"
+              />
+            </div>
+          </>
+        )}
+      </UID>
     );
   }
 
