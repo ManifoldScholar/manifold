@@ -58,7 +58,14 @@ Array [
       <div
         className="select"
       >
+        <label
+          className="screen-reader-text"
+          htmlFor={1}
+        >
+          Sort results
+        </label>
         <select
+          id={1}
           onChange={[Function]}
           value=""
         >
@@ -95,7 +102,14 @@ Array [
       <div
         className="select"
       >
+        <label
+          className="screen-reader-text"
+          htmlFor={1}
+        >
+          Filter results
+        </label>
         <select
+          id={1}
           onChange={[Function]}
           value=""
         >
