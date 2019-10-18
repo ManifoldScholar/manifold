@@ -58,11 +58,10 @@ module Validation
   def project_params
     params.require(:data)
     attributes = [:title, :subtitle, :featured, :hashtag, :description, :purchase_url,
-                  :purchase_price_money, :purchase_price_currency, :facebook_id,
-                  :purchase_call_to_action, :twitter_id, :hide_activity, :instagram_id,
-                  :remove_avatar, attachment(:avatar), attachment(:hero), :download_url,
-                  attachment(:cover), :remove_hero, :draft, :remove_cover,
-                  :download_call_to_action, :publication_date, metadata(Project),
+                  :purchase_price_currency, :facebook_id, :purchase_call_to_action, :twitter_id,
+                  :hide_activity, :instagram_id, :remove_avatar, attachment(:avatar),
+                  attachment(:hero), :download_url, attachment(:cover), :remove_hero, :draft,
+                  :remove_cover, :download_call_to_action, :publication_date, metadata(Project),
                   :avatar_color, :pending_slug, :tag_list, :dark_mode, :image_credits,
                   :standalone_mode, :standalone_mode_press_bar_text,
                   :standalone_mode_press_bar_url, :finished]
