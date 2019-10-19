@@ -208,7 +208,9 @@ class Project < ApplicationRecord
     Project.authorizer.scope_updatable_projects(user)
   }
 
-  scope :with_collection_order, lambda { |collection|
+  scope :with_collection_order, lambda { |collection = nil|
+    next unless collection.present?
+
     pc = ProjectCollection.friendly.find(collection)
     ranked_by_collection
       .joins(:collection_projects)
