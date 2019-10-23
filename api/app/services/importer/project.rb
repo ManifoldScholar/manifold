@@ -174,7 +174,7 @@ module Importer
     end
 
     def unset_untouched(model, attributes, exclude = [])
-      default_excludes = %w(id created_at updated_at creator_id draft dark_mode)
+      default_excludes = %w(id created_at updated_at creator_id draft dark_mode standalone_mode)
       exclude.concat(default_excludes)
       fields = model.class.column_names.map(&:to_sym)
       touched = attributes.keys
