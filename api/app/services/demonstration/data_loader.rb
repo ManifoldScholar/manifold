@@ -16,7 +16,7 @@ module Demonstration
       clear_db
       seed_db
       create_admin_user
-      # create_fake_users
+      create_fake_users
       create_pages
       create_featured_projects_collection
       import_projects
@@ -56,7 +56,7 @@ module Demonstration
       40.times do
         first_name = Faker::Name.first_name
         last_name = Faker::Name.last_name
-        email = Faker::Internet.safe_email("#{first_name}_#{last_name}")
+        email = Faker::Internet.safe_email(name: "#{first_name}_#{last_name}")
         u = User.find_or_create_by(email: email)
         u.first_name = first_name
         u.last_name = last_name

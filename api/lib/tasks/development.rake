@@ -1,5 +1,5 @@
 namespace :manifold do
-  namespace :dev do
+  namespace :development do
     desc "Loads demo data into Manifold"
     task seed: :environment do
       Manifold::Rake.logger.info "Seeding development environment data"
