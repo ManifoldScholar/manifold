@@ -46,23 +46,20 @@ class SerializerRegistry
   def typed_attribute(attribute, type, options = {}, &block)
     options = map_options(options)
     register_attributes(attribute, type, options)
-    _block = type == Hash ? build_camelize_proc(attribute, block) : block
+    _block = type == ::Types::Hash ? build_camelize_proc(attribute, block) : block
     klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
       attributes(attribute, options, &_block)
     RUBY
   end
 
-  # TODO: Change the type to a the dry types hash class.
   def abilities
-    typed_attribute :abilities, Hash do |object, params|
+    typed_attribute :abilities, ::Types::Hash do |object, params|
       klass.calculate_abilities(object, params)
     end
   end
 
-  # TODO: Change the type to a the dry types boolean class. Ruby doesn't have a native
-  # Boolean type, so the NilClass is a placeholder here.
   def current_user_is_creator?
-    typed_attribute :current_user_is_creator, NilClass do |object, params|
+    typed_attribute :current_user_is_creator, ::Types::Bool do |object, params|
       klass.calculate_current_user_is_creator?(object, params)
     end
   end
@@ -74,12 +71,26 @@ class SerializerRegistry
   # rubocop:enable Naming/PredicateName
 
   def metadata(metadata: true, formatted: true, properties: true)
-    typed_attribute(:metadata, Hash) if metadata
-    typed_attribute(:metadata_formatted, Hash) if formatted
-    typed_attribute(:metadata_properties, Array) if properties
+    typed_attribute(:metadata, ::Types::Hash) if metadata
+    typed_attribute(:metadata_formatted, ::Types::Hash) if formatted
+    typed_attribute(:metadata_properties, ::Types::Array.of(::Types::String)) if properties
+  end
+
+  def attribute_types
+    values = reject { |_, v| v[:relationship] }.to_h
+    filter_to_types values
+  end
+
+  def relationship_types
+    values = select { |_, v| v[:relationship] }.to_h
+    filter_to_types values
   end
 
   private
+
+  def filter_to_types(values)
+    values.map { |_, v| [v[:key], v[:type]] }.to_h
+  end
 
   def build_camelize_proc(attribute, block = nil)
     proc { |object, params|
