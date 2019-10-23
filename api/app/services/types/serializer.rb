@@ -9,7 +9,7 @@ module Types
     Collection = Types::Hash.schema(data: Types::Array.of(Pointer))
     Resource = Types::Hash.schema(data: Pointer)
 
-    NOTIFICATION_ENUM = %w[always never daily].freeze
+    NotificationPreference = Types::String.enum("always", "never", "daily")
 
     Abilities = Types::Hash.schema(
       create: Types::Bool,
