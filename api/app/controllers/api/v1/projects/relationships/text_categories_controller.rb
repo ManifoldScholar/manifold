@@ -7,7 +7,7 @@ module Api
 
           LOCATION = [:api, :v1, :project, :relationships, :text_categories].freeze
 
-          before_action :set_project, only: [:index, :create]
+          before_action :set_project
 
           resourceful! Category, authorize_options: { except: [:index] } do
             @project.text_categories
@@ -24,6 +24,11 @@ module Api
 
           def create
             @category = authorize_and_create_category(category_params)
+            render_single_resource(@category, location: LOCATION)
+          end
+
+          def show
+            @category = load_and_authorize_category
             render_single_resource(@category, location: LOCATION)
           end
 

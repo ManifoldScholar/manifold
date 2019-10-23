@@ -16,6 +16,19 @@ RSpec.shared_context "authenticated request" do
     }
   end
 
+  def get_user_token(user_type)
+    case user_type
+    when :admin
+      admin_auth
+    when :author
+      author_auth
+    when :reader
+      reader_auth
+    when nil
+      nil
+    end
+  end
+
   let(:author_email) { "author@castironcoding.com" }
   let(:reader_email) { "reader@castironcoding.com" }
   let(:another_reader_email) { "another-reader@castironcoding.com" }
