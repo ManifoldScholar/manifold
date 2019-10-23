@@ -79,7 +79,21 @@ class SerializerRegistry
     typed_attribute(:metadata_properties, Array) if properties
   end
 
+  def attribute_types
+    values = reject { |_, v| v[:relationship] }.to_h
+    filter_to_types values
+  end
+
+  def relationship_types
+    values = select { |_, v| v[:relationship] }.to_h
+    filter_to_types values
+  end
+
   private
+
+  def filter_to_types(values)
+    values.map { |_, v| [v[:key], v[:type]] }.to_h
+  end
 
   def build_camelize_proc(attribute, block = nil)
     proc { |object, params|
