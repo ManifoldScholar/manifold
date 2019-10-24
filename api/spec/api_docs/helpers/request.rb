@@ -28,6 +28,7 @@ module ApiDocs
       def summary
         return @options[:summary] if @options[:summary]
 
+        return I18n.t("swagger.#{@action}.description", type: human_resource_name_plural, attribute: "ID") if @action == :index
         I18n.t("swagger.#{@action}.description", type: human_resource_name, attribute: "ID")
       end
 
@@ -46,6 +47,7 @@ module ApiDocs
       def success_description
         return @options[:success_description] if @options[:success_description]
 
+        return I18n.t("swagger.#{@action}.success", type: human_resource_name, attribute: "ID") if @action == :index
         I18n.t("swagger.#{@action}.success", type: human_resource_name, attribute: "ID")
       end
 
