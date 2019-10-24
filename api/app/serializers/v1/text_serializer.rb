@@ -3,60 +3,90 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    typed_attribute :title, NilClass
-    typed_attribute :creator_names, NilClass
-    typed_attribute :created_at, NilClass
-    typed_attribute :updated_at, NilClass
-    typed_attribute :published, NilClass
-    typed_attribute :annotations_count, NilClass
-    typed_attribute :highlights_count, NilClass
-    typed_attribute :age, NilClass
-    typed_attribute :position, NilClass
-    typed_attribute :publication_date, NilClass
-    typed_attribute :subtitle, NilClass
-    typed_attribute :slug, NilClass
-    typed_attribute :description, NilClass
-    typed_attribute :title_formatted, NilClass
-    typed_attribute :title_plaintext, NilClass
-    typed_attribute :subtitle_formatted, NilClass
-    typed_attribute :subtitle_plaintext, NilClass
-    typed_attribute :description_formatted, NilClass
-    typed_attribute :description_plaintext, NilClass
-    typed_attribute :toc, NilClass, if: proc { |object, params|
+    typed_attribute :title, Types::String
+    typed_attribute :creator_names, Types::String.meta(read_only: true)
+    typed_attribute :created_at, Types::DateTime.meta(read_only: true)
+    typed_attribute :updated_at, Types::DateTime.meta(read_only: true)
+    typed_attribute :published, Types::Bool
+    typed_attribute :annotations_count, Types::Integer.meta(read_only: true)
+    typed_attribute :highlights_count, Types::Integer.meta(read_only: true)
+    typed_attribute :age, Types::Integer.meta(read_only: true, description: "The age of the resource in days")
+    typed_attribute :position, Types::Integer
+    typed_attribute :publication_date, Types::DateTime.optional
+    typed_attribute :subtitle, Types::String.optional
+    typed_attribute :slug, Types::String.meta(read_only: true)
+    typed_attribute :description, Types::String.optional
+    typed_attribute :title_formatted, Types::String.optional.meta(read_only: true)
+    typed_attribute :title_plaintext, Types::String.optional.meta(read_only: true)
+    typed_attribute :subtitle_formatted, Types::String.optional.meta(read_only: true)
+    typed_attribute :subtitle_plaintext, Types::String.optional.meta(read_only: true)
+    typed_attribute :description_formatted, Types::String.optional.meta(read_only: true)
+    typed_attribute :description_plaintext, Types::String.optional.meta(read_only: true)
+    typed_attribute :toc, Types::Array.of(
+      Types::Hash.schema(
+        label: Types::String,
+        anchor: Types::String,
+        type: Types::String.optional,
+        id: Types::Serializer::ID,
+        children: Types::Array.of(
+          Types::Hash.schema(
+            label: Types::String,
+            anchor: Types::String,
+            type: Types::String.optional,
+            id: Types::Serializer::ID
+          )
+        )
+      )
+    ).meta(read_only: true), if: proc { |object, params|
       next true if full?(params)
 
       params[:include_toc] && params[:include_toc].include?(object.id)
     }
 
-    typed_attribute :cover_styles, Types::Hash
+    typed_attribute :cover_styles, Types::Serializer::Attachment.meta(read_only: true)
 
     typed_belongs_to :category
 
+    # rubocop: disable Metrics/BlockLength
     when_full do
       abilities
       metadata(metadata: true, properties: true, formatted: true)
 
-      typed_attribute :start_text_section_id, NilClass, &:calculated_start_text_section_id
+      typed_attribute :start_text_section_id, Types::Serializer::ID.optional.meta(read_only: true), &:calculated_start_text_section_id
 
-      typed_attribute :sections_map, NilClass do |object, _params|
+      typed_attribute :sections_map, Types::Array.of(
+        Types::Hash.schema(
+          id: Types::Serializer::ID,
+          name: Types::String
+        )
+      ).meta(read_only: true) do |object, _params|
         sections_map(object)
       end
 
-      typed_attribute :ingestion_source_download_url, NilClass do |object, params|
+      typed_attribute :ingestion_source_download_url, Types::Serializer::URL.optional.meta(read_only: true) do |object, params|
         ingestion_source_download_url(object, params)
       end
 
-      typed_attribute :ingestion_external_source_url, NilClass do |object, params|
+      typed_attribute :ingestion_external_source_url, Types::Serializer::URL.optional.meta(read_only: true) do |object, params|
         ingestion_external_source_url(object, params)
       end
 
-      typed_attribute :exports_as_epub_v3, NilClass
-      typed_attribute :epub_v3_export_url, NilClass, if: ->(object, _params) { object.has_epub_v3_export_url? }
+      typed_attribute :exports_as_epub_v3, Types::Bool.meta(read_only: true)
+      typed_attribute :epub_v3_export_url, Types::Serializer::URL.optional.meta(read_only: true), if: ->(object, _params) {
+        object.has_epub_v3_export_url?
+      }
 
-      typed_attribute :citations, NilClass
-      typed_attribute :spine, NilClass
-      typed_attribute :pending_slug, NilClass
-      typed_attribute :section_kind, NilClass
+      typed_attribute :citations, Types::Hash.schema(
+        apa: Types::String,
+        mla: Types::String,
+        chicago: Types::String
+      ).meta(read_only: true)
+      typed_attribute :spine, Types::Array.of(Types::Serializer::ID).meta(read_only: true)
+      typed_attribute :pending_slug, Types::String
+      typed_attribute :section_kind, Types::String.optional.meta(
+        description: "The label used for sections within the text. "\
+        'Values might be, for example, "chapter" or "unit"'
+      )
 
       typed_belongs_to :project
       typed_has_many :stylesheets
@@ -65,6 +95,7 @@ module V1
       typed_has_many :text_sections
       typed_has_one :toc_section, serializer: TextSectionSerializer, record_type: "text_section"
     end
+    # rubocop: enable Metrics/BlockLength
 
     class << self
       def ingestion_external_source_url(object, params)
