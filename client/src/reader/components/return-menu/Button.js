@@ -21,7 +21,7 @@ export default class ReturnMenuButton extends Component {
       "reader-header__button": true,
       "reader-header__button--pad-default": true,
       "button-active": expanded
-    })
+    });
     return (
       <button
         className={buttonClasses}
