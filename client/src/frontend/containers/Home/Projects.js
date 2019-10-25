@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import ProjectList from "frontend/components/project-list";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
@@ -9,11 +8,9 @@ import { projectsAPI, requests } from "api";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import Utility from "global/components/utility";
-import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 const perPage = 20;
-const helpLink = "https://manifoldapp.org/docs/";
 
 export class HomeProjectsContainer extends Component {
   // This method is called by the Home Container, since its fetchData is exposed to the

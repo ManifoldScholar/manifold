@@ -71,12 +71,14 @@ export class EventTile extends Component {
 
     return (
       <div className={this.props.itemClass}>
+        {/* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex */}
         <div
           role={this.hasLink ? "link" : null}
           tabIndex={this.hasLink ? "0" : null}
           className={tileClass}
           onClick={this.handleTileClick}
         >
+          {/* eslint-enable jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex */}
           <div className={`${baseClass}__inner`}>
             {icon && (
               <Utility.IconComposer
