@@ -47,4 +47,10 @@ doc
 
 .DS_Store
 
+## Plugins ##
 client/plugins*
+
+
+## Built files ###
+api/swagger
+
