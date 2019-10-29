@@ -7,7 +7,7 @@ class ResourceSerializer < ApplicationSerializer
              :attachment_styles, :variant_thumbnail_styles, :metadata_formatted,
              :external_type, :external_id, :external_url, :slug, :pending_slug,
              :downloadable, :created_at, :minimum_width, :minimum_height, :project_slug,
-             :variant_poster_styles
+             :variant_poster_styles, :pending_sort_title, :sort_title
 
   has_many :collection_resources
 
