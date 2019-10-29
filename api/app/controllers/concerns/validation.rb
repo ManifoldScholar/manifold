@@ -159,7 +159,7 @@ module Validation
                   :allow_download, :external_type, :external_url, :external_id,
                   :embed_code, :subject, :minimum_width, :maximum_width, :minimum_height,
                   :maximum_height, :iframe_allow_fullscreen, metadata(Resource),
-                  :fingerprint, :pending_slug]
+                  :fingerprint, :pending_slug, :pending_sort_title]
     relationships = [:project, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -400,8 +400,15 @@ module Validation
   end
 
   def resource_filter_params
-    params.permit(filter: [:keyword, :kind, :tag, :order, :collection_order,
-                           :project, :resource_collection])[:filter]
+    params.with_defaults(
+      filter: { order: "sort_title ASC" }
+    ).permit(filter: [:keyword,
+                      :kind,
+                      :tag,
+                      :order,
+                      :collection_order,
+                      :project,
+                      :resource_collection])[:filter]
   end
 
   def comment_filter_params

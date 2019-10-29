@@ -40,7 +40,7 @@ class Resource < ApplicationRecord
     series_number edition issue volume rights rights_territory restrictions rights_holder
     creator alt_text credit copyright_status
   )
-  has_sort_title :title_plaintext
+  has_sort_title :sort_title_candidate
 
   # Associations
   belongs_to :project
@@ -184,6 +184,11 @@ class Resource < ApplicationRecord
 
   def force_update_kind
     self.kind = determine_kind
+  end
+
+  def sort_title_candidate
+    candidate = pending_sort_title.blank? ? title_plaintext : pending_sort_title
+    candidate.delete "\"", "'"
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_205942) do
+ActiveRecord::Schema.define(version: 2019_10_25_200842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -448,7 +448,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_205942) do
     t.jsonb "citations", default: {}
     t.boolean "draft", default: true, null: false
     t.boolean "hide_activity", default: false
-    t.string "sort_title"
+    t.citext "sort_title"
     t.integer "events_count", default: 0
     t.string "download_url"
     t.string "download_call_to_action"
@@ -632,7 +632,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_205942) do
     t.integer "minimum_width"
     t.integer "minimum_height"
     t.boolean "iframe_allow_fullscreen", default: true
-    t.string "sort_title"
+    t.citext "sort_title"
     t.jsonb "attachment_data", default: {}
     t.jsonb "high_res_data", default: {}
     t.jsonb "transcript_data", default: {}
@@ -641,6 +641,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_205942) do
     t.jsonb "variant_format_two_data", default: {}
     t.jsonb "variant_thumbnail_data", default: {}
     t.jsonb "variant_poster_data", default: {}
+    t.string "pending_sort_title"
     t.index ["project_id"], name: "index_resources_on_project_id"
     t.index ["slug"], name: "index_resources_on_slug", unique: true
   end

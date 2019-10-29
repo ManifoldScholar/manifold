@@ -50,11 +50,20 @@ export class ResourceGeneralContainer extends PureComponent {
             label="Title"
             name="attributes[title]"
             placeholder="Enter a title"
+            instructions="This field accepts Markdown"
+          />
+          <Form.TextInput
+            label="Fingerprint"
+            name="attributes[pendingSortTitle]"
+            placeholder="Enter sort title"
+            instructions="This field is only used to sort resources alphabetically in lists. If blank, sorting is based on resource title."
+            disabled
           />
           <Form.TextInput
             label="Fingerprint"
             name="attributes[fingerprint]"
             placeholder="Enter fingerprint"
+            instructions="The fingerprint is used to indentify resources during bulk resource imports."
             disabled
           />
           <Form.TextInput

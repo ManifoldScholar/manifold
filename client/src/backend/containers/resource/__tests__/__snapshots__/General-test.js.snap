@@ -113,7 +113,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
         style={Object {}}
       >
         <label
-          className=""
+          className="has-instructions"
           htmlFor="text-input-1"
         >
           Title
@@ -126,13 +126,44 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           type="text"
           value="Image"
         />
+        <span
+          className="instructions"
+          id="text-input-instructions-1"
+        >
+          This field accepts Markdown
+        </span>
       </div>
       <div
         className="form-input"
         style={Object {}}
       >
         <label
-          className=""
+          className="has-instructions"
+          htmlFor="text-input-1"
+        >
+          Fingerprint
+        </label>
+        <input
+          aria-describedby="text-input-error-1 text-input-instructions-1"
+          id="text-input-1"
+          onChange={[Function]}
+          placeholder="Enter sort title"
+          type="text"
+          value=""
+        />
+        <span
+          className="instructions"
+          id="text-input-instructions-1"
+        >
+          This field is only used to sort resources alphabetically in lists. If blank, sorting is based on resource title.
+        </span>
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
           htmlFor="text-input-1"
         >
           Fingerprint
@@ -145,6 +176,12 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           type="text"
           value=""
         />
+        <span
+          className="instructions"
+          id="text-input-instructions-1"
+        >
+          The fingerprint is used to indentify resources during bulk resource imports.
+        </span>
       </div>
       <div
         className="form-input"
