@@ -15,7 +15,7 @@ module Attachments
 
   BASE_STYLES = {
     small: {
-      geometry: "#{SMALL}x#{SMALL}",
+      resize: "#{SMALL}x#{SMALL}",
       convert: "jpg",
       background: "none",
       gravity: "north"
@@ -42,7 +42,7 @@ module Attachments
       extent: "#{SMALL_REL}x#{SMALL}"
     },
     medium: {
-      geometry: "#{MED}x#{MED}",
+      resize: "#{MED}x#{MED}",
       convert: "jpg",
       background: "none",
       gravity: "north"
