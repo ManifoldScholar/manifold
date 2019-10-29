@@ -50,7 +50,6 @@ export class ResourceGeneralContainer extends PureComponent {
             label="Title"
             name="attributes[title]"
             placeholder="Enter a title"
-            {...this.props}
           />
           <Form.TextInput
             label="Fingerprint"
@@ -72,13 +71,11 @@ export class ResourceGeneralContainer extends PureComponent {
             label="Description"
             name="attributes[description]"
             placeholder="Enter a description"
-            {...this.props}
           />
           <Form.TextArea
             label="Caption"
             name="attributes[caption]"
             placeholder="Enter a short description"
-            {...this.props}
           />
           {resource.downloadableKind ? (
             <Form.Switch
