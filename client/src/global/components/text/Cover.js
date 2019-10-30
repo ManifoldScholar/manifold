@@ -23,7 +23,7 @@ export default class TextCover extends PureComponent {
 
   get hasCover() {
     if (this.props.iconOnly) return false;
-    return get(this.text.attributes, "coverStyles.smallPortrait");
+    return get(this.text.attributes, "coverStyles.small");
   }
 
   render() {
@@ -34,7 +34,7 @@ export default class TextCover extends PureComponent {
       <figure className={`${elemClass} ${elemClass}--${modifier}`}>
         {this.hasCover ? (
           <img
-            src={this.text.attributes.coverStyles.smallPortrait}
+            src={this.text.attributes.coverStyles.small}
             alt={"Thumbnail image for " + this.text.attributes.titlePlaintext}
             className={`${this.props.baseClass}__cover-image`}
           />

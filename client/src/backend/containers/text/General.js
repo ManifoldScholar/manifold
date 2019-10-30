@@ -48,6 +48,14 @@ export default class TextGeneralContainer extends PureComponent {
             name="attributes[description]"
             placeholder="Enter a Brief Description"
           />
+          <Form.Upload
+            layout="portrait"
+            label="Cover"
+            accepts="images"
+            readFrom="attributes[coverStyles][small]"
+            name="attributes[cover]"
+            remove="attributes[removeCover]"
+          />
           <Form.TextInput
             label="Section Label"
             name="attributes[sectionKind]"

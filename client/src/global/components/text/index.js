@@ -1,5 +1,5 @@
-import Placeholder from "./Placeholder";
+import Cover from "./Cover";
 
 export default {
-  Placeholder
+  Cover
 };

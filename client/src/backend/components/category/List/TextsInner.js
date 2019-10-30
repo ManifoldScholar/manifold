@@ -70,7 +70,7 @@ export default class CategoryListTexts extends PureComponent {
                 className="texts-list__details"
               >
                 <div className="texts-list__icon">
-                  <Text.Placeholder />
+                  <Text.Cover text={text} iconOnly={false} />
                 </div>
                 <div className="texts-list__title-wrapper">
                   <h3 className="texts-list__title">
