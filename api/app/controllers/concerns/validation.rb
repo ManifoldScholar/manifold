@@ -254,7 +254,7 @@ module Validation
     params.require(:data)
     attributes = [:title, :language, :position, :description, :publication_date,
                   metadata(Text), :rights, :section_kind, :subtitle, :published,
-                  :pending_slug]
+                  :pending_slug, attachment(:cover), :remove_cover]
     relationships = [:category, :contributors, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

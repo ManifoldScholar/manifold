@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Bibliographic from "./Bibliographic";
-import Cover from "frontend/components/text/Cover";
+import Text from "global/components/text";
 
 export default class TextListListItemContent extends Component {
   static displayName = "TextList.ListItem.Content";
@@ -59,7 +59,7 @@ export default class TextListListItemContent extends Component {
       <div className={`${baseClass}__content`}>
         <div className={`${baseClass}__inner`}>
           <Link to={this.readUrl}>
-            <Cover
+            <Text.Cover
               text={text}
               baseClass={baseClass}
               iconOnly={!this.props.showCovers}

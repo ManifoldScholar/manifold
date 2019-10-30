@@ -3,5 +3,10 @@ module Updaters
   class Text
     include ::Updaters
     include ::Updaters::Concerns::HasSortableCollaborators
+
+    def attachment_fields
+      [:cover]
+    end
+
   end
 end
