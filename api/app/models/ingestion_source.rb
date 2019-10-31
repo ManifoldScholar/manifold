@@ -9,6 +9,8 @@ class IngestionSource < ApplicationRecord
   include Concerns::SerializedAbilitiesFor
   self.authorizer_name = "ProjectChildAuthorizer"
 
+  classy_enum_attr :kind, enum: "IngestionSourceKind", allow_blank: false
+
   # Constants
   KIND_COVER_IMAGE = "cover_image".freeze
   KIND_NAVIGATION = "navigation".freeze
@@ -21,15 +23,21 @@ class IngestionSource < ApplicationRecord
     KIND_PUBLICATION_RESOURCE
   ].freeze
 
+  scope :by_kind, ->(kind) { where(kind: kind) }
+  scope :cover_images, -> { by_kind(:cover_image) }
+  scope :navigation, -> { by_kind(:navigation) }
+  scope :publication_resources, -> { by_kind(:publication_resource) }
+
   # Associations
   belongs_to :text
 
   # Delegations
   delegate :project, to: :text
+  delegate *IngestionSourceKind.predicates, to: :kind
+  delegate :content_type, to: :attachment, allow_nil: true
 
   # Validations
   validates :source_identifier, presence: true
-  validates :kind, inclusion: { in: ALLOWED_KINDS }
 
   class << self
     def proxy_path(ingestion_source)

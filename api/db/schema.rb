@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_191_130_212_914) do
+ActiveRecord::Schema.define(version: 2019_11_30_212914) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_trgm"
@@ -62,6 +63,29 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.index ["text_section_id"], name: "index_annotations_on_text_section_id"
   end
 
+  create_table "cached_external_source_links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "cached_external_source_id", null: false
+    t.uuid "text_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cached_external_source_id", "text_id"], name: "index_cached_external_source_link_uniqueness", unique: true
+    t.index ["cached_external_source_id"], name: "index_cached_external_source_links_on_cached_external_source_id"
+    t.index ["text_id"], name: "index_cached_external_source_links_on_text_id"
+  end
+
+  create_table "cached_external_sources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "url", null: false
+    t.text "source_identifier", null: false
+    t.text "kind", default: "unknown", null: false
+    t.text "content_type", null: false
+    t.jsonb "asset_data"
+    t.jsonb "metadata", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_identifier"], name: "index_cached_external_sources_on_source_identifier", unique: true
+    t.index ["url"], name: "index_cached_external_sources_on_url", unique: true
+  end
+
   create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "project_id"
     t.string "title"
@@ -78,7 +102,7 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.integer "position"
     t.string "collaboratable_type"
     t.uuid "collaboratable_id"
-    t.index %w[collaboratable_type collaboratable_id], name: "index_collabs_on_collabable_type_and_collabable_id"
+    t.index ["collaboratable_type", "collaboratable_id"], name: "index_collabs_on_collabable_type_and_collabable_id"
     t.index ["maker_id"], name: "index_collaborators_on_maker_id"
   end
 
@@ -89,7 +113,7 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_collection_id"], name: "index_collection_projects_on_project_collection_id"
-    t.index %w[project_id project_collection_id], name: "by_project_and_project_collection", unique: true
+    t.index ["project_id", "project_collection_id"], name: "by_project_and_project_collection", unique: true
     t.index ["project_id"], name: "index_collection_projects_on_project_id"
   end
 
@@ -107,7 +131,7 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.uuid "ancestor_id", null: false
     t.uuid "descendant_id", null: false
     t.integer "generations", null: false
-    t.index %w[ancestor_id descendant_id generations], name: "comment_anc_desc_idx", unique: true
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "comment_anc_desc_idx", unique: true
     t.index ["ancestor_id"], name: "index_comment_hierarchies_on_ancestor_id"
     t.index ["descendant_id"], name: "comment_desc_idx"
   end
@@ -128,7 +152,7 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.index ["created_at"], name: "index_comments_on_created_at", using: :brin
     t.index ["creator_id"], name: "index_comments_on_creator_id"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
-    t.index %w[subject_type subject_id], name: "index_comments_on_subject_type_and_subject_id"
+    t.index ["subject_type", "subject_id"], name: "index_comments_on_subject_type_and_subject_id"
   end
 
   create_table "content_block_references", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -137,7 +161,7 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.uuid "referencable_id"
     t.string "kind", null: false
     t.index ["content_block_id"], name: "index_content_block_references_on_content_block_id"
-    t.index %w[referencable_type referencable_id], name: "index_content_block_references_on_referencable"
+    t.index ["referencable_type", "referencable_id"], name: "index_content_block_references_on_referencable"
   end
 
   create_table "content_blocks", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -169,9 +193,9 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.string "external_subject_type"
     t.uuid "twitter_query_id"
     t.index ["created_at"], name: "index_events_on_created_at"
-    t.index %w[external_subject_type external_subject_id], name: "index_subj_on_subj_type_and_subj_id"
+    t.index ["external_subject_type", "external_subject_id"], name: "index_subj_on_subj_type_and_subj_id"
     t.index ["project_id"], name: "index_events_on_project_id"
-    t.index %w[subject_type subject_id], name: "index_events_on_subject_type_and_subject_id"
+    t.index ["subject_type", "subject_id"], name: "index_events_on_subject_type_and_subject_id"
     t.index ["twitter_query_id"], name: "index_events_on_twitter_query_id"
   end
 
@@ -181,7 +205,7 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.uuid "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[favoritable_type favoritable_id], name: "index_favorites_on_favoritable_type_and_favoritable_id"
+    t.index ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable_type_and_favoritable_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
@@ -225,7 +249,7 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.string "flaggable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[flaggable_type flaggable_id], name: "index_flags_on_flaggable_type_and_flaggable_id"
+    t.index ["flaggable_type", "flaggable_id"], name: "index_flags_on_flaggable_type_and_flaggable_id"
   end
 
   create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
@@ -234,8 +258,8 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.string "sluggable_type", limit: 50
     t.string "scope"
     t.datetime "created_at"
-    t.index %w[slug sluggable_type scope], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index %w[slug sluggable_type], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
@@ -247,7 +271,7 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.jsonb "info", default: "{}", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[uid provider], name: "index_identities_on_uid_and_provider", unique: true
+    t.index ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true
     t.index ["user_id"], name: "index_identities_on_user_id"
   end
 
@@ -349,7 +373,7 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.datetime "updated_at", null: false
     t.index ["frequency"], name: "index_notification_preferences_on_frequency"
     t.index ["kind"], name: "index_notification_preferences_on_kind"
-    t.index %w[user_id kind], name: "index_notification_preferences_on_user_id_and_kind", unique: true
+    t.index ["user_id", "kind"], name: "index_notification_preferences_on_user_id_and_kind", unique: true
     t.index ["user_id"], name: "index_notification_preferences_on_user_id"
   end
 
@@ -476,9 +500,9 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "anonymous_label"
-    t.index %w[reading_group_id anonymous_label], name: "anonymous_label_index", unique: true
+    t.index ["reading_group_id", "anonymous_label"], name: "anonymous_label_index", unique: true
     t.index ["reading_group_id"], name: "index_reading_group_memberships_on_reading_group_id"
-    t.index %w[user_id reading_group_id], name: "index_reading_group_memberships_on_user_id_and_reading_group_id", unique: true
+    t.index ["user_id", "reading_group_id"], name: "index_reading_group_memberships_on_user_id_and_reading_group_id", unique: true
     t.index ["user_id"], name: "index_reading_group_memberships_on_user_id"
   end
 
@@ -523,8 +547,8 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.boolean "most_recent", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[resource_import_row_id most_recent], name: "index_resource_import_row_transitions_parent_most_recent", unique: true, where: "most_recent"
-    t.index %w[resource_import_row_id sort_key], name: "index_resource_import_row_transitions_parent_sort", unique: true
+    t.index ["resource_import_row_id", "most_recent"], name: "index_resource_import_row_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["resource_import_row_id", "sort_key"], name: "index_resource_import_row_transitions_parent_sort", unique: true
   end
 
   create_table "resource_import_rows", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -550,8 +574,8 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.boolean "most_recent", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[resource_import_id most_recent], name: "index_resource_import_transitions_parent_most_recent", unique: true, where: "most_recent"
-    t.index %w[resource_import_id sort_key], name: "index_resource_import_transitions_parent_sort", unique: true
+    t.index ["resource_import_id", "most_recent"], name: "index_resource_import_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["resource_import_id", "sort_key"], name: "index_resource_import_transitions_parent_sort", unique: true
   end
 
   create_table "resource_imports", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -658,9 +682,9 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.uuid "resource_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[name resource_type resource_id], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true
     t.index ["name"], name: "index_roles_on_name"
-    t.index %w[resource_type resource_id], name: "index_roles_on_resource_type_and_resource_id"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
   create_table "settings", id: :serial, force: :cascade do |t|
@@ -723,13 +747,13 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.string "context", limit: 128
     t.datetime "created_at"
     t.index ["context"], name: "index_taggings_on_context"
-    t.index %w[tag_id taggable_id taggable_type context tagger_id tagger_type], name: "taggings_idx", unique: true
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
-    t.index %w[taggable_id taggable_type context], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
-    t.index %w[taggable_id taggable_type tagger_id context], name: "taggings_idy"
+    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
+    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
     t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
     t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
-    t.index %w[tagger_id tagger_type], name: "index_taggings_on_tagger_id_and_tagger_type"
+    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
     t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
   end
 
@@ -737,6 +761,19 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.string "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
+  create_table "text_exports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "text_id", null: false
+    t.text "export_kind", default: "unknown", null: false
+    t.text "fingerprint", null: false
+    t.jsonb "asset_data"
+    t.jsonb "integrity_check", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_data"], name: "index_text_exports_on_asset_data", using: :gin
+    t.index ["text_id", "export_kind", "fingerprint"], name: "index_text_exports_uniqueness", unique: true
+    t.index ["text_id"], name: "index_text_exports_on_text_id"
   end
 
   create_table "text_section_stylesheets", id: :serial, force: :cascade do |t|
@@ -874,7 +911,7 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.uuid "user_id", null: false
     t.uuid "role_id", null: false
     t.index ["role_id"], name: "index_users_roles_on_role_id"
-    t.index %w[user_id role_id], name: "index_users_roles_on_user_id_and_role_id", unique: true
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", unique: true
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
@@ -889,11 +926,13 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
     t.jsonb "object_changes"
     t.datetime "created_at"
     t.index ["created_at"], name: "index_versions_on_created_at", using: :brin
-    t.index %w[item_type item_id], name: "index_versions_on_item_type_and_item_id"
-    t.index %w[parent_item_type parent_item_id], name: "index_versions_on_parent_item_type_and_parent_item_id"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+    t.index ["parent_item_type", "parent_item_id"], name: "index_versions_on_parent_item_type_and_parent_item_id"
   end
 
   add_foreign_key "annotations", "reading_groups", on_delete: :nullify
+  add_foreign_key "cached_external_source_links", "cached_external_sources", on_delete: :cascade
+  add_foreign_key "cached_external_source_links", "texts", on_delete: :cascade
   add_foreign_key "identities", "users", on_delete: :cascade
   add_foreign_key "import_selection_matches", "annotations", on_delete: :nullify
   add_foreign_key "import_selection_matches", "import_selections", on_delete: :cascade
@@ -911,185 +950,186 @@ ActiveRecord::Schema.define(version: 20_191_130_212_914) do
   add_foreign_key "resource_import_transitions", "resource_imports"
   add_foreign_key "resource_imports", "projects", on_delete: :cascade
   add_foreign_key "resource_imports", "users", column: "creator_id"
+  add_foreign_key "text_exports", "texts", on_delete: :restrict
   add_foreign_key "users_roles", "roles", on_delete: :cascade
   add_foreign_key "users_roles", "users", on_delete: :cascade
 
   create_view "project_collection_sort_orders", materialized: true, sql_definition: <<-SQL
-      WITH allowed_columns AS (
-           SELECT t.column_name
-             FROM ( VALUES ('created_at'::text), ('updated_at'::text), ('publication_date'::text), ('title'::text)) t(column_name)
-          ), allowed_directions AS (
-           SELECT t.direction
-             FROM ( VALUES ('asc'::text), ('desc'::text)) t(direction)
-          ), allowed_sort_orders AS (
-           SELECT allowed_columns.column_name,
-              allowed_directions.direction,
-              concat(allowed_columns.column_name, '_', allowed_directions.direction) AS sort_order,
-              (allowed_directions.direction = 'asc'::text) AS ascending,
-              (allowed_directions.direction = 'desc'::text) AS descending
-             FROM allowed_columns,
-              allowed_directions
-          )
-   SELECT allowed_sort_orders.column_name,
-      allowed_sort_orders.direction,
-      allowed_sort_orders.sort_order,
-      allowed_sort_orders.ascending,
-      allowed_sort_orders.descending
-     FROM allowed_sort_orders;
+    WITH allowed_columns AS (
+         SELECT t.column_name
+           FROM ( VALUES ('created_at'::text), ('updated_at'::text), ('publication_date'::text), ('title'::text)) t(column_name)
+        ), allowed_directions AS (
+         SELECT t.direction
+           FROM ( VALUES ('asc'::text), ('desc'::text)) t(direction)
+        ), allowed_sort_orders AS (
+         SELECT allowed_columns.column_name,
+            allowed_directions.direction,
+            concat(allowed_columns.column_name, '_', allowed_directions.direction) AS sort_order,
+            (allowed_directions.direction = 'asc'::text) AS ascending,
+            (allowed_directions.direction = 'desc'::text) AS descending
+           FROM allowed_columns,
+            allowed_directions
+        )
+ SELECT allowed_sort_orders.column_name,
+    allowed_sort_orders.direction,
+    allowed_sort_orders.sort_order,
+    allowed_sort_orders.ascending,
+    allowed_sort_orders.descending
+   FROM allowed_sort_orders;
   SQL
   add_index "project_collection_sort_orders", ["sort_order"], name: "project_collection_sort_orders_pkey", unique: true
 
   create_view "collection_project_rankings", sql_definition: <<-SQL
-      SELECT cp.id AS collection_project_id,
-      cp.project_collection_id,
-      cp.project_id,
-      rank() OVER outer_w AS ranking,
-      rank() OVER global_w AS global_ranking,
-      pc.sort_order,
-      sv.sort_order AS dynamic_sort_order,
-      dsv.dynamic_sort_value,
-      manual.ranking AS manual_sort_value
-     FROM (((((collection_projects cp
-       JOIN project_collections pc ON ((pc.id = cp.project_collection_id)))
-       JOIN projects p ON ((p.id = cp.project_id)))
-       LEFT JOIN LATERAL ( SELECT cp."position" AS ranking
-            WHERE ((pc.sort_order)::text = 'manual'::text)) manual ON (((pc.sort_order)::text = 'manual'::text)))
-       LEFT JOIN project_collection_sort_orders sv ON ((((pc.sort_order)::text <> 'manual'::text) AND ((pc.sort_order)::text = sv.sort_order))))
-       LEFT JOIN LATERAL ( SELECT
-                  CASE sv.column_name
-                      WHEN 'created_at'::text THEN ((p.created_at)::text)::character varying
-                      WHEN 'updated_at'::text THEN ((p.updated_at)::text)::character varying
-                      WHEN 'publication_date'::text THEN ((p.publication_date)::text)::character varying
-                      WHEN 'title'::text THEN p.title
-                      ELSE p.title
-                  END AS dynamic_sort_value) dsv ON (((pc.sort_order)::text <> 'manual'::text)))
-    WINDOW outer_w AS (PARTITION BY cp.project_collection_id ORDER BY
-          CASE
-              WHEN ((pc.sort_order)::text = 'manual'::text) THEN manual.ranking
-              ELSE NULL::integer
-          END,
-          CASE
-              WHEN sv.descending THEN dsv.dynamic_sort_value
-              ELSE NULL::character varying
-          END DESC,
-          CASE
-              WHEN sv.ascending THEN dsv.dynamic_sort_value
-              ELSE NULL::character varying
-          END), global_w AS (ORDER BY pc."position",
-          CASE
-              WHEN ((pc.sort_order)::text = 'manual'::text) THEN manual.ranking
-              ELSE NULL::integer
-          END,
-          CASE
-              WHEN sv.descending THEN dsv.dynamic_sort_value
-              ELSE NULL::character varying
-          END DESC,
-          CASE
-              WHEN sv.ascending THEN dsv.dynamic_sort_value
-              ELSE NULL::character varying
-          END);
+    SELECT cp.id AS collection_project_id,
+    cp.project_collection_id,
+    cp.project_id,
+    rank() OVER outer_w AS ranking,
+    rank() OVER global_w AS global_ranking,
+    pc.sort_order,
+    sv.sort_order AS dynamic_sort_order,
+    dsv.dynamic_sort_value,
+    manual.ranking AS manual_sort_value
+   FROM (((((collection_projects cp
+     JOIN project_collections pc ON ((pc.id = cp.project_collection_id)))
+     JOIN projects p ON ((p.id = cp.project_id)))
+     LEFT JOIN LATERAL ( SELECT cp."position" AS ranking
+          WHERE ((pc.sort_order)::text = 'manual'::text)) manual ON (((pc.sort_order)::text = 'manual'::text)))
+     LEFT JOIN project_collection_sort_orders sv ON ((((pc.sort_order)::text <> 'manual'::text) AND ((pc.sort_order)::text = sv.sort_order))))
+     LEFT JOIN LATERAL ( SELECT
+                CASE sv.column_name
+                    WHEN 'created_at'::text THEN ((p.created_at)::text)::character varying
+                    WHEN 'updated_at'::text THEN ((p.updated_at)::text)::character varying
+                    WHEN 'publication_date'::text THEN ((p.publication_date)::text)::character varying
+                    WHEN 'title'::text THEN p.title
+                    ELSE p.title
+                END AS dynamic_sort_value) dsv ON (((pc.sort_order)::text <> 'manual'::text)))
+  WINDOW outer_w AS (PARTITION BY cp.project_collection_id ORDER BY
+        CASE
+            WHEN ((pc.sort_order)::text = 'manual'::text) THEN manual.ranking
+            ELSE NULL::integer
+        END,
+        CASE
+            WHEN sv.descending THEN dsv.dynamic_sort_value
+            ELSE NULL::character varying
+        END DESC,
+        CASE
+            WHEN sv.ascending THEN dsv.dynamic_sort_value
+            ELSE NULL::character varying
+        END), global_w AS (ORDER BY pc."position",
+        CASE
+            WHEN ((pc.sort_order)::text = 'manual'::text) THEN manual.ranking
+            ELSE NULL::integer
+        END,
+        CASE
+            WHEN sv.descending THEN dsv.dynamic_sort_value
+            ELSE NULL::character varying
+        END DESC,
+        CASE
+            WHEN sv.ascending THEN dsv.dynamic_sort_value
+            ELSE NULL::character varying
+        END);
   SQL
   create_view "permissions", sql_definition: <<-SQL
-      SELECT ((((ur.user_id || ':'::text) || r.resource_id) || ':'::text) || (r.resource_type)::text) AS id,
-      ur.user_id,
-      r.resource_id,
-      r.resource_type,
-      array_agg(r.name) AS role_names
-     FROM (roles r
-       JOIN users_roles ur ON ((ur.role_id = r.id)))
-    GROUP BY ur.user_id, r.resource_id, r.resource_type
-   HAVING ((r.resource_id IS NOT NULL) AND (r.resource_type IS NOT NULL));
+    SELECT ((((ur.user_id || ':'::text) || r.resource_id) || ':'::text) || (r.resource_type)::text) AS id,
+    ur.user_id,
+    r.resource_id,
+    r.resource_type,
+    array_agg(r.name) AS role_names
+   FROM (roles r
+     JOIN users_roles ur ON ((ur.role_id = r.id)))
+  GROUP BY ur.user_id, r.resource_id, r.resource_type
+ HAVING ((r.resource_id IS NOT NULL) AND (r.resource_type IS NOT NULL));
   SQL
   create_view "reading_group_counts", sql_definition: <<-SQL
-      SELECT rg.id AS reading_group_id,
-      count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
-      count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
-     FROM (reading_groups rg
-       LEFT JOIN annotations a ON ((a.reading_group_id = rg.id)))
-    GROUP BY rg.id;
+    SELECT rg.id AS reading_group_id,
+    count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
+    count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
+   FROM (reading_groups rg
+     LEFT JOIN annotations a ON ((a.reading_group_id = rg.id)))
+  GROUP BY rg.id;
   SQL
   create_view "reading_group_membership_counts", sql_definition: <<-SQL
-      SELECT rgm.id AS reading_group_membership_id,
-      count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
-      count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
-     FROM (reading_group_memberships rgm
-       LEFT JOIN annotations a ON (((a.creator_id = rgm.user_id) AND (a.reading_group_id = rgm.reading_group_id))))
-    GROUP BY rgm.id;
+    SELECT rgm.id AS reading_group_membership_id,
+    count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
+    count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
+   FROM (reading_group_memberships rgm
+     LEFT JOIN annotations a ON (((a.creator_id = rgm.user_id) AND (a.reading_group_id = rgm.reading_group_id))))
+  GROUP BY rgm.id;
   SQL
   create_view "project_summaries", sql_definition: <<-SQL
-      SELECT p.id,
-      p.id AS project_id,
-      p.title,
-      p.cached_title_formatted AS title_formatted,
-      p.cached_title_plaintext AS title_plaintext,
-      p.subtitle,
-      p.cached_subtitle_formatted AS subtitle_formatted,
-      p.cached_subtitle_plaintext AS subtitle_plaintext,
-      p.publication_date,
-      p.created_at,
-      p.updated_at,
-      p.slug,
-      p.avatar_color,
-      p.avatar_data,
-      p.draft,
-      p.finished,
-      pm.creator_names
-     FROM (projects p
-       LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
-              string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
-             FROM (collaborators c
-               JOIN makers m ON ((m.id = c.maker_id)))
-            WHERE (((c.collaboratable_type)::text = 'Project'::text) AND (c.collaboratable_id = p.id))) pm ON (true));
+    SELECT p.id,
+    p.id AS project_id,
+    p.title,
+    p.cached_title_formatted AS title_formatted,
+    p.cached_title_plaintext AS title_plaintext,
+    p.subtitle,
+    p.cached_subtitle_formatted AS subtitle_formatted,
+    p.cached_subtitle_plaintext AS subtitle_plaintext,
+    p.publication_date,
+    p.created_at,
+    p.updated_at,
+    p.slug,
+    p.avatar_color,
+    p.avatar_data,
+    p.draft,
+    p.finished,
+    pm.creator_names
+   FROM (projects p
+     LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
+            string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
+           FROM (collaborators c
+             JOIN makers m ON ((m.id = c.maker_id)))
+          WHERE (((c.collaboratable_type)::text = 'Project'::text) AND (c.collaboratable_id = p.id))) pm ON (true));
   SQL
   create_view "text_summaries", sql_definition: <<-SQL
-      SELECT t.project_id,
-      t.id,
-      t.id AS text_id,
-      t.created_at,
-      t.updated_at,
-      t.published,
-      t.slug,
-      t.category_id,
-      t."position",
-      t.description,
-      t.cached_description_formatted AS description_formatted,
-      t.cached_description_plaintext AS description_plaintext,
-      t.start_text_section_id,
-      t.publication_date,
-      t.cover_data,
-      t.toc,
-      tb.id AS toc_section,
-      ta.subtitle,
-      ta.subtitle_formatted,
-      ta.subtitle_plaintext,
-      ta.title,
-      ta.title_formatted,
-      ta.title_plaintext,
-      tm.creator_names,
-      tm.collaborator_names,
-      COALESCE(tac.annotations_count, (0)::bigint) AS annotations_count,
-      COALESCE(tac.highlights_count, (0)::bigint) AS highlights_count
-     FROM ((((texts t
-       LEFT JOIN LATERAL ( SELECT count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
-              count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
-             FROM (annotations a
-               JOIN text_sections ts ON ((ts.id = a.text_section_id)))
-            WHERE (ts.text_id = t.id)) tac ON (true))
-       LEFT JOIN LATERAL ( SELECT (array_agg(tt.value ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title,
-              (array_agg(tt.value ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle,
-              (array_agg(tt.cached_value_formatted ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title_formatted,
-              (array_agg(tt.cached_value_formatted ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle_formatted,
-              (array_agg(tt.cached_value_plaintext ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title_plaintext,
-              (array_agg(tt.cached_value_plaintext ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle_plaintext
-             FROM text_titles tt
-            WHERE (tt.text_id = t.id)) ta ON (true))
-       LEFT JOIN LATERAL ( SELECT ts.id
-             FROM text_sections ts
-            WHERE ((ts.text_id = t.id) AND ((ts.kind)::text = 'navigation'::text))) tb ON (true))
-       LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
-              string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
-             FROM (collaborators c
-               JOIN makers m ON ((m.id = c.maker_id)))
-            WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
+    SELECT t.project_id,
+    t.id,
+    t.id AS text_id,
+    t.created_at,
+    t.updated_at,
+    t.published,
+    t.slug,
+    t.category_id,
+    t."position",
+    t.description,
+    t.cached_description_formatted AS description_formatted,
+    t.cached_description_plaintext AS description_plaintext,
+    t.start_text_section_id,
+    t.publication_date,
+    t.cover_data,
+    t.toc,
+    tb.id AS toc_section,
+    ta.subtitle,
+    ta.subtitle_formatted,
+    ta.subtitle_plaintext,
+    ta.title,
+    ta.title_formatted,
+    ta.title_plaintext,
+    tm.creator_names,
+    tm.collaborator_names,
+    COALESCE(tac.annotations_count, (0)::bigint) AS annotations_count,
+    COALESCE(tac.highlights_count, (0)::bigint) AS highlights_count
+   FROM ((((texts t
+     LEFT JOIN LATERAL ( SELECT count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
+            count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
+           FROM (annotations a
+             JOIN text_sections ts ON ((ts.id = a.text_section_id)))
+          WHERE (ts.text_id = t.id)) tac ON (true))
+     LEFT JOIN LATERAL ( SELECT (array_agg(tt.value ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title,
+            (array_agg(tt.value ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle,
+            (array_agg(tt.cached_value_formatted ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title_formatted,
+            (array_agg(tt.cached_value_formatted ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle_formatted,
+            (array_agg(tt.cached_value_plaintext ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title_plaintext,
+            (array_agg(tt.cached_value_plaintext ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle_plaintext
+           FROM text_titles tt
+          WHERE (tt.text_id = t.id)) ta ON (true))
+     LEFT JOIN LATERAL ( SELECT ts.id
+           FROM text_sections ts
+          WHERE ((ts.text_id = t.id) AND ((ts.kind)::text = 'navigation'::text))) tb ON (true))
+     LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
+            string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
+           FROM (collaborators c
+             JOIN makers m ON ((m.id = c.maker_id)))
+          WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
   SQL
 end

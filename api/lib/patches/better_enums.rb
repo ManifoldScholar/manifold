@@ -24,6 +24,11 @@ module Patches
       self.class < base_class ? "#{base_class.name}[:#{self}]" : super
     end
 
+    # @return [Symbol]
+    def predicate_name
+      :"#{to_sym}?"
+    end
+
     def to_str
       to_s
     end
@@ -60,6 +65,11 @@ module Patches
         else
           base_class.last_index
         end
+      end
+
+      # @return [<Symbol>]
+      def predicates
+        map(&:predicate_name)
       end
 
       # @return [<String>, String]

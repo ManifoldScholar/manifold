@@ -7,11 +7,13 @@ AllCops:
       - 'bin/**/*'
       - 'spec/**/*'
       - 'lib/patches/**/*'
+      - 'lib/templates/**/*'
       - 'api/vendor/**/*'
       - 'api/db/**/*'
       - 'api/bin/**/*'
       - 'api/spec/**/*'
       - 'api/lib/patches/**/*'
+      - 'api/lib/templates/**/*'
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -23,7 +25,7 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 120
+  Max: 140
 
 Metrics/MethodLength:
   Max: 15
@@ -37,10 +39,23 @@ Metrics/ClassLength:
 Layout/DotPosition:
   EnforcedStyle: leading
 
+Layout/IndentHeredoc:
+  Enabled: false
+
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
 Naming/HeredocDelimiterNaming:
+  Enabled: false
+
+Naming/PredicateName:
+  NamePrefixBlacklist: ["is_"]
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+# This complains about perfectly valid delegation syntax
+Lint/AmbiguousOperator:
   Enabled: false
 
 Lint/UnneededCopDisableDirective:
@@ -49,17 +64,45 @@ Lint/UnneededCopDisableDirective:
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
+Style/ClassCheck:
+  Enabled: false
+
 Style/Documentation:
+  Enabled: false
+
+Style/FormatString:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+# This is acceptable Ruby syntax for callables
+Style/LambdaCall:
   Enabled: false
 
 Style/PercentLiteralDelimiters:
   Enabled: false
+
+Style/RedundantReturn:
+  Exclude:
+    # Interactions often benefit from being able to explicitly return
+    # to distinguish typos
+    - app/services/**/*.rb
+    - api/app/services/**/*.rb
 
 Style/SymbolArray:
   Enabled: false
 
 Style/AccessModifierDeclarations:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: true
+  Exclude:
+    # classy_enum generates them this way for clarity,
+    # since they need to be loaded in one file to work.
+    - app/enums/**/*.rb
+    - api/app/enums/**/*.rb
 
 Lint/ScriptPermission:
   Enabled: false
