@@ -31,7 +31,7 @@ export class FormUpload extends Component {
       extensions: "doc, docx, txt, odt"
     },
     csv: {
-      accepts: "text/plain, text/csv",
+      accepts: "text/*,",
       extensions: "txt, csv"
     },
     spreadsheet: {
