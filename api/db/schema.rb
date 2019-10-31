@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_205942) do
+ActiveRecord::Schema.define(version: 2019_11_12_221025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -61,6 +61,29 @@ ActiveRecord::Schema.define(version: 2019_09_23_205942) do
     t.index ["reading_group_id"], name: "index_annotations_on_reading_group_id"
     t.index ["resource_id"], name: "index_annotations_on_resource_id"
     t.index ["text_section_id"], name: "index_annotations_on_text_section_id"
+  end
+
+  create_table "cached_external_source_links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "cached_external_source_id", null: false
+    t.uuid "text_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cached_external_source_id", "text_id"], name: "index_cached_external_source_link_uniqueness", unique: true
+    t.index ["cached_external_source_id"], name: "index_cached_external_source_links_on_cached_external_source_id"
+    t.index ["text_id"], name: "index_cached_external_source_links_on_text_id"
+  end
+
+  create_table "cached_external_sources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "url", null: false
+    t.text "source_identifier", null: false
+    t.text "kind", default: "unknown", null: false
+    t.text "content_type", null: false
+    t.jsonb "asset_data"
+    t.jsonb "metadata", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_identifier"], name: "index_cached_external_sources_on_source_identifier", unique: true
+    t.index ["url"], name: "index_cached_external_sources_on_url", unique: true
   end
 
   create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -732,6 +755,19 @@ ActiveRecord::Schema.define(version: 2019_09_23_205942) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
+  create_table "text_exports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "text_id", null: false
+    t.text "export_kind", default: "unknown", null: false
+    t.text "fingerprint", null: false
+    t.jsonb "asset_data"
+    t.jsonb "integrity_check", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_data"], name: "index_text_exports_on_asset_data", using: :gin
+    t.index ["text_id", "export_kind", "fingerprint"], name: "index_text_exports_uniqueness", unique: true
+    t.index ["text_id"], name: "index_text_exports_on_text_id"
+  end
+
   create_table "text_section_stylesheets", id: :serial, force: :cascade do |t|
     t.uuid "text_section_id", null: false
     t.uuid "stylesheet_id", null: false
@@ -883,6 +919,8 @@ ActiveRecord::Schema.define(version: 2019_09_23_205942) do
   end
 
   add_foreign_key "annotations", "reading_groups", on_delete: :nullify
+  add_foreign_key "cached_external_source_links", "cached_external_sources", on_delete: :cascade
+  add_foreign_key "cached_external_source_links", "texts", on_delete: :cascade
   add_foreign_key "identities", "users", on_delete: :cascade
   add_foreign_key "import_selection_matches", "annotations", on_delete: :nullify
   add_foreign_key "import_selection_matches", "import_selections", on_delete: :cascade
@@ -900,6 +938,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_205942) do
   add_foreign_key "resource_import_transitions", "resource_imports"
   add_foreign_key "resource_imports", "projects", on_delete: :cascade
   add_foreign_key "resource_imports", "users", column: "creator_id"
+  add_foreign_key "text_exports", "texts", on_delete: :restrict
   add_foreign_key "users_roles", "roles", on_delete: :cascade
   add_foreign_key "users_roles", "users", on_delete: :cascade
 

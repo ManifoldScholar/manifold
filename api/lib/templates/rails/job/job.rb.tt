@@ -1,0 +1,41 @@
+<%-
+  # vim: set ft=ruby.eruby :
+  parts = class_name.split("::")
+
+  last_index = parts.length - 1
+
+  header = parts.map.with_index do |part, index|
+    indentation = "  " * index
+
+    if index == last_index
+      "#{indentation}class #{part}Job < ApplicationJob\n"
+    else
+      "#{indentation}module #{part}"
+    end
+  end.join("\n")
+
+  body_indent = 2 * parts.length
+
+  body_indentation = " " * body_indent
+
+  NL = Regexp.escape("\n")
+
+  INDENTABLE = /(\A|(?:#{NL}(?!#{NL}|\z)))/m
+
+  class_body = <<~RUBY.strip_heredoc.gsub(INDENTABLE, '\1' + body_indentation)#.insert(0, body_indentation)
+  queue_as :#{options[:queue]}
+
+  # @return [void]
+  def perform(*args)
+  end
+  RUBY
+
+  binding.pry
+
+  footer = last_index.downto(0).map do |index|
+    indentation = "  " * index
+
+    "#{indentation}end"
+  end.join("\n")
+-%>
+<%= header + class_body + footer %>

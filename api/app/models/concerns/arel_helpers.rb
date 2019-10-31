@@ -14,26 +14,13 @@ module Concerns
     class_methods do
       # @!group JSON methods
 
-      # @param [Symbol] attribute
-      # @return [Arel::Nodes::NamedFunction]
-      def arel_json_array_length(attribute)
-        arel_named_fn('jsonb_array_length', arel_table[attribute])
-      end
-
-      # @param [Symbol] attribute
-      # @param [Integer] value
-      # @return [Arel::Nodes::GreaterThanOrEqual]
-      def arel_json_array_gteq(attribute, value)
-        arel_json_array_length(attribute).gteq(value)
-      end
-
       # Use the `@>` operator to test if the given `attribute` contains `values` (auto-cast to JSONB)
       #
       # @param [Symbol] attribute
       # @param [{ Symbol => Object }] values
       # @return [Arel::Nodes::InfixOperator]
       def arel_json_contains(attribute, **values)
-        arel_infix '@>', arel_table[attribute], arel_cast(values.to_json, 'jsonb')
+        arel_infix '@>', arel_attrify(attribute), arel_cast(values.to_json, 'jsonb')
       end
 
       # Use the `->>` operator to select a top-level `property_name` from `attribute`.
@@ -42,13 +29,13 @@ module Concerns
       # @param [Symbol, String] property_name
       # @return [Arel::Nodes::InfixOperator]
       def arel_json_get_as_text(attribute, property_name)
-        arel_infix '->>', arel_table[attribute], arel_quote(property_name)
+        arel_infix '->>', arel_attrify(attribute), arel_quote(property_name)
       end
 
       def arel_json_get_path_as_text(attribute, *path_parts)
         raise "Must have at least one part" unless path_parts.present?
 
-        arel_infix '#>>', arel_table[attribute], arel_encode_text_array(*path_parts)
+        arel_infix '#>>', arel_attrify(attribute), arel_encode_text_array(*path_parts)
       end
 
       # Use the `?` operator to test if the given JSONB `attribute`
@@ -58,7 +45,7 @@ module Concerns
       # @param [Symbol, String] property_name
       # @return [Arel::Nodes::InfixOperator]
       def arel_json_has_key(attribute, property_name)
-        arel_infix ??, arel_table[attribute], arel_quote(property_name)
+        arel_infix ??, arel_attrify(attribute), arel_quote(property_name)
       end
 
       # Test if both the key exists and has a non-nil value.
@@ -128,7 +115,56 @@ module Concerns
         arel_json_get_as_text(attribute, property_name).not_eq(value)
       end
 
+      # @return [Arel::Nodes::Case]
+      def arel_json_safe_array_length(attribute)
+        column = arel_attrify attribute
+
+        arel_case(arel_named_fn("jsonb_typeof", column)).tap do |stmt|
+          stmt.when(arel_quote("array")).then(arel_named_fn("jsonb_array_length", column))
+          stmt.else(arel_quote(0))
+        end
+      end
+
+      alias_method :arel_json_array_length, :arel_json_safe_array_length
+
+      # @return [Arel::Nodes::Equality]
+      def arel_json_blank_array(attribute)
+        arel_json_safe_array_length(attribute).eq(0)
+      end
+
+      # @return [Arel::Nodes::GreaterThan]
+      def arel_json_present_array(attribute)
+        arel_json_safe_array_length(attribute).gt(0)
+      end
+
+      # @param [Symbol] attribute
+      # @param [Integer] value
+      # @return [Arel::Nodes::GreaterThanOrEqual]
+      def arel_json_array_gteq(attribute, value)
+        arel_json_array_length(attribute).gteq(value)
+      end
+
       # @!endgroup
+
+      def arel_any_not_null(*attributes)
+        expressions = attributes.flatten.map do |attribute|
+          arel_attrify(attribute).not_eq(nil)
+        end
+
+        arel_or_expressions *expressions
+      end
+
+      def arel_range_contains(attribute, value)
+        arel_infix "@>", arel_attrify(attribute), arel_quote(value)
+      end
+
+      def arel_current_date
+        arel_literal "CURRENT_DATE"
+      end
+
+      def arel_current_timestamp
+        arel_literal "CURRENT_TIMESTAMP"
+      end
 
       # @!group Arel Math
 
@@ -151,8 +187,8 @@ module Concerns
       end
 
       def arel_percentage_where(left_column, left_where, right_column: nil, right_where: nil, cast_as: 'float')
-        left  = arel_table[left_column].count.filter(left_where)
-        right = arel_table[right_column || left_column].count
+        left  = arel_attrify(left_column).count.filter(left_where)
+        right = arel_attrify(right_column || left_column).count
 
         right = right.where(right_where) if right_where.present?
 
@@ -205,6 +241,23 @@ module Concerns
         Arel::Nodes::As.new(left, right)
       end
 
+      # @param [String, Symbol, Arel::Attributes::Attribute, Arel::Nodes::SqlLiteral, Arel::Expresions, Arel::Node] attribute
+      # @return [Arel::Attributes::Attribute]
+      # @return [Arel::Nodes::SqlLiteral]
+      # @return [Arel::Node]
+      def arel_attrify(attribute)
+        case attribute
+        when Arel::Attributes::Attribute, Arel::Nodes::SqlLiteral, Arel::Expressions, Arel::Node
+          attribute
+        when arel_column_matcher
+          arel_table[attribute]
+        when /\A[^.\s]+\.[^.\s]+/
+          arel_literal attribute
+        else
+          raise TypeError, "Don't know how to turn #{attribute} into an Arel::Attribute"
+        end
+      end
+
       # @param [nil, Arel::Node] value
       # @yield [statement] optional block to build the case statement via `Object#tap`
       # @yieldparam [Arel::Nodes::Case] statement
@@ -225,6 +278,11 @@ module Concerns
       # @return [Arel::Nodes::NamedFunction]
       def arel_coalesce(expr, value)
         arel_named_fn('COALESCE', expr, arel_quote(value))
+      end
+
+      # @return [Dux::Enum]
+      def arel_column_matcher
+        @arel_column_matcher ||= Dux.enum column_names
       end
 
       def arel_concat(*values)

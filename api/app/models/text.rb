@@ -73,6 +73,8 @@ class Text < ApplicationRecord
           class_name: "TextSection",
           inverse_of: :text
   has_one :last_finished_ingestion, -> { where(state: "finished").order(updated_at: :desc) }, class_name: "Ingestion"
+  has_many :cached_external_source_links, inverse_of: :text, dependent: :destroy
+  has_many :cached_external_sources, through: :cached_external_source_links
 
   # Delegations
   delegate :creator_names_array, to: :project, prefix: true, allow_nil: true
@@ -218,6 +220,51 @@ class Text < ApplicationRecord
     map
   end
   memoize :source_path_map
+
+  # @param [String, TextSection] source_path
+  # @return [Hash, nil]
+  def landmark_for(source_path)
+    return toc_entry_for(source_path.source_path) if source_path.kind_of?(TextSection)
+
+    Array(landmarks).detect do |landmark|
+      landmark["source_path"] == source_path
+    end
+  end
+
+  # @api private
+  # @param [<Hash>] list
+  # @param [Integer] depth
+  # @yield [toc_entry]
+  # @yieldparam [Hash] toc_entry
+  # @yieldreturn [Boolean]
+  # @return [Hash, nil]
+  def toc_entry_detect(list: toc, depth: 0)
+    return enum_for(__method__) unless block_given?
+
+    catch(:found) do
+      Array(list).each do |toc_entry|
+        throw :found, toc_entry if yield(toc_entry)
+
+        children = toc_entry["children"]
+
+        found = toc_entry_detect(list: children, depth: depth + 1, &Proc.new) if children.present?
+
+        throw :found, found unless found.nil?
+      end
+
+      nil
+    end
+  end
+
+  # @param [String, TextSection] text_section_id
+  # @return [Hash, nil]
+  def toc_entry_for(text_section_id)
+    return toc_entry_for(text_section_id.id) if text_section_id.kind_of?(TextSection)
+
+    toc_entry_detect do |entry|
+      entry["id"] == text_section_id
+    end
+  end
 
   def to_s
     title
