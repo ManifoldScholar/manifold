@@ -5,6 +5,7 @@ import Wrapper from "./Wrapper";
 import isString from "lodash/isString";
 import isFunction from "lodash/isFunction";
 import IconComposer from "global/components/utility/IconComposer";
+import { DrawerContext } from "helpers/contexts";
 
 export default class DialogConfirm extends PureComponent {
   static displayName = "Dialog.Confirm";
@@ -17,10 +18,7 @@ export default class DialogConfirm extends PureComponent {
     message: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   };
 
-  static contextTypes = {
-    pauseKeyboardEvents: PropTypes.func,
-    unpauseKeyboardEvents: PropTypes.func
-  };
+  static contextType = DrawerContext;
 
   static defaultProps = {
     heading: "Are you sure?",
@@ -31,13 +29,14 @@ export default class DialogConfirm extends PureComponent {
   };
 
   componentDidMount() {
-    if (this.context.pauseKeyboardEvents) this.context.pauseKeyboardEvents();
+    console.log(this.context); // eslint-disable-line
+    // if (this.context.pauseKeyboardEvents) this.context.pauseKeyboardEvents();
     window.addEventListener("keyup", this.handleKeyPress);
   }
 
   componentWillUnmount() {
-    if (this.context.unpauseKeyboardEvents)
-      this.context.unpauseKeyboardEvents();
+    // if (this.context.unpauseKeyboardEvents)
+    //   this.context.unpauseKeyboardEvents();
     window.removeEventListener("keyup", this.handleKeyPress);
   }
 

@@ -11,6 +11,7 @@ import classNames from "classnames";
 import { notificationActions } from "actions";
 import IconComposer from "global/components/utility/IconComposer";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import { DrawerContext } from "helpers/contexts";
 
 export default class DrawerWrapper extends PureComponent {
   static mapStateToProps() {
@@ -43,11 +44,6 @@ export default class DrawerWrapper extends PureComponent {
     returnFocusOnDeactivate: PropTypes.bool,
     focusTrap: PropTypes.bool,
     includeSRCloseButton: PropTypes.bool
-  };
-
-  static childContextTypes = {
-    pauseKeyboardEvents: PropTypes.func,
-    unpauseKeyboardEvents: PropTypes.func
   };
 
   // NB lockScroll can be:
@@ -83,13 +79,6 @@ export default class DrawerWrapper extends PureComponent {
     if (props.open) {
       this.onOpen();
     }
-  }
-
-  getChildContext() {
-    return {
-      pauseKeyboardEvents: this.pauseKeyboardEvents,
-      unpauseKeyboardEvents: this.unpauseKeyboardEvents
-    };
   }
 
   static getDerivedStateFromProps(nextProps, prevStateIgnored) {
@@ -342,14 +331,21 @@ export default class DrawerWrapper extends PureComponent {
 
   render() {
     return (
-      <CSSTransition
-        in={this.props.open}
-        classNames="drawer"
-        timeout={{ enter: 500, exit: 300 }}
-        unmountOnExit
+      <DrawerContext.Provider
+        value={{
+          pauseKeyboardEvents: this.pauseKeyboardEvents,
+          unpauseKeyboardEvents: this.unpauseKeyboardEvents
+        }}
       >
-        {this.renderDrawerWrapper()}
-      </CSSTransition>
+        <CSSTransition
+          in={this.props.open}
+          classNames="drawer"
+          timeout={{ enter: 500, exit: 300 }}
+          unmountOnExit
+        >
+          {this.renderDrawerWrapper()}
+        </CSSTransition>
+      </DrawerContext.Provider>
     );
   }
 }
