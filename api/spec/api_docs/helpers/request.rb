@@ -165,11 +165,11 @@ module ApiDocs
       end
 
       def request
-        resource_klass(resource_name).send(type_method(type_from_action(@action, :request)))
+        resource_klass(resource_name).send(definition_name(@action, :request))
       end
 
       def response
-        resource_klass(resource_name).send(type_method(type_from_action(@action, :response)))
+        resource_klass(resource_name).send(definition_name(@action, :response))
       end
     end
   end
