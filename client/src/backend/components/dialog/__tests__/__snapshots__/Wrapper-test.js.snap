@@ -10,6 +10,7 @@ exports[`backend/components/dialog/Wrapper matches the snapshot 1`] = `
   />
   <div
     class="dialog-box dialog-confirm"
+    role="dialog"
     style="max-width:400px"
   >
     <div

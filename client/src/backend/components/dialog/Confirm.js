@@ -5,6 +5,7 @@ import Wrapper from "./Wrapper";
 import isString from "lodash/isString";
 import isFunction from "lodash/isFunction";
 import IconComposer from "global/components/utility/IconComposer";
+import { UID } from "react-uid";
 
 export default class DialogConfirm extends PureComponent {
   static displayName = "Dialog.Confirm";
@@ -82,54 +83,60 @@ export default class DialogConfirm extends PureComponent {
 
   render() {
     return (
-      <Wrapper
-        className="dialog-confirm"
-        maxWidth={400}
-        showCloseButton={false}
-        closeOnOverlayClick={false}
-      >
-        <header className="dialog-header-small">
-          <h2>{this.props.heading}</h2>
-        </header>
-
-        {isString(this.props.message) ? (
-          <p>{this.props.message}</p>
-        ) : (
-          this.props.message
-        )}
-
-        <div className="buttons-icon-horizontal">
-          {this.canHandleResolve && (
-            <button
-              onClick={this.handleResolveClick}
-              className={this.buttonClasses}
-              data-id="accept"
-            >
-              <IconComposer
-                icon="checkmark16"
-                size="default"
-                iconClass="button-icon-secondary__icon"
-              />
-              <span>{this.resolveLabel}</span>
-            </button>
-          )}
-          <button
-            className={classNames(
-              this.buttonClasses,
-              "button-icon-secondary--dull"
-            )}
-            onClick={this.handleRejectClick}
-            data-id="reject"
+      <UID name={id => `dialog-${id}`}>
+        {id => (
+          <Wrapper
+            className="dialog-confirm"
+            maxWidth={400}
+            showCloseButton={false}
+            closeOnOverlayClick={false}
+            labelledBy={`${id}-label`}
+            describedBy={`${id}-description`}
           >
-            <IconComposer
-              icon="close16"
-              size="default"
-              iconClass="button-icon-secondary__icon"
-            />
-            <span>{this.rejectLabel}</span>
-          </button>
-        </div>
-      </Wrapper>
+            <header className="dialog-header-small">
+              <h2 id={`${id}-label`}>{this.props.heading}</h2>
+            </header>
+
+            {isString(this.props.message) ? (
+              <p id={`${id}-description`}>{this.props.message}</p>
+            ) : (
+              this.props.message
+            )}
+
+            <div className="buttons-icon-horizontal">
+              {this.canHandleResolve && (
+                <button
+                  onClick={this.handleResolveClick}
+                  className={this.buttonClasses}
+                  data-id="accept"
+                >
+                  <IconComposer
+                    icon="checkmark16"
+                    size="default"
+                    iconClass="button-icon-secondary__icon"
+                  />
+                  <span>{this.resolveLabel}</span>
+                </button>
+              )}
+              <button
+                className={classNames(
+                  this.buttonClasses,
+                  "button-icon-secondary--dull"
+                )}
+                onClick={this.handleRejectClick}
+                data-id="reject"
+              >
+                <IconComposer
+                  icon="close16"
+                  size="default"
+                  iconClass="button-icon-secondary__icon"
+                />
+                <span>{this.rejectLabel}</span>
+              </button>
+            </div>
+          </Wrapper>
+        )}
+      </UID>
     );
   }
 }
