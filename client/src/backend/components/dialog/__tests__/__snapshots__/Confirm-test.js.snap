@@ -1,65 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`backend/components/dialog/Confirm matches the snapshot 1`] = `
-<withRouter(Dialog.Wrapper)
-  className="dialog-confirm"
-  closeOnOverlayClick={false}
-  maxWidth={400}
-  showCloseButton={false}
+<mockConstructor
+  name={[Function]}
 >
-  <header
-    className="dialog-header-small"
-  >
-    <h2>
-      Player's Ball
-    </h2>
-  </header>
-  <p>
-    All the players came from far and wide
-  </p>
-  <div
-    className="buttons-icon-horizontal"
-  >
-    <button
-      className="buttons-icon-horizontal__button button-icon-secondary"
-      data-id="accept"
-      onClick={[Function]}
-    >
-      <IconComposer
-        fill="currentColor"
-        icon="checkmark16"
-        iconClass="button-icon-secondary__icon"
-        size="default"
-        svgProps={
-          Object {
-            "aria-hidden": true,
-          }
-        }
-      />
-      <span>
-        Yes
-      </span>
-    </button>
-    <button
-      className="buttons-icon-horizontal__button button-icon-secondary button-icon-secondary--dull"
-      data-id="reject"
-      onClick={[Function]}
-    >
-      <IconComposer
-        fill="currentColor"
-        icon="close16"
-        iconClass="button-icon-secondary__icon"
-        size="default"
-        svgProps={
-          Object {
-            "aria-hidden": true,
-          }
-        }
-      />
-      <span>
-        No
-      </span>
-    </button>
-  </div>
-</withRouter(Dialog.Wrapper)>
+  <Component />
+</mockConstructor>
 `;

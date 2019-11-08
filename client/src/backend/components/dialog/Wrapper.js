@@ -20,7 +20,9 @@ class DialogWrapper extends PureComponent {
     className: PropTypes.string,
     history: PropTypes.object,
     closeHandler: PropTypes.func,
-    children: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
+    children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+    labelledBy: PropTypes.string,
+    describedBy: PropTypes.string
   };
 
   static defaultProps = {
@@ -42,6 +44,10 @@ class DialogWrapper extends PureComponent {
 
   componentWillUnmount() {
     window.removeEventListener("keyup", this.handleEscape);
+  }
+
+  get overlayRole() {
+    return this.props.closeOnOverlayClick ? "button" : null;
   }
 
   setDialogClassName = additionalClassNames => {
@@ -114,12 +120,17 @@ class DialogWrapper extends PureComponent {
         unmountOnExit
       >
         <FocusTrap className="dialog-primary dialog-appear">
+          {/* The <div> element's role is declared dynamically, confusing jsx-a11y */}
+          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <div
             className="dialog-overlay"
             onClick={this.handleOverlayClick}
-            role="button"
+            role={this.overlayRole}
           />
           <div
+            role="dialog"
+            aria-labelledby={this.props.labelledBy}
+            aria-describedby={this.props.describedBy}
             className={classnames(
               "dialog-box",
               this.props.className,

@@ -32,7 +32,7 @@ describe("backend/components/dialog/Confirm", () => {
   });
 
   it("should trigger reject callback when cancel is clicked", () => {
-    shallow($root)
+    mount($withApp($root))
       .find('[data-id="reject"]')
       .first()
       .simulate("click", { preventDefault() {} });
@@ -40,7 +40,7 @@ describe("backend/components/dialog/Confirm", () => {
   });
 
   it("should trigger resolve callback when accept is clicked", () => {
-    shallow($root)
+    mount($withApp($root))
       .find('[data-id="accept"]')
       .first()
       .simulate("click", { preventDefault() {} });
@@ -48,13 +48,13 @@ describe("backend/components/dialog/Confirm", () => {
   });
 
   it("should trigger reject callback when escape is pressed", () => {
-    shallow($root);
+    mount($withApp($root));
     map.keyup({ keyCode: 27, preventDefault() {} });
     expect($rejectMock).toHaveBeenCalled();
   });
 
   it("should trigger resolve callback when enter is pressed", () => {
-    shallow($root);
+    mount($withApp($root));
     map.keyup({ keyCode: 13, preventDefault() {} });
     expect($resolveMock).toHaveBeenCalled();
   });
