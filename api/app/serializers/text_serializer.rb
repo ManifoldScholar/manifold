@@ -7,7 +7,7 @@ class TextSerializer < ApplicationSerializer
              :age, :position, :publication_date, :cover_styles, :subtitle,
              :slug, :pending_slug, :section_kind, :title_formatted, :title_plaintext,
              :subtitle_formatted, :subtitle_plaintext, :description, :description_formatted,
-             :toc, :toc_section
+             :toc
 
   belongs_to :project
   belongs_to :category
