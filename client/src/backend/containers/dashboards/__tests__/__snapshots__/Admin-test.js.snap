@@ -161,13 +161,16 @@ Array [
                               className="entity-row__figure entity-row__figure--size-normal entity-row__figure--shape-square entity-row--figure--in-rows"
                             >
                               <svg
-                                aria-label="Default Project Thumbnail"
+                                aria-hidden={false}
                                 className="project-thumb-placeholder project-thumb-placeholder--all project-thumb-placeholder--primary"
                                 height="100%"
                                 viewBox="0 0 48 48"
                                 width="100%"
                                 xmlns="http://www.w3.org/2000/svg"
                               >
+                                <title>
+                                  Default Project Thumbnail
+                                </title>
                                 <g
                                   fill="none"
                                   fillRule="evenodd"
@@ -285,13 +288,16 @@ Array [
                               className="entity-row__figure entity-row__figure--size-normal entity-row__figure--shape-square entity-row--figure--in-rows"
                             >
                               <svg
-                                aria-label="Default Project Thumbnail"
+                                aria-hidden={false}
                                 className="project-thumb-placeholder project-thumb-placeholder--all project-thumb-placeholder--primary"
                                 height="100%"
                                 viewBox="0 0 48 48"
                                 width="100%"
                                 xmlns="http://www.w3.org/2000/svg"
                               >
+                                <title>
+                                  Default Project Thumbnail
+                                </title>
                                 <g
                                   fill="none"
                                   fillRule="evenodd"

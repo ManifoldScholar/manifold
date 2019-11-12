@@ -45,13 +45,16 @@ exports[`Backend Project New Container renders correctly 1`] = `
             className="backend-header__figure"
           >
             <svg
-              aria-label="Default Project Thumbnail"
+              aria-hidden={false}
               className="project-thumb-placeholder backend-header__type-icon backend-header__type-icon--project project-thumb-placeholder--all project-thumb-placeholder--outlined"
               height="100%"
               viewBox="0 0 48 48"
               width="100%"
               xmlns="http://www.w3.org/2000/svg"
             >
+              <title>
+                Default Project Thumbnail
+              </title>
               <g
                 fill="none"
                 fillRule="evenodd"

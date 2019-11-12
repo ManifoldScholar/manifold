@@ -80,7 +80,6 @@ class AvatarBuilder extends Component {
         <UniqueIcons.ProjectPlaceholderUnique
           color={this.props.getModelValue("attributes[avatarColor]")}
         />
-        <span className="screen-reader-text">Default Project Thumbnail</span>
       </div>
     );
   }

@@ -77,9 +77,9 @@ Array [
               className="project-hero__figure project-hero__figure--constrained"
             >
               <svg
-                aria-label={null}
                 className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--primary"
                 height={134}
+                role="img"
                 viewBox="0 0 134 134"
                 width={134}
                 xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +161,7 @@ Array [
                 </g>
               </svg>
               <svg
-                aria-label={null}
+                aria-hidden={true}
                 className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--primary"
                 height="100%"
                 viewBox="0 0 48 48"
@@ -376,9 +376,9 @@ Array [
               className="project-hero__figure project-hero__figure--constrained"
             >
               <svg
-                aria-label={null}
                 className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--primary"
                 height={134}
+                role="img"
                 viewBox="0 0 134 134"
                 width={134}
                 xmlns="http://www.w3.org/2000/svg"
@@ -460,7 +460,7 @@ Array [
                 </g>
               </svg>
               <svg
-                aria-label={null}
+                aria-hidden={true}
                 className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--primary"
                 height="100%"
                 viewBox="0 0 48 48"
