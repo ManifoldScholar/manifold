@@ -29,6 +29,10 @@ export default class SVGProjectPlaceholder extends Component {
     return this.props.ariaLabel ? "Default Project Thumbnail" : null;
   }
 
+  get isResponsive() {
+    return this.props.mode === "responsive";
+  }
+
   small(className) {
     return (
       <svg
@@ -37,8 +41,9 @@ export default class SVGProjectPlaceholder extends Component {
         width="100%"
         height="100%"
         className={this.classes(className)}
-        aria-label={this.ariaLabel}
+        aria-hidden={this.isResponsive}
       >
+        {this.ariaLabel && <title>{this.ariaLabel}</title>}
         <g fill="none" fillRule="evenodd">
           <polygon
             className={`${this.blockClass}__tile`}
@@ -84,8 +89,9 @@ export default class SVGProjectPlaceholder extends Component {
         width={134}
         height={134}
         className={this.classes(className)}
-        aria-label={this.ariaLabel}
+        role="img"
       >
+        {this.ariaLabel && <title>{this.ariaLabel}</title>}
         <g fill="none" fillRule="evenodd">
           <g
             className={`${this.blockClass}__frame`}

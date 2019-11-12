@@ -366,13 +366,16 @@ exports[`Backend Project General Container renders correctly 1`] = `
                     className="preview"
                   >
                     <svg
-                      aria-label="Default Project Thumbnail"
                       className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--primary"
                       height={134}
+                      role="img"
                       viewBox="0 0 134 134"
                       width={134}
                       xmlns="http://www.w3.org/2000/svg"
                     >
+                      <title>
+                        Default Project Thumbnail
+                      </title>
                       <g
                         fill="none"
                         fillRule="evenodd"
@@ -450,13 +453,16 @@ exports[`Backend Project General Container renders correctly 1`] = `
                       </g>
                     </svg>
                     <svg
-                      aria-label="Default Project Thumbnail"
+                      aria-hidden={true}
                       className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--primary"
                       height="100%"
                       viewBox="0 0 48 48"
                       width="100%"
                       xmlns="http://www.w3.org/2000/svg"
                     >
+                      <title>
+                        Default Project Thumbnail
+                      </title>
                       <g
                         fill="none"
                         fillRule="evenodd"
@@ -521,11 +527,6 @@ exports[`Backend Project General Container renders correctly 1`] = `
                         </g>
                       </g>
                     </svg>
-                    <span
-                      className="screen-reader-text"
-                    >
-                      Default Project Thumbnail
-                    </span>
                   </div>
                 </div>
                 <div
