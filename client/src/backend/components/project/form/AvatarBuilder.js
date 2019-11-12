@@ -68,8 +68,14 @@ class AvatarBuilder extends Component {
 
   renderCoverImage(image) {
     if (!image) return null;
+    const title = this.props.getModelValue("attributes[title]");
     return (
-      <div className="preview" style={{ backgroundImage: `url(${image})` }} />
+      <div
+        role="img"
+        aria-label={`Thumbnail for ${title}`}
+        className="preview"
+        style={{ backgroundImage: `url(${image})` }}
+      />
     );
   }
 
