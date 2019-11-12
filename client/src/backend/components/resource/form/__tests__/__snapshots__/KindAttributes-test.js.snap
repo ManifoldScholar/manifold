@@ -55,7 +55,6 @@ exports[`Backend.Resource.Form.KindAttributes component when kind is audio rende
             className="primary"
           >
             <button
-              aria-hidden={true}
               className="form-dropzone__inline-button"
               tabIndex="-1"
               type="button"

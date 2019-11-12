@@ -41,7 +41,6 @@ export default class FormUploadEmpty extends PureComponent {
                 <button
                   type="button"
                   className="form-dropzone__inline-button"
-                  aria-hidden
                   tabIndex="-1"
                 >
                   {"Upload a file"}

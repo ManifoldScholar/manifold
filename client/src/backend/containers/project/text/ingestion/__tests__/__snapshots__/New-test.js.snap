@@ -75,7 +75,6 @@ exports[`Project Text Ingestion New Container renders correctly 1`] = `
                     className="primary"
                   >
                     <button
-                      aria-hidden={true}
                       className="form-dropzone__inline-button"
                       tabIndex="-1"
                       type="button"
