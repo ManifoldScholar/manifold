@@ -86,7 +86,6 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
               className="primary"
             >
               <button
-                aria-hidden={true}
                 className="form-dropzone__inline-button"
                 tabIndex="-1"
                 type="button"

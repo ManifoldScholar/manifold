@@ -127,7 +127,6 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                             className="primary"
                           >
                             <button
-                              aria-hidden={true}
                               className="form-dropzone__inline-button"
                               tabIndex="-1"
                               type="button"
@@ -209,7 +208,6 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                             className="primary"
                           >
                             <button
-                              aria-hidden={true}
                               className="form-dropzone__inline-button"
                               tabIndex="-1"
                               type="button"
@@ -291,7 +289,6 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                             className="primary"
                           >
                             <button
-                              aria-hidden={true}
                               className="form-dropzone__inline-button"
                               tabIndex="-1"
                               type="button"
@@ -373,7 +370,6 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                             className="primary"
                           >
                             <button
-                              aria-hidden={true}
                               className="form-dropzone__inline-button"
                               tabIndex="-1"
                               type="button"
