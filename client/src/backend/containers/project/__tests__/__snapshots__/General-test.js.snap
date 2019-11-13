@@ -561,7 +561,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           <span
                             className="screen-reader-text"
                           >
-                            Primary Background Color
+                            Green
                           </span>
                           <input
                             checked={true}
@@ -599,7 +599,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           <span
                             className="screen-reader-text"
                           >
-                            Secondary Background Color
+                            Gray
                           </span>
                           <input
                             checked={false}
@@ -622,7 +622,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           <span
                             className="screen-reader-text"
                           >
-                            Tertiary Background Color
+                            Blue
                           </span>
                           <input
                             checked={false}
@@ -645,7 +645,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           <span
                             className="screen-reader-text"
                           >
-                            Quaternary Background Color
+                            Orange
                           </span>
                           <input
                             checked={false}
@@ -668,7 +668,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           <span
                             className="screen-reader-text"
                           >
-                            Quinary Background Color
+                            Violet
                           </span>
                           <input
                             checked={false}
@@ -691,7 +691,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           <span
                             className="screen-reader-text"
                           >
-                            Sentary Background Color
+                            White
                           </span>
                           <input
                             checked={false}
