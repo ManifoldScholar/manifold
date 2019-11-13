@@ -21,32 +21,32 @@ export default class ColorPicker extends Component {
     const avatarColors = [
       {
         value: "primary",
-        label: "Primary Background Color",
+        label: "Green",
         className: "color-picker__item--primary"
       },
       {
         value: "secondary",
-        label: "Secondary Background Color",
+        label: "Gray",
         className: "color-picker__item--secondary"
       },
       {
         value: "tertiary",
-        label: "Tertiary Background Color",
+        label: "Blue",
         className: "color-picker__item--tertiary"
       },
       {
         value: "quaternary",
-        label: "Quaternary Background Color",
+        label: "Orange",
         className: "color-picker__item--quaternary"
       },
       {
         value: "quinary",
-        label: "Quinary Background Color",
+        label: "Violet",
         className: "color-picker__item--quinary"
       },
       {
         value: "sentary",
-        label: "Sentary Background Color",
+        label: "White",
         className: "color-picker__item--sentary"
       }
     ];
