@@ -63,7 +63,7 @@ export default class Block extends PureComponent {
             <Utility.IconComposer icon="annotate32" size={26} />
           </button>
         </div>
-        <Collapse isOpened={this.open} hasNestedCollapse>
+        <Collapse isOpened={this.open}>
           <div className="hero-builder-block__body">{this.props.children}</div>
         </Collapse>
       </div>
