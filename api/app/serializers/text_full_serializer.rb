@@ -27,4 +27,9 @@ class TextFullSerializer < TextSerializer
     object.last_finished_ingestion&.source_url
   end
 
+  def sections_map
+    sections_ids = object.spine & object.text_sections.pluck(:id)
+    sections_ids.map { |id| Hash[id: id.to_s, name: object.text_sections.find(id).name] }
+  end
+
 end

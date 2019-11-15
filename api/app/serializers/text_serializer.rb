@@ -16,11 +16,6 @@ class TextSerializer < ApplicationSerializer
     object.start_text_section_id || object.spine[0] || object.text_sections.first.try(:id)
   end
 
-  def sections_map
-    sections_ids = object.spine & object.text_sections.pluck(:id)
-    sections_ids.map { |id| Hash[id: id.to_s, name: object.text_sections.find(id).name] }
-  end
-
   def annotations_count
     object.annotations.only_annotations.count
   end
