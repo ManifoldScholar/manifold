@@ -46,10 +46,7 @@ export default class Group extends Component {
     });
 
     return (
-      <Collapse
-        isOpened={this.state.expanded}
-        springConfig={{ stiffness: 270 }}
-      >
+      <Collapse isOpened={this.state.expanded}>
         <ul className={classes}>
           {annotations.map(annotation => {
             return (

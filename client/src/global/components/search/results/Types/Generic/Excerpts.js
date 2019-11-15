@@ -38,8 +38,8 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
     return isArray(this.allExcerpts) && this.allExcerpts.length > 0;
   }
 
-  holdScroll = ({ height }) => {
-    if (height !== 0) return;
+  holdScroll = ({ contentHeight }) => {
+    if (contentHeight !== 0) return;
     this.scrollTarget.current.scrollIntoView({ block: "center" });
   };
 
@@ -79,7 +79,8 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
         <Collapse
           className={expandedClass}
           isOpened={this.state.open}
-          onMeasure={this.holdScroll}
+          onWork={this.holdScroll}
+          onRest={this.holdScroll}
         >
           <div className="search-result__excerpt-shim" />
           {this.expandedExcerpts.map(excerpt => (
