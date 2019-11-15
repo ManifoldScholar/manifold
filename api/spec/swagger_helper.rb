@@ -11,7 +11,8 @@ require "api_docs/helpers/request"
 include_dirs = [
   "api_docs/examples/*.rb",
   "api_docs/definitions/types/*.rb",
-  "api_docs/definitions/resources/*.rb"
+  "api_docs/definitions/resources/*.rb",
+  "../app/serializers/*.rb"
 ]
 
 include_dirs.each do |include_dir|

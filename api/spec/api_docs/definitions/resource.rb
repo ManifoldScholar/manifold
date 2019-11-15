@@ -1,27 +1,31 @@
 module ApiDocs
   module Definition
     module Resource
-      def resource_response
+      def data_properties(partial: false)
+        Type.object( properties: {
+          id: Type.id,
+          type: Type.string(example: type),
+          attributes: Type.object(properties: response_attributes(partial: partial)),
+          relationships: Type.object(properties: response_relationships(partial: partial)),
+          meta: Type.meta
+        })
+      end
+
+      def resource_response(partial: false)
         definition = Type.object(
           properties: {
-            data: Type.object(properties: {
-                                id: Type.id,
-                                type: Type.string(example: type),
-                                attributes: Type.object(properties: response_attributes),
-                                relationships: response_relationships,
-                                meta: Type.meta
-                              })
+            data: data_properties(partial: partial)
           }
         )
         debug(__callee__, definition)
         transform_keys(definition)
       end
 
-      def collection_response
+      def collection_response(partial: false)
         definition = Type.object(
           properties: {
             data: Type.array(
-              items: collection_resource_response || resource_response
+              items: collection_resource_response || data_properties(partial: partial)
             )
           }
         )
@@ -57,11 +61,17 @@ module ApiDocs
         nil
       end
 
-      def response_relationships
-        Type.object(properties: self::RELATIONSHIPS)
+      def response_relationships(partial: false)
+        return self::RELATIONSHIPS.slice(*self::PARTIAL_RELATIONSHIPS) if const_defined?(:PARTIAL_RELATIONSHIPS) and partial
+        self::RELATIONSHIPS
       end
 
-      def response_attributes
+      def response_attributes(partial: false)
+        if partial
+          return self::ATTRIBUTES.slice(*self::PARTIAL) if const_defined?(:PARTIAL)
+          return serializer_attributes if serializer.respond_to?(:introspect_abilities)
+        end
+
         self::ATTRIBUTES.except(*self::WRITE_ONLY)
       end
 
@@ -101,6 +111,14 @@ module ApiDocs
       end
 
       private
+
+      def serializer
+        ActiveModel::Serializer.serializer_for(self.name.constantize)
+      end
+
+      def serializer_attributes
+        self::ATTRIBUTES.slice(*serializer.introspect_abilities)
+      end
 
       def make_request(callee, attributes)
         required = case callee

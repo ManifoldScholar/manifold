@@ -5,6 +5,12 @@ class ApplicationSerializer < ActiveModel::Serializer
 
   meta(partial: false)
 
+  class << self
+    def introspect_abilities
+      _attributes
+    end
+  end
+
   def abilities
     object.serialized_abilities_for(current_user)
   end

@@ -26,6 +26,10 @@ module ApiDocs
         @options[:auth_type]
       end
 
+      def partial
+        !!@options[:partial]
+      end
+
       def model
         @options[:model]
       end
@@ -122,7 +126,11 @@ module ApiDocs
       end
 
       def response
-        resource_klass(resource_name).send(definition_name(@action, :response))
+        klass = resource_klass(resource_name)
+        args = {}
+        args[:partial] = partial if partial
+
+        klass.send(definition_name(@action, :response), args)
       end
     end
   end
