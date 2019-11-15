@@ -3,6 +3,7 @@ module ApiDocs
     class Request
 
       include Helpers::Inflections
+      include Helpers::DescriptionBuilder
 
       def content_type
         "application/json"
@@ -23,32 +24,6 @@ module ApiDocs
 
       def auth_type
         @options[:auth_type]
-      end
-
-      def summary
-        return @options[:summary] if @options[:summary]
-
-        return I18n.t("swagger.#{@action}.description", type: human_resource_name_plural, attribute: "ID") if @action == :index
-        I18n.t("swagger.#{@action}.description", type: human_resource_name, attribute: "ID")
-      end
-
-      def response_description?
-        !!response_description
-      end
-
-      def response_description
-        description || body_response_description
-      end
-
-      def description
-        @options[:description]
-      end
-
-      def success_description
-        return @options[:success_description] if @options[:success_description]
-
-        return I18n.t("swagger.#{@action}.success", type: human_resource_name, attribute: "ID") if @action == :index
-        I18n.t("swagger.#{@action}.success", type: human_resource_name, attribute: "ID")
       end
 
       def model
@@ -77,14 +52,6 @@ module ApiDocs
 
       def resource_tag
         resource_name.pluralize.humanize.titleize
-      end
-
-      def human_resource_name
-        resource_name.camelize
-      end
-
-      def human_resource_name_plural
-        human_resource_name.pluralize
       end
 
       def tags
@@ -148,20 +115,6 @@ module ApiDocs
           { name: :id, in: :path, type: :string },
           { name: :body, in: :body, description: body_request_description, schema: request }
         ]
-      end
-
-      def body_request_description
-        klass = resource_klass(resource_name)
-        return "" unless klass.const_defined?(:BODY_REQUEST_DESCRIPTION)
-
-        klass.const_get(:BODY_REQUEST_DESCRIPTION)
-      end
-
-      def body_response_description
-        klass = resource_klass(resource_name)
-        return nil unless klass.const_defined?(:BODY_RESPONSE_DESCRIPTION)
-
-        klass.const_get(:BODY_RESPONSE_DESCRIPTION)
       end
 
       def request

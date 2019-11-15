@@ -5,6 +5,7 @@ require "api_docs/definitions/type"
 require "api_docs/definitions/types/abstract_type"
 require "api_docs/definitions/types/object"
 require "api_docs/helpers/inflections"
+require "api_docs/helpers/description_builder"
 require "api_docs/helpers/request"
 
 include_dirs = [
