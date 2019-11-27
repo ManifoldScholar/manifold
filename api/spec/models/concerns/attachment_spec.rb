@@ -1,8 +1,9 @@
 require "rails_helper"
 require "with_model"
-include ActiveJob::TestHelper
 
 RSpec.describe Attachments do
+  include ActiveJob::TestHelper
+
   with_model :AttachableClass do
     table do |t|
       t.string :attached_file_name
@@ -21,6 +22,7 @@ RSpec.describe Attachments do
       manifold_has_attached_file :resource, :resource
     end
   end
+
   let(:instance) do
     instance = AttachableClass.new
     instance.attached = fixture_file_upload(Rails.root.join('spec', 'data','assets','images','test_avatar.jpg'))
@@ -124,20 +126,20 @@ RSpec.describe Attachments do
                                                                        :small_portrait => {:width=>200, :height=>320},
                                                                        :small_square => {:width=>320, :height=>320} }
     include_examples "an Attachment defined method", :manifold_attachment_image_styles, { :large_landscape => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"1280x800.0^", :extent=>"1280x800.0^"},
-                                                                                          :medium => {:geometry=>"640x640", :convert=>"jpg", :background=>"none", :gravity=>"north"},
+                                                                                          :medium => {:resize=>"640x640", :convert=>"jpg", :background=>"none", :gravity=>"north"},
                                                                                           :medium_landscape => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"640x400^", :extent=>"640x400"},
                                                                                           :medium_portrait => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"400.0x640^", :extent=>"400"},
                                                                                           :medium_square => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"640x640^", :extent=>"640x640"},
-                                                                                          :small => {:geometry=>"320x320", :convert=>"jpg", :background=>"none", :gravity=>"north"},
+                                                                                          :small => {:resize=>"320x320", :convert=>"jpg", :background=>"none", :gravity=>"north"},
                                                                                           :small_landscape => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"320x200^", :extent=>"320x200"},
                                                                                           :small_portrait => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"200x320^", :extent=>"200x320"},
                                                                                           :small_square => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"320x320^", :extent=>"320x320"} }
     include_examples "an Attachment defined method", :manifold_attachment_alpha_styles, { :large_landscape => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"1280x800.0^", :extent=>"1280x800.0^"},
-                                                                                          :medium => {:geometry=>"640x640", :convert=>"png", :background=>"none", :gravity=>"north"},
+                                                                                          :medium => {:resize=>"640x640", :convert=>"png", :background=>"none", :gravity=>"north"},
                                                                                           :medium_landscape => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"640x400^", :extent=>"640x400"},
                                                                                           :medium_portrait => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"400.0x640^", :extent=>"400"},
                                                                                           :medium_square => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"640x640^", :extent=>"640x640"},
-                                                                                          :small => {:geometry=>"320x320", :convert=>"png", :background=>"none", :gravity=>"north"},
+                                                                                          :small => {:resize=>"320x320", :convert=>"png", :background=>"none", :gravity=>"north"},
                                                                                           :small_landscape => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"320x200^", :extent=>"320x200"},
                                                                                           :small_portrait => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"200x320^", :extent=>"200x320"},
                                                                                           :small_square => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"320x320^", :extent=>"320x320"} }
