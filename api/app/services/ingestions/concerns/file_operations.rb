@@ -1,17 +1,16 @@
-# This class provides a set of file operations used during the ingestion process.
-# It allows us to perform operations by providing paths relative to the working
-# ingestion root dir.
-
-require "zip"
-require "securerandom"
-require "fileutils"
-
 module Ingestions
   module Concerns
+    # This class provides a set of file operations used during the ingestion process.
+    # It allows us to perform operations by providing paths relative to the working
+    # ingestion root dir.
     module FileOperations
       extend ActiveSupport::Concern
 
-      WORKING_DIR_BASE = Rails.root.join("tmp", "ingestion")
+      WORKING_DIR_BASE = Rails.root.join(
+        "tmp",
+        Rails.env.test? ? "ingestion-test#{ENV['TEST_ENV_NUMBER']}" : "ingestion"
+      )
+
       EXTRACTION_REJECTION_PATTERNS = {
         directory: {
           hidden: ".*?"

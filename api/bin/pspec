@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+app_root="$(realpath "$(dirname "$0")/..")"
+
+cd "$app_root"
+
+exec bin/parallel_rspec --serialize-stdout --combine-stderr --runtime-log tmp/parallel_runtime_rspec.log spec

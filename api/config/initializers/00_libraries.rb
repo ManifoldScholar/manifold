@@ -5,5 +5,6 @@ require "auth_token"
 require "middleware/omniauth_stack"
 require "our_types/indifferent_hash"
 require "scanf"
+require "zip"
 
 ActiveRecord::Type.register :indifferent_hash, OurTypes::IndifferentHash
