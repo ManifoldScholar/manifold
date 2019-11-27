@@ -74,11 +74,11 @@ RSpec.configure do |config|
   end
 
   config.after(:suite) do
-    ingestion_dir = Rails.root.join("tmp", "ingestion")
+    ingestion_dir = Ingestions::Concerns::FileOperations::WORKING_DIR_BASE
+
     next unless File.directory? ingestion_dir
-    ingestion_dir.children.each do |child|
-      child.rmtree
-    end
+
+    ingestion_dir.each_child(&:rmtree)
   end
 
   # Allow elastic search for tests tagged with elasticsearch
@@ -92,5 +92,4 @@ RSpec.configure do |config|
       example.run
     end
   end
-
 end

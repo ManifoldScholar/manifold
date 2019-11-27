@@ -1,0 +1,6 @@
+--color
+--require spec_helper
+--require rails_helper
+--format progress
+--format ParallelTests::RSpec::RuntimeLogger --out tmp/parallel_runtime_rspec.log
+--format ParallelTests::RSpec::FailuresLogger --out tmp/failing_specs.log

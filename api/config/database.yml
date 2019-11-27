@@ -34,4 +34,4 @@ development:
 
 test:
   <<: *common
-  database: <%= test_db %>
+  database: <%= test_db %><%= ENV["TEST_ENV_NUMBER"] %>
