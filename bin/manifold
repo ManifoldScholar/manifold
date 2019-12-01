@@ -47,7 +47,7 @@ Clamp do
     option "--no-api", :flag, "do not start API"
     option "--no-worker", :flag, "do not start background worker"
     option "--no-cable", :flag, "do not start the websocket (action cable) server"
-    option "--no-clockwork", :flag, "do not start clockwork"
+    option "--no-zhong", :flag, "do not start zhong"
     option "--no-client", :flag, "do not start client"
     option "--no-hmr", :flag, "do not enable client HMR"
     option "--no-elasticsearch", :flag, "do not enable Elasticsearch"
@@ -60,49 +60,49 @@ Clamp do
         env = no_hmr? ? "DISABLE_HMR=1 " : ""
         api_num = no_api? ? 0 : 1
         worker_num = no_worker? ? 0 : 1
-        clockwork_num = no_clockwork? ? 0 : 1
+        zhong_num = no_zhong? ? 0 : 1
         client_num = no_client? ? 0 : 1
         cable_num = no_cable? ? 0 : 1
         elastic = no_elasticsearch? ? 0 : 1
-        exec "#{env}foreman start -m api=#{api_num},worker=#{worker_num},clockwork=#{clockwork_num},client=#{client_num},cable=#{cable_num},elastic=#{elastic}"
+        exec "#{env}foreman start -m api=#{api_num},worker=#{worker_num},zhong=#{zhong_num},client=#{client_num},cable=#{cable_num},elastic=#{elastic}"
       end
 
     end
 
     subcommand ["backend"], "Start all backend services" do
       def execute
-        exec "foreman start -m elastic=1,cable=1,api=1,worker=1,clockwork=1,client=0"
+        exec "foreman start -m elastic=1,cable=1,api=1,worker=1,zhong=1,client=0"
       end
     end
 
     subcommand ["api"], "Start API service" do
       def execute
-        exec "foreman start -m cable=0,api=1,worker=0,clockwork=0,client=0,elastic=0"
+        exec "foreman start -m cable=0,api=1,worker=0,zhong=0,client=0,elastic=0"
       end
     end
 
     subcommand ["cable"], "Start Action Cable service" do
       def execute
-        exec "foreman start -m cable=1,api=0,worker=0,clockwork=0,client=0,elastic=0"
+        exec "foreman start -m cable=1,api=0,worker=0,zhong=0,client=0,elastic=0"
       end
     end
 
 
     subcommand ["worker"], "Start Worker service" do
       def execute
-        exec "foreman start -m cable=0,api=0,worker=1,clockwork=0,client=0,elastic=0"
+        exec "foreman start -m cable=0,api=0,worker=1,zhong=0,client=0,elastic=0"
       end
     end
 
-    subcommand ["clockwork"], "Start Clockwork service" do
+    subcommand ["zhong"], "Start Clockwork service" do
       def execute
-        exec "foreman start -m cable=0,api=0,worker=0,clockwork=1,client=0,elastic=0"
+        exec "foreman start -m cable=0,api=0,worker=0,zhong=1,client=0,elastic=0"
       end
     end
 
     subcommand ["elasticsearch"], "Start Elasticsearch service" do
       def execute
-        exec "foreman start -m cable=0,api=0,worker=0,clockwork=0,client=0,elastic=1"
+        exec "foreman start -m cable=0,api=0,worker=0,zhong=0,client=0,elastic=1"
       end
     end
     subcommand ["client", "frontend"], "Start Client service" do
@@ -111,7 +111,7 @@ Clamp do
 
       def execute
         env = nohmr? ? "DISABLE_HMR=1 " : ""
-        exec "#{env}foreman start -m cable=0,api=0,worker=0,clockwork=0,client=1,elastic=0"
+        exec "#{env}foreman start -m cable=0,api=0,worker=0,zhong=0,client=1,elastic=0"
       end
     end
 
