@@ -43,7 +43,7 @@ class Resource < ApplicationRecord
   has_sort_title :sort_title_candidate
 
   # Associations
-  belongs_to :project
+  belongs_to :project, counter_cache: true
   has_one :thumbnail_fetch_attempt, dependent: :destroy
   has_one :resource_created_event, -> { where event_type: EventType[:resource_added] },
           class_name: "Event",
