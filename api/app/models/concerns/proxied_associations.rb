@@ -66,6 +66,19 @@ module Concerns
       def configure_association(**options)
         reference_configurations << Content::ReferenceConfiguration.new(**options)
         build_association_getter options.dig(:name)
+        build_assocciation_id_getter(options.dig(:name))
+      end
+
+      def build_assocciation_id_getter(name)
+        singular_name = name.to_s.singularize
+        class_eval <<~RUBY, __FILE__, __LINE__ + 1
+          def #{singular_name}_id
+            association = reference_associations[:#{name}]
+            return association&.pluck(:id) if association.is_a? Array
+            association&.id
+          end
+          alias_method "#{singular_name}_ids", "#{singular_name}_id"
+        RUBY
       end
 
       def build_association_getter(name)
