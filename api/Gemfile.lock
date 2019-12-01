@@ -99,9 +99,6 @@ GEM
     classy_enum (4.0.0)
       activerecord (>= 3.2)
     cleanroom (1.0.0)
-    clockwork (2.0.4)
-      activesupport
-      tzinfo
     closure_tree (7.0.0)
       activerecord (>= 4.2.10)
       with_advisory_lock (>= 4.0.0)
@@ -269,6 +266,7 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    mustermann (1.0.3)
     namae (1.0.1)
     naught (1.1.0)
     nio4r (2.5.1)
@@ -468,6 +466,11 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
+    sinatra (2.0.7)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.7)
+      tilt (~> 2.0)
     slop (3.6.0)
     spring (2.1.0)
     spring-commands-rspec (1.0.4)
@@ -487,6 +490,7 @@ GEM
     systemu (2.6.5)
     thor (0.19.4)
     thread_safe (0.3.6)
+    tilt (2.0.10)
     timecop (0.9.1)
     tus-server (2.3.0)
       content_disposition (~> 1.0)
@@ -529,6 +533,11 @@ GEM
     with_model (2.1.2)
       activerecord (>= 4.2, < 6.0)
     yard_types (0.2.0)
+    zhong (0.2.4)
+      activesupport
+      redis
+      suo
+      tzinfo
 
 PLATFORMS
   ruby
@@ -550,7 +559,6 @@ DEPENDENCIES
   citeproc-ruby (~> 1.1.0)
   classy_enum (~> 4.0.0)
   cleanroom
-  clockwork (~> 2.0.0)
   closure_tree (~> 7.0)
   colorize (~> 0.8.0)
   csl-styles (~> 1.0)
@@ -629,6 +637,7 @@ DEPENDENCIES
   sidekiq (~> 5.0)
   signet (~> 0.8.0)
   simplecov
+  sinatra (~> 2.0)
   spring (~> 2.0)
   spring-commands-rspec (~> 1.0)
   statesman (~> 3.4.1)
@@ -643,6 +652,7 @@ DEPENDENCIES
   webmock (~> 3.0)
   with_advisory_lock (~> 4.0)
   with_model (~> 2.1)
+  zhong (~> 0.2)
 
 BUNDLED WITH
    1.17.2
