@@ -43,10 +43,9 @@ module Api
       def render_multiple_resources(models, **options)
         options[:each_serializer] ||= model_serializer
         options[:location]        ||= build_location_for(models)
-        options[:meta]            ||= build_meta_for(models)
         options[:json] = models
-
-        render options
+        options[:full] = false
+        render_jsonapi models, options
       end
 
       # @param [ActiveRecord::Base] model
@@ -59,10 +58,9 @@ module Api
         options[:serializer] ||= model_serializer
         options[:serializer] = error_serializer if (action_name == "update" || action_name == "create") && !model.valid?
         options[:location] ||= build_location_for model
-        options[:meta] ||= build_meta_for(model)
         options[:status] ||= build_status_for model, ok_status, error_status
-        options[:json] = model
-        render options
+        options[:full] = true
+        render_jsonapi model, options
       end
       # rubocop:enable Metrics/LineLength, Metrics/AbcSize
 
@@ -71,12 +69,6 @@ module Api
       # @api private
       def auditing_security?
         !Rails.env.production?
-      end
-
-      def build_meta_for(model)
-        meta = {}
-        meta[:pagination] = pagination_dict(model) if model.respond_to?(:current_page)
-        meta
       end
 
       # @api private
@@ -140,7 +132,7 @@ module Api
 
           self.model_klass      = resource_configuration.model
           self.model_serializer = detect_model_serializer
-          self.error_serializer = ActiveModel::Serializer::ErrorSerializer
+          self.error_serializer = ::V1::ErrorSerializer
         end
 
         # @return [String]

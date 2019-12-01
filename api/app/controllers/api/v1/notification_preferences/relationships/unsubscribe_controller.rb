@@ -7,13 +7,8 @@ module Api
 
           def create
             outcome = Notifications::Unsubscribe.run token: params.dig("token")
-            if outcome.valid?
-              render_single_resource outcome.result
-            else
-              render json:  outcome,
-                     serializer: ActiveModel::Serializer::ErrorSerializer,
-                     status: :unprocessable_entity
-            end
+            outcome.valid?
+            render_single_resource outcome.result
           end
 
         end

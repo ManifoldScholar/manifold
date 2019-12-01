@@ -17,8 +17,8 @@ module Api
             @versions = load_versions
             render_multiple_resources(
               @versions,
-              each_serializer: VersionSerializer,
-              location: api_v1_project_relationships_versions_url(@project)
+              location: api_v1_project_relationships_versions_url(@project),
+              serializer: ::V1::VersionSerializer
             )
           end
 

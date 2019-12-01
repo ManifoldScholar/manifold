@@ -18,7 +18,7 @@ class ReadingGroup < ApplicationRecord
   # rubocop:disable Rails/HasManyOrHasOneDependent
   has_one :reading_group_count
   # rubocop:enable Rails/HasManyOrHasOneDependent
-  has_many :texts, -> { distinct }, through: :annotations
+  has_many :texts, -> { group(:id) }, through: :annotations
 
   delegate :annotations_count, to: :reading_group_count
   delegate :highlights_count, to: :reading_group_count

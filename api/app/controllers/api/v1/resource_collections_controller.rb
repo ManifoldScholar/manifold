@@ -3,8 +3,6 @@ module Api
     # Collections controller
     class ResourceCollectionsController < ApplicationController
 
-      INCLUDES = [:project, :resources].freeze
-
       resourceful! ResourceCollection, authorize_options: { except: [:index, :show] } do
         ResourceCollection.filter(with_pagination!(resource_collection_filter_params))
       end
@@ -13,15 +11,14 @@ module Api
       def index
         @collections = load_resource_collections
         render_multiple_resources(
-          @collections,
-          each_serializer: ResourceCollectionSerializer
+          @collections
         )
       end
 
       # GET /collections/1
       def show
         @collection = load_resource_collection
-        render_single_resource(@collection, include: INCLUDES)
+        render_single_resource(@collection, include: includes)
       end
 
       # POST /collections
@@ -34,7 +31,7 @@ module Api
       def update
         @collection = load_and_authorize_resource_collection
         ::Updaters::ResourceCollection.new(resource_collection_params).update(@collection)
-        render_single_resource(@collection, include: INCLUDES)
+        render_single_resource(@collection, include: includes)
       end
 
       # DELETE /projects/1
@@ -44,6 +41,10 @@ module Api
       end
 
       private
+
+      def includes
+        [:project, :resources]
+      end
 
       def scope_for_resource_collections
         ResourceCollection.friendly

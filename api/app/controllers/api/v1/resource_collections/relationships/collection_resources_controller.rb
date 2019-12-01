@@ -22,7 +22,6 @@ module Api
             render_multiple_resources(
               @collection_resources,
               include: %w(resource),
-              each_serializer: CollectionResourceSerializer,
               meta: { pagination: pagination_dict(@collection_resources) },
               location: LOCATION
             )

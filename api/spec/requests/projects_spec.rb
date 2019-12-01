@@ -13,6 +13,18 @@ RSpec.describe "Projects API", type: :request do
         expect(response).to have_http_status(200)
       end
     end
+
+    describe "it allows searching by keyword", :elasticsearch do
+      before(:each) do
+        FactoryBot.create(:project, title: "foo")
+        path = api_v1_projects_path(params: { filter: { keyword: "foo" } })
+        get path, headers: reader_headers
+      end
+
+      it "has a 200 status code" do
+        expect(response).to have_http_status(200)
+      end
+    end
   end
 
   describe "sends a single project" do

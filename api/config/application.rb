@@ -77,6 +77,7 @@ module ManifoldApi
     config.eager_load_paths += [
       "#{config.root}/app/jobs",
       "#{config.root}/app/services",
+      "#{config.root}/app/serializers",
       "#{config.root}/app/presenters",
       "#{config.root}/app/lib",
       "#{config.root}/app/enums"

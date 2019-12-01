@@ -5,13 +5,11 @@ module Api
 
       before_action :authenticate_request!
 
-      INCLUDES = %w(favorites makers).freeze
-
       def show
         if current_user
-          render json: current_user,
-                 include: INCLUDES,
-                 serializer: CurrentUserSerializer
+          render_jsonapi current_user,
+                         serializer: ::V1::CurrentUserSerializer,
+                         include: includes
         else
           render status: :unauthorized
         end
@@ -20,15 +18,22 @@ module Api
       def update
         ::Updaters::User.new(user_params).update(current_user)
         if current_user.valid?
-          render json: current_user,
-                 include: INCLUDES,
-                 serializer: CurrentUserSerializer
+          render_jsonapi current_user,
+                         serializer: ::V1::CurrentUserSerializer,
+                         include: includes
         else
-          render json: current_user,
-                 serializer: ActiveModel::Serializer::ErrorSerializer,
-                 status: :unprocessable_entity
+          render_jsonapi current_user,
+                         serializer: ::V1::ErrorSerializer,
+                         status: :unprocessable_entity
         end
       end
+
+      private
+
+      def includes
+        [:favorites]
+      end
+
     end
   end
 end

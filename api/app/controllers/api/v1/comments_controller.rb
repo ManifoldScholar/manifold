@@ -3,7 +3,6 @@ module Api
     # Comments controller
     class CommentsController < ApplicationController
       before_action :set_subject
-      INCLUDES = %w(creator).freeze
 
       resourceful! Comment, authorize_options: { except: [:index, :show] } do
         Comment.filter(
@@ -16,8 +15,7 @@ module Api
         @comments = load_comments
         render_multiple_resources(
           @comments,
-          include: %w(creator),
-          each_serializer: CommentSerializer,
+          include: includes,
           location: index_location
         )
       end
@@ -35,7 +33,7 @@ module Api
         render_single_resource(
           @comment,
           location: comment_location(@comment),
-          include: %w(creator)
+          include: includes
         )
       end
 
@@ -54,6 +52,10 @@ module Api
       end
 
       private
+
+      def includes
+        [:creator]
+      end
 
       def comment_location(comment)
         if comment.subject_type == "Annotation"

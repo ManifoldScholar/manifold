@@ -82,6 +82,7 @@ class Text < ApplicationRecord
   delegate :title_plaintext, to: :title_main, allow_nil: true
   delegate :subtitle_formatted, to: :title_subtitle, allow_nil: true
   delegate :subtitle_plaintext, to: :title_subtitle, allow_nil: true
+  delegate :social_image, to: :project
 
   # Validation
   validates :spine,
@@ -118,6 +119,10 @@ class Text < ApplicationRecord
   # We don't want to index those orphaned texts.
   def should_index?
     project.present?
+  end
+
+  def age
+    (Time.zone.today - created_at.to_date).to_i
   end
 
   def search_data
@@ -190,6 +195,10 @@ class Text < ApplicationRecord
     text_sections.find_by(position: position)
   end
 
+  def calculated_start_text_section_id
+    start_text_section_id || spine[0] || text_sections.first.try(:id)
+  end
+
   def find_text_section_by_source_path(path)
     source = ingestion_sources.find_by(source_path: path)
     return unless source
@@ -223,6 +232,14 @@ class Text < ApplicationRecord
     title
   end
 
+  def annotations_count
+    annotations.only_annotations.count
+  end
+
+  def highlights_count
+    annotations.only_highlights.count
+  end
+
   private
 
   def category_list_scope
@@ -233,11 +250,4 @@ class Text < ApplicationRecord
     Event.trigger(EventType[:text_added], self) if project
   end
 
-  def annotations_count
-    annotations.only_annotations.count
-  end
-
-  def highlights_count
-    annotations.only_highlights.count
-  end
 end

@@ -16,8 +16,7 @@ module Api
 
           def index
             @collections = load_resource_collections
-            render_multiple_resources(@collections,
-                                      each_serializer: ResourceCollectionSerializer)
+            render_multiple_resources(@collections)
           end
 
           def create

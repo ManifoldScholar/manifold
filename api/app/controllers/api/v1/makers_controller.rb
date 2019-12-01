@@ -10,8 +10,7 @@ module Api
       def index
         @makers = load_makers
         render_multiple_resources(
-          @makers,
-          each_serializer: MakerSerializer
+          @makers
         )
       end
 

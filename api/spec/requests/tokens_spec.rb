@@ -1,12 +1,10 @@
 require "rails_helper"
 
 RSpec.describe "Tokens API", type: :request do
-
   include_context("authenticated request")
   include_context("param helpers")
 
   describe "creates a token" do
-
     let(:path) { api_v1_tokens_path }
     let(:params) { { email: reader.email, password: password } }
     let(:invalid_params) { { email: reader.email, password: "boogers" } }
@@ -27,8 +25,13 @@ RSpec.describe "Tokens API", type: :request do
       it "contains the user" do
         type = api_response["data"]["type"]
         id = api_response["data"]["id"]
-        expect(type).to eq ("users")
+        expect(type).to eq "users"
         expect(id).to eq(reader.id)
+      end
+
+      it "includes private data such as the user's role" do
+        role = api_response["data"]["attributes"]["role"]
+        expect(role).to eq "reader"
       end
     end
 
@@ -49,6 +52,5 @@ RSpec.describe "Tokens API", type: :request do
         end
       end
     end
-
   end
 end

@@ -83,7 +83,7 @@ class ContentBlock < ApplicationRecord
 
   class << self
     def serializer
-      "#{name}Serializer".constantize
+      "::V1::#{name}Serializer".constantize
     end
 
     # rubocop:disable Naming/PredicateName

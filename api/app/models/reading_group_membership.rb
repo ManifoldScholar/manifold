@@ -14,6 +14,8 @@ class ReadingGroupMembership < ApplicationRecord
   has_one :reading_group_membership_count
   # rubocop:enable Rails/HasManyOrHasOneDependent
 
+  delegate :full_name, to: :user, prefix: true
+  delegate :anonymous?, to: :reading_group, prefix: true
   delegate :annotations_count, to: :reading_group_membership_count, allow_nil: true
   delegate :highlights_count, to: :reading_group_membership_count, allow_nil: true
 

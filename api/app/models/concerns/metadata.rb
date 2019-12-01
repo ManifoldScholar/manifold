@@ -32,12 +32,16 @@ module Metadata
   end
 
   class_methods do
+    def camelized_metadata_properties
+      @camelized_metadata_properties
+    end
+
     def metadata_properties
       @metadata_properties
     end
 
     def with_metadata(properties)
-      attr_reader :metadata_properties
+      attr_reader :metadata_properties, :camelized_metadata_properties
 
       @metadata_properties = properties
       has_formatted_attributes(properties&.map(&:to_sym),
@@ -47,6 +51,7 @@ module Metadata
 
       after_initialize do
         @metadata_properties = properties
+        @camelized_metadata_properties = properties.map { |p| p.camelize(:lower) }
       end
 
       before_save do

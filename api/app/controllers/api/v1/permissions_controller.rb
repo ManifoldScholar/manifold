@@ -2,21 +2,19 @@ module Api
   module V1
     class PermissionsController < ApplicationController
 
-      INCLUDES = %w(user).freeze
-
       resourceful! Permission, authorize_options: {
         except: [:index, :create, :show, :update, :destroy]
       }
 
       def index
         authorize_action_for Permission, for: parent_resource
-        render json: permissions_scope.all
+        render_multiple_resources permissions_scope.all
       end
 
       def show
         permission = load_permission
         authorize_action_for permission
-        render json: permission
+        render_single_resource permission
       end
 
       def create
@@ -26,7 +24,7 @@ module Api
         outcome = Permissions::Save.run permission: permission
         render_single_resource outcome.result,
                                location: location(outcome.result),
-                               include: INCLUDES
+                               include: includes
       end
 
       def update
@@ -37,7 +35,7 @@ module Api
         outcome = Permissions::Save.run permission: permission
         render_single_resource outcome.result,
                                location: location(outcome.result),
-                               include: INCLUDES
+                               include: includes
       end
 
       def destroy
@@ -47,6 +45,10 @@ module Api
       end
 
       private
+
+      def includes
+        [:user]
+      end
 
       # @return [#permissions]
       def parent_resource

@@ -522,6 +522,17 @@ const defaults = {
     }
   },
 
+  collectionProject: {
+    type: "collectionProject",
+    attributes: {
+      position: 1
+    },
+    relationships: {
+      projectCollection: null,
+      project: null
+    }
+  },
+
   projectCollection: {
     type: "projectCollections",
     attributes: {
@@ -694,6 +705,10 @@ const projectCollection = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("projectCollection", id, attributes, relationships);
 };
 
+const collectionProject = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("collectionProject", id, attributes, relationships);
+};
+
 const actionCallout = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("actionCallout", id, attributes, relationships);
 };
@@ -724,6 +739,7 @@ export default {
   twitterQuery,
   permission,
   projectCollection,
+  collectionProject,
   version,
   page,
   readingGroup,

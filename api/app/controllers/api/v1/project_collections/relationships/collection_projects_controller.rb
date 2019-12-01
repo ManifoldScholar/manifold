@@ -4,37 +4,40 @@ module Api
       module Relationships
         class CollectionProjectsController < ApplicationController
 
-          before_action :set_project_collection, only: [:index, :update]
-
-          INCLUDES = %w(creators contributors project).freeze
+          before_action :set_project_collection
 
           resourceful! CollectionProject,
                        authorize_options: { except: [:index, :show] } do
-            includes = [:creators, :contributors, :project]
-
-            @project_collection.collection_projects
+            @project_collection.collection_projects.projects_with_read_ability(current_user)
               .includes(includes)
-              .page(page_number)
-              .per(page_size)
           end
 
-          # GET /resources
           def index
             @collection_projects = load_collection_projects
             render_multiple_resources(
               @collection_projects,
-              include: INCLUDES,
-              each_serializer: CollectionProjectSerializer,
-              meta: { pagination: pagination_dict(@collection_projects) },
-              location: location
+              location: location,
+              include: [:project]
             )
+          end
+
+          def create
+            @collection_project = ::Updaters::Default.new(collection_project_params)
+              .update(@project_collection.collection_projects.new)
+            @collection_project.save
+            authorize_action_for @collection_project
+            render_single_resource @collection_project, location: location
+          end
+
+          def destroy
+            @collection_project = load_and_authorize_collection_project
+            @collection_project.destroy
           end
 
           def update
             @collection_project = load_and_authorize_collection_project
             ::Updaters::Default.new(collection_project_params).update(@collection_project)
             render_single_resource(@collection_project,
-                                   include: INCLUDES,
                                    location: location)
           end
 
@@ -50,6 +53,10 @@ module Api
             api_v1_project_collection_relationships_collection_projects_url(@project_collection)
           end
           # rubocop:enable Metrics/LineLength
+
+          def includes
+            %w()
+          end
 
         end
       end

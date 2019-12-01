@@ -6,8 +6,6 @@ module Api
 
           before_action :set_project_collection, only: [:index]
 
-          INCLUDES = %w(projects projects.creators projects.contributors).freeze
-
           resourceful! Project, authorize_options: { except: [:index, :show] } do
             ids = @project_collection.projects.select(:id)
             Project.filter(
@@ -21,8 +19,7 @@ module Api
             @projects = load_projects
             render_multiple_resources(
               @projects,
-              include: INCLUDES,
-              each_serializer: ProjectSerializer,
+              include: includes,
               meta: { pagination: pagination_dict(@projects) },
               location: location
             )
@@ -33,6 +30,10 @@ module Api
           def set_project_collection
             @project_collection = ProjectCollection.friendly
               .find(params[:project_collection_id])
+          end
+
+          def includes
+            %w(projects projects.creators projects.contributors)
           end
 
           def location

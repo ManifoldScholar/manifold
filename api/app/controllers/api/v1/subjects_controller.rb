@@ -10,8 +10,7 @@ module Api
       def index
         @subjects = load_subjects
         render_multiple_resources(
-          @subjects,
-          each_serializer: SubjectSerializer
+          @subjects
         )
       end
 

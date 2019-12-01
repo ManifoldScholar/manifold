@@ -18,7 +18,6 @@ module Api
             location = api_v1_project_relationships_twitter_queries_url(@project.id)
             render_multiple_resources(
               @twitter_queries,
-              each_serializer: TwitterQuerySerializer,
               location: location
             )
           end

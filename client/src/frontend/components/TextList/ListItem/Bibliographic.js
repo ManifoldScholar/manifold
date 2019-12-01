@@ -27,6 +27,10 @@ export default class TextListListItemBibliographic extends Component {
     return this.props.readUrl;
   }
 
+  get creatorNames() {
+    return this.props.creatorNames;
+  }
+
   render() {
     const baseClass = this.props.baseClass;
 
@@ -50,7 +54,7 @@ export default class TextListListItemBibliographic extends Component {
         {this.props.creatorNames && (
           <div className={`${baseClass}__creators`}>
             <span style={{ fontStyle: "italic" }}>by </span>
-            {this.props.creatorNames}
+            {this.creatorNames}
           </div>
         )}
         {this.props.description && (

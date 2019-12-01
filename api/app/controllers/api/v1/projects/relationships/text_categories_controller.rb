@@ -17,7 +17,6 @@ module Api
             @categories = load_categories
             render_multiple_resources(
               @categories,
-              each_serializer: CategorySerializer,
               location: api_v1_project_relationships_text_categories_url(@project)
             )
           end

@@ -10,14 +10,14 @@ module Api
           resourceful! Project do
             Project.filter(
               with_pagination!(project_filter_params),
-              scope: current_user.favorite_projects.includes(:creators, :collaborators)
+              scope: current_user.favorite_projects.includes(:creators)
             )
           end
 
           # GET /projects
           def index
             @projects = load_projects
-            render_multiple_resources @projects, include: %w(creators collaborators)
+            render_multiple_resources @projects, include: [:creators]
           end
 
         end

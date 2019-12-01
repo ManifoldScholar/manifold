@@ -2,7 +2,6 @@ module Api
   module V1
     # Passwords controller
     class PasswordsController < ApplicationController
-      include Password
       include Resourceful
 
       resourceful! User, authorize_options:
@@ -25,27 +24,31 @@ module Api
         return invalid_token_error unless user&.valid_token?
 
         user.update_password(params[:password], params[:password_confirmation])
-        if user.save
-          render_single_resource(user)
-        else
-          render json:  user,
-                 serializer: ActiveModel::Serializer::ErrorSerializer,
-                 status: :unprocessable_entity
-        end
+        user.save
+        render_single_resource user
       end
 
       def admin_reset_password
         @user = User.find(params[:id])
         @user.force_reset_password
-        if @user.save
-          AccountMailer.password_change_notification(@user).deliver
-          render_single_resource(@user)
-        else
-          render json:  @user,
-                 serializer: ActiveModel::Serializer::ErrorSerializer,
-                 status: :unprocessable_entity
-        end
+        @user.save
+        AccountMailer.password_change_notification(@user).deliver if @user.valid?
+        render_single_resource(@user)
       end
+
+      protected
+
+      def invalid_token_error
+        render json: {
+          errors: [
+            {
+              source: { pointer: "/data/attributes/resetToken" },
+              detail: "Invalid or expired"
+            }
+          ]
+        }, status: :unprocessable_entity
+      end
+
     end
   end
 end

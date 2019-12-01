@@ -10,8 +10,7 @@ module Api
       def index
         @categories = load_categories
         render_multiple_resources(
-          @categories,
-          each_serializer: CategorySerializer
+          @categories
         )
       end
 

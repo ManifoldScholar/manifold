@@ -7,8 +7,6 @@ module Api
 
           before_action :set_text_section, only: [:index]
 
-          INCLUDES = %w().freeze
-
           resourceful! Resource, authorize_options: { except: [:index] } do
             @text_section.resources
           end

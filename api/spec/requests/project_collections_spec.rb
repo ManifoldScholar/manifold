@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Project Collections API", type: :request do
-
   include_context("authenticated request")
   include_context("param helpers")
 
@@ -32,8 +31,13 @@ RSpec.describe "Project Collections API", type: :request do
         end
 
         it "does not include draft projects" do
-          included = JSON.parse(response.body).dig("included").reject { |record| record["type"] != "projects" }
+          included = JSON.parse(response.body).dig("included").select { |record| record["type"] == "projects" }
           expect(included.length).to eq 1
+        end
+
+        it "returns a paginated collectionProjects relationship" do
+          pagination = JSON.parse(response.body).dig("data", "relationships", "collectionProjects", "meta", "pagination")
+          expect(pagination).to be_a Hash
         end
       end
     end
@@ -46,7 +50,7 @@ RSpec.describe "Project Collections API", type: :request do
         end
 
         it "does include draft projects" do
-          included = JSON.parse(response.body).dig("included").reject { |record| record["type"] != "projects" }
+          included = JSON.parse(response.body).dig("included").select { |record| record["type"] == "projects" }
           expect(included.length).to eq 2
         end
       end
@@ -56,21 +60,21 @@ RSpec.describe "Project Collections API", type: :request do
   describe "creates a collection" do
     let (:path) { api_v1_project_collections_path }
     let(:subject) { FactoryBot.create(:subject) }
-    let(:attributes) {
+    let(:attributes) do
       {
         title: "Project Collection",
         icon: "some-icon",
         smart: true
       }
-    }
+    end
     let(:relationships) do
       {
         subjects: { data: [{ type: "subjects", id: subject.id }] }
       }
     end
-    let(:valid_params) {
+    let(:valid_params) do
       json_payload(attributes: attributes, relationships: relationships)
-    }
+    end
 
     it "has a 201 CREATED status code" do
       post path, headers: admin_headers, params: valid_params
@@ -79,11 +83,9 @@ RSpec.describe "Project Collections API", type: :request do
   end
 
   describe "updates a collection" do
-
     let(:path) { api_v1_project_collection_path(project_collection) }
 
     context "when the user is an admin" do
-
       let(:headers) { admin_headers }
 
       describe "the response" do
@@ -92,7 +94,7 @@ RSpec.describe "Project Collections API", type: :request do
         end
 
         it "has a 200 OK status code" do
-          patch path, headers: headers, params: json_payload()
+          patch path, headers: headers, params: json_payload
           expect(response).to have_http_status(200)
         end
       end
@@ -100,11 +102,9 @@ RSpec.describe "Project Collections API", type: :request do
   end
 
   describe "destroys a collection" do
-
     let(:path) { api_v1_project_collection_path(project_collection) }
 
     context "when the user is an admin" do
-
       let(:headers) { admin_headers }
 
       it "has a 204 NO CONTENT status code" do
@@ -114,7 +114,6 @@ RSpec.describe "Project Collections API", type: :request do
     end
 
     context "when the user is a reader" do
-
       let(:headers) { reader_headers }
 
       it "has a 403 FORBIDDEN status code" do

@@ -9,7 +9,6 @@ module Api
         @text_section = load_text_section
         includes = %w(stylesheets)
         render_single_resource @text_section,
-                               serializer: TextSectionFullSerializer,
                                inlcude: includes
       end
 

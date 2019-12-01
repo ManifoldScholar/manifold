@@ -31,6 +31,10 @@ class TextTitle < ApplicationRecord
 
   alias_attribute :title, :value
   alias_attribute :subtitle, :value
+  alias_attribute :title_formatted, :value_formatted
+  alias_attribute :subtitle_formatted, :value_formatted
+  alias_attribute :title_plaintext, :value_plaintext
+  alias_attribute :subtitle_plaintext, :value_plaintext
 
   # Authority
   include Authority::Abilities
@@ -38,7 +42,7 @@ class TextTitle < ApplicationRecord
   self.authorizer_name = "ProjectChildAuthorizer"
 
   include Concerns::HasFormattedAttributes
-  has_formatted_attributes :title, :subtitle, include_wrap: false
+  has_formatted_attributes :value, include_wrap: false
 
   # Associations
   belongs_to :text
