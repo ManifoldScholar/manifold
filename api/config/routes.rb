@@ -1,4 +1,5 @@
 require "sidekiq/web"
+require "zhong/web"
 
 # rubocop:disable Metrics/BlockLength, Metrics/LineLength
 Rails.application.routes.draw do
@@ -8,7 +9,10 @@ Rails.application.routes.draw do
               controller: "/api/v1/permissions"
   end
 
-  mount Sidekiq::Web => "/sidekiq" if Rails.env.development?
+  constraints ->(request) { AuthConstraint.new(request).admin? } do
+    mount Sidekiq::Web => "/api/sidekiq"
+    mount Zhong::Web, at: "/api/zhong"
+  end
 
   get "auth/:provider/callback", to: "oauth#authorize"
 
@@ -91,7 +95,7 @@ Rails.application.routes.draw do
       resources :project_collections do
         scope module: :project_collections do
           namespace :relationships do
-            resources :collection_projects, only: [:index, :show, :update]
+            resources :collection_projects
             resources :projects, only: [:index]
           end
         end
