@@ -219,9 +219,7 @@ exports[`Backend.ProjectCollection.Detail.Manual component renders correctly 1`]
               </h3>
               <h4
                 className="entity-row__subtitle entity-row__subtitle--in-grid"
-              >
-                World's Greatest Dog
-              </h4>
+              />
               <div
                 className="entity-row__meta entity-row__meta--in-grid"
               />

@@ -6,6 +6,7 @@ import GlobalProject from "global/components/project";
 import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import lh from "helpers/linkHandler";
+import has from "lodash/has";
 
 export default class ProjectGridItem extends Component {
   static displayName = "Project.GridItem";
@@ -72,13 +73,23 @@ export default class ProjectGridItem extends Component {
   }
 
   renderProjectMakers(project) {
-    const creators = project.relationships.creators;
-    if (!creators || creators.length === 0) return null;
+    let names;
+    if (has(project.attributes, "creatorNames")) {
+      names = project.attributes.creatorNames;
+    } else if (
+      project.relationships.creators &&
+      project.relationships.creators.legnth > 0
+    ) {
+      names = project.relationships.creators
+        .map(maker => maker.attributes.fullName)
+        .join(", ");
+    }
+
+    if (!names) return null;
+
     return (
       <div className="relations-list" aria-hidden>
-        <span>
-          {creators.map(maker => maker.attributes.fullName).join(", ")}
-        </span>
+        <span>{names}</span>
       </div>
     );
   }

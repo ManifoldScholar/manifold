@@ -6,6 +6,7 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 
 describe("Backend.ProjectCollection.Detail container", () => {
+  const projects = [build.entity.project("1"), build.entity.project("2")];
   const projectCollection = build.entity.projectCollection(
     "1",
     {},
@@ -13,14 +14,16 @@ describe("Backend.ProjectCollection.Detail container", () => {
   );
   const store = build.store();
 
+  const collectionProjects = [
+    build.entity.collectionProject("3", {}, { project: projects[0] })
+  ];
+
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
         <ProjectCollectionDetail
           projectCollection={projectCollection}
-          projectCollectionMeta={{
-            meta: { relationships: { collectionProjects: build.pagination() } }
-          }}
+          collectionProjects={collectionProjects}
           dispatch={store.dispatch}
           route={{
             routes: []

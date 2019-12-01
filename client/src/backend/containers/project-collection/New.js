@@ -3,22 +3,21 @@ import PropTypes from "prop-types";
 import ProjectCollection from "backend/components/project-collection";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
-import { projectCollectionsAPI } from "api";
-import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
 
 import Authorize from "hoc/authorize";
 
-export class ProjectCollectionNew extends PureComponent {
+export default class ProjectCollectionNew extends PureComponent {
   static displayName = "ProjectCollection.New";
 
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    buildUpdateProjectCollection: PropTypes.func.isRequired,
+    buildCreateProjectCollection: PropTypes.func.isRequired,
     successHandler: PropTypes.func.isRequired
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.model = this.defaultModel;
   }
 
@@ -45,8 +44,8 @@ export class ProjectCollectionNew extends PureComponent {
           <FormContainer.Form
             model={this.model}
             name="backend-project-collection-create"
-            update={projectCollectionsAPI.update}
-            create={projectCollectionsAPI.create}
+            update={this.props.buildUpdateProjectCollection}
+            create={this.props.buildCreateProjectCollection}
             onSuccess={this.props.successHandler}
             className="form-secondary project-collection-form"
           >
@@ -58,7 +57,3 @@ export class ProjectCollectionNew extends PureComponent {
     );
   }
 }
-
-export default connect(ProjectCollectionNew.mapStateToProps)(
-  ProjectCollectionNew
-);

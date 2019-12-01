@@ -5,6 +5,7 @@ import List from "./List";
 import ListItem from "./ListItem";
 import ProjectCover from "./ProjectCover";
 import SortBy from "./SortBy";
+import EmptyPlaceholder from "./EmptyPlaceholder";
 
 export default {
   AddButton,
@@ -13,5 +14,6 @@ export default {
   List,
   ListItem,
   ProjectCover,
-  SortBy
+  SortBy,
+  EmptyPlaceholder
 };

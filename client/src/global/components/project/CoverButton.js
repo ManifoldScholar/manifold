@@ -12,7 +12,7 @@ export default class CoverButton extends Component {
   static displayName = "Project.CoverButton";
 
   static propTypes = {
-    selected: PropTypes.object,
+    selected: PropTypes.bool,
     confirm: PropTypes.bool,
     addHandler: PropTypes.func.isRequired,
     removeHandler: PropTypes.func.isRequired,
@@ -56,7 +56,7 @@ export default class CoverButton extends Component {
   };
 
   handleRemove = () => {
-    this.props.removeHandler(this.props.selected);
+    this.props.removeHandler(this.props.project);
   };
 
   maybeRemove = () => {

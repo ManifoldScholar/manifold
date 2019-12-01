@@ -32,7 +32,9 @@ RSpec.describe "ProjectCollection CollectionProject API", type: :request do
   end
 
   describe "destroys the CollectionProject" do
-    before(:each) { @collection_project = FactoryBot.create(:collection_project, project_collection: project_collection) }
+    before(:each) do
+      @collection_project = FactoryBot.create(:collection_project, project_collection: project_collection)
+    end
     let(:path) { api_v1_project_collection_relationships_collection_project_path(project_collection, @collection_project) }
 
     context "when the user is an admin" do

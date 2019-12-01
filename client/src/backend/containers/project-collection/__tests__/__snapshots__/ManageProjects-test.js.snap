@@ -130,7 +130,7 @@ Array [
           >
             You have added 
             <span>
-              0
+              1
             </span>
              of 
             <span>
@@ -144,7 +144,7 @@ Array [
             className="screen-reader-text"
             role="status"
           >
-            You have added 0 of 2 available projects.
+            You have added 1 of 2 available projects.
           </div>
         </div>
       </div>
@@ -432,9 +432,7 @@ Array [
               </h3>
               <h4
                 className="entity-row__subtitle entity-row__subtitle--in-grid"
-              >
-                World's Greatest Dog
-              </h4>
+              />
               <div
                 className="entity-row__meta entity-row__meta--in-grid"
               />
@@ -614,11 +612,11 @@ Array [
                     className="project-cover-button--sr-only screen-reader-text"
                     onClick={[Function]}
                   >
-                    Exclude Rowan Test
+                    Include Rowan Test
                   </button>
                   <button
                     aria-hidden="true"
-                    className="remove project-cover-button-wrapper"
+                    className="add project-cover-button-wrapper"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
@@ -685,9 +683,9 @@ Array [
                       </div>
                       <div>
                         <span
-                          className="action-text action-text-hide-immediately"
+                          className="action-text"
                         >
-                          Exclude
+                          Include
                         </span>
                       </div>
                     </div>
@@ -721,9 +719,7 @@ Array [
               </h3>
               <h4
                 className="entity-row__subtitle entity-row__subtitle--in-grid"
-              >
-                World's Greatest Dog
-              </h4>
+              />
               <div
                 className="entity-row__meta entity-row__meta--in-grid"
               />
