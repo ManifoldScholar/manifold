@@ -90,9 +90,9 @@ export default function withReadingGroups(WrappedComponent) {
     };
 
     render() {
-      if (!this.props.readingGroups) return null;
       const { _authentication, ...otherProps } = this.props;
       const props = { ...otherProps, ...this.childProps };
+      if (!props.readingGroups) props.readingGroups = [];
       return React.createElement(WrappedComponent, props);
     }
   }
