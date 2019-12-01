@@ -1,18 +1,17 @@
 require "rails_helper"
 
 RSpec.shared_context "authenticated request" do
-
   def token(user, password)
-    params = {email: user.email, password: password}
+    params = { email: user.email, password: password }
     post api_v1_tokens_path, params: params
     data = JSON.parse(response.body)
-    return data.dig("meta", "authToken")
+    data.dig("meta", "authToken")
   end
 
   def build_headers(token)
     {
       "Authorization" => "Bearer #{token}",
-      "content-type"=> "application/json"
+      "content-type" => "application/json"
     }
   end
 
@@ -23,7 +22,7 @@ RSpec.shared_context "authenticated request" do
   let(:password) { "testTest123" }
   let(:author) { user = FactoryBot.create(:user, email: author_email, password: password, password_confirmation: password, role: Role::ROLE_PROJECT_AUTHOR) }
   let(:reader) { user = FactoryBot.create(:user, email: reader_email, password: password, password_confirmation: password, role: Role::ROLE_READER) }
-  let(:another_reader ) { user = FactoryBot.create(:user, email: another_reader_email, password: password, password_confirmation: password, role: Role::ROLE_READER) }
+  let(:another_reader) { user = FactoryBot.create(:user, email: another_reader_email, password: password, password_confirmation: password, role: Role::ROLE_READER) }
   let(:admin) { user = FactoryBot.create(:user, email: admin_email, password: password, password_confirmation: password, role: Role::ROLE_ADMIN) }
   let(:author_token) { token(author, password) }
   let(:reader_token) { token(reader, password) }
@@ -34,5 +33,4 @@ RSpec.shared_context "authenticated request" do
   let(:reader_headers) { build_headers(reader_token) }
   let(:another_reader_headers) { build_headers(another_reader_token) }
   let(:anonymous_headers) { { "content-type" => "application/json" } }
-
 end

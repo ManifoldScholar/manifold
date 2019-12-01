@@ -1,10 +1,9 @@
 require "rails_helper"
-require 'base64'
+require "base64"
 
 RSpec.shared_context "param helpers" do
-
   def json_for(model)
-    attributes = FactoryBot::attributes_for(model)
+    attributes = FactoryBot.attributes_for(model)
     json_structure(attributes: attributes)
   end
 
@@ -19,7 +18,7 @@ RSpec.shared_context "param helpers" do
   end
 
   def relationship_payload(name, models)
-    Hash[*[name, models]]
+    Hash[name, models]
   end
 
   def json_payload(attributes: {}, relationships: {}, meta: {})
@@ -27,9 +26,9 @@ RSpec.shared_context "param helpers" do
   end
 
   def expect_updated_param(param, value, expected_value = nil, expected_param = nil)
-    attributes = Hash[*[param, value]]
-    expected_value = value unless expected_value
-    expected_param = param unless expected_param
+    attributes = Hash[param, value]
+    expected_value ||= value
+    expected_param ||= param
     patch(path, headers: headers, params: json_payload(attributes: attributes))
     api_response = JSON.parse(response.body)
     expect(api_response["data"]["attributes"][expected_param]).to eq(expected_value)
@@ -53,7 +52,7 @@ RSpec.shared_context "param helpers" do
 
     {
       id: id,
-      storage: 'cache',
+      storage: "cache",
       metadata: {
         filename: filename,
         size: io.size,

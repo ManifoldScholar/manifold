@@ -112,5 +112,4 @@ RSpec.describe Text, type: :model do
       end
     end
   end
-
 end

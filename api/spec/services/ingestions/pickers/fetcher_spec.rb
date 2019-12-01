@@ -18,7 +18,6 @@ RSpec.describe Ingestions::Pickers::Fetcher do
       "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/5edit?usp=sharing"
     }
     it "returns the correct fetcher" do
-      puts outcome.errors.full_messages
       expect(outcome.result.interaction).to eq Ingestions::Fetchers::GoogleDoc
     end
   end
@@ -28,7 +27,6 @@ RSpec.describe Ingestions::Pickers::Fetcher do
       "https://my-wobsite.com/index.html"
     }
     it "returns the correct fetcher" do
-      puts outcome.errors.full_messages
       expect(outcome.result.interaction).to eq Ingestions::Fetchers::Url
     end
   end
