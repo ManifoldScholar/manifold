@@ -67,6 +67,7 @@ class Project < ApplicationRecord
   has_many :collection_project_rankings, through: :collection_projects, source: :ranking
   has_many :project_collections, through: :collection_projects, dependent: :destroy
   has_many :texts, dependent: :destroy, inverse_of: :project
+  has_many :text_summaries, inverse_of: :project
   has_many :published_texts,
            -> { published(true) },
            class_name: "Text",
@@ -102,6 +103,8 @@ class Project < ApplicationRecord
            -> { order(:position) },
            dependent: :destroy,
            inverse_of: :project
+  has_many :content_block_references, through: :content_blocks
+
   has_many :action_callouts,
            -> { order(:position) },
            dependent: :destroy,
@@ -118,10 +121,6 @@ class Project < ApplicationRecord
   before_create :assign_publisher_defaults!
   after_commit :trigger_creation_event, on: [:create]
   after_commit :queue_reindex_children_job
-
-  # Delegations
-  delegate :count, to: :resource_collections, prefix: true
-  delegate :count, to: :resources, prefix: true
 
   # Misc
   money_attributes :purchase_price
@@ -213,6 +212,7 @@ class Project < ApplicationRecord
     ranked_by_collection
       .joins(:collection_projects)
       .where(collection_projects: { project_collection: pc })
+      .group("projects.id, collection_project_rankings.ranking")
   }
 
   # Search
@@ -251,6 +251,10 @@ class Project < ApplicationRecord
     }
   end
 
+  def social_image
+    hero? ? hero_styles[:medium] : nil
+  end
+
   # I believe this is here to allow us to pass `Project` as a scope in our resourceful
   # controllers. See the load_resources_for in the resourceful_methods controller concern.
   # -ZD
@@ -264,6 +268,34 @@ class Project < ApplicationRecord
     Project.filter(params, scope: scope, user: user)
   end
 
+  def events_for_project_detail
+    filtered_events.limit(6)
+  end
+
+  def resources_for_project_detail
+    resources.limit(10)
+  end
+
+  def events_for_project_detail_ids
+    events_for_project_detail.pluck(:id)
+  end
+
+  def resources_for_project_detail_ids
+    resources_for_project_detail.pluck(:id)
+  end
+
+  def filtered_events
+    events.excluding_type(%w(comment_created text_annotated))
+  end
+
+  def filtered_event_count
+    filtered_events.count
+  end
+
+  def uniq_event_types
+    filtered_events.pluck(:event_type).uniq
+  end
+
   def resource_kinds
     resources
       .select("resources.kind")
@@ -273,6 +305,10 @@ class Project < ApplicationRecord
 
   def resource_tags
     resources.joins(:tags).distinct.pluck("tags.name")
+  end
+
+  def sorted_resource_tags
+    resource_tags.sort
   end
 
   def following_twitter_accounts?
@@ -299,6 +335,12 @@ class Project < ApplicationRecord
 
   def standalone?
     !standalone_mode_disabled?
+  end
+
+  def texts_in_toc_blocks_ids
+    content_block_references
+      .where("content_block_references.referencable_type" => "Text")
+      .pluck("content_block_references.referencable_id")
   end
 
   private
