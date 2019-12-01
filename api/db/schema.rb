@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_30_132659) do
+ActiveRecord::Schema.define(version: 2019_11_30_212914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -1017,52 +1017,6 @@ ActiveRecord::Schema.define(version: 2019_11_30_132659) do
        LEFT JOIN annotations a ON (((a.creator_id = rgm.user_id) AND (a.reading_group_id = rgm.reading_group_id))))
     GROUP BY rgm.id;
   SQL
-  create_view "text_summaries", sql_definition: <<-SQL
-      SELECT t.project_id,
-      t.id,
-      t.id AS text_id,
-      t.created_at,
-      t.updated_at,
-      t.published,
-      t.slug,
-      t.category_id,
-      t."position",
-      t.description,
-      t.cached_description_formatted AS description_formatted,
-      t.start_text_section_id,
-      t.publication_date,
-      t.cover_data,
-      t.toc,
-      tb.id AS toc_section,
-      ta.title,
-      ta.subtitle,
-      ta.title_formatted,
-      ta.subtitle_formatted,
-      tm.creator_names,
-      tm.collaborator_names,
-      COALESCE(tac.annotations_count, (0)::bigint) AS annotations_count,
-      COALESCE(tac.highlights_count, (0)::bigint) AS highlights_count
-     FROM ((((texts t
-       LEFT JOIN LATERAL ( SELECT count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
-              count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
-             FROM (annotations a
-               JOIN text_sections ts ON ((ts.id = a.text_section_id)))
-            WHERE (ts.text_id = t.id)) tac ON (true))
-       LEFT JOIN LATERAL ( SELECT (array_agg(tt.value ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title,
-              (array_agg(tt.value ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle,
-              (array_agg(tt.cached_value_formatted ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title_formatted,
-              (array_agg(tt.cached_value_formatted ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle_formatted
-             FROM text_titles tt
-            WHERE (tt.text_id = t.id)) ta ON (true))
-       LEFT JOIN LATERAL ( SELECT ts.id
-             FROM text_sections ts
-            WHERE ((ts.text_id = t.id) AND ((ts.kind)::text = 'navigation'::text))) tb ON (true))
-       LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
-              string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
-             FROM (collaborators c
-               JOIN makers m ON ((m.id = c.maker_id)))
-            WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
-  SQL
   create_view "project_summaries", sql_definition: <<-SQL
       SELECT p.id,
       p.id AS project_id,
@@ -1087,5 +1041,56 @@ ActiveRecord::Schema.define(version: 2019_11_30_132659) do
              FROM (collaborators c
                JOIN makers m ON ((m.id = c.maker_id)))
             WHERE (((c.collaboratable_type)::text = 'Project'::text) AND (c.collaboratable_id = p.id))) pm ON (true));
+  SQL
+  create_view "text_summaries", sql_definition: <<-SQL
+      SELECT t.project_id,
+      t.id,
+      t.id AS text_id,
+      t.created_at,
+      t.updated_at,
+      t.published,
+      t.slug,
+      t.category_id,
+      t."position",
+      t.description,
+      t.cached_description_formatted AS description_formatted,
+      t.cached_description_plaintext AS description_plaintext,
+      t.start_text_section_id,
+      t.publication_date,
+      t.cover_data,
+      t.toc,
+      tb.id AS toc_section,
+      ta.subtitle,
+      ta.subtitle_formatted,
+      ta.subtitle_plaintext,
+      ta.title,
+      ta.title_formatted,
+      ta.title_plaintext,
+      tm.creator_names,
+      tm.collaborator_names,
+      COALESCE(tac.annotations_count, (0)::bigint) AS annotations_count,
+      COALESCE(tac.highlights_count, (0)::bigint) AS highlights_count
+     FROM ((((texts t
+       LEFT JOIN LATERAL ( SELECT count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
+              count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
+             FROM (annotations a
+               JOIN text_sections ts ON ((ts.id = a.text_section_id)))
+            WHERE (ts.text_id = t.id)) tac ON (true))
+       LEFT JOIN LATERAL ( SELECT (array_agg(tt.value ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title,
+              (array_agg(tt.value ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle,
+              (array_agg(tt.cached_value_formatted ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title_formatted,
+              (array_agg(tt.cached_value_formatted ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle_formatted,
+              (array_agg(tt.cached_value_plaintext ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title_plaintext,
+              (array_agg(tt.cached_value_plaintext ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle_plaintext
+             FROM text_titles tt
+            WHERE (tt.text_id = t.id)) ta ON (true))
+       LEFT JOIN LATERAL ( SELECT ts.id
+             FROM text_sections ts
+            WHERE ((ts.text_id = t.id) AND ((ts.kind)::text = 'navigation'::text))) tb ON (true))
+       LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
+              string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
+             FROM (collaborators c
+               JOIN makers m ON ((m.id = c.maker_id)))
+            WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
   SQL
 end
