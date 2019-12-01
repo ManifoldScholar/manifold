@@ -29,7 +29,6 @@ export default class TextCover extends PureComponent {
   render() {
     const elemClass = `${this.props.baseClass}__cover`;
     const modifier = this.hasCover ? "image" : "svg";
-
     return (
       <figure className={`${elemClass} ${elemClass}--${modifier}`}>
         {this.hasCover ? (

@@ -48,7 +48,6 @@ export class ReaderContainer extends Component {
     const state = getState();
     const { textId } = match.params;
     const textLoaded = textId ? isEntityLoaded("texts", textId, state) : false;
-
     if (textId && !textLoaded) {
       const textCall = textsAPI.show(textId);
       const { promise: one } = dispatch(request(textCall, requests.rText));
