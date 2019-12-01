@@ -16,7 +16,7 @@ class ResourceCollection < ApplicationRecord
   self.authorizer_name = "ProjectChildAuthorizer"
 
   # Associations
-  belongs_to :project
+  belongs_to :project, counter_cache: true
   has_many :collection_resources,
            dependent: :destroy
   has_many :resources, through: :collection_resources

@@ -461,6 +461,8 @@ ActiveRecord::Schema.define(version: 2019_10_25_200842) do
     t.string "standalone_mode_press_bar_text"
     t.string "standalone_mode_press_bar_url"
     t.boolean "finished", default: false
+    t.integer "resource_collections_count", default: 0
+    t.integer "resources_count", default: 0
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 
