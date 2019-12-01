@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import get from "lodash/get";
+import has from "lodash/has";
 import { currentUserActions } from "actions";
 import Project from "global/components/project";
 
@@ -24,8 +25,8 @@ class ProjectFollow extends Component {
     return "You are no longer following this project.";
   }
 
-  getFollowed(props) {
-    return get(props.favorites, props.project.id);
+  get selected() {
+    return has(this.props.favorites, this.props.project.id);
   }
 
   handleFollow = () => {
@@ -34,7 +35,8 @@ class ProjectFollow extends Component {
     this.props.setScreenReaderStatus(this.followMessage);
   };
 
-  handleUnfollow = followed => {
+  handleUnfollow = () => {
+    const followed = get(this.props.favorites, this.props.project.id);
     this.props.dispatch(
       currentUserActions.unfollow(this.props.project.id, followed.id)
     );
@@ -43,12 +45,11 @@ class ProjectFollow extends Component {
 
   render() {
     if (!this.props.authenticated) return null;
-
     return (
       <Project.CoverButton
         addText="Follow"
         removeText="Unfollow"
-        selected={this.getFollowed(this.props)}
+        selected={this.selected}
         addHandler={this.handleFollow}
         removeHandler={this.handleUnfollow}
         project={this.props.project}

@@ -4,6 +4,7 @@ import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import FormattedDate from "global/components/FormattedDate";
+import has from "lodash/has";
 
 export default class ProjectRow extends PureComponent {
   static displayName = "EntitiesList.Entity.ProjectRow";
@@ -54,6 +55,9 @@ export default class ProjectRow extends PureComponent {
   }
 
   get creatorNames() {
+    if (has(this.attr, "creatorNames")) {
+      return this.attr.creatorNames;
+    }
     return this.creators.map((creator, i) => {
       let nameList = creator.attributes.fullName;
       if (i > 0) nameList = ", " + nameList;
@@ -87,7 +91,7 @@ export default class ProjectRow extends PureComponent {
 
   get subtitle() {
     if (this.compact) return null;
-    return this.attr.subtitle;
+    return this.attr.subtitleFormatted;
   }
 
   render() {

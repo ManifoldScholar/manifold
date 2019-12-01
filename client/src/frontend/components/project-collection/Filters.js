@@ -103,26 +103,30 @@ export class ProjectCollectionFilters extends Component {
             )}
           </UID>
         </div>
-        <div className="select-group inline">
-          <div className="select">
-            <select
-              onChange={event => this.setFilters(event, "order")}
-              value={this.state.filters.order || ""}
-            >
-              <option value="">Sort</option>
-              <option value="sort_title ASC">A-Z</option>
-              <option value="sort_title DESC">Z-A</option>
-            </select>
-            <Utility.IconComposer
-              icon="disclosureDown16"
-              size={20}
-              iconClass="select__icon"
-            />
+        {/* The API currently will not override PC sorting with custom sorting, */}
+        {/* so we're disabling this for the time being. */}
+        {false && (
+          <div className="select-group inline">
+            <div className="select">
+              <select
+                onChange={event => this.setFilters(event, "order")}
+                value={this.state.filters.order || ""}
+              >
+                <option value="">Sort</option>
+                <option value="sort_title ASC">A-Z</option>
+                <option value="sort_title DESC">Z-A</option>
+              </select>
+              <Utility.IconComposer
+                icon="disclosureDown16"
+                size={20}
+                iconClass="select__icon"
+              />
+            </div>
           </div>
-        </div>
+        )}
         {this.showResetButton && (
           <button className="reset-button" onClick={this.resetFilters}>
-            {"Reset Search + Filters"}
+            {"Reset Search"}
           </button>
         )}
       </form>

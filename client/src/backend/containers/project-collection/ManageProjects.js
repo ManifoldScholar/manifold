@@ -4,7 +4,7 @@ import classNames from "classnames";
 import connectAndFetch from "utils/connectAndFetch";
 import ProjectCollection from "backend/components/project-collection";
 import { select, meta } from "utils/entityUtils";
-import { projectsAPI, projectCollectionsAPI, requests } from "api";
+import { projectsAPI, collectionProjectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
@@ -23,7 +23,11 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
   static mapStateToProps = state => {
     return {
       projects: select(requests.beProjects, state.entityStore),
-      projectsMeta: meta(requests.beProjects, state.entityStore)
+      projectsMeta: meta(requests.beProjects, state.entityStore),
+      collectionProjects: select(
+        requests.beCollectionProjects,
+        state.entityStore
+      )
     };
   };
 
@@ -41,6 +45,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
 
   componentDidMount() {
     this.fetchProjects();
+    this.fetchCollectionProjects();
   }
 
   componentDidUpdate(prevProps) {
@@ -90,6 +95,14 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     );
   }
 
+  fetchCollectionProjects() {
+    const action = request(
+      collectionProjectsAPI.index(this.props.projectCollection.id),
+      requests.beCollectionProjects
+    );
+    this.props.dispatch(action);
+  }
+
   fetchProjects(eventIgnored = null, page = 1) {
     const pagination = { number: page, size: perPage };
     const action = request(
@@ -105,53 +118,58 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     };
   };
 
-  updateProjects = projects => {
-    const adjustedProjects = projects.map(project => {
-      return { id: project.id, type: "projects" };
-    });
-    const projectCollection = {
-      id: this.props.projectCollection.id,
+  collectionProjectParams(project) {
+    return {
+      attributes: {},
       type: "projectCollections",
-      relationships: { projects: { data: adjustedProjects } }
+      relationships: {
+        project: {
+          data: {
+            type: "projects",
+            id: project.id
+          }
+        }
+      }
     };
+  }
 
-    const call = projectCollectionsAPI.update(
-      projectCollection.id,
-      projectCollection
-    );
-    const projectCollectionRequest = request(
-      call,
-      requests.beProjectCollectionUpdate
-    );
-    this.props.dispatch(projectCollectionRequest);
-  };
+  findCollectionProjectForProject(project) {
+    return this.props.collectionProjects.find(cp => {
+      return cp.relationships.project.id === project.id;
+    });
+  }
 
   handleProjectAdd = project => {
     this.props.setScreenReaderStatus(this.projectAddMessage(project));
-
-    const projects = this.projectsForProjectCollection(
-      this.props.projectCollection
+    const call = collectionProjectsAPI.create(
+      this.props.projectCollection.id,
+      this.collectionProjectParams(project)
     );
-    projects.push({ id: project.id });
-
-    return this.updateProjects(projects);
+    this.props.dispatch(
+      request(call, requests.beCollectionProjectsCreate, {
+        adds: requests.beCollectionProjects
+      })
+    );
   };
 
   handleProjectRemove = project => {
     this.props.setScreenReaderStatus(this.projectRemoveMessage(project));
-
-    const projects = this.projectsForProjectCollection(
-      this.props.projectCollection
+    const collectionProject = this.findCollectionProjectForProject(project);
+    if (!collectionProject) return;
+    const call = collectionProjectsAPI.destroy(
+      this.props.projectCollection.id,
+      collectionProject.id
     );
-    const adjusted = projects.filter(p => p.id !== project.id);
-
-    return this.updateProjects(adjusted);
+    this.props.dispatch(
+      request(call, requests.beCollectionProjectsDestroy, {
+        removes: collectionProject
+      })
+    );
   };
 
   projectCover = props => {
     const entity = props.entity;
     if (!entity) return null;
-
     return (
       <ProjectRow
         entity={entity}
@@ -176,8 +194,8 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     return this.props.history.push(url);
   };
 
-  renderProjectCount(projectCollection, projectsMeta) {
-    const added = projectCollection.attributes.projectsCount || 0;
+  renderProjectCount(collectionProjects, projectsMeta) {
+    const added = collectionProjects.length || 0;
     const total = projectsMeta.pagination.totalCount || 0;
 
     return (
@@ -197,6 +215,10 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
         </div>
       </>
     );
+  }
+
+  get selectedProjectIds() {
+    return this.props.collectionProjects.map(cp => cp.relationships.project.id);
   }
 
   render() {
@@ -220,12 +242,12 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
           listStyle="grid"
           entityComponent={this.projectCover}
           entityComponentProps={{
-            projectCollection: this.props.projectCollection,
+            selectedProjectIds: this.selectedProjectIds,
             addable: true
           }}
           pagination={this.props.projectsMeta.pagination}
           showCount={this.renderProjectCount(
-            this.props.projectCollection,
+            this.props.collectionProjects,
             this.props.projectsMeta
           )}
           callbacks={{

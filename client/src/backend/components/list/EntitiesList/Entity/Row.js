@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import isArray from "lodash/isArray";
 import isString from "lodash/isString";
+import has from "lodash/has";
 import LabelSet from "./LabelSet";
 import { Link } from "react-router-dom";
 import { UID } from "react-uid";
@@ -81,15 +82,15 @@ export default class EntitiesListRow extends PureComponent {
   }
 
   get hasCount() {
-    return !!this.count;
+    return has(this.props, "count");
   }
 
   get hasSubtitle() {
-    return !!this.subtitle;
+    return has(this.props, "subtitle");
   }
 
   get hasMeta() {
-    return !!this.meta;
+    return has(this.props, "meta");
   }
 
   get utility() {

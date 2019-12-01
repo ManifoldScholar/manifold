@@ -5,14 +5,9 @@ import ProjectCollection from "backend/components/project-collection";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { projectCollectionsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
-import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
 
 import Authorize from "hoc/authorize";
-
-const { request } = entityStoreActions;
-const perPage = 12;
 
 export class ProjectCollectionSettings extends PureComponent {
   static displayName = "ProjectCollection.Settings";
@@ -20,7 +15,6 @@ export class ProjectCollectionSettings extends PureComponent {
   static propTypes = {
     projectCollection: PropTypes.object,
     projectCollectionMeta: PropTypes.object,
-    dispatch: PropTypes.func.isRequired,
     confirm: PropTypes.func.isRequired
   };
 
@@ -31,45 +25,7 @@ export class ProjectCollectionSettings extends PureComponent {
   handleDestroy = () => {
     const heading = "Are you sure you want to delete this project collection?";
     const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, this.destroyProjectCollection);
-  };
-
-  destroyProjectCollection = () => {
-    const projectCollection = this.props.projectCollection;
-    const call = projectCollectionsAPI.destroy(projectCollection.id);
-    const options = { removes: projectCollection };
-    const destroyRequest = request(
-      call,
-      requests.beProjectCollectionDestroy,
-      options
-    );
-    this.props.dispatch(destroyRequest).promise.then(() => {
-      this.doAfterDestroy(this.props);
-    });
-  };
-
-  doAfterDestroy(props) {
-    if (props.afterDestroy) return props.afterDestroy();
-    return props.history.push(lh.link("backendProjectCollections"));
-  }
-
-  shouldPaginate(model) {
-    const { projectCollection } = this.props;
-    return (
-      model.attributes.smart || !projectCollection.attributes.manuallySorted
-    );
-  }
-
-  handleUpdate = (id, model) => {
-    const pagination = this.props.projectCollectionMeta.relationships
-      .collectionProjects.pagination;
-    const page = {};
-    if (this.shouldPaginate(model))
-      page.collectionProjects = {
-        number: pagination.currentPage,
-        size: perPage
-      };
-    return projectCollectionsAPI.update(id, model, page);
+    this.props.confirm(heading, message, this.props.destroyProjectCollection);
   };
 
   render() {
@@ -90,8 +46,9 @@ export class ProjectCollectionSettings extends PureComponent {
           <FormContainer.Form
             model={projectCollection}
             name={requests.beProjectCollectionUpdate}
-            update={this.handleUpdate}
+            update={this.props.buildUpdateProjectCollection}
             create={projectCollectionsAPI.create}
+            onSuccess={this.props.refreshCollectionProjects}
             className="form-secondary project-collection-form"
             flushOnUnmount={false}
           >
@@ -107,6 +64,4 @@ export class ProjectCollectionSettings extends PureComponent {
   }
 }
 
-export default withConfirmation(
-  connect(ProjectCollectionSettings.mapStateToProps)(ProjectCollectionSettings)
-);
+export default withConfirmation(ProjectCollectionSettings);

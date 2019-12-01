@@ -14,31 +14,34 @@ export default class ProjectCollectionDetailManual extends PureComponent {
     projects: PropTypes.array
   };
 
+  get isManuallySorted() {
+    const { projectCollection } = this.props;
+    return projectCollection.attributes.manuallySorted;
+  }
+
+  get entities() {
+    if (!this.isManuallySorted)
+      return this.props.collectionProjects.map(cp => cp.relationships.project);
+    return this.props.collectionProjects;
+  }
+
+  get callbacks() {
+    if (!this.isManuallySorted) return {};
+    return { onReorder: this.props.orderChangeHandler };
+  }
+
   render() {
-    const { projectCollection, projects, orderChangeHandler } = this.props;
+    const { projectCollection } = this.props;
     if (!projectCollection) return null;
-
-    const manuallyOrdered = this.props.projectCollection.attributes
-      .manuallySorted;
-
-    if (manuallyOrdered) {
-      return (
-        <EntitiesList
-          entityComponent={CollectionProjectRow}
-          entities={projectCollection.relationships.collectionProjects}
-          listStyle="grid"
-          callbacks={{
-            onReorder: orderChangeHandler
-          }}
-        />
-      );
-    }
 
     return (
       <EntitiesList
-        entityComponent={ProjectRow}
-        entities={projects}
+        entityComponent={
+          this.isManuallySorted ? CollectionProjectRow : ProjectRow
+        }
+        entities={this.entities}
         listStyle="grid"
+        callbacks={this.callbacks}
       />
     );
   }

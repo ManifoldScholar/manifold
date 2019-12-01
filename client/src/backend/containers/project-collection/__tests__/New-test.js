@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { ProjectCollectionNew } from "../New";
+import ProjectCollectionNew from "../New";
 import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
+import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 
 describe("Backend.ProjectCollection.New container", () => {
@@ -20,6 +20,8 @@ describe("Backend.ProjectCollection.New container", () => {
       <Provider store={store}>
         <ProjectCollectionNew
           dispatch={store.dispatch}
+          buildUpdateProjectCollection={jest.fn}
+          buildCreateProjectCollection={jest.fn}
           successHandler={jest.fn}
         />
       </Provider>

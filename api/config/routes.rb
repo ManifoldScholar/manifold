@@ -91,7 +91,7 @@ Rails.application.routes.draw do
       resources :project_collections do
         scope module: :project_collections do
           namespace :relationships do
-            resources :collection_projects, only: [:index, :show, :update]
+            resources :collection_projects
             resources :projects, only: [:index]
           end
         end

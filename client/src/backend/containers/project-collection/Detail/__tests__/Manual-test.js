@@ -10,6 +10,11 @@ describe("Backend.ProjectCollection.Detail.Manual component", () => {
     manuallySorted: false
   });
   const project = build.entity.project("2");
+
+  const collectionProjects = [
+    build.entity.collectionProject("3", {}, { project })
+  ];
+
   const store = build.store();
 
   it("renders correctly", () => {
@@ -18,6 +23,7 @@ describe("Backend.ProjectCollection.Detail.Manual component", () => {
         <Provider store={store}>
           <Manual
             projectCollection={projectCollection}
+            collectionProjects={collectionProjects}
             orderChangeHandler={() => jest.fn()}
             projects={[project]}
           />

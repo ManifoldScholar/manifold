@@ -12,6 +12,11 @@ describe("Backend.ProjectCollection.ManageProjects container", () => {
     {},
     { projects }
   );
+
+  const collectionProjects = [
+    build.entity.collectionProject("3", {}, { project: projects[0] })
+  ];
+
   const store = build.store();
 
   const component = renderer.create(
@@ -20,6 +25,7 @@ describe("Backend.ProjectCollection.ManageProjects container", () => {
         <ProjectCollectionManageProjects
           dispatch={store.dispatch}
           projectCollection={projectCollection}
+          collectionProjects={collectionProjects}
           projects={projects}
           projectsMeta={{ pagination: build.pagination() }}
         />

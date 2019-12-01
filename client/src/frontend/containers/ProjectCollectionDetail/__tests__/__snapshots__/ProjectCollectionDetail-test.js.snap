@@ -125,47 +125,6 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
             value=""
           />
         </div>
-        <div
-          className="select-group inline"
-        >
-          <div
-            className="select"
-          >
-            <select
-              onChange={[Function]}
-              value=""
-            >
-              <option
-                value=""
-              >
-                Sort
-              </option>
-              <option
-                value="sort_title ASC"
-              >
-                A-Z
-              </option>
-              <option
-                value="sort_title DESC"
-              >
-                Z-A
-              </option>
-            </select>
-            <svg
-              aria-hidden={true}
-              className="manicon-svg select__icon svg-icon--disclosureDown16"
-              fill="currentColor"
-              height={20}
-              viewBox="0 0 16 16"
-              width={20}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <polygon
-                points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
-              />
-            </svg>
-          </div>
-        </div>
       </form>
       <div
         className="entity-section-wrapper__details"

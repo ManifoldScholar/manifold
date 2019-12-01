@@ -262,9 +262,7 @@ Array [
                               </h3>
                               <h4
                                 className="entity-row__subtitle entity-row__subtitle--in-rows"
-                              >
-                                World's Greatest Dog
-                              </h4>
+                              />
                               <div
                                 className="entity-row__meta entity-row__meta--in-rows"
                               />
@@ -389,9 +387,7 @@ Array [
                               </h3>
                               <h4
                                 className="entity-row__subtitle entity-row__subtitle--in-rows"
-                              >
-                                World's Greatest Dog
-                              </h4>
+                              />
                               <div
                                 className="entity-row__meta entity-row__meta--in-rows"
                               />
@@ -616,6 +612,9 @@ Array [
                                   View Rowan Test
                                 </span>
                               </h3>
+                              <h4
+                                className="entity-row__subtitle entity-row__subtitle--in-rows"
+                              />
                               <div
                                 className="entity-row__meta entity-row__meta--in-rows"
                               />
@@ -659,6 +658,9 @@ Array [
                                   View Rowan Test
                                 </span>
                               </h3>
+                              <h4
+                                className="entity-row__subtitle entity-row__subtitle--in-rows"
+                              />
                               <div
                                 className="entity-row__meta entity-row__meta--in-rows"
                               />

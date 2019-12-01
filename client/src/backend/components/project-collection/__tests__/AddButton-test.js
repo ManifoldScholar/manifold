@@ -16,6 +16,7 @@ describe("Backend.ProjectCollection.AddButton component", () => {
         <Provider store={store}>
           <AddButton
             projectCollection={projectCollection}
+            selectedProjectIds={[]}
             project={project}
             dispatch={store.dispatch}
             handleAdd={jest.fn}

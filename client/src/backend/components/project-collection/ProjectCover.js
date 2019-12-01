@@ -9,18 +9,18 @@ export default class ProjectCollectionProjectCover extends PureComponent {
 
   static propTypes = {
     entity: PropTypes.object,
-    projectCollection: PropTypes.object,
+    selectedProjectIds: PropTypes.array,
     addHandler: PropTypes.func,
     removeHandler: PropTypes.func,
     addable: PropTypes.bool
   };
 
   renderAddButton(props) {
-    if (!props.addable || !props.projectCollection) return null;
+    if (!props.addable || !props.selectedProjectIds) return null;
 
     return (
       <AddButton
-        projectCollection={props.projectCollection}
+        selectedProjectIds={props.selectedProjectIds}
         project={props.entity}
         handleAdd={this.props.addHandler}
         handleRemove={this.props.removeHandler}

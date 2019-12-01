@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { projectCollectionsAPI, requests } from "api";
+import { collectionProjectsAPI, projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import ProjectCollection from "backend/components/project-collection";
@@ -11,8 +11,6 @@ import { childRoutes } from "helpers/router";
 import size from "lodash/size";
 import lh from "helpers/linkHandler";
 import classnames from "classnames";
-import ContentPlaceholder from "global/components/ContentPlaceholder";
-import IconComposer from "global/components/utility/IconComposer";
 
 import Authorize from "hoc/authorize";
 
@@ -24,27 +22,16 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
       projectCollections: select(
         requests.beProjectCollections,
         state.entityStore
+      ),
+      projectCollection: select(
+        requests.beProjectCollection,
+        state.entityStore
+      ),
+      collectionProjects: select(
+        requests.beCollectionProjects,
+        state.entityStore
       )
     };
-  };
-
-  static fetchProjectCollections = dispatch => {
-    const call = projectCollectionsAPI.index({ order: "position ASC" });
-
-    return dispatch(request(call, requests.beProjectCollections));
-  };
-
-  static fetchData = (getState, dispatch) => {
-    const promises = [];
-
-    const call = projectCollectionsAPI.index({ order: "position ASC" });
-
-    const { promise: one } = dispatch(
-      request(call, requests.beProjectCollections)
-    );
-    promises.push(one);
-
-    return Promise.all(promises);
   };
 
   static displayName = "ProjectCollection.Wrapper";
@@ -59,41 +46,133 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     route: PropTypes.object
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { showNew: false };
   }
 
+  componentDidMount() {
+    this.fetchProjectCollections();
+    this.fetchProjectCollection();
+    this.fetchCollectionProjects();
+  }
+
   componentWillUnmount() {
+    this.props.dispatch(flush(requests.beProjectCollection));
     this.props.dispatch(flush(requests.beProjectCollections));
     this.props.dispatch(flush(requests.beProjects));
+    this.props.dispatch(flush(requests.beCollectionProjects));
   }
 
-  activeProjectCollection() {
-    const { match, projectCollections } = this.props;
-    if (!size(projectCollections) > 0) return null;
-    return projectCollections.find(pc => pc.id === match.params.id);
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.fetchProjectCollection();
+      this.fetchCollectionProjects();
+    }
   }
 
-  updateProjectCollection = (projectCollection, changes, options = {}) => {
-    const call = projectCollectionsAPI.update(projectCollection.id, changes);
-    const projectCollectionRequest = request(
+  fetchProjectCollections = () => {
+    const call = projectCollectionsAPI.index({ order: "position ASC" });
+    const { promise } = this.props.dispatch(
+      request(call, requests.beProjectCollections)
+    );
+    return promise;
+  };
+
+  fetchProjectCollection = (page = 1, perPage = 12) => {
+    const id = this.props.match.params.id;
+    if (!id) return Promise.resolve();
+
+    const pageParams = { number: page, size: perPage };
+    const pagination = { collectionProjects: pageParams };
+
+    const call = projectCollectionsAPI.show(id, pagination);
+    const { promise } = this.props.dispatch(
+      request(call, requests.beProjectCollection)
+    );
+    return promise;
+  };
+
+  fetchCollectionProjects = () => {
+    const id = this.props.match.params.id;
+    if (!id) return Promise.resolve();
+    const call = collectionProjectsAPI.index(id);
+    const { promise } = this.props.dispatch(
+      request(call, requests.beCollectionProjects)
+    );
+    return promise;
+  };
+
+  destroyProjectCollection = (afterDestroy = this.returnToList) => {
+    const projectCollection = this.props.projectCollection;
+    const call = projectCollectionsAPI.destroy(projectCollection.id);
+    const options = { removes: projectCollection };
+    const destroyRequest = request(
       call,
-      requests.beProjectCollection,
+      requests.beProjectCollectionDestroy,
       options
     );
+    const { promise } = this.props.dispatch(destroyRequest);
+    promise.then(afterDestroy);
+    return promise;
+  };
 
-    this.props.dispatch(projectCollectionRequest).promise.then(() => {
-      ProjectCollectionWrapperContainer.fetchProjectCollections(
-        this.props.dispatch
-      );
-    });
+  returnToList = () => {
+    return this.props.history.push(lh.link("backendProjectCollections"));
+  };
+
+  buildUpdateProjectCollection = (id, changes) => {
+    return projectCollectionsAPI.update(id, changes);
+  };
+
+  buildCreateProjectCollection = model => {
+    return projectCollectionsAPI.create(model);
+  };
+
+  updateCollectionProject = (id, changes, options = {}) => {
+    const projectCollection = this.props.projectCollection;
+    const call = projectCollectionsAPI.updateCollectionProject(
+      projectCollection.id,
+      id,
+      changes
+    );
+    const projectCollectionRequest = request(
+      call,
+      requests.beCollectionProjectUpdate,
+      options
+    );
+    const { promise } = this.props.dispatch(projectCollectionRequest);
+    return promise;
+  };
+
+  updateProjectCollection = (
+    changes,
+    options = {},
+    optionalProjectCollection = null
+  ) => {
+    const projectCollection =
+      optionalProjectCollection || this.props.projectCollection;
+    const config = this.buildUpdateProjectCollection(
+      projectCollection.id,
+      changes
+    );
+    const updateRequest = request(
+      config,
+      requests.beProjectCollectionUpdate,
+      options
+    );
+    const { promise } = this.props.dispatch(updateRequest);
+    promise.then(this.fetchCollectionProjects);
+    return promise;
   };
 
   handleCollectionOrderChange = result => {
     const changes = { attributes: { position: result.position } };
-
-    this.updateProjectCollection(result, changes, { noTouch: true });
+    this.updateProjectCollection(
+      changes,
+      { noTouch: true },
+      { id: result.id }
+    ).then(this.fetchProjectCollections);
   };
 
   handleCollectionSelect = collection => {
@@ -112,6 +191,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
   };
 
   handleNewSuccess = projectCollection => {
+    this.fetchProjectCollections();
     const path = lh.link("backendProjectCollection", projectCollection.id);
     this.props.history.push(path);
     this.handleHideNew();
@@ -119,58 +199,50 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
 
   handleToggleVisibility = (projectCollection, visible) => {
     const changes = { attributes: { visible } };
-    this.updateProjectCollection(projectCollection, changes);
+    this.updateProjectCollection(changes, {}, projectCollection);
   };
 
-  renderChildRoutes(active, projectCollections) {
-    if (size(projectCollections) === 0)
-      return (
-        <ContentPlaceholder.Wrapper context="backend">
-          <ContentPlaceholder.Title icon="booksOnShelfStrokeUnique">
-            Ready to create a Project Collection?
-          </ContentPlaceholder.Title>
-          <ContentPlaceholder.Body>
-            With Project Collections, you can take control of what appears on
-            your Manifold Library homepage. Create custom groupings of Projects
-            and change their order and visibility. You can handpick your
-            collections and order them manually, or you can create Smart
-            Collections that automatically update based on your filtering
-            criteria.
-          </ContentPlaceholder.Body>
-          <ContentPlaceholder.Actions>
-            <button
-              className="button-icon-secondary"
-              onClick={this.handleShowNew}
-            >
-              <IconComposer
-                icon="plus16"
-                size={20}
-                iconClass={classnames(
-                  "button-icon-secondary__icon",
-                  "button-icon-secondary__icon--large"
-                )}
-              />
-              <span>{"Create a Collection"}</span>
-            </button>
-          </ContentPlaceholder.Actions>
-        </ContentPlaceholder.Wrapper>
-      );
-    const drawerProps = { closeUrl: lh.link("backendProjectCollections") };
+  get childProps() {
+    return {
+      projectCollection: this.props.projectCollection,
+      projectCollections: this.props.projectCollections,
+      collectionProjects: this.props.collectionProjects,
+      destroyProjectCollection: this.destroyProjectCollection,
+      updateProjectCollection: this.updateProjectCollection,
+      updateCollectionProject: this.updateCollectionProject,
+      buildUpdateProjectCollection: this.buildUpdateProjectCollection,
+      buildCreateProjectCollection: this.buildCreateProjectCollection,
+      refreshProjectCollection: this.fetchProjectCollection,
+      refreshProjectCollections: this.fetchProjectCollections,
+      refreshCollectionProjects: this.fetchCollectionProjects,
+      drawerProps: {
+        closeUrl: lh.link("backendProjectCollections")
+      }
+    };
+  }
 
+  renderChildRoutes() {
     return childRoutes(this.props.route, {
-      childProps: { projectCollection: active, drawerProps }
+      childProps: this.childProps
     });
   }
 
+  get hasProjectCollections() {
+    return !this.noProjectCollections;
+  }
+
+  get noProjectCollections() {
+    return size(this.props.projectCollections) === 0;
+  }
+
   render() {
-    const projectCollection = this.activeProjectCollection();
+    const projectCollection = this.props.projectCollection;
     const projectCollections = this.props.projectCollections;
     if (!projectCollections) return null;
 
-    const hasProjectCollections = projectCollections.length > 0;
     const wrapperClasses = classnames("project-collections", {
       "active-collection": projectCollection || this.state.showNew,
-      empty: !hasProjectCollections
+      empty: this.noProjectCollections
     });
 
     return (
@@ -184,7 +256,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
         <section className={wrapperClasses}>
           <div className="backend-panel">
             <div className="container">
-              {hasProjectCollections && (
+              {this.hasProjectCollections && (
                 <ProjectCollection.List
                   projectCollection={projectCollection}
                   projectCollections={projectCollections}
@@ -195,7 +267,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
                 />
               )}
               <div className="panel">
-                {hasProjectCollections && (
+                {this.hasProjectCollections && (
                   <ProjectCollection.Header
                     projectCollection={projectCollection}
                   />
@@ -208,9 +280,18 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
                   padding="large"
                   lockScroll="always"
                 >
-                  <New successHandler={this.handleNewSuccess} />
+                  <New
+                    successHandler={this.handleNewSuccess}
+                    {...this.childProps}
+                  />
                 </Drawer.Wrapper>
-                {this.renderChildRoutes(projectCollection, projectCollections)}
+                {this.noProjectCollections ? (
+                  <ProjectCollection.EmptyPlaceholder
+                    onShowNew={this.handleShowNew}
+                  />
+                ) : (
+                  this.renderChildRoutes()
+                )}
               </div>
             </div>
           </div>
