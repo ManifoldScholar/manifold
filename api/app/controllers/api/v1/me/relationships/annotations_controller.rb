@@ -17,23 +17,22 @@ module Api
             location = api_v1_me_relationships_annotations_url
             render_multiple_resources(
               @annotations,
-              each_serializer: AnnotationSerializer,
               include: [:creator],
               location: location,
-              meta: meta(@annotations)
+              meta: meta
             )
           end
 
           private
 
-          def meta(models)
-            meta = build_meta_for models
-            if params[:filter][:text]
-              meta[:annotated] = Annotation.created_by(current_user)
+          def meta
+            return {} unless params[:filter][:text]
+
+            {
+              annotated: Annotation.created_by(current_user)
                 .by_text(params[:filter][:text])
                 .exists?
-            end
-            meta
+            }
           end
 
           def location

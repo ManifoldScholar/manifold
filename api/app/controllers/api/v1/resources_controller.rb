@@ -3,8 +3,6 @@ module Api
     # resources controller
     class ResourcesController < ApplicationController
 
-      INCLUDES = [:project].freeze
-
       resourceful! Resource, authorize_options: { except: [:index, :show] } do
         Resource.filter(with_pagination!(resource_filter_params))
       end
@@ -17,8 +15,7 @@ module Api
       def show
         @resource = load_zresource
         render_single_resource @resource,
-                               serializer: ResourceFullSerializer,
-                               include: INCLUDES
+                               include: includes
       end
 
       def create
@@ -34,8 +31,7 @@ module Api
         authorized_params = only_meta ? resource_metadata_params : resource_params
         ::Updaters::Resource.new(authorized_params).update(@resource)
         render_single_resource @resource,
-                               serializer: ResourceFullSerializer,
-                               include: INCLUDES
+                               include: includes
       end
 
       def destroy
@@ -44,6 +40,10 @@ module Api
       end
 
       protected
+
+      def includes
+        [:project]
+      end
 
       def scope_for_zresources
         Resource.friendly

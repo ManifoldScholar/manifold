@@ -6,14 +6,13 @@ module Api
       def index
         outcome = Search::Query.run(search_options)
         if outcome.valid?
-          serializer = search_params[:raw] ? nil : SearchResultSerializer
-          render json: outcome.result,
-                 each_serializer: serializer,
-                 include: [model: [:creators, :creator]],
-                 meta: {
-                   keyword: search_options.dig(:keyword),
-                   pagination: pagination_dict(outcome.result)
-                 }
+          render_jsonapi outcome.result,
+                         include: [:model, :"model.creator", :"model.creators"],
+                         serializer: ::V1::SearchResultSerializer,
+                         meta: {
+                           keyword: search_options.dig(:keyword),
+                           pagination: pagination_dict(outcome.result)
+                         }
         else
           render_error outcome
         end

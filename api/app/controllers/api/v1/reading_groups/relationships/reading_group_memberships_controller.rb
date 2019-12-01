@@ -20,7 +20,6 @@ module Api
             location = api_v1_reading_group_relationships_reading_group_memberships_url(@reading_group.id)
             render_multiple_resources(
               @reading_group_memberships,
-              each_serializer: ReadingGroupMembershipSerializer,
               include: [:user],
               location: location
             )

@@ -8,11 +8,14 @@ exports[`Global.Form.InputError component renders correctly 1`] = `
   id={null}
   role="alert"
 >
-  <span
-    className="error"
-  >
-    Name can't be blank.  
-    <br />
+  <span>
+    <span
+      className="error"
+    >
+      Can't be blank. 
+      <br />
+    </span>
+     
   </span>
 </span>
 `;

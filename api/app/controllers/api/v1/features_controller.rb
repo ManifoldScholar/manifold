@@ -9,7 +9,7 @@ module Api
 
       def index
         @features = load_features
-        render_multiple_resources(@features, each_serializer: FeatureSerializer)
+        render_multiple_resources(@features)
       end
 
       def show

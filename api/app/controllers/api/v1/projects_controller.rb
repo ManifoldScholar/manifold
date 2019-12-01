@@ -3,12 +3,6 @@ module Api
     # Projects controller
     class ProjectsController < ApplicationController
 
-      INCLUDES = [
-        :creators, :contributors, :texts, :text_categories, :events,
-        :resource_collections, :resources, :subjects, :twitter_queries,
-        :permitted_users, :content_blocks, :action_callouts
-      ].freeze
-
       resourceful! Project, authorize_options: { except: [:index, :show] } do
         Project.filter(
           with_pagination!(project_filter_params),
@@ -19,15 +13,13 @@ module Api
 
       def index
         @projects = load_projects
-        render_multiple_resources @projects, include: %w(creators collaborators)
+        render_multiple_resources @projects, include: [:creators]
       end
 
       def show
         @project = scope_for_projects.find(params[:id])
         authorize_action_for @project
-        render_single_resource @project,
-                               serializer: ProjectFullSerializer,
-                               include: INCLUDES
+        render_single_resource @project, include: includes, params: { include_toc: @project.texts_in_toc_blocks_ids }
       end
 
       def create
@@ -41,8 +33,7 @@ module Api
         @project = load_and_authorize_project
         ::Updaters::Project.new(project_params).update(@project)
         render_single_resource @project,
-                               serializer: ProjectFullSerializer,
-                               include: INCLUDES
+                               include: includes
       end
 
       def destroy
@@ -52,14 +43,14 @@ module Api
 
       protected
 
+      def includes
+        [:creators, :contributors, :texts, :text_categories, :events,
+         :resource_collections, :resources, :subjects, :twitter_queries,
+         :permitted_users, :content_blocks, :action_callouts]
+      end
+
       def scope_for_projects
-        Project.friendly.includes(
-          { texts: [:titles, :text_subjects] },
-          :events,
-          :twitter_queries,
-          :text_categories,
-          :subjects
-        )
+        Project.friendly
       end
 
       def scope_visibility

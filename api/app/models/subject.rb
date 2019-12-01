@@ -26,7 +26,7 @@ class Subject < ApplicationRecord
   scope :by_used, lambda { |used|
     return all unless used.present?
 
-    joins(:project_subjects).where("project_subjects.id IS NOT NULL")
+    joins(:project_subjects).where("project_subjects.id IS NOT NULL").group(:id)
   }
 
   # Validations

@@ -19,7 +19,6 @@ module Api
             @events = load_events
             render_multiple_resources(
               @events,
-              each_serializer: EventSerializer,
               location: api_v1_project_relationships_events_url(@project)
             )
           end

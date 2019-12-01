@@ -10,11 +10,9 @@ module Api
             @project.content_blocks
           end
 
-          # TODO: Is this OK or should we refactor resourceful! to determine
-          # each_serializer based on each model instead of config?
           def index
             @content_blocks = @project.content_blocks
-            render json: @content_blocks, location: location
+            render_multiple_resources @content_blocks, location: location
           end
 
           def create

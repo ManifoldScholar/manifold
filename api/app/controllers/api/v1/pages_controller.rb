@@ -14,8 +14,7 @@ module Api
 
       def show
         @page = Page.friendly.find(params[:id])
-        render_single_resource @page,
-                               serializer: PageFullSerializer
+        render_single_resource @page
       end
 
       def create
@@ -26,8 +25,7 @@ module Api
       def update
         @page = load_and_authorize_page
         ::Updaters::Page.new(page_params).update(@page)
-        render_single_resource @page,
-                               serializer: PageFullSerializer
+        render_single_resource @page
       end
 
       def destroy

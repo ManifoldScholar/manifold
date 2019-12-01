@@ -35,6 +35,10 @@ class Settings < ApplicationRecord
       value = merge_settings_into!(:#{section}, new_values.symbolize_keys)
       write_attribute(:#{section}, value)
     end
+
+    def force_#{section}=(value)
+      write_attribute(:#{section}, value)
+    end
     RUBY
   end
 

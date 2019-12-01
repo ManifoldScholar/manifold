@@ -109,11 +109,11 @@ class Ingestion < ApplicationRecord
   # rubocop:disable Metrics/MethodLength
   def begin_processing(processing_user = nil)
     # Announce the new state of the ingestion.
-    serialization_options = { scope: processing_user }
-    serialization = ActiveModelSerializers::SerializableResource.new(
+    serialization_options = { current_user: processing_user }
+    serialization = V1::IngestionSerializer.new(
       self,
       serialization_options
-    )
+    ).serializable_hash
     IngestionChannel.broadcast_to self, type: "entity", payload: serialization
 
     begin

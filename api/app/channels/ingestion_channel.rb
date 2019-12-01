@@ -63,8 +63,11 @@ class IngestionChannel < ApplicationCable::Channel
   end
 
   def send_model(ingestion)
-    options = { scope: current_user }
-    serialization = ActiveModelSerializers::SerializableResource.new(ingestion, options)
+    serialization_options = { current_user: current_user }
+    serialization = V1::IngestionSerializer.new(
+      ingestion,
+      serialization_options
+    ).serializable_hash
     IngestionChannel.broadcast_to ingestion, type: "entity", payload: serialization
   end
 

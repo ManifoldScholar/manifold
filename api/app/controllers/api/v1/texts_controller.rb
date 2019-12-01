@@ -3,8 +3,6 @@ module Api
     # Texts controller
     class TextsController < ApplicationController
 
-      INCLUDES = %w(project).freeze
-
       resourceful! Text, authorize_options: { except: [:index, :show] } do
         Text.all
       end
@@ -12,7 +10,7 @@ module Api
       # GET /texts
       def index
         @texts = load_texts
-        render_multiple_resources @texts, include: INCLUDES
+        render_multiple_resources @texts, include: [:project]
       end
 
       # GET /texts/1
@@ -20,10 +18,8 @@ module Api
         @text = scope_for_texts.includes(:project, :text_sections, :stylesheets,
                                          :toc_section)
           .find(params[:id])
-        includes = INCLUDES + %w(category creators contributors stylesheets)
         authorize_action_for @text
         render_single_resource @text,
-                               serializer: TextFullSerializer,
                                include: includes
       end
 
@@ -34,10 +30,8 @@ module Api
 
       def update
         @text = load_and_authorize_text
-        includes = INCLUDES + %w(creators contributors)
         ::Updaters::Text.new(text_params).update(@text)
         render_single_resource @text,
-                               serializer: TextFullSerializer,
                                include: includes
       end
 
@@ -47,6 +41,10 @@ module Api
       end
 
       protected
+
+      def includes
+        [:project, :category, :creators, :contributors, :stylesheets]
+      end
 
       def scope_for_texts
         Text.friendly

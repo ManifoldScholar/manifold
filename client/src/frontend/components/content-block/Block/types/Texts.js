@@ -37,7 +37,9 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
   }
 
   get uncategorizedTexts() {
-    return this.texts.filter(text => text.relationships.category === null);
+    return this.texts.filter(
+      text => !text.relationships || !text.relationships.category
+    );
   }
 
   get visibility() {
@@ -53,7 +55,11 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
   }
 
   textsForCategory(category) {
-    return this.texts.filter(text => text.relationships.category === category);
+    const texts = this.texts.filter(text => {
+      if (!text.relationships || !text.relationships.category) return false;
+      return text.relationships.category.id === category.id;
+    });
+    return texts;
   }
 
   render() {

@@ -8,8 +8,6 @@ class ApplicationController < ActionController::API
   include JsonApi
   include Authority::Controller
 
-  serialization_scope :serial_scope
-
   before_action :set_paper_trail_whodunnit
 
   rescue_from ApiExceptions::StandardError, with: :render_error_response
@@ -34,7 +32,7 @@ class ApplicationController < ActionController::API
         nil
       end
 
-      def can_read?(resource)
+      def can_read?(resource, *_other)
         resource.readable_by? self
       end
     end.new
@@ -43,12 +41,6 @@ class ApplicationController < ActionController::API
 
   def user_for_paper_trail
     current_user&.to_global_id.to_s if current_user
-  end
-
-  def serial_scope
-    @serial_scope ||=
-      Api::V1::SerializationContext.new controller: self,
-                                        current_user: current_user
   end
 
   def page_size

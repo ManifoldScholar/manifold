@@ -39,7 +39,11 @@ export default class TextListListItemContent extends Component {
 
   get creatorNames() {
     if (!this.props.showAuthors) return null;
-    return this.props.text.attributes.creatorNames;
+    const creatorNames = this.props.text.attributes.creatorNames;
+    if (Array.isArray(creatorNames)) {
+      return creatorNames.map(n => `${n.firstName} ${n.lastName}`).join(", ");
+    }
+    return creatorNames;
   }
 
   get date() {

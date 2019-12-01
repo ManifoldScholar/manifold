@@ -14,7 +14,7 @@ module Api
         authorize_action_for @ingestion
         render_single_resource(
           @ingestion,
-          includes: :text,
+          include: [:creator],
           location: location(@ingestion)
         )
       end
@@ -28,7 +28,7 @@ module Api
         @ingestion.save
         render_single_resource(
           @ingestion,
-          include: [:creator, :text],
+          include: [:creator],
           location: location(@ingestion)
         )
       end

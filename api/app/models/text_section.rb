@@ -48,6 +48,7 @@ class TextSection < ApplicationRecord
   delegate :title, to: :text, prefix: true, allow_nil: true
   delegate :creator_names_array, to: :text, prefix: true, allow_nil: true
   delegate :slug, to: :text, prefix: true
+  delegate :social_image, to: :text
 
   # Validation
   validates :position, numericality: { only_integer: true }

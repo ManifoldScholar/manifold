@@ -12,7 +12,7 @@ module Api
 
           def index
             @reading_groups = load_reading_groups
-            render_multiple_resources @reading_groups, include: ["texts", reading_group_memberships: :user]
+            render_multiple_resources @reading_groups, include: ["texts", "reading_group_memberships.user"]
           end
 
         end

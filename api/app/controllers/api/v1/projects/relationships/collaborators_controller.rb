@@ -16,7 +16,6 @@ module Api
             render_multiple_resources(
               @collaborators,
               include: %w(maker),
-              each_serializer: CollaboratorSerializer,
               location: api_v1_project_relationships_collaborators_url(@project)
             )
           end

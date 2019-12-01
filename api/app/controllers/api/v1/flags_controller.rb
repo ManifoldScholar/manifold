@@ -3,7 +3,6 @@ module Api
     # Flags controller
     class FlagsController < ApplicationController
       before_action :set_subject
-      INCLUDES = %w(creator).freeze
 
       resourceful! Flag do
         current_user.created_flags

@@ -9,7 +9,7 @@ function hydrateEntity({ id, type }, entities, hydrationMap = {}) {
   const entityPath = `${type}.${id}`;
   const source = get(entities, entityPath);
   let entity;
-  if (!source) return null;
+  if (!source) return { id, type };
   // We need to keep track of which entities we've hydrated to ensure that we don't end
   // up with infinite recursion. For example, a project has many texts, and a text belongs
   // to a project. When we hydrate a text for the project, we'll pick up the text's

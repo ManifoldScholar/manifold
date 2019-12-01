@@ -20,8 +20,7 @@ module Api
       def show
         @reading_group = uuid? ? load_and_authorize_reading_group : lookup_reading_group
         render_single_resource @reading_group,
-                               serializer: ReadingGroupSerializer,
-                               include: ["texts", reading_group_memberships: :user]
+                               include: ["texts", "reading_group_memberships.user"]
       end
 
       def create
@@ -32,8 +31,7 @@ module Api
       def update
         @reading_group = load_and_authorize_reading_group
         ::Updaters::ReadingGroup.new(reading_group_params).update(@reading_group)
-        render_single_resource @reading_group,
-                               serializer: ReadingGroupSerializer
+        render_single_resource @reading_group
       end
 
       def destroy

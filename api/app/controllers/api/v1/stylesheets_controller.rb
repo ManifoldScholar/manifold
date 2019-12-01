@@ -13,7 +13,6 @@ module Api
         @stylesheet = load_stylesheet
         render_single_resource(
           @stylesheet,
-          serializer: StylesheetFullSerializer,
           include: %w(text text_sections),
           location: location(@stylesheet)
         )
@@ -28,7 +27,6 @@ module Api
         @stylesheet.save
         render_single_resource(
           @stylesheet,
-          serializer: set_serializer,
           location: location(@stylesheet)
         )
       end
@@ -39,7 +37,6 @@ module Api
         render_single_resource(
           @stylesheet,
           include: %w(text text_sections),
-          serializer: set_serializer,
           location: location(@stylesheet)
         )
       end
@@ -58,12 +55,6 @@ module Api
 
       def set_text
         @text = Text.friendly.find(params[:text_id]) if params[:text_id]
-      end
-
-      def set_serializer
-        return error_serializer unless @stylesheet.valid?
-
-        StylesheetFullSerializer
       end
 
     end

@@ -16,8 +16,7 @@ module Api
       def index
         @users = load_users
         render_multiple_resources(
-          @users,
-          each_serializer: UserSerializer
+          @users
         )
       end
 

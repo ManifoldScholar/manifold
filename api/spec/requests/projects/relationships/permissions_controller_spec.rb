@@ -1,12 +1,11 @@
 require "rails_helper"
 
 RSpec.describe "Project Permissions API", type: :request do
-
   include_context("authenticated request")
   include_context("param helpers")
   let(:project) { FactoryBot.create(:project) }
   let(:user) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
-  let(:params) { json_payload({ attributes: { role_names: [Role::ROLE_PROJECT_EDITOR] }, relationships: { user: { data: { id: user.id, type: 'users' } } } }) }
+  let(:params) { json_payload(attributes: { role_names: [Role::ROLE_PROJECT_EDITOR] }, relationships: { user: { data: { id: user.id, type: "users" } } }) }
 
   describe "sends a list of project permissions" do
     let(:path) { api_v1_project_relationships_permissions_path(project) }
@@ -17,6 +16,12 @@ RSpec.describe "Project Permissions API", type: :request do
         it "has a 200 status code" do
           get path, headers: headers
           expect(response).to have_http_status(200)
+        end
+
+        it "has a data attribute" do
+          get path, headers: headers
+          api_response = JSON.parse(response.body)
+          expect(api_response).to be_a Hash
         end
       end
     end
@@ -132,9 +137,9 @@ RSpec.describe "Project Permissions API", type: :request do
       end
 
       it "destroys a permission successfully" do
-        expect{
+        expect do
           delete @path, headers: headers
-        }.to change{Permission.count}.by(-1)
+        end.to change { Permission.count }.by(-1)
       end
     end
 
@@ -146,5 +151,4 @@ RSpec.describe "Project Permissions API", type: :request do
       end
     end
   end
-
 end

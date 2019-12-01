@@ -9,7 +9,7 @@ module Api
 
       def index
         @tags = load_tags
-        render_multiple_resources @tags
+        render_multiple_resources @tags, serializer: ::V1::TagSerializer
       end
 
     end

@@ -7,8 +7,6 @@ module Api
 
           before_action :set_text_section, only: [:index]
 
-          INCLUDES = %w().freeze
-
           resourceful! ResourceCollection, authorize_options: { except: [:index] } do
             @text_section.resource_collections
           end
@@ -16,8 +14,7 @@ module Api
           def index
             @collections = load_resource_collections
             render_multiple_resources(
-              @collections,
-              each_serializer: ResourceCollectionSerializer
+              @collections
             )
           end
 

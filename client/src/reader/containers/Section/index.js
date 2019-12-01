@@ -194,7 +194,6 @@ export class SectionContainer extends Component {
     if (!this.props.section || !this.props.text) return null;
     const { text, section, settings } = this.props;
     const { project } = text.relationships;
-    const projectImage = project ? project.attributes.heroStyles.medium : null;
     const textTitle = text.attributes.titlePlaintext;
     const sectionTitle = section.attributes.name;
     const projectTitle = project.attributes.titlePlainText;
@@ -219,7 +218,7 @@ export class SectionContainer extends Component {
         {this.renderStyles(this.props)}
         <HeadContent
           title={metaTitle}
-          image={projectImage}
+          image={section.attributes.socialImage}
           description={sectionDescription}
         />
         {this.renderRoutes()}

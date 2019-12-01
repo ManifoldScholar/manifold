@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/ManifoldScholar/fast_jsonapi.git
+  revision: 486d550db98d15f9b6daed70ff90fc0d6d34f3a2
+  branch: master
+  specs:
+    fast_jsonapi (1.6.0)
+      activesupport (>= 4.2)
+
+GIT
   remote: https://github.com/steveklabnik/metadown.git
   revision: 34b79ad7e0bdf560ce13e384caa1626569397798
   tag: v1.1.0.beta
@@ -36,11 +44,6 @@ GEM
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
     active_interaction (3.7.1)
       activemodel (>= 4, < 7)
-    active_model_serializers (0.10.10)
-      actionpack (>= 4.1, < 6.1)
-      activemodel (>= 4.1, < 6.1)
-      case_transform (>= 0.2)
-      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (5.2.3)
       activesupport (= 5.2.3)
       globalid (>= 0.3.6)
@@ -87,8 +90,6 @@ GEM
     bcrypt (3.1.13)
     buftok (0.2.0)
     builder (3.2.3)
-    case_transform (0.2)
-      activesupport
     charlock_holmes (0.7.6)
     chroma (0.2.0)
     citeproc (1.0.9)
@@ -215,7 +216,6 @@ GEM
       ruby-vips (>= 2.0.13, < 3)
     jaro_winkler (1.5.3)
     json (2.2.0)
-    jsonapi-renderer (0.2.2)
     jsonb_accessor (1.0.0)
       activerecord (>= 5.0)
       activesupport (>= 5.0)
@@ -536,7 +536,6 @@ PLATFORMS
 DEPENDENCIES
   aasm (~> 4.0)
   active_interaction (~> 3.0)
-  active_model_serializers (~> 0.10)
   activejob-retry (~> 0.4)
   activejob-traffic_control (~> 0.1.0)
   activerecord-import (~> 0.22.0)
@@ -565,6 +564,7 @@ DEPENDENCIES
   equalizer
   factory_bot_rails (~> 4.0)
   faker (~> 2.0)
+  fast_jsonapi!
   filesize (~> 0.1.0)
   foreman (~> 0.84.0)
   friendly_id (~> 5.0)

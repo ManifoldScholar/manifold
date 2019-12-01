@@ -63,13 +63,15 @@ module Authentication
   end
 
   # Returns user with auth token
-  def render_authenticated_user(user)
+  def render_authenticated_user(user, include_token: true, status: :ok)
     if user
-      render json: user,
-             serializer: CurrentUserSerializer,
-             meta: { authToken: AuthToken.encode(user_id: user.id) },
-             override_current_user: user,
-             include: %w(favorites)
+      render_jsonapi user,
+                     serializer: ::V1::CurrentUserSerializer,
+                     params: { include_private_data: true },
+                     meta: include_token ? { authToken: AuthToken.encode(user_id: user.id) } : {},
+                     override_current_user: user,
+                     include: %w(favorites),
+                     status: status
     else
       render json: { errors: ["Invalid username or password"] }, status: :unauthorized
     end

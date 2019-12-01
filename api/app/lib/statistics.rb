@@ -99,10 +99,6 @@ class Statistics
     User.count
   end
 
-  def read_attribute_for_serialization(attr)
-    send(attr)
-  end
-
   private
 
   # @param [Numeric] value
@@ -124,5 +120,6 @@ class Statistics
         yield instance
       end
     end
+
   end
 end

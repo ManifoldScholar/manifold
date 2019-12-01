@@ -22,8 +22,7 @@ module Api
             location = api_v1_text_section_relationships_annotations_url(@text_section.id)
             render_multiple_resources(
               @annotations,
-              each_serializer: AnnotationSerializer,
-              include: [:creator, :reading_group],
+              include: [:creator],
               location: location
             )
           end
