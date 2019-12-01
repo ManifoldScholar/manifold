@@ -5,9 +5,23 @@ module SystemUpgrades
 
       def perform!
         update_resource_sort_titles!
+        update_project_counters!
+        cache_formatted_attributes!
       end
 
       private
+
+      def update_project_counters!
+        logger.info("===================================================================")
+        logger.info("Updating Project Counters                                          ")
+        logger.info("===================================================================")
+        logger.info("Prior to version 4.0.1, Manifold calculated counts of project      ")
+        logger.info("resources on the fly, which was inefficient. Now we cache these    ")
+        logger.info("counts.                                                            ")
+        logger.info("===================================================================")
+        Project.find_each { |p| Project.reset_counters(p.id, :resources) }
+        Project.find_each { |p| Project.reset_counters(p.id, :resource_collections) }
+      end
 
       def update_resource_sort_titles!
         logger.info("===================================================================")
@@ -18,6 +32,21 @@ module SystemUpgrades
         logger.info("===================================================================")
         Resource.all.each(&:update_sort_title!)
         Project.all.each(&:update_sort_title!)
+      end
+
+      def cache_formatted_attributes!
+        logger.info("===================================================================")
+        logger.info("Cache Formatted Attributes                                         ")
+        logger.info("===================================================================")
+        logger.info("We now cache some rendered markdown in the database to speed up    ")
+        logger.info("very long lists of resources. Prime these caches.                  ")
+        logger.info("===================================================================")
+        TextTitle.find_each { |tt| tt.update_db_cache_for_formatted_value && tt.save }
+        Text.find_each { |t| t.update_db_cache_for_formatted_description && t.save }
+        Project.find_each { |t| t.update_db_cache_for_formatted_title && t.save }
+        Project.find_each { |t| t.update_db_cache_for_formatted_subtitle && t.save }
+
+        Maker.find_each { |t| t.cache_name && t.save }
       end
 
       # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
