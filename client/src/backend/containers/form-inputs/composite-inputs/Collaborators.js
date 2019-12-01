@@ -79,7 +79,6 @@ export class FormCollaborators extends Component {
 
   render() {
     const entity = this.props.entity;
-
     return (
       <section>
         <form className="form-secondary">

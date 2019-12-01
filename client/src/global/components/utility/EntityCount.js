@@ -62,7 +62,6 @@ export default class EntityCount extends PureComponent {
       totalCount > 1 || totalCount === 0
         ? this.props.pluralUnit
         : this.props.singularUnit;
-
     return this.props.countOnly
       ? this.renderCount(totalCount, label)
       : this.renderRange(start, end, totalCount, label);
