@@ -2,12 +2,12 @@
 ENV["RAILS_ENV"] ||= "test"
 require "spec_helper"
 
-require File.expand_path("../../config/environment", __FILE__)
+require File.expand_path("../config/environment", __dir__)
 
 require "rspec/rails"
 require "webmock/rspec"
 require "database_cleaner"
-require 'closure_tree/test/matcher'
+require "closure_tree/test/matcher"
 require "scanf"
 require "with_model"
 
@@ -35,7 +35,7 @@ RSpec.configure do |config|
   config.include TestHelpers
   config.extend WithModel
 
-  config.alias_it_should_behave_like_to :the_subject_behaves_like, 'the subject\'s'
+  config.alias_it_should_behave_like_to :the_subject_behaves_like, "the subject's"
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -83,7 +83,7 @@ RSpec.configure do |config|
 
   # Allow elastic search for tests tagged with elasticsearch
   config.around(:all) do |example|
-    if (example.metadata[:elasticsearch])
+    if example.metadata[:elasticsearch]
       WebMock.disable_net_connect!(allow: /127\.0\.0\.1:2?9200/)
       example.run
     else

@@ -1,18 +1,16 @@
 require "rails_helper"
 
 RSpec.describe "Me API", type: :request do
-
   include_context("authenticated request")
   include_context("param helpers")
   let(:path) { api_v1_me_path }
 
   describe "updates the current user" do
-
     let(:first_name) { "John" }
     let(:last_name) { "Rambozo" }
-    let(:update_params) {
+    let(:update_params) do
       json_payload(attributes: { firstName: first_name, lastName: last_name })
-    }
+    end
     let(:api_response) { JSON.parse(response.body) }
 
     context "when the user has not authenticated" do
@@ -37,22 +35,19 @@ RSpec.describe "Me API", type: :request do
         it("contains the updated first name") { expect_updated_param("firstName", "Janko") }
         it("contains the updated last name") { expect_updated_param("lastName", "Rambozo") }
         describe "the avatar" do
-
-          let(:params) { json_payload(attributes: {avatar: image_params }) }
+          let(:params) { json_payload(attributes: { avatar: image_params }) }
           before(:each) { patch path, headers: reader_headers, params: params }
 
           it("has an updated avatar") {
             reader.reload
             expect(reader.avatar.present?).to be true
           }
-
         end
       end
     end
   end
 
   describe "sends the current user" do
-
     context "when the user is a reader" do
       before(:each) { get path, headers: reader_headers }
       let(:api_response) { JSON.parse(response.body) }
