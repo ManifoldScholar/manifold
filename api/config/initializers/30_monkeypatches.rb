@@ -12,3 +12,28 @@ class WebAgent
     end
   end
 end
+
+# We want to namespace some serializers.
+module FastJsonapi
+  module ObjectSerializer
+    class_methods do
+      def compute_serializer_name(serializer_key)
+        return serializer_key unless serializer_key.is_a? Symbol
+
+        serializer_map = {
+          ResourcesBlock: :'::V1::Content::ResourcesBlockSerializer',
+          MarkdownBlock: :'::V1::Content::MarkdownBlockSerializer',
+          RecentActivityBlock: :'::V1::Content::RecentActivityBlockSerializer',
+          TableOfContentsBlock: :'::V1::Content::TableOfContentsBlockSerializer',
+          TextsBlock: :'::V1::Content::TextsBlockSerializer',
+          MetadataBlock: :'::V1::Content::MetadataBlockSerializer'
+        }
+        return serializer_map[serializer_key] if serializer_map.key?(serializer_key)
+
+        namespace = name.gsub(/()?\w+Serializer$/, "")
+        serializer_name = serializer_key.to_s.classify + "Serializer"
+        (namespace + serializer_name).to_sym
+      end
+    end
+  end
+end
