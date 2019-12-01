@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_20_014230) do
+ActiveRecord::Schema.define(version: 2019_11_30_132659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -464,6 +464,10 @@ ActiveRecord::Schema.define(version: 2019_11_20_014230) do
     t.boolean "finished", default: false
     t.integer "resource_collections_count", default: 0
     t.integer "resources_count", default: 0
+    t.string "cached_title_formatted"
+    t.string "cached_subtitle_formatted"
+    t.string "cached_title_plaintext"
+    t.string "cached_subtitle_plaintext"
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 
@@ -780,6 +784,7 @@ ActiveRecord::Schema.define(version: 2019_11_20_014230) do
     t.datetime "updated_at", null: false
     t.uuid "text_id"
     t.string "cached_value_formatted"
+    t.string "cached_value_plaintext"
     t.index ["text_id"], name: "index_text_titles_on_text_id"
   end
 
@@ -806,6 +811,7 @@ ActiveRecord::Schema.define(version: 2019_11_20_014230) do
     t.jsonb "cover_data", default: {}
     t.boolean "published", default: false, null: false
     t.string "cached_description_formatted"
+    t.string "cached_description_plaintext"
     t.index ["category_id"], name: "index_texts_on_category_id"
     t.index ["created_at"], name: "index_texts_on_created_at", using: :brin
     t.index ["project_id"], name: "index_texts_on_project_id"
@@ -1056,5 +1062,30 @@ ActiveRecord::Schema.define(version: 2019_11_20_014230) do
              FROM (collaborators c
                JOIN makers m ON ((m.id = c.maker_id)))
             WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
+  SQL
+  create_view "project_summaries", sql_definition: <<-SQL
+      SELECT p.id,
+      p.id AS project_id,
+      p.title,
+      p.cached_title_formatted AS title_formatted,
+      p.cached_title_plaintext AS title_plaintext,
+      p.subtitle,
+      p.cached_subtitle_formatted AS subtitle_formatted,
+      p.cached_subtitle_plaintext AS subtitle_plaintext,
+      p.publication_date,
+      p.created_at,
+      p.updated_at,
+      p.slug,
+      p.avatar_color,
+      p.avatar_data,
+      p.draft,
+      p.finished,
+      pm.creator_names
+     FROM (projects p
+       LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
+              string_agg((m.cached_full_name)::text, ', '::text) FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
+             FROM (collaborators c
+               JOIN makers m ON ((m.id = c.maker_id)))
+            WHERE (((c.collaboratable_type)::text = 'Project'::text) AND (c.collaboratable_id = p.id))) pm ON (true));
   SQL
 end
