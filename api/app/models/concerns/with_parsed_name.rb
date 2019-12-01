@@ -13,6 +13,7 @@ module WithParsedName
     validate :nickname_not_blank!
     validates :first_name, :last_name, length: { maximum: 50 }
 
+    before_save :cache_name, if: :full_name_db_cacheable?
     before_validation :ensure_nickname
   end
 
@@ -26,6 +27,14 @@ module WithParsedName
     end
   end
   # rubocop:enable Rails/ReadWriteAttribute
+
+  def full_name_db_cacheable?
+    respond_to? "cached_full_name="
+  end
+
+  def cache_name
+    self.cached_full_name = full_name
+  end
 
   def ensure_nickname
     return unless respond_to? :nickname
