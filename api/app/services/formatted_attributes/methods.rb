@@ -17,7 +17,9 @@ module FormattedAttributes
         plaintext: :"#{attribute}_plaintext",
         refresh: :"refresh_formatted_#{attribute}",
         textify: :"textify_#{attribute}",
-        saved_changed_to?: :"saved_change_to_#{attribute}"
+        saved_changed_to?: :"saved_change_to_#{attribute}",
+        update_db_cache: :"update_db_cache_for_formatted_#{attribute}",
+        db_cacheable?: :"formatted_#{attribute}_db_cacheable?"
       }
 
       initialize_methods!
@@ -31,60 +33,74 @@ module FormattedAttributes
 
     # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def initialize_methods!
-      class_eval <<-RUBY, __FILE__, __LINE__ + 1
-          extend ActiveSupport::Concern
+      class_eval <<~RUBY, __FILE__, __LINE__ + 1
+        extend ActiveSupport::Concern
 
-          included do
-            after_save :#{method_name(:refresh)}, if: :#{method_name(:saved_changed_to?)}
-          end
+        included do
+          before_save :#{method_name(:update_db_cache)}, if: :#{method_name(:db_cacheable?)}
+          after_save :#{method_name(:refresh)}, if: :#{method_name(:saved_changed_to?)}
+        end
 
-          def #{method_name(:formatted)}
-            if persisted?
-              Rails.cache.fetch(#{method_name(:formatted_cache_key)}) do
-                #{method_name(:format)}
-              end
-            else
+        def #{method_name(:formatted)}
+          if persisted?
+            Rails.cache.fetch(#{method_name(:formatted_cache_key)}) do
               #{method_name(:format)}
             end
+          else
+            #{method_name(:format)}
           end
+        end
 
-          def #{method_name(:plaintext)}
-            if persisted?
-              Rails.cache.fetch #{method_name(:plaintext_cache_key)} do
-                #{method_name(:textify)}
-              end
-            else
+        def #{method_name(:plaintext)}
+          if persisted?
+            Rails.cache.fetch #{method_name(:plaintext_cache_key)} do
               #{method_name(:textify)}
             end
+          else
+            #{method_name(:textify)}
           end
+        end
 
-          def #{method_name(:format)}
-            value = #{container.present? ? "#{container}.dig('#{attribute}')" : attribute.to_s}
-            SimpleFormatter.run!(
-              input: value,
-              include_wrap: #{include_wrap?},
-              renderer_options: #{renderer_options}
-            )
-          end
+        def #{method_name(:format)}
+          _value = #{container.present? ? "#{container}.dig('#{attribute}')" : attribute.to_s}
+          SimpleFormatter.run!(
+            input: _value,
+            include_wrap: #{include_wrap?},
+            renderer_options: #{renderer_options}
+          )
+        end
 
-          def #{method_name(:textify)}
-            Rails::Html::FullSanitizer.new.sanitize #{method_name(:formatted)}
-          end
+        def #{method_name(:textify)}
+          Rails::Html::FullSanitizer.new.sanitize #{method_name(:formatted)}
+        end
 
-          def #{method_name(:refresh)}
-            Rails.cache.write(#{method_name(:formatted_cache_key)}, #{method_name(:format)})
-            Rails.cache.write(#{method_name(:plaintext_cache_key)}, #{method_name(:textify)})
-          end
+        def #{method_name(:refresh)}
+          Rails.cache.write(#{method_name(:formatted_cache_key)}, #{method_name(:format)})
+          Rails.cache.write(#{method_name(:plaintext_cache_key)}, #{method_name(:textify)})
+        end
 
-          private
+        def #{method_name(:update_db_cache)}
+          format = "cached_#{attribute}_formatted="
+          plaintext = "cached_#{attribute}_plaintext="
+          send(format, #{method_name(:format)}) if respond_to?(format)
+          send(plaintext, #{method_name(:plaintext)}) if respond_to?(plaintext)
+        end
 
-          def #{method_name(:formatted_cache_key)}
-            "#{Rails.env.downcase}/\#{model_name.cache_key}/\#{id}/formatted/#{attribute}"
-          end
+        def #{method_name(:db_cacheable?)}
+          return false unless respond_to?("cached_#{attribute}_formatted=") || respond_to?("cached_#{attribute}_plaintext=")
+          return false unless respond_to? "#{attribute}_changed?"
+          #{attribute}_changed?
+        end
 
-          def #{method_name(:plaintext_cache_key)}
-            "#{Rails.env.downcase}/\#{model_name.cache_key}/\#{id}/plaintext/#{attribute}"
-          end
+        private
+
+        def #{method_name(:formatted_cache_key)}
+          "#{Rails.env.downcase}/\#{model_name.cache_key}/\#{id}/formatted/#{attribute}"
+        end
+
+        def #{method_name(:plaintext_cache_key)}
+          "#{Rails.env.downcase}/\#{model_name.cache_key}/\#{id}/plaintext/#{attribute}"
+        end
       RUBY
 
       return unless container.present?
