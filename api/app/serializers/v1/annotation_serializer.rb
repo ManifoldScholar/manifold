@@ -58,6 +58,7 @@ module V1
     end
 
     has_one :creator,
+            record_type: :users,
             if: proc { |object, params| creator_identity_visible?(object, params) },
             serializer: ::V1::UserSerializer
 
