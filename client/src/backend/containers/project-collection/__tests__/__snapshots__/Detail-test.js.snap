@@ -273,7 +273,15 @@ exports[`Backend.ProjectCollection.Detail container renders correctly 1`] = `
                 </h3>
                 <h4
                   className="entity-row__subtitle entity-row__subtitle--in-grid"
-                />
+                >
+                  <span
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": undefined,
+                      }
+                    }
+                  />
+                </h4>
                 <div
                   className="entity-row__meta entity-row__meta--in-grid"
                 />

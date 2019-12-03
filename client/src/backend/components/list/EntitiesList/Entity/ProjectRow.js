@@ -107,7 +107,11 @@ export default class ProjectRow extends PureComponent {
           />
         }
         titlePlainText={this.attr.title}
-        subtitle={this.subtitle}
+        subtitle={
+          <span
+            dangerouslySetInnerHTML={{ __html: this.attr.subtitleFormatted }}
+          />
+        }
         meta={this.meta}
         label={this.label}
         figure={this.figure}
