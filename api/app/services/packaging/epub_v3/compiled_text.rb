@@ -27,6 +27,10 @@ module Packaging
         "manifold-#{text_id}"
       end
 
+      def has_cover_image?
+        original_cover_image.present?
+      end
+
       def has_language?
         language.present?
       end
@@ -35,6 +39,12 @@ module Packaging
       # @return [String]
       def language
         text.language_plaintext
+      end
+
+      # @!attribute [r] original_cover_image
+      # @return [AttachmentUploader::UploadedFile, nil]
+      memoize def original_cover_image
+        text.cover_original
       end
 
       # @!attribute [r] primary_identifier
@@ -47,6 +57,13 @@ module Packaging
       # @return [String]
       memoize def reader_url
         URI.join(Packaging::EpubV3::Container["frontend_url"], "/read/#{text_id}").to_s
+      end
+
+      # @return [Hash]
+      def to_convert_cover_image_inputs
+        {}.tap do |h|
+          h[:uploaded_file] = original_cover_image if has_cover_image?
+        end
       end
     end
   end

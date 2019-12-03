@@ -15,6 +15,8 @@ module Packaging
 
         pipe :add_collaborators!, with: "book_compilation.add_collaborators"
 
+        pipe :add_cover_image!, with: "book_compilation.add_cover_image"
+
         pipe :add_ingestion_sources, with: "book_compilation.add_ingestion_sources"
 
         pipe :add_stylesheets!, with: "book_compilation.add_stylesheets"
