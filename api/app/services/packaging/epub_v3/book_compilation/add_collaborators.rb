@@ -2,7 +2,7 @@ module Packaging
   module EpubV3
     module BookCompilation
       class AddCollaborators
-        include Dry::Transaction::Operation
+        include Packaging::PipelineOperation
 
         # @param [Packaging::EpubV3::BookContext] context
         # @return [void]
