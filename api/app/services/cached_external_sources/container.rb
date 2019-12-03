@@ -1,24 +1,8 @@
 module CachedExternalSources
   # @api private
-  # rubocop:disable Metrics/BlockLength
   class Container
-    extend Dry::Container::Mixin
+    include Concerns::IntrospectiveContainer
 
-    register "fetch" do
-      CachedExternalSources::Fetch.new
-    end
-
-    register "fetch_content_type" do
-      CachedExternalSources::FetchContentType.new
-    end
-
-    register "possibly_download" do
-      CachedExternalSources::PossiblyDownload.new
-    end
-
-    register "pipeline" do
-      CachedExternalSources::Pipeline.new
-    end
+    register_simple_callables :fetch, :fetch_content_type, :possibly_download, :pipeline
   end
-  # rubocop:enable Metrics/BlockLength
 end

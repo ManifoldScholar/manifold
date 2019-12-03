@@ -14,8 +14,6 @@ module Packaging
               item.add_content ingestion_source.to_io
 
               item.set_media_type ingestion_source.content_type
-
-              item.cover_image if ingestion_source.cover_image?
             end
           end
         end
