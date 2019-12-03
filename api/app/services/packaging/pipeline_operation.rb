@@ -11,5 +11,9 @@ module Packaging
 
       Success(built_state)
     end
+
+    def compose_monadic_interaction(interaction, inputs = {}, &block)
+      interaction.run_as_monad(inputs, &block)
+    end
   end
 end

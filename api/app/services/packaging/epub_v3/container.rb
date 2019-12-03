@@ -23,6 +23,7 @@ module Packaging
 
       register_simple_callables_in :book_compilation,
         :add_collaborators,
+        :add_cover_image,
         :add_ingestion_sources,
         :add_remote_resources,
         :add_stylesheets,

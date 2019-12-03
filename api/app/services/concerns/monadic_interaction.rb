@@ -4,6 +4,7 @@ module Concerns
     extend ActiveSupport::Concern
 
     include Dry::Monads::Result::Mixin
+    include Dry::Matcher.for(:as_monadic_result, with: Dry::Matcher::ResultMatcher)
 
     # @return [Dry::Monads::Result::Success] on a successful interaction
     # @return [Dry::Monads::Result::Failure] on a failed interaction
@@ -32,8 +33,8 @@ module Concerns
     class_methods do
       # @see #as_monadic_result
       # @return [Dry::Monads::Result]
-      def run_as_monad(inputs = {})
-        run(inputs).as_monadic_result
+      def run_as_monad(inputs = {}, &block)
+        run(inputs).as_monadic_result(&block)
       end
     end
   end

@@ -10,11 +10,12 @@ module Packaging
 
         # @param [Hash] state
         # @option state [<Packaging::EpubV3::GroupedReferencedItem>] :referenced_items
-        # @return [<Packaging::EpubV3::IngestionSourceItem>]
+        # @option state [Text] :text
+        # @return [void]
         def call(state)
           state[:ingestion_sources] = []
 
-          state[:referenced_items].select(&:has_ingestion_source?).map do |item|
+          state[:referenced_items].select(&:has_ingestion_source?).each do |item|
             ingestion_source = IngestionSource.find(item.ingestion_source_id)
 
             source_item = Packaging::EpubV3::IngestionSourceItem.new ingestion_source: ingestion_source
