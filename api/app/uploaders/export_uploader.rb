@@ -8,6 +8,7 @@ class ExportUploader < Shrine
   plugin :determine_mime_type, analyzer: :marcel
   plugin :module_include
   plugin :moving
+  plugin :pretty_location, class_underscore: true, identifier: :location_identifier
   plugin :validation_helpers
   plugin :default_url_options, cache: URL_OPTIONS, store: URL_OPTIONS
 
