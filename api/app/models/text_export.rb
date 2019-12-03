@@ -19,6 +19,15 @@ class TextExport < ApplicationRecord
   validates :fingerprint, uniqueness: { scope: %i[text_id export_kind] }
 
   # @api private
+  # @note Used by {ExportUploader}
+  # @return [(String, String)]
+  def location_identifier
+    raise "Cannot derive pretty location" unless text_id? && fingerprint?
+
+    [text_id, fingerprint]
+  end
+
+  # @api private
   # @return [void]
   def populate_integrity_check!
     self.integrity_check = build_integrity_check
