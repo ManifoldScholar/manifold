@@ -371,7 +371,9 @@ common: &1
           - application/x-latex
           - text/x-latex
           - application/x-tex
+          - text/markdown
           - text/x-tex
+          - text/css
           - text/csv
           - text/html
           - text/plain
