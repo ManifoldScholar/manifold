@@ -1,5 +1,5 @@
 class AttachmentUploader < Shrine
-  MANIFOLD_CONFIG = Rails.configuration.manifold
+  include Concerns::SharedUploader
 
   plugin :backgrounding
   plugin :validation_helpers
@@ -17,11 +17,6 @@ class AttachmentUploader < Shrine
 
     analyzers[:mini_magick].call io
   }
-
-  shared_options = {
-    host: MANIFOLD_CONFIG.api_url&.sub(%r{\/\z}, "") || ""
-  }
-  plugin :default_url_options, cache: shared_options, store: shared_options
 
   Attacher.promote { |data| Attachments::ProcessAttachmentJob.perform_later data }
 

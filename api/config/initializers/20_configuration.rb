@@ -14,4 +14,16 @@ m.url_options = {
   host: m.domain
 }
 
+add_missing_mime = ->(definition, content_type) do
+  definition[:allowed_mime] |= [content_type]
+end
+
+m.attachments.validations.each do |(type, definition)|
+  # Ensure we import the original YAML manifest
+  add_missing_mime[definition, "application/x-yaml"] if type == "resource"
+
+  # Ensure text/markdown is present where it should be
+  add_missing_mime[definition, "text/markdown"] if "application/markdown".in?(definition[:allowed_mime])
+end
+
 Rails.application.config.manifold = m

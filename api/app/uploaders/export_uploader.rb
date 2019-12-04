@@ -1,8 +1,5 @@
 class ExportUploader < Shrine
-  MANIFOLD_CONFIG = Rails.configuration.manifold
-  URL_OPTIONS = {
-    host: MANIFOLD_CONFIG.api_url&.sub(%r{\/\z}, "") || ""
-  }.freeze
+  include Concerns::SharedUploader
 
   plugin :add_metadata
   plugin :determine_mime_type, analyzer: :marcel
@@ -10,7 +7,6 @@ class ExportUploader < Shrine
   plugin :moving
   plugin :pretty_location, class_underscore: true, identifier: :location_identifier
   plugin :validation_helpers
-  plugin :default_url_options, cache: URL_OPTIONS, store: URL_OPTIONS
 
   add_metadata :sha256 do |io, context|
     calculate_signature(io, :sha256, format: :hex) if context[:action] == :cache
