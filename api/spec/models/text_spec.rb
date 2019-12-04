@@ -76,13 +76,17 @@ RSpec.describe Text, type: :model do
   end
 
   describe "its titles" do
+    def expect_setting_to_change!(attribute, new_value)
+      expect do
+        text.update! attribute => new_value
+      end.to execute_safely.and change { text.reload.public_send(attribute) }.to(new_value)
+    end
+
     describe "its main title" do
       let(:text) { FactoryBot.create(:text, title: "**Formatted** _Title_") }
 
       it "can be set" do
-        text.title = "New Title"
-        text.save
-        expect(text.title).to eq "New Title"
+        expect_setting_to_change!(:title, "New Title")
       end
 
       it "correctly returns the formatted value of main TextTitle association" do
@@ -98,9 +102,7 @@ RSpec.describe Text, type: :model do
       let(:text) { FactoryBot.create(:text, subtitle: "**Formatted** _Subtitle_") }
 
       it "can be set" do
-        text.subtitle = "New Subtitle"
-        text.save
-        expect(text.subtitle).to eq "New Subtitle"
+        expect_setting_to_change! :subtitle, "New Subtitle"
       end
 
       it "correctly returns the formatted value of subtitle TextTitle association" do
@@ -111,5 +113,9 @@ RSpec.describe Text, type: :model do
         expect(text.subtitle_plaintext).to eq text.title_subtitle.subtitle_plaintext
       end
     end
+  end
+
+  it_should_behave_like "a model that stores its fingerprint" do
+    subject { FactoryBot.create :text }
   end
 end

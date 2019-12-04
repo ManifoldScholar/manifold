@@ -109,6 +109,7 @@ Lint/ScriptPermission:
 
 Naming/UncommunicativeMethodParamName:
   AllowedNames:
+    - 'as'
     - 'ok'
     - 'id'
     - 'io'

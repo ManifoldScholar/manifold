@@ -15,8 +15,9 @@ class Collaborator < ApplicationRecord
   belongs_to :collaboratable, polymorphic: true
   belongs_to :maker
 
+  delegate :name, to: :maker, prefix: true
+
   def to_s
     "#{role} #{maker}"
   end
-
 end

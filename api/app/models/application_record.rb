@@ -2,6 +2,8 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
+  INHERITS = Dux.inherits(self).freeze
+
   include ClassyEnum::ActiveRecord
   include Concerns::ArelHelpers
   include WithAdvisoryLock::Concern

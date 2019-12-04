@@ -15,6 +15,18 @@ SimpleCov.start 'rails' do
 
   add_group "Enums", %w[app/enums]
 
+  add_group "Fingerprinting", %w[
+    app/jobs/fingerprints/**/*.rb
+    app/models/concerns/calculates_fingerprints.rb
+    app/models/concerns/stores_fingerprints.rb
+    app/services/collaborators/calculate_fingerprint.rb
+    app/services/fingerprints/**/*.rb
+    app/services/fingerprints.rb
+    app/services/texts/calculate_fingerprint.rb
+    app/services/text_sections/calculate_fingerprint.rb
+    app/services/text_titles/calculate_fingerprint.rb
+  ]
+
   add_group "Ingestion", %w[
     app/models/ingestion.rb
     app/models/ingestion_source.rb
