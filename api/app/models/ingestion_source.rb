@@ -1,8 +1,10 @@
 # Connects texts to resources that were sources for text sections during ingestion
+#
+# @see IngestionSourceUploader
 class IngestionSource < ApplicationRecord
 
   # Attachments
-  include ResourceUploader::Attachment.new(:attachment)
+  include IngestionSourceUploader::Attachment.new(:attachment)
 
   # Authorization
   include Authority::Abilities

@@ -1,4 +1,5 @@
-class ResourceUploader < Shrine
+# @see IngestionSource
+class IngestionSourceUploader < Shrine
   include Concerns::SharedUploader
 
   plugin :pretty_location
