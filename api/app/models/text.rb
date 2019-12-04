@@ -46,6 +46,11 @@ class Text < ApplicationRecord
   serialize :page_list, Array
   serialize :landmarks, Array
 
+  jsonb_accessor(
+    :export_configuration,
+    exports_as_epub_v3: [:boolean, default: false, store_key: :epub_v3]
+  )
+
   # Acts as List
   acts_as_list scope: [:project_id, :category_id]
 
@@ -94,6 +99,7 @@ class Text < ApplicationRecord
   scope :by_category, ->(category) { where(category: category) if category.present? }
   scope :uncategorized, -> { where(category: nil) }
   scope :categorized, -> { where.not(category: nil) }
+  scope :exports_as_epub_v3, -> { export_configuration_where(exports_as_epub_v3: true) }
 
   # Attachments
   manifold_has_attached_file :cover, :image
