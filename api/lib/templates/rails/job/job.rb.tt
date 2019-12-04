@@ -30,8 +30,6 @@
   end
   RUBY
 
-  binding.pry
-
   footer = last_index.downto(0).map do |index|
     indentation = "  " * index
 
