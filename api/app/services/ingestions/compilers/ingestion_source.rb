@@ -28,7 +28,7 @@ module Ingestions
       end
 
       def update_or_create
-        ingestion_source.update attributes.merge(text: text)
+        ingestion_source.update! attributes.merge(text: text)
       end
 
       def report

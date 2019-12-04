@@ -38,7 +38,7 @@ module Ingestions
       def update_or_create
         return unless collaborator
 
-        collaborator.update collaborator_attributes
+        collaborator.update! collaborator_attributes
       end
 
       def collaborator_attributes

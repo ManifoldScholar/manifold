@@ -1,7 +1,9 @@
 module Ingestions
+  # @abstract
   class AbstractInteraction < AbstractBaseInteraction
-
     object :context, class: "Ingestions::Context"
+
+    set_callback :execute, :around, :catch_validation_errors!
 
     delegate :ingestion, to: :context
 
@@ -14,5 +16,14 @@ module Ingestions
     delegate :warn, to: :context
     delegate :log_structure, to: :context
 
+    # @api private
+    # @note An `around` callback for execution that catches `ActiveRecord::RecordInvalid` exceptions
+    # @raise [Ingestions::IngestionError] on validation failure
+    # @return [void]
+    def catch_validation_errors!
+      yield if block_given?
+    rescue ActiveRecord::RecordInvalid => e
+      raise ::Ingestions::IngestionError, "Validation error: #{e.message}"
+    end
   end
 end

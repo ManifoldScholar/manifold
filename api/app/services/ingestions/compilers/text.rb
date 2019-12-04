@@ -17,11 +17,11 @@ module Ingestions
       end
 
       def create_text
-        ::Text.create(text_attributes)
+        ::Text.create!(text_attributes)
       end
 
       def update_text
-        ingestion.text.update(text_attributes)
+        ingestion.text.update!(text_attributes)
 
         ingestion.text
       end
