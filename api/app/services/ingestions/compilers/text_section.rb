@@ -24,7 +24,7 @@ module Ingestions
       end
 
       def update_or_create
-        text_section.update adjusted_attributes
+        text_section.update! adjusted_attributes
       end
 
       def initialize_text_section

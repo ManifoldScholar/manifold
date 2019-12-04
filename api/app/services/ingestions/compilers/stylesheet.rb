@@ -30,7 +30,7 @@ module Ingestions
       end
 
       def update_or_create
-        stylesheet.update adjusted_attributes
+        stylesheet.update! adjusted_attributes
       end
 
       def adjusted_attributes

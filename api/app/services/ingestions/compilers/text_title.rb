@@ -25,7 +25,7 @@ module Ingestions
       end
 
       def update_or_create
-        text_title.update adjusted_attributes
+        text_title.update! adjusted_attributes
       end
 
       def adjusted_attributes
