@@ -1,5 +1,3 @@
-require "memoist"
-
 # A single Text
 class Text < ApplicationRecord
 
@@ -9,6 +7,7 @@ class Text < ApplicationRecord
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
   include Concerns::Sluggable
+  include Concerns::StoresFingerprints
   include WithMarkdown
   extend Memoist
   include Collaborative

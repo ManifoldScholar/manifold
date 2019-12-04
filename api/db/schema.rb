@@ -848,8 +848,12 @@ ActiveRecord::Schema.define(version: 2019_11_30_212914) do
     t.boolean "published", default: false, null: false
     t.string "cached_description_formatted"
     t.string "cached_description_plaintext"
+    t.text "fingerprint", null: false
+    t.jsonb "export_configuration", default: {}, null: false
+    t.index "((export_configuration @> '{\"epub_v3\": true}'::jsonb))", name: "index_texts_export_configuration_exports_as_epub_v3"
     t.index ["category_id"], name: "index_texts_on_category_id"
     t.index ["created_at"], name: "index_texts_on_created_at", using: :brin
+    t.index ["fingerprint"], name: "index_texts_on_fingerprint"
     t.index ["project_id"], name: "index_texts_on_project_id"
     t.index ["slug"], name: "index_texts_on_slug", unique: true
   end
