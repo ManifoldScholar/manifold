@@ -2,6 +2,46 @@
 
 ## Unreleased - TBD
 
+### Features
+
+-  Relace clockwork and expose background dashboards [#2460](https://github.com/ManifoldScholar/manifold/pull/2460) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve API performance on large model collections [#2458](https://github.com/ManifoldScholar/manifold/pull/2458) ([zdavis](https://api.github.com/users/zdavis))
+-  Expose text cover image in backend [#2419](https://github.com/ManifoldScholar/manifold/pull/2419) ([zdavis](https://api.github.com/users/zdavis))
+-  Support animated gif attachments [#2414](https://github.com/ManifoldScholar/manifold/pull/2414) ([zdavis](https://api.github.com/users/zdavis))
+-  Make EPUB3 TOC parsing more forgiving [#2397](https://github.com/ManifoldScholar/manifold/pull/2397) ([zdavis](https://api.github.com/users/zdavis))
+
+### Bugs
+
+-  Correctly serialize search result creator [#2465](https://github.com/ManifoldScholar/manifold/pull/2465) ([zdavis](https://api.github.com/users/zdavis))
+-  Restore SSR of full text in reader [#2464](https://github.com/ManifoldScholar/manifold/pull/2464) ([zdavis](https://api.github.com/users/zdavis))
+-  Remove pagination from BE PC containers [#2463](https://github.com/ManifoldScholar/manifold/pull/2463) ([zdavis](https://api.github.com/users/zdavis))
+-  Rescue file not found exception in v3 upgrade [#2457](https://github.com/ManifoldScholar/manifold/pull/2457) ([zdavis](https://api.github.com/users/zdavis))
+-  Add workaround for Windows CSV upload bug [#2423](https://github.com/ManifoldScholar/manifold/pull/2423) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Improve resource and project sorting [#2413](https://github.com/ManifoldScholar/manifold/pull/2413) ([zdavis](https://api.github.com/users/zdavis))
+-  Style italics in project hero subtitles [#2407](https://github.com/ManifoldScholar/manifold/pull/2407) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix regression in Form.Switch layout [#2404](https://github.com/ManifoldScholar/manifold/pull/2404) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Revise ReadingGroupDetail placeholder [#2373](https://github.com/ManifoldScholar/manifold/pull/2373) ([dananjohnson](https://api.github.com/users/dananjohnson))
+
+### Security
+
+-  Bump loofah from 2.2.3 to 2.4.0 in /api [#2455](https://github.com/ManifoldScholar/manifold/pull/2455) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+-  Bump rubyzip from 1.2.4 to 1.3.0 in /api [#2396](https://github.com/ManifoldScholar/manifold/pull/2396) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+
+### Accessibility
+
+-  A11y improvements to BE project thumbnail components [#2442](https://github.com/ManifoldScholar/manifold/pull/2442) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Miscellaneous accessibility fixes [#2403](https://github.com/ManifoldScholar/manifold/pull/2403) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Additional contrast improvements [#2401](https://github.com/ManifoldScholar/manifold/pull/2401) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix FE Project Collections placeholder [#2388](https://github.com/ManifoldScholar/manifold/pull/2388) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix focusability of event tiles [#2384](https://github.com/ManifoldScholar/manifold/pull/2384) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix color contrast to meet WCAG AA guidelines [#2383](https://github.com/ManifoldScholar/manifold/pull/2383) ([dananjohnson](https://api.github.com/users/dananjohnson))
+
+## [v4.0.1](https://github.com/ManifoldScholar/manifold/tree/v4.0.1) - 09/29/19
+
+### Features
+
+-  Support docker runtime environment [#2374](https://github.com/ManifoldScholar/manifold/pull/2374) ([zdavis](https://api.github.com/users/zdavis))
+
 ## [v4.0.0](https://github.com/ManifoldScholar/manifold/tree/v4.0.0) - 09/26/19
 
 ### Features
