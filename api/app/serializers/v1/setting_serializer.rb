@@ -2,6 +2,7 @@ module V1
   class SettingSerializer < ManifoldSerializer
 
     include ::V1::Concerns::ManifoldSerializer
+    set_id :singleton_guard
 
     camelized_attributes :general,
                          :theme,
