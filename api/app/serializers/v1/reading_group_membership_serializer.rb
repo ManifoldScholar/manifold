@@ -2,18 +2,18 @@ module V1
   class ReadingGroupMembershipSerializer < ManifoldSerializer
 
     include ::V1::Concerns::ManifoldSerializer
-    include ::V1::Concerns::IsCreator
 
-    attributes :annotations_count,
-               :highlights_count,
-               :anonymous_label,
-               :is_current_user
+    current_user_is_creator?
 
-    attributes :is_current_user do |object, params|
+    typed_attribute :annotations_count, NilClass
+    typed_attribute :highlights_count, NilClass
+    typed_attribute :anonymous_label, NilClass
+    typed_attribute :is_current_user, NilClass
+    typed_attribute :is_current_user, NilClass do |object, params|
       current_user_is_object_user?(object, params)
     end
 
-    attributes :name do |object, params|
+    typed_attribute :name, NilClass do |object, params|
       next object.user_full_name if not_anonymous?(object)
       next object.user.full_name if current_user_is_object_user?(object, params)
       next "#{object.user.full_name} (#{anonymous_label(object)})" if can_see_identity?(object, params)
@@ -21,7 +21,7 @@ module V1
       anonymous_label(object)
     end
 
-    has_one :user, if: proc { |object, params|
+    typed_has_one :user, if: proc { |object, params|
       not_anonymous?(object) || can_see_identity?(object, params)
     }
 

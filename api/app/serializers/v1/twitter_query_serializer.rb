@@ -3,14 +3,14 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    attributes :created_at,
-               :updated_at,
-               :query,
-               :active,
-               :events_count,
-               :result_type,
-               :display_name
+    typed_attribute :created_at, NilClass
+    typed_attribute :updated_at, NilClass
+    typed_attribute :query, NilClass
+    typed_attribute :active, NilClass
+    typed_attribute :events_count, NilClass
+    typed_attribute :result_type, NilClass
+    typed_attribute :display_name, NilClass
 
-    belongs_to :project
+    typed_belongs_to :project
   end
 end

@@ -35,10 +35,6 @@ RSpec.describe "Project Collections API", type: :request do
           expect(included.length).to eq 1
         end
 
-        it "returns a paginated collectionProjects relationship" do
-          pagination = JSON.parse(response.body).dig("data", "relationships", "collectionProjects", "meta", "pagination")
-          expect(pagination).to be_a Hash
-        end
       end
     end
 

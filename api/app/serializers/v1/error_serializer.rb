@@ -5,7 +5,10 @@ module V1
     set_id :id
     attr_accessor :with_root_key
 
-    attribute :id, :detail, :source, :title
+    typed_attribute :id, NilClass
+    typed_attribute :detail, NilClass
+    typed_attribute :source, NilClass
+    typed_attribute :title, NilClass
 
     def initialize(resource, options = {})
       super

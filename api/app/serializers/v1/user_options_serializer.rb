@@ -3,9 +3,9 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    attributes :full_name,
-               :last_name,
-               :first_name
+    typed_attribute :full_name, NilClass
+    typed_attribute :last_name, NilClass
+    typed_attribute :first_name, NilClass
 
   end
 end

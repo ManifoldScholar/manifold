@@ -1,8 +1,9 @@
 module V1
   class SubjectSerializer < ManifoldSerializer
+
     include ::V1::Concerns::ManifoldSerializer
 
-    attributes :name
+    typed_attribute :name, NilClass
 
   end
 end

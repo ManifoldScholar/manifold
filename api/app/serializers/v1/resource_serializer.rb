@@ -2,89 +2,87 @@ module V1
   class ResourceSerializer < ManifoldSerializer
 
     include ::V1::Concerns::ManifoldSerializer
-    include ::V1::Concerns::WithMetadata
 
-    make_partial_by_default
+    metadata(metadata: false, properties: false, formatted: true)
 
-    with_metadata(metadata: false, properties: false, formatted: true)
-    with_metadata_if_full(metadata: true, properties: true)
+    typed_attribute :alt_text, NilClass
+    typed_attribute :caption, NilClass
+    typed_attribute :caption_formatted, NilClass
+    typed_attribute :caption_plaintext, NilClass
+    typed_attribute :created_at, NilClass
+    typed_attribute :external_id, NilClass
+    typed_attribute :external_type, NilClass
+    typed_attribute :external_url, NilClass
+    typed_attribute :kind, NilClass
+    typed_attribute :minimum_height, NilClass
+    typed_attribute :minimum_width, NilClass
+    typed_attribute :pending_slug, NilClass
+    typed_attribute :pending_sort_title, NilClass
+    typed_attribute :project_id, NilClass
+    typed_attribute :project_slug, NilClass
+    typed_attribute :slug, NilClass
+    typed_attribute :sort_title, NilClass
+    typed_attribute :sub_kind, NilClass
+    typed_attribute :title, NilClass
+    typed_attribute :title_formatted, NilClass
+    typed_attribute :title_plaintext, NilClass
+    typed_attribute :downloadable, NilClass, &:downloadable?
 
-    attributes :alt_text,
-               :caption,
-               :caption_formatted,
-               :caption_plaintext,
-               :created_at,
-               :external_id,
-               :external_type,
-               :external_url,
-               :kind,
-               :minimum_height,
-               :minimum_width,
-               :pending_slug,
-               :pending_sort_title,
-               :project_id,
-               :project_slug,
-               :slug,
-               :sort_title,
-               :sub_kind,
-               :title,
-               :title_formatted,
-               :title_plaintext
+    typed_attribute :attachment_styles, Hash
+    typed_attribute :variant_poster_styles, Hash
+    typed_attribute :variant_thumbnail_styles, Hash
 
-    camelized_attributes :attachment_styles,
-                         :variant_poster_styles,
-                         :variant_thumbnail_styles
+    typed_has_many :collection_resources
 
-    attributes :downloadable, &:downloadable?
+    # rubocop:disable Metrics/BlockLength
+    when_full do
+      abilities
+      metadata(metadata: true, properties: true)
 
-    has_many :collection_resources
+      typed_attribute :allow_download, NilClass
+      typed_attribute :allow_high_res, NilClass
+      typed_attribute :attachment_content_type, NilClass
+      typed_attribute :attachment_extension, NilClass
+      typed_attribute :attachment_file_size, NilClass
+      typed_attribute :description, NilClass
+      typed_attribute :description_formatted, NilClass
+      typed_attribute :description_plaintext, NilClass
+      typed_attribute :embed_code, NilClass
+      typed_attribute :fingerprint, NilClass
+      typed_attribute :high_res_content_type, NilClass
+      typed_attribute :high_res_file_name, NilClass
+      typed_attribute :high_res_file_size, NilClass
+      typed_attribute :high_res_url, NilClass
+      typed_attribute :iframe_allow_fullscreen, NilClass
+      typed_attribute :tag_list, NilClass
+      typed_attribute :transcript_content_type, NilClass
+      typed_attribute :transcript_file_name, NilClass
+      typed_attribute :transcript_file_size, NilClass
+      typed_attribute :translation_content_type, NilClass
+      typed_attribute :translation_file_name, NilClass
+      typed_attribute :translation_file_size, NilClass
+      typed_attribute :updated_at, NilClass
+      typed_attribute :variant_format_one_content_type, NilClass
+      typed_attribute :variant_format_one_file_name, NilClass
+      typed_attribute :variant_format_one_file_size, NilClass
+      typed_attribute :variant_format_one_url, NilClass
+      typed_attribute :variant_format_two_content_type, NilClass
+      typed_attribute :variant_format_two_file_name, NilClass
+      typed_attribute :variant_format_two_file_size, NilClass
+      typed_attribute :variant_format_two_url, NilClass
+      typed_attribute :variant_poster_content_type, NilClass
+      typed_attribute :variant_poster_file_name, NilClass
+      typed_attribute :variant_poster_file_size, NilClass
+      typed_attribute :variant_thumbnail_content_type, NilClass
+      typed_attribute :variant_thumbnail_file_name, NilClass
+      typed_attribute :variant_thumbnail_file_size, NilClass
+      typed_attribute :attachment_file_name, NilClass
+      typed_attribute :downloadable_kind, NilClass, &:downloadable_kind?
 
-    full_attributes :allow_download,
-                    :allow_high_res,
-                    :attachment_content_type,
-                    :attachment_extension,
-                    :attachment_file_size,
-                    :description,
-                    :description_formatted,
-                    :description_plaintext,
-                    :embed_code,
-                    :fingerprint,
-                    :high_res_content_type,
-                    :high_res_file_name,
-                    :high_res_file_size,
-                    :high_res_url,
-                    :iframe_allow_fullscreen,
-                    :tag_list,
-                    :transcript_content_type,
-                    :transcript_file_name,
-                    :transcript_file_size,
-                    :translation_content_type,
-                    :translation_file_name,
-                    :translation_file_size,
-                    :updated_at,
-                    :variant_format_one_content_type,
-                    :variant_format_one_file_name,
-                    :variant_format_one_file_size,
-                    :variant_format_one_url,
-                    :variant_format_two_content_type,
-                    :variant_format_two_file_name,
-                    :variant_format_two_file_size,
-                    :variant_format_two_url,
-                    :variant_poster_content_type,
-                    :variant_poster_file_name,
-                    :variant_poster_file_size,
-                    :variant_thumbnail_content_type,
-                    :variant_thumbnail_file_name,
-                    :variant_thumbnail_file_size,
-                    :attachment_file_name
-    full_attributes :downloadable_kind, &:downloadable_kind?
-
-    full_attributes :abilities do |object, params|
-      abilities(object, params)
+      typed_has_many :resource_collections
+      typed_belongs_to :project
     end
-
-    full_has_many :resource_collections
-    full_belongs_to :project
+    # rubocop:enable Metrics/BlockLength
 
   end
 end

@@ -1,7 +1,8 @@
 module V1
   class TextOptionsSerializer < ManifoldSerializer
     include ::V1::Concerns::ManifoldSerializer
-    attributes :title
+
+    typed_attribute :title, NilClass
 
   end
 end
