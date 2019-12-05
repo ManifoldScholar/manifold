@@ -45,7 +45,7 @@ class SerializerRegistry
 
   def typed_attribute(attribute, type, options = {}, &block)
     options = map_options(options)
-    register_attributes([attribute], type, options)
+    register_attributes(attribute, type, options)
     _block = type == Hash ? build_camelize_proc(attribute, block) : block
     klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
       attributes(attribute, options, &_block)
@@ -114,18 +114,17 @@ class SerializerRegistry
     entries["relationship_#{relationship_name}"] = {
       key: relationship_name,
       type: type,
+      relationship: true,
       serializer: options[:serializer]
     }
   end
 
-  def register_attributes(*attributes_list, type, _options)
-    attributes_list = [attributes_list] unless attributes_list.respond_to? :each
-    attributes_list.each do |attribute|
-      entries["attribute_#{attribute}"] = {
-        key: attribute,
-        type: type
-      }
-    end
+  def register_attributes(attribute, type, _options)
+    entries["attribute_#{attribute}"] = {
+      key: attribute,
+      relationship: false,
+      type: type
+    }
   end
 
   def page_params(relationship_name, params)
