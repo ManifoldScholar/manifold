@@ -2,28 +2,28 @@ module V1
   class ResourceCollectionSerializer < ManifoldSerializer
 
     include ::V1::Concerns::ManifoldSerializer
-    include ::V1::Concerns::WithAbilities
 
-    attributes :title,
-               :title_formatted,
-               :created_at,
-               :description,
-               :description_formatted,
-               :project_id,
-               :resource_kinds,
-               :resource_tags,
-               :collection_resources_count,
-               :slug,
-               :pending_slug
+    abilities
 
-    camelized_attributes :thumbnail_styles
+    typed_attribute :title, NilClass
+    typed_attribute :title_formatted, NilClass
+    typed_attribute :created_at, NilClass
+    typed_attribute :description, NilClass
+    typed_attribute :description_formatted, NilClass
+    typed_attribute :project_id, NilClass
+    typed_attribute :resource_kinds, NilClass
+    typed_attribute :resource_tags, NilClass
+    typed_attribute :collection_resources_count, NilClass
+    typed_attribute :slug, NilClass
+    typed_attribute :pending_slug, NilClass
+    typed_attribute :thumbnail_styles, Hash
 
-    attributes :resource_tags do |object, _params|
+    typed_attribute :resource_tags, NilClass do |object, _params|
       object.resource_tags.sort
     end
 
-    has_many :resources
-    belongs_to :project
+    typed_has_many :resources
+    typed_belongs_to :project
 
   end
 end

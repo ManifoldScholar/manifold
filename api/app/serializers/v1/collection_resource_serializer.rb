@@ -3,10 +3,9 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    attributes :position,
-               :resource_collection_id
-
-    has_one :resource
+    typed_attribute :position, NilClass
+    typed_attribute :resource_collection_id, NilClass
+    typed_has_one :resource
 
   end
 end

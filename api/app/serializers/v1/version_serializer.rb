@@ -2,33 +2,34 @@ module V1
   class VersionSerializer < ManifoldSerializer
 
     include ::V1::Concerns::ManifoldSerializer
-    attributes :item_type,
-               :item_id,
-               :event,
-               :created_at
+
+    typed_attribute :item_type, NilClass
+    typed_attribute :item_id, NilClass
+    typed_attribute :event, NilClass
+    typed_attribute :created_at, NilClass
 
     # Strip out lateral, nil-nil changes and updated_at
-    attributes :object_changes do |object|
+    typed_attribute :object_changes, NilClass do |object|
       object.object_changes.except("updated_at")
     end
 
-    attributes :actor_name do |object|
+    typed_attribute :actor_name, NilClass do |object|
       object.actor.name
     end
 
-    attributes :actor_id do |object|
+    typed_attribute :actor_id, NilClass do |object|
       object.actor.id
     end
 
-    attributes :deleted do |object|
+    typed_attribute :deleted, NilClass do |object|
       object.item.nil?
     end
 
-    attributes :item_display_name do |object|
+    typed_attribute :item_display_name, NilClass do |object|
       item_display_name(object)
     end
 
-    belongs_to :parent_item
+    typed_belongs_to :parent_item
 
     class << self
       # rubocop:disable Metrics/AbcSize

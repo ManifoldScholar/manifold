@@ -1,12 +1,13 @@
 module V1
   class CollectionProjectSerializer < ManifoldSerializer
+
     include ::V1::Concerns::ManifoldSerializer
 
-    attributes :position
+    typed_attribute :position, NilClass
+    typed_has_one :project,
+                  object_method_name: :project_summary,
+                  id_method_name: :project_id,
+                  serializer: ::V1::ProjectSerializer
 
-    has_one :project,
-            object_method_name: :project_summary,
-            id_method_name: :project_id,
-            serializer: ::V1::ProjectSerializer
   end
 end

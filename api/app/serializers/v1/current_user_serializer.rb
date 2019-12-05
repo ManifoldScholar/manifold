@@ -2,28 +2,28 @@ module V1
   class CurrentUserSerializer < ManifoldSerializer
 
     include ::V1::Concerns::ManifoldSerializer
-    include ::V1::Concerns::IsUser
+    include ::V1::Concerns::UserAttributes
 
     set_type :user
 
-    attributes :persistent_ui
+    typed_attribute :persistent_ui, NilClass
 
-    attributes :notification_preferences do |object, _params|
+    typed_attribute :notification_preferences, NilClass do |object, _params|
       camelize_hash(object.notification_preferences_by_kind)
     end
 
-    attributes :current_user do
+    typed_attribute :current_user, NilClass do
       true
     end
 
-    attributes :class_abilities do |object|
+    typed_attribute :class_abilities, NilClass do |object|
       out = models_with_authorization.each_with_object({}) do |klass, abilities|
         abilities[klass.name.underscore] = klass.serialized_abilities_for(object)
       end
       camelize_hash(out)
     end
 
-    has_many :favorites
+    typed_has_many :favorites
 
     class << self
 

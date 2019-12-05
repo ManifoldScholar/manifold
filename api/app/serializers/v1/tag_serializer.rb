@@ -2,7 +2,9 @@ module V1
   class TagSerializer < ManifoldSerializer
 
     include ::V1::Concerns::ManifoldSerializer
-    attributes :name,
-               :taggings_count
+
+    typed_attribute :name, NilClass
+    typed_attribute :taggings_count, NilClass
+
   end
 end

@@ -2,26 +2,27 @@ module V1
   class PageSerializer < ManifoldSerializer
 
     include ::V1::Concerns::ManifoldSerializer
-    include ::V1::Concerns::WithAbilities
 
-    make_partial_by_default
+    abilities
 
-    attributes :slug,
-               :pending_slug,
-               :title,
-               :nav_title,
-               :show_in_footer,
-               :show_in_header,
-               :created_at,
-               :updated_at,
-               :hidden,
-               :body_formatted,
-               :purpose,
-               :is_external_link,
-               :external_link,
-               :open_in_new_tab
+    typed_attribute :slug, NilClass
+    typed_attribute :pending_slug, NilClass
+    typed_attribute :title, NilClass
+    typed_attribute :nav_title, NilClass
+    typed_attribute :show_in_footer, NilClass
+    typed_attribute :show_in_header, NilClass
+    typed_attribute :created_at, NilClass
+    typed_attribute :updated_at, NilClass
+    typed_attribute :hidden, NilClass
+    typed_attribute :body_formatted, NilClass
+    typed_attribute :purpose, NilClass
+    typed_attribute :is_external_link, NilClass
+    typed_attribute :external_link, NilClass
+    typed_attribute :open_in_new_tab, NilClass
 
-    full_attributes :body
+    when_full do
+      typed_attribute :body, NilClass
+    end
 
   end
 end

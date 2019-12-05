@@ -3,9 +3,9 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    attributes :id, :role
-    belongs_to :maker
-    belongs_to :collaboratable, polymorphic: true
+    typed_attribute :role, NilClass
+    typed_belongs_to :maker
+    typed_belongs_to :collaboratable, polymorphic: true
 
   end
 end

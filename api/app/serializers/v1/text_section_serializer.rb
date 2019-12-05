@@ -3,24 +3,19 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    make_partial_by_default
+    typed_attribute :text_slug, NilClass
+    typed_attribute :text_title, NilClass
+    typed_attribute :name, NilClass
+    typed_attribute :social_image, NilClass
+    typed_attribute :source_identifier, NilClass
+    typed_attribute :kind, NilClass
 
-    attributes :text_slug,
-               :text_title,
-               :name,
-               :social_image,
-               :source_identifier,
-               :kind
+    typed_belongs_to :text
+    typed_has_many :stylesheets
 
-    belongs_to :text
-    has_many :stylesheets
-
-    full_attributes :body_json do |object, _params|
-      camelize_hash(object.body_json)
-    end
-
-    full_attributes :citations do |object, _params|
-      camelize_hash(object.body_json)
+    when_full do
+      typed_attribute :body_json, Hash
+      typed_attribute :citations, Hash
     end
 
   end

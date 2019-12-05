@@ -3,19 +3,19 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    make_partial_by_default
+    typed_attribute :name, NilClass
+    typed_attribute :source_identifier, NilClass
+    typed_attribute :styles, NilClass
+    typed_attribute :ingested, NilClass
+    typed_attribute :position, NilClass
+    typed_attribute :created_at, NilClass
 
-    attributes :name,
-               :source_identifier,
-               :styles,
-               :ingested,
-               :position,
-               :created_at
+    when_full do
+      typed_attribute :raw_styles, NilClass
 
-    full_attributes :raw_styles
-
-    full_belongs_to :text
-    full_has_many :text_sections
+      typed_belongs_to :text
+      typed_has_many :text_sections
+    end
 
   end
 end

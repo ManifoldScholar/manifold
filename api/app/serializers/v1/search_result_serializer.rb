@@ -3,25 +3,27 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    has_one :model, polymorphic: true
-
-    attributes :score, &:_score
-    attributes :searchable_id, &:_id
-    attributes :full_text, :title
-
-    attributes :searchable_type do |object, _params|
+    typed_attribute :score, NilClass, &:_score
+    typed_attribute :searchable_id, NilClass, &:_id
+    typed_attribute :full_text, NilClass
+    typed_attribute :title, NilClass
+    typed_attribute :keywords, NilClass
+    typed_attribute :parent_keywords, NilClass
+    typed_attribute :makers, NilClass
+    typed_attribute :searchable_type, NilClass do |object, _params|
       camelized_type(object)
     end
-    attribute :parents do |object, _params|
+    typed_attribute :parents, NilClass do |object, _params|
       parents(object)
     end
-    attribute :text_nodes do |object, _params|
+    typed_attribute :text_nodes, NilClass do |object, _params|
       text_nodes(object)
     end
-    attributes :keywords, :parent_keywords, :makers
-    attribute :highlights do |object, _params|
+    typed_attribute :highlights, NilClass do |object, _params|
       highlights(object)
     end
+
+    typed_has_one :model, polymorphic: true
 
     class << self
 
