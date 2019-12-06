@@ -50,6 +50,9 @@ module V1
         ingestion_external_source_url(object, params)
       end
 
+      typed_attribute :exports_as_epub_v3, NilClass
+      typed_attribute :epub_v3_export_url, NilClass, if: ->(object, _params) { object.has_epub_v3_export_url? }
+
       typed_attribute :citations, NilClass
       typed_attribute :spine, NilClass
       typed_attribute :pending_slug, NilClass

@@ -299,6 +299,21 @@ class Text < ApplicationRecord
     annotations.only_highlights.count
   end
 
+  # @!attribute [r] epub_v3_export_url
+  # @return [String]
+  def epub_v3_export_url
+    current_text_export&.asset&.url if exports_as_epub_v3?
+  end
+
+  def has_epub_v3_export_url?
+    exports_as_epub_v3? && current_text_export&.asset.present?
+  end
+
+  # @return [void]
+  def toggle_exports_as_epub_v3!
+    update_attribute :exports_as_epub_v3, !exports_as_epub_v3
+  end
+
   private
 
   def category_list_scope

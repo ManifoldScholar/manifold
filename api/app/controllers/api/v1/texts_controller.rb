@@ -3,7 +3,7 @@ module Api
     # Texts controller
     class TextsController < ApplicationController
 
-      resourceful! Text, authorize_options: { except: [:index, :show] } do
+      resourceful! Text, authorize_options: { actions: { toggle_export_epub_v3: :update }, except: [:index, :show] } do
         Text.all
       end
 
@@ -38,6 +38,15 @@ module Api
       def destroy
         @text = load_and_authorize_text
         @text.destroy
+      end
+
+      def toggle_export_epub_v3
+        @text = load_and_authorize_text
+
+        @text.toggle_exports_as_epub_v3!
+
+        render_single_resource @text,
+                               include: includes
       end
 
       protected

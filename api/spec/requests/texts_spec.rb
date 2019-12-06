@@ -52,4 +52,21 @@ RSpec.describe "Texts API", type: :request do
     end
   end
 
+  describe "toggling API export" do
+    let!(:text) { FactoryBot.create :text, exports_as_epub_v3: false }
+
+    it "toggles the export" do
+      expect do
+        put toggle_export_epub_v3_api_v1_text_path(text.id), headers: admin_headers
+      end.to change { text.reload.exports_as_epub_v3? }.from(false).to(true)
+
+      expect(response).to be_successful
+
+      expect do
+        put toggle_export_epub_v3_api_v1_text_path(text.id), headers: admin_headers
+      end.to change { text.reload.exports_as_epub_v3? }.from(true).to(false)
+
+      expect(response).to be_successful
+    end
+  end
 end

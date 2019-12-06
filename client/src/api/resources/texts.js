@@ -43,5 +43,13 @@ export default {
       method: "DELETE",
       options: {}
     };
+  },
+
+  toggleEpubV3Export(id) {
+    return {
+      endpoint: `/api/v1/texts/${id}/export_epub_v3`,
+      method: "PUT",
+      options: {}
+    };
   }
 };

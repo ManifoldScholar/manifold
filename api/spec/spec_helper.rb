@@ -39,12 +39,17 @@ SimpleCov.start 'rails' do
     app/enums/referenced_path_strategy.rb
     app/enums/source_node_kind.rb
     app/jobs/packaging
+    app/jobs/text_exports/prune_job.rb
+    app/jobs/texts/automate_exports_job.rb
     app/models/cached_external_source.rb
     app/models/cached_external_source_link.rb
     app/models/text_export.rb
+    app/models/text_export_status.rb
     app/services/cached_external_sources
     app/services/html_nodes
     app/services/packaging
+    app/services/text_exports/prune.rb
+    app/services/texts/automate_exports.rb
     app/services/epub_check.rb
   ]
 

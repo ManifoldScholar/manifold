@@ -64,6 +64,16 @@ export class TextWrapperContainer extends PureComponent {
     });
   };
 
+  toggleExportsAsEpubV3 = () => {
+    const call = textsAPI.toggleEpubV3Export(this.props.text.id);
+    const textRequest = request(call, requests.beText);
+
+    this.props.dispatch(textRequest).promise.then((...args) => {
+      console.info("all done with req");
+      console.dir(args);
+    });
+  }
+
   notifyDestroy() {
     const notification = {
       level: 0,
@@ -98,6 +108,8 @@ export class TextWrapperContainer extends PureComponent {
 
   renderUtility() {
     const { text } = this.props;
+    const { attributes: { exportsAsEpubV3, epubV3ExportUrl } } = text;
+
     return (
       <div className="utility-button-group utility-button-group--inline">
         <button onClick={this.doPreview} className="utility-button">
@@ -116,6 +128,30 @@ export class TextWrapperContainer extends PureComponent {
           />
           <span className="utility-button__text">Delete</span>
         </button>
+        <button onClick={this.toggleExportsAsEpubV3} className="utility-button">
+          <IconComposer
+            icon={exportsAsEpubV3 ? "delete32" : "arrowDown32"}
+            size={26}
+            iconClass="utility-button__icon utility-button__icon--download"
+          />
+          <span className="utility-button__text">{exportsAsEpubV3 ? "Disable Epub Export" : "Enable Epub Export"}</span>
+        </button>
+        {
+          epubV3ExportUrl && (
+            <a
+              href={epubV3ExportUrl}
+              download
+              className="utility-button"
+            >
+              <IconComposer
+                icon="arrowDown32"
+                size={26}
+                iconClass="utility-button__icon utility-button__icon--download"
+              />
+              <span className="utility-button__text">Download Epub</span>
+            </a>
+          )
+        }
         {text.attributes.ingestionSourceDownloadUrl && (
           <a
             href={text.attributes.ingestionSourceDownloadUrl}
