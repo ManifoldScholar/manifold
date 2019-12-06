@@ -80,7 +80,7 @@ module Api
         end
 
         def #{method_names[:load_resource]}
-          #{method_names[:resource_scope]}.find(params[:id])
+          #{method_names[:resource_scope]}.find(#{method_names[:resource_id]})
         end
 
         def #{method_names[:load_and_authorize_resource]}
@@ -97,6 +97,10 @@ module Api
           end
         end
 
+        def #{method_names[:resource_id]}
+          params.fetch(:id, params[:#{resource_name}_id])
+        end
+
         def load_resources
           #{method_names[:load_resources]}
         end
@@ -108,6 +112,10 @@ module Api
         def load_and_authorize_resource
           #{method_names[:load_and_authorize_resource]}
         end
+
+        def resource_id_from_params
+          #{method_names[:resource_id]}
+        end
         RUBY
       end
       # rubocop:enable Metrics/AbcSize
@@ -118,6 +126,7 @@ module Api
         the_collection_name = collection_name == :resources ? :zresources : collection_name
 
         {}.tap do |method_names|
+          method_names[:resource_id]                  = :"#{the_name}_id_from_params"
           method_names[:load_resources]               = :"load_#{the_collection_name}"
           method_names[:load_resource]                = :"load_#{the_name}"
           method_names[:load_and_authorize_resource]  = :"load_and_authorize_#{the_name}"
