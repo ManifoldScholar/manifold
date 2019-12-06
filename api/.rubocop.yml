@@ -120,6 +120,7 @@ Metrics/BlockLength:
     - 'Rakefile'
     - '**/*.rake'
     - 'spec/**/*.rb'
+    - 'zhong.rb'
 
 Layout/AlignHash:
   EnforcedLastArgumentHashStyle: ignore_implicit

@@ -1,69 +1,18 @@
 require "rails_helper"
 
 RSpec.describe Text, type: :model do
-  let(:new_text) { Text.new }
-  let(:text_with_sections) do
-    text = FactoryBot.create(:text)
-    text.text_sections << FactoryBot.create(:text_section, position: 1)
-    text.text_sections << FactoryBot.create(:text_section, position: 2)
-    text.text_sections << FactoryBot.create(:text_section, position: 3)
-    text.text_sections << FactoryBot.create(:text_section, position: 4)
-    text.text_sections << FactoryBot.create(:text_section, position: 5)
-    text
-  end
+  describe "#section_at" do
+    let!(:text) { FactoryBot.create :text }
 
-  it "has a valid factory" do
-    expect(FactoryBot.build(:text)).to be_valid
-  end
+    let!(:section_1) { FactoryBot.create :text_section, text: text, position: 1 }
+    let!(:section_2) { FactoryBot.create :text_section, text: text, position: 2 }
 
-  it "correctly returns the section at a certain position" do
-    text = text_with_sections
-    sections = text.text_sections
-    expect(text.section_at(2)).to eq sections.second
-  end
-
-  it "has many titles" do
-    text = new_text
-    2.times { text.titles.build }
-    expect(text.titles.length).to be 2
-  end
-
-  it "has many text subjects" do
-    text = new_text
-    2.times { text.text_subjects.build }
-    expect(text.text_subjects.length).to be 2
-  end
-
-  it "has many ingestion sources" do
-    text = new_text
-    2.times { text.ingestion_sources.build }
-    expect(text.ingestion_sources.length).to be 2
-  end
-
-  it "has many text sections" do
-    text = new_text
-    2.times { text.text_sections.build }
-    expect(text.text_sections.length).to be 2
-  end
-
-  it "has many stylesheets" do
-    text = new_text
-    2.times { text.stylesheets.build }
-    expect(text.stylesheets.length).to be 2
-  end
-
-  it "belongs to a project" do
-    text = new_text
-    project = Project.new
-    text.project = project
-    expect(text.project).to be project
-  end
-
-  it "belongs to a category" do
-    text = new_text
-    category = Category.new
-    text.category = category
-    expect(text.category).to be category
+    it "finds the right sections" do
+      aggregate_failures "for each position" do
+        expect(text.section_at(1)).to eq section_1
+        expect(text.section_at(2)).to eq section_2
+      end
+    end
   end
 
   context "when citations are updated" do
@@ -111,6 +60,52 @@ RSpec.describe Text, type: :model do
 
       it "correctly returns the plaintext value of subtitle TextTitle association" do
         expect(text.subtitle_plaintext).to eq text.title_subtitle.subtitle_plaintext
+      end
+    end
+  end
+
+  describe ".pending_epub_v3_export" do
+    let!(:text) { FactoryBot.create :text }
+
+    let(:the_scope) { described_class.pending_epub_v3_export }
+
+    subject { the_scope }
+
+    class << self
+      def it_is_found
+        it "is found by the scope" do
+          expect(the_scope).to include text
+        end
+      end
+
+      def it_is_not_found
+        it "is not found by the scope" do
+          expect(the_scope).not_to include text
+        end
+      end
+    end
+
+    context "with a text not marked to export" do
+      it_is_not_found
+    end
+
+    context "with a text marked to export" do
+      let!(:text) { FactoryBot.create :text, :exports_as_epub_v3 }
+
+      context "and no text exports" do
+        it_is_found
+      end
+
+      context "with a stale export" do
+        let!(:text_export) { FactoryBot.create :text_export, :epub_v3, text: text, fingerprint: text.fingerprint.reverse }
+
+        it_is_found
+      end
+
+      context "with a current export" do
+        let!(:text_export) { FactoryBot.create :text_export, :epub_v3, text: text, fingerprint: text.fingerprint }
+
+        it_is_not_found
       end
     end
   end

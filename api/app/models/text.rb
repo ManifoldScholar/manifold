@@ -79,6 +79,10 @@ class Text < ApplicationRecord
   has_one :last_finished_ingestion, -> { where(state: "finished").order(updated_at: :desc) }, class_name: "Ingestion"
   has_many :cached_external_source_links, inverse_of: :text, dependent: :destroy
   has_many :cached_external_sources, through: :cached_external_source_links
+  has_many :text_exports, inverse_of: :text
+  has_many :text_export_statuses, inverse_of: :text
+  has_one :current_text_export_status, -> { current }, class_name: "TextExportStatus"
+  has_one :current_text_export, through: :current_text_export_status, source: :text_export
 
   # Delegations
   delegate :creator_names_array, to: :project, prefix: true, allow_nil: true
@@ -100,6 +104,9 @@ class Text < ApplicationRecord
   scope :uncategorized, -> { where(category: nil) }
   scope :categorized, -> { where.not(category: nil) }
   scope :exports_as_epub_v3, -> { export_configuration_where(exports_as_epub_v3: true) }
+  scope :sans_current_epub_v3_export, -> { where.not(id: TextExportStatus.current_text_ids) }
+  scope :with_current_epub_v3_export, -> { where(id: TextExportStatus.current_text_ids) }
+  scope :pending_epub_v3_export, -> { exports_as_epub_v3.sans_current_epub_v3_export }
 
   # Attachments
   manifold_has_attached_file :cover, :image
