@@ -56,6 +56,8 @@ Rails.application.routes.draw do
       resource :settings, except: [:destroy, :create]
 
       resources :texts do
+        put :toggle_export_epub_v3, on: :member, path: "export_epub_v3"
+
         scope module: :texts do
           namespace :relationships do
             resources :text_sections, only: [:index]
