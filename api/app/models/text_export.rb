@@ -1,7 +1,8 @@
 class TextExport < ApplicationRecord
   include ExportUploader::Attachment.new(:asset)
 
-  belongs_to :text
+  belongs_to :text, inverse_of: :text_exports
+  has_many :text_export_statuses, inverse_of: :text_export
 
   classy_enum_attr :export_kind, allow_blank: false, default: :unknown
 
@@ -10,7 +11,9 @@ class TextExport < ApplicationRecord
   scope :by_text, ->(text) { where(text: text) }
   scope :by_kind, ->(kind) { where(export_kind: kind) }
   scope :by_fingerprint, ->(fingerprint) { where(fingerprint: fingerprint) }
+  scope :epub_v3, -> { by_kind :epub_v3 }
   scope :with_epubcheck_messages, -> { where(arel_integrity_check_message_count("epubcheck").gt(0)) }
+  scope :prunable, -> { where(id: TextExportStatus.prunable_export_ids) }
 
   attribute :integrity_check, :indifferent_hash
 

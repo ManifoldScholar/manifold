@@ -35,4 +35,14 @@ Zhong.schedule do
       Notifications::EnqueueDigestsJob.perform_later "weekly"
     end
   end
+
+  category "packaging" do
+    every(5.minutes, "automate_text_exports") do
+      Texts::AutomateExportsJob.perform_later
+    end
+
+    every(1.day, "prune_text_exports", at: "01:00") do
+      TextExports::PruneJob.perform_later
+    end
+  end
 end

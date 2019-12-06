@@ -1,8 +1,11 @@
 FactoryBot.define do
   factory :text_export do
-    text { nil }
-    export_kind { "MyText" }
-    fingerprint { "MyText" }
-    asset_data { "" }
+    association :text
+    export_kind { :unknown }
+    fingerprint { SecureRandom.uuid }
+
+    trait :epub_v3 do
+      export_kind { :epub_v3 }
+    end
   end
 end

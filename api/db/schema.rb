@@ -1136,4 +1136,19 @@ ActiveRecord::Schema.define(version: 2019_11_30_212914) do
              JOIN makers m ON ((m.id = c.maker_id)))
           WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
   SQL
+  create_view "text_export_statuses", sql_definition: <<-SQL
+    SELECT t.id AS text_id,
+    te.id AS text_export_id,
+        CASE te.export_kind
+            WHEN 'epub_v3'::text THEN (t.export_configuration @> '{"epub_v3": true}'::jsonb)
+            ELSE false
+        END AS autoexport,
+    te.export_kind,
+    te.fingerprint AS export_fingerprint,
+    (t.fingerprint = te.fingerprint) AS current,
+    (t.fingerprint <> te.fingerprint) AS stale,
+    te.created_at AS exported_at
+   FROM (texts t
+     JOIN text_exports te ON ((t.id = te.text_id)));
+  SQL
 end
