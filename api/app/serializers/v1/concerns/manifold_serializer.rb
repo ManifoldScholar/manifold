@@ -107,6 +107,10 @@ module V1
           @full_register ||= SerializerRegistry.new(self, full: true)
         end
 
+        def partial_only?
+          full_register.entries.empty?
+        end
+
         def camelize_hash(hash)
           hash.deep_transform_keys { |key| key.to_s.camelize(:lower) }.symbolize_keys!
         end

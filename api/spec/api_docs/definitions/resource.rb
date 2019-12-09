@@ -110,22 +110,25 @@ module ApiDocs
       end
 
       def attributes
-        serializer.attribute_types.map { |key, value| [value[:key], value[:type]] }.to_h
+        serializer.register.attribute_types
       end
 
       def full_attributes
-        full = serializer.full_attribute_types.map { |key, value| [value[:key], value[:type]] }.to_h
-        attributes.merge(full)
+        attributes.merge(serializer.full_register.attribute_types)
+      end
+
+      def map_serializer_types(hash)
+        hash.map { |k,v| if v == :has_many then [k, ::Types::Serializer::Collection] else [k, ::Types::Serializer::Resource] end }.to_h
       end
 
       def relationships
-        partial = serializer.relationship_types.map { |key, value| [value[:key], value[:type]] }.to_h
-        partial = partial.map { |k,v| if v == :has_many then [k, ::Types::Serializer::Collection] else [k, ::Types::Serializer::Resource] end }.to_h
+        partial = serializer.register.relationship_types
+        map_serializer_types(partial)
       end
 
       def full_relationships
-        full = serializer.full_relationship_types.map { |key, value| [value[:key], value[:type]] }.to_h
-        full = full.map { |k,v| if v == :has_many then [k, ::Types::Serializer::Collection] else [k, ::Types::Serializer::Resource] end }.to_h
+        full = serializer.full_register.relationship_types
+        full = map_serializer_types(full)
         relationships.merge(full)
       end
 
