@@ -1,4 +1,5 @@
 class TextExport < ApplicationRecord
+  include Concerns::HasExportKind
   include ExportUploader::Attachment.new(:asset)
 
   belongs_to :text, inverse_of: :text_exports
@@ -9,7 +10,6 @@ class TextExport < ApplicationRecord
   upsert_keys %i[text_id fingerprint]
 
   scope :by_text, ->(text) { where(text: text) }
-  scope :by_kind, ->(kind) { where(export_kind: kind) }
   scope :by_fingerprint, ->(fingerprint) { where(fingerprint: fingerprint) }
   scope :epub_v3, -> { by_kind :epub_v3 }
   scope :with_epubcheck_messages, -> { where(arel_integrity_check_message_count("epubcheck").gt(0)) }
