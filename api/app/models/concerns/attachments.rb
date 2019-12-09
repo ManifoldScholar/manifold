@@ -210,6 +210,10 @@ module Attachments
           block_given? ? yield(original) : original
         end
 
+        def #{field}_original_path
+          #{field}_original&.to_io&.path
+        end
+
         def #{field}_meta
           return {} unless #{field}?
           versions = style_keys.map do |version|
