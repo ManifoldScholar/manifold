@@ -2,7 +2,7 @@ module ApiDocs
   module Helpers
     class Request
 
-      include Inflections
+      include Helpers::Inflections
 
       attr_accessor :action
       attr_accessor :options
