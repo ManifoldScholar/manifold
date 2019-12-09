@@ -9,8 +9,6 @@ RSpec.describe "Projects API", type: :request do
   end
 
   path "/projects" do
-    Type = ApiDocs::Definition::Type
-
     let(:'filter[draft]') { nil }
     let(:'filter[featured]') { nil }
     let(:'filter[subject]') { nil }
