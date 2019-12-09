@@ -49,12 +49,12 @@ module ApiDocs
       ############# RESPONSES ##############
       ######################################
 
-      def resource_data(attr, realtion)
+      def resource_data(attr, relation)
         ::Types::Hash.schema(
           id: ::Types::Serializer::ID,
           type: ::Types::String.meta(example: type),
           attributes: attr,
-          relationships: realtion,
+          relationships: relation,
           meta: ::Types::Serializer::Meta
         )
       end
@@ -93,8 +93,8 @@ module ApiDocs
         )
       end
 
-      def response_relationships(realtion)
-        ::Types::Hash.schema(realtion)
+      def response_relationships(relation)
+        ::Types::Hash.schema(relation)
       end
 
       def response_attributes(attr)

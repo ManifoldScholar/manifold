@@ -10,21 +10,21 @@ module Types
     # each of these are URL's
     AttatchmentStyles = Types::Hash.schema(
       small: Types::String.optional,
-      smallSquare: Types::String.optional,
-      smallLandscape: Types::String.optional,
-      smallPortrait: Types::String.optional,
+      small_square: Types::String.optional,
+      small_landscape: Types::String.optional,
+      small_portrait: Types::String.optional,
       medium: Types::String.optional,
-      mediumSquare: Types::String.optional,
-      mediumLandscape: Types::String.optional,
-      mediumPortrait: Types::String.optional,
-      largeLandscape: Types::String.optional,
+      medium_square: Types::String.optional,
+      medium_landscape: Types::String.optional,
+      medium_portrait: Types::String.optional,
+      large_landscape: Types::String.optional,
       original: Types::String.optional
     )
 
     Upload = Types::Hash.schema(
       filename: Types::Bool,
       data: Types::String,
-      contentType: Types::String
+      content_type: Types::String
     )
 
     ID = Types::String.meta(example: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX")
