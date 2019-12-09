@@ -1,52 +1,20 @@
 module ApiDocs
-  module Definition
+  module Definitions
     module Resource
-      def resource_response
-        definition = Type.object(
-          properties: {
-            data: Type.object(properties: {
-                                id: Type.id,
-                                type: Type.string(example: type),
-                                attributes: Type.object(properties: response_attributes),
-                                relationships: response_relationships,
-                                meta: Type.meta
-                              })
-          }
-        )
-        debug(__callee__, definition)
-        transform_keys(definition)
-      end
-
-      def collection_response
-        definition = Type.object(
-          properties: {
-            data: Type.array(
-              items: collection_resource_response || resource_response
-            )
-          }
-        )
-        debug(__callee__, definition)
-        transform_keys(definition)
-      end
+      ####################################
+      ############# REQESTS ##############
+      ####################################
 
       def update_request
         definition = make_request(__callee__, update_attributes || request_attributes)
+        definition = Definitions::DryTypesToJson.convert(definition)
         transform_keys(definition)
       end
 
       def create_request
         definition = make_request(__callee__, create_attributes || request_attributes)
+        definition = Definitions::DryTypesToJson.convert(definition)
         transform_keys(definition)
-      end
-
-      protected
-
-      def transform_keys(definition)
-        definition.deep_transform_keys { |key| key.to_s.camelize(:lower) }
-      end
-
-      def collection_resource_response
-        nil
       end
 
       def update_attributes
@@ -57,35 +25,12 @@ module ApiDocs
         nil
       end
 
-      def response_relationships
-        Type.object(properties: self::RELATIONSHIPS)
-      end
-
-      def response_attributes
-        self::ATTRIBUTES.except(*self::WRITE_ONLY)
-      end
-
       def request_attributes
-        self::ATTRIBUTES.except(*self::READ_ONLY)
+        ::Types::Hash.schema(self::ATTRIBUTES.merge(attributes).except(*self::READ_ONLY))
       end
 
       def request_relationships
         Type.object(properties: {})
-      end
-
-      def debug(callee, definition)
-        return unless ENV["RSWAG_DEBUG"]
-
-        puts "-" * 80
-        puts "#{self}##{callee}"
-        puts "-" * 80
-        pp definition
-        puts "-" * 80
-        puts "\n"
-      end
-
-      def type
-        name.demodulize.pluralize.underscore
       end
 
       def required_create_attributes
@@ -100,31 +45,119 @@ module ApiDocs
         const_defined?(:REQUIRED_ATTRIBUTES) ? self::REQUIRED_ATTRIBUTES : []
       end
 
+      ######################################
+      ############# RESPONSES ##############
+      ######################################
+
+      def resource_data(attr, realtion)
+        ::Types::Hash.schema(
+          id: ::Types::Serializer::ID,
+          type: ::Types::String.meta(example: type),
+          attributes: attr,
+          relationships: realtion,
+          meta: ::Types::Serializer::Meta
+        )
+      end
+
+      def resource_response_data
+        return collection_response_data if serializer.partial_only?
+
+        resource_data(
+          response_attributes(full_attributes),
+          response_relationships(full_relationships)
+        )
+      end
+
+      def resource_response
+        definition = ::Types::Hash.schema(data: resource_response_data)
+
+        definition = Definitions::DryTypesToJson.convert(definition)
+        debug(__callee__, definition)
+        transform_keys(definition)
+      end
+
+      def collection_response
+        definition = ::Types::Hash.schema(
+          data: ::Types::Array.of(collection_response_data)
+        )
+
+        definition = Definitions::DryTypesToJson.convert(definition)
+        debug(__callee__, definition)
+        transform_keys(definition)
+      end
+
+      def collection_response_data
+        resource_data(
+          response_attributes(attributes),
+          response_relationships(relationships)
+        )
+      end
+
+      def response_relationships(realtion)
+        ::Types::Hash.schema(realtion)
+      end
+
+      def response_attributes(attr)
+        ::Types::Hash.schema(self::ATTRIBUTES.merge(attr).except(*self::WRITE_ONLY))
+      end
+
+      ####################################
+      ############# HELPERS ##############
+      ####################################
+
+      def serializer
+        "V1::#{self.name.demodulize}Serializer".constantize
+      end
+
+      def attributes
+        serializer.attribute_types.map { |key, value| [value[:key], value[:type]] }.to_h
+      end
+
+      def full_attributes
+        full = serializer.full_attribute_types.map { |key, value| [value[:key], value[:type]] }.to_h
+        attributes.merge(full)
+      end
+
+      def relationships
+        partial = serializer.relationship_types.map { |key, value| [value[:key], value[:type]] }.to_h
+        partial = partial.map { |k,v| if v == :has_many then [k, ::Types::Serializer::Collection] else [k, ::Types::Serializer::Resource] end }.to_h
+      end
+
+      def full_relationships
+        full = serializer.full_relationship_types.map { |key, value| [value[:key], value[:type]] }.to_h
+        full = full.map { |k,v| if v == :has_many then [k, ::Types::Serializer::Collection] else [k, ::Types::Serializer::Resource] end }.to_h
+        relationships.merge(full)
+      end
+
+      protected
+
+      def transform_keys(definition)
+        definition.deep_transform_keys { |key| key.to_s.camelize(:lower) }
+      end
+
+      def type
+        name.demodulize.pluralize.underscore
+      end
+
       private
 
-      def make_request(callee, attributes)
-        required = case callee
-                   when :create_request
-                     required_create_attributes
-                   when :update_request
-                     required_update_attributes
-                   else
-                     required_attributes
-        end
+      def debug(callee, definition)
+        return unless ENV["RSWAG_DEBUG"]
 
-        definition = Type.object(
-          nullable: false,
-          properties: {
-            data: Type.object(
-              nullable: false,
-              properties: {
-                attributes: Type.object(
-                  required: required,
-                  properties: attributes
-                )
-              }
-            )
-          }
+        puts "-" * 80
+        puts "#{self}##{callee}"
+        puts "-" * 80
+        pp definition
+        puts "-" * 80
+        puts "\n"
+      end
+
+      # TODO: Note required fields on request types
+      def make_request(callee, attr)
+        definition = ::Types::Hash.schema(
+          data: ::Types::Hash.schema(
+            attributes: attr
+          )
         )
 
         debug(callee, definition)

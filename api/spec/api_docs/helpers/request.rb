@@ -2,15 +2,18 @@ module ApiDocs
   module Helpers
     class Request
 
-      include Helpers::Inflections
+      include Inflections
 
-      def content_type
-        "application/json"
-      end
+      attr_accessor :action
+      attr_accessor :options
 
       def initialize(options, action)
         @options = options
         @action = action
+      end
+
+      def content_type
+        "application/json"
       end
 
       def focus
@@ -81,15 +84,9 @@ module ApiDocs
         resource_name.camelize
       end
 
-      def human_resource_name_plural
-        human_resource_name.pluralize
-      end
-
       def tags
         @options[:tags] || resource_tag
       end
-
-      def url_params; end
 
       def default_parameters
         return @options[:parameters] if @options.key?(:parameters)
@@ -163,11 +160,11 @@ module ApiDocs
       end
 
       def request
-        resource_klass(resource_name).send(type_method(type_from_action(@action, :request)))
+        resource_klass(resource_name).send(type_method(type_from_action(action, :request)))
       end
 
       def response
-        resource_klass(resource_name).send(type_method(type_from_action(@action, :response)))
+        resource_klass(resource_name).send(type_method(type_from_action(action, :response)))
       end
     end
   end

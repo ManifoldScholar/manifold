@@ -5,12 +5,8 @@ module ApiDocs
         [:create, :update]
       end
 
-      def response_types
-        [:collection, :resource]
-      end
-
       def resource_klass(resource)
-        klass = "ApiDocs::Definition::Resource::#{resource.to_s.camelize}".constantize
+        klass = "ApiDocs::Definitions::Resources::#{resource.to_s.camelize}".constantize
       end
 
       def request_or_response(type)
@@ -28,20 +24,8 @@ module ApiDocs
         :resource
       end
 
-      def definition_name_for(resource, type)
-        "#{resource.capitalize}#{type.capitalize}#{request_or_response(type).capitalize}"
-      end
-
       def type_method(type)
         "#{type}_#{request_or_response(type)}"
-      end
-
-      def definitions_for(resource)
-        out = (request_types + response_types).map do |type|
-          [definition_name_for(resource, type), resource_klass(resource).send(type_method(type))]
-        end.to_h
-        pp out
-        out
       end
     end
   end

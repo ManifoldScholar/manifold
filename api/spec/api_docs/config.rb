@@ -10,7 +10,7 @@ module ApiDocs
 
       def definitions
         defined = {}
-        ApiDocs::Definition::Resource.constants.each do |resource_class|
+        ApiDocs::Definitions::Resources.constants.each do |resource_class|
           defined[resource_class] = resource_klass(resource_class).send(:resource_response)
         end
         defined

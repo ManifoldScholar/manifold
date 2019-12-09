@@ -1,5 +1,5 @@
 module ApiDocs
-  module Definition
+  module Definitions
 
   end
 end

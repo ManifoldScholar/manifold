@@ -1,15 +1,12 @@
 require "rails_helper"
-require "api_docs/definition"
+require "api_docs/definitions"
 require "api_docs/definitions/resource"
-require "api_docs/definitions/type"
-require "api_docs/definitions/types/abstract_type"
-require "api_docs/definitions/types/object"
+require "api_docs/definitions/dry_types_to_json"
 require "api_docs/helpers/inflections"
 require "api_docs/helpers/request"
 
 include_dirs = [
   "api_docs/examples/*.rb",
-  "api_docs/definitions/types/*.rb",
   "api_docs/definitions/resources/*.rb"
 ]
 
