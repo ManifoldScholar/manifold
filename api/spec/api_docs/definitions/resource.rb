@@ -26,7 +26,7 @@ module ApiDocs
       end
 
       def request_attributes
-        ::Types::Hash.schema(self::ATTRIBUTES.merge(attributes).except(*self::READ_ONLY))
+        ::Types::Hash.schema(self::REQUEST_ATTRIBUTES.merge(full_attributes).except(*self::READ_ONLY))
       end
 
       def request_relationships
@@ -98,7 +98,7 @@ module ApiDocs
       end
 
       def response_attributes(attr)
-        ::Types::Hash.schema(self::ATTRIBUTES.merge(attr).except(*self::WRITE_ONLY))
+        ::Types::Hash.schema(attr.except(*self::WRITE_ONLY))
       end
 
       ####################################
