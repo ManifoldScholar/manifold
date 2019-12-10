@@ -34,9 +34,9 @@ module V1
       typed_attribute :hashtag, Types::String.optional
       typed_attribute :description, Types::String.optional
       typed_attribute :featured, Types::Bool
-      typed_attribute :purchase_url, Types::String.optional
-      typed_attribute :purchase_price_money, Types::String
-      typed_attribute :purchase_price_currency, Types::String.optional
+      typed_attribute :purchase_url, Types::Serializer::URL.optional
+      typed_attribute :purchase_price_money, Types::String.meta(example: "$0.00")
+      typed_attribute :purchase_price_currency, Types::String.optional.meta(example: "USD")
       typed_attribute :purchase_price, Types::Float.optional
       typed_attribute :purchase_call_to_action, Types::String.optional
       typed_attribute :twitter_id, Types::String.optional
