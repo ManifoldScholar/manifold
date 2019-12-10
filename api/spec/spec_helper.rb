@@ -4,6 +4,12 @@ SimpleCov.start 'rails' do
   project_name "Manifold"
 
   add_filter "app/models/concerns/arel_helpers.rb"
+  add_filter "lib/generators/**/*.rb"
+  add_filter "lib/paperclip_migrator.rb"
+  add_filter "lib/patches/better_enums.rb"
+  add_filter "lib/patches/better_interactions.rb"
+  add_filter "lib/templates/**/*.rb"
+  add_filter "app/services/system_upgrades/upgrades/*.rb"
 
   add_group "Authorizers", %w[
     app/authorizers
