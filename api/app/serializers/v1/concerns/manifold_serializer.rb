@@ -108,7 +108,7 @@ module V1
         end
 
         def partial_only?
-          full_register.present?
+          full_register.blank?
         end
 
         def camelize_hash(hash)

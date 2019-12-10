@@ -4,6 +4,7 @@ shared_examples_for "an API create request" do |options|
 
   api_spec_helper = ApiDocs::Helpers::Request.new(options, :create)
 
+  # TODO: Convert serializer information into a request
   let(:body) { json_structure_for(api_spec_helper.factory) }
 
   post api_spec_helper.summary do

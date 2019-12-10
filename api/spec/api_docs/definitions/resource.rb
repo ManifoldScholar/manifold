@@ -25,7 +25,7 @@ module ApiDocs
 
       def collection_response
         definition = ::Types::Hash.schema(
-          data: ::Types::Array.of(collection_response_data)
+          data: ::Types::Array.of(partial_response_data)
         )
 
         definition = ApiDocumentation::DryTypesToJson.convert(definition)
@@ -68,7 +68,7 @@ module ApiDocs
       ######################################
 
       def resource_response_data
-        return collection_response_data if serializer.partial_only?
+        return partial_response_data if serializer.partial_only?
 
         resource_data(
           wrap_response_attributes(full_attributes),
@@ -76,7 +76,7 @@ module ApiDocs
         )
       end
 
-      def collection_response_data
+      def partial_response_data
         resource_data(
           wrap_response_attributes(attributes),
           wrap_response_relationships(relationships)

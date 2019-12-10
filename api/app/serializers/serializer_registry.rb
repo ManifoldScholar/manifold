@@ -89,7 +89,7 @@ class SerializerRegistry
   private
 
   def filter_to_types(values)
-    values.map { |k, v| [k, v[:type]] }.to_h
+    values.map { |_, v| [v[:key], v[:type]] }.to_h
   end
 
   def build_camelize_proc(attribute, block = nil)
