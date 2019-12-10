@@ -53,9 +53,7 @@ module V1
       typed_attribute :citations, Types::Hash.meta(description: "Citations of the book in a veriety of formats (mla, chicago, apa, etc.)")
       typed_attribute :hide_activity, Types::Bool
       typed_attribute :standalone_mode, Types::String.enum("disabled", "enabled", "enforced")
-      # TODO: check type on this
       typed_attribute :download_url, Types::String.optional
-      # TODO: check type on this
       typed_attribute :download_call_to_action, Types::String.optional
       typed_attribute :pending_slug, Types::String
       typed_attribute :standalone_mode_press_bar_text, Types::String.optional
