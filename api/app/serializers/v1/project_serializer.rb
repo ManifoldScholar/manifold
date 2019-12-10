@@ -22,7 +22,7 @@ module V1
     typed_attribute :creator_names, Types::String
     typed_attribute :recently_updated, Types::Bool, &:recently_updated?
     typed_attribute :updated, Types::Bool, &:updated?
-    typed_attribute :avatar_styles, Types::Serializer::AttatchmentStyles
+    typed_attribute :avatar_styles, Types::Serializer::Attachtment
 
     typed_has_many :creators, serializer: ::V1::MakerSerializer, record_type: :maker
 
@@ -42,8 +42,8 @@ module V1
       #    version: Type.string
       #  }
       metadata(metadata: true, properties: true, formatted: true)
-      typed_attribute :hero_styles, Types::Serializer::AttatchmentStyles
-      typed_attribute :cover_styles, Types::Serializer::AttatchmentStyles
+      typed_attribute :hero_styles, Types::Serializer::Attachtment
+      typed_attribute :cover_styles, Types::Serializer::Attachtment
       typed_attribute :hashtag, Types::String.optional
       typed_attribute :description, Types::String.optional
       typed_attribute :featured, Types::Bool
