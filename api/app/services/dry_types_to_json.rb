@@ -1,19 +1,39 @@
 class DryTypesToJson
   class << self
     def convert(type)
-      mapping = {}
-
-      mapping[type] = convert_simple_dry_type(type) if single_type?(type)
-      mapping[type] = convert_multi_type(type) if multi_type?(type)
-
-      mapping[type] = merge_enum_values(mapping, type) if contains_enum?(type)
-      mapping[type] = mapping[type].merge(type.meta) if contains_meta?(type)
-
-      mapping = handle_edge_case_conversions(mapping)
-      mapping[type] || type
+      result = convert_base_type_structure(type)
+      result = result.merge(type.meta) if contains_meta?(type)
+      result = merge_enum_values(result, type) if contains_enum?(type)
+      result
     end
 
     private
+
+    def convert_base_type_structure(type)
+      return convert_complex_type(type) if multi_type?(type)
+
+      convert_simple_type(type)
+    end
+
+    def convert_complex_type(type)
+      return base_boolean if type?(type, :bool)
+
+      convert(type.left).merge(convert(type.right))
+    end
+
+    def convert_simple_type(type)
+      return convert_array_dry_type(type) if type?(type, :array)
+      return convert_hash_dry_type(type) if type?(type, :hash)
+      return base_float if type?(type, :float)
+      return base_date_time if type?(type, :datetime)
+      return base_null if type?(type, :nilclass)
+
+      { type: type.name.downcase }
+    end
+
+    def merge_enum_values(hash, type)
+      hash.merge(enum: type.values.map { |key, _| key })
+    end
 
     def single_type?(type)
       type.respond_to? :type
@@ -28,45 +48,28 @@ class DryTypesToJson
     end
 
     def multi_type?(type)
-      type.respond_to?(:name) && split_multi_type(type).count > 1
+      type.respond_to? :left
     end
 
-    def handle_edge_case_conversions(mapping)
-      mapping[Dry::Types["date_time"]] = base_date_time
-      mapping[Dry::Types["bool"]] = { type: "boolean" }
-      mapping
+    def keys?(type)
+      type.respond_to? :keys
     end
 
-    def convert_simple_dry_type(type)
-      case type.name.downcase.to_sym
-      when :array
-        return convert_array_dry_type(type)
-      when :hash
-        return convert_hash_dry_type(type)
-      when :float
-        return base_float
-      end
+    def type?(type, sym)
+      return boolean_type?(type) if sym == :bool
 
-      { type: type.name.downcase }
+      type.name.downcase.to_sym == sym
     end
 
-    def convert_multi_type(type)
-      mapping = {}
-      options = split_multi_type(type).map { |i| i.downcase.to_sym }
-      nullable = options.delete(:nilclass)
-      mapping[type] = { type: options[0].to_s }
-      mapping[type] = mapping[type].merge(null_object) if nullable
-      mapping[type] = mapping[type].merge(base_date_time) if options.include? :datetime
-      mapping[type] = mapping[type].merge(base_float) if options.include? :float
-      mapping[type]
-    end
+    def boolean_type?(type)
+      return false unless multi_type?(type)
+      return true if type?(type.left, :trueclass) && type?(type.right, :falseclass)
 
-    def merge_enum_values(mapping, type)
-      mapping[type].merge(enum: type.values.map { |key, _| key })
+      false
     end
 
     def convert_hash_dry_type(type)
-      if type.respond_to?(:keys)
+      if keys?(type)
         return {
           type: "object",
           properties: type.keys.map { |item| [item.name, convert(item.type)] }.to_h
@@ -83,8 +86,8 @@ class DryTypesToJson
       }
     end
 
-    def split_multi_type(type)
-      type.name.split(" | ")
+    def base_boolean
+      { type: "boolean" }
     end
 
     def base_date_time
@@ -95,7 +98,7 @@ class DryTypesToJson
       { type: "number", format: "float" }
     end
 
-    def null_object
+    def base_null
       { "x-nullable": true }
     end
   end

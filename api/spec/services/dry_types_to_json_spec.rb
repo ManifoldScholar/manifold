@@ -5,7 +5,7 @@ RSpec.describe DryTypesToJson do
   let(:serializer_types) { ::Types::Serializer }
 
   describe 'when defining primitive types' do
-    it 'should map a string' do
+    it 'should convert a string' do
       expect(
         described_class.convert(types['string'])
       ).to eq({
@@ -13,7 +13,7 @@ RSpec.describe DryTypesToJson do
       })
     end
 
-    it 'should map a bool' do
+    it 'should convert a bool' do
       expect(
         described_class.convert(types['bool'])
       ).to eq({
@@ -21,7 +21,7 @@ RSpec.describe DryTypesToJson do
       })
     end
 
-    it 'should map a integer' do
+    it 'should convert a integer' do
       expect(
         described_class.convert(types['integer'])
       ).to eq({
@@ -29,7 +29,7 @@ RSpec.describe DryTypesToJson do
       })
     end
 
-    it 'should map a float' do
+    it 'should convert a float' do
       expect(
         described_class.convert(types['float'])
       ).to eq({
@@ -38,7 +38,7 @@ RSpec.describe DryTypesToJson do
       })
     end
 
-    it 'should map a datetime' do
+    it 'should convert a datetime' do
       expect(
         described_class.convert(types['date_time'])
       ).to eq({
@@ -57,7 +57,7 @@ RSpec.describe DryTypesToJson do
     })
   end
 
-  it 'should be able to convert an optional string' do
+  it 'should convert an optional string' do
     expect(
       described_class.convert(types['string'].optional)
     ).to eq({
@@ -66,7 +66,7 @@ RSpec.describe DryTypesToJson do
     })
   end
 
-  it 'should be able to convert an optional datetime' do
+  it 'should convert an optional datetime' do
     expect(
       described_class.convert(types['date_time'].optional)
     ).to eq({
@@ -77,7 +77,17 @@ RSpec.describe DryTypesToJson do
   end
 
   describe 'complex types' do
-    it 'should be able to convert an enum string' do
+    it 'should convert an optional enum string' do
+      expect(
+        described_class.convert(types['string'].optional.enum('one', 'two'))
+      ).to eq({
+        type: 'string',
+        enum: ['one', 'two'],
+        'x-nullable': true
+      })
+    end
+
+    it 'should convert an enum string' do
       expect(
         described_class.convert(types['string'].enum('one', 'two'))
       ).to eq({
@@ -86,7 +96,7 @@ RSpec.describe DryTypesToJson do
       })
     end
 
-    it 'should be able to convert an optional float' do
+    it 'should convert an optional float' do
       expect(
         described_class.convert(types['float'].optional)
       ).to eq({
@@ -96,13 +106,13 @@ RSpec.describe DryTypesToJson do
       })
     end
 
-    it 'should be able to convert an empty hash' do
+    it 'should convert an empty hash' do
       expect(
         described_class.convert(types['hash'])
       ).to eq({})
     end
 
-    it 'should be able to convert an array with a simple type' do
+    it 'should convert an array with a simple type' do
       expect(
         described_class.convert(types['array'].of(types['string']))
       ).to eq({
@@ -113,7 +123,7 @@ RSpec.describe DryTypesToJson do
       })
     end
 
-    it 'should be able to convert a hash with content' do
+    it 'should convert a hash with content' do
       expect(
         described_class.convert(types['hash'].schema(name: types['string']))
       ).to eq({
@@ -125,7 +135,7 @@ RSpec.describe DryTypesToJson do
     end
 
     describe 'custom serializer types' do
-      it 'should be able to convert a pointer' do
+      it 'should convert a pointer' do
         expect(
           described_class.convert(serializer_types::Pointer)
         ).to eq({
@@ -137,7 +147,7 @@ RSpec.describe DryTypesToJson do
         })
       end
 
-      it 'should be able to convert a resource' do
+      it 'should convert a resource' do
         expect(
           described_class.convert(serializer_types::Resource)
         ).to eq({
@@ -148,7 +158,7 @@ RSpec.describe DryTypesToJson do
         })
       end
 
-      it 'should be able to convert an array of hashes' do
+      it 'should convert an array of hashes' do
         expect(
           described_class.convert(types['array'].of(types['hash'].schema(name: types['string'])))
         ).to eq({
@@ -162,7 +172,7 @@ RSpec.describe DryTypesToJson do
         })
       end
 
-      it 'should be able to convert a collection' do
+      it 'should convert a collection' do
         expect(
           described_class.convert(serializer_types::Collection)
         ).to eq({
