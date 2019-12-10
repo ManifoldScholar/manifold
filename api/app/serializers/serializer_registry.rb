@@ -78,15 +78,19 @@ class SerializerRegistry
 
   def attribute_types
     values = reject { |_, v| v[:relationship] }.to_h
-    values.map { |k, v| [k, v[:type]] }.to_h
+    filter_to_types values
   end
 
   def relationship_types
     values = select { |_, v| v[:relationship] }.to_h
-    values.map { |k, v| [k, v[:type]] }.to_h
+    filter_to_types values
   end
 
   private
+
+  def filter_to_types(values)
+    values.map { |k, v| [k, v[:type]] }.to_h
+  end
 
   def build_camelize_proc(attribute, block = nil)
     proc { |object, params|

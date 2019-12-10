@@ -1,71 +1,18 @@
 module ApiDocs
   module Definitions
     module Resource
-      ####################################
-      ############# REQESTS ##############
-      ####################################
-
       def update_request
         definition = make_request(__callee__, update_attributes || request_attributes)
+
         definition = DryTypesToJson.convert(definition)
         transform_keys(definition)
       end
 
       def create_request
         definition = make_request(__callee__, create_attributes || request_attributes)
+
         definition = DryTypesToJson.convert(definition)
         transform_keys(definition)
-      end
-
-      def update_attributes
-        nil
-      end
-
-      def create_attributes
-        nil
-      end
-
-      def request_attributes
-        ::Types::Hash.schema(self::REQUEST_ATTRIBUTES.merge(full_attributes).except(*self::READ_ONLY))
-      end
-
-      def request_relationships
-        Type.object(properties: {})
-      end
-
-      def required_create_attributes
-        const_defined?(:REQUIRED_CREATE_ATTRIBUTES) ? self::REQUIRED_CREATE_ATTRIBUTES : required_attributes
-      end
-
-      def required_update_attributes
-        const_defined?(:REQUIRED_UPDATE_ATTRIBUTES) ? self::REQUIRED_UPDATE_ATTRIBUTES : required_attributes
-      end
-
-      def required_attributes
-        const_defined?(:REQUIRED_ATTRIBUTES) ? self::REQUIRED_ATTRIBUTES : []
-      end
-
-      ######################################
-      ############# RESPONSES ##############
-      ######################################
-
-      def resource_data(attr, relation)
-        ::Types::Hash.schema(
-          id: ::Types::Serializer::ID,
-          type: ::Types::String.meta(example: type),
-          attributes: attr,
-          relationships: relation,
-          meta: ::Types::Serializer::Meta
-        )
-      end
-
-      def resource_response_data
-        return collection_response_data if serializer.partial_only?
-
-        resource_data(
-          response_attributes(full_attributes),
-          response_relationships(full_relationships)
-        )
       end
 
       def resource_response
@@ -86,24 +33,81 @@ module ApiDocs
         transform_keys(definition)
       end
 
-      def collection_response_data
+      protected
+
+      def update_attributes
+        nil
+      end
+
+      def create_attributes
+        nil
+      end
+
+      ####################################
+      ############# REQESTS ##############
+      ####################################
+
+      def request_attributes
+        ::Types::Hash.schema(self::REQUEST_ATTRIBUTES.merge(full_attributes).except(*self::READ_ONLY))
+      end
+
+      def required_create_attributes
+        const_defined?(:REQUIRED_CREATE_ATTRIBUTES) ? self::REQUIRED_CREATE_ATTRIBUTES : required_attributes
+      end
+
+      def required_update_attributes
+        const_defined?(:REQUIRED_UPDATE_ATTRIBUTES) ? self::REQUIRED_UPDATE_ATTRIBUTES : required_attributes
+      end
+
+      def required_attributes
+        const_defined?(:REQUIRED_ATTRIBUTES) ? self::REQUIRED_ATTRIBUTES : []
+      end
+
+      ######################################
+      ############# RESPONSES ##############
+      ######################################
+
+      def resource_response_data
+        return collection_response_data if serializer.partial_only?
+
         resource_data(
-          response_attributes(attributes),
-          response_relationships(relationships)
+          wrap_response_attributes(full_attributes),
+          wrap_relationships(full_relationships)
         )
       end
 
-      def response_relationships(relation)
-        ::Types::Hash.schema(relation)
+      def collection_response_data
+        resource_data(
+          wrap_response_attributes(attributes),
+          wrap_relationships(relationships)
+        )
       end
 
-      def response_attributes(attr)
-        ::Types::Hash.schema(attr.except(*self::WRITE_ONLY))
+      def wrap_relationships(relationships)
+        ::Types::Hash.schema(relationships)
+      end
+
+      def wrap_response_attributes(attributes)
+        ::Types::Hash.schema(attributes.except(*self::WRITE_ONLY))
       end
 
       ####################################
       ############# HELPERS ##############
       ####################################
+
+      def resource_data(attributes, relation)
+        ::Types::Hash.schema(
+          id: ::Types::Serializer::ID,
+          type: ::Types::String.meta(example: type),
+          attributes: attributes,
+          relationships: relation,
+          meta: ::Types::Serializer::Meta
+        )
+      end
+
+      def type
+        name.demodulize.pluralize.underscore
+      end
 
       def serializer
         "V1::#{self.name.demodulize}Serializer".constantize
@@ -115,6 +119,12 @@ module ApiDocs
 
       def full_attributes
         attributes.merge(serializer.full_register.attribute_types)
+      end
+
+      private
+
+      def transform_keys(definition)
+        definition.deep_transform_keys { |key| key.to_s.camelize(:lower) }
       end
 
       def map_serializer_types(hash)
@@ -132,18 +142,6 @@ module ApiDocs
         relationships.merge(full)
       end
 
-      protected
-
-      def transform_keys(definition)
-        definition.deep_transform_keys { |key| key.to_s.camelize(:lower) }
-      end
-
-      def type
-        name.demodulize.pluralize.underscore
-      end
-
-      private
-
       def debug(callee, definition)
         return unless ENV["RSWAG_DEBUG"]
 
@@ -156,10 +154,10 @@ module ApiDocs
       end
 
       # TODO: Note required fields on request types
-      def make_request(callee, attr)
+      def make_request(callee, attributes)
         definition = ::Types::Hash.schema(
           data: ::Types::Hash.schema(
-            attributes: attr
+            attributes: attributes
           )
         )
 

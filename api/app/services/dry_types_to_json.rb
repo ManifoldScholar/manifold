@@ -3,25 +3,38 @@ class DryTypesToJson
     def convert(type)
       mapping = {}
 
-      if type.respond_to?(:type)
-        mapping[type] = convert_simple_dry_type(type)
-      elsif has_multi_types?(type)
-        mapping[type] = convert_multi_type(type)
-      end
+      mapping[type] = convert_simple_dry_type(type) if single_type?(type)
+      mapping[type] = convert_multi_type(type) if multi_type?(type)
 
-      mapping[type] = merge_enum_values(mapping, type) if type.respond_to?(:values)
-      mapping[type] = mapping[type].merge(type.meta) if type.respond_to?(:meta)
+      mapping[type] = merge_enum_values(mapping, type) if contains_enum?(type)
+      mapping[type] = mapping[type].merge(type.meta) if contains_meta?(type)
 
-      mapping[Dry::Types["date_time"]] = base_date_time
-      mapping[Dry::Types["bool"]] = { type: "boolean" }
-
+      mapping = handle_edge_case_conversions(mapping)
       mapping[type] || type
     end
 
     private
 
-    def has_multi_types?(type)
+    def single_type?(type)
+      type.respond_to? :type
+    end
+
+    def contains_enum?(type)
+      type.respond_to? :values
+    end
+
+    def contains_meta?(type)
+      type.respond_to? :meta
+    end
+
+    def multi_type?(type)
       type.respond_to?(:name) && split_multi_type(type).count > 1
+    end
+
+    def handle_edge_case_conversions(mapping)
+      mapping[Dry::Types["date_time"]] = base_date_time
+      mapping[Dry::Types["bool"]] = { type: "boolean" }
+      mapping
     end
 
     def convert_simple_dry_type(type)
