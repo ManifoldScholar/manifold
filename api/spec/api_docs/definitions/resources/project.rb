@@ -15,7 +15,7 @@ module ApiDocs
           :pending_slug, :avatar, :hero, :cover
         ].freeze
 
-        ATTRIBUTES = {
+        REQUEST_ATTRIBUTES = {
           pending_slug: ::Types::String,
           avatar: ::Types::Serializer::Upload,
           hero: ::Types::Serializer::Upload,
