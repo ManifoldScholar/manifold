@@ -28,19 +28,6 @@ module V1
 
     # rubocop:disable Metrics/BlockLength
     when_full do
-      # metadata attributes
-      # {
-      #    doi: Type.url,
-      #    edition: Type.string,
-      #    isbn: Type.string,
-      #    publisher: Type.string,
-      #    publisher_place: Type.string,
-      #    restrictions: Type.string,
-      #    rights: Type.string,
-      #    rights_holder: Type.string,
-      #    rights_territory: Type.string,
-      #    version: Type.string
-      #  }
       metadata(metadata: true, properties: true, formatted: true)
       typed_attribute :hero_styles, Types::Serializer::Attachtment
       typed_attribute :cover_styles, Types::Serializer::Attachtment
@@ -70,7 +57,6 @@ module V1
       typed_attribute :download_url, Types::String.optional
       # TODO: check type on this
       typed_attribute :download_call_to_action, Types::String.optional
-      # QUESTION: This was added in at commit cfd019c9a14dba13b61a7c8b5a1eb9634195b7c0. Was this intentional?
       typed_attribute :pending_slug, Types::String
       typed_attribute :standalone_mode_press_bar_text, Types::String.optional
       typed_attribute :standalone_mode_press_bar_url, Types::String.optional

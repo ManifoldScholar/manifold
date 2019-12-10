@@ -1,4 +1,3 @@
-require "rails_helper"
 require "swagger_helper"
 
 RSpec.describe "Projects API", type: :request do
