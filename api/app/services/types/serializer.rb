@@ -8,7 +8,7 @@ module Types
     )
 
     # each of these are URL's
-    AttatchmentStyles = Types::Hash.schema(
+    Attachtment = Types::Hash.schema(
       small: Types::String.optional,
       small_square: Types::String.optional,
       small_landscape: Types::String.optional,
