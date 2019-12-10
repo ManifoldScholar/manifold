@@ -116,22 +116,20 @@ module Attachments
     # can_process_avatar?
     # It also adds a before processing callback for Paperclip to process the variants if,
     # and only if the attachment is processable.
-
     def manifold_has_attached_file(field, type, no_styles: false, validate_content_type: true)
       # Create the style
 
       include AttachmentUploader::Attachment.new(field)
 
       class_eval <<-RUBY, __FILE__, __LINE__ + 1
-      
         def #{field}_options
-          { 
+          {
             type: :#{type},
             no_styles: #{no_styles},
             validate_content_type: #{validate_content_type}
           }
         end
-      
+
         def manifold_attachment_image_styles
           return BASE_STYLES
         end
@@ -153,7 +151,7 @@ module Attachments
 
         def #{field}_processed?
           #{field}_attacher.stored?
-        end 
+        end
 
         def show_#{field}_placeholder?
           return false unless #{field}_is_image?
@@ -199,14 +197,14 @@ module Attachments
 
         def #{field}_original
           return nil unless #{field}?
-        
+
           original =
             if #{field}_attacher.cached?
               #{field}
             elsif #{field}_attacher.stored?
               #{field}[:original]
             end
-        
+
           block_given? ? yield(original) : original
         end
 
@@ -219,7 +217,7 @@ module Attachments
           versions = style_keys.map do |version|
             if #{field}_data&.key? version.to_s
               value = { width: #{field}[version].width, height: #{field}[version].height }
-            else 
+            else
               value = nil
             end
             [version, value]
@@ -228,7 +226,7 @@ module Attachments
           versions.push([:original, { width: original.width, height: original.height }])
           Hash[versions]
         end
-  
+
         def #{field}_styles
           original = #{field}_original&.url
           styles = style_keys.map do |style|
@@ -244,56 +242,48 @@ module Attachments
           styles.push([:original, original])
           Hash[styles]
         end
-  
+
         def #{field}_is_image?
           return false unless #{field}?
           attachment = #{field}_original
-          !attachment.mime_type.match(Regexp.union(CONFIG[:image][:allowed_mime])).nil?
           !attachment.extension.match(Regexp.union(CONFIG[:image][:allowed_ext])).nil?
         end
 
         def #{field}_is_video?
           return false unless #{field}?
           attachment = #{field}_original
-          !attachment.mime_type.match(Regexp.union(CONFIG[:video][:allowed_mime])).nil?  
           !attachment.extension.match(Regexp.union(CONFIG[:video][:allowed_ext])).nil?
         end
-      
+
         def #{field}_is_audio?
           return false unless #{field}?
           attachment = #{field}_original
-          !attachment.mime_type.match(Regexp.union(CONFIG[:audio][:allowed_mime])).nil?  
           !attachment.extension.match(Regexp.union(CONFIG[:audio][:allowed_ext])).nil?
         end
-      
+
         def #{field}_is_spreadsheet?
           return false unless #{field}?
           attachment = #{field}_original
-          !attachment.mime_type.match(Regexp.union(CONFIG[:spreadsheet][:allowed_mime])).nil?  
           !attachment.extension.match(Regexp.union(CONFIG[:spreadsheet][:allowed_ext])).nil?
         end
-      
+
         def #{field}_is_text_document?
           return false unless #{field}?
           attachment = #{field}_original
-          !attachment.mime_type.match(Regexp.union(CONFIG[:text_document][:allowed_mime])).nil?  
           !attachment.extension.match(Regexp.union(CONFIG[:text_document][:allowed_ext])).nil?
         end
-      
+
         def #{field}_is_presentation?
           return false unless #{field}?
           attachment = #{field}_original
-          !attachment.mime_type.match(Regexp.union(CONFIG[:presentation][:allowed_mime])).nil?  
           !attachment.extension.match(Regexp.union(CONFIG[:presentation][:allowed_ext])).nil?
         end
-      
+
         def #{field}_is_pdf?
           return false unless #{field}.present?
           attachment = #{field}_original
-          !attachment.mime_type.match(Regexp.union(CONFIG[:pdf][:allowed_mime])).nil?  
           !attachment.extension.match(Regexp.union(CONFIG[:pdf][:allowed_ext])).nil?
         end
-
       RUBY
     end
   end
