@@ -72,18 +72,18 @@ module ApiDocs
 
         resource_data(
           wrap_response_attributes(full_attributes),
-          wrap_relationships(full_relationships)
+          wrap_response_relationships(full_relationships)
         )
       end
 
       def collection_response_data
         resource_data(
           wrap_response_attributes(attributes),
-          wrap_relationships(relationships)
+          wrap_response_relationships(relationships)
         )
       end
 
-      def wrap_relationships(relationships)
+      def wrap_response_relationships(relationships)
         ::Types::Hash.schema(relationships)
       end
 
