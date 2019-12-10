@@ -316,4 +316,54 @@ RSpec.describe Project, type: :model do
       end
     end
   end
+
+  describe ".pending_bag_it_export" do
+    let!(:project) { FactoryBot.create :project }
+
+    let(:the_scope) { described_class.pending_bag_it_export }
+
+    subject { the_scope }
+
+    class << self
+      def it_is_found
+        it "is found by the scope" do
+          expect(the_scope).to include project
+        end
+      end
+
+      def it_is_not_found
+        it "is not found by the scope" do
+          expect(the_scope).not_to include project
+        end
+      end
+    end
+
+    context "with a project not marked to export" do
+      it_is_not_found
+    end
+
+    context "with a project marked to export" do
+      let!(:project) { FactoryBot.create :project, :exports_as_bag_it }
+
+      context "and no text exports" do
+        it_is_found
+      end
+
+      context "with a stale export" do
+        let!(:project_export) { FactoryBot.create :project_export, :bag_it, project: project, fingerprint: project.fingerprint.reverse }
+
+        it_is_found
+      end
+
+      context "with a current export" do
+        let!(:project_export) { FactoryBot.create :project_export, :bag_it, project: project, fingerprint: project.fingerprint }
+
+        it_is_not_found
+      end
+    end
+  end
+
+  it_should_behave_like "a model that stores its fingerprint" do
+    subject { FactoryBot.create :project }
+  end
 end

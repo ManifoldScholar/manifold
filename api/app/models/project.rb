@@ -21,6 +21,7 @@ class Project < ApplicationRecord
   # Concerns
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
+  include Concerns::StoresFingerprints
   include Concerns::Taggable
   include TrackedCreator
   include Collaborative
@@ -59,6 +60,11 @@ class Project < ApplicationRecord
 
   # PaperTrail
   has_paper_trail
+
+  jsonb_accessor(
+    :export_configuration,
+    exports_as_bag_it: [:boolean, default: false, store_key: :bag_it]
+  )
 
   # Associations
   has_many :collection_projects, dependent: :destroy, inverse_of: :project
@@ -107,6 +113,11 @@ class Project < ApplicationRecord
            -> { order(:position) },
            dependent: :destroy,
            inverse_of: :project
+
+  has_many :project_exports, inverse_of: :project
+  has_many :project_export_statuses, inverse_of: :project
+  has_one :current_project_export_status, -> { current }, class_name: "ProjectExportStatus"
+  has_one :current_project_export, through: :current_project_export_status, source: :project_export
 
   # rubocop:disable Style/Lambda, Rails/InverseOf
   has_many :uncollected_resources, ->(object) {
@@ -212,6 +223,11 @@ class Project < ApplicationRecord
       .where(collection_projects: { project_collection: pc })
       .group("projects.id, collection_project_rankings.ranking")
   }
+
+  scope :exports_as_bag_it, -> { export_configuration_where(exports_as_bag_it: true) }
+  scope :sans_current_bag_it_export, -> { where.not(id: ProjectExportStatus.current_project_ids) }
+  scope :with_current_bag_it_export, -> { where(id: ProjectExportStatus.current_project_ids) }
+  scope :pending_bag_it_export, -> { exports_as_bag_it.sans_current_bag_it_export }
 
   # Search
   # rubocop:disable Style/Lambda

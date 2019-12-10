@@ -114,6 +114,7 @@ Naming/UncommunicativeMethodParamName:
     - 'id'
     - 'io'
     - 'e'
+    - 'to'
 
 Metrics/BlockLength:
   Exclude:

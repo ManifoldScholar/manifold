@@ -1,4 +1,4 @@
-class TextExportStatus < ApplicationRecord
+class ProjectExportStatus < ApplicationRecord
   include Concerns::ExportStatusView
 
   configure!
