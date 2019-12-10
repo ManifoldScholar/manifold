@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe DryTypesToJson do
+RSpec.describe ::ApiDocumentation::DryTypesToJson do
   let(:types) { Dry::Types }
   let(:serializer_types) { ::Types::Serializer }
 

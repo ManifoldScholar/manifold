@@ -4,21 +4,21 @@ module ApiDocs
       def update_request
         definition = make_request(__callee__, update_attributes || request_attributes)
 
-        definition = DryTypesToJson.convert(definition)
+        definition = ApiDocumentation::DryTypesToJson.convert(definition)
         transform_keys(definition)
       end
 
       def create_request
         definition = make_request(__callee__, create_attributes || request_attributes)
 
-        definition = DryTypesToJson.convert(definition)
+        definition = ApiDocumentation::DryTypesToJson.convert(definition)
         transform_keys(definition)
       end
 
       def resource_response
         definition = ::Types::Hash.schema(data: resource_response_data)
 
-        definition = DryTypesToJson.convert(definition)
+        definition = ApiDocumentation::DryTypesToJson.convert(definition)
         debug(__callee__, definition)
         transform_keys(definition)
       end
@@ -28,7 +28,7 @@ module ApiDocs
           data: ::Types::Array.of(collection_response_data)
         )
 
-        definition = DryTypesToJson.convert(definition)
+        definition = ApiDocumentation::DryTypesToJson.convert(definition)
         debug(__callee__, definition)
         transform_keys(definition)
       end
