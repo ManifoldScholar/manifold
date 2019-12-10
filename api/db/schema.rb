@@ -430,6 +430,19 @@ ActiveRecord::Schema.define(version: 2019_12_29_200459) do
     t.index ["slug"], name: "index_project_collections_on_slug", unique: true
   end
 
+  create_table "project_exports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "project_id", null: false
+    t.text "export_kind", default: "unknown", null: false
+    t.text "fingerprint", null: false
+    t.jsonb "asset_data"
+    t.jsonb "metadata", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_data"], name: "index_project_exports_on_asset_data", using: :gin
+    t.index ["project_id", "export_kind", "fingerprint"], name: "index_project_exports_uniqueness", unique: true
+    t.index ["project_id"], name: "index_project_exports_on_project_id"
+  end
+
   create_table "project_subjects", id: :serial, force: :cascade do |t|
     t.uuid "project_id"
     t.uuid "subject_id"
@@ -491,6 +504,10 @@ ActiveRecord::Schema.define(version: 2019_12_29_200459) do
     t.string "cached_subtitle_formatted"
     t.string "cached_title_plaintext"
     t.string "cached_subtitle_plaintext"
+    t.text "fingerprint", null: false
+    t.jsonb "export_configuration", default: {}, null: false
+    t.index "((export_configuration @> '{\"bag_it\": true}'::jsonb))", name: "index_projects_export_configuration_exports_as_bag_it"
+    t.index ["fingerprint"], name: "index_projects_on_fingerprint"
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 
@@ -953,6 +970,7 @@ ActiveRecord::Schema.define(version: 2019_12_29_200459) do
   add_foreign_key "ingestions", "texts", on_delete: :nullify
   add_foreign_key "ingestions", "users", column: "creator_id", on_delete: :restrict
   add_foreign_key "notification_preferences", "users", on_delete: :cascade
+  add_foreign_key "project_exports", "projects", on_delete: :restrict
   add_foreign_key "reading_group_memberships", "reading_groups", on_delete: :cascade
   add_foreign_key "reading_group_memberships", "users", on_delete: :cascade
   add_foreign_key "reading_groups", "users", column: "creator_id", on_delete: :nullify
@@ -1157,5 +1175,20 @@ ActiveRecord::Schema.define(version: 2019_12_29_200459) do
     te.created_at AS exported_at
    FROM (texts t
      JOIN text_exports te ON ((t.id = te.text_id)));
+  SQL
+  create_view "project_export_statuses", sql_definition: <<-SQL
+    SELECT p.id AS project_id,
+    pe.id AS project_export_id,
+        CASE pe.export_kind
+            WHEN 'bag_it'::text THEN (p.export_configuration @> '{"bag_it": true}'::jsonb)
+            ELSE false
+        END AS autoexport,
+    pe.export_kind,
+    pe.fingerprint AS export_fingerprint,
+    (p.fingerprint = pe.fingerprint) AS current,
+    (p.fingerprint <> pe.fingerprint) AS stale,
+    pe.created_at AS exported_at
+   FROM (projects p
+     JOIN project_exports pe ON ((p.id = pe.project_id)));
   SQL
 end

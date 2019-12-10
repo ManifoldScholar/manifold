@@ -69,6 +69,27 @@ module Types
     end
   end
 
+  NON_BLANK_STRING = Types::String.constrained(format: /\S+/)
+
+  ENSURE_EXISTING_PATH = ->(path) do
+    case path
+    when NON_BLANK_STRING
+      return ENSURE_EXISTING_PATH[Pathname.new(path)]
+    when Pathname
+      raise ArgumentError, "Expected path #{path.to_s.inspect} to exist" unless path.exist?
+    else
+      raise TypeError, "Expected #{path.inspect} to be a Pathname or String"
+    end
+
+    path
+  end
+
+  EXISTING_PATH = Types.Constructor(Types.Instance(::Pathname)) do |value|
+    next Dry::Types::Undefined if value.blank?
+
+    ENSURE_EXISTING_PATH[value]
+  end
+
   class FlexibleStruct < Dry::Struct
     extend Memoist
 

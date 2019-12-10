@@ -27,9 +27,18 @@ class ExportKind < ClassyEnum::Base
   end
 
   # @return [void]
+  def owner_must_be_project_export!
+    owner_must_be! ProjectExport
+  end
+
+  # @return [void]
   def owner_must_be_text_export!
     owner_must_be! TextExport
   end
+end
+
+class ExportKind::BagIt < ExportKind
+  validate :owner_must_be_project_export!
 end
 
 class ExportKind::EpubV3 < ExportKind
