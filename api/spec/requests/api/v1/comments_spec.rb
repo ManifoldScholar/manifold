@@ -1,4 +1,3 @@
-require "rails_helper"
 require "swagger_helper"
 
 RSpec.describe "Comments", type: :request do
@@ -14,7 +13,8 @@ RSpec.describe "Comments", type: :request do
     end
 
     path "/annotations/{annotation_id}/relationships/comments" do
-      it_behaves_like "an API create request", model: Comment, tags: "Annotation Comments", url_parameters: [:annotation_id], auth_type: :admin
+      it_behaves_like "an API create request", model: Comment, tags: "Annotation Comments", url_parameters: [:annotation_id], auth_type: :admin, included_relationships: [:creator]
+      include_examples "an API index request", model: Comment, tags: "Annotation Comments", url_parameters: [:annotation_id], paginated: true, included_relationships: [:creator]
     end
   end
 
@@ -30,7 +30,7 @@ RSpec.describe "Comments", type: :request do
     end
 
     path "/resources/{resource_id}/relationships/comments" do
-      it_behaves_like "an API create request", model: Comment, tags: "Resource Comments", url_parameters: [:resource_id], auth_type: :admin
+      it_behaves_like "an API create request", model: Comment, tags: "Resource Comments", url_parameters: [:resource_id], auth_type: :admin, included_relationships: [:creator]
     end
   end
 
