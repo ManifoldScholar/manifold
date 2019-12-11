@@ -36,19 +36,13 @@ module ApiDocs
           :slug
         ].freeze
 
-        WRITE_ONLY = [
-          :pending_slug,
-          :avatar,
-          :hero,
-          :cover
-        ].freeze
-
         REQUEST_ATTRIBUTES = {
-          pending_slug: ::Types::String,
           avatar: ::Types::Serializer::Upload,
           hero: ::Types::Serializer::Upload,
           cover: ::Types::Serializer::Upload,
         }.freeze
+
+        REQUIRED_CREATE_ATTRIBUTES = [:title].freeze
 
         class << self
 
