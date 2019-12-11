@@ -1,29 +1,15 @@
 module ApiDocs
-  module Definition
-    module Resource
+  module Definitions
+    module Resources
       class Comment
 
-        READ_ONLY = [:parent_id, :abilities, :created_at, :flags_count, :children_count,
-                     :author_created].freeze
-
-        WRITE_ONLY = [].freeze
-
-        ATTRIBUTES = {
-          body: Type.string,
-          parent_id: Type.id,
-          created_at: Type.date_time,
-          flags_count: Type.integer,
-          flagged: Type.boolean,
-          abilities: Type.abilities,
-          deleted: Type.boolean,
-          children_count: Type.integer,
-          sort_order: Type.integer,
-          author_created: Type.boolean
-        }.freeze
-
-        RELATIONSHIPS = {
-          creator: Type.resource
-        }.freeze
+        READ_ONLY = [
+          :abilities,
+          :created_at,
+          :flags_count,
+          :children_count,
+          :author_created
+        ].freeze
 
         class << self
 
