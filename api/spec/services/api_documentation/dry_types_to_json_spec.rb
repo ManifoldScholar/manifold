@@ -109,7 +109,7 @@ RSpec.describe ::ApiDocumentation::DryTypesToJson do
     it 'should convert an empty hash' do
       expect(
         described_class.convert(types['hash'])
-      ).to eq({})
+      ).to eq({ type: 'object' })
     end
 
     it 'should convert an array with a simple type' do
@@ -128,6 +128,18 @@ RSpec.describe ::ApiDocumentation::DryTypesToJson do
         described_class.convert(types['hash'].schema(name: types['string']))
       ).to eq({
         type: 'object',
+        properties: {
+          name: described_class.convert(types['string'])
+        }
+      })
+    end
+
+    it 'should assign a required attributes to hash elements' do
+      expect(
+        described_class.convert(types['hash'].schema(name: types['string']).meta(required: ['name']))
+      ).to eq({
+        type: 'object',
+        required: ['name'],
         properties: {
           name: described_class.convert(types['string'])
         }

@@ -77,7 +77,7 @@ module ApiDocumentation
           }
         end
 
-        return {}
+        return { type: "object" }
       end
 
       def convert_array_dry_type(type)

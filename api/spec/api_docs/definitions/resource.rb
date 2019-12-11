@@ -43,12 +43,13 @@ module ApiDocs
         nil
       end
 
-      ####################################
-      ############# REQESTS ##############
-      ####################################
+      #####################################
+      ############# REQUESTS ##############
+      #####################################
 
       def request_attributes
-        ::Types::Hash.schema(self::REQUEST_ATTRIBUTES.merge(full_attributes).except(*self::READ_ONLY))
+        request_attr = const_defined?(:REQUEST_ATTRIBUTES) ? self::REQUEST_ATTRIBUTES : {}
+        ::Types::Hash.schema(request_attr.merge(full_attributes).except(*read_only_attributes))
       end
 
       def required_create_attributes
@@ -61,6 +62,24 @@ module ApiDocs
 
       def required_attributes
         const_defined?(:REQUIRED_ATTRIBUTES) ? self::REQUIRED_ATTRIBUTES : []
+      end
+
+      def write_only_attributes
+        const_defined?(:WRITE_ONLY) ? self::WRITE_ONLY : []
+      end
+
+      def make_request(callee, attributes)
+        attributes = attributes.meta(required: required_create_attributes) if required_create_attributes.present? && callee == :create_request
+        attributes = attributes.meta(required: required_update_attributes) if required_update_attributes.present? && callee == :update_request
+
+        definition = ::Types::Hash.schema(
+          data: ::Types::Hash.schema(
+            attributes: attributes
+          )
+        )
+
+        debug(callee, definition)
+        definition
       end
 
       ######################################
@@ -88,7 +107,11 @@ module ApiDocs
       end
 
       def wrap_response_attributes(attributes)
-        ::Types::Hash.schema(attributes.except(*self::WRITE_ONLY))
+        ::Types::Hash.schema(attributes.except(*write_only_attributes))
+      end
+
+      def read_only_attributes
+        const_defined?(:READ_ONLY) ? self::READ_ONLY : []
       end
 
       ####################################
@@ -151,18 +174,6 @@ module ApiDocs
         pp definition
         puts "-" * 80
         puts "\n"
-      end
-
-      # TODO: Note required fields on request types
-      def make_request(callee, attributes)
-        definition = ::Types::Hash.schema(
-          data: ::Types::Hash.schema(
-            attributes: attributes
-          )
-        )
-
-        debug(callee, definition)
-        definition
       end
     end
   end
