@@ -6,20 +6,18 @@ module V1
       included do
         abilities
 
-        typed_attribute :id, NilClass
-        typed_attribute :nickname, NilClass
-        typed_attribute :first_name, NilClass
-        typed_attribute :last_name, NilClass
-        typed_attribute :updated_at, NilClass
-        typed_attribute :full_name, NilClass
-        typed_attribute :is_current_user, NilClass
-        typed_attribute :avatar_styles, Types::Hash
+        typed_attribute :nickname, Types::String
+        typed_attribute :first_name, Types::String
+        typed_attribute :last_name, Types::String
+        typed_attribute :updated_at, Types::DateTime.meta(read_only: true)
+        typed_attribute :full_name, Types::String.meta(read_only: true)
+        typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
 
-        typed_attribute :email, NilClass, private: true
-        typed_attribute :created_at, NilClass, private: true
-        typed_attribute :role, NilClass, private: true
-        typed_attribute :kind, NilClass, private: true
-        typed_attribute :is_current_user, NilClass do |object, params|
+        typed_attribute :email, Types::Serializer::Email, private: true
+        typed_attribute :created_at, Types::DateTime.meta(read_only: true), private: true
+        typed_attribute :role, Types::String, private: true
+        typed_attribute :kind, Types::String.meta(read_only: true), private: true
+        typed_attribute :is_current_user, Types::Bool.meta(read_only: true) do |object, params|
           next false unless authenticated?(params)
 
           object.id == params[:current_user].id

@@ -1,6 +1,6 @@
 module ApiDocs
-  module Definition
-    module Resource
+  module Definitions
+    module Resources
       class User
 
         BODY_RESPONSE_DESCRIPTION = <<~HEREDOC.freeze
@@ -15,85 +15,53 @@ module ApiDocs
           The `role` attribute may only be set or updated by admin users.
         HEREDOC
 
-        READ_ONLY = [
-          :abilities,
-          :kind,
-          :created_at,
-          :updated_at,
-          :full_name,
-          :avatar_styles,
-          :is_current_user
-        ].freeze
-
-        WRITE_ONLY = [
-          :name,
-          :password,
-          :password_confirmation,
-          :avatar,
-          :remove_avatar,
-          :notification_preferences_by_kind,
-          :persistent_ui,
-          :unsubscribe
-        ].freeze
-
         REQUIRED_CREATE_ATTRIBUTES = [
           :name,
           :email,
-          :password,
-          :password_confirmation
+          :first_name,
+          :last_name,
+          :password
         ].freeze
 
-        REQUIRED_UPDATE_ATTRIBUTES = [
-        ].freeze
-
-        ATTRIBUTES = {
-          email: Type.string,
-          nickname: Type.string,
-          first_name: Type.string,
-          last_name: Type.string,
-          kind: Type.string,
-          name: Type.string,
-          password: Type.string,
-          password_confirmation: Type.string,
-          remove_avatar: Type.boolean,
-          avatar: Type.attachment_styles,
-          created_at: Type.date_time,
-          role: Type.string,
-          updated_at: Type.date_time,
-          full_name: Type.string,
-          avatar_styles: Type.attachment_styles,
-          abilities: Type.abilities,
-          is_current_user: Type.boolean,
-          class_abilities: Type.object, # TODO: Flesh out class abilities
-          persistent_ui: Type.object(parameters: {
-                                       reader: Type.object(parameters: {
-                                                             colors: Type.object,
-                                                             typography: Type.object,
-                                                             reading_groups: Type.object
-                                                           })
-                                     }),
-          notification_preferences_by_kind: Type.array(
-            items: Type.object(parameters: {
-                                 type: Type.object(parameters: {
-                                                     digest: Type.string,
-                                                     projects: Type.string,
-                                                     replies_to_me: Type.string,
-                                                     followed_project: Type.string,
-                                                     flagged_resources: Type.string,
-                                                     digest_comments_and_annotations: Type.string,
-                                                     project_comments_and_annotations: Type.string
-                                                   })
-                               })
-          )
-        }.freeze
-
-        RELATIONSHIPS = {
-          makers: Type.collection(contains: "makers")
+        REQUEST_ATTRIBUTES = {
+          name: Types::String,
+          password: Types::String,
+          password_confirmation: Types::String.meta(description: "Only used when creating an account for yourself. Not needed for admin users creating a new user."),
+          remove_avatar: Types::Bool,
+          avatar: Types::Serializer::Upload,
+          class_abilities: Types::Hash, # TODO: Flesh out class abilities
+          persistent_ui: Types::Hash.schema(
+            reader: Types::Hash.schema(
+              colors: Types::Hash, # TODO: Flesh out class abilities
+              typography: Types::Hash, # TODO: Flesh out class abilities
+              reading_groups: Types::Hash # TODO: Flesh out class abilities
+            )
+          ),
+          notification_preferences_by_kind: Types::Array.of(
+            Types::Hash.schema(
+              type: Types::Hash.schema(
+                # TODO: Check that these notification preferences are correct for the users attribute
+                digest: Types::String.enum(NOTIFICATION_ENUM),
+                projects: Types::String.enum(NOTIFICATION_ENUM),
+                replies_to_me: Types::String.enum(NOTIFICATION_ENUM),
+                followed_projects: Types::String.enum(NOTIFICATION_ENUM),
+                flagged_resources: Types::String.enum(NOTIFICATION_ENUM),
+                digest_comments_and_annotations: Types::String.enum(NOTIFICATION_ENUM),
+                project_comments_and_annotations: Types::String.enum(NOTIFICATION_ENUM)
+              )
+            )
+          ),
+          # TODO: Add a description for how this should be used
+          unsubscribe: Types::Bool
         }.freeze
 
         class << self
 
           include Resource
+
+          def create_attributes
+            request_attributes.except(:unsubscribe, :remove_avatar)
+          end
 
         end
       end
