@@ -28,9 +28,9 @@ module V1
     typed_attribute :title_plaintext, NilClass
     typed_attribute :downloadable, NilClass, &:downloadable?
 
-    typed_attribute :attachment_styles, Hash
-    typed_attribute :variant_poster_styles, Hash
-    typed_attribute :variant_thumbnail_styles, Hash
+    typed_attribute :attachment_styles, Types::Hash
+    typed_attribute :variant_poster_styles, Types::Hash
+    typed_attribute :variant_thumbnail_styles, Types::Hash
 
     typed_has_many :collection_resources
 
