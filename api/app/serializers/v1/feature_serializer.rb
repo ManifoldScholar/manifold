@@ -29,8 +29,8 @@ module V1
     typed_attribute :position, NilClass
     typed_attribute :live, NilClass
     typed_attribute :include_sign_up, NilClass
-    typed_attribute :foreground_styles, Hash
-    typed_attribute :background_styles, Hash
+    typed_attribute :foreground_styles, Types::Hash
+    typed_attribute :background_styles, Types::Hash
 
   end
 end
