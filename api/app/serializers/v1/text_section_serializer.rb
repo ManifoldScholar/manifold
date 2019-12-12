@@ -14,8 +14,8 @@ module V1
     typed_has_many :stylesheets
 
     when_full do
-      typed_attribute :body_json, Hash
-      typed_attribute :citations, Hash
+      typed_attribute :body_json, Types::Hash
+      typed_attribute :citations, Types::Hash
     end
 
   end

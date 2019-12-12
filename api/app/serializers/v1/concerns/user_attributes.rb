@@ -18,7 +18,6 @@ module V1
         typed_attribute :kind, Types::String.meta(read_only: true), private: true
         typed_attribute :is_current_user, Types::Bool.meta(read_only: true) do |object, params|
           next false unless authenticated?(params)
-
           object.id == params[:current_user].id
         end
       end
