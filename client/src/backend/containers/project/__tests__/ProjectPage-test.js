@@ -1,29 +1,21 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import ProjectProjectPageContainer from "../ProjectPage";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
+import { project, route } from "./__fixtures__";
 
-describe("Backend Project ProjectPage Container", () => {
-  const store = build.store();
-  const project = build.entity.project("1");
-
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <ProjectProjectPageContainer project={project} />
-      </Provider>
-    )
-  );
-
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("backend/containers/project/ProjectPage", () => {
+  beforeEach(() => {
+    testHelpers.startSession($dispatch, $user);
   });
 
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  def("abilities", () => ({ update: true }));
+  def("user", () => factory("user"));
+  def("project", () => project($abilities));
+  def("root", () => <ProjectProjectPageContainer project={$project} />);
+
+  it("matches the snapshot when rendered", () => {
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
+  });
+
+  it("does not render a null value", () => {
+    expect(mount($withApp($root)).html()).not.toBeNull();
   });
 });

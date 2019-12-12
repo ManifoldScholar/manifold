@@ -31,7 +31,6 @@ export default class Activity extends Component {
   render() {
     if (!this.props.statistics) return null;
     const stats = this.props.statistics.attributes;
-
     return (
       <div className="backend-activity-stats">
         <ul className="backend-activity-stats__list">

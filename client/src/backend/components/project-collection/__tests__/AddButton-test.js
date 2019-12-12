@@ -1,31 +1,23 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import AddButton from "../AddButton";
-import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
 
-describe("Backend.ProjectCollection.AddButton component", () => {
-  const projectCollection = build.entity.projectCollection("1");
-  const project = build.entity.project("2");
-  const store = build.store();
+describe("backend/components/project-collection/AddButton", () => {
+  def("projectCollection", () => factory("projectCollection"));
+  def("project", () => factory("project"));
+  def("handleAdd", () => jest.fn());
+  def("handleRemove", () => jest.fn());
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <AddButton
-            projectCollection={projectCollection}
-            selectedProjectIds={[]}
-            project={project}
-            dispatch={store.dispatch}
-            handleAdd={jest.fn}
-            handleRemove={jest.fn}
-          />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  def("root", () => (
+    <AddButton
+      projectCollection={$projectCollection}
+      selectedProjectIds={[$project.id]}
+      project={$project}
+      dispatch={$dispatch}
+      handleAdd={$handleAdd}
+      handleRemove={$handleRemove}
+    />
+  ));
+
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

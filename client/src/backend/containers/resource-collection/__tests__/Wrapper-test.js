@@ -1,50 +1,20 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { ResourceCollectionWrapperContainer } from "../Wrapper";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
 
-describe("Backend ResourceCollection Wrapper Container", () => {
-  const store = build.store();
-  const collection = build.entity.resourceCollection("1");
-  collection.relationships.resources = [
-    build.entity.resource("2"),
-    build.entity.resource("3")
-  ];
-  collection.relationships.project = build.entity.project("4");
-  store.dispatch({
-    type: "UPDATE_CURRENT_USER",
-    error: false,
-    payload: {
-      data: build.entity.user("1")
-    }
-  });
-
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <ResourceCollectionWrapperContainer
-          resourceCollection={collection}
-          route={{
-            routes: []
-          }}
-          match={{
-            params: {}
-          }}
-          dispatch={store.dispatch}
-        />
-      </Provider>
-    )
+describe("backend/containers/resource-collection/Wrapper", () => {
+  def("project", () => factory("project"));
+  def("resourceCollection", () =>
+    factory("resourceCollection", { relationships: { project: $project } })
   );
+  def("root", () => (
+    <ResourceCollectionWrapperContainer
+      resourceCollection={$resourceCollection}
+      route={fixtures.route()}
+      match={{ params: {} }}
+      dispatch={$dispatch}
+    />
+  ));
 
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 });

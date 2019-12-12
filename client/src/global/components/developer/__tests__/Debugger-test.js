@@ -1,16 +1,10 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Debugger from "../Debugger";
-import build from "test/fixtures/build";
 
-describe("Global.Developer.Debugger component", () => {
-  const project = build.entity.project("1");
+describe("global/components/developer/Debugger", () => {
+  def("project", () => factory("project"));
+  def("root", () => <Debugger object={$project} label="Project" />);
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <Debugger object={project} label="Project" />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

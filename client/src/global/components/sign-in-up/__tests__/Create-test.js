@@ -1,43 +1,31 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import { mount } from "enzyme";
 import { CreateContainer } from "../Create";
-import build from "test/fixtures/build";
-import { Provider } from "react-redux";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
-describe("Global.SignInUp.Create component", () => {
-  const store = build.store();
+describe("global/components/sign-in-up/Create", () => {
+  def("handleViewChange", () => jest.fn());
+  def("user", () => factory("user"));
+  def("pages", () => collectionFactory("page"));
+  def("settings", () => factory("settings"));
+  def("root", () => (
+    <CreateContainer
+      dispatch={$dispatch}
+      handleViewChange={$handleViewChange}
+      settings={$settings}
+      pages={$pages}
+      user={$user}
+    />
+  ));
 
-  const handleViewChange = jest.fn();
-  const user = build.entity.user("1");
-  const pages = [build.entity.page("1")];
-
-  const root = wrapWithRouter(
-    <Provider store={store}>
-      <CreateContainer
-        dispatch={store.dispatch}
-        handleViewChange={handleViewChange}
-        settings={build.entity.settings("1")}
-        pages={pages}
-        user={user}
-      />
-    </Provider>
-  );
-
-  it("renders correctly", () => {
-    const component = renderer.create(root);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 
   it("should trigger handleViewChange callback when show login is clicked", () => {
-    const wrapper = mount(wrapWithRouter(root));
-    handleViewChange.mockClear();
+    const wrapper = mount($withApp($root));
+    $handleViewChange.mockClear();
     wrapper
       .find('[data-id="show-login"]')
       .first()
       .simulate("click");
-    expect(handleViewChange).toHaveBeenCalled();
+    expect($handleViewChange).toHaveBeenCalled();
   });
 });

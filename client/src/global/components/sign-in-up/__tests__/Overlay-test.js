@@ -1,50 +1,36 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Overlay from "../Overlay";
-import build from "test/fixtures/build";
-import { Provider } from "react-redux";
-import Adapter from "enzyme-adapter-react-16";
-import Enzyme from "enzyme";
-import { wrapWithRouter } from "test/helpers/routing";
-Enzyme.configure({ adapter: new Adapter() });
 
-describe("Global.SignInUp.Overlay component", () => {
-  const store = build.store();
-  const fakeDomEvent = {
+describe("global/components/sign-in-up/Overlay", () => {
+  def("fakeDomEvent", () => ({
     stopPropagation: () => undefined,
     preventDefault: () => undefined
-  };
-
-  const hideOverlayMock = jest.fn();
-  const user = build.entity.user("1");
-
-  const root = wrapWithRouter(
-    <Provider store={store}>
-      <Overlay
-        dispatch={store.dispatch}
-        visible
-        settings={{}}
-        hideSignInUpOverlay={hideOverlayMock}
-        authentication={{
-          currentUser: user
-        }}
-      />
-    </Provider>
+  }));
+  def("hideOverlayMock", () => jest.fn());
+  def("user", () => factory("user"));
+  def("authentication", () =>
+    fixtures.authentication({ user: $user })
   );
+  def("root", () => (
+    <Overlay
+      dispatch={$dispatch}
+      visible
+      settings={{}}
+      hideSignInUpOverlay={$hideOverlayMock}
+      authentication={$authentication}
+    />
+  ));
+  def("wrapper", () => mount($withApp($root)));
 
-  it("renders correctly", () => {
-    const component = renderer.create(root);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 
   it("should trigger hideSignInUpOverlay callback when close overlay is clicked", () => {
-    const wrapper = Enzyme.mount(root);
-    hideOverlayMock.mockClear();
-    wrapper
+    $hideOverlayMock.mockClear();
+    $wrapper
       .find('[data-id="overlay-close"]')
       .first()
-      .simulate("click", fakeDomEvent);
-    expect(hideOverlayMock).toHaveBeenCalled();
+      .simulate("click", $fakeDomEvent);
+    expect($hideOverlayMock).toHaveBeenCalled();
   });
 });

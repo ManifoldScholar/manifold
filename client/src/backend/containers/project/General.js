@@ -27,7 +27,7 @@ export default class ProjectGeneralContainer extends PureComponent {
       >
         <section>
           <FormContainer.Form
-            model={this.props.project}
+            model={project}
             name="backend-project-update"
             update={projectsAPI.update}
             create={projectsAPI.create}

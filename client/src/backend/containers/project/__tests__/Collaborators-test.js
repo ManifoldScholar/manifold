@@ -1,40 +1,45 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { ProjectCollaboratorsContainer } from "../Collaborators";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
+import { project, route } from "./__fixtures__";
 
-describe("Backend Project Collaborators Container", () => {
-  const store = build.store();
-  const project = build.entity.project("1");
-  project.relationships.creators = [build.entity.user("2")];
-  project.relationships.contributors = [build.entity.user("3")];
-  const route = {
-    routes: [],
-    options: {}
-  };
-
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <ProjectCollaboratorsContainer
-          project={project}
-          route={route}
-          history={{}}
-          refresh={jest.fn()}
-        />
-      </Provider>
-    )
-  );
-
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("backend/containers/project/Collaborators", () => {
+  beforeEach(() => {
+    testHelpers.startSession($dispatch, $user);
   });
 
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  def("user", () => factory("user"));
+  def("project", () => project($abilities));
+  def("route", () => route());
+  def("refresh", () => jest.fn());
+
+  def("root", () => (
+    <ProjectCollaboratorsContainer
+      project={$project}
+      route={$route}
+      history={{}}
+      refresh={$refresh}
+    />
+  ));
+
+  describe("when the user can manage makers", () => {
+    def("abilities", () => ({
+      updateMakers: true
+    }));
+
+    it("matches the snapshot when rendered", () => {
+      expect(render($withApp($root)).html()).toMatchSnapshot();
+    });
+    it("does not render a null value", () => {
+      expect(render($withApp($root)).html()).not.toBeNull();
+    });
+  });
+
+  describe("when the user cannot manage makers", () => {
+    def("abilities", () => ({
+      updateMakers: false
+    }));
+
+    it("renders a null value", () => {
+      expect(render($withApp($root)).html()).toBeNull();
+    });
   });
 });

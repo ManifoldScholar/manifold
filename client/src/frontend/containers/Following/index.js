@@ -63,10 +63,6 @@ export class FollowingContainer extends Component {
     followedProjects: []
   };
 
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
-
   componentDidUpdate(prevProps) {
     if (!this.props.authentication.authenticated) return;
     // Favorite projects filters changed?

@@ -1,35 +1,18 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { SettingsSubjectsEditContainer } from "../Edit";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
 
-describe("Backend Settings Subjects Edit Container", () => {
-  const store = build.store();
-  const subject = build.entity.subject("1");
+describe("backend/containers/settings/subjects/Edit", () => {
+  def("subject", () => factory("subject"));
+  def("root", () => (
+    <SettingsSubjectsEditContainer
+      subject={$subject}
+      dispatch={$dispatch}
+      match={{
+        params: {}
+      }}
+    />
+  ));
 
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <SettingsSubjectsEditContainer
-          subject={subject}
-          dispatch={store.dispatch}
-          match={{
-            params: {}
-          }}
-        />
-      </Provider>
-    )
-  );
-
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 });

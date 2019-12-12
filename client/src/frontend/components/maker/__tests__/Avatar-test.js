@@ -1,14 +1,10 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Avatar from "../Avatar";
-import build from "test/fixtures/build";
 
-describe("Frontend.Maker.Avatar component", () => {
-  const user = build.entity.user("1");
+describe("frontend/components/maker/Avatar", () => {
+  def("maker", () => factory("maker"));
+  def("root", () => <Avatar maker={$maker} />);
 
-  it("renders correctly", () => {
-    const component = renderer.create(<Avatar maker={user} />);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

@@ -1,24 +1,17 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Dropdown from "../";
 
-describe("Global.Dropdown component", () => {
-  function triggerComponentMock() {
-    return <div>Render me</div>;
-  }
+describe("global/components/Dropdown", () => {
+  def("triggerComponent", () => () => <div>Render me</div>);
+  def("bodyComponent", () => () => <div>Me too</div>);
 
-  function bodyComponentMock() {
-    return <div>Me too</div>;
-  }
+  def("root", () => (
+    <Dropdown
+      triggerComponent={$triggerComponent}
+      bodyComponent={$bodyComponent}
+    />
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <Dropdown
-        triggerComponent={triggerComponentMock}
-        bodyComponent={bodyComponentMock}
-      />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

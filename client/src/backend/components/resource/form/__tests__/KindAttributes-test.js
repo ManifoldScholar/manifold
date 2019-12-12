@@ -1,133 +1,38 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import KindAttributes from "../KindAttributes";
-import FormContext from "helpers/contexts/FormContext";
 
-describe("Backend.Resource.Form.KindAttributes component", () => {
-  function getModelValue(kind) {
-    return kind;
-  }
+describe("backend/components/resource/form/KindAttributes", () => {
+  def("getModelValue", () => jest.fn(() => $resource.attributes.kind));
+  def("resource", () => factory("resource", { attributes: { kind: $kind } }));
+  def("root", () =>
+    $withFormContext(<KindAttributes />, {
+      sourceModel: $resource,
+      getModelValue: $getModelValue
+    })
+  );
 
-  describe("when kind is audio", () => {
-    it("renders correctly", () => {
-      const component = renderer.create(
-        <FormContext.Provider
-          value={{
-            getModelValue: () => getModelValue("image")
-          }}
-        >
-          <KindAttributes />
-        </FormContext.Provider>
-      );
-      let tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+  [
+    "audio",
+    "document",
+    "file",
+    "image",
+    "interactive",
+    "link",
+    "pdf",
+    "presentation",
+    "spreadsheet",
+    "variants",
+    "video"
+  ].forEach(kind => {
+    describe(`when the kind is ${kind}`, () => {
+      def("kind", () => kind);
+
+      it("matches the snapshot when rendered", () => {
+        expect(render($root)).toMatchSnapshot();
+      });
+
+      it("is not null when rendered", () => {
+        expect(render($root).html).not.toBeNull();
+      });
     });
   });
-
-  // describe("when kind is document", () => {
-  //
-  //   it('renders correctly', () => {
-  //     const component = renderer.create(
-  //       <KindAttributes
-  //         getModelValue={() => getModelValue("document")}
-  //       />
-  //     );
-  //     let tree = component.toJSON();
-  //     expect(tree).toMatchSnapshot();
-  //   });
-  // });
-  //
-  // describe("when kind is file", () => {
-  //
-  //   it('renders correctly', () => {
-  //     const component = renderer.create(
-  //       <KindAttributes
-  //         getModelValue={() => getModelValue("file")}
-  //       />
-  //     );
-  //     let tree = component.toJSON();
-  //     expect(tree).toMatchSnapshot();
-  //   });
-  // });
-  //
-  // describe("when kind is interactive", () => {
-  //
-  //   it('renders correctly', () => {
-  //     const component = renderer.create(
-  //       <KindAttributes
-  //         getModelValue={() => getModelValue("interactive")}
-  //       />
-  //     );
-  //     let tree = component.toJSON();
-  //     expect(tree).toMatchSnapshot();
-  //   });
-  // });
-  //
-  // describe("when kind is link", () => {
-  //
-  //   it('renders correctly', () => {
-  //     const component = renderer.create(
-  //       <KindAttributes
-  //         getModelValue={() => getModelValue("link")}
-  //       />
-  //     );
-  //     let tree = component.toJSON();
-  //     expect(tree).toMatchSnapshot();
-  //   });
-  // });
-  //
-  // describe("when kind is pdf", () => {
-  //
-  //   it('renders correctly', () => {
-  //     const component = renderer.create(
-  //       <KindAttributes
-  //         getModelValue={() => getModelValue("pdf")}
-  //       />
-  //     );
-  //     let tree = component.toJSON();
-  //     expect(tree).toMatchSnapshot();
-  //   });
-  // });
-  //
-  // describe("when kind is presentation", () => {
-  //
-  //   it('renders correctly', () => {
-  //     const component = renderer.create(
-  //       <KindAttributes
-  //         getModelValue={() => getModelValue("presentation")}
-  //       />
-  //     );
-  //     let tree = component.toJSON();
-  //     expect(tree).toMatchSnapshot();
-  //   });
-  // });
-  //
-  // describe("when kind is spreadsheet", () => {
-  //
-  //   it('renders correctly', () => {
-  //     const component = renderer.create(
-  //       <KindAttributes
-  //         getModelValue={() => getModelValue("spreadsheet")}
-  //       />
-  //     );
-  //     let tree = component.toJSON();
-  //     expect(tree).toMatchSnapshot();
-  //   });
-  // });
-  //
-  // describe("when kind is video", () => {
-  //
-  //   it('renders correctly', () => {
-  //     const component = renderer.create(
-  //       <KindAttributes
-  //         getModelValue={() => getModelValue("video")}
-  //         sourceModel={{
-  //           attributes: {}
-  //         }}
-  //       />
-  //     );
-  //     let tree = component.toJSON();
-  //     expect(tree).toMatchSnapshot();
-  //   });
-  // });
 });

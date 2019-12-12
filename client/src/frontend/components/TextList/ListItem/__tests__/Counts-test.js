@@ -1,17 +1,9 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Counts from "../Counts";
-import build from "test/fixtures/build";
 
-describe("Frontend.TextList.ListItem.Counts component", () => {
-
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <Counts
-        text={build.entity.text("1")}
-      />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("frontend/components/TextList/ListItem/Counts", () => {
+  def("text", () => factory("text"));
+  def("root", () => <Counts text={$text} />);
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

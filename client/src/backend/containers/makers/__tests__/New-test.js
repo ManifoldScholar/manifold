@@ -1,28 +1,16 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { MakersNewContainer } from "../New";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
 
-describe("Backend People Makers New Container", () => {
-  const store = build.store();
+describe("backend/containers/makers/New", () => {
+  def("history", () => fixtures.history());
+  def("root", () => (
+    <MakersNewContainer dispatch={$dispatch} history={$history} />
+  ));
 
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <MakersNewContainer dispatch={store.dispatch} history={{}} />
-      </Provider>
-    )
-  );
-
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("does not render a null value", () => {
+    expect(render($withApp($root)).html()).not.toBeNull();
   });
 });

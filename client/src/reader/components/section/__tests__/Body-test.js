@@ -1,22 +1,16 @@
-import React from "react";
 import Body from "../Body";
-import renderer from "react-test-renderer";
-import build from "test/fixtures/build";
 
-describe("Reader.Section.Body component", () => {
-  const section = build.entity.textSection("1");
-  const annotations = [
-    build.entity.annotation("2"),
-    build.entity.annotation("3")
-  ];
-
-  const root = (
-    <Body section={section} location={{ hash: "" }} annotations={annotations} />
-  );
-
-  it("renders correctly", () => {
-    const component = renderer.create(root);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("reader/components/section/Body", () => {
+  def("textSection", () => factory("textSection"));
+  def("annotations", () => collectionFactory("annotation"));
+  def("root", () => (
+    <Body
+      section={$textSection}
+      location={{ hash: "" }}
+      annotations={$annotations}
+    />
+  ));
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

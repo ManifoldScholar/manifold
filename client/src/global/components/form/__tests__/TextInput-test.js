@@ -1,23 +1,16 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Form from "global/components/form";
-import { shallow, mount, render } from "enzyme";
+import TextInput from "../TextInput";
 
-describe("Backend.Form.TextInput component", () => {
-  const onChange = jest.fn();
-
-  const element = (
-    <Form.TextInput
+describe("global/components/form/TextInput", () => {
+  def("change", () => jest.fn());
+  def("root", () => (
+    <TextInput
       label="A form label"
       name="attributes[property]"
       mask="hashtag"
-      onChange={onChange}
+      onChange={$change}
     />
-  );
-
-  it("renders correctly", () => {
-    const component = renderer.create(element);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  ));
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

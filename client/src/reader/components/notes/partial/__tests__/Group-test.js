@@ -1,31 +1,17 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Group from "../Group";
-import build from "test/fixtures/build";
 
-describe("Reader.Notes.Partial.Group Component", () => {
-  const annotations = [
-    build.entity.annotation("1"),
-    build.entity.annotation("2")
-  ];
-  const sectionName = "Test";
-  const section = build.entity.textSection("3");
-
-  const component = renderer.create(
+describe("reader/components/notes/partial/Group", () => {
+  def("annotations", () => collectionFactory("annotation"));
+  def("textSection", () => factory("textSection"));
+  def("root", () => (
     <Group
-      sectionName={sectionName}
-      annotations={annotations}
-      readerSection={section}
+      sectionName="Test"
+      readerSection={$textSection}
+      annotations={$annotations}
     />
-  );
+  ));
 
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

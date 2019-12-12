@@ -1,19 +1,10 @@
-jest.mock("react-collapse");
-
-import React from "react";
-import renderer from "react-test-renderer";
 import Caption from "../Caption";
-import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
-describe("Frontend.ResourceList.Slide.Caption component", () => {
-  const resource = build.entity.resource("1");
+describe("frontend/components/resource-slide/Caption", () => {
+  def("resource", () => factory("resource"));
+  def("root", () => <Caption resource={$resource} collectionId={1} />);
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(<Caption resource={resource} collectionId="1" />)
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

@@ -1,40 +1,24 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { ProjectTextsContainer } from "../Texts";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
+import { project, route } from "./__fixtures__";
 
-describe("Backend Project Texts Container", () => {
-  const store = build.store();
-  const project = build.entity.project("1");
-  const category = build.entity.category("2");
-  const textA = build.entity.text("3");
-  const textB = build.entity.text("4");
-  project.relationships.textCategories = [category];
-  textB.relationships.category = textB;
-  project.relationships.texts = [textA, textB];
-
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <ProjectTextsContainer
-          project={project}
-          route={{
-            routes: []
-          }}
-        />
-      </Provider>
-    )
-  );
-
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("backend/containers/project/Texts", () => {
+  beforeEach(() => {
+    testHelpers.startSession($dispatch, $user);
   });
 
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  def("abilities", () => ({ manageTexts: true }));
+  def("user", () => factory("user"));
+  def("project", () => project($abilities));
+  def("route", () => route());
+  def("root", () => (
+    <ProjectTextsContainer project={$project} route={$route} />
+  ));
+
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
+  });
+
+  it("does not render a null value", () => {
+    expect(render($withApp($root)).html()).not.toBeNull();
   });
 });

@@ -1,37 +1,31 @@
-import React from "react";
 import { LogContainer } from "../Log";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import renderer from "react-test-renderer";
-import build from "test/fixtures/build";
+import { project } from "./__fixtures__";
 
-describe("Backend Project Log Container", () => {
-  const project = build.entity.project("1");
-  const store = build.store();
-  const versionsMeta = { pagination: build.pagination() };
-  const versions = [
-    build.entity.version("1"),
-    build.entity.version("2", { itemId: "1", itemType: "Project" })
-  ];
+describe("backend/containers/project/Log", () => {
+  beforeEach(() => {
+    testHelpers.startSession($dispatch, $user);
+  });
+  def("abilities", () => ({ readLog: true }));
+  def("user", () => factory("user"));
+  def("project", () => project($abilities));
+  def("version", () => factory("version"));
+  def("versions", () => [$version]);
+  def("pagination", () => fixtures.pagination());
 
-  const component = wrapWithRouter(
-    <Provider store={store}>
-      <LogContainer
-        project={project}
-        dispatch={store.dispatch}
-        versions={versions}
-        versionsMeta={versionsMeta}
-      />
-    </Provider>
-  );
+  def("root", () => (
+    <LogContainer
+      project={$project}
+      dispatch={$dispatch}
+      versions={$versions}
+      versionsMeta={{ pagination: $pagination }}
+    />
+  ));
 
-  const snapshot = renderer.create(component).toJSON();
-
-  it("renders correctly", () => {
-    expect(snapshot).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(shallow($withApp($root)).html()).toMatchSnapshot();
   });
 
-  it("doesn't render to null", () => {
-    expect(snapshot).not.toBe(null);
+  it("does not render a null value", () => {
+    expect(shallow($withApp($root)).html()).not.toBeNull();
   });
 });

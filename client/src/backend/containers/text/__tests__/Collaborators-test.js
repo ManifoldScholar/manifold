@@ -1,40 +1,23 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { TextCollaboratorsContainer } from "../Collaborators";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
 
-describe("Backend Text Collaborators Container", () => {
-  const store = build.store();
-  const text = build.entity.text("1");
-  text.relationships.creators = [build.entity.user("2")];
-  text.relationships.contributors = [build.entity.user("3")];
-  const route = {
-    routes: [],
-    options: {}
-  };
-
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <TextCollaboratorsContainer
-          text={text}
-          route={route}
-          history={{}}
-          refresh={jest.fn()}
-        />
-      </Provider>
-    )
+describe("backend/containers/text/Collaborators", () => {
+  def("creator", () => factory("maker"));
+  def("contributor", () => factory("maker"));
+  def("text", () =>
+    factory("text", {
+      relationships: { creators: [$creator], contributors: [$contributor] }
+    })
   );
+  def("root", () => (
+    <TextCollaboratorsContainer
+      text={$text}
+      route={fixtures.route()}
+      history={fixtures.history()}
+      refresh={jest.fn()}
+    />
+  ));
 
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 });

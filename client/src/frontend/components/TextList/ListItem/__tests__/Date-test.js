@@ -1,19 +1,15 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Date from "../Date";
-import build from "test/fixtures/build";
 
-describe("Frontend.TextList.ListItem.Date component", () => {
-
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <Date
-        date={build.entity.text("1").attributes.createdAt}
-        datePrefix={"Added"}
-        baseClass={"text-block"}
-      />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("frontend/components/TextList/ListItem/Date", () => {
+  def("text", () => factory("text"));
+  def("root", () => (
+    <Date
+      date={$text.attributes.createdAt}
+      datePrefix={"Added"}
+      baseClass={"text-block"}
+    />
+  ));
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

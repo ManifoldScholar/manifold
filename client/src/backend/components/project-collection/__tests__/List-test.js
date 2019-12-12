@@ -1,27 +1,27 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import List from "../List";
-import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
-describe("Backend.ProjectCollection.List component", () => {
-  const projectCollection = build.entity.projectCollection("1");
+describe("backend/components/project-collection/List", () => {
+  def("projectCollections", () => [
+    factory("projectCollection", { id: "1" }),
+    factory("projectCollection", { id: "2" }),
+    factory("projectCollection", { id: "3" })
+  ]);
+  def("onCollectionOrderChange", () => jest.fn());
+  def("onCollectionSelect", () => jest.fn());
+  def("onShowNew", () => jest.fn());
+  def("onToggleVisibility", () => jest.fn());
+  def("root", () => (
+    <List
+      projectCollection={$projectCollections[0]}
+      projectCollections={$projectCollections}
+      onCollectionOrderChange={$onCollectionOrderChange}
+      onCollectionSelect={$onCollectionSelect}
+      onShowNew={$onShowNew}
+      onToggleVisibility={$onToggleVisibility}
+    />
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <List
-        projectCollection={projectCollection}
-        projectCollections={[
-          projectCollection,
-          build.entity.projectCollection("2")
-        ]}
-        onCollectionOrderChange={jest.fn}
-        onCollectionSelect={jest.fn}
-        onShowNew={jest.fn}
-        onToggleVisibility={jest.fn}
-      />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

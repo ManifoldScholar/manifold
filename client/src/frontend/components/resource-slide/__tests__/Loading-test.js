@@ -1,14 +1,10 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Loading from "../Loading";
-import build from "test/fixtures/build";
 
-describe("Frontend.ResourceList.Slide.Loading component", () => {
-  const resource = build.entity.resource("1");
+describe("frontend/components/resource-slide/Loading", () => {
+  def("resource", () => factory("resource"));
+  def("root", () => <Loading resource={$resource} />);
 
-  it("renders correctly", () => {
-    const component = renderer.create(<Loading resource={resource} />);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

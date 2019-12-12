@@ -1,16 +1,13 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import GeneratedPasswordInput from "../GeneratedPasswordInput";
 
-describe("Backend.Form.GeneratedPasswordInput component", () => {
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <GeneratedPasswordInput
-        value="attributes[password]"
-        name="attributes[password]"
-      />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("global/components/form/GeneratedPasswordInput", () => {
+  def("root", () => (
+    <GeneratedPasswordInput
+      value="attributes[password]"
+      name="attributes[password]"
+    />
+  ));
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

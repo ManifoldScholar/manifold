@@ -1,11 +1,9 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Presentation from "../Presentation";
 
-describe("Backend.Resource.Form.Presentation component", () => {
-  it("renders correctly", () => {
-    const component = renderer.create(<Presentation />);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("backend/components/resource/form/kind/Presentation", () => {
+  def("root", () => <Presentation />);
+
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

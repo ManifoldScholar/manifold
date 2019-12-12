@@ -1,9 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Radios from "../Radios";
 
-describe("Backend.Form.Radios component", () => {
-  const options = [
+describe("global/components/form/Radios", () => {
+  def("options", () => [
     {
       label: "option-1",
       instructions: "What does this option really mean?",
@@ -13,13 +11,16 @@ describe("Backend.Form.Radios component", () => {
       label: "option-2",
       value: "2"
     }
-  ];
-
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <Radios options={options} label="Label this" prompt="Pick the right choice" name="attributes[fake]" />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  ]);
+  def("root", () => (
+    <Radios
+      options={$options}
+      label="Label this"
+      prompt="Pick the right choice"
+      name="attributes[fake]"
+    />
+  ));
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

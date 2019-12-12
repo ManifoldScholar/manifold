@@ -1,35 +1,29 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { ProjectNewContainer } from "../New";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
+import { project } from "./__fixtures__";
+import ProjectMetadataContainer from "../Metadata";
 
-describe("Backend Project New Container", () => {
-  const store = build.store();
-  store.dispatch({
-    type: "UPDATE_CURRENT_USER",
-    error: false,
-    payload: {
-      data: build.entity.user("1")
-    }
+describe("backend/containers/project/New", () => {
+  beforeEach(() => {
+    testHelpers.startSession($dispatch, $user);
   });
-
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <ProjectNewContainer />
-      </Provider>
-    )
+  def("user", () =>
+    factory("user", {
+      attributes: {
+        abilities: {
+          project: {
+            create: true
+          }
+        }
+      }
+    })
   );
+  def("root", () => <ProjectNewContainer />);
 
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("does not render a null value", () => {
+    expect(render($withApp($root)).html()).not.toBeNull();
   });
 });

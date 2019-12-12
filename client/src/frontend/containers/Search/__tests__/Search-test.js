@@ -1,37 +1,22 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Search from "../index";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
-import { wrapWithRouter } from "test/helpers/routing";
 
-describe("Frontend SearchContainer", () => {
-  const store = build.store();
-  const props = {
-    searchQueryState: {},
-    setQueryState: jest.fn,
-    setPage: jest.fn,
-    dispatch: store.dispatch,
-    history: {},
-    location: {},
-    match: {}
-  };
+describe("frontend/containers/Search/Search", () => {
+  def("setQuery", () => jest.fn());
+  def("setPage", () => jest.fn());
 
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <Search {...props} />
-      </Provider>
-    )
-  );
+  def("root", () => (
+    <Search
+      searchQueryState={{}}
+      setQuery={$setQuery}
+      setPage={$setPage}
+      dispatch={$dispatch}
+      history={fixtures.history()}
+      location={{}}
+      match={{}}
+    />
+  ));
 
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("matches the snapshot when rendered", () => {
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
 });

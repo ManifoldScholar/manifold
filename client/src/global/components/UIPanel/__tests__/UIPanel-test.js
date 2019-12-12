@@ -1,23 +1,18 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import UIPanel from "../";
 
-describe("Global.UIPanel component", () => {
-  function bodyComponentMock() {
-    return <div>Render me</div>;
-  }
+describe("global/components/UIPanel", () => {
+  def("bodyComponentMock", () => () => <div>Render me</div>);
+  def("root", () => (
+    <UIPanel
+      id="show"
+      visibility={{
+        show: true
+      }}
+      bodyComponent={$bodyComponentMock}
+    />
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <UIPanel
-        id="show"
-        visibility={{
-          show: true
-        }}
-        bodyComponent={bodyComponentMock}
-      />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

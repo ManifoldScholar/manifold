@@ -1,46 +1,18 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { UsersListContainer } from "../List";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
 
-describe("Backend People Users List Container", () => {
-  const store = build.store();
-  const user = build.entity.user("1");
-  store.dispatch({
-    type: "UPDATE_CURRENT_USER",
-    error: false,
-    payload: {
-      data: build.entity.user("2")
-    }
-  });
+describe("backend/containers/users/List", () => {
+  def("users", () => collectionFactory("user"));
+  def("root", () => (
+    <UsersListContainer
+      dispatch={$dispatch}
+      users={$users}
+      usersMeta={{ pagination: fixtures.pagination() }}
+      match={{ params: {} }}
+      route={fixtures.route()}
+    />
+  ));
 
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <UsersListContainer
-          dispatch={store.dispatch}
-          users={[user]}
-          usersMeta={{
-            pagination: build.pagination()
-          }}
-          match={{
-            params: {}
-          }}
-          route={{}}
-        />
-      </Provider>
-    )
-  );
-
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("matches the snapshot when rendered", () => {
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
 });

@@ -1,21 +1,17 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Splash from "../Splash";
-import build from "test/fixtures/build";
 
-describe("Frontend.Layout.Splash component", () => {
-  const clickHandleMock = jest.fn();
-  const feature = build.entity.feature(1);
+describe("frontend/components/layout/Splash", () => {
+  def("clickHandleMock", () => jest.fn());
+  def("feature", () => factory("feature"));
+  def("root", () => (
+    <Splash
+      feature={$feature}
+      authenticated
+      toggleSignInUpOverlay={$clickHandleMock}
+    />
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <Splash
-        feature={feature}
-        authenticated
-        toggleSignInUpOverlay={clickHandleMock}
-      />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

@@ -1,27 +1,26 @@
-import React from "react";
-import ShallowRenderer from "react-test-renderer/shallow";
 import ProjectPermissionsContainer from "../Permissions";
-import { wrapWithRouter } from "test/helpers/routing";
-import build from "test/fixtures/build";
+import { project, route } from "./__fixtures__";
+import ProjectGeneralContainer from "../General";
 
-describe("Backend Project Permissions Container", () => {
-  const project = build.entity.project("1");
-  const route = {
-    routes: [],
-    options: {}
-  };
-
-  const root = <ProjectPermissionsContainer project={project} route={route} />;
-
-  it("renders correctly", () => {
-    const renderer = new ShallowRenderer();
-    const tree = renderer.render(root);
-    expect(tree).toMatchSnapshot();
+describe("backend/containers/project/Permissions", () => {
+  beforeEach(() => {
+    testHelpers.startSession($dispatch, $user);
   });
 
-  it("doesn't render to null", () => {
-    const renderer = new ShallowRenderer();
-    const tree = renderer.render(root);
-    expect(tree).not.toBe(null);
+  def("abilities", () => ({ managePermissions: true }));
+  def("user", () => factory("user"));
+  def("project", () => project($abilities));
+  def("route", () => route());
+
+  def("root", () => (
+    <ProjectPermissionsContainer project={$project} route={$route} />
+  ));
+
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
+  });
+
+  it("does not render a null value", () => {
+    expect(shallow($withApp($root)).html()).not.toBeNull();
   });
 });

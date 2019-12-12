@@ -1,31 +1,13 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Filters from "../Filters";
 
-describe("Frontend.ProjectList.Filters component", () => {
-  const subjects = [
-    {
-      type: "subjects",
-      id: "1",
-      attributes: {
-        name: "Subject 1"
-      }
-    },
-    {
-      type: "subjects",
-      id: "2",
-      attributes: {
-        name: "Subject 2"
-      }
-    }
-  ];
-  const updateActionMock = jest.fn();
+describe("frontend/components/project-list/Filters", () => {
+  def("subjects", () => collectionFactory("subject"));
+  def("updateAction", () => jest.fn());
+  def("root", () => (
+    <Filters updateAction={$updateAction} subjects={$subjects} />
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <Filters updateAction={updateActionMock} subjects={subjects} />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

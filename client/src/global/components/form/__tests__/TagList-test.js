@@ -1,20 +1,8 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Form from "global/components/form";
-import { Provider } from "react-redux";
-import createStore from "store/createStore";
-const store = createStore();
+import TagList from "../TagList";
 
-describe("Backend.Form.TagList component", () => {
-  const element = (
-    <Provider store={store}>
-      <Form.TagList label="Tags" name="attributes[tags]" />
-    </Provider>
-  );
-
-  it("renders correctly", () => {
-    const component = renderer.create(element);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("global/components/form/TagList", () => {
+  def("root", () => <TagList label="Tags" name="attributes[tags]" />);
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

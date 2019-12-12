@@ -1,11 +1,8 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import LoadingBar from "../";
 
-describe("Global.LoadingBar component", () => {
-  it("renders correctly", () => {
-    const component = renderer.create(<LoadingBar loading />);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("global/components/LoadingBar/LoadingBar", () => {
+  def("root", () => <LoadingBar loading />);
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

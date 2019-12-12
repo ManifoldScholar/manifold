@@ -1,62 +1,28 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import FilteredList from "../FilteredList";
-import build from "test/fixtures/build";
-import EmptyMessage from "../EmptyMessage";
-import Adapter from "enzyme-adapter-react-16";
-import Enzyme from "enzyme";
 
-Enzyme.configure({ adapter: new Adapter() });
-
-describe("Reader.Notes.FilteredList Component", () => {
-  const sortedAnnotations = [
+describe("reader/components/notes/FilteredList", () => {
+  def("annotations", () => collectionFactory("annotation"));
+  def("sortedAnnotations", () => [
     {
       name: "Test",
       sectionId: 1,
-      annotations: [build.entity.annotation("1"), build.entity.annotation("2")]
+      annotations: $annotations
     }
-  ];
-
-  const section = build.entity.textSection("3");
-
-  const filter = {
-    formats: ["highlight", "annotation", "bookmark"]
-  };
-
-  const clickMock = jest.fn();
-
-  const component = renderer.create(
+  ]);
+  def("textSection", () => factory("textSection"));
+  def("clickMock", () => jest.fn());
+  def("filter", () => ({ formats: ["highlight", "annotation", "bookmark"] }));
+  def("root", () => (
     <FilteredList
-      sortedAnnotations={sortedAnnotations}
-      handleSeeAllClick={clickMock}
-      handleFilterChange={clickMock}
-      section={section}
-      filter={filter}
+      sortedAnnotations={$sortedAnnotations}
+      handleSeeAllClick={$clickMock}
+      handleFilterChange={$clickMock}
+      section={$textSection}
+      filter={$filter}
       loaded
     />
-  );
-
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
-  });
-
-  it("renders an empty message when there are no annotations", () => {
-    const wrapper = Enzyme.shallow(
-      <FilteredList
-        sortedAnnotations={[]}
-        handleSeeAllClick={clickMock}
-        handleFilterChange={clickMock}
-        section={section}
-        filter={filter}
-        loaded
-      />
-    );
-    expect(wrapper.find(EmptyMessage).length).toBe(1);
+  ));
+  it("matches the snapshot when rendered", () => {
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
 });

@@ -1,13 +1,10 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import LockBodyScroll from "../LockBodyScroll";
+import EdgeLockScroll from "../EdgeLockScroll";
 
-describe("Global.Utility.LockBodyScroll component", () => {
-  const children = <div>How is babby formed?</div>;
-
-  it("renders correctly", () => {
-    const component = renderer.create(<LockBodyScroll children={children} />);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("global/components/utility/LockBodyScroll", () => {
+  def("children", () => <div>How is babby formed?</div>);
+  def("root", () => <LockBodyScroll children={$children} />);
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

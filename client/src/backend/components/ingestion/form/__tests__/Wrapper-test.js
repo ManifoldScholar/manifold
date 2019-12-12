@@ -1,31 +1,19 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Wrapper from "../Wrapper";
-import build from "test/fixtures/build";
-import { Provider } from "react-redux";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
-describe("Backend.Ingestion.Form.Wrapper component", () => {
-  const modelValueMock = jest.fn();
-  const location = {};
-  const history = build.history();
-  const project = build.entity.project("1");
+describe("backend/components/ingestion/form/Wrapper", () => {
+  def("getModelValue", () => jest.fn());
+  def("project", () => factory("project"));
+  def("root", () => (
+    <Wrapper
+      name="attributes[something]"
+      getModelValue={$getModelValue}
+      location={$location}
+      history={$history}
+      project={$project}
+    />
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={build.store()}>
-          <Wrapper
-            name="attributes[something]"
-            getModelValue={modelValueMock}
-            location={location}
-            history={history}
-            project={project}
-          />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot after mounting", () => {
+    expect(mount($withApp($root))).toMatchSnapshot();
   });
 });

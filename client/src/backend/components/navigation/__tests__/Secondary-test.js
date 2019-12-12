@@ -1,10 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Secondary from "../Secondary";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
-describe("Backend.Navigation.Secondary component", () => {
-  const links = [
+describe("backend/components/navigation/Secondary", () => {
+  def("links", () => [
     {
       route: "backendProjects",
       label: "projects"
@@ -13,13 +10,10 @@ describe("Backend.Navigation.Secondary component", () => {
       route: "backendRecords",
       label: "records"
     }
-  ];
+  ]);
+  def("root", () => <Secondary links={$links} />);
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(<Secondary links={links} />)
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

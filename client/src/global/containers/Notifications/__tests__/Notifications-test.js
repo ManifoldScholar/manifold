@@ -1,15 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { NotificationsComponent } from "../";
-import build from "test/fixtures/build";
-import { Provider } from "react-redux";
-import { wrapWithRouter } from "test/helpers/routing";
-import { mount } from "enzyme";
 
-const store = build.store();
-
-const props = {
-  notifications: {
+describe("global/containers/Notifications/Notifications", () => {
+  def("notifications", () => ({
     notifications: [
       {
         id: "A_NOTIFICATION_1",
@@ -26,28 +18,17 @@ const props = {
         scope: "drawer"
       }
     ]
-  }
-};
+  }));
 
-const component = wrapWithRouter(
-  <NotificationsComponent
-    {...props}
-    notifications={props.notifications}
-    scope="global"
-    dispatch={() => {}}
-  />
-);
+  def("root", () => (
+    <NotificationsComponent
+      notifications={$notifications}
+      scope="global"
+      dispatch={$dispatch}
+    />
+  ));
 
-describe("Global.Notifications component", () => {
-  it("renders correctly", () => {
-    const component = renderer.create(component);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("should not render out-of-scope notifications", () => {
-    const rendered = mount(component);
-    const list = rendered.find(".notifications-list__inner");
-    expect(list.length).toBe(1);
+  it("matches the snapshot when rendered", () => {
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
 });

@@ -1,31 +1,16 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import TextGeneralContainer from "../General";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
 
-describe("Backend Text General Container", () => {
-  const store = build.store();
-  const text = build.entity.text("1");
-  text.relationships.creators = [build.entity.user("2")];
-  text.relationships.contributors = [build.entity.user("3")];
-
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <TextGeneralContainer text={text} />
-      </Provider>
-    )
+describe("backend/containers/text/General", () => {
+  def("creator", () => factory("maker"));
+  def("contributor", () => factory("maker"));
+  def("text", () =>
+    factory("text", {
+      relationships: { creators: [$creator], contributors: [$contributor] }
+    })
   );
+  def("root", () => <TextGeneralContainer text={$text} />);
 
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("matches the snapshot when rendered", () => {
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
 });

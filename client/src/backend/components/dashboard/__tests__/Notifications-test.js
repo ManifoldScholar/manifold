@@ -1,11 +1,9 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Dashboard from "backend/components/dashboard";
+import Notifications from "../Notifications";
 
-describe("Backend.Dashboard.Notification component", () => {
-  it("renders correctly", () => {
-    const component = renderer.create(<Dashboard.Notifications />);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("backend/components/dashboard/Notifications", () => {
+  def("root", () => <Notifications />);
+
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

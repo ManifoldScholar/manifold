@@ -1,21 +1,15 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import AppearanceMenuBody from "../AppearanceMenuBody";
 
-describe("Reader.ControlMenu.AppearanceMenuBody Component", () => {
-  const appearance = {
+describe("reader/components/control-menu/AppearanceMenuBody", () => {
+  def("appearance", () => ({
     typography: {
       fontSize: {},
       margins: {}
     },
     colors: {}
-  };
-
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <AppearanceMenuBody appearance={appearance} />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  }));
+  def("root", () => <AppearanceMenuBody appearance={$appearance} />);
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

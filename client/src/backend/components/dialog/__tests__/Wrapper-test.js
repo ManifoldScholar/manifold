@@ -1,22 +1,12 @@
-import React from "react";
-import { mount } from "enzyme";
 import Wrapper from "../Wrapper";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
-describe("Backend.Dialog.Wrapper Component", () => {
-  const child = <div>How is babby formed?</div>;
+describe("backend/components/dialog/Wrapper", () => {
+  def("child", () => <div>a child node.</div>);
+  def("root", () => (
+    <Wrapper className="dialog-confirm" maxWidth={400} children={$child} />
+  ));
 
-  it("renders correctly", () => {
-    const component = mount(
-      wrapWithRouter(
-        <Wrapper className="dialog-confirm" maxWidth={400} children={child} />
-      )
-    );
-
-    // Wrapper has event listeners attached to document,
-    // so we need to use Enzyme to mock that.
-    // debug() outputs the markdown generated.
-    let tree = component.debug();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(render($withApp($root))).toMatchSnapshot();
   });
 });

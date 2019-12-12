@@ -1,29 +1,33 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import SmartAttributes from "../SmartAttributes";
-import build from "test/fixtures/build";
-import FormContext from "helpers/contexts/FormContext";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
 
-describe("Backend.ProjectCollection.Form.SmartAttributes component", () => {
-  const projectCollection = build.entity.projectCollection("1");
-  const store = build.store();
+describe("backend/components/project-collection/form/SmartAttributes", () => {
+  def("projectCollection", () => factory("projectCollection"));
+  def("getModelValue", () =>
+    jest.fn(() => $projectCollection.attributes.smart)
+  );
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <Provider store={store}>
-        <FormContext.Provider
-          value={{
-            getModelValue: value => value,
-            sourceModel: projectCollection
-          }}
-        >
-          <SmartAttributes projectCollection={projectCollection} />
-        </FormContext.Provider>
-      </Provider>
+  def("root", () =>
+    $withFormContext(
+      <SmartAttributes projectCollection={$projectCollection} />,
+      { sourceModel: $projectCollection, getModelValue: $getModelValue }
+    )
+  );
+
+  describe("when the project collection is smart", () => {
+    def("projectCollection", () =>
+      factory("projectCollection", { attributes: { smart: true } })
     );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    it("matches the snapshot when rendered", () => {
+      expect(render($withApp($root))).toMatchSnapshot();
+    });
+  });
+
+  describe("when the project collection is not smart", () => {
+    def("projectCollection", () =>
+      factory("projectCollection", { attributes: { smart: false } })
+    );
+    it("renders does not render", () => {
+      expect(render($withApp($root)).html()).toBe(null);
+    });
   });
 });

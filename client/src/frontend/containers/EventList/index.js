@@ -12,7 +12,7 @@ import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 
-export class ProjectEventsContainer extends Component {
+export class EventList extends Component {
   static fetchData = (getState, dispatch, location, match) => {
     const { params } = match;
     const page = params.page ? params.page : 1;
@@ -74,4 +74,4 @@ export class ProjectEventsContainer extends Component {
   }
 }
 
-export default connectAndFetch(ProjectEventsContainer);
+export default connectAndFetch(EventList);

@@ -1,65 +1,61 @@
-import React from "react";
-import { mount } from "enzyme";
 import Confirm from "../Confirm";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
-describe("Backend.Dialog.Confirm Component", () => {
-  const resolveMock = jest.fn();
-  const rejectMock = jest.fn();
+describe("backend/components/dialog/Confirm", () => {
+  let previousAddEventListener;
+  let map = {};
 
-  // https://github.com/airbnb/enzyme/issues/426
-  const map = {};
-  window.addEventListener = jest.fn((event, cb) => {
-    map[event] = cb;
+  beforeAll(() => {
+    // https://github.com/airbnb/enzyme/issues/426
+    previousAddEventListener = window.addEventListener;
+    window.addEventListener = jest.fn((event, cb) => {
+      map[event] = cb;
+    });
   });
 
-  const component = mount(
-    wrapWithRouter(
-      <Confirm
-        heading="Player's Ball"
-        message="All the players came from far and wide"
-        reject={rejectMock}
-        resolve={resolveMock}
-      />
-    )
-  );
-
-  it("renders correctly", () => {
-    // Confirm has event listeners attached to document,
-    // so we need to use Enzyme to mock that.
-    // debug() outputs the markdown generated.
-    let tree = component.debug();
-    expect(tree).toMatchSnapshot();
+  afterAll(() => {
+    window.addEventListener = previousAddEventListener;
   });
 
-  // it("should trigger reject callback when cancel is clicked", () => {
-  //   rejectMock.mockClear();
-  //   component
-  //     .find('[data-id="reject"]')
-  //     .first()
-  //     .simulate("click");
-  //   expect(rejectMock).toHaveBeenCalled();
-  // });
-  //
-  // it("should trigger resolve callback when accept is clicked", () => {
-  //   resolveMock.mockClear();
-  //   console.log(component.html());
-  //   component
-  //     .find('[data-id="accept"]')
-  //     .first()
-  //     .simulate("click");
-  //   expect(resolveMock).toHaveBeenCalled();
-  // });
+  def("resolveMock", () => jest.fn());
+  def("rejectMock", () => jest.fn());
+  def("root", () => (
+    <Confirm
+      heading="Player's Ball"
+      message="All the players came from far and wide"
+      reject={$rejectMock}
+      resolve={$resolveMock}
+    />
+  ));
+
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
+  });
+
+  it("should trigger reject callback when cancel is clicked", () => {
+    shallow($root)
+      .find('[data-id="reject"]')
+      .first()
+      .simulate("click", { preventDefault() {} });
+    expect($rejectMock).toHaveBeenCalled();
+  });
+
+  it("should trigger resolve callback when accept is clicked", () => {
+    shallow($root)
+      .find('[data-id="accept"]')
+      .first()
+      .simulate("click", { preventDefault() {} });
+    expect($resolveMock).toHaveBeenCalled();
+  });
 
   it("should trigger reject callback when escape is pressed", () => {
-    rejectMock.mockClear();
-    map.keyup({ keyCode: 27, preventDefault: () => undefined });
-    expect(rejectMock).toHaveBeenCalled();
+    shallow($root);
+    map.keyup({ keyCode: 27, preventDefault() {} });
+    expect($rejectMock).toHaveBeenCalled();
   });
 
   it("should trigger resolve callback when enter is pressed", () => {
-    resolveMock.mockClear();
-    map.keyup({ keyCode: 13, preventDefault: () => undefined });
-    expect(resolveMock).toHaveBeenCalled();
+    shallow($root);
+    map.keyup({ keyCode: 13, preventDefault() {} });
+    expect($resolveMock).toHaveBeenCalled();
   });
 });

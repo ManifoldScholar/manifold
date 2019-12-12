@@ -1,33 +1,21 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import PermissionForm from "../Form";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
+import { PermissionForm } from "../Form";
 
-describe("Backend Permission Form Container", () => {
-  const project = build.entity.project("1");
-  const history = build.history();
+describe("backend/containers/permission/Form", () => {
+  def("project", () => factory("project"));
+  def("history", () => fixtures.history());
+  def("root", () => (
+    <PermissionForm
+      entity={$project}
+      history={$history}
+      successUrl="http://www.dailyrowan.com"
+    />
+  ));
 
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={build.store()}>
-        <PermissionForm
-          entity={project}
-          history={history}
-          successUrl="http://www.dailyrowan.com"
-        />
-      </Provider>
-    )
-  );
-
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("does not render a null value", () => {
+    expect(render($withApp($root)).html()).not.toBeNull();
   });
 });

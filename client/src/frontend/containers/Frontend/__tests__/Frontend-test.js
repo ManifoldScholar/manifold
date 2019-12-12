@@ -1,51 +1,21 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { FrontendContainer } from "../";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
-import { wrapWithRouter } from "test/helpers/routing";
-import { FrontendModeContext } from "helpers/contexts";
 
-describe("Frontend Frontend Container", () => {
-  const store = build.store();
-  const props = {
-    notifications: {
-      notifications: []
-    },
-    history: {},
-    route: {
-      routes: []
-    },
-    location: {},
-    visibility: {
-      uiPanels: {}
-    },
-    authentication: {
-      authenticated: true,
-      currentUser: build.entity.user("1")
-    },
-    settings: build.entity.settings("0")
-  };
+describe("frontend/containers/Frontend/Frontend", () => {
+  def("notifications", () => ({ notifications: [] }));
+  def("settings", () => factory("settings"));
+  def("root", () => (
+    <FrontendContainer
+      notifications={$notifications}
+      history={fixtures.history()}
+      route={{ routes: [] }}
+      location={{}}
+      visibility={$state.ui.transitory.visibility}
+      authentication={fixtures.authentication()}
+      settings={$settings}
+    />
+  ));
 
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <FrontendModeContext.Provider
-          value={{ isLibrary: true, isStandalone: false }}
-        >
-          <FrontendContainer {...props} />
-        </FrontendModeContext.Provider>
-      </Provider>
-    )
-  );
-
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

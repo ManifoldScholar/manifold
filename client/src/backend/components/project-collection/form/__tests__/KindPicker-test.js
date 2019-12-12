@@ -1,26 +1,16 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import KindPicker from "../KindPicker";
-import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
 
-describe("Backend.ProjectCollection.Form.KindPicker component", () => {
-  const projectCollection = build.entity.projectCollection("1");
-  const store = build.store();
+describe("backend/components/project-collection/form/KindPicker", () => {
+  def("projectCollection", () => factory("projectCollection"));
+  def("getModelValue", () =>
+    jest.fn(() => $projectCollection.attributes.smart)
+  );
+  def("setOther", () => jest.fn());
+  def("root", () => (
+    <KindPicker getModelValue={$getModelValue} setOther={$setOther} />
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <KindPicker
-            getModelValue={() => projectCollection.attributes.smart}
-            setOther={jest.fn}
-          />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

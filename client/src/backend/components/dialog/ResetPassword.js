@@ -11,7 +11,7 @@ import classNames from "classnames";
 
 const { request, flush } = entityStoreActions;
 
-class ResetPasswordWrapper extends PureComponent {
+export class ResetPasswordBase extends PureComponent {
   static mapStateToProps = (state, ownPropsIgnored) => {
     return {
       response: get(state.entityStore.responses, requests.beUserUpdate)
@@ -241,6 +241,4 @@ class ResetPasswordWrapper extends PureComponent {
   }
 }
 
-export default connect(ResetPasswordWrapper.mapStateToProps)(
-  ResetPasswordWrapper
-);
+export default connect(ResetPasswordBase.mapStateToProps)(ResetPasswordBase);

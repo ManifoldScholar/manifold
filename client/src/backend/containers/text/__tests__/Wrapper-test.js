@@ -1,48 +1,23 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { TextWrapperContainer } from "../Wrapper";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
 
-describe("Backend Text Wrapper Container", () => {
-  const store = build.store();
-  const text = build.entity.text("1");
-  text.relationships.creators = [build.entity.user("2")];
-  text.relationships.contributors = [build.entity.user("3")];
-  text.relationships.project = build.entity.project("4");
-  store.dispatch({
-    type: "UPDATE_CURRENT_USER",
-    error: false,
-    payload: {
-      data: build.entity.user("1")
-    }
+describe("backend/containers/text/Wrapper", () => {
+  beforeEach(() => {
+    testHelpers.startSession($dispatch, $user);
   });
-
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <TextWrapperContainer
-          text={text}
-          dispatch={store.dispatch}
-          route={{
-            routes: []
-          }}
-          match={{
-            params: {}
-          }}
-        />
-      </Provider>
-    )
+  def("user", () => factory("user"));
+  def("text", () =>
+    factory("text", { attributes: { abilities: { update: true } } })
   );
+  def("root", () => (
+    <TextWrapperContainer
+      text={$text}
+      dispatch={$dispatch}
+      route={fixtures.route()}
+      match={{ params: {} }}
+    />
+  ));
 
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 });

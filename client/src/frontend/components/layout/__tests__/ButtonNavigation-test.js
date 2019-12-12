@@ -1,69 +1,41 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Layout from "frontend/components/layout";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
 
-describe("Frontend.Layout.ButtonNavigation component", () => {
+describe("frontend/components/layout/ButtonNavigation", () => {
+  def("root", () => <Layout.ButtonNavigation {...$props} />);
 
-  const store = build.store();
-
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <Layout.ButtonNavigation/>
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(render($withApp($root))).toMatchSnapshot();
   });
 
-  it("respects the grayBg prop", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}><Layout.ButtonNavigation grayBg={false} /></Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  context("when the grayBg prop is false", () => {
+    def("props", () => ({ grayBg: false }));
+
+    it("matches the snapshot", () => {
+      expect(render($withApp($root))).toMatchSnapshot();
+    });
   });
 
-  it("respects the showFollowing prop", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <Layout.ButtonNavigation showFollowing={false} />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  context("when the showProjects prop is true", () => {
+    def("props", () => ({ showProjects: false }));
+
+    it("matches the snapshot", () => {
+      expect(render($withApp($root))).toMatchSnapshot();
+    });
   });
 
-  it("respects the showBrowse prop", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <Layout.ButtonNavigation showBrowse={false} />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  context("when the showFollowing prop is false", () => {
+    def("props", () => ({ showFollowing: false }));
+
+    it("matches the snapshot", () => {
+      expect(render($withApp($root))).toMatchSnapshot();
+    });
   });
 
-  it("doesn't render anything when not logged in on home", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <Layout.ButtonNavigation showBrowse={false} />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  context("when the showCollections prop is true", () => {
+    def("props", () => ({ showCollections: false }));
+
+    it("matches the snapshot", () => {
+      expect(render($withApp($root))).toMatchSnapshot();
+    });
   });
 });
