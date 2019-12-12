@@ -30,8 +30,8 @@ module ApiDocs
 
       def summary
         return @options[:summary] if @options[:summary]
-
-        I18n.t("swagger.#{@action}.description", type: human_resource_name, attribute: "ID")
+        type = action == :index ? human_resource_name_plural : human_resource_name
+        I18n.t("swagger.#{@action}.description", type: type, attribute: "ID")
       end
 
       def response_description?
@@ -78,6 +78,10 @@ module ApiDocs
 
       def resource_tag
         resource_name.pluralize.humanize.titleize
+      end
+
+      def human_resource_name_plural
+        resource_name_plural.camelize
       end
 
       def human_resource_name
