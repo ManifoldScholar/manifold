@@ -49,7 +49,10 @@ module ApiDocs
 
       def request_attributes
         request_attr = const_defined?(:REQUEST_ATTRIBUTES) ? self::REQUEST_ATTRIBUTES : {}
-        ::Types::Hash.schema(request_attr.merge(full_attributes).except(*read_only_attributes))
+        request_attr = request_attr.merge(full_attributes)
+        return request_attr.slice(*writable_attributes) if writable_attributes.present?
+
+        request_attr.except(*read_only_attributes)
       end
 
       def required_create_attributes
@@ -68,7 +71,12 @@ module ApiDocs
         const_defined?(:WRITE_ONLY) ? self::WRITE_ONLY : []
       end
 
+      def writable_attributes
+        const_defined?(:WRITEABLE) ? self::WRITEABLE : []
+      end
+
       def make_request(callee, attributes)
+        attributes = ::Types::Hash.schema(attributes)
         attributes = attributes.meta(required: required_create_attributes) if required_create_attributes.present? && callee == :create_request
         attributes = attributes.meta(required: required_update_attributes) if required_update_attributes.present? && callee == :update_request
 
