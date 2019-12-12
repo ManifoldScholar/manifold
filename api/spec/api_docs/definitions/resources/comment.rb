@@ -3,13 +3,13 @@ module ApiDocs
     module Resources
       class Comment
 
-        READ_ONLY = [
-          :abilities,
-          :created_at,
-          :flags_count,
-          :children_count,
-          :author_created
+        WRITEABLE = [
+          :parent_id,
+          :deleted,
+          :body
         ].freeze
+
+        REQUIRED_CREATE_ATTRIBUTES = [:body].freeze
 
         class << self
 
