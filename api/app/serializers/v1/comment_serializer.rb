@@ -12,7 +12,7 @@ module V1
     typed_attribute :sort_order, Types::Integer
     typed_attribute :author_created, Types::Bool
     typed_attribute :flagged, Types::Bool do |object, params|
-      next 0 unless authenticated?(params)
+      next false unless authenticated?(params)
 
       object.flagged_by?(params[:current_user])
     end
