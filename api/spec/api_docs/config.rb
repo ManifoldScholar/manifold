@@ -24,7 +24,7 @@ module ApiDocs
               title: "Manifold",
               version: "v1"
             },
-            host: "localhost:3020", # TODO: base this off the .env file
+            host: ENV["DOMAIN"],
             basePath: "/api/v1",
             schemes: ["http"],
             paths: {},
