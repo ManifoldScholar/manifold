@@ -5,14 +5,19 @@ module V1
 
     abilities
 
-    typed_attribute :type, NilClass
-    typed_attribute :position, NilClass
-    typed_attribute :visible, NilClass
-    typed_attribute :incomplete_render_attributes, NilClass
-    typed_attribute :configurable, NilClass, &:configurable?
-    typed_attribute :orderable, NilClass, &:orderable?
-    typed_attribute :hideable, NilClass, &:hideable?
-    typed_attribute :renderable, NilClass, &:renderable?
+    # TODO: List other acceptable types in enum
+    typed_attribute :type, Types::String.meta(example: "Content::RecentActivityBlock")
+    typed_attribute :position, Types::Integer.meta(description: "Only writable for certain types")
+    typed_attribute :visible, Types::Bool.meta(description: "Only writable for certain types")
+    # TODO: List other acceptable types in enum
+    typed_attribute :incomplete_render_attributes,
+                    Types::Array.of(
+                      Types::String.meta(example: "resources_or_collections")
+                    ).meta(read_only: true)
+    typed_attribute :configurable, Types::Bool.meta(read_only: true), &:configurable?
+    typed_attribute :orderable, Types::Bool.meta(read_only: true), &:orderable?
+    typed_attribute :hideable, Types::Bool.meta(read_only: true), &:hideable?
+    typed_attribute :renderable, Types::Bool.meta(read_only: true), &:renderable?
 
     typed_belongs_to :project
   end
