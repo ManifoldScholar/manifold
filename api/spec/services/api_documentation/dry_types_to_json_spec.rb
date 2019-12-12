@@ -178,7 +178,7 @@ RSpec.describe ::ApiDocumentation::DryTypesToJson do
           items: {
             type: "object",
             properties: {
-              name: { type: 'string' }
+              name: described_class.convert(types['string'])
             }
           }
         })
