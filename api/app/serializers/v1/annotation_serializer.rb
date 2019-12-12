@@ -44,7 +44,7 @@ module V1
       object.anonymous_label
     end
 
-    typed_attribute :creator_avatar_styles, Hash do |object, params|
+    typed_attribute :creator_avatar_styles, Types::Hash do |object, params|
       creator_identity_visible?(object, params) ? camelize_hash(object.creator_avatar_styles) : {}
     end
 
