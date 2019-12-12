@@ -28,7 +28,7 @@ module V1
       params[:include_toc] && params[:include_toc].include?(object.id)
     }
 
-    typed_attribute :cover_styles, Hash
+    typed_attribute :cover_styles, Types::Hash
 
     typed_belongs_to :category
 
