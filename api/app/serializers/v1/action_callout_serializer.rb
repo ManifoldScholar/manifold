@@ -3,13 +3,14 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    typed_attribute :title, NilClass
-    typed_attribute :kind, NilClass
-    typed_attribute :location, NilClass
-    typed_attribute :position, NilClass
-    typed_attribute :url, NilClass
-    typed_attribute :button, NilClass
-    typed_attribute :attachment_styles, Types::Hash
+    typed_attribute :title, Types::String
+    typed_attribute :kind, Types::String.enum("link", "read", "toc", "download")
+    typed_attribute :location, Types::String.enum("left", "right")
+    typed_attribute :position, Types::Integer
+    typed_attribute :url, Types::Serializer::URL
+    typed_attribute :button, Types::Bool
+    typed_attribute :attachment_styles, Types::Serializer::Attachment.meta(read_only: true)
+
     typed_belongs_to :project
     typed_belongs_to :text
   end
