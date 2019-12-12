@@ -32,9 +32,12 @@ module Types
     )
 
     Upload = Types::Hash.schema(
-      filename: Types::String.meta(example: "profile_pic.jpg"),
-      data: Types::String.meta(description: "A base 64 encoded image string"),
-      content_type: Types::String.meta(example: "image/jpeg")
+      filename: Types::String.meta(example: "profile_pic.png"),
+      data: Types::String.meta(
+        description: "A base 64 encoded image string",
+        example: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z/C/HgAGgwJ/lK3Q6wAAAABJRU5ErkJggg=="
+      ),
+      content_type: Types::String.meta(example: "image/png")
     )
   end
 end
