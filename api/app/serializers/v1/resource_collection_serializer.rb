@@ -16,7 +16,7 @@ module V1
     typed_attribute :collection_resources_count, NilClass
     typed_attribute :slug, NilClass
     typed_attribute :pending_slug, NilClass
-    typed_attribute :thumbnail_styles, Hash
+    typed_attribute :thumbnail_styles, Types::Hash
 
     typed_attribute :resource_tags, NilClass do |object, _params|
       object.resource_tags.sort
