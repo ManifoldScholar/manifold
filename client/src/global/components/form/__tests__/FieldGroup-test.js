@@ -1,13 +1,9 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import FieldGroup from "../FieldGroup";
 
-describe("Backend.Form.FieldGroup component", () => {
-  const child = <div>How is babby formed?</div>;
-
-  it("renders correctly", () => {
-    const component = renderer.create(<FieldGroup children={child} />);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("global/components/form/FieldGroup", () => {
+  def("child", () => <div>How is babby formed?</div>);
+  def("root", () => <FieldGroup children={$child} />);
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

@@ -1,11 +1,9 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Pdf from "../Pdf";
 
-describe("Backend.Resource.Form.Pdf component", () => {
-  it("renders correctly", () => {
-    const component = renderer.create(<Pdf />);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("backend/components/resource/form/kind/Pdf", () => {
+  def("root", () => <Pdf />);
+
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

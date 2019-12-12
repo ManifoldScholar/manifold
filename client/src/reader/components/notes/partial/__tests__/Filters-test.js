@@ -1,24 +1,13 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Filters from "../Filters";
 
-describe("Reader.Notes.Partial.Group Component", () => {
-  const props = {
-    filter: {
-      formats: ["highlight", "annotation", "bookmark"]
-    },
-    filterChangeHandler: jest.fn()
-  };
+describe("reader/components/notes/partial/Filters", () => {
+  def("filter", () => ({ formats: ["highlight", "annotation", "bookmark"] }));
+  def("filterChangeHandler", () => jest.fn());
+  def("root", () => (
+    <Filters filter={$filter} filterChangeHandler={$filterChangeHandler} />
+  ));
 
-  const component = renderer.create(<Filters {...props} />);
-
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

@@ -1,35 +1,24 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Detail from "../";
-import build from "test/fixtures/build";
-import { Provider } from "react-redux";
-import { wrapWithRouter } from "test/helpers/routing";
 
-describe("Global.Comment.Detail component", () => {
-  const store = build.store();
+describe("global/components/comment/detail/Detail", () => {
+  def("handleDeleteMock", () => jest.fn());
+  def("handleDestroyMock", () => jest.fn());
+  def("handleRestoreMock", () => jest.fn());
+  def("handleFlagMock", () => jest.fn());
+  def("resource", () => factory("resource"));
+  def("comment", () => factory("comment"));
+  def("root", () => (
+    <Detail
+      handleDelete={$handleDeleteMock}
+      handleDestroy={$handleDestroyMock}
+      handleRestore={$handleRestoreMock}
+      handleFlag={$handleFlagMock}
+      subject={$resource}
+      comment={$comment}
+    />
+  ));
 
-  const handleDeleteMock = jest.fn();
-  const handleDestroyMock = jest.fn();
-  const handleRestoreMock = jest.fn();
-  const handleFlagMock = jest.fn();
-  const subject = build.entity.resource("1");
-  const comment = build.entity.comment("2");
-  comment.relationships.creator = build.entity.user("3");
-
-  it("renders correctly", () => {
-    const component = renderer.create(wrapWithRouter(
-      <Provider store={store}>
-        <Detail
-          handleDelete={handleDeleteMock}
-          handleDestroy={handleDestroyMock}
-          handleRestore={handleRestoreMock}
-          handleFlag={handleFlagMock}
-          subject={subject}
-          comment={comment}
-        />
-      </Provider>
-    ));
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

@@ -1,13 +1,9 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import EdgeLockScroll from "../EdgeLockScroll";
 
-describe("Global.Utility.EdgeLockScroll component", () => {
-  const children = <div>How is babby formed?</div>;
-
-  it("renders correctly", () => {
-    const component = renderer.create(<EdgeLockScroll children={children} />);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("global/components/utility/EdgeLockScroll", () => {
+  def("children", () => <div>How is babby formed?</div>);
+  def("root", () => <EdgeLockScroll children={$children} />);
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

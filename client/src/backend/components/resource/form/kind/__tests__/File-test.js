@@ -1,11 +1,9 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import File from "../File";
 
-describe("Backend.Resource.Form.File component", () => {
-  it("renders correctly", () => {
-    const component = renderer.create(<File />);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("backend/components/resource/form/kind/File", () => {
+  def("root", () => <File />);
+
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

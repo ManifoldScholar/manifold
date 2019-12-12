@@ -1,31 +1,21 @@
-import React from "react";
 import withFormOptions from "../";
-import Enzyme from "enzyme/build";
-import Adapter from "enzyme-adapter-react-16/build";
-Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock("global/components/form/setter", () => {
-  return (wrappedComponent) => wrappedComponent;
+  return wrappedComponent => wrappedComponent;
 });
 
 describe("withFormOptions HOC", () => {
-
   class MockOptionsComponent extends React.Component {
     render() {
-      return (
-        <div>A mocked component that consumes options</div>
-      )
+      return <div>A mocked component that consumes options</div>;
     }
   }
 
   const FormOptionsComponent = withFormOptions(MockOptionsComponent);
   const setup = (mock, options = []) => {
-    const wrapper = Enzyme.mount(
-      <FormOptionsComponent
-        name="foo"
-        set={mock}
-        options={options}
-      />);
+    const wrapper = mount(
+      <FormOptionsComponent name="foo" set={mock} options={options} />
+    );
     const child = wrapper.find(MockOptionsComponent).instance();
     return { child };
   };
@@ -36,7 +26,7 @@ describe("withFormOptions HOC", () => {
       { label: "foo", value: "foo" },
       { label: "bar", value: "bar" }
     ]);
-    child.props.onChange({ target: { value: "bar" }});
+    child.props.onChange({ target: { value: "bar" } });
     const setValue = set.mock.calls.pop()[0];
     expect(setValue).toEqual("bar");
   });
@@ -47,7 +37,7 @@ describe("withFormOptions HOC", () => {
       { label: "1", value: 1 },
       { label: "2", value: 2 }
     ]);
-    child.props.onChange({ target: { value: "2" }});
+    child.props.onChange({ target: { value: "2" } });
     const setValue = set.mock.calls.pop()[0];
     expect(setValue).toEqual(2);
   });
@@ -58,7 +48,7 @@ describe("withFormOptions HOC", () => {
       { label: "1", value: 1 },
       { label: "2", value: 2 }
     ]);
-    child.props.onChange({ target: { value: 2 }});
+    child.props.onChange({ target: { value: 2 } });
     const setValue = set.mock.calls.pop()[0];
     expect(setValue).toEqual(2);
   });
@@ -71,7 +61,7 @@ describe("withFormOptions HOC", () => {
       { label: "foo", value: foo },
       { label: "bar", value: bar }
     ]);
-    child.props.onChange({ target: { value: "bar" }});
+    child.props.onChange({ target: { value: "bar" } });
     const setValue = set.mock.calls.pop()[0];
     expect(setValue).toEqual(bar);
   });
@@ -84,7 +74,7 @@ describe("withFormOptions HOC", () => {
       { label: "foo", value: foo },
       { label: "bar", value: bar }
     ]);
-    child.props.onChange({ target: { value: 2 }});
+    child.props.onChange({ target: { value: 2 } });
     const setValue = set.mock.calls.pop()[0];
     expect(setValue).toEqual(bar);
   });
@@ -95,7 +85,7 @@ describe("withFormOptions HOC", () => {
       { label: "foo", value: true },
       { label: "bar", value: false }
     ]);
-    child.props.onChange({ target: { value: true }});
+    child.props.onChange({ target: { value: true } });
     const setValue = set.mock.calls.pop()[0];
     expect(setValue).toEqual(true);
   });
@@ -106,9 +96,8 @@ describe("withFormOptions HOC", () => {
       { label: "foo", value: true },
       { label: "bar", value: false }
     ]);
-    child.props.onChange({ target: { value: "true" }});
+    child.props.onChange({ target: { value: "true" } });
     const setValue = set.mock.calls.pop()[0];
     expect(setValue).toEqual(true);
   });
-
 });

@@ -1,36 +1,21 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Manual from "../Manual";
-import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
 
-describe("Backend.ProjectCollection.Detail.Manual component", () => {
-  const projectCollection = build.entity.projectCollection("1", {
-    manuallySorted: false
-  });
-  const project = build.entity.project("2");
+describe("backend/containers/project-collection/Detail/Manual", () => {
+  def("projects", () => collectionFactory("project"));
+  def("projectCollection", () =>
+    factory("projectCollection", { attributes: { manuallySorted: false } })
+  );
+  def("collectionProjects", () => collectionFactory("collectionProject"));
+  def("root", () => (
+    <Manual
+      projectCollection={$projectCollection}
+      collectionProjects={$collectionProjects}
+      orderChangeHandler={() => jest.fn()}
+      projects={$projects}
+    />
+  ));
 
-  const collectionProjects = [
-    build.entity.collectionProject("3", {}, { project })
-  ];
-
-  const store = build.store();
-
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <Manual
-            projectCollection={projectCollection}
-            collectionProjects={collectionProjects}
-            orderChangeHandler={() => jest.fn()}
-            projects={[project]}
-          />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 });

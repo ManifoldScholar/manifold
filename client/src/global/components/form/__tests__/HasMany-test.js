@@ -1,31 +1,22 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Form from "global/components/form";
-import { Provider } from "react-redux";
-import createStore from "store/createStore";
+import HasMany from "../HasMany";
 
-describe("Backend.Form.HasMany component", () => {
-  const store = createStore();
+describe("global/components/form/HasMany", () => {
+  def("makers", () => collectionFactory("maker"));
+  def("mock", () => jest.fn());
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <Provider store={store}>
-        <Form.HasMany
-          label="makers"
-          entities={[
-            { id: 1, attributes: { name: "John" } },
-            { id: 2, attributes: { name: "Jane" } }
-          ]}
-          onChange={() => {}}
-          optionsFetch={() => {}}
-          onNew={() => {}}
-          fetch={() => {}}
-          entityLabelAttribute="name"
-          orderable
-        />
-      </Provider>
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  def("root", () => (
+    <HasMany
+      label="makers"
+      entities={$makers}
+      onChange={$mock}
+      optionsFetch={$mock}
+      onNew={$mock}
+      fetch={$mock}
+      entityLabelAttribute="name"
+      orderable
+    />
+  ));
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

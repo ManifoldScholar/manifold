@@ -1,56 +1,43 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Login from "../Login";
-import build from "test/fixtures/build";
-import { Provider } from "react-redux";
-import Adapter from "enzyme-adapter-react-16";
-import Enzyme from "enzyme";
+import CreateUpdate from "../CreateUpdate";
 
-Enzyme.configure({ adapter: new Adapter() });
-
-describe("Global.SignInUp.Login component", () => {
-  const store = build.store();
-
-  const handleViewChange = jest.fn();
-  const user = build.entity.user("1");
-
-  const root = (
-    <Provider store={store}>
-      <Login
-        dispatch={store.dispatch}
-        handleViewChange={handleViewChange}
-        user={user}
-        authentication={{
-          currentUser: user
-        }}
-        settings={build.entity.settings("1")}
-      />
-    </Provider>
+describe("global/components/sign-in-up/Login", () => {
+  def("user", () => factory("user"));
+  def("authentication", () =>
+    fixtures.authentication({ user: $user })
   );
+  def("handleViewChange", () => jest.fn());
+  def("settings", () => factory("settings"));
+  def("root", () => (
+    <Login
+      dispatch={$dispatch}
+      handleViewChange={$handleViewChange}
+      user={$user}
+      authentication={$authentication}
+      settings={$settings}
+    />
+  ));
+  def("wrapper", () => mount($withApp($root)));
 
-  it("renders correctly", () => {
-    const component = renderer.create(root);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 
   it("should trigger handleViewChange callback when show forgot is clicked", () => {
-    const wrapper = Enzyme.mount(root);
-    handleViewChange.mockClear();
-    wrapper
+    $handleViewChange.mockClear();
+    $wrapper
       .find('[data-id="show-forgot"]')
       .first()
       .simulate("click");
-    expect(handleViewChange).toHaveBeenCalled();
+    expect($handleViewChange).toHaveBeenCalled();
   });
 
   it("should trigger handleViewChange callback when show create is clicked", () => {
-    const wrapper = Enzyme.mount(root);
-    handleViewChange.mockClear();
-    wrapper
+    $handleViewChange.mockClear();
+    $wrapper
       .find('[data-id="show-create"]')
       .first()
       .simulate("click");
-    expect(handleViewChange).toHaveBeenCalled();
+    expect($handleViewChange).toHaveBeenCalled();
   });
 });

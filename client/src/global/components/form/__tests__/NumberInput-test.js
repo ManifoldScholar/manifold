@@ -1,21 +1,15 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Form from "global/components/form";
+import NumberInput from "../NumberInput";
 
-describe("Backend.Form.NumberInput component", () => {
-  const onChange = jest.fn();
-
-  const element = (
-    <Form.NumberInput
+describe("global/components/form/NumberInput", () => {
+  def("mock", () => jest.fn());
+  def("root", () => (
+    <NumberInput
       label="A form label"
       name="attributes[property]"
-      onChange={onChange}
+      onChange={$mock}
     />
-  );
-
-  it("renders correctly", () => {
-    const component = renderer.create(element);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  ));
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

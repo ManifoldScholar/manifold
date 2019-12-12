@@ -7,8 +7,3 @@ export const startSession = (dispatch, user) => {
 export const endSession = dispatch => {
   dispatch(currentUserActions.logout());
 };
-
-export default {
-  startSession,
-  endSession
-};

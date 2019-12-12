@@ -1,26 +1,13 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Smart from "../Smart";
-import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
 
-describe("Backend.ProjectCollection.Detail.Smart component", () => {
-  const projectCollection = build.entity.projectCollection("1", {
-    manuallySorted: false
-  });
-  const project = build.entity.project("2");
-  const store = build.store();
+describe("backend/containers/project-collection/Detail/Smart", () => {
+  def("projectCollection", () => factory("projectCollection"));
+  def("projects", () => collectionFactory("project"));
+  def("root", () => (
+    <Smart projectCollection={$projectCollection} projects={$projects} />
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <Smart projectCollection={projectCollection} projects={[project]} />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 });

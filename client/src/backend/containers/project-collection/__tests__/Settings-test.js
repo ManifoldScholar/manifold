@@ -1,34 +1,22 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { ProjectCollectionSettings } from "../Settings";
-import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
+import ProjectCollectionNew from "../New";
 
-describe("Backend.ProjectCollection.Settings container", () => {
-  const projectCollection = build.entity.projectCollection("1");
-  const store = build.store();
+describe("backend/containers/project-collection/Settings", () => {
+  def("projectCollection", () => factory("projectCollection"));
+  def("pagination", () => fixtures.pagination());
 
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <ProjectCollectionSettings
-          dispatch={store.dispatch}
-          projectCollection={projectCollection}
-          projectCollectionMeta={{
-            relationships: { collectionProjects: build.pagination() }
-          }}
-        />
-      </Provider>
-    )
-  );
-  const tree = component.toJSON();
+  def("root", () => (
+    <ProjectCollectionSettings
+      dispatch={$dispatch}
+      buildUpdateProjectCollection={jest.fn}
+      projectCollection={$projectCollection}
+      projectCollectionMeta={{
+        relationships: { collectionProjects: $pagination }
+      }}
+    />
+  ));
 
-  it("renders correctly", () => {
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    expect(tree).not.toBe(null);
+  it("matches the snapshot when rendered", () => {
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
 });

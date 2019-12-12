@@ -1,46 +1,33 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { ProjectWrapperContainer } from "../Wrapper";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
+import { project, route } from "./__fixtures__";
 
-describe("Backend Project Wrapper Container", () => {
-  const store = build.store();
-  const project = build.entity.project("1");
-  store.dispatch({
-    type: "UPDATE_CURRENT_USER",
-    error: false,
-    payload: {
-      data: build.entity.user("2")
-    }
+describe("backend/containers/project/Wrapper", () => {
+  beforeEach(() => {
+    testHelpers.startSession($dispatch, $user);
   });
 
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <ProjectWrapperContainer
-          project={project}
-          dispatch={store.dispatch}
-          location={{ pathname: "/projects/1" }}
-          route={{
-            routes: []
-          }}
-          match={{
-            params: {}
-          }}
-        />
-      </Provider>
-    )
-  );
+  def("abilities", () => ({ update: true }));
+  def("user", () => factory("user"));
+  def("project", () => project($abilities));
+  def("route", () => route());
+  def("match", () => ({
+    params: {}
+  }));
+  def("root", () => (
+    <ProjectWrapperContainer
+      project={$project}
+      dispatch={$dispatch}
+      location={{ pathname: "/projects/1" }}
+      route={$route}
+      match={$match}
+    />
+  ));
 
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("does not render a null value", () => {
+    expect(render($withApp($root)).html()).not.toBeNull();
   });
 });

@@ -1,44 +1,30 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { ProjectResourcesListContainer } from "../ResourcesList";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
 
-describe("Backend Project Resource ResourcesList Container", () => {
-  const store = build.store();
-  const project = build.entity.project("1");
-  const resources = [build.entity.resource("2"), build.entity.resource("3")];
-  store.dispatch({
-    type: "UPDATE_CURRENT_USER",
-    error: false,
-    payload: {
-      data: build.entity.user("1")
-    }
+describe("backend/containers/project/resource/ResourcesList", () => {
+  beforeEach(() => {
+    testHelpers.startSession($dispatch, $user);
   });
 
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <ProjectResourcesListContainer
-          project={project}
-          resources={resources}
-          resourcesMeta={{
-            pagination: build.pagination()
-          }}
-          dispatch={store.dispatch}
-        />
-      </Provider>
-    )
-  );
+  def("abilities", () => ({ managePermissions: true }));
+  def("user", () => factory("user"));
+  def("pagination", () => fixtures.pagination());
+  def("project", () => factory("project"));
+  def("resources", () => [
+    factory("resource", { id: "resource-1" }),
+    factory("resource", { id: "resource-2" })
+  ]);
+  def("root", () => (
+    <ProjectResourcesListContainer
+      project={$project}
+      resources={$resources}
+      resourcesMeta={{
+        pagination: $pagination
+      }}
+      dispatch={$dispatch}
+    />
+  ));
 
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("matches the snapshot when rendered", () => {
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
 });

@@ -197,7 +197,8 @@
     "__DEVTOOLS__": true,
     "__API_URL__": true,
     "__CABLE_URL__": true,
-    "socket": true
+    "socket": true,
+    "def": "readonly"
   },
   "overrides": [
     {

@@ -1,13 +1,10 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Toggle from "../Toggle";
 
-describe("Frontend.Utility.Toggle component", () => {
-  const toggleMock = jest.fn();
-
-  const root = (
+describe("frontend/components/utility/Toggle", () => {
+  def("toggle", () => jest.fn());
+  def("root", () => (
     <Toggle
-      handleToggle={toggleMock}
+      handleToggle={$toggle}
       label="options"
       optionOne={{
         icon: "resource24",
@@ -19,11 +16,9 @@ describe("Frontend.Utility.Toggle component", () => {
       }}
       selected="resources"
     />
-  );
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(root);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

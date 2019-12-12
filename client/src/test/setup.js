@@ -1,8 +1,15 @@
 import "@babel/polyfill";
-import { HelmetProvider } from "react-helmet-async";
 import React from "react";
+import fixtures from "test/fixtures";
+import testHelpers from "test/helpers";
 
-HelmetProvider.canUseDOM = false;
+// Expose our fixture factory globally.
+global.fixtures = fixtures;
+global.factory = fixtures.factory;
+global.collectionFactory = fixtures.collectionFactory;
+
+// Expose helpers globally.
+global.testHelpers = testHelpers;
 
 // We mock 3rd party libraries that depend on the refs because react-test-renderer doesn't
 // support DOM refs, which breaks our tests.
@@ -18,6 +25,7 @@ jest.mock("date-fns/distance_in_words", () => {
 });
 
 jest.mock("focus-trap-react", () => "focus-trap-react");
+
 jest.mock("react-uid", () => {
   return {
     UID: jest.fn(props => props.children(1))

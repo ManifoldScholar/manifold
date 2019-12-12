@@ -1,39 +1,31 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import ProjectCollectionNew from "../New";
-import build from "test/fixtures/build";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
 
-describe("Backend.ProjectCollection.New container", () => {
-  const store = build.store();
-  store.dispatch({
-    type: "UPDATE_CURRENT_USER",
-    error: false,
-    payload: {
-      data: build.entity.user("1")
-    }
+describe("backend/containers/project-collection/New", () => {
+  beforeEach(() => {
+    testHelpers.startSession($dispatch, $user);
   });
-
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <ProjectCollectionNew
-          dispatch={store.dispatch}
-          buildUpdateProjectCollection={jest.fn}
-          buildCreateProjectCollection={jest.fn}
-          successHandler={jest.fn}
-        />
-      </Provider>
-    )
+  def("user", () =>
+    factory("user", {
+      attributes: {
+        abilities: {
+          projectCollection: {
+            create: true
+          }
+        }
+      }
+    })
   );
-  const tree = component.toJSON();
 
-  it("renders correctly", () => {
-    expect(tree).toMatchSnapshot();
-  });
+  def("root", () => (
+    <ProjectCollectionNew
+      dispatch={$dispatch}
+      buildUpdateProjectCollection={jest.fn}
+      buildCreateProjectCollection={jest.fn}
+      successHandler={jest.fn}
+    />
+  ));
 
-  it("doesn't render to null", () => {
-    expect(tree).not.toBe(null);
+  it("matches the snapshot when rendered", () => {
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
 });

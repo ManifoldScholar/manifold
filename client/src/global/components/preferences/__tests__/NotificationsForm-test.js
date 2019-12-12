@@ -1,26 +1,26 @@
-jest.mock("react-collapse");
-
-import React from "react";
-import renderer from "react-test-renderer";
 import NotificationsForm from "../NotificationsForm";
 
-describe("Global.Preferences.NotificationsForm component", () => {
-  const props = {
-    preferences: {
-      digest: "daily",
-      projects: "always",
-      followedProjects: "never",
-      annotationsAndComments: "never",
-      repliesToMe: "never"
-    },
-    changeHandler: jest.fn(),
-    digestProjectsChangeHandler: jest.fn(),
-    unsubscribeAllHandler: jest.fn()
-  };
+describe("global/components/preferences/NotificationsForm", () => {
+  def("preferences", () => ({
+    digest: "daily",
+    projects: "always",
+    followedProjects: "never",
+    annotationsAndComments: "never",
+    repliesToMe: "never"
+  }));
+  def("changeHandler", () => jest.fn());
+  def("digestProjectsChangeHandler", () => jest.fn());
+  def("unsubscribeAllHandler", () => jest.fn());
+  def("root", () => (
+    <NotificationsForm
+      preferences={$preferences}
+      changeHandler={$changeHandler}
+      digestProjectsChangeHandler={$digestProjectsChangeHandler}
+      unsubscribeAllHandler={$unsubscribeAllHandler}
+    />
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(<NotificationsForm {...props} />);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

@@ -1,75 +1,52 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { ReaderContainer } from "../";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
-import { wrapWithRouter } from "test/helpers/routing";
-import { FrontendModeContext } from "helpers/contexts";
 
-describe("Reader Reader Container", () => {
-  const store = build.store();
-  const text = build.entity.text("1");
-  const currentUser = build.entity.user("1");
-  text.relationships.project = build.entity.project("3");
-  const props = {
-    text,
-    section: build.entity.textSection("2"),
-    route: {
-      routes: [
-        {
-          name: "ReaderSection",
-          path: "/read/:textId/section/:sectionId"
-        }
-      ]
-    },
-    dispatch: store.dispatch,
-    location: {
-      pathname: `/read/1/section/2`
-    },
-    visibility: {
-      visibilityFilters: {},
-      uiPanels: {}
-    },
-    appearance: {
-      colors: {},
-      typography: {
-        fontSize: {},
-        margins: {}
-      }
-    },
-    notifications: {
-      notifications: []
-    },
-    authentication: {}
-  };
-  store.dispatch({
-    type: "UPDATE_CURRENT_USER",
-    error: false,
-    payload: {
-      data: currentUser
-    }
-  });
-
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <FrontendModeContext.Provider
-          value={{ isLibrary: true, isStandalone: false }}
-        >
-          <ReaderContainer {...props} />
-        </FrontendModeContext.Provider>
-      </Provider>
-    )
+describe("reader/containers/Reader/Reader", () => {
+  def("text", () => factory("text"));
+  def("currentUser", () =>
+    factory("user", { attributes: { persistentUi: {} } })
   );
+  def("textSection", () => factory("textSection"));
+  def("route", () => ({
+    routes: [
+      {
+        name: "ReaderSection",
+        path: "/read/:textId/section/:sectionId"
+      }
+    ]
+  }));
+  def("visibility", () => ({
+    visibilityFilters: {},
+    uiPanels: {}
+  }));
+  def("location", () => ({
+    pathname: `/read/1/section/2`
+  }));
+  def("appearance", () => ({
+    colors: {},
+    typography: {
+      fontSize: {},
+      margins: {}
+    }
+  }));
+  def("notifications", () => ({
+    notifications: []
+  }));
 
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  def("root", () => (
+    <ReaderContainer
+      text={$text}
+      section={$textSection}
+      route={$route}
+      dispatch={$dispatch}
+      location={$location}
+      visibility={$visibility}
+      appearance={$appearance}
+      notifications={$notifications}
+      authentication={{}}
+    />
+  ));
+
+  it("matches the snapshot when rendered", () => {
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
-
-  // TODO: Fix this test.
-  // it("doesn't render to null", () => {
-  //   let tree = component.toJSON();
-  //   expect(tree).not.toBe(null);
-  // });
 });

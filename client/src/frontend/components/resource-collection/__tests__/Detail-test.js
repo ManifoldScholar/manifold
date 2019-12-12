@@ -1,56 +1,46 @@
 jest.mock("react-collapse");
 
-import React from "react";
-import renderer from "react-test-renderer";
 import ResourceCollection from "frontend/components/resource-collection";
-import { Provider } from "react-redux";
-import { wrapWithRouter } from "test/helpers/routing";
-import build from "test/fixtures/build";
 
-describe("Frontend.ResourceCollection.Detail Component", () => {
-  const pagination = build.pagination();
-  const store = build.store();
-
-  const project = build.entity.project("1");
-  const collectionResource = build.entity.collectionResource("4", {});
-  const resource = build.entity.resource(
-    "3",
-    {},
-    { project, collectionResources: [collectionResource] }
+describe("frontend/components/resource-collection/Detail", () => {
+  def("project", () => factory("project"));
+  def("collectionResources", () => collectionFactory("collectionResource"));
+  def("resource", () =>
+    factory("resource", {
+      relationships: {
+        project: $project,
+        collectionResources: $collectionResources
+      }
+    })
   );
-  const collection = build.entity.resourceCollection(
-    "2",
-    {},
-    { project, resources: [resource] }
+  def("resources", () => [$resource]);
+  def("resourceCollection", () =>
+    factory("resourceCollection", {
+      relationships: { project: $project, resources: $resources }
+    })
   );
-  project.relationships.resources.push(resource);
-  const resources = project.relationships.resources;
+  def("pageChange", () => jest.fn());
+  def("filterChange", () => jest.fn());
+  def("root", () => (
+    <ResourceCollection.Detail
+      project={$project}
+      slideshowResources={$resources}
+      slideshowPagination={fixtures.pagination()}
+      collectionResources={$collectionResources}
+      resourceCollectionPagination={fixtures.pagination()}
+      resourceCollectionPaginationHandler={$pageChange}
+      resourceCollection={$resourceCollection}
+      resourceCollectionUrl={`/browse/project/${$project.id}/collection/${$resourceCollection.id}`}
+      filterChange={$filterChange}
+      initialFilterState={null}
+    />
+  ));
 
-  const pageChangeMock = jest.fn();
-  const filterChangeMock = jest.fn();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
+  });
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <ResourceCollection.Detail
-            project={project}
-            slideshowResources={resources}
-            slideshowPagination={pagination}
-            collectionResources={resources}
-            resourceCollectionPagination={pagination}
-            resourceCollectionPaginationHandler={pageChangeMock}
-            resourceCollection={collection}
-            resourceCollectionUrl={`/browse/project/${project.id}/collection/${
-              collection.id
-            }`}
-            filterChange={filterChangeMock}
-            initialFilterState={null}
-          />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 });

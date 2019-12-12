@@ -1,32 +1,22 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Video from "../Video";
 
-describe("Backend.Resource.Form.Video component", () => {
-  function getModelValue(kind) {
-    return kind;
-  }
+describe("backend/components/resource/form/kind/Video", () => {
+  def("kind", () => "kind");
+  def("getModelValue", () => jest.fn(() => $kind));
+  def("resource", () => factory("resource"));
+  def("root", () => (
+    <Video getModelValue={$getModelValue} sourceModel={$resource} />
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <Video getModelValue={() => getModelValue("")} />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 
   describe("when sub kind is external_video", () => {
-    it("renders correctly", () => {
-      const component = renderer.create(
-        <Video
-          getModelValue={() => getModelValue("external_video")}
-          sourceModel={{
-            attributes: {}
-          }}
-        />
-      );
-      let tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+    def("kind", () => "external_video");
+
+    it("matches the snapshot when rendered", () => {
+      expect(render($root)).toMatchSnapshot();
     });
   });
 });

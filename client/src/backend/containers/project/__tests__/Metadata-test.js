@@ -1,29 +1,20 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import ProjectMetadataContainer from "../Metadata";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
+import { project } from "./__fixtures__";
 
-describe("Backend Project Metadata Container", () => {
-  const store = build.store();
-  const project = build.entity.project("1");
+describe("backend/containers/project/Metadata", () => {
+  beforeEach(() => {
+    testHelpers.startSession($dispatch, $user);
+  });
+  def("abilities", () => ({ update: true }));
+  def("user", () => factory("user"));
+  def("project", () => project($abilities));
+  def("root", () => <ProjectMetadataContainer project={$project} />);
 
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <ProjectMetadataContainer project={project} />
-      </Provider>
-    )
-  );
-
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot when mounted", () => {
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
 
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("does not render a null value after mounting", () => {
+    expect(mount($withApp($root)).html()).not.toBeNull();
   });
 });

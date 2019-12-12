@@ -1,27 +1,10 @@
-import React from "react";
-import { renderWithRouter, wrapWithRouter } from "test/helpers/routing";
-import renderer from "react-test-renderer";
 import Totals from "../Totals";
-import build from "test/fixtures/build";
 
-const project = build.entity.project("1");
+describe("frontend/components/resource-list/Totals", () => {
+  def("project", () => factory("project"));
+  def("root", () => <Totals count={3} project={$project} />);
 
-describe("Frontend.ResourceList.Totals Component", () => {
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(<Totals count={3} project={project} />)
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("displays the correct count", () => {
-    const wrapper = renderWithRouter(<Totals count={3} project={project} />);
-    expect(wrapper.find('[data-id="count"]').text()).toBe("3");
-  });
-
-  it("does render the count when there is no count", () => {
-    const wrapper = renderWithRouter(<Totals count={null} project={project} />);
-    expect(wrapper.find('[data-id="count"]')).toHaveLength(1);
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

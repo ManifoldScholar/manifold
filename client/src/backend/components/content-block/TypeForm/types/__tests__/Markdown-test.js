@@ -1,22 +1,9 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Markdown from "../Markdown";
-import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
 
-describe("Backend.Project.Content.TypeForm.Markdown component", () => {
-  const store = build.store();
+describe("backend/components/content-block/TypeForm/types/Markdown", () => {
+  def("root", () => <Markdown setOther={jest.fn} />);
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <Markdown setOther={jest.fn} />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(render($root)).toMatchSnapshot();
   });
 });

@@ -1,28 +1,13 @@
-import React from "react";
-import { Provider } from "react-redux";
 import AnnotationDetail from "global/components/Annotation/Annotation/UserContent/index.js";
-import renderer from "react-test-renderer";
-import build from "test/fixtures/build";
-import { wrapWithRouter } from "test/helpers/routing";
 
-describe("Reader.Annotation.Annotation component", () => {
-  const annotation = build.entity.annotation(
-    "2",
-    {},
-    { creator: build.entity.user("1") }
-  );
-  const store = build.store();
-  const showLogin = jest.fn();
+describe("reader/components/annotation/Detail", () => {
+  def("annotation", () => factory("annotation"));
+  def("showLogin", () => jest.fn());
+  def("root", () => (
+    <AnnotationDetail annotation={$annotation} showLogin={$showLogin} />
+  ));
 
-  const root = wrapWithRouter(
-    <Provider store={store}>
-      <AnnotationDetail annotation={annotation} showLogin={showLogin} />
-    </Provider>
-  );
-
-  it("renders correctly", () => {
-    const component = renderer.create(root);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($withApp($root))).toMatchSnapshot();
   });
 });

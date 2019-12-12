@@ -1,25 +1,17 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import GridItem from "../GridItem";
-import build from "test/fixtures/build";
-import { wrapWithRouter } from "test/helpers/routing";
 
-describe("Frontend.Project.Thumbnail component", () => {
-  const project = build.entity.project("1");
-  const dispatchMock = jest.fn();
+describe("frontend/components/project-list/GridItem", () => {
+  def("project", () => factory("project"));
+  def("root", () => (
+    <GridItem
+      dispatch={$dispatch}
+      project={$project}
+      favorites={{}}
+      authenticated
+    />
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <GridItem
-          dispatch={dispatchMock}
-          project={project}
-          favorites={{}}
-          authenticated
-        />
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

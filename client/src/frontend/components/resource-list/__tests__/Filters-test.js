@@ -1,22 +1,19 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Filters from "../Filters";
 
-describe("Frontend.ResourceList.Filters Component", () => {
-  const tags = ["dog", "puppy"];
-  const kinds = ["image", "video"];
-  const filterChangeMock = jest.fn();
+describe("frontend/components/resource-list/Filters", () => {
+  def("tags", () => ["dog", "puppy"]);
+  def("kinds", () => ["image", "video"]);
+  def("filterChange", () => jest.fn());
+  def("root", () => (
+    <Filters
+      tags={$tags}
+      kinds={$kinds}
+      filterChangeHandler={$filterChange}
+      initialFilterState={{}}
+    />
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <Filters
-        tags={tags}
-        kinds={kinds}
-        filterChangeHandler={filterChangeMock}
-        initialFilterState={{}}
-      />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

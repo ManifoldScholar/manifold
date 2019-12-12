@@ -15,7 +15,8 @@ export class ProjectCollectionSettings extends PureComponent {
   static propTypes = {
     projectCollection: PropTypes.object,
     projectCollectionMeta: PropTypes.object,
-    confirm: PropTypes.func.isRequired
+    confirm: PropTypes.func.isRequired,
+    buildUpdateProjectCollection: PropTypes.func.isRequired
   };
 
   static defaultProps = {

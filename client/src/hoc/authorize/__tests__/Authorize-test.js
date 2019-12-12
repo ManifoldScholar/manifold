@@ -1,77 +1,63 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { AuthorizeComponent } from "../";
-import { Provider } from "react-redux";
-import build from "test/fixtures/build";
-import { wrapWithRouter } from "test/helpers/routing";
 
-describe("Global HigherOrder Authorize Container", () => {
-  const store = build.store();
-  const authentication = {
-    authenticated: true,
-    currentUser: build.entity.user("1")
-  };
-  const child = <div>How is babby formed?</div>;
+describe("hoc/authorize", () => {
+  def("user", () => factory("user"));
+  def("authentication", () =>
+    fixtures.authentication({ user: $user })
+  );
+  def("child", () => <div>How is babby formed?</div>);
 
-  it("renders correctly when kind matches", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <AuthorizeComponent
-            kind="any"
-            authentication={authentication}
-            children={child}
-          />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  context("when kind matches", () => {
+    def("root", () => (
+      <AuthorizeComponent
+        kind="any"
+        authentication={$authentication}
+        children={$child}
+      />
+    ));
+
+    it("matches the snapshot when rendered", () => {
+      expect(mount($withApp($root)).html()).toMatchSnapshot();
+    });
   });
 
-  it("renders correctly to null when kind doesn't match", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <AuthorizeComponent kind="any" authentication={{}} children={child} />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  context("when kind does not match", () => {
+    def("root", () => (
+      <AuthorizeComponent kind="any" authentication={{}} children={$child} />
+    ));
+
+    it("matches the snapshot when rendered", () => {
+      expect(mount($withApp($root)).html()).toMatchSnapshot();
+    });
   });
 
-  it("renders correctly when ability matches", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <AuthorizeComponent
-            entity="user"
-            ability="create"
-            authentication={authentication}
-            children={child}
-          />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  context("when ability matches", () => {
+    def("root", () => (
+      <AuthorizeComponent
+        entity="user"
+        ability="create"
+        authentication={$authentication}
+        children={$child}
+      />
+    ));
+
+    it("matches the snapshot when rendered", () => {
+      expect(mount($withApp($root)).html()).toMatchSnapshot();
+    });
   });
 
-  it("renders correctly to null when ability doesn't match", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <AuthorizeComponent
-            entity="user"
-            ability="create"
-            authentication={{}}
-            children={child}
-          />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  context("when ability does not match", () => {
+    def("root", () => (
+      <AuthorizeComponent
+        entity="user"
+        ability="create"
+        authentication={{}}
+        children={$child}
+      />
+    ));
+
+    it("matches the snapshot when rendered", () => {
+      expect(mount($withApp($root)).html()).toMatchSnapshot();
+    });
   });
 });

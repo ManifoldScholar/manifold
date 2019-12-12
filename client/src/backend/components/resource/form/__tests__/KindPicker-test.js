@@ -1,21 +1,16 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import KindPicker from "../KindPicker";
 
-describe("Backend.Resource.Form.KindPicker component", () => {
-  function getModelValue(kind) {
-    return kind;
-  }
+describe("backend/components/resource/form/KindPicker", () => {
+  def("getModelValue", () => jest.fn(() => "image"));
+  def("root", () => (
+    <KindPicker
+      name="attributes[kind]"
+      getModelValue={$getModelValue}
+      includeButtons
+    />
+  ));
 
-  it("renders correctly", () => {
-    const component = renderer.create(
-      <KindPicker
-        name="attributes[kind]"
-        getModelValue={() => getModelValue("image")}
-        includeButtons
-      />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(render($root)).toMatchSnapshot();
   });
 });

@@ -1,21 +1,19 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Button from "../menu/Button";
 
-describe("Reader.Search.Button component", () => {
-  it("renders correctly when inactive", () => {
-    const component = renderer.create(
-      <Button active={false} toggleSearchMenu={() => {}} />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe("global/components/search/button", () => {
+  context("when it isn't active", () => {
+    def("root", () => <Button active={false} toggleSearchMenu={() => {}} />);
+
+    it("matches the snapshot", () => {
+      expect(shallow($root)).toMatchSnapshot();
+    });
   });
 
-  it("renders correctly when active", () => {
-    const component = renderer.create(
-      <Button active={true} toggleSearchMenu={() => {}} />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  context("when it is active", () => {
+    def("root", () => <Button active={true} toggleSearchMenu={() => {}} />);
+
+    it("matches the snapshot", () => {
+      expect(shallow($root)).toMatchSnapshot();
+    });
   });
 });

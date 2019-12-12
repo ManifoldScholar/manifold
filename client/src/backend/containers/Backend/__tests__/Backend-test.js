@@ -1,49 +1,23 @@
-import React from "react";
-import { Provider } from "react-redux";
-import { mount } from "enzyme";
 import { BackendContainer } from "../";
-import build from "test/fixtures/build";
-import { wrapWithRouter } from "test/helpers/routing";
 
-describe("Backend Backend Container", () => {
-  const history = build.history();
-  const notifications = {
-    notifications: {}
-  };
-  const authentication = {
-    authenticated: true,
-    currentUser: build.entity.user("1")
-  };
-  const route = {
-    routes: []
-  };
-  const visibility = {
-    uiPanels: {}
-  };
-  const settings = build.entity.settings("0");
+describe("backend/containers/Backend/index", () => {
+  def("settings", () => factory("settings"));
+  def("root", () => (
+    <BackendContainer
+      history={fixtures.history()}
+      notifications={$state.notifications}
+      authentication={$state.authentication}
+      route={{ routes: [] }}
+      visibility={$state.ui.transitory.visibility}
+      settings={$settings}
+    />
+  ));
 
-  const component = mount(
-    wrapWithRouter(
-      <Provider store={build.store()}>
-        <BackendContainer
-          history={history}
-          notifications={notifications}
-          authentication={authentication}
-          route={route}
-          visibility={visibility}
-          settings={settings}
-        />
-      </Provider>
-    )
-  );
-
-  it("renders correctly", () => {
-    let tree = component.debug();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 
-  it("doesn't render to null", () => {
-    let tree = component.debug();
-    expect(tree).not.toBe(null);
+  it("does not render to null", () => {
+    expect(render($withApp($root))).not.toBeNull();
   });
 });

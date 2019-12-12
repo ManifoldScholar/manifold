@@ -1,28 +1,13 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import Update from "../Update";
-import build from "test/fixtures/build";
-import { Provider } from "react-redux";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
-describe("Global.SignInUp.Update component", () => {
-  const store = build.store();
+describe("global/components/sign-in-up/Update", () => {
+  def("user", () => factory("user"));
+  def("authentication", () =>
+    fixtures.authentication({ user: $user })
+  );
+  def("root", () => <Update authentication={$authentication} />);
 
-  const user = build.entity.user("1");
-
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <Update
-            authentication={{
-              currentUser: user
-            }}
-          />
-        </Provider>
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

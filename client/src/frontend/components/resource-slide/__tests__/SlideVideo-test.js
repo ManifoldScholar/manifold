@@ -1,20 +1,19 @@
-jest.mock("react-html5video");
-
-import React from "react";
-import renderer from "react-test-renderer";
 import SlideVideo from "../SlideVideo";
-import build from "test/fixtures/build";
 
-describe("Frontend.ResourceList.Slide.SlideVideo component", () => {
-  const resource = build.entity.resource("1");
-  resource.attributes.kind = "video";
-  resource.attributes.subKind = "external_video";
-  resource.attributes.externalType = "youtube";
-  resource.attributes.externalId = "lVrAwK7FaOw";
+describe("frontend/components/resource-slide/SlideVideo", () => {
+  def("resource", () =>
+    factory("resource", {
+      attributes: {
+        kind: "video",
+        subKind: "external_video",
+        externalType: "youtube",
+        externalId: "1VrAwK7FaOw"
+      }
+    })
+  );
+  def("root", () => <SlideVideo resource={$resource} />);
 
-  it("renders correctly", () => {
-    const component = renderer.create(<SlideVideo resource={resource} />);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

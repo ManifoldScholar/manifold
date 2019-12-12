@@ -1,34 +1,29 @@
-import React from "react";
-import { shallow, mount, render } from "enzyme";
-import renderer from "react-test-renderer";
 import List from "../List";
-import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
-const events = [build.entity.event("1"), build.entity.event("2")];
-const project = build.entity.project("1");
+describe("frontend/components/event/List", () => {
+  def("events", () => collectionFactory("event"));
+  def("project", () => factory("project"));
+  def("root", () => <List project={$project} events={$events} />);
 
-describe("Frontend.Event.List Component", () => {
-  it("renders correctly", () => {
-    const component = renderer.create(
-      wrapWithRouter(<List project={project} events={events} />)
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 
   it("has the event-list class", () => {
     expect(
-      shallow(<List project={project} events={[]} />)
+      shallow($root)
         .find("ul")
         .is(".event-list")
     ).toBe(true);
   });
 
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
+  });
+
   it("renders a Tile for each event", () => {
-    const wrapper = mount(
-      wrapWithRouter(<List project={project} events={events} />)
+    expect(render($withApp($root)).find(".event-tile").length).toBe(
+      $events.length
     );
-    expect(wrapper.find(".event-tile").hostNodes().length).toBe(events.length);
   });
 });

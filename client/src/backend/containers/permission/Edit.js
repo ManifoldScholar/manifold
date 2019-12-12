@@ -81,7 +81,6 @@ export class PermissionEdit extends PureComponent {
   render() {
     const permission = this.props.permission;
     if (!permission) return null;
-
     return (
       <section>
         <Navigation.DrawerHeader

@@ -1,44 +1,30 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import SearchMenu from "global/components/search/menu";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
-describe("Reader.Search.Menu component", () => {
-  const historyMock = {
-    push: () => {}
-  };
+describe("global/components/search/menu", () => {
+  def("history", () => jest.fn());
+  def("match", () => jest.fn());
+  def("toggleVisibility", () => jest.fn());
+  def("root", () => (
+    <SearchMenu.Body
+      visibility={{ search: $searchVisible }}
+      searchType="reader"
+      history={$history}
+      match={$match}
+      toggleVisibility={$toggleVisibility}
+    />
+  ));
 
-  const matchMock = {};
-
-  it("renders correctly when search is visible", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <SearchMenu.Body
-          visibility={{ search: true }}
-          searchType="reader"
-          history={historyMock}
-          match={matchMock}
-          toggleVisibility={() => {}}
-        />
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  context("when search is visible", () => {
+    def("searchVisible", () => true);
+    it("matches the snapshot", () => {
+      expect(shallow($root)).toMatchSnapshot();
+    });
   });
 
-  it("renders correctly when search is not visible", () => {
-    const component = renderer.create(
-      wrapWithRouter(
-        <SearchMenu.Body
-          visibility={{ search: false }}
-          searchType="reader"
-          history={historyMock}
-          match={matchMock}
-          toggleVisibility={() => {}}
-        />
-      )
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  context("when search is not visible", () => {
+    def("searchVisible", () => false);
+    it("matches the snapshot", () => {
+      expect(shallow($root)).toMatchSnapshot();
+    });
   });
 });

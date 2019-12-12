@@ -1,24 +1,16 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { PasswordResetContainer } from "../";
 
-describe("Frontend PasswordReset Container", () => {
-  const component = renderer.create(
+describe("frontend/containers/PasswordReset/PasswordReset", () => {
+  def("root", () => (
     <PasswordResetContainer
       match={{
         params: {}
       }}
-      history={{}}
+      history={fixtures.history()}
     />
-  );
+  ));
 
-  it("renders correctly", () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+  it("matches the snapshot", () => {
+    expect(shallow($root)).toMatchSnapshot();
   });
 });

@@ -1,44 +1,22 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import { ProjectCollectionManageProjects } from "../ManageProjects";
-import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
 
-describe("Backend.ProjectCollection.ManageProjects container", () => {
-  const projects = [build.entity.project("1"), build.entity.project("2")];
-  const projectCollection = build.entity.projectCollection(
-    "1",
-    {},
-    { projects }
-  );
+describe("backend/containers/project-collection/ManageProjects", () => {
+  def("project", () => factory("project"));
+  def("projectCollection", () => factory("projectCollection"));
+  def("collectionProjects", () => collectionFactory("collectionProject"));
+  def("projects", () => collectionFactory("project"));
+  def("pagination", () => fixtures.pagination());
+  def("root", () => (
+    <ProjectCollectionManageProjects
+      dispatch={$dispatch}
+      projectCollection={$projectCollection}
+      collectionProjects={$collectionProjects}
+      projects={$projects}
+      projectsMeta={{ pagination: $pagination }}
+    />
+  ));
 
-  const collectionProjects = [
-    build.entity.collectionProject("3", {}, { project: projects[0] })
-  ];
-
-  const store = build.store();
-
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <ProjectCollectionManageProjects
-          dispatch={store.dispatch}
-          projectCollection={projectCollection}
-          collectionProjects={collectionProjects}
-          projects={projects}
-          projectsMeta={{ pagination: build.pagination() }}
-        />
-      </Provider>
-    )
-  );
-  const tree = component.toJSON();
-
-  it("renders correctly", () => {
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("doesn't render to null", () => {
-    expect(tree).not.toBe(null);
+  it("matches the snapshot when rendered", () => {
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
 });

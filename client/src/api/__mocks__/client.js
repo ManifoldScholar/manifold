@@ -1,4 +1,4 @@
-import pagination from "test/fixtures/pagination";
+import fixtures from "test/fixtures";
 import some from "lodash/some";
 
 export default class ApiClient {
@@ -20,7 +20,7 @@ export default class ApiClient {
     if (isCollectionEndpoint) {
       response = {
         data: [],
-        meta: { pagination: pagination() }
+        meta: { pagination: fixtures.pagination() }
       };
     } else {
       response = { data: {} };
