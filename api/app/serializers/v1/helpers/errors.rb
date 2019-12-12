@@ -53,6 +53,7 @@ module V1
       def detail(attribute, type)
         base = type if type.is_a? String
         base = @errors.generate_message(attribute, type) if type.is_a? Symbol
+        # NOTE: Potential option for conversion to dry types
         msg = base.is_a?(Hash) ? base.values.first : base
         return msg.slice(0) if msg.start_with?("^")
 
