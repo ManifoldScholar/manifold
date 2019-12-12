@@ -9,7 +9,7 @@ module V1
     typed_attribute :position, NilClass
     typed_attribute :url, NilClass
     typed_attribute :button, NilClass
-    typed_attribute :attachment_styles, Hash
+    typed_attribute :attachment_styles, Types::Hash
     typed_belongs_to :project
     typed_belongs_to :text
   end
