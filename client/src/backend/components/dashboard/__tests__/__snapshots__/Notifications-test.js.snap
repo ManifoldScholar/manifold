@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Dashboard.Notification component renders correctly 1`] = `
+exports[`backend/components/dashboard/Notifications matches the snapshot 1`] = `
 <nav
   className="notification-list-block"
 >
@@ -17,19 +17,16 @@ exports[`Backend.Dashboard.Notification component renders correctly 1`] = `
       <button
         className="notification-list-block__close-button"
       >
-        <svg
-          aria-hidden={true}
-          className="manicon-svg svg-icon--close16"
+        <IconComposer
           fill="currentColor"
-          height={16}
-          viewBox="0 0 16 16"
-          width={16}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z"
-          />
-        </svg>
+          icon="close16"
+          size="default"
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
         <span
           className="screen-reader-text"
         >
@@ -49,19 +46,16 @@ exports[`Backend.Dashboard.Notification component renders correctly 1`] = `
       <button
         className="notification-list-block__close-button"
       >
-        <svg
-          aria-hidden={true}
-          className="manicon-svg svg-icon--close16"
+        <IconComposer
           fill="currentColor"
-          height={16}
-          viewBox="0 0 16 16"
-          width={16}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z"
-          />
-        </svg>
+          icon="close16"
+          size="default"
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
         <span
           className="screen-reader-text"
         >

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global.Utility.Pagination component renders correctly 1`] = `
+exports[`global/components/utility/Pagination matches the snapshot 1`] = `
 <nav
   aria-label="Pagination"
   className="list-pagination"
@@ -14,26 +14,23 @@ exports[`Global.Utility.Pagination component renders correctly 1`] = `
       <ul>
         <li
           className="list-pagination__page list-pagination__page--prev list-pagination__page--disabled"
+          key="previous"
         >
           <a
             disabled={true}
             href="#pagination-target"
             onClick={[MockFunction]}
           >
-            <svg
-              aria-hidden={true}
-              className="manicon-svg svg-icon--arrowLongLeft16"
+            <IconComposer
               fill="currentColor"
-              height={null}
-              viewBox="0 0 24 16"
-              width={null}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                transform="rotate(180 12 8)"
-              />
-            </svg>
+              icon="arrowLongLeft16"
+              screenReaderText="previous page"
+              svgProps={
+                Object {
+                  "aria-hidden": true,
+                }
+              }
+            />
             <span
               className="list-pagination__icon-label"
             >
@@ -51,6 +48,7 @@ exports[`Global.Utility.Pagination component renders correctly 1`] = `
       >
         <li
           className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
+          key="1"
         >
           <a
             href="#pagination-target"
@@ -71,6 +69,7 @@ exports[`Global.Utility.Pagination component renders correctly 1`] = `
         </li>
         <li
           className="list-pagination__page list-pagination__page--ordinal"
+          key="2"
         >
           <a
             href="#pagination-target"
@@ -97,6 +96,7 @@ exports[`Global.Utility.Pagination component renders correctly 1`] = `
       <ul>
         <li
           className="list-pagination__page list-pagination__page--next"
+          key="next"
         >
           <a
             href="#pagination-target"
@@ -107,19 +107,16 @@ exports[`Global.Utility.Pagination component renders correctly 1`] = `
             >
               NEXT
             </span>
-            <svg
-              aria-hidden={true}
-              className="manicon-svg svg-icon--arrowLongRight16"
+            <IconComposer
               fill="currentColor"
-              height={null}
-              viewBox="0 0 24 16"
-              width={null}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-              />
-            </svg>
+              icon="arrowLongRight16"
+              screenReaderText="next page"
+              svgProps={
+                Object {
+                  "aria-hidden": true,
+                }
+              }
+            />
           </a>
         </li>
       </ul>
@@ -128,7 +125,7 @@ exports[`Global.Utility.Pagination component renders correctly 1`] = `
 </nav>
 `;
 
-exports[`Global.Utility.Pagination component renders correctly when compact style 1`] = `
+exports[`global/components/utility/Pagination when it is compact matches the snapshot 1`] = `
 <nav
   aria-label="Pagination"
   className="list-pagination list-pagination--compact"
@@ -142,26 +139,23 @@ exports[`Global.Utility.Pagination component renders correctly when compact styl
       <ul>
         <li
           className="list-pagination__page list-pagination__page--prev list-pagination__page--disabled"
+          key="previous"
         >
           <a
             disabled={true}
             href="#pagination-target"
             onClick={[MockFunction]}
           >
-            <svg
-              aria-hidden={true}
-              className="manicon-svg svg-icon--arrowLongLeft16"
+            <IconComposer
               fill="currentColor"
-              height={null}
-              viewBox="0 0 24 16"
-              width={null}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                transform="rotate(180 12 8)"
-              />
-            </svg>
+              icon="arrowLongLeft16"
+              screenReaderText="previous page"
+              svgProps={
+                Object {
+                  "aria-hidden": true,
+                }
+              }
+            />
             <span
               className="list-pagination__icon-label"
             >
@@ -195,6 +189,7 @@ exports[`Global.Utility.Pagination component renders correctly when compact styl
       <ul>
         <li
           className="list-pagination__page list-pagination__page--next"
+          key="next"
         >
           <a
             href="#pagination-target"
@@ -205,19 +200,16 @@ exports[`Global.Utility.Pagination component renders correctly when compact styl
             >
               NEXT
             </span>
-            <svg
-              aria-hidden={true}
-              className="manicon-svg svg-icon--arrowLongRight16"
+            <IconComposer
               fill="currentColor"
-              height={null}
-              viewBox="0 0 24 16"
-              width={null}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-              />
-            </svg>
+              icon="arrowLongRight16"
+              screenReaderText="next page"
+              svgProps={
+                Object {
+                  "aria-hidden": true,
+                }
+              }
+            />
           </a>
         </li>
       </ul>
@@ -226,4 +218,4 @@ exports[`Global.Utility.Pagination component renders correctly when compact styl
 </nav>
 `;
 
-exports[`Global.Utility.Pagination component renders null without pagination props 1`] = `null`;
+exports[`global/components/utility/Pagination when there are no pagination props renders to null 1`] = `""`;

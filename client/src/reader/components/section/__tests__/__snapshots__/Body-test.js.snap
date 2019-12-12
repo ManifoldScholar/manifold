@@ -1,9 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reader.Section.Body component renders correctly 1`] = `
-<section
-  className="chapter"
-  id="RO"
-  type="titlepage"
+exports[`reader/components/section/Body matches the snapshot 1`] = `
+<ValidatedNode
+  attributes={
+    Object {
+      "class": "chapter",
+      "id": "RO",
+      "type": "titlepage",
+    }
+  }
+  nodeType="element"
+  openAnnotations={Object {}}
+  scrollAnnotation={null}
+  scrollKey={null}
+  scrollNode={false}
+  scrollToView={false}
+  tag="section"
 />
 `;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.ResourceList.Slide.LoadingCaption component renders correctly 1`] = `
+exports[`frontend/components/resource-slide/LoadingCaption matches the snapshot 1`] = `
 <div
   className="slide-caption"
 >

@@ -1,19 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.Event.AllLink Component renders correctly 1`] = `
+exports[`frontend/components/event/AllLink matches the snapshot 1`] = `
 <div
   className=""
 >
-  <a
+  <Link
     className="button-primary"
-    href="/projects/slug-1/events"
-    onClick={[Function]}
+    to="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/events"
   >
     <span
       className="button-primary__text"
     >
       See all Activity
     </span>
-  </a>
+  </Link>
 </div>
 `;

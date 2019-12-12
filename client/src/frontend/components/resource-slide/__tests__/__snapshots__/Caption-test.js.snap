@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
+exports[`frontend/components/resource-slide/Caption matches the snapshot 1`] = `
 <div
   className="resource-slideshow__caption"
 >
@@ -22,6 +22,29 @@ exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
       Image
     </span>
   </header>
+  <Collapse
+    checkTimeout={50}
+    isOpened={true}
+    onRest={[Function]}
+    theme={
+      Object {
+        "collapse": "ReactCollapse--collapse",
+        "content": "ReactCollapse--content",
+      }
+    }
+  >
+    <div
+      className="resource-slideshow__description"
+    >
+      <div
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "World's Greatest Dog",
+          }
+        }
+      />
+    </div>
+  </Collapse>
   <div
     className="resource-slideshow__utility resource-slideshow__utility--with-shadow"
   >
@@ -52,28 +75,24 @@ exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
         <span>
           Download
         </span>
-        <svg
-          aria-hidden={true}
-          className="manicon-svg resource-slideshow__download-icon svg-icon--arrowDown16"
+        <IconComposer
           fill="currentColor"
-          height={16}
-          viewBox="0 0 16 16"
-          width={16}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
-            transform="rotate(90 8 8)"
-          />
-        </svg>
+          icon="arrowDown16"
+          iconClass="resource-slideshow__download-icon"
+          size="default"
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
       </a>
-      <a
+      <Link
         className="resource-slideshow__detail-link"
-        href="/projects/delegated-project-slug/resource/slug-1"
-        onClick={[Function]}
+        to="/projects/delegated-project-slug/resource/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
       >
         View Resource
-      </a>
+      </Link>
     </div>
   </div>
 </div>

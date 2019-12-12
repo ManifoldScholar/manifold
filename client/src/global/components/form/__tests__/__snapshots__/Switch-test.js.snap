@@ -1,32 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Form.Switch component renders correctly 1`] = `
-<div
-  className="form-input"
->
-  <label
-    className="form-switch"
-    htmlFor="switch-input-1"
-  >
-    <span
-      className="form-input-heading toggle above"
-    >
-      Label this
-    </span>
-    <input
-      checked={false}
-      id="switch-input-1"
-      onChange={[Function]}
-      type="checkbox"
-    />
-    <span
-      className="toggle-indicator"
-    >
-      <span
-        aria-hidden="true"
-        className="boolean-primary"
-      />
-    </span>
-  </label>
-</div>
+exports[`global/components/form/Switch matches the snapshot 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
 `;

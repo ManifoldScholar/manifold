@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`backend/components/category/List/Texts matches the snapshot 1`] = `
+<Connect(Droppable)
+  droppableId="uncategorized"
+  type="text"
+>
+  <Component />
+</Connect(Droppable)>
+`;

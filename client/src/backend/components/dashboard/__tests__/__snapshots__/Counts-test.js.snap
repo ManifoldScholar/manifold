@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`backend/components/dashboard/Counts matches the snapshot 1`] = `
+<div
+  class="backend-activity-stats"
+>
+  <ul
+    class="backend-activity-stats__list"
+  >
+    <li
+      class="backend-activity-stats__list-item"
+    >
+      <span
+        class="backend-activity-stats__list-text"
+      >
+        Projects
+      </span>
+      <span
+        class="backend-activity-stats__list-text--highlighted"
+      />
+    </li>
+    <li
+      class="backend-activity-stats__list-item"
+    >
+      <span
+        class="backend-activity-stats__list-text"
+      >
+        Texts
+      </span>
+      <span
+        class="backend-activity-stats__list-text--highlighted"
+      />
+    </li>
+    <li
+      class="backend-activity-stats__list-item"
+    >
+      <span
+        class="backend-activity-stats__list-text"
+      >
+        Annotations
+      </span>
+      <span
+        class="backend-activity-stats__list-text--highlighted"
+      />
+    </li>
+    <li
+      class="backend-activity-stats__list-item"
+    >
+      <span
+        class="backend-activity-stats__list-text"
+      >
+        Comments
+      </span>
+      <span
+        class="backend-activity-stats__list-text--highlighted"
+      />
+    </li>
+    <li
+      class="backend-activity-stats__list-item"
+    >
+      <span
+        class="backend-activity-stats__list-text"
+      >
+        Resources
+      </span>
+      <span
+        class="backend-activity-stats__list-text--highlighted"
+      />
+    </li>
+    <li
+      class="backend-activity-stats__list-item"
+    >
+      <span
+        class="backend-activity-stats__list-text"
+      >
+        Users
+      </span>
+      <span
+        class="backend-activity-stats__list-text--highlighted"
+      />
+    </li>
+  </ul>
+</div>
+`;

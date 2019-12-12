@@ -1,58 +1,151 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.Resource.Preview component renders correctly 1`] = `
+exports[`frontend/components/resource-preview/Preview matches the snapshot 1`] = `
 <div
   className="resource-link-wrapper"
 >
-  <div
-    className="overlay-full bg-neutral90"
-  >
-    <focus-trap-react
-      focusTrapOptions={
-        Object {
-          "escapeDeactivates": false,
-        }
+  <Component
+    classNames="overlay-full"
+    in={false}
+    timeout={
+      Object {
+        "enter": 300,
+        "exit": 300,
       }
+    }
+    unmountOnExit={true}
+  >
+    <Overlay
+      appearance="overlay-full bg-neutral90"
+      closeCallback={[Function]}
     >
-      <button
-        className="overlay-close"
-        data-id="overlay-close"
-        onClick={[Function]}
-      >
-        Close
-        <svg
-          aria-hidden={true}
-          className="manicon-svg overlay-close__icon svg-icon--close32"
-          fill="currentColor"
-          height={37.334}
-          viewBox="0 0 32 32"
-          width={37.334}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M7.00007316,7.70847994 L7.70712678,7.00132 L24.9999268,24.2915201 L24.2928732,24.99868 L7.00007316,7.70847994 Z M7.70712678,24.99868 L7.00007316,24.2915201 L24.2928732,7.00132 L24.9999268,7.70847994 L7.70712678,24.99868 Z"
-          />
-        </svg>
-      </button>
-      <div
-        className="container"
-        style={
+      <Resource.Preview.Image
+        resource={
           Object {
-            "maxWidth": undefined,
+            "attributes": Object {
+              "abilities": Object {
+                "create": true,
+                "createPermissions": true,
+                "createResourceCollections": true,
+                "createResources": true,
+                "createTexts": true,
+                "createTwitterQueries": true,
+                "delete": true,
+                "manageEvents": true,
+                "managePermissions": true,
+                "manageResourceCollections": true,
+                "manageResources": true,
+                "manageSocials": true,
+                "manageTexts": true,
+                "manageTwitterQueries": true,
+                "read": true,
+                "readDeleted": true,
+                "readDrafts": true,
+                "readLog": true,
+                "readSecrets": true,
+                "update": true,
+                "updateMakers": true,
+              },
+              "attachmentStyles": Object {
+                "medium": null,
+                "mediumSquare": "original-image.mock",
+                "original": "original-image.mock",
+              },
+              "captionFormatted": "World's Greatest Dog",
+              "createdAt": "2017-04-24T23:25:50.161Z",
+              "descriptionFormatted": "Black and white freckles",
+              "downloadable": true,
+              "kind": "image",
+              "metadata": Object {
+                "abstract": "some-value",
+                "archive": "some-value",
+                "archiveLocation": "some-value",
+                "archivePlace": "some-value",
+                "authority": "some-value",
+                "callNumber": "some-value",
+                "chapterNumber": "some-value",
+                "collectionNumber": "some-value",
+                "collectionTitle": "some-value",
+                "containerTitle": "some-value",
+                "dimensions": "some-value",
+                "edition": "some-value",
+                "event": "some-value",
+                "eventPlace": "some-value",
+                "isbn": "some-value",
+                "issn": "some-value",
+                "issue": "some-value",
+                "jurisdiction": "some-value",
+                "medium": "some-value",
+                "number": "some-value",
+                "numberOfPages": "some-value",
+                "numberOfVolumes": "some-value",
+                "originalPublisher": "some-value",
+                "originalPublisherPlace": "some-value",
+                "originalTitle": "some-value",
+                "pmcid": "some-value",
+                "pmid": "some-value",
+                "publisher": "some-value",
+                "publisherPlace": "some-value",
+                "reviewedTitle": "some-value",
+                "section": "some-value",
+                "version": "some-value",
+                "volume": "some-value",
+                "yearSuffix": "some-value",
+              },
+              "metadataFormatted": Object {
+                "abstract": "some-value",
+                "archive": "some-value",
+                "archiveLocation": "some-value",
+                "archivePlace": "some-value",
+                "authority": "some-value",
+                "callNumber": "some-value",
+                "chapterNumber": "some-value",
+                "collectionNumber": "some-value",
+                "collectionTitle": "some-value",
+                "containerTitle": "some-value",
+                "dimensions": "some-value",
+                "edition": "some-value",
+                "event": "some-value",
+                "eventPlace": "some-value",
+                "isbn": "some-value",
+                "issn": "some-value",
+                "issue": "some-value",
+                "jurisdiction": "some-value",
+                "medium": "some-value",
+                "number": "some-value",
+                "numberOfPages": "some-value",
+                "numberOfVolumes": "some-value",
+                "originalPublisher": "some-value",
+                "originalPublisherPlace": "some-value",
+                "originalTitle": "some-value",
+                "pmcid": "some-value",
+                "pmid": "some-value",
+                "publisher": "some-value",
+                "publisherPlace": "some-value",
+                "reviewedTitle": "some-value",
+                "section": "some-value",
+                "version": "some-value",
+                "volume": "some-value",
+                "yearSuffix": "some-value",
+              },
+              "projectSlug": "delegated-project-slug",
+              "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+              "tagList": Array [
+                "dog",
+                "puppy",
+                "GOAT",
+              ],
+              "title": "Image",
+              "titleFormatted": "Image",
+            },
+            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+            "relationships": Object {},
+            "type": "resources",
           }
         }
-      >
-        <div
-          className="resource-preview resource-preview-image"
-        >
-          <img
-            alt="Image"
-            src="original-image.mock"
-          />
-        </div>
-      </div>
-    </focus-trap-react>
-  </div>
+      />
+    </Overlay>
+  </Component>
   <div
     className="resource-preview-wrapper"
     onClick={[Function]}

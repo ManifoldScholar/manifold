@@ -1,174 +1,1373 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
-<div>
-  <form
-    className="form-secondary"
-    data-id="submit"
-    onSubmit={[Function]}
-  >
-    <div>
-      <header
-        className="form-header"
-      >
-        <h2>
-          Upload
-        </h2>
-      </header>
-      <div
-        className="form-input"
-      >
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="upload-1"
-          >
-            Upload a file
-          </label>
-          <react-dropzone
-            accept={null}
-            className="form-dropzone style-landscape"
-            inputProps={
-              Object {
-                "aria-describedby": "upload-error-1 upload-instructions-1",
-                "id": "upload-1",
-              }
-            }
-            multiple={false}
-            onDrop={[Function]}
-            style={
-              Object {
-                "width": "100%",
-              }
-            }
-          >
-            <div
-              className="contents-empty"
-            >
-              <svg
-                aria-hidden={true}
-                className="manicon-svg contents-empty__icon svg-icon--upload64"
-                height={82}
-                viewBox="0 0 64 64"
-                width={82}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g
-                  fill="none"
-                  fillRule="evenodd"
-                >
-                  <path
-                    d="M32.9988,29.9144136 L32.9988,42.0002 L30.9988,42.0002 L30.9988,29.9144136 L25.7059068,35.2073068 L24.2916932,33.7930932 L31.9988,26.0859864 L39.7059068,33.7930932 L38.2916932,35.2073068 L32.9988,29.9144136 Z M50.1861877,22.5986557 C56.4497399,23.0677704 61.5405685,28.1667806 61.9686336,34.4041458 C62.4434658,41.2940362 57.365095,47.2462232 50.5614005,47.9604353 L50.4578781,47.9658996 L11.6699429,47.9977815 C8.53033255,47.7930939 5.62013166,45.6673177 3.63424187,42.4514574 C-0.606099659,35.5873073 3.82653587,26.5383733 11.8099093,26.1212576 C14.0599364,26.0038929 16.2272667,26.566062 18.0852466,27.6896237 C18.5412167,20.3542541 24.6631146,14.5469 32.145,14.5469 C37.9174389,14.5469 43.0124004,18.037155 45.1604639,23.2141812 C46.7581064,22.6838525 48.4567018,22.4699946 50.1861877,22.5986557 Z M44.9652102,25.4242014 C44.4268603,25.6530481 43.8078886,25.3729597 43.6244437,24.8174965 C42.0077096,19.9220973 37.4048058,16.5469 32.145,16.5469 C25.4688521,16.5469 20.058,21.9306221 20.058,28.5689 C20.058,28.8683971 20.0747493,29.1712969 20.1115458,29.6128545 C20.1868189,30.5161318 19.1178416,31.0455547 18.4449777,30.438241 C16.6714657,28.837504 14.3554563,27.9911971 11.9141769,28.1185379 C5.4789839,28.4547641 1.87879742,35.8043081 5.33584257,41.4004793 C7.00940449,44.1105699 9.38308844,45.8444436 11.7341219,45.9999004 L50.403086,45.965947 C56.1172051,45.3394064 60.3725258,40.33352 59.9733467,34.5413681 C59.6134776,29.2976912 55.3109878,24.9882098 50.0375627,24.5931257 C48.2705385,24.4617114 46.5473971,24.7516308 44.9652102,25.4242014 Z"
-                    fill="currentColor"
-                    fillRule="nonzero"
-                  />
-                </g>
-              </svg>
-              <div
-                className="message"
-              >
-                <p
-                  className="primary"
-                >
-                  <button
-                    className="form-dropzone__inline-button"
-                    tabIndex="-1"
-                    type="button"
-                  >
-                    Upload a file
-                  </button>
-                   or 
-                  <br />
-                  drag and drop here
-                  <br />
-                </p>
-              </div>
-            </div>
-          </react-dropzone>
-          <span
-            className="instructions"
-          >
-            Manifold can ingest texts from single files or a .zip collection.
-            <br />
-            See the
-             
-            <a
-              href="https://manifoldapp.org/docs/projects/preparing"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              documentation
-            </a>
-             
-            for supported file types and directory structure.
-          </span>
-        </div>
-      </div>
-      <div
-        className="form-divider"
-      >
-        or
-      </div>
-      <div
-        className="form-input"
-        style={Object {}}
-      >
-        <label
-          className="has-instructions"
-          htmlFor="text-input-1"
-        >
-          URL
-        </label>
-        <input
-          aria-describedby="text-input-error-1 text-input-instructions-1"
-          id="text-input-1"
-          onChange={[Function]}
-          type="text"
-          value=""
-        />
-        <span
-          className="instructions"
-          id="text-input-instructions-1"
-        >
-          Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file.
-        </span>
-      </div>
-      <div
-        className="buttons-icon-horizontal"
-        style={
+exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mounting 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "key": "test-key",
+        "pathname": "/",
+      },
+    ]
+  }
+>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "canGo": [Function],
+        "createHref": [Function],
+        "entries": Array [
           Object {
-            "marginTop": 30,
+            "hash": "",
+            "key": "test-key",
+            "pathname": "/",
+            "search": "",
+          },
+        ],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "index": 0,
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "key": "test-key",
+          "pathname": "/",
+          "search": "",
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <HelmetProvider
+      context={
+        Object {
+          "helmet": Object {
+            "base": Object {
+              "toComponent": [Function],
+              "toString": [Function],
+            },
+            "bodyAttributes": Object {
+              "toComponent": [Function],
+              "toString": [Function],
+            },
+            "htmlAttributes": Object {
+              "toComponent": [Function],
+              "toString": [Function],
+            },
+            "link": Object {
+              "toComponent": [Function],
+              "toString": [Function],
+            },
+            "meta": Object {
+              "toComponent": [Function],
+              "toString": [Function],
+            },
+            "noscript": Object {
+              "toComponent": [Function],
+              "toString": [Function],
+            },
+            "script": Object {
+              "toComponent": [Function],
+              "toString": [Function],
+            },
+            "style": Object {
+              "toComponent": [Function],
+              "toString": [Function],
+            },
+            "title": Object {
+              "toComponent": [Function],
+              "toString": [Function],
+            },
+          },
+        }
+      }
+    >
+      <Provider
+        store={
+          Object {
+            "dispatch": [Function],
+            "getState": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+            Symbol(observable): [Function],
           }
         }
       >
-        <button
-          className="buttons-icon-horizontal__button button-icon-secondary button-icon-secondary--in-drawer"
-          disabled={true}
-          type="submit"
+        <ProjectDetail.Text.Ingestion.Form.Wrapper
+          getModelValue={[MockFunction]}
+          history={
+            Object {
+              "push": [MockFunction],
+              "replace": [MockFunction],
+            }
+          }
+          ingestion={Object {}}
+          location={Object {}}
+          name="attributes[something]"
+          project={
+            Object {
+              "attributes": Object {
+                "abilities": Object {
+                  "create": true,
+                  "createPermissions": true,
+                  "createResourceCollections": true,
+                  "createResources": true,
+                  "createTexts": true,
+                  "createTwitterQueries": true,
+                  "delete": true,
+                  "manageEvents": true,
+                  "managePermissions": true,
+                  "manageResourceCollections": true,
+                  "manageResources": true,
+                  "manageSocials": true,
+                  "manageTexts": true,
+                  "manageTwitterQueries": true,
+                  "read": true,
+                  "readDeleted": true,
+                  "readDrafts": true,
+                  "readLog": true,
+                  "readSecrets": true,
+                  "update": true,
+                  "updateMakers": true,
+                },
+                "avatarColor": "primary",
+                "avatarMeta": Object {},
+                "avatarStyles": Object {},
+                "coverStyles": Object {},
+                "darkMode": false,
+                "description": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
+                "descriptionFormatted": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
+                "downloadCallToAction": "Download the greatest dog",
+                "hashtag": "cute_dog",
+                "heroStyles": Object {},
+                "hideActivity": false,
+                "imageCreditsFormatted": "<p>Rowan, <em>The Dog</em></p>",
+                "metadata": Object {
+                  "abstract": "some-value",
+                  "archive": "some-value",
+                  "archiveLocation": "some-value",
+                  "archivePlace": "some-value",
+                  "authority": "some-value",
+                  "callNumber": "some-value",
+                  "chapterNumber": "some-value",
+                  "collectionNumber": "some-value",
+                  "collectionTitle": "some-value",
+                  "containerTitle": "some-value",
+                  "dimensions": "some-value",
+                  "edition": "some-value",
+                  "event": "some-value",
+                  "eventPlace": "some-value",
+                  "isbn": "some-value",
+                  "issn": "some-value",
+                  "issue": "some-value",
+                  "jurisdiction": "some-value",
+                  "medium": "some-value",
+                  "number": "some-value",
+                  "numberOfPages": "some-value",
+                  "numberOfVolumes": "some-value",
+                  "originalPublisher": "some-value",
+                  "originalPublisherPlace": "some-value",
+                  "originalTitle": "some-value",
+                  "pmcid": "some-value",
+                  "pmid": "some-value",
+                  "publisher": "some-value",
+                  "publisherPlace": "some-value",
+                  "reviewedTitle": "some-value",
+                  "section": "some-value",
+                  "version": "some-value",
+                  "volume": "some-value",
+                  "yearSuffix": "some-value",
+                },
+                "metadataFormatted": Object {
+                  "abstract": "some-value",
+                  "archive": "some-value",
+                  "archiveLocation": "some-value",
+                  "archivePlace": "some-value",
+                  "authority": "some-value",
+                  "callNumber": "some-value",
+                  "chapterNumber": "some-value",
+                  "collectionNumber": "some-value",
+                  "collectionTitle": "some-value",
+                  "containerTitle": "some-value",
+                  "dimensions": "some-value",
+                  "edition": "some-value",
+                  "event": "some-value",
+                  "eventPlace": "some-value",
+                  "isbn": "some-value",
+                  "issn": "some-value",
+                  "issue": "some-value",
+                  "jurisdiction": "some-value",
+                  "medium": "some-value",
+                  "number": "some-value",
+                  "numberOfPages": "some-value",
+                  "numberOfVolumes": "some-value",
+                  "originalPublisher": "some-value",
+                  "originalPublisherPlace": "some-value",
+                  "originalTitle": "some-value",
+                  "pmcid": "some-value",
+                  "pmid": "some-value",
+                  "publisher": "some-value",
+                  "publisherPlace": "some-value",
+                  "reviewedTitle": "some-value",
+                  "section": "some-value",
+                  "version": "some-value",
+                  "volume": "some-value",
+                  "yearSuffix": "some-value",
+                },
+                "metadataProperties": Array [
+                  "abstract",
+                  "archive",
+                  "archiveLocation",
+                  "archivePlace",
+                  "authority",
+                  "callNumber",
+                  "collectionTitle",
+                  "containerTitle",
+                  "dimensions",
+                  "event",
+                  "eventPlace",
+                  "isbn",
+                  "issn",
+                  "jurisdiction",
+                  "medium",
+                  "originalPublisher",
+                  "originalPublisherPlace",
+                  "originalTitle",
+                  "pmcid",
+                  "pmid",
+                  "publisher",
+                  "publisherPlace",
+                  "reviewedTitle",
+                  "section",
+                  "version",
+                  "yearSuffix",
+                  "chapterNumber",
+                  "collectionNumber",
+                  "edition",
+                  "issue",
+                  "number",
+                  "numberOfPages",
+                  "numberOfVolumes",
+                  "volume",
+                ],
+                "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                "subtitle": "World's Greatest Dog",
+                "title": "Rowan Test",
+                "titleFormatted": "Rowan Test",
+                "titlePlaintext": "Rowan Test",
+              },
+              "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+              "relationships": Object {
+                "actionCallouts": Array [
+                  Object {
+                    "attributes": Object {
+                      "button": true,
+                      "externalLink": true,
+                      "kind": "link",
+                      "location": "left",
+                      "position": 1,
+                      "title": "Start Reading",
+                      "url": "https://github.com/ManifoldScholar/manifold",
+                    },
+                    "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                    "relationships": Object {
+                      "project": null,
+                    },
+                    "type": "actionCallouts",
+                  },
+                ],
+                "makers": Array [
+                  Object {
+                    "attributes": Object {
+                      "avatarStyles": Object {},
+                      "firstName": "John",
+                      "fullName": "John Milton",
+                      "lastName": "Milton",
+                    },
+                    "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                    "relationships": Object {},
+                    "type": "maker",
+                  },
+                ],
+                "resources": Array [
+                  Object {
+                    "attributes": Object {
+                      "abilities": Object {
+                        "create": true,
+                        "createPermissions": true,
+                        "createResourceCollections": true,
+                        "createResources": true,
+                        "createTexts": true,
+                        "createTwitterQueries": true,
+                        "delete": true,
+                        "manageEvents": true,
+                        "managePermissions": true,
+                        "manageResourceCollections": true,
+                        "manageResources": true,
+                        "manageSocials": true,
+                        "manageTexts": true,
+                        "manageTwitterQueries": true,
+                        "read": true,
+                        "readDeleted": true,
+                        "readDrafts": true,
+                        "readLog": true,
+                        "readSecrets": true,
+                        "update": true,
+                        "updateMakers": true,
+                      },
+                      "attachmentStyles": Object {
+                        "medium": null,
+                        "mediumSquare": "original-image.mock",
+                        "original": "original-image.mock",
+                      },
+                      "captionFormatted": "World's Greatest Dog",
+                      "createdAt": "2017-04-24T23:25:50.161Z",
+                      "descriptionFormatted": "Black and white freckles",
+                      "downloadable": true,
+                      "kind": "image",
+                      "metadata": Object {
+                        "abstract": "some-value",
+                        "archive": "some-value",
+                        "archiveLocation": "some-value",
+                        "archivePlace": "some-value",
+                        "authority": "some-value",
+                        "callNumber": "some-value",
+                        "chapterNumber": "some-value",
+                        "collectionNumber": "some-value",
+                        "collectionTitle": "some-value",
+                        "containerTitle": "some-value",
+                        "dimensions": "some-value",
+                        "edition": "some-value",
+                        "event": "some-value",
+                        "eventPlace": "some-value",
+                        "isbn": "some-value",
+                        "issn": "some-value",
+                        "issue": "some-value",
+                        "jurisdiction": "some-value",
+                        "medium": "some-value",
+                        "number": "some-value",
+                        "numberOfPages": "some-value",
+                        "numberOfVolumes": "some-value",
+                        "originalPublisher": "some-value",
+                        "originalPublisherPlace": "some-value",
+                        "originalTitle": "some-value",
+                        "pmcid": "some-value",
+                        "pmid": "some-value",
+                        "publisher": "some-value",
+                        "publisherPlace": "some-value",
+                        "reviewedTitle": "some-value",
+                        "section": "some-value",
+                        "version": "some-value",
+                        "volume": "some-value",
+                        "yearSuffix": "some-value",
+                      },
+                      "metadataFormatted": Object {
+                        "abstract": "some-value",
+                        "archive": "some-value",
+                        "archiveLocation": "some-value",
+                        "archivePlace": "some-value",
+                        "authority": "some-value",
+                        "callNumber": "some-value",
+                        "chapterNumber": "some-value",
+                        "collectionNumber": "some-value",
+                        "collectionTitle": "some-value",
+                        "containerTitle": "some-value",
+                        "dimensions": "some-value",
+                        "edition": "some-value",
+                        "event": "some-value",
+                        "eventPlace": "some-value",
+                        "isbn": "some-value",
+                        "issn": "some-value",
+                        "issue": "some-value",
+                        "jurisdiction": "some-value",
+                        "medium": "some-value",
+                        "number": "some-value",
+                        "numberOfPages": "some-value",
+                        "numberOfVolumes": "some-value",
+                        "originalPublisher": "some-value",
+                        "originalPublisherPlace": "some-value",
+                        "originalTitle": "some-value",
+                        "pmcid": "some-value",
+                        "pmid": "some-value",
+                        "publisher": "some-value",
+                        "publisherPlace": "some-value",
+                        "reviewedTitle": "some-value",
+                        "section": "some-value",
+                        "version": "some-value",
+                        "volume": "some-value",
+                        "yearSuffix": "some-value",
+                      },
+                      "projectSlug": "delegated-project-slug",
+                      "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                      "tagList": Array [
+                        "dog",
+                        "puppy",
+                        "GOAT",
+                      ],
+                      "title": "Image",
+                      "titleFormatted": "Image",
+                    },
+                    "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                    "relationships": Object {
+                      "collectionResources": Array [],
+                    },
+                    "type": "resources",
+                  },
+                ],
+                "texts": Array [
+                  Object {
+                    "attributes": Object {
+                      "abilities": Object {
+                        "create": true,
+                        "createPermissions": true,
+                        "createResourceCollections": true,
+                        "createResources": true,
+                        "createTexts": true,
+                        "createTwitterQueries": true,
+                        "delete": true,
+                        "manageEvents": true,
+                        "managePermissions": true,
+                        "manageResourceCollections": true,
+                        "manageResources": true,
+                        "manageSocials": true,
+                        "manageTexts": true,
+                        "manageTwitterQueries": true,
+                        "read": true,
+                        "readDeleted": true,
+                        "readDrafts": true,
+                        "readLog": true,
+                        "readSecrets": true,
+                        "update": true,
+                        "updateMakers": true,
+                      },
+                      "coverStyles": Object {},
+                      "createdAt": "2017-04-24T23:25:50.161Z",
+                      "creatorNames": "Andre3000, Big Boi",
+                      "metadata": Object {
+                        "abstract": "some-value",
+                        "archive": "some-value",
+                        "archiveLocation": "some-value",
+                        "archivePlace": "some-value",
+                        "authority": "some-value",
+                        "callNumber": "some-value",
+                        "chapterNumber": "some-value",
+                        "collectionNumber": "some-value",
+                        "collectionTitle": "some-value",
+                        "containerTitle": "some-value",
+                        "dimensions": "some-value",
+                        "edition": "some-value",
+                        "event": "some-value",
+                        "eventPlace": "some-value",
+                        "isbn": "some-value",
+                        "issn": "some-value",
+                        "issue": "some-value",
+                        "jurisdiction": "some-value",
+                        "medium": "some-value",
+                        "number": "some-value",
+                        "numberOfPages": "some-value",
+                        "numberOfVolumes": "some-value",
+                        "originalPublisher": "some-value",
+                        "originalPublisherPlace": "some-value",
+                        "originalTitle": "some-value",
+                        "pmcid": "some-value",
+                        "pmid": "some-value",
+                        "publisher": "some-value",
+                        "publisherPlace": "some-value",
+                        "reviewedTitle": "some-value",
+                        "section": "some-value",
+                        "version": "some-value",
+                        "volume": "some-value",
+                        "yearSuffix": "some-value",
+                      },
+                      "metadataFormatted": Object {
+                        "abstract": "some-value",
+                        "archive": "some-value",
+                        "archiveLocation": "some-value",
+                        "archivePlace": "some-value",
+                        "authority": "some-value",
+                        "callNumber": "some-value",
+                        "chapterNumber": "some-value",
+                        "collectionNumber": "some-value",
+                        "collectionTitle": "some-value",
+                        "containerTitle": "some-value",
+                        "dimensions": "some-value",
+                        "edition": "some-value",
+                        "event": "some-value",
+                        "eventPlace": "some-value",
+                        "isbn": "some-value",
+                        "issn": "some-value",
+                        "issue": "some-value",
+                        "jurisdiction": "some-value",
+                        "medium": "some-value",
+                        "number": "some-value",
+                        "numberOfPages": "some-value",
+                        "numberOfVolumes": "some-value",
+                        "originalPublisher": "some-value",
+                        "originalPublisherPlace": "some-value",
+                        "originalTitle": "some-value",
+                        "pmcid": "some-value",
+                        "pmid": "some-value",
+                        "publisher": "some-value",
+                        "publisherPlace": "some-value",
+                        "reviewedTitle": "some-value",
+                        "section": "some-value",
+                        "version": "some-value",
+                        "volume": "some-value",
+                        "yearSuffix": "some-value",
+                      },
+                      "metadataProperties": Array [
+                        "abstract",
+                        "archive",
+                        "archiveLocation",
+                        "archivePlace",
+                        "authority",
+                        "callNumber",
+                        "collectionTitle",
+                        "containerTitle",
+                        "dimensions",
+                        "event",
+                        "eventPlace",
+                        "isbn",
+                        "issn",
+                        "jurisdiction",
+                        "medium",
+                        "originalPublisher",
+                        "originalPublisherPlace",
+                        "originalTitle",
+                        "pmcid",
+                        "pmid",
+                        "publisher",
+                        "publisherPlace",
+                        "reviewedTitle",
+                        "section",
+                        "version",
+                        "yearSuffix",
+                        "chapterNumber",
+                        "collectionNumber",
+                        "edition",
+                        "issue",
+                        "number",
+                        "numberOfPages",
+                        "numberOfVolumes",
+                        "volume",
+                      ],
+                      "publicationDate": "2001-12-04",
+                      "published": true,
+                      "rights": "All Rights Reserved",
+                      "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                      "title": "Ain't No Thang",
+                      "titleFormatted": "Ain't No Thang",
+                      "titlePlaintext": "Ain't No Thang",
+                      "toc": Array [
+                        "Chapter 1",
+                        "Chapter 2",
+                      ],
+                    },
+                    "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                    "relationships": Object {
+                      "category": "category",
+                      "project": "project",
+                      "stylesheets": Array [
+                        "stylesheet",
+                      ],
+                    },
+                    "type": "texts",
+                  },
+                ],
+              },
+              "type": "projects",
+            }
+          }
         >
-          <svg
-            aria-hidden={true}
-            className="manicon-svg button-icon-secondary__icon svg-icon--checkmark16"
-            height={16}
-            viewBox="0 0 16 16"
-            width={16}
-            xmlns="http://www.w3.org/2000/svg"
+          <withRouter(Connect(HigherOrder.FetchData('Form.Form)))
+            className="form-secondary"
+            create={[Function]}
+            doNotWarn={true}
+            groupErrors={true}
+            model={Object {}}
+            name="attributes[something]"
+            update={[Function]}
           >
-            <polygon
-              fill="currentColor"
-              fillRule="nonzero"
-              points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-            />
-          </svg>
-          <span>
-            Continue
-          </span>
-        </button>
-      </div>
-    </div>
-  </form>
-</div>
+            <Connect(HigherOrder.FetchData('Form.Form))
+              className="form-secondary"
+              create={[Function]}
+              doNotWarn={true}
+              groupErrors={true}
+              history={
+                Object {
+                  "action": "POP",
+                  "block": [Function],
+                  "canGo": [Function],
+                  "createHref": [Function],
+                  "entries": Array [
+                    Object {
+                      "hash": "",
+                      "key": "test-key",
+                      "pathname": "/",
+                      "search": "",
+                    },
+                  ],
+                  "go": [Function],
+                  "goBack": [Function],
+                  "goForward": [Function],
+                  "index": 0,
+                  "length": 1,
+                  "listen": [Function],
+                  "location": Object {
+                    "hash": "",
+                    "key": "test-key",
+                    "pathname": "/",
+                    "search": "",
+                  },
+                  "push": [Function],
+                  "replace": [Function],
+                }
+              }
+              location={
+                Object {
+                  "hash": "",
+                  "key": "test-key",
+                  "pathname": "/",
+                  "search": "",
+                }
+              }
+              match={
+                Object {
+                  "isExact": true,
+                  "params": Object {},
+                  "path": "/",
+                  "url": "/",
+                }
+              }
+              model={Object {}}
+              name="attributes[something]"
+              update={[Function]}
+            >
+              <HigherOrder.FetchData('Form.Form)
+                className="form-secondary"
+                create={[Function]}
+                dispatch={[Function]}
+                doNotWarn={true}
+                groupErrors={true}
+                history={
+                  Object {
+                    "action": "POP",
+                    "block": [Function],
+                    "canGo": [Function],
+                    "createHref": [Function],
+                    "entries": Array [
+                      Object {
+                        "hash": "",
+                        "key": "test-key",
+                        "pathname": "/",
+                        "search": "",
+                      },
+                    ],
+                    "go": [Function],
+                    "goBack": [Function],
+                    "goForward": [Function],
+                    "index": 0,
+                    "length": 1,
+                    "listen": [Function],
+                    "location": Object {
+                      "hash": "",
+                      "key": "test-key",
+                      "pathname": "/",
+                      "search": "",
+                    },
+                    "push": [Function],
+                    "replace": [Function],
+                  }
+                }
+                location={
+                  Object {
+                    "hash": "",
+                    "key": "test-key",
+                    "pathname": "/",
+                    "search": "",
+                  }
+                }
+                match={
+                  Object {
+                    "isExact": true,
+                    "params": Object {},
+                    "path": "/",
+                    "url": "/",
+                  }
+                }
+                model={Object {}}
+                name="attributes[something]"
+                session={
+                  Object {
+                    "changed": false,
+                    "dirty": Object {
+                      "attributes": Object {},
+                      "relationships": Object {},
+                    },
+                    "source": Object {},
+                  }
+                }
+                update={[Function]}
+              >
+                <Form.Form
+                  className="form-secondary"
+                  create={[Function]}
+                  debug={false}
+                  dispatch={[Function]}
+                  doNotWarn={true}
+                  fetchData={[Function]}
+                  flushOnUnmount={true}
+                  groupErrors={true}
+                  history={
+                    Object {
+                      "action": "POP",
+                      "block": [Function],
+                      "canGo": [Function],
+                      "createHref": [Function],
+                      "entries": Array [
+                        Object {
+                          "hash": "",
+                          "key": "test-key",
+                          "pathname": "/",
+                          "search": "",
+                        },
+                      ],
+                      "go": [Function],
+                      "goBack": [Function],
+                      "goForward": [Function],
+                      "index": 0,
+                      "length": 1,
+                      "listen": [Function],
+                      "location": Object {
+                        "hash": "",
+                        "key": "test-key",
+                        "pathname": "/",
+                        "search": "",
+                      },
+                      "push": [Function],
+                      "replace": [Function],
+                    }
+                  }
+                  location={
+                    Object {
+                      "hash": "",
+                      "key": "test-key",
+                      "pathname": "/",
+                      "search": "",
+                    }
+                  }
+                  match={
+                    Object {
+                      "isExact": true,
+                      "params": Object {},
+                      "path": "/",
+                      "url": "/",
+                    }
+                  }
+                  model={Object {}}
+                  modelName="This model"
+                  name="attributes[something]"
+                  notificationScope="global"
+                  options={Object {}}
+                  session={
+                    Object {
+                      "changed": false,
+                      "dirty": Object {
+                        "attributes": Object {},
+                        "relationships": Object {},
+                      },
+                      "source": Object {},
+                    }
+                  }
+                  update={[Function]}
+                >
+                  <div>
+                    <Prompt
+                      message="You may have unsaved changes. Do you want to leave without saving your changes?"
+                      when={false}
+                    />
+                    <form
+                      className="form-secondary"
+                      data-id="submit"
+                      onSubmit={[Function]}
+                    >
+                      <HigherOrder.FetchData('ProjectDetail.Text.Ingestion.Form.Upload)
+                        history={
+                          Object {
+                            "push": [MockFunction],
+                            "replace": [MockFunction],
+                          }
+                        }
+                        location={Object {}}
+                      >
+                        <Form.Setter('ProjectDetail.Text.Ingestion.Form.Upload)
+                          actions={
+                            Object {
+                              "set": [Function],
+                            }
+                          }
+                          dirtyModel={
+                            Object {
+                              "attributes": Object {},
+                              "relationships": Object {},
+                            }
+                          }
+                          getModelValue={[Function]}
+                          history={
+                            Object {
+                              "push": [MockFunction],
+                              "replace": [MockFunction],
+                            }
+                          }
+                          location={Object {}}
+                          sessionKey="attributes[something]"
+                          sourceModel={Object {}}
+                          submitKey={null}
+                        >
+                          <ProjectDetail.Text.Ingestion.Form.Upload
+                            getModelValue={[Function]}
+                            history={
+                              Object {
+                                "push": [MockFunction],
+                                "replace": [MockFunction],
+                              }
+                            }
+                            location={Object {}}
+                            sessionKey="attributes[something]"
+                            setOther={[Function]}
+                            submitKey={null}
+                          >
+                            <div>
+                              <Form.Header
+                                label="Upload"
+                              >
+                                <header
+                                  className="form-header"
+                                >
+                                  <h2>
+                                    Upload
+                                  </h2>
+                                </header>
+                              </Form.Header>
+                              <HigherOrder.FetchData('Form.TusUpload)
+                                accepts="any"
+                                initialValue={null}
+                                inlineStyle={
+                                  Object {
+                                    "width": "100%",
+                                  }
+                                }
+                                instructions={
+                                  <span
+                                    className="instructions"
+                                  >
+                                    Manifold can ingest texts from single files or a .zip collection.
+                                    <br />
+                                    See the
+                                     
+                                    <a
+                                      href="https://manifoldapp.org/docs/projects/preparing"
+                                      rel="noopener noreferrer"
+                                      target="_blank"
+                                    >
+                                      documentation
+                                    </a>
+                                     
+                                    for supported file types and directory structure.
+                                  </span>
+                                }
+                                label="Upload a file"
+                                layout="landscape"
+                                set={[Function]}
+                                value={null}
+                              >
+                                <Form.Setter('Form.TusUpload)
+                                  accepts="any"
+                                  actions={
+                                    Object {
+                                      "set": [Function],
+                                    }
+                                  }
+                                  dirtyModel={
+                                    Object {
+                                      "attributes": Object {},
+                                      "relationships": Object {},
+                                    }
+                                  }
+                                  getModelValue={[Function]}
+                                  initialValue={null}
+                                  inlineStyle={
+                                    Object {
+                                      "width": "100%",
+                                    }
+                                  }
+                                  instructions={
+                                    <span
+                                      className="instructions"
+                                    >
+                                      Manifold can ingest texts from single files or a .zip collection.
+                                      <br />
+                                      See the
+                                       
+                                      <a
+                                        href="https://manifoldapp.org/docs/projects/preparing"
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                      >
+                                        documentation
+                                      </a>
+                                       
+                                      for supported file types and directory structure.
+                                    </span>
+                                  }
+                                  label="Upload a file"
+                                  layout="landscape"
+                                  sessionKey="attributes[something]"
+                                  set={[Function]}
+                                  sourceModel={Object {}}
+                                  submitKey={null}
+                                  value={null}
+                                >
+                                  <Form.TusUpload
+                                    accepts="any"
+                                    getModelValue={[Function]}
+                                    initialValue={null}
+                                    inlineStyle={
+                                      Object {
+                                        "width": "100%",
+                                      }
+                                    }
+                                    instructions={
+                                      <span
+                                        className="instructions"
+                                      >
+                                        Manifold can ingest texts from single files or a .zip collection.
+                                        <br />
+                                        See the
+                                         
+                                        <a
+                                          href="https://manifoldapp.org/docs/projects/preparing"
+                                          rel="noopener noreferrer"
+                                          target="_blank"
+                                        >
+                                          documentation
+                                        </a>
+                                         
+                                        for supported file types and directory structure.
+                                      </span>
+                                    }
+                                    label="Upload a file"
+                                    layout="landscape"
+                                    sessionKey="attributes[something]"
+                                    set={[Function]}
+                                    setOther={[Function]}
+                                    submitKey={null}
+                                    value={null}
+                                  >
+                                    <mockConstructor>
+                                      <Form.Upload.Base
+                                        accepts={
+                                          Object {
+                                            "accepts": null,
+                                            "extensions": null,
+                                          }
+                                        }
+                                        getModelValue={[Function]}
+                                        idForError="upload-error-1"
+                                        idForInstructions="upload-instructions-1"
+                                        initialValue={null}
+                                        inlineStyle={
+                                          Object {
+                                            "width": "100%",
+                                          }
+                                        }
+                                        inputId="upload-1"
+                                        instructions={
+                                          <span
+                                            className="instructions"
+                                          >
+                                            Manifold can ingest texts from single files or a .zip collection.
+                                            <br />
+                                            See the
+                                             
+                                            <a
+                                              href="https://manifoldapp.org/docs/projects/preparing"
+                                              rel="noopener noreferrer"
+                                              target="_blank"
+                                            >
+                                              documentation
+                                            </a>
+                                             
+                                            for supported file types and directory structure.
+                                          </span>
+                                        }
+                                        label="Upload a file"
+                                        layout="landscape"
+                                        progress={null}
+                                        sessionKey="attributes[something]"
+                                        setOther={[Function]}
+                                        submitKey={null}
+                                        updateValue={[Function]}
+                                        uploadError={null}
+                                        value={null}
+                                        wide={false}
+                                      >
+                                        <div
+                                          className="form-input"
+                                        >
+                                          <Errorable
+                                            className="form-input"
+                                            containerStyle={Object {}}
+                                            idForError="upload-error-1"
+                                            label="Upload a file"
+                                          >
+                                            <div
+                                              className="form-input"
+                                              style={Object {}}
+                                            >
+                                              <label
+                                                className=""
+                                                htmlFor="upload-1"
+                                              >
+                                                Upload a file
+                                              </label>
+                                              <react-dropzone
+                                                accept={null}
+                                                className="form-dropzone style-landscape"
+                                                inputProps={
+                                                  Object {
+                                                    "aria-describedby": "upload-error-1 upload-instructions-1",
+                                                    "id": "upload-1",
+                                                  }
+                                                }
+                                                multiple={false}
+                                                onDrop={[Function]}
+                                                style={
+                                                  Object {
+                                                    "width": "100%",
+                                                  }
+                                                }
+                                              >
+                                                <FormUploadEmpty
+                                                  accepts={
+                                                    Object {
+                                                      "accepts": null,
+                                                      "extensions": null,
+                                                    }
+                                                  }
+                                                  placeholder="cover"
+                                                  progress={null}
+                                                  uploadError={null}
+                                                >
+                                                  <div
+                                                    className="contents-empty"
+                                                  >
+                                                    <IconComposer
+                                                      fill="currentColor"
+                                                      icon="upload64"
+                                                      iconClass="contents-empty__icon"
+                                                      size={82}
+                                                      svgProps={
+                                                        Object {
+                                                          "aria-hidden": true,
+                                                        }
+                                                      }
+                                                    >
+                                                      <Upload
+                                                        fill="currentColor"
+                                                        icon="upload64"
+                                                        iconClass="contents-empty__icon svg-icon--upload64"
+                                                        size={82}
+                                                        stroke="currentColor"
+                                                        svgProps={
+                                                          Object {
+                                                            "aria-hidden": true,
+                                                          }
+                                                        }
+                                                      >
+                                                        <svg
+                                                          aria-hidden={true}
+                                                          className="manicon-svg contents-empty__icon svg-icon--upload64"
+                                                          height={82}
+                                                          viewBox="0 0 64 64"
+                                                          width={82}
+                                                          xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                          <g
+                                                            fill="none"
+                                                            fillRule="evenodd"
+                                                          >
+                                                            <path
+                                                              d="M32.9988,29.9144136 L32.9988,42.0002 L30.9988,42.0002 L30.9988,29.9144136 L25.7059068,35.2073068 L24.2916932,33.7930932 L31.9988,26.0859864 L39.7059068,33.7930932 L38.2916932,35.2073068 L32.9988,29.9144136 Z M50.1861877,22.5986557 C56.4497399,23.0677704 61.5405685,28.1667806 61.9686336,34.4041458 C62.4434658,41.2940362 57.365095,47.2462232 50.5614005,47.9604353 L50.4578781,47.9658996 L11.6699429,47.9977815 C8.53033255,47.7930939 5.62013166,45.6673177 3.63424187,42.4514574 C-0.606099659,35.5873073 3.82653587,26.5383733 11.8099093,26.1212576 C14.0599364,26.0038929 16.2272667,26.566062 18.0852466,27.6896237 C18.5412167,20.3542541 24.6631146,14.5469 32.145,14.5469 C37.9174389,14.5469 43.0124004,18.037155 45.1604639,23.2141812 C46.7581064,22.6838525 48.4567018,22.4699946 50.1861877,22.5986557 Z M44.9652102,25.4242014 C44.4268603,25.6530481 43.8078886,25.3729597 43.6244437,24.8174965 C42.0077096,19.9220973 37.4048058,16.5469 32.145,16.5469 C25.4688521,16.5469 20.058,21.9306221 20.058,28.5689 C20.058,28.8683971 20.0747493,29.1712969 20.1115458,29.6128545 C20.1868189,30.5161318 19.1178416,31.0455547 18.4449777,30.438241 C16.6714657,28.837504 14.3554563,27.9911971 11.9141769,28.1185379 C5.4789839,28.4547641 1.87879742,35.8043081 5.33584257,41.4004793 C7.00940449,44.1105699 9.38308844,45.8444436 11.7341219,45.9999004 L50.403086,45.965947 C56.1172051,45.3394064 60.3725258,40.33352 59.9733467,34.5413681 C59.6134776,29.2976912 55.3109878,24.9882098 50.0375627,24.5931257 C48.2705385,24.4617114 46.5473971,24.7516308 44.9652102,25.4242014 Z"
+                                                              fill="currentColor"
+                                                              fillRule="nonzero"
+                                                            />
+                                                          </g>
+                                                        </svg>
+                                                      </Upload>
+                                                    </IconComposer>
+                                                    <div
+                                                      className="message"
+                                                    >
+                                                      <p
+                                                        className="primary"
+                                                      >
+                                                        <button
+                                                          className="form-dropzone__inline-button"
+                                                          tabIndex="-1"
+                                                          type="button"
+                                                        >
+                                                          Upload a file
+                                                        </button>
+                                                         or 
+                                                        <br />
+                                                        drag and drop here
+                                                        <br />
+                                                      </p>
+                                                    </div>
+                                                  </div>
+                                                </FormUploadEmpty>
+                                              </react-dropzone>
+                                              <Instructions
+                                                id="upload-instructions-1"
+                                                instructions={
+                                                  <span
+                                                    className="instructions"
+                                                  >
+                                                    Manifold can ingest texts from single files or a .zip collection.
+                                                    <br />
+                                                    See the
+                                                     
+                                                    <a
+                                                      href="https://manifoldapp.org/docs/projects/preparing"
+                                                      rel="noopener noreferrer"
+                                                      target="_blank"
+                                                    >
+                                                      documentation
+                                                    </a>
+                                                     
+                                                    for supported file types and directory structure.
+                                                  </span>
+                                                }
+                                              >
+                                                <span
+                                                  className="instructions"
+                                                >
+                                                  Manifold can ingest texts from single files or a .zip collection.
+                                                  <br />
+                                                  See the
+                                                   
+                                                  <a
+                                                    href="https://manifoldapp.org/docs/projects/preparing"
+                                                    rel="noopener noreferrer"
+                                                    target="_blank"
+                                                  >
+                                                    documentation
+                                                  </a>
+                                                   
+                                                  for supported file types and directory structure.
+                                                </span>
+                                              </Instructions>
+                                            </div>
+                                          </Errorable>
+                                        </div>
+                                      </Form.Upload.Base>
+                                    </mockConstructor>
+                                  </Form.TusUpload>
+                                </Form.Setter('Form.TusUpload)>
+                              </HigherOrder.FetchData('Form.TusUpload)>
+                              <div
+                                className="form-divider"
+                              >
+                                or
+                              </div>
+                              <Form.TextInput
+                                focusOnMount={true}
+                                instructions="Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
+                                join={[Function]}
+                                label="URL"
+                                onChange={[Function]}
+                                password={false}
+                                value={null}
+                              >
+                                <mockConstructor>
+                                  <HigherOrder.FetchData('Form.BaseInput)
+                                    focusOnMount={true}
+                                    id="text-input-1"
+                                    idForError="text-input-error-1"
+                                    idForInstructions="text-input-instructions-1"
+                                    inputType="text"
+                                    instructions="Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
+                                    join={[Function]}
+                                    label="URL"
+                                    onChange={[Function]}
+                                    password={false}
+                                    renderValue={[Function]}
+                                    value={null}
+                                  >
+                                    <Form.Setter('Form.BaseInput)
+                                      actions={
+                                        Object {
+                                          "set": [Function],
+                                        }
+                                      }
+                                      dirtyModel={
+                                        Object {
+                                          "attributes": Object {},
+                                          "relationships": Object {},
+                                        }
+                                      }
+                                      focusOnMount={true}
+                                      getModelValue={[Function]}
+                                      id="text-input-1"
+                                      idForError="text-input-error-1"
+                                      idForInstructions="text-input-instructions-1"
+                                      inputType="text"
+                                      instructions="Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
+                                      join={[Function]}
+                                      label="URL"
+                                      onChange={[Function]}
+                                      password={false}
+                                      renderValue={[Function]}
+                                      sessionKey="attributes[something]"
+                                      sourceModel={Object {}}
+                                      submitKey={null}
+                                      value={null}
+                                    >
+                                      <Form.BaseInput
+                                        focusOnMount={true}
+                                        getModelValue={[Function]}
+                                        id="text-input-1"
+                                        idForError="text-input-error-1"
+                                        idForInstructions="text-input-instructions-1"
+                                        inputType="text"
+                                        instructions="Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
+                                        join={[Function]}
+                                        label="URL"
+                                        onChange={[Function]}
+                                        password={false}
+                                        renderValue={[Function]}
+                                        sessionKey="attributes[something]"
+                                        setOther={[Function]}
+                                        submitKey={null}
+                                        value={null}
+                                      >
+                                        <Errorable
+                                          className="form-input"
+                                          containerStyle={Object {}}
+                                          idForError="text-input-error-1"
+                                          label="URL"
+                                        >
+                                          <div
+                                            className="form-input"
+                                            style={Object {}}
+                                          >
+                                            <label
+                                              className="has-instructions"
+                                              htmlFor="text-input-1"
+                                            >
+                                              URL
+                                            </label>
+                                            <input
+                                              aria-describedby="text-input-error-1 text-input-instructions-1"
+                                              id="text-input-1"
+                                              onChange={[Function]}
+                                              type="text"
+                                              value=""
+                                            />
+                                            <Instructions
+                                              id="text-input-instructions-1"
+                                              instructions="Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
+                                            >
+                                              <span
+                                                className="instructions"
+                                                id="text-input-instructions-1"
+                                              >
+                                                Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file.
+                                              </span>
+                                            </Instructions>
+                                          </div>
+                                        </Errorable>
+                                      </Form.BaseInput>
+                                    </Form.Setter('Form.BaseInput)>
+                                  </HigherOrder.FetchData('Form.BaseInput)>
+                                </mockConstructor>
+                              </Form.TextInput>
+                              <div
+                                className="buttons-icon-horizontal"
+                                style={
+                                  Object {
+                                    "marginTop": 30,
+                                  }
+                                }
+                              >
+                                <button
+                                  className="buttons-icon-horizontal__button button-icon-secondary button-icon-secondary--in-drawer"
+                                  disabled={true}
+                                  type="submit"
+                                >
+                                  <IconComposer
+                                    fill="currentColor"
+                                    icon="checkmark16"
+                                    iconClass="button-icon-secondary__icon"
+                                    size="default"
+                                    svgProps={
+                                      Object {
+                                        "aria-hidden": true,
+                                      }
+                                    }
+                                  >
+                                    <Checkmark
+                                      fill="currentColor"
+                                      icon="checkmark16"
+                                      iconClass="button-icon-secondary__icon svg-icon--checkmark16"
+                                      size="default"
+                                      stroke="currentColor"
+                                      svgProps={
+                                        Object {
+                                          "aria-hidden": true,
+                                        }
+                                      }
+                                    >
+                                      <svg
+                                        aria-hidden={true}
+                                        className="manicon-svg button-icon-secondary__icon svg-icon--checkmark16"
+                                        height={16}
+                                        viewBox="0 0 16 16"
+                                        width={16}
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <polygon
+                                          fill="currentColor"
+                                          fillRule="nonzero"
+                                          points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
+                                        />
+                                      </svg>
+                                    </Checkmark>
+                                  </IconComposer>
+                                  <span>
+                                    Continue
+                                  </span>
+                                </button>
+                              </div>
+                            </div>
+                          </ProjectDetail.Text.Ingestion.Form.Upload>
+                        </Form.Setter('ProjectDetail.Text.Ingestion.Form.Upload)>
+                      </HigherOrder.FetchData('ProjectDetail.Text.Ingestion.Form.Upload)>
+                    </form>
+                  </div>
+                </Form.Form>
+              </HigherOrder.FetchData('Form.Form)>
+            </Connect(HigherOrder.FetchData('Form.Form))>
+          </withRouter(Connect(HigherOrder.FetchData('Form.Form)))>
+        </ProjectDetail.Text.Ingestion.Form.Wrapper>
+      </Provider>
+    </HelmetProvider>
+  </Router>
+</MemoryRouter>
 `;

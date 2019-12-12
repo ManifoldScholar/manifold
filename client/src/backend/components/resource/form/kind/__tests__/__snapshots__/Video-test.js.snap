@@ -1,197 +1,546 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
+exports[`backend/components/resource/form/kind/Video matches the snapshot 1`] = `
 <div
   className="form-section form-section--primary"
 >
-  <div
-    className="form-input"
-  >
-    <label
-      className="form-switch"
-      htmlFor="switch-input-1"
-    >
-      <span
-        className="form-input-heading toggle above"
-      >
-        Is this an externally linked video?
-      </span>
-      <input
-        checked={false}
-        id="switch-input-1"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <span
-        className="toggle-indicator"
-      >
-        <span
-          aria-hidden="true"
-          className="boolean-primary"
-        />
-      </span>
-    </label>
-  </div>
-  <div
-    className="form-input"
-  >
-    <div
-      className="form-input"
-      style={Object {}}
-    >
-      <label
-        className=""
-        htmlFor="upload-1"
-      >
-        Video File
-      </label>
-      <react-dropzone
-        accept="video/x-flv,video/*"
-        className="form-dropzone style-square"
-        inputProps={
+  <HigherOrder.FetchData('Form.Switch)
+    customValues={
+      Object {
+        "false": "",
+        "true": "external_video",
+      }
+    }
+    getModelValue={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "attributes[subKind]",
+          ],
+        ],
+        "results": Array [
           Object {
-            "aria-describedby": "upload-error-1 upload-instructions-1",
-            "id": "upload-1",
-          }
+            "type": "return",
+            "value": "kind",
+          },
+        ],
+      }
+    }
+    label="Is this an externally linked video?"
+    name="attributes[subKind]"
+    sourceModel={
+      Object {
+        "attributes": Object {
+          "abilities": Object {
+            "create": true,
+            "createPermissions": true,
+            "createResourceCollections": true,
+            "createResources": true,
+            "createTexts": true,
+            "createTwitterQueries": true,
+            "delete": true,
+            "manageEvents": true,
+            "managePermissions": true,
+            "manageResourceCollections": true,
+            "manageResources": true,
+            "manageSocials": true,
+            "manageTexts": true,
+            "manageTwitterQueries": true,
+            "read": true,
+            "readDeleted": true,
+            "readDrafts": true,
+            "readLog": true,
+            "readSecrets": true,
+            "update": true,
+            "updateMakers": true,
+          },
+          "attachmentStyles": Object {
+            "medium": null,
+            "mediumSquare": "original-image.mock",
+            "original": "original-image.mock",
+          },
+          "captionFormatted": "World's Greatest Dog",
+          "createdAt": "2017-04-24T23:25:50.161Z",
+          "descriptionFormatted": "Black and white freckles",
+          "downloadable": true,
+          "kind": "image",
+          "metadata": Object {
+            "abstract": "some-value",
+            "archive": "some-value",
+            "archiveLocation": "some-value",
+            "archivePlace": "some-value",
+            "authority": "some-value",
+            "callNumber": "some-value",
+            "chapterNumber": "some-value",
+            "collectionNumber": "some-value",
+            "collectionTitle": "some-value",
+            "containerTitle": "some-value",
+            "dimensions": "some-value",
+            "edition": "some-value",
+            "event": "some-value",
+            "eventPlace": "some-value",
+            "isbn": "some-value",
+            "issn": "some-value",
+            "issue": "some-value",
+            "jurisdiction": "some-value",
+            "medium": "some-value",
+            "number": "some-value",
+            "numberOfPages": "some-value",
+            "numberOfVolumes": "some-value",
+            "originalPublisher": "some-value",
+            "originalPublisherPlace": "some-value",
+            "originalTitle": "some-value",
+            "pmcid": "some-value",
+            "pmid": "some-value",
+            "publisher": "some-value",
+            "publisherPlace": "some-value",
+            "reviewedTitle": "some-value",
+            "section": "some-value",
+            "version": "some-value",
+            "volume": "some-value",
+            "yearSuffix": "some-value",
+          },
+          "metadataFormatted": Object {
+            "abstract": "some-value",
+            "archive": "some-value",
+            "archiveLocation": "some-value",
+            "archivePlace": "some-value",
+            "authority": "some-value",
+            "callNumber": "some-value",
+            "chapterNumber": "some-value",
+            "collectionNumber": "some-value",
+            "collectionTitle": "some-value",
+            "containerTitle": "some-value",
+            "dimensions": "some-value",
+            "edition": "some-value",
+            "event": "some-value",
+            "eventPlace": "some-value",
+            "isbn": "some-value",
+            "issn": "some-value",
+            "issue": "some-value",
+            "jurisdiction": "some-value",
+            "medium": "some-value",
+            "number": "some-value",
+            "numberOfPages": "some-value",
+            "numberOfVolumes": "some-value",
+            "originalPublisher": "some-value",
+            "originalPublisherPlace": "some-value",
+            "originalTitle": "some-value",
+            "pmcid": "some-value",
+            "pmid": "some-value",
+            "publisher": "some-value",
+            "publisherPlace": "some-value",
+            "reviewedTitle": "some-value",
+            "section": "some-value",
+            "version": "some-value",
+            "volume": "some-value",
+            "yearSuffix": "some-value",
+          },
+          "projectSlug": "delegated-project-slug",
+          "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+          "tagList": Array [
+            "dog",
+            "puppy",
+            "GOAT",
+          ],
+          "title": "Image",
+          "titleFormatted": "Image",
+        },
+        "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+        "relationships": Object {},
+        "type": "resources",
+      }
+    }
+  />
+  <div
+    className="form-section form-section--primary"
+  >
+    <Form.TextInput
+      focusOnMount={false}
+      getModelValue={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "attributes[subKind]",
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": "kind",
+            },
+          ],
         }
-        multiple={false}
-        onDrop={[Function]}
-      >
-        <div
-          className="contents-empty"
-        >
-          <svg
-            aria-hidden={true}
-            className="manicon-svg contents-empty__icon svg-icon--upload64"
-            height={82}
-            viewBox="0 0 64 64"
-            width={82}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g
-              fill="none"
-              fillRule="evenodd"
-            >
-              <path
-                d="M32.9988,29.9144136 L32.9988,42.0002 L30.9988,42.0002 L30.9988,29.9144136 L25.7059068,35.2073068 L24.2916932,33.7930932 L31.9988,26.0859864 L39.7059068,33.7930932 L38.2916932,35.2073068 L32.9988,29.9144136 Z M50.1861877,22.5986557 C56.4497399,23.0677704 61.5405685,28.1667806 61.9686336,34.4041458 C62.4434658,41.2940362 57.365095,47.2462232 50.5614005,47.9604353 L50.4578781,47.9658996 L11.6699429,47.9977815 C8.53033255,47.7930939 5.62013166,45.6673177 3.63424187,42.4514574 C-0.606099659,35.5873073 3.82653587,26.5383733 11.8099093,26.1212576 C14.0599364,26.0038929 16.2272667,26.566062 18.0852466,27.6896237 C18.5412167,20.3542541 24.6631146,14.5469 32.145,14.5469 C37.9174389,14.5469 43.0124004,18.037155 45.1604639,23.2141812 C46.7581064,22.6838525 48.4567018,22.4699946 50.1861877,22.5986557 Z M44.9652102,25.4242014 C44.4268603,25.6530481 43.8078886,25.3729597 43.6244437,24.8174965 C42.0077096,19.9220973 37.4048058,16.5469 32.145,16.5469 C25.4688521,16.5469 20.058,21.9306221 20.058,28.5689 C20.058,28.8683971 20.0747493,29.1712969 20.1115458,29.6128545 C20.1868189,30.5161318 19.1178416,31.0455547 18.4449777,30.438241 C16.6714657,28.837504 14.3554563,27.9911971 11.9141769,28.1185379 C5.4789839,28.4547641 1.87879742,35.8043081 5.33584257,41.4004793 C7.00940449,44.1105699 9.38308844,45.8444436 11.7341219,45.9999004 L50.403086,45.965947 C56.1172051,45.3394064 60.3725258,40.33352 59.9733467,34.5413681 C59.6134776,29.2976912 55.3109878,24.9882098 50.0375627,24.5931257 C48.2705385,24.4617114 46.5473971,24.7516308 44.9652102,25.4242014 Z"
-                fill="currentColor"
-                fillRule="nonzero"
-              />
-            </g>
-          </svg>
-          <div
-            className="message"
-          >
-            <p
-              className="primary"
-            >
-              <button
-                className="form-dropzone__inline-button"
-                tabIndex="-1"
-                type="button"
-              >
-                Upload a file
-              </button>
-               or 
-              <br />
-              drag and drop here
-              <br />
-            </p>
-            <p
-              className="secondary"
-            >
-              mp4, webm, flv, mov, avi
-            </p>
-          </div>
-        </div>
-      </react-dropzone>
-    </div>
+      }
+      instructions="The video's ID is located after \\"?v=\\" in YouTube URLs, and after \\"vimeo.com/\\" in Vimeo URLs."
+      join={[Function]}
+      label="Video ID"
+      name="attributes[externalId]"
+      password={false}
+      placeholder="Video ID"
+      sourceModel={
+        Object {
+          "attributes": Object {
+            "abilities": Object {
+              "create": true,
+              "createPermissions": true,
+              "createResourceCollections": true,
+              "createResources": true,
+              "createTexts": true,
+              "createTwitterQueries": true,
+              "delete": true,
+              "manageEvents": true,
+              "managePermissions": true,
+              "manageResourceCollections": true,
+              "manageResources": true,
+              "manageSocials": true,
+              "manageTexts": true,
+              "manageTwitterQueries": true,
+              "read": true,
+              "readDeleted": true,
+              "readDrafts": true,
+              "readLog": true,
+              "readSecrets": true,
+              "update": true,
+              "updateMakers": true,
+            },
+            "attachmentStyles": Object {
+              "medium": null,
+              "mediumSquare": "original-image.mock",
+              "original": "original-image.mock",
+            },
+            "captionFormatted": "World's Greatest Dog",
+            "createdAt": "2017-04-24T23:25:50.161Z",
+            "descriptionFormatted": "Black and white freckles",
+            "downloadable": true,
+            "kind": "image",
+            "metadata": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "metadataFormatted": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "projectSlug": "delegated-project-slug",
+            "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+            "tagList": Array [
+              "dog",
+              "puppy",
+              "GOAT",
+            ],
+            "title": "Image",
+            "titleFormatted": "Image",
+          },
+          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+          "relationships": Object {},
+          "type": "resources",
+        }
+      }
+    />
+    <HigherOrder.FetchData('HigherOrder.WithFormOptions('Form.Select))
+      getModelValue={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "attributes[subKind]",
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": "kind",
+            },
+          ],
+        }
+      }
+      label="External Video Type"
+      name="attributes[externalType]"
+      options={
+        Array [
+          Object {
+            "label": "Select a video source...",
+            "value": "",
+          },
+          Object {
+            "label": "Youtube",
+            "value": "youtube",
+          },
+          Object {
+            "label": "Vimeo",
+            "value": "vimeo",
+          },
+        ]
+      }
+      sourceModel={
+        Object {
+          "attributes": Object {
+            "abilities": Object {
+              "create": true,
+              "createPermissions": true,
+              "createResourceCollections": true,
+              "createResources": true,
+              "createTexts": true,
+              "createTwitterQueries": true,
+              "delete": true,
+              "manageEvents": true,
+              "managePermissions": true,
+              "manageResourceCollections": true,
+              "manageResources": true,
+              "manageSocials": true,
+              "manageTexts": true,
+              "manageTwitterQueries": true,
+              "read": true,
+              "readDeleted": true,
+              "readDrafts": true,
+              "readLog": true,
+              "readSecrets": true,
+              "update": true,
+              "updateMakers": true,
+            },
+            "attachmentStyles": Object {
+              "medium": null,
+              "mediumSquare": "original-image.mock",
+              "original": "original-image.mock",
+            },
+            "captionFormatted": "World's Greatest Dog",
+            "createdAt": "2017-04-24T23:25:50.161Z",
+            "descriptionFormatted": "Black and white freckles",
+            "downloadable": true,
+            "kind": "image",
+            "metadata": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "metadataFormatted": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "projectSlug": "delegated-project-slug",
+            "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+            "tagList": Array [
+              "dog",
+              "puppy",
+              "GOAT",
+            ],
+            "title": "Image",
+            "titleFormatted": "Image",
+          },
+          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+          "relationships": Object {},
+          "type": "resources",
+        }
+      }
+    />
   </div>
 </div>
 `;
 
-exports[`Backend.Resource.Form.Video component when sub kind is external_video renders correctly 1`] = `
+exports[`backend/components/resource/form/kind/Video when sub kind is external_video matches the snapshot when rendered 1`] = `
 <div
-  className="form-section form-section--primary"
+  class="form-section form-section--primary"
 >
   <div
-    className="form-input"
+    class="form-input"
   >
     <label
-      className="form-switch"
-      htmlFor="switch-input-1"
+      class="form-switch"
+      for="switch-input-1"
     >
       <span
-        className="form-input-heading toggle above"
+        class="form-input-heading toggle above"
       >
         Is this an externally linked video?
       </span>
       <input
-        checked={false}
         id="switch-input-1"
-        onChange={[Function]}
         type="checkbox"
       />
       <span
-        className="toggle-indicator"
+        class="toggle-indicator"
       >
         <span
           aria-hidden="true"
-          className="boolean-primary"
+          class="boolean-primary"
         />
       </span>
     </label>
   </div>
   <div
-    className="form-section form-section--primary"
+    class="form-section form-section--primary"
   >
     <div
-      className="form-input"
-      style={Object {}}
+      class="form-input"
     >
       <label
-        className="has-instructions"
-        htmlFor="text-input-1"
+        class="has-instructions"
+        for="text-input-1"
       >
         Video ID
       </label>
       <input
         aria-describedby="text-input-error-1 text-input-instructions-1"
         id="text-input-1"
-        onChange={[Function]}
         placeholder="Video ID"
         type="text"
         value=""
       />
       <span
-        className="instructions"
+        class="instructions"
         id="text-input-instructions-1"
       >
         The video's ID is located after "?v=" in YouTube URLs, and after "vimeo.com/" in Vimeo URLs.
       </span>
     </div>
     <div
-      className="form-input"
+      class="form-input"
     >
       <div
-        className="form-input"
-        style={Object {}}
+        class="form-input"
       >
         <label
-          htmlFor="select-1"
+          for="select-1"
         >
           External Video Type
         </label>
         <div
-          className="form-select"
+          class="form-select"
         >
           <svg
-            aria-hidden={true}
-            className="manicon-svg form-select__icon svg-icon--disclosureDown16"
+            aria-hidden="true"
+            class="manicon-svg form-select__icon svg-icon--disclosureDown16"
             fill="currentColor"
-            height={20}
+            height="20"
             viewBox="0 0 16 16"
-            width={20}
+            width="20"
             xmlns="http://www.w3.org/2000/svg"
           >
             <polygon
@@ -201,10 +550,9 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
           <select
             aria-describedby="select-error-1 select-instructions-1"
             id="select-1"
-            onChange={[Function]}
-            value=""
           >
             <option
+              selected=""
               value=""
             >
               Select a video source...

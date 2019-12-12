@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reader.Search.Button component renders correctly when active 1`] = `
+exports[`global/components/search/button when it is active matches the snapshot 1`] = `
 <button
   aria-expanded={true}
   aria-haspopup={true}
@@ -8,19 +8,17 @@ exports[`Reader.Search.Button component renders correctly when active 1`] = `
   data-id="toggle-menu"
   onClick={[Function]}
 >
-  <svg
-    aria-hidden={true}
-    className="manicon-svg search-icon svg-icon--search24"
+  <IconComposer
     fill="currentColor"
-    height={32}
-    viewBox="0 0 24 24"
-    width={32}
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M15.5798983,14.8766915 L19.3507534,18.6475466 L18.6436466,19.3546534 L14.8724673,15.5834741 C13.8274558,16.4672326 12.4760412,17 11,17 C7.68652629,17 5,14.3138111 5,11 C5,7.68685763 7.68685763,5 11,5 C14.3138111,5 17,7.68652629 17,11 C17,12.4780309 16.4657953,13.8310989 15.5798983,14.8766915 Z M16,11 C16,8.23878293 13.7614982,6 11,6 C8.23914237,6 6,8.23914237 6,11 C6,13.7614982 8.23878293,16 11,16 C13.7618576,16 16,13.7618576 16,11 Z"
-    />
-  </svg>
+    icon="search24"
+    iconClass="search-icon"
+    size={32}
+    svgProps={
+      Object {
+        "aria-hidden": true,
+      }
+    }
+  />
   <span
     className="screen-reader-text"
   >
@@ -29,7 +27,7 @@ exports[`Reader.Search.Button component renders correctly when active 1`] = `
 </button>
 `;
 
-exports[`Reader.Search.Button component renders correctly when inactive 1`] = `
+exports[`global/components/search/button when it isn't active matches the snapshot 1`] = `
 <button
   aria-expanded={false}
   aria-haspopup={true}
@@ -37,19 +35,17 @@ exports[`Reader.Search.Button component renders correctly when inactive 1`] = `
   data-id="toggle-menu"
   onClick={[Function]}
 >
-  <svg
-    aria-hidden={true}
-    className="manicon-svg search-icon svg-icon--search24"
+  <IconComposer
     fill="currentColor"
-    height={32}
-    viewBox="0 0 24 24"
-    width={32}
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M15.5798983,14.8766915 L19.3507534,18.6475466 L18.6436466,19.3546534 L14.8724673,15.5834741 C13.8274558,16.4672326 12.4760412,17 11,17 C7.68652629,17 5,14.3138111 5,11 C5,7.68685763 7.68685763,5 11,5 C14.3138111,5 17,7.68652629 17,11 C17,12.4780309 16.4657953,13.8310989 15.5798983,14.8766915 Z M16,11 C16,8.23878293 13.7614982,6 11,6 C8.23914237,6 6,8.23914237 6,11 C6,13.7614982 8.23878293,16 11,16 C13.7618576,16 16,13.7618576 16,11 Z"
-    />
-  </svg>
+    icon="search24"
+    iconClass="search-icon"
+    size={32}
+    svgProps={
+      Object {
+        "aria-hidden": true,
+      }
+    }
+  />
   <span
     className="screen-reader-text"
   >

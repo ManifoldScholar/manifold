@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.TextList.ListItem.Date component renders correctly 1`] = `
+exports[`frontend/components/TextList/ListItem/Date matches the snapshot 1`] = `
 <span
   className="text-block__date text-block__date--block"
 >
-  <time
-    dateTime="2017-04-24"
-  >
-    Added April 2017
-  </time>
+  <FormattedDate
+    date="2017-04-24T23:25:50.161Z"
+    format="MMMM YYYY"
+    prefix="Added"
+  />
 </span>
 `;

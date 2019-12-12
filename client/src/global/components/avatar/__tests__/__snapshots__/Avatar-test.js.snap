@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global.Avatar component renders correctly 1`] = `
+exports[`global/components/avatar/Avatar matches the snapshot 1`] = `
 <figure
   className="avatar"
 >

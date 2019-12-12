@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.ProjectCollection.SortBy component renders correctly 1`] = `
+exports[`backend/components/project-collection/SortBy matches the snapshot 1`] = `
 <div
   className="project-collection-sort"
 >

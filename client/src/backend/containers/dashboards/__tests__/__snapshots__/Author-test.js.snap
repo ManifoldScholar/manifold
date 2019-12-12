@@ -1,18 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend Dashboards Author Container renders correctly 1`] = `
+exports[`backend/containers/dashboards/Author matches the snapshot when rendered 1`] = `
 <div>
   <section>
     <div
-      className="container"
+      class="container"
     >
       <section>
         <header
-          className="section-heading-secondary"
+          class="section-heading-secondary"
         >
           <h3>
-            Projects
-             
+            Projects 
           </h3>
         </header>
       </section>

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reader.ReturnMenu.Button component renders correctly 1`] = `
+exports[`reader/components/return-menu/Button matches the snapshot 1`] = `
 <button
   aria-expanded={false}
   aria-haspopup={true}

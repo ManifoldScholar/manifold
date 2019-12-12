@@ -1,52 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Form.Select component renders correctly 1`] = `
-<div
-  className="form-input"
->
-  <div
-    className="form-input"
-    style={Object {}}
-  >
-    <label
-      htmlFor="select-1"
-    >
-      Label this
-    </label>
-    <div
-      className="form-select"
-    >
-      <svg
-        aria-hidden={true}
-        className="manicon-svg form-select__icon svg-icon--disclosureDown16"
-        fill="currentColor"
-        height={20}
-        viewBox="0 0 16 16"
-        width={20}
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <polygon
-          points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
-        />
-      </svg>
-      <select
-        aria-describedby="select-error-1 select-instructions-1"
-        id="select-1"
-        onChange={[Function]}
-        value=""
-      >
-        <option
-          value="1"
-        >
-          option-1
-        </option>
-        <option
-          value="2"
-        >
-          option-2
-        </option>
-      </select>
-    </div>
-  </div>
-</div>
+exports[`global/components/form/Select matches the snapshot 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
 `;

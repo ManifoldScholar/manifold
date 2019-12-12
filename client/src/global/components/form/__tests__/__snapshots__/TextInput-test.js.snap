@@ -1,22 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Form.TextInput component renders correctly 1`] = `
-<div
-  className="form-input"
-  style={Object {}}
->
-  <label
-    className=""
-    htmlFor="text-input-1"
-  >
-    A form label
-  </label>
-  <input
-    aria-describedby="text-input-error-1 text-input-instructions-1"
-    id="text-input-1"
-    onChange={[Function]}
-    type="text"
-    value=""
-  />
-</div>
+exports[`global/components/form/TextInput matches the snapshot 1`] = `
+<mockConstructor>
+  <Component />
+</mockConstructor>
 `;

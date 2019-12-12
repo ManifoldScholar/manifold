@@ -1,320 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend Subscriptions Container renders correctly 1`] = `
-<section
-  className="bg-neutral05"
+exports[`frontend/containers/Subscriptions matches the snapshot 1`] = `
+<Connect(withRouter(AuthorizeComponent))
+  failureNotification={
+    Object {
+      "body": "You must be logged in to manage notification preferences.",
+      "heading": "Access Denied.",
+      "level": 2,
+    }
+  }
+  failureRedirect="/"
+  kind="any"
 >
-  <div
-    className="container"
+  <section
+    className="bg-neutral05"
   >
-    <form
-      autoComplete="off"
-      className="subscriptions"
-      method="post"
-      onSubmit={[Function]}
+    <div
+      className="container"
     >
-      <h1
-        className="form-heading"
-      >
-        Notification Settings
-        <span
-          className="instructions"
-        >
-          Edit your email notifications and subscriptions.
-        </span>
-      </h1>
-      <div
+      <form
+        autoComplete="off"
         className="subscriptions"
+        method="post"
+        onSubmit={[Function]}
       >
-        <div
-          aria-describedby="1-instructions"
-          aria-labelledby="1-header"
-          role="group"
+        <h1
+          className="form-heading"
         >
-          <h2
-            className="section-heading-secondary"
-            id="1-header"
-          >
-            Project Activity
-          </h2>
-          <div
-            className="form-group"
-          >
-            <div
-              className="form-input"
-            >
-              <span
-                className="instructions"
-                id="1-instructions"
-              >
-                Manifold can send you a daily or weekly email with information about texts,
-                  resources, and resource collections that have been added to projects.
-              </span>
-            </div>
-            <fieldset
-              className="subscriptions__radio-group form-input"
-            >
-              <legend
-                className="subscriptions__legend"
-              >
-                How often would you like to be notified?
-              </legend>
-              <label
-                className="form-toggle radio inline"
-              >
-                <input
-                  checked={false}
-                  name="digest"
-                  onChange={[Function]}
-                  type="radio"
-                  value="never"
-                />
-                <span
-                  className="toggle-indicator"
-                />
-                <span
-                  className="toggle-label"
-                >
-                  Never
-                </span>
-              </label>
-              <label
-                className="form-toggle radio inline checked"
-              >
-                <input
-                  checked={true}
-                  name="digest"
-                  onChange={[Function]}
-                  type="radio"
-                  value="daily"
-                />
-                <span
-                  className="toggle-indicator"
-                />
-                <span
-                  className="toggle-label"
-                >
-                  Daily
-                </span>
-              </label>
-              <label
-                className="form-toggle radio inline"
-              >
-                <input
-                  checked={false}
-                  name="digest"
-                  onChange={[Function]}
-                  type="radio"
-                  value="weekly"
-                />
-                <span
-                  className="toggle-indicator"
-                />
-                <span
-                  className="toggle-label"
-                >
-                  Weekly
-                </span>
-              </label>
-            </fieldset>
-          </div>
-        </div>
-        <div
-          aria-labelledby="1-header"
-          role="group"
-        >
-          <h2
-            className="section-heading-secondary"
-            id="1-header"
-          >
-            Other Activity
-          </h2>
-          <div
-            className="form-group"
-          >
-            <fieldset
-              className="subscriptions__radio-group form-input"
-            >
-              <legend
-                className="subscriptions__legend"
-              >
-                Notify you when someone replies to you?
-              </legend>
-              <span
-                className="instructions"
-              >
-                Manifold will send you an email when a reply is posted to your annotations or comments.
-              </span>
-              <label
-                className="form-toggle radio inline"
-              >
-                <input
-                  checked={false}
-                  name="repliesToMe"
-                  onChange={[Function]}
-                  type="radio"
-                  value="never"
-                />
-                <span
-                  className="toggle-indicator"
-                />
-                <span
-                  className="toggle-label"
-                >
-                  No
-                </span>
-              </label>
-              <label
-                className="form-toggle radio inline checked"
-              >
-                <input
-                  checked={true}
-                  name="repliesToMe"
-                  onChange={[Function]}
-                  type="radio"
-                  value="always"
-                />
-                <span
-                  className="toggle-indicator"
-                />
-                <span
-                  className="toggle-label"
-                >
-                  Yes
-                </span>
-              </label>
-            </fieldset>
-            <fieldset
-              className="subscriptions__radio-group form-input"
-            >
-              <legend
-                className="subscriptions__legend"
-              >
-                Notify you of all Comments and Annotations?
-              </legend>
-              <span
-                className="instructions"
-              >
-                Manifold will send you an email anytime a comment or annotation is created
-              </span>
-              <label
-                className="form-toggle radio inline"
-              >
-                <input
-                  checked={false}
-                  name="projectCommentsAndAnnotations"
-                  onChange={[Function]}
-                  type="radio"
-                  value="never"
-                />
-                <span
-                  className="toggle-indicator"
-                />
-                <span
-                  className="toggle-label"
-                >
-                  No
-                </span>
-              </label>
-              <label
-                className="form-toggle radio inline"
-              >
-                <input
-                  checked={false}
-                  name="projectCommentsAndAnnotations"
-                  onChange={[Function]}
-                  type="radio"
-                  value="always"
-                />
-                <span
-                  className="toggle-indicator"
-                />
-                <span
-                  className="toggle-label"
-                >
-                  Yes
-                </span>
-              </label>
-            </fieldset>
-            <fieldset
-              className="subscriptions__radio-group form-input"
-            >
-              <legend
-                className="subscriptions__legend"
-              >
-                Notify me when comments are flagged.
-              </legend>
-              <span
-                className="instructions"
-              >
-                Anytime a user flags a comment, you will receive email notification.
-              </span>
-              <label
-                className="form-toggle radio inline"
-              >
-                <input
-                  checked={false}
-                  name="flaggedResources"
-                  onChange={[Function]}
-                  type="radio"
-                  value="never"
-                />
-                <span
-                  className="toggle-indicator"
-                />
-                <span
-                  className="toggle-label"
-                >
-                  No
-                </span>
-              </label>
-              <label
-                className="form-toggle radio inline"
-              >
-                <input
-                  checked={false}
-                  name="flaggedResources"
-                  onChange={[Function]}
-                  type="radio"
-                  value="always"
-                />
-                <span
-                  className="toggle-indicator"
-                />
-                <span
-                  className="toggle-label"
-                >
-                  Yes
-                </span>
-              </label>
-            </fieldset>
-          </div>
-        </div>
-        <button
-          className="utility-button"
-          onClick={[Function]}
-        >
+          Notification Settings
           <span
-            className="utility-button__text utility-button__text--underlined"
+            className="instructions"
           >
-            Unsubscribe From All
+            Edit your email notifications and subscriptions.
           </span>
-        </button>
-      </div>
-      <div
-        className="row-1-p"
-      >
+        </h1>
+        <NotificationsForm
+          changeHandler={[Function]}
+          digestProjectsChangeHandler={[Function]}
+          unsubscribeAllHandler={[Function]}
+        />
         <div
-          className="form-input form-error"
+          className="row-1-p"
         >
-          <input
-            className="button-secondary button-secondary--with-room"
-            type="submit"
-            value="Save Changes"
-          />
+          <div
+            className="form-input form-error"
+          >
+            <input
+              className="button-secondary button-secondary--with-room"
+              type="submit"
+              value="Save Changes"
+            />
+          </div>
         </div>
-      </div>
-    </form>
-  </div>
-</section>
+      </form>
+    </div>
+  </section>
+</Connect(withRouter(AuthorizeComponent))>
 `;

@@ -1,55 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend Project Category New Container renders correctly 1`] = `
+exports[`backend/containers/project/category/New matches the snapshot 1`] = `
 <div>
-  <header
-    className="drawer-header"
-  >
-    <h2
-      className="drawer-header__title"
-    >
-      <span
-        className="drawer-header__title-text"
-      >
-        Create Category
-      </span>
-    </h2>
-  </header>
-  <div>
-    <form
-      className="form-secondary"
-      data-id="submit"
-      onSubmit={[Function]}
-    >
-      <div
-        className="form-input"
-        style={Object {}}
-      >
-        <label
-          className=""
-          htmlFor="text-input-1"
-        >
-          Title
-        </label>
-        <input
-          aria-describedby="text-input-error-1 text-input-instructions-1"
-          id="text-input-1"
-          onChange={[Function]}
-          placeholder="What would you like to call this category?"
-          type="text"
-          value=""
-        />
-      </div>
-      <div
-        className="form-input submit wide"
-      >
-        <input
-          className="button-secondary button-secondary--outlined"
-          type="submit"
-          value="Create Category"
-        />
-      </div>
-    </form>
-  </div>
+  <Drawer.EntityHeader
+    buttons={Array []}
+    title="Create Category"
+  />
+  <Category.Form
+    onSuccess={[Function]}
+    projectId="AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
+  />
 </div>
 `;

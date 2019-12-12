@@ -1,89 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Project.Content.TypeForm.Markdown component renders correctly 1`] = `
+exports[`backend/components/content-block/TypeForm/types/Markdown matches the snapshot 1`] = `
 Array [
   <div
-    className="form-input wide"
+    class="form-input wide"
   >
     <div
-      className="form-input"
-      style={Object {}}
+      class="form-input"
     >
       <label
-        className=""
-        htmlFor="textarea-1"
+        class=""
+        for="textarea-1"
       >
         Body
       </label>
       <textarea
         aria-describedby="textarea-error-1 textarea-instructions-1"
         id="textarea-1"
-        onChange={[Function]}
-        style={
-          Object {
-            "height": 300,
-          }
-        }
-        value=""
+        style="height:300px"
       />
     </div>
   </div>,
   <div
-    className="form-input form-input-radios extra-space-bottom wide"
-    style={Object {}}
+    class="form-input form-input-radios extra-space-bottom wide"
   >
     <fieldset
       aria-describedby="radios-error-1 radios-instructions-1"
-      className="form-input-radios__wrapper"
+      class="form-input-radios__wrapper"
     >
       <legend
-        className="form-input-radios__legend"
+        class="form-input-radios__legend"
       >
         <span
-          aria-hidden={true}
-          className="form-input-radios__title"
+          aria-hidden="true"
+          class="form-input-radios__title"
         >
           Style
         </span>
       </legend>
       <label
-        className="form-toggle radio inline"
+        class="form-toggle radio inline"
       >
         <input
-          checked={false}
           name="radios-1"
-          onChange={[Function]}
-          tabIndex={0}
+          tabindex="0"
           type="radio"
           value="normal"
         />
         <span
           aria-hidden="true"
-          className="toggle-indicator"
+          class="toggle-indicator"
         />
         <span
-          className="toggle-label"
+          class="toggle-label"
         >
           Normal
         </span>
       </label>
       <label
-        className="form-toggle radio inline"
+        class="form-toggle radio inline"
       >
         <input
-          checked={false}
           name="radios-1"
-          onChange={[Function]}
-          tabIndex={-1}
+          tabindex="-1"
           type="radio"
           value="shaded"
         />
         <span
           aria-hidden="true"
-          className="toggle-indicator"
+          class="toggle-indicator"
         />
         <span
-          className="toggle-label"
+          class="toggle-label"
         >
           Shaded
         </span>

@@ -1,12 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global.Dropdown component renders correctly 1`] = `
+exports[`global/components/Dropdown matches the snapshot 1`] = `
 <div>
-  <div>
-    Render me
-  </div>
-  <div>
-    Me too
-  </div>
+  <Component
+    onClick={[Function]}
+  />
+  <Component
+    bodyComponent={[Function]}
+    triggerComponent={[Function]}
+  />
 </div>
 `;

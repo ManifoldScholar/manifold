@@ -1,41 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
-"<MemoryRouter>
-  <Router history={{...}}>
-    <Drawer.Wrapper open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]} connected={false} lockScroll=\\"hover\\" lockScrollClickCloses={true} context=\\"backend\\" size=\\"default\\" padding=\\"default\\" position=\\"default\\" entrySide=\\"right\\" includeDrawerFrontMatter={true} returnFocusOnDeactivate={true} focusTrap={true} includeSRCloseButton={false}>
-      <Component in={true} classNames=\\"drawer\\" timeout={{...}} unmountOnExit={true}>
-        <div className={[undefined]}>
-          <Utility.EdgeLockScroll>
-            <div className=\\"edge-lock-scroll\\">
-              <div className=\\"drawer drawer--backend drawer--right drawer--default drawer--pad-default drawer--pos-default\\">
-                <focus-trap-react active={false} focusTrapOptions={{...}}>
-                  <div className=\\"drawer-bar drawer-bar--default\\">
-                    <div className=\\"drawer-bar__title\\">
-                      <span className=\\"drawer-bar__title-text\\">
-                        wrapper
-                      </span>
-                    </div>
-                    <button onClick={[Function]} tabIndex=\\"0\\" className=\\"drawer-bar__close-button drawer-bar__close-button--light\\">
-                      <span className=\\"drawer-bar__close-text\\">
-                        Close
-                      </span>
-                      <IconComposer icon=\\"close16\\" size={24} iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--small\\" fill=\\"currentColor\\" svgProps={{...}}>
-                        <Close svgProps={{...}} iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--small svg-icon--close16\\" icon=\\"close16\\" size={24} fill=\\"currentColor\\" stroke=\\"currentColor\\">
-                          <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg drawer-bar__close-icon drawer-bar__close-icon--small svg-icon--close16\\" width={24} height={24} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
-                            <path d=\\"M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z\\" />
-                          </svg>
-                        </Close>
-                      </IconComposer>
-                    </button>
-                  </div>
-                </focus-trap-react>
-              </div>
+exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
+<Component
+  classNames="drawer"
+  in={true}
+  timeout={
+    Object {
+      "enter": 500,
+      "exit": 300,
+    }
+  }
+  unmountOnExit={true}
+>
+  <div>
+    <Utility.EdgeLockScroll>
+      <div
+        className="drawer drawer--backend drawer--right drawer--default drawer--pad-default drawer--pos-default"
+        key="drawer"
+      >
+        <focus-trap-react
+          active={false}
+          focusTrapOptions={
+            Object {
+              "clickOutsideDeactivates": true,
+              "escapeDeactivates": false,
+              "returnFocusOnDeactivate": true,
+            }
+          }
+        >
+          <div
+            className="drawer-bar drawer-bar--default"
+          >
+            <div
+              className="drawer-bar__title"
+            >
+              <span
+                className="drawer-bar__title-text"
+              >
+                wrapper
+              </span>
             </div>
-          </Utility.EdgeLockScroll>
-        </div>
-      </Component>
-    </Drawer.Wrapper>
-  </Router>
-</MemoryRouter>"
+            <button
+              className="drawer-bar__close-button drawer-bar__close-button--light"
+              onClick={[Function]}
+              tabIndex="0"
+            >
+              <span
+                className="drawer-bar__close-text"
+              >
+                Close
+              </span>
+              <IconComposer
+                fill="currentColor"
+                icon="close16"
+                iconClass="drawer-bar__close-icon drawer-bar__close-icon--small"
+                size={24}
+                svgProps={
+                  Object {
+                    "aria-hidden": true,
+                  }
+                }
+              />
+            </button>
+          </div>
+        </focus-trap-react>
+      </div>
+    </Utility.EdgeLockScroll>
+  </div>
+</Component>
 `;

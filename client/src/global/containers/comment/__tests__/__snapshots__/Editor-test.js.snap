@@ -1,69 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global Comment Editor Container renders correctly when logged in 1`] = `
+exports[`global/containers/comment/Editor matches the snapshot 1`] = `
 <div
   className="annotation-editor"
 >
-  <form
-    onSubmit={[Function]}
+  <Connect(withRouter(AuthorizeComponent))
+    kind="unauthenticated"
   >
     <div
-      className=""
-      style={Object {}}
+      className="placeholder"
     >
-      <label
-        className="screen-reader-text"
-        htmlFor="comment-textarea-1"
+      <button
+        onClick={[Function]}
       >
-        Edit this comment...
-      </label>
-      <textarea
-        aria-describedby="comment-textarea-error-1"
-        className="annotation-editor__textarea annotation-editor__textarea--expanded"
-        id="comment-textarea-1"
-        onChange={[Function]}
-        onKeyDown={[Function]}
-        placeholder="Edit this comment..."
-        value="Plaid clash with polka dots, I hope you ain't mad."
-      />
-      <div
-        className="annotation-editor__actions"
-      >
-        <div
-          className="annotation-editor__buttons"
-        >
-          <button
-            className="button-primary button-primary--gray"
-            onClick={[MockFunction]}
-            type="button"
-          >
-            Cancel
-          </button>
-          <button
-            className="button-secondary"
-            disabled={false}
-          >
-            Update
-          </button>
-        </div>
-      </div>
+        Login to post a comment
+      </button>
     </div>
-  </form>
-</div>
-`;
-
-exports[`Global Comment Editor Container renders correctly when logged out 1`] = `
-<div
-  className="annotation-editor"
->
-  <div
-    className="placeholder"
+  </Connect(withRouter(AuthorizeComponent))>
+  <Connect(withRouter(AuthorizeComponent))
+    kind="any"
   >
-    <button
-      onClick={[Function]}
+    <form
+      onSubmit={[Function]}
     >
-      Login to post a comment
-    </button>
-  </div>
+      <mockConstructor>
+        <Component />
+      </mockConstructor>
+    </form>
+  </Connect(withRouter(AuthorizeComponent))>
 </div>
 `;

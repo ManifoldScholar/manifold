@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global.Form.InputError component renders correctly 1`] = `
+exports[`global/components/form/InputError matches the snapshot 1`] = `
 <span
   aria-atomic="true"
   aria-live="polite"
@@ -8,7 +8,9 @@ exports[`Global.Form.InputError component renders correctly 1`] = `
   id={null}
   role="alert"
 >
-  <span>
+  <span
+    key="0"
+  >
     <span
       className="error"
     >

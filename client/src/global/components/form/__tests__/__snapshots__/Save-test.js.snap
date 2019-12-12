@@ -1,16 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Form.Save component renders correctly 1`] = `
+exports[`global/components/form/Save matches the snapshot 1`] = `
 <div
   className="form-input submit wide"
 >
-  <a
+  <Link
     className="button-secondary button-secondary--dull button-secondary--outlined"
-    href="/cancel/this"
-    onClick={[Function]}
+    to="cancel/this"
   >
     Cancel
-  </a>
+  </Link>
   <input
     className="button-secondary button-secondary--outlined"
     type="submit"

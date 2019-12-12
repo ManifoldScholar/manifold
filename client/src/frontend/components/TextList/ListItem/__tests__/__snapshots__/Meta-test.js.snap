@@ -1,76 +1,373 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.TextList.ListItem.Meta component renders correctly 1`] = `
+exports[`frontend/components/TextList/ListItem/Meta matches the snapshot 1`] = `
 <div
   className="text-block__meta"
 >
   <div
     className="text-block__status text-block__status--inline"
   >
-    <span
-      className="text-block__date text-block__date--inline"
-    >
-      <time
-        dateTime="2017-04-24"
-      >
-        Added April 2017
-      </time>
-    </span>
+    <TextList.ListItem.Date
+      baseClass="text-block"
+      date="2017-04-24T23:25:50.161Z"
+      datePrefix="Added"
+      inline={true}
+    />
     <span
       className="text-block__published"
     >
       Published
     </span>
   </div>
-  <ul
-    className="text-block__interaction-list"
-  >
-    <li
-      className="text-block__interaction"
-    >
-      <svg
-        aria-hidden={true}
-        className="manicon-svg text-block__interaction-icon svg-icon--comment32"
-        fill="currentColor"
-        height={32}
-        viewBox="0 0 32 32"
-        width={32}
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M12.109,20.319 L5.99999997,20.319 L5.99999997,7.00999997 L26,7.00999997 L26,20.319 L18.8529849,20.319 L12.109,26.9658287 L12.109,20.319 Z M25,8.00999998 L6.99999997,8.00999998 L6.99999997,19.319 L13.109,19.319 L13.109,24.5761714 L18.4430151,19.319 L25,19.319 L25,8.00999998 Z"
-        />
-      </svg>
-      <span
-        className="screen-reader-text"
-      >
-        This text has 
-         annotations
-      </span>
-    </li>
-    <li
-      className="text-block__interaction"
-    >
-      <svg
-        aria-hidden={true}
-        className="manicon-svg text-block__interaction-icon svg-icon--annotate32"
-        fill="currentColor"
-        height={32}
-        viewBox="0 0 32 32"
-        width={32}
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M25.082904,11.08319 L20.9631945,6.97713321 L8.68138527,19.1624329 L6.97462644,24.9625129 L12.8041307,23.2654775 L25.082904,11.08319 Z M5.4993735,26.4334872 L7.79461468,18.6335671 L20.9648055,5.56686673 L26.5010961,11.08481 L13.3278693,24.1545225 L5.4993735,26.4334872 Z M13.418666,23.3556603 L12.7127339,24.0639398 L7.88503392,19.2522398 L8.59096603,18.5439603 L13.418666,23.3556603 Z"
-        />
-      </svg>
-      <span
-        className="screen-reader-text"
-      >
-        This text has 
-         highlights
-      </span>
-    </li>
-  </ul>
+  <TextList.ListItem.Counts
+    baseClass="text-block"
+    text={
+      Object {
+        "attributes": Object {
+          "abilities": Object {
+            "create": true,
+            "createPermissions": true,
+            "createResourceCollections": true,
+            "createResources": true,
+            "createTexts": true,
+            "createTwitterQueries": true,
+            "delete": true,
+            "manageEvents": true,
+            "managePermissions": true,
+            "manageResourceCollections": true,
+            "manageResources": true,
+            "manageSocials": true,
+            "manageTexts": true,
+            "manageTwitterQueries": true,
+            "read": true,
+            "readDeleted": true,
+            "readDrafts": true,
+            "readLog": true,
+            "readSecrets": true,
+            "update": true,
+            "updateMakers": true,
+          },
+          "coverStyles": Object {},
+          "createdAt": "2017-04-24T23:25:50.161Z",
+          "creatorNames": "Andre3000, Big Boi",
+          "metadata": Object {
+            "abstract": "some-value",
+            "archive": "some-value",
+            "archiveLocation": "some-value",
+            "archivePlace": "some-value",
+            "authority": "some-value",
+            "callNumber": "some-value",
+            "chapterNumber": "some-value",
+            "collectionNumber": "some-value",
+            "collectionTitle": "some-value",
+            "containerTitle": "some-value",
+            "dimensions": "some-value",
+            "edition": "some-value",
+            "event": "some-value",
+            "eventPlace": "some-value",
+            "isbn": "some-value",
+            "issn": "some-value",
+            "issue": "some-value",
+            "jurisdiction": "some-value",
+            "medium": "some-value",
+            "number": "some-value",
+            "numberOfPages": "some-value",
+            "numberOfVolumes": "some-value",
+            "originalPublisher": "some-value",
+            "originalPublisherPlace": "some-value",
+            "originalTitle": "some-value",
+            "pmcid": "some-value",
+            "pmid": "some-value",
+            "publisher": "some-value",
+            "publisherPlace": "some-value",
+            "reviewedTitle": "some-value",
+            "section": "some-value",
+            "version": "some-value",
+            "volume": "some-value",
+            "yearSuffix": "some-value",
+          },
+          "metadataFormatted": Object {
+            "abstract": "some-value",
+            "archive": "some-value",
+            "archiveLocation": "some-value",
+            "archivePlace": "some-value",
+            "authority": "some-value",
+            "callNumber": "some-value",
+            "chapterNumber": "some-value",
+            "collectionNumber": "some-value",
+            "collectionTitle": "some-value",
+            "containerTitle": "some-value",
+            "dimensions": "some-value",
+            "edition": "some-value",
+            "event": "some-value",
+            "eventPlace": "some-value",
+            "isbn": "some-value",
+            "issn": "some-value",
+            "issue": "some-value",
+            "jurisdiction": "some-value",
+            "medium": "some-value",
+            "number": "some-value",
+            "numberOfPages": "some-value",
+            "numberOfVolumes": "some-value",
+            "originalPublisher": "some-value",
+            "originalPublisherPlace": "some-value",
+            "originalTitle": "some-value",
+            "pmcid": "some-value",
+            "pmid": "some-value",
+            "publisher": "some-value",
+            "publisherPlace": "some-value",
+            "reviewedTitle": "some-value",
+            "section": "some-value",
+            "version": "some-value",
+            "volume": "some-value",
+            "yearSuffix": "some-value",
+          },
+          "metadataProperties": Array [
+            "abstract",
+            "archive",
+            "archiveLocation",
+            "archivePlace",
+            "authority",
+            "callNumber",
+            "collectionTitle",
+            "containerTitle",
+            "dimensions",
+            "event",
+            "eventPlace",
+            "isbn",
+            "issn",
+            "jurisdiction",
+            "medium",
+            "originalPublisher",
+            "originalPublisherPlace",
+            "originalTitle",
+            "pmcid",
+            "pmid",
+            "publisher",
+            "publisherPlace",
+            "reviewedTitle",
+            "section",
+            "version",
+            "yearSuffix",
+            "chapterNumber",
+            "collectionNumber",
+            "edition",
+            "issue",
+            "number",
+            "numberOfPages",
+            "numberOfVolumes",
+            "volume",
+          ],
+          "publicationDate": "2001-12-04",
+          "published": true,
+          "rights": "All Rights Reserved",
+          "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+          "title": "Ain't No Thang",
+          "titleFormatted": "Ain't No Thang",
+          "titlePlaintext": "Ain't No Thang",
+          "toc": Array [
+            "Chapter 1",
+            "Chapter 2",
+          ],
+        },
+        "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+        "relationships": Object {
+          "category": Object {
+            "attributes": Object {
+              "position": 1,
+              "title": "Hip Hop Classics",
+            },
+            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+            "relationships": Object {},
+            "type": "categories",
+          },
+          "project": Object {
+            "attributes": Object {
+              "abilities": Object {
+                "create": true,
+                "createPermissions": true,
+                "createResourceCollections": true,
+                "createResources": true,
+                "createTexts": true,
+                "createTwitterQueries": true,
+                "delete": true,
+                "manageEvents": true,
+                "managePermissions": true,
+                "manageResourceCollections": true,
+                "manageResources": true,
+                "manageSocials": true,
+                "manageTexts": true,
+                "manageTwitterQueries": true,
+                "read": true,
+                "readDeleted": true,
+                "readDrafts": true,
+                "readLog": true,
+                "readSecrets": true,
+                "update": true,
+                "updateMakers": true,
+              },
+              "avatarColor": "primary",
+              "avatarMeta": Object {},
+              "avatarStyles": Object {},
+              "coverStyles": Object {},
+              "darkMode": false,
+              "description": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
+              "descriptionFormatted": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
+              "downloadCallToAction": "Download the greatest dog",
+              "hashtag": "cute_dog",
+              "heroStyles": Object {},
+              "hideActivity": false,
+              "imageCreditsFormatted": "<p>Rowan, <em>The Dog</em></p>",
+              "metadata": Object {
+                "abstract": "some-value",
+                "archive": "some-value",
+                "archiveLocation": "some-value",
+                "archivePlace": "some-value",
+                "authority": "some-value",
+                "callNumber": "some-value",
+                "chapterNumber": "some-value",
+                "collectionNumber": "some-value",
+                "collectionTitle": "some-value",
+                "containerTitle": "some-value",
+                "dimensions": "some-value",
+                "edition": "some-value",
+                "event": "some-value",
+                "eventPlace": "some-value",
+                "isbn": "some-value",
+                "issn": "some-value",
+                "issue": "some-value",
+                "jurisdiction": "some-value",
+                "medium": "some-value",
+                "number": "some-value",
+                "numberOfPages": "some-value",
+                "numberOfVolumes": "some-value",
+                "originalPublisher": "some-value",
+                "originalPublisherPlace": "some-value",
+                "originalTitle": "some-value",
+                "pmcid": "some-value",
+                "pmid": "some-value",
+                "publisher": "some-value",
+                "publisherPlace": "some-value",
+                "reviewedTitle": "some-value",
+                "section": "some-value",
+                "version": "some-value",
+                "volume": "some-value",
+                "yearSuffix": "some-value",
+              },
+              "metadataFormatted": Object {
+                "abstract": "some-value",
+                "archive": "some-value",
+                "archiveLocation": "some-value",
+                "archivePlace": "some-value",
+                "authority": "some-value",
+                "callNumber": "some-value",
+                "chapterNumber": "some-value",
+                "collectionNumber": "some-value",
+                "collectionTitle": "some-value",
+                "containerTitle": "some-value",
+                "dimensions": "some-value",
+                "edition": "some-value",
+                "event": "some-value",
+                "eventPlace": "some-value",
+                "isbn": "some-value",
+                "issn": "some-value",
+                "issue": "some-value",
+                "jurisdiction": "some-value",
+                "medium": "some-value",
+                "number": "some-value",
+                "numberOfPages": "some-value",
+                "numberOfVolumes": "some-value",
+                "originalPublisher": "some-value",
+                "originalPublisherPlace": "some-value",
+                "originalTitle": "some-value",
+                "pmcid": "some-value",
+                "pmid": "some-value",
+                "publisher": "some-value",
+                "publisherPlace": "some-value",
+                "reviewedTitle": "some-value",
+                "section": "some-value",
+                "version": "some-value",
+                "volume": "some-value",
+                "yearSuffix": "some-value",
+              },
+              "metadataProperties": Array [
+                "abstract",
+                "archive",
+                "archiveLocation",
+                "archivePlace",
+                "authority",
+                "callNumber",
+                "collectionTitle",
+                "containerTitle",
+                "dimensions",
+                "event",
+                "eventPlace",
+                "isbn",
+                "issn",
+                "jurisdiction",
+                "medium",
+                "originalPublisher",
+                "originalPublisherPlace",
+                "originalTitle",
+                "pmcid",
+                "pmid",
+                "publisher",
+                "publisherPlace",
+                "reviewedTitle",
+                "section",
+                "version",
+                "yearSuffix",
+                "chapterNumber",
+                "collectionNumber",
+                "edition",
+                "issue",
+                "number",
+                "numberOfPages",
+                "numberOfVolumes",
+                "volume",
+              ],
+              "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+              "subtitle": "World's Greatest Dog",
+              "title": "Rowan Test",
+              "titleFormatted": "Rowan Test",
+              "titlePlaintext": "Rowan Test",
+            },
+            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+            "relationships": Object {
+              "actionCallouts": Array [
+                "actionCallout",
+              ],
+              "makers": Array [
+                "maker",
+              ],
+              "resources": Array [
+                "resource",
+              ],
+              "texts": Array [
+                "text",
+              ],
+            },
+            "type": "projects",
+          },
+          "stylesheets": Array [
+            Object {
+              "attributes": Object {
+                "name": "Slarmbo",
+                "position": 1,
+                "rawStyles": ".some-class { font-weight: bold }",
+                "styles": ".manifold-text-section .some-class { font-weight: bold }",
+              },
+              "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+              "relationships": Object {
+                "text": null,
+              },
+              "type": "stylesheets",
+            },
+          ],
+        },
+        "type": "texts",
+      }
+    }
+  />
 </div>
 `;

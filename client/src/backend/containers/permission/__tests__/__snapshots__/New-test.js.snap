@@ -1,179 +1,486 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend Permission New Container renders correctly 1`] = `
+exports[`backend/containers/permission/New matches the snapshot 1`] = `
 <section>
-  <header
-    className="drawer-header"
-  >
-    <h2
-      className="drawer-header__title"
-    >
-      <span
-        className="drawer-header__title-text"
-      >
-        Grant Permissions
-      </span>
-    </h2>
-  </header>
-  <section>
-    <div>
-      <form
-        className="form-secondary permissions-form"
-        data-id="submit"
-        onSubmit={[Function]}
-      >
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <nav
-            className="fetch-select"
-          >
-            <div
-              className="fetch-select__trigger"
-              onClick={[Function]}
-              role="button"
-            >
-              Select User
-              <svg
-                aria-hidden={true}
-                className="manicon-svg fetch-select__trigger-icon svg-icon--disclosureDown16"
-                fill="currentColor"
-                height={20}
-                viewBox="0 0 16 16"
-                width={20}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <polygon
-                  points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
-                />
-              </svg>
-            </div>
-            <ul
-              className="fetch-select__list"
-            />
-          </nav>
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <div
-            aria-describedby="1-instructions"
-            aria-labelledby="1-header"
-            className="form-section horizontal form-section--primary"
-            role="group"
-          >
-            <header
-              className="form-section-label"
-            >
-              <h2
-                id="1-header"
-              >
-                Permissions
-              </h2>
-            </header>
-            <div
-              className="form-input-group form-input-group--primary"
-            >
-              <div
-                className="form-input"
-              >
-                <label
-                  className="form-switch"
-                  htmlFor="switch-input-1"
-                >
-                  <span
-                    className="form-input-heading toggle above"
-                  >
-                    Can modify project?
-                  </span>
-                  <input
-                    checked={false}
-                    id="switch-input-1"
-                    onChange={[Function]}
-                    type="checkbox"
-                  />
-                  <span
-                    className="toggle-indicator"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="boolean-primary"
-                    />
-                  </span>
-                </label>
-              </div>
-              <div
-                className="form-input"
-              >
-                <label
-                  className="form-switch"
-                  htmlFor="switch-input-1"
-                >
-                  <span
-                    className="form-input-heading toggle above"
-                  >
-                    Can modify resource metadata?
-                  </span>
-                  <input
-                    checked={false}
-                    id="switch-input-1"
-                    onChange={[Function]}
-                    type="checkbox"
-                  />
-                  <span
-                    className="toggle-indicator"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="boolean-primary"
-                    />
-                  </span>
-                </label>
-              </div>
-              <div
-                className="form-input"
-              >
-                <label
-                  className="form-switch"
-                  htmlFor="switch-input-1"
-                >
-                  <span
-                    className="form-input-heading toggle above"
-                  >
-                    Is a project author?
-                  </span>
-                  <input
-                    checked={false}
-                    id="switch-input-1"
-                    onChange={[Function]}
-                    type="checkbox"
-                  />
-                  <span
-                    className="toggle-indicator"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="boolean-primary"
-                    />
-                  </span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="form-input submit wide"
-        >
-          <input
-            className="button-secondary button-secondary--outlined"
-            type="submit"
-            value="Save Permissions"
-          />
-        </div>
-      </form>
-    </div>
-  </section>
+  <Drawer.EntityHeader
+    buttons={Array []}
+    title="Grant Permissions"
+  />
+  <withRouter(Connect(HigherOrder.FetchData('Permission.Form)))
+    entity={
+      Object {
+        "attributes": Object {
+          "abilities": Object {
+            "create": true,
+            "createPermissions": true,
+            "createResourceCollections": true,
+            "createResources": true,
+            "createTexts": true,
+            "createTwitterQueries": true,
+            "delete": true,
+            "manageEvents": true,
+            "managePermissions": true,
+            "manageResourceCollections": true,
+            "manageResources": true,
+            "manageSocials": true,
+            "manageTexts": true,
+            "manageTwitterQueries": true,
+            "read": true,
+            "readDeleted": true,
+            "readDrafts": true,
+            "readLog": true,
+            "readSecrets": true,
+            "update": true,
+            "updateMakers": true,
+          },
+          "avatarColor": "primary",
+          "avatarMeta": Object {},
+          "avatarStyles": Object {},
+          "coverStyles": Object {},
+          "darkMode": false,
+          "description": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
+          "descriptionFormatted": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
+          "downloadCallToAction": "Download the greatest dog",
+          "hashtag": "cute_dog",
+          "heroStyles": Object {},
+          "hideActivity": false,
+          "imageCreditsFormatted": "<p>Rowan, <em>The Dog</em></p>",
+          "metadata": Object {
+            "abstract": "some-value",
+            "archive": "some-value",
+            "archiveLocation": "some-value",
+            "archivePlace": "some-value",
+            "authority": "some-value",
+            "callNumber": "some-value",
+            "chapterNumber": "some-value",
+            "collectionNumber": "some-value",
+            "collectionTitle": "some-value",
+            "containerTitle": "some-value",
+            "dimensions": "some-value",
+            "edition": "some-value",
+            "event": "some-value",
+            "eventPlace": "some-value",
+            "isbn": "some-value",
+            "issn": "some-value",
+            "issue": "some-value",
+            "jurisdiction": "some-value",
+            "medium": "some-value",
+            "number": "some-value",
+            "numberOfPages": "some-value",
+            "numberOfVolumes": "some-value",
+            "originalPublisher": "some-value",
+            "originalPublisherPlace": "some-value",
+            "originalTitle": "some-value",
+            "pmcid": "some-value",
+            "pmid": "some-value",
+            "publisher": "some-value",
+            "publisherPlace": "some-value",
+            "reviewedTitle": "some-value",
+            "section": "some-value",
+            "version": "some-value",
+            "volume": "some-value",
+            "yearSuffix": "some-value",
+          },
+          "metadataFormatted": Object {
+            "abstract": "some-value",
+            "archive": "some-value",
+            "archiveLocation": "some-value",
+            "archivePlace": "some-value",
+            "authority": "some-value",
+            "callNumber": "some-value",
+            "chapterNumber": "some-value",
+            "collectionNumber": "some-value",
+            "collectionTitle": "some-value",
+            "containerTitle": "some-value",
+            "dimensions": "some-value",
+            "edition": "some-value",
+            "event": "some-value",
+            "eventPlace": "some-value",
+            "isbn": "some-value",
+            "issn": "some-value",
+            "issue": "some-value",
+            "jurisdiction": "some-value",
+            "medium": "some-value",
+            "number": "some-value",
+            "numberOfPages": "some-value",
+            "numberOfVolumes": "some-value",
+            "originalPublisher": "some-value",
+            "originalPublisherPlace": "some-value",
+            "originalTitle": "some-value",
+            "pmcid": "some-value",
+            "pmid": "some-value",
+            "publisher": "some-value",
+            "publisherPlace": "some-value",
+            "reviewedTitle": "some-value",
+            "section": "some-value",
+            "version": "some-value",
+            "volume": "some-value",
+            "yearSuffix": "some-value",
+          },
+          "metadataProperties": Array [
+            "abstract",
+            "archive",
+            "archiveLocation",
+            "archivePlace",
+            "authority",
+            "callNumber",
+            "collectionTitle",
+            "containerTitle",
+            "dimensions",
+            "event",
+            "eventPlace",
+            "isbn",
+            "issn",
+            "jurisdiction",
+            "medium",
+            "originalPublisher",
+            "originalPublisherPlace",
+            "originalTitle",
+            "pmcid",
+            "pmid",
+            "publisher",
+            "publisherPlace",
+            "reviewedTitle",
+            "section",
+            "version",
+            "yearSuffix",
+            "chapterNumber",
+            "collectionNumber",
+            "edition",
+            "issue",
+            "number",
+            "numberOfPages",
+            "numberOfVolumes",
+            "volume",
+          ],
+          "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+          "subtitle": "World's Greatest Dog",
+          "title": "Rowan Test",
+          "titleFormatted": "Rowan Test",
+          "titlePlaintext": "Rowan Test",
+        },
+        "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+        "relationships": Object {
+          "actionCallouts": Array [
+            Object {
+              "attributes": Object {
+                "button": true,
+                "externalLink": true,
+                "kind": "link",
+                "location": "left",
+                "position": 1,
+                "title": "Start Reading",
+                "url": "https://github.com/ManifoldScholar/manifold",
+              },
+              "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+              "relationships": Object {
+                "project": null,
+              },
+              "type": "actionCallouts",
+            },
+          ],
+          "makers": Array [
+            Object {
+              "attributes": Object {
+                "avatarStyles": Object {},
+                "firstName": "John",
+                "fullName": "John Milton",
+                "lastName": "Milton",
+              },
+              "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+              "relationships": Object {},
+              "type": "maker",
+            },
+          ],
+          "resources": Array [
+            Object {
+              "attributes": Object {
+                "abilities": Object {
+                  "create": true,
+                  "createPermissions": true,
+                  "createResourceCollections": true,
+                  "createResources": true,
+                  "createTexts": true,
+                  "createTwitterQueries": true,
+                  "delete": true,
+                  "manageEvents": true,
+                  "managePermissions": true,
+                  "manageResourceCollections": true,
+                  "manageResources": true,
+                  "manageSocials": true,
+                  "manageTexts": true,
+                  "manageTwitterQueries": true,
+                  "read": true,
+                  "readDeleted": true,
+                  "readDrafts": true,
+                  "readLog": true,
+                  "readSecrets": true,
+                  "update": true,
+                  "updateMakers": true,
+                },
+                "attachmentStyles": Object {
+                  "medium": null,
+                  "mediumSquare": "original-image.mock",
+                  "original": "original-image.mock",
+                },
+                "captionFormatted": "World's Greatest Dog",
+                "createdAt": "2017-04-24T23:25:50.161Z",
+                "descriptionFormatted": "Black and white freckles",
+                "downloadable": true,
+                "kind": "image",
+                "metadata": Object {
+                  "abstract": "some-value",
+                  "archive": "some-value",
+                  "archiveLocation": "some-value",
+                  "archivePlace": "some-value",
+                  "authority": "some-value",
+                  "callNumber": "some-value",
+                  "chapterNumber": "some-value",
+                  "collectionNumber": "some-value",
+                  "collectionTitle": "some-value",
+                  "containerTitle": "some-value",
+                  "dimensions": "some-value",
+                  "edition": "some-value",
+                  "event": "some-value",
+                  "eventPlace": "some-value",
+                  "isbn": "some-value",
+                  "issn": "some-value",
+                  "issue": "some-value",
+                  "jurisdiction": "some-value",
+                  "medium": "some-value",
+                  "number": "some-value",
+                  "numberOfPages": "some-value",
+                  "numberOfVolumes": "some-value",
+                  "originalPublisher": "some-value",
+                  "originalPublisherPlace": "some-value",
+                  "originalTitle": "some-value",
+                  "pmcid": "some-value",
+                  "pmid": "some-value",
+                  "publisher": "some-value",
+                  "publisherPlace": "some-value",
+                  "reviewedTitle": "some-value",
+                  "section": "some-value",
+                  "version": "some-value",
+                  "volume": "some-value",
+                  "yearSuffix": "some-value",
+                },
+                "metadataFormatted": Object {
+                  "abstract": "some-value",
+                  "archive": "some-value",
+                  "archiveLocation": "some-value",
+                  "archivePlace": "some-value",
+                  "authority": "some-value",
+                  "callNumber": "some-value",
+                  "chapterNumber": "some-value",
+                  "collectionNumber": "some-value",
+                  "collectionTitle": "some-value",
+                  "containerTitle": "some-value",
+                  "dimensions": "some-value",
+                  "edition": "some-value",
+                  "event": "some-value",
+                  "eventPlace": "some-value",
+                  "isbn": "some-value",
+                  "issn": "some-value",
+                  "issue": "some-value",
+                  "jurisdiction": "some-value",
+                  "medium": "some-value",
+                  "number": "some-value",
+                  "numberOfPages": "some-value",
+                  "numberOfVolumes": "some-value",
+                  "originalPublisher": "some-value",
+                  "originalPublisherPlace": "some-value",
+                  "originalTitle": "some-value",
+                  "pmcid": "some-value",
+                  "pmid": "some-value",
+                  "publisher": "some-value",
+                  "publisherPlace": "some-value",
+                  "reviewedTitle": "some-value",
+                  "section": "some-value",
+                  "version": "some-value",
+                  "volume": "some-value",
+                  "yearSuffix": "some-value",
+                },
+                "projectSlug": "delegated-project-slug",
+                "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                "tagList": Array [
+                  "dog",
+                  "puppy",
+                  "GOAT",
+                ],
+                "title": "Image",
+                "titleFormatted": "Image",
+              },
+              "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+              "relationships": Object {
+                "collectionResources": Array [],
+              },
+              "type": "resources",
+            },
+          ],
+          "texts": Array [
+            Object {
+              "attributes": Object {
+                "abilities": Object {
+                  "create": true,
+                  "createPermissions": true,
+                  "createResourceCollections": true,
+                  "createResources": true,
+                  "createTexts": true,
+                  "createTwitterQueries": true,
+                  "delete": true,
+                  "manageEvents": true,
+                  "managePermissions": true,
+                  "manageResourceCollections": true,
+                  "manageResources": true,
+                  "manageSocials": true,
+                  "manageTexts": true,
+                  "manageTwitterQueries": true,
+                  "read": true,
+                  "readDeleted": true,
+                  "readDrafts": true,
+                  "readLog": true,
+                  "readSecrets": true,
+                  "update": true,
+                  "updateMakers": true,
+                },
+                "coverStyles": Object {},
+                "createdAt": "2017-04-24T23:25:50.161Z",
+                "creatorNames": "Andre3000, Big Boi",
+                "metadata": Object {
+                  "abstract": "some-value",
+                  "archive": "some-value",
+                  "archiveLocation": "some-value",
+                  "archivePlace": "some-value",
+                  "authority": "some-value",
+                  "callNumber": "some-value",
+                  "chapterNumber": "some-value",
+                  "collectionNumber": "some-value",
+                  "collectionTitle": "some-value",
+                  "containerTitle": "some-value",
+                  "dimensions": "some-value",
+                  "edition": "some-value",
+                  "event": "some-value",
+                  "eventPlace": "some-value",
+                  "isbn": "some-value",
+                  "issn": "some-value",
+                  "issue": "some-value",
+                  "jurisdiction": "some-value",
+                  "medium": "some-value",
+                  "number": "some-value",
+                  "numberOfPages": "some-value",
+                  "numberOfVolumes": "some-value",
+                  "originalPublisher": "some-value",
+                  "originalPublisherPlace": "some-value",
+                  "originalTitle": "some-value",
+                  "pmcid": "some-value",
+                  "pmid": "some-value",
+                  "publisher": "some-value",
+                  "publisherPlace": "some-value",
+                  "reviewedTitle": "some-value",
+                  "section": "some-value",
+                  "version": "some-value",
+                  "volume": "some-value",
+                  "yearSuffix": "some-value",
+                },
+                "metadataFormatted": Object {
+                  "abstract": "some-value",
+                  "archive": "some-value",
+                  "archiveLocation": "some-value",
+                  "archivePlace": "some-value",
+                  "authority": "some-value",
+                  "callNumber": "some-value",
+                  "chapterNumber": "some-value",
+                  "collectionNumber": "some-value",
+                  "collectionTitle": "some-value",
+                  "containerTitle": "some-value",
+                  "dimensions": "some-value",
+                  "edition": "some-value",
+                  "event": "some-value",
+                  "eventPlace": "some-value",
+                  "isbn": "some-value",
+                  "issn": "some-value",
+                  "issue": "some-value",
+                  "jurisdiction": "some-value",
+                  "medium": "some-value",
+                  "number": "some-value",
+                  "numberOfPages": "some-value",
+                  "numberOfVolumes": "some-value",
+                  "originalPublisher": "some-value",
+                  "originalPublisherPlace": "some-value",
+                  "originalTitle": "some-value",
+                  "pmcid": "some-value",
+                  "pmid": "some-value",
+                  "publisher": "some-value",
+                  "publisherPlace": "some-value",
+                  "reviewedTitle": "some-value",
+                  "section": "some-value",
+                  "version": "some-value",
+                  "volume": "some-value",
+                  "yearSuffix": "some-value",
+                },
+                "metadataProperties": Array [
+                  "abstract",
+                  "archive",
+                  "archiveLocation",
+                  "archivePlace",
+                  "authority",
+                  "callNumber",
+                  "collectionTitle",
+                  "containerTitle",
+                  "dimensions",
+                  "event",
+                  "eventPlace",
+                  "isbn",
+                  "issn",
+                  "jurisdiction",
+                  "medium",
+                  "originalPublisher",
+                  "originalPublisherPlace",
+                  "originalTitle",
+                  "pmcid",
+                  "pmid",
+                  "publisher",
+                  "publisherPlace",
+                  "reviewedTitle",
+                  "section",
+                  "version",
+                  "yearSuffix",
+                  "chapterNumber",
+                  "collectionNumber",
+                  "edition",
+                  "issue",
+                  "number",
+                  "numberOfPages",
+                  "numberOfVolumes",
+                  "volume",
+                ],
+                "publicationDate": "2001-12-04",
+                "published": true,
+                "rights": "All Rights Reserved",
+                "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                "title": "Ain't No Thang",
+                "titleFormatted": "Ain't No Thang",
+                "titlePlaintext": "Ain't No Thang",
+                "toc": Array [
+                  "Chapter 1",
+                  "Chapter 2",
+                ],
+              },
+              "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+              "relationships": Object {
+                "category": "category",
+                "project": "project",
+                "stylesheets": Array [
+                  "stylesheet",
+                ],
+              },
+              "type": "texts",
+            },
+          ],
+        },
+        "type": "projects",
+      }
+    }
+  />
 </section>
 `;

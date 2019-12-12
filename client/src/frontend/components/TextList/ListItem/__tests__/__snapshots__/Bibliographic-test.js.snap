@@ -1,12 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.TextList.ListItem.Bibliographic component renders correctly 1`] = `
+exports[`frontend/components/TextList/ListItem/Bibliographic matches the snapshot 1`] = `
 <div
   className="text-block__bibliographic"
 >
-  <a
-    href="/foo"
-    onClick={[Function]}
+  <Link
+    to="/foo"
   >
     <h4
       className="text-block__name"
@@ -20,7 +19,7 @@ exports[`Frontend.TextList.ListItem.Bibliographic component renders correctly 1`
         }
       />
     </h4>
-  </a>
+  </Link>
   <div
     className="text-block__creators"
   >
@@ -38,15 +37,11 @@ exports[`Frontend.TextList.ListItem.Bibliographic component renders correctly 1`
   <div
     className="text-block__status text-block__status--block"
   >
-    <span
-      className="text-block__date text-block__date--block"
-    >
-      <time
-        dateTime="2017-04-24"
-      >
-        Added April 2017
-      </time>
-    </span>
+    <TextList.ListItem.Date
+      baseClass="text-block"
+      date="2017-04-24T23:25:50.161Z"
+      datePrefix="Added"
+    />
   </div>
 </div>
 `;

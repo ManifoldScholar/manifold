@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.Layout.Splash component renders correctly 1`] = `
+exports[`frontend/components/layout/Splash matches the snapshot 1`] = `
 <section
   className="feature feature-dark-style"
   style={Object {}}

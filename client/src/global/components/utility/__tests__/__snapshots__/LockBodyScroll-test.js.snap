@@ -1,11 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global.Utility.LockBodyScroll component renders correctly 1`] = `
+exports[`global/components/utility/LockBodyScroll matches the snapshot 1`] = `
 <div
   className="lock-body-scroll"
 >
-  <div>
-    How is babby formed?
-  </div>
+  <SideEffect(BodyClass)
+    className="no-scroll"
+  >
+    <div>
+      How is babby formed?
+    </div>
+  </SideEffect(BodyClass)>
 </div>
 `;

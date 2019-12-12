@@ -1,172 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.ResourceList.Filters Component renders correctly 1`] = `
-Array [
+exports[`frontend/components/resource-list/Filters matches the snapshot 1`] = `
+<Fragment>
   <div
     aria-atomic={true}
     aria-live="polite"
     className="screen-reader-text"
     role="status"
-  />,
-  <form
-    className="form-list-filter entity-section-wrapper__tools entity-section-wrapper__tools--wide"
-    onSubmit={[Function]}
-  >
-    <div
-      className="search-input"
-    >
-      <button
-        className="search-button"
-        type="submit"
-      >
-        <span
-          className="screen-reader-text"
-        >
-          Search
-        </span>
-        <svg
-          aria-hidden={true}
-          className="manicon-svg svg-icon--search16"
-          fill="currentColor"
-          height={20}
-          viewBox="0 0 16 16"
-          width={20}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
-          />
-        </svg>
-      </button>
-      <label
-        className="screen-reader-text"
-        htmlFor={1}
-      >
-        Enter Search Criteria
-      </label>
-      <input
-        id={1}
-        onChange={[Function]}
-        placeholder="Search"
-        type="text"
-        value=""
-      />
-    </div>
-    <div
-      className="select-group inline"
-    >
-      <div
-        className="select"
-      >
-        <select
-          onChange={[Function]}
-          value=""
-        >
-          <option
-            value=""
-          >
-            Type:
-          </option>
-          <option
-            value="image"
-          >
-            Image
-          </option>
-          <option
-            value="video"
-          >
-            Video
-          </option>
-        </select>
-        <svg
-          aria-hidden={true}
-          className="manicon-svg select__icon svg-icon--disclosureDown16"
-          fill="currentColor"
-          height={20}
-          viewBox="0 0 16 16"
-          width={20}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <polygon
-            points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
-          />
-        </svg>
-      </div>
-      <div
-        className="select"
-      >
-        <select
-          onChange={[Function]}
-          value=""
-        >
-          <option
-            value=""
-          >
-            Tag:
-          </option>
-          <option
-            value="dog"
-          >
-            Dog
-          </option>
-          <option
-            value="puppy"
-          >
-            Puppy
-          </option>
-        </select>
-        <svg
-          aria-hidden={true}
-          className="manicon-svg select__icon svg-icon--disclosureDown16"
-          fill="currentColor"
-          height={20}
-          viewBox="0 0 16 16"
-          width={20}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <polygon
-            points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
-          />
-        </svg>
-      </div>
-      <div
-        className="select"
-      >
-        <select
-          onChange={[Function]}
-          value=""
-        >
-          <option
-            value="default"
-          >
-            Sort By:
-          </option>
-          <option
-            value="sort_title ASC"
-          >
-            A-Z
-          </option>
-          <option
-            value="sort_title DESC"
-          >
-            Z-A
-          </option>
-        </select>
-        <svg
-          aria-hidden={true}
-          className="manicon-svg select__icon svg-icon--disclosureDown16"
-          fill="currentColor"
-          height={20}
-          viewBox="0 0 16 16"
-          width={20}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <polygon
-            points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
-          />
-        </svg>
-      </div>
-    </div>
-  </form>,
-]
+  />
+  <ResourceList.Filters
+    filterChangeHandler={[MockFunction]}
+    initialFilterState={Object {}}
+    kinds={
+      Array [
+        "image",
+        "video",
+      ]
+    }
+    setScreenReaderStatus={[Function]}
+    tags={
+      Array [
+        "dog",
+        "puppy",
+      ]
+    }
+  />
+</Fragment>
 `;
