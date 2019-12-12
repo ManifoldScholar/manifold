@@ -157,6 +157,7 @@ module ApiDocs
       end
 
       def body_response_description
+        # TODO: Add in included_relationships information
         klass = resource_klass(resource_name)
         return nil unless klass.const_defined?(:BODY_RESPONSE_DESCRIPTION)
 
@@ -168,6 +169,7 @@ module ApiDocs
       end
 
       def response
+        # TODO: Denote whether resposne is paginated or not
         resource_klass(resource_name).send(type_method(type_from_action(action, :response)))
       end
     end
