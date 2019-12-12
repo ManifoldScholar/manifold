@@ -13,7 +13,7 @@ module V1
     typed_attribute :full_name, NilClass
     typed_attribute :suffix, NilClass
     typed_attribute :prefix, NilClass
-    typed_attribute :avatar_styles, Hash
+    typed_attribute :avatar_styles, Types::Hash
 
   end
 end

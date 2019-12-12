@@ -28,7 +28,7 @@ module V1
       params[:include_toc] && params[:include_toc].include?(object.id)
     }
 
-    typed_attribute :cover_styles, Hash
+    typed_attribute :cover_styles, Types::Hash
 
     typed_belongs_to :category
 
@@ -37,7 +37,7 @@ module V1
 
       typed_attribute :start_text_section_id, NilClass, &:calculated_start_text_section_id
 
-      typed_attribute :sections_map, NilClass do |object, _params|
+      typed_attribute :sections_map, Types::Hash do |object, _params|
         sections_map(object)
       end
 

@@ -13,7 +13,7 @@ module V1
         typed_attribute :updated_at, NilClass
         typed_attribute :full_name, NilClass
         typed_attribute :is_current_user, NilClass
-        typed_attribute :avatar_styles, Hash
+        typed_attribute :avatar_styles, Types::Hash
 
         typed_attribute :email, NilClass, private: true
         typed_attribute :created_at, NilClass, private: true
