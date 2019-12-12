@@ -1,26 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global.Form.Errorable component renders correctly 1`] = `
+exports[`global/components/form/Errorable matches the snapshot 1`] = `
 <div
   className="form-error"
   style={Object {}}
 >
-  <span
-    aria-atomic="true"
-    aria-live="polite"
-    className="errors"
-    id={null}
-    role="alert"
-  >
-    <span>
-      <span
-        className="error"
-      >
-        Can't be blank. 
-        <br />
-      </span>
-       
-    </span>
-  </span>
+  <InputError
+    errors={
+      Array [
+        Object {
+          "detail": "can't be blank",
+          "source": Object {
+            "pointer": "/data/attributes/name",
+          },
+        },
+      ]
+    }
+    idForError={null}
+  />
 </div>
 `;

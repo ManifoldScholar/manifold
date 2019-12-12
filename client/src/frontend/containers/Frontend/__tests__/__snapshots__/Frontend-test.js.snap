@@ -1,783 +1,480 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend Frontend Container renders correctly 1`] = `
-Array [
-  <header
-    className="header-app header-app--sticky"
-  >
-    <a
-      className="skip-to-main screen-reader-text"
-      href="#skip-to-main"
-      onClick={[Function]}
-    >
-      Skip to main content
-    </a>
-    <div
-      className="library-header library-header--light"
+exports[`frontend/containers/Frontend/Frontend matches the snapshot 1`] = `
+<SideEffect(BodyClass)
+  className="browse"
+>
+  <BackLinkProvider>
+    <withRouter(ScrollToTop) />
+    <Layout.Header
+      authentication={
+        Object {
+          "authenticated": true,
+          "currentUser": Object {
+            "attributes": Object {
+              "abilities": Object {
+                "create": true,
+                "createPermissions": true,
+                "createResourceCollections": true,
+                "createResources": true,
+                "createTexts": true,
+                "createTwitterQueries": true,
+                "delete": true,
+                "manageEvents": true,
+                "managePermissions": true,
+                "manageResourceCollections": true,
+                "manageResources": true,
+                "manageSocials": true,
+                "manageTexts": true,
+                "manageTwitterQueries": true,
+                "read": true,
+                "readDeleted": true,
+                "readDrafts": true,
+                "readLog": true,
+                "readSecrets": true,
+                "update": true,
+                "updateMakers": true,
+              },
+              "avatarStyles": Object {},
+              "classAbilities": Object {
+                "annotation": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "comment": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "permission": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "project": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "projectCollection": Object {
+                  "create": true,
+                  "read": true,
+                  "update": true,
+                },
+                "resource": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "settings": Object {
+                  "create": true,
+                  "read": true,
+                  "update": true,
+                },
+                "statistics": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "subject": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "text": Object {
+                  "create": true,
+                  "read": true,
+                  "update": true,
+                },
+                "user": Object {
+                  "create": true,
+                  "read": true,
+                  "update": true,
+                },
+                "version": Object {
+                  "create": true,
+                  "read": true,
+                },
+              },
+              "email": "test@cic-fake.gotcha",
+              "firstName": "Rowan",
+              "fullName": "Rowan Ida",
+              "isCurrentUser": true,
+              "kind": "admin",
+              "lastName": "Ida",
+              "role": "admin",
+            },
+            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+            "relationships": Object {},
+            "type": "users",
+          },
+        }
+      }
+      commonActions={
+        Object {
+          "addNotification": [Function],
+          "clearNotifications": [Function],
+          "closeSignInUpOverlay": [Function],
+          "hideAppearancePanel": [Function],
+          "hideNotesPanel": [Function],
+          "hideReaderReturnPanel": [Function],
+          "hideSearchPanel": [Function],
+          "hideUserPanel": [Function],
+          "hideVisibilityPanel": [Function],
+          "logout": [Function],
+          "panelHide": [Function],
+          "panelShow": [Function],
+          "panelToggle": [Function],
+          "removeNotification": [Function],
+          "showMyNotes": [Function],
+          "toggleSearchPanel": [Function],
+          "toggleSignInUpOverlay": [Function],
+          "toggleUserPanel": [Function],
+          "visibilityChange": [Function],
+          "visibilityHide": [Function],
+          "visibilityShow": [Function],
+          "visibilityToggle": [Function],
+        }
+      }
+      location={Object {}}
+      notifications={
+        Object {
+          "notifications": Array [],
+        }
+      }
+      pages={Array []}
+      settings={
+        Object {
+          "attributes": Object {
+            "abilities": Object {
+              "create": true,
+              "createPermissions": true,
+              "createResourceCollections": true,
+              "createResources": true,
+              "createTexts": true,
+              "createTwitterQueries": true,
+              "delete": true,
+              "manageEvents": true,
+              "managePermissions": true,
+              "manageResourceCollections": true,
+              "manageResources": true,
+              "manageSocials": true,
+              "manageTexts": true,
+              "manageTwitterQueries": true,
+              "read": true,
+              "readDeleted": true,
+              "readDrafts": true,
+              "readLog": true,
+              "readSecrets": true,
+              "update": true,
+              "updateMakers": true,
+            },
+            "copyrightFormatted": "2015-2016 6 University of Minnesota Press",
+            "general": Object {
+              "contactUrl": "http://www.dailyrowan.com",
+              "copyright": "2015-2016 6 University of Minnesota Press",
+              "installationName": "Manifold",
+            },
+            "integrations": Object {
+              "facebookAppId": null,
+              "gaProfileId": null,
+              "gaTrackingId": null,
+              "googleClientEmail": null,
+              "googleClientId": null,
+              "googleOauthClientId": null,
+              "googlePrivateKeyId": null,
+              "googleProjectId": null,
+              "twitterAccessToken": null,
+              "twitterAppId": null,
+            },
+            "oauth": Object {
+              "facebook": Object {
+                "enabled": false,
+              },
+              "googleOauth2": Object {
+                "enabled": true,
+                "name": "google",
+              },
+              "twitter": Object {
+                "enabled": true,
+                "name": "twitter",
+              },
+            },
+            "pressLogoStyles": Object {
+              "largeLandscape": null,
+              "medium": null,
+              "mediumLandscape": null,
+              "mediumPortrait": null,
+              "mediumSquare": null,
+              "original": null,
+              "small": null,
+              "smallLandscape": null,
+              "smallPortrait": null,
+              "smallSquare": null,
+            },
+            "secrets": Object {
+              "facebookAppSecret": null,
+              "googleOauthClientSecret": null,
+              "googlePrivateKey": null,
+              "twitterAccessTokenSecret": null,
+              "twitterAppSecret": null,
+            },
+            "theme": Object {
+              "logoStyles": "{\\"left\\": -1}",
+              "typekitId": "typekitId",
+            },
+          },
+          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+          "relationships": Object {},
+          "type": "settings",
+        }
+      }
+      visibility={
+        Object {
+          "loginOverlay": false,
+          "uiPanels": Object {
+            "appearance": false,
+            "layers": false,
+            "notes": false,
+            "readerReturn": false,
+            "search": false,
+            "tocDrawer": false,
+            "user": false,
+            "visibility": false,
+          },
+          "userMenu": false,
+          "visibilityFilters": Object {
+            "annotation": Object {
+              "others": true,
+              "yours": true,
+            },
+            "highlight": Object {
+              "others": true,
+              "yours": true,
+            },
+            "readingGroups": Object {
+              "all": true,
+            },
+            "resource": Object {
+              "all": true,
+            },
+          },
+        }
+      }
+    />
+    <main
+      className=""
+      id="skip-to-main"
     >
       <div>
-        <div
-          className="library-header__inner"
-        >
-          <a
-            className="header-logo"
-            href="/"
-            onClick={[Function]}
-          >
-            <span
-              className="screen-reader-text"
-            >
-              Return to home
-            </span>
-            <figure
-              className=""
-            >
-              <svg
-                aria-hidden={true}
-                className="manicon-svg svg-icon--manifoldLogo32"
-                fill="currentColor"
-                height={26}
-                viewBox="0 0 32 32"
-                width={26}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <polygon
-                  fillRule="evenodd"
-                  points="29.995 10.305 27.851 10.983 24.581 9.72 29.995 8.007 29.995 6.182 21.983 8.718 18.712 7.454 29.995 3.884 29.995 2.059 16.114 6.45 2 1 2.036 12.73 15.131 8.587 15.131 10.886 2.036 15.029 2.036 16.854 15.131 12.71 15.131 15.009 2.036 19.152 2.036 20.977 15.131 16.834 15.131 19.132 2.036 23.275 2.036 25.1 15.131 20.958 15.131 23.256 2.036 27.399 2.036 29.224 15.989 24.809 30 30.22"
-                />
-              </svg>
-              <span
-                className="screen-reader-text"
-              >
-                Manifold Logo
-              </span>
-            </figure>
-          </a>
-          <nav
-            aria-label="Primary Navigation"
-            className="site-nav show-75"
-          >
-            <ul
-              aria-label="Page Links"
-              className="site-nav__list"
-              style={Object {}}
-            >
-              <li
-                className="site-nav__item"
-              >
-                <a
-                  aria-current="page"
-                  className="site-nav__link site-nav__link--active"
-                  href="/"
-                  onClick={[Function]}
-                  style={Object {}}
-                  target={null}
-                >
-                  Home
-                </a>
-              </li>
-              <li
-                className="site-nav__item"
-              >
-                <a
-                  aria-current={null}
-                  className="site-nav__link"
-                  href="/projects"
-                  onClick={[Function]}
-                  target={null}
-                >
-                  Projects
-                </a>
-              </li>
-              <li
-                className="site-nav__item"
-              >
-                <a
-                  aria-current={null}
-                  className="site-nav__link"
-                  href="/following"
-                  onClick={[Function]}
-                  target={null}
-                >
-                  Following
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <nav
-            className="user-nav show-75"
-          >
-            <ul
-              aria-label="User Links"
-              className="user-nav__list"
-              style={Object {}}
-            >
-              <li
-                className="user-nav__item"
-              >
-                <a
-                  className="mode-button"
-                  href="/backend"
-                  onClick={[Function]}
-                >
-                  Enter Admin Mode
-                </a>
-              </li>
-              <li
-                className="user-nav__item"
-              >
-                <button
-                  aria-haspopup={true}
-                  className="user-nav__button user-nav__button--search button-search"
-                  data-id="toggle-menu"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg search-icon svg-icon--search24"
-                    fill="currentColor"
-                    height={32}
-                    viewBox="0 0 24 24"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M15.5798983,14.8766915 L19.3507534,18.6475466 L18.6436466,19.3546534 L14.8724673,15.5834741 C13.8274558,16.4672326 12.4760412,17 11,17 C7.68652629,17 5,14.3138111 5,11 C5,7.68685763 7.68685763,5 11,5 C14.3138111,5 17,7.68652629 17,11 C17,12.4780309 16.4657953,13.8310989 15.5798983,14.8766915 Z M16,11 C16,8.23878293 13.7614982,6 11,6 C8.23914237,6 6,8.23914237 6,11 C6,13.7614982 8.23878293,16 11,16 C13.7618576,16 16,13.7618576 16,11 Z"
-                    />
-                  </svg>
-                  <span
-                    className="screen-reader-text"
-                  >
-                    Search
-                  </span>
-                </button>
-                <div
-                  className="panel-hidden"
-                >
-                  <focus-trap-react
-                    focusTrapOptions={
-                      Object {
-                        "clickOutsideDeactivates": true,
-                        "escapeDeactivate": false,
-                      }
-                    }
-                  >
-                    <button
-                      className="screen-reader-text"
-                      onClick={[Function]}
-                    >
-                      Close Panel
-                    </button>
-                    <nav
-                      className="search-menu"
-                    >
-                      <form
-                        className="search-query"
-                        onSubmit={[Function]}
-                      >
-                        <div
-                          className="search-query__input-magnify"
-                        >
-                          <label
-                            className="screen-reader-text"
-                            htmlFor={1}
-                          >
-                            Enter Search Criteria
-                          </label>
-                          <input
-                            autoFocus={true}
-                            className="search-query__input"
-                            id={1}
-                            onChange={[Function]}
-                            placeholder="Search…"
-                            type="text"
-                            value=""
-                          />
-                          <button
-                            className="search-query__submit"
-                            type="submit"
-                          >
-                            <svg
-                              aria-hidden={true}
-                              className="manicon-svg search-query__search-icon svg-icon--search16"
-                              fill="currentColor"
-                              height={22}
-                              viewBox="0 0 16 16"
-                              width={22}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
-                              />
-                            </svg>
-                            <span
-                              className="screen-reader-text"
-                            >
-                              Execute Search
-                            </span>
-                          </button>
-                        </div>
-                        <div
-                          className="search-query__footer"
-                        >
-                          <div
-                            className="search-query__description"
-                          >
-                            Search across all content and projects
-                          </div>
-                        </div>
-                      </form>
-                    </nav>
-                  </focus-trap-react>
-                </div>
-              </li>
-              <li
-                className="user-nav__item"
-              >
-                <button
-                  aria-haspopup={true}
-                  className="button-avatar button-avatar--frontend"
-                  onClick={[Function]}
-                >
-                  <span
-                    className="screen-reader-text"
-                  >
-                    User settings
-                  </span>
-                  <figure
-                    aria-hidden={true}
-                    className="avatar"
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg avatar__icon svg-icon--Avatar24"
-                      fill="currentColor"
-                      height={24}
-                      viewBox="0 0 24 24"
-                      width={24}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M17.06,18.19 L16.95,17.444 C16.738,16.014 15.631,14.977 14.316,14.977 L9.65,14.977 C8.336,14.977 7.228,16.014 7.017,17.444 L6.91,18.167 C5.134,16.698 4,14.479 4,12 C4,7.588 7.589,4 12,4 C16.412,4 20,7.588 20,12 C20,14.493 18.853,16.722 17.06,18.19 M7.826,18.811 L8.006,17.59 C8.144,16.656 8.836,15.977 9.65,15.977 L14.316,15.977 C15.131,15.977 15.822,16.656 15.96,17.59 L16.144,18.831 C14.934,19.567 13.518,20 12,20 C10.47,20 9.043,19.56 7.826,18.811 M12,3 C7.038,3 3,7.037 3,12 C3,16.962 7.038,21 12,21 C16.963,21 21,16.962 21,12 C21,7.037 16.963,3 12,3 M11.9999,12.4751 C10.6219,12.4751 9.4999,11.3541 9.4999,9.9751 C9.4999,8.5961 10.6219,7.4751 11.9999,7.4751 C13.3779,7.4751 14.4999,8.5961 14.4999,9.9751 C14.4999,11.3541 13.3779,12.4751 11.9999,12.4751 M11.9999,6.4751 C10.0699,6.4751 8.4999,8.0451 8.4999,9.9751 C8.4999,11.9051 10.0699,13.4751 11.9999,13.4751 C13.9299,13.4751 15.4999,11.9051 15.4999,9.9751 C15.4999,8.0451 13.9299,6.4751 11.9999,6.4751"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                    <span
-                      className="screen-reader-text"
-                    >
-                      Avatar
-                    </span>
-                  </figure>
-                </button>
-                <div
-                  className="panel-hidden"
-                >
-                  <focus-trap-react
-                    focusTrapOptions={
-                      Object {
-                        "clickOutsideDeactivates": true,
-                        "escapeDeactivate": false,
-                      }
-                    }
-                  >
-                    <button
-                      className="screen-reader-text"
-                      onClick={[Function]}
-                    >
-                      Close Panel
-                    </button>
-                    <nav
-                      className="user-menu user-menu--frontend menu-hidden"
-                    >
-                      <i
-                        className="user-menu__tail tail"
-                      />
-                      <ul
-                        className="user-menu__list"
-                      >
-                        <li
-                          className="user-menu__item"
-                        >
-                          <button
-                            aria-describedby="user-menu-edit-profile"
-                            className="user-menu__link"
-                            onClick={[Function]}
-                          >
-                            <svg
-                              aria-hidden={true}
-                              className="manicon-svg user-menu__icon svg-icon--editProfile24"
-                              fill="currentColor"
-                              height={32}
-                              viewBox="0 0 24 24"
-                              width={32}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M9.3785,4 C10.7565,4 11.8785,5.121 11.8785,6.5 C11.8785,7.879 10.7565,9 9.3785,9 C8.0005,9 6.8785,7.879 6.8785,6.5 C6.8785,5.121 8.0005,4 9.3785,4 M9.3785,10 C11.3085,10 12.8785,8.43 12.8785,6.5 C12.8785,4.57 11.3085,3 9.3785,3 C7.4485,3 5.8785,4.57 5.8785,6.5 C5.8785,8.43 7.4485,10 9.3785,10 M11.542,18.4863 L12.921,19.8693 L10.97,20.4403 L11.542,18.4863 Z M19.939,13.3503 L13.871,19.4053 L12.007,17.5363 L18.075,11.4823 L19.939,13.3503 Z M18.077,10.0683 L14.391,13.7453 C14.146,12.4353 13.047,11.4903 11.745,11.4903 L7.012,11.4903 C5.686,11.4903 4.565,12.4663 4.349,13.8133 L4,15.9753 L5.013,15.9753 L5.336,13.9713 C5.474,13.1133 6.179,12.4903 7.012,12.4903 L11.745,12.4903 C12.577,12.4903 13.282,13.1133 13.42,13.9713 L13.523,14.6103 L10.855,17.2713 L9.498,21.9133 L14.133,20.5563 L21.353,13.3523 L18.077,10.0683 Z"
-                                fillRule="evenodd"
-                              />
-                            </svg>
-                            <span
-                              className="user-menu__link-text"
-                            >
-                              Edit Profile
-                            </span>
-                          </button>
-                          <span
-                            className="aria-describedby"
-                            id="user-menu-edit-profile"
-                          >
-                            Edit your profile
-                          </span>
-                        </li>
-                        <li
-                          className="user-menu__item"
-                        >
-                          <button
-                            aria-describedby="user-menu-notifications"
-                            className="user-menu__link"
-                            onClick={[Function]}
-                          >
-                            <svg
-                              aria-hidden={true}
-                              className="manicon-svg user-menu__icon svg-icon--notifications24"
-                              fill="currentColor"
-                              height={32}
-                              viewBox="0 0 24 24"
-                              width={32}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M21,10.0980483 L21,17.499 L3,17.499 L3,6.499 L16.6708057,6.499 C17.0826008,5.33378734 18.1936863,4.4992 19.5001,4.4992 C21.1572424,4.4992 22.5001,5.84205763 22.5001,7.4992 C22.5001,8.60991078 21.8968292,9.57943101 21,10.0980483 Z M16.5001,7.499 L4.89352556,7.499 L12.0001,13.3514731 L17.0329753,9.20675226 C16.6969712,8.72213638 16.5001,8.13370622 16.5001,7.4992 Z M17.7341318,9.9247831 L12.0001,14.6469269 L4,8.05860928 L4,16.499 L20,16.499 L20,10.4577577 C19.8374314,10.4850136 19.6704258,10.4992 19.5001,10.4992 C18.8398741,10.4992 18.2295354,10.2860451 17.7341318,9.9247831 Z M21.5001,7.4992 C21.5001,6.39434237 20.6049576,5.4992 19.5001,5.4992 C18.3952424,5.4992 17.5001,6.39434237 17.5001,7.4992 C17.5001,8.60405763 18.3952424,9.4992 19.5001,9.4992 C20.6049576,9.4992 21.5001,8.60405763 21.5001,7.4992 Z"
-                              />
-                            </svg>
-                            <span
-                              className="user-menu__link-text"
-                            >
-                              Notifications
-                            </span>
-                          </button>
-                          <span
-                            className="aria-describedby"
-                            id="user-menu-notifications"
-                          >
-                            Edit your notification settings
-                          </span>
-                        </li>
-                        <li
-                          className="user-menu__item"
-                        >
-                          <button
-                            aria-describedby="user-menu-groups"
-                            className="user-menu__link"
-                            onClick={[Function]}
-                          >
-                            <svg
-                              aria-hidden={true}
-                              className="manicon-svg user-menu__icon svg-icon--annotationGroup24"
-                              height={32}
-                              viewBox="0 0 24 24"
-                              width={32}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <g
-                                fill="none"
-                                fillRule="evenodd"
-                              >
-                                <path
-                                  d="M2,3 L2,13 L5,13 L5,17.046 L9.478,13 L16,13 L16,3 L2,3 Z M3,4 L15,4 L15,12 L9.093,12 L6,14.794 L6,12 L3,12 L3,4 Z M17.5003,7.9995 L21.9993,7.9995 L21.9993,16.9995 L19.0003,16.9995 L19.0003,21.2575 L14.8993,16.9995 L10.0003,16.9995 L10.0003,14.4995 L11.0003,14.4995 L11.0003,15.9995 L15.3253,15.9995 L18.0003,18.7775 L18.0003,15.9995 L21.0003,15.9995 L21.0003,8.9995 L17.5003,8.9995 L17.5003,7.9995 Z"
-                                  fill="currentColor"
-                                />
-                              </g>
-                            </svg>
-                            <span
-                              className="user-menu__link-text"
-                            >
-                              Manage Groups
-                            </span>
-                          </button>
-                          <span
-                            className="aria-describedby"
-                            id="user-menu-groups"
-                          >
-                            Manage your Reading Groups
-                          </span>
-                        </li>
-                        <li
-                          className="user-menu__item"
-                        >
-                          <button
-                            aria-describedby="user-menu-logout"
-                            className="user-menu__link"
-                            onClick={[Function]}
-                          >
-                            <svg
-                              aria-hidden={true}
-                              className="manicon-svg user-menu__icon svg-icon--logout24"
-                              fill="currentColor"
-                              height={32}
-                              viewBox="0 0 24 24"
-                              width={32}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M9,17 C11.045,17 12.802,15.763 13.576,14 L14.65,14 C13.823,16.327 11.606,18 9,18 C5.691,18 3,15.309 3,12 C3,8.691 5.691,6 9,6 C11.606,6 13.824,7.674 14.65,10 L13.576,10 C12.803,8.237 11.045,7 9,7 C6.243,7 4,9.243 4,12 C4,14.757 6.243,17 9,17 Z M17.269,7.627 L21.479,12 L17.269,16.374 L16.548,15.681 L19.61,12.5 L9.5,12.5 L9.5,11.5 L19.61,11.5 L16.548,8.32 L17.269,7.627 Z"
-                                fillRule="evenodd"
-                              />
-                            </svg>
-                            <span
-                              className="user-menu__link-text"
-                            >
-                              Logout
-                            </span>
-                          </button>
-                          <span
-                            className="aria-describedby"
-                            id="user-menu-logout"
-                          >
-                            Logout of Manifold
-                          </span>
-                        </li>
-                      </ul>
-                    </nav>
-                  </focus-trap-react>
-                </div>
-              </li>
-            </ul>
-          </nav>
-          <nav
-            className="breadcrumb-list hide-75"
-          >
-            <span>
-              <a
-                aria-current="page"
-                className="breadcrumb-list__link active"
-                href="/"
-                onClick={[Function]}
-                style={Object {}}
-              >
-                Home
-              </a>
-            </span>
-          </nav>
-          <nav
-            aria-label="Mobile Navigation"
-            className="hide-75 nested-nav"
-          />
-          <button
-            aria-expanded={false}
-            aria-haspopup={true}
-            className="mobile-nav-toggle"
-            onClick={[Function]}
-          >
-            <span
-              className="screen-reader-text"
-            >
-              Open mobile navigation menu
-            </span>
-            <svg
-              aria-hidden={true}
-              className="manicon-svg mobile-nav-trigger__icon svg-icon--menu32"
-              fill="currentColor"
-              height={32}
-              viewBox="0 0 32 32"
-              width={32}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M25,15.5 L25,16.5 L6.99999997,16.5 L6.99999997,15.5 L25,15.5 Z M25,8.49999998 L25,9.49999998 L6.99999997,9.49999998 L6.99999997,8.49999998 L25,8.49999998 Z M25,22.5 L25,23.5 L6.99999997,23.5 L6.99999997,22.5 L25,22.5 Z"
-              />
-            </svg>
-          </button>
-        </div>
+        <Switch />
       </div>
-    </div>
-    <div
-      className="header-border"
+    </main>
+    <Connect(withPluginReplacement('FrontendFooter))
+      authentication={
+        Object {
+          "authenticated": true,
+          "currentUser": Object {
+            "attributes": Object {
+              "abilities": Object {
+                "create": true,
+                "createPermissions": true,
+                "createResourceCollections": true,
+                "createResources": true,
+                "createTexts": true,
+                "createTwitterQueries": true,
+                "delete": true,
+                "manageEvents": true,
+                "managePermissions": true,
+                "manageResourceCollections": true,
+                "manageResources": true,
+                "manageSocials": true,
+                "manageTexts": true,
+                "manageTwitterQueries": true,
+                "read": true,
+                "readDeleted": true,
+                "readDrafts": true,
+                "readLog": true,
+                "readSecrets": true,
+                "update": true,
+                "updateMakers": true,
+              },
+              "avatarStyles": Object {},
+              "classAbilities": Object {
+                "annotation": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "comment": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "permission": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "project": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "projectCollection": Object {
+                  "create": true,
+                  "read": true,
+                  "update": true,
+                },
+                "resource": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "settings": Object {
+                  "create": true,
+                  "read": true,
+                  "update": true,
+                },
+                "statistics": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "subject": Object {
+                  "create": true,
+                  "read": true,
+                },
+                "text": Object {
+                  "create": true,
+                  "read": true,
+                  "update": true,
+                },
+                "user": Object {
+                  "create": true,
+                  "read": true,
+                  "update": true,
+                },
+                "version": Object {
+                  "create": true,
+                  "read": true,
+                },
+              },
+              "email": "test@cic-fake.gotcha",
+              "firstName": "Rowan",
+              "fullName": "Rowan Ida",
+              "isCurrentUser": true,
+              "kind": "admin",
+              "lastName": "Ida",
+              "role": "admin",
+            },
+            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+            "relationships": Object {},
+            "type": "users",
+          },
+        }
+      }
+      commonActions={
+        Object {
+          "addNotification": [Function],
+          "clearNotifications": [Function],
+          "closeSignInUpOverlay": [Function],
+          "hideAppearancePanel": [Function],
+          "hideNotesPanel": [Function],
+          "hideReaderReturnPanel": [Function],
+          "hideSearchPanel": [Function],
+          "hideUserPanel": [Function],
+          "hideVisibilityPanel": [Function],
+          "logout": [Function],
+          "panelHide": [Function],
+          "panelShow": [Function],
+          "panelToggle": [Function],
+          "removeNotification": [Function],
+          "showMyNotes": [Function],
+          "toggleSearchPanel": [Function],
+          "toggleSignInUpOverlay": [Function],
+          "toggleUserPanel": [Function],
+          "visibilityChange": [Function],
+          "visibilityHide": [Function],
+          "visibilityShow": [Function],
+          "visibilityToggle": [Function],
+        }
+      }
+      settings={
+        Object {
+          "attributes": Object {
+            "abilities": Object {
+              "create": true,
+              "createPermissions": true,
+              "createResourceCollections": true,
+              "createResources": true,
+              "createTexts": true,
+              "createTwitterQueries": true,
+              "delete": true,
+              "manageEvents": true,
+              "managePermissions": true,
+              "manageResourceCollections": true,
+              "manageResources": true,
+              "manageSocials": true,
+              "manageTexts": true,
+              "manageTwitterQueries": true,
+              "read": true,
+              "readDeleted": true,
+              "readDrafts": true,
+              "readLog": true,
+              "readSecrets": true,
+              "update": true,
+              "updateMakers": true,
+            },
+            "copyrightFormatted": "2015-2016 6 University of Minnesota Press",
+            "general": Object {
+              "contactUrl": "http://www.dailyrowan.com",
+              "copyright": "2015-2016 6 University of Minnesota Press",
+              "installationName": "Manifold",
+            },
+            "integrations": Object {
+              "facebookAppId": null,
+              "gaProfileId": null,
+              "gaTrackingId": null,
+              "googleClientEmail": null,
+              "googleClientId": null,
+              "googleOauthClientId": null,
+              "googlePrivateKeyId": null,
+              "googleProjectId": null,
+              "twitterAccessToken": null,
+              "twitterAppId": null,
+            },
+            "oauth": Object {
+              "facebook": Object {
+                "enabled": false,
+              },
+              "googleOauth2": Object {
+                "enabled": true,
+                "name": "google",
+              },
+              "twitter": Object {
+                "enabled": true,
+                "name": "twitter",
+              },
+            },
+            "pressLogoStyles": Object {
+              "largeLandscape": null,
+              "medium": null,
+              "mediumLandscape": null,
+              "mediumPortrait": null,
+              "mediumSquare": null,
+              "original": null,
+              "small": null,
+              "smallLandscape": null,
+              "smallPortrait": null,
+              "smallSquare": null,
+            },
+            "secrets": Object {
+              "facebookAppSecret": null,
+              "googleOauthClientSecret": null,
+              "googlePrivateKey": null,
+              "twitterAccessTokenSecret": null,
+              "twitterAppSecret": null,
+            },
+            "theme": Object {
+              "logoStyles": "{\\"left\\": -1}",
+              "typekitId": "typekitId",
+            },
+          },
+          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+          "relationships": Object {},
+          "type": "settings",
+        }
+      }
     />
-    <section
-      className="notifications-container"
-      role="alert"
-    >
-      <div
-        className="notifications-list--context-header notifications-list"
-      >
-        <div />
-      </div>
-    </section>
-  </header>,
-  <main
-    className=""
-    id="skip-to-main"
-  >
-    <div />
-  </main>,
-  <footer
-    className="app-footer app-footer--default"
-  >
-    <div
-      className="app-footer__columns container"
-    >
-      <div
-        className="app-footer__row"
-      >
-        <div
-          className="app-footer__column app-footer__column--right"
-        >
-          <form
-            className="app-footer-search-form search-form"
-            onSubmit={[Function]}
-          >
-            <div
-              className="search-button-inline"
-            >
-              <label
-                className="screen-reader-text"
-                htmlFor="app-footer-search"
-              >
-                Site Search
-              </label>
-              <input
-                id="app-footer-search"
-                onChange={[Function]}
-                placeholder="Search"
-                type="text"
-                value=""
-              />
-              <button
-                className="icon"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="manicon-svg svg-icon--search16"
-                  fill="currentColor"
-                  height={20}
-                  viewBox="0 0 16 16"
-                  width={20}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
-                  />
-                </svg>
-                <span
-                  className="screen-reader-text"
-                >
-                  Search
-                </span>
-              </button>
-            </div>
-          </form>
-        </div>
-        <div
-          className="app-footer__column app-footer__column--left"
-        >
-          <div>
-            <nav
-              aria-hidden="true"
-              className="app-footer-navigation app-footer-navigation--mobile"
-            >
-              <ul
-                className="app-footer-navigation__list"
-              >
-                <li>
-                  <ul
-                    className="app-footer-navigation__group"
-                  >
-                    <li
-                      className="app-footer-navigation__item"
-                    >
-                      <span
-                        className="app-footer-navigation__link"
-                        onClick={[Function]}
-                        role="button"
-                        tabIndex="0"
-                      >
-                        <span
-                          className="app-footer-navigation__link-text"
-                        >
-                          Log Out
-                        </span>
-                      </span>
-                    </li>
-                    <li
-                      className="app-footer-navigation__item"
-                    >
-                      <a
-                        className="app-footer-navigation__link"
-                        href="/projects/all"
-                        onClick={[Function]}
-                        target={null}
-                      >
-                        <span
-                          className="app-footer-navigation__link-text"
-                        >
-                          Projects
-                        </span>
-                      </a>
-                    </li>
-                    <li
-                      className="app-footer-navigation__item"
-                    >
-                      <a
-                        className="app-footer-navigation__link"
-                        href="/"
-                        onClick={[Function]}
-                        target={null}
-                      >
-                        <span
-                          className="app-footer-navigation__link-text"
-                        >
-                          Home
-                        </span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <ul
-                    className="app-footer-navigation__group"
-                  />
-                </li>
-              </ul>
-            </nav>
-            <nav
-              aria-label="Footer Navigation"
-              className="app-footer-navigation app-footer-navigation--desktop"
-            >
-              <ul
-                className="app-footer-navigation__list"
-              >
-                <li>
-                  <ul
-                    className="app-footer-navigation__group"
-                  >
-                    <li
-                      className="app-footer-navigation__item"
-                    >
-                      <span
-                        className="app-footer-navigation__link"
-                        onClick={[Function]}
-                        role="button"
-                        tabIndex="0"
-                      >
-                        <span
-                          className="app-footer-navigation__link-text"
-                        >
-                          Log Out
-                        </span>
-                      </span>
-                    </li>
-                    <li
-                      className="app-footer-navigation__item"
-                    >
-                      <a
-                        className="app-footer-navigation__link"
-                        href="/projects/all"
-                        onClick={[Function]}
-                        target={null}
-                      >
-                        <span
-                          className="app-footer-navigation__link-text"
-                        >
-                          Projects
-                        </span>
-                      </a>
-                    </li>
-                    <li
-                      className="app-footer-navigation__item"
-                    >
-                      <a
-                        className="app-footer-navigation__link"
-                        href="/"
-                        onClick={[Function]}
-                        target={null}
-                      >
-                        <span
-                          className="app-footer-navigation__link-text"
-                        >
-                          Home
-                        </span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <ul
-                    className="app-footer-navigation__group"
-                  />
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </div>
-    <section
-      className="app-footer__copyright app-footer__copyright"
-    >
-      <div
-        className="container flush"
-      >
-        <div
-          className="app-footer__colophone"
-        >
-          <div
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "2015-2016 6 University of Minnesota Press",
-              }
-            }
-          />
-        </div>
-      </div>
-    </section>
-    <a
-      className="app-footer-powered-by app-footer-powered-by--with-hover"
-      href="http://manifoldapp.org"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <section>
-        <div
-          className="container flush"
-        >
-          <span
-            className="app-footer-powered-by__logo"
-          >
-            <svg
-              aria-hidden={true}
-              className="manicon-svg app-footer-powered-by__logo-icon svg-icon--manifoldLogo32"
-              fill="currentColor"
-              height={32}
-              viewBox="0 0 32 32"
-              width={32}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <polygon
-                fillRule="evenodd"
-                points="29.995 10.305 27.851 10.983 24.581 9.72 29.995 8.007 29.995 6.182 21.983 8.718 18.712 7.454 29.995 3.884 29.995 2.059 16.114 6.45 2 1 2.036 12.73 15.131 8.587 15.131 10.886 2.036 15.029 2.036 16.854 15.131 12.71 15.131 15.009 2.036 19.152 2.036 20.977 15.131 16.834 15.131 19.132 2.036 23.275 2.036 25.1 15.131 20.958 15.131 23.256 2.036 27.399 2.036 29.224 15.989 24.809 30 30.22"
-              />
-            </svg>
-            <span
-              className="app-footer-powered-by__logo-text"
-            >
-              <span
-                className="app-footer-powered-by__logo-text--neutral"
-              >
-                Powered by
-              </span>
-               
-              <span
-                className="app-footer-powered-by__logo-text--white"
-              >
-                Manifold
-              </span>
-            </span>
-          </span>
-        </div>
-      </section>
-    </a>
-  </footer>,
-]
+  </BackLinkProvider>
+</SideEffect(BodyClass)>
 `;

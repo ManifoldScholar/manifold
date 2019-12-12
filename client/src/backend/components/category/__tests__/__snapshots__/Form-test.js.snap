@@ -1,40 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Category.Form Component renders correctly 1`] = `
-<div>
-  <form
-    className="form-secondary"
-    data-id="submit"
-    onSubmit={[Function]}
-  >
-    <div
-      className="form-input"
-      style={Object {}}
-    >
-      <label
-        className=""
-        htmlFor="text-input-1"
-      >
-        Title
-      </label>
-      <input
-        aria-describedby="text-input-error-1 text-input-instructions-1"
-        id="text-input-1"
-        onChange={[Function]}
-        placeholder="What would you like to call this category?"
-        type="text"
-        value=""
-      />
-    </div>
-    <div
-      className="form-input submit wide"
-    >
-      <input
-        className="button-secondary button-secondary--outlined"
-        type="submit"
-        value="Create Category"
-      />
-    </div>
-  </form>
-</div>
+exports[`backend/components/category/Form matches the snapshot 1`] = `
+<withRouter(Connect(HigherOrder.FetchData('Form.Form)))
+  className="form-secondary"
+  create={[Function]}
+  name="backend-text-category-create"
+  notificationScope="none"
+  projectId="1"
+  update={[Function]}
+>
+  <Form.TextInput
+    focusOnMount={true}
+    join={[Function]}
+    label="Title"
+    name="attributes[title]"
+    password={false}
+    placeholder="What would you like to call this category?"
+  />
+  <Form.Save
+    text="Create Category"
+    theme="backend"
+  />
+</withRouter(Connect(HigherOrder.FetchData('Form.Form)))>
 `;

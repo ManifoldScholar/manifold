@@ -1,208 +1,104 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global.SignInUp.Update component renders correctly 1`] = `
-<section
-  className="sign-in-up-update"
->
-  <form
-    autoComplete="off"
-    method="post"
-    onSubmit={[Function]}
-  >
-    <div>
-      <h4
-        className="form-heading"
-      >
-        Hello,
-         
-        <span
-          className="nickname"
-        >
-          Rowan
-        </span>
-        .
-      </h4>
-    </div>
-    <div
-      className="row-1-p"
-    >
-      <div>
-        <p
-          className="overlay-copy"
-          id="update-nickname-label"
-        >
-          Would you like to update your Nickname?
-        </p>
-      </div>
-      <div
-        className="row-1-p"
-      >
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <input
-            aria-describedby="update-nickname-error"
-            aria-labelledby="update-nickname-label"
-            id="update-nickname"
-            name="nickname"
-            onChange={[Function]}
-            placeholder="Nickname"
-            type="text"
-            value=""
-          />
-        </div>
-      </div>
-      <div
-        className="row-1-p"
-      >
-        <p
-          className="overlay-copy"
-        >
-          Do you want to edit your account information?
-        </p>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            htmlFor="update-firstName"
-          >
-            First Name
-          </label>
-          <input
-            aria-describedby="update-firstName-error"
-            id="update-firstName"
-            name="firstName"
-            onChange={[Function]}
-            placeholder="First name"
-            type="text"
-            value="Rowan"
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            htmlFor="update-lastName"
-          >
-            Last Name
-          </label>
-          <input
-            aria-describedby="update-lastName-error"
-            id="update-lastName"
-            name="lastName"
-            onChange={[Function]}
-            placeholder="Last name"
-            type="text"
-            value="Ida"
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            htmlFor="update-email"
-          >
-            Email
-          </label>
-          <input
-            aria-describedby="update-email-error"
-            id="update-email"
-            name="email"
-            onChange={[Function]}
-            placeholder="Email"
-            type="text"
-            value="test@cic-fake.gotcha"
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            htmlFor="update-password"
-          >
-            Password
-          </label>
-          <input
-            aria-describedby="update-password-error"
-            id="update-password"
-            name="password"
-            onChange={[Function]}
-            placeholder="New password"
-            type="password"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            htmlFor="update-passwordConfirmation"
-          >
-            Confirm Password
-          </label>
-          <input
-            aria-describedby="update-passwordConfirmation-error"
-            id="update-passwordConfirmation"
-            name="passwordConfirmation"
-            onChange={[Function]}
-            placeholder="Confirm new password"
-            type="password"
-            value=""
-          />
-        </div>
-      </div>
-    </div>
-    <div
-      className="row-1-p"
-    >
-      <div
-        className="form-input form-error"
-      >
-        <input
-          className="button-secondary button-secondary--with-room"
-          type="submit"
-          value="Save Changes"
-        />
-      </div>
-    </div>
-  </form>
-  <div
-    className="subscriptions"
-  >
-    <span
-      className="subscriptions__label"
-    >
-      Adjust your settings for email notifications:
-    </span>
-    <button
-      className="button-secondary button-secondary--outlined button-secondary--color-white"
-      onClick={[Function]}
-    >
-      <span
-        className="button-secondary__text"
-      >
-        Notification Settings
-      </span>
-      <svg
-        aria-hidden={true}
-        className="manicon-svg button-secondary__icon svg-icon--arrowLongRight16"
-        fill="currentColor"
-        height={16}
-        viewBox="0 0 24 16"
-        width={24}
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-        />
-      </svg>
-    </button>
-  </div>
-</section>
+exports[`global/components/sign-in-up/Update matches the snapshot 1`] = `
+<withRouter(Connect(HigherOrder.FetchData('UpdateFormContainer)))
+  authentication={
+    Object {
+      "authenticated": true,
+      "currentUser": Object {
+        "attributes": Object {
+          "abilities": Object {
+            "create": true,
+            "createPermissions": true,
+            "createResourceCollections": true,
+            "createResources": true,
+            "createTexts": true,
+            "createTwitterQueries": true,
+            "delete": true,
+            "manageEvents": true,
+            "managePermissions": true,
+            "manageResourceCollections": true,
+            "manageResources": true,
+            "manageSocials": true,
+            "manageTexts": true,
+            "manageTwitterQueries": true,
+            "read": true,
+            "readDeleted": true,
+            "readDrafts": true,
+            "readLog": true,
+            "readSecrets": true,
+            "update": true,
+            "updateMakers": true,
+          },
+          "avatarStyles": Object {},
+          "classAbilities": Object {
+            "annotation": Object {
+              "create": true,
+              "read": true,
+            },
+            "comment": Object {
+              "create": true,
+              "read": true,
+            },
+            "permission": Object {
+              "create": true,
+              "read": true,
+            },
+            "project": Object {
+              "create": true,
+              "read": true,
+            },
+            "projectCollection": Object {
+              "create": true,
+              "read": true,
+              "update": true,
+            },
+            "resource": Object {
+              "create": true,
+              "read": true,
+            },
+            "settings": Object {
+              "create": true,
+              "read": true,
+              "update": true,
+            },
+            "statistics": Object {
+              "create": true,
+              "read": true,
+            },
+            "subject": Object {
+              "create": true,
+              "read": true,
+            },
+            "text": Object {
+              "create": true,
+              "read": true,
+              "update": true,
+            },
+            "user": Object {
+              "create": true,
+              "read": true,
+              "update": true,
+            },
+            "version": Object {
+              "create": true,
+              "read": true,
+            },
+          },
+          "email": "test@cic-fake.gotcha",
+          "firstName": "Rowan",
+          "fullName": "Rowan Ida",
+          "isCurrentUser": true,
+          "kind": "admin",
+          "lastName": "Ida",
+          "role": "admin",
+        },
+        "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+        "relationships": Object {},
+        "type": "users",
+      },
+    }
+  }
+  mode="existing"
+/>
 `;

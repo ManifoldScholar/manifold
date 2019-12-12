@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend Page Container renders correctly 1`] = `
+exports[`frontend/containers/Page/Page matches the snapshot 1`] = `
 <section>
+  <Connect(WithSettings('HeadContentComponent))
+    title="Daily Rowan"
+  />
   <div
     className="container page-content"
     dangerouslySetInnerHTML={

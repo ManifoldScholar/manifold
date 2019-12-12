@@ -1,28 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global.Utility.EntityCount component renders correctly 1`] = `
-Array [
+exports[`global/components/utility/Entitycount matches the snapshot 1`] = `
+<Fragment>
   <p
     aria-hidden={true}
     className="list-total"
   >
     Showing 
     <span>
-      1-5
+      1-1
     </span>
      of 
     <span>
-      10
+      2
     </span>
-     entities: 
-  </p>,
+     babies: 
+  </p>
   <div
     aria-atomic={true}
     aria-live="polite"
     className="screen-reader-text"
     role="status"
   >
-    10 entities. Showing results 1 through 5.
-  </div>,
-]
+    2 babies. Showing results 1 through 1.
+  </div>
+</Fragment>
 `;

@@ -64,9 +64,21 @@
     "setupFiles": [
       "./src/test/setup.js"
     ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/.*/__mocks__"
+    "setupFilesAfterEnv": [
+      "jest-enzyme",
+      "bdd-lazy-var/global",
+      "./src/test/setup/withApp.js",
+      "./src/test/setup/withFormContext.js",
+      "./src/test/setup/quietConsole.js"
     ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/.*/__mocks__",
+      "<rootDir>/.*/__fixtures__"
+    ],
+    "testEnvironment": "enzyme",
+    "testEnvironmentOptions": {
+      "enzymeAdapter": "react16"
+    },
     "globals": {
       "__BROWSER__": false,
       "__SERVER__": true,
@@ -82,6 +94,7 @@
     "brackets2dots": "^1.1.0",
     "classnames": "^2.2.1",
     "cli-spinner": "^0.2.8",
+    "common-tags": "^1.8.0",
     "compression": "^1.6.0",
     "connect": "^3.6.6",
     "cookie": "^0.x",
@@ -186,12 +199,13 @@
     "babel-plugin-dynamic-import-node": "^2.2",
     "babel-plugin-module-resolver": "^3.0",
     "babel-plugin-react-require": "^3.1.1",
+    "bdd-lazy-var": "^2.5.2",
     "cfonts": "^2.3.0",
     "circular-dependency-plugin": "^5.0.2",
     "copy-webpack-plugin": "^5.x",
     "css-loader": "^3.x",
     "enzyme": "^3.x",
-    "enzyme-adapter-react-16": "^1.x",
+    "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.x",
     "eslint-config-airbnb": "18.x",
     "eslint-config-prettier": "^6.3.0",
@@ -204,6 +218,8 @@
     "faker": "^4.1.0",
     "file-loader": "^4.x",
     "jest": "^24.x",
+    "jest-environment-enzyme": "^7.1.2",
+    "jest-enzyme": "^7.1.2",
     "jscodeshift": "^0.6.0",
     "lint-staged": "^9.x",
     "mini-css-extract-plugin": "^0.x",

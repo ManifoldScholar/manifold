@@ -1,32 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reader.Header Component renders correctly 1`] = `
-<div>
+exports[`Reader.Header Component matches the snapshot 1`] = `
+<BlurOnLocationChange
+  tag="div"
+>
   <header
     className="reader-header"
   >
-    <a
-      className="skip-to-main screen-reader-text"
-      href="#skip-to-main"
-      onClick={[Function]}
-    >
-      Skip to main content
-    </a>
+    <SkipLink
+      skipId="skip-to-main"
+      skipLinkText="Skip to main content"
+      skipMessage="Skipped to Main Content"
+    />
+    <Connect(withPluginReplacement('Reader.Layout.PreHeader)) />
     <nav
       className="reader-header__inner"
     >
       <div
         className="reader-header__menu-group reader-header__menu-group--left"
       >
+        <ReturnMenuButton
+          expanded={false}
+          toggleReaderMenu={[Function]}
+        />
         <button
-          aria-haspopup={true}
-          className="reader-header__button reader-header__button--pad-default"
-          data-id="toggle-menu"
-          onClick={[Function]}
-        >
-          Menu
-        </button>
-        <button
+          aria-expanded={false}
           aria-haspopup={true}
           className="reader-header__button reader-header__button--gray reader-header__button--pad-default"
           onClick={[Function]}
@@ -36,32 +34,28 @@ exports[`Reader.Header Component renders correctly 1`] = `
           >
             Contents
           </span>
-          <svg
-            aria-hidden={true}
-            className="manicon-svg reader-header__button-icon reader-header__button-icon--large svg-icon--disclosureDown24"
+          <IconComposer
             fill="currentColor"
-            height={24}
-            viewBox="0 0 24 24"
-            width={24}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polygon
-              points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
-            />
-          </svg>
-          <svg
-            aria-hidden={true}
-            className="manicon-svg reader-header__button-icon reader-header__button-icon--small svg-icon--disclosureDown16"
+            icon="disclosureDown24"
+            iconClass="reader-header__button-icon reader-header__button-icon--large"
+            size="default"
+            svgProps={
+              Object {
+                "aria-hidden": true,
+              }
+            }
+          />
+          <IconComposer
             fill="currentColor"
-            height={20}
-            viewBox="0 0 16 16"
-            width={20}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polygon
-              points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
-            />
-          </svg>
+            icon="disclosureDown16"
+            iconClass="reader-header__button-icon reader-header__button-icon--small"
+            size={20}
+            svgProps={
+              Object {
+                "aria-hidden": true,
+              }
+            }
+          />
         </button>
       </div>
       <div
@@ -71,131 +65,59 @@ exports[`Reader.Header Component renders correctly 1`] = `
           aria-label="Reader Settings and Search"
           className="reader-header__nav-list"
         >
+          <Connect(withRouter(AuthorizeComponent))
+            kind="any"
+          >
+            <li
+              className="reader-header__nav-item"
+            >
+              <ControlMenu.Button
+                active={false}
+                icon="notes24"
+                label="Notes"
+                onClick={[Function]}
+              />
+            </li>
+          </Connect(withRouter(AuthorizeComponent))>
           <li
             className="reader-header__nav-item"
           >
-            <button
-              aria-haspopup={true}
+            <ControlMenu.Button
+              active={false}
+              icon="eyeball24"
+              label="Visibility"
+              onClick={[Function]}
+            />
+          </li>
+          <li
+            className="reader-header__nav-item"
+          >
+            <ControlMenu.Button
+              active={false}
+              icon="text24"
+              label="Reader appearance"
+              onClick={[Function]}
+            />
+          </li>
+          <li
+            className="reader-header__nav-item"
+          >
+            <SearchMenuButton
+              active={false}
               className="reader-header__button reader-header__button--pad-narrow"
-              data-id="toggle-Visibility"
-              onClick={[Function]}
-            >
-              <svg
-                aria-hidden={true}
-                className="manicon-svg svg-icon--eyeball24"
-                fill="currentColor"
-                height={32}
-                viewBox="0 0 24 24"
-                width={32}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.2457405,11.4790231 C19.6783989,10.853779 19.0310749,10.2281368 18.3165344,9.64510007 C16.2971738,7.99738186 14.1564315,7.01539998 12,7.01539998 C9.84356852,7.01539998 7.70282618,7.99738186 5.68346559,9.64510007 C4.96892513,10.2281368 4.32160109,10.853779 3.75425948,11.4790231 C3.572291,11.6795632 3.42024661,11.8554474 3.30000079,12 C3.42024661,12.1445526 3.572291,12.3204368 3.75425948,12.5209769 C4.32160109,13.146221 4.96892513,13.7718632 5.68346559,14.3548999 C7.70282618,16.0026181 9.84356852,16.9846 12,16.9846 C14.1564315,16.9846 16.2971738,16.0026181 18.3165344,14.3548999 C19.0310749,13.7718632 19.6783989,13.146221 20.2457405,12.5209769 C20.427709,12.3204368 20.5797534,12.1445526 20.6999992,12 C20.5797534,11.8554474 20.427709,11.6795632 20.2457405,11.4790231 Z M21.7394239,12.2995677 C21.7032367,12.347926 21.636235,12.4338115 21.5398229,12.5518927 C21.3814041,12.7459167 21.196439,12.961382 20.9863064,13.1929606 C20.3872379,13.8531697 19.7045611,14.5129805 18.9487406,15.1297001 C16.76707,16.9098569 14.424106,17.9846 12,17.9846 C9.57589396,17.9846 7.23293003,16.9098569 5.05125936,15.1297001 C4.29543887,14.5129805 3.61276212,13.8531697 3.01369357,13.1929606 C2.80356097,12.961382 2.61859589,12.7459167 2.46017715,12.5518927 C2.36376504,12.4338115 2.29676327,12.347926 2.26057611,12.2995677 L2.03640556,12 L2.26057611,11.7004323 C2.29676327,11.652074 2.36376504,11.5661885 2.46017715,11.4481073 C2.61859589,11.2540833 2.80356097,11.038618 3.01369357,10.8070394 C3.61276212,10.1468303 4.29543887,9.48701947 5.05125936,8.87029991 C7.23293003,7.0901431 9.57589396,6.01539997 12,6.01539997 C14.424106,6.01539997 16.76707,7.0901431 18.9487406,8.87029991 C19.7045611,9.48701947 20.3872379,10.1468303 20.9863064,10.8070394 C21.196439,11.038618 21.3814041,11.2540833 21.5398229,11.4481073 C21.636235,11.5661885 21.7032367,11.652074 21.7394239,11.7004323 L21.9635944,12 L21.7394239,12.2995677 Z M12,15 C10.3431457,15 8.99999999,13.6568543 8.99999999,12 C8.99999999,10.3431457 10.3431457,8.99999999 12,8.99999999 C13.6568543,8.99999999 15,10.3431457 15,12 C15,13.6568543 13.6568543,15 12,15 Z M12,14 C13.1045695,14 14,13.1045695 14,12 C14,10.8954305 13.1045695,9.99999999 12,9.99999999 C10.8954305,9.99999999 9.99999999,10.8954305 9.99999999,12 C9.99999999,13.1045695 10.8954305,14 12,14 Z"
-                />
-              </svg>
-              <span
-                className="screen-reader-text"
-              >
-                Visibility
-              </span>
-            </button>
+              toggleSearchMenu={[Function]}
+            />
           </li>
           <li
             className="reader-header__nav-item"
           >
-            <button
-              aria-haspopup={true}
+            <UserMenuButton
+              active={false}
               className="reader-header__button reader-header__button--pad-narrow"
-              data-id="toggle-Reader appearance"
-              onClick={[Function]}
-            >
-              <svg
-                aria-hidden={true}
-                className="manicon-svg svg-icon--text24"
-                fill="currentColor"
-                height={32}
-                viewBox="0 0 24 24"
-                width={32}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2.46879996,17.9944 L7.13089998,5.50439997 L8.36239998,5.50439997 L13.0245,17.9944 L11.7755,17.9944 L10.544,14.7131 L4.93169997,14.7131 L3.71779997,17.9944 L2.46879996,17.9944 Z M7.74659998,7.17209998 L5.35409997,13.5891 L10.1392,13.5891 L7.74659998,7.17209998 Z M15.29,11.6321 L14.498,10.7981 C15.3072358,9.80618683 16.5456879,9.26614244 17.8232,9.34809999 C20.1632,9.34809999 21.4477,10.5444 21.4477,12.8647 L21.4477,17.9947 L20.2686,17.9947 L20.2686,16.8157 C19.4286317,17.6824702 18.273992,18.1729468 17.067,18.1757 C15.237,18.1757 14.023,17.2323 14.023,15.6191 C14.023,14.205 14.9556,13.0273 17.5069,13.0273 C18.4512592,13.0681316 19.3832725,13.2576255 20.2686,13.5888 L20.2686,12.8642 C20.2897651,12.197878 20.0167133,11.555987 19.5220081,11.1091093 C19.0273029,10.6622316 18.3610479,10.4556268 17.7003,10.5442 C16.7835274,10.5691142 15.9151425,10.9610637 15.29,11.6321 L15.29,11.6321 Z M20.2509,15.4026 L20.2509,14.677 C19.3670633,14.3676929 18.4423819,14.1906485 17.5068,14.1516 C15.6068,14.1516 15.2368,14.967 15.2368,15.6194 C15.2368,16.3811 15.8173,16.9973 17.1015,16.9973 C18.3445501,16.9941366 19.5127112,16.4026565 20.251,15.4026 L20.2509,15.4026 Z"
-                />
-              </svg>
-              <span
-                className="screen-reader-text"
-              >
-                Reader appearance
-              </span>
-            </button>
-          </li>
-          <li
-            className="reader-header__nav-item"
-          >
-            <button
-              aria-haspopup={true}
-              className="reader-header__button reader-header__button--pad-narrow button-search"
-              data-id="toggle-menu"
-              onClick={[Function]}
-            >
-              <svg
-                aria-hidden={true}
-                className="manicon-svg search-icon svg-icon--search24"
-                fill="currentColor"
-                height={32}
-                viewBox="0 0 24 24"
-                width={32}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15.5798983,14.8766915 L19.3507534,18.6475466 L18.6436466,19.3546534 L14.8724673,15.5834741 C13.8274558,16.4672326 12.4760412,17 11,17 C7.68652629,17 5,14.3138111 5,11 C5,7.68685763 7.68685763,5 11,5 C14.3138111,5 17,7.68652629 17,11 C17,12.4780309 16.4657953,13.8310989 15.5798983,14.8766915 Z M16,11 C16,8.23878293 13.7614982,6 11,6 C8.23914237,6 6,8.23914237 6,11 C6,13.7614982 8.23878293,16 11,16 C13.7618576,16 16,13.7618576 16,11 Z"
-                />
-              </svg>
-              <span
-                className="screen-reader-text"
-              >
-                Search
-              </span>
-            </button>
-          </li>
-          <li
-            className="reader-header__nav-item"
-          >
-            <button
-              aria-haspopup={true}
-              className="reader-header__button reader-header__button--pad-narrow button-avatar button-avatar--reader"
-              onClick={[Function]}
-            >
-              <span
-                className="screen-reader-text"
-              >
-                User settings
-              </span>
-              <figure
-                aria-hidden={true}
-                className="avatar"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="manicon-svg avatar__icon svg-icon--Avatar24"
-                  fill="currentColor"
-                  height={24}
-                  viewBox="0 0 24 24"
-                  width={24}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M17.06,18.19 L16.95,17.444 C16.738,16.014 15.631,14.977 14.316,14.977 L9.65,14.977 C8.336,14.977 7.228,16.014 7.017,17.444 L6.91,18.167 C5.134,16.698 4,14.479 4,12 C4,7.588 7.589,4 12,4 C16.412,4 20,7.588 20,12 C20,14.493 18.853,16.722 17.06,18.19 M7.826,18.811 L8.006,17.59 C8.144,16.656 8.836,15.977 9.65,15.977 L14.316,15.977 C15.131,15.977 15.822,16.656 15.96,17.59 L16.144,18.831 C14.934,19.567 13.518,20 12,20 C10.47,20 9.043,19.56 7.826,18.811 M12,3 C7.038,3 3,7.037 3,12 C3,16.962 7.038,21 12,21 C16.963,21 21,16.962 21,12 C21,7.037 16.963,3 12,3 M11.9999,12.4751 C10.6219,12.4751 9.4999,11.3541 9.4999,9.9751 C9.4999,8.5961 10.6219,7.4751 11.9999,7.4751 C13.3779,7.4751 14.4999,8.5961 14.4999,9.9751 C14.4999,11.3541 13.3779,12.4751 11.9999,12.4751 M11.9999,6.4751 C10.0699,6.4751 8.4999,8.0451 8.4999,9.9751 C8.4999,11.9051 10.0699,13.4751 11.9999,13.4751 C13.9299,13.4751 15.4999,11.9051 15.4999,9.9751 C15.4999,8.0451 13.9299,6.4751 11.9999,6.4751"
-                    fillRule="evenodd"
-                  />
-                </svg>
-                <span
-                  className="screen-reader-text"
-                >
-                  Avatar
-                </span>
-              </figure>
-            </button>
+              context="reader"
+              showLoginOverlay={[Function]}
+              toggleUserMenu={[Function]}
+            />
           </li>
         </ul>
       </div>
@@ -203,1215 +125,185 @@ exports[`Reader.Header Component renders correctly 1`] = `
     <div
       className="reader-header__panels reader-header__panels--left"
     >
-      <div
-        className="panel-hidden"
-      >
-        <focus-trap-react
-          focusTrapOptions={
-            Object {
-              "clickOutsideDeactivates": true,
-              "escapeDeactivate": false,
-            }
+      <UIPanel
+        bodyComponent={[Function]}
+        hidePanel={[Function]}
+        id="readerReturn"
+        moreLink="http://manifold.umn.edu/about/"
+        projectId="AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
+        projectTitle="Rowan Test"
+        returnUrl="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
+        toggleSignInUpOverlay={[Function]}
+        visibility={
+          Object {
+            "appearance": false,
+            "layers": false,
+            "notes": false,
+            "readerReturn": false,
+            "search": false,
+            "tocDrawer": false,
+            "user": false,
+            "visibility": false,
           }
-        >
-          <button
-            className="screen-reader-text"
-          >
-            Close Panel
-          </button>
-          <nav
-            aria-label="Site Navigation"
-            className="reader-return-menu"
-          >
-            <ul
-              className="reader-return-menu__list"
-            >
-              <li
-                className="reader-return-menu__item"
-              >
-                <a
-                  className="reader-return-menu__link"
-                  href="/projects/slug-2"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg reader-return-menu__link-icon svg-icon--circleArrowLeft64"
-                    fill="currentColor"
-                    height={36.923}
-                    viewBox="0 0 64 64"
-                    width={36.923}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M32,58 C17.6405965,58 5.99999996,46.3594035 5.99999996,32 C5.99999996,17.6405965 17.6405965,5.99999996 32,5.99999996 C46.3594035,5.99999996 58,17.6405965 58,32 C58,46.3594035 46.3594035,58 32,58 Z M32,56 C45.254834,56 56,45.254834 56,32 C56,18.745166 45.254834,7.99999996 32,7.99999996 C18.745166,7.99999996 7.99999996,18.745166 7.99999996,32 C7.99999996,45.254834 18.745166,56 32,56 Z M19.6388077,32.9918997 L19.6403922,30.9919003 L44.0007923,31.0112003 L43.9992077,33.0111997 L19.6388077,32.9918997 Z M21.019947,32 L35.2169617,44.5045804 L33.8950383,46.0054197 L17.994053,32 L33.8950383,17.9945803 L35.2169617,19.4954196 L21.019947,32 Z"
-                    />
-                  </svg>
-                  <span
-                    className="reader-return-menu__link-text"
-                  >
-                    Project Home
-                  </span>
-                  <span
-                    className="reader-return-menu__small-text"
-                  >
-                    Rowan Test
-                  </span>
-                </a>
-              </li>
-              <li
-                className="reader-return-menu__item"
-              >
-                <a
-                  className="reader-return-menu__link"
-                  href="/"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg reader-return-menu__link-icon svg-icon--projects64"
-                    fill="currentColor"
-                    height={36.923}
-                    viewBox="0 0 64 64"
-                    width={36.923}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M48.522,10 L36.417,11.872 L42.4,50.553 L35.188,50.553 L35.188,11.257 L22.939,11.257 L22.939,50.553 L20.819,50.553 L20.819,11.257 L8.57,11.257 L8.57,50.553 L4,50.553 L4,52.553 L59.467,52.553 L59.467,50.553 L50.237,50.553 L54.688,49.865 L48.522,10 Z M38.699,13.542 L46.851,12.281 L52.405,48.194 L44.254,49.455 L38.699,13.542 Z M24.939,15.622 L33.188,15.622 L33.188,13.257 L24.939,13.257 L24.939,15.622 Z M10.57,16.689 L18.819,16.689 L18.819,13.257 L10.57,13.257 L10.57,16.689 Z M24.939,19.725 L33.188,19.725 L33.188,17.622 L24.939,17.622 L24.939,19.725 Z M10.57,44.164 L18.819,44.164 L18.819,18.689 L10.57,18.689 L10.57,44.164 Z M24.939,41.127 L33.188,41.127 L33.188,21.726 L24.939,21.726 L24.939,41.127 Z M24.939,45.23 L33.188,45.23 L33.188,43.127 L24.939,43.127 L24.939,45.23 Z M10.57,49.596 L18.819,49.596 L18.819,46.163 L10.57,46.163 L10.57,49.596 Z M24.939,49.595 L33.188,49.595 L33.188,47.23 L24.939,47.23 L24.939,49.595 Z M45.8783,32.9758 C47.0433,32.7958 47.8403,31.7058 47.6603,30.5418 C47.4803,29.3778 46.3903,28.5798 45.2263,28.7598 C44.0623,28.9408 43.2643,30.0308 43.4443,31.1948 C43.6243,32.3588 44.7143,33.1568 45.8783,32.9758"
-                      fillRule="evenodd"
-                    />
-                  </svg>
-                  <span
-                    className="reader-return-menu__link-text"
-                  >
-                    Projects
-                  </span>
-                </a>
-              </li>
-              <li
-                className="reader-return-menu__item"
-              >
-                <button
-                  className="reader-return-menu__link reader-return-menu__link--flush-bottom"
-                  data-id="toggle-overlay"
-                  onClick={[MockFunction]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg reader-return-menu__logo-icon svg-icon--manifoldLogo32"
-                    fill="currentColor"
-                    height={28}
-                    viewBox="0 0 32 32"
-                    width={28}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <polygon
-                      fillRule="evenodd"
-                      points="29.995 10.305 27.851 10.983 24.581 9.72 29.995 8.007 29.995 6.182 21.983 8.718 18.712 7.454 29.995 3.884 29.995 2.059 16.114 6.45 2 1 2.036 12.73 15.131 8.587 15.131 10.886 2.036 15.029 2.036 16.854 15.131 12.71 15.131 15.009 2.036 19.152 2.036 20.977 15.131 16.834 15.131 19.132 2.036 23.275 2.036 25.1 15.131 20.958 15.131 23.256 2.036 27.399 2.036 29.224 15.989 24.809 30 30.22"
-                    />
-                  </svg>
-                  <span
-                    className="reader-return-menu__link-text"
-                  >
-                    Sign-in
-                  </span>
-                </button>
-                <a
-                  className="reader-return-menu__note"
-                  href="http://manifold.umn.edu/about/"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  Learn More About
-                   
-                  <span
-                    className="reader-return-menu__note-bold"
-                  >
-                    Manifold
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </focus-trap-react>
-      </div>
+        }
+      />
     </div>
     <div
       className="reader-header__panels reader-header__panels--right"
     >
-      <div
-        className="panel-hidden"
-      >
-        <focus-trap-react
-          focusTrapOptions={
-            Object {
-              "clickOutsideDeactivates": true,
-              "escapeDeactivate": false,
-            }
+      <UIPanel
+        bodyComponent={[Function]}
+        hidePanel={[Function]}
+        id="notes"
+        visibility={
+          Object {
+            "appearance": false,
+            "layers": false,
+            "notes": false,
+            "readerReturn": false,
+            "search": false,
+            "tocDrawer": false,
+            "user": false,
+            "visibility": false,
           }
-        >
-          <button
-            className="screen-reader-text"
-          >
-            Close Panel
-          </button>
-          <div
-            className="notes-drawer"
-          >
-            <div
-              className="drawer-overlay drawer-overlay--reader drawer-overlay--pos-default"
-            />
-            <div
-              className="drawer drawer--reader drawer--right drawer--wide drawer--pad-none drawer--pos-default"
-            >
-              <focus-trap-react
-                active={false}
-                focusTrapOptions={
-                  Object {
-                    "clickOutsideDeactivates": true,
-                    "escapeDeactivates": false,
-                    "returnFocusOnDeactivate": true,
-                  }
-                }
-              >
-                <div
-                  className="drawer-bar drawer-bar--pad-lateral drawer-bar--reader"
-                >
-                  <div
-                    className="drawer-bar__title"
-                  >
-                    <span
-                      className="drawer-bar__title-text"
-                    >
-                      My Notes
-                    </span>
-                  </div>
-                </div>
-                <section
-                  className="notifications-container"
-                  role="alert"
-                >
-                  <div
-                    className="notifications-list--context-drawer notifications-list"
-                  >
-                    <div />
-                  </div>
-                </section>
-              </focus-trap-react>
-            </div>
-          </div>
-        </focus-trap-react>
-      </div>
-      <div
-        className="panel-hidden"
-      >
-        <focus-trap-react
-          focusTrapOptions={
-            Object {
-              "clickOutsideDeactivates": true,
-              "escapeDeactivate": false,
-            }
+        }
+        visible={false}
+      />
+      <UIPanel
+        bodyComponent={
+          Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "displayName": "Connect(HigherOrder.WithReadingGroups(ControlMenu.VisibilityMenuBody))",
+            "mapStateToProps": [Function],
+            "type": [Function],
           }
-        >
-          <button
-            className="screen-reader-text"
-          >
-            Close Panel
-          </button>
-          <div
-            className="visibility-menu control-menu"
-          >
-            <div
-              className="control-menu__header"
-            >
-              <div
-                className="control-menu__heading"
-              >
-                Show the following:
-              </div>
-            </div>
-            <ul
-              className="visibility-menu__section-list"
-            >
-              <li
-                className="visibility-menu__section"
-              >
-                <fieldset
-                  className="visibility-menu__group"
-                >
-                  <legend
-                    className="visibility-menu__legend control-menu__header control-menu__header--with-icon"
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg visibility-menu__group-icon svg-icon--annotate24"
-                      fill="currentColor"
-                      height={32}
-                      viewBox="0 0 24 24"
-                      width={32}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M9.40612602,17.7199728 L19.0839055,8.06418391 L15.9511664,4.92410056 L6.27386418,14.5784572 L4.97459192,19.0173654 L9.40612602,17.7199728 Z M3.50140802,20.4906347 L5.38613577,14.0515428 L15.9528336,3.50989938 L20.4980945,8.06581606 L9.93187396,18.6080272 L3.50140802,20.4906347 Z M10.0233532,17.8105469 L9.31544675,18.5168531 L5.47564673,14.6683531 L6.18355322,13.9620469 L10.0233532,17.8105469 Z"
-                      />
-                    </svg>
-                    <span
-                      className="visibility-menu__group-name"
-                    >
-                      Highlights
-                    </span>
-                  </legend>
-                  <div
-                    className="visibility-menu__filters control-menu__section"
-                  />
-                </fieldset>
-              </li>
-              <li
-                className="visibility-menu__section"
-              >
-                <fieldset
-                  className="visibility-menu__group"
-                >
-                  <legend
-                    className="visibility-menu__legend control-menu__header control-menu__header--with-icon"
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg visibility-menu__group-icon svg-icon--comment24"
-                      fill="currentColor"
-                      height={32}
-                      viewBox="0 0 24 24"
-                      width={32}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M7.99999998,16 L3.99999997,16 L3.99999997,4.99999997 L20,4.99999997 L20,16 L14.1773533,16 L7.99999998,21.0495005 L7.99999998,16 Z M19,5.99999998 L4.99999997,5.99999998 L4.99999997,15 L8.99999999,15 L8.99999999,18.9404996 L13.8206467,15 L19,15 L19,5.99999998 Z"
-                      />
-                    </svg>
-                    <span
-                      className="visibility-menu__group-name"
-                    >
-                      Annotations
-                    </span>
-                  </legend>
-                  <div
-                    className="visibility-menu__filters control-menu__section"
-                  />
-                </fieldset>
-              </li>
-              <li
-                className="visibility-menu__section"
-              >
-                <fieldset
-                  className="visibility-menu__group"
-                >
-                  <legend
-                    className="visibility-menu__legend control-menu__header control-menu__header--with-icon"
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg visibility-menu__group-icon svg-icon--resource24"
-                      fill="currentColor"
-                      height={32}
-                      viewBox="0 0 24 24"
-                      width={32}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M20,7.21504954 L20,16.7580616 L12,20.9927283 L3.99999997,16.7580616 L3.99999997,7.21504954 L12,3.00704952 L20,7.21504954 Z M19,7.81895042 L12,4.13695041 L4.99999997,7.81895042 L4.99999997,16.1559384 L12,19.8612718 L19,16.1559384 L19,7.81895042 Z M12.5,20.4009 L11.5,20.4009 L11.5,11.4612 L12.5,11.4612 L12.5,20.4009 Z M19.2660832,7.04909169 L19.7339168,7.93290827 L12,12.0267282 L4.26608318,7.93290827 L4.73391676,7.04909169 L12,10.8952718 L19.2660832,7.04909169 Z"
-                      />
-                    </svg>
-                    <span
-                      className="visibility-menu__group-name"
-                    >
-                      Resources
-                    </span>
-                  </legend>
-                  <div
-                    className="visibility-menu__filters control-menu__section"
-                  />
-                </fieldset>
-              </li>
-              <li
-                className="visibility-menu__section"
-              >
-                <fieldset
-                  className="visibility-menu__group"
-                >
-                  <legend
-                    className="visibility-menu__legend control-menu__header control-menu__header--with-icon"
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg visibility-menu__group-icon svg-icon--readingGroup24"
-                      height={32}
-                      viewBox="0 0 24 24"
-                      width={32}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M18.0001,3 C16.8971,3 16.0001,3.897 16.0001,5 C16.0001,6.103 16.8971,7 18.0001,7 C19.1031,7 20.0001,6.103 20.0001,5 C20.0001,3.897 19.1031,3 18.0001,3 Z M18.0001,8 C16.3461,8 15.0001,6.654 15.0001,5 C15.0001,3.346 16.3461,2 18.0001,2 C19.6541,2 21.0001,3.346 21.0001,5 C21.0001,6.654 19.6541,8 18.0001,8 Z M6.0001,3 C4.8971,3 4.0001,3.897 4.0001,5 C4.0001,6.103 4.8971,7 6.0001,7 C7.1031,7 8.0001,6.103 8.0001,5 C8.0001,3.897 7.1031,3 6.0001,3 Z M6.0001,8 C4.3461,8 3.0001,6.654 3.0001,5 C3.0001,3.346 4.3461,2 6.0001,2 C7.6541,2 9.0001,3.346 9.0001,5 C9.0001,6.654 7.6541,8 6.0001,8 Z M20.5054,9 C21.8804,9 23.0004,10.119 23.0004,11.495 L23.0004,13 L22.0004,13 L22.0004,11.495 C22.0004,10.671 21.3294,10 20.5054,10 L15.9584,10 L15.9584,9 L20.5054,9 Z M8.0206,10 L3.4946,10 C2.6706,10 1.9996,10.671 1.9996,11.495 L1.9996,13 L0.9996,13 L0.9996,11.495 C0.9996,10.119 2.1196,9 3.4946,9 L8.0206,9 L8.0206,10 Z M8.0001,15.9951 L8.0001,16.3661 L12.0001,17.4771 L16.0001,16.3661 L16.0001,15.9951 C16.0001,15.1711 15.3301,14.5001 14.5051,14.5001 L9.4951,14.5001 C8.6701,14.5001 8.0001,15.1711 8.0001,15.9951 Z M17.0001,15.9951 L17.0001,16.0881 L21.5001,14.8381 L21.5001,22.0001 L20.5001,22.0001 L20.5001,16.1541 L12.5001,18.3761 L12.5001,22.0001 L11.5001,22.0001 L11.5001,18.3761 L3.5001,16.1541 L3.5001,22.0001 L2.5001,22.0001 L2.5001,14.8381 L7.0001,16.0881 L7.0001,15.9951 C7.0001,14.6191 8.1191,13.5001 9.4951,13.5001 L14.5051,13.5001 C15.8811,13.5001 17.0001,14.6191 17.0001,15.9951 Z M12.0001,7.5 C10.8971,7.5 10.0001,8.397 10.0001,9.5 C10.0001,10.603 10.8971,11.5 12.0001,11.5 C13.1031,11.5 14.0001,10.603 14.0001,9.5 C14.0001,8.397 13.1031,7.5 12.0001,7.5 Z M12.0001,12.5 C10.3461,12.5 9.0001,11.154 9.0001,9.5 C9.0001,7.846 10.3461,6.5 12.0001,6.5 C13.6541,6.5 15.0001,7.846 15.0001,9.5 C15.0001,11.154 13.6541,12.5 12.0001,12.5 Z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <span
-                      className="visibility-menu__group-name"
-                    >
-                      Reading Groups
-                    </span>
-                  </legend>
-                  <div
-                    className="visibility-menu__filters control-menu__section"
-                  >
-                    <label
-                      className="checkbox checkbox--white visibility-menu__checkbox visibility-menu__checkbox--block"
-                      htmlFor="readingGroups-checkbox-0"
-                    >
-                      <input
-                        checked={false}
-                        id="readingGroups-checkbox-0"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <div
-                        aria-hidden="true"
-                        className="checkbox__indicator"
-                      >
-                        <svg
-                          aria-hidden={true}
-                          className="manicon-svg checkbox__icon svg-icon--checkmark16"
-                          height={16}
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <polygon
-                            fill="currentColor"
-                            fillRule="nonzero"
-                            points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-                          />
-                        </svg>
-                      </div>
-                      Show All
-                    </label>
-                    <label
-                      className="checkbox checkbox--white visibility-menu__checkbox visibility-menu__checkbox--block"
-                      htmlFor="readingGroups-checkbox-1"
-                    >
-                      <input
-                        checked={false}
-                        id="readingGroups-checkbox-1"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <div
-                        aria-hidden="true"
-                        className="checkbox__indicator"
-                      >
-                        <svg
-                          aria-hidden={true}
-                          className="manicon-svg checkbox__icon svg-icon--checkmark16"
-                          height={16}
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <polygon
-                            fill="currentColor"
-                            fillRule="nonzero"
-                            points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-                          />
-                        </svg>
-                      </div>
-                      My Private Annotations
-                    </label>
-                    <label
-                      className="checkbox checkbox--white visibility-menu__checkbox visibility-menu__checkbox--block"
-                      htmlFor="readingGroups-checkbox-2"
-                    >
-                      <input
-                        checked={false}
-                        id="readingGroups-checkbox-2"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <div
-                        aria-hidden="true"
-                        className="checkbox__indicator"
-                      >
-                        <svg
-                          aria-hidden={true}
-                          className="manicon-svg checkbox__icon svg-icon--checkmark16"
-                          height={16}
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <polygon
-                            fill="currentColor"
-                            fillRule="nonzero"
-                            points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-                          />
-                        </svg>
-                      </div>
-                      My Public Annotations
-                    </label>
-                  </div>
-                </fieldset>
-              </li>
-              <li
-                className="visibility-menu__footer"
-              >
-                <button
-                  className="control-menu__button"
-                  onClick={[Function]}
-                >
-                  Show All
-                </button>
-                <button
-                  className="control-menu__button"
-                  onClick={[Function]}
-                >
-                  Hide All
-                </button>
-              </li>
-            </ul>
-          </div>
-        </focus-trap-react>
-      </div>
-      <div
-        className="panel-hidden"
-      >
-        <focus-trap-react
-          focusTrapOptions={
-            Object {
-              "clickOutsideDeactivates": true,
-              "escapeDeactivate": false,
-            }
+        }
+        filter={
+          Object {
+            "annotation": Object {
+              "others": true,
+              "yours": true,
+            },
+            "highlight": Object {
+              "others": true,
+              "yours": true,
+            },
+            "readingGroups": Object {
+              "all": true,
+            },
+            "resource": Object {
+              "all": true,
+            },
           }
-        >
-          <button
-            className="screen-reader-text"
-          >
-            Close Panel
-          </button>
-          <nav
-            className="search-menu"
-          >
-            <form
-              className="search-query"
-              onSubmit={[Function]}
-            >
-              <div
-                className="search-query__input-magnify"
-              >
-                <label
-                  className="screen-reader-text"
-                  htmlFor={1}
-                >
-                  Enter Search Criteria
-                </label>
-                <input
-                  autoFocus={true}
-                  className="search-query__input"
-                  id={1}
-                  onChange={[Function]}
-                  placeholder="Search…"
-                  type="text"
-                  value=""
-                />
-                <button
-                  className="search-query__submit"
-                  type="submit"
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg search-query__search-icon svg-icon--search16"
-                    fill="currentColor"
-                    height={22}
-                    viewBox="0 0 16 16"
-                    width={22}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
-                    />
-                  </svg>
-                  <span
-                    className="screen-reader-text"
-                  >
-                    Execute Search
-                  </span>
-                </button>
-              </div>
-              <div
-                aria-labelledby="search-within-header"
-                className="search-query__filters"
-                role="group"
-              >
-                <div
-                  className="search-query__checkbox-group"
-                >
-                  <h4
-                    className="search-query__group-label"
-                    id="search-within-header"
-                  >
-                    Search within:
-                  </h4>
-                  <label
-                    className="search-query__checkbox checkbox checkbox--white"
-                    htmlFor="text-0"
-                  >
-                    <input
-                      checked={true}
-                      id="text-0"
-                      onChange={[Function]}
-                      type="checkbox"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="checkbox__indicator"
-                    >
-                      <svg
-                        aria-hidden={true}
-                        className="manicon-svg checkbox__icon svg-icon--checkmark16"
-                        height={16}
-                        viewBox="0 0 16 16"
-                        width={16}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <polygon
-                          fill="currentColor"
-                          fillRule="nonzero"
-                          points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-                        />
-                      </svg>
-                    </div>
-                    Text
-                  </label>
-                  <label
-                    className="search-query__checkbox checkbox checkbox--white"
-                    htmlFor="project-1"
-                  >
-                    <input
-                      checked={false}
-                      id="project-1"
-                      onChange={[Function]}
-                      type="checkbox"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="checkbox__indicator"
-                    >
-                      <svg
-                        aria-hidden={true}
-                        className="manicon-svg checkbox__icon svg-icon--checkmark16"
-                        height={16}
-                        viewBox="0 0 16 16"
-                        width={16}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <polygon
-                          fill="currentColor"
-                          fillRule="nonzero"
-                          points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-                        />
-                      </svg>
-                    </div>
-                    Project
-                  </label>
-                </div>
-              </div>
-            </form>
-          </nav>
-        </focus-trap-react>
-      </div>
-      <div
-        className="panel-hidden"
-      >
-        <focus-trap-react
-          focusTrapOptions={
-            Object {
-              "clickOutsideDeactivates": true,
-              "escapeDeactivate": false,
-            }
+        }
+        filterChangeHandler={[Function]}
+        hidePanel={[Function]}
+        id="visibility"
+        visibility={
+          Object {
+            "appearance": false,
+            "layers": false,
+            "notes": false,
+            "readerReturn": false,
+            "search": false,
+            "tocDrawer": false,
+            "user": false,
+            "visibility": false,
           }
-        >
-          <button
-            className="screen-reader-text"
-          >
-            Close Panel
-          </button>
-          <div
-            aria-atomic={true}
-            aria-live="polite"
-            className="screen-reader-text"
-            role="status"
-          />
-          <div
-            className="appearance-menu control-menu"
-          >
-            <div
-              className="control-menu__header"
-            >
-              <div
-                className="control-menu__heading"
-              >
-                Adjust appearance:
-              </div>
-            </div>
-            <ul
-              className="appearance-menu__list"
-            >
-              <li
-                className="appearance-menu__section control-menu__section"
-              >
-                <div
-                  className="appearance-menu__font-control-group"
-                >
-                  <div
-                    className="appearance-menu__font-style-control"
-                  >
-                    <fieldset
-                      className="appearance-menu__radio-group"
-                    >
-                      <legend
-                        className="screen-reader-text"
-                      >
-                        Select font style for reader
-                      </legend>
-                      <div
-                        className="appearance-menu__radio-stack"
-                      >
-                        <label
-                          className="appearance-menu__button-base appearance-menu__font-style appearance-menu__font-style--serif"
-                        >
-                          <input
-                            checked={false}
-                            className="appearance-menu__radio-input"
-                            name="font-style-radios"
-                            onChange={[Function]}
-                            tabIndex={0}
-                            type="radio"
-                            value="serif"
-                          />
-                          <span
-                            className="appearance-menu__radio-label"
-                          >
-                            Serif
-                          </span>
-                        </label>
-                        <label
-                          className="appearance-menu__button-base appearance-menu__font-style appearance-menu__font-style--sans-serif"
-                        >
-                          <input
-                            checked={false}
-                            className="appearance-menu__radio-input"
-                            name="font-style-radios"
-                            onChange={[Function]}
-                            tabIndex={-1}
-                            type="radio"
-                            value="sans-serif"
-                          />
-                          <span
-                            className="appearance-menu__radio-label"
-                          >
-                            Sans-serif
-                          </span>
-                        </label>
-                      </div>
-                    </fieldset>
-                  </div>
-                  <div
-                    className="appearance-menu__font-size-control appearance-menu__font-size-control--serif"
-                  >
-                    <div
-                      aria-label="Adjust font size"
-                      role="group"
-                    >
-                      <button
-                        aria-disabled={true}
-                        className="appearance-menu__font-size-button appearance-menu__primary-hover-button appearance-menu__button-base"
-                        disabled={true}
-                        onClick={[Function]}
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="manicon-svg svg-icon--MinusUnique"
-                          fill="currentColor"
-                          height={30}
-                          viewBox="0 0 32 32"
-                          width={30}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            height="2"
-                            width="14"
-                            x="9"
-                            y="15"
-                          />
-                        </svg>
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Decrease font size
-                        </span>
-                      </button>
-                      <button
-                        aria-disabled={true}
-                        className="appearance-menu__font-size-button appearance-menu__primary-hover-button appearance-menu__button-base"
-                        disabled={true}
-                        onClick={[Function]}
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="manicon-svg svg-icon--PlusUnique"
-                          fill="currentColor"
-                          height={30}
-                          viewBox="0 0 32 32"
-                          width={30}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            height="2"
-                            width="14"
-                            x="9"
-                            y="15"
-                          />
-                          <rect
-                            height="14"
-                            width="2"
-                            x="15"
-                            y="9"
-                          />
-                        </svg>
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Increase font size
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                  <div
-                    className="appearance-menu__font-size-control appearance-menu__font-size-control--sans"
-                  >
-                    <div>
-                      <button
-                        aria-disabled={true}
-                        className="appearance-menu__font-size-button appearance-menu__primary-hover-button appearance-menu__button-base"
-                        disabled={true}
-                        onClick={[Function]}
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="manicon-svg svg-icon--MinusUnique"
-                          fill="currentColor"
-                          height={30}
-                          viewBox="0 0 32 32"
-                          width={30}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            height="2"
-                            width="14"
-                            x="9"
-                            y="15"
-                          />
-                        </svg>
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Decrease font size
-                        </span>
-                      </button>
-                      <button
-                        aria-disabled={true}
-                        className="appearance-menu__font-size-button appearance-menu__primary-hover-button appearance-menu__button-base"
-                        disabled={true}
-                        onClick={[Function]}
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="manicon-svg svg-icon--PlusUnique"
-                          fill="currentColor"
-                          height={30}
-                          viewBox="0 0 32 32"
-                          width={30}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            height="2"
-                            width="14"
-                            x="9"
-                            y="15"
-                          />
-                          <rect
-                            height="14"
-                            width="2"
-                            x="15"
-                            y="9"
-                          />
-                        </svg>
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Increase font size
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li
-                className="appearance-menu__section control-menu__section"
-              >
-                <div
-                  className="appearance-menu__color-buttons-container"
-                >
-                  <fieldset
-                    className="appearance-menu__radio-group"
-                  >
-                    <legend
-                      className="screen-reader-text"
-                    >
-                      Select color scheme for reader
-                    </legend>
-                    <label
-                      className="appearance-menu__button-base appearance-menu__color-scheme appearance-menu__color-scheme--light"
-                    >
-                      <input
-                        checked={false}
-                        className="appearance-menu__radio-input"
-                        name="color-scheme-radios"
-                        onChange={[Function]}
-                        tabIndex={0}
-                        type="radio"
-                        value="light"
-                      />
-                      <svg
-                        aria-hidden="true"
-                        className="manicon-svg appearance-menu__color-scheme-icon svg-icon--CheckUnique"
-                        fill="currentColor"
-                        height={30}
-                        viewBox="0 0 32 32"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <polygon
-                          points="14.314 23.462 7.317 16.909 8.684 15.449 14.118 20.538 23.225 9.368 24.775 10.632 14.314 23.462"
-                        />
-                      </svg>
-                      <span
-                        className="screen-reader-text"
-                      >
-                        Light
-                      </span>
-                    </label>
-                    <label
-                      className="appearance-menu__button-base appearance-menu__color-scheme appearance-menu__color-scheme--dark"
-                    >
-                      <input
-                        checked={false}
-                        className="appearance-menu__radio-input"
-                        name="color-scheme-radios"
-                        onChange={[Function]}
-                        tabIndex={-1}
-                        type="radio"
-                        value="dark"
-                      />
-                      <svg
-                        aria-hidden="true"
-                        className="manicon-svg appearance-menu__color-scheme-icon svg-icon--CheckUnique"
-                        fill="currentColor"
-                        height={30}
-                        viewBox="0 0 32 32"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <polygon
-                          points="14.314 23.462 7.317 16.909 8.684 15.449 14.118 20.538 23.225 9.368 24.775 10.632 14.314 23.462"
-                        />
-                      </svg>
-                      <span
-                        className="screen-reader-text"
-                      >
-                        Dark
-                      </span>
-                    </label>
-                  </fieldset>
-                </div>
-              </li>
-              <li
-                className="appearance-menu__section control-menu__section"
-              >
-                <div
-                  aria-label="Adjust text margins"
-                  className="appearance-menu__control-margins"
-                  role="group"
-                >
-                  <button
-                    aria-disabled={true}
-                    className="appearance-menu__margin-button appearance-menu__button-base appearance-menu__primary-hover-button"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg icon-two-color appearance-menu__menu-icon svg-icon--MarginIncreaseUnique"
-                      fill="currentColor"
-                      height={null}
-                      viewBox="0 0 96 50"
-                      width={null}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g>
-                        <path
-                          className="appearance-menu__menu-icon--dark"
-                          d="M24.2967426,24 L19.3492086,19.7592566 L20.6507914,18.2407434 L28.5365907,25 L20.6507914,31.7592566 L19.3492086,30.2407434 L24.2967426,26 L12,26 L12,24 L24.2967426,24 Z M71.7032574,24 L84,24 L84,26 L71.7032574,26 L76.6507914,30.2407434 L75.3492086,31.7592566 L67.4634093,25 L75.3492086,18.2407434 L76.6507914,19.7592566 L71.7032574,24 Z"
-                        />
-                        <path
-                          className="appearance-menu__menu-icon--light"
-                          d="M57,12 L57,14 L39,14 L39,12 L57,12 Z M57,18 L57,20 L39,20 L39,18 L57,18 Z M57,24 L57,26 L39,26 L39,24 L57,24 Z M57,30 L57,32 L39,32 L39,30 L57,30 Z M57,36 L57,38 L39,38 L39,36 L57,36 Z"
-                        />
-                      </g>
-                    </svg>
-                    <span
-                      className="screen-reader-text"
-                    >
-                      Increase text margins
-                    </span>
-                  </button>
-                  <button
-                    aria-disabled={true}
-                    className="appearance-menu__margin-button appearance-menu__button-base appearance-menu__primary-hover-button"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg appearance-menu__menu-icon svg-icon--MarginDecreaseUnique"
-                      fill="currentColor"
-                      height={null}
-                      viewBox="0 0 96 50"
-                      width={null}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g>
-                        <path
-                          className="appearance-menu__menu-icon--dark"
-                          d="M14.2398482,24 L25.5365907,24 L25.5365907,26 L14.2398482,26 L19.1873821,30.2407434 L17.8857994,31.7592566 L10,25 L17.8857994,18.2407434 L19.1873821,19.7592566 L14.2398482,24 Z M80.8333333,26 L69.5365907,26 L69.5365907,24 L80.8333333,24 L75.8857994,19.7592566 L77.1873821,18.2407434 L85.0731815,25 L77.1873821,31.7592566 L75.8857994,30.2407434 L80.8333333,26 Z"
-                        />
-                        <path
-                          className="appearance-menu__menu-icon--light"
-                          d="M63.5365907,12 L63.5365907,14 L31.5365907,14 L31.5365907,12 L63.5365907,12 Z M63.5365907,18 L63.5365907,20 L31.5365907,20 L31.5365907,18 L63.5365907,18 Z M63.5365907,24 L63.5365907,26 L31.5365907,26 L31.5365907,24 L63.5365907,24 Z M63.5365907,30 L63.5365907,32 L31.5365907,32 L31.5365907,30 L63.5365907,30 Z M63.5365907,36 L63.5365907,38 L31.5365907,38 L31.5365907,36 L63.5365907,36 Z"
-                        />
-                      </g>
-                    </svg>
-                    <span
-                      className="screen-reader-text"
-                    >
-                      Decrease text margins
-                    </span>
-                  </button>
-                </div>
-              </li>
-            </ul>
-            <div>
-              <button
-                className="control-menu__button"
-                disabled={false}
-                onClick={[Function]}
-              >
-                <svg
-                  aria-hidden={true}
-                  className="manicon-svg appearance-menu__reload-icon svg-icon--reload24"
-                  fill="currentColor"
-                  height={32}
-                  viewBox="0 0 24 24"
-                  width={32}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M11.84,17.9997 C13.726,17.9997 15.409,17.1237 16.51,15.7587 L17.291,16.3807 C16.006,17.9757 14.041,18.9997 11.84,18.9997 C7.981,18.9997 4.84,15.8587 4.84,11.9997 C4.84,11.8297 4.863,11.6657 4.876,11.4987 L2.637,13.3467 L2,12.5747 L5.319,9.8357 L8.638,12.5747 L8.001,13.3467 L5.861,11.5797 C5.852,11.7197 5.84,11.8577 5.84,11.9997 C5.84,15.3087 8.531,17.9997 11.84,17.9997 Z M21.0432,10.653 L21.6802,11.424 L18.3602,14.164 L15.0412,11.424 L15.6782,10.653 L17.8182,12.42 C17.8282,12.281 17.8402,12.141 17.8402,12 C17.8402,8.691 15.1482,6 11.8402,6 C9.9542,6 8.2712,6.876 7.1702,8.241 L6.3892,7.619 C7.6732,6.024 9.6392,5 11.8402,5 C15.6992,5 18.8402,8.14 18.8402,12 C18.8402,12.17 18.8162,12.334 18.8042,12.501 L21.0432,10.653 Z"
-                    fillRule="evenodd"
-                  />
-                </svg>
-                <span>
-                  Reset to Defaults
-                </span>
-              </button>
-            </div>
-          </div>
-        </focus-trap-react>
-      </div>
-      <div
-        className="panel-hidden"
-      >
-        <focus-trap-react
-          focusTrapOptions={
-            Object {
-              "clickOutsideDeactivates": true,
-              "escapeDeactivate": false,
-            }
+        }
+      />
+      <UIPanel
+        bodyComponent={[Function]}
+        hidePanel={[Function]}
+        id="search"
+        initialState={
+          Object {
+            "allFacets": true,
+            "keyword": "",
+            "scope": "text",
           }
-        >
-          <button
-            className="screen-reader-text"
-          >
-            Close Panel
-          </button>
-          <nav
-            className="user-menu user-menu--reader menu-hidden"
-          >
-            <ul
-              className="user-menu__list"
-            >
-              <li
-                className="user-menu__item"
-              >
-                <button
-                  aria-describedby="user-menu-edit-profile"
-                  className="user-menu__link"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg user-menu__icon svg-icon--editProfile24"
-                    fill="currentColor"
-                    height={32}
-                    viewBox="0 0 24 24"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9.3785,4 C10.7565,4 11.8785,5.121 11.8785,6.5 C11.8785,7.879 10.7565,9 9.3785,9 C8.0005,9 6.8785,7.879 6.8785,6.5 C6.8785,5.121 8.0005,4 9.3785,4 M9.3785,10 C11.3085,10 12.8785,8.43 12.8785,6.5 C12.8785,4.57 11.3085,3 9.3785,3 C7.4485,3 5.8785,4.57 5.8785,6.5 C5.8785,8.43 7.4485,10 9.3785,10 M11.542,18.4863 L12.921,19.8693 L10.97,20.4403 L11.542,18.4863 Z M19.939,13.3503 L13.871,19.4053 L12.007,17.5363 L18.075,11.4823 L19.939,13.3503 Z M18.077,10.0683 L14.391,13.7453 C14.146,12.4353 13.047,11.4903 11.745,11.4903 L7.012,11.4903 C5.686,11.4903 4.565,12.4663 4.349,13.8133 L4,15.9753 L5.013,15.9753 L5.336,13.9713 C5.474,13.1133 6.179,12.4903 7.012,12.4903 L11.745,12.4903 C12.577,12.4903 13.282,13.1133 13.42,13.9713 L13.523,14.6103 L10.855,17.2713 L9.498,21.9133 L14.133,20.5563 L21.353,13.3523 L18.077,10.0683 Z"
-                      fillRule="evenodd"
-                    />
-                  </svg>
-                  <span
-                    className="user-menu__link-text"
-                  >
-                    Edit Profile
-                  </span>
-                </button>
-                <span
-                  className="aria-describedby"
-                  id="user-menu-edit-profile"
-                >
-                  Edit your profile
-                </span>
-              </li>
-              <li
-                className="user-menu__item"
-              >
-                <button
-                  aria-describedby="user-menu-notifications"
-                  className="user-menu__link"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg user-menu__icon svg-icon--notifications24"
-                    fill="currentColor"
-                    height={32}
-                    viewBox="0 0 24 24"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M21,10.0980483 L21,17.499 L3,17.499 L3,6.499 L16.6708057,6.499 C17.0826008,5.33378734 18.1936863,4.4992 19.5001,4.4992 C21.1572424,4.4992 22.5001,5.84205763 22.5001,7.4992 C22.5001,8.60991078 21.8968292,9.57943101 21,10.0980483 Z M16.5001,7.499 L4.89352556,7.499 L12.0001,13.3514731 L17.0329753,9.20675226 C16.6969712,8.72213638 16.5001,8.13370622 16.5001,7.4992 Z M17.7341318,9.9247831 L12.0001,14.6469269 L4,8.05860928 L4,16.499 L20,16.499 L20,10.4577577 C19.8374314,10.4850136 19.6704258,10.4992 19.5001,10.4992 C18.8398741,10.4992 18.2295354,10.2860451 17.7341318,9.9247831 Z M21.5001,7.4992 C21.5001,6.39434237 20.6049576,5.4992 19.5001,5.4992 C18.3952424,5.4992 17.5001,6.39434237 17.5001,7.4992 C17.5001,8.60405763 18.3952424,9.4992 19.5001,9.4992 C20.6049576,9.4992 21.5001,8.60405763 21.5001,7.4992 Z"
-                    />
-                  </svg>
-                  <span
-                    className="user-menu__link-text"
-                  >
-                    Notifications
-                  </span>
-                </button>
-                <span
-                  className="aria-describedby"
-                  id="user-menu-notifications"
-                >
-                  Edit your notification settings
-                </span>
-              </li>
-              <li
-                className="user-menu__item"
-              >
-                <button
-                  aria-describedby="user-menu-groups"
-                  className="user-menu__link"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg user-menu__icon svg-icon--annotationGroup24"
-                    height={32}
-                    viewBox="0 0 24 24"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g
-                      fill="none"
-                      fillRule="evenodd"
-                    >
-                      <path
-                        d="M2,3 L2,13 L5,13 L5,17.046 L9.478,13 L16,13 L16,3 L2,3 Z M3,4 L15,4 L15,12 L9.093,12 L6,14.794 L6,12 L3,12 L3,4 Z M17.5003,7.9995 L21.9993,7.9995 L21.9993,16.9995 L19.0003,16.9995 L19.0003,21.2575 L14.8993,16.9995 L10.0003,16.9995 L10.0003,14.4995 L11.0003,14.4995 L11.0003,15.9995 L15.3253,15.9995 L18.0003,18.7775 L18.0003,15.9995 L21.0003,15.9995 L21.0003,8.9995 L17.5003,8.9995 L17.5003,7.9995 Z"
-                        fill="currentColor"
-                      />
-                    </g>
-                  </svg>
-                  <span
-                    className="user-menu__link-text"
-                  >
-                    Manage Groups
-                  </span>
-                </button>
-                <span
-                  className="aria-describedby"
-                  id="user-menu-groups"
-                >
-                  Manage your Reading Groups
-                </span>
-              </li>
-              <li
-                className="user-menu__item"
-              >
-                <button
-                  aria-describedby="user-menu-logout"
-                  className="user-menu__link"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg user-menu__icon svg-icon--logout24"
-                    fill="currentColor"
-                    height={32}
-                    viewBox="0 0 24 24"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9,17 C11.045,17 12.802,15.763 13.576,14 L14.65,14 C13.823,16.327 11.606,18 9,18 C5.691,18 3,15.309 3,12 C3,8.691 5.691,6 9,6 C11.606,6 13.824,7.674 14.65,10 L13.576,10 C12.803,8.237 11.045,7 9,7 C6.243,7 4,9.243 4,12 C4,14.757 6.243,17 9,17 Z M17.269,7.627 L21.479,12 L17.269,16.374 L16.548,15.681 L19.61,12.5 L9.5,12.5 L9.5,11.5 L19.61,11.5 L16.548,8.32 L17.269,7.627 Z"
-                      fillRule="evenodd"
-                    />
-                  </svg>
-                  <span
-                    className="user-menu__link-text"
-                  >
-                    Logout
-                  </span>
-                </button>
-                <span
-                  className="aria-describedby"
-                  id="user-menu-logout"
-                >
-                  Logout of Manifold
-                </span>
-              </li>
-            </ul>
-          </nav>
-        </focus-trap-react>
-      </div>
+        }
+        projectId="AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
+        searchType="reader"
+        sectionId={null}
+        textId="AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
+        toggleVisibility={[Function]}
+        visibility={
+          Object {
+            "appearance": false,
+            "layers": false,
+            "notes": false,
+            "readerReturn": false,
+            "search": false,
+            "tocDrawer": false,
+            "user": false,
+            "visibility": false,
+          }
+        }
+      />
+      <UIPanel
+        appearance={
+          Object {
+            "colors": Object {
+              "colorScheme": "light",
+            },
+            "readingGroups": Object {
+              "currentReadingGroup": "public",
+            },
+            "typography": Object {
+              "font": "serif",
+              "fontSize": Object {
+                "current": 3,
+                "max": 6,
+                "min": 0,
+              },
+              "margins": Object {
+                "current": 1,
+                "max": 4,
+                "min": 0,
+              },
+            },
+          }
+        }
+        bodyComponent={[Function]}
+        hidePanel={[Function]}
+        id="appearance"
+        visibility={
+          Object {
+            "appearance": false,
+            "layers": false,
+            "notes": false,
+            "readerReturn": false,
+            "search": false,
+            "tocDrawer": false,
+            "user": false,
+            "visibility": false,
+          }
+        }
+      />
+      <UIPanel
+        bodyComponent={[Function]}
+        context="reader"
+        hidePanel={[Function]}
+        hideUserMenu={[Function]}
+        id="user"
+        showLoginOverlay={[Function]}
+        startLogout={[Function]}
+        visibility={
+          Object {
+            "appearance": false,
+            "layers": false,
+            "notes": false,
+            "readerReturn": false,
+            "search": false,
+            "tocDrawer": false,
+            "user": false,
+            "visibility": false,
+          }
+        }
+      />
     </div>
     <button
       aria-hidden={true}
@@ -1421,1414 +313,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
     >
       Options
     </button>
-    <section
-      className="notifications-container"
-      role="alert"
-    >
-      <div
-        className="notifications-list--context-header notifications-list"
-      >
-        <div />
-      </div>
-    </section>
+    <HeaderNotification />
   </header>
-</div>
-`;
-
-exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] = `
-<div>
-  <header
-    className="reader-header"
-  >
-    <a
-      className="skip-to-main screen-reader-text"
-      href="#skip-to-main"
-      onClick={[Function]}
-    >
-      Skip to main content
-    </a>
-    <nav
-      className="reader-header__inner"
-    >
-      <div
-        className="reader-header__menu-group reader-header__menu-group--left"
-      >
-        <button
-          aria-haspopup={true}
-          className="reader-header__button reader-header__button--pad-default"
-          data-id="toggle-menu"
-          onClick={[Function]}
-        >
-          Menu
-        </button>
-      </div>
-      <div
-        className="reader-header__menu-group reader-header__menu-group--right"
-      >
-        <ul
-          aria-label="Reader Settings and Search"
-          className="reader-header__nav-list"
-        >
-          <li
-            className="reader-header__nav-item"
-          >
-            <button
-              aria-haspopup={true}
-              className="reader-header__button reader-header__button--pad-narrow"
-              data-id="toggle-Visibility"
-              onClick={[Function]}
-            >
-              <svg
-                aria-hidden={true}
-                className="manicon-svg svg-icon--eyeball24"
-                fill="currentColor"
-                height={32}
-                viewBox="0 0 24 24"
-                width={32}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.2457405,11.4790231 C19.6783989,10.853779 19.0310749,10.2281368 18.3165344,9.64510007 C16.2971738,7.99738186 14.1564315,7.01539998 12,7.01539998 C9.84356852,7.01539998 7.70282618,7.99738186 5.68346559,9.64510007 C4.96892513,10.2281368 4.32160109,10.853779 3.75425948,11.4790231 C3.572291,11.6795632 3.42024661,11.8554474 3.30000079,12 C3.42024661,12.1445526 3.572291,12.3204368 3.75425948,12.5209769 C4.32160109,13.146221 4.96892513,13.7718632 5.68346559,14.3548999 C7.70282618,16.0026181 9.84356852,16.9846 12,16.9846 C14.1564315,16.9846 16.2971738,16.0026181 18.3165344,14.3548999 C19.0310749,13.7718632 19.6783989,13.146221 20.2457405,12.5209769 C20.427709,12.3204368 20.5797534,12.1445526 20.6999992,12 C20.5797534,11.8554474 20.427709,11.6795632 20.2457405,11.4790231 Z M21.7394239,12.2995677 C21.7032367,12.347926 21.636235,12.4338115 21.5398229,12.5518927 C21.3814041,12.7459167 21.196439,12.961382 20.9863064,13.1929606 C20.3872379,13.8531697 19.7045611,14.5129805 18.9487406,15.1297001 C16.76707,16.9098569 14.424106,17.9846 12,17.9846 C9.57589396,17.9846 7.23293003,16.9098569 5.05125936,15.1297001 C4.29543887,14.5129805 3.61276212,13.8531697 3.01369357,13.1929606 C2.80356097,12.961382 2.61859589,12.7459167 2.46017715,12.5518927 C2.36376504,12.4338115 2.29676327,12.347926 2.26057611,12.2995677 L2.03640556,12 L2.26057611,11.7004323 C2.29676327,11.652074 2.36376504,11.5661885 2.46017715,11.4481073 C2.61859589,11.2540833 2.80356097,11.038618 3.01369357,10.8070394 C3.61276212,10.1468303 4.29543887,9.48701947 5.05125936,8.87029991 C7.23293003,7.0901431 9.57589396,6.01539997 12,6.01539997 C14.424106,6.01539997 16.76707,7.0901431 18.9487406,8.87029991 C19.7045611,9.48701947 20.3872379,10.1468303 20.9863064,10.8070394 C21.196439,11.038618 21.3814041,11.2540833 21.5398229,11.4481073 C21.636235,11.5661885 21.7032367,11.652074 21.7394239,11.7004323 L21.9635944,12 L21.7394239,12.2995677 Z M12,15 C10.3431457,15 8.99999999,13.6568543 8.99999999,12 C8.99999999,10.3431457 10.3431457,8.99999999 12,8.99999999 C13.6568543,8.99999999 15,10.3431457 15,12 C15,13.6568543 13.6568543,15 12,15 Z M12,14 C13.1045695,14 14,13.1045695 14,12 C14,10.8954305 13.1045695,9.99999999 12,9.99999999 C10.8954305,9.99999999 9.99999999,10.8954305 9.99999999,12 C9.99999999,13.1045695 10.8954305,14 12,14 Z"
-                />
-              </svg>
-              <span
-                className="screen-reader-text"
-              >
-                Visibility
-              </span>
-            </button>
-          </li>
-          <li
-            className="reader-header__nav-item"
-          >
-            <button
-              aria-haspopup={true}
-              className="reader-header__button reader-header__button--pad-narrow"
-              data-id="toggle-Reader appearance"
-              onClick={[Function]}
-            >
-              <svg
-                aria-hidden={true}
-                className="manicon-svg svg-icon--text24"
-                fill="currentColor"
-                height={32}
-                viewBox="0 0 24 24"
-                width={32}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2.46879996,17.9944 L7.13089998,5.50439997 L8.36239998,5.50439997 L13.0245,17.9944 L11.7755,17.9944 L10.544,14.7131 L4.93169997,14.7131 L3.71779997,17.9944 L2.46879996,17.9944 Z M7.74659998,7.17209998 L5.35409997,13.5891 L10.1392,13.5891 L7.74659998,7.17209998 Z M15.29,11.6321 L14.498,10.7981 C15.3072358,9.80618683 16.5456879,9.26614244 17.8232,9.34809999 C20.1632,9.34809999 21.4477,10.5444 21.4477,12.8647 L21.4477,17.9947 L20.2686,17.9947 L20.2686,16.8157 C19.4286317,17.6824702 18.273992,18.1729468 17.067,18.1757 C15.237,18.1757 14.023,17.2323 14.023,15.6191 C14.023,14.205 14.9556,13.0273 17.5069,13.0273 C18.4512592,13.0681316 19.3832725,13.2576255 20.2686,13.5888 L20.2686,12.8642 C20.2897651,12.197878 20.0167133,11.555987 19.5220081,11.1091093 C19.0273029,10.6622316 18.3610479,10.4556268 17.7003,10.5442 C16.7835274,10.5691142 15.9151425,10.9610637 15.29,11.6321 L15.29,11.6321 Z M20.2509,15.4026 L20.2509,14.677 C19.3670633,14.3676929 18.4423819,14.1906485 17.5068,14.1516 C15.6068,14.1516 15.2368,14.967 15.2368,15.6194 C15.2368,16.3811 15.8173,16.9973 17.1015,16.9973 C18.3445501,16.9941366 19.5127112,16.4026565 20.251,15.4026 L20.2509,15.4026 Z"
-                />
-              </svg>
-              <span
-                className="screen-reader-text"
-              >
-                Reader appearance
-              </span>
-            </button>
-          </li>
-          <li
-            className="reader-header__nav-item"
-          >
-            <button
-              aria-haspopup={true}
-              className="reader-header__button reader-header__button--pad-narrow button-search"
-              data-id="toggle-menu"
-              onClick={[Function]}
-            >
-              <svg
-                aria-hidden={true}
-                className="manicon-svg search-icon svg-icon--search24"
-                fill="currentColor"
-                height={32}
-                viewBox="0 0 24 24"
-                width={32}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15.5798983,14.8766915 L19.3507534,18.6475466 L18.6436466,19.3546534 L14.8724673,15.5834741 C13.8274558,16.4672326 12.4760412,17 11,17 C7.68652629,17 5,14.3138111 5,11 C5,7.68685763 7.68685763,5 11,5 C14.3138111,5 17,7.68652629 17,11 C17,12.4780309 16.4657953,13.8310989 15.5798983,14.8766915 Z M16,11 C16,8.23878293 13.7614982,6 11,6 C8.23914237,6 6,8.23914237 6,11 C6,13.7614982 8.23878293,16 11,16 C13.7618576,16 16,13.7618576 16,11 Z"
-                />
-              </svg>
-              <span
-                className="screen-reader-text"
-              >
-                Search
-              </span>
-            </button>
-          </li>
-          <li
-            className="reader-header__nav-item"
-          >
-            <button
-              aria-haspopup={true}
-              className="reader-header__button reader-header__button--pad-narrow button-avatar button-avatar--reader"
-              onClick={[Function]}
-            >
-              <span
-                className="screen-reader-text"
-              >
-                User settings
-              </span>
-              <figure
-                aria-hidden={true}
-                className="avatar"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="manicon-svg avatar__icon svg-icon--Avatar24"
-                  fill="currentColor"
-                  height={24}
-                  viewBox="0 0 24 24"
-                  width={24}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M17.06,18.19 L16.95,17.444 C16.738,16.014 15.631,14.977 14.316,14.977 L9.65,14.977 C8.336,14.977 7.228,16.014 7.017,17.444 L6.91,18.167 C5.134,16.698 4,14.479 4,12 C4,7.588 7.589,4 12,4 C16.412,4 20,7.588 20,12 C20,14.493 18.853,16.722 17.06,18.19 M7.826,18.811 L8.006,17.59 C8.144,16.656 8.836,15.977 9.65,15.977 L14.316,15.977 C15.131,15.977 15.822,16.656 15.96,17.59 L16.144,18.831 C14.934,19.567 13.518,20 12,20 C10.47,20 9.043,19.56 7.826,18.811 M12,3 C7.038,3 3,7.037 3,12 C3,16.962 7.038,21 12,21 C16.963,21 21,16.962 21,12 C21,7.037 16.963,3 12,3 M11.9999,12.4751 C10.6219,12.4751 9.4999,11.3541 9.4999,9.9751 C9.4999,8.5961 10.6219,7.4751 11.9999,7.4751 C13.3779,7.4751 14.4999,8.5961 14.4999,9.9751 C14.4999,11.3541 13.3779,12.4751 11.9999,12.4751 M11.9999,6.4751 C10.0699,6.4751 8.4999,8.0451 8.4999,9.9751 C8.4999,11.9051 10.0699,13.4751 11.9999,13.4751 C13.9299,13.4751 15.4999,11.9051 15.4999,9.9751 C15.4999,8.0451 13.9299,6.4751 11.9999,6.4751"
-                    fillRule="evenodd"
-                  />
-                </svg>
-                <span
-                  className="screen-reader-text"
-                >
-                  Avatar
-                </span>
-              </figure>
-            </button>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div
-      className="reader-header__panels reader-header__panels--left"
-    >
-      <div
-        className="panel-hidden"
-      >
-        <focus-trap-react
-          focusTrapOptions={
-            Object {
-              "clickOutsideDeactivates": true,
-              "escapeDeactivate": false,
-            }
-          }
-        >
-          <button
-            className="screen-reader-text"
-          >
-            Close Panel
-          </button>
-          <nav
-            aria-label="Site Navigation"
-            className="reader-return-menu"
-          >
-            <ul
-              className="reader-return-menu__list"
-            >
-              <li
-                className="reader-return-menu__item"
-              >
-                <a
-                  className="reader-return-menu__link"
-                  href="/projects/slug-2"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg reader-return-menu__link-icon svg-icon--circleArrowLeft64"
-                    fill="currentColor"
-                    height={36.923}
-                    viewBox="0 0 64 64"
-                    width={36.923}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M32,58 C17.6405965,58 5.99999996,46.3594035 5.99999996,32 C5.99999996,17.6405965 17.6405965,5.99999996 32,5.99999996 C46.3594035,5.99999996 58,17.6405965 58,32 C58,46.3594035 46.3594035,58 32,58 Z M32,56 C45.254834,56 56,45.254834 56,32 C56,18.745166 45.254834,7.99999996 32,7.99999996 C18.745166,7.99999996 7.99999996,18.745166 7.99999996,32 C7.99999996,45.254834 18.745166,56 32,56 Z M19.6388077,32.9918997 L19.6403922,30.9919003 L44.0007923,31.0112003 L43.9992077,33.0111997 L19.6388077,32.9918997 Z M21.019947,32 L35.2169617,44.5045804 L33.8950383,46.0054197 L17.994053,32 L33.8950383,17.9945803 L35.2169617,19.4954196 L21.019947,32 Z"
-                    />
-                  </svg>
-                  <span
-                    className="reader-return-menu__link-text"
-                  >
-                    Project Home
-                  </span>
-                  <span
-                    className="reader-return-menu__small-text"
-                  >
-                    Rowan Test
-                  </span>
-                </a>
-              </li>
-              <li
-                className="reader-return-menu__item"
-              >
-                <a
-                  className="reader-return-menu__link"
-                  href="/"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg reader-return-menu__link-icon svg-icon--projects64"
-                    fill="currentColor"
-                    height={36.923}
-                    viewBox="0 0 64 64"
-                    width={36.923}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M48.522,10 L36.417,11.872 L42.4,50.553 L35.188,50.553 L35.188,11.257 L22.939,11.257 L22.939,50.553 L20.819,50.553 L20.819,11.257 L8.57,11.257 L8.57,50.553 L4,50.553 L4,52.553 L59.467,52.553 L59.467,50.553 L50.237,50.553 L54.688,49.865 L48.522,10 Z M38.699,13.542 L46.851,12.281 L52.405,48.194 L44.254,49.455 L38.699,13.542 Z M24.939,15.622 L33.188,15.622 L33.188,13.257 L24.939,13.257 L24.939,15.622 Z M10.57,16.689 L18.819,16.689 L18.819,13.257 L10.57,13.257 L10.57,16.689 Z M24.939,19.725 L33.188,19.725 L33.188,17.622 L24.939,17.622 L24.939,19.725 Z M10.57,44.164 L18.819,44.164 L18.819,18.689 L10.57,18.689 L10.57,44.164 Z M24.939,41.127 L33.188,41.127 L33.188,21.726 L24.939,21.726 L24.939,41.127 Z M24.939,45.23 L33.188,45.23 L33.188,43.127 L24.939,43.127 L24.939,45.23 Z M10.57,49.596 L18.819,49.596 L18.819,46.163 L10.57,46.163 L10.57,49.596 Z M24.939,49.595 L33.188,49.595 L33.188,47.23 L24.939,47.23 L24.939,49.595 Z M45.8783,32.9758 C47.0433,32.7958 47.8403,31.7058 47.6603,30.5418 C47.4803,29.3778 46.3903,28.5798 45.2263,28.7598 C44.0623,28.9408 43.2643,30.0308 43.4443,31.1948 C43.6243,32.3588 44.7143,33.1568 45.8783,32.9758"
-                      fillRule="evenodd"
-                    />
-                  </svg>
-                  <span
-                    className="reader-return-menu__link-text"
-                  >
-                    Projects
-                  </span>
-                </a>
-              </li>
-              <li
-                className="reader-return-menu__item"
-              >
-                <button
-                  className="reader-return-menu__link reader-return-menu__link--flush-bottom"
-                  data-id="toggle-overlay"
-                  onClick={[MockFunction]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg reader-return-menu__logo-icon svg-icon--manifoldLogo32"
-                    fill="currentColor"
-                    height={28}
-                    viewBox="0 0 32 32"
-                    width={28}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <polygon
-                      fillRule="evenodd"
-                      points="29.995 10.305 27.851 10.983 24.581 9.72 29.995 8.007 29.995 6.182 21.983 8.718 18.712 7.454 29.995 3.884 29.995 2.059 16.114 6.45 2 1 2.036 12.73 15.131 8.587 15.131 10.886 2.036 15.029 2.036 16.854 15.131 12.71 15.131 15.009 2.036 19.152 2.036 20.977 15.131 16.834 15.131 19.132 2.036 23.275 2.036 25.1 15.131 20.958 15.131 23.256 2.036 27.399 2.036 29.224 15.989 24.809 30 30.22"
-                    />
-                  </svg>
-                  <span
-                    className="reader-return-menu__link-text"
-                  >
-                    Sign-in
-                  </span>
-                </button>
-                <a
-                  className="reader-return-menu__note"
-                  href="http://manifold.umn.edu/about/"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  Learn More About
-                   
-                  <span
-                    className="reader-return-menu__note-bold"
-                  >
-                    Manifold
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </focus-trap-react>
-      </div>
-    </div>
-    <div
-      className="reader-header__panels reader-header__panels--right"
-    >
-      <div
-        className="panel-hidden"
-      >
-        <focus-trap-react
-          focusTrapOptions={
-            Object {
-              "clickOutsideDeactivates": true,
-              "escapeDeactivate": false,
-            }
-          }
-        >
-          <button
-            className="screen-reader-text"
-          >
-            Close Panel
-          </button>
-          <div
-            className="notes-drawer"
-          >
-            <div
-              className="drawer-overlay drawer-overlay--reader drawer-overlay--pos-default"
-            />
-            <div
-              className="drawer drawer--reader drawer--right drawer--wide drawer--pad-none drawer--pos-default"
-            >
-              <focus-trap-react
-                active={false}
-                focusTrapOptions={
-                  Object {
-                    "clickOutsideDeactivates": true,
-                    "escapeDeactivates": false,
-                    "returnFocusOnDeactivate": true,
-                  }
-                }
-              >
-                <div
-                  className="drawer-bar drawer-bar--pad-lateral drawer-bar--reader"
-                >
-                  <div
-                    className="drawer-bar__title"
-                  >
-                    <span
-                      className="drawer-bar__title-text"
-                    >
-                      My Notes
-                    </span>
-                  </div>
-                </div>
-                <section
-                  className="notifications-container"
-                  role="alert"
-                >
-                  <div
-                    className="notifications-list--context-drawer notifications-list"
-                  >
-                    <div />
-                  </div>
-                </section>
-              </focus-trap-react>
-            </div>
-          </div>
-        </focus-trap-react>
-      </div>
-      <div
-        className="panel-hidden"
-      >
-        <focus-trap-react
-          focusTrapOptions={
-            Object {
-              "clickOutsideDeactivates": true,
-              "escapeDeactivate": false,
-            }
-          }
-        >
-          <button
-            className="screen-reader-text"
-          >
-            Close Panel
-          </button>
-          <div
-            className="visibility-menu control-menu"
-          >
-            <div
-              className="control-menu__header"
-            >
-              <div
-                className="control-menu__heading"
-              >
-                Show the following:
-              </div>
-            </div>
-            <ul
-              className="visibility-menu__section-list"
-            >
-              <li
-                className="visibility-menu__section"
-              >
-                <fieldset
-                  className="visibility-menu__group"
-                >
-                  <legend
-                    className="visibility-menu__legend control-menu__header control-menu__header--with-icon"
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg visibility-menu__group-icon svg-icon--annotate24"
-                      fill="currentColor"
-                      height={32}
-                      viewBox="0 0 24 24"
-                      width={32}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M9.40612602,17.7199728 L19.0839055,8.06418391 L15.9511664,4.92410056 L6.27386418,14.5784572 L4.97459192,19.0173654 L9.40612602,17.7199728 Z M3.50140802,20.4906347 L5.38613577,14.0515428 L15.9528336,3.50989938 L20.4980945,8.06581606 L9.93187396,18.6080272 L3.50140802,20.4906347 Z M10.0233532,17.8105469 L9.31544675,18.5168531 L5.47564673,14.6683531 L6.18355322,13.9620469 L10.0233532,17.8105469 Z"
-                      />
-                    </svg>
-                    <span
-                      className="visibility-menu__group-name"
-                    >
-                      Highlights
-                    </span>
-                  </legend>
-                  <div
-                    className="visibility-menu__filters control-menu__section"
-                  />
-                </fieldset>
-              </li>
-              <li
-                className="visibility-menu__section"
-              >
-                <fieldset
-                  className="visibility-menu__group"
-                >
-                  <legend
-                    className="visibility-menu__legend control-menu__header control-menu__header--with-icon"
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg visibility-menu__group-icon svg-icon--comment24"
-                      fill="currentColor"
-                      height={32}
-                      viewBox="0 0 24 24"
-                      width={32}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M7.99999998,16 L3.99999997,16 L3.99999997,4.99999997 L20,4.99999997 L20,16 L14.1773533,16 L7.99999998,21.0495005 L7.99999998,16 Z M19,5.99999998 L4.99999997,5.99999998 L4.99999997,15 L8.99999999,15 L8.99999999,18.9404996 L13.8206467,15 L19,15 L19,5.99999998 Z"
-                      />
-                    </svg>
-                    <span
-                      className="visibility-menu__group-name"
-                    >
-                      Annotations
-                    </span>
-                  </legend>
-                  <div
-                    className="visibility-menu__filters control-menu__section"
-                  />
-                </fieldset>
-              </li>
-              <li
-                className="visibility-menu__section"
-              >
-                <fieldset
-                  className="visibility-menu__group"
-                >
-                  <legend
-                    className="visibility-menu__legend control-menu__header control-menu__header--with-icon"
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg visibility-menu__group-icon svg-icon--resource24"
-                      fill="currentColor"
-                      height={32}
-                      viewBox="0 0 24 24"
-                      width={32}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M20,7.21504954 L20,16.7580616 L12,20.9927283 L3.99999997,16.7580616 L3.99999997,7.21504954 L12,3.00704952 L20,7.21504954 Z M19,7.81895042 L12,4.13695041 L4.99999997,7.81895042 L4.99999997,16.1559384 L12,19.8612718 L19,16.1559384 L19,7.81895042 Z M12.5,20.4009 L11.5,20.4009 L11.5,11.4612 L12.5,11.4612 L12.5,20.4009 Z M19.2660832,7.04909169 L19.7339168,7.93290827 L12,12.0267282 L4.26608318,7.93290827 L4.73391676,7.04909169 L12,10.8952718 L19.2660832,7.04909169 Z"
-                      />
-                    </svg>
-                    <span
-                      className="visibility-menu__group-name"
-                    >
-                      Resources
-                    </span>
-                  </legend>
-                  <div
-                    className="visibility-menu__filters control-menu__section"
-                  />
-                </fieldset>
-              </li>
-              <li
-                className="visibility-menu__section"
-              >
-                <fieldset
-                  className="visibility-menu__group"
-                >
-                  <legend
-                    className="visibility-menu__legend control-menu__header control-menu__header--with-icon"
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg visibility-menu__group-icon svg-icon--readingGroup24"
-                      height={32}
-                      viewBox="0 0 24 24"
-                      width={32}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M18.0001,3 C16.8971,3 16.0001,3.897 16.0001,5 C16.0001,6.103 16.8971,7 18.0001,7 C19.1031,7 20.0001,6.103 20.0001,5 C20.0001,3.897 19.1031,3 18.0001,3 Z M18.0001,8 C16.3461,8 15.0001,6.654 15.0001,5 C15.0001,3.346 16.3461,2 18.0001,2 C19.6541,2 21.0001,3.346 21.0001,5 C21.0001,6.654 19.6541,8 18.0001,8 Z M6.0001,3 C4.8971,3 4.0001,3.897 4.0001,5 C4.0001,6.103 4.8971,7 6.0001,7 C7.1031,7 8.0001,6.103 8.0001,5 C8.0001,3.897 7.1031,3 6.0001,3 Z M6.0001,8 C4.3461,8 3.0001,6.654 3.0001,5 C3.0001,3.346 4.3461,2 6.0001,2 C7.6541,2 9.0001,3.346 9.0001,5 C9.0001,6.654 7.6541,8 6.0001,8 Z M20.5054,9 C21.8804,9 23.0004,10.119 23.0004,11.495 L23.0004,13 L22.0004,13 L22.0004,11.495 C22.0004,10.671 21.3294,10 20.5054,10 L15.9584,10 L15.9584,9 L20.5054,9 Z M8.0206,10 L3.4946,10 C2.6706,10 1.9996,10.671 1.9996,11.495 L1.9996,13 L0.9996,13 L0.9996,11.495 C0.9996,10.119 2.1196,9 3.4946,9 L8.0206,9 L8.0206,10 Z M8.0001,15.9951 L8.0001,16.3661 L12.0001,17.4771 L16.0001,16.3661 L16.0001,15.9951 C16.0001,15.1711 15.3301,14.5001 14.5051,14.5001 L9.4951,14.5001 C8.6701,14.5001 8.0001,15.1711 8.0001,15.9951 Z M17.0001,15.9951 L17.0001,16.0881 L21.5001,14.8381 L21.5001,22.0001 L20.5001,22.0001 L20.5001,16.1541 L12.5001,18.3761 L12.5001,22.0001 L11.5001,22.0001 L11.5001,18.3761 L3.5001,16.1541 L3.5001,22.0001 L2.5001,22.0001 L2.5001,14.8381 L7.0001,16.0881 L7.0001,15.9951 C7.0001,14.6191 8.1191,13.5001 9.4951,13.5001 L14.5051,13.5001 C15.8811,13.5001 17.0001,14.6191 17.0001,15.9951 Z M12.0001,7.5 C10.8971,7.5 10.0001,8.397 10.0001,9.5 C10.0001,10.603 10.8971,11.5 12.0001,11.5 C13.1031,11.5 14.0001,10.603 14.0001,9.5 C14.0001,8.397 13.1031,7.5 12.0001,7.5 Z M12.0001,12.5 C10.3461,12.5 9.0001,11.154 9.0001,9.5 C9.0001,7.846 10.3461,6.5 12.0001,6.5 C13.6541,6.5 15.0001,7.846 15.0001,9.5 C15.0001,11.154 13.6541,12.5 12.0001,12.5 Z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <span
-                      className="visibility-menu__group-name"
-                    >
-                      Reading Groups
-                    </span>
-                  </legend>
-                  <div
-                    className="visibility-menu__filters control-menu__section"
-                  >
-                    <label
-                      className="checkbox checkbox--white visibility-menu__checkbox visibility-menu__checkbox--block"
-                      htmlFor="readingGroups-checkbox-0"
-                    >
-                      <input
-                        checked={false}
-                        id="readingGroups-checkbox-0"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <div
-                        aria-hidden="true"
-                        className="checkbox__indicator"
-                      >
-                        <svg
-                          aria-hidden={true}
-                          className="manicon-svg checkbox__icon svg-icon--checkmark16"
-                          height={16}
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <polygon
-                            fill="currentColor"
-                            fillRule="nonzero"
-                            points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-                          />
-                        </svg>
-                      </div>
-                      Show All
-                    </label>
-                    <label
-                      className="checkbox checkbox--white visibility-menu__checkbox visibility-menu__checkbox--block"
-                      htmlFor="readingGroups-checkbox-1"
-                    >
-                      <input
-                        checked={false}
-                        id="readingGroups-checkbox-1"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <div
-                        aria-hidden="true"
-                        className="checkbox__indicator"
-                      >
-                        <svg
-                          aria-hidden={true}
-                          className="manicon-svg checkbox__icon svg-icon--checkmark16"
-                          height={16}
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <polygon
-                            fill="currentColor"
-                            fillRule="nonzero"
-                            points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-                          />
-                        </svg>
-                      </div>
-                      My Private Annotations
-                    </label>
-                    <label
-                      className="checkbox checkbox--white visibility-menu__checkbox visibility-menu__checkbox--block"
-                      htmlFor="readingGroups-checkbox-2"
-                    >
-                      <input
-                        checked={false}
-                        id="readingGroups-checkbox-2"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <div
-                        aria-hidden="true"
-                        className="checkbox__indicator"
-                      >
-                        <svg
-                          aria-hidden={true}
-                          className="manicon-svg checkbox__icon svg-icon--checkmark16"
-                          height={16}
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <polygon
-                            fill="currentColor"
-                            fillRule="nonzero"
-                            points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-                          />
-                        </svg>
-                      </div>
-                      My Public Annotations
-                    </label>
-                  </div>
-                </fieldset>
-              </li>
-              <li
-                className="visibility-menu__footer"
-              >
-                <button
-                  className="control-menu__button"
-                  onClick={[Function]}
-                >
-                  Show All
-                </button>
-                <button
-                  className="control-menu__button"
-                  onClick={[Function]}
-                >
-                  Hide All
-                </button>
-              </li>
-            </ul>
-          </div>
-        </focus-trap-react>
-      </div>
-      <div
-        className="panel-hidden"
-      >
-        <focus-trap-react
-          focusTrapOptions={
-            Object {
-              "clickOutsideDeactivates": true,
-              "escapeDeactivate": false,
-            }
-          }
-        >
-          <button
-            className="screen-reader-text"
-          >
-            Close Panel
-          </button>
-          <nav
-            className="search-menu"
-          >
-            <form
-              className="search-query"
-              onSubmit={[Function]}
-            >
-              <div
-                className="search-query__input-magnify"
-              >
-                <label
-                  className="screen-reader-text"
-                  htmlFor={1}
-                >
-                  Enter Search Criteria
-                </label>
-                <input
-                  autoFocus={true}
-                  className="search-query__input"
-                  id={1}
-                  onChange={[Function]}
-                  placeholder="Search…"
-                  type="text"
-                  value=""
-                />
-                <button
-                  className="search-query__submit"
-                  type="submit"
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg search-query__search-icon svg-icon--search16"
-                    fill="currentColor"
-                    height={22}
-                    viewBox="0 0 16 16"
-                    width={22}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
-                    />
-                  </svg>
-                  <span
-                    className="screen-reader-text"
-                  >
-                    Execute Search
-                  </span>
-                </button>
-              </div>
-              <div
-                aria-labelledby="search-within-header"
-                className="search-query__filters"
-                role="group"
-              >
-                <div
-                  className="search-query__checkbox-group"
-                >
-                  <h4
-                    className="search-query__group-label"
-                    id="search-within-header"
-                  >
-                    Search within:
-                  </h4>
-                  <label
-                    className="search-query__checkbox checkbox checkbox--white"
-                    htmlFor="text-0"
-                  >
-                    <input
-                      checked={true}
-                      id="text-0"
-                      onChange={[Function]}
-                      type="checkbox"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="checkbox__indicator"
-                    >
-                      <svg
-                        aria-hidden={true}
-                        className="manicon-svg checkbox__icon svg-icon--checkmark16"
-                        height={16}
-                        viewBox="0 0 16 16"
-                        width={16}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <polygon
-                          fill="currentColor"
-                          fillRule="nonzero"
-                          points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-                        />
-                      </svg>
-                    </div>
-                    Text
-                  </label>
-                  <label
-                    className="search-query__checkbox checkbox checkbox--white"
-                    htmlFor="project-1"
-                  >
-                    <input
-                      checked={false}
-                      id="project-1"
-                      onChange={[Function]}
-                      type="checkbox"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="checkbox__indicator"
-                    >
-                      <svg
-                        aria-hidden={true}
-                        className="manicon-svg checkbox__icon svg-icon--checkmark16"
-                        height={16}
-                        viewBox="0 0 16 16"
-                        width={16}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <polygon
-                          fill="currentColor"
-                          fillRule="nonzero"
-                          points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-                        />
-                      </svg>
-                    </div>
-                    Project
-                  </label>
-                </div>
-              </div>
-            </form>
-          </nav>
-        </focus-trap-react>
-      </div>
-      <div
-        className="panel-hidden"
-      >
-        <focus-trap-react
-          focusTrapOptions={
-            Object {
-              "clickOutsideDeactivates": true,
-              "escapeDeactivate": false,
-            }
-          }
-        >
-          <button
-            className="screen-reader-text"
-          >
-            Close Panel
-          </button>
-          <div
-            aria-atomic={true}
-            aria-live="polite"
-            className="screen-reader-text"
-            role="status"
-          />
-          <div
-            className="appearance-menu control-menu"
-          >
-            <div
-              className="control-menu__header"
-            >
-              <div
-                className="control-menu__heading"
-              >
-                Adjust appearance:
-              </div>
-            </div>
-            <ul
-              className="appearance-menu__list"
-            >
-              <li
-                className="appearance-menu__section control-menu__section"
-              >
-                <div
-                  className="appearance-menu__font-control-group"
-                >
-                  <div
-                    className="appearance-menu__font-style-control"
-                  >
-                    <fieldset
-                      className="appearance-menu__radio-group"
-                    >
-                      <legend
-                        className="screen-reader-text"
-                      >
-                        Select font style for reader
-                      </legend>
-                      <div
-                        className="appearance-menu__radio-stack"
-                      >
-                        <label
-                          className="appearance-menu__button-base appearance-menu__font-style appearance-menu__font-style--serif"
-                        >
-                          <input
-                            checked={false}
-                            className="appearance-menu__radio-input"
-                            name="font-style-radios"
-                            onChange={[Function]}
-                            tabIndex={0}
-                            type="radio"
-                            value="serif"
-                          />
-                          <span
-                            className="appearance-menu__radio-label"
-                          >
-                            Serif
-                          </span>
-                        </label>
-                        <label
-                          className="appearance-menu__button-base appearance-menu__font-style appearance-menu__font-style--sans-serif"
-                        >
-                          <input
-                            checked={false}
-                            className="appearance-menu__radio-input"
-                            name="font-style-radios"
-                            onChange={[Function]}
-                            tabIndex={-1}
-                            type="radio"
-                            value="sans-serif"
-                          />
-                          <span
-                            className="appearance-menu__radio-label"
-                          >
-                            Sans-serif
-                          </span>
-                        </label>
-                      </div>
-                    </fieldset>
-                  </div>
-                  <div
-                    className="appearance-menu__font-size-control appearance-menu__font-size-control--serif"
-                  >
-                    <div
-                      aria-label="Adjust font size"
-                      role="group"
-                    >
-                      <button
-                        aria-disabled={true}
-                        className="appearance-menu__font-size-button appearance-menu__primary-hover-button appearance-menu__button-base"
-                        disabled={true}
-                        onClick={[Function]}
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="manicon-svg svg-icon--MinusUnique"
-                          fill="currentColor"
-                          height={30}
-                          viewBox="0 0 32 32"
-                          width={30}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            height="2"
-                            width="14"
-                            x="9"
-                            y="15"
-                          />
-                        </svg>
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Decrease font size
-                        </span>
-                      </button>
-                      <button
-                        aria-disabled={true}
-                        className="appearance-menu__font-size-button appearance-menu__primary-hover-button appearance-menu__button-base"
-                        disabled={true}
-                        onClick={[Function]}
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="manicon-svg svg-icon--PlusUnique"
-                          fill="currentColor"
-                          height={30}
-                          viewBox="0 0 32 32"
-                          width={30}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            height="2"
-                            width="14"
-                            x="9"
-                            y="15"
-                          />
-                          <rect
-                            height="14"
-                            width="2"
-                            x="15"
-                            y="9"
-                          />
-                        </svg>
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Increase font size
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                  <div
-                    className="appearance-menu__font-size-control appearance-menu__font-size-control--sans"
-                  >
-                    <div>
-                      <button
-                        aria-disabled={true}
-                        className="appearance-menu__font-size-button appearance-menu__primary-hover-button appearance-menu__button-base"
-                        disabled={true}
-                        onClick={[Function]}
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="manicon-svg svg-icon--MinusUnique"
-                          fill="currentColor"
-                          height={30}
-                          viewBox="0 0 32 32"
-                          width={30}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            height="2"
-                            width="14"
-                            x="9"
-                            y="15"
-                          />
-                        </svg>
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Decrease font size
-                        </span>
-                      </button>
-                      <button
-                        aria-disabled={true}
-                        className="appearance-menu__font-size-button appearance-menu__primary-hover-button appearance-menu__button-base"
-                        disabled={true}
-                        onClick={[Function]}
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="manicon-svg svg-icon--PlusUnique"
-                          fill="currentColor"
-                          height={30}
-                          viewBox="0 0 32 32"
-                          width={30}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            height="2"
-                            width="14"
-                            x="9"
-                            y="15"
-                          />
-                          <rect
-                            height="14"
-                            width="2"
-                            x="15"
-                            y="9"
-                          />
-                        </svg>
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Increase font size
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li
-                className="appearance-menu__section control-menu__section"
-              >
-                <div
-                  className="appearance-menu__color-buttons-container"
-                >
-                  <fieldset
-                    className="appearance-menu__radio-group"
-                  >
-                    <legend
-                      className="screen-reader-text"
-                    >
-                      Select color scheme for reader
-                    </legend>
-                    <label
-                      className="appearance-menu__button-base appearance-menu__color-scheme appearance-menu__color-scheme--light"
-                    >
-                      <input
-                        checked={false}
-                        className="appearance-menu__radio-input"
-                        name="color-scheme-radios"
-                        onChange={[Function]}
-                        tabIndex={0}
-                        type="radio"
-                        value="light"
-                      />
-                      <svg
-                        aria-hidden="true"
-                        className="manicon-svg appearance-menu__color-scheme-icon svg-icon--CheckUnique"
-                        fill="currentColor"
-                        height={30}
-                        viewBox="0 0 32 32"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <polygon
-                          points="14.314 23.462 7.317 16.909 8.684 15.449 14.118 20.538 23.225 9.368 24.775 10.632 14.314 23.462"
-                        />
-                      </svg>
-                      <span
-                        className="screen-reader-text"
-                      >
-                        Light
-                      </span>
-                    </label>
-                    <label
-                      className="appearance-menu__button-base appearance-menu__color-scheme appearance-menu__color-scheme--dark"
-                    >
-                      <input
-                        checked={false}
-                        className="appearance-menu__radio-input"
-                        name="color-scheme-radios"
-                        onChange={[Function]}
-                        tabIndex={-1}
-                        type="radio"
-                        value="dark"
-                      />
-                      <svg
-                        aria-hidden="true"
-                        className="manicon-svg appearance-menu__color-scheme-icon svg-icon--CheckUnique"
-                        fill="currentColor"
-                        height={30}
-                        viewBox="0 0 32 32"
-                        width={30}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <polygon
-                          points="14.314 23.462 7.317 16.909 8.684 15.449 14.118 20.538 23.225 9.368 24.775 10.632 14.314 23.462"
-                        />
-                      </svg>
-                      <span
-                        className="screen-reader-text"
-                      >
-                        Dark
-                      </span>
-                    </label>
-                  </fieldset>
-                </div>
-              </li>
-              <li
-                className="appearance-menu__section control-menu__section"
-              >
-                <div
-                  aria-label="Adjust text margins"
-                  className="appearance-menu__control-margins"
-                  role="group"
-                >
-                  <button
-                    aria-disabled={true}
-                    className="appearance-menu__margin-button appearance-menu__button-base appearance-menu__primary-hover-button"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg icon-two-color appearance-menu__menu-icon svg-icon--MarginIncreaseUnique"
-                      fill="currentColor"
-                      height={null}
-                      viewBox="0 0 96 50"
-                      width={null}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g>
-                        <path
-                          className="appearance-menu__menu-icon--dark"
-                          d="M24.2967426,24 L19.3492086,19.7592566 L20.6507914,18.2407434 L28.5365907,25 L20.6507914,31.7592566 L19.3492086,30.2407434 L24.2967426,26 L12,26 L12,24 L24.2967426,24 Z M71.7032574,24 L84,24 L84,26 L71.7032574,26 L76.6507914,30.2407434 L75.3492086,31.7592566 L67.4634093,25 L75.3492086,18.2407434 L76.6507914,19.7592566 L71.7032574,24 Z"
-                        />
-                        <path
-                          className="appearance-menu__menu-icon--light"
-                          d="M57,12 L57,14 L39,14 L39,12 L57,12 Z M57,18 L57,20 L39,20 L39,18 L57,18 Z M57,24 L57,26 L39,26 L39,24 L57,24 Z M57,30 L57,32 L39,32 L39,30 L57,30 Z M57,36 L57,38 L39,38 L39,36 L57,36 Z"
-                        />
-                      </g>
-                    </svg>
-                    <span
-                      className="screen-reader-text"
-                    >
-                      Increase text margins
-                    </span>
-                  </button>
-                  <button
-                    aria-disabled={true}
-                    className="appearance-menu__margin-button appearance-menu__button-base appearance-menu__primary-hover-button"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg appearance-menu__menu-icon svg-icon--MarginDecreaseUnique"
-                      fill="currentColor"
-                      height={null}
-                      viewBox="0 0 96 50"
-                      width={null}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g>
-                        <path
-                          className="appearance-menu__menu-icon--dark"
-                          d="M14.2398482,24 L25.5365907,24 L25.5365907,26 L14.2398482,26 L19.1873821,30.2407434 L17.8857994,31.7592566 L10,25 L17.8857994,18.2407434 L19.1873821,19.7592566 L14.2398482,24 Z M80.8333333,26 L69.5365907,26 L69.5365907,24 L80.8333333,24 L75.8857994,19.7592566 L77.1873821,18.2407434 L85.0731815,25 L77.1873821,31.7592566 L75.8857994,30.2407434 L80.8333333,26 Z"
-                        />
-                        <path
-                          className="appearance-menu__menu-icon--light"
-                          d="M63.5365907,12 L63.5365907,14 L31.5365907,14 L31.5365907,12 L63.5365907,12 Z M63.5365907,18 L63.5365907,20 L31.5365907,20 L31.5365907,18 L63.5365907,18 Z M63.5365907,24 L63.5365907,26 L31.5365907,26 L31.5365907,24 L63.5365907,24 Z M63.5365907,30 L63.5365907,32 L31.5365907,32 L31.5365907,30 L63.5365907,30 Z M63.5365907,36 L63.5365907,38 L31.5365907,38 L31.5365907,36 L63.5365907,36 Z"
-                        />
-                      </g>
-                    </svg>
-                    <span
-                      className="screen-reader-text"
-                    >
-                      Decrease text margins
-                    </span>
-                  </button>
-                </div>
-              </li>
-            </ul>
-            <div>
-              <button
-                className="control-menu__button"
-                disabled={false}
-                onClick={[Function]}
-              >
-                <svg
-                  aria-hidden={true}
-                  className="manicon-svg appearance-menu__reload-icon svg-icon--reload24"
-                  fill="currentColor"
-                  height={32}
-                  viewBox="0 0 24 24"
-                  width={32}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M11.84,17.9997 C13.726,17.9997 15.409,17.1237 16.51,15.7587 L17.291,16.3807 C16.006,17.9757 14.041,18.9997 11.84,18.9997 C7.981,18.9997 4.84,15.8587 4.84,11.9997 C4.84,11.8297 4.863,11.6657 4.876,11.4987 L2.637,13.3467 L2,12.5747 L5.319,9.8357 L8.638,12.5747 L8.001,13.3467 L5.861,11.5797 C5.852,11.7197 5.84,11.8577 5.84,11.9997 C5.84,15.3087 8.531,17.9997 11.84,17.9997 Z M21.0432,10.653 L21.6802,11.424 L18.3602,14.164 L15.0412,11.424 L15.6782,10.653 L17.8182,12.42 C17.8282,12.281 17.8402,12.141 17.8402,12 C17.8402,8.691 15.1482,6 11.8402,6 C9.9542,6 8.2712,6.876 7.1702,8.241 L6.3892,7.619 C7.6732,6.024 9.6392,5 11.8402,5 C15.6992,5 18.8402,8.14 18.8402,12 C18.8402,12.17 18.8162,12.334 18.8042,12.501 L21.0432,10.653 Z"
-                    fillRule="evenodd"
-                  />
-                </svg>
-                <span>
-                  Reset to Defaults
-                </span>
-              </button>
-            </div>
-          </div>
-        </focus-trap-react>
-      </div>
-      <div
-        className="panel-hidden"
-      >
-        <focus-trap-react
-          focusTrapOptions={
-            Object {
-              "clickOutsideDeactivates": true,
-              "escapeDeactivate": false,
-            }
-          }
-        >
-          <button
-            className="screen-reader-text"
-          >
-            Close Panel
-          </button>
-          <nav
-            className="user-menu user-menu--reader menu-hidden"
-          >
-            <ul
-              className="user-menu__list"
-            >
-              <li
-                className="user-menu__item"
-              >
-                <button
-                  aria-describedby="user-menu-edit-profile"
-                  className="user-menu__link"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg user-menu__icon svg-icon--editProfile24"
-                    fill="currentColor"
-                    height={32}
-                    viewBox="0 0 24 24"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9.3785,4 C10.7565,4 11.8785,5.121 11.8785,6.5 C11.8785,7.879 10.7565,9 9.3785,9 C8.0005,9 6.8785,7.879 6.8785,6.5 C6.8785,5.121 8.0005,4 9.3785,4 M9.3785,10 C11.3085,10 12.8785,8.43 12.8785,6.5 C12.8785,4.57 11.3085,3 9.3785,3 C7.4485,3 5.8785,4.57 5.8785,6.5 C5.8785,8.43 7.4485,10 9.3785,10 M11.542,18.4863 L12.921,19.8693 L10.97,20.4403 L11.542,18.4863 Z M19.939,13.3503 L13.871,19.4053 L12.007,17.5363 L18.075,11.4823 L19.939,13.3503 Z M18.077,10.0683 L14.391,13.7453 C14.146,12.4353 13.047,11.4903 11.745,11.4903 L7.012,11.4903 C5.686,11.4903 4.565,12.4663 4.349,13.8133 L4,15.9753 L5.013,15.9753 L5.336,13.9713 C5.474,13.1133 6.179,12.4903 7.012,12.4903 L11.745,12.4903 C12.577,12.4903 13.282,13.1133 13.42,13.9713 L13.523,14.6103 L10.855,17.2713 L9.498,21.9133 L14.133,20.5563 L21.353,13.3523 L18.077,10.0683 Z"
-                      fillRule="evenodd"
-                    />
-                  </svg>
-                  <span
-                    className="user-menu__link-text"
-                  >
-                    Edit Profile
-                  </span>
-                </button>
-                <span
-                  className="aria-describedby"
-                  id="user-menu-edit-profile"
-                >
-                  Edit your profile
-                </span>
-              </li>
-              <li
-                className="user-menu__item"
-              >
-                <button
-                  aria-describedby="user-menu-notifications"
-                  className="user-menu__link"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg user-menu__icon svg-icon--notifications24"
-                    fill="currentColor"
-                    height={32}
-                    viewBox="0 0 24 24"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M21,10.0980483 L21,17.499 L3,17.499 L3,6.499 L16.6708057,6.499 C17.0826008,5.33378734 18.1936863,4.4992 19.5001,4.4992 C21.1572424,4.4992 22.5001,5.84205763 22.5001,7.4992 C22.5001,8.60991078 21.8968292,9.57943101 21,10.0980483 Z M16.5001,7.499 L4.89352556,7.499 L12.0001,13.3514731 L17.0329753,9.20675226 C16.6969712,8.72213638 16.5001,8.13370622 16.5001,7.4992 Z M17.7341318,9.9247831 L12.0001,14.6469269 L4,8.05860928 L4,16.499 L20,16.499 L20,10.4577577 C19.8374314,10.4850136 19.6704258,10.4992 19.5001,10.4992 C18.8398741,10.4992 18.2295354,10.2860451 17.7341318,9.9247831 Z M21.5001,7.4992 C21.5001,6.39434237 20.6049576,5.4992 19.5001,5.4992 C18.3952424,5.4992 17.5001,6.39434237 17.5001,7.4992 C17.5001,8.60405763 18.3952424,9.4992 19.5001,9.4992 C20.6049576,9.4992 21.5001,8.60405763 21.5001,7.4992 Z"
-                    />
-                  </svg>
-                  <span
-                    className="user-menu__link-text"
-                  >
-                    Notifications
-                  </span>
-                </button>
-                <span
-                  className="aria-describedby"
-                  id="user-menu-notifications"
-                >
-                  Edit your notification settings
-                </span>
-              </li>
-              <li
-                className="user-menu__item"
-              >
-                <button
-                  aria-describedby="user-menu-groups"
-                  className="user-menu__link"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg user-menu__icon svg-icon--annotationGroup24"
-                    height={32}
-                    viewBox="0 0 24 24"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g
-                      fill="none"
-                      fillRule="evenodd"
-                    >
-                      <path
-                        d="M2,3 L2,13 L5,13 L5,17.046 L9.478,13 L16,13 L16,3 L2,3 Z M3,4 L15,4 L15,12 L9.093,12 L6,14.794 L6,12 L3,12 L3,4 Z M17.5003,7.9995 L21.9993,7.9995 L21.9993,16.9995 L19.0003,16.9995 L19.0003,21.2575 L14.8993,16.9995 L10.0003,16.9995 L10.0003,14.4995 L11.0003,14.4995 L11.0003,15.9995 L15.3253,15.9995 L18.0003,18.7775 L18.0003,15.9995 L21.0003,15.9995 L21.0003,8.9995 L17.5003,8.9995 L17.5003,7.9995 Z"
-                        fill="currentColor"
-                      />
-                    </g>
-                  </svg>
-                  <span
-                    className="user-menu__link-text"
-                  >
-                    Manage Groups
-                  </span>
-                </button>
-                <span
-                  className="aria-describedby"
-                  id="user-menu-groups"
-                >
-                  Manage your Reading Groups
-                </span>
-              </li>
-              <li
-                className="user-menu__item"
-              >
-                <button
-                  aria-describedby="user-menu-logout"
-                  className="user-menu__link"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg user-menu__icon svg-icon--logout24"
-                    fill="currentColor"
-                    height={32}
-                    viewBox="0 0 24 24"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9,17 C11.045,17 12.802,15.763 13.576,14 L14.65,14 C13.823,16.327 11.606,18 9,18 C5.691,18 3,15.309 3,12 C3,8.691 5.691,6 9,6 C11.606,6 13.824,7.674 14.65,10 L13.576,10 C12.803,8.237 11.045,7 9,7 C6.243,7 4,9.243 4,12 C4,14.757 6.243,17 9,17 Z M17.269,7.627 L21.479,12 L17.269,16.374 L16.548,15.681 L19.61,12.5 L9.5,12.5 L9.5,11.5 L19.61,11.5 L16.548,8.32 L17.269,7.627 Z"
-                      fillRule="evenodd"
-                    />
-                  </svg>
-                  <span
-                    className="user-menu__link-text"
-                  >
-                    Logout
-                  </span>
-                </button>
-                <span
-                  className="aria-describedby"
-                  id="user-menu-logout"
-                >
-                  Logout of Manifold
-                </span>
-              </li>
-            </ul>
-          </nav>
-        </focus-trap-react>
-      </div>
-    </div>
-    <button
-      aria-hidden={true}
-      className="reader-header__button reader-header__button--pad-default reader-header__options-button"
-      onClick={[Function]}
-      tabIndex={-1}
-    >
-      Options
-    </button>
-    <section
-      className="notifications-container"
-      role="alert"
-    >
-      <div
-        className="notifications-list--context-header notifications-list"
-      >
-        <div />
-      </div>
-    </section>
-  </header>
-</div>
+</BlurOnLocationChange>
 `;

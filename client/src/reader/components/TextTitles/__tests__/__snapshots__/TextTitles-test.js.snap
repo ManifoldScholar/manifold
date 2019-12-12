@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reader.TextTitles Component renders correctly 1`] = `
+exports[`reader/components/TextTitles/TextTitles matches the snapshot 1`] = `
 <div
   className="reader-header__title-bar reader-header__title-bar--show-section"
   onClick={[Function]}

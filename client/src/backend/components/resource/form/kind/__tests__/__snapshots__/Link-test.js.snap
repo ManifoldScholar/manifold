@@ -1,27 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Resource.Form.Link component renders correctly 1`] = `
+exports[`backend/components/resource/form/kind/Link matches the snapshot 1`] = `
 <div
   className="form-section form-section--primary"
 >
-  <div
-    className="form-input"
-    style={Object {}}
-  >
-    <label
-      className=""
-      htmlFor="text-input-1"
-    >
-      Link URL
-    </label>
-    <input
-      aria-describedby="text-input-error-1 text-input-instructions-1"
-      id="text-input-1"
-      onChange={[Function]}
-      placeholder="Enter link URL"
-      type="text"
-      value=""
-    />
-  </div>
+  <Form.TextInput
+    focusOnMount={false}
+    join={[Function]}
+    label="Link URL"
+    name="attributes[externalUrl]"
+    password={false}
+    placeholder="Enter link URL"
+  />
 </div>
 `;

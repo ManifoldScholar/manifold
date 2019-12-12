@@ -1,62 +1,142 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Resource.Form.KindAttributes component when kind is audio renders correctly 1`] = `
+exports[`backend/components/resource/form/KindAttributes when the kind is audio matches the snapshot when rendered 1`] = `
 <div
-  className="form-input"
+  class="form-section form-section--primary"
 >
   <div
-    className="form-input"
-    style={Object {}}
+    class="form-input"
+  >
+    <div
+      class="form-input"
+    >
+      <label
+        class=""
+        for="upload-1"
+      >
+        Audio File
+      </label>
+      <react-dropzone
+        accept="audio/*"
+        classname="form-dropzone style-square"
+        inputprops="[object Object]"
+        multiple="false"
+        ondrop="function (file) {
+      _this.setState({
+        attachment: file[0],
+        removed: false
+      });
+    }"
+      >
+        <div
+          class="contents-empty"
+        >
+          <svg
+            aria-hidden="true"
+            class="manicon-svg contents-empty__icon svg-icon--upload64"
+            height="82"
+            viewBox="0 0 64 64"
+            width="82"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              fill="none"
+              fill-rule="evenodd"
+            >
+              <path
+                d="M32.9988,29.9144136 L32.9988,42.0002 L30.9988,42.0002 L30.9988,29.9144136 L25.7059068,35.2073068 L24.2916932,33.7930932 L31.9988,26.0859864 L39.7059068,33.7930932 L38.2916932,35.2073068 L32.9988,29.9144136 Z M50.1861877,22.5986557 C56.4497399,23.0677704 61.5405685,28.1667806 61.9686336,34.4041458 C62.4434658,41.2940362 57.365095,47.2462232 50.5614005,47.9604353 L50.4578781,47.9658996 L11.6699429,47.9977815 C8.53033255,47.7930939 5.62013166,45.6673177 3.63424187,42.4514574 C-0.606099659,35.5873073 3.82653587,26.5383733 11.8099093,26.1212576 C14.0599364,26.0038929 16.2272667,26.566062 18.0852466,27.6896237 C18.5412167,20.3542541 24.6631146,14.5469 32.145,14.5469 C37.9174389,14.5469 43.0124004,18.037155 45.1604639,23.2141812 C46.7581064,22.6838525 48.4567018,22.4699946 50.1861877,22.5986557 Z M44.9652102,25.4242014 C44.4268603,25.6530481 43.8078886,25.3729597 43.6244437,24.8174965 C42.0077096,19.9220973 37.4048058,16.5469 32.145,16.5469 C25.4688521,16.5469 20.058,21.9306221 20.058,28.5689 C20.058,28.8683971 20.0747493,29.1712969 20.1115458,29.6128545 C20.1868189,30.5161318 19.1178416,31.0455547 18.4449777,30.438241 C16.6714657,28.837504 14.3554563,27.9911971 11.9141769,28.1185379 C5.4789839,28.4547641 1.87879742,35.8043081 5.33584257,41.4004793 C7.00940449,44.1105699 9.38308844,45.8444436 11.7341219,45.9999004 L50.403086,45.965947 C56.1172051,45.3394064 60.3725258,40.33352 59.9733467,34.5413681 C59.6134776,29.2976912 55.3109878,24.9882098 50.0375627,24.5931257 C48.2705385,24.4617114 46.5473971,24.7516308 44.9652102,25.4242014 Z"
+                fill="currentColor"
+                fill-rule="nonzero"
+              />
+            </g>
+          </svg>
+          <div
+            class="message"
+          >
+            <p
+              class="primary"
+            >
+              <button
+                class="form-dropzone__inline-button"
+                tabindex="-1"
+                type="button"
+              >
+                Upload a file
+              </button>
+               or 
+              <br />
+              drag and drop here
+              <br />
+            </p>
+            <p
+              class="secondary"
+            >
+              mp3, flac, wav, ogg, oga
+            </p>
+          </div>
+        </div>
+      </react-dropzone>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`backend/components/resource/form/KindAttributes when the kind is document matches the snapshot when rendered 1`] = `
+<div
+  class="form-input"
+>
+  <div
+    class="form-input"
   >
     <label
-      className=""
-      htmlFor="upload-1"
+      class=""
+      for="upload-1"
     >
-      Image File
+      Document File
     </label>
     <react-dropzone
-      accept="image/*"
-      className="form-dropzone style-square"
-      inputProps={
-        Object {
-          "aria-describedby": "upload-error-1 upload-instructions-1",
-          "id": "upload-1",
-        }
-      }
-      multiple={false}
-      onDrop={[Function]}
+      accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,text/*,application/vnd.oasis.opendocument.text"
+      classname="form-dropzone style-square"
+      inputprops="[object Object]"
+      multiple="false"
+      ondrop="function (file) {
+      _this.setState({
+        attachment: file[0],
+        removed: false
+      });
+    }"
     >
       <div
-        className="contents-empty"
+        class="contents-empty"
       >
         <svg
-          aria-hidden={true}
-          className="manicon-svg contents-empty__icon svg-icon--upload64"
-          height={82}
+          aria-hidden="true"
+          class="manicon-svg contents-empty__icon svg-icon--upload64"
+          height="82"
           viewBox="0 0 64 64"
-          width={82}
+          width="82"
           xmlns="http://www.w3.org/2000/svg"
         >
           <g
             fill="none"
-            fillRule="evenodd"
+            fill-rule="evenodd"
           >
             <path
               d="M32.9988,29.9144136 L32.9988,42.0002 L30.9988,42.0002 L30.9988,29.9144136 L25.7059068,35.2073068 L24.2916932,33.7930932 L31.9988,26.0859864 L39.7059068,33.7930932 L38.2916932,35.2073068 L32.9988,29.9144136 Z M50.1861877,22.5986557 C56.4497399,23.0677704 61.5405685,28.1667806 61.9686336,34.4041458 C62.4434658,41.2940362 57.365095,47.2462232 50.5614005,47.9604353 L50.4578781,47.9658996 L11.6699429,47.9977815 C8.53033255,47.7930939 5.62013166,45.6673177 3.63424187,42.4514574 C-0.606099659,35.5873073 3.82653587,26.5383733 11.8099093,26.1212576 C14.0599364,26.0038929 16.2272667,26.566062 18.0852466,27.6896237 C18.5412167,20.3542541 24.6631146,14.5469 32.145,14.5469 C37.9174389,14.5469 43.0124004,18.037155 45.1604639,23.2141812 C46.7581064,22.6838525 48.4567018,22.4699946 50.1861877,22.5986557 Z M44.9652102,25.4242014 C44.4268603,25.6530481 43.8078886,25.3729597 43.6244437,24.8174965 C42.0077096,19.9220973 37.4048058,16.5469 32.145,16.5469 C25.4688521,16.5469 20.058,21.9306221 20.058,28.5689 C20.058,28.8683971 20.0747493,29.1712969 20.1115458,29.6128545 C20.1868189,30.5161318 19.1178416,31.0455547 18.4449777,30.438241 C16.6714657,28.837504 14.3554563,27.9911971 11.9141769,28.1185379 C5.4789839,28.4547641 1.87879742,35.8043081 5.33584257,41.4004793 C7.00940449,44.1105699 9.38308844,45.8444436 11.7341219,45.9999004 L50.403086,45.965947 C56.1172051,45.3394064 60.3725258,40.33352 59.9733467,34.5413681 C59.6134776,29.2976912 55.3109878,24.9882098 50.0375627,24.5931257 C48.2705385,24.4617114 46.5473971,24.7516308 44.9652102,25.4242014 Z"
               fill="currentColor"
-              fillRule="nonzero"
+              fill-rule="nonzero"
             />
           </g>
         </svg>
         <div
-          className="message"
+          class="message"
         >
           <p
-            className="primary"
+            class="primary"
           >
             <button
-              className="form-dropzone__inline-button"
-              tabIndex="-1"
+              class="form-dropzone__inline-button"
+              tabindex="-1"
               type="button"
             >
               Upload a file
@@ -67,13 +147,592 @@ exports[`Backend.Resource.Form.KindAttributes component when kind is audio rende
             <br />
           </p>
           <p
-            className="secondary"
+            class="secondary"
+          >
+            doc, docx, txt, odt
+          </p>
+        </div>
+      </div>
+    </react-dropzone>
+  </div>
+</div>
+`;
+
+exports[`backend/components/resource/form/KindAttributes when the kind is file matches the snapshot when rendered 1`] = `
+<div
+  class="form-input"
+>
+  <div
+    class="form-input"
+  >
+    <label
+      class=""
+      for="upload-1"
+    >
+      File
+    </label>
+    <react-dropzone
+      classname="form-dropzone style-square"
+      inputprops="[object Object]"
+      multiple="false"
+      ondrop="function (file) {
+      _this.setState({
+        attachment: file[0],
+        removed: false
+      });
+    }"
+    >
+      <div
+        class="contents-icon-preview"
+      >
+        <div
+          class="message"
+          data-id="preview"
+        >
+          <svg
+            aria-hidden="true"
+            class="manicon-svg contents-icon-preview__icon svg-icon--resourceDocument64"
+            fill="currentColor"
+            height="64"
+            viewBox="0 0 64 64"
+            width="64"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M51,58 L51,17.8331 C51,17.6121481 50.9122272,17.4002459 50.7559907,17.2440093 C50.5997541,17.0877728 50.3878519,17 50.1669,17 L40,17 L40,6.83309996 C40,6.37299153 39.6270084,5.99999996 39.1669,5.99999996 L13,5.99999996 L13,58 L51,58 Z M42,15 L50.1669,15 C50.9182849,15 51.6388949,15.2984864 52.1702043,15.8297958 C52.7015136,16.3611051 53,17.0817151 53,17.8331 L53,60 L11,60 L11,3.99999996 L39.1669,3.99999996 C40.7315779,3.99999996 42,5.26842203 42,6.83309996 L42,15 Z M39.6862229,6.18893547 L41.0987771,4.77306445 L52.1547771,15.8031645 L50.7422229,17.2190355 L39.6862229,6.18893547 Z M20.0004958,24.9999999 L19.9995041,23.0000001 L43.9995042,22.9881001 L44.0004959,24.9880999 L20.0004958,24.9999999 Z M20.0004958,34.9999999 L19.9995041,33.0000001 L43.9995042,32.9881001 L44.0004959,34.9880999 L20.0004958,34.9999999 Z M20.0004958,44.9999999 L19.9995041,43.0000001 L43.9995042,42.9881001 L44.0004959,44.9880999 L20.0004958,44.9999999 Z M20,30 L20,28 L39,28 L39,30 L20,30 Z M20,40 L20,38 L39,38 L39,40 L20,40 Z"
+            />
+          </svg>
+          <p
+            class="primary"
+          >
+            original-image.mock
+          </p>
+          <p
+            class="secondary"
+          >
+            <button
+              class="form-dropzone__inline-button"
+              type="button"
+            >
+              Remove this file
+            </button>
+            <br />
+            or 
+            <button
+              aria-hidden="true"
+              class="form-dropzone__inline-button"
+              tabindex="-1"
+              type="button"
+            >
+              Upload a new file
+            </button>
+          </p>
+        </div>
+      </div>
+    </react-dropzone>
+  </div>
+</div>
+`;
+
+exports[`backend/components/resource/form/KindAttributes when the kind is image matches the snapshot when rendered 1`] = `
+<div
+  class="form-input"
+>
+  <div
+    class="form-input"
+  >
+    <label
+      class=""
+      for="upload-1"
+    >
+      Image File
+    </label>
+    <react-dropzone
+      accept="image/*"
+      classname="form-dropzone style-square"
+      inputprops="[object Object]"
+      multiple="false"
+      ondrop="function (file) {
+      _this.setState({
+        attachment: file[0],
+        removed: false
+      });
+    }"
+    >
+      <div
+        class="contents-empty"
+      >
+        <svg
+          aria-hidden="true"
+          class="manicon-svg contents-empty__icon svg-icon--upload64"
+          height="82"
+          viewBox="0 0 64 64"
+          width="82"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            fill="none"
+            fill-rule="evenodd"
+          >
+            <path
+              d="M32.9988,29.9144136 L32.9988,42.0002 L30.9988,42.0002 L30.9988,29.9144136 L25.7059068,35.2073068 L24.2916932,33.7930932 L31.9988,26.0859864 L39.7059068,33.7930932 L38.2916932,35.2073068 L32.9988,29.9144136 Z M50.1861877,22.5986557 C56.4497399,23.0677704 61.5405685,28.1667806 61.9686336,34.4041458 C62.4434658,41.2940362 57.365095,47.2462232 50.5614005,47.9604353 L50.4578781,47.9658996 L11.6699429,47.9977815 C8.53033255,47.7930939 5.62013166,45.6673177 3.63424187,42.4514574 C-0.606099659,35.5873073 3.82653587,26.5383733 11.8099093,26.1212576 C14.0599364,26.0038929 16.2272667,26.566062 18.0852466,27.6896237 C18.5412167,20.3542541 24.6631146,14.5469 32.145,14.5469 C37.9174389,14.5469 43.0124004,18.037155 45.1604639,23.2141812 C46.7581064,22.6838525 48.4567018,22.4699946 50.1861877,22.5986557 Z M44.9652102,25.4242014 C44.4268603,25.6530481 43.8078886,25.3729597 43.6244437,24.8174965 C42.0077096,19.9220973 37.4048058,16.5469 32.145,16.5469 C25.4688521,16.5469 20.058,21.9306221 20.058,28.5689 C20.058,28.8683971 20.0747493,29.1712969 20.1115458,29.6128545 C20.1868189,30.5161318 19.1178416,31.0455547 18.4449777,30.438241 C16.6714657,28.837504 14.3554563,27.9911971 11.9141769,28.1185379 C5.4789839,28.4547641 1.87879742,35.8043081 5.33584257,41.4004793 C7.00940449,44.1105699 9.38308844,45.8444436 11.7341219,45.9999004 L50.403086,45.965947 C56.1172051,45.3394064 60.3725258,40.33352 59.9733467,34.5413681 C59.6134776,29.2976912 55.3109878,24.9882098 50.0375627,24.5931257 C48.2705385,24.4617114 46.5473971,24.7516308 44.9652102,25.4242014 Z"
+              fill="currentColor"
+              fill-rule="nonzero"
+            />
+          </g>
+        </svg>
+        <div
+          class="message"
+        >
+          <p
+            class="primary"
+          >
+            <button
+              class="form-dropzone__inline-button"
+              tabindex="-1"
+              type="button"
+            >
+              Upload a file
+            </button>
+             or 
+            <br />
+            drag and drop here
+            <br />
+          </p>
+          <p
+            class="secondary"
           >
             gif, jpeg, jpg, png
           </p>
         </div>
       </div>
     </react-dropzone>
+  </div>
+</div>
+`;
+
+exports[`backend/components/resource/form/KindAttributes when the kind is interactive matches the snapshot when rendered 1`] = `
+<div
+  class="form-section form-section--primary"
+>
+  <div
+    class="form-input"
+  >
+    <label
+      class=""
+      for="text-input-1"
+    >
+      Minimum Width
+    </label>
+    <input
+      aria-describedby="text-input-error-1 text-input-instructions-1"
+      id="text-input-1"
+      placeholder="The minimum display width"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    class="form-input"
+  >
+    <label
+      class=""
+      for="text-input-1"
+    >
+      Minimum Height
+    </label>
+    <input
+      aria-describedby="text-input-error-1 text-input-instructions-1"
+      id="text-input-1"
+      placeholder="The minimum display height"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    class="form-input"
+  >
+    <label
+      class=""
+      for="text-input-1"
+    >
+      iFrame URL
+    </label>
+    <input
+      aria-describedby="text-input-error-1 text-input-instructions-1"
+      id="text-input-1"
+      placeholder="Enter iFrame URL"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`backend/components/resource/form/KindAttributes when the kind is link matches the snapshot when rendered 1`] = `
+<div
+  class="form-section form-section--primary"
+>
+  <div
+    class="form-input"
+  >
+    <label
+      class=""
+      for="text-input-1"
+    >
+      Link URL
+    </label>
+    <input
+      aria-describedby="text-input-error-1 text-input-instructions-1"
+      id="text-input-1"
+      placeholder="Enter link URL"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`backend/components/resource/form/KindAttributes when the kind is pdf matches the snapshot when rendered 1`] = `
+<div
+  class="form-input"
+>
+  <div
+    class="form-input"
+  >
+    <label
+      class=""
+      for="upload-1"
+    >
+      PDF File
+    </label>
+    <react-dropzone
+      accept="application/pdf"
+      classname="form-dropzone style-square"
+      inputprops="[object Object]"
+      multiple="false"
+      ondrop="function (file) {
+      _this.setState({
+        attachment: file[0],
+        removed: false
+      });
+    }"
+    >
+      <div
+        class="contents-empty"
+      >
+        <svg
+          aria-hidden="true"
+          class="manicon-svg contents-empty__icon svg-icon--upload64"
+          height="82"
+          viewBox="0 0 64 64"
+          width="82"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            fill="none"
+            fill-rule="evenodd"
+          >
+            <path
+              d="M32.9988,29.9144136 L32.9988,42.0002 L30.9988,42.0002 L30.9988,29.9144136 L25.7059068,35.2073068 L24.2916932,33.7930932 L31.9988,26.0859864 L39.7059068,33.7930932 L38.2916932,35.2073068 L32.9988,29.9144136 Z M50.1861877,22.5986557 C56.4497399,23.0677704 61.5405685,28.1667806 61.9686336,34.4041458 C62.4434658,41.2940362 57.365095,47.2462232 50.5614005,47.9604353 L50.4578781,47.9658996 L11.6699429,47.9977815 C8.53033255,47.7930939 5.62013166,45.6673177 3.63424187,42.4514574 C-0.606099659,35.5873073 3.82653587,26.5383733 11.8099093,26.1212576 C14.0599364,26.0038929 16.2272667,26.566062 18.0852466,27.6896237 C18.5412167,20.3542541 24.6631146,14.5469 32.145,14.5469 C37.9174389,14.5469 43.0124004,18.037155 45.1604639,23.2141812 C46.7581064,22.6838525 48.4567018,22.4699946 50.1861877,22.5986557 Z M44.9652102,25.4242014 C44.4268603,25.6530481 43.8078886,25.3729597 43.6244437,24.8174965 C42.0077096,19.9220973 37.4048058,16.5469 32.145,16.5469 C25.4688521,16.5469 20.058,21.9306221 20.058,28.5689 C20.058,28.8683971 20.0747493,29.1712969 20.1115458,29.6128545 C20.1868189,30.5161318 19.1178416,31.0455547 18.4449777,30.438241 C16.6714657,28.837504 14.3554563,27.9911971 11.9141769,28.1185379 C5.4789839,28.4547641 1.87879742,35.8043081 5.33584257,41.4004793 C7.00940449,44.1105699 9.38308844,45.8444436 11.7341219,45.9999004 L50.403086,45.965947 C56.1172051,45.3394064 60.3725258,40.33352 59.9733467,34.5413681 C59.6134776,29.2976912 55.3109878,24.9882098 50.0375627,24.5931257 C48.2705385,24.4617114 46.5473971,24.7516308 44.9652102,25.4242014 Z"
+              fill="currentColor"
+              fill-rule="nonzero"
+            />
+          </g>
+        </svg>
+        <div
+          class="message"
+        >
+          <p
+            class="primary"
+          >
+            <button
+              class="form-dropzone__inline-button"
+              tabindex="-1"
+              type="button"
+            >
+              Upload a file
+            </button>
+             or 
+            <br />
+            drag and drop here
+            <br />
+          </p>
+          <p
+            class="secondary"
+          >
+            pdf
+          </p>
+        </div>
+      </div>
+    </react-dropzone>
+  </div>
+</div>
+`;
+
+exports[`backend/components/resource/form/KindAttributes when the kind is presentation matches the snapshot when rendered 1`] = `
+<div
+  class="form-input"
+>
+  <div
+    class="form-input"
+  >
+    <label
+      class=""
+      for="upload-1"
+    >
+      Presentation File
+    </label>
+    <react-dropzone
+      accept="application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint,application/vnd.oasis.opendocument.presentation"
+      classname="form-dropzone style-square"
+      inputprops="[object Object]"
+      multiple="false"
+      ondrop="function (file) {
+      _this.setState({
+        attachment: file[0],
+        removed: false
+      });
+    }"
+    >
+      <div
+        class="contents-empty"
+      >
+        <svg
+          aria-hidden="true"
+          class="manicon-svg contents-empty__icon svg-icon--upload64"
+          height="82"
+          viewBox="0 0 64 64"
+          width="82"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            fill="none"
+            fill-rule="evenodd"
+          >
+            <path
+              d="M32.9988,29.9144136 L32.9988,42.0002 L30.9988,42.0002 L30.9988,29.9144136 L25.7059068,35.2073068 L24.2916932,33.7930932 L31.9988,26.0859864 L39.7059068,33.7930932 L38.2916932,35.2073068 L32.9988,29.9144136 Z M50.1861877,22.5986557 C56.4497399,23.0677704 61.5405685,28.1667806 61.9686336,34.4041458 C62.4434658,41.2940362 57.365095,47.2462232 50.5614005,47.9604353 L50.4578781,47.9658996 L11.6699429,47.9977815 C8.53033255,47.7930939 5.62013166,45.6673177 3.63424187,42.4514574 C-0.606099659,35.5873073 3.82653587,26.5383733 11.8099093,26.1212576 C14.0599364,26.0038929 16.2272667,26.566062 18.0852466,27.6896237 C18.5412167,20.3542541 24.6631146,14.5469 32.145,14.5469 C37.9174389,14.5469 43.0124004,18.037155 45.1604639,23.2141812 C46.7581064,22.6838525 48.4567018,22.4699946 50.1861877,22.5986557 Z M44.9652102,25.4242014 C44.4268603,25.6530481 43.8078886,25.3729597 43.6244437,24.8174965 C42.0077096,19.9220973 37.4048058,16.5469 32.145,16.5469 C25.4688521,16.5469 20.058,21.9306221 20.058,28.5689 C20.058,28.8683971 20.0747493,29.1712969 20.1115458,29.6128545 C20.1868189,30.5161318 19.1178416,31.0455547 18.4449777,30.438241 C16.6714657,28.837504 14.3554563,27.9911971 11.9141769,28.1185379 C5.4789839,28.4547641 1.87879742,35.8043081 5.33584257,41.4004793 C7.00940449,44.1105699 9.38308844,45.8444436 11.7341219,45.9999004 L50.403086,45.965947 C56.1172051,45.3394064 60.3725258,40.33352 59.9733467,34.5413681 C59.6134776,29.2976912 55.3109878,24.9882098 50.0375627,24.5931257 C48.2705385,24.4617114 46.5473971,24.7516308 44.9652102,25.4242014 Z"
+              fill="currentColor"
+              fill-rule="nonzero"
+            />
+          </g>
+        </svg>
+        <div
+          class="message"
+        >
+          <p
+            class="primary"
+          >
+            <button
+              class="form-dropzone__inline-button"
+              tabindex="-1"
+              type="button"
+            >
+              Upload a file
+            </button>
+             or 
+            <br />
+            drag and drop here
+            <br />
+          </p>
+          <p
+            class="secondary"
+          >
+            ppt, pptx, odp
+          </p>
+        </div>
+      </div>
+    </react-dropzone>
+  </div>
+</div>
+`;
+
+exports[`backend/components/resource/form/KindAttributes when the kind is spreadsheet matches the snapshot when rendered 1`] = `
+<div
+  class="form-input"
+>
+  <div
+    class="form-input"
+  >
+    <label
+      class=""
+      for="upload-1"
+    >
+      Spreadsheet File
+    </label>
+    <react-dropzone
+      accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.oasis.opendocument.spreadsheet,"
+      classname="form-dropzone style-square"
+      inputprops="[object Object]"
+      multiple="false"
+      ondrop="function (file) {
+      _this.setState({
+        attachment: file[0],
+        removed: false
+      });
+    }"
+    >
+      <div
+        class="contents-empty"
+      >
+        <svg
+          aria-hidden="true"
+          class="manicon-svg contents-empty__icon svg-icon--upload64"
+          height="82"
+          viewBox="0 0 64 64"
+          width="82"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            fill="none"
+            fill-rule="evenodd"
+          >
+            <path
+              d="M32.9988,29.9144136 L32.9988,42.0002 L30.9988,42.0002 L30.9988,29.9144136 L25.7059068,35.2073068 L24.2916932,33.7930932 L31.9988,26.0859864 L39.7059068,33.7930932 L38.2916932,35.2073068 L32.9988,29.9144136 Z M50.1861877,22.5986557 C56.4497399,23.0677704 61.5405685,28.1667806 61.9686336,34.4041458 C62.4434658,41.2940362 57.365095,47.2462232 50.5614005,47.9604353 L50.4578781,47.9658996 L11.6699429,47.9977815 C8.53033255,47.7930939 5.62013166,45.6673177 3.63424187,42.4514574 C-0.606099659,35.5873073 3.82653587,26.5383733 11.8099093,26.1212576 C14.0599364,26.0038929 16.2272667,26.566062 18.0852466,27.6896237 C18.5412167,20.3542541 24.6631146,14.5469 32.145,14.5469 C37.9174389,14.5469 43.0124004,18.037155 45.1604639,23.2141812 C46.7581064,22.6838525 48.4567018,22.4699946 50.1861877,22.5986557 Z M44.9652102,25.4242014 C44.4268603,25.6530481 43.8078886,25.3729597 43.6244437,24.8174965 C42.0077096,19.9220973 37.4048058,16.5469 32.145,16.5469 C25.4688521,16.5469 20.058,21.9306221 20.058,28.5689 C20.058,28.8683971 20.0747493,29.1712969 20.1115458,29.6128545 C20.1868189,30.5161318 19.1178416,31.0455547 18.4449777,30.438241 C16.6714657,28.837504 14.3554563,27.9911971 11.9141769,28.1185379 C5.4789839,28.4547641 1.87879742,35.8043081 5.33584257,41.4004793 C7.00940449,44.1105699 9.38308844,45.8444436 11.7341219,45.9999004 L50.403086,45.965947 C56.1172051,45.3394064 60.3725258,40.33352 59.9733467,34.5413681 C59.6134776,29.2976912 55.3109878,24.9882098 50.0375627,24.5931257 C48.2705385,24.4617114 46.5473971,24.7516308 44.9652102,25.4242014 Z"
+              fill="currentColor"
+              fill-rule="nonzero"
+            />
+          </g>
+        </svg>
+        <div
+          class="message"
+        >
+          <p
+            class="primary"
+          >
+            <button
+              class="form-dropzone__inline-button"
+              tabindex="-1"
+              type="button"
+            >
+              Upload a file
+            </button>
+             or 
+            <br />
+            drag and drop here
+            <br />
+          </p>
+          <p
+            class="secondary"
+          >
+            xls, xlsx, ods
+          </p>
+        </div>
+      </div>
+    </react-dropzone>
+  </div>
+</div>
+`;
+
+exports[`backend/components/resource/form/KindAttributes when the kind is variants matches the snapshot when rendered 1`] = `null`;
+
+exports[`backend/components/resource/form/KindAttributes when the kind is video matches the snapshot when rendered 1`] = `
+<div
+  class="form-section form-section--primary"
+>
+  <div
+    class="form-input"
+  >
+    <label
+      class="form-switch"
+      for="switch-input-1"
+    >
+      <span
+        class="form-input-heading toggle above"
+      >
+        Is this an externally linked video?
+      </span>
+      <input
+        id="switch-input-1"
+        type="checkbox"
+      />
+      <span
+        class="toggle-indicator"
+      >
+        <span
+          aria-hidden="true"
+          class="boolean-primary"
+        />
+      </span>
+    </label>
+  </div>
+  <div
+    class="form-section form-section--primary"
+  >
+    <div
+      class="form-input"
+    >
+      <label
+        class="has-instructions"
+        for="text-input-1"
+      >
+        Video ID
+      </label>
+      <input
+        aria-describedby="text-input-error-1 text-input-instructions-1"
+        id="text-input-1"
+        placeholder="Video ID"
+        type="text"
+        value=""
+      />
+      <span
+        class="instructions"
+        id="text-input-instructions-1"
+      >
+        The video's ID is located after "?v=" in YouTube URLs, and after "vimeo.com/" in Vimeo URLs.
+      </span>
+    </div>
+    <div
+      class="form-input"
+    >
+      <div
+        class="form-input"
+      >
+        <label
+          for="select-1"
+        >
+          External Video Type
+        </label>
+        <div
+          class="form-select"
+        >
+          <svg
+            aria-hidden="true"
+            class="manicon-svg form-select__icon svg-icon--disclosureDown16"
+            fill="currentColor"
+            height="20"
+            viewBox="0 0 16 16"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+            />
+          </svg>
+          <select
+            aria-describedby="select-error-1 select-instructions-1"
+            id="select-1"
+          >
+            <option
+              selected=""
+              value=""
+            >
+              Select a video source...
+            </option>
+            <option
+              value="youtube"
+            >
+              Youtube
+            </option>
+            <option
+              value="vimeo"
+            >
+              Vimeo
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;

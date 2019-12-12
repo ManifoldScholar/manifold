@@ -1,84 +1,80 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.ProjectCollection.Form.IconPicker component renders correctly 1`] = `
+exports[`backend/components/project-collection/form/IconPicker matches the snapshot when rendered 1`] = `
 <div
-  className="form-input icon-picker"
+  class="form-input icon-picker"
 >
   <div
-    className="form-input"
-    style={Object {}}
+    class="form-input"
   >
     <label
-      className="form-input-heading"
-      htmlFor="icon-picker-1"
+      class="form-input-heading"
+      for="icon-picker-1"
     >
       Collection Icon:
     </label>
     <div>
       <span
-        className="screen-reader-text"
+        class="screen-reader-text"
       >
         Select an icon for the project collection.
       </span>
       <div
-        className="icon-picker__list"
+        class="icon-picker__list"
         id="icon-picker-1"
         role="group"
       >
         <label
-          className="icon-picker__item"
+          class="icon-picker__item"
         >
           <span
-            className="screen-reader-text"
+            class="screen-reader-text"
           >
             book-stack-vertical
           </span>
           <input
-            checked={false}
-            className="icon-picker__input"
+            class="icon-picker__input"
             name="icon-picker-1"
-            onChange={[Function]}
             type="radio"
             value="book-stack-vertical"
           />
           <svg
-            aria-hidden={true}
-            className="manicon-svg svg-icon--projectCollections64"
+            aria-hidden="true"
+            class="manicon-svg svg-icon--projectCollections64"
             fill="currentColor"
-            height={48}
+            height="48"
             viewBox="0 0 64 64"
-            width={48}
+            width="48"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M15.192,51.213 L17.9,51.213 L17.9,44.693 L15.192,44.693 L15.192,51.213 Z M7.822,42.693 L7.822,34.039 L9.729,34.039 L47.175,34.039 L47.175,42.693 L13.192,42.693 L7.822,42.693 Z M11.729,25.52 L14.192,25.52 L15.066,25.52 L15.066,32.039 L11.729,32.039 L11.729,25.52 Z M16.192,17 L55.544,17 L55.544,23.52 L53.081,23.52 L16.192,23.52 L16.192,17 Z M51.081,32.039 L49.175,32.039 L47.743,32.039 L47.743,25.52 L51.081,25.52 L51.081,32.039 Z M43.401,32.04 L45.743,32.04 L45.743,25.52 L43.401,25.52 L43.401,32.04 Z M21.408,32.04 L41.401,32.04 L41.401,25.52 L21.408,25.52 L21.408,32.04 Z M17.066,32.039 L19.408,32.039 L19.408,25.519 L17.066,25.519 L17.066,32.039 Z M49.836,44.693 L49.836,51.213 L19.9,51.213 L19.9,44.693 L49.175,44.693 L49.836,44.693 Z M51.836,51.213 L54.544,51.213 L54.544,44.693 L51.836,44.693 L51.836,51.213 Z M56.544,51.213 L56.544,42.693 L49.175,42.693 L49.175,34.039 L53.081,34.039 L53.081,25.52 L57.544,25.52 L57.544,15 L14.192,15 L14.192,23.52 L9.729,23.52 L9.729,32.039 L5.822,32.039 L5.822,44.693 L13.192,44.693 L13.192,51.213 L5,51.213 L5,53.213 L59.944,53.213 L59.944,51.213 L56.544,51.213 Z M27.1726,36.2589 C26.0076,36.4389 25.2106,37.5289 25.3906,38.6929 C25.5706,39.8569 26.6606,40.6549 27.8246,40.4749 C28.9886,40.2939 29.7866,39.2039 29.6066,38.0399 C29.4266,36.8759 28.3366,36.0779 27.1726,36.2589"
-              fillRule="evenodd"
+              fill-rule="evenodd"
             />
           </svg>
         </label>
         <label
-          className="icon-picker__item icon-picker__item--active"
+          class="icon-picker__item icon-picker__item--active"
         >
           <span
-            className="screen-reader-text"
+            class="screen-reader-text"
           >
             lamp
           </span>
           <input
-            checked={true}
-            className="icon-picker__input"
+            checked=""
+            class="icon-picker__input"
             name="icon-picker-1"
-            onChange={[Function]}
             type="radio"
             value="lamp"
           />
           <svg
-            aria-hidden={true}
-            className="manicon-svg svg-icon--lamp64"
+            aria-hidden="true"
+            class="manicon-svg svg-icon--lamp64"
             fill="currentColor"
-            height={48}
+            height="48"
             viewBox="0 0 64 64"
-            width={48}
+            width="48"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -87,28 +83,26 @@ exports[`Backend.ProjectCollection.Form.IconPicker component renders correctly 1
           </svg>
         </label>
         <label
-          className="icon-picker__item"
+          class="icon-picker__item"
         >
           <span
-            className="screen-reader-text"
+            class="screen-reader-text"
           >
             new-round
           </span>
           <input
-            checked={false}
-            className="icon-picker__input"
+            class="icon-picker__input"
             name="icon-picker-1"
-            onChange={[Function]}
             type="radio"
             value="new-round"
           />
           <svg
-            aria-hidden={true}
-            className="manicon-svg svg-icon--new64"
+            aria-hidden="true"
+            class="manicon-svg svg-icon--new64"
             fill="currentColor"
-            height={48}
+            height="48"
             viewBox="0 0 64 64"
-            width={48}
+            width="48"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -117,59 +111,55 @@ exports[`Backend.ProjectCollection.Form.IconPicker component renders correctly 1
           </svg>
         </label>
         <label
-          className="icon-picker__item"
+          class="icon-picker__item"
         >
           <span
-            className="screen-reader-text"
+            class="screen-reader-text"
           >
             books-on-shelf
           </span>
           <input
-            checked={false}
-            className="icon-picker__input"
+            class="icon-picker__input"
             name="icon-picker-1"
-            onChange={[Function]}
             type="radio"
             value="books-on-shelf"
           />
           <svg
-            aria-hidden={true}
-            className="manicon-svg svg-icon--projects64"
+            aria-hidden="true"
+            class="manicon-svg svg-icon--projects64"
             fill="currentColor"
-            height={48}
+            height="48"
             viewBox="0 0 64 64"
-            width={48}
+            width="48"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M48.522,10 L36.417,11.872 L42.4,50.553 L35.188,50.553 L35.188,11.257 L22.939,11.257 L22.939,50.553 L20.819,50.553 L20.819,11.257 L8.57,11.257 L8.57,50.553 L4,50.553 L4,52.553 L59.467,52.553 L59.467,50.553 L50.237,50.553 L54.688,49.865 L48.522,10 Z M38.699,13.542 L46.851,12.281 L52.405,48.194 L44.254,49.455 L38.699,13.542 Z M24.939,15.622 L33.188,15.622 L33.188,13.257 L24.939,13.257 L24.939,15.622 Z M10.57,16.689 L18.819,16.689 L18.819,13.257 L10.57,13.257 L10.57,16.689 Z M24.939,19.725 L33.188,19.725 L33.188,17.622 L24.939,17.622 L24.939,19.725 Z M10.57,44.164 L18.819,44.164 L18.819,18.689 L10.57,18.689 L10.57,44.164 Z M24.939,41.127 L33.188,41.127 L33.188,21.726 L24.939,21.726 L24.939,41.127 Z M24.939,45.23 L33.188,45.23 L33.188,43.127 L24.939,43.127 L24.939,45.23 Z M10.57,49.596 L18.819,49.596 L18.819,46.163 L10.57,46.163 L10.57,49.596 Z M24.939,49.595 L33.188,49.595 L33.188,47.23 L24.939,47.23 L24.939,49.595 Z M45.8783,32.9758 C47.0433,32.7958 47.8403,31.7058 47.6603,30.5418 C47.4803,29.3778 46.3903,28.5798 45.2263,28.7598 C44.0623,28.9408 43.2643,30.0308 43.4443,31.1948 C43.6243,32.3588 44.7143,33.1568 45.8783,32.9758"
-              fillRule="evenodd"
+              fill-rule="evenodd"
             />
           </svg>
         </label>
         <label
-          className="icon-picker__item"
+          class="icon-picker__item"
         >
           <span
-            className="screen-reader-text"
+            class="screen-reader-text"
           >
             globe
           </span>
           <input
-            checked={false}
-            className="icon-picker__input"
+            class="icon-picker__input"
             name="icon-picker-1"
-            onChange={[Function]}
             type="radio"
             value="globe"
           />
           <svg
-            aria-hidden={true}
-            className="manicon-svg svg-icon--globe64"
+            aria-hidden="true"
+            class="manicon-svg svg-icon--globe64"
             fill="currentColor"
-            height={48}
+            height="48"
             viewBox="0 0 64 64"
-            width={48}
+            width="48"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -178,28 +168,26 @@ exports[`Backend.ProjectCollection.Form.IconPicker component renders correctly 1
           </svg>
         </label>
         <label
-          className="icon-picker__item"
+          class="icon-picker__item"
         >
           <span
-            className="screen-reader-text"
+            class="screen-reader-text"
           >
             touch
           </span>
           <input
-            checked={false}
-            className="icon-picker__input"
+            class="icon-picker__input"
             name="icon-picker-1"
-            onChange={[Function]}
             type="radio"
             value="touch"
           />
           <svg
-            aria-hidden={true}
-            className="manicon-svg svg-icon--touch64"
+            aria-hidden="true"
+            class="manicon-svg svg-icon--touch64"
             fill="currentColor"
-            height={48}
+            height="48"
             viewBox="0 0 64 64"
-            width={48}
+            width="48"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -208,28 +196,26 @@ exports[`Backend.ProjectCollection.Form.IconPicker component renders correctly 1
           </svg>
         </label>
         <label
-          className="icon-picker__item"
+          class="icon-picker__item"
         >
           <span
-            className="screen-reader-text"
+            class="screen-reader-text"
           >
             mug
           </span>
           <input
-            checked={false}
-            className="icon-picker__input"
+            class="icon-picker__input"
             name="icon-picker-1"
-            onChange={[Function]}
             type="radio"
             value="mug"
           />
           <svg
-            aria-hidden={true}
-            className="manicon-svg svg-icon--mug64"
+            aria-hidden="true"
+            class="manicon-svg svg-icon--mug64"
             fill="currentColor"
-            height={48}
+            height="48"
             viewBox="0 0 64 64"
-            width={48}
+            width="48"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path

@@ -1,30 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
+exports[`backend/components/resource/form/KindPicker matches the snapshot when rendered 1`] = `
 <div
-  className="resource-kind-picker form-secondary"
+  class="resource-kind-picker form-secondary"
 >
   <div
-    className="form-input"
+    class="form-input"
   >
     <label
-      htmlFor={1}
+      for="1"
     >
       Kind
     </label>
     <div
-      className="resource-kind-picker__select"
+      class="resource-kind-picker__select"
     >
       <div
-        className="form-select"
+        class="form-select"
       >
         <svg
-          aria-hidden={true}
-          className="manicon-svg form-select__icon svg-icon--disclosureDown16"
+          aria-hidden="true"
+          class="manicon-svg form-select__icon svg-icon--disclosureDown16"
           fill="currentColor"
-          height={22}
+          height="22"
           viewBox="0 0 16 16"
-          width={22}
+          width="22"
           xmlns="http://www.w3.org/2000/svg"
         >
           <polygon
@@ -32,12 +32,11 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
           />
         </svg>
         <select
-          id={1}
-          onChange={[Function]}
-          value="image"
+          id="1"
         >
           <option
             id="image"
+            selected=""
             value="image"
           >
             Image
@@ -101,34 +100,33 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
     </div>
     <div
       aria-label="Resource Kind"
-      className="resource-kind-picker__list"
+      class="resource-kind-picker__list"
       role="group"
     >
       <label
-        className="resource-kind-picker__item radio resource-kind-picker__item--active"
-        htmlFor="1-image"
+        class="resource-kind-picker__item radio resource-kind-picker__item--active"
+        for="1-image"
       >
         <input
-          checked={true}
-          className="resource-kind-picker__input"
+          checked=""
+          class="resource-kind-picker__input"
           id="1-image"
-          name={1}
-          onChange={[Function]}
+          name="1"
           type="radio"
           value="image"
         />
         <span
-          className="resource-kind-picker__label"
+          class="resource-kind-picker__label"
         >
           Image
         </span>
         <svg
-          aria-hidden={true}
-          className="manicon-svg resource-kind-picker__icon svg-icon--resourceImage64"
+          aria-hidden="true"
+          class="manicon-svg resource-kind-picker__icon svg-icon--resourceImage64"
           fill="currentColor"
-          height={64}
+          height="64"
           viewBox="0 0 64 64"
-          width={64}
+          width="64"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -137,63 +135,59 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         </svg>
       </label>
       <label
-        className="resource-kind-picker__item radio"
-        htmlFor="1-video"
+        class="resource-kind-picker__item radio"
+        for="1-video"
       >
         <input
-          checked={false}
-          className="resource-kind-picker__input"
+          class="resource-kind-picker__input"
           id="1-video"
-          name={1}
-          onChange={[Function]}
+          name="1"
           type="radio"
           value="video"
         />
         <span
-          className="resource-kind-picker__label"
+          class="resource-kind-picker__label"
         >
           Video
         </span>
         <svg
-          aria-hidden={true}
-          className="manicon-svg resource-kind-picker__icon svg-icon--resourceVideo64"
+          aria-hidden="true"
+          class="manicon-svg resource-kind-picker__icon svg-icon--resourceVideo64"
           fill="currentColor"
-          height={64}
+          height="64"
           viewBox="0 0 64 64"
-          width={64}
+          width="64"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M56.011,7 L5,17.095 L7.116,27.791 L7.116,57.147 L59.116,57.147 L59.116,27.147 L16.019,27.147 L58.339,18.772 L56.011,7 Z M52.924,9.649 L54.436,9.349 L55.99,17.198 L49.168,18.549 L52.924,9.649 Z M43.771,11.46 L50.555,10.118 L46.799,19.017 L40.015,20.36 L43.771,11.46 Z M34.621,13.271 L41.404,11.929 L37.647,20.828 L30.864,22.17 L34.621,13.271 Z M25.469,15.084 L32.253,13.74 L28.496,22.639 L21.713,23.982 L25.469,15.084 Z M16.317,16.894 L23.101,15.552 L19.345,24.451 L12.562,25.794 L16.317,16.894 Z M7.35,18.669 L13.949,17.363 L10.193,26.263 L8.903,26.517 L7.35,18.669 Z M9.116,55.147 L57.116,55.147 L57.116,29.147 L9.116,29.147 L9.116,55.147 Z M29.1112,37.4049 L36.1762,41.6429 L29.1112,45.8809 L29.1112,37.4049 Z M27.1112,33.8739 L27.1112,49.4119 L40.0652,41.6429 L27.1112,33.8739 Z"
-            fillRule="evenodd"
+            fill-rule="evenodd"
           />
         </svg>
       </label>
       <label
-        className="resource-kind-picker__item radio"
-        htmlFor="1-audio"
+        class="resource-kind-picker__item radio"
+        for="1-audio"
       >
         <input
-          checked={false}
-          className="resource-kind-picker__input"
+          class="resource-kind-picker__input"
           id="1-audio"
-          name={1}
-          onChange={[Function]}
+          name="1"
           type="radio"
           value="audio"
         />
         <span
-          className="resource-kind-picker__label"
+          class="resource-kind-picker__label"
         >
           Audio
         </span>
         <svg
-          aria-hidden={true}
-          className="manicon-svg resource-kind-picker__icon svg-icon--resourceAudio64"
+          aria-hidden="true"
+          class="manicon-svg resource-kind-picker__icon svg-icon--resourceAudio64"
           fill="currentColor"
-          height={64}
+          height="64"
           viewBox="0 0 64 64"
-          width={64}
+          width="64"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -202,30 +196,28 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         </svg>
       </label>
       <label
-        className="resource-kind-picker__item radio"
-        htmlFor="1-file"
+        class="resource-kind-picker__item radio"
+        for="1-file"
       >
         <input
-          checked={false}
-          className="resource-kind-picker__input"
+          class="resource-kind-picker__input"
           id="1-file"
-          name={1}
-          onChange={[Function]}
+          name="1"
           type="radio"
           value="file"
         />
         <span
-          className="resource-kind-picker__label"
+          class="resource-kind-picker__label"
         >
           File
         </span>
         <svg
-          aria-hidden={true}
-          className="manicon-svg resource-kind-picker__icon svg-icon--resourceFile64"
+          aria-hidden="true"
+          class="manicon-svg resource-kind-picker__icon svg-icon--resourceFile64"
           fill="currentColor"
-          height={64}
+          height="64"
           viewBox="0 0 64 64"
-          width={64}
+          width="64"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -234,30 +226,28 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         </svg>
       </label>
       <label
-        className="resource-kind-picker__item radio"
-        htmlFor="1-link"
+        class="resource-kind-picker__item radio"
+        for="1-link"
       >
         <input
-          checked={false}
-          className="resource-kind-picker__input"
+          class="resource-kind-picker__input"
           id="1-link"
-          name={1}
-          onChange={[Function]}
+          name="1"
           type="radio"
           value="link"
         />
         <span
-          className="resource-kind-picker__label"
+          class="resource-kind-picker__label"
         >
           Link
         </span>
         <svg
-          aria-hidden={true}
-          className="manicon-svg resource-kind-picker__icon svg-icon--resourceLink64"
+          aria-hidden="true"
+          class="manicon-svg resource-kind-picker__icon svg-icon--resourceLink64"
           fill="currentColor"
-          height={64}
+          height="64"
           viewBox="0 0 64 64"
-          width={64}
+          width="64"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -266,30 +256,28 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         </svg>
       </label>
       <label
-        className="resource-kind-picker__item radio"
-        htmlFor="1-pdf"
+        class="resource-kind-picker__item radio"
+        for="1-pdf"
       >
         <input
-          checked={false}
-          className="resource-kind-picker__input"
+          class="resource-kind-picker__input"
           id="1-pdf"
-          name={1}
-          onChange={[Function]}
+          name="1"
           type="radio"
           value="pdf"
         />
         <span
-          className="resource-kind-picker__label"
+          class="resource-kind-picker__label"
         >
           PDF
         </span>
         <svg
-          aria-hidden={true}
-          className="manicon-svg resource-kind-picker__icon svg-icon--resourcePdf64"
+          aria-hidden="true"
+          class="manicon-svg resource-kind-picker__icon svg-icon--resourcePdf64"
           fill="currentColor"
-          height={64}
+          height="64"
           viewBox="0 0 64 64"
-          width={64}
+          width="64"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -298,30 +286,28 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         </svg>
       </label>
       <label
-        className="resource-kind-picker__item radio"
-        htmlFor="1-document"
+        class="resource-kind-picker__item radio"
+        for="1-document"
       >
         <input
-          checked={false}
-          className="resource-kind-picker__input"
+          class="resource-kind-picker__input"
           id="1-document"
-          name={1}
-          onChange={[Function]}
+          name="1"
           type="radio"
           value="document"
         />
         <span
-          className="resource-kind-picker__label"
+          class="resource-kind-picker__label"
         >
           Document
         </span>
         <svg
-          aria-hidden={true}
-          className="manicon-svg resource-kind-picker__icon svg-icon--resourceDocument64"
+          aria-hidden="true"
+          class="manicon-svg resource-kind-picker__icon svg-icon--resourceDocument64"
           fill="currentColor"
-          height={64}
+          height="64"
           viewBox="0 0 64 64"
-          width={64}
+          width="64"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -330,30 +316,28 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         </svg>
       </label>
       <label
-        className="resource-kind-picker__item radio"
-        htmlFor="1-spreadsheet"
+        class="resource-kind-picker__item radio"
+        for="1-spreadsheet"
       >
         <input
-          checked={false}
-          className="resource-kind-picker__input"
+          class="resource-kind-picker__input"
           id="1-spreadsheet"
-          name={1}
-          onChange={[Function]}
+          name="1"
           type="radio"
           value="spreadsheet"
         />
         <span
-          className="resource-kind-picker__label"
+          class="resource-kind-picker__label"
         >
           Spreadsheet
         </span>
         <svg
-          aria-hidden={true}
-          className="manicon-svg resource-kind-picker__icon svg-icon--resourceSpreadsheet64"
+          aria-hidden="true"
+          class="manicon-svg resource-kind-picker__icon svg-icon--resourceSpreadsheet64"
           fill="currentColor"
-          height={64}
+          height="64"
           viewBox="0 0 64 64"
-          width={64}
+          width="64"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -362,30 +346,28 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         </svg>
       </label>
       <label
-        className="resource-kind-picker__item radio"
-        htmlFor="1-presentation"
+        class="resource-kind-picker__item radio"
+        for="1-presentation"
       >
         <input
-          checked={false}
-          className="resource-kind-picker__input"
+          class="resource-kind-picker__input"
           id="1-presentation"
-          name={1}
-          onChange={[Function]}
+          name="1"
           type="radio"
           value="presentation"
         />
         <span
-          className="resource-kind-picker__label"
+          class="resource-kind-picker__label"
         >
           Presentation
         </span>
         <svg
-          aria-hidden={true}
-          className="manicon-svg resource-kind-picker__icon svg-icon--resourcePresentation64"
+          aria-hidden="true"
+          class="manicon-svg resource-kind-picker__icon svg-icon--resourcePresentation64"
           fill="currentColor"
-          height={64}
+          height="64"
           viewBox="0 0 64 64"
-          width={64}
+          width="64"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -394,30 +376,28 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         </svg>
       </label>
       <label
-        className="resource-kind-picker__item radio"
-        htmlFor="1-interactive"
+        class="resource-kind-picker__item radio"
+        for="1-interactive"
       >
         <input
-          checked={false}
-          className="resource-kind-picker__input"
+          class="resource-kind-picker__input"
           id="1-interactive"
-          name={1}
-          onChange={[Function]}
+          name="1"
           type="radio"
           value="interactive"
         />
         <span
-          className="resource-kind-picker__label"
+          class="resource-kind-picker__label"
         >
           Interactive
         </span>
         <svg
-          aria-hidden={true}
-          className="manicon-svg resource-kind-picker__icon svg-icon--resourceInteractive64"
+          aria-hidden="true"
+          class="manicon-svg resource-kind-picker__icon svg-icon--resourceInteractive64"
           fill="currentColor"
-          height={64}
+          height="64"
           viewBox="0 0 64 64"
-          width={64}
+          width="64"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path

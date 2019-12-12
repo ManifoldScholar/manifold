@@ -1,9 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global.Date component renders correctly 1`] = `
-<time
-  dateTime="2017-01-01"
+exports[`global/components/FormattedDate matches the snapshot 1`] = `
+<FormattedDate
+  date="01-01-2017"
+  format="MMMM, YYYY"
+  prefix="test"
 >
-  test January, 2017
-</time>
+  <time
+    dateTime="2017-01-01"
+  >
+    test January, 2017
+  </time>
+</FormattedDate>
+`;
+
+exports[`global/components/FormattedDate when the date is a date object matches the snapshot 1`] = `
+<FormattedDate
+  date={2017-01-01T08:00:00.000Z}
+  format="MMMM, YYYY"
+  prefix="test"
+>
+  <time
+    dateTime="2017-01-01"
+  >
+    test January, 2017
+  </time>
+</FormattedDate>
 `;

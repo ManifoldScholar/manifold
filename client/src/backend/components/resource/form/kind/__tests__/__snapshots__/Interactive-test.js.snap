@@ -1,129 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Resource.Form.Interactive component when sub kind is embed renders correctly 1`] = `
+exports[`backend/components/resource/form/kind/Interactive when sub kind is embed matches the snapshot 1`] = `
 <div
   className="form-section form-section--primary"
 >
-  <div
-    className="form-input"
-    style={Object {}}
-  >
-    <label
-      className=""
-      htmlFor="text-input-1"
-    >
-      Minimum Width
-    </label>
-    <input
-      aria-describedby="text-input-error-1 text-input-instructions-1"
-      id="text-input-1"
-      onChange={[Function]}
-      placeholder="The minimum display width"
-      type="text"
-      value=""
-    />
-  </div>
-  <div
-    className="form-input"
-    style={Object {}}
-  >
-    <label
-      className=""
-      htmlFor="text-input-1"
-    >
-      Minimum Height
-    </label>
-    <input
-      aria-describedby="text-input-error-1 text-input-instructions-1"
-      id="text-input-1"
-      onChange={[Function]}
-      placeholder="The minimum display height"
-      type="text"
-      value=""
-    />
-  </div>
-  <div
-    className="form-input"
-    style={Object {}}
-  >
-    <label
-      className=""
-      htmlFor="text-input-1"
-    >
-      iFrame URL
-    </label>
-    <input
-      aria-describedby="text-input-error-1 text-input-instructions-1"
-      id="text-input-1"
-      onChange={[Function]}
-      placeholder="Enter iFrame URL"
-      type="text"
-      value=""
-    />
-  </div>
+  <Form.TextInput
+    focusOnMount={false}
+    getModelValue={[MockFunction]}
+    join={[Function]}
+    label="Minimum Width"
+    name="attributes[minimumWidth]"
+    password={false}
+    placeholder="The minimum display width"
+  />
+  <Form.TextInput
+    focusOnMount={false}
+    getModelValue={[MockFunction]}
+    join={[Function]}
+    label="Minimum Height"
+    name="attributes[minimumHeight]"
+    password={false}
+    placeholder="The minimum display height"
+  />
+  <Form.TextInput
+    focusOnMount={false}
+    getModelValue={[MockFunction]}
+    join={[Function]}
+    label="iFrame URL"
+    name="attributes[externalUrl]"
+    password={false}
+    placeholder="Enter iFrame URL"
+  />
 </div>
 `;
 
-exports[`Backend.Resource.Form.Interactive component when sub kind is iframe renders correctly 1`] = `
+exports[`backend/components/resource/form/kind/Interactive when sub kind is iframe matches the snapshot 1`] = `
 <div
   className="form-section form-section--primary"
 >
-  <div
-    className="form-input"
-    style={Object {}}
-  >
-    <label
-      className=""
-      htmlFor="text-input-1"
-    >
-      Minimum Width
-    </label>
-    <input
-      aria-describedby="text-input-error-1 text-input-instructions-1"
-      id="text-input-1"
-      onChange={[Function]}
-      placeholder="The minimum display width"
-      type="text"
-      value=""
-    />
-  </div>
-  <div
-    className="form-input"
-    style={Object {}}
-  >
-    <label
-      className=""
-      htmlFor="text-input-1"
-    >
-      Minimum Height
-    </label>
-    <input
-      aria-describedby="text-input-error-1 text-input-instructions-1"
-      id="text-input-1"
-      onChange={[Function]}
-      placeholder="The minimum display height"
-      type="text"
-      value=""
-    />
-  </div>
-  <div
-    className="form-input"
-    style={Object {}}
-  >
-    <label
-      className=""
-      htmlFor="text-input-1"
-    >
-      iFrame URL
-    </label>
-    <input
-      aria-describedby="text-input-error-1 text-input-instructions-1"
-      id="text-input-1"
-      onChange={[Function]}
-      placeholder="Enter iFrame URL"
-      type="text"
-      value=""
-    />
-  </div>
+  <Form.TextInput
+    focusOnMount={false}
+    getModelValue={[MockFunction]}
+    join={[Function]}
+    label="Minimum Width"
+    name="attributes[minimumWidth]"
+    password={false}
+    placeholder="The minimum display width"
+  />
+  <Form.TextInput
+    focusOnMount={false}
+    getModelValue={[MockFunction]}
+    join={[Function]}
+    label="Minimum Height"
+    name="attributes[minimumHeight]"
+    password={false}
+    placeholder="The minimum display height"
+  />
+  <Form.TextInput
+    focusOnMount={false}
+    getModelValue={[MockFunction]}
+    join={[Function]}
+    label="iFrame URL"
+    name="attributes[externalUrl]"
+    password={false}
+    placeholder="Enter iFrame URL"
+  />
 </div>
 `;

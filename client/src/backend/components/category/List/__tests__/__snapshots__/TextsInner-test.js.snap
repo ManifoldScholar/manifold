@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`backend/components/category/List/TextsInner matches the snapshot 1`] = `
+<Fragment>
+  <Connect(Draggable)
+    draggableId="3"
+    index={0}
+    key="3"
+    type="text"
+  >
+    <Component />
+  </Connect(Draggable)>
+  <Connect(Draggable)
+    draggableId="4"
+    index={1}
+    key="4"
+    type="text"
+  >
+    <Component />
+  </Connect(Draggable)>
+</Fragment>
+`;

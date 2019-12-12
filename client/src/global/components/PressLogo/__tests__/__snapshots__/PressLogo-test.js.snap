@@ -1,6 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global.PressLogo component renders correctly 1`] = `
+exports[`global/components/PressLogo/PressLogo when it does not have a URL matches the snapshot 1`] = `
+<figure
+  className=""
+>
+  <IconComposer
+    fill="currentColor"
+    icon="manifoldLogo32"
+    size={26}
+    svgProps={
+      Object {
+        "aria-hidden": true,
+      }
+    }
+  />
+  <span
+    className="screen-reader-text"
+  >
+    Manifold Logo
+  </span>
+</figure>
+`;
+
+exports[`global/components/PressLogo/PressLogo when it has a URL matches the snapshot 1`] = `
 <figure
   className="custom-logo"
 >

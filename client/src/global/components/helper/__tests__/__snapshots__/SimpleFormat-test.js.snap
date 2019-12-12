@@ -1,13 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global.Helper.SimpleFormat component renders correctly 1`] = `
+exports[`global/components/helper/SimpleFormat matches the snapshot 1`] = `
 <div>
-  <p
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "Basketball is my favorite sport. I like the way they dribble up and down the court.",
-      }
-    }
+  <LoadableComponent
+    text="Basketball is my favorite sport. I like the way they dribble up and down the court."
+    wrapperTag="div"
+    wrapperTagProps={Object {}}
   />
 </div>
 `;

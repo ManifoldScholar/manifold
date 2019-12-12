@@ -1,78 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Dashboard.Activity component renders correctly 1`] = `
+exports[`backend/components/dashboard/Activity when all stats are present matches the snapshot 1`] = `
 <div
-  className="backend-activity-stats"
+  class="backend-activity-stats"
 >
   <ul
-    className="backend-activity-stats__list"
+    class="backend-activity-stats__list"
   >
     <li
-      className="backend-activity-stats__list-item"
+      class="backend-activity-stats__list-item"
     >
       <span
-        className="backend-activity-stats__list-text"
+        class="backend-activity-stats__list-text"
       >
         Texts added this week
       </span>
       <span
-        className="backend-activity-stats__list-text--highlighted"
+        class="backend-activity-stats__list-text--highlighted"
       >
         5
       </span>
     </li>
     <li
-      className="backend-activity-stats__list-item"
+      class="backend-activity-stats__list-item"
     >
       <span
-        className="backend-activity-stats__list-text"
+        class="backend-activity-stats__list-text"
       >
         Readers this week
       </span>
       <span
-        className="backend-activity-stats__list-text--highlighted"
+        class="backend-activity-stats__list-text--highlighted"
       >
         2
       </span>
     </li>
     <li
-      className="backend-activity-stats__list-item"
+      class="backend-activity-stats__list-item"
     >
       <span
-        className="backend-activity-stats__list-text"
+        class="backend-activity-stats__list-text"
       >
         Change from last week
       </span>
       <span
-        className="backend-activity-stats__list-text--highlighted"
+        class="backend-activity-stats__list-text--highlighted"
       >
         +50%
       </span>
     </li>
     <li
-      className="backend-activity-stats__list-item"
+      class="backend-activity-stats__list-item"
     >
       <span
-        className="backend-activity-stats__list-text"
+        class="backend-activity-stats__list-text"
       >
         Highlights in the past week
       </span>
       <span
-        className="backend-activity-stats__list-text--highlighted"
+        class="backend-activity-stats__list-text--highlighted"
       >
         4
       </span>
     </li>
     <li
-      className="backend-activity-stats__list-item"
+      class="backend-activity-stats__list-item"
     >
       <span
-        className="backend-activity-stats__list-text"
+        class="backend-activity-stats__list-text"
       >
         Annotations in the past week
       </span>
       <span
-        className="backend-activity-stats__list-text--highlighted"
+        class="backend-activity-stats__list-text--highlighted"
       >
         3
       </span>

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
+exports[`reader/components/notation/resource-collection/Detail matches the snapshot 1`] = `
 <div>
   <div
     className="collection-detail"
@@ -8,258 +8,1073 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
     <div
       className="container"
     >
-      <header
-        className="entity-section-wrapper__heading entity-section-wrapper__heading--wide collection-detail__heading section-heading"
-      >
-        <div
-          className="main"
-        >
-          <svg
-            aria-hidden={true}
-            className="manicon-svg svg-icon--resourceCollection64"
-            fill="currentColor"
-            height={54}
-            viewBox="0 0 64 64"
-            width={54}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
-            />
-          </svg>
-          <div
-            className="body"
-          >
-            <h1
-              className="title"
-            >
-              Rowan
-            </h1>
-            <span
-              className="date"
-            >
-              <time
-                dateTime="2017-04-24"
-              >
-                Collection created April, 2017
-              </time>
-            </span>
-          </div>
-        </div>
-      </header>
-    </div>
-  </div>
-  <div
-    className="resource-slideshow"
-  >
-    <div
-      className="slide"
-    >
-      <div>
-        <div
-          className="resource-slide-figure"
-        >
-          <div>
-            <div>
-              <figure>
-                <div
-                  className="figure-image"
-                  style={
-                    Object {
-                      "backgroundImage": "url(null)",
-                    }
-                  }
-                />
-              </figure>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="resource-slideshow__footer"
-      >
-        <div
-          className="resource-slideshow__caption"
-        >
-          <header>
-            <h3
-              className="resource-slideshow__title"
-              dangerouslySetInnerHTML={
+      <ResourceCollection.Title
+        resourceCollection={
+          Object {
+            "attributes": Object {
+              "abilities": Object {
+                "create": true,
+                "createPermissions": true,
+                "createResourceCollections": true,
+                "createResources": true,
+                "createTexts": true,
+                "createTwitterQueries": true,
+                "delete": true,
+                "manageEvents": true,
+                "managePermissions": true,
+                "manageResourceCollections": true,
+                "manageResources": true,
+                "manageSocials": true,
+                "manageTexts": true,
+                "manageTwitterQueries": true,
+                "read": true,
+                "readDeleted": true,
+                "readDrafts": true,
+                "readLog": true,
+                "readSecrets": true,
+                "update": true,
+                "updateMakers": true,
+              },
+              "collectionResourcesCount": 0,
+              "createdAt": "2017-04-24T23:25:50.161Z",
+              "resourceKinds": Array [
+                "image",
+                "video",
+              ],
+              "resourceTags": Array [
+                "dog",
+              ],
+              "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+              "thumbnailStyles": Object {},
+              "title": "Rowan",
+            },
+            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+            "relationships": Object {
+              "project": Object {
+                "attributes": Object {
+                  "abilities": Object {
+                    "create": true,
+                    "createPermissions": true,
+                    "createResourceCollections": true,
+                    "createResources": true,
+                    "createTexts": true,
+                    "createTwitterQueries": true,
+                    "delete": true,
+                    "manageEvents": true,
+                    "managePermissions": true,
+                    "manageResourceCollections": true,
+                    "manageResources": true,
+                    "manageSocials": true,
+                    "manageTexts": true,
+                    "manageTwitterQueries": true,
+                    "read": true,
+                    "readDeleted": true,
+                    "readDrafts": true,
+                    "readLog": true,
+                    "readSecrets": true,
+                    "update": true,
+                    "updateMakers": true,
+                  },
+                  "avatarColor": "primary",
+                  "avatarMeta": Object {},
+                  "avatarStyles": Object {},
+                  "coverStyles": Object {},
+                  "darkMode": false,
+                  "description": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
+                  "descriptionFormatted": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
+                  "downloadCallToAction": "Download the greatest dog",
+                  "hashtag": "cute_dog",
+                  "heroStyles": Object {},
+                  "hideActivity": false,
+                  "imageCreditsFormatted": "<p>Rowan, <em>The Dog</em></p>",
+                  "metadata": Object {
+                    "abstract": "some-value",
+                    "archive": "some-value",
+                    "archiveLocation": "some-value",
+                    "archivePlace": "some-value",
+                    "authority": "some-value",
+                    "callNumber": "some-value",
+                    "chapterNumber": "some-value",
+                    "collectionNumber": "some-value",
+                    "collectionTitle": "some-value",
+                    "containerTitle": "some-value",
+                    "dimensions": "some-value",
+                    "edition": "some-value",
+                    "event": "some-value",
+                    "eventPlace": "some-value",
+                    "isbn": "some-value",
+                    "issn": "some-value",
+                    "issue": "some-value",
+                    "jurisdiction": "some-value",
+                    "medium": "some-value",
+                    "number": "some-value",
+                    "numberOfPages": "some-value",
+                    "numberOfVolumes": "some-value",
+                    "originalPublisher": "some-value",
+                    "originalPublisherPlace": "some-value",
+                    "originalTitle": "some-value",
+                    "pmcid": "some-value",
+                    "pmid": "some-value",
+                    "publisher": "some-value",
+                    "publisherPlace": "some-value",
+                    "reviewedTitle": "some-value",
+                    "section": "some-value",
+                    "version": "some-value",
+                    "volume": "some-value",
+                    "yearSuffix": "some-value",
+                  },
+                  "metadataFormatted": Object {
+                    "abstract": "some-value",
+                    "archive": "some-value",
+                    "archiveLocation": "some-value",
+                    "archivePlace": "some-value",
+                    "authority": "some-value",
+                    "callNumber": "some-value",
+                    "chapterNumber": "some-value",
+                    "collectionNumber": "some-value",
+                    "collectionTitle": "some-value",
+                    "containerTitle": "some-value",
+                    "dimensions": "some-value",
+                    "edition": "some-value",
+                    "event": "some-value",
+                    "eventPlace": "some-value",
+                    "isbn": "some-value",
+                    "issn": "some-value",
+                    "issue": "some-value",
+                    "jurisdiction": "some-value",
+                    "medium": "some-value",
+                    "number": "some-value",
+                    "numberOfPages": "some-value",
+                    "numberOfVolumes": "some-value",
+                    "originalPublisher": "some-value",
+                    "originalPublisherPlace": "some-value",
+                    "originalTitle": "some-value",
+                    "pmcid": "some-value",
+                    "pmid": "some-value",
+                    "publisher": "some-value",
+                    "publisherPlace": "some-value",
+                    "reviewedTitle": "some-value",
+                    "section": "some-value",
+                    "version": "some-value",
+                    "volume": "some-value",
+                    "yearSuffix": "some-value",
+                  },
+                  "metadataProperties": Array [
+                    "abstract",
+                    "archive",
+                    "archiveLocation",
+                    "archivePlace",
+                    "authority",
+                    "callNumber",
+                    "collectionTitle",
+                    "containerTitle",
+                    "dimensions",
+                    "event",
+                    "eventPlace",
+                    "isbn",
+                    "issn",
+                    "jurisdiction",
+                    "medium",
+                    "originalPublisher",
+                    "originalPublisherPlace",
+                    "originalTitle",
+                    "pmcid",
+                    "pmid",
+                    "publisher",
+                    "publisherPlace",
+                    "reviewedTitle",
+                    "section",
+                    "version",
+                    "yearSuffix",
+                    "chapterNumber",
+                    "collectionNumber",
+                    "edition",
+                    "issue",
+                    "number",
+                    "numberOfPages",
+                    "numberOfVolumes",
+                    "volume",
+                  ],
+                  "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                  "subtitle": "World's Greatest Dog",
+                  "title": "Rowan Test",
+                  "titleFormatted": "Rowan Test",
+                  "titlePlaintext": "Rowan Test",
+                },
+                "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                "relationships": Object {
+                  "actionCallouts": Array [
+                    "actionCallout",
+                  ],
+                  "makers": Array [
+                    "maker",
+                  ],
+                  "resources": Array [
+                    "resource",
+                  ],
+                  "texts": Array [
+                    "text",
+                  ],
+                },
+                "type": "projects",
+              },
+              "resources": Array [
                 Object {
-                  "__html": "Image",
-                }
-              }
-            />
-            <span
-              className="screen-reader-text"
-              role="alert"
-            >
-              Showing 
-               resource: 
-              Image
-            </span>
-          </header>
-          <div
-            className="resource-slideshow__utility resource-slideshow__utility--with-shadow"
-          >
-            <div
-              className="resource-slideshow__utility-inner"
-            >
-              <button
-                className="resource-slideshow__more-link"
-                onClick={[Function]}
-              >
-                <span
-                  className="resource-slideshow__open-text"
-                >
-                  Read More
-                </span>
-                <span
-                  className="resource-slideshow__close-text"
-                >
-                  Hide Description
-                </span>
-              </button>
-              <a
-                className="resource-slideshow__download-link"
-                href="original-image.mock"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <span>
-                  Download
-                </span>
-                <svg
-                  aria-hidden={true}
-                  className="manicon-svg resource-slideshow__download-icon svg-icon--arrowDown16"
-                  fill="currentColor"
-                  height={16}
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
-                    transform="rotate(90 8 8)"
-                  />
-                </svg>
-              </a>
-              <a
-                className="resource-slideshow__detail-link"
-                href="/projects/delegated-project-slug/resource-collection/slug-2/resource/slug-3"
-                onClick={[Function]}
-              >
-                View Resource
-              </a>
-            </div>
-          </div>
-        </div>
-        <div
-          className="resource-slideshow__pagination"
-        >
-          <span
-            className="resource-slideshow__ordinal"
-          >
-            1
-             
-            /
-             
-            2
-          </span>
-          <div>
-            <button
-              className="resource-slideshow__button resource-slideshow__button--previous"
-              disabled={true}
-              onClick={[Function]}
-            >
-              <svg
-                aria-hidden={true}
-                className="manicon-svg resource-slideshow__pagination-icon resource-slideshow__pagination-icon--left resource-slideshow__pagination-icon--large svg-icon--circleArrowLeft64"
-                fill="currentColor"
-                height={50}
-                viewBox="0 0 64 64"
-                width={50}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M32,58 C17.6405965,58 5.99999996,46.3594035 5.99999996,32 C5.99999996,17.6405965 17.6405965,5.99999996 32,5.99999996 C46.3594035,5.99999996 58,17.6405965 58,32 C58,46.3594035 46.3594035,58 32,58 Z M32,56 C45.254834,56 56,45.254834 56,32 C56,18.745166 45.254834,7.99999996 32,7.99999996 C18.745166,7.99999996 7.99999996,18.745166 7.99999996,32 C7.99999996,45.254834 18.745166,56 32,56 Z M19.6388077,32.9918997 L19.6403922,30.9919003 L44.0007923,31.0112003 L43.9992077,33.0111997 L19.6388077,32.9918997 Z M21.019947,32 L35.2169617,44.5045804 L33.8950383,46.0054197 L17.994053,32 L33.8950383,17.9945803 L35.2169617,19.4954196 L21.019947,32 Z"
-                />
-              </svg>
-              <svg
-                aria-hidden={true}
-                className="manicon-svg resource-slideshow__pagination-icon resource-slideshow__pagination-icon--left resource-slideshow__pagination-icon--small svg-icon--arrowLeft16"
-                fill="currentColor"
-                height={16}
-                viewBox="0 0 16 16"
-                width={16}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
-                  transform="rotate(180 8 8)"
-                />
-              </svg>
-              <span
-                aria-hidden="true"
-                className="resource-slideshow__pagination-text"
-              >
-                Prev
-              </span>
-              <span
-                className="screen-reader-text"
-              >
-                Go to previous slide
-              </span>
-            </button>
-            <button
-              className="resource-slideshow__button resource-slideshow__button--next"
-              disabled={false}
-              onClick={[Function]}
-            >
-              <span
-                aria-hidden="true"
-                className="resource-slideshow__pagination-text"
-              >
-                Next
-              </span>
-              <span
-                className="screen-reader-text"
-              >
-                Go to next slide
-              </span>
-              <svg
-                aria-hidden={true}
-                className="manicon-svg resource-slideshow__pagination-icon resource-slideshow__pagination-icon--right resource-slideshow__pagination-icon--large svg-icon--circleArrowRight64"
-                fill="currentColor"
-                height={50}
-                viewBox="0 0 64 64"
-                width={50}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M32,58 C17.6405965,58 5.99999996,46.3594035 5.99999996,32 C5.99999996,17.6405965 17.6405965,5.99999996 32,5.99999996 C46.3594035,5.99999996 58,17.6405965 58,32 C58,46.3594035 46.3594035,58 32,58 Z M32,56 C45.254834,56 56,45.254834 56,32 C56,18.745166 45.254834,7.99999996 32,7.99999996 C18.745166,7.99999996 7.99999996,18.745166 7.99999996,32 C7.99999996,45.254834 18.745166,56 32,56 Z M19.6388077,32.9918997 L19.6403922,30.9919003 L44.0007923,31.0112003 L43.9992077,33.0111997 L19.6388077,32.9918997 Z M21.019947,32 L35.2169617,44.5045804 L33.8950383,46.0054197 L17.994053,32 L33.8950383,17.9945803 L35.2169617,19.4954196 L21.019947,32 Z"
-                  transform="matrix(-1 0 0 1 64 0)"
-                />
-              </svg>
-              <svg
-                aria-hidden={true}
-                className="manicon-svg resource-slideshow__pagination-icon resource-slideshow__pagination-icon--right resource-slideshow__pagination-icon--small svg-icon--arrowRight16"
-                fill="currentColor"
-                height={16}
-                viewBox="0 0 16 16"
-                width={16}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
+                  "attributes": Object {
+                    "abilities": Object {
+                      "create": true,
+                      "createPermissions": true,
+                      "createResourceCollections": true,
+                      "createResources": true,
+                      "createTexts": true,
+                      "createTwitterQueries": true,
+                      "delete": true,
+                      "manageEvents": true,
+                      "managePermissions": true,
+                      "manageResourceCollections": true,
+                      "manageResources": true,
+                      "manageSocials": true,
+                      "manageTexts": true,
+                      "manageTwitterQueries": true,
+                      "read": true,
+                      "readDeleted": true,
+                      "readDrafts": true,
+                      "readLog": true,
+                      "readSecrets": true,
+                      "update": true,
+                      "updateMakers": true,
+                    },
+                    "attachmentStyles": Object {
+                      "medium": null,
+                      "mediumSquare": "original-image.mock",
+                      "original": "original-image.mock",
+                    },
+                    "captionFormatted": "World's Greatest Dog",
+                    "createdAt": "2017-04-24T23:25:50.161Z",
+                    "descriptionFormatted": "Black and white freckles",
+                    "downloadable": true,
+                    "kind": "image",
+                    "metadata": Object {
+                      "abstract": "some-value",
+                      "archive": "some-value",
+                      "archiveLocation": "some-value",
+                      "archivePlace": "some-value",
+                      "authority": "some-value",
+                      "callNumber": "some-value",
+                      "chapterNumber": "some-value",
+                      "collectionNumber": "some-value",
+                      "collectionTitle": "some-value",
+                      "containerTitle": "some-value",
+                      "dimensions": "some-value",
+                      "edition": "some-value",
+                      "event": "some-value",
+                      "eventPlace": "some-value",
+                      "isbn": "some-value",
+                      "issn": "some-value",
+                      "issue": "some-value",
+                      "jurisdiction": "some-value",
+                      "medium": "some-value",
+                      "number": "some-value",
+                      "numberOfPages": "some-value",
+                      "numberOfVolumes": "some-value",
+                      "originalPublisher": "some-value",
+                      "originalPublisherPlace": "some-value",
+                      "originalTitle": "some-value",
+                      "pmcid": "some-value",
+                      "pmid": "some-value",
+                      "publisher": "some-value",
+                      "publisherPlace": "some-value",
+                      "reviewedTitle": "some-value",
+                      "section": "some-value",
+                      "version": "some-value",
+                      "volume": "some-value",
+                      "yearSuffix": "some-value",
+                    },
+                    "metadataFormatted": Object {
+                      "abstract": "some-value",
+                      "archive": "some-value",
+                      "archiveLocation": "some-value",
+                      "archivePlace": "some-value",
+                      "authority": "some-value",
+                      "callNumber": "some-value",
+                      "chapterNumber": "some-value",
+                      "collectionNumber": "some-value",
+                      "collectionTitle": "some-value",
+                      "containerTitle": "some-value",
+                      "dimensions": "some-value",
+                      "edition": "some-value",
+                      "event": "some-value",
+                      "eventPlace": "some-value",
+                      "isbn": "some-value",
+                      "issn": "some-value",
+                      "issue": "some-value",
+                      "jurisdiction": "some-value",
+                      "medium": "some-value",
+                      "number": "some-value",
+                      "numberOfPages": "some-value",
+                      "numberOfVolumes": "some-value",
+                      "originalPublisher": "some-value",
+                      "originalPublisherPlace": "some-value",
+                      "originalTitle": "some-value",
+                      "pmcid": "some-value",
+                      "pmid": "some-value",
+                      "publisher": "some-value",
+                      "publisherPlace": "some-value",
+                      "reviewedTitle": "some-value",
+                      "section": "some-value",
+                      "version": "some-value",
+                      "volume": "some-value",
+                      "yearSuffix": "some-value",
+                    },
+                    "projectSlug": "delegated-project-slug",
+                    "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                    "tagList": Array [
+                      "dog",
+                      "puppy",
+                      "GOAT",
+                    ],
+                    "title": "Image",
+                    "titleFormatted": "Image",
+                  },
+                  "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                  "relationships": Object {
+                    "collectionResources": Array [],
+                  },
+                  "type": "resources",
+                },
+              ],
+            },
+            "type": "resourceCollections",
+          }
+        }
+        showCreatedAt={true}
+      />
     </div>
   </div>
+  <ResourceSlideshow
+    collectionResources={
+      Array [
+        Object {
+          "attributes": Object {
+            "abilities": Object {
+              "create": true,
+              "createPermissions": true,
+              "createResourceCollections": true,
+              "createResources": true,
+              "createTexts": true,
+              "createTwitterQueries": true,
+              "delete": true,
+              "manageEvents": true,
+              "managePermissions": true,
+              "manageResourceCollections": true,
+              "manageResources": true,
+              "manageSocials": true,
+              "manageTexts": true,
+              "manageTwitterQueries": true,
+              "read": true,
+              "readDeleted": true,
+              "readDrafts": true,
+              "readLog": true,
+              "readSecrets": true,
+              "update": true,
+              "updateMakers": true,
+            },
+            "attachmentStyles": Object {
+              "medium": null,
+              "mediumSquare": "original-image.mock",
+              "original": "original-image.mock",
+            },
+            "captionFormatted": "World's Greatest Dog",
+            "createdAt": "2017-04-24T23:25:50.161Z",
+            "descriptionFormatted": "Black and white freckles",
+            "downloadable": true,
+            "kind": "image",
+            "metadata": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "metadataFormatted": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "projectSlug": "delegated-project-slug",
+            "slug": "slug-resource-0",
+            "tagList": Array [
+              "dog",
+              "puppy",
+              "GOAT",
+            ],
+            "title": "Image",
+            "titleFormatted": "Image",
+          },
+          "id": "resource-0",
+          "relationships": Object {},
+          "type": "resources",
+        },
+        Object {
+          "attributes": Object {
+            "abilities": Object {
+              "create": true,
+              "createPermissions": true,
+              "createResourceCollections": true,
+              "createResources": true,
+              "createTexts": true,
+              "createTwitterQueries": true,
+              "delete": true,
+              "manageEvents": true,
+              "managePermissions": true,
+              "manageResourceCollections": true,
+              "manageResources": true,
+              "manageSocials": true,
+              "manageTexts": true,
+              "manageTwitterQueries": true,
+              "read": true,
+              "readDeleted": true,
+              "readDrafts": true,
+              "readLog": true,
+              "readSecrets": true,
+              "update": true,
+              "updateMakers": true,
+            },
+            "attachmentStyles": Object {
+              "medium": null,
+              "mediumSquare": "original-image.mock",
+              "original": "original-image.mock",
+            },
+            "captionFormatted": "World's Greatest Dog",
+            "createdAt": "2017-04-24T23:25:50.161Z",
+            "descriptionFormatted": "Black and white freckles",
+            "downloadable": true,
+            "kind": "image",
+            "metadata": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "metadataFormatted": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "projectSlug": "delegated-project-slug",
+            "slug": "slug-resource-1",
+            "tagList": Array [
+              "dog",
+              "puppy",
+              "GOAT",
+            ],
+            "title": "Image",
+            "titleFormatted": "Image",
+          },
+          "id": "resource-1",
+          "relationships": Object {},
+          "type": "resources",
+        },
+        Object {
+          "attributes": Object {
+            "abilities": Object {
+              "create": true,
+              "createPermissions": true,
+              "createResourceCollections": true,
+              "createResources": true,
+              "createTexts": true,
+              "createTwitterQueries": true,
+              "delete": true,
+              "manageEvents": true,
+              "managePermissions": true,
+              "manageResourceCollections": true,
+              "manageResources": true,
+              "manageSocials": true,
+              "manageTexts": true,
+              "manageTwitterQueries": true,
+              "read": true,
+              "readDeleted": true,
+              "readDrafts": true,
+              "readLog": true,
+              "readSecrets": true,
+              "update": true,
+              "updateMakers": true,
+            },
+            "attachmentStyles": Object {
+              "medium": null,
+              "mediumSquare": "original-image.mock",
+              "original": "original-image.mock",
+            },
+            "captionFormatted": "World's Greatest Dog",
+            "createdAt": "2017-04-24T23:25:50.161Z",
+            "descriptionFormatted": "Black and white freckles",
+            "downloadable": true,
+            "kind": "image",
+            "metadata": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "metadataFormatted": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "projectSlug": "delegated-project-slug",
+            "slug": "slug-resource-2",
+            "tagList": Array [
+              "dog",
+              "puppy",
+              "GOAT",
+            ],
+            "title": "Image",
+            "titleFormatted": "Image",
+          },
+          "id": "resource-2",
+          "relationships": Object {},
+          "type": "resources",
+        },
+      ]
+    }
+    hideDetailUrl={false}
+    hideDownload={false}
+    pagination={
+      Object {
+        "currentPage": 1,
+        "nextPage": 2,
+        "perPage": 1,
+        "prevPage": 0,
+        "totalCount": 2,
+        "totalPages": 2,
+      }
+    }
+    resourceCollection={
+      Object {
+        "attributes": Object {
+          "abilities": Object {
+            "create": true,
+            "createPermissions": true,
+            "createResourceCollections": true,
+            "createResources": true,
+            "createTexts": true,
+            "createTwitterQueries": true,
+            "delete": true,
+            "manageEvents": true,
+            "managePermissions": true,
+            "manageResourceCollections": true,
+            "manageResources": true,
+            "manageSocials": true,
+            "manageTexts": true,
+            "manageTwitterQueries": true,
+            "read": true,
+            "readDeleted": true,
+            "readDrafts": true,
+            "readLog": true,
+            "readSecrets": true,
+            "update": true,
+            "updateMakers": true,
+          },
+          "collectionResourcesCount": 0,
+          "createdAt": "2017-04-24T23:25:50.161Z",
+          "resourceKinds": Array [
+            "image",
+            "video",
+          ],
+          "resourceTags": Array [
+            "dog",
+          ],
+          "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+          "thumbnailStyles": Object {},
+          "title": "Rowan",
+        },
+        "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+        "relationships": Object {
+          "project": Object {
+            "attributes": Object {
+              "abilities": Object {
+                "create": true,
+                "createPermissions": true,
+                "createResourceCollections": true,
+                "createResources": true,
+                "createTexts": true,
+                "createTwitterQueries": true,
+                "delete": true,
+                "manageEvents": true,
+                "managePermissions": true,
+                "manageResourceCollections": true,
+                "manageResources": true,
+                "manageSocials": true,
+                "manageTexts": true,
+                "manageTwitterQueries": true,
+                "read": true,
+                "readDeleted": true,
+                "readDrafts": true,
+                "readLog": true,
+                "readSecrets": true,
+                "update": true,
+                "updateMakers": true,
+              },
+              "avatarColor": "primary",
+              "avatarMeta": Object {},
+              "avatarStyles": Object {},
+              "coverStyles": Object {},
+              "darkMode": false,
+              "description": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
+              "descriptionFormatted": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
+              "downloadCallToAction": "Download the greatest dog",
+              "hashtag": "cute_dog",
+              "heroStyles": Object {},
+              "hideActivity": false,
+              "imageCreditsFormatted": "<p>Rowan, <em>The Dog</em></p>",
+              "metadata": Object {
+                "abstract": "some-value",
+                "archive": "some-value",
+                "archiveLocation": "some-value",
+                "archivePlace": "some-value",
+                "authority": "some-value",
+                "callNumber": "some-value",
+                "chapterNumber": "some-value",
+                "collectionNumber": "some-value",
+                "collectionTitle": "some-value",
+                "containerTitle": "some-value",
+                "dimensions": "some-value",
+                "edition": "some-value",
+                "event": "some-value",
+                "eventPlace": "some-value",
+                "isbn": "some-value",
+                "issn": "some-value",
+                "issue": "some-value",
+                "jurisdiction": "some-value",
+                "medium": "some-value",
+                "number": "some-value",
+                "numberOfPages": "some-value",
+                "numberOfVolumes": "some-value",
+                "originalPublisher": "some-value",
+                "originalPublisherPlace": "some-value",
+                "originalTitle": "some-value",
+                "pmcid": "some-value",
+                "pmid": "some-value",
+                "publisher": "some-value",
+                "publisherPlace": "some-value",
+                "reviewedTitle": "some-value",
+                "section": "some-value",
+                "version": "some-value",
+                "volume": "some-value",
+                "yearSuffix": "some-value",
+              },
+              "metadataFormatted": Object {
+                "abstract": "some-value",
+                "archive": "some-value",
+                "archiveLocation": "some-value",
+                "archivePlace": "some-value",
+                "authority": "some-value",
+                "callNumber": "some-value",
+                "chapterNumber": "some-value",
+                "collectionNumber": "some-value",
+                "collectionTitle": "some-value",
+                "containerTitle": "some-value",
+                "dimensions": "some-value",
+                "edition": "some-value",
+                "event": "some-value",
+                "eventPlace": "some-value",
+                "isbn": "some-value",
+                "issn": "some-value",
+                "issue": "some-value",
+                "jurisdiction": "some-value",
+                "medium": "some-value",
+                "number": "some-value",
+                "numberOfPages": "some-value",
+                "numberOfVolumes": "some-value",
+                "originalPublisher": "some-value",
+                "originalPublisherPlace": "some-value",
+                "originalTitle": "some-value",
+                "pmcid": "some-value",
+                "pmid": "some-value",
+                "publisher": "some-value",
+                "publisherPlace": "some-value",
+                "reviewedTitle": "some-value",
+                "section": "some-value",
+                "version": "some-value",
+                "volume": "some-value",
+                "yearSuffix": "some-value",
+              },
+              "metadataProperties": Array [
+                "abstract",
+                "archive",
+                "archiveLocation",
+                "archivePlace",
+                "authority",
+                "callNumber",
+                "collectionTitle",
+                "containerTitle",
+                "dimensions",
+                "event",
+                "eventPlace",
+                "isbn",
+                "issn",
+                "jurisdiction",
+                "medium",
+                "originalPublisher",
+                "originalPublisherPlace",
+                "originalTitle",
+                "pmcid",
+                "pmid",
+                "publisher",
+                "publisherPlace",
+                "reviewedTitle",
+                "section",
+                "version",
+                "yearSuffix",
+                "chapterNumber",
+                "collectionNumber",
+                "edition",
+                "issue",
+                "number",
+                "numberOfPages",
+                "numberOfVolumes",
+                "volume",
+              ],
+              "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+              "subtitle": "World's Greatest Dog",
+              "title": "Rowan Test",
+              "titleFormatted": "Rowan Test",
+              "titlePlaintext": "Rowan Test",
+            },
+            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+            "relationships": Object {
+              "actionCallouts": Array [
+                "actionCallout",
+              ],
+              "makers": Array [
+                "maker",
+              ],
+              "resources": Array [
+                "resource",
+              ],
+              "texts": Array [
+                "text",
+              ],
+            },
+            "type": "projects",
+          },
+          "resources": Array [
+            Object {
+              "attributes": Object {
+                "abilities": Object {
+                  "create": true,
+                  "createPermissions": true,
+                  "createResourceCollections": true,
+                  "createResources": true,
+                  "createTexts": true,
+                  "createTwitterQueries": true,
+                  "delete": true,
+                  "manageEvents": true,
+                  "managePermissions": true,
+                  "manageResourceCollections": true,
+                  "manageResources": true,
+                  "manageSocials": true,
+                  "manageTexts": true,
+                  "manageTwitterQueries": true,
+                  "read": true,
+                  "readDeleted": true,
+                  "readDrafts": true,
+                  "readLog": true,
+                  "readSecrets": true,
+                  "update": true,
+                  "updateMakers": true,
+                },
+                "attachmentStyles": Object {
+                  "medium": null,
+                  "mediumSquare": "original-image.mock",
+                  "original": "original-image.mock",
+                },
+                "captionFormatted": "World's Greatest Dog",
+                "createdAt": "2017-04-24T23:25:50.161Z",
+                "descriptionFormatted": "Black and white freckles",
+                "downloadable": true,
+                "kind": "image",
+                "metadata": Object {
+                  "abstract": "some-value",
+                  "archive": "some-value",
+                  "archiveLocation": "some-value",
+                  "archivePlace": "some-value",
+                  "authority": "some-value",
+                  "callNumber": "some-value",
+                  "chapterNumber": "some-value",
+                  "collectionNumber": "some-value",
+                  "collectionTitle": "some-value",
+                  "containerTitle": "some-value",
+                  "dimensions": "some-value",
+                  "edition": "some-value",
+                  "event": "some-value",
+                  "eventPlace": "some-value",
+                  "isbn": "some-value",
+                  "issn": "some-value",
+                  "issue": "some-value",
+                  "jurisdiction": "some-value",
+                  "medium": "some-value",
+                  "number": "some-value",
+                  "numberOfPages": "some-value",
+                  "numberOfVolumes": "some-value",
+                  "originalPublisher": "some-value",
+                  "originalPublisherPlace": "some-value",
+                  "originalTitle": "some-value",
+                  "pmcid": "some-value",
+                  "pmid": "some-value",
+                  "publisher": "some-value",
+                  "publisherPlace": "some-value",
+                  "reviewedTitle": "some-value",
+                  "section": "some-value",
+                  "version": "some-value",
+                  "volume": "some-value",
+                  "yearSuffix": "some-value",
+                },
+                "metadataFormatted": Object {
+                  "abstract": "some-value",
+                  "archive": "some-value",
+                  "archiveLocation": "some-value",
+                  "archivePlace": "some-value",
+                  "authority": "some-value",
+                  "callNumber": "some-value",
+                  "chapterNumber": "some-value",
+                  "collectionNumber": "some-value",
+                  "collectionTitle": "some-value",
+                  "containerTitle": "some-value",
+                  "dimensions": "some-value",
+                  "edition": "some-value",
+                  "event": "some-value",
+                  "eventPlace": "some-value",
+                  "isbn": "some-value",
+                  "issn": "some-value",
+                  "issue": "some-value",
+                  "jurisdiction": "some-value",
+                  "medium": "some-value",
+                  "number": "some-value",
+                  "numberOfPages": "some-value",
+                  "numberOfVolumes": "some-value",
+                  "originalPublisher": "some-value",
+                  "originalPublisherPlace": "some-value",
+                  "originalTitle": "some-value",
+                  "pmcid": "some-value",
+                  "pmid": "some-value",
+                  "publisher": "some-value",
+                  "publisherPlace": "some-value",
+                  "reviewedTitle": "some-value",
+                  "section": "some-value",
+                  "version": "some-value",
+                  "volume": "some-value",
+                  "yearSuffix": "some-value",
+                },
+                "projectSlug": "delegated-project-slug",
+                "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                "tagList": Array [
+                  "dog",
+                  "puppy",
+                  "GOAT",
+                ],
+                "title": "Image",
+                "titleFormatted": "Image",
+              },
+              "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+              "relationships": Object {
+                "collectionResources": Array [],
+              },
+              "type": "resources",
+            },
+          ],
+        },
+        "type": "resourceCollections",
+      }
+    }
+    slideOptions={
+      Object {
+        "enableZoom": false,
+      }
+    }
+  />
   <div
     className="container"
   >
@@ -267,50 +1082,44 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
       className="button-nav button-nav--stack"
     >
       <br />
-      <a
+      <Link
         className="button-secondary button-secondary--outlined"
-        href="/projects/slug-1/resource-collection/slug-2"
-        onClick={[Function]}
+        to="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resource-collection/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
       >
         <span
           className="button-secondary__text"
         >
           Visit Collection Page
         </span>
-        <svg
-          aria-hidden={true}
-          className="manicon-svg button-secondary__icon svg-icon--arrowRight16"
+        <IconComposer
           fill="currentColor"
-          height={16}
-          viewBox="0 0 16 16"
-          width={16}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
-          />
-        </svg>
-      </a>
+          icon="arrowRight16"
+          iconClass="button-secondary__icon"
+          size="default"
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
+      </Link>
       <br />
       <button
         className="button-secondary button-secondary--outlined button-secondary--dull"
         data-id="close-overlay"
         onClick={[MockFunction]}
       >
-        <svg
-          aria-hidden={true}
-          className="manicon-svg button-secondary__icon svg-icon--arrowLeft16"
+        <IconComposer
           fill="currentColor"
-          height={16}
-          viewBox="0 0 16 16"
-          width={16}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
-            transform="rotate(180 8 8)"
-          />
-        </svg>
+          icon="arrowLeft16"
+          iconClass="button-secondary__icon"
+          size="default"
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
         <span
           className="button-secondary__text"
         >

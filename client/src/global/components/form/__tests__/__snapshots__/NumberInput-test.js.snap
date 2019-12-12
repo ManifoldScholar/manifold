@@ -1,22 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Form.NumberInput component renders correctly 1`] = `
-<div
-  className="form-number-input form-input"
-  style={Object {}}
->
-  <label
-    className=""
-    htmlFor="number-input-1"
-  >
-    A form label
-  </label>
-  <input
-    aria-describedby="number-input-error-1 number-input-instructions-1"
-    id="number-input-1"
-    onChange={[Function]}
-    type="number"
-    value=""
-  />
-</div>
+exports[`global/components/form/NumberInput matches the snapshot 1`] = `
+<mockConstructor>
+  <Component />
+</mockConstructor>
 `;

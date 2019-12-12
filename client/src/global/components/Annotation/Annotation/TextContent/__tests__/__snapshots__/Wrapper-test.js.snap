@@ -1,31 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reader.Annotation.Selection.Wrapper component renders correctly 1`] = `
+exports[`global/components/Annotation/Annotation/TextContent/Wrapper matches the snapshot 1`] = `
 <div
   className="annotation-selection__text-container annotation-selection__text-container--light"
 >
   <div
     className="annotation-selection__container"
   >
-    <svg
-      aria-hidden={true}
-      className="manicon-svg annotation-selection__icon svg-icon--socialCite32"
+    <IconComposer
       fill="currentColor"
-      height={32}
-      viewBox="0 0 32 32"
-      width={32}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M2.99999996,14.59 C2.99999996,22.1751 7.33859997,26 14,26 L14,21.9918 C11.9188,21.9918 9.12559998,21.7804 9.12559998,17.2936 L14,17.2936 L14,5.99999997 L2.99999996,5.99999997 L2.99999996,14.59 Z M29,5.99999997 L18,5.99999997 L18,14.59 C18,22.1751 22.3386,26 29,26 L29,21.9918 C26.9188,21.9918 24.1256,21.7804 24.1256,17.2936 L29,17.2936 L29,5.99999997 Z"
-      />
-    </svg>
+      icon="socialCite32"
+      iconClass="annotation-selection__icon"
+      size="default"
+      svgProps={
+        Object {
+          "aria-hidden": true,
+        }
+      }
+    />
     <div
       dangerouslySetInnerHTML={
         Object {
-          "__html": "undefined",
+          "__html": "foo bar",
         }
       }
+    />
+    <SourceSummary
+      annotation={
+        Object {
+          "attributes": Object {
+            "abilities": Object {
+              "create": true,
+              "createPermissions": true,
+              "createResourceCollections": true,
+              "createResources": true,
+              "createTexts": true,
+              "createTwitterQueries": true,
+              "delete": true,
+              "manageEvents": true,
+              "managePermissions": true,
+              "manageResourceCollections": true,
+              "manageResources": true,
+              "manageSocials": true,
+              "manageTexts": true,
+              "manageTwitterQueries": true,
+              "read": true,
+              "readDeleted": true,
+              "readDrafts": true,
+              "readLog": true,
+              "readSecrets": true,
+              "update": true,
+              "updateMakers": true,
+            },
+            "body": "Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.",
+            "createdAt": "2017-04-24T23:25:50.161Z",
+            "creatorAvatarStyles": Object {},
+            "endChar": 13,
+            "endNode": "another-node",
+            "startChar": 4,
+            "startNode": "some-node",
+            "subject": "Gods, Earths, and 85ers",
+          },
+          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+          "relationships": Object {},
+          "type": "annotations",
+        }
+      }
+      includeCreator={false}
+      includeDate={false}
+      onHover={[Function]}
     />
   </div>
 </div>

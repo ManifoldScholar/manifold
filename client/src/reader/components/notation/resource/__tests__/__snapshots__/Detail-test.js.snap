@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reader.Notation.Resource.Detail component renders correctly 1`] = `
+exports[`reader/components/notation/resource/Detail matches the snapshot 1`] = `
 <div
   className="resource-detail"
 >
@@ -13,61 +13,139 @@ exports[`Reader.Notation.Resource.Detail component renders correctly 1`] = `
       <figure
         className="resource-icon image"
       >
-        <svg
-          aria-hidden={true}
-          className="manicon-svg svg-icon--resourceImage64"
-          fill="currentColor"
-          height={50}
-          viewBox="0 0 64 64"
-          width={50}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M5.99999996,13 L5.99999996,51 L58,51 L58,13 L5.99999996,13 Z M60,11 L60,53 L3.99999996,53 L3.99999996,11 L60,11 Z M45.114319,36.7052772 C46.0891538,35.776283 47.4070852,35.2956435 48.7511053,35.3789689 C50.0951254,35.4622943 51.3435959,36.1020435 52.2251484,37.1814515 L59.8029485,47.3896515 L58.1970516,48.5817485 L50.6481834,38.4106653 C50.1480528,37.7992777 49.4157245,37.4240133 48.6273486,37.3751363 C47.8389728,37.3262592 47.0659001,37.608193 46.5124285,38.1351833 L39.6414917,45.0279719 L38.9387682,44.1921171 L25.4012973,28.0888039 C24.8721474,27.5066301 24.1255162,27.1696052 23.3388857,27.1578435 C22.5522552,27.1460819 21.7958816,27.4606339 21.2723966,28.0022606 L5.74239658,45.2113607 L4.25760333,43.8714394 L19.8104371,26.6378727 C20.7408786,25.6737527 22.029067,25.1380356 23.3687863,25.1580671 C24.7085055,25.1780985 25.9801016,25.7520894 26.9067318,26.7726829 L39.7669351,42.06926 L45.114319,36.7052772 Z M45.0127,29.9813 C41.6989915,29.9813 39.0127,27.2950085 39.0127,23.9813 C39.0127,20.6675915 41.6989915,17.9813 45.0127,17.9813 C48.3264085,17.9813 51.0127,20.6675915 51.0127,23.9813 C51.0127,27.2950085 48.3264085,29.9813 45.0127,29.9813 Z M45.0127,27.9813 C47.221839,27.9813 49.0127,26.190439 49.0127,23.9813 C49.0127,21.772161 47.221839,19.9813 45.0127,19.9813 C42.803561,19.9813 41.0127,21.772161 41.0127,23.9813 C41.0127,26.190439 42.803561,27.9813 45.0127,27.9813 Z"
-          />
-        </svg>
-      </figure>
-    </div>
-    <div
-      className="resource-title"
-    >
-      <figure
-        className="resource-icon image"
-      >
-        <svg
-          aria-hidden={true}
-          className="manicon-svg svg-icon--resourceImage64"
-          fill="currentColor"
-          height={60}
-          viewBox="0 0 64 64"
-          width={60}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M5.99999996,13 L5.99999996,51 L58,51 L58,13 L5.99999996,13 Z M60,11 L60,53 L3.99999996,53 L3.99999996,11 L60,11 Z M45.114319,36.7052772 C46.0891538,35.776283 47.4070852,35.2956435 48.7511053,35.3789689 C50.0951254,35.4622943 51.3435959,36.1020435 52.2251484,37.1814515 L59.8029485,47.3896515 L58.1970516,48.5817485 L50.6481834,38.4106653 C50.1480528,37.7992777 49.4157245,37.4240133 48.6273486,37.3751363 C47.8389728,37.3262592 47.0659001,37.608193 46.5124285,38.1351833 L39.6414917,45.0279719 L38.9387682,44.1921171 L25.4012973,28.0888039 C24.8721474,27.5066301 24.1255162,27.1696052 23.3388857,27.1578435 C22.5522552,27.1460819 21.7958816,27.4606339 21.2723966,28.0022606 L5.74239658,45.2113607 L4.25760333,43.8714394 L19.8104371,26.6378727 C20.7408786,25.6737527 22.029067,25.1380356 23.3687863,25.1580671 C24.7085055,25.1780985 25.9801016,25.7520894 26.9067318,26.7726829 L39.7669351,42.06926 L45.114319,36.7052772 Z M45.0127,29.9813 C41.6989915,29.9813 39.0127,27.2950085 39.0127,23.9813 C39.0127,20.6675915 41.6989915,17.9813 45.0127,17.9813 C48.3264085,17.9813 51.0127,20.6675915 51.0127,23.9813 C51.0127,27.2950085 48.3264085,29.9813 45.0127,29.9813 Z M45.0127,27.9813 C47.221839,27.9813 49.0127,26.190439 49.0127,23.9813 C49.0127,21.772161 47.221839,19.9813 45.0127,19.9813 C42.803561,19.9813 41.0127,21.772161 41.0127,23.9813 C41.0127,26.190439 42.803561,27.9813 45.0127,27.9813 Z"
-          />
-        </svg>
-      </figure>
-      <div>
-        <h1
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "Image",
-            }
-          }
+        <IconComputed.Resource
+          icon="image"
+          size={50}
         />
-        <span
-          className="resource-date"
-        >
-          Resource added 
-          <time
-            dateTime="2017-04-24"
-          >
-            April, 2017
-          </time>
-        </span>
-      </div>
+      </figure>
     </div>
+    <Resource.Title
+      resource={
+        Object {
+          "attributes": Object {
+            "abilities": Object {
+              "create": true,
+              "createPermissions": true,
+              "createResourceCollections": true,
+              "createResources": true,
+              "createTexts": true,
+              "createTwitterQueries": true,
+              "delete": true,
+              "manageEvents": true,
+              "managePermissions": true,
+              "manageResourceCollections": true,
+              "manageResources": true,
+              "manageSocials": true,
+              "manageTexts": true,
+              "manageTwitterQueries": true,
+              "read": true,
+              "readDeleted": true,
+              "readDrafts": true,
+              "readLog": true,
+              "readSecrets": true,
+              "update": true,
+              "updateMakers": true,
+            },
+            "attachmentStyles": Object {
+              "medium": null,
+              "mediumSquare": "original-image.mock",
+              "original": "original-image.mock",
+            },
+            "captionFormatted": "World's Greatest Dog",
+            "createdAt": "2017-04-24T23:25:50.161Z",
+            "descriptionFormatted": "Black and white freckles",
+            "downloadable": true,
+            "kind": "image",
+            "metadata": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "metadataFormatted": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "projectSlug": "delegated-project-slug",
+            "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+            "tagList": Array [
+              "dog",
+              "puppy",
+              "GOAT",
+            ],
+            "title": "Image",
+            "titleFormatted": "Image",
+          },
+          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+          "relationships": Object {},
+          "type": "resources",
+        }
+      }
+      showDate={true}
+      showIcon={true}
+    />
     <div
       className="resource-content"
     >
@@ -87,162 +165,430 @@ exports[`Reader.Notation.Resource.Detail component renders correctly 1`] = `
       />
     </div>
   </div>
-  <section
-    className="resource-hero-container"
-  >
-    <div
-      className="resource-hero"
-    >
-      <div
-        className="resource-slide-figure"
-      >
-        <figure>
-          <div
-            className="figure-image"
-            style={
-              Object {
-                "backgroundImage": "url(null)",
-              }
-            }
-          />
-        </figure>
-      </div>
-    </div>
-  </section>
+  <Resource.Hero
+    resource={
+      Object {
+        "attributes": Object {
+          "abilities": Object {
+            "create": true,
+            "createPermissions": true,
+            "createResourceCollections": true,
+            "createResources": true,
+            "createTexts": true,
+            "createTwitterQueries": true,
+            "delete": true,
+            "manageEvents": true,
+            "managePermissions": true,
+            "manageResourceCollections": true,
+            "manageResources": true,
+            "manageSocials": true,
+            "manageTexts": true,
+            "manageTwitterQueries": true,
+            "read": true,
+            "readDeleted": true,
+            "readDrafts": true,
+            "readLog": true,
+            "readSecrets": true,
+            "update": true,
+            "updateMakers": true,
+          },
+          "attachmentStyles": Object {
+            "medium": null,
+            "mediumSquare": "original-image.mock",
+            "original": "original-image.mock",
+          },
+          "captionFormatted": "World's Greatest Dog",
+          "createdAt": "2017-04-24T23:25:50.161Z",
+          "descriptionFormatted": "Black and white freckles",
+          "downloadable": true,
+          "kind": "image",
+          "metadata": Object {
+            "abstract": "some-value",
+            "archive": "some-value",
+            "archiveLocation": "some-value",
+            "archivePlace": "some-value",
+            "authority": "some-value",
+            "callNumber": "some-value",
+            "chapterNumber": "some-value",
+            "collectionNumber": "some-value",
+            "collectionTitle": "some-value",
+            "containerTitle": "some-value",
+            "dimensions": "some-value",
+            "edition": "some-value",
+            "event": "some-value",
+            "eventPlace": "some-value",
+            "isbn": "some-value",
+            "issn": "some-value",
+            "issue": "some-value",
+            "jurisdiction": "some-value",
+            "medium": "some-value",
+            "number": "some-value",
+            "numberOfPages": "some-value",
+            "numberOfVolumes": "some-value",
+            "originalPublisher": "some-value",
+            "originalPublisherPlace": "some-value",
+            "originalTitle": "some-value",
+            "pmcid": "some-value",
+            "pmid": "some-value",
+            "publisher": "some-value",
+            "publisherPlace": "some-value",
+            "reviewedTitle": "some-value",
+            "section": "some-value",
+            "version": "some-value",
+            "volume": "some-value",
+            "yearSuffix": "some-value",
+          },
+          "metadataFormatted": Object {
+            "abstract": "some-value",
+            "archive": "some-value",
+            "archiveLocation": "some-value",
+            "archivePlace": "some-value",
+            "authority": "some-value",
+            "callNumber": "some-value",
+            "chapterNumber": "some-value",
+            "collectionNumber": "some-value",
+            "collectionTitle": "some-value",
+            "containerTitle": "some-value",
+            "dimensions": "some-value",
+            "edition": "some-value",
+            "event": "some-value",
+            "eventPlace": "some-value",
+            "isbn": "some-value",
+            "issn": "some-value",
+            "issue": "some-value",
+            "jurisdiction": "some-value",
+            "medium": "some-value",
+            "number": "some-value",
+            "numberOfPages": "some-value",
+            "numberOfVolumes": "some-value",
+            "originalPublisher": "some-value",
+            "originalPublisherPlace": "some-value",
+            "originalTitle": "some-value",
+            "pmcid": "some-value",
+            "pmid": "some-value",
+            "publisher": "some-value",
+            "publisherPlace": "some-value",
+            "reviewedTitle": "some-value",
+            "section": "some-value",
+            "version": "some-value",
+            "volume": "some-value",
+            "yearSuffix": "some-value",
+          },
+          "projectSlug": "delegated-project-slug",
+          "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+          "tagList": Array [
+            "dog",
+            "puppy",
+            "GOAT",
+          ],
+          "title": "Image",
+          "titleFormatted": "Image",
+        },
+        "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+        "relationships": Object {},
+        "type": "resources",
+      }
+    }
+    slideOptions={
+      Object {
+        "enableZoom": false,
+      }
+    }
+  />
   <div
     className="container"
   >
-    <section
-      className="resource-meta"
-    >
-      <ul
-        className="meta-list-secondary columnar"
-      >
-        <li>
-          <span
-            className="meta-label"
-          >
-            type
-          </span>
-          <div
-            className="meta-value"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "Image",
-              }
-            }
-          />
-        </li>
-        <li>
-          <span
-            className="meta-label"
-          >
-            created on
-          </span>
-          <div
-            className="meta-value"
-          >
-            <time
-              dateTime="2017-04-24"
-            >
-              April 24, 2017
-            </time>
-          </div>
-        </li>
-        <li>
-          <span
-            className="meta-label"
-          >
-            doi
-          </span>
-          <div
-            className="meta-value"
-          >
-            <a
-              href="https://doi.org/10.12345.6789"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              https://doi.org/10.12345.6789
-            </a>
-          </div>
-        </li>
-      </ul>
-    </section>
+    <Resource.Meta
+      layout="secondary columnar"
+      resource={
+        Object {
+          "attributes": Object {
+            "abilities": Object {
+              "create": true,
+              "createPermissions": true,
+              "createResourceCollections": true,
+              "createResources": true,
+              "createTexts": true,
+              "createTwitterQueries": true,
+              "delete": true,
+              "manageEvents": true,
+              "managePermissions": true,
+              "manageResourceCollections": true,
+              "manageResources": true,
+              "manageSocials": true,
+              "manageTexts": true,
+              "manageTwitterQueries": true,
+              "read": true,
+              "readDeleted": true,
+              "readDrafts": true,
+              "readLog": true,
+              "readSecrets": true,
+              "update": true,
+              "updateMakers": true,
+            },
+            "attachmentStyles": Object {
+              "medium": null,
+              "mediumSquare": "original-image.mock",
+              "original": "original-image.mock",
+            },
+            "captionFormatted": "World's Greatest Dog",
+            "createdAt": "2017-04-24T23:25:50.161Z",
+            "descriptionFormatted": "Black and white freckles",
+            "downloadable": true,
+            "kind": "image",
+            "metadata": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "metadataFormatted": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "projectSlug": "delegated-project-slug",
+            "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+            "tagList": Array [
+              "dog",
+              "puppy",
+              "GOAT",
+            ],
+            "title": "Image",
+            "titleFormatted": "Image",
+          },
+          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+          "relationships": Object {},
+          "type": "resources",
+        }
+      }
+      showIcon={false}
+      showTags={false}
+    />
     <nav
       className="button-nav button-nav--stack"
     >
-      <a
-        className="button-secondary button-secondary--outlined"
-        href="original-image.mock"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        <span
-          className="button-primary__text"
-        >
-          Download
-        </span>
-        <svg
-          aria-hidden={true}
-          className="manicon-svg button-primary__icon svg-icon--arrowDown16"
-          fill="currentColor"
-          height={16}
-          viewBox="0 0 16 16"
-          width={16}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
-            transform="rotate(90 8 8)"
-          />
-        </svg>
-      </a>
+      <Resource.Link
+        attributes={
+          Object {
+            "abilities": Object {
+              "create": true,
+              "createPermissions": true,
+              "createResourceCollections": true,
+              "createResources": true,
+              "createTexts": true,
+              "createTwitterQueries": true,
+              "delete": true,
+              "manageEvents": true,
+              "managePermissions": true,
+              "manageResourceCollections": true,
+              "manageResources": true,
+              "manageSocials": true,
+              "manageTexts": true,
+              "manageTwitterQueries": true,
+              "read": true,
+              "readDeleted": true,
+              "readDrafts": true,
+              "readLog": true,
+              "readSecrets": true,
+              "update": true,
+              "updateMakers": true,
+            },
+            "attachmentStyles": Object {
+              "medium": null,
+              "mediumSquare": "original-image.mock",
+              "original": "original-image.mock",
+            },
+            "captionFormatted": "World's Greatest Dog",
+            "createdAt": "2017-04-24T23:25:50.161Z",
+            "descriptionFormatted": "Black and white freckles",
+            "downloadable": true,
+            "kind": "image",
+            "metadata": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "metadataFormatted": Object {
+              "abstract": "some-value",
+              "archive": "some-value",
+              "archiveLocation": "some-value",
+              "archivePlace": "some-value",
+              "authority": "some-value",
+              "callNumber": "some-value",
+              "chapterNumber": "some-value",
+              "collectionNumber": "some-value",
+              "collectionTitle": "some-value",
+              "containerTitle": "some-value",
+              "dimensions": "some-value",
+              "edition": "some-value",
+              "event": "some-value",
+              "eventPlace": "some-value",
+              "isbn": "some-value",
+              "issn": "some-value",
+              "issue": "some-value",
+              "jurisdiction": "some-value",
+              "medium": "some-value",
+              "number": "some-value",
+              "numberOfPages": "some-value",
+              "numberOfVolumes": "some-value",
+              "originalPublisher": "some-value",
+              "originalPublisherPlace": "some-value",
+              "originalTitle": "some-value",
+              "pmcid": "some-value",
+              "pmid": "some-value",
+              "publisher": "some-value",
+              "publisherPlace": "some-value",
+              "reviewedTitle": "some-value",
+              "section": "some-value",
+              "version": "some-value",
+              "volume": "some-value",
+              "yearSuffix": "some-value",
+            },
+            "projectSlug": "delegated-project-slug",
+            "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+            "tagList": Array [
+              "dog",
+              "puppy",
+              "GOAT",
+            ],
+            "title": "Image",
+            "titleFormatted": "Image",
+          }
+        }
+        buttonClass="button-secondary button-secondary--outlined"
+      />
       <br />
-      <a
+      <Link
         className="button-secondary button-secondary--outlined"
-        href="/projects/delegated-project-slug/resource/slug-1"
-        onClick={[Function]}
+        to="/projects/delegated-project-slug/resource/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
       >
         <span
           className="button-secondary__text"
         >
           Visit Resource Page
         </span>
-        <svg
-          aria-hidden={true}
-          className="manicon-svg button-secondary__icon svg-icon--arrowRight16"
+        <IconComposer
           fill="currentColor"
-          height={16}
-          viewBox="0 0 16 16"
-          width={16}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
-          />
-        </svg>
-      </a>
+          icon="arrowRight16"
+          iconClass="button-secondary__icon"
+          size="default"
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
+      </Link>
       <br />
       <button
         className="button-secondary button-secondary--outlined button-secondary--dull"
         data-id="close-overlay"
         onClick={[MockFunction]}
       >
-        <svg
-          aria-hidden={true}
-          className="manicon-svg button-secondary__icon svg-icon--arrowLeft16"
+        <IconComposer
           fill="currentColor"
-          height={16}
-          viewBox="0 0 16 16"
-          width={16}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
-            transform="rotate(180 8 8)"
-          />
-        </svg>
+          icon="arrowLeft16"
+          iconClass="button-secondary__icon"
+          size="default"
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
         <span
           className="button-secondary__text"
         >

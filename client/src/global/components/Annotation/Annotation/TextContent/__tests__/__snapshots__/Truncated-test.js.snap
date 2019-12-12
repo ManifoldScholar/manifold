@@ -1,14 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reader.Annotation.Selection.Truncated Component renders correctly 1`] = `
-"<Annotation.Annotation.TextContentTruncated truncate={40} selection=\\"You will remember we from now til forever, G. I am infinity, lyrics flowing endlessly.\\">
-  <div className=\\"truncated__wrapper truncated__wrapper--blur truncated__wrapper--light\\">
-    <div>
-      <div dangerouslySetInnerHTML={{...}} />
-    </div>
-  </div>
-  <button className=\\"truncated__expand-button\\" onClick={[Function]}>
-    Read Full Passage
-  </button>
-</Annotation.Annotation.TextContentTruncated>"
-`;
+exports[`global/components/Annotation/Annotation/TextContent/Truncated matches the snapshot when rendered 1`] = `"<div class=\\"truncated__wrapper truncated__wrapper--blur truncated__wrapper--light\\" style=\\"height: 0px;\\"><div><div>You will remember we from now til foreve...</div></div></div><button class=\\"truncated__expand-button\\">Read Full Passage</button>"`;

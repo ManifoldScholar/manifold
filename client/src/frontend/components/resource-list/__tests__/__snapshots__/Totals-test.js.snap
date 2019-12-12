@@ -1,13 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.ResourceList.Totals Component renders correctly 1`] = `
+exports[`frontend/components/resource-list/Totals matches the snapshot 1`] = `
 <div
   className="resource-total"
 >
-  <a
+  <Link
     className="resource-total__link"
-    href="/projects/slug-1/resources"
-    onClick={[Function]}
+    to="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resources"
   >
     <span
       className="resource-total__value"
@@ -16,19 +15,17 @@ exports[`Frontend.ResourceList.Totals Component renders correctly 1`] = `
       3
     </span>
      Total Resources
-    <svg
-      aria-hidden={true}
-      className="manicon-svg resource-total__icon svg-icon--arrowLongRight16"
+    <IconComposer
       fill="currentColor"
-      height={30}
-      viewBox="0 0 24 16"
-      width={30}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-      />
-    </svg>
-  </a>
+      icon="arrowLongRight16"
+      iconClass="resource-total__icon"
+      size={30}
+      svgProps={
+        Object {
+          "aria-hidden": true,
+        }
+      }
+    />
+  </Link>
 </div>
 `;

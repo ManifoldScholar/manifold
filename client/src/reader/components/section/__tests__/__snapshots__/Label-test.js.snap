@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reader.Section.Label component renders correctly 1`] = `
+exports[`reader/components/section/Label matches the snapshot 1`] = `
 <div
   className="section-category-label"
 >

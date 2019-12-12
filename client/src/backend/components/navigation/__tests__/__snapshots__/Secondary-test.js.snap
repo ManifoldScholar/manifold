@@ -1,31 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Navigation.Secondary component renders correctly 1`] = `
-<div>
-  <nav
-    aria-label="Secondary Navigation"
-    className="secondary-nav"
-  >
-    <ul>
-      <li>
-        <a
-          aria-current={null}
-          href="/backend/projects"
-          onClick={[Function]}
-        >
-          projects
-        </a>
-      </li>
-      <li>
-        <a
-          aria-current={null}
-          href="/backend/records"
-          onClick={[Function]}
-        >
-          records
-        </a>
-      </li>
-    </ul>
-  </nav>
-</div>
+exports[`backend/components/navigation/Secondary matches the snapshot 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
 `;

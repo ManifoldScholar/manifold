@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.Resource.Hero component renders correctly 1`] = `
+exports[`frontend/components/resource/Hero matches the snapshot 1`] = `
 <section
   className="resource-hero-container"
 >
@@ -10,104 +10,132 @@ exports[`Frontend.Resource.Hero component renders correctly 1`] = `
     <div
       className="resource-slide-figure"
     >
-      <figure>
-        <div
-          className="resource-link-wrapper"
-        >
-          <div
-            className="overlay-full bg-neutral90"
-          >
-            <focus-trap-react
-              focusTrapOptions={
-                Object {
-                  "escapeDeactivates": false,
-                }
-              }
-            >
-              <button
-                className="overlay-close"
-                data-id="overlay-close"
-                onClick={[Function]}
-              >
-                Close
-                <svg
-                  aria-hidden={true}
-                  className="manicon-svg overlay-close__icon svg-icon--close32"
-                  fill="currentColor"
-                  height={37.334}
-                  viewBox="0 0 32 32"
-                  width={37.334}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7.00007316,7.70847994 L7.70712678,7.00132 L24.9999268,24.2915201 L24.2928732,24.99868 L7.00007316,7.70847994 Z M7.70712678,24.99868 L7.00007316,24.2915201 L24.2928732,7.00132 L24.9999268,7.70847994 L7.70712678,24.99868 Z"
-                  />
-                </svg>
-              </button>
-              <div
-                className="container"
-                style={
-                  Object {
-                    "maxWidth": undefined,
-                  }
-                }
-              >
-                <div
-                  className="resource-preview resource-preview-image"
-                >
-                  <img
-                    alt="Image"
-                    src="original-image.mock"
-                  />
-                </div>
-              </div>
-            </focus-trap-react>
-          </div>
-          <div
-            className="resource-preview-wrapper"
-            onClick={[Function]}
-            role="button"
-            tabIndex="0"
-          >
-            <div
-              className="zoom-indicator"
-            >
-              <span
-                className="zoom-indicator__text"
-              >
-                Zoom
-              </span>
-              <svg
-                aria-hidden={true}
-                className="manicon-svg zoom-indicator__icon svg-icon--zoomIn16"
-                height={21.333}
-                viewBox="0 0 16 16"
-                width={21.333}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g
-                  fill="none"
-                  fillRule="evenodd"
-                >
-                  <path
-                    d="M7.00000001,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7 C3.00000001,9.20913903 4.79086102,11 7.00000001,11 C9.20912238,11 11,9.20916605 11,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000001,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247363,11.5768008 8.20065856,12 7,12 C4.23857626,12 2,9.76142379 2,7 C2,4.23857625 4.23857626,2 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12,6.99990005 C12,8.20055769 11.5768321,9.30236027 10.8715096,10.1643028 Z M4.5,7.5 L4.500132,6.5 L9.500132,6.5 L9.5,7.5 L4.5,7.5 Z M7.5,9.5 L6.5,9.500132 L6.5,4.500132 L7.5,4.5 L7.5,9.5 Z"
-                    fill="currentColor"
-                    fillRule="nonzero"
-                  />
-                </g>
-              </svg>
-            </div>
-          </div>
-        </div>
-        <div
-          className="figure-image"
-          style={
-            Object {
-              "backgroundImage": "url(null)",
-            }
+      <ResourceListSlideFigureImage
+        enableZoom={true}
+        resource={
+          Object {
+            "attributes": Object {
+              "abilities": Object {
+                "create": true,
+                "createPermissions": true,
+                "createResourceCollections": true,
+                "createResources": true,
+                "createTexts": true,
+                "createTwitterQueries": true,
+                "delete": true,
+                "manageEvents": true,
+                "managePermissions": true,
+                "manageResourceCollections": true,
+                "manageResources": true,
+                "manageSocials": true,
+                "manageTexts": true,
+                "manageTwitterQueries": true,
+                "read": true,
+                "readDeleted": true,
+                "readDrafts": true,
+                "readLog": true,
+                "readSecrets": true,
+                "update": true,
+                "updateMakers": true,
+              },
+              "attachmentStyles": Object {
+                "medium": null,
+                "mediumSquare": "original-image.mock",
+                "original": "original-image.mock",
+              },
+              "captionFormatted": "World's Greatest Dog",
+              "createdAt": "2017-04-24T23:25:50.161Z",
+              "descriptionFormatted": "Black and white freckles",
+              "downloadable": true,
+              "kind": "image",
+              "metadata": Object {
+                "abstract": "some-value",
+                "archive": "some-value",
+                "archiveLocation": "some-value",
+                "archivePlace": "some-value",
+                "authority": "some-value",
+                "callNumber": "some-value",
+                "chapterNumber": "some-value",
+                "collectionNumber": "some-value",
+                "collectionTitle": "some-value",
+                "containerTitle": "some-value",
+                "dimensions": "some-value",
+                "edition": "some-value",
+                "event": "some-value",
+                "eventPlace": "some-value",
+                "isbn": "some-value",
+                "issn": "some-value",
+                "issue": "some-value",
+                "jurisdiction": "some-value",
+                "medium": "some-value",
+                "number": "some-value",
+                "numberOfPages": "some-value",
+                "numberOfVolumes": "some-value",
+                "originalPublisher": "some-value",
+                "originalPublisherPlace": "some-value",
+                "originalTitle": "some-value",
+                "pmcid": "some-value",
+                "pmid": "some-value",
+                "publisher": "some-value",
+                "publisherPlace": "some-value",
+                "reviewedTitle": "some-value",
+                "section": "some-value",
+                "version": "some-value",
+                "volume": "some-value",
+                "yearSuffix": "some-value",
+              },
+              "metadataFormatted": Object {
+                "abstract": "some-value",
+                "archive": "some-value",
+                "archiveLocation": "some-value",
+                "archivePlace": "some-value",
+                "authority": "some-value",
+                "callNumber": "some-value",
+                "chapterNumber": "some-value",
+                "collectionNumber": "some-value",
+                "collectionTitle": "some-value",
+                "containerTitle": "some-value",
+                "dimensions": "some-value",
+                "edition": "some-value",
+                "event": "some-value",
+                "eventPlace": "some-value",
+                "isbn": "some-value",
+                "issn": "some-value",
+                "issue": "some-value",
+                "jurisdiction": "some-value",
+                "medium": "some-value",
+                "number": "some-value",
+                "numberOfPages": "some-value",
+                "numberOfVolumes": "some-value",
+                "originalPublisher": "some-value",
+                "originalPublisherPlace": "some-value",
+                "originalTitle": "some-value",
+                "pmcid": "some-value",
+                "pmid": "some-value",
+                "publisher": "some-value",
+                "publisherPlace": "some-value",
+                "reviewedTitle": "some-value",
+                "section": "some-value",
+                "version": "some-value",
+                "volume": "some-value",
+                "yearSuffix": "some-value",
+              },
+              "projectSlug": "delegated-project-slug",
+              "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+              "tagList": Array [
+                "dog",
+                "puppy",
+                "GOAT",
+              ],
+              "title": "Image",
+              "titleFormatted": "Image",
+            },
+            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+            "relationships": Object {},
+            "type": "resources",
           }
-        />
-      </figure>
+        }
+      />
     </div>
   </div>
 </section>
