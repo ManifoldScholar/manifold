@@ -33,6 +33,7 @@ module V1
     typed_belongs_to :category
 
     when_full do
+      abilities
       metadata(metadata: true, properties: true, formatted: true)
 
       typed_attribute :start_text_section_id, NilClass, &:calculated_start_text_section_id
