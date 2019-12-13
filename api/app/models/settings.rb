@@ -83,7 +83,8 @@ class Settings < ApplicationRecord
   def calculated(current_user = nil)
     {
       has_visible_home_project_collections: ProjectCollection.by_visible_on_homepage.exists?,
-      has_visible_projects: Project.with_read_ability(current_user).exists?
+      has_visible_projects: Project.with_read_ability(current_user).exists?,
+      manifold_version: self.class.manifold_version
     }
   end
 
@@ -109,6 +110,14 @@ class Settings < ApplicationRecord
     # @return [Settings]
     def instance
       where(singleton_guard: 0).first_or_create!
+    end
+
+    # @!attribute [r] manifold_version
+    # @!scope class
+    # @see Settings::ReadManifoldVersion
+    # @return [Gem::Version]
+    def manifold_version
+      @manifold_version ||= Settings::ReadManifoldVersion.run!
     end
 
     def update_from_environment?
