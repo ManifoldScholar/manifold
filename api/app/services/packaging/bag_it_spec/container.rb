@@ -13,10 +13,12 @@ module Packaging
         :build_archive,
         :build_manifest,
         :finalize,
+        :generate_bag_info,
         :pipeline,
         :prepare,
         :prepare_resource,
         :prepare_text,
+        :write_bag_info,
         :write_project_entries
 
       namespace :compilation do

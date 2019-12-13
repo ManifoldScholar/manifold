@@ -27,6 +27,12 @@ module Packaging
         Pathname.new Dir.mktmpdir(["project", project_id], tmp_root)
       end
 
+      # @!attribute [r] global_id
+      # @return [Pathname]
+      memoize def global_id
+        project.to_global_id.to_s
+      end
+
       # @!attribute [r] project_metadata
       # @see Packaging::Preservation::ExportProjectMetadata
       # @return [ActiveSupport::HashWithIndifferentAccess]
