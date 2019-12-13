@@ -1,14 +1,29 @@
 module ApiDocumentation
-  class DryTypesToJson
+  class DryTypesParser
     class << self
       def convert(type)
         result = convert_base_type_structure(type)
-        result = result.merge(type.meta) if contains_meta?(type)
+        result = merge_meta_values(result, type) if contains_meta?(type)
         result = merge_enum_values(result, type) if contains_enum?(type)
         result
       end
 
+      def read_only_attributes(hash)
+        filter_attributes_by(hash, :read_only)
+      end
+
       private
+
+      def allowed_swagger_meta_types
+        [:required, :example]
+      end
+
+      def filter_attributes_by(hash, search_key)
+        values = hash.select do |_, value|
+          contains_meta?(value) && value.meta.include?(search_key)
+        end
+        values.map { |k, _| k }
+      end
 
       def convert_base_type_structure(type)
         return convert_complex_type(type) if multi_type?(type)
@@ -34,6 +49,13 @@ module ApiDocumentation
 
       def merge_enum_values(hash, type)
         hash.merge(enum: type.values.map { |key, _| key })
+      end
+
+      def merge_meta_values(hash, type)
+        filtered_meta = type.meta.select do |k, _|
+          allowed_swagger_meta_types.include? k
+        end
+        hash.merge(filtered_meta)
       end
 
       def single_type?(type)
