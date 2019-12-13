@@ -11,7 +11,13 @@ module Packaging
           source: ->(state) { state[:context].published_texts },
           target: :texts
 
+        batch_map_state :prepare_resources!, with: "compilation.prepare_resource",
+          source: ->(state) { state[:context].resources },
+          target: :resources
+
         pipe :add_texts!, with: "compilation.add_texts"
+
+        pipe :add_resources!, with: "compilation.add_resources"
 
         pipe :write_metadata!, with: "compilation.write_metadata"
 
