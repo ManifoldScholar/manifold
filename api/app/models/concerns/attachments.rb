@@ -1,7 +1,16 @@
-# Model concern that tracks who created a record
-# rubocop:disable Metrics/LineLength, Layout/TrailingWhitespace
+# rubocop:disable Layout/AlignArguments, Layout/AlignParameters
 module Attachments
   extend ActiveSupport::Concern
+
+  include ActiveSupport::Configurable
+
+  included do
+    config.shrine_attachment_configurations ||= {}.with_indifferent_access
+
+    delegate :shrine_attachment_configurations, :shrine_configuration_for, :shrine_options_for,
+      :shrine_attachment_type_for, :shrine_attachment_style_keys_for, :shrine_has_versions?,
+      to: :class
+  end
 
   CONFIG = Rails.configuration.manifold.attachments.validations
 
@@ -65,17 +74,21 @@ module Attachments
       convert: "jpg",
       background: "none",
       gravity: "north",
-      thumbnail: "#{MED / 1.6}x#{MED}^",
+      thumbnail: "#{MED / RATIO}x#{MED}^",
       extent: MED_REL.to_s
     },
     large_landscape: {
       convert: "jpg",
       background: "none",
       gravity: "north",
-      thumbnail: "#{LRG}x#{LRG / 1.6}^",
-      extent: "#{LRG}x#{LRG / 1.6}^"
+      thumbnail: "#{LRG}x#{LRG / RATIO}^",
+      extent: "#{LRG}x#{LRG / RATIO}^"
     }
   }.freeze
+
+  ALPHA_STYLES = BASE_STYLES.transform_values do |base_style|
+    base_style.merge(convert: "png").freeze
+  end.freeze
 
   FAVICON_STYLES = {
     small: {
@@ -101,9 +114,206 @@ module Attachments
     }
   }.freeze
 
+  TYPE_MATCHERS = CONFIG.each_with_object({}.with_indifferent_access) do |(type, defn), h|
+    h[type] = Attachments::TypeMatcher.new type, **defn.as_json.deep_symbolize_keys
+  end.freeze
+
+  def has_present_shrine_attachment?(attachment_name)
+    public_send(attachment_name).present?
+  end
+
+  def has_processed_shrine_attachment?(attachment_name)
+    shrine_attacher_for(attachment_name).stored?
+  end
+
+  # @return [Hash]
+  def manifold_attachment_alpha_styles
+    ALPHA_STYLES
+  end
+
+  # @return [Hash]
+  def manifold_attachment_image_styles
+    BASE_STYLES
+  end
+
+  # @return [Hash]
+  def manifold_favicon_styles
+    FAVICON_STYLES
+  end
+
+  def shrine_attacher_for(attachment_name)
+    public_send(:"#{attachment_name}_attacher")
+  end
+
+  # @return [<Attachments::Proxy>]
+  def shrine_attachment_proxies
+    shrine_attachment_configurations.map do |(name, configuration)|
+      Attachments::Proxy.new name, configuration, record: self, uploaded_file: shrine_original_for(name)
+    end
+  end
+
+  # Get the URI to placeholder images for attachments.
+  #
+  # @param [#to_s] style
+  # @return [String]
+  def shrine_image_placeholder_for(style)
+    "/static/images/attachment_placeholders/#{style}.png"
+  end
+
+  # @param [String, Symbol] attachment_name
+  # @yieldparam [AttachmentUploader::UploadedFile]
+  # @return [AttachmentUploader::UploadedFile]
+  def shrine_original_for(attachment_name)
+    attachment = public_send(attachment_name)
+
+    return nil unless attachment.present?
+
+    original = shrine_version_for(attachment_name, :original)
+
+    block_given? ? yield(original) : original
+  end
+
+  # @param [String, Symbol] attachment_name
+  def shrine_show_placeholder_for?(attachment_name)
+    return false unless shrine_upload_matches_type?(public_send(attachment_name), type: :image)
+    return false if has_processed_shrine_attachment?(attachment_name)
+
+    true
+  end
+
+  # @param [String, Symbol] attachment_name
+  # @return [{ Symbol => { Symbol => Integer, nil }, nil }]
+  def shrine_meta_for(attachment_name)
+    shrine_style_map_for attachment_name do |uploaded_file, _style|
+      uploaded_file&.as_dimensions_hash
+    end
+  end
+
+  # @param [String, Symbol] attachment_name
+  # @return [{ Symbol => { Symbol => Integer, nil }, nil }]
+  def shrine_styles_for(attachment_name)
+    shrine_style_map_for attachment_name do |uploaded_file, style|
+      if uploaded_file.present?
+        uploaded_file.url
+      elsif shrine_show_placeholder_for?(attachment_name)
+        shrine_image_placeholder_for(style)
+      end
+    end
+  end
+
+  # @api private
+  # @param [Symbol, String] attachment_name
+  # @yield [uploaded_file, style_key]
+  # @yieldparam [AttachmentUploader::UploadedFile] uploaded_file
+  # @yieldparam [Symbol] style_key
+  # @yieldreturn [Object]
+  # @return [{ Symbol => Object }]
+  def shrine_style_map_for(attachment_name)
+    return {} unless has_present_shrine_attachment?(attachment_name)
+
+    style_keys = shrine_attachment_style_keys_for(attachment_name) | [:original]
+
+    style_keys.each_with_object({}) do |style_key, h|
+      version = shrine_version_for attachment_name, style_key
+
+      h[style_key] = yield version, style_key
+    end
+  end
+
+  # Validates that the uploaded file matches the given type,
+  # currently based on extension.
+  #
+  # @see Attachments::TypeMatcher#call
+  # @param [AttachmentUploader::UploadedFile] attachment
+  # @param [Symbol] type
+  def shrine_upload_matches_type?(uploaded_file, type:)
+    TYPE_MATCHERS.fetch(type).call(uploaded_file)
+  end
+
+  # @param [Symbol, String] attachment_name
+  # @param [Symbol] style
+  # @return [AttachmentUploader::UploadedFile, nil]
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  def shrine_version_for(attachment_name, style)
+    attachment = public_send(attachment_name)
+
+    return nil unless attachment.present?
+
+    style = style.to_sym
+
+    if shrine_has_versions?(attachment_name)
+      attacher = shrine_attacher_for attachment_name
+
+      if attacher.stored?
+        public_send(attachment_name)[style]
+      elsif attacher.cached?
+        style == :original ? attachment : nil
+      end
+    elsif style == :original
+      attachment
+    else
+      raise ArgumentError, "Tried to fetch style #{style.inspect} for #{attachment_name}, which has no styles"
+    end
+  end
+  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+
+  # @param [String, Symbol] attachment_name
+  def validate_content_type_for?(attachment_name)
+    shrine_configuration_for(attachment_name).validate_content_type
+  end
+
   # rubocop:disable Metrics/BlockLength
   class_methods do
-    # Sets up paperclip attachment configuration for `field`. The `type` argument
+    # @!attribute [r] shrine_attachment_configurations
+    # @!scope class
+    # @return [ActiveSupport::HashWithIndifferentAccess{Symbol, String => Attachments::Configuration}]
+    def shrine_attachment_configurations
+      config.shrine_attachment_configurations
+    end
+
+    # @!attribute [r] shrine_attachment_modules
+    # @!scope class
+    # @return [<AttachmentUploader::Attachment>]
+    def shrine_attachment_modules
+      ancestors.select { |mod| mod.kind_of?(Shrine::Attachment) }
+    end
+
+    # @param [Symbol, String] attachment_name
+    # @return [Attachments::Configuration]
+    def shrine_configuration_for(attachment_name)
+      shrine_attachment_configurations.fetch(attachment_name)
+    end
+
+    # @param [Symbol, String] attachment_name
+    # @return [{ Symbol => Object }]
+    def shrine_options_for(attachment_name)
+      shrine_configuration_for(attachment_name).options
+    end
+
+    # @param [Symbol, String] attachment_name
+    # @return [Symbol]
+    def shrine_attachment_type_for(attachment_name)
+      shrine_configuration_for(attachment_name).type
+    end
+
+    # @param [Symbol, String] attachment_name
+    # @return [<Symbol>]
+    def shrine_attachment_style_keys_for(attachment_name)
+      return [] unless shrine_has_versions?(attachment_name)
+
+      case shrine_attachment_type_for(attachment_name)
+      when :favicon then FAVICON_STYLES.keys
+      else
+        BASE_STYLES.keys
+      end
+    end
+
+    # @param [Symbol, String] attachment_name
+    def shrine_has_versions?(attachment_name)
+      shrine_configuration_for(attachment_name).has_versions?
+    end
+
+    # Sets up Shrine attachment configuration for `field`. The `type` argument
     # references attachment validation in Manifold config attachments.validations. This
     # bit of metaprogramming provides a number of methods to the model for each attachment
     # field. If the field name were, for example, "avatar," we'd have the following
@@ -117,176 +327,27 @@ module Attachments
     # It also adds a before processing callback for Paperclip to process the variants if,
     # and only if the attachment is processable.
     def manifold_has_attached_file(field, type, no_styles: false, validate_content_type: true)
-      # Create the style
+      validations = CONFIG.fetch(type).with_indifferent_access
+
+      config = Attachments::Configuration.new(
+        field: field, type: type,
+        no_styles: no_styles, validate_content_type: validate_content_type,
+        validations: validations
+      )
+
+      add_shrine_attachment_configuration! config
 
       include AttachmentUploader::Attachment.new(field)
+    end
 
-      class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        def #{field}_options
-          {
-            type: :#{type},
-            no_styles: #{no_styles},
-            validate_content_type: #{validate_content_type}
-          }
-        end
+    private
 
-        def manifold_attachment_image_styles
-          return BASE_STYLES
-        end
-
-        def manifold_attachment_alpha_styles
-          BASE_STYLES.transform_values do |base_style|
-            base_style.merge(convert: "png")
-          end
-        end
-
-        def manifold_favicon_styles
-          return FAVICON_STYLES
-        end
-
-        def style_keys
-          return FAVICON_STYLES.keys if :#{type} == :favicon
-          BASE_STYLES.keys
-        end
-
-        def #{field}_processed?
-          #{field}_attacher.stored?
-        end
-
-        def show_#{field}_placeholder?
-          return false unless #{field}_is_image?
-          return false if #{field}_processed?
-          true
-        end
-
-        def #{field}_placeholder(style)
-          "/static/images/attachment_placeholders/\#{style}.png"
-        end
-
-        def #{field}_versions?
-          #{field}.is_a? Hash
-        end
-
-        def #{field}_checksum
-          #{field}_original(&:sha256)
-        end
-
-        def #{field}_extension
-          #{field}_original(&:extension)
-        end
-
-        def #{field}_file_name
-          #{field}_original(&:original_filename)
-        end
-
-        def #{field}?
-          #{field}.present?
-        end
-
-        def #{field}_url
-          #{field}_original(&:url)
-        end
-
-        def #{field}_content_type
-          #{field}_original(&:mime_type)
-        end
-
-        def #{field}_file_size
-          #{field}_original(&:size)
-        end
-
-        def #{field}_original
-          return nil unless #{field}?
-
-          original =
-            if #{field}_attacher.cached?
-              #{field}
-            elsif #{field}_attacher.stored?
-              #{field}[:original]
-            end
-
-          block_given? ? yield(original) : original
-        end
-
-        def #{field}_original_path
-          #{field}_original&.to_io&.path
-        end
-
-        def #{field}_meta
-          return {} unless #{field}?
-          versions = style_keys.map do |version|
-            if #{field}_data&.key? version.to_s
-              value = { width: #{field}[version].width, height: #{field}[version].height }
-            else
-              value = nil
-            end
-            [version, value]
-          end
-          original = #{field}_original
-          versions.push([:original, { width: original.width, height: original.height }])
-          Hash[versions]
-        end
-
-        def #{field}_styles
-          original = #{field}_original&.url
-          styles = style_keys.map do |style|
-            value = if #{field}_data&.key? style.to_s
-                      #{field}[style].url
-                    elsif show_#{field}_placeholder?
-                      #{field}_placeholder(style)
-                    else
-                      nil
-                    end
-            [style, value]
-          end
-          styles.push([:original, original])
-          Hash[styles]
-        end
-
-        def #{field}_is_image?
-          return false unless #{field}?
-          attachment = #{field}_original
-          !attachment.extension.match(Regexp.union(CONFIG[:image][:allowed_ext])).nil?
-        end
-
-        def #{field}_is_video?
-          return false unless #{field}?
-          attachment = #{field}_original
-          !attachment.extension.match(Regexp.union(CONFIG[:video][:allowed_ext])).nil?
-        end
-
-        def #{field}_is_audio?
-          return false unless #{field}?
-          attachment = #{field}_original
-          !attachment.extension.match(Regexp.union(CONFIG[:audio][:allowed_ext])).nil?
-        end
-
-        def #{field}_is_spreadsheet?
-          return false unless #{field}?
-          attachment = #{field}_original
-          !attachment.extension.match(Regexp.union(CONFIG[:spreadsheet][:allowed_ext])).nil?
-        end
-
-        def #{field}_is_text_document?
-          return false unless #{field}?
-          attachment = #{field}_original
-          !attachment.extension.match(Regexp.union(CONFIG[:text_document][:allowed_ext])).nil?
-        end
-
-        def #{field}_is_presentation?
-          return false unless #{field}?
-          attachment = #{field}_original
-          !attachment.extension.match(Regexp.union(CONFIG[:presentation][:allowed_ext])).nil?
-        end
-
-        def #{field}_is_pdf?
-          return false unless #{field}.present?
-          attachment = #{field}_original
-          !attachment.extension.match(Regexp.union(CONFIG[:pdf][:allowed_ext])).nil?
-        end
-      RUBY
+    # @param [Attachments::Configuration] configuration
+    # @return [void]
+    def add_shrine_attachment_configuration!(configuration)
+      config.shrine_attachment_configurations = shrine_attachment_configurations.merge(configuration.field => configuration)
     end
   end
   # rubocop:enable Metrics/BlockLength
 end
-# rubocop:enable Metrics/LineLength, Layout/TrailingWhitespace
+# rubocop:enable Layout/AlignArguments, Layout/AlignParameters
