@@ -19,8 +19,20 @@ module Packaging
         :prepare_text,
         :write_metadata
 
+      namespace :compilation do
+        register "version", memoize: true do
+          Packaging::BagItSpec::Compilation::VERSION
+        end
+      end
+
       register_simple_callables_in :entries,
         :builder
+
+      namespace :manifold do
+        register "version", memoize: true do
+          Settings.manifold_version
+        end
+      end
 
       register_simple_callables_in :resources,
         :attachment_name_parser
