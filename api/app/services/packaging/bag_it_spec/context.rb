@@ -10,7 +10,7 @@ module Packaging
       option :tmp_root, default: proc { Packaging::BagItSpec::Compilation::TMP_ROOT }, type: Types::EXISTING_PATH
 
       delegate :id, to: :project, prefix: true
-      delegate :texts, to: :project
+      delegate :resources, :texts, to: :project
 
       # @!attribute [r] bag
       # @return [Bagit::Bag]

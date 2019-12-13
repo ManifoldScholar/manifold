@@ -55,12 +55,14 @@ module Utility
 
     # @return [<Object>]
     def to_a
-      cache.each_value.to_a
+      each_value.to_a
     end
+
+    delegate :first, :last, :length, :size, to: :to_a
 
     # @return [{ Object => Object }]
     def to_h
-      cache.each_pair.to_h
+      each.to_h
     end
 
     # @!endgroup
