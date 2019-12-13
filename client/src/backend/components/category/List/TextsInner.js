@@ -86,7 +86,7 @@ export default class CategoryListTexts extends PureComponent {
                   <span className="texts-list__date">
                     <FormattedDate
                       prefix="Added"
-                      format="MMMM, YYYY"
+                      format="MMMM, yyyy"
                       date={text.attributes.createdAt}
                     />
                   </span>

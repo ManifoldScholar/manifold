@@ -51,7 +51,7 @@ export default class List extends Component {
       return (
         <li key={key}>
           <Item label={key}>
-            <FormattedDate format="MMMM DD, YYYY" date={value} />
+            <FormattedDate format="MMMM dd, yyyy" date={value} />
           </Item>
         </li>
       );

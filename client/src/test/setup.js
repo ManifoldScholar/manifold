@@ -20,8 +20,8 @@ jest.mock("helpers/passwordGenerator", () => {
   return jest.fn(() => "testtest123");
 });
 
-jest.mock("date-fns/distance_in_words", () => {
-  return () => "mocked-distance-in-words-for-snapshot";
+jest.mock("date-fns/formatDistance", () => {
+  return () => "mocked-date-fns-format-distance-for-snapshot";
 });
 
 jest.mock("focus-trap-react", () => "focus-trap-react");

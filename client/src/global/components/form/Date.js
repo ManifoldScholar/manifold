@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import { UID } from "react-uid";
 import setter from "./setter";
-import parse from "date-fns/parse";
+import parse from "date-fns/parseISO";
 import range from "lodash/range";
-import getMonth from "date-fns/get_month";
-import getDate from "date-fns/get_date";
-import getYear from "date-fns/get_year";
-import isEqual from "date-fns/is_equal";
-import getDaysInMonth from "date-fns/get_days_in_month";
+import getMonth from "date-fns/getMonth";
+import getDate from "date-fns/getDate";
+import getYear from "date-fns/getYear";
+import isEqual from "date-fns/isEqual";
+import getDaysInMonth from "date-fns/getDaysInMonth";
 import Errorable from "global/components/form/Errorable";
 import MaskedInput from "react-text-mask";
 import isNull from "lodash/isNull";
@@ -136,7 +136,7 @@ class FormDate extends Component {
 
   broadcastValue() {
     const newValue = this.validStateDate();
-    if (isEqual(newValue, this.props.value)) return;
+    if (isEqual(newValue, parse(this.props.value))) return;
     this.props.set(newValue);
   }
 

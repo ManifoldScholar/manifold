@@ -23,7 +23,7 @@ export default class TextListListItemDate extends Component {
       >
         <FormattedDate
           prefix={this.props.datePrefix}
-          format="MMMM YYYY"
+          format="MMMM yyyy"
           date={this.props.date}
         />
       </span>

@@ -22,7 +22,7 @@ export default class ResourceCollectionTitle extends Component {
       <span className="date">
         <FormattedDate
           prefix="Collection created"
-          format="MMMM, YYYY"
+          format="MMMM, yyyy"
           date={attributes.createdAt}
         />
       </span>

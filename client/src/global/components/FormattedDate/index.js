@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import format from "date-fns/format";
-import parse from "date-fns/parse";
-import distanceInWords from "date-fns/distance_in_words";
+import parseISO from "date-fns/parseISO";
+import formatDistance from "date-fns/formatDistance";
 import isDate from "lodash/isDate";
 
 export default class FormattedDate extends Component {
@@ -15,7 +15,9 @@ export default class FormattedDate extends Component {
   };
 
   get date() {
-    return this.props.date;
+    const { date } = this.props;
+    if (isDate(date)) return date;
+    return parseISO(date);
   }
 
   get value() {
@@ -23,16 +25,15 @@ export default class FormattedDate extends Component {
   }
 
   get dateTime() {
-    return format(this.date, "YYYY-MM-DD");
+    return format(this.date, "yyyy-MM-dd");
   }
 
   formatDate(date) {
     if (!date) return;
-    const out = isDate(date) ? date : parse(date);
     if (this.props.format === "distanceInWords")
-      return distanceInWords(out, Date.now());
-    const outFormat = this.props.format ? this.props.format : "MMMM DD, YYYY";
-    return format(out, outFormat);
+      return formatDistance(this.date, Date.now());
+    const outFormat = this.props.format ? this.props.format : "MMMM dd, yyyy";
+    return format(this.date, outFormat);
   }
 
   formatString(date) {

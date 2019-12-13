@@ -6,7 +6,7 @@ exports[`frontend/components/TextList/ListItem/Date matches the snapshot 1`] = `
 >
   <FormattedDate
     date="2017-04-24T23:25:50.161Z"
-    format="MMMM YYYY"
+    format="MMMM yyyy"
     prefix="Added"
   />
 </span>

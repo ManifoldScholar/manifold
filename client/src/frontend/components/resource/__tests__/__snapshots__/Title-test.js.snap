@@ -26,7 +26,7 @@ exports[`frontend/components/resource/Title matches the snapshot 1`] = `
       Resource added 
       <FormattedDate
         date="2017-04-24T23:25:50.161Z"
-        format="MMMM, YYYY"
+        format="MMMM, yyyy"
       />
     </span>
   </div>
