@@ -91,6 +91,9 @@ module Types
 
   NON_BLANK_STRING = Types::String.constrained(format: /\S+/)
 
+  # A type that matches `{ String => String }`
+  STRING_MAP = Types::Hash.map(Types::String, Types::String)
+
   ENSURE_EXISTING_PATH = ->(path) do
     case path
     when NON_BLANK_STRING

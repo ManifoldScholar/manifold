@@ -19,7 +19,12 @@ module Packaging
 
         pipe :add_resources!, with: "compilation.add_resources"
 
-        pipe :write_metadata!, with: "compilation.write_metadata"
+        pipe :write_project_entries!, with: "compilation.write_project_entries"
+
+        pipe_into :generate_bag_info!, with: "compilation.generate_bag_info",
+          target: :bag_info
+
+        pipe :write_bag_info!, with: "compilation.write_bag_info"
 
         pipe :build_manifest!, with: "compilation.build_manifest"
 
