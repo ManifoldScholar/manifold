@@ -11,23 +11,13 @@ module Packaging
       # @return [ActiveSupport::HashWithIndifferentAccess]
       def execute
         store :id
-        store :reader_url, frontend_path("projects/#{project.slug}")
+        store :reader_url, compose(Projects::GetReaderURL, inputs)
         store :title, :title_plaintext
         store :description
         store :metadata
       end
 
       private
-
-      # @param [String] path
-      # @return [String]
-      def frontend_path(path)
-        URI.join(frontend_url, path).to_s
-      end
-
-      memoize def frontend_url
-        Rails.configuration.manifold.url
-      end
 
       # @!attribute [r] metadata
       # @return [ActiveSupport::HashWithIndifferentAccess]

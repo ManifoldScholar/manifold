@@ -5,6 +5,9 @@ module Packaging
       extend Dry::Initializer
       extend Memoist
 
+      include Packaging::BagItSpec::BuildsEntries
+      include Packaging::BagItSpec::Import[compilation_version: "compilation.version", manifold_version: "manifold.version"]
+
       param :project, Types.Instance(Project)
 
       option :tmp_root, default: proc { Packaging::BagItSpec::Compilation::TMP_ROOT }, type: Types::EXISTING_PATH
@@ -36,6 +39,20 @@ module Packaging
       # @return [<Text>]
       memoize def published_texts
         texts.published(true).to_a
+      end
+
+      # @!attribute [r] reader_url
+      # @return [String]
+      memoize def reader_url
+        Projects::GetReaderURL.run! project: project
+      end
+
+      private
+
+      def build_entries(builder)
+        builder.simple! :compilation_version, "manifold/compilation_version", compilation_version
+        builder.simple! :manifold_version, "manifold/version", manifold_version
+        builder.json! :project_metadata, "metadata.json", project_metadata
       end
     end
   end
