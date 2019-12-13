@@ -1,6 +1,26 @@
 module Types
   include Dry.Types
 
+  # @api private
+  MANIFOLD_CONFIG = Rails.configuration.manifold
+
+  private_constant :MANIFOLD_CONFIG
+
+  ATTACHMENT_TYPE = Types::Coercible::Symbol.enum(*MANIFOLD_CONFIG.attachments.validations.keys.map(&:to_sym))
+
+  # Matches a simple attribute name, like `foo` or `bar_baz`. Does not allow numerals
+  # or consecutive / initial / terminal underscores per good sense and Ruby idioms.
+  ATTRIBUTE_NAME_FORMAT = /
+  \A
+  [a-z]
+  (?:[a-z]|_(?!_))+
+  [a-z]
+  \z
+  /xms.freeze
+
+  # @see ATTRIBUTE_NAME_FORMAT
+  ATTRIBUTE_NAME = Types::Coercible::Symbol.constrained(format: ATTRIBUTE_NAME_FORMAT)
+
   CALLABLE = Types.Interface(:call)
 
   ENUM_OF_TYPE = ->(klass) { Types.Constructor(klass) { |v| klass.build(v) } }
@@ -82,6 +102,10 @@ module Types
     end
 
     path
+  end
+
+  PATH = Types.Constructor(Types.Instance(::Pathname)) do |value|
+    Pathname.new(value)
   end
 
   EXISTING_PATH = Types.Constructor(Types.Instance(::Pathname)) do |value|
