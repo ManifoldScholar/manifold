@@ -169,7 +169,7 @@ module ApiDocs
       end
 
       def response
-        # TODO: Denote whether resposne is paginated or not
+        # TODO: Denote if response is paginated or not
         resource_klass(resource_name).send(type_method(type_from_action(action, :response)))
       end
     end
