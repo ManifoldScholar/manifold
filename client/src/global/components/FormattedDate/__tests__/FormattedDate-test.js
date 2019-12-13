@@ -1,9 +1,14 @@
 import FormattedDate from "../";
+import { zonedTimeToUtc } from "date-fns-tz";
 
 describe("global/components/FormattedDate", () => {
   def("root", () => (
-    <FormattedDate prefix="test" format="MMMM, YYYY" date="01-01-2017" />
+    <FormattedDate prefix="test" format="MMMM, yyyy" date="2017-01-01" />
   ));
+  def("date", () =>
+    zonedTimeToUtc("2017-01-01 13:00:00.000", "America/Los_Angeles")
+  );
+
   def("wrapper", () => mount($root));
 
   it("matches the snapshot", () => {
@@ -17,11 +22,7 @@ describe("global/components/FormattedDate", () => {
 
   context("when the date is a date object", () => {
     def("root", () => (
-      <FormattedDate
-        prefix="test"
-        format="MMMM, YYYY"
-        date={new Date(2017, 0, 1)}
-      />
+      <FormattedDate prefix="test" format="MMMM, yyyy" date={$date} />
     ));
 
     it("matches the snapshot", () => {
@@ -35,9 +36,7 @@ describe("global/components/FormattedDate", () => {
   });
 
   context("when no format is supplied", () => {
-    def("root", () => (
-      <FormattedDate prefix="" format="" date={new Date(2017, 0, 1)} />
-    ));
+    def("root", () => <FormattedDate prefix="" format="" date={$date} />);
     it("uses a default format", () => {
       expect($wrapper.exists("time")).toBe(true);
       expect($wrapper.find("time").text()).toEqual("January 01, 2017");

@@ -83,7 +83,7 @@ class SearchResultsTypeResource extends PureComponent {
         meta={
           <FormattedDate
             prefix={`${this.capitalize(this.kind)} added`}
-            format="MMMM, YYYY"
+            format="MMMM, yyyy"
             date={this.createdAt}
           />
         }

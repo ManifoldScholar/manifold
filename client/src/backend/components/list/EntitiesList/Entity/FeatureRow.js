@@ -93,7 +93,7 @@ export default class EventRow extends PureComponent {
         meta={
           <FormattedDate
             prefix="Added"
-            format="MMMM, YYYY"
+            format="MMMM, yyyy"
             date={this.createdAt}
           />
         }

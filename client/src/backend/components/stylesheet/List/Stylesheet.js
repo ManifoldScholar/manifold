@@ -82,7 +82,7 @@ export default class CategoryList extends PureComponent {
                   <span className={`${baseClass}__date`}>
                     <FormattedDate
                       prefix="Added on"
-                      format="MMMM, YYYY"
+                      format="MMMM, yyyy"
                       date={this.stylesheet.attributes.createdAt}
                     />
                   </span>

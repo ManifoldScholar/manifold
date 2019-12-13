@@ -237,7 +237,7 @@ class ResourceCard extends Component {
             </header>
             <span className="resource-card__date">
               Uploaded{" "}
-              <FormattedDate format="MMMM, YYYY" date={attr.createdAt} />
+              <FormattedDate format="MMMM, yyyy" date={attr.createdAt} />
             </span>
             <div to={this.detailUrl()} className="resource-card__arrow-link">
               <IconComposer

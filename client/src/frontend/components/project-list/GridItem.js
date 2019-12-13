@@ -39,7 +39,7 @@ export default class ProjectGridItem extends Component {
         <div className="date" aria-hidden>
           <FormattedDate
             prefix="Published"
-            format="MMMM, YYYY"
+            format="MMMM, yyyy"
             date={attr.publicationDate}
           />
         </div>
@@ -104,7 +104,7 @@ export default class ProjectGridItem extends Component {
       <div className={classes} aria-hidden>
         <FormattedDate
           prefix="Updated"
-          format="MMMM, YYYY"
+          format="MMMM, yyyy"
           date={project.attributes.updatedAt}
         />
       </div>

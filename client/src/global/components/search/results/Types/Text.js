@@ -75,7 +75,7 @@ class SearchResultsTypeText extends PureComponent {
         meta={
           <FormattedDate
             prefix="Published"
-            format="MMMM, YYYY"
+            format="MMMM, yyyy"
             date={this.createdAt}
           />
         }

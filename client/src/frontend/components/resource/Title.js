@@ -32,7 +32,7 @@ export default class ResourceTitle extends Component {
           {this.props.showDate ? (
             <span className="resource-date">
               {"Resource added "}
-              <FormattedDate format="MMMM, YYYY" date={attr.createdAt} />
+              <FormattedDate format="MMMM, yyyy" date={attr.createdAt} />
             </span>
           ) : null}
         </div>
