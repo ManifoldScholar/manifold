@@ -54,6 +54,21 @@ module Types
 
   HTTP_URI = URI.constrained_type.new(URI, rule: HTTP_SCHEME)
 
+  SHA512_HEX = Types::String.constrained(format: /\A[a-z0-9]{128}\z/)
+
+  SHA512_DIGEST = Types.Instance(Digest::SHA512)
+
+  SHA512_FINGERPRINT = Types.Constructor(Types::Strict::String) do |v|
+    case v
+    when SHA512_HEX then v
+    when SHA512_DIGEST then v.hexdigest
+    else
+      # :nocov:
+      Dry::Types::Undefined
+      # :nocov:
+    end
+  end
+
   class FlexibleStruct < Dry::Struct
     extend Memoist
 

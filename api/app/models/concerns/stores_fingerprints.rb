@@ -20,6 +20,23 @@ module Concerns
       self.fingerprint = calculate_fingerprint
     end
 
+    # @param [#hexdigest, String] digest
+    def matches_fingerprint?(digest)
+      fingerprint == Types::SHA512_FINGERPRINT[digest]
+    end
+
+    # @!api private
+    # @param [#hexdigest, String] digest
+    # @see Concerns::FingerprintInteraction#maybe_update_fingerprint!
+    # @return [void]
+    def maybe_update_fingerprint!(digest)
+      return unless persisted?
+
+      received_fingerprint = Types::SHA512_FINGERPRINT[digest]
+
+      update_column :fingerprint, received_fingerprint unless matches_fingerprint?(digest)
+    end
+
     # Recalculate the fingerprint on-demand.
     #
     # @return [void]

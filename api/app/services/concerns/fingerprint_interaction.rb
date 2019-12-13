@@ -24,17 +24,33 @@ module Concerns
     def execute
       add_details!
 
+      maybe_update_fingerprint!
+
       return digest if raw || nested
 
       digest.hexdigest
     end
+
+    # @abstract
+    # @see .fingerprint_target!
+    # @return [ApplicationRecord]
+    attr_reader :fingerprint_target
 
     private
 
     # @abstract
     # @return [void]
     def add_details!
+      # :nocov:
       raise NotImplementedError, "Must implement #{self.class}#add_details!"
+      # :nocov:
+    end
+
+    # @return [void]
+    def maybe_update_fingerprint!
+      return unless fingerprint_target.kind_of? Concerns::StoresFingerprints
+
+      fingerprint_target.maybe_update_fingerprint! digest
     end
 
     # @param [ClassyEnum::Base, String, #to_json]
@@ -90,5 +106,26 @@ module Concerns
         update_digest! obj.public_send method_name
       end
     end
+
+    # rubocop:disable Metrics/LineLength
+    class_methods do
+      # @return [Symbol, nil]
+      attr_reader :fingerprint_target
+
+      # Set up a fingerprint target for the interaction on the associated key.
+      #
+      # @param [Symbol] input_key
+      # @return [void]
+      def fingerprint_target!(input_key, **options)
+        raise "Cannot set fingerprint_target to #{input_key.inspect}, already set #{@fingerprint_target.inspect}" if @fingerprint_target.present?
+
+        @fingerprint_target = input_key.to_sym
+
+        record @fingerprint_target, **options
+
+        alias_method :fingerprint_target, @fingerprint_target
+      end
+    end
+    # rubocop:enable Metrics/LineLength
   end
 end

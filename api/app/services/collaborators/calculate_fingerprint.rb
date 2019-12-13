@@ -3,7 +3,7 @@ module Collaborators
   class CalculateFingerprint < ActiveInteraction::Base
     include Concerns::FingerprintInteraction
 
-    record :collaborator
+    fingerprint_target! :collaborator
 
     def add_details!
       update_digest_with! collaborator, :id, :maker_id, :role, :maker_name
