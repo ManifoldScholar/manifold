@@ -17,7 +17,7 @@ module Packaging
         :prepare,
         :prepare_resource,
         :prepare_text,
-        :write_metadata
+        :write_project_entries
 
       namespace :compilation do
         register "version", memoize: true do
