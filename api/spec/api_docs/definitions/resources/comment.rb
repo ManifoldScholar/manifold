@@ -3,12 +3,6 @@ module ApiDocs
     module Resources
       class Comment
 
-        WRITEABLE = [
-          :parent_id,
-          :deleted,
-          :body
-        ].freeze
-
         REQUIRED_CREATE_ATTRIBUTES = [:body].freeze
 
         class << self
