@@ -64,7 +64,10 @@ module ApiDocs
       end
 
       def write_only_attributes
-        const_defined?(:REQUEST_ATTRIBUTES) ? self::REQUEST_ATTRIBUTES : {}
+        return {} unless const_defined?(:REQUEST_ATTRIBUTES)
+
+        raise("Error: REQUEST_ATTRIBUTES requires a hash with dry type definitions") unless self::REQUEST_ATTRIBUTES.is_a? Hash
+        self::REQUEST_ATTRIBUTES
       end
 
       def make_request(callee, attributes)
