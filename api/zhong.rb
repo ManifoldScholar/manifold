@@ -44,5 +44,9 @@ Zhong.schedule do
     every(1.day, "prune_text_exports", at: "01:00") do
       TextExports::PruneJob.perform_later
     end
+
+    every(4.hours, "prune_bag_it_temporary_directory") do
+      Packaging::BagItSpec::PruneTemporaryDirectoryJob.perform_later
+    end
   end
 end
