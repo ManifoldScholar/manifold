@@ -3,7 +3,7 @@ module TextTitles
   class CalculateFingerprint < ActiveInteraction::Base
     include Concerns::FingerprintInteraction
 
-    record :text_title
+    fingerprint_target! :text_title
 
     def add_details!
       update_digest_with! text_title, :id, :value

@@ -3,7 +3,7 @@ module TextSections
   class CalculateFingerprint < ActiveInteraction::Base
     include Concerns::FingerprintInteraction
 
-    record :text_section
+    fingerprint_target! :text_section
 
     def add_details!
       update_digest_with! text_section, :id, :source_identifier, :body_json, :citations

@@ -3,7 +3,7 @@ module Texts
   class CalculateFingerprint < ActiveInteraction::Base
     include Concerns::FingerprintInteraction
 
-    record :text
+    fingerprint_target! :text
 
     # @return [String]
     def add_details!
