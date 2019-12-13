@@ -58,7 +58,7 @@ class SerializerRegistry
   end
 
   def abilities
-    typed_attribute :abilities, ::Types::Hash do |object, params|
+    typed_attribute :abilities, ::Types::Hash.meta(read_only: true) do |object, params|
       klass.calculate_abilities(object, params)
     end
   end
