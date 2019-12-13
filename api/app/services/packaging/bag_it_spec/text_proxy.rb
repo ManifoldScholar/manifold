@@ -6,6 +6,8 @@ module Packaging
       extend Dry::Initializer
       extend Memoist
 
+      include Packaging::BagItSpec::BuildsEntries
+
       param :text, Types.Instance(Text)
       param :text_export, Types.Instance(TextExport)
 
@@ -75,6 +77,11 @@ module Packaging
       # @return [Pathname] the relative root for a given text
       memoize def text_root
         Pathname.new("texts/#{text.slug}")
+      end
+
+      def build_entries(builder)
+        builder.local! :cover, cover_path, cover_asset_path if has_cover?
+        builder.local! :epub, epub_path, asset_path
       end
     end
   end

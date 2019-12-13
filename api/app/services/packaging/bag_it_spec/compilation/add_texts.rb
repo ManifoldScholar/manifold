@@ -6,38 +6,14 @@ module Packaging
       class AddTexts
         include Packaging::PipelineOperation
 
+        # @param [Packaging::BagItSpec::Context] context
+        # @param [<Packaging::BagItSpec::TextProxy>] texts
         # @param [Hash] state
-        # @option state [Packaging::BagItSpec::Context] :context
-        # @option state [<Packaging::BagItSpec::TextProxy>] :texts
         # @return [void]
-        def call(state)
-          bag = state[:context].bag
-
-          state[:texts].each do |text|
-            add_text_to! bag, text
-          end
-        end
-
-        private
-
-        # @param [BagIt::Bag] bag
-        # @param [Packaging::BagItSpec::TextProxy] text
-        # @return [void]
-        def add_text_to!(bag, text)
-          copy_file! bag, from: text.cover_asset_path, to: text.cover_path if text.has_cover?
-
-          copy_file! bag, from: text.asset_path, to: text.epub_path
-        end
-
-        # @param [BagIt::Bag] bag
-        # @param [String] from
-        # @param [String] to
-        # @param [String] open_mode
-        # @return [void]
-        def copy_file!(bag, from:, to:, open_mode: "rb")
-          bag.add_file to do |output_file|
-            File.open(from, open_mode) do |input_file|
-              IO.copy_stream input_file, output_file
+        def call(bag:, texts:, **_state)
+          texts.each do |text|
+            text.entries.each_value do |entry|
+              entry.add_to! bag
             end
           end
         end
