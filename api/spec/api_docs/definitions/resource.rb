@@ -4,21 +4,21 @@ module ApiDocs
       def update_request
         definition = make_request(__callee__, update_attributes || request_attributes)
 
-        definition = ApiDocumentation::DryTypesToJson.convert(definition)
+        definition = ApiDocumentation::DryTypesParser.convert(definition)
         transform_keys(definition)
       end
 
       def create_request
         definition = make_request(__callee__, create_attributes || request_attributes)
 
-        definition = ApiDocumentation::DryTypesToJson.convert(definition)
+        definition = ApiDocumentation::DryTypesParser.convert(definition)
         transform_keys(definition)
       end
 
       def resource_response
         definition = ::Types::Hash.schema(data: resource_response_data)
 
-        definition = ApiDocumentation::DryTypesToJson.convert(definition)
+        definition = ApiDocumentation::DryTypesParser.convert(definition)
         debug(__callee__, definition)
         transform_keys(definition)
       end
@@ -28,7 +28,7 @@ module ApiDocs
           data: ::Types::Array.of(partial_response_data)
         )
 
-        definition = ApiDocumentation::DryTypesToJson.convert(definition)
+        definition = ApiDocumentation::DryTypesParser.convert(definition)
         debug(__callee__, definition)
         transform_keys(definition)
       end
@@ -48,11 +48,7 @@ module ApiDocs
       #####################################
 
       def request_attributes
-        request_attr = const_defined?(:REQUEST_ATTRIBUTES) ? self::REQUEST_ATTRIBUTES : {}
-        request_attr = request_attr.merge(full_attributes)
-        return request_attr.slice(*writable_attributes) if writable_attributes.present?
-
-        request_attr.except(*read_only_attributes)
+        write_only_attributes.merge(full_attributes).except(*read_only_attributes)
       end
 
       def required_create_attributes
@@ -68,11 +64,7 @@ module ApiDocs
       end
 
       def write_only_attributes
-        const_defined?(:WRITE_ONLY) ? self::WRITE_ONLY : []
-      end
-
-      def writable_attributes
-        const_defined?(:WRITEABLE) ? self::WRITEABLE : []
+        const_defined?(:REQUEST_ATTRIBUTES) ? self::REQUEST_ATTRIBUTES : {}
       end
 
       def make_request(callee, attributes)
@@ -119,7 +111,7 @@ module ApiDocs
       end
 
       def read_only_attributes
-        const_defined?(:READ_ONLY) ? self::READ_ONLY : []
+        ApiDocumentation::DryTypesParser.read_only_attributes(full_attributes)
       end
 
       ####################################
