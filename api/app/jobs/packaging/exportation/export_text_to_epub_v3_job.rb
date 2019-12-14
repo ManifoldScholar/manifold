@@ -1,6 +1,8 @@
 module Packaging
   module Exportation
     class ExportTextToEpubV3Job < ApplicationJob
+      concurrency 3, drop: false
+
       queue_as :default
 
       # @param [Text] text
