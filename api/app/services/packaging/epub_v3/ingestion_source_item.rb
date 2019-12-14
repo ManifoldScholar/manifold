@@ -26,7 +26,7 @@ module Packaging
       private
 
       def build_base_path
-        source_path
+        File.join("assets", File.basename(source_path))
       end
     end
   end
