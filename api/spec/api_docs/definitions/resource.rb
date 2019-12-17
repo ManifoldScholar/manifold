@@ -93,15 +93,15 @@ module ApiDocs
         return partial_response_data if serializer.partial_only?
 
         resource_data(
-          wrap_response_attributes(full_attributes),
-          wrap_response_relationships(full_relationships)
+          attributes: (wrap_response_attributes(full_attributes) if full_attributes?),
+          relationships: (wrap_response_relationships(full_relationships) if full_relationships?),
         )
       end
 
       def partial_response_data
         resource_data(
-          wrap_response_attributes(attributes),
-          wrap_response_relationships(relationships)
+          attributes: (wrap_response_attributes(attributes) if attributes?),
+          relationships: (wrap_response_relationships(relationships) if relationships?),
         )
       end
 
@@ -121,14 +121,16 @@ module ApiDocs
       ############# HELPERS ##############
       ####################################
 
-      def resource_data(attributes, relation)
-        ::Types::Hash.schema(
+      def resource_data(attributes: nil, relationships: nil)
+        data = {
           id: ::Types::Serializer::ID,
           type: ::Types::String.meta(example: type),
-          attributes: attributes,
-          relationships: relation,
+          attributes: (attributes unless attributes.nil?),
+          relationships: (relationships unless relationships.nil?),
           meta: ::Types::Serializer::Meta
-        )
+        }.compact
+
+        ::Types::Hash.schema(data)
       end
 
       def type
@@ -143,8 +145,16 @@ module ApiDocs
         serializer.register.attribute_types
       end
 
+      def attributes?
+        attributes.present?
+      end
+
       def full_attributes
         attributes.merge(serializer.full_register.attribute_types)
+      end
+
+      def full_attributes?
+        attributes.present?
       end
 
       private
@@ -162,10 +172,18 @@ module ApiDocs
         map_serializer_types(partial)
       end
 
+      def relationships?
+        relationships.present?
+      end
+
       def full_relationships
         full = serializer.full_register.relationship_types
         full = map_serializer_types(full)
         relationships.merge(full)
+      end
+
+      def full_relationships?
+        full_relationships.present?
       end
 
       def debug(callee, definition)
