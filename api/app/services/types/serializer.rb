@@ -7,7 +7,7 @@ module Types
 
     Pointer = Types::Hash.schema(id: ID, type: Types::String)
     Collection = Types::Hash.schema(data: Types::Array.of(Pointer))
-    Resource = Types::Hash.schema(data: Pointer)
+    Resource = Types::Hash.schema(data: Pointer.optional)
 
     NotificationPreference = Types::String.enum("always", "never", "daily")
 
