@@ -39,7 +39,15 @@ module ApiDocs
       end
 
       def response_description
-        description || body_response_description
+        [included_relationships, description, body_response_description].join("\n\n")
+      end
+
+      def included_relationships
+        included = @options[:included_relationships] || []
+        return nil if included.empty?
+
+        docs = "Included relationships:\n* "
+        docs << included.join("\n* ")
       end
 
       def description
