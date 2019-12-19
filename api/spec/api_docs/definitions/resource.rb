@@ -48,7 +48,7 @@ module ApiDocs
       #####################################
 
       def request_attributes
-        write_only_attributes.merge(full_attributes).except(*read_only_attributes)
+        write_only_attributes.merge(all_attributes).except(*read_only_attributes)
       end
 
       def required_create_attributes
@@ -93,28 +93,24 @@ module ApiDocs
         return partial_response_data if serializer.partial_only?
 
         resource_data(
-          attributes: (wrap_response_attributes(full_attributes) if full_attributes?),
-          relationships: (wrap_response_relationships(full_relationships) if full_relationships?),
+          attributes: (filter_response_attributes(all_attributes) if all_attributes?),
+          relationships: (full_relationships if full_relationships?),
         )
       end
 
       def partial_response_data
         resource_data(
-          attributes: (wrap_response_attributes(attributes) if attributes?),
-          relationships: (wrap_response_relationships(relationships) if relationships?),
+          attributes: (filter_response_attributes(attributes) if attributes?),
+          relationships: (relationships if relationships?),
         )
       end
 
-      def wrap_response_relationships(relationships)
-        ::Types::Hash.schema(relationships)
-      end
-
-      def wrap_response_attributes(attributes)
-        ::Types::Hash.schema(attributes.except(*write_only_attributes))
-      end
-
       def read_only_attributes
-        ApiDocumentation::DryTypesParser.read_only_attributes(full_attributes)
+        ApiDocumentation::DryTypesParser.read_only_attributes(all_attributes)
+      end
+
+      def filter_response_attributes(attributes)
+        attributes.except(*write_only_attributes)
       end
 
       ####################################
@@ -125,8 +121,8 @@ module ApiDocs
         data = {
           id: ::Types::Serializer::ID,
           type: ::Types::String.meta(example: type),
-          attributes: (attributes unless attributes.nil?),
-          relationships: (relationships unless relationships.nil?),
+          attributes: (::Types::Hash.schema(attributes) unless attributes.nil?),
+          relationships: (::Types::Hash.schema(relationships) unless relationships.nil?),
           meta: ::Types::Serializer::Meta
         }.compact
 
@@ -149,12 +145,12 @@ module ApiDocs
         attributes.present?
       end
 
-      def full_attributes
+      def all_attributes
         attributes.merge(serializer.full_register.attribute_types)
       end
 
-      def full_attributes?
-        attributes.present?
+      def all_attributes?
+        all_attributes.present?
       end
 
       private
