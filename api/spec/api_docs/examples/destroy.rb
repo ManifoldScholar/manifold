@@ -8,7 +8,7 @@ shared_examples_for "an API destroy request" do |options|
     api_spec_helper.parameters.each do |parameter_options|
       parameter(parameter_options)
     end
-    description api_spec_helper.description if api_spec_helper.description
+    description api_spec_helper.response_description if api_spec_helper.response_description?
     security [apiKey: []]
     tags api_spec_helper.tags
 
