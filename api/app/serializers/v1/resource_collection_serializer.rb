@@ -5,20 +5,19 @@ module V1
 
     abilities
 
-    typed_attribute :title, NilClass
-    typed_attribute :title_formatted, NilClass
-    typed_attribute :created_at, NilClass
-    typed_attribute :description, NilClass
-    typed_attribute :description_formatted, NilClass
-    typed_attribute :project_id, NilClass
-    typed_attribute :resource_kinds, NilClass
-    typed_attribute :resource_tags, NilClass
-    typed_attribute :collection_resources_count, NilClass
-    typed_attribute :slug, NilClass
-    typed_attribute :pending_slug, NilClass
-    typed_attribute :thumbnail_styles, Types::Hash
+    typed_attribute :title, Types::String
+    typed_attribute :title_formatted, Types::String.meta(read_only: true)
+    typed_attribute :created_at, Types::DateTime.meta(read_only: true)
+    typed_attribute :description, Types::String.optional
+    typed_attribute :description_formatted, Types::String.meta(read_only: true)
+    typed_attribute :project_id, Types::Serializer::ID.meta(read_only: true)
+    typed_attribute :resource_kinds, Types::Array.of(Types::String).meta(read_only: true)
+    typed_attribute :collection_resources_count, Types::Integer.meta(read_only: true)
+    typed_attribute :slug, Types::String.meta(read_only: true)
+    typed_attribute :pending_slug, Types::String
+    typed_attribute :thumbnail_styles, Types::Serializer::Attachment.meta(read_only: true)
 
-    typed_attribute :resource_tags, NilClass do |object, _params|
+    typed_attribute :resource_tags, Types::Array.of(Types::String) do |object, _params|
       object.resource_tags.sort
     end
 
