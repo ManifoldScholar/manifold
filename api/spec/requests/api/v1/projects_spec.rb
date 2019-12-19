@@ -1,9 +1,33 @@
 require "swagger_helper"
 
 RSpec.describe "Projects API", type: :request do
+  included_relationships = [
+    :creators,
+    :contributors,
+    :texts,
+    :text_categories,
+    :events,
+    :resource_collections,
+    :resources,
+    :subjects,
+    :twitter_queries,
+    :permitted_users,
+    :content_blocks,
+    :action_callouts
+   ]
+
   path "/projects/{id}" do
-    include_examples "an API show request", model: Project
-    include_examples "an API update request", model: Project, auth_type: :admin
+    include_examples "an API show request",
+                      model: Project,
+                      description: "Authorization required when trying to access a draft project",
+                      paginated: true,
+                      included_relationships: included_relationships
+
+    include_examples "an API update request",
+                      model: Project,
+                      auth_type: :admin,
+                      included_relationships: included_relationships
+
     include_examples "an API destroy request", model: Project, auth_type: :admin
   end
 
@@ -30,7 +54,7 @@ RSpec.describe "Projects API", type: :request do
       { name: "filter[collection_order]", in: :query, type: :boolean },
       { name: "filter[with_creator_role]", in: :query, type: :boolean },
       { name: "filter[standalone_mode_enforced]", in: :query, type: :boolean }
-    ]
+    ], included_relationships: [:creators]
 
     include_examples "an API create request", model: Project, auth_type: :admin
   end
