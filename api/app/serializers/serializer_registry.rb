@@ -76,7 +76,7 @@ class SerializerRegistry
   def metadata(metadata: true, formatted: true, properties: true)
     typed_attribute(:metadata, Hash) if metadata
     typed_attribute(:metadata_formatted, Hash) if formatted
-    typed_attribute(:metadata_properties, Array) if properties
+    typed_attribute(:metadata_properties, Array, &:camelized_metadata_properties) if properties
   end
 
   private
