@@ -48,7 +48,17 @@ module ApiDocs
       #####################################
 
       def request_attributes
-        write_only_attributes.merge(all_attributes).except(*read_only_attributes)
+        metadata_handler.validate_metadata_attributes!
+        attributes = write_only_attributes.merge(all_attributes).except(*read_only_attributes)
+
+        if metadata_handler.metadata?
+          # the serializer automatically attaches empty metadata fields if the model contains metadata,
+          # however the formatted and properties version of metadata are not request attributes
+          attributes = attributes.except(:metadata_formatted, :metadata_properties)
+          attributes = attributes.merge(metadata_handler.request_metadata)
+        end
+
+        attributes
       end
 
       def required_create_attributes
@@ -118,6 +128,9 @@ module ApiDocs
       ####################################
 
       def resource_data(attributes: nil, relationships: nil)
+        metadata_handler.validate_metadata_attributes!
+        attributes = attributes.merge(metadata_handler.response_metadata) if metadata_handler.metadata?
+
         data = {
           id: ::Types::Serializer::ID,
           type: ::Types::String.meta(example: type),
@@ -154,6 +167,13 @@ module ApiDocs
       end
 
       private
+
+      def metadata_handler
+        metadata_attributes = const_defined?(:METADATA_ATTRIBUTES) ? self::METADATA_ATTRIBUTES : {}
+        raise "Error: METADATA_ATTRIBUTES requires a hash with dry type definitions" unless metadata_attributes.is_a? Hash
+
+        Helpers::MetadataHandler.new(name, metadata_attributes)
+      end
 
       def transform_keys(definition)
         definition.deep_transform_keys { |key| key.to_s.camelize(:lower) }
