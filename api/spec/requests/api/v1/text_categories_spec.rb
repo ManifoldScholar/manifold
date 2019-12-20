@@ -11,9 +11,12 @@ RSpec.describe "Text Categories", type: :request do
       include_examples "an API create request", model: Category, resource_name: "text_category", tags: "Project Text Categories", url_parameters: [:project_id], auth_type: :admin
     end
     path "/projects/{project_id}/relationships/text_categories/{id}" do
-      # TODO: This should require authorization, but passes without it
-      # Figure out why it succeeds in getting a response without any authorization
-      include_examples "an API show request", model: Category, resource_name: "text_category", tags: "Project Text Categories", url_parameters: [:project_id]
+      include_examples "an API show request",
+                        model: Category,
+                        resource_name: "text_category",
+                        tags: "Project Text Categories",
+                        url_parameters: [:project_id],
+                        description: "Authorization required when trying to access a draft project"
     end
   end
 end
