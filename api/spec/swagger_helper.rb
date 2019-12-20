@@ -2,6 +2,7 @@ require "rails_helper"
 require "api_docs/definitions"
 require "api_docs/definitions/resource"
 require "api_docs/helpers/inflections"
+require "api_docs/helpers/metadata_handler"
 require "api_docs/helpers/request"
 
 include_dirs = [
