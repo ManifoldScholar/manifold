@@ -1,0 +1,73 @@
+name: continuous-integration
+
+on: [push]
+env:
+  PATH: /usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin:/usr/local/sbin
+
+jobs:
+  api-specs:
+
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11.5
+        ports: ["5432:5432"]
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+      redis:
+        image: redis
+        ports: ["6379:6379"]
+        options: --entrypoint redis-server
+
+    steps:
+    - name: "Checkout code"
+      uses: actions/checkout@v1
+
+    - name: "Set up Ruby 2.4"
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.4.x
+
+    - name: "Install PostgreSQL 11 client"
+      run: |
+        sudo apt-get -yqq install libpq-dev
+
+    - name: "Install Pandoc"
+      run: |
+        wget https://github.com/jgm/pandoc/releases/download/2.2/pandoc-2.2-1-amd64.deb
+        sudo dpkg -i pandoc-2.2-1-amd64.deb
+
+    - name: "Restore gem dependencies from cache"
+      uses: actions/cache@v1
+      with:
+        path: api/vendor
+        key: ${{ runner.OS }}-gem-cache-${{ hashFiles('**/api/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.OS }}-gem-cache-
+
+    - name: "Install Gem dependencies"
+      env:
+        RAILS_ENV: test
+      run: |
+        cd api
+        gem install bundler -v 1.17.2
+        bundle install --deployment --jobs 4 --retry 3
+
+    - name: "Setup test database"
+      env:
+        PGHOST: localhost
+        PGUSER: postgres
+        RAILS_ENV: test
+      run: |
+        cd api
+        bin/rails db:setup
+
+    - name: "Run API specs"
+      env:
+        PGHOST: localhost
+        PGUSER: postgres
+        RAILS_ENV: test
+      run: |
+        cd api
+        bin/rspec spec --tag="~integration" --tag="~slow" --tag="~elasticsearch"
