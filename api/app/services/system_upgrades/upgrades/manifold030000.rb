@@ -72,10 +72,7 @@ module SystemUpgrades
         logger.info("===================================================================")
 
         index_name = Rails.env.development? ? "searchable_nodes_development" : "searchable_nodes_production"
-
-        if Searchkick.client.indices.delete(index: index_name)
-          logger.info("Removed #{index_name} index from Elasticsearch.")
-        end
+        logger.info("Removed #{index_name} index from Elasticsearch.") if Searchkick.client.indices.delete(index: index_name)
       rescue Elasticsearch::Transport::Transport::Errors::NotFound
         logger.info("SearchableNode index not present in Elasticsearch.")
       rescue Faraday::ConnectionFailed

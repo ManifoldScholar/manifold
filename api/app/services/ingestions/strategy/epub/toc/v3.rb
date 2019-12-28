@@ -73,10 +73,7 @@ module Ingestions
                 end
 
                 item = make_structure_item(label, href, type)
-
-                if node.at_xpath("xmlns:ol/xmlns:li")
-                  item[:children] = nodes_to_structure(node.xpath("xmlns:ol/xmlns:li"))
-                end
+                item[:children] = nodes_to_structure(node.xpath("xmlns:ol/xmlns:li")) if node.at_xpath("xmlns:ol/xmlns:li")
                 items.push item unless item.empty?
               end
             end
