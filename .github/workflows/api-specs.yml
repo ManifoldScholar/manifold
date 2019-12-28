@@ -101,6 +101,10 @@ jobs:
         with:
           ruby-version: 2.4.x
 
+      - name: "Install PostgreSQL 11 client"
+        run: |
+          sudo apt-get -yqq install libpq-dev
+
       - name: "Restore gem dependencies from cache"
         uses: actions/cache@v1
         with:
