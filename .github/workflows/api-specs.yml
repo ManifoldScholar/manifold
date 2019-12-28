@@ -1,0 +1,190 @@
+name: continuous-integration
+
+on: [push]
+env:
+  PATH: /usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin:/usr/local/sbin
+
+jobs:
+
+  client-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v1
+
+      - name: "Set up Ruby 2.4"
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.4.x
+
+      - name: "Install Node"
+        uses: actions/setup-node@v1
+        with:
+          node-version: '8.x'
+
+      - name: "Install Yarn"
+        run: |
+          sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
+          echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+          sudo apt-get update
+          sudo apt-get install -y yarn
+
+      - name: "Restore Node dependencies from cache"
+        uses: actions/cache@v1
+        with:
+          path: client/node_modules
+          key: ${{ runner.OS }}-node-module-cache-${{ hashFiles('**/client/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-module-cache-
+
+      - name: "Install Node dependencies"
+        env:
+          NODE_ENV: development
+        run: |
+          cd client
+          yarn install
+
+      - name: "Lint client"
+        run: |
+          cd client
+          yarn lint
+
+  client-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v1
+
+      - name: "Install Node"
+        uses: actions/setup-node@v1
+        with:
+          node-version: '8.x'
+
+      - name: "Install Yarn"
+        run: |
+          sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
+          echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+          sudo apt-get update
+          sudo apt-get install -y yarn
+
+      - name: "Restore Node dependencies from cache"
+        uses: actions/cache@v1
+        with:
+          path: client/node_modules
+          key: ${{ runner.OS }}-node-module-cache-${{ hashFiles('**/client/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-module-cache-
+
+      - name: "Install Node dependencies"
+        env:
+          NODE_ENV: development
+        run: |
+          cd client
+          yarn install
+
+      - name: "Run client tests"
+        run: |
+          cd client
+          yarn test-ci
+
+  api-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v1
+
+      - name: "Set up Ruby 2.4"
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.4.x
+
+      - name: "Restore gem dependencies from cache"
+        uses: actions/cache@v1
+        with:
+          path: api/vendor
+          key: ${{ runner.OS }}-gem-cache-${{ hashFiles('**/api/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-gem-cache-
+
+      - name: "Install Gem dependencies"
+        env:
+          RAILS_ENV: test
+        run: |
+          cd api
+          gem install bundler -v 1.17.2
+          bundle install --deployment --jobs 4 --retry 3
+
+      - name: "Run Rubopcop"
+        run: |
+          cd api
+          bin/rubocop
+
+  api-tests:
+
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11.5
+        ports: ["5432:5432"]
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+      redis:
+        image: redis
+        ports: ["6379:6379"]
+        options: --entrypoint redis-server
+
+    steps:
+    - name: "Checkout code"
+      uses: actions/checkout@v1
+
+    - name: "Set up Ruby 2.4"
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.4.x
+
+    - name: "Install PostgreSQL 11 client"
+      run: |
+        sudo apt-get -yqq install libpq-dev
+
+    - name: "Install Pandoc"
+      run: |
+        wget https://github.com/jgm/pandoc/releases/download/2.2/pandoc-2.2-1-amd64.deb
+        sudo dpkg -i pandoc-2.2-1-amd64.deb
+
+    - name: "Restore gem dependencies from cache"
+      uses: actions/cache@v1
+      with:
+        path: api/vendor
+        key: ${{ runner.OS }}-gem-cache-${{ hashFiles('**/api/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.OS }}-gem-cache-
+
+    - name: "Install Gem dependencies"
+      env:
+        RAILS_ENV: test
+      run: |
+        cd api
+        gem install bundler -v 1.17.2
+        bundle install --deployment --jobs 4 --retry 3
+
+    - name: "Setup test database"
+      env:
+        PGHOST: localhost
+        PGUSER: postgres
+        RAILS_ENV: test
+      run: |
+        cd api
+        bin/rails db:setup
+
+    - name: "Run API specs"
+      env:
+        PGHOST: localhost
+        PGUSER: postgres
+        RAILS_ENV: test
+      run: |
+        cd api
+        bin/rspec spec --tag="~integration" --tag="~slow" --tag="~elasticsearch"
