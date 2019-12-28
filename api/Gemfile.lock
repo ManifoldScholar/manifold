@@ -418,7 +418,7 @@ GEM
       slop (~> 3.0)
     public_suffix (4.0.1)
     puma (3.12.2)
-    rack (2.0.7)
+    rack (2.0.8)
     rack-cors (1.0.5)
       rack (>= 1.6.0)
     rack-protection (2.0.7)
