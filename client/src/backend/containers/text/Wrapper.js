@@ -67,12 +67,8 @@ export class TextWrapperContainer extends PureComponent {
   toggleExportsAsEpubV3 = () => {
     const call = textsAPI.toggleEpubV3Export(this.props.text.id);
     const textRequest = request(call, requests.beText);
-
-    this.props.dispatch(textRequest).promise.then((...args) => {
-      console.info("all done with req");
-      console.dir(args);
-    });
-  }
+    this.props.dispatch(textRequest);
+  };
 
   notifyDestroy() {
     const notification = {
@@ -108,7 +104,9 @@ export class TextWrapperContainer extends PureComponent {
 
   renderUtility() {
     const { text } = this.props;
-    const { attributes: { exportsAsEpubV3, epubV3ExportUrl } } = text;
+    const {
+      attributes: { exportsAsEpubV3, epubV3ExportUrl }
+    } = text;
 
     return (
       <div className="utility-button-group utility-button-group--inline">
@@ -134,24 +132,20 @@ export class TextWrapperContainer extends PureComponent {
             size={26}
             iconClass="utility-button__icon utility-button__icon--download"
           />
-          <span className="utility-button__text">{exportsAsEpubV3 ? "Disable Epub Export" : "Enable Epub Export"}</span>
+          <span className="utility-button__text">
+            {exportsAsEpubV3 ? "Disable Epub Export" : "Enable Epub Export"}
+          </span>
         </button>
-        {
-          epubV3ExportUrl && (
-            <a
-              href={epubV3ExportUrl}
-              download
-              className="utility-button"
-            >
-              <IconComposer
-                icon="arrowDown32"
-                size={26}
-                iconClass="utility-button__icon utility-button__icon--download"
-              />
-              <span className="utility-button__text">Download Epub</span>
-            </a>
-          )
-        }
+        {epubV3ExportUrl && (
+          <a href={epubV3ExportUrl} download className="utility-button">
+            <IconComposer
+              icon="arrowDown32"
+              size={26}
+              iconClass="utility-button__icon utility-button__icon--download"
+            />
+            <span className="utility-button__text">Download Epub</span>
+          </a>
+        )}
         {text.attributes.ingestionSourceDownloadUrl && (
           <a
             href={text.attributes.ingestionSourceDownloadUrl}
