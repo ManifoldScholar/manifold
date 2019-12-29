@@ -168,7 +168,11 @@ module Attachments
         def #{field}_versions?
           #{field}.is_a? Hash
         end
-  
+
+        def #{field}_checksum
+          #{field}_original(&:sha256)
+        end
+
         def #{field}_extension
           #{field}_original(&:extension)
         end

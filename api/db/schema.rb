@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_30_212914) do
+ActiveRecord::Schema.define(version: 2019_12_29_155846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -527,7 +527,6 @@ ActiveRecord::Schema.define(version: 2019_11_30_212914) do
     t.string "thumbnail_content_type_deprecated"
     t.integer "thumbnail_file_size_deprecated"
     t.datetime "thumbnail_updated_at_deprecated"
-    t.string "thumbnail_checksum"
     t.string "fingerprint"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -621,10 +620,6 @@ ActiveRecord::Schema.define(version: 2019_11_30_212914) do
     t.boolean "allow_download", default: true
     t.boolean "doi_requested", default: false
     t.datetime "doi_added"
-    t.string "high_res_checksum"
-    t.string "transcript_checksum"
-    t.string "translation_checksum"
-    t.string "attachment_checksum"
     t.string "high_res_file_name_deprecated"
     t.string "high_res_content_type_deprecated"
     t.integer "high_res_file_size_deprecated"
