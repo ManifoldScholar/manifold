@@ -264,6 +264,15 @@ RSpec.describe Resource, type: :model do
       expect(resource.attachment_styles.values.any? &:empty?).to be false
     end
 
+    it "stores attachment checksums" do
+      resource.reload # Reload to pick up backgrounded attachment versions.
+      path = resource.attachment_original.storage.path(resource.attachment_original.id)
+      sha = Digest::SHA256.file(path).to_s
+      expect(resource.attachment_checksum).to_not eq nil
+      expect(resource.attachment_checksum).to eq sha
+    end
+
+
   end
 
 end
