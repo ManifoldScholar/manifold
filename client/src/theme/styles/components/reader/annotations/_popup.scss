@@ -27,7 +27,7 @@
 
   &__panel {
     @include boxShadow(0, 12px, 22px, -3px, $neutralBlack, 0.39);
-    position: absolute;
+    position: relative;
     left: 50%;
     background-color: $panelBgColor;
     border-radius: $panelRoundedRadius;
