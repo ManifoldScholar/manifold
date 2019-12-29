@@ -1,6 +1,6 @@
 name: continuous-integration
 
-on: [push]
+on: [push, pull_request]
 env:
   PATH: /usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin:/usr/local/sbin
 
