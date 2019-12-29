@@ -22,7 +22,7 @@ class TwitterQuery < ApplicationRecord
   validates :result_type, inclusion: { in: ALLOWED_RESULT_TYPES }
 
   # Callbacks
-  before_save :reset_most_recent_tweet_id, if: :query_changed?
+  before_save :reset_most_recent_tweet_id, if: :will_save_change_to_query?
 
   def title
     id
