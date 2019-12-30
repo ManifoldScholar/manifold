@@ -18,7 +18,7 @@
 }
 
 .text-section {
-  font-family: 'freight-text-pro', serif;
+  @include templateCopy;
   font-weight: $regular;
   line-height: 1.761;
 
