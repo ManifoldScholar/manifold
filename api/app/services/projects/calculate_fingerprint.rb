@@ -3,7 +3,7 @@ module Projects
   class CalculateFingerprint < ActiveInteraction::Base
     include Concerns::FingerprintInteraction
 
-    record :project
+    fingerprint_target! :project
 
     # Presentational and other columns which should not factor into
     # fingerprint calculation
