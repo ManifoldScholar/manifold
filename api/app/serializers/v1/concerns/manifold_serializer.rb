@@ -92,7 +92,7 @@ module V1
         end
 
         def partialable?
-          @full_register.present?
+          @full_register.present? && @full_register.activated?
         end
 
         def current_register
