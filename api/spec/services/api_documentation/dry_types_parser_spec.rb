@@ -174,7 +174,7 @@ RSpec.describe ::ApiDocumentation::DryTypesParser do
           ).to eq({
             type: 'object',
             properties: {
-              data: described_class.convert(serializer_types::Pointer)
+              data: described_class.convert(serializer_types::Pointer.optional)
             }
           })
         end
