@@ -1,12 +1,13 @@
 class SerializerRegistry
 
   include Enumerable
-  attr_reader :klass, :entries, :full
+  attr_reader :klass, :entries, :full, :active
 
   def initialize(klass, full: false)
     @klass = klass
     @full = full
     @entries = {}
+    @active = false
   end
 
   def each(&block)
@@ -15,6 +16,7 @@ class SerializerRegistry
 
   # rubocop:disable Lint/UnusedMethodArgument
   def typed_has_one(relationship_name, options = {}, &block)
+    activate
     options = map_relationship_options(options)
     register_relationship(relationship_name, :has_one, options)
     klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
@@ -25,6 +27,7 @@ class SerializerRegistry
 
   # rubocop:disable Lint/UnusedMethodArgument
   def typed_belongs_to(relationship_name, options = {}, &block)
+    activate
     options = map_relationship_options(options)
     register_relationship(relationship_name, :belongs_to, options)
     klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
@@ -35,6 +38,7 @@ class SerializerRegistry
 
   # rubocop:disable Lint/UnusedMethodArgument
   def typed_has_many(relationship_name, options = {}, &block)
+    activate
     options = map_relationship_options(options)
     register_relationship(relationship_name, :has_many, options)
     klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
@@ -44,6 +48,7 @@ class SerializerRegistry
   # rubocop:enable Lint/UnusedMethodArgument
 
   def typed_attribute(attribute, type, options = {}, &block)
+    activate
     options = map_options(options)
     register_attributes(attribute, type, options)
     _block = type == Hash ? build_camelize_proc(attribute, block) : block
@@ -77,6 +82,10 @@ class SerializerRegistry
     typed_attribute(:metadata, Hash) if metadata
     typed_attribute(:metadata_formatted, Hash) if formatted
     typed_attribute(:metadata_properties, Array, &:camelized_metadata_properties) if properties
+  end
+
+  def activated?
+    @active
   end
 
   private
@@ -125,6 +134,10 @@ class SerializerRegistry
       relationship: false,
       type: type
     }
+  end
+
+  def activate
+    @active = true
   end
 
   def page_params(relationship_name, params)
