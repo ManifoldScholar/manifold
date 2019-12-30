@@ -170,7 +170,7 @@ export function authenticateWithCookie(dispatch, cookieHelper) {
       handleAuthenticationFailure(dispatch, {
         status,
         cookieHelper,
-        destroyCookie: true
+        destroyCookie: status !== 502
       });
     }
   );
