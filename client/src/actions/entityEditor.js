@@ -1,5 +1,9 @@
 import { createAction } from "redux-actions";
 
+export const refresh = createAction("ENTITY_EDITOR_REFRESH", (key, model) => {
+  return { key, model };
+});
+
 export const open = createAction("ENTITY_EDITOR_OPEN", (key, model) => {
   return { key, model };
 });
