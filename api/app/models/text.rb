@@ -86,7 +86,7 @@ class Text < ApplicationRecord
   has_one :last_finished_ingestion, -> { where(state: "finished").order(updated_at: :desc) }, class_name: "Ingestion"
   has_many :cached_external_source_links, inverse_of: :text, dependent: :destroy
   has_many :cached_external_sources, through: :cached_external_source_links
-  has_many :text_exports, inverse_of: :text
+  has_many :text_exports, inverse_of: :text, dependent: :destroy
   has_many :text_export_statuses, inverse_of: :text
   has_one :current_text_export_status, -> { current }, class_name: "TextExportStatus"
   has_one :current_text_export, through: :current_text_export_status, source: :text_export
