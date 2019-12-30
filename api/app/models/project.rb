@@ -58,9 +58,7 @@ class Project < ApplicationRecord
   end
 
   # PaperTrail
-  has_paper_trail on: [:update],
-                  skip:
-                    %i[cover_data hero_data avatar_data]
+  has_paper_trail
 
   # Associations
   has_many :collection_projects, dependent: :destroy, inverse_of: :project

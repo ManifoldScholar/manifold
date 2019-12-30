@@ -63,6 +63,7 @@ gem "oj", "~>3.9"
 gem "paleta", "~> 0.3.0"
 gem "pandoc-ruby", "~> 2.0"
 gem "paper_trail", "~> 10.0"
+gem "paper_trail-association_tracking", "~> 2.0"
 gem "paper_trail-globalid", "~> 0.2"
 # Rails does not yet support PG 1.0; it's in master for rails, but not released as of
 # Jan 25, 2018. See https://github.com/rails/rails/issues/31669

@@ -117,7 +117,11 @@ class Ingestion < ApplicationRecord
     IngestionChannel.broadcast_to self, type: "entity", payload: serialization
 
     begin
-      outcome = Ingestions::Ingestor.run ingestion: self
+      outcome = nil
+      PaperTrail.request(whodunnit: processing_user) do
+        outcome = Ingestions::Ingestor.run ingestion: self
+      end
+      outcome
     rescue StandardError => e
       return handle_ingestion_exception(e)
     end

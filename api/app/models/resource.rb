@@ -8,15 +8,10 @@ class Resource < ApplicationRecord
   ALLOWED_SUB_KINDS = %w(external_video).freeze
 
   # PaperTrail
-  has_paper_trail on: [:update],
-                  meta: {
-                    parent_item_id: :project_id,
-                    parent_item_type: "Project"
-                  },
-                  skip:
-                    %i[attachment_data high_res_data variant_thumbnail_data variant_poster_data variant_format_one_data
-                       variant_format_two_data translation_data transcript_data]
-
+  has_paper_trail meta: {
+    parent_item_id: :project_id,
+    parent_item_type: "Project"
+  }
   # Concerns
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor

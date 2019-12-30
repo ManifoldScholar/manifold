@@ -9,16 +9,16 @@ module V1
     typed_attribute :created_at, NilClass
 
     # Strip out lateral, nil-nil changes and updated_at
-    typed_attribute :object_changes, NilClass do |object|
-      object.object_changes.except("updated_at")
+    typed_attribute :object_changes, Hash do |object|
+      object.object_changes&.except("updated_at")
     end
 
     typed_attribute :actor_name, NilClass do |object|
-      object.actor.name
+      object.actor&.name
     end
 
     typed_attribute :actor_id, NilClass do |object|
-      object.actor.id
+      object.actor&.id
     end
 
     typed_attribute :deleted, NilClass do |object|
@@ -37,7 +37,7 @@ module V1
         return object.item_title_formatted if object.item.respond_to? :title_formatted
         return object.item_title if object.item.respond_to? :title
 
-        object.object["title"] || object.item_id
+        object.object["title"] || object.title_fallback || object.object_changes["title"] || object.item_id
       end
       # rubocop:enable Metrics/AbcSize
     end

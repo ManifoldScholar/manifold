@@ -15,6 +15,12 @@ class ResourceCollection < ApplicationRecord
 
   self.authorizer_name = "ProjectChildAuthorizer"
 
+  # PaperTrail
+  has_paper_trail meta: {
+    parent_item_id: :project_id,
+    parent_item_type: "Project"
+  }
+
   # Associations
   belongs_to :project, counter_cache: true
   has_many :collection_resources,
