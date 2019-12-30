@@ -1,6 +1,13 @@
 name: continuous-integration
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
 env:
   PATH: /usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin:/usr/local/sbin
 
