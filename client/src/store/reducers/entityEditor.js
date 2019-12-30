@@ -2,6 +2,7 @@ import { handleActions } from "redux-actions";
 import update from "immutability-helper";
 import lodashSet from "lodash/set";
 import lodashGet from "lodash/get";
+import isEmpty from "lodash/isEmpty";
 import lodashUnset from "lodash/unset";
 import flatMapDeep from "lodash/flatMapDeep";
 
@@ -41,6 +42,33 @@ const open = (state, action) => {
     },
     source: model,
     changed: false
+  };
+  const newSessions = { ...state.session, [key]: newSession };
+  const newState = { ...state, sessions: newSessions };
+  return newState;
+};
+
+const refresh = (state, action) => {
+  const { key, model } = action.payload;
+  const existingSession = state.sessions[key];
+  if (!existingSession) return open(state, action);
+
+  const dirty = {
+    attributes: { ...existingSession.dirty.attributes },
+    relationships: { ...existingSession.dirty.relationships }
+  };
+
+  ["attributes", "relationships"].forEach(type => {
+    Object.keys(dirty[type]).forEach(property => {
+      if (dirty[type][property] === model[type][property])
+        delete dirty[type][property];
+    });
+  });
+
+  const newSession = {
+    dirty,
+    source: model,
+    changed: !(isEmpty(dirty.attributes) && isEmpty(dirty.attributes))
   };
   const newSessions = { ...state.session, [key]: newSession };
   const newState = { ...state, sessions: newSessions };
@@ -126,6 +154,7 @@ const completeAction = (state, dispatchedAction) => {
 export default handleActions(
   {
     ENTITY_EDITOR_OPEN: open,
+    ENTITY_EDITOR_REFRESH: refresh,
     ENTITY_EDITOR_CLOSE: close,
     ENTITY_EDITOR_SET: set,
     ENTITY_EDITOR_PENDING_ACTION: startAction,
