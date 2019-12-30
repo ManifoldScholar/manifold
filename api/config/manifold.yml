@@ -250,6 +250,7 @@ common: &1
         :allowed_mime:
           - audio/ogg
           - audio/wav
+          - audio/x-wav
           - audio/mp3
           - audio/mpeg
           - video/x-flv
@@ -379,6 +380,7 @@ common: &1
           - text/plain
           - audio/ogg
           - audio/wav
+          - audio/x-wav
           - audio/mp3
           - audio/mpeg
           - video/x-flv
