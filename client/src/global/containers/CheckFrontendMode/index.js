@@ -52,6 +52,11 @@ class CheckFrontendMode extends PureComponent {
     return this.projectStandaloneMode === "enforced";
   }
 
+  get canOverridePressHeader() {
+    if (!this.project) return false;
+    return Boolean(this.project.attributes.standaloneModePressBarText);
+  }
+
   setIsProjectHomepage() {
     this.props.dispatch(uiFrontendModeActions.isProjectHomepage());
   }
@@ -65,6 +70,15 @@ class CheckFrontendMode extends PureComponent {
     const project = this.project;
     this.props.dispatch(
       uiFrontendModeActions.setFrontendModeToStandalone({
+        project
+      })
+    );
+  }
+
+  overridePressHeader() {
+    const project = this.project;
+    this.props.dispatch(
+      uiFrontendModeActions.overridePressHeader({
         project
       })
     );
@@ -120,6 +134,7 @@ class CheckFrontendMode extends PureComponent {
       return this.engageStandaloneMode();
     if (this.canShowStandalone && this.standaloneModeRequested)
       return this.engageStandaloneMode();
+    if (this.canOverridePressHeader) return this.overridePressHeader();
   }
 
   render() {
