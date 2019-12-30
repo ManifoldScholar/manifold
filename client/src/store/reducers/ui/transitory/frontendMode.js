@@ -1,48 +1,62 @@
 import { handleActions } from "redux-actions";
 import queryString from "query-string";
 
+const buildProjectState = project => {
+  if (!project) return null;
+  return {
+    id: project.id,
+    slug: project.attributes.slug,
+    title: project.attributes.title,
+    titleFormatted: project.attributes.titleFormatted,
+    subtitle: project.attributes.subtitle,
+    subtitleFormatted: project.attributes.subtitleFormatted,
+    darkMode: project.attributes.darkMode,
+    heroStyles: project.attributes.heroStyles,
+    standaloneModePressBarText: project.attributes.standaloneModePressBarText,
+    standaloneModePressBarUrl: project.attributes.standaloneModePressBarUrl
+  };
+};
+
 const buildState = (
   mode = "library",
   state = { isProjectHomepage: true },
   payload = null
 ) => {
+  const project = payload ? payload.project : null;
   const isLibrary = mode === "library";
   const isStandalone = mode === "standalone";
 
-  if (isLibrary && state.isLibrary) return state;
+  // If we're in library mode and the project hasn't changed, we can return early.
+  if (
+    isLibrary &&
+    state.isLibrary &&
+    project &&
+    state.project &&
+    project.id === state.project.id
+  )
+    return state;
+
   const lastStandaloneId =
     isLibrary && state.project && state.project.id
       ? state.project.id
       : state.lastStandaloneId;
 
-  if (isStandalone && state.isStandalone && payload.project === state.project)
+  if (isStandalone && state.isStandalone && project === state.project)
     return state;
+
   if (isStandalone)
     return {
       isProjectHomepage: state.isProjectHomepage,
       isLibrary,
       isStandalone,
       lastStandaloneId,
-      project: {
-        id: payload.project.id,
-        slug: payload.project.attributes.slug,
-        title: payload.project.attributes.title,
-        titleFormatted: payload.project.attributes.titleFormatted,
-        subtitle: payload.project.attributes.subtitle,
-        subtitleFormatted: payload.project.attributes.subtitleFormatted,
-        darkMode: payload.project.attributes.darkMode,
-        heroStyles: payload.project.attributes.heroStyles,
-        standaloneModePressBarText:
-          payload.project.attributes.standaloneModePressBarText,
-        standaloneModePressBarUrl:
-          payload.project.attributes.standaloneModePressBarUrl
-      }
+      project: buildProjectState(project)
     };
   return {
     isLibrary,
     isStandalone,
     lastStandaloneId,
-    project: null
+    project: buildProjectState(project)
   };
 };
 
@@ -69,6 +83,10 @@ function setIsProjectSubpage(state) {
   return { ...state, isProjectHomepage: false };
 }
 
+function setPressHeader(state, action) {
+  return buildState(state.mode, state, action.payload);
+}
+
 function setIsProjectHomepage(state) {
   return { ...state, isProjectHomepage: true };
 }
@@ -79,7 +97,8 @@ export default handleActions(
     SET_FRONTEND_MODE_LIBRARY: setModeLibrary,
     SET_FRONTEND_MODE_STANDALONE: setModeStandalone,
     SET_FRONTEND_MODE_IS_PROJECT_SUBPAGE: setIsProjectSubpage,
-    SET_FRONTEND_MODE_IS_PROJECT_HOME_PAGE: setIsProjectHomepage
+    SET_FRONTEND_MODE_IS_PROJECT_HOME_PAGE: setIsProjectHomepage,
+    SET_FRONTEND_MODE_PRESS_HEADER: setPressHeader
   },
   buildState()
 );

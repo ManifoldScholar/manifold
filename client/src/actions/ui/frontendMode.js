@@ -16,3 +16,8 @@ export const setFrontendModeToStandalone = createAction(
   "SET_FRONTEND_MODE_STANDALONE",
   project => project
 );
+
+export const overridePressHeader = createAction(
+  "SET_FRONTEND_MODE_PRESS_HEADER",
+  project => project
+);
