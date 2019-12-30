@@ -16,6 +16,13 @@ class Text < ApplicationRecord
   include Metadata
   include Attachments
 
+  # PaperTrail
+  has_paper_trail meta: {
+    parent_item_id: :project_id,
+    parent_item_type: "Project",
+    title_fallback: :title_plaintext
+  }
+
   # Default Scope
   default_scope { order(position: :asc).includes(:titles, :text_subjects, :category) }
 

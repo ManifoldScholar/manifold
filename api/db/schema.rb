@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_29_155846) do
+ActiveRecord::Schema.define(version: 2019_12_29_200459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -914,6 +914,15 @@ ActiveRecord::Schema.define(version: 2019_12_29_155846) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  create_table "version_associations", force: :cascade do |t|
+    t.integer "version_id"
+    t.string "foreign_key_name", null: false
+    t.integer "foreign_key_id"
+    t.string "foreign_type"
+    t.index ["foreign_key_name", "foreign_key_id", "foreign_type"], name: "index_version_associations_on_foreign_key"
+    t.index ["version_id"], name: "index_version_associations_on_version_id"
+  end
+
   create_table "versions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "item_type", null: false
     t.uuid "item_id", null: false
@@ -924,9 +933,12 @@ ActiveRecord::Schema.define(version: 2019_12_29_155846) do
     t.jsonb "object"
     t.jsonb "object_changes"
     t.datetime "created_at"
+    t.integer "transaction_id"
+    t.string "title_fallback"
     t.index ["created_at"], name: "index_versions_on_created_at", using: :brin
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
     t.index ["parent_item_type", "parent_item_id"], name: "index_versions_on_parent_item_type_and_parent_item_id"
+    t.index ["transaction_id"], name: "index_versions_on_transaction_id"
   end
 
   add_foreign_key "annotations", "reading_groups", on_delete: :nullify

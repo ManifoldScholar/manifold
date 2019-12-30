@@ -21,6 +21,10 @@ export default class EventRow extends PureComponent {
     return this.version.attributes.itemDisplayName;
   }
 
+  get event() {
+    return this.version.attributes.event;
+  }
+
   get itemId() {
     return this.version.attributes.itemId;
   }
@@ -43,6 +47,12 @@ export default class EventRow extends PureComponent {
 
   get objectChanges() {
     return this.version.attributes.objectChanges;
+  }
+
+  get showObjectChanges() {
+    if (!this.objectChanges) return false;
+    if (this.event === "create" || this.event === "destroy") return false;
+    return true;
   }
 
   get itemType() {
@@ -97,23 +107,34 @@ export default class EventRow extends PureComponent {
     );
   }
 
+  get action() {
+    const actions = {
+      create: "created",
+      update: "updated",
+      destroy: "deleted",
+      default: "changed"
+    };
+    return actions[this.event] || actions.default;
+  }
+
   get title() {
     if (this.isProjectLog) return this.projectLogSubtitle;
     return (
       <span>
         {this.userLink}
-        {` updated the ${this.itemType}, \u201C`}
+        {` ${this.action} the ${this.itemType.toLowerCase()} \u201C`}
         {this.itemLink}
-        {`\u201D, `}
-        <FormattedDate prefix="on" date={this.createdAt} />
+        {`\u201D `}
+        <FormattedDate format="distanceInWords" date={this.createdAt} /> ago.
       </span>
     );
   }
 
   get changeList() {
+    if (!this.showObjectChanges) return null;
     return (
       <span>
-        {`These fields were modified: `}
+        {`Modified: `}
         <em>
           {Object.keys(this.objectChanges)
             .map(change => humps.decamelize(change, { separator: " " }))
