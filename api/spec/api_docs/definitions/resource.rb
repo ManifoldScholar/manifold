@@ -2,35 +2,39 @@ module ApiDocs
   module Definitions
     module Resource
       def update_request
-        definition = make_request(__callee__, update_attributes || request_attributes)
+        attributes = assign_required_attributes(
+          (update_attributes || request_attributes),
+          required_update_attributes
+        )
 
-        definition = ApiDocumentation::DryTypesParser.convert(definition)
-        transform_keys(definition)
+        relationships = assign_required_attributes(update_relationships, required_update_relationships)
+
+        definition = make_request(attributes, relationships)
+        parse_dry_types(__callee__, definition)
       end
 
       def create_request
-        definition = make_request(__callee__, create_attributes || request_attributes)
+        attributes = assign_required_attributes(
+          (create_attributes || request_attributes),
+          required_create_attributes
+        )
 
-        definition = ApiDocumentation::DryTypesParser.convert(definition)
-        transform_keys(definition)
+        relationships = assign_required_attributes(create_relationships, required_create_relationships)
+
+        definition = make_request(attributes, relationships)
+        parse_dry_types(__callee__, definition)
       end
 
       def resource_response
         definition = ::Types::Hash.schema(data: resource_response_data)
-
-        definition = ApiDocumentation::DryTypesParser.convert(definition)
-        debug(__callee__, definition)
-        transform_keys(definition)
+        parse_dry_types(__callee__, definition)
       end
 
       def collection_response
         definition = ::Types::Hash.schema(
           data: ::Types::Array.of(partial_response_data)
         )
-
-        definition = ApiDocumentation::DryTypesParser.convert(definition)
-        debug(__callee__, definition)
-        transform_keys(definition)
+        parse_dry_types(__callee__, definition)
       end
 
       protected
@@ -40,6 +44,14 @@ module ApiDocs
       end
 
       def create_attributes
+        nil
+      end
+
+      def create_relationships
+        nil
+      end
+
+      def update_relationships
         nil
       end
 
@@ -69,6 +81,14 @@ module ApiDocs
         const_defined?(:REQUIRED_UPDATE_ATTRIBUTES) ? self::REQUIRED_UPDATE_ATTRIBUTES : required_attributes
       end
 
+      def required_create_relationships
+        const_defined?(:REQUIRED_CREATE_RELATIONSHIPS) ? self::REQUIRED_CREATE_RELATIONSHIPS : nil
+      end
+
+      def required_update_relationships
+        const_defined?(:REQUIRED_UPDATE_RELATIONSHIPS) ? self::REQUIRED_UPDATE_RELATIONSHIPS : nil
+      end
+
       def required_attributes
         const_defined?(:REQUIRED_ATTRIBUTES) ? self::REQUIRED_ATTRIBUTES : []
       end
@@ -80,19 +100,23 @@ module ApiDocs
         self::REQUEST_ATTRIBUTES
       end
 
-      def make_request(callee, attributes)
-        attributes = ::Types::Hash.schema(attributes)
-        attributes = attributes.meta(required: required_create_attributes) if required_create_attributes.present? && callee == :create_request
-        attributes = attributes.meta(required: required_update_attributes) if required_update_attributes.present? && callee == :update_request
+      def assign_required_attributes(contents, required_values)
+        return nil if contents.nil?
+        raise "contents must be a hash" unless contents.is_a?(Hash)
+        attributes = ::Types::Hash.schema(contents)
+        attributes = attributes.meta(required: required_values) if required_values.present?
+        attributes
+      end
 
-        definition = ::Types::Hash.schema(
+      def make_request(attributes, relationships)
+        ::Types::Hash.schema(
           data: ::Types::Hash.schema(
-            attributes: attributes
+            {
+              attributes: (attributes unless attributes.nil?),
+              relationships: (relationships unless relationships.nil?)
+            }.compact
           )
         )
-
-        debug(callee, definition)
-        definition
       end
 
       ######################################
@@ -167,6 +191,12 @@ module ApiDocs
       end
 
       private
+
+      def parse_dry_types(callee, definition)
+        definition = ApiDocumentation::DryTypesParser.convert(definition)
+        debug(callee, definition)
+        transform_keys(definition)
+      end
 
       def metadata_handler
         metadata_attributes = const_defined?(:METADATA_ATTRIBUTES) ? self::METADATA_ATTRIBUTES : {}
