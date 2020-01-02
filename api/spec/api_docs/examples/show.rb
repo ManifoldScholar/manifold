@@ -34,8 +34,8 @@ shared_examples_for "an API show request" do |options|
       end
     end
 
-    unless api_spec_helper.exclude_403
-      response "403", I18n.t("swagger.access_denied"), focus: api_spec_helper.focus do
+    unless api_spec_helper.exclude_401
+      response "401", I18n.t("swagger.not_authenticated"), focus: api_spec_helper.focus do
         let(:Authorization) {}
         run_test!
       end

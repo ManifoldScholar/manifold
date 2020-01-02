@@ -27,6 +27,7 @@ en:
       avatar_meta: "An object with data about the avatar image"
   swagger:
     access_denied: "Access denied for unauthorized users"
+    not_authenticated: "Access denied for unauthenticated users"
     not_found: "Record not found"
     unprocessable: "Invalid or missing data in request"
     index:
