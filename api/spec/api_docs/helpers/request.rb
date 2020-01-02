@@ -68,8 +68,8 @@ module ApiDocs
         @options[:exclude]&.include?("404")
       end
 
-      def exclude_403
-        !with_auth || (@options[:exclude]&.include?("403"))
+      def exclude_401
+        !with_auth || (@options[:exclude]&.include?("401"))
       end
 
       def factory
