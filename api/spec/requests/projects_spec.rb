@@ -49,6 +49,41 @@ RSpec.describe "Projects API", type: :request do
     end
   end
 
+  describe "creates a project" do
+    let(:path) { api_v1_projects_path }
+
+
+    context "when the user is an admin" do
+      let(:headers) { admin_headers }
+
+      it "has a 201 SUCCESS status code" do
+        params = json_payload(attributes: { title: "foo" })
+        post path, headers: headers, params: params
+        expect(response).to have_http_status(201)
+      end
+    end
+
+    context "when the user is not logged in" do
+
+      it "has a 401 status code" do
+        params = json_payload(attributes: { title: "foo" })
+        post path, params: params
+        expect(response).to have_http_status(401)
+      end
+    end
+
+    context "when the user is a reader" do
+      let(:headers) { reader_headers }
+
+      it "has a 403 status code" do
+        params = json_payload(attributes: { title: "foo" })
+        post path, headers: headers, params: params
+        expect(response).to have_http_status(403)
+      end
+    end
+
+  end
+
   describe "updates a project" do
     let(:path) { api_v1_project_path(project) }
     let(:metadata) do
