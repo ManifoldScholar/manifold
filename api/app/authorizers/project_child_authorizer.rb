@@ -7,18 +7,24 @@ class ProjectChildAuthorizer < ApplicationAuthorizer
   end
 
   def default(_able, user, _options = {})
-    resource.project.updatable_by? user
+    return false unless resource.project
+
+    resource.project.updatable_by?(user)
   end
 
   def deletable_by?(user, _options = {})
-    resource.project.updatable_by? user
+    return false unless resource.project
+
+    resource.project.updatable_by?(user)
   end
 
   # Most, if not all, things that are on the project are readable if the project is
   # readable. Note: the delegation to the project will ensure that the child inherits
   # the draft visibility from the parent.
   def readable_by?(user, _options = {})
-    resource.project.readable_by? user
+    return false unless resource.project
+
+    resource.project.readable_by?(user)
   end
 
 end
