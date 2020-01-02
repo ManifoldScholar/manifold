@@ -133,7 +133,7 @@ module ApiDocs
 
         data = {
           id: ::Types::Serializer::ID,
-          type: ::Types::String.meta(example: type),
+          type: ::Types::String.meta(example: type.camelize(:lower)),
           attributes: (::Types::Hash.schema(attributes) unless attributes.nil?),
           relationships: (::Types::Hash.schema(relationships) unless relationships.nil?),
           meta: ::Types::Serializer::Meta
