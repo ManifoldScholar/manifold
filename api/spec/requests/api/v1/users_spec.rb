@@ -18,6 +18,6 @@ RSpec.describe "User", type: :request do
                      parameters: [],
                      summary: "Returns the User that is currently logged in",
                      success_description: "Returns the User that is currently logged in",
-                     exclude: %w(404 403)
+                     exclude: %w(404 401)
   end
 end
