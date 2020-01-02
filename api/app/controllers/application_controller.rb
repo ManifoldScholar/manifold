@@ -79,34 +79,45 @@ class ApplicationController < ActionController::API
     render json: resource
   end
 
+  def authorization_error_status(symbol = false)
+    if current_user
+      return :forbidden if symbol
+
+      return 403
+    end
+    return :unauthorized if symbol
+
+    401
+  end
+
   def authority_forbidden_resource_class(error)
     vars = { resource: error.resource.to_s.downcase.pluralize, action: error.action }
     options = {
-      status: 403,
+      status: authorization_error_status,
       title: I18n.t("controllers.errors.forbidden.class.title", vars).titlecase,
       detail: I18n.t("controllers.errors.forbidden.class.detail", vars)
     }
-    render json: { errors: build_api_error(options) }, status: :forbidden
+    render json: { errors: build_api_error(options) }, status: authorization_error_status(true)
   end
 
   def authority_forbidden_resource_instance(error)
     vars = { resource: error.resource.to_s, action: error.action }
     options = {
-      status: 403,
+      status: authorization_error_status,
       title: I18n.t("controllers.errors.forbidden.instance.title", vars).titlecase,
       detail: I18n.t("controllers.errors.forbidden.instance.detail", vars)
     }
-    render json: { errors: build_api_error(options) }, status: :forbidden
+    render json: { errors: build_api_error(options) }, status: authorization_error_status(true)
   end
 
   def respond_with_forbidden(resource, action)
     vars = { resource: resource, action: action }
     options = {
-      status: 403,
+      status: authorization_error_status,
       title: I18n.t("controllers.errors.forbidden.instance.title", vars).titlecase,
       detail: I18n.t("controllers.errors.forbidden.instance.detail", vars)
     }
-    render json: { errors: build_api_error(options) }, status: :forbidden
+    render json: { errors: build_api_error(options) }, status: authorization_error_status(true)
   end
 
   def resource_not_found
