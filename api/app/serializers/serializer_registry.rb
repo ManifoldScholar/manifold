@@ -69,7 +69,7 @@ class SerializerRegistry
   end
 
   def current_user_is_creator?
-    typed_attribute :current_user_is_creator, ::Types::Bool do |object, params|
+    typed_attribute :current_user_is_creator, ::Types::Bool.meta(read_only: true) do |object, params|
       klass.calculate_current_user_is_creator?(object, params)
     end
   end
