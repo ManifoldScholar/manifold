@@ -74,4 +74,29 @@ RSpec.describe "Annotations", type: :request do
                         included_relationships: [:creator]
     end
   end
+
+  context "when managing flagging" do
+    let!(:annotation) { FactoryBot.create(:annotation, creator: admin) }
+    let!(:annotation_id) { annotation.id }
+    let!(:flag) { FactoryBot.create(:flag, creator: admin, flaggable: annotation) }
+
+    path "/annotations/{annotation_id}/relationships/flags" do
+      include_examples "an API create request",
+                        model: Annotation,
+                        authorized_user: :admin,
+                        request_body: false,
+                        url_parameters: [:annotation_id]
+
+      include_examples "an API destroy request",
+                        model: Annotation,
+                        authorized_user: :admin,
+                        url_parameters: [:annotation_id],
+                        # this route is a special case where a destroy does not take an ID
+                        parameters: [],
+                        exclude: %(404),
+                        delete_has_response_body: true,
+                        success_response_code: "200"
+
+    end
+  end
 end
