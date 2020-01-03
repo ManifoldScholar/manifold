@@ -8,46 +8,48 @@ RSpec.shared_context "authenticated request" do
     data.dig("meta", "authToken")
   end
 
+  def build_bearer_token(token)
+    "Bearer #{token}"
+  end
+
   def build_headers(token)
     {
-      "Authorization" => "Bearer #{token}",
+      "Authorization" => build_bearer_token(token),
       "content-type" => "application/json"
     }
   end
 
   def get_user_token(user_type)
-    case user_type
-    when :admin
-      admin_auth
-    when :author
-      author_auth
-    when :reader
-      reader_auth
-    when nil
-      nil
-    end
+    eval("#{user_type}_auth")
   end
 
-  let(:author_email) { "author@castironcoding.com" }
-  let(:reader_email) { "reader@castironcoding.com" }
-  let(:another_reader_email) { "another-reader@castironcoding.com" }
-  let(:admin_email) { "admin@castironcoding.com" }
+
   let(:password) { "testTest123" }
-  let(:author) { user = FactoryBot.create(:user, email: author_email, password: password, password_confirmation: password, role: Role::ROLE_PROJECT_AUTHOR) }
-  let(:reader) { user = FactoryBot.create(:user, email: reader_email, password: password, password_confirmation: password, role: Role::ROLE_READER) }
-  let(:another_reader) { user = FactoryBot.create(:user, email: another_reader_email, password: password, password_confirmation: password, role: Role::ROLE_READER) }
-  let(:admin) { user = FactoryBot.create(:user, email: admin_email, password: password, password_confirmation: password, role: Role::ROLE_ADMIN) }
-  let(:author_token) { token(author, password) }
-  let(:reader_token) { token(reader, password) }
-  let(:another_reader_token) { token(another_reader, password) }
-  let(:admin_token) { token(admin, password) }
-  let(:admin_headers) { build_headers(admin_token) }
-  let(:author_headers) { build_headers(author_token) }
-  let(:reader_headers) { build_headers(reader_token) }
-  let(:another_reader_headers) { build_headers(another_reader_token) }
   let(:anonymous_headers) { { "content-type" => "application/json" } }
 
-  let(:admin_auth) { "Bearer #{admin_token}" }
-  let(:author_auth) { "Bearer #{author_token}" }
-  let(:reader_auth) { "Bearer #{reader_token}" }
+  Role::ALLOWED_ROLES.each do |role|
+    let("#{role}_email".to_sym) { "#{role}@castironcoding.com"}
+    let(role.to_sym) {
+      FactoryBot.create(
+        :user,
+        email: eval("#{role}_email"),
+        password: password,
+        password_confirmation: password,
+        role: role
+      )
+    }
+    let("#{role}_token".to_sym)   { token(eval(role), password) }
+    let("#{role}_headers".to_sym) { build_headers(eval("#{role}_token")) }
+    let("#{role}_auth".to_sym)    { build_bearer_token(eval("#{role}_token")) }
+  end
+
+  let(:another_reader_email) { "another-reader@castironcoding.com" }
+  let(:another_reader) { FactoryBot.create(:user, email: another_reader_email, password: password, password_confirmation: password, role: Role::ROLE_READER) }
+  let(:another_reader_token) { token(another_reader, password) }
+  let(:another_reader_headers) { build_headers(another_reader_token) }
+
+  let(:author_email) { project_author_email }
+  let(:author) { project_author }
+  let(:author_headers) { project_author_headers }
+  let(:author_auth) { project_author_auth }
 end
