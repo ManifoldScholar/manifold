@@ -39,4 +39,31 @@ RSpec.describe "Comments", type: :request do
     include_examples "an API update request", model: Comment, authorized_user: :admin
     include_examples "an API destroy request", model: Comment, authorized_user: :admin
   end
+
+  describe "when taking the form of a flag" do
+    context "when attached to a comment" do
+      let!(:comment) { FactoryBot.create(:comment, creator: admin) }
+      let!(:comment_id) { comment.id }
+      let!(:flag) { FactoryBot.create(:flag, flaggable: comment, creator: admin) }
+
+      path "/comments/{comment_id}/relationships/flags" do
+        include_examples "an API create request",
+                          model: Comment,
+                          authorized_user: :admin,
+                          request_body: false,
+                          url_parameters: [:comment_id]
+
+        include_examples "an API destroy request",
+                          model: Comment,
+                          authorized_user: :admin,
+                          url_parameters: [:comment_id],
+                          # this route is a special case where a destroy does not take an ID
+                          parameters: [],
+                          exclude: %w(404),
+                          delete_has_response_body: true,
+                          success_response_code: "200"
+
+      end
+    end
+  end
 end
