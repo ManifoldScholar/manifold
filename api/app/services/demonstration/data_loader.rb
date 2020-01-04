@@ -23,6 +23,8 @@ module Demonstration
       reindex_records
     end
 
+    private
+
     def info(msg)
       @logger.info(Rainbow(msg).lightblue)
     end
@@ -114,8 +116,6 @@ module Demonstration
       info("Events reindexed")
     end
     # rubocop:enable Metrics/AbcSize
-
-    private
 
     def create_admin_user
       u = User.find_or_create_by(email: "admin@manifold.app")
