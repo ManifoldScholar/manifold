@@ -118,7 +118,6 @@ GEM
       activerecord (>= 4.2.10)
       with_advisory_lock (>= 4.0.0)
     coderay (1.1.2)
-    colorize (0.8.1)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     content_disposition (1.0.0)
@@ -658,7 +657,6 @@ DEPENDENCIES
   classy_enum (~> 4.0.0)
   cleanroom
   closure_tree (~> 7.0)
-  colorize (~> 0.8.0)
   crass (~> 1.0.5)
   csl-styles (~> 1.0)
   css_parser (~> 1.0)
