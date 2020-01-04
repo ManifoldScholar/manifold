@@ -7,35 +7,35 @@ module Ingestions
 
       def significant(key, vars = {})
         msg = I18n.t(key, vars)
-        the_logger.info(msg.green)
+        the_logger.info(Rainbow(msg).green)
       end
 
       def info(key, vars = {})
         msg = I18n.t(key, vars)
-        the_logger.info(msg.yellow)
+        the_logger.info(Rainbow(msg).blue)
       end
 
       def debug_string(msg)
-        the_logger.debug(msg.light_cyan)
+        the_logger.debug(Rainbow(msg).lightcyan)
       end
 
       def debug(key, vars = {})
         msg = I18n.t(key, vars)
-        the_logger.debug(msg.light_cyan)
+        the_logger.debug(Rainbow(msg).lightcyan)
       end
 
       def error(key, vars = {})
         msg = I18n.t(key, vars)
-        the_logger.error(msg.red)
+        the_logger.error(Rainbow(msg).red)
       end
 
       def error_string(msg)
-        the_logger.error(msg.red)
+        the_logger.error(Rainbow(msg).red)
       end
 
       def warn(key, vars = {})
         msg = I18n.t(key, vars)
-        the_logger.warn(msg.light_red)
+        the_logger.warn(Rainbow(msg).yellow)
       end
 
       def log_structure(branch, preface, indent = 0)

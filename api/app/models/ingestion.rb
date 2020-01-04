@@ -1,4 +1,3 @@
-require "colorized_string"
 require "stringio"
 
 # Connects texts to resources that were sources for text sections during ingestion
@@ -51,7 +50,7 @@ class Ingestion < ApplicationRecord
   %w(DEBUG INFO WARN ERROR FATAL UNKNOWN).each do |severity|
     class_eval <<-EOT, __FILE__, __LINE__ + 1
       def #{severity.downcase}(message = nil, progname = nil, &block)
-        add("#{severity}", ColorizedString.new(message).uncolorize, progname, &block)
+        add("#{severity}", message, progname, &block)
       end
     EOT
   end

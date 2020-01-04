@@ -20,7 +20,7 @@ class Seed
   def self.make_feature(logger, creator)
     return if Feature.exists?
 
-    logger.info("Creating placeholder feature".green)
+    logger.info(Rainbow("Creating placeholder feature").lightblue)
     # rubocop:disable Metrics/LineLength
     Feature.create(
       header: "Welcome to Manifold. An Intuitive, collaborative, open-source platform for scholarly publishing",
@@ -38,7 +38,7 @@ class Seed
   end
 
   def self.maybe_update_settings(logger)
-    logger.info("Potentially updating settings from the environment".green)
+    logger.info(Rainbow("Potentially updating settings from the environment").lightblue)
     Settings.potentially_update_from_environment!
   end
 
@@ -56,9 +56,9 @@ class Seed
 
     User.fetch_by_classification(classification.to_s) do |created, user|
       if created
-        logger.info "Creating #{classification.text} user: #{user.email}".green
+        logger.info Rainbow("Creating #{classification.text} user: #{user.email}").lightblue
       else
-        logger.info "#{classification.text} user exists: #{user.id}".green
+        logger.info Rainbow("#{classification.text} user exists: #{user.id}").lightblue
       end
     end
   end

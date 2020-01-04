@@ -23,6 +23,14 @@ module Demonstration
       reindex_records
     end
 
+    def info(msg)
+      @logger.info(Rainbow(msg).lightblue)
+    end
+
+    def warn(msg)
+      @logger.info(Rainbow(msg).yellow)
+    end
+
     def cli_user
       @cli_user ||= User.cli_user
     end
@@ -47,7 +55,7 @@ module Demonstration
                  Favorite Flag ProjectSubject Stylesheet Subject TwitterQuery
                  UpgradeResult)
       clear.each do |model_name|
-        @logger.info("Truncate #{model_name} table".red)
+        warn("Truncate #{model_name} table")
         model_name.constantize.destroy_all
       end
     end
@@ -63,7 +71,7 @@ module Demonstration
         u.password = "manifold"
         u.password_confirmation = "manifold"
         u.save
-        @logger.info("Creating reader user: #{u.email}".green)
+        info("Creating reader user: #{u.email}")
       end
     end
 
@@ -74,7 +82,7 @@ module Demonstration
           nav_title: title.capitalize,
           body: "This is the #{title.capitalize} page"
         )
-        @logger.info("Creating page: #{page.title}".green)
+        info("Creating page: #{page.title}")
       end
     end
 
@@ -87,23 +95,23 @@ module Demonstration
                                                     homepage: true,
                                                     icon: "lamp",
                                                     creator: cli_user)
-      @logger.info("Creating project collection: #{project_collection.title}".green)
+      info("Creating project collection: #{project_collection.title}")
     end
 
     # rubocop:disable Metrics/AbcSize
     def reindex_records
       Project.reindex
-      @logger.info("Projects reindexed".green)
+      info("Projects reindexed")
       User.reindex
-      @logger.info("Users reindexed".green)
+      info("Users reindexed")
       Maker.reindex
-      @logger.info("Makers reindexed".green)
+      info("Makers reindexed")
       Resource.reindex
-      @logger.info("Resources reindexed".green)
+      info("Resources reindexed")
       ResourceCollection.reindex
-      @logger.info("ResourceCollections reindexed".green)
+      info("ResourceCollections reindexed")
       Event.reindex
-      @logger.info("Events reindexed".green)
+      info("Events reindexed")
     end
     # rubocop:enable Metrics/AbcSize
 
@@ -117,7 +125,7 @@ module Demonstration
       u.password_confirmation = "manifold"
       u.role = :admin
       u.save
-      @logger.info("Creating admin user: #{u.email}".green)
+      info("Creating admin user: #{u.email}")
     end
   end
 end
