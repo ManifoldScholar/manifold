@@ -62,6 +62,14 @@ module ApiDocs
         I18n.t("swagger.#{@action}.success", type: human_resource_name, attribute: "ID")
       end
 
+      def success_response_code
+        return @options[:success_response_code] if @options[:success_response_code]
+
+        return "204" if action == :destroy
+        return "201" if action == :create
+        "200"
+      end
+
       def model
         @options[:model]
       end

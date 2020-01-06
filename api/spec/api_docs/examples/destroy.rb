@@ -12,7 +12,7 @@ shared_examples_for "an API destroy request" do |options|
     security [apiKey: []]
     tags api_spec_helper.tags
 
-    response "204", api_spec_helper.success_description, focus: api_spec_helper.focus do
+    response api_spec_helper.success_response_code, api_spec_helper.success_description, focus: api_spec_helper.focus do
       let(:Authorization) { get_user_token(api_spec_helper.authorized_user) } if api_spec_helper.requires_auth?
       run_test!
     end
