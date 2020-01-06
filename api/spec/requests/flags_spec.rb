@@ -51,7 +51,7 @@ RSpec.describe "Flags API", type: :request do
         expect(api_response["data"]["id"]).to eq comment.id
       end
 
-      it("saves the flag on the comment") do
+      it("removes the flag on the comment") do
         flag
         delete path, headers: headers
         reloaded_comment = Comment.find(comment.id)
