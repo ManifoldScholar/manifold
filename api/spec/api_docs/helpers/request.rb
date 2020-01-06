@@ -94,6 +94,10 @@ module ApiDocs
         @options[:resource_name_plural] || resource_name.pluralize
       end
 
+      def delete_has_response_body?
+        !!@options[:delete_has_response_body]
+      end
+
       def resource_tag
         resource_name.pluralize.humanize.titleize
       end
