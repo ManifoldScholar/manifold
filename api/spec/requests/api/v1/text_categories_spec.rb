@@ -8,7 +8,7 @@ RSpec.describe "Text Categories", type: :request do
 
     path "/projects/{project_id}/relationships/text_categories" do
       include_examples "an API index request", model: Category, resource_name: "text_category", tags: "Project Text Categories", url_parameters: [:project_id]
-      include_examples "an API create request", model: Category, resource_name: "text_category", tags: "Project Text Categories", url_parameters: [:project_id], auth_type: :admin
+      include_examples "an API create request", model: Category, resource_name: "text_category", tags: "Project Text Categories", url_parameters: [:project_id], authorized_user: :admin
     end
     path "/projects/{project_id}/relationships/text_categories/{id}" do
       include_examples "an API show request",

@@ -13,11 +13,11 @@ RSpec.describe "Resource Collections", type: :request do
     include_examples "an API update request",
                       model: ResourceCollection,
                       included_relationships: included_relationships,
-                      auth_type: :admin
+                      authorized_user: :admin
 
     include_examples "an API destroy request",
                       model: ResourceCollection,
-                      auth_type: :admin
+                      authorized_user: :admin
   end
 
   context "for a project" do
@@ -29,7 +29,7 @@ RSpec.describe "Resource Collections", type: :request do
                         model: ResourceCollection,
                         tags: "Projects",
                         url_parameters: [:project_id],
-                        auth_type: :admin
+                        authorized_user: :admin
 
       include_examples "an API index request",
                         model: ResourceCollection,

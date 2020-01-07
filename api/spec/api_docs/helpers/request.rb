@@ -20,12 +20,14 @@ module ApiDocs
         !!@options[:focus]
       end
 
-      def with_auth
-        !!@options[:auth_type]
+      def requires_auth?
+        !!@options[:authorized_user]
       end
 
-      def auth_type
-        @options[:auth_type]
+      def authorized_user
+        auth = @options[:authorized_user]
+        raise "authorized_user requires inputs that can be converted to a string" unless auth.respond_to?(:to_s)
+        auth.to_s
       end
 
       def summary
@@ -69,7 +71,7 @@ module ApiDocs
       end
 
       def exclude_401
-        !with_auth || (@options[:exclude]&.include?("401"))
+        !requires_auth? || (@options[:exclude]&.include?("401"))
       end
 
       def factory
