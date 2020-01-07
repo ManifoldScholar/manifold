@@ -14,6 +14,9 @@ class ProjectExport < ApplicationRecord
 
   jsonb_accessor :metadata, files: [:indifferent_hash, array: true, default: []]
 
+  delegate :extension, to: :asset, prefix: true
+  delegate :id, :title, :slug, to: :project, prefix: true
+
   before_validation :populate_files!
 
   validates :fingerprint, uniqueness: { scope: %i[project_id export_kind] }
@@ -39,6 +42,21 @@ class ProjectExport < ApplicationRecord
     self.files = asset_files fresh: true
 
     save!
+  end
+
+  # @return [ExportStrategies::TargetNameFormatter]
+  def to_target_name_formatter
+    ExportStrategies::TargetNameFormatter.new to_target_name_formatter_options
+  end
+
+  # @return [{ Symbol => Object }]
+  def to_target_name_formatter_options
+    slice_with(
+      :project_id, :project_slug,
+      export_asset_extension: :asset_extension,
+      export_id: :id,
+      project_name: :project_title
+    )
   end
 
   class << self

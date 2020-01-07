@@ -27,6 +27,8 @@ module Types
 
   HTTP_METHOD = Types::Coercible::Symbol.enum(:get, :head, :post, :put, :delete)
 
+  METHOD_NAMES = Types::Coercible::Array.of(Types::Coercible::Symbol)
+
   MONADIC_RESULT = Instance(Dry::Monads::Result).constructor do |v|
     case v
     when Dry::Monads::Result then v
@@ -94,6 +96,9 @@ module Types
   # A type that matches `{ String => String }`
   STRING_MAP = Types::Hash.map(Types::String, Types::String)
 
+  # A type that matches `{ Symbol => #to_sym }`
+  SYMBOL_MAP = Types::Hash.map(Types::Symbol, Types::Coercible::Symbol)
+
   ENSURE_EXISTING_PATH = ->(path) do
     case path
     when NON_BLANK_STRING
@@ -119,6 +124,8 @@ module Types
 
   class FlexibleStruct < Dry::Struct
     extend Memoist
+
+    include Concerns::Sliceable
 
     transform_keys(&:to_sym)
 

@@ -16,4 +16,6 @@
 # end
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.uncountable %w(me)
+  inflect.acronym "SFTP"
+  inflect.acronym "SSH"
 end

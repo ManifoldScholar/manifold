@@ -43,6 +43,8 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :export_targets
+      resources :project_exportations, only: [:index, :show, :create]
       resources :features
       resources :subjects
       resources :categories, except: [:create, :index]

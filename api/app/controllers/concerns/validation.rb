@@ -354,6 +354,43 @@ module Validation
     param_config = structure_params(attributes: attributes)
     params.permit(param_config)
   end
+
+  def export_target_params
+    params.require(:data)
+
+    attributes = [
+      :name, :strategy,
+      {
+        configuration: [
+          :target_name_format,
+          {
+            sftp_key: %i[host port username private_key],
+            sftp_password: %i[host port username password]
+          }
+        ]
+      }
+    ]
+
+    relationships = []
+
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+
+    params.permit(param_config)
+  end
+
+  def project_exportation_params
+    params.require(:data)
+
+    attributes = [
+      :project_id, :export_target_id
+    ]
+
+    relationships = [:project, :export_target]
+
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+
+    params.permit(param_config)
+  end
   # rubocop:enable MethodLength
 
   def maker_params
