@@ -180,6 +180,63 @@ module Patches
 
     # @!group Statesman Methods
 
+    # Ensure that a given model can attempt to transition to a new state.
+    #
+    # @param [Symbol] target_state the name of the Statesman target_state
+    # @param [ApplicationRecord, Symbol] on the model or input to check the target_state availability
+    # @param [Symbol] error
+    # @param [{ Symbol => Object }] options
+    # @option options [Symbol, nil] guard_target
+    # @return [Boolean]
+    def ensure_transitionable!(target_state, on:, error: :cannot_transition, **options)
+      model = on.is_a?(Symbol) ? __send__(on) : on
+
+      return true if model.can_transition_to? target_state
+
+      guard_target = options.fetch :guard_target do
+        on.is_a?(Symbol) ? on : error_target_for(model, default: :base)
+      end
+
+      errors.add guard_target, error, target_state: target_state
+
+      halt!
+    end
+
+    # Try to transition a `Statesman` target_state on a given model or input / attribute.
+    #
+    # @see #ensure_transitionable!
+    # @param [Symbol] target_state the name of the Statesman target_state
+    # @param [ApplicationRecord, Symbol] on the model or input that should have a transitioned target_state
+    # @param [Boolean] check_if_transitionable determines if {#ensure_transitionable!} should be called
+    # @param [Symbol] error The i18n message key to use
+    # @param [Symbol] guard_error The error symbol that will be passed to {#ensure_transitionable!}, if it is called
+    # @param [Hash] metadata
+    # @param [{ Symbol => Object }] options
+    # @option options [Symbol, nil] error_target
+    # @option options [Symbol, nil] guard_target
+    # @return [Boolean]
+    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/ParameterLists
+    def transition_to!(target_state, on:, assimilate: false, check_if_transitionable: true, error: :something_went_wrong, guard_error: :cannot_transition, metadata: {}, **options)
+      model = on.is_a?(Symbol) ? __send__(on) : on
+
+      ensure_transitionable!(target_state, on: on, error: guard_error, **options) if check_if_transitionable
+
+      return model if model.transition_to target_state, metadata
+
+      error_target = options.fetch :error_target do
+        on.is_a?(Symbol) && error != :something_went_wrong ? on : :base
+      end
+
+      if assimilate && model.errors.any?
+        assimilate_errors! model
+      else
+        errors.add error_target, error
+      end
+
+      halt!
+    end
+    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/ParameterLists
+
     # Ensure that a given model can attempt to trigger an event, purely based on its current state.
     #
     # @param [Symbol] event the name of the Statesman event
