@@ -58,4 +58,17 @@ RSpec.describe "Projects API", type: :request do
 
     include_examples "an API create request", model: Project, authorized_user: :admin
   end
+
+  context "my favorite projects" do
+    let!(:project) { FactoryBot.create(:project) }
+    let!(:favorite) { FactoryBot.create(:favorite, user: admin, favoritable: project) }
+
+    path "/me/relationships/favorite_projects" do
+      include_examples "an API index request",
+                        model: Project,
+                        summary: "Returns all Projects that the user is following",
+                        authorized_user: :admin,
+                        paginated: true
+    end
+  end
 end
