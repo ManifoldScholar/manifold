@@ -25,10 +25,10 @@ RSpec.describe "Projects API", type: :request do
 
     include_examples "an API update request",
                       model: Project,
-                      auth_type: :admin,
+                      authorized_user: :admin,
                       included_relationships: included_relationships
 
-    include_examples "an API destroy request", model: Project, auth_type: :admin
+    include_examples "an API destroy request", model: Project, authorized_user: :admin
   end
 
   path "/projects" do
@@ -56,6 +56,6 @@ RSpec.describe "Projects API", type: :request do
       { name: "filter[standalone_mode_enforced]", in: :query, type: :boolean }
     ], included_relationships: [:creators]
 
-    include_examples "an API create request", model: Project, auth_type: :admin
+    include_examples "an API create request", model: Project, authorized_user: :admin
   end
 end

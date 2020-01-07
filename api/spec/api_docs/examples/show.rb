@@ -17,18 +17,18 @@ shared_examples_for "an API show request" do |options|
     description api_spec_helper.response_description if api_spec_helper.response_description?
     produces api_spec_helper.content_type
     consumes api_spec_helper.content_type
-    security [apiKey: []] if api_spec_helper.with_auth
+    security [apiKey: []] if api_spec_helper.requires_auth?
     tags api_spec_helper.tags
 
     response "200", api_spec_helper.success_description, focus: api_spec_helper.focus do
-      let(:Authorization) { get_user_token(api_spec_helper.auth_type) }
+      let(:Authorization) { get_user_token(api_spec_helper.authorized_user) } if api_spec_helper.requires_auth?
       schema api_spec_helper.response
       run_test!
     end
 
     unless api_spec_helper.exclude_404
       response "404", I18n.t("swagger.not_found"), focus: api_spec_helper.focus do
-        let(:Authorization) { get_user_token(api_spec_helper.auth_type) }
+        let(:Authorization) { get_user_token(api_spec_helper.authorized_user) } if api_spec_helper.requires_auth?
         let(:id) { "not-an-id" }
         run_test!
       end
