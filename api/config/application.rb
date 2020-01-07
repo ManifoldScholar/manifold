@@ -83,6 +83,16 @@ module ManifoldApi
       "#{config.root}/app/enums"
     ]
 
+    config.generators do |g|
+      g.assets false
+      g.helper false
+      g.stylesheets false
+      g.view_specs false
+      g.integration_specs false
+
+      g.orm :active_record, primary_key_type: :uuid
+    end
+
     config.active_job.queue_adapter = :sidekiq
     config.cache_store = :redis_store, ManifoldEnv.redis.namespaced_url("cache")
   end
