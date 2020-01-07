@@ -133,6 +133,7 @@ module ApiDocs
         resource_data(
           attributes: (filter_response_attributes(all_attributes) if all_attributes?),
           relationships: (full_relationships if full_relationships?),
+          full_register: true
         )
       end
 
@@ -159,9 +160,9 @@ module ApiDocs
       ############# HELPERS ##############
       ####################################
 
-      def resource_data(attributes: nil, relationships: nil)
+      def resource_data(attributes: nil, relationships: nil, full_register: false)
         metadata_handler.validate_metadata_attributes!
-        attributes = attributes.merge(metadata_handler.response_metadata) if metadata_handler.metadata?
+        attributes = attributes.merge(metadata_handler.response_metadata) if metadata_handler.metadata? && full_register
 
         data = {
           id: id_type,
