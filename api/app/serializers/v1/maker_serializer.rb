@@ -5,15 +5,14 @@ module V1
 
     abilities
 
-    typed_attribute :id, NilClass
-    typed_attribute :first_name, NilClass
-    typed_attribute :last_name, NilClass
-    typed_attribute :middle_name, NilClass
-    typed_attribute :display_name, NilClass
-    typed_attribute :full_name, NilClass
-    typed_attribute :suffix, NilClass
-    typed_attribute :prefix, NilClass
-    typed_attribute :avatar_styles, Types::Hash
+    typed_attribute :first_name, Types::String.meta(description: "Requires at least one of these fields")
+    typed_attribute :last_name, Types::String.meta(description: "Requires at least one of these fields")
+    typed_attribute :middle_name, Types::String.optional
+    typed_attribute :display_name, Types::String.optional
+    typed_attribute :full_name, Types::String
+    typed_attribute :suffix, Types::String.optional
+    typed_attribute :prefix, Types::String.optional
+    typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
 
   end
 end
