@@ -199,6 +199,17 @@ ActiveRecord::Schema.define(version: 2019_12_29_200459) do
     t.index ["twitter_query_id"], name: "index_events_on_twitter_query_id"
   end
 
+  create_table "export_targets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "strategy", default: "unknown", null: false
+    t.text "name", null: false
+    t.text "slug", null: false
+    t.text "configuration_ciphertext", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_export_targets_on_slug", unique: true
+    t.index ["strategy"], name: "index_export_targets_on_strategy"
+  end
+
   create_table "favorites", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "favoritable_id"
     t.string "favoritable_type"
@@ -428,6 +439,35 @@ ActiveRecord::Schema.define(version: 2019_12_29_200459) do
     t.index ["homepage_end_date"], name: "index_project_collections_on_homepage_end_date"
     t.index ["homepage_start_date"], name: "index_project_collections_on_homepage_start_date"
     t.index ["slug"], name: "index_project_collections_on_slug", unique: true
+  end
+
+  create_table "project_exportation_transitions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "to_state", null: false
+    t.jsonb "metadata", default: {}
+    t.integer "sort_key", null: false
+    t.uuid "project_exportation_id", null: false
+    t.boolean "most_recent", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_exportation_id", "most_recent"], name: "index_project_exportation_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["project_exportation_id", "sort_key"], name: "index_project_exportation_transitions_parent_sort", unique: true
+    t.index ["project_exportation_id"], name: "index_project_exportation_transitions_on_project_exportation_id"
+  end
+
+  create_table "project_exportations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "project_id", null: false
+    t.uuid "export_target_id", null: false
+    t.uuid "project_export_id"
+    t.uuid "user_id"
+    t.datetime "exported_at"
+    t.jsonb "logs", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["export_target_id"], name: "index_project_exportations_on_export_target_id"
+    t.index ["project_export_id"], name: "index_project_exportations_on_project_export_id"
+    t.index ["project_id", "export_target_id"], name: "index_project_exportations_targeted_projects"
+    t.index ["project_id"], name: "index_project_exportations_on_project_id"
+    t.index ["user_id"], name: "index_project_exportations_on_user_id"
   end
 
   create_table "project_exports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -970,6 +1010,11 @@ ActiveRecord::Schema.define(version: 2019_12_29_200459) do
   add_foreign_key "ingestions", "texts", on_delete: :nullify
   add_foreign_key "ingestions", "users", column: "creator_id", on_delete: :restrict
   add_foreign_key "notification_preferences", "users", on_delete: :cascade
+  add_foreign_key "project_exportation_transitions", "project_exportations", on_delete: :cascade
+  add_foreign_key "project_exportations", "export_targets", on_delete: :cascade
+  add_foreign_key "project_exportations", "project_exports", on_delete: :nullify
+  add_foreign_key "project_exportations", "projects", on_delete: :cascade
+  add_foreign_key "project_exportations", "users", on_delete: :nullify
   add_foreign_key "project_exports", "projects", on_delete: :restrict
   add_foreign_key "reading_group_memberships", "reading_groups", on_delete: :cascade
   add_foreign_key "reading_group_memberships", "users", on_delete: :cascade
