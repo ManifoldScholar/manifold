@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require_relative "../config/environment"
+
+require_relative "../lib/test_sftp/server"
+
+begin
+  instance = TestSFTP::Server.fork_start! verbose: true
+
+  server_pid = instance.server_pid
+
+  warn "Started SFTP Server: #{server_pid}"
+  warn "\t directory: #{instance.directory}"
+  warn "\t username: #{instance.username}"
+  warn "\t password: #{instance.password}"
+  warn "\t port: #{instance.port}"
+  warn "\n\n\t #{instance.connect_command}\n"
+
+  Process.wait server_pid
+
+  warn "Server closed"
+rescue Interrupt
+  warn "\n\nCaught interrupt, killing server\n\n"
+
+  Process.kill "TERM", server_pid
+
+  warn "\n\nServer closed"
+end

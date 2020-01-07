@@ -7,12 +7,14 @@ AllCops:
       - 'bin/**/*'
       - 'spec/**/*'
       - 'lib/patches/**/*'
+      - 'lib/test_sftp/**/*'
       - 'lib/templates/**/*'
       - 'api/vendor/**/*'
       - 'api/db/**/*'
       - 'api/bin/**/*'
       - 'api/spec/**/*'
       - 'api/lib/patches/**/*'
+      - 'api/lib/test_sftp/**/*'
       - 'api/lib/templates/**/*'
 
 Style/StringLiterals:

@@ -542,6 +542,8 @@ GEM
       activemodel (>= 4.1)
       elasticsearch (>= 1)
       hashie
+    sftp_server (0.6.0)
+      ffi (~> 1.9)
     shrine (2.17.1)
       content_disposition (~> 1.0)
       down (~> 4.1)
@@ -763,6 +765,7 @@ DEPENDENCIES
   rubyzip (~> 1.3.0)
   scenic (~> 1.4)
   searchkick (~> 2.0)
+  sftp_server
   shrine (~> 2.17.0)
   shrine-memory
   shrine-tus (~> 1.2)
