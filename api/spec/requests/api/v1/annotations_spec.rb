@@ -3,8 +3,8 @@ require "swagger_helper"
 RSpec.describe "Annotations", type: :request do
 
   path "/annotations/{id}" do
-    include_examples "an API update request", model: Annotation, auth_type: :admin
-    include_examples "an API destroy request", model: Annotation, auth_type: :admin
+    include_examples "an API update request", model: Annotation, authorized_user: :admin
+    include_examples "an API destroy request", model: Annotation, authorized_user: :admin
   end
 
   describe "for a text section" do
@@ -22,7 +22,7 @@ RSpec.describe "Annotations", type: :request do
                        model: Annotation,
                        url_parameters: [:text_section_id],
                        tags: "Text Sections",
-                       auth_type: :admin
+                       authorized_user: :admin
     end
 
     path "/text_sections/{text_section_id}/relationships/annotations/{id}" do
@@ -30,7 +30,7 @@ RSpec.describe "Annotations", type: :request do
                        model: Annotation,
                        url_parameters: [:text_section_id],
                        tags: "Text Sections",
-                       auth_type: :admin
+                       authorized_user: :admin
     end
   end
 
@@ -46,7 +46,7 @@ RSpec.describe "Annotations", type: :request do
 
       include_examples "an API index request",
                         model: Annotation,
-                        auth_type: :admin,
+                        authorized_user: :admin,
                         included_relationships: [:creator],
                         additional_parameters: [
                           {
