@@ -3,7 +3,7 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    typed_attribute :role, NilClass
+    typed_attribute :role, Types::String
     typed_belongs_to :maker
     typed_belongs_to :collaboratable, polymorphic: true
 
