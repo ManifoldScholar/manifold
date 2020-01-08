@@ -147,6 +147,10 @@ module ApiDocs
         attributes.except(*write_only_attributes)
       end
 
+      def id_type
+        const_defined?(:ID_TYPE) ? self::ID_TYPE : ::Types::Serializer::ID
+      end
+
       ####################################
       ############# HELPERS ##############
       ####################################
@@ -156,7 +160,7 @@ module ApiDocs
         attributes = attributes.merge(metadata_handler.response_metadata) if metadata_handler.metadata?
 
         data = {
-          id: ::Types::Serializer::ID,
+          id: id_type,
           type: ::Types::String.meta(example: type.camelize(:lower)),
           attributes: (::Types::Hash.schema(attributes) unless attributes.nil?),
           relationships: (::Types::Hash.schema(relationships) unless relationships.nil?),
