@@ -82,6 +82,12 @@ module ApiDocs
         !requires_auth? || (@options[:exclude]&.include?("401"))
       end
 
+      def request_body?
+        return options[:request_body] if options.key?(:request_body)
+        return options[:parameters].any? { |hash| hash[:in] == :body} if options.key?(:parameters)
+        true
+      end
+
       def factory
         @options[:factory] || model.name.underscore
       end
@@ -123,7 +129,13 @@ module ApiDocs
           destroy: default_destroy_parameters,
           show: default_show_parameters
         }
+
+        defaults[@action] = remove_request_body(defaults[@action]) unless request_body?
         defaults[@action] || []
+      end
+
+      def remove_request_body(defaults)
+        defaults.reject { |parameter| parameter[:in] == :body }
       end
 
       def parameters
