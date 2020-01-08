@@ -14,7 +14,7 @@ shared_examples_for "an API create request" do |options|
 
     description api_spec_helper.response_description if api_spec_helper.response_description?
     produces api_spec_helper.content_type
-    consumes api_spec_helper.content_type
+    consumes api_spec_helper.content_type if api_spec_helper.request_body?
     security [apiKey: []] if api_spec_helper.requires_auth?
     tags api_spec_helper.tags
 
