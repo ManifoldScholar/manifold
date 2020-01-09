@@ -83,6 +83,26 @@ RSpec.describe ::ApiDocumentation::DryTypesParser do
           described_class.convert(types['string'].meta(foo: true))
         ).to eq described_class.convert(types['string'])
       end
+
+      describe "when noting uniqueness" do
+        it 'should create a description if none exists' do
+          expect(
+            described_class.convert(types['string'].meta(unique: true))
+          ).to eq({
+            type: 'string',
+            description: 'Must be unique.'
+          })
+        end
+
+        it 'should append to an existing description' do
+          expect(
+            described_class.convert(types['string'].meta(unique: true, description: "Test."))
+          ).to eq({
+            type: 'string',
+            description: 'Test. Must be unique.'
+          })
+        end
+      end
     end
 
     describe 'complex types' do
