@@ -5,25 +5,24 @@ module V1
 
     abilities
 
-    typed_attribute :name, NilClass
-    typed_attribute :privacy, NilClass
-    typed_attribute :invitation_code, NilClass
-    typed_attribute :notify_on_join, NilClass
-    typed_attribute :memberships_count, NilClass
-    typed_attribute :annotations_count, NilClass
-    typed_attribute :highlights_count, NilClass
-    typed_attribute :created_at, NilClass
-    typed_attribute :current_user_role, NilClass
-    typed_attribute :creator_id, NilClass
-    typed_attribute :all_annotations_count, NilClass do |object, _params|
+    typed_attribute :name, Types::String
+    typed_attribute :privacy, Types::String.enum("public", "private", "anonymous")
+    typed_attribute :invitation_code, Types::String.meta(example: "E80RSYY6", unique: true)
+    typed_attribute :notify_on_join, Types::Bool
+    typed_attribute :memberships_count, Types::Integer.meta(read_only: true)
+    typed_attribute :annotations_count, Types::Integer.meta(read_only: true)
+    typed_attribute :highlights_count, Types::Integer.meta(read_only: true)
+    typed_attribute :created_at, Types::DateTime.meta(read_only: true)
+    typed_attribute :creator_id, Types::Serializer::ID.meta(read_only: true)
+    typed_attribute :all_annotations_count, Types::Integer.meta(read_only: true) do |object, _params|
       object.annotations_count + object.highlights_count
     end
 
-    typed_attribute :current_user_role, NilClass do |object, params|
+    typed_attribute :current_user_role, Types::String.enum("moderator", "member").meta(read_only: true) do |object, params|
       calculate_current_user_is_creator?(object, params) ? "moderator" : "member"
     end
 
-    typed_attribute :invitation_url, NilClass do |object, _params|
+    typed_attribute :invitation_url, Types::Serializer::URL.meta(read_only: true) do |object, _params|
       ClientURL.call(:join_reading_group, invitation_code: object.invitation_code)
     end
 
