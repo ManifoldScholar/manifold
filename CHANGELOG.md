@@ -2,6 +2,8 @@
 
 ## Unreleased - TBD
 
+## [v4.0.2-rc.1](https://github.com/ManifoldScholar/manifold/tree/v4.0.2-rc.1) - 12/04/19
+
 ### Features
 
 -  Relace clockwork and expose background dashboards [#2460](https://github.com/ManifoldScholar/manifold/pull/2460) ([zdavis](https://api.github.com/users/zdavis))
@@ -13,8 +15,8 @@
 ### Bugs
 
 -  Correctly serialize search result creator [#2465](https://github.com/ManifoldScholar/manifold/pull/2465) ([zdavis](https://api.github.com/users/zdavis))
--  Restore SSR of full text in reader [#2464](https://github.com/ManifoldScholar/manifold/pull/2464) ([zdavis](https://api.github.com/users/zdavis))
 -  Remove pagination from BE PC containers [#2463](https://github.com/ManifoldScholar/manifold/pull/2463) ([zdavis](https://api.github.com/users/zdavis))
+-  Restore SSR of full text in reader [#2464](https://github.com/ManifoldScholar/manifold/pull/2464) ([zdavis](https://api.github.com/users/zdavis))
 -  Rescue file not found exception in v3 upgrade [#2457](https://github.com/ManifoldScholar/manifold/pull/2457) ([zdavis](https://api.github.com/users/zdavis))
 -  Add workaround for Windows CSV upload bug [#2423](https://github.com/ManifoldScholar/manifold/pull/2423) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Improve resource and project sorting [#2413](https://github.com/ManifoldScholar/manifold/pull/2413) ([zdavis](https://api.github.com/users/zdavis))
@@ -32,9 +34,9 @@
 -  A11y improvements to BE project thumbnail components [#2442](https://github.com/ManifoldScholar/manifold/pull/2442) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Miscellaneous accessibility fixes [#2403](https://github.com/ManifoldScholar/manifold/pull/2403) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Additional contrast improvements [#2401](https://github.com/ManifoldScholar/manifold/pull/2401) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix color contrast to meet WCAG AA guidelines [#2383](https://github.com/ManifoldScholar/manifold/pull/2383) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Fix FE Project Collections placeholder [#2388](https://github.com/ManifoldScholar/manifold/pull/2388) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Fix focusability of event tiles [#2384](https://github.com/ManifoldScholar/manifold/pull/2384) ([dananjohnson](https://api.github.com/users/dananjohnson))
--  Fix color contrast to meet WCAG AA guidelines [#2383](https://github.com/ManifoldScholar/manifold/pull/2383) ([dananjohnson](https://api.github.com/users/dananjohnson))
 
 ## [v4.0.1](https://github.com/ManifoldScholar/manifold/tree/v4.0.1) - 09/29/19
 
