@@ -18,10 +18,10 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v1
 
-      - name: "Set up Ruby 2.4"
+      - name: "Set up Ruby 2.6"
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.4.x
+          ruby-version: 2.6.x
 
       - name: "Install Node"
         uses: actions/setup-node@v1
@@ -101,10 +101,10 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v1
 
-      - name: "Set up Ruby 2.4"
+      - name: "Set up Ruby 2.6"
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.4.x
+          ruby-version: 2.6.x
 
       - name: "Install PostgreSQL 11 client"
         run: |
@@ -150,10 +150,10 @@ jobs:
     - name: "Checkout code"
       uses: actions/checkout@v1
 
-    - name: "Set up Ruby 2.4"
+    - name: "Set up Ruby 2.6"
       uses: actions/setup-ruby@v1
       with:
-        ruby-version: 2.4.x
+        ruby-version: 2.6.x
 
     - name: "Install PostgreSQL 11 client"
       run: |
