@@ -2,7 +2,9 @@ import React, { Component } from "react";
 
 export default function withPropsChecker(WrappedComponent) {
   return class PropsChecker extends Component {
-    componentWillReceiveProps(nextProps) {
+    /* eslint-disable camelcase */
+    UNSAFE_componentWillReceiveProps(nextProps) {
+      /* eslint-enable camelcase */
       Object.keys(nextProps)
         .filter(key => {
           return nextProps[key] !== this.props[key];

@@ -1,10 +1,13 @@
-import PasswordForgot from "../PasswordForgot";
+import { PasswordForgotContainer } from "../PasswordForgot";
 
 describe("global/components/sign-in-up/PasswordForgot", () => {
   def("handleViewChange", () => jest.fn());
 
   def("root", () => (
-    <PasswordForgot dispatch={$dispatch} handleViewChange={$handleViewChange} />
+    <PasswordForgotContainer
+      dispatch={$dispatch}
+      handleViewChange={$handleViewChange}
+    />
   ));
   def("wrapper", () => mount($withApp($root)));
 

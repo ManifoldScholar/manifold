@@ -43,6 +43,7 @@ function handleStateChangeOnClient(classes) {
   document.documentElement.dataset.addedClasses = htmlClasses;
 }
 
-export default withSideEffect(reducePropsToState, handleStateChangeOnClient)(
-  HtmlClass
-);
+export default withSideEffect(
+  reducePropsToState,
+  handleStateChangeOnClient
+)(HtmlClass);

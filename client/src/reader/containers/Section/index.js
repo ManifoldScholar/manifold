@@ -206,9 +206,7 @@ export class SectionContainer extends Component {
     let metaTitle = "";
     if (parts.length === 1) metaTitle = `\u201c${parts[0]}\u201d on ${append}`;
     if (parts.length === 2 || parts.length === 3)
-      metaTitle = `\u201c${parts[0]}\u201d in \u201c${
-        parts[1]
-      }\u201d on ${append}`;
+      metaTitle = `\u201c${parts[0]}\u201d in \u201c${parts[1]}\u201d on ${append}`;
     let sectionDescription = text.attributes.description;
     if (!sectionDescription)
       sectionDescription = `Start reading this text on ${append}.`;

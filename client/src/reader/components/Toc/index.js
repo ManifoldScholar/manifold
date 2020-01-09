@@ -49,7 +49,7 @@ class Toc extends PureComponent {
   };
 
   visitNode = node => {
-    this.counter = this.counter + 1;
+    this.counter += 1;
     let children = null;
     if (node.children && node.children.length > 0) {
       children = (

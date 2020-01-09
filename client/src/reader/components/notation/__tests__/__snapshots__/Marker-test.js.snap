@@ -1,7 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`reader/components/notation/Marker matches the snapshot 1`] = `
-<ContextConsumer>
-  <Component />
-</ContextConsumer>
+<span>
+  <span
+    className="notation-marker"
+    data-annotation-notation="annotation-0"
+    key="annotation-0"
+    onClick={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOver={[Function]}
+    role="presentation"
+    title="annotation-0"
+  >
+    <IconComposer
+      fill="currentColor"
+      icon="resourceFilled24"
+      iconClass="notation-marker__icon"
+      size={28}
+      svgProps={
+        Object {
+          "aria-hidden": true,
+        }
+      }
+    />
+  </span>
+  <span
+    className="notation-marker"
+    data-annotation-notation="annotation-1"
+    key="annotation-1"
+    onClick={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOver={[Function]}
+    role="presentation"
+    title="annotation-1"
+  >
+    <IconComposer
+      fill="currentColor"
+      icon="resourceFilled24"
+      iconClass="notation-marker__icon"
+      size={28}
+      svgProps={
+        Object {
+          "aria-hidden": true,
+        }
+      }
+    />
+  </span>
+  <span
+    className="notation-marker"
+    data-annotation-notation="annotation-2"
+    key="annotation-2"
+    onClick={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOver={[Function]}
+    role="presentation"
+    title="annotation-2"
+  >
+    <IconComposer
+      fill="currentColor"
+      icon="resourceFilled24"
+      iconClass="notation-marker__icon"
+      size={28}
+      svgProps={
+        Object {
+          "aria-hidden": true,
+        }
+      }
+    />
+  </span>
+</span>
 `;
