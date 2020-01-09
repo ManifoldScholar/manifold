@@ -27,6 +27,7 @@ function handleStateChangeOnClient(bodyClasses) {
   document.body.className = bodyClasses.join(" ").trim();
 }
 
-export default withSideEffect(reducePropsToState, handleStateChangeOnClient)(
-  BodyClass
-);
+export default withSideEffect(
+  reducePropsToState,
+  handleStateChangeOnClient
+)(BodyClass);

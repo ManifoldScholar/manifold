@@ -19,7 +19,7 @@ const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
 
-class ProjectResourcesContainer extends Component {
+export class ProjectResourcesContainer extends Component {
   static fetchData = (getState, dispatch, location, match) => {
     const params = queryString.parse(location.search);
     const pagination = {

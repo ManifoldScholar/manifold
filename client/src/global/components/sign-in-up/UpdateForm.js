@@ -13,7 +13,7 @@ import IconComposer from "global/components/utility/IconComposer";
 
 const { request } = entityStoreActions;
 
-class UpdateFormContainer extends Component {
+export class UpdateFormContainer extends Component {
   static mapStateToProps = state => {
     return {
       response: state.entityStore.responses[requests.gAuthenticatedUserUpdate]

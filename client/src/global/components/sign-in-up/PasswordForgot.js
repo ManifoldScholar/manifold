@@ -8,7 +8,7 @@ import GlobalForm from "global/components/form";
 
 const { request, flush } = entityStoreActions;
 
-class PasswordForgotContainer extends Component {
+export class PasswordForgotContainer extends Component {
   static mapStateToProps = (state, ownPropsIgnored) => {
     return {
       response: get(state.entityStore.responses, "request-reset-password")
