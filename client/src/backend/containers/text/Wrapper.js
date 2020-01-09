@@ -128,12 +128,12 @@ export class TextWrapperContainer extends PureComponent {
         </button>
         <button onClick={this.toggleExportsAsEpubV3} className="utility-button">
           <IconComposer
-            icon={exportsAsEpubV3 ? "delete32" : "arrowDown32"}
+            icon={exportsAsEpubV3 ? "circleMinus24" : "circlePlus24"}
             size={26}
             iconClass="utility-button__icon utility-button__icon--download"
           />
           <span className="utility-button__text">
-            {exportsAsEpubV3 ? "Disable Epub Export" : "Enable Epub Export"}
+            {exportsAsEpubV3 ? "Disable EPUB" : "Enable EPUB"}
           </span>
         </button>
         {epubV3ExportUrl && (
