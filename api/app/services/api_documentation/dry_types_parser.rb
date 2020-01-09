@@ -15,7 +15,11 @@ module ApiDocumentation
       private
 
       def allowed_swagger_meta_types
-        [:required, :example]
+        [
+          :required,
+          :example,
+          :description
+        ]
       end
 
       def filter_attributes_by(hash, search_key)
