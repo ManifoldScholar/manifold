@@ -55,11 +55,21 @@ module ApiDocumentation
         hash.merge(enum: type.values.map { |key, _| key })
       end
 
-      def merge_meta_values(hash, type)
-        filtered_meta = type.meta.select do |k, _|
+      def allowed_meta_values(type, allowed_swagger_meta_types)
+        type.meta.select do |k, _|
           allowed_swagger_meta_types.include? k
         end
-        hash.merge(filtered_meta)
+      end
+
+      def add_description_for_uniqueness(converted_hash)
+        converted_hash[:description] = (converted_hash[:description].to_s + " Must be unique.").strip
+        converted_hash
+      end
+
+      def merge_meta_values(converted_hash, type)
+        return_value = allowed_meta_values(type, allowed_swagger_meta_types)
+        return_value = add_description_for_uniqueness(return_value) if type.meta.include? :unique
+        converted_hash.merge(return_value)
       end
 
       def single_type?(type)
