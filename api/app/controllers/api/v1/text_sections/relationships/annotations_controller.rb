@@ -11,7 +11,7 @@ module Api
             scope = @text_section.nil? ? Annotation : @text_section.annotations
             scope = scope.with_read_ability(current_user)
             scope = scope.includes(:reading_group, :text, :creator)
-            Annotation.filter(
+            Annotation.filtered(
               annotation_filter_params || {},
               scope: scope
             )

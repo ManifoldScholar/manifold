@@ -4,7 +4,7 @@ module Api
     class ResourceCollectionsController < ApplicationController
 
       resourceful! ResourceCollection, authorize_options: { except: [:index, :show] } do
-        ResourceCollection.filter(with_pagination!(resource_collection_filter_params))
+        ResourceCollection.filtered(with_pagination!(resource_collection_filter_params))
       end
 
       # GET /collections

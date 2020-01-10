@@ -8,7 +8,7 @@ module Api
           authorize_actions_for :reading_group, all_actions: :read
 
           resourceful! ReadingGroupMembership do
-            ReadingGroupMembership.filter(
+            ReadingGroupMembership.filtered(
               with_pagination!(reading_group_membership_filter_params),
               scope: @reading_group.reading_group_memberships
             )

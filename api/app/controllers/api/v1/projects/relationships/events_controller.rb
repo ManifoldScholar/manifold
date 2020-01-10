@@ -8,7 +8,7 @@ module Api
           before_action :set_project, only: [:index]
 
           resourceful! Event, authorize_options: { except: [:index] } do
-            Event.filter(
+            Event.filtered(
               with_pagination!(event_filter_params),
               scope: @project.events.excluding_type([EventType[:comment_created],
                                                      EventType[:text_annotated]])

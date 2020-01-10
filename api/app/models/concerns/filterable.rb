@@ -4,7 +4,7 @@ module Filterable
   # rubocop:disable Metrics/BlockLength
   # rubocop:disable Metrics/AbcSize
   class_methods do
-    def filter(params, scope: all, user: nil)
+    def filtered(params, scope: all, user: nil)
       results = scope.filter_with_query(params, user)
         .filter_with_elasticsearch(params)
 

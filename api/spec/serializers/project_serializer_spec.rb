@@ -6,7 +6,7 @@ RSpec.describe V1::ProjectSerializer do
   describe "when the collection is search results", elasticsearch: true do
     let(:object) do
       FactoryBot.create(:project, title: "test")
-      Project.filter(keyword: "test")
+      Project.filtered(keyword: "test")
     end
     let(:subject) { described_class.new(object, include: [:texts], params: { full: true }) }
 

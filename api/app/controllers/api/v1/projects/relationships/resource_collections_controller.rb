@@ -8,7 +8,7 @@ module Api
           before_action :set_project, only: [:index, :create]
 
           resourceful! ResourceCollection, authorize_options: { except: [:index] } do
-            ResourceCollection.filter(
+            ResourceCollection.filtered(
               with_pagination!(resource_collection_filter_params),
               scope: @project.resource_collections
             )

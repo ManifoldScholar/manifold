@@ -279,7 +279,7 @@ class Project < ApplicationRecord
   def self.filter_if_not_featured(params, scope: all, user: nil)
     return scope.by_featured(true) if params["featured"]
 
-    Project.filter(params, scope: scope, user: user)
+    Project.filtered(params, scope: scope, user: user)
   end
 
   def events_for_project_detail

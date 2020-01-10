@@ -154,14 +154,14 @@ RSpec.describe Resource, type: :model do
       collection.resources << @resource_a
       collection.resources << @resource_b
       collection.save
-      results = Resource.filter({collection_order: collection.id})
+      results = Resource.filtered({collection_order: collection.id})
       expect(results.first.id).to eq @resource_a.id
     end
 
     it "to only include those belonging to a project" do
-      results = Resource.filter({project: @project_a})
+      results = Resource.filtered({project: @project_a})
       expect(results.length).to be 2
-      results = Resource.filter({project: @project_b})
+      results = Resource.filtered({project: @project_b})
       expect(results.length).to be 1
     end
 
@@ -170,23 +170,23 @@ RSpec.describe Resource, type: :model do
       @collection_resource_a = FactoryBot.create(:collection_resource, resource_collection: @collection_a, resource: @resource_a)
       @collection_resource_b = FactoryBot.create(:collection_resource, resource_collection: @collection_a, resource: @resource_b)
       @collection_resource_c = FactoryBot.create(:collection_resource, resource_collection: @collection_b, resource: @resource_d)
-      results = Resource.filter({resource_collection: @collection_a.id})
+      results = Resource.filtered({resource_collection: @collection_a.id})
       expect(results.length).to be 2
-      results = Resource.filter({resource_collection: @collection_b.id})
+      results = Resource.filtered({resource_collection: @collection_b.id})
       expect(results.length).to be 1
     end
 
     it "by kind" do
       # TBD: Expand this test. Right now all factory resources are links to avoid dealing
       # with attachments.
-      results = Resource.filter({kind: "link"})
+      results = Resource.filtered({kind: "link"})
       expect(results.length).to be 3
     end
 
     it "by tag" do
-      results = Resource.filter({tag: "dog"})
+      results = Resource.filtered({tag: "dog"})
       expect(results.length).to be 2
-      results = Resource.filter({tag: "test"})
+      results = Resource.filtered({tag: "test"})
       expect(results.length).to be 1
     end
   end
