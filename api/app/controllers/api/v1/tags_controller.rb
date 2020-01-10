@@ -4,7 +4,7 @@ module Api
     class TagsController < ApplicationController
 
       resourceful! Tag, authorize_options: { except: [:index] } do
-        Tag.filter(tag_filter_params || {})
+        Tag.filtered(tag_filter_params || {})
       end
 
       def index

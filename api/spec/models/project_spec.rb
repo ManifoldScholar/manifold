@@ -118,9 +118,9 @@ RSpec.describe Project, type: :model do
       @project_b = FactoryBot.create(:project, title: "Rambo Smarts", featured: true)
       Project.reindex
       Project.searchkick_index.refresh
-      results = Project.filter({keyword: "Bartholomew"})
+      results = Project.filtered({keyword: "Bartholomew"})
       expect(results.length).to be 1
-      results = Project.filter({keyword: "Smarts"})
+      results = Project.filtered({keyword: "Smarts"})
       expect(results.length).to be 2
     end
   end
@@ -131,7 +131,7 @@ RSpec.describe Project, type: :model do
 
       it "the results are always paginated if a page is requested" do
         Project.destroy_all
-        results = Project.filter({page: 1, per_page: 10, keyword: "foo"})
+        results = Project.filtered({page: 1, per_page: 10, keyword: "foo"})
         expect(results).to respond_to :current_page
       end
 
@@ -152,48 +152,48 @@ RSpec.describe Project, type: :model do
 
       it "the results are paginated if a page is requested" do
         Project.destroy_all
-        results = Project.filter({page: 1, per_page: 10})
+        results = Project.filtered({page: 1, per_page: 10})
         expect(results).to respond_to :current_page
       end
 
       it "to only include creator's projects" do
-        results = Project.filter({with_creator_role: true}, user: @user)
+        results = Project.filtered({with_creator_role: true}, user: @user)
         expect(results).to match_array(@project_b)
       end
 
       it "to only include featured" do
-        results = Project.filter({featured: true})
+        results = Project.filtered({featured: true})
         expect(results.length).to be 1
       end
 
       it "to only include not featured" do
-        results = Project.filter({featured: false})
+        results = Project.filtered({featured: false})
         expect(results.length).to be 1
       end
 
       it "to only include projects of a specific subject" do
-        results = Project.filter({subject: @subject_a})
+        results = Project.filtered({subject: @subject_a})
         expect(results.first).to eq @project_a
-        results = Project.filter({subject: @subject_b})
+        results = Project.filtered({subject: @subject_b})
         expect(results.first).to eq @project_b
       end
 
       it "by both subject and featured" do
-        results = Project.filter({subject: @subject_a, featured: false})
+        results = Project.filtered({subject: @subject_a, featured: false})
         expect(results.length).to be 0
-        results = Project.filter({subject: @subject_a, featured: true})
+        results = Project.filtered({subject: @subject_a, featured: true})
         expect(results.length).to be 1
       end
 
       it "allows boolean and string featured values" do
-        results = Project.filter({featured: "true"})
+        results = Project.filtered({featured: "true"})
         expect(results.length).to be 1
       end
 
       it "treats 1 as true when filtering" do
-        results = Project.filter({featured: "1"})
+        results = Project.filtered({featured: "1"})
         expect(results.length).to be 1
-        results = Project.filter({featured: 1})
+        results = Project.filtered({featured: 1})
         expect(results.length).to be 1
       end
     end

@@ -3,8 +3,8 @@ module Api
     class ProjectCollectionsController < ApplicationController
 
       resourceful! ProjectCollection, authorize_options: { except: [:index, :show] } do
-        ProjectCollection.filter(with_pagination!(project_collection_filter_params),
-                                 scope: ProjectCollection.all)
+        ProjectCollection.filtered(with_pagination!(project_collection_filter_params),
+                                   scope: ProjectCollection.all)
       end
 
       # GET /project-collections

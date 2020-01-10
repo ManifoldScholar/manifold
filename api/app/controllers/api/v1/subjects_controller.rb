@@ -4,7 +4,7 @@ module Api
     class SubjectsController < ApplicationController
 
       resourceful! Subject, authorize_options: { except: [:index, :show] } do
-        Subject.filter(filter_options)
+        Subject.filtered(filter_options)
       end
 
       def index

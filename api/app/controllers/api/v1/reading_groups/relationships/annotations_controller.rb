@@ -8,7 +8,7 @@ module Api
           authorize_actions_for :reading_group, all_actions: :read
 
           resourceful! Annotation do
-            Annotation.filter(
+            Annotation.filtered(
               with_pagination!(annotation_filter_params),
               scope: @reading_group.annotations
             )

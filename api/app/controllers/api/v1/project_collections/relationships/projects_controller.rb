@@ -8,7 +8,7 @@ module Api
 
           resourceful! Project, authorize_options: { except: [:index, :show] } do
             ids = @project_collection.projects.select(:id)
-            Project.filter(
+            Project.filtered(
               with_pagination!(project_filter_params),
               scope: Project.all.where(id: ids)
             )

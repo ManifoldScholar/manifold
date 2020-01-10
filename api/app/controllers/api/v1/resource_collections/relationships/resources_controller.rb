@@ -9,7 +9,7 @@ module Api
 
           resourceful! Resource, authorize_options: { except: [:index, :show] } do
             ids = @collection.resources.pluck(:id)
-            Resource.filter(
+            Resource.filtered(
               with_pagination!(resource_filter_params),
               scope: Resource.all.where("resources.id IN (?)", ids)
             )

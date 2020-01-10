@@ -6,7 +6,7 @@ module Api
       PRELOADS = %w(roles).freeze
 
       resourceful! User, authorize_options: { except: [:create, :show, :whoami] } do
-        User.preload(PRELOADS).filter(with_pagination!(user_filter_params))
+        User.preload(PRELOADS).filtered(with_pagination!(user_filter_params))
       end
 
       def whoami

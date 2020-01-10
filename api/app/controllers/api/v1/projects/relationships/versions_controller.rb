@@ -6,7 +6,7 @@ module Api
           before_action :set_project, only: [:index]
 
           resourceful! Version, authorize_options: { except: [:index] } do
-            Version.filter(
+            Version.filtered(
               with_pagination!(version_filter_params),
               scope: Version.for_item(@project).with_actor
             )

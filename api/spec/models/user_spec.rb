@@ -117,17 +117,17 @@ RSpec.describe User, type: :model do
     end
 
     it "by first name" do
-      results = User.filter({keyword: first, typeahead: true})
+      results = User.filtered({keyword: first, typeahead: true})
       expect(results.length).to be 1
     end
 
     it "by last name" do
-      results = User.filter({keyword: last, typeahead: true})
+      results = User.filtered({keyword: last, typeahead: true})
       expect(results.length).to be 1
     end
 
     it "by email" do
-      results = User.filter({keyword: email, typeahead: true})
+      results = User.filtered({keyword: email, typeahead: true})
       expect(results.length).to be 1
     end
   end

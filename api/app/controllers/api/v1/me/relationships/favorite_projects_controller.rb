@@ -8,7 +8,7 @@ module Api
           before_action :authenticate_request!
 
           resourceful! Project do
-            Project.filter(
+            Project.filtered(
               with_pagination!(project_filter_params),
               scope: current_user.favorite_projects.includes(:creators)
             )

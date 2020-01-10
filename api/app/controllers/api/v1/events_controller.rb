@@ -4,7 +4,7 @@ module Api
     class EventsController < ApplicationController
 
       resourceful! Event, authorize_options: { only: [:destroy] } do
-        Event.filter(with_pagination!(event_filter_params))
+        Event.filtered(with_pagination!(event_filter_params))
       end
 
       def destroy
