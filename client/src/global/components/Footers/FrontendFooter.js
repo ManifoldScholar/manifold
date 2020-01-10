@@ -10,7 +10,9 @@ class FrontendFooter extends Component {
 
   get isBranded() {
     const pressLogo = this.props.settings.attributes.pressLogoFooterStyles;
-    return pressLogo && pressLogo.original !== null;
+    if (!pressLogo) return false;
+    if (!pressLogo.original) return false;
+    return true;
   }
 
   render() {
