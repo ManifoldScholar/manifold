@@ -3,17 +3,16 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    typed_attribute :state, NilClass
-    typed_attribute :external_source_url, NilClass
-    typed_attribute :log, NilClass
-    typed_attribute :source_file_name, NilClass
-    typed_attribute :ingestion_type, NilClass
-    typed_attribute :available_events, NilClass
-    typed_attribute :strategy, NilClass
-    typed_attribute :strategy_label, NilClass
-    typed_attribute :text_id, NilClass
-    typed_attribute :creator_id, NilClass
-    typed_attribute :available_events, NilClass do |object, _params|
+    typed_attribute :state, Types::String.enum("sleeping", "processing", "finished").meta(read_only: true)
+    typed_attribute :external_source_url, Types::Serializer::URL.meta(description: "Required if not uploading from a file")
+    typed_attribute :log, Types::Array.of(Types::String).meta(read_only: true)
+    typed_attribute :source_file_name, Types::String.optional.meta(read_only: true)
+    typed_attribute :ingestion_type, Types::String.optional
+    typed_attribute :strategy, Types::String.optional.meta(read_only: true)
+    typed_attribute :strategy_label, Types::String.optional.meta(read_only: true)
+    typed_attribute :text_id, Types::Serializer::ID.optional.meta(read_only: true)
+    typed_attribute :creator_id, Types::Serializer::ID.meta(read_only: true)
+    typed_attribute :available_events, Types::Array.of(Types::String) do |object, _params|
       allowed = [:analyze, :reset, :process, :reingest]
       actions = object.aasm.events.map(&:name)
       actions.select { |action| allowed.include?(action) }
