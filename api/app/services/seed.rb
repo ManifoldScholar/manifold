@@ -8,13 +8,6 @@ class Seed
     _anonymous_user = make_anonymous_user(logger)
     cli_user = make_cli_user(logger)
     make_feature(logger, cli_user)
-  rescue Faraday::ConnectionFailed
-    Rails.logger.warn <<~TEXT
-      The database was seeded before ElasticSearch was running. This means that
-      the CLI user may not have been successfully added to the ElasticSearch
-      index. You may want to re-index your users to address this once
-      ElasticSearch is available.
-    TEXT
   end
 
   def self.make_feature(logger, creator)
@@ -51,17 +44,18 @@ class Seed
   end
 
   # @api private
+  # rubocop:disable Metrics/AbcSize
   def self.make_system_user(logger, classification)
     classification = UserClassification.fetch(classification)
-
-    User.fetch_by_classification(classification.to_s) do |created, user|
-      if created
-        logger.info Rainbow("Creating #{classification.text} user: #{user.email}").lightblue
-      else
-        logger.info Rainbow("#{classification.text} user exists: #{user.id}").lightblue
-      end
+    begin
+      User.fetch_by_classification(classification.to_s)
+    rescue Faraday::ConnectionFailed
+      Rails.logger.warn "Unable to index user in ElasticSearch while running seed script."
     end
+    user = User.fetch_by_classification(classification.to_s)
+    logger.info Rainbow("Ensuring #{classification.text} user exists: #{user.email}").lightblue
+    user
   end
-
+  # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
 end
