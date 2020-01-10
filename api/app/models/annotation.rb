@@ -73,8 +73,8 @@ class Annotation < ApplicationRecord
   delegate :title, to: :text_section, allow_nil: true, prefix: true
 
   delegate :slug, to: :text, allow_nil: true, prefix: true
-  delegate :title, to: :text, prefix: true
-  delegate :title_formatted, to: :text, prefix: true
+  delegate :title, to: :text, allow_nil: true, prefix: true
+  delegate :title_formatted, to: :text, allow_nil: true, prefix: true
 
   delegate :privacy, to: :reading_group, allow_nil: true, prefix: true
   delegate :name, to: :reading_group, allow_nil: true, prefix: true
@@ -135,6 +135,10 @@ class Annotation < ApplicationRecord
   scope :with_orphaned, lambda { |orphaned|
     where.not(text_section: nil).where(orphaned: orphaned) unless orphaned.blank?
   }
+  scope :with_existing_text, lambda {
+    where.not(text_section: nil)
+  }
+
   scope :sans_private_annotations_not_owned_by, ->(user) { where(arel_exclude_private_annotations_not_owned_by(user)) }
   scope :non_private, -> { where(private: false) }
 
