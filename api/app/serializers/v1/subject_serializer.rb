@@ -3,7 +3,7 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    typed_attribute :name, NilClass
+    typed_attribute :name, Types::String
 
   end
 end
