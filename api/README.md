@@ -32,7 +32,7 @@ Once that is done, you'll need to load up the schema in each:
 ```sh
 # This task is run after creation, and after any migration / schema changes
 # Don't forget the RAILS_ENV!
-RAILS_ENV=test bin/rake parallel:prepare
+RAILS_ENV=test bin/rake parallel:rake[db:schema:load]
 ```
 
 **IMPORTANT!** The `RAILS_ENV` must be specified for the `parallel:prepare` task, or it will clobber your local development database.
