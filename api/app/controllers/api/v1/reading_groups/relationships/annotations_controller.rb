@@ -10,7 +10,7 @@ module Api
           resourceful! Annotation do
             Annotation.filtered(
               with_pagination!(annotation_filter_params),
-              scope: @reading_group.annotations
+              scope: @reading_group.annotations.with_existing_text
             )
           end
 
