@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/ankane/lockbox.git
-  revision: f7cca369f1fdd6735048c113577fcfeda010245c
-  ref: f7cca369f1fdd6735048c113
-  branch: master
-  specs:
-    lockbox (0.2.5)
-
-GIT
   remote: https://github.com/ManifoldScholar/fast_jsonapi.git
   revision: 486d550db98d15f9b6daed70ff90fc0d6d34f3a2
   branch: master
@@ -326,6 +318,7 @@ GEM
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
     little-plugger (1.1.4)
+    lockbox (0.3.1)
     logging (2.2.2)
       little-plugger (~> 1.1)
       multi_json (~> 1.10)
@@ -711,7 +704,7 @@ DEPENDENCIES
   jsonb_accessor (~> 1.0.0)
   jwt (~> 1.5.6)
   kaminari (~> 1.0)
-  lockbox!
+  lockbox (~> 0.3.1)
   lograge (~> 0.10)
   marcel (~> 0.3.2)
   memoist (~> 0.16.0)
