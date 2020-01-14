@@ -13,6 +13,7 @@ RSpec.describe Attachments do
 
       t.jsonb :attached_data
       t.jsonb :resource_data
+      t.jsonb :image_sans_styles_data
     end
 
     model do
@@ -20,6 +21,7 @@ RSpec.describe Attachments do
 
       manifold_has_attached_file :attached, :image
       manifold_has_attached_file :resource, :resource
+      manifold_has_attached_file :image_sans_styles, :image, no_styles: true
     end
   end
 
@@ -27,6 +29,7 @@ RSpec.describe Attachments do
     instance = AttachableClass.new
     instance.attached = fixture_file_upload(Rails.root.join("spec", "data", "assets", "images", "test_avatar.jpg"))
     instance.resource = fixture_file_upload(Rails.root.join("spec", "data", "ingestion", "ms_word", "example.docx"))
+    instance.image_sans_styles = fixture_file_upload(Rails.root.join("spec", "data", "assets", "images", "test_avatar.jpg"))
     instance.save
 
     instance.reload
@@ -54,7 +57,7 @@ RSpec.describe Attachments do
   end
 
   it "enqueues a processing job" do
-    expect { instance.save }.to have_enqueued_job(Attachments::ProcessAttachmentJob).exactly(:twice)
+    expect { instance.save }.to have_enqueued_job(Attachments::ProcessAttachmentJob).exactly(:thrice)
   end
 
   context "when unprocessable source attachment" do
@@ -64,6 +67,32 @@ RSpec.describe Attachments do
         expect(instance.resource_styles[:original]).to_not be_nil
       end
     end
+  end
+
+  describe "when the attachment doesn't have styles" do
+    let(:attachable) do
+      attachable = AttachableClass.new
+      attachable.image_sans_styles = fixture_file_upload(Rails.root.join("spec", "data", "assets", "images", "test_avatar.jpg"))
+
+      attachable.save
+
+      attachable.reload
+    end
+
+    context "before processing" do
+      fit "returns the original url" do
+        expect(attachable.image_sans_styles_original.url).to be_instance_of String
+      end
+
+    end
+
+    context "after processing" do
+      before { perform_enqueued_jobs { attachable.save } }
+      fit "returns the original url" do
+        expect(attachable.image_sans_styles_original.url).to be_instance_of String
+      end
+    end
+
   end
 
   describe "determining whether to show placeholder" do
