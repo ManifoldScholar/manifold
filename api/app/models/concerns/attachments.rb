@@ -190,7 +190,7 @@ module Attachments
   end
 
   # @param [String, Symbol] attachment_name
-  # @return [{ Symbol => { Symbol => Integer, nil }, nil }]
+  # @return [{ Symbol => String, nil }]
   def shrine_styles_for(attachment_name)
     shrine_style_map_for attachment_name do |uploaded_file, style|
       if uploaded_file.present?
@@ -233,7 +233,7 @@ module Attachments
   # @param [Symbol, String] attachment_name
   # @param [Symbol] style
   # @return [AttachmentUploader::UploadedFile, nil]
-  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def shrine_version_for(attachment_name, style)
     attachment = public_send(attachment_name)
 
@@ -250,12 +250,12 @@ module Attachments
         style == :original ? attachment : nil
       end
     elsif style == :original
-      attachment
+      attachment.kind_of?(Hash) ? attachment[style] : attachment
     else
       raise ArgumentError, "Tried to fetch style #{style.inspect} for #{attachment_name}, which has no styles"
     end
   end
-  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   # @param [String, Symbol] attachment_name
   def validate_content_type_for?(attachment_name)
