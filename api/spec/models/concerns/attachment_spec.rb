@@ -80,7 +80,7 @@ RSpec.describe Attachments do
     end
 
     context "before processing" do
-      fit "returns the original url" do
+      it "returns the original url" do
         expect(attachable.image_sans_styles_original.url).to be_instance_of String
       end
 
@@ -88,7 +88,7 @@ RSpec.describe Attachments do
 
     context "after processing" do
       before { perform_enqueued_jobs { attachable.save } }
-      fit "returns the original url" do
+      it "returns the original url" do
         expect(attachable.image_sans_styles_original.url).to be_instance_of String
       end
     end
