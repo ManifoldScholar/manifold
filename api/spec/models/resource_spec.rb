@@ -248,6 +248,24 @@ RSpec.describe Resource, type: :model do
 
   end
 
+  context "when the resource is an MP3", slow: true do
+
+    let(:resource) do
+      FactoryBot.build(
+        :resource,
+        kind: "audio",
+        attachment: fixture_file_upload(Rails.root.join('spec/data/assets/audio/test.mp3'), 'audio/mpeg')
+      )
+    end
+    before { perform_enqueued_jobs { resource.save } }
+
+    it "produces attachment styles" do
+      resource.reload
+      expect(resource.attachment_styles[:original].empty?).to be false
+    end
+
+  end
+
   context "when the resource is an image", slow: true do
 
     let(:resource) do
