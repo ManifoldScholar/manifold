@@ -55,6 +55,10 @@ module ApiDocs
         nil
       end
 
+      def serializer
+        "V1::#{self.name.demodulize}Serializer".constantize
+      end
+
       #####################################
       ############# REQUESTS ##############
       #####################################
@@ -172,10 +176,6 @@ module ApiDocs
 
       def type
         name.demodulize.pluralize.underscore
-      end
-
-      def serializer
-        "V1::#{self.name.demodulize}Serializer".constantize
       end
 
       def attributes
