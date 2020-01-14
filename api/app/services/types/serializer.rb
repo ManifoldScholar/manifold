@@ -39,5 +39,39 @@ module Types
       ),
       content_type: Types::String.meta(example: "image/png")
     )
+
+    PersistentUI = Types::Hash.schema(
+      reader: Types::Hash.schema(
+        colors: Types::Hash.schema(
+          color_scheme: Types::String.enum("light", "dark")
+        ),
+        typography: Types::Hash.schema(
+          font: Types::String.meta(example: "serif"),
+          margins: Types::Hash.schema(
+            max: Types::Integer,
+            min: Types::Integer,
+            current: Types::Integer
+          ),
+          font_size: Types::Hash.schema(
+            max: Types::Integer,
+            min: Types::Integer,
+            current: Types::Integer
+          )
+        ),
+        reading_groups: Types::Hash.schema(
+          current_reading_group: Types::Serializer::ID
+        )
+      )
+    )
+
+    NotificationPreferences = Types::Hash.schema(
+      projects: Types::String.enum("never", "always"),
+      followedProjects: Types::String.enum("never", "always"),
+      flaggedResources: Types::String.enum("never", "always"),
+      projectCommentsAndAnnotations: Types::String.enum("never", "always"),
+      repliesToMe: Types::String.enum("never", "always"),
+      digest: Types::String.enum("never", "always"),
+      digestCommentsAndAnnotations: Types::String.enum("never", "always")
+    )
   end
 end
