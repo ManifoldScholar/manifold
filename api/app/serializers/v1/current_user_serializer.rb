@@ -6,7 +6,9 @@ module V1
 
     set_type :user
 
-    typed_attribute :persistent_ui, Types::Serializer::PersistentUI
+    typed_attribute :persistent_ui, Types::Serializer::PersistentUI do |object, _params|
+      object.persistent_ui.as_json
+    end
 
     typed_attribute :notification_preferences, Types::Serializer::NotificationPreferences do |object, _params|
       camelize_hash(object.notification_preferences_by_kind)
