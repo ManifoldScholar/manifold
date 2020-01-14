@@ -48,7 +48,7 @@ export default class FatalError extends PureComponent {
     const showDetail = config.environment.isDevelopment;
 
     return (
-      <BodyClass className="fatal-error-page">
+      <BodyClass className="browse fatal-error-page">
         <section className="fatal-error">
           <div className="error-wrapper">
             <div className="container">
