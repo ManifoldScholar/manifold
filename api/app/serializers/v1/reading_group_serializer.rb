@@ -15,7 +15,6 @@ module V1
     typed_attribute :created_at, NilClass
     typed_attribute :current_user_role, NilClass
     typed_attribute :creator_id, NilClass
-    typed_attribute :texts, NilClass
     typed_attribute :all_annotations_count, NilClass do |object, _params|
       object.annotations_count + object.highlights_count
     end
@@ -28,7 +27,7 @@ module V1
       ClientURL.call(:join_reading_group, invitation_code: object.invitation_code)
     end
 
-    typed_has_many :texts, serializer: TextOptionsSerializer
+    typed_has_many :texts, serializer: TextOptionsSerializer, record_type: "textOptions"
     typed_has_many :reading_group_memberships
 
   end
