@@ -22,17 +22,8 @@ exports[`backend/components/resource/form/kind/Variants matches the snapshot whe
         >
           Variant #1
         </label>
-        <react-dropzone
-          classname="form-dropzone style-square"
-          inputprops="[object Object]"
-          multiple="false"
-          ondrop="function (file) {
-      _this.setState({
-        attachment: file[0],
-        removed: false
-      });
-    }"
-        >
+        <div>
+          <input />
           <div
             class="contents-empty"
           >
@@ -61,13 +52,11 @@ exports[`backend/components/resource/form/kind/Variants matches the snapshot whe
               <p
                 class="primary"
               >
-                <button
-                  class="form-dropzone__inline-button"
-                  tabindex="-1"
-                  type="button"
+                <span
+                  class="form-dropzone__upload-prompt"
                 >
                   Upload a file
-                </button>
+                </span>
                  or 
                 <br />
                 drag and drop here
@@ -75,7 +64,7 @@ exports[`backend/components/resource/form/kind/Variants matches the snapshot whe
               </p>
             </div>
           </div>
-        </react-dropzone>
+        </div>
       </div>
     </div>
     <div
@@ -90,17 +79,8 @@ exports[`backend/components/resource/form/kind/Variants matches the snapshot whe
         >
           Variant #2
         </label>
-        <react-dropzone
-          classname="form-dropzone style-square"
-          inputprops="[object Object]"
-          multiple="false"
-          ondrop="function (file) {
-      _this.setState({
-        attachment: file[0],
-        removed: false
-      });
-    }"
-        >
+        <div>
+          <input />
           <div
             class="contents-empty"
           >
@@ -129,13 +109,11 @@ exports[`backend/components/resource/form/kind/Variants matches the snapshot whe
               <p
                 class="primary"
               >
-                <button
-                  class="form-dropzone__inline-button"
-                  tabindex="-1"
-                  type="button"
+                <span
+                  class="form-dropzone__upload-prompt"
                 >
                   Upload a file
-                </button>
+                </span>
                  or 
                 <br />
                 drag and drop here
@@ -143,7 +121,7 @@ exports[`backend/components/resource/form/kind/Variants matches the snapshot whe
               </p>
             </div>
           </div>
-        </react-dropzone>
+        </div>
       </div>
     </div>
   </div>
@@ -166,18 +144,8 @@ exports[`backend/components/resource/form/kind/Variants when kind is image match
       >
         High Resolution Image
       </label>
-      <react-dropzone
-        accept="image/*"
-        classname="form-dropzone style-square"
-        inputprops="[object Object]"
-        multiple="false"
-        ondrop="function (file) {
-      _this.setState({
-        attachment: file[0],
-        removed: false
-      });
-    }"
-      >
+      <div>
+        <input />
         <div
           class="contents-empty"
         >
@@ -206,13 +174,11 @@ exports[`backend/components/resource/form/kind/Variants when kind is image match
             <p
               class="primary"
             >
-              <button
-                class="form-dropzone__inline-button"
-                tabindex="-1"
-                type="button"
+              <span
+                class="form-dropzone__upload-prompt"
               >
                 Upload a file
-              </button>
+              </span>
                or 
               <br />
               drag and drop here
@@ -225,7 +191,7 @@ exports[`backend/components/resource/form/kind/Variants when kind is image match
             </p>
           </div>
         </div>
-      </react-dropzone>
+      </div>
     </div>
   </div>
   <div
@@ -240,18 +206,8 @@ exports[`backend/components/resource/form/kind/Variants when kind is image match
       >
         Thumbnail Image
       </label>
-      <react-dropzone
-        accept="image/*"
-        classname="form-dropzone style-square"
-        inputprops="[object Object]"
-        multiple="false"
-        ondrop="function (file) {
-      _this.setState({
-        attachment: file[0],
-        removed: false
-      });
-    }"
-      >
+      <div>
+        <input />
         <div
           class="contents-empty"
         >
@@ -280,13 +236,11 @@ exports[`backend/components/resource/form/kind/Variants when kind is image match
             <p
               class="primary"
             >
-              <button
-                class="form-dropzone__inline-button"
-                tabindex="-1"
-                type="button"
+              <span
+                class="form-dropzone__upload-prompt"
               >
                 Upload a file
-              </button>
+              </span>
                or 
               <br />
               drag and drop here
@@ -299,7 +253,7 @@ exports[`backend/components/resource/form/kind/Variants when kind is image match
             </p>
           </div>
         </div>
-      </react-dropzone>
+      </div>
     </div>
   </div>
 </div>
@@ -321,18 +275,8 @@ exports[`backend/components/resource/form/kind/Variants when kind is pdf matches
       >
         Thumbnail Image
       </label>
-      <react-dropzone
-        accept="image/*"
-        classname="form-dropzone style-square"
-        inputprops="[object Object]"
-        multiple="false"
-        ondrop="function (file) {
-      _this.setState({
-        attachment: file[0],
-        removed: false
-      });
-    }"
-      >
+      <div>
+        <input />
         <div
           class="contents-empty"
         >
@@ -361,13 +305,11 @@ exports[`backend/components/resource/form/kind/Variants when kind is pdf matches
             <p
               class="primary"
             >
-              <button
-                class="form-dropzone__inline-button"
-                tabindex="-1"
-                type="button"
+              <span
+                class="form-dropzone__upload-prompt"
               >
                 Upload a file
-              </button>
+              </span>
                or 
               <br />
               drag and drop here
@@ -380,7 +322,7 @@ exports[`backend/components/resource/form/kind/Variants when kind is pdf matches
             </p>
           </div>
         </div>
-      </react-dropzone>
+      </div>
     </div>
   </div>
 </div>

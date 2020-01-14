@@ -31,18 +31,12 @@ export default class FormUploadImagePreview extends PureComponent {
             </button>
             <br />
             or{" "}
-            <button
-              type="button"
-              className="form-dropzone__inline-button"
-              aria-hidden
-              tabIndex="-1"
-            >
+            <span className="form-dropzone__upload-prompt">
               Upload an image
-            </button>
+            </span>
           </p>
         </div>
         <img alt="Upload preview" className="preview" src={this.imageUrl} />
-        <span className="screen-reader-text">Upload Preview</span>
       </div>
     );
   }

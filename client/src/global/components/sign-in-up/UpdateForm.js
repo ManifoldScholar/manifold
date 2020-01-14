@@ -207,54 +207,64 @@ export class UpdateFormContainer extends Component {
               <label htmlFor="avatar-update" className="screen-reader-text">
                 Profile image
               </label>
-              <Dropzone
-                inputProps={{
-                  id: "avatar-update",
-                  "aria-describedby": "avatar-update-error"
-                }}
-                className="form-dropzone"
-                style={{}}
-                activeStyle={{}}
-                accept="image/*"
-                multiple={false}
-                ref={dropzone => {
-                  this.dropzone = dropzone;
-                }}
-                onDrop={this.handleFileDrop}
-              >
-                <div
-                  style={{ position: "relative" }}
-                  className="dropzone-button dropzone-button-dotted"
-                >
+              <Dropzone onDrop={this.handleFileDrop}>
+                {({ getRootProps, getInputProps }) => (
                   <div
-                    style={{
-                      top: "50%",
-                      marginTop: -33,
-                      height: 66,
-                      width: 66,
-                      position: "absolute"
-                    }}
+                    {...getRootProps({
+                      className: "form-dropzone",
+                      tabIndex: null
+                    })}
                   >
-                    {this.hasAvatar() && (
-                      <button
-                        onClick={this.handleRemoveAvatar}
-                        tabIndex="0"
-                        className="dropzone-button__cancel-button"
+                    <input
+                      {...getInputProps({
+                        accept: "image/*",
+                        multiple: false,
+                        id: "avatar-update",
+                        "aria-describedby": "avatar-update-error",
+                        tabIndex: 0
+                      })}
+                    />
+                    <div
+                      style={{ position: "relative" }}
+                      className="dropzone-button dropzone-button-dotted"
+                    >
+                      <div
+                        style={{
+                          top: "50%",
+                          marginTop: -33,
+                          height: 66,
+                          width: 66,
+                          position: "absolute"
+                        }}
                       >
-                        <IconComposer icon="close16" size="default" />
-                        <span className="screen-reader-text">
-                          Remove current avatar
-                        </span>
-                      </button>
-                    )}
-                    <Avatar style={{ margin: 0 }} url={this.displayAvatar()} />
+                        {this.hasAvatar() && (
+                          <button
+                            onClick={this.handleRemoveAvatar}
+                            tabIndex="0"
+                            className="dropzone-button__cancel-button"
+                          >
+                            <IconComposer icon="close16" size="default" />
+                            <span className="screen-reader-text">
+                              Remove current avatar
+                            </span>
+                          </button>
+                        )}
+                        <Avatar
+                          style={{ margin: 0 }}
+                          url={this.displayAvatar()}
+                        />
+                      </div>
+                      <span className="dropzone-button__text">
+                        <span className="form-dropzone__upload-prompt">
+                          Upload a file
+                        </span>{" "}
+                        or
+                        <br />
+                        drag and drop
+                      </span>
+                    </div>
                   </div>
-                  <span className="dropzone-button__text">
-                    Upload a file or
-                    <br />
-                    drag and drop
-                  </span>
-                </div>
+                )}
               </Dropzone>
             </Form.Errorable>
           </div>

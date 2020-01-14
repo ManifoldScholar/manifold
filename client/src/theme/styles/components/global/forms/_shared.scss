@@ -47,6 +47,11 @@
     letter-spacing: inherit;
   }
 
+  &__upload-prompt {
+    @include defaultHoverState;
+    text-decoration: underline;
+  }
+
   .dropzone-button {
     @include buttonUnstyled;
     @include buttonRounded;
@@ -84,6 +89,16 @@
     /* stylelint-disable declaration-no-important */
     display: block !important;
     /* stylelint-enable declaration-no-important */
+
+    &:focus-visible {
+      outline: 0;
+
+      + [class^='contents-'] .form-dropzone__upload-prompt,
+      + .dropzone-button .form-dropzone__upload-prompt {
+        @include defaultFocusStyle;
+        outline-color: $defaultFocusColor;
+      }
+    }
   }
 }
 

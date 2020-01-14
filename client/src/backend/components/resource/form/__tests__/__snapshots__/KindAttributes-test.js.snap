@@ -16,18 +16,8 @@ exports[`backend/components/resource/form/KindAttributes when the kind is audio 
       >
         Audio File
       </label>
-      <react-dropzone
-        accept="audio/*"
-        classname="form-dropzone style-square"
-        inputprops="[object Object]"
-        multiple="false"
-        ondrop="function (file) {
-      _this.setState({
-        attachment: file[0],
-        removed: false
-      });
-    }"
-      >
+      <div>
+        <input />
         <div
           class="contents-empty"
         >
@@ -56,13 +46,11 @@ exports[`backend/components/resource/form/KindAttributes when the kind is audio 
             <p
               class="primary"
             >
-              <button
-                class="form-dropzone__inline-button"
-                tabindex="-1"
-                type="button"
+              <span
+                class="form-dropzone__upload-prompt"
               >
                 Upload a file
-              </button>
+              </span>
                or 
               <br />
               drag and drop here
@@ -75,7 +63,7 @@ exports[`backend/components/resource/form/KindAttributes when the kind is audio 
             </p>
           </div>
         </div>
-      </react-dropzone>
+      </div>
     </div>
   </div>
 </div>
@@ -94,18 +82,8 @@ exports[`backend/components/resource/form/KindAttributes when the kind is docume
     >
       Document File
     </label>
-    <react-dropzone
-      accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,text/*,application/vnd.oasis.opendocument.text"
-      classname="form-dropzone style-square"
-      inputprops="[object Object]"
-      multiple="false"
-      ondrop="function (file) {
-      _this.setState({
-        attachment: file[0],
-        removed: false
-      });
-    }"
-    >
+    <div>
+      <input />
       <div
         class="contents-empty"
       >
@@ -134,13 +112,11 @@ exports[`backend/components/resource/form/KindAttributes when the kind is docume
           <p
             class="primary"
           >
-            <button
-              class="form-dropzone__inline-button"
-              tabindex="-1"
-              type="button"
+            <span
+              class="form-dropzone__upload-prompt"
             >
               Upload a file
-            </button>
+            </span>
              or 
             <br />
             drag and drop here
@@ -153,7 +129,7 @@ exports[`backend/components/resource/form/KindAttributes when the kind is docume
           </p>
         </div>
       </div>
-    </react-dropzone>
+    </div>
   </div>
 </div>
 `;
@@ -171,17 +147,8 @@ exports[`backend/components/resource/form/KindAttributes when the kind is file m
     >
       File
     </label>
-    <react-dropzone
-      classname="form-dropzone style-square"
-      inputprops="[object Object]"
-      multiple="false"
-      ondrop="function (file) {
-      _this.setState({
-        attachment: file[0],
-        removed: false
-      });
-    }"
-    >
+    <div>
+      <input />
       <div
         class="contents-icon-preview"
       >
@@ -218,18 +185,15 @@ exports[`backend/components/resource/form/KindAttributes when the kind is file m
             </button>
             <br />
             or 
-            <button
-              aria-hidden="true"
-              class="form-dropzone__inline-button"
-              tabindex="-1"
-              type="button"
+            <span
+              class="form-dropzone__upload-prompt"
             >
               Upload a new file
-            </button>
+            </span>
           </p>
         </div>
       </div>
-    </react-dropzone>
+    </div>
   </div>
 </div>
 `;
@@ -247,18 +211,8 @@ exports[`backend/components/resource/form/KindAttributes when the kind is image 
     >
       Image File
     </label>
-    <react-dropzone
-      accept="image/*"
-      classname="form-dropzone style-square"
-      inputprops="[object Object]"
-      multiple="false"
-      ondrop="function (file) {
-      _this.setState({
-        attachment: file[0],
-        removed: false
-      });
-    }"
-    >
+    <div>
+      <input />
       <div
         class="contents-empty"
       >
@@ -287,13 +241,11 @@ exports[`backend/components/resource/form/KindAttributes when the kind is image 
           <p
             class="primary"
           >
-            <button
-              class="form-dropzone__inline-button"
-              tabindex="-1"
-              type="button"
+            <span
+              class="form-dropzone__upload-prompt"
             >
               Upload a file
-            </button>
+            </span>
              or 
             <br />
             drag and drop here
@@ -306,7 +258,7 @@ exports[`backend/components/resource/form/KindAttributes when the kind is image 
           </p>
         </div>
       </div>
-    </react-dropzone>
+    </div>
   </div>
 </div>
 `;
@@ -406,18 +358,8 @@ exports[`backend/components/resource/form/KindAttributes when the kind is pdf ma
     >
       PDF File
     </label>
-    <react-dropzone
-      accept="application/pdf"
-      classname="form-dropzone style-square"
-      inputprops="[object Object]"
-      multiple="false"
-      ondrop="function (file) {
-      _this.setState({
-        attachment: file[0],
-        removed: false
-      });
-    }"
-    >
+    <div>
+      <input />
       <div
         class="contents-empty"
       >
@@ -446,13 +388,11 @@ exports[`backend/components/resource/form/KindAttributes when the kind is pdf ma
           <p
             class="primary"
           >
-            <button
-              class="form-dropzone__inline-button"
-              tabindex="-1"
-              type="button"
+            <span
+              class="form-dropzone__upload-prompt"
             >
               Upload a file
-            </button>
+            </span>
              or 
             <br />
             drag and drop here
@@ -465,7 +405,7 @@ exports[`backend/components/resource/form/KindAttributes when the kind is pdf ma
           </p>
         </div>
       </div>
-    </react-dropzone>
+    </div>
   </div>
 </div>
 `;
@@ -483,18 +423,8 @@ exports[`backend/components/resource/form/KindAttributes when the kind is presen
     >
       Presentation File
     </label>
-    <react-dropzone
-      accept="application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint,application/vnd.oasis.opendocument.presentation"
-      classname="form-dropzone style-square"
-      inputprops="[object Object]"
-      multiple="false"
-      ondrop="function (file) {
-      _this.setState({
-        attachment: file[0],
-        removed: false
-      });
-    }"
-    >
+    <div>
+      <input />
       <div
         class="contents-empty"
       >
@@ -523,13 +453,11 @@ exports[`backend/components/resource/form/KindAttributes when the kind is presen
           <p
             class="primary"
           >
-            <button
-              class="form-dropzone__inline-button"
-              tabindex="-1"
-              type="button"
+            <span
+              class="form-dropzone__upload-prompt"
             >
               Upload a file
-            </button>
+            </span>
              or 
             <br />
             drag and drop here
@@ -542,7 +470,7 @@ exports[`backend/components/resource/form/KindAttributes when the kind is presen
           </p>
         </div>
       </div>
-    </react-dropzone>
+    </div>
   </div>
 </div>
 `;
@@ -560,18 +488,8 @@ exports[`backend/components/resource/form/KindAttributes when the kind is spread
     >
       Spreadsheet File
     </label>
-    <react-dropzone
-      accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.oasis.opendocument.spreadsheet,"
-      classname="form-dropzone style-square"
-      inputprops="[object Object]"
-      multiple="false"
-      ondrop="function (file) {
-      _this.setState({
-        attachment: file[0],
-        removed: false
-      });
-    }"
-    >
+    <div>
+      <input />
       <div
         class="contents-empty"
       >
@@ -600,13 +518,11 @@ exports[`backend/components/resource/form/KindAttributes when the kind is spread
           <p
             class="primary"
           >
-            <button
-              class="form-dropzone__inline-button"
-              tabindex="-1"
-              type="button"
+            <span
+              class="form-dropzone__upload-prompt"
             >
               Upload a file
-            </button>
+            </span>
              or 
             <br />
             drag and drop here
@@ -619,7 +535,7 @@ exports[`backend/components/resource/form/KindAttributes when the kind is spread
           </p>
         </div>
       </div>
-    </react-dropzone>
+    </div>
   </div>
 </div>
 `;

@@ -21,18 +21,8 @@ exports[`backend/components/ingestion/form/Upload matches the snapshot 1`] = `
       >
         Upload a file
       </label>
-      <react-dropzone
-        classname="form-dropzone style-landscape"
-        inputprops="[object Object]"
-        multiple="false"
-        ondrop="function (file) {
-      _this.setState({
-        attachment: file[0],
-        removed: false
-      });
-    }"
-        style="width:100%"
-      >
+      <div>
+        <input />
         <div
           class="contents-empty"
         >
@@ -61,13 +51,11 @@ exports[`backend/components/ingestion/form/Upload matches the snapshot 1`] = `
             <p
               class="primary"
             >
-              <button
-                class="form-dropzone__inline-button"
-                tabindex="-1"
-                type="button"
+              <span
+                class="form-dropzone__upload-prompt"
               >
                 Upload a file
-              </button>
+              </span>
                or 
               <br />
               drag and drop here
@@ -75,7 +63,7 @@ exports[`backend/components/ingestion/form/Upload matches the snapshot 1`] = `
             </p>
           </div>
         </div>
-      </react-dropzone>
+      </div>
       <span
         class="instructions"
       >

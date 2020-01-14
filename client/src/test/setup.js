@@ -13,8 +13,22 @@ global.testHelpers = testHelpers;
 
 // We mock 3rd party libraries that depend on the refs because react-test-renderer doesn't
 // support DOM refs, which breaks our tests.
-jest.mock("react-dropzone", () => "react-dropzone");
 jest.mock("react-text-mask", () => "react-text-mask");
+
+// We mock 3rd party libraries that depend heavily on hooks because Enzyme does not yet
+// support them (and may never. blerg).
+jest.mock("react-dropzone", () => {
+  return props => {
+    return (
+      <>
+        {props.children({
+          getRootProps: () => props,
+          getInputProps: () => ({})
+        })}
+      </>
+    );
+  };
+});
 
 jest.mock("helpers/passwordGenerator", () => {
   return jest.fn(() => "testtest123");

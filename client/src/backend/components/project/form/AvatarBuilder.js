@@ -134,21 +134,16 @@ class AvatarBuilder extends Component {
               <span className="label" aria-hidden="true">
                 Default
               </span>
-              <span className="screen-reader-text">
-                Select a background color for the default thumbnail
-              </span>
               <ColorPicker
                 onChange={this.onColorChange}
                 value={this.props.getModelValue("attributes[avatarColor]")}
+                label="Default Thumbnail Background Color"
                 {...this.props}
               />
             </div>
             <div className={uploadClasses}>
               <span className="label" aria-hidden="true">
                 Custom
-              </span>
-              <span className="screen-reader-text">
-                Add a Custom Thumbnail Image
               </span>
               <Form.Upload
                 set={this.onUploadChange}
@@ -158,6 +153,8 @@ class AvatarBuilder extends Component {
                 value={this.props.getModelValue("attributes[avatar]")}
                 placeholder="cover"
                 accepts="images"
+                label="Custom Thumbnail Image"
+                labelClass="screen-reader-text"
               />
             </div>
           </div>
