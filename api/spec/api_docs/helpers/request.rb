@@ -24,6 +24,10 @@ module ApiDocs
         !!@options[:authorized_user]
       end
 
+      def response_body?
+        options.key?(:response_body) ? !!@options[:response_body] : true
+      end
+
       def authorized_user
         auth = @options[:authorized_user]
         raise "authorized_user requires inputs that can be converted to a string" unless auth.respond_to?(:to_s)
