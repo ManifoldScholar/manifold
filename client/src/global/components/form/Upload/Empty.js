@@ -38,13 +38,9 @@ export default class FormUploadEmpty extends PureComponent {
               </span>
             ) : (
               <>
-                <button
-                  type="button"
-                  className="form-dropzone__inline-button"
-                  tabIndex="-1"
-                >
+                <span className="form-dropzone__upload-prompt">
                   {"Upload a file"}
-                </button>
+                </span>
                 {" or "}
                 <br />
                 {"drag and drop here"}

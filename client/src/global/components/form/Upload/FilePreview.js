@@ -30,14 +30,9 @@ export default class FormUploadFilePreview extends PureComponent {
             </button>
             <br />
             or{" "}
-            <button
-              type="button"
-              className="form-dropzone__inline-button"
-              aria-hidden
-              tabIndex="-1"
-            >
+            <span className="form-dropzone__upload-prompt">
               Upload a new file
-            </button>
+            </span>
           </p>
         </div>
       </div>

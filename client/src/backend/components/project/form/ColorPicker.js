@@ -10,7 +10,12 @@ export default class ColorPicker extends Component {
   static propTypes = {
     onChange: PropTypes.func,
     wrapperClass: PropTypes.string,
-    getModelValue: PropTypes.func
+    getModelValue: PropTypes.func,
+    label: PropTypes.string
+  };
+
+  static defaultProps = {
+    label: "Background Color Picker"
   };
 
   get idForPrefix() {
@@ -57,7 +62,7 @@ export default class ColorPicker extends Component {
           <div
             className="color-picker__list"
             role="group"
-            aria-label="Background Color Picker"
+            aria-label={this.props.label}
           >
             {avatarColors.map(color => {
               const checked =

@@ -77,72 +77,60 @@ exports[`global/components/form/Upload When there is no remove prop matches the 
                 >
                   Cover
                 </label>
-                <react-dropzone
-                  accept="image/*"
-                  className="form-dropzone style-portrait"
-                  inputProps={
-                    Object {
-                      "aria-describedby": "upload-error-1 upload-instructions-1",
-                      "id": "upload-1",
-                    }
-                  }
-                  multiple={false}
+                <Component
                   onDrop={[Function]}
                 >
-                  <FormUploadPreview
-                    fileName={null}
-                    handleRemove={[Function]}
-                    preview="/some/image.jpg"
+                  <div
+                    onDrop={[Function]}
                   >
-                    <FormUploadImagePreview
+                    <input />
+                    <FormUploadPreview
+                      fileName={null}
                       handleRemove={[Function]}
-                      image="/some/image.jpg"
+                      preview="/some/image.jpg"
                     >
-                      <div
-                        className="contents-image-preview"
-                        data-id="preview"
+                      <FormUploadImagePreview
+                        handleRemove={[Function]}
+                        image="/some/image.jpg"
                       >
                         <div
-                          className="message"
+                          className="contents-image-preview"
+                          data-id="preview"
                         >
-                          <p
-                            className="secondary"
+                          <div
+                            className="message"
                           >
-                            <button
-                              className="form-dropzone__inline-button"
-                              data-id="remove"
-                              onClick={[Function]}
-                              type="button"
+                            <p
+                              className="secondary"
                             >
-                              Remove this image
-                            </button>
-                            <br />
-                            or
-                             
-                            <button
-                              aria-hidden={true}
-                              className="form-dropzone__inline-button"
-                              tabIndex="-1"
-                              type="button"
-                            >
-                              Upload an image
-                            </button>
-                          </p>
+                              <button
+                                className="form-dropzone__inline-button"
+                                data-id="remove"
+                                onClick={[Function]}
+                                type="button"
+                              >
+                                Remove this image
+                              </button>
+                              <br />
+                              or
+                               
+                              <span
+                                className="form-dropzone__upload-prompt"
+                              >
+                                Upload an image
+                              </span>
+                            </p>
+                          </div>
+                          <img
+                            alt="Upload preview"
+                            className="preview"
+                            src="/some/image.jpg"
+                          />
                         </div>
-                        <img
-                          alt="Upload preview"
-                          className="preview"
-                          src="/some/image.jpg"
-                        />
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Upload Preview
-                        </span>
-                      </div>
-                    </FormUploadImagePreview>
-                  </FormUploadPreview>
-                </react-dropzone>
+                      </FormUploadImagePreview>
+                    </FormUploadPreview>
+                  </div>
+                </Component>
                 <Instructions
                   id="upload-instructions-1"
                   instructions={null}
@@ -238,72 +226,60 @@ exports[`global/components/form/Upload matches the snapshot 1`] = `
                 >
                   Cover
                 </label>
-                <react-dropzone
-                  accept="image/*"
-                  className="form-dropzone style-portrait"
-                  inputProps={
-                    Object {
-                      "aria-describedby": "upload-error-1 upload-instructions-1",
-                      "id": "upload-1",
-                    }
-                  }
-                  multiple={false}
+                <Component
                   onDrop={[Function]}
                 >
-                  <FormUploadPreview
-                    fileName={null}
-                    handleRemove={[Function]}
-                    preview="/some/image.jpg"
+                  <div
+                    onDrop={[Function]}
                   >
-                    <FormUploadImagePreview
+                    <input />
+                    <FormUploadPreview
+                      fileName={null}
                       handleRemove={[Function]}
-                      image="/some/image.jpg"
+                      preview="/some/image.jpg"
                     >
-                      <div
-                        className="contents-image-preview"
-                        data-id="preview"
+                      <FormUploadImagePreview
+                        handleRemove={[Function]}
+                        image="/some/image.jpg"
                       >
                         <div
-                          className="message"
+                          className="contents-image-preview"
+                          data-id="preview"
                         >
-                          <p
-                            className="secondary"
+                          <div
+                            className="message"
                           >
-                            <button
-                              className="form-dropzone__inline-button"
-                              data-id="remove"
-                              onClick={[Function]}
-                              type="button"
+                            <p
+                              className="secondary"
                             >
-                              Remove this image
-                            </button>
-                            <br />
-                            or
-                             
-                            <button
-                              aria-hidden={true}
-                              className="form-dropzone__inline-button"
-                              tabIndex="-1"
-                              type="button"
-                            >
-                              Upload an image
-                            </button>
-                          </p>
+                              <button
+                                className="form-dropzone__inline-button"
+                                data-id="remove"
+                                onClick={[Function]}
+                                type="button"
+                              >
+                                Remove this image
+                              </button>
+                              <br />
+                              or
+                               
+                              <span
+                                className="form-dropzone__upload-prompt"
+                              >
+                                Upload an image
+                              </span>
+                            </p>
+                          </div>
+                          <img
+                            alt="Upload preview"
+                            className="preview"
+                            src="/some/image.jpg"
+                          />
                         </div>
-                        <img
-                          alt="Upload preview"
-                          className="preview"
-                          src="/some/image.jpg"
-                        />
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Upload Preview
-                        </span>
-                      </div>
-                    </FormUploadImagePreview>
-                  </FormUploadPreview>
-                </react-dropzone>
+                      </FormUploadImagePreview>
+                    </FormUploadPreview>
+                  </div>
+                </Component>
                 <Instructions
                   id="upload-instructions-1"
                   instructions={null}

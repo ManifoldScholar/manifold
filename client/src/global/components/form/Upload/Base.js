@@ -91,17 +91,13 @@ export default class FormUpload extends Component {
   };
 
   render() {
-    const labelClass = classnames({
+    const labelClass = classnames(this.props.labelClass, {
       "has-instructions": isString(this.props.instructions)
     });
     const inputClasses = classnames({
       "form-input": true,
       wide: this.props.wide
     });
-    const inputProps = {
-      id: this.props.inputId,
-      "aria-describedby": `${this.props.idForError} ${this.props.idForInstructions}`
-    };
     return (
       <div className={inputClasses}>
         <Errorable
@@ -116,30 +112,39 @@ export default class FormUpload extends Component {
               {this.props.label}
             </label>
           ) : null}
-          <Dropzone
-            inputProps={inputProps}
-            style={this.props.inlineStyle}
-            className={`form-dropzone style-${this.props.layout}`}
-            multiple={false}
-            ref={dropzone => {
-              this.dropzone = dropzone;
-            }}
-            onDrop={this.handleFileDrop}
-            accept={this.props.accepts.accepts}
-          >
-            {this.previewable ? (
-              <Preview
-                preview={this.currentPreview}
-                handleRemove={this.handleRemove}
-                fileName={this.fileName}
-              />
-            ) : (
-              <Empty
-                accepts={this.props.accepts}
-                progress={this.props.progress}
-                uploadError={this.props.uploadError}
-                placeholder={this.props.placeholder}
-              />
+          <Dropzone onDrop={this.handleFileDrop}>
+            {({ getRootProps, getInputProps }) => (
+              <div
+                {...getRootProps({
+                  style: this.props.inlineStyle,
+                  className: `form-dropzone style-${this.props.layout}`,
+                  tabIndex: null
+                })}
+              >
+                <input
+                  {...getInputProps({
+                    accept: this.props.accepts.accepts,
+                    multiple: false,
+                    id: this.props.inputId,
+                    "aria-describedby": `${this.props.idForError} ${this.props.idForInstructions}`,
+                    tabIndex: 0
+                  })}
+                />
+                {this.previewable ? (
+                  <Preview
+                    preview={this.currentPreview}
+                    handleRemove={this.handleRemove}
+                    fileName={this.fileName}
+                  />
+                ) : (
+                  <Empty
+                    accepts={this.props.accepts}
+                    progress={this.props.progress}
+                    uploadError={this.props.uploadError}
+                    placeholder={this.props.placeholder}
+                  />
+                )}
+              </div>
             )}
           </Dropzone>
           <Instructions
