@@ -100,6 +100,11 @@ module ApiDocs
         @options[:resource_name_plural] || resource_name.pluralize
       end
 
+      def request_id?
+        return options[:request_id] if options.key?(:request_id)
+        true
+      end
+
       def delete_has_response_body?
         !!@options[:delete_has_response_body]
       end
@@ -131,11 +136,16 @@ module ApiDocs
         }
 
         defaults[@action] = remove_request_body(defaults[@action]) unless request_body?
+        defaults[@action] = remove_request_id(defaults[@action]) unless request_id?
         defaults[@action] || []
       end
 
       def remove_request_body(defaults)
         defaults.reject { |parameter| parameter[:in] == :body }
+      end
+
+      def remove_request_id(defaults)
+        defaults.reject { |parameter| parameter[:name] == :id }
       end
 
       def parameters
