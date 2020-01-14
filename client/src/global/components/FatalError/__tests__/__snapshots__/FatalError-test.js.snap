@@ -2,7 +2,7 @@
 
 exports[`global/components/FatalError matches the snapshot 1`] = `
 <SideEffect(BodyClass)
-  className="fatal-error-page"
+  className="browse fatal-error-page"
 >
   <section
     className="fatal-error"
