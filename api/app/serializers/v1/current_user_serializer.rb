@@ -6,17 +6,23 @@ module V1
 
     set_type :user
 
-    typed_attribute :persistent_ui, NilClass
+    typed_attribute :persistent_ui, Types::Serializer::PersistentUI
 
-    typed_attribute :notification_preferences, NilClass do |object, _params|
+    typed_attribute :notification_preferences, Types::Serializer::NotificationPreferences do |object, _params|
       camelize_hash(object.notification_preferences_by_kind)
     end
 
-    typed_attribute :current_user, NilClass do
+    typed_attribute :current_user, Types::Bool.meta(read_only: true) do
       true
     end
 
-    typed_attribute :class_abilities, NilClass do |object|
+    typed_attribute :class_abilities, Types::Hash.meta(
+      read_only: true,
+      description: "A wide variety of all the permissions that you as a user have " \
+      "for every kind of resource on the site. For each resource is a hash of keys " \
+      "such as 'create', 'read', 'update', 'delete', and each key has a boolean value" \
+      "attached to it"
+    ) do |object|
       out = models_with_authorization.each_with_object({}) do |klass, abilities|
         abilities[klass.name.underscore] = klass.serialized_abilities_for(object)
       end
