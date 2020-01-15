@@ -68,11 +68,9 @@ class TextSection < ApplicationRecord
     batch_size: 25,
     merge_mappings: true,
     mappings: {
-      text_section: {
-        properties: {
-          text_nodes: {
-            type: "nested"
-          }
+      properties: {
+        text_nodes: {
+          type: "nested"
         }
       }
     }

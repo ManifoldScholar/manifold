@@ -17,7 +17,8 @@ module Search
 
     def execute
       res = Searchkick.search(keyword, search_options) do |body|
-        queries = body[:query][:bool][:must][:dis_max][:queries]
+        query_groups = body[:query][:bool][:must][:bool][:should]
+        queries = query_groups.map { |item| item[:dis_max][:queries] }.flatten
         queries.push(full_text_query)
       end
       Results.new(res)

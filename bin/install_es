@@ -2,14 +2,13 @@
 
 require 'logger'
 
-url = "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.5.tar.gz"
-archive_filename = "elasticsearch-5.6.5.tar.gz"
-es_dir_name = "elasticsearch-5.6.5"
+archive_filename = 'elasticsearch-7.5.1-darwin-x86_64.tar.gz'
+url = "https://artifacts.elastic.co/downloads/elasticsearch/#{archive_filename}"
 
 logger = Logger.new(STDOUT)
 root = File.expand_path(File.join(__dir__, ".."))
 services_dir = File.join(root, "services")
-es_dir = File.join(services_dir, es_dir_name)
+es_dir = File.join(services_dir, 'elasticsearch-7.5.1')
 
 if File.directory? es_dir
     logger.warn "ElasticSearch directory already exists at #{es_dir}"
