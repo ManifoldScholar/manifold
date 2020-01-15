@@ -1,7 +1,7 @@
 require "./config/boot"
 require "./config/environment"
 
-Zhong.redis = Redis.new(url: ENV["REDIS_URL"])
+Zhong.redis = Redis.new(url: ENV["RAILS_REDIS_URL"])
 
 Zhong.schedule do
   category "social" do
