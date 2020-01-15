@@ -1,22 +1,22 @@
 {
   "assetsByChunkName": {
     "ace-editor": [
-      "build/chunk-ace-editor-d50c853601b3e4366053.js",
-      "build/chunk-ace-editor-d50c853601b3e4366053.js.map"
+      "build/chunk-ace-editor-52938cbd8f4132e7744f.js",
+      "build/chunk-ace-editor-52938cbd8f4132e7744f.js.map"
     ],
     "build/manifold-client-browser": [
-      "build/manifold-client-browser-d50c853601b3e4366053.css",
-      "build/manifold-client-browser-d50c853601b3e4366053.js",
-      "build/manifold-client-browser-d50c853601b3e4366053.css.map",
-      "build/manifold-client-browser-d50c853601b3e4366053.js.map"
+      "build/manifold-client-browser-52938cbd8f4132e7744f.css",
+      "build/manifold-client-browser-52938cbd8f4132e7744f.js",
+      "build/manifold-client-browser-52938cbd8f4132e7744f.css.map",
+      "build/manifold-client-browser-52938cbd8f4132e7744f.js.map"
     ],
     "vendors~ace-editor": [
-      "build/chunk-vendors~ace-editor-d50c853601b3e4366053.js",
-      "build/chunk-vendors~ace-editor-d50c853601b3e4366053.js.map"
+      "build/chunk-vendors~ace-editor-52938cbd8f4132e7744f.js",
+      "build/chunk-vendors~ace-editor-52938cbd8f4132e7744f.js.map"
     ],
     "vendors~autolinker": [
-      "build/chunk-vendors~autolinker-d50c853601b3e4366053.js",
-      "build/chunk-vendors~autolinker-d50c853601b3e4366053.js.map"
+      "build/chunk-vendors~autolinker-52938cbd8f4132e7744f.js",
+      "build/chunk-vendors~autolinker-52938cbd8f4132e7744f.js.map"
     ]
   }
 }
