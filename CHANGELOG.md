@@ -1,6 +1,44 @@
 # Changelog
 
-## Unreleased - TBD
+## [v4.1.0-beta.1](https://github.com/ManifoldScholar/manifold/tree/v4.1.0-beta.1) - 01/15/20
+
+### Features
+
+-  Improve handling of invalid URIs during ingestion [#2553](https://github.com/ManifoldScholar/manifold/pull/2553) ([zdavis](https://api.github.com/users/zdavis))
+-  Upgrade node, node_modules, ruby [#2526](https://github.com/ManifoldScholar/manifold/pull/2526) ([zdavis](https://api.github.com/users/zdavis))
+-  Add API SFTP Export Services [#2484](https://github.com/ManifoldScholar/manifold/pull/2484) ([scryptmouse](https://api.github.com/users/scryptmouse))
+-  Package Projects via Bagit [#2476](https://github.com/ManifoldScholar/manifold/pull/2476) ([scryptmouse](https://api.github.com/users/scryptmouse))
+-  Add ability to select texts for epub exportation [#2475](https://github.com/ManifoldScholar/manifold/pull/2475) ([scryptmouse](https://api.github.com/users/scryptmouse))
+-  Add types to serializers to support API docs [#2473](https://github.com/ManifoldScholar/manifold/pull/2473) ([zdavis](https://api.github.com/users/zdavis))
+-  Add ability to export Texts as V3 Epubs [#2450](https://github.com/ManifoldScholar/manifold/pull/2450) ([scryptmouse](https://api.github.com/users/scryptmouse))
+
+### Bugs
+
+-  Always show fatal error in browse context [#2554](https://github.com/ManifoldScholar/manifold/pull/2554) ([zdavis](https://api.github.com/users/zdavis))
+-  Correct non-image attachment handling [#2552](https://github.com/ManifoldScholar/manifold/pull/2552) ([zdavis](https://api.github.com/users/zdavis))
+-  Handle hash attachments with no styles [#2549](https://github.com/ManifoldScholar/manifold/pull/2549) ([scryptmouse](https://api.github.com/users/scryptmouse))
+-  Return 401 for unauthenticated requests [#2521](https://github.com/ManifoldScholar/manifold/pull/2521) ([zdavis](https://api.github.com/users/zdavis))
+-  Make project child authorizer more resilient [#2519](https://github.com/ManifoldScholar/manifold/pull/2519) ([zdavis](https://api.github.com/users/zdavis))
+-  Ensure texts destroy their exports [#2509](https://github.com/ManifoldScholar/manifold/pull/2509) ([scryptmouse](https://api.github.com/users/scryptmouse))
+-  Persist dirty form values when model updates [#2508](https://github.com/ManifoldScholar/manifold/pull/2508) ([zdavis](https://api.github.com/users/zdavis))
+-  Decouple press bar content from standalone mode [#2507](https://github.com/ManifoldScholar/manifold/pull/2507) ([zdavis](https://api.github.com/users/zdavis))
+-  Allow audio/x-wav mimetype [#2506](https://github.com/ManifoldScholar/manifold/pull/2506) ([zdavis](https://api.github.com/users/zdavis))
+-  Restore fallback font to reader [#2505](https://github.com/ManifoldScholar/manifold/pull/2505) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve project logging [#2503](https://github.com/ManifoldScholar/manifold/pull/2503) ([zdavis](https://api.github.com/users/zdavis))
+-  Do not logout users when API is unavailable [#2502](https://github.com/ManifoldScholar/manifold/pull/2502) ([zdavis](https://api.github.com/users/zdavis))
+-  Restore height to annotation popup wrapper [#2499](https://github.com/ManifoldScholar/manifold/pull/2499) ([zdavis](https://api.github.com/users/zdavis))
+-  Remove extraneous routes [#2498](https://github.com/ManifoldScholar/manifold/pull/2498) ([zdavis](https://api.github.com/users/zdavis))
+-  Ensure attachment checksums are present [#2497](https://github.com/ManifoldScholar/manifold/pull/2497) ([zdavis](https://api.github.com/users/zdavis))
+-  Camelize metadata properties for client [#2491](https://github.com/ManifoldScholar/manifold/pull/2491) ([zdavis](https://api.github.com/users/zdavis))
+
+### Security
+
+-  Bump handlebars from 4.2.0 to 4.5.3 in /client [#2501](https://github.com/ManifoldScholar/manifold/pull/2501) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+-  Bump rack from 2.0.7 to 2.0.8 in /api [#2486](https://github.com/ManifoldScholar/manifold/pull/2486) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+-  Bump serialize-javascript from 2.1.0 to 2.1.1 in /client [#2477](https://github.com/ManifoldScholar/manifold/pull/2477) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+-  Bump puma from 3.12.1 to 3.12.2 [#2474](https://github.com/ManifoldScholar/manifold/pull/2474) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+
+## [v4.0.2-rc.1](https://github.com/ManifoldScholar/manifold/tree/v4.0.2-rc.1) - 12/04/19
 
 ### Features
 
@@ -13,8 +51,8 @@
 ### Bugs
 
 -  Correctly serialize search result creator [#2465](https://github.com/ManifoldScholar/manifold/pull/2465) ([zdavis](https://api.github.com/users/zdavis))
--  Restore SSR of full text in reader [#2464](https://github.com/ManifoldScholar/manifold/pull/2464) ([zdavis](https://api.github.com/users/zdavis))
 -  Remove pagination from BE PC containers [#2463](https://github.com/ManifoldScholar/manifold/pull/2463) ([zdavis](https://api.github.com/users/zdavis))
+-  Restore SSR of full text in reader [#2464](https://github.com/ManifoldScholar/manifold/pull/2464) ([zdavis](https://api.github.com/users/zdavis))
 -  Rescue file not found exception in v3 upgrade [#2457](https://github.com/ManifoldScholar/manifold/pull/2457) ([zdavis](https://api.github.com/users/zdavis))
 -  Add workaround for Windows CSV upload bug [#2423](https://github.com/ManifoldScholar/manifold/pull/2423) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Improve resource and project sorting [#2413](https://github.com/ManifoldScholar/manifold/pull/2413) ([zdavis](https://api.github.com/users/zdavis))
@@ -32,9 +70,9 @@
 -  A11y improvements to BE project thumbnail components [#2442](https://github.com/ManifoldScholar/manifold/pull/2442) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Miscellaneous accessibility fixes [#2403](https://github.com/ManifoldScholar/manifold/pull/2403) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Additional contrast improvements [#2401](https://github.com/ManifoldScholar/manifold/pull/2401) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix color contrast to meet WCAG AA guidelines [#2383](https://github.com/ManifoldScholar/manifold/pull/2383) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Fix FE Project Collections placeholder [#2388](https://github.com/ManifoldScholar/manifold/pull/2388) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Fix focusability of event tiles [#2384](https://github.com/ManifoldScholar/manifold/pull/2384) ([dananjohnson](https://api.github.com/users/dananjohnson))
--  Fix color contrast to meet WCAG AA guidelines [#2383](https://github.com/ManifoldScholar/manifold/pull/2383) ([dananjohnson](https://api.github.com/users/dananjohnson))
 
 ## [v4.0.1](https://github.com/ManifoldScholar/manifold/tree/v4.0.1) - 09/29/19
 
