@@ -1,12 +1,14 @@
 # Changelog
 
+## [v4.1.0-rc.1](https://github.com/ManifoldScholar/manifold/tree/v4.1.0-rc.1) - 01/15/20
+
 ## [v4.1.0-beta.1](https://github.com/ManifoldScholar/manifold/tree/v4.1.0-beta.1) - 01/15/20
 
 ### Features
 
 -  Improve handling of invalid URIs during ingestion [#2553](https://github.com/ManifoldScholar/manifold/pull/2553) ([zdavis](https://api.github.com/users/zdavis))
--  Upgrade node, node_modules, ruby [#2526](https://github.com/ManifoldScholar/manifold/pull/2526) ([zdavis](https://api.github.com/users/zdavis))
 -  Add API SFTP Export Services [#2484](https://github.com/ManifoldScholar/manifold/pull/2484) ([scryptmouse](https://api.github.com/users/scryptmouse))
+-  Upgrade node, node_modules, ruby [#2526](https://github.com/ManifoldScholar/manifold/pull/2526) ([zdavis](https://api.github.com/users/zdavis))
 -  Package Projects via Bagit [#2476](https://github.com/ManifoldScholar/manifold/pull/2476) ([scryptmouse](https://api.github.com/users/scryptmouse))
 -  Add ability to select texts for epub exportation [#2475](https://github.com/ManifoldScholar/manifold/pull/2475) ([scryptmouse](https://api.github.com/users/scryptmouse))
 -  Add types to serializers to support API docs [#2473](https://github.com/ManifoldScholar/manifold/pull/2473) ([zdavis](https://api.github.com/users/zdavis))
@@ -25,8 +27,8 @@
 -  Allow audio/x-wav mimetype [#2506](https://github.com/ManifoldScholar/manifold/pull/2506) ([zdavis](https://api.github.com/users/zdavis))
 -  Restore fallback font to reader [#2505](https://github.com/ManifoldScholar/manifold/pull/2505) ([zdavis](https://api.github.com/users/zdavis))
 -  Improve project logging [#2503](https://github.com/ManifoldScholar/manifold/pull/2503) ([zdavis](https://api.github.com/users/zdavis))
--  Do not logout users when API is unavailable [#2502](https://github.com/ManifoldScholar/manifold/pull/2502) ([zdavis](https://api.github.com/users/zdavis))
 -  Restore height to annotation popup wrapper [#2499](https://github.com/ManifoldScholar/manifold/pull/2499) ([zdavis](https://api.github.com/users/zdavis))
+-  Do not logout users when API is unavailable [#2502](https://github.com/ManifoldScholar/manifold/pull/2502) ([zdavis](https://api.github.com/users/zdavis))
 -  Remove extraneous routes [#2498](https://github.com/ManifoldScholar/manifold/pull/2498) ([zdavis](https://api.github.com/users/zdavis))
 -  Ensure attachment checksums are present [#2497](https://github.com/ManifoldScholar/manifold/pull/2497) ([zdavis](https://api.github.com/users/zdavis))
 -  Camelize metadata properties for client [#2491](https://github.com/ManifoldScholar/manifold/pull/2491) ([zdavis](https://api.github.com/users/zdavis))
@@ -34,8 +36,8 @@
 ### Security
 
 -  Bump handlebars from 4.2.0 to 4.5.3 in /client [#2501](https://github.com/ManifoldScholar/manifold/pull/2501) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
--  Bump rack from 2.0.7 to 2.0.8 in /api [#2486](https://github.com/ManifoldScholar/manifold/pull/2486) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
 -  Bump serialize-javascript from 2.1.0 to 2.1.1 in /client [#2477](https://github.com/ManifoldScholar/manifold/pull/2477) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+-  Bump rack from 2.0.7 to 2.0.8 in /api [#2486](https://github.com/ManifoldScholar/manifold/pull/2486) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
 -  Bump puma from 3.12.1 to 3.12.2 [#2474](https://github.com/ManifoldScholar/manifold/pull/2474) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
 
 ## [v4.0.2-rc.1](https://github.com/ManifoldScholar/manifold/tree/v4.0.2-rc.1) - 12/04/19
