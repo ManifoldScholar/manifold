@@ -44,7 +44,7 @@ module Search
       @adjusted_results ||= begin
         return @searchkick_results.results if @searchkick_results.options[:load]
 
-        inject_associations(@searchkick_results)
+        adjust_results(@searchkick_results)
       end
     end
 
@@ -53,6 +53,18 @@ module Search
     end
 
     private
+
+    def adjust_results(searchkick_results)
+      out = inject_associations(inject_type(searchkick_results))
+      out
+    end
+
+    def inject_type(results)
+      results.each do |result|
+        result["_type"] = result_type(result)
+      end
+      results
+    end
 
     def inject_associations(searchkick_results)
       models = execute query_plan_for models_in searchkick_results
@@ -99,7 +111,12 @@ module Search
     end
 
     def result_model_reference(result)
-      result.values_at("_type", "_id")
+      id = result["_id"]
+      [result_type(result), id]
+    end
+
+    def result_type(result)
+      result["_index"].split("_#{Searchkick.env}").first.singularize
     end
 
     def models_in(results)

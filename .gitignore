@@ -54,3 +54,4 @@ client/plugins*
 ## Built files ###
 api/swagger
 
+config/elasticsearch/elasticsearch.keystore

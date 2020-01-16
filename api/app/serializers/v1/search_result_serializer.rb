@@ -99,9 +99,9 @@ module V1
 
       # rubocop:disable Metrics/AbcSize
       def text_nodes(object)
-        results = object.dig("inner_hits", "text_nodes")
-        return nil unless results
+        results = object.dig("text_nodes")
 
+        return nil unless results
         camelize_hash(
           total: results.hits.total,
           hits: results.hits.hits.each_with_index.map do |hit, _index|

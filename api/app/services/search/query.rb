@@ -21,6 +21,7 @@ module Search
         queries = query_groups.map { |item| item[:dis_max][:queries] }.flatten
         queries.push(full_text_query)
       end
+
       Results.new(res)
     end
 
@@ -111,9 +112,9 @@ module Search
         explain: false,
         page: page_number,
         per_page: per_page,
-        select: {
-          exclude: [:text_nodes]
-        },
+        # select: {
+        #   exclude: [:text_nodes]
+        # },
         where: where,
         indices_boost: indices_boost,
         fields: ["title^50", "full_text^40", "makers^30", "keywords^30", "parent_keywords^10"],
