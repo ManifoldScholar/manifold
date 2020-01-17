@@ -342,7 +342,8 @@ module Validation
           :top_bar_text,
           :top_bar_url,
           :top_bar_color,
-          :top_bar_mode
+          :top_bar_mode,
+          :accent_color
         ]
       },
       :remove_press_logo, attachment(:press_logo),

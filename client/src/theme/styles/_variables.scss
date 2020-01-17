@@ -31,21 +31,24 @@ $neutral40hex: str-slice(#{$neutral40}, 2);
 $neutralOffWhite: $neutral05;
 $neutralOffBlack: $neutral90;
 
-$accentPrimary: #52e3ac !default;
-$accentPrimaryDark: darken(desaturate($accentPrimary, 20.97), 18.82) !default; // #34a178
-$accentPrimaryMedium: darken(desaturate($accentPrimary, 20.94), 11.57) !default; // #3dbd8c
-$accentPrimaryLight: lighten(saturate($accentPrimary, 0.36), 8.04) !default; // #75e9bd
-$accentPrimaryDull: lighten(desaturate(adjust-hue($accentPrimary, -3), 14.56), 20) !default; // #b1ead2
-$accentPrimaryPale: lighten(desaturate($accentPrimary, 1.55), 19.41) !default; // #a8f0d5
-$accentPrimaryExtraPale: lighten(saturate($accentPrimary, 1.19), 27.65); // #cbf7e6
-$accentPrimaryOffWhite: lighten(desaturate(adjust-hue($accentPrimary, 5), 22.14), 35.49) !default; // #f0faf7
+$_accentPrimary: #52e3ac !default;
+$_accentPrimaryDark: darken(desaturate($_accentPrimary, 20.97), 18.82) !default; // #34a178
+$_accentPrimaryMedium: darken(desaturate($_accentPrimary, 20.94), 11.57) !default; // #3dbd8c
+$_accentPrimaryLight: lighten(saturate($_accentPrimary, 0.36), 8.04) !default; // #75e9bd
+$_accentPrimaryDull: lighten(desaturate(adjust-hue($_accentPrimary, -3), 14.56), 20) !default; // #b1ead2
+$_accentPrimaryPale: lighten(desaturate($_accentPrimary, 1.55), 19.41) !default; // #a8f0d5
+$_accentPrimaryExtraPale: lighten(saturate($_accentPrimary, 1.19), 27.65); // #cbf7e6
+$_accentPrimaryOffWhite: lighten(desaturate(adjust-hue($_accentPrimary, 5), 22.14), 35.49) !default; // #f0faf7
 
-$focusPrimary: lighten(saturate(adjust-hue($accentPrimary, 2), 7.86), 25.69) !default; // #c0f8e5
+// User Interactions
+$_accentInteractionLight: $_accentPrimary !default;
+$_accentInteractionDark: darken(saturate(adjust-hue($_accentPrimary, 4), 17.01), 35.29) !default; // #077A57
+
 $focusSecondary: $neutral20;
 $focusTertiary: $neutral30;
 
 // ---> For SVG interpolation
-$accentPrimaryHex: str-slice(#{$accentPrimary}, 2);
+$_accentPrimaryHex: str-slice(#{$_accentPrimary}, 2);
 
 // Spectra
 // Additional global accent colors
@@ -96,10 +99,6 @@ $neutralTextDark: $neutral75; // for $neutral10 ↓ bg
 $neutralUIDark: $neutral70; // ""
 $neutralTextExtraDark: $neutral90; // for informational hierarchy with $neutralTextDark
 $neutralUIExtraDark: $neutral85; // ""
-
-// User Interactions
-$accentInteractionLight: $accentPrimary !default;
-$accentInteractionDark: darken(saturate(adjust-hue($accentPrimary, 4), 17.01), 35.29) !default; // #077A57
 
 // Errors (plus delete icons/messages)
 $spErrorExtraLight: $spRed20;

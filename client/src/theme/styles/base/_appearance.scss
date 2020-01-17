@@ -23,6 +23,20 @@
 // - Browser UI
 // - Tables
 
+// Accent Colors
+// --------------------
+
+$accentPrimary: var(--accent-primary, #{$_accentPrimary});
+$accentPrimaryDark: var(--accent-primary-dark, #{$_accentPrimaryDark});
+$accentPrimaryMedium: var(--accent-primary-medium, #{$_accentPrimaryMedium});
+$accentPrimaryLight: var(--accent-primary-light, #{$_accentPrimaryLight});
+$accentPrimaryDull: var(--accent-primary-dull #{$_accentPrimaryDull});
+$accentPrimaryPale: var(--accent-primary-pale, #{$_accentPrimaryPale});
+$accentPrimaryExtraPale: var(--accent-primary-extra-pale, #{$_accentPrimaryExtraPale});
+$accentPrimaryOffWhite: var(--accent-primary-off-white, #{$_accentPrimaryOffWhite});
+$accentInteractionLight: var(--accent-interaction-light, #{$_accentInteractionLight});
+$accentInteractionDark: var(--accent-interaction-dark, #{$_accentInteractionDark});
+
 // Light & Dark Client Themes
 // --------------------
 $defaultFocusColor: var(--default-focus-color, #{$accentInteractionLight});
@@ -30,6 +44,19 @@ $defaultHoverColor: var(--default-hover-color, #{$accentInteractionLight});
 $defaultErrorColor: var(--default-error-color, #{$spErrorLight});
 $defaultWarningColor: var(--default-warning-color, #{$spWarningLight});
 $defaultNoticeColor: var(--default-notice-color, #{$spNoticeLight});
+
+body {
+  --accent-primary: #{$_accentPrimary};
+  --accent-primary-dark: #{$_accentPrimaryDark};
+  --accent-primary-medium: #{$_accentPrimaryMedium};
+  --accent-primary-light: #{$_accentPrimaryLight};
+  --accent-primary-dul: #{$_accentPrimaryDull};
+  --accent-primary-pale: #{$_accentPrimaryPale};
+  --accent-primary-extra-pale: #{$_accentPrimaryExtraPale};
+  --accent-primary-off-white: #{$_accentPrimaryOffWhite};
+  --accent-interaction-light: #{$_accentInteractionLight};
+  --accent-interaction-dark: #{$_accentInteractionDark};
+}
 
 .browse, .reader.scheme-light {
   --default-focus-color: #{$neutralUIDark};
