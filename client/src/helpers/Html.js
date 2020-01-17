@@ -139,7 +139,9 @@ export default class Html extends Component {
             name="viewport"
             content="width=device-width, initial-scale=1, user-scalable=0"
           />
-
+          <script src="/browser.config.js" charSet="UTF-8" />
+          {this.favicons()}
+          {this.stylesheets()}
           {helmetContext && helmetContext.helmet && (
             <>
               {helmetContext.helmet.title.toComponent()}
@@ -147,11 +149,6 @@ export default class Html extends Component {
               {helmetContext.helmet.style.toComponent()}
             </>
           )}
-
-          <script src="/browser.config.js" charSet="UTF-8" />
-
-          {this.favicons()}
-          {this.stylesheets()}
         </head>
         <body className={bodyClass}>
           <div id="content" {...contentProps} />
