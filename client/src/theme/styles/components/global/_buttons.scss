@@ -131,7 +131,7 @@
   }
 
   &:focus-visible {
-    background-color: $focusPrimary;
+    background-color: $defaultFocusColor;
     outline: 0;
 
     .browse & {
@@ -444,7 +444,7 @@
   }
 
   &:focus-visible {
-    background-color: $focusPrimary;
+    background-color: $defaultFocusColor;
     outline: 0;
   }
 

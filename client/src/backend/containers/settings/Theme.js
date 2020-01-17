@@ -85,6 +85,13 @@ export class SettingsThemeContainer extends PureComponent {
                 placeholder="0"
                 instructions={`Use this field to adjust the vertical position of header navigation. For example, enter "5" to move the header down 5 pixels. Enter "-5" to move it up 5 pixels.`}
               />
+              <Form.TextInput
+                label="Accent Color"
+                name="attributes[theme][accentColor]"
+                placeholder="#52e3ac"
+                instructions="Enter a color in one of the following formats: CSS color keyword, hexadecimal, rgb, rgba, hsl, hsla, or hwb. Leave blank to restore default accent color."
+                wide
+              />
             </Form.FieldGroup>
             <Form.FieldGroup label={"Typography"}>
               <Form.TextInput

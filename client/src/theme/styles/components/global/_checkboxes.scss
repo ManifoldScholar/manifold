@@ -85,7 +85,7 @@
     outline: 0;
 
     ~ .checkbox__indicator {
-      background-color: $focusPrimary;
+      background-color: $defaultFocusColor;
 
       .checkbox__icon {
         color: $neutral90;

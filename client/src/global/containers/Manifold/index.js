@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import HeadContent from "global/components/HeadContent";
+import ColorScheme from "global/components/ColorScheme";
 import LoadingBar from "global/components/LoadingBar";
 import FatalError from "global/components/FatalError";
 import SignInUp from "global/components/sign-in-up";
@@ -174,6 +175,7 @@ class ManifoldContainer extends PureComponent {
           {this.props.confirm}
           <HeadContent />
           <LoadingBar loading={this.props.loading} />
+          <ColorScheme settings={this.props.settings} />
           <CSSTransition
             in={this.props.visibility.signInUpOverlay}
             classNames={"overlay-login"}
