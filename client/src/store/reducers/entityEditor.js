@@ -3,6 +3,7 @@ import update from "immutability-helper";
 import lodashSet from "lodash/set";
 import lodashGet from "lodash/get";
 import isEmpty from "lodash/isEmpty";
+import isPlainObject from "lodash/isPlainObject";
 import lodashUnset from "lodash/unset";
 import flatMapDeep from "lodash/flatMapDeep";
 
@@ -60,7 +61,10 @@ const refresh = (state, action) => {
 
   ["attributes", "relationships"].forEach(type => {
     Object.keys(dirty[type]).forEach(property => {
-      if (dirty[type][property] === model[type][property])
+      if (
+        dirty[type][property] === model[type][property] ||
+        isPlainObject(dirty[type][property])
+      )
         delete dirty[type][property];
     });
   });
