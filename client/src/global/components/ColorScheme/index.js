@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import colorHelper from "color";
+import { Helmet } from "react-helmet-async";
 
 export default class ColorScheme extends Component {
   static customProperties = {
@@ -96,7 +97,25 @@ export default class ColorScheme extends Component {
     }
   }
 
+  colorSchemeAsCSS() {
+    const rules = [];
+    if (!this.hasCustomColor()) return null;
+    try {
+      const accent = colorHelper(this.accentColor());
+      Object.keys(this.constructor.customProperties).forEach(customProperty => {
+        const transformer = this.constructor.customProperties[customProperty];
+        const value = transformer(accent).hex();
+        rules.push(`${customProperty}: ${value};`);
+      });
+      if (rules.length > 0) return `body { ${rules.join(" ")} };`;
+    } catch (error) {
+      return null;
+    }
+  }
+
   render() {
-    return null;
+    const cssText = this.colorSchemeAsCSS();
+    if (!cssText) return null;
+    return <Helmet style={[{ cssText }]} />;
   }
 }

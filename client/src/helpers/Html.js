@@ -144,6 +144,7 @@ export default class Html extends Component {
             <>
               {helmetContext.helmet.title.toComponent()}
               {helmetContext.helmet.meta.toComponent()}
+              {helmetContext.helmet.style.toComponent()}
             </>
           )}
 
