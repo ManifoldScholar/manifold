@@ -1,24 +1,39 @@
 # Changelog
 
-## [v4.1.0-rc.1](https://github.com/ManifoldScholar/manifold/tree/v4.1.0-rc.1) - 01/15/20
+## [v4.1.0](https://github.com/ManifoldScholar/manifold/tree/v4.1.0) - 01/21/20
+
+### Features
+
+-  Manifold accent color can be customized [#2568](https://github.com/ManifoldScholar/manifold/pull/2568) ([zdavis](https://api.github.com/users/zdavis))
+
+### Bugs
+
+-  Apply custom accent color to SSR [#2571](https://github.com/ManifoldScholar/manifold/pull/2571) ([zdavis](https://api.github.com/users/zdavis))
+-  Enforce Lockbox master key length [#2570](https://github.com/ManifoldScholar/manifold/pull/2570) ([scryptmouse](https://api.github.com/users/scryptmouse))
+
+## [v4.1.0-rc.1](https://github.com/ManifoldScholar/manifold/tree/v4.1.0-rc.1) - 01/16/20
+
+### Features
+
+-  Release v4.1.0-rc.1 [#2563](https://github.com/ManifoldScholar/manifold/pull/2563) ([zdavis](https://api.github.com/users/zdavis))
 
 ## [v4.1.0-beta.1](https://github.com/ManifoldScholar/manifold/tree/v4.1.0-beta.1) - 01/15/20
 
 ### Features
 
+-  Release v4.1.0-beta.1 [#2561](https://github.com/ManifoldScholar/manifold/pull/2561) ([zdavis](https://api.github.com/users/zdavis))
 -  Improve handling of invalid URIs during ingestion [#2553](https://github.com/ManifoldScholar/manifold/pull/2553) ([zdavis](https://api.github.com/users/zdavis))
--  Add API SFTP Export Services [#2484](https://github.com/ManifoldScholar/manifold/pull/2484) ([scryptmouse](https://api.github.com/users/scryptmouse))
--  Upgrade node, node_modules, ruby [#2526](https://github.com/ManifoldScholar/manifold/pull/2526) ([zdavis](https://api.github.com/users/zdavis))
--  Package Projects via Bagit [#2476](https://github.com/ManifoldScholar/manifold/pull/2476) ([scryptmouse](https://api.github.com/users/scryptmouse))
--  Add ability to select texts for epub exportation [#2475](https://github.com/ManifoldScholar/manifold/pull/2475) ([scryptmouse](https://api.github.com/users/scryptmouse))
--  Add types to serializers to support API docs [#2473](https://github.com/ManifoldScholar/manifold/pull/2473) ([zdavis](https://api.github.com/users/zdavis))
--  Add ability to export Texts as V3 Epubs [#2450](https://github.com/ManifoldScholar/manifold/pull/2450) ([scryptmouse](https://api.github.com/users/scryptmouse))
+-  Build service and expose API endpoints for pushing project packages to SFTP storage [#2484](https://github.com/ManifoldScholar/manifold/pull/2484) ([scryptmouse](https://api.github.com/users/scryptmouse))
+-  Upgrade Node, Node module dependencies, and Ruby [#2526](https://github.com/ManifoldScholar/manifold/pull/2526) ([zdavis](https://api.github.com/users/zdavis))
+-  Add service for packaging projects in accordance with the BagIt specification [#2476](https://github.com/ManifoldScholar/manifold/pull/2476) ([scryptmouse](https://api.github.com/users/scryptmouse))
+-  Expose preliminary interface for enabling Epub export for specific texts [#2475](https://github.com/ManifoldScholar/manifold/pull/2475) ([scryptmouse](https://api.github.com/users/scryptmouse))
+-  Document serializer property types to support upcoming API documentation [#2473](https://github.com/ManifoldScholar/manifold/pull/2473) ([zdavis](https://api.github.com/users/zdavis))
+-  Give backend users the option of producing Epubs from Manifold texts [#2450](https://github.com/ManifoldScholar/manifold/pull/2450) ([scryptmouse](https://api.github.com/users/scryptmouse))
 
 ### Bugs
 
--  Always show fatal error in browse context [#2554](https://github.com/ManifoldScholar/manifold/pull/2554) ([zdavis](https://api.github.com/users/zdavis))
--  Correct non-image attachment handling [#2552](https://github.com/ManifoldScholar/manifold/pull/2552) ([zdavis](https://api.github.com/users/zdavis))
--  Handle hash attachments with no styles [#2549](https://github.com/ManifoldScholar/manifold/pull/2549) ([scryptmouse](https://api.github.com/users/scryptmouse))
+-  Add epubcheck jars [#2560](https://github.com/ManifoldScholar/manifold/pull/2560) ([scryptmouse](https://api.github.com/users/scryptmouse))
+-  Correct color contrast on fatal error view [#2554](https://github.com/ManifoldScholar/manifold/pull/2554) ([zdavis](https://api.github.com/users/zdavis))
 -  Return 401 for unauthenticated requests [#2521](https://github.com/ManifoldScholar/manifold/pull/2521) ([zdavis](https://api.github.com/users/zdavis))
 -  Make project child authorizer more resilient [#2519](https://github.com/ManifoldScholar/manifold/pull/2519) ([zdavis](https://api.github.com/users/zdavis))
 -  Ensure texts destroy their exports [#2509](https://github.com/ManifoldScholar/manifold/pull/2509) ([scryptmouse](https://api.github.com/users/scryptmouse))
