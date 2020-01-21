@@ -4,6 +4,7 @@ module SystemUpgrades
       # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
 
       def perform!
+        remove_collaborators_without_makers!
         update_resource_sort_titles!
         update_project_counters!
         cache_formatted_attributes!
