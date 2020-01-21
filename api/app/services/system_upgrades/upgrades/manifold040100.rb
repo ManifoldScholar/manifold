@@ -11,6 +11,18 @@ module SystemUpgrades
 
       private
 
+      def remove_collaborators_without_makers!
+        logger.info("===================================================================")
+        logger.info("Remove Collaborators with Null Makers                              ")
+        logger.info("===================================================================")
+        logger.info("Prior to version 4.0.1, it was possible to delete a maker without  ")
+        logger.info("deleting associated collaborator records. We can safely delete any ")
+        logger.info("collaborators that do not have a corresponding maker               ")
+        logger.info("===================================================================")
+        invalid_collaborators = Collaborator.all.reject(&:maker)
+        invalid_collaborators.each { |c| c.destroy if c.maker.nil? }
+      end
+
       def update_project_counters!
         logger.info("===================================================================")
         logger.info("Updating Project Counters                                          ")
