@@ -28,6 +28,11 @@ module ApiDocs
         options.key?(:response_body) ? !!@options[:response_body] : true
       end
 
+      def instantiate_before_test?
+        return !!options[:instantiate_before_test] if options.has_key? :instantiate_before_test
+        true
+      end
+
       def authorized_user
         auth = @options[:authorized_user]
         raise "authorized_user requires inputs that can be converted to a string" unless auth.respond_to?(:to_s)
