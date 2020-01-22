@@ -23,7 +23,7 @@ RSpec.describe "Twitter Queries", type: :request do
                         model: TwitterQuery,
                         authorized_user: :admin,
                         tags: "Projects",
-                        summary: "Gets all twitter queries associated with a project",
+                        summary: "Returns all twitter queries associated with a project",
                         url_parameters: [:project_id]
     end
   end
