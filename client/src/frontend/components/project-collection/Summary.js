@@ -58,7 +58,7 @@ export default class ProjectCollectionSummary extends Component {
     });
     const iconFill =
       this.collection.attributes.icon === "new-round"
-        ? "#52e3ac"
+        ? "var(--accent-primary, #52e3ac)"
         : "currentColor";
 
     return (

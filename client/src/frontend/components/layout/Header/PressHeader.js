@@ -21,7 +21,8 @@ class PressHeader extends PureComponent {
     return (
       this.props.bgColor ||
       this.props.settings.attributes.theme.topBarColor ||
-      "#52e3ac"
+      this.props.settings.attributes.theme.accentColor ||
+      "#52e3ac" // default $accentPrimary
     );
   }
 

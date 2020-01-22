@@ -85,11 +85,7 @@
     outline: 0;
 
     ~ .checkbox__indicator {
-      background-color: $defaultFocusColor;
-
-      .checkbox__icon {
-        color: $neutral90;
-      }
+      @include defaultFocusStyle;
     }
   }
 }

@@ -50,6 +50,10 @@ export default class ResourcePlayerAudio extends Component {
     return "volume-bar";
   }
 
+  get progressColor() {
+    return getComputedStyle(document.body).getPropertyValue("--accent-primary");
+  }
+
   setVolume = event => {
     event.preventDefault();
     const volume = parseInt(event.target.value, 10);
@@ -100,7 +104,7 @@ export default class ResourcePlayerAudio extends Component {
         container: this.container,
         height: 275,
         waveColor: "#555", // $neutral80
-        progressColor: "#52e3ac", // $accentPrimary
+        progressColor: this.progressColor,
         barWidth: 5,
         barHeight: 1,
         cursorWidth: 0

@@ -147,7 +147,7 @@
 
   &__button {
     @include utilityPrimary;
-    @include fillOnFocusVisible(rgba($accentPrimary, 0.2));
+    @include fillOnFocusVisible($accentPrimaryPale);
     display: block;
     padding: 7px 15px 5px 10px;
     font-size: 14px;
@@ -178,6 +178,10 @@
     &:hover {
       color: $neutralTextExtraDark;
       background-color: $defaultHoverColor;
+    }
+
+    &:focus-visible {
+      color: $neutralTextExtraDark;
     }
 
     svg {

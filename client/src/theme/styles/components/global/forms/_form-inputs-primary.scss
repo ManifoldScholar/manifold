@@ -63,7 +63,7 @@
   &__action {
     @include buttonUnstyled;
     @include utilityPrimary;
-    @include fillOnFocusVisible(rgba($accentPrimary, 0.35));
+    @include fillOnFocusVisible($accentInteractionLight);
     padding: 0.333em 1em;
     font-size: 12px;
     font-weight: $semibold;
@@ -454,7 +454,7 @@
     z-index: -1;
     opacity: 0;
 
-    &:focus-visible ~ .toggle-indicator {
+    &:focus-visible ~ .toggle-indicator .boolean-primary {
       @include defaultFocusStyle;
       outline-color: $defaultFocusColor;
       outline-offset: 2px;

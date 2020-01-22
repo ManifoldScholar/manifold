@@ -30,7 +30,7 @@ export default class ProjectCollectionDetail extends Component {
 
     const iconFill =
       projectCollection.attributes.icon === "new-round"
-        ? "#52e3ac"
+        ? "var(--accent-primary, #52e3ac)"
         : "currentColor";
 
     return (
