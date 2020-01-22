@@ -50,10 +50,7 @@ module V1
       typed_attribute :tag_list, Types::Array.of(Types::String)
       typed_attribute :resource_collections_count, Types::Integer.meta(read_only: true)
       typed_attribute :resources_count, Types::Integer.meta(read_only: true)
-      typed_attribute :citations, Types::Hash.meta(
-        description: "Citations of the book in a variety of formats (mla, chicago, apa, etc.)",
-        read_only: true
-      )
+      typed_attribute :citations, Types::Serializer::Citations
       typed_attribute :hide_activity, Types::Bool
       typed_attribute :standalone_mode, Types::String.enum("disabled", "enabled", "enforced")
       typed_attribute :download_url, Types::String.optional

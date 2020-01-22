@@ -76,11 +76,7 @@ module V1
         object.has_epub_v3_export_url?
       }
 
-      typed_attribute :citations, Types::Hash.schema(
-        apa: Types::String,
-        mla: Types::String,
-        chicago: Types::String
-      ).meta(read_only: true)
+      typed_attribute :citations, Types::Serializer::Citations
       typed_attribute :spine, Types::Array.of(Types::Serializer::ID).meta(read_only: true)
       typed_attribute :pending_slug, Types::String
       typed_attribute :section_kind, Types::String.optional.meta(
