@@ -3,18 +3,23 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    typed_attribute :text_slug, NilClass
-    typed_attribute :text_title, NilClass
-    typed_attribute :name, NilClass
-    typed_attribute :social_image, NilClass
-    typed_attribute :source_identifier, NilClass
-    typed_attribute :kind, NilClass
+    typed_attribute :text_slug, Types::String
+    typed_attribute :text_title, Types::String
+    typed_attribute :name, Types::String.optional
+    typed_attribute :social_image, Types::Serializer::URL.optional
+    typed_attribute :source_identifier, Types::String.optional
+    typed_attribute :kind, Types::String.meta(example: "section")
 
     typed_belongs_to :text
     typed_has_many :stylesheets
 
     when_full do
-      typed_attribute :body_json, Types::Hash
+      typed_attribute :body_json, Types::Hash.schema(
+        tag: Types::String.meta(example: "div"),
+        children: Types::Array.of(Types::Hash).meta(
+          description: "A JSON representation of the text section's HTML contents"
+        )
+      )
       typed_attribute :citations, Types::Hash
     end
 
