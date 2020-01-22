@@ -4,6 +4,11 @@ shared_examples_for "an API destroy request" do |options|
 
   api_spec_helper = ApiDocs::Helpers::Request.new(options, :destroy)
 
+  let(:resource_instance) do
+    defined?(resource) ? resource : FactoryBot.create(api_spec_helper.factory)
+  end
+  let(:id) { resource_instance.id }
+
   delete api_spec_helper.summary do
     api_spec_helper.parameters.each do |parameter_options|
       parameter(parameter_options)

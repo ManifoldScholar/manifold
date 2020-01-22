@@ -5,15 +5,14 @@ module V1
 
     current_user_is_creator?
 
-    typed_attribute :annotations_count, NilClass
-    typed_attribute :highlights_count, NilClass
-    typed_attribute :anonymous_label, NilClass
-    typed_attribute :is_current_user, NilClass
-    typed_attribute :is_current_user, NilClass do |object, params|
+    typed_attribute :annotations_count, Types::Integer.meta(read_only: true)
+    typed_attribute :highlights_count, Types::Integer.meta(read_only: true)
+    typed_attribute :anonymous_label, Types::String.meta(read_only: true)
+    typed_attribute :is_current_user, Types::Bool.meta(read_only: true) do |object, params|
       current_user_is_object_user?(object, params)
     end
 
-    typed_attribute :name, NilClass do |object, params|
+    typed_attribute :name, Types::String.meta(read_only: true) do |object, params|
       next object.user_full_name if not_anonymous?(object)
       next object.user.full_name if current_user_is_object_user?(object, params)
       next "#{object.user.full_name} (#{anonymous_label(object)})" if can_see_identity?(object, params)
