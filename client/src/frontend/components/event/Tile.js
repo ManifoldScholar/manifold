@@ -70,7 +70,7 @@ export class EventTile extends Component {
     });
 
     return (
-      <div className={this.props.itemClass}>
+      <li className={this.props.itemClass}>
         {/* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex */}
         <div
           role={this.hasLink ? "link" : null}
@@ -129,7 +129,7 @@ export class EventTile extends Component {
             <span className="screen-reader-text">Delete Event</span>
           </div>
         )}
-      </div>
+      </li>
     );
   }
 }
