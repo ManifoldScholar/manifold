@@ -4,10 +4,13 @@ shared_examples_for "an API show request" do |options|
 
   api_spec_helper = ApiDocs::Helpers::Request.new(options, :show)
 
-  let(:resource_instance) do
-    defined?(resource) ? resource : FactoryBot.create(api_spec_helper.factory)
+  if api_spec_helper.instantiate_before_test?
+    let(:resource_instance) do
+      defined?(resource) ? resource : FactoryBot.create(api_spec_helper.factory)
+    end
+    let(:id) { resource_instance.id }
   end
-  let(:id) { resource_instance.id }
+
   let(:body) { json_structure_for(api_spec_helper.factory) }
 
   get api_spec_helper.summary do
