@@ -73,5 +73,12 @@ module Types
       digest: Types::String.enum("never", "always"),
       digestCommentsAndAnnotations: Types::String.enum("never", "always")
     )
+
+    Oauth = Types::Hash.schema(
+      custom: Types::Bool,
+      enabled: Types::Bool,
+      name: Types::String.meta(example: "facebook"),
+      descriptiveName: Types::String.meta(example: "Facebook")
+    )
   end
 end
