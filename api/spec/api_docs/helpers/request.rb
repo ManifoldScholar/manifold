@@ -67,6 +67,7 @@ module ApiDocs
 
       def success_description
         return @options[:success_description] if @options[:success_description]
+        return options[:summary] if options.has_key? :summary
 
         I18n.t("swagger.#{@action}.success", type: human_resource_name, attribute: "ID")
       end
