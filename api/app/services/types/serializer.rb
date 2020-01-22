@@ -11,6 +11,15 @@ module Types
 
     NotificationPreference = Types::String.enum("always", "never", "daily")
 
+    Citations = Types::Hash.schema(
+      apa: Types::String,
+      mla: Types::String,
+      chicago: Types::String
+    ).meta(
+      description: "Citations of the book in a variety of formats (mla, chicago, apa, etc.)",
+      read_only: true
+    )
+
     Abilities = Types::Hash.schema(
       create: Types::Bool,
       read: Types::Bool,
