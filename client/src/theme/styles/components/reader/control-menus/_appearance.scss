@@ -241,16 +241,9 @@
       }
     }
 
-    &:hover, &:focus-visible {
+    &:hover, &:focus-within {
       border-color: $defaultHoverColor;
       outline: 0;
-    }
-  }
-
-  &__color-scheme-icon {
-    .appearance-menu__radio-input:focus-visible ~ & {
-      @include defaultHoverStyle;
-      opacity: 1;
     }
   }
 

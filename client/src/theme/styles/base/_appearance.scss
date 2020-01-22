@@ -30,7 +30,7 @@ $accentPrimary: var(--accent-primary, #{$_accentPrimary});
 $accentPrimaryDark: var(--accent-primary-dark, #{$_accentPrimaryDark});
 $accentPrimaryMedium: var(--accent-primary-medium, #{$_accentPrimaryMedium});
 $accentPrimaryLight: var(--accent-primary-light, #{$_accentPrimaryLight});
-$accentPrimaryDull: var(--accent-primary-dull #{$_accentPrimaryDull});
+$accentPrimaryDull: var(--accent-primary-dull, #{$_accentPrimaryDull});
 $accentPrimaryPale: var(--accent-primary-pale, #{$_accentPrimaryPale});
 $accentPrimaryExtraPale: var(--accent-primary-extra-pale, #{$_accentPrimaryExtraPale});
 $accentPrimaryOffWhite: var(--accent-primary-off-white, #{$_accentPrimaryOffWhite});
@@ -50,7 +50,7 @@ body {
   --accent-primary-dark: #{$_accentPrimaryDark};
   --accent-primary-medium: #{$_accentPrimaryMedium};
   --accent-primary-light: #{$_accentPrimaryLight};
-  --accent-primary-dul: #{$_accentPrimaryDull};
+  --accent-primary-dull: #{$_accentPrimaryDull};
   --accent-primary-pale: #{$_accentPrimaryPale};
   --accent-primary-extra-pale: #{$_accentPrimaryExtraPale};
   --accent-primary-off-white: #{$_accentPrimaryOffWhite};

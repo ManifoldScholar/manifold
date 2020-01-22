@@ -24,7 +24,7 @@
 
     &:focus-within {
       color: $accentPrimary;
-      background-color: rgba($accentPrimary, 0.2);
+      background-color: rgba($neutral20, 0.1);
     }
 
     &--selected {

@@ -131,7 +131,7 @@
   }
 
   &:focus-visible {
-    background-color: $defaultFocusColor;
+    background-color: $accentPrimaryDull;
     outline: 0;
 
     .browse & {
@@ -220,11 +220,10 @@
   &:active {
     color: $neutralTextExtraDark;
     background-color: $accentInteractionLight;
-    border-color: $accentInteractionLight;
   }
 
   .browse & {
-    @include fillOnFocusVisible($accentPrimaryDull);
+    @include fillOnFocusVisible($accentPrimaryExtraPale);
   }
 
   &__icon {
@@ -294,7 +293,8 @@
   }
 
   &:focus-visible:not([disabled]) {
-    background-color: rgba($accentPrimary, 0.2);
+    color: $neutral90;
+    background-color: $accentPrimaryPale;
     outline: 0;
   }
 
@@ -320,7 +320,8 @@
     }
 
     &:focus-visible:not([disabled]) {
-      background-color: rgba($neutral50, 0.2);
+      color: $neutralTextExtraLight;
+      background-color: rgba($neutralUIDark, 0.3);
       outline: 0;
     }
   }
@@ -438,13 +439,10 @@
     font-size: 14px;
   }
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     color: $neutral80;
     background-color: $accentPrimaryDull;
-  }
-
-  &:focus-visible {
-    background-color: $defaultFocusColor;
     outline: 0;
   }
 
@@ -510,12 +508,17 @@
     .bg-neutral90 &,
     .bg-neutral100 &,
     .drawer-backend & {
-      @include fillOnFocusVisible(rgba($accentPrimary, 0.2));
       color: $neutralWhite;
 
       &:hover {
         color: $neutral90;
         background-color: $accentPrimary;
+      }
+
+      &:focus-visible {
+        color: $neutral100;
+        background-color: $accentPrimaryPale;
+        border-color: $accentPrimaryPale;
       }
     }
 
