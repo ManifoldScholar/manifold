@@ -9,7 +9,7 @@ module Api
         @text_section = load_text_section
         includes = %w(stylesheets)
         render_single_resource @text_section,
-                               inlcude: includes
+                               include: includes
       end
 
     end
