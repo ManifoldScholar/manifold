@@ -5,21 +5,48 @@ module V1
 
     typed_attribute :score, Types::Float, &:_score
     typed_attribute :searchable_id, Types::Serializer::ID, &:_id
-    typed_attribute :searchable_type, Types::String do |object, _params|
+    typed_attribute :searchable_type, Types::String.meta(example: "textSection") do |object, _params|
       camelized_type(object)
     end
-    typed_attribute :full_text, Types::String
+    typed_attribute :full_text, Types::String.optional
     typed_attribute :title, Types::String
     typed_attribute :keywords, Types::Array.of(Types::String)
     typed_attribute :parent_keywords, Types::Array.of(Types::String).optional
     typed_attribute :makers, Types::Array.of(Types::String)
-    typed_attribute :parents, Types::Hash.optional do |object, _params|
+    typed_attribute :parents, Types::Hash.schema(
+      text: Types::Hash.schema(
+        title: Types::String,
+        slug: Types::String,
+        id: Types::Serializer::ID
+      ),
+      project: Types::Hash.schema(
+        title: Types::String,
+        slug: Types::String,
+        id: Types::Serializer::ID
+      )
+    ).optional do |object, _params|
       parents(object)
     end
-    typed_attribute :text_nodes, Types::Hash.optional do |object, _params|
+    typed_attribute :text_nodes, Types::Hash.schema(
+      total: Types::Integer,
+      hits: Types::Array.of(
+        Types::Hash.schema(
+          content: Types::String,
+          content_highlighted: Types::Array.of(Types::String),
+          node_uuid: Types::String,
+          position: Types::Integer
+        )
+      )
+    ).optional do |object, _params|
       text_nodes(object)
     end
-    typed_attribute :highlights, Types::Hash.optional do |object, _params|
+    typed_attribute :highlights, Types::Hash.schema(
+      parent_keywords: Types::String.optional, # TOOD: check type
+      keywords: Types::String.optional, # TOOD: check type
+      makers: Types::String.optional, # TOOD: check type
+      full_text: Types::String.optional, # TOOD: check type
+      title: Types::String.optional # TOOD: check type
+    ).optional do |object, _params|
       highlights(object)
     end
 
