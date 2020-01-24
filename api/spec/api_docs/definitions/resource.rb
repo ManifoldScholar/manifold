@@ -25,15 +25,23 @@ module ApiDocs
         parse_dry_types(__callee__, definition)
       end
 
-      def resource_response
-        definition = ::Types::Hash.schema(data: resource_response_data)
+      def resource_response(paginated: false)
+        schema = {
+          data: resource_response_data,
+          meta: (Types::Serializer::PaginatedMeta if paginated)
+        }.compact
+
+        definition = ::Types::Hash.schema(schema)
         parse_dry_types(__callee__, definition)
       end
 
-      def collection_response
-        definition = ::Types::Hash.schema(
-          data: ::Types::Array.of(partial_resource_response_data)
-        )
+      def collection_response(paginated: false)
+        schema = {
+          data: ::Types::Array.of(partial_resource_response_data),
+          meta: (Types::Serializer::PaginatedMeta if paginated)
+        }.compact
+
+        definition = ::Types::Hash.schema(schema)
         parse_dry_types(__callee__, definition)
       end
 
