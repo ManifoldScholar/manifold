@@ -117,6 +117,10 @@
     font-size: 18px;
     font-style: italic;
     letter-spacing: 0.028em;
+
+    @include respond($break75) {
+      padding-bottom: header-layout(padding-vertical-desktop);
+    }
   }
 
   .user-nav {
