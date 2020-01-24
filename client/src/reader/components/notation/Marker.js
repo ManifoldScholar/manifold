@@ -21,13 +21,7 @@ export class NotationMarker extends Component {
     history: PropTypes.object
   };
 
-  setActiveAnnotation(annotationId) {
-    this.props.dispatch(
-      uiReaderActions.setActiveAnnotation({ annotationId, passive: false })
-    );
-  }
-
-  hasTouchSupport() {
+  get hasTouchSupport() {
     return (
       "ontouchstart" in window ||
       (window.DocumentTouch && document instanceof window.DocumentTouch) ||
@@ -36,30 +30,41 @@ export class NotationMarker extends Component {
     );
   }
 
+  get thumbnailsAreVisible() {
+    const breakpoint = 1235;
+    return window.innerWidth >= breakpoint;
+  }
+
+  get disallowMarkerClickthru() {
+    return this.hasTouchSupport && !this.thumbnailsAreVisible;
+  }
+
+  setActiveAnnotation(annotationId) {
+    this.props.dispatch(
+      uiReaderActions.setActiveAnnotation({ annotationId, passive: false })
+    );
+  }
+
   handleClick(event, annotation) {
     event.preventDefault();
-    if (!this.hasTouchSupport()) {
-      const base = window.location.pathname;
-      let rel = lh.link(
-        "frontendProjectResourceRelative",
-        annotation.resourceId
-      );
-      if (annotation.type === "resource_collection") {
-        rel = lh.link(
-          "frontendProjectResourceCollectionRelative",
-          annotation.resourceCollectionId
-        );
-      }
-      const url = `${base}/${rel}`;
-      this.props.history.push(url, { noScroll: true });
-    } else {
-      this.setActiveAnnotation(annotation.id);
+
+    if (this.disallowMarkerClickthru) {
+      return this.setActiveAnnotation(annotation.id);
     }
+
+    const base = window.location.pathname;
+    let rel = lh.link("frontendProjectResourceRelative", annotation.resourceId);
+    if (annotation.type === "resource_collection") {
+      rel = lh.link(
+        "frontendProjectResourceCollectionRelative",
+        annotation.resourceCollectionId
+      );
+    }
+    const url = `${base}/${rel}`;
+    this.props.history.push(url, { noScroll: true });
   }
 
   render() {
-    const touch = this.hasTouchSupport();
-
     return (
       <span>
         {this.props.annotations.map(annotation => {
@@ -75,14 +80,14 @@ export class NotationMarker extends Component {
               data-annotation-notation={id}
               role="presentation"
               className={markerClassNames}
-              onClick={event => {
-                this.handleClick(event, annotation);
-              }}
+              onClick={event => this.handleClick(event, annotation)}
               onMouseOver={() => {
-                if (!touch) this.setActiveAnnotation(id);
+                if (this.disallowMarkerClickthru) return null;
+                this.setActiveAnnotation(id);
               }}
               onMouseLeave={() => {
-                if (!touch) this.setActiveAnnotation(null);
+                if (this.disallowMarkerClickthru) return null;
+                this.setActiveAnnotation(null);
               }}
             >
               <IconComposer
