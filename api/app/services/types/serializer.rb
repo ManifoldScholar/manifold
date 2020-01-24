@@ -92,5 +92,16 @@ module Types
       name: Types::String.meta(example: "facebook"),
       descriptiveName: Types::String.meta(example: "Facebook")
     )
+
+    PaginatedMeta = Types::Hash.schema(
+      pagination: Types::Hash.schema(
+        perPage: Types::Integer,
+        currentPage: Types::Integer,
+        nextPage: Types::Integer,
+        prevPage: Types::Integer,
+        totalPages: Types::Integer,
+        totalCount: Types::Integer
+      )
+    )
   end
 end

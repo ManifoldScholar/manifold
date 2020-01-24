@@ -2791,6 +2791,34 @@
                       }
                     }
                   }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "perPage": {
+                          "type": "integer"
+                        },
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "prevPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalCount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4171,6 +4199,34 @@
                       }
                     }
                   }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "perPage": {
+                          "type": "integer"
+                        },
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "prevPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalCount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4845,6 +4901,34 @@
                           "partial": {
                             "type": "boolean"
                           }
+                        }
+                      }
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "perPage": {
+                          "type": "integer"
+                        },
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "prevPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalCount": {
+                          "type": "integer"
                         }
                       }
                     }
@@ -13184,6 +13268,34 @@
                       }
                     }
                   }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "perPage": {
+                          "type": "integer"
+                        },
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "prevPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalCount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -15087,6 +15199,34 @@
                       "properties": {
                         "partial": {
                           "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "perPage": {
+                          "type": "integer"
+                        },
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "prevPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalCount": {
+                          "type": "integer"
                         }
                       }
                     }
@@ -17824,6 +17964,34 @@
                       }
                     }
                   }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "perPage": {
+                          "type": "integer"
+                        },
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "prevPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalCount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -17984,6 +18152,34 @@
                       "properties": {
                         "partial": {
                           "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "perPage": {
+                          "type": "integer"
+                        },
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "prevPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalCount": {
+                          "type": "integer"
                         }
                       }
                     }
@@ -19030,6 +19226,34 @@
                       }
                     }
                   }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "perPage": {
+                          "type": "integer"
+                        },
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "prevPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalCount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -19985,6 +20209,34 @@
                           "partial": {
                             "type": "boolean"
                           }
+                        }
+                      }
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "perPage": {
+                          "type": "integer"
+                        },
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "prevPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalCount": {
+                          "type": "integer"
                         }
                       }
                     }
@@ -26383,6 +26635,34 @@
                       }
                     }
                   }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "perPage": {
+                          "type": "integer"
+                        },
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "prevPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalCount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -31080,6 +31360,34 @@
                       }
                     }
                   }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "perPage": {
+                          "type": "integer"
+                        },
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "prevPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalCount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -31729,6 +32037,282 @@
                         },
                         "type": {
                           "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "CurrentUser": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "currentUsers"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "abilities": {
+                  "type": "object"
+                },
+                "nickname": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "fullName": {
+                  "type": "string"
+                },
+                "avatarStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "largeLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                },
+                "email": {
+                  "type": "string",
+                  "example": "me@email.com"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "isCurrentUser": {
+                  "type": "boolean"
+                },
+                "persistentUi": {
+                  "type": "object",
+                  "properties": {
+                    "reader": {
+                      "type": "object",
+                      "properties": {
+                        "colors": {
+                          "type": "object",
+                          "properties": {
+                            "colorScheme": {
+                              "type": "string",
+                              "enum": [
+                                "light",
+                                "dark"
+                              ]
+                            }
+                          }
+                        },
+                        "typography": {
+                          "type": "object",
+                          "properties": {
+                            "font": {
+                              "type": "string",
+                              "example": "serif"
+                            },
+                            "margins": {
+                              "type": "object",
+                              "properties": {
+                                "max": {
+                                  "type": "integer"
+                                },
+                                "min": {
+                                  "type": "integer"
+                                },
+                                "current": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "fontSize": {
+                              "type": "object",
+                              "properties": {
+                                "max": {
+                                  "type": "integer"
+                                },
+                                "min": {
+                                  "type": "integer"
+                                },
+                                "current": {
+                                  "type": "integer"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "readingGroups": {
+                          "type": "object",
+                          "properties": {
+                            "currentReadingGroup": {
+                              "type": "string",
+                              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "notificationPreferences": {
+                  "type": "object",
+                  "properties": {
+                    "projects": {
+                      "type": "string",
+                      "enum": [
+                        "never",
+                        "always"
+                      ]
+                    },
+                    "followedProjects": {
+                      "type": "string",
+                      "enum": [
+                        "never",
+                        "always"
+                      ]
+                    },
+                    "flaggedResources": {
+                      "type": "string",
+                      "enum": [
+                        "never",
+                        "always"
+                      ]
+                    },
+                    "projectCommentsAndAnnotations": {
+                      "type": "string",
+                      "enum": [
+                        "never",
+                        "always"
+                      ]
+                    },
+                    "repliesToMe": {
+                      "type": "string",
+                      "enum": [
+                        "never",
+                        "always"
+                      ]
+                    },
+                    "digest": {
+                      "type": "string",
+                      "enum": [
+                        "never",
+                        "always"
+                      ]
+                    },
+                    "digestCommentsAndAnnotations": {
+                      "type": "string",
+                      "enum": [
+                        "never",
+                        "always"
+                      ]
+                    }
+                  }
+                },
+                "currentUser": {
+                  "type": "boolean"
+                },
+                "classAbilities": {
+                  "type": "object",
+                  "description": "A wide variety of all the permissions that you as a user have for every kind of resource on the site. For each resource is a hash of keys such as 'create', 'read', 'update', 'delete', and each key has a boolean valueattached to it"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "favorites": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                          },
+                          "type": {
+                            "type": "string"
+                          }
                         }
                       }
                     }
@@ -36217,100 +36801,6 @@
         }
       }
     },
-    "TextCategory": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "textCategories"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "position": {
-                  "type": "integer"
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "CollectionProject": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "collectionProjects"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "position": {
-                  "type": "integer"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "project": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "Comment": {
       "type": "object",
       "properties": {
@@ -36367,6 +36857,168 @@
               "type": "object",
               "properties": {
                 "creator": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ProjectExportation": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "projectExportations"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "currentState": {
+                  "type": "string",
+                  "enum": [
+                    "new",
+                    "pending",
+                    "queued",
+                    "importing",
+                    "imported",
+                    "failed",
+                    "skipped"
+                  ]
+                },
+                "exportedAt": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "metadata": {
+                  "x-nullable": true,
+                  "type": "object"
+                },
+                "packageUrl": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "packageSize": {
+                  "x-nullable": true,
+                  "type": "string"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "exportTarget": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "CollectionProject": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "collectionProjects"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "position": {
+                  "type": "integer"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "project": {
                   "type": "object",
                   "properties": {
                     "data": {
@@ -36632,7 +37284,7 @@
         }
       }
     },
-    "CurrentUser": {
+    "TextCategory": {
       "type": "object",
       "properties": {
         "data": {
@@ -36644,360 +37296,16 @@
             },
             "type": {
               "type": "string",
-              "example": "currentUsers"
+              "example": "textCategories"
             },
             "attributes": {
               "type": "object",
               "properties": {
-                "abilities": {
-                  "type": "object"
-                },
-                "nickname": {
+                "title": {
                   "type": "string"
                 },
-                "firstName": {
-                  "type": "string"
-                },
-                "lastName": {
-                  "type": "string"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "fullName": {
-                  "type": "string"
-                },
-                "avatarStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "largeLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                },
-                "email": {
-                  "type": "string",
-                  "example": "me@email.com"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "role": {
-                  "type": "string"
-                },
-                "kind": {
-                  "type": "string"
-                },
-                "isCurrentUser": {
-                  "type": "boolean"
-                },
-                "persistentUi": {
-                  "type": "object",
-                  "properties": {
-                    "reader": {
-                      "type": "object",
-                      "properties": {
-                        "colors": {
-                          "type": "object",
-                          "properties": {
-                            "colorScheme": {
-                              "type": "string",
-                              "enum": [
-                                "light",
-                                "dark"
-                              ]
-                            }
-                          }
-                        },
-                        "typography": {
-                          "type": "object",
-                          "properties": {
-                            "font": {
-                              "type": "string",
-                              "example": "serif"
-                            },
-                            "margins": {
-                              "type": "object",
-                              "properties": {
-                                "max": {
-                                  "type": "integer"
-                                },
-                                "min": {
-                                  "type": "integer"
-                                },
-                                "current": {
-                                  "type": "integer"
-                                }
-                              }
-                            },
-                            "fontSize": {
-                              "type": "object",
-                              "properties": {
-                                "max": {
-                                  "type": "integer"
-                                },
-                                "min": {
-                                  "type": "integer"
-                                },
-                                "current": {
-                                  "type": "integer"
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "readingGroups": {
-                          "type": "object",
-                          "properties": {
-                            "currentReadingGroup": {
-                              "type": "string",
-                              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "notificationPreferences": {
-                  "type": "object",
-                  "properties": {
-                    "projects": {
-                      "type": "string",
-                      "enum": [
-                        "never",
-                        "always"
-                      ]
-                    },
-                    "followedProjects": {
-                      "type": "string",
-                      "enum": [
-                        "never",
-                        "always"
-                      ]
-                    },
-                    "flaggedResources": {
-                      "type": "string",
-                      "enum": [
-                        "never",
-                        "always"
-                      ]
-                    },
-                    "projectCommentsAndAnnotations": {
-                      "type": "string",
-                      "enum": [
-                        "never",
-                        "always"
-                      ]
-                    },
-                    "repliesToMe": {
-                      "type": "string",
-                      "enum": [
-                        "never",
-                        "always"
-                      ]
-                    },
-                    "digest": {
-                      "type": "string",
-                      "enum": [
-                        "never",
-                        "always"
-                      ]
-                    },
-                    "digestCommentsAndAnnotations": {
-                      "type": "string",
-                      "enum": [
-                        "never",
-                        "always"
-                      ]
-                    }
-                  }
-                },
-                "currentUser": {
-                  "type": "boolean"
-                },
-                "classAbilities": {
-                  "type": "object",
-                  "description": "A wide variety of all the permissions that you as a user have for every kind of resource on the site. For each resource is a hash of keys such as 'create', 'read', 'update', 'delete', and each key has a boolean valueattached to it"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "favorites": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                          },
-                          "type": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "ProjectExportation": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "projectExportations"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "currentState": {
-                  "type": "string",
-                  "enum": [
-                    "new",
-                    "pending",
-                    "queued",
-                    "importing",
-                    "imported",
-                    "failed",
-                    "skipped"
-                  ]
-                },
-                "exportedAt": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "metadata": {
-                  "x-nullable": true,
-                  "type": "object"
-                },
-                "packageUrl": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "packageSize": {
-                  "x-nullable": true,
-                  "type": "string"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "project": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                },
-                "exportTarget": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
+                "position": {
+                  "type": "integer"
                 }
               }
             },

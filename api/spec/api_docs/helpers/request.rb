@@ -28,6 +28,10 @@ module ApiDocs
         options.key?(:response_body) ? @options[:response_body].present? : true
       end
 
+      def paginated?
+        options[:paginated].present?
+      end
+
       def instantiate_before_test?
         return options[:instantiate_before_test].present? if options.key? :instantiate_before_test
 
@@ -270,8 +274,10 @@ module ApiDocs
       end
 
       def response
-        # TODO: Denote if response is paginated or not
-        resource_klass(resource_name).send(type_method(type_from_action(action, :response)))
+        options = {
+          paginated: paginated?
+        }
+        resource_klass(resource_name).send(type_method(type_from_action(action, :response)), options)
       end
     end
   end
