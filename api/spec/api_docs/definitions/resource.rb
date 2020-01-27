@@ -32,7 +32,7 @@ module ApiDocs
 
       def collection_response
         definition = ::Types::Hash.schema(
-          data: ::Types::Array.of(partial_response_data)
+          data: ::Types::Array.of(partial_resource_response_data)
         )
         parse_dry_types(__callee__, definition)
       end
@@ -55,26 +55,13 @@ module ApiDocs
         nil
       end
 
-      def serializer
-        "V1::#{self.name.demodulize}Serializer".constantize
-      end
-
       #####################################
       ############# REQUESTS ##############
       #####################################
 
       def request_attributes
-        metadata_handler.validate_metadata_attributes!
         attributes = write_only_attributes.merge(all_attributes).except(*read_only_attributes)
-
-        if metadata_handler.metadata?
-          # the serializer automatically attaches empty metadata fields if the model contains metadata,
-          # however the formatted and properties version of metadata are not request attributes
-          attributes = attributes.except(:metadata_formatted, :metadata_properties)
-          attributes = attributes.merge(metadata_handler.request_metadata)
-        end
-
-        attributes
+        expand_attributes(attributes, :request)
       end
 
       def required_create_attributes
@@ -101,12 +88,14 @@ module ApiDocs
         return {} unless const_defined?(:REQUEST_ATTRIBUTES)
 
         raise("Error: REQUEST_ATTRIBUTES requires a hash with dry type definitions") unless self::REQUEST_ATTRIBUTES.is_a? Hash
+
         self::REQUEST_ATTRIBUTES
       end
 
       def assign_required_attributes(contents, required_values)
         return nil if contents.nil?
         raise "contents must be a hash" unless contents.is_a?(Hash)
+
         attributes = ::Types::Hash.schema(contents)
         attributes = attributes.meta(required: required_values) if required_values.present?
         attributes
@@ -128,19 +117,22 @@ module ApiDocs
       ######################################
 
       def resource_response_data
-        return partial_response_data if serializer.partial_only?
+        return partial_resource_response_data if serializer.partial_only?
 
+        full_resource_response_data
+      end
+
+      def full_resource_response_data
         resource_data(
           attributes: (filter_response_attributes(all_attributes) if all_attributes?),
           relationships: (full_relationships if full_relationships?),
-          full_register: true
         )
       end
 
-      def partial_response_data
+      def partial_resource_response_data
         resource_data(
           attributes: (filter_response_attributes(attributes) if attributes?),
-          relationships: (relationships if relationships?),
+          relationships: (relationships if relationships?)
         )
       end
 
@@ -160,14 +152,34 @@ module ApiDocs
       ############# HELPERS ##############
       ####################################
 
-      def resource_data(attributes: nil, relationships: nil, full_register: false)
-        metadata_handler.validate_metadata_attributes!
-        attributes = attributes.merge(metadata_handler.response_metadata) if metadata_handler.metadata? && full_register
+      def expand_attributes(attributes, _type = :response)
+        return attributes if attributes.nil?
 
+        # If we have other nested hashes that need special treatment in the future,
+        # we can address them here.
+        expand_with_metadata(attributes)
+      end
+
+      def expand_with_metadata(attributes, type = :response)
+        return attributes unless attributes.key? :metadata_properties
+        raise "METADATA_ATTRIBUTES must be defined on #{name}" unless self::METADATA_ATTRIBUTES
+
+        metadata = {
+          metadata: ::Types::Hash.schema(self::METADATA_ATTRIBUTES)
+        }
+        if type == :response
+          metadata[:metadata_formatted] = ::Types::Hash.schema(self::METADATA_ATTRIBUTES)
+          metadata[:metadata_properties] = ::Types::Array.of(::Types::String)
+        end
+        attributes.merge(metadata)
+      end
+
+      def resource_data(attributes: nil, relationships: nil)
+        expanded_attributes = expand_attributes(attributes)
         data = {
           id: id_type,
           type: ::Types::String.meta(example: type.camelize(:lower)),
-          attributes: (::Types::Hash.schema(attributes) unless attributes.nil?),
+          attributes: (::Types::Hash.schema(expanded_attributes) unless expanded_attributes.nil?),
           relationships: (::Types::Hash.schema(relationships) unless relationships.nil?),
           meta: ::Types::Serializer::Meta
         }.compact
@@ -177,6 +189,10 @@ module ApiDocs
 
       def type
         name.demodulize.pluralize.underscore
+      end
+
+      def serializer
+        "V1::#{name.demodulize}Serializer".constantize
       end
 
       def attributes
@@ -203,19 +219,12 @@ module ApiDocs
         transform_keys(definition)
       end
 
-      def metadata_handler
-        metadata_attributes = const_defined?(:METADATA_ATTRIBUTES) ? self::METADATA_ATTRIBUTES : {}
-        raise "Error: METADATA_ATTRIBUTES requires a hash with dry type definitions" unless metadata_attributes.is_a? Hash
-
-        Helpers::MetadataHandler.new(name, metadata_attributes)
-      end
-
       def transform_keys(definition)
         definition.deep_transform_keys { |key| key.to_s.camelize(:lower) }
       end
 
       def map_serializer_types(hash)
-        hash.map { |k,v| if v == :has_many then [k, ::Types::Serializer::Collection] else [k, ::Types::Serializer::Resource] end }.to_h
+        hash.map { |k, v| v == :has_many ? [k, ::Types::Serializer::Collection] : [k, ::Types::Serializer::Resource] }.to_h
       end
 
       def relationships
