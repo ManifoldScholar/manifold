@@ -278,9 +278,13 @@
       border-color: $defaultHoverColor;
     }
 
-    /* Undo the Firefox inner focus ring */
     &:focus-visible:-moz-focusring {
       color: transparent;
+      text-shadow: 0 0 0 $neutralTextDark;
+
+      .backend & {
+        text-shadow: 0 0 0 $neutralTextExtraLight;
+      }
     }
 
     &::-ms-expand {
