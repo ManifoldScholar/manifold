@@ -3,7 +3,7 @@ require "csl/styles"
 
 module Citation
   class Generator
-
+    # rubocop:disable Metrics/AbcSize
     def cite(subject, styles)
       item = CiteProc::Item.new(map(subject))
       return {} unless subject.respond_to? :citation_parts
@@ -15,8 +15,10 @@ module Citation
         results[style[0]] = citation unless citation.blank?
       end
     rescue TypeError
-      nil
+      Rails.logger.error("Error while generating citation: #{TypeError}")
+      {}
     end
+    # rubocop:enable Metrics/AbcSize
 
     def map(subject)
       return {} unless subject.respond_to? :citation_parts
