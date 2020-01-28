@@ -27,6 +27,7 @@ class PredictiveInput extends PureComponent {
     fetchOptions: PropTypes.object,
     placeholder: PropTypes.string,
     authToken: PropTypes.string,
+    idForLabel: PropTypes.string,
     idForError: PropTypes.string,
     idForInstructions: PropTypes.string,
     focusOnMount: PropTypes.bool
@@ -59,6 +60,10 @@ class PredictiveInput extends PureComponent {
     if (prevState.value !== this.state.value) {
       this.debouncedUpdateOptions(this.state.value, this.props.fetch);
     }
+  }
+
+  get ariaLabelledBy() {
+    return this.props.idForLabel;
   }
 
   get ariaDescribedBy() {
@@ -271,6 +276,7 @@ class PredictiveInput extends PureComponent {
           onFocus={this.handleFocus}
           onKeyPress={this.handleKeyPress}
           onKeyDown={this.handleKeyDown}
+          aria-labelledby={this.ariaLabelledBy}
           aria-describedby={this.ariaDescribedBy}
           aria-autocomplete="list"
           aria-controls={`${id}-listbox`}
@@ -279,8 +285,8 @@ class PredictiveInput extends PureComponent {
         {this.props.onNew ? (
           <button
             type="button"
-            aria-hidden="true"
             onClick={this.handleNew}
+            disabled={!this.state.value}
             className="input-predictive__button"
           >
             <IconComposer
@@ -288,6 +294,9 @@ class PredictiveInput extends PureComponent {
               size={20}
               iconClass="input-predictive__icon"
             />
+            <span className="screen-reader-text">
+              {`Add ${this.state.value} to list`}
+            </span>
           </button>
         ) : null}
       </div>
@@ -298,7 +307,7 @@ class PredictiveInput extends PureComponent {
   renderResults(id) {
     return (
       <ul
-        aria-label={this.props.placeholder}
+        aria-labelledby={this.ariaLabelledBy}
         role="listbox"
         id={`${id}-listbox`}
         className="input-predictive__results"

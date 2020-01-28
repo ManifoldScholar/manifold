@@ -10,7 +10,8 @@ export default class FormHasManyHeader extends PureComponent {
     labelTag: PropTypes.oneOf(["div", "h2", "h3", "h4"]),
     labelHeader: PropTypes.bool,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    idForInstructions: PropTypes.string
+    idForInstructions: PropTypes.string,
+    labelId: PropTypes.string.isRequired
   };
 
   static defaultProps = {
@@ -21,10 +22,10 @@ export default class FormHasManyHeader extends PureComponent {
     return this.props.labelTag;
   }
 
-  renderLabelHeader(label, instructions, idForInstructions) {
+  renderLabelHeader(label, instructions, idForInstructions, id) {
     return (
       <>
-        <header className="section-heading-secondary">
+        <header id={id} className="section-heading-secondary">
           <h3>{label}</h3>
         </header>
         <Instructions instructions={instructions} id={idForInstructions} />
@@ -32,9 +33,9 @@ export default class FormHasManyHeader extends PureComponent {
     );
   }
 
-  renderHeader(label, instructions, idForInstructions) {
+  renderHeader(label, instructions, idForInstructions, id) {
     const Header = props => (
-      <this.labelTag className="form-input-heading">
+      <this.labelTag id={id} className="form-input-heading">
         {props.children}
       </this.labelTag>
     );
@@ -48,11 +49,11 @@ export default class FormHasManyHeader extends PureComponent {
   }
 
   render() {
-    const { label, instructions, idForInstructions } = this.props;
+    const { label, instructions, idForInstructions, labelId: id } = this.props;
     if (!label) return null;
 
     return this.props.labelHeader
-      ? this.renderLabelHeader(label, instructions, idForInstructions)
-      : this.renderHeader(label, instructions, idForInstructions);
+      ? this.renderLabelHeader(label, instructions, idForInstructions, id)
+      : this.renderHeader(label, instructions, idForInstructions, id);
   }
 }
