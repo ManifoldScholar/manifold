@@ -30,6 +30,7 @@
     text-decoration: none;
 
     &:focus-visible {
+      @include defaultHoverStyle;
       outline: 0;
     }
   }
