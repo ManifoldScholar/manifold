@@ -152,12 +152,12 @@ module ApiDocs
       ############# HELPERS ##############
       ####################################
 
-      def expand_attributes(attributes, _type = :response)
+      def expand_attributes(attributes, type = :response)
         return attributes if attributes.nil?
 
         # If we have other nested hashes that need special treatment in the future,
         # we can address them here.
-        expand_with_metadata(attributes)
+        expand_with_metadata(attributes, type)
       end
 
       def expand_with_metadata(attributes, type = :response)
