@@ -10,7 +10,7 @@ module ApiDocs
         ID_TYPE = ::Types::String.meta(example: "1")
 
         class << self
-          include Resource
+          include ApiDocs::Definitions::Resource
         end
       end
     end

@@ -3,7 +3,7 @@ module ApiDocs
     module Resources
       class CollectionProject
         class << self
-          include Resource
+          include ApiDocs::Definitions::Resource
         end
       end
     end

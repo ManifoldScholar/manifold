@@ -21,7 +21,7 @@ module ApiDocs
         }.freeze
 
         class << self
-          include Resource
+          include ApiDocs::Definitions::Resource
         end
       end
     end
