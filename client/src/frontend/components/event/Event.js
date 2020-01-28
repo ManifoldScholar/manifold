@@ -80,7 +80,7 @@ export default class Event extends PureComponent {
       ),
       content: autolinkTweet(contentProps),
       date: attr.createdAt,
-      dateFormat: "MMMM Do, yyyy",
+      dateFormat: "MMMM dd, yyyy",
       linkHref: attr.eventUrl,
       linkTarget: "_blank"
     };
@@ -92,7 +92,7 @@ export default class Event extends PureComponent {
       icon: "activityEgg64",
       date: attr.createdAt,
       header: attr.eventTitle,
-      dateFormat: "MMMM Do, yyyy",
+      dateFormat: "MMMM dd, yyyy",
       title: attr.eventSubtitle
     };
   }
@@ -102,7 +102,7 @@ export default class Event extends PureComponent {
       type: attr.eventType,
       date: attr.createdAt,
       header: "Text Added",
-      dateFormat: "MMMM Do, yyyy",
+      dateFormat: "MMMM dd, yyyy",
       title: attr.subjectTitle,
       icon: "activityText64",
       linkHref: lh.link("reader", attr.subjectSlug)
@@ -114,7 +114,7 @@ export default class Event extends PureComponent {
       type: attr.eventType,
       date: attr.createdAt,
       header: "Resource Added",
-      dateFormat: "MMMM Do, yyyy",
+      dateFormat: "MMMM dd, yyyy",
       title: attr.subjectTitle,
       icon: "activityResource64",
       linkHref: lh.link(
@@ -130,7 +130,7 @@ export default class Event extends PureComponent {
       type: attr.eventType,
       date: attr.createdAt,
       header: "Resource Collection Added",
-      dateFormat: "MMMM Do, yyyy",
+      dateFormat: "MMMM dd, yyyy",
       title: attr.subjectTitle,
       icon: "activityResource64",
       linkHref: lh.link(
