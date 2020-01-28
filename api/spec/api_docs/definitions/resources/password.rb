@@ -3,7 +3,7 @@ module ApiDocs
     module Resources
       class Password
         class << self
-          include Resource
+          include ApiDocs::Definitions::Resource
 
           def serializer
             ::V1::UserSerializer

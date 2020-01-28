@@ -8,7 +8,7 @@ module ApiDocs
         READ_ONLY_RELATIONSHIPS = [:text].freeze
 
         class << self
-          include Resource
+          include ApiDocs::Definitions::Resource
         end
       end
     end

@@ -3,7 +3,7 @@ module ApiDocs
     module Resources
       class TextSection
         class << self
-          include Resource
+          include ApiDocs::Definitions::Resource
         end
       end
     end
