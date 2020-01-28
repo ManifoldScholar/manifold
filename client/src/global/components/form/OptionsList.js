@@ -18,6 +18,7 @@ class FormOptionsList extends PureComponent {
     mode: PropTypes.string,
     selectedValue: PropTypes.string,
     searchable: PropTypes.bool,
+    idForLabel: PropTypes.string,
     idForError: PropTypes.string,
     idForInstructions: PropTypes.string
   };
@@ -61,6 +62,7 @@ class FormOptionsList extends PureComponent {
         label={props.label}
         onSelect={this.handleSelect}
         onNew={props.onNew}
+        idForLabel={props.idForLabel}
         idForError={props.idForError}
         idForInstructions={props.idForInstructions}
         focusOnMount={props.focusOnMount}

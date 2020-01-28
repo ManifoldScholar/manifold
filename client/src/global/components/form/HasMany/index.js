@@ -70,12 +70,20 @@ export class FormHasMany extends PureComponent {
     return entities || [];
   }
 
+  get idPrefix() {
+    return "predictive-text";
+  }
+
+  get idForLabelPrefix() {
+    return `${this.idPrefix}-label`;
+  }
+
   get idForErrorPrefix() {
-    return "predictive-text-belongs-to-error";
+    return `${this.idPrefix}-belongs-to-error`;
   }
 
   get idForInstructionsPrefix() {
-    return "predictive-text-belongs-to-instructions";
+    return `${this.idPrefix}-belongs-to-instructions`;
   }
 
   selectOne(entity) {
@@ -131,6 +139,7 @@ export class FormHasMany extends PureComponent {
               labelTag={this.props.labelTag}
               labelHeader={this.props.labelHeader}
               instructions={this.props.instructions}
+              labelId={`${this.idForLabelPrefix}-${id}`}
               idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
             />
             <div className="has-many-list">
@@ -147,6 +156,7 @@ export class FormHasMany extends PureComponent {
                 fetchOptions={this.props.fetchOptions}
                 options={this.props.options}
                 searchable={this.props.searchable}
+                idForLabel={`${this.idForLabelPrefix}-${id}`}
                 idForError={`${this.idForErrorPrefix}-${id}`}
                 idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
               />
