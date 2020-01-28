@@ -510,12 +510,12 @@
     .drawer-backend & {
       color: $neutralWhite;
 
-      &:hover {
+      &:not(.button-secondary--dull):hover {
         color: $neutral90;
         background-color: $accentPrimary;
       }
 
-      &:focus-visible {
+      &:not(.button-secondary--dull):focus-visible {
         color: $neutral100;
         background-color: $accentPrimaryPale;
         border-color: $accentPrimaryPale;
