@@ -10,7 +10,7 @@ module ApiDocs
 
         class << self
 
-          include Resource
+          include ApiDocs::Definitions::Resource
 
           def create_attributes
             request_attributes.except(:remove_thumbnail)

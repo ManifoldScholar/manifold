@@ -6,7 +6,7 @@ module ApiDocs
         REQUIRED_CREATE_RELATIONSHIPS = [:favoritable].freeze
 
         class << self
-          include Resource
+          include ApiDocs::Definitions::Resource
 
           def create_relationships
             {
