@@ -78,7 +78,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
 
   describe "creates an annotation" do
     context "when the user is an reader" do
-      before(:each) { post path, headers: reader_headers, params: json_payload(annotation_params) }
+      before(:each) { post path, headers: reader_headers, params: build_json_payload(annotation_params) }
       describe "the response" do
         it "has a 201 status code" do
           expect(response).to have_http_status(201)
@@ -87,7 +87,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
     end
 
     context "when the user is not authenticated" do
-      before(:each) { post path, params: json_payload(annotation_params) }
+      before(:each) { post path, params: build_json_payload(annotation_params) }
       describe "the response" do
         it "has a 401 status code" do
           expect(response).to have_http_status(401)
@@ -96,7 +96,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
     end
 
     context "when the user is an admin" do
-      before(:each) { post path, headers: admin_headers, params: json_payload(annotation_params) }
+      before(:each) { post path, headers: admin_headers, params: build_json_payload(annotation_params) }
       describe "the response" do
         it "has a 201 status code" do
           expect(response).to have_http_status(201)
@@ -107,7 +107,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
 
   describe "creates a resource annotation" do
     context "when the user is an reader" do
-      before(:each) { post path, headers: reader_headers, params: json_payload(resource_params) }
+      before(:each) { post path, headers: reader_headers, params: build_json_payload(resource_params) }
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
           a = response.body
@@ -117,7 +117,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
     end
 
     context "when the user is an admin" do
-      before(:each) { post path, headers: admin_headers, params: json_payload(resource_params) }
+      before(:each) { post path, headers: admin_headers, params: build_json_payload(resource_params) }
       describe "the response" do
         it "has a 201 status code" do
           expect(response).to have_http_status(201)
@@ -128,7 +128,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
 
   describe "creates a collection annotation" do
     context "when the user is an reader" do
-      before(:each) { post path, headers: reader_headers, params: json_payload(collection_params) }
+      before(:each) { post path, headers: reader_headers, params: build_json_payload(collection_params) }
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
           a = response.body
@@ -138,7 +138,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
     end
 
     context "when the user is an admin" do
-      before(:each) { post path, headers: admin_headers, params: json_payload(collection_params) }
+      before(:each) { post path, headers: admin_headers, params: build_json_payload(collection_params) }
       describe "the response" do
         it "has a 201 status code" do
           expect(response).to have_http_status(201)

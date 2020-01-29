@@ -19,7 +19,7 @@ RSpec.describe "My Favorites API", type: :request do
         }
       }
     }
-    json_payload(relationships: relationships)
+    build_json_payload(relationships: relationships)
   }
 
   describe "sends my favorites" do

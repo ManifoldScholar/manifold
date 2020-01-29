@@ -13,7 +13,7 @@ RSpec.describe "Stylesheets API", type: :request do
     }
   }
   let(:valid_params) {
-    json_payload(attributes: attributes)
+    build_json_payload(attributes: attributes)
   }
 
   let(:text) { FactoryBot.create(:text) }
@@ -47,7 +47,7 @@ RSpec.describe "Stylesheets API", type: :request do
     let(:api_response) { JSON.parse(response.body) }
 
     it "updates the name attribute" do
-      valid_params = json_payload(attributes: { name: "Rambo Stoolz"})
+      valid_params = build_json_payload(attributes: { name: "Rambo Stoolz"})
       put api_v1_stylesheet_path(stylesheet.id), headers: admin_headers, params: valid_params
       expect(api_response["data"]["attributes"]["name"]).to eq("Rambo Stoolz")
     end

@@ -4,22 +4,6 @@ module V1
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :source, Types::String.enum("google_sheet", "attached_data")
-    typed_attribute :data, Types::Hash.schema(
-      original: Types::Hash.schema(
-        id: Types::String.meta(
-          example: "resourceimport/151747a1-ec84-492d-bf1f-7cb407881f5a/data/original-248172aeb6805275060ad0f6283afee1.csv"
-        ),
-        storage: Types::String.meta(example: "store"),
-        metadata: Types::Hash.schema(
-          size: Types::Integer,
-          width: Types::Integer.optional,
-          height: Types::Integer.optional,
-          sha256: Types::String,
-          filename: Types::String,
-          mime_type: Types::String.meta(example: "application/octet-stream")
-        )
-      )
-    ).meta(description: "Required if source is an attachment", read_only: true)
     typed_attribute :column_map, Types::Hash
     typed_attribute :column_automap, Types::Hash.meta(read_only: true)
     typed_attribute :header_row, Types::Integer

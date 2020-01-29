@@ -31,7 +31,7 @@ RSpec.describe "Resource Collections API", type: :request do
         end
 
         it "has a 200 OK status code" do
-          patch path, headers: headers, params: json_payload()
+          patch path, headers: headers, params: build_json_payload()
           expect(response).to have_http_status(200)
         end
       end

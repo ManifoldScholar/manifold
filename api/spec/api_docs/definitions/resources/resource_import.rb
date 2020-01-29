@@ -5,6 +5,11 @@ module ApiDocs
 
         REQUIRED_CREATE_ATTRIBUTES = [:header_row].freeze
 
+        REQUEST_ATTRIBUTES = {
+            data: Types::Serializer::Upload
+        }.freeze
+
+
         class << self
           include Resource
         end
