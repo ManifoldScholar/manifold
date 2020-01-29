@@ -1,19 +1,6 @@
 require "swagger_helper"
 
 RSpec.describe "Resources", type: :request do
-  path "/resources" do
-
-    # TODO: Remove or figure out how to pass in the projectID on this route.
-    # The response from the server is an denial for authorization, likely because
-    # the user is not authorized to attach a resource to a undefined project
-    # include_examples "an API create request",
-    #                   model: Resource,
-    #                   authorized_user: :admin
-
-    include_examples "an API index request",
-                      model: Resource,
-                      paginated: true
-  end
 
   path "/resources/{id}" do
     include_examples "an API show request", model: Resource

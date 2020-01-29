@@ -7,15 +7,6 @@ RSpec.describe "Resource Collections API", type: :request do
 
   let(:collection) { FactoryBot.create(:resource_collection) }
 
-  describe "sends a list of resource collections" do
-    describe "the response" do
-      it "has a 200 status code" do
-        get api_v1_resource_collections_path
-        expect(response).to have_http_status(200)
-      end
-    end
-  end
-
   describe "updates a collection" do
 
     let(:path) { api_v1_resource_collection_path(collection) }

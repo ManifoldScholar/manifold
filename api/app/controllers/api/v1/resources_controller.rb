@@ -18,11 +18,6 @@ module Api
                                include: includes
       end
 
-      def create
-        @resource = authorize_and_create_zresource(resource_params)
-        render_single_resource @resource
-      end
-
       def update
         @resource = load_and_authorize_zresource
         project = @resource.project
