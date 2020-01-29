@@ -95,7 +95,7 @@ RSpec.describe "Reading Groups API", type: :request do
         end
 
         it "has a 200 OK status code" do
-          patch path, headers: headers, params: json_payload()
+          patch path, headers: headers, params: build_json_payload()
           expect(response).to have_http_status(200)
         end
       end
@@ -108,7 +108,7 @@ RSpec.describe "Reading Groups API", type: :request do
 
       describe "the response" do
         it "has a 403 status code" do
-          patch path, headers: headers, params: json_payload()
+          patch path, headers: headers, params: build_json_payload()
           expect(response).to have_http_status(403)
         end
       end
@@ -121,7 +121,7 @@ RSpec.describe "Reading Groups API", type: :request do
 
       describe "the response" do
         it "has a 200 status code" do
-          patch path, headers: headers, params: json_payload()
+          patch path, headers: headers, params: build_json_payload()
           expect(response).to have_http_status(200)
         end
       end
@@ -136,7 +136,7 @@ RSpec.describe "Reading Groups API", type: :request do
       }
     }
     let(:valid_params) {
-      json_payload(attributes: attributes)
+      build_json_payload(attributes: attributes)
     }
 
     it "has a 201 CREATED status code" do

@@ -8,7 +8,7 @@ shared_examples_for "an API update request" do |options|
     defined?(resource) ? resource : FactoryBot.create(api_spec_helper.factory)
   end
   let(:id) { resource_instance.id }
-  let(:body) { json_structure_for(api_spec_helper.factory) }
+  let(:body) { json_structure_from_factory(api_spec_helper.factory, type: :request) }
 
   patch api_spec_helper.summary do
     api_spec_helper.parameters.each do |parameter_options|

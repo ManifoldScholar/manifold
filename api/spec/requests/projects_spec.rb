@@ -57,7 +57,7 @@ RSpec.describe "Projects API", type: :request do
       let(:headers) { admin_headers }
 
       it "has a 201 SUCCESS status code" do
-        params = json_payload(attributes: { title: "foo" })
+        params = build_json_payload(attributes: { title: "foo" })
         post path, headers: headers, params: params
         expect(response).to have_http_status(201)
       end
@@ -66,7 +66,7 @@ RSpec.describe "Projects API", type: :request do
     context "when the user is not logged in" do
 
       it "has a 401 status code" do
-        params = json_payload(attributes: { title: "foo" })
+        params = build_json_payload(attributes: { title: "foo" })
         post path, params: params
         expect(response).to have_http_status(401)
       end
@@ -76,7 +76,7 @@ RSpec.describe "Projects API", type: :request do
       let(:headers) { reader_headers }
 
       it "has a 403 status code" do
-        params = json_payload(attributes: { title: "foo" })
+        params = build_json_payload(attributes: { title: "foo" })
         post path, headers: headers, params: params
         expect(response).to have_http_status(403)
       end
@@ -104,7 +104,7 @@ RSpec.describe "Projects API", type: :request do
       describe "its creator association" do
         it("can be replaced") do
           project.creators << jenny
-          params = json_payload(relationships: { creators: { data: [
+          params = build_json_payload(relationships: { creators: { data: [
                                   { type: "makers", id: john.id },
                                   { type: "makers", id: jim.id }
                                 ] } })
@@ -116,7 +116,7 @@ RSpec.describe "Projects API", type: :request do
       describe "its contributors" do
         it("can be replaced") do
           project.contributors << jenny
-          params = json_payload(relationships: { contributors: { data: [
+          params = build_json_payload(relationships: { contributors: { data: [
                                   { type: "makers", id: john.id },
                                   { type: "makers", id: jim.id }
                                 ] } })
@@ -129,7 +129,7 @@ RSpec.describe "Projects API", type: :request do
           project.contributors << john
           project.save
           expect(project.contributors.reload.pluck(:id)).to eq([jenny.id, john.id])
-          params = json_payload(relationships: { contributors: { data: [
+          params = build_json_payload(relationships: { contributors: { data: [
                                   { type: "makers", id: john.id },
                                   { type: "makers", id: jenny.id }
                                 ] } })
@@ -141,7 +141,7 @@ RSpec.describe "Projects API", type: :request do
       describe "its creators" do
         it("can be replaced") do
           project.creators << jenny
-          params = json_payload(relationships: { creators: { data: [
+          params = build_json_payload(relationships: { creators: { data: [
                                   { type: "makers", id: john.id },
                                   { type: "makers", id: jim.id }
                                 ] } })
@@ -154,7 +154,7 @@ RSpec.describe "Projects API", type: :request do
           project.creators << john
           project.save
           expect(project.creators.pluck(:id)).to eq([jenny.id, john.id])
-          params = json_payload(relationships: { creators: { data: [
+          params = build_json_payload(relationships: { creators: { data: [
                                   { type: "makers", id: john.id },
                                   { type: "makers", id: jenny.id }
                                 ] } })
@@ -175,7 +175,7 @@ RSpec.describe "Projects API", type: :request do
         end
 
         it "has a 200 OK status code" do
-          patch path, headers: headers, params: json_payload
+          patch path, headers: headers, params: build_json_payload
           expect(response).to have_http_status(200)
         end
       end
@@ -186,7 +186,7 @@ RSpec.describe "Projects API", type: :request do
 
       describe "the response" do
         it "has a 403 forbidden status code" do
-          patch path, headers: headers, params: json_payload
+          patch path, headers: headers, params: build_json_payload
           expect(response).to have_http_status(403)
         end
       end

@@ -33,7 +33,7 @@ RSpec.describe "ProjectExportations API", type: :request do
       let!(:export_target) { FactoryBot.create :export_target, :sftp_password }
 
       let(:valid_params) do
-        json_payload(
+        build_json_payload(
           attributes: { project_id: project.id, export_target_id: export_target.id }
         )
       end

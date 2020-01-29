@@ -2,38 +2,50 @@ require "rails_helper"
 require "base64"
 
 RSpec.shared_context "param helpers" do
-  def json_for(model)
-    attributes = FactoryBot.attributes_for(model)
-    json_structure(attributes: attributes)
+
+  def json_structure_from_factory(factory_name, **options)
+    build_json_structure(options.merge({ attributes: FactoryBot.attributes_for(factory_name) }))
   end
 
-  def json_structure_for(model)
-    json_for(model)
-  end
-
-  def json_structure(attributes: {}, relationships: {}, meta: {})
+  def build_json_structure(attributes: {}, relationships: {}, meta: {}, type: :response)
     {
       data: {
-        attributes: attributes,
+        attributes: adjust_attributes(attributes, type),
         relationships: relationships,
         meta: meta
       }
     }
   end
 
-  def relationship_payload(name, models)
-    Hash[name, models]
+  def build_json_payload(**options)
+    build_json_structure(options).to_json
   end
 
-  def json_payload(attributes: {}, relationships: {}, meta: {})
-    json_structure(attributes: attributes, relationships: relationships, meta: meta).to_json
+  def adjust_attributes(attributes, type)
+    return adjust_attributes_for_request(attributes) if type == :request
+    adjust_attributes_for_response(attributes)
+  end
+
+  def adjust_attributes_for_request(attributes)
+    attributes.map { |k,v|
+      next [k, v] unless v.respond_to? :path
+      [k, file_param(v.path, v.content_type, v.original_filename)]
+    }.to_h
+  end
+
+  def adjust_attributes_for_response(attributes)
+    attributes
+  end
+
+  def relationship_payload(name, models)
+    Hash[name, models]
   end
 
   def expect_updated_param(param, value, expected_value = nil, expected_param = nil)
     attributes = Hash[param, value]
     expected_value ||= value
     expected_param ||= param
-    patch(path, headers: headers, params: json_payload(attributes: attributes))
+    patch(path, headers: headers, params: build_json_payload(attributes: attributes))
     api_response = JSON.parse(response.body)
     expect(api_response["data"]["attributes"][expected_param]).to eq(expected_value)
   end

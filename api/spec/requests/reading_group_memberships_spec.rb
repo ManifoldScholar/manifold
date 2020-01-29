@@ -22,7 +22,7 @@ RSpec.describe "Reading Group Memberships API", type: :request do
     }
 
     let(:valid_params) {
-      json_payload(attributes: attributes, relationships: relationships)
+      build_json_payload(attributes: attributes, relationships: relationships)
     }
 
     it "has a 201 CREATED status code when the membership is for the authenticated user" do

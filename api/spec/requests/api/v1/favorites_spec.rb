@@ -19,7 +19,7 @@ RSpec.describe "Favorites", type: :request do
                        included_relationships: [:creator] do
         let(:comment) { FactoryBot.create(:comment) }
         let(:body) do
-          json_structure(relationships: {
+          build_json_structure(relationships: {
                            favoritable: {
                              data: {
                                id: comment.id,
