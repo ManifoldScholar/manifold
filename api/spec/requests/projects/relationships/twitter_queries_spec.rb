@@ -68,7 +68,7 @@ RSpec.describe "Project Twitter Queries API", type: :request do
       let(:headers) { admin_headers }
       describe "the response" do
         it "has a 201 CREATED status code" do
-          post path, headers: headers, params: json_payload(resource)
+          post path, headers: headers, params: build_json_payload(resource)
           expect(response).to have_http_status(201)
         end
       end
@@ -78,7 +78,7 @@ RSpec.describe "Project Twitter Queries API", type: :request do
       let(:headers) { reader_headers }
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
-          post path, headers: headers, params: json_payload(resource)
+          post path, headers: headers, params: build_json_payload(resource)
           expect(response).to have_http_status(403)
         end
       end
@@ -90,7 +90,7 @@ RSpec.describe "Project Twitter Queries API", type: :request do
       @twitter_query = FactoryBot.create(:twitter_query, project: project)
     end
     let(:path) { api_v1_twitter_query_path(@twitter_query) }
-    let(:valid_params) { json_payload(attributes: { query: "from:rambostoolz" }) }
+    let(:valid_params) { build_json_payload(attributes: { query: "from:rambostoolz" }) }
 
     context "when the user is an admin" do
       let(:headers) { admin_headers }

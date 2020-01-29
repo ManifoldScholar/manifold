@@ -23,7 +23,7 @@ RSpec.describe "Contacts API", type: :request do
     context "when params are valid" do
       describe "the response" do
         it "has a 204 status code" do
-          post api_v1_contacts_path, headers: headers, params: json_payload(valid_params)
+          post api_v1_contacts_path, headers: headers, params: build_json_payload(valid_params)
           expect(response).to have_http_status(204)
         end
       end
@@ -31,7 +31,7 @@ RSpec.describe "Contacts API", type: :request do
 
     context "when params are invalid" do
       before(:each) do
-        post api_v1_contacts_path, headers: headers, params: json_payload(invalid_params)
+        post api_v1_contacts_path, headers: headers, params: build_json_payload(invalid_params)
       end
       describe "the response" do
         it "has a 422 status code" do

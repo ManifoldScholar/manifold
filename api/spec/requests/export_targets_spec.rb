@@ -37,7 +37,7 @@ RSpec.describe "ExportTargets API", type: :request do
       end
 
       let(:valid_params) do
-        json_payload(
+        build_json_payload(
           attributes: FactoryBot.attributes_for(:export_target, :sftp_password).merge(
             configuration: valid_configuration_params
           )
@@ -74,7 +74,7 @@ RSpec.describe "ExportTargets API", type: :request do
       let!(:new_name) { "A New Name" }
 
       let(:valid_params) do
-        json_payload(attributes: { name: new_name })
+        build_json_payload(attributes: { name: new_name })
       end
 
       it "updates successfully given valid params" do

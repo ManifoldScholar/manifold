@@ -5,7 +5,7 @@ RSpec.describe "Project Permissions API", type: :request do
   include_context("param helpers")
   let(:project) { FactoryBot.create(:project) }
   let(:user) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
-  let(:params) { json_payload(attributes: { role_names: [Role::ROLE_PROJECT_EDITOR] }, relationships: { user: { data: { id: user.id, type: "users" } } }) }
+  let(:params) { build_json_payload(attributes: { role_names: [Role::ROLE_PROJECT_EDITOR] }, relationships: { user: { data: { id: user.id, type: "users" } } }) }
 
   describe "sends a list of project permissions" do
     let(:path) { api_v1_project_relationships_permissions_path(project) }
@@ -95,7 +95,7 @@ RSpec.describe "Project Permissions API", type: :request do
       @permission = Permission.fetch(project, user)
       @path = api_v1_project_relationships_permission_path(project, @permission)
     end
-    let(:valid_params) { json_payload(attributes: { role_names: [Role::ROLE_PROJECT_EDITOR, Role::ROLE_PROJECT_AUTHOR] }) }
+    let(:valid_params) { build_json_payload(attributes: { role_names: [Role::ROLE_PROJECT_EDITOR, Role::ROLE_PROJECT_AUTHOR] }) }
 
     context "when the user is an admin" do
       let(:headers) { admin_headers }

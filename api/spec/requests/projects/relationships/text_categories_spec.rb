@@ -24,7 +24,7 @@ RSpec.describe "Project Text Categories API", type: :request do
 
     context "when the user is an admin" do
       let(:headers) { admin_headers }
-      before(:each) { post path, headers: headers, params: json_payload(post_model) }
+      before(:each) { post path, headers: headers, params: build_json_payload(post_model) }
 
       describe "the response" do
         it "has a 201 CREATED status code" do
@@ -35,7 +35,7 @@ RSpec.describe "Project Text Categories API", type: :request do
 
     context "when the user is an reader" do
       let(:headers) { reader_headers }
-      before(:each) { post path, headers: headers, params: json_payload(post_model) }
+      before(:each) { post path, headers: headers, params: build_json_payload(post_model) }
 
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do

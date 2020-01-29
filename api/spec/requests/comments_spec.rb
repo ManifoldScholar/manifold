@@ -55,7 +55,7 @@ RSpec.describe "Comments API", type: :request do
           end
 
           it "has a 200 OK status code" do
-            patch path, headers: headers, params: json_payload()
+            patch path, headers: headers, params: build_json_payload()
             expect(response).to have_http_status(200)
           end
         end
@@ -71,7 +71,7 @@ RSpec.describe "Comments API", type: :request do
           end
 
           it "has a 200 OK status code" do
-            patch path, headers: headers, params: json_payload()
+            patch path, headers: headers, params: build_json_payload()
             expect(response).to have_http_status(200)
           end
         end
@@ -83,7 +83,7 @@ RSpec.describe "Comments API", type: :request do
 
         describe "the response" do
           it "has a 403 status code" do
-            patch path, headers: headers, params: json_payload()
+            patch path, headers: headers, params: build_json_payload()
             expect(response).to have_http_status(403)
           end
         end
@@ -95,7 +95,7 @@ RSpec.describe "Comments API", type: :request do
       let(:path) { api_v1_annotation_relationships_comments_path(annotation, comment_a) }
 
       let(:params) {
-        json_payload(attributes: {
+        build_json_payload(attributes: {
           body: "John Rambo was here.",
         })
       }
@@ -166,7 +166,7 @@ RSpec.describe "Comments API", type: :request do
           end
 
           it "has a 200 OK status code" do
-            patch path, headers: headers, params: json_payload()
+            patch path, headers: headers, params: build_json_payload()
             expect(response).to have_http_status(200)
           end
         end
@@ -182,7 +182,7 @@ RSpec.describe "Comments API", type: :request do
           end
 
           it "has a 200 OK status code" do
-            patch path, headers: headers, params: json_payload()
+            patch path, headers: headers, params: build_json_payload()
             expect(response).to have_http_status(200)
           end
         end
@@ -194,7 +194,7 @@ RSpec.describe "Comments API", type: :request do
 
         describe "the response" do
           it "has a 403 status code" do
-            patch path, headers: headers, params: json_payload()
+            patch path, headers: headers, params: build_json_payload()
             expect(response).to have_http_status(403)
           end
         end
@@ -206,7 +206,7 @@ RSpec.describe "Comments API", type: :request do
       let(:path) { api_v1_resource_relationships_comments_path(resource, comment_b) }
 
       let(:params) {
-        json_payload(attributes: {
+        build_json_payload(attributes: {
           body: "John Rambo was here.",
         })
       }

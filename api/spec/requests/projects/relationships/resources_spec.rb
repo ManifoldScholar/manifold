@@ -31,7 +31,7 @@ RSpec.describe "Project Resources API", type: :request do
 
       describe "the response" do
         it "has a 201 CREATED status code" do
-          post path, headers: headers, params: json_payload(resource)
+          post path, headers: headers, params: build_json_payload(resource)
           expect(response).to have_http_status(201)
         end
       end
@@ -42,7 +42,7 @@ RSpec.describe "Project Resources API", type: :request do
 
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
-          post path, headers: headers, params: json_payload(resource)
+          post path, headers: headers, params: build_json_payload(resource)
           expect(response).to have_http_status(403)
         end
       end
