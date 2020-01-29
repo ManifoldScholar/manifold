@@ -86,13 +86,13 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :resources do
+      resources :resources, only: [:show, :update, :destroy] do
         namespace :relationships do
           resources :comments, controller: "/api/v1/comments"
         end
       end
 
-      resources :resource_collections do
+      resources :resource_collections, only: [:show, :update, :destroy] do
         scope module: :resource_collections do
           namespace :relationships do
             resources :collection_resources, only: [:index, :show]
