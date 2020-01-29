@@ -4,7 +4,7 @@ shared_examples_for "an API create request" do |options|
 
   api_spec_helper = ApiDocs::Helpers::Request.new(options, :create)
 
-  let(:body) { json_structure_for(api_spec_helper.factory) } if api_spec_helper.response_body?
+  let(:body) { json_structure_from_factory(api_spec_helper.factory, type: :request) } if api_spec_helper.response_body?
 
   post api_spec_helper.summary do
     api_spec_helper.parameters.each do |parameter_options|

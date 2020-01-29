@@ -14,7 +14,7 @@ RSpec.describe "Resource Import API", type: :request do
   }
 
   let(:valid_params) {
-    json_payload(attributes: attributes)
+    build_json_payload(attributes: attributes)
   }
 
   let(:project) { FactoryBot.create(:project) }
@@ -50,7 +50,7 @@ RSpec.describe "Resource Import API", type: :request do
     end
 
     it "changes the state of the import model" do
-      valid_params = json_payload(attributes: { state: "parsing" })
+      valid_params = build_json_payload(attributes: { state: "parsing" })
       put path, headers: admin_headers, params: valid_params
       @resource_import.reload
       expect(@resource_import.state_machine.in_state?(:parsed)).to be true

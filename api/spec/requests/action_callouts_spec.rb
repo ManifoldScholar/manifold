@@ -14,7 +14,7 @@ RSpec.describe "Action Callout API", type: :request do
 
       describe "the response" do
         it "has a 200 OK status code" do
-          patch path, headers: headers, params: json_payload
+          patch path, headers: headers, params: build_json_payload
           expect(response).to have_http_status(200)
         end
 
@@ -35,7 +35,7 @@ RSpec.describe "Action Callout API", type: :request do
               }
             }
 
-            patch path, headers: headers, params: json_payload(relationships: params)
+            patch path, headers: headers, params: build_json_payload(relationships: params)
             api_response = JSON.parse(response.body)
             expect(api_response.dig("data", "relationships", "text", "data", "id")).to eq new_text.id
           end

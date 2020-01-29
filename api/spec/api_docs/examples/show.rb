@@ -11,7 +11,7 @@ shared_examples_for "an API show request" do |options|
     let(:id) { resource_instance.id }
   end
 
-  let(:body) { json_structure_for(api_spec_helper.factory) }
+  let(:body) { json_structure_from_factory(api_spec_helper.factory) }
 
   get api_spec_helper.summary do
     api_spec_helper.parameters.each do |parameter_options|
