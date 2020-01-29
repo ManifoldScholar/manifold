@@ -18,7 +18,7 @@ RSpec.describe "Users API", type: :request do
     }
   }
   let(:valid_params) {
-    json_payload(attributes: attributes)
+    build_json_payload(attributes: attributes)
   }
 
   describe "sends a list of users" do
@@ -62,14 +62,14 @@ RSpec.describe "Users API", type: :request do
     end
 
     it "tells the welcome mailer that the user was created by the admin when meta[createdByAdmin] is true" do
-      valid_params = json_payload(attributes: attributes, meta: { created_by_admin: true })
+      valid_params = build_json_payload(attributes: attributes, meta: { created_by_admin: true })
       allow(AccountMailer).to receive(:welcome).and_call_original
       post path, headers: anonymous_headers, params: valid_params
       expect(AccountMailer).to have_received(:welcome).with(anything, true)
     end
 
     it "does not tell the welcome mailer that the user was created by the admin when meta[createdByAdmin] is absent" do
-      valid_params = json_payload(attributes: attributes)
+      valid_params = build_json_payload(attributes: attributes)
       allow(AccountMailer).to receive(:welcome).and_call_original
       post path, headers: anonymous_headers, params: valid_params
       expect(AccountMailer).to have_received(:welcome).with(anything, false)

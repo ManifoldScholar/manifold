@@ -9,7 +9,7 @@ RSpec.describe "Me API", type: :request do
     let(:first_name) { "John" }
     let(:last_name) { "Rambozo" }
     let(:update_params) do
-      json_payload(attributes: { firstName: first_name, lastName: last_name })
+      build_json_payload(attributes: { firstName: first_name, lastName: last_name })
     end
     let(:api_response) { JSON.parse(response.body) }
 
@@ -35,7 +35,7 @@ RSpec.describe "Me API", type: :request do
         it("contains the updated first name") { expect_updated_param("firstName", "Janko") }
         it("contains the updated last name") { expect_updated_param("lastName", "Rambozo") }
         describe "the avatar" do
-          let(:params) { json_payload(attributes: { avatar: image_params }) }
+          let(:params) { build_json_payload(attributes: { avatar: image_params }) }
           before(:each) { patch path, headers: reader_headers, params: params }
 
           it("has an updated avatar") {

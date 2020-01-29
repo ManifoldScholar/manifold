@@ -12,7 +12,7 @@ RSpec.describe "Ingestions API", type: :request do
     }
   }
   let(:valid_params) {
-    json_payload(attributes: attributes)
+    build_json_payload(attributes: attributes)
   }
 
   describe "creates an ingestion" do

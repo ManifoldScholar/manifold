@@ -69,7 +69,7 @@ RSpec.describe "Project Collections API", type: :request do
       }
     end
     let(:valid_params) do
-      json_payload(attributes: attributes, relationships: relationships)
+      build_json_payload(attributes: attributes, relationships: relationships)
     end
 
     it "has a 201 CREATED status code" do
@@ -90,7 +90,7 @@ RSpec.describe "Project Collections API", type: :request do
         end
 
         it "has a 200 OK status code" do
-          patch path, headers: headers, params: json_payload
+          patch path, headers: headers, params: build_json_payload
           expect(response).to have_http_status(200)
         end
       end
