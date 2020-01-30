@@ -5,30 +5,37 @@ module V1
 
     abilities
 
-    typed_attribute :title, NilClass
-    typed_attribute :slug, NilClass
-    typed_attribute :pending_slug, NilClass
-    typed_attribute :sort_order, NilClass
-    typed_attribute :visible, NilClass
-    typed_attribute :homepage, NilClass
-    typed_attribute :position, NilClass
-    typed_attribute :icon, NilClass
-    typed_attribute :number_of_projects, NilClass
-    typed_attribute :featured_only, NilClass
-    typed_attribute :smart, NilClass
-    typed_attribute :description, NilClass
-    typed_attribute :description_formatted, NilClass
-    typed_attribute :description_plaintext, NilClass
-    typed_attribute :sort_order, NilClass
-    typed_attribute :tag_list, NilClass
-    typed_attribute :description, NilClass
-    typed_attribute :homepage_start_date, NilClass
-    typed_attribute :homepage_end_date, NilClass
-    typed_attribute :homepage_count, NilClass
-    typed_attribute :manually_sorted, NilClass, &:manually_sorted?
-    typed_attribute :projects_count, NilClass, &:collection_projects_count
+    typed_attribute :title, Types::String.meta(unique: true)
+    typed_attribute :slug, Types::String.meta(description: I18n.t("attributes.descriptions.slug"), read_only: true)
+    typed_attribute :pending_slug, Types::String.meta(description: I18n.t("attributes.descriptions.pending_slug"))
+    typed_attribute :sort_order, Types::String.enum(
+      "created_at_asc",
+      "created_at_desc",
+      "updated_at_asc",
+      "updated_at_desc",
+      "publication_date_asc",
+      "publication_date_desc",
+      "title_asc",
+      "title_desc"
+    )
+    typed_attribute :visible, Types::Bool
+    typed_attribute :homepage, Types::Bool
+    typed_attribute :position, Types::Integer
+    typed_attribute :icon, Types::String.enum("lamp")
+    typed_attribute :number_of_projects, Types::Integer.optional
+    typed_attribute :featured_only, Types::Bool
+    typed_attribute :smart, Types::Bool
+    typed_attribute :description, Types::String.optional
+    typed_attribute :description_formatted, Types::String.meta(read_only: true)
+    typed_attribute :description_plaintext, Types::String.meta(read_only: true)
+    typed_attribute :tag_list, Types::Array.of(Types::String) # check value
+    typed_attribute :homepage_start_date, Types::String.optional
+    typed_attribute :homepage_end_date, Types::String.optional
+    typed_attribute :homepage_count, Types::Integer.optional
+    typed_attribute :manually_sorted, Types::Bool.meta(read_only: true), &:manually_sorted?
+    typed_attribute :projects_count, Types::Integer.meta(read_only: true), &:collection_projects_count
 
-    typed_has_many :collection_projects, paginated: true do |object, params|
+    typed_has_many :collection_projects do |object, params|
       object.collection_projects.projects_with_read_ability(params[:current_user])
     end
 
