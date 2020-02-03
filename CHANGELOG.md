@@ -1,9 +1,25 @@
 # Changelog
 
+## [v4.1.1](https://github.com/ManifoldScholar/manifold/tree/v4.1.1) - 02/03/20
+
+### Bugs
+
+-  Fix few focus indicators [#2602](https://github.com/ManifoldScholar/manifold/pull/2602) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix a11y issues with Form.HasMany [#2601](https://github.com/ManifoldScholar/manifold/pull/2601) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Correct event tile dates [#2600](https://github.com/ManifoldScholar/manifold/pull/2600) ([zdavis](https://api.github.com/users/zdavis))
+-  Fix Form.Date focus color in FF [#2599](https://github.com/ManifoldScholar/manifold/pull/2599) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Prevent nil values for citations [#2597](https://github.com/ManifoldScholar/manifold/pull/2597) ([zdavis](https://api.github.com/users/zdavis))
+-  Pad bottom of standalone header subtitle [#2595](https://github.com/ManifoldScholar/manifold/pull/2595) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Restore relationship on resources block [#2594](https://github.com/ManifoldScholar/manifold/pull/2594) ([zdavis](https://api.github.com/users/zdavis))
+-  Adjust Notation.Marker click behavior [#2593](https://github.com/ManifoldScholar/manifold/pull/2593) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix color regressions [#2589](https://github.com/ManifoldScholar/manifold/pull/2589) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Use li tag for Event.Tile [#2582](https://github.com/ManifoldScholar/manifold/pull/2582) ([dananjohnson](https://api.github.com/users/dananjohnson))
+
 ## [v4.1.0](https://github.com/ManifoldScholar/manifold/tree/v4.1.0) - 01/21/20
 
 ### Features
 
+-  Release v4.1.0 [#2576](https://github.com/ManifoldScholar/manifold/pull/2576) ([zdavis](https://api.github.com/users/zdavis))
 -  Manifold accent color can be customized [#2568](https://github.com/ManifoldScholar/manifold/pull/2568) ([zdavis](https://api.github.com/users/zdavis))
 
 ### Bugs
