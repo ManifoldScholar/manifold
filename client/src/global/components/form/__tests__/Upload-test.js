@@ -64,7 +64,6 @@ describe("global/components/form/Upload", () => {
 
     it("should trigger set callback when remove is clicked with null value", () => {
       $set.mockClear();
-      console.log($wrapper.find('[data-id="remove"]'));
       $wrapper.find('[data-id="remove"]').simulate("click", $fakeDomEvent);
       expect($set).toHaveBeenCalled();
     });
