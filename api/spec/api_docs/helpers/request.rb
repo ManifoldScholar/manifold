@@ -17,36 +17,79 @@ module ApiDocs
       end
 
       def focus
-        !!@options[:focus]
+        @options[:focus].present?
       end
 
       def requires_auth?
-        !!@options[:authorized_user]
+        @options[:authorized_user].present?
       end
 
       def response_body?
-        options.key?(:response_body) ? !!@options[:response_body] : true
+        options.key?(:response_body) ? @options[:response_body].present? : true
       end
 
       def instantiate_before_test?
-        return !!options[:instantiate_before_test] if options.has_key? :instantiate_before_test
+        return options[:instantiate_before_test].present? if options.key? :instantiate_before_test
+
         true
       end
 
       def authorized_user
         auth = @options[:authorized_user]
         raise "authorized_user requires inputs that can be converted to a string" unless auth.respond_to?(:to_s)
+
         auth.to_s
+      end
+
+      def article(type)
+        return nil if type.nil?
+        return "the" if ["current user", "settings", "statistics"].include? type
+        return "a" if %w[user].include? type
+
+        %w(a e i o u).include?(type[0].downcase) ? "an" : "a"
+      end
+
+      def possessivize(type)
+        return nil if type.nil?
+
+        type + (type[-1, 1] == "s" ? "'" : "'s")
+      end
+
+      def downcase_first(string)
+        return nil if string.nil?
+
+        string[0, 1].downcase + string[1..-1]
+      end
+
+      def transform_type(type)
+        return "settings" if type.downcase == "setting"
+
+        type.underscore.humanize.downcase
+      end
+
+      def string_vars(type)
+        parent = downcase_first(@options[:parent])
+        human_type = transform_type(type)
+        @string_vars ||= {
+          parent: parent,
+          parent_possessive: possessivize(parent),
+          parent_article: article(parent),
+          type: human_type,
+          article: article(human_type),
+          attribute: "ID"
+        }
       end
 
       def summary
         return @options[:summary] if @options[:summary]
+
         type = action == :index ? human_resource_name_plural : human_resource_name
-        I18n.t("swagger.#{@action}.description", type: type, attribute: "ID")
+        key = @options[:parent].present? ? "swagger.#{@action}.summary_with_parent" : "swagger.#{@action}.summary"
+        I18n.t(key, string_vars(type))
       end
 
       def response_description?
-        !!response_description
+        response_description.present?
       end
 
       def response_description
@@ -67,9 +110,10 @@ module ApiDocs
 
       def success_description
         return @options[:success_description] if @options[:success_description]
-        return options[:summary] if options.has_key? :summary
+        return options[:summary] if options.key? :summary
 
-        I18n.t("swagger.#{@action}.success", type: human_resource_name, attribute: "ID")
+        type = human_resource_name
+        I18n.t("swagger.#{@action}.success", type: type, article: article(type), attribute: "ID")
       end
 
       def success_response_code
@@ -77,6 +121,7 @@ module ApiDocs
 
         return "204" if action == :destroy
         return "201" if action == :create
+
         "200"
       end
 
@@ -94,7 +139,8 @@ module ApiDocs
 
       def request_body?
         return options[:request_body] if options.key?(:request_body)
-        return options[:parameters].any? { |hash| hash[:in] == :body} if options.key?(:parameters)
+        return options[:parameters].any? { |hash| hash[:in] == :body } if options.key?(:parameters)
+
         true
       end
 
@@ -112,11 +158,12 @@ module ApiDocs
 
       def request_id?
         return options[:request_id] if options.key?(:request_id)
+
         true
       end
 
       def delete_has_response_body?
-        !!@options[:delete_has_response_body]
+        @options[:delete_has_response_body].present?
       end
 
       def resource_tag

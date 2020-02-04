@@ -14,19 +14,19 @@ RSpec.describe "Projects API", type: :request do
     :permitted_users,
     :content_blocks,
     :action_callouts
-   ]
+  ]
 
   path "/projects/{id}" do
     include_examples "an API show request",
-                      model: Project,
-                      description: "Authorization required when trying to access a draft project",
-                      paginated: true,
-                      included_relationships: included_relationships
+                     model: Project,
+                     description: "Authorization required when trying to access a draft project",
+                     paginated: true,
+                     included_relationships: included_relationships
 
     include_examples "an API update request",
-                      model: Project,
-                      authorized_user: :admin,
-                      included_relationships: included_relationships
+                     model: Project,
+                     authorized_user: :admin,
+                     included_relationships: included_relationships
 
     include_examples "an API destroy request", model: Project, authorized_user: :admin
   end
@@ -65,10 +65,11 @@ RSpec.describe "Projects API", type: :request do
 
     path "/me/relationships/favorite_projects" do
       include_examples "an API index request",
-                        model: Project,
-                        summary: "Returns all Projects that the user is following",
-                        authorized_user: :admin,
-                        paginated: true
+                       tags: "Me",
+                       parent: "current user",
+                       model: Project,
+                       authorized_user: :admin,
+                       paginated: true
     end
   end
 end

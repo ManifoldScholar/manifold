@@ -7,19 +7,17 @@ RSpec.describe "Collaborators", type: :request do
 
     path "/projects/{project_id}/relationships/collaborators" do
       include_examples "an API index request",
-                        model: Collaborator,
-                        tags: "Projects",
-                        summary: "Returns all collaborators associated to a project",
-                        url_parameters: [:project_id],
-                        included_relationships: [:maker]
+                       parent: "project",
+                       model: Collaborator,
+                       url_parameters: [:project_id],
+                       included_relationships: [:maker]
     end
 
     path "/projects/{project_id}/relationships/collaborators/{id}" do
       include_examples "an API show request",
-                        model: Collaborator,
-                        summary: "Returns the collaborator by ID on a project",
-                        tags: "Projects",
-                        url_parameters: [:project_id]
+                       parent: "project",
+                       model: Collaborator,
+                       url_parameters: [:project_id]
     end
   end
 end

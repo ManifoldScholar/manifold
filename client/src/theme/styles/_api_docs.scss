@@ -1,0 +1,60 @@
+@import 'variables';
+@import 'api-docs/variables';
+
+@font-face {
+  font-family: 'Jetbrains Mono';
+  font-style: normal;
+  font-weight: $regular;
+  src: url('../assets/fonts/mono/JetBrainsMono-Regular.woff') format('woff');
+}
+
+.swagger-ui
+{
+  width: 100%;
+
+  .opblock-summary-patch {
+    .svg-icon--lock16 {
+      color: $_color-patch;
+    }
+  }
+
+  .opblock-summary-get {
+    .svg-icon--lock16 {
+      color: $_color-get;
+    }
+  }
+
+  .opblock-summary-post  {
+    .svg-icon--lock16 {
+      color: $_color-post;
+    }
+  }
+
+  .opblock-summary-delete  {
+    .svg-icon--lock16 {
+      color: $_color-delete;
+    }
+  }
+
+
+  @import 'vendor/index';
+  @import 'fonts/index';
+  @import 'base/index';
+  @import 'api-docs/mixins';
+
+  @import 'api-docs/type';
+  @import 'api-docs/layout';
+  @import 'api-docs/buttons';
+  @import 'api-docs/form';
+  @import 'api-docs/modal';
+  @import 'api-docs/models';
+  @import 'api-docs/servers';
+  @import 'api-docs/table';
+  @import 'api-docs/topbar';
+  @import 'api-docs/information';
+  @import 'api-docs/authorize';
+  @import 'api-docs/errors';
+  @include text_body;
+  @import 'api-docs/split-pane-mode';
+  @import 'api-docs/markdown';
+}

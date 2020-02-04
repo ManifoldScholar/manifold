@@ -1,7 +1,6 @@
 require "swagger_helper"
 
 RSpec.describe "Annotations", type: :request do
-
   path "/annotations/{id}" do
     include_examples "an API update request", model: Annotation, authorized_user: :admin
     include_examples "an API destroy request", model: Annotation, authorized_user: :admin
@@ -14,22 +13,22 @@ RSpec.describe "Annotations", type: :request do
 
     path "/text_sections/{text_section_id}/relationships/annotations" do
       include_examples "an API index request",
+                       parent: "text section",
                        model: Annotation,
-                       url_parameters: [:text_section_id],
-                       tags: "Text Sections"
+                       url_parameters: [:text_section_id]
 
       include_examples "an API create request",
+                       parent: "text section",
                        model: Annotation,
                        url_parameters: [:text_section_id],
-                       tags: "Text Sections",
                        authorized_user: :admin
     end
 
     path "/text_sections/{text_section_id}/relationships/annotations/{id}" do
       include_examples "an API update request",
+                       parent: "text section",
                        model: Annotation,
                        url_parameters: [:text_section_id],
-                       tags: "Text Sections",
                        authorized_user: :admin
     end
   end
@@ -37,27 +36,28 @@ RSpec.describe "Annotations", type: :request do
   describe "for me" do
     text = FactoryBot.create(:text)
     let(:text_section) { FactoryBot.create(:text_section, text: text) }
-    let(:annotation) {
+    let(:annotation) do
       FactoryBot.create(:annotation, creator: admin, text_section: text_section)
-    }
+    end
 
     path "/me/relationships/annotations" do
       let(:'filter[text]') { nil }
 
       include_examples "an API index request",
-                        model: Annotation,
-                        authorized_user: :admin,
-                        included_relationships: [:creator],
-                        additional_parameters: [
-                          {
-                            name: "filter[text]",
-                            in: :query,
-                            type: :string,
-                            required: true
-                          }
-                        ]
+                       parent: "current user",
+                       tags: "Me",
+                       model: Annotation,
+                       authorized_user: :admin,
+                       included_relationships: [:creator],
+                       additional_parameters: [
+                         {
+                           name: "filter[text]",
+                           in: :query,
+                           type: :string,
+                           required: true
+                         }
+                       ]
     end
-
   end
 
   describe "for a reading group" do
@@ -67,11 +67,11 @@ RSpec.describe "Annotations", type: :request do
 
     path "/reading_groups/{reading_group_id}/relationships/annotations" do
       include_examples "an API index request",
-                        model: Annotation,
-                        tags: "Reading Groups",
-                        url_parameters: [:reading_group_id],
-                        paginated: true,
-                        included_relationships: [:creator]
+                       parent: "reading group",
+                       model: Annotation,
+                       url_parameters: [:reading_group_id],
+                       paginated: true,
+                       included_relationships: [:creator]
     end
   end
 
@@ -82,21 +82,22 @@ RSpec.describe "Annotations", type: :request do
 
     path "/annotations/{annotation_id}/relationships/flags" do
       include_examples "an API create request",
-                        model: Annotation,
-                        authorized_user: :admin,
-                        request_body: false,
-                        url_parameters: [:annotation_id]
+                       summary: "Flag the annotation for moderation",
+                       model: Annotation,
+                       authorized_user: :admin,
+                       request_body: false,
+                       url_parameters: [:annotation_id]
 
       include_examples "an API destroy request",
-                        model: Annotation,
-                        authorized_user: :admin,
-                        url_parameters: [:annotation_id],
-                        # this route is a special case where a destroy does not take an ID
-                        parameters: [],
-                        exclude: %(404),
-                        delete_has_response_body: true,
-                        success_response_code: "200"
-
+                       summary: "Unflag the annotation",
+                       model: Annotation,
+                       authorized_user: :admin,
+                       url_parameters: [:annotation_id],
+                       # this route is a special case where a destroy does not take an ID
+                       parameters: [],
+                       exclude: %(404),
+                       delete_has_response_body: true,
+                       success_response_code: "200"
     end
   end
 end

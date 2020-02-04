@@ -6,11 +6,15 @@ RSpec.describe "Favorites", type: :request do
 
     path "/me/relationships/favorites" do
       include_examples "an API index request",
+                       parent: "current user",
+                       tags: "Me",
                        model: Favorite,
                        authorized_user: :admin
 
       include_examples "an API create request",
+                       parent: "current user",
                        model: Favorite,
+                       tags: "Me",
                        authorized_user: :admin,
                        description: "If the favorite is valid, it will return the current user. "\
                        "If not, it will return the favorite. If the resource has already been "\
@@ -20,23 +24,27 @@ RSpec.describe "Favorites", type: :request do
         let(:comment) { FactoryBot.create(:comment) }
         let(:body) do
           build_json_structure(relationships: {
-                           favoritable: {
-                             data: {
-                               id: comment.id,
-                               type: "comment"
-                             }
-                           }
-                         })
+                                 favoritable: {
+                                   data: {
+                                     id: comment.id,
+                                     type: "comment"
+                                   }
+                                 }
+                               })
         end
       end
     end
 
     path "/me/relationships/favorites/{id}" do
       include_examples "an API show request",
+                       tags: "Me",
+                       parent: "current user",
                        model: Favorite,
                        authorized_user: :admin
 
       include_examples "an API destroy request",
+                       tags: "Me",
+                       parent: "current user",
                        model: Favorite,
                        authorized_user: :admin
     end

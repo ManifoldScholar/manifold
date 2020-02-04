@@ -1,0 +1,26 @@
+
+@mixin text_body($color: $text-body-default-font-color)
+{
+  @include templateHead;
+  font-size: 14px;
+  line-height: 1.438;
+  color: $neutral90;
+}
+
+@mixin text_label($color: $text-body-default-font-color)
+{
+
+}
+
+@mixin text_code($color: $text-code-default-font-color)
+{
+  font-family: 'Jetbrains Mono', serif;
+  font-weight: 600;
+
+  color: $color;
+}
+
+@mixin text_headline($color: $text-headline-default-font-color)
+{
+  @include templateHead;
+}

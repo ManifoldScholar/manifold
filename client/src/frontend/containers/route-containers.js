@@ -1,4 +1,5 @@
 import NotFound from "global/containers/NotFound";
+import ApiDocs from "frontend/containers/Api";
 import Frontend from "frontend/containers/Frontend";
 import ProjectsWrapper from "frontend/containers/ProjectsWrapper";
 import Projects from "frontend/containers/Projects";
@@ -31,6 +32,7 @@ import ReadingGroupEdit from "frontend/containers/ReadingGroup/Edit";
 
 export default {
   NotFound,
+  ApiDocs,
   Frontend,
   ProjectsWrapper,
   Projects,
