@@ -1,22 +1,21 @@
 require "swagger_helper"
 
 RSpec.describe "Stylesheets", type: :request do
-
   included_relationships = [:text, :text_sections]
 
   path "/stylesheets/{id}" do
     include_examples "an API show request",
-                      model: Stylesheet,
-                      included_relationships: included_relationships
+                     model: Stylesheet,
+                     included_relationships: included_relationships
 
     include_examples "an API update request",
-                      model: Stylesheet,
-                      authorized_user: :admin,
-                      included_relationships: included_relationships
+                     model: Stylesheet,
+                     authorized_user: :admin,
+                     included_relationships: included_relationships
 
     include_examples "an API destroy request",
-                      model: Stylesheet,
-                      authorized_user: :admin
+                     model: Stylesheet,
+                     authorized_user: :admin
   end
 
   context "when relating to a text" do
@@ -25,10 +24,10 @@ RSpec.describe "Stylesheets", type: :request do
 
     path "/texts/{text_id}/relationships/stylesheets" do
       include_examples "an API create request",
-                        model: Stylesheet,
-                        url_parameters: [:text_id],
-                        authorized_user: :admin
-
+                       parent: "text",
+                       model: Stylesheet,
+                       url_parameters: [:text_id],
+                       authorized_user: :admin
     end
   end
 end

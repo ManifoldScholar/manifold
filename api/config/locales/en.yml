@@ -24,27 +24,32 @@ en:
     descriptions:
       slug: "A unique identifier that the user requests. It will be set to the pendingSlug or the title if it is not already taken."
       pending_slug: "The unique identifier that the user requests. It may or may not be available, in which case, characters will be appended to make it unique"
-      avatar_meta: "An object with data about the avatar image"
+      avatar_meta: "A hash with data about the avatar image"
   swagger:
-    access_denied: "Access denied for unauthorized users"
-    not_authenticated: "Access denied for unauthenticated users"
-    not_found: "Record not found"
-    unprocessable: "Invalid or missing data in request"
+    access_denied: "	The API key doesn't have permissions to perform the request."
+    not_authenticated: "Valid API key was not provided."
+    not_found: "The requested resource doesn't exist."
+    unprocessable: "Something went wrong on Manifold's end."
     index:
-      description: "Returns all %{type}"
-      success: "Returns an array of %{type} objects"
+      summary: "List all %{type}"
+      summary_with_parent: "List %{parent_article} %{parent_possessive} %{type}"
+      success: "Returns an array of %{type} resources."
     show:
-      description: "Returns the %{type} with the given %{attribute}"
-      success: "Returns the %{type} with the matching %{attribute}"
+      summary: "Retrieve %{article} %{type}"
+      summary_with_parent: "Retrieve %{article} %{type} for %{parent_article} %{parent}"
+      success: "Retrieve %{article} %{type}."
     create:
-      description: "Creates a %{type}"
-      success: "Returns the created %{type} object"
+      summary: "Create %{article} %{type}"
+      summary_with_parent: "Create %{article} %{type} for %{parent_article} %{parent}"
+      success: "Returns the %{type} resource."
     update:
-      description: "Updates the %{type} with the given %{attribute}"
-      success: "Returns the updated %{type}"
+      summary: "Update %{article} %{type}"
+      summary_with_parent: "Update %{parent_article} %{parent_possessive} %{type}"
+      success: "Returns the updated %{type} resource."
     destroy:
-      description: "Removes the %{type} with the given %{attribute}"
-      success: "Removes the %{type}"
+      summary: "Delete %{article} %{type}"
+      summary_with_parent: "Delete %{parent_article} %{parent_possessive} %{type}"
+      success: "Removes the %{type} resource."
   activerecord:
     attributes:
     errors:

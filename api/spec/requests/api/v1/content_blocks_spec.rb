@@ -14,15 +14,15 @@ RSpec.describe "Content Blocks", type: :request do
 
     path "/projects/{project_id}/relationships/content_blocks" do
       include_examples "an API index request",
-                        model: ContentBlock,
-                        url_parameters: [:project_id],
-                        tags: "Project Content Blocks"
+                       parent: "project",
+                       model: ContentBlock,
+                       url_parameters: [:project_id]
 
       include_examples "an API create request",
-                        model: ContentBlock,
-                        url_parameters: [:project_id],
-                        tags: "Project Content Blocks",
-                        authorized_user: :admin
+                       parent: "project",
+                       model: ContentBlock,
+                       url_parameters: [:project_id],
+                       authorized_user: :admin
     end
   end
 end

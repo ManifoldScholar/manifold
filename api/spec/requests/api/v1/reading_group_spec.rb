@@ -1,7 +1,6 @@
 require "swagger_helper"
 
 RSpec.describe "Reading Group", type: :request do
-
   path "/reading_groups" do
     include_examples "an API create request", model: ReadingGroup, authorized_user: :admin
     include_examples "an API index request", model: ReadingGroup, authorized_user: :admin
@@ -15,8 +14,11 @@ RSpec.describe "Reading Group", type: :request do
 
   path "/me/relationships/reading_groups" do
     include_examples "an API index request",
-                      model: ReadingGroup,
-                      summary: "Returns all reading groups that the user is a part of",
-                      paginated: true
+                     tags: "Me",
+                     model: ReadingGroup,
+                     parent: "current user",
+                     paginated: true,
+                     exclude: %w(401),
+                     authorized_user: :reader
   end
 end

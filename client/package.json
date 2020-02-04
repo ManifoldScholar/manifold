@@ -163,6 +163,7 @@
     "redux-thunk": "^2.0.1",
     "serialize-javascript": "^2.x",
     "serve-static": "^1.13.2",
+    "swagger-ui-react": "^3.25.0",
     "text-mask-addons": "^3.7.1",
     "tinycolor2": "^1.4.1",
     "tus-js-client": "^1.5.1",

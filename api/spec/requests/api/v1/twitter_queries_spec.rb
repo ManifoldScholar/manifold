@@ -13,20 +13,17 @@ RSpec.describe "Twitter Queries", type: :request do
 
     path "/projects/{project_id}/relationships/twitter_queries" do
       include_examples "an API create request",
-                        model: TwitterQuery,
-                        authorized_user: :admin,
-                        tags: "Projects",
-                        summary: "Creates a twitter query on a project",
-                        url_parameters: [:project_id]
+                       model: TwitterQuery,
+                       parent: "project",
+                       authorized_user: :admin,
+                       url_parameters: [:project_id]
 
       include_examples "an API index request",
-                        model: TwitterQuery,
-                        authorized_user: :admin,
-                        tags: "Projects",
-                        summary: "Returns all twitter queries associated with a project",
-                        url_parameters: [:project_id]
+                       model: TwitterQuery,
+                       parent: "project",
+                       authorized_user: :admin,
+                       url_parameters: [:project_id]
     end
-
   end
 
   context "when belonging to a twitter_query" do
@@ -34,14 +31,14 @@ RSpec.describe "Twitter Queries", type: :request do
     let!(:twitter_query_id) { resource.id }
     path "/twitter_queries/{twitter_query_id}/relationships/fetch" do
       include_examples "an API create request",
-                        model: TwitterQuery,
-                        summary: "Returns all tweets that match the query in the TwitterQuery",
-                        description: "In order to run this query successfully, "\
-                        "twitter credentials must be set in the settings for this "\
-                        "manifold instance. Please look at the /settings routes "\
-                        "for more information on how to set twitter credentials.",
-                        authorized_user: :admin,
-                        url_parameters: [:twitter_query_id]
+                       model: TwitterQuery,
+                       parent: "twitter query",
+                       description: "In order to run this query successfully, "\
+                       "twitter credentials must be set in the settings for this "\
+                       "manifold instance. Please look at the /settings routes "\
+                       "for more information on how to set twitter credentials.",
+                       authorized_user: :admin,
+                       url_parameters: [:twitter_query_id]
     end
   end
 end

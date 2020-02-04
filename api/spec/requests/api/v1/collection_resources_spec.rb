@@ -7,19 +7,19 @@ RSpec.describe "Collection Resource", type: :request do
 
     path "/resource_collections/{resource_collection_id}/relationships/collection_resources" do
       include_examples "an API index request",
-                        model: CollectionResource,
-                        tags: "Resource Collections",
-                        url_parameters: [:resource_collection_id],
-                        included_relationships: [:resource],
-                        paginated: true
+                       model: CollectionResource,
+                       parent: "resource collection",
+                       url_parameters: [:resource_collection_id],
+                       included_relationships: [:resource],
+                       paginated: true
     end
 
     path "/resource_collections/{resource_collection_id}/relationships/collection_resources/{id}" do
       include_examples "an API show request",
-                        model: CollectionResource,
-                        tags: "Resource Collections",
-                        url_parameters: [:resource_collection_id],
-                        included_relationships: [:resource]
+                       model: CollectionResource,
+                       parent: "resource collection",
+                       url_parameters: [:resource_collection_id],
+                       included_relationships: [:resource]
     end
   end
 end

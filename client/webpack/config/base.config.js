@@ -51,7 +51,7 @@ export default function buildWebpackConfiguration(target = "web") {
         // SASS loader: sass > postcss > css > style or css extract into separate file.
         {
           test: /\.(s?)css$/,
-          include: [paths.src, paths.plugins],
+          // include: [paths.src, paths.plugins],
           use: [
             styleLoader(),
             {

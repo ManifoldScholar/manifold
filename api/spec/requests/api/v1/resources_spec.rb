@@ -1,7 +1,6 @@
 require "swagger_helper"
 
 RSpec.describe "Resources", type: :request do
-
   path "/resources/{id}" do
     include_examples "an API show request", model: Resource
     include_examples "an API destroy request", model: Resource, authorized_user: :admin
@@ -15,13 +14,15 @@ RSpec.describe "Resources", type: :request do
 
     path "/projects/{project_id}/relationships/resources" do
       include_examples "an API create request",
-                        model: Resource,
-                        authorized_user: :admin,
-                        url_parameters: [:project_id]
+                       parent: "project",
+                       model: Resource,
+                       authorized_user: :admin,
+                       url_parameters: [:project_id]
 
       include_examples "an API index request",
-                        model: Resource,
-                        url_parameters: [:project_id]
+                       parent: "project",
+                       model: Resource,
+                       url_parameters: [:project_id]
     end
   end
 
@@ -32,8 +33,9 @@ RSpec.describe "Resources", type: :request do
 
     path "/resource_collections/{resource_collection_id}/relationships/resources" do
       include_examples "an API index request",
-                        model: Resource,
-                        url_parameters: [:resource_collection_id]
+                       parent: "resource collection",
+                       model: Resource,
+                       url_parameters: [:resource_collection_id]
     end
   end
 
@@ -44,8 +46,9 @@ RSpec.describe "Resources", type: :request do
 
     path "/text_sections/{text_section_id}/relationships/resources" do
       include_examples "an API index request",
-                        model: Resource,
-                        url_parameters: [:text_section_id]
+                       parent: "text section",
+                       model: Resource,
+                       url_parameters: [:text_section_id]
     end
   end
 end

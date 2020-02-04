@@ -7,14 +7,14 @@ RSpec.describe "Comments", type: :request do
     let(:annotation_id) { parent.id }
 
     path "/annotations/{annotation_id}/relationships/comments/{id}" do
-      include_examples "an API show request", model: Comment, tags: "Annotation Comments", url_parameters: [:annotation_id]
-      include_examples "an API update request", model: Comment, tags: "Annotation Comments", url_parameters: [:annotation_id], authorized_user: :admin
-      include_examples "an API destroy request", model: Comment, tags: "Annotation Comments", url_parameters: [:annotation_id], authorized_user: :admin
+      include_examples "an API show request", parent: "annotation", model: Comment, url_parameters: [:annotation_id]
+      include_examples "an API update request", parent: "annotation", model: Comment, url_parameters: [:annotation_id], authorized_user: :admin
+      include_examples "an API destroy request", parent: "annotation", model: Comment, url_parameters: [:annotation_id], authorized_user: :admin
     end
 
     path "/annotations/{annotation_id}/relationships/comments" do
-      it_behaves_like "an API create request", model: Comment, tags: "Annotation Comments", url_parameters: [:annotation_id], authorized_user: :admin, included_relationships: [:creator]
-      include_examples "an API index request", model: Comment, tags: "Annotation Comments", url_parameters: [:annotation_id], paginated: true, included_relationships: [:creator]
+      it_behaves_like "an API create request", parent: "annotation", model: Comment, url_parameters: [:annotation_id], authorized_user: :admin, included_relationships: [:creator]
+      include_examples "an API index request", parent: "annotation", model: Comment, url_parameters: [:annotation_id], paginated: true, included_relationships: [:creator]
     end
   end
 
@@ -24,13 +24,13 @@ RSpec.describe "Comments", type: :request do
     let(:resource_id) { parent.id }
 
     path "/resources/{resource_id}/relationships/comments/{id}" do
-      include_examples "an API show request", model: Comment, tags: "Resource Comments", url_parameters: [:resource_id]
-      include_examples "an API update request", model: Comment, tags: "Resource Comments", url_parameters: [:resource_id], authorized_user: :admin
-      include_examples "an API destroy request", model: Comment, tags: "Resource Comments", url_parameters: [:resource_id], authorized_user: :admin
+      include_examples "an API show request", parent: "resource", model: Comment, url_parameters: [:resource_id]
+      include_examples "an API update request", parent: "resource", model: Comment, url_parameters: [:resource_id], authorized_user: :admin
+      include_examples "an API destroy request", parent: "resource", model: Comment, url_parameters: [:resource_id], authorized_user: :admin
     end
 
     path "/resources/{resource_id}/relationships/comments" do
-      it_behaves_like "an API create request", model: Comment, tags: "Resource Comments", url_parameters: [:resource_id], authorized_user: :admin, included_relationships: [:creator]
+      it_behaves_like "an API create request", parent: "resource", model: Comment, url_parameters: [:resource_id], authorized_user: :admin, included_relationships: [:creator]
     end
   end
 
@@ -48,21 +48,22 @@ RSpec.describe "Comments", type: :request do
 
       path "/comments/{comment_id}/relationships/flags" do
         include_examples "an API create request",
-                          model: Comment,
-                          authorized_user: :admin,
-                          request_body: false,
-                          url_parameters: [:comment_id]
+                         summary: "Flag the comment for moderation",
+                         model: Comment,
+                         authorized_user: :admin,
+                         request_body: false,
+                         url_parameters: [:comment_id]
 
         include_examples "an API destroy request",
-                          model: Comment,
-                          authorized_user: :admin,
-                          url_parameters: [:comment_id],
-                          # this route is a special case where a destroy does not take an ID
-                          parameters: [],
-                          exclude: %w(404),
-                          delete_has_response_body: true,
-                          success_response_code: "200"
-
+                         summary: "Unflag the comment",
+                         model: Comment,
+                         authorized_user: :admin,
+                         url_parameters: [:comment_id],
+                         # this route is a special case where a destroy does not take an ID
+                         parameters: [],
+                         exclude: %w(404),
+                         delete_has_response_body: true,
+                         success_response_code: "200"
       end
     end
   end

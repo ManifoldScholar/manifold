@@ -10,9 +10,9 @@ RSpec.describe "Action Callouts", type: :request do
   path "/action_callouts/{id}" do
     include_examples "an API show request", model: ActionCallout
     include_examples "an API update request",
-                      model: ActionCallout,
-                      authorized_user: :admin,
-                      description: conditional_requirements
+                     model: ActionCallout,
+                     authorized_user: :admin,
+                     description: conditional_requirements
 
     include_examples "an API destroy request", model: ActionCallout, authorized_user: :admin
   end
@@ -23,16 +23,16 @@ RSpec.describe "Action Callouts", type: :request do
 
     path "/projects/{project_id}/relationships/action_callouts" do
       include_examples "an API index request",
-                        model: ActionCallout,
-                        tags: "Projects",
-                        url_parameters: [:project_id]
+                       parent: "project",
+                       model: ActionCallout,
+                       url_parameters: [:project_id]
 
       include_examples "an API create request",
-                        model: ActionCallout,
-                        authorized_user: :admin,
-                        tags: "Projects",
-                        url_parameters: [:project_id],
-                        description: conditional_requirements
+                       parent: "project",
+                       model: ActionCallout,
+                       authorized_user: :admin,
+                       url_parameters: [:project_id],
+                       description: conditional_requirements
     end
   end
 end

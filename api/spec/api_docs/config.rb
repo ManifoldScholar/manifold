@@ -24,9 +24,7 @@ module ApiDocs
               title: "Manifold",
               version: "v1"
             },
-            host: Rails.application.config.manifold.domain,
             basePath: "/api/v1",
-            schemes: ["http"],
             paths: {},
             securityDefinitions: {
               apiKey: {
