@@ -27,6 +27,14 @@ RSpec.describe "Twitter Queries", type: :request do
   end
 
   context "when belonging to a twitter_query" do
+    before(:all) do
+      headers = {
+        "Content-Type" => "application/json;charset=utf-8"
+      }
+      body = '{"statuses":[]}'
+      stub_request(:get, /api.twitter.com/).to_return(status: 200, body: body, headers: headers)
+    end
+
     let!(:resource) { FactoryBot.create(:twitter_query) }
     let!(:twitter_query_id) { resource.id }
     path "/twitter_queries/{twitter_query_id}/relationships/fetch" do
