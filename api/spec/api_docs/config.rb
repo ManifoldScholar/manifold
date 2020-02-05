@@ -5,7 +5,7 @@ module ApiDocs
       include Helpers::Inflections
 
       def swagger_root
-        File.join(__dir__, "../../swagger")
+        File.join(Rails.root, "public/api/static/docs")
       end
 
       def definitions
@@ -16,6 +16,7 @@ module ApiDocs
         defined
       end
 
+      # rubocop:disable Metrics/MethodLength
       def swagger_docs
         {
           "v1/swagger.json" => {
@@ -37,6 +38,7 @@ module ApiDocs
           }
         }
       end
+      # rubocop:enable Metrics/MethodLength
 
     end
 
