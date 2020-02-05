@@ -3,6 +3,7 @@ require "swagger_helper"
 RSpec.describe "Contacts", type: :request do
   path "/contacts" do
     post "Sends an email to Manifold's contact address" do
+      tags "Contacts"
       consumes "application/json"
       parameter name: :body, in: :body, schema: ApiDocumentation::DryTypesParser.convert(
         Types::Hash.schema(

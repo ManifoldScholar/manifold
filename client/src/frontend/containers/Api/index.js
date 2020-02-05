@@ -22,7 +22,7 @@ class Api extends Component {
   }
 
   get url() {
-    return `${config.services.api}/api-docs/v1/swagger.json`;
+    return `${config.services.api}/api/static/docs/v1/swagger.json`;
   }
 
   fetchSchema() {
@@ -94,10 +94,10 @@ class Api extends Component {
                     {`. `}
                   </>
                 ) : (
-                  "You are not currently logged in."
+                  <strong>{`You are not currently logged in. `}</strong>
                 )}
                 {`Any requests you send to this instance using the documentation below
-                  will be sent on your behalf and will operate on the current data for `}
+                  will be sent with your current authorization token and will operate on the current data for `}
                 <a href={config.services.api}>{config.services.api}</a>
                 {`, so
                   proceed with caution.`}

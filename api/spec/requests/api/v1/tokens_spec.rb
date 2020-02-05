@@ -12,6 +12,7 @@ RSpec.describe "Tokens", type: :request do
   path "/tokens" do
     include_examples "an API create request",
                      model: User,
+                     tags: "Token",
                      resource_name: "CurrentUser",
                      exclude: %w(404),
                      additional_parameters: [

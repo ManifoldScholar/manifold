@@ -5809,6 +5809,9 @@
     "/contacts": {
       "post": {
         "summary": "Sends an email to Manifold's contact address",
+        "tags": [
+          "Contacts"
+        ],
         "consumes": [
           "application/json"
         ],
@@ -27273,7 +27276,7 @@
           "application/json"
         ],
         "tags": [
-          "Currentusers"
+          "Token"
         ],
         "responses": {
           "200": {
