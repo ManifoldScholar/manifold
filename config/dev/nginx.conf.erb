@@ -44,6 +44,11 @@ server {
   }
 
   location /api {
+
+    location /api/static {
+      root <%= root %>/api/public;
+    }
+
     proxy_set_header Host            $host;
     proxy_set_header X-Forwarded-For $remote_addr;
     proxy_set_header X-Forwarded-Proto $scheme;
