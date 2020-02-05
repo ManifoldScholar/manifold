@@ -29505,162 +29505,6 @@
     }
   },
   "definitions": {
-    "ActionCallout": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "actionCallouts"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "kind": {
-                  "type": "string",
-                  "enum": [
-                    "link",
-                    "read",
-                    "toc",
-                    "download"
-                  ]
-                },
-                "location": {
-                  "type": "string",
-                  "enum": [
-                    "left",
-                    "right"
-                  ]
-                },
-                "position": {
-                  "type": "integer"
-                },
-                "url": {
-                  "type": "string",
-                  "example": "http://some-website.com"
-                },
-                "button": {
-                  "type": "boolean"
-                },
-                "attachmentStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "largeLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "project": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                },
-                "text": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "Subject": {
       "type": "object",
       "properties": {
@@ -29680,81 +29524,6 @@
               "properties": {
                 "name": {
                   "type": "string"
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Collaborator": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "collaborators"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "role": {
-                  "type": "string"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "maker": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                },
-                "collaboratable": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
                 }
               }
             },
@@ -30330,6 +30099,180 @@
         }
       }
     },
+    "ResourceCollection": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "resourceCollections"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "abilities": {
+                  "type": "object"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "titleFormatted": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "description": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "descriptionFormatted": {
+                  "type": "string"
+                },
+                "projectId": {
+                  "type": "string",
+                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                },
+                "resourceKinds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "collectionResourcesCount": {
+                  "type": "integer"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "pendingSlug": {
+                  "type": "string"
+                },
+                "thumbnailStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "largeLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                },
+                "resourceTags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "resources": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                          },
+                          "type": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "Annotation": {
       "type": "object",
       "properties": {
@@ -30564,7 +30507,7 @@
         }
       }
     },
-    "Maker": {
+    "TwitterQuery": {
       "type": "object",
       "properties": {
         "data": {
@@ -30576,179 +30519,60 @@
             },
             "type": {
               "type": "string",
-              "example": "makers"
+              "example": "twitterQueries"
             },
             "attributes": {
               "type": "object",
               "properties": {
-                "abilities": {
-                  "type": "object"
-                },
-                "firstName": {
+                "createdAt": {
                   "type": "string",
-                  "description": "Requires at least one of these fields"
+                  "format": "date-time"
                 },
-                "lastName": {
+                "updatedAt": {
                   "type": "string",
-                  "description": "Requires at least one of these fields"
+                  "format": "date-time"
                 },
-                "middleName": {
-                  "x-nullable": true,
+                "query": {
                   "type": "string"
                 },
-                "displayName": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "fullName": {
-                  "type": "string"
-                },
-                "suffix": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "prefix": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "avatarStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "largeLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
+                "active": {
                   "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "ResourceImport": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "resourceImports"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string",
-                  "enum": [
-                    "google_sheet",
-                    "attached_data"
-                  ]
                 },
-                "columnMap": {
-                  "type": "object"
-                },
-                "columnAutomap": {
-                  "type": "object"
-                },
-                "headerRow": {
+                "eventsCount": {
                   "type": "integer"
                 },
-                "headers": {
-                  "type": "object"
-                },
-                "availableColumns": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "storageType": {
-                  "type": "string"
-                },
-                "storageIdentifier": {
-                  "type": "string"
-                },
-                "url": {
-                  "x-nullable": true,
+                "resultType": {
                   "type": "string",
-                  "example": "http://some-website.com",
-                  "description": "Required if source is a google sheet"
+                  "enum": [
+                    "most_recent",
+                    "popular"
+                  ]
                 },
-                "parseError": {
-                  "type": "boolean"
-                },
-                "importResults": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "dataFilename": {
+                "displayName": {
                   "type": "string"
-                },
-                "state": {
-                  "type": "string",
-                  "example": "pending"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -30871,6 +30695,63 @@
                 },
                 "isCurrentUser": {
                   "type": "boolean"
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "CollectionProject": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "collectionProjects"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "position": {
+                  "type": "integer"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -31607,1188 +31488,6 @@
                       }
                     }
                   }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Category": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "categories"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "abilities": {
-                  "type": "object"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "position": {
-                  "type": "integer"
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "ResourceCollection": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "resourceCollections"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "abilities": {
-                  "type": "object"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "titleFormatted": {
-                  "type": "string"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "description": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "descriptionFormatted": {
-                  "type": "string"
-                },
-                "projectId": {
-                  "type": "string",
-                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                },
-                "resourceKinds": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "collectionResourcesCount": {
-                  "type": "integer"
-                },
-                "slug": {
-                  "type": "string"
-                },
-                "pendingSlug": {
-                  "type": "string"
-                },
-                "thumbnailStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "largeLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                },
-                "resourceTags": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "resources": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                          },
-                          "type": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "project": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Feature": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "features"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "abilities": {
-                  "type": "object"
-                },
-                "header": {
-                  "type": "string"
-                },
-                "headerFormatted": {
-                  "type": "string"
-                },
-                "subheader": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "subheaderFormatted": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "body": {
-                  "type": "string"
-                },
-                "bodyFormatted": {
-                  "type": "string"
-                },
-                "linkText": {
-                  "type": "string"
-                },
-                "linkUrl": {
-                  "type": "string",
-                  "example": "http://some-website.com"
-                },
-                "linkTarget": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "description": "Where to display the linked URL. Additional information can be found <a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target'>here</a>"
-                },
-                "style": {
-                  "type": "string",
-                  "enum": [
-                    "dark",
-                    "light"
-                  ]
-                },
-                "hidden": {
-                  "type": "boolean"
-                },
-                "backgroundColor": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "description": "Any valid CSS color (eg. 'blue' or '#e3e3e3'"
-                },
-                "foregroundColor": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "description": "Any valid CSS color (eg. 'blue' or '#e3e3e3'"
-                },
-                "headerColor": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "description": "Any valid CSS color (eg. 'blue' or '#e3e3e3'"
-                },
-                "layout": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "foregroundTop": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "example": "1.9em",
-                  "description": "Any valid CSS distance (eg. px, em, rem)"
-                },
-                "foregroundLeft": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "example": "1.9em",
-                  "description": "Any valid CSS distance (eg. px, em, rem)"
-                },
-                "foregroundPosition": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "example": "absolute",
-                  "description": "Position can be absolute or relative"
-                },
-                "position": {
-                  "type": "integer"
-                },
-                "live": {
-                  "type": "boolean"
-                },
-                "includeSignUp": {
-                  "type": "boolean"
-                },
-                "foregroundStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "largeLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                },
-                "backgroundStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "largeLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "TwitterQuery": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "twitterQueries"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "active": {
-                  "type": "boolean"
-                },
-                "eventsCount": {
-                  "type": "integer"
-                },
-                "resultType": {
-                  "type": "string",
-                  "enum": [
-                    "most_recent",
-                    "popular"
-                  ]
-                },
-                "displayName": {
-                  "type": "string"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "project": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "CollectionProject": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "collectionProjects"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "position": {
-                  "type": "integer"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "project": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Permission": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "permissions"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "roleNames": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": "editor"
-                  }
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "user": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                },
-                "resource": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Setting": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "settings"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "general": {
-                  "type": "object",
-                  "properties": {
-                    "installationName": {
-                      "type": "string"
-                    },
-                    "defaultPublisher": {
-                      "type": "string"
-                    },
-                    "defaultPublisherPlace": {
-                      "type": "string"
-                    },
-                    "headDescription": {
-                      "type": "string"
-                    },
-                    "socialShareMessage": {
-                      "type": "string"
-                    },
-                    "contactEmail": {
-                      "type": "string",
-                      "example": "me@email.com"
-                    },
-                    "copyright": {
-                      "type": "string"
-                    },
-                    "pressSite": {
-                      "type": "string"
-                    },
-                    "termsUrl": {
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "headTile": {
-                      "type": "string"
-                    },
-                    "twitter": {
-                      "type": "string"
-                    },
-                    "facebook": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "theme": {
-                  "type": "object",
-                  "properties": {
-                    "logoStyles": {
-                      "type": "string"
-                    },
-                    "typekitId": {
-                      "type": "string"
-                    },
-                    "headerOffset": {
-                      "type": "string"
-                    },
-                    "topBarText": {
-                      "type": "string"
-                    },
-                    "topBarUrl": {
-                      "type": "string"
-                    },
-                    "topBarColor": {
-                      "type": "string"
-                    },
-                    "topBarMode": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "integrations": {
-                  "type": "object",
-                  "properties": {
-                    "facebookAppId": {
-                      "type": "string"
-                    },
-                    "twitterAppId": {
-                      "type": "string"
-                    },
-                    "twitterAccessToken": {
-                      "type": "string"
-                    },
-                    "googleProjectId": {
-                      "type": "string"
-                    },
-                    "googlePrivateKeyId": {
-                      "type": "string"
-                    },
-                    "googleClientEmail": {
-                      "type": "string"
-                    },
-                    "googleClientId": {
-                      "type": "string"
-                    },
-                    "gaTrackingId": {
-                      "type": "string"
-                    },
-                    "gaProfileId": {
-                      "type": "string",
-                      "example": "ga:343245632"
-                    }
-                  }
-                },
-                "email": {
-                  "type": "object",
-                  "properties": {
-                    "fromAddress": {
-                      "type": "string",
-                      "example": "me@email.com"
-                    },
-                    "fromName": {
-                      "type": "string"
-                    },
-                    "replyToAddress": {
-                      "type": "string",
-                      "example": "me@email.com"
-                    },
-                    "replyToName": {
-                      "type": "string"
-                    },
-                    "closing": {
-                      "type": "string"
-                    },
-                    "deliveryMethod": {
-                      "type": "string",
-                      "enum": [
-                        "sendmail"
-                      ]
-                    },
-                    "smtpSettingsAddress": {
-                      "type": "string"
-                    },
-                    "smtpSettingsPort": {
-                      "type": "integer"
-                    },
-                    "smtpSettingsUserName": {
-                      "type": "string"
-                    },
-                    "sendmailSettingsLocation": {
-                      "type": "string"
-                    },
-                    "sendmailSettingsArguments": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "pressLogoStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "largeLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                },
-                "pressLogoFooterStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "largeLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                },
-                "pressLogoMobileStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "largeLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                },
-                "faviconStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "large": {
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                },
-                "copyrightFormatted": {
-                  "type": "string"
-                },
-                "calculated": {
-                  "type": "object",
-                  "properties": {
-                    "hasVisibleHomeProjectCollections": {
-                      "type": "boolean"
-                    },
-                    "hasVisibleProjects": {
-                      "type": "boolean"
-                    },
-                    "manifoldVersion": {
-                      "type": "object",
-                      "properties": {
-                        "version": {
-                          "type": "string"
-                        },
-                        "segments": {
-                          "x-nullable": true,
-                          "type": "array",
-                          "items": {
-                            "type": "integer"
-                          },
-                          "description": "An array of integers representing the major, minor and patch version. This will default to null if the version does not adhere to a semantic versioning format."
-                        }
-                      }
-                    }
-                  }
-                },
-                "oauth": {
-                  "type": "object",
-                  "properties": {
-                    "facebook": {
-                      "type": "object",
-                      "properties": {
-                        "custom": {
-                          "type": "boolean"
-                        },
-                        "enabled": {
-                          "type": "boolean"
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "facebook"
-                        },
-                        "descriptiveName": {
-                          "type": "string",
-                          "example": "Facebook"
-                        }
-                      }
-                    },
-                    "googleOauth2": {
-                      "type": "object",
-                      "properties": {
-                        "custom": {
-                          "type": "boolean"
-                        },
-                        "enabled": {
-                          "type": "boolean"
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "facebook"
-                        },
-                        "descriptiveName": {
-                          "type": "string",
-                          "example": "Facebook"
-                        }
-                      }
-                    },
-                    "twitter": {
-                      "type": "object",
-                      "properties": {
-                        "custom": {
-                          "type": "boolean"
-                        },
-                        "enabled": {
-                          "type": "boolean"
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "facebook"
-                        },
-                        "descriptiveName": {
-                          "type": "string",
-                          "example": "Facebook"
-                        }
-                      }
-                    }
-                  }
-                },
-                "secrets": {
-                  "type": "object",
-                  "properties": {
-                    "facebookAppSecret": {
-                      "type": "string"
-                    },
-                    "twitterAppSecret": {
-                      "type": "string"
-                    },
-                    "twitterAccessTokenSecret": {
-                      "type": "string"
-                    },
-                    "googlePrivateKey": {
-                      "type": "string"
-                    },
-                    "smtpSettingsPassword": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "TextCategory": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "textCategories"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "position": {
-                  "type": "integer"
                 }
               }
             },
@@ -33768,7 +32467,7 @@
         }
       }
     },
-    "User": {
+    "Category": {
       "type": "object",
       "properties": {
         "data": {
@@ -33780,7 +32479,7 @@
             },
             "type": {
               "type": "string",
-              "example": "users"
+              "example": "categories"
             },
             "attributes": {
               "type": "object",
@@ -33788,23 +32487,180 @@
                 "abilities": {
                   "type": "object"
                 },
-                "nickname": {
+                "title": {
                   "type": "string"
                 },
-                "firstName": {
+                "position": {
+                  "type": "integer"
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "TextCategory": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "textCategories"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "title": {
                   "type": "string"
                 },
-                "lastName": {
+                "position": {
+                  "type": "integer"
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Feature": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "features"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "abilities": {
+                  "type": "object"
+                },
+                "header": {
                   "type": "string"
+                },
+                "headerFormatted": {
+                  "type": "string"
+                },
+                "subheader": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "subheaderFormatted": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "body": {
+                  "type": "string"
+                },
+                "bodyFormatted": {
+                  "type": "string"
+                },
+                "linkText": {
+                  "type": "string"
+                },
+                "linkUrl": {
+                  "type": "string",
+                  "example": "http://some-website.com"
+                },
+                "linkTarget": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "description": "Where to display the linked URL. Additional information can be found <a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target'>here</a>"
+                },
+                "style": {
+                  "type": "string",
+                  "enum": [
+                    "dark",
+                    "light"
+                  ]
+                },
+                "hidden": {
+                  "type": "boolean"
+                },
+                "backgroundColor": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "description": "Any valid CSS color (eg. 'blue' or '#e3e3e3'"
+                },
+                "foregroundColor": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "description": "Any valid CSS color (eg. 'blue' or '#e3e3e3'"
+                },
+                "headerColor": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "description": "Any valid CSS color (eg. 'blue' or '#e3e3e3'"
+                },
+                "layout": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
                 },
                 "updatedAt": {
                   "type": "string",
                   "format": "date-time"
                 },
-                "fullName": {
-                  "type": "string"
+                "foregroundTop": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "example": "1.9em",
+                  "description": "Any valid CSS distance (eg. px, em, rem)"
                 },
-                "avatarStyles": {
+                "foregroundLeft": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "example": "1.9em",
+                  "description": "Any valid CSS distance (eg. px, em, rem)"
+                },
+                "foregroundPosition": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "example": "absolute",
+                  "description": "Position can be absolute or relative"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "live": {
+                  "type": "boolean"
+                },
+                "includeSignUp": {
+                  "type": "boolean"
+                },
+                "foregroundStyles": {
                   "type": "object",
                   "properties": {
                     "small": {
@@ -33859,22 +32715,265 @@
                     }
                   }
                 },
-                "email": {
-                  "type": "string",
-                  "example": "me@email.com"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "role": {
-                  "type": "string"
-                },
-                "kind": {
-                  "type": "string"
-                },
-                "isCurrentUser": {
+                "backgroundStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "largeLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
                   "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Statistics": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "0"
+            },
+            "type": {
+              "type": "string",
+              "example": "statistics"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "readersThisWeek": {
+                  "type": "number",
+                  "format": "float"
+                },
+                "readerIncrease": {
+                  "type": "integer"
+                },
+                "newHighlightsCount": {
+                  "type": "integer"
+                },
+                "newAnnotationsCount": {
+                  "type": "integer"
+                },
+                "newTextsCount": {
+                  "type": "integer"
+                },
+                "totalTextCount": {
+                  "type": "integer"
+                },
+                "totalResourceCount": {
+                  "type": "integer"
+                },
+                "totalAnnotationCount": {
+                  "type": "integer"
+                },
+                "totalCommentCount": {
+                  "type": "integer"
+                },
+                "totalUserCount": {
+                  "type": "integer"
+                },
+                "totalProjectCount": {
+                  "type": "integer"
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Permission": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "permissions"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "roleNames": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "editor"
+                  }
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "CollectionResource": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "collectionResources"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "position": {
+                  "type": "integer"
+                },
+                "resourceCollectionId": {
+                  "type": "string",
+                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -34166,72 +33265,7 @@
         }
       }
     },
-    "Statistics": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "0"
-            },
-            "type": {
-              "type": "string",
-              "example": "statistics"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "readersThisWeek": {
-                  "type": "number",
-                  "format": "float"
-                },
-                "readerIncrease": {
-                  "type": "integer"
-                },
-                "newHighlightsCount": {
-                  "type": "integer"
-                },
-                "newAnnotationsCount": {
-                  "type": "integer"
-                },
-                "newTextsCount": {
-                  "type": "integer"
-                },
-                "totalTextCount": {
-                  "type": "integer"
-                },
-                "totalResourceCount": {
-                  "type": "integer"
-                },
-                "totalAnnotationCount": {
-                  "type": "integer"
-                },
-                "totalCommentCount": {
-                  "type": "integer"
-                },
-                "totalUserCount": {
-                  "type": "integer"
-                },
-                "totalProjectCount": {
-                  "type": "integer"
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "CollectionResource": {
+    "Setting": {
       "type": "object",
       "properties": {
         "data": {
@@ -34243,77 +33277,453 @@
             },
             "type": {
               "type": "string",
-              "example": "collectionResources"
+              "example": "settings"
             },
             "attributes": {
               "type": "object",
               "properties": {
-                "position": {
-                  "type": "integer"
-                },
-                "resourceCollectionId": {
-                  "type": "string",
-                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "resource": {
+                "general": {
                   "type": "object",
                   "properties": {
-                    "data": {
+                    "installationName": {
+                      "type": "string"
+                    },
+                    "defaultPublisher": {
+                      "type": "string"
+                    },
+                    "defaultPublisherPlace": {
+                      "type": "string"
+                    },
+                    "headDescription": {
+                      "type": "string"
+                    },
+                    "socialShareMessage": {
+                      "type": "string"
+                    },
+                    "contactEmail": {
+                      "type": "string",
+                      "example": "me@email.com"
+                    },
+                    "copyright": {
+                      "type": "string"
+                    },
+                    "pressSite": {
+                      "type": "string"
+                    },
+                    "termsUrl": {
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "headTile": {
+                      "type": "string"
+                    },
+                    "twitter": {
+                      "type": "string"
+                    },
+                    "facebook": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "theme": {
+                  "type": "object",
+                  "properties": {
+                    "logoStyles": {
+                      "type": "string"
+                    },
+                    "typekitId": {
+                      "type": "string"
+                    },
+                    "headerOffset": {
+                      "type": "string"
+                    },
+                    "topBarText": {
+                      "type": "string"
+                    },
+                    "topBarUrl": {
+                      "type": "string"
+                    },
+                    "topBarColor": {
+                      "type": "string"
+                    },
+                    "topBarMode": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "integrations": {
+                  "type": "object",
+                  "properties": {
+                    "facebookAppId": {
+                      "type": "string"
+                    },
+                    "twitterAppId": {
+                      "type": "string"
+                    },
+                    "twitterAccessToken": {
+                      "type": "string"
+                    },
+                    "googleProjectId": {
+                      "type": "string"
+                    },
+                    "googlePrivateKeyId": {
+                      "type": "string"
+                    },
+                    "googleClientEmail": {
+                      "type": "string"
+                    },
+                    "googleClientId": {
+                      "type": "string"
+                    },
+                    "gaTrackingId": {
+                      "type": "string"
+                    },
+                    "gaProfileId": {
+                      "type": "string",
+                      "example": "ga:343245632"
+                    }
+                  }
+                },
+                "email": {
+                  "type": "object",
+                  "properties": {
+                    "fromAddress": {
+                      "type": "string",
+                      "example": "me@email.com"
+                    },
+                    "fromName": {
+                      "type": "string"
+                    },
+                    "replyToAddress": {
+                      "type": "string",
+                      "example": "me@email.com"
+                    },
+                    "replyToName": {
+                      "type": "string"
+                    },
+                    "closing": {
+                      "type": "string"
+                    },
+                    "deliveryMethod": {
+                      "type": "string",
+                      "enum": [
+                        "sendmail"
+                      ]
+                    },
+                    "smtpSettingsAddress": {
+                      "type": "string"
+                    },
+                    "smtpSettingsPort": {
+                      "type": "integer"
+                    },
+                    "smtpSettingsUserName": {
+                      "type": "string"
+                    },
+                    "sendmailSettingsLocation": {
+                      "type": "string"
+                    },
+                    "sendmailSettingsArguments": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "pressLogoStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
                       "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "largeLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                },
+                "pressLogoFooterStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "largeLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                },
+                "pressLogoMobileStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "largeLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                },
+                "faviconStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "large": {
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                },
+                "copyrightFormatted": {
+                  "type": "string"
+                },
+                "calculated": {
+                  "type": "object",
+                  "properties": {
+                    "hasVisibleHomeProjectCollections": {
+                      "type": "boolean"
+                    },
+                    "hasVisibleProjects": {
+                      "type": "boolean"
+                    },
+                    "manifoldVersion": {
                       "type": "object",
                       "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
+                        "version": {
                           "type": "string"
+                        },
+                        "segments": {
+                          "x-nullable": true,
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "An array of integers representing the major, minor and patch version. This will default to null if the version does not adhere to a semantic versioning format."
                         }
                       }
                     }
                   }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Tag": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "0"
-            },
-            "type": {
-              "type": "string",
-              "example": "tags"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
                 },
-                "taggingsCount": {
-                  "type": "integer"
+                "oauth": {
+                  "type": "object",
+                  "properties": {
+                    "facebook": {
+                      "type": "object",
+                      "properties": {
+                        "custom": {
+                          "type": "boolean"
+                        },
+                        "enabled": {
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "facebook"
+                        },
+                        "descriptiveName": {
+                          "type": "string",
+                          "example": "Facebook"
+                        }
+                      }
+                    },
+                    "googleOauth2": {
+                      "type": "object",
+                      "properties": {
+                        "custom": {
+                          "type": "boolean"
+                        },
+                        "enabled": {
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "facebook"
+                        },
+                        "descriptiveName": {
+                          "type": "string",
+                          "example": "Facebook"
+                        }
+                      }
+                    },
+                    "twitter": {
+                      "type": "object",
+                      "properties": {
+                        "custom": {
+                          "type": "boolean"
+                        },
+                        "enabled": {
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "facebook"
+                        },
+                        "descriptiveName": {
+                          "type": "string",
+                          "example": "Facebook"
+                        }
+                      }
+                    }
+                  }
+                },
+                "secrets": {
+                  "type": "object",
+                  "properties": {
+                    "facebookAppSecret": {
+                      "type": "string"
+                    },
+                    "twitterAppSecret": {
+                      "type": "string"
+                    },
+                    "twitterAccessTokenSecret": {
+                      "type": "string"
+                    },
+                    "googlePrivateKey": {
+                      "type": "string"
+                    },
+                    "smtpSettingsPassword": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             },
@@ -34367,180 +33777,6 @@
               "type": "object",
               "properties": {
                 "favoritable": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Stylesheet": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "stylesheets"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "sourceIdentifier": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "styles": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "description": "Validated, scoped, and transformed styles that will be applied in the reader."
-                },
-                "ingested": {
-                  "type": "boolean"
-                },
-                "position": {
-                  "type": "integer"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "rawStyles": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "example": ".class-selector { background: black }",
-                  "description": "CSS styles and selectors for your custom stylesheet"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "text": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                },
-                "textSections": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                          },
-                          "type": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "ReadingGroupMembership": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "readingGroupMemberships"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "currentUserIsCreator": {
-                  "type": "boolean"
-                },
-                "annotationsCount": {
-                  "type": "integer"
-                },
-                "highlightsCount": {
-                  "type": "integer"
-                },
-                "anonymousLabel": {
-                  "type": "string"
-                },
-                "isCurrentUser": {
-                  "type": "boolean"
-                },
-                "name": {
-                  "type": "string"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "user": {
                   "type": "object",
                   "properties": {
                     "data": {
@@ -34629,6 +33865,78 @@
               "type": "object",
               "properties": {
                 "project": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ReadingGroupMembership": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "readingGroupMemberships"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "currentUserIsCreator": {
+                  "type": "boolean"
+                },
+                "annotationsCount": {
+                  "type": "integer"
+                },
+                "highlightsCount": {
+                  "type": "integer"
+                },
+                "anonymousLabel": {
+                  "type": "string"
+                },
+                "isCurrentUser": {
+                  "type": "boolean"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "user": {
                   "type": "object",
                   "properties": {
                     "data": {
@@ -34764,96 +34072,7 @@
         }
       }
     },
-    "Page": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "1"
-            },
-            "type": {
-              "type": "string",
-              "example": "pages"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "abilities": {
-                  "type": "object"
-                },
-                "slug": {
-                  "type": "string"
-                },
-                "pendingSlug": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "navTitle": {
-                  "type": "string"
-                },
-                "showInFooter": {
-                  "type": "boolean"
-                },
-                "showInHeader": {
-                  "type": "boolean"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "hidden": {
-                  "type": "boolean"
-                },
-                "bodyFormatted": {
-                  "type": "string",
-                  "example": "<p>string</p>"
-                },
-                "purpose": {
-                  "type": "string",
-                  "enum": [
-                    "terms_and_conditions",
-                    "privacy_policy",
-                    "supplemental_content"
-                  ]
-                },
-                "isExternalLink": {
-                  "type": "boolean"
-                },
-                "externalLink": {
-                  "type": "string",
-                  "example": "http://some-website.com",
-                  "description": "Required if is_external_link is true"
-                },
-                "openInNewTab": {
-                  "type": "boolean"
-                },
-                "body": {
-                  "type": "string"
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Comment": {
+    "User": {
       "type": "object",
       "properties": {
         "data": {
@@ -34865,7 +34084,7 @@
             },
             "type": {
               "type": "string",
-              "example": "comments"
+              "example": "users"
             },
             "attributes": {
               "type": "object",
@@ -34873,58 +34092,93 @@
                 "abilities": {
                   "type": "object"
                 },
-                "parentId": {
-                  "x-nullable": true,
+                "nickname": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "updatedAt": {
                   "type": "string",
-                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                  "format": "date-time"
+                },
+                "fullName": {
+                  "type": "string"
+                },
+                "avatarStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "largeLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                },
+                "email": {
+                  "type": "string",
+                  "example": "me@email.com"
                 },
                 "createdAt": {
                   "type": "string",
                   "format": "date-time"
                 },
-                "flagsCount": {
-                  "type": "integer"
-                },
-                "deleted": {
-                  "type": "boolean"
-                },
-                "childrenCount": {
-                  "type": "integer"
-                },
-                "sortOrder": {
-                  "type": "integer"
-                },
-                "authorCreated": {
-                  "type": "boolean"
-                },
-                "flagged": {
-                  "type": "boolean"
-                },
-                "body": {
+                "role": {
                   "type": "string"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "creator": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "isCurrentUser": {
+                  "type": "boolean"
                 }
               }
             },
@@ -35069,6 +34323,43 @@
         }
       }
     },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "0"
+            },
+            "type": {
+              "type": "string",
+              "example": "tags"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "taggingsCount": {
+                  "type": "integer"
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "TextSection": {
       "type": "object",
       "properties": {
@@ -35182,6 +34473,715 @@
                       }
                     }
                   }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Stylesheet": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "stylesheets"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "sourceIdentifier": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "styles": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "description": "Validated, scoped, and transformed styles that will be applied in the reader."
+                },
+                "ingested": {
+                  "type": "boolean"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "rawStyles": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "example": ".class-selector { background: black }",
+                  "description": "CSS styles and selectors for your custom stylesheet"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "textSections": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                          },
+                          "type": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ActionCallout": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "actionCallouts"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "link",
+                    "read",
+                    "toc",
+                    "download"
+                  ]
+                },
+                "location": {
+                  "type": "string",
+                  "enum": [
+                    "left",
+                    "right"
+                  ]
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "url": {
+                  "type": "string",
+                  "example": "http://some-website.com"
+                },
+                "button": {
+                  "type": "boolean"
+                },
+                "attachmentStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "largeLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "text": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Page": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "1"
+            },
+            "type": {
+              "type": "string",
+              "example": "pages"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "abilities": {
+                  "type": "object"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "pendingSlug": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "navTitle": {
+                  "type": "string"
+                },
+                "showInFooter": {
+                  "type": "boolean"
+                },
+                "showInHeader": {
+                  "type": "boolean"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "hidden": {
+                  "type": "boolean"
+                },
+                "bodyFormatted": {
+                  "type": "string",
+                  "example": "<p>string</p>"
+                },
+                "purpose": {
+                  "type": "string",
+                  "enum": [
+                    "terms_and_conditions",
+                    "privacy_policy",
+                    "supplemental_content"
+                  ]
+                },
+                "isExternalLink": {
+                  "type": "boolean"
+                },
+                "externalLink": {
+                  "type": "string",
+                  "example": "http://some-website.com",
+                  "description": "Required if is_external_link is true"
+                },
+                "openInNewTab": {
+                  "type": "boolean"
+                },
+                "body": {
+                  "type": "string"
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Collaborator": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "collaborators"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "maker": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "collaboratable": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Comment": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "comments"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "abilities": {
+                  "type": "object"
+                },
+                "parentId": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "flagsCount": {
+                  "type": "integer"
+                },
+                "deleted": {
+                  "type": "boolean"
+                },
+                "childrenCount": {
+                  "type": "integer"
+                },
+                "sortOrder": {
+                  "type": "integer"
+                },
+                "authorCreated": {
+                  "type": "boolean"
+                },
+                "flagged": {
+                  "type": "boolean"
+                },
+                "body": {
+                  "type": "string"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "creator": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Maker": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "makers"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "abilities": {
+                  "type": "object"
+                },
+                "firstName": {
+                  "type": "string",
+                  "description": "Requires at least one of these fields"
+                },
+                "lastName": {
+                  "type": "string",
+                  "description": "Requires at least one of these fields"
+                },
+                "middleName": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "displayName": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "fullName": {
+                  "type": "string"
+                },
+                "suffix": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "prefix": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "avatarStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "largeLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ResourceImport": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "resourceImports"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "enum": [
+                    "google_sheet",
+                    "attached_data"
+                  ]
+                },
+                "columnMap": {
+                  "type": "object"
+                },
+                "columnAutomap": {
+                  "type": "object"
+                },
+                "headerRow": {
+                  "type": "integer"
+                },
+                "headers": {
+                  "type": "object"
+                },
+                "availableColumns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "storageType": {
+                  "type": "string"
+                },
+                "storageIdentifier": {
+                  "type": "string"
+                },
+                "url": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "example": "http://some-website.com",
+                  "description": "Required if source is a google sheet"
+                },
+                "parseError": {
+                  "type": "boolean"
+                },
+                "importResults": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "dataFilename": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "pending"
                 }
               }
             },
