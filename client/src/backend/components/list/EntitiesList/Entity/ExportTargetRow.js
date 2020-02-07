@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import lh from "helpers/linkHandler";
 import EntityRow from "./Row";
 
 export default class ExportTargetRow extends PureComponent {
@@ -15,6 +16,7 @@ export default class ExportTargetRow extends PureComponent {
 
     return (
       <EntityRow
+        onRowClick={lh.link("backendRecordsExportTargetEdit", exportTarget.id)}
         rowClickMode="block"
         title={name}
         label={label}
