@@ -19,6 +19,7 @@ import Features from "backend/containers/features";
 import Settings from "backend/containers/settings";
 import Content from "backend/containers/content-block";
 import ActionCallout from "backend/containers/action-callout";
+import ExportTargets from "backend/containers/records/export-targets";
 
 export default {
   Backend,
@@ -91,6 +92,7 @@ export default {
   FeaturesGeneral: Features.General,
   PagesList: Pages.List,
   FeaturesList: Features.List,
+  ExportTargetsList: ExportTargets.List,
   SettingsWrapper: Settings.Wrapper,
   SettingsTheme: Settings.Theme,
   SettingsIntegrations: Settings.Integrations,

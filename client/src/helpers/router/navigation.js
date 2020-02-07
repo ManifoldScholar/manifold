@@ -56,7 +56,7 @@ class Navigation {
       {
         label: "Records",
         route: "backendRecords",
-        entity: ["user", "maker", "page", "feature"],
+        entity: ["user", "maker", "page", "feature", "exportTarget"],
         ability: "update",
         children: [
           {
@@ -81,6 +81,12 @@ class Navigation {
             label: "Features",
             route: "backendRecordsFeatures",
             entity: "feature",
+            ability: "update"
+          },
+          {
+            label: "Export Targets",
+            route: "backendRecordsExportTargets",
+            entity: "exportTarget",
             ability: "update"
           }
         ]
@@ -273,6 +279,12 @@ class Navigation {
         label: "Features",
         route: "backendRecordsFeatures",
         entity: "feature",
+        ability: "update"
+      },
+      {
+        label: "Export Targets",
+        route: "backendRecordsExportTargets",
+        entity: "exportTarget",
         ability: "update"
       }
     ];
