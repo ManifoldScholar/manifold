@@ -527,6 +527,13 @@ const routes = {
               component: "ExportTargetsNew",
               path: "/backend/records/export-targets/new",
               helper: () => "/backend/records/export-targets/new"
+            },
+            {
+              name: "backendRecordsExportTargetEdit",
+              exact: true,
+              component: "ExportTargetsEdit",
+              path: "/backend/records/export-targets/:id",
+              helper: et => `/backend/records/export-targets/${et}`
             }
           ]
         },

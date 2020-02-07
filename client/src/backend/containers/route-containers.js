@@ -94,6 +94,7 @@ export default {
   FeaturesList: Features.List,
   ExportTargetsList: ExportTargets.List,
   ExportTargetsNew: ExportTargets.New,
+  ExportTargetsEdit: ExportTargets.Edit,
   SettingsWrapper: Settings.Wrapper,
   SettingsTheme: Settings.Theme,
   SettingsIntegrations: Settings.Integrations,
