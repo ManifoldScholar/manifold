@@ -2,6 +2,7 @@ import Category from "./category";
 import Collaborators from "./Collaborators";
 import Content from "./Content";
 import Events from "./Events";
+import ProjectExportations from "./ProjectExportations";
 import General from "./General";
 import Log from "./Log";
 import Metadata from "./Metadata";
@@ -21,6 +22,7 @@ export default {
   Collaborators,
   Content,
   Events,
+  ProjectExportations,
   General,
   Log,
   Metadata,

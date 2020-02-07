@@ -425,6 +425,13 @@ const routes = {
               ]
             },
             {
+              name: "backendProjectExportations",
+              exact: false,
+              component: "ProjectExportations",
+              path: "/backend/projects/:pId/exports",
+              helper: p => `/backend/projects/${p}/exports`
+            },
+            {
               name: "backendProjectLayout",
               exact: false,
               component: "ProjectContent",
