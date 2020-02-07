@@ -93,6 +93,7 @@ export default {
   PagesList: Pages.List,
   FeaturesList: Features.List,
   ExportTargetsList: ExportTargets.List,
+  ExportTargetsNew: ExportTargets.New,
   SettingsWrapper: Settings.Wrapper,
   SettingsTheme: Settings.Theme,
   SettingsIntegrations: Settings.Integrations,
