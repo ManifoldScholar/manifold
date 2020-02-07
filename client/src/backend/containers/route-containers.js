@@ -67,6 +67,7 @@ export default {
   PermissionEdit: Permission.Edit,
   ProjectCollaborators: Project.Collaborators,
   ProjectEvents: Project.Events,
+  ProjectExportations: Project.ProjectExportations,
   ProjectMetadata: Project.Metadata,
   ProjectSocialWrapper: Project.Social.Wrapper,
   TwitterQueryNew: TwitterQuery.New,

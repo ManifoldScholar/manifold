@@ -229,6 +229,13 @@ class Navigation {
         args
       },
       {
+        label: "Exports",
+        route: "backendProjectExportations",
+        entity: project,
+        ability: "manageProjectExportations",
+        args
+      },
+      {
         label: "Log",
         route: "backendProjectLog",
         entity: project,

@@ -9,6 +9,7 @@ export pagesAPI from "./resources/pages";
 export featuresAPI from "./resources/features";
 export passwordsAPI from "./resources/passwords";
 export projectsAPI from "./resources/projects";
+export projectExportationsAPI from "./resources/projectExportations";
 export resourcesAPI from "./resources/resources";
 export sectionsAPI from "./resources/sections";
 export settingsAPI from "./resources/settings";
