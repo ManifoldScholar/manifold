@@ -5,7 +5,10 @@ import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { exportTargetsAPI, requests } from "api";
 import get from "lodash/get";
+import lh from "helpers/linkHandler";
+import { childRoutes } from "helpers/router";
 import EntitiesList, {
+  Button,
   ExportTargetRow
 } from "backend/components/list/EntitiesList";
 
@@ -55,12 +58,16 @@ export class ExportTargetsContainerImplementation extends PureComponent {
   }
 
   render() {
-    const { exportTargets, match } = this.props;
+    const { exportTargets, match, route } = this.props;
     if (!exportTargets) return null;
     const active = match.params.id || "";
+    const drawerProps = {
+      closeUrl: lh.link("backendRecordsExportTargets")
+    };
 
     return (
       <>
+        {childRoutes(route, { drawer: true, drawerProps })}
         <EntitiesList
           entityComponent={ExportTargetRow}
           entityComponentProps={{ active }}
@@ -71,6 +78,14 @@ export class ExportTargetsContainerImplementation extends PureComponent {
             singular: "export target",
             plural: "export targets"
           }}
+          buttons={[
+            <Button
+              path={lh.link("backendRecordsExportTargetsNew")}
+              text="Add a new export target"
+              authorizedFor="exportTarget"
+              type="add"
+            />
+          ]}
         />
       </>
     );

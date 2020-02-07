@@ -519,7 +519,16 @@ const routes = {
           exact: false,
           component: "ExportTargetsList",
           path: "/backend/records/export-targets",
-          helper: () => "/backend/records/export-targets"
+          helper: () => "/backend/records/export-targets",
+          routes: [
+            {
+              name: "backendRecordsExportTargetsNew",
+              exact: true,
+              component: "ExportTargetsNew",
+              path: "/backend/records/export-targets/new",
+              helper: () => "/backend/records/export-targets/new"
+            }
+          ]
         },
         {
           name: "backendRecordsMakers",
