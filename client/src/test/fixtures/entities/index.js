@@ -6,6 +6,7 @@ import collectionResource from "./collection-resource";
 import comment from "./comment";
 import contentBlock from "./content-block";
 import event from "./event";
+import exportTarget from "./export-target";
 import feature from "./feature";
 import ingestion from "./ingestion";
 import maker from "./maker";
@@ -38,6 +39,7 @@ export default {
   comment,
   contentBlock,
   event,
+  exportTarget,
   feature,
   ingestion,
   maker,

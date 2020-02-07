@@ -20,7 +20,7 @@ export default class RecordsContainer extends PureComponent {
     return (
       <Authorize
         ability="update"
-        entity={["user", "maker", "page", "feature"]}
+        entity={["user", "maker", "page", "feature", "exportTarget"]}
         failureFatalError={{
           body: "You are not allowed to manage records."
         }}
