@@ -116,6 +116,7 @@ class Project < ApplicationRecord
 
   has_many :project_exports, inverse_of: :project, dependent: :destroy
   has_many :project_export_statuses, inverse_of: :project
+  has_many :project_exportations, dependent: :destroy
   has_one :current_project_export_status, -> { current }, class_name: "ProjectExportStatus"
   has_one :current_project_export, through: :current_project_export_status, source: :project_export
 
