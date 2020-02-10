@@ -3,6 +3,7 @@ import Button from "./List/Button";
 import Search from "./List/Search";
 import EntityRow from "./Entity/Row";
 import EventRow from "./Entity/EventRow";
+import ProjectExportationRow from "./Entity/ProjectExportationRow";
 import ExportTargetRow from "./Entity/ExportTargetRow";
 import FeatureRow from "./Entity/FeatureRow";
 import LogRow from "./Entity/LogRow";
@@ -23,6 +24,7 @@ export {
   Button,
   Search,
   EventRow,
+  ProjectExportationRow,
   ExportTargetRow,
   FeatureRow,
   LogRow,

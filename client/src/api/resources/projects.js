@@ -55,6 +55,16 @@ export default {
     };
   },
 
+  project_exportations(id, filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/projects/${id}/relationships/project_exportations`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
   resources(id, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/projects/${id}/relationships/resources`,

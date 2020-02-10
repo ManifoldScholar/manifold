@@ -124,6 +124,7 @@ Rails.application.routes.draw do
         scope module: :projects do
           namespace :relationships do
             resources :action_callouts, only: [:index, :create]
+            resources :project_exportations, only: [:index]
             resources :content_blocks, only: [:index, :create]
             resources :uncollected_resources, only: [:index]
             resources :resources, only: [:index, :create]

@@ -5,7 +5,15 @@ import PropTypes from "prop-types";
 import isArray from "lodash/isArray";
 
 import { select, meta } from "utils/entityUtils";
-import { exportTargetsAPI, projectExportationsAPI, requests } from "api";
+import {
+  projectsAPI,
+  exportTargetsAPI,
+  projectExportationsAPI,
+  requests
+} from "api";
+import EntitiesList, {
+  ProjectExportationRow
+} from "backend/components/list/EntitiesList";
 import Form from "/global/components/form";
 import FormContainer from "global/containers/form";
 import lh from "helpers/linkHandler";
@@ -48,6 +56,7 @@ export class ProjecExportations extends PureComponent {
   };
 
   componentDidMount() {
+    this.fetchExportations(1);
     this.fetchExportTargets();
   }
 
@@ -67,6 +76,10 @@ export class ProjecExportations extends PureComponent {
     return targets;
   }
 
+  pageChangeHandlerCreator = page => {
+    return () => this.fetchExportations(page);
+  };
+
   dispatch(action) {
     this.props.dispatch(action);
   }
@@ -76,8 +89,29 @@ export class ProjecExportations extends PureComponent {
     this.dispatch(action);
   }
 
+  fetchExportations(page) {
+    const pagination = {
+      number: page,
+      size: this.props.projectExportationsPerPage
+    };
+    const action = request(
+      projectsAPI.project_exportations(this.props.project.id, {}, pagination),
+      requests.beProjectExportations
+    );
+    this.dispatch(action);
+  }
+
   render() {
-    const { project } = this.props;
+    const active = false;
+    const {
+      projectExportations,
+      project,
+      projectExportationsMeta
+    } = this.props;
+
+    if (!projectExportations || !projectExportationsMeta) return null;
+
+    const { pagination } = projectExportationsMeta;
 
     return (
       <Authorize
@@ -97,7 +131,7 @@ export class ProjecExportations extends PureComponent {
           }}
           update={() => null}
           create={projectExportationsAPI.create}
-          onSuccess={() => null}
+          onSuccess={() => this.fetchExportations(1)}
           doNotWarn
         >
           <Form.FieldGroup label="New Project Export" horizontal>
@@ -109,6 +143,22 @@ export class ProjecExportations extends PureComponent {
             <Form.Save text="Export" wide={false} />
           </Form.FieldGroup>
         </FormContainer.Form>
+        <EntitiesList
+          entityComponent={ProjectExportationRow}
+          entityComponentProps={{ active }}
+          title="Past Project Exports"
+          titleStyle="section"
+          showCount
+          pagination={pagination}
+          callbacks={{
+            onPageClick: this.pageChangeHandlerCreator
+          }}
+          entities={projectExportations}
+          unit={{
+            singular: "export",
+            plural: "exports"
+          }}
+        />
       </Authorize>
     );
   }
