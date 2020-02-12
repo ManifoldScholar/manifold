@@ -26,6 +26,7 @@ export default class EventRow extends PureComponent {
     return (
       <li className="event-entity-row">
         <Event.Event
+          itemTag="div"
           itemClass={this.itemClass}
           event={event}
           hideLink
