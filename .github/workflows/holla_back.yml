@@ -18,31 +18,31 @@ jobs:
             [
               {
                 "cmd": "bug",
-                "labels": ["bug", "planned"],
+                "labels": ["Type: Bug", "Status: Planned"],
                 "message": "master:.github/workflows/hollas/bug_accepted.md",
                 "close": false
               },
               {
                 "cmd": "accept",
-                "labels": ["feature", "accepted"],
+                "labels": ["Type: Enhancement", "Status: Planned"],
                 "message": "master:.github/workflows/hollas/in_scope_accepted.md",
                 "close": false
               },
               {
                 "cmd": "funding",
-                "labels": ["feature", "needs funding"],
+                "labels": ["Type: Enhancement", "Status: Funding Needed"],
                 "message": "master:.github/workflows/hollas/in_scope_needs_funding.md",
                 "close": true
               },
               {
                 "cmd": "planned",
-                "labels": ["feature", "planned"],
+                "labels": ["Type: Enhancement", "Status: Planned"],
                 "message": "master:.github/workflows/hollas/in_scope_planned.md",
                 "close": false
               },
               {
                 "cmd": "reject",
-                "labels": ["out of scope"],
+                "labels": ["Status: Out of Scope"],
                 "message": "master:.github/workflows/hollas/out_of_scope.md",
                 "close": true
               }
