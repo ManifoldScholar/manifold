@@ -41,13 +41,6 @@
     color: $defaultHoverColor;
   }
 
-  &__contents-wrapper {
-    &--with-section-title {
-      margin-left: 24px;
-    }
-
-  }
-
   &__list {
     @include listUnstyled;
 
