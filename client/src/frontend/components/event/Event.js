@@ -24,6 +24,7 @@ export default class Event extends PureComponent {
 
   static propTypes = {
     event: PropTypes.object,
+    itemTag: PropTypes.oneOf(["li", "div"]),
     itemClass: PropTypes.string,
     destroyCallback: PropTypes.func,
     hideLink: PropTypes.bool
@@ -147,6 +148,7 @@ export default class Event extends PureComponent {
       <Tile
         hideLink={this.props.hideLink}
         destroyCallback={this.props.destroyCallback}
+        itemTag={this.props.itemTag}
         itemClass={this.props.itemClass}
         {...tileProps}
       />

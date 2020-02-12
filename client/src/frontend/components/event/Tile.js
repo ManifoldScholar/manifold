@@ -10,6 +10,7 @@ export class EventTile extends Component {
 
   static propTypes = {
     hideLink: PropTypes.bool,
+    itemTag: PropTypes.oneOf(["li", "div"]),
     itemClass: PropTypes.string,
     destroyCallback: PropTypes.func,
     visible: PropTypes.bool,
@@ -32,12 +33,17 @@ export class EventTile extends Component {
     linkTarget: "_self",
     hideLink: false,
     visible: true,
-    itemClass: ""
+    itemClass: "",
+    itemTag: "li"
   };
 
   get hasLink() {
     const { linkHref, hideLink } = this.props;
     return !hideLink && linkHref;
+  }
+
+  get tileTag() {
+    return this.props.itemTag;
   }
 
   handleTileClick = event => {
@@ -70,7 +76,7 @@ export class EventTile extends Component {
     });
 
     return (
-      <li className={this.props.itemClass}>
+      <this.tileTag className={this.props.itemClass}>
         {/* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex */}
         <div
           role={this.hasLink ? "link" : null}
@@ -129,7 +135,7 @@ export class EventTile extends Component {
             <span className="screen-reader-text">Delete Event</span>
           </div>
         )}
-      </li>
+      </this.tileTag>
     );
   }
 }
