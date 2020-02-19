@@ -149,6 +149,18 @@
     vertical-align: middle;
     background-color: $neutralTextExtraLight;
 
+    &--notice {
+      background-color: $spNoticeLight;
+    }
+
+    &--warning {
+      background-color: $spWarningLight;
+    }
+
+    &--error {
+      background-color: $spErrorLight;
+    }
+
     + .entity-row__label {
       margin-left: 14px;
     }

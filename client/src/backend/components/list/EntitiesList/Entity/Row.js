@@ -24,6 +24,7 @@ export default class EntitiesListRow extends PureComponent {
     figureShape: PropTypes.oneOf(["circle", "square"]),
     label: PropTypes.oneOfType([
       PropTypes.string,
+      PropTypes.object,
       PropTypes.array,
       PropTypes.node
     ]),
