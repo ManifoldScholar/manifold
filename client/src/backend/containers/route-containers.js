@@ -19,7 +19,7 @@ import Features from "backend/containers/features";
 import Settings from "backend/containers/settings";
 import Content from "backend/containers/content-block";
 import ActionCallout from "backend/containers/action-callout";
-import ExportTargets from "backend/containers/records/export-targets";
+import ExportTargets from "backend/containers/export-targets";
 
 export default {
   Backend,

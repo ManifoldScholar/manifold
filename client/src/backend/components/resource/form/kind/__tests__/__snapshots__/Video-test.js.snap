@@ -524,7 +524,7 @@ exports[`backend/components/resource/form/kind/Video when sub kind is external_v
       class="form-input"
     >
       <div
-        class="form-input"
+        class="form-select"
       >
         <label
           for="select-1"

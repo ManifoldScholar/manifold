@@ -784,6 +784,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                       "source": Object {},
                     }
                   }
+                  suppressModelErrors={false}
                   update={[Function]}
                 >
                   <div>

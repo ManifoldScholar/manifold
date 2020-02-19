@@ -50,6 +50,10 @@ en:
       summary: "Delete %{article} %{type}"
       summary_with_parent: "Delete %{parent_article} %{parent_possessive} %{type}"
       success: "Removes the %{type} resource."
+  active_interaction:
+    errors:
+      messages:
+        invalid: dilavni si
   activerecord:
     attributes:
     errors:
@@ -70,6 +74,8 @@ en:
       command_line: "CLI"
   controllers:
     errors:
+      project_exportation:
+        failed: "^Unable to initiate project export. Select location and try again."
       auth_timeout:
         title: "Authentication expired"
         detail: "Your login session has expired. Please reauthenticate."

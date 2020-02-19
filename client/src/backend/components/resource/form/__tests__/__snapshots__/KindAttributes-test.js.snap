@@ -602,7 +602,7 @@ exports[`backend/components/resource/form/KindAttributes when the kind is video 
       class="form-input"
     >
       <div
-        class="form-input"
+        class="form-select"
       >
         <label
           for="select-1"

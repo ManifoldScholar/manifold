@@ -13,6 +13,7 @@ class ExportTarget < ApplicationRecord
   after_initialize :ensure_configuration!
 
   before_validation :sync_strategy!
+  after_validation :merge_configuration_errors
 
   validates :configuration, presence: true, store_model: true
   validates :name, presence: true, uniqueness: true
@@ -22,6 +23,13 @@ class ExportTarget < ApplicationRecord
   # @return [void]
   def ensure_configuration!
     self.configuration ||= {}
+  end
+
+  def merge_configuration_errors
+    config_errors = configuration.errors.full_messages.map { |e| "^#{e}" }
+    config_errors.each do |msg|
+      errors.add(:configuration, msg)
+    end
   end
 
   # @return [void]

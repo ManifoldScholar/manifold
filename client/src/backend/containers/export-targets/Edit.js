@@ -21,9 +21,7 @@ export class ExportTargetsEditContainer extends PureComponent {
   static displayName = "ExportTargets.Edit";
 
   static propTypes = {
-    // export target information is required, but can be null/undefined until
-    // the async network request is fulfilled
-    exportTarget: PropTypes.object, // eslint-disable-line react/require-default-props
+    exportTarget: PropTypes.object,
     match: PropTypes.object.isRequired,
     confirm: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
@@ -98,7 +96,6 @@ export class ExportTargetsEditContainer extends PureComponent {
             }
           ]}
         />
-
         <section className="form-section form-section--primary">
           <Form model={this.exportTarget} />
         </section>

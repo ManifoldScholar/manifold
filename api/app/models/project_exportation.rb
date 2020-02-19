@@ -15,6 +15,9 @@ class ProjectExportation < ApplicationRecord
 
   has_state_machine! initial_state: :pending
 
+  delegate :last_transition, to: :state_machine, allow_nil: true
+  delegate :metadata, to: :last_transition, allow_nil: true
+
   validates :project_export, presence: true, on: %i[export_ready success]
 
   scope :by_created_at, lambda { |order = nil|

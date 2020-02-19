@@ -7,7 +7,8 @@ describe("backend/containers/Records/export-targets/Edit", () => {
       exportTarget={$exportTarget}
       dispatch={$dispatch}
       match={{ params: {} }}
-      confirm={ () => null }
+      confirm={() => null}
+      history={$history}
     />
   ));
 

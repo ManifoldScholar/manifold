@@ -5,7 +5,9 @@ module V1
     typed_attribute :strategy, Types::String
     typed_attribute :name, Types::String
     typed_attribute :slug, Types::String
-    typed_attribute :configuration, Types::Hash do |object, _params|
+    typed_attribute :configuration, Types::Hash do |object, params|
+      next nil unless current_user_can_update?(object, params)
+
       object.configuration.as_filtered_json
     end
 
