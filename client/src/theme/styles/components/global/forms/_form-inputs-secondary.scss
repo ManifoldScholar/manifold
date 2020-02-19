@@ -37,6 +37,11 @@
   }
 }
 
+/* I'm sorry for everything --ZD */
+.form-section .form-input-group > .form-input .form-select--rounded .form-select {
+  width: auto;
+}
+
 .form-secondary {
   .drawer-primary & {
     margin-bottom: 80px;
@@ -298,6 +303,56 @@
         border-color: $accentPrimaryLight;
       }
     }
+
+    &.form-select--rounded {
+      .form-select {
+        width: auto;
+      }
+
+      .form-select__icon {
+        position: absolute;
+        top: 50%;
+        right: 8px;
+        width: auto;
+        width: 22px;
+        height: 22px;
+        color: $neutralUIDullLight;
+        pointer-events: none;
+        transform: translateY(-50%);
+
+        // Use native dropdown arrow in IE9
+        .ie9 & {
+          display: none;
+        }
+      }
+
+
+      select {
+        @include unstyledSelect;
+        @include utilityPrimary;
+        width: auto;
+        height: 2.857em;
+        padding-right: 32px;
+        padding-bottom: 0;
+        padding-left: 13px;
+        overflow: hidden;
+        font-size: 16px;
+        font-weight: $regular;
+        text-overflow: ellipsis;
+        text-transform: none;
+        letter-spacing: normal;
+        white-space: nowrap;
+        background-color: $neutral90; // required for `option` to inherit in FF
+        border: 1px solid $neutralUIDullLight;
+        border-radius: 8px;
+        transition: border-color $duration $timing;
+
+        &:focus-visible {
+          border-color: $accentPrimary;
+        }
+      }
+    }
+
   }
 
   // Upload dropzone and previews

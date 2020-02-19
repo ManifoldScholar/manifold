@@ -5,6 +5,7 @@ import Errorable from "global/components/form/Errorable";
 import Instructions from "./Instructions";
 import withFormOptions from "hoc/with-form-options";
 import IconComposer from "global/components/utility/IconComposer";
+import classNames from "classnames";
 
 class FormSelect extends Component {
   static displayName = "Form.Select";
@@ -14,7 +15,9 @@ class FormSelect extends Component {
     errors: PropTypes.array,
     label: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    rounded: PropTypes.bool,
     name: PropTypes.string,
+    wide: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
     options: PropTypes.arrayOf(
       PropTypes.shape({
@@ -24,6 +27,10 @@ class FormSelect extends Component {
       })
     ).isRequired,
     focusOnMount: PropTypes.bool
+  };
+
+  static defaultProps = {
+    rounded: false
   };
 
   componentDidMount() {
@@ -53,12 +60,22 @@ class FormSelect extends Component {
       );
     });
 
+    const selectClassName = classNames({
+      "form-select": true,
+      "form-select--rounded": this.props.rounded
+    });
+
+    const wrapperClassName = classNames({
+      "form-input": true,
+      wide: this.props.wide
+    });
+
     return (
       <UID>
         {id => (
-          <div className="form-input">
+          <div className={wrapperClassName}>
             <Errorable
-              className="form-input"
+              className={selectClassName}
               name={this.props.name}
               errors={this.props.errors}
               label={this.props.label}
