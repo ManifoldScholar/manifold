@@ -70,6 +70,7 @@ export default class ListEntities extends PureComponent {
     entityComponent: PropTypes.func.isRequired,
     entityComponentProps: PropTypes.object,
     title: PropTypes.node,
+    indented: PropTypes.bool,
     titleIcon: PropTypes.string,
     titleStyle: PropTypes.oneOf(["bar", "title", "section"]),
     titleLink: PropTypes.string,
@@ -96,6 +97,7 @@ export default class ListEntities extends PureComponent {
     showCountInTitle: false,
     titleStyle: "title",
     listStyle: "rows",
+    indented: false,
     entityComponentProps: {},
     callbacks: {}
   };
@@ -196,7 +198,8 @@ export default class ListEntities extends PureComponent {
   render() {
     const wrapperClassNames = classNames({
       "entity-list": true,
-      "entity-list--bare": this.listStyle === "bare"
+      "entity-list--bare": this.listStyle === "bare",
+      "entity-list--indented": this.props.indented
     });
 
     const listClassNames = classNames({

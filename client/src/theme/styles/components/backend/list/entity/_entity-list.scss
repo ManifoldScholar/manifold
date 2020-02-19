@@ -3,6 +3,11 @@
     margin-top: 64px;
   }
 
+  &--indented {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
   .instructional-copy {
     padding-bottom: 0; // sorry. hacked it.
   }
