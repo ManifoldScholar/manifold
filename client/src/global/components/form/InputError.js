@@ -14,7 +14,9 @@ export default class InputError extends Component {
   };
 
   errorString(error) {
-    return `${capitalize(error.detail)}. `;
+    const out = `${capitalize(error.detail)}`;
+    if (out.endsWith(".") || out.endsWith("?")) return out;
+    return `${out}.`;
   }
 
   /* eslint-disable react/no-array-index-key */
