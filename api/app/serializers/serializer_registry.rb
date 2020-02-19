@@ -113,6 +113,8 @@ class SerializerRegistry
               else
                 object.public_send(attribute)
               end
+      next nil if value.nil?
+
       unless value.respond_to? :keys
         raise "The typed attribute :#{attribute} on #{self.class} is not a hash.
               Consider changing the type to #{value.class}"
