@@ -11,8 +11,7 @@ module ExportStrategies
     #
     # @api private
     NON_SFTP_PASSWORD = /(?<!sftp_)password\z/.freeze
-
-    filter_attributes! ->(k, _v) { k =~ NON_SFTP_PASSWORD }, :private_key
+    filter_attributes! NON_SFTP_PASSWORD, :private_key
 
     DEFAULT_TARGET_NAME_FORMAT = "%s-%t.%e".freeze
 

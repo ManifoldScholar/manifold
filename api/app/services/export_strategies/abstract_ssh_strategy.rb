@@ -19,6 +19,7 @@ module ExportStrategies
     def to_ssh_options
       slice(:auth_methods, :port).tap do |h|
         h[:compression] = compression
+        h[:non_interactive] = true
         # h[:verbose] = :debug
       end
     end
@@ -40,6 +41,8 @@ module ExportStrategies
             c << yield(sftp)
           end
         end
+      rescue Net::SSH::AuthenticationFailed => e
+        halt! e.message
       end
 
       # @return [void]

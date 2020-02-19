@@ -32,6 +32,8 @@ export default class ExportTargetsContainerForm extends PureComponent {
     const strategy = camelCase(getModelValue("attributes[strategy]"));
     return (
       <>
+        <Form.Errors names={["attributes[configuration]"]} />
+
         <Form.TextInput
           focusOnMount
           label="name"
@@ -82,7 +84,7 @@ export default class ExportTargetsContainerForm extends PureComponent {
           <Form.TextInput
             password
             label="SFTP password"
-            name="attributes[configuration][sftpPassword][password]"
+            name={`attributes[configuration][${strategy}][password]`}
           />
         )}
         <Form.Save text="Save Export Target" />

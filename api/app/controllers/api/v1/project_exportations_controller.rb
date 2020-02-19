@@ -18,9 +18,15 @@ module Api
       end
 
       def create
-        @project_exportation = ProjectExportations::CreateFromAPI.run! project_exportation_params
-
-        render_single_resource @project_exportation
+        @project_exportation = ProjectExportations::CreateFromAPI.run project_exportation_params
+        if @project_exportation.valid?
+          resource = @project_exportation.result
+        else
+          @project_exportation.result.clear
+          @project_exportation.result.add :base, I18n.t("controllers.errors.project_exportation.failed")
+          resource = @project_exportation
+        end
+        render_single_resource resource, serializer: ::V1::ProjectExportationSerializer
       end
     end
   end
