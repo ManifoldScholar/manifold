@@ -27,11 +27,13 @@ import Upload from "./Upload";
 import CoverUploadPlaceholder from "./CoverUploadPlaceholder";
 import InputError from "./InputError";
 import Errorable from "./Errorable";
+import Errors from "./Errors";
 import Divider from "./Divider";
 
 export default {
   CoverUploadPlaceholder,
   InputError,
+  Errors,
   Errorable,
   BaseInput,
   BelongsTo,
