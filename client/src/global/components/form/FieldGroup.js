@@ -41,6 +41,7 @@ export default class FieldGroup extends PureComponent {
         label,
         instructions,
         theme,
+        children,
         ...childProps
       } = this.props;
       return React.cloneElement(child, childProps);
