@@ -54,7 +54,7 @@ module V1
         base = type if type.is_a? String
         base = @errors.generate_message(attribute, type) if type.is_a? Symbol
         msg = base.is_a?(Hash) ? base.values.first : base
-        return msg.slice(0) if msg.start_with?("^")
+        return msg[1..-1] if msg.start_with?("^")
 
         "#{attribute.to_s.humanize} #{msg}"
       end
