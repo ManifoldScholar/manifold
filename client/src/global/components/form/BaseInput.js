@@ -31,7 +31,7 @@ class FormBaseInput extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = { notifcation: null };
+    this.state = { notification: null };
   }
 
   componentDidMount() {
