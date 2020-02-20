@@ -7,7 +7,7 @@ RSpec.describe V1::ErrorSerializer do
     project.save
     project
   end
-  let(:errors) { ::V1::Helpers::Errors.new(project.errors).serializable_hash }
+  let(:errors) { ::V1::Helpers::Errors.new(project.errors).for_serialization }
 
   it "successfully serializes the object to a String value" do
     expect(subject.serialized_json).to be_instance_of String
