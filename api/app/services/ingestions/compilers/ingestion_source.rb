@@ -27,14 +27,26 @@ module Ingestions
         )
       end
 
+      def publication_resource?
+        attributes["kind"] == ::IngestionSource::KIND_PUBLICATION_RESOURCE
+      end
+
       def update_or_create
-        ingestion_source.update! attributes.merge(text: text)
+        # We can fail and continue in the case of a missing publication resource, which
+        # could, for example, be an invalid image referenced from HTMl. Sections, however
+        # must be backed by valid ingestion sources.
+        message = publication_resource? ? "update" : "update!"
+        success = ingestion_source.send(message, attributes.merge(text: text))
+        return success if success
+
+        warn "services.ingestions.compiler.ingestion_source.log.invalid", source_path: ingestion_source.source_path
+        false
       end
 
       def report
         key = if ingestion_source.id_previously_changed?
                 "services.ingestions.compiler.ingestion_source.log.new"
-              else
+              elsif ingestion_source.id
                 "services.ingestions.compiler.ingestion_source.log.updated"
               end
 

@@ -1,0 +1,21 @@
+meta:
+  title: A Manifest Ingestion
+  language: language
+  rights: rights
+  description: description
+  creators:
+    - name: Rowan Ono
+  contributors:
+    - name: Ida Davis
+toc:
+  - label: Title Set From TOC
+    source_path: section_1.html
+    start_section: true
+    children:
+      - label: Section 1.1
+        source_path: section_1_1.html
+        children:
+          - label: Section 1.1a
+            source_path: section_1_1a.md
+  - label: Section 1#1
+    source_path: section_1.html#1

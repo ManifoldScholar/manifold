@@ -34,6 +34,7 @@ en:
           log:
             new: 'Created new ingestion_source "%{source_path}"'
             updated: 'Updated ingestion_source "%{source_path}"'
+            invalid: 'Skipped ingestion_source because it is invalid "%{source_path}"'
         stylesheet:
           log:
             new: 'Created new stylesheet "%{name}"'
