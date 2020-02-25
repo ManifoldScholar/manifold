@@ -16,7 +16,7 @@ module Packaging
           state[:ingestion_sources] = []
 
           state[:referenced_items].select(&:has_ingestion_source?).each do |item|
-            ingestion_source = IngestionSource.find(item.ingestion_source_id)
+            ingestion_source = item.derived_ingestion_source
 
             source_item = Packaging::EpubV3::IngestionSourceItem.new ingestion_source: ingestion_source
 

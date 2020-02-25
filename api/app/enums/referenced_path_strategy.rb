@@ -7,6 +7,9 @@ class ReferencedPathStrategy < ClassyEnum::Base
   /api/proxy/ingestion_sources
   /(?<ingestion_source_id>[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})
   }xmsi.freeze
+  LEGACY_INGESTION_SOURCE_PATH = %r{\A
+  /system/(?<attachment_id>ingestion\S+)
+  }xmsi.freeze
   SECTION_READ_LINK = %r{\A
   /read
   /(?<text_id>[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})
@@ -56,6 +59,10 @@ end
 
 class ReferencedPathStrategy::IngestionSource < ReferencedPathStrategy
   config.pattern = INGESTION_SOURCE_PROXY
+end
+
+class ReferencedPathStrategy::LegacyIngestionSource < ReferencedPathStrategy
+  config.pattern = LEGACY_INGESTION_SOURCE_PATH
 end
 
 class ReferencedPathStrategy::TextSectionLink < ReferencedPathStrategy

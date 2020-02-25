@@ -8,12 +8,28 @@ module Packaging
 
       param :path, Types::Strict::String
 
-      delegate :external?, :ingestion_source?, :text_section_link?, to: :strategy
-
-      alias has_ingestion_source? ingestion_source?
+      delegate :external?, :ingestion_source?, :legacy_ingestion_source?, :text_section_link?, to: :strategy
 
       def absolute_uri?
         path.starts_with?("/")
+      end
+
+      # @!attribute [r] attachment_id
+      # @return [String, nil]
+      def attachment_id
+        derived_path_values[:attachment_id]
+      end
+
+      # @!attribute [r] derived_ingestion_source
+      # @return [IngestionSource, nil]
+      memoize def derived_ingestion_source
+        return IngestionSource.find_by_attachment_id(attachment_id) if legacy_ingestion_source?
+
+        IngestionSource.find ingestion_source_id if has_ingestion_source?
+      end
+
+      def has_ingestion_source?
+        ingestion_source? || legacy_ingestion_source?
       end
 
       # @!attribute [r] ingestion_source_id
