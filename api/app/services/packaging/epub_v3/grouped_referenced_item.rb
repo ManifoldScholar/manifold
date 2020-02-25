@@ -7,7 +7,7 @@ module Packaging
       attribute :path, Types.Instance(Packaging::Shared::ReferencedPath)
       attribute :references, Types::Array.of(Packaging::EpubV3::ReferencedItem)
 
-      delegate :absolute_uri?, :external?, :has_ingestion_source?, :ingestion_source_id,
+      delegate :absolute_uri?, :external?, :derived_ingestion_source, :has_ingestion_source?, :ingestion_source_id,
         :text_section_id, :text_section_link?, to: :path
 
       def external_source?
