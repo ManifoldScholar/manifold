@@ -25,6 +25,7 @@ class IngestionSource < ApplicationRecord
     KIND_PUBLICATION_RESOURCE
   ].freeze
 
+  scope :by_attachment_id, ->(attachment_id) { where(arel_json_property_eq(:attachment_data, :id, attachment_id)) }
   scope :by_kind, ->(kind) { where(kind: kind) }
   scope :cover_images, -> { by_kind(:cover_image) }
   scope :navigation, -> { by_kind(:navigation) }
@@ -42,6 +43,13 @@ class IngestionSource < ApplicationRecord
   validates :source_identifier, presence: true
 
   class << self
+    # @param [String] attachment_id
+    # @raise [ActiveRecord::RecordNotFound]
+    # @return [IngestionSource]
+    def find_by_attachment_id(attachment_id)
+      by_attachment_id(attachment_id).first!
+    end
+
     def proxy_path(ingestion_source)
       Rails.application.routes.url_helpers.api_proxy_ingestion_source_path(
         ingestion_source
@@ -56,5 +64,4 @@ class IngestionSource < ApplicationRecord
   def to_s
     "ingestion source #{id}"
   end
-
 end
