@@ -17,6 +17,7 @@ class ProjectExportation < ApplicationRecord
 
   delegate :last_transition, to: :state_machine, allow_nil: true
   delegate :metadata, to: :last_transition, allow_nil: true
+  delegate :asset, to: :project_export, allow_nil: true
 
   validates :project_export, presence: true, on: %i[export_ready success]
 
@@ -25,6 +26,14 @@ class ProjectExportation < ApplicationRecord
 
     order(created_at: order)
   }
+
+  def package_size
+    asset&.size
+  end
+
+  def package_url
+    asset&.url
+  end
 
   # @return [ExportStrategies::Selection]
   def to_selection

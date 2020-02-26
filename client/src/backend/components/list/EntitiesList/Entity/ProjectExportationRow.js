@@ -2,6 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import EntityRow from "./Row";
+import Utility from "global/components/utility";
+import filesize from "filesize";
 
 export default class ProjectExportationRow extends PureComponent {
   static propTypes = {
@@ -42,7 +44,22 @@ export default class ProjectExportationRow extends PureComponent {
   }
 
   get successMessage() {
-    return `Exported project to ${this.exportTargetName}`;
+    let size = "";
+    if (this.attributes.packageSize) {
+      size = `Package size: ${filesize(this.attributes.packageSize)}`;
+    }
+
+    return `Exported project to ${this.exportTargetName}. ${size}`;
+  }
+
+  get utility() {
+    const url = this.attributes.packageUrl;
+    if (!url) return null;
+    return (
+      <a className="entity-row__utility-button" href={url} title="Download">
+        <Utility.IconComposer icon="arrowDown32" size={26} />
+      </a>
+    );
   }
 
   get metadataReason() {
@@ -51,11 +68,11 @@ export default class ProjectExportationRow extends PureComponent {
   }
 
   get failureMessage() {
-    return `Failed to export project to ${this.exportTargetName}: ${this.metadataReason}`;
+    return `Failed to export project to ${this.exportTargetName}: ${this.metadataReason}. `;
   }
 
   get pendingMessage() {
-    return `Exporting project to ${this.exportTargetName}`;
+    return `Exporting project to ${this.exportTargetName}. `;
   }
 
   get labelLevel() {
@@ -94,6 +111,7 @@ export default class ProjectExportationRow extends PureComponent {
         title={<FormattedDate date={createdAt || exportedAt} format="PPpp" />}
         label={this.label}
         meta={this.subtitle}
+        utility={this.utility}
       />
     );
   }

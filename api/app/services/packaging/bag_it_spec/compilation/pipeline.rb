@@ -8,7 +8,7 @@ module Packaging
         step :prepare!, with: "compilation.prepare"
 
         batch_map_state :prepare_text!, with: "compilation.prepare_text",
-          source: ->(state) { state[:context].published_texts },
+          source: ->(state) { state[:context].all_texts },
           target: :texts
 
         batch_map_state :prepare_resources!, with: "compilation.prepare_resource",
