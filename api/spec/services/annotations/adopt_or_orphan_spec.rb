@@ -48,8 +48,8 @@ RSpec.describe Annotations::AdoptOrOrphan do
         :annotation,
         text_section: text_section,
         subject: <<~TEXT
-          Whan that Aprille with his shoures soote the droghte of Marche hath perced to 
-          the roote, And bathed every veyne in swich licour of which vertu engendred is 
+          Whan that Aprille with his shoures soote the droghte of Marche hath perced to
+          the roote, And bathed every veyne in swich licour of which vertu engendred is
           the flour...than longen folk to goon on pilgrimages.
         TEXT
       )
@@ -78,7 +78,6 @@ RSpec.describe Annotations::AdoptOrOrphan do
       Annotations::AdoptOrOrphan.run annotation: annotation
       expect(annotation.orphaned).to be true
     end
-
   end
 
   context "with a simple text structure" do
@@ -201,6 +200,46 @@ RSpec.describe Annotations::AdoptOrOrphan do
         Annotations::AdoptOrOrphan.run annotation: annotation
         expect(annotation.orphaned).to eq true
       end
+    end
+  end
+
+  context "When another node begins with the last letter of the annotation subject" do
+    let(:body_json) do
+      one = {
+        "content" => "abcdefg",
+        "node_type" => "text",
+        "node_uuid" => "a",
+        "text_digest" => "b",
+        "parent" => "p"
+      }
+      two = {
+        "content" => "fzzzz",
+        "node_type" => "text",
+        "node_uuid" => "c",
+        "text_digest" => "d",
+        "parent" => "p"
+      }
+      {
+        "tag" => "div",
+        "children" => [one, two]
+      }
+    end
+
+    let(:annotation) do
+      FactoryBot.create(
+        :annotation,
+        text_section: text_section,
+        subject: "bcdef"
+      )
+    end
+
+    let (:text_section) do
+      FactoryBot.create(:text_section, body_json: body_json)
+    end
+
+    it "adopts it correctly" do
+      Annotations::AdoptOrOrphan.run annotation: annotation
+      expect(annotation.attributes.slice("start_node", "end_node").values).to eq %w(a a)
     end
   end
 end
