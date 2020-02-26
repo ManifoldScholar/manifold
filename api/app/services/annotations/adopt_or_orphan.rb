@@ -1,116 +1,106 @@
-# This service attempts to reassign an annotation's start/end positions based on
-# subject content. To keep things sane, we only assume a node is correct
-# if a block of its content is is an exact match to a piece of the subject.
 module Annotations
+  # This service attempts to reassign an annotation's start/end positions based on
+  # subject content. To keep things sane, we only assume a node is correct
+  # if a block of its content is is an exact match to a piece of the subject.
   class AdoptOrOrphan < ActiveInteraction::Base
-    object :annotation
 
+    extend Memoist
+
+    record :annotation
+    delegate :text_section, to: :annotation
+    delegate :text_nodes, to: :text_section
+
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def execute
-      candidates = determine_parent_candidates
+      return orphan_annotation unless adoptable?
 
-      return annotation if valid_parents? current_parents
+      updates = update_hash
 
-      if valid_parents? candidates
-        adopt_annotation candidates
-      else
-        orphan_annotation
+      haystack_iterator = 0
+      text_nodes.each do |node|
+        node_text_iterator = 0
+        node_content = collapse(node[:content])
+        node_content.split("") do
+          if haystack_iterator == start_index
+            updates[:start_node] = node[:node_uuid]
+            updates[:start_char] = node_text_iterator + 1
+          elsif haystack_iterator == final_index
+            updates[:end_node] = node[:node_uuid]
+            updates[:end_char] = node_text_iterator
+          end
+          haystack_iterator += 1
+          node_text_iterator += 1
+        end
       end
 
-      annotation.save
-      annotation
+      return orphan_annotation unless all_present? updates
+
+      adopt_annotation(updates)
     end
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
     private
 
-    def orphan_annotation
-      annotation.assign_attributes orphaned: true
+    def adoptable?
+      return false if multiple_occurrences?
+      return false unless start_index.present? && final_index.present?
+
+      true
     end
 
-    def adopt_annotation(candidates)
-      annotation.assign_attributes candidates.merge(orphaned: false)
-    end
-
-    # A set of nodes is only considered valid if all are present and
-    # the content spanning the nodes contains an exact match to the
-    # annotation subject.
-    def valid_parents?(candidates)
-      candidates_present?(candidates) && valid_content?(candidates)
-    end
-
-    # We only consider this a success if everything has been matched
-    def candidates_present?(candidates)
-      candidates.values.all?(&:present?)
-    end
-
-    # We compile the content from the start node to the end node and
-    # see if the complete subject is included.  If not, we consider
-    # this annotation changed and orphan it.
-    def valid_content?(candidates)
-      start_node, end_node = candidates.values
-      node_range = annotation.text_section.text_node_range start_node, end_node
-      content = node_range.map { |n| n[:content] }.join
-      content.squish.include? annotation.subject.squish
-    end
-
-    def current_parents
+    def update_hash
       {
-        start_node: annotation.start_node,
-        end_node: annotation.end_node,
-        start_char: annotation.start_char,
-        end_char: annotation.end_char
-      }
-    end
-
-    # Here we create an array of letters for every node's content.  For every
-    # letter we look forward to the content end and backwards from the content
-    # end to the letter.  We then try to match those chunks to either the start
-    # or end of the subject.
-    #
-    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-    def determine_parent_candidates
-      candidates = {
         start_node: nil,
         end_node: nil,
         start_char: nil,
         end_char: nil
-      }.with_indifferent_access
-
-      # We have to check every text section in case there are multiple matches, so
-      # we can't abort out of this early.
-      # If we have multiple matches for any node, we cannot assume that either is the
-      # correct one and therefore abort and orphan the annotation.
-      compare_subject = annotation.subject.squish
-      annotation.text_section_text_nodes.each do |node|
-        content = node[:content].squish
-
-        content.split(//).each_with_index do |_letter, index|
-          from_start = content[index..content.length - 1]
-          from_end = content[0..index]
-          if start_match?(compare_subject, from_start)
-            compare_subject.start_with?(from_start)
-            return {} if candidates[:start_node].present?
-
-            candidates[:start_node] = node[:node_uuid]
-            candidates[:start_char] = index + 1
-          elsif end_match?(compare_subject, from_end)
-            return {} if candidates[:end_node].present?
-
-            candidates[:end_node] = node[:node_uuid]
-            candidates[:end_char] = index
-          end
-        end
-      end
-
-      candidates
-    end
-    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
-
-    def start_match?(compare_subject, from_start)
-      from_start.start_with?(compare_subject) || compare_subject.start_with?(from_start)
+      }
     end
 
-    def end_match?(compare_subject, from_end)
-      from_end.end_with?(compare_subject) || compare_subject.end_with?(from_end)
+    def all_present?(hash)
+      hash.values.all?
+    end
+
+    def collapse(input)
+      input.gsub(/[[:space:]]+/, " ")
+    end
+
+    def needle
+      collapse(annotation.subject)
+    end
+
+    memoize def start_index
+      haystack.index(/#{needle_query}/i)
+    end
+
+    memoize def final_index
+      start_index + needle.size - 1
+    end
+
+    memoize def occurrences
+      haystack.scan(/#{needle_query}/i)
+    end
+
+    def multiple_occurrences?
+      occurrences.length > 1
+    end
+
+    def needle_query
+      needle.split(/[[:space:]]+/).map { |w| Regexp.quote(w) }.join("[[:space:]]+")
+    end
+
+    memoize def haystack
+      collapse(text_nodes.map { |node| node[:content] }.join)
+    end
+
+    def orphan_annotation
+      annotation.assign_attributes orphaned: true
+      annotation.save
+    end
+
+    def adopt_annotation(candidates)
+      annotation.assign_attributes candidates.merge(orphaned: false)
+      annotation.save
     end
 
   end

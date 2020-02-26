@@ -55,7 +55,7 @@ class TextSection < ApplicationRecord
   validates :kind, inclusion: { in: ALLOWED_KINDS }
 
   # Callbacks
-  after_commit :adopt_or_orphan_annotations!
+  after_commit :maybe_adopt_or_orphan_annotations!
 
   # Scopes
   scope :in_texts, lambda { |texts|
@@ -178,11 +178,15 @@ class TextSection < ApplicationRecord
     text_nodes[text_nodes.index(start_node)..text_nodes.index(end_node)]
   end
 
+  def adopt_or_orphan_annotations!
+    TextSectionJobs::EnqueueAdoptAnnotationsJob.perform_later annotations.pluck(:id)
+  end
+
   private
 
-  def adopt_or_orphan_annotations!
-    return unless body_json_previously_changed?
+  def maybe_adopt_or_orphan_annotations!
+    return unless body_json_previously_changed? || source_body_previously_changed?
 
-    TextSectionJobs::EnqueueAdoptAnnotationsJob.perform_later annotations.pluck(:id)
+    adopt_or_orphan_annotations!
   end
 end
