@@ -47,6 +47,13 @@ module Packaging
         texts.published(true).to_a
       end
 
+      # @!attribute [r] all_texts
+      # An array of {Text}s
+      # @return [<Text>]
+      memoize def all_texts
+        texts.to_a
+      end
+
       # @!attribute [r] reader_url
       # @return [String]
       memoize def reader_url
