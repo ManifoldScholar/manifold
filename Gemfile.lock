@@ -38,7 +38,7 @@ GEM
     paint (2.0.0)
     public_suffix (3.0.1)
     rainbow (3.0.0)
-    rake (12.3.0)
+    rake (13.0.1)
     retriable (3.1.1)
     sawyer (0.8.1)
       addressable (>= 2.3.5, < 2.6)
