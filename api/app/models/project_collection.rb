@@ -19,6 +19,8 @@ class ProjectCollection < ApplicationRecord
   # Formatted Attributes
   has_formatted_attribute :description, include_wrap: false
 
+  resourcify
+
   # Relationships
   has_many :collection_projects, -> { ranked }, dependent: :destroy, inverse_of: :project_collection
 
