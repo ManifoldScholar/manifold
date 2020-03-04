@@ -14,10 +14,11 @@ class User < ApplicationRecord
   include Attachments
   include WithParsedName
 
+  classy_enum_attr :role, enum: "RoleName", allow_blank: false, default: :reader
+  classy_enum_attr :kind, enum: "RoleName", allow_blank: false, default: :reader
+
   # Rolify
-  rolify after_add: :sync_notification_preferences!,
-         after_remove: :sync_notification_preferences!
-  attr_reader :pending_role
+  rolify after_add: :synchronize_kind!, after_remove: :synchronize_kind!
 
   # Associations
   has_many :identities, inverse_of: :user, autosave: true, dependent: :destroy
@@ -42,6 +43,8 @@ class User < ApplicationRecord
 
   # rubocop:disable Rails/HasManyOrHasOneDependent
   has_many :permissions
+
+  has_one :derived_role, inverse_of: :user, class_name: "UserDerivedRole"
   # rubocop:enable Rails/HasManyOrHasOneDependent
 
   # Validation
@@ -49,12 +52,12 @@ class User < ApplicationRecord
   validate :password_not_blank!
   validates :email, presence: true, case_sensitive: false
   validates :email, uniqueness: true, email_format: { message: "is not valid" }
-  validates :pending_role, inclusion: { in: Role::ALLOWED_ROLES }, allow_nil: true
   validates :first_name, :last_name, presence: true
 
-  # Callbacks
-  before_create :assign_default_role!
-  after_save :sync_pending_role!
+  before_validation :infer_kind!
+  before_validation :infer_role!
+
+  after_save :sync_global_role!, if: :saved_change_to_role?
 
   # Attachments
   manifold_has_attached_file :avatar, :image
@@ -68,20 +71,20 @@ class User < ApplicationRecord
   has_secure_password
 
   # Scopes
-  scope :by_email, lambda { |email|
-    where("email ILIKE ?", "#{email}%") if email.present?
-  }
+  scope :by_email, ->(email) { where(arel_table[:email].matches("#{email}%")) if email.present? }
   scope :with_order, lambda { |by|
     return order(:last_name, :first_name) unless by.present?
 
     order(by)
   }
-  scope :by_role, lambda { |role|
-    with_role role.to_sym if role.present?
-  }
+  scope :by_role, ->(role) { RoleName[role].then { |r| with_role(r.to_sym) if r.present? } }
+  scope :by_cached_role, ->(*role) { where(role: role) }
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
+
+  delegate *RoleName.global_predicates, to: :role
+  delegate *RoleName.scoped_predicates, to: :kind
 
   def search_data
     {
@@ -94,21 +97,16 @@ class User < ApplicationRecord
     }
   end
 
-  # Creates user.role_name? methods for all roles
-  Role::GLOBAL_ROLES.each do |role_name|
-    define_method "#{role_name}?" do
-      role == role_name
-    end
+  def project_author_of?(resource)
+    has_role? :project_author, resource
   end
 
-  Role::SCOPED_ROLES.each do |role_name|
-    define_method "#{role_name}?" do
-      kind == role_name
-    end
+  def project_editor_of?(resource)
+    has_role? :project_editor, resource
+  end
 
-    define_method "#{role_name}_of?" do |resource|
-      has_role? role_name, resource
-    end
+  def project_resource_editor_of?(resource)
+    has_role? :project_resource_editor, resource
   end
 
   def favorite(favoritable)
@@ -137,47 +135,57 @@ class User < ApplicationRecord
     resource.creator == self
   end
 
-  def role=(new_role)
-    @pending_role = new_role.to_s
-  end
+  # @api private
+  # @return [void]
+  def sync_global_role!
+    @synchronizing_global_role = true
 
-  # Global roles
-  def role
-    Role::GLOBAL_ROLES.each do |role_name|
-      return role_name if has_cached_role? role_name
+    roles_to_remove = RoleName.globals(without: role)
+
+    roles_to_remove.each do |role|
+      remove_role role.to_sym
     end
-    Role::ROLE_READER
+
+    add_role role.to_sym
+  ensure
+    @synchronizing_global_role = false
   end
 
-  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/LineLength, Metrics/PerceivedComplexity
-  def kind
-    return Role::ROLE_ADMIN if has_cached_role? Role::ROLE_ADMIN
-    return Role::ROLE_EDITOR if has_cached_role? Role::ROLE_EDITOR
-    return Role::ROLE_PROJECT_CREATOR if has_cached_role? Role::ROLE_PROJECT_CREATOR
-    return Role::ROLE_MARKETEER if has_cached_role? Role::ROLE_MARKETEER
-    return Role::ROLE_PROJECT_EDITOR if has_cached_role? Role::ROLE_PROJECT_EDITOR, :any
-    return Role::ROLE_PROJECT_RESOURCE_EDITOR if has_cached_role? Role::ROLE_PROJECT_RESOURCE_EDITOR, :any
-    return Role::ROLE_PROJECT_AUTHOR if has_cached_role? Role::ROLE_PROJECT_AUTHOR, :any
-
-    Role::ROLE_READER
+  class << self
+    # @param [#project] subject
+    # @return [ActiveRecord::Relation<User>]
+    def receiving_comment_notifications_for(subject)
+      by_cached_role(:admin, :editor).or(unscoped.where(id: subject.project.permitted_editors.select(:id)))
+    end
   end
-  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/LineLength, Metrics/PerceivedComplexity
 
   private
 
-  def assign_default_role!
-    return unless pending_role.blank?
-
-    add_role Role::ROLE_READER
+  # @see RoleName.fetch_for_kind
+  # @return [void]
+  def infer_kind!
+    self.kind = RoleName.fetch_for_kind self
   end
 
-  def sync_pending_role!
-    return if pending_role.blank?
+  # @see RoleName#applies_to?
+  # @return [void]
+  def infer_role!
+    self.role = RoleName.fetch_for(self) unless will_save_change_to_role?
+  end
 
-    roles_to_remove = Role::GLOBAL_ROLES.without(pending_role.to_s)
-    roles_to_remove.each { |role| remove_role role }
+  # @param [Role]
+  # @return [void]
+  def synchronize_kind!(role)
+    sync_notification_preferences! role
 
-    add_role pending_role
+    return if @synchronizing_global_role
+
+    updates = {}
+
+    updates[:role] = RoleName.fetch_for(self) if role.global?
+    updates[:kind] = RoleName.fetch_for_kind(self) if role.global? || role.scoped?
+
+    update_columns updates if updates.any?
   end
 
   def password_not_blank!

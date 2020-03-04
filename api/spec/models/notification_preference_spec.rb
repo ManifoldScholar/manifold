@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe NotificationPreference, type: :model do
-  let!(:user) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+  let!(:user) { FactoryBot.create(:user, :admin) }
 
   it "has a valid factory" do
     np = FactoryBot.build(:notification_preference)

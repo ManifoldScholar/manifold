@@ -6,28 +6,22 @@ module Notifications
     delegate :parent, to: :comment
     delegate :subject, to: :comment
 
-    # TODO: I suspect the queries happening here are not at all optimized -ZD
     def execute
-      global_editors = User.with_any_role Role::ROLE_ADMIN, Role::ROLE_EDITOR
-      project_editors = subject.project.permitted_users_for_role(Role::EDITOR_ROLES)
-      editors = global_editors + project_editors
+      editors = User.receiving_comment_notifications_for subject
 
       editors.select do |editor|
         next false if editor.in? excluded
 
-        editor.wants_notifications_for?(
-          NotificationKind[:project_comments_and_annotations]
-        )
+        editor.wants_notifications_for?(:project_comments_and_annotations)
       end
     end
 
     private
 
     def excluded
-      out = [creator]
-      out << parent.creator if parent.present?
-      out
+      @excluded ||= [creator].tap do |out|
+        out << parent.creator if parent.present?
+      end.compact
     end
-
   end
 end

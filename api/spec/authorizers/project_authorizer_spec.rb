@@ -88,7 +88,7 @@ RSpec.describe "Project Abilities", :authorizer do
   end
 
   context "when the subject is an admin and the project is a draft" do
-    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+    let(:subject) { FactoryBot.create(:user, :admin) }
     let(:object) { FactoryBot.create(:project, draft: true) }
 
     the_subject_behaves_like "instance abilities", Project, all: true
@@ -98,7 +98,7 @@ RSpec.describe "Project Abilities", :authorizer do
   end
 
   context "when the subject is an editor and the project is a draft" do
-    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
+    let(:subject) { FactoryBot.create(:user, :editor) }
     let(:object) { FactoryBot.create(:project, draft: true) }
 
     the_subject_behaves_like "instance abilities", Project, all: true
@@ -108,7 +108,7 @@ RSpec.describe "Project Abilities", :authorizer do
   end
 
   context "when the subject is a project_creator and the project is a draft" do
-    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_PROJECT_CREATOR) }
+    let(:subject) { FactoryBot.create(:user, :project_creator) }
     let(:object) { FactoryBot.create(:project, draft: true) }
 
     abilities = { create: true, read: false, update: false, delete: false }
@@ -119,7 +119,7 @@ RSpec.describe "Project Abilities", :authorizer do
   end
 
   context "when the subject is a marketeer and the project is a draft" do
-    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_MARKETEER) }
+    let(:subject) { FactoryBot.create(:user, :marketeer) }
     let(:object) { FactoryBot.create(:project, draft: true) }
 
     abilities = { create: false, read: true, update: true, delete: false }
@@ -133,7 +133,7 @@ RSpec.describe "Project Abilities", :authorizer do
     before(:each) do
       @project_editor = FactoryBot.create(:user)
       @project = FactoryBot.create(:project, draft: true)
-      @project_editor.add_role Role::ROLE_PROJECT_EDITOR, @project
+      @project_editor.add_role :project_editor, @project
     end
     let(:subject) { @project_editor }
     let(:object) { @project }
@@ -149,7 +149,7 @@ RSpec.describe "Project Abilities", :authorizer do
     before(:each) do
       @metadata_editor = FactoryBot.create(:user)
       @project = FactoryBot.create(:project, draft: true)
-      @metadata_editor.add_role Role::ROLE_PROJECT_RESOURCE_EDITOR, @project
+      @metadata_editor.add_role :project_resource_editor, @project
     end
     let(:subject) { @metadata_editor }
     let(:object) { @project }
@@ -177,7 +177,7 @@ RSpec.describe "Project Abilities", :authorizer do
     before(:each) do
       @author = FactoryBot.create(:user)
       @project = FactoryBot.create(:project, draft: false)
-      @author.add_role Role::ROLE_PROJECT_AUTHOR, @project
+      @author.add_role :project_author, @project
     end
     let(:subject) { @author }
     let(:object) { @project }
@@ -192,7 +192,7 @@ RSpec.describe "Project Abilities", :authorizer do
     before(:each) do
       @author = FactoryBot.create(:user)
       @project = FactoryBot.create(:project, draft: true)
-      @author.add_role Role::ROLE_PROJECT_AUTHOR, @project
+      @author.add_role :project_author, @project
     end
     let(:subject) { @author }
     let(:object) { @project }

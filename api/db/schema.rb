@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_29_200459) do
+ActiveRecord::Schema.define(version: 2020_02_25_183735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -734,6 +734,8 @@ ActiveRecord::Schema.define(version: 2019_12_29_200459) do
     t.uuid "resource_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "kind", default: "unknown", null: false
+    t.index ["kind"], name: "index_roles_on_kind"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true
     t.index ["name"], name: "index_roles_on_name"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
@@ -958,9 +960,13 @@ ActiveRecord::Schema.define(version: 2019_12_29_200459) do
     t.datetime "imported_at"
     t.string "import_source_id"
     t.jsonb "avatar_data", default: {}
+    t.text "role", null: false
+    t.text "kind", null: false
     t.index ["classification"], name: "udx_users_anonymous", unique: true, where: "((classification)::text = 'anonymous'::text)"
     t.index ["classification"], name: "udx_users_cli", unique: true, where: "((classification)::text = 'command_line'::text)"
     t.index ["import_source_id"], name: "index_users_on_import_source_id", unique: true, where: "(import_source_id IS NOT NULL)"
+    t.index ["kind"], name: "index_users_on_kind"
+    t.index ["role"], name: "index_users_on_role"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -1235,5 +1241,33 @@ ActiveRecord::Schema.define(version: 2019_12_29_200459) do
     pe.created_at AS exported_at
    FROM (projects p
      JOIN project_exports pe ON ((p.id = pe.project_id)));
+  SQL
+  create_view "user_derived_roles", sql_definition: <<-SQL
+    SELECT u.id AS user_id,
+    COALESCE((array_agg(r.name ORDER BY
+        CASE r.name
+            WHEN 'admin'::text THEN 1
+            WHEN 'editor'::text THEN 2
+            WHEN 'project_creator'::text THEN 3
+            WHEN 'marketeer'::text THEN 4
+            WHEN 'reader'::text THEN 8
+            ELSE 20
+        END) FILTER (WHERE (r.kind = 'global'::text)))[1], 'reader'::character varying) AS role,
+    COALESCE((array_agg(r.name ORDER BY
+        CASE r.name
+            WHEN 'admin'::text THEN 1
+            WHEN 'editor'::text THEN 2
+            WHEN 'project_creator'::text THEN 3
+            WHEN 'marketeer'::text THEN 4
+            WHEN 'project_editor'::text THEN 5
+            WHEN 'project_resource_editor'::text THEN 6
+            WHEN 'project_author'::text THEN 7
+            WHEN 'reader'::text THEN 8
+            ELSE 20
+        END) FILTER (WHERE (r.kind = ANY (ARRAY['global'::text, 'scoped'::text]))))[1], 'reader'::character varying) AS kind
+   FROM ((users u
+     LEFT JOIN users_roles ur ON ((ur.user_id = u.id)))
+     LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
+  GROUP BY u.id;
   SQL
 end

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Concerns::NotificationPreferences do
-  let(:user) { FactoryBot.create(:user, role: Role::ROLE_READER) }
+  let(:user) { FactoryBot.create(:user, :reader) }
 
   it "includes a scope to retrieve users by digest frequency" do
     user.notification_preferences_by_kind = { digest: NotificationFrequency[:weekly] }
@@ -21,6 +21,7 @@ RSpec.describe Concerns::NotificationPreferences do
 
     it "sets NotificationFrequency[:followed_projects] to 'always'" do
       preference = user.notification_preferences.find_by(kind: NotificationKind[:followed_projects])
+
       expect(preference.frequency).to eq NotificationFrequency[:always]
     end
   end
@@ -34,14 +35,19 @@ RSpec.describe Concerns::NotificationPreferences do
   context "when updating user" do
     context "when role is not changed" do
       it "does not change preferences" do
-        expect { user.save }.to_not change { user.notification_preferences.pluck(:kind) }
+        expect { user.save! }.to_not change { user.notification_preferences.reload.to_a }
       end
     end
 
     context "when role is changed" do
+      let!(:user) { FactoryBot.create :user, :admin }
+
       it "reassigns the default preferences" do
-        user.role = Role::ROLE_PROJECT_EDITOR
-        expect { user.save }.to change { user.notification_preferences.pluck(:kind) }
+        expect do
+          user.role = :editor
+
+          user.save!
+        end.to change { user.notification_preferences.reload.to_a }
       end
     end
   end
@@ -55,10 +61,8 @@ RSpec.describe Concerns::NotificationPreferences do
 
     it "ignores kinds not available to user" do
       user.notification_preferences_by_kind = { digest_comments_and_annotations: NotificationFrequency[:always] }
+
       expect { user.save }.to_not change { user.notification_preferences.count }
     end
   end
-
 end
-
-

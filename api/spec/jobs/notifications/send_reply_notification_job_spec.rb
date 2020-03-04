@@ -1,10 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Notifications::SendReplyNotificationJob, type: :job do
-
   describe "#perform" do
-
-    let(:editor) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+    let(:editor) { FactoryBot.create(:user, :admin) }
     let(:comment) { FactoryBot.create(:comment) }
 
     it "sends an a reply notification email to the user" do
@@ -12,7 +10,5 @@ RSpec.describe Notifications::SendReplyNotificationJob, type: :job do
       mail = ActionMailer::Base.deliveries.last
       expect(mail.to).to eq [editor.email]
     end
-
   end
-
 end
