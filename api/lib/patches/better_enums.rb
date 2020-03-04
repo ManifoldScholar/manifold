@@ -4,6 +4,8 @@ module Patches
 
     include ActiveSupport::Configurable
 
+    UNSET = Dux.null("UNSET")
+
     included do
       delegate :base_config, :type_casted, to: :class
     end
@@ -35,6 +37,14 @@ module Patches
 
     # rubocop:disable Metrics/BlockLength, Metrics/LineLength
     class_methods do
+      # Make this enum an {Patches::BetterEnums::ApplicableEnum ApplicableEnum}.
+      #
+      # @api private
+      # @return [void]
+      def applicable!
+        include Patches::BetterEnums::ApplicableEnum
+      end
+
       # @!attribute [r] base_config
       # @return [ActiveSupport::Configurable::Configuration]
       def base_config
@@ -72,6 +82,50 @@ module Patches
         map(&:predicate_name)
       end
 
+      # @api private
+      # @param [<String, Symbol, ClassyEnum::Base>] only
+      # @param [<String, Symbol, ClassyEnum::Base>] except
+      # @return [<ClassyEnum::Base>]
+      def constrain(only: [], except: [])
+        only    = EnumFilter.new(only)
+        except  = EnumFilter.new(except, inverted: true)
+
+        return all if only.blank? && except.blank?
+
+        base_class.select do |enum|
+          only.(enum) && except.(enum)
+        end
+      end
+
+      # @return [Arel::Nodes::Case]
+      def as_case_statement(initial = nil, or_else: UNSET, only: [], except: [])
+        quoted_expr = Arel::Nodes.build_quoted initial if initial.present?
+
+        statement = Arel::Nodes::Case.new(quoted_expr).tap do |statement|
+          unless or_else == UNSET
+            other_value = Arel::Nodes.build_quoted or_else
+
+            statement.else(other_value)
+          end
+        end
+
+        constrain(only: only, except: except).each_with_object(statement) do |enum, statement|
+          value = yield enum
+
+          statement.when(enum.to_s).then(value)
+        end
+      end
+
+      def as_case_order(initial = nil, **options)
+        options[:or_else] = order_value_for_else
+
+        as_case_statement(initial, **options, &:index)
+      end
+
+      def order_value_for_else
+        last_index * 2
+      end
+
       # @return [<String>, String]
       def type_casted
         if base_class == self
@@ -81,6 +135,114 @@ module Patches
         end.to_s
       end
     end
+
+    # @api private
+    class EnumFilter
+      def initialize(match_value, inverted: false)
+        @match_value = match_value
+        @inverted = inverted
+      end
+
+      def blank?
+        @match_value.blank?
+      end
+
+      # @param [ClassyEnum::Base] value
+      # @return [Boolean]
+      def call(value)
+        return true if blank?
+
+        value = matches value
+
+        inverted? ? !value : value
+      end
+
+      alias_method :match, :call
+
+      def inverted?
+        @inverted
+      end
+
+      private
+
+      def matches(value)
+        case @match_value
+        when Dux[:call] then @match_value.call(value)
+        when String, Symbol then value == @match_value
+        when Array
+          @match_value.empty? || @match_value.any? { |matchable| value == matchable }
+        else
+          false
+        end
+      end
+    end
+
+    module ApplicableEnum
+      extend ActiveSupport::Concern
+
+      included do
+        config.should_enforce_owner = false
+      end
+
+      def applies?
+        return false unless owner.present?
+
+        applies_to? owner
+      end
+
+      alias_method :applicable?, :applies?
+
+      # @api private
+      # @note Test method
+      def applicable_for?(owner)
+        applies_to? owner
+      end
+
+      private
+
+      # @abstract
+      # @param [Object] owner
+      def applies_to?(owner)
+        false
+      end
+
+      class_methods do
+        # @param [Object] owner
+        # @return [Patches::BetterEnum::ApplicableEnum, nil]
+        def fetch_for(owner)
+          detect do |enum|
+            enum.owner = owner
+
+            enum.applies?
+          end
+        end
+
+        # @param [Object] owner
+        # @raise [ClassyEnum::InapplicableEnum] if no applicable enum found
+        # @return [Patches::BetterEnums::ApplicableEnum]
+        def fetch_for!(owner)
+          found = fetch_for(owner)
+
+          raise Patches::BetterEnums::InapplicableEnum, "Could not find applicable enum for #{owner.inspect}" if found.blank?
+
+          return found
+        end
+
+        # @param [Object] owner
+        # @return [<Patches::BetterEnums::ApplicableEnum>]
+        def for_owner(owner)
+          each_with_object([]) do |enum, list|
+            enum.owner = owner
+
+            list << enum if enum.applies?
+          end
+        end
+      end
+    end
+
+    class InapplicableEnum < StandardError; end
+
+    class InvalidOwner < StandardError; end
   end
   # rubocop:enable Metrics/BlockLength, Metrics/LineLength
 

@@ -58,11 +58,6 @@ RSpec.describe User, type: :model do
     expect(user).to_not be_valid
   end
 
-  it "should not be valid without a role" do
-    user = FactoryBot.build(:user, role: nil)
-    expect(user).to_not be_valid
-  end
-
   it "should not be valid with an invalid role" do
     user = FactoryBot.build(:user, role: "dog")
     expect(user).to_not be_valid
@@ -84,8 +79,9 @@ RSpec.describe User, type: :model do
   end
 
   it "sets a role correctly" do
-    user = FactoryBot.create(:user, role: Role::ROLE_ADMIN)
-    expect(user.has_role? :admin).to eq true
+    user = FactoryBot.create(:user, :admin)
+
+    expect(user).to have_role :admin
   end
 
   it "has a case-insensitive email" do
@@ -93,15 +89,42 @@ RSpec.describe User, type: :model do
     expect(User.find_by(email: "ROWAN@WOOF.DOG")).to eq user
   end
 
-  # TODO: Improve this test
-  it "preserves permissions when changing role" do
-    user = FactoryBot.create(:user, role: Role::ROLE_EDITOR)
-    project = FactoryBot.create(:project)
-    user.add_role Role::ROLE_PROJECT_EDITOR, project
-    permissions = Array.new user.permissions
-    user.role = Role::ROLE_EDITOR
-    user.save
-    expect(user.reload.permissions).to eq permissions
+  context "when changing a role" do
+    let!(:user) { FactoryBot.create :user, :editor }
+    let!(:project) { FactoryBot.create :project }
+
+    before do
+      user.add_role :project_editor, project
+    end
+
+    it "preserves existing permissions" do
+      expect do
+        user.role = :editor
+
+        user.save!
+      end.to change { user.role }.and keep_the_same { user.permissions.reload.to_a }
+    end
+  end
+
+  context "when altering a role with rolify" do
+    let!(:user) { FactoryBot.create :user, :reader }
+    let!(:project) { FactoryBot.create :project }
+
+    context "with a global role" do
+      it "updates the role and kind" do
+        expect do
+          user.add_role :editor
+        end.to change { user.role.to_sym }.from(:reader).to(:editor).and change { user.kind.to_sym }.from(:reader).to(:editor)
+      end
+    end
+
+    context "with a scoped role" do
+      it "updates the kind" do
+        expect do
+          user.add_role :project_editor, project
+        end.to keep_the_same { user.role.to_sym }.and change { user.kind.to_sym }.from(:reader).to(:project_editor)
+      end
+    end
   end
 
   context "can be searched", :elasticsearch do

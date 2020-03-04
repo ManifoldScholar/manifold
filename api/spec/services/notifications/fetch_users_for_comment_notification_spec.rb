@@ -5,15 +5,15 @@ RSpec.describe Notifications::FetchUsersForCommentNotification do
   let(:text) { FactoryBot.create(:text, project: project) }
   let(:text_section) { FactoryBot.create(:text_section, text: text) }
   let(:subject) { FactoryBot.create(:annotation, text_section: text_section)}
-  let(:editor) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
+  let(:editor) { FactoryBot.create(:user, :editor) }
   let(:project_editor) { FactoryBot.create(:user) }
   let(:author) { FactoryBot.create(:user) }
   let(:comment) { FactoryBot.create(:comment, subject: subject)}
 
   before(:each) do
     editor.update(notification_preferences_by_kind: { project_comments_and_annotations: NotificationFrequency[:always] })
-    author.add_role(Role::ROLE_PROJECT_AUTHOR, project)
-    project_editor.add_role(Role::ROLE_PROJECT_EDITOR, project)
+    author.add_role(:project_author, project)
+    project_editor.add_role(:project_editor, project)
     author.update(notification_preferences_by_kind: { project_comments_and_annotations: NotificationFrequency[:always] })
     project_editor.update(notification_preferences_by_kind: { project_comments_and_annotations: NotificationFrequency[:always] })
   end
@@ -50,5 +50,4 @@ RSpec.describe Notifications::FetchUsersForCommentNotification do
     outcome = described_class.run comment: comment
     expect(outcome.result.include? author).to be false
   end
-
 end

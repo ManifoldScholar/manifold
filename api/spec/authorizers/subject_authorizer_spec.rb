@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Subject Abilities", :authorizer do
   context 'when the subject is an admin' do
-    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+    let(:subject) { FactoryBot.create(:user, :admin) }
 
     the_subject_behaves_like "class abilities", Subject, all: true
   end

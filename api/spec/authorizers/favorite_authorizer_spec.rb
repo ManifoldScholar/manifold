@@ -5,7 +5,7 @@ RSpec.describe "Favorite Abilities", :authorizer do
   let(:object) { FactoryBot.create(:favorite, user: owner) }
 
   context 'when the subject is an admin' do
-    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+    let(:subject) { FactoryBot.create(:user, :admin) }
 
     the_subject_behaves_like "instance abilities", Favorite, all: true
   end

@@ -4,13 +4,20 @@ class NotificationKind < ClassyEnum::Base
   config.visible_to_admin = false
   config.visible_to_editor = false
 
+  # @param [NotificationFrequency, String, Symbol] frequency
+  def allow_frequency?(frequency)
+    NotificationFrequency.fetch(frequency).then do |freq|
+      digest? ? freq.digest? : freq.nondigest?
+    end
+  end
+
   def visible_to?(role)
-    role = role.to_s
+    role = RoleName[role]
 
     if visible_to_admin?
-      role == Role::ROLE_ADMIN
+      role.visible_to_admin?
     elsif visible_to_editor?
-      role == Role::ROLE_ADMIN || role.in?(Role::EDITOR_ROLES)
+      role.visible_to_admin? || role.visible_to_editor?
     else
       true
     end

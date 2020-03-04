@@ -9,10 +9,10 @@ module Notifications
     delegate :reply_to_self?, to: :comment
 
     def execute
-      recipients = []
-      recipients.push(parent.creator) if notify_parent_creator?
-      recipients.push(subject.creator) if notify_subject_creator?
-      recipients
+      [].tap do |recipients|
+        recipients.push(parent.creator) if notify_parent_creator?
+        recipients.push(subject.creator) if notify_subject_creator?
+      end
     end
 
     def notify_parent_creator?
@@ -28,6 +28,5 @@ module Notifications
     def creator_wants_notification?(creator)
       creator.wants_notifications_for? NotificationKind[:replies_to_me]
     end
-
   end
 end

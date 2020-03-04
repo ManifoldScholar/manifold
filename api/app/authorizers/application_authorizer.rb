@@ -61,10 +61,10 @@ class ApplicationAuthorizer < Authority::Authorizer
   end
 
   def self.editor_of_any_project?(user)
-    user.has_role? Role::ROLE_PROJECT_EDITOR, :any
+    user.has_role? :project_editor, :any
   end
 
-  protected
+  private
 
   def known_user?(user)
     user.role.present?
@@ -75,5 +75,4 @@ class ApplicationAuthorizer < Authority::Authorizer
       user.can_update? project
     end
   end
-
 end

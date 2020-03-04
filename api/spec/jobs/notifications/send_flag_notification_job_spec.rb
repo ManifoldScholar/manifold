@@ -1,10 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Notifications::SendFlagNotificationJob, type: :job do
-
   describe "#perform" do
-
-    let(:editor) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+    let(:editor) { FactoryBot.create(:user, :admin) }
     let(:always) { NotificationFrequency[:always] }
     let(:do_notify) { { flagged_resources: always } }
     let(:flag) { FactoryBot.create(:flag) }
@@ -14,7 +12,5 @@ RSpec.describe Notifications::SendFlagNotificationJob, type: :job do
       mail = ActionMailer::Base.deliveries.last
       expect(mail.to).to eq [editor.email]
     end
-
   end
-
 end

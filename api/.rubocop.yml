@@ -80,6 +80,9 @@ Style/Lambda:
 Style/LambdaCall:
   Enabled: false
 
+Style/Not:
+  Enabled: false
+
 Style/PercentLiteralDelimiters:
   Enabled: false
 
@@ -105,6 +108,9 @@ Style/ClassAndModuleChildren:
     - api/app/enums/**/*.rb
 
 Lint/ScriptPermission:
+  Enabled: false
+
+Naming/PredicateName:
   Enabled: false
 
 Naming/UncommunicativeMethodParamName:

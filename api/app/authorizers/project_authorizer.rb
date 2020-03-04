@@ -26,9 +26,7 @@ class ProjectAuthorizer < ApplicationAuthorizer
   def self.scope_updatable_projects(user)
     return Project.all if marketeer_permissions?(user)
 
-    Project.with_roles(
-      [Role::ROLE_PROJECT_RESOURCE_EDITOR, Role::ROLE_PROJECT_EDITOR], user
-    )
+    Project.with_roles([:project_resource_editor, :project_editor], user)
   end
 
   # All backend user types can edit projects, plus editors of the specific project.
@@ -90,5 +88,4 @@ class ProjectAuthorizer < ApplicationAuthorizer
         __send__("#{social}_creatable_by?", user)
     end.present?
   end
-
 end

@@ -9,5 +9,25 @@ FactoryBot.define do
       digest: NotificationFrequency[:daily],
       followed_projects: NotificationFrequency[:always]
     }) }
+
+    trait :admin do
+      role { :admin }
+    end
+
+    trait :editor do
+      role { :editor }
+    end
+
+    trait :project_creator do
+      role { :project_creator }
+    end
+
+    trait :marketeer do
+      role { :marketeer }
+    end
+
+    trait :reader do
+      role { :reader }
+    end
   end
 end
