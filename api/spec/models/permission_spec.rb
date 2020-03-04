@@ -10,13 +10,12 @@ RSpec.describe Permission, type: :model do
   end
 
   it "is invalid without a user" do
-    permission = Permission.new(user: nil, resource: project, role_names: [Role::ROLE_PROJECT_EDITOR])
+    permission = Permission.new(user: nil, resource: project, role_names: %w[project_editor])
     expect(permission).to_not be_valid
   end
 
   it "is invalid without a resource" do
-    permission = Permission.new(user: user, resource: nil, role_names: [Role::ROLE_PROJECT_EDITOR])
+    permission = Permission.new(user: user, resource: nil, role_names: %w[project_editor])
     expect(permission).to_not be_valid
   end
-
 end

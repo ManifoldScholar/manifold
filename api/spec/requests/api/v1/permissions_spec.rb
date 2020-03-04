@@ -40,7 +40,7 @@ RSpec.describe "Permissions", type: :request do
   end
 
   let!(:resource) do
-    admin.add_role Role::ROLE_PROJECT_AUTHOR, project
+    admin.add_role :project_author, project
     Permission.fetch(project, admin)
   end
 

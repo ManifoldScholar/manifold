@@ -14,13 +14,13 @@ RSpec.describe "Annotation Abilities", :authorizer do
   end
 
   context 'when the subject is an admin' do
-    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+    let(:subject) { FactoryBot.create(:user, :admin) }
 
     the_subject_behaves_like "instance abilities", Annotation, all: true
   end
 
   context 'when the subject is an editor' do
-    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
+    let(:subject) { FactoryBot.create(:user, :editor) }
 
     the_subject_behaves_like "instance abilities", Annotation, all: true
   end
@@ -28,7 +28,7 @@ RSpec.describe "Annotation Abilities", :authorizer do
   context 'when the subject is a resource editor for the annotation\'s project' do
     let(:subject) do
       user = FactoryBot.create(:user)
-      user.add_role Role::ROLE_PROJECT_EDITOR, project
+      user.add_role :project_editor, project
       user
     end
 

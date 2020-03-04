@@ -84,7 +84,7 @@ RSpec.describe V1::ProjectSerializer do
     end
 
     context "when params includes a current_user" do
-      let(:admin) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+      let(:admin) { FactoryBot.create(:user, :admin) }
       let(:params) { { current_user: admin, full: true } }
       let(:subject) { described_class.new(object, include: [:texts], params: params) }
 

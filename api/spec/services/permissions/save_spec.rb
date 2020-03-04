@@ -6,11 +6,11 @@ RSpec.describe Permissions::Save do
   let(:permission) { Permission.new(user_id: user.id,
                                     resource_id: project.id,
                                     resource_type: project.class.name,
-                                    role_names: [Role::ROLE_PROJECT_EDITOR, Role::ROLE_PROJECT_AUTHOR])
+                                    role_names: %w[project_editor project_author])
   }
 
   it "correctly updates roles" do
     outcome = Permissions::Save.run permission: permission
-    expect(outcome.result.role_names).to include Role::ROLE_PROJECT_EDITOR, Role::ROLE_PROJECT_AUTHOR
+    expect(outcome.result.role_names).to include "project_editor", "project_author"
   end
 end

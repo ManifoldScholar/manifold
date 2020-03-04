@@ -1,12 +1,10 @@
 module Notifications
   class FetchUsersForDigestEmail < ActiveInteraction::Base
-    string :frequency
-    validates_inclusion_of :frequency, in: NotificationFrequency
+    record :frequency, class: "NotificationFrequency", finder: :[]
 
+    # @return [ActiveRecord::Relation<User>]
     def execute
-      frequency_instance = NotificationFrequency.fetch(frequency)
-      User.with_digest_for_frequency(frequency_instance)
+      User.with_digest_for_frequency frequency
     end
-
   end
 end

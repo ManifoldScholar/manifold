@@ -1,11 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Notifications::EnqueueFlagNotificationsJob, type: :job do
-
   describe "#perform" do
-
-    let(:editor) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
-    let(:other_editor) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+    let(:editor) { FactoryBot.create(:user, :admin) }
+    let(:other_editor) { FactoryBot.create(:user, :admin) }
     let(:always) { NotificationFrequency[:always] }
     let(:never) { NotificationFrequency[:never] }
     let(:do_notify) { { flagged_resources: always } }
@@ -26,7 +24,5 @@ RSpec.describe Notifications::EnqueueFlagNotificationsJob, type: :job do
           )
       )
     end
-
   end
-
 end

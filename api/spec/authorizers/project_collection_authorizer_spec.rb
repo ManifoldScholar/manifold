@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "ProjectCollection Abilities", :authorizer do
   context 'when the subject is an admin' do
-    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+    let(:subject) { FactoryBot.create(:user, :admin) }
 
     the_subject_behaves_like "class abilities", ProjectCollection, all: true
   end
@@ -22,18 +22,17 @@ RSpec.describe "ProjectCollection Abilities", :authorizer do
   end
 
   context 'when the subject is a marketeer' do
-    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_MARKETEER) }
+    let(:subject) { FactoryBot.create(:user, :marketeer) }
     let(:object) { FactoryBot.create(:project_collection) }
 
     the_subject_behaves_like "class abilities", ProjectCollection, all: true
   end
 
   context 'when the subject is a global editor' do
-    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
+    let(:subject) { FactoryBot.create(:user, :editor) }
     let(:another_user) { FactoryBot.create(:user) }
     let(:project) { FactoryBot.create(:project) }
-    let(:object) { ProjectCollection.new(resource: project, user: another_user, role_names: Role::ROLE_PROJECT_EDITOR) }
+    let(:object) { ProjectCollection.new(resource: project, user: another_user, role_names: "project_editor") }
     the_subject_behaves_like "class abilities", ProjectCollection, all: true
   end
-
 end

@@ -264,13 +264,15 @@ RSpec.describe Project, type: :model do
     end
 
     it "for admin" do
-      admin = FactoryBot.create(:user, role: Role::ROLE_ADMIN)
+      admin = FactoryBot.create(:user, :admin)
+
       expect(Project.with_read_ability(admin).count).to eq 3
     end
 
     it "for project_editor" do
       project_editor = FactoryBot.create(:user)
-      project_editor.add_role Role::ROLE_PROJECT_EDITOR, @project_b
+      project_editor.add_role :project_editor, @project_b
+
       expect(Project.with_read_ability(project_editor).count).to eq 2
     end
 

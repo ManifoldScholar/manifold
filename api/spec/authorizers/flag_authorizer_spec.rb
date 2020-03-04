@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "Flag Abilities", :authorizer do
-  let(:creator) { FactoryBot.create(:user, role: Role::ROLE_READER) }
+  let(:creator) { FactoryBot.create(:user, :reader) }
   let(:object) { FactoryBot.create(:flag, creator: creator) }
 
   context 'when the subject is an admin' do
-    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+    let(:subject) { FactoryBot.create(:user, :admin) }
 
     abilities = { create: true, read: false, update: false, delete: true }
     the_subject_behaves_like "instance abilities", Flag, abilities
