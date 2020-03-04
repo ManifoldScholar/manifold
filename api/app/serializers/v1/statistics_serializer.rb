@@ -14,5 +14,6 @@ module V1
     typed_attribute :total_comment_count, Types::Integer.meta(read_only: true)
     typed_attribute :total_user_count, Types::Integer.meta(read_only: true)
     typed_attribute :total_project_count, Types::Integer.meta(read_only: true)
+    typed_attribute :total_reading_group_count, Types::Integer.meta(read_only: true)
   end
 end

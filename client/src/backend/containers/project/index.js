@@ -4,6 +4,7 @@ import Content from "./Content";
 import Events from "./Events";
 import ProjectExportations from "./ProjectExportations";
 import General from "./General";
+import Analytics from "./Analytics";
 import Log from "./Log";
 import Metadata from "./Metadata";
 import New from "./New";
@@ -25,6 +26,7 @@ export default {
   ProjectExportations,
   General,
   Log,
+  Analytics,
   Metadata,
   New,
   Permissions,

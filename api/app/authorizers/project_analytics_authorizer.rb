@@ -1,0 +1,3 @@
+class ProjectAnalyticsAuthorizer < ProjectRestrictedChildAuthorizer
+
+end

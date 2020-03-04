@@ -87,6 +87,7 @@
   },
   "dependencies": {
     "actioncable": "~5.0.2",
+    "ahoy.js": "^0.3.4",
     "autolinker": "^1.x",
     "autoprefixer": "^9.0",
     "babel-polyfill": "^6.23.0",

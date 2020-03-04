@@ -99,6 +99,10 @@ class Statistics
     User.count
   end
 
+  def total_reading_group_count
+    ReadingGroup.count
+  end
+
   private
 
   # @param [Numeric] value

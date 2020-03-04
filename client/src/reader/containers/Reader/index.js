@@ -30,6 +30,7 @@ import get from "lodash/get";
 import ScrollAware from "hoc/scroll-aware";
 import BodyClass from "hoc/body-class";
 import Authorize from "hoc/authorize";
+import EventTracker, { EVENTS } from "global/components/EventTracker";
 
 const {
   selectFont,
@@ -242,6 +243,7 @@ export class ReaderContainer extends Component {
     return (
       <BodyClass className={this.bodyClass}>
         <div>
+          <EventTracker event={EVENTS.VIEW} resource={this.props.text} />
           <CheckFrontendMode
             debugLabel="ReaderWrapper"
             project={this.props.text.relationships.project}

@@ -10,6 +10,7 @@ import Projects from "./Projects";
 import Feature from "./Feature";
 import withSettings from "hoc/with-settings";
 import Layout from "frontend/components/layout";
+import EventTracker, { EVENTS } from "global/components/EventTracker";
 
 export class HomeContainer extends Component {
   static showProjects(settings) {
@@ -77,6 +78,7 @@ export class HomeContainer extends Component {
           overflowX: "hidden"
         }}
       >
+        <EventTracker event={EVENTS.VIEW} subject="library" />
         <Feature
           authentication={this.props.authentication}
           commonActions={this.commonActions}

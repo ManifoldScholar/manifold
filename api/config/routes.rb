@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     mount Tus::Server => "/files"
+    mount Ahoy::Engine => "/ahoy"
 
     namespace :proxy do
       resources :ingestion_sources, only: [:show]
@@ -136,6 +137,7 @@ Rails.application.routes.draw do
             resources :text_categories, only: [:index, :create, :show]
             resources :ingestions, only: [:create], controller: "/api/v1/ingestions"
             resources :versions, only: [:index]
+            resource :analytics, only: [:show]
             concerns [:permissible]
           end
         end

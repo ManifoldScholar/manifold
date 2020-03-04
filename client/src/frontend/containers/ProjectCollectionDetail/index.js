@@ -4,7 +4,6 @@ import connectAndFetch from "utils/connectAndFetch";
 import Layout from "frontend/components/layout";
 import Utility from "frontend/components/utility";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
-
 import ProjectCollection from "frontend/components/project-collection";
 import { entityStoreActions } from "actions";
 import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
@@ -14,7 +13,7 @@ import HeadContent from "global/components/HeadContent";
 import omitBy from "lodash/omitBy";
 import queryString from "query-string";
 import debounce from "lodash/debounce";
-
+import EventTracker, { EVENTS } from "global/components/EventTracker";
 import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
@@ -164,6 +163,9 @@ export class ProjectCollectionDetailContainer extends Component {
           debugLabel="ProjectCollectionDetail"
           isProjectSubpage
         />
+        {this.props.projectCollection && (
+          <EventTracker event={EVENTS.VIEW} resource={this.props.projectCollection} />
+        )}
         <Utility.BackLinkPrimary
           link={lh.link("frontendProjectCollections")}
           backText={"Back to Project Collections"}

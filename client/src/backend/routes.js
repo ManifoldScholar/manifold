@@ -481,6 +481,13 @@ const routes = {
               helper: p => `/backend/projects/${p}/log`
             },
             {
+              name: "backendProjectAnalytics",
+              exact: true,
+              component: "ProjectAnalytics",
+              path: "/backend/projects/:id/analytics",
+              helper: p => `/backend/projects/${p}/analytics`
+            },
+            {
               name: "backendProjectGeneral",
               exact: true,
               component: "ProjectGeneral",

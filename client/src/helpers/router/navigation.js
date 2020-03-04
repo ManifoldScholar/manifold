@@ -241,6 +241,13 @@ class Navigation {
         entity: project,
         ability: "readLog",
         args
+      },
+      {
+        label: "Analytics",
+        route: "backendProjectAnalytics",
+        entity: project,
+        ability: "update",
+        args
       }
     ];
   });

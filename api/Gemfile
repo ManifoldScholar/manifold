@@ -9,7 +9,9 @@ gem "activerecord-import", "~> 0.22.0"
 gem "activerecord-wrapped_transaction", "~> 0.5.1"
 gem "acts-as-taggable-on", "~> 6.0"
 gem "acts_as_list", "~>0.9"
+gem "ahoy_matey", "~> 3.0"
 # Project is now unmaintained. Fixing to 3.3 for now.
+gem "attr_lazy"
 gem "authority", "~>3.3.0"
 gem "bagit", "~> 0.4.3"
 gem "bcrypt", "~> 3.0"
@@ -124,9 +126,8 @@ gem "zhong", "~> 0.2"
 group :development, :test do
   gem "factory_bot_rails", "~> 4.0"
   gem "parallel_tests", "~> 2.29.2"
-  gem "rspec-core", "~> 3.0"
-
   gem "rspec-collection_matchers"
+  gem "rspec-core", "~> 3.0"
   gem "rspec-expectations", "~> 3.0"
   gem "rspec-its"
   gem "rspec-json_expectations", "~> 2.0"
@@ -135,6 +136,7 @@ group :development, :test do
   gem "rspec-retry", "~> 0.6.2"
   gem "rspec-support", "~> 3.0"
   gem "rswag", "~> 2.0"
+  gem "table_print"
   gem "timecop", "~> 0.9"
 end
 

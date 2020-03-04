@@ -38,7 +38,7 @@ export default class ProjectContentBlockIncomplete extends PureComponent {
 
   get defaultError() {
     return (
-      <span>
+      <span key="default-error">
         <Link to={this.blockEditLink}>Fix this content block.</Link>
       </span>
     );
