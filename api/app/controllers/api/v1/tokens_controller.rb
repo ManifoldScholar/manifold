@@ -10,6 +10,8 @@ module Api
         authenticated_user = User.find_by(email: token_params[:email])
           .try(:authenticate, token_params[:password])
         render_authenticated_user(authenticated_user)
+      rescue StandardError => e
+        render_error_response e
       end
 
       private

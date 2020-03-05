@@ -105,6 +105,7 @@ GEM
     builder (3.2.4)
     charlock_holmes (0.7.6)
     chroma (0.2.0)
+    chronic (0.10.2)
     citeproc (1.0.9)
       namae (~> 1.0)
     citeproc-ruby (1.1.10)
@@ -678,6 +679,7 @@ DEPENDENCIES
   bcrypt (~> 3.0)
   charlock_holmes (~> 0.7)
   chroma (~> 0.2)
+  chronic
   citeproc-ruby (~> 1.1.0)
   classy_enum (~> 4.0.0)
   cleanroom

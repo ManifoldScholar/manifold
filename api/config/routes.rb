@@ -43,6 +43,7 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :entitlements, only: %i[index show create destroy]
       resources :export_targets
       resources :project_exportations, only: [:index, :show, :create]
       resources :features

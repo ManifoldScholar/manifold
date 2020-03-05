@@ -83,6 +83,9 @@ Style/LambdaCall:
 Style/Not:
   Enabled: false
 
+Style/SymbolProc:
+  Enabled: false
+
 Style/PercentLiteralDelimiters:
   Enabled: false
 
@@ -110,16 +113,21 @@ Style/ClassAndModuleChildren:
 Lint/ScriptPermission:
   Enabled: false
 
+Naming/AccessorMethodName:
+  Enabled: false
+
 Naming/PredicateName:
   Enabled: false
 
 Naming/UncommunicativeMethodParamName:
   AllowedNames:
     - 'as'
+    - 'at'
     - 'ok'
     - 'id'
     - 'io'
     - 'e'
+    - 'on'
     - 'to'
 
 Metrics/BlockLength:

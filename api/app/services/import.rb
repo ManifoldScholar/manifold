@@ -1,0 +1,1 @@
+Import = Dry::AutoInject(::Container)

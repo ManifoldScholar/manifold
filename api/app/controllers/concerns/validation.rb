@@ -144,6 +144,21 @@ module Validation
     params.permit(param_config)
   end
 
+  def entitlement_params
+    params.require(:data)
+
+    attributes = [
+      :subject_url,
+      :target_url,
+      global_roles: %i[subscriber],
+      scoped_roles: %i[read_access]
+    ]
+
+    param_config = structure_params(attributes: attributes)
+
+    params.permit(param_config)
+  end
+
   # rubocop:disable Metrics/MethodLength
   def resource_params
     params.require(:data)
