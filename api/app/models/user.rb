@@ -9,6 +9,8 @@ class User < ApplicationRecord
   include Concerns::SerializedAbilitiesOn
   include Concerns::SerializedAbilitiesFor
   include Concerns::NotificationPreferences
+  include Concerns::ProvidesEntitlements
+  include Concerns::ReceivesEntitlements
   include Filterable
   include Recoverable
   include Attachments
@@ -40,6 +42,8 @@ class User < ApplicationRecord
            dependent: :destroy, inverse_of: :creator
   has_many :reading_group_memberships, dependent: :destroy
   has_many :reading_groups, through: :reading_group_memberships
+  has_many :entitlement_user_links, inverse_of: :user, dependent: :destroy
+  has_many :granted_entitlements, through: :entitlement_user_links, source: :entitlement
 
   # rubocop:disable Rails/HasManyOrHasOneDependent
   has_many :permissions

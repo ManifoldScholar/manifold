@@ -2,6 +2,7 @@
 class ReadingGroup < ApplicationRecord
 
   include Authority::Abilities
+  include Concerns::ReceivesEntitlements
   include Concerns::SerializedAbilitiesFor
   include TrackedCreator
 

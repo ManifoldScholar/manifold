@@ -4,8 +4,22 @@ RSpec.shared_context "authenticated request" do
   def token(user, password)
     params = { email: user.email, password: password }
     post api_v1_tokens_path, params: params
-    data = JSON.parse(response.body)
-    data.dig("meta", "authToken")
+
+    if response.successful?
+      data = JSON.parse(response.body)
+
+      data.dig("meta", "authToken").tap do |token|
+        raise "Received no token: #{token}" if token.blank?
+      end
+    else
+      data = JSON.parse(response.body)
+
+      errors = Array(data.dig("errors"))
+      
+      raise "Unable to receive token: #{errors.to_sentence}"
+    end
+  rescue JSON::ParserError => e
+    raise "Was unable to parse token: #{e.message}"
   end
 
   def build_bearer_token(token)

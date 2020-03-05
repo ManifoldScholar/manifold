@@ -16,6 +16,16 @@ Zhong.schedule do
     every(4.hours, "update_statistics") { ::UpdateAnalyticsCache.perform_later }
   end
 
+  category "entitlements" do
+    every(15.minutes, "audit") do
+      Entitlements::AuditJob.perform_later
+    end
+
+    every(1.hour, "check_expiration") do
+      Entitlements::CheckExpirationJob.perform_later
+    end
+  end
+
   category "uploads" do
     every(1.day, "expire_shrine_cache", at: "22:00", tz: "America/Los_Angeles") do
       ExpireShrineCacheJob.perform_later
