@@ -20,6 +20,7 @@ class Project < ApplicationRecord
 
   # Concerns
   include Authority::Abilities
+  include Concerns::Entitleable
   include Concerns::SerializedAbilitiesFor
   include Concerns::StoresFingerprints
   include Concerns::Taggable

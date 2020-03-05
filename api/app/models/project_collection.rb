@@ -5,6 +5,7 @@ class ProjectCollection < ApplicationRecord
   ALLOWED_SORT_DIRECTIONS = %w(asc desc).freeze
 
   # Concerns
+  include Concerns::Entitleable
   include Concerns::HasFormattedAttributes
   include Filterable
   include TrackedCreator

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_25_183735) do
+ActiveRecord::Schema.define(version: 2020_03_19_023714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -171,6 +171,74 @@ ActiveRecord::Schema.define(version: 2020_02_25_183735) do
     t.uuid "project_id"
     t.boolean "visible", default: true, null: false
     t.index ["project_id"], name: "index_content_blocks_on_project_id"
+  end
+
+  create_table "entitlement_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "name", null: false
+    t.text "kind", default: "unknown", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kind"], name: "index_entitlement_roles_on_kind"
+    t.index ["name"], name: "index_entitlement_roles_on_name", unique: true
+  end
+
+  create_table "entitlement_transitions", force: :cascade do |t|
+    t.uuid "entitlement_id", null: false
+    t.integer "sort_key", null: false
+    t.boolean "most_recent", null: false
+    t.text "to_state", null: false
+    t.jsonb "metadata", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entitlement_id", "most_recent"], name: "index_entitlement_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["entitlement_id", "sort_key"], name: "index_entitlement_transitions_parent_sort", unique: true
+    t.index ["entitlement_id"], name: "index_entitlement_transitions_on_entitlement_id"
+  end
+
+  create_table "entitlement_user_links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "entitlement_id", null: false
+    t.uuid "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entitlement_id", "user_id"], name: "entitlement_user_links_uniqueness", unique: true
+    t.index ["entitlement_id"], name: "index_entitlement_user_links_on_entitlement_id"
+    t.index ["user_id"], name: "index_entitlement_user_links_on_user_id"
+  end
+
+  create_table "entitlements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "target_type", null: false
+    t.uuid "target_id", null: false
+    t.uuid "entitler_id", null: false
+    t.string "subject_type", null: false
+    t.uuid "subject_id", null: false
+    t.date "expires_on"
+    t.datetime "expired_at"
+    t.text "kind", default: "unknown", null: false
+    t.text "description", default: "", null: false
+    t.jsonb "global_roles", default: {}, null: false
+    t.jsonb "scoped_roles", default: {}, null: false
+    t.jsonb "options", default: {}, null: false
+    t.jsonb "metadata", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entitler_id"], name: "index_entitlements_on_entitler_id"
+    t.index ["expired_at"], name: "index_entitlements_on_expired_at"
+    t.index ["expires_on"], name: "index_entitlements_on_expires_on"
+    t.index ["global_roles"], name: "index_entitlements_on_global_roles", using: :gin
+    t.index ["scoped_roles"], name: "index_entitlements_on_scoped_roles", using: :gin
+    t.index ["subject_type", "subject_id"], name: "index_entitlements_on_subject_type_and_subject_id"
+    t.index ["target_type", "target_id", "entitler_id", "subject_type", "subject_id"], name: "index_entitlements_uniqueness"
+    t.index ["target_type", "target_id"], name: "index_entitlements_on_target_type_and_target_id"
+  end
+
+  create_table "entitlers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "entity_type", null: false
+    t.uuid "entity_id", null: false
+    t.text "name", null: false
+    t.jsonb "metadata", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entity_type", "entity_id"], name: "index_entitlers_entity_uniqueness", unique: true
   end
 
   create_table "events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -546,8 +614,10 @@ ActiveRecord::Schema.define(version: 2020_02_25_183735) do
     t.string "cached_subtitle_plaintext"
     t.text "fingerprint", null: false
     t.jsonb "export_configuration", default: {}, null: false
+    t.boolean "restricted_access", default: false, null: false
     t.index "((export_configuration @> '{\"bag_it\": true}'::jsonb))", name: "index_projects_export_configuration_exports_as_bag_it"
     t.index ["fingerprint"], name: "index_projects_on_fingerprint"
+    t.index ["restricted_access"], name: "index_projects_on_restricted_access"
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 
@@ -792,6 +862,13 @@ ActiveRecord::Schema.define(version: 2020_02_25_183735) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "system_entitlements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "kind", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kind"], name: "index_system_entitlements_on_kind", unique: true
+  end
+
   create_table "taggings", id: :serial, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
@@ -1007,6 +1084,9 @@ ActiveRecord::Schema.define(version: 2020_02_25_183735) do
   add_foreign_key "annotations", "reading_groups", on_delete: :nullify
   add_foreign_key "cached_external_source_links", "cached_external_sources", on_delete: :cascade
   add_foreign_key "cached_external_source_links", "texts", on_delete: :cascade
+  add_foreign_key "entitlement_user_links", "entitlements", on_delete: :cascade
+  add_foreign_key "entitlement_user_links", "users", on_delete: :cascade
+  add_foreign_key "entitlements", "entitlers", on_delete: :restrict
   add_foreign_key "identities", "users", on_delete: :cascade
   add_foreign_key "import_selection_matches", "annotations", on_delete: :nullify
   add_foreign_key "import_selection_matches", "import_selections", on_delete: :cascade
@@ -1270,4 +1350,137 @@ ActiveRecord::Schema.define(version: 2020_02_25_183735) do
      LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
   GROUP BY u.id;
   SQL
+  create_view "entitlement_assigned_roles", sql_definition: <<-SQL
+    SELECT ur.user_id,
+    er.id AS entitlement_role_id,
+    r.resource_id,
+    r.resource_type,
+    r.name AS role_name,
+    r.id AS role_id
+   FROM ((roles r
+     JOIN entitlement_roles er ON (((r.name)::text = er.name)))
+     JOIN users_roles ur ON ((ur.role_id = r.id)));
+  SQL
+  create_view "user_entitlements", sql_definition: <<-SQL
+    SELECT ent.id,
+    eul.user_id,
+    eul.entitlement_id,
+    ent.target_type,
+    ent.target_id,
+    ent.entitler_id,
+    ent.subject_type,
+    ent.subject_id,
+    ent.expires_on,
+    ent.expired_at,
+    ent.kind,
+    ent.description,
+    ent.global_roles,
+    ent.scoped_roles,
+    ent.options,
+    ent.metadata,
+    ent.created_at,
+    ent.updated_at
+   FROM (entitlement_user_links eul
+     JOIN entitlements ent ON ((ent.id = eul.entitlement_id)));
+  SQL
+  create_view "entitlement_derived_roles", sql_definition: <<-SQL
+    SELECT ent.user_id,
+    ent.id AS entitlement_id,
+    ent.created_at AS granted_at,
+    COALESCE(most_recent_entitlement_transition.to_state, 'pending'::text) AS current_state,
+    r.entitlement_role_id,
+    r.role_name,
+    r.role_kind,
+    r.resource_id,
+    r.resource_type,
+    r.inferred,
+    ent.expires_on,
+    ent.expired_at,
+    (ent.expired_at IS NOT NULL) AS expired
+   FROM ((user_entitlements ent
+     LEFT JOIN entitlement_transitions most_recent_entitlement_transition ON (((ent.id = most_recent_entitlement_transition.entitlement_id) AND (most_recent_entitlement_transition.most_recent = true))))
+     LEFT JOIN LATERAL ( SELECT er.id AS entitlement_role_id,
+            er.name AS role_name,
+            er.kind AS role_kind,
+            ent.subject_id AS resource_id,
+            ent.subject_type AS resource_type,
+            false AS inferred
+           FROM (jsonb_each(ent.global_roles) t(name, value)
+             JOIN entitlement_roles er USING (name))
+          WHERE (t.value = to_jsonb(true))
+        UNION ALL
+         SELECT er.id AS entitlement_role_id,
+            er.name AS role_name,
+            er.kind AS role_kind,
+            ent.subject_id AS resource_id,
+            ent.subject_type AS resource_type,
+            false AS inferred
+           FROM (jsonb_each(ent.scoped_roles) t(name, value)
+             JOIN entitlement_roles er USING (name))
+          WHERE (t.value = to_jsonb(true))
+        UNION ALL
+         SELECT er.id AS entitlement_role_id,
+            er.name AS role_name,
+            er.kind AS role_kind,
+            cp.project_id AS resource_id,
+            'Project'::character varying AS resource_type,
+            true AS inferred
+           FROM ((jsonb_each(ent.scoped_roles) t(name, value)
+             JOIN entitlement_roles er USING (name))
+             JOIN collection_projects cp ON ((cp.project_collection_id = ent.subject_id)))
+          WHERE (((ent.subject_type)::text = 'ProjectCollection'::text) AND (t.value = to_jsonb(true)))) r ON (true));
+  SQL
+  create_view "entitlement_grants", materialized: true, sql_definition: <<-SQL
+    SELECT entitlement_derived_roles.user_id,
+    entitlement_derived_roles.entitlement_role_id,
+    entitlement_derived_roles.resource_id,
+    entitlement_derived_roles.resource_type,
+    entitlement_derived_roles.role_name,
+    entitlement_derived_roles.role_kind,
+    COALESCE((array_agg(entitlement_derived_roles.current_state ORDER BY cs."position"))[1], 'pending'::text) AS current_state,
+    bool_and(entitlement_derived_roles.expired) AS expired,
+    bool_and(entitlement_derived_roles.inferred) AS inferred,
+    bool_or(entitlement_derived_roles.expired) AS has_ever_been_expired,
+    bool_or(entitlement_derived_roles.inferred) AS has_ever_been_inferred,
+    count(DISTINCT entitlement_derived_roles.entitlement_id) FILTER (WHERE (entitlement_derived_roles.current_state = 'active'::text)) AS active_entitlements_count,
+    count(DISTINCT entitlement_derived_roles.entitlement_id) FILTER (WHERE (entitlement_derived_roles.current_state = 'expiring_soon'::text)) AS expiring_soon_entitlements_count,
+    count(DISTINCT entitlement_derived_roles.entitlement_id) FILTER (WHERE (entitlement_derived_roles.current_state = 'expired'::text)) AS expired_entitlements_count,
+    min(entitlement_derived_roles.granted_at) AS first_granted_at,
+    max(entitlement_derived_roles.expired_at) AS last_expired_at,
+    jsonb_agg(DISTINCT s.summary) AS summaries
+   FROM ((entitlement_derived_roles
+     LEFT JOIN LATERAL ( SELECT
+                CASE entitlement_derived_roles.current_state
+                    WHEN 'active'::text THEN 1
+                    WHEN 'expiring_soon'::text THEN 2
+                    WHEN 'expired'::text THEN 3
+                    ELSE 5
+                END AS "position") cs ON (true))
+     LEFT JOIN LATERAL ( SELECT jsonb_build_object('current_state', entitlement_derived_roles.current_state, 'entitlement_id', entitlement_derived_roles.entitlement_id, 'expired', entitlement_derived_roles.expired, 'expires_on', entitlement_derived_roles.expires_on, 'expired_at', entitlement_derived_roles.expired_at, 'granted_at', entitlement_derived_roles.granted_at) AS summary
+          ORDER BY entitlement_derived_roles.expired_at DESC, cs."position", entitlement_derived_roles.expires_on DESC) s ON (true))
+  GROUP BY entitlement_derived_roles.user_id, entitlement_derived_roles.entitlement_role_id, entitlement_derived_roles.resource_id, entitlement_derived_roles.resource_type, entitlement_derived_roles.role_name, entitlement_derived_roles.role_kind;
+  SQL
+  add_index "entitlement_grants", ["user_id", "entitlement_role_id", "resource_id", "resource_type", "role_name", "role_kind"], name: "entitlement_grants_pkey", unique: true
+
+  create_view "entitlement_grant_audits", materialized: true, sql_definition: <<-SQL
+    SELECT user_id,
+    entitlement_role_id,
+    resource_id,
+    resource_type,
+    role_name,
+    x.has_entitlement,
+    x.has_assigned_role,
+        CASE
+            WHEN (x.has_entitlement AND (NOT x.has_assigned_role)) THEN 'add_role'::text
+            WHEN ((NOT x.has_entitlement) AND x.has_assigned_role) THEN 'remove_role'::text
+            ELSE 'skip'::text
+        END AS action
+   FROM ((entitlement_grants eg
+     FULL JOIN entitlement_assigned_roles ear USING (user_id, entitlement_role_id, resource_id, resource_type, role_name))
+     LEFT JOIN LATERAL ( SELECT ((eg.summaries IS NOT NULL) AND (NOT eg.expired)) AS has_entitlement,
+            (ear.role_id IS NOT NULL) AS has_assigned_role) x ON (true));
+  SQL
+  add_index "entitlement_grant_audits", ["action"], name: "index_entitlement_grant_audits_on_action"
+  add_index "entitlement_grant_audits", ["user_id", "entitlement_role_id", "resource_id", "resource_type", "role_name"], name: "entitlement_grant_audits_pkey", unique: true
+
 end

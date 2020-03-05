@@ -17,12 +17,26 @@ class Role < ApplicationRecord
   # rubocop:enable Rails/HasAndBelongsToMany
 
   validates :resource_type, inclusion: { in: Rolify.resource_types }, allow_nil: true
+  validate :check_resource_for_kind!
 
   before_validation :set_kind!
 
-  delegate *RoleKind.predicates, to: :kind
+  delegate :has_expected_resource?, *RoleKind.predicates, to: :kind
 
   private
+
+  # @return [void]
+  # rubocop:disable Style/GuardClause
+  def check_resource_for_kind!
+    if has_expected_resource?
+      errors.add :resource, "must be a single record" unless resource.kind_of?(ApplicationRecord)
+    end
+
+    if global_entitlement?
+      errors.add :resource, "must be a system entitlement" unless resource.kind_of?(SystemEntitlement)
+    end
+  end
+  # rubocop:enable Style/GuardClause
 
   # @return [void]
   def set_kind!
