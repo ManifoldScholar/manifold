@@ -1,17 +1,43 @@
 # Changelog
 
-## [v4.1.1](https://github.com/ManifoldScholar/manifold/tree/v4.1.1) - 02/03/20
+## [v4.1.2](https://github.com/ManifoldScholar/manifold/tree/v4.1.2) - 03/06/20
+
+### Features
+
+-  Enhance exports user interface [#2630](https://github.com/ManifoldScholar/manifold/pull/2630) ([zdavis](https://api.github.com/users/zdavis))
+-  Expose UI for project export &amp; preservation [#2598](https://github.com/ManifoldScholar/manifold/pull/2598) ([zdavis](https://api.github.com/users/zdavis))
+-  Add API documentation [#2481](https://github.com/ManifoldScholar/manifold/pull/2481) ([zdavis](https://api.github.com/users/zdavis))
 
 ### Bugs
 
+-  Handle destroyed referencables on CBRs [#2640](https://github.com/ManifoldScholar/manifold/pull/2640) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve annotation adoption [#2631](https://github.com/ManifoldScholar/manifold/pull/2631) ([zdavis](https://api.github.com/users/zdavis))
+-  Support exporting legacy ingestion sources [#2626](https://github.com/ManifoldScholar/manifold/pull/2626) ([scryptmouse](https://api.github.com/users/scryptmouse))
+-  Skip some invalid ingestion sources [#2624](https://github.com/ManifoldScholar/manifold/pull/2624) ([zdavis](https://api.github.com/users/zdavis))
+-  Correct regression with vars in error messages [#2623](https://github.com/ManifoldScholar/manifold/pull/2623) ([zdavis](https://api.github.com/users/zdavis))
+-  Fix backend list spacing bugs [#2614](https://github.com/ManifoldScholar/manifold/pull/2614) ([dananjohnson](https://api.github.com/users/dananjohnson))
+
+### Security
+
+-  Bump puma from 3.12.2 to 3.12.4 in /api [#2635](https://github.com/ManifoldScholar/manifold/pull/2635) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+-  Bump rake from 12.3.0 to 13.0.1 [#2634](https://github.com/ManifoldScholar/manifold/pull/2634) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+
+## [v4.1.1](https://github.com/ManifoldScholar/manifold/tree/v4.1.1) - 02/04/20
+
+### Features
+
+-  Release v4.1.1 [#2608](https://github.com/ManifoldScholar/manifold/pull/2608) ([zdavis](https://api.github.com/users/zdavis))
+
+### Bugs
+
+-  Pad bottom of standalone header subtitle [#2595](https://github.com/ManifoldScholar/manifold/pull/2595) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Fix few focus indicators [#2602](https://github.com/ManifoldScholar/manifold/pull/2602) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Fix a11y issues with Form.HasMany [#2601](https://github.com/ManifoldScholar/manifold/pull/2601) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Adjust Notation.Marker click behavior [#2593](https://github.com/ManifoldScholar/manifold/pull/2593) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Correct event tile dates [#2600](https://github.com/ManifoldScholar/manifold/pull/2600) ([zdavis](https://api.github.com/users/zdavis))
 -  Fix Form.Date focus color in FF [#2599](https://github.com/ManifoldScholar/manifold/pull/2599) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Prevent nil values for citations [#2597](https://github.com/ManifoldScholar/manifold/pull/2597) ([zdavis](https://api.github.com/users/zdavis))
--  Pad bottom of standalone header subtitle [#2595](https://github.com/ManifoldScholar/manifold/pull/2595) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Restore relationship on resources block [#2594](https://github.com/ManifoldScholar/manifold/pull/2594) ([zdavis](https://api.github.com/users/zdavis))
--  Adjust Notation.Marker click behavior [#2593](https://github.com/ManifoldScholar/manifold/pull/2593) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Fix color regressions [#2589](https://github.com/ManifoldScholar/manifold/pull/2589) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Use li tag for Event.Tile [#2582](https://github.com/ManifoldScholar/manifold/pull/2582) ([dananjohnson](https://api.github.com/users/dananjohnson))
 
