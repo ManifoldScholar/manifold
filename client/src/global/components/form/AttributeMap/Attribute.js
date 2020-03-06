@@ -8,6 +8,7 @@ export default class FormColumnMapAttribute extends PureComponent {
 
   static propTypes = {
     name: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
     mapping: PropTypes.string,
     unLink: PropTypes.func
   };
@@ -19,13 +20,10 @@ export default class FormColumnMapAttribute extends PureComponent {
 
   render() {
     return (
-      <Draggable draggableId={this.props.name}>
-        {(provided, snapshot) => {
+      <Draggable draggableId={this.props.name} index={this.props.index}>
+        {provided => {
           return (
-            <div
-              className="form-column-listing"
-              style={{ marginRight: snapshot.isDragging ? "-200px" : 0 }}
-            >
+            <div className="form-column-listing">
               <div
                 ref={provided.innerRef}
                 className="form-column-available"
@@ -34,8 +32,6 @@ export default class FormColumnMapAttribute extends PureComponent {
               >
                 <span className="text">{this.props.name}</span>
               </div>
-              {provided.placeholder}
-
               <button className="cancel" onClick={this.handleCancel}>
                 <span className="screen-reader-text">
                   {"Cancel mapping of "}
