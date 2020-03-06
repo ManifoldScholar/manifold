@@ -19,8 +19,6 @@ export default class ProjectContentBlockInListPartsDrag extends PureComponent {
       <div
         className={`${this.props.baseClass}__button ${this.props.baseClass}__button--draggable`}
         {...this.props.dragHandleProps}
-        role="button"
-        tabIndex="0"
       >
         <Utility.IconComposer
           icon="grabber32"

@@ -10,6 +10,14 @@
     color: $neutralTextLight;
   }
 
+  &--available {
+    & ~ [data-rbd-placeholder-context-id] {
+      // hide placeholder in Avaiable dropzone
+      // since dropping is disabled
+      display: none !important;
+    }
+  }
+
   &__inner {
     @include panelRoundedDark;
     display: flex;

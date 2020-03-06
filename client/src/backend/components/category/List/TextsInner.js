@@ -57,69 +57,66 @@ export default class CategoryListTexts extends PureComponent {
     return this.texts.map((text, index) => (
       <Draggable type="text" index={index} key={text.id} draggableId={text.id}>
         {(provided, snapshot) => (
-          <div>
-            <div
-              ref={provided.innerRef}
-              {...provided.draggableProps}
-              className={classNames("texts-list__text", {
-                "texts-list__text--is-dragging": snapshot.isDragging
-              })}
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            className={classNames("texts-list__text", {
+              "texts-list__text--is-dragging": snapshot.isDragging
+            })}
+          >
+            <Link
+              to={lh.link("backendText", text.id)}
+              className="texts-list__details"
             >
+              <div className="texts-list__icon">
+                <Text.Cover text={text} iconOnly={false} />
+              </div>
+              <div className="texts-list__title-wrapper">
+                <h3 className="texts-list__title">
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: text.attributes.titleFormatted
+                    }}
+                  />
+                  <span className="texts-list__subtitle">
+                    {text.attributes.subtitle}
+                  </span>
+                </h3>
+                <span className="texts-list__date">
+                  <FormattedDate
+                    prefix="Added"
+                    format="MMMM, yyyy"
+                    date={text.attributes.createdAt}
+                  />
+                </span>
+              </div>
+            </Link>
+            <div className="texts-list__utility">
+              <button
+                className="texts-list__button texts-list__button--notice"
+                onClick={event => {
+                  this.onDelete(event, text);
+                }}
+              >
+                <Utility.IconComposer icon="delete32" size={26} />
+                <span className="screen-reader-text">Delete Text</span>
+              </button>
               <Link
                 to={lh.link("backendText", text.id)}
-                className="texts-list__details"
+                className="texts-list__button"
               >
-                <div className="texts-list__icon">
-                  <Text.Cover text={text} iconOnly={false} />
-                </div>
-                <div className="texts-list__title-wrapper">
-                  <h3 className="texts-list__title">
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: text.attributes.titleFormatted
-                      }}
-                    />
-                    <span className="texts-list__subtitle">
-                      {text.attributes.subtitle}
-                    </span>
-                  </h3>
-                  <span className="texts-list__date">
-                    <FormattedDate
-                      prefix="Added"
-                      format="MMMM, yyyy"
-                      date={text.attributes.createdAt}
-                    />
-                  </span>
-                </div>
+                <Utility.IconComposer icon="annotate32" size={26} />
+                <span className="screen-reader-text">Edit Text</span>
               </Link>
-              <div className="texts-list__utility">
-                <button
-                  className="texts-list__button texts-list__button--notice"
-                  onClick={event => {
-                    this.onDelete(event, text);
-                  }}
-                >
-                  <Utility.IconComposer icon="delete32" size={26} />
-                  <span className="screen-reader-text">Delete Text</span>
-                </button>
-                <Link
-                  to={lh.link("backendText", text.id)}
-                  className="texts-list__button"
-                >
-                  <Utility.IconComposer icon="annotate32" size={26} />
-                  <span className="screen-reader-text">Edit Text</span>
-                </Link>
 
-                <div
-                  className="texts-list__button"
-                  {...provided.dragHandleProps}
-                >
-                  <Utility.IconComposer icon="grabber32" size={26} />
-                  <span className="screen-reader-text">Move Category</span>
-                </div>
+              <div
+                className="texts-list__button"
+                {...provided.dragHandleProps}
+              >
+                <Utility.IconComposer icon="grabber32" size={26} />
+                <span className="screen-reader-text">Move Category</span>
               </div>
             </div>
-            {provided.placeholder}
           </div>
         )}
       </Draggable>

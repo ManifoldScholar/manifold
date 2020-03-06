@@ -47,35 +47,32 @@ export default class Chip extends PureComponent {
         type="actionCallout"
       >
         {provided => (
-          <>
-            <div
-              ref={provided.innerRef}
-              {...provided.draggableProps}
-              className="action-callout-slot__chip"
-            >
-              <div className="action-callout-slot__chip-inner">
-                <span className="action-callout-slot__chip-title">
-                  {this.title}
-                </span>
-                <span className="action-callout-slot__chip-utility">
-                  <button
-                    onClick={this.onEdit}
-                    type="button"
-                    className="action-callout-slot__button"
-                  >
-                    <Utility.IconComposer icon="annotate32" size={24} />
-                  </button>
-                  <div
-                    className="action-callout-slot__button action-callout-slot__button--draggable"
-                    {...provided.dragHandleProps}
-                  >
-                    <Utility.IconComposer icon="grabber32" size={24} />
-                  </div>
-                </span>
-              </div>
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            className="action-callout-slot__chip"
+          >
+            <div className="action-callout-slot__chip-inner">
+              <span className="action-callout-slot__chip-title">
+                {this.title}
+              </span>
+              <span className="action-callout-slot__chip-utility">
+                <button
+                  onClick={this.onEdit}
+                  type="button"
+                  className="action-callout-slot__button"
+                >
+                  <Utility.IconComposer icon="annotate32" size={24} />
+                </button>
+                <div
+                  className="action-callout-slot__button action-callout-slot__button--draggable"
+                  {...provided.dragHandleProps}
+                >
+                  <Utility.IconComposer icon="grabber32" size={24} />
+                </div>
+              </span>
             </div>
-            {provided.placeholder}
-          </>
+          </div>
         )}
       </Draggable>
     );

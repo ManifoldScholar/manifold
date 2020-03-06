@@ -816,6 +816,10 @@
       padding: 0.6em 0.8em 0.6em 1.6em;
       color: $neutral45;
     }
+
+    [data-rbd-placeholder-context-id] {
+      height: 0 !important;
+    }
   }
 }
 

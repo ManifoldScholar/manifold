@@ -114,6 +114,7 @@ class FormColumnMap extends PureComponent {
                     return (
                       <li key={index}>
                         <Mapping
+                          index={index}
                           name={header}
                           id={id}
                           match={this.getCurrentMapping(id)}
@@ -129,8 +130,14 @@ class FormColumnMap extends PureComponent {
                 <Droppable droppableId="attributesAvailable" isDropDisabled>
                   {(provided, snapshotIgnored) => (
                     <div className="available" ref={provided.innerRef}>
-                      {sortedAttributes.map(attribute => {
-                        return <Attribute key={attribute} name={attribute} />;
+                      {sortedAttributes.map((attribute, index) => {
+                        return (
+                          <Attribute
+                            key={attribute}
+                            name={attribute}
+                            index={index}
+                          />
+                        );
                       })}
                       {provided.placeholder}
                     </div>

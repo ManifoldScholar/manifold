@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Droppable } from "react-beautiful-dnd";
 import Attribute from "./Attribute";
+import isNil from "lodash/isNil";
 
 export default class FormColumnMapMapping extends PureComponent {
   static displayName = "Form.ColumnMap.Mapping";
@@ -10,6 +11,7 @@ export default class FormColumnMapMapping extends PureComponent {
   static propTypes = {
     name: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
     match: PropTypes.string,
     unLink: PropTypes.func
   };
@@ -26,7 +28,7 @@ export default class FormColumnMapMapping extends PureComponent {
             <span className="truncate">&nbsp;</span>
           )}
         </div>
-        <Droppable droppableId={this.props.id} isDropDisabled={match}>
+        <Droppable droppableId={this.props.id} isDropDisabled={!isNil(match)}>
           {(provided, snapshot) => {
             // Set a class if element is being dragged over
             const wellClass = classNames("well", {
@@ -39,11 +41,13 @@ export default class FormColumnMapMapping extends PureComponent {
                 {this.props.match ? (
                   <Attribute
                     name={this.props.match}
+                    index={this.props.index}
                     unLink={this.props.unLink}
                     mapping={this.props.name}
                   />
                 ) : null}
                 <span className="placeholder">{"Drag column ..."}</span>
+                {provided.placeholder}
               </div>
             );
           }}

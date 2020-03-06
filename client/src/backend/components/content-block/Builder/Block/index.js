@@ -63,6 +63,7 @@ export default class ProjectContentBlock extends PureComponent {
   }
 
   get disabled() {
+    if (this.pending) return true;
     if (this.inCurrentList) return false;
     if (!isFunction(this.typeComponent.isAvailable)) return false;
     return !this.typeComponent.isAvailable(this.props.currentBlocks);
@@ -70,6 +71,10 @@ export default class ProjectContentBlock extends PureComponent {
 
   get typeComponent() {
     return typeResolver.typeToBlockComponent(this.type);
+  }
+
+  get pending() {
+    return this.id && this.id === "pending";
   }
 
   handleClickAdd = () => {
@@ -143,7 +148,6 @@ export default class ProjectContentBlock extends PureComponent {
                   <AvailablePlaceholder typeComponent={TypeComponent} />
                 </div>
               )}
-              {this.inCurrentList && provided.placeholder}
             </>
           );
         }}

@@ -44,20 +44,19 @@ export default class ProjectContentSectionsAvailable extends PureComponent {
               }
               droppableId={`available-${type}`}
               isDropDisabled
+              direction="horizontal"
             >
               {provided => (
-                <>
-                  <div ref={provided.innerRef}>
-                    <Block
-                      currentBlocks={this.props.currentBlocks}
-                      context="available"
-                      type={type}
-                      index={index}
-                      onClickAdd={this.props.onClickAdd}
-                    />
-                  </div>
+                <div ref={provided.innerRef}>
+                  <Block
+                    currentBlocks={this.props.currentBlocks}
+                    context="available"
+                    type={type}
+                    index={index}
+                    onClickAdd={this.props.onClickAdd}
+                  />
                   {provided.placeholder}
-                </>
+                </div>
               )}
             </Droppable>
           ))}

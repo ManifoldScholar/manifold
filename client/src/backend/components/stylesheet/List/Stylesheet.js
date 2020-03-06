@@ -59,15 +59,15 @@ export default class CategoryList extends PureComponent {
         draggableId={this.stylesheet.id}
       >
         {(provided, snapshot) => (
-          <div className={baseClass}>
-            <div
-              ref={provided.innerRef}
-              {...provided.draggableProps}
-              className={classNames({
-                [`${baseClass}__inner`]: true,
-                [`${baseClass}__inner--is-dragging`]: snapshot.isDragging
-              })}
-            >
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            className={classNames({
+              [`${baseClass}`]: true,
+              [`${baseClass}--is-dragging`]: snapshot.isDragging
+            })}
+          >
+            <div className={`${baseClass}__inner`}>
               <Link className={`${baseClass}__details`} to={this.editUrl}>
                 <div className={`${baseClass}__icon`}>
                   <Utility.IconComposer icon="resourceDocument64" size={50} />
@@ -100,15 +100,14 @@ export default class CategoryList extends PureComponent {
                   <Utility.IconComposer icon="annotate32" size={26} />
                   <span className="screen-reader-text">Edit Stylesheet</span>
                 </Link>
-                <button
+                <div
                   {...provided.dragHandleProps}
                   className={`${baseClass}__button`}
                 >
                   <Utility.IconComposer icon="grabber32" size={26} />
-                </button>
+                </div>
               </div>
             </div>
-            {provided.placeholder}
           </div>
         )}
       </Draggable>
