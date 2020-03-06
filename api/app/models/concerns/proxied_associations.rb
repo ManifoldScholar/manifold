@@ -27,11 +27,10 @@ module Concerns
       reference_configurations.each_with_object({}) do |config, h|
         h[config.name] ||= [] if config.multiple
         method = config.multiple ? :select : :detect
-
         cbrs = content_block_references.__send__(method) { |cbr| cbr.kind == config.name.to_s }
 
         h[config.name] = if config.multiple
-                           cbrs.map(&:referencable)
+                           cbrs.map(&:referencable).reject(&:blank?)
                          else
                            cbrs&.referencable
                          end
