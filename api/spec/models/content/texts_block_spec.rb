@@ -1,8 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Content::TextsBlock do
-
-  let(:text) { FactoryBot.create(:text)}
+  let(:text) { FactoryBot.create(:text) }
   let(:texts_block) { FactoryBot.create(:texts_block, project: text.project) }
 
   it "has a valid factory" do
@@ -14,11 +13,11 @@ RSpec.describe Content::TextsBlock do
   end
 
   it "responds to :included_categories" do
-    expect(texts_block.respond_to? :included_categories).to eq true
+    expect(texts_block.respond_to?(:included_categories)).to eq true
   end
 
   it "responds to :texts" do
-    expect(texts_block.respond_to? :texts).to eq true
+    expect(texts_block.respond_to?(:texts)).to eq true
   end
 
   it "has the correct available attributes" do
@@ -26,17 +25,17 @@ RSpec.describe Content::TextsBlock do
   end
 
   it "has a formatted description" do
-    expect(texts_block.respond_to? :description_formatted).to eq true
+    expect(texts_block.respond_to?(:description_formatted)).to eq true
   end
 
   describe "#texts" do
     let(:project) { FactoryBot.create(:project) }
-    let(:category_a) { FactoryBot.create(:category, title: "A") }
-    let(:category_b) { FactoryBot.create(:category, title: "B") }
+    let(:category_a) { FactoryBot.create(:category, title: "A", project: project) }
+    let(:category_b) { FactoryBot.create(:category, title: "B", project: project) }
     let(:text_a) { FactoryBot.create(:text, project: project, category: category_a) }
     let(:text_b) { FactoryBot.create(:text, project: project, category: category_b) }
     let(:text_c) { FactoryBot.create(:text, project: project, category: nil) }
-    let(:texts_block) { FactoryBot.create(:texts_block, project: project) }
+    let!(:texts_block) { FactoryBot.create(:texts_block, project: project) }
 
     context "when not filtered by category" do
       context "when show_uncategorized is true" do
@@ -55,10 +54,16 @@ RSpec.describe Content::TextsBlock do
     end
 
     context "when filtered by category" do
-      before(:each) do
-        texts_block.content_block_references << FactoryBot.create(:content_block_reference,
-                                                                  kind: "included_categories",
-                                                                  referencable: category_a)
+      let!(:reference) do
+        FactoryBot.create(:content_block_reference,
+                          content_block: texts_block,
+                          kind: "included_categories",
+                          referencable: category_a)
+      end
+
+      it "can handle removal of a referenced category" do
+        category_a.destroy
+        expect(texts_block.reload.included_category_ids.length).to eq 0
       end
 
       context "when show_uncategorized is true" do
