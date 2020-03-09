@@ -122,7 +122,7 @@ RSpec.describe Ingestions::Ingestor do
       end
     end
 
-    context "when reingesting" do
+    context "when reingesting a document" do
       let(:text) { FactoryBot.create(:text, title: "original") }
       let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html") }
       let(:ingestion) do
@@ -130,6 +130,27 @@ RSpec.describe Ingestions::Ingestor do
         allow(ingestion).to receive(:ingestion_source).and_return(path)
         allow(ingestion).to receive(:source_file_name).and_return("index.html")
         ingestion
+      end
+
+      # For document ingestions, which only have one text section,  we can always update
+      # the single text section rather than create a new one.
+      it "updates the existing text section, regardless of the source identifier" do
+        ingestion_source = FactoryBot.create(:ingestion_source)
+        text_section = FactoryBot.create(
+          :text_section,
+          text: text,
+          ingestion_source: ingestion_source,
+          source_identifier: ingestion_source.source_identifier
+        )
+        expect do
+          described_class.run ingestion: ingestion
+        end.to change { text_section.reload.updated_at }
+      end
+
+      it "Creates a new text section if a text section does not exist" do
+        expect do
+          described_class.run ingestion: ingestion
+        end.to change { TextSection.count }.by 1
       end
 
       describe "a successful reingestion" do

@@ -70,6 +70,10 @@ class Ingestion < ApplicationRecord
     valid?
   end
 
+  def reingest?
+    text.present?
+  end
+
   def strategy_label
     return nil if strategy.blank?
 

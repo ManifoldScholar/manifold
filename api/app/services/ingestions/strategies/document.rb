@@ -2,9 +2,13 @@ module Ingestions
   module Strategies
     class Document < Ingestions::Strategies::AbstractStrategy
 
+      delegate :text, to: :ingestion, prefix: :existing
+      delegate :text_sections, to: :existing_text, prefix: :existing, allow_nil: true
+      delegate :reingest?, to: :ingestion
+
       def perform
         preprocess
-
+        maybe_fix_legacy_source_identifiers!
         manifest
       end
 
@@ -79,12 +83,16 @@ module Ingestions
 
       def text_section
         {
-          source_identifier: Digest::MD5.hexdigest(inspector.basename),
+          source_identifier: text_section_source_identifier,
           name: inspector.title,
           kind: ::TextSection::KIND_SECTION,
           position: 1,
           build: build
         }
+      end
+
+      def text_section_source_identifier
+        Digest::MD5.hexdigest(inspector.basename)
       end
 
       def creators
@@ -102,6 +110,36 @@ module Ingestions
           }
         end
       end
+
+      # Prior to V1, we used a different method for calculating the source_identifier.
+      # When ingestion was refactored, we ended up with a stable source identifier for all
+      # document ingestions. This poses a problem when a reingestion happens on a text
+      # that was ingested prior to v1.
+      #
+      # If the following conditions are true, this method will make a quick update to the
+      # existing text_section and associated ingestion_source so that their identifiers
+      # match those of the new ingestion. Once the identifiers match, the compiler will
+      # trigger an update instead of an insert + delete. Conditions that must be met are
+      # as follows:
+      #
+      # 1. We're reingesting, not ingesting
+      # 2. The text being updated exists and has one text section that is KIND_SECTION
+      # 3. None of the text's text sections have the correct source identifier
+      #
+      # rubocop:disable Metrics/AbcSize
+      def maybe_fix_legacy_source_identifiers!
+        return unless reingest?
+
+        return unless existing_text.present? && existing_text_sections.count == 1
+        return if existing_text_sections.where(source_identifier: text_section_source_identifier).any?
+
+        existing_text_section = existing_text_sections.find_by(text: existing_text, kind: ::TextSection::KIND_SECTION)
+        [existing_text_section, existing_text_section.ingestion_source].each do |resource|
+          resource.update_column(:source_identifier, text_section_source_identifier)
+        end
+      end
+      # rubocop:enable Metrics/AbcSize
+
     end
   end
 end
