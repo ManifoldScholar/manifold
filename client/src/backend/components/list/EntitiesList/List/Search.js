@@ -33,10 +33,15 @@ export default class ListEntitiesListSearch extends PureComponent {
     this.searchInput = React.createRef();
   }
 
+  componentDidMount() {
+    if (!has(this.props, "values.keyword")) return;
+    this.updateKeywordFromProps();
+  }
+
   componentDidUpdate(prevProps) {
-    if (has(prevProps, "values.keyword")) {
+    if (has(prevProps, "values.keyword") || has(this.props, "values.keyword")) {
       if (prevProps.values.keyword !== this.props.values.keyword) {
-        this.setState({ keyword: this.props.values.keyword });
+        this.updateKeywordFromProps();
       }
     }
   }
@@ -93,6 +98,10 @@ export default class ListEntitiesListSearch extends PureComponent {
 
   get idPrefix() {
     return "list-search";
+  }
+
+  updateKeywordFromProps() {
+    this.setState({ keyword: this.props.values.keyword });
   }
 
   setKeywordState(event) {
