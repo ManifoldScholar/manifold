@@ -26,11 +26,19 @@ module ApiDocs
           restrictions: Types::String,
           rights_holder: Types::String,
           original_publication_date: Types::DateTime
-        }
+        }.freeze
+
+        REQUEST_ATTRIBUTES = {
+          remove_cover: Types::Bool
+        }.freeze
 
         class << self
 
           include ApiDocs::Definitions::Resource
+
+          def create_attributes
+            request_attributes.except(:remove_cover)
+          end
 
         end
       end

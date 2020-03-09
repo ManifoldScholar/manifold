@@ -100,10 +100,6 @@ class SerializerRegistry
     @active
   end
 
-  def activated?
-    @active
-  end
-
   private
 
   def filter_to_types(values)
