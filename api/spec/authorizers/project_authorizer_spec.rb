@@ -1,96 +1,113 @@
-require 'rails_helper'
+require "rails_helper"
 
 shared_examples_for "authorized to manage project children" do
   context "the subject's project child abilities" do
-    it("the subject CAN manage project resources"){ expect(object.resources_manageable_by?(subject)).to be true }
-    it("the subject CAN create project resources"){ expect(object.resources_creatable_by?(subject)).to be true }
-    it("the subject CAN manage project resource collections"){ expect(object.resource_collections_manageable_by?(subject)).to be true }
-    it("the subject CAN create project resource collections"){ expect(object.resource_collections_creatable_by?(subject)).to be true }
-    it("the subject CAN manage project texts"){ expect(object.texts_manageable_by?(subject)).to be true }
-    it("the subject CAN create project texts"){ expect(object.texts_creatable_by?(subject)).to be true }
-    it("the subject CAN manage project twitter queries"){ expect(object.twitter_queries_manageable_by?(subject)).to be true }
-    it("the subject CAN create project twitter queries"){ expect(object.twitter_queries_creatable_by?(subject)).to be true }
-    it("the subject CAN manage project events"){ expect(object.events_manageable_by?(subject)).to be true }
-    it("the subject CAN create project events"){ expect(object.events_creatable_by?(subject)).to be true }
-    it("the subject CAN manage project makers"){ expect(object.makers_updatable_by?(subject)).to be true }
-    it("the subject CAN read project log entries"){ expect(object.log_readable_by?(subject)).to be true }
+    it("the subject CAN manage project resources") { expect(object.resources_manageable_by?(subject)).to be true }
+    it("the subject CAN create project resources") { expect(object.resources_creatable_by?(subject)).to be true }
+    it("the subject CAN manage project resource collections") { expect(object.resource_collections_manageable_by?(subject)).to be true }
+    it("the subject CAN create project resource collections") { expect(object.resource_collections_creatable_by?(subject)).to be true }
+    it("the subject CAN manage project texts") { expect(object.texts_manageable_by?(subject)).to be true }
+    it("the subject CAN create project texts") { expect(object.texts_creatable_by?(subject)).to be true }
+    it("the subject CAN manage project twitter queries") { expect(object.twitter_queries_manageable_by?(subject)).to be true }
+    it("the subject CAN create project twitter queries") { expect(object.twitter_queries_creatable_by?(subject)).to be true }
+    it("the subject CAN manage project events") { expect(object.events_manageable_by?(subject)).to be true }
+    it("the subject CAN create project events") { expect(object.events_creatable_by?(subject)).to be true }
+    it("the subject CAN manage project makers") { expect(object.makers_updatable_by?(subject)).to be true }
+    it("the subject CAN read project log entries") { expect(object.log_readable_by?(subject)).to be true }
   end
 end
 
 shared_examples_for "unauthorized to manage project children" do
   context "the subject's project child abilities" do
-    it("the subject CAN'T manage project resources"){ expect(object.resources_manageable_by?(subject)).to be false }
-    it("the subject CAN'T create project resources"){ expect(object.resources_creatable_by?(subject)).to be false }
-    it("the subject CAN'T manage project resource collections"){ expect(object.resource_collections_manageable_by?(subject)).to be false }
-    it("the subject CAN'T create project resource collections"){ expect(object.resource_collections_creatable_by?(subject)).to be false }
-    it("the subject CAN'T manage project texts"){ expect(object.texts_manageable_by?(subject)).to be false }
-    it("the subject CAN'T create project texts"){ expect(object.texts_creatable_by?(subject)).to be false }
-    it("the subject CAN'T manage project twitter queries"){ expect(object.twitter_queries_manageable_by?(subject)).to be false }
-    it("the subject CAN'T create project twitter queries"){ expect(object.twitter_queries_creatable_by?(subject)).to be false }
-    it("the subject CAN'T manage project events"){ expect(object.events_manageable_by?(subject)).to be false }
-    it("the subject CAN'T create project events"){ expect(object.events_creatable_by?(subject)).to be false }
-    it("the subject CAN'T manage project makers"){ expect(object.makers_updatable_by?(subject)).to be false }
-    it("the subject CAN'T read project log entries"){ expect(object.log_readable_by?(subject)).to be false }
+    it("the subject CAN'T manage project resources") { expect(object.resources_manageable_by?(subject)).to be false }
+    it("the subject CAN'T create project resources") { expect(object.resources_creatable_by?(subject)).to be false }
+    it("the subject CAN'T manage project resource collections") { expect(object.resource_collections_manageable_by?(subject)).to be false }
+    it("the subject CAN'T create project resource collections") { expect(object.resource_collections_creatable_by?(subject)).to be false }
+    it("the subject CAN'T manage project texts") { expect(object.texts_manageable_by?(subject)).to be false }
+    it("the subject CAN'T create project texts") { expect(object.texts_creatable_by?(subject)).to be false }
+    it("the subject CAN'T manage project twitter queries") { expect(object.twitter_queries_manageable_by?(subject)).to be false }
+    it("the subject CAN'T create project twitter queries") { expect(object.twitter_queries_creatable_by?(subject)).to be false }
+    it("the subject CAN'T manage project events") { expect(object.events_manageable_by?(subject)).to be false }
+    it("the subject CAN'T create project events") { expect(object.events_creatable_by?(subject)).to be false }
+    it("the subject CAN'T manage project makers") { expect(object.makers_updatable_by?(subject)).to be false }
+    it("the subject CAN'T read project log entries") { expect(object.log_readable_by?(subject)).to be false }
   end
 end
 
+shared_examples_for "authorized to manage project exportations" do
+  context "the subject's project exportations" do
+    it("the subject CAN manage project exportations") { expect(object.project_exportations_manageable_by?(subject)).to be true }
+    it("the subject CAN create project exportations") { expect(object.project_exportations_creatable_by?(subject)).to be true }
+  end
+end
+
+shared_examples_for "unauthorized to manage project exportations" do
+  context "the subject's project exportations" do
+    it("the subject CAN manage project exportations") { expect(object.project_exportations_manageable_by?(subject)).to be false }
+    it("the subject CAN create project exportations") { expect(object.project_exportations_creatable_by?(subject)).to be false }
+  end
+end
 
 shared_examples_for "authorized to manage project permissions" do
   context "the subject's project permissions" do
-    it("the subject CAN manage project permissions"){ expect(object.permissions_manageable_by?(subject)).to be true }
-    it("the subject CAN create project permissions"){ expect(object.permissions_creatable_by?(subject)).to be true }
+    it("the subject CAN manage project permissions") { expect(object.permissions_manageable_by?(subject)).to be true }
+    it("the subject CAN create project permissions") { expect(object.permissions_creatable_by?(subject)).to be true }
   end
 end
 
 shared_examples_for "unauthorized to manage project permissions" do
   context "the subject's project permissions" do
-    it("the subject CAN'T manage project permissions"){ expect(object.permissions_manageable_by?(subject)).to be false }
-    it("the subject CAN'T create project permissions"){ expect(object.permissions_creatable_by?(subject)).to be false }
+    it("the subject CAN'T manage project permissions") { expect(object.permissions_manageable_by?(subject)).to be false }
+    it("the subject CAN'T create project permissions") { expect(object.permissions_creatable_by?(subject)).to be false }
   end
 end
 
 RSpec.describe "Project Abilities", :authorizer do
   include TestHelpers::AuthorizationHelpers
 
-  context 'when unauthenticated' do
-    context 'when draft' do
+  context "when unauthenticated" do
+    context "when draft" do
       let(:subject) { anonymous_user }
       let(:object) { FactoryBot.create(:project, draft: true) }
 
       the_subject_behaves_like "instance abilities", Project, none: true
       the_subject_behaves_like "unauthorized to manage project children"
       the_subject_behaves_like "unauthorized to manage project permissions"
+      the_subject_behaves_like "unauthorized to manage project exportations"
     end
 
-    context 'when not draft' do
+    context "when not draft" do
       let(:subject) { anonymous_user }
       let(:object) { FactoryBot.create(:project) }
 
       the_subject_behaves_like "instance abilities", Project, read_only: true
       the_subject_behaves_like "unauthorized to manage project children"
       the_subject_behaves_like "unauthorized to manage project permissions"
+      the_subject_behaves_like "unauthorized to manage project exportations"
     end
   end
 
-  context 'when the subject is an admin and the project is a draft' do
+  context "when the subject is an admin and the project is a draft" do
     let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
     let(:object) { FactoryBot.create(:project, draft: true) }
 
     the_subject_behaves_like "instance abilities", Project, all: true
     the_subject_behaves_like "authorized to manage project children"
     the_subject_behaves_like "authorized to manage project permissions"
+    the_subject_behaves_like "authorized to manage project exportations"
   end
 
-  context 'when the subject is an editor and the project is a draft' do
+  context "when the subject is an editor and the project is a draft" do
     let(:subject) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
     let(:object) { FactoryBot.create(:project, draft: true) }
 
     the_subject_behaves_like "instance abilities", Project, all: true
     the_subject_behaves_like "authorized to manage project children"
     the_subject_behaves_like "authorized to manage project permissions"
+    the_subject_behaves_like "authorized to manage project exportations"
   end
 
-  context 'when the subject is a project_creator and the project is a draft' do
+  context "when the subject is a project_creator and the project is a draft" do
     let(:subject) { FactoryBot.create(:user, role: Role::ROLE_PROJECT_CREATOR) }
     let(:object) { FactoryBot.create(:project, draft: true) }
 
@@ -98,9 +115,10 @@ RSpec.describe "Project Abilities", :authorizer do
     the_subject_behaves_like "instance abilities", Project, abilities
     the_subject_behaves_like "unauthorized to manage project children"
     the_subject_behaves_like "unauthorized to manage project permissions"
+    the_subject_behaves_like "unauthorized to manage project exportations"
   end
 
-  context 'when the subject is a marketeer and the project is a draft' do
+  context "when the subject is a marketeer and the project is a draft" do
     let(:subject) { FactoryBot.create(:user, role: Role::ROLE_MARKETEER) }
     let(:object) { FactoryBot.create(:project, draft: true) }
 
@@ -108,9 +126,10 @@ RSpec.describe "Project Abilities", :authorizer do
     the_subject_behaves_like "instance abilities", Project, abilities
     the_subject_behaves_like "authorized to manage project children"
     the_subject_behaves_like "unauthorized to manage project permissions"
+    the_subject_behaves_like "unauthorized to manage project exportations"
   end
 
-  context 'when the subject is a reader and project_editor of a draft project' do
+  context "when the subject is a reader and project_editor of a draft project" do
     before(:each) do
       @project_editor = FactoryBot.create(:user)
       @project = FactoryBot.create(:project, draft: true)
@@ -123,9 +142,10 @@ RSpec.describe "Project Abilities", :authorizer do
     the_subject_behaves_like "instance abilities", Project, abilities
     the_subject_behaves_like "authorized to manage project children"
     the_subject_behaves_like "unauthorized to manage project permissions"
+    the_subject_behaves_like "unauthorized to manage project exportations"
   end
 
-  context 'when the subject is a reader and project_resource_editor of the project' do
+  context "when the subject is a reader and project_resource_editor of the project" do
     before(:each) do
       @metadata_editor = FactoryBot.create(:user)
       @project = FactoryBot.create(:project, draft: true)
@@ -136,23 +156,24 @@ RSpec.describe "Project Abilities", :authorizer do
 
     the_subject_behaves_like "instance abilities", Project, read_only: true
     context "the subject's project child abilities" do
-      it("the subject CAN manage project resources"){ expect(object.resources_manageable_by?(subject)).to be true }
-      it("the subject CAN'T create project resources"){ expect(object.resources_creatable_by?(subject)).to be false }
-      it("the subject CAN'T manage project resource collections"){ expect(object.resource_collections_manageable_by?(subject)).to be false }
-      it("the subject CAN'T create project resource collections"){ expect(object.resource_collections_creatable_by?(subject)).to be false }
-      it("the subject CAN'T manage project texts"){ expect(object.texts_manageable_by?(subject)).to be false }
-      it("the subject CAN'T create project texts"){ expect(object.texts_creatable_by?(subject)).to be false }
-      it("the subject CAN'T manage project twitter queries"){ expect(object.twitter_queries_manageable_by?(subject)).to be false }
-      it("the subject CAN'T create project twitter queries"){ expect(object.twitter_queries_creatable_by?(subject)).to be false }
-      it("the subject CAN'T manage project events"){ expect(object.events_manageable_by?(subject)).to be false }
-      it("the subject CAN'T create project events"){ expect(object.events_creatable_by?(subject)).to be false }
-      it("the subject CAN'T manage project makers"){ expect(object.makers_updatable_by?(subject)).to be false }
-      it("the subject CAN'T read project log entries"){ expect(object.log_readable_by?(subject)).to be false }
+      it("the subject CAN manage project resources") { expect(object.resources_manageable_by?(subject)).to be true }
+      it("the subject CAN'T create project resources") { expect(object.resources_creatable_by?(subject)).to be false }
+      it("the subject CAN'T manage project resource collections") { expect(object.resource_collections_manageable_by?(subject)).to be false }
+      it("the subject CAN'T create project resource collections") { expect(object.resource_collections_creatable_by?(subject)).to be false }
+      it("the subject CAN'T manage project texts") { expect(object.texts_manageable_by?(subject)).to be false }
+      it("the subject CAN'T create project texts") { expect(object.texts_creatable_by?(subject)).to be false }
+      it("the subject CAN'T manage project twitter queries") { expect(object.twitter_queries_manageable_by?(subject)).to be false }
+      it("the subject CAN'T create project twitter queries") { expect(object.twitter_queries_creatable_by?(subject)).to be false }
+      it("the subject CAN'T manage project events") { expect(object.events_manageable_by?(subject)).to be false }
+      it("the subject CAN'T create project events") { expect(object.events_creatable_by?(subject)).to be false }
+      it("the subject CAN'T manage project makers") { expect(object.makers_updatable_by?(subject)).to be false }
+      it("the subject CAN'T read project log entries") { expect(object.log_readable_by?(subject)).to be false }
     end
     the_subject_behaves_like "unauthorized to manage project permissions"
+    the_subject_behaves_like "unauthorized to manage project exportations"
   end
 
-  context 'when the subject is a reader and project_author of the project' do
+  context "when the subject is a reader and project_author of the project" do
     before(:each) do
       @author = FactoryBot.create(:user)
       @project = FactoryBot.create(:project, draft: false)
@@ -164,9 +185,10 @@ RSpec.describe "Project Abilities", :authorizer do
     the_subject_behaves_like "instance abilities", Project, read_only: true
     the_subject_behaves_like "unauthorized to manage project children"
     the_subject_behaves_like "unauthorized to manage project permissions"
+    the_subject_behaves_like "unauthorized to manage project exportations"
   end
 
-  context 'when the subject is a reader and project_author of a draft project' do
+  context "when the subject is a reader and project_author of a draft project" do
     before(:each) do
       @author = FactoryBot.create(:user)
       @project = FactoryBot.create(:project, draft: true)
@@ -178,24 +200,26 @@ RSpec.describe "Project Abilities", :authorizer do
     the_subject_behaves_like "instance abilities", Project, none: true
     the_subject_behaves_like "unauthorized to manage project children"
     the_subject_behaves_like "unauthorized to manage project permissions"
+    the_subject_behaves_like "unauthorized to manage project exportations"
   end
 
-  context 'when the subject is a reader' do
+  context "when the subject is a reader" do
     let(:subject) { FactoryBot.create(:user) }
     let(:object) { FactoryBot.create(:project, draft: false) }
 
     the_subject_behaves_like "instance abilities", Project, read_only: true
     the_subject_behaves_like "unauthorized to manage project children"
     the_subject_behaves_like "unauthorized to manage project permissions"
+    the_subject_behaves_like "unauthorized to manage project exportations"
   end
 
-  context 'when the subject is a reader and the project is a draft' do
+  context "when the subject is a reader and the project is a draft" do
     let(:subject) { FactoryBot.create(:user) }
     let(:object) { FactoryBot.create(:project, draft: true) }
 
     the_subject_behaves_like "instance abilities", Project, none: true
     the_subject_behaves_like "unauthorized to manage project children"
     the_subject_behaves_like "unauthorized to manage project permissions"
+    the_subject_behaves_like "unauthorized to manage project exportations"
   end
-  
 end
