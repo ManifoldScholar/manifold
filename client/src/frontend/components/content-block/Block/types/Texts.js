@@ -37,9 +37,16 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
   }
 
   get uncategorizedTexts() {
-    return this.texts.filter(
+    return this.filteredOrderedTexts(
       text => !text.relationships || !text.relationships.category
     );
+  }
+
+  filteredOrderedTexts(filter) {
+    const texts = this.texts.filter(filter).sort((textA, textB) => {
+      return textB.attributes.position > textA.attributes.position ? -1 : 1;
+    });
+    return texts;
   }
 
   get visibility() {
@@ -55,11 +62,10 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
   }
 
   textsForCategory(category) {
-    const texts = this.texts.filter(text => {
+    return this.filteredOrderedTexts(text => {
       if (!text.relationships || !text.relationships.category) return false;
       return text.relationships.category.id === category.id;
     });
-    return texts;
   }
 
   render() {
