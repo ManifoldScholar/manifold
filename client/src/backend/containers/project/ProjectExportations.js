@@ -143,10 +143,10 @@ export class ProjecExportations extends PureComponent {
             {this.hasExportTargets && (
               <div className="instructional-copy">
                 Manifold makes it possible to export a preservation copy of your
-                project to an exeternal export target. To start an export,
-                select one of the configured targets below and press the button.
-                The export will happen in the background and can take a few
-                minutes to complete.
+                project to an external export target. To start an export, select
+                one of the configured targets below and press the button. The
+                export will happen in the background and can take a few minutes
+                to complete.
               </div>
             )}
             {!this.hasExportTargets && (
