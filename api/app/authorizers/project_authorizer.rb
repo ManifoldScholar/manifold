@@ -48,6 +48,14 @@ class ProjectAuthorizer < ApplicationAuthorizer
   alias makers_updatable_by? updatable_by?
   alias log_readable_by? updatable_by?
 
+  def project_administered_by?(user, _options = {})
+    creator_or_has_editor_permissions?(user, resource)
+  end
+  alias project_exportations_manageable_by? project_administered_by?
+  alias project_exportations_creatable_by? project_administered_by?
+  alias permissions_creatable_by? project_administered_by?
+  alias permissions_manageable_by? project_administered_by?
+
   # Admins, editors, and project-specific editors can delete those projects.
   def deletable_by?(user, _options = {})
     editor_permissions?(user) ||
@@ -72,11 +80,6 @@ class ProjectAuthorizer < ApplicationAuthorizer
     updatable_by?(user) ||
       user.project_resource_editor_of?(resource)
   end
-
-  def permissions_manageable_by?(user, _options = {})
-    creator_or_has_editor_permissions?(user, resource)
-  end
-  alias permissions_creatable_by? permissions_manageable_by?
 
   # Can the user manage or create any of the entities
   # on the project social integrations tab?
