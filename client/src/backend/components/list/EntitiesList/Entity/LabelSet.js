@@ -30,7 +30,8 @@ export default class EntitiesListRow extends PureComponent {
 
   labelText(label) {
     if (isString(label)) return label;
-    return label.text;
+    if (has(label, "text")) return label.text;
+    return label;
   }
 
   /* eslint-disable react/no-array-index-key */
