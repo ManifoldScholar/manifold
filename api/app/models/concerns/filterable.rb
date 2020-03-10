@@ -49,7 +49,7 @@ module Filterable
     def validate_paginated_results(params, results)
       return results unless exceeds_total_pages? results
 
-      filter params.merge(page: results.total_pages), scope: results
+      filtered params.merge(page: results.total_pages), scope: results
     end
 
     def paginated?(results)
