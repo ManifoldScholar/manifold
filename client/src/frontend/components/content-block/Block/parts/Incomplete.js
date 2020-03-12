@@ -33,7 +33,7 @@ export default class ProjectContentBlockIncomplete extends PureComponent {
       })
       .filter(Boolean);
     if (errors.length > 0) return errors;
-    return [this.defaultError];
+    return this.defaultError;
   }
 
   get defaultError() {
@@ -138,7 +138,7 @@ export default class ProjectContentBlockIncomplete extends PureComponent {
             This content block needs your attention before it can be displayed.
           </span>
           <span className="entity-section-wrapper__link-container">
-            {this.presentBlockErrors.map(error => error)}
+            {this.presentBlockErrors}
             <span className="entity-section-wrapper__body--warning">
               Note: This message is only visible to project editors.
             </span>
