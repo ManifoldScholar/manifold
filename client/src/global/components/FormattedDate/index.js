@@ -25,15 +25,23 @@ export default class FormattedDate extends Component {
   }
 
   get dateTime() {
-    return format(this.date, "yyyy-MM-dd");
+    try {
+      return format(this.date, "yyyy-MM-dd");
+    } catch {
+      return "";
+    }
   }
 
   formatDate(date) {
     if (!date) return;
-    if (this.props.format === "distanceInWords")
-      return formatDistance(this.date, Date.now());
-    const outFormat = this.props.format ? this.props.format : "MMMM dd, yyyy";
-    return format(this.date, outFormat);
+    try {
+      if (this.props.format === "distanceInWords")
+        return formatDistance(this.date, Date.now());
+      const outFormat = this.props.format ? this.props.format : "MMMM dd, yyyy";
+      return format(this.date, outFormat);
+    } catch {
+      return "";
+    }
   }
 
   formatString(date) {

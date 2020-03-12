@@ -6,6 +6,7 @@ import abilities from "./structures/abilities";
 import authentication from "./structures/authentication";
 import classAbilities from "./structures/class-abilities";
 import metadata from "./structures/metadata";
+import imageStyles from "./structures/image-styles";
 import pagination from "./structures/pagination";
 import route from "./structures/route";
 
@@ -19,6 +20,7 @@ export default {
   authentication,
   classAbilities,
   metadata,
+  imageStyles,
   pagination,
   route
 };

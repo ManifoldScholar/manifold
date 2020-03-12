@@ -1,5 +1,5 @@
 import React from "react";
-import { build, storiesOf } from "helpers/storybook/exports";
+import { storiesOf, fixtures } from "helpers/storybook/exports";
 import EntityRow from "backend/components/list/EntitiesList/Entity/Row";
 import EntitiesList, {
   Button,
@@ -19,27 +19,30 @@ import EntitiesList, {
 } from "backend/components/list/EntitiesList";
 import { text } from "@storybook/addon-knobs";
 
-const users = build.arrayOf.users(8);
-const makers = build.arrayOf.makers(8);
-const projects = build.arrayOf.projects(6);
-const features = build.arrayOf.type("features", 6);
-const pages = build.arrayOf.type("pages", 6);
-const events = build.arrayOf.type("events", 6);
-const resourceCollections = build.arrayOf.resourceCollections(6);
-const resources = build.arrayOf.resources(6);
-const twitterQueries = build.arrayOf.type("twitterQueries", 6);
-const subjects = build.arrayOf.type("subjects", 6);
-const permissions = build.arrayOf.permissions(6);
-const versions = build.arrayOf.type("versions", 6);
+const users = fixtures.collectionFactory("user", 8);
+const makers = fixtures.collectionFactory("maker", 8);
+const projects = fixtures.collectionFactory("project", 6);
+const features = fixtures.collectionFactory("feature", 6);
+const pages = fixtures.collectionFactory("page", 6);
+const events = fixtures.collectionFactory("event", 6);
+const resourceCollections = fixtures.collectionFactory("resourceCollection", 6);
+const resources = fixtures.collectionFactory("resource", 6);
+const twitterQueries = fixtures.collectionFactory("twitterQuery", 6);
+const subjects = fixtures.collectionFactory("subject", 6);
+const permissions = fixtures.collectionFactory(
+  "permission",
+  6,
+  (type, index) => ({
+    id: `${type}-${index}`,
+    relationships: {
+      user: fixtures.factory("user"),
+      resource: fixtures.factory("project")
+    }
+  })
+);
+const versions = fixtures.collectionFactory("version", 6);
+const pagination = fixtures.pagination();
 
-const pagination = {
-  perPage: 20,
-  currentPage: 3,
-  nextPage: 2,
-  prevPage: 0,
-  totalPages: 10,
-  totalCount: 32
-};
 const fourFilters = [
   {
     label: "Published State",

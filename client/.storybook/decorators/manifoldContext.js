@@ -2,11 +2,11 @@ import { makeDecorator } from "@storybook/addons";
 import Wrappers from "../wrappers";
 import React from "react";
 import Provider from "react-redux/es/components/Provider";
-import build from "test/fixtures/build";
+import fixtures from "test/fixtures";
 import storyRouter from "storybook-react-router";
 import startsWith from "lodash/startsWith";
 
-const store = build.store();
+const store = fixtures.createStore();
 const routeDecorator = storyRouter();
 
 export default makeDecorator({

@@ -6,7 +6,7 @@ import lh from "helpers/linkHandler";
 import humps from "humps";
 import EntityRow from "./Row";
 
-export default class EventRow extends PureComponent {
+export default class LogRow extends PureComponent {
   static displayName = "EntitiesList.Entity.LogRow";
 
   static propTypes = {

@@ -3,6 +3,7 @@ import metadata from "./metadata";
 import abilities from "./abilities";
 import classAbilities from "./class-abilities";
 import authentication from "./authentication";
+import imageStyles from "./image-styles";
 import route from "./route";
 
 export default {
@@ -11,5 +12,6 @@ export default {
   abilities,
   classAbilities,
   authentication,
+  imageStyles,
   route
 };

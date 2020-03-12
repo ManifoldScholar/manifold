@@ -1,13 +1,15 @@
 import React from "react";
-import { build, storiesOf } from "helpers/storybook/exports";
+import { storiesOf, fixtures } from "helpers/storybook/exports";
 import Annotation from "global/components/Annotation";
+
+const annotations = fixtures.collectionFactory("annotation", 8);
 
 storiesOf("Global/Annotation/List", module)
   .add("Default", () => {
     return (
       <div style={{ backgroundColor: "white" }}>
         <Annotation.List.Default
-          annotations={build.arrayOf.annotations(8, true)}
+          annotations={annotations}
           dispatch={() => console.log("dispatched")}
         />
       </div>
@@ -17,7 +19,7 @@ storiesOf("Global/Annotation/List", module)
     return (
       <div style={{ backgroundColor: "white" }}>
         <Annotation.List.GroupedBySelection
-          annotations={build.arrayOf.annotations(8, false)}
+          annotations={annotations}
           saveAnnotation={() => console.log("annotation saved")}
           loginHandler={() => console.log("login triggered")}
           dispatch={() => console.log("dispatched")}
@@ -33,12 +35,12 @@ storiesOf("Global/Annotation/List", module)
             {
               name: "A Section",
               sectionId: "111",
-              annotations: build.arrayOf.annotations(4, true)
+              annotations
             },
             {
               name: "Another Section",
               sectionId: "222",
-              annotations: build.arrayOf.annotations(4, true)
+              annotations
             }
           ]}
           saveAnnotation={() => console.log("annotation saved")}

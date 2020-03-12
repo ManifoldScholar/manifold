@@ -4,7 +4,7 @@ import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 
-export default class EventRow extends PureComponent {
+export default class PageRow extends PureComponent {
   static displayName = "EntitiesList.Entity.PageRow";
 
   static propTypes = {

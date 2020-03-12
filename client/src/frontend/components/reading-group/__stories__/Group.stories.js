@@ -1,5 +1,5 @@
-import { build, storiesOf } from "helpers/storybook/exports";
 import React from "react";
+import { storiesOf, fixtures } from "helpers/storybook/exports";
 import GroupsTable from "../Table/Groups";
 import MembersTable from "../Table/Members";
 import JoinBox from "../JoinBox";
@@ -7,19 +7,25 @@ import Heading from "../Heading";
 import GroupSummaryBox from "../GroupSummaryBox";
 import NoteFilter from "../NoteFilter";
 
-const groups = build.arrayOf.readingGroups(8);
-const members = build.arrayOf.readingGroupMemberships(8);
-const projects = build.arrayOf.projects(8);
-const makers = build.arrayOf.makers(8);
-const pagination = {
-  perPage: 8,
-  currentPage: 3,
-  nextPage: 2,
-  prevPage: 0,
-  totalPages: 10,
-  totalCount: 32
-};
-const group = groups[0];
+const groups = fixtures.collectionFactory("readingGroup", 8);
+const user = fixtures.factory("user");
+const members = fixtures.collectionFactory(
+  "readingGroupMembership",
+  8,
+  (type, index) => ({
+    id: `${type}-${index}`,
+    relationships: { readingGroup: groups[0], user }
+  })
+);
+
+const group = fixtures.factory("readingGroup", {
+  relationships: {
+    texts: fixtures.collectionFactory("text"),
+    readingGroupMemberships: members
+  }
+});
+
+const pagination = fixtures.pagination();
 
 storiesOf("Frontend/ReadingGroup", module)
   .add("Tables/Group", () => {
@@ -66,7 +72,5 @@ storiesOf("Frontend/ReadingGroup", module)
     return <GroupSummaryBox readingGroup={group} />;
   })
   .add("Note Filter", () => {
-    return (
-      <NoteFilter projects={projects} makers={makers} pagination={pagination} />
-    );
+    return <NoteFilter readingGroup={group} pagination={pagination} />;
   });
