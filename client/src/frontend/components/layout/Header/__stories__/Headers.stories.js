@@ -1,6 +1,6 @@
 import React from "react";
 import { boolean } from "@storybook/addon-knobs";
-import { build, storiesOf, entity } from "helpers/storybook/exports";
+import { storiesOf, fixtures } from "helpers/storybook/exports";
 import PressHeader from "../PressHeader";
 import LibraryHeader from "../LibraryHeader";
 import StandaloneHeader from "../StandaloneHeader";
@@ -61,7 +61,7 @@ const projectFactory = (
       medium: bookCover
     };
   }
-  return build.entity.project(null, attributes, relationships);
+  return fixtures.factory("project", { attributes, relationships });
 };
 
 const contextFactory = project =>
@@ -77,7 +77,7 @@ const contextFactory = project =>
   });
 
 const adjustSettings = (dispatch, showPressHeader) => {
-  const settings = entity.settings("0");
+  const settings = fixtures.factory("settings");
   const baseTheme = settings.attributes.theme;
   settings.meta = { partial: false };
 

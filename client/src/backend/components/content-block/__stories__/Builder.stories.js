@@ -1,11 +1,10 @@
 import React from "react";
-import { build, storiesOf } from "helpers/storybook/exports";
+import { storiesOf, fixtures } from "helpers/storybook/exports";
 import Builder from "../Builder";
 import { setCurrentUser } from "actions/currentUser";
 
-const project = build.entity.project();
-const admin = build.entity.user();
-
+const project = fixtures.factory("project");
+const admin = fixtures.factory("user");
 const contentBlocks = [
   "Content::MarkdownBlock",
   "Content::MetadataBlock",
@@ -14,20 +13,20 @@ const contentBlocks = [
   "Content::TableOfContentsBlock",
   "Content::TextsBlock"
 ].map((t, i) =>
-  build.entity.contentBlock(
-    null,
-    {
-      position: i,
-      type: t,
-      abilities: {
-        update: true,
-        delete: true
+  fixtures.factory("contentBlock", {
+    id: i,
+    attributes: {
+      attributes: {
+        position: i,
+        type: t,
+        abilities: {
+          update: true,
+          delete: true
+        }
       }
-    },
-    { project }
-  )
+    }
+  })
 );
-
 const history = { push: () => {} };
 const fakeDispatch = reqIgnored => {
   return Promise.reject;

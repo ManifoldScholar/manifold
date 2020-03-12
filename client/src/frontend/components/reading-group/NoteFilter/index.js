@@ -8,7 +8,8 @@ import omitBy from "lodash/omitBy";
 
 export default class SelectFilter extends React.PureComponent {
   static propTypes = {
-    readingGroup: PropTypes.object.isRequired
+    readingGroup: PropTypes.object.isRequired,
+    pagination: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -90,13 +91,17 @@ export default class SelectFilter extends React.PureComponent {
                 Notes filters
               </p>
               <Filter
-                value={this.state.filter.title}
+                value={this.state.filter ? this.state.filter.title : undefined}
                 onChange={this.updateTextFilter}
                 label={"All Texts"}
                 options={this.titles}
               />
               <Filter
-                value={this.state.filter.readingGroupMembership}
+                value={
+                  this.state.filter
+                    ? this.state.filter.readingGroupMembership
+                    : undefined
+                }
                 onChange={this.updateMemberFilter}
                 label={"All Members"}
                 options={this.members}

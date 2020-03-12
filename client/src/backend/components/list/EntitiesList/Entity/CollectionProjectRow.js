@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import ProjectRow from "./ProjectRow";
 
-export default class EventRow extends PureComponent {
-  static displayName = "EntitiesList.Entity.ProjectRow";
+export default class CollectionProjectRow extends PureComponent {
+  static displayName = "EntitiesList.Entity.CollectionProjectRow";
 
   static propTypes = {
     entity: PropTypes.object,

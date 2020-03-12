@@ -4,7 +4,7 @@ import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 
-export default class SubjectRow extends PureComponent {
+export default class UserRow extends PureComponent {
   static displayName = "EntitiesList.Entity.UserRow";
 
   static propTypes = {

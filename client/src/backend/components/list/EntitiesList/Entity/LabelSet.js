@@ -5,7 +5,7 @@ import isPlainObject from "lodash/isPlainObject";
 import has from "lodash/has";
 import classNames from "classnames";
 
-export default class EntitiesListRow extends PureComponent {
+export default class LabelSet extends PureComponent {
   static propTypes = {
     labels: PropTypes.array
   };

@@ -1,5 +1,4 @@
 import { storiesOf } from "@storybook/react";
-import build from "test/fixtures/build";
-import entity from "test/fixtures/entity";
+import fixtures from "test/fixtures";
 
-export { storiesOf, build, entity };
+export { storiesOf, fixtures };

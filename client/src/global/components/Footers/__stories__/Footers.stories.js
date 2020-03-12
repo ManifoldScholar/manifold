@@ -1,16 +1,17 @@
 import React from "react";
-import { build, storiesOf } from "helpers/storybook/exports";
+import { storiesOf, fixtures } from "helpers/storybook/exports";
 import Footers from "../index";
 import logo from "./logo.jpg";
 
-const pages = build.arrayOf.pages(3);
-const text = build.entity.text(null, {
-  metadataFormatted: {
-    rights: "Copyright 2012 by the some press, somewhere."
+const pages = fixtures.collectionFactory("page");
+const text = fixtures.factory("text", {
+  attributes: {
+    metadataFormatted: {
+      rights: "Copyright 2012 by the some press, somewhere."
+    }
   }
 });
-
-const settings = {
+const settings = fixtures.factory("settings", {
   attributes: {
     copyrightFormatted:
       "© 2018 Press Name Goes Here. Vestibulum id ligula porta felis euismod semper.",
@@ -20,9 +21,9 @@ const settings = {
       facebook: "manifoldscholar"
     }
   }
-};
+});
 
-const brandedSettings = {
+const brandedSettings = fixtures.factory("settings", {
   attributes: {
     copyrightFormatted:
       "© 2018 Press Name Goes Here. Vestibulum id ligula porta felis euismod semper.",
@@ -35,7 +36,7 @@ const brandedSettings = {
       facebook: "manifoldscholar"
     }
   }
-};
+});
 
 storiesOf("Global/Footers", module)
   .add("FE Footer", () => {

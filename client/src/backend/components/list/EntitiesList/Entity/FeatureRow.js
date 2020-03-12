@@ -7,7 +7,7 @@ import EntityRow from "./Row";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import Utility from "global/components/utility";
 
-export default class EventRow extends PureComponent {
+export default class FeatureRow extends PureComponent {
   static displayName = "EntitiesList.Entity.FeatureRow";
 
   static propTypes = {

@@ -1,14 +1,13 @@
 import React from "react";
-import { build, storiesOf } from "helpers/storybook/exports";
+import { storiesOf, fixtures } from "helpers/storybook/exports";
 import List from "../List";
 
-const project = build.entity.project();
-const categories = build.arrayOf.type("categories", 3);
+const project = fixtures.factory("project");
+const categories = fixtures.collectionFactory("project");
 const texts = [
-  build.entity.text(null, {}, { category: null }),
-  build.entity.text(null, {}, { category: categories[0] }),
-  build.entity.text(null, {}, { category: categories[2] }),
-  build.entity.text(null, {}, { category: categories[2] })
+  fixtures.factory("text", { relationships: { category: categories[0] } }),
+  fixtures.factory("text", { relationships: { category: categories[1] } }),
+  fixtures.factory("text", { relationships: { category: categories[2] } })
 ];
 
 storiesOf("Backend/Category", module).add("List", () => {
