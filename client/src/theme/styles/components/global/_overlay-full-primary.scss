@@ -109,31 +109,6 @@
     }
   }
 
-  .login-links {
-    margin-top: 25px;
-
-    button {
-      @include buttonUnstyled;
-      @include outlineOnFocusVisible;
-      display: block;
-      font-style: italic;
-      text-decoration: underline;
-
-      + button {
-        margin-top: 14px;
-        margin-left: 0;
-      }
-    }
-
-    a {
-      font-style: italic;
-
-      + a {
-        margin-top: 14px;
-        margin-left: 0;
-      }
-    }
-  }
 
   .login-external {
     margin-top: 45px;

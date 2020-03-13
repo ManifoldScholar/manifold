@@ -29,6 +29,10 @@ export class UpdateFormContainer extends Component {
     mode: PropTypes.string
   };
 
+  static defaultProps = {
+    hideSignInUpOverlay: () => {}
+  };
+
   constructor(props) {
     super(props);
     this.state = this.initialState(props);

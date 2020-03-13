@@ -1,5 +1,11 @@
 .login-page {
+  margin: auto;
+  width: 300px;
+
   .login-form {
+
+    width: 300px;
+
     @include loginFormPrimary;
 
     input[type='text'], input[type='email'], input[type='password'] {
@@ -17,7 +23,7 @@
 
     .button-secondary--dark {
       display: block;
-      width: 300px;
+      width: 100%;
     }
   }
 
@@ -28,6 +34,6 @@
   }
 
   .button-secondary {
-    width: 120px;
+    width: 100%;
   }
 }

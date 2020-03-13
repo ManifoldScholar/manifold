@@ -223,6 +223,13 @@ const routes = {
       helper: () => `/search`
     },
     {
+      name: "frontendLogin",
+      exact: true,
+      component: "Login",
+      path: "/login",
+      helper: () => `/login`
+    },
+    {
       name: "frontendContact",
       exact: true,
       component: "Contact",

@@ -11,6 +11,7 @@ import entityUtils from "utils/entityUtils";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
 import BodyClass from "hoc/body-class";
+import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 
@@ -78,41 +79,54 @@ export class BackendContainer extends PureComponent {
 
   render() {
     return (
-      <BodyClass className={"backend bg-neutral90"}>
-        <>
-          <RedirectToFirstMatch
-            from={lh.link("backend")}
-            candidates={[
-              {
-                label: "Dashboard",
-                route: "backendDashboard"
-              }
-            ]}
-          />
-          <Utility.ScrollToTop />
-          <Layout.Header
-            visibility={this.props.visibility}
-            match={this.props.match}
-            location={this.props.location}
-            authentication={this.props.authentication}
-            commonActions={this.commonActions}
-          />
-          <main
-            ref={mainContainer => {
-              this.mainContainer = mainContainer;
-            }}
-            id="skip-to-main"
-          >
-            {childRoutes(this.props.route, { childProps: this.childProps() })}
-          </main>
-          <Footers.FrontendFooter
-            pages={this.props.pages}
-            authentication={this.props.authentication}
-            commonActions={this.commonActions}
-            settings={this.props.settings}
-          />
-        </>
-      </BodyClass>
+      <Authorize
+        kind={[
+          "admin",
+          "editor",
+          "marketeer",
+          "project_creator",
+          "project_editor",
+          "project_resource_editor"
+        ]}
+        failureRedirect={lh.link("frontendLogin")}
+        failureNotification
+      >
+        <BodyClass className={"backend bg-neutral90"}>
+          <>
+            <RedirectToFirstMatch
+              from={lh.link("backend")}
+              candidates={[
+                {
+                  label: "Dashboard",
+                  route: "backendDashboard"
+                }
+              ]}
+            />
+            <Utility.ScrollToTop />
+            <Layout.Header
+              visibility={this.props.visibility}
+              match={this.props.match}
+              location={this.props.location}
+              authentication={this.props.authentication}
+              commonActions={this.commonActions}
+            />
+            <main
+              ref={mainContainer => {
+                this.mainContainer = mainContainer;
+              }}
+              id="skip-to-main"
+            >
+              {childRoutes(this.props.route, { childProps: this.childProps() })}
+            </main>
+            <Footers.FrontendFooter
+              pages={this.props.pages}
+              authentication={this.props.authentication}
+              commonActions={this.commonActions}
+              settings={this.props.settings}
+            />
+          </>
+        </BodyClass>
+      </Authorize>
     );
   }
 }

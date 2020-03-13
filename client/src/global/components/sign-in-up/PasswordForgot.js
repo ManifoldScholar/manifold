@@ -24,6 +24,10 @@ export class PasswordForgotContainer extends Component {
     response: PropTypes.object
   };
 
+  static defaultProps = {
+    hideSignInUpOverlay: () => {}
+  };
+
   constructor(propsIgnored) {
     super();
     this.state = {
