@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Draggable } from "react-beautiful-dnd";
 import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
+import classNames from "classnames";
 
 export default class Chip extends PureComponent {
   static displayName = "Project.Hero.Builder.ActionCallouts.Chip";
@@ -46,11 +47,14 @@ export default class Chip extends PureComponent {
         key={this.id}
         type="actionCallout"
       >
-        {provided => (
+        {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
             {...provided.draggableProps}
-            className="action-callout-slot__chip"
+            className={classNames({
+              "action-callout-slot__chip": true,
+              "action-callout-slot__chip--is-dragging": snapshot.isDragging
+            })}
           >
             <div className="action-callout-slot__chip-inner">
               <span className="action-callout-slot__chip-title">

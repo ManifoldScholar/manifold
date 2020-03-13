@@ -84,6 +84,10 @@
     letter-spacing: 0.125em;
     background: $neutral95;
     border-radius: 5px;
+
+    .action-callout-slot__chip--is-dragging & {
+      @include dragging;
+    }
   }
 
   &__chip-title {
