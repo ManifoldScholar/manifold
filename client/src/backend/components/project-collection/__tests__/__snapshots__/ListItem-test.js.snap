@@ -3,42 +3,50 @@
 exports[`backend/components/project-collection/ListItem matches the snapshot 1`] = `
 <li
   className="project-collection-list-item"
-  onClick={[Function]}
 >
-  <span
-    className="project-collection-list-item__item-text"
-  >
-    A Project Collection
-  </span>
   <div
-    className="project-collection-list-item__icon-group"
+    className="project-collection-list-item__inner"
   >
-    <span
-      className="project-collection-list-item__icon-group-item project-collection-list-item__count"
-    />
     <button
-      aria-label="Change visibility of A Project Collection to visible."
-      className="project-collection-list-item__icon-group-item project-collection-list-item__button"
+      className="project-collection-list-item__link"
       onClick={[Function]}
     >
-      <IconComposer
-        fill="currentColor"
-        icon="eyeClosed32"
-        iconClass="project-collection-list-item__icon eye-closed"
-        size={30}
-        svgProps={
-          Object {
-            "aria-hidden": true,
-          }
-        }
-      />
       <span
-        className="screen-reader-text"
+        className="project-collection-list-item__item-text"
       >
-        Collection is not visible
+        A Project Collection
       </span>
     </button>
-    <sortableHandle />
+    <div
+      className="project-collection-list-item__icon-group"
+    >
+      <span
+        className="project-collection-list-item__icon-group-item project-collection-list-item__count"
+      />
+      <button
+        aria-label="Change visibility of A Project Collection to visible."
+        className="project-collection-list-item__icon-group-item project-collection-list-item__button"
+        onClick={[Function]}
+      >
+        <IconComposer
+          fill="currentColor"
+          icon="eyeClosed32"
+          iconClass="project-collection-list-item__icon eye-closed"
+          size={30}
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
+        <span
+          className="screen-reader-text"
+        >
+          Collection is not visible
+        </span>
+      </button>
+      <Handle />
+    </div>
   </div>
 </li>
 `;
