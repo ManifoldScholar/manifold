@@ -82,8 +82,7 @@ export class SubscriptionsContainer extends Component {
     return (
       <Authorize
         kind="any"
-        // TODO: This should redirect to login page, when implemented, probably without an error message
-        failureRedirect={lh.link("frontend")}
+        failureRedirect={lh.link("frontendLogin")}
         failureNotification={{
           heading: "Access Denied.",
           body: "You must be logged in to manage notification preferences.",

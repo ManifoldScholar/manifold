@@ -152,7 +152,7 @@ export class FollowingContainer extends Component {
     return (
       <Authorize
         kind="any"
-        failureRedirect={lh.link("frontend")}
+        failureRedirect={lh.link("frontendLogin")}
         {...this.props}
       >
         <div>
