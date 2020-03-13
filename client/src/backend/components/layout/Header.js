@@ -37,7 +37,7 @@ export default class LayoutHeader extends Component {
           <Utility.SkipLink />
           <div className="library-header library-header--dark">
             <div className="library-header__inner">
-              <Link to={lh.link("frontend")} className="header-logo">
+              <Link to={lh.link("backend")} className="header-logo">
                 <span className="screen-reader-text">Return to home</span>
                 <PressLogo aria-hidden="true" />
               </Link>
