@@ -17,6 +17,10 @@ export default class Login extends Component {
     hideSignInUpOverlay: PropTypes.func
   };
 
+  static defaultProps = {
+    hideSignInUpOverlay: () => {}
+  };
+
   constructor() {
     super();
     this.state = { email: "", password: "" };
@@ -61,7 +65,11 @@ export default class Login extends Component {
       <div>
         {this.props.willRedirect && (
           <div style={{ marginBottom: 25 }}>
-            <Notifications scope="global" style="drawer" animate={false} />
+            <Notifications
+              scope="authentication"
+              style="drawer"
+              animate={false}
+            />
           </div>
         )}
         <form method="post" onSubmit={this.handleLogin}>

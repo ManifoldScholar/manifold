@@ -125,13 +125,21 @@ class ManifoldContainer extends PureComponent {
   }
 
   doPostLogout() {
-    this.redirectToHome();
+    this.reload();
   }
 
   doPostLogin() {
     if (this.routeStateRequestsPostLoginRedirect) {
       this.props.dispatch(notificationActions.removeAllNotifications());
       this.props.history.push(this.props.location.state.postLoginRedirect);
+    }
+  }
+
+  reload() {
+    if (__BROWSER__) {
+      window.location.reload();
+    } else {
+      this.redirectToHome();
     }
   }
 

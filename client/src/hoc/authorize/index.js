@@ -103,8 +103,9 @@ export class AuthorizeComponent extends PureComponent {
     if (!!props.failureNotification && !this.authorization.authorize(props)) {
       let error = {
         heading: "Access Denied.",
-        body: "You do not have sufficient permissions to perform this action.",
-        level: 2
+        body: "Please login to proceed.",
+        level: 2,
+        scope: "authentication"
       };
       if (isPlainObject(props.failureNotification)) {
         error = Object.assign(error, props.failureNotification);
@@ -126,9 +127,10 @@ export class AuthorizeComponent extends PureComponent {
   render() {
     if (this.state.redirect) {
       const to = {
-        pathName: this.props.failureRedirect,
+        pathname: this.props.failureRedirect,
         state: {
-          showLogin: !this.isAuthenticated,
+          showLogin:
+            !this.isAuthenticated && this.props.failureRedirect !== "/login",
           postLoginRedirect: `${this.props.location.pathname}${this.props.location.search}`
         }
       };

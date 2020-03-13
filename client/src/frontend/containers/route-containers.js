@@ -29,6 +29,7 @@ import ReadingGroup from "frontend/containers/ReadingGroup";
 import ReadingGroupDetail from "frontend/containers/ReadingGroup/Detail";
 import ReadingGroupMembers from "frontend/containers/ReadingGroup/Members";
 import ReadingGroupEdit from "frontend/containers/ReadingGroup/Edit";
+import Login from "frontend/containers/Login";
 
 export default {
   NotFound,
@@ -61,5 +62,6 @@ export default {
   ReadingGroup,
   ReadingGroupDetail,
   ReadingGroupEdit,
-  ReadingGroupMembers
+  ReadingGroupMembers,
+  Login
 };

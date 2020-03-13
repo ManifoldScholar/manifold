@@ -24,18 +24,6 @@ function generateErrorPayload(status = 401) {
   return { id: "LOGIN_NOTIFICATION", level, heading, body };
 }
 
-function notifyLogout(dispatch) {
-  const notification = {
-    level: 0,
-    id: "AUTHENTICATION_STATE_CHANGE",
-    heading: "You have logged out successfully."
-  };
-  dispatch(notificationActions.addNotification(notification));
-  setTimeout(() => {
-    dispatch(notificationActions.removeNotification(notification.id));
-  }, 5000);
-}
-
 function follow(project, token, dispatch) {
   const client = new ApiClient();
   const { endpoint, method, options } = favoritesAPI.create(project);
@@ -197,7 +185,6 @@ export default function currentUserMiddleware({ dispatch, getState }) {
 
     if (action.type === "LOGOUT") {
       destroyCookie();
-      notifyLogout(dispatch);
     }
 
     if (action.type === "FOLLOW") {
