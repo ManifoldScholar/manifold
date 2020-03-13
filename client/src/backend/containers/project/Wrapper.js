@@ -13,6 +13,7 @@ import navigation from "helpers/router/navigation";
 import Authorize from "hoc/authorize";
 import get from "lodash/get";
 import IconComposer from "global/components/utility/IconComposer";
+import { Link } from "react-router-dom";
 
 const { request, flush } = entityStoreActions;
 
@@ -56,15 +57,6 @@ export class ProjectWrapperContainer extends PureComponent {
     this.props.dispatch(projectRequest);
   };
 
-  doPreview = event => {
-    event.preventDefault();
-    const win = window.open(
-      lh.link("frontendProjectDetail", this.props.project.attributes.slug),
-      "_blank"
-    );
-    win.focus();
-  };
-
   doDestroy = () => {
     const call = projectsAPI.destroy(this.props.project.id);
     const options = { removes: this.props.project };
@@ -87,14 +79,20 @@ export class ProjectWrapperContainer extends PureComponent {
   renderUtility(project) {
     return (
       <div className="utility-button-group utility-button-group--inline">
-        <button onClick={this.doPreview} className="utility-button">
+        <Link
+          to={lh.link(
+            "frontendProjectDetail",
+            this.props.project.attributes.slug
+          )}
+          className="utility-button"
+        >
           <IconComposer
             icon="eyeOpen32"
             size={26}
             iconClass="utility-button__icon utility-button__icon--highlight"
           />
           <span className="utility-button__text">Preview</span>
-        </button>
+        </Link>
         <Authorize entity={project} ability={"delete"}>
           <button
             onClick={this.handleProjectDestroy}
