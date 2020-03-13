@@ -107,7 +107,7 @@ export default class ProjectGeneralContainer extends PureComponent {
             </Form.FieldGroup>
             <Form.FieldGroup
               label="Press Header Bar"
-              instructions="Admin users can enabled the press bar for your installation on the settings / theme panel."
+              instructions="Admin users can enable the press bar for your installation on the settings / theme panel."
             >
               <Form.TextInput
                 label="Press Header Bar Text"
