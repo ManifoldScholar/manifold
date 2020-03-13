@@ -8,7 +8,7 @@ import UIPanel from "global/components/UIPanel";
 import { NavLink, withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
-
+import withSettings from "hoc/with-settings";
 import Authorize from "hoc/authorize";
 
 export class NavigationStatic extends PureComponent {
@@ -52,6 +52,10 @@ export class NavigationStatic extends PureComponent {
 
   get hasLinks() {
     return this.props.links && this.props.links.length > 0;
+  }
+
+  get isLibraryDisabled() {
+    return this.props.settings.attributes.general.libraryDisabled;
   }
 
   pathForLink(link) {
@@ -100,10 +104,15 @@ export class NavigationStatic extends PureComponent {
 
   renderSearch(props) {
     if (props.mode === "backend") return null;
-    const description = this.context.isLibrary
-      ? "Search across all content and projects"
-      : "Search across all project content";
-    const projectId = this.context.isLibrary ? null : this.context.project.id;
+
+    const scopeToProject =
+      this.context.isStandalone ||
+      Boolean(this.isLibraryDisabled && this.context.project);
+
+    const description = scopeToProject
+      ? "Search across all project content"
+      : "Search across all content and projects";
+    const projectId = scopeToProject ? this.context.project.id : null;
 
     return (
       <li className="user-nav__item">
@@ -201,4 +210,4 @@ export class NavigationStatic extends PureComponent {
   }
 }
 
-export default withRouter(NavigationStatic);
+export default withRouter(withSettings(NavigationStatic));

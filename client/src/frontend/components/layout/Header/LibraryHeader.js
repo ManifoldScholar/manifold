@@ -35,10 +35,17 @@ export default class LayoutLibraryHeader extends PureComponent {
     return attrs;
   }
 
-  frontendLinks(props) {
-    const out = navigation.frontend(this.props.authentication);
-    const pages = props.pages || [];
-    const pageLinks = pages.reduce((list, page) => {
+  get logoRedirectUrl() {
+    const { settings } = this.props;
+    const { homeRedirectUrl } = settings.attributes.general;
+    return homeRedirectUrl;
+  }
+
+  get links() {
+    const { authentication, settings, pages } = this.props;
+    const out = navigation.frontend(authentication, settings);
+    const ensurePages = pages || [];
+    const pageLinks = ensurePages.reduce((list, page) => {
       const item = this.pageItem(page);
       if (item) list.push(item);
 
@@ -48,8 +55,29 @@ export default class LayoutLibraryHeader extends PureComponent {
     return out.concat(pageLinks);
   }
 
+  get doesLogoRedirect() {
+    const { settings } = this.props;
+    const { libraryDisabled, homeRedirectUrl } = settings.attributes.general;
+    return libraryDisabled && homeRedirectUrl;
+  }
+
+  linkLogo(children) {
+    const headerLogoClass = "header-logo";
+    if (this.doesLogoRedirect) {
+      return (
+        <a href={this.logoRedirectUrl} className={headerLogoClass}>
+          {children}
+        </a>
+      );
+    }
+    return (
+      <Link to={lh.link("frontend")} className={headerLogoClass}>
+        {children}
+      </Link>
+    );
+  }
+
   render() {
-    const links = this.frontendLinks(this.props);
     const offset = get(this.props, "settings.attributes.theme.headerOffset");
     const navStyle = offset
       ? { position: "relative", top: parseInt(offset, 10) }
@@ -70,21 +98,23 @@ export default class LayoutLibraryHeader extends PureComponent {
             propertyName="--library-header-height"
           >
             <div className="library-header__inner">
-              <Link to={lh.link("frontend")} className="header-logo">
-                <span className="screen-reader-text">Return to home</span>
-                <PressLogo
-                  url={logoUrl}
-                  mobileUrl={mobileLogoUrl}
-                  styles={get(
-                    this.props.settings,
-                    "attributes.theme.logoStyles"
-                  )}
-                  aria-hidden="true"
-                />
-              </Link>
+              {this.linkLogo(
+                <>
+                  <span className="screen-reader-text">Return to home</span>
+                  <PressLogo
+                    url={logoUrl}
+                    mobileUrl={mobileLogoUrl}
+                    styles={get(
+                      this.props.settings,
+                      "attributes.theme.logoStyles"
+                    )}
+                    aria-hidden="true"
+                  />
+                </>
+              )}
               <Navigation.Primary
                 desktopStyle={navStyle}
-                links={links}
+                links={this.links}
                 commonActions={this.props.commonActions}
                 authentication={this.props.authentication}
                 visibility={this.props.visibility}

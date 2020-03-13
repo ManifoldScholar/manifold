@@ -2,7 +2,7 @@
 .button-search {
   height: 100%;
   color: $neutralTextDark;
-  color: var(--button-color, $neutralTextDark);
+  color: var(--header-foreground-color, $neutralTextDark);
   vertical-align: middle;
   background: transparent;
   border: 0;

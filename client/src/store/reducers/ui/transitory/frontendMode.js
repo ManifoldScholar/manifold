@@ -26,37 +26,19 @@ const buildState = (
   const isLibrary = mode === "library";
   const isStandalone = mode === "standalone";
 
-  // If we're in library mode and the project hasn't changed, we can return early.
-  if (
-    isLibrary &&
-    state.isLibrary &&
-    project &&
-    state.project &&
-    project.id === state.project.id
-  )
-    return state;
-
+  // If we're transitioning from standalone to library, we store the project ID in case
+  // the user returns to it.
   const lastStandaloneId =
-    isLibrary && state.project && state.project.id
+    isLibrary && state.isStandalone && state.project && state.project.id
       ? state.project.id
       : state.lastStandaloneId;
 
-  if (isStandalone && state.isStandalone && project === state.project)
-    return state;
-
-  if (isStandalone)
-    return {
-      isProjectHomepage: state.isProjectHomepage,
-      isLibrary,
-      isStandalone,
-      lastStandaloneId,
-      project: buildProjectState(project)
-    };
   return {
+    isProjectHomepage: state.isProjectHomepage || false,
     isLibrary,
     isStandalone,
-    lastStandaloneId,
-    project: buildProjectState(project)
+    project: project ? buildProjectState(project) : state.project,
+    lastStandaloneId
   };
 };
 
@@ -83,7 +65,7 @@ function setIsProjectSubpage(state) {
   return { ...state, isProjectHomepage: false };
 }
 
-function setPressHeader(state, action) {
+function setProjectContext(state, action) {
   return buildState(state.mode, state, action.payload);
 }
 
@@ -98,7 +80,7 @@ export default handleActions(
     SET_FRONTEND_MODE_STANDALONE: setModeStandalone,
     SET_FRONTEND_MODE_IS_PROJECT_SUBPAGE: setIsProjectSubpage,
     SET_FRONTEND_MODE_IS_PROJECT_HOME_PAGE: setIsProjectHomepage,
-    SET_FRONTEND_MODE_PRESS_HEADER: setPressHeader
+    SET_FRONTEND_MODE_PROJECT_CONTEXT: setProjectContext
   },
   buildState()
 );

@@ -247,7 +247,7 @@
       margin-left: auto;
       font-size: 11.18px;
       color: $neutral75;
-      color: var(--button-color, $neutral75);
+      color: var(--header-foreground-color, $neutral75);
 
       > span
             {

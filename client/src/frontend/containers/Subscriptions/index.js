@@ -6,7 +6,7 @@ import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import PropTypes from "prop-types";
 import mapValues from "lodash/mapValues";
-
+import withProjectContext from "hoc/with-project-context";
 import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
@@ -91,6 +91,7 @@ export class SubscriptionsContainer extends Component {
         }}
       >
         <section className="bg-neutral05">
+          {this.props.projectBackLink}
           <div className="container">
             <form
               autoComplete="off"
@@ -130,5 +131,5 @@ export class SubscriptionsContainer extends Component {
 }
 
 export default connect(SubscriptionsContainer.mapStateToProps)(
-  SubscriptionsContainer
+  withProjectContext(SubscriptionsContainer)
 );

@@ -36,6 +36,9 @@ export default class Copyright extends PureComponent {
       "app-footer__copyright--standalone": this.isStandalone
     });
 
+    const copyright = this.renderCopyright();
+    if (!copyright) return null;
+
     return (
       <section className={containerClasses}>
         <div

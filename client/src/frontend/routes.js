@@ -4,12 +4,14 @@ import NotFound from "global/containers/NotFound";
 const routes = {
   component: "Frontend",
   path: "/",
+  isLibrary: true,
   routes: [
     {
       name: "frontendProjects",
       exact: false,
       component: "ProjectsWrapper",
       path: "/projects",
+      isLibrary: true,
       helper: () => "/projects",
       routes: [
         {
@@ -17,6 +19,7 @@ const routes = {
           exact: true,
           component: "Projects",
           path: "/projects/all",
+          isLibrary: true,
           helper: (params = {}) => {
             const query = queryString.stringify(params);
             if (!query) return "/projects/all";
@@ -28,6 +31,7 @@ const routes = {
           exact: true,
           component: "ProjectCollections",
           path: "/projects/project-collections",
+          isLibrary: true,
           helper: (params = {}) => {
             const query = queryString.stringify(params);
             if (!query) return "/projects/project-collections";
@@ -39,6 +43,7 @@ const routes = {
           exact: true,
           component: "ProjectCollectionDetail",
           path: "/projects/project-collection/:id",
+          isLibrary: true,
           helper: (pc, params = {}) => {
             const query = queryString.stringify(params);
             if (!query) return `/projects/project-collection/${pc}`;
@@ -206,6 +211,7 @@ const routes = {
       exact: true,
       component: "Following",
       path: "/following",
+      isLibrary: true,
       helper: () => "/following"
     },
     {
@@ -213,6 +219,7 @@ const routes = {
       exact: true,
       component: "Featured",
       path: "/featured",
+      isLibrary: true,
       helper: () => "/featured"
     },
     {
@@ -220,6 +227,7 @@ const routes = {
       exact: true,
       component: "Search",
       path: "/search",
+      isLibrary: true,
       helper: () => `/search`
     },
     {
@@ -273,6 +281,7 @@ const routes = {
       name: "frontend",
       exact: true,
       component: "Home",
+      isLibrary: true,
       path: "/",
       helper: (params = {}) => {
         const query = queryString.stringify(params);

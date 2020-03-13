@@ -12,10 +12,12 @@ class StandaloneFooter extends Component {
           <FooterParts.Socials links={socialLinks(this.props)} />
         </div>
         <FooterParts.PoweredBy type="standalone">
-          <FooterParts.Copyright
-            type="standalone"
-            settings={this.props.settings}
-          />
+          {this.props.settings.attributes.copyrightFormatted && (
+            <FooterParts.Copyright
+              type="standalone"
+              settings={this.props.settings}
+            />
+          )}
         </FooterParts.PoweredBy>
       </footer>
     );

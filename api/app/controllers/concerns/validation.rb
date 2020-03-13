@@ -293,7 +293,11 @@ module Validation
           :terms_url,
           :head_title,
           :twitter,
-          :facebook
+          :facebook,
+          :library_disabled,
+          :all_standalone,
+          :library_redirect_url,
+          :home_redirect_url
         ]
       },
       {
@@ -342,7 +346,10 @@ module Validation
           :top_bar_url,
           :top_bar_color,
           :top_bar_mode,
-          :accent_color
+          :accent_color,
+          :header_foreground_color,
+          :header_foreground_active_color,
+          :header_background_color
         ]
       },
       :remove_press_logo, attachment(:press_logo),

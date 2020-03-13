@@ -17,7 +17,11 @@ module V1
       terms_url: Types::Serializer::URL,
       head_tile: Types::String,
       twitter: Types::String,
-      facebook: Types::String
+      facebook: Types::String,
+      library_disabled: Types::Bool,
+      all_standalone: Types::Bool,
+      library_redirect_url: Types::String,
+      home_redirect_url: Types::String
     )
     typed_attribute :theme, Types::Hash.schema(
       logo_styles: Types::String,
@@ -26,7 +30,11 @@ module V1
       top_bar_text: Types::String,
       top_bar_url: Types::String,
       top_bar_color: Types::String,
-      top_bar_mode: Types::String
+      top_bar_mode: Types::String,
+      accent_color: Types::String,
+      header_foreground_color: Types::String,
+      header_foreground_active_color: Types::String,
+      header_background_color: Types::String
     )
     typed_attribute :integrations, Types::Hash.schema(
       facebook_app_id: Types::String,

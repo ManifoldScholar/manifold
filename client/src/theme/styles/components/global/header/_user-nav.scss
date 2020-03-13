@@ -2,10 +2,8 @@
 //===============
 
 .user-nav {
-  --button-color: #{$neutralTextDark};
-
   &--dark {
-    --button-color: #{$accentPrimary};
+    --header-foreground-color: #{$accentPrimary};
   }
 
   &__list {

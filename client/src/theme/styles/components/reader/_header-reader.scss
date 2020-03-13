@@ -2,7 +2,7 @@
   $paddingLateral: $containerPaddingNarrow;
   $paddingLateralNarrow: 11px;
 
-  --button-color: #{$neutral75};
+  --header-foreground-color: #{$neutral75};
   --default-hover-color: #{$accentInteractionDark};
 
   @include reactSlideTransition('left', '.reader-return-menu');

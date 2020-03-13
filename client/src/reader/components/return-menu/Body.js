@@ -5,8 +5,9 @@ import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 import { FrontendModeContext } from "helpers/contexts";
 import Authorize from "hoc/authorize";
+import withSettings from "hoc/with-settings";
 
-export default class ReturnMenuBody extends PureComponent {
+class ReturnMenuBody extends PureComponent {
   static displayName = "ReturnMenuBody";
 
   static propTypes = {
@@ -17,6 +18,10 @@ export default class ReturnMenuBody extends PureComponent {
   };
 
   static contextType = FrontendModeContext;
+
+  isLibraryDisabled() {
+    return this.props.settings.attributes.general.libraryDisabled;
+  }
 
   render() {
     return (
@@ -40,7 +45,7 @@ export default class ReturnMenuBody extends PureComponent {
               </span>
             </Link>
           </li>
-          {this.context.isLibrary && (
+          {this.context.isLibrary && !this.isLibraryDisabled && (
             <>
               <li className="reader-return-menu__item">
                 <Link
@@ -110,3 +115,5 @@ export default class ReturnMenuBody extends PureComponent {
     );
   }
 }
+
+export default withSettings(ReturnMenuBody);

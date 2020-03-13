@@ -44,6 +44,10 @@ export default class ColorScheme extends Component {
   }
 
   accentColor(props = this.props) {
+    return this.themeValue("accentColor", props);
+  }
+
+  themeValue(key, props = this.props) {
     if (
       !props ||
       !props.settings ||
@@ -51,7 +55,7 @@ export default class ColorScheme extends Component {
       !props.settings.attributes.theme
     )
       return null;
-    return props.settings.attributes.theme.accentColor || null;
+    return props.settings.attributes.theme[key] || null;
   }
 
   shouldComponentUpdate(nextProps) {
@@ -94,14 +98,14 @@ export default class ColorScheme extends Component {
     this.setColorScheme();
   }
 
-  hasCustomColor() {
+  hasCustomAccentColor() {
     return Boolean(
       this.accentColor() && colorHelper(this.accentColor()).isValid()
     );
   }
 
   setColorScheme() {
-    if (!this.hasCustomColor()) return this.restoreDefaultAccent();
+    if (!this.hasCustomAccentColor()) return this.restoreDefaultAccent();
     try {
       Object.keys(this.constructor.customProperties).forEach(customProperty => {
         const accent = colorHelper(this.accentColor());
@@ -119,7 +123,7 @@ export default class ColorScheme extends Component {
 
   colorSchemeAsCSS() {
     const rules = [];
-    if (!this.hasCustomColor()) return null;
+    if (!this.hasCustomAccentColor()) return null;
     try {
       const accent = colorHelper(this.accentColor());
       Object.keys(this.constructor.customProperties).forEach(customProperty => {
@@ -127,7 +131,6 @@ export default class ColorScheme extends Component {
         const value = transformer(accent).toHexString();
         rules.push(`${customProperty}: ${value};`);
       });
-      if (rules.length > 0) return `body { ${rules.join(" ")} };`;
     } catch (error) {
       /* eslint-disable no-console */
       console.log(error, "Manifold color scheme error!");
@@ -136,9 +139,41 @@ export default class ColorScheme extends Component {
     }
   }
 
+  otherColorVarsAsCSS() {
+    const rules = [];
+    const vars = {
+      "--header-background-color": "headerBackgroundColor",
+      "--header-foreground-color": "headerForegroundColor",
+      "--header-foreground-active-color": "headerForegroundActiveColor",
+      "--header-foreground-hover-color": "headerForegroundActiveColor"
+    };
+    try {
+      Object.keys(vars).forEach(varName => {
+        const stringValue = this.themeValue(vars[varName]);
+        if (!stringValue) return;
+        const value = colorHelper(stringValue).toHexString();
+        rules.push(`${varName}: ${value};`);
+      });
+    } catch (error) {
+      /* eslint-disable no-console */
+      console.log(error, "Manifold color scheme error!");
+      /* eslint-enable no-console */
+      return null;
+    }
+    if (rules.length === 0) return null;
+    return rules.join("\n");
+  }
+
   render() {
-    const cssText = this.colorSchemeAsCSS();
-    if (!cssText) return null;
+    const accentStyles = this.colorSchemeAsCSS();
+    const otherStyles = this.otherColorVarsAsCSS();
+    if (!accentStyles && !otherStyles) return null;
+    const cssText = `
+      body {
+        ${accentStyles || ""}
+        ${otherStyles || ""}
+      };
+    `;
     return <Helmet style={[{ cssText }]} />;
   }
 }

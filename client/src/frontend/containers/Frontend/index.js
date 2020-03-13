@@ -12,6 +12,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { renderRoutes } from "react-router-config";
 import get from "lodash/get";
 import BodyClass from "hoc/body-class";
+import redirectIfLibraryDisabled from "hoc/redirect-if-library-disabled";
 
 const { request } = entityStoreActions;
 
@@ -118,4 +119,4 @@ export class FrontendContainer extends Component {
   }
 }
 
-export default connectAndFetch(FrontendContainer);
+export default connectAndFetch(redirectIfLibraryDisabled(FrontendContainer));

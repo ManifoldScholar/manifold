@@ -5,6 +5,7 @@ import Layout from "frontend/components/layout";
 import Hero from "./Hero";
 import ContentBlock from "frontend/components/content-block";
 import { FrontendModeContext } from "helpers/contexts";
+import withSettings from "hoc/with-settings";
 
 class Detail extends Component {
   static displayName = "Project.Detail";
@@ -20,6 +21,10 @@ class Detail extends Component {
     if (window && window.ScrollTo) window.scrollTo(0, 0);
   }
 
+  isLibraryDisabled() {
+    return this.props.settings.attributes.general.libraryDisabled;
+  }
+
   render() {
     const { project } = this.props;
     if (!project) return <LoadingBlock />;
@@ -30,10 +35,12 @@ class Detail extends Component {
           <Hero project={project} />
           <ContentBlock project={project} />
         </section>
-        {!this.context.isStandalone && <Layout.ButtonNavigation />}
+        {!this.context.isStandalone && !this.isLibraryDisabled && (
+          <Layout.ButtonNavigation />
+        )}
       </>
     );
   }
 }
 
-export default Detail;
+export default withSettings(Detail);

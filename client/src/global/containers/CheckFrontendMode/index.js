@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { uiFrontendModeActions } from "actions";
 import { FrontendModeContext } from "helpers/contexts";
 import connectAndFetch from "utils/connectAndFetch";
+import withSettings from "hoc/with-settings";
 import queryString from "query-string";
 
 class CheckFrontendMode extends PureComponent {
@@ -39,6 +40,10 @@ class CheckFrontendMode extends PureComponent {
     return this.props.project;
   }
 
+  get settings() {
+    return this.props.settings;
+  }
+
   get projectStandaloneMode() {
     if (!this.project) return "disabled";
     return this.project.attributes.standaloneMode;
@@ -46,6 +51,16 @@ class CheckFrontendMode extends PureComponent {
 
   get canShowStandalone() {
     return this.projectStandaloneMode !== "disabled";
+  }
+
+  get isLibraryDisabled() {
+    if (!this.project) return false;
+    return this.settings.attributes.general.libraryDisabled;
+  }
+
+  get allStandalone() {
+    if (!this.project) return false;
+    return this.settings.attributes.general.allStandalone;
   }
 
   get isStandaloneEnforced() {
@@ -75,10 +90,11 @@ class CheckFrontendMode extends PureComponent {
     );
   }
 
-  overridePressHeader() {
+  setProjectContext() {
     const project = this.project;
+    if (!project) return;
     this.props.dispatch(
-      uiFrontendModeActions.overridePressHeader({
+      uiFrontendModeActions.setFrontendModeProjectContext({
         project
       })
     );
@@ -113,6 +129,7 @@ class CheckFrontendMode extends PureComponent {
     );
   }
 
+  // Look, this component is difficult to debug.
   log(arg, label = "") {
     /* eslint-disable no-constant-condition */
     /* eslint-disable no-console */
@@ -122,19 +139,20 @@ class CheckFrontendMode extends PureComponent {
   }
 
   checkStandaloneMode(project) {
+    this.log(this.project, "the project");
     this.log(this.canShowStandalone, "canShowStandalone?");
     this.log("mounting, checking standalone mode");
     this.log(this.isStandaloneEnforced, "isStandaloneEnforced?");
     this.log(this.lastStandaloneId, "lastStandaloneId");
     this.log(this.standaloneModeRequested, "standaloneModeRequested");
-    this.log(this.props, "props");
-
+    if (this.isLibraryDisabled && this.allStandalone)
+      return this.engageStandaloneMode();
     if (this.isStandaloneEnforced) return this.engageStandaloneMode();
     if (this.canShowStandalone && this.lastStandaloneId === project.id)
       return this.engageStandaloneMode();
     if (this.canShowStandalone && this.standaloneModeRequested)
       return this.engageStandaloneMode();
-    if (this.canOverridePressHeader) return this.overridePressHeader();
+    return this.setProjectContext();
   }
 
   render() {
@@ -142,4 +160,4 @@ class CheckFrontendMode extends PureComponent {
   }
 }
 
-export default connectAndFetch(CheckFrontendMode);
+export default connectAndFetch(withSettings(CheckFrontendMode));
