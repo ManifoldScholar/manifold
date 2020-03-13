@@ -53,6 +53,10 @@ export class NavigationMobile extends Component {
     this.setState(this.initialState);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener("keyup", this.handleEscape);
+  }
+
   get initialState() {
     return {
       expanded: [],
