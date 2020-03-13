@@ -818,7 +818,7 @@
     }
 
     [data-rbd-placeholder-context-id] {
-      height: 0 !important;
+      height: 0 !important; /* stylelint-disable-line declaration-no-important */
     }
   }
 }

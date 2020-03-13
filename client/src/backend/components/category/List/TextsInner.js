@@ -109,10 +109,7 @@ export default class CategoryListTexts extends PureComponent {
                 <span className="screen-reader-text">Edit Text</span>
               </Link>
 
-              <div
-                className="texts-list__button"
-                {...provided.dragHandleProps}
-              >
+              <div className="texts-list__button" {...provided.dragHandleProps}>
                 <Utility.IconComposer icon="grabber32" size={26} />
                 <span className="screen-reader-text">Move Category</span>
               </div>
