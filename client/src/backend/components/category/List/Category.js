@@ -5,6 +5,7 @@ import lh from "helpers/linkHandler";
 import Texts from "./Texts";
 import { Draggable } from "react-beautiful-dnd";
 import Utility from "global/components/utility";
+import classNames from "classnames";
 
 export default class CategoryListCategory extends PureComponent {
   static displayName = "Category.List.Category";
@@ -57,13 +58,16 @@ export default class CategoryListCategory extends PureComponent {
 
     return (
       <Draggable type="category" index={this.props.index} draggableId={this.id}>
-        {provided => (
+        {(provided, snapshot) => (
           <div>
             <div
               ref={provided.innerRef}
               {...provided.draggableProps}
               key={this.id}
-              className="text-categories__category"
+              className={classNames({
+                "text-categories__category": true,
+                "text-categories__category--is-dragging": snapshot.isDragging
+              })}
             >
               <header className="text-categories__header">
                 <h2 className="text-categories__label">

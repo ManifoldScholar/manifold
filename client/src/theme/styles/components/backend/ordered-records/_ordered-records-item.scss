@@ -1,12 +1,19 @@
 .ordered-records-item {
   @include templateHead;
-
-  &--is-dragging {
-    border: 1px solid lighten($neutral90, 3%);
-  }
+  transition: border $duration $timing;
 
   & + & {
     border-top: 1px solid $neutralUIDullLight;
+  }
+
+  &--is-dragging {
+    @include dragging;
+    border: none;
+  }
+
+  &--is-dragging ~ &,
+  & ~ &--is-dragging {
+    border: none;
   }
 
   &__inner {

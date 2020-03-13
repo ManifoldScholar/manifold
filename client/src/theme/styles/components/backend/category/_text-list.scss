@@ -37,6 +37,7 @@
     border-radius: 8px;
 
     &--is-dragging {
+      @include dragging;
     }
 
     &--placeholder {

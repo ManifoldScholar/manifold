@@ -3,6 +3,10 @@
     @include panelRoundedDark;
     margin-bottom: 16px;
     background: $neutral95;
+
+    &--is-dragging {
+      @include dragging;
+    }
   }
 
   &__header {
