@@ -1,6 +1,5 @@
 import actions from "actions/currentUser";
 import { ApiClient, tokensAPI, meAPI, favoritesAPI } from "api";
-import { notificationActions } from "actions";
 import BrowserCookieHelper from "helpers/cookie/Browser";
 
 function generateErrorPayload(status = 401) {

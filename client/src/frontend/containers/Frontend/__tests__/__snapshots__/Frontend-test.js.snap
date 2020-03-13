@@ -264,7 +264,7 @@ exports[`frontend/containers/Frontend/Frontend matches the snapshot 1`] = `
         <Switch />
       </div>
     </main>
-    <Connect(withPluginReplacement('FrontendFooter))
+    <Connect(WithSettings('Connect(withPluginReplacement('FrontendFooter))))
       authentication={
         Object {
           "authenticated": true,

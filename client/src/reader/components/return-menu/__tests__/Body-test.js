@@ -10,7 +10,7 @@ describe("reader/components/return-menu/Body", () => {
       toggleSignInUpOverlay={$toggleMock}
     />
   ));
-  it("matches the snapshot", () => {
-    expect(shallow($root)).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
 });
