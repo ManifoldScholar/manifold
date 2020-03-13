@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import withPluginReplacement from "hoc/with-plugin-replacement";
+import withSettings from "hoc/with-settings";
 import DefaultFooter from "./DefaultFooter";
 import BrandedFooter from "./BrandedFooter";
 import StandaloneFooter from "./StandaloneFooter";
@@ -16,14 +17,19 @@ class FrontendFooter extends Component {
   }
 
   render() {
-    if (this.context && this.context.isStandalone)
+    const { settings } = this.props;
+    const libraryDisabled = settings.attributes.general.libraryDisabled;
+
+    if (libraryDisabled || (this.context && this.context.isStandalone))
       return <StandaloneFooter {...this.props} />;
     if (this.isBranded) return <BrandedFooter {...this.props} />;
     return <DefaultFooter {...this.props} />;
   }
 }
 
-export default withPluginReplacement(
-  FrontendFooter,
-  "Global.Components.Footers.FrontendFooter"
+export default withSettings(
+  withPluginReplacement(
+    FrontendFooter,
+    "Global.Components.Footers.FrontendFooter"
+  )
 );

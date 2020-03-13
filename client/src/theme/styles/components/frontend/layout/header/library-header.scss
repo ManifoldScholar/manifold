@@ -1,7 +1,8 @@
 /* stylelint-disable property-no-vendor-prefix */
 .library-header {
   &--light {
-    background-color: $neutralWhite;
+    color: $headerForegroundColor;
+    background-color: $headerBackgroundColor;
   }
 
   &--dark {

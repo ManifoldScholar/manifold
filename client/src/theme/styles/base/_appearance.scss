@@ -36,6 +36,11 @@ $accentPrimaryExtraPale: var(--accent-primary-extra-pale, #{$_accentPrimaryExtra
 $accentPrimaryOffWhite: var(--accent-primary-off-white, #{$_accentPrimaryOffWhite});
 $accentInteractionLight: var(--accent-interaction-light, #{$_accentInteractionLight});
 $accentInteractionDark: var(--accent-interaction-dark, #{$_accentInteractionDark});
+$headerBackgroundColor: var(--header-background-color, #{$neutralWhite});
+$headerForegroundColor: var(--header-foreground-color, #{$neutralTextDark});
+$headerForegroundActiveColor: var(--header-foreground-active-color, #{$neutral90});
+$headerForegroundHoverColor: var(--header-foreground-hover-color, #{$_accentInteractionLight});
+
 
 // Light & Dark Client Themes
 // --------------------
@@ -44,6 +49,7 @@ $defaultHoverColor: var(--default-hover-color, #{$accentInteractionLight});
 $defaultErrorColor: var(--default-error-color, #{$spErrorLight});
 $defaultWarningColor: var(--default-warning-color, #{$spWarningLight});
 $defaultNoticeColor: var(--default-notice-color, #{$spNoticeLight});
+
 
 body {
   --accent-primary: #{$_accentPrimary};
@@ -64,7 +70,6 @@ body {
   --default-error-color: #{$spErrorDark};
   --default-warning-color: #{$spWarningDark};
   --default-notice-color: #{$spNoticeDark};
-  color: $neutralTextDark;
 }
 
 .backend, .reader.scheme-dark, .bg-neutral90, .bg-neutral95 {

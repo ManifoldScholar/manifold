@@ -14,7 +14,8 @@ class Settings < ApplicationRecord
       installation_name: "Manifold",
       head_title: "Manifold Scholarship",
       head_description: "Transforming scholarly publications into living digital works",
-      social_share_message: "Shared from Manifold Scholarship"
+      social_share_message: "Shared from Manifold Scholarship",
+      library_disabled: false
     },
     email: {
       from_address: "do-not-reply@manifoldapp.org",

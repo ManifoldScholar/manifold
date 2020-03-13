@@ -119,7 +119,7 @@ class PoweredBy extends PureComponent {
                 </span>
               )}
             </LogoWrapper>
-            {this.isStandaloneFooter && (
+            {this.isStandaloneFooter && this.props.children && (
               <div className={"app-footer-powered-by__postscript"}>
                 {this.props.children}
               </div>

@@ -2,20 +2,29 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import SearchMenu from "global/components/search/menu";
 import { FrontendModeContext } from "helpers/contexts";
+import withSettings from "hoc/with-settings";
 
-export default class MobileSearch extends PureComponent {
+class MobileSearch extends PureComponent {
   static propTypes = {
     closeNavigation: PropTypes.func
   };
 
   static contextType = FrontendModeContext;
 
+  get isLibraryDisabled() {
+    return this.props.settings.attributes.general.libraryDisabled;
+  }
+
   render() {
-    const projectId = this.context.isLibrary ? null : this.context.project.id;
+    const scopeToProject =
+      this.context.isStandalone ||
+      Boolean(this.isLibraryDisabled && this.context.project);
+    const projectId = scopeToProject ? this.context.project.id : null;
+
     return (
       <SearchMenu.Body
         onSubmit={this.props.closeNavigation}
-        searchType={projectId ? "project" : "library"}
+        searchType={scopeToProject ? "project" : "library"}
         projectId={projectId}
         visibility={{ search: true }}
         className="nested-nav__search-menu"
@@ -23,3 +32,5 @@ export default class MobileSearch extends PureComponent {
     );
   }
 }
+
+export default withSettings(MobileSearch);

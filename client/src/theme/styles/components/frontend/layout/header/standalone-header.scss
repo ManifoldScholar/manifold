@@ -4,6 +4,7 @@
   left: 0;
   width: 100%;
   background-color: $neutral100;
+  --header-foreground-color: $neutral75;
 
   &--visible {
     @include boxShadow(0, -10px, 20px, 7px, $neutralBlack, 0.25);

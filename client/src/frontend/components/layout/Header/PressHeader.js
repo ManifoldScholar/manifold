@@ -91,11 +91,19 @@ class PressHeader extends PureComponent {
     return mode;
   }
 
+  get isLibraryDisabled() {
+    return this.props.settings.attributes.general.libraryDisabled;
+  }
+
   get visible() {
     if (!this.label || !this.url) return false;
     const mode = this.pressHeaderMode;
     if (mode === "enforced") return true;
-    if (mode === "enabled" && this.context.isStandalone) return true;
+    if (
+      mode === "enabled" &&
+      (this.context.isStandalone || this.isLibraryDisabled)
+    )
+      return true;
     return false;
   }
 

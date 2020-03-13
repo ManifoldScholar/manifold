@@ -10,7 +10,7 @@ import { meta, select } from "utils/entityUtils";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import PropTypes from "prop-types";
+import withProjectContext from "hoc/with-project-context";
 
 const { request } = entityStoreActions;
 
@@ -128,6 +128,7 @@ class ReadingGroupsListContainer extends Component {
       <>
         <section>
           <div className="container">
+            {this.props.projectBackLink}
             {this.renderRoutes()}
             <Heading
               buttons={[
@@ -154,4 +155,4 @@ class ReadingGroupsListContainer extends Component {
   }
 }
 
-export default connectAndFetch(ReadingGroupsListContainer);
+export default connectAndFetch(withProjectContext(ReadingGroupsListContainer));

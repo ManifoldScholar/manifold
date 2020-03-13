@@ -92,6 +92,27 @@ export class SettingsThemeContainer extends PureComponent {
                 instructions="Enter a color in one of the following formats: CSS color keyword, hexadecimal, rgb, rgba, hsl, hsla, or hwb. Leave blank to restore default accent color."
                 wide
               />
+              <Form.TextInput
+                label="Library Header Foreground Color"
+                name="attributes[theme][headerForegroundColor]"
+                placeholder="#ffffff"
+                instructions="Override the library header foreground color in one of the allowed formats (see above)."
+                wide
+              />
+              <Form.TextInput
+                label="Library Header Foreground Active Color"
+                name="attributes[theme][headerForegroundActiveColor]"
+                placeholder="#363636"
+                instructions={`Override the library header foreground active state color in one of the allowed formats (see above). A link in the primary navigation is "active" when the user is currently on that page.`}
+                wide
+              />
+              <Form.TextInput
+                label="Library Header Background Color"
+                name="attributes[theme][headerBackgroundColor]"
+                placeholder="#696969"
+                instructions="Override the library header background color in one of the allowed formats (see above)."
+                wide
+              />
             </Form.FieldGroup>
             <Form.FieldGroup label={"Typography"}>
               <Form.TextInput

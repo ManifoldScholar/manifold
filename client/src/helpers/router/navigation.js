@@ -1,7 +1,9 @@
 import memoize from "lodash/memoize";
 
 class Navigation {
-  static frontend = memoize(authentication => {
+  static frontend = memoize((authentication, settings) => {
+    if (settings.attributes.general.libraryDisabled) return [];
+
     const out = [
       {
         label: "Home",
