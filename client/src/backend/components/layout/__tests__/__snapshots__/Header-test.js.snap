@@ -23,7 +23,7 @@ exports[`Backend.Layout.Header component matches the snapshot 1`] = `
       >
         <Link
           className="header-logo"
-          to="/"
+          to="/backend"
         >
           <span
             className="screen-reader-text"
