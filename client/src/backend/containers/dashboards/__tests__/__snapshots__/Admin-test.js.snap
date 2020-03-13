@@ -421,9 +421,6 @@ Array [
                   <div
                     class="entity-list__contents-wrapper"
                   >
-                    <div
-                      class="entity-list__header"
-                    />
                     <ul
                       aria-describedby="entities-list-instructions-1"
                       class="entity-list__list entity-list__list--rows"

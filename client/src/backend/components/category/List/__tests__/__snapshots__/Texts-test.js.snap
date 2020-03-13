@@ -2,7 +2,14 @@
 
 exports[`backend/components/category/List/Texts matches the snapshot 1`] = `
 <Connect(Droppable)
+  direction="vertical"
   droppableId="uncategorized"
+  getContainerForClone={[Function]}
+  ignoreContainerClipping={false}
+  isCombineEnabled={false}
+  isDropDisabled={false}
+  mode="standard"
+  renderClone={null}
   type="text"
 >
   <Component />
