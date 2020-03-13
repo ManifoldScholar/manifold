@@ -20,7 +20,7 @@ export default class ReadingGroups extends Component {
     return (
       <Authorize
         kind="any"
-        failureRedirect={lh.link("frontend")}
+        failureRedirect={lh.link("frontendLogin")}
         failureNotification
       >
         {this.renderRoutes()}
