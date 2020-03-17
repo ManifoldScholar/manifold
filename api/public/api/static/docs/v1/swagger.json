@@ -6576,6 +6576,765 @@
         }
       }
     },
+    "/export_targets": {
+      "get": {
+        "summary": "List all export targets",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Export Targets"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of ExportTarget resources.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                      },
+                      "type": {
+                        "type": "string",
+                        "example": "exportTargets"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "strategy": {
+                            "type": "string",
+                            "description": "Denotes which on the two sftp configurations will be used.",
+                            "example": "sftp_key"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "slug": {
+                            "type": "string"
+                          },
+                          "configuration": {
+                            "type": "object",
+                            "properties": {
+                              "sftpKey": {
+                                "x-nullable": true,
+                                "type": "object",
+                                "properties": {
+                                  "port": {
+                                    "type": "integer",
+                                    "example": 3020
+                                  },
+                                  "host": {
+                                    "type": "string",
+                                    "example": "https://manifoldapp.org/"
+                                  },
+                                  "username": {
+                                    "type": "string"
+                                  },
+                                  "compression": {
+                                    "type": "integer"
+                                  },
+                                  "privateKey": {
+                                    "type": "string",
+                                    "description": "The key used to secure the sftp connection. This value can be updated, but will not be sent in any response. It will instead respond with [FILTERED] if there is a value.",
+                                    "example": "[FILTERED]"
+                                  }
+                                }
+                              },
+                              "sftpPassword": {
+                                "x-nullable": true,
+                                "type": "object",
+                                "properties": {
+                                  "port": {
+                                    "type": "integer",
+                                    "example": 3020
+                                  },
+                                  "host": {
+                                    "type": "string",
+                                    "example": "https://manifoldapp.org/"
+                                  },
+                                  "username": {
+                                    "type": "string"
+                                  },
+                                  "password": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "targetNameFormat": {
+                                "type": "string",
+                                "example": "%s-%t.%e"
+                              },
+                              "strategy": {
+                                "type": "integer",
+                                "description": "A digit representation of the export target strategy"
+                              }
+                            }
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      },
+                      "meta": {
+                        "type": "object",
+                        "properties": {
+                          "partial": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Valid API key was not provided."
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an export target",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "strategy": {
+                          "type": "string",
+                          "description": "Denotes which on the two sftp configurations will be used.",
+                          "example": "sftp_key"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "configuration": {
+                          "type": "object",
+                          "properties": {
+                            "sftpKey": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "port": {
+                                  "type": "integer",
+                                  "example": 3020
+                                },
+                                "host": {
+                                  "type": "string",
+                                  "example": "https://manifoldapp.org/"
+                                },
+                                "username": {
+                                  "type": "string"
+                                },
+                                "compression": {
+                                  "type": "integer"
+                                },
+                                "privateKey": {
+                                  "type": "string",
+                                  "description": "The key used to secure the sftp connection. This value can be updated, but will not be sent in any response. It will instead respond with [FILTERED] if there is a value.",
+                                  "example": "[FILTERED]"
+                                }
+                              }
+                            },
+                            "sftpPassword": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "port": {
+                                  "type": "integer",
+                                  "example": 3020
+                                },
+                                "host": {
+                                  "type": "string",
+                                  "example": "https://manifoldapp.org/"
+                                },
+                                "username": {
+                                  "type": "string"
+                                },
+                                "password": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "targetNameFormat": {
+                              "type": "string",
+                              "example": "%s-%t.%e"
+                            },
+                            "strategy": {
+                              "type": "integer",
+                              "description": "A digit representation of the export target strategy"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "name"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Export Targets"
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the ExportTarget resource.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "exportTargets"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "strategy": {
+                          "type": "string",
+                          "description": "Denotes which on the two sftp configurations will be used.",
+                          "example": "sftp_key"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "slug": {
+                          "type": "string"
+                        },
+                        "configuration": {
+                          "type": "object",
+                          "properties": {
+                            "sftpKey": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "port": {
+                                  "type": "integer",
+                                  "example": 3020
+                                },
+                                "host": {
+                                  "type": "string",
+                                  "example": "https://manifoldapp.org/"
+                                },
+                                "username": {
+                                  "type": "string"
+                                },
+                                "compression": {
+                                  "type": "integer"
+                                },
+                                "privateKey": {
+                                  "type": "string",
+                                  "description": "The key used to secure the sftp connection. This value can be updated, but will not be sent in any response. It will instead respond with [FILTERED] if there is a value.",
+                                  "example": "[FILTERED]"
+                                }
+                              }
+                            },
+                            "sftpPassword": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "port": {
+                                  "type": "integer",
+                                  "example": 3020
+                                },
+                                "host": {
+                                  "type": "string",
+                                  "example": "https://manifoldapp.org/"
+                                },
+                                "username": {
+                                  "type": "string"
+                                },
+                                "password": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "targetNameFormat": {
+                              "type": "string",
+                              "example": "%s-%t.%e"
+                            },
+                            "strategy": {
+                              "type": "integer",
+                              "description": "A digit representation of the export target strategy"
+                            }
+                          }
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "partial": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Valid API key was not provided."
+          }
+        }
+      }
+    },
+    "/export_targets/{id}": {
+      "get": {
+        "summary": "Retrieve an export target",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Export Targets"
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieve an ExportTarget.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "exportTargets"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "strategy": {
+                          "type": "string",
+                          "description": "Denotes which on the two sftp configurations will be used.",
+                          "example": "sftp_key"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "slug": {
+                          "type": "string"
+                        },
+                        "configuration": {
+                          "type": "object",
+                          "properties": {
+                            "sftpKey": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "port": {
+                                  "type": "integer",
+                                  "example": 3020
+                                },
+                                "host": {
+                                  "type": "string",
+                                  "example": "https://manifoldapp.org/"
+                                },
+                                "username": {
+                                  "type": "string"
+                                },
+                                "compression": {
+                                  "type": "integer"
+                                },
+                                "privateKey": {
+                                  "type": "string",
+                                  "description": "The key used to secure the sftp connection. This value can be updated, but will not be sent in any response. It will instead respond with [FILTERED] if there is a value.",
+                                  "example": "[FILTERED]"
+                                }
+                              }
+                            },
+                            "sftpPassword": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "port": {
+                                  "type": "integer",
+                                  "example": 3020
+                                },
+                                "host": {
+                                  "type": "string",
+                                  "example": "https://manifoldapp.org/"
+                                },
+                                "username": {
+                                  "type": "string"
+                                },
+                                "password": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "targetNameFormat": {
+                              "type": "string",
+                              "example": "%s-%t.%e"
+                            },
+                            "strategy": {
+                              "type": "integer",
+                              "description": "A digit representation of the export target strategy"
+                            }
+                          }
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "partial": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested resource doesn't exist."
+          },
+          "401": {
+            "description": "Valid API key was not provided."
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update an export target",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "strategy": {
+                          "type": "string",
+                          "description": "Denotes which on the two sftp configurations will be used.",
+                          "example": "sftp_key"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "configuration": {
+                          "type": "object",
+                          "properties": {
+                            "sftpKey": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "port": {
+                                  "type": "integer",
+                                  "example": 3020
+                                },
+                                "host": {
+                                  "type": "string",
+                                  "example": "https://manifoldapp.org/"
+                                },
+                                "username": {
+                                  "type": "string"
+                                },
+                                "compression": {
+                                  "type": "integer"
+                                },
+                                "privateKey": {
+                                  "type": "string",
+                                  "description": "The key used to secure the sftp connection. This value can be updated, but will not be sent in any response. It will instead respond with [FILTERED] if there is a value.",
+                                  "example": "[FILTERED]"
+                                }
+                              }
+                            },
+                            "sftpPassword": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "port": {
+                                  "type": "integer",
+                                  "example": 3020
+                                },
+                                "host": {
+                                  "type": "string",
+                                  "example": "https://manifoldapp.org/"
+                                },
+                                "username": {
+                                  "type": "string"
+                                },
+                                "password": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "targetNameFormat": {
+                              "type": "string",
+                              "example": "%s-%t.%e"
+                            },
+                            "strategy": {
+                              "type": "integer",
+                              "description": "A digit representation of the export target strategy"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Export Targets"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated ExportTarget resource.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "exportTargets"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "strategy": {
+                          "type": "string",
+                          "description": "Denotes which on the two sftp configurations will be used.",
+                          "example": "sftp_key"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "slug": {
+                          "type": "string"
+                        },
+                        "configuration": {
+                          "type": "object",
+                          "properties": {
+                            "sftpKey": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "port": {
+                                  "type": "integer",
+                                  "example": 3020
+                                },
+                                "host": {
+                                  "type": "string",
+                                  "example": "https://manifoldapp.org/"
+                                },
+                                "username": {
+                                  "type": "string"
+                                },
+                                "compression": {
+                                  "type": "integer"
+                                },
+                                "privateKey": {
+                                  "type": "string",
+                                  "description": "The key used to secure the sftp connection. This value can be updated, but will not be sent in any response. It will instead respond with [FILTERED] if there is a value.",
+                                  "example": "[FILTERED]"
+                                }
+                              }
+                            },
+                            "sftpPassword": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "port": {
+                                  "type": "integer",
+                                  "example": 3020
+                                },
+                                "host": {
+                                  "type": "string",
+                                  "example": "https://manifoldapp.org/"
+                                },
+                                "username": {
+                                  "type": "string"
+                                },
+                                "password": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "targetNameFormat": {
+                              "type": "string",
+                              "example": "%s-%t.%e"
+                            },
+                            "strategy": {
+                              "type": "integer",
+                              "description": "A digit representation of the export target strategy"
+                            }
+                          }
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "partial": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Valid API key was not provided."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an export target",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Export Targets"
+        ],
+        "responses": {
+          "204": {
+            "description": "Removes the ExportTarget resource."
+          },
+          "401": {
+            "description": "Valid API key was not provided."
+          }
+        }
+      }
+    },
     "/me/relationships/favorites": {
       "get": {
         "summary": "List the current user's favorites",
@@ -26525,6 +27284,9 @@
                     "attributes": {
                       "type": "object",
                       "properties": {
+                        "removeCover": {
+                          "type": "boolean"
+                        },
                         "title": {
                           "type": "string"
                         },
@@ -29542,6 +30304,168 @@
         }
       }
     },
+    "Collaborator": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "collaborators"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "maker": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "collaboratable": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Comment": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "comments"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "abilities": {
+                  "type": "object"
+                },
+                "parentId": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "flagsCount": {
+                  "type": "integer"
+                },
+                "deleted": {
+                  "type": "boolean"
+                },
+                "childrenCount": {
+                  "type": "integer"
+                },
+                "sortOrder": {
+                  "type": "integer"
+                },
+                "authorCreated": {
+                  "type": "boolean"
+                },
+                "flagged": {
+                  "type": "boolean"
+                },
+                "body": {
+                  "type": "string"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "creator": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "Text": {
       "type": "object",
       "properties": {
@@ -30102,180 +31026,6 @@
         }
       }
     },
-    "ResourceCollection": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "resourceCollections"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "abilities": {
-                  "type": "object"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "titleFormatted": {
-                  "type": "string"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "description": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "descriptionFormatted": {
-                  "type": "string"
-                },
-                "projectId": {
-                  "type": "string",
-                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                },
-                "resourceKinds": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "collectionResourcesCount": {
-                  "type": "integer"
-                },
-                "slug": {
-                  "type": "string"
-                },
-                "pendingSlug": {
-                  "type": "string"
-                },
-                "thumbnailStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "largeLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                },
-                "resourceTags": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "resources": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                          },
-                          "type": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "project": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "Annotation": {
       "type": "object",
       "properties": {
@@ -30510,7 +31260,7 @@
         }
       }
     },
-    "TwitterQuery": {
+    "Event": {
       "type": "object",
       "properties": {
         "data": {
@@ -30522,60 +31272,75 @@
             },
             "type": {
               "type": "string",
-              "example": "twitterQueries"
+              "example": "events"
             },
             "attributes": {
               "type": "object",
               "properties": {
+                "eventType": {
+                  "type": "string",
+                  "example": "resource_collection_added"
+                },
+                "eventUrl": {
+                  "type": "string",
+                  "example": "/project/023ebc40-174a-4056-b1e7-de1a1f52d666/ResourceCollection/aec3e2f6-f541-464c-b3cf-08ebba2a4453"
+                },
+                "subjectId": {
+                  "type": "string",
+                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                },
+                "subjectType": {
+                  "type": "string",
+                  "example": "ResourceCollection"
+                },
+                "subjectSlug": {
+                  "type": "string"
+                },
+                "subjectTitle": {
+                  "type": "string"
+                },
+                "subjectSubtitle": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "attributionName": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "attributionUrl": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "attributionIdentifier": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "excerpt": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "projectId": {
+                  "type": "string",
+                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                },
+                "projectSlug": {
+                  "type": "string"
+                },
+                "eventTitle": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "eventSubtitle": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
                 "createdAt": {
                   "type": "string",
                   "format": "date-time"
                 },
-                "updatedAt": {
+                "subjectTitleFormatted": {
                   "type": "string",
-                  "format": "date-time"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "active": {
-                  "type": "boolean"
-                },
-                "eventsCount": {
-                  "type": "integer"
-                },
-                "resultType": {
-                  "type": "string",
-                  "enum": [
-                    "most_recent",
-                    "popular"
-                  ]
-                },
-                "displayName": {
-                  "type": "string"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "project": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
+                  "example": "<p>string</p>"
                 }
               }
             },
@@ -30591,7 +31356,7 @@
         }
       }
     },
-    "Password": {
+    "Maker": {
       "type": "object",
       "properties": {
         "data": {
@@ -30603,7 +31368,7 @@
             },
             "type": {
               "type": "string",
-              "example": "passwords"
+              "example": "makers"
             },
             "attributes": {
               "type": "object",
@@ -30611,20 +31376,31 @@
                 "abilities": {
                   "type": "object"
                 },
-                "nickname": {
-                  "type": "string"
-                },
                 "firstName": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Requires at least one of these fields"
                 },
                 "lastName": {
+                  "type": "string",
+                  "description": "Requires at least one of these fields"
+                },
+                "middleName": {
+                  "x-nullable": true,
                   "type": "string"
                 },
-                "updatedAt": {
-                  "type": "string",
-                  "format": "date-time"
+                "displayName": {
+                  "x-nullable": true,
+                  "type": "string"
                 },
                 "fullName": {
+                  "type": "string"
+                },
+                "suffix": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "prefix": {
+                  "x-nullable": true,
                   "type": "string"
                 },
                 "avatarStyles": {
@@ -30679,80 +31455,6 @@
                       "x-nullable": true,
                       "type": "string",
                       "example": "http://some-website.com"
-                    }
-                  }
-                },
-                "email": {
-                  "type": "string",
-                  "example": "me@email.com"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "role": {
-                  "type": "string"
-                },
-                "kind": {
-                  "type": "string"
-                },
-                "isCurrentUser": {
-                  "type": "boolean"
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "CollectionProject": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "collectionProjects"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "position": {
-                  "type": "integer"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "project": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
                     }
                   }
                 }
@@ -31475,6 +32177,330 @@
               "type": "object",
               "properties": {
                 "parentItem": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Password": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "passwords"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "abilities": {
+                  "type": "object"
+                },
+                "nickname": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "fullName": {
+                  "type": "string"
+                },
+                "avatarStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "largeLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                },
+                "email": {
+                  "type": "string",
+                  "example": "me@email.com"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "isCurrentUser": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "TextCategory": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "textCategories"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ExportTarget": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "exportTargets"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "strategy": {
+                  "type": "string",
+                  "description": "Denotes which on the two sftp configurations will be used.",
+                  "example": "sftp_key"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "configuration": {
+                  "type": "object",
+                  "properties": {
+                    "sftpKey": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "port": {
+                          "type": "integer",
+                          "example": 3020
+                        },
+                        "host": {
+                          "type": "string",
+                          "example": "https://manifoldapp.org/"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
+                        "compression": {
+                          "type": "integer"
+                        },
+                        "privateKey": {
+                          "type": "string",
+                          "description": "The key used to secure the sftp connection. This value can be updated, but will not be sent in any response. It will instead respond with [FILTERED] if there is a value.",
+                          "example": "[FILTERED]"
+                        }
+                      }
+                    },
+                    "sftpPassword": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "port": {
+                          "type": "integer",
+                          "example": 3020
+                        },
+                        "host": {
+                          "type": "string",
+                          "example": "https://manifoldapp.org/"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
+                        "password": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "targetNameFormat": {
+                      "type": "string",
+                      "example": "%s-%t.%e"
+                    },
+                    "strategy": {
+                      "type": "integer",
+                      "description": "A digit representation of the export target strategy"
+                    }
+                  }
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "CollectionProject": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "collectionProjects"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "position": {
+                  "type": "integer"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "project": {
                   "type": "object",
                   "properties": {
                     "data": {
@@ -32307,691 +33333,6 @@
         }
       }
     },
-    "ProjectCollection": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "projectCollections"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "abilities": {
-                  "type": "object"
-                },
-                "title": {
-                  "type": "string",
-                  "description": "Must be unique."
-                },
-                "slug": {
-                  "type": "string",
-                  "description": "translation missing: en.attributes.descriptions.slug"
-                },
-                "pendingSlug": {
-                  "type": "string",
-                  "description": "translation missing: en.attributes.descriptions.pending_slug"
-                },
-                "sortOrder": {
-                  "type": "string",
-                  "enum": [
-                    "created_at_asc",
-                    "created_at_desc",
-                    "updated_at_asc",
-                    "updated_at_desc",
-                    "publication_date_asc",
-                    "publication_date_desc",
-                    "title_asc",
-                    "title_desc"
-                  ]
-                },
-                "visible": {
-                  "type": "boolean"
-                },
-                "homepage": {
-                  "type": "boolean"
-                },
-                "position": {
-                  "type": "integer"
-                },
-                "icon": {
-                  "type": "string",
-                  "enum": [
-                    "lamp"
-                  ]
-                },
-                "numberOfProjects": {
-                  "x-nullable": true,
-                  "type": "integer"
-                },
-                "featuredOnly": {
-                  "type": "boolean"
-                },
-                "smart": {
-                  "type": "boolean"
-                },
-                "description": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "descriptionFormatted": {
-                  "type": "string"
-                },
-                "descriptionPlaintext": {
-                  "type": "string"
-                },
-                "tagList": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "homepageStartDate": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "homepageEndDate": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "homepageCount": {
-                  "x-nullable": true,
-                  "type": "integer"
-                },
-                "manuallySorted": {
-                  "type": "boolean"
-                },
-                "projectsCount": {
-                  "type": "integer"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "collectionProjects": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                          },
-                          "type": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "subjects": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                          },
-                          "type": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Category": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "categories"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "abilities": {
-                  "type": "object"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "position": {
-                  "type": "integer"
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "TextCategory": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "textCategories"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "position": {
-                  "type": "integer"
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Feature": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "features"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "abilities": {
-                  "type": "object"
-                },
-                "header": {
-                  "type": "string"
-                },
-                "headerFormatted": {
-                  "type": "string"
-                },
-                "subheader": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "subheaderFormatted": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "body": {
-                  "type": "string"
-                },
-                "bodyFormatted": {
-                  "type": "string"
-                },
-                "linkText": {
-                  "type": "string"
-                },
-                "linkUrl": {
-                  "type": "string",
-                  "example": "http://some-website.com"
-                },
-                "linkTarget": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "description": "Where to display the linked URL. Additional information can be found <a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target'>here</a>"
-                },
-                "style": {
-                  "type": "string",
-                  "enum": [
-                    "dark",
-                    "light"
-                  ]
-                },
-                "hidden": {
-                  "type": "boolean"
-                },
-                "backgroundColor": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "description": "Any valid CSS color (eg. 'blue' or '#e3e3e3'"
-                },
-                "foregroundColor": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "description": "Any valid CSS color (eg. 'blue' or '#e3e3e3'"
-                },
-                "headerColor": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "description": "Any valid CSS color (eg. 'blue' or '#e3e3e3'"
-                },
-                "layout": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "foregroundTop": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "example": "1.9em",
-                  "description": "Any valid CSS distance (eg. px, em, rem)"
-                },
-                "foregroundLeft": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "example": "1.9em",
-                  "description": "Any valid CSS distance (eg. px, em, rem)"
-                },
-                "foregroundPosition": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "example": "absolute",
-                  "description": "Position can be absolute or relative"
-                },
-                "position": {
-                  "type": "integer"
-                },
-                "live": {
-                  "type": "boolean"
-                },
-                "includeSignUp": {
-                  "type": "boolean"
-                },
-                "foregroundStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "largeLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                },
-                "backgroundStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "largeLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Statistics": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "0"
-            },
-            "type": {
-              "type": "string",
-              "example": "statistics"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "readersThisWeek": {
-                  "type": "number",
-                  "format": "float"
-                },
-                "readerIncrease": {
-                  "type": "integer"
-                },
-                "newHighlightsCount": {
-                  "type": "integer"
-                },
-                "newAnnotationsCount": {
-                  "type": "integer"
-                },
-                "newTextsCount": {
-                  "type": "integer"
-                },
-                "totalTextCount": {
-                  "type": "integer"
-                },
-                "totalResourceCount": {
-                  "type": "integer"
-                },
-                "totalAnnotationCount": {
-                  "type": "integer"
-                },
-                "totalCommentCount": {
-                  "type": "integer"
-                },
-                "totalUserCount": {
-                  "type": "integer"
-                },
-                "totalProjectCount": {
-                  "type": "integer"
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Permission": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "permissions"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "roleNames": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": "editor"
-                  }
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "user": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                },
-                "resource": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "CollectionResource": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "collectionResources"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "position": {
-                  "type": "integer"
-                },
-                "resourceCollectionId": {
-                  "type": "string",
-                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "resource": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "CurrentUser": {
       "type": "object",
       "properties": {
@@ -33249,6 +33590,612 @@
                           "type": {
                             "type": "string"
                           }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "categories"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "abilities": {
+                  "type": "object"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ResourceImport": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "resourceImports"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "enum": [
+                    "google_sheet",
+                    "attached_data"
+                  ]
+                },
+                "columnMap": {
+                  "type": "object"
+                },
+                "columnAutomap": {
+                  "type": "object"
+                },
+                "headerRow": {
+                  "type": "integer"
+                },
+                "headers": {
+                  "type": "object"
+                },
+                "availableColumns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "storageType": {
+                  "type": "string"
+                },
+                "storageIdentifier": {
+                  "type": "string"
+                },
+                "url": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "example": "http://some-website.com",
+                  "description": "Required if source is a google sheet"
+                },
+                "parseError": {
+                  "type": "boolean"
+                },
+                "importResults": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "dataFilename": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "pending"
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Feature": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "features"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "abilities": {
+                  "type": "object"
+                },
+                "header": {
+                  "type": "string"
+                },
+                "headerFormatted": {
+                  "type": "string"
+                },
+                "subheader": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "subheaderFormatted": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "body": {
+                  "type": "string"
+                },
+                "bodyFormatted": {
+                  "type": "string"
+                },
+                "linkText": {
+                  "type": "string"
+                },
+                "linkUrl": {
+                  "type": "string",
+                  "example": "http://some-website.com"
+                },
+                "linkTarget": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "description": "Where to display the linked URL. Additional information can be found <a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target'>here</a>"
+                },
+                "style": {
+                  "type": "string",
+                  "enum": [
+                    "dark",
+                    "light"
+                  ]
+                },
+                "hidden": {
+                  "type": "boolean"
+                },
+                "backgroundColor": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "description": "Any valid CSS color (eg. 'blue' or '#e3e3e3'"
+                },
+                "foregroundColor": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "description": "Any valid CSS color (eg. 'blue' or '#e3e3e3'"
+                },
+                "headerColor": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "description": "Any valid CSS color (eg. 'blue' or '#e3e3e3'"
+                },
+                "layout": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "foregroundTop": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "example": "1.9em",
+                  "description": "Any valid CSS distance (eg. px, em, rem)"
+                },
+                "foregroundLeft": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "example": "1.9em",
+                  "description": "Any valid CSS distance (eg. px, em, rem)"
+                },
+                "foregroundPosition": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "example": "absolute",
+                  "description": "Position can be absolute or relative"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "live": {
+                  "type": "boolean"
+                },
+                "includeSignUp": {
+                  "type": "boolean"
+                },
+                "foregroundStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "largeLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                },
+                "backgroundStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "largeLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ProjectCollection": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "projectCollections"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "abilities": {
+                  "type": "object"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Must be unique."
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "translation missing: en.attributes.descriptions.slug"
+                },
+                "pendingSlug": {
+                  "type": "string",
+                  "description": "translation missing: en.attributes.descriptions.pending_slug"
+                },
+                "sortOrder": {
+                  "type": "string",
+                  "enum": [
+                    "created_at_asc",
+                    "created_at_desc",
+                    "updated_at_asc",
+                    "updated_at_desc",
+                    "publication_date_asc",
+                    "publication_date_desc",
+                    "title_asc",
+                    "title_desc"
+                  ]
+                },
+                "visible": {
+                  "type": "boolean"
+                },
+                "homepage": {
+                  "type": "boolean"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "icon": {
+                  "type": "string",
+                  "enum": [
+                    "lamp"
+                  ]
+                },
+                "numberOfProjects": {
+                  "x-nullable": true,
+                  "type": "integer"
+                },
+                "featuredOnly": {
+                  "type": "boolean"
+                },
+                "smart": {
+                  "type": "boolean"
+                },
+                "description": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "descriptionFormatted": {
+                  "type": "string"
+                },
+                "descriptionPlaintext": {
+                  "type": "string"
+                },
+                "tagList": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "homepageStartDate": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "homepageEndDate": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "homepageCount": {
+                  "x-nullable": true,
+                  "type": "integer"
+                },
+                "manuallySorted": {
+                  "type": "boolean"
+                },
+                "projectsCount": {
+                  "type": "integer"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "collectionProjects": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                          },
+                          "type": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "subjects": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                          },
+                          "type": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Permission": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "permissions"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "roleNames": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "editor"
+                  }
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
                         }
                       }
                     }
@@ -33742,7 +34689,7 @@
         }
       }
     },
-    "Favorite": {
+    "ResourceCollection": {
       "type": "object",
       "properties": {
         "data": {
@@ -33754,24 +34701,109 @@
             },
             "type": {
               "type": "string",
-              "example": "favorites"
+              "example": "resourceCollections"
             },
             "attributes": {
               "type": "object",
               "properties": {
-                "favoritableType": {
+                "abilities": {
+                  "type": "object"
+                },
+                "title": {
                   "type": "string"
                 },
-                "favoritableId": {
+                "titleFormatted": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "description": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "descriptionFormatted": {
+                  "type": "string"
+                },
+                "projectId": {
                   "type": "string",
                   "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
                 },
-                "subjectIds": {
-                  "x-nullable": true,
+                "resourceKinds": {
                   "type": "array",
                   "items": {
-                    "type": "string",
-                    "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                    "type": "string"
+                  }
+                },
+                "collectionResourcesCount": {
+                  "type": "integer"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "pendingSlug": {
+                  "type": "string"
+                },
+                "thumbnailStyles": {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "smallPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "medium": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumSquare": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "mediumPortrait": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "largeLandscape": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    },
+                    "original": {
+                      "x-nullable": true,
+                      "type": "string",
+                      "example": "http://some-website.com"
+                    }
+                  }
+                },
+                "resourceTags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
                   }
                 }
               }
@@ -33779,7 +34811,27 @@
             "relationships": {
               "type": "object",
               "properties": {
-                "favoritable": {
+                "resources": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                          },
+                          "type": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "project": {
                   "type": "object",
                   "properties": {
                     "data": {
@@ -33868,78 +34920,6 @@
               "type": "object",
               "properties": {
                 "project": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "ReadingGroupMembership": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "readingGroupMemberships"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "currentUserIsCreator": {
-                  "type": "boolean"
-                },
-                "annotationsCount": {
-                  "type": "integer"
-                },
-                "highlightsCount": {
-                  "type": "integer"
-                },
-                "anonymousLabel": {
-                  "type": "string"
-                },
-                "isCurrentUser": {
-                  "type": "boolean"
-                },
-                "name": {
-                  "type": "string"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "user": {
                   "type": "object",
                   "properties": {
                     "data": {
@@ -34197,6 +35177,196 @@
         }
       }
     },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "0"
+            },
+            "type": {
+              "type": "string",
+              "example": "tags"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "taggingsCount": {
+                  "type": "integer"
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "TwitterQuery": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "twitterQueries"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "query": {
+                  "type": "string"
+                },
+                "active": {
+                  "type": "boolean"
+                },
+                "eventsCount": {
+                  "type": "integer"
+                },
+                "resultType": {
+                  "type": "string",
+                  "enum": [
+                    "most_recent",
+                    "popular"
+                  ]
+                },
+                "displayName": {
+                  "type": "string"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ReadingGroupMembership": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "readingGroupMemberships"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "currentUserIsCreator": {
+                  "type": "boolean"
+                },
+                "annotationsCount": {
+                  "type": "integer"
+                },
+                "highlightsCount": {
+                  "type": "integer"
+                },
+                "anonymousLabel": {
+                  "type": "string"
+                },
+                "isCurrentUser": {
+                  "type": "boolean"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "ReadingGroup": {
       "type": "object",
       "properties": {
@@ -34293,171 +35463,6 @@
                   }
                 },
                 "readingGroupMemberships": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                          },
-                          "type": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Tag": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "0"
-            },
-            "type": {
-              "type": "string",
-              "example": "tags"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "taggingsCount": {
-                  "type": "integer"
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "TextSection": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "textSections"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "textSlug": {
-                  "type": "string"
-                },
-                "textTitle": {
-                  "type": "string"
-                },
-                "name": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "socialImage": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "example": "http://some-website.com"
-                },
-                "sourceIdentifier": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "kind": {
-                  "type": "string",
-                  "example": "section"
-                },
-                "bodyJson": {
-                  "type": "object",
-                  "properties": {
-                    "tag": {
-                      "type": "string",
-                      "example": "div"
-                    },
-                    "children": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      },
-                      "description": "A JSON representation of the text section's HTML contents"
-                    }
-                  }
-                },
-                "citations": {
-                  "type": "object",
-                  "properties": {
-                    "apa": {
-                      "type": "string"
-                    },
-                    "mla": {
-                      "type": "string"
-                    },
-                    "chicago": {
-                      "type": "string"
-                    }
-                  },
-                  "description": "Citations of the book in a variety of formats (mla, chicago, apa, etc.)"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "text": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                },
-                "stylesheets": {
                   "type": "object",
                   "properties": {
                     "data": {
@@ -34749,6 +35754,134 @@
         }
       }
     },
+    "TextSection": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "textSections"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "textSlug": {
+                  "type": "string"
+                },
+                "textTitle": {
+                  "type": "string"
+                },
+                "name": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "socialImage": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "example": "http://some-website.com"
+                },
+                "sourceIdentifier": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string",
+                  "example": "section"
+                },
+                "bodyJson": {
+                  "type": "object",
+                  "properties": {
+                    "tag": {
+                      "type": "string",
+                      "example": "div"
+                    },
+                    "children": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      },
+                      "description": "A JSON representation of the text section's HTML contents"
+                    }
+                  }
+                },
+                "citations": {
+                  "type": "object",
+                  "properties": {
+                    "apa": {
+                      "type": "string"
+                    },
+                    "mla": {
+                      "type": "string"
+                    },
+                    "chicago": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Citations of the book in a variety of formats (mla, chicago, apa, etc.)"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "stylesheets": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                          },
+                          "type": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "Page": {
       "type": "object",
       "properties": {
@@ -34838,7 +35971,7 @@
         }
       }
     },
-    "Collaborator": {
+    "CollectionResource": {
       "type": "object",
       "properties": {
         "data": {
@@ -34850,38 +35983,24 @@
             },
             "type": {
               "type": "string",
-              "example": "collaborators"
+              "example": "collectionResources"
             },
             "attributes": {
               "type": "object",
               "properties": {
-                "role": {
-                  "type": "string"
+                "position": {
+                  "type": "integer"
+                },
+                "resourceCollectionId": {
+                  "type": "string",
+                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
                 }
               }
             },
             "relationships": {
               "type": "object",
               "properties": {
-                "maker": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                },
-                "collaboratable": {
+                "resource": {
                   "type": "object",
                   "properties": {
                     "data": {
@@ -34913,7 +36032,72 @@
         }
       }
     },
-    "Comment": {
+    "Statistics": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "0"
+            },
+            "type": {
+              "type": "string",
+              "example": "statistics"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "readersThisWeek": {
+                  "type": "number",
+                  "format": "float"
+                },
+                "readerIncrease": {
+                  "type": "integer"
+                },
+                "newHighlightsCount": {
+                  "type": "integer"
+                },
+                "newAnnotationsCount": {
+                  "type": "integer"
+                },
+                "newTextsCount": {
+                  "type": "integer"
+                },
+                "totalTextCount": {
+                  "type": "integer"
+                },
+                "totalResourceCount": {
+                  "type": "integer"
+                },
+                "totalAnnotationCount": {
+                  "type": "integer"
+                },
+                "totalCommentCount": {
+                  "type": "integer"
+                },
+                "totalUserCount": {
+                  "type": "integer"
+                },
+                "totalProjectCount": {
+                  "type": "integer"
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Favorite": {
       "type": "object",
       "properties": {
         "data": {
@@ -34925,50 +36109,32 @@
             },
             "type": {
               "type": "string",
-              "example": "comments"
+              "example": "favorites"
             },
             "attributes": {
               "type": "object",
               "properties": {
-                "abilities": {
-                  "type": "object"
+                "favoritableType": {
+                  "type": "string"
                 },
-                "parentId": {
-                  "x-nullable": true,
+                "favoritableId": {
                   "type": "string",
                   "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
                 },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "flagsCount": {
-                  "type": "integer"
-                },
-                "deleted": {
-                  "type": "boolean"
-                },
-                "childrenCount": {
-                  "type": "integer"
-                },
-                "sortOrder": {
-                  "type": "integer"
-                },
-                "authorCreated": {
-                  "type": "boolean"
-                },
-                "flagged": {
-                  "type": "boolean"
-                },
-                "body": {
-                  "type": "string"
+                "subjectIds": {
+                  "x-nullable": true,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                  }
                 }
               }
             },
             "relationships": {
               "type": "object",
               "properties": {
-                "creator": {
+                "favoritable": {
                   "type": "object",
                   "properties": {
                     "data": {
@@ -34985,302 +36151,6 @@
                       }
                     }
                   }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Maker": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "makers"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "abilities": {
-                  "type": "object"
-                },
-                "firstName": {
-                  "type": "string",
-                  "description": "Requires at least one of these fields"
-                },
-                "lastName": {
-                  "type": "string",
-                  "description": "Requires at least one of these fields"
-                },
-                "middleName": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "displayName": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "fullName": {
-                  "type": "string"
-                },
-                "suffix": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "prefix": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "avatarStyles": {
-                  "type": "object",
-                  "properties": {
-                    "small": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "smallPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "medium": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumSquare": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "mediumPortrait": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "largeLandscape": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    },
-                    "original": {
-                      "x-nullable": true,
-                      "type": "string",
-                      "example": "http://some-website.com"
-                    }
-                  }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "ResourceImport": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "resourceImports"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string",
-                  "enum": [
-                    "google_sheet",
-                    "attached_data"
-                  ]
-                },
-                "columnMap": {
-                  "type": "object"
-                },
-                "columnAutomap": {
-                  "type": "object"
-                },
-                "headerRow": {
-                  "type": "integer"
-                },
-                "headers": {
-                  "type": "object"
-                },
-                "availableColumns": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "storageType": {
-                  "type": "string"
-                },
-                "storageIdentifier": {
-                  "type": "string"
-                },
-                "url": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "example": "http://some-website.com",
-                  "description": "Required if source is a google sheet"
-                },
-                "parseError": {
-                  "type": "boolean"
-                },
-                "importResults": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "dataFilename": {
-                  "type": "string"
-                },
-                "state": {
-                  "type": "string",
-                  "example": "pending"
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "partial": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Event": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-            },
-            "type": {
-              "type": "string",
-              "example": "events"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "eventType": {
-                  "type": "string",
-                  "example": "resource_collection_added"
-                },
-                "eventUrl": {
-                  "type": "string",
-                  "example": "/project/023ebc40-174a-4056-b1e7-de1a1f52d666/ResourceCollection/aec3e2f6-f541-464c-b3cf-08ebba2a4453"
-                },
-                "subjectId": {
-                  "type": "string",
-                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                },
-                "subjectType": {
-                  "type": "string",
-                  "example": "ResourceCollection"
-                },
-                "subjectSlug": {
-                  "type": "string"
-                },
-                "subjectTitle": {
-                  "type": "string"
-                },
-                "subjectSubtitle": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "attributionName": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "attributionUrl": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "attributionIdentifier": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "excerpt": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "projectId": {
-                  "type": "string",
-                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                },
-                "projectSlug": {
-                  "type": "string"
-                },
-                "eventTitle": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "eventSubtitle": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "subjectTitleFormatted": {
-                  "type": "string",
-                  "example": "<p>string</p>"
                 }
               }
             },
