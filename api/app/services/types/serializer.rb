@@ -9,6 +9,9 @@ module Types
     Collection = Types::Hash.schema(data: Types::Array.of(Pointer))
     Resource = Types::Hash.schema(data: Pointer.optional)
 
+    Host = Types::String.meta(example: "https://manifoldapp.org/")
+    Port = Types::Integer.meta(example: 3020)
+
     NotificationPreference = Types::String.enum("always", "never", "daily")
 
     Citations = Types::Hash.schema(
