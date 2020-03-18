@@ -13601,6 +13601,557 @@
         }
       }
     },
+    "/project_exportations": {
+      "get": {
+        "summary": "List all project exportations",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Project Exportations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of ProjectExportation resources.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                      },
+                      "type": {
+                        "type": "string",
+                        "example": "projectExportations"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "currentState": {
+                            "type": "string",
+                            "enum": [
+                              "pending",
+                              "queued",
+                              "importing",
+                              "imported",
+                              "failed",
+                              "skipped"
+                            ]
+                          },
+                          "exportedAt": {
+                            "x-nullable": true,
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "metadata": {
+                            "x-nullable": true,
+                            "type": "object"
+                          },
+                          "packageUrl": {
+                            "x-nullable": true,
+                            "type": "string"
+                          },
+                          "packageSize": {
+                            "x-nullable": true,
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "relationships": {
+                        "type": "object",
+                        "properties": {
+                          "project": {
+                            "type": "object",
+                            "properties": {
+                              "data": {
+                                "x-nullable": true,
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                                  },
+                                  "type": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "exportTarget": {
+                            "type": "object",
+                            "properties": {
+                              "data": {
+                                "x-nullable": true,
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                                  },
+                                  "type": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "meta": {
+                        "type": "object",
+                        "properties": {
+                          "partial": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a project exportation",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "projectId": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "projectExportationId": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        }
+                      },
+                      "required": [
+                        "project_id",
+                        "export_target_id"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Project Exportations"
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the ProjectExportation resource.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "projectExportations"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "currentState": {
+                          "type": "string",
+                          "enum": [
+                            "pending",
+                            "queued",
+                            "importing",
+                            "imported",
+                            "failed",
+                            "skipped"
+                          ]
+                        },
+                        "exportedAt": {
+                          "x-nullable": true,
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "metadata": {
+                          "x-nullable": true,
+                          "type": "object"
+                        },
+                        "packageUrl": {
+                          "x-nullable": true,
+                          "type": "string"
+                        },
+                        "packageSize": {
+                          "x-nullable": true,
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "relationships": {
+                      "type": "object",
+                      "properties": {
+                        "project": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                                },
+                                "type": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "exportTarget": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                                },
+                                "type": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "partial": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Valid API key was not provided."
+          }
+        }
+      }
+    },
+    "/project_exportations/{id}": {
+      "get": {
+        "summary": "Retrieve a project exportation",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "Project Exportations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieve a ProjectExportation.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "projectExportations"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "currentState": {
+                          "type": "string",
+                          "enum": [
+                            "pending",
+                            "queued",
+                            "importing",
+                            "imported",
+                            "failed",
+                            "skipped"
+                          ]
+                        },
+                        "exportedAt": {
+                          "x-nullable": true,
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "metadata": {
+                          "x-nullable": true,
+                          "type": "object"
+                        },
+                        "packageUrl": {
+                          "x-nullable": true,
+                          "type": "string"
+                        },
+                        "packageSize": {
+                          "x-nullable": true,
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "relationships": {
+                      "type": "object",
+                      "properties": {
+                        "project": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                                },
+                                "type": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "exportTarget": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "x-nullable": true,
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                                },
+                                "type": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "partial": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested resource doesn't exist."
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/relationships/project_exportations": {
+      "get": {
+        "summary": "List all project exportations",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Project Exportations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of ProjectExportation resources.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                      },
+                      "type": {
+                        "type": "string",
+                        "example": "projectExportations"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "currentState": {
+                            "type": "string",
+                            "enum": [
+                              "pending",
+                              "queued",
+                              "importing",
+                              "imported",
+                              "failed",
+                              "skipped"
+                            ]
+                          },
+                          "exportedAt": {
+                            "x-nullable": true,
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "metadata": {
+                            "x-nullable": true,
+                            "type": "object"
+                          },
+                          "packageUrl": {
+                            "x-nullable": true,
+                            "type": "string"
+                          },
+                          "packageSize": {
+                            "x-nullable": true,
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "relationships": {
+                        "type": "object",
+                        "properties": {
+                          "project": {
+                            "type": "object",
+                            "properties": {
+                              "data": {
+                                "x-nullable": true,
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                                  },
+                                  "type": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "exportTarget": {
+                            "type": "object",
+                            "properties": {
+                              "data": {
+                                "x-nullable": true,
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                                  },
+                                  "type": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "meta": {
+                        "type": "object",
+                        "properties": {
+                          "partial": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/projects/{id}": {
       "get": {
         "summary": "Retrieve a project",
@@ -30270,7 +30821,7 @@
     }
   },
   "definitions": {
-    "Subject": {
+    "ProjectExportation": {
       "type": "object",
       "properties": {
         "data": {
@@ -30282,13 +30833,83 @@
             },
             "type": {
               "type": "string",
-              "example": "subjects"
+              "example": "projectExportations"
             },
             "attributes": {
               "type": "object",
               "properties": {
-                "name": {
+                "currentState": {
+                  "type": "string",
+                  "enum": [
+                    "pending",
+                    "queued",
+                    "importing",
+                    "imported",
+                    "failed",
+                    "skipped"
+                  ]
+                },
+                "exportedAt": {
+                  "x-nullable": true,
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "metadata": {
+                  "x-nullable": true,
+                  "type": "object"
+                },
+                "packageUrl": {
+                  "x-nullable": true,
                   "type": "string"
+                },
+                "packageSize": {
+                  "x-nullable": true,
+                  "type": "string"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "exportTarget": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -30379,7 +31000,7 @@
         }
       }
     },
-    "Comment": {
+    "Subject": {
       "type": "object",
       "properties": {
         "data": {
@@ -30391,66 +31012,13 @@
             },
             "type": {
               "type": "string",
-              "example": "comments"
+              "example": "subjects"
             },
             "attributes": {
               "type": "object",
               "properties": {
-                "abilities": {
-                  "type": "object"
-                },
-                "parentId": {
-                  "x-nullable": true,
-                  "type": "string",
-                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "flagsCount": {
-                  "type": "integer"
-                },
-                "deleted": {
-                  "type": "boolean"
-                },
-                "childrenCount": {
-                  "type": "integer"
-                },
-                "sortOrder": {
-                  "type": "integer"
-                },
-                "authorCreated": {
-                  "type": "boolean"
-                },
-                "flagged": {
-                  "type": "boolean"
-                },
-                "body": {
+                "name": {
                   "type": "string"
-                }
-              }
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "creator": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "x-nullable": true,
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
                 }
               }
             },
@@ -31260,7 +31828,7 @@
         }
       }
     },
-    "Event": {
+    "Comment": {
       "type": "object",
       "properties": {
         "data": {
@@ -31272,75 +31840,66 @@
             },
             "type": {
               "type": "string",
-              "example": "events"
+              "example": "comments"
             },
             "attributes": {
               "type": "object",
               "properties": {
-                "eventType": {
-                  "type": "string",
-                  "example": "resource_collection_added"
+                "abilities": {
+                  "type": "object"
                 },
-                "eventUrl": {
-                  "type": "string",
-                  "example": "/project/023ebc40-174a-4056-b1e7-de1a1f52d666/ResourceCollection/aec3e2f6-f541-464c-b3cf-08ebba2a4453"
-                },
-                "subjectId": {
+                "parentId": {
+                  "x-nullable": true,
                   "type": "string",
                   "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                },
-                "subjectType": {
-                  "type": "string",
-                  "example": "ResourceCollection"
-                },
-                "subjectSlug": {
-                  "type": "string"
-                },
-                "subjectTitle": {
-                  "type": "string"
-                },
-                "subjectSubtitle": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "attributionName": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "attributionUrl": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "attributionIdentifier": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "excerpt": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "projectId": {
-                  "type": "string",
-                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-                },
-                "projectSlug": {
-                  "type": "string"
-                },
-                "eventTitle": {
-                  "x-nullable": true,
-                  "type": "string"
-                },
-                "eventSubtitle": {
-                  "x-nullable": true,
-                  "type": "string"
                 },
                 "createdAt": {
                   "type": "string",
                   "format": "date-time"
                 },
-                "subjectTitleFormatted": {
-                  "type": "string",
-                  "example": "<p>string</p>"
+                "flagsCount": {
+                  "type": "integer"
+                },
+                "deleted": {
+                  "type": "boolean"
+                },
+                "childrenCount": {
+                  "type": "integer"
+                },
+                "sortOrder": {
+                  "type": "integer"
+                },
+                "authorCreated": {
+                  "type": "boolean"
+                },
+                "flagged": {
+                  "type": "boolean"
+                },
+                "body": {
+                  "type": "string"
+                }
+              }
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "creator": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "x-nullable": true,
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -32106,6 +32665,102 @@
                       }
                     }
                   }
+                }
+              }
+            },
+            "meta": {
+              "type": "object",
+              "properties": {
+                "partial": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Event": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            },
+            "type": {
+              "type": "string",
+              "example": "events"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "eventType": {
+                  "type": "string",
+                  "example": "resource_collection_added"
+                },
+                "eventUrl": {
+                  "type": "string",
+                  "example": "/project/023ebc40-174a-4056-b1e7-de1a1f52d666/ResourceCollection/aec3e2f6-f541-464c-b3cf-08ebba2a4453"
+                },
+                "subjectId": {
+                  "type": "string",
+                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                },
+                "subjectType": {
+                  "type": "string",
+                  "example": "ResourceCollection"
+                },
+                "subjectSlug": {
+                  "type": "string"
+                },
+                "subjectTitle": {
+                  "type": "string"
+                },
+                "subjectSubtitle": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "attributionName": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "attributionUrl": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "attributionIdentifier": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "excerpt": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "projectId": {
+                  "type": "string",
+                  "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                },
+                "projectSlug": {
+                  "type": "string"
+                },
+                "eventTitle": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "eventSubtitle": {
+                  "x-nullable": true,
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "subjectTitleFormatted": {
+                  "type": "string",
+                  "example": "<p>string</p>"
                 }
               }
             },
