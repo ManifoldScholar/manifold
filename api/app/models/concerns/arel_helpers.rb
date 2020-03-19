@@ -154,6 +154,36 @@ module Concerns
         arel_or_expressions *expressions
       end
 
+      # @see #arel_expr_in_query
+      # @param [Symbol] attr (see #arel_attrify)
+      # @param [#to_sql, #to_s] query
+      # @return [Arel::Nodes::In]
+      def arel_attr_in_query(attr, query)
+        arel_expr_in_query arel_attrify(attr), query
+      end
+
+      # @param [#in] expr
+      # @param [#to_sql, #to_s] query
+      # @return [Arel::Nodes::In]
+      def arel_expr_in_query(expr, query)
+        wrapped_query = arel_quote_query query
+
+        expr.in(wrapped_query)
+      end
+
+      # @param [#to_sql] query
+      # @return [Arel::Nodes::SqlLiteral]
+      def arel_quote_query(query)
+        case query
+        when Dux[:to_sql] then arel_literal query.to_sql
+        when String then arel_literal query
+        else
+          # :nocov:
+          raise TypeError, "cannot quote query #{query.inspect}"
+          # :nocov:
+        end
+      end
+
       def arel_range_contains(attribute, value)
         arel_infix "@>", arel_attrify(attribute), arel_quote(value)
       end

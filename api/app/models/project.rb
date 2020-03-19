@@ -1,6 +1,5 @@
 # The project model is the primary unit of Manifold.
 class Project < ApplicationRecord
-
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:title, :maker_names].freeze
   AVATAR_COLOR_PRIMARY = "primary".freeze
@@ -159,7 +158,6 @@ class Project < ApplicationRecord
   manifold_has_attached_file :hero, :image
   manifold_has_attached_file :avatar, :image
 
-  # Scopes
   scope :by_featured, lambda { |featured|
     next all if featured.nil?
 
@@ -173,9 +171,14 @@ class Project < ApplicationRecord
                       .merge(ProjectSubject.by_subject(subject)).select(:project_id))
   }
 
-  scope :by_draft, lambda { |draft|
-    where(draft: to_boolean(draft)) unless draft.nil?
-  }
+  scope :restricted, -> { where(restricted_access: true) }
+  scope :unrestricted, -> { where(restricted_access: false) }
+  scope :drafts, -> { where(draft: true) }
+  scope :published, -> { where(draft: false) }
+  scope :by_draft, ->(draft = nil) { where(draft: to_boolean(draft)) unless draft.nil? }
+
+  scope :standalone_enforced, -> { where(standalone_mode: :enforced) }
+  scope :standalone_unforced, -> { where.not(standalone_mode: :enforced) }
 
   scope :ranked_by_collection, (lambda do
     is_same_project = CollectionProjectRanking
@@ -190,43 +193,15 @@ class Project < ApplicationRecord
       .where(is_same_project.and(in_same_collection))
   end)
 
-  scope :with_order, lambda { |by = nil|
-    next order(:sort_title, :title) unless by.present?
+  scope :with_order, ->(by = nil) { by.present? ? order(by) : order(:sort_title, :title) }
 
-    order(by)
-  }
-
-  scope :by_standalone_mode_enforced, lambda { |enforced|
-    next where(standalone_mode: :enforced) if to_boolean(enforced)
-
-    where.not(standalone_mode: :enforced)
-  }
+  scope :by_standalone_mode_enforced, ->(enforced) { to_boolean(enforced) ? standalone_enforced : standalone_unforced }
 
   scope :with_creator_role, ->(user = nil) { where(creator: user) if user.present? }
 
-  scope :with_read_ability, lambda { |user = nil|
-    next all if user && Project.drafts_readable_by?(user)
-    next where(draft: false) unless user
+  scope :with_read_ability, ->(user = nil) { build_read_ability_scope_for user }
 
-    updatable_projects = Project.authorizer.scope_updatable_projects(user).pluck(:id)
-    where(draft: false).or(where(id: updatable_projects))
-  }
-
-  scope :with_update_ability, lambda { |user = nil|
-    next none unless user && Project.updatable_by?(user)
-
-    Project.authorizer.scope_updatable_projects(user)
-  }
-
-  scope :with_collection_order, lambda { |collection = nil|
-    next unless collection.present?
-
-    pc = ProjectCollection.friendly.find(collection)
-    ranked_by_collection
-      .joins(:collection_projects)
-      .where(collection_projects: { project_collection: pc })
-      .group("projects.id, collection_project_rankings.ranking")
-  }
+  scope :with_update_ability, ->(user = nil) { build_update_ability_scope_for user }
 
   scope :exports_as_bag_it, -> { export_configuration_where(exports_as_bag_it: true) }
   scope :sans_current_bag_it_export, -> { where.not(id: ProjectExportStatus.current_project_ids) }
@@ -394,5 +369,68 @@ class Project < ApplicationRecord
 
   def trigger_creation_event
     Event.trigger(EventType[:project_created], self)
+  end
+
+  class << self
+    # @see .arel_build_read_case_statement_for
+    # @param [User, nil] user
+    # @return [ActiveRecord::Relation<Project>]
+    def build_read_ability_scope_for(user = nil)
+      return published.unrestricted unless user.present?
+
+      where(arel_build_read_case_statement_for(user))
+    end
+
+    # @param [User, nil] user
+    # @return [ActiveRecord::Relation<Project>]
+    def build_update_ability_scope_for(user = nil)
+      return none if user.blank?
+
+      where arel_with_roles_for(user, RoleName.for_project_update)
+    end
+
+    private
+
+    # This creates a case statement to be supplied to `where`.
+    #
+    # * If the project is a draft, only show for users with draft access roles
+    # * If the project has restricted access, only show for users that have been granted
+    #   access to it
+    #
+    # @param [User, nil] user
+    def arel_build_read_case_statement_for(user)
+      arel_case.tap do |stmt|
+        stmt.when(arel_table[:draft]).then(arel_with_draft_roles_for(user))
+        stmt.when(arel_table[:restricted_access]).then(arel_with_full_read_access_roles_for(user))
+        stmt.else(true)
+      end
+    end
+
+    # @see .arel_with_roles_for
+    # @param [User] user
+    # @return [Arel::Nodes::Or]
+    def arel_with_draft_roles_for(user)
+      arel_with_roles_for(user, RoleName.for_draft_access)
+    end
+
+    # @see .arel_with_roles_for
+    # @param [User] user
+    # @return [Arel::Nodes::Or]
+    def arel_with_full_read_access_roles_for(user)
+      arel_with_roles_for(user, RoleName.for_full_read_access)
+    end
+
+    # @see RoleName.for_access
+    # @param [User] user
+    # @param [<Symbol, String>] global role names
+    # @param [<Symbol, String>] scoped role names
+    # @return [Arel::Nodes::Or]
+    def arel_with_roles_for(user, global: [], scoped: [])
+      query = with_role(scoped, user).unscope(:select).select(primary_key)
+
+      has_global_role = global.any? { |role| user.has_cached_role? role, :any }
+
+      arel_attr_in_query(primary_key, query).or(arel_quote(has_global_role))
+    end
   end
 end

@@ -1,6 +1,7 @@
 class CollectionProject < ApplicationRecord
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
+
   self.authorizer_name = "ProjectChildAuthorizer"
 
   belongs_to :project_collection, counter_cache: true
@@ -17,30 +18,15 @@ class CollectionProject < ApplicationRecord
   # Ordering
   acts_as_list scope: :project_collection
 
-  # Scopes
   scope :globally_ranked, -> { joins(:ranking).merge(CollectionProjectRanking.globally_ranked) }
   scope :ranked, -> { joins(:ranking).merge(CollectionProjectRanking.ranked) }
   scope :with_order, ->(order) { order(order) if order.present? }
 
-  scope :projects_with_read_ability, lambda { |user = nil|
-    next all if user && Project.drafts_readable_by?(user)
-    next joins(:project).where(projects: { draft: false }) unless user
-
-    projects_with_update_ability user
-  }
-
-  scope :projects_with_update_ability, lambda { |user = nil|
-    next none unless user.present?
-
-    joins(:project).where("projects.draft = FALSE OR projects.id IN (?)",
-                          Project.authorizer.scope_updatable_projects(user).pluck(:id))
-  }
+  scope :projects_with_read_ability, ->(user) { joins(:project).merge(Project.with_read_ability(user)) }
+  scope :projects_with_update_ability, ->(user) { joins(:project).merge(Project.with_update_ability(user)) }
 
   # Validation
   validates :project, uniqueness: { scope: :project_collection }
 
-  def project_summary_id
-    project_id
-  end
-
+  alias_attribute :project_summary_id, :project_id
 end
