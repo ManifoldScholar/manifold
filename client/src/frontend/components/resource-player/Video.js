@@ -44,16 +44,7 @@ export default class ResourcePlayerVideo extends Component {
         />
       );
     }
-    return (
-      <div
-        className="figure-video"
-        ref={c => {
-          this._figure = c;
-        }}
-      >
-        {output}
-      </div>
-    );
+    return <div className="figure-video">{output}</div>;
   }
 
   renderFileVideo(resource) {
