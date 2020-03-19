@@ -51,9 +51,6 @@ export default class ResourceListSlideFigure extends Component {
           </ResourcePreview>
         ) : null}
         <div
-          ref={c => {
-            this._figure = c;
-          }}
           className="figure-default"
           style={{ backgroundImage: `url(${bgImage})` }}
         >
