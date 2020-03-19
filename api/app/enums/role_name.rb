@@ -34,8 +34,24 @@ class RoleName < ClassyEnum::Base
 
   # @!group Visibility predicates
 
+  def acts_global?
+    global? || global_entitlement?
+  end
+
   def any_editor?
     config.any_editor.present?
+  end
+
+  def can_update_projects?
+    config.can_update_projects.present?
+  end
+
+  def provides_draft_access?
+    config.provides_draft_access.present?
+  end
+
+  def provides_full_read_access?
+    config.provides_full_read_access.present?
   end
 
   def visible_to_admin?
@@ -51,12 +67,25 @@ class RoleName < ClassyEnum::Base
   class << self
     # @!group Selections
 
+    def can_update_projects
+      select(&:can_update_projects?)
+    end
+
+    def draft_access
+      select(&:provides_draft_access?)
+    end
+
     def editor_roles
       select(&:any_editor?)
     end
 
     def entitlements
       select(&:entitlement?)
+    end
+
+    # @return [<RoleName>]
+    def full_read_access
+      select(&:provides_full_read_access?)
     end
 
     def globals(without: nil)
@@ -95,10 +124,38 @@ class RoleName < ClassyEnum::Base
       end
     end
 
+    # @!attribute [r] for_draft_access
+    # @return [{ Symbol => <Symbol> }]
+    def for_draft_access
+      @for_draft_access ||= for_access draft_access
+    end
+
+    # @!attribute [r] for_full_read_access
+    # @return [{ Symbol => <Symbol> }]
+    def for_full_read_access
+      @for_full_read_access ||= for_access full_read_access
+    end
+
+    # @!attribute [r] for_project_update
+    # @return [{ Symbol => <Symbol> }]
+    def for_project_update
+      @for_project_update ||= for_access can_update_projects
+    end
+
     private
 
     def any_editor!
       config.any_editor = true
+    end
+
+    def can_update_projects!
+      config.can_update_projects = true
+    end
+
+    def for_access(selection)
+      global, scoped = selection.partition(&:acts_global?)
+
+      { global: global.map(&:to_sym), scoped: scoped.map(&:to_sym) }
     end
 
     def global!
@@ -107,6 +164,14 @@ class RoleName < ClassyEnum::Base
 
     def global_entitlement!
       set_kind! :global_entitlement
+    end
+
+    def provides_draft_access!
+      config.provides_draft_access = true
+    end
+
+    def provides_full_read_access!
+      config.provides_full_read_access = true
     end
 
     def scoped!
@@ -125,12 +190,20 @@ end
 
 class RoleName::Admin < RoleName
   global!
+
+  can_update_projects!
+  provides_draft_access!
+  provides_full_read_access!
 end
 
 class RoleName::Editor < RoleName
   any_editor!
 
   global!
+
+  can_update_projects!
+  provides_draft_access!
+  provides_full_read_access!
 end
 
 class RoleName::ProjectCreator < RoleName
@@ -139,16 +212,28 @@ end
 
 class RoleName::Marketeer < RoleName
   global!
+
+  can_update_projects!
+  provides_draft_access!
+  provides_full_read_access!
 end
 
 class RoleName::ProjectEditor < RoleName
   any_editor!
 
   scoped!
+
+  can_update_projects!
+  provides_draft_access!
+  provides_full_read_access!
 end
 
 class RoleName::ProjectResourceEditor < RoleName
   scoped!
+
+  can_update_projects!
+  provides_draft_access!
+  provides_full_read_access!
 end
 
 class RoleName::ProjectAuthor < RoleName
@@ -163,8 +248,12 @@ end
 
 class RoleName::Subscriber < RoleName
   global_entitlement!
+
+  provides_full_read_access!
 end
 
 class RoleName::ReadAccess < RoleName
   scoped_entitlement!
+
+  provides_full_read_access!
 end

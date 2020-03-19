@@ -47,6 +47,7 @@ Authority.configure do |config|
     destroy: "deleteable",
     read_deleted: "deleted_readable",
     read_drafts: "drafts_readable",
+    fully_read: "fully_readable",
     list: "listable",
     manage_project_exportations: "project_exportations_manageable",
     create_project_exportations: "project_exportations_creatable",

@@ -45,8 +45,8 @@ module TestHelpers
         nil
       end
 
-      def can_read?(resource)
-        resource.readable_by? self
+      def can_read?(resource, options = {})
+        resource.readable_by? self, options
       end
     end.new
   end
