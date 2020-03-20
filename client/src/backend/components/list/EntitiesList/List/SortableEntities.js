@@ -117,26 +117,6 @@ export default class SortableEntities extends PureComponent {
   render() {
     const EntityComponent = this.entityComponent;
 
-    const SortableEntityComponent = ({ sortableEntity, index }) => (
-      <Draggable
-        key={this.entityKey(index)}
-        draggableId={this.entityKey(index)}
-        index={index}
-      >
-        {(provided, snapshot) => (
-          <EntityComponent
-            innerRef={provided.innerRef}
-            entity={sortableEntity}
-            dragHandleProps={provided.dragHandleProps}
-            draggableProps={provided.draggableProps}
-            useDragHandle={this.useDragHandle}
-            isDragging={snapshot.isDragging}
-            {...this.entityComponentProps}
-          />
-        )}
-      </Draggable>
-    );
-
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId="sortableEntities">
@@ -149,11 +129,24 @@ export default class SortableEntities extends PureComponent {
               })}
             >
               {this.entities.map((entity, index) => (
-                <SortableEntityComponent
+                <Draggable
                   key={this.entityKey(index)}
+                  draggableId={this.entityKey(index)}
                   index={index}
-                  sortableEntity={entity}
-                />
+                >
+                  {/* eslint-disable-next-line no-shadow */}
+                  {(provided, snapshot) => (
+                    <EntityComponent
+                      innerRef={provided.innerRef}
+                      entity={entity}
+                      dragHandleProps={provided.dragHandleProps}
+                      draggableProps={provided.draggableProps}
+                      useDragHandle={this.useDragHandle}
+                      isDragging={snapshot.isDragging}
+                      {...this.entityComponentProps}
+                    />
+                  )}
+                </Draggable>
               ))}
               {provided.placeholder}
             </ul>

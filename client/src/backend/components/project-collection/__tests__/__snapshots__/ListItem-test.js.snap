@@ -45,7 +45,21 @@ exports[`backend/components/project-collection/ListItem matches the snapshot 1`]
           Collection is not visible
         </span>
       </button>
-      <Handle />
+      <div
+        className="project-collection-list-item__icon-group-item project-collection-list-item__button project-collection-list-item__button--drag-handle"
+      >
+        <IconComposer
+          fill="currentColor"
+          icon="grabber32"
+          iconClass="project-collection-list-item__icon"
+          size={30}
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
+      </div>
     </div>
   </div>
 </li>
