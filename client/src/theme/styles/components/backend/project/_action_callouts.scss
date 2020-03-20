@@ -4,11 +4,11 @@
   flex-direction: column;
 
   @include respond($break85) {
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
 
     > * {
-      flex-basis: calc(50% - #{$gutter / 2});
+      flex-basis: calc(25% - #{$gutter / 2});
     }
   }
 }
