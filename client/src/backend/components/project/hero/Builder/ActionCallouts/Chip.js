@@ -57,17 +57,16 @@ export default class Chip extends PureComponent {
             })}
           >
             <div className="action-callout-slot__chip-inner">
-              <span className="action-callout-slot__chip-title">
-                {this.title}
-              </span>
+              <button
+                onClick={this.onEdit}
+                type="button"
+                className="action-callout-slot__button"
+              >
+                <span className="action-callout-slot__chip-title">
+                  {this.title}
+                </span>
+              </button>
               <span className="action-callout-slot__chip-utility">
-                <button
-                  onClick={this.onEdit}
-                  type="button"
-                  className="action-callout-slot__button"
-                >
-                  <Utility.IconComposer icon="annotate32" size={24} />
-                </button>
                 <div
                   className="action-callout-slot__button action-callout-slot__button--draggable"
                   {...provided.dragHandleProps}

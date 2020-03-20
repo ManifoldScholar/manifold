@@ -43,19 +43,19 @@ export default class ActionCallouts extends PureComponent {
 
   static slots = {
     "left-button": {
-      title: "Add button to left side",
+      title: "Left side",
       attributes: { location: "left", button: true }
     },
     "right-button": {
-      title: "Add button to right side",
+      title: "Right side",
       attributes: { location: "right", button: true }
     },
     "left-link": {
-      title: "Add link to left side",
+      title: "Left side",
       attributes: { location: "left", button: false }
     },
     "right-link": {
-      title: "Add link to right side",
+      title: "Right side",
       attributes: { location: "right", button: false }
     }
   };

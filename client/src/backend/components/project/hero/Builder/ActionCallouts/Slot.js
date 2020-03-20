@@ -64,7 +64,11 @@ class Slot extends PureComponent {
                 className="action-callout-slot__button action-callout-slot__button--header"
               >
                 <Utility.IconComposer icon="circlePlus32" size={32} />
-                {this.title}
+                <span>
+                  {this.title}
+                  <br />
+                  {this.attributes.button ? "buttons" : "links"}
+                </span>
               </button>
               <div
                 ref={provided.innerRef}
