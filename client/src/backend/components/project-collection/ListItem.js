@@ -70,23 +70,6 @@ export default class ProjectCollectionListItem extends PureComponent {
       "project-collection-list-item__inner--is-dragging": isDragging
     });
 
-    const Handle = ({ dragHandleProps }) => (
-      <div
-        className={classNames(
-          "project-collection-list-item__icon-group-item",
-          "project-collection-list-item__button",
-          "project-collection-list-item__button--drag-handle"
-        )}
-        {...dragHandleProps}
-      >
-        <Utility.IconComposer
-          size={30}
-          icon="grabber32"
-          iconClass="project-collection-list-item__icon"
-        />
-      </div>
-    );
-
     /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
     return (
       <li ref={innerRef} className={itemClass} {...draggableProps}>
@@ -123,7 +106,20 @@ export default class ProjectCollectionListItem extends PureComponent {
                 }`}
               </span>
             </button>
-            <Handle dragHandleProps={this.props.dragHandleProps} />
+            <div
+              className={classNames(
+                "project-collection-list-item__icon-group-item",
+                "project-collection-list-item__button",
+                "project-collection-list-item__button--drag-handle"
+              )}
+              {...this.props.dragHandleProps}
+            >
+              <Utility.IconComposer
+                size={30}
+                icon="grabber32"
+                iconClass="project-collection-list-item__icon"
+              />
+            </div>
           </div>
         </div>
       </li>
