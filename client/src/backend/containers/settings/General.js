@@ -33,42 +33,45 @@ export class SettingsGeneralContainer extends PureComponent {
           >
             {getModelValue => (
               <>
-                <Form.TextInput
-                  focusOnMount
-                  label="How do you refer to your Manifold installation?"
-                  name="attributes[general][installationName]"
-                  placeholder="Manifold"
-                  instructions={
-                    'There are various places throughout the application where \
+                <Form.FieldGroup label="Behaviors">
+                  <Form.TextInput
+                    focusOnMount
+                    label="How do you refer to your Manifold installation?"
+                    name="attributes[general][installationName]"
+                    placeholder="Manifold"
+                    instructions={
+                      'There are various places throughout the application where \
                   Manifold refers to itself. If you set a value here, Manifold will use it where \
                   appropriate. For example, you could call it "Manifold at the University of \
                   Minnesota Press" or just "University of Minnesota Digital Books." Or, if you\
                   prefer, you can leave this blank, and Manifold will just refer to itself as \
                   "Manifold."'
-                  }
-                />
-                <Form.TextInput
-                  label="Default Page Title"
-                  name="attributes[general][headTitle]"
-                  placeholder="Enter page title"
-                  instructions="This field will be used as the page title on the home page, and will be appended to the page title on core Manifold pages. Defaults to 'Manifold Scholarship'."
-                />
-                <Form.TextArea
-                  label="Default Page Description"
-                  name="attributes[general][headDescription]"
-                  placeholder="Enter page description"
-                  instructions="This field will be used as the page description on the home page. Defaults to 'Transforming scholarly publications into living digital works'."
-                />
-                <Form.TextInput
-                  label="Default Publisher"
-                  name="attributes[general][defaultPublisher]"
-                  placeholder="Enter Default Publisher"
-                />
-                <Form.TextInput
-                  label="Default Place of Publication"
-                  name="attributes[general][defaultPublisherPlace]"
-                  placeholder="Enter Default Place of Publication"
-                />
+                    }
+                  />
+                  <Form.TextInput
+                    label="Default Page Title"
+                    name="attributes[general][headTitle]"
+                    placeholder="Enter page title"
+                    instructions="This field will be used as the page title on the home page, and will be appended to the page title on core Manifold pages. Defaults to 'Manifold Scholarship'."
+                  />
+                  <Form.TextArea
+                    wide
+                    label="Default Page Description"
+                    name="attributes[general][headDescription]"
+                    placeholder="Enter page description"
+                    instructions="This field will be used as the page description on the home page. Defaults to 'Transforming scholarly publications into living digital works'."
+                  />
+                  <Form.TextInput
+                    label="Default Publisher"
+                    name="attributes[general][defaultPublisher]"
+                    placeholder="Enter Default Publisher"
+                  />
+                  <Form.TextInput
+                    label="Default Place of Publication"
+                    name="attributes[general][defaultPublisherPlace]"
+                    placeholder="Enter Default Place of Publication"
+                  />
+                </Form.FieldGroup>
                 <Form.FieldGroup label="Footer">
                   <Form.TextInput
                     label="Copyright"
@@ -112,7 +115,7 @@ export class SettingsGeneralContainer extends PureComponent {
                       <Form.Switch
                         label="Enforce Standalone Mode for All Projects"
                         name="attributes[general][allStandalone]"
-                        instructions="When on, all projects will render in standalone mode"
+                        instructions="When on, all projects will render in standalone mode."
                       />
                       <Form.TextInput
                         label="Library Page Redirect URL"
@@ -124,7 +127,7 @@ export class SettingsGeneralContainer extends PureComponent {
                         label="Home Page Redirect URL"
                         name="attributes[general][homeRedirectUrl]"
                         placeholder="http://your-website.com"
-                        instructions="If set, this URL will be used instead of the Library Page Redirect URL for requests to the Manifold home page"
+                        instructions="If set, this URL will be used instead of the Library Page Redirect URL for requests to the Manifold home page."
                       />
                     </>
                   )}

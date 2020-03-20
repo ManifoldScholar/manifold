@@ -93,24 +93,24 @@ export class SettingsThemeContainer extends PureComponent {
                 wide
               />
               <Form.TextInput
-                label="Library Header Foreground Color"
+                label="Header Foreground Color"
                 name="attributes[theme][headerForegroundColor]"
                 placeholder="#ffffff"
-                instructions="Override the library header foreground color in one of the allowed formats (see above)."
+                instructions="Override the header foreground color in one of the allowed formats (see above)."
                 wide
               />
               <Form.TextInput
-                label="Library Header Foreground Active Color"
+                label="Header Foreground Active Color"
                 name="attributes[theme][headerForegroundActiveColor]"
                 placeholder="#363636"
-                instructions={`Override the library header foreground active state color in one of the allowed formats (see above). A link in the primary navigation is "active" when the user is currently on that page.`}
+                instructions={`Override the header foreground active state color in one of the allowed formats (see above). A link in the primary navigation is "active" when the user is currently on that page.`}
                 wide
               />
               <Form.TextInput
-                label="Library Header Background Color"
+                label="Header Background Color"
                 name="attributes[theme][headerBackgroundColor]"
                 placeholder="#696969"
-                instructions="Override the library header background color in one of the allowed formats (see above)."
+                instructions="Override the header background color in one of the allowed formats (see above)."
                 wide
               />
             </Form.FieldGroup>
