@@ -100,7 +100,7 @@ exports[`frontend/containers/Following/Following matches the snapshot 1`] = `
     }
   }
   dispatch={[Function]}
-  failureRedirect="/"
+  failureRedirect="/login"
   featuredProjects={
     Array [
       Object {

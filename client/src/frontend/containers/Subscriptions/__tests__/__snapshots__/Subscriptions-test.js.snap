@@ -9,7 +9,7 @@ exports[`frontend/containers/Subscriptions matches the snapshot 1`] = `
       "level": 2,
     }
   }
-  failureRedirect="/"
+  failureRedirect="/login"
   kind="any"
 >
   <section
