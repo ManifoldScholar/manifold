@@ -31,9 +31,13 @@ export default function redirectIfLibraryDisabled(WrappedComponent) {
       return this.settings.attributes.general.libraryDisabled;
     }
 
+    get isHome() {
+      return this.props.location && this.props.location.pathname === "/";
+    }
+
     get redirectUrl() {
       const { general } = this.settings.attributes;
-      if (this.props.isHome && general.homeRedirectUrl)
+      if (this.isHome && general.homeRedirectUrl)
         return general.homeRedirectUrl;
       return this.settings.attributes.general.libraryRedirectUrl;
     }
