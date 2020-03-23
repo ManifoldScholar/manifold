@@ -6,6 +6,7 @@ import AuthorizeOperationBtn from "./SwaggerUIComponents/AuthorizeOperationBtn";
 export default class ApiDocs extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { swaggerUi: null };
     this.plugins = [this.componentReplacementPlugin];
   }
 
@@ -24,7 +25,14 @@ export default class ApiDocs extends React.Component {
 
   onComplete = swaggerUi => {
     this.preAuthorize(swaggerUi);
+    this.setState({ swaggerUi });
   };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.authToken !== this.props.authToken) {
+      this.preAuthorize(this.state.swaggerUi);
+    }
+  }
 
   preAuthorize(swaggerUi) {
     if (!this.props.authToken) return;
