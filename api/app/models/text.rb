@@ -90,6 +90,9 @@ class Text < ApplicationRecord
   has_many :text_export_statuses, inverse_of: :text
   has_one :current_text_export_status, -> { current }, class_name: "TextExportStatus"
   has_one :current_text_export, through: :current_text_export_status, source: :text_export
+  has_many :action_callouts,
+           dependent: :destroy,
+           inverse_of: :text
 
   # Delegations
   delegate :creator_names_array, to: :project, prefix: true, allow_nil: true
