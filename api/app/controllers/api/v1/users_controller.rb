@@ -10,6 +10,8 @@ module Api
       end
 
       def whoami
+        return respond_with_forbidden("the authenticated user", "show") unless @current_user
+
         render_single_resource(@current_user)
       end
 
