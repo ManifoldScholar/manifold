@@ -13,6 +13,7 @@ export class ProjectListFilters extends Component {
   static propTypes = {
     filterChangeHandler: PropTypes.func,
     initialFilterState: PropTypes.object,
+    resetFilterState: PropTypes.object,
     subjects: PropTypes.array,
     hideFeatured: PropTypes.bool
   };
@@ -70,7 +71,10 @@ export class ProjectListFilters extends Component {
 
   resetFilters = event => {
     event.preventDefault();
-    this.setState(this.initialState(), this.updateResults);
+    const newState = this.props.resetFilterState
+      ? { filters: { ...this.props.resetFilterState } }
+      : this.initialState();
+    this.setState(newState, this.updateResults);
     // update SR message
     this.props.setScreenReaderStatus(this.resetMessage);
     // focus on search field

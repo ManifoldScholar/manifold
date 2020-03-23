@@ -85,11 +85,15 @@ export class ProjectsContainer extends Component {
     return get(this.props.settings, "attributes.calculated.hasVisibleProjects");
   }
 
-  initialState(init) {
+  initialFilterState(init = {}) {
     const filter = omitBy(init, (vIgnored, k) => k === "page");
+    filter.standaloneModeEnforced = false;
+    return filter;
+  }
 
+  initialState(init = {}) {
     return {
-      filter: { ...filter },
+      filter: { ...this.initialFilterState(init) },
       pagination: {
         number: init.page || defaultPage,
         size: perPage
@@ -160,6 +164,7 @@ export class ProjectsContainer extends Component {
           <ProjectList.Filters
             filterChangeHandler={this.filterChangeHandler}
             initialFilterState={this.state.filter}
+            resetFilterState={this.initialFilterState()}
             subjects={this.props.subjects}
           />
           <div className="entity-section-wrapper__details">
