@@ -218,6 +218,11 @@
     .button-secondary {
       display: inline-block;
       width: auto;
+
+      &.button-secondary--wide {
+        display: block;
+        width: 100%;
+      }
     }
 
     &.submit {

@@ -118,6 +118,7 @@ export class ResetPasswordBase extends PureComponent {
     return (
       <form
         method="put"
+        className="form-secondary"
         onSubmit={event => this.resetUserPassword(event, this.props.user)}
       >
         <div className="row-1-p">
@@ -139,28 +140,28 @@ export class ResetPasswordBase extends PureComponent {
             />
           </Form.Errorable>
         </div>
-        <div className="row-1-p">
-          <div className="form-input">
-            <input
-              className={classNames(
-                "button-secondary",
-                "button-secondary--outlined",
-                "button-secondary--with-room"
-              )}
-              type="submit"
-              value="Reset Password"
-            />
-            <button
-              className={classNames(
-                "button-secondary",
-                "button-secondary--outlined",
-                "button-secondary--dull"
-              )}
-              onClick={event => this.handleStateChange(event, "editing", false)}
-            >
-              Cancel
-            </button>
-          </div>
+        <div className="form-input">
+          <input
+            className={classNames(
+              "button-secondary",
+              "button-secondary--wide",
+              "button-secondary--outlined",
+              "button-secondary--with-room"
+            )}
+            type="submit"
+            value="Reset Password"
+          />
+          <button
+            className={classNames(
+              "button-secondary",
+              "button-secondary--wide",
+              "button-secondary--outlined",
+              "button-secondary--dull"
+            )}
+            onClick={event => this.handleStateChange(event, "editing", false)}
+          >
+            Cancel
+          </button>
         </div>
       </form>
     );
