@@ -33,6 +33,72 @@ RSpec.describe Entitlements::Create, interaction: true do
         expect(@outcome).to have(1).error_on :scoped_roles
       end
     end
+
+    fcontext "when providing an expiration" do
+      let(:read_access) { true }
+
+      def expect_expiration_on(date)
+        perform_within_expectation!
+
+        expect(@outcome.result.expires_on).to eq date.to_date
+      end
+
+      shared_examples_for "a failed expiration" do
+        it "fails" do
+          perform_within_expectation! valid: false do |e|
+            e.to keep_the_same(Entitlement, :count)
+          end
+
+          expect(@outcome).to have(1).error_on :expiration
+        end
+      end
+
+      context "with a YYYY/MM/DD date" do
+        let(:expected_value) { 2.years.from_now.to_date }
+
+        let_input!(:expiration) { expected_value.strftime("%Y/%m/%d") }
+
+        it "produces the right expiration" do
+          expect_expiration_on(expected_value)
+        end
+      end
+
+      context "with a MM/DD/YYYY date" do
+        let(:expected_value) { 2.years.from_now.to_date }
+
+        let_input!(:expiration) { expected_value.strftime("%m/%d/%Y") }
+
+        it "produces the right expiration" do
+          expect_expiration_on(expected_value)
+        end
+      end
+
+      context "that is fuzzy" do
+        let_input!(:expiration) { "in 1 year" }
+
+        it "produces the right expiration" do
+          expect_expiration_on(1.year.from_now)
+        end
+      end
+
+      context "with an invalid date" do
+        let_input!(:expiration) { "Invalid Date Breaks The Bank" }
+
+        include_examples "a failed expiration"
+      end
+
+      context "with a date in the past" do
+        let_input!(:expiration) { "1999/12/13" }
+
+        include_examples "a failed expiration"
+      end
+
+      context "that is ambiguous" do
+        let_input!(:expiration) { "2 years" }
+
+        include_examples "a failed expiration"
+      end
+    end
   end
 
   context "for a project collection" do
