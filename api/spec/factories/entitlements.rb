@@ -33,5 +33,9 @@ FactoryBot.define do
     trait :for_reading_group do
       target { create :reading_group, with_user: user }
     end
+
+    trait :with_expiration do
+      expires_on { 1.year.from_now }
+    end
   end
 end

@@ -5,11 +5,21 @@ module Entitlements
 
     transactional!
 
+    CHRONIC_OPTIONS = {
+      # When in doubt, dates should always be considered in the future
+      context: :future,
+      # We prefer MM/DD/YYYY dates if provided something ambiguous.
+      # In general, people should use YYYY/MM/DD.
+      endian_precedence: :middle
+    }.freeze
+
     object :entitling_entity, class: "Concerns::ProvidesEntitlements"
 
     record :subject_url, class: "GlobalID", finder: :new
 
     record :target_url, class: "GlobalID", finder: :new
+
+    string :expiration, default: nil
 
     hash :global_roles, default: proc { {} } do
       boolean :subscriber, default: false
@@ -22,17 +32,20 @@ module Entitlements
     validate :find_entitler!
     validate :find_subject!
     validate :find_target!
+    validate :find_expires_on!
 
     # @return [Entitlement]
     def execute
       @entitlement = entitler.entitlements.build subject: subject, target: target
       @entitlement.assign_attributes inputs.slice(:global_roles, :scoped_roles)
+      @entitlement.expires_on = expires_on
 
       persist_model! entitlement, assimilate: true
     end
 
     attr_reader :entitlement
     attr_reader :entitler
+    attr_reader :expires_on
     attr_reader :subject
     attr_reader :target
 
@@ -44,6 +57,21 @@ module Entitlements
         entitler.upsert!
 
         @entitler = entitler
+      end
+    end
+
+    # @return [void]
+    def find_expires_on!
+      return if expiration.blank?
+
+      parsed_date = Chronic.parse(expiration, CHRONIC_OPTIONS.deep_dup).try(:to_date)
+
+      if parsed_date.blank?
+        errors.add :expiration, "did not produce a valid date"
+      elsif parsed_date <= Date.current
+        errors.add :expiration, "must be in the future"
+      else
+        @expires_on = parsed_date
       end
     end
 
