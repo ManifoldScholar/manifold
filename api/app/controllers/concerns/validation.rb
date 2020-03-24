@@ -150,6 +150,7 @@ module Validation
     attributes = [
       :subject_url,
       :target_url,
+      :expiration,
       global_roles: %i[subscriber],
       scoped_roles: %i[read_access]
     ]

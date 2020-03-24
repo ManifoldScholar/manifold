@@ -52,6 +52,14 @@ class Entitlement < ApplicationRecord
     transition_to! expected_state.to_sym
   end
 
+  # @!attribute [r] expiration
+  # @return [String, nil] a string representation of the date
+  def expiration
+    return nil unless expires_on?
+
+    expires_on.to_s
+  end
+
   # Predicate that tests if the entitlement's `subject` is a {Project}
   #
   # @see #has_subject?
@@ -110,6 +118,18 @@ class Entitlement < ApplicationRecord
     when ReadingGroup then target.users
     when User then [target]
     end.to_a
+  end
+
+  # @!attribute [r] subject_url
+  # @return [String]
+  def subject_url
+    subject&.to_entitlement_gid&.to_s
+  end
+
+  # @!attribute [r] target_url
+  # @return [String]
+  def target_url
+    target&.to_global_id&.to_s
   end
 
   private

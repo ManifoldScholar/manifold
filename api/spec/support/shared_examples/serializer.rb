@@ -1,9 +1,10 @@
 require "rails_helper"
 
 shared_examples_for "a serializer" do |partial_by_default: false|
+  let(:serialized_object) { defined?(super) ? super() : nil }
   let(:subject) { described_class.new(object) }
   let(:factory) { described_class.to_s.demodulize.gsub("Serializer", "").underscore.to_sym }
-  let(:object) { FactoryBot.create(factory) }
+  let(:object) { serialized_object || FactoryBot.create(factory) }
 
   it "successfully serializes the object to a String value" do
     expect(subject.serialized_json).to be_instance_of String
