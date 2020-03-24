@@ -53,7 +53,7 @@ export class ResourceGeneralContainer extends PureComponent {
             instructions="This field accepts Markdown"
           />
           <Form.TextInput
-            label="Fingerprint"
+            label="Sort Title"
             name="attributes[pendingSortTitle]"
             placeholder="Enter sort title"
             instructions="This field is only used to sort resources alphabetically in lists. If blank, sorting is based on resource title."
