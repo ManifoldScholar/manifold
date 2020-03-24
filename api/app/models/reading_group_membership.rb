@@ -22,6 +22,7 @@ class ReadingGroupMembership < ApplicationRecord
   before_validation :ensure_anonymous_label
   after_commit :enqueue_notification, on: [:create]
   after_create :create_entitlements!
+  before_destroy :remove_entitlements!
 
   ANONYMOUS_LABELS = ["Folio", "Bifolium", "Broadside", "Catchword", "Colophon",
                       "Compositor", "Coucher", "Deckle", "Printer’s Devil", "Font",
@@ -59,6 +60,11 @@ class ReadingGroupMembership < ApplicationRecord
   # @return [void]
   def create_entitlements!
     ReadingGroupMemberships::CreateEntitlements.run! reading_group_membership: self
+  end
+
+  # @return [void]
+  def remove_entitlements!
+    ReadingGroupMemberships::RemoveEntitlements.run! reading_group_membership: self
   end
 
   def enqueue_notification
