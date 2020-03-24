@@ -179,6 +179,8 @@ class Text < ApplicationRecord
   end
 
   def set_title_value(kind, value)
+    return titles.where(kind: kind).destroy_all if value.blank? && kind == TextTitle::KIND_SUBTITLE
+
     title = titles.find_or_initialize_by(kind: kind)
     title.value = value
     title.save
