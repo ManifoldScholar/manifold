@@ -2,33 +2,19 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ResourcePreview from "frontend/components/resource-preview";
 import IconComposer from "global/components/utility/IconComposer";
+import Zoom from "./Zoom";
 
 export default class ResourceListSlideFigureImage extends Component {
   static propTypes = {
-    resource: PropTypes.object,
-    enableZoom: PropTypes.bool
+    resource: PropTypes.object.isRequired
   };
 
-  static defaultProps = {
-    enableZoom: true
-  };
 
   render() {
     const attr = this.props.resource.attributes;
     return (
       <figure>
-        {this.props.enableZoom ? (
-          <ResourcePreview resource={this.props.resource}>
-            <div className="zoom-indicator">
-              <span className="zoom-indicator__text">Zoom</span>
-              <IconComposer
-                icon="zoomIn16"
-                size={21.333}
-                iconClass="zoom-indicator__icon"
-              />
-            </div>
-          </ResourcePreview>
-        ) : null}
+        <Zoom resource={this.props.resource} />
         <div
           className="figure-image"
           style={{

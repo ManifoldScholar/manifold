@@ -34,8 +34,9 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
             }
           >
             <div>
-              <ResourceListSlideFigure
-                enableZoom={false}
+              <ResourceList.Slide.Default
+                backgroundUrl="/static/images/resource-splash.png"
+                info={true}
                 resource={
                   Object {
                     "attributes": Object {
@@ -47,7 +48,6 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                     "type": "collectionResources",
                   }
                 }
-                zoomLabel="Zoom"
               />
             </div>
           </Component>
