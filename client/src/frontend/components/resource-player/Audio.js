@@ -6,6 +6,8 @@ import { UID } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourcePlayerAudio extends Component {
+  static displayName = "Resource.Player.Audio";
+
   static propTypes = {
     resource: PropTypes.object
   };

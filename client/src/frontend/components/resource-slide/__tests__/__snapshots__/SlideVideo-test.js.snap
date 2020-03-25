@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/resource-slide/SlideVideo matches the snapshot 1`] = `
-<ResourcePlayerVideo
+<Resource.Player.Video
   resource={
     Object {
       "attributes": Object {
