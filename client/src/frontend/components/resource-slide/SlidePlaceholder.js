@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import Utility from "global/components/utility";
 
 export default class ResourceListSlidePlaceholder extends Component {
-  static displayName = "ResourceSlide.Placeholder";
+  static displayName = "ResourceList.Slide.Placeholder";
 
   render() {
     return (
-      <figure>
+      <>
         <div
           className="figure-default"
           style={{
@@ -24,7 +24,7 @@ export default class ResourceListSlidePlaceholder extends Component {
             </span>
           </div>
         </div>
-      </figure>
+      </>
     );
   }
 }

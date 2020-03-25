@@ -34,21 +34,23 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
             }
           >
             <div>
-              <ResourceList.Slide.Default
-                backgroundUrl="/static/images/resource-splash.png"
-                info={true}
-                resource={
-                  Object {
-                    "attributes": Object {
-                      "position": 1,
-                      "resourceCollectionId": 2,
-                    },
-                    "id": "collectionResource-0",
-                    "relationships": Object {},
-                    "type": "collectionResources",
+              <figure>
+                <ResourceList.Slide.Default
+                  backgroundUrl="/static/images/resource-splash.png"
+                  info={true}
+                  resource={
+                    Object {
+                      "attributes": Object {
+                        "position": 1,
+                        "resourceCollectionId": 2,
+                      },
+                      "id": "collectionResource-0",
+                      "relationships": Object {},
+                      "type": "collectionResources",
+                    }
                   }
-                }
-              />
+                />
+              </figure>
             </div>
           </Component>
         </TransitionGroup>
