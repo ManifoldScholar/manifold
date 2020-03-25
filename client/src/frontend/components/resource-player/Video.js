@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { DefaultPlayer as Video } from "react-html5video";
 
 export default class ResourcePlayerVideo extends Component {
+  static displayName = "Resource.Player.Video";
+
   static propTypes = {
     resource: PropTypes.object
   };

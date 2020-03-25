@@ -4,7 +4,7 @@ exports[`frontend/components/resource-preview/Video matches the snapshot 1`] = `
 <div
   className="resource-preview resource-preview-video"
 >
-  <ResourcePlayerVideo
+  <Resource.Player.Video
     resource={
       Object {
         "attributes": Object {
