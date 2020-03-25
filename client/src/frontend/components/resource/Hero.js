@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ResourceSlide from "frontend/components/resource-slide";
+import ResourcePlayer from "frontend/components/resource-player";
 
 export default class ResourceHero extends Component {
   static displayName = "Resource.Hero";
@@ -40,10 +41,9 @@ export default class ResourceHero extends Component {
       case "interactive":
         output = (
           <div className="resource-slide-figure resource-slide-interactive">
-            <ResourceSlide.SlideInteractive
+            <ResourcePlayer.Iframe
               resource={resource}
-              noPlaceholder
-              {...this.props.slideOptions}
+              styleProps={{ minHeight: "100%" }}
             />
           </div>
         );

@@ -10,6 +10,7 @@
   overflow: hidden;
   color: $neutralTextExtraLight;
   background-color: $neutralBlack;
+  display: flex;
 
   figure {
     position: absolute;
@@ -24,8 +25,7 @@
   /* Most resource heroes are height constrained. */
   /* Interactive ones are not. */
   &.resource-slide-interactive {
-    height: auto;
-    max-height: none;
+    display: flex;
     overflow: visible;
     background-color: inherit;
 
@@ -103,9 +103,13 @@
   }
 
   .figure-interactive {
+    flex: 1;
+    height: 100%;
     background: $neutralWhite;
 
     iframe {
+      min-height: 100%;
+      width: 100%;
       border: 0;
     }
   }
