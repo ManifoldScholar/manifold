@@ -6,11 +6,10 @@ import {
 } from "react-transition-group";
 import { Swipeable } from "react-swipeable";
 import includes from "lodash/includes";
-import classNames from "classnames";
 import ResourceSlide from "frontend/components/resource-slide";
 import { resourceCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import IconComposer from "global/components/utility/IconComposer";
+import DirectionalButton from "./SlideShow/DirectionalButton";
 
 const { request } = entityStoreActions;
 
@@ -211,6 +210,7 @@ export default class ResourceSlideshow extends PureComponent {
     const position = this.state.position;
     const totalCount = this.state.totalCount;
     const collectionResource = this.state.map[position];
+    const collectionResourcesCount = this.props.collectionResources.length;
 
     return (
       <div className="resource-slideshow">
@@ -225,7 +225,7 @@ export default class ResourceSlideshow extends PureComponent {
           >
             <div className="resource-slide-figure">
               <ReactTransitionGroup>
-                {this.props.collectionResources.length > 0
+                {collectionResourcesCount > 0
                   ? this.renderSlideShow()
                   : this.renderPlaceholder()}
               </ReactTransitionGroup>
@@ -242,84 +242,26 @@ export default class ResourceSlideshow extends PureComponent {
             ) : (
               <ResourceSlide.LoadingCaption />
             )}
-            {this.props.collectionResources.length > 0 && (
+            {collectionResourcesCount > 0 && (
               <div className="resource-slideshow__pagination">
                 <span className="resource-slideshow__ordinal">
-                  {position} {"/"} {totalCount}
+                  {position} / {totalCount}
                 </span>
                 <div>
-                  <button
-                    className={classNames(
-                      "resource-slideshow__button",
-                      "resource-slideshow__button--previous"
-                    )}
+                  <DirectionalButton
                     onClick={this.handleSlidePrev}
+                    direction="left"
                     disabled={position === 1}
-                  >
-                    <IconComposer
-                      icon="circleArrowLeft64"
-                      size={50}
-                      iconClass={classNames(
-                        "resource-slideshow__pagination-icon",
-                        "resource-slideshow__pagination-icon--left",
-                        "resource-slideshow__pagination-icon--large"
-                      )}
-                    />
-                    <IconComposer
-                      icon="arrowLeft16"
-                      size="default"
-                      iconClass={classNames(
-                        "resource-slideshow__pagination-icon",
-                        "resource-slideshow__pagination-icon--left",
-                        "resource-slideshow__pagination-icon--small"
-                      )}
-                    />
-                    <span
-                      className="resource-slideshow__pagination-text"
-                      aria-hidden="true"
-                    >
-                      Prev
-                    </span>
-                    <span className="screen-reader-text">
-                      {"Go to previous slide"}
-                    </span>
-                  </button>
-                  <button
-                    className={classNames(
-                      "resource-slideshow__button",
-                      "resource-slideshow__button--next"
-                    )}
+                    paginationText="Prev"
+                    screenReaderText="Go to previous slide"
+                  />
+                  <DirectionalButton
                     onClick={this.handleSlideNext}
+                    direction="right"
                     disabled={position === totalCount}
-                  >
-                    <span
-                      className="resource-slideshow__pagination-text"
-                      aria-hidden="true"
-                    >
-                      Next
-                    </span>
-                    <span className="screen-reader-text">
-                      {"Go to next slide"}
-                    </span>
-                    <IconComposer
-                      icon="circleArrowRight64"
-                      size={50}
-                      iconClass={classNames(
-                        "resource-slideshow__pagination-icon",
-                        "resource-slideshow__pagination-icon--right",
-                        "resource-slideshow__pagination-icon--large"
-                      )}
-                    />
-                    <IconComposer
-                      icon="arrowRight16"
-                      size="default"
-                      iconClass={classNames(
-                        "resource-slideshow__pagination-icon",
-                        "resource-slideshow__pagination-icon--right",
-                        "resource-slideshow__pagination-icon--small"
-                      )}
-                    />
-                  </button>
+                    paginationText="Next"
+                    screenReaderText="Go to next slide"
+                  />
                 </div>
               </div>
             )}
