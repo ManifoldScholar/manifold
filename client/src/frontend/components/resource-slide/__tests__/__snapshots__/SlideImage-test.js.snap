@@ -2,7 +2,8 @@
 
 exports[`frontend/components/resource-slide/SlideImage matches the snapshot 1`] = `
 <figure>
-  <Resource.Preview
+  <ResourceList.Slide.Zoom
+    label="Zoom"
     resource={
       Object {
         "attributes": Object {
@@ -126,28 +127,7 @@ exports[`frontend/components/resource-slide/SlideImage matches the snapshot 1`] 
         "type": "resources",
       }
     }
-  >
-    <div
-      className="zoom-indicator"
-    >
-      <span
-        className="zoom-indicator__text"
-      >
-        Zoom
-      </span>
-      <IconComposer
-        fill="currentColor"
-        icon="zoomIn16"
-        iconClass="zoom-indicator__icon"
-        size={21.333}
-        svgProps={
-          Object {
-            "aria-hidden": true,
-          }
-        }
-      />
-    </div>
-  </Resource.Preview>
+  />
   <div
     className="figure-image"
     style={

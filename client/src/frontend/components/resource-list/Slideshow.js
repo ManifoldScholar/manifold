@@ -82,7 +82,7 @@ export default class ResourceSlideshow extends PureComponent {
   }
 
   getFigureByType(resource) {
-    let Slide = ResourceSlide.Slide;
+    let Slide = ResourceSlide.SlideDefault;
     if (resource.attributes.kind === "image") Slide = ResourceSlide.SlideImage;
     if (resource.attributes.kind === "video") Slide = ResourceSlide.SlideVideo;
     if (resource.attributes.kind === "interactive")
