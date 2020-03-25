@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/resource-slide/SlideImage matches the snapshot 1`] = `
-<figure>
+<Fragment>
   <ResourceList.Slide.Zoom
     label="Zoom"
     resource={
@@ -136,5 +136,5 @@ exports[`frontend/components/resource-slide/SlideImage matches the snapshot 1`] 
       }
     }
   />
-</figure>
+</Fragment>
 `;

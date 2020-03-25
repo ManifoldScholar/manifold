@@ -10,7 +10,8 @@ exports[`frontend/components/resource/Hero matches the snapshot 1`] = `
     <div
       className="resource-slide-figure"
     >
-      <ResourceListSlideFigureImage
+      <ResourceList.Slide.Image
+        enableZoom={true}
         resource={
           Object {
             "attributes": Object {

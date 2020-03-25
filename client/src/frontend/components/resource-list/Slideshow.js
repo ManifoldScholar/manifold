@@ -10,6 +10,7 @@ import ResourceSlide from "frontend/components/resource-slide";
 import { resourceCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import DirectionalButton from "./SlideShow/DirectionalButton";
+import capitalize from "lodash/capitalize";
 
 const { request } = entityStoreActions;
 
@@ -82,13 +83,19 @@ export default class ResourceSlideshow extends PureComponent {
   }
 
   getFigureByType(resource) {
-    let Slide = ResourceSlide.SlideDefault;
-    if (resource.attributes.kind === "image") Slide = ResourceSlide.SlideImage;
-    if (resource.attributes.kind === "video") Slide = ResourceSlide.SlideVideo;
-    if (resource.attributes.kind === "interactive")
-      Slide = ResourceSlide.SlideInteractive;
-    if (resource.attributes.kind === "audio") Slide = ResourceSlide.SlideAudio;
-    return <Slide resource={resource} {...this.props.slideOptions} />;
+    const { kind } = resource.attributes;
+    const key = `Slide${capitalize(kind)}`;
+    const Slide = ResourceSlide[key];
+    if (Slide) {
+      return <Slide resource={resource} {...this.props.slideOptions} />;
+    }
+
+    return (
+      <ResourceSlide.SlideDefault
+        resource={resource}
+        {...this.props.slideOptions}
+      />
+    );
   }
 
   bindKeyboard = event => {
@@ -185,7 +192,7 @@ export default class ResourceSlideshow extends PureComponent {
       >
         <div>
           {this.isLoaded(position) ? (
-            this.getFigureByType(collectionResource)
+            <figure>{this.getFigureByType(collectionResource)}</figure>
           ) : (
             <ResourceSlide.SlideLoading />
           )}

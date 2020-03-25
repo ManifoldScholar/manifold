@@ -1,27 +1,36 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ResourcePreview from "frontend/components/resource-preview";
-import IconComposer from "global/components/utility/IconComposer";
 import Zoom from "./Zoom";
 
-export default class ResourceListSlideFigureImage extends Component {
+export default class ResourceListSlideImage extends Component {
+  static displayName = "ResourceList.Slide.Image";
+
   static propTypes = {
-    resource: PropTypes.object.isRequired
+    resource: PropTypes.object.isRequired,
+    enableZoom: PropTypes.bool
   };
 
+  static defaultProps = {
+    enableZoom: true
+  };
+
+  get background() {
+    const { resource } = this.props;
+    if (!resource.attributes.attachmentStyles) return null;
+    return resource.attributes.attachmentStyles.medium;
+  }
 
   render() {
-    const attr = this.props.resource.attributes;
     return (
-      <figure>
-        <Zoom resource={this.props.resource} />
+      <>
+        {this.props.enableZoom && <Zoom resource={this.props.resource} />}
         <div
           className="figure-image"
           style={{
-            backgroundImage: "url(" + attr.attachmentStyles.medium + ")"
+            backgroundImage: `url(${this.background})`
           }}
         />
-      </figure>
+      </>
     );
   }
 }

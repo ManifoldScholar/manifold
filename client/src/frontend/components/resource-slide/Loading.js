@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Utility from "global/components/utility";
 
 export default class ResourceListSlideFigureLoading extends Component {
-  static displayName = "ResourceList.Slide.Loading";
+  static displayName = "ResourceList.Loading";
 
   render() {
     return (
