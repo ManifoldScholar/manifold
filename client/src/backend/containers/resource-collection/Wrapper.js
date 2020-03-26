@@ -13,6 +13,7 @@ import withConfirmation from "hoc/with-confirmation";
 import IconComposer from "global/components/utility/IconComposer";
 
 import Authorize from "hoc/authorize";
+import { Link } from "react-router-dom";
 
 const { request, flush } = entityStoreActions;
 
@@ -72,16 +73,13 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     this.props.dispatch(resourceCollectionRequest);
   };
 
-  doPreview = event => {
-    event.preventDefault();
-    const previewUrl = lh.link(
+  previewUrl() {
+    return lh.link(
       "frontendProjectResourceCollection",
       this.props.resourceCollection.relationships.project.attributes.slug,
       this.props.resourceCollection.attributes.slug
     );
-    const win = window.open(previewUrl, "_blank");
-    win.focus();
-  };
+  }
 
   doDestroy = () => {
     const call = resourceCollectionsAPI.destroy(
@@ -125,14 +123,14 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
   renderUtility() {
     return (
       <div className="utility-button-group utility-button-group--inline">
-        <button onClick={this.doPreview} className="utility-button">
+        <Link to={this.previewUrl()} className="utility-button">
           <IconComposer
             icon="eyeOpen32"
             size={26}
             iconClass="utility-button__icon utility-button__icon--highlight"
           />
           <span className="utility-button__text">Preview</span>
-        </button>
+        </Link>
         <button
           onClick={this.handleCollectionDestroy}
           className="utility-button"

@@ -13,6 +13,7 @@ import withConfirmation from "hoc/with-confirmation";
 import IconComposer from "global/components/utility/IconComposer";
 
 import Authorize from "hoc/authorize";
+import { Link } from "react-router-dom";
 
 const { request, flush } = entityStoreActions;
 
@@ -52,18 +53,6 @@ export class ResourceWrapperContainer extends PureComponent {
     this.props.dispatch(resourceRequest);
   };
 
-  doPreview = event => {
-    event.preventDefault();
-    const project = this.props.resource.relationships.project;
-    const previewUrl = lh.link(
-      "frontendProjectResource",
-      project.attributes.slug,
-      this.props.resource.attributes.slug
-    );
-    const win = window.open(previewUrl, "_blank");
-    win.focus();
-  };
-
   doDestroy = () => {
     const call = resourcesAPI.destroy(this.props.resource.id);
     const options = { removes: this.props.resource };
@@ -98,16 +87,23 @@ export class ResourceWrapperContainer extends PureComponent {
   };
 
   renderUtility(resource) {
+    const project = resource.relationships.project;
+    const previewUrl = lh.link(
+      "frontendProjectResource",
+      project.attributes.slug,
+      resource.attributes.slug
+    );
+
     return (
       <div className="utility-button-group utility-button-group--inline">
-        <button onClick={this.doPreview} className="utility-button">
+        <Link to={previewUrl} className="utility-button">
           <IconComposer
             icon="eyeOpen32"
             size={26}
             iconClass="utility-button__icon utility-button__icon--highlight"
           />
           <span className="utility-button__text">Preview</span>
-        </button>
+        </Link>
         <Authorize entity={resource} ability={"delete"}>
           <button
             onClick={this.handleResourceDestroy}

@@ -11,6 +11,7 @@ import Navigation from "backend/components/navigation";
 import navigation from "helpers/router/navigation";
 import withConfirmation from "hoc/with-confirmation";
 import IconComposer from "global/components/utility/IconComposer";
+import { Link } from "react-router-dom";
 
 import Authorize from "hoc/authorize";
 
@@ -103,16 +104,6 @@ class PageDetailContainer extends PureComponent {
     });
   };
 
-  doPreview = event => {
-    event.preventDefault();
-    const attr = this.props.page.attributes;
-    const previewUrl = attr.isExternalLink
-      ? attr.externalLink
-      : lh.link("frontendPage", attr.slug);
-    const win = window.open(previewUrl, "_blank");
-    win.focus();
-  };
-
   isNew(props) {
     return this.id(props) === "new";
   }
@@ -161,14 +152,17 @@ class PageDetailContainer extends PureComponent {
   renderUtility() {
     return (
       <div className="utility-button-group utility-button-group--inline">
-        <button onClick={this.doPreview} className="utility-button">
+        <Link
+          to={lh.link("frontendPage", this.props.page.attributes.slug)}
+          className="utility-button"
+        >
           <IconComposer
             icon="eyeOpen32"
             size={26}
             iconClass="utility-button__icon utility-button__icon--highlight"
           />
           <span className="utility-button__text">Preview</span>
-        </button>
+        </Link>
         <Authorize entity={this.props.page} ability="update">
           <button onClick={this.handleDestroy} className="utility-button">
             <IconComposer
