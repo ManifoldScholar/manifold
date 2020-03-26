@@ -36,7 +36,7 @@ export default class ResourceListSlideInteractive extends PureComponent {
   get poster() {
     const { resource } = this.props;
     if (!resource.attributes.variantPosterStyles) return null;
-    return resource.attributes.variantPosterStyles.mediumLandscape;
+    return resource.attributes.variantPosterStyles.largeLandscape;
   }
 
   get backgroundImage() {
@@ -88,11 +88,11 @@ export default class ResourceListSlideInteractive extends PureComponent {
   }
 
   minimumHeight() {
-    return this.props.resource.attributes.minimumHeight || 0;
+    return this.props.resource.attributes.minimumHeight || 600;
   }
 
   minimumWidth() {
-    return this.props.resource.attributes.minimumWidth || 0;
+    return this.props.resource.attributes.minimumWidth || 800;
   }
 
   get canShowIFrame() {
