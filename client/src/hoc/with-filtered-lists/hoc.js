@@ -64,7 +64,8 @@ function withFilters(WrappedComponent, filteredLists = {}) {
         listDefinition.params.forEach(paramDefinition => {
           const param = {
             label: paramDefinition.label,
-            name: paramDefinition.name
+            name: paramDefinition.name,
+            hidden: paramDefinition.hidden || false
           };
           if (paramDefinition.options) {
             param.options = paramDefinition.options.map(o => ({ ...o }));

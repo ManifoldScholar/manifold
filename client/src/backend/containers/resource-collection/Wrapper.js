@@ -5,7 +5,7 @@ import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
-import { resourceCollectionsAPI, requests } from "api";
+import { resourceCollectionsAPI, requests, projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
@@ -22,7 +22,8 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
       resourceCollection: select(
         requests.beResourceCollection,
         state.entityStore
-      )
+      ),
+      project: select(requests.beProject, state.entityStore)
     };
   };
 
@@ -48,6 +49,19 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
   componentWillUnmount() {
     this.props.dispatch(flush(requests.beResourceCollection));
   }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.resourceCollection && !prevProps.resourceCollection) {
+      const projectId = this.props.resourceCollection.attributes.projectId;
+      this.fetchProject(projectId);
+    }
+  }
+
+  fetchProject = id => {
+    const call = projectsAPI.show(id);
+    const projectRequest = request(call, requests.beProject);
+    this.props.dispatch(projectRequest);
+  };
 
   fetchCollection = () => {
     const call = resourceCollectionsAPI.show(this.props.match.params.id);
@@ -135,9 +149,9 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
   }
 
   renderRoutes() {
-    const { resourceCollection } = this.props;
+    const { resourceCollection, project } = this.props;
     return childRoutes(this.props.route, {
-      childProps: { resourceCollection }
+      childProps: { resourceCollection, project }
     });
   }
 

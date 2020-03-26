@@ -52,7 +52,7 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
   }
 
   get project() {
-    return this.props.resourceCollection.relationships.project;
+    return this.props.project;
   }
 
   filtersChanged(prevProps) {
