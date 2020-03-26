@@ -9,6 +9,7 @@ import has from "lodash/has";
 import LabelSet from "./LabelSet";
 import { Link } from "react-router-dom";
 import { UID } from "react-uid";
+import Utility from "global/components/utility";
 
 export default class EntitiesListRow extends PureComponent {
   static displayName = "List.EntitiesList.Entity.Row";
@@ -32,6 +33,7 @@ export default class EntitiesListRow extends PureComponent {
     ]),
     active: PropTypes.bool,
     listStyle: PropTypes.oneOf(["rows", "tiles", "grid"]),
+    sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
     utility: PropTypes.node,
     dragHandleProps: PropTypes.object,
     draggableProps: PropTypes.object,
@@ -42,6 +44,7 @@ export default class EntitiesListRow extends PureComponent {
   static defaultProps = {
     rowClickMode: "inline",
     listStyle: "rows",
+    sortableStyle: "spaced",
     figureSize: "normal",
     figureShape: "square",
     active: false
@@ -111,6 +114,10 @@ export default class EntitiesListRow extends PureComponent {
     return this.props.listStyle;
   }
 
+  get sortableStyle() {
+    return this.props.sortableStyle;
+  }
+
   get titlePlainText() {
     return this.props.titlePlainText || this.props.title;
   }
@@ -164,6 +171,8 @@ export default class EntitiesListRow extends PureComponent {
       "entity-row__inner--in-rows": this.listStyle === "rows",
       "entity-row__inner--with-row-link": this.entireRowIsClickable,
       "entity-row__inner--sortable": this.isSortable,
+      "entity-row__inner--sortable-tight":
+        this.isSortable && this.sortableStyle === "tight",
       "entity-row__inner--is-dragging": this.isDragging
     });
   }
@@ -278,6 +287,15 @@ export default class EntitiesListRow extends PureComponent {
     return this.wrapWithClickHandler(child, id, false);
   }
 
+  get dragHandle() {
+    if (!this.isSortable) return null;
+    return (
+      <span className="entity-row__utility-button entity-row__utility-button--handle">
+        <Utility.IconComposer icon="grabber32" size={26} />
+      </span>
+    );
+  }
+
   blockLink(child, id) {
     if (this.isSortable) return this.wrapWithDragHandler(child);
     if (!this.entireRowIsClickable) return child;
@@ -324,8 +342,13 @@ export default class EntitiesListRow extends PureComponent {
                     <div className={this.metaClassNames}>{this.meta}</div>
                   )}
                 </div>
-                {this.utility && (
-                  <div className="entity-row__utility">{this.utility}</div>
+                {(this.utility || this.isSortable) && (
+                  <div className="entity-row__utility">
+                    <>
+                      {this.utility}
+                      {this.dragHandle}
+                    </>
+                  </div>
                 )}
               </div>,
               id

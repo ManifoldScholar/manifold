@@ -75,6 +75,7 @@ export default class ListEntities extends PureComponent {
     titleStyle: PropTypes.oneOf(["bar", "title", "section"]),
     titleLink: PropTypes.string,
     listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare"]),
+    sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
     showCount: ListEntities.validateShowCounts,
     showCountInTitle: ListEntities.validateShowCounts,
     buttons: PropTypes.arrayOf(ListEntities.validateEnsureButton),
@@ -97,6 +98,7 @@ export default class ListEntities extends PureComponent {
     showCountInTitle: false,
     titleStyle: "title",
     listStyle: "rows",
+    sortableStyle: "spaced",
     indented: false,
     entityComponentProps: {},
     callbacks: {}
@@ -162,6 +164,10 @@ export default class ListEntities extends PureComponent {
     return this.props.listStyle;
   }
 
+  get sortableStyle() {
+    return this.props.sortableStyle;
+  }
+
   get titleStyle() {
     return this.props.titleStyle;
   }
@@ -208,7 +214,9 @@ export default class ListEntities extends PureComponent {
       "entity-list__list--grid": this.listStyle === "grid",
       "entity-list__list--tiles": this.listStyle === "tiles",
       "entity-list__list--rows": this.listStyle === "rows",
-      "entity-list__list--sortable": this.isSortable
+      "entity-list__list--sortable": this.isSortable,
+      "entity-list__list--sortable-tight":
+        this.isSortable && this.sortableStyle === "tight"
     });
 
     const contentsWrapperClassName = classNames({

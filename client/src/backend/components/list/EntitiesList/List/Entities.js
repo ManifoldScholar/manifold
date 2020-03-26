@@ -12,6 +12,7 @@ export default class ListEntitiesListEntities extends PureComponent {
     entityComponentProps: PropTypes.object,
     emptyMessage: PropTypes.node,
     listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare"]),
+    sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
     idForInstructions: PropTypes.string
   };
 
@@ -27,8 +28,16 @@ export default class ListEntitiesListEntities extends PureComponent {
     return this.props.listStyle;
   }
 
+  get sortableStyle() {
+    return this.props.sortableStyle;
+  }
+
   get entityComponentProps() {
-    return { ...this.props.entityComponentProps, listStyle: this.listStyle };
+    return {
+      ...this.props.entityComponentProps,
+      listStyle: this.listStyle,
+      sortableStyle: this.sortableStyle
+    };
   }
 
   get className() {

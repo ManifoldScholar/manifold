@@ -41,6 +41,7 @@ export default class ProjectCollectionDetailManual extends PureComponent {
         }
         entities={this.entities}
         listStyle="rows"
+        sortableStyle="tight"
         callbacks={this.callbacks}
       />
     );

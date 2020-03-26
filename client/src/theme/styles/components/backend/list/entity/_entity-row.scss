@@ -3,6 +3,11 @@
   user-select: none;
 
   &__inner {
+    .focus-visible & {
+      outline: 2px solid $defaultFocusColor;
+      outline-offset: -2px;
+    }
+
     position: relative;
     display: flex;
     align-items: flex-start;
@@ -29,7 +34,30 @@
       @include respond($break90) {
         padding: 10px 19px 10px 23px;
       }
+
+      &.entity-row__inner--sortable-with-handle {
+        cursor: default;
+      }
+
+      &.entity-row__inner--sortable-tight {
+        padding: 14px 9px 14px 11px;
+        background-color: $neutral90;
+        border-bottom: 1px solid $neutralUIDullLight;
+        border-radius: 0;
+        transition: background-color $duration ease-out,;
+      }
+
+      .show-dropzone & {
+        border-bottom: 1px solid #424242;
+        border-radius: 9px;
+      }
+
+      &.entity-row__inner--is-dragging{
+        box-shadow: none;
+      }
     }
+
+
 
     &--is-dragging {
       @include dragging;
@@ -51,6 +79,10 @@
   &__drag-container {
     padding-top: 9px;
     padding-bottom: 9px;
+
+    &.focus-visible {
+      outline: 0;
+    }
   }
 
   &__row-link {
@@ -171,6 +203,11 @@
 
   &__utility-button {
     @include buttonUnstyled;
+
+    &.entity-row__utility-button--handle {
+      cursor: move;
+      cursor: grab;
+    }
   }
 
   &__figure {
@@ -399,6 +436,11 @@
     margin-top: 7px;
   }
 
+}
+
+// A hack to adjust the drag container in tight, sortable entity lists.
+.entity-list__list--sortable-tight .entity-row__drag-container {
+  padding: 0;
 }
 
 // Bit of a hack to clear out the hover state on other items when the list is sortable

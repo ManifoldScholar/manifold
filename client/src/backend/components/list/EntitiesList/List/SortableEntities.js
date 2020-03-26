@@ -17,12 +17,14 @@ export default class SortableEntities extends PureComponent {
     entityComponent: PropTypes.func.isRequired,
     entityComponentProps: PropTypes.object,
     listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare"]),
+    sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
     useDragHandle: PropTypes.bool,
     idForInstructions: PropTypes.string
   };
 
   static defaultProps = {
-    useDragHandle: false
+    useDragHandle: false,
+    sortableStyle: "spaced"
   };
 
   static getDerivedStateFromProps(props, prevState) {
@@ -76,12 +78,20 @@ export default class SortableEntities extends PureComponent {
     return this.props.listStyle;
   }
 
+  get sortableStyle() {
+    return this.props.sortableStyle;
+  }
+
   get useDragHandle() {
     return this.props.useDragHandle;
   }
 
   get entityComponentProps() {
-    return { ...this.props.entityComponentProps, listStyle: this.listStyle };
+    return {
+      ...this.props.entityComponentProps,
+      listStyle: this.listStyle,
+      sortableStyle: this.sortableStyle
+    };
   }
 
   get reorderCallback() {

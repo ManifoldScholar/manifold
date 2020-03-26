@@ -140,6 +140,7 @@ exports[`backend/components/project-collection/List matches the snapshot 1`] = `
     listStyle="bare"
     showCount={false}
     showCountInTitle={false}
+    sortableStyle="spaced"
     titleStyle="title"
     useDragHandle={true}
   />
