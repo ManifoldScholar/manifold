@@ -33,6 +33,8 @@ class Stylesheet < ApplicationRecord
   # Concerns
   acts_as_list scope: :text_id
 
+  scope :ingested, -> { where(ingested: true) }
+
   def to_s
     "stylesheet #{id}"
   end

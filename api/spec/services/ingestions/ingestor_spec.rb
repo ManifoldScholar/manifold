@@ -124,6 +124,13 @@ RSpec.describe Ingestions::Ingestor do
 
     context "when reingesting a document" do
       let(:text) { FactoryBot.create(:text, title: "original") }
+      let!(:userStylesheet) do
+        FactoryBot.create(
+          :stylesheet,
+          raw_styles: ".invalid { position: relative }",
+          text: text
+        )
+      end
       let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html") }
       let(:ingestion) do
         ingestion = FactoryBot.create(:ingestion, text: text)
@@ -170,6 +177,13 @@ RSpec.describe Ingestions::Ingestor do
           expect do
             described_class.run ingestion: ingestion
           end.to_not change(text, :slug)
+        end
+
+        it "does not revalidate user stylesheets" do
+          expect do
+            described_class.run ingestion: ingestion
+            userStylesheet.reload
+          end.to_not change(userStylesheet, :styles)
         end
       end
 
