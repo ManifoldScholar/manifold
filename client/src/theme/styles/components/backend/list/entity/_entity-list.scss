@@ -125,11 +125,12 @@
 
     &--sortable {
       @include dropzone(9px, '.show-dropzone');
-
-      .entity-list__entity:first-child {
-        margin-top: 10px;
-      }
+      padding-top: 9px;
+      padding-bottom: 9px;
+      margin-top: -9px;
+      margin-bottom: -9px;
     }
+
   }
 
   &__header {
