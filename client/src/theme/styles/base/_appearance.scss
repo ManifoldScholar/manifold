@@ -72,7 +72,7 @@ body {
   --default-notice-color: #{$spNoticeDark};
 }
 
-.backend, .reader.scheme-dark, .bg-neutral90, .bg-neutral95 {
+.backend, .drawer--backend, .reader.scheme-dark, .bg-neutral90, .bg-neutral95 {
   --default-focus-color: #{$accentInteractionLight};
   --default-hover-color: #{$accentInteractionLight};
   --default-error-color: #{$spErrorLight};
