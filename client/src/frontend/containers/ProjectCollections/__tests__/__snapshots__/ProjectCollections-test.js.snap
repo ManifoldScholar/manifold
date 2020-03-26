@@ -24,6 +24,7 @@ exports[`frontend/containers/ProjectCollections/ProjectCollections matches the s
   <ProjectCollectionSummary
     authentication={Object {}}
     dispatch={[Function]}
+    invertColor={true}
     key="projectCollection-0"
     limit={4}
     ordinal={0}
@@ -71,6 +72,7 @@ exports[`frontend/containers/ProjectCollections/ProjectCollections matches the s
   <ProjectCollectionSummary
     authentication={Object {}}
     dispatch={[Function]}
+    invertColor={true}
     key="projectCollection-1"
     limit={4}
     ordinal={1}
@@ -118,6 +120,7 @@ exports[`frontend/containers/ProjectCollections/ProjectCollections matches the s
   <ProjectCollectionSummary
     authentication={Object {}}
     dispatch={[Function]}
+    invertColor={true}
     key="projectCollection-2"
     limit={4}
     ordinal={2}

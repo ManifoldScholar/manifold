@@ -16,7 +16,12 @@ export default class ProjectCollectionSummary extends Component {
     limit: PropTypes.number,
     dispatch: PropTypes.func,
     authentication: PropTypes.object,
-    ordinal: PropTypes.number
+    ordinal: PropTypes.number,
+    invertColor: PropTypes.bool
+  };
+
+  static defaultProps = {
+    invertColor: false
   };
 
   get limit() {
@@ -51,10 +56,10 @@ export default class ProjectCollectionSummary extends Component {
 
   render() {
     if (!this.collection) return null;
-
     const backgroundClasses = classnames({
       "project-collection-summary": true,
-      "bg-neutral05": this.props.ordinal % 2 === 0
+      "bg-neutral05":
+        this.props.ordinal % 2 === (this.props.invertColor ? 1 : 0)
     });
     const iconFill =
       this.collection.attributes.icon === "new-round"

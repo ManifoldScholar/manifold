@@ -117,6 +117,7 @@ export class ProjectsCollectionsContainer extends Component {
           dispatch={this.props.dispatch}
           limit={4}
           ordinal={index}
+          invertColor
         />
       );
     });
