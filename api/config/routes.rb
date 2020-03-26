@@ -74,7 +74,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :annotations, only: [:show, :update, :destroy], controller: "text_sections/relationships/annotations" do
+      resources :annotations, only: [:update, :destroy], controller: "text_sections/relationships/annotations" do
         namespace :relationships do
           resource :flags, controller: "/api/v1/flags", only: [:create, :destroy]
           resources :comments, controller: "/api/v1/comments"
@@ -99,7 +99,7 @@ Rails.application.routes.draw do
       resources :project_collections do
         scope module: :project_collections do
           namespace :relationships do
-            resources :collection_projects
+            resources :collection_projects, except: [:show]
             resources :projects, only: [:index]
           end
         end
@@ -115,11 +115,6 @@ Rails.application.routes.draw do
         end
       end
 
-      # TODO: Implement
-      resources :collaborators, only: [:show]
-      resources :collection_resources, only: [:show]
-      # END TODO
-
       resources :projects do
         scope module: :projects do
           namespace :relationships do
@@ -132,7 +127,7 @@ Rails.application.routes.draw do
             resources :events, only: [:index]
             resources :twitter_queries, only: [:index, :create]
             resources :resource_imports, only: [:create, :update, :show]
-            resources :collaborators
+            resources :collaborators, only: [:index, :show]
             resources :text_categories, only: [:index, :create, :show]
             resources :ingestions, only: [:create], controller: "/api/v1/ingestions"
             resources :versions, only: [:index]
@@ -160,7 +155,7 @@ Rails.application.routes.draw do
       resource :me, only: [:show, :update], controller: "me"
       namespace :me do
         namespace :relationships do
-          resources :favorites
+          resources :favorites, except: [:update]
           resources :reading_groups, only: [:index]
           resources :favorite_projects, only: [:index]
           resources :annotations, only: [:index]
