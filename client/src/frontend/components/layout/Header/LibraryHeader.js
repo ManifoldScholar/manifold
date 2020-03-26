@@ -84,7 +84,7 @@ export default class LayoutLibraryHeader extends PureComponent {
       : {};
     const logoUrl = get(
       this.props.settings,
-      "attributes.pressLogoStyles.small"
+      "attributes.pressLogoStyles.medium"
     );
     const mobileLogoUrl =
       get(this.props.settings, "attributes.pressLogoMobileStyles.small") ||
