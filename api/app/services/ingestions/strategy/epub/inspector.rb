@@ -56,7 +56,11 @@ module Ingestions
         memoize :language_node
 
         def date_node
-          metadata_node.xpath("//dc:date", "dc" => dc)
+          metadata_node.xpath(
+            "//dc:date[not(@opf:event=\"modification\" or @opf:event=\"creation\")]",
+            "dc" => dc,
+            "opf" => opf
+          )
         end
         memoize :date_node
 
@@ -243,6 +247,10 @@ module Ingestions
 
         def dc
           "http://purl.org/dc/elements/1.1/"
+        end
+
+        def opf
+          "http://www.idpf.org/2007/opf"
         end
 
         def rendition_package_node

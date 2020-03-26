@@ -3,6 +3,8 @@
   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
     <dc:identifier id="pub-id" opf:scheme="UUID">test-v2</dc:identifier>
     <dc:title>Your title here</dc:title>
+    <dc:date>2020-12-30</dc:date>
+    <dc:date xmlns:opf="http://www.idpf.org/2007/opf" opf:event="modification">2020-03-23</dc:date>
     <dc:language>en</dc:language>
     <dc:description>Your description here</dc:description>
     <dc:rights>Your rights here</dc:rights>
