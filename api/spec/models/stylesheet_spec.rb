@@ -1,8 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Stylesheet, type: :model do
-
-  let(:stylesheet) { FactoryBot.create(:stylesheet)}
+  let(:stylesheet) { FactoryBot.create(:stylesheet) }
 
   it "has a valid factory" do
     expect(FactoryBot.build(:stylesheet)).to be_valid
@@ -14,7 +13,7 @@ RSpec.describe Stylesheet, type: :model do
 
   it "changes the computed styles when its raw styles change" do
     stylesheet.raw_styles = ".some-class { color: red }"
-    expect{ stylesheet.save }.to change(stylesheet, :styles)
+    expect { stylesheet.save }.to change(stylesheet, :styles)
   end
 
   it "does not destroy text section records on destroy" do
@@ -26,10 +25,9 @@ RSpec.describe Stylesheet, type: :model do
     let(:stylesheet) { FactoryBot.create(:stylesheet) }
 
     it "pretty formats the styles" do
-      stylesheet.raw_styles  = ".selector{attribute:value}"
+      stylesheet.raw_styles = ".selector{attribute:value}"
       stylesheet.save
       expect(stylesheet.raw_styles).to eq ".selector {\n    attribute: value;\n}"
     end
   end
-
 end

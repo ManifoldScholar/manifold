@@ -42,7 +42,7 @@ module Ingestions
     def validate_stylesheets
       info "services.ingestions.post_processor.log.transforming_ss"
 
-      text.stylesheets.each do |stylesheet|
+      text.stylesheets.ingested.each do |stylesheet|
         compose PostProcessors::Stylesheet,
                 stylesheet: stylesheet
       end
