@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Resourceish from "frontend/components/resourceish";
-import get from "lodash/get";
 
 // The Notation class is used to generate a notation thumbnail, which is currently either
 // a resource or a collection. Please do not add any logic to this class that's not
@@ -23,32 +22,22 @@ export default class NotationViewerNotation extends PureComponent {
     neverCrop: false
   };
 
-  type() {
+  get variant() {
+    return "smallLandscape";
+  }
+
+  get type() {
     return this.props.notation.type;
   }
 
-  imageAttributeName() {
-    return this.type() === "resources" ? "attachmentStyles" : "thumbnailStyles";
-  }
-
   hasImage() {
-    const attribute = this.imageAttributeName();
-    if (get(this.props.notation, `attributes.${attribute}.smallLandscape`))
-      return true;
-    if (
-      get(
-        this.props.notation,
-        `attributes.variantThumbnailStyles.smallLandscape`
-      )
-    )
-      return true;
-    return false;
+    return Resourceish.Thumbnail.hasImage(this.props.notation, this.variant);
   }
 
   renderNotation() {
     const { notation, additionalClasses, showTitle, neverCrop } = this.props;
     let noCrop = false;
-    if (this.hasImage() && !neverCrop) noCrop = true;
+    if (this.hasImage && !neverCrop) noCrop = true;
     return (
       <Resourceish.Thumbnail
         key={notation.id}
@@ -56,7 +45,7 @@ export default class NotationViewerNotation extends PureComponent {
         showKind={false}
         noCrop={noCrop}
         showTitle={showTitle}
-        variant="smallLandscape"
+        variant={this.variant}
         additionalClasses={additionalClasses}
       />
     );

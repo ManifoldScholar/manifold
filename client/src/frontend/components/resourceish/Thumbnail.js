@@ -1,12 +1,29 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import get from "lodash/get";
+import has from "lodash/has";
 import Utility from "global/components/utility";
 import IconComputed from "global/components/icon-computed";
 
 export default class ResourceishThumbnail extends Component {
   static displayName = "Resourceish.Thumbnail";
+
+  static hasImage(resourceish, variant) {
+    return this.imageKey(resourceish, variant) !== undefined;
+  }
+
+  static imageKey(resourceish, variant) {
+    if (!resourceish) return false;
+    const { attributes } = resourceish;
+    const lookups = [
+      "variantThumbnailStyles",
+      "variantPosterStyles",
+      "attachmentStyles"
+    ];
+    return lookups.find(lookup => {
+      return has(attributes, `${lookup}.${variant}`);
+    });
+  }
 
   static propTypes = {
     resourceish: PropTypes.object,
@@ -45,26 +62,10 @@ export default class ResourceishThumbnail extends Component {
   }
 
   getImage(resourceish) {
-    let attributeName = null;
-    switch (this.type()) {
-      case "resources":
-        attributeName = "attachmentStyles";
-        break;
-      case "resourceCollections":
-        attributeName = "thumbnailStyles";
-        break;
-      default:
-        break;
-    }
-    const thumb = get(
-      resourceish,
-      `attributes.variantThumbnailStyles.${this.props.variant}`
-    );
-    if (thumb) return thumb;
-    return get(
-      resourceish,
-      `attributes.${attributeName}.${this.props.variant}`
-    );
+    const key = this.constructor.imageKey(resourceish, this.props.variant);
+    if (!key) return null;
+    const { attributes } = resourceish;
+    return attributes[key][this.props.variant];
   }
 
   hasImage(resourceish) {
