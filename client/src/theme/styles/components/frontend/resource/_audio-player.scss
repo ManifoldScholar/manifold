@@ -3,6 +3,7 @@
 
   position: relative;
   display: flex;
+  width: 100%;
   flex-direction: column;
   height: 100%;
 
@@ -91,6 +92,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 20px;
+      font-variant-numeric: tabular-nums;
 
       @include respond($break40) {
         display: flex;
