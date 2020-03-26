@@ -2,6 +2,8 @@
 <package version="3.0" unique-identifier="pub-id" xmlns="http://www.idpf.org/2007/opf">
   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
     <dc:identifier id="pub-id">test-v3</dc:identifier>
+    <dc:date>2020-12-30</dc:date>
+    <dc:date xmlns:opf="http://www.idpf.org/2007/opf" opf:event="modification">2020-03-23</dc:date>
     <dc:title>Your title here</dc:title>
     <dc:description>Your description here</dc:description>
     <dc:language>en</dc:language>

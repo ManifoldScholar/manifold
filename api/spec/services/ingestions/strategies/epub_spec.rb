@@ -23,7 +23,7 @@ RSpec.describe Ingestions::Strategies::Epub do
         end
 
         it "has the correct date" do
-          expect(manifest[:attributes][:publication_date]).to eq ""
+          expect(manifest[:attributes][:publication_date]).to eq "2020-12-30"
         end
 
         it "has the correct page list" do
@@ -70,27 +70,28 @@ RSpec.describe Ingestions::Strategies::Epub do
     it "has the correct TOC" do
       expected = [
         { "label" => "Section 1", "anchor" => nil, "source_path" => "EPUB/xhtml/section0001.xhtml", "type" => nil },
-        { "label" => "Section 2", "anchor" => nil, "source_path" => "EPUB/xhtml/section0002.xhtml", "type" => nil, "children"=> [
-            { "label" => "Section 2.a", "anchor" => nil, "source_path" => "EPUB/xhtml/section0002a.xhtml", "type" => nil }
+        { "label" => "Section 2", "anchor" => nil, "source_path" => "EPUB/xhtml/section0002.xhtml", "type" => nil, "children" => [
+          { "label" => "Section 2.a", "anchor" => nil, "source_path" => "EPUB/xhtml/section0002a.xhtml", "type" => nil }
         ] },
-        {"label"=>"Section 2#1","anchor"=>"1", "source_path"=>"EPUB/xhtml/section0002.xhtml", "type"=>nil},
-        { "label" => "Section 3", "anchor" => nil, "source_path" => "EPUB/xhtml/an item with spaces.xhtml", "type"=> nil }
+        { "label" => "Section 2#1", "anchor" => "1", "source_path" => "EPUB/xhtml/section0002.xhtml", "type" => nil },
+        { "label" => "Section 3", "anchor" => nil, "source_path" => "EPUB/xhtml/an item with spaces.xhtml", "type" => nil }
       ]
       expect(manifest[:attributes][:toc]).to eq expected
     end
 
     it "has one text section for every unique ingestion source referenced in TOC" do
       expected = [
-        { "source_identifier"=>"section0001.xhtml", "name" => "Section 1", "kind" => "navigation", "position" => 0, "build" => "build/section0001.xhtml" },
-        { "source_identifier"=>"section0002.xhtml",  "name" => "Section 2", "kind" => "section", "position" => 1, "build" => "build/section0002.xhtml" },
-        { "source_identifier"=>"section0002a.xhtml",  "name" => "Section 2.a", "kind" => "section", "position" => 2, "build" => "build/section0002a.xhtml" },
-        { "source_identifier"=>"section0003.xhtml",  "name" => "Section 3", "kind" => "section", "position" => 3, "build" => "build/section0003.xhtml" }]
+        { "source_identifier" => "section0001.xhtml", "name" => "Section 1", "kind" => "navigation", "position" => 0, "build" => "build/section0001.xhtml" },
+        { "source_identifier" => "section0002.xhtml", "name" => "Section 2", "kind" => "section", "position" => 1, "build" => "build/section0002.xhtml" },
+        { "source_identifier" => "section0002a.xhtml", "name" => "Section 2.a", "kind" => "section", "position" => 2, "build" => "build/section0002a.xhtml" },
+        { "source_identifier" => "section0003.xhtml", "name" => "Section 3", "kind" => "section", "position" => 3, "build" => "build/section0003.xhtml" }
+      ]
       expect(manifest[:relationships][:text_sections]).to eq expected
     end
 
     it "has the correct landmarks" do
-      expect(manifest[:attributes][:landmarks]).to eq [{"label"=>"Table of Contents", "anchor"=>nil, "source_path"=>"EPUB/xhtml/section0001.xhtml", "type"=>"toc"},
-                                                       {"label"=>"Title page", "anchor"=>nil, "source_path"=>"EPUB/xhtml/section0002.xhtml", "type"=>"bodymatter"}]
+      expect(manifest[:attributes][:landmarks]).to eq [{ "label" => "Table of Contents", "anchor" => nil, "source_path" => "EPUB/xhtml/section0001.xhtml", "type" => "toc" },
+                                                       { "label" => "Title page", "anchor" => nil, "source_path" => "EPUB/xhtml/section0002.xhtml", "type" => "bodymatter" }]
     end
   end
 
@@ -113,25 +114,27 @@ RSpec.describe Ingestions::Strategies::Epub do
     it "has the correct TOC" do
       expected = [
         { "label" => "Section 1", "anchor" => nil, "source_path" => "OEBPS/xhtml/section0001.xhtml", "type" => nil },
-        { "label" => "Section 2", "anchor" => nil, "source_path" => "OEBPS/xhtml/section0002.xhtml", "type" => nil, "children"=> [
-            { "label" => "Section 2.a", "anchor" => nil, "source_path" => "OEBPS/xhtml/section0002a.xhtml", "type" => nil }] },
-        { "label" => "Section 3", "anchor" => nil, "source_path" => "OEBPS/xhtml/section0003.xhtml", "type"=> nil }
+        { "label" => "Section 2", "anchor" => nil, "source_path" => "OEBPS/xhtml/section0002.xhtml", "type" => nil, "children" => [
+          { "label" => "Section 2.a", "anchor" => nil, "source_path" => "OEBPS/xhtml/section0002a.xhtml", "type" => nil }
+        ] },
+        { "label" => "Section 3", "anchor" => nil, "source_path" => "OEBPS/xhtml/section0003.xhtml", "type" => nil }
       ]
       expect(manifest[:attributes][:toc]).to eq expected
     end
 
     it "has one text section for every unique ingestion source referenced in TOC" do
       expected = [
-        { "source_identifier"=>"section0001.xhtml",  "name" => "Section 1", "kind" => "navigation", "position" => 0, "build" => "build/section0001.xhtml" },
-        { "source_identifier"=>"section0002.xhtml",  "name" => "Section 2", "kind" => "section", "position" => 1, "build" => "build/section0002.xhtml" },
-        { "source_identifier"=>"section0002a.xhtml",  "name" => "Section 2.a", "kind" => "section", "position" => 2, "build" => "build/section0002a.xhtml" },
-        { "source_identifier"=>"section0003.xhtml",  "name" => "Section 3", "kind" => "section", "position" => 3, "build" => "build/section0003.xhtml" }]
+        { "source_identifier" => "section0001.xhtml",  "name" => "Section 1", "kind" => "navigation", "position" => 0, "build" => "build/section0001.xhtml" },
+        { "source_identifier" => "section0002.xhtml",  "name" => "Section 2", "kind" => "section", "position" => 1, "build" => "build/section0002.xhtml" },
+        { "source_identifier" => "section0002a.xhtml", "name" => "Section 2.a", "kind" => "section", "position" => 2, "build" => "build/section0002a.xhtml" },
+        { "source_identifier" => "section0003.xhtml", "name" => "Section 3", "kind" => "section", "position" => 3, "build" => "build/section0003.xhtml" }
+      ]
       expect(manifest[:relationships][:text_sections]).to eq expected
     end
 
     it "has the correct landmarks" do
-      expect(manifest[:attributes][:landmarks]).to eq [{"label"=>"Table of Contents", "anchor"=>nil, "source_path"=>"OEBPS/xhtml/section0001.xhtml", "type"=>"toc"},
-                                                       {"label"=>"Start", "anchor"=>nil, "source_path"=>"OEBPS/xhtml/section0002.xhtml", "type"=>"text"}]
+      expect(manifest[:attributes][:landmarks]).to eq [{ "label" => "Table of Contents", "anchor" => nil, "source_path" => "OEBPS/xhtml/section0001.xhtml", "type" => "toc" },
+                                                       { "label" => "Start", "anchor" => nil, "source_path" => "OEBPS/xhtml/section0002.xhtml", "type" => "text" }]
     end
   end
 
@@ -210,21 +213,21 @@ RSpec.describe Ingestions::Strategies::Epub do
 
       it "has one text section for every unique ingestion source referenced in TOC" do
         expected = [
-          { "source_identifier" => "titlepage.xhtml", "name" => "Titlepage", "kind" => "section", "position" => 0, "build" => "build/titlepage.xhtml"  },
-          { "source_identifier" => "imprint.xhtml",  "name" => "Imprint", "kind" => "section", "position" => 1, "build" => "build/imprint.xhtml"  },
-          { "source_identifier" => "chapter-1.xhtml",  "name" => "I First Adventure", "kind" => "section", "position" => 2, "build" => "build/chapter-1.xhtml"  },
+          { "source_identifier" => "titlepage.xhtml", "name" => "Titlepage", "kind" => "section", "position" => 0, "build" => "build/titlepage.xhtml" },
+          { "source_identifier" => "imprint.xhtml", "name" => "Imprint", "kind" => "section", "position" => 1, "build" => "build/imprint.xhtml" },
+          { "source_identifier" => "chapter-1.xhtml",  "name" => "I First Adventure", "kind" => "section", "position" => 2, "build" => "build/chapter-1.xhtml" },
           { "source_identifier" => "chapter-2.xhtml",  "name" => "II Second Adventure", "kind" => "section", "position" => 3, "build" => "build/chapter-2.xhtml"  },
           { "source_identifier" => "chapter-3.xhtml",  "name" => "III Third Adventure", "kind" => "section", "position" => 4, "build" => "build/chapter-3.xhtml"  },
           { "source_identifier" => "chapter-4.xhtml",  "name" => "IV Fourth Adventure", "kind" => "section", "position" => 5, "build" => "build/chapter-4.xhtml"  },
           { "source_identifier" => "chapter-5.xhtml",  "name" => "V Fifth Adventure", "kind" => "section", "position" => 6, "build" => "build/chapter-5.xhtml"  },
           { "source_identifier" => "chapter-6.xhtml",  "name" => "VI Sixth Adventure", "kind" => "section", "position" => 7, "build" => "build/chapter-6.xhtml" },
-          { "source_identifier" => "chapter-7.xhtml",  "name" => "VII Seventh Adventure", "kind" => "section", "position" => 8, "build" => "build/chapter-7.xhtml"  },
-          { "source_identifier" => "endnotes.xhtml",  "name" => "Endnotes", "kind" => "section", "position" => 9, "build" => "build/endnotes.xhtml"  },
-          { "source_identifier" => "colophon.xhtml",  "name" => "Colophon", "kind" => "section", "position" => 10, "build" => "build/colophon.xhtml"  },
-          { "source_identifier" => "uncopyright.xhtml",  "name" => "Uncopyright", "kind" => "section", "position" => 11, "build" => "build/uncopyright.xhtml"  }]
+          { "source_identifier" => "chapter-7.xhtml",  "name" => "VII Seventh Adventure", "kind" => "section", "position" => 8, "build" => "build/chapter-7.xhtml" },
+          { "source_identifier" => "endnotes.xhtml",  "name" => "Endnotes", "kind" => "section", "position" => 9, "build" => "build/endnotes.xhtml" },
+          { "source_identifier" => "colophon.xhtml",  "name" => "Colophon", "kind" => "section", "position" => 10, "build" => "build/colophon.xhtml" },
+          { "source_identifier" => "uncopyright.xhtml", "name" => "Uncopyright", "kind" => "section", "position" => 11, "build" => "build/uncopyright.xhtml" }
+        ]
 
-
-          expect(@manifest[:relationships][:text_sections]).to eq expected
+        expect(@manifest[:relationships][:text_sections]).to eq expected
       end
 
       it "has one ingestion source for every unique source file" do
