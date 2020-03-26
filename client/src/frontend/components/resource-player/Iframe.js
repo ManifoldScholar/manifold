@@ -25,7 +25,7 @@ export default class ResourcePlayerIframe extends Component {
           title={titlePlaintext}
           style={{
             minHeight: minimumHeight,
-            minWidth: minimumWidth,
+            minWidth: Math.min(minimumWidth, 1135),
             ...styleProps
           }}
         />
