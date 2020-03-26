@@ -13,6 +13,7 @@ import withConfirmation from "hoc/with-confirmation";
 import IconComposer from "global/components/utility/IconComposer";
 
 import Authorize from "hoc/authorize";
+import { Link } from "react-router-dom";
 
 const { request } = entityStoreActions;
 
@@ -93,14 +94,9 @@ export class TextWrapperContainer extends PureComponent {
     this.props.confirm(heading, message, this.doDestroy);
   };
 
-  doPreview = event => {
-    event.preventDefault();
-    const win = window.open(
-      lh.link("reader", this.props.text.attributes.slug),
-      "_blank"
-    );
-    win.focus();
-  };
+  previewUrl() {
+    return lh.link("reader", this.props.text.attributes.slug);
+  }
 
   renderUtility() {
     const { text } = this.props;
@@ -110,14 +106,14 @@ export class TextWrapperContainer extends PureComponent {
 
     return (
       <div className="utility-button-group utility-button-group--inline">
-        <button onClick={this.doPreview} className="utility-button">
+        <Link to={this.previewUrl()} className="utility-button">
           <IconComposer
             icon="eyeOpen32"
             size={26}
             iconClass="utility-button__icon utility-button__icon--highlight"
           />
           <span className="utility-button__text">Preview</span>
-        </button>
+        </Link>
         <button onClick={this.handleTextDestroy} className="utility-button">
           <IconComposer
             icon="delete32"
