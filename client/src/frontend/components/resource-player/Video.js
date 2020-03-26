@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { DefaultPlayer as Video } from "react-html5video";
+import withDispatch from "hoc/with-dispatch";
+import { notificationActions } from "actions";
 
-export default class ResourcePlayerVideo extends Component {
+class ResourcePlayerVideo extends Component {
   static displayName = "Resource.Player.Video";
 
   static propTypes = {
-    resource: PropTypes.object
+    resource: PropTypes.object,
+    dispatch: PropTypes.func
   };
 
   constructor() {
     super();
+    this.playerRef = React.createRef();
     this.state = { inBrowser: false };
   }
 
@@ -49,14 +53,29 @@ export default class ResourcePlayerVideo extends Component {
     return <div className="figure-video">{output}</div>;
   }
 
+  handleError = eventIgnored => {
+    const hasDownload = this.props.resource.attributes.allowDownload;
+    const notification = {
+      level: 1,
+      id: `VIDEO_PLAYBACK_ERROR`,
+      heading: "Unable to play video.",
+      body: `Your browser is not able to play this video. ${hasDownload &&
+        "You may download it and play it locally using the download button below."}`,
+      expiration: 5000
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
+  };
+
   renderFileVideo(resource) {
     if (!this.state.inBrowser) return null;
 
     return (
       <div className="figure-video">
         <Video
+          ref={this.playerRef}
           controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}
           poster={resource.attributes.variantPosterStyles.mediumLandscape}
+          onError={this.handleError}
         >
           <source
             src={resource.attributes.attachmentStyles.original}
@@ -82,3 +101,5 @@ export default class ResourcePlayerVideo extends Component {
     return this.renderVideo(resource);
   }
 }
+
+export default withDispatch(ResourcePlayerVideo);
