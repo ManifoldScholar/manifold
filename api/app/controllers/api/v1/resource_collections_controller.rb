@@ -3,28 +3,14 @@ module Api
     # Collections controller
     class ResourceCollectionsController < ApplicationController
 
-      resourceful! ResourceCollection, authorize_options: { except: [:index, :show] } do
+      resourceful! ResourceCollection, authorize_options: { except: [:index] } do
         ResourceCollection.filtered(with_pagination!(resource_collection_filter_params))
-      end
-
-      # GET /collections
-      def index
-        @collections = load_resource_collections
-        render_multiple_resources(
-          @collections
-        )
       end
 
       # GET /collections/1
       def show
         @collection = load_resource_collection
         render_single_resource(@collection, include: includes)
-      end
-
-      # POST /collections
-      def create
-        @collection = authorize_and_create_resource_collection(resource_collection_params)
-        render_single_resource @collection
       end
 
       # PATCH/PUT /collections/1
