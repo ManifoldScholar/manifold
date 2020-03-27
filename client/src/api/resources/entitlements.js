@@ -19,14 +19,14 @@ export default {
     };
   },
 
-  show(_entity, id) {
+  show(id) {
     return {
       endpoint: `/api/v1/entitlements/${id}`,
       method: "GET"
     };
   },
 
-  destroy(_entity, id) {
+  destroy(id) {
     return {
       endpoint: `/api/v1/entitlements/${id}`,
       method: "DELETE"

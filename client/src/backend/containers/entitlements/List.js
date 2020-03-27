@@ -34,6 +34,18 @@ export class EntitlementsList extends PureComponent {
     dispatch(action);
   }
 
+  onDelete = entitlement => {
+    const { dispatch } = this.props;
+
+    const options = entitlementsAPI.destroy(entitlement.id);
+
+    const action = request(options, requests.beProjectEntitlementDestroy, {
+      removes: entitlement
+    });
+
+    dispatch(action);
+  };
+
   render() {
     const { match, entity, entitlements } = this.props;
     const active = match.params.id;
@@ -50,7 +62,8 @@ export class EntitlementsList extends PureComponent {
             entityComponent={EntitlementRow}
             entityComponentProps={{
               active,
-              linkName: listUrl
+              linkName: listUrl,
+              onDelete: this.onDelete
             }}
             buttons={[
               <Button
