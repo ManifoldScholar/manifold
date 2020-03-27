@@ -40,6 +40,7 @@ class Entitlement < ApplicationRecord
   delegate :role_names, to: :global_roles, prefix: :global
   delegate :role_names, to: :scoped_roles, prefix: :scoped
   delegate :has_global_roles?, :has_scoped_roles?, :granted_role_names, to: :kind
+  delegate :name, to: :target, prefix: true
 
   # @api private
   # @return [void]
@@ -118,6 +119,15 @@ class Entitlement < ApplicationRecord
     when ReadingGroup then target.users
     when User then [target]
     end.to_a
+  end
+
+  # @yield [m]
+  # @yieldparam [Dry::Matcher] m
+  # @yieldreturn [object]
+  def on_subject
+    raise "Must provide a block" unless block_given?
+
+    Entitlements::SubjectMatcher.call(self, &Proc.new)
   end
 
   # @!attribute [r] subject_url
