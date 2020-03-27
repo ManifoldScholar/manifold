@@ -5,6 +5,7 @@ import EntityRow from "./Entity/Row";
 import EventRow from "./Entity/EventRow";
 import ProjectExportationRow from "./Entity/ProjectExportationRow";
 import ExportTargetRow from "./Entity/ExportTargetRow";
+import EntitlementRow from "./Entity/EntitlementRow";
 import FeatureRow from "./Entity/FeatureRow";
 import LogRow from "./Entity/LogRow";
 import MakerRow from "./Entity/MakerRow";
@@ -26,6 +27,7 @@ export {
   EventRow,
   ProjectExportationRow,
   ExportTargetRow,
+  EntitlementRow,
   FeatureRow,
   LogRow,
   MakerRow,
