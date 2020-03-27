@@ -2,6 +2,8 @@ export annotationsAPI from "./resources/annotations";
 export resourceCollectionsAPI from "./resources/resourceCollections";
 export favoriteProjectsAPI from "./resources/favoriteProjects";
 export favoritesAPI from "./resources/favorites";
+export entitlementsAPI from "./resources/entitlements";
+export entitlementTargetsAPI from "./resources/entitlementTargets";
 export eventsAPI from "./resources/events";
 export makersAPI from "./resources/makers";
 export meAPI from "./resources/me";
