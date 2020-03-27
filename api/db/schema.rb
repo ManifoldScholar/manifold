@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_19_023714) do
+ActiveRecord::Schema.define(version: 2020_03_27_050921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -1483,4 +1483,25 @@ ActiveRecord::Schema.define(version: 2020_03_19_023714) do
   add_index "entitlement_grant_audits", ["action"], name: "index_entitlement_grant_audits_on_action"
   add_index "entitlement_grant_audits", ["user_id", "entitlement_role_id", "resource_id", "resource_type", "role_name"], name: "entitlement_grant_audits_pkey", unique: true
 
+  create_view "entitlement_targets", sql_definition: <<-SQL
+    SELECT 'User'::text AS target_type,
+    users.id AS target_id,
+    concat('gid://manifold-api/User/', users.id) AS target_url,
+    concat(users.first_name, ' ', users.last_name) AS name,
+    'public'::text AS visibility,
+    concat('1', users.first_name, ' ', users.last_name) AS sort_key
+   FROM users
+  WHERE ((users.classification)::text = 'default'::text)
+UNION ALL
+ SELECT 'ReadingGroup'::text AS target_type,
+    reading_groups.id AS target_id,
+    concat('gid://manifold-api/ReadingGroup/', reading_groups.id) AS target_url,
+    reading_groups.name,
+        CASE reading_groups.privacy
+            WHEN 'public'::text THEN 'public'::text
+            ELSE 'private'::text
+        END AS visibility,
+    concat('2', reading_groups.name) AS sort_key
+   FROM reading_groups;
+  SQL
 end
