@@ -8,7 +8,7 @@ module Api
       def index
         @entitlements = load_entitlements
 
-        render_multiple_resources @entitlements
+        render_multiple_resources @entitlements, includes: %i[entitler subject target]
       end
 
       def show

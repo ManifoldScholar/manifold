@@ -9,6 +9,8 @@ class Entitler < ApplicationRecord
 
   has_many :entitlements, inverse_of: :entitler, dependent: :destroy
 
+  scope :by_entity, ->(entity) { where(entity: entity) }
+
   before_validation :set_name!, on: :create
 
   validates :name, presence: true
@@ -20,5 +22,11 @@ class Entitler < ApplicationRecord
   # @return [void]
   def set_name!
     self.name = entity.name unless name.present?
+  end
+
+  class << self
+    def has?(entity)
+      by_entity(entity).exists?
+    end
   end
 end
