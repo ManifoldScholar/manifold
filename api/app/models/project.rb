@@ -426,7 +426,7 @@ class Project < ApplicationRecord
     # @param [<Symbol, String>] scoped role names
     # @return [Arel::Nodes::Or]
     def arel_with_roles_for(user, global: [], scoped: [])
-      query = with_role(scoped, user).unscope(:select).select(primary_key)
+      query = unscoped.with_role(scoped, user).unscope(:select).select(primary_key)
 
       has_global_role = global.any? { |role| user.has_cached_role? role, :any }
 
