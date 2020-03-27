@@ -20,6 +20,7 @@ import Settings from "backend/containers/settings";
 import Content from "backend/containers/content-block";
 import ActionCallout from "backend/containers/action-callout";
 import ExportTargets from "backend/containers/export-targets";
+import Entitlements from "backend/containers/entitlements";
 
 export default {
   Backend,
@@ -67,6 +68,7 @@ export default {
   PermissionEdit: Permission.Edit,
   ProjectCollaborators: Project.Collaborators,
   ProjectEvents: Project.Events,
+  ProjectEntitlements: Project.ProjectEntitlements,
   ProjectExportations: Project.ProjectExportations,
   ProjectMetadata: Project.Metadata,
   ProjectSocialWrapper: Project.Social.Wrapper,
@@ -105,5 +107,7 @@ export default {
   SettingsEmail: Settings.Email,
   SettingsGeneral: Settings.General,
   ActionCalloutNew: ActionCallout.New,
-  ActionCalloutEdit: ActionCallout.Edit
+  ActionCalloutEdit: ActionCallout.Edit,
+  EntitlementsList: Entitlements.List,
+  EntitlementsNew: Entitlements.New
 };

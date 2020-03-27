@@ -369,6 +369,22 @@ const routes = {
               ]
             },
             {
+              name: "backendProjectEntitlements",
+              exact: false,
+              component: "ProjectEntitlements",
+              path: "/backend/projects/:projectId/entitlements",
+              helper: (projectId) => `/backend/projects/${projectId}/entitlements`,
+              routes: [
+                {
+                  name: "backendProjectEntitlementsNew",
+                  exact: true,
+                  component: "EntitlementsNew",
+                  path: "/backend/projects/:projectId/entitlements/new",
+                  helper: (projectId) => `/backend/projects/${projectId}/entitlements/new`
+                }
+              ]
+            },
+            {
               name: "backendProjectCollaborators",
               exact: false,
               component: "ProjectCollaborators",

@@ -182,6 +182,13 @@ class Navigation {
         args
       },
       {
+        label: "Entitlements",
+        route: "backendProjectEntitlements",
+        entity: project,
+        ability: "managePermissions",
+        args
+      },
+      {
         label: "People",
         route: "backendProjectCollaborators",
         entity: project,
