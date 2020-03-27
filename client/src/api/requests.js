@@ -34,6 +34,7 @@ export default {
   beProjectEntitlement: "backend-project-entitlement",
   beProjectEntitlements: "backend-project-entitlements",
   beProjectEntitlementCreate: "backend-project-entitlement-create",
+  beProjectEntitlementDestroy: "backend-project-entitlement-destroy",
   beProjectExportation: "backend-project-exportation",
   beProjectExportations: "backend-project-exportations",
   beProjectExportationCreate: "backend-project-exportation-create",

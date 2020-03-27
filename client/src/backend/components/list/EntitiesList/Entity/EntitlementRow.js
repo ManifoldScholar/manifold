@@ -51,6 +51,24 @@ export default class EntitlementRow extends PureComponent {
     return this.targetName;
   }
 
+  get utility() {
+    return (
+      <button
+        className="entity-row__utility-button"
+        onClick={this.onDelete}
+        title="Publish feature"
+      >
+        <Utility.IconComposer icon="delete32" size={26} />
+      </button>
+    );
+  }
+
+  onDelete = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.props.onDelete(this.entitlement);
+  };
+
   render() {
     const { active, url, title, label } = this;
 
@@ -62,6 +80,6 @@ export default class EntitlementRow extends PureComponent {
       rowProps.figure = <EntityThumbnail.User entity={this.target} />;
     }
 
-    return <EntityRow {...rowProps} />;
+    return <EntityRow {...rowProps} utility={this.utility} />;
   }
 }
