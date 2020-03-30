@@ -1,9 +1,52 @@
 # Changelog
 
+## [v5.0.0-alpha.1](https://github.com/ManifoldScholar/manifold/tree/v5.0.0-alpha.1) - 03/30/20
+
+### Features
+
+-  Document ProjectExportations and ExportTargets routes [#2663](https://github.com/ManifoldScholar/manifold/pull/2663) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
+-  Allow disabling of library pages [#2657](https://github.com/ManifoldScholar/manifold/pull/2657) ([zdavis](https://api.github.com/users/zdavis))
+
+### Bugs
+
+-  Address background color conflict [#2689](https://github.com/ManifoldScholar/manifold/pull/2689) ([zdavis](https://api.github.com/users/zdavis))
+-  Do not modify user styles on reingest [#2688](https://github.com/ManifoldScholar/manifold/pull/2688) ([zdavis](https://api.github.com/users/zdavis))
+-  Deliver higher resolution custom logo [#2686](https://github.com/ManifoldScholar/manifold/pull/2686) ([zdavis](https://api.github.com/users/zdavis))
+-  Respect EPUB dates with opf:event attributes [#2685](https://github.com/ManifoldScholar/manifold/pull/2685) ([zdavis](https://api.github.com/users/zdavis))
+-  Correct FG color in reader resource drawer [#2684](https://github.com/ManifoldScholar/manifold/pull/2684) ([zdavis](https://api.github.com/users/zdavis))
+-  Notify user when video playback fails [#2683](https://github.com/ManifoldScholar/manifold/pull/2683) ([zdavis](https://api.github.com/users/zdavis))
+-  Use tabular numbers on audio player [#2682](https://github.com/ManifoldScholar/manifold/pull/2682) ([zdavis](https://api.github.com/users/zdavis))
+-  Correct contrast in BE reset PW interface [#2676](https://github.com/ManifoldScholar/manifold/pull/2676) ([zdavis](https://api.github.com/users/zdavis))
+-  Correct form field label [#2675](https://github.com/ManifoldScholar/manifold/pull/2675) ([zdavis](https://api.github.com/users/zdavis))
+-  Allow text subtitle to be cleared [#2674](https://github.com/ManifoldScholar/manifold/pull/2674) ([zdavis](https://api.github.com/users/zdavis))
+-  Update SwaggerUi preAuth when user logs in [#2673](https://github.com/ManifoldScholar/manifold/pull/2673) ([zdavis](https://api.github.com/users/zdavis))
+-  Exclude standalone projects from projects list [#2672](https://github.com/ManifoldScholar/manifold/pull/2672) ([zdavis](https://api.github.com/users/zdavis))
+-  Delete callout when linked text is destroyed [#2671](https://github.com/ManifoldScholar/manifold/pull/2671) ([zdavis](https://api.github.com/users/zdavis))
+-  Fix missing poster display on resource interactive slides [#2665](https://github.com/ManifoldScholar/manifold/pull/2665) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
+-  Remove legacy centering method [#2664](https://github.com/ManifoldScholar/manifold/pull/2664) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
+-  Fix filtering with invalid pagination params [#2651](https://github.com/ManifoldScholar/manifold/pull/2651) ([zdavis](https://api.github.com/users/zdavis))
+-  Address list label regression [#2648](https://github.com/ManifoldScholar/manifold/pull/2648) ([zdavis](https://api.github.com/users/zdavis))
+-  Correct typo [#2647](https://github.com/ManifoldScholar/manifold/pull/2647) ([zdavis](https://api.github.com/users/zdavis))
+-  Address pre-v1 ingestion edge case [#2646](https://github.com/ManifoldScholar/manifold/pull/2646) ([zdavis](https://api.github.com/users/zdavis))
+-  Persist stateful search keyword param in UI [#2644](https://github.com/ManifoldScholar/manifold/pull/2644) ([zdavis](https://api.github.com/users/zdavis))
+-  Ensure correct text ordering in text CB [#2643](https://github.com/ManifoldScholar/manifold/pull/2643) ([zdavis](https://api.github.com/users/zdavis))
+-  Restore ability to manage text covers [#2642](https://github.com/ManifoldScholar/manifold/pull/2642) ([zdavis](https://api.github.com/users/zdavis))
+-  Refactor FetchSelect [#2300](https://github.com/ManifoldScholar/manifold/pull/2300) ([dananjohnson](https://api.github.com/users/dananjohnson))
+
+### Security
+
+-  Bump minimist from 1.2.0 to 1.2.2 in /client [#2660](https://github.com/ManifoldScholar/manifold/pull/2660) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+-  Bump acorn from 5.7.3 to 5.7.4 in /client [#2659](https://github.com/ManifoldScholar/manifold/pull/2659) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+
+### Accessibility
+
+-  Improve a11y of DnD interfaces [#2658](https://github.com/ManifoldScholar/manifold/pull/2658) ([dananjohnson](https://api.github.com/users/dananjohnson))
+
 ## [v4.1.2](https://github.com/ManifoldScholar/manifold/tree/v4.1.2) - 03/06/20
 
 ### Features
 
+-  Release v4.1.2 [#2641](https://github.com/ManifoldScholar/manifold/pull/2641) ([zdavis](https://api.github.com/users/zdavis))
 -  Enhance exports user interface [#2630](https://github.com/ManifoldScholar/manifold/pull/2630) ([zdavis](https://api.github.com/users/zdavis))
 -  Expose UI for project export &amp; preservation [#2598](https://github.com/ManifoldScholar/manifold/pull/2598) ([zdavis](https://api.github.com/users/zdavis))
 -  Add API documentation [#2481](https://github.com/ManifoldScholar/manifold/pull/2481) ([zdavis](https://api.github.com/users/zdavis))
