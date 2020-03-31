@@ -7,7 +7,6 @@ import FormContainer from "global/containers/form";
 import { entitlementTargetsAPI, entitlementsAPI, requests } from "api";
 import connectAndFetch from "utils/connectAndFetch";
 import lh from "helpers/linkHandler";
-import EntityThumbnail from "global/components/entity-thumbnail";
 
 export class EntitlementForm extends PureComponent {
   static displayName = "Entitlement.Form";
@@ -20,15 +19,13 @@ export class EntitlementForm extends PureComponent {
     dispatch: PropTypes.func
   };
 
-  handleSuccess = (newEntitlement) => {
+  handleSuccess = () => {
     const base = lh.nameFromType("backend", "Entitlements", this.props.entity);
-
-    const url = lh.link(base, this.props.entity.id);
 
     return this.props.history.push(base, { keepNotifications: true });
   };
 
-  composeCreateCall = (entitlement) => {
+  composeCreateCall = entitlement => {
     const entity = this.props.entity;
 
     if (!entitlement || !entity) {
@@ -80,7 +77,7 @@ export class EntitlementForm extends PureComponent {
             inputLabel="Select Target"
             selectedLabel={this.labelTarget}
             relationName="targetUrl"
-            focusOnMount={true}
+            focusOnMount
             searchable={false}
           />
           <Form.TextInput

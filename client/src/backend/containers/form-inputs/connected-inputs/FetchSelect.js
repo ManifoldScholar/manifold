@@ -71,7 +71,9 @@ class FetchSelect extends PureComponent {
   }
 
   updateOptions = fetch => {
-    const { endpoint, method, options = {} } = fetch({ ...this.props.fetchOptions });
+    const { endpoint, method, options = {} } = fetch({
+      ...this.props.fetchOptions
+    });
 
     options.authToken = this.props.authToken;
     options.params = options.params || {};
