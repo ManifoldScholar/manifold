@@ -19,41 +19,31 @@ RSpec.describe EntitlementAuthorizer, :authorizer do
 
   let!(:entitlement) { FactoryBot.create :entitlement, *Array(entitlement_traits), **entitlement_attributes }
 
-  context "at the instance level" do
-    subject { entitlement }
+  context "an admin" do
+    subject { an_admin }
 
-    it { is_expected.to be_readable_by a_random_user }
-    it { is_expected.to be_creatable_by creator }
-    it { is_expected.not_to be_creatable_by an_admin }
-    it { is_expected.to be_updatable_by creator }
-    it { is_expected.not_to be_updatable_by an_admin }
-
-    it "is deletable only by the entitler or an admin" do
-      aggregate_failures do
-        is_expected.to be_deletable_by an_admin
-        is_expected.to be_deletable_by creator
-        is_expected.not_to be_deletable_by a_random_user
-      end
-    end
+    it { is_expected.to be_able_to(:read, :manage, :delete).on(entitlement).and be_unable_to(:create, :update).on(entitlement) }
+    it { is_expected.to be_able_to(:read, :create, :manage, :delete).on(Entitlement).and be_unable_to(:update).on(Entitlement) }
   end
 
-  context "at the class level" do
-    subject { Entitlement }
-    it { is_expected.to be_readable_by a_random_user }
+  context "the entitler" do
+    subject { creator }
 
-    it { is_expected.to be_creatable_by creator }
-    it { is_expected.to be_creatable_by an_admin }
-    it { is_expected.not_to be_creatable_by a_random_user }
-    it { is_expected.to be_updatable_by creator }
-    it { is_expected.to be_updatable_by an_admin }
-    it { is_expected.not_to be_creatable_by a_random_user }
+    it { is_expected.to be_able_to(:read, :create, :manage, :delete).on(entitlement).and be_unable_to(:update).on(entitlement) }
+    it { is_expected.to be_able_to(:read, :create, :manage, :delete).on(Entitlement).and be_unable_to(:update).on(Entitlement) }
+  end
 
-    it "is deletable only by the entitler or an admin" do
-      aggregate_failures do
-        is_expected.to be_deletable_by an_admin
-        is_expected.to be_deletable_by creator
-        is_expected.not_to be_deletable_by a_random_user
-      end
-    end
+  context "a random user" do
+    subject { a_random_user }
+
+    it { is_expected.to be_unable_to(:read, :create, :manage, :update, :delete).on(entitlement) }
+    it { is_expected.to be_unable_to(:read, :create, :manage, :update, :delete).on(Entitlement) }
+  end
+
+  context "the target user" do
+    subject { target_user }
+
+    it { is_expected.to be_able_to(:read).on(entitlement).and be_unable_to(:create, :manage, :update, :delete).on(entitlement) }
+    it { is_expected.to be_able_to(:read).on(Entitlement).and be_unable_to(:create, :manage, :update, :delete).on(Entitlement) }
   end
 end

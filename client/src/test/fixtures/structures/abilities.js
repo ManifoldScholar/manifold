@@ -10,6 +10,8 @@ export default function abilities() {
     createResources: true,
     manageResourceCollections: true,
     createResourceCollections: true,
+    manageEntitlements: true,
+    createEntitlements: true,
     managePermissions: true,
     createPermissions: true,
     manageTexts: true,
