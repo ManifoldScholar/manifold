@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { get } from "lodash";
-import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import Utility from "global/components/utility";
 import EntityRow from "./Row";
@@ -70,7 +69,7 @@ export default class EntitlementRow extends PureComponent {
   };
 
   render() {
-    const { active, url, title, label } = this;
+    const { active, title, label } = this;
 
     const rowProps = { ...this.props, active, title, label };
 

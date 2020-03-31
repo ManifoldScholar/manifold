@@ -22,7 +22,7 @@ class EntitlementAuthorizer < ApplicationAuthorizer
     has_editor_or_default_subject_abilities?(user)
   end
 
-  def updatable_by?(user, _options = {})
+  def updatable_by?(_user, _options = {})
     false
   end
 

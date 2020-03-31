@@ -373,14 +373,16 @@ const routes = {
               exact: false,
               component: "ProjectEntitlements",
               path: "/backend/projects/:projectId/entitlements",
-              helper: (projectId) => `/backend/projects/${projectId}/entitlements`,
+              helper: projectId =>
+                `/backend/projects/${projectId}/entitlements`,
               routes: [
                 {
                   name: "backendProjectEntitlementsNew",
                   exact: true,
                   component: "EntitlementsNew",
                   path: "/backend/projects/:projectId/entitlements/new",
-                  helper: (projectId) => `/backend/projects/${projectId}/entitlements/new`
+                  helper: projectId =>
+                    `/backend/projects/${projectId}/entitlements/new`
                 }
               ]
             },

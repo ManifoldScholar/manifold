@@ -30,12 +30,14 @@ exports[`reader/components/notation/viewer/Group matches the snapshot 1`] = `
               "attributes": Object {
                 "abilities": Object {
                   "create": true,
+                  "createEntitlements": true,
                   "createPermissions": true,
                   "createResourceCollections": true,
                   "createResources": true,
                   "createTexts": true,
                   "createTwitterQueries": true,
                   "delete": true,
+                  "manageEntitlements": true,
                   "manageEvents": true,
                   "managePermissions": true,
                   "manageResourceCollections": true,
@@ -70,12 +72,14 @@ exports[`reader/components/notation/viewer/Group matches the snapshot 1`] = `
               "attributes": Object {
                 "abilities": Object {
                   "create": true,
+                  "createEntitlements": true,
                   "createPermissions": true,
                   "createResourceCollections": true,
                   "createResources": true,
                   "createTexts": true,
                   "createTwitterQueries": true,
                   "delete": true,
+                  "manageEntitlements": true,
                   "manageEvents": true,
                   "managePermissions": true,
                   "manageResourceCollections": true,
@@ -218,12 +222,14 @@ exports[`reader/components/notation/viewer/Group matches the snapshot 1`] = `
                 "attributes": Object {
                   "abilities": Object {
                     "create": true,
+                    "createEntitlements": true,
                     "createPermissions": true,
                     "createResourceCollections": true,
                     "createResources": true,
                     "createTexts": true,
                     "createTwitterQueries": true,
                     "delete": true,
+                    "manageEntitlements": true,
                     "manageEvents": true,
                     "managePermissions": true,
                     "manageResourceCollections": true,
@@ -351,12 +357,14 @@ exports[`reader/components/notation/viewer/Group matches the snapshot 1`] = `
                   "attributes": Object {
                     "abilities": Object {
                       "create": true,
+                      "createEntitlements": true,
                       "createPermissions": true,
                       "createResourceCollections": true,
                       "createResources": true,
                       "createTexts": true,
                       "createTwitterQueries": true,
                       "delete": true,
+                      "manageEntitlements": true,
                       "manageEvents": true,
                       "managePermissions": true,
                       "manageResourceCollections": true,
@@ -491,12 +499,14 @@ exports[`reader/components/notation/viewer/Group matches the snapshot 1`] = `
                 "attributes": Object {
                   "abilities": Object {
                     "create": true,
+                    "createEntitlements": true,
                     "createPermissions": true,
                     "createResourceCollections": true,
                     "createResources": true,
                     "createTexts": true,
                     "createTwitterQueries": true,
                     "delete": true,
+                    "manageEntitlements": true,
                     "manageEvents": true,
                     "managePermissions": true,
                     "manageResourceCollections": true,
@@ -624,12 +634,14 @@ exports[`reader/components/notation/viewer/Group matches the snapshot 1`] = `
                   "attributes": Object {
                     "abilities": Object {
                       "create": true,
+                      "createEntitlements": true,
                       "createPermissions": true,
                       "createResourceCollections": true,
                       "createResources": true,
                       "createTexts": true,
                       "createTwitterQueries": true,
                       "delete": true,
+                      "manageEntitlements": true,
                       "manageEvents": true,
                       "managePermissions": true,
                       "manageResourceCollections": true,
@@ -760,12 +772,14 @@ exports[`reader/components/notation/viewer/Group matches the snapshot 1`] = `
           "attributes": Object {
             "abilities": Object {
               "create": true,
+              "createEntitlements": true,
               "createPermissions": true,
               "createResourceCollections": true,
               "createResources": true,
               "createTexts": true,
               "createTwitterQueries": true,
               "delete": true,
+              "manageEntitlements": true,
               "manageEvents": true,
               "managePermissions": true,
               "manageResourceCollections": true,

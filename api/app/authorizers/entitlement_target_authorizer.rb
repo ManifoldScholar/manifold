@@ -8,8 +8,6 @@ class EntitlementTargetAuthorizer < ApplicationAuthorizer
     true
   end
 
-  private
-
   class << self
     # @param [Symbol] _adjective
     # @param [User] _user

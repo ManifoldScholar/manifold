@@ -34,7 +34,7 @@ RSpec.describe Entitlements::Create, interaction: true do
       end
     end
 
-    fcontext "when providing an expiration" do
+    context "when providing an expiration" do
       let(:read_access) { true }
 
       def expect_expiration_on(date)
