@@ -185,7 +185,7 @@ class Navigation {
         label: "Entitlements",
         route: "backendProjectEntitlements",
         entity: project,
-        ability: "managePermissions",
+        ability: "manageEntitlements",
         args
       },
       {

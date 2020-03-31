@@ -70,7 +70,7 @@ export class EntitlementsList extends PureComponent {
                 path={lh.link(newUrl, entity.id)}
                 text="Grant new entitlement"
                 type="add"
-                authorizedTo="createPermissions"
+                authorizedTo="createEntitlements"
                 authorizedFor={entity}
               />
             ]}
