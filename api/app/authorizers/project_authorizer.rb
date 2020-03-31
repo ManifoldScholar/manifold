@@ -5,6 +5,7 @@ class ProjectAuthorizer < ApplicationAuthorizer
     :manage_permissions, :create_permissions, :manage_texts,
     :create_texts, :manage_twitter_queries, :create_twitter_queries,
     :manage_events, :manage_socials, :update_makers, :manage_project_exportations,
+    :create_entitlements, :manage_entitlements,
     :create_project_exportations
   ]
 
@@ -59,6 +60,28 @@ class ProjectAuthorizer < ApplicationAuthorizer
   alias project_exportations_creatable_by? project_administered_by?
   alias permissions_creatable_by? project_administered_by?
   alias permissions_manageable_by? project_administered_by?
+
+  # @see EntitlementAuthorizer.creatable_by?
+  # @param [User] user
+  # @param [Hash] options
+  def entitlements_creatable_by?(user, options = {})
+    options ||= {}
+
+    options[:subject] = resource
+
+    user.can_create? Entitlement, options
+  end
+
+  # @see EntitlementAuthorizer.manageable_by?
+  # @param [User] user
+  # @param [Hash] options
+  def entitlements_manageable_by?(user, options = {})
+    options ||= {}
+
+    options[:subject] = resource
+
+    user.can_manage? Entitlement, options
+  end
 
   # {RoleName::Admin Admins} and {RoleName::Editor editors} can delete any project.
   #

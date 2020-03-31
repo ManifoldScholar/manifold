@@ -39,6 +39,12 @@ RSpec.describe "Project Abilities", :authorizer do
     end
   end
 
+  shared_examples_for "authorized to manage project entitlements" do
+    it "is able to manage project entitlements" do
+      is_expected.to be_able_to(:manage_entitlements, :create_entitlements).on(project)
+    end
+  end
+
   shared_examples_for "authorized to manage project exportations" do
     it "is able to manage project exporations" do
       is_expected.to be_able_to(:manage_project_exportations, :create_project_exportations).on(project)
@@ -54,6 +60,12 @@ RSpec.describe "Project Abilities", :authorizer do
   shared_examples_for "unauthorized to manage project children" do
     it "cannot manage project children" do
       is_expected.not_to be_able_to(*project_children_abilities).on(project)
+    end
+  end
+
+  shared_examples_for "unauthorized to manage project entitlements" do
+    it "cannot manage project entitlements" do
+      is_expected.to be_unable_to(:manage_entitlements, :create_entitlements).on(project)
     end
   end
 
@@ -81,7 +93,9 @@ RSpec.describe "Project Abilities", :authorizer do
 
   shared_examples_for "full access" do
     it("can perform all CRUD actions") { is_expected.to be_able_to(:create, :read, :update, :destroy).on(project) }
+
     include_examples "authorized to manage project children"
+    include_examples "authorized to manage project entitlements"
     include_examples "authorized to manage project exportations"
     include_examples "authorized to manage project permissions"
   end
@@ -94,6 +108,7 @@ RSpec.describe "Project Abilities", :authorizer do
 
       include_examples "no access"
       include_examples "unauthorized to manage project children"
+      include_examples "unauthorized to manage project entitlements"
       include_examples "unauthorized to manage project exportations"
       include_examples "unauthorized to manage project permissions"
     end
@@ -102,6 +117,7 @@ RSpec.describe "Project Abilities", :authorizer do
       it { is_expected.to be_able_to(:read).on(project).and be_unable_to(:create, :update, :destroy).on(project) }
 
       include_examples "unauthorized to manage project children"
+      include_examples "unauthorized to manage project entitlements"
       include_examples "unauthorized to manage project exportations"
       include_examples "unauthorized to manage project permissions"
     end
@@ -146,6 +162,7 @@ RSpec.describe "Project Abilities", :authorizer do
       end
 
       include_examples "unauthorized to manage project children"
+      include_examples "unauthorized to manage project entitlements"
       include_examples "unauthorized to manage project exportations"
       include_examples "unauthorized to manage project permissions"
     end
@@ -162,6 +179,7 @@ RSpec.describe "Project Abilities", :authorizer do
       end
 
       include_examples "authorized to manage project children"
+      include_examples "unauthorized to manage project entitlements"
       include_examples "unauthorized to manage project exportations"
       include_examples "unauthorized to manage project permissions"
     end
@@ -179,6 +197,7 @@ RSpec.describe "Project Abilities", :authorizer do
     end
 
     include_examples "authorized to manage project children"
+    include_examples "unauthorized to manage project entitlements"
     include_examples "unauthorized to manage project exportations"
     include_examples "unauthorized to manage project permissions"
   end
@@ -198,6 +217,7 @@ RSpec.describe "Project Abilities", :authorizer do
       expect(user).to be_able_to(:manage_resources).on(project).and be_unable_to(*other_actions).on(project)
     end
 
+    include_examples "unauthorized to manage project entitlements"
     include_examples "unauthorized to manage project exportations"
     include_examples "unauthorized to manage project permissions"
   end
@@ -212,6 +232,7 @@ RSpec.describe "Project Abilities", :authorizer do
 
       include_examples "no access"
       include_examples "unauthorized to manage project children"
+      include_examples "unauthorized to manage project entitlements"
       include_examples "unauthorized to manage project exportations"
       include_examples "unauthorized to manage project permissions"
     end
@@ -219,6 +240,7 @@ RSpec.describe "Project Abilities", :authorizer do
     context "that is published" do
       include_examples "read only"
       include_examples "unauthorized to manage project children"
+      include_examples "unauthorized to manage project entitlements"
       include_examples "unauthorized to manage project exportations"
       include_examples "unauthorized to manage project permissions"
     end
@@ -230,6 +252,7 @@ RSpec.describe "Project Abilities", :authorizer do
     context "for a draft project" do
       include_examples "no access"
       include_examples "unauthorized to manage project children"
+      include_examples "unauthorized to manage project entitlements"
       include_examples "unauthorized to manage project exportations"
       include_examples "unauthorized to manage project permissions"
     end
@@ -237,6 +260,7 @@ RSpec.describe "Project Abilities", :authorizer do
     context "for a published project" do
       include_examples "read only"
       include_examples "unauthorized to manage project children"
+      include_examples "unauthorized to manage project entitlements"
       include_examples "unauthorized to manage project exportations"
       include_examples "unauthorized to manage project permissions"
     end

@@ -6,33 +6,24 @@ class EntitlementAuthorizer < ApplicationAuthorizer
   # @return [Boolean]
   def default(_adjective, user, _options = {})
     return true if provided_by?(user)
-    return true if editor_permissions?(user)
 
-    resource.on_subject do |m|
-      m.project do |(project, _)|
-        project.resources_manageable_by?(user)
-      end
-
-      m.project_collection { false }
-      m.system_entitlement { false }
-    end
+    has_editor_or_default_subject_abilities? user
   end
 
   def creatable_by?(user, _options = {})
-    return true if editor_permissions?(user)
-
-    resource.on_subject do |m|
-      m.project do |(project, _)|
-        project.resources_creatable_by?(user)
-      end
-
-      m.project_collection { false }
-      m.system_entitlement { false }
-    end
+    resource.entitling_user == user
   end
 
   def readable_by?(user, options = {})
     provides_to?(user) || default(:readable, user, options)
+  end
+
+  def manageable_by?(user, _options = {})
+    has_editor_or_default_subject_abilities?(user)
+  end
+
+  def updatable_by?(user, _options = {})
+    false
   end
 
   private
@@ -45,6 +36,20 @@ class EntitlementAuthorizer < ApplicationAuthorizer
     user.in?(resource.users)
   end
 
+  def has_editor_or_default_subject_abilities?(user)
+    return true if provided_by?(user)
+    return true if editor_permissions?(user)
+
+    resource.on_subject do |m|
+      m.project do |(project, _)|
+        project.creator == user
+      end
+
+      m.project_collection { false }
+      m.system_entitlement { false }
+    end
+  end
+
   class << self
     # @param [Symbol] _adjective
     # @param [User] user
@@ -54,12 +59,26 @@ class EntitlementAuthorizer < ApplicationAuthorizer
       might_access? user
     end
 
+    # @param [User] user
+    # @param [Hash] _options
     def creatable_by?(user, _options = {})
-      might_access?(user) || has_any_role?(user, :project_resource_editor)
+      might_access? user
     end
 
+    # @param [User] user
+    # @param [Hash] _options
+    def manageable_by?(user, _options = {})
+      might_access? user
+    end
+
+    # @param [User] user
+    # @param [Hash] _options
     def readable_by?(_user, _options = {})
       true
+    end
+
+    def updatable_by?(_user, _options = {})
+      false
     end
 
     private
