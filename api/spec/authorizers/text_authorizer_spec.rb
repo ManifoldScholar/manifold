@@ -74,4 +74,22 @@ RSpec.describe "Text Abilities", :authorizer do
 
     the_subject_behaves_like "instance abilities", Text, read_only: true
   end
+
+  context "when the user tries to access a text belonging to a restricted project" do
+    let!(:project) { FactoryBot.create :project, :with_restricted_access }
+    let!(:text)    { FactoryBot.create :text, project: project }
+    let!(:user)    { FactoryBot.create :user }
+
+    subject { user }
+
+    context "an admin" do
+      let!(:user) { FactoryBot.create :user, :admin }
+
+      it { is_expected.to be_able_to(:read).on(text) }
+    end
+
+    context "a regular reader" do
+      it { is_expected.to be_unable_to(:read).on(text) }
+    end
+  end
 end
