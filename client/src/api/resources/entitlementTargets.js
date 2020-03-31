@@ -4,5 +4,5 @@ export default {
       endpoint: `/api/v1/entitlement_targets`,
       method: "GET"
     };
-  },
+  }
 };

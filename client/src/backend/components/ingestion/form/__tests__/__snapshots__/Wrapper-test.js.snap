@@ -114,12 +114,14 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
               "attributes": Object {
                 "abilities": Object {
                   "create": true,
+                  "createEntitlements": true,
                   "createPermissions": true,
                   "createResourceCollections": true,
                   "createResources": true,
                   "createTexts": true,
                   "createTwitterQueries": true,
                   "delete": true,
+                  "manageEntitlements": true,
                   "manageEvents": true,
                   "managePermissions": true,
                   "manageResourceCollections": true,
@@ -299,12 +301,14 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                     "attributes": Object {
                       "abilities": Object {
                         "create": true,
+                        "createEntitlements": true,
                         "createPermissions": true,
                         "createResourceCollections": true,
                         "createResources": true,
                         "createTexts": true,
                         "createTwitterQueries": true,
                         "delete": true,
+                        "manageEntitlements": true,
                         "manageEvents": true,
                         "managePermissions": true,
                         "manageResourceCollections": true,
@@ -424,12 +428,14 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                     "attributes": Object {
                       "abilities": Object {
                         "create": true,
+                        "createEntitlements": true,
                         "createPermissions": true,
                         "createResourceCollections": true,
                         "createResources": true,
                         "createTexts": true,
                         "createTwitterQueries": true,
                         "delete": true,
+                        "manageEntitlements": true,
                         "manageEvents": true,
                         "managePermissions": true,
                         "manageResourceCollections": true,
