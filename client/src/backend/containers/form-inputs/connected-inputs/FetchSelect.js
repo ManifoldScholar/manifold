@@ -42,9 +42,12 @@ class FetchSelect extends PureComponent {
     super(props);
     this.debouncedUpdateOptions = debounce(this.updateOptions, 500);
 
+    const options = props.options || [];
+
     this.state = {
-      options: props.options || [],
-      selectedValue: props.options ? props.options[0].id : ""
+      options,
+      selectedValue:
+        options.length > 0 && options[0].id ? props.options[0].id : ""
     };
   }
 
