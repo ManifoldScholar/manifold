@@ -44,7 +44,7 @@ const open = (state, action) => {
     source: model,
     changed: false
   };
-  const newSessions = { ...state.session, [key]: newSession };
+  const newSessions = { ...state.sessions, [key]: newSession };
   const newState = { ...state, sessions: newSessions };
   return newState;
 };
