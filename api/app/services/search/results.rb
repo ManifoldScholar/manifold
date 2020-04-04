@@ -34,7 +34,7 @@ module Search
                    :padding, :total_pages, :num_pages, :offset_value, :offset,
                    :previous_page, :prev_page, :prev_page, :next_page, :first_page?,
                    :last_page?, :out_of_range?, :hits, :misspellings?, :klass, :response,
-                   :options
+                   :options, :blank?, :empty?
 
     def initialize(searchkick_results)
       @searchkick_results = searchkick_results
@@ -50,6 +50,20 @@ module Search
 
     def each_with_hit(&block)
       adjusted_results.zip(@searchkick_results.hits).each(&block)
+    end
+
+    # @note Introspection methods, used in tests
+    def has_matched_model?(model)
+      adjusted_results.any? do |result|
+        result[:model] == model
+      end
+    end
+
+    # @note Introspection methods, used in tests
+    def missing_model?(model)
+      adjusted_results.none? do |result|
+        result[:model] == model
+      end
     end
 
     private

@@ -3,23 +3,23 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
-    typed_attribute :score, NilClass, &:_score
-    typed_attribute :searchable_id, NilClass, &:_id
-    typed_attribute :full_text, NilClass
-    typed_attribute :title, NilClass
-    typed_attribute :keywords, NilClass
-    typed_attribute :parent_keywords, NilClass
-    typed_attribute :makers, NilClass
-    typed_attribute :searchable_type, NilClass do |object, _params|
+    typed_attribute :score, Types::Float, &:_score
+    typed_attribute :searchable_id, Types::Serializer::ID, &:_id
+    typed_attribute :searchable_type, Types::String do |object, _params|
       camelized_type(object)
     end
-    typed_attribute :parents, NilClass do |object, _params|
+    typed_attribute :full_text, Types::String
+    typed_attribute :title, Types::String
+    typed_attribute :keywords, Types::Array.of(Types::String)
+    typed_attribute :parent_keywords, Types::Array.of(Types::String).optional
+    typed_attribute :makers, Types::Array.of(Types::String)
+    typed_attribute :parents, Types::Hash.optional do |object, _params|
       parents(object)
     end
-    typed_attribute :text_nodes, NilClass do |object, _params|
+    typed_attribute :text_nodes, Types::Hash.optional do |object, _params|
       text_nodes(object)
     end
-    typed_attribute :highlights, NilClass do |object, _params|
+    typed_attribute :highlights, Types::Hash.optional do |object, _params|
       highlights(object)
     end
 
