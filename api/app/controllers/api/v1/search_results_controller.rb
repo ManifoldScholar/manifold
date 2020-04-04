@@ -2,9 +2,9 @@ module Api
   module V1
     # SearchResultsController
     class SearchResultsController < ApplicationController
-
       def index
         outcome = Search::Query.run(search_options)
+
         if outcome.valid?
           render_jsonapi outcome.result,
                          include: [:model, :"model.creator", :"model.creators"],

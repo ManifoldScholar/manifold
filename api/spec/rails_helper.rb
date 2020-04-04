@@ -67,6 +67,15 @@ RSpec.configure do |config|
     clear_enqueued_jobs
   end
 
+  # Set up jsonapi request encoder
+  config.before(:suite) do
+    ActionDispatch::IntegrationTest.register_encoder(
+      :jsonapi,
+      param_encoder: ->(value) { JSON.stringify(value) },
+      response_parser: ->(value) { JSON.parse(value) }
+    )
+  end
+
   # Truncate all test database tables before running tests.
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
