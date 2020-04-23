@@ -10,9 +10,14 @@ export default class ResourceCollectionRow extends PureComponent {
 
   static propTypes = {
     entity: PropTypes.object,
+    clickable: PropTypes.bool,
     projectId: PropTypes.string,
     active: PropTypes.string,
     onRowClick: PropTypes.func
+  };
+
+  static defaultProps = {
+    clickable: true
   };
 
   get onRowClick() {
@@ -27,6 +32,10 @@ export default class ResourceCollectionRow extends PureComponent {
 
   get resourceCollection() {
     return this.props.entity;
+  }
+
+  get isInWell() {
+    return this.props.listStyle === "well";
   }
 
   get id() {
@@ -45,7 +54,7 @@ export default class ResourceCollectionRow extends PureComponent {
     const {
       collectionResourcesCount: count
     } = this.resourceCollection.attributes;
-    return `${count} resources`;
+    return `${count} ${count === 1 ? "resource" : "resources"}`;
   }
 
   get createdAt() {
@@ -53,24 +62,33 @@ export default class ResourceCollectionRow extends PureComponent {
   }
 
   render() {
+    const linkProps = this.props.clickable
+      ? {
+          onRowClick: this.onRowClick,
+          rowClickMode: "block"
+        }
+      : {};
     return (
       <EntityRow
         {...this.props}
-        onRowClick={this.onRowClick}
-        rowClickMode="block"
+        {...linkProps}
         title={this.title}
         count={this.count}
         meta={
-          <FormattedDate
-            prefix="Created"
-            format="MMMM dd, yyyy"
-            date={this.createdAt}
-          />
+          !this.isInWell && (
+            <FormattedDate
+              prefix="Created"
+              format="MMMM dd, yyyy"
+              date={this.createdAt}
+            />
+          )
         }
         figure={
-          <EntityThumbnail.ResourceCollection
-            entity={this.resourceCollection}
-          />
+          !this.isInWell && (
+            <EntityThumbnail.ResourceCollection
+              entity={this.resourceCollection}
+            />
+          )
         }
         active={this.active}
       />

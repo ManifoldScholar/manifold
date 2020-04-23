@@ -79,13 +79,14 @@ module Authentication
 
   # Helper Methods for responding to errors
   # ------------------------------------------------------------
-  def build_api_error(title: nil, detail: nil, status: nil)
+  def build_api_error(title: nil, detail: nil, status: nil, project: nil)
     [
       {
         id: "API_ERROR",
         status: status,
         title: title,
-        detail: detail
+        detail: detail,
+        project: project
       }
     ]
   end

@@ -234,7 +234,7 @@
       font-style: italic;
     }
 
-    &--incomplete {
+    &--incomplete, &--notice {
       @include templateHead;
       display: flex;
       flex-direction: column;
@@ -296,7 +296,17 @@
         }
       }
     }
+
+    &--notice {
+      background-color: $spNoticeExtraLight;
+
+      svg {
+        color: $defaultNoticeColor;
+      }
+    }
+
   }
+
 
   &__utility {
     @include utilityPrimary;

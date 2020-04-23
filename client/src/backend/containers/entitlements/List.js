@@ -7,11 +7,15 @@ import lh from "helpers/linkHandler";
 import entityUtils from "utils/entityUtils";
 import EntitiesList, {
   Button,
+  Search,
   EntitlementRow
 } from "backend/components/list/EntitiesList";
+import withFilteredLists, { keywordFilter } from "hoc/with-filtered-lists";
 
-const { select } = entityUtils;
+const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
+
+const PER_PAGE = 20;
 
 export class EntitlementsList extends PureComponent {
   static displayName = "Entitlements.List";
@@ -25,14 +29,32 @@ export class EntitlementsList extends PureComponent {
   };
 
   componentDidMount() {
-    const { entity, dispatch } = this.props;
+    this.fetchEntitlements();
+  }
 
-    const options = entitlementsAPI.index(entity, {}, {});
+  componentDidUpdate(prevProps) {
+    if (this.filtersChanged(prevProps)) return this.fetchEntitlements();
+  }
+
+  get filters() {
+    return this.props.entitiesListSearchParams.entitlements || {};
+  }
+
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
+  }
+
+  fetchEntitlements = (page = 1) => {
+    const { entity, dispatch } = this.props;
+    const pagination = { number: page, size: PER_PAGE };
+    const options = entitlementsAPI.index(entity, this.filters, pagination);
 
     const action = request(options, requests.beProjectEntitlements);
 
     dispatch(action);
-  }
+  };
 
   onDelete = entitlement => {
     const { dispatch } = this.props;
@@ -40,23 +62,39 @@ export class EntitlementsList extends PureComponent {
     const options = entitlementsAPI.destroy(entitlement.id);
 
     const action = request(options, requests.beProjectEntitlementDestroy, {
-      removes: entitlement
+      refreshes: requests.beProjectEntitlements
     });
 
     dispatch(action);
   };
 
+  updateHandlerCreator = page => {
+    return eventIgnored => {
+      this.fetchEntitlements(page);
+    };
+  };
+
   render() {
-    const { match, entity, entitlements } = this.props;
+    const {
+      match,
+      entity,
+      entitlements,
+      entitlementsMeta,
+      preList
+    } = this.props;
     const active = match.params.id;
     const listUrl = lh.nameFromType("backend", "Entitlement", entity);
     const newUrl = lh.nameFromType("backend", "EntitlementsNew", entity);
-
     return (
       <section>
         {entitlements && (
           <EntitiesList
-            title="Manage Entitlements"
+            title="Project Entitlements"
+            instructions="Entitlements give users and/or reading groups access to this
+                project. In Manifold, all projects are open by default. Configure access
+                restrictions, below, and enable restrictions to limit access to your
+                project."
+            preList={preList}
             titleStyle="section"
             entities={entitlements}
             entityComponent={EntitlementRow}
@@ -65,15 +103,23 @@ export class EntitlementsList extends PureComponent {
               linkName: listUrl,
               onDelete: this.onDelete
             }}
+            showCount
+            paginationStyle="normal"
+            pagination={entitlementsMeta.pagination}
+            unit="entitlement"
+            callbacks={{ onPageClick: this.updateHandlerCreator }}
             buttons={[
               <Button
                 path={lh.link(newUrl, entity.id)}
-                text="Grant new entitlement"
+                text="Create entitlement"
                 type="add"
                 authorizedTo="createEntitlements"
                 authorizedFor={entity}
               />
             ]}
+            search={
+              <Search {...this.props.entitiesListSearchProps("entitlements")} />
+            }
           />
         )}
       </section>
@@ -82,9 +128,14 @@ export class EntitlementsList extends PureComponent {
 
   static mapStateToProps(state) {
     return {
-      entitlements: select(requests.beProjectEntitlements, state.entityStore)
+      entitlements: select(requests.beProjectEntitlements, state.entityStore),
+      entitlementsMeta: meta(requests.beProjectEntitlements, state.entityStore)
     };
   }
 }
 
-export default connectAndFetch(EntitlementsList);
+export default connectAndFetch(
+  withFilteredLists(EntitlementsList, {
+    entitlements: keywordFilter()
+  })
+);

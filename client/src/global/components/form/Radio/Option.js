@@ -11,7 +11,6 @@ export default class FormRadioOption extends PureComponent {
     onChange: PropTypes.func.isRequired,
     option: PropTypes.shape({
       value: PropTypes.any.isRequired,
-      internalValue: PropTypes.any.isRequired,
       instructions: PropTypes.string,
       label: PropTypes.string.isRequired
     }),
@@ -35,7 +34,7 @@ export default class FormRadioOption extends PureComponent {
   }
 
   get checked() {
-    return this.props.value === this.props.option.internalValue;
+    return this.props.value === this.props.option.value;
   }
 
   get inline() {
@@ -60,7 +59,7 @@ export default class FormRadioOption extends PureComponent {
           <input
             type="radio"
             name={this.props.groupName}
-            value={this.option.internalValue}
+            value={this.option.value}
             checked={this.checked}
             onChange={this.props.onChange}
             ref={input => {

@@ -11,7 +11,7 @@ export default class ListEntitiesListEntities extends PureComponent {
     entityComponent: PropTypes.func.isRequired,
     entityComponentProps: PropTypes.object,
     emptyMessage: PropTypes.node,
-    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare"]),
+    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
     sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
     idForInstructions: PropTypes.string
   };
@@ -65,7 +65,8 @@ export default class ListEntitiesListEntities extends PureComponent {
   render() {
     const EntityComponent = this.entityComponent;
 
-    if (this.isEmpty) return <Empty message={this.emptyMessage} />;
+    if (this.isEmpty)
+      return <Empty listStyle={this.listStyle} message={this.emptyMessage} />;
 
     return (
       <ul className={this.className} aria-describedby={this.idForInstructions}>

@@ -34,6 +34,11 @@ module V1
       typed_attribute :hashtag, Types::String.optional
       typed_attribute :description, Types::String.optional
       typed_attribute :featured, Types::Bool
+      typed_attribute :restricted_access, Types::Bool
+      typed_attribute :open_access, Types::Bool
+      typed_attribute :restricted_access_heading, Types::String.optional
+      typed_attribute :restricted_access_body, Types::String.optional
+      typed_attribute :restricted_access_body_formatted, Types::String.meta(read_only: true)
       typed_attribute :purchase_url, Types::Serializer::URL.optional
       typed_attribute :purchase_price_money, Types::String.meta(example: "$0.00").meta(read_only: true)
       typed_attribute :purchase_price_currency, Types::String.optional.meta(example: "USD")

@@ -20,7 +20,8 @@ describe("global/components/form/Radios", () => {
       name="attributes[fake]"
     />
   ));
-  it("matches the snapshot", () => {
-    expect(shallow($root)).toMatchSnapshot();
+
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 });

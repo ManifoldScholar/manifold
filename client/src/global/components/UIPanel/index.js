@@ -13,11 +13,11 @@ export default class UIPanel extends Component {
   };
 
   componentDidMount() {
-    document.addEventListener("keyup", this.handleLeaveKey);
+    window.addEventListener("keyup", this.handleLeaveKey);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("keyup", this.handleLeaveKey);
+    window.removeEventListener("keyup", this.handleLeaveKey);
   }
 
   handleLeaveKey = event => {

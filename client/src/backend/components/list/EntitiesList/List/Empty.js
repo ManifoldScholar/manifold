@@ -1,11 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 export default class ListEntitiesListEmpty extends PureComponent {
   static displayName = "List.Entities.List.Empty";
 
   static propTypes = {
-    message: PropTypes.node
+    message: PropTypes.node,
+    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"])
   };
 
   static defaultProps = {
@@ -17,6 +19,13 @@ export default class ListEntitiesListEmpty extends PureComponent {
   }
 
   render() {
-    return <div className="entity-list__empty-message">{this.message}</div>;
+    const { listStyle } = this.props;
+
+    const wrapperClasses = classNames({
+      "entity-list__empty-message": true,
+      "entity-list__empty-message--well": listStyle === "well"
+    });
+
+    return <div className={wrapperClasses}>{this.message}</div>;
   }
 }

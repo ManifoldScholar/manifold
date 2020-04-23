@@ -15,7 +15,8 @@ class Settings < ApplicationRecord
       head_title: "Manifold Scholarship",
       head_description: "Transforming scholarly publications into living digital works",
       social_share_message: "Shared from Manifold Scholarship",
-      library_disabled: false
+      library_disabled: false,
+      restricted_access: false
     },
     email: {
       from_address: "do-not-reply@manifoldapp.org",
@@ -53,6 +54,7 @@ class Settings < ApplicationRecord
   manifold_has_attached_file :favicon, :favicon
 
   has_formatted_attributes :copyright, include_wrap: false, container: :general
+  has_formatted_attributes :restricted_access_body, include_wrap: false, container: :general
 
   # Callbacks
   after_update :update_oauth_providers!

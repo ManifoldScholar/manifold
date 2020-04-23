@@ -6,6 +6,7 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { settingsAPI, requests } from "api";
 import { select } from "utils/entityUtils";
+import config from "../../../config";
 
 export class SettingsGeneralContainer extends PureComponent {
   static mapStateToProps = state => {
@@ -33,7 +34,7 @@ export class SettingsGeneralContainer extends PureComponent {
           >
             {getModelValue => (
               <>
-                <Form.FieldGroup label="Behaviors">
+                <Form.FieldGroup label="About">
                   <Form.TextInput
                     focusOnMount
                     label="How do you refer to your Manifold installation?"
@@ -105,6 +106,35 @@ export class SettingsGeneralContainer extends PureComponent {
                 </Form.FieldGroup>
                 <Form.FieldGroup label="Behaviors">
                   <Form.Switch
+                    wide
+                    label="Restrict Access to All Projects"
+                    instructions="When on, users must have entitlements to access project content"
+                    name="attributes[general][restrictedAccess]"
+                  />
+                  {getModelValue("attributes[general][restrictedAccess]") ===
+                    true && (
+                    <>
+                      <Form.TextInput
+                        className="form-toggle-secondary"
+                        label="Restricted Access Notice Header"
+                        name="attributes[restrictedAccessHeading]"
+                        placeholder={
+                          config.app.locale.notifications
+                            .projectAuthorizationNotice.heading
+                        }
+                      />
+                      <Form.TextArea
+                        className="form-toggle-secondary"
+                        label="Restricted Access Notice Body"
+                        name="attributes[restrictedAccessBody]"
+                        placeholder={
+                          config.app.locale.notifications
+                            .projectAuthorizationNotice.body
+                        }
+                      />
+                    </>
+                  )}
+                  <Form.Switch
                     label="Disable Library Views"
                     instructions="When on, this setting will disable the library views on the frontend."
                     name="attributes[general][libraryDisabled]"
@@ -113,6 +143,7 @@ export class SettingsGeneralContainer extends PureComponent {
                     true && (
                     <>
                       <Form.Switch
+                        wide
                         label="Enforce Standalone Mode for All Projects"
                         name="attributes[general][allStandalone]"
                         instructions="When on, all projects will render in standalone mode."

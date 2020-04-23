@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Project Abilities", :authorizer do
   include TestHelpers::AuthorizationHelpers
@@ -294,7 +294,7 @@ RSpec.describe "Project Abilities", :authorizer do
     end
 
     context "when the user is just a regular user" do
-      it { is_expected.not_to be_authorized_to :read, project }
+      it { is_expected.to be_authorized_to :read, project }
       it { is_expected.not_to be_authorized_to :fully_read, project }
     end
   end

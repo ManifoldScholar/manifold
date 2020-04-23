@@ -18,7 +18,7 @@ module Api
         @text = scope_for_texts.includes(:project, :text_sections, :stylesheets,
                                          :toc_section)
           .find(params[:id])
-        authorize_action_for @text
+        authorize_action_for @text, resource: @text
         render_single_resource @text,
                                include: includes
       end

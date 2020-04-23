@@ -2,9 +2,7 @@ module Api
   module V1
     module Projects
       module Relationships
-        class ProjectExportationsController < ApplicationController
-
-          before_action :set_project, only: [:index]
+        class ProjectExportationsController < AbstractProjectChildController
 
           resourceful! ProjectExportation do
             ProjectExportation.filtered(with_pagination!({}), scope: @project.project_exportations)
@@ -15,11 +13,6 @@ module Api
             render_multiple_resources @exports.by_created_at(:desc), include: [:export_target]
           end
 
-          private
-
-          def set_project
-            @project = Project.friendly.find(params[:project_id])
-          end
         end
       end
     end

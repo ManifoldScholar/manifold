@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { projectsAPI } from "api";
-import CompositeInputs from "backend/containers/form-inputs/composite-inputs";
+import { projectsAPI, makersAPI } from "api";
 import { connect } from "react-redux";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
-
+import FormContainer from "global/containers/form";
+import Form from "global/components/form";
 import Authorize from "hoc/authorize";
+
+import { MakerRow } from "backend/components/list/EntitiesList";
 
 export class ProjectCollaboratorsContainer extends Component {
   static displayName = "Project.Collaborators";
@@ -39,12 +41,33 @@ export class ProjectCollaboratorsContainer extends Component {
         failureRedirect={lh.link("backendProject", project.id)}
       >
         <section>
-          <CompositeInputs.Collaborators
-            entity={project}
-            api={projectsAPI}
-            history={this.props.history}
-            route={this.props.route}
-          />
+          <FormContainer.Form
+            style={{ marginBottom: 100 }}
+            model={project}
+            name="update-project-collaborators"
+            update={projectsAPI.update}
+            className="form-secondary"
+          >
+            <Form.Picker
+              label="Authors"
+              name="relationships[creators]"
+              optionToLabel={maker => maker.attributes.fullName}
+              callbacks={{}}
+              predictive
+              listRowComponent={MakerRow}
+              options={makersAPI.index}
+            />
+            <Form.Picker
+              label="Contributors"
+              name="relationships[contributors]"
+              optionToLabel={maker => maker.attributes.fullName}
+              callbacks={{}}
+              predictive
+              listRowComponent={MakerRow}
+              options={makersAPI.index}
+            />
+            <Form.Save />
+          </FormContainer.Form>
           {childRoutes(this.props.route, {
             drawer: true,
             drawerProps: { closeUrl },

@@ -21,7 +21,10 @@ module V1
       library_disabled: Types::Bool,
       all_standalone: Types::Bool,
       library_redirect_url: Types::String,
-      home_redirect_url: Types::String
+      home_redirect_url: Types::String,
+      restricted_access: Types::Bool,
+      restricted_access_heading: Types::String,
+      restricted_access_body: Types::String
     )
     typed_attribute :theme, Types::Hash.schema(
       logo_styles: Types::String,

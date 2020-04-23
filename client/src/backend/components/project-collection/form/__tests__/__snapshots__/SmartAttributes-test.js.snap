@@ -59,158 +59,166 @@ Array [
     class="form-input"
   >
     <div
-      class="form-input-heading"
-      id="predictive-text-label-1"
+      class="picker-input"
     >
-      Subjects:
-    </div>
-    <span
-      class="instructions"
-      id="predictive-text-belongs-to-instructions-1"
-    >
-      Include all Projects with these subjects.
-    </span>
-    <div
-      class="has-many-list"
-    >
-      <div
-        aria-atomic="true"
-        aria-live="polite"
-        class="screen-reader-text"
-        role="status"
-      />
-      <div
-        class="input-predictive"
+      <label
+        for="1-picker-textbox"
+        id="1-picker-label"
       >
-        <div
-          aria-expanded="false"
-          aria-haspopup="listbox"
-          aria-owns="1-listbox"
-          class="input-predictive__input"
-          role="combobox"
-        >
-          <input
-            aria-autocomplete="list"
-            aria-controls="1-listbox"
-            aria-describedby="predictive-text-belongs-to-error-1 predictive-text-belongs-to-instructions-1"
-            aria-labelledby="predictive-text-label-1"
-            class="input-predictive__text-input text-input"
-            placeholder="Add a Subject"
-            type="text"
-            value=""
-          />
-        </div>
-        <ul
-          aria-labelledby="predictive-text-label-1"
-          class="input-predictive__results"
-          id="1-listbox"
-          role="listbox"
+        Show projects with these subjects
+      </label>
+      <div
+        aria-controls="1-picker-textbox"
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        aria-owns="1-picker-textbox,1-picker-listbox"
+        class="picker-input__input"
+        id="1-picker-combobox"
+        role="combobox"
+      >
+        <input
+          aria-autocomplete="list"
+          aria-controls="1-listbox"
+          class="picker-input__text-input text-input"
+          placeholder="Select a Subject"
+          type="text"
+          value=""
         />
-      </div>
-      <div
-        aria-atomic="true"
-        aria-live="polite"
-        class="screen-reader-text"
-        role="status"
-      />
-      <ul
-        aria-label="Active Subjects:"
-        class="bucket empty"
-        role="group"
-      >
-        <div
-          class="placeholder"
+        <button
+          aria-label="Open"
+          class="picker-input__button"
+          tabindex="-1"
+          type="button"
         >
-          None Added
-        </div>
-      </ul>
+          <svg
+            aria-hidden="true"
+            class="manicon-svg picker-input__icon svg-icon--disclosureDown16"
+            fill="currentColor"
+            height="20"
+            viewBox="0 0 16 16"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+            />
+          </svg>
+          <span
+            class="screen-reader-text"
+          >
+            Show Listbox
+          </span>
+        </button>
+        <ul
+          aria-labelledby="1-picker-label"
+          class="picker-input__results"
+          id="1-picker-listbox"
+          role="listbox"
+        >
+          <li
+            class="picker-input__result picker-input__result--empty"
+            id="no-options"
+            tabindex="-1"
+          >
+            No Options
+          </li>
+        </ul>
+      </div>
     </div>
   </div>,
   <div
     class="form-input"
   >
-    <label
-      class=""
-      for="tag-list-1"
-    >
-      Tags:
-    </label>
     <div
-      class="has-many-list"
+      class="picker-input"
+    >
+      <label
+        for="1-picker-textbox"
+        id="1-picker-label"
+      >
+        Show projects with these tags
+      </label>
+      <div
+        aria-controls="1-picker-textbox"
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        aria-owns="1-picker-textbox,1-picker-listbox"
+        class="picker-input__input"
+        id="1-picker-combobox"
+        role="combobox"
+      >
+        <input
+          aria-autocomplete="list"
+          aria-controls="1-listbox"
+          class="picker-input__text-input text-input"
+          placeholder="Enter Tags"
+          type="text"
+          value=""
+        />
+        <button
+          aria-label="Open"
+          class="picker-input__button"
+          tabindex="-1"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="manicon-svg picker-input__icon svg-icon--disclosureDown16"
+            fill="currentColor"
+            height="20"
+            viewBox="0 0 16 16"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+            />
+          </svg>
+          <span
+            class="screen-reader-text"
+          >
+            Show Listbox
+          </span>
+        </button>
+        <ul
+          aria-labelledby="1-picker-label"
+          class="picker-input__results"
+          id="1-picker-listbox"
+          role="listbox"
+        >
+          <li
+            class="picker-input__result picker-input__result--empty"
+            id="no-options"
+            tabindex="-1"
+          >
+            No Options
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      aria-atomic="true"
+      aria-live="polite"
+      class="screen-reader-text"
+      role="status"
+    />
+    <div
+      class="picker-input__list"
     >
       <div
-        aria-atomic="true"
-        aria-live="polite"
-        class="screen-reader-text"
-        role="status"
-      />
-      <div
-        class="input-predictive"
+        class="entity-list entity-list--well"
+        id="entities-list-1"
       >
         <div
-          aria-expanded="false"
-          aria-haspopup="listbox"
-          aria-owns="1-listbox"
-          class="input-predictive__input"
-          role="combobox"
+          class="entity-list__contents-wrapper"
         >
-          <input
-            aria-autocomplete="list"
-            aria-controls="1-listbox"
-            aria-describedby="tag-list-error-1 tag-list-instructions-1"
-            class="input-predictive__text-input text-input"
-            placeholder="Enter a Tag"
-            type="text"
-            value=""
-          />
-          <button
-            class="input-predictive__button"
-            disabled=""
-            type="button"
+          <div
+            class="entity-list__empty-message entity-list__empty-message--well"
           >
-            <svg
-              aria-hidden="true"
-              class="manicon-svg input-predictive__icon svg-icon--plus16"
-              fill="currentColor"
-              height="20"
-              viewBox="0 0 16 16"
-              width="20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z"
-              />
-            </svg>
-            <span
-              class="screen-reader-text"
-            >
-              Add  to list
-            </span>
-          </button>
+            None Added
+          </div>
         </div>
-        <ul
-          class="input-predictive__results"
-          id="1-listbox"
-          role="listbox"
-        />
       </div>
-      <div
-        aria-atomic="true"
-        aria-live="polite"
-        class="screen-reader-text"
-        role="status"
-      />
-      <ul
-        aria-label="Active Tags:"
-        class="bucket empty"
-        role="group"
-      >
-        <div
-          class="placeholder"
-        >
-          None added
-        </div>
-      </ul>
     </div>
   </div>,
 ]

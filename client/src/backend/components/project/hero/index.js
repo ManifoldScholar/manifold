@@ -1,5 +1,7 @@
 import Builder from "./Builder";
+import Block from "./Builder/Block";
 
 export default {
-  Builder
+  Builder,
+  Block
 };

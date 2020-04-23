@@ -978,6 +978,7 @@ exports[`frontend/components/project/Hero matches the snapshot 1`] = `
         }
       />
       <ProjectHero.CalloutList
+        authorized={false}
         blockClass="project-hero"
         callouts={
           Array [
@@ -1004,6 +1005,7 @@ exports[`frontend/components/project/Hero matches the snapshot 1`] = `
         visibilityClass="desktop"
       />
       <ProjectHero.CalloutList
+        authorized={false}
         blockClass="project-hero"
         callouts={
           Array [
@@ -2002,6 +2004,7 @@ exports[`frontend/components/project/Hero matches the snapshot 1`] = `
         }
       />
       <ProjectHero.CalloutList
+        authorized={false}
         blockClass="project-hero"
         callouts={Array []}
         layoutClass="stacked"

@@ -1,7 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`global/components/form/Radios matches the snapshot 1`] = `
-<ContextConsumer>
-  <Component />
-</ContextConsumer>
-`;
+exports[`global/components/form/Radios matches the snapshot when rendered 1`] = `"<fieldset class=\\"form-input-radios__wrapper\\" aria-describedby=\\"radios-error-1 radios-instructions-1\\"><legend class=\\"form-input-radios__legend\\"><span class=\\"form-input-radios__title\\" aria-hidden=\\"true\\">Label this</span><span class=\\"form-input-radios__prompt\\">Pick the right choice</span></legend><label class=\\"form-toggle radio\\"><input type=\\"radio\\" name=\\"radios-1\\" value=\\"1\\" tabindex=\\"0\\"><span class=\\"toggle-indicator\\" aria-hidden=\\"true\\"></span><span class=\\"toggle-label\\">option-1</span></label><span class=\\"toggle-instructions\\">What does this option really mean?</span><label class=\\"form-toggle radio\\"><input type=\\"radio\\" name=\\"radios-1\\" value=\\"2\\" tabindex=\\"-1\\"><span class=\\"toggle-indicator\\" aria-hidden=\\"true\\"></span><span class=\\"toggle-label\\">option-2</span></label></fieldset>"`;

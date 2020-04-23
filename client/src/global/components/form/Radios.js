@@ -17,8 +17,7 @@ class FormRadios extends Component {
       PropTypes.shape({
         value: PropTypes.any.isRequired,
         label: PropTypes.string.isRequired,
-        instructions: PropTypes.string,
-        internalValue: PropTypes.any.isRequired
+        instructions: PropTypes.string
       })
     ).isRequired,
     label: PropTypes.string,
@@ -100,7 +99,7 @@ class FormRadios extends Component {
               />
               {this.options.map((option, index) => (
                 <Option
-                  key={`${this.idPrefix}-${id}-${option.internalValue}`}
+                  key={option.key}
                   option={option}
                   focusOnMount={this.focusOnMount && index === 0}
                   tabIndex={index === 0 ? 0 : -1}

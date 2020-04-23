@@ -14,6 +14,7 @@ module Api
 
       def show
         @resource = load_zresource
+        authorize_action_for @resource
         render_single_resource @resource,
                                include: includes
       end

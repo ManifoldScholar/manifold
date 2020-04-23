@@ -18,6 +18,10 @@ import ResourceCollectionRow from "./Entity/ResourceCollectionRow";
 import SubjectRow from "./Entity/SubjectRow";
 import TwitterQueryRow from "./Entity/TwitterQueryRow";
 import UserRow from "./Entity/UserRow";
+import TagRow from "./Entity/TagRow";
+import StringRow from "./Entity/StringRow";
+import TextCategoryRow from "./Entity/TextCategoryRow";
+import FormOptionRow from "./Entity/FormOptionRow";
 
 export default List;
 export {
@@ -39,5 +43,9 @@ export {
   ResourceCollectionRow,
   SubjectRow,
   TwitterQueryRow,
-  UserRow
+  UserRow,
+  TagRow,
+  StringRow,
+  TextCategoryRow,
+  FormOptionRow
 };

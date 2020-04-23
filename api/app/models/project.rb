@@ -39,6 +39,7 @@ class Project < ApplicationRecord
 
   # Magic
   has_formatted_attributes :description, :subtitle, :image_credits
+  has_formatted_attributes :restricted_access_body, include_wrap: false
   has_formatted_attributes :title, include_wrap: false
   with_metadata %w(
     series_title container_title isbn issn doi original_publisher
@@ -171,8 +172,16 @@ class Project < ApplicationRecord
                       .merge(ProjectSubject.by_subject(subject)).select(:project_id))
   }
 
-  scope :restricted, -> { where(restricted_access: true) }
-  scope :unrestricted, -> { where(restricted_access: false) }
+  scope :restricted, -> do
+    return where(open_access: false) if Settings.instance.general["restricted_access"]
+
+    where(restricted_access: true)
+  end
+  scope :unrestricted, -> do
+    return where(open_access: true) if Settings.instance.general["restricted_access"]
+
+    where(restricted_access: false)
+  end
   scope :drafts, -> { where(draft: true) }
   scope :published, -> { where(draft: false) }
   scope :by_draft, ->(draft = nil) { where(draft: to_boolean(draft)) unless draft.nil? }
@@ -200,6 +209,7 @@ class Project < ApplicationRecord
   scope :with_creator_role, ->(user = nil) { where(creator: user) if user.present? }
 
   scope :with_read_ability, ->(user = nil) { build_read_ability_scope_for user }
+  scope :with_full_read_ability, ->(user = nil) { build_full_read_ability_scope_for user }
 
   scope :with_update_ability, ->(user = nil) { build_update_ability_scope_for user }
 
@@ -376,9 +386,18 @@ class Project < ApplicationRecord
     # @param [User, nil] user
     # @return [ActiveRecord::Relation<Project>]
     def build_read_ability_scope_for(user = nil)
+      return published unless user.present?
+
+      where(arel_build_read_case_statement_for(user, false))
+    end
+
+    # @see .arel_build_read_case_statement_for
+    # @param [User, nil] user
+    # @return [ActiveRecord::Relation<Project>]
+    def build_full_read_ability_scope_for(user = nil)
       return published.unrestricted unless user.present?
 
-      where(arel_build_read_case_statement_for(user))
+      where(arel_build_read_case_statement_for(user, true))
     end
 
     # @param [User, nil] user
@@ -398,10 +417,16 @@ class Project < ApplicationRecord
     #   access to it
     #
     # @param [User, nil] user
-    def arel_build_read_case_statement_for(user)
+    def arel_build_read_case_statement_for(user, full = false)
       arel_case.tap do |stmt|
         stmt.when(arel_table[:draft]).then(arel_with_draft_roles_for(user))
-        stmt.when(arel_table[:restricted_access]).then(arel_with_full_read_access_roles_for(user))
+        if full
+          if Settings.instance.general["restricted_access"]
+            stmt.when(arel_table[:open_access].eq(false), false).then(arel_with_full_read_access_roles_for(user))
+          else
+            stmt.when(arel_table[:restricted_access]).then(arel_with_full_read_access_roles_for(user))
+          end
+        end
         stmt.else(true)
       end
     end

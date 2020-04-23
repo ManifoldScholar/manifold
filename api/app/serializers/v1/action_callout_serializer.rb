@@ -6,6 +6,7 @@ module V1
     typed_attribute :title, Types::String
     typed_attribute :kind, Types::String.enum("link", "read", "toc", "download")
     typed_attribute :location, Types::String.enum("left", "right")
+    typed_attribute :visibility, Types::String.enum("always", "unauthorized", "authorized")
     typed_attribute :position, Types::Integer
     typed_attribute :url, Types::Serializer::URL
     typed_attribute :button, Types::Bool

@@ -16,7 +16,7 @@ export default class SortableEntities extends PureComponent {
     entities: PropTypes.array,
     entityComponent: PropTypes.func.isRequired,
     entityComponentProps: PropTypes.object,
-    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare"]),
+    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
     sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
     useDragHandle: PropTypes.bool,
     idForInstructions: PropTypes.string

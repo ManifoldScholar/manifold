@@ -3,8 +3,7 @@ module Api
     module Projects
       module Relationships
         # Responds with twitter queries in a project
-        class TwitterQueriesController < ApplicationController
-          before_action :set_project, only: [:create, :index]
+        class TwitterQueriesController < AbstractProjectChildController
 
           resourceful! TwitterQuery, authorize_options: {
             except: [:index, :create, :show, :update, :destroy]
@@ -67,9 +66,6 @@ module Api
             )
           end
 
-          def set_project
-            @project = Project.friendly.find(params[:project_id])
-          end
         end
       end
     end

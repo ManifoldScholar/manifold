@@ -82,6 +82,14 @@ export class ActionCalloutForm extends Component {
     ];
   }
 
+  get visibilityOptions() {
+    return [
+      { label: "Always Visible", value: "always" },
+      { label: "Visible Only When Authorized", value: "authorized" },
+      { label: "Visible Only When Unauthorized ", value: "unauthorized" }
+    ];
+  }
+
   get textOptions() {
     const options = [{ label: "Select Text", value: "" }];
     const texts = this.project.relationships.texts.map(text => {
@@ -100,6 +108,10 @@ export class ActionCalloutForm extends Component {
 
   shouldShowTextsForKind(kind) {
     return kind === "read" || kind === "toc";
+  }
+
+  shouldShowVisibilityForKind(kind) {
+    return kind === "link" || kind === "download";
   }
 
   shouldShowUrlForKind(kind) {
@@ -153,6 +165,15 @@ export class ActionCalloutForm extends Component {
                 options={this.kindOptions}
                 name="attributes[kind]"
               />
+              {this.shouldShowVisibilityForKind(
+                getModelValue("attributes[kind]")
+              ) && (
+                <Form.Select
+                  label="Visibility"
+                  options={this.visibilityOptions}
+                  name="attributes[visibility]"
+                />
+              )}
               {this.shouldShowTextsForKind(
                 getModelValue("attributes[kind]")
               ) && (

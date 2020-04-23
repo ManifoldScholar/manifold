@@ -3,11 +3,9 @@ module Api
     module Projects
       module Relationships
         # Responds with categories in a project
-        class TextCategoriesController < ApplicationController
+        class TextCategoriesController < AbstractProjectChildController
 
           LOCATION = [:api, :v1, :project, :relationships, :text_categories].freeze
-
-          before_action :set_project
 
           resourceful! Category, authorize_options: { except: [:index] } do
             @project.text_categories
@@ -35,10 +33,6 @@ module Api
 
           def scope_for_categories
             @project.text_categories
-          end
-
-          def set_project
-            @project = Project.friendly.find(params[:project_id])
           end
 
         end

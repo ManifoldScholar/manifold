@@ -10,6 +10,7 @@ module Api
       # GET /collections/1
       def show
         @collection = load_resource_collection
+        authorize_action_for @collection
         render_single_resource(@collection, include: includes)
       end
 

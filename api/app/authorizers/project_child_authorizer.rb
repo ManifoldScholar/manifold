@@ -20,7 +20,7 @@ class ProjectChildAuthorizer < ApplicationAuthorizer
   #
   # @see ProjectAuthorizer#readable_by?
   def readable_by?(user, options = {})
-    with_project { |p| p.readable_by? user, options }
+    with_project { |p| p.fully_readable_by? user, options }
   end
 
   # @see ProjectAuthorizer#fully_readable_by?

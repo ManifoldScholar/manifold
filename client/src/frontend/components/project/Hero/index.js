@@ -149,6 +149,11 @@ export default class ProjectHero extends PureComponent {
   }
 
   render() {
+    const { project } = this.props;
+    const authorized = this.authorization.authorizeAbility({
+      entity: project,
+      ability: "fullyRead"
+    });
     const blockClass = "project-hero";
 
     const containerClasses = classNames({
@@ -163,10 +168,11 @@ export default class ProjectHero extends PureComponent {
         <div className={`${blockClass}__inner`}>
           <div className={`${blockClass}__left-top-block`}>
             <div ref={this.headingRef}>
-              <Heading project={this.props.project} />
+              <Heading project={project} />
             </div>
-            <Meta blockClass={blockClass} project={this.props.project} />
+            <Meta blockClass={blockClass} project={project} />
             <CalloutList
+              authorized={authorized}
               blockClass={blockClass}
               callouts={this.leftCallouts}
               layoutClass={"inline"}
@@ -174,6 +180,7 @@ export default class ProjectHero extends PureComponent {
               visibilityClass={"desktop"}
             />
             <CalloutList
+              authorized={authorized}
               blockClass={blockClass}
               callouts={this.allCallouts}
               layoutClass={"stacked"}
@@ -192,6 +199,7 @@ export default class ProjectHero extends PureComponent {
           >
             <Cover blockClass={blockClass} project={this.props.project} />
             <CalloutList
+              authorized={authorized}
               blockClass={blockClass}
               callouts={this.rightCallouts}
               layoutClass={"stacked"}

@@ -8,7 +8,7 @@ module Api
 
       def index
         authorize_action_for Permission, for: parent_resource
-        render_multiple_resources permissions_scope.all
+        render_multiple_resources permissions_scope.all, include: includes
       end
 
       def show

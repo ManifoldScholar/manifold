@@ -37,9 +37,10 @@ export class FormContainer extends PureComponent {
       PropTypes.array,
       PropTypes.element
     ]),
+    style: PropTypes.object,
     model: PropTypes.object,
-    update: PropTypes.func.isRequired,
-    create: PropTypes.func.isRequired,
+    update: PropTypes.func,
+    create: PropTypes.func,
     name: PropTypes.string.isRequired,
     onSuccess: PropTypes.func,
     debug: PropTypes.bool,
@@ -56,12 +57,14 @@ export class FormContainer extends PureComponent {
   };
 
   static defaultProps = {
+    style: {},
     doNotWarn: false,
     notificationScope: "global",
     model: {
       attributes: {},
       relationships: {}
     },
+    className: "form-secondary",
     debug: false,
     groupErrors: false,
     suppressModelErrors: false,
@@ -74,7 +77,8 @@ export class FormContainer extends PureComponent {
     super(props);
     this.state = {
       preventDirtyWarning: false,
-      submitKey: null
+      submitKey: null,
+      submitRequested: false
     };
   }
 
@@ -82,8 +86,10 @@ export class FormContainer extends PureComponent {
     this.maybeOpenSession(this.props);
   }
 
-  componentDidUpdate(prevProps, prevStateIgnored) {
+  componentDidUpdate(prevProps, prevState) {
     this.maybeOpenSession(this.props, prevProps);
+    if (this.state.submitRequested && !prevState.submitRequested)
+      this.handleSubmit();
   }
 
   componentWillUnmount() {
@@ -133,6 +139,7 @@ export class FormContainer extends PureComponent {
     } else {
       this.create();
     }
+    this.setState({ submitRequested: false });
   };
 
   createKey() {
@@ -161,6 +168,7 @@ export class FormContainer extends PureComponent {
   update() {
     const dirty = this.props.session.dirty;
     const source = this.props.session.source;
+    if (!this.props.update) return;
     const call = this.props.update(source.id, {
       attributes: dirty.attributes,
       relationships: this.adjustedRelationships(dirty.relationships)
@@ -185,7 +193,9 @@ export class FormContainer extends PureComponent {
 
   create() {
     const { dirty, source } = this.props.session;
-    const call = this.props.create({
+    const callMethod = this.props.create || this.props.update || null;
+    if (!callMethod) return;
+    const call = callMethod({
       attributes: { ...source.attributes, ...dirty.attributes },
       relationships: this.adjustedRelationships(dirty.relationships)
     });
@@ -215,6 +225,10 @@ export class FormContainer extends PureComponent {
     return null;
   }
 
+  triggerSubmit = () => {
+    this.setState({ submitRequested: true });
+  };
+
   contextProps = props => {
     const out = {
       actions: {
@@ -224,7 +238,8 @@ export class FormContainer extends PureComponent {
       sourceModel: props.session.source,
       getModelValue: name => this.lookupValue(name, this.props),
       sessionKey: props.name,
-      submitKey: this.state.submitKey
+      submitKey: this.state.submitKey,
+      triggerSubmit: this.triggerSubmit
     };
     if (!this.props.groupErrors) out.errors = props.errors || [];
     return out;
@@ -286,6 +301,7 @@ export class FormContainer extends PureComponent {
 
         {this.renderGroupedErrors(this.props)}
         <form
+          style={this.props.style}
           onSubmit={this.handleSubmit}
           className={this.props.className}
           data-id="submit"

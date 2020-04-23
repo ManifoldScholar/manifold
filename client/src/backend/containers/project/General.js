@@ -3,16 +3,33 @@ import PropTypes from "prop-types";
 import Project from "backend/components/project";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
-import { projectsAPI } from "api";
+import { subjectsAPI, projectsAPI, tagsAPI } from "api";
 import lh from "helpers/linkHandler";
-
 import Authorize from "hoc/authorize";
+import { entityStoreActions } from "actions";
 
-export default class ProjectGeneralContainer extends PureComponent {
+const { request } = entityStoreActions;
+import withDispatch from "hoc/with-dispatch";
+import isString from "lodash/isString";
+
+class ProjectGeneralContainer extends PureComponent {
   static displayName = "Project.General";
 
   static propTypes = {
     project: PropTypes.object
+  };
+
+  newSubject = value => {
+    const subject = {
+      type: "subject",
+      attributes: {
+        name: value
+      }
+    };
+    const call = subjectsAPI.create(subject);
+    const subjectRequest = request(call, `create-subject`);
+    const { promise } = this.props.dispatch(subjectRequest);
+    return promise.then(({ data }) => data);
   };
 
   render() {
@@ -64,7 +81,7 @@ export default class ProjectGeneralContainer extends PureComponent {
                 {...this.props}
               />
             </Form.FieldGroup>
-            <Form.FieldGroup label="Visibility">
+            <Form.FieldGroup label="Visibility and Access">
               <Form.Switch
                 className="form-toggle-secondary"
                 label="Draft Mode"
@@ -97,12 +114,37 @@ export default class ProjectGeneralContainer extends PureComponent {
               />
             </Form.FieldGroup>
             <Form.FieldGroup label="Taxonomy">
-              <Project.Form.Subjects wide project={project} {...this.props} />
-              <Form.TagList
+              <Form.Picker
+                label="Subjects"
+                listStyle={"well"}
+                name="relationships[subjects]"
+                options={subjectsAPI.index}
+                optionToLabel={subject => subject.attributes.name}
+                newToValue={this.newSubject}
+                placeholder="Select a Subject"
+                listRowComponent="SubjectRow"
+              />
+
+              <Form.Picker
                 label="Tags"
+                listStyle="well"
+                listRowComponent="StringRow"
                 name="attributes[tagList]"
-                placeholder="Enter a Tag"
-                wide
+                placeholder="Enter Tags"
+                options={tagsAPI.index}
+                optionToLabel={tag => tag.attributes.name}
+                optionToValue={tag => tag.attributes.name}
+                beforeSetValue={tags =>
+                  Array.isArray(tags) ? tags.join(",") : tags
+                }
+                beforeGetValue={tags => {
+                  if (isString(tags)) {
+                    if (tags.trim() === "") return [];
+                    return tags.split(",");
+                  }
+                  return tags;
+                }}
+                allowNew
               />
             </Form.FieldGroup>
             <Form.FieldGroup
@@ -127,3 +169,5 @@ export default class ProjectGeneralContainer extends PureComponent {
     );
   }
 }
+
+export default withDispatch(ProjectGeneralContainer);
