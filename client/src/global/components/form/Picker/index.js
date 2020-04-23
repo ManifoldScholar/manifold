@@ -382,8 +382,20 @@ export class PickerComponent extends PureComponent {
     }
   }
 
+  scrollToActiveOption = () => {
+    const activeOptionIndex = this.activeOptionIndex;
+    if (activeOptionIndex < 0) return;
+    const parent = this.optionsRef.current;
+    const node = parent.children[this.activeOptionIndex];
+    if (!node) return;
+    const visible =
+      node.offsetTop > parent.scrollTop &&
+      node.offsetTop < parent.scrollTop + parent.offsetHeight;
+    if (!visible) node.scrollIntoView();
+  };
+
   setActiveOption(activeOption) {
-    this.setState({ activeOption });
+    this.setState({ activeOption }, this.scrollToActiveOption);
   }
 
   activateNextOption() {
