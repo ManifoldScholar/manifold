@@ -108,7 +108,7 @@ storiesOf("Backend/Form", module).add("Picker", () => {
       </FormContainer.Form>
 
       <FormContainer.Form
-        name="test-form-select-multiple-resource-options"
+        name="test-form-select-multiple-resource-options-row-style"
         model={{
           id: 1,
           attributes: {
