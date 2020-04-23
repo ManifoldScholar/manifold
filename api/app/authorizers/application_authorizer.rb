@@ -150,6 +150,8 @@ class ApplicationAuthorizer < Authority::Authorizer
     # @param [RoleName, String, Symbol] role
     # @param [Rolify::Resource, :any] on
     def has_role?(user, role, on: :any)
+      return false if user.nil?
+
       role_name = RoleName.fetch role
 
       actual_on = role_name.acts_global? ? :any : on

@@ -140,7 +140,7 @@ module V1
         end
 
         def calculate_abilities(object, params)
-          object.serialized_abilities_for(params[:current_user])
+          object.serialized_abilities_for(params[:authority_user])
         end
       end
       # rubocop:enable Metrics/BlockLength

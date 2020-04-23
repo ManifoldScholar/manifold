@@ -63,6 +63,7 @@ export default {
   ProjectCategoryEdit: Project.Category.Edit,
   ProjectResources: Project.Resources,
   ProjectResourceCollections: Project.ResourceCollections,
+  ProjectAccessWrapper: Project.Access.Wrapper,
   ProjectPermissions: Project.Permissions,
   PermissionNew: Permission.New,
   PermissionEdit: Permission.Edit,

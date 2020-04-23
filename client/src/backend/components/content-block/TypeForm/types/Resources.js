@@ -22,6 +22,7 @@ export default class ProjectContentTypeFormResources extends PureComponent {
     return (
       <>
         <Form.TextInput
+          debug
           label="Title"
           name="attributes[title]"
           instructions={`If blank, the block title will default to "Resources"`}
@@ -34,14 +35,18 @@ export default class ProjectContentTypeFormResources extends PureComponent {
           wide
         />
         {!this.showAllCollections ? (
-          <Form.HasMany
-            label="Show Selected Collections"
-            placeholder="Select Collection"
-            name="relationships[featuredCollections]"
-            options={this.collections}
-            entityLabelAttribute={"title"}
-            wide
-          />
+          <>
+            <Form.Picker
+              placeholder="Add a Resource Collection"
+              label="Show Specific Collections"
+              optionToLabel={rc => rc.attributes.title}
+              name="relationships[featuredCollections]"
+              options={this.collections}
+              listStyle="well"
+              showAddRemoveAll
+              listRowComponent="ResourceCollectionRow"
+            />
+          </>
         ) : null}
       </>
     );

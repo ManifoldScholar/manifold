@@ -115,7 +115,9 @@ const set = (state, action) => {
   const { path, id, value } = action.payload;
   if (value === undefined) return state; // undefined values are noops.
   const setPath = lodashSet({}, path, value);
-  const sourceValue = getSourceValue(path, state.sessions[id].source);
+  const session = state.sessions[id];
+  if (!session) return;
+  const sourceValue = getSourceValue(path, session.source);
   const dirty = { ...state.sessions[id].dirty };
   let newDirty;
   if (value === sourceValue) {

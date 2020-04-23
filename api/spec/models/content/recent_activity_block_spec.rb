@@ -8,8 +8,8 @@ RSpec.describe Content::RecentActivityBlock do
     expect(FactoryBot.build(:recent_activity_block)).to be_valid
   end
 
-  it "is not configurable" do
-    expect(recent_activity_block.configurable?).to eq false
+  it "is configurable" do
+    expect(recent_activity_block.configurable?).to eq true
   end
 
   describe "#renderable?" do

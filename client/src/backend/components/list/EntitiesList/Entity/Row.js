@@ -32,7 +32,7 @@ export default class EntitiesListRow extends PureComponent {
       PropTypes.node
     ]),
     active: PropTypes.bool,
-    listStyle: PropTypes.oneOf(["rows", "tiles", "grid"]),
+    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
     sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
     utility: PropTypes.node,
     dragHandleProps: PropTypes.object,
@@ -158,6 +158,7 @@ export default class EntitiesListRow extends PureComponent {
       "entity-row__figure--shape-round": this.figureShape === "circle",
       "entity-row__figure--shape-square": this.figureShape === "square",
       "entity-row__figure--in-grid": this.listStyle === "grid",
+      "entity-row__figure--in-well": this.listStyle === "well",
       "entity-row--figure--in-tiles": this.listStyle === "tiles",
       "entity-row--figure--in-rows": this.listStyle === "rows"
     });
@@ -167,6 +168,7 @@ export default class EntitiesListRow extends PureComponent {
     return classNames({
       "entity-row__inner": true,
       "entity-row__inner--in-grid": this.listStyle === "grid",
+      "entity-row__inner--in-well": this.listStyle === "well",
       "entity-row__inner--in-tiles": this.listStyle === "tiles",
       "entity-row__inner--in-rows": this.listStyle === "rows",
       "entity-row__inner--with-row-link": this.entireRowIsClickable,
@@ -191,6 +193,7 @@ export default class EntitiesListRow extends PureComponent {
     return classNames({
       "entity-row__title": true,
       "entity-row__title--in-grid": this.listStyle === "grid",
+      "entity-row__title--in-well": this.listStyle === "well",
       "entity-row__title--in-tiles": this.listStyle === "tiles",
       "entity-row__title--in-rows": this.listStyle === "rows"
     });
@@ -200,6 +203,7 @@ export default class EntitiesListRow extends PureComponent {
     return classNames({
       "entity-row__subtitle": true,
       "entity-row__subtitle--in-grid": this.listStyle === "grid",
+      "entity-row__subtitle--in-well": this.listStyle === "well",
       "entity-row__subtitle--in-tiles": this.listStyle === "tiles",
       "entity-row__subtitle--in-rows": this.listStyle === "rows"
     });
@@ -209,6 +213,7 @@ export default class EntitiesListRow extends PureComponent {
     return classNames({
       "entity-row__count": true,
       "entity-row__count--in-grid": this.listStyle === "grid",
+      "entity-row__count--in-well": this.listStyle === "well",
       "entity-row__count--in-tiles": this.listStyle === "tiles",
       "entity-row__count--in-rows": this.listStyle === "rows"
     });
@@ -218,6 +223,7 @@ export default class EntitiesListRow extends PureComponent {
     return classNames({
       "entity-row__meta": true,
       "entity-row__meta--in-grid": this.listStyle === "grid",
+      "entity-row__meta--in-well": this.listStyle === "well",
       "entity-row__meta--in-tiles": this.listStyle === "tiles",
       "entity-row__meta--in-rows": this.listStyle === "rows"
     });
@@ -233,6 +239,7 @@ export default class EntitiesListRow extends PureComponent {
       "entity-row__row-link--block": block,
       "entity-row__row-link--atag": true,
       "entity-row__row-link--in-grid": this.listStyle === "grid",
+      "entity-row__row-link--in-well": this.listStyle === "well",
       "entity-row__row-link--is-active": this.active
     });
     return (
@@ -252,6 +259,7 @@ export default class EntitiesListRow extends PureComponent {
       "entity-row__row-link--block": block,
       "entity-row__row-link--button": true,
       "entity-row__row-link--in-grid": this.listStyle === "grid",
+      "entity-row__row-link--in-well": this.listStyle === "well",
       "entity-row__row-link--is-active": this.active
     });
     return (

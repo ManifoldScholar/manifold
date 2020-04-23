@@ -8,8 +8,13 @@ export default class MakerRow extends PureComponent {
   static displayName = "EntitiesList.Entity.MakerRow";
 
   static propTypes = {
+    clickable: PropTypes.bool,
     entity: PropTypes.object,
     active: PropTypes.string
+  };
+
+  static defaultProps = {
+    clickable: true
   };
 
   get maker() {
@@ -38,13 +43,19 @@ export default class MakerRow extends PureComponent {
   }
 
   render() {
+    const linkProps = this.props.clickable
+      ? {
+          onRowClick: this.url,
+          rowClickMode: "block"
+        }
+      : {};
+
     return (
       <EntityRow
         {...this.props}
-        onRowClick={this.url}
+        {...linkProps}
         title={this.name}
         figure={<EntityThumbnail.Maker entity={this.maker} />}
-        rowClickMode="block"
         figureSize="small"
         figureShape="circle"
         active={this.active}

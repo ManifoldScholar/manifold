@@ -31,7 +31,8 @@ export default class EntitlementRow extends PureComponent {
   }
 
   get label() {
-    return this.currentState;
+    const labels = [this.currentState];
+    return labels;
   }
 
   get target() {
@@ -48,6 +49,13 @@ export default class EntitlementRow extends PureComponent {
 
   get title() {
     return this.targetName;
+  }
+
+  get subtitle() {
+    if (this.entitlement.attributes.expiration) {
+      return `Expires ${this.entitlement.attributes.expiration}`;
+    }
+    return null;
   }
 
   get utility() {
@@ -72,6 +80,7 @@ export default class EntitlementRow extends PureComponent {
     const { active, title, label } = this;
 
     const rowProps = { ...this.props, active, title, label };
+    const subtitleProps = this.subtitle ? { subtitle: this.subtitle } : {};
 
     if (this.targetType === "User") {
       rowProps.figureSize = "small";
@@ -79,6 +88,14 @@ export default class EntitlementRow extends PureComponent {
       rowProps.figure = <EntityThumbnail.User entity={this.target} />;
     }
 
-    return <EntityRow {...rowProps} utility={this.utility} />;
+    if (this.targetType === "ReadingGroup") {
+      rowProps.figureSize = "small";
+      rowProps.figureShape = "square";
+      rowProps.figure = <EntityThumbnail.ReadingGroup entity={this.target} />;
+    }
+
+    return (
+      <EntityRow {...rowProps} {...subtitleProps} utility={this.utility} />
+    );
   }
 }

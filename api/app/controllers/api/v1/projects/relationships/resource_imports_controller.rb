@@ -3,9 +3,7 @@ module Api
     module Projects
       module Relationships
         # Imports resources into a project
-        class ResourceImportsController < ApplicationController
-
-          before_action :set_project
+        class ResourceImportsController < AbstractProjectChildController
 
           resourceful! ResourceImport do
             @project.resource_imports
@@ -45,9 +43,6 @@ module Api
             )
           end
 
-          def set_project
-            @project = Project.friendly.find(params[:project_id])
-          end
         end
       end
     end

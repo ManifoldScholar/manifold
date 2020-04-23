@@ -201,7 +201,10 @@ class ManifoldContainer extends PureComponent {
           </CSSTransition>
           {fatalError.error ? (
             <div className="global-container">
-              <FatalError fatalError={fatalError} />
+              <FatalError
+                dispatch={this.props.dispatch}
+                fatalError={fatalError}
+              />
             </div>
           ) : (
             <FatalErrorBoundary>{renderRoutes(routes)}</FatalErrorBoundary>

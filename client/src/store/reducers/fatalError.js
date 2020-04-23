@@ -28,11 +28,12 @@ const mapAPIError = ({ status, error, exception, traces }) => {
   };
 };
 
-const mapAuthorizationError = ({ heading, body }) => {
+const mapAuthorizationError = ({ status, heading, body, project }) => {
   return {
-    status: 403, // forbidden!
+    status,
     heading,
     body,
+    project,
     apiTrace: null
   };
 };

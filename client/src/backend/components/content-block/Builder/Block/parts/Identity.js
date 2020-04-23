@@ -31,6 +31,18 @@ export default class ProjectContentBlockIdentity extends PureComponent {
     return !!this.props.entity;
   }
 
+  get access() {
+    if (!this.props.entity) return;
+    switch (this.props.entity.attributes.access) {
+      case "unauthorized":
+        return "Unauthorized";
+      case "authorized":
+        return "Authorized";
+      default:
+        return null;
+    }
+  }
+
   get visible() {
     if (!this.props.entity) return;
     return this.props.entity.attributes.visible;
@@ -57,6 +69,9 @@ export default class ProjectContentBlockIdentity extends PureComponent {
           {this.props.title}
           {this.showVisibility && !this.visible && (
             <span className="content-block__label">Hidden</span>
+          )}
+          {this.access && (
+            <span className="content-block__label">{this.access}</span>
           )}
         </span>
       </header>

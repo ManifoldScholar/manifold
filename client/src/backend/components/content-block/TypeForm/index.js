@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import typeResolver from "../helpers/resolver";
 import setter from "global/components/form/setter";
+import Form from "../../../../global/components/form";
 
 export class ProjectContentTypeForm extends PureComponent {
   static displayName = "Project.Content.TypeForm";
@@ -42,7 +43,20 @@ export class ProjectContentTypeForm extends PureComponent {
   render() {
     const TypeForm = this.typeComponent;
 
-    return <TypeForm {...this.props} />;
+    return (
+      <>
+        <Form.Select
+          label="Access"
+          options={[
+            { label: "Always Visible", value: "always" },
+            { label: "Visible Only When Authorized", value: "authorized" },
+            { label: "Visible Only When Unauthorized ", value: "unauthorized" }
+          ]}
+          name="attributes[access]"
+        />
+        <TypeForm {...this.props} />
+      </>
+    );
   }
 }
 

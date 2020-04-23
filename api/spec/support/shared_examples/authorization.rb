@@ -11,7 +11,7 @@ shared_examples_for "instance abilities" do |klass, abilities|
 
     it "the subject #{verb} #{ability.upcase} the #{klass.to_s.downcase}" do
       skip unless test_ability_for?(ability, abilities)
-      expect(object).send(assertion, self.send(matcher_for_ability(ability), subject))
+      expect(object).send(assertion, send(matcher_for_ability(ability), subject))
     end
   end
 end
@@ -27,7 +27,7 @@ shared_examples_for "class abilities" do |klass, abilities|
 
     it "the subject #{verb} #{ability} any #{klass.to_s.pluralize}" do
       skip unless test_ability_for?(ability, abilities)
-      expect(klass).send(assertion, self.send(matcher_for_ability(ability), subject))
+      expect(klass).send(assertion, send(matcher_for_ability(ability), subject))
     end
   end
 end
@@ -37,7 +37,7 @@ shared_examples_for "unauthenticated user" do |klass|
 
   let(:subject) { anonymous_user }
 
-  context 'when unauthenticated user' do
+  context "when unauthenticated user" do
     context "when #{class_name}'s project is draft" do
       let(:project) { FactoryBot.create(:project, draft: true) }
       let(:object) { FactoryBot.create(class_name.to_sym, project: project) }

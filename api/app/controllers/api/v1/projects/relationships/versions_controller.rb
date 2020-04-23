@@ -2,8 +2,7 @@ module Api
   module V1
     module Projects
       module Relationships
-        class VersionsController < ApplicationController
-          before_action :set_project, only: [:index]
+        class VersionsController < AbstractProjectChildController
 
           resourceful! Version, authorize_options: { except: [:index] } do
             Version.filtered(
@@ -22,11 +21,6 @@ module Api
             )
           end
 
-          private
-
-          def set_project
-            @project = Project.friendly.find(params[:project_id])
-          end
         end
       end
     end

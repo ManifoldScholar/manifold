@@ -2,13 +2,11 @@ import Category from "./category";
 import Collaborators from "./Collaborators";
 import Content from "./Content";
 import Events from "./Events";
-import ProjectEntitlements from "./ProjectEntitlements";
 import ProjectExportations from "./ProjectExportations";
 import General from "./General";
 import Log from "./Log";
 import Metadata from "./Metadata";
 import New from "./New";
-import Permissions from "./Permissions";
 import ProjectPage from "./ProjectPage";
 import Resource from "./resource";
 import ResourceCollections from "./ResourceCollections";
@@ -17,19 +15,18 @@ import Social from "./social";
 import Text from "./text";
 import Texts from "./Texts";
 import Wrapper from "./Wrapper";
+import Access from "./access";
 
 export default {
   Category,
   Collaborators,
   Content,
   Events,
-  ProjectEntitlements,
   ProjectExportations,
   General,
   Log,
   Metadata,
   New,
-  Permissions,
   ProjectPage,
   Resource,
   ResourceCollections,
@@ -37,5 +34,6 @@ export default {
   Social,
   Text,
   Texts,
-  Wrapper
+  Wrapper,
+  Access
 };

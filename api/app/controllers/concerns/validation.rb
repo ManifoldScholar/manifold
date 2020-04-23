@@ -63,8 +63,9 @@ module Validation
                   attachment(:hero), :download_url, attachment(:cover), :remove_hero, :draft,
                   :remove_cover, :download_call_to_action, :publication_date, metadata(Project),
                   :avatar_color, :pending_slug, :tag_list, :dark_mode, :image_credits,
-                  :standalone_mode, :standalone_mode_press_bar_text,
-                  :standalone_mode_press_bar_url, :finished]
+                  :standalone_mode, :standalone_mode_press_bar_text, :restricted_access,
+                  :standalone_mode_press_bar_url, :finished, :restricted_access_heading,
+                  :restricted_access_body, :open_access]
     relationships = [:collaborators, :creators, :contributors, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -138,7 +139,7 @@ module Validation
   def action_callout_params
     params.require(:data)
     attributes = [:title, :kind, :location, :button, :position, :remove_attachment, :url,
-                  attachment(:attachment)]
+                  :visibility, attachment(:attachment)]
     relationships = [:project, :text]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -286,7 +287,7 @@ module Validation
   def content_block_params(type = nil)
     type ||= params.dig(:data, :attributes, :type)
     params.require(:data)
-    attributes = [:position, :visible] << ContentBlock.permitted_attributes_for(type)
+    attributes = [:position, :visible, :access] << ContentBlock.permitted_attributes_for(type)
     relationships = ContentBlock.permitted_relationships_for(type)
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -313,7 +314,10 @@ module Validation
           :library_disabled,
           :all_standalone,
           :library_redirect_url,
-          :home_redirect_url
+          :home_redirect_url,
+          :restricted_access,
+          :restrictedAccessHeading,
+          :restrictedAccessBody
         ]
       },
       {
@@ -527,6 +531,10 @@ module Validation
 
   def subject_filter_params
     params.permit(filter: [:featured, :keyword, :typeahead, :used])[:filter]
+  end
+
+  def entitlement_filter_params
+    params.permit(filter: [:keyword])[:filter] || {}
   end
 
   def project_filter_params

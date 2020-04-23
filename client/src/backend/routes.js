@@ -345,44 +345,35 @@ const routes = {
               helper: p => `/backend/projects/${p}/resource-collections`
             },
             {
-              name: "backendProjectPermissions",
+              name: "backendProjectAccess",
               exact: false,
-              component: "ProjectPermissions",
-              path: "/backend/projects/:projectId/permissions/:id?",
-              helper: p => `/backend/projects/${p}/permissions`,
+              component: "ProjectAccessWrapper",
+              path: "/backend/projects/:projectId/access",
+              helper: p => `/backend/projects/${p}/access`,
               routes: [
                 {
                   name: "backendProjectPermissionsNew",
                   exact: true,
                   component: "PermissionNew",
-                  path: "/backend/projects/:pId/permissions/new",
-                  helper: pId => `/backend/projects/${pId}/permissions/new`
+                  path: "/backend/projects/:pId/access/permissions/new",
+                  helper: pId =>
+                    `/backend/projects/${pId}/access/permissions/new`
                 },
                 {
                   name: "backendProjectPermission",
                   exact: true,
                   component: "PermissionEdit",
-                  path: "/backend/projects/:pId/permissions/:id",
+                  path: "/backend/projects/:pId/access/permissions/:id",
                   helper: (pId, id) =>
-                    `/backend/projects/${pId}/permissions/${id}`
-                }
-              ]
-            },
-            {
-              name: "backendProjectEntitlements",
-              exact: false,
-              component: "ProjectEntitlements",
-              path: "/backend/projects/:projectId/entitlements",
-              helper: projectId =>
-                `/backend/projects/${projectId}/entitlements`,
-              routes: [
+                    `/backend/projects/${pId}/access/permissions/${id}`
+                },
                 {
                   name: "backendProjectEntitlementsNew",
                   exact: true,
                   component: "EntitlementsNew",
-                  path: "/backend/projects/:projectId/entitlements/new",
+                  path: "/backend/projects/:projectId/access/entitlements/new",
                   helper: projectId =>
-                    `/backend/projects/${projectId}/entitlements/new`
+                    `/backend/projects/${projectId}/access/entitlements/new`
                 }
               ]
             },

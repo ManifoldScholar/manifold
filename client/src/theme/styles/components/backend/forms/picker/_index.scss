@@ -1,16 +1,16 @@
-.input-predictive {
+.picker-input {
   position: relative;
 
   &__input {
     display: flex;
     align-items: center;
     width: 100%;
-    border: 1px solid $accentPrimary;
+    border: 1px solid $neutral70;
   }
 
   &__button {
     @include buttonUnstyled;
-    padding: 8px 13px;
+    padding: 8px 6px;
     color: $accentPrimary;
   }
 
@@ -21,8 +21,9 @@
     left: 0;
     width: 100%;
     max-height: 210px;
-    padding: 12px 0;
+    padding: 8px 0;
     overflow: auto;
+    color: $neutral10;
     visibility: hidden;
     background-color: $neutral90;
     border-color: $neutral80;
@@ -32,7 +33,7 @@
     transition: opacity $durationFast $timing
       visibility $durationFast $timing;
 
-    .input-predictive--open & {
+    .picker-input--open & {
       visibility: visible;
       opacity: 1;
     }
@@ -40,17 +41,33 @@
 
   &__result {
     @include templateHead;
-    padding: 0.425em 1.3em;
-    font-size: 20px;
-    color: $neutral70;
+    padding: 8px 17px;
+    color: $neutral10;
     cursor: pointer;
 
     & + & {
       border: 0; // OD
     }
 
-    &:hover, &.highlighted {
-      color: $neutral40;
+    &:hover, &--active {
+      background: $neutral80;
+    }
+
+    &--active.picker-input__result--selected {
+      background: $neutral75;
+    }
+
+    &--selected {
+      background: $neutral85;
+    }
+
+    &--empty {
+      color: $neutral45;
+      cursor: inherit;
+
+      &:hover {
+        background: inherit;
+      }
     }
   }
 
@@ -66,27 +83,23 @@
       }
 
       &::placeholder {
-        color: $accentPrimary;
+        color: $neutral10;
       }
     }
   }
 
-  .submit {
-    @include buttonUnstyled;
-    @include utilityPrimary;
-    display: none;
-    padding: 0.667em 15px;
-    font-size: 12px;
-    color: $accentPrimary;
-    letter-spacing: 0.125em;
-    white-space: nowrap;
+  &__utility {
+    margin-top: 12px;
+    margin-bottom: 8px;
+  }
 
-    @include respond($break50) {
-      display: block;
+  &__list {
+    margin-top: 24px;
+
+    &--tight {
+      margin-top: 0;
     }
+
   }
 
-  + .has-many-list {
-    margin-top: 20px;
-  }
 }

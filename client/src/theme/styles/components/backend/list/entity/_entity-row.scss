@@ -26,6 +26,23 @@
       }
     }
 
+    &--in-well {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      padding: 5px 10px;
+      margin: 10px 10px 0 0;
+      line-height: 1;
+      border: 1px solid $neutralUILight;
+      border-radius: 5px;
+
+      &:last-child {
+        padding-bottom: 5px;
+      }
+
+    }
+
     &--sortable {
       @include draggable;
       padding: 14px 9px 14px 11px;
@@ -124,7 +141,6 @@
     @include templateCopy;
     flex-grow: 1;
     align-self: flex-start;
-    width: 100%;
     font-size: 17px;
     font-weight: $regular;
     hyphens: none;
@@ -348,6 +364,11 @@
       .entity-row__title-inner {
         margin-right: 0;
       }
+    }
+
+    &--in-well {
+      margin-right: 0;
+      font-weight: 400;
     }
 
     button {

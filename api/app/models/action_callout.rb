@@ -16,12 +16,19 @@ class ActionCallout < ApplicationRecord
   validates :title, :kind, :location, presence: true
   validates :text, presence: true, if: :requires_text?
   validates :url, presence: true, if: :requires_url?
+  validates :visibility, presence: true, if: :requires_visibility?
 
   enum kind: {
     link: 0,
     read: 1,
     toc: 2,
     download: 3
+  }
+
+  enum visibility: {
+    always: 0,
+    authorized: 1,
+    unauthorized: 2
   }
 
   enum location: {
@@ -38,6 +45,10 @@ class ActionCallout < ApplicationRecord
 
   def requires_url?
     link?
+  end
+
+  def requires_visibility?
+    link? || download?
   end
 
   def requires_text?

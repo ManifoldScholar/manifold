@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_27_050921) do
+ActiveRecord::Schema.define(version: 2020_04_21_182131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -31,8 +31,52 @@ ActiveRecord::Schema.define(version: 2020_03_27_050921) do
     t.uuid "text_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "visibility", default: 0, null: false
     t.index ["project_id"], name: "index_action_callouts_on_project_id"
     t.index ["text_id"], name: "index_action_callouts_on_text_id"
+  end
+
+  create_table "ahoy_events", force: :cascade do |t|
+    t.bigint "visit_id"
+    t.bigint "user_id"
+    t.string "name"
+    t.jsonb "properties"
+    t.datetime "time"
+    t.date "date"
+    t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
+    t.index ["properties"], name: "index_ahoy_events_on_properties", opclass: :jsonb_path_ops, using: :gin
+    t.index ["user_id"], name: "index_ahoy_events_on_user_id"
+    t.index ["visit_id"], name: "index_ahoy_events_on_visit_id"
+  end
+
+  create_table "ahoy_visits", force: :cascade do |t|
+    t.string "visit_token"
+    t.string "visitor_token"
+    t.bigint "user_id"
+    t.string "ip"
+    t.text "user_agent"
+    t.text "referrer"
+    t.string "referring_domain"
+    t.text "landing_page"
+    t.string "browser"
+    t.string "os"
+    t.string "device_type"
+    t.string "country"
+    t.string "region"
+    t.string "city"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "utm_source"
+    t.string "utm_medium"
+    t.string "utm_term"
+    t.string "utm_content"
+    t.string "utm_campaign"
+    t.string "app_version"
+    t.string "os_version"
+    t.string "platform"
+    t.datetime "started_at"
+    t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
+    t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
   end
 
   create_table "annotations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -170,6 +214,7 @@ ActiveRecord::Schema.define(version: 2020_03_27_050921) do
     t.integer "position"
     t.uuid "project_id"
     t.boolean "visible", default: true, null: false
+    t.integer "access", default: 0, null: false
     t.index ["project_id"], name: "index_content_blocks_on_project_id"
   end
 
@@ -585,12 +630,12 @@ ActiveRecord::Schema.define(version: 2020_03_27_050921) do
     t.string "avatar_content_type_deprecated"
     t.integer "avatar_file_size_deprecated"
     t.datetime "avatar_updated_at_deprecated"
-    t.jsonb "metadata", default: {}
+    t.jsonb "metadata", default: {}, null: false
     t.uuid "creator_id"
     t.date "publication_date"
     t.string "slug"
     t.string "avatar_color", default: "primary"
-    t.jsonb "citations", default: {}
+    t.jsonb "citations", default: {}, null: false
     t.boolean "draft", default: true, null: false
     t.boolean "hide_activity", default: false
     t.citext "sort_title"
@@ -615,8 +660,12 @@ ActiveRecord::Schema.define(version: 2020_03_27_050921) do
     t.text "fingerprint", null: false
     t.jsonb "export_configuration", default: {}, null: false
     t.boolean "restricted_access", default: false, null: false
+    t.string "restricted_access_heading"
+    t.text "restricted_access_body"
+    t.boolean "open_access", default: false, null: false
     t.index "((export_configuration @> '{\"bag_it\": true}'::jsonb))", name: "index_projects_export_configuration_exports_as_bag_it"
     t.index ["fingerprint"], name: "index_projects_on_fingerprint"
+    t.index ["open_access"], name: "index_projects_on_open_access"
     t.index ["restricted_access"], name: "index_projects_on_restricted_access"
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
@@ -779,7 +828,7 @@ ActiveRecord::Schema.define(version: 2020_03_27_050921) do
     t.string "sub_kind"
     t.string "slug"
     t.integer "comments_count", default: 0
-    t.jsonb "metadata", default: {}
+    t.jsonb "metadata", default: {}, null: false
     t.integer "events_count", default: 0
     t.integer "minimum_width"
     t.integer "minimum_height"
@@ -928,7 +977,7 @@ ActiveRecord::Schema.define(version: 2020_03_27_050921) do
     t.string "kind"
     t.uuid "ingestion_source_id"
     t.jsonb "body_json", default: "{}", null: false
-    t.jsonb "citations", default: {}
+    t.jsonb "citations", default: {}, null: false
     t.index ["ingestion_source_id"], name: "index_text_sections_on_ingestion_source_id"
     t.index ["source_identifier"], name: "index_text_sections_on_source_identifier"
     t.index ["text_id"], name: "index_text_sections_on_text_id"
@@ -970,9 +1019,9 @@ ActiveRecord::Schema.define(version: 2020_03_27_050921) do
     t.uuid "start_text_section_id"
     t.integer "position"
     t.string "spine", default: [], array: true
-    t.jsonb "metadata", default: {}
+    t.jsonb "metadata", default: {}, null: false
     t.string "slug"
-    t.jsonb "citations", default: {}
+    t.jsonb "citations", default: {}, null: false
     t.string "section_kind"
     t.integer "events_count", default: 0
     t.jsonb "cover_data", default: {}
@@ -1188,17 +1237,6 @@ ActiveRecord::Schema.define(version: 2020_03_27_050921) do
             WHEN sv.ascending THEN dsv.dynamic_sort_value
             ELSE NULL::character varying
         END);
-  SQL
-  create_view "permissions", sql_definition: <<-SQL
-    SELECT ((((ur.user_id || ':'::text) || r.resource_id) || ':'::text) || (r.resource_type)::text) AS id,
-    ur.user_id,
-    r.resource_id,
-    r.resource_type,
-    array_agg(r.name) AS role_names
-   FROM (roles r
-     JOIN users_roles ur ON ((ur.role_id = r.id)))
-  GROUP BY ur.user_id, r.resource_id, r.resource_type
- HAVING ((r.resource_id IS NOT NULL) AND (r.resource_type IS NOT NULL));
   SQL
   create_view "reading_group_counts", sql_definition: <<-SQL
     SELECT rg.id AS reading_group_id,
@@ -1503,5 +1541,17 @@ UNION ALL
         END AS visibility,
     concat('2', reading_groups.name) AS sort_key
    FROM reading_groups;
+  SQL
+  create_view "permissions", sql_definition: <<-SQL
+    SELECT ((((ur.user_id || ':'::text) || r.resource_id) || ':'::text) || (r.resource_type)::text) AS id,
+    ur.user_id,
+    r.resource_id,
+    r.resource_type,
+    array_agg(r.name) AS role_names
+   FROM (roles r
+     JOIN users_roles ur ON ((ur.role_id = r.id)))
+  WHERE (r.kind = 'scoped'::text)
+  GROUP BY ur.user_id, r.resource_id, r.resource_type
+ HAVING ((r.resource_id IS NOT NULL) AND (r.resource_type IS NOT NULL));
   SQL
 end

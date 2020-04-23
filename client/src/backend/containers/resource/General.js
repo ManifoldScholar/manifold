@@ -71,11 +71,7 @@ export class ResourceGeneralContainer extends PureComponent {
             name="attributes[pendingSlug]"
             placeholder="Enter URL Slug"
           />
-          <Form.TagList
-            label="Tags"
-            name="attributes[tagList]"
-            placeholder="Enter a Tag"
-          />
+          taglist
           <Form.TextArea
             label="Description"
             name="attributes[description]"

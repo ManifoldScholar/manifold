@@ -70,11 +70,13 @@ export default class ListEntities extends PureComponent {
     entityComponent: PropTypes.func.isRequired,
     entityComponentProps: PropTypes.object,
     title: PropTypes.node,
+    instructions: PropTypes.node,
+    preList: PropTypes.node,
     indented: PropTypes.bool,
     titleIcon: PropTypes.string,
     titleStyle: PropTypes.oneOf(["bar", "title", "section"]),
     titleLink: PropTypes.string,
-    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare"]),
+    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
     sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
     showCount: ListEntities.validateShowCounts,
     showCountInTitle: ListEntities.validateShowCounts,
@@ -122,6 +124,10 @@ export default class ListEntities extends PureComponent {
 
   get instructions() {
     return this.props.instructions;
+  }
+
+  get preList() {
+    return this.props.preList;
   }
 
   get entityComponent() {
@@ -205,12 +211,14 @@ export default class ListEntities extends PureComponent {
     const wrapperClassNames = classNames({
       "entity-list": true,
       "entity-list--bare": this.listStyle === "bare",
+      "entity-list--well": this.listStyle === "well",
       "entity-list--indented": this.props.indented
     });
 
     const listClassNames = classNames({
       "entity-list__list": true,
       "entity-list__list--bare": this.listStyle === "bare",
+      "entity-list__list--well": this.listStyle === "well",
       "entity-list__list--grid": this.listStyle === "grid",
       "entity-list__list--tiles": this.listStyle === "tiles",
       "entity-list__list--rows": this.listStyle === "rows",
@@ -246,6 +254,7 @@ export default class ListEntities extends PureComponent {
                   id={`${this.idForInstructionsPrefix}-${id}`}
                 />
               )}
+              {this.preList}
               {this.hasSearch && this.search}
               {(this.hasButtons || this.showCount) && (
                 <div className="entity-list__header">

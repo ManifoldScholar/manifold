@@ -2,9 +2,7 @@ module Api
   module V1
     module Projects
       module Relationships
-        class ContentBlocksController < ApplicationController
-
-          before_action :set_project, only: [:index, :create]
+        class ContentBlocksController < AbstractProjectChildController
 
           resourceful! ContentBlock, authorize_options: { except: [:index] } do
             @project.content_blocks
@@ -28,10 +26,6 @@ module Api
           end
 
           private
-
-          def set_project
-            @project = Project.friendly.find(params[:project_id])
-          end
 
           def location
             api_v1_project_relationships_content_blocks_url(

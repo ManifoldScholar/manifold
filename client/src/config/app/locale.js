@@ -10,6 +10,18 @@ export default {
       "/data/attributes/purpose": "A purpose"
     }
   },
+  notifications: {
+    projectAuthorizationWarning: {
+      heading: "Only authorized users may access this project.",
+      body:
+        "Only users granted permission may view this project's texts, resources, and other content."
+    },
+    projectAuthorizationNotice: {
+      heading: "Access to this project is restricted.",
+      body:
+        "Only users granted permission may view this project's texts, resources, and other content."
+    }
+  },
   event_types: {
     project_created: "Project Created",
     text_added: "Text Added",

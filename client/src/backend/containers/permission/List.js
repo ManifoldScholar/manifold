@@ -49,7 +49,8 @@ export class PermissionContainer extends PureComponent {
       <section>
         {permissions && (
           <EntitiesList
-            title="Manage Permissions"
+            title="Editor Permissions"
+            instructions="Use permissions to specify which users may modify this project in the backend, and the extent to which they can modify it."
             titleStyle="section"
             entities={permissions}
             entityComponent={PermissionRow}
@@ -60,7 +61,7 @@ export class PermissionContainer extends PureComponent {
             buttons={[
               <Button
                 path={lh.link(newUrl, entity.id)}
-                text="Grant new permissions"
+                text="Grant editor permissions"
                 type="add"
                 authorizedTo="createPermissions"
                 authorizedFor={entity}

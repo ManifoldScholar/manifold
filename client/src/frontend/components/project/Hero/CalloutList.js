@@ -8,6 +8,7 @@ export default class ProjectHeroCalloutList extends PureComponent {
 
   static propTypes = {
     callouts: PropTypes.array.isRequired,
+    authorized: PropTypes.bool,
     blockClass: PropTypes.string,
     layoutClass: PropTypes.string,
     visibilityClass: PropTypes.string,
@@ -15,6 +16,7 @@ export default class ProjectHeroCalloutList extends PureComponent {
   };
 
   static defaultProps = {
+    authorized: false,
     showErrors: false
   };
 
@@ -22,12 +24,28 @@ export default class ProjectHeroCalloutList extends PureComponent {
     return this.props.callouts;
   }
 
+  byVisibility(callouts) {
+    const { authorized } = this.props;
+    return callouts.filter(callout => {
+      const { kind, visibility } = callout.attributes;
+      if (!authorized && kind !== "link" && kind !== "download") return false;
+      if (visibility === "always") return true;
+      if (authorized) return visibility === "authorized";
+      if (!authorized) return visibility === "unauthorized";
+      return false;
+    });
+  }
+
   get buttons() {
-    return this.callouts.filter(callout => callout.attributes.button);
+    return this.byVisibility(
+      this.callouts.filter(callout => callout.attributes.button)
+    );
   }
 
   get links() {
-    return this.callouts.filter(callout => !callout.attributes.button);
+    return this.byVisibility(
+      this.callouts.filter(callout => !callout.attributes.button)
+    );
   }
 
   get showErrors() {

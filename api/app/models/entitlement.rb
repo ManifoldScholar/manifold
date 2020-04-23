@@ -1,7 +1,9 @@
 class Entitlement < ApplicationRecord
+
   include Authority::Abilities
   include Concerns::HasStateMachine
   include Concerns::SerializedAbilitiesFor
+  include Filterable
 
   classy_enum_attr :kind, enum: "EntitlementKind", allow_blank: false, default: :unknown
 
@@ -12,7 +14,7 @@ class Entitlement < ApplicationRecord
 
   belongs_to :entitler, inverse_of: :entitlements
   belongs_to :target,   polymorphic: true
-  belongs_to :subject,  polymorphic: true
+  belongs_to :subject, polymorphic: true
 
   has_one :entitling_user, through: :entitler, source: :entity, source_type: "User"
 
@@ -28,6 +30,13 @@ class Entitlement < ApplicationRecord
   scope :expirable, -> { where.not(expires_on: nil) }
   scope :expired, -> { where.not(expired_at: nil) }
   scope :maybe_soon_to_expire, -> { expirable.in_state(:active) }
+
+  scope :by_keyword, ->(keyword) {
+                       joins("LEFT JOIN entitlement_targets et
+                           ON et.target_type = entitlements.target_type
+                           AND et.target_id = entitlements.target_id")
+                         .where("lower(et.name) LIKE :prefix", prefix: "#{keyword}%".downcase)
+                     }
 
   before_validation :infer_kind!
   after_save :check_state!

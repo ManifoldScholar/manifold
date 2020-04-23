@@ -11,6 +11,12 @@ class ContentBlock < ApplicationRecord
   # Ordering
   acts_as_list scope: :project
 
+  enum access: {
+    always: 0,
+    authorized: 1,
+    unauthorized: 2
+  }
+
   delegate :serializer, to: :class
   delegate :available_attributes, to: :class
   delegate :configurable?, to: :class
@@ -109,7 +115,8 @@ class ContentBlock < ApplicationRecord
     end
 
     def configurable?
-      available_attributes.present? || available_relationships.present?
+      true
+      # available_attributes.present? || available_relationships.present?
     end
 
     def orderable?

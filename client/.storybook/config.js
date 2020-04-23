@@ -8,6 +8,7 @@ import manifoldContext from "./decorators/manifoldContext";
 import { withA11y } from "@storybook/addon-a11y";
 import { withKnobs } from "@storybook/addon-knobs";
 import JSXAddon from "storybook-addon-jsx";
+import "focus-visible";
 
 // the storybook theme, not to be confused with the manifold theme, below.
 import theme from "./theme";

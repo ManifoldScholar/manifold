@@ -32,7 +32,8 @@ export default function setter(WrappedComponent) {
         PropTypes.string,
         PropTypes.object,
         PropTypes.bool,
-        PropTypes.number
+        PropTypes.number,
+        PropTypes.array
       ])
     };
 
