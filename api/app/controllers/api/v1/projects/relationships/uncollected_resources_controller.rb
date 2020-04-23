@@ -3,8 +3,7 @@ module Api
     module Projects
       module Relationships
         # Responds with uncollected in a project
-        class UncollectedResourcesController < ApplicationController
-          before_action :set_project, only: [:index]
+        class UncollectedResourcesController < AbstractProjectChildController
 
           resourceful! Resource, authorize_options: { except: [:index] } do
             Project.filtered(
@@ -19,12 +18,6 @@ module Api
             render_multiple_resources(
               @resources
             )
-          end
-
-          private
-
-          def set_project
-            @project = Project.friendly.find(params[:project_id])
           end
 
         end

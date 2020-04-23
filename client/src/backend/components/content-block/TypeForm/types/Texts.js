@@ -60,13 +60,15 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
           </div>
         </div>
         {this.hasCategories && (
-          <Form.HasMany
-            label="Categories"
-            placeholder="Add a Category"
+          <Form.Picker
+            placeholder="Add a Text Category"
+            label="Include Texts in these Categories"
+            optionToLabel={rc => rc.attributes.title}
             name="relationships[includedCategories]"
             options={this.categories}
-            entityLabelAttribute={"title"}
-            wide
+            listStyle="well"
+            showAddRemoveAll
+            listRowComponent="TextCategoryRow"
           />
         )}
       </>

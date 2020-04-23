@@ -51,8 +51,8 @@ class ApplicationController < ActionController::API
     params.dig(:page, :number) || 1
   end
 
-  def with_pagination!(filter_params)
-    filter_params ||= {}
+  def with_pagination!(filter_params = {})
+    filter_params = {} if filter_params.nil?
     return filter_params if params.dig(:no_pagination)
 
     filter_params[:page] = page_number
@@ -101,11 +101,24 @@ class ApplicationController < ActionController::API
   end
 
   def authority_forbidden_resource_instance(error)
+    project_details = nil
+    project = nil
+    project = error.resource if error.resource.is_a?(Project)
+    project = error.resource.project if error.resource.respond_to?(:project)
+    if project&.readable_by?(authority_user)
+      project_details = {
+        id: project.id,
+        slug: project.slug,
+        title: project.title,
+        titleFormatted: project.title_formatted
+      }
+    end
     vars = { resource: error.resource.to_s, action: error.action }
     options = {
       status: authorization_error_status,
       title: I18n.t("controllers.errors.forbidden.instance.title", vars).titlecase,
-      detail: I18n.t("controllers.errors.forbidden.instance.detail", vars)
+      detail: I18n.t("controllers.errors.forbidden.instance.detail", vars),
+      project: project_details
     }
     render json: { errors: build_api_error(options) }, status: authorization_error_status(true)
   end

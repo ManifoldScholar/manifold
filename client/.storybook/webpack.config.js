@@ -1,6 +1,8 @@
 const webpack = require("webpack");
 const DefinePlugin = webpack.DefinePlugin;
-const path = require('path');
+const path = require("path");
+const postcssFocusVisible = require("postcss-focus-visible");
+const postcssCustomProperties = require("postcss-custom-properties");
 
 // Export a function. Accept the base config as the only param.
 module.exports = async ({ config, mode }) => {
@@ -11,8 +13,25 @@ module.exports = async ({ config, mode }) => {
   // Make whatever fine-grained changes you need
   config.module.rules.push({
     test: /\.scss$/,
-    loaders: ['style-loader', 'css-loader', 'sass-loader'],
-    include: path.resolve(__dirname, '../'),
+    loaders: [
+      "style-loader",
+      "css-loader",
+      {
+        loader: "postcss-loader",
+        options: {
+          syntax: "postcss-scss",
+          plugins: () => [
+            require("autoprefixer"),
+            postcssFocusVisible({
+              preserve: false
+            }),
+            postcssCustomProperties()
+          ]
+        }
+      },
+      "sass-loader"
+    ],
+    include: path.resolve(__dirname, "../")
   });
 
   config.module.rules.push({
@@ -24,7 +43,11 @@ module.exports = async ({ config, mode }) => {
         options: "importLoaders=2"
       },
       {
-        loader: path.resolve(__dirname, '../',"webpack/loaders/icon-font-loader"),
+        loader: path.resolve(
+          __dirname,
+          "../",
+          "webpack/loaders/icon-font-loader"
+        ),
         options: {
           fileName: `build/assets/[name][ext]`
         }
@@ -40,11 +63,22 @@ module.exports = async ({ config, mode }) => {
     })
   );
 
-  const sassNoOp = path.resolve(__dirname, '../', "src/utils/plugins/null.scss");
-  const pluginNoOp = path.resolve(__dirname, '../', "src/utils/plugins/missingPluginsManifest.js");
+  const sassNoOp = path.resolve(
+    __dirname,
+    "../",
+    "src/utils/plugins/null.scss"
+  );
+  const pluginNoOp = path.resolve(
+    __dirname,
+    "../",
+    "src/utils/plugins/missingPluginsManifest.js"
+  );
 
   // console.log(config.resolve);
-  config.resolve.modules =  [path.resolve(__dirname, '../', "src"), "node_modules"];
+  config.resolve.modules = [
+    path.resolve(__dirname, "../", "src"),
+    "node_modules"
+  ];
   config.resolve.alias.userVariables$ = sassNoOp;
   config.resolve.alias.userStyles$ = sassNoOp;
   config.resolve.alias.plugins$ = pluginNoOp;

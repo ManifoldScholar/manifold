@@ -22,13 +22,15 @@ class FormSwitch extends Component {
       false: PropTypes.string
     }),
     focusOnMount: PropTypes.bool,
+    submitOnChange: PropTypes.bool,
     wide: PropTypes.bool,
     theme: PropTypes.oneOf(["default", "checkbox"])
   };
 
   static defaultProps = {
     labelPos: "above",
-    theme: "default"
+    theme: "default",
+    submitOnChange: false
   };
 
   componentDidMount() {
@@ -102,8 +104,14 @@ class FormSwitch extends Component {
   }
 
   handleChange = () => {
-    if (this.props.customValues) return this.handleCustomValues();
-    return this.handleBooleans();
+    if (this.props.customValues) {
+      this.handleCustomValues();
+    } else {
+      this.handleBooleans();
+    }
+    if (this.props.submitOnChange && this.props.triggerSubmit) {
+      this.props.triggerSubmit();
+    }
   };
 
   handleCustomValues() {

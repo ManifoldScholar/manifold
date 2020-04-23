@@ -27,11 +27,7 @@ describe("backend/components/resource/form/KindAttributes", () => {
       def("kind", () => kind);
 
       it("matches the snapshot when rendered", () => {
-        expect(render($root)).toMatchSnapshot();
-      });
-
-      it("is not null when rendered", () => {
-        expect(render($root).html).not.toBeNull();
+        expect(render($withApp($root)).html()).toMatchSnapshot();
       });
     });
   });

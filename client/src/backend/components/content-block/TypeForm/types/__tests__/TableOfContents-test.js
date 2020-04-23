@@ -12,7 +12,7 @@ describe("backend/components/content-block/TypeForm/types/TableOfContents", () =
     />
   ));
 
-  it("matches the snapshot", () => {
-    expect(render($root)).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 });

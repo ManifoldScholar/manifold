@@ -2,6 +2,7 @@ import { ApiClient } from "api";
 import { constantizeMeta } from "utils/entityUtils";
 import get from "lodash/get";
 import has from "lodash/has";
+import { entityStoreActions } from "actions";
 
 function sendRequest(request, authToken) {
   const client = new ApiClient();
@@ -93,7 +94,6 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     // loading.
     const withState = { state: 1, promise: requestPromise };
     const requestPayload = { ...action.payload, ...withState };
-
     let newMeta = action.meta;
     if (!Array.isArray(newMeta)) newMeta = [action.meta];
 
@@ -165,6 +165,33 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
       requestPromise.then(
         () => {
           dispatch(buildClearsAction(requestPayload.clears));
+        },
+        () => {
+          // noop
+        }
+      );
+    }
+
+    // Replay a previous API call. Useful for updating a collection after creating
+    // or removing an entity.
+    if (requestPayload.refreshes) {
+      requestPromise.then(
+        () => {
+          const refreshResponse = get(
+            state,
+            `entityStore.responses.${requestPayload.refreshes}`
+          );
+          if (
+            !refreshResponse ||
+            !refreshResponse.loaded ||
+            !refreshResponse.request
+          )
+            return;
+          const refreshAction = entityStoreActions.request(
+            refreshResponse.request,
+            requestPayload.refreshes
+          );
+          dispatch(refreshAction);
         },
         () => {
           // noop

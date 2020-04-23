@@ -5,7 +5,7 @@ class ProjectAuthorizer < ApplicationAuthorizer
     :manage_permissions, :create_permissions, :manage_texts,
     :create_texts, :manage_twitter_queries, :create_twitter_queries,
     :manage_events, :manage_socials, :update_makers, :manage_project_exportations,
-    :create_entitlements, :manage_entitlements,
+    :create_entitlements, :manage_entitlements, :fully_read,
     :create_project_exportations
   ]
 
@@ -18,7 +18,6 @@ class ProjectAuthorizer < ApplicationAuthorizer
   end.freeze
 
   # First, we check to see if the project is a draft. If so, {#drafts_readable_by? it must be readable}.
-  # Second, we check if it has restricted access. If so, {#fully_readable_by? the user must be able to access it}.
   # Otherwise, we allow a project to be read.
   #
   # @see #drafts_readable_by
@@ -27,7 +26,6 @@ class ProjectAuthorizer < ApplicationAuthorizer
   # @param [Hash] _options
   def readable_by?(user, options = {})
     return drafts_readable_by?(user, options) if resource.draft?
-    return fully_readable_by?(user, options) if resource.restricted_access?
 
     true
   end
@@ -105,8 +103,14 @@ class ProjectAuthorizer < ApplicationAuthorizer
   # @see RoleName.full_read_access
   # @param [User] user
   # @param [Hash] _options
-  def fully_readable_by?(user, _options = {})
-    return true unless resource.restricted_access?
+  def fully_readable_by?(user, options = {})
+    return false unless readable_by?(user, options)
+
+    if Settings.instance.general["restricted_access"]
+      return true if resource.open_access?
+    else
+      return true unless resource.restricted_access?
+    end
 
     has_any_role? user, *RoleName.full_read_access
   end

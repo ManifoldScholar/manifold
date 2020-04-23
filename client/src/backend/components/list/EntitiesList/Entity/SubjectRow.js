@@ -7,8 +7,13 @@ export default class SubjectRow extends PureComponent {
   static displayName = "EntitiesList.Entity.SubjectRow";
 
   static propTypes = {
+    clickable: PropTypes.bool,
     entity: PropTypes.object,
     active: PropTypes.string
+  };
+
+  static defaultProps = {
+    clickable: true
   };
 
   get subject() {
@@ -28,14 +33,17 @@ export default class SubjectRow extends PureComponent {
   }
 
   render() {
-    return (
-      <EntityRow
-        {...this.props}
-        onRowClick={lh.link("backendSettingsSubject", this.id)}
-        rowClickMode="block"
-        title={this.name}
-        active={this.active}
-      />
-    );
+    const { clickable } = this.props;
+
+    const additionalProps = {
+      title: this.name,
+      active: this.active
+    };
+    if (clickable) {
+      additionalProps.onRowClick = lh.link("backendSettingsSubject", this.id);
+      additionalProps.rowClickMode = "block";
+    }
+
+    return <EntityRow {...this.props} {...additionalProps} />;
   }
 }

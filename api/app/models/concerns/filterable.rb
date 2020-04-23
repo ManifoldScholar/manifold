@@ -31,7 +31,7 @@ module Filterable
 
     def filter_with_elasticsearch(params)
       ids = distinct.reorder(nil).pluck :id
-      return by_pagination(params[:page], params[:per_page]) if !params.key?(:keyword) || ids.blank?
+      return by_pagination(params[:page], params[:per_page]) if !params.key?(:keyword) || ids.blank? || respond_to?(:by_keyword)
 
       search_query = params.dig :keyword || "*"
       filter = Search::FilterScope.new do |f|

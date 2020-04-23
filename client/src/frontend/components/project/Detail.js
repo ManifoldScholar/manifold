@@ -6,6 +6,8 @@ import Hero from "./Hero";
 import ContentBlock from "frontend/components/content-block";
 import { FrontendModeContext } from "helpers/contexts";
 import withSettings from "hoc/with-settings";
+import AccessDenied from "./AccessDenied";
+import Authorize from "hoc/authorize";
 
 class Detail extends Component {
   static displayName = "Project.Detail";
@@ -28,11 +30,17 @@ class Detail extends Component {
   render() {
     const { project } = this.props;
     if (!project) return <LoadingBlock />;
-
     return (
       <>
         <section>
           <Hero project={project} />
+          <Authorize
+            entity={project}
+            ability="fullyRead"
+            successBehavior="hide"
+          >
+            <AccessDenied project={project} />
+          </Authorize>
           <ContentBlock project={project} />
         </section>
         {!this.context.isStandalone && !this.isLibraryDisabled && (

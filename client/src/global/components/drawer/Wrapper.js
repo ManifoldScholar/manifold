@@ -101,7 +101,7 @@ export default class DrawerWrapper extends PureComponent {
   }
 
   componentDidMount() {
-    document.addEventListener("keyup", this.handleLeaveKey);
+    window.addEventListener("keyup", this.handleLeaveKey);
     this.enableScrollLock();
   }
 
@@ -123,7 +123,7 @@ export default class DrawerWrapper extends PureComponent {
   }
 
   componentWillUnmount() {
-    document.removeEventListener("keyup", this.handleLeaveKey);
+    window.removeEventListener("keyup", this.handleLeaveKey);
     this.disableScrollLock();
   }
 

@@ -65,6 +65,7 @@ button,
 [role='button'],
 a,
 input,
+select,
 [data-react-beautiful-dnd-drag-handle] {
   @include outlineOnFocusVisible;
 }

@@ -94,6 +94,15 @@
       }
     }
 
+    &--well {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      padding: 10px 20px 20px;
+      background-color: $neutral95;
+      border-radius: 10px;
+    }
+
     &--grid {
       $grid-item-min-width: 192px;
 
@@ -212,5 +221,16 @@
     font-size: 17px;
     font-style: italic;
     border-bottom: 1px solid $neutralTextDark;
+
+    &--well {
+      @include utilityPrimary;
+      padding: 31px 25px;
+      font-size: 14px;
+      font-style: normal;
+      background-color: $neutral95;
+      border: none;
+      border-radius: 10px;
+    }
+
   }
 }

@@ -2,11 +2,14 @@ module Api
   module V1
     module Projects
       module Relationships
-        class EntitlementsController < ApplicationController
+        class EntitlementsController < AbstractProjectChildController
           include Api::V1::BuildsScopedEntitlements
 
           resourceful! Entitlement do
-            Entitlement.where(subject_type: "Project", subject_id: params[:project_id])
+            Entitlement.filtered(
+              with_pagination!(entitlement_filter_params),
+              scope: Entitlement.where(subject_type: "Project", subject_id: params[:project_id])
+            )
           end
 
           def index
@@ -18,8 +21,6 @@ module Api
           end
 
           def create
-            @project = Project.friendly.find params[:project_id]
-
             @entitlement = build_entitlement_for @project
 
             inputs = scoped_entitlement_inputs_for @entitlement
@@ -27,7 +28,7 @@ module Api
             outcome = Entitlements::ScopedCreate.run inputs
 
             if outcome.valid?
-              render_single_resource outcome.result, location: location_for(outcome.result)
+              render_single_resource outcome.result, location: location_for(outcome.result), include: [:target]
             else
               respond_with_errors outcome
             end

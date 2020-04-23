@@ -56,22 +56,25 @@ export class PermissionForm extends PureComponent {
     );
   }
 
+  fetchUsers = () => {
+    return usersAPI.index({ order: "first_name, last_name" });
+  };
+
   renderUser(props) {
     if (props.permission) {
       return this.renderSelectedUser(props.permission.relationships.user);
     }
 
     return (
-      <Form.BelongsTo
-        readOnly={this.props.showUserInput}
-        renderAttribute="fullName"
-        fetch={usersAPI.index}
-        fetchOptions={{ order: "first_name, last_name" }}
-        inputLabel="Select User"
-        selectedLabel={this.labelUser}
-        relationName="user"
-        focusOnMount={!this.props.showUserInput}
-        searchable={false}
+      <Form.Picker
+        label="User"
+        listStyle={"well"}
+        name="relationships[user]"
+        options={this.fetchUsers}
+        optionToLabel={u => u.attributes.fullName}
+        placeholder="Select a User"
+        predictive
+        listRowComponent="UserRow"
       />
     );
   }
@@ -98,7 +101,6 @@ export class PermissionForm extends PureComponent {
           {this.renderUser(this.props)}
           <Form.SwitchArray
             name="attributes[roleNames]"
-            label="Permissions"
             options={[
               { label: "Can modify project?", value: "project_editor" },
               {

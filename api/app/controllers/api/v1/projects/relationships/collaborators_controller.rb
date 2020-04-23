@@ -3,9 +3,7 @@ module Api
     module Projects
       module Relationships
         # Responds with collaborators in a project
-        class CollaboratorsController < ApplicationController
-
-          before_action :set_project
+        class CollaboratorsController < AbstractProjectChildController
 
           resourceful! Collaborator, authorize_options: { except: [:index, :show] } do
             @project.collaborators
@@ -29,10 +27,6 @@ module Api
 
           def load_collaborator
             @project.collaborators.find(params[:id])
-          end
-
-          def set_project
-            @project = Project.friendly.find(params[:project_id])
           end
 
         end

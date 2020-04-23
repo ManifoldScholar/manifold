@@ -14,7 +14,7 @@ describe("withFormOptions HOC", () => {
   const FormOptionsComponent = withFormOptions(MockOptionsComponent);
   const setup = (mock, options = []) => {
     const wrapper = mount(
-      <FormOptionsComponent name="foo" set={mock} options={options} />
+      $withApp(<FormOptionsComponent name="foo" set={mock} options={options} />)
     );
     const child = wrapper.find(MockOptionsComponent).instance();
     return { child };

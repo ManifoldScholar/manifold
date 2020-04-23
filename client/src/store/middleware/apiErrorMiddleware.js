@@ -8,7 +8,7 @@ function isApiError(error) {
 }
 
 function isAuthorizationError(error) {
-  return error.status === 403;
+  return error.status === 403 || error.status === 401;
 }
 
 function isFatal(error) {
@@ -41,19 +41,31 @@ function firstFatalError(action) {
 
 function fatalAuthorizationError(error) {
   return fatalErrorActions.setFatalError(
-    { heading: error.title, body: error.detail },
+    {
+      heading: error.title,
+      body: error.detail,
+      status: error.status,
+      project: error.project
+    },
     fatalErrorActions.types.authorization
   );
 }
 
-function notifyApiErrors(dispatch, action) {
+function redirectIfUnauthorized(dispatch, action) {
   const errors = apiErrors(action);
   if (errors.length === 0) return;
   errors.forEach(error => {
     if (isAuthorizationError(error)) {
       return dispatch(fatalAuthorizationError(error));
     }
+  });
+}
 
+function notifyIfOtherApiError(dispatch, action) {
+  const errors = apiErrors(action);
+  if (errors.length === 0) return;
+  errors.forEach(error => {
+    if (isAuthorizationError(error)) return;
     dispatch(
       notificationActions.addNotification({
         id: error.id,
@@ -77,7 +89,9 @@ export default function entityStoreMiddleware({ dispatch, getStateIgnored }) {
   return next => action => {
     if (!isApiResponse(action)) return next(action);
     if (get(action, "payload.suppressErrors")) return next(action);
-    notifyApiErrors(dispatch, action);
+
+    redirectIfUnauthorized(dispatch, action);
+    notifyIfOtherApiError(dispatch, action);
     checkForFatalErrors(dispatch, action);
     return next(action);
   };

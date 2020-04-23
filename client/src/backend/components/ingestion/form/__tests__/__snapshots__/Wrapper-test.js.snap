@@ -790,6 +790,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                       "source": Object {},
                     }
                   }
+                  style={Object {}}
                   suppressModelErrors={false}
                   update={[Function]}
                 >
@@ -802,6 +803,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                       className="form-secondary"
                       data-id="submit"
                       onSubmit={[Function]}
+                      style={Object {}}
                     >
                       <HigherOrder.FetchData('ProjectDetail.Text.Ingestion.Form.Upload)
                         history={
@@ -835,6 +837,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                           sessionKey="attributes[something]"
                           sourceModel={Object {}}
                           submitKey={null}
+                          triggerSubmit={[Function]}
                         >
                           <ProjectDetail.Text.Ingestion.Form.Upload
                             getModelValue={[Function]}
@@ -848,6 +851,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             sessionKey="attributes[something]"
                             setOther={[Function]}
                             submitKey={null}
+                            triggerSubmit={[Function]}
                           >
                             <div>
                               <Form.Header
@@ -938,6 +942,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   set={[Function]}
                                   sourceModel={Object {}}
                                   submitKey={null}
+                                  triggerSubmit={[Function]}
                                   value={null}
                                 >
                                   <Form.TusUpload
@@ -974,6 +979,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     set={[Function]}
                                     setOther={[Function]}
                                     submitKey={null}
+                                    triggerSubmit={[Function]}
                                     value={null}
                                   >
                                     <mockConstructor>
@@ -1019,6 +1025,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                         sessionKey="attributes[something]"
                                         setOther={[Function]}
                                         submitKey={null}
+                                        triggerSubmit={[Function]}
                                         updateValue={[Function]}
                                         uploadError={null}
                                         value={null}
@@ -1233,6 +1240,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                       sessionKey="attributes[something]"
                                       sourceModel={Object {}}
                                       submitKey={null}
+                                      triggerSubmit={[Function]}
                                       value={null}
                                     >
                                       <Form.BaseInput
@@ -1251,6 +1259,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                         sessionKey="attributes[something]"
                                         setOther={[Function]}
                                         submitKey={null}
+                                        triggerSubmit={[Function]}
                                         value={null}
                                       >
                                         <Errorable

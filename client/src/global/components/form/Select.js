@@ -23,7 +23,7 @@ class FormSelect extends Component {
       PropTypes.shape({
         value: PropTypes.any.isRequired,
         label: PropTypes.string.isRequired,
-        internalValue: PropTypes.any.isRequired
+        key: PropTypes.string.isRequired
       })
     ).isRequired,
     focusOnMount: PropTypes.bool
@@ -54,7 +54,7 @@ class FormSelect extends Component {
   render() {
     const options = this.props.options.map(option => {
       return (
-        <option key={option.internalValue} value={option.internalValue}>
+        <option key={option.key} value={option.value}>
           {option.label}
         </option>
       );

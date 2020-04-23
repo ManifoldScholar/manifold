@@ -5,6 +5,10 @@ import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
 import config from "config";
 import IconComposer from "global/components/utility/IconComposer";
+import { fatalErrorActions, notificationActions } from "actions";
+import has from "lodash/has";
+import lh from "helpers/linkHandler";
+import { Redirect } from "react-router-dom";
 
 export default class FatalError extends PureComponent {
   static propTypes = {
@@ -14,7 +18,8 @@ export default class FatalError extends PureComponent {
     }).isRequired,
     headerLineOne: PropTypes.string.isRequired,
     headerLineTwo: PropTypes.string.isRequired,
-    dismiss: PropTypes.func
+    dismiss: PropTypes.func,
+    dispatch: PropTypes.func
   };
 
   static defaultProps = {
@@ -25,6 +30,20 @@ export default class FatalError extends PureComponent {
   get error() {
     const { error } = this.props.fatalError;
     return error;
+  }
+
+  get type() {
+    const { type } = this.props.fatalError;
+    return type;
+  }
+
+  get isAuthorizationError() {
+    return this.error && this.type === fatalErrorActions.types.authorization;
+  }
+
+  get isProjectAuthorizationError() {
+    if (!this.isAuthorizationError) return false;
+    return has(this.error, "project.id");
   }
 
   get apiTrace() {
@@ -42,8 +61,33 @@ export default class FatalError extends PureComponent {
     return this.error.clientTraceTruncate;
   }
 
+  renderProjectAuthorizationRedirect() {
+    const url = lh.link("frontendProjectDetail", this.error.project.slug);
+    if (this.props.dispatch) {
+      this.props.dispatch(
+        notificationActions.addNotification({
+          id: "projectAuthorizationError",
+          level: 1,
+          heading:
+            config.app.locale.notifications.projectAuthorizationWarning.heading
+        })
+      );
+    }
+
+    return (
+      <Redirect
+        to={{
+          pathname: url,
+          state: { projectAuthorizationError: this.error }
+        }}
+      />
+    );
+  }
+
   render() {
     if (!this.props.fatalError) return null;
+    if (this.isProjectAuthorizationError)
+      return this.renderProjectAuthorizationRedirect();
     const { error } = this.props.fatalError;
     const showDetail = config.environment.isDevelopment;
 

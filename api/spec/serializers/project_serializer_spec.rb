@@ -83,9 +83,9 @@ RSpec.describe V1::ProjectSerializer do
       end
     end
 
-    context "when params includes a current_user" do
+    context "when params includes a authorized_user" do
       let(:admin) { FactoryBot.create(:user, :admin) }
-      let(:params) { { current_user: admin, full: true } }
+      let(:params) { { authority_user: admin, full: true } }
       let(:subject) { described_class.new(object, include: [:texts], params: params) }
 
       it "has a populated abilities hash" do

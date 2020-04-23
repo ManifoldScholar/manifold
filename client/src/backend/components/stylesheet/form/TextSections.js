@@ -47,16 +47,14 @@ export class StylesheetTextSections extends PureComponent {
     if (!stylesheet) return null;
 
     return (
-      <Form.HasMany
-        label="Text Sections"
-        placeholder="Add a Text Section"
+      <Form.Picker
+        label="Apply to these text sections"
+        placeholder={"Add a text section"}
         name="relationships[textSections]"
-        fetch={this.fetchTextSections}
-        entities={stylesheet.relationships.textSections}
-        entityLabelAttribute={"name"}
-        errors={get(this.props, "updateTextSections.errors")}
-        searchable={false}
-        wide
+        optionToLabel={t => t.attributes.name}
+        options={this.fetchTextSections}
+        rowProps={{ namePath: "attributes.title" }}
+        showAddRemoveAll
       />
     );
   }

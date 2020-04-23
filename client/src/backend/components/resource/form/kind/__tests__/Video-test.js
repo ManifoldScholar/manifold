@@ -8,15 +8,15 @@ describe("backend/components/resource/form/kind/Video", () => {
     <Video getModelValue={$getModelValue} sourceModel={$resource} />
   ));
 
-  it("matches the snapshot", () => {
-    expect(shallow($root)).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 
   describe("when sub kind is external_video", () => {
     def("kind", () => "external_video");
 
     it("matches the snapshot when rendered", () => {
-      expect(render($root)).toMatchSnapshot();
+      expect(render($withApp($root)).html()).toMatchSnapshot();
     });
   });
 });

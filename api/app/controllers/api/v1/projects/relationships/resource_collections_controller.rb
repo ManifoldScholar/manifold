@@ -3,9 +3,7 @@ module Api
     module Projects
       module Relationships
         # Responds with resources in a project
-        class ResourceCollectionsController < ApplicationController
-
-          before_action :set_project, only: [:index, :create]
+        class ResourceCollectionsController < AbstractProjectChildController
 
           resourceful! ResourceCollection, authorize_options: { except: [:index] } do
             ResourceCollection.filtered(
@@ -31,11 +29,6 @@ module Api
             render_single_resource @collection, location: location
           end
 
-          private
-
-          def set_project
-            @project = Project.friendly.find(params[:project_id])
-          end
         end
       end
     end

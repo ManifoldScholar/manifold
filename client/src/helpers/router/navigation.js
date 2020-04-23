@@ -175,17 +175,10 @@ class Navigation {
         args
       },
       {
-        label: "Permissions",
-        route: "backendProjectPermissions",
+        label: "Access",
+        route: "backendProjectAccess",
         entity: project,
-        ability: "managePermissions",
-        args
-      },
-      {
-        label: "Entitlements",
-        route: "backendProjectEntitlements",
-        entity: project,
-        ability: "manageEntitlements",
+        ability: "update",
         args
       },
       {

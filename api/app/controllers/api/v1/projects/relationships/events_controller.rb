@@ -4,8 +4,7 @@ module Api
     module Projects
       module Relationships
         # Responds with events in a project
-        class EventsController < ApplicationController
-          before_action :set_project, only: [:index]
+        class EventsController < AbstractProjectChildController
 
           resourceful! Event, authorize_options: { except: [:index] } do
             Event.filtered(
@@ -23,11 +22,6 @@ module Api
             )
           end
 
-          private
-
-          def set_project
-            @project = Project.friendly.find(params[:project_id])
-          end
         end
       end
     end

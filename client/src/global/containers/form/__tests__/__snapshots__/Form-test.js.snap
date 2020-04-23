@@ -7,8 +7,10 @@ exports[`global/containers/form/Form matches the snapshot 1`] = `
     when={false}
   />
   <form
+    className="form-secondary"
     data-id="submit"
     onSubmit={[Function]}
+    style={Object {}}
   >
     <ContextProvider
       value={
@@ -502,6 +504,7 @@ exports[`global/containers/form/Form matches the snapshot 1`] = `
             "type": "projects",
           },
           "submitKey": null,
+          "triggerSubmit": [Function],
         }
       }
     />

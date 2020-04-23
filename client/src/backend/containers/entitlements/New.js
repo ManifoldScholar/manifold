@@ -15,7 +15,10 @@ export default class EntitlementNew extends PureComponent {
     return (
       <section>
         <Navigation.DrawerHeader title="Grant Entitlements" />
-        <Form entity={this.props.entity} history={this.props.history} />
+        <Form
+          entity={this.props.entity}
+          redirectAfterSuccess={this.props.closeUrl}
+        />
       </section>
     );
   }
