@@ -1,11 +1,10 @@
 import React, { PureComponent } from "react";
 import * as EntitiesList from "backend/components/list/EntitiesList";
-import withScreenReaderStatus from "hoc/with-screen-reader-status";
 import Utility from "global/components/utility";
 import has from "lodash/has";
 import isFunction from "lodash/isFunction";
 
-class FormHasManyList extends PureComponent {
+export default class FormHasManyList extends PureComponent {
   static displayName = "Form.Picker.List";
 
   static propTypes = {};
@@ -97,5 +96,3 @@ class FormHasManyList extends PureComponent {
     );
   }
 }
-
-export default withScreenReaderStatus(FormHasManyList);
