@@ -439,8 +439,13 @@ export class PickerComponent extends PureComponent {
       error: `${id}-picker-error`,
       textBox: `${id}-picker-textbox`,
       listBox: `${id}-picker-listbox`,
-      comboBox: `${id}-picker-combobox`
+      option: `${id}-picker-option`
     };
+  }
+
+  activeOptionId(formId) {
+    if (!this.activeOptionFromState) return null;
+    return `${this.ids(formId).option}-${this.activeOptionFromState.key}`;
   }
 
   updateSearchInputValue(searchInputValue) {
@@ -553,24 +558,18 @@ export class PickerComponent extends PureComponent {
                 />
               )}
               <div className={wrapperClasses}>
-                <label id={ids.label} htmlFor={ids.textBox}>
-                  {label}
-                </label>
+                <label id={ids.label}>{label}</label>
                 <div
                   ref={this.inputWrapperRef}
-                  id={ids.comboBox}
                   role="combobox"
-                  aria-controls={ids.textBox}
-                  aria-expanded={this.hasOptions}
-                  aria-owns={(this.isListBoxVisible
-                    ? [ids.textBox]
-                    : [ids.textBox, ids.listBox]
-                  ).join(",")}
+                  aria-expanded={this.isListBoxVisible}
+                  aria-owns={ids.listBox}
                   aria-haspopup="listbox"
                   className="picker-input__input"
                 >
                   <input
                     ref={this.searchInputRef}
+                    id={ids.textBox}
                     className="picker-input__text-input text-input"
                     type="text"
                     onClick={this.onSearchInputClick}
@@ -581,10 +580,10 @@ export class PickerComponent extends PureComponent {
                     placeholder={placeholder}
                     onKeyDown={this.listenForListBoxNavigation}
                     onKeyUp={this.stopEscapePropagation}
-                    aria-labelledby={this.ariaLabelledBy}
-                    aria-describedby={this.ariaDescribedBy}
+                    aria-labelledby={ids.label}
                     aria-autocomplete="list"
-                    aria-controls={`${id}-listbox`}
+                    aria-controls={ids.listBox}
+                    aria-activedescendant={this.activeOptionId(id)}
                   />
                   {this.isResetButtonVisible && (
                     <button
@@ -634,7 +633,6 @@ export class PickerComponent extends PureComponent {
                   >
                     {options.length === 0 && (
                       <li
-                        tabIndex="-1"
                         id="no-options"
                         className="picker-input__result picker-input__result--empty"
                       >
@@ -651,8 +649,7 @@ export class PickerComponent extends PureComponent {
                         <li
                           key={option.key}
                           role="option"
-                          tabIndex="-1"
-                          id={option.key}
+                          id={`${ids.option}-${option.key}`}
                           aria-selected={selected}
                           className={classNames("picker-input__result", {
                             "picker-input__result--selected": selected,
