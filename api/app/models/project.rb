@@ -410,6 +410,7 @@ class Project < ApplicationRecord
 
     private
 
+    # rubocop:disable Metrics/AbcSize
     # This creates a case statement to be supplied to `where`.
     #
     # * If the project is a draft, only show for users with draft access roles
@@ -430,6 +431,7 @@ class Project < ApplicationRecord
         stmt.else(true)
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     # @see .arel_with_roles_for
     # @param [User] user

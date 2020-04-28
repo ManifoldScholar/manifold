@@ -118,9 +118,6 @@ Lint/ScriptPermission:
 Naming/AccessorMethodName:
   Enabled: false
 
-Naming/PredicateName:
-  Enabled: false
-
 Naming/UncommunicativeMethodParamName:
   AllowedNames:
     - 'as'
