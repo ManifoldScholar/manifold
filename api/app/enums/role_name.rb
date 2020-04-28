@@ -237,9 +237,10 @@ class RoleName::ProjectResourceEditor < RoleName
 end
 
 class RoleName::ProjectAuthor < RoleName
-  any_editor!
-
   scoped!
+
+  provides_draft_access!
+  provides_full_read_access!
 end
 
 class RoleName::Reader < RoleName

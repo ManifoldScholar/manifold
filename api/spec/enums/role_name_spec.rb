@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe RoleName do
   subject { described_class.new }
@@ -82,7 +82,7 @@ RSpec.describe RoleName do
     it { is_expected.not_to be_an_entitlement }
     it { is_expected.to have_expected_resource }
     it { is_expected.not_to be_visible_to_admin }
-    it { is_expected.to be_visible_to_editor }
+    it { is_expected.not_to be_visible_to_editor }
     it { is_expected.not_to be_applicable_for project_author }
     it { is_expected.to be_applicable_for_kind project_author }
   end
