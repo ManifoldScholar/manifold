@@ -492,6 +492,7 @@ exports[`frontend/components/project/Following matches the snapshot 1`] = `
         "type": "projects",
       }
     }
+    renderLiveRegion={[Function]}
     setScreenReaderStatus={[Function]}
   />
 </Fragment>

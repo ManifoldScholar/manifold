@@ -9,6 +9,7 @@ exports[`frontend/components/project-list/Filters matches the snapshot 1`] = `
     role="status"
   />
   <ProjectList.Filters
+    renderLiveRegion={[Function]}
     setScreenReaderStatus={[Function]}
     subjects={
       Array [
