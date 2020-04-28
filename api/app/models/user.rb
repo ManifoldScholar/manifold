@@ -159,7 +159,7 @@ class User < ApplicationRecord
     # @param [#project] subject
     # @return [ActiveRecord::Relation<User>]
     def receiving_comment_notifications_for(subject)
-      by_cached_role(:admin, :editor).or(unscoped.where(id: subject.project.permitted_editors.select(:id)))
+      by_cached_role(:admin, :editor).or(unscoped.where(id: subject.project.permitted_editors_and_authors.select(:id)))
     end
   end
 

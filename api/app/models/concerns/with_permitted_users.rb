@@ -13,6 +13,10 @@ module WithPermittedUsers
     after_create :grant_project_editor_role!
   end
 
+  def permitted_editors_and_authors
+    permitted_users_for_role(EDITOR_ROLES + [RoleName::ProjectAuthor.new.to_sym])
+  end
+
   def permitted_editors
     permitted_users_for_role EDITOR_ROLES
   end

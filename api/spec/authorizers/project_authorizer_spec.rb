@@ -267,10 +267,40 @@ RSpec.describe "Project Abilities", :authorizer do
   end
 
   context "with entitlements" do
-    let!(:user) { FactoryBot.create :user }
+    let!(:user) { FactoryBot.create :user, *user_traits }
+    let(:user_traits) do
+      []
+    end
     let!(:project) { FactoryBot.create :project, :with_restricted_access }
 
     subject { user }
+
+    context "when the user is an author of the project" do
+      before do
+        user.add_role :project_author, project
+      end
+
+      it { is_expected.to be_authorized_to :read, project }
+      it { is_expected.to be_authorized_to :fully_read, project }
+    end
+
+    context "when the user is a project resource editor for the project" do
+      before do
+        user.add_role :project_resource_editor, project
+      end
+
+      it { is_expected.to be_authorized_to :read, project }
+      it { is_expected.to be_authorized_to :fully_read, project }
+    end
+
+    context "when the user is an editor of the project" do
+      before do
+        user.add_role :project_editor, project
+      end
+
+      it { is_expected.to be_authorized_to :read, project }
+      it { is_expected.to be_authorized_to :fully_read, project }
+    end
 
     context "when the user is an admin" do
       let!(:user) { FactoryBot.create :user, :admin }

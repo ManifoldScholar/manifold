@@ -1,25 +1,15 @@
 # @see Entitlement
 class EntitlementAuthorizer < ApplicationAuthorizer
-  # @param [Symbol] _adjective
-  # @param [User] user
-  # @param [Hash] _options
-  # @return [Boolean]
-  def default(_adjective, user, _options = {})
-    return true if provided_by?(user)
+  # By default, we defer to {ProjectAuthorizer#updatable_by?}.
+  def default(_adjective, user, options = {})
+    return editor_permissions?(user) unless for_project?
 
-    has_editor_or_default_subject_abilities? user
-  end
-
-  def creatable_by?(user, _options = {})
-    resource.entitling_user == user
+    with_project { |p| p.updatable_by? user, options }
   end
 
   def readable_by?(user, options = {})
-    provides_to?(user) || default(:readable, user, options)
-  end
-
-  def manageable_by?(user, _options = {})
-    has_editor_or_default_subject_abilities?(user)
+    default(:read, user, options) ||
+      provided_by?(user) || provides_to?(user)
   end
 
   def updatable_by?(_user, _options = {})
@@ -27,6 +17,10 @@ class EntitlementAuthorizer < ApplicationAuthorizer
   end
 
   private
+
+  def for_project?
+    resource.subject_type == "Project"
+  end
 
   def provided_by?(user)
     resource.entitling_user == user
@@ -36,18 +30,16 @@ class EntitlementAuthorizer < ApplicationAuthorizer
     user.in?(resource.users)
   end
 
-  def has_editor_or_default_subject_abilities?(user)
-    return true if provided_by?(user)
-    return true if editor_permissions?(user)
+  # @yield [project] do something with a project if it is present on the resource.
+  # @yieldparam [Project] project
+  # @yieldreturn [Boolean]
+  # @return [Boolean]
+  def with_project
+    project = resource.subject
 
-    resource.on_subject do |m|
-      m.project do |(project, _)|
-        project.creator == user
-      end
+    return false if project.blank?
 
-      m.project_collection { false }
-      m.system_entitlement { false }
-    end
+    project.then(&Proc.new)
   end
 
   class << self
@@ -91,4 +83,5 @@ class EntitlementAuthorizer < ApplicationAuthorizer
       Entitler.has? user
     end
   end
+
 end
