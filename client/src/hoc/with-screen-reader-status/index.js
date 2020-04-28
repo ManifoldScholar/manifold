@@ -1,17 +1,19 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from "react";
 import hoistStatics from "hoist-non-react-statics";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
 }
 
-export default function withScreenReaderStatus(WrappedComponent) {
+export default function withScreenReaderStatus(
+  WrappedComponent,
+  renderLiveRegion = true
+) {
   const displayName = `WithScreenReaderStatus('${getDisplayName(
     WrappedComponent
   )})`;
 
-  class WithScreenReaderStatus extends PureComponent {
+  class WithScreenReaderStatus extends Component {
     static WrappedComponent = WrappedComponent;
 
     static displayName = displayName;
@@ -23,7 +25,8 @@ export default function withScreenReaderStatus(WrappedComponent) {
 
     get childProps() {
       return {
-        setScreenReaderStatus: this.setStatus
+        setScreenReaderStatus: this.setStatus,
+        renderLiveRegion: this.renderLiveRegion
       };
     }
 
@@ -37,7 +40,7 @@ export default function withScreenReaderStatus(WrappedComponent) {
       }, 1000);
     };
 
-    renderLiveRegion() {
+    renderLiveRegion = () => {
       return (
         <div
           role="status"
@@ -48,14 +51,14 @@ export default function withScreenReaderStatus(WrappedComponent) {
           {this.state.message}
         </div>
       );
-    }
+    };
 
     render() {
       const props = { ...this.props, ...this.childProps };
 
       return (
         <>
-          {this.renderLiveRegion()}
+          {renderLiveRegion && this.renderLiveRegion()}
           {React.createElement(WrappedComponent, props)}
         </>
       );

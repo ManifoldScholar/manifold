@@ -17,6 +17,7 @@ exports[`frontend/components/resource-list/Filters matches the snapshot 1`] = `
         "video",
       ]
     }
+    renderLiveRegion={[Function]}
     setScreenReaderStatus={[Function]}
     tags={
       Array [

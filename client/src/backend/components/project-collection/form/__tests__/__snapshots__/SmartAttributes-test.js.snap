@@ -68,18 +68,24 @@ Array [
         Show projects with these subjects
       </label>
       <div
-        aria-controls="1-picker-textbox"
         aria-expanded="false"
         aria-haspopup="listbox"
-        aria-owns="1-picker-textbox,1-picker-listbox"
+        aria-owns="1-picker-listbox"
         class="picker-input__input"
-        id="1-picker-combobox"
         role="combobox"
       >
+        <div
+          aria-atomic="true"
+          aria-live="polite"
+          class="screen-reader-text"
+          role="status"
+        />
         <input
           aria-autocomplete="list"
-          aria-controls="1-listbox"
+          aria-controls="1-picker-listbox"
+          aria-labelledby="1-picker-label"
           class="picker-input__text-input text-input"
+          id="1-picker-textbox"
           placeholder="Select a Subject"
           type="text"
           value=""
@@ -118,7 +124,6 @@ Array [
           <li
             class="picker-input__result picker-input__result--empty"
             id="no-options"
-            tabindex="-1"
           >
             No Options
           </li>
@@ -139,18 +144,24 @@ Array [
         Show projects with these tags
       </label>
       <div
-        aria-controls="1-picker-textbox"
         aria-expanded="false"
         aria-haspopup="listbox"
-        aria-owns="1-picker-textbox,1-picker-listbox"
+        aria-owns="1-picker-listbox"
         class="picker-input__input"
-        id="1-picker-combobox"
         role="combobox"
       >
+        <div
+          aria-atomic="true"
+          aria-live="polite"
+          class="screen-reader-text"
+          role="status"
+        />
         <input
           aria-autocomplete="list"
-          aria-controls="1-listbox"
+          aria-controls="1-picker-listbox"
+          aria-labelledby="1-picker-label"
           class="picker-input__text-input text-input"
+          id="1-picker-textbox"
           placeholder="Enter Tags"
           type="text"
           value=""
@@ -189,19 +200,12 @@ Array [
           <li
             class="picker-input__result picker-input__result--empty"
             id="no-options"
-            tabindex="-1"
           >
             No Options
           </li>
         </ul>
       </div>
     </div>
-    <div
-      aria-atomic="true"
-      aria-live="polite"
-      class="screen-reader-text"
-      role="status"
-    />
     <div
       class="picker-input__list"
     >

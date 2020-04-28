@@ -7,6 +7,7 @@ import setter from "../setter";
 import Developer from "global/components/developer";
 import IconComposer from "../../utility/IconComposer";
 import withFormOptions from "hoc/with-form-options";
+import withScreenReaderStatus from "hoc/with-screen-reader-status";
 import List from "./List";
 import isString from "lodash/isString";
 
@@ -142,7 +143,10 @@ export class PickerComponent extends PureComponent {
     reorderable: false,
     value: "",
     listRowComponent: "FormOptionRow",
-    listRowProps: { namePath: "attributes.name" }
+    listRowProps: { namePath: "attributes.name" },
+    renderLiveRegion: () => {
+      /* noop */
+    }
   };
 
   constructor(props) {
@@ -166,6 +170,9 @@ export class PickerComponent extends PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.listboxBecameVisible(prevState)) this.scrollListboxToTop();
+    if (this.announcementChanged(prevProps)) {
+      this.props.setScreenReaderStatus(this.props.optionsMeta.announcement);
+    }
   }
 
   componentWillUnmount() {
@@ -271,6 +278,12 @@ export class PickerComponent extends PureComponent {
     };
   }
 
+  announcementChanged(prevProps) {
+    return (
+      prevProps.optionsMeta.announcement !== this.props.optionsMeta.announcement
+    );
+  }
+
   clearTimeouts() {
     if (!this.timeouts) return;
     this.timeouts.forEach(clearTimeout);
@@ -309,7 +322,7 @@ export class PickerComponent extends PureComponent {
 
   selectOption = value => {
     this.updateSearchInputValue(null);
-    this.props.set(value);
+    this.props.select(value);
     this.makeListBoxHidden();
   };
 
@@ -424,7 +437,7 @@ export class PickerComponent extends PureComponent {
   };
 
   removeSelection = selection => {
-    this.props.optionsHandlers.removeSelection(selection);
+    this.props.optionsHandlers.deselect(selection);
   };
 
   reorderSelection = (selection, newPosition) => {
@@ -523,7 +536,8 @@ export class PickerComponent extends PureComponent {
       listRowComponent,
       listRowProps,
       debug,
-      value
+      value,
+      renderLiveRegion
     } = this.props;
 
     const inputClasses = classNames({
@@ -558,15 +572,19 @@ export class PickerComponent extends PureComponent {
                 />
               )}
               <div className={wrapperClasses}>
-                <label id={ids.label}>{label}</label>
+                <label htmlFor={ids.textBox} id={ids.label}>
+                  {label}
+                </label>
                 <div
                   ref={this.inputWrapperRef}
+                  // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
                   role="combobox"
                   aria-expanded={this.isListBoxVisible}
                   aria-owns={ids.listBox}
                   aria-haspopup="listbox"
                   className="picker-input__input"
                 >
+                  {renderLiveRegion()}
                   <input
                     ref={this.searchInputRef}
                     id={ids.textBox}
@@ -648,6 +666,7 @@ export class PickerComponent extends PureComponent {
                       return (
                         <li
                           key={option.key}
+                          tabIndex="-1"
                           role="option"
                           id={`${ids.option}-${option.key}`}
                           aria-selected={selected}
@@ -722,4 +741,6 @@ export class PickerComponent extends PureComponent {
   }
 }
 
-export default setter(withFormOptions(PickerComponent));
+export default setter(
+  withScreenReaderStatus(withFormOptions(PickerComponent), false)
+);

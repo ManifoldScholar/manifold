@@ -4,7 +4,7 @@ import Utility from "global/components/utility";
 import has from "lodash/has";
 import isFunction from "lodash/isFunction";
 
-export default class FormHasManyList extends PureComponent {
+export default class PickerListComponent extends PureComponent {
   static displayName = "Form.Picker.List";
 
   static propTypes = {};

@@ -18,6 +18,7 @@ exports[`reader/components/control-menu/AppearanceMenuBody matches the snapshot 
         },
       }
     }
+    renderLiveRegion={[Function]}
     setScreenReaderStatus={[Function]}
   />
 </Fragment>

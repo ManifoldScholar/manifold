@@ -171,6 +171,7 @@ function withFormOptions(WrappedComponent) {
       super(props);
       this.authorization = new Authorization();
       this.state = {
+        announcement: null,
         rawOptions: null,
         options: [],
         valueMap: null,
@@ -196,7 +197,7 @@ function withFormOptions(WrappedComponent) {
 
     get childProps() {
       const childProps = {
-        set: this.setValue,
+        select: this.select,
         value: this.currentValue,
         onChange: this.onChange,
         allowNew: this.allowsNew,
@@ -222,7 +223,7 @@ function withFormOptions(WrappedComponent) {
         activateOption: this.activateOption,
         activateOptionByValue: this.activateOptionByValue,
         filterOptions: this.updateSearchWord,
-        removeSelection: this.removeSelection,
+        deselect: this.deselect,
         reorderSelection: this.reorderSelection,
         selectAll: this.selectAll,
         unselectAll: this.unselectAll
@@ -241,7 +242,8 @@ function withFormOptions(WrappedComponent) {
         selectedOptions,
         value: this.currentValue,
         stringValue: this.props.optionToString(this.currentValue),
-        allOptions: this.unfilteredOptions
+        allOptions: this.unfilteredOptions,
+        announcement: this.state.announcement
       };
     }
 
@@ -310,8 +312,9 @@ function withFormOptions(WrappedComponent) {
     }
 
     findOption(value) {
-      const byValue = has(this.state.valueMap, value)
-        ? this.state.valueMap[value]
+      const stringValue = this.constructor.valueToString(value);
+      const byValue = has(this.state.valueMap, stringValue)
+        ? this.state.valueMap[stringValue]
         : null;
       if (byValue || !this.isPredictive) return byValue;
       return has(this.state.labelMap, value)
@@ -319,25 +322,8 @@ function withFormOptions(WrappedComponent) {
         : null;
     }
 
-    newThenSetValue = inputValue => {
-      const value = this.props.newToValue(inputValue);
-      if (!isPromise(value)) return this.addOrReplaceValue(value);
-      value
-        .then(this.addOrReplaceValue.bind(this), () => {
-          // noop
-        })
-        .then(
-          () => {
-            if (this.canFetchOptions) this.fetchOptions();
-          },
-          () => {
-            // noop
-          }
-        );
-    };
-
-    selectValueToOriginalValue(selectValue) {
-      const option = this.findOption(selectValue);
+    selectToOriginalValue(select) {
+      const option = this.findOption(select);
       return option ? option.originalValue : null;
     }
 
@@ -351,34 +337,73 @@ function withFormOptions(WrappedComponent) {
       });
     }
 
-    addOrReplaceValue(value) {
-      this.isMultiple ? this.addToValue(value) : this.replaceValue(value);
+    valueToLabel(value) {
+      const option = this.findOption(value);
+      if (!option || !option.label) return value;
+      return option.label;
     }
 
     toggleOptionSelection = value => {
-      const originalValue = this.selectValueToOriginalValue(value);
+      const originalValue = this.selectToOriginalValue(value);
       if (this.isSelected(originalValue)) {
-        this.removeSelection(originalValue);
+        this.deselect(originalValue);
       } else {
-        this.setValue(value);
+        this.select(value);
       }
     };
 
-    setValue = value => {
-      const originalValue = this.selectValueToOriginalValue(value);
+    select = value => {
+      const originalValue = this.selectToOriginalValue(value);
       if (originalValue == null && this.allowsNew && value)
-        return this.newThenSetValue(value);
-      return this.addOrReplaceValue(originalValue);
+        return this.newThenSelectValue(value);
+      return this.addOrReplaceSelection(originalValue);
     };
 
-    addToValue(value) {
+    deselect = value => {
+      if (!this.isMultiple) {
+        if (this.currentValue === value) return this.replaceSelection(null);
+      }
+      const newValue = this.currentValue.filter(
+        compareValue => !this.doValuesMatch(value, compareValue)
+      );
+      if (newValue.length !== this.currentValue.length) {
+        this.announceDeselection(value);
+      }
+      this.replaceSelection(newValue);
+    };
+
+    newThenSelectValue = inputValue => {
+      const value = this.props.newToValue(inputValue);
+      if (!isPromise(value)) return this.addOrReplaceSelection(value);
+      value
+        .then(this.addOrReplaceSelection.bind(this), () => {
+          // noop
+        })
+        .then(
+          () => {
+            if (this.canFetchOptions) this.fetchOptions();
+          },
+          () => {
+            // noop
+          }
+        );
+    };
+
+    addOrReplaceSelection(value) {
+      this.announceSelection(value);
+      this.isMultiple
+        ? this.appendSelection(value)
+        : this.replaceSelection(value);
+    }
+
+    appendSelection(value) {
       if (value === null) return;
       if (this.currentValue.includes(value)) return;
       const newValue = [...this.currentValue, value];
-      this.replaceValue(newValue);
+      this.replaceSelection(newValue);
     }
 
-    replaceValue(value) {
+    replaceSelection(value) {
       this.props.set(this.props.beforeSetValue(value));
     }
 
@@ -401,18 +426,28 @@ function withFormOptions(WrappedComponent) {
           insertIndex = position - 1;
       }
       newCollection.splice(insertIndex, 0, thingToMove);
-      this.replaceValue(newCollection);
+      this.replaceSelection(newCollection);
     };
 
     selectAll = () => {
       if (!this.isMultiple) return;
       const values = this.filteredOptions.map(option => option.originalValue);
-      this.replaceValue(values);
+      this.replaceSelection(values);
     };
 
     unselectAll = () => {
-      this.replaceValue(this.isMultiple ? [] : null);
+      this.replaceSelection(this.isMultiple ? [] : null);
     };
+
+    announceDeselection(value) {
+      const announcement = `${this.valueToLabel(value)} was deselected`;
+      this.setState({ announcement });
+    }
+
+    announceSelection(value) {
+      const announcement = `${this.valueToLabel(value)} was selected`;
+      this.setState({ announcement });
+    }
 
     isSelected = value => {
       if (!this.isMultiple) return this.currentValue === value;
@@ -430,19 +465,9 @@ function withFormOptions(WrappedComponent) {
       );
     }
 
-    removeSelection = value => {
-      if (!this.isMultiple) {
-        if (this.currentValue === value) return this.replaceValue(null);
-      }
-      const newValue = this.currentValue.filter(
-        compareValue => !this.doValuesMatch(value, compareValue)
-      );
-      this.replaceValue(newValue);
-    };
-
     onChange = event => {
       const value = event.target.value;
-      this.setValue(value);
+      this.select(value);
     };
 
     activateOptionByValue = value => {
