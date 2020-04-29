@@ -20,6 +20,7 @@ module WithParsedName
   # rubocop:disable Rails/ReadWriteAttribute
   def name=(name)
     parts = Namae::Name.parse(name).to_h.compact
+    validate_parts!(parts)
     parts.each do |key, value|
       next unless respond_to? KEY_MAP[key]
 
@@ -51,6 +52,15 @@ module WithParsedName
   end
 
   private
+
+  def validate_parts!(parts)
+    # rubocop:disable Style/GuardClause
+    if parts[:particle].present? && parts[:given].blank?
+      parts[:given] = parts[:particle]
+      parts[:particle] = nil
+    end
+    # rubocop:enable Style/GuardClause
+  end
 
   def nickname_not_blank!
     return unless respond_to? :nickname
