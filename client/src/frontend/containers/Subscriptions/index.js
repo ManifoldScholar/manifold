@@ -43,12 +43,10 @@ export class SubscriptionsContainer extends Component {
     this.setState({ notificationPreferencesByKind: notifications });
   };
 
-  handleProjectsPreferenceChange = event => {
+  handleProjectsPreferenceChange = toInclude => {
     const notifications = {
       ...this.state.notificationPreferencesByKind
     };
-
-    const toInclude = event.target.name;
     const toExclude =
       toInclude === "projects" ? "followedProjects" : "projects";
 
@@ -71,10 +69,7 @@ export class SubscriptionsContainer extends Component {
     event.preventDefault();
     window.scrollTo(0, 0);
     this.props.dispatch(
-      request(
-        meAPI.update(this.state),
-        requests.gAuthenticatedUserNotificationsUpdate
-      )
+      request(meAPI.update(this.state), requests.gAuthenticatedUserUpdate)
     );
   };
 
