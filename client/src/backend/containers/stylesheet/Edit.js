@@ -1,12 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { stylesheetsAPI, requests } from "api";
+import { stylesheetsAPI, requests, sectionsAPI } from "api";
 import { select } from "utils/entityUtils";
-import Stylesheet from "backend/components/stylesheet";
 import Form from "global/components/form";
 import lh from "helpers/linkHandler";
-import { Redirect } from "react-router-dom";
 import FormContainer from "global/containers/form";
 import { entityStoreActions } from "actions";
 import has from "lodash/has";
@@ -33,104 +31,114 @@ export class StylesheetEditContainer extends PureComponent {
     stylesheet: PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = { redirect: null };
+  get isNew() {
+    const { params } = this.props.match;
+    return !has(params, "stylesheet");
   }
 
-  onSuccess = () => {
-    if (!__BROWSER__) return;
-    window.scrollTo(0, 0);
-    this.props.refresh();
+  get isEdit() {
+    return !this.isNew;
+  }
+
+  get stylesheet() {
+    if (this.isNew)
+      return { attributes: {}, relationships: { textSections: [] } };
+    return this.props.stylesheet;
+  }
+
+  get text() {
+    return this.props.text;
+  }
+
+  redirectToStylesheet = stylesheet => {
+    const path = lh.link(
+      "BackendTextStylesheetEdit",
+      this.text.id,
+      stylesheet.id
+    );
+    this.props.history.push(path);
   };
 
   create = attributes => {
     return stylesheetsAPI.create(this.props.match.params.id, attributes);
   };
 
-  renderEdit(isNew) {
-    const { stylesheet } = this.props;
+  fetchTextSections = () => {
+    return sectionsAPI.forText(this.props.text.id);
+  };
+
+  render() {
+    if (this.isEdit && !this.stylesheet) return null;
+
+    const { params } = this.props.match;
+    const name = this.isNew
+      ? requests.beStylesheetCreate
+      : requests.beStylesheetUpdate;
+
     return (
       <div>
         <section>
-          {isNew ? this.renderForm() : this.renderForm(stylesheet)}
+          <section className="form-section form-section--primary">
+            <FormContainer.Form
+              model={this.stylesheet}
+              name={name}
+              update={stylesheetsAPI.update}
+              create={this.create}
+              onSuccess={this.redirectToStylesheet}
+              className="form-secondary"
+            >
+              <div className="form-input">
+                <p className="instructions">
+                  {this.stylesheet.attributes.ingested
+                    ? "This stylesheet was ingested as part of the source document. You may " +
+                      "make changes to it. However, if the source document is reingested, " +
+                      "those changes will be lost. If you'd like to add styles to this " +
+                      "text consider creating a new, supplemental stylesheet rather than " +
+                      "modifying this one."
+                    : null}
+                </p>
+              </div>
+              <Form.TextInput
+                label="Name"
+                name="attributes[name]"
+                placeholder="Name"
+              />
+              <Form.CodeArea
+                label="Source Styles"
+                height="300px"
+                mode="css"
+                name="attributes[rawStyles]"
+                instructions="These are the raw source styles, which can be edited."
+              />
+              <Form.CodeArea
+                label="Validated Styles"
+                name="attributes[styles]"
+                mode="css"
+                instructions={
+                  "The following input is read-only. It contains the validated " +
+                  "styles that are included in the reader for this text."
+                }
+                readOnly
+              />
+              <Form.Picker
+                label="Apply to these text sections"
+                placeholder={"Add a text section"}
+                name="relationships[textSections]"
+                optionToLabel={t => t.attributes.name}
+                options={this.fetchTextSections}
+                rowProps={{ namePath: "attributes.title" }}
+                showAddRemoveAll
+              />
+
+              <Form.Save
+                cancelRoute={lh.link("backendTextStyles", params.id)}
+                text="Save Stylesheet"
+              />
+            </FormContainer.Form>
+          </section>
         </section>
       </div>
     );
-  }
-
-  renderForm(stylesheet) {
-    const { params } = this.props.match;
-    const name = stylesheet
-      ? requests.beStylesheetUpdate
-      : requests.beStylesheetCreate;
-
-    return (
-      <section className="form-section form-section--primary">
-        <FormContainer.Form
-          model={stylesheet}
-          name={name}
-          update={stylesheetsAPI.update}
-          create={this.create}
-          onSuccess={this.onSuccess}
-          className="form-secondary"
-        >
-          <div className="form-input">
-            <p className="instructions">
-              {stylesheet && stylesheet.attributes.ingested
-                ? "This stylesheet was ingested as part of the source document. You may " +
-                  "make changes to it. However, if the source document is reingested, " +
-                  "those changes will be lost. If you'd like to add styles to this " +
-                  "text consider creating a new, supplemental stylesheet rather than " +
-                  "modifying this one."
-                : null}
-            </p>
-          </div>
-          <Form.TextInput
-            label="Name"
-            name="attributes[name]"
-            placeholder="Name"
-          />
-          <Form.CodeArea
-            label="Source Styles"
-            height="300px"
-            mode="css"
-            name="attributes[rawStyles]"
-            instructions="These are the raw source styles, which can be edited."
-          />
-          <Form.CodeArea
-            label="Validated Styles"
-            name="attributes[styles]"
-            mode="css"
-            instructions={
-              "The following input is read-only. It contains the validated " +
-              "styles that are included in the reader for this text."
-            }
-            readOnly
-          />
-          <Stylesheet.Form.TextSections
-            stylesheet={stylesheet}
-            wide
-            {...this.props}
-          />
-          <Form.Save
-            cancelRoute={lh.link("backendTextStyles", params.id)}
-            text="Save Stylesheet"
-          />
-        </FormContainer.Form>
-      </section>
-    );
-  }
-
-  render() {
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
-    }
-
-    const { params } = this.props.match;
-    const isNew = !has(params, "stylesheet");
-    return this.renderEdit(isNew);
   }
 }
 
