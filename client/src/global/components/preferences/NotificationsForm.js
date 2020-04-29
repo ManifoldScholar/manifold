@@ -79,7 +79,6 @@ export default class NotificationsForm extends Component {
     ];
     if (preferences.projects)
       options.unshift({ key: "projects", label: "All Projects" });
-
     return (
       <>
         <fieldset
@@ -110,7 +109,9 @@ export default class NotificationsForm extends Component {
                   name="digest-projects"
                   value="always"
                   checked={checked}
-                  onChange={this.props.digestProjectsChangeHandler}
+                  onChange={() =>
+                    this.props.digestProjectsChangeHandler(option.key)
+                  }
                 />
                 <span className="toggle-indicator" />
                 <span className="toggle-label">{option.label}</span>
