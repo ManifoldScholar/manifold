@@ -109,6 +109,7 @@
       .screen-reader-text {
         @include utilityPrimary;
         position: relative;
+        margin: 0;
         overflow: visible;
         font-size: 12px;
       }
