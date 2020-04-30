@@ -153,7 +153,6 @@ export class PickerComponent extends PureComponent {
     super(props);
     this.inputWrapperRef = React.createRef();
     this.searchInputRef = React.createRef();
-    this.listBoxToggleRef = React.createRef();
     this.optionsRef = React.createRef();
 
     this.state = {
@@ -352,8 +351,10 @@ export class PickerComponent extends PureComponent {
   }
 
   listenForListBoxNavigation = event => {
-    if (event.keyCode === KEYS.DOWN) this.activateNextOption(event);
-    if (event.keyCode === KEYS.UP) this.activatePreviousOption(event);
+    if (event.keyCode === KEYS.DOWN)
+      this.preventDefault(this.activateNextOption, event);
+    if (event.keyCode === KEYS.UP)
+      this.preventDefault(this.activatePreviousOption, event);
     if (event.keyCode === KEYS.TAB) this.makeListBoxHidden();
     if (event.keyCode === KEYS.ENTER)
       this.preventDefault(this.selectActiveOption, event);
@@ -550,6 +551,13 @@ export class PickerComponent extends PureComponent {
       "picker-input--open": this.isListBoxVisible
     });
 
+    const textBoxClasses = classNames({
+      "text-input": true,
+      "picker-input__text-input": true,
+      "picker-input__text-input--padded-1x": !this.isResetButtonVisible,
+      "picker-input__text-input--padded-2x": this.isResetButtonVisible
+    });
+
     return (
       <UID>
         {id => {
@@ -571,119 +579,110 @@ export class PickerComponent extends PureComponent {
                   }}
                 />
               )}
+              {renderLiveRegion()}
               <div className={wrapperClasses}>
                 <label htmlFor={ids.textBox} id={ids.label}>
                   {label}
                 </label>
-                <div
-                  ref={this.inputWrapperRef}
-                  // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
-                  role="combobox"
-                  aria-expanded={this.isListBoxVisible}
-                  aria-owns={ids.listBox}
-                  aria-haspopup="listbox"
-                  className="picker-input__input"
-                >
-                  {renderLiveRegion()}
-                  <input
-                    ref={this.searchInputRef}
-                    id={ids.textBox}
-                    className="picker-input__text-input text-input"
-                    type="text"
-                    onClick={this.onSearchInputClick}
-                    onFocus={this.onSearchInputFocus}
-                    onBlur={this.onSearchInputBlur}
-                    onChange={this.onSearchInputChange}
-                    value={this.searchInputValue}
-                    placeholder={placeholder}
-                    onKeyDown={this.listenForListBoxNavigation}
-                    onKeyUp={this.stopEscapePropagation}
-                    aria-labelledby={ids.label}
-                    aria-autocomplete="list"
-                    aria-controls={ids.listBox}
-                    aria-activedescendant={this.activeOptionId(id)}
-                  />
-                  {this.isResetButtonVisible && (
-                    <button
-                      aria-label="Reset"
-                      tabIndex="-1"
-                      type="button"
-                      onClick={this.callbacks.unselectAll}
-                      className="picker-input__button"
-                    >
-                      <IconComposer
-                        icon="close16"
-                        size={20}
-                        iconClass="picker-input__icon"
-                      />
-                      <span className="screen-reader-text">
-                        Clear selection
-                      </span>
-                    </button>
-                  )}
-                  <button
-                    aria-label="Open"
-                    tabIndex="-1"
-                    type="button"
-                    ref={this.listBoxToggleRef}
-                    onClick={this.callbacks.toggleListBoxVisibility}
-                    onKeyDown={this.listenForListBoxNavigation}
-                    onKeyUp={this.stopEscapePropagation}
-                    className="picker-input__button"
+                <div className="picker-input__input-wrapper">
+                  <div
+                    ref={this.inputWrapperRef}
+                    // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
+                    role="combobox"
+                    aria-expanded={this.isListBoxVisible}
+                    aria-owns={ids.listBox}
+                    aria-haspopup="listbox"
+                    className="picker-input__input"
                   >
-                    <IconComposer
-                      icon="disclosureDown16"
-                      size={20}
-                      iconClass="picker-input__icon"
+                    <input
+                      ref={this.searchInputRef}
+                      id={ids.textBox}
+                      className={textBoxClasses}
+                      type="text"
+                      onClick={this.onSearchInputClick}
+                      onFocus={this.onSearchInputFocus}
+                      onBlur={this.onSearchInputBlur}
+                      onChange={this.onSearchInputChange}
+                      value={this.searchInputValue}
+                      placeholder={placeholder}
+                      onKeyDown={this.listenForListBoxNavigation}
+                      onKeyUp={this.stopEscapePropagation}
+                      aria-labelledby={ids.label}
+                      aria-autocomplete="list"
+                      aria-controls={ids.listBox}
+                      aria-activedescendant={this.activeOptionId(id)}
                     />
-                    <span className="screen-reader-text">
-                      {this.isListBoxVisible ? "Hide Listbox" : "Show Listbox"}
-                    </span>
-                  </button>
-
-                  <ul
-                    aria-labelledby={ids.label}
-                    ref={this.optionsRef}
-                    role="listbox"
-                    id={ids.listBox}
-                    onKeyDown={this.listenForListBoxNavigation}
-                    className="picker-input__results"
-                  >
-                    {options.length === 0 && (
-                      <li
-                        id="no-options"
-                        className="picker-input__result picker-input__result--empty"
+                  </div>
+                  <div className="picker-input__button-group">
+                    {this.isResetButtonVisible && (
+                      <button
+                        aria-label="Reset"
+                        tabIndex="-1"
+                        type="button"
+                        onClick={this.callbacks.unselectAll}
+                        className="picker-input__button"
                       >
-                        No Options
-                      </li>
+                        <IconComposer
+                          icon="close16"
+                          size={20}
+                          iconClass="picker-input__icon picker-input__icon--reset"
+                        />
+                        <span className="screen-reader-text">
+                          Clear selection
+                        </span>
+                      </button>
                     )}
-
-                    {options.map(option => {
-                      const active = option === this.state.activeOption;
-                      const selected = optionsMeta.selectedOptions.includes(
-                        option
-                      );
-                      return (
-                        <li
-                          key={option.key}
-                          tabIndex="-1"
-                          role="option"
-                          id={`${ids.option}-${option.key}`}
-                          aria-selected={selected}
-                          className={classNames("picker-input__result", {
-                            "picker-input__result--selected": selected,
-                            "picker-input__result--active": active
-                          })}
-                          onClick={() => {
-                            this.callbacks.selectOrToggleOption(option.value);
-                          }}
-                        >
-                          {option.label}
-                        </li>
-                      );
-                    })}
-                  </ul>
+                    <div aria-hidden className="picker-input__button">
+                      <IconComposer
+                        icon="disclosureDown16"
+                        size={20}
+                        iconClass="picker-input__icon picker-input__icon--disclosure"
+                      />
+                    </div>
+                  </div>
                 </div>
+                <ul
+                  aria-labelledby={ids.label}
+                  ref={this.optionsRef}
+                  role="listbox"
+                  id={ids.listBox}
+                  onKeyDown={this.listenForListBoxNavigation}
+                  className="picker-input__results"
+                >
+                  {options.length === 0 && (
+                    <li
+                      id="no-options"
+                      className="picker-input__result picker-input__result--empty"
+                    >
+                      No Options
+                    </li>
+                  )}
+
+                  {options.map(option => {
+                    const active = option === this.state.activeOption;
+                    const selected = optionsMeta.selectedOptions.includes(
+                      option
+                    );
+                    return (
+                      <li
+                        key={option.key}
+                        tabIndex="-1"
+                        role="option"
+                        id={`${ids.option}-${option.key}`}
+                        aria-selected={active}
+                        className={classNames("picker-input__result", {
+                          "picker-input__result--selected": selected,
+                          "picker-input__result--active": active
+                        })}
+                        onClick={() => {
+                          this.callbacks.selectOrToggleOption(option.value);
+                        }}
+                      >
+                        {option.label}
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
               {this.isMultiple && (
                 <>
