@@ -19,6 +19,11 @@ class NotificationMailerPreview < ActionMailer::Preview
     NotificationMailer.comment_notification(user, comment)
   end
 
+  # Accessible from http://manifold.lvh/rails/mailers/notification_mailer/annotation_notification.html
+  def annotation_notification
+    NotificationMailer.annotation_notification(user, annotation)
+  end
+
   # Accessible from http://manifold.lvh/rails/mailers/notification_mailer/reply_notification.html
   def reply_notification
     NotificationMailer.reply_notification(user, reply)
@@ -29,17 +34,16 @@ class NotificationMailerPreview < ActionMailer::Preview
     NotificationMailer.reading_group_join_notification(user, reading_group_membership)
   end
 
-
   private
 
   def user
-    User.new({
+    User.new(
       first_name: "Bilbo",
       last_name: "Baggins",
       nickname: "Short Stuff",
       email: "bilbo@bagend.com",
-      password: SecureRandom.hex[0, 10 ]
-    })
+      password: SecureRandom.hex[0, 10]
+    )
   end
 
   def reading_group_membership
@@ -56,10 +60,14 @@ class NotificationMailerPreview < ActionMailer::Preview
 
   def flagged_resource
     Comment.new(
-      subject: Annotation.last,
+      subject: Annotation.where.not(text_section: nil).last,
       body: "Something very, very bad",
       flags_count: 3
     )
+  end
+
+  def annotation
+    Annotation.where.not(text_section_id: nil).first
   end
 
   def events

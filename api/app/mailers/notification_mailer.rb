@@ -24,6 +24,12 @@ class NotificationMailer < ApplicationMailer
     mail(to: @user.email, subject: "A comment has been made on #{@comment.title}")
   end
 
+  def annotation_notification(user, annotation)
+    user_assignment user
+    @annotation = annotation.decorate
+    mail(to: @user.email, subject: "An annotation has been made on #{@annotation.text_title}")
+  end
+
   def reply_notification(user, comment)
     user_assignment user
     @comment = comment.decorate

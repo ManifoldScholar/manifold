@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Comment, type: :model do
-
   it "has a valid comment factory" do
     expect(FactoryBot.build(:comment)).to be_valid
   end
@@ -9,6 +8,12 @@ RSpec.describe Comment, type: :model do
   it "enqueues a COMMENT_CREATED event on creation" do
     subject = FactoryBot.create(:annotation)
     expect(CreateEventJob).to receive(:perform_later).with(EventType[:comment_created], any_args)
+    FactoryBot.create(:comment, subject: subject)
+  end
+
+  it "does not enqueues a COMMENT_CREATED when subject is private" do
+    subject = FactoryBot.create(:annotation, private: true)
+    expect(CreateEventJob).to_not receive(:perform_later).with(EventType[:comment_created], any_args)
     FactoryBot.create(:comment, subject: subject)
   end
 
@@ -32,21 +37,21 @@ RSpec.describe Comment, type: :model do
     end
   end
 
-  describe 'its hierarchical tree' do
-    it 'is ordered by :sort_order' do
+  describe "its hierarchical tree" do
+    it "is ordered by :sort_order" do
       is_expected.to be_a_closure_tree.ordered(:sort_order)
     end
 
-    context 'assigning the sort order' do
+    context "assigning the sort order" do
       before(:each) do
         @comment = FactoryBot.create(:comment)
       end
 
-      it 'is correct when a root' do
+      it "is correct when a root" do
         expect(@comment.sort_order).to eq 0
       end
 
-      it 'is correct when child' do
+      it "is correct when child" do
         comment = FactoryBot.create(:comment, parent: @comment)
         expect(comment.sort_order).to eq 0
       end
