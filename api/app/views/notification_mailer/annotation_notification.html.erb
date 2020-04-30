@@ -1,0 +1,12 @@
+<div>
+  <p><%= @annotation.creator_name %> annotated the text <em><%= @annotation.text_title %></em>:</p>
+
+  <blockquote style="margin: 0; padding: 20px; background: #cccccc;">
+    <%= @annotation.subject %>
+  </blockquote>
+  <blockquote style="margin: 0; padding: 20px; background: #efefef">
+    <em><%= @annotation.body %></em>
+  </blockquote>
+
+  <p style="margin-top: 15px; margin-bottom: 40px;"><a href="<%= @annotation.reader_url %>">View Annotation</a></p>
+</div>

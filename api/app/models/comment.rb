@@ -77,6 +77,8 @@ class Comment < ApplicationRecord
   private
 
   def trigger_event_creation
+    return if on_annotation? && subject.respond_to?(:private?) && subject.private?
+
     Event.trigger(EventType[:comment_created], self)
   end
 

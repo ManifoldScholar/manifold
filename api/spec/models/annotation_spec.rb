@@ -89,6 +89,12 @@ RSpec.describe Annotation, type: :model do
     FactoryBot.create(:annotation, text_section: text_section)
   end
 
+  it "does not enqueues a TEXT_ANNOTATED event on creation when it is private" do
+    text_section = FactoryBot.create(:text_section)
+    expect(CreateEventJob).to_not receive(:perform_later).with(EventType[:text_annotated], any_args)
+    FactoryBot.create(:annotation, private: true, text_section: text_section)
+  end
+
   context "with notation" do
     it "is invalid without a resource if format is resource" do
       @annotation.format = "resource"

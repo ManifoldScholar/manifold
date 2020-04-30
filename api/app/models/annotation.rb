@@ -143,6 +143,7 @@ class Annotation < ApplicationRecord
   scope :non_private, -> { where(private: false) }
 
   # Callbacks
+  after_commit :enqueue_annotation_notifications, on: [:create]
   after_commit :trigger_event_creation, on: [:create]
 
   class << self
@@ -229,8 +230,15 @@ class Annotation < ApplicationRecord
 
   private
 
+  def enqueue_annotation_notifications
+    return unless public?
+
+    Notifications::EnqueueAnnotationNotificationsJob.perform_later id
+  end
+
   def trigger_event_creation
     return if [TYPE_HIGHLIGHT, TYPE_RESOURCE].include? format
+    return unless public?
 
     Event.trigger(EventType[:text_annotated], self)
   end

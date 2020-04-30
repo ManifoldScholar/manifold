@@ -9,7 +9,7 @@ module Notifications
       NotificationMailer.comment_notification(user, comment).deliver
     # rubocop:disable Metrics/LineLength
     rescue ActiveRecord::RecordNotFound
-      Rails.logger.error("ActiveRecord::RecordNotFound error in SendReplyNotificationJob")
+      Rails.logger.error("ActiveRecord::RecordNotFound error in SendCommentNotificationJob")
       Rails.logger.error(
         "  Failed to send new comment notification for #<Comment:#{comment_id} to #<User:#{user_id}>"
       )
