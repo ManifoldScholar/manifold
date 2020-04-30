@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Entitlement, type: :model do
   let!(:user) { FactoryBot.create :user }
@@ -45,7 +45,7 @@ RSpec.describe Entitlement, type: :model do
 
     it "automatically sets the state when expiring soon" do
       expect do
-        entitlement.expires_on = Date.current + 2
+        entitlement.expires_on = Date.current + 1
         entitlement.save!
       end.to change_current_state.from(:active).to(:expiring_soon)
     end
