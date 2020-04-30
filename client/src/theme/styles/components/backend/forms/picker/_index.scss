@@ -1,17 +1,55 @@
 .picker-input {
+  $_button-padding-lateral: 8px;
+  $_icon-size: 16px;
+  $_button-width: $_icon-size + $_button-padding-lateral * 2;
+
   position: relative;
 
+  &__input-wrapper {
+    position: relative;
+  }
+
   &__input {
-    display: flex;
-    align-items: center;
-    width: 100%;
     border: 1px solid $neutral70;
+  }
+
+  &__text-input {
+    $_padding: 32px;
+
+    /* stylelint-disable declaration-no-important */
+    &--padded-1x {
+      padding-right: $_button-width + $_button-padding-lateral !important;
+    }
+
+    &--padded-2x {
+      padding-right: ($_button-width * 2) + $_button-padding-lateral !important;
+    }
+    /* stylelint-enable declaration-no-important */
+  }
+
+  &__button-group {
+    position: absolute;
+    top: 50%;
+    right: $_button-padding-lateral;
+    display: flex;
+    pointer-events: none;
+    transform: translateY(-50%);
   }
 
   &__button {
     @include buttonUnstyled;
-    padding: 8px 6px;
+    padding: $_button-padding-lateral 6px;
     color: $accentPrimary;
+  }
+
+  &__icon {
+    &--reset {
+      pointer-events: all;
+    }
+
+    &--disclosure {
+      pointer-events: none;
+    }
   }
 
   &__results {

@@ -59,6 +59,12 @@ Array [
     class="form-input"
   >
     <div
+      aria-atomic="true"
+      aria-live="polite"
+      class="screen-reader-text"
+      role="status"
+    />
+    <div
       class="picker-input"
     >
       <label
@@ -68,72 +74,73 @@ Array [
         Show projects with these subjects
       </label>
       <div
-        aria-expanded="false"
-        aria-haspopup="listbox"
-        aria-owns="1-picker-listbox"
-        class="picker-input__input"
-        role="combobox"
+        class="picker-input__input-wrapper"
       >
         <div
-          aria-atomic="true"
-          aria-live="polite"
-          class="screen-reader-text"
-          role="status"
-        />
-        <input
-          aria-autocomplete="list"
-          aria-controls="1-picker-listbox"
-          aria-labelledby="1-picker-label"
-          class="picker-input__text-input text-input"
-          id="1-picker-textbox"
-          placeholder="Select a Subject"
-          type="text"
-          value=""
-        />
-        <button
-          aria-label="Open"
-          class="picker-input__button"
-          tabindex="-1"
-          type="button"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-owns="1-picker-listbox"
+          class="picker-input__input"
+          role="combobox"
         >
-          <svg
+          <input
+            aria-autocomplete="list"
+            aria-controls="1-picker-listbox"
+            aria-labelledby="1-picker-label"
+            class="text-input picker-input__text-input picker-input__text-input--padded-1x"
+            id="1-picker-textbox"
+            placeholder="Select a Subject"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="picker-input__button-group"
+        >
+          <div
             aria-hidden="true"
-            class="manicon-svg picker-input__icon svg-icon--disclosureDown16"
-            fill="currentColor"
-            height="20"
-            viewBox="0 0 16 16"
-            width="20"
-            xmlns="http://www.w3.org/2000/svg"
+            class="picker-input__button"
           >
-            <polygon
-              points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
-            />
-          </svg>
-          <span
-            class="screen-reader-text"
-          >
-            Show Listbox
-          </span>
-        </button>
-        <ul
-          aria-labelledby="1-picker-label"
-          class="picker-input__results"
-          id="1-picker-listbox"
-          role="listbox"
-        >
-          <li
-            class="picker-input__result picker-input__result--empty"
-            id="no-options"
-          >
-            No Options
-          </li>
-        </ul>
+            <svg
+              aria-hidden="true"
+              class="manicon-svg picker-input__icon picker-input__icon--disclosure svg-icon--disclosureDown16"
+              fill="currentColor"
+              height="20"
+              viewBox="0 0 16 16"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
+      <ul
+        aria-labelledby="1-picker-label"
+        class="picker-input__results"
+        id="1-picker-listbox"
+        role="listbox"
+      >
+        <li
+          class="picker-input__result picker-input__result--empty"
+          id="no-options"
+        >
+          No Options
+        </li>
+      </ul>
     </div>
   </div>,
   <div
     class="form-input"
   >
+    <div
+      aria-atomic="true"
+      aria-live="polite"
+      class="screen-reader-text"
+      role="status"
+    />
     <div
       class="picker-input"
     >
@@ -144,67 +151,62 @@ Array [
         Show projects with these tags
       </label>
       <div
-        aria-expanded="false"
-        aria-haspopup="listbox"
-        aria-owns="1-picker-listbox"
-        class="picker-input__input"
-        role="combobox"
+        class="picker-input__input-wrapper"
       >
         <div
-          aria-atomic="true"
-          aria-live="polite"
-          class="screen-reader-text"
-          role="status"
-        />
-        <input
-          aria-autocomplete="list"
-          aria-controls="1-picker-listbox"
-          aria-labelledby="1-picker-label"
-          class="picker-input__text-input text-input"
-          id="1-picker-textbox"
-          placeholder="Enter Tags"
-          type="text"
-          value=""
-        />
-        <button
-          aria-label="Open"
-          class="picker-input__button"
-          tabindex="-1"
-          type="button"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-owns="1-picker-listbox"
+          class="picker-input__input"
+          role="combobox"
         >
-          <svg
+          <input
+            aria-autocomplete="list"
+            aria-controls="1-picker-listbox"
+            aria-labelledby="1-picker-label"
+            class="text-input picker-input__text-input picker-input__text-input--padded-1x"
+            id="1-picker-textbox"
+            placeholder="Enter Tags"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="picker-input__button-group"
+        >
+          <div
             aria-hidden="true"
-            class="manicon-svg picker-input__icon svg-icon--disclosureDown16"
-            fill="currentColor"
-            height="20"
-            viewBox="0 0 16 16"
-            width="20"
-            xmlns="http://www.w3.org/2000/svg"
+            class="picker-input__button"
           >
-            <polygon
-              points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
-            />
-          </svg>
-          <span
-            class="screen-reader-text"
-          >
-            Show Listbox
-          </span>
-        </button>
-        <ul
-          aria-labelledby="1-picker-label"
-          class="picker-input__results"
-          id="1-picker-listbox"
-          role="listbox"
-        >
-          <li
-            class="picker-input__result picker-input__result--empty"
-            id="no-options"
-          >
-            No Options
-          </li>
-        </ul>
+            <svg
+              aria-hidden="true"
+              class="manicon-svg picker-input__icon picker-input__icon--disclosure svg-icon--disclosureDown16"
+              fill="currentColor"
+              height="20"
+              viewBox="0 0 16 16"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
+      <ul
+        aria-labelledby="1-picker-label"
+        class="picker-input__results"
+        id="1-picker-listbox"
+        role="listbox"
+      >
+        <li
+          class="picker-input__result picker-input__result--empty"
+          id="no-options"
+        >
+          No Options
+        </li>
+      </ul>
     </div>
     <div
       class="picker-input__list"

@@ -55,7 +55,7 @@ export default class PickerListComponent extends PureComponent {
               event.preventDefault();
               this.callbacks.removeSelection(props.entity);
             }}
-            title="Remove"
+            aria-label="Remove selection"
           >
             <Utility.IconComposer icon="close32" size={26} />
           </button>
@@ -69,7 +69,7 @@ export default class PickerListComponent extends PureComponent {
               event.preventDefault();
               this.callbacks.editSelection(props.entity);
             }}
-            title="Edit"
+            aria-label="Edit selection"
           >
             <Utility.IconComposer icon="annotate32" size={26} />
           </button>
