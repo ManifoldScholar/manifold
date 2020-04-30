@@ -24,9 +24,14 @@ export default function withScreenReaderStatus(
     }
 
     get childProps() {
+      const base = {
+        setScreenReaderStatus: this.setStatus
+      };
+      if (renderLiveRegion) return base;
       return {
-        setScreenReaderStatus: this.setStatus,
-        renderLiveRegion: this.renderLiveRegion
+        renderLiveRegion: this.renderLiveRegion,
+        currentScreenReaderStatus: this.state.message,
+        ...base
       };
     }
 
