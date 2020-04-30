@@ -163,7 +163,6 @@ export class PickerComponent extends PureComponent {
   }
 
   componentDidMount() {
-    this.timeouts = [];
     this.setupGlobalEvents();
   }
 
@@ -176,7 +175,6 @@ export class PickerComponent extends PureComponent {
 
   componentWillUnmount() {
     this.cleanupGlobalEvents();
-    this.clearTimeouts();
   }
 
   get isMultiple() {
@@ -231,10 +229,7 @@ export class PickerComponent extends PureComponent {
   }
 
   get somethingInPickerHasFocus() {
-    return (
-      document.activeElement &&
-      this.inputWrapperRef.current.contains(document.activeElement)
-    );
+    return document.activeElement && this.isInPicker(document.activeElement);
   }
 
   get singleSelectedOption() {
@@ -283,9 +278,8 @@ export class PickerComponent extends PureComponent {
     );
   }
 
-  clearTimeouts() {
-    if (!this.timeouts) return;
-    this.timeouts.forEach(clearTimeout);
+  isInPicker(element) {
+    this.inputWrapperRef.current.contains(element);
   }
 
   scrollListboxToTop() {
@@ -495,27 +489,23 @@ export class PickerComponent extends PureComponent {
     this.selectSearchInputText();
   };
 
-  ifPickerLosesFocus(callback) {
-    this.timeouts.push(
-      setTimeout(() => {
-        if (!this.somethingInPickerHasFocus) callback();
-      }, 100)
-    );
-  }
+  onSearchInputBlur = event => {
+    if (
+      !this.somethingInPickerHasFocus ||
+      !this.isInPicker(event.relatedTarget)
+    )
+      return;
 
-  onSearchInputBlur = () => {
-    this.ifPickerLosesFocus(() => {
-      if (this.isNotMultiple && this.isSearchInputValueEmptyString)
-        this.unselectAll();
-      if (this.isSearchInputValuePresent) {
-        if (this.props.allowNew) {
-          this.selectActiveOption();
-        } else {
-          this.updateSearchInputValue(null);
-        }
+    if (this.isNotMultiple && this.isSearchInputValueEmptyString)
+      this.unselectAll();
+    if (this.isSearchInputValuePresent) {
+      if (this.props.allowNew) {
+        this.selectActiveOption();
+      } else {
+        this.updateSearchInputValue(null);
       }
-      this.makeListBoxHidden();
-    });
+    }
+    this.makeListBoxHidden();
   };
 
   setOptionFilter(searchWord) {
@@ -666,7 +656,6 @@ export class PickerComponent extends PureComponent {
                     return (
                       <li
                         key={option.key}
-                        tabIndex="-1"
                         role="option"
                         id={`${ids.option}-${option.key}`}
                         aria-selected={active}
