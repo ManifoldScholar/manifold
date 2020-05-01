@@ -32,8 +32,8 @@ class ApplicationController < ActionController::API
         nil
       end
 
-      def can_read?(resource, *_other)
-        resource.readable_by? self
+      def can_read?(resource, *other)
+        resource.readable_by? self, *other
       end
     end.new
   end

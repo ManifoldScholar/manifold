@@ -65,7 +65,11 @@ class EntitlementAuthorizer < ApplicationAuthorizer
 
     # @param [User] user
     # @param [Hash] _options
-    def readable_by?(_user, _options = {})
+    def readable_by?(user, options = {})
+      return true unless options
+      return admin_permissions?(user) if options[:unscoped]
+      return options[:for].updatable_by? user if options[:for]
+
       true
     end
 
