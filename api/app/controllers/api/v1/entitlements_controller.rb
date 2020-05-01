@@ -1,11 +1,12 @@
 module Api
   module V1
     class EntitlementsController < ApplicationController
-      resourceful! Entitlement do
+      resourceful! Entitlement, authorize_options: { except: [:index] } do
         Entitlement.all
       end
 
       def index
+        authorize_action_for Entitlement, unscoped: true
         @entitlements = load_entitlements
 
         render_multiple_resources @entitlements, includes: %i[entitler subject target]

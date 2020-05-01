@@ -5,7 +5,7 @@ module Api
         class EntitlementsController < AbstractProjectChildController
           include Api::V1::BuildsScopedEntitlements
 
-          resourceful! Entitlement do
+          resourceful! Entitlement, authorize_options: { except: [:index] } do
             Entitlement.filtered(
               with_pagination!(entitlement_filter_params),
               scope: Entitlement.where(subject_type: "Project", subject_id: params[:project_id])
@@ -13,6 +13,7 @@ module Api
           end
 
           def index
+            authorize_action_for Entitlement, for: @project
             @entitlements = load_entitlements
 
             location = api_v1_project_relationships_entitlements_url(project_id: params[:project_id])
