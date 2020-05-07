@@ -40,6 +40,10 @@ export class PickerComponent extends PureComponent {
     listRowComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     /* props to be passed to each row in the list                               */
     listRowProps: PropTypes.object,
+    /* This function will be passed the entity for a given row and should       */
+    /* a URL string. If present, entities in the list will render with an edit  */
+    /* link.                                                                    */
+    listRowEditUrlGenerator: PropTypes.func,
     /* The path to the attribute on the model that's being updated in bracket   */
     /* notation. For example: "attributes[tagList]"                             */
     name: PropTypes.string.isRequired,
@@ -716,6 +720,7 @@ export class PickerComponent extends PureComponent {
                       ...listRowProps,
                       options: optionsMeta.allOptions
                     }}
+                    rowEditRoute={this.props.listRowEditRoute}
                     callbacks={this.callbacks}
                     entities={value}
                   />

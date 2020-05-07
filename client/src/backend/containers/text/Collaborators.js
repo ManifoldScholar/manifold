@@ -6,6 +6,9 @@ import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
+import { entityStoreActions } from "actions";
+
+const { request } = entityStoreActions;
 
 export class TextCollaboratorsContainer extends Component {
   static displayName = "Text.Collaborators";
@@ -26,21 +29,26 @@ export class TextCollaboratorsContainer extends Component {
     this.props.history.push(this.closeUrl(this.props));
   };
 
+  newMaker = value => {
+    const maker = {
+      type: "maker",
+      attributes: {
+        name: value
+      }
+    };
+    const call = makersAPI.create(maker);
+    const makerRequest = request(call, `create-maker`);
+    const { promise } = this.props.dispatch(makerRequest);
+    return promise.then(({ data }) => data);
+  };
+
   render() {
     const text = this.props.text;
     const closeUrl = this.closeUrl(this.props);
 
-    // <CompositeInputs.Collaborators
-    //   entity={text}
-    //   api={textsAPI}
-    //   history={this.props.history}
-    //   route={this.props.route}
-    // />
-
     return (
       <section>
         <FormContainer.Form
-          debug
           style={{ marginBottom: 100 }}
           model={text}
           name="testing-project-collaborators"
@@ -51,21 +59,28 @@ export class TextCollaboratorsContainer extends Component {
             label="Authors"
             name="relationships[creators]"
             optionToLabel={maker => maker.attributes.fullName}
-            callbacks={{}}
+            reorderable
             predictive
-            placeholder="Add an Author"
+            listStyle={"rows"}
             listRowComponent="MakerRow"
+            listRowEditRoute={"backendRecordsMaker"}
             options={makersAPI.index}
+            newToValue={this.newMaker}
+            allowNew
           />
           <Form.Picker
             label="Contributors"
             name="relationships[contributors]"
             optionToLabel={maker => maker.attributes.fullName}
             callbacks={{}}
+            reorderable
             predictive
-            placeholder="Add a Contributor"
-            listRowComponent="MakerRow"
+            newToValue={this.newMaker}
+            allowNew
             options={makersAPI.index}
+            listStyle={"rows"}
+            listRowComponent="MakerRow"
+            listRowEditRoute={"backendRecordsMaker"}
           />
           <Form.Save />
         </FormContainer.Form>

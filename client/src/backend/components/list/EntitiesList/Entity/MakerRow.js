@@ -10,11 +10,13 @@ export default class MakerRow extends PureComponent {
   static propTypes = {
     clickable: PropTypes.bool,
     entity: PropTypes.object,
-    active: PropTypes.string
+    active: PropTypes.string,
+    withEditButton: PropTypes.bool
   };
 
   static defaultProps = {
-    clickable: true
+    clickable: true,
+    withEditButton: false
   };
 
   get maker() {

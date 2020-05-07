@@ -3,6 +3,8 @@ import * as EntitiesList from "backend/components/list/EntitiesList";
 import Utility from "global/components/utility";
 import has from "lodash/has";
 import isFunction from "lodash/isFunction";
+import { Link } from "react-router-dom";
+import lh from "helpers/linkHandler";
 
 export default class PickerListComponent extends PureComponent {
   static displayName = "Form.Picker.List";
@@ -28,7 +30,7 @@ export default class PickerListComponent extends PureComponent {
   }
 
   get canEdit() {
-    return has(this.callbacks, "editSelection");
+    return this.props.rowEditRoute;
   }
 
   get canReorder() {
@@ -39,6 +41,10 @@ export default class PickerListComponent extends PureComponent {
     const { rowComponent } = this.props;
     if (isFunction(rowComponent)) return rowComponent;
     if (has(EntitiesList, rowComponent)) return EntitiesList[rowComponent];
+  }
+
+  editUrl(entity) {
+    return lh.link(this.props.rowEditRoute, entity.id);
   }
 
   wrappedRowComponent = props => {
@@ -61,18 +67,13 @@ export default class PickerListComponent extends PureComponent {
           </button>
         )}
         {this.canEdit && (
-          <button
+          <Link
             type="button"
             className="entity-row__utility-button"
-            onClick={event => {
-              event.stopPropagation();
-              event.preventDefault();
-              this.callbacks.editSelection(props.entity);
-            }}
-            aria-label="Edit selection"
+            to={this.editUrl(props.entity)}
           >
             <Utility.IconComposer icon="annotate32" size={26} />
-          </button>
+          </Link>
         )}
       </>
     );
