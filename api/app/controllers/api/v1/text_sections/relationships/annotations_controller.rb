@@ -32,8 +32,8 @@ module Api
               .new(annotation_params)
               .update_without_save(@text_section.annotations.new)
             @annotation.creator = @current_user
-            @annotation.save
             authorize_action_for @annotation
+            @annotation.save
             render_single_resource @annotation, location: location
           end
 
