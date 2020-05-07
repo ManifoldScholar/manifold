@@ -47,7 +47,7 @@ $spHighlightTertiaryPaleLowContrast: #775e77;
   &.secondary {
     // Built in css function
     // scss-lint:disable NameFormat
-    background-image: linear-gradient($spNoticeExtraLight, $spNoticeExtraLight);
+    background-image: linear-gradient($spHighlightSecondaryLight, $spHighlightSecondaryLight);
 
     .scheme-dark & {
       background-image: linear-gradient($spHighlightSecondaryPaleLowContrast, $spHighlightSecondaryPaleLowContrast);
