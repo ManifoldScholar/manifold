@@ -50,11 +50,11 @@ export class HeadContentComponent extends Component {
   }
 
   get image() {
-    const image =
+    return (
       this.props.image ||
       get(this.props.settings, "attributes.pressLogoStyles.medium") ||
-      `/static/logo.jpg`;
-    return `${config.services.client.url}${image}`;
+      `${config.services.client.url}/static/logo.jpg`
+    );
   }
 
   readPropValue(key) {
