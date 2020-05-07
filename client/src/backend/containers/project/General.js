@@ -65,7 +65,7 @@ class ProjectGeneralContainer extends PureComponent {
                 name="attributes[subtitle]"
                 placeholder="Enter Project Subtitle"
               />
-              <Form.Date
+              <Form.DatePicker
                 label="Publication Date"
                 name="attributes[publicationDate]"
               />
