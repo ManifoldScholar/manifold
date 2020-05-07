@@ -34,7 +34,7 @@ export default class FormRadioOption extends PureComponent {
   }
 
   get checked() {
-    return this.props.value === this.props.option.value;
+    return this.props.value === this.props.option.originalValue;
   }
 
   get inline() {
@@ -65,7 +65,6 @@ export default class FormRadioOption extends PureComponent {
             ref={input => {
               this.inputElement = input;
             }}
-            tabIndex={this.tabIndex}
           />
           <span className="toggle-indicator" aria-hidden="true" />
           <span className="toggle-label">{this.option.label}</span>
