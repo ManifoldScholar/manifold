@@ -7,6 +7,10 @@
 
   &__input-wrapper {
     position: relative;
+
+    body.backend & {
+      background-color: $neutral90;
+    }
   }
 
   &__input {

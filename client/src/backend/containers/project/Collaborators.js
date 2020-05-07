@@ -7,8 +7,9 @@ import lh from "helpers/linkHandler";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import Authorize from "hoc/authorize";
+import { entityStoreActions } from "actions";
 
-import { MakerRow } from "backend/components/list/EntitiesList";
+const { request } = entityStoreActions;
 
 export class ProjectCollaboratorsContainer extends Component {
   static displayName = "Project.Collaborators";
@@ -27,6 +28,19 @@ export class ProjectCollaboratorsContainer extends Component {
   close = () => {
     this.props.refresh();
     this.props.history.push(this.closeUrl(this.props));
+  };
+
+  newMaker = value => {
+    const maker = {
+      type: "maker",
+      attributes: {
+        name: value
+      }
+    };
+    const call = makersAPI.create(maker);
+    const makerRequest = request(call, `create-maker`);
+    const { promise } = this.props.dispatch(makerRequest);
+    return promise.then(({ data }) => data);
   };
 
   render() {
@@ -52,19 +66,28 @@ export class ProjectCollaboratorsContainer extends Component {
               label="Authors"
               name="relationships[creators]"
               optionToLabel={maker => maker.attributes.fullName}
-              callbacks={{}}
+              reorderable
               predictive
-              listRowComponent={MakerRow}
+              listStyle={"rows"}
+              listRowComponent="MakerRow"
+              listRowEditRoute={"backendRecordsMaker"}
               options={makersAPI.index}
+              newToValue={this.newMaker}
+              allowNew
             />
             <Form.Picker
               label="Contributors"
               name="relationships[contributors]"
               optionToLabel={maker => maker.attributes.fullName}
               callbacks={{}}
+              reorderable
               predictive
-              listRowComponent={MakerRow}
+              newToValue={this.newMaker}
+              allowNew
               options={makersAPI.index}
+              listStyle={"rows"}
+              listRowComponent="MakerRow"
+              listRowEditRoute={"backendRecordsMaker"}
             />
             <Form.Save />
           </FormContainer.Form>
