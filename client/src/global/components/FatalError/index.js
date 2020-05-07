@@ -43,6 +43,7 @@ export default class FatalError extends PureComponent {
 
   get isProjectAuthorizationError() {
     if (!this.isAuthorizationError) return false;
+    if (has(this.error, "method") && this.error.method !== "GET") return false;
     return has(this.error, "project.id");
   }
 
