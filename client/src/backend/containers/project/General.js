@@ -153,12 +153,12 @@ class ProjectGeneralContainer extends PureComponent {
               <Form.TextInput
                 label="Top Bar Text"
                 name="attributes[standaloneModePressBarText]"
-                instructions="If the top bar is visible, this text will override the installation's top bar text"
+                instructions="If set, the top bar will display and this text will override the installation's top bar text"
               />
               <Form.TextInput
                 label="Top Bar URL"
                 name="attributes[standaloneModePressBarUrl]"
-                instructions="If the top bar is visible, this text will override the top bar link URL"
+                instructions="If the top bar is visible, this text will link to this URL"
               />
             </Form.FieldGroup>
             <Form.FieldGroup label="Restrictions">

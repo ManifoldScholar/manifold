@@ -19,12 +19,13 @@ const buildProjectState = project => {
 
 const buildState = (
   mode = "library",
-  state = { isProjectHomepage: true },
+  state = { isProjectHomepage: false },
   payload = null
 ) => {
   const project = payload ? payload.project : null;
   const isLibrary = mode === "library";
   const isStandalone = mode === "standalone";
+  const isProject = state.isProject || false;
 
   // If we're transitioning from standalone to library, we store the project ID in case
   // the user returns to it.
@@ -34,8 +35,9 @@ const buildState = (
       : state.lastStandaloneId;
 
   return {
-    isProjectHomepage: state.isProjectHomepage || false,
+    isProjectHomepage: isLibrary ? false : state.isProjectHomepage || false,
     isLibrary,
+    isProject,
     isStandalone,
     project: project ? buildProjectState(project) : state.project,
     lastStandaloneId
@@ -43,7 +45,7 @@ const buildState = (
 };
 
 function setModeLibrary(state) {
-  return buildState("library", state);
+  return buildState("library", { ...state, isProject: false });
 }
 
 function setModeStandalone(state, action) {
@@ -66,7 +68,7 @@ function setIsProjectSubpage(state) {
 }
 
 function setProjectContext(state, action) {
-  return buildState(state.mode, state, action.payload);
+  return buildState(state.mode, { ...state, isProject: true }, action.payload);
 }
 
 function setIsProjectHomepage(state) {

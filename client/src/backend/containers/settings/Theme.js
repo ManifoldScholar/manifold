@@ -121,25 +121,25 @@ export class SettingsThemeContainer extends PureComponent {
                 placeholder="Enter Typekit ID"
               />
             </Form.FieldGroup>
-            <Form.FieldGroup label={"Press Header Bar"}>
+            <Form.FieldGroup label={"Top Bar"}>
               <Form.TextInput
                 label="Text"
                 name="attributes[theme][topBarText]"
-                placeholder="Enter Press Bar Text"
+                placeholder="Enter Top Bar Text"
               />
               <Form.TextInput
                 label="Color"
                 name="attributes[theme][topBarColor]"
-                placeholder="Enter Press Bar Color"
+                placeholder="Enter Top Bar Color"
                 instructions="Enter a hex code beginning with #"
               />
               <Form.TextInput
                 label="URL"
                 name="attributes[theme][topBarUrl]"
-                placeholder="Enter Press Bar Link URL"
+                placeholder="Enter Top Bar Link URL"
               />
               <Form.Select
-                label="Press Bar Display Mode"
+                label="Top Bar Display Mode"
                 name="attributes[theme][topBarMode]"
                 options={[
                   { label: "Disabled", value: "disabled" },
