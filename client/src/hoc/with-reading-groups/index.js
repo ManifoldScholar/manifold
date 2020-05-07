@@ -69,8 +69,14 @@ export default function withReadingGroups(WrappedComponent) {
           group => group.id === this.props.currentReadingGroup
         );
         if (!currentGroup)
-          this.props.dispatch(uiReadingGroupActions.setReadingGroup("private"));
+          this.props.dispatch(
+            uiReadingGroupActions.setReadingGroup(this.defaultReadingGroup)
+          );
       }
+    }
+
+    get defaultReadingGroup() {
+      return "private";
     }
 
     get canReadReadingGroups() {
@@ -97,6 +103,19 @@ export default function withReadingGroups(WrappedComponent) {
       );
     }
 
+    get validatedCurrentReadingGroup() {
+      const { currentReadingGroup } = this.props;
+      if (currentReadingGroup === "public" && this.canEngagePublicly)
+        return currentReadingGroup;
+      if (currentReadingGroup === "private") return currentReadingGroup;
+
+      const validGroup = this.adjustedReadingGroups.find(
+        group => group.id === currentReadingGroup
+      );
+      if (validGroup) return currentReadingGroup;
+      return this.defaultReadingGroup;
+    }
+
     fetchReadingGroups() {
       if (!this.canReadReadingGroups) return;
       const readingGroupsFetch = meAPI.readingGroups();
@@ -116,7 +135,8 @@ export default function withReadingGroups(WrappedComponent) {
       const props = {
         ...otherProps,
         ...this.childProps,
-        readingGroups: this.adjustedReadingGroups
+        readingGroups: this.adjustedReadingGroups,
+        currentReadingGroup: this.validatedCurrentReadingGroup
       };
       return React.createElement(WrappedComponent, props);
     }
