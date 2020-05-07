@@ -6,6 +6,14 @@ class CommentAuthorizer < ApplicationAuthorizer
     true
   end
 
+  def creatable_by?(user, options = {})
+    with_project { |p| p.publicly_engageable_by? user, options }
+  end
+
+  def readable_by?(user, options = {})
+    with_project { |p| p.publicly_engageable_by? user, options }
+  end
+
   def deletable_by?(user, _options = {})
     creator_or_has_editor_permissions?(user, resource)
   end

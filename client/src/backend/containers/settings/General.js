@@ -107,6 +107,7 @@ export class SettingsGeneralContainer extends PureComponent {
                 <Form.FieldGroup label="Behaviors">
                   <Form.Switch
                     wide
+                    className="form-toggle-secondary"
                     label="Restrict Access to All Projects"
                     instructions="When on, users must have entitlements to access project content"
                     name="attributes[general][restrictedAccess]"
@@ -115,6 +116,7 @@ export class SettingsGeneralContainer extends PureComponent {
                     true && (
                     <>
                       <Form.TextInput
+                        wide
                         className="form-toggle-secondary"
                         label="Restricted Access Notice Header"
                         name="attributes[restrictedAccessHeading]"
@@ -124,6 +126,7 @@ export class SettingsGeneralContainer extends PureComponent {
                         }
                       />
                       <Form.TextArea
+                        wide
                         className="form-toggle-secondary"
                         label="Restricted Access Notice Body"
                         name="attributes[restrictedAccessBody]"
@@ -135,6 +138,8 @@ export class SettingsGeneralContainer extends PureComponent {
                     </>
                   )}
                   <Form.Switch
+                    className="form-toggle-secondary"
+                    wide
                     label="Disable Library Views"
                     instructions="When on, this setting will disable the library views on the frontend."
                     name="attributes[general][libraryDisabled]"
@@ -144,6 +149,7 @@ export class SettingsGeneralContainer extends PureComponent {
                     <>
                       <Form.Switch
                         wide
+                        className="form-toggle-secondary"
                         label="Enforce Standalone Mode for All Projects"
                         name="attributes[general][allStandalone]"
                         instructions="When on, all projects will render in standalone mode."
@@ -162,6 +168,20 @@ export class SettingsGeneralContainer extends PureComponent {
                       />
                     </>
                   )}
+                  <Form.Switch
+                    className="form-toggle-secondary"
+                    wide
+                    label="Disable Public Annotations and Comments"
+                    instructions="When on, this setting will prevent users from commenting or annotating publicly. All reading groups will behave as private reading groups."
+                    name="attributes[general][disableEngagement]"
+                  />
+                  <Form.Switch
+                    className="form-toggle-secondary"
+                    wide
+                    label="Disable Reading Groups"
+                    instructions="When on, this setting will prevent users from creating or joining reading groups."
+                    name="attributes[general][disableReadingGroups]"
+                  />
                 </Form.FieldGroup>
                 <Form.Save text="Save Settings" />
               </>

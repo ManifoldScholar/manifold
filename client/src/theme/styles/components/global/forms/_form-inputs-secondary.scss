@@ -7,7 +7,7 @@
   // Explicit height so that elements can line up
   height: 32px;
   // Declared in em as it should change with font size
-  padding: 0 0 0.75em;
+  padding: 0;
   font-size: 16px;
   vertical-align: top;
   background-color: transparent;
@@ -115,7 +115,7 @@
       @include formLabelPrimary;
       display: block;
       margin-top: 0;
-      margin-bottom: 1em;
+      margin-bottom: 0.5em;
 
       &.below {
         margin-top: 0.6em;

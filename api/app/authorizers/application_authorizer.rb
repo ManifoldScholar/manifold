@@ -37,6 +37,22 @@ class ApplicationAuthorizer < Authority::Authorizer
     end
   end
 
+  def reading_groups_disabled?
+    self.class.reading_groups_disabled?
+  end
+
+  # @yield [project] do something with a project if it is present on the resource.
+  # @yieldparam [Project] project
+  # @yieldreturn [Boolean]
+  # @return [Boolean]
+  def with_project
+    project = resource.project
+
+    return false if project.blank?
+
+    project.then(&Proc.new)
+  end
+
   class << self
     # Any class method from Authority::Authorizer that isn't overridden
     # will call its authorizer's default method.
@@ -49,6 +65,10 @@ class ApplicationAuthorizer < Authority::Authorizer
       # 'Whitelist' strategy for security: anything not explicitly allowed is
       # considered forbidden.
       false
+    end
+
+    def reading_groups_disabled?
+      Settings.instance.general[:disable_reading_groups]
     end
 
     # @see RoleName::Admin
@@ -158,5 +178,6 @@ class ApplicationAuthorizer < Authority::Authorizer
 
       user.has_cached_role? role, actual_on
     end
+
   end
 end

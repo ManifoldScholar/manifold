@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
+import withCurrentUser from "hoc/with-current-user";
 
 export class UserMenuBodyComponent extends Component {
   static propTypes = {
@@ -23,6 +24,12 @@ export class UserMenuBodyComponent extends Component {
     this.props.startLogout();
     this.props.hideUserMenu();
   };
+
+  get canAccessReadingGroups() {
+    const { currentUser } = this.props;
+    if (!currentUser) return false;
+    return currentUser.attributes.classAbilities.readingGroup.read;
+  }
 
   handleProfileClick = event => {
     event.preventDefault();
@@ -90,23 +97,25 @@ export class UserMenuBodyComponent extends Component {
               Edit your notification settings
             </span>
           </li>
-          <li className="user-menu__item">
-            <button
-              className="user-menu__link"
-              onClick={this.handleReadingGroupsClick}
-              aria-describedby="user-menu-groups"
-            >
-              <IconComposer
-                icon="annotationGroup24"
-                size={32}
-                iconClass="user-menu__icon"
-              />
-              <span className="user-menu__link-text">Manage Groups</span>
-            </button>
-            <span id="user-menu-groups" className="aria-describedby">
-              Manage your Reading Groups
-            </span>
-          </li>
+          {this.canAccessReadingGroups && (
+            <li className="user-menu__item">
+              <button
+                className="user-menu__link"
+                onClick={this.handleReadingGroupsClick}
+                aria-describedby="user-menu-groups"
+              >
+                <IconComposer
+                  icon="annotationGroup24"
+                  size={32}
+                  iconClass="user-menu__icon"
+                />
+                <span className="user-menu__link-text">Manage Groups</span>
+              </button>
+              <span id="user-menu-groups" className="aria-describedby">
+                Manage your Reading Groups
+              </span>
+            </li>
+          )}
           <li className="user-menu__item">
             <button
               className="user-menu__link"
@@ -130,4 +139,4 @@ export class UserMenuBodyComponent extends Component {
   }
 }
 
-export default withRouter(UserMenuBodyComponent);
+export default withRouter(withCurrentUser(UserMenuBodyComponent));

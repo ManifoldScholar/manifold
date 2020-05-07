@@ -24,7 +24,9 @@ module V1
       home_redirect_url: Types::String,
       restricted_access: Types::Bool,
       restricted_access_heading: Types::String,
-      restricted_access_body: Types::String
+      restricted_access_body: Types::String,
+      disable_engagement: Types::Bool,
+      disable_reading_groups: Types::Bool
     )
     typed_attribute :theme, Types::Hash.schema(
       logo_styles: Types::String,

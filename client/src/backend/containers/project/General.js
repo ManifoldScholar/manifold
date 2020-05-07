@@ -50,7 +50,7 @@ class ProjectGeneralContainer extends PureComponent {
             create={projectsAPI.create}
             className="form-secondary"
           >
-            <Form.FieldGroup label="General Attributes">
+            <Form.FieldGroup label="General">
               <Form.TextInput
                 wide
                 validation={["required"]}
@@ -79,38 +79,6 @@ class ProjectGeneralContainer extends PureComponent {
                 wide
                 project={project}
                 {...this.props}
-              />
-            </Form.FieldGroup>
-            <Form.FieldGroup label="Visibility and Access">
-              <Form.Switch
-                className="form-toggle-secondary"
-                label="Draft Mode"
-                name="attributes[draft]"
-                instructions="A draft project is only visible to users who are able to modify it."
-              />
-              <Form.Switch
-                className="form-toggle-secondary"
-                label="Featured"
-                name="attributes[featured]"
-                instructions="Featured projects are highlighted on the home page."
-              />
-              <Form.Switch
-                className="form-toggle-secondary"
-                label="Finished"
-                name="attributes[finished]"
-                instructions="In lists, Manifold will show the publication date for finished projects."
-              />
-              <Form.Select
-                label="Standalone Mode"
-                name="attributes[standaloneMode]"
-                options={[
-                  { value: "disabled", label: "Disabled" },
-                  { value: "enabled", label: "Enabled" },
-                  { value: "enforced", label: "Enforced" }
-                ]}
-                instructions={`If enabled, this project will always render in standalone
-                mode when "?mode=standalone" is appended to the URL. If standalone mode
-                is enforced, this project will always render in standalone mode`}
               />
             </Form.FieldGroup>
             <Form.FieldGroup label="Taxonomy">
@@ -147,19 +115,59 @@ class ProjectGeneralContainer extends PureComponent {
                 allowNew
               />
             </Form.FieldGroup>
-            <Form.FieldGroup
-              label="Press Header Bar"
-              instructions="Admin users can enable the press bar for your installation on the settings / theme panel."
-            >
+            <Form.FieldGroup label="Presentation">
+              <Form.Switch
+                className="form-toggle-secondary"
+                wide
+                label="Draft Mode"
+                name="attributes[draft]"
+                instructions="A draft project is only visible to users who are able to modify it."
+              />
+              <Form.Switch
+                className="form-toggle-secondary"
+                wide
+                label="Featured"
+                name="attributes[featured]"
+                instructions="Featured projects are highlighted on the home page."
+              />
+              <Form.Switch
+                className="form-toggle-secondary"
+                wide
+                label="Finished"
+                name="attributes[finished]"
+                instructions="In lists, Manifold will show the publication date for finished projects."
+              />
+              <Form.Select
+                label="Standalone Mode"
+                wide
+                name="attributes[standaloneMode]"
+                options={[
+                  { value: "disabled", label: "Standalone Mode Disabled" },
+                  { value: "enabled", label: "Standalone Mode Enabled" },
+                  { value: "enforced", label: "Standalone Mode Enforced" }
+                ]}
+                instructions={`If enabled, this project will always render in standalone
+                mode when "?mode=standalone" is appended to the URL. If standalone mode
+                is enforced, this project will always render in standalone mode`}
+              />
               <Form.TextInput
-                label="Press Header Bar Text"
+                label="Top Bar Text"
                 name="attributes[standaloneModePressBarText]"
                 instructions="If the top bar is visible, this text will override the installation's top bar text"
               />
               <Form.TextInput
-                label="Press Header Bar URL"
+                label="Top Bar URL"
                 name="attributes[standaloneModePressBarUrl]"
                 instructions="If the top bar is visible, this text will override the top bar link URL"
+              />
+            </Form.FieldGroup>
+            <Form.FieldGroup label="Restrictions">
+              <Form.Switch
+                className="form-toggle-secondary"
+                wide
+                label="Disable Public Annotations and Comments"
+                name="attributes[disableEngagement]"
+                instructions="When on, this setting will prevent users from commenting or annotating publicly on this project. Reading group annotations will only appear for group members."
               />
             </Form.FieldGroup>
             <Form.Save text="Save Project" />

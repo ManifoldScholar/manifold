@@ -70,7 +70,8 @@ Authority.configure do |config|
     manage_socials: "socials_manageable",
     read_secrets: "secrets_readable",
     read_log: "log_readable",
-    notate: "notatable"
+    notate: "notatable",
+    engage_publicly: "publicly_engageable"
   }
 
   # LOGGER

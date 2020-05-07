@@ -16,7 +16,9 @@ class Settings < ApplicationRecord
       head_description: "Transforming scholarly publications into living digital works",
       social_share_message: "Shared from Manifold Scholarship",
       library_disabled: false,
-      restricted_access: false
+      restricted_access: false,
+      disable_engagement: false,
+      disable_reading_groups: false
     },
     email: {
       from_address: "do-not-reply@manifoldapp.org",

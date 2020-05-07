@@ -28,18 +28,8 @@ class ProjectChildAuthorizer < ApplicationAuthorizer
     with_project { |p| p.fully_readable_by? user, options }
   end
 
-  private
-
-  # @yield [project] do something with a project if it is present on the resource.
-  # @yieldparam [Project] project
-  # @yieldreturn [Boolean]
-  # @return [Boolean]
-  def with_project
-    project = resource.project
-
-    return false if project.blank?
-
-    project.then(&Proc.new)
+  def publicly_engageable_by?(user, options = {})
+    with_project { |p| p.publicly_engageable_by? user, options }
   end
 
   class << self

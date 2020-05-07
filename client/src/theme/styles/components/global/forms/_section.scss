@@ -58,7 +58,7 @@
 
     &--primary {
       > .form-input {
-        margin-bottom: 20px;
+        margin-bottom: 35px;
 
         @include respond($break90) {
           margin-top: 18px;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_182131) do
+ActiveRecord::Schema.define(version: 2020_05_04_201500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -663,6 +663,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_182131) do
     t.string "restricted_access_heading"
     t.text "restricted_access_body"
     t.boolean "open_access", default: false, null: false
+    t.boolean "disable_engagement", default: false
     t.index "((export_configuration @> '{\"bag_it\": true}'::jsonb))", name: "index_projects_export_configuration_exports_as_bag_it"
     t.index ["fingerprint"], name: "index_projects_on_fingerprint"
     t.index ["open_access"], name: "index_projects_on_open_access"

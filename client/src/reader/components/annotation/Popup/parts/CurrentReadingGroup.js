@@ -9,12 +9,24 @@ export default class CurrentReadingGroup extends PureComponent {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
     readingGroups: PropTypes.array,
-    currentReadingGroup: PropTypes.string
+    currentReadingGroup: PropTypes.string,
+    canAccessReadingGroups: PropTypes.bool,
+    canEngagePublicly: PropTypes.bool
   };
 
   static defaultProps = {
-    currentReadingGroup: "public"
+    currentReadingGroup: "public",
+    canAccessReadingGroups: false,
+    canEngagePublicly: false
   };
+
+  get canAccessReadingGroups() {
+    return this.props.canAccessReadingGroups;
+  }
+
+  get canEngagePublicly() {
+    return this.props.canEngagePublicly;
+  }
 
   get currentGroupName() {
     if (this.props.currentReadingGroup === "public")
@@ -37,7 +49,11 @@ export default class CurrentReadingGroup extends PureComponent {
           onClick={onClick}
           className="annotation-popup__button annotation-popup__button--stacked annotation-popup__button--secondary-dark"
         >
-          <span className="annotation-popup__button-text">Current Group:</span>
+          <span className="annotation-popup__button-text">
+            {this.canAccessReadingGroups
+              ? "Current Group:"
+              : "Current Visibility:"}
+          </span>
           <div className="annotation-popup__button-inner-row">
             <span className="annotation-popup__button-text annotation-popup__button-text--small">
               {this.currentGroupName}

@@ -11,6 +11,7 @@ class ReadingGroupMembershipAuthorizer < ApplicationAuthorizer
 
   def creatable_by?(user, _options = {})
     return false unless known_user?(user)
+    return false if reading_groups_disabled?
     return true if resource.user_id == user.id
 
     admin_permissions? user
@@ -25,10 +26,14 @@ class ReadingGroupMembershipAuthorizer < ApplicationAuthorizer
   end
 
   def updatable_by?(user, _options = {})
+    return false if reading_groups_disabled?
+
     resource.reading_group.updatable_by?(user)
   end
 
   def readable_by?(user, _options = {})
+    return false if reading_groups_disabled?
+
     resource.reading_group.users.exists?(user)
   end
 

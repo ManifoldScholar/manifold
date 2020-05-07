@@ -8,6 +8,8 @@ import { UID } from "react-uid";
 import classNames from "classnames";
 import ReadingGroupOption from "reader/components/annotation/Popup/parts/ReadingGroupOption";
 import withReadingGroups from "hoc/with-reading-groups";
+import { ReaderContext } from "helpers/contexts";
+import withCurrentUser from "hoc/with-current-user";
 
 class AnnotationEditor extends PureComponent {
   static displayName = "Annotation.Editor";
@@ -23,6 +25,8 @@ class AnnotationEditor extends PureComponent {
     closeOnSave: true,
     annotation: { attributes: {} }
   };
+
+  static contextType = ReaderContext;
 
   constructor(props) {
     super(props);
@@ -53,6 +57,16 @@ class AnnotationEditor extends PureComponent {
 
   get readingGroups() {
     return this.props.readingGroups;
+  }
+
+  get canAccessReadingGroups() {
+    const { currentUser } = this.props;
+    if (!currentUser) return false;
+    return currentUser.attributes.classAbilities.readingGroup.read;
+  }
+
+  get canEngagePublicly() {
+    return this.context.attributes.abilities.engagePublicly;
   }
 
   get hasReadingGroups() {
@@ -173,7 +187,9 @@ class AnnotationEditor extends PureComponent {
         onChange={event => this.setReadingGroup(event.target.value)}
         value={this.props.currentReadingGroup}
       >
-        <option value="public">{this.publicLabel}</option>
+        {this.canEngagePublicly && (
+          <option value="public">{this.publicLabel}</option>
+        )}
         <option value="private">{this.privateLabel}</option>
         {this.hasReadingGroups &&
           this.readingGroups.map(option => (
@@ -198,11 +214,13 @@ class AnnotationEditor extends PureComponent {
         })}
       >
         <ul className="annotation-group-options__list">
-          <ReadingGroupOption
-            label={this.publicLabel}
-            onClick={() => this.setReadingGroup("public")}
-            selected={this.isSelected("public")}
-          />
+          {this.canEngagePublicly && (
+            <ReadingGroupOption
+              label={this.publicLabel}
+              onClick={() => this.setReadingGroup("public")}
+              selected={this.isSelected("public")}
+            />
+          )}
           <ReadingGroupOption
             label={this.privateLabel}
             onClick={() => this.setReadingGroup("private")}
@@ -220,21 +238,23 @@ class AnnotationEditor extends PureComponent {
               />
             ))}
         </ul>
-        <div className="annotation-group-options__footer">
-          <Link
-            to={lh.link("frontendReadingGroups")}
-            className="annotation-group-options__link"
-          >
-            <span className="annotation-group-options__link-text">
-              Manage Groups
-            </span>
-            <IconComposer
-              icon="link24"
-              size="default"
-              iconClass="annotation-group-options__icon annotation-group-options__icon--link"
-            />
-          </Link>
-        </div>
+        {this.canAccessReadingGroups && (
+          <div className="annotation-group-options__footer">
+            <Link
+              to={lh.link("frontendReadingGroups")}
+              className="annotation-group-options__link"
+            >
+              <span className="annotation-group-options__link-text">
+                Manage Groups
+              </span>
+              <IconComposer
+                icon="link24"
+                size="default"
+                iconClass="annotation-group-options__icon annotation-group-options__icon--link"
+              />
+            </Link>
+          </div>
+        )}
       </div>
     );
   }
@@ -286,22 +306,29 @@ class AnnotationEditor extends PureComponent {
           </GlobalForm.Errorable>
 
           <div className="annotation-editor__actions">
-            <UID name={id => `${this.idPrefix}-${id}`}>
-              {id => (
-                <div className="annotation-editor__action">
-                  <div className="annotation-editor__action-label">
-                    <IconComposer
-                      icon="readingGroup24"
-                      size="default"
-                      iconClass="annotation-editor__action-icon"
-                    />
-                    <span id={`${id}-label`}>Reading Group:</span>
+            {(this.canAccessReadingGroups || this.canEngagePublicly) && (
+              <UID name={id => `${this.idPrefix}-${id}`}>
+                {id => (
+                  <div className="annotation-editor__action">
+                    <div className="annotation-editor__action-label">
+                      <IconComposer
+                        icon="readingGroup24"
+                        size="default"
+                        iconClass="annotation-editor__action-icon"
+                      />
+                      <span id={`${id}-label`}>
+                        {this.canAccessReadingGroups
+                          ? "Reading Group:"
+                          : "Visibility:"}
+                      </span>
+                    </div>
+
+                    {this.renderGroupPicker()}
+                    {this.renderSRSelect(id)}
                   </div>
-                  {this.renderGroupPicker()}
-                  {this.renderSRSelect(id)}
-                </div>
-              )}
-            </UID>
+                )}
+              </UID>
+            )}
             <div className="annotation-editor__buttons">
               <button
                 onClick={this.handleCancel}
@@ -320,4 +347,4 @@ class AnnotationEditor extends PureComponent {
   }
 }
 
-export default withReadingGroups(AnnotationEditor);
+export default withReadingGroups(withCurrentUser(AnnotationEditor));

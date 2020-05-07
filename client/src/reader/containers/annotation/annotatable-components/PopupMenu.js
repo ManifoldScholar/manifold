@@ -11,7 +11,7 @@ class AnnotatablePopup extends PureComponent {
     activeEvent: PropTypes.object,
     direction: PropTypes.string,
     actions: PropTypes.object.isRequired,
-    text: PropTypes.object,
+    text: PropTypes.object.isRequired,
     section: PropTypes.object,
     activeAnnotation: PropTypes.object,
     selection: PropTypes.object
