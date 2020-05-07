@@ -45,6 +45,14 @@ class ReadingGroupMembership < ApplicationRecord
           .merge(ReadingGroup.visible_to_public))
         .select(:reading_group_id)
     end
+
+    def joined_reading_group_ids_for(user)
+      return none if user.blank?
+
+      joins(:reading_group).where(user: user)
+        .select(:reading_group_id)
+    end
+
   end
 
   def creator?
