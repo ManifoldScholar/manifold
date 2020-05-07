@@ -184,7 +184,7 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
             "$$typeof": Symbol(react.memo),
             "WrappedComponent": [Function],
             "compare": null,
-            "displayName": "Connect(HigherOrder.WithReadingGroups(ControlMenu.VisibilityMenuBody))",
+            "displayName": "Connect(HigherOrder.WithReadingGroups(Connect(HigherOrder.WithCurrentUser('ControlMenu.VisibilityMenuBody))))",
             "mapStateToProps": [Function],
             "type": [Function],
           }

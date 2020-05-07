@@ -24,6 +24,12 @@ export default class ResourceDetail extends Component {
     };
   }
 
+  get canEngagePublicly() {
+    const { resource } = this.props;
+    if (!resource) return false;
+    return resource.attributes.abilities.engagePublicly;
+  }
+
   // The cancel prop is required by CommentEditor.
   // We don't render the cancel button in this context,
   // so this is basically a stub. --MO
@@ -76,13 +82,17 @@ export default class ResourceDetail extends Component {
                   )}
                 />
                 <div className="resource-comments">
-                  <CommentContainer.Thread subject={resource} />
-                  <CommentContainer.Editor
-                    focus={false}
-                    label={"Add Comment"}
-                    subject={resource}
-                    cancel={event => this.cancelComment(event)}
-                  />
+                  {this.canEngagePublicly && (
+                    <>
+                      <CommentContainer.Thread subject={resource} />
+                      <CommentContainer.Editor
+                        focus={false}
+                        label={"Add Comment"}
+                        subject={resource}
+                        cancel={event => this.cancelComment(event)}
+                      />
+                    </>
+                  )}
                 </div>
               </div>
             </div>

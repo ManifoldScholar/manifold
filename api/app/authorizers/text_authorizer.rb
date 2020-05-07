@@ -1,6 +1,6 @@
 class TextAuthorizer < ProjectChildAuthorizer
 
-  expose_abilities [:notate]
+  expose_abilities [:notate, :engage_publicly]
 
   def notatable_by?(user, _options = {})
     user.project_editor_of?(resource.project) ||

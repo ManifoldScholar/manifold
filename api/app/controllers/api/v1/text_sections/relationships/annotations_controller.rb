@@ -9,7 +9,7 @@ module Api
 
           resourceful! Annotation, authorize_options: { except: [:index] } do
             scope = @text_section.nil? ? Annotation : @text_section.annotations
-            scope = scope.with_read_ability(current_user)
+            scope = scope.with_read_ability(current_user, exclude_public_annotations?)
             scope = scope.includes(:reading_group, :text, :creator)
             Annotation.filtered(
               annotation_filter_params || {},
@@ -52,6 +52,12 @@ module Api
           end
 
           private
+
+          def exclude_public_annotations?
+            return false unless @text_section
+
+            !@text_section.publicly_engageable_by?(authority_user)
+          end
 
           def location
             api_v1_text_section_relationships_annotations_url(

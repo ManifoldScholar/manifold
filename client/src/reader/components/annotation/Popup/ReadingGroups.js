@@ -6,8 +6,10 @@ import Panel from "./parts/Panel";
 import ReadingGroupOption from "./parts/ReadingGroupOption";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
+import { ReaderContext } from "helpers/contexts";
+import withCurrentUser from "hoc/with-current-user";
 
-export default class AnnotationPopupSecondaryReadingGroup extends PureComponent {
+class AnnotationPopupSecondaryReadingGroup extends PureComponent {
   static displayName = "Annotation.Popup.Secondary.ReadingGroup";
 
   static propTypes = {
@@ -18,6 +20,8 @@ export default class AnnotationPopupSecondaryReadingGroup extends PureComponent 
     readingGroups: PropTypes.array,
     currentReadingGroup: PropTypes.string.isRequired
   };
+
+  static contextType = ReaderContext;
 
   get publicLabel() {
     return "My Public Annotations";
@@ -31,8 +35,18 @@ export default class AnnotationPopupSecondaryReadingGroup extends PureComponent 
     return this.props.readingGroups;
   }
 
+  get canAccessReadingGroups() {
+    const { currentUser } = this.props;
+    if (!currentUser) return false;
+    return currentUser.attributes.classAbilities.readingGroup.read;
+  }
+
   get hasReadingGroups() {
     return this.readingGroups && this.readingGroups.length > 0;
+  }
+
+  get canEngagePublicly() {
+    return this.context.attributes.abilities.engagePublicly;
   }
 
   isPrivateGroup(privacy) {
@@ -56,7 +70,9 @@ export default class AnnotationPopupSecondaryReadingGroup extends PureComponent 
     return (
       <div className="annotation-popup__header">
         <IconComposer icon="readingGroup24" size="default" />
-        <span className="annotation-popup__heading">Reading Groups:</span>
+        <span className="annotation-popup__heading">
+          {this.canAccessReadingGroups ? "Reading Groups:" : "Visibility"}
+        </span>
       </div>
     );
   }
@@ -65,11 +81,13 @@ export default class AnnotationPopupSecondaryReadingGroup extends PureComponent 
     const { onSelect, currentReadingGroup } = this.props;
     return (
       <ul className="annotation-group-options__list">
-        <ReadingGroupOption
-          label={this.publicLabel}
-          onClick={() => onSelect("public")}
-          selected={currentReadingGroup === "public"}
-        />
+        {this.canEngagePublicly && (
+          <ReadingGroupOption
+            label={this.publicLabel}
+            onClick={() => onSelect("public")}
+            selected={currentReadingGroup === "public"}
+          />
+        )}
         <ReadingGroupOption
           label={this.privateLabel}
           onClick={() => onSelect("private")}
@@ -91,6 +109,7 @@ export default class AnnotationPopupSecondaryReadingGroup extends PureComponent 
   }
 
   renderFooter() {
+    if (!this.canAccessReadingGroups) return null;
     return (
       <div className="annotation-group-options__footer">
         <Link
@@ -129,3 +148,5 @@ export default class AnnotationPopupSecondaryReadingGroup extends PureComponent 
     );
   }
 }
+
+export default withCurrentUser(AnnotationPopupSecondaryReadingGroup);

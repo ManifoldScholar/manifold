@@ -5,6 +5,7 @@ import { select, loaded } from "utils/entityUtils";
 import hoistStatics from "hoist-non-react-statics";
 import { connect } from "react-redux";
 import { entityStoreActions, uiReadingGroupActions } from "actions";
+import { ReaderContext } from "helpers/contexts";
 
 const { request } = entityStoreActions;
 
@@ -40,6 +41,8 @@ export default function withReadingGroups(WrappedComponent) {
       currentReadingGroup: PropTypes.string
     };
 
+    static contextType = ReaderContext;
+
     componentDidMount() {
       if (!this.props.readingGroupsLoaded) {
         this.fetchReadingGroups();
@@ -62,21 +65,18 @@ export default function withReadingGroups(WrappedComponent) {
         this.props.readingGroupsLoaded &&
         this.props.currentReadingGroup
       ) {
-        const currentGroup = this.props.readingGroups.find(
+        const currentGroup = this.adjustedReadingGroups.find(
           group => group.id === this.props.currentReadingGroup
         );
         if (!currentGroup)
-          this.props.dispatch(uiReadingGroupActions.setReadingGroup("public"));
+          this.props.dispatch(uiReadingGroupActions.setReadingGroup("private"));
       }
     }
 
-    fetchReadingGroups() {
-      const readingGroupsFetch = meAPI.readingGroups();
-      const readingGroupsAction = request(
-        readingGroupsFetch,
-        requests.feMyReadingGroups
-      );
-      this.props.dispatch(readingGroupsAction);
+    get canReadReadingGroups() {
+      const { currentUser } = this.props;
+      if (!currentUser) return false;
+      return currentUser.attributes.classAbilities.readingGroup.read;
     }
 
     get childProps() {
@@ -85,14 +85,39 @@ export default function withReadingGroups(WrappedComponent) {
       };
     }
 
+    get canEngagePublicly() {
+      return this.context.attributes.abilities.engagePublicly;
+    }
+
+    get adjustedReadingGroups() {
+      if (!this.props.readingGroups) return [];
+      if (this.canEngagePublicly) return this.props.readingGroups;
+      return this.props.readingGroups.filter(
+        rg => rg.attributes.privacy === "private"
+      );
+    }
+
+    fetchReadingGroups() {
+      if (!this.canReadReadingGroups) return;
+      const readingGroupsFetch = meAPI.readingGroups();
+      const readingGroupsAction = request(
+        readingGroupsFetch,
+        requests.feMyReadingGroups
+      );
+      this.props.dispatch(readingGroupsAction);
+    }
+
     setReadingGroup = id => {
       this.props.dispatch(uiReadingGroupActions.setReadingGroup(id));
     };
 
     render() {
       const { _authentication, ...otherProps } = this.props;
-      const props = { ...otherProps, ...this.childProps };
-      if (!props.readingGroups) props.readingGroups = [];
+      const props = {
+        ...otherProps,
+        ...this.childProps,
+        readingGroups: this.adjustedReadingGroups
+      };
       return React.createElement(WrappedComponent, props);
     }
   }

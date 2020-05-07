@@ -6,7 +6,7 @@ class ProjectAuthorizer < ApplicationAuthorizer
     :create_texts, :manage_twitter_queries, :create_twitter_queries,
     :manage_events, :manage_socials, :update_makers, :manage_project_exportations,
     :create_entitlements, :manage_entitlements, :fully_read,
-    :create_project_exportations
+    :create_project_exportations, :engage_publicly
   ]
 
   SOCIALS = %i[twitter_queries].freeze
@@ -96,6 +96,10 @@ class ProjectAuthorizer < ApplicationAuthorizer
   # @param [Hash] _options
   def drafts_readable_by?(user, _options = {})
     has_any_role? user, *RoleName.draft_access
+  end
+
+  def publicly_engageable_by?(_user, _options = {})
+    !resource.disable_engagement? && !Settings.instance.general[:disable_engagement]
   end
 
   # @note If a project does not have restricted access, this always returns true.

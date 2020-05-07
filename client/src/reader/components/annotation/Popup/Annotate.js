@@ -4,8 +4,10 @@ import Button from "./parts/Button";
 import Panel from "./parts/Panel";
 import CurrentReadingGroup from "./parts/CurrentReadingGroup";
 import classNames from "classnames";
+import withCurrentUser from "hoc/with-current-user";
+import { ReaderContext } from "helpers/contexts";
 
-export default class AnnotationPopupAnnotate extends PureComponent {
+class AnnotationPopupAnnotate extends PureComponent {
   static displayName = "Annotation.Popup.Annotate";
 
   static propTypes = {
@@ -27,8 +29,20 @@ export default class AnnotationPopupAnnotate extends PureComponent {
     direction: "down"
   };
 
+  static contextType = ReaderContext;
+
   get actions() {
     return this.props.actions;
+  }
+
+  get canEngagePublicly() {
+    return this.context.attributes.abilities.engagePublicly;
+  }
+
+  get canAccessReadingGroups() {
+    const { currentUser } = this.props;
+    if (!currentUser) return false;
+    return currentUser.attributes.classAbilities.readingGroup.read;
   }
 
   get hasActiveAnnotation() {
@@ -128,12 +142,15 @@ export default class AnnotationPopupAnnotate extends PureComponent {
   }
 
   rowCurrentReadingGroup() {
+    if (!this.canAccessReadingGroups && !this.canEngagePublicly) return null;
     return (
       <CurrentReadingGroup
         key="reading-groups"
         onClick={this.props.showReadingGroups}
         readingGroups={this.props.readingGroups}
         currentReadingGroup={this.props.currentReadingGroup}
+        canAccessReadingGroups={this.canAccessReadingGroups}
+        canEngagePublicly={this.canEngagePublicly}
       />
     );
   }
@@ -167,3 +184,5 @@ export default class AnnotationPopupAnnotate extends PureComponent {
     );
   }
 }
+
+export default withCurrentUser(AnnotationPopupAnnotate);

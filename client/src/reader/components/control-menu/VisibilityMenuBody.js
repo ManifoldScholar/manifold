@@ -5,6 +5,8 @@ import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 import withReadingGroups from "hoc/with-reading-groups";
 import has from "lodash/has";
+import { ReaderContext } from "helpers/contexts";
+import withCurrentUser from "hoc/with-current-user";
 
 // This class is in need of refactoring. I did not have bandwidth to give it the refactor
 // it deserves during reading group development --ZD
@@ -17,6 +19,8 @@ class VisibilityMenuBody extends PureComponent {
     filterChangeHandler: PropTypes.func
   };
 
+  static contextType = ReaderContext;
+
   get readingGroups() {
     const { readingGroups } = this.props;
 
@@ -26,6 +30,16 @@ class VisibilityMenuBody extends PureComponent {
         value: readingGroup.attributes.id
       };
     });
+  }
+
+  get canEngagePublicly() {
+    return this.context.attributes.abilities.engagePublicly;
+  }
+
+  get canAccessReadingGroups() {
+    const { currentUser } = this.props;
+    if (!currentUser) return false;
+    return currentUser.attributes.classAbilities.readingGroup.read;
   }
 
   readingGroupFilterBase(value = false) {
@@ -144,16 +158,17 @@ class VisibilityMenuBody extends PureComponent {
         true
       );
     });
-    children.unshift(
-      this.renderCheckbox(
-        "public",
-        "My Public Annotations",
-        options,
-        "readingGroups",
-        2,
-        true
-      )
-    );
+    if (this.canEngagePublicly)
+      children.unshift(
+        this.renderCheckbox(
+          "public",
+          "My Public Annotations",
+          options,
+          "readingGroups",
+          2,
+          true
+        )
+      );
     children.unshift(
       this.renderCheckbox(
         "private",
@@ -175,7 +190,8 @@ class VisibilityMenuBody extends PureComponent {
       )
     );
 
-    return this.renderFilter("reading group", "Reading Groups", children);
+    const label = this.canAccessReadingGroups ? "Reading Groups" : "Visibility";
+    return this.renderFilter("reading group", label, children);
   }
 
   renderCheckboxGroup(format, filterState = {}, block) {
@@ -252,7 +268,8 @@ class VisibilityMenuBody extends PureComponent {
           {this.renderCheckboxGroup("highlight", filter.highlight)}
           {this.renderCheckboxGroup("annotation", filter.annotation)}
           {this.renderCheckboxGroup("resource", filter.resource)}
-          {this.renderReadingGroups()}
+          {(this.canAccessReadingGroups || this.canEngagePublicly) &&
+            this.renderReadingGroups()}
           {this.renderFooterButtons()}
         </ul>
       </div>
@@ -260,4 +277,4 @@ class VisibilityMenuBody extends PureComponent {
   }
 }
 
-export default withReadingGroups(VisibilityMenuBody);
+export default withReadingGroups(withCurrentUser(VisibilityMenuBody));

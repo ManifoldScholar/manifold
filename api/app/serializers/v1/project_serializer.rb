@@ -66,6 +66,7 @@ module V1
       typed_attribute :event_count, Types::Integer.meta(read_only: true), &:filtered_event_count
       typed_attribute :event_types, Types::Array.of(Types::String).meta(read_only: true), &:uniq_event_types
       typed_attribute :resource_tags, Types::Array.of(Types::String).meta(read_only: true), &:sorted_resource_tags
+      typed_attribute :disable_engagement, Types::Bool
 
       typed_has_many :texts,
                      object_method_name: :text_summaries,

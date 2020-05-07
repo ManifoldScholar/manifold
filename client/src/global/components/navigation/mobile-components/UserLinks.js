@@ -14,6 +14,12 @@ export default class UserLinks extends PureComponent {
     closeNavigation: PropTypes.func.isRequired
   };
 
+  get canAccessReadingGroups() {
+    const { currentUser } = this.props.authentication;
+    if (!currentUser) return false;
+    return currentUser.attributes.classAbilities.readingGroup.read;
+  }
+
   handleProfileClick = event => {
     event.preventDefault();
     this.props.commonActions.toggleSignInUpOverlay();
@@ -130,25 +136,27 @@ export default class UserLinks extends PureComponent {
             Edit your notification settings
           </span>
         </li>
-        <li className="nested-nav__item">
-          <button
-            className="nested-nav__button"
-            onClick={this.handleReadingGroupsClick}
-            aria-describedby="user-menu-groups-mobile"
-          >
-            <div className="nested-nav__grid-item">
-              <IconComposer
-                icon="annotationGroup24"
-                size={32}
-                iconClass="nested-nav__button-icon"
-              />
-              <span className="nested-nav__button-text">Manage Groups</span>
-            </div>
-          </button>
-          <span id="user-menu-groups-mobile" className="aria-describedby">
-            Manage your Reading Groups
-          </span>
-        </li>
+        {this.canAccessReadingGroups && (
+          <li className="nested-nav__item">
+            <button
+              className="nested-nav__button"
+              onClick={this.handleReadingGroupsClick}
+              aria-describedby="user-menu-groups-mobile"
+            >
+              <div className="nested-nav__grid-item">
+                <IconComposer
+                  icon="annotationGroup24"
+                  size={32}
+                  iconClass="nested-nav__button-icon"
+                />
+                <span className="nested-nav__button-text">Manage Groups</span>
+              </div>
+            </button>
+            <span id="user-menu-groups-mobile" className="aria-describedby">
+              Manage your Reading Groups
+            </span>
+          </li>
+        )}
         <li className="nested-nav__item">
           <button
             className="nested-nav__button"

@@ -88,7 +88,12 @@ class AnnotationsFilter {
       if (isInGroup && this.readingGroupIsHidden(readingGroupId)) return false;
       if (isPrivate && isCreator && this.hideYourPrivateAnnotations)
         return false;
-      if (isPrivate && isCreator && this.hideYourPublicAnnotations)
+      if (
+        !isPrivate &&
+        !readingGroupId &&
+        isCreator &&
+        this.hideYourPublicAnnotations
+      )
         return false;
       return true;
     });

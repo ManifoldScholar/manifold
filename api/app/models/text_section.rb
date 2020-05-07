@@ -15,7 +15,7 @@ class TextSection < ApplicationRecord
   # Authority
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
-  self.authorizer_name = "ProjectChildAuthorizer"
+  self.authorizer_name = "TextSectionAuthorizer"
 
   with_citation do |text_section|
     (text_section.text_citation_parts || {}).merge(
