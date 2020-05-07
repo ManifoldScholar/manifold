@@ -183,17 +183,17 @@ RSpec.describe Annotation, type: :model do
 
     let(:reader) { FactoryBot.create(:user) }
 
-    shared_examples_for "a readable annotation" do |label, annotation_sym|
+    shared_examples_for "a readable annotation" do |label, annotation_sym, exclude_public = false|
       it "when the annotation is a #{label}" do
         annotation = send(annotation_sym)
-        expect(Annotation.with_read_ability(user).pluck(:id)).to include annotation.id
+        expect(Annotation.with_read_ability(user, exclude_public).pluck(:id)).to include annotation.id
       end
     end
 
-    shared_examples_for "a non-readable annotation" do |label, annotation_sym|
+    shared_examples_for "a non-readable annotation" do |label, annotation_sym, exclude_public = false|
       it "when the annotation is a #{label}" do
         annotation = send(annotation_sym)
-        expect(Annotation.with_read_ability(user).pluck(:id)).to_not include annotation.id
+        expect(Annotation.with_read_ability(user, exclude_public).pluck(:id)).to_not include annotation.id
       end
     end
 
@@ -217,11 +217,26 @@ RSpec.describe Annotation, type: :model do
         it_behaves_like "a readable annotation", "private group annotation authored by the user who does not belong to the private group", :private_group_annotation_by_former_group_member
         it_behaves_like "a readable annotation", "public group annotation authored by the user who does not belong to the public group", :public_group_annotation_by_former_group_member
         it_behaves_like "a readable annotation", "anonymous group annotation authored by the user who does not belong to the anonymous group", :anonymous_group_annotation_by_former_group_member
+
+        context "when public annotations are excluded" do
+          it_behaves_like "a non-readable annotation", "public annotation", :public_annotation, true
+          it_behaves_like "a non-readable annotation", "public group annotation", :public_group_annotation, true
+          it_behaves_like "a non-readable annotation", "private annotation", :private_annotation, true
+          it_behaves_like "a non-readable annotation", "private group annotation", :private_group_annotation, true
+          it_behaves_like "a non-readable annotation", "anonymous group annotation", :anonymous_group_annotation, true
+          it_behaves_like "a readable annotation", "private group annotation authored by the user who does not belong to the private group", :private_group_annotation_by_former_group_member, true
+          it_behaves_like "a readable annotation", "public group annotation authored by the user who does not belong to the public group", :public_group_annotation_by_former_group_member, true
+          it_behaves_like "a readable annotation", "anonymous group annotation authored by the user who does not belong to the anonymous group", :anonymous_group_annotation_by_former_group_member, true
+        end
       end
 
       context "when the user is the creator of the annotation" do
         let(:user) { all_groups_member }
         it_behaves_like "a readable annotation", "private annotation", :all_groups_member_private_annotation
+
+        context "when public annotations are excluded" do
+          it_behaves_like "a readable annotation", "private annotation", :all_groups_member_private_annotation, true
+        end
       end
 
       context "when the user is nil" do
@@ -231,6 +246,14 @@ RSpec.describe Annotation, type: :model do
         it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
         it_behaves_like "a non-readable annotation", "private group annotation", :private_group_annotation
         it_behaves_like "a non-readable annotation", "anonymous group annotation", :anonymous_group_annotation
+
+        context "when public annotations are excluded" do
+          it_behaves_like "a non-readable annotation", "public annotation", :public_annotation, true
+          it_behaves_like "a non-readable annotation", "public group annotation", :public_group_annotation, true
+          it_behaves_like "a non-readable annotation", "private annotation", :private_annotation, true
+          it_behaves_like "a non-readable annotation", "private group annotation", :private_group_annotation, true
+          it_behaves_like "a non-readable annotation", "anonymous group annotation", :anonymous_group_annotation, true
+        end
       end
 
       context "when the user is only in the private group" do
@@ -240,6 +263,14 @@ RSpec.describe Annotation, type: :model do
         it_behaves_like "a readable annotation", "private group annotation", :private_group_annotation
         it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
         it_behaves_like "a non-readable annotation", "anonymous group annotation", :anonymous_group_annotation
+
+        context "when public annotations are excluded" do
+          it_behaves_like "a non-readable annotation", "public annotation", :public_annotation, true
+          it_behaves_like "a non-readable annotation", "public group annotation", :public_group_annotation, true
+          it_behaves_like "a readable annotation", "private group annotation", :private_group_annotation, true
+          it_behaves_like "a non-readable annotation", "private annotation", :private_annotation, true
+          it_behaves_like "a non-readable annotation", "anonymous group annotation", :anonymous_group_annotation, true
+        end
       end
 
       context "when the user is only in the anonymous group" do
@@ -249,6 +280,14 @@ RSpec.describe Annotation, type: :model do
         it_behaves_like "a readable annotation", "anonymous group annotation", :anonymous_group_annotation
         it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
         it_behaves_like "a non-readable annotation", "private group annotation", :private_group_annotation
+
+        context "when public annotations are excluded" do
+          it_behaves_like "a non-readable annotation", "public annotation", :public_annotation, true
+          it_behaves_like "a non-readable annotation", "public group annotation", :public_group_annotation, true
+          it_behaves_like "a readable annotation", "anonymous group annotation", :anonymous_group_annotation, true
+          it_behaves_like "a non-readable annotation", "private annotation", :private_annotation, true
+          it_behaves_like "a non-readable annotation", "private group annotation", :private_group_annotation, true
+        end
       end
 
       context "when the user is in all groups" do
@@ -258,6 +297,14 @@ RSpec.describe Annotation, type: :model do
         it_behaves_like "a readable annotation", "anonymous group annotation", :anonymous_group_annotation
         it_behaves_like "a readable annotation", "private group annotation", :private_group_annotation
         it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
+
+        context "when public annotations are excluded" do
+          it_behaves_like "a non-readable annotation", "public annotation", :public_annotation, true
+          it_behaves_like "a readable annotation", "public group annotation", :public_group_annotation, true
+          it_behaves_like "a readable annotation", "anonymous group annotation", :anonymous_group_annotation, true
+          it_behaves_like "a readable annotation", "private group annotation", :private_group_annotation, true
+          it_behaves_like "a non-readable annotation", "private annotation", :private_annotation, true
+        end
       end
     end
   end
