@@ -77,12 +77,45 @@ class PressHeader extends PureComponent {
   }
 
   get label() {
+    const type = this.labelType;
+    if (type === "props") return this.propsLabel;
+    if (type === "project") return this.projectLabel;
+    if (type === "settings") return this.settingsLabel;
+    return null;
+  }
+
+  get labelType() {
+    if (this.props.label) return "props";
+    if (this.projectLabel) {
+      if (this.isProjectPage || this.isLibraryDisabled || this.isStandaloneMode)
+        return "project";
+    }
+    if (this.settingsLabel) return "settings";
+    return null;
+  }
+
+  get visible() {
+    const labelType = this.labelType;
+    if (!labelType) return false;
+    if (labelType === "project") return true;
+    if (this.isHeaderAlwaysVisible) return true;
+    if (this.isHeaderOnlyVisibleInStandaloneMode && this.isStandaloneMode)
+      return true;
+    return false;
+  }
+
+  get propsLabel() {
+    return this.props.label;
+  }
+
+  get projectLabel() {
     return (
-      this.props.label ||
-      (this.context.project &&
-        this.context.project.standaloneModePressBarText) ||
-      this.props.settings.attributes.theme.topBarText
+      this.context.project && this.context.project.standaloneModePressBarText
     );
+  }
+
+  get settingsLabel() {
+    return this.props.settings.attributes.theme.topBarText;
   }
 
   get pressHeaderMode() {
@@ -91,20 +124,28 @@ class PressHeader extends PureComponent {
     return mode;
   }
 
+  get isHeaderAlwaysVisible() {
+    return this.pressHeaderMode === "enforced";
+  }
+
+  get isHeaderOnlyVisibleInStandaloneMode() {
+    return this.pressHeaderMode === "enabled";
+  }
+
   get isLibraryDisabled() {
     return this.props.settings.attributes.general.libraryDisabled;
   }
 
-  get visible() {
-    if (!this.label || !this.url) return false;
-    const mode = this.pressHeaderMode;
-    if (mode === "enforced") return true;
-    if (
-      mode === "enabled" &&
-      (this.context.isStandalone || this.isLibraryDisabled)
-    )
-      return true;
-    return false;
+  get isProjectPage() {
+    return this.context.isProject;
+  }
+
+  get isStandaloneMode() {
+    return this.context.isStandalone;
+  }
+
+  get linked() {
+    return Boolean(this.url);
   }
 
   get styles() {
@@ -116,18 +157,28 @@ class PressHeader extends PureComponent {
 
   render() {
     if (!this.visible) return null;
+    const text = (
+      <div className="press-header__inner">
+        <span className="press-header__text">{this.label}</span>
+      </div>
+    );
+
     return (
       <SetCSSProperty measurement="height" propertyName="--press-header-height">
-        <a
-          href={this.url}
-          rel="noopener noreferrer"
-          className="press-header"
-          style={this.styles}
-        >
-          <div className="press-header__inner">
-            <span className="press-header__text">{this.label}</span>
-          </div>
-        </a>
+        {this.linked ? (
+          <a
+            href={this.url}
+            rel="noopener noreferrer"
+            className="press-header"
+            style={this.styles}
+          >
+            {text}
+          </a>
+        ) : (
+          <span className="press-header" style={this.styles}>
+            {text}
+          </span>
+        )}
       </SetCSSProperty>
     );
   }
