@@ -28,9 +28,10 @@ const mapAPIError = ({ status, error, exception, traces }) => {
   };
 };
 
-const mapAuthorizationError = ({ status, heading, body, project }) => {
+const mapAuthorizationError = ({ status, heading, body, project, method }) => {
   return {
     status,
+    method,
     heading,
     body,
     project,

@@ -39,12 +39,13 @@ function firstFatalError(action) {
   });
 }
 
-function fatalAuthorizationError(error) {
+function fatalAuthorizationError(error, method) {
   return fatalErrorActions.setFatalError(
     {
       heading: error.title,
       body: error.detail,
       status: error.status,
+      method,
       project: error.project
     },
     fatalErrorActions.types.authorization
@@ -56,7 +57,8 @@ function redirectIfUnauthorized(dispatch, action) {
   if (errors.length === 0) return;
   errors.forEach(error => {
     if (isAuthorizationError(error)) {
-      return dispatch(fatalAuthorizationError(error));
+      const method = get(action, "payload.request.method");
+      return dispatch(fatalAuthorizationError(error, method));
     }
   });
 }
