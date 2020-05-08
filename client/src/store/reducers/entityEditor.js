@@ -2,6 +2,7 @@ import { handleActions } from "redux-actions";
 import update from "immutability-helper";
 import lodashSet from "lodash/set";
 import lodashGet from "lodash/get";
+import isEqual from "lodash/isEqual";
 import isEmpty from "lodash/isEmpty";
 import isPlainObject from "lodash/isPlainObject";
 import lodashUnset from "lodash/unset";
@@ -25,11 +26,55 @@ const getSourceValue = (setPath, model) => {
   return value;
 };
 
-const hasChanges = model => {
-  const found = flatMapDeep(model).find(obj => {
-    return Object.keys(obj).length > 0;
+const hasKeysDeep = obj => {
+  if (!isPlainObject(obj)) return false;
+  const found = flatMapDeep(obj).find(entry => {
+    return Object.keys(entry).length > 0;
   });
   return found !== undefined;
+};
+
+const isResource = obj => {
+  return (
+    obj.hasOwnProperty("attributes") || obj.hasOwnProperty("relationships")
+  );
+};
+
+const anyRelationshipChanged = (dirty, source) => {
+  if (
+    !isPlainObject(dirty.relationships) ||
+    !isPlainObject(source.relationships)
+  )
+    return false;
+  return Object.keys(dirty.relationships).some(relationshipKey => {
+    const relationship = dirty.relationships[relationshipKey];
+    const sourceRelationship = source.relationships[relationshipKey];
+    if (Array.isArray(relationship)) {
+      if (relationship.some(entity => !entity.hasOwnProperty("id")))
+        return true;
+      const dirtyIds = relationship.map(entity => entity.id);
+      const sourceIds = sourceRelationship.map(entity => entity.id);
+      if (!isEqual(dirtyIds, sourceIds)) {
+        return true;
+      }
+    } else if (
+      isPlainObject(relationship) &&
+      relationship.hasOwnProperty("id")
+    ) {
+      return relationship.id === sourceRelationship.id;
+    }
+    return false;
+  });
+};
+
+const hasChanges = (dirty, source) => {
+  if (isResource(dirty)) {
+    if (hasKeysDeep(dirty.attributes)) return true;
+    if (anyRelationshipChanged(dirty, source)) return true;
+    return false;
+  } else {
+    return hasKeysDeep(dirty);
+  }
 };
 
 // End helper methods
@@ -129,7 +174,7 @@ const set = (state, action) => {
   }
   let changed;
   if (action.payload.triggersDirty) {
-    changed = hasChanges(newDirty);
+    changed = hasChanges(newDirty, session.source);
   } else {
     changed = lodashGet(state, `${id}.changed`) || false;
   }

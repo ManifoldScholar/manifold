@@ -56,6 +56,7 @@ export class ProjectCollaboratorsContainer extends Component {
       >
         <section>
           <FormContainer.Form
+            debug
             style={{ marginBottom: 100 }}
             model={project}
             name="update-project-collaborators"
