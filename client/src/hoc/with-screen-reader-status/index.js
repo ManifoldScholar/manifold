@@ -23,6 +23,10 @@ export default function withScreenReaderStatus(
       this.state = { message: null };
     }
 
+    componentWillUnmount() {
+      clearTimeout(this.timeout);
+    }
+
     get childProps() {
       const base = {
         setScreenReaderStatus: this.setStatus
@@ -40,7 +44,7 @@ export default function withScreenReaderStatus(
       this.setState({ message });
 
       // remove message
-      setTimeout(() => {
+      this.timeout = setTimeout(() => {
         this.setState({ message: null });
       }, 1000);
     };
