@@ -10,7 +10,6 @@ import { entityStoreActions } from "actions";
 
 const { request } = entityStoreActions;
 import withDispatch from "hoc/with-dispatch";
-import isString from "lodash/isString";
 
 class ProjectGeneralContainer extends PureComponent {
   static displayName = "Project.General";
@@ -44,7 +43,6 @@ class ProjectGeneralContainer extends PureComponent {
       >
         <section>
           <FormContainer.Form
-            debug
             model={project}
             name="backend-project-update"
             update={projectsAPI.update}

@@ -2,6 +2,8 @@ import { handleActions } from "redux-actions";
 import update from "immutability-helper";
 import lodashSet from "lodash/set";
 import lodashGet from "lodash/get";
+import endsWith from "lodash/endsWith";
+import isNil from "lodash/isNil";
 import isEqual from "lodash/isEqual";
 import isEmpty from "lodash/isEmpty";
 import isPlainObject from "lodash/isPlainObject";
@@ -11,8 +13,6 @@ import flatMapDeep from "lodash/flatMapDeep";
 const initialState = {
   sessions: {}
 };
-
-// Begin helper methods
 
 const setPathToGetPath = path => {
   const parts = path.split(".");
@@ -34,10 +34,57 @@ const hasKeysDeep = obj => {
   return found !== undefined;
 };
 
-const isResource = obj => {
+const hasKeys = obj => {
+  if (!isPlainObject(obj)) return false;
+  return Object.keys(obj).length > 0;
+};
+
+const makeComparableCollection = collection => {
+  return collection.map(entity => {
+    if (entity.hasOwnProperty("id")) return entity.id;
+    return entity;
+  });
+};
+
+const hasIdentity = value => {
+  return isPlainObject(value) && value.hasOwnProperty("id");
+};
+
+const isResourcish = value => {
   return (
-    obj.hasOwnProperty("attributes") || obj.hasOwnProperty("relationships")
+    isPlainObject(value) &&
+    (value.hasOwnProperty("attributes") ||
+      value.hasOwnProperty("relationships"))
   );
+};
+
+const isAttachmentStyles = (property, value) => {
+  if (!isPlainObject(value)) return false;
+  return endsWith(property, "Styles");
+};
+
+const areCollectionsEqualish = (a, b) => {
+  return isEqual(makeComparableCollection(a), makeComparableCollection(b));
+};
+
+const areObjectsEqualish = (a, b) => {
+  if (hasIdentity(a) && hasIdentity(b)) return a.id === b.id;
+  return a === b;
+};
+
+const areValuesEqualish = (a, b) => {
+  if (Array.isArray(a)) return areCollectionsEqualish(a, b);
+  if (isPlainObject(a)) return areObjectsEqualish(a, b);
+  if (a === "" && isNil(b)) return true;
+  return a === b;
+};
+
+const relationshipChanged = (a, b) => {
+  if (Array.isArray(a)) {
+    return !areCollectionsEqualish(a, b);
+  } else {
+    return areObjectsEqualish(a, b);
+  }
 };
 
 const anyRelationshipChanged = (dirty, source) => {
@@ -46,32 +93,18 @@ const anyRelationshipChanged = (dirty, source) => {
     !isPlainObject(source.relationships)
   )
     return false;
-  return Object.keys(dirty.relationships).some(relationshipKey => {
-    const relationship = dirty.relationships[relationshipKey];
-    const sourceRelationship = source.relationships[relationshipKey];
-    if (Array.isArray(relationship)) {
-      if (relationship.some(entity => !entity.hasOwnProperty("id")))
-        return true;
-      const dirtyIds = relationship.map(entity => entity.id);
-      const sourceIds = sourceRelationship.map(entity => entity.id);
-      if (!isEqual(dirtyIds, sourceIds)) {
-        return true;
-      }
-    } else if (
-      isPlainObject(relationship) &&
-      relationship.hasOwnProperty("id")
-    ) {
-      return relationship.id === sourceRelationship.id;
-    }
-    return false;
+  return Object.keys(dirty.relationships).some(relationship => {
+    return relationshipChanged(
+      dirty.relationships[relationship],
+      source.relationships[relationship]
+    );
   });
 };
 
 const hasChanges = (dirty, source) => {
-  if (isResource(dirty)) {
-    if (hasKeysDeep(dirty.attributes)) return true;
-    if (anyRelationshipChanged(dirty, source)) return true;
-    return false;
+  if (isResourcish(dirty)) {
+    if (hasKeys(dirty.attributes)) return true;
+    return anyRelationshipChanged(dirty, source);
   } else {
     return hasKeysDeep(dirty);
   }
@@ -104,14 +137,31 @@ const refresh = (state, action) => {
     relationships: { ...existingSession.dirty.relationships }
   };
 
-  ["attributes", "relationships"].forEach(type => {
-    Object.keys(dirty[type]).forEach(property => {
-      if (
-        dirty[type][property] === model[type][property] ||
-        isPlainObject(dirty[type][property])
+  // Remove attributes form dirty model when...
+  Object.keys(dirty.attributes).forEach(property => {
+    if (
+      // The source and dirty values are equal...
+      areValuesEqualish(
+        dirty.attributes[property],
+        model.attributes[property]
+      ) ||
+      // Or the property only exists in the dirty model (eg, removeAvatar)
+      !model.attributes.hasOwnProperty(property) ||
+      // Or when it's an attachment styles property
+      isAttachmentStyles(property, model.attributes[property])
+    )
+      delete dirty.attributes[property];
+  });
+
+  // Delete relationships that are the same.
+  Object.keys(dirty.relationships).forEach(property => {
+    if (
+      relationshipChanged(
+        dirty.relationships[property],
+        model.relationships[property]
       )
-        delete dirty[type][property];
-    });
+    )
+      delete dirty.relationships[property];
   });
 
   const newSession = {
@@ -165,8 +215,21 @@ const set = (state, action) => {
   const sourceValue = getSourceValue(path, session.source);
   const dirty = { ...state.sessions[id].dirty };
   let newDirty;
-  if (value === sourceValue) {
-    lodashUnset(dirty, setPathToGetPath(path));
+
+  // If the new value matches the source value, we unset it in dirty.
+  if (areValuesEqualish(value, sourceValue)) {
+    const target = setPathToGetPath(path);
+    lodashUnset(dirty, target);
+    // If we're dealing with a nested hash, than we may need to unset the parent as well.
+    // For example, without this, metadata hashes will always trigger dirty.
+    const depth = target.split(".").length;
+    if (depth > 2) {
+      const parentPath = target.substr(0, target.lastIndexOf("."));
+      const parent = lodashGet(dirty, parentPath);
+      if (isPlainObject(parent) && Object.keys(parent).length === 0) {
+        lodashUnset(dirty, parentPath);
+      }
+    }
     newDirty = dirty;
   } else {
     lodashSet(dirty, setPathToGetPath(path), null);
