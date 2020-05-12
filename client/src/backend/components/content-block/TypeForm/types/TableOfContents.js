@@ -18,23 +18,15 @@ export default class ProjectContentTypeFormTableOfContents extends PureComponent
     return this.props.project;
   }
 
-  get options() {
-    const options = [{ label: "Select Text", value: "" }];
-
-    const texts = this.project.relationships.texts.map(text => {
-      return { label: text.attributes.title, value: text };
-    });
-
-    return options.concat(texts);
-  }
-
   render() {
     return (
       <>
         <Form.TextInput label="Title" name="attributes[title]" focusOnMount />
-        <Form.Select
+        <Form.Picker
           label="Text"
-          options={this.options}
+          options={this.project.relationships.texts}
+          optionToLabel={t => t.attributes.title}
+          placeholder="Select a text"
           name="relationships[text]"
           wide
         />
