@@ -8,14 +8,20 @@ import MaskedInput from "./MaskedTextInput";
 import classnames from "classnames";
 import ReactDatePicker from "react-datepicker";
 import isDate from "lodash/isDate";
+import format from "date-fns/format";
 
 class DatePicker extends PureComponent {
   static propTypes = {
     label: PropTypes.string,
     placeholder: PropTypes.string,
+    setFormat: PropTypes.string,
     set: PropTypes.func.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
     wide: PropTypes.bool
+  };
+
+  static defaultProps = {
+    setFormat: "yyyy-MM-dd"
   };
 
   get value() {
@@ -41,7 +47,7 @@ class DatePicker extends PureComponent {
   }
 
   handleChange = date => {
-    return this.props.set(date);
+    return this.props.set(format(date, this.props.setFormat));
   };
 
   clear = () => {
