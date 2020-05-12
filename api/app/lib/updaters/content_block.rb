@@ -42,16 +42,17 @@ module Updaters
       data = association.dig("data")
 
       if data.is_a? Array
-        data.map do |attr|
-          build_content_block_reference kind, attr["id"], source
+        data.map.with_index do |attr, index|
+          build_content_block_reference kind, index + 1, attr["id"], source
         end
       else
-        build_content_block_reference kind, data["id"], source
+        build_content_block_reference kind, 1, data["id"], source
       end
     end
 
-    def build_content_block_reference(kind, id, type)
+    def build_content_block_reference(kind, index, id, type)
       content_block_references.find_or_initialize_by kind: kind,
+                                                     position: index,
                                                      referencable_id: id,
                                                      referencable_type: type
     end

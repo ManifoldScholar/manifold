@@ -61,7 +61,12 @@
         background-color: $neutral90;
         border-bottom: 1px solid $neutralUIDullLight;
         border-radius: 0;
-        transition: background-color $duration ease-out,;
+        transition: background-color $duration ease-out;
+
+        .drawer--backend & {
+          background-color: inherit;
+        }
+
       }
 
       .show-dropzone & {
