@@ -194,6 +194,7 @@ describe("store/reducers/entityEditor", () => {
 
     it("should replace, not merge an object attribute", () => {
       const state = entityEditorReducer(initialState, objectReplaceAction);
+
       expect(state.sessions.a.dirty.attributes.anObjectAttribute.foo).toBe(
         undefined
       );

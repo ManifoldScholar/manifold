@@ -2,10 +2,8 @@ import { handleActions } from "redux-actions";
 import update from "immutability-helper";
 import lodashSet from "lodash/set";
 import lodashGet from "lodash/get";
-import endsWith from "lodash/endsWith";
 import isNil from "lodash/isNil";
 import isEqual from "lodash/isEqual";
-import isEmpty from "lodash/isEmpty";
 import isPlainObject from "lodash/isPlainObject";
 import lodashUnset from "lodash/unset";
 import flatMapDeep from "lodash/flatMapDeep";
@@ -58,11 +56,6 @@ const isResourcish = value => {
   );
 };
 
-const isAttachmentStyles = (property, value) => {
-  if (!isPlainObject(value)) return false;
-  return endsWith(property, "Styles");
-};
-
 const areCollectionsEqualish = (a, b) => {
   return isEqual(makeComparableCollection(a), makeComparableCollection(b));
 };
@@ -73,8 +66,8 @@ const areObjectsEqualish = (a, b) => {
 };
 
 const areValuesEqualish = (a, b) => {
-  if (Array.isArray(a)) return areCollectionsEqualish(a, b);
-  if (isPlainObject(a)) return areObjectsEqualish(a, b);
+  if (Array.isArray(a) && Array.isArray(b)) return areCollectionsEqualish(a, b);
+  if (isPlainObject(a) && isPlainObject(b)) return areObjectsEqualish(a, b);
   if (a === "" && isNil(b)) return true;
   return a === b;
 };
@@ -110,8 +103,6 @@ const hasChanges = (dirty, source) => {
   }
 };
 
-// End helper methods
-
 const open = (state, action) => {
   const { key, model } = action.payload;
   const newSession = {
@@ -123,53 +114,6 @@ const open = (state, action) => {
     changed: false
   };
   const newSessions = { ...state.sessions, [key]: newSession };
-  const newState = { ...state, sessions: newSessions };
-  return newState;
-};
-
-const refresh = (state, action) => {
-  const { key, model } = action.payload;
-  const existingSession = state.sessions[key];
-  if (!existingSession) return open(state, action);
-
-  const dirty = {
-    attributes: { ...existingSession.dirty.attributes },
-    relationships: { ...existingSession.dirty.relationships }
-  };
-
-  // Remove attributes form dirty model when...
-  Object.keys(dirty.attributes).forEach(property => {
-    if (
-      // The source and dirty values are equal...
-      areValuesEqualish(
-        dirty.attributes[property],
-        model.attributes[property]
-      ) ||
-      // Or the property only exists in the dirty model (eg, removeAvatar)
-      !model.attributes.hasOwnProperty(property) ||
-      // Or when it's an attachment styles property
-      isAttachmentStyles(property, model.attributes[property])
-    )
-      delete dirty.attributes[property];
-  });
-
-  // Delete relationships that are the same.
-  Object.keys(dirty.relationships).forEach(property => {
-    if (
-      relationshipChanged(
-        dirty.relationships[property],
-        model.relationships[property]
-      )
-    )
-      delete dirty.relationships[property];
-  });
-
-  const newSession = {
-    dirty,
-    source: model,
-    changed: !(isEmpty(dirty.attributes) && isEmpty(dirty.attributes))
-  };
-  const newSessions = { ...state.session, [key]: newSession };
   const newState = { ...state, sessions: newSessions };
   return newState;
 };
@@ -268,7 +212,6 @@ const completeAction = (state, dispatchedAction) => {
 export default handleActions(
   {
     ENTITY_EDITOR_OPEN: open,
-    ENTITY_EDITOR_REFRESH: refresh,
     ENTITY_EDITOR_CLOSE: close,
     ENTITY_EDITOR_SET: set,
     ENTITY_EDITOR_PENDING_ACTION: startAction,
