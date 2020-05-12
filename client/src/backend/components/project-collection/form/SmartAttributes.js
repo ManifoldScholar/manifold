@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Form from "global/components/form";
 import { subjectsAPI, tagsAPI } from "api";
 import FormContext from "helpers/contexts/FormContext";
-import isString from "lodash/isString";
 
 export default class SmartAttributes extends Component {
   static displayName = "ProjectCollection.Form.SmartAttributes";
@@ -43,21 +42,14 @@ export default class SmartAttributes extends Component {
               />
               <Form.Picker
                 label="Show projects with these tags"
-                listStyle={"well"}
+                listStyle="well"
                 listRowComponent="StringRow"
                 name="attributes[tagList]"
                 placeholder="Enter Tags"
                 options={tagsAPI.index}
                 optionToLabel={tag => tag.attributes.name}
                 optionToValue={tag => tag.attributes.name}
-                beforeSetValue={tags =>
-                  Array.isArray(tags) ? tags.join(",") : tags
-                }
-                beforeGetValue={tags =>
-                  isString(tags) ? tags.split(",") : tags
-                }
                 allowNew
-                predictive
               />
             </>
           );
