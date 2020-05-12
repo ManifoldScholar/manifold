@@ -62,7 +62,7 @@ module Validation
                   :hide_activity, :instagram_id, :remove_avatar, attachment(:avatar),
                   attachment(:hero), :download_url, attachment(:cover), :remove_hero, :draft,
                   :remove_cover, :download_call_to_action, :publication_date, metadata(Project),
-                  :avatar_color, :pending_slug, :tag_list, :dark_mode, :image_credits,
+                  :avatar_color, :pending_slug, { tag_list: [] }, :dark_mode, :image_credits,
                   :standalone_mode, :standalone_mode_press_bar_text, :restricted_access,
                   :standalone_mode_press_bar_url, :finished, :restricted_access_heading,
                   :restricted_access_body, :open_access, :disable_engagement]
@@ -120,7 +120,7 @@ module Validation
   def project_collection_params
     params.require(:data)
     attributes = [:title, :sort_order, :visible, :homepage, :smart, :position, :icon,
-                  :tag_list, :number_of_projects, :featured_only, :description,
+                  { tag_list: [] }, :number_of_projects, :featured_only, :description,
                   :pending_slug, :homepage_start_date, :homepage_end_date,
                   :homepage_count]
     relationships = [:projects, :subjects]
@@ -170,7 +170,7 @@ module Validation
                   attachment(:variant_format_two), :remove_variant_format_two,
                   attachment(:variant_thumbnail), :remove_variant_thumbnail,
                   attachment(:variant_poster), :remove_variant_poster,
-                  :title, :caption, :description, :tag_list, :kind, :sub_kind,
+                  :title, :caption, :description, { tag_list: [] }, :kind, :sub_kind,
                   :alt_text, :copyright_status, :credit,
                   :allow_download, :external_type, :external_url, :external_id,
                   :embed_code, :minimum_width, :minimum_height,

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Form from "global/components/form";
 import Resource from "backend/components/resource";
 import FormContainer from "global/containers/form";
-import { resourcesAPI } from "api";
+import { resourcesAPI, tagsAPI } from "api";
 import { connect } from "react-redux";
 
 export class ResourceGeneralContainer extends PureComponent {
@@ -71,7 +71,17 @@ export class ResourceGeneralContainer extends PureComponent {
             name="attributes[pendingSlug]"
             placeholder="Enter URL Slug"
           />
-          taglist
+          <Form.Picker
+            label="Tags"
+            listStyle="well"
+            listRowComponent="StringRow"
+            name="attributes[tagList]"
+            placeholder="Enter Tags"
+            options={tagsAPI.index}
+            optionToLabel={tag => tag.attributes.name}
+            optionToValue={tag => tag.attributes.name}
+            allowNew
+          />
           <Form.TextArea
             label="Description"
             name="attributes[description]"

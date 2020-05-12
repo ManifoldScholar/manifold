@@ -44,6 +44,7 @@ class ProjectGeneralContainer extends PureComponent {
       >
         <section>
           <FormContainer.Form
+            debug
             model={project}
             name="backend-project-update"
             update={projectsAPI.update}
@@ -102,16 +103,6 @@ class ProjectGeneralContainer extends PureComponent {
                 options={tagsAPI.index}
                 optionToLabel={tag => tag.attributes.name}
                 optionToValue={tag => tag.attributes.name}
-                beforeSetValue={tags =>
-                  Array.isArray(tags) ? tags.join(",") : tags
-                }
-                beforeGetValue={tags => {
-                  if (isString(tags)) {
-                    if (tags.trim() === "") return [];
-                    return tags.split(",");
-                  }
-                  return tags;
-                }}
                 allowNew
               />
             </Form.FieldGroup>
