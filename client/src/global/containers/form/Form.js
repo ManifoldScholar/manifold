@@ -16,7 +16,7 @@ import { FormContext } from "helpers/contexts";
 import isArray from "lodash/isArray";
 
 const { request, flush } = entityStoreActions;
-const { close, open, set, refresh } = entityEditorActions;
+const { close, open, set } = entityEditorActions;
 
 export class FormContainer extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
@@ -109,22 +109,10 @@ export class FormContainer extends PureComponent {
     const model = props.model || {};
 
     if (prevProps.model !== props.model) {
-      if (
-        prevProps.model &&
-        props.model &&
-        prevProps.model.id === props.model.id
-      ) {
-        return this.refreshSession(props.name, model);
-      } else {
-        return this.openSession(props.name, model);
-      }
+      return this.openSession(props.name, model);
     }
     if (props.session) return null;
     this.openSession(props.name, model);
-  }
-
-  refreshSession(name, model = {}) {
-    this.props.dispatch(refresh(name, model));
   }
 
   openSession(name, model = {}) {
