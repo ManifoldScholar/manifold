@@ -34,6 +34,8 @@ module Search
 
     # @return [Searchkick::Results]
     def perform_search
+      return empty_resultset if keyword.blank?
+
       parse_search_components!
 
       query_builder = Search::QueryBuilder.new search_components
