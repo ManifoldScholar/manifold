@@ -52,7 +52,6 @@ RSpec.describe "Projects API", type: :request do
   describe "creates a project" do
     let(:path) { api_v1_projects_path }
 
-
     context "when the user is an admin" do
       let(:headers) { admin_headers }
 
@@ -64,7 +63,6 @@ RSpec.describe "Projects API", type: :request do
     end
 
     context "when the user is not logged in" do
-
       it "has a 401 status code" do
         params = build_json_payload(attributes: { title: "foo" })
         post path, params: params
@@ -81,7 +79,6 @@ RSpec.describe "Projects API", type: :request do
         expect(response).to have_http_status(403)
       end
     end
-
   end
 
   describe "updates a project" do
@@ -105,9 +102,9 @@ RSpec.describe "Projects API", type: :request do
         it("can be replaced") do
           project.creators << jenny
           params = build_json_payload(relationships: { creators: { data: [
-                                  { type: "makers", id: john.id },
-                                  { type: "makers", id: jim.id }
-                                ] } })
+                                        { type: "makers", id: john.id },
+                                        { type: "makers", id: jim.id }
+                                      ] } })
           patch path, headers: headers, params: params
           expect(project.creators.reload.pluck(:id)).to contain_exactly(john.id, jim.id)
         end
@@ -117,9 +114,9 @@ RSpec.describe "Projects API", type: :request do
         it("can be replaced") do
           project.contributors << jenny
           params = build_json_payload(relationships: { contributors: { data: [
-                                  { type: "makers", id: john.id },
-                                  { type: "makers", id: jim.id }
-                                ] } })
+                                        { type: "makers", id: john.id },
+                                        { type: "makers", id: jim.id }
+                                      ] } })
           patch path, headers: headers, params: params
           expect(project.contributors.reload.pluck(:id)).to contain_exactly(john.id, jim.id)
         end
@@ -130,9 +127,9 @@ RSpec.describe "Projects API", type: :request do
           project.save
           expect(project.contributors.reload.pluck(:id)).to eq([jenny.id, john.id])
           params = build_json_payload(relationships: { contributors: { data: [
-                                  { type: "makers", id: john.id },
-                                  { type: "makers", id: jenny.id }
-                                ] } })
+                                        { type: "makers", id: john.id },
+                                        { type: "makers", id: jenny.id }
+                                      ] } })
           patch path, headers: headers, params: params
           expect(project.contributors.reload.pluck(:id)).to eq([john.id, jenny.id])
         end
@@ -142,9 +139,9 @@ RSpec.describe "Projects API", type: :request do
         it("can be replaced") do
           project.creators << jenny
           params = build_json_payload(relationships: { creators: { data: [
-                                  { type: "makers", id: john.id },
-                                  { type: "makers", id: jim.id }
-                                ] } })
+                                        { type: "makers", id: john.id },
+                                        { type: "makers", id: jim.id }
+                                      ] } })
           patch path, headers: headers, params: params
           expect(project.creators.reload.pluck(:id)).to contain_exactly(jim.id, john.id)
         end
@@ -155,9 +152,9 @@ RSpec.describe "Projects API", type: :request do
           project.save
           expect(project.creators.pluck(:id)).to eq([jenny.id, john.id])
           params = build_json_payload(relationships: { creators: { data: [
-                                  { type: "makers", id: john.id },
-                                  { type: "makers", id: jenny.id }
-                                ] } })
+                                        { type: "makers", id: john.id },
+                                        { type: "makers", id: jenny.id }
+                                      ] } })
           patch path, headers: headers, params: params
           expect(project.creators.reload.pluck(:id)).to eq([john.id, jenny.id])
         end
@@ -171,7 +168,7 @@ RSpec.describe "Projects API", type: :request do
           it("contains the updated featured boolean value") { expect_updated_param("featured", "true", true) }
           it("contains the updated hashtag") { expect_updated_param("hashtag", "the_hashtag") }
           it("contains the updated description") { expect_updated_param("description", "the description") }
-          it("contains the updated tag list") { expect_updated_param("tagList", "rowan, dog, puppy", %w(rowan dog puppy)) }
+          it("contains the updated tag list") { expect_updated_param("tagList", %w(rowan dog puppy), %w(rowan dog puppy)) }
         end
 
         it "has a 200 OK status code" do
