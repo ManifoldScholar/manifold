@@ -42,9 +42,10 @@ export default class ProjectContentTypeFormResources extends PureComponent {
               optionToLabel={rc => rc.attributes.title}
               name="relationships[featuredCollections]"
               options={this.collections}
-              listStyle="well"
+              listStyle="rows"
               showAddRemoveAll
-              listRowComponent="ResourceCollectionRow"
+              reorderable
+              listRowComponent="FormOptionRow"
             />
           </>
         ) : null}

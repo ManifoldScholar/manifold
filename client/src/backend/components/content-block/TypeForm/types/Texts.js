@@ -66,7 +66,8 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
             optionToLabel={rc => rc.attributes.title}
             name="relationships[includedCategories]"
             options={this.categories}
-            listStyle="well"
+            listStyle="rows"
+            reorderable
             showAddRemoveAll
             listRowComponent="TextCategoryRow"
           />
