@@ -31,7 +31,7 @@ class SearchResultsTypeAnnotation extends PureComponent {
   }
 
   get textSection() {
-    return this.result.attributes.parents.text;
+    return this.result.attributes.parents.text_section;
   }
 
   get creatorAttributes() {
