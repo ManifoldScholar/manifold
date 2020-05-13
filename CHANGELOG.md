@@ -1,9 +1,43 @@
 # Changelog
 
+## [v5.0.0-rc.1](https://github.com/ManifoldScholar/manifold/tree/v5.0.0-rc.1) - 05/13/20
+
+### Features
+
+-  Make content block references sortable [#2738](https://github.com/ManifoldScholar/manifold/pull/2738) ([zdavis](https://api.github.com/users/zdavis))
+-  Adds annotation and reading group restrictions [#2718](https://github.com/ManifoldScholar/manifold/pull/2718) ([zdavis](https://api.github.com/users/zdavis))
+-  Support open &amp; restricted projects via entitlements [#2702](https://github.com/ManifoldScholar/manifold/pull/2702) ([zdavis](https://api.github.com/users/zdavis))
+-  Support phrasal searching [#2695](https://github.com/ManifoldScholar/manifold/pull/2695) ([scryptmouse](https://api.github.com/users/scryptmouse))
+
+### Bugs
+
+-  Exclude highlights from notification [#2739](https://github.com/ManifoldScholar/manifold/pull/2739) ([zdavis](https://api.github.com/users/zdavis))
+-  Clear metadata attributes on editor refresh [#2736](https://github.com/ManifoldScholar/manifold/pull/2736) ([zdavis](https://api.github.com/users/zdavis))
+-  Correct TOC CB text picker [#2735](https://github.com/ManifoldScholar/manifold/pull/2735) ([zdavis](https://api.github.com/users/zdavis))
+-  Correct annotation link in search results [#2733](https://github.com/ManifoldScholar/manifold/pull/2733) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve dirty checking [#2728](https://github.com/ManifoldScholar/manifold/pull/2728) ([zdavis](https://api.github.com/users/zdavis))
+-  Always show top bar on project if configured [#2725](https://github.com/ManifoldScholar/manifold/pull/2725) ([zdavis](https://api.github.com/users/zdavis))
+-  Correct incorrect og:image URL [#2724](https://github.com/ManifoldScholar/manifold/pull/2724) ([zdavis](https://api.github.com/users/zdavis))
+-  Correct radio button behavior and focus [#2723](https://github.com/ManifoldScholar/manifold/pull/2723) ([zdavis](https://api.github.com/users/zdavis))
+-  Restore create and reorder to maker associations [#2722](https://github.com/ManifoldScholar/manifold/pull/2722) ([zdavis](https://api.github.com/users/zdavis))
+-  Notify on new annotations; fix regressions [#2714](https://github.com/ManifoldScholar/manifold/pull/2714) ([zdavis](https://api.github.com/users/zdavis))
+-  Fix wrapping on login button [#2713](https://github.com/ManifoldScholar/manifold/pull/2713) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Additional a11y fixes to Form.Picker [#2712](https://github.com/ManifoldScholar/manifold/pull/2712) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Improve handling of lowercase names [#2710](https://github.com/ManifoldScholar/manifold/pull/2710) ([zdavis](https://api.github.com/users/zdavis))
+-  Update auth user state when notification changes [#2709](https://github.com/ManifoldScholar/manifold/pull/2709) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve stylesheet creation [#2707](https://github.com/ManifoldScholar/manifold/pull/2707) ([zdavis](https://api.github.com/users/zdavis))
+-  Prevent error when FetchSelect has no options [#2691](https://github.com/ManifoldScholar/manifold/pull/2691) ([zdavis](https://api.github.com/users/zdavis))
+
+### Security
+
+-  Update rails to 5.2.4.2 [#2715](https://github.com/ManifoldScholar/manifold/pull/2715) ([zdavis](https://api.github.com/users/zdavis))
+-  Bump minimist from 1.2.2 to 1.2.3 in /client [#2696](https://github.com/ManifoldScholar/manifold/pull/2696) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+
 ## [v5.0.0-alpha.1](https://github.com/ManifoldScholar/manifold/tree/v5.0.0-alpha.1) - 03/30/20
 
 ### Features
 
+-  Release v5.0.0-alpha.1 [#2690](https://github.com/ManifoldScholar/manifold/pull/2690) ([zdavis](https://api.github.com/users/zdavis))
 -  Document ProjectExportations and ExportTargets routes [#2663](https://github.com/ManifoldScholar/manifold/pull/2663) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
 -  Allow disabling of library pages [#2657](https://github.com/ManifoldScholar/manifold/pull/2657) ([zdavis](https://api.github.com/users/zdavis))
 
@@ -16,14 +50,15 @@
 -  Correct FG color in reader resource drawer [#2684](https://github.com/ManifoldScholar/manifold/pull/2684) ([zdavis](https://api.github.com/users/zdavis))
 -  Notify user when video playback fails [#2683](https://github.com/ManifoldScholar/manifold/pull/2683) ([zdavis](https://api.github.com/users/zdavis))
 -  Use tabular numbers on audio player [#2682](https://github.com/ManifoldScholar/manifold/pull/2682) ([zdavis](https://api.github.com/users/zdavis))
+-  Fix missing poster display on resource interactive slides [#2665](https://github.com/ManifoldScholar/manifold/pull/2665) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
 -  Correct contrast in BE reset PW interface [#2676](https://github.com/ManifoldScholar/manifold/pull/2676) ([zdavis](https://api.github.com/users/zdavis))
 -  Correct form field label [#2675](https://github.com/ManifoldScholar/manifold/pull/2675) ([zdavis](https://api.github.com/users/zdavis))
 -  Allow text subtitle to be cleared [#2674](https://github.com/ManifoldScholar/manifold/pull/2674) ([zdavis](https://api.github.com/users/zdavis))
 -  Update SwaggerUi preAuth when user logs in [#2673](https://github.com/ManifoldScholar/manifold/pull/2673) ([zdavis](https://api.github.com/users/zdavis))
 -  Exclude standalone projects from projects list [#2672](https://github.com/ManifoldScholar/manifold/pull/2672) ([zdavis](https://api.github.com/users/zdavis))
 -  Delete callout when linked text is destroyed [#2671](https://github.com/ManifoldScholar/manifold/pull/2671) ([zdavis](https://api.github.com/users/zdavis))
--  Fix missing poster display on resource interactive slides [#2665](https://github.com/ManifoldScholar/manifold/pull/2665) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
 -  Remove legacy centering method [#2664](https://github.com/ManifoldScholar/manifold/pull/2664) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
+-  Refactor FetchSelect [#2300](https://github.com/ManifoldScholar/manifold/pull/2300) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Fix filtering with invalid pagination params [#2651](https://github.com/ManifoldScholar/manifold/pull/2651) ([zdavis](https://api.github.com/users/zdavis))
 -  Address list label regression [#2648](https://github.com/ManifoldScholar/manifold/pull/2648) ([zdavis](https://api.github.com/users/zdavis))
 -  Correct typo [#2647](https://github.com/ManifoldScholar/manifold/pull/2647) ([zdavis](https://api.github.com/users/zdavis))
@@ -31,7 +66,6 @@
 -  Persist stateful search keyword param in UI [#2644](https://github.com/ManifoldScholar/manifold/pull/2644) ([zdavis](https://api.github.com/users/zdavis))
 -  Ensure correct text ordering in text CB [#2643](https://github.com/ManifoldScholar/manifold/pull/2643) ([zdavis](https://api.github.com/users/zdavis))
 -  Restore ability to manage text covers [#2642](https://github.com/ManifoldScholar/manifold/pull/2642) ([zdavis](https://api.github.com/users/zdavis))
--  Refactor FetchSelect [#2300](https://github.com/ManifoldScholar/manifold/pull/2300) ([dananjohnson](https://api.github.com/users/dananjohnson))
 
 ### Security
 
