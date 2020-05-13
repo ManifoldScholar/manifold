@@ -266,7 +266,7 @@ class Annotation < ApplicationRecord
   private
 
   def enqueue_annotation_notifications
-    return unless public?
+    return unless public? && annotation?
 
     Notifications::EnqueueAnnotationNotificationsJob.perform_later id
   end
