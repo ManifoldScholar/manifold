@@ -58,6 +58,10 @@ en:
     attributes:
     errors:
       models:
+        resource:
+          attributes:
+            external_id:
+              missing: "^Video ID cannot be blank."
         page:
           attributes:
             purpose:
