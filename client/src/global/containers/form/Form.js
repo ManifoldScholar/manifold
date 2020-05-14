@@ -14,6 +14,7 @@ import brackets2dots from "brackets2dots";
 import { Prompt } from "react-router-dom";
 import { FormContext } from "helpers/contexts";
 import isArray from "lodash/isArray";
+import isNil from "lodash/isNil";
 
 const { request, flush } = entityStoreActions;
 const { close, open, set } = entityEditorActions;
@@ -140,14 +141,18 @@ export class FormContainer extends PureComponent {
   adjustedRelationships(relationships) {
     if (!relationships) return {};
     const adjusted = { ...relationships };
-    forEach(adjusted, (value, key) => {
-      const adjustedValue = isArray(value)
-        ? value.map(relation => pick(relation, ["id", "type"]))
-        : pick(value, ["id", "type"]);
 
-      adjusted[key] = {
-        data: adjustedValue
-      };
+    forEach(adjusted, (value, key) => {
+      if (isNil(value)) {
+        adjusted[key] = null;
+      } else {
+        const adjustedValue = isArray(value)
+          ? value.map(relation => pick(relation, ["id", "type"]))
+          : pick(value, ["id", "type"]);
+        adjusted[key] = {
+          data: adjustedValue
+        };
+      }
     });
 
     return adjusted;

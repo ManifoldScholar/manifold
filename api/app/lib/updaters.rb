@@ -124,7 +124,7 @@ module Updaters
     if to_add.nil?
       model.send("#{name}=", nil)
     else
-      value = klass.find(to_add[:id])
+      value = to_add[:id].present? ? klass.find(to_add[:id]) : nil
       model.send("#{name}=", value)
     end
   end
