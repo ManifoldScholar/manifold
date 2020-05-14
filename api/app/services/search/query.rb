@@ -66,6 +66,8 @@ module Search
           search_components[positive ? :needle : :negated_needle] = words.join(" ").presence
         end
       end
+    rescue KeywordSearch::ParseError
+      search_components[:needle] = keyword
     end
 
     # @!attribute [r] search_components
