@@ -1,13 +1,27 @@
 # Changelog
 
+## [v5.0.0-rc.2](https://github.com/ManifoldScholar/manifold/tree/v5.0.0-rc.2) - 05/14/20
+
+### Features
+
+-  Document Entitlements [#2716](https://github.com/ManifoldScholar/manifold/pull/2716) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
+-  Document SearchResult API endpoint [#2606](https://github.com/ManifoldScholar/manifold/pull/2606) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
+-  Add pagination to route response documentation [#2605](https://github.com/ManifoldScholar/manifold/pull/2605) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
+
+### Bugs
+
+-  Handle unterminated quotation marks in search [#2745](https://github.com/ManifoldScholar/manifold/pull/2745) ([zdavis](https://api.github.com/users/zdavis))
+-  Correct select input behavior [#2742](https://github.com/ManifoldScholar/manifold/pull/2742) ([zdavis](https://api.github.com/users/zdavis))
+
 ## [v5.0.0-rc.1](https://github.com/ManifoldScholar/manifold/tree/v5.0.0-rc.1) - 05/13/20
 
 ### Features
 
+-  Release v5.0.0-rc.1 [#2740](https://github.com/ManifoldScholar/manifold/pull/2740) ([zdavis](https://api.github.com/users/zdavis))
 -  Make content block references sortable [#2738](https://github.com/ManifoldScholar/manifold/pull/2738) ([zdavis](https://api.github.com/users/zdavis))
+-  Support phrasal searching [#2695](https://github.com/ManifoldScholar/manifold/pull/2695) ([scryptmouse](https://api.github.com/users/scryptmouse))
 -  Adds annotation and reading group restrictions [#2718](https://github.com/ManifoldScholar/manifold/pull/2718) ([zdavis](https://api.github.com/users/zdavis))
 -  Support open &amp; restricted projects via entitlements [#2702](https://github.com/ManifoldScholar/manifold/pull/2702) ([zdavis](https://api.github.com/users/zdavis))
--  Support phrasal searching [#2695](https://github.com/ManifoldScholar/manifold/pull/2695) ([scryptmouse](https://api.github.com/users/scryptmouse))
 
 ### Bugs
 
@@ -20,9 +34,9 @@
 -  Correct incorrect og:image URL [#2724](https://github.com/ManifoldScholar/manifold/pull/2724) ([zdavis](https://api.github.com/users/zdavis))
 -  Correct radio button behavior and focus [#2723](https://github.com/ManifoldScholar/manifold/pull/2723) ([zdavis](https://api.github.com/users/zdavis))
 -  Restore create and reorder to maker associations [#2722](https://github.com/ManifoldScholar/manifold/pull/2722) ([zdavis](https://api.github.com/users/zdavis))
--  Notify on new annotations; fix regressions [#2714](https://github.com/ManifoldScholar/manifold/pull/2714) ([zdavis](https://api.github.com/users/zdavis))
--  Fix wrapping on login button [#2713](https://github.com/ManifoldScholar/manifold/pull/2713) ([dananjohnson](https://api.github.com/users/dananjohnson))
 -  Additional a11y fixes to Form.Picker [#2712](https://github.com/ManifoldScholar/manifold/pull/2712) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix wrapping on login button [#2713](https://github.com/ManifoldScholar/manifold/pull/2713) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Notify on new annotations; fix regressions [#2714](https://github.com/ManifoldScholar/manifold/pull/2714) ([zdavis](https://api.github.com/users/zdavis))
 -  Improve handling of lowercase names [#2710](https://github.com/ManifoldScholar/manifold/pull/2710) ([zdavis](https://api.github.com/users/zdavis))
 -  Update auth user state when notification changes [#2709](https://github.com/ManifoldScholar/manifold/pull/2709) ([zdavis](https://api.github.com/users/zdavis))
 -  Improve stylesheet creation [#2707](https://github.com/ManifoldScholar/manifold/pull/2707) ([zdavis](https://api.github.com/users/zdavis))
