@@ -19,7 +19,7 @@ class ReturnMenuBody extends PureComponent {
 
   static contextType = FrontendModeContext;
 
-  isLibraryDisabled() {
+  get isLibraryDisabled() {
     return this.props.settings.attributes.general.libraryDisabled;
   }
 
