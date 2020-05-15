@@ -218,6 +218,16 @@ class Project < ApplicationRecord
   scope :with_current_bag_it_export, -> { where(id: ProjectExportStatus.current_project_ids) }
   scope :pending_bag_it_export, -> { exports_as_bag_it.sans_current_bag_it_export }
 
+  scope :with_collection_order, lambda { |collection = nil|
+    next unless collection.present?
+
+    pc = ProjectCollection.friendly.find(collection)
+    ranked_by_collection
+      .joins(:collection_projects)
+      .where(collection_projects: { project_collection: pc })
+      .group("projects.id, collection_project_rankings.ranking")
+  }
+
   # Search
   # rubocop:disable Style/Lambda
   scope :search_import, -> {
