@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_200_512_192_527) do
+ActiveRecord::Schema.define(version: 2020_05_12_192527) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_trgm"
@@ -33,49 +34,6 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.integer "visibility", default: 0, null: false
     t.index ["project_id"], name: "index_action_callouts_on_project_id"
     t.index ["text_id"], name: "index_action_callouts_on_text_id"
-  end
-
-  create_table "ahoy_events", force: :cascade do |t|
-    t.bigint "visit_id"
-    t.bigint "user_id"
-    t.string "name"
-    t.jsonb "properties"
-    t.datetime "time"
-    t.date "date"
-    t.index %w[name time], name: "index_ahoy_events_on_name_and_time"
-    t.index ["properties"], name: "index_ahoy_events_on_properties", opclass: :jsonb_path_ops, using: :gin
-    t.index ["user_id"], name: "index_ahoy_events_on_user_id"
-    t.index ["visit_id"], name: "index_ahoy_events_on_visit_id"
-  end
-
-  create_table "ahoy_visits", force: :cascade do |t|
-    t.string "visit_token"
-    t.string "visitor_token"
-    t.bigint "user_id"
-    t.string "ip"
-    t.text "user_agent"
-    t.text "referrer"
-    t.string "referring_domain"
-    t.text "landing_page"
-    t.string "browser"
-    t.string "os"
-    t.string "device_type"
-    t.string "country"
-    t.string "region"
-    t.string "city"
-    t.float "latitude"
-    t.float "longitude"
-    t.string "utm_source"
-    t.string "utm_medium"
-    t.string "utm_term"
-    t.string "utm_content"
-    t.string "utm_campaign"
-    t.string "app_version"
-    t.string "os_version"
-    t.string "platform"
-    t.datetime "started_at"
-    t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
-    t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
   end
 
   create_table "annotations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -111,7 +69,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.uuid "text_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[cached_external_source_id text_id], name: "index_cached_external_source_link_uniqueness", unique: true
+    t.index ["cached_external_source_id", "text_id"], name: "index_cached_external_source_link_uniqueness", unique: true
     t.index ["cached_external_source_id"], name: "index_cached_external_source_links_on_cached_external_source_id"
     t.index ["text_id"], name: "index_cached_external_source_links_on_text_id"
   end
@@ -145,7 +103,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.integer "position"
     t.string "collaboratable_type"
     t.uuid "collaboratable_id"
-    t.index %w[collaboratable_type collaboratable_id], name: "index_collabs_on_collabable_type_and_collabable_id"
+    t.index ["collaboratable_type", "collaboratable_id"], name: "index_collabs_on_collabable_type_and_collabable_id"
     t.index ["maker_id"], name: "index_collaborators_on_maker_id"
   end
 
@@ -156,7 +114,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_collection_id"], name: "index_collection_projects_on_project_collection_id"
-    t.index %w[project_id project_collection_id], name: "by_project_and_project_collection", unique: true
+    t.index ["project_id", "project_collection_id"], name: "by_project_and_project_collection", unique: true
     t.index ["project_id"], name: "index_collection_projects_on_project_id"
   end
 
@@ -174,7 +132,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.uuid "ancestor_id", null: false
     t.uuid "descendant_id", null: false
     t.integer "generations", null: false
-    t.index %w[ancestor_id descendant_id generations], name: "comment_anc_desc_idx", unique: true
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "comment_anc_desc_idx", unique: true
     t.index ["ancestor_id"], name: "index_comment_hierarchies_on_ancestor_id"
     t.index ["descendant_id"], name: "comment_desc_idx"
   end
@@ -195,7 +153,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.index ["created_at"], name: "index_comments_on_created_at", using: :brin
     t.index ["creator_id"], name: "index_comments_on_creator_id"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
-    t.index %w[subject_type subject_id], name: "index_comments_on_subject_type_and_subject_id"
+    t.index ["subject_type", "subject_id"], name: "index_comments_on_subject_type_and_subject_id"
   end
 
   create_table "content_block_references", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -205,7 +163,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "kind", null: false
     t.integer "position"
     t.index ["content_block_id"], name: "index_content_block_references_on_content_block_id"
-    t.index %w[referencable_type referencable_id], name: "index_content_block_references_on_referencable"
+    t.index ["referencable_type", "referencable_id"], name: "index_content_block_references_on_referencable"
   end
 
   create_table "content_blocks", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -235,8 +193,8 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.jsonb "metadata", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[entitlement_id most_recent], name: "index_entitlement_transitions_parent_most_recent", unique: true, where: "most_recent"
-    t.index %w[entitlement_id sort_key], name: "index_entitlement_transitions_parent_sort", unique: true
+    t.index ["entitlement_id", "most_recent"], name: "index_entitlement_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["entitlement_id", "sort_key"], name: "index_entitlement_transitions_parent_sort", unique: true
     t.index ["entitlement_id"], name: "index_entitlement_transitions_on_entitlement_id"
   end
 
@@ -245,7 +203,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.uuid "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[entitlement_id user_id], name: "entitlement_user_links_uniqueness", unique: true
+    t.index ["entitlement_id", "user_id"], name: "entitlement_user_links_uniqueness", unique: true
     t.index ["entitlement_id"], name: "index_entitlement_user_links_on_entitlement_id"
     t.index ["user_id"], name: "index_entitlement_user_links_on_user_id"
   end
@@ -271,9 +229,9 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.index ["expires_on"], name: "index_entitlements_on_expires_on"
     t.index ["global_roles"], name: "index_entitlements_on_global_roles", using: :gin
     t.index ["scoped_roles"], name: "index_entitlements_on_scoped_roles", using: :gin
-    t.index %w[subject_type subject_id], name: "index_entitlements_on_subject_type_and_subject_id"
-    t.index %w[target_type target_id entitler_id subject_type subject_id], name: "index_entitlements_uniqueness"
-    t.index %w[target_type target_id], name: "index_entitlements_on_target_type_and_target_id"
+    t.index ["subject_type", "subject_id"], name: "index_entitlements_on_subject_type_and_subject_id"
+    t.index ["target_type", "target_id", "entitler_id", "subject_type", "subject_id"], name: "index_entitlements_uniqueness"
+    t.index ["target_type", "target_id"], name: "index_entitlements_on_target_type_and_target_id"
   end
 
   create_table "entitlers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -283,7 +241,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.jsonb "metadata", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[entity_type entity_id], name: "index_entitlers_entity_uniqueness", unique: true
+    t.index ["entity_type", "entity_id"], name: "index_entitlers_entity_uniqueness", unique: true
   end
 
   create_table "events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -306,9 +264,9 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "external_subject_type"
     t.uuid "twitter_query_id"
     t.index ["created_at"], name: "index_events_on_created_at"
-    t.index %w[external_subject_type external_subject_id], name: "index_subj_on_subj_type_and_subj_id"
+    t.index ["external_subject_type", "external_subject_id"], name: "index_subj_on_subj_type_and_subj_id"
     t.index ["project_id"], name: "index_events_on_project_id"
-    t.index %w[subject_type subject_id], name: "index_events_on_subject_type_and_subject_id"
+    t.index ["subject_type", "subject_id"], name: "index_events_on_subject_type_and_subject_id"
     t.index ["twitter_query_id"], name: "index_events_on_twitter_query_id"
   end
 
@@ -329,7 +287,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.uuid "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[favoritable_type favoritable_id], name: "index_favorites_on_favoritable_type_and_favoritable_id"
+    t.index ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable_type_and_favoritable_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
@@ -340,6 +298,12 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "link_text"
     t.string "link_url"
     t.string "link_target"
+    t.integer "position"
+    t.text "style", default: "dark"
+    t.boolean "hidden", default: false
+    t.uuid "creator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "background_file_name_deprecated"
     t.string "background_content_type_deprecated"
     t.integer "background_file_size_deprecated"
@@ -348,12 +312,6 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "foreground_content_type_deprecated"
     t.integer "foreground_file_size_deprecated"
     t.datetime "foreground_updated_at_deprecated"
-    t.integer "position"
-    t.text "style", default: "dark"
-    t.boolean "hidden", default: false
-    t.uuid "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "background_color"
     t.string "foreground_color"
     t.string "header_color"
@@ -373,7 +331,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "flaggable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[flaggable_type flaggable_id], name: "index_flags_on_flaggable_type_and_flaggable_id"
+    t.index ["flaggable_type", "flaggable_id"], name: "index_flags_on_flaggable_type_and_flaggable_id"
   end
 
   create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
@@ -382,8 +340,8 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "sluggable_type", limit: 50
     t.string "scope"
     t.datetime "created_at"
-    t.index %w[slug sluggable_type scope], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index %w[slug sluggable_type], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
@@ -395,7 +353,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.jsonb "info", default: "{}", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[uid provider], name: "index_identities_on_uid_and_provider", unique: true
+    t.index ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true
     t.index ["user_id"], name: "index_identities_on_user_id"
   end
 
@@ -452,10 +410,6 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
   create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "state"
     t.string "log", array: true
-    t.string "source_file_name"
-    t.string "source_content_type"
-    t.integer "source_file_size"
-    t.datetime "source_updated_at"
     t.string "strategy"
     t.string "external_source_url"
     t.string "ingestion_type"
@@ -464,6 +418,10 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.uuid "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "source_file_name"
+    t.string "source_content_type"
+    t.integer "source_file_size"
+    t.datetime "source_updated_at"
     t.jsonb "source_data", default: {}, null: false
     t.index ["creator_id"], name: "index_ingestions_on_creator_id"
     t.index ["project_id"], name: "index_ingestions_on_project_id"
@@ -497,7 +455,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.datetime "updated_at", null: false
     t.index ["frequency"], name: "index_notification_preferences_on_frequency"
     t.index ["kind"], name: "index_notification_preferences_on_kind"
-    t.index %w[user_id kind], name: "index_notification_preferences_on_user_id_and_kind", unique: true
+    t.index ["user_id", "kind"], name: "index_notification_preferences_on_user_id_and_kind", unique: true
     t.index ["user_id"], name: "index_notification_preferences_on_user_id"
   end
 
@@ -562,8 +520,8 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.boolean "most_recent", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[project_exportation_id most_recent], name: "index_project_exportation_transitions_parent_most_recent", unique: true, where: "most_recent"
-    t.index %w[project_exportation_id sort_key], name: "index_project_exportation_transitions_parent_sort", unique: true
+    t.index ["project_exportation_id", "most_recent"], name: "index_project_exportation_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["project_exportation_id", "sort_key"], name: "index_project_exportation_transitions_parent_sort", unique: true
     t.index ["project_exportation_id"], name: "index_project_exportation_transitions_on_project_exportation_id"
   end
 
@@ -578,7 +536,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.datetime "updated_at", null: false
     t.index ["export_target_id"], name: "index_project_exportations_on_export_target_id"
     t.index ["project_export_id"], name: "index_project_exportations_on_project_export_id"
-    t.index %w[project_id export_target_id], name: "index_project_exportations_targeted_projects"
+    t.index ["project_id", "export_target_id"], name: "index_project_exportations_targeted_projects"
     t.index ["project_id"], name: "index_project_exportations_on_project_id"
     t.index ["user_id"], name: "index_project_exportations_on_user_id"
   end
@@ -592,7 +550,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["asset_data"], name: "index_project_exports_on_asset_data", using: :gin
-    t.index %w[project_id export_kind fingerprint], name: "index_project_exports_uniqueness", unique: true
+    t.index ["project_id", "export_kind", "fingerprint"], name: "index_project_exports_uniqueness", unique: true
     t.index ["project_id"], name: "index_project_exports_on_project_id"
   end
 
@@ -611,8 +569,8 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "cover_content_type_deprecated"
     t.integer "cover_file_size_deprecated"
     t.datetime "cover_updated_at_deprecated"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "featured", default: false
     t.string "hashtag"
     t.string "purchase_url"
@@ -630,12 +588,12 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "avatar_content_type_deprecated"
     t.integer "avatar_file_size_deprecated"
     t.datetime "avatar_updated_at_deprecated"
-    t.jsonb "metadata", default: {}, null: false
+    t.jsonb "metadata", default: {}
     t.uuid "creator_id"
     t.date "publication_date"
     t.string "slug"
     t.string "avatar_color", default: "primary"
-    t.jsonb "citations", default: {}, null: false
+    t.jsonb "citations", default: {}
     t.boolean "draft", default: true, null: false
     t.boolean "hide_activity", default: false
     t.citext "sort_title"
@@ -677,9 +635,9 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "anonymous_label"
-    t.index %w[reading_group_id anonymous_label], name: "anonymous_label_index", unique: true
+    t.index ["reading_group_id", "anonymous_label"], name: "anonymous_label_index", unique: true
     t.index ["reading_group_id"], name: "index_reading_group_memberships_on_reading_group_id"
-    t.index %w[user_id reading_group_id], name: "index_reading_group_memberships_on_user_id_and_reading_group_id", unique: true
+    t.index ["user_id", "reading_group_id"], name: "index_reading_group_memberships_on_user_id_and_reading_group_id", unique: true
     t.index ["user_id"], name: "index_reading_group_memberships_on_user_id"
   end
 
@@ -700,13 +658,13 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "title"
     t.text "description"
     t.uuid "project_id"
+    t.string "fingerprint"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "thumbnail_file_name_deprecated"
     t.string "thumbnail_content_type_deprecated"
     t.integer "thumbnail_file_size_deprecated"
     t.datetime "thumbnail_updated_at_deprecated"
-    t.string "fingerprint"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "slug"
     t.integer "collection_resources_count", default: 0
     t.integer "events_count", default: 0
@@ -723,8 +681,8 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.boolean "most_recent", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[resource_import_row_id most_recent], name: "index_resource_import_row_transitions_parent_most_recent", unique: true, where: "most_recent"
-    t.index %w[resource_import_row_id sort_key], name: "index_resource_import_row_transitions_parent_sort", unique: true
+    t.index ["resource_import_row_id", "most_recent"], name: "index_resource_import_row_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["resource_import_row_id", "sort_key"], name: "index_resource_import_row_transitions_parent_sort", unique: true
   end
 
   create_table "resource_import_rows", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -750,8 +708,8 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.boolean "most_recent", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[resource_import_id most_recent], name: "index_resource_import_transitions_parent_most_recent", unique: true, where: "most_recent"
-    t.index %w[resource_import_id sort_key], name: "index_resource_import_transitions_parent_sort", unique: true
+    t.index ["resource_import_id", "most_recent"], name: "index_resource_import_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["resource_import_id", "sort_key"], name: "index_resource_import_transitions_parent_sort", unique: true
   end
 
   create_table "resource_imports", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -760,10 +718,6 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "storage_type"
     t.string "storage_identifier"
     t.string "source", null: false
-    t.string "data_file_name_deprecated"
-    t.string "data_content_type_deprecated"
-    t.integer "data_file_size_deprecated"
-    t.datetime "data_updated_at_deprecated"
     t.string "url"
     t.integer "header_row", default: 1
     t.jsonb "column_map", default: {}, null: false
@@ -771,6 +725,10 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.boolean "parse_error", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "data_file_name_deprecated"
+    t.string "data_content_type_deprecated"
+    t.integer "data_file_size_deprecated"
+    t.datetime "data_updated_at_deprecated"
     t.jsonb "data_data", default: {}
     t.index ["creator_id"], name: "index_resource_imports_on_creator_id"
     t.index ["project_id"], name: "index_resource_imports_on_project_id"
@@ -829,7 +787,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "sub_kind"
     t.string "slug"
     t.integer "comments_count", default: 0
-    t.jsonb "metadata", default: {}, null: false
+    t.jsonb "metadata", default: {}
     t.integer "events_count", default: 0
     t.integer "minimum_width"
     t.integer "minimum_height"
@@ -856,9 +814,9 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.datetime "updated_at", null: false
     t.text "kind", default: "unknown", null: false
     t.index ["kind"], name: "index_roles_on_kind"
-    t.index %w[name resource_type resource_id], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true
     t.index ["name"], name: "index_roles_on_name"
-    t.index %w[resource_type resource_id], name: "index_roles_on_resource_type_and_resource_id"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
   create_table "settings", id: :serial, force: :cascade do |t|
@@ -928,14 +886,16 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "context", limit: 128
     t.datetime "created_at"
     t.index ["context"], name: "index_taggings_on_context"
-    t.index %w[tag_id taggable_id taggable_type context tagger_id tagger_type], name: "taggings_idx", unique: true
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
-    t.index %w[taggable_id taggable_type context], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
-    t.index %w[taggable_id taggable_type tagger_id context], name: "taggings_idy"
+    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
+    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
     t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
+    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id"
     t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
-    t.index %w[tagger_id tagger_type], name: "index_taggings_on_tagger_id_and_tagger_type"
+    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
     t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
+    t.index ["tagger_type", "tagger_id"], name: "index_taggings_on_tagger_type_and_tagger_id"
   end
 
   create_table "tags", id: :serial, force: :cascade do |t|
@@ -953,7 +913,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["asset_data"], name: "index_text_exports_on_asset_data", using: :gin
-    t.index %w[text_id export_kind fingerprint], name: "index_text_exports_uniqueness", unique: true
+    t.index ["text_id", "export_kind", "fingerprint"], name: "index_text_exports_uniqueness", unique: true
     t.index ["text_id"], name: "index_text_exports_on_text_id"
   end
 
@@ -978,7 +938,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "kind"
     t.uuid "ingestion_source_id"
     t.jsonb "body_json", default: "{}", null: false
-    t.jsonb "citations", default: {}, null: false
+    t.jsonb "citations", default: {}
     t.index ["ingestion_source_id"], name: "index_text_sections_on_ingestion_source_id"
     t.index ["source_identifier"], name: "index_text_sections_on_source_identifier"
     t.index ["text_id"], name: "index_text_sections_on_text_id"
@@ -1020,17 +980,17 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.uuid "start_text_section_id"
     t.integer "position"
     t.string "spine", default: [], array: true
-    t.jsonb "metadata", default: {}, null: false
+    t.jsonb "metadata", default: {}
     t.string "slug"
-    t.jsonb "citations", default: {}, null: false
+    t.jsonb "citations", default: {}
     t.string "section_kind"
     t.integer "events_count", default: 0
     t.jsonb "cover_data", default: {}
     t.boolean "published", default: false, null: false
     t.string "cached_description_formatted"
-    t.string "cached_description_plaintext"
     t.text "fingerprint", null: false
     t.jsonb "export_configuration", default: {}, null: false
+    t.string "cached_description_plaintext"
     t.index "((export_configuration @> '{\"epub_v3\": true}'::jsonb))", name: "index_texts_export_configuration_exports_as_epub_v3"
     t.index ["category_id"], name: "index_texts_on_category_id"
     t.index ["created_at"], name: "index_texts_on_created_at", using: :brin
@@ -1073,8 +1033,8 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "password_digest"
     t.string "password"
     t.string "password_confirmation"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "nickname"
     t.string "avatar_file_name_deprecated"
     t.string "avatar_content_type_deprecated"
@@ -1100,7 +1060,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.uuid "user_id", null: false
     t.uuid "role_id", null: false
     t.index ["role_id"], name: "index_users_roles_on_role_id"
-    t.index %w[user_id role_id], name: "index_users_roles_on_user_id_and_role_id", unique: true
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", unique: true
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
@@ -1109,7 +1069,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.string "foreign_key_name", null: false
     t.integer "foreign_key_id"
     t.string "foreign_type"
-    t.index %w[foreign_key_name foreign_key_id foreign_type], name: "index_version_associations_on_foreign_key"
+    t.index ["foreign_key_name", "foreign_key_id", "foreign_type"], name: "index_version_associations_on_foreign_key"
     t.index ["version_id"], name: "index_version_associations_on_version_id"
   end
 
@@ -1126,8 +1086,8 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
     t.integer "transaction_id"
     t.string "title_fallback"
     t.index ["created_at"], name: "index_versions_on_created_at", using: :brin
-    t.index %w[item_type item_id], name: "index_versions_on_item_type_and_item_id"
-    t.index %w[parent_item_type parent_item_id], name: "index_versions_on_parent_item_type_and_parent_item_id"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+    t.index ["parent_item_type", "parent_item_id"], name: "index_versions_on_parent_item_type_and_parent_item_id"
     t.index ["transaction_id"], name: "index_versions_on_transaction_id"
   end
 
@@ -1239,6 +1199,14 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
             ELSE NULL::character varying
         END);
   SQL
+  create_view "reading_group_membership_counts", sql_definition: <<-SQL
+    SELECT rgm.id AS reading_group_membership_id,
+    count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
+    count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
+   FROM (reading_group_memberships rgm
+     LEFT JOIN annotations a ON (((a.creator_id = rgm.user_id) AND (a.reading_group_id = rgm.reading_group_id))))
+  GROUP BY rgm.id;
+  SQL
   create_view "reading_group_counts", sql_definition: <<-SQL
     SELECT rg.id AS reading_group_id,
     count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
@@ -1247,13 +1215,20 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
      LEFT JOIN annotations a ON ((a.reading_group_id = rg.id)))
   GROUP BY rg.id;
   SQL
-  create_view "reading_group_membership_counts", sql_definition: <<-SQL
-    SELECT rgm.id AS reading_group_membership_id,
-    count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
-    count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
-   FROM (reading_group_memberships rgm
-     LEFT JOIN annotations a ON (((a.creator_id = rgm.user_id) AND (a.reading_group_id = rgm.reading_group_id))))
-  GROUP BY rgm.id;
+  create_view "text_export_statuses", sql_definition: <<-SQL
+    SELECT t.id AS text_id,
+    te.id AS text_export_id,
+        CASE te.export_kind
+            WHEN 'epub_v3'::text THEN (t.export_configuration @> '{"epub_v3": true}'::jsonb)
+            ELSE false
+        END AS autoexport,
+    te.export_kind,
+    te.fingerprint AS export_fingerprint,
+    (t.fingerprint = te.fingerprint) AS current,
+    (t.fingerprint <> te.fingerprint) AS stale,
+    te.created_at AS exported_at
+   FROM (texts t
+     JOIN text_exports te ON ((t.id = te.text_id)));
   SQL
   create_view "project_summaries", sql_definition: <<-SQL
     SELECT p.id,
@@ -1330,21 +1305,6 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
            FROM (collaborators c
              JOIN makers m ON ((m.id = c.maker_id)))
           WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
-  SQL
-  create_view "text_export_statuses", sql_definition: <<-SQL
-    SELECT t.id AS text_id,
-    te.id AS text_export_id,
-        CASE te.export_kind
-            WHEN 'epub_v3'::text THEN (t.export_configuration @> '{"epub_v3": true}'::jsonb)
-            ELSE false
-        END AS autoexport,
-    te.export_kind,
-    te.fingerprint AS export_fingerprint,
-    (t.fingerprint = te.fingerprint) AS current,
-    (t.fingerprint <> te.fingerprint) AS stale,
-    te.created_at AS exported_at
-   FROM (texts t
-     JOIN text_exports te ON ((t.id = te.text_id)));
   SQL
   create_view "project_export_statuses", sql_definition: <<-SQL
     SELECT p.id AS project_id,
@@ -1499,7 +1459,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
           ORDER BY entitlement_derived_roles.expired_at DESC, cs."position", entitlement_derived_roles.expires_on DESC) s ON (true))
   GROUP BY entitlement_derived_roles.user_id, entitlement_derived_roles.entitlement_role_id, entitlement_derived_roles.resource_id, entitlement_derived_roles.resource_type, entitlement_derived_roles.role_name, entitlement_derived_roles.role_kind;
   SQL
-  add_index "entitlement_grants", %w[user_id entitlement_role_id resource_id resource_type role_name role_kind], name: "entitlement_grants_pkey", unique: true
+  add_index "entitlement_grants", ["user_id", "entitlement_role_id", "resource_id", "resource_type", "role_name", "role_kind"], name: "entitlement_grants_pkey", unique: true
 
   create_view "entitlement_grant_audits", materialized: true, sql_definition: <<-SQL
     SELECT user_id,
@@ -1520,7 +1480,7 @@ ActiveRecord::Schema.define(version: 20_200_512_192_527) do
             (ear.role_id IS NOT NULL) AS has_assigned_role) x ON (true));
   SQL
   add_index "entitlement_grant_audits", ["action"], name: "index_entitlement_grant_audits_on_action"
-  add_index "entitlement_grant_audits", %w[user_id entitlement_role_id resource_id resource_type role_name], name: "entitlement_grant_audits_pkey", unique: true
+  add_index "entitlement_grant_audits", ["user_id", "entitlement_role_id", "resource_id", "resource_type", "role_name"], name: "entitlement_grant_audits_pkey", unique: true
 
   create_view "entitlement_targets", sql_definition: <<-SQL
     SELECT 'User'::text AS target_type,
