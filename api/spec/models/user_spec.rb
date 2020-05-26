@@ -75,7 +75,7 @@ RSpec.describe User, type: :model do
 
   it "has a default role 'reader'" do
     user = FactoryBot.create(:user)
-    expect(user.has_role? :reader).to eq true
+    expect(user.has_role?(:reader)).to eq true
   end
 
   it "sets a role correctly" do
@@ -127,11 +127,17 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context "can be searched", :elasticsearch do
+  context "when assigning a role during creation" do
+    let!(:user) { FactoryBot.create :user, :admin }
+    it "sets the kind correctly" do
+      expect(user.kind).to eq RoleName[:admin]
+    end
+  end
 
+  context "can be searched", :elasticsearch do
     let(:first) { "189274891457612" }
     let(:last) { "HIOUFHAOASJDFIO" }
-    let(:email) { "#{first}@#{last}.com"}
+    let(:email) { "#{first}@#{last}.com" }
 
     before(:each) do
       user = FactoryBot.create(:user, first_name: first, last_name: last, email: email)
@@ -140,23 +146,22 @@ RSpec.describe User, type: :model do
     end
 
     it "by first name" do
-      results = User.filtered({keyword: first, typeahead: true})
+      results = User.filtered(keyword: first, typeahead: true)
       expect(results.length).to be 1
     end
 
     it "by last name" do
-      results = User.filtered({keyword: last, typeahead: true})
+      results = User.filtered(keyword: last, typeahead: true)
       expect(results.length).to be 1
     end
 
     it "by email" do
-      results = User.filtered({keyword: email, typeahead: true})
+      results = User.filtered(keyword: email, typeahead: true)
       expect(results.length).to be 1
     end
   end
 
   context "when resetting password" do
-
     let(:user) do
       u = FactoryBot.create(:user, password: "password", password_confirmation: "password")
       User.find u.id
@@ -187,8 +192,6 @@ RSpec.describe User, type: :model do
       expect(user.password.length).to eq(12)
       expect(user).to be_valid
     end
-
-
   end
 
   context "already exists" do
