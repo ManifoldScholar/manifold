@@ -167,6 +167,7 @@ class Annotation < ApplicationRecord
 
   # Callbacks
   after_commit :enqueue_annotation_notifications, on: [:create]
+  after_commit :maybe_enqueue_annotation_notifications, on: [:update]
   after_commit :trigger_event_creation, on: [:create]
 
   class << self
@@ -269,6 +270,12 @@ class Annotation < ApplicationRecord
     return unless public? && annotation?
 
     Notifications::EnqueueAnnotationNotificationsJob.perform_later id
+  end
+
+  def maybe_enqueue_annotation_notifications
+    return unless saved_change_to_body? || saved_change_to_private?
+
+    enqueue_annotation_notifications
   end
 
   def trigger_event_creation
