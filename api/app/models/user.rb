@@ -151,6 +151,8 @@ class User < ApplicationRecord
     end
 
     add_role role.to_sym
+    infer_kind!
+    update_column :kind, kind if kind_changed?
   ensure
     @synchronizing_global_role = false
   end
