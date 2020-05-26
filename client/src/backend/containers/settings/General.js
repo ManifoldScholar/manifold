@@ -119,7 +119,7 @@ export class SettingsGeneralContainer extends PureComponent {
                         wide
                         className="form-toggle-secondary"
                         label="Restricted Access Notice Header"
-                        name="attributes[restrictedAccessHeading]"
+                        name="attributes[general][restrictedAccessHeading]"
                         placeholder={
                           config.app.locale.notifications
                             .projectAuthorizationNotice.heading
@@ -129,7 +129,7 @@ export class SettingsGeneralContainer extends PureComponent {
                         wide
                         className="form-toggle-secondary"
                         label="Restricted Access Notice Body"
-                        name="attributes[restrictedAccessBody]"
+                        name="attributes[general][restrictedAccessBody]"
                         placeholder={
                           config.app.locale.notifications
                             .projectAuthorizationNotice.body
