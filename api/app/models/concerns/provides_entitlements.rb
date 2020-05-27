@@ -10,7 +10,7 @@ module Concerns
 
     # @return [Entitler]
     def to_upsertable_entitler
-      build_entitler
+      entitler || build_entitler
     end
   end
 end

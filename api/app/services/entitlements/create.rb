@@ -25,7 +25,7 @@ module Entitlements
     # @return [void]
     def find_entitler!
       entitling_entity.to_upsertable_entitler.then do |entitler|
-        entitler.upsert!
+        entitler.upsert! unless entitler.persisted?
 
         @entitler = entitler
       end
