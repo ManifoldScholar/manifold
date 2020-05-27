@@ -12,7 +12,7 @@ class AnnotationAuthorizer < ApplicationAuthorizer
     allowed = true
     allowed = false if annotation_in_reading_group? && reading_groups_disabled?
     allowed = false if !annotation_is_resource_annotation? &&
-                       !resource.project.publicly_engageable_by?(user) &&
+                       !resource.project&.publicly_engageable_by?(user) &&
                        !annotation_in_reading_group? && annotation_is_public?
     allowed = false if annotation_in_reading_group? && user_is_not_in_reading_group?(user)
     allowed = false if annotation_is_resource_annotation? && !user_can_notate_text?(user)
