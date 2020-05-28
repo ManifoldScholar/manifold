@@ -1,9 +1,22 @@
 # Changelog
 
+## [v5.0.0](https://github.com/ManifoldScholar/manifold/tree/v5.0.0) - 05/27/20
+
+### Bugs
+
+-  Correct entitlement creation [#2758](https://github.com/ManifoldScholar/manifold/pull/2758) ([zdavis](https://api.github.com/users/zdavis))
+-  Correct reader back menu [#2748](https://github.com/ManifoldScholar/manifold/pull/2748) ([zdavis](https://api.github.com/users/zdavis))
+-  Restore collection project filter [#2747](https://github.com/ManifoldScholar/manifold/pull/2747) ([zdavis](https://api.github.com/users/zdavis))
+
+### Security
+
+-  Bump puma from 3.12.4 to 3.12.6 [#2753](https://github.com/ManifoldScholar/manifold/pull/2753) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+
 ## [v5.0.0-rc.2](https://github.com/ManifoldScholar/manifold/tree/v5.0.0-rc.2) - 05/14/20
 
 ### Features
 
+-  Release v5.0.0-rc.2 [#2746](https://github.com/ManifoldScholar/manifold/pull/2746) ([zdavis](https://api.github.com/users/zdavis))
 -  Document Entitlements [#2716](https://github.com/ManifoldScholar/manifold/pull/2716) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
 -  Document SearchResult API endpoint [#2606](https://github.com/ManifoldScholar/manifold/pull/2606) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
 -  Add pagination to route response documentation [#2605](https://github.com/ManifoldScholar/manifold/pull/2605) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
