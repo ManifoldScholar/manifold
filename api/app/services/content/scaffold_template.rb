@@ -50,6 +50,10 @@ module Content
     RESOURCES["Content::ResourcesBlock"] = {}
     RESOURCES.freeze
 
+    ONE_TEXT = ActiveSupport::OrderedHash.new
+    ONE_TEXT["Content::TableOfContentsBlock"] = {}
+    ONE_TEXT.freeze
+
     def initialize(kind)
       @kind = kind
       @content_blocks = content_blocks_for_kind(kind).with_indifferent_access
