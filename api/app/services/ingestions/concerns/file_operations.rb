@@ -214,6 +214,7 @@ module Ingestions
 
             target_path.mkpath
             zip_file.extract(f, target_file.to_s)
+            target_file.chmod(0o760)
           end
         end
         logger.debug("Unzipped archive to temporary directory: #{extract_path}")
