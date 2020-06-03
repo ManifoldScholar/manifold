@@ -5,10 +5,11 @@ module Filterable
   # rubocop:disable Metrics/AbcSize
   class_methods do
     def filtered(params, scope: all, user: nil)
-      results = scope.filter_with_query(params, user)
-        .filter_with_elasticsearch(params)
+      query = scope.filter_with_query params, user
 
-      validate_paginated_results(params, results)
+      results = query.filter_with_elasticsearch params
+
+      validate_paginated_results params, results
     end
 
     def filter_with_query(params, user = nil)
