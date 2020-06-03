@@ -21,6 +21,7 @@ class CollectionProject < ApplicationRecord
   scope :globally_ranked, -> { joins(:ranking).merge(CollectionProjectRanking.globally_ranked) }
   scope :ranked, -> { joins(:ranking).merge(CollectionProjectRanking.ranked) }
   scope :with_order, ->(order) { order(order) if order.present? }
+  scope :by_collection, ->(collection) { where(project_collection: collection) }
 
   scope :projects_with_read_ability, ->(user) { joins(:project).merge(Project.with_read_ability(user)) }
   scope :projects_with_update_ability, ->(user) { joins(:project).merge(Project.with_update_ability(user)) }

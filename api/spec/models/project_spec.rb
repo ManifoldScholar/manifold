@@ -65,15 +65,15 @@ RSpec.describe Project, type: :model do
   end
 
   it "triggers an event on create" do
-    expect {
+    expect do
       project = FactoryBot.create(:project)
-    }.to have_enqueued_job(CreateEventJob)
+    end.to have_enqueued_job(CreateEventJob)
   end
 
   it "does not trigger an event on new" do
-    expect {
+    expect do
       project = FactoryBot.build(:project)
-    }.to_not have_enqueued_job(CreateEventJob)
+    end.to_not have_enqueued_job(CreateEventJob)
   end
 
   it "is created as a draft" do
@@ -112,29 +112,25 @@ RSpec.describe Project, type: :model do
   end
 
   context "can be searched", :elasticsearch do
-
     it "by title" do
       @project_a = FactoryBot.create(:project, title: "Bartholomew Smarts", featured: true)
       @project_b = FactoryBot.create(:project, title: "Rambo Smarts", featured: true)
       Project.reindex
       Project.searchkick_index.refresh
-      results = Project.filtered({keyword: "Bartholomew"})
+      results = Project.filtered(keyword: "Bartholomew")
       expect(results.length).to be 1
-      results = Project.filtered({keyword: "Smarts"})
+      results = Project.filtered(keyword: "Smarts")
       expect(results.length).to be 2
     end
   end
 
   context "can be filtered" do
-
     context "when there are not models" do
-
       it "the results are always paginated if a page is requested" do
         Project.destroy_all
-        results = Project.filtered({page: 1, per_page: 10, keyword: "foo"})
+        results = Project.filtered(page: 1, per_page: 10, keyword: "foo")
         expect(results).to respond_to :current_page
       end
-
     end
 
     context "when there are models" do
@@ -152,56 +148,54 @@ RSpec.describe Project, type: :model do
 
       it "the results are paginated if a page is requested" do
         Project.destroy_all
-        results = Project.filtered({page: 1, per_page: 10})
+        results = Project.filtered(page: 1, per_page: 10)
         expect(results).to respond_to :current_page
       end
 
       it "to only include creator's projects" do
-        results = Project.filtered({with_creator_role: true}, user: @user)
+        results = Project.filtered({ with_creator_role: true }, user: @user)
         expect(results).to match_array(@project_b)
       end
 
       it "to only include featured" do
-        results = Project.filtered({featured: true})
+        results = Project.filtered(featured: true)
         expect(results.length).to be 1
       end
 
       it "to only include not featured" do
-        results = Project.filtered({featured: false})
+        results = Project.filtered(featured: false)
         expect(results.length).to be 1
       end
 
       it "to only include projects of a specific subject" do
-        results = Project.filtered({subject: @subject_a})
+        results = Project.filtered(subject: @subject_a)
         expect(results.first).to eq @project_a
-        results = Project.filtered({subject: @subject_b})
+        results = Project.filtered(subject: @subject_b)
         expect(results.first).to eq @project_b
       end
 
       it "by both subject and featured" do
-        results = Project.filtered({subject: @subject_a, featured: false})
+        results = Project.filtered(subject: @subject_a, featured: false)
         expect(results.length).to be 0
-        results = Project.filtered({subject: @subject_a, featured: true})
+        results = Project.filtered(subject: @subject_a, featured: true)
         expect(results.length).to be 1
       end
 
       it "allows boolean and string featured values" do
-        results = Project.filtered({featured: "true"})
+        results = Project.filtered(featured: "true")
         expect(results.length).to be 1
       end
 
       it "treats 1 as true when filtering" do
-        results = Project.filtered({featured: "1"})
+        results = Project.filtered(featured: "1")
         expect(results.length).to be 1
-        results = Project.filtered({featured: 1})
+        results = Project.filtered(featured: 1)
         expect(results.length).to be 1
       end
     end
-
   end
 
   describe "its metadata" do
-
     it "can be set" do
       p = FactoryBot.build(:project)
       p.metadata = { "isbn" => "1234" }
@@ -213,16 +207,15 @@ RSpec.describe Project, type: :model do
       p = FactoryBot.build(:project)
       p.metadata = { "isbn" => "1234", "foo" => "bar" }
       p.save
-      expect(p.metadata).to eq({ "isbn" => "1234" })
+      expect(p.metadata).to eq("isbn" => "1234")
     end
 
     it "filters out blank metadata" do
       p = FactoryBot.build(:project)
       p.metadata = { "isbn" => "1234", "foo" => "" }
       p.save
-      expect(p.metadata).to eq({ "isbn" => "1234" })
+      expect(p.metadata).to eq("isbn" => "1234")
     end
-
   end
 
   context "when avatar is present" do
@@ -254,6 +247,89 @@ RSpec.describe Project, type: :model do
     end
 
     include_examples "a citable class with_citable_children"
+  end
+
+  describe ".filtered(collection_order:)" do
+    let(:tag_list) { "smart" }
+    let!(:collected_projects) { FactoryBot.create_list :project, 7, draft: false, tag_list: tag_list }
+    let(:expected_total_count) { collected_projects.length }
+    let(:pages) { 1.upto(3).to_a }
+    let(:total_page_count) { pages.length }
+
+    let!(:expected_page_counts) do
+      pages.map { |i| [i, (i%3).nonzero? ? 3 : 1] }.to_h
+    end
+
+    let!(:other_projects) { FactoryBot.create_list :project, 7, draft: false, tag_list: "other" }
+    let!(:another_collection) { FactoryBot.create :project_collection, :smart, tag_list: "other" }
+
+    def filter!(page, per_page: 3)
+      Project.filtered collection_order: project_collection.slug, page: page, per_page: per_page
+    end
+
+    shared_examples_for "valid counts for a page" do |page_number|
+      context "for page ##{page_number}" do
+        let(:current_page) { page_number }
+
+        let(:expected_page_count) { expected_page_counts.fetch(page_number) }
+
+        let(:found_projects) { filter! page_number }
+
+        it "returns the correct number of pages" do
+          expect(found_projects.total_pages).to eq total_page_count
+        end
+
+        it "returns the correct number of records on the current page" do
+          expect(found_projects.size).to eq expected_page_count
+        end
+
+        it "returns the correct total count of records" do
+          expect(found_projects.total_count).to eq expected_total_count
+        end
+      end
+    end
+
+    shared_examples_for "a valid filtered collection" do
+      it "does not duplicate items across pages" do
+        pages.map { |number| filter! number }
+      end
+
+      context "across the entire collection" do
+        let!(:entire_collection) { pages.flat_map { |number| filter!(number).to_a } }
+
+        subject { entire_collection }
+
+        it { is_expected.to have(expected_total_count).items }
+
+        it "does not duplicate any items" do
+          expect(entire_collection.uniq).to have(expected_total_count).items
+        end
+      end
+
+      1.upto(3).each do |page_number|
+        include_examples "valid counts for a page", page_number 
+      end
+    end
+
+    context "for a manual collection" do
+      let!(:project_collection) { FactoryBot.create :project_collection, smart: false }
+
+      let!(:collection_projects) do
+        collected_projects.map do |project|
+          FactoryBot.create :collection_project, project_collection: project_collection, project: project
+        end
+      end
+
+      it_should_behave_like "a valid filtered collection"
+    end
+
+    context "for a smart collection" do
+      let!(:project_collection) do
+        FactoryBot.create(:project_collection, :smart, tag_list: tag_list)
+      end
+
+      it_should_behave_like "a valid filtered collection"
+    end
   end
 
   context "it correctly scopes the visible projects" do
