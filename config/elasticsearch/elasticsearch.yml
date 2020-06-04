@@ -1,6 +1,8 @@
 # ======================== Elasticsearch Configuration =========================
 
+bootstrap.system_call_filter: false
 cluster.name: manifold
 cluster.routing.allocation.disk.watermark.low: 500mb
+discovery.type: single-node
 node.name: manifold-es
 transport.type: local
