@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
-import Layout from "backend/components/layout";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
@@ -86,45 +85,37 @@ class ProjectsListContainerImplementation extends PureComponent {
   };
 
   render() {
-    if (!this.props.projectsMeta) return null;
+    if (!this.props.projectsMeta || !this.props.projects) return null;
     const { totalCount } = this.props.projectsMeta.pagination;
     const label = totalCount > 1 || totalCount === 0 ? " Projects" : " Project";
 
     return (
-      <div>
-        <Layout.BackendPanel flush>
-          {this.props.projects && this.props.projectsMeta ? (
-            <EntitiesList
-              entityComponent={ProjectRow}
-              listStyle="grid"
-              title={label}
-              titleStyle="bar"
-              titleIcon="BEProject64"
-              entities={this.props.projects}
-              unit="project"
-              pagination={this.props.projectsMeta.pagination}
-              showCountInTitle
-              showCount
-              callbacks={{
-                onPageClick: this.updateHandlerCreator
-              }}
-              search={
-                <Search
-                  {...this.props.entitiesListSearchProps("projectsList")}
-                />
-              }
-              buttons={[
-                <Button
-                  path={lh.link("backendProjectsNew")}
-                  text="Add a new project"
-                  authorizedFor="project"
-                  type="add"
-                />
-              ]}
-            />
-          ) : null}
-        </Layout.BackendPanel>
-      </div>
+      <EntitiesList
+        entityComponent={ProjectRow}
+        listStyle="grid"
+        title={label}
+        titleStyle="bar"
+        titleIcon="BEProject64"
+        entities={this.props.projects}
+        unit="project"
+        pagination={this.props.projectsMeta.pagination}
+        showCountInTitle
+        showCount
+        callbacks={{
+          onPageClick: this.updateHandlerCreator
+        }}
+        search={
+          <Search {...this.props.entitiesListSearchProps("projectsList")} />
+        }
+        buttons={[
+          <Button
+            path={lh.link("backendProjectsNew")}
+            text="Add a new project"
+            authorizedFor="project"
+            type="add"
+          />
+        ]}
+      />
     );
   }
 }
