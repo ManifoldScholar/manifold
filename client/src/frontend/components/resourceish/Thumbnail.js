@@ -132,7 +132,7 @@ export default class ResourceishThumbnail extends Component {
                 {this.getResourceKind(resourceish.attributes.kind)}
               </figcaption>
             ) : null}
-            {this.props.noCrop ? (
+            {this.props.noCrop && hasImage ? (
               <div className="icon-thumbnail-image">
                 <img
                   src={this.getImage(resourceish)}
