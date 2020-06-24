@@ -1,7 +1,5 @@
 class AddPendingSortTitleToResources < ActiveRecord::Migration[5.2]
   def change
-    enable_extension "citext"
-
     add_column :resources, :pending_sort_title, :string
 
     reversible do |change|
