@@ -4,8 +4,15 @@ class CreateResourceImportAndResourceImportRows < ActiveRecord::Migration[5.0]
   include PaperclipMigrator
 
   def change
+    reversible do |change|
+      change.up do
+        enable_extension("pg_trgm") if extensions.include?("pg_trgm")
+      end
 
-    enable_extension "pg_trgm"
+      change.down do
+        disable_extension("pg_trgm") if extensions.include?("pg_trgm")
+      end
+    end
 
     create_table :resource_imports, id: :uuid do |t|
       t.references :creator, type: :uuid, index: true, foreign_key: { to_table: :users }
@@ -52,7 +59,7 @@ class CreateResourceImportAndResourceImportRows < ActiveRecord::Migration[5.0]
     add_index(:resource_import_transitions,
               [:resource_import_id, :most_recent],
               unique: true,
-              where: 'most_recent',
+              where: "most_recent",
               name: "index_resource_import_transitions_parent_most_recent")
 
     create_table :resource_import_row_transitions do |t|
@@ -73,7 +80,7 @@ class CreateResourceImportAndResourceImportRows < ActiveRecord::Migration[5.0]
     add_index(:resource_import_row_transitions,
               [:resource_import_row_id, :most_recent],
               unique: true,
-              where: 'most_recent',
+              where: "most_recent",
               name: "index_resource_import_row_transitions_parent_most_recent")
   end
 end
