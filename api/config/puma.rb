@@ -43,3 +43,4 @@ preload_app!
 
 bind "unix://#{socket}" if listen_on_socket
 bind "tcp://#{ip}:#{port}" if listen_on_port
+plugin :tmp_restart
