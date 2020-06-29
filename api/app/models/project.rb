@@ -128,7 +128,7 @@ class Project < ApplicationRecord
   # rubocop:enable Style/Lambda, Rails/InverseOf
 
   # Callbacks
-  before_save :prepare_to_reindex_children, on: [:update], if: :draft_changed?
+  before_update :prepare_to_reindex_children, if: :draft_changed?
   before_create :assign_publisher_defaults!
   after_commit :trigger_creation_event, on: [:create]
   after_commit :queue_reindex_children_job
