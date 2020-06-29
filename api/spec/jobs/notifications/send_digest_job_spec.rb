@@ -4,11 +4,11 @@ RSpec.describe Notifications::SendDigestJob, type: :job do
   describe "#perform" do
     let!(:user) do
       FactoryBot.create(:user).tap do |user|
-        user.update_attributes! notification_preferences_by_kind: daily_notifications 
+        user.update! notification_preferences_by_kind: daily_notifications
       end
     end
 
-    let!(:project) do 
+    let!(:project) do
       FactoryBot.create(:project).tap do |project|
         user.favorite_projects << project
       end
