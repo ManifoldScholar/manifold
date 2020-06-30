@@ -3,6 +3,8 @@ require 'simplecov'
 SimpleCov.start 'rails' do
   project_name "Manifold"
 
+  enable_coverage :branch
+
   add_filter "app/models/concerns/arel_helpers.rb"
   add_filter "lib/generators/**/*.rb"
   add_filter "lib/paperclip_migrator.rb"
