@@ -137,6 +137,8 @@ module Patches
     def halt!(reason = nil)
       errors.add :base, reason if reason.present?
 
+      @_interaction_valid = errors.none?
+
       throw :halt!
     end
 
