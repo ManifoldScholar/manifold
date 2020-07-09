@@ -31,7 +31,7 @@ module Concerns
       private
 
       def build_parameter_filter
-        ActionDispatch::Http::ParameterFilter.new filtered_attributes
+        ActiveSupport::ParameterFilter.new filtered_attributes
       end
     end
   end
