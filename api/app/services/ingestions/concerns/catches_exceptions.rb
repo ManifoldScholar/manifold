@@ -4,6 +4,8 @@ module Ingestions
       extend ActiveSupport::Concern
 
       included do
+        isolatable!
+        haltable!
         set_callback :execute, :around, :watch_for_uncaught_exceptions!
       end
 
@@ -30,7 +32,7 @@ module Ingestions
             error += "\n#{line}"
           end
         end
-        errors.add :base, error
+        halt!(error)
       end
       # rubocop:enable Metrics/AbcSize
     end
