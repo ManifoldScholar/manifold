@@ -9,10 +9,7 @@ class OauthController < ApplicationController
     )
 
     @oauth_payload = ExternalAuth::Payload.new outcome
-
-    # rubocop:disable Rails/OutputSafety
     render html: body.html_safe, layout: false
-    # rubocop:enable Rails/OutputSafety
   end
 
   private

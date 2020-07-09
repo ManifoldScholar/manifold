@@ -12,5 +12,6 @@ module V1
     typed_attribute :display_name, Types::String.meta(read_only: true)
 
     typed_belongs_to :project
+
   end
 end

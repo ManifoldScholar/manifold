@@ -7,7 +7,7 @@ module ExternalImport
     delegate :content, to: :searchable_node, prefix: :searchable
 
     # @return [void]
-    # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/AbcSize
+    # rubocop:disable Metrics/AbcSize
     def execute
       start = searchable_content.index(selection_body)
 
@@ -27,6 +27,6 @@ module ExternalImport
 
       import_selection_match.save!
     end
-    # rubocop:enable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/AbcSize
+    # rubocop:enable Metrics/AbcSize
   end
 end

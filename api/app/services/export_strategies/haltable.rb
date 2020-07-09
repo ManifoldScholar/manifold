@@ -24,7 +24,7 @@ module ExportStrategies
     # @param [String, Dry::Monads::Result] reason
     # @return [void]
     def halt!(reason = nil, code: :halted)
-      reason = reason.kind_of?(Dry::Monads::Result) ? reason : Failure([code, reason.presence || "Halted!"])
+      reason = reason.is_a?(Dry::Monads::Result) ? reason : Failure([code, reason.presence || "Halted!"])
 
       throw :halt!, reason
     end

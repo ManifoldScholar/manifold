@@ -2,8 +2,7 @@ module FormattedAttributes
   class Definition
     include Equalizer.new(:attribute)
 
-    attr_reader :attribute
-    attr_reader :methods_module
+    attr_reader :attribute, :methods_module, :renderer_options, :container
 
     def initialize(attribute, include_wrap: true, renderer_options: nil, container: nil)
       @attribute = attribute
@@ -22,8 +21,6 @@ module FormattedAttributes
     def include_wrap?
       @include_wrap.present?
     end
-
-    attr_reader :renderer_options, :container
 
   end
 end

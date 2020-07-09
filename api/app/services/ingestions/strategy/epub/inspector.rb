@@ -7,7 +7,6 @@ module Ingestions
       # document structure, nodes, etc.
       #
       # @author Zach Davis
-      # rubocop: disable Metrics/ClassLength
       class Inspector
         extend Memoist
 
@@ -200,7 +199,6 @@ module Ingestions
           node.attribute("id").value
         end
 
-        # rubocop:disable Metrics/AbcSize
         def v2_start_section_identifier
           start = v2_guide_node_by_type("text") || v2_guide_node_by_type("start")
           return unless start
@@ -213,7 +211,6 @@ module Ingestions
 
           node.attribute("id").value
         end
-        # rubocop:enable Metrics/AbcSize
 
         def manifest_nav_node
           if v2?
@@ -298,7 +295,6 @@ module Ingestions
         end
 
       end
-      # rubocop: enable Metrics/ClassLength
     end
   end
 end

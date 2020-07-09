@@ -19,7 +19,7 @@ module ExportStrategies
 
       persist_model! exportation
 
-      attach_step_args = { export_and_attach_project: [force: force_new_export] }
+      attach_step_args = { export_and_attach_project: [{ force: force_new_export }] }
 
       attach_export_pipeline.with_step_args(attach_step_args).call(exportation) do |m|
         m.success do

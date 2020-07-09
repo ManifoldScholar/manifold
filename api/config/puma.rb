@@ -18,9 +18,7 @@ number_of_workers = ENV.fetch "WORKER_COUNT" do
   rails_environment == "development" ? 0 : 2
 end
 
-min_threads = ENV.fetch "RAILS_MIN_THREADS" do
-  0
-end
+min_threads = ENV.fetch("RAILS_MIN_THREADS", 0)
 
 max_threads = ENV.fetch "RAILS_MAX_THREADS" do
   is_development ? 16 : 6

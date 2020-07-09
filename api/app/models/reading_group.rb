@@ -8,17 +8,13 @@ class ReadingGroup < ApplicationRecord
 
   has_many :reading_group_memberships, dependent: :destroy
   has_many :users, through: :reading_group_memberships
-
-  # rubocop:disable Rails/HasManyOrHasOneDependent
   # We intentionally leave out the :dependent option here because we apply out own logic
   # to child annotations on reading group delete in the :update_annotations_privacy
   # before_destroy callback below.
   has_many :annotations
-  # rubocop:enable Rails/HasManyOrHasOneDependent
 
-  # rubocop:disable Rails/HasManyOrHasOneDependent
   has_one :reading_group_count
-  # rubocop:enable Rails/HasManyOrHasOneDependent
+
   has_many :texts, -> { group(:id) }, through: :annotations
 
   delegate :annotations_count, to: :reading_group_count
@@ -66,11 +62,9 @@ class ReadingGroup < ApplicationRecord
   # private
 
   def update_annotations_privacy
-    # rubocop:disable Rails/SkipsModelValidations
     # Use of update_all is intentional. We don't care about validations here.
     annotations.update_all(private: true, reading_group_id: nil) if private? || anonymous?
     annotations.update_all(private: false, reading_group_id: nil) if public?
-    # rubocop:enable Rails/SkipsModelValidations
   end
 
   def ensure_invitation_code

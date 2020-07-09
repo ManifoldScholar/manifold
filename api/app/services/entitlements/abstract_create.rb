@@ -36,9 +36,7 @@ module Entitlements
       # :nocov:
     end
 
-    attr_reader :entitlement
-    attr_reader :expires_on
-    attr_reader :target
+    attr_reader :entitlement, :expires_on, :target
 
     private
 
@@ -70,7 +68,7 @@ module Entitlements
       errors.add :target_url, e.message
     else
       errors.add :target_url, "does not correspond to a known target" if @target.blank?
-      errors.add :target_url, "cannot receive entitlements" unless @target.kind_of?(Concerns::ReceivesEntitlements)
+      errors.add :target_url, "cannot receive entitlements" unless @target.is_a?(Concerns::ReceivesEntitlements)
     end
   end
 end

@@ -29,7 +29,6 @@ module Attachments
       end
     end
 
-    # rubocop:disable Metrics/AbcSize
     def replace_model_attachment(model, path)
       model.__send__("#{field_name}=", File.open(path))
 
@@ -40,7 +39,6 @@ module Attachments
                       model.errors.full_messages
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     def models_for_filename(path)
       filename = ActiveRecord::Base.connection.quote(File.basename(path))

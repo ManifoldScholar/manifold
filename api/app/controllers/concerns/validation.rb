@@ -154,8 +154,8 @@ module Validation
       :subject_url,
       :target_url,
       :expiration,
-      global_roles: %i[subscriber],
-      scoped_roles: %i[read_access]
+      { global_roles: %i[subscriber],
+        scoped_roles: %i[read_access] }
     ]
 
     param_config = structure_params(attributes: attributes)
@@ -194,7 +194,7 @@ module Validation
     params.require(:data)
     map_keys = (1..100).to_a.map(&:to_s)
     attributes = [attachment(:data), :source, :url, :storage_type,
-                  :storage_identifier, :state, :header_row, column_map: map_keys]
+                  :storage_identifier, :state, :header_row, { column_map: map_keys }]
     relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -295,7 +295,7 @@ module Validation
     params.permit(param_config)
   end
 
-  # rubocop:disable MethodLength
+  # rubocop:disable Metrics/MethodLength
   def settings_params
     params.require(:data)
     attributes = [
@@ -382,7 +382,7 @@ module Validation
       :remove_press_logo_footer, attachment(:press_logo_footer),
       :remove_press_logo_mobile, attachment(:press_logo_mobile),
       :remove_favicon, attachment(:favicon),
-      google_service: [:data]
+      { google_service: [:data] }
     ]
     param_config = structure_params(attributes: attributes)
     params.permit(param_config)
@@ -424,7 +424,7 @@ module Validation
 
     params.permit(param_config)
   end
-  # rubocop:enable MethodLength
+  # rubocop:enable Metrics/MethodLength
 
   def maker_params
     params.require(:data)

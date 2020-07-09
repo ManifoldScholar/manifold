@@ -16,8 +16,6 @@ class IngestionUploader < TusUploader
 
     validate_extension_inclusion validations.ingestion.allowed_ext
   end
-
-  # rubocop:disable Layout/IndentHeredoc
   attachment_module do
     def included(model)
       super
@@ -33,5 +31,5 @@ class IngestionUploader < TusUploader
       RUBY
     end
   end
-  # rubocop:enable Layout/IndentHeredoc
+
 end

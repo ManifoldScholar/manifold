@@ -52,8 +52,6 @@ class NotificationKind < ClassyEnum::Base
   end
 end
 
-# rubocop:disable Style/ClassAndModuleChildren
-
 # Notification of a flagged comment
 class NotificationKind::FlaggedResources < NotificationKind
   visible_to_admin!
@@ -82,4 +80,3 @@ class NotificationKind::FollowedProjects < NotificationKind; end
 # Digest content of all new annotations and comments on readable projects
 class NotificationKind::DigestCommentsAndAnnotations < NotificationKind
 end
-# rubocop:enable Style/ClassAndModuleChildren

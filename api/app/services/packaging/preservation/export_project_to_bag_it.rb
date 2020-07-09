@@ -24,7 +24,7 @@ module Packaging
 
         if @project_export.new_record? || force
           step_args = {
-            finalize!: [project_export: @project_export]
+            finalize!: [{ project_export: @project_export }]
           }
 
           bagit_pipeline.with_step_args(step_args).call(project) do |m|

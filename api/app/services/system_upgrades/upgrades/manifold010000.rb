@@ -1,7 +1,5 @@
 module SystemUpgrades
   module Upgrades
-    # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/MethodLength
     class Manifold010000 < SystemUpgrades::AbstractVersion
 
       def perform!
@@ -25,7 +23,5 @@ module SystemUpgrades
       end
 
     end
-    # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/MethodLength
   end
 end

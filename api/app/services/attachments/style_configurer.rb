@@ -30,12 +30,12 @@ module Attachments
       pdf? || upload.extension == "png" || upload.extension == "gif"
     end
 
-    # rubocop:disable Metrics/AbcSize, Lint/Void
+    # rubocop:disable Lint/Void
     def pdf?
       !upload.mime_type.match(Regexp.union(CONFIG[:pdf][:allowed_mime])).nil?
       !upload.extension.match(Regexp.union(CONFIG[:pdf][:allowed_ext])).nil?
     end
-    # rubocop:enable Metrics/AbcSize, Lint/Void
+    # rubocop:enable Lint/Void
 
   end
 end

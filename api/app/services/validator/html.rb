@@ -23,8 +23,8 @@ module Validator
     def close_void_tags(html)
       output = html
       VOID_ELEMENTS.each do |element|
-        output.gsub!(%r(<#{element}(.*?)?\/?>), "<#{element}\\1 />")
-        output.gsub!(%r(<\/#{element}>), "")
+        output.gsub!(%r(<#{element}(.*?)?/?>), "<#{element}\\1 />")
+        output.gsub!(%r(</#{element}>), "")
       end
 
       output
@@ -93,7 +93,7 @@ module Validator
       end
     end
 
-    # rubocop:disable Metrics/PerceivedComplexity, Metrics/MethodLength, Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/CyclomaticComplexity
     def tag_valid_with_parent?(tag, parent)
       case tag
@@ -114,7 +114,7 @@ module Validator
       end
       true
     end
-    # rubocop:enable Metrics/PerceivedComplexity, Metrics/MethodLength, Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/CyclomaticComplexity
   end
 end

@@ -1,7 +1,6 @@
 module Utility
   module DryHTTP
     # @api private
-    # rubocop:disable Metrics/AbcSize
     class Requestor
       extend Dry::Initializer
 
@@ -34,6 +33,5 @@ module Utility
         Failure([response.code, response])
       end
     end
-    # rubocop:enable Metrics/AbcSize
   end
 end

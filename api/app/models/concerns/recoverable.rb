@@ -1,7 +1,5 @@
 module Recoverable
   extend ActiveSupport::Concern
-
-  # rubocop:disable Rails/FindBy
   class_methods do
     def by_reset_token(token)
       return nil unless token.present?
@@ -9,7 +7,6 @@ module Recoverable
       where(reset_password_token: token).first
     end
   end
-  # rubocop:enable Rails/FindBy
 
   def generate_reset_token
     self.reset_password_token = SecureRandom.uuid

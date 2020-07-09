@@ -21,10 +21,8 @@ module Ingestions
         @description  = description.to_s
       end
 
-      attr_reader   :name
-      attr_reader   :interaction
+      attr_reader :name, :interaction, :description
       attr_accessor :position
-      attr_reader   :description
 
       def =~(other)
         name.to_s == other.to_s

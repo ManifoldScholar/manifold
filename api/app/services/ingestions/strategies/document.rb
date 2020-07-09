@@ -38,6 +38,7 @@ module Ingestions
         end
       end
 
+      # rubocop:disable Metrics/AbcSize
       def attributes
         {}.with_indifferent_access.tap do |hash|
           hash[:publication_date] = inspector.date
@@ -48,6 +49,7 @@ module Ingestions
           hash[:page_list] = []
         end
       end
+      # rubocop:enable Metrics/AbcSize
 
       def relationships
         {}.with_indifferent_access.tap do |hash|

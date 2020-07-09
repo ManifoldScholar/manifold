@@ -113,9 +113,8 @@ module Validator
         __send__(method, node, attribute, transform)
       end
     rescue NoMethodError => e
-      # rubocop:disable LineLength
       Rails.logger.error("Invalid HTML validator transform configuration. Please correct in config/manifold.yml")
-      # rubocop:enable LineLength
+
       Rails.logger.error(e)
     end
     # rubocop:enable Metrics/AbcSize

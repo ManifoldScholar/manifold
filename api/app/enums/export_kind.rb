@@ -12,11 +12,11 @@ class ExportKind < ClassyEnum::Base
   private
 
   def matches_or_belongs_to?(owner, klass)
-    return true if owner.kind_of?(klass)
+    return true if owner.is_a?(klass)
 
     association_name = klass.model_name.i18n_key
 
-    owner.respond_to?(association_name) && owner.public_send(association_name).kind_of?(klass)
+    owner.respond_to?(association_name) && owner.public_send(association_name).is_a?(klass)
   end
 
   # @return [void]

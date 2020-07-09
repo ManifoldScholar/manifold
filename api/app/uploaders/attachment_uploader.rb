@@ -39,8 +39,6 @@ class AttachmentUploader < Shrine
       attachment_options: attachment_options
     )
   end
-
-  # rubocop:disable Layout/IndentHeredoc
   attachment_module do
     def initialize(*)
       super
@@ -150,7 +148,6 @@ class AttachmentUploader < Shrine
       RUBY
     end
   end
-  # rubocop:enable Layout/IndentHeredoc
 
   file_module do
     def as_dimensions_hash

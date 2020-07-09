@@ -48,7 +48,7 @@ module Concerns
 
     # @return [void]
     def maybe_update_fingerprint!
-      return unless fingerprint_target.kind_of? Concerns::StoresFingerprints
+      return unless fingerprint_target.is_a? Concerns::StoresFingerprints
 
       fingerprint_target.maybe_update_fingerprint! digest
     end
@@ -111,7 +111,7 @@ module Concerns
       end
     end
 
-    # rubocop:disable Metrics/LineLength
+    # rubocop:disable Layout/LineLength
     class_methods do
       # @return [Symbol, nil]
       attr_reader :fingerprint_target
@@ -130,6 +130,6 @@ module Concerns
         alias_method :fingerprint_target, @fingerprint_target
       end
     end
-    # rubocop:enable Metrics/LineLength
+    # rubocop:enable Layout/LineLength
   end
 end

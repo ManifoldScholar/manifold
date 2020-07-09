@@ -20,7 +20,7 @@ module Manifold
     end
 
     def self.logger
-      logger = Logger.new(STDOUT)
+      logger = Logger.new($stdout)
       logger.formatter = proc { |severity, _datetime, _progname, msg|
         "#{severity.rjust(8)}: #{msg}\n"
       }

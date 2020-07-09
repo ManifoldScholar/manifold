@@ -20,10 +20,7 @@ class Entitlement < ApplicationRecord
 
   has_many :entitlement_user_links, autosave: true, inverse_of: :entitlement, dependent: :destroy
   has_many :users, through: :entitlement_user_links, source: :user
-
-  # rubocop:disable Rails/HasManyOrHasOneDependent
   has_many :derived_roles, class_name: "EntitlementDerivedRole", inverse_of: :entitlement
-  # rubocop:enable Rails/HasManyOrHasOneDependent
 
   scope :active, -> { in_state(:active) }
   scope :by_target, ->(target) { where(target: target) }
@@ -164,19 +161,16 @@ class Entitlement < ApplicationRecord
   end
 
   # @return [void]
-  # rubocop:disable Metrics/CyclomaticComplexity
   def must_specify_correct_roles!
     self.global_roles = {} unless has_global_roles?
     self.scoped_roles = {} unless has_scoped_roles?
-
     errors.add :global_roles, "must have at least one role specified" if has_global_roles? && global_roles.none?
     errors.add :scoped_roles, "must have at least one role specified" if has_scoped_roles? && scoped_roles.none?
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
 
   # @return [void]
   def subject_is_entitleable!
-    errors.add :subject, "is not supported" unless subject.kind_of?(Concerns::Entitleable)
+    errors.add :subject, "is not supported" unless subject.is_a?(Concerns::Entitleable)
   end
 
   module Expiration

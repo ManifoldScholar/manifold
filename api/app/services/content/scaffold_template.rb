@@ -59,8 +59,7 @@ module Content
       @content_blocks = content_blocks_for_kind(kind).with_indifferent_access
     end
 
-    attr_reader :kind
-    attr_reader :content_blocks
+    attr_reader :kind, :content_blocks
 
     private
 

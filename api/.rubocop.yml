@@ -17,17 +17,13 @@ AllCops:
       - 'api/lib/patches/**/*'
       - 'api/lib/templates/**/*'
 
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
 
-Style/CollectionMethods:
-  Enabled: false
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
-Metrics/LineLength:
-  Max: 140
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - 'zhong.rb'
 
 Metrics/MethodLength:
   Max: 15
@@ -38,20 +34,29 @@ Metrics/ModuleLength:
 Metrics/ClassLength:
   Enabled: false
 
+Layout/HashAlignment:
+  EnforcedLastArgumentHashStyle: ignore_implicit
+
 Layout/DotPosition:
   EnforcedStyle: leading
 
-Layout/IndentHeredoc:
+Layout/HeredocIndentation:
   Enabled: false
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
-Naming/HeredocDelimiterNaming:
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
-Naming/PredicateName:
-  NamePrefixBlacklist: ["is_"]
+Layout/LineLength:
+  Max: 140
 
 Lint/AmbiguousBlockAssociation:
   Enabled: false
@@ -60,14 +65,108 @@ Lint/AmbiguousBlockAssociation:
 Lint/AmbiguousOperator:
   Enabled: false
 
-Lint/UnneededCopDisableDirective:
+Lint/RedundantCopDisableDirective:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
   Enabled: false
 
-Layout/EmptyLinesAroundClassBody:
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Lint/ScriptPermission:
+  Enabled: false
+
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: true
+
+Lint/DuplicateElsifCondition:
+  Enabled: true
+
+Lint/EmptyConditionalBody:
+  Enabled: true
+
+Lint/FloatComparison:
+  Enabled: true
+
+Lint/MissingSuper:
+  Enabled: false
+
+Lint/OutOfRangeRegexpRef:
+  Enabled: true
+
+Lint/SelfAssignment:
+  Enabled: true
+
+Lint/TopLevelReturnWithArgument:
+  Enabled: true
+
+Lint/UnreachableLoop:
+  Enabled: true
+
+Lint/DuplicateRescueException:
+  Enabled: true
+
+Style/AccessorGrouping:
+  Enabled: true
+
+Style/ArrayCoercion:
+  Enabled: true
+
+Style/BisectedAttrAccessor:
+  Enabled: true
+
+Style/CaseLikeIf:
+  Enabled: true
+
+Style/ExplicitBlockArgument:
+  Enabled: false
+
+Style/GlobalStdStream:
+  Enabled: true
+
+Style/HashAsLastArrayItem:
+  Enabled: true
+
+Style/HashLikeCase:
+  Enabled: true
+
+Style/OptionalBooleanParameter:
+  Enabled: true
+
+Style/RedundantAssignment:
+  Enabled: true
+
+Style/RedundantFileExtensionInRequire:
+  Enabled: true
+
+Style/SingleArgumentDig:
+  Enabled: false
+
+Style/StringConcatenation:
+  Enabled: false
+
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/CollectionMethods:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/FormatStringToken:
   Enabled: false
 
 Style/ClassCheck:
-  Enabled: false
+  Enabled: true
 
 Style/Documentation:
   Enabled: false
@@ -112,13 +211,40 @@ Style/ClassAndModuleChildren:
     - app/enums/**/*.rb
     - api/app/enums/**/*.rb
 
-Lint/ScriptPermission:
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/RedundantFetchBlock:
+  Enabled: true
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+
+Style/RedundantRegexpEscape:
+  Enabled: true
+
+Style/SlicingWithRange:
+  Enabled: true
+
+Naming/HeredocDelimiterNaming:
   Enabled: false
+
+Naming/PredicateName:
+  ForbiddenPrefixes: ["is_"]
 
 Naming/AccessorMethodName:
   Enabled: false
 
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   AllowedNames:
     - 'as'
     - 'at'
@@ -128,13 +254,3 @@ Naming/UncommunicativeMethodParamName:
     - 'e'
     - 'on'
     - 'to'
-
-Metrics/BlockLength:
-  Exclude:
-    - 'Rakefile'
-    - '**/*.rake'
-    - 'spec/**/*.rb'
-    - 'zhong.rb'
-
-Layout/AlignHash:
-  EnforcedLastArgumentHashStyle: ignore_implicit

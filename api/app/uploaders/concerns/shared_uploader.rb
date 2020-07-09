@@ -8,7 +8,7 @@ module Concerns
     IMAGE_MIME_TYPES = Array(MANIFOLD_CONFIG.dig(:attachments, :validations, :image, :allowed_mime))
 
     URL_OPTIONS = {
-      host: MANIFOLD_CONFIG.api_url&.sub(%r{\/\z}, "") || ""
+      host: MANIFOLD_CONFIG.api_url&.sub(%r{/\z}, "") || ""
     }.freeze
 
     BETTER_MARCEL = ->(io, *_) do

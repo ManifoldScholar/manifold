@@ -12,7 +12,7 @@ class ProjectExport < ApplicationRecord
   scope :bag_it, -> { by_kind :bag_it }
   scope :prunable, -> { where(id: ProjectExportStatus.prunable_export_ids) }
 
-  jsonb_accessor :metadata, files: [:indifferent_hash, array: true, default: []]
+  jsonb_accessor :metadata, files: [:indifferent_hash, { array: true, default: [] }]
 
   delegate :extension, to: :asset, prefix: true
   delegate :id, :title, :slug, to: :project, prefix: true

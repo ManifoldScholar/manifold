@@ -22,7 +22,7 @@ module Concerns
       reference_configurations.detect { |config| config.name == kind }
     end
 
-    # rubocop:disable Metrics/LineLength, Metrics/AbcSize
+    # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     def build_reference_associations
       reference_configurations.each_with_object({}) do |config, h|
         h[config.name] ||= [] if config.multiple
@@ -36,7 +36,7 @@ module Concerns
                          end
       end
     end
-    # rubocop:enable Metrics/LineLength, Metrics/AbcSize
+    # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
     # rubocop:disable Naming/PredicateName, Metrics/BlockLength
     class_methods do

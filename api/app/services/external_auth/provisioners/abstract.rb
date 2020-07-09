@@ -7,11 +7,7 @@ module ExternalAuth
 
       define_model_callbacks :provision
 
-      attr_reader :auth_hash
-
-      attr_reader :provider
-
-      attr_reader :user
+      attr_reader :auth_hash, :provider, :user
 
       delegate :info, to: :auth_hash, prefix: :auth
 

@@ -18,7 +18,7 @@ class ApplicationController < ActionController::API
     @authority_user ||= current_user || anonymous_user
   end
 
-  # rubocop:disable Metrics/MethodLength, Lint/NestedMethodDefinition
+  # rubocop:disable Lint/NestedMethodDefinition
   def anonymous_user
     @anonymous_user ||= Naught.build do |config|
       config.impersonate User
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::API
       end
     end.new
   end
-  # rubocop:enable Metrics/MethodLength, Lint/NestedMethodDefinition
+  # rubocop:enable Lint/NestedMethodDefinition
 
   def user_for_paper_trail
     current_user&.to_global_id.to_s if current_user

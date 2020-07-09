@@ -30,6 +30,7 @@ module HTMLNodes
 
     # @!attribute [r] attributes_for_epub
     # @return [{ String => Object }]
+    # rubocop:disable Metrics/AbcSize
     memoize def attributes_for_epub
       if element?
         {}.merge(node_attributes).tap do |h|
@@ -47,6 +48,7 @@ module HTMLNodes
         {}
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     # @!attribute [r] epub_type
     # @return [String]

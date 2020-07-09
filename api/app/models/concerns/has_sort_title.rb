@@ -20,7 +20,6 @@ module Concerns
     end
 
     # @return [void]
-    # rubocop:disable Rails/SkipsModelValidations
     def update_sort_title!
       computed = sort_title_needs_update?
 
@@ -30,12 +29,10 @@ module Concerns
         update_column :sort_title, computed
       end
     end
-    # rubocop:enable Rails/SkipsModelValidations
 
     private
 
     # @return [String]
-    # rubocop:disable Metrics/AbcSize
     def compute_sort_title
       return instance_eval(&sort_title_updater) if sort_title_updater.is_a? Proc
       return sort_title_updater.call self if sort_title_updater.respond_to? :call
@@ -43,7 +40,6 @@ module Concerns
 
       raise "cannot update sort title with #{sort_title_updater.inspect}"
     end
-    # rubocop:enable Metrics/AbcSize
 
     class_methods do
       # rubocop:disable Naming/PredicateName

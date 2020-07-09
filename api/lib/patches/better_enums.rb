@@ -35,7 +35,7 @@ module Patches
       to_s
     end
 
-    # rubocop:disable Metrics/BlockLength, Metrics/LineLength
+    # rubocop:disable Metrics/BlockLength, Layout/LineLength
     class_methods do
       # Make this enum an {Patches::BetterEnums::ApplicableEnum ApplicableEnum}.
       #
@@ -244,7 +244,7 @@ module Patches
 
     class InvalidOwner < StandardError; end
   end
-  # rubocop:enable Metrics/BlockLength, Metrics/LineLength
+  # rubocop:enable Metrics/BlockLength, Layout/LineLength
 
   module ProperlyQuoteEnums
     def _type_cast(value)

@@ -45,7 +45,7 @@ module Packaging
           block_given? ? yield(project) : project[key]
         elsif block_given?
           raise ArgumentError, "cannot provide #{value.inspect} and a block"
-        elsif value.kind_of?(Symbol) && project.respond_to?(value)
+        elsif value.is_a?(Symbol) && project.respond_to?(value)
           project[value]
         else
           value.as_json

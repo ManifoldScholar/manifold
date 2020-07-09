@@ -2,7 +2,6 @@ module ResourceAttachmentValidation
   extend ActiveSupport::Concern
 
   include Attachments
-  # rubocop:disable Metrics/LineLength
   def validate_image_fields
     errors.add(:attachment, "image is required") unless attachment.present?
     errors.add(:attachment, "is invalid image file") if attachment.present? && !attachment_is_image?
@@ -15,7 +14,7 @@ module ResourceAttachmentValidation
     errors.empty?
   end
 
-  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop:disable Metrics/AbcSize
   def validate_video_fields
     if external_video?
       errors.add(:external_id, "can't be blank") unless external_id.present?
@@ -26,7 +25,7 @@ module ResourceAttachmentValidation
     end
     errors.empty?
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop:enable Metrics/AbcSize
 
   def validate_pdf_fields
     errors.add(:attachment, "pdf is required") unless attachment.present?
@@ -57,16 +56,13 @@ module ResourceAttachmentValidation
     errors.empty?
   end
 
-  # rubocop:disable Metrics/AbcSize
   def validate_interactive_fields
     errors.add(:external_url, "can't be blank") unless external_url.present?
     errors.empty?
   end
-  # rubocop:enable Metrics/AbcSize
 
   def validate_link_fields
     errors.add(:external_url, "can't be blank") if external_url.blank?
     errors.empty?
   end
-  # rubocop:enable Metrics/LineLength
 end

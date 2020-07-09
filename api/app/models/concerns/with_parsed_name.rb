@@ -16,8 +16,6 @@ module WithParsedName
     before_save :cache_name, if: :full_name_db_cacheable?
     before_validation :ensure_nickname
   end
-
-  # rubocop:disable Rails/ReadWriteAttribute
   def name=(name)
     parts = Namae::Name.parse(name).to_h.compact
     validate_parts!(parts)
@@ -27,7 +25,6 @@ module WithParsedName
       write_attribute(KEY_MAP[key], value)
     end
   end
-  # rubocop:enable Rails/ReadWriteAttribute
 
   def full_name_db_cacheable?
     respond_to? "cached_full_name="

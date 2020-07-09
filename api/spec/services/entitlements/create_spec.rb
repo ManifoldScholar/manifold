@@ -29,7 +29,6 @@ RSpec.describe Entitlements::Create, interaction: true do
         perform_within_expectation! valid: false do |e|
           e.to keep_the_same(Entitlement, :count)
         end
-
         expect(@outcome).to have(1).error_on :scoped_roles
       end
     end

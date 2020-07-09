@@ -34,7 +34,7 @@ module ExportStrategies
     # @see ExportStrategies::Operations::FormatTargetName
     # @param [String] format
     def call(format, &block)
-      format_pipeline.with_step_args(apply_format: [format: format]).call(self, &block)
+      format_pipeline.with_step_args(apply_format: [{ format: format }]).call(self, &block)
     end
 
     # @api private

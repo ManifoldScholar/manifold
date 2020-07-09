@@ -6,7 +6,6 @@ class ResourceImportRowTransition < ApplicationRecord
 
   private
 
-  # rubocop:disable Rails/SkipsModelValidations
   def update_most_recent
     last_transition = resource_import_row
       .resource_import_row_transitions
@@ -16,5 +15,5 @@ class ResourceImportRowTransition < ApplicationRecord
 
     last_transition.update_column(:most_recent, true)
   end
-  # rubocop:enable Rails/SkipsModelValidations
+
 end

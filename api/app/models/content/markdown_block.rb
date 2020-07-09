@@ -5,7 +5,7 @@ module Content
 
     include ::Concerns::HasFormattedAttributes
 
-    has_configured_attributes style: [:string, default: "normal"],
+    has_configured_attributes style: [:string, { default: "normal" }],
                               body: :string
 
     has_formatted_attribute :body, renderer_options: {

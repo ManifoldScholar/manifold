@@ -18,8 +18,7 @@ module Attachments
     def animated_gif_config
       # The order matters here. Coalesce and repage must come before resize, or the
       # resize operation will not work as expected.
-      out = { coalesce: true, repage: "0x0" }.merge(config.except("convert"))
-      out
+      { coalesce: true, repage: "0x0" }.merge(config.except("convert"))
     end
 
     def animated_gif?

@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/LineLength
 # rubocop:disable Style/NumericPredicate
 class ImportSelection < ApplicationRecord
   has_many :import_selection_matches, dependent: :destroy, counter_cache: :matches_count
@@ -43,5 +42,5 @@ class ImportSelection < ApplicationRecord
     end
   end
 end
-# rubocop:enable Metrics/LineLength
+
 # rubocop:enable Style/NumericPredicate

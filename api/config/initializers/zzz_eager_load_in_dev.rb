@@ -1,4 +1,3 @@
-# rubocop:disable Lint/HandleExceptions
 if Rails.env.development?
   begin
     Rails.application.eager_load!
@@ -6,4 +5,3 @@ if Rails.env.development?
     # purposely left blank
   end
 end
-# rubocop:enable Lint/HandleExceptions

@@ -44,8 +44,6 @@ module Citable
 
     UpdateCitatableChildren.perform_later(self)
   end
-
-  # rubocop:disable Metrics/BlockLength
   class_methods do
     def with_citation(method = nil, &block)
       @generate_citation = block_given? ? block : method
@@ -53,6 +51,7 @@ module Citable
 
     def with_citable_children(*children)
       attr_reader :citable_children
+
       after_commit :update_citable_children if respond_to? :after_commit
 
       @citable_children = children
@@ -67,5 +66,4 @@ module Citable
       return @generate_citation.call(model) if @generate_citation.is_a? Proc
     end
   end
-  # rubocop:enable Metrics/BlockLength
 end

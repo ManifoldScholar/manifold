@@ -1,7 +1,5 @@
 class EventType < ClassyEnum::Base
 end
-
-# rubocop:disable Style/ClassAndModuleChildren
 class EventType::ProjectCreated < EventType
 end
 
@@ -22,4 +20,3 @@ end
 
 class EventType::ResourceCollectionAdded < EventType
 end
-# rubocop:enable Style/ClassAndModuleChildren

@@ -15,7 +15,7 @@ module Thumbnail
     end
 
     def remove_params(external_id)
-      external_id.gsub(/\&.*$/, "").gsub(/\?.*$/, "")
+      external_id.gsub(/&.*$/, "").gsub(/\?.*$/, "")
     end
 
     def self.accepts?(resource)

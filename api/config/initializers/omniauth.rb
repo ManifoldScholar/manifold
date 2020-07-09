@@ -1,4 +1,3 @@
-# rubocop:disable Style/SymbolProc
 ManifoldEnv.oauth.configure do |config|
   config.provider :facebook do |provider|
     provider.strategy_options do |hsh|
@@ -32,4 +31,3 @@ end
 Rails.application.configure do
   config.middleware.insert_before ActionDispatch::RemoteIp, OmniauthStack
 end
-# rubocop:enable Style/SymbolProc

@@ -1,4 +1,4 @@
-require_relative 'boot'
+require_relative "boot"
 
 require "rails"
 # Pick the frameworks you want:
@@ -44,11 +44,14 @@ ActionMailer::Base.add_delivery_method :manifold_dynamic, DynamicMailer::Mailer
 module ManifoldApi
   # Manifold main application
 
-
   class Application < Rails::Application
 
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.0
+    config.load_defaults 6.0
+
+    # TODO: Switch over to :zeitwerk autoloader.
+    # See https://weblog.rubyonrails.org/2019/2/22/zeitwerk-integration-in-rails-6-beta-2/#backwards-incompatibility
+    config.autoloader = :classic
 
     config.action_mailer.delivery_method = :manifold_dynamic
 

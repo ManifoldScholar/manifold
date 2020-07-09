@@ -1,7 +1,7 @@
 module Concerns
   # An idiomatic concern that composes ClassyEnum with Statesman in a standard way.
   #
-  # rubocop:disable Metrics/BlockLength, Metrics/LineLength, Naming/PredicateName, Style/AndOr, Style/RedundantReturn
+  # rubocop:disable Metrics/BlockLength, Layout/LineLength, Naming/PredicateName, Style/RedundantReturn
   module HasStateMachine
     extend ActiveSupport::Concern
 
@@ -115,5 +115,5 @@ module Concerns
       end
     end
   end
-  # rubocop:enable Metrics/BlockLength, Metrics/LineLength, Naming/PredicateName, Style/AndOr, Style/RedundantReturn
+  # rubocop:enable Metrics/BlockLength, Layout/LineLength, Naming/PredicateName, Style/RedundantReturn
 end
