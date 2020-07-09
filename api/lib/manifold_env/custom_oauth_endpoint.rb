@@ -8,17 +8,9 @@ module ManifoldEnv
       @query = query
     end
 
-    attr_reader :http_method
-
-    attr_reader :name
-
-    attr_reader :provider
+    attr_reader :http_method, :name, :provider, :query, :uri
 
     delegate :build_url, to: :provider
-
-    attr_reader :query
-
-    attr_reader :uri
 
     def url
       @url ||= build_url path: uri

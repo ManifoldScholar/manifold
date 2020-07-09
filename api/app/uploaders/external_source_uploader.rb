@@ -10,8 +10,6 @@ class ExternalSourceUploader < Shrine
   add_metadata :sha256 do |io, context|
     calculate_signature(io, :sha256, format: :hex) if context[:action] == :cache
   end
-
-  # rubocop:disable Layout/IndentHeredoc
   attachment_module do
     def included(model)
       super
@@ -35,5 +33,5 @@ class ExternalSourceUploader < Shrine
       RUBY
     end
   end
-  # rubocop:enable Layout/IndentHeredoc
+
 end

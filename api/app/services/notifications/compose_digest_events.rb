@@ -3,7 +3,7 @@ module Notifications
     DEFAULT_INCLUDES = [
       :project,
       :subject,
-      project: [:creators, :texts, :resource_collections, :resources]
+      { project: [:creators, :texts, :resource_collections, :resources] }
     ].freeze
 
     record :user

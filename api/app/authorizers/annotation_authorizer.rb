@@ -5,7 +5,7 @@ class AnnotationAuthorizer < ApplicationAuthorizer
     true
   end
 
-  # rubocop:disable Metrics/AbcSize, CyclomaticComplexity, PerceivedComplexity
+  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def creatable_by?(user, _options = {})
     return false unless known_user?(user)
 
@@ -18,7 +18,7 @@ class AnnotationAuthorizer < ApplicationAuthorizer
     allowed = false if annotation_is_resource_annotation? && !user_can_notate_text?(user)
     allowed
   end
-  # rubocop:enable Metrics/AbcSize, CyclomaticComplexity, PerceivedComplexity
+  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def deletable_by?(user, _options = {})
     return user.created? resource if resource.highlight?

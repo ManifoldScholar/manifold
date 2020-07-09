@@ -58,17 +58,19 @@ module Api
       end
 
       def comment_location(comment)
-        if comment.subject_type == "Annotation"
+        case comment.subject_type
+        when "Annotation"
           api_v1_annotation_relationships_comments_path(comment.subject_id, comment)
-        elsif comment.subject_type == "Resource"
+        when "Resource"
           api_v1_resource_relationships_comments_path(comment.subject_id, comment)
         end
       end
 
       def index_location
-        if @subject.is_a? Annotation
+        case @subject
+        when Annotation
           api_v1_annotation_relationships_comments_path(@subject)
-        elsif @subject.is_a? Resource
+        when Resource
           api_v1_resource_relationships_comments_path(@subject)
         end
       end

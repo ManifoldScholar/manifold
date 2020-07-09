@@ -1,12 +1,11 @@
-# rubocop:disable Layout/AlignArguments, Layout/AlignParameters
 class CachedExternalSource < ApplicationRecord
   include ExternalSourceUploader::Attachment.new(:asset)
 
   classy_enum_attr :kind, enum: "CoreMediaTypeKind", allow_blank: false, default: :unknown
 
   jsonb_accessor :metadata,
-    source_path: :string,
-    source_name: :string
+                 source_path: :string,
+                 source_name: :string
 
   upsert_keys %i[url]
 
@@ -79,4 +78,4 @@ class CachedExternalSource < ApplicationRecord
     end
   end
 end
-# rubocop:enable Layout/AlignArguments, Layout/AlignParameters
+# rubocop:enable

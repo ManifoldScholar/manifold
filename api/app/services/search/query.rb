@@ -52,6 +52,7 @@ module Search
     # Populates {#search_components} via `KeywordSearch`.
     #
     # @return [void]
+    # rubocop: disable Metrics/AbcSize
     def parse_search_components!
       KeywordSearch.search keyword do |with|
         with.default_keyword :text_content
@@ -69,6 +70,7 @@ module Search
     rescue KeywordSearch::ParseError
       search_components[:needle] = keyword
     end
+    # rubocop: enable Metrics/AbcSize
 
     # @!attribute [r] search_components
     # @return [Hash]

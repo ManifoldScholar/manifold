@@ -5,10 +5,10 @@ module Content
 
     has_one_proxied :text, source: "Text"
 
-    has_configured_attributes depth: [:integer, default: 6],
+    has_configured_attributes depth: [:integer, { default: 6 }],
                               title: :string,
-                              show_authors: [:boolean, default: false],
-                              show_text_title: [:boolean, default: false]
+                              show_authors: [:boolean, { default: false }],
+                              show_text_title: [:boolean, { default: false }]
 
     validates :depth,
               numericality: { min: 1, less_than_or_equal_to: 6, only_integer: true },

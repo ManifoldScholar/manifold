@@ -2,8 +2,7 @@ module ExternalAuth
   class FindUser < ActiveInteraction::Base
     include AuthAction
 
-    attr_reader :identity
-    attr_reader :user
+    attr_reader :identity, :user
 
     # @return [User]
     def execute

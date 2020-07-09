@@ -2,8 +2,6 @@
 # and contributors
 module Collaborative
   extend ActiveSupport::Concern
-
-  # rubocop:disable Metrics/BlockLength
   included do
     has_many :collaborators,
              -> { order(:position) },
@@ -16,17 +14,15 @@ module Collaborative
              as: :collaboratable,
              class_name: "Collaborator",
              inverse_of: :collaboratable
-    # rubocop:disable Rails/InverseOf
     has_many :contributor_collaborators,
              -> { where(role: Collaborator::ROLE_CONTRIBUTOR).order(:position) },
              as: :collaboratable,
              class_name: "Collaborator"
-    # rubocop:enable Rails/InverseOf
+
     has_many :makers, through: :collaborators
     has_many :creators, through: :creator_collaborators, source: "maker"
     has_many :contributors, through: :contributor_collaborators, source: "maker"
   end
-  # rubocop:enable Metrics/BlockLength
 
   def creator_names
     creator_names_array.join(", ")

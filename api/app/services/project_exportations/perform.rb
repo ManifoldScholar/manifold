@@ -12,7 +12,7 @@ module ProjectExportations
 
     # @return [ProjectExportation]
     def execute
-      step_args = { export_and_attach_project: [force: force_new_export] }
+      step_args = { export_and_attach_project: [{ force: force_new_export }] }
 
       upload_pipeline.with_step_args(step_args).call(project_exportation) do |m|
         m.success do

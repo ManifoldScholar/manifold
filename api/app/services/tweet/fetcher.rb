@@ -49,6 +49,7 @@ module Tweet
       query.save
     end
 
+    # rubocop: disable Metrics/AbcSize
     def client
       @client ||= Twitter::REST::Client.new do |config|
         config.consumer_key        = settings.integrations.dig(:twitter_app_id)
@@ -57,6 +58,7 @@ module Tweet
         config.access_token_secret = settings.secrets.dig(:twitter_access_token_secret)
       end
     end
+    # rubocop: enable Metrics/AbcSize
 
     def settings
       @settings ||= Settings.instance

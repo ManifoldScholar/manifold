@@ -12,8 +12,6 @@ class NotificationFrequency < ClassyEnum::Base
     config.nondigest.present?
   end
 end
-
-# rubocop:disable Style/ClassAndModuleChildren
 class NotificationFrequency::Never < NotificationFrequency
   config.digest = true
   config.nondigest = true
@@ -30,4 +28,3 @@ end
 class NotificationFrequency::Weekly < NotificationFrequency
   config.digest = true
 end
-# rubocop:enable Style/ClassAndModuleChildren

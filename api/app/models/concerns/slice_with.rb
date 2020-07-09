@@ -13,8 +13,8 @@ module Concerns
 
       mapping = Types::SYMBOL_MAP[pairs].reverse_merge(attributes.zip(attributes).to_h)
 
-      mapping.each_with_object({}) do |(target, source), h|
-        h[target] = public_send(source)
+      mapping.transform_values do |source|
+        public_send(source)
       end
     end
   end

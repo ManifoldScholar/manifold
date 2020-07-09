@@ -20,6 +20,7 @@ module Ingestions
 
       private
 
+      # rubocop:disable Metrics/AbcSize
       def build_stylesheet(node)
         content = hashed_content(node)
         return if stylesheet_exists?(content)
@@ -35,6 +36,7 @@ module Ingestions
           hash[:source_identifier] = source_identifier(node)
         end
       end
+      # rubocop:enable Metrics/AbcSize
 
       def build_source_map
         {}.with_indifferent_access.tap do |hash|

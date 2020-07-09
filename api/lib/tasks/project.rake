@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/BlockLength
 namespace :manifold do
   namespace :project do
     desc "Fetch the project's tweets"
@@ -15,7 +14,7 @@ namespace :manifold do
                                                  source: File.open(args[:path]),
                                                  creator: User.cli_user).result
       outcome = Ingestions::Ingestor.run ingestion: ingestion,
-                                         logger: Logger.new(STDOUT)
+                                         logger: Logger.new($stdout)
       if outcome.valid?
         Manifold::Rake.logger.info "Ingested text: #{outcome.result.id}"
       else
@@ -51,4 +50,3 @@ namespace :manifold do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

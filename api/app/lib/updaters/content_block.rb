@@ -12,7 +12,6 @@ module Updaters
 
     private
 
-    # rubocop:disable Metrics/AbcSize
     def update_relationships!(_model)
       clone = relationships.clone.with_indifferent_access
 
@@ -30,7 +29,6 @@ module Updaters
 
       assign_association! relationships.reject(&:nil?)
     end
-    # rubocop:enable Metrics/AbcSize
 
     def assign_association!(relationships)
       @model.content_block_references = relationships

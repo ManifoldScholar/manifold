@@ -39,14 +39,12 @@ module Ingestions
       end
 
       # @return [Ingestions::Configuration::AbstractDefinition]
-      # rubocop:disable Rails/DynamicFindBy
       def [](name)
         find_by_name(name) || raise(Ingestions::Configuration::UnknownDefinition,
                                     "Unknown definition: #{name}")
       end
-      # rubocop:enable Rails/DynamicFindBy
 
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/LineLength
+      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       # @api private
       # @param [Integer, :first, (:before, Symbol), (:last, Symbol)] position
       # @param [{ Symbol => Object }] options (@see Ingestions::Configuration::AbstractDefinition#initialize)
@@ -79,7 +77,7 @@ module Ingestions
 
         new_definition
       end
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/LineLength
+      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
       def configure(&block)
         @configuring = true
@@ -156,7 +154,7 @@ module Ingestions
 
         private
 
-        # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/LineLength, Style/GuardClause
+        # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Style/GuardClause
         def infer_defaults!(definition_definer: infer_definition_definer,
                             interaction_namespace: infer_interaction_namespace,
                             interaction_parent: "#{interaction_namespace}::Abstract#{infer_noun_klass}".safe_constantize)
@@ -190,7 +188,7 @@ module Ingestions
             end
           end
         end
-        # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/LineLength, Style/GuardClause
+        # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Style/GuardClause
 
         def infer_definition_definer
           infer_noun.to_sym

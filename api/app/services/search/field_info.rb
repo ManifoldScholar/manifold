@@ -6,7 +6,7 @@ module Search
   # For fields that need to search nested content, a la `text_nodes.content`,
   # its interface will automatically use nested alternatives.
   #
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:disable Metrics/MethodLength
   class FieldInfo < Types::FlexibleStruct
     include Search::AdvancedDSL
 
@@ -210,5 +210,5 @@ module Search
       end
     end
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:enable Metrics/MethodLength
 end

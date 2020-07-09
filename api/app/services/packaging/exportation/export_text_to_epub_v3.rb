@@ -20,7 +20,7 @@ module Packaging
 
         if @text_export.new_record? || force
           step_args = {
-            finalize!: [text_export: @text_export]
+            finalize!: [{ text_export: @text_export }]
           }
 
           book_pipeline.with_step_args(step_args).call(text) do |m|

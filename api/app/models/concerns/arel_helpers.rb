@@ -2,9 +2,8 @@ module Concerns
   # Shared collection of (mostly Arel) class-level helpers for working with advanced
   # SQL selections.
   #
-  # rubocop:disable Metrics/LineLength
-  # rubocop:disable Metrics/BlockLength, Style/CharacterLiteral, Style/CollectionMethods
-  # rubocop:disable Style/ClassCheck, Style/MultilineBlockChain, Style/StringLiterals
+  # rubocop:disable Metrics/BlockLength, Style/CharacterLiteral
+  # rubocop:disable Style/MultilineBlockChain, Style/StringLiterals
   # @see https://www.postgresql.org/docs/9.5/static/functions-json.html JSON functions and operators in PostgreSQL
   module ArelHelpers
     extend ActiveSupport::Concern
@@ -389,7 +388,7 @@ module Concerns
       # @return [Arel::Nodes::Grouping(Arel::Nodes::Or)]
       def arel_or_expressions(*expressions)
         expressions.flatten.reduce do |grouping, expression|
-          if grouping.kind_of?(Arel::Nodes::Grouping)
+          if grouping.is_a?(Arel::Nodes::Grouping)
             grouping.expr.or(expression)
           else
             # First expression
@@ -401,7 +400,7 @@ module Concerns
       # @param [Arel::Node, Object] arg
       # @return [Arel::Node, Arel::Nodes::Quoted]
       def arel_quote(arg)
-        return arg if arg.kind_of?(Arel::Node)
+        return arg if arg.is_a?(Arel::Node)
 
         Arel::Nodes.build_quoted arg
       end
@@ -409,7 +408,6 @@ module Concerns
       # @!endgroup
     end
   end
-  # rubocop:enable Metrics/BlockLength, Style/CharacterLiteral, Style/CollectionMethods
-  # rubocop:enable Style/ClassCheck, Style/MultilineBlockChain, Style/StringLiterals
-  # rubocop:enable Metrics/LineLength
+  # rubocop:enable Metrics/BlockLength, Style/CharacterLiteral
+  # rubocop:enable Style/MultilineBlockChain, Style/StringLiterals
 end

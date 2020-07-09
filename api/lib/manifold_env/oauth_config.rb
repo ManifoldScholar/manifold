@@ -1,5 +1,4 @@
 module ManifoldEnv
-  # rubocop:disable Style/AndOr, Style/ClassCheck, Metrics/BlockLength, Metrics/LineLength
   class OauthConfig
     include ManifoldEnv::HasConfigurationDSL
     include Enumerable
@@ -23,7 +22,7 @@ module ManifoldEnv
       end or raise ManifoldEnv::UnknownProvider, "Unknown provider: #{name}"
     end
 
-    attr_reader :custom_providers
+    attr_reader :custom_providers, :raw_custom_oauth_configuration
 
     def custom(provider_name)
       @custom_providers[provider_name]
@@ -50,8 +49,6 @@ module ManifoldEnv
       map { |p| p.strategy_name.to_s }
     end
 
-    attr_reader :raw_custom_oauth_configuration
-
     def as_json(options = nil)
       each_with_object({}) do |provider, hsh|
         hsh[provider.strategy_name] = provider.as_json(options)
@@ -62,7 +59,7 @@ module ManifoldEnv
       ivar_reader :providers
 
       def provider(name, &config)
-        name = name.to_sym unless name.kind_of?(Symbol)
+        name = name.to_sym unless name.is_a?(Symbol)
 
         definition = ManifoldEnv::OauthProvider.new(name)
 
@@ -107,5 +104,5 @@ module ManifoldEnv
     class UnknownProvider < KeyError
     end
   end
-  # rubocop:enable Style/AndOr, Style/ClassCheck, Metrics/BlockLength, Metrics/LineLength
+  # rubocop:enable
 end

@@ -13,15 +13,13 @@ module DynamicMailer
       return deliver_sendmail!(mail) if @config.use_sendmail?
 
       handle_send_failure(mail)
-    # rubocop:disable Metrics/LineLength
     rescue StandardError => e
-      # rubocop:enable Metrics/LineLength
       handle_exception(e)
     end
 
     private
 
-    # rubocop:disable Metrics/LineLength, Metrics/MethodLength
+    # rubocop:disable Metrics/MethodLength
     def handle_exception(e)
       msg =
         case e.class.name
@@ -40,7 +38,7 @@ module DynamicMailer
         end
       raise ApiExceptions::StandardError, msg
     end
-    # rubocop:enable Metrics/LineLength, Metrics/MethodLength
+    # rubocop:enable Metrics/MethodLength
 
     def add_defaults!(mail)
       mail.from = @config.from unless mail.from

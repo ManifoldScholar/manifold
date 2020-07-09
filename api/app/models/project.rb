@@ -64,7 +64,7 @@ class Project < ApplicationRecord
 
   jsonb_accessor(
     :export_configuration,
-    exports_as_bag_it: [:boolean, default: false, store_key: :bag_it]
+    exports_as_bag_it: [:boolean, { default: false, store_key: :bag_it }]
   )
 
   # Associations
@@ -94,9 +94,8 @@ class Project < ApplicationRecord
   has_many :subjects, through: :project_subjects
   has_many :ingestions, dependent: :destroy, inverse_of: :project
   has_many :twitter_queries, dependent: :destroy, inverse_of: :project
-  # rubocop:disable Rails/HasManyOrHasOneDependent
   has_many :permissions, as: :resource, inverse_of: :resource
-  # rubocop:enable Rails/HasManyOrHasOneDependent
+
   has_many :resource_imports, inverse_of: :project, dependent: :destroy
   has_many :tracked_dependent_versions,
            -> { order(created_at: :desc) },
@@ -120,12 +119,10 @@ class Project < ApplicationRecord
   has_many :project_exportations, dependent: :destroy
   has_one :current_project_export_status, -> { current }, class_name: "ProjectExportStatus"
   has_one :current_project_export, through: :current_project_export_status, source: :project_export
-
-  # rubocop:disable Style/Lambda, Rails/InverseOf
   has_many :uncollected_resources, ->(object) {
     where.not(id: object.collection_resources.select(:resource_id))
   }, class_name: "Resource"
-  # rubocop:enable Style/Lambda, Rails/InverseOf
+  # rubocop:enable
 
   # Callbacks
   before_update :prepare_to_reindex_children, if: :draft_changed?
@@ -228,7 +225,6 @@ class Project < ApplicationRecord
   end
 
   # Search
-  # rubocop:disable Style/Lambda
   scope :search_import, -> {
     includes(
       :collaborators,
@@ -237,7 +233,6 @@ class Project < ApplicationRecord
       texts: :titles
     )
   }
-  # rubocop:enable Style/Lambda
 
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,

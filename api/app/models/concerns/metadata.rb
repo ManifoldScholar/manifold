@@ -1,5 +1,4 @@
 # Helpers for hash attributes
-# rubocop:disable Rails/ReadWriteAttribute
 module Metadata
   extend ActiveSupport::Concern
   include Concerns::HasFormattedAttributes
@@ -61,4 +60,3 @@ module Metadata
     end
   end
 end
-# rubocop:enable Rails/ReadWriteAttribute

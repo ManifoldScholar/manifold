@@ -26,8 +26,8 @@ module Api
         attributes = [
           :target_url,
           :expiration,
-          global_roles: %i[subscriber],
-          scoped_roles: %i[read_access]
+          { global_roles: %i[subscriber],
+            scoped_roles: %i[read_access] }
         ]
 
         param_config = structure_params(attributes: attributes)

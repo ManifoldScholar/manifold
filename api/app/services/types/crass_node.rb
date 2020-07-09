@@ -81,7 +81,7 @@ module Types
     def each_value(deep: false)
       return enum_for(__method__) unless block_given?
 
-      return unless value.kind_of?(Array)
+      return unless value.is_a?(Array)
 
       value.each do |v|
         catch :prune do

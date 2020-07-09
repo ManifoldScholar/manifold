@@ -4,7 +4,7 @@ namespace :packaging do
     task :export_text, %i[text_id] => %i[environment] do |t, args|
       text_id = args[:text_id]
 
-      logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+      logger = ActiveSupport::TaggedLogging.new(Logger.new($stdout))
 
       logger.tagged("packaging", "epub_v3") do
         unless text_id.present?

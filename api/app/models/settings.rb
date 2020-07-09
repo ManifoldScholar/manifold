@@ -8,7 +8,7 @@ class Settings < ApplicationRecord
 
   SECTIONS = [:general, :integrations, :secrets, :email, :theme].freeze
 
-  # rubocop/disable Metrics/LineLength
+  # rubocop/disable Layout/LineLength
   DEFAULTS = {
     general: {
       installation_name: "Manifold",
@@ -29,7 +29,7 @@ class Settings < ApplicationRecord
       delivery_method: "sendmail"
     }
   }.freeze
-  # rubocop/enable Metrics/LineLength
+  # rubocop/enable Layout/LineLength
 
   # Create merge setters for the various settings sections. Initialize the hashes.
   SECTIONS.each do |section|

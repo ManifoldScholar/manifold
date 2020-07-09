@@ -1,4 +1,3 @@
-# rubocop:disable Style/SymbolProc, Performance/HashEachMethods
 module ResourceImports
   class StateMachine
     include Statesman::Machine
@@ -93,5 +92,5 @@ module ResourceImports
 
   end
 end
-# rubocop:enable Style/SymbolProc, Performance/HashEachMethods
+# rubocop:enable
 #

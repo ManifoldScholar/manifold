@@ -23,8 +23,6 @@ class ExportUploader < Shrine
   Attacher.validate do
     validate_extension_inclusion %w[epub]
   end
-
-  # rubocop:disable Layout/IndentHeredoc
   attachment_module do
     def included(model)
       super
@@ -40,5 +38,5 @@ class ExportUploader < Shrine
       RUBY
     end
   end
-  # rubocop:enable Layout/IndentHeredoc
+
 end

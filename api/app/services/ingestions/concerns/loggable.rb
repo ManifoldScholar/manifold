@@ -40,9 +40,9 @@ module Ingestions
 
       def log_structure(branch, preface, indent = 0)
         branch.each do |leaf|
-          # rubocop:disable Metrics/LineLength
+          # rubocop:disable Layout/LineLength
           debug_string "#{preface}#{indent.positive? ? (' ' * indent + '|') + '-' : ''} #{leaf[:label] || 'NULL'} [#{leaf[:id]}#{leaf[:anchor]}]" if leaf[:id]
-          # rubocop:enable Metrics/LineLength
+          # rubocop:enable Layout/LineLength
           log_structure(leaf[:children], preface, indent + 2) if leaf[:children]
         end
       end

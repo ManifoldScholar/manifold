@@ -27,7 +27,6 @@ module Ingestions
         branch_convert text.toc.clone
       end
 
-      # rubocop:disable Metrics/AbcSize
       def branch_convert(branch)
         branch.each do |leaf|
           if leaf[:source_path]
@@ -42,7 +41,7 @@ module Ingestions
           branch_convert(leaf[:children]) if leaf[:children]
         end
       end
-      # rubocop:enable Metrics/AbcSize
+
     end
   end
 end
