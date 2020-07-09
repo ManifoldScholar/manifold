@@ -13,6 +13,6 @@ end
 
 Shrine.plugin :data_uri
 
-# rubocop:disable Metrics/LineLength
+# rubocop:disable Layout/LineLength
 Shrine::Plugins::DataUri::DataFile.include Patches::ForShrine::AllowOriginalFilenameToBeSet
-# rubocop:enable Metrics/LineLength
+# rubocop:enable Layout/LineLength

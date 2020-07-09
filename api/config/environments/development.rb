@@ -14,10 +14,10 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join("tmp", "caching-dev.txt").exist?
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}"
+      "Cache-Control" => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -41,7 +41,7 @@ Rails.application.configure do
 
   Rails.application.configure do
     config.hosts << "manifold.lvh"
-    config.hosts << ENV['DOMAIN']
+    config.hosts << ENV["DOMAIN"]
   end
 
   # Raises error for missing translations.

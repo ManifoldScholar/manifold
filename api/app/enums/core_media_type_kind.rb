@@ -110,7 +110,7 @@ class CoreMediaTypeKind < ClassyEnum::Base
       base_class.each do |enum|
         pattern = enum.config.mime_pattern
 
-        next unless pattern.kind_of?(Regexp)
+        next unless pattern.is_a?(Regexp)
 
         patterns << pattern
       end

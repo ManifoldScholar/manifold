@@ -1,5 +1,5 @@
 module ManifoldEnv
-  # rubocop:disable Style/AndOr, Style/ClassCheck, Style/RedundantReturn
+  # rubocop:disable Style/RedundantReturn
   module HasConfigurationDSL
     extend ActiveSupport::Concern
 
@@ -27,8 +27,6 @@ module ManifoldEnv
     def manifold_settings
       Rails.application.config.manifold
     end
-
-    # rubocop:disable Metrics/BlockLength
     class_methods do
       def dsl(&configuration_block)
         dsl_klass.class_eval(&configuration_block)
@@ -60,7 +58,6 @@ module ManifoldEnv
         end
       end
     end
-    # rubocop:enable Metrics/BlockLength
 
     module ConfigurationDSLMethods
       extend ActiveSupport::Concern
@@ -121,5 +118,5 @@ module ManifoldEnv
       # rubocop:enable Metrics/BlockLength
     end
   end
-  # rubocop:enable Style/AndOr, Style/ClassCheck, Style/RedundantReturn
+  # rubocop:enable Style/RedundantReturn
 end

@@ -293,7 +293,7 @@ module Validation
     params.permit(param_config)
   end
 
-  # rubocop:disable MethodLength
+  # rubocop:disable Metrics/MethodLength
   def settings_params
     params.require(:data)
     attributes = [
@@ -420,7 +420,7 @@ module Validation
 
     params.permit(param_config)
   end
-  # rubocop:enable MethodLength
+  # rubocop:enable Metrics/MethodLength
 
   def maker_params
     params.require(:data)

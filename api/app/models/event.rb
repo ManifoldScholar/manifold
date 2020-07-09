@@ -110,13 +110,11 @@ class Event < ApplicationRecord
 
   private
 
-  # rubocop:disable Rails/SkipsModelValidations
   def touch_project!
     return unless project.present?
     return unless project.persisted?
 
     project.touch
   end
-  # rubocop:enable Rails/SkipsModelValidations
 
 end

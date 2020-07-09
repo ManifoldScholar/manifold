@@ -6,7 +6,6 @@ module Importer
 
   # This class imports an existing project's resources into Manifold from a Google drive
   # sheet and a google drive directory
-  # rubocop:disable ClassLength
   class DriveResources
 
     REQUIRED_RESOURCE_COLUMNS = %w(Title Filename).freeze
@@ -296,20 +295,18 @@ module Importer
 
     def find_or_initialize_resource(fingerprint)
       resource = @project.resources.find_or_initialize_by fingerprint: fingerprint
-      # rubocop:disable LineLength
       @logger.info "    Found existing resource with id #{resource.id}" unless resource.new_record?
       @logger.info "    No resource exists for fingerprint. Creating new resource" if resource.new_record?
-      # rubocop:enable LineLength
+
       resource
     end
 
     def find_or_initialize_collection(fingerprint)
       collection = @project.resource_collections
         .find_or_initialize_by fingerprint: fingerprint
-      # rubocop:disable LineLength
       @logger.info "    Found existing resource collection with id #{collection.id}" unless collection.new_record?
       @logger.info "    No collection exists for fingerprint. Creating new collection" if collection.new_record?
-      # rubocop:enable LineLength
+
       collection
     end
 
@@ -326,9 +323,9 @@ module Importer
     end
 
     def raise_missing_column_error(worksheet)
-      # rubocop:disable LineLength
+      # rubocop:disable Layout/LineLength
       msg = "\"#{worksheet.title}\" sheet in \"#{worksheet.spreadsheet.title}\" is missing required column(s): #{(REQUIRED_RESOURCE_COLUMNS - Helpers::List.new(worksheet).keys).join(', ')}"
-      # rubocop:enable LineLength
+      # rubocop:enable Layout/LineLength
       @logger.error(Rainbow(msg).red)
       raise ImportDriveResourcesError
     end
@@ -359,5 +356,4 @@ module Importer
       @session ||= ::Factory::DriveSession.create_service_account_session
     end
   end
-  # rubocop:enable ClassLength
 end

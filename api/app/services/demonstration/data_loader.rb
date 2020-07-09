@@ -1,6 +1,5 @@
 require "faker"
 require "open-uri"
-# rubocop:disable Metrics/ClassLength
 module Demonstration
   # Loads demo data into the Manifold installation
   class DataLoader
@@ -100,7 +99,6 @@ module Demonstration
       info("Creating project collection: #{project_collection.title}")
     end
 
-    # rubocop:disable Metrics/AbcSize
     def reindex_records
       Project.reindex
       info("Projects reindexed")
@@ -115,7 +113,6 @@ module Demonstration
       Event.reindex
       info("Events reindexed")
     end
-    # rubocop:enable Metrics/AbcSize
 
     def create_admin_user
       u = User.find_or_create_by(email: "admin@manifold.app")
@@ -129,4 +126,3 @@ module Demonstration
     end
   end
 end
-# rubocop:enable Metrics/ClassLength

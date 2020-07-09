@@ -45,8 +45,7 @@ module Ingestions
             ""
           end
 
-          # rubocop: disable Metrics/AbcSize
-          # rubocop: disable Metrics/MethodLength
+          # rubocop: disable Metrics/AbcSize, Metrics/CyclomaticComplexity
           def nodes_to_structure(nodes)
             items = []
             if nodes.count.positive?
@@ -65,8 +64,7 @@ module Ingestions
             end
             items
           end
-          # rubocop: enable Metrics/AbcSize
-          # rubocop: enable Metrics/MethodLength
+          # rubocop: enable Metrics/AbcSize, Metrics/CyclomaticComplexity
 
           def toc_nodes_to_structure(nodes)
             nodes_to_structure(nodes)

@@ -45,7 +45,7 @@ module Entitlements
       errors.add :subject_url, e.message
     else
       errors.add :subject_url, "does not correspond to a known subject" if @subject.blank?
-      errors.add :subject_url, "is not entitleable" unless @subject.kind_of?(Concerns::Entitleable)
+      errors.add :subject_url, "is not entitleable" unless @subject.is_a?(Concerns::Entitleable)
     end
     # rubocop:enable Metrics/AbcSize
   end

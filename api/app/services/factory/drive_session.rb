@@ -2,7 +2,7 @@ module Factory
   # Returns a drive session object; used by the drive_resource importer
   class DriveSession
 
-    # rubocop:disable Metrics/AbcSize, Metrics/LineLength
+    # rubocop:disable Metrics/AbcSize
     def self.config
       settings = Settings.instance
       {
@@ -25,7 +25,7 @@ module Factory
 
       GoogleDrive::Session.from_service_account_key(StringIO.new(config.to_json))
     end
-    # rubocop:enable Metrics/AbcSize, Metrics/LineLength
+    # rubocop:enable Metrics/AbcSize
 
   end
 end

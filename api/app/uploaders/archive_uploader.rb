@@ -23,8 +23,6 @@ class ArchiveUploader < Shrine
   Attacher.validate do
     validate_extension_inclusion %w[zip]
   end
-
-  # rubocop:disable Layout/IndentHeredoc
   attachment_module do
     def included(base)
       super
@@ -59,5 +57,5 @@ class ArchiveUploader < Shrine
       RUBY
     end
   end
-  # rubocop:enable Layout/IndentHeredoc
+
 end

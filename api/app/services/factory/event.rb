@@ -105,19 +105,15 @@ module Factory
       end
     end
 
-    # rubocop:disable LineLength
     def raise_no_project
       msg = "Factory::Event can only create events for subjects that have or are a project"
       raise ::Factory::Errors::NoEventProject, msg
     end
-    # rubocop:enable LineLength
 
-    # rubocop:disable LineLength
     def raise_no_subject
       msg = "Factory::Event requires a valid subject or subject_type and subject_id"
       raise ::Factory::Errors::NoEventSubject, msg
     end
-    # rubocop:enable LineLength
 
     def resolve_subject(id, type, model)
       return model if model

@@ -27,7 +27,7 @@ class OmniauthStack
     @middleware_stack ||= build_middleware_stack
   end
 
-  # rubocop:disable Metrics/AbcSize, Style/CharacterLiteral, Layout/AlignParameters
+  # rubocop:disable Metrics/AbcSize
   def build_middleware_stack
     session_store   = Rails.application.config.session_store
     session_options = Rails.application.config.session_options
@@ -48,5 +48,5 @@ class OmniauthStack
       end
     end
   end
-  # rubocop:enable Metrics/AbcSize, Style/CharacterLiteral, Layout/AlignParameters
+  # rubocop:enable Metrics/AbcSize
 end

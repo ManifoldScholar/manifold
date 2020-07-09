@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/BlockLength
 namespace :manifold do
   namespace :project do
     desc "Fetch the project's tweets"
@@ -51,4 +50,3 @@ namespace :manifold do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

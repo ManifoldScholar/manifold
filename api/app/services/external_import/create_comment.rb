@@ -1,5 +1,5 @@
 module ExternalImport
-  # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/LineLength
+  # rubocop:disable Metrics/AbcSize
   class CreateComment < ActiveInteraction::Base
     object :annotation
 
@@ -54,6 +54,6 @@ module ExternalImport
     def find_user!
       anonymous || user_id.blank? ? User.anonymous_user : User.where(import_source_id: user_id).first!
     end
-    # rubocop:enable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/LineLength
   end
+  # rubocop:enable Metrics/AbcSize
 end

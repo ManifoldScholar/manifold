@@ -158,13 +158,11 @@ module Ingestions
         file_not_found
       end
 
-      # rubocop:disable Metrics/LineLength
       def validate_path(abs_path)
         path = Pathname.new(abs_path)
         raise IngestionError, "Ingestion path must be absolute: #{path}" unless path.absolute?
         raise IngestionError, "Ingestion path not inside of root: #{path}" unless path.to_s.start_with? root_path
       end
-      # rubocop:enable Metrics/LineLength
 
       def ensure_root
         FileUtils.mkdir_p(root_path) unless File.exist?(root_path)

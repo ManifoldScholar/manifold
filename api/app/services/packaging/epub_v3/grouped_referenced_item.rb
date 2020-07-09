@@ -1,6 +1,5 @@
 module Packaging
   module EpubV3
-    # rubocop:disable Layout/AlignArguments, Layout/AlignParameters
     class GroupedReferencedItem < Types::FlexibleStruct
       include Dry::Equalizer.new(:path)
 
@@ -8,7 +7,7 @@ module Packaging
       attribute :references, Types::Array.of(Packaging::EpubV3::ReferencedItem)
 
       delegate :absolute_uri?, :external?, :derived_ingestion_source, :has_ingestion_source?, :ingestion_source_id,
-        :text_section_id, :text_section_link?, to: :path
+               :text_section_id, :text_section_link?, to: :path
 
       def external_source?
         external? && references.any?(&:external_source?)
@@ -23,6 +22,6 @@ module Packaging
         end
       end
     end
-    # rubocop:enable Layout/AlignArguments, Layout/AlignParameters
+    # rubocop:enable
   end
 end

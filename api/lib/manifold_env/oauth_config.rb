@@ -1,5 +1,4 @@
 module ManifoldEnv
-  # rubocop:disable Style/AndOr, Style/ClassCheck, Metrics/BlockLength, Metrics/LineLength
   class OauthConfig
     include ManifoldEnv::HasConfigurationDSL
     include Enumerable
@@ -62,7 +61,7 @@ module ManifoldEnv
       ivar_reader :providers
 
       def provider(name, &config)
-        name = name.to_sym unless name.kind_of?(Symbol)
+        name = name.to_sym unless name.is_a?(Symbol)
 
         definition = ManifoldEnv::OauthProvider.new(name)
 
@@ -107,5 +106,5 @@ module ManifoldEnv
     class UnknownProvider < KeyError
     end
   end
-  # rubocop:enable Style/AndOr, Style/ClassCheck, Metrics/BlockLength, Metrics/LineLength
+  # rubocop:enable
 end

@@ -257,7 +257,7 @@ class Text < ApplicationRecord
   # @param [String, TextSection] source_path
   # @return [Hash, nil]
   def landmark_for(source_path)
-    return toc_entry_for(source_path.source_path) if source_path.kind_of?(TextSection)
+    return toc_entry_for(source_path.source_path) if source_path.is_a?(TextSection)
 
     Array(landmarks).detect do |landmark|
       landmark["source_path"] == source_path
@@ -292,7 +292,7 @@ class Text < ApplicationRecord
   # @param [String, TextSection] text_section_id
   # @return [Hash, nil]
   def toc_entry_for(text_section_id)
-    return toc_entry_for(text_section_id.id) if text_section_id.kind_of?(TextSection)
+    return toc_entry_for(text_section_id.id) if text_section_id.is_a?(TextSection)
 
     toc_entry_detect do |entry|
       entry["id"] == text_section_id

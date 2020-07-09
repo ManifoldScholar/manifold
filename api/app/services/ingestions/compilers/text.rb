@@ -43,7 +43,7 @@ module Ingestions
         manifest[:relationships][:text_titles] || []
       end
 
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
       def report(text)
         if text.id_previously_changed?
           info "services.ingestions.compiler.text.log.new", id: text.id
@@ -60,7 +60,7 @@ module Ingestions
         info "services.ingestions.compiler.text.log.desc",
              desc: text.description
       end
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
     end
   end
 end

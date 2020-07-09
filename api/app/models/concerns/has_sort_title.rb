@@ -20,7 +20,6 @@ module Concerns
     end
 
     # @return [void]
-    # rubocop:disable Rails/SkipsModelValidations
     def update_sort_title!
       computed = sort_title_needs_update?
 
@@ -30,7 +29,6 @@ module Concerns
         update_column :sort_title, computed
       end
     end
-    # rubocop:enable Rails/SkipsModelValidations
 
     private
 

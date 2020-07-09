@@ -2,7 +2,6 @@ module Packaging
   module EpubV3
     module BookCompilation
       # Add in remote resources
-      # rubocop:disable Layout/AlignArguments, Layout/AlignParameters
       class AddRemoteResources
         include Packaging::PipelineOperation
 
@@ -49,7 +48,7 @@ module Packaging
           item.fallback = external_source.source_identifier
 
           fallback = book.add_item external_source.source_path,
-            id: external_source.source_identifier
+                                   id: external_source.source_identifier
 
           fallback.add_content external_source.asset.to_io
 
@@ -59,7 +58,7 @@ module Packaging
           # :nocov:
         end
       end
-      # rubocop:enable Layout/AlignArguments, Layout/AlignParameters
+      # rubocop:enable
     end
   end
 end

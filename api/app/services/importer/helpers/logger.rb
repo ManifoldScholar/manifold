@@ -20,18 +20,14 @@ module Importer
 
       def log_validation_errors(model)
         model.errors.full_messages.each do |error|
-          # rubocop:disable LineLength
           @logger.error Rainbow("    #{model.class.name} model validation error: #{error}").red
-          # rubocop:enable LineLength
         end
       end
 
       def log_attachment_errors(model)
         return unless model.class.name == "Resource"
 
-        # rubocop:disable LineLength
         @logger.error Rainbow("        Attachment content type: #{model.attachment.content_type}").red
-        # rubocop:enable LineLength
       end
 
       def log_missing_file(filename)
@@ -49,9 +45,8 @@ module Importer
       end
 
       def log_unchanged_file(file)
-        # rubocop:disable LineLength
         @logger.info "        File \"#{file.title}\" Checksum is unchanged. Skipping download."
-        # rubocop:enable LineLength
+
         nil
       end
 

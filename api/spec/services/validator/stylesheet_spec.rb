@@ -1,6 +1,6 @@
 require "rails_helper"
 
-# rubocop:disable Metrics/LineLength
+# rubocop:disable Layout/LineLength
 # rubocop:disable Style/StringLiteralsInInterpolation
 RSpec.describe Validator::Stylesheet do
   let(:scope_selector) { Rails.configuration.manifold.css_validator.defaults.class_scope }
@@ -23,7 +23,7 @@ RSpec.describe Validator::Stylesheet do
     valid_css = <<~HEREDOC
     @charset "UTF-8";
     @namespace epub "http://www.idpf.org/2007/ops";
-    
+
     abbr.name{
       white-space: nowrap;
     }
@@ -31,7 +31,7 @@ RSpec.describe Validator::Stylesheet do
     validated_css = <<~HEREDOC
     @charset "UTF-8";
     @namespace epub "http://www.idpf.org/2007/ops";
-    
+
     #{scope_selector} abbr.name{
       white-space: nowrap;
     }

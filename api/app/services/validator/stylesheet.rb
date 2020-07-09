@@ -359,7 +359,7 @@ module Validator
       return clean if clean.blank?
 
       # Find last element in combinatory selectors, strip psuedo selectors.
-      tag = clean.split(/(\s?[~>+]\s?|\s)/).last.split(/[:]/).first
+      tag = clean.split(/(\s?[~>+]\s?|\s)/).last.split(/:/).first
       tag
     end
     memoize :tag_from_selector

@@ -1,7 +1,6 @@
 require "securerandom"
 
 class Seed
-  # rubocop:disable Metrics/MethodLength
   def self.execute(logger = nil)
     logger ||= Logger.new(STDOUT)
     maybe_update_settings(logger)
@@ -14,7 +13,7 @@ class Seed
     return if Feature.exists?
 
     logger.info(Rainbow("Creating placeholder feature").lightblue)
-    # rubocop:disable Metrics/LineLength
+    # rubocop:disable Layout/LineLength
     Feature.create(
       header: "Welcome to Manifold. An Intuitive, collaborative, open-source platform for scholarly publishing",
       body: "With iterative texts, powerful annotation tools, rich media support, and robust community dialogue, Manifold transforms scholarly publications into living digital works.",
@@ -27,7 +26,7 @@ class Seed
       foreground_top: "1.9em",
       live: true
     )
-    # rubocop:enable Metrics/LineLength
+    # rubocop:enable Layout/LineLength
   end
 
   def self.maybe_update_settings(logger)
@@ -44,7 +43,6 @@ class Seed
   end
 
   # @api private
-  # rubocop:disable Metrics/AbcSize
   def self.make_system_user(logger, classification)
     classification = UserClassification.fetch(classification)
     begin
@@ -56,6 +54,5 @@ class Seed
     logger.info Rainbow("Ensuring #{classification.text} user exists: #{user.email}").lightblue
     user
   end
-  # rubocop:enable Metrics/AbcSize
-  # rubocop:enable Metrics/MethodLength
+
 end

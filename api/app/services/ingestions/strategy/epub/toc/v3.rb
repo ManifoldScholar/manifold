@@ -55,8 +55,7 @@ module Ingestions
             @nav_xml.xpath(selector_landmark_root_node)
           end
 
-          # rubocop: disable Metrics/MethodLength
-          # rubocop: disable Metrics/AbcSize
+          # rubocop: disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
           def nodes_to_structure(nodes)
             items = []
             if nodes.count
@@ -79,8 +78,7 @@ module Ingestions
             end
             items
           end
-          # rubocop: enable Metrics/MethodLength
-          # rubocop: enable Metrics/AbcSize
+          # rubocop: enable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
 
           def toc_nodes_to_structure(nodes)
             nodes_to_structure(nodes)

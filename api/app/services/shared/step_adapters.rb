@@ -55,7 +55,7 @@ module Shared
       # @return [Symbol]
       def target_key_from(options)
         options[:target].tap do |target_key|
-          next target_key if target_key.kind_of?(Symbol)
+          next target_key if target_key.is_a?(Symbol)
 
           fail_with! :invalid_batch_target, "Invalid batch map target key: #{target_key.inspect}"
         end

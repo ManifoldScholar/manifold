@@ -46,12 +46,10 @@ module Ingestions
 
     # @param [Symbol] strategy_name
     # @return [void]
-    # rubocop:disable Naming/AccessorMethodName
     def set_used_strategy!(strategy_name)
       ingestion.update ingestion_type: strategy_name.demodulize.underscore,
                        strategy: strategy_name.to_s
     end
-    # rubocop:enable Naming/AccessorMethodName
 
     def to_fetcher_inputs
       {

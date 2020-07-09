@@ -9,7 +9,7 @@ class CommentDecorator < ApplicationDecorator
     end
   end
 
-  # rubocop:disable Metrics/LineLength, Metrics/AbcSize
+  # rubocop:disable Metrics/AbcSize
   def subject_url
     if on_resource?
       ClientURL.call(:resource_show, project_slug: project.slug, resource_slug: subject.slug)
@@ -19,6 +19,6 @@ class CommentDecorator < ApplicationDecorator
                      annotation_anchor: "annotation-#{subject.id}")
     end
   end
-  # rubocop:enable Metrics/LineLength, Metrics/AbcSize
+  # rubocop:enable Metrics/AbcSize
 
 end

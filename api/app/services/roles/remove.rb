@@ -31,7 +31,7 @@ module Roles
     # @param [ApplicationRecord, Class, nil] resource
     def apply_role(user, role_name, resource)
       user.remove_role(role_name, resource).then do |role|
-        Success((role if role.kind_of?(::Role)))
+        Success((role if role.is_a?(::Role)))
       end
     end
   end

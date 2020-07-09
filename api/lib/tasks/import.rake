@@ -1,7 +1,6 @@
 require "pathname"
 
 namespace :manifold do
-  # rubocop:disable Metrics/BlockLength
   namespace :import do
     desc "Imports all projects in a directory into Manifold"
     task :projects, [:path, :include_texts, :log_level] => :environment do |_t, args|
@@ -16,5 +15,4 @@ namespace :manifold do
       end
     end
   end
-  # rubocop:enable Metrics/BlockLength
 end

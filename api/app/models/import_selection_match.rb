@@ -12,12 +12,9 @@ class ImportSelectionMatch < ApplicationRecord
 
   scope :sans_range, -> { where(start_char: nil) }
   scope :with_range, -> { where.not(start_char: nil, end_char: nil) }
-
-  # rubocop:disable Naming/PredicateName
   def has_range?
     start_char? && end_char?
   end
-  # rubocop:enable Naming/PredicateName
 
   def match_range!
     ExternalImport::MatchRange.run! import_selection_match: self

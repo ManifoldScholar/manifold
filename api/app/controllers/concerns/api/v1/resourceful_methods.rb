@@ -58,7 +58,6 @@ module Api
 
       # rubocop:disable Metrics/AbcSize
       # rubocop:disable Lint/UnderscorePrefixedVariableName
-      # rubocop:disable Metrics/LineLength
       def define_methods!
         _resource_configuration = self
 
@@ -134,7 +133,6 @@ module Api
           method_names[:resource_scope] = :"scope_for_#{the_collection_name}"
         end
       end
-      # rubocop:enable Metrics/LineLength
 
     end
   end

@@ -1,6 +1,4 @@
 module ManifoldEnv
-  # rubocop:disable Style/AndOr, Style/ClassCheck, Metrics/BlockLength
-  # rubocop:disable Naming/PredicateName
   class OauthProvider
     include Comparable
     include Equalizer.new(:name)
@@ -24,7 +22,7 @@ module ManifoldEnv
     end
 
     def <=>(other)
-      raise TypeError, "Cannot compare #{self.class} with #{other.class}" unless other.kind_of?(self.class)
+      raise TypeError, "Cannot compare #{self.class} with #{other.class}" unless other.is_a?(self.class)
 
       name <=> other.name
     end
@@ -122,6 +120,5 @@ module ManifoldEnv
     end
     # rubocop:enable Style/CaseEquality
   end
-  # rubocop:enable Style/AndOr, Style/ClassCheck, Metrics/BlockLength
-  # rubocop:enable Naming/PredicateName
+  # rubocop:enable
 end

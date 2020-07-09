@@ -1,6 +1,6 @@
 require "rails_helper"
 
-# rubocop:disable Metrics/LineLength
+# rubocop:disable Layout/LineLength
 RSpec.describe Ingestions::Concerns::FileOperations do
   include TestHelpers::IngestionHelper
 

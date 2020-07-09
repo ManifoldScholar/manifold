@@ -1,4 +1,3 @@
-# rubocop:disable Style/ClassAndModuleChildren
 class UserClassification < ClassyEnum::Base
   include ActiveSupport::Configurable
 
@@ -46,4 +45,3 @@ end
 class UserClassification::CommandLine < UserClassification
   config.unique = true
 end
-# rubocop:enable Style/ClassAndModuleChildren

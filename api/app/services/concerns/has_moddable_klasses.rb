@@ -25,8 +25,6 @@ module Concerns
             self.class.#{@reference_name}
           end
         RUBY
-
-        # rubocop:disable Layout/IndentHeredoc
         class_eval <<~RUBY, __FILE__, __LINE__ + 1
           def #{@reference_name}
             return nil if abstract?
@@ -47,7 +45,6 @@ module Concerns
         end
         RUBY
       end
-      # rubocop:enable Layout/IndentHeredoc
 
       def extended(base)
         base.include(@instance_mod)

@@ -1,7 +1,5 @@
 class UpdateAnalyticsCache < ApplicationJob
   queue_as :default
-
-  # rubocop:disable Metrics/AbcSize
   def perform
     @client   = Factory::AnalyticsSession.new.create_analytics_session
     @settings = Settings.instance.integrations
@@ -16,7 +14,6 @@ class UpdateAnalyticsCache < ApplicationJob
   rescue Faraday::ConnectionFailed
     Rails.logger.error("Connection Failed: unable to update Google Analytics cache.")
   end
-  # rubocop:enable Metrics/AbcSize
 
   def count_readers_for(base_date)
     return 0 unless @client

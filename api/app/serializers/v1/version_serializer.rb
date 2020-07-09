@@ -47,14 +47,13 @@ module V1
     typed_belongs_to :parent_item
 
     class << self
-      # rubocop:disable Metrics/AbcSize
       def item_display_name(object)
         return object.item_title_formatted if object.item.respond_to? :title_formatted
         return object.item_title if object.item.respond_to? :title
 
         object.object["title"] || object.title_fallback || object.object_changes["title"] || object.item_id
       end
-      # rubocop:enable Metrics/AbcSize
+
     end
 
   end

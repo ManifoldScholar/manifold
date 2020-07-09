@@ -7,13 +7,11 @@ module Notifications
       user = User.find(user_id)
       annotation = Annotation.find(annotation_id)
       NotificationMailer.annotation_notification(user, annotation).deliver
-    # rubocop:disable Metrics/LineLength
     rescue ActiveRecord::RecordNotFound
       Rails.logger.error("ActiveRecord::RecordNotFound error in SendAnnotationNotificationJob")
       Rails.logger.error(
         "  Failed to send new annotation notification for #<Annotation:#{annotation_id} to #<User:#{user_id}>"
       )
-      # rubocop:enable Metrics/LineLength
     end
 
   end

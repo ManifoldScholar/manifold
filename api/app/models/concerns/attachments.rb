@@ -1,4 +1,3 @@
-# rubocop:disable Layout/AlignArguments, Layout/AlignParameters
 module Attachments
   extend ActiveSupport::Concern
 
@@ -8,8 +7,8 @@ module Attachments
     config.shrine_attachment_configurations ||= {}.with_indifferent_access
 
     delegate :shrine_attachment_configurations, :shrine_configuration_for, :shrine_options_for,
-      :shrine_attachment_type_for, :shrine_attachment_style_keys_for, :shrine_has_versions?,
-      to: :class
+             :shrine_attachment_type_for, :shrine_attachment_style_keys_for, :shrine_has_versions?,
+             to: :class
   end
 
   CONFIG = Rails.configuration.manifold.attachments.validations
@@ -250,7 +249,7 @@ module Attachments
         style == :original ? attachment : nil
       end
     elsif style == :original
-      attachment.kind_of?(Hash) ? attachment[style] : attachment
+      attachment.is_a?(Hash) ? attachment[style] : attachment
     else
       raise ArgumentError, "Tried to fetch style #{style.inspect} for #{attachment_name}, which has no styles"
     end
@@ -275,7 +274,7 @@ module Attachments
     # @!scope class
     # @return [<AttachmentUploader::Attachment>]
     def shrine_attachment_modules
-      ancestors.select { |mod| mod.kind_of?(Shrine::Attachment) }
+      ancestors.select { |mod| mod.is_a?(Shrine::Attachment) }
     end
 
     # @param [Symbol, String] attachment_name
@@ -350,4 +349,4 @@ module Attachments
   end
   # rubocop:enable Metrics/BlockLength
 end
-# rubocop:enable Layout/AlignArguments, Layout/AlignParameters
+# rubocop:enable

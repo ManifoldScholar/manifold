@@ -21,8 +21,6 @@ class Ingestion < ApplicationRecord
   # Validations
   validates :source, presence: true, if: :file_based_ingestion?
   validates :external_source_url, presence: true, unless: :file_based_ingestion?
-
-  # rubocop:disable Metrics/BlockLength
   aasm column: "state" do
     state :sleeping, initial: true
     state :processing
@@ -46,7 +44,6 @@ class Ingestion < ApplicationRecord
     end
   end
 
-  # rubocop:enable Metrics/BlockLength
   %w(DEBUG INFO WARN ERROR FATAL UNKNOWN).each do |severity|
     class_eval <<-EOT, __FILE__, __LINE__ + 1
       def #{severity.downcase}(message = nil, progname = nil, &block)
@@ -108,7 +105,6 @@ class Ingestion < ApplicationRecord
     external_source_url
   end
 
-  # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
   def begin_processing(processing_user = nil)
     # Announce the new state of the ingestion.
@@ -137,7 +133,7 @@ class Ingestion < ApplicationRecord
       handle_ingestion_exception(outcome.errors)
     end
   end
-  # rubocop:enable Metrics/AbcSize
+
   # rubocop:enable Metrics/MethodLength
 
   private

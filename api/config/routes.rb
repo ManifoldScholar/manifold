@@ -1,7 +1,7 @@
 require "sidekiq/web"
 require "zhong/web"
 
-# rubocop:disable Metrics/BlockLength, Metrics/LineLength
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   concern :permissible do
     resources :permissions,
@@ -178,4 +178,4 @@ Rails.application.routes.draw do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength, Metrics/LineLength
+# rubocop:enable Metrics/BlockLength

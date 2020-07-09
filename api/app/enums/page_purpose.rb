@@ -17,8 +17,6 @@ class PagePurpose < ClassyEnum::Base
     end
   end
 end
-
-# rubocop:disable Style/ClassAndModuleChildren
 class PagePurpose::TermsAndConditions < PagePurpose
   policy!
 end
@@ -28,4 +26,3 @@ class PagePurpose::PrivacyPolicy < PagePurpose
 end
 
 class PagePurpose::SupplementalContent < PagePurpose; end
-# rubocop:enable Style/ClassAndModuleChildren

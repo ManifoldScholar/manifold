@@ -3,8 +3,8 @@ using Refinements::HandleRenamedCollections
 #
 # Its intention is to divorce all dependencies on Paperclip itself so that migrations
 # will continue to work even after we eventually remove the Paperclip gem.
-# rubocop:disable Metrics/LineLength, Metrics/MethodLength, Metrics/AbcSize
-# rubocop:disable Style/MultilineBlockChain, Naming/PredicateName, Style/GuardClause
+# rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+# rubocop:disable Style/MultilineBlockChain, Style/GuardClause
 module PaperclipMigrator
   FIELD_NAMES = %w[file_name file_size content_type updated_at].freeze
   HASH_DATA = ":class/:attachment/:id/:style/:updated_at".freeze
@@ -235,7 +235,7 @@ module PaperclipMigrator
     private
 
     def build_hash_for(style)
-      digest = OpenSSL::Digest::SHA1.new
+      digest = OpenSSL::Digest.new("SHA1")
       data   = build_hash_data_for(style)
       OpenSSL::HMAC.hexdigest(digest, hash_secret, data)
     end
@@ -308,5 +308,5 @@ module PaperclipMigrator
     end
   end
 end
-# rubocop:enable Style/MultilineBlockChain, Naming/PredicateName, Style/GuardClause
-# rubocop:enable Metrics/LineLength, Metrics/MethodLength, Metrics/AbcSize
+# rubocop:enable Style/MultilineBlockChain, Style/GuardClause
+# rubocop:enable Metrics/MethodLength, Metrics/AbcSize

@@ -1,7 +1,7 @@
 module SystemUpgrades
   module Upgrades
     class Manifold040100 < SystemUpgrades::AbstractVersion
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
 
       def perform!
         remove_collaborators_without_makers!
@@ -62,7 +62,7 @@ module SystemUpgrades
         Maker.find_each { |t| t.cache_name && t.save }
       end
 
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
     end
   end
 end

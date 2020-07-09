@@ -4,6 +4,7 @@ module V1
   module Helpers
     class Error
       attr_reader :id, :title, :detail, :source
+
       def initialize(id:, title:, detail:, source:)
         @id = id
         @title = title

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-# rubocop:disable Metrics/LineLength
+# rubocop:disable Layout/LineLength
 RSpec.describe User, type: :model do
   it "has a valid factory" do
     expect(FactoryBot.build(:user)).to be_valid

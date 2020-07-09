@@ -2,7 +2,6 @@ require "json"
 
 module Importer
   # This class imports a project.json file into Manifold
-  # rubocop:disable ClassLength
   class Project
     def initialize(path, creator, logger = Rails.logger)
       @creator = creator
