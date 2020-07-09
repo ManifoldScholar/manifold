@@ -1,29 +1,41 @@
 require "rails_helper"
-RSpec.describe AttachmentUploader do
-  let(:attachment) { project.reload.avatar }
-  let(:path) { Rails.root.join("spec", "data", "assets", "images", "test_avatar.jpg") }
-  let(:project) { FactoryBot.build(:project, avatar: fixture_file_upload(path)) }
-  before { perform_enqueued_jobs { project.save } }
+RSpec.describe ExportUploader do
+  let(:attachment) { text_export.reload.asset }
+  let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2.epub") }
+  let(:text_export) { FactoryBot.build(:text_export, :epub_v3, asset: fixture_file_upload(path)) }
+  before do
+    outcome = Struct.new(:result) do
+      def valid?
+        true
+      end
+    end
+    allow_any_instance_of(EpubCheck).to receive(:execute).and_return outcome.new({})
+    perform_enqueued_jobs { text_export.save }
+  end
 
   it "extracts metadata" do
-    expect(attachment[:original].mime_type).to eq("image/jpeg")
-    expect(attachment[:original].extension).to eq("jpg")
-    expect(attachment[:original].size).to be_instance_of(Integer)
+    expect(attachment.mime_type).to eq("application/zip")
+    expect(attachment.extension).to eq("epub")
+    expect(attachment.size).to be_instance_of(Integer)
   end
 
-  it "includes the original file" do
-    expect(attachment.key?(:original)).to be true
+  it "stores epub check results" do
+    expect(attachment.metadata["epubcheck"]).to be_a Hash
   end
 
-  it "contains all variants defined in Attachment::BASE_STYLES" do
-    expect(attachment.keys - [:original] && Attachments::BASE_STYLES.keys == Attachments::BASE_STYLES.keys).to be true
+  it "stores the SHA256 hash" do
+    expect(attachment.metadata["sha256"]).to be_a String
   end
 
-  it "is valid" do
-    expect(project.valid?).to eq true
+  it "adds a path method to the model" do
+    expect(text_export.respond_to?(:asset_path)).to be true
+  end
+
+  it "adds a file name method to the model" do
+    expect(text_export.respond_to?(:asset_file_name)).to be true
   end
 
   it "promotes the asset to the store" do
-    expect(attachment[:original].storage_key).to eq("store")
+    expect(attachment.storage_key).to eq("store")
   end
 end
