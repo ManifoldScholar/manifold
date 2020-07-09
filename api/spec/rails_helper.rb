@@ -91,7 +91,7 @@ RSpec.configure do |config|
   end
 
   # Allow elastic search for tests tagged with elasticsearch
-  config.around(:all) do |example|
+  config.around(:example) do |example|
     if example.metadata[:elasticsearch]
       WebMock.disable_net_connect!(allow: /127\.0\.0\.1:2?9200/)
       example.run

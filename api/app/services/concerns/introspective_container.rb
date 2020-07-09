@@ -80,7 +80,7 @@ module Concerns
 
       # @return [Module]
       def root_namespace
-        parent
+        module_parent
       end
 
       private
