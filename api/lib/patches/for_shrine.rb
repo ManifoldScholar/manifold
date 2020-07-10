@@ -12,7 +12,4 @@ module Patches
 end
 
 Shrine.plugin :data_uri
-
-# rubocop:disable Layout/LineLength
-Shrine::Plugins::DataUri::DataFile.include Patches::ForShrine::AllowOriginalFilenameToBeSet
-# rubocop:enable Layout/LineLength
+Shrine::DataFile.include Patches::ForShrine::AllowOriginalFilenameToBeSet

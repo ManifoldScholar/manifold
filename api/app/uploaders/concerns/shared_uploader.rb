@@ -17,7 +17,7 @@ module Concerns
 
     included do
       plugin :add_metadata
-      plugin :default_url_options, cache: URL_OPTIONS, store: URL_OPTIONS
+      plugin :url_options, cache: URL_OPTIONS, store: URL_OPTIONS
 
       add_metadata :sha256 do |io, _context|
         calculate_signature(io, :sha256, format: :hex)

@@ -26,7 +26,7 @@ RSpec.describe AttachmentUploader do
   end
 
   it "contains all variants defined in Attachment::BASE_STYLES" do
-    expect(attachment.keys - [:original] && Attachments::BASE_STYLES.keys == Attachments::BASE_STYLES.keys).to be true
+    expect((attachment.keys - [:original] && Attachments::BASE_STYLES.keys) == Attachments::BASE_STYLES.keys).to be true
   end
 
   it "stores dimensions for the original" do
@@ -43,13 +43,20 @@ RSpec.describe AttachmentUploader do
     let(:project) { FactoryBot.build(:project, avatar_remote_url: "https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png") }
 
     it "is stored correctly" do
-      expect(attachment[:original].storage_key).to eq("store")
+      expect(attachment[:original].storage_key).to eq(:store)
       expect(attachment[:original].size).to be 95
     end
   end
 
   it "promotes the asset to the store" do
-    expect(attachment[:original].storage_key).to eq("store")
+    expect(attachment[:original].storage_key).to eq(:store)
   end
 
+  it "adds a configuration method to the model" do
+    expect(project.respond_to?(:avatar_configuration)).to be true
+  end
+
+  it "adds a style_keys method to the model" do
+    expect(project.respond_to?(:avatar_style_keys)).to be true
+  end
 end

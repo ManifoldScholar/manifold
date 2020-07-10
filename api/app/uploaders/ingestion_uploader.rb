@@ -3,8 +3,6 @@ class IngestionUploader < TusUploader
 
   plugin :add_metadata
   plugin :determine_mime_type, analyzer: :marcel
-  plugin :module_include
-  plugin :moving
   plugin :validation_helpers
 
   add_metadata :sha256 do |io, context|
@@ -16,7 +14,8 @@ class IngestionUploader < TusUploader
 
     validate_extension_inclusion validations.ingestion.allowed_ext
   end
-  attachment_module do
+
+  class Attachment
     def included(model)
       super
 
@@ -30,6 +29,7 @@ class IngestionUploader < TusUploader
       end
       RUBY
     end
+
   end
 
 end
