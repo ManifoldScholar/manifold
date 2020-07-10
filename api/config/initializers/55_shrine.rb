@@ -15,6 +15,6 @@ Shrine.storages[:tus] =
   end
 
 Shrine.plugin :activerecord
-Shrine.plugin :parsed_json
 Shrine.plugin :refresh_metadata
 Shrine.plugin :signature
+Shrine.plugin :upload_options, cache: { move: true }, store: { move: true }

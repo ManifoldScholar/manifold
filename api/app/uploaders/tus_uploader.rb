@@ -6,5 +6,5 @@ class TusUploader < Shrine
 
   # Ensure that all uploads from tus get removed
   # after promotion
-  plugin :delete_promoted
+
 end

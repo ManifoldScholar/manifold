@@ -3,8 +3,6 @@ class ExportUploader < Shrine
 
   plugin :add_metadata
   plugin :determine_mime_type, analyzer: :marcel
-  plugin :module_include
-  plugin :moving
   plugin :pretty_location, class_underscore: true, identifier: :location_identifier
   plugin :validation_helpers
 
@@ -23,7 +21,8 @@ class ExportUploader < Shrine
   Attacher.validate do
     validate_extension_inclusion %w[epub]
   end
-  attachment_module do
+
+  class Attachment
     def included(model)
       super
 

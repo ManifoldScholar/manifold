@@ -1,6 +1,6 @@
 RSpec.describe ArchiveUploader do
   let(:attachment) { project_export.reload.asset }
-  let(:path) { Rails.root.join('spec','data','zip_files','test.zip') }
+  let(:path) { Rails.root.join("spec", "data", "zip_files", "test.zip") }
   let(:project_export) { FactoryBot.build(:project_export, :bag_it, asset: fixture_file_upload(path)) }
   before { perform_enqueued_jobs { project_export.save } }
 
@@ -12,7 +12,6 @@ RSpec.describe ArchiveUploader do
   end
 
   it "promotes the asset to the store" do
-    expect(attachment.storage_key).to eq("store")
+    expect(attachment.storage_key).to eq(:store)
   end
-
 end

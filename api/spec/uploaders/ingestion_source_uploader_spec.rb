@@ -3,6 +3,7 @@ RSpec.describe IngestionSourceUploader do
   let(:attachment) { ingestion_source.reload.attachment }
   let(:path) { Rails.root.join("spec", "data", "assets", "images", "publication_resource.png") }
   let(:ingestion_source) { FactoryBot.build(:ingestion_source, attachment: fixture_file_upload(path)) }
+
   before do
     perform_enqueued_jobs { ingestion_source.save }
   end
@@ -18,6 +19,6 @@ RSpec.describe IngestionSourceUploader do
   end
 
   it "promotes the asset to the store" do
-    expect(attachment.storage_key).to eq("store")
+    expect(attachment.storage_key).to eq(:store)
   end
 end

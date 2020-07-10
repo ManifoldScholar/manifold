@@ -9,7 +9,6 @@ class ExpireShrineCacheJob < ApplicationJob
   # @return [void]
   def perform
     shrine_cache = Shrine.storages[:cache]
-
-    shrine_cache.clear! older_than: EXPIRATION_TIME.ago
+    shrine_cache.clear! { |path| path.mtime < Time.now - EXPIRATION_TIME.ago }
   end
 end

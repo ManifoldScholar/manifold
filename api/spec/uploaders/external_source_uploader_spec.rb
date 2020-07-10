@@ -33,6 +33,6 @@ RSpec.describe ExternalSourceUploader do
   end
 
   it "promotes the asset to the store" do
-    expect(attachment.storage_key).to eq("store")
+    expect(attachment.storage_key).to eq(:store)
   end
 end
