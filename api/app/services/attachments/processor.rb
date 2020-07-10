@@ -14,14 +14,13 @@ module Attachments
       return versions unless can_process?
 
       process_versions!
-
       versions
     end
 
     private
 
     def versions
-      @versions ||= { original: upload }
+      @versions ||= {}
     end
 
     def process_versions!

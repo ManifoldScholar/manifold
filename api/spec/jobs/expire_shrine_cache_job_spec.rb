@@ -12,6 +12,6 @@ RSpec.describe ExpireShrineCacheJob, type: :job do
       job.perform
     end.not_to raise_error
 
-    expect(shrine_cache).to have_received(:clear!).with(older_than: a_kind_of(Time)).once
+    expect(shrine_cache).to have_received(:clear!).once
   end
 end

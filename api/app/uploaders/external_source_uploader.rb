@@ -3,14 +3,13 @@ class ExternalSourceUploader < Shrine
 
   plugin :add_metadata
   plugin :determine_mime_type, analyzer: :marcel
-  plugin :module_include
-  plugin :moving
   plugin :validation_helpers
 
   add_metadata :sha256 do |io, context|
     calculate_signature(io, :sha256, format: :hex) if context[:action] == :cache
   end
-  attachment_module do
+
+  class Attachment
     def included(model)
       super
 

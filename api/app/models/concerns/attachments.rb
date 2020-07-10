@@ -163,18 +163,15 @@ module Attachments
   # @yieldparam [AttachmentUploader::UploadedFile]
   # @return [AttachmentUploader::UploadedFile]
   def shrine_original_for(attachment_name)
-    attachment = public_send(attachment_name)
-
-    return nil unless attachment.present?
-
-    original = shrine_version_for(attachment_name, :original)
+    original = public_send(attachment_name)
     block_given? && original ? yield(original) : original
   end
 
   # @param [String, Symbol] attachment_name
   def shrine_show_placeholder_for?(attachment_name)
     return false unless shrine_upload_matches_type?(shrine_original_for(attachment_name), type: :image)
-    return false if has_processed_shrine_attachment?(attachment_name)
+
+    #    return false if has_processed_shrine_attachment?(attachment_name)
 
     true
   end
@@ -231,30 +228,15 @@ module Attachments
   # @param [Symbol, String] attachment_name
   # @param [Symbol] style
   # @return [AttachmentUploader::UploadedFile, nil]
-  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/MethodLength
   def shrine_version_for(attachment_name, style)
-    attachment = public_send(attachment_name)
+    return shrine_original_for(attachment_name) if style == :original
 
-    return nil unless attachment.present?
+    derivatives = public_send("#{attachment_name}_derivatives")
+    return nil unless derivatives&.key?(style)
 
-    style = style.to_sym
-
-    if shrine_has_versions?(attachment_name)
-      attacher = shrine_attacher_for attachment_name
-
-      if attacher.stored?
-        receiver = public_send(attachment_name)
-        receiver[style] if receiver.respond_to?("[]")
-      elsif attacher.cached?
-        style == :original ? attachment : nil
-      end
-    elsif style == :original
-      attachment.is_a?(Hash) ? attachment[style] : attachment
-    else
-      raise ArgumentError, "Tried to fetch style #{style.inspect} for #{attachment_name}, which has no styles"
-    end
+    derivatives[style]
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/MethodLength
+  # rubocop:enable
 
   # @param [String, Symbol] attachment_name
   def validate_content_type_for?(attachment_name)
