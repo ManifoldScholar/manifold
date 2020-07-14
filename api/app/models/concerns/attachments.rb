@@ -168,7 +168,6 @@ module Attachments
     return nil unless attachment.present?
 
     original = shrine_version_for(attachment_name, :original)
-
     block_given? ? yield(original) : original
   end
 
@@ -232,29 +231,33 @@ module Attachments
   # @param [Symbol, String] attachment_name
   # @param [Symbol] style
   # @return [AttachmentUploader::UploadedFile, nil]
-  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def shrine_version_for(attachment_name, style)
+    derivatives = public_send("#{attachment_name}_derivatives")
     attachment = public_send(attachment_name)
+    return derivatives[style] if derivatives.key?(style)
 
-    return nil unless attachment.present?
-
-    style = style.to_sym
-
-    if shrine_has_versions?(attachment_name)
-      attacher = shrine_attacher_for attachment_name
-
-      if attacher.stored?
-        public_send(attachment_name)[style]
-      elsif attacher.cached?
-        style == :original ? attachment : nil
-      end
-    elsif style == :original
-      attachment.is_a?(Hash) ? attachment[style] : attachment
-    else
-      raise ArgumentError, "Tried to fetch style #{style.inspect} for #{attachment_name}, which has no styles"
-    end
+    attachment
+    #
+    # binding.pry
+    #
+    # return nil unless attachment.present?
+    #
+    # style = style.to_sym
+    # if shrine_has_versions?(attachment_name)
+    #  attacher = shrine_attacher_for attachment_name
+    #
+    #  if attacher.stored?
+    #    public_send(attachment_name, style)
+    #  elsif attacher.cached?
+    #    style == :original ? attachment : nil
+    #  end
+    # elsif style == :original
+    #  attachment.is_a?(Hash) ? attachment[style] : attachment
+    # else
+    #  raise ArgumentError, "Tried to fetch style #{style.inspect} for #{attachment_name}, which has no styles"
+    # end
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop:enable
 
   # @param [String, Symbol] attachment_name
   def validate_content_type_for?(attachment_name)

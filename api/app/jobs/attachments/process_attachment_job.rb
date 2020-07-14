@@ -14,6 +14,8 @@ module Attachments
         file: params[:file_data]
       )
       attacher.atomic_promote
+      attacher.create_derivatives
+      attacher.record.save
     end
 
     def exclusive_lock_name

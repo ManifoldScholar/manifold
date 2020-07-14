@@ -4,10 +4,10 @@ class AttachmentUploader < Shrine
 
   plugin :backgrounding
   plugin :validation_helpers
-
+  plugin :derivatives, versions_compatibility: true
   # TODO: SHRINE V3 - Deprecated - https://shrinerb.com/docs/upgrading-to-3#versions
-  plugin :processing
-  plugin :versions
+  # plugin :processing
+  # plugin :versions
   plugin :pretty_location
   plugin :remote_url, max_size: 20 * 1024 * 1024
   plugin :determine_mime_type, analyzer: :marcel
@@ -31,15 +31,26 @@ class AttachmentUploader < Shrine
     validate_extension_inclusion conf.validations.allowed_ext
   end
 
-  process(:store) do |io, context|
+  Attacher.derivatives_processor do |_original|
     attachment_options = context[:record].shrine_options_for context[:name]
 
-    Attachments::Processor.run!(
-      upload: io,
+    outcome = Attachments::Processor.run!(
+      upload: file,
       model: context[:record],
       attachment_options: attachment_options
     )
+    outcome
   end
+
+  # process(:store) do |io, context|
+  #  attachment_options = context[:record].shrine_options_for context[:name]
+  #
+  #  Attachments::Processor.run!(
+  #    upload: io,
+  #    model: context[:record],
+  #    attachment_options: attachment_options
+  #  )
+  # end
 
   class Attachment
     def initialize(*)
@@ -73,7 +84,7 @@ class AttachmentUploader < Shrine
         end
 
         def #{@name}_versions?
-          #{@name}.is_a? Hash
+          #{@name}_derivatives.is_a? Hash
         end
 
         def #{@name}_checksum
