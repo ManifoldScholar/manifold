@@ -19,7 +19,7 @@
     "start-docker": "npm-run-all _build:browser-config _serve:ssr",
     "watch": "BUILD_IN=tmp/client/ npm-run-all _watch:banner --parallel _watch:ssr _watch:browser _build:ssr:rescue _serve:ssr:rescue",
     "test": "jest --verbose",
-    "test-ci": "jest --logHeapUsage",
+    "test-ci": "jest --maxWorkers=2 --logHeapUsage",
     "fix": "npm-run-all \"fix:js {*}\" \"fix:scss {*}\" --",
     "lint": "npm-run-all \"lint:js {*}\" \"lint:scss {*}\" --",
     "fix:js": "./script/lint-javascript --fix",
