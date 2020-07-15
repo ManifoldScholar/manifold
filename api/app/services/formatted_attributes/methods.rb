@@ -6,10 +6,13 @@ module FormattedAttributes
     delegate :attribute, :renderer_options, to: :definition
     delegate :attribute, :container, to: :definition
 
+    # rubocop:disable Metrics/MethodLength
     def initialize(definition)
       @definition = definition
 
       @method_names = {
+        unformatted_value: "unformatted_value_for_#{attribute}",
+        prime_formatted_caches: "prime_formatted_attribute_caches_for_#{attribute}",
         formatted_cache_key: :"cache_key_for_formatted_#{attribute}",
         plaintext_cache_key: :"cache_key_for_plaintext_#{attribute}",
         format: :"format_#{attribute}",
@@ -24,6 +27,7 @@ module FormattedAttributes
 
       initialize_methods!
     end
+    # rubocop:enable Metrics/MethodLength
 
     def method_name(key)
       @method_names.fetch(key)
@@ -39,6 +43,16 @@ module FormattedAttributes
         included do
           before_save :#{method_name(:update_db_cache)}, if: :#{method_name(:db_cacheable?)}
           after_save :#{method_name(:refresh)}, if: :#{method_name(:saved_changed_to?)}
+        end
+
+        class_methods do
+          def #{method_name(:prime_formatted_caches)}
+            all.each do |resource|
+              resource.#{method_name(:refresh)}
+              resource.#{method_name(:update_db_cache)}
+              resource.save
+            end
+          end
         end
 
         def #{method_name(:formatted)}
@@ -61,10 +75,14 @@ module FormattedAttributes
           end
         end
 
+        def #{method_name(:unformatted_value)}
+          #{container.present? ? "#{container}.dig('#{attribute}')" : attribute.to_s}
+        end
+
         def #{method_name(:format)}
           _value = #{container.present? ? "#{container}.dig('#{attribute}')" : attribute.to_s}
           SimpleFormatter.run!(
-            input: _value,
+            input:  _value,
             include_wrap: #{include_wrap?},
             renderer_options: #{renderer_options}
           )
@@ -88,6 +106,7 @@ module FormattedAttributes
 
         def #{method_name(:db_cacheable?)}
           return false unless respond_to?("cached_#{attribute}_formatted=") || respond_to?("cached_#{attribute}_plaintext=")
+          return true if (send("cached_#{attribute}_formatted").nil? || send("cached_#{attribute}_plaintext").nil?) && #{method_name(:unformatted_value)}.present?
           return false unless respond_to? "#{attribute}_changed?"
           #{attribute}_changed?
         end
