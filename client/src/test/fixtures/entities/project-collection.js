@@ -11,7 +11,11 @@ const projectCollection = () => ({
     numberOfProjects: null,
     tagList: [],
     icon: "lamp",
-    abilities: abilities()
+    abilities: abilities(),
+
+    // mocked content
+    metaDescription: {},
+    heroLayout: "square_inset"
   },
   relationships: {
     collectionProjects: [],
