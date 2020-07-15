@@ -111,6 +111,12 @@
   overflow-wrap: normal;
 }
 
+@mixin textTruncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 
 // Labels
 // --------------------------------------------------------

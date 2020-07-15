@@ -41,7 +41,7 @@
   &__inner {
     @include draggable;
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
 
@@ -57,8 +57,10 @@
 
   &__link {
     @include buttonUnstyled;
+    display: flex;
     flex-grow: 1;
     padding: $_inner-padding $_inner-padding $_inner-padding $_inner-padding * 2;
+    overflow: hidden;
     text-align: left;
 
     .project-collection-list-item--selected & {
@@ -82,13 +84,11 @@
   }
 
   &__item-text {
+    @include textTruncate;
     flex-grow: 1;
     padding: 3px 0;
     margin-right: 6px;
-    overflow: hidden;
     text-align: left;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   &__count {
@@ -126,6 +126,4 @@
     padding-right: 3px;
     padding-left: 3px;
   }
-
-  &__icon {}
 }
