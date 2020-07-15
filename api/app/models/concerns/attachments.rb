@@ -169,8 +169,7 @@ module Attachments
     return nil unless attachment.present?
 
     original = shrine_version_for(attachment_name, :original)
-
-    block_given? ? yield(original) : original
+    block_given? && original ? yield(original) : original
   end
 
   # @param [String, Symbol] attachment_name
@@ -233,7 +232,7 @@ module Attachments
   # @param [Symbol, String] attachment_name
   # @param [Symbol] style
   # @return [AttachmentUploader::UploadedFile, nil]
-  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/MethodLength
   def shrine_version_for(attachment_name, style)
     attachment = public_send(attachment_name)
 
@@ -245,7 +244,8 @@ module Attachments
       attacher = shrine_attacher_for attachment_name
 
       if attacher.stored?
-        public_send(attachment_name)[style]
+        receiver = public_send(attachment_name)
+        receiver[style] if receiver.respond_to?("[]")
       elsif attacher.cached?
         style == :original ? attachment : nil
       end
@@ -255,7 +255,7 @@ module Attachments
       raise ArgumentError, "Tried to fetch style #{style.inspect} for #{attachment_name}, which has no styles"
     end
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/MethodLength
 
   # @param [String, Symbol] attachment_name
   def validate_content_type_for?(attachment_name)
