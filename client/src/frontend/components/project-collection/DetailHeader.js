@@ -51,6 +51,10 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
   }
 
   get description() {
+    if (!this.collectionAttributes.descriptionFormatted) {
+      return null;
+    }
+
     return (
       <p className="project-collection__description">
         {this.collectionAttributes.descriptionFormatted}
