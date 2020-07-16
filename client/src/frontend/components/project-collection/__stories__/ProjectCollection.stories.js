@@ -16,12 +16,18 @@ const projectCollection = fixtures.factory("projectCollection", {
 });
 const pagination = fixtures.pagination();
 
-function createProjectCollectionWithImages(detailType) {
+function createProjectCollectionWithImages(detailType, iconEnabled = true) {
   const mergedAttributes = {
     iconStyles: null,
     heroStyles: null,
     heroLayout: null
   };
+
+  if (!iconEnabled) {
+    mergedAttributes.icon = null;
+  } else {
+    mergedAttributes.icon = 'lamp';
+  }
 
   if (detailType === "customIcon") {
     mergedAttributes.iconStyles = { square: icon };
@@ -41,12 +47,13 @@ function createProjectCollectionWithImages(detailType) {
 }
 
 function Context(props) {
-  return <div className="browse container">{props.children}</div>;
+  return <div className="browse">{props.children}</div>;
 }
 
 storiesOf("Frontend/ProjectCollection", module)
   .add("Default", () => {
     const authenticated = boolean("Authenticated", true);
+    const iconEnabled = boolean("Icon", true);
     const limit = number("Project limit", 5);
     const invertColor = boolean("Invert Color", false);
 
@@ -65,7 +72,8 @@ storiesOf("Frontend/ProjectCollection", module)
     );
 
     const projectCollectionWithImages = createProjectCollectionWithImages(
-      detailType
+      detailType,
+      iconEnabled
     );
 
     return (
@@ -81,6 +89,7 @@ storiesOf("Frontend/ProjectCollection", module)
   })
   .add("Detail", () => {
     const authenticated = boolean("Authenticated", true);
+    const iconEnabled = boolean("Icon", true);
     const bannerOptions = {
       default: "default",
       "custom icon": "customIcon",
@@ -96,7 +105,8 @@ storiesOf("Frontend/ProjectCollection", module)
     );
 
     const projectCollectionWithImages = createProjectCollectionWithImages(
-      detailType
+      detailType,
+      iconEnabled
     );
 
     return (

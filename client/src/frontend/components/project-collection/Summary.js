@@ -62,7 +62,7 @@ export default class ProjectCollectionSummary extends Component {
     return (
       <section key={this.collection.id} className={backgroundClasses}>
         <Link
-          className=""
+          className="project-collection_summary"
           to={lh.link(
             "frontendProjectCollection",
             this.collection.attributes.slug

@@ -36,7 +36,11 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
   }
 
   get description() {
-    return <p>{this.collectionAttributes.descriptionFormatted}</p>;
+    return (
+      <p className="project-collection__description">
+        {this.collectionAttributes.descriptionFormatted}
+      </p>
+    );
   }
 
   get icon() {
@@ -102,7 +106,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
   render() {
     if (this.isSquare) {
       return (
-        <div className={`${BLOCKCLASS}__wrapper_square`}>
+        <div className={`${BLOCKCLASS}__wrapper_square container flush`}>
           <img
             className={`${BLOCKCLASS}__square-image`}
             src={this.collectionAttributes.heroStyles.mediumSquare}
@@ -124,14 +128,16 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
 
     if (this.isWide) {
       return (
-        <div className={`${BLOCKCLASS}__wrapper`}>
+        <div className={`${BLOCKCLASS}__wrapper container flush`}>
           <div className={`${BLOCKCLASS}__icon-title`}>
             {this.icon}
             {this.title}
           </div>
-          <div className={`${BLOCKCLASS}__wide-image-wrapper`}>
+          <div
+            className={`${BLOCKCLASS}__hero-image-wrapper ${BLOCKCLASS}__hero-image-wrapper_wide`}
+          >
             <img
-              className={`${BLOCKCLASS}__wide-image`}
+              className={`${BLOCKCLASS}__hero-image`}
               src={this.collectionAttributes.heroStyles.mediumLandscape}
               alt="Project Collection"
             />
@@ -143,22 +149,29 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
 
     if (this.isFull) {
       return (
-        <div className={`${BLOCKCLASS}__wrapper`}>
-          <img
-            src={this.collectionAttributes.heroStyles.largeLandscape}
-            alt="Project Collection"
-          />
-          <div className={`${BLOCKCLASS}__icon-title`}>
-            {this.icon}
-            {this.title}
+        <div className={`${BLOCKCLASS}__wrapper_full`}>
+          <div
+            className={`${BLOCKCLASS}__hero-image-wrapper ${BLOCKCLASS}__hero-image-wrapper_full`}
+          >
+            <img
+              className={`${BLOCKCLASS}__hero-image`}
+              src={this.collectionAttributes.heroStyles.largeLandscape}
+              alt="Project Collection"
+            />
           </div>
-          {this.description}
+          <div className="container flush">
+            <div className={`${BLOCKCLASS}__icon-title`}>
+              {this.icon}
+              {this.title}
+            </div>
+            {this.description}
+          </div>
         </div>
       );
     }
 
     return (
-      <div className={`${BLOCKCLASS}__wrapper`}>
+      <div className={`${BLOCKCLASS}__wrapper container flush`}>
         <div className={`${BLOCKCLASS}__search-title`}>
           <div className={`${BLOCKCLASS}__icon-title`}>
             {this.icon}
