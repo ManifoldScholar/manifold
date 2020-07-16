@@ -16,18 +16,67 @@ const projectCollection = fixtures.factory("projectCollection", {
 });
 const pagination = fixtures.pagination();
 
+function createProjectCollectionWithImages(detailType) {
+  const mergedAttributes = {
+    iconStyles: null,
+    heroStyles: null,
+    heroLayout: null
+  };
+
+  if (detailType === "customIcon") {
+    mergedAttributes.iconStyles = { square: icon };
+  } else if (detailType !== "default") {
+    mergedAttributes.heroStyles = {
+      mediumSquare: squareHero,
+      mediumLandscape: heroBackground,
+      largeLandscape: heroBackground
+    };
+    mergedAttributes.heroLayout = detailType;
+  }
+
+  return {
+    attributes: Object.assign(projectCollection.attributes, mergedAttributes),
+    relationships: projectCollection.relationships
+  };
+}
+
+function Context(props) {
+  return <div className="browse">{props.children}</div>;
+}
+
 storiesOf("Frontend/ProjectCollection", module)
   .add("Default", () => {
     const authenticated = boolean("Authenticated", true);
     const limit = number("Project limit", 5);
     const invertColor = boolean("Invert Color", false);
+
+    const bannerOptions = {
+      default: "default",
+      "custom icon": "customIcon",
+      "square hero": "square_inset",
+      "medium size hero": "wide_inset",
+      "large size hero": "full_bleed"
+    };
+
+    const detailType = select(
+      "Collection Banner Type",
+      bannerOptions,
+      "default"
+    );
+
+    const projectCollectionWithImages = createProjectCollectionWithImages(
+      detailType
+    );
+
     return (
-      <Summary
-        projectCollection={projectCollection}
-        invertColor={invertColor}
-        limit={limit}
-        authentication={{ authenticated }}
-      />
+      <Context>
+        <Summary
+          projectCollection={projectCollectionWithImages}
+          invertColor={invertColor}
+          limit={limit}
+          authentication={{ authenticated }}
+        />
+      </Context>
     );
   })
   .add("Detail", () => {
@@ -46,35 +95,19 @@ storiesOf("Frontend/ProjectCollection", module)
       "default"
     );
 
-    const mergedAttributes = {
-      iconStyles: null,
-      heroStyles: null,
-      heroLayout: null
-    };
-
-    if (detailType === "customIcon") {
-      mergedAttributes.iconStyles = { square: icon };
-    } else if (detailType !== "default") {
-      mergedAttributes.heroStyles = {
-        mediumSquare: squareHero,
-        mediumLandscape: heroBackground,
-        largeLandscape: heroBackground
-      };
-      mergedAttributes.heroLayout = detailType;
-    }
-
-    const ProjectCollectionWithImages = {
-      attributes: Object.assign(projectCollection.attributes, mergedAttributes),
-      relationships: projectCollection.relationships
-    };
+    const projectCollectionWithImages = createProjectCollectionWithImages(
+      detailType
+    );
 
     return (
-      <Detail
-        projectCollection={ProjectCollectionWithImages}
-        projects={projects}
-        authentication={{ authenticated }}
-        pagination={pagination}
-        paginationClickHandler={() => null}
-      />
+      <Context>
+        <Detail
+          projectCollection={projectCollectionWithImages}
+          projects={projects}
+          authentication={{ authenticated }}
+          pagination={pagination}
+          paginationClickHandler={() => null}
+        />
+      </Context>
     );
   });

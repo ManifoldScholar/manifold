@@ -29,29 +29,27 @@ export default class ProjectCollectionDetail extends Component {
 
     return (
       <section key={projectCollection.id} className="bg-neutral05">
-        <div className="container entity-section-wrapper">
-          <DetailHeader
-            projectCollection={projectCollection}
-            filterChangeHandler={this.props.filterChangeHandler}
-            initialState={this.props.initialState}
-          />
-          <div className="entity-section-wrapper__details">
-            <Utility.EntityCount
-              pagination={this.props.pagination}
-              singularUnit="project"
-              pluralUnit="projects"
-              countOnly
-            />
-          </div>
-          <ProjectList.Grid
-            authenticated={this.props.authentication.authenticated}
-            favorites={get(this.props.authentication, "currentUser.favorites")}
-            projects={this.props.projects}
-            dispatch={this.props.dispatch}
-            paginationClickHandler={this.props.paginationClickHandler}
+        <DetailHeader
+          projectCollection={projectCollection}
+          filterChangeHandler={this.props.filterChangeHandler}
+          initialState={this.props.initialState}
+        />
+        <div className="entity-section-wrapper__details">
+          <Utility.EntityCount
             pagination={this.props.pagination}
+            singularUnit="project"
+            pluralUnit="projects"
+            countOnly
           />
         </div>
+        <ProjectList.Grid
+          authenticated={this.props.authentication.authenticated}
+          favorites={get(this.props.authentication, "currentUser.favorites")}
+          projects={this.props.projects}
+          dispatch={this.props.dispatch}
+          paginationClickHandler={this.props.paginationClickHandler}
+          pagination={this.props.pagination}
+        />
       </section>
     );
   }
