@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import IconComputed from "global/components/icon-computed";
+import Filters from "./Filters";
 
 const SQUARE = "square_inset";
 const WIDE = "wide_inset";
@@ -9,8 +10,16 @@ const FULL = "full_bleed";
 export default class ProjectCollectionDetailHeader extends PureComponent {
   static displayName = "ProjectCollectionDetailHeader";
 
+  get projectCollection() {
+    return this.props.projectCollection;
+  }
+
+  get collectionAttributes() {
+    return this.projectCollection.attributes;
+  }
+
   get iconFill() {
-    if (this.props.icon === "new-round") {
+    if (this.collectionAttributes.icon === "new-round") {
       return "var(--accent-primary, #52e3ac)";
     }
 
@@ -18,46 +27,56 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
   }
 
   get title() {
-    return <h2 className="title">{this.props.title}</h2>;
+    return <h2 className="title">{this.collectionAttributes.title}</h2>;
   }
 
   get description() {
-    return <p>{this.props.description}</p>;
+    return <p>{this.collectionAttributes.descriptionFormatted}</p>;
   }
 
   get icon() {
-    if (this.props.iconStyles) {
-      return <img src={this.props.iconStyles.square} />;
+    if (this.collectionAttributes.iconStyles) {
+      return <img style={{ maxWidth: "56px", maxHeight: "56px" }} src={this.collectionAttributes.iconStyles.square} />;
     }
 
-    return <IconComputed.ProjectCollection icon={this.props.icon} size={56} fill={this.iconFill} />;
+    return <IconComputed.ProjectCollection icon={this.collectionAttributes.icon} size={56} fill={this.iconFill} />;
+  }
+
+  get filter() {
+    return (
+      <Filters
+        filterChangeHandler={this.props.filterChangeHandler}
+        initialState={this.props.initialState}
+      />
+    );
   }
 
   get isIcon() {
-    return !!(this.props.iconStyles || this.props.icon);
+    return !!(this.collectionAttributes.iconStyles || this.collectionAttributes.icon);
   }
 
   get isSquare() {
-    return !!(this.props.heroStyles && this.props.heroLayout === SQUARE);
+    return !!(this.collectionAttributes.heroStyles && this.collectionAttributes.heroLayout === SQUARE);
   }
 
   get isWide() {
-    return !!(this.props.heroStyles && this.props.heroLayout === WIDE);
+    return !!(this.collectionAttributes.heroStyles && this.collectionAttributes.heroLayout === WIDE);
   }
 
   get isFull() {
-    return !!(this.props.heroStyles && this.props.heroLayout === FULL);
+    return !!(this.collectionAttributes.heroStyles && this.collectionAttributes.heroLayout === FULL);
   }
 
   render() {
     if (this.isSquare) {
       return (
         <div style={{ display: "flex" }}>
-          <img src={this.props.heroStyles.mediumSquare} />
+          <img src={this.collectionAttributes.heroStyles.mediumSquare} />
           <div>
             <div style={{ display: "flex" }}>
               {this.icon}
               {this.title}
+              {this.filter}
             </div>
             {this.description}
           </div>
@@ -69,7 +88,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
       return (
         <>
           {this.title}
-          <img src={this.props.heroStyles.mediumLandscape} />
+          <img src={this.collectionAttributes.heroStyles.mediumLandscape} />
           {this.description}
         </>
       );
@@ -78,7 +97,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
     if (this.isFull) {
       return (
         <>
-          <img src={this.props.heroStyles.largeLandscape} />
+          <img src={this.collectionAttributes.heroStyles.largeLandscape} />
           <div style={{ display: "flex" }}>
             {this.icon}
             {this.title}
@@ -93,6 +112,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
         <div style={{ display: "flex" }}>
           {this.icon}
           {this.title}
+          {this.filter}
         </div>
         {this.description}
       </>
