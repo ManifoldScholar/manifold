@@ -1,9 +1,9 @@
 import React from "react";
 import { storiesOf, fixtures } from "helpers/storybook/exports";
-import { boolean, number, select } from "@storybook/addon-knobs";
+import { boolean, number, select, text } from "@storybook/addon-knobs";
 import ProjectCollection from "../index";
 
-import icon from "test/assets/icon.png";
+import iconSVG from "test/assets/icon.png";
 import heroBackground from "test/assets/hero-bg.jpg";
 import squareHero from "test/assets/hero-square.jpg";
 
@@ -16,21 +16,40 @@ const projectCollection = fixtures.factory("projectCollection", {
 });
 const pagination = fixtures.pagination();
 
-function createProjectCollectionWithImages(detailType, iconEnabled = true) {
+const defaultDescription = projectCollection.attributes.descriptionFormatted;
+
+const iconOptions = {
+  none: null,
+  lamp: "lamp",
+  "book stack vertical": "book-stack-vertical",
+  "new round": "new-round",
+  "books on shelf": "books-on-shelf",
+  globe: "globe",
+  touch: "touch",
+  mug: "mug"
+};
+
+const bannerOptions = {
+  default: "default",
+  "custom icon": "customIcon",
+  "square hero": "square_inset",
+  "medium size hero": "wide_inset",
+  "large size hero": "full_bleed"
+};
+
+// eslint-disable-next-line prettier/prettier
+function createProjectCollectionWithImages(detailType, icon, description, title) {
   const mergedAttributes = {
     iconStyles: null,
     heroStyles: null,
-    heroLayout: null
+    heroLayout: null,
+    icon,
+    descriptionFormatted: description ? defaultDescription : null,
+    title
   };
 
-  if (!iconEnabled) {
-    mergedAttributes.icon = null;
-  } else {
-    mergedAttributes.icon = 'lamp';
-  }
-
   if (detailType === "customIcon") {
-    mergedAttributes.iconStyles = { square: icon };
+    mergedAttributes.iconStyles = { square: iconSVG };
   } else if (detailType !== "default") {
     mergedAttributes.heroStyles = {
       mediumSquare: squareHero,
@@ -50,30 +69,23 @@ function Context(props) {
   return <div className="browse">{props.children}</div>;
 }
 
+/* ********** Stories ********** */
+
 storiesOf("Frontend/ProjectCollection", module)
   .add("Default", () => {
     const authenticated = boolean("Authenticated", true);
-    const iconEnabled = boolean("Icon", true);
     const limit = number("Project limit", 5);
     const invertColor = boolean("Invert Color", false);
-
-    const bannerOptions = {
-      default: "default",
-      "custom icon": "customIcon",
-      "square hero": "square_inset",
-      "medium size hero": "wide_inset",
-      "large size hero": "full_bleed"
-    };
-
-    const detailType = select(
-      "Collection Banner Type",
-      bannerOptions,
-      "default"
-    );
+    const description = boolean("Show Description", true);
+    const title = text("Text", "A Project Collection");
+    const detailType = select("Type", bannerOptions, "default");
+    const iconType = select("Icon", iconOptions, "lamp");
 
     const projectCollectionWithImages = createProjectCollectionWithImages(
       detailType,
-      iconEnabled
+      iconType,
+      description,
+      title
     );
 
     return (
@@ -89,24 +101,16 @@ storiesOf("Frontend/ProjectCollection", module)
   })
   .add("Detail", () => {
     const authenticated = boolean("Authenticated", true);
-    const iconEnabled = boolean("Icon", true);
-    const bannerOptions = {
-      default: "default",
-      "custom icon": "customIcon",
-      "square hero": "square_inset",
-      "medium size hero": "wide_inset",
-      "large size hero": "full_bleed"
-    };
-
-    const detailType = select(
-      "Collection Banner Type",
-      bannerOptions,
-      "default"
-    );
+    const description = boolean("Show Description", true);
+    const title = text("Text", "A Project Collection");
+    const detailType = select("Type", bannerOptions, "default");
+    const iconType = select("Icon", iconOptions, "lamp");
 
     const projectCollectionWithImages = createProjectCollectionWithImages(
       detailType,
-      iconEnabled
+      iconType,
+      description,
+      title
     );
 
     return (
