@@ -52,16 +52,16 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
   render() {
     if (this.isSquare) {
       return (
-        <>
-          <div><img src={this.props.heroStyles.mediumSquare} /></div>
+        <div style={{ display: "flex" }}>
+          <img src={this.props.heroStyles.mediumSquare} />
           <div>
-            <div>
+            <div style={{ display: "flex" }}>
               {this.icon}
               {this.title}
             </div>
             {this.description}
           </div>
-        </>
+        </div>
       );
     }
 
@@ -79,7 +79,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
       return (
         <>
           <img src={this.props.heroStyles.largeLandscape} />
-          <div>
+          <div style={{ display: "flex" }}>
             {this.icon}
             {this.title}
           </div>
@@ -90,7 +90,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
 
     return (
       <>
-        <div>
+        <div style={{ display: "flex" }}>
           {this.icon}
           {this.title}
         </div>
