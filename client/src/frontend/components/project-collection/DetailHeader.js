@@ -36,10 +36,22 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
 
   get icon() {
     if (this.collectionAttributes.iconStyles) {
-      return <img style={{ maxWidth: "56px", maxHeight: "56px" }} src={this.collectionAttributes.iconStyles.square} />;
+      return (
+        <img
+          style={{ maxWidth: "56px", maxHeight: "56px" }}
+          src={this.collectionAttributes.iconStyles.square}
+          alt="square"
+        />
+      );
     }
 
-    return <IconComputed.ProjectCollection icon={this.collectionAttributes.icon} size={56} fill={this.iconFill} />;
+    return (
+      <IconComputed.ProjectCollection
+        icon={this.collectionAttributes.icon}
+        size={56}
+        fill={this.iconFill}
+      />
+    );
   }
 
   get filter() {
@@ -52,26 +64,40 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
   }
 
   get isIcon() {
-    return !!(this.collectionAttributes.iconStyles || this.collectionAttributes.icon);
+    return !!(
+      this.collectionAttributes.iconStyles || this.collectionAttributes.icon
+    );
   }
 
   get isSquare() {
-    return !!(this.collectionAttributes.heroStyles && this.collectionAttributes.heroLayout === SQUARE);
+    return !!(
+      this.collectionAttributes.heroStyles &&
+      this.collectionAttributes.heroLayout === SQUARE
+    );
   }
 
   get isWide() {
-    return !!(this.collectionAttributes.heroStyles && this.collectionAttributes.heroLayout === WIDE);
+    return !!(
+      this.collectionAttributes.heroStyles &&
+      this.collectionAttributes.heroLayout === WIDE
+    );
   }
 
   get isFull() {
-    return !!(this.collectionAttributes.heroStyles && this.collectionAttributes.heroLayout === FULL);
+    return !!(
+      this.collectionAttributes.heroStyles &&
+      this.collectionAttributes.heroLayout === FULL
+    );
   }
 
   render() {
     if (this.isSquare) {
       return (
         <div style={{ display: "flex" }}>
-          <img src={this.collectionAttributes.heroStyles.mediumSquare} />
+          <img
+            src={this.collectionAttributes.heroStyles.mediumSquare}
+            alt="Project Collection"
+          />
           <div>
             <div style={{ display: "flex" }}>
               {this.icon}
@@ -88,7 +114,10 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
       return (
         <>
           {this.title}
-          <img src={this.collectionAttributes.heroStyles.mediumLandscape} />
+          <img
+            src={this.collectionAttributes.heroStyles.mediumLandscape}
+            alt="Project Collection"
+          />
           {this.description}
         </>
       );
@@ -97,7 +126,10 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
     if (this.isFull) {
       return (
         <>
-          <img src={this.collectionAttributes.heroStyles.largeLandscape} />
+          <img
+            src={this.collectionAttributes.heroStyles.largeLandscape}
+            alt="Project Collection"
+          />
           <div style={{ display: "flex" }}>
             {this.icon}
             {this.title}
