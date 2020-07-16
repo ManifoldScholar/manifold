@@ -33,6 +33,7 @@ export default class ProjectCollectionDetail extends Component {
           projectCollection={projectCollection}
           filterChangeHandler={this.props.filterChangeHandler}
           initialState={this.props.initialState}
+          showFilters
         />
         <div className="container flush">
           <div className="entity-section-wrapper__details">

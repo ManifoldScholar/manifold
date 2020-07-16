@@ -11,6 +11,21 @@ const BLOCKCLASS = "project-collection";
 export default class ProjectCollectionDetailHeader extends PureComponent {
   static displayName = "ProjectCollectionDetailHeader";
 
+  static propTypes = {
+    projectCollection: PropTypes.object.isRequired,
+    filterChangeHandler: PropTypes.func,
+    initialState: PropTypes.func,
+    showFilters: PropTypes.bool
+  };
+
+  static defaultProps = {
+    showFilters: false
+  };
+
+  get showFilters() {
+    return this.props.showFilters;
+  }
+
   get projectCollection() {
     return this.props.projectCollection;
   }
@@ -118,7 +133,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
                 {this.icon}
                 {this.title}
               </div>
-              {this.filter}
+              {this.showFilters && this.filter}
             </div>
             {this.description}
           </div>
@@ -177,7 +192,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
             {this.icon}
             {this.title}
           </div>
-          {this.filter}
+          {this.showFilters && this.filter}
         </div>
         {this.description}
       </div>

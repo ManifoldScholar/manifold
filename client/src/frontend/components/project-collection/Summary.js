@@ -74,27 +74,32 @@ export default class ProjectCollectionSummary extends Component {
             initialState={this.props.initialState}
           />
         </Link>
-        {this.hasProjects ? (
-          <ProjectList.Grid
-            authenticated={this.props.authentication.authenticated}
-            favorites={get(this.props.authentication, "currentUser.favorites")}
-            projects={this.projects}
-            dispatch={this.props.dispatch}
-            limit={this.limit}
-            showViewAll={this.projects.length < this.projectsCount}
-            viewAllUrl={lh.link(
-              "frontendProjectCollection",
-              this.collection.attributes.slug
-            )}
-            viewAllLabel={"See the full collection"}
-          />
-        ) : (
-          <div className="entity-section-wrapper__body project-list empty">
-            <p className="message">
-              {"This Project Collection is currently empty."}
-            </p>
-          </div>
-        )}
+        <div className="container flush">
+          {this.hasProjects ? (
+            <ProjectList.Grid
+              authenticated={this.props.authentication.authenticated}
+              favorites={get(
+                this.props.authentication,
+                "currentUser.favorites"
+              )}
+              projects={this.projects}
+              dispatch={this.props.dispatch}
+              limit={this.limit}
+              showViewAll={this.projects.length < this.projectsCount}
+              viewAllUrl={lh.link(
+                "frontendProjectCollection",
+                this.collection.attributes.slug
+              )}
+              viewAllLabel={"See the full collection"}
+            />
+          ) : (
+            <div className="entity-section-wrapper__body project-list empty">
+              <p className="message">
+                {"This Project Collection is currently empty."}
+              </p>
+            </div>
+          )}
+        </div>
       </section>
     );
   }
