@@ -31,7 +31,9 @@ export default class ProjectCollectionDetail extends Component {
     return (
       <section key={projectCollection.id} className="bg-neutral05">
         <div className="container entity-section-wrapper">
-          <DetailHeader {...projectCollection.attributes} />
+          <div>
+            <DetailHeader {...projectCollection.attributes} />
+          </div>
           <Filters
             filterChangeHandler={this.props.filterChangeHandler}
             initialState={this.props.initialState}

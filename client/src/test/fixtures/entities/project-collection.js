@@ -4,6 +4,7 @@ const projectCollection = () => ({
   type: "projectCollections",
   attributes: {
     title: "A Project Collection",
+    description: "A description of the project collection",
     sortOrder: "manual",
     manuallySorted: true,
     smart: false,
