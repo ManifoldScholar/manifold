@@ -1,1 +1,60 @@
-@import 'summary';
+.project-collection {
+
+  &__wrapper {
+    margin-top: 60px;
+    margin-bottom: 30px;
+    &_square {
+      display: flex;
+      margin-top: 60px;
+      margin-bottom: 30px;
+    }
+  }
+
+  &__search-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+  }
+
+  &__icon-title {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    width: 56px;
+    height: 56px;
+    margin: 5px 10px 5px 0;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__square-image {
+    padding-right: 30px;
+  }
+
+  &__wide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+
+    &-wrapper {
+      height: 340px;
+      overflow: hidden;
+      object-fit: cover;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      // background properties used if image is set as bg-image on wrapper
+      // when object-fit isn't supported
+      background-size: cover;
+      margin: 30px 0;
+    }
+  }
+}

@@ -54,7 +54,7 @@ export default class ProjectCollectionSummary extends Component {
     if (!this.collection) return null;
 
     const backgroundClasses = classnames({
-      "project-collection-summary": true,
+      "project-collection": true,
       "bg-neutral05":
         this.props.ordinal % 2 === (this.props.invertColor ? 1 : 0)
     });

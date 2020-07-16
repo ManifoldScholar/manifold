@@ -10,5 +10,4 @@ tmp/*
 !tmp/sockets/
 !tmp/sockets/.gitkeep
 
-dist/manifold/www/browser.config.js
-dist/manifold/ssr/ssr.config.js
+dist

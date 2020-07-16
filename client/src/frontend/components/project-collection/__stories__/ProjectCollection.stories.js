@@ -41,7 +41,7 @@ function createProjectCollectionWithImages(detailType) {
 }
 
 function Context(props) {
-  return <div className="browse">{props.children}</div>;
+  return <div className="browse container">{props.children}</div>;
 }
 
 storiesOf("Frontend/ProjectCollection", module)
