@@ -8,6 +8,8 @@ import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import DetailHeader from "./DetailHeader";
 
+const FULL = "full_bleed";
+
 export default class ProjectCollectionSummary extends Component {
   static displayName = "ProjectCollectionSummary";
 
@@ -44,6 +46,13 @@ export default class ProjectCollectionSummary extends Component {
     return this.projects.length > 0;
   }
 
+  get isFull() {
+    return !!(
+      this.collection.attributes.heroStyles &&
+      this.collection.attributes.heroLayout === FULL
+    );
+  }
+
   mappedProjects = memoize(() => {
     return this.collection.relationships.collectionProjects.map(
       cp => cp.relationships.project
@@ -61,44 +70,46 @@ export default class ProjectCollectionSummary extends Component {
 
     return (
       <section key={this.collection.id} className={backgroundClasses}>
-        <Link
-          className="project-collection_summary"
-          to={lh.link(
-            "frontendProjectCollection",
-            this.collection.attributes.slug
-          )}
-        >
-          <DetailHeader
-            projectCollection={this.props.projectCollection}
-            filterChangeHandler={this.props.filterChangeHandler}
-            initialState={this.props.initialState}
-          />
-        </Link>
-        <div className="container flush">
-          {this.hasProjects ? (
-            <ProjectList.Grid
-              authenticated={this.props.authentication.authenticated}
-              favorites={get(
-                this.props.authentication,
-                "currentUser.favorites"
-              )}
-              projects={this.projects}
-              dispatch={this.props.dispatch}
-              limit={this.limit}
-              showViewAll={this.projects.length < this.projectsCount}
-              viewAllUrl={lh.link(
-                "frontendProjectCollection",
-                this.collection.attributes.slug
-              )}
-              viewAllLabel={"See the full collection"}
+        <div className={classnames({ container: !this.isFull })}>
+          <Link
+            className="project-collection_summary"
+            to={lh.link(
+              "frontendProjectCollection",
+              this.collection.attributes.slug
+            )}
+          >
+            <DetailHeader
+              projectCollection={this.props.projectCollection}
+              filterChangeHandler={this.props.filterChangeHandler}
+              initialState={this.props.initialState}
             />
-          ) : (
-            <div className="entity-section-wrapper__body project-list empty">
-              <p className="message">
-                {"This Project Collection is currently empty."}
-              </p>
-            </div>
-          )}
+          </Link>
+          <div className={classnames({ container: this.isFull })}>
+            {this.hasProjects ? (
+              <ProjectList.Grid
+                authenticated={this.props.authentication.authenticated}
+                favorites={get(
+                  this.props.authentication,
+                  "currentUser.favorites"
+                )}
+                projects={this.projects}
+                dispatch={this.props.dispatch}
+                limit={this.limit}
+                showViewAll={this.projects.length < this.projectsCount}
+                viewAllUrl={lh.link(
+                  "frontendProjectCollection",
+                  this.collection.attributes.slug
+                )}
+                viewAllLabel={"See the full collection"}
+              />
+            ) : (
+              <div className="entity-section-wrapper__body project-list empty">
+                <p className="message">
+                  {"This Project Collection is currently empty."}
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </section>
     );

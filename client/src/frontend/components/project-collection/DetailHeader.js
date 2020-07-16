@@ -125,7 +125,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
   render() {
     if (this.isSquare) {
       return (
-        <div className={`${BLOCKCLASS}__wrapper_square container flush`}>
+        <div className={`${BLOCKCLASS}__wrapper_square `}>
           <img
             className={`${BLOCKCLASS}__square-image`}
             src={this.collectionAttributes.heroStyles.mediumSquare}
@@ -147,7 +147,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
 
     if (this.isWide) {
       return (
-        <div className={`${BLOCKCLASS}__wrapper container flush`}>
+        <div className={`${BLOCKCLASS}__wrapper `}>
           <div className={`${BLOCKCLASS}__icon-title`}>
             {this.icon}
             {this.title}
@@ -178,7 +178,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
               alt="Project Collection"
             />
           </div>
-          <div className="container flush">
+          <div className="container">
             <div className={`${BLOCKCLASS}__icon-title`}>
               {this.icon}
               {this.title}
@@ -190,7 +190,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
     }
 
     return (
-      <div className={`${BLOCKCLASS}__wrapper container flush`}>
+      <div className={`${BLOCKCLASS}__wrapper `}>
         <div className={`${BLOCKCLASS}__search-title`}>
           <div className={`${BLOCKCLASS}__icon-title`}>
             {this.icon}

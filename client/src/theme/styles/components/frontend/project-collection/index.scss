@@ -2,19 +2,15 @@
 
   &_summary {
     text-decoration: none;
+    margin-bottom: 30px;
   }
 
   &__wrapper {
-    margin-top: 60px;
-    margin-bottom: 30px;
     &_square {
       display: flex;
-      margin-top: 60px;
-      margin-bottom: 30px;
     }
     &_full {
       margin-top: 0;
-      margin-bottom: 30px;
     }
   }
 

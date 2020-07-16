@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 import ProjectList from "frontend/components/project-list";
 import Utility from "global/components/utility";
 import get from "lodash/get";
+import classnames from "classnames";
 import DetailHeader from "./DetailHeader";
+
+const FULL = "full_bleed";
 
 export default class ProjectCollectionDetail extends Component {
   static displayName = "ProjectCollectionDetail";
@@ -23,6 +26,13 @@ export default class ProjectCollectionDetail extends Component {
     return this.props.projectCollection.attributes.descriptionFormatted;
   }
 
+  get isFull() {
+    return !!(
+      this.props.projectCollection.attributes.heroStyles &&
+      this.props.projectCollection.attributes.heroLayout === FULL
+    );
+  }
+
   render() {
     const projectCollection = this.props.projectCollection;
     if (!projectCollection) return null;
@@ -35,7 +45,7 @@ export default class ProjectCollectionDetail extends Component {
           initialState={this.props.initialState}
           showFilters
         />
-        <div className="container flush">
+        <div className={classnames({ container: this.isFull })}>
           <div className="entity-section-wrapper__details">
             <Utility.EntityCount
               pagination={this.props.pagination}
