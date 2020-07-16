@@ -35,7 +35,7 @@ storiesOf("Frontend/ProjectCollection", module)
     const bannerOptions = {
       default: "default",
       "custom icon": "customIcon",
-      "square hero": "squareInset",
+      "square hero": "square_inset",
       "medium size hero": "wide_inset",
       "large size hero": "full_bleed"
     };
@@ -46,21 +46,31 @@ storiesOf("Frontend/ProjectCollection", module)
       "default"
     );
 
-    if (detailType === "default") {
-      null;
-    } else if (detailType === "customIcon") {
-      projectCollection.attributes.iconStyles = { square: icon };
-    } else {
-      projectCollection.attributes.heroStyles = {
+    const mergedAttributes = {
+      iconStyles: null,
+      heroStyles: null,
+      heroLayout: null
+    };
+
+    if (detailType === "customIcon") {
+      mergedAttributes.iconStyles = { square: icon };
+    } else if (detailType !== "default") {
+      mergedAttributes.heroStyles = {
         mediumSquare: squareHero,
         mediumLandscape: heroBackground,
         largeLandscape: heroBackground
       };
+      mergedAttributes.heroLayout = detailType;
     }
+
+    const ProjectCollectionWithImages = {
+      attributes: Object.assign(projectCollection.attributes, mergedAttributes),
+      relationships: projectCollection.relationships
+    };
 
     return (
       <Detail
-        projectCollection={projectCollection}
+        projectCollection={ProjectCollectionWithImages}
         projects={projects}
         authentication={{ authenticated }}
         pagination={pagination}
