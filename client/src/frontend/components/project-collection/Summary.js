@@ -7,8 +7,7 @@ import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import DetailHeader from "./DetailHeader";
-
-const FULL = "full_bleed";
+import Constants from "./Constants";
 
 export default class ProjectCollectionSummary extends Component {
   static displayName = "ProjectCollectionSummary";
@@ -49,7 +48,7 @@ export default class ProjectCollectionSummary extends Component {
   get isFull() {
     return !!(
       this.collection.attributes.heroStyles &&
-      this.collection.attributes.heroLayout === FULL
+      this.collection.attributes.heroLayout === Constants.FULL
     );
   }
 

@@ -5,8 +5,7 @@ import Utility from "global/components/utility";
 import get from "lodash/get";
 import classnames from "classnames";
 import DetailHeader from "./DetailHeader";
-
-const FULL = "full_bleed";
+import Constants from "./Constants";
 
 export default class ProjectCollectionDetail extends Component {
   static displayName = "ProjectCollectionDetail";
@@ -29,7 +28,7 @@ export default class ProjectCollectionDetail extends Component {
   get isFull() {
     return !!(
       this.props.projectCollection.attributes.heroStyles &&
-      this.props.projectCollection.attributes.heroLayout === FULL
+      this.props.projectCollection.attributes.heroLayout === Constants.FULL
     );
   }
 

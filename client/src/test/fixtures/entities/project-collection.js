@@ -1,4 +1,5 @@
 import abilities from "../structures/abilities";
+import Constants from "frontend/components/project-collection/Constants";
 
 const projectCollection = () => ({
   type: "projectCollections",
@@ -16,7 +17,7 @@ const projectCollection = () => ({
 
     // mocked content
     metaDescription: {},
-    heroLayout: "square_inset"
+    heroLayout: Constants.SQUARE
   },
   relationships: {
     collectionProjects: [],

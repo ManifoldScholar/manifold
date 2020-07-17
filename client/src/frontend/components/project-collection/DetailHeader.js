@@ -2,10 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import IconComputed from "global/components/icon-computed";
 import Filters from "./Filters";
+import Constants from "./Constants";
 
-const SQUARE = "square_inset";
-const WIDE = "wide_inset";
-const FULL = "full_bleed";
 const BLOCKCLASS = "project-collection";
 
 export default class ProjectCollectionDetailHeader extends PureComponent {
@@ -104,21 +102,21 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
   get isSquare() {
     return !!(
       this.collectionAttributes.heroStyles &&
-      this.collectionAttributes.heroLayout === SQUARE
+      this.collectionAttributes.heroLayout === Constants.SQUARE
     );
   }
 
   get isWide() {
     return !!(
       this.collectionAttributes.heroStyles &&
-      this.collectionAttributes.heroLayout === WIDE
+      this.collectionAttributes.heroLayout === Constants.WIDE
     );
   }
 
   get isFull() {
     return !!(
       this.collectionAttributes.heroStyles &&
-      this.collectionAttributes.heroLayout === FULL
+      this.collectionAttributes.heroLayout === Constants.FULL
     );
   }
 
