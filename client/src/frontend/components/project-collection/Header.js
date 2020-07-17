@@ -110,7 +110,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
     if (this.props.hasLink) {
       return (
         <Link
-          className="section-heading entity-section-wrapper__heading project-collection_summary"
+          className={`${BLOCKCLASS}_summary`}
           to={lh.link(
             "frontendProjectCollection",
             this.collectionAttributes.slug

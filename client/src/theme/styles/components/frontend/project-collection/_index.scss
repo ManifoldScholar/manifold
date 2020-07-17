@@ -63,8 +63,12 @@
     color: #555555;
 
     &__right {
+      margin-right: 0;
+
+      @include respond($break95) {
       margin-right: 50%;
     }
+  }
   }
 
   &__square-image {
