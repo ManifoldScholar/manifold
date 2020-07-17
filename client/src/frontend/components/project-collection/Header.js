@@ -151,7 +151,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
 
     if (this.isWide) {
       return (
-        <div className={`${BLOCKCLASS}__wrapper `}>
+        <div className={`${BLOCKCLASS}__wrapper`}>
           {this.iconTitle}
           <div
             className={`${BLOCKCLASS}__hero-image-wrapper ${BLOCKCLASS}__hero-image-wrapper_wide`}
