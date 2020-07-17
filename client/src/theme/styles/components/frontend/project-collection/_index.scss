@@ -6,7 +6,9 @@
   }
 
   &_filter {
-    margin-bottom: 30px;
+    // while the designs would call for 30px here, a little extra
+    // space should be given for the reset search button
+    margin-bottom: 40px;
   }
 
   &__wrapper {
@@ -101,6 +103,8 @@
       }
 
       &_full {
+        // break the full bleed hero out of the container so it spans the
+        // full width of the page
         width: 100vw;
         position: relative;
         left: 50%;

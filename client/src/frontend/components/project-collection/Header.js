@@ -61,7 +61,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
         <img
           className={`${BLOCKCLASS}__icon`}
           src={this.collectionAttributes.iconStyles.square}
-          alt="square"
+          alt="Project Collection Icon"
         />
       );
     }
@@ -85,21 +85,21 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
     );
   }
 
-  get isSquare() {
+  get isSquareHero() {
     return !!(
       this.collectionAttributes.heroStyles &&
       this.collectionAttributes.heroLayout === Constants.SQUARE
     );
   }
 
-  get isWide() {
+  get isWideHero() {
     return !!(
       this.collectionAttributes.heroStyles &&
       this.collectionAttributes.heroLayout === Constants.WIDE
     );
   }
 
-  get isFull() {
+  get isFullHero() {
     return !!(
       this.collectionAttributes.heroStyles &&
       this.collectionAttributes.heroLayout === Constants.FULL
@@ -133,7 +133,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
   }
 
   render() {
-    if (this.isSquare) {
+    if (this.isSquareHero) {
       return (
         <div className={`${BLOCKCLASS}__wrapper_square `}>
           <img
@@ -149,7 +149,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
       );
     }
 
-    if (this.isWide) {
+    if (this.isWideHero) {
       return (
         <div className={`${BLOCKCLASS}__wrapper`}>
           {this.iconTitle}
@@ -169,7 +169,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
       );
     }
 
-    if (this.isFull) {
+    if (this.isFullHero) {
       return (
         <div className={`${BLOCKCLASS}__wrapper_full`}>
           <div
