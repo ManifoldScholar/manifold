@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import IconComputed from "global/components/icon-computed";
 import Constants from "./Constants";
 
-const BLOCKCLASS = "project-collection";
+const BLOCKCLASS = "project-collection-header";
 
 export default class ProjectCollectionDetailHeader extends PureComponent {
   static displayName = "ProjectCollectionDetailHeader";
@@ -30,7 +30,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
 
   get title() {
     return (
-      <h2 className="project-collection__title">
+      <h2 className={`${BLOCKCLASS}__title`}>
         {this.collectionAttributes.title}
       </h2>
     );
@@ -42,7 +42,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
     }
 
     return (
-      <p className="project-collection_description">
+      <p className={`${BLOCKCLASS}_description`}>
         {this.collectionAttributes.descriptionFormatted}
       </p>
     );
@@ -52,7 +52,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
     if (this.collectionAttributes.iconStyles) {
       return (
         <img
-          className="project-collection__icon"
+          className={`${BLOCKCLASS}__icon`}
           src={this.collectionAttributes.iconStyles.square}
           alt="square"
         />
