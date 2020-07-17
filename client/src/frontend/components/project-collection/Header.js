@@ -137,11 +137,11 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
       return (
         <div className={`${BLOCKCLASS}__wrapper_square `}>
           <img
-            className={`${BLOCKCLASS}__square-image`}
+            className={`${BLOCKCLASS}__hero-image_square`}
             src={this.collectionAttributes.heroStyles.mediumSquare}
             alt="Project Collection"
           />
-          <div>
+          <div className={`${BLOCKCLASS}_description__right`}>
             {this.iconTitle}
             {this.description}
           </div>
