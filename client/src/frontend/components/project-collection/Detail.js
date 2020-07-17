@@ -6,6 +6,7 @@ import get from "lodash/get";
 import classnames from "classnames";
 import DetailHeader from "./DetailHeader";
 import Constants from "./Constants";
+import Filters from "./Filters";
 
 export default class ProjectCollectionDetail extends Component {
   static displayName = "ProjectCollectionDetail";
@@ -39,13 +40,16 @@ export default class ProjectCollectionDetail extends Component {
     return (
       <section key={projectCollection.id} className="bg-neutral05">
         <div className="container">
-          <DetailHeader
-            projectCollection={projectCollection}
-            filterChangeHandler={this.props.filterChangeHandler}
-            initialState={this.props.initialState}
-            showFilters
-          />
+          <div className="section-heading entity-section-wrapper__heading">
+            <DetailHeader projectCollection={projectCollection} />
+          </div>
           <div className={classnames({ container: this.isFull })}>
+            <div className="project-collection_filter">
+              <Filters
+                filterChangeHandler={this.props.filterChangeHandler}
+                initialState={this.props.initialState}
+              />
+            </div>
             <div className="entity-section-wrapper__details">
               <Utility.EntityCount
                 pagination={this.props.pagination}

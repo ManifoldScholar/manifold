@@ -77,11 +77,7 @@ export default class ProjectCollectionSummary extends Component {
               this.collection.attributes.slug
             )}
           >
-            <DetailHeader
-              projectCollection={this.props.projectCollection}
-              filterChangeHandler={this.props.filterChangeHandler}
-              initialState={this.props.initialState}
-            />
+            <DetailHeader projectCollection={this.props.projectCollection} />
           </Link>
           <div className={classnames({ container: this.isFull })}>
             {this.hasProjects ? (

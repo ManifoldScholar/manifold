@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import IconComputed from "global/components/icon-computed";
-import Filters from "./Filters";
 import Constants from "./Constants";
 
 const BLOCKCLASS = "project-collection";
@@ -10,19 +9,8 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
   static displayName = "ProjectCollectionDetailHeader";
 
   static propTypes = {
-    projectCollection: PropTypes.object.isRequired,
-    filterChangeHandler: PropTypes.func,
-    initialState: PropTypes.func,
-    showFilters: PropTypes.bool
+    projectCollection: PropTypes.object.isRequired
   };
-
-  static defaultProps = {
-    showFilters: false
-  };
-
-  get showFilters() {
-    return this.props.showFilters;
-  }
 
   get projectCollection() {
     return this.props.projectCollection;
@@ -54,11 +42,9 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
     }
 
     return (
-      <div className="entity-section-wrapper__details">
-        <p className="description">
-          {this.collectionAttributes.descriptionFormatted}
-        </p>
-      </div>
+      <p className="project-collection_description">
+        {this.collectionAttributes.descriptionFormatted}
+      </p>
     );
   }
 
@@ -84,15 +70,6 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
     }
 
     return null;
-  }
-
-  get filter() {
-    return (
-      <Filters
-        filterChangeHandler={this.props.filterChangeHandler}
-        initialState={this.props.initialState}
-      />
-    );
   }
 
   get isIcon() {
@@ -132,20 +109,10 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
             alt="Project Collection"
           />
           <div>
-            {this.showFilters ? (
-              <div className={`${BLOCKCLASS}__search-title`}>
-                <div className={`${BLOCKCLASS}__icon-title main`}>
-                  {this.icon}
-                  {this.title}
-                </div>
-                {this.filter}
-              </div>
-            ) : (
-              <div className={`${BLOCKCLASS}__icon-title main`}>
-                {this.icon}
-                {this.title}
-              </div>
-            )}
+            <div className={`${BLOCKCLASS}__icon-title main`}>
+              {this.icon}
+              {this.title}
+            </div>
             {this.description}
           </div>
         </div>
@@ -168,7 +135,9 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
               alt="Project Collection"
             />
           </div>
-          {this.description}
+          <div className={`${BLOCKCLASS}_description__right`}>
+            {this.description}
+          </div>
         </div>
       );
     }
@@ -190,7 +159,9 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
               {this.icon}
               {this.title}
             </div>
-            {this.description}
+            <div className={`${BLOCKCLASS}_description__right`}>
+              {this.description}
+            </div>
           </div>
         </div>
       );
@@ -198,21 +169,13 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
 
     return (
       <div className={`${BLOCKCLASS}__wrapper `}>
-        {this.showFilters ? (
-          <div className={`${BLOCKCLASS}__search-title`}>
-            <div className={`${BLOCKCLASS}__icon-title main`}>
-              {this.icon}
-              {this.title}
-            </div>
-            {this.showFilters && this.filter}
-          </div>
-        ) : (
-          <div className={`${BLOCKCLASS}__icon-title main`}>
-            {this.icon}
-            {this.title}
-          </div>
-        )}
-        {this.description}
+        <div className={`${BLOCKCLASS}__icon-title main`}>
+          {this.icon}
+          {this.title}
+        </div>
+        <div className={`${BLOCKCLASS}_description__right`}>
+          {this.description}
+        </div>
       </div>
     );
   }
