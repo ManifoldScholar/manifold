@@ -1,6 +1,7 @@
 import React from "react";
 import { storiesOf, fixtures } from "helpers/storybook/exports";
 import { boolean, number, select, text } from "@storybook/addon-knobs";
+import { HelmetProvider } from "react-helmet-async";
 import ProjectCollection from "../index";
 import iconSVG from "test/assets/icon.png";
 import heroBackground from "test/assets/hero-bg.jpg";
@@ -126,13 +127,15 @@ storiesOf("Frontend/ProjectCollection", module)
 
     return (
       <Context>
-        <Detail
-          projectCollection={projectCollectionWithImages}
-          projects={projects}
-          authentication={{ authenticated }}
-          pagination={pagination}
-          paginationClickHandler={() => null}
-        />
+        <HelmetProvider context={{}}>
+          <Detail
+            projectCollection={projectCollectionWithImages}
+            projects={projects}
+            authentication={{ authenticated }}
+            pagination={pagination}
+            paginationClickHandler={() => null}
+          />
+        </HelmetProvider>
       </Context>
     );
   });
