@@ -42,9 +42,11 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
 
   get title() {
     return (
-      <h2 className="project-collection__title">
-        {this.collectionAttributes.title}
-      </h2>
+      <div className="body">
+        <h2 className="title project-collection__title">
+          {this.collectionAttributes.title}
+        </h2>
+      </div>
     );
   }
 
@@ -54,9 +56,11 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
     }
 
     return (
-      <p className="project-collection__description">
-        {this.collectionAttributes.descriptionFormatted}
-      </p>
+      <div className="entity-section-wrapper__details">
+        <p className="description">
+          {this.collectionAttributes.descriptionFormatted}
+        </p>
+      </div>
     );
   }
 
@@ -130,13 +134,20 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
             alt="Project Collection"
           />
           <div>
-            <div className={`${BLOCKCLASS}__search-title`}>
-              <div className={`${BLOCKCLASS}__icon-title`}>
+            {this.showFilters ? (
+              <div className={`${BLOCKCLASS}__search-title`}>
+                <div className={`${BLOCKCLASS}__icon-title main`}>
+                  {this.icon}
+                  {this.title}
+                </div>
+                {this.filter}
+              </div>
+            ) : (
+              <div className={`${BLOCKCLASS}__icon-title main`}>
                 {this.icon}
                 {this.title}
               </div>
-              {this.showFilters && this.filter}
-            </div>
+            )}
             {this.description}
           </div>
         </div>
@@ -146,7 +157,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
     if (this.isWide) {
       return (
         <div className={`${BLOCKCLASS}__wrapper `}>
-          <div className={`${BLOCKCLASS}__icon-title`}>
+          <div className={`${BLOCKCLASS}__icon-title main`}>
             {this.icon}
             {this.title}
           </div>
@@ -177,7 +188,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
             />
           </div>
           <div className="container">
-            <div className={`${BLOCKCLASS}__icon-title`}>
+            <div className={`${BLOCKCLASS}__icon-title main`}>
               {this.icon}
               {this.title}
             </div>
@@ -189,13 +200,20 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
 
     return (
       <div className={`${BLOCKCLASS}__wrapper `}>
-        <div className={`${BLOCKCLASS}__search-title`}>
-          <div className={`${BLOCKCLASS}__icon-title`}>
+        {this.showFilters ? (
+          <div className={`${BLOCKCLASS}__search-title`}>
+            <div className={`${BLOCKCLASS}__icon-title`}>
+              {this.icon}
+              {this.title}
+            </div>
+            {this.showFilters && this.filter}
+          </div>
+        ) : (
+          <div className={`${BLOCKCLASS}__icon-title main`}>
             {this.icon}
             {this.title}
           </div>
-          {this.showFilters && this.filter}
-        </div>
+        )}
         {this.description}
       </div>
     );

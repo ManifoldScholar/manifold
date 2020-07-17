@@ -71,7 +71,7 @@ export default class ProjectCollectionSummary extends Component {
       <section key={this.collection.id} className={backgroundClasses}>
         <div className={classnames({ container: !this.isFull })}>
           <Link
-            className="project-collection_summary"
+            className="section-heading entity-section-wrapper__heading project-collection_summary"
             to={lh.link(
               "frontendProjectCollection",
               this.collection.attributes.slug
