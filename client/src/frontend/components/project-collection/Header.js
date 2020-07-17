@@ -181,7 +181,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
               alt="Project Collection"
             />
           </div>
-          <div className="container">
+          <div>
             {this.iconTitle}
             <div className={`${BLOCKCLASS}_description__right`}>
               {this.description}

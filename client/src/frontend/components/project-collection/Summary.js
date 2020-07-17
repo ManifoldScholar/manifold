@@ -6,7 +6,6 @@ import memoize from "lodash/memoize";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import Header from "./Header";
-import Constants from "./Constants";
 
 export default class ProjectCollectionSummary extends Component {
   static displayName = "ProjectCollectionSummary";
@@ -44,13 +43,6 @@ export default class ProjectCollectionSummary extends Component {
     return this.projects.length > 0;
   }
 
-  get isFull() {
-    return !!(
-      this.collection.attributes.heroStyles &&
-      this.collection.attributes.heroLayout === Constants.FULL
-    );
-  }
-
   mappedProjects = memoize(() => {
     return this.collection.relationships.collectionProjects.map(
       cp => cp.relationships.project
@@ -68,34 +60,32 @@ export default class ProjectCollectionSummary extends Component {
 
     return (
       <section key={this.collection.id} className={backgroundClasses}>
-        <div className={classnames({ container: !this.isFull })}>
+        <div className="container">
           <Header projectCollection={this.props.projectCollection} hasLink />
-          <div className={classnames({ container: this.isFull })}>
-            {this.hasProjects ? (
-              <ProjectList.Grid
-                authenticated={this.props.authentication.authenticated}
-                favorites={get(
-                  this.props.authentication,
-                  "currentUser.favorites"
-                )}
-                projects={this.projects}
-                dispatch={this.props.dispatch}
-                limit={this.limit}
-                showViewAll={this.projects.length < this.projectsCount}
-                viewAllUrl={lh.link(
-                  "frontendProjectCollection",
-                  this.collection.attributes.slug
-                )}
-                viewAllLabel={"See the full collection"}
-              />
-            ) : (
-              <div className="entity-section-wrapper__body project-list empty">
-                <p className="message">
-                  {"This Project Collection is currently empty."}
-                </p>
-              </div>
-            )}
-          </div>
+          {this.hasProjects ? (
+            <ProjectList.Grid
+              authenticated={this.props.authentication.authenticated}
+              favorites={get(
+                this.props.authentication,
+                "currentUser.favorites"
+              )}
+              projects={this.projects}
+              dispatch={this.props.dispatch}
+              limit={this.limit}
+              showViewAll={this.projects.length < this.projectsCount}
+              viewAllUrl={lh.link(
+                "frontendProjectCollection",
+                this.collection.attributes.slug
+              )}
+              viewAllLabel={"See the full collection"}
+            />
+          ) : (
+            <div className="entity-section-wrapper__body project-list empty">
+              <p className="message">
+                {"This Project Collection is currently empty."}
+              </p>
+            </div>
+          )}
         </div>
       </section>
     );
