@@ -42,11 +42,9 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
 
   get title() {
     return (
-      <div className="body">
-        <h2 className="title project-collection__title">
-          {this.collectionAttributes.title}
-        </h2>
-      </div>
+      <h2 className="project-collection__title">
+        {this.collectionAttributes.title}
+      </h2>
     );
   }
 
@@ -202,7 +200,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
       <div className={`${BLOCKCLASS}__wrapper `}>
         {this.showFilters ? (
           <div className={`${BLOCKCLASS}__search-title`}>
-            <div className={`${BLOCKCLASS}__icon-title`}>
+            <div className={`${BLOCKCLASS}__icon-title main`}>
               {this.icon}
               {this.title}
             </div>

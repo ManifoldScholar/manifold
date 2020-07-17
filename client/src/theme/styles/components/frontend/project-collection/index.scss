@@ -23,6 +23,17 @@
   &__icon-title {
     display: flex;
     align-items: center;
+
+    & > .manicon-svg {
+      position: relative;
+      top: 2px;
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      margin-right: 6px;
+      margin-left: -4px;
+      color: #b3b3b3;
+    }
   }
 
   &__icon {
@@ -32,7 +43,15 @@
   }
 
   &__title {
-    margin: 0;
+    font-family: 'sofia-pro', 'trueno', sans-serif;
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 1.2em;
+    font-weight: 500;
+    hyphens: none;
+    line-height: 1.32;
+    margin-bottom: 2px;
+    color: #363636;
   }
 
   &__square-image {
