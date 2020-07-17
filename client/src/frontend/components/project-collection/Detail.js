@@ -4,7 +4,7 @@ import ProjectList from "frontend/components/project-list";
 import Utility from "global/components/utility";
 import get from "lodash/get";
 import classnames from "classnames";
-import DetailHeader from "./DetailHeader";
+import Header from "./Header";
 import Constants from "./Constants";
 import Filters from "./Filters";
 
@@ -41,7 +41,7 @@ export default class ProjectCollectionDetail extends Component {
       <section key={projectCollection.id} className="bg-neutral05">
         <div className="container">
           <div className="section-heading entity-section-wrapper__heading">
-            <DetailHeader projectCollection={projectCollection} />
+            <Header projectCollection={projectCollection} />
           </div>
           <div className={classnames({ container: this.isFull })}>
             <div className="project-collection_filter">

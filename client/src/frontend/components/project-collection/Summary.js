@@ -6,7 +6,7 @@ import memoize from "lodash/memoize";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
-import DetailHeader from "./DetailHeader";
+import Header from "./Header";
 import Constants from "./Constants";
 
 export default class ProjectCollectionSummary extends Component {
@@ -77,7 +77,7 @@ export default class ProjectCollectionSummary extends Component {
               this.collection.attributes.slug
             )}
           >
-            <DetailHeader projectCollection={this.props.projectCollection} />
+            <Header projectCollection={this.props.projectCollection} />
           </Link>
           <div className={classnames({ container: this.isFull })}>
             {this.hasProjects ? (
