@@ -62,7 +62,12 @@
       display: flex;
       align-items: center;
       margin-bottom: 28px;
+      text-decoration: none;
       transition: color $duration $timing;
+
+      &:visited {
+        color: inherit;
+      }
 
       &:hover {
         @include defaultHoverStyle;
