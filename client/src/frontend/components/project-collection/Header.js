@@ -1,5 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import lh from "helpers/linkHandler";
 import IconComputed from "global/components/icon-computed";
 import Constants from "./Constants";
 
@@ -9,7 +11,12 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
   static displayName = "ProjectCollectionDetailHeader";
 
   static propTypes = {
-    projectCollection: PropTypes.object.isRequired
+    projectCollection: PropTypes.object.isRequired,
+    hasLink: PropTypes.bool
+  };
+
+  static defaultProps = {
+    hasLink: false
   };
 
   get projectCollection() {
@@ -99,6 +106,32 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
     );
   }
 
+  get iconTitle() {
+    if (this.props.hasLink) {
+      return (
+        <Link
+          className="section-heading entity-section-wrapper__heading project-collection_summary"
+          to={lh.link(
+            "frontendProjectCollection",
+            this.collectionAttributes.slug
+          )}
+        >
+          <div className={`${BLOCKCLASS}__icon-title main`}>
+            {this.icon}
+            {this.title}
+          </div>
+        </Link>
+      );
+    }
+
+    return (
+      <div className={`${BLOCKCLASS}__icon-title main`}>
+        {this.icon}
+        {this.title}
+      </div>
+    );
+  }
+
   render() {
     if (this.isSquare) {
       return (
@@ -109,10 +142,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
             alt="Project Collection"
           />
           <div>
-            <div className={`${BLOCKCLASS}__icon-title main`}>
-              {this.icon}
-              {this.title}
-            </div>
+            {this.iconTitle}
             {this.description}
           </div>
         </div>
@@ -122,10 +152,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
     if (this.isWide) {
       return (
         <div className={`${BLOCKCLASS}__wrapper `}>
-          <div className={`${BLOCKCLASS}__icon-title main`}>
-            {this.icon}
-            {this.title}
-          </div>
+          {this.iconTitle}
           <div
             className={`${BLOCKCLASS}__hero-image-wrapper ${BLOCKCLASS}__hero-image-wrapper_wide`}
           >
@@ -155,10 +182,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
             />
           </div>
           <div className="container">
-            <div className={`${BLOCKCLASS}__icon-title main`}>
-              {this.icon}
-              {this.title}
-            </div>
+            {this.iconTitle}
             <div className={`${BLOCKCLASS}_description__right`}>
               {this.description}
             </div>
@@ -169,10 +193,7 @@ export default class ProjectCollectionDetailHeader extends PureComponent {
 
     return (
       <div className={`${BLOCKCLASS}__wrapper `}>
-        <div className={`${BLOCKCLASS}__icon-title main`}>
-          {this.icon}
-          {this.title}
-        </div>
+        {this.iconTitle}
         <div className={`${BLOCKCLASS}_description__right`}>
           {this.description}
         </div>

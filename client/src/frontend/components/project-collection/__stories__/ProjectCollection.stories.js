@@ -72,7 +72,7 @@ function Context(props) {
 /* ********** Stories ********** */
 
 storiesOf("Frontend/ProjectCollection", module)
-  .add("Default", () => {
+  .add("Summary", () => {
     const authenticated = boolean("Authenticated", true);
     const limit = number("Project limit", 5);
     const invertColor = boolean("Invert Color", false);

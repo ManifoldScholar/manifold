@@ -5,7 +5,6 @@ import get from "lodash/get";
 import memoize from "lodash/memoize";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
-import { Link } from "react-router-dom";
 import Header from "./Header";
 import Constants from "./Constants";
 
@@ -70,15 +69,7 @@ export default class ProjectCollectionSummary extends Component {
     return (
       <section key={this.collection.id} className={backgroundClasses}>
         <div className={classnames({ container: !this.isFull })}>
-          <Link
-            className="section-heading entity-section-wrapper__heading project-collection_summary"
-            to={lh.link(
-              "frontendProjectCollection",
-              this.collection.attributes.slug
-            )}
-          >
-            <Header projectCollection={this.props.projectCollection} />
-          </Link>
+          <Header projectCollection={this.props.projectCollection} hasLink />
           <div className={classnames({ container: this.isFull })}>
             {this.hasProjects ? (
               <ProjectList.Grid
