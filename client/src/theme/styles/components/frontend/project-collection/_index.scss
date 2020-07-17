@@ -24,29 +24,6 @@
     }
   }
 
-  &__icon-title {
-    display: flex;
-    align-items: center;
-    margin-bottom: 28px;
-
-    & > .manicon-svg {
-      position: relative;
-      top: 2px;
-      flex-shrink: 0;
-      width: 56px;
-      height: 56px;
-      margin-right: 6px;
-      margin-left: -4px;
-      color: #b3b3b3;
-    }
-  }
-
-  &__icon {
-    width: 56px;
-    height: 56px;
-    margin-right: 14px;
-  }
-
   &__title {
     font-family: 'sofia-pro', 'trueno', sans-serif;
     font-size: 22px;
@@ -75,8 +52,27 @@
     }
   }
 
-  &__description {
-    margin-top: 30px;
+  &__icon {
+    width: 56px;
+    height: 56px;
+    margin-right: 14px;
+
+    &-title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 28px;
+
+      & > .manicon-svg {
+        position: relative;
+        top: 2px;
+        flex-shrink: 0;
+        width: 56px;
+        height: 56px;
+        margin-right: 6px;
+        margin-left: -4px;
+        color: #b3b3b3;
+      }
+    }
   }
 
   &__hero-image {
@@ -103,9 +99,13 @@
       }
 
       &_full {
-        position: relative;
-        margin: -60px -50px 30px -50px;
         width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-top: -60px;
+        margin-left: -50vw;
+        margin-bottom: 30px;
       }
     }
   }
