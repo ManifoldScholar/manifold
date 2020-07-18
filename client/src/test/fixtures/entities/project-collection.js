@@ -1,9 +1,12 @@
 import abilities from "../structures/abilities";
+import Constants from "frontend/components/project-collection/Constants";
 
 const projectCollection = () => ({
   type: "projectCollections",
   attributes: {
     title: "A Project Collection",
+    descriptionFormatted:
+      "The publisher can include a descriptive sentence or paragraph to help describe this Collection. If you want to go this route it might be a good idea for the text describing your custom collection to be a little longer than a single short sentence.",
     sortOrder: "manual",
     manuallySorted: true,
     smart: false,
@@ -11,7 +14,11 @@ const projectCollection = () => ({
     numberOfProjects: null,
     tagList: [],
     icon: "lamp",
-    abilities: abilities()
+    abilities: abilities(),
+
+    // mocked content
+    metaDescription: {},
+    heroLayout: Constants.SQUARE
   },
   relationships: {
     collectionProjects: [],
