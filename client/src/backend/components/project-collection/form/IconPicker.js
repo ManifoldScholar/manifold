@@ -50,6 +50,13 @@ export default class IconPicker extends Component {
     this.props.setOther(icon, "attributes[icon]");
   };
 
+  maybeClear = icon => {
+    if (this.selected === icon) {
+      this.props.setOther(null, "attributes[icon]");
+      document.activeElement.blur();
+    }
+  };
+
   renderIcon(icon, id) {
     const selected = this.selected === icon;
     const labelClasses = classNames({
@@ -64,6 +71,7 @@ export default class IconPicker extends Component {
           value={icon}
           name={`${this.idPrefix}-${id}`}
           checked={selected}
+          onClick={() => this.maybeClear(icon)}
           onChange={() => this.handleIconChange(icon)}
           className="icon-picker__input"
         />

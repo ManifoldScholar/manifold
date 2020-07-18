@@ -1,0 +1,140 @@
+$_icon-size: 60px;
+$_hero-max-height: 340px;
+$_gap-size: 30px;
+
+.project-collection-header {
+  @include templateHead;
+  display: grid;
+  grid-template-areas:
+    'title'
+    'description';
+  grid-gap: $_gap-size;
+  margin-bottom: $_gap-size;
+  color: $neutral90;
+
+  // For the configurations where the description is at the
+  // bottom of the grid, but there is no description present.
+  // The cell will still exist but the content will not, so the
+  // grid-gap will serve as an unwanted additional bottom padding.
+  &--no-description {
+    margin-bottom: 0;
+  }
+
+  &--square {
+    grid-template-areas:
+      'title'
+      'image'
+      'description';
+
+    @include respond($break75) {
+      /* stylelint-disable declaration-block-no-redundant-longhand-properties */
+      // There is a bug where using 1fr as a unit in grid-template will cause an
+      // SCSS compilation error
+
+      grid-template-areas:
+        'image title'
+        'image description';
+      grid-template-rows: auto 1fr;
+      grid-template-columns: $_hero-max-height auto;
+      /* stylelint-enable declaration-block-no-redundant-longhand-properties */
+
+      // Add the margin bottom back in for the square configuration
+      // where the description is not at the bottom of the grid.
+      margin-bottom: $_gap-size;
+    }
+  }
+
+  &--wide {
+    grid-template-areas:
+      'title'
+      'image'
+      'description';
+  }
+
+  &--full {
+    grid-template-areas:
+      'image'
+      'title'
+      'description';
+  }
+
+  &__header {
+    display: flex;
+    grid-area: title;
+    align-items: center;
+    transition: color $duration $timing;
+
+    &--link {
+      text-decoration: none;
+    }
+  }
+
+  &__filter {
+    // While the designs would call for the standard gap size here,
+    // a little extra space should be given for the reset search button.
+    margin-bottom: $_gap-size + 10px;
+  }
+
+  &__title {
+    margin: 0;
+
+    // These two rules are temporary additions and should be eventually
+    // defined by the parent component
+    font-size: 26px;
+    font-weight: 500;
+  }
+
+  &__description {
+    grid-area: description;
+    hyphens: manual;
+    line-height: 1.5;
+    color: $neutral80;
+
+    @include respond($break95) {
+      max-width: 563px;
+    }
+  }
+
+  &__icon {
+    width: $_icon-size;
+    height: $_icon-size;
+    margin-right: 12px;
+
+    > .manicon-svg {
+      position: relative;
+      flex-shrink: 0;
+      color: $neutral45;
+    }
+  }
+
+  &__hero {
+    grid-area: image;
+    width: $_hero-max-height;
+    height: $_hero-max-height;
+    object-fit: cover;
+    object-position: center;
+
+    &--wide {
+      width: 100%;
+    }
+
+    &--full {
+      // Break the full bleed hero out of the container so it spans the
+      // full width of the page.
+      position: relative;
+      right: 50%;
+      left: 50%;
+      width: 100vw;
+      margin-top: -60px;
+      margin-bottom: 10px;
+      margin-left: -50vw;
+
+      @include respond($containerWidthInner) {
+        right: 0;
+        left: 0;
+        margin-right: calc(-100vw / 2 + #{$containerWidthInner} / 2);
+        margin-left: calc(-100vw / 2 + #{$containerWidthInner} / 2);
+      }
+    }
+  }
+}

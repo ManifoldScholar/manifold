@@ -41,7 +41,7 @@ class Fields extends Component {
           <Form.TextInput
             wide
             focusOnMount
-            label="Collection Title:"
+            label="Collection Title"
             name="attributes[title]"
             placeholder="Enter collection name"
           />
@@ -50,15 +50,33 @@ class Fields extends Component {
         <KindPicker {...this.props} />
         <Form.TextInput
           wide
-          label="Slug:"
+          label="Slug"
           name="attributes[pendingSlug]"
           placeholder="Enter URL slug"
         />
         <Form.TextArea
           wide
-          label="Description:"
+          label="Description"
           name="attributes[description]"
           placeholder="Enter description"
+        />
+        <Form.Upload
+          wide
+          layout="portrait"
+          label="Hero Image"
+          accepts="images"
+          readFrom="attributes[heroStyles][small]"
+          name="attributes[hero]"
+          remove="attributes[removeHero]"
+        />
+        <Form.Select
+          name="attributes[heroLayout]"
+          label="Hero Layout:"
+          options={[
+            { label: "Square Inset", value: "square_inset" },
+            { label: "Wide Inset", value: "wide_inset" },
+            { label: "Full Bleed", value: "full_bleed" }
+          ]}
         />
         <Form.Switch
           className="form-toggle-secondary"
@@ -92,6 +110,36 @@ class Fields extends Component {
           </>
         )}
         <IconPicker {...this.props} />
+        <Form.Upload
+          wide
+          layout="portrait"
+          label="Custom Icon"
+          accepts="images"
+          readFrom="attributes[customIconStyles][small]"
+          name="attributes[customIcon]"
+          remove="attributes[removeCustomIcon]"
+        />
+        <Form.Upload
+          wide
+          layout="portrait"
+          label="Social Card Image"
+          accepts="images"
+          readFrom="attributes[socialImageStyles][small]"
+          name="attributes[socialImage]"
+          remove="attributes[removeSocialImage]"
+        />
+        <Form.TextInput
+          wide
+          label="Social Card Title"
+          name="attributes[socialTitle]"
+          placeholder="Optionally, Enter a Social Card Title"
+        />
+        <Form.TextArea
+          wide
+          label="Social Card Description"
+          name="attributes[socialDescription]"
+          placeholder="Optionally, Enter a Social Card Description"
+        />
         <SmartAttributes {...this.props} />
       </>
     );

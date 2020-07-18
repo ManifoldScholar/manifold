@@ -15,10 +15,9 @@ const projectCollection = () => ({
     tagList: [],
     icon: "lamp",
     abilities: abilities(),
-
-    // mocked content
-    metaDescription: {},
-    heroLayout: Constants.SQUARE
+    heroLayout: Constants.SQUARE,
+    socialTitle: "Foo Bar",
+    socialDescription: "Bar Foo"
   },
   relationships: {
     collectionProjects: [],

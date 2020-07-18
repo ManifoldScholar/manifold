@@ -34,6 +34,12 @@ module V1
     typed_attribute :homepage_count, Types::Integer.optional
     typed_attribute :manually_sorted, Types::Bool.meta(read_only: true), &:manually_sorted?
     typed_attribute :projects_count, Types::Integer.meta(read_only: true), &:collection_projects_count
+    typed_attribute :custom_icon_styles, Types::Serializer::Attachment.meta(read_only: true)
+    typed_attribute :hero_styles, Types::Serializer::Attachment.meta(read_only: true)
+    typed_attribute :hero_layout, Types::String.enum("square_inset", "wide_inset", "full_bleed")
+    typed_attribute :social_description, Types::String.optional
+    typed_attribute :social_title, Types::String.optional
+    typed_attribute :social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
 
     typed_has_many :collection_projects do |object, params|
       object.collection_projects.projects_with_read_ability(params[:current_user])
