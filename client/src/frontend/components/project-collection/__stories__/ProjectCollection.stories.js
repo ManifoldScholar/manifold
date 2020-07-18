@@ -3,6 +3,8 @@ import { storiesOf, fixtures } from "helpers/storybook/exports";
 import { boolean, number, select, text } from "@storybook/addon-knobs";
 import { HelmetProvider } from "react-helmet-async";
 import ProjectCollection from "../index";
+
+// eslint-disable-next-line import/extensions
 import iconSVG from "test/assets/icon.png";
 import heroBackground from "test/assets/hero-bg.jpg";
 import squareHero from "test/assets/hero-square.jpg";
@@ -48,7 +50,7 @@ const bannerOptions = {
  * can take.
  */
 
- // eslint-disable-next-line prettier/prettier
+// eslint-disable-next-line prettier/prettier
 function createProjectCollectionWithImages(detailType, icon, description, title) {
   // create an object that will hold on to fields that the storybook knobs control
   // so we can modify the mock project collection data without mutating the original

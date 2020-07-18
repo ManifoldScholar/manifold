@@ -1,1 +1,126 @@
-@import 'header';
+.project-collection-header {
+  &_summary {
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+
+  &_filter {
+    // while the designs would call for 30px here, a little extra
+    // space should be given for the reset search button
+    margin-bottom: 40px;
+  }
+
+  &__wrapper {
+    width: 100%;
+
+    &_square {
+      display: block;
+
+      @include respond($break75) {
+        display: flex;
+      }
+    }
+
+    &_full {
+      margin-top: 0;
+    }
+  }
+
+  &__title {
+    margin-top: 0;
+    margin-bottom: 2px;
+    font-family: 'sofia-pro', 'trueno', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    hyphens: none;
+    line-height: 1.32;
+  }
+
+  &_description {
+    margin-bottom: 30px;
+    font-family: 'sofia-pro', 'trueno', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555555;
+
+    &__right {
+      width: 100%;
+
+      @include respond($break95) {
+        width: 50%;
+      }
+    }
+  }
+
+  &__icon {
+    width: 56px;
+    height: 56px;
+    margin-right: 14px;
+
+    &-title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 28px;
+      text-decoration: none;
+      transition: color $duration $timing;
+
+      &:visited {
+        color: inherit;
+      }
+
+      &:hover {
+        @include defaultHoverStyle;
+      }
+
+      > .manicon-svg {
+        position: relative;
+        top: 2px;
+        flex-shrink: 0;
+        width: 56px;
+        height: 56px;
+        margin-right: 6px;
+        margin-left: -4px;
+        color: #b3b3b3;
+      }
+    }
+  }
+
+  &__hero-image {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+
+    &_square {
+      width: 100%;
+      max-width: 340px;
+      height: 100%;
+      max-height: 340px;
+      margin-right: 30px;
+      margin-bottom: 30px;
+    }
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 340px;
+      overflow: hidden;
+
+      &_wide {
+        margin-bottom: 30px;
+      }
+
+      &_full {
+        // break the full bleed hero out of the container so it spans the
+        // full width of the page
+        position: relative;
+        right: 50%;
+        left: 50%;
+        width: 100vw;
+        margin-top: -60px;
+        margin-bottom: 30px;
+        margin-left: -50vw;
+      }
+    }
+  }
+}
