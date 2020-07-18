@@ -26,15 +26,16 @@ module Api
 
       # POST /project-collections
       def create
-        @project_collection =
-          authorize_and_create_project_collection(project_collection_params)
+        @project_collection = ::Updaters::ProjectCollection.new(project_collection_params)
+          .update(ProjectCollection.new(creator: current_user))
+        authorize_action_for @project_collection
         render_single_resource @project_collection, include: includes
       end
 
       # PATCH/PUT /project-collections/1
       def update
         @project_collection = load_and_authorize_project_collection
-        ::Updaters::Default.new(project_collection_params).update(@project_collection)
+        ::Updaters::ProjectCollection.new(project_collection_params).update(@project_collection)
         render_single_resource @project_collection,
                                pagination: params[:page],
                                include: includes

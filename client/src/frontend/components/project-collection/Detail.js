@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Filters from "./Filters";
 import ProjectList from "frontend/components/project-list";
-import IconComputed from "global/components/icon-computed";
 import Utility from "global/components/utility";
 import get from "lodash/get";
+import Header from "./Header";
+import Filters from "./Filters";
 
 export default class ProjectCollectionDetail extends Component {
   static displayName = "ProjectCollectionDetail";
@@ -20,47 +20,25 @@ export default class ProjectCollectionDetail extends Component {
     initialState: PropTypes.object
   };
 
-  get description() {
-    return this.props.projectCollection.attributes.descriptionFormatted;
+  get collectionAttributes() {
+    return this.props.projectCollection.attributes;
   }
 
   render() {
     const projectCollection = this.props.projectCollection;
     if (!projectCollection) return null;
 
-    const iconFill =
-      projectCollection.attributes.icon === "new-round"
-        ? "var(--accent-primary, #52e3ac)"
-        : "currentColor";
-
     return (
       <section key={projectCollection.id} className="bg-neutral05">
-        <div className="container entity-section-wrapper">
-          <div className="section-heading entity-section-wrapper__heading">
-            <div className="main">
-              <IconComputed.ProjectCollection
-                icon={projectCollection.attributes.icon}
-                size={56}
-                fill={iconFill}
-              />
-              <div className="body">
-                <h2 className="title">{projectCollection.attributes.title}</h2>
-              </div>
-            </div>
+        <div className="container">
+          <Header projectCollection={projectCollection} />
+          <div className="project-collection-header__filter">
+            <Filters
+              filterChangeHandler={this.props.filterChangeHandler}
+              initialState={this.props.initialState}
+            />
           </div>
-          <Filters
-            filterChangeHandler={this.props.filterChangeHandler}
-            initialState={this.props.initialState}
-          />
           <div className="entity-section-wrapper__details">
-            {this.description && (
-              <p
-                className="description"
-                dangerouslySetInnerHTML={{
-                  __html: this.description
-                }}
-              />
-            )}
             <Utility.EntityCount
               pagination={this.props.pagination}
               singularUnit="project"

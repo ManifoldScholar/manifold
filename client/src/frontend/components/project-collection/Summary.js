@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ProjectList from "frontend/components/project-list";
-import IconComputed from "global/components/icon-computed";
 import get from "lodash/get";
 import memoize from "lodash/memoize";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
-import { Link } from "react-router-dom";
+import Header from "./Header";
 
 export default class ProjectCollectionSummary extends Component {
   static displayName = "ProjectCollectionSummary";
@@ -32,10 +31,6 @@ export default class ProjectCollectionSummary extends Component {
     return this.props.projectCollection;
   }
 
-  get description() {
-    return this.collection.attributes.descriptionFormatted;
-  }
-
   get projects() {
     return this.mappedProjects(this.collection);
   }
@@ -56,47 +51,16 @@ export default class ProjectCollectionSummary extends Component {
 
   render() {
     if (!this.collection) return null;
+
     const backgroundClasses = classnames({
-      "project-collection-summary": true,
       "bg-neutral05":
         this.props.ordinal % 2 === (this.props.invertColor ? 1 : 0)
     });
-    const iconFill =
-      this.collection.attributes.icon === "new-round"
-        ? "var(--accent-primary, #52e3ac)"
-        : "currentColor";
 
     return (
       <section key={this.collection.id} className={backgroundClasses}>
-        <div className="container entity-section-wrapper">
-          <Link
-            className="section-heading entity-section-wrapper__heading"
-            to={lh.link(
-              "frontendProjectCollection",
-              this.collection.attributes.slug
-            )}
-          >
-            <div className="main">
-              <IconComputed.ProjectCollection
-                icon={this.collection.attributes.icon}
-                size={56}
-                fill={iconFill}
-              />
-              <div className="body">
-                <h2 className="title">{this.collection.attributes.title}</h2>
-              </div>
-            </div>
-          </Link>
-          {this.description && (
-            <div className="entity-section-wrapper__details">
-              <p
-                className="description"
-                dangerouslySetInnerHTML={{
-                  __html: this.description
-                }}
-              />
-            </div>
-          )}
+        <div className="container">
+          <Header projectCollection={this.props.projectCollection} hasLink />
           {this.hasProjects ? (
             <ProjectList.Grid
               authenticated={this.props.authentication.authenticated}

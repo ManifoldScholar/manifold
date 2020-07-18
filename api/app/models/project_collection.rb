@@ -8,11 +8,17 @@ class ProjectCollection < ApplicationRecord
   include Concerns::Entitleable
   include Concerns::HasFormattedAttributes
   include Filterable
+  include Attachments
   include TrackedCreator
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
   include Concerns::Taggable
   include Concerns::Sluggable
+
+  # Attachments
+  manifold_has_attached_file :custom_icon, :image
+  manifold_has_attached_file :hero, :image
+  manifold_has_attached_file :social_image, :image
 
   # Ordering
   acts_as_list
@@ -21,6 +27,12 @@ class ProjectCollection < ApplicationRecord
   has_formatted_attribute :description, include_wrap: false
 
   resourcify
+
+  enum hero_layout: {
+    square_inset: 0,
+    wide_inset: 1,
+    full_bleed: 2
+  }
 
   # Relationships
   has_many :collection_projects, -> { ranked }, dependent: :destroy, inverse_of: :project_collection
@@ -63,7 +75,7 @@ class ProjectCollection < ApplicationRecord
 
   # Validation
   validates :title, presence: true, uniqueness: true
-  validates :sort_order, :icon, presence: true
+  validates :sort_order, presence: true
   validates :number_of_projects, numericality: { only_integer: true,
                                                  greater_than_or_equal_to: 0 },
                                 allow_nil: true

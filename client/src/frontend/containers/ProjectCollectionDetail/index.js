@@ -14,7 +14,7 @@ import HeadContent from "global/components/HeadContent";
 import omitBy from "lodash/omitBy";
 import queryString from "query-string";
 import debounce from "lodash/debounce";
-
+import has from "lodash/has";
 import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
@@ -154,8 +154,38 @@ export class ProjectCollectionDetailContainer extends Component {
     );
   }
 
-  render() {
+  get description() {
+    const { projectCollection } = this.props;
+    if (!projectCollection) return null;
+    const {
+      descriptionPlaintext,
+      socialDescription
+    } = projectCollection.attributes;
+    return socialDescription || descriptionPlaintext;
+  }
+
+  get title() {
     const { projectCollection, settings } = this.props;
+    if (!projectCollection || !settings) return null;
+    const { socialTitle, title } = projectCollection.attributes;
+    return (
+      socialTitle ||
+      `\u201c${title}\u201d on ${settings.attributes.general.installationName}`
+    );
+  }
+
+  get image() {
+    const { projectCollection } = this.props;
+    if (!projectCollection) return null;
+    const { socialImageStyles, heroStyles } = projectCollection.attributes;
+    if (has(socialImageStyles, "mediumLandscape"))
+      return socialImageStyles.mediumLandscape;
+    if (has(heroStyles, "mediumLandscape")) return heroStyles.mediumLandscape;
+    return null;
+  }
+
+  render() {
+    const { projectCollection } = this.props;
     if (!projectCollection) return null;
 
     return (
@@ -169,10 +199,9 @@ export class ProjectCollectionDetailContainer extends Component {
           backText={"Back to Project Collections"}
         />
         <HeadContent
-          title={`\u201c${this.props.projectCollection.attributes.title}\u201d on ${settings.attributes.general.installationName}`}
-          description={
-            this.props.projectCollection.attributes.descriptionPlaintext
-          }
+          title={this.title}
+          description={this.description}
+          image={this.image}
         />
         <h1 className="screen-reader-text">
           {this.props.projectCollection.attributes.title}

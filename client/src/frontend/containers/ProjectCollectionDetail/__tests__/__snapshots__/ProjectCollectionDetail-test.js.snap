@@ -11,7 +11,9 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
     link="/projects/project-collections"
   />
   <Connect(WithSettings('HeadContentComponent))
-    title="“A Project Collection” on Manifold"
+    description="Bar Foo"
+    image={null}
+    title="Foo Bar"
   />
   <h1
     className="screen-reader-text"
@@ -62,11 +64,15 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
             "update": true,
             "updateMakers": true,
           },
+          "descriptionFormatted": "The publisher can include a descriptive sentence or paragraph to help describe this Collection. If you want to go this route it might be a good idea for the text describing your custom collection to be a little longer than a single short sentence.",
           "featuredOnly": false,
+          "heroLayout": "square_inset",
           "icon": "lamp",
           "manuallySorted": true,
           "numberOfProjects": null,
           "smart": false,
+          "socialDescription": "Bar Foo",
+          "socialTitle": "Foo Bar",
           "sortOrder": "manual",
           "tagList": Array [],
           "title": "A Project Collection",
