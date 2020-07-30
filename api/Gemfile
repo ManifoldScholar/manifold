@@ -142,9 +142,11 @@ group :development, :test do
 end
 
 group :development do
+  gem "debase"
   gem "pry-remote"
   gem "rubocop", "~> 0.60"
   gem "rubocop-rspec", "~> 1.32"
+  gem "ruby-debug-ide"
   gem "simplecov", require: false
   gem "spring", "~> 2.0"
   gem "spring-commands-rspec", "~> 1.0"

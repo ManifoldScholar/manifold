@@ -2,7 +2,13 @@
 require "dotenv"
 require "active_support/core_ext/object/blank"
 
-Dotenv.load
+rails_environment = ENV["RAILS_ENV"] || "development"
+
+Dotenv.load(
+  File.join(__dir__, "../../.env.local"),
+  File.join(__dir__, "../../.env.#{rails_environment}"),
+  File.join(__dir__, "../../.env")
+)
 
 listen_on_socket = ENV["API_CABLE_SOCKET"].present?
 listen_on_port = ENV["API_CABLE_PORT"].present? || !listen_on_socket
