@@ -37,7 +37,8 @@ module ExternalAuth
 
       # @return [void]
       def extract_custom_details!
-        user.name = auth_info["name"]
+        user.first_name = auth_info["first_name"]
+        user.last_name = auth_info["last_name"]
         user.nickname = auth_info["nickname"]
       end
     end

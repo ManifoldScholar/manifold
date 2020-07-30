@@ -6,7 +6,8 @@ module ManifoldEnv
     def initialize(
       name:, client_id:, client_secret:, host:,
       protocol: :https, endpoints: {}, descriptive_name: nil,
-      email_key: "email", name_key: "name", nickname_key: "nickname", uid_key: "id"
+      email_key: "email", first_name_key: "first_name", last_name_key: "last_name", 
+      nickname_key: "nickname", uid_key: "id"
     )
       @client_id     = client_id
       @client_secret = client_secret
@@ -16,7 +17,8 @@ module ManifoldEnv
       @endpoints     = parse_endpoints endpoints
       @descriptive_name = descriptive_name.presence || @name.to_s.titleize
       @email_key = email_key.to_s
-      @name_key = name_key.to_s
+      @first_name_key = first_name_key.to_s
+      @last_name_key = last_name_key.to_s
       @nickname_key = nickname_key.to_s
       @uid_key = uid_key.to_s
     end
@@ -49,7 +51,9 @@ module ManifoldEnv
     # @return [Symbol]
     attr_reader :name
 
-    attr_reader :name_key
+    attr_reader :first_name_key
+
+    attr_reader :last_name_key
 
     attr_reader :nickname_key
 
@@ -123,7 +127,8 @@ module ManifoldEnv
         info do
           {
             email: raw_info[provider.email_key],
-            name: raw_info[provider.name_key],
+            first_name: raw_info[provider.first_name_key],
+            last_name: raw_info[provider.last_name_key],
             nickname: raw_info[provider.nickname_key]
           }
         end
