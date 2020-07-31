@@ -21,7 +21,6 @@ RSpec.describe Packaging::Preservation::ExportProjectToBagIt, interaction: true,
       perform_within_expectation! do |e|
         e.to execute_safely.and change(ProjectExport, :count).by(1)
       end
-
       expect(@outcome).to be_valid
     end
 

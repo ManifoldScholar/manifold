@@ -12,6 +12,7 @@ module Packaging
       param :text_export, Types.Instance(TextExport)
 
       delegate :cover_original, to: :text
+      delegate :metadata, to: :text
       delegate :asset_path, to: :text_export
       delegate :content_type, to: :cover_original, prefix: :cover, allow_nil: true
 
@@ -58,6 +59,15 @@ module Packaging
         path_to epub_name
       end
 
+      # @!attribute [r] metadata_path
+      #
+      # The relative path for the text metdata within the bagit archive.
+      #
+      # @return [String]
+      memoize def metadata_path
+        path_to "metadata.json"
+      end
+
       # {Text#cover} is an optional attachment and may not always be present.
       # Make sure we have one before attempting to add it or do any processing.
       def has_cover?
@@ -82,6 +92,7 @@ module Packaging
       def build_entries(builder)
         builder.local! :cover, cover_path, cover_asset_path if has_cover?
         builder.local! :epub, epub_path, asset_path
+        builder.json! :metadata, metadata_path, metadata
       end
     end
   end
