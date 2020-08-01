@@ -238,6 +238,13 @@ const routes = {
       helper: () => `/login`
     },
     {
+      name: "frontendSignUp",
+      exact: true,
+      component: "SignUp",
+      path: "/signup",
+      helper: () => `/signup`
+    },
+    {
       name: "frontendContact",
       exact: true,
       component: "Contact",
