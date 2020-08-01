@@ -11,6 +11,7 @@ import find from "lodash/find";
 import values from "lodash/values";
 import capitalize from "lodash/capitalize";
 import LoginExternal from "./LoginExternal";
+import { has } from "lodash";
 
 const { request, flush } = entityStoreActions;
 
@@ -97,8 +98,16 @@ export class CreateContainer extends Component {
         )
       )
       .promise.then(() => {
-        if (!this.props.willRedirect)
+        if (!this.props.willRedirect && !this.props.redirectToHomeOnSignup)
           this.props.handleViewChange("account-create-update");
+        if (
+          this.props.redirectToHomeOnSignup &&
+          !has(this.props.location, "state.postLoginRedirect")
+        ) {
+          this.props.history.replace(this.props.location, {
+            postLoginRedirect: "/"
+          });
+        }
       });
   };
 

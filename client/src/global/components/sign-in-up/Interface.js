@@ -11,6 +11,7 @@ import { withRouter } from "react-router-dom";
 class SignInUpInterface extends Component {
   static propTypes = {
     withoutAccountUpdate: PropTypes.bool,
+    defaultToSignUp: PropTypes.bool,
     hideSignInUpOverlay: PropTypes.func,
     authentication: PropTypes.object,
     settings: PropTypes.object,
@@ -19,7 +20,8 @@ class SignInUpInterface extends Component {
 
   static defaultProps = {
     hideSignInUpOverlay: () => {},
-    withoutAccountUpdate: false
+    withoutAccountUpdate: false,
+    defaultToSignUp: false
   };
 
   constructor(props) {
@@ -31,7 +33,7 @@ class SignInUpInterface extends Component {
 
   defaultView(props) {
     const { authenticated } = props.authentication;
-    const { withoutAccountUpdate } = props;
+    const { withoutAccountUpdate, defaultToSignUp } = props;
     if (authenticated) {
       if (withoutAccountUpdate) {
         return "account-logout";
@@ -39,6 +41,7 @@ class SignInUpInterface extends Component {
         return "account-update";
       }
     } else {
+      if (defaultToSignUp) return "account-create";
       return "account-login";
     }
   }
@@ -73,6 +76,8 @@ class SignInUpInterface extends Component {
   childProps = () => {
     return {
       handleViewChange: this.updateView,
+      redirectToHomeOnSignup: this.props.defaultToSignUp,
+      history: this.props.history,
       settings: this.props.settings,
       dispatch: this.props.dispatch,
       location: this.props.location,
