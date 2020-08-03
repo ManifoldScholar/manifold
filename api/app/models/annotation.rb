@@ -144,7 +144,7 @@ class Annotation < ApplicationRecord
         .maybe_sans_public_annotations_not_owned_by(exclude_public, user)
         .where(arel_reading_groups_for_user(user, exclude_public))
     else
-      return none if exclude_public
+      return only_resource_annotations if exclude_public
 
       left_outer_joins(:reading_group)
         .non_private
@@ -161,6 +161,7 @@ class Annotation < ApplicationRecord
     where.not(text_section: nil)
   }
 
+  scope :only_resource_annotations, -> { where(format: TYPE_RESOURCE) }
   scope :sans_public_annotations_not_owned_by, ->(user) { where(arel_exclude_public_annotations_not_owned_by(user)) }
   scope :sans_private_annotations_not_owned_by, ->(user) { where(arel_exclude_private_annotations_not_owned_by(user)) }
   scope :non_private, -> { where(private: false) }
@@ -179,11 +180,14 @@ class Annotation < ApplicationRecord
 
     # @param [User, nil] user
     # @return [Arel::Nodes::Not]
+    # rubocop:disable Metrics/AbcSize
     def arel_exclude_public_annotations_not_owned_by(user)
       Arel::Nodes::Not.new(arel_table[:creator_id].not_eq(user&.id)
+                               .and(Arel::Nodes::Not.new(arel_table[:format].eq(TYPE_RESOURCE)))
                                .and(arel_table[:reading_group_id].eq(nil))
                                .and(arel_table[:private].eq(false)))
     end
+    # rubocop:enable Metrics/AbcSize
 
     def arel_reading_groups_for_user(user, with_membership_only = false)
       id_scope = if with_membership_only
