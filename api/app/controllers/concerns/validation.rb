@@ -330,6 +330,7 @@ module Validation
           :twitter_app_secret,
           :twitter_access_token_secret,
           :google_private_key,
+          :google_oauth_client_secret,
           :smtp_settings_password
         ]
       },
@@ -342,6 +343,7 @@ module Validation
           :google_private_key_id,
           :google_client_email,
           :google_client_id,
+          :google_oauth_client_id,
           :ga_tracking_id,
           :ga_profile_id
         ]
