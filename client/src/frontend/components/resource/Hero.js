@@ -40,7 +40,10 @@ export default class ResourceHero extends Component {
         break;
       case "interactive":
         output = (
-          <div className="resource-slide-figure resource-slide-interactive">
+          <div
+            style={{ minHeight: resource.attributes.minimumHeight }}
+            className="resource-slide-figure resource-slide-interactive"
+          >
             <ResourcePlayer.Iframe
               resource={resource}
               styleProps={{ minHeight: "100%" }}
