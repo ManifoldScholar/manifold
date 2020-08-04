@@ -28,11 +28,14 @@ RSpec.describe ExternalAuth::Provisioners::User, external_auth_provisioner: true
       expect_hooks! :twitter_details
 
       the_user_has do
-        set_attributes("set the twitter username to the user's nickname") do
+        set_attributes("set the user's nickname to the twitter nickname") do
           { nickname: "@#{auth_hash.info.nickname}" }
         end
 
-        set_static_attributes first_name: 'Twitter', last_name: 'User'
+        set_attributes("set the user's name to the twitter name") do
+          { name: auth_hash.info.name }
+        end
+
       end
     end
   end
