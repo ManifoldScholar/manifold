@@ -46,10 +46,10 @@
     grid-template:
       'figure title' auto
       'figure utility' auto / auto 1fr;
+    row-gap: 9px;
+    column-gap: 25px;
     -ms-grid-rows: auto 9px auto;
     -ms-grid-columns: auto 25px 1fr;
-    column-gap: 25px;
-    row-gap: 9px;
   }
 
   &__content-flex-wrapper {

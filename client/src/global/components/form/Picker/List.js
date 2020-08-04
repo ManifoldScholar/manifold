@@ -81,6 +81,7 @@ export default class PickerListComponent extends PureComponent {
     return <Row {...props} clickable={false} utility={utility} />;
   };
 
+  /* eslint-disable react/jsx-pascal-case */
   render() {
     return (
       <div className={this.props.className}>
@@ -96,4 +97,5 @@ export default class PickerListComponent extends PureComponent {
       </div>
     );
   }
+  /* eslint-enable react/jsx-pascal-case */
 }

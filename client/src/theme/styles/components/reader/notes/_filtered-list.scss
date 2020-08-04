@@ -59,14 +59,14 @@
     display: -ms-grid;
     display: grid;
     grid-template: 'icon label' auto / $iconSize 1fr;
+    column-gap: $columnGapMobile;
     align-items: center;
     -ms-grid-rows: auto;
     -ms-grid-columns: $iconSize $columnGapMobile 1fr;
-    column-gap: $columnGapMobile;
 
     @include respond($break50) {
-      -ms-grid-columns: $iconSize $columnGapDesktop 1fr;
       column-gap: $columnGapDesktop;
+      -ms-grid-columns: $iconSize $columnGapDesktop 1fr;
     }
   }
 

@@ -142,10 +142,10 @@
     grid-template:
       'icon link' auto
       'nested nested' auto / 32px 1fr;
+    column-gap: 12px;
     align-items: center;
     -ms-grid-rows: auto auto;
     -ms-grid-columns: 32px 12px 1fr;
-    column-gap: 12px;
   }
 
   &__link {
