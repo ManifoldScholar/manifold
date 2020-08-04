@@ -29,9 +29,9 @@
   // enhance with auto-placing grid if browser supports
   @supports (grid-auto-columns: min-content) {
     display: grid;
-    column-gap: $grid-gap;
-    row-gap: $grid-gap - $item-padding * 2;
     grid-template-columns:repeat(auto-fit, minmax($min-width, 1fr));
+    row-gap: $grid-gap - $item-padding * 2;
+    column-gap: $grid-gap;
     margin-top: $grid-gap;
 
     > * {

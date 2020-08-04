@@ -111,7 +111,7 @@
     "glob": "^7.0.0",
     "he": "^1.2.0",
     "hoist-non-react-statics": "^3.0",
-    "http-proxy-middleware": ">=0.17.2",
+    "http-proxy-middleware": "^0.17.2",
     "http-shutdown": "^1.2.0",
     "humps": "^2.0.0",
     "immutability-helper": "^3.x",

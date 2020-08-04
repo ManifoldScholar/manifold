@@ -86,11 +86,11 @@
     @include respond($layout-breakpoint) {
 
       grid-template-columns: 1fr minmax(220px, $right-column-width);
+      row-gap: $row-gap-medium;
+      column-gap: $column-gap-medium;
       padding-right: 20px;
 
       padding-left: 20px;
-      row-gap: $row-gap-medium;
-      column-gap: $column-gap-medium;
       -ms-grid-rows: auto $row-gap-medium auto;
       -ms-grid-columns: 1fr $column-gap-medium minmax(220px, $right-column-width);
     }
