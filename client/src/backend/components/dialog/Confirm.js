@@ -68,7 +68,6 @@ export default class DialogConfirm extends PureComponent {
   handleKeyPress = event => {
     event.preventDefault();
     if (event.keyCode === 27) return this.handleRejectClick(event);
-    if (event.keyCode === 13) return this.handleResolveClick(event);
   };
 
   handleResolveClick = event => {

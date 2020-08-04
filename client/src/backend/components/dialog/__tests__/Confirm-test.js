@@ -53,9 +53,4 @@ describe("backend/components/dialog/Confirm", () => {
     expect($rejectMock).toHaveBeenCalled();
   });
 
-  it("should trigger resolve callback when enter is pressed", () => {
-    mount($withApp($root));
-    map.keyup({ keyCode: 13, preventDefault() {} });
-    expect($resolveMock).toHaveBeenCalled();
-  });
 });
