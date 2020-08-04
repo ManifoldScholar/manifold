@@ -27,12 +27,9 @@ module ExternalAuth
         end
       end
 
-      # @note Limitation of the twitter API: we cannot currently
-      #   get first & last name from the data fetched by omniauth
       def twitter_details
         user.nickname = "@#{auth_info.nickname}"
-        user.first_name = "Twitter"
-        user.last_name = "User"
+        user.name = auth_info.name
       end
 
       # @return [void]
