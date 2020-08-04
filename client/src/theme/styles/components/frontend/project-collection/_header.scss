@@ -129,9 +129,8 @@ $_gap-size: 30px;
       margin-bottom: 10px;
       margin-left: -50vw;
 
-      @include respond($containerWidthInner) {
-        right: 0;
-        left: 0;
+      @include respond($containerWidthFull) {
+        position: static;
         margin-right: calc(-100vw / 2 + #{$containerWidthInner} / 2);
         margin-left: calc(-100vw / 2 + #{$containerWidthInner} / 2);
       }

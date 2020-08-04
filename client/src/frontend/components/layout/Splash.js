@@ -28,6 +28,10 @@ export default class Splash extends Component {
     this.sizeForeground();
   }
 
+  get foregroundPosition() {
+    return get(this.props.feature, "attributes.foregroundPosition");
+  }
+
   foregroundStyle() {
     const top = get(this.props.feature, "attributes.foregroundTop");
     const left = get(this.props.feature, "attributes.foregroundLeft");
@@ -39,10 +43,10 @@ export default class Splash extends Component {
     if (!this.imgEl) return;
     if (!this.rightEl) return;
     const containerWidth = this.rightEl.offsetWidth;
-    this.imgEl.style.position = get(
-      this.props.feature,
-      "attributes.foregroundPosition"
-    );
+    this.imgEl.style.position = this.foregroundPosition;
+    if (this.foregroundPosition === "absolute") {
+      this.imgEl.style.zIndex = 1;
+    }
     if (this.imgEl.offsetWidth > containerWidth) {
       this.imgEl.style.width = `${containerWidth}px`;
       this.imgEl.style.maxWidth = `${this.imgEl.naturalWidth}px`;
