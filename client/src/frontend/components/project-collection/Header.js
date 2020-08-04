@@ -161,9 +161,12 @@ export default class ProjectCollectionHeader extends PureComponent {
   get description() {
     if (!this.collectionAttributes.descriptionFormatted) return null;
     return (
-      <p className="project-collection-header__description">
-        {this.collectionAttributes.descriptionFormatted}
-      </p>
+      <p
+        className="project-collection-header__description"
+        dangerouslySetInnerHTML={{
+          __html: this.collectionAttributes.descriptionFormatted
+        }}
+      />
     );
   }
 
