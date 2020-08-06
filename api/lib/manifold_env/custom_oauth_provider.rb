@@ -6,7 +6,7 @@ module ManifoldEnv
     def initialize(
       name:, client_id:, client_secret:, host:,
       protocol: :https, endpoints: {}, descriptive_name: nil,
-      email_key: "email", first_name_key: "first_name", last_name_key: "last_name", 
+      email_key: "email", first_name_key: "first_name", last_name_key: "last_name",
       nickname_key: "nickname", uid_key: "id"
     )
       @client_id     = client_id
