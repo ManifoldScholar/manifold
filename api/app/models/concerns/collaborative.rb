@@ -33,6 +33,6 @@ module Collaborative
   end
 
   def creator_names_array
-    creators.order(:position).map(&:full_name)
+    creators.map(&:full_name)
   end
 end
