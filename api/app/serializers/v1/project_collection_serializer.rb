@@ -42,7 +42,7 @@ module V1
     typed_attribute :social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
 
     typed_has_many :collection_projects do |object, params|
-      object.collection_projects.projects_with_read_ability(params[:current_user])
+      object.collection_projects.projects_with_read_ability(params[:current_user]).eager_load(:project_summary)
     end
 
     when_full do

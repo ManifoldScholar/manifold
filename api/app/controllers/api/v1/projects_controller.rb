@@ -6,7 +6,7 @@ module Api
       resourceful! Project, authorize_options: { except: [:index, :show] } do
         Project.filtered(
           with_pagination!(project_filter_params),
-          scope: scope_visibility,
+          scope: scope_visibility.includes(:creators),
           user: current_user
         )
       end

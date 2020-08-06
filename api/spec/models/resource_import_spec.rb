@@ -95,6 +95,10 @@ end
 
 RSpec.describe ResourceImport, type: :model, slow: true do
 
+  before(:all) do
+    Settings.instance.update_from_environment!
+  end
+
   include_context "resource import"
 
   let(:resource_import) {
