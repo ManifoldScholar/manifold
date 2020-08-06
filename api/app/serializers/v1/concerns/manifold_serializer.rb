@@ -140,6 +140,8 @@ module V1
         end
 
         def calculate_abilities(object, params)
+          return { read: true } unless params[:action] != "index" && object.respond_to?(:serialized_abilities_for)
+
           object.serialized_abilities_for(params[:authority_user])
         end
       end

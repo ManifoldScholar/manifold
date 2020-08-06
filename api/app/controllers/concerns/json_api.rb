@@ -83,6 +83,7 @@ module JsonApi
 
   def build_params(options, _collection)
     params = (options[:params] || {})
+    params[:action] = request.params[:action]
     params[:current_user] = current_user
     params[:authority_user] = authority_user
     params[:pagination] = request.params[:page]

@@ -10,8 +10,6 @@ class ProjectSummary < ApplicationRecord
 
   manifold_has_attached_file :avatar, :image
 
-  delegate :serialized_abilities_for, to: :project
-
   serialize :toc, Array
 
   def readonly?

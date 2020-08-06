@@ -69,14 +69,7 @@ export default class ProjectRow extends PureComponent {
 
   get url() {
     if (this.props.renderWithoutLink) return null;
-    if (
-      this.project.attributes.abilities &&
-      (this.project.attributes.abilities.update === true ||
-        this.project.attributes.abilities.manageResources === true)
-    ) {
-      return lh.link("backendProject", this.id);
-    }
-    return lh.link("frontendProjectDetail", this.id);
+    return lh.link("backendProject", this.id);
   }
 
   get label() {
