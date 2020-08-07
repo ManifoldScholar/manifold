@@ -89,6 +89,10 @@ RSpec.describe Ingestions::Strategies::Manifest do
   end
 
   context "when the manifest is composed of nested, remote sources", slow: true do
+    before(:all) do
+      Settings.instance.update_from_environment!
+    end
+
     let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_remote") }
     let(:ingestion) do
       ingestion = FactoryBot.create(:ingestion, text: nil)

@@ -51,6 +51,11 @@ RSpec.describe Ingestions::Pickers::Strategy do
   end
 
   context "when a google doc", slow: true do
+
+    before(:all) do
+      Settings.instance.update_from_environment!
+    end
+
     url = "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/edit?usp=sharing"
 
     the_subject_behaves_like "assigned strategy", url, :document

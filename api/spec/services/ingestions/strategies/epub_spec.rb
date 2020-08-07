@@ -140,6 +140,7 @@ RSpec.describe Ingestions::Strategies::Epub do
 
   context "when url", slow: true do
     before(:all) do
+      Settings.instance.update_from_environment!
       @path = "https://storage.googleapis.com/manifold-assets/spec/e-t-a-hoffmann_master-flea.epub3"
       ingestion = FactoryBot.create(:ingestion, external_source_url: @path, text: nil)
       WebMock.allow_net_connect!

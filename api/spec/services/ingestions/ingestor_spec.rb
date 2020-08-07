@@ -77,6 +77,11 @@ RSpec.describe Ingestions::Ingestor do
     end
 
     context "when Google Doc", slow: true do
+
+      before(:all) do
+        Settings.instance.update_from_environment!
+      end
+
       let(:path) { "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/edit?usp=sharing" }
       let(:ingestion) do
         ingestion = FactoryBot.create(:ingestion, text: nil)

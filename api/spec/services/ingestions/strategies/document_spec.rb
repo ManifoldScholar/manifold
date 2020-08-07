@@ -259,6 +259,7 @@ RSpec.describe Ingestions::Strategies::Document do
   context "when google doc", slow: true do
 
     before(:all) do
+      Settings.instance.update_from_environment!
       url = "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/edit?usp=sharing"
       ingestion = FactoryBot.create(:ingestion, external_source_url: url)
       WebMock.allow_net_connect!

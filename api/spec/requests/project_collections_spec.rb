@@ -20,7 +20,7 @@ RSpec.describe "Project Collections API", type: :request do
     end
   end
 
-  describe "sends a single project" do
+  describe "sends a single project collection" do
     let(:path) { api_v1_project_collection_path(project_collection) }
 
     context "when the user is an reader" do
