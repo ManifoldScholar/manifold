@@ -3,6 +3,10 @@ require "rails_helper"
 RSpec.describe Ingestions::Compiler do
   include TestHelpers::IngestionHelper
 
+  before(:all) do
+    Settings.instance.update_from_environment!
+  end
+
   describe "an epub ingestion" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
     let(:ingestion) do

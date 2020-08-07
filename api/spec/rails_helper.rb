@@ -79,7 +79,7 @@ RSpec.configure do |config|
   # Truncate all test database tables before running tests.
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:deletion, except: %w(settings))
+    DatabaseCleaner.clean_with(:deletion)
   end
 
   config.after(:suite) do
