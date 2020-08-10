@@ -139,8 +139,12 @@ module V1
           object.creator == params[:current_user]
         end
 
+        def include_abilities?(object, params)
+          params[:action] != "index" && object.respond_to?(:serialized_abilities_for)
+        end
+
         def calculate_abilities(object, params)
-          return { read: true } unless params[:action] != "index" && object.respond_to?(:serialized_abilities_for)
+          return { read: true } unless include_abilities?(object, params)
 
           object.serialized_abilities_for(params[:authority_user])
         end

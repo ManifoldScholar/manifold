@@ -22,5 +22,10 @@ module V1
     typed_attribute :renderable, Types::Bool.meta(read_only: true), &:renderable?
 
     typed_belongs_to :project
+
+    def self.include_abilities?(_object, _params)
+      true
+    end
+
   end
 end
