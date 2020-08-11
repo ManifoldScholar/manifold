@@ -74,13 +74,18 @@ class Button extends Component {
     );
 
     return (
-      <button
-        className="button-secondary button-secondary--dark"
+      <span
+        className="site-nav__link show-75"
         onClick={this.openWindow}
+        style={{
+          cursor: "pointer",
+          float: "right",
+          margin: "10px 0",
+        }}
       >
         {icon}
         {label}
-      </button>
+      </span>
     );
   }
 }
