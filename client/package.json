@@ -160,7 +160,7 @@
     "redux-actions": "^2.0",
     "redux-promise": "^0.6",
     "redux-thunk": "^2.0.1",
-    "serialize-javascript": "^2.x",
+    "serialize-javascript": "^3.x",
     "serve-static": "^1.13.2",
     "swagger-ui-react": "^3.25.0",
     "text-mask-addons": "^3.7.1",
