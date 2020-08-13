@@ -5,6 +5,7 @@ import SearchMenu from "global/components/search/menu";
 import UserMenuButton from "global/components/UserMenuButton";
 import UserMenuBody from "global/components/UserMenuBody";
 import UIPanel from "global/components/UIPanel";
+import LoginExternal from "global/components/sign-in-up/LoginExternal";
 import { NavLink, withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
@@ -204,7 +205,11 @@ export class NavigationStatic extends PureComponent {
     return (
       <>
         {this.hasLinks && this.renderSiteNav()}
-        {this.renderUserMenu(this.props)}
+        {/* {this.renderUserMenu(this.props)} */}
+        <LoginExternal
+          settings={this.props.settings}
+          dispatch={this.props.dispatch}
+        />
       </>
     );
   }
