@@ -6,7 +6,8 @@ oauth:
     host: external-provider.com
     protocol: https
     email_key: 'email'
-    name_key: 'name'
+    first_name_key: 'first_name'
+    last_name_key: 'last_name'
     nickname_key: 'nickname'
     uid_key: 'id'
     endpoints:
