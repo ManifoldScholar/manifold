@@ -29,8 +29,8 @@ module Api
 
       def create
         @user = ::Updaters::User.new(user_params).update(User.new)
-        include_password = user_params.dig("data", "meta", "created_by_admin") == true
-        AccountMailer.welcome(@user, include_password).deliver if @user.valid?
+        created_by_admin = user_params.dig("data", "meta", "created_by_admin") == true
+        AccountMailer.welcome(@user, created_by_admin: created_by_admin).deliver if @user.valid?
         render_single_resource @user
       end
 

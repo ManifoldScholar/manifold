@@ -142,7 +142,7 @@ class Annotation < ApplicationRecord
       left_outer_joins(:reading_group)
         .sans_private_annotations_not_owned_by(user)
         .maybe_sans_public_annotations_not_owned_by(exclude_public, user)
-        .where(arel_reading_groups_for_user(user, exclude_public))
+        .where(arel_reading_groups_for_user(user, with_membership_only: exclude_public))
     else
       return only_resource_annotations if exclude_public
 
@@ -189,7 +189,7 @@ class Annotation < ApplicationRecord
     end
     # rubocop:enable Metrics/AbcSize
 
-    def arel_reading_groups_for_user(user, with_membership_only = false)
+    def arel_reading_groups_for_user(user, with_membership_only: false)
       id_scope = if with_membership_only
                    ReadingGroupMembership.joined_reading_group_ids_for(user)
                  else

@@ -31,7 +31,7 @@ namespace :manifold do
         args[:path],
         cli_user,
         Manifold::Rake.logger
-      ).import(include_texts)
+      ).import(include_texts: include_texts)
     end
 
     namespace :import do

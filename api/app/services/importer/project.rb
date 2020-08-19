@@ -13,7 +13,7 @@ module Importer
       @logger.error(e)
     end
 
-    def import(include_texts = true)
+    def import(include_texts: true)
       ApplicationRecord.transaction { upsert_project(include_texts) } if @project_json
     rescue StandardError => e
       @logger.error "Unable to import project at #{@path}"

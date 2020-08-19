@@ -79,7 +79,7 @@ class ApplicationController < ActionController::API
     render json: resource
   end
 
-  def authorization_error_status(symbol = false)
+  def authorization_error_status(symbol: false)
     if current_user
       return :forbidden if symbol
 
@@ -97,7 +97,7 @@ class ApplicationController < ActionController::API
       title: I18n.t("controllers.errors.forbidden.class.title", vars).titlecase,
       detail: I18n.t("controllers.errors.forbidden.class.detail", vars)
     }
-    render json: { errors: build_api_error(options) }, status: authorization_error_status(true)
+    render json: { errors: build_api_error(options) }, status: authorization_error_status(symbol: true)
   end
 
   def authority_forbidden_resource_instance(error)
@@ -108,7 +108,7 @@ class ApplicationController < ActionController::API
       detail: I18n.t("controllers.errors.forbidden.instance.detail", vars),
       project: error_project_details(error)
     }
-    render json: { errors: build_api_error(options) }, status: authorization_error_status(true)
+    render json: { errors: build_api_error(options) }, status: authorization_error_status(symbol: true)
   end
 
   def respond_with_forbidden(resource, action)
@@ -118,7 +118,7 @@ class ApplicationController < ActionController::API
       title: I18n.t("controllers.errors.forbidden.instance.title", vars).titlecase,
       detail: I18n.t("controllers.errors.forbidden.instance.detail", vars)
     }
-    render json: { errors: build_api_error(options) }, status: authorization_error_status(true)
+    render json: { errors: build_api_error(options) }, status: authorization_error_status(symbol: true)
   end
 
   def resource_not_found

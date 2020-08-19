@@ -13,7 +13,7 @@ class AccountMailerPreview < ActionMailer::Preview
 
   # Accessible from http://manifold.lvh/rails/mailers/account_mailer/welcome_when_created_by_admin.html
   def welcome_when_created_by_admin
-    AccountMailer.welcome(user, true)
+    AccountMailer.welcome(user, created_by_admin: true)
   end
 
   # Accessible from http://manifold.lvh/rails/mailers/account_mailer/password_change_notification.html
