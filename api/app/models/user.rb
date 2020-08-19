@@ -127,7 +127,7 @@ class User < ApplicationRecord
   end
 
   def send_welcome_email
-    AccountMailer.welcome(self, false).deliver
+    AccountMailer.welcome(self, created_by_admin: false).deliver
   end
 
   def created?(resource)

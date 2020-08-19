@@ -154,7 +154,7 @@ class Resource < ApplicationRecord
     !variant_thumbnail.present? || previous_changes.key?(:external_id)
   end
 
-  def queue_fetch_thumbnail(force = false)
+  def queue_fetch_thumbnail(force: false)
     unless force
       return unless fetch_thumbnail?
     end

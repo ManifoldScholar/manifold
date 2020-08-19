@@ -392,7 +392,7 @@ class Project < ApplicationRecord
     def build_read_ability_scope_for(user = nil)
       return published unless user.present?
 
-      where(arel_build_read_case_statement_for(user, false))
+      where(arel_build_read_case_statement_for(user, full: false))
     end
 
     # @see .arel_build_read_case_statement_for
@@ -401,7 +401,7 @@ class Project < ApplicationRecord
     def build_full_read_ability_scope_for(user = nil)
       return published.unrestricted unless user.present?
 
-      where(arel_build_read_case_statement_for(user, true))
+      where(arel_build_read_case_statement_for(user, full: true))
     end
 
     # @param [User, nil] user
@@ -422,7 +422,7 @@ class Project < ApplicationRecord
     #   access to it
     #
     # @param [User, nil] user
-    def arel_build_read_case_statement_for(user, full = false)
+    def arel_build_read_case_statement_for(user, full: false)
       arel_case.tap do |stmt|
         stmt.when(arel_table[:draft]).then(arel_with_draft_roles_for(user))
         if full

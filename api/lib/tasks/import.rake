@@ -11,7 +11,7 @@ namespace :manifold do
       children.each do |child|
         next if File.file?(File.join(child, ".skip"))
 
-        Importer::Project.new(child, user, logger).import(include_texts)
+        Importer::Project.new(child, user, logger).import(include_texts: include_texts)
       end
     end
 
