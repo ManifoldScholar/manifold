@@ -8,7 +8,6 @@ class Text < ApplicationRecord
   include Concerns::SerializedAbilitiesFor
   include Concerns::Sluggable
   include Concerns::StoresFingerprints
-  include WithMarkdown
   extend Memoist
   include Collaborative
   include Citable

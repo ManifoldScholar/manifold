@@ -17,7 +17,6 @@ class Resource < ApplicationRecord
   include Concerns::SerializedAbilitiesFor
   include TrackedCreator
   include Filterable
-  include WithMarkdown
   include Attachments
   include ResourceAttachmentValidation
   include ResourceAttributeResets

@@ -27,7 +27,6 @@ class Project < ApplicationRecord
   include Collaborative
   include Citable
   include MoneyAttributes
-  include WithMarkdown
   include TruthyChecks
   include Filterable
   include Attachments
