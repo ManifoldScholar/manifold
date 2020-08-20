@@ -1,7 +1,7 @@
 module Packaging
   module Exportation
     class ExportTextToEpubV3 < ActiveInteraction::Base
-      include Concerns::MonadicInteraction
+      include MonadicInteraction
       include Packaging::EpubV3::Import[book_pipeline: "book_compilation.pipeline"]
 
       record :text

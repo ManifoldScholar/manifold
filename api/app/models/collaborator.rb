@@ -8,7 +8,7 @@ class Collaborator < ApplicationRecord
 
   # Authority
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   self.authorizer_name = "ProjectChildAuthorizer"
 
   # Associations

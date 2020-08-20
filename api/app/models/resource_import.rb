@@ -7,7 +7,7 @@ class ResourceImport < ApplicationRecord
 
   # Authorization
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   self.authorizer_name = "ProjectRestrictedChildAuthorizer"
 
   belongs_to :project, inverse_of: :resource_imports

@@ -1,9 +1,7 @@
-module Concerns
-  module ReceivesEntitlements
-    extend ActiveSupport::Concern
+module ReceivesEntitlements
+  extend ActiveSupport::Concern
 
-    included do
-      has_many :entitlements, as: :target, dependent: :destroy
-    end
+  included do
+    has_many :entitlements, as: :target, dependent: :destroy
   end
 end

@@ -1,7 +1,7 @@
 module TextSections
   # Calculate the fingerprint for a {TextSection}
   class CalculateFingerprint < ActiveInteraction::Base
-    include Concerns::FingerprintInteraction
+    include FingerprintInteraction
 
     fingerprint_target! :text_section
 

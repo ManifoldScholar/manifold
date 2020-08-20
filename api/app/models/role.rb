@@ -1,5 +1,5 @@
 class Role < ApplicationRecord
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
 
   scopify
 

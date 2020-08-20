@@ -2,7 +2,7 @@ shared_examples_for "an API destroy request" do |options|
   include_context("authenticated request")
   include_context("param helpers")
 
-  api_spec_helper = ApiDocs::Helpers::Request.new(options, :destroy)
+  api_spec_helper = APIDocs::Helpers::Request.new(options, :destroy)
 
   let(:resource_instance) do
     defined?(resource) ? resource : FactoryBot.create(api_spec_helper.factory)

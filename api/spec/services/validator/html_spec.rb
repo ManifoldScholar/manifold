@@ -1,7 +1,7 @@
 require "rails_helper"
 
 # rubocop:disable Style/StringLiteralsInInterpolation
-RSpec.describe Validator::Html do
+RSpec.describe Validator::HTML do
 
   html_config = Rails.configuration.manifold.html_validator
   excluded_css_properties = [
@@ -14,7 +14,7 @@ RSpec.describe Validator::Html do
     'max-width'
   ]
 
-  let(:validator) { Validator::Html.new }
+  let(:validator) { Validator::HTML.new }
 
   it "handles ASCII encoding" do
     pointer = File.open(Rails.root.join('spec','data','ingestion','fragments','ascii_section.html'))

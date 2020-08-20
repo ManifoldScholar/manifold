@@ -1,4 +1,4 @@
-module Api
+module API
   module V1
     # Adds resourceful methods to a controller
     class ResourcefulMethods < Module
@@ -34,7 +34,7 @@ module Api
       end
 
       def inspect
-        "Api::V1::ResourcefulMethods(#{model_name})"
+        "API::V1::ResourcefulMethods(#{model_name})"
       end
 
       # @param [ApplicationController] controller

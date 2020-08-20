@@ -1,5 +1,5 @@
 class TextExport < ApplicationRecord
-  include Concerns::HasExportKind
+  include HasExportKind
   include ExportUploader::Attachment.new(:asset)
 
   belongs_to :text, inverse_of: :text_exports

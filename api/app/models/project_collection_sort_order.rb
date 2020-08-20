@@ -1,3 +1,3 @@
 class ProjectCollectionSortOrder < ApplicationRecord
-  include Concerns::MaterializedView
+  include MaterializedView
 end

@@ -7,7 +7,7 @@ const textSection = () => ({
   attributes: {
     name: "Title Page",
     metadataProperties: Object.keys(metadata()),
-    bodyJson: {
+    bodyJSON: {
       tag: "section",
       nodeType: "element",
       attributes: {

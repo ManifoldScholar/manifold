@@ -1,7 +1,7 @@
 # A collection of resources
 class ResourceCollection < ApplicationRecord
 
-  include Concerns::HasFormattedAttributes
+  include HasFormattedAttributes
 
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
@@ -10,8 +10,8 @@ class ResourceCollection < ApplicationRecord
   include Filterable
   include Attachments
   include Authority::Abilities
-  include Concerns::Sluggable
-  include Concerns::SerializedAbilitiesFor
+  include Sluggable
+  include SerializedAbilitiesFor
 
   self.authorizer_name = "ProjectChildAuthorizer"
 

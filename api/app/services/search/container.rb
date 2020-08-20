@@ -1,7 +1,7 @@
 module Search
   # Reusable definitions for search services.
   class Container
-    include Concerns::IntrospectiveContainer
+    include IntrospectiveContainer
 
     FIELD_DEFINITIONS = [
       { name: "title", raw_boost: 50.0 },

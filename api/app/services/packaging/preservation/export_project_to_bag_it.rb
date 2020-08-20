@@ -5,7 +5,7 @@ module Packaging
     # @see Packaging::BagItSpec::Compilation::Pipeline
     # @see ProjectExport
     class ExportProjectToBagIt < ActiveInteraction::Base
-      include Concerns::MonadicInteraction
+      include MonadicInteraction
       include Packaging::BagItSpec::Import[bagit_pipeline: "compilation.pipeline"]
 
       record :project

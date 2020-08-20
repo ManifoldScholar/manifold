@@ -125,7 +125,7 @@ module Types
   class FlexibleStruct < Dry::Struct
     extend Memoist
 
-    include Concerns::Sliceable
+    include Sliceable
 
     transform_keys(&:to_sym)
 

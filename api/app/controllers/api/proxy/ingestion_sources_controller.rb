@@ -1,4 +1,4 @@
-module Api
+module API
   module Proxy
     class IngestionSourcesController < ActionController::API
 

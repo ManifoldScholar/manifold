@@ -6,11 +6,11 @@ class User < ApplicationRecord
   # Concerns
   include Authority::Abilities
   include Authority::UserAbilities
-  include Concerns::SerializedAbilitiesOn
-  include Concerns::SerializedAbilitiesFor
-  include Concerns::NotificationPreferences
-  include Concerns::ProvidesEntitlements
-  include Concerns::ReceivesEntitlements
+  include SerializedAbilitiesOn
+  include SerializedAbilitiesFor
+  include NotificationPreferences
+  include ProvidesEntitlements
+  include ReceivesEntitlements
   include Filterable
   include Recoverable
   include Attachments

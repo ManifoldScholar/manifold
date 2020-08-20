@@ -1,7 +1,7 @@
 class EntitlementTarget < ApplicationRecord
   include Authority::Abilities
-  include Concerns::View
-  include Concerns::SerializedAbilitiesFor
+  include View
+  include SerializedAbilitiesFor
 
   self.primary_key = :target_url
 

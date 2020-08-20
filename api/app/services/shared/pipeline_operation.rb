@@ -19,21 +19,21 @@ module Shared
       interaction.run_as_monad(inputs, &block)
     end
 
-    # @param [Concerns::HasStateMachine] stateful
+    # @param [HasStateMachine] stateful
     # @param [Symbol] target_state
     # @return [Dry::Monads::Result]
     def monadic_can_transition_to!(stateful, target_state)
       Utility::MonadicStateOperation.new(stateful).can_transition_to target_state
     end
 
-    # @param [Concerns::HasStateMachine] stateful
+    # @param [HasStateMachine] stateful
     # @param [Symbol] target_state
     # @return [Dry::Monads::Result]
     def monadic_in_state!(stateful, target_state)
       Utility::MonadicStateOperation.new(stateful).in_state target_state
     end
 
-    # @param [Concerns::HasStateMachine] stateful
+    # @param [HasStateMachine] stateful
     # @param [Symbol] target_state
     # @return [Dry::Monads::Result]
     def monadic_transition_to!(stateful, target_state)

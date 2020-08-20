@@ -27,7 +27,7 @@ RSpec.describe Ingestions::Pickers::Fetcher do
       "https://my-wobsite.com/index.html"
     }
     it "returns the correct fetcher" do
-      expect(outcome.result.interaction).to eq Ingestions::Fetchers::Url
+      expect(outcome.result.interaction).to eq Ingestions::Fetchers::URL
     end
   end
 

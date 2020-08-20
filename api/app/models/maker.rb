@@ -8,7 +8,7 @@ class Maker < ApplicationRecord
   include Filterable
   include Attachments
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   include WithParsedName
 
   # Associations

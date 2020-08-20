@@ -1,4 +1,4 @@
-module ApiDocumentation
+module APIDocumentation
   class DryTypesParser
     class << self
       def convert(type)

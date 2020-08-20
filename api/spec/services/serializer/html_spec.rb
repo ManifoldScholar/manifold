@@ -1,8 +1,8 @@
 require "rails_helper"
 
 # rubocop:disable Layout/LineLength
-RSpec.describe Serializer::Html do
-  let(:serializer) { Serializer::Html.new }
+RSpec.describe Serializer::HTML do
+  let(:serializer) { Serializer::HTML.new }
 
   it "should wrap top level siblings in a div element" do
     node = "<p>AAA</p><p>BBB</p>"

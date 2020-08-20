@@ -1,5 +1,5 @@
 class CollectionProjectRanking < ApplicationRecord
-  include Concerns::View
+  include View
 
   belongs_to :collection_project, optional: false
   belongs_to :project_collection

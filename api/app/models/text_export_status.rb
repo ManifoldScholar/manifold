@@ -1,5 +1,5 @@
 class TextExportStatus < ApplicationRecord
-  include Concerns::ExportStatusView
+  include ExportStatusView
 
   configure!
 end

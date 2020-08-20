@@ -1,6 +1,6 @@
 class ProjectExport < ApplicationRecord
   include ArchiveUploader::Attachment.new(:asset)
-  include Concerns::HasExportKind
+  include HasExportKind
 
   belongs_to :project, inverse_of: :project_exports
   has_many :project_export_statuses, inverse_of: :project_export

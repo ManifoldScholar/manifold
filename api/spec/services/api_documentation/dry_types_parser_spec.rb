@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ::ApiDocumentation::DryTypesParser do
+RSpec.describe ::APIDocumentation::DryTypesParser do
   let(:types) { Dry::Types }
   let(:serializer_types) { ::Types::Serializer }
 

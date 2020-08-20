@@ -1,4 +1,4 @@
-module Api
+module API
   module V1
     class EntitlementsController < ApplicationController
       resourceful! Entitlement, authorize_options: { except: [:index] } do

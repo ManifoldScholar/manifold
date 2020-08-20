@@ -3,7 +3,7 @@ class Tag < ActsAsTaggableOn::Tag
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   include Filterable
 
   scope :by_kind, lambda { |kind|

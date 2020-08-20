@@ -1,13 +1,13 @@
 require "rails_helper"
 
-RSpec.describe Ingestions::Converters::Html do
+RSpec.describe Ingestions::Converters::HTML do
   let(:ingestion) do
     ingestion = FactoryBot.create(:ingestion, text: nil)
     allow(ingestion).to receive(:ingestion_source).and_return(path)
     ingestion
   end
   let(:context) { Ingestions::Context.new(ingestion) }
-  let(:output) { Ingestions::Converters::Html.run context: context, source_path: context.rel(context.source_path) }
+  let(:output) { Ingestions::Converters::HTML.run context: context, source_path: context.rel(context.source_path) }
   let(:parsed) { Nokogiri::HTML(output.result) }
 
   describe "when ingesting html with inline styles" do

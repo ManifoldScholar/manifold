@@ -6,7 +6,7 @@ class ResourceImportRow < ApplicationRecord
   ROW_TYPE_HEADER = "header".freeze
 
   include Statesman::Adapters::ActiveRecordQueries
-  include Concerns::Fingerprinted
+  include Fingerprinted
 
   belongs_to :resource_import, inverse_of: :resource_import_rows
   belongs_to :resource, optional: true, inverse_of: :resource_import_row

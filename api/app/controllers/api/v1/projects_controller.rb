@@ -1,4 +1,4 @@
-module Api
+module API
   module V1
     # Projects controller
     class ProjectsController < ApplicationController

@@ -1,8 +1,8 @@
 class Entitlement < ApplicationRecord
 
   include Authority::Abilities
-  include Concerns::HasStateMachine
-  include Concerns::SerializedAbilitiesFor
+  include HasStateMachine
+  include SerializedAbilitiesFor
   include Filterable
 
   classy_enum_attr :kind, enum: "EntitlementKind", allow_blank: false, default: :unknown
@@ -170,7 +170,7 @@ class Entitlement < ApplicationRecord
 
   # @return [void]
   def subject_is_entitleable!
-    errors.add :subject, "is not supported" unless subject.is_a?(Concerns::Entitleable)
+    errors.add :subject, "is not supported" unless subject.is_a?(Entitleable)
   end
 
   module Expiration

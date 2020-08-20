@@ -3,7 +3,7 @@ require "pandoc-ruby"
 module Ingestions
   module Converters
     class Latex < Ingestions::Converters::AbstractConverter
-      include Concerns::ConversionHelpers
+      include Ingestions::Concerns::ConversionHelpers
 
       def perform
         convert_to_html

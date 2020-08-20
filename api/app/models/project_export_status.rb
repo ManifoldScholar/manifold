@@ -1,5 +1,5 @@
 class ProjectExportStatus < ApplicationRecord
-  include Concerns::ExportStatusView
+  include ExportStatusView
 
   configure!
 end

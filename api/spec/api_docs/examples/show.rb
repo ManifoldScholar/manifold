@@ -2,7 +2,7 @@ shared_examples_for "an API show request" do |options|
   include_context("authenticated request")
   include_context("param helpers")
 
-  api_spec_helper = ApiDocs::Helpers::Request.new(options, :show)
+  api_spec_helper = APIDocs::Helpers::Request.new(options, :show)
 
   if api_spec_helper.instantiate_before_test?
     let(:resource_instance) do

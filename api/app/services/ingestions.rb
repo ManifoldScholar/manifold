@@ -12,12 +12,12 @@ module Ingestions
   configure do
     fetchers do
       fetcher :google_doc
-      fetcher :url
+      fetcher :URL
     end
 
     converters do
       converter :markdown
-      converter :html
+      converter :HTML
       converter :latex
       converter :ms_word
     end

@@ -5,9 +5,9 @@ class ApplicationRecord < ActiveRecord::Base
   INHERITS = Dux.inherits(self).freeze
 
   include ClassyEnum::ActiveRecord
-  include Concerns::ArelHelpers
-  include Concerns::SliceWith
-  include Concerns::ValuesAt
+  include ArelHelpers
+  include SliceWith
+  include ValuesAt
   include WithAdvisoryLock::Concern
 
   # https://api.rubyonrails.org/classes/ActiveModel/Errors.html#method-i-merge-21

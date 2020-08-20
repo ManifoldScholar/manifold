@@ -5,15 +5,15 @@ class ProjectCollection < ApplicationRecord
   ALLOWED_SORT_DIRECTIONS = %w(asc desc).freeze
 
   # Concerns
-  include Concerns::Entitleable
-  include Concerns::HasFormattedAttributes
+  include Entitleable
+  include HasFormattedAttributes
   include Filterable
   include Attachments
   include TrackedCreator
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
-  include Concerns::Taggable
-  include Concerns::Sluggable
+  include SerializedAbilitiesFor
+  include Taggable
+  include Sluggable
 
   # Attachments
   manifold_has_attached_file :custom_icon, :image

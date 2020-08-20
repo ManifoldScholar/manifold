@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Concerns::NotificationPreferences do
+RSpec.describe NotificationPreferences do
   let(:user) { FactoryBot.create(:user, :reader) }
 
   it "includes a scope to retrieve users by digest frequency" do

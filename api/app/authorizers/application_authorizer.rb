@@ -1,6 +1,6 @@
 # Other authorizers should subclass this one
 class ApplicationAuthorizer < Authority::Authorizer
-  include Concerns::SerializableAuthorization
+  include SerializableAuthorization
 
   delegate :admin_permissions?, :editor_permissions?,
            :project_creator_permissions?, :marketeer_permissions?,

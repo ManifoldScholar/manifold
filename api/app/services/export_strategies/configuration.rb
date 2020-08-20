@@ -5,7 +5,7 @@ module ExportStrategies
   # represented by {ExportTargetStrategy}.
   class Configuration
     include StoreModel::Model
-    include Concerns::HasFilteredAttributes
+    include HasFilteredAttributes
 
     # Matches an attribute name that ends with `password` that isn't `sftp_password`.
     #

@@ -1,7 +1,7 @@
 module Ingestions
   module Configuration
     class AbstractRegistryConfigurator
-      include Concerns::Configurates
+      include Configurates
 
       # @param [Ingestions::Configuration::AbstractRegistry] registry
       def initialize(registry)

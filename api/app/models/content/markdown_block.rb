@@ -3,7 +3,7 @@ module Content
 
     config.required_render_attributes = %i{style body}.freeze
 
-    include ::Concerns::HasFormattedAttributes
+    include ::HasFormattedAttributes
 
     has_configured_attributes style: [:string, { default: "normal" }],
                               body: :string

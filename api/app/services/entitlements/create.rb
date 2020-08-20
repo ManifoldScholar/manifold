@@ -1,7 +1,7 @@
 module Entitlements
   # Create an Entitlement
   class Create < AbstractCreate
-    object :entitling_entity, class: "Concerns::ProvidesEntitlements"
+    object :entitling_entity, class: "ProvidesEntitlements"
 
     record :subject_url, class: "GlobalID", finder: :new
 
@@ -43,7 +43,7 @@ module Entitlements
       errors.add :subject_url, e.message
     else
       errors.add :subject_url, "does not correspond to a known subject" if @subject.blank?
-      errors.add :subject_url, "is not entitleable" unless @subject.is_a?(Concerns::Entitleable)
+      errors.add :subject_url, "is not entitleable" unless @subject.is_a?(Entitleable)
     end
 
   end

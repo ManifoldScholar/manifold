@@ -5,7 +5,7 @@ module ExportStrategies
   class Selection
     extend Dry::Initializer
 
-    include Concerns::Sliceable
+    include Sliceable
 
     param :exportation, Types.Instance(ProjectExportation)
     param :export, Types.Instance(ProjectExport)

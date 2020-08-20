@@ -3,7 +3,7 @@ class Flag < ApplicationRecord
 
   # Authority
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
 
   # Concerns
   include TrackedCreator

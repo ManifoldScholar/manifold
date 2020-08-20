@@ -1,4 +1,4 @@
-module Api
+module API
   module V1
     # Stylesheets controller
     class StylesheetsController < ApplicationController

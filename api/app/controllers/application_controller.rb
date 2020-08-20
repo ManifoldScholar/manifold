@@ -5,12 +5,12 @@ class ApplicationController < ActionController::API
 
   include Authentication
   include Validation
-  include JsonApi
+  include JSONAPI
   include Authority::Controller
 
   before_action :set_paper_trail_whodunnit
 
-  rescue_from ApiExceptions::StandardError, with: :render_error_response
+  rescue_from APIExceptions::StandardError, with: :render_error_response
 
   protected
 
@@ -173,7 +173,7 @@ class ApplicationController < ActionController::API
     # @return [void]
     # rubocop:disable Lint/UnusedMethodArgument
     def resourceful!(model, authorize: true, **other_options, &model_scope)
-      include Api::V1::Resourceful
+      include API::V1::Resourceful
 
       other_options[:authorize] = true
       other_options[:model] = model

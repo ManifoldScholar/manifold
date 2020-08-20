@@ -6,7 +6,7 @@ class Subject < ApplicationRecord
 
   # Authority
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   include Filterable
 
   # Associations

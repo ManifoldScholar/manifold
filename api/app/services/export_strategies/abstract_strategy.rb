@@ -3,7 +3,7 @@ module ExportStrategies
   class AbstractStrategy
     extend Dry::Configurable
 
-    include Concerns::Sliceable
+    include Sliceable
     include StoreModel::Model
 
     # The minimum value for a TCP port

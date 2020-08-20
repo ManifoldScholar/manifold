@@ -51,7 +51,8 @@ module ManifoldApi
 
     # TODO: Switch over to :zeitwerk autoloader.
     # See https://weblog.rubyonrails.org/2019/2/22/zeitwerk-integration-in-rails-6-beta-2/#backwards-incompatibility
-    config.autoloader = :classic
+    config.autoloader = :zeitwerk
+    config.autoload_paths += %W(#{config.root}/app/lib)
 
     config.action_mailer.delivery_method = :manifold_dynamic
 

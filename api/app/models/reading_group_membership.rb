@@ -2,7 +2,7 @@
 class ReadingGroupMembership < ApplicationRecord
 
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   include Filterable
 
   validates :user_id, uniqueness: { scope: :reading_group_id }

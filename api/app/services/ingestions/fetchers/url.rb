@@ -1,6 +1,6 @@
 module Ingestions
   module Fetchers
-    class Url < Ingestions::Fetchers::AbstractFetcher
+    class URL < Ingestions::Fetchers::AbstractFetcher
 
       def perform
         fetch

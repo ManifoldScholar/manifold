@@ -3,12 +3,12 @@ class Page < ApplicationRecord
 
   # Authority
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
 
   # Concerns
   include TrackedCreator
-  include Concerns::Sluggable
-  include Concerns::HasFormattedAttributes
+  include Sluggable
+  include HasFormattedAttributes
   include ClassyEnum::ActiveRecord
 
   classy_enum_attr :purpose, class_name: "PagePurpose"

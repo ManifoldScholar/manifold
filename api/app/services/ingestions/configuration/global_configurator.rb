@@ -1,7 +1,7 @@
 module Ingestions
   module Configuration
     class GlobalConfigurator
-      include ::Concerns::Configurates
+      include ::Configurates
 
       def initialize
         @converters = Ingestions::Configuration::ConverterRegistry.new

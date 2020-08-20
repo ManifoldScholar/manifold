@@ -3,11 +3,11 @@ class Feature < ApplicationRecord
 
   # Authority
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
 
   # Concerns
   include TrackedCreator
-  include Concerns::HasFormattedAttributes
+  include HasFormattedAttributes
   include Attachments
   include Filterable
 

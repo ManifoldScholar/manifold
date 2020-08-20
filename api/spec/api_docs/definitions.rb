@@ -1,4 +1,4 @@
-module ApiDocs
+module APIDocs
   module Definitions
 
   end

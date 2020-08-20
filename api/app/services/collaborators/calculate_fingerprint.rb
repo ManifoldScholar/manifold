@@ -1,7 +1,7 @@
 module Collaborators
   # Calculate the fingerprint for a {Collaborator}
   class CalculateFingerprint < ActiveInteraction::Base
-    include Concerns::FingerprintInteraction
+    include FingerprintInteraction
 
     fingerprint_target! :collaborator
 

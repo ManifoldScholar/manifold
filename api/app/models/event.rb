@@ -10,12 +10,12 @@ class Event < ApplicationRecord
 
   # Authority
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   self.authorizer_name = "ProjectChildAuthorizer"
 
   # Concerns
   include Filterable
-  include Concerns::HasFormattedAttributes
+  include HasFormattedAttributes
 
   has_formatted_attribute :subject_title
 

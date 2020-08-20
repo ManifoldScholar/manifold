@@ -2,7 +2,7 @@ shared_examples_for "an API create request" do |options|
   include_context("authenticated request")
   include_context("param helpers")
 
-  api_spec_helper = ApiDocs::Helpers::Request.new(options, :create)
+  api_spec_helper = APIDocs::Helpers::Request.new(options, :create)
 
   let(:body) { json_structure_from_factory(api_spec_helper.factory, type: :request) } if api_spec_helper.response_body?
 

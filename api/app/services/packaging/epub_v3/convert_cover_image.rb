@@ -3,7 +3,7 @@ module Packaging
     # For best support, cover images must be `image/jpeg` or `image/png`. Though many may be
     # `image/svg+xml`, this is not widely supported by all EpubV3 readers (including iBooks, Calibre).
     class ConvertCoverImage < ActiveInteraction::Base
-      include Concerns::MonadicInteraction
+      include MonadicInteraction
 
       # @api private
       ACCEPTABLE_CONTENT_TYPES = %w[image/jpeg image/png].freeze

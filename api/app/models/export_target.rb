@@ -2,7 +2,7 @@ class ExportTarget < ApplicationRecord
   extend FriendlyId
 
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
 
   classy_enum_attr :strategy, enum: "ExportTargetStrategy", default: :unknown
 
