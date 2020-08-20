@@ -43,7 +43,7 @@ RSpec.describe Ingestions::Pickers::Converter do
     let!(:outcome) { Ingestions::Pickers::Converter.run context: context, source_path: path.to_s }
 
     it "returns the correct converter" do
-      expect(outcome.result.interaction).to eq Ingestions::Converters::Html
+      expect(outcome.result.interaction).to eq Ingestions::Converters::HTML
     end
   end
 

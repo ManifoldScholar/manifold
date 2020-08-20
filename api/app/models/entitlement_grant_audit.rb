@@ -1,5 +1,5 @@
 class EntitlementGrantAudit < ApplicationRecord
-  include Concerns::MaterializedView
+  include MaterializedView
 
   # @todo We need to add composite primary keys
   self.primary_key = :user_id

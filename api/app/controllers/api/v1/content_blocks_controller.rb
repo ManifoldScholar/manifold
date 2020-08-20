@@ -1,4 +1,4 @@
-module Api
+module API
   module V1
     # ContentBlocks controller
     class ContentBlocksController < ApplicationController

@@ -11,7 +11,7 @@ module Packaging
     #
     # @see Packaging::EpubV3::TextSectionCompilation::BuildInitialHTML
     class CompileNodeToXHTML < ActiveInteraction::Base
-      include Concerns::MonadicInteraction
+      include MonadicInteraction
 
       object :parent, class: "Nokogiri::XML::Node", default: proc { Nokogiri::HTML.fragment("") }
 

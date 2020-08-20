@@ -1,7 +1,7 @@
 module Texts
   # Calculate a fingerprint for a {Text}.
   class CalculateFingerprint < ActiveInteraction::Base
-    include Concerns::FingerprintInteraction
+    include FingerprintInteraction
 
     fingerprint_target! :text
 

@@ -48,7 +48,7 @@ module Ingestions
       end
 
       def initialize_doc
-        body = Validator::Html.new.validate(source_body)
+        body = Validator::HTML.new.validate(source_body)
         Nokogiri::HTML(body)
       end
 
@@ -69,7 +69,7 @@ module Ingestions
       def convert_body_to_json
         return unless body.present?
 
-        Serializer::Html.serialize_as_json(body) do |json|
+        Serializer::HTML.serialize_as_json(body) do |json|
           if json.blank?
             error_string(body)
 

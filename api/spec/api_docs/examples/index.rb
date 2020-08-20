@@ -2,7 +2,7 @@ shared_examples_for "an API index request" do |options|
   include_context("authenticated request")
   include_context("param helpers")
 
-  api_spec_helper = ApiDocs::Helpers::Request.new(options, :index)
+  api_spec_helper = APIDocs::Helpers::Request.new(options, :index)
 
   get api_spec_helper.summary do
     api_spec_helper.parameters.each do |parameter_options|
@@ -15,7 +15,9 @@ shared_examples_for "an API index request" do |options|
     tags api_spec_helper.tags
 
     response api_spec_helper.success_response_code, api_spec_helper.success_description, focus: api_spec_helper.focus do
-      let(:Authorization) { get_user_token(api_spec_helper.authorized_user) } if api_spec_helper.requires_auth?
+      let(:Authorization) do
+        get_user_token(api_spec_helper.authorized_user)
+      end if api_spec_helper.requires_auth?
       schema api_spec_helper.response
       run_test!
     end

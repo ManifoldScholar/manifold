@@ -1,4 +1,3 @@
-require "exceptions"
 require "auth_token"
 
 # Includes authentication related functionality
@@ -8,8 +7,8 @@ module Authentication
   included do
     before_action :load_current_user
     rescue_from ActionController::RoutingError, with: :resource_not_found
-    rescue_from AuthenticationTimeoutError, with: :authentication_timeout
-    rescue_from NotAuthenticatedError, with: :user_not_authenticated
+    rescue_from APIExceptions::AuthenticationTimeoutError, with: :authentication_timeout
+    rescue_from APIExceptions::NotAuthenticatedError, with: :user_not_authenticated
     rescue_from Authority::MissingUser, with: :user_not_authenticated
   end
 
@@ -33,13 +32,13 @@ module Authentication
   # Call this from child controllers in a before_action or from
   # within the action method itself
   def authenticate_request!
-    raise NotAuthenticatedError unless user_id_included_in_auth_token?
+    raise APIExceptions::NotAuthenticatedError unless user_id_included_in_auth_token?
 
     @current_user = User.preload(CURRENT_USER_PRELOADS).find(decoded_auth_token[:user_id])
   rescue JWT::ExpiredSignature
-    raise AuthenticationTimeoutError
+    raise APIExceptions::AuthenticationTimeoutError
   rescue JWT::VerificationError, JWT::DecodeError
-    raise NotAuthenticatedError
+    raise APIExceptions::NotAuthenticatedError
   end
 
   private

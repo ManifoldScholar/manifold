@@ -1,5 +1,5 @@
 class Container
-  include Concerns::IntrospectiveContainer
+  include IntrospectiveContainer
 
   merge Entitlements::Container, namespace: "entitlements"
 

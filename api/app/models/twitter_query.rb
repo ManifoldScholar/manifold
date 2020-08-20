@@ -7,7 +7,7 @@ class TwitterQuery < ApplicationRecord
 
   # Authorization
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   self.authorizer_name = "ProjectRestrictedChildAuthorizer"
 
   # Association

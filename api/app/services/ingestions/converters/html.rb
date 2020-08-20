@@ -1,7 +1,7 @@
 module Ingestions
   module Converters
-    class Html < Ingestions::Converters::AbstractConverter
-      include Concerns::ConversionHelpers
+    class HTML < Ingestions::Converters::AbstractConverter
+      include Ingestions::Concerns::ConversionHelpers
       include Validator::StyleHelpers
 
       def perform

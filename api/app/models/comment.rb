@@ -6,10 +6,10 @@ class Comment < ApplicationRecord
 
   # Authority
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
 
   # Concerns
-  include Concerns::FlaggableResource
+  include FlaggableResource
   include TrackedCreator
   include Filterable
 

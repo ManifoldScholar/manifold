@@ -1,7 +1,7 @@
 module Resources
   # Calculate a fingerprint for a {Resource}.
   class CalculateFingerprint < ActiveInteraction::Base
-    include Concerns::FingerprintInteraction
+    include FingerprintInteraction
 
     record :resource
 

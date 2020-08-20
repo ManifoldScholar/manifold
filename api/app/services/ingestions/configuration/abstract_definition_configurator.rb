@@ -2,7 +2,7 @@ module Ingestions
   module Configuration
     class AbstractDefinitionConfigurator
       include ActiveSupport::Configurable
-      include Concerns::Configurates
+      include Configurates
 
       config_accessor :interaction_namespace
 

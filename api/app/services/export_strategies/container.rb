@@ -1,7 +1,7 @@
 module ExportStrategies
   # @api private
   class Container
-    include Concerns::IntrospectiveContainer
+    include IntrospectiveContainer
 
     register_simple_callables_in(
       :operations,

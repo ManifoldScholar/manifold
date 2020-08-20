@@ -1,5 +1,5 @@
 class EntitlementAssignedRole < ApplicationRecord
-  include Concerns::View
+  include View
 
   classy_enum_attr :role_name, enum: "RoleName", allow_blank: false
 

@@ -4,12 +4,12 @@ module Utility
 
     include Dry::Monads::Result::Mixin
 
-    param :stateful, Types.Instance(Concerns::HasStateMachine)
+    param :stateful, Types.Instance(HasStateMachine)
 
     delegate :current_state, to: :stateful
 
     # @param [Symbol] target_state
-    # @return [Dry::Monads::Result::Success(Concerns::HasStateMachine)]
+    # @return [Dry::Monads::Result::Success(HasStateMachine)]
     # @return [Dry::Monads::Result::Failure((Symbol, String))]
     def can_transition_to(target_state)
       return Success(stateful) if stateful.can_transition_to? target_state
@@ -18,7 +18,7 @@ module Utility
     end
 
     # @param [Symbol] target_state
-    # @return [Dry::Monads::Result::Success(Concerns::HasStateMachine)]
+    # @return [Dry::Monads::Result::Success(HasStateMachine)]
     # @return [Dry::Monads::Result::Failure((Symbol, String))]
     def in_state(target_state)
       return fail_with(:invalid_state, "Expected state #{target_state}, currently #{current_state}") unless current_state == target_state
@@ -27,7 +27,7 @@ module Utility
     end
 
     # @param [Symbol] target_state
-    # @return [Dry::Monads::Result::Success(Concerns::HasStateMachine)]
+    # @return [Dry::Monads::Result::Success(HasStateMachine)]
     # @return [Dry::Monads::Result::Failure((Symbol, String))]
     def transition_to(target_state)
       if stateful.transition_to target_state

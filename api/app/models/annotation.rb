@@ -5,12 +5,12 @@ class Annotation < ApplicationRecord
 
   # Authority
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
 
   # Concerns
   include TrackedCreator
   include Filterable
-  include Concerns::FlaggableResource
+  include FlaggableResource
 
   # Constants
   TYPE_ANNOTATION = "annotation".freeze

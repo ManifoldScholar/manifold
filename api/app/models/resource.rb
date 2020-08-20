@@ -14,17 +14,17 @@ class Resource < ApplicationRecord
   }
   # Concerns
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   include TrackedCreator
   include Filterable
   include Attachments
   include ResourceAttachmentValidation
   include ResourceAttributeResets
-  include Concerns::HasFormattedAttributes
-  include Concerns::HasSortTitle
-  include Concerns::Fingerprinted
-  include Concerns::Taggable
-  include Concerns::Sluggable
+  include HasFormattedAttributes
+  include HasSortTitle
+  include Fingerprinted
+  include Taggable
+  include Sluggable
   include Metadata
 
   # Magic

@@ -1,12 +1,12 @@
 class ContentBlock < ApplicationRecord
-  include Concerns::ProxiedAssociations
+  include ProxiedAssociations
   include ActiveSupport::Configurable
 
   config.required_render_attributes = [].freeze
 
   # Authorization
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
 
   # Ordering
   acts_as_list scope: :project

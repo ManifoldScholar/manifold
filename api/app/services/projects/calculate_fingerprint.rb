@@ -1,7 +1,7 @@
 module Projects
   # Calculate a fingerprint for a {Project}.
   class CalculateFingerprint < ActiveInteraction::Base
-    include Concerns::FingerprintInteraction
+    include FingerprintInteraction
 
     fingerprint_target! :project
 

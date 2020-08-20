@@ -3,7 +3,7 @@ class Favorite < ApplicationRecord
 
   # Authority
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
 
   # Associations
   belongs_to :user

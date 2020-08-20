@@ -2,8 +2,8 @@
 class ReadingGroup < ApplicationRecord
 
   include Authority::Abilities
-  include Concerns::ReceivesEntitlements
-  include Concerns::SerializedAbilitiesFor
+  include ReceivesEntitlements
+  include SerializedAbilitiesFor
   include TrackedCreator
 
   has_many :reading_group_memberships, dependent: :destroy

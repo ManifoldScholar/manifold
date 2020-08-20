@@ -4,8 +4,8 @@
 # @see ProjectExportations::StateMachine
 class ProjectExportation < ApplicationRecord
   include Authority::Abilities
-  include Concerns::HasStateMachine
-  include Concerns::SerializedAbilitiesFor
+  include HasStateMachine
+  include SerializedAbilitiesFor
   include Filterable
 
   belongs_to :project, required: true

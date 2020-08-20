@@ -5,9 +5,9 @@ class Text < ApplicationRecord
 
   # Concerns
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
-  include Concerns::Sluggable
-  include Concerns::StoresFingerprints
+  include SerializedAbilitiesFor
+  include Sluggable
+  include StoresFingerprints
   extend Memoist
   include Collaborative
   include Citable

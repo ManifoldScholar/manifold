@@ -1,4 +1,4 @@
-module ApiDocs
+module APIDocs
   module Definitions
     module Resources
       class Page
@@ -10,7 +10,7 @@ module ApiDocs
         ID_TYPE = ::Types::String.meta(example: "1")
 
         class << self
-          include ApiDocs::Definitions::Resource
+          include APIDocs::Definitions::Resource
         end
       end
     end

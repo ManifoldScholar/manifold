@@ -1,4 +1,4 @@
-module ApiDocs
+module APIDocs
   module Definitions
     module Resources
       class Feature
@@ -11,7 +11,7 @@ module ApiDocs
         }.freeze
 
         class << self
-          include ApiDocs::Definitions::Resource
+          include APIDocs::Definitions::Resource
 
           def create_attributes
             request_attributes.except(:remove_background, :remove_foreground)

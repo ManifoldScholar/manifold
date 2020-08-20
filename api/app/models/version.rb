@@ -1,7 +1,7 @@
 class Version < PaperTrail::Version
 
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   include Filterable
 
   delegate :title, :title_formatted, to: :item, prefix: true

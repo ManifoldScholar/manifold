@@ -1,12 +1,12 @@
 module Fingerprints
-  # @see Concerns::StoresFingerprints
+  # @see StoresFingerprints
   # @see Fingerprints::RecalculateJob
   class Recalculate < ActiveInteraction::Base
     isolatable!
 
     transactional!
 
-    object :fingerprintable, class: "Concerns::StoresFingerprints"
+    object :fingerprintable, class: "StoresFingerprints"
 
     # @return [void]
     def execute

@@ -1,6 +1,6 @@
 require "uuid"
 
-module Api
+module API
   module V1
     # Reading groups controller
     class ReadingGroupsController < ApplicationController

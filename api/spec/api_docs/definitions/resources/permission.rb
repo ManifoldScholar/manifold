@@ -1,4 +1,4 @@
-module ApiDocs
+module APIDocs
   module Definitions
     module Resources
       class Permission
@@ -6,7 +6,7 @@ module ApiDocs
         REQUIRED_CREATE_ATTRIBUTES = [:role_names].freeze
 
         class << self
-          include ApiDocs::Definitions::Resource
+          include APIDocs::Definitions::Resource
         end
       end
     end

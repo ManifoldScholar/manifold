@@ -1,4 +1,4 @@
-module ApiDocs
+module APIDocs
   class Config
 
     class << self
@@ -10,7 +10,7 @@ module ApiDocs
 
       def definitions
         defined = {}
-        ApiDocs::Definitions::Resources.constants.each do |resource_class|
+        APIDocs::Definitions::Resources.constants.each do |resource_class|
           defined[resource_class] = resource_klass(resource_class).send(:resource_response)
         end
         defined

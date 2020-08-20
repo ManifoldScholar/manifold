@@ -1,6 +1,6 @@
 require "auth_token"
 
-module Api
+module API
   module V1
     # Authentication token controller
     class TokensController < ApplicationController

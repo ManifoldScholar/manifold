@@ -3,7 +3,7 @@ module Validator
   # HTML and transform it into a valid HTML structure that can be consumed by the Manifold
   # frontend. This mainly involves insuring proper nesting, and making sure that the
   # structure will work with ReactDom.
-  class Html
+  class HTML
 
     VOID_ELEMENTS = %w(area base br col embed hr img input keygen
                        link meta param source track wbr).freeze

@@ -5,7 +5,7 @@ RSpec.describe "Contacts", type: :request do
     post "Sends an email to Manifold's contact address" do
       tags "Contacts"
       consumes "application/json"
-      parameter name: :body, in: :body, schema: ApiDocumentation::DryTypesParser.convert(
+      parameter name: :body, in: :body, schema: APIDocumentation::DryTypesParser.convert(
         Types::Hash.schema(
           data: Types::Hash.schema(
             attributes: Types::Hash.schema(

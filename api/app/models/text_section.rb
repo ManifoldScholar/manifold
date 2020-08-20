@@ -14,7 +14,7 @@ class TextSection < ApplicationRecord
 
   # Authority
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   self.authorizer_name = "TextSectionAuthorizer"
 
   with_citation do |text_section|
@@ -129,7 +129,7 @@ class TextSection < ApplicationRecord
 
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def properties_for_text_nodes
-    inline = Serializer::Html::INLINE_ELEMENTS
+    inline = Serializer::HTML::INLINE_ELEMENTS
     *, nodes = text_nodes.reverse.inject([false, []]) do |(once_more, nodes), node|
       next [once_more, nodes] if node["content"].strip.blank?
 

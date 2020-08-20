@@ -4,7 +4,7 @@ module Packaging
     #
     # @api private
     class Container
-      include Concerns::IntrospectiveContainer
+      include IntrospectiveContainer
 
       register_simple_callables_in :compilation,
                                    :add_resources,

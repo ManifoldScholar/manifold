@@ -19,10 +19,10 @@ class Project < ApplicationRecord
 
   # Concerns
   include Authority::Abilities
-  include Concerns::Entitleable
-  include Concerns::SerializedAbilitiesFor
-  include Concerns::StoresFingerprints
-  include Concerns::Taggable
+  include Entitleable
+  include SerializedAbilitiesFor
+  include StoresFingerprints
+  include Taggable
   include TrackedCreator
   include Collaborative
   include Citable
@@ -31,10 +31,10 @@ class Project < ApplicationRecord
   include Filterable
   include Attachments
   include Metadata
-  include Concerns::HasFormattedAttributes
-  include Concerns::HasSortTitle
+  include HasFormattedAttributes
+  include HasSortTitle
   include WithPermittedUsers
-  include Concerns::Sluggable
+  include Sluggable
 
   # Magic
   has_formatted_attributes :description, :subtitle, :image_credits

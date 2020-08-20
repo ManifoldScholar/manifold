@@ -1,4 +1,4 @@
-module ApiDocs
+module APIDocs
   module Definitions
     module Resources
       class ActionCallout
@@ -18,7 +18,7 @@ module ApiDocs
 
         class << self
 
-          include ApiDocs::Definitions::Resource
+          include APIDocs::Definitions::Resource
 
           def create_attributes
             request_attributes.except(:remove_attachment)

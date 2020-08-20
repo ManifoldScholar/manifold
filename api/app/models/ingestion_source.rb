@@ -8,7 +8,7 @@ class IngestionSource < ApplicationRecord
 
   # Authorization
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   self.authorizer_name = "ProjectChildAuthorizer"
 
   classy_enum_attr :kind, enum: "IngestionSourceKind", allow_blank: false

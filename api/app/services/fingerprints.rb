@@ -1,8 +1,8 @@
 # Global namespace & derivation methods for fingerprinting
 # models.
 #
-# @see Concerns::CalculatesFingerprint
-# @see Concerns::FingerprintInteraction
+# @see CalculatesFingerprint
+# @see FingerprintInteraction
 module Fingerprints
   # Error raised when a fingerprint interaction {#derive_fingerprint_interaction_for cannot be derived}.
   class UnknownFingerprintInteraction < StandardError; end

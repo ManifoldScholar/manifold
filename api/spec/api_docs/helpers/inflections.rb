@@ -1,4 +1,4 @@
-module ApiDocs
+module APIDocs
   module Helpers
     module Inflections
       def request_types
@@ -6,7 +6,7 @@ module ApiDocs
       end
 
       def resource_klass(resource)
-        klass = "ApiDocs::Definitions::Resources::#{resource.to_s.camelize}".constantize
+        klass = "APIDocs::Definitions::Resources::#{resource.to_s.camelize}".constantize
       end
 
       def request_or_response(type)

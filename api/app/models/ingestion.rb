@@ -2,7 +2,7 @@ require "stringio"
 
 # Connects texts to resources that were sources for text sections during ingestion
 class Ingestion < ApplicationRecord
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   include Attachments
   include IngestionUploader::Attachment.new(:source)
   include TrackedCreator

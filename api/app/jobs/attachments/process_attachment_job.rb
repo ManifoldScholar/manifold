@@ -1,6 +1,6 @@
 module Attachments
   class ProcessAttachmentJob < ApplicationJob
-    include Concerns::ExclusiveJob
+    include ExclusiveJob
 
     # TODO: SHRINE V3 - https://shrinerb.com/docs/upgrading-to-3#dual-support
 

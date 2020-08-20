@@ -1,5 +1,5 @@
 # Includes JSON API related functionality
-module JsonApi
+module JSONAPI
   extend ActiveSupport::Concern
 
   included do

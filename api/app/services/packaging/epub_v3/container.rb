@@ -4,7 +4,7 @@ module Packaging
     #
     # @api private
     class Container
-      include Concerns::IntrospectiveContainer
+      include IntrospectiveContainer
 
       register "api_url" do
         URI(Rails.configuration.manifold.api_url)

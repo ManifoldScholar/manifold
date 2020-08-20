@@ -1,4 +1,4 @@
-module Api
+module API
   module V1
     # Test Mail controller
     class TestMailsController < ApplicationController

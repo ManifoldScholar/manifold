@@ -1,7 +1,7 @@
 module Content
   class TextsBlock < ::ContentBlock
 
-    include ::Concerns::HasFormattedAttributes
+    include ::HasFormattedAttributes
 
     config.required_render_attributes = %i{has_texts}.freeze
 

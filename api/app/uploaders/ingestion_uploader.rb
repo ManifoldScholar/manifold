@@ -1,5 +1,5 @@
 class IngestionUploader < TusUploader
-  include Concerns::SharedUploader
+  include SharedUploader
 
   plugin :add_metadata
   plugin :determine_mime_type, analyzer: :marcel

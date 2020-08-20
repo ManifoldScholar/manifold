@@ -5,7 +5,7 @@ module Serializer
   # This class takes HTML input and serializes it into a serializable data structure,
   # which will likely then be transformed into JSON. The Manifold React frontend can then
   # traverse this structure and create React components on the fly.
-  class Html
+  class HTML
     ELEMENT_BLACK_LIST = %w(script link).freeze
     INLINE_ELEMENTS = %w(b big i small tt abbr acronym cite code dfn em kbd strong samp
                          time var a bdo br img map object q script span sub sup button
@@ -15,7 +15,7 @@ module Serializer
       reset
       return if html.blank?
 
-      fragment = Nokogiri::HTML.fragment(Validator::Html.new.validate(html))
+      fragment = Nokogiri::HTML.fragment(Validator::HTML.new.validate(html))
       node = fragment.children.first
       output = visit(node)
       check_for_node_uuid_duplicates(output, logger)

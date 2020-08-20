@@ -4,7 +4,7 @@ require "shellwords"
 module Ingestions
   module Converters
     class MsWord < Ingestions::Converters::AbstractConverter
-      include Concerns::ConversionHelpers
+      include Ingestions::Concerns::ConversionHelpers
 
       def perform
         convert_to_html

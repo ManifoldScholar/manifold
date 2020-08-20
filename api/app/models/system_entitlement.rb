@@ -3,7 +3,7 @@
 # Currently, there's only one, {SystemEntitlementKind::Subscription subscription},
 # which corresponds to {RoleName::Subscriber subscriber}.
 class SystemEntitlement < ApplicationRecord
-  include Concerns::Entitleable
+  include Entitleable
 
   upsert_keys %i[kind]
 

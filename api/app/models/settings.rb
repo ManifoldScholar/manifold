@@ -3,8 +3,8 @@ class Settings < ApplicationRecord
   # Concerns
   include Attachments
   include Authority::Abilities
-  include Concerns::HasFormattedAttributes
-  include Concerns::SerializedAbilitiesFor
+  include HasFormattedAttributes
+  include SerializedAbilitiesFor
 
   SECTIONS = [:general, :integrations, :secrets, :email, :theme].freeze
 

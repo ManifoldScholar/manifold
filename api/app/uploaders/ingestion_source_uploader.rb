@@ -1,6 +1,6 @@
 # @see IngestionSource
 class IngestionSourceUploader < Shrine
-  include Concerns::SharedUploader
+  include SharedUploader
 
   plugin :pretty_location
   plugin :determine_mime_type, analyzer: BETTER_MARCEL

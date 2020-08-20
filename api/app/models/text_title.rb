@@ -38,10 +38,10 @@ class TextTitle < ApplicationRecord
 
   # Authority
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   self.authorizer_name = "ProjectChildAuthorizer"
 
-  include Concerns::HasFormattedAttributes
+  include HasFormattedAttributes
   has_formatted_attributes :value, include_wrap: false
 
   # Associations

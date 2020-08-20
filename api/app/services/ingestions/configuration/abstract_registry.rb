@@ -2,7 +2,7 @@ module Ingestions
   module Configuration
     # @api private
     class AbstractRegistry
-      include Concerns::HasModdableKlasses
+      include HasModdableKlasses
       include Enumerable
 
       RELATIVE_INSERTIONS = %i[before after].freeze

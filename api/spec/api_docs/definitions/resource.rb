@@ -1,4 +1,4 @@
-module ApiDocs
+module APIDocs
   module Definitions
     module Resource
       def update_request
@@ -145,7 +145,7 @@ module ApiDocs
       end
 
       def read_only_attributes
-        ApiDocumentation::DryTypesParser.read_only_attributes(all_attributes)
+        APIDocumentation::DryTypesParser.read_only_attributes(all_attributes)
       end
 
       def filter_response_attributes(attributes)
@@ -222,7 +222,7 @@ module ApiDocs
       private
 
       def parse_dry_types(callee, definition)
-        definition = ApiDocumentation::DryTypesParser.convert(definition)
+        definition = APIDocumentation::DryTypesParser.convert(definition)
         debug(callee, definition)
         transform_keys(definition)
       end

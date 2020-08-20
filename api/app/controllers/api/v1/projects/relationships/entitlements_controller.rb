@@ -1,9 +1,9 @@
-module Api
+module API
   module V1
     module Projects
       module Relationships
         class EntitlementsController < AbstractProjectChildController
-          include Api::V1::BuildsScopedEntitlements
+          include API::V1::BuildsScopedEntitlements
 
           resourceful! Entitlement, authorize_options: { except: [:index] } do
             Entitlement.filtered(

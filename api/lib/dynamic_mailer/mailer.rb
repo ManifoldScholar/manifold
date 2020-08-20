@@ -36,7 +36,7 @@ module DynamicMailer
            \"#{e.class.name}.\" The message was \"#{e.message}.\" Double check your
           configuration."
         end
-      raise ApiExceptions::StandardError, msg
+      raise APIExceptions::StandardError, msg
     end
     # rubocop:enable Metrics/MethodLength
 

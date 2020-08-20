@@ -129,7 +129,7 @@ Style/ExplicitBlockArgument:
   Enabled: false
 
 Style/GlobalStdStream:
-  Enabled: true
+  Enabled: false
 
 Style/HashAsLastArrayItem:
   Enabled: true

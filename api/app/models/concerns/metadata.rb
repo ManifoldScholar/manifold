@@ -1,7 +1,7 @@
 # Helpers for hash attributes
 module Metadata
   extend ActiveSupport::Concern
-  include Concerns::HasFormattedAttributes
+  include HasFormattedAttributes
 
   def filter_metadata(properties)
     return unless metadata_changed?

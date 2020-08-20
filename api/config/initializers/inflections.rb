@@ -18,4 +18,21 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.uncountable %w(me)
   inflect.acronym "SFTP"
   inflect.acronym "SSH"
+  inflect.acronym "TOC"
+  inflect.acronym "CSV"
+  inflect.acronym "DSL"
+  inflect.acronym "XHTML"
+  inflect.acronym "HTML"
+  inflect.acronym "HTTP"
+  inflect.acronym "API"
+  inflect.acronym "JSON"
+end
+
+Rails.autoloaders.each do |autoloader|
+  autoloader.inflector.inflect(
+    "url" => "URL",
+    "get_reader_url" => "GetReaderURL",
+    "client_url" => "ClientURL",
+    "persistent_ui" => "PersistentUI"
+  )
 end

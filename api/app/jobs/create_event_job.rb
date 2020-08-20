@@ -1,6 +1,6 @@
 # Simple job to create a new event in the background.
 class CreateEventJob < ApplicationJob
-  include Concerns::ExclusiveJob
+  include ExclusiveJob
 
   queue_as :default
 

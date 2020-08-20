@@ -1,4 +1,4 @@
-module ApiDocs
+module APIDocs
   module Definitions
     module Resources
       class Annotation
@@ -19,7 +19,7 @@ module ApiDocs
 
         class << self
 
-          include ApiDocs::Definitions::Resource
+          include APIDocs::Definitions::Resource
 
         end
       end

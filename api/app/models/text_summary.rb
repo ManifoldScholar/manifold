@@ -3,7 +3,7 @@ class TextSummary < ApplicationRecord
   self.primary_key = :id
 
   include Attachments
-  include Concerns::HasFormattedAttributes
+  include HasFormattedAttributes
 
   belongs_to :project
   belongs_to :text

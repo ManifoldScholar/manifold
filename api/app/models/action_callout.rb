@@ -2,7 +2,7 @@ class ActionCallout < ApplicationRecord
 
   # Authorization
   include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
+  include SerializedAbilitiesFor
   include Attachments
 
   # Ordering

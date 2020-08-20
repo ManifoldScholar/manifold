@@ -1,6 +1,6 @@
 require "uber/inheritable_attr"
 
-module Api
+module API
   module V1
     # Makes a controller resourceful.
     module Resourceful
@@ -109,7 +109,7 @@ module Api
       class_methods do
         # rubocop:disable Metrics/AbcSize
         def setup_resources!(model:, authorize: true, authorize_options: {}, &model_scope)
-          self.resource_configuration = Api::V1::ResourcefulMethods.new(
+          self.resource_configuration = API::V1::ResourcefulMethods.new(
             model: model,
             model_scope: model_scope
           )

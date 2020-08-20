@@ -12,8 +12,8 @@ export default class Body extends Component {
 
   shouldComponentUpdate(nextProps, nextStateIgnored) {
     const same =
-      this.props.section.attributes.bodyJson ===
-        nextProps.section.attributes.bodyJson &&
+      this.props.section.attributes.bodyJSON ===
+        nextProps.section.attributes.bodyJSON &&
       this.props.annotations === nextProps.annotations &&
       this.props.pendingAnnotation === nextProps.pendingAnnotation &&
       this.props.location.key === nextProps.location.key;
@@ -22,7 +22,7 @@ export default class Body extends Component {
 
   render() {
     const iterator = new BodyNodes.Helpers.NodeTreeIterator(this.props);
-    const node = this.props.section.attributes.bodyJson;
+    const node = this.props.section.attributes.bodyJSON;
     const elements = iterator.visit(node);
     return elements;
   }

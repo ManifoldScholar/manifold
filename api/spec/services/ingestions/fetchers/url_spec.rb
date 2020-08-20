@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Ingestions::Fetchers::Url, slow: true do
+RSpec.describe Ingestions::Fetchers::URL, slow: true do
 
   before(:all) do
     Settings.instance.update_from_environment!

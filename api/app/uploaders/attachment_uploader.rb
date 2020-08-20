@@ -1,6 +1,6 @@
 # @see Attachments
 class AttachmentUploader < Shrine
-  include Concerns::SharedUploader
+  include SharedUploader
 
   plugin :backgrounding
   plugin :validation_helpers

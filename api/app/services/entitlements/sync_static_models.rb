@@ -1,6 +1,6 @@
 module Entitlements
   class SyncStaticModels < ActiveInteraction::Base
-    include Concerns::MonadicInteraction
+    include MonadicInteraction
 
     isolatable!
 

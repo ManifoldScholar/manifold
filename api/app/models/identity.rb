@@ -1,5 +1,5 @@
 class Identity < ApplicationRecord
-  attribute :provider, Concerns::Inquiry.new
+  attribute :provider, Inquiry.new
 
   belongs_to :user, optional: false, inverse_of: :identities
 

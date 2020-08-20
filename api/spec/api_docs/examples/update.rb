@@ -2,7 +2,7 @@ shared_examples_for "an API update request" do |options|
   include_context("authenticated request")
   include_context("param helpers")
 
-  api_spec_helper = ApiDocs::Helpers::Request.new(options, :update)
+  api_spec_helper = APIDocs::Helpers::Request.new(options, :update)
 
   let(:resource_instance) do
     defined?(resource) ? resource : FactoryBot.create(api_spec_helper.factory)
