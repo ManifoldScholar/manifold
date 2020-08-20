@@ -23,11 +23,12 @@ module SystemUpgrades
 
         Text.find_each do |text|
           next unless text.cover_attacher.stored?
-          next if text.cover[:small].present?
+
+          next if text.cover(:small).present?
 
           begin
             logger.info("Generating cover styles for Text #{text.id}")
-            text.update cover: text.cover[:original]
+            text.update cover: text.cover
           rescue Errno::ENOENT
             logger.warn("The cover file image for Text #{text.id} is missing.")
             logger.warn("  You should clear the cover data in the Manifold backend.")
