@@ -137,6 +137,8 @@ export default class ColorScheme extends Component {
       /* eslint-enable no-console */
       return null;
     }
+    if (rules.length === 0) return null;
+    return rules.join("\n");
   }
 
   otherColorVarsAsCSS() {
