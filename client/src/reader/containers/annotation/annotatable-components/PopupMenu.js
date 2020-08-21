@@ -19,11 +19,22 @@ class AnnotatablePopup extends PureComponent {
 
   constructor(props) {
     super(props);
-
+    this.tabRef = React.createRef();
     this.state = {
       activePanel: "primary"
     };
   }
+
+  // TODO: The below focus event works well on Chrome,
+  // in that it keeps the current highlight while allowing tabbing within the popup
+  // but on FF and Safari, the highlight is lost (and on FF no popup even appears so, unacceptable)
+  // componentDidMount() {
+  //   this.setFocus();
+  // }
+
+  // setFocus = () => {
+  //   this.tabRef.current.focus();
+  // };
 
   closeSecondary = () => {
     this.setState({ activePanel: "primary" });
@@ -67,7 +78,12 @@ class AnnotatablePopup extends PureComponent {
     const { activePanel } = this.state;
 
     return (
-      <div className="annotation-popup__panel--secondary-group">
+      <div
+        className="annotation-popup__panel--secondary-group"
+        ref={this.tabRef}
+        tabIndex={0}
+        onFocus={e => e.stopPropagation()}
+      >
         {activePanel === "primary" && (
           <Popup.Annotate
             primary
