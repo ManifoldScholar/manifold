@@ -42,6 +42,12 @@ export default class AnnotatableCaptureClick extends Component {
     }
   };
 
+  handleKeyDown = event => {
+    if (!event || !event.target || (event.key !== "Enter" && event.key !== " "))
+      return;
+    this.handleClick(event);
+  };
+
   handleClick = event => {
     if (!event || !event.target) return;
     const el = event.target;
@@ -95,9 +101,10 @@ export default class AnnotatableCaptureClick extends Component {
   render() {
     return (
       <div
-        role="presentation"
         onClick={this.handleClick}
+        onKeyDown={this.handleKeyDown}
         onMouseUp={this.handleMouseUp}
+        tabIndex={-1}
       >
         {this.props.children}
       </div>
