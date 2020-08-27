@@ -2,18 +2,9 @@
 
 ## [v5.1.1](https://github.com/ManifoldScholar/manifold/tree/v5.1.1) - 08/26/20
 
-### Features
-
--  Upgrade Shrine and Rails [#2813](https://github.com/ManifoldScholar/manifold/pull/2813) ([zdavis](https://api.github.com/users/zdavis))
-
 ### Bugs
 
 -  Allow annotation comments when engagement is disabled [#2833](https://github.com/ManifoldScholar/manifold/pull/2833) ([zdavis](https://api.github.com/users/zdavis))
--  Render custom color scheme in SSR [#2827](https://github.com/ManifoldScholar/manifold/pull/2827) ([zdavis](https://api.github.com/users/zdavis))
-
-### Security
-
--  Bump serialize-javascript from 2.1.2 to 3.1.0 [#2816](https://github.com/ManifoldScholar/manifold/pull/2816) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
 
 ## [v5.1.0](https://github.com/ManifoldScholar/manifold/tree/v5.1.0) - 08/11/20
 
