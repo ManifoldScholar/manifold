@@ -1,9 +1,25 @@
 # Changelog
 
-## [v5.1.0](https://github.com/ManifoldScholar/manifold/tree/v5.1.0) - 08/10/20
+## [v5.1.1](https://github.com/ManifoldScholar/manifold/tree/v5.1.1) - 08/26/20
 
 ### Features
 
+-  Upgrade Shrine and Rails [#2813](https://github.com/ManifoldScholar/manifold/pull/2813) ([zdavis](https://api.github.com/users/zdavis))
+
+### Bugs
+
+-  Allow annotation comments when engagement is disabled [#2833](https://github.com/ManifoldScholar/manifold/pull/2833) ([zdavis](https://api.github.com/users/zdavis))
+-  Render custom color scheme in SSR [#2827](https://github.com/ManifoldScholar/manifold/pull/2827) ([zdavis](https://api.github.com/users/zdavis))
+
+### Security
+
+-  Bump serialize-javascript from 2.1.2 to 3.1.0 [#2816](https://github.com/ManifoldScholar/manifold/pull/2816) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+
+## [v5.1.0](https://github.com/ManifoldScholar/manifold/tree/v5.1.0) - 08/11/20
+
+### Features
+
+-  Release v5.1.0 [#2815](https://github.com/ManifoldScholar/manifold/pull/2815) ([zdavis](https://api.github.com/users/zdavis))
 -  Expose signup form at /signup [#2799](https://github.com/ManifoldScholar/manifold/pull/2799) ([zdavis](https://api.github.com/users/zdavis))
 -  Include text metadata in ProjectExports [#2798](https://github.com/ManifoldScholar/manifold/pull/2798) ([zdavis](https://api.github.com/users/zdavis))
 -  Add new project collection header styles [#2793](https://github.com/ManifoldScholar/manifold/pull/2793) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
@@ -20,18 +36,18 @@
 -  Exclude resources when hiding public annotations [#2801](https://github.com/ManifoldScholar/manifold/pull/2801) ([zdavis](https://api.github.com/users/zdavis))
 -  Fix iframe height on detail view [#2800](https://github.com/ManifoldScholar/manifold/pull/2800) ([zdavis](https://api.github.com/users/zdavis))
 -  Maintain author name order on frontend [#2791](https://github.com/ManifoldScholar/manifold/pull/2791) ([zdavis](https://api.github.com/users/zdavis))
+-  Correct project collection pagination [#2770](https://github.com/ManifoldScholar/manifold/pull/2770) ([zdavis](https://api.github.com/users/zdavis))
 -  Truncate project collection titles that are too long [#2790](https://github.com/ManifoldScholar/manifold/pull/2790) ([ConnorChristensen](https://api.github.com/users/ConnorChristensen))
 -  Ensure resource icon is visible in the reader [#2779](https://github.com/ManifoldScholar/manifold/pull/2779) ([zdavis](https://api.github.com/users/zdavis))
--  Correct project collection pagination [#2770](https://github.com/ManifoldScholar/manifold/pull/2770) ([zdavis](https://api.github.com/users/zdavis))
 -  Assign permissions to sources during ingestion [#2766](https://github.com/ManifoldScholar/manifold/pull/2766) ([zdavis](https://api.github.com/users/zdavis))
 
 ### Security
 
 -  Bump elliptic from 6.5.2 to 6.5.3 in /client [#2797](https://github.com/ManifoldScholar/manifold/pull/2797) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
 -  Bump json from 2.2.0 to 2.3.1 in /api [#2795](https://github.com/ManifoldScholar/manifold/pull/2795) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
--  Bump rack from 2.2.2 to 2.2.3 in /api [#2780](https://github.com/ManifoldScholar/manifold/pull/2780) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
--  Bump websocket-extensions from 0.1.3 to 0.1.4 in /client [#2775](https://github.com/ManifoldScholar/manifold/pull/2775) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
 -  Bump websocket-extensions from 0.1.4 to 0.1.5 in /api [#2771](https://github.com/ManifoldScholar/manifold/pull/2771) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+-  Bump websocket-extensions from 0.1.3 to 0.1.4 in /client [#2775](https://github.com/ManifoldScholar/manifold/pull/2775) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+-  Bump rack from 2.2.2 to 2.2.3 in /api [#2780](https://github.com/ManifoldScholar/manifold/pull/2780) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
 
 ## [v5.0.0](https://github.com/ManifoldScholar/manifold/tree/v5.0.0) - 05/28/20
 
