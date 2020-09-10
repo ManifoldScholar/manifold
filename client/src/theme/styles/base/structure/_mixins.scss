@@ -1,0 +1,216 @@
+// Component Structure
+// -------------------
+// Structure-only mixins with parameters for margins, padding, position, display, etc.
+// The mixins are kept separately from the utility classes so someone can import mixins
+// without worrying that the structure utilites will overwrite previously defined values.
+
+// Utilities
+// --------------------------------------------------------
+// Media queries
+// Respond to viewport size
+// $size -> viewport size
+// $operator -> 'min' or 'max'
+// $aspect -> 'width' or 'height'
+// --------------------------
+@mixin respond($size, $operator: min, $aspect: width) {
+  @media all and (#{$operator}-#{$aspect}: $size) {
+    @content;
+  }
+}
+
+// Media show/hide classes, media-query variable dependent
+// --------------------------
+@mixin hide($breakpoint) {
+  @include respond($breakpoint) {
+    display: none;
+  }
+}
+
+@mixin show($breakpoint, $default: inherit) {
+  display: none;
+
+  @include respond($breakpoint) {
+    display: $default;
+  }
+}
+
+// Clearfix
+// $mode accepts 'light' or 'heavy'
+// 'light' is sufficient for clearing floats, while 'heavy' is required to
+// prevent margin collapsing
+// --------------------------
+@mixin clearfix($mode: light) {
+  @if $mode == heavy {
+    &::before,
+    &::after {
+      display: table;
+      content: '';
+    }
+
+    &::after {
+      clear: both;
+    }
+  } @else {
+    &::after {
+      display: block;
+      clear: both;
+      content: '';
+    }
+  }
+}
+
+
+// Layout
+// --------------------------------------------------------
+@mixin containerPrototype {
+  max-width: $containerWidthFull;
+  padding-right: $containerPaddingNarrow;
+  padding-left: $containerPaddingNarrow;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include respond($break35) {
+    padding-right: $containerPaddingResp;
+    padding-left: $containerPaddingResp;
+  }
+
+  @include respond($break120) {
+    padding-right: $containerPaddingFull;
+    padding-left: $containerPaddingFull;
+  }
+}
+
+@mixin containerFocus {
+  // Default max width
+  max-width: $containerWidthFocus;
+  padding-right: $containerPaddingMin;
+  padding-left: $containerPaddingMin;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@mixin headerContainerPrimary {
+  @include containerPrototype;
+  position: relative;
+  padding-top: header-layout(padding-vertical-mobile);
+
+  @include respond($break40) {
+    padding-top: header-layout(padding-vertical-desktop);
+  }
+}
+
+@mixin drawerPadding($parameter, $scale: 'wide') {
+  #{$parameter}: 20px;
+
+  @include respond($break95) {
+    @if ($scale == 'wide') {
+      #{$parameter}: 5.859vw;
+    } @else {
+      #{$parameter}: 3.906vw;
+    }
+  }
+
+  @include respond($break120) {
+    @if ($scale == 'wide') {
+      #{$parameter}: 60px;
+    } @else {
+      #{$parameter}: 40px;
+    }
+  }
+}
+
+@mixin drawerIndent($parameter, $dimension: 1) {
+  #{$parameter}: (50px * $dimension);
+}
+
+// Lists
+// --------------------------------------------------------
+@mixin listUnstyled {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+@mixin listHorizontal {
+  @include listUnstyled;
+
+  li {
+    display: inline-block;
+  }
+}
+
+
+// Form Layout
+// --------------------------------------------------------
+// TODO: This combines appearance mixins and should be a shared class or mixin
+@mixin loginFormPrimary {
+  .field + .field {
+    margin-top: 27px;
+  }
+
+  .login-links {
+    margin-top: 25px;
+
+    button {
+      @include buttonUnstyled;
+      @include outlineOnFocusVisible;
+      display: block;
+      font-style: italic;
+      text-decoration: underline;
+
+      + button {
+        margin-top: 14px;
+        margin-left: 0;
+      }
+    }
+
+    a {
+      font-style: italic;
+
+      + a {
+        margin-top: 14px;
+        margin-left: 0;
+      }
+    }
+  }
+
+  .login-external {
+    margin-top: 45px;
+  }
+
+  .button-secondary--dark {
+    display: flex;
+    width: 100%;
+  }
+
+  label {
+    @include inputLabelPrimary;
+  }
+
+  input[type='text'], input[type='password'], input[type='email'] {
+    @include inputPrimary;
+  }
+
+  .button-secondary {
+    display: block;
+    margin-top: 30px;
+  }
+}
+
+// Pagination
+// --------------------------------------------------------
+// Show/hide pagination button text
+@mixin constrainedPaginationResponsive {
+  span {
+    display: inline-block;
+
+    @include respond($break65) {
+      display: none;
+    }
+
+    @include respond($break90) {
+      display: inline-block;
+    }
+  }
+}
