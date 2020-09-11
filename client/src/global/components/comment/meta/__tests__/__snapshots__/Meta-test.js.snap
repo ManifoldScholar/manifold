@@ -15,7 +15,7 @@ exports[`global/components/comment/meta matches the snapshot 1`] = `
     <h4
       className="annotation-meta__author-name"
     >
-      Rowan Ida
+      Me
     </h4>
     <span
       className="annotation-meta__datetime"

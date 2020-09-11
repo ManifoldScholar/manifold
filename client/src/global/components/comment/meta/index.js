@@ -26,8 +26,18 @@ export default class CommentMeta extends PureComponent {
     });
   }
 
+  get name() {
+    const {
+      creator: {
+        attributes: { isCurrentUser, fullName }
+      }
+    } = this.props;
+    if (isCurrentUser) return "Me";
+    return fullName;
+  }
+
   render() {
-    const { comment, creator } = this.props;
+    const { comment } = this.props;
 
     return (
       <section className="annotation-meta">
@@ -35,9 +45,7 @@ export default class CommentMeta extends PureComponent {
           <div className={this.avatarClassNames}>
             <Avatar url={this.avatarUrl} />
           </div>
-          <h4 className="annotation-meta__author-name">
-            {creator.attributes.fullName}
-          </h4>
+          <h4 className="annotation-meta__author-name">{this.name}</h4>
           <span className="annotation-meta__datetime">
             <FormattedDate
               format="distanceInWords"
