@@ -23,6 +23,10 @@ module V1
     has_one_creator
 
     class << self
+      def include_abilities?(_object, _params)
+        true
+      end
+
       def deleted_body(object, params)
         return object.body if params[:current_user]&.can_read_deleted?(object)
 
