@@ -59,6 +59,10 @@ module V1
 
     class << self
 
+      def include_abilities?(_object, _params)
+        true
+      end
+
       def moderator?(object, params)
         params[:current_user]&.can_update? object.reading_group
       end
