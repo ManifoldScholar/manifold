@@ -1,10 +1,29 @@
 # Changelog
 
-## [v5.1.1](https://github.com/ManifoldScholar/manifold/tree/v5.1.1) - 08/26/20
+## [v5.1.2](https://github.com/ManifoldScholar/manifold/tree/v5.1.2) - 09/15/20
+
+### Features
+
+-  Release v5.1.1 [#2834](https://github.com/ManifoldScholar/manifold/pull/2834) ([zdavis](https://api.github.com/users/zdavis))
 
 ### Bugs
 
+-  Correct annotation and comment serialized abilities [#2842](https://github.com/ManifoldScholar/manifold/pull/2842) ([zdavis](https://api.github.com/users/zdavis))
 -  Allow annotation comments when engagement is disabled [#2833](https://github.com/ManifoldScholar/manifold/pull/2833) ([zdavis](https://api.github.com/users/zdavis))
+
+## [v5.1.1](https://github.com/ManifoldScholar/manifold/tree/v5.1.1) - 08/27/20
+
+### Features
+
+-  Upgrade Shrine and Rails [#2813](https://github.com/ManifoldScholar/manifold/pull/2813) ([zdavis](https://api.github.com/users/zdavis))
+
+### Bugs
+
+-  Render custom color scheme in SSR [#2827](https://github.com/ManifoldScholar/manifold/pull/2827) ([zdavis](https://api.github.com/users/zdavis))
+
+### Security
+
+-  Bump serialize-javascript from 2.1.2 to 3.1.0 [#2816](https://github.com/ManifoldScholar/manifold/pull/2816) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
 
 ## [v5.1.0](https://github.com/ManifoldScholar/manifold/tree/v5.1.0) - 08/11/20
 
@@ -244,6 +263,9 @@
 -  Bump serialize-javascript from 2.1.0 to 2.1.1 in /client [#2477](https://github.com/ManifoldScholar/manifold/pull/2477) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
 -  Bump rack from 2.0.7 to 2.0.8 in /api [#2486](https://github.com/ManifoldScholar/manifold/pull/2486) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
 -  Bump puma from 3.12.1 to 3.12.2 [#2474](https://github.com/ManifoldScholar/manifold/pull/2474) ([dependabot[bot]](https://api.github.com/users/dependabot%5Bbot%5D))
+
+
+
 
 ## [v4.0.2-rc.1](https://github.com/ManifoldScholar/manifold/tree/v4.0.2-rc.1) - 12/04/19
 
