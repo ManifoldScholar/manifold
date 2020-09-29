@@ -74,7 +74,7 @@ gem "paper_trail-globalid", "~> 0.2"
 gem "pg", "~> 0.21.0"
 gem "premailer-rails", "~> 1.0"
 gem "pry-rails", "~> 0.3.0"
-gem "puma", "~> 3.12"
+gem "puma", "~> 4.3"
 # We can't upgrade to rails 5.1 until this is addressed:
 # https://github.com/mbleigh/acts-as-taggable-on/issues/836
 gem "elasticsearch", "~> 5.0"
