@@ -1,15 +1,18 @@
 # Changelog
 
-## [v5.1.2](https://github.com/ManifoldScholar/manifold/tree/v5.1.2) - 09/15/20
+## [v5.1.3](https://github.com/ManifoldScholar/manifold/tree/v5.1.3) - 09/30/20
 
 ### Features
 
+-  Release v5.1.2 [#2844](https://github.com/ManifoldScholar/manifold/pull/2844) ([zdavis](https://api.github.com/users/zdavis))
 -  Release v5.1.1 [#2834](https://github.com/ManifoldScholar/manifold/pull/2834) ([zdavis](https://api.github.com/users/zdavis))
 
 ### Bugs
 
+-  Improve puma performance [#2854](https://github.com/ManifoldScholar/manifold/pull/2854) ([zdavis](https://api.github.com/users/zdavis))
 -  Correct annotation and comment serialized abilities [#2842](https://github.com/ManifoldScholar/manifold/pull/2842) ([zdavis](https://api.github.com/users/zdavis))
 -  Allow annotation comments when engagement is disabled [#2833](https://github.com/ManifoldScholar/manifold/pull/2833) ([zdavis](https://api.github.com/users/zdavis))
+
 
 ## [v5.1.1](https://github.com/ManifoldScholar/manifold/tree/v5.1.1) - 08/27/20
 
