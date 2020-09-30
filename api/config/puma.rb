@@ -12,16 +12,20 @@ Dotenv.load(
   File.join(__dir__, "../../.env")
 )
 
-is_cable_puma = ENV.fetch("IS_CABLE") { false }
-is_api_puma = !is_cable_puma
-api_port = ENV["API_PORT"] || 3020
-api_cable_port = ENV["API_CABLE_PORT"] || 3021
-port = is_api_puma ? api_port : api_cable_port
-listen_on_port = is_api_puma ? ENV["API_PORT"].present? : ENV["API_CABLE_PORT"].present?
-socket = is_api_puma ? ENV["API_SOCKET"] : ENV["API_CABLE_SOCKET"]
-listen_on_socket = is_api_puma ? ENV["API_SOCKET"].present? : ENV["API_CABLE_SOCKET"].present?
-ip = (is_api_puma ? ENV["API_BIND_IP"] : ENV["API_CABLE_BIND_IP"]) || "0.0.0.0"
-label = is_api_puma ? "api" : "cable"
+env_var_lookups = {
+  "API" => "API",
+  "CABLE" => "API_CABLE"
+}
+
+application = ENV.fetch("PUMA_APPLICATION", "api").upcase
+env_var_lookup = env_var_lookups[application]
+port = ENV.fetch("#{env_var_lookup}_PORT", nil)
+socket = ENV.fetch("#{env_var_lookup}_SOCKET", nil)
+pidfile_path = ENV.fetch("#{env_var_lookup}_PIDFILE", "tmp/pids/manifold-#{application.downcase}.pid")
+state_path = ENV.fetch("#{env_var_lookup}_STATEFILE", "tmp/pids/manifold-#{application.downcase}.state")
+listen_on_port = port.present?
+listen_on_socket = socket.present?
+address = ENV.fetch("#{env_var_lookup}_BIND_IP", "0.0.0.0")
 
 number_of_workers = ENV.fetch "WORKER_COUNT" do
   rails_environment == "development" ? 0 : 2
@@ -35,9 +39,9 @@ max_threads = ENV.fetch "RAILS_MAX_THREADS" do
   is_development ? 16 : 6
 end
 
-pidfile "tmp/pids/manifold-#{label}.pid"
-state_path "tmp/pids/manifold-#{label}.state"
-tag "manifold-#{label}"
+pidfile pidfile_path
+state_path state_path
+tag "manifold-#{application}"
 environment rails_environment
 workers number_of_workers
 threads min_threads, max_threads
@@ -49,7 +53,7 @@ on_refork do
 end
 
 bind "unix://#{socket}" if listen_on_socket
-bind "tcp://#{ip}:#{port}" if listen_on_port
+bind "tcp://#{address}:#{port}" if listen_on_port
 
 out_of_band do
   GC.start full_mark: false, immediate_sweep: false
