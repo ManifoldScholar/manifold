@@ -455,7 +455,8 @@ GEM
       pry (~> 0.9)
       slop (~> 3.0)
     public_suffix (4.0.6)
-    puma (3.12.6)
+    puma (5.0.2)
+      nio4r (~> 2.0)
     rack (2.2.3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
@@ -793,7 +794,7 @@ DEPENDENCIES
   premailer-rails (~> 1.0)
   pry-rails (~> 0.3.0)
   pry-remote
-  puma (~> 3.12)
+  puma (~> 5.0)
   rack (>= 2.0.6)
   rack-cors (~> 1.0)
   rails (~> 6.0.3.2)
