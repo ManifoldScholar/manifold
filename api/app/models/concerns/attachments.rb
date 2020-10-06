@@ -5,9 +5,11 @@ module Attachments
 
   included do
     config.shrine_attachment_configurations ||= {}.with_indifferent_access
+    config.shrine_attachment_derivatives ||= Concurrent::Map.new
 
     delegate :shrine_attachment_configurations, :shrine_configuration_for, :shrine_options_for,
              :shrine_attachment_type_for, :shrine_attachment_style_keys_for, :shrine_has_versions?,
+             :shrine_derivatives_name_for,
              to: :class
   end
 
@@ -225,14 +227,17 @@ module Attachments
     TYPE_MATCHERS.fetch(type).call(uploaded_file)
   end
 
+  def shrine_derivatives_for(attachment_name)
+    public_send shrine_derivatives_name_for(attachment_name)
+  end
+
   # @param [Symbol, String] attachment_name
   # @param [Symbol] style
   # @return [AttachmentUploader::UploadedFile, nil]
   def shrine_version_for(attachment_name, style)
     return shrine_original_for(attachment_name) if style == :original
 
-    derivatives = public_send("#{attachment_name}_derivatives")
-    return nil unless derivatives&.key?(style)
+    derivatives = shrine_derivatives_for(attachment_name)
 
     derivatives[style]
   end
@@ -286,6 +291,14 @@ module Attachments
       when :favicon then FAVICON_STYLES.keys
       else
         BASE_STYLES.keys
+      end
+    end
+
+    # @param [Symbol, String] attachment_name
+    # @return [Symbol]
+    def shrine_derivatives_name_for(attachment_name)
+      config.shrine_attachment_derivatives.compute_if_absent attachment_name do
+        :"#{attachment_name}_derivatives"
       end
     end
 
