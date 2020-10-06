@@ -53,20 +53,34 @@ module API
         end
       end
 
+      def included(base)
+        class << base
+          attr_accessor :resource_configuration
+        end
+
+        base.delegate :resource_configuration, to: :class
+
+        base.resource_configuration = self
+      end
+
       private
 
       # rubocop:disable Metrics/AbcSize
       # rubocop:disable Lint/UnderscorePrefixedVariableName
       def define_methods!
-        _resource_configuration = self
+        #_resource_configuration = self
 
-        define_method(:resource_configuration) { _resource_configuration }
+        #define_method(:resource_configuration) { _resource_configuration }
 
-        define_method(:call_resourceful_method) do |method_name|
+        #define_method(:call_resourceful_method) do |method_name|
+          #__send__(resource_configuration.method_for(method_name))
+        #end
+
+        class_eval <<-RUBY, __FILE__, __LINE__ + 1
+        def call_resourceful_method(method_name)
           __send__(resource_configuration.method_for(method_name))
         end
 
-        class_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{method_names[:load_resources]}
           scope = apply_scopes(resource_configuration.load_resources_for(self))
           return scope.all if scope.respond_to? :all
