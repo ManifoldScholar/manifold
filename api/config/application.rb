@@ -58,6 +58,9 @@ module ManifoldApi
 
     config.active_record.belongs_to_required_by_default = true
 
+    # Needed for profiling
+    config.active_record.cache_versioning = false
+
     config.action_cable.allowed_request_origins = [
       "http://#{ENV['DOMAIN']}",
       "https://#{ENV['DOMAIN']}",
