@@ -111,8 +111,18 @@ module V1
           full_register.blank?
         end
 
+        def camel_cache
+          @camel_cache ||= Concurrent::Map.new
+        end
+
+        def camelized_value_for(key)
+          camel_cache.compute_if_absent key do
+            key.to_s.camelize :lower
+          end
+        end
+
         def camelize_hash(hash)
-          hash.deep_transform_keys { |key| key.to_s.camelize(:lower) }.symbolize_keys!
+          hash.deep_transform_keys { |key| camelized_value_for(key) }.symbolize_keys
         end
 
         def authenticated?(params)
