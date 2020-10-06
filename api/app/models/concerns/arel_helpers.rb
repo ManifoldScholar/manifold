@@ -169,11 +169,13 @@ module ArelHelpers
       expr.in(wrapped_query)
     end
 
+    TO_SQL = Dux[:to_sql]
+
     # @param [#to_sql] query
     # @return [Arel::Nodes::SqlLiteral]
     def arel_quote_query(query)
       case query
-      when Dux[:to_sql] then arel_literal query.to_sql
+      when TO_SQL then arel_literal query.to_sql
       when String then arel_literal query
       else
         # :nocov:
@@ -365,7 +367,7 @@ module ArelHelpers
     def arel_literal(value)
       case value
       when Arel::Attribute then Arel.sql(arel_grouped(value).to_sql)
-      when Dux[:to_sql] then Arel.sql value.to_sql
+      when TO_SQL then Arel.sql value.to_sql
       else
         Arel.sql(value)
       end

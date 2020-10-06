@@ -6,6 +6,8 @@ module Patches
 
     UNSET = Dux.null("UNSET")
 
+    CALLABLE = Dux[:call]
+
     included do
       delegate :base_config, :type_casted, to: :class
     end
@@ -167,7 +169,7 @@ module Patches
 
       def matches(value)
         case @match_value
-        when Dux[:call] then @match_value.call(value)
+        when CALLABLE then @match_value.call(value)
         when String, Symbol then value == @match_value
         when Array
           @match_value.empty? || @match_value.any? { |matchable| value == matchable }
@@ -246,10 +248,12 @@ module Patches
   end
   # rubocop:enable Metrics/BlockLength, Layout/LineLength
 
+  ENUM_SUBCLASS = Dux.inherits(ClassyEnum::Base)
+
   module ProperlyQuoteEnums
     def _type_cast(value)
       case value
-      when Dux.inherits(ClassyEnum::Base), ClassyEnum::Base then value.type_casted
+      when ENUM_SUBCLASS, ClassyEnum::Base then value.type_casted
       else
         super
       end
@@ -259,7 +263,7 @@ module Patches
   module ProperlySerializeForType
     def serialize(value)
       case value
-      when Dux.inherits(ClassyEnum::Base), ClassyEnum::Base then value.type_casted
+      when ENUM_SUBCLASS, ClassyEnum::Base then value.type_casted
       else
         super
       end
