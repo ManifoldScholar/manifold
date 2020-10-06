@@ -8,4 +8,9 @@ class TextAuthorizer < ProjectChildAuthorizer
       resource.project.resources_manageable_by?(user)
   end
 
+  def readable_by?(user, options = {})
+    return true if resource.ignore_access_restrictions
+    with_project { |p| p.fully_readable_by? user, options }
+  end
+
 end

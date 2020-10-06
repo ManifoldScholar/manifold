@@ -52,6 +52,7 @@ module V1
       abilities
       metadata(metadata: true, properties: true, formatted: true)
 
+      typed_attribute :ignore_access_restrictions, Types::Bool
       typed_attribute :start_text_section_id, Types::Serializer::ID.optional.meta(read_only: true), &:calculated_start_text_section_id
 
       typed_attribute :sections_map, Types::Array.of(

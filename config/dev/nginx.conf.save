@@ -1,0 +1,119 @@
+upstream manifold-api.lvh {
+ server unix:/Users/zdavis/src/manifold/api/tmp/sockets/manifold-api;
+}
+
+upstream manifold-cable.lvh {
+ server unix:/Users/zdavis/src/manifold/api/tmp/sockets/manifold-cable;
+}
+
+upstream manifold-client.lvh {
+ server unix:/Users/zdavis/src/manifold/client/tmp/sockets/manifold-client;
+}
+
+server {
+  listen 80;
+  listen 443 default_server ssl;
+  server_name manifold.lvh 10.2.3.209;
+
+  root /Users/zdavis/src/manifold/client/dist/manifold/www;
+
+  access_log /Users/zdavis/src/manifold/log/nginx.access.log combined;
+  error_log /Users/zdavis/src/manifold/log/nginx.error.log;
+
+  client_max_body_size 100M;
+  client_body_timeout 600s;
+  proxy_send_timeout 600s;
+  proxy_read_timeout 600s;
+
+  error_page 500 502 503 504 /50x.html;
+
+  ssl_certificate /Users/zdavis/src/manifold/config/dev/ssl/manifold.lvh.crt;
+  ssl_certificate_key /Users/zdavis/src/manifold/config/dev/ssl/manifold.lvh.key;
+  ssl_protocols SSLv2 SSLv3 TLSv1.2 TLSv1.3;
+  ssl_ciphers  HIGH:!aNULL:!MD5;
+  ssl_prefer_server_ciphers   on;
+  ssl_session_timeout 10m;
+
+  if ($host ~* "www") {
+    rewrite ^(.*)$ http://manifold.lvh$1 permanent;
+    break;
+  }
+
+  location = /50x.html {
+    root /Users/zdavis/src/manifold/client/dist/manifold/www/static;
+  }
+
+  location /api {
+
+    location /api/static {
+      root /Users/zdavis/src/manifold/api/public;
+    }
+
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Sendfile-Type X-Accel-Redirect;
+    proxy_set_header X-Accel-Mapping /Users/zdavis/src/manifold/api/=/__send_file_accel/;
+    proxy_pass http://manifold-api.lvh;
+
+  }
+
+  location /__send_file_accel {
+    internal;
+    alias /Users/zdavis/src/manifold/api;
+  }
+
+  location /system {
+    root /Users/zdavis/src/manifold/api/public;
+  }
+
+  location /auth {
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_pass http://manifold-api.lvh;
+  }
+
+  location /cable {
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_pass http://manifold-cable.lvh;
+  }
+
+  location /sidekiq {
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_pass http://manifold-api.lvh;
+  }
+
+  location /rails {
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_pass http://manifold-api.lvh;
+  }
+
+  location / {
+
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+
+    if (-f $request_filename/index.html) {
+      rewrite (.*) $1/index.html break;
+    }
+
+    if (-f $request_filename.html) {
+      rewrite (.*) $1.html break;
+    }
+
+    if (!-f $request_filename) {
+      proxy_pass http://manifold-client.lvh;
+      break;
+    }
+  }
+}

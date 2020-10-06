@@ -76,6 +76,14 @@ export default class TextGeneralContainer extends PureComponent {
               instructions="For example, “chapter” for books or “article” for journals"
             />
           </Form.FieldGroup>
+          <Form.FieldGroup label="Access">
+            <Form.Switch
+              wide
+              className="form-toggle-secondary"
+              label="Ignore Access Restrictions?"
+              name="attributes[ignoreAccessRestrictions]"
+            />
+          </Form.FieldGroup>
           <Form.Save text="Save Text" />
         </FormContainer.Form>
       </section>
