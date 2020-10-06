@@ -2,10 +2,11 @@ module API
   module V1
     # Statistics controller
     class StatisticsController < ApplicationController
+      # require_dependency Rails.root.join("app", "lib", "statistics.rb")
 
-      resourceful! Statistics do
-        Statistics.new
-      end
+      #resourceful! Statistics do
+        #Statistics.new
+      #end
 
       def show
         expires_in 3.hours, public: true
