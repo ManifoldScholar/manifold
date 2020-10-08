@@ -25,6 +25,12 @@ export default class CategoryListTexts extends PureComponent {
     this.callbacks.destroyText(text);
   };
 
+  labels(text) {
+    const labels = [];
+    if (text.attributes.ignoreAccessRestrictions) labels.push("unrestricted");
+    return labels;
+  }
+
   get texts() {
     return this.props.texts;
   }
@@ -81,6 +87,15 @@ export default class CategoryListTexts extends PureComponent {
                   <span className="texts-list__subtitle">
                     {text.attributes.subtitle}
                   </span>
+                  {this.labels(text).length > 0 && (
+                    <span className="texts-list__labels">
+                      {this.labels(text).map(label => (
+                        <span key={label} className="texts-list__label">
+                          {label}
+                        </span>
+                      ))}
+                    </span>
+                  )}
                 </h3>
                 <span className="texts-list__date">
                   <FormattedDate

@@ -16,6 +16,7 @@ module V1
     typed_attribute :subtitle, Types::String.optional
     typed_attribute :slug, Types::String.meta(read_only: true)
     typed_attribute :description, Types::String.optional
+    typed_attribute :ignore_access_restrictions, Types::Bool
     typed_attribute :title_formatted, Types::String.optional.meta(read_only: true)
     typed_attribute :title_plaintext, Types::String.optional.meta(read_only: true)
     typed_attribute :subtitle_formatted, Types::String.optional.meta(read_only: true)
