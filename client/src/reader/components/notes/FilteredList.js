@@ -73,7 +73,7 @@ export default class FilteredList extends PureComponent {
   render() {
     return (
       <div className="notes-filtered-list">
-        {this.hasAnnotations && this.renderHeading()}
+        {this.renderHeading()}
         <div>{this.props.loaded ? this.renderList() : null}</div>
       </div>
     );
