@@ -6,8 +6,9 @@ RSpec.describe "Search Results", type: :request do
     let!(:text_resource) { FactoryBot.create(:text) }
     let!(:project_resource) { FactoryBot.create(:project, title: keyword, texts: [text_resource]) }
 
-    around(:all) do |example|
+    around(:each) do |example|
       WebMock.disable_net_connect!(allow: /127\.0\.0\.1:2?9200/)
+      WebMock.disable_net_connect!(allow: /localhost:2?9200/)
       Text.reindex
       Resource.reindex
       Annotation.reindex
