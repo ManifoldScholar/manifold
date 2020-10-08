@@ -59,10 +59,19 @@ class AnnotationEditor extends PureComponent {
     return this.props.readingGroups;
   }
 
+  get shouldShowReadingGroups() {
+    if (!this.hasReaderContext) return false;
+    return this.canAccessReadingGroups || this.canEngagePublicly;
+  }
+
   get canAccessReadingGroups() {
     const { currentUser } = this.props;
     if (!currentUser) return false;
     return currentUser.attributes.classAbilities.readingGroup.read;
+  }
+
+  get hasReaderContext() {
+    return !!this.context;
   }
 
   get canEngagePublicly() {
@@ -306,7 +315,7 @@ class AnnotationEditor extends PureComponent {
           </GlobalForm.Errorable>
 
           <div className="annotation-editor__actions">
-            {(this.canAccessReadingGroups || this.canEngagePublicly) && (
+            {this.shouldShowReadingGroups && (
               <UID name={id => `${this.idPrefix}-${id}`}>
                 {id => (
                   <div className="annotation-editor__action">
