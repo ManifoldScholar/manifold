@@ -12,7 +12,6 @@ module Packaging
       param :text_export, Types.Instance(TextExport)
 
       delegate :cover_original, to: :text
-      delegate :metadata, to: :text
       delegate :asset_path, to: :text_export
       delegate :content_type, to: :cover_original, prefix: :cover, allow_nil: true
 
@@ -75,6 +74,12 @@ module Packaging
       end
 
       private
+
+      def metadata
+        text.metadata.merge(
+          publication_date: text.publication_date
+        )
+      end
 
       # @param [<String>] parts
       # @return [String] a relative path to the provided path `parts`.
