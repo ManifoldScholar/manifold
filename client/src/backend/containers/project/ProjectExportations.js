@@ -8,7 +8,8 @@ import {
   projectsAPI,
   exportTargetsAPI,
   projectExportationsAPI,
-  requests
+  requests,
+  entitlementsAPI
 } from "api";
 import EntitiesList, {
   Button,
@@ -82,6 +83,18 @@ export class ProjecExportations extends PureComponent {
 
   pageChangeHandlerCreator = page => {
     return () => this.fetchExportations(page);
+  };
+
+  onDelete = projectExportation => {
+    const { dispatch } = this.props;
+
+    const options = projectExportationsAPI.destroy(projectExportation.id);
+
+    const action = request(options, requests.beProjectExportationDestroy, {
+      refreshes: requests.beProjectExportations
+    });
+
+    dispatch(action);
   };
 
   dispatch(action) {
@@ -196,7 +209,7 @@ export class ProjecExportations extends PureComponent {
           <div style={{ marginTop: 25 }}>
             <EntitiesList
               entityComponent={ProjectExportationRow}
-              entityComponentProps={{ active }}
+              entityComponentProps={{ active, onDelete: this.onDelete }}
               showCount
               indented
               pagination={pagination}

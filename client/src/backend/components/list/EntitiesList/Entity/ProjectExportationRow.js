@@ -10,6 +10,12 @@ export default class ProjectExportationRow extends PureComponent {
     entity: PropTypes.object.isRequired
   };
 
+  onDelete = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.props.onDelete(this.props.entity);
+  };
+
   get attributes() {
     return this.props.entity.attributes || {};
   }
@@ -56,9 +62,18 @@ export default class ProjectExportationRow extends PureComponent {
     const url = this.attributes.packageUrl;
     if (!url) return null;
     return (
-      <a className="entity-row__utility-button" href={url} title="Download">
-        <Utility.IconComposer icon="arrowDown32" size={26} />
-      </a>
+      <>
+        <a className="entity-row__utility-button" href={url} title="Download">
+          <Utility.IconComposer icon="arrowDown32" size={26} />
+        </a>
+        <button
+          className="entity-row__utility-button"
+          onClick={this.onDelete}
+          title="Delete Project Exportation"
+        >
+          <Utility.IconComposer icon="delete32" size={26} />
+        </button>
+      </>
     );
   }
 

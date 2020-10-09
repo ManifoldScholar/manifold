@@ -17,6 +17,11 @@ module API
         render_single_resource @project_exportation
       end
 
+      def destroy
+        @project_exportation = load_and_authorize_project_exportation
+        @project_exportation.destroy
+      end
+
       def create
         @project_exportation = ProjectExportations::CreateFromAPI.run project_exportation_params
         if @project_exportation.valid?
