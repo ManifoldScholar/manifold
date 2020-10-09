@@ -10,5 +10,13 @@ export default {
         })
       }
     };
+  },
+
+  destroy(id) {
+    return {
+      endpoint: `/api/v1/project_exportations/${id}`,
+      method: "DELETE",
+      options: {}
+    };
   }
 };

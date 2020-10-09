@@ -38,6 +38,7 @@ export default {
   beProjectExportation: "backend-project-exportation",
   beProjectExportations: "backend-project-exportations",
   beProjectExportationCreate: "backend-project-exportation-create",
+  beProjectExportationDestroy: "backend-project-exportation-destroy",
   beExportTarget: "backend-export-target",
   beExportTargets: "backend-export-targets",
   beExportTargetCreate: "backend-export-target-create",
