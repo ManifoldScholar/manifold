@@ -43,11 +43,11 @@ module Packaging
       # @return [#to_json]
       def read_value(key, value = nil)
         if value == UNSET
-          block_given? ? yield(project) : project[key]
+          block_given? ? yield(project) : project.public_send(key)
         elsif block_given?
           raise ArgumentError, "cannot provide #{value.inspect} and a block"
         elsif value.is_a?(Symbol) && project.respond_to?(value)
-          project[value]
+          project.public_send value
         else
           value.as_json
         end
