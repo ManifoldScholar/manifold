@@ -19,6 +19,7 @@ module API
       # GET /project-collections/1
       def show
         @project_collection = load_project_collection
+        authorize_action_for @project_collection
         render_single_resource @project_collection,
                                pagination: params[:page],
                                include: includes
