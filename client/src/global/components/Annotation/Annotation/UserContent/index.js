@@ -9,7 +9,7 @@ import CommentContainer from "global/containers/comment";
 import classNames from "classnames";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-
+import pluralize from "pluralize";
 import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
@@ -30,9 +30,9 @@ class AnnotationDetail extends PureComponent {
 
   constructor(props) {
     super(props);
-
     this.state = {
-      action: null
+      action: null,
+      includeComments: this.props.includeComments && this.canIncludeComments
     };
   }
 
@@ -82,10 +82,31 @@ class AnnotationDetail extends PureComponent {
     return res.promise;
   };
 
-  get showComments() {
+  loadComments = () => {
+    this.setState({ includeComments: true });
+  };
+
+  get commentsCount() {
+    return this.props.annotation.attributes.commentsCount;
+  }
+
+  get commentsCountLabel() {
+    const root = "comment";
+    return this.commentsCount === 1 ? root : pluralize(root);
+  }
+
+  get canIncludeComments() {
     const { annotation } = this.props;
-    if (!this.props.includeComments) return false;
+    if (!annotation) return false;
     return annotation.attributes.readingGroupPrivacy !== "anonymous";
+  }
+
+  get includeComments() {
+    return this.canIncludeComments && this.state.includeComments;
+  }
+
+  get hasComments() {
+    return this.commentsCount > 0;
   }
 
   get listButtonBaseClassNames() {
@@ -142,7 +163,7 @@ class AnnotationDetail extends PureComponent {
             <Authorize kind={"any"}>
               <div className="annotation-comments__utility">
                 <ul className="annotation-comments__utility-list">
-                  {this.showComments ? (
+                  {this.includeComments ? (
                     <li>
                       <button
                         className={this.replyButtonClassNames}
@@ -189,6 +210,16 @@ class AnnotationDetail extends PureComponent {
                       </button>
                     </li>
                   )}
+                  {!this.includeComments && this.hasComments ? (
+                    <li>
+                      <button
+                        className={this.editButtonClassNames}
+                        onClick={this.loadComments}
+                      >
+                        {`${this.commentsCount} ${this.commentsCountLabel}`}
+                      </button>
+                    </li>
+                  ) : null}
                 </ul>
                 {this.state.action === "replying" ? (
                   <CommentContainer.Editor
@@ -216,7 +247,7 @@ class AnnotationDetail extends PureComponent {
             )}
           </div>
         )}
-        {this.showComments ? (
+        {this.includeComments ? (
           <CommentContainer.Thread subject={annotation} />
         ) : null}
       </li>
