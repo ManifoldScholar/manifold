@@ -67,6 +67,12 @@ module Packaging
         path_to "metadata.json"
       end
 
+      # @!attribute [r] metadata
+      # @return [ActiveSupport::HashWithIndifferentAccess]
+      memoize def metadata
+        text.packaging_metadata
+      end
+
       # {Text#cover} is an optional attachment and may not always be present.
       # Make sure we have one before attempting to add it or do any processing.
       def has_cover?
@@ -74,12 +80,6 @@ module Packaging
       end
 
       private
-
-      def metadata
-        text.metadata.merge(
-          publication_date: text.publication_date
-        )
-      end
 
       # @param [<String>] parts
       # @return [String] a relative path to the provided path `parts`.

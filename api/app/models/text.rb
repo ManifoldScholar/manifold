@@ -325,6 +325,11 @@ class Text < ApplicationRecord
     update_attribute :exports_as_epub_v3, !exports_as_epub_v3
   end
 
+  # @return [{ Symbol => Object }]
+  def packaging_metadata
+    metadata.with_indifferent_access.merge(publication_date: publication_date)
+  end
+
   private
 
   def category_list_scope
