@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_06_215946) do
+ActiveRecord::Schema.define(version: 2020_10_08_203503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -1040,6 +1040,7 @@ ActiveRecord::Schema.define(version: 2020_08_06_215946) do
     t.text "fingerprint", null: false
     t.jsonb "export_configuration", default: {}, null: false
     t.string "cached_description_plaintext"
+    t.boolean "ignore_access_restrictions", default: false
     t.index "((export_configuration @> '{\"epub_v3\": true}'::jsonb))", name: "index_texts_export_configuration_exports_as_epub_v3"
     t.index ["category_id"], name: "index_texts_on_category_id"
     t.index ["created_at"], name: "index_texts_on_created_at", using: :brin
@@ -1530,6 +1531,7 @@ UNION ALL
     t.publication_date,
     t.cover_data,
     t.toc,
+    t.ignore_access_restrictions,
     tb.id AS toc_section,
     ta.subtitle,
     ta.subtitle_formatted,

@@ -92,6 +92,15 @@ export default function withReadingGroups(WrappedComponent) {
     }
 
     get canEngagePublicly() {
+      // Generally speaking, this HOC should not be used outside of the reader context.
+      // However, there are cases where it could be, in which case we won't have access
+      // to project abilities. In that case, we'll assume that public engagement is
+      // possible. For example, we list annotations and the annotation editor in
+      // reading groups, and don't have easy access to the parent project. We mitigate
+      // this problem by not rendering the reading group selector in the editor outside
+      // of the reader. If the user wants to change an annotation reading group, they
+      // need to do it in the reader, not from within the RG annotation list.
+      if (!this.context) return true;
       return this.context.attributes.abilities.engagePublicly;
     }
 

@@ -136,9 +136,7 @@ class Resource < ApplicationRecord
       parent_project: project&.id,
       parent_keywords: resource_collections.map(&:title) + [project&.title],
       metadata: metadata.values.reject(&:blank?),
-      keywords: [
-        attachment_file_name
-      ].reject(&:blank?)
+      keywords: (tag_list + attachment_file_name).reject(&:blank?)
     }.merge(search_hidden)
   end
   # rubocop:enable Metrics/AbcSize

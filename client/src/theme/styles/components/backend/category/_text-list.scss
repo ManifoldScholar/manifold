@@ -76,6 +76,28 @@
     transition: color $duration $timing;
   }
 
+  &__labels {
+    display: inline-block;
+    margin: 0;
+  }
+
+  &__label {
+    @include blockLabelRound;
+    position: relative;
+    display: inline-block;
+    padding: 0.333em 5px;
+    margin: -3px 0 0;
+    font-size: 9px;
+    line-height: 1.2em;
+    color: $neutralUIExtraDark;
+    vertical-align: middle;
+    background-color: $neutralTextExtraLight;
+
+    + .texts-list__label {
+      margin-left: 14px;
+    }
+  }
+
   &__date {
     @include utilityPrimary;
     display: inline-block;
