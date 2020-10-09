@@ -7,7 +7,7 @@ module Texts
 
     # @return [String]
     def add_details!
-      update_digest_with! text, :id, :description, :landmarks, :spine, :toc
+      update_digest_with! text, :id, :description, :landmarks, :spine, :publication_date, :toc
 
       calculate_fingerprints_for! text.text_sections
       calculate_fingerprints_for! text.titles
