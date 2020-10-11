@@ -9,7 +9,7 @@ module ProjectExportations
 
     record :user, default: nil
 
-    boolean :force_new_export, default: false
+    boolean :force_new_export, default: true
 
     boolean :perform_synchronously, default: false
 

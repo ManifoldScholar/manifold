@@ -8,7 +8,7 @@ module ProjectExportations
 
     record :project_exportation
 
-    boolean :force_new_export, default: false
+    boolean :force_new_export, default: true
 
     # @return [ProjectExportation]
     def execute
