@@ -33,11 +33,20 @@ module ResourceImports
     end
 
     def ensure_encoding(file_path)
+      return ensure_string_io_encoding(file_path) if file_path.is_a? StringIO
+
       content = File.read(file_path)
       detection = CharlockHolmes::EncodingDetector.detect(content)
       return file_path if detection[:encoding] == VALID_ENCODING
 
       CharlockHolmes::Converter.convert content, detection[:encoding], VALID_ENCODING
     end
+
+    def ensure_string_io_encoding(string_io)
+      content = string_io.read
+      detection = CharlockHolmes::EncodingDetector.detect(content)
+      CharlockHolmes::Converter.convert content, detection[:encoding], VALID_ENCODING
+    end
+
   end
 end

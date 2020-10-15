@@ -2,8 +2,6 @@ module Attachments
   class ProcessAttachmentJob < ApplicationJob
     include ExclusiveJob
 
-    # TODO: SHRINE V3 - https://shrinerb.com/docs/upgrading-to-3#dual-support
-
     queue_as :default
 
     def perform(*args)
@@ -13,7 +11,7 @@ module Attachments
         name: params[:name],
         file: params[:file_data]
       )
-      attacher.atomic_promote
+      attacher.promote
       attacher.create_derivatives
       attacher.record.save
     end

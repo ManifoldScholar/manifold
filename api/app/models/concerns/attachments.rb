@@ -171,8 +171,6 @@ module Attachments
   def shrine_show_placeholder_for?(attachment_name)
     return false unless shrine_upload_matches_type?(shrine_original_for(attachment_name), type: :image)
 
-    #    return false if has_processed_shrine_attachment?(attachment_name)
-
     true
   end
 

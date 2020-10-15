@@ -20,7 +20,11 @@ module Packaging
 
       # @return [File]
       def to_io
-        ingestion_source.attachment.to_io
+        if ingestion_source.attachment.storage.respond_to? :path
+          ingestion_source.attachment.to_io
+        else
+          Down.download(ingestion_source.attachment.url)
+        end
       end
 
       private

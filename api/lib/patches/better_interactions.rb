@@ -99,7 +99,7 @@ module Patches
     def compose(interaction, provided_inputs = {})
       super
     rescue ActiveInteraction::Interrupt => e
-      raise ActiveRecord::Rollback, e.message if in_transaction?
+      raise ActiveRecord::Rollback, e.errors.full_messages if in_transaction?
 
       raise e
     end

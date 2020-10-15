@@ -19,8 +19,9 @@ RSpec.describe ResourceImports::ParseCSV do
     end
 
     it "parses and maintains the correct characters" do
-      expected = [["Header 1", "Header 2"], ["regular value",  "value ‘with’ curly “quotes”"]]
-      expect(ResourceImportRow.pluck(:values)).to eq expected
+      expected = [["Header 1", "Header 2"], ["regular value", "value ‘with’ curly “quotes”"]]
+      compare = ResourceImportRow.pluck(:values)
+      expect(expected[1][1]).to eq compare[1][1]
     end
   end
 end

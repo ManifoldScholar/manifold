@@ -38,3 +38,14 @@ module FastJsonapi
     end
   end
 end
+
+# Google cloud storage needs to deal with the underlying IO stream, not the TUS wrapper,
+# which doesn't respond to all the methods that GCS needs to see for it to be a viable
+# stream. This patch exposes the underlying input to our TusGcs storage.
+module ::Tus
+  class Input
+    def get_input
+      @input
+    end
+  end
+end

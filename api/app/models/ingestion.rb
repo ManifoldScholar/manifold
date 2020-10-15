@@ -100,7 +100,7 @@ class Ingestion < ApplicationRecord
   end
 
   def ingestion_source
-    return source_path if file_based_ingestion?
+    return local_source_path if file_based_ingestion?
 
     external_source_url
   end
