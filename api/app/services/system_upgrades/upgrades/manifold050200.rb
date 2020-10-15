@@ -16,35 +16,7 @@ module SystemUpgrades
         logger.info("See https://shrinerb.com/docs/upgrading-to-3#migrating-versions.   ")
         logger.info("===================================================================")
 
-        shrine_properties = {
-          ActionCallout: [:attachment],
-          Feature: [:background, :foreground],
-          IngestionSource: [:attachment],
-          Ingestion: [:source],
-          Maker: [:avatar],
-          Project: [:cover, :hero, :avatar],
-          User: [:avatar],
-          ProjectCollection: [:custom_icon, :hero, :social_image],
-          ResourceCollection: [:thumbnail],
-          ResourceImport: [:data],
-          Resource: [
-            :attachment,
-            :high_res,
-            :transcript,
-            :translation,
-            :variant_format_one,
-            :variant_format_two,
-            :variant_thumbnail,
-            :variant_poster
-          ],
-          Settings: [:press_logo, :press_logo_footer, :press_logo_mobile, :favicon],
-          Text: [:cover],
-          CachedExternalSource: [:asset],
-          ProjectExport: [:asset],
-          TextExport: [:asset]
-        }
-
-        shrine_properties.each do |klass_name, properties|
+        Storage::ShrineProperties.fetch.each do |klass_name, properties|
           klass = klass_name.to_s.constantize
           klass.find_each do |model|
             logger.info "Found #{klass_name} #{model.id}..."

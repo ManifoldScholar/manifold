@@ -1,20 +1,9 @@
-require "shrine/storage/file_system"
-require "shrine/storage/memory"
-require "shrine/storage/tus"
+Shrine.storages = Storage::Factory.shrine_storages
 
-Shrine.storages = {
-  cache: Shrine::Storage::FileSystem.new("public", prefix: "system/cache"),
-  store: Shrine::Storage::FileSystem.new("public", prefix: "system")
-}
-
-Shrine.storages[:tus] =
-  if Rails.env.test?
-    Shrine::Storage::Memory.new
-  else
-    Shrine::Storage::FileSystem.new("data")
-  end
+Shrine.plugin :mirroring, mirror: { store: :mirror } if Shrine.storages[:mirror]
 
 Shrine.plugin :activerecord
 Shrine.plugin :refresh_metadata
 Shrine.plugin :signature
-Shrine.plugin :upload_options, cache: { move: true }, store: { move: true }
+
+Shrine.plugin :upload_options, cache: { move: true }, store: { move: true } if Storage::Factory.store_supports_move?

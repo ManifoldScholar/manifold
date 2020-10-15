@@ -29,7 +29,7 @@ module Resources
 
     # @api private
     ATTACHMENTS = Resource.column_names.grep(/_data\z/).map do |column|
-      column.sub(/_data\z/, "_original_path").to_sym
+      column.sub(/_data\z/, "_checksum").to_sym
     end.freeze
 
     def add_details!

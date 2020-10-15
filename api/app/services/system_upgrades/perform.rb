@@ -4,8 +4,10 @@ module SystemUpgrades
     include SystemUpgrades::Utilities
 
     boolean :force, default: false
+    string :version, default: nil
     boolean :noop, default: false
     boolean :stdout, default: false
+    boolean :reindex, default: true
 
     set_callback :execute, :before, :load_upgrades!
 
@@ -16,13 +18,13 @@ module SystemUpgrades
     def execute
       applied = false
 
-      upgrade_interactions.each do |upgrade_interaction|
+      filtered_upgrades.each do |upgrade_interaction|
         _result, upgrade_output = compose upgrade_interaction, inputs
         applied = true if _result && !noop
         output.write upgrade_output
       end
 
-      reindex_records if applied
+      reindex_records if applied && reindex
 
       output.string
     end
@@ -51,6 +53,12 @@ module SystemUpgrades
       end
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+
+    def filtered_upgrades
+      return upgrade_interactions unless version.present?
+
+      upgrade_interactions.filter { |klass| klass.version_string == version }
+    end
 
     def load_upgrades!
       @upgrade_interactions = SystemUpgrades.eager_load_upgrades!

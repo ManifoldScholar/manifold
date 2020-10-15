@@ -10,7 +10,7 @@ module Attachments
     # @param [AttachmentUploader::UploadedFile] uploaded_file
     # @return [Boolean]
     def call(uploaded_file)
-      return false unless uploaded_file.present?
+      return false unless uploaded_file.present? && uploaded_file.extension.present?
 
       uploaded_file.extension.match? pattern
     end
