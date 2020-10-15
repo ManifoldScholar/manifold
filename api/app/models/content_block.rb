@@ -1,6 +1,9 @@
+require "sti_preload"
+
 class ContentBlock < ApplicationRecord
   include ProxiedAssociations
   include ActiveSupport::Configurable
+  include StiPreload
 
   config.required_render_attributes = [].freeze
 
