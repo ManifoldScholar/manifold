@@ -45,7 +45,7 @@ server {
 
   location /api {
 
-    location /api/static {
+    location ~ ^/(api/static|api/sidekiq/images|api/sidekiq/stylesheets|api/sidekiq/javascripts)/ {
       root <%= root %>/api/public;
     }
 
