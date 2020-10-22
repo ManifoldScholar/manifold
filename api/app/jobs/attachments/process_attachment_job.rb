@@ -1,6 +1,11 @@
+require "image_processing/mini_magick"
+
 module Attachments
   class ProcessAttachmentJob < ApplicationJob
     include ExclusiveJob
+
+    concurrency 3, drop: false unless Rails.env.test?
+    retry_on ::MiniMagick::Error, wait: 10.seconds, attempts: 3
 
     queue_as :default
 
@@ -11,7 +16,7 @@ module Attachments
         name: params[:name],
         file: params[:file_data]
       )
-      attacher.promote
+      attacher.promote unless attacher.stored?
       attacher.create_derivatives
       attacher.record.save
     end
