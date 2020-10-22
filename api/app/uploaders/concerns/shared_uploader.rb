@@ -22,9 +22,19 @@ module SharedUploader
     # which should remain in place after the import runs. Until we sort out these issues, we
     # should copy rather than move files into the cache.
     plugin :upload_options, cache: { move: false }, store: { move: true } if Storage::Factory.store_supports_move?
+    plugin :pretty_location
 
     add_metadata :sha256 do |io, _context|
       calculate_signature(io, :sha256, format: :hex)
+    end
+
+    def generate_location(io, **options)
+      identifier = options[:record].public_send(opts[:pretty_location][:identifier])
+      splittable = identifier.is_a?(Array) ? identifier.first : identifier
+      parts = splittable.to_s[0..2].split("")
+      parts.push(identifier) unless identifier.is_a? Array
+      parts += identifier if identifier.is_a? Array
+      pretty_location(io, identifier: parts, **options)
     end
   end
 end

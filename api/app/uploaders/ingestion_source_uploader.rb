@@ -2,7 +2,6 @@
 class IngestionSourceUploader < Shrine
   include SharedUploader
 
-  plugin :pretty_location
   plugin :determine_mime_type, analyzer: BETTER_MARCEL
   plugin :validation_helpers
   plugin :backgrounding

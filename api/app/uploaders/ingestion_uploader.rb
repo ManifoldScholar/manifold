@@ -2,7 +2,6 @@ class IngestionUploader < TusUploader
   include SharedUploader
 
   plugin :add_metadata
-  plugin :pretty_location
   plugin :determine_mime_type, analyzer: :marcel
   plugin :validation_helpers
   plugin :backgrounding

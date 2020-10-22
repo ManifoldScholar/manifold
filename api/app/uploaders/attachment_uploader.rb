@@ -5,7 +5,6 @@ class AttachmentUploader < Shrine
   plugin :backgrounding
   plugin :validation_helpers
   plugin :derivatives, versions_compatibility: true
-  plugin :pretty_location
   plugin :remote_url, max_size: 20 * 1024 * 1024
   plugin :determine_mime_type, analyzer: :marcel
   plugin :store_dimensions, analyzer: lambda { |io, analyzers|

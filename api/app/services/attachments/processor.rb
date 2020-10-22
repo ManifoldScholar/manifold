@@ -49,6 +49,7 @@ module Attachments
     end
 
     # rubocop:disable Lint/Void
+    # rubocop:disable Metrics/AbcSize
     def image?
       return false unless upload&.mime_type && upload&.extension
 
@@ -63,6 +64,7 @@ module Attachments
       !upload.extension.match(Regexp.union(CONFIG[:pdf][:allowed_ext])).nil?
     end
     # rubocop:enable Lint/Void
+    # rubocop:enable Metrics/AbcSize
 
   end
 end
