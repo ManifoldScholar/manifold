@@ -152,9 +152,8 @@ class Resource < ApplicationRecord
   end
 
   def queue_fetch_thumbnail(force: false)
-    unless force
-      return unless fetch_thumbnail?
-    end
+    return unless force || fetch_thumbnail?
+
     FetchResourceThumbnail.perform_later(id)
   end
 

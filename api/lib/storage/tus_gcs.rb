@@ -13,6 +13,7 @@ module Storage
     attr_reader :bucket, :prefix, :upload_options, :limits
 
     # Initializes an aws-sdk-s3 client with the given credentials.
+    # rubocop:disable Metrics/ParameterLists
     def initialize(bucket:, prefix: "tus", upload_options: {}, limits: {}, credentials: nil, **_client_options)
       raise ArgumentError, "the :bucket option was nil" unless bucket
 
@@ -23,6 +24,7 @@ module Storage
       @storage = nil
       @credentials = credentials
     end
+    # rubocop:enable Metrics/ParameterLists
 
     # Initiates multipart upload for the given upload, and stores its
     # information inside the info hash.
@@ -75,6 +77,7 @@ module Storage
     # Returns a Tus::Response object through which data of the specified
     # upload can be retrieved in a streaming fashion. Accepts an optional
     # range parameter for selecting a subset of bytes to retrieve.
+    # rubocop:disable Metrics/AbcSize
     def get_file(uid, _info = {}, range: nil)
       range_opts = range ? range.begin..range.end : nil
       data = get_object(uid).download(range: range_opts)
@@ -90,8 +93,10 @@ module Storage
 
       Tus::Response.new(chunks: chunks, close: data.method(:close))
     end
+    # rubocop:enable Metrics/AbcSize
 
-    def file_url(uid, info = {}, **options); end # optional
+    # optional
+    def file_url(uid, info = {}, **options); end
 
     def delete_file(uid, _info = {})
       get_object(uid)&.delete

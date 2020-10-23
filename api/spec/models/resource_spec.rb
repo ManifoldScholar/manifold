@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Resource, type: :model do
-
   it "has a valid factory" do
     expect(FactoryBot.build(:resource)).to be_valid
   end
@@ -62,11 +61,13 @@ RSpec.describe Resource, type: :model do
 
   describe "#parse_and_set_external_id!" do
     context "when valid :external_id" do
-      let(:resource) { FactoryBot.build(:resource,
-                                        kind: "video",
-                                        sub_kind: "external_video",
-                                        external_type: "youtube",
-                                        external_id: "https://www.youtube.com?v=lVrAwK7FaOw") }
+      let(:resource) do
+        FactoryBot.build(:resource,
+                         kind: "video",
+                               sub_kind: "external_video",
+                               external_type: "youtube",
+                               external_id: "https://www.youtube.com?v=lVrAwK7FaOw")
+      end
 
       before(:each) { resource.save }
 
@@ -76,11 +77,13 @@ RSpec.describe Resource, type: :model do
     end
 
     context "when invalid :external_id" do
-      let(:resource) { FactoryBot.build(:resource,
-                                        kind: "video",
-                                        sub_kind: "external_video",
-                                        external_type: "vimeo",
-                                        external_id: "https://www.youtube.com?v=lVrAwK7FaOw") }
+      let(:resource) do
+        FactoryBot.build(:resource,
+                         kind: "video",
+                               sub_kind: "external_video",
+                               external_type: "vimeo",
+                               external_id: "https://www.youtube.com?v=lVrAwK7FaOw")
+      end
 
       before(:each) { resource.save }
 
@@ -115,11 +118,10 @@ RSpec.describe Resource, type: :model do
     end
   end
 
-
   describe "formats some fields with a markdown subset" do
-    let(:raw) { "_italic_ a **bold**"}
-    let(:formatted_without_blocks) { "<em>italic</em> a <strong>bold</strong>"}
-    let(:formatted_with_block) { "<p><em>italic</em> a <strong>bold</strong></p>"}
+    let(:raw) { "_italic_ a **bold**" }
+    let(:formatted_without_blocks) { "<em>italic</em> a <strong>bold</strong>" }
+    let(:formatted_with_block) { "<p><em>italic</em> a <strong>bold</strong></p>" }
 
     it "has a formatted title after save" do
       resource = FactoryBot.create(:resource, title: raw)
@@ -138,7 +140,6 @@ RSpec.describe Resource, type: :model do
   end
 
   context "can be filtered" do
-
     before(:each) do
       @project_a = FactoryBot.create(:project, title: "project_a")
       @project_b = FactoryBot.create(:project, title: "project_b")
@@ -154,14 +155,14 @@ RSpec.describe Resource, type: :model do
       collection.resources << @resource_a
       collection.resources << @resource_b
       collection.save
-      results = Resource.filtered({collection_order: collection.id})
+      results = Resource.filtered({ collection_order: collection.id })
       expect(results.first.id).to eq @resource_a.id
     end
 
     it "to only include those belonging to a project" do
-      results = Resource.filtered({project: @project_a})
+      results = Resource.filtered({ project: @project_a })
       expect(results.length).to be 2
-      results = Resource.filtered({project: @project_b})
+      results = Resource.filtered({ project: @project_b })
       expect(results.length).to be 1
     end
 
@@ -170,23 +171,23 @@ RSpec.describe Resource, type: :model do
       @collection_resource_a = FactoryBot.create(:collection_resource, resource_collection: @collection_a, resource: @resource_a)
       @collection_resource_b = FactoryBot.create(:collection_resource, resource_collection: @collection_a, resource: @resource_b)
       @collection_resource_c = FactoryBot.create(:collection_resource, resource_collection: @collection_b, resource: @resource_d)
-      results = Resource.filtered({resource_collection: @collection_a.id})
+      results = Resource.filtered({ resource_collection: @collection_a.id })
       expect(results.length).to be 2
-      results = Resource.filtered({resource_collection: @collection_b.id})
+      results = Resource.filtered({ resource_collection: @collection_b.id })
       expect(results.length).to be 1
     end
 
     it "by kind" do
       # TBD: Expand this test. Right now all factory resources are links to avoid dealing
       # with attachments.
-      results = Resource.filtered({kind: "link"})
+      results = Resource.filtered({ kind: "link" })
       expect(results.length).to be 3
     end
 
     it "by tag" do
-      results = Resource.filtered({tag: "dog"})
+      results = Resource.filtered({ tag: "dog" })
       expect(results.length).to be 2
-      results = Resource.filtered({tag: "test"})
+      results = Resource.filtered({ tag: "test" })
       expect(results.length).to be 1
     end
   end
@@ -231,30 +232,27 @@ RSpec.describe Resource, type: :model do
   end
 
   context "when the resource is a PDF", slow: true do
-
     let(:resource) do
       FactoryBot.build(
         :resource,
         kind: "pdf",
-        attachment: fixture_file_upload(Rails.root.join('spec/data/assets/pdfs/multi-page.pdf'), 'application/pdf')
+        attachment: fixture_file_upload(Rails.root.join("spec/data/assets/pdfs/multi-page.pdf"), "application/pdf")
       )
     end
     before { perform_enqueued_jobs { resource.save } }
 
     it "produces attachment styles" do
       resource.reload # Reload to pick up backgrounded attachment versions.
-      expect(resource.attachment_styles.values.any? &:empty?).to be false
+      expect(resource.attachment_styles.values.any?(&:empty?)).to be false
     end
-
   end
 
   context "when the resource is an MP3", slow: true do
-
     let(:resource) do
       FactoryBot.build(
         :resource,
         kind: "audio",
-        attachment: fixture_file_upload(Rails.root.join('spec/data/assets/audio/test.mp3'), 'audio/mpeg')
+        attachment: fixture_file_upload(Rails.root.join("spec/data/assets/audio/test.mp3"), "audio/mpeg")
       )
     end
     before { perform_enqueued_jobs { resource.save } }
@@ -263,23 +261,21 @@ RSpec.describe Resource, type: :model do
       resource.reload
       expect(resource.attachment_styles[:original].empty?).to be false
     end
-
   end
 
   context "when the resource is an image", slow: true do
-
     let(:resource) do
       FactoryBot.build(
         :resource,
         kind: "image",
-        attachment: fixture_file_upload(Rails.root.join('spec/data/assets/images/test_avatar.jpg'), 'image/jpg')
+        attachment: fixture_file_upload(Rails.root.join("spec/data/assets/images/test_avatar.jpg"), "image/jpg")
       )
     end
     before { perform_enqueued_jobs { resource.save } }
 
     it "produces attachment styles" do
       resource.reload # Reload to pick up backgrounded attachment versions.
-      expect(resource.attachment_styles.values.any? &:empty?).to be false
+      expect(resource.attachment_styles.values.any?(&:empty?)).to be false
     end
 
     it "stores attachment checksums" do
@@ -289,8 +285,5 @@ RSpec.describe Resource, type: :model do
       expect(resource.attachment_checksum).to_not eq nil
       expect(resource.attachment_checksum).to eq sha
     end
-
-
   end
-
 end
