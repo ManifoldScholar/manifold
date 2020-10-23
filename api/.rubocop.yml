@@ -17,7 +17,6 @@ AllCops:
       - 'api/lib/patches/**/*'
       - 'api/lib/templates/**/*'
 
-
 Metrics/BlockLength:
   Exclude:
     - 'Rakefile'
@@ -57,6 +56,9 @@ Layout/EmptyLinesAroundClassBody:
 
 Layout/LineLength:
   Max: 140
+
+Layout/BeginEndAlignment: # (new in 0.91)
+  Enabled: true
 
 Lint/AmbiguousBlockAssociation:
   Enabled: false
@@ -111,6 +113,33 @@ Lint/UnreachableLoop:
   Enabled: true
 
 Lint/DuplicateRescueException:
+  Enabled: true
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: true
+
+Lint/DuplicateRequire:
+  Enabled: true
+
+Lint/EmptyFile:
+  Enabled: true
+
+Lint/HashCompareByIdentity:
+  Enabled: true
+
+Lint/IdentityComparison:
+  Enabled: true
+
+Lint/RedundantSafeNavigation:
+  Enabled: true
+
+Lint/TrailingCommaInAttributeDeclaration:
+  Enabled: true
+
+Lint/UselessMethodDefinition:
+  Enabled: true
+
+Lint/UselessTimes:
   Enabled: true
 
 Style/AccessorGrouping:
@@ -234,6 +263,25 @@ Style/RedundantRegexpEscape:
 
 Style/SlicingWithRange:
   Enabled: true
+
+Style/ClassEqualityComparison:
+  Enabled: true
+
+# We do this so rarely, that when we do it's generally for a good reason
+Style/CombinableLoops:
+  Enabled: false
+
+Style/KeywordParametersOrder:
+  Enabled: true
+
+Style/RedundantSelfAssignment:
+  Enabled: true
+
+# It's often the case that breaking a complex condition into nested conditions can make
+# the code more readable. All the changes suggested by this rule, IMO, made our code
+# more complex and less legible.
+Style/SoleNestedConditional:
+  Enabled: false
 
 Naming/HeredocDelimiterNaming:
   Enabled: false

@@ -95,7 +95,7 @@ module ArelHelpers
       end
     end
 
-    def arel_json_property_path_numeric_compare(attribute, *path_parts, default: 0, operator:, value:)
+    def arel_json_property_path_numeric_compare(attribute, *path_parts, operator:, value:, default: 0)
       expr = arel_json_get_path_as_text(attribute, path_parts)
 
       arel_coalesce(arel_cast(expr, 'numeric'), default).__send__(operator, value)

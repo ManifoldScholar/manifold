@@ -44,7 +44,7 @@ module HasStateMachine
   class_methods do
     include Statesman::Adapters::ActiveRecordQueries::ClassMethods
 
-    def has_state_machine!(enum_klass: default_enum_klass, initial_state:, machine_klass: default_machine_klass, transition_klass: default_transition_klass)
+    def has_state_machine!(initial_state:, enum_klass: default_enum_klass, machine_klass: default_machine_klass, transition_klass: default_transition_klass)
       config.initial_state = initial_state
       config.transition_klass = transition_klass
 

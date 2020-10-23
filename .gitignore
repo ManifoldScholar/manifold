@@ -14,6 +14,9 @@
 .idea
 .idea/*
 
+### VSCode ###
+.vscode
+
 # File-based project format:
 *.ipr
 *.iws

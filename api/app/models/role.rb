@@ -23,17 +23,11 @@ class Role < ApplicationRecord
   private
 
   # @return [void]
-  # rubocop:disable Style/GuardClause
   def check_resource_for_kind!
-    if has_expected_resource?
-      errors.add :resource, "must be a single record" unless resource.is_a?(ApplicationRecord)
-    end
+    errors.add :resource, "must be a single record" if has_expected_resource? && !resource.is_a?(ApplicationRecord)
 
-    if global_entitlement?
-      errors.add :resource, "must be a system entitlement" unless resource.is_a?(SystemEntitlement)
-    end
+    errors.add :resource, "must be a system entitlement" if global_entitlement? && !resource.is_a?(SystemEntitlement)
   end
-  # rubocop:enable Style/GuardClause
 
   # @return [void]
   def set_kind!

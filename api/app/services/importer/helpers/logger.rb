@@ -25,7 +25,7 @@ module Importer
       end
 
       def log_attachment_errors(model)
-        return unless model.class.name == "Resource"
+        return unless model.instance_of?(Resource)
 
         @logger.error Rainbow("        Attachment content type: #{model.attachment.content_type}").red
       end
