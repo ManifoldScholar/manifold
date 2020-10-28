@@ -107,6 +107,7 @@ module ManifoldApi
     end
 
     config.active_job.queue_adapter = :sidekiq
+    config.active_record.cache_versioning = false
     config.cache_store = :redis_store, ManifoldEnv.redis.namespaced_url("cache")
   end
 end
