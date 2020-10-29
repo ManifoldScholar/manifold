@@ -182,8 +182,8 @@ class Project < ApplicationRecord
   scope :published, -> { where(draft: false) }
   scope :by_draft, ->(draft = nil) { where(draft: to_boolean(draft)) unless draft.nil? }
 
-  scope :standalone_enforced, -> { where(standalone_mode: :enforced) }
-  scope :standalone_unforced, -> { where.not(standalone_mode: :enforced) }
+  scope :standalone_enforced, -> { where(standalone_mode: standalone_modes[:enforced]) }
+  scope :standalone_unforced, -> { where.not(standalone_mode: standalone_modes[:enforced]) }
 
   scope :ranked_by_collection, (lambda do
     is_same_project = CollectionProjectRanking
