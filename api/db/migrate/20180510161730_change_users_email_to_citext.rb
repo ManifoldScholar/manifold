@@ -2,7 +2,7 @@ class ChangeUsersEmailToCitext < ActiveRecord::Migration[5.0]
   def change
     reversible do |dir|
       dir.up do
-        enable_extension("citext") if extensions.include?("citext")
+        enable_extension("citext")
 
         change_column :users, :email, :citext
 
@@ -19,7 +19,7 @@ class ChangeUsersEmailToCitext < ActiveRecord::Migration[5.0]
 
       dir.down do
         change_column :users, :email, :string
-        disable_extension("citext") if extensions.include?("citext")
+        disable_extension("citext")
       end
     end
   end

@@ -4,15 +4,7 @@ class CreateResourceImportAndResourceImportRows < ActiveRecord::Migration[5.0]
   include PaperclipMigrator
 
   def change
-    reversible do |change|
-      change.up do
-        enable_extension("pg_trgm") if extensions.include?("pg_trgm")
-      end
-
-      change.down do
-        disable_extension("pg_trgm") if extensions.include?("pg_trgm")
-      end
-    end
+    enable_extension("pg_trgm")
 
     create_table :resource_imports, id: :uuid do |t|
       t.references :creator, type: :uuid, index: true, foreign_key: { to_table: :users }

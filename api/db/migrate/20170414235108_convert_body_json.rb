@@ -1,4 +1,4 @@
-class ConvertBodyJson < ActiveRecord::Migration[5.0]
+class ConvertBodyJSON < ActiveRecord::Migration[5.0]
   def change
     rename_column :text_sections, :body_json, :body_json_text
 

@@ -1,14 +1,6 @@
 class InitialSchema < ActiveRecord::Migration[5.0]
   def change
-    reversible do |change|
-      change.up do
-        enable_extension("uuid-ossp") if extensions.include?("uuid-ossp")
-      end
-
-      change.down do
-        disable_extension("uuid-ossp") if extensions.include?("uuid-ossp")
-      end
-    end
+    enable_extension("uuid-ossp")
 
     create_table "collaborators", id: :uuid, force: :cascade do |t|
       t.uuid "text_id"
