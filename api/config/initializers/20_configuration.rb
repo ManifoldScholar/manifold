@@ -1,4 +1,8 @@
-m = Hashie::Mash.new(Rails.application.config_for(:manifold))
+class ConfigMash < Hashie::Mash
+  disable_warnings
+end
+
+m = ConfigMash.new(Rails.application.config_for(:manifold))
 
 # Load environment variables into configuration so we have a unified interface
 # for accessing configuration that can be spread across a few locations.
