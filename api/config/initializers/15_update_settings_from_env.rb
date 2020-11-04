@@ -9,12 +9,13 @@ Rails.application.configure do
         the settings update from environment to fail gracefully. If this error persists
         or occurs outside of migrations, it should be investigated.
       TEXT
-    rescue ActiveRecord::NoDatabaseError
+    rescue ActiveRecord::NoDatabaseError, PG::UndefinedTable
       Rails.logger.warn <<~TEXT
-        Unable to update settings from environment due to NoDatabaseError. This is likely due
-        to the udpate being run during setup, before the DB exists. In this case, we allow
-        the settings update from environment to fail gracefully. If this error persists
-        or occurs outside of project setup, it should be investigated.
+        Unable to update settings from environment due to ActiveRecord::NoDatabaseError or
+        PG::UndefinedTable. This is likely due to the update being run during setup,
+        before the DB or tables exist. In this case, we allow the settings update from
+        environment to fail gracefully. If this error persists or occurs outside of
+        project setup, it should be investigated.
       TEXT
     end
   end
