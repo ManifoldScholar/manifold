@@ -6,8 +6,9 @@ module Factory
     # rubocop:disable Metrics/MethodLength
     def self.config
       db_config = ActiveRecord::Base.connection_pool.with_connection do |conn|
-        Rails.application.executor.wrap do
-          conn.select_one <<~SQL
+        if conn.table_exists? "settings"
+          Rails.application.executor.wrap do
+            conn.select_one <<~SQL
             SELECT
               integrations ->> 'google_project_id' AS google_project_id,
               integrations ->> 'google_private_key_id' AS google_private_key_id,
@@ -15,7 +16,8 @@ module Factory
               integrations ->> 'google_client_email' AS google_client_email,
               integrations ->> 'google_client_id' AS google_client_id
             FROM settings
-          SQL
+            SQL
+          end
         end
       end
 
