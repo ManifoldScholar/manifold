@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[123],{1671:function(n,o){n.exports=function(n){return{disableAutodetect:!0}}}}]);
-//# sourceMappingURL=chunk-react-syntax-highlighter_languages_highlight_plaintext-7fcde5fdae57b889f5df.js.map
