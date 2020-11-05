@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[171],{1720:function(n,e){n.exports=function(n){return{subLanguage:"xml",contains:[{begin:"<%",end:"%>",subLanguage:"vbscript"}]}}}}]);
-//# sourceMappingURL=chunk-react-syntax-highlighter_languages_highlight_vbscriptHtml-7fcde5fdae57b889f5df.js.map

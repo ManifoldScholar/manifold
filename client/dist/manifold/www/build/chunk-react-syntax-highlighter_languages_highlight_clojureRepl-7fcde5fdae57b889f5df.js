@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[29],{1572:function(n,s){n.exports=function(n){return{contains:[{className:"meta",begin:/^([\w.-]+|\s*#_)?=>/,starts:{end:/$/,subLanguage:"clojure"}}]}}}}]);
-//# sourceMappingURL=chunk-react-syntax-highlighter_languages_highlight_clojureRepl-7fcde5fdae57b889f5df.js.map
