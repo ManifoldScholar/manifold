@@ -10,9 +10,12 @@ module API
         if token_params[:token]
           user_id = AuthToken.decode(token_params[:token])[:user_id]
           authenticated_user = User.find(user_id)
-        else    
+        elsif token_params[:email] and token_params[:password]
           authenticated_user = User.find_by(email: token_params[:email])
           .try(:authenticate, token_params[:password])
+        elsif token_params[:email]
+          # TODO: send email link
+          
         end
         render_authenticated_user(authenticated_user)
       rescue StandardError => e

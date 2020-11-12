@@ -14,7 +14,7 @@ export default function bootstrap(getState, dispatch, cookieHelper, location) {
   const state = getState();
   const authToken = cookieHelper.read("authToken") || new URLSearchParams(location.search).get("authToken");
 
-  console.log(authToken);
+  // TODO: exchange tokens & clear URL param after it's used
 
   // Load settings if they have not already been loaded.
   const loaded = has(state, "entityStore.entities.settings.0");
