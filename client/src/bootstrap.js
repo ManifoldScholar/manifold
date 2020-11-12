@@ -1,7 +1,7 @@
 import has from "lodash/has";
 import ch from "helpers/consoleHelpers";
 import { entityStoreActions } from "actions";
-import { authenticateWithCookie } from "store/middleware/currentUserMiddleware";
+import { authenticateWithAuthToken } from "store/middleware/currentUserMiddleware";
 
 const { request } = entityStoreActions;
 import { settingsAPI, requests } from "api";
@@ -9,10 +9,12 @@ import { settingsAPI, requests } from "api";
 // Currently, the Manifold Bootstrap does two things:
 // 1. Load the settings.
 // 2. Authenticate the user from a cookie.
-export default function bootstrap(getState, dispatch, cookieHelper) {
+export default function bootstrap(getState, dispatch, cookieHelper, location) {
   const promises = [];
   const state = getState();
-  const authToken = cookieHelper.read("authToken");
+  const authToken = cookieHelper.read("authToken") || new URLSearchParams(location.search).get("authToken");
+
+  console.log(authToken);
 
   // Load settings if they have not already been loaded.
   const loaded = has(state, "entityStore.entities.settings.0");
@@ -40,7 +42,7 @@ export default function bootstrap(getState, dispatch, cookieHelper) {
   const authPromiseWrapper = new Promise((resolve, rejectIgnored) => {
     // Whether or not we can authenticate the user, we successfully resolve the promise,
     // because an unauthenticated user is not the same as a failed request.
-    const authPromise = authenticateWithCookie(dispatch, cookieHelper);
+    const authPromise = authenticateWithAuthToken(dispatch, cookieHelper, authToken);
     authPromise.then(
       () => {
         ch.notice("User authenticated", "wink");

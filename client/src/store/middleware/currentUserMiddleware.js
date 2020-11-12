@@ -139,8 +139,7 @@ function authenticateWithToken(authToken, dispatch) {
 // would be difficult to pass through the store. That said, we keep this in the middleware
 // so as not to spread and duplicate this authenticate logic. Yeah, it's kind of a
 // one-off. We're sorry.
-export function authenticateWithCookie(dispatch, cookieHelper) {
-  const authToken = cookieHelper.read("authToken");
+export function authenticateWithAuthToken(dispatch, cookieHelper, authToken) {
   if (!authToken) return Promise.reject();
   const promise = getUserFromToken(authToken);
   promise.then(

@@ -152,7 +152,8 @@ const fetchRouteData = (req, store) => {
 
 const performBootstrap = (req, res, store) => {
   const cookie = new CookieHelper(req, res);
-  return manifoldBootstrap(store.getState, store.dispatch, cookie);
+  const location = createLocation(req.url, {}, "SSR", null);
+  return manifoldBootstrap(store.getState, store.dispatch, cookie, location);
 };
 
 // Handle requests
