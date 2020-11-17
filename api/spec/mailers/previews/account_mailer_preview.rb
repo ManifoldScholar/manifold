@@ -16,6 +16,11 @@ class AccountMailerPreview < ActionMailer::Preview
     AccountMailer.welcome(user, created_by_admin: true)
   end
 
+  # Accessible from http://manifold.lvh/rails/mailers/account_mailer/login_token.html
+  def login_token
+    AccountMailer.login_token(user)
+  end
+
   # Accessible from http://manifold.lvh/rails/mailers/account_mailer/password_change_notification.html
   def password_change_notification
     AccountMailer.password_change_notification(user)

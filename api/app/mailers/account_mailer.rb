@@ -9,6 +9,12 @@ class AccountMailer < ApplicationMailer
     mail(to: @user.email, subject: "Your password has been reset")
   end
 
+  def login_token(user)
+    @user = user
+    @login_token = AuthToken.encode( { user_id: @user.id }, 15)
+    mail(to: @user.email, subject: "Here's your login link")
+  end
+
   def welcome(user, created_by_admin: false)
     @user = user
     @created_by_admin = created_by_admin

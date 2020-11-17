@@ -1,0 +1,8 @@
+<p>
+  You recently requested a login link for your account on <%= @installation_name %>.
+  Click the link below to login.
+</p>
+<%= render :partial => "partials/email/spacer", locals: { height: 10 } %>
+<%= render :partial => "partials/email/button", locals: { text: "Login", url: "#{@client_url}/?x=#{@login_token}"} %>
+<%= render :partial => "partials/email/spacer", locals: { height: 10 } %>
+<p>This login link is only valid for the next 15 minutes.</p>
