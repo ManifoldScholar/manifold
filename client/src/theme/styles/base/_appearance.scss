@@ -40,6 +40,7 @@ $headerBackgroundColor: var(--header-background-color, #{$neutralWhite});
 $headerForegroundColor: var(--header-foreground-color, #{$neutralTextDark});
 $headerForegroundActiveColor: var(--header-foreground-active-color, #{$neutral90});
 $headerForegroundHoverColor: var(--header-foreground-hover-color, #{$_accentInteractionLight});
+$analyticsHighlightColor: var(--analytics-highlight-color, #{$spBlue45});
 
 
 // Light & Dark Client Themes
@@ -62,6 +63,7 @@ body {
   --accent-primary-off-white: #{$_accentPrimaryOffWhite};
   --accent-interaction-light: #{$_accentInteractionLight};
   --accent-interaction-dark: #{$_accentInteractionDark};
+  --analytics-highlight-color: #{$spBlue45};
 }
 
 .browse, .reader.scheme-light, .bg-white {

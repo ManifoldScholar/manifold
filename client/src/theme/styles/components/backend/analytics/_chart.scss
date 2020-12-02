@@ -1,0 +1,46 @@
+.analytics-chart {
+  &__label {
+    @include utilityPrimary;
+    font-size: 12px;
+    font-weight: $semibold;
+    letter-spacing: 0.1em;
+  }
+
+  &__tooltip {
+    @include templateHead;
+    padding: 15px 18px;
+    background-color: $neutral110;
+    border: none;
+    border-radius: 8px;
+  }
+
+  &__tooltip-label {
+    @include utilityPrimary;
+    display: block;
+    font-size: 14px;
+    font-weight: $semibold;
+    color: $neutral50;
+    letter-spacing: 0.1em;
+  }
+
+  &__tooltip-value {
+    display: block;
+    margin-top: 6px;
+    font-size: 17px;
+    color: $analyticsHighlightColor;
+  }
+}
+
+// ApexCharts library overrides
+.apexcharts-tooltip {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.apexcharts-gridlines-horizontal {
+  .apexcharts-gridline:last-child {
+    // hide grid line that overlaps with x-axis
+    display: none;
+  }
+}

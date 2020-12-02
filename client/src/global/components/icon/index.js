@@ -60,12 +60,16 @@ import EyeClosed32 from "./32/EyeClosed";
 import EyeOpen16 from "./16/EyeOpen";
 import EyeOpen32 from "./32/EyeOpen";
 import Eyeball24 from "./24/Eyeball";
+import FeatureExplore32 from "./32/FeatureExplore";
+import FeatureMeasure32 from "./32/FeatureMeasure";
 import Following64 from "./64/Following";
 import Glasses64 from "./64/Glasses";
 import Globe64 from "./64/Globe";
 import Grabber32 from "./32/Grabber";
 import GrabberInactive32 from "./32/GrabberInactive";
 import Info16 from "./16/Info";
+import InteractAnnotate32 from "./32/InteractAnnotate";
+import InteractComment32 from "./32/InteractComment";
 import Key32 from "./32/Key";
 import Lamp64 from "./64/Lamp";
 import Link24 from "./24/Link";
@@ -130,10 +134,12 @@ import Text24 from "./24/Text";
 import TextsBook64 from "./64/TextsBook";
 import TextsLoosePages64 from "./64/TextsLoosePages";
 import TextsStacked64 from "./64/TextsStacked";
+import TimerClock32 from "./32/TimerClock";
 import Toc64 from "./64/Toc";
 import Touch64 from "./64/Touch";
 import Upload32 from "./32/Upload";
 import Upload64 from "./64/Upload";
+import Users32 from "./32/Users";
 import WarningSign64 from "./64/WarningSign";
 import ZoomIn16 from "./16/ZoomIn";
 import ZoomOut16 from "./16/ZoomOut";
@@ -201,12 +207,16 @@ export default {
   EyeOpen16,
   EyeOpen32,
   Eyeball24,
+  FeatureExplore32,
+  FeatureMeasure32,
   Following64,
   Glasses64,
   Globe64,
   Grabber32,
   GrabberInactive32,
   Info16,
+  InteractAnnotate32,
+  InteractComment32,
   Key32,
   Lamp64,
   Link24,
@@ -271,10 +281,12 @@ export default {
   TextsBook64,
   TextsLoosePages64,
   TextsStacked64,
+  TimerClock32,
   Toc64,
   Touch64,
   Upload32,
   Upload64,
+  Users32,
   WarningSign64,
   ZoomIn16,
   ZoomOut16
