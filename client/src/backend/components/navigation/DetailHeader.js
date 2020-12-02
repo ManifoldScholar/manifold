@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 import UniqueIcons from "global/components/icon/unique";
+import Layout from "backend/components/layout";
 
 export default class DetailHeader extends PureComponent {
   static displayName = "Navigation.DetailHeader";
@@ -65,13 +66,6 @@ export default class DetailHeader extends PureComponent {
     return this.props.secondaryLinks;
   }
 
-  get figureClasses() {
-    return classNames("backend-header__figure", {
-      "backend-header__figure--rounded": this.isProjectCollection,
-      "backend-header__figure--accented": this.isProjectCollection
-    });
-  }
-
   get iconName() {
     return this.props.iconName;
   }
@@ -116,16 +110,6 @@ export default class DetailHeader extends PureComponent {
     );
   }
 
-  typeIcon() {
-    return (
-      <IconComposer
-        icon={this.iconFromType}
-        size="default"
-        iconClass="backend-header__type-icon"
-      />
-    );
-  }
-
   breadcrumbs() {
     return (
       <nav
@@ -162,49 +146,24 @@ export default class DetailHeader extends PureComponent {
     );
   }
 
-  figureBlock() {
-    return (
-      <figure className="backend-header__figure-block">
-        <div className={this.figureClasses}>
-          {this.isProject ? this.projectIcon() : this.typeIcon()}
-        </div>
-      </figure>
-    );
-  }
-
-  titleBlock() {
-    return (
-      <div className="backend-header__title-block">
-        <h1 className="backend-header__title">
-          <span dangerouslySetInnerHTML={{ __html: this.title }} />
-          <span className="backend-header__subtitle">{this.subtitle}</span>
-        </h1>
-      </div>
-    );
-  }
-
-  utilityBlock() {
-    return (
-      <div className="backend-header__utility-block">
-        {this.utility}
-        {this.note && <span className="backend-header__note">{this.note}</span>}
-      </div>
-    );
-  }
-
   render() {
     return (
-      <section className="backend-header">
-        {this.backUrl && this.breadcrumbs()}
-        <div className="backend-header__inner backend-header__inner--padded">
-          <header className="backend-header__content-wrapper">
-            {this.titleBlock()}
-            {this.utilityBlock()}
-            {this.figureBlock()}
-          </header>
-        </div>
-        {this.secondaryLinks && this.sectionNav()}
-      </section>
+      <Layout.ViewHeader
+        pre={this.backUrl && this.breadcrumbs()}
+        icon={this.isProject ? this.projectIcon() : this.iconFromType}
+        utility={this.utility}
+        note={this.note}
+        title={this.title}
+        subtitle={this.subtitle}
+        post={this.secondaryLinks && this.sectionNav()}
+        smallTitle
+        padded={!this.isProjectCollection}
+        allowTitleHTML
+        iconSize={this.isProjectCollection ? 44 : null}
+        iconRounded={this.isProjectCollection}
+        iconAccented={this.isProjectCollection}
+        iconType="entity-type"
+      />
     );
   }
 }

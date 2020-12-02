@@ -32,15 +32,40 @@ $accentPrimaryMedium: var(--accent-primary-medium, #{$_accentPrimaryMedium});
 $accentPrimaryLight: var(--accent-primary-light, #{$_accentPrimaryLight});
 $accentPrimaryDull: var(--accent-primary-dull, #{$_accentPrimaryDull});
 $accentPrimaryPale: var(--accent-primary-pale, #{$_accentPrimaryPale});
-$accentPrimaryExtraPale: var(--accent-primary-extra-pale, #{$_accentPrimaryExtraPale});
-$accentPrimaryOffWhite: var(--accent-primary-off-white, #{$_accentPrimaryOffWhite});
-$accentInteractionLight: var(--accent-interaction-light, #{$_accentInteractionLight});
-$accentInteractionDark: var(--accent-interaction-dark, #{$_accentInteractionDark});
+$accentPrimaryExtraPale: var(
+  --accent-primary-extra-pale,
+  #{$_accentPrimaryExtraPale}
+);
+$accentPrimaryOffWhite: var(
+  --accent-primary-off-white,
+  #{$_accentPrimaryOffWhite}
+);
+$accentInteractionLight: var(
+  --accent-interaction-light,
+  #{$_accentInteractionLight}
+);
+$accentInteractionDark: var(
+  --accent-interaction-dark,
+  #{$_accentInteractionDark}
+);
 $headerBackgroundColor: var(--header-background-color, #{$neutralWhite});
 $headerForegroundColor: var(--header-foreground-color, #{$neutralTextDark});
-$headerForegroundActiveColor: var(--header-foreground-active-color, #{$neutral90});
-$headerForegroundHoverColor: var(--header-foreground-hover-color, #{$_accentInteractionLight});
-
+$headerForegroundActiveColor: var(
+  --header-foreground-active-color,
+  #{$neutral90}
+);
+$headerForegroundHoverColor: var(
+  --header-foreground-hover-color,
+  #{$_accentInteractionLight}
+);
+$analyticsHighlightColor: var(
+  --analytics-highlight-color,
+  #{$_analyticsHighlightColor}
+);
+$analyticsHighlightColorPale: var(
+  --analytics-highlight-color-pale,
+  #{$_analyticsHighlightColorPale}
+);
 
 // Light & Dark Client Themes
 // --------------------
@@ -49,7 +74,6 @@ $defaultHoverColor: var(--default-hover-color, #{$accentInteractionLight});
 $defaultErrorColor: var(--default-error-color, #{$spErrorLight});
 $defaultWarningColor: var(--default-warning-color, #{$spWarningLight});
 $defaultNoticeColor: var(--default-notice-color, #{$spNoticeLight});
-
 
 body {
   --accent-primary: #{$_accentPrimary};
@@ -62,9 +86,13 @@ body {
   --accent-primary-off-white: #{$_accentPrimaryOffWhite};
   --accent-interaction-light: #{$_accentInteractionLight};
   --accent-interaction-dark: #{$_accentInteractionDark};
+  --analytics-highlight-color: #{$_analyticsHighlightColor};
+  --analytics-highlight-color-pale: #{$_analyticsHighlightColorPale};
 }
 
-.browse, .reader.scheme-light, .bg-white {
+.browse,
+.reader.scheme-light,
+.bg-white {
   --default-focus-color: #{$neutralUIDark};
   --default-hover-color: #{$accentInteractionDark};
   --default-error-color: #{$spErrorDark};
@@ -73,7 +101,11 @@ body {
   color: $neutralTextDark;
 }
 
-.backend, .drawer--backend, .reader.scheme-dark, .bg-neutral90, .bg-neutral95 {
+.backend,
+.drawer--backend,
+.reader.scheme-dark,
+.bg-neutral90,
+.bg-neutral95 {
   --default-focus-color: #{$accentInteractionLight};
   --default-hover-color: #{$accentInteractionLight};
   --default-error-color: #{$spErrorLight};
@@ -81,9 +113,9 @@ body {
   --default-notice-color: #{$spNoticeLight};
   color: $neutralTextLight;
 
-  input[type='text'],
-  input[type='email'],
-  input[type='password'],
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
   select {
     color: $neutralTextExtraLight;
   }
@@ -99,7 +131,7 @@ body {
   color: $defaultHoverColor;
 }
 
-@mixin defaultFocusState($property: 'outline', $value: 'solid 2px') {
+@mixin defaultFocusState($property: "outline", $value: "solid 2px") {
   &:focus:not(:focus-visible) {
     outline: 0;
   }
@@ -109,7 +141,7 @@ body {
   }
 }
 
-@mixin defaultHoverState($property: 'color', $value: $defaultHoverColor) {
+@mixin defaultHoverState($property: "color", $value: $defaultHoverColor) {
   transition: #{$property} $duration $timing;
 
   &:hover {
@@ -118,11 +150,11 @@ body {
 }
 
 @mixin outlineOnFocusVisible($color: $defaultFocusColor) {
-  @include defaultFocusState('outline', 'solid 2px #{$color}');
+  @include defaultFocusState("outline", "solid 2px #{$color}");
 }
 
 @mixin fillOnFocusVisible($color: $accentPrimary) {
-  @include defaultFocusState('background-color', $color);
+  @include defaultFocusState("background-color", $color);
 
   &:focus-visible {
     outline: 0;
@@ -130,7 +162,7 @@ body {
 }
 
 @mixin fillOnHover($color: $defaultHoverColor) {
-  @include defaultHoverState('background-color', $color);
+  @include defaultHoverState("background-color", $color);
 }
 
 // Utility
@@ -190,10 +222,16 @@ body {
   background-color: $neutral95;
 }
 
-@mixin boxShadow($x: 10px, $y: 31px, $blur: 44px, $spread: 2px, $color: $neutralBlack, $opacity: 0.13) {
+@mixin boxShadow(
+  $x: 10px,
+  $y: 31px,
+  $blur: 44px,
+  $spread: 2px,
+  $color: $neutralBlack,
+  $opacity: 0.13
+) {
   box-shadow: $x $y $blur $spread rgba($color, $opacity);
 }
-
 
 // SVG Icons
 // --------------------------------------------------------
@@ -354,7 +392,6 @@ body {
   }
 }
 
-
 // Inputs/Textareas
 @mixin inputSecondary {
   @include templateCopy;
@@ -464,7 +501,8 @@ body {
 @mixin roundedFormHeader {
   @include roundedHeader;
 
-  h2, span {
+  h2,
+  span {
     @include utilityPrimary;
     display: table-cell;
     width: 100%;
@@ -498,7 +536,8 @@ body {
       padding-left: 15px;
     }
 
-    > img, > svg {
+    > img,
+    > svg {
       width: 50px;
       height: auto;
     }
@@ -573,7 +612,6 @@ body {
     font-size: 14px;
     font-style: italic;
 
-
     @include respond($break75) {
       font-size: 16px;
     }
@@ -597,7 +635,8 @@ body {
         padding-left: 0;
       }
 
-      > img, > svg {
+      > img,
+      > svg {
         width: auto;
         height: 100%;
       }
@@ -631,7 +670,7 @@ body {
 }
 
 // Drag and Drop styles
-@mixin dropzone($margin: 9px, $active-selector: '--show-dropzone') {
+@mixin dropzone($margin: 9px, $active-selector: "--show-dropzone") {
   @include panelRoundedDark;
   display: block;
   padding: 0 $margin;
@@ -649,9 +688,7 @@ body {
   @include panelRoundedDark;
   cursor: move; // fallback for older browsers
   cursor: grab;
-  transition:
-    color $duration $timing,
-    background-color $duration $timing,
+  transition: color $duration $timing, background-color $duration $timing,
     border-color $duration $timing;
 }
 

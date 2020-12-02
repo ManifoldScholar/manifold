@@ -56,13 +56,14 @@ export default class ListEntitiesListButtonSet extends PureComponent {
 
   render() {
     const buttonClassNames = classNames({
-      "entity-list__button": true
+      "entity-list__button": true,
+      "button-lozenge": true
     });
 
     return this.maybeAuthorize(
       <Link to={this.path} className={buttonClassNames}>
         {this.icon && <Utility.IconComposer icon={this.icon} />}
-        {this.text}
+        <span>{this.text}</span>
       </Link>
     );
   }

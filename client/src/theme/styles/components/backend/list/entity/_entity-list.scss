@@ -24,7 +24,8 @@
     text-transform: uppercase;
     letter-spacing: 2px;
 
-    a, a:visited {
+    a,
+    a:visited {
       color: $neutralTextExtraLight;
       text-decoration: none;
     }
@@ -59,7 +60,10 @@
       }
 
       @include respond(event-entity(panel-breakpoint)) {
-        grid-template-columns: repeat(auto-fit, minmax(event-entity(min-width), 1fr));
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(event-entity(min-width), 1fr)
+        );
         margin-top: event-entity(list-margin-top) - event-entity(row-gap);
         margin-left: -1 * event-entity(icon-size-small);
       }
@@ -114,7 +118,10 @@
 
         @supports (grid-auto-columns: min-content) {
           display: grid;
-          grid-template-columns:repeat(auto-fill, minmax($grid-item-min-width, 1fr));
+          grid-template-columns: repeat(
+            auto-fill,
+            minmax($grid-item-min-width, 1fr)
+          );
         }
 
         li {
@@ -133,13 +140,12 @@
     }
 
     &--sortable {
-      @include dropzone(9px, '.show-dropzone');
+      @include dropzone(9px, ".show-dropzone");
       padding-top: 9px;
       padding-bottom: 9px;
       margin-top: -9px;
       margin-bottom: -9px;
     }
-
   }
 
   &__header {
@@ -161,49 +167,19 @@
   }
 
   &__button {
-    @include utilityPrimary;
     @include fillOnFocusVisible($accentPrimaryPale);
-    display: block;
-    padding: 7px 15px 5px 10px;
-    font-size: 14px;
-    font-weight: $medium;
-    color: $accentPrimary;
-    text-decoration: none;
-    text-transform: none;
-    letter-spacing: 0;
-    border: 1px solid;
-    border-radius: 16px;
-    transition:
-      color $duration $timing,
-      background-color $duration $timing;
 
     & + & {
       margin-top: 24px;
     }
 
     @include respond($break60) {
-      display: inline-block;
+      display: inline-flex;
 
       & + & {
         margin-top: 0;
         margin-left: 12px;
       }
-    }
-
-    &:hover {
-      color: $neutralTextExtraDark;
-      background-color: $defaultHoverColor;
-    }
-
-    &:focus-visible {
-      color: $neutralTextExtraDark;
-    }
-
-    svg {
-      width: 24px;
-      height: 24px;
-      margin-top: -3px;
-      margin-right: 6px;
     }
   }
 
@@ -231,6 +207,5 @@
       border: none;
       border-radius: 10px;
     }
-
   }
 }

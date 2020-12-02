@@ -1,0 +1,128 @@
+.analytics-block {
+  --default-focus-color: #{$analyticsHighlightColor};
+  --default-hover-color: #{$analyticsHighlightColor};
+  --select-bg-color: #{$neutral95};
+
+  $_stat-font-size-large: 66px;
+  $_stat-font-size-small: 52px;
+
+  @include panelRoundedDark;
+  @include templateHead;
+  padding: 30px;
+  font-size: 17px;
+
+  &__title {
+    display: flex;
+    align-items: baseline;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: -3px;
+    font-size: 22px;
+    font-weight: $medium;
+    color: $neutral30;
+  }
+
+  &__title-text {
+    flex-grow: 1;
+    margin-left: 0.5em;
+  }
+
+  &__icon {
+    position: relative;
+    top: -1px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    color: $analyticsHighlightColor;
+  }
+
+  &__description {
+    margin-top: 8px;
+  }
+
+  &__body {
+    margin-top: 15px;
+  }
+
+  &__stat {
+    font-size: $_stat-font-size-large;
+    font-weight: $light;
+    line-height: 1;
+    color: $analyticsHighlightColor;
+  }
+
+  &__caption {
+    margin-top: 15px;
+  }
+
+  &__list {
+    @include listUnstyled;
+    columns: auto 365px;
+    column-gap: 50px;
+  }
+
+  &__figure-list {
+    @include listUnstyled;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    row-gap: 20px;
+  }
+
+  &__figure-list-item {
+    padding-right: 20px;
+
+    & + & {
+      position: relative;
+      padding-left: 20px;
+
+      &::after {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 100%;
+        content: "";
+        display: block;
+        background-color: currentColor;
+      }
+
+      .analytics-block__stat {
+        color: $neutralUILight;
+        font-size: $_stat-font-size-small;
+        // simulate baseline alignment with larger stat
+        line-height: $_stat-font-size-large;
+        position: relative;
+        top: ($_stat-font-size-large - $_stat-font-size-small - 2) / 2;
+      }
+    }
+  }
+
+  &__footer {
+    margin-top: 32px;
+    text-align: center;
+  }
+
+  &__link {
+    @include utilityPrimary;
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: $semibold;
+    color: $analyticsHighlightColor;
+    text-decoration: none;
+
+    > * + * {
+      margin-left: 8px;
+    }
+  }
+
+  &__sort {
+    margin-bottom: 16px;
+  }
+
+  &__sort-form {
+    @include respond($break60) {
+      display: inline-flex;
+    }
+  }
+}

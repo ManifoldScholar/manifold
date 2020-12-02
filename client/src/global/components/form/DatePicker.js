@@ -10,6 +10,8 @@ import ReactDatePicker from "react-datepicker";
 import isDate from "lodash/isDate";
 import format from "date-fns/format";
 
+import withScreenReaderStatus from "hoc/with-screen-reader-status";
+
 class DatePicker extends PureComponent {
   static propTypes = {
     label: PropTypes.string,
@@ -21,7 +23,8 @@ class DatePicker extends PureComponent {
   };
 
   static defaultProps = {
-    setFormat: "yyyy-MM-dd"
+    setFormat: "yyyy-MM-dd",
+    placeholder: "MM/dd/yyyy"
   };
 
   get value() {
@@ -33,8 +36,8 @@ class DatePicker extends PureComponent {
     return this.dateUTC(date);
   }
 
-  get idForErrorPrefix() {
-    return "date-picker-error";
+  get mask() {
+    return [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/];
   }
 
   // The API returns values in UTC, but the JS tries to render dates in the user's local
@@ -46,12 +49,20 @@ class DatePicker extends PureComponent {
     return new Date(adjusted);
   }
 
+  humanReadableDate(date) {
+    return format(date, "MMMM d, yyyy");
+  }
+
   handleChange = date => {
-    return this.props.set(format(date, this.props.setFormat));
+    this.props.set(format(date, this.props.setFormat));
+    this.props.setScreenReaderStatus(
+      `You entered ${this.humanReadableDate(date)}.`
+    );
   };
 
   clear = () => {
     this.props.set(null);
+    this.props.setScreenReaderStatus(`You have cleared the input.`);
   };
 
   render() {
@@ -60,44 +71,42 @@ class DatePicker extends PureComponent {
       "form-date-picker": true,
       wide: this.props.wide
     });
+    const { name, errors, label, placeholder, value } = this.props;
+
+    const PopperContainer = ({ children, className }) => (
+      <div aria-hidden className={className}>
+        {children}
+      </div>
+    );
 
     return (
       <UID>
         {id => (
           <Errorable
             className={inputClasses}
-            name={this.props.name}
-            errors={this.props.errors}
-            label={this.props.label}
-            idForError={`${this.idForErrorPrefix}-${id}`}
+            name={name}
+            errors={errors}
+            label={label}
+            idForError={`date-picker-error-${id}`}
           >
-            <h4 className="form-input-heading">{this.props.label}</h4>
             <ReactDatePicker
               customInput={
                 <MaskedInput
                   type="text"
-                  mask={[
-                    /\d/,
-                    /\d/,
-                    "/",
-                    /\d/,
-                    /\d/,
-                    "/",
-                    /\d/,
-                    /\d/,
-                    /\d/,
-                    /\d/
-                  ]}
+                  mask={this.mask}
+                  label={label}
+                  autoComplete="off"
                 />
               }
-              placeholderText={this.props.placeholder}
+              placeholderText={placeholder}
               dropdownMode="scroll"
-              dateFormat="MM/dd/yyyy"
+              dateFormat="mm/dd/yyyy"
               selected={this.value}
               onChange={this.handleChange}
-              renderCustomHeader={props => <Header {...props} />}
+              renderCustomHeader={props => <Header uid={id} {...props} />}
+              popperContainer={PopperContainer}
             />
-            {this.props.value && (
+            {value && (
               <button
                 type="button"
                 className="form-date-picker__button"
@@ -113,4 +122,4 @@ class DatePicker extends PureComponent {
   }
 }
 
-export default setter(DatePicker);
+export default setter(withScreenReaderStatus(DatePicker));

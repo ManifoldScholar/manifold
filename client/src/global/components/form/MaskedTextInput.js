@@ -23,7 +23,12 @@ class FormMaskedTextInput extends Component {
     value: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     onClick: PropTypes.func,
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
+    autoComplete: PropTypes.string
+  };
+
+  static defaultProps = {
+    autoComplete: "off"
   };
 
   constructor() {
@@ -118,6 +123,7 @@ class FormMaskedTextInput extends Component {
               placeholderChar={this.placeholderChar}
               onClick={this.props.onClick}
               aria-describedby={`${this.idForInstructionsPrefix}-${id}`}
+              autoComplete={this.props.autoComplete}
             />
             <Instructions
               instructions={this.props.instructions}

@@ -79,6 +79,18 @@ exports[`backend/components/dashboard/Counts matches the snapshot 1`] = `
         class="backend-activity-stats__list-text--highlighted"
       />
     </li>
+    <li
+      class="backend-activity-stats__list-item"
+    >
+      <span
+        class="backend-activity-stats__list-text"
+      >
+        Reading Groups
+      </span>
+      <span
+        class="backend-activity-stats__list-text--highlighted"
+      />
+    </li>
   </ul>
 </div>
 `;
