@@ -232,6 +232,10 @@
 
     &--warning {
       font-style: italic;
+
+      i, em {
+        font-style: normal;
+      }
     }
 
     &--incomplete, &--notice {
