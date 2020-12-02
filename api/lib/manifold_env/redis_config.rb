@@ -17,6 +17,13 @@ module ManifoldEnv
       "#{url}/#{namespace(*parts)}"
     end
 
+    def cache_options
+      {
+        namespace: namespace("cache"),
+        url: url
+      }
+    end
+
     def sidekiq_options
       {
         url: url,
