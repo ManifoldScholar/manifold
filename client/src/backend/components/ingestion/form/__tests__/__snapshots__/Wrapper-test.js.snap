@@ -570,8 +570,50 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                       "titleFormatted": "Ain't No Thang",
                       "titlePlaintext": "Ain't No Thang",
                       "toc": Array [
-                        "Chapter 1",
-                        "Chapter 2",
+                        Object {
+                          "anchor": "cvi",
+                          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                          "label": "Cover",
+                        },
+                        Object {
+                          "anchor": "bk",
+                          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                          "label": "Title Page",
+                        },
+                        Object {
+                          "anchor": "cip",
+                          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                          "label": "Copyright Page",
+                        },
+                        Object {
+                          "anchor": "toc",
+                          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                          "label": "Contents",
+                        },
+                        Object {
+                          "anchor": "ch01",
+                          "children": Array [
+                            Object {
+                              "anchor": "ch01sec01",
+                              "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                              "label": "Chapter 1 Section 1",
+                            },
+                            Object {
+                              "anchor": "ch01sec02",
+                              "children": Array [
+                                Object {
+                                  "anchor": "ch01sec01subsec01",
+                                  "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                                  "label": "Chapter 1 Section 2 Subsection 1",
+                                },
+                              ],
+                              "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                              "label": "Chapter 1 Section 2",
+                            },
+                          ],
+                          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                          "label": "Chapter 1",
+                        },
                       ],
                     },
                     "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",

@@ -1,0 +1,69 @@
+.analytics-table {
+  $_indent-increment: 1em;
+
+  --link-indent: 0px;
+
+  width: 100%;
+  text-align: left;
+  table-layout: auto;
+
+  &__header {
+    @include utilityPrimary;
+    font-size: 12px;
+    font-weight: $semibold;
+    color: $neutral50;
+    letter-spacing: 0.1em;
+  }
+
+  &__row {
+    vertical-align: baseline;
+    border-bottom: 1px solid $neutral80;
+  }
+
+  &__link {
+    text-decoration: none;
+    margin-left: var(--link-indent, 0px);
+
+    @for $i from 2 through 6 {
+      &--depth-#{$i} {
+        --link-indent: #{$_indent-increment * ($i - 1)};
+      }
+    }
+  }
+
+  &__empty-message {
+    @include templateCopy;
+    font-style: italic;
+  }
+
+  th {
+    padding-top: 12px;
+
+    &:first-child {
+      width: 100%;
+    }
+
+    &:last-child {
+      width: 100%;
+      text-align: right;
+      white-space: nowrap;
+    }
+  }
+
+  td {
+    padding-top: 14px;
+    padding-bottom: 10px;
+
+    &:first-child {
+      font-size: 18px;
+      font-weight: $medium;
+      color: $neutral30;
+    }
+
+    &:last-child {
+      font-size: 27px;
+      color: $analyticsHighlightColor;
+      text-align: right;
+    }
+  }
+}
