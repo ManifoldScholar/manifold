@@ -1,0 +1,105 @@
+.range-picker {
+  $_container-width: $containerWidthInner;
+  $_columns: 4;
+  $_gutter: 20px;
+  $_track-max-width: ($_container-width - $_gutter * ($_columns - 1)) /
+    $_columns;
+  $_icon-size: 32px;
+  $_icon-padding: 12px;
+
+  --default-focus-color: #{$analyticsHighlightColor};
+  --default-hover-color: #{$analyticsHighlightColor};
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, $_track-max-width));
+  grid-gap: $_gutter;
+
+  &__section {
+    min-width: 0; // prevent grid blowout
+
+    &:last-child {
+      grid-column: span 2;
+    }
+  }
+
+  &__date-input {
+    position: relative;
+  }
+
+  &__label {
+    @include formLabelPrimary;
+    display: block;
+    margin-bottom: 1em;
+  }
+
+  &__input-wrapper {
+    position: relative;
+  }
+
+  &__input {
+    @include formInputPrimary;
+    width: 100%;
+    // Explicit height so that elements can line up
+    height: 32x;
+    // Declared in em as it should change with font size
+    padding: 0;
+    padding-right: $_icon-size + $_icon-padding;
+    font-size: 16px;
+    vertical-align: top;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid $neutralUIDullLight;
+    outline: 0;
+    transition: border-color $duration $timing;
+    transition: border-color $duration $timing;
+    appearance: none;
+
+    @include respond($break60) {
+      height: 42px;
+      font-size: 18px;
+    }
+
+    &:focus-visible {
+      border-color: $defaultFocusColor;
+      outline: 0;
+    }
+
+    &::placeholder {
+      color: $neutralUILight;
+    }
+  }
+
+  &__picker-toggle {
+    @include buttonUnstyled;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    color: currentColor;
+    transform: translateY(-50%);
+  }
+
+  &__preset-group {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  &__legend {
+    @include formLabelPrimary;
+    display: block;
+    margin-bottom: 1em;
+  }
+
+  &__preset-group-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 12px;
+    margin-top: 4px;
+  }
+
+  &__preset {
+    @include buttonUnstyled;
+    @include fillOnFocusVisible($analyticsHighlightColorPale);
+    color: $analyticsHighlightColor;
+  }
+}

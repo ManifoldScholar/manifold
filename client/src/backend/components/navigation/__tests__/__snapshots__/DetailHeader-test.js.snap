@@ -1,53 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`backend/components/navigation/DetailHeader matches the snapshot 1`] = `
-<section
-  className="backend-header"
->
-  <div
-    className="backend-header__inner backend-header__inner--padded"
-  >
-    <header
-      className="backend-header__content-wrapper"
-    >
-      <div
-        className="backend-header__title-block"
-      >
-        <h1
-          className="backend-header__title"
-        >
-          <span
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "Rowan",
-              }
-            }
-          />
-          <span
-            className="backend-header__subtitle"
-          >
-            World's Greatest Dog
-          </span>
-        </h1>
-      </div>
-      <div
-        className="backend-header__utility-block"
-      />
-      <figure
-        className="backend-header__figure-block"
-      >
-        <div
-          className="backend-header__figure"
-        >
-          <SVG.ProjectPlaceholder
-            ariaLabel={null}
-            color="outlined"
-            iconClass="backend-header__type-icon backend-header__type-icon--project"
-            mode="small"
-          />
-        </div>
-      </figure>
-    </header>
-  </div>
-</section>
+<Layout.ViewHeader
+  allowTitleHTML={true}
+  icon={
+    <SVG.ProjectPlaceholder
+      ariaLabel={null}
+      color="outlined"
+      iconClass="backend-header__type-icon backend-header__type-icon--project"
+      mode="small"
+    />
+  }
+  iconAccented={false}
+  iconRounded={false}
+  iconSize={null}
+  iconType="entity-type"
+  narrow={false}
+  padded={true}
+  smallTitle={true}
+  spaceBottom={false}
+  subtitle="World's Greatest Dog"
+  title="Rowan"
+  utility={null}
+/>
 `;

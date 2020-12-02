@@ -8,7 +8,8 @@ export default class DatePickerHeader extends Component {
   static propTypes = {
     date: PropTypes.instanceOf(Date).isRequired,
     decreaseMonth: PropTypes.func.isRequired,
-    increaseMonth: PropTypes.func.isRequired
+    increaseMonth: PropTypes.func.isRequired,
+    uid: PropTypes.string.isRequired
   };
 
   get monthName() {
@@ -50,7 +51,10 @@ export default class DatePickerHeader extends Component {
         >
           <IconComposer icon="arrowLeft16" size={20} />
         </button>
-        <div className="react-datepicker__current-month">
+        <div
+          id={`range-picker-dialog-label-${this.props.uid}`}
+          className="react-datepicker__current-month"
+        >
           {this.monthName} {this.year}
         </div>
       </div>

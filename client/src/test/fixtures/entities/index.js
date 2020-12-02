@@ -1,4 +1,5 @@
 import actionCallout from "./action-callout";
+import analyticsResults from "./analyticsResults";
 import annotation from "./annotation";
 import category from "./category";
 import collectionProject from "./collection-project";
@@ -32,6 +33,7 @@ import version from "./version";
 
 export default {
   actionCallout,
+  analyticsResults,
   annotation,
   category,
   collectionProject,

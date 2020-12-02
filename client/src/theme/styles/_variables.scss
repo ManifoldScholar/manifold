@@ -32,17 +32,41 @@ $neutralOffWhite: $neutral05;
 $neutralOffBlack: $neutral90;
 
 $_accentPrimary: #52e3ac !default;
-$_accentPrimaryDark: darken(desaturate($_accentPrimary, 20.97), 18.82) !default; // #34a178
-$_accentPrimaryMedium: darken(desaturate($_accentPrimary, 20.94), 11.57) !default; // #3dbd8c
-$_accentPrimaryLight: lighten(saturate($_accentPrimary, 0.36), 8.04) !default; // #75e9bd
-$_accentPrimaryDull: lighten(desaturate(adjust-hue($_accentPrimary, -3), 14.56), 20) !default; // #b1ead2
-$_accentPrimaryPale: lighten(desaturate($_accentPrimary, 1.55), 19.41) !default; // #a8f0d5
-$_accentPrimaryExtraPale: lighten(saturate($_accentPrimary, 1.19), 27.65); // #cbf7e6
-$_accentPrimaryOffWhite: lighten(desaturate(adjust-hue($_accentPrimary, 5), 22.14), 35.49) !default; // #f0faf7
+$_accentPrimaryDark: darken(
+  desaturate($_accentPrimary, 20.97),
+  18.82
+) !default; // #34a178
+$_accentPrimaryMedium: darken(
+  desaturate($_accentPrimary, 20.94),
+  11.57
+) !default; // #3dbd8c
+$_accentPrimaryLight: lighten(
+  saturate($_accentPrimary, 0.36),
+  8.04
+) !default; // #75e9bd
+$_accentPrimaryDull: lighten(
+  desaturate(adjust-hue($_accentPrimary, -3), 14.56),
+  20
+) !default; // #b1ead2
+$_accentPrimaryPale: lighten(
+  desaturate($_accentPrimary, 1.55),
+  19.41
+) !default; // #a8f0d5
+$_accentPrimaryExtraPale: lighten(
+  saturate($_accentPrimary, 1.19),
+  27.65
+); // #cbf7e6
+$_accentPrimaryOffWhite: lighten(
+  desaturate(adjust-hue($_accentPrimary, 5), 22.14),
+  35.49
+) !default; // #f0faf7
 
 // User Interactions
 $_accentInteractionLight: $_accentPrimary !default;
-$_accentInteractionDark: darken(saturate(adjust-hue($_accentPrimary, 4), 17.01), 35.29) !default; // #077A57
+$_accentInteractionDark: darken(
+  saturate(adjust-hue($_accentPrimary, 4), 17.01),
+  35.29
+) !default; // #077A57
 
 $focusSecondary: $neutral20;
 $focusTertiary: $neutral30;
@@ -52,37 +76,41 @@ $_accentPrimaryHex: str-slice(#{$_accentPrimary}, 2);
 
 // Spectra
 // Additional global accent colors
-$spBlue20: #D4EDFA;
-$spBlue45: #61CAFF;
-$spBlue75: #19678F;
+$spBlue20: #d4edfa;
+$spBlue45: #61caff;
+$spBlue75: #19678f;
 
-$spGreen20: #C7F2A7;
-$spGreen45: #87C930;
-$spGreen75: #3C6E1A;
+$spGreen20: #c7f2a7;
+$spGreen45: #87c930;
+$spGreen75: #3c6e1a;
 
-$spOrange20: #FFEBCE;
-$spOrange45: #FAB048;
-$spOrange75: #875F27;
+$spOrange20: #ffebce;
+$spOrange45: #fab048;
+$spOrange75: #875f27;
 
-$spPink20: #FFD6E4;
-$spPink45: #FF8AB1;
-$spPink75: #99536A;
+$spPink20: #ffd6e4;
+$spPink45: #ff8ab1;
+$spPink75: #99536a;
 
-$spRed20: #FFD1D1;
-$spRed45: #FF9191;
-$spRed75: #C42929;
+$spRed20: #ffd1d1;
+$spRed45: #ff9191;
+$spRed75: #c42929;
 
-$spTeal20: #C0FAF5;
-$spTeal45: #38D6C9;
-$spTeal75: #1D756E;
+$spTeal20: #c0faf5;
+$spTeal45: #38d6c9;
+$spTeal75: #1d756e;
 
-$spViolet20: #F7DCF6;
-$spViolet45: #F58CEE;
-$spViolet75: #9C4A96;
+$spViolet20: #f7dcf6;
+$spViolet45: #f58cee;
+$spViolet75: #9c4a96;
 
-$spYellow20: #FFF799;
-$spYellow45: #F5E425;
-$spYellow75: #706B2C;
+$spYellow20: #fff799;
+$spYellow45: #f5e425;
+$spYellow75: #706b2c;
+
+// Analytics
+$_analyticsHighlightColor: $spBlue45;
+$_analyticsHighlightColorPale: desaturate(darken($spBlue45, 10), 19);
 
 // Default colors that meet WCAG AA color contrast guidelines
 // Namespaced functionally by usage and context (light/dark modes)
@@ -118,7 +146,10 @@ $spNoticeDark: $spBlue75;
 // Reader Annotations, Highlighting, Labels
 // additional variables defined locally in components/reader/annotations/_marker.scss
 $spHighlightPrimary: #2bd1fa !default; // #2bd1fa;
-$spHighlightPrimaryPale: lighten(desaturate(adjust-hue($spHighlightPrimary, -1), 14.44), 34.31); // #d9f5fb;
+$spHighlightPrimaryPale: lighten(
+  desaturate(adjust-hue($spHighlightPrimary, -1), 14.44),
+  34.31
+); // #d9f5fb;
 
 // Typographic Hierarchy
 // Commonly used font-sizes for template typography
@@ -139,7 +170,6 @@ $type40: 14px;
 $type30: 13px;
 $type20: 12px;
 // $type10: ;
-
 
 // Measurements
 // Structural measurements used site wide that are kept in one place
@@ -171,7 +201,6 @@ $regular: 400;
 $semibold: 600;
 $bold: 700;
 
-
 // Animation
 // --------------------------------------------------------
 // Commonly used animation variables, mainly used with transition CSS
@@ -180,7 +209,6 @@ $duration: 0.2s;
 $durationSlow: 0.4s;
 
 $timing: ease;
-
 
 // Responsive Breakpoints
 // Maintained in one place to keep major breakpoints consistent
@@ -224,7 +252,7 @@ $event-entity: (
   icon-size-small: 40px,
   icon-size-med: 44px,
   icon-size-large: 48px,
-  panel-breakpoint: $break60
+  panel-breakpoint: $break60,
 );
 
 // get value from $event-entity map
@@ -235,7 +263,7 @@ $event-entity: (
 $header-layout: (
   padding-vertical-mobile: 9px,
   padding-vertical-desktop: 20px,
-  menu-slide-distance: 30px
+  menu-slide-distance: 30px,
 );
 
 @function header-layout($property) {
@@ -246,7 +274,7 @@ $header-layout: (
 $standalone-header-layout: (
   max-width: 1178px,
   padding-top-mobile: 24px,
-  padding-top-desktop: 45px
+  padding-top-desktop: 45px,
 );
 
 @function standalone-header-layout($property) {

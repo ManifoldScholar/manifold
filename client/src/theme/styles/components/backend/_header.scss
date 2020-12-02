@@ -200,6 +200,11 @@
     &--accented {
       color: $accentPrimary;
     }
+
+    &--alt-accented {
+      color: $analyticsHighlightColor;
+    }
+
   }
 
   &__type-icon {

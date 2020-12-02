@@ -118,9 +118,7 @@
   text-decoration: none;
   letter-spacing: 0.089em;
   border: 1px solid $defaultHoverColor;
-  transition:
-    color $duration $timing,
-    background-color $duration $timing,
+  transition: color $duration $timing, background-color $duration $timing,
     border-color $duration $timing;
 
   &:hover,
@@ -188,7 +186,8 @@
     margin-left: 10px;
   }
 
-  &__text {}
+  &__text {
+  }
 }
 
 // Large transparent button with icon on the left
@@ -206,9 +205,7 @@
   text-align: center;
   text-decoration: none;
   border: 1px solid $defaultHoverColor;
-  transition:
-    color $duration $timing,
-    background-color $duration $timing,
+  transition: color $duration $timing, background-color $duration $timing,
     border-color $duration $timing;
 
   @include respond($break60) {
@@ -241,7 +238,8 @@
     }
   }
 
-  &__text {}
+  &__text {
+  }
 }
 
 // Used in backend for "add" buttons
@@ -258,9 +256,7 @@
   text-decoration: none;
   letter-spacing: 0.015em;
   border: 1px solid $accentPrimary;
-  transition:
-    color $duration $timing,
-    background-color $duration $timing,
+  transition: color $duration $timing, background-color $duration $timing,
     border-color $duration $timing;
 
   @include respond($break60) {
@@ -431,9 +427,7 @@
   text-transform: uppercase;
   letter-spacing: 0.089em;
   background-color: $accentPrimary;
-  transition:
-    color $duration $timing,
-    background-color $duration $timing;
+  transition: color $duration $timing, background-color $duration $timing;
 
   @include respond($break60) {
     font-size: 14px;
@@ -499,7 +493,8 @@
     background: none;
     border: 1px solid $accentPrimary;
 
-    &:hover, &:focus-visible {
+    &:hover,
+    &:focus-visible {
       color: $neutral90;
       background-color: $accentPrimary;
       outline: 0;
@@ -576,7 +571,8 @@
     }
 
     .overlay-full-primary & {
-      &:hover, &:focus-visible {
+      &:hover,
+      &:focus-visible {
         color: $neutral80;
       }
     }
@@ -627,11 +623,10 @@
   white-space: nowrap;
   background-color: $accentPrimaryPale;
   border-radius: 4px;
-  transition:
-    color $duration $timing,
-    background-color $duration $timing;
+  transition: color $duration $timing, background-color $duration $timing;
 
-  &:hover, &:focus-visible {
+  &:hover,
+  &:focus-visible {
     color: $neutralTextExtraDark;
     background-color: $accentInteractionLight;
     outline: 0;
@@ -681,7 +676,9 @@
   border: 0;
   transition: color $duration $timing;
 
-  &:hover, &.active, &:focus-visible {
+  &:hover,
+  &.active,
+  &:focus-visible {
     color: $accentPrimaryDark;
   }
 }
@@ -738,8 +735,7 @@
   cursor: pointer;
   background-color: $accentPrimary;
   border-radius: 22.5px;
-  transition: max-width $duration $timing,
-    background-color $duration $timing;
+  transition: max-width $duration $timing, background-color $duration $timing;
 
   @include respond($break75) {
     font-size: 18px;
@@ -768,7 +764,8 @@
     }
   }
 
-  .button-enter, .button-exit.action-text-hide-immediately {
+  .button-enter,
+  .button-exit.action-text-hide-immediately {
     display: none;
   }
 
@@ -776,7 +773,9 @@
     display: inline;
   }
 
-  .add-active &, .remove-active &, .remove-confirm-active & {
+  .add-active &,
+  .remove-active &,
+  .remove-confirm-active & {
     max-width: 200px;
     transition: max-width $durationSlow ease-out;
   }
@@ -785,7 +784,8 @@
     background-color: $spBlue45;
   }
 
-  .remove-active &, .remove-confirm-active & {
+  .remove-active &,
+  .remove-confirm-active & {
     background-color: $neutral40;
   }
 
@@ -845,8 +845,7 @@
   line-height: 1.4;
   text-decoration: none !important;
   background-color: $neutral05;
-  transition: color $duration $timing,
-    background-color $duration $timing;
+  transition: color $duration $timing, background-color $duration $timing;
 
   @include respond($break40) {
     padding: 26px 0 25px;
@@ -860,13 +859,15 @@
   .bg-neutral95 & {
     background-color: $neutral95;
 
-    &:hover, &:focus-visible {
+    &:hover,
+    &:focus-visible {
       background-color: $neutral95;
       outline: 0;
     }
   }
 
-  &:hover, &:active {
+  &:hover,
+  &:active {
     background-color: $neutral20;
   }
 
@@ -914,7 +915,8 @@
   background-color: $neutral10;
   transition: background-color $duration $timing;
 
-  &:hover, &:active {
+  &:hover,
+  &:active {
     background-color: $neutral20;
   }
 
@@ -932,7 +934,8 @@
     padding-bottom: 28px;
   }
 
-  &__icon, &__project-title {
+  &__icon,
+  &__project-title {
     .back-link-secondary:hover & {
       color: $neutral70;
     }
@@ -978,4 +981,45 @@
   color: $neutral50;
   text-decoration: none;
   cursor: pointer;
+}
+
+.button-lozenge {
+  @include utilityPrimary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 15px;
+  padding-left: 15px;
+  font-size: 14px;
+  font-weight: $medium;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0;
+  border: 1px solid;
+  border-radius: 16px;
+  transition: color $duration $timing, background-color $duration $timing,
+    border-color $duration $timing;
+
+  &:hover {
+    color: $neutralTextExtraDark;
+    background-color: $defaultHoverColor;
+    border-color: $defaultHoverColor;
+  }
+
+  &:focus-visible {
+    color: $neutralTextExtraDark;
+    border-color: $defaultHoverColor;
+  }
+
+  span {
+    padding-top: 7px;
+    padding-bottom: 9px;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+    margin-left: -5px;
+  }
 }

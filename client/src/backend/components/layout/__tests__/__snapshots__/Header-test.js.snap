@@ -234,6 +234,13 @@ exports[`Backend.Layout.Header component matches the snapshot 1`] = `
                 "label": "Settings",
                 "route": "backendSettings",
               },
+              Object {
+                "ability": "read",
+                "children": Array [],
+                "entity": "statistics",
+                "label": "Analytics",
+                "route": "backendAnalytics",
+              },
             ]
           }
           mode="backend"
