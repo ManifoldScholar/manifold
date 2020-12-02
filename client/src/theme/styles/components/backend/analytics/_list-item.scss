@@ -1,0 +1,29 @@
+.analytics-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 20px;
+  color: $neutral30;
+  border-bottom: 1px solid $neutral80;
+
+  &__label {
+    display: flex;
+    align-items: center;
+
+    h4 {
+      margin: 0 0 0 15px;
+      font-weight: $regular;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    color: $analyticsHighlightColor;
+  }
+
+  &__value {
+    font-size: 32px;
+    color: $analyticsHighlightColor;
+  }
+}

@@ -1,0 +1,49 @@
+/*
+* Backend analytics grid for dashboard, projects, and texts
+*
+* This grid has 2, 3, or 4 columns depending on the width of its container.
+* Without container queries in CSS yet :(, it's necessary to use separate media queries
+* for each layout context, and adjust the flow of grid items within that context.
+*/
+
+$_grid-width-full: $containerWidthInner;
+$_grid-width-half: ($containerWidthInner - 95) / 2;
+$_grid-width-with-sidebar: $containerWidthInner - 192 - 46;
+$_item-min-width: 250px;
+$_gap: 30px;
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: $_gap;
+
+  &--4-col {
+    @include respond($_item-min-width * 4 + $_gap * 3) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &--3-col {
+    @include respond($_item-min-width * 3 + $_gap * 2) {
+      grid-template-columns: repeat(3, 1fr);
+
+      .analytics-grid__item--50 {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+
+  &__item {
+    &--100 {
+      grid-column: 1 / -1;
+    }
+
+    &--50 {
+      grid-column-end: span 2;
+    }
+
+    &--25 {
+      grid-column-end: span 1;
+    }
+  }
+}

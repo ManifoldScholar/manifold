@@ -243,15 +243,15 @@ export default class ListEntitiesListSearch extends PureComponent {
                           `${baseClass}__option`
                         )}
                       >
-                        <div className={`${baseClass}__option-inner`}>
+                        <div className={`select`}>
                           <span
-                            className={`${baseClass}__options-label ${
-                              i > 0 ? `${baseClass}__options-label--empty` : ""
+                            className={`select__label ${
+                              i > 0 ? `select__label--empty` : ""
                             }`}
                           >
                             {i === 0 ? "Filter Results:" : "\u00A0"}
                           </span>
-                          <div className={`${baseClass}__select-wrapper`}>
+                          <div className={`select__wrapper`}>
                             <label
                               htmlFor={`${id}-filter-${i}`}
                               className="screen-reader-text"
@@ -285,11 +285,11 @@ export default class ListEntitiesListSearch extends PureComponent {
                           `${baseClass}__option`
                         )}
                       >
-                        <div className={`${baseClass}__option-inner`}>
-                          <span className={`${baseClass}__options-label`}>
+                        <div className={`select`}>
+                          <span className={`select__label`}>
                             Order Results:
                           </span>
-                          <div className={`${baseClass}__select-wrapper`}>
+                          <div className={`select__wrapper`}>
                             <label
                               htmlFor={`${id}-order`}
                               className="screen-reader-text"
