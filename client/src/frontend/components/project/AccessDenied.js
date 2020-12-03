@@ -3,36 +3,103 @@ import Utility from "global/components/utility";
 import config from "config";
 import PropTypes from "prop-types";
 
-export default class AccessDenied extends Component {
+import get from "lodash/get";
+
+import withSettings from "hoc/with-settings";
+
+const TEXT_PATHS = {
+  heading: [
+    {
+      prop: "project",
+      path: ["attributes"],
+      name: "restrictedAccessHeading"
+    },
+    {
+      prop: "settings",
+      path: ["attributes", "general"],
+      name: "restrictedAccessHeading"
+    },
+    {
+      prop: "config",
+      path: ["app", "locale", "notifications", "projectAuthorizationNotice"],
+      name: "heading"
+    }
+  ],
+  body: [
+    {
+      prop: "project",
+      path: ["attributes"],
+      name: "restrictedAccessBody",
+      show: "restrictedAccessBodyFormatted"
+    },
+    {
+      prop: "settings",
+      path: ["attributes", "general"],
+      name: "restrictedAccessBody",
+      show: "restrictedAccessBodyFormatted"
+    },
+    {
+      prop: "config",
+      path: ["app", "locale", "notifications", "projectAuthorizationNotice"],
+      name: "body"
+    }
+  ]
+};
+
+export function fetchTextPath(props, type) {
+  const paths = get(TEXT_PATHS, type, []);
+
+  let found = null;
+
+  paths.forEach(({ prop, path, name, show }) => {
+    if (found) return;
+
+    const presence = get(props, [prop, ...path, name]);
+
+    if (presence) {
+      if (show) {
+        found = get(props, [prop, ...path, show], presence);
+      } else {
+        found = presence;
+      }
+    }
+  });
+
+  return found;
+}
+
+export class BaseAccessDenied extends Component {
+  static displayName = "Frontend.Project.AccessDenied";
+
   static propTypes = {
-    project: PropTypes.object
+    config: PropTypes.object,
+    project: PropTypes.shape({
+      attributes: PropTypes.shape({
+        restrictedAccessHeading: PropTypes.string,
+        restrictedAccessBody: PropTypes.string,
+        restrictedAccessBodyFormatted: PropTypes.string
+      })
+    }),
+    settings: PropTypes.shape({
+      attributes: PropTypes.shape({
+        general: PropTypes.shape({
+          restrictedAccessHeading: PropTypes.string,
+          restrictedAccessBody: PropTypes.string,
+          restrictedAccessBodyFormatted: PropTypes.string
+        })
+      })
+    })
   };
 
-  isPresent(value) {
-    return Boolean(value);
-  }
-
-  isBlank(value) {
-    return !this.isPresent(value);
-  }
-
-  get project() {
-    return this.props.project;
-  }
-
-  get heading() {
-    if (this.isPresent(this.project.attributes.restrictedAccessHeading))
-      return this.project.attributes.restrictedAccessHeading;
-    return config.app.locale.notifications.projectAuthorizationNotice.heading;
-  }
-
-  get body() {
-    if (this.isPresent(this.project.attributes.restrictedAccessBody))
-      return this.project.attributes.restrictedAccessBodyFormatted;
-    return config.app.locale.notifications.projectAuthorizationNotice.body;
-  }
+  static defaultProps = {
+    config
+  };
 
   render() {
+    const heading = fetchTextPath(this.props, "heading");
+
+    const body = fetchTextPath(this.props, "body");
+
     return (
       <section className="project-content-block">
         <div className="container flush entity-section-wrapper">
@@ -40,14 +107,14 @@ export default class AccessDenied extends Component {
             <Utility.IconComposer icon="stopSign64" size={50} />
             <div>
               <span className="entity-section-wrapper__body--incomplete-header">
-                {this.heading}
+                {heading}
               </span>
               <span className="entity-section-wrapper__link-container">
                 {this.presentBlockErrors}
                 <span
                   className="entity-section-wrapper__body--warning"
                   dangerouslySetInnerHTML={{
-                    __html: this.body
+                    __html: body
                   }}
                 />
               </span>
@@ -58,3 +125,5 @@ export default class AccessDenied extends Component {
     );
   }
 }
+
+export default withSettings(BaseAccessDenied);
