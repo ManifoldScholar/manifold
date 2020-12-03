@@ -5,6 +5,9 @@ module V1
 
     set_id :singleton_guard
 
+    typed_attribute :restricted_access_body_plaintext, Types::String.optional
+    typed_attribute :restricted_access_body_formatted, Types::String.meta(read_only: true)
+
     typed_attribute :general, Types::Hash.schema(
       installation_name: Types::String,
       default_publisher: Types::String,
@@ -25,9 +28,13 @@ module V1
       restricted_access: Types::Bool,
       restricted_access_heading: Types::String,
       restricted_access_body: Types::String,
+      restricted_access_body_formatted: Types::String,
       disable_engagement: Types::Bool,
       disable_reading_groups: Types::Bool
-    )
+    ) do |object, _params|
+      object.general.merge(restricted_access_body_formatted: object.restricted_access_body_formatted)
+    end
+
     typed_attribute :theme, Types::Hash.schema(
       logo_styles: Types::String,
       typekit_id: Types::String,
