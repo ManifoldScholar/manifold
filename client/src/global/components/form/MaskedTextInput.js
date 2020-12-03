@@ -48,8 +48,10 @@ class FormMaskedTextInput extends Component {
 
   hashTagMask() {
     return raw => {
-      const wordChar = /^[A-Za-z0-9-]$/;
-      const notWordChar = /[^A-Za-z0-9-]/g;
+      // eslint-disable-next-line
+      const wordChar = /^#?[^\s!@#$%^&*()=+.\/,[{]};:'"?><]+$/;
+      // eslint-disable-next-line
+      const notWordChar = /[\s!@#$%^&*()=+.\/,[{]};:'"?><]+/g;
       const adjusted = raw.replace(notWordChar, "").replace("_", "");
       const length = adjusted.length;
       let mask = Array(length);
