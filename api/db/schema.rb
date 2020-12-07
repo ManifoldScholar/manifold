@@ -36,23 +36,19 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.index ["text_id"], name: "index_action_callouts_on_text_id"
   end
 
-  create_table "ahoy_events", force: :cascade do |t|
-    t.bigint "visit_id"
-    t.bigint "user_id"
-    t.string "name"
-    t.jsonb "properties"
-    t.datetime "time"
-    t.date "date"
-    t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
-    t.index ["properties"], name: "index_ahoy_events_on_properties", opclass: :jsonb_path_ops, using: :gin
-    t.index ["user_id"], name: "index_ahoy_events_on_user_id"
-    t.index ["visit_id"], name: "index_ahoy_events_on_visit_id"
+  create_table "analytics_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "visit_id", null: false
+    t.string "name", null: false
+    t.jsonb "properties", default: {}, null: false
+    t.datetime "time", null: false
+    t.index ["name", "time"], name: "index_analytics_events_on_name_and_time"
+    t.index ["properties"], name: "index_analytics_events_on_properties", opclass: :jsonb_path_ops, using: :gin
+    t.index ["visit_id"], name: "index_analytics_events_on_visit_id"
   end
 
-  create_table "ahoy_visits", force: :cascade do |t|
-    t.string "visit_token"
-    t.string "visitor_token"
-    t.bigint "user_id"
+  create_table "analytics_visits", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "visit_token", null: false
+    t.string "visitor_token", null: false
     t.string "ip"
     t.text "user_agent"
     t.text "referrer"
@@ -75,8 +71,8 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.string "os_version"
     t.string "platform"
     t.datetime "started_at"
-    t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
-    t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
+    t.datetime "ended_at"
+    t.index ["visit_token"], name: "index_analytics_visits_on_visit_token", unique: true
   end
 
   create_table "annotations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -1099,6 +1095,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.jsonb "avatar_data"
     t.text "role", null: false
     t.text "kind", null: false
+    t.uuid "visitor_token", default: -> { "uuid_generate_v4()" }, null: false
     t.index ["classification"], name: "udx_users_anonymous", unique: true, where: "((classification)::text = 'anonymous'::text)"
     t.index ["classification"], name: "udx_users_cli", unique: true, where: "((classification)::text = 'command_line'::text)"
     t.index ["import_source_id"], name: "index_users_on_import_source_id", unique: true, where: "(import_source_id IS NOT NULL)"
