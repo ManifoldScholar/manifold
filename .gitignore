@@ -25,6 +25,8 @@
 /public/system
 /user_texts
 /import
+.byebug_history
+Brewfile.lock.json
 
 ### Ignore keys ###
 /config/keys/*
@@ -52,6 +54,3 @@ doc
 
 ## Plugins ##
 client/plugins*
-
-
-

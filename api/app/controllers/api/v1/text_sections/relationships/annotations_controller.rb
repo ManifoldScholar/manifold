@@ -17,6 +17,10 @@ module API
             )
           end
 
+          record_analytics_for! Annotation do
+            record_analytics_for_action :create, event: :create_resource
+          end
+
           def index
             @annotations = load_annotations
             location = api_v1_text_section_relationships_annotations_url(@text_section.id)

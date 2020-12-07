@@ -2,7 +2,6 @@ require "rails_helper"
 include ActiveJob::TestHelper
 
 RSpec.shared_examples "after importing" do
-
   include_context "resource import"
 
   it "is valid" do
@@ -17,14 +16,12 @@ RSpec.shared_examples "after importing" do
     resource_count = ri.data_rows.count
     expect(ri.resources.count).to eq resource_count
   end
-
 end
 
 RSpec.shared_examples "after parsing" do
-
   include_context "resource import"
 
-  data_path = Rails.root.join('spec', 'data','resource_import','resources.csv')
+  data_path = Rails.root.join("spec", "data", "resource_import", "resources.csv")
 
   csv = CSV.read(data_path, headers: true)
   data_row_count = csv.count
@@ -52,7 +49,7 @@ RSpec.shared_examples "after parsing" do
   end
 
   it "flags the remaining rows as data rows" do
-    expect(ri.resource_import_rows.with_type_data.count).to be (row_count - 2)
+    expect(ri.resource_import_rows.with_type_data.count).to be(row_count - 2)
   end
 
   it "creates rows with a value for each column" do
@@ -94,61 +91,60 @@ RSpec.shared_examples "after parsing" do
 end
 
 RSpec.describe ResourceImport, type: :model, slow: true do
-
   before(:all) do
     Settings.instance.update_from_environment!
   end
 
   include_context "resource import"
 
-  let(:resource_import) {
+  let(:resource_import) do
     perform_enqueued_jobs do
       ri = FactoryBot.create(:resource_import)
       ri.reload
     end
-  }
+  end
 
-  let(:google_resource_import) {
+  let(:google_resource_import) do
     FactoryBot.create(:resource_import_google)
-  }
+  end
 
-  let(:csv_resource_import) {
+  let(:csv_resource_import) do
     perform_enqueued_jobs do
       ri = FactoryBot.create(:resource_import_csv)
       ri.reload
     end
-  }
+  end
 
-  let(:parsing_google_resource_import) {
+  let(:parsing_google_resource_import) do
     WebMock.allow_net_connect!
     google_resource_import.state_machine.transition_to(:parsing)
     WebMock.disable_net_connect!
     google_resource_import
-  }
+  end
 
-  let(:parsing_csv_resource_import) {
+  let(:parsing_csv_resource_import) do
     csv_resource_import.state_machine.transition_to(:parsing)
     csv_resource_import
-  }
+  end
 
-  let(:importing_google_resource_import) {
+  let(:importing_google_resource_import) do
     parsing_google_resource_import.state_machine.transition_to(:importing, perform_now: true)
     parsing_google_resource_import.column_map = parsing_google_resource_import.column_automap
     parsing_google_resource_import.save
     parsing_google_resource_import
-  }
+  end
 
-  let(:importing_csv_resource_import) {
+  let(:importing_csv_resource_import) do
     parsing_csv_resource_import.column_map = csv_resource_import.column_automap
     parsing_csv_resource_import.state_machine.transition_to(:mapped)
     parsing_csv_resource_import.state_machine.transition_to(:importing, perform_now: true)
     parsing_csv_resource_import.save
     parsing_csv_resource_import
-  }
+  end
 
-  let(:ri) {
+  let(:ri) do
     resource_import
-  }
+  end
 
   it "exposes the header row values as headers" do
     header_row = FactoryBot.build(:resource_import_header_row)
@@ -180,50 +176,45 @@ RSpec.describe ResourceImport, type: :model, slow: true do
   end
 
   describe "when source is google_sheet" do
-
     it "is invalid if url is blank" do
       google_resource_import.url = nil
       expect(google_resource_import).to_not be_valid
     end
 
     context "after parsing it" do
-      let(:ri) {
+      let(:ri) do
         parsing_google_resource_import
-      }
+      end
       include_examples "after parsing"
     end
-
   end
 
   describe "when source is csv" do
-
     it "is invalid if data is blank" do
       csv_resource_import.data = nil
       expect(csv_resource_import).to_not be_valid
     end
 
     context "after parsing" do
-      let(:ri) {
+      let(:ri) do
         parsing_csv_resource_import
-      }
+      end
       include_examples "after parsing"
     end
 
     context "after importing" do
-      let(:ri) {
+      let(:ri) do
         importing_csv_resource_import
-      }
+      end
       include_examples "after importing"
     end
-
   end
 
   describe "when the import data is invalid" do
-
     let(:csv_resource_import) do
       FactoryBot.create(
         :resource_import_csv,
-        data: fixture_file_upload(Rails.root.join('spec', 'data','resource_import','invalid_resource.csv'), 'text/csv')
+        data: fixture_file_upload(Rails.root.join("spec", "data", "resource_import", "invalid_resource.csv"), "text/csv")
       )
     end
 
@@ -246,7 +237,5 @@ RSpec.describe ResourceImport, type: :model, slow: true do
     it "has errors" do
       expect(ri.import_errors?).to be true
     end
-
   end
-
 end

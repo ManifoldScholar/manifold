@@ -11,6 +11,10 @@ module API
         )
       end
 
+      record_analytics_for! Comment do
+        record_analytics_for_action :create, event: :create_resource
+      end
+
       def index
         @comments = load_comments
         render_multiple_resources(

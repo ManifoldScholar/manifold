@@ -121,13 +121,22 @@ class ApplicationController < ActionController::API
     render json: { errors: build_api_error(options) }, status: authorization_error_status(symbol: true)
   end
 
-  def resource_not_found
+  def respond_with_resource_not_found
     options = {
       status: 404,
       title: I18n.t("controllers.errors.not_found.title").titlecase,
       detail: I18n.t("controllers.errors.not_found.detail")
     }
     render json: { errors: build_api_error(options) }, status: :not_found
+  end
+
+  def respond_with_bad_request
+    options = {
+      status: 400,
+      title: I18n.t("controllers.errors.bad_request.title").titlecase,
+      detail: I18n.t("controllers.errors.bad_request.detail")
+    }
+    render json: { errors: build_api_error(options) }, status: :bad_request
   end
 
   def authority_forbidden(error)
@@ -181,6 +190,19 @@ class ApplicationController < ActionController::API
       setup_resources!(**other_options, &model_scope)
     end
     # rubocop:enable Lint/UnusedMethodArgument
+
+    def record_analytics_for!(model, record_getter: "@#{model.model_name.param_key}")
+      include API::V1::RecordsAnalytics
+      @analytics_record_getter = record_getter
+
+      yield
+    end
+
+    def record_analytics!
+      include API::V1::RecordsAnalytics
+
+      yield
+    end
   end
 
 end

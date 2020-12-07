@@ -459,6 +459,17 @@ module Validation
     params.permit(param_config)
   end
 
+  def analytics_filter_params
+    params.permit(:record_type, :record_id, :start_date, :end_date, :report_type, analytics: [], page: [:number, :size])
+  end
+
+  def analytics_params
+    params.require(:data)
+    attributes = [:record_type, :record_id, :name, :time, :visit_token, :visitor_token, { properties: [] }]
+    param_config = structure_params(attributes: attributes)
+    params.permit(param_config)
+  end
+
   def favoritable_params
     structure_params
   end
