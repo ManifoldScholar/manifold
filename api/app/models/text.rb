@@ -66,7 +66,7 @@ class Text < ApplicationRecord
   belongs_to :start_text_section, optional: true, class_name: "TextSection",
              inverse_of: :text_started_by
   has_many :ingestions, dependent: :nullify, inverse_of: :text
-  has_many :titles, class_name: "TextTitle", dependent: :destroy, inverse_of: :text
+  has_many :titles, class_name: "TextTitle", autosave: true, dependent: :destroy, inverse_of: :text
   has_many :text_subjects, dependent: :destroy
   has_many :subjects, through: :text_subjects
   has_many :ingestion_sources, dependent: :destroy
@@ -173,19 +173,22 @@ class Text < ApplicationRecord
   end
 
   def title_by_kind(kind)
-    if association(:titles).loaded?
-      titles.detect { |t| t.kind == kind }
-    else
-      titles.find_by(kind: kind)
-    end
+    titles.detect { |t| t.kind == kind }
   end
 
   def set_title_value(kind, value)
-    return titles.where(kind: kind).destroy_all if value.blank? && kind == TextTitle::KIND_SUBTITLE
+    if value.blank?
+      if kind == TextTitle::KIND_SUBTITLE
+        titles.each do |title|
+          title.mark_for_destruction if title.kind == kind
+        end
+      end
 
-    title = titles.find_or_initialize_by(kind: kind)
+      return
+    end
+
+    title = titles.detect { |t| t.kind == kind } || titles.build(kind: kind)
     title.value = value
-    title.save
   end
 
   def get_title_value(title, default = nil)

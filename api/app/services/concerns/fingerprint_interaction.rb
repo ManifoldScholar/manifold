@@ -76,10 +76,10 @@ module FingerprintInteraction
   # @param [Class] with the interaction to use (can be derived per {Fingerprints#derive_fingerprint_interaction_for})
   # @return [void]
   def calculate_fingerprints_for!(models, as: nil, with: nil)
-    models.reload if models.respond_to?(:reload)
+    models.reload if models.respond_to?(:reload) && models.none?(&:changed_for_autosave?)
 
     models.each do |model|
-      model.reload unless models.respond_to?(:reload)
+      model.reload unless models.respond_to?(:reload) || model.changed_for_autosave?
 
       calculate_fingerprint_for! model, as: as, with: with
     end
