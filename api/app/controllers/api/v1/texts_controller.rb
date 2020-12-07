@@ -7,6 +7,10 @@ module API
         Text.all
       end
 
+      record_analytics_for!(Text) do
+        record_analytics_for_action :show, event: :view
+      end
+
       # GET /texts
       def index
         @texts = load_texts

@@ -11,6 +11,10 @@ module API
         )
       end
 
+      record_analytics_for!(Project) do
+        record_analytics_for_action :show, event: :view
+      end
+
       def index
         @projects = load_projects
         render_multiple_resources @projects, include: [:creators]
