@@ -42,6 +42,6 @@ module StoresFingerprints
   def recalculate_fingerprint!
     calculate_and_store_fingerprint!
 
-    save! if fingerprint_changed?
+    update_column :fingerprint, fingerprint if fingerprint_changed?
   end
 end
