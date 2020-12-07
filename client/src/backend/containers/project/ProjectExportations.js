@@ -8,8 +8,7 @@ import {
   projectsAPI,
   exportTargetsAPI,
   projectExportationsAPI,
-  requests,
-  entitlementsAPI
+  requests
 } from "api";
 import EntitiesList, {
   Button,
