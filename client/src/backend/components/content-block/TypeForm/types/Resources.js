@@ -22,15 +22,15 @@ export default class ProjectContentTypeFormResources extends PureComponent {
     return (
       <>
         <Form.TextInput
-          debug
           label="Title"
           name="attributes[title]"
           instructions={`If blank, the block title will default to "Resources"`}
           focusOnMount
         />
+        <Form.TextArea label="Description" name="attributes[description]" />
         <Form.Switch
           label="Show All Collections?"
-          instructions="If set, all project collections will be included in the block. Otherwise, only featured selections will be shown."
+          instructions="If set, all resource collections will be included in the block. Otherwise, only featured selections will be shown."
           name="attributes[showAllCollections]"
           wide
         />

@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import ResourceCollectionList from "frontend/components/resource-collection-list";
 import ResourceList from "frontend/components/resource-list";
+import pick from "lodash/pick";
 
 export default class ProjectContentBlockResourcesBlock extends PureComponent {
   static displayName = "Project.Content.Block.Resources";
@@ -65,6 +66,10 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
     return this.project.attributes.resourcesCount;
   }
 
+  get visibility() {
+    return pick(this.props.block.attributes, ["showDescriptions"]);
+  }
+
   get isSparse() {
     return (
       (!this.hasVisibleCollections && !this.hasVisibleResources) ||
@@ -82,6 +87,7 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
             <ResourceCollectionList.Grid
               project={this.project}
               resourceCollections={this.visibleCollections}
+              {...this.visibility}
             />
             <ResourceCollectionList.Totals
               alignLeft={this.isSparse}
@@ -94,6 +100,7 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
         <ResourceList.Thumbnails
           project={this.project}
           resources={this.visibleResources}
+          {...this.visibility}
         />
         <ResourceList.Totals
           alignLeft={this.isSparse}
