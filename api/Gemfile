@@ -9,6 +9,7 @@ gem "active_record_upsert", branch: "master", git: "https://github.com/scryptmou
 gem "activerecord-wrapped_transaction", "~> 0.9.0"
 gem "acts_as_list", "~>0.9"
 gem "acts-as-taggable-on", "~> 6.0"
+gem "ahoy_matey", "~>3.0.4"
 # Project is now unmaintained. Fixing to 3.3 for now.
 gem "authority", "~>3.3.0"
 gem "bagit", "~> 0.4.3"
@@ -57,6 +58,7 @@ gem "keyword_search", "~> 1.5"
 gem "lockbox", "~> 0.3.1"
 gem "lograge", "~> 0.10"
 gem "marcel", "~> 0.3.2"
+gem "maxminddb"
 gem "memoist", "~> 0.16.0"
 gem "metadown", git: "https://github.com/steveklabnik/metadown.git", tag: "v1.1.0.beta"
 gem "mime-types", "~> 3.3"
@@ -118,6 +120,7 @@ gem "google_drive", "~> 2.0"
 gem "shrine-google_cloud_storage", "~> 3.0"
 
 group :development, :test do
+  gem "byebug"
   gem "factory_bot_rails", "~> 4.0"
   gem "parallel_tests", "~> 2.29.2"
   gem "rspec-core", "~> 3.0"
@@ -137,6 +140,7 @@ end
 group :development do
   gem "debase"
   gem "listen", ">= 3.0.5", "< 3.2"
+  gem "pry-nav"
   gem "pry-remote"
   gem "rubocop", "~> 0.60"
   gem "rubocop-rspec", "~> 1.32"

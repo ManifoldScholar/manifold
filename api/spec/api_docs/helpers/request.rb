@@ -4,8 +4,7 @@ module APIDocs
 
       include Helpers::Inflections
 
-      attr_accessor :action
-      attr_accessor :options
+      attr_accessor :action, :options
 
       def initialize(options, action)
         @options = options
@@ -138,7 +137,7 @@ module APIDocs
       end
 
       def exclude_401
-        !requires_auth? || (@options[:exclude]&.include?("401"))
+        !requires_auth? || @options[:exclude]&.include?("401")
       end
 
       def request_body?

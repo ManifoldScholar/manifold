@@ -4,6 +4,7 @@ require Rails.root.join("lib", "patches", "better_enums").to_s
 require Rails.root.join("lib", "patches", "elasticsearch-dsl").to_s
 require Rails.root.join("lib", "patches", "for_shrine").to_s
 require Rails.root.join("lib", "patches", "friendly_id_uniqueness").to_s
+require Rails.root.join("lib", "patches", "ahoy").to_s
 
 # See https://github.com/nahi/httpclient/issues/252
 class WebAgent

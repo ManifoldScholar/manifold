@@ -171,6 +171,11 @@ Rails.application.routes.draw do
         end
       end
 
+      namespace :analytics do
+        resource :events, only: [:create]
+        resource :reports, only: [:show]
+      end
+
       resources :passwords, only: [:create, :update]
       post "passwords/admin_reset_password" => "passwords#admin_reset_password"
 
