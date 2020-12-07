@@ -2,6 +2,7 @@ module API
   module V1
     # SearchResultsController
     class SearchResultsController < ApplicationController
+
       def index
         outcome = Search::Query.run(search_options)
 
