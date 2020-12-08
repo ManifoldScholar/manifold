@@ -11,8 +11,9 @@ import Block, {
   ProjectRow
 } from "backend/components/analytics";
 import { chart, figure, time, list, table, projectTable } from "./sampleBlocks";
+import { getData } from "./sampleData";
 
-storiesOf("Backend/Analytics/Grid", module).add("Sample Grid", () => {
+storiesOf("Backend/Analytics/Dashboard", module).add("Global", () => {
   const columns = select(
     "Columns (on desktop)",
     {
@@ -22,6 +23,10 @@ storiesOf("Backend/Analytics/Grid", module).add("Sample Grid", () => {
     },
     4
   );
+  const dailyVisitors = getData("daily_visitors");
+  const returnVisits = getData("returning_visitors");
+  const averageVisit = getData("average_visit_duration");
+
   return (
     <Grid columns={columns}>
       <Block
@@ -30,13 +35,13 @@ storiesOf("Backend/Analytics/Grid", module).add("Sample Grid", () => {
         title={chart.title}
         description={chart.description}
       >
-        <Chart series={chart.series} options={chart.options} />
+        <Chart data={dailyVisitors.data} dataLabel="Visitors" />
       </Block>
       <Block width={25} icon={figure.icon} title={figure.title}>
-        <Figure stat={figure.stat} caption={figure.caption} />
+        <Figure stat={returnVisits.data.value} caption={figure.caption} />
       </Block>
       <Block width={25} icon="timerClock32" title={time.title}>
-        <Time minutes={time.minutes} seconds={time.seconds} />
+        <Time time={averageVisit.data.value} />
       </Block>
       <Block width={25} icon="resourceInteractive64" title="Interaction">
         <Figure stat="18%" caption="46 visitors used annotations or comments" />

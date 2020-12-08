@@ -20,13 +20,18 @@ import {
   projectTable,
   textNodeTable
 } from "./sampleBlocks";
+import { getData } from "./sampleData";
+
+const dailyVisitors = getData("daily_visitors");
+const returnVisits = getData("returning_visitors");
+const averageVisit = getData("average_visit_duration");
 
 storiesOf("Backend/Analytics/Block", module)
   .add("Chart", () => {
-    const { icon, title, description, series, options } = chart;
+    const { icon, title, description } = chart;
     return (
       <Block icon={icon} title={title} description={description}>
-        <Chart series={series} options={options} />
+        <Chart data={dailyVisitors.data} dataLabel="Visitors" />
       </Block>
     );
   })
@@ -34,7 +39,7 @@ storiesOf("Backend/Analytics/Block", module)
     const { icon, title, stat, caption } = figure;
     return (
       <Block icon={icon} title={title}>
-        <Figure stat={stat} caption={caption} />
+        <Figure stat={returnVisits.data.value} caption={caption} />
       </Block>
     );
   })
@@ -50,7 +55,7 @@ storiesOf("Backend/Analytics/Block", module)
     const { title, minutes, seconds } = time;
     return (
       <Block icon="timerClock32" title={title}>
-        <Time minutes={minutes} seconds={seconds} />
+        <Time time={averageVisit.data.value} />
       </Block>
     );
   })

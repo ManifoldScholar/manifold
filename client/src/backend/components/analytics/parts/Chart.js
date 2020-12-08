@@ -18,8 +18,17 @@ const LoadableChart = Loadable({
 });
 /* eslint-enable react/prop-types */
 
-function Chart({ options, series, type = "line", height = 175 }) {
-  const mergedOptions = merge({}, cloneDeep(defaultOptions), options);
+function Chart({ options, data, dataLabel, type = "line", height = 175 }) {
+  const series = [
+    {
+      name: dataLabel,
+      data: data.map(point => point.y)
+    }
+  ];
+  const withLabels = {
+    labels: data.map(point => new Date(point.x).getTime())
+  };
+  const mergedOptions = merge({}, cloneDeep(defaultOptions), options, withLabels);
   const chartProps = {
     series,
     options: mergedOptions,
@@ -30,8 +39,12 @@ function Chart({ options, series, type = "line", height = 175 }) {
 }
 
 Chart.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({
+    x: PropTypes.string,
+    y: PropTypes.number
+  })).isRequired,
+  dataLabel: PropTypes.string.isRequired,
   options: PropTypes.object,
-  series: PropTypes.array.isRequired,
   type: PropTypes.string,
   height: PropTypes.number
 };
