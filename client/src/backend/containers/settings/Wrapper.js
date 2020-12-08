@@ -31,9 +31,9 @@ export class SettingsWrapperContainer extends PureComponent {
 
         <section>
           <Navigation.Secondary links={secondaryLinks} />
-          <div className="backend-detail">
+          <main id="skip-to-main" className="backend-detail">
             <div className="panel">{childRoutes(this.props.route)}</div>
-          </div>
+          </main>
         </section>
       </Authorize>
     );

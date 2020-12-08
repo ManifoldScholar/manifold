@@ -29,9 +29,9 @@ export default class ProjectsWrapper extends PureComponent {
             candidates={secondaryLinks}
           />
           <Navigation.Secondary links={secondaryLinks} />
-          <section className="backend-detail">
+          <main id="skip-to-main" className="backend-detail">
             {childRoutes(this.props.route)}
-          </section>
+          </main>
         </div>
       </Authorize>
     );

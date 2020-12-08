@@ -110,14 +110,13 @@ export class BackendContainer extends PureComponent {
               authentication={this.props.authentication}
               commonActions={this.commonActions}
             />
-            <main
+            <div
               ref={mainContainer => {
                 this.mainContainer = mainContainer;
               }}
-              id="skip-to-main"
             >
               {childRoutes(this.props.route, { childProps: this.childProps() })}
-            </main>
+            </div>
             <Footers.FrontendFooter
               pages={this.props.pages}
               authentication={this.props.authentication}

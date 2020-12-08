@@ -133,7 +133,7 @@ class DashboardsAdminContainerImplementation extends PureComponent {
 
   render() {
     return (
-      <div>
+      <main id="skip-to-main">
         <h1 className="screen-reader-text">Dashboard</h1>
         <section>
           <div className="container">
@@ -204,7 +204,7 @@ class DashboardsAdminContainerImplementation extends PureComponent {
             </section>
           </div>
         </section>
-      </div>
+      </main>
     );
   }
 }
