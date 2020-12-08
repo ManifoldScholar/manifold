@@ -1,7 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import intervalToDuration from "date-fns/intervalToDuration";
 
-function Time({ minutes, seconds }) {
+function Time({ time }) {
+  const interval = {
+    start: new Date('October 26, 2020 00:00:00'),
+    end: new Date(`October 26, 2020 ${time}`)
+  };
+  const { minutes, seconds } = intervalToDuration(interval);
+
   return (
     <figure>
       <div aria-hidden className="analytics-time-block">
@@ -15,14 +22,13 @@ function Time({ minutes, seconds }) {
           sec
         </span>
       </div>
-      <span className="screen-reader-text">{`${minutes} minutes, ${seconds} seconds`}</span>
+      <span className="screen-reader-text">{`${minutes} minutes ${seconds} seconds`}</span>
     </figure>
   );
 }
 
 Time.propTypes = {
-  minutes: PropTypes.string.isRequired,
-  seconds: PropTypes.string.isRequired
+  time: PropTypes.string.isRequired
 };
 
 Time.displayName = "Analytics.Block.Time";

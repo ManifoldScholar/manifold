@@ -10,26 +10,7 @@ export const chart = {
       <span style={{ color: "var(--analytics-highlight-color" }}>316</span>{" "}
       unique visitors in the last 30 days
     </p>
-  ),
-  series: [
-    {
-      name: "Visitors",
-      data: [10, 41, 35, 51, 49, 62, 69, 91, 153]
-    }
-  ],
-  options: {
-    labels: [
-      "July 10",
-      "July 11",
-      "July 12",
-      "July 13",
-      "July 14",
-      "July 15",
-      "July 16",
-      "July 17",
-      "July 18"
-    ]
-  }
+  )
 };
 
 export const figure = {
@@ -71,9 +52,7 @@ export const figureList = {
 };
 
 export const time = {
-  title: text("Title", "Average Visit"),
-  minutes: "27",
-  seconds: "03"
+  title: text("Title", "Average Visit")
 };
 
 export const list = {

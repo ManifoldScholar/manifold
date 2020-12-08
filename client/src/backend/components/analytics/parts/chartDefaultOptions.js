@@ -1,3 +1,6 @@
+import parseISO from "date-fns/parseISO";
+import format from "date-fns/format";
+
 const highlightColor = "#61CAFF";
 const textColor = "#9a9a9a";
 const lineColor = "#696969";
@@ -59,8 +62,9 @@ const defaultOptions = {
     }
   },
   xaxis: {
-    type: "category",
+    type: "datetime",
     labels: {
+      format: "MMM d",
       hideOverlappingLabels: true,
       style: {
         cssClass: "analytics-chart__label"
