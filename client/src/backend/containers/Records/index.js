@@ -31,9 +31,9 @@ export default class RecordsContainer extends PureComponent {
         />
         <div>
           <Navigation.Secondary links={secondaryLinks} />
-          <section className="backend-detail">
+          <main id="skip-to-main" className="backend-detail">
             {childRoutes(this.props.route)}
-          </section>
+          </main>
         </div>
       </Authorize>
     );

@@ -111,6 +111,7 @@ export default class DetailHeader extends PureComponent {
         mode="small"
         color="outlined"
         iconClass="backend-header__type-icon backend-header__type-icon--project"
+        ariaLabel={null}
       />
     );
   }

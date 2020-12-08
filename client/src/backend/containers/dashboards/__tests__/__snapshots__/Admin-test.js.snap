@@ -8,7 +8,9 @@ Array [
     class="screen-reader-text"
     role="status"
   />,
-  <div>
+  <main
+    id="skip-to-main"
+  >
     <h1
       class="screen-reader-text"
     >
@@ -520,6 +522,6 @@ Array [
         </section>
       </div>
     </section>
-  </div>,
+  </main>,
 ]
 `;
