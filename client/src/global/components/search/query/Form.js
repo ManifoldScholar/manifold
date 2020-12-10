@@ -1,8 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
-import isEqual from "lodash/isEqual";
+import { UIDConsumer } from "react-uid";
+import classNames from "classnames";
 import Utility from "global/components/utility";
+import Option from "global/components/form/Radio/Option";
+import CheckboxMixed from "./CheckboxMixed";
 
 export default class SearchQueryForm extends PureComponent {
   static displayName = "Search.Query.Form";
@@ -74,15 +76,6 @@ export default class SearchQueryForm extends PureComponent {
   }
   /* eslint-enable no-param-reassign */
 
-  /* eslint-disable no-param-reassign */
-  setFacetsFromAllFacets(state) {
-    if (state.allFacets) {
-      state.facets = this.availableFacetValues;
-    }
-    return state;
-  }
-  /* eslint-enable no-param-reassign */
-
   setScopeIdFromScopeString(state) {
     const { scope } = state;
     const newState = { scope, project: null, text: null, textSection: null };
@@ -104,33 +97,33 @@ export default class SearchQueryForm extends PureComponent {
     this.setState({ keyword: value });
   };
 
-  setSelectedFacets(facets, allFacets = false) {
+  setFacets(facets) {
     facets.sort();
-    const facetsUnchanged = isEqual(facets, this.state.facets);
-    if (facetsUnchanged && allFacets === this.state.allFacets) return;
-    const callback = facetsUnchanged ? null : this.doSearch;
-    return this.setState({ facets, allFacets }, callback);
+    return this.setState({ facets }, this.doSearch);
   }
 
   get availableScopes() {
     const scopes = [];
     const { projectId, textId, sectionId } = this.props;
-    if (sectionId) scopes.push({ label: "Chapter", value: "section" });
-    if (textId) scopes.push({ label: "Text", value: "text" });
-    if (projectId) scopes.push({ label: "Project", value: "project" });
+    if (sectionId)
+      scopes.push({
+        label: "Chapter",
+        value: "section",
+        originalValue: "section"
+      });
+    if (textId)
+      scopes.push({ label: "Text", value: "text", originalValue: "text" });
+    if (projectId)
+      scopes.push({
+        label: "Project",
+        value: "project",
+        originalValue: "project"
+      });
     return scopes;
   }
 
   get availableFacetValues() {
     return this.props.facets.map(f => f.value).sort();
-  }
-
-  get selectedFacets() {
-    return this.state.facets;
-  }
-
-  get allFacetsSelected() {
-    return isEqual(this.availableFacetValues, this.selectedFacets);
   }
 
   get searchIdPrefix() {
@@ -139,6 +132,10 @@ export default class SearchQueryForm extends PureComponent {
 
   get checkboxClasses() {
     return "search-query__checkbox checkbox checkbox--white";
+  }
+
+  get typeIsReader() {
+    return this.props.searchType === "reader";
   }
 
   internalStateFromIncomingState(initialState) {
@@ -150,42 +147,7 @@ export default class SearchQueryForm extends PureComponent {
     };
     newState = this.setDefaultScope(newState);
     newState = this.setScopeIdFromScopeString(newState);
-    newState = this.setFacetsFromAllFacets(newState);
     return newState;
-  }
-
-  facetChecked(value) {
-    if (this.state.allFacets) {
-      return value === "All";
-    }
-    return this.facetSelected(value);
-  }
-
-  facetSelected(value) {
-    return this.selectedFacets.includes(value);
-  }
-
-  selectFacet(key) {
-    if (this.allFacetsSelected) {
-      return this.setSelectedFacets([key]);
-    }
-    const selected = this.state.facets;
-    const updated = this.facetSelected(key) ? selected : [...selected, key];
-    return this.setSelectedFacets(updated);
-  }
-
-  deselectFacet(key) {
-    const selected = this.state.facets;
-    let updated = selected;
-    let allFacets = false;
-    const index = selected.indexOf(key);
-    if (index !== -1)
-      updated = selected.slice(0, index).concat(selected.slice(index + 1));
-    if (updated.length === 0) {
-      updated = this.availableFacetValues;
-      allFacets = true;
-    }
-    return this.setSelectedFacets(updated, allFacets);
   }
 
   valueFromEvent(event) {
@@ -203,27 +165,48 @@ export default class SearchQueryForm extends PureComponent {
     return handler;
   }
 
-  makeFacetHandler(key) {
-    let handler = this.handlers.facets[key];
-    if (handler) return handler;
-    handler = event => {
-      if (key === "All") {
-        this.setSelectedFacets(this.availableFacetValues, true);
-      } else {
-        this.valueFromEvent(event)
-          ? this.selectFacet(key)
-          : this.deselectFacet(key);
-      }
-    };
-    this.handlers.facets[key] = handler;
-    return handler;
-  }
-
   doSearch = (event = null) => {
     if (event) event.preventDefault();
     if (!this.state.keyword) return null; // If there's no keyword, don't do anything yet.
     this.props.setQueryState(this.state);
   };
+
+  renderScopeOptions() {
+    return (
+      <fieldset
+        className={classNames({
+          "search-query__filter-group": true,
+          "search-query__filter-group--inline": this.typeIsReader
+        })}
+      >
+        <div className="search-query__group-label">
+          <legend>Search within:</legend>
+        </div>
+        <div className="search-query__filter-group-list">
+          {this.availableScopes.map(option => (
+            <Option
+              key={option.value}
+              option={option}
+              groupName={`search[scope]`}
+              onChange={this.makeScopeHandler(option.value)}
+              value={this.state.scope}
+              inline
+            />
+          ))}
+        </div>
+      </fieldset>
+    );
+  }
+
+  renderFacetOptions() {
+    return (
+      <CheckboxMixed
+        label="Show results for:"
+        checkboxes={this.props.facets}
+        onChange={value => this.setFacets(value)}
+      />
+    );
+  }
 
   renderFooter() {
     if (this.props.searchType !== "frontend" && !this.props.description)
@@ -252,7 +235,7 @@ export default class SearchQueryForm extends PureComponent {
     return (
       <form className="search-query" onSubmit={this.doSearch}>
         <div className="search-query__input-magnify">
-          <UID name={id => `${this.searchIdPrefix}-${id}`}>
+          <UIDConsumer name={id => `${this.searchIdPrefix}-${id}`}>
             {id => (
               <>
                 <label htmlFor={id} className="screen-reader-text">
@@ -269,7 +252,7 @@ export default class SearchQueryForm extends PureComponent {
                 />
               </>
             )}
-          </UID>
+          </UIDConsumer>
           <button type="submit" className="search-query__submit">
             <Utility.IconComposer
               iconClass="search-query__search-icon"
@@ -279,124 +262,8 @@ export default class SearchQueryForm extends PureComponent {
             <span className="screen-reader-text">Execute Search</span>
           </button>
         </div>
-        {this.availableScopes.length > 1 ? (
-          <div
-            role="group"
-            aria-labelledby="search-within-header"
-            className="search-query__filters"
-          >
-            {this.props.searchType !== "reader" ? (
-              <h4
-                id="search-within-header"
-                className="search-query__group-label"
-              >
-                {"Search within:"}
-              </h4>
-            ) : null}
-            <div className="search-query__checkbox-group">
-              {this.props.searchType === "reader" ? (
-                <h4
-                  id="search-within-header"
-                  className="search-query__group-label"
-                >
-                  {"Search within:"}
-                </h4>
-              ) : null}
-              {this.availableScopes.map((scope, index) => {
-                const filterCheckboxId = scope.value + "-" + index;
-
-                return (
-                  <label
-                    htmlFor={filterCheckboxId}
-                    key={scope.value}
-                    className={this.checkboxClasses}
-                  >
-                    <input
-                      type="checkbox"
-                      id={filterCheckboxId}
-                      checked={this.state.scope === scope.value}
-                      onChange={this.makeScopeHandler(scope.value)}
-                    />
-                    <div className="checkbox__indicator" aria-hidden="true">
-                      <Utility.IconComposer
-                        icon="checkmark16"
-                        size="default"
-                        iconClass="checkbox__icon"
-                      />
-                    </div>
-                    {scope.label}
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-        ) : null}
-
-        {this.props.facets.length > 0 ? (
-          <div
-            role="group"
-            aria-labelledby="show-results-for-header"
-            className="search-query__filters"
-          >
-            <h4
-              id="show-results-for-header"
-              className="search-query__group-label"
-            >
-              {"Show Results For:"}
-            </h4>
-            <div className="search-query__checkbox-group">
-              <label
-                htmlFor="all-filters"
-                key={"all"}
-                className={this.checkboxClasses}
-              >
-                <input
-                  type="checkbox"
-                  id="all-filters"
-                  checked={this.facetChecked("All")}
-                  onChange={this.makeFacetHandler("All")}
-                />
-                {/* Fake control to allow for custom checkbox styles */}
-                <div className="checkbox__indicator" aria-hidden="true">
-                  <Utility.IconComposer
-                    icon="checkmark16"
-                    size="default"
-                    iconClass="checkbox__icon"
-                  />
-                </div>
-                {"Everything"}
-              </label>
-              {this.props.facets.map((facet, index) => {
-                const facetCheckboxId = facet.value + "-" + index;
-
-                return (
-                  <label
-                    htmlFor={facetCheckboxId}
-                    key={facet.value}
-                    className={this.checkboxClasses}
-                  >
-                    <input
-                      type="checkbox"
-                      id={facetCheckboxId}
-                      checked={this.facetChecked(facet.value)}
-                      onChange={this.makeFacetHandler(facet.value)}
-                    />
-                    {/* Fake control to allow for custom checkbox styles */}
-                    <div className="checkbox__indicator" aria-hidden="true">
-                      <Utility.IconComposer
-                        icon="checkmark16"
-                        size="default"
-                        iconClass="checkbox__icon"
-                      />
-                    </div>
-                    {facet.label}
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-        ) : null}
-
+        {this.availableScopes.length > 1 && this.renderScopeOptions()}
+        {this.props.facets.length > 0 && this.renderFacetOptions()}
         {this.renderFooter()}
       </form>
     );
