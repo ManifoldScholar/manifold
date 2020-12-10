@@ -291,8 +291,7 @@ export default class Header extends Component {
               toggleVisibility={this.panelToggleHandler("search")}
               initialState={{
                 keyword: "",
-                scope: "text",
-                allFacets: true
+                scope: "text"
               }}
               projectId={this.projectId}
               textId={this.textId}

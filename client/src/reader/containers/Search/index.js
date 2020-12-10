@@ -69,13 +69,13 @@ class SearchContainer extends PureComponent {
         title={"Search Results"}
         icon={"search24"}
         contentWidth={850}
+        appearance="overlay-full bg-white"
       >
         <div>
           <SearchQuery.Form
             initialState={{
               keyword: "",
-              scope: "text",
-              allFacets: true
+              scope: "text"
             }}
             searchQueryState={this.props.searchQueryState}
             setQueryState={this.props.setQueryState}

@@ -129,8 +129,7 @@ export class NavigationStatic extends PureComponent {
           searchType={projectId ? "project" : "library"}
           projectId={projectId}
           initialState={{
-            keyword: "",
-            allFacets: true
+            keyword: ""
           }}
           description={description}
           hidePanel={this.props.commonActions.hideSearchPanel}

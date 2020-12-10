@@ -48,8 +48,7 @@ class ProjectSearch extends Component {
             <SearchQuery.Form
               initialState={{
                 keyword: "",
-                scope: "project",
-                allFacets: true
+                scope: "project"
               }}
               projectId={this.project.id}
               searchQueryState={this.props.searchQueryState}

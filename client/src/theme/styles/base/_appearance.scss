@@ -64,12 +64,13 @@ body {
   --accent-interaction-dark: #{$_accentInteractionDark};
 }
 
-.browse, .reader.scheme-light {
+.browse, .reader.scheme-light, .bg-white {
   --default-focus-color: #{$neutralUIDark};
   --default-hover-color: #{$accentInteractionDark};
   --default-error-color: #{$spErrorDark};
   --default-warning-color: #{$spWarningDark};
   --default-notice-color: #{$spNoticeDark};
+  color: $neutralTextDark;
 }
 
 .backend, .drawer--backend, .reader.scheme-dark, .bg-neutral90, .bg-neutral95 {
@@ -165,6 +166,10 @@ body {
 }
 
 // Background color utility classes
+.bg-white {
+  background-color: $neutralWhite;
+}
+
 .bg-accent-primary {
   background-color: $accentPrimary;
 }

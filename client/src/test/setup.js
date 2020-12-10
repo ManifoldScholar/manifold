@@ -42,7 +42,8 @@ jest.mock("focus-trap-react", () => "focus-trap-react");
 
 jest.mock("react-uid", () => {
   return {
-    UID: jest.fn(props => props.children(1))
+    UID: jest.fn(props => props.children(1)),
+    UIDConsumer: jest.fn(props => props.children(1))
   };
 });
 

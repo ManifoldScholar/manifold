@@ -229,7 +229,6 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
         id="search"
         initialState={
           Object {
-            "allFacets": true,
             "keyword": "",
             "scope": "text",
           }

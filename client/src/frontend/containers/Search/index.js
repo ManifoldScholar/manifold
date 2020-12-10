@@ -47,8 +47,7 @@ class SearchContainer extends PureComponent {
             <h2 className="screen-reader-text">Search Form</h2>
             <SearchQuery.Form
               initialState={{
-                keyword: "",
-                allFacets: true
+                keyword: ""
               }}
               searchQueryState={this.props.searchQueryState}
               setQueryState={this.props.setQueryState}
