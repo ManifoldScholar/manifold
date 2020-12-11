@@ -67,10 +67,10 @@ module Analytics
         require_cte! :daily_project_visitors
 
         build_agg_query(
-          name: 'daily_visitors',
-          type: 'xy',
-          x_type: 'date',
-          y_type: 'int',
+          name: "daily_visitors",
+          type: "xy",
+          x_type: "date",
+          y_type: "int",
           query_or_table_name: "daily_project_visitors",
           from: "daily_project_visitors"
         )

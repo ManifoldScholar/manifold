@@ -2,7 +2,7 @@ module Analytics
   module Reports
     class AnalyticsResult < ActiveInteraction::Base
 
-      PARSEABLE_VALUES = %i[meta data]
+      PARSEABLE_VALUES = %i[meta data].freeze
 
       attr_reader :id, :data
 
@@ -40,7 +40,7 @@ module Analytics
       end
 
       def input_hash
-        Digest::SHA2.hexdigest inputs.except(:data).reduce("") { |m, i| m += i.to_s}
+        Digest::SHA2.hexdigest inputs.except(:data).reduce("") { |m, i| m += i.to_s }
       end
 
     end

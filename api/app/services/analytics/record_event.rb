@@ -7,8 +7,7 @@ module Analytics
 
     set_callback :type_check, :before, :set_visit
 
-    def execute
-    end
+    def execute; end
 
     private
 
@@ -17,7 +16,7 @@ module Analytics
       return if visit_token.blank?
 
       @analytics_visit = Analytics::Visit.find_by(visit_token: visit_token) ||
-                          Analytics::RecordVisit.run(visit_token: visit_token).result
+                         Analytics::RecordVisit.run(visit_token: visit_token).result
     end
 
   end

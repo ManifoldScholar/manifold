@@ -41,6 +41,7 @@ module Api
 
       def analytics_record
         return if self.class.analytics_record_getter.nil?
+
         self.class.analytics_record_getter.starts_with?("@") ? instance_variable_get(self.class.analytics_record_getter) : __send__(self.class.analytics_record_getter)
       end
 
@@ -59,7 +60,6 @@ module Api
       def visitor_token
         params[:visitor_token] || request.headers["HTTP_VISITOR_TOKEN"]
       end
-
     end
   end
 end

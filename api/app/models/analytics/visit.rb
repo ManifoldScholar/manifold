@@ -16,7 +16,7 @@ class Analytics::Visit < ApplicationRecord
     app_version
     os_version
     platform
-  ]
+  ].freeze
 
   self.table_name = "analytics_visits"
 

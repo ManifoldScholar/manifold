@@ -182,14 +182,14 @@ class ApplicationController < ActionController::API
     end
     # rubocop:enable Lint/UnusedMethodArgument
 
-    def record_analytics_for!(model, record_getter: "@#{model.model_name.param_key}", &block)
+    def record_analytics_for!(model, record_getter: "@#{model.model_name.param_key}")
       include Api::V1::RecordsAnalytics
       @analytics_record_getter = record_getter
 
       yield
     end
 
-    def record_analytics!(&block)
+    def record_analytics!
       include Api::V1::RecordsAnalytics
 
       yield

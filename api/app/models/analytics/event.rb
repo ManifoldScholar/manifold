@@ -16,7 +16,7 @@ class Analytics::Event < ApplicationRecord
     end
 
     def find_or_create_view_event_for(visit:, record:, start_time: Time.current)
-      find_or_create_event_for(visit: visit, record: record, event_name: "view #{record.model_name.param_key}") do |e|
+      find_or_create_event_for(visit: visit, record: record, event_name: "view #{record.model_name.param_key}") do |_e|
         properties[:started_at] = start_time
       end
     end

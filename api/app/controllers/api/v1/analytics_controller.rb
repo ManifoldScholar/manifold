@@ -8,12 +8,12 @@ module Api
         scope = analytics_scope
 
         interaction_outcome = case scope
-        when nil
-          Analytics::Reports::Global.run(allow_cached_result: false, **analytics_params)
-        else
-          reporter_class = "Analytics::Reports::For#{scope.class.name}".constantize
-          reporter_class.run scope: scope, **analytics_params.to_h.symbolize_keys
-        end
+                              when nil
+                                Analytics::Reports::Global.run(allow_cached_result: false, **analytics_params)
+                              else
+                                reporter_class = "Analytics::Reports::For#{scope.class.name}".constantize
+                                reporter_class.run scope: scope, **analytics_params.to_h.symbolize_keys
+                              end
 
         render_jsonapi(interaction_outcome.result, serializer: ::V1::AnalyticsResultSerializer)
       end

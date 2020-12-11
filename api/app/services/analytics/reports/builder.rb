@@ -2,12 +2,12 @@ module Analytics
   module Reports
     class Builder < ActiveInteraction::Base
 
-      TIME_ZONE = "PST"
-      VISIT_DATE_PLACEHOLDER = "{{ VISIT DATE FILTER }}"
-      START_DATE_PLACEHOLDER = "{{ START DATE }}"
-      END_DATE_PLACEHOLDER = "{{ END DATE }}"
-      TZ_PLACEHOLDER = "{{ TIME ZONE }}"
-      SCOPE_PLACEHOLDER = "{{ SCOPE ID }}"
+      TIME_ZONE = "PST".freeze
+      VISIT_DATE_PLACEHOLDER = "{{ VISIT DATE FILTER }}".freeze
+      START_DATE_PLACEHOLDER = "{{ START DATE }}".freeze
+      END_DATE_PLACEHOLDER = "{{ END DATE }}".freeze
+      TZ_PLACEHOLDER = "{{ TIME ZONE }}".freeze
+      SCOPE_PLACEHOLDER = "{{ SCOPE ID }}".freeze
 
       attr_reader :cached_result
 
@@ -34,9 +34,7 @@ module Analytics
 
       class << self
 
-        attr_reader :ctes
-        attr_reader :base_ctes
-        attr_reader :analytics
+        attr_reader :ctes, :base_ctes, :analytics
 
         def register_base_cte!(name, sql)
           register_cte!(name, sql)
@@ -82,7 +80,7 @@ module Analytics
 
       def full_query
         subqueries = analytics.map do |f|
-          send(f) if self.respond_to?(f)
+          send(f) if respond_to?(f)
         end
 
         raw_query = with_required_ctes do
@@ -103,7 +101,7 @@ module Analytics
 
       def cached_analytics
         set_default_dates
-        cache_key = "analytics/#{self.class.name.demodulize}/#{@scope&.id || "all"}"
+        cache_key = "analytics/#{self.class.name.demodulize}/#{@scope&.id || 'all'}"
         @cached_result = true
 
         Rails.cache.fetch(cache_key, force: force_cache_refresh, skip_nil: true, expires_in: (Time.now.end_of_day - Time.now).seconds, race_condition_ttl: 10.seconds) do
@@ -147,8 +145,8 @@ module Analytics
         @required_ctes.uniq
       end
 
-      def with_required_ctes(&block)
-        cte_sql = "WITH #{required_ctes.map { |c| self.class.ctes[c] }.join(",")}"
+      def with_required_ctes
+        cte_sql = "WITH #{required_ctes.map { |c| self.class.ctes[c] }.join(',')}"
 
         <<~SQL
           #{required_ctes.present? ? cte_sql : nil}
@@ -187,9 +185,9 @@ module Analytics
       def build_json(name, quote: true, **args)
         args.transform_keys! { |k| quote(k) } unless quote
         args = args.to_a.flatten
-        args.map! {|a| quote(a.to_s) } if quote
+        args.map! { |a| quote(a.to_s) } if quote
 
-        "JSON_BUILD_OBJECT(#{args.join(",")}) AS #{name}"
+        "JSON_BUILD_OBJECT(#{args.join(',')}) AS #{name}"
       end
 
       def build_json_array(name, query_or_table_name)
@@ -197,15 +195,15 @@ module Analytics
       end
 
       def build_meta(type, **metadata)
-        build_json('meta', { type: type }.merge(metadata))
+        build_json("meta", { type: type }.merge(metadata))
       end
 
       def build_simple_data(value, is_query: true)
-        build_json('data', quote: !is_query, value: value)
+        build_json("data", quote: !is_query, value: value)
       end
 
       def build_row_data(query_or_table_name)
-        build_json_array('data', query_or_table_name)
+        build_json_array("data", query_or_table_name)
       end
 
     end

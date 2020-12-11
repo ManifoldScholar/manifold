@@ -5,7 +5,7 @@ module Analytics
     hash :properties, strip: false
     time :time, default: Time.current
 
-    def execute      
+    def execute
       Analytics::Event.create(
         visit: analytics_visit,
         name: name,

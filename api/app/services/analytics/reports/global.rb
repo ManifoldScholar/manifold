@@ -105,9 +105,9 @@ module Analytics
         require_cte! :unique_visitors
 
         build_simple_query(
-          name: 'returning_visitors',
-          type: 'float',
-          value: 'COALESCE((SELECT COUNT(*) FROM unique_visitors HAVING COUNT(*) > 1) / (NULLIF(COUNT(*)::float, 0)), 0)'
+          name: "returning_visitors",
+          type: "float",
+          value: "COALESCE((SELECT COUNT(*) FROM unique_visitors HAVING COUNT(*) > 1) / (NULLIF(COUNT(*)::float, 0)), 0)"
         )
       end
 
@@ -115,9 +115,9 @@ module Analytics
       # Average of difference between visit start and end times
       define_analytic :average_visit_duration do
         build_simple_query(
-          name: 'average_visit_duration',
-          type: 'interval',
-          value: 'AVG(ended_at - started_at)',
+          name: "average_visit_duration",
+          type: "interval",
+          value: "AVG(ended_at - started_at)",
           filter: "ended_at IS NOT NULL"
         )
       end
@@ -168,10 +168,10 @@ module Analytics
         require_cte! :search_terms
 
         build_agg_query(
-          name: 'top_search_terms',
-          type: 'array',
-          query_or_table_name: 'search_terms',
-          from: 'search_terms'
+          name: "top_search_terms",
+          type: "array",
+          query_or_table_name: "search_terms",
+          from: "search_terms"
         )
       end
 
