@@ -170,6 +170,7 @@ module Analytics
         build_agg_query(
           name: "top_search_terms",
           type: "array",
+          array_content: "json",
           query_or_table_name: "search_terms",
           from: "search_terms"
         )

@@ -1,8 +1,8 @@
-class AnalyticsEvent < ClassyEnum::Base
+class AnalyticsEventType < ClassyEnum::Base
   class << self
     def build(name)
       enum = find(name)
-      enum.is_a?(AnalyticsEvent) ? enum : AnalyticsEvent::Other.new(name)
+      enum.is_a?(AnalyticsEventType) ? enum : AnalyticsEventType::Other.new(name)
     end
   end
 
@@ -15,19 +15,19 @@ class AnalyticsEvent < ClassyEnum::Base
   end
 end
 
-class AnalyticsEvent::View < AnalyticsEvent
+class AnalyticsEventType::View < AnalyticsEventType
   def interaction
     Analytics::RecordViewEvent
   end
 end
 
-class AnalyticsEvent::Leave < AnalyticsEvent
+class AnalyticsEventType::Leave < AnalyticsEventType
   def interaction
     Analytics::RecordLeaveEvent
   end
 end
 
-class AnalyticsEvent::Search < AnalyticsEvent
+class AnalyticsEventType::Search < AnalyticsEventType
   def interaction
     Analytics::RecordSearchEvent
   end
@@ -37,7 +37,7 @@ class AnalyticsEvent::Search < AnalyticsEvent
   end
 end
 
-class AnalyticsEvent::Other < AnalyticsEvent
+class AnalyticsEventType::Other < AnalyticsEventType
   def initialize(name = "other")
     @name = name
   end

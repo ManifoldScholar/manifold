@@ -12,8 +12,8 @@ module Api
         attr_reader :analytics_record_getter
 
         def record_analytics_for_actions(*action_names, event:)
-          event = AnalyticsEvent.build(event)
-          return unless event.is_a?(AnalyticsEvent)
+          event = AnalyticsEventType.build(event)
+          return unless event.is_a?(AnalyticsEventType)
 
           @analytics = action_names.each_with_object({}.with_indifferent_access) do |action, hsh|
             (hsh[action] ||= []).push(event)

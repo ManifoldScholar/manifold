@@ -22,7 +22,11 @@ module Analytics
     end
 
     def tracker
-      @tracker ||= Ahoy::Tracker.new(visit_token: visit_token, visitor_token: visitor_token, request: request)
+      @tracker ||= Ahoy::Tracker.new(**tracker_args)
+    end
+
+    def tracker_args
+      {visit_token: visit_token, visitor_token: visitor_token, request: request}.compact
     end
 
   end

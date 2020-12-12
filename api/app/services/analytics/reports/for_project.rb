@@ -81,8 +81,8 @@ module Analytics
 
         build_agg_query(
           name: "annotations",
-          type: "json",
-          value_type: "int",
+          type: "array",
+          array_content: "json",
           query_or_table_name: "annotation_counts",
           from: "annotation_counts"
         )

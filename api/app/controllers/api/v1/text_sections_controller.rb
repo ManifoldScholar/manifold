@@ -5,10 +5,6 @@ module API
 
       resourceful! TextSection, authorize_options: { except: [:index, :show] }
 
-      record_analytics_for!(TextSection) do
-        record_analytics_for_action :show, event: :view
-      end
-
       def show
         @text_section = load_text_section
         authorize_action_for @text_section.text

@@ -7,6 +7,9 @@ class Ahoy::Store < Ahoy::DatabaseStore
     Analytics::Event
   end
 
+  # Disable linking visits to Users
+  def authenticate(_data); end
+
 end
 
 Ahoy.api = true
@@ -15,5 +18,3 @@ Ahoy.job_queue = :low_priority
 # GDPR Compliance
 Ahoy.cookies = false
 Ahoy.mask_ips = true
-
-Ahoy.logger = Logger.new(STDOUT)

@@ -53,7 +53,7 @@ module Analytics
         SELECT
           text_sections.id,
           text_sections.name,
-          COUNT(*) AS view_count
+          COUNT(*) AS count
         FROM analytics_visits
         JOIN analytics_events text_events
           ON analytics_visits.id = text_events.visit_id
@@ -75,7 +75,7 @@ module Analytics
           analytics_events.properties ->> 'share_action' AS action
         FROM analytics_events
         JOIN text_sections
-          ON (analytics_events.properties ->> 'text_section_id')::uuid = text_sections.id
+          ON (analytics_events.properties ->> 'text_section')::uuid = text_sections.id
         JOIN texts
           ON text_sections.text_id = texts.id
         WHERE analytics_events.name = 'share button click' AND texts.id = #{SCOPE_PLACEHOLDER}
@@ -105,6 +105,7 @@ module Analytics
         build_agg_query(
           name: "annotations",
           type: "json",
+          array_content: "json",
           query_or_table_name: "annotation_counts",
           from: "annotation_counts"
         )
@@ -115,7 +116,8 @@ module Analytics
 
         build_agg_query(
           name: "text_section_views",
-          type: "json",
+          type: "array",
+          array_content: "json",
           query_or_table_name: "text_section_views",
           from: "text_section_views"
         )
@@ -126,7 +128,8 @@ module Analytics
 
         build_agg_query(
           name: "share_clicks",
-          type: "json",
+          type: "array",
+          array_content: "json",
           query_or_table_name: "share_clicks",
           from: "share_clicks"
         )

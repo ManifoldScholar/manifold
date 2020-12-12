@@ -54,7 +54,7 @@ module API
       # @return [void]
       # rubocop:disable Metrics/AbcSize
       def render_single_resource(model, ok_status: default_ok_status, error_status: :unprocessable_entity, **options)
-        options[:serializer] ||= (options[:serializer] || model_serializer)
+        options[:serializer] ||= model_serializer
         options[:serializer] = error_serializer if (action_name == "update" || action_name == "create") && !model.valid?
         options[:location] ||= build_location_for model
         options[:status] ||= build_status_for model, ok_status, error_status

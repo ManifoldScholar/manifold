@@ -12,9 +12,6 @@ RSpec.describe "Analytics API", type: :request do
                     resource_name: "analytics_result",
                     authorized_user: :admin,
                     exclude: ["404", "401"]
-
-    # include_examples "an API create request",
-    #                 model:
   end
 
 

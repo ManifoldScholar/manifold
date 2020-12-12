@@ -1,11 +1,11 @@
-module Api
+module API
   module V1
-    class AnalyticsController < ApplicationController
-
-      before_action :authorize_user
+    class AnalyticsController < Ahoy::BaseController
 
       def show
         scope = analytics_scope
+
+        AnalyticsResultAuthorizer.readable_by? current_user, scope: scope
 
         interaction_outcome = case scope
                               when nil
@@ -19,12 +19,16 @@ module Api
       end
 
       def create
-        outcome = Analytics::RecordCustomEvent.run custom_event_params.to_h.merge(user: current_user)
-        head(outcome.valid? ? 200 : 400)
+        ahoy.track_visit
+
+        @outcome = Analytics::RecordCustomEvent.run custom_event_params.to_h.merge(analytics_visit: ahoy.visit)
+        head(@outcome.valid? ? 200 : 400)
       end
 
       def leave
-        outcome = Analytics::RecordLeaveEvent.run leave_params.to_h.merge(user: current_user)
+        ahoy.track_visit
+
+        outcome = Analytics::RecordLeaveEvent.run leave_params.to_h.merge(analytics_visit: ahoy.visit)
         head(outcome.valid? ? 200 : 400)
       end
 
@@ -35,7 +39,7 @@ module Api
       end
 
       def custom_event_params
-        params.permit(:visit_token, :visitor_token, :name, :properties)
+        params.permit(:visit_token, :visitor_token, :name, properties: {})
       end
 
       def leave_params
@@ -49,10 +53,6 @@ module Api
         return head(400) unless scope_class.present?
 
         scope_class.find(analytics_params[:record_id])
-      end
-
-      def authorize_user
-        authorize_action_for Settings.instance
       end
 
     end
