@@ -1,6 +1,9 @@
 module Analytics
   class RecordEvent < ActiveInteraction::Base
 
+    VIEW_EVENT_MATCHER = /view(:?\s[\w\s]+)?/.freeze
+    SEARCH_EVENT_MATCHER = /search/.freeze
+
     record :analytics_visit, class: Analytics::Visit
 
     string :visit_token, default: nil
@@ -10,7 +13,20 @@ module Analytics
 
     set_callback :type_check, :before, :set_visit
 
-    def execute; end
+    class << self
+      def record_event(inputs)
+        interaction = case inputs[:name]
+                      when VIEW_EVENT_MATCHER
+                        Analytics::RecordViewEvent
+                      when SEARCH_EVENT_MATCHER
+                        Analytics::RecordSearchEvent
+                      else
+                        Analytics::RecordCustomEvent
+                      end
+
+        interaction.run inputs
+      end
+    end
 
     private
 

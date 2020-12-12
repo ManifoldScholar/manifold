@@ -11,6 +11,13 @@ class Analytics::Event < ApplicationRecord
   before_create :set_time
 
   class << self
+    def create_view_event_for(visit:, record:, start_time: Time.current)
+      create visit: visit,
+              name: "view #{record.model_name.param_key}",
+              properties: {record.model_name.param_key => record.id},
+              time: start_time
+    end
+
     def find_or_create_event_for(visit:, record:, event_name:)
       find_or_create_by(visit: visit, name: event_name, properties: { record.model_name.param_key => record.id })
     end

@@ -9,11 +9,9 @@ module Analytics
 
         view_event.properties[:ended_at] = [time, view_event.properties[:ended_at]].max
         view_event.save!
-      else
-        visit = Analytics::Visit.find_by(visit_token: params[:visit_token])
-
-        visit.update_attribute(:ended_at, [time, view_event.properties[:ended_at]].max)
       end
+
+      params[:analytics_visit].update_attribute(:ended_at, [time, params[:analytics_visit].ended_at, view_event&.properties[:ended_at]].compact.max)
     end
 
     def record(params)

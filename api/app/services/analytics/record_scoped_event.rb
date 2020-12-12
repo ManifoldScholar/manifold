@@ -1,20 +1,20 @@
 module Analytics
   class RecordScopedEvent < Analytics::RecordEvent
 
-    object :scope, class: ApplicationRecord
+    object :record, class: ApplicationRecord
 
-    string :scope_type, default: nil
-    string :scope_id, default: nil
+    string :record_type, default: nil
+    string :record_id, default: nil
 
     set_callback :type_check, :before, :set_scope
 
     private
 
     def set_scope
-      return if scope.present?
-      return if scope_type.blank? || scope_id.blank?
+      return if record.present?
+      return if record_type.blank? || record_id.blank?
 
-      @scope = scope_type.classify.safe_constantize&.find_by(id: scope_id)
+      @record = record_type.classify.safe_constantize&.find_by(id: record_id)
     end
 
   end
