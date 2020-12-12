@@ -3,10 +3,6 @@ module API
     # SearchResultsController
     class SearchResultsController < ApplicationController
 
-      record_analytics! do
-        record_analytics_for_action :index, event: :search
-      end
-
       def index
         outcome = Search::Query.run(search_options)
 
