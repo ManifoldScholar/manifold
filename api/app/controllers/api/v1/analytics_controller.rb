@@ -23,7 +23,6 @@ module API
       def create
         @outcome = Analytics::RecordEvent.record_event create_event_params.to_h.merge(analytics_visit: @analytics_visit)
         @outcome.valid? ? head(200) : render(json: { errors: @outcome.errors.messages }, status: 400)
-        # head(@outcome.valid? ? 200 : 400)
       end
 
       def leave
@@ -52,12 +51,12 @@ module API
       end
 
       def analytics_scope
-        return unless analytics_params[:record_type].present? && analytics_params[:record_id].present?
+        return unless get_analytics_params[:record_type].present? && get_analytics_params[:record_id].present?
 
-        scope_class = analytics_params[:record_type].safe_constantize
+        scope_class = get_analytics_params[:record_type].safe_constantize
         return head(400) unless scope_class.present?
 
-        scope_class.find(analytics_params[:record_id])
+        scope_class.find(get_analytics_params[:record_id])
       end
 
     end
