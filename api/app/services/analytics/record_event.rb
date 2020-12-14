@@ -41,8 +41,10 @@ module Analytics
     end
 
     def get_tokens
+      # rubocop:disable Naming/MemoizedInstanceVariableName
       @visit_token ||= request.headers["HTTP_VISIT_TOKEN"]
       @visitor_token ||= request.headers["HTTP_VISITOR_TOKEN"]
+      # rubocop:enable Naming/MemoizedInstanceVariableName
     end
 
   end

@@ -26,23 +26,29 @@ module Api
       def record_analytics_event
         registered_events = self.class.analytics[action_name]
 
-        return unless registered_events.present?
-        return unless self.class.analytics_record_getter.nil? || analytics_record.present?
-        return unless visit.present?
+        return unless registered_events.present? &&
+                      (self.class.analytics_record_getter.nil? || analytics_record.present?) &&
+                      visit.present?
 
-        registered_events.each do |event|
-          event.interaction.run!  scope: analytics_record,
-                                  analytics_visit: visit,
-                                  properties: analytics_params_for(event) || {}
-        end
+        registered_events.each { |event| trigger_event_interaction(event) }
       end
 
       private
 
+      def trigger_event_interaction(event)
+        event.interaction.run! scope: record,
+                                analytics_visit: visit,
+                                properties: analytics_params_for(event) || {}
+      end
+
       def analytics_record
         return if self.class.analytics_record_getter.nil?
 
-        self.class.analytics_record_getter.starts_with?("@") ? instance_variable_get(self.class.analytics_record_getter) : __send__(self.class.analytics_record_getter)
+        if self.class.analytics_record_getter.starts_with?("@")
+          instance_variable_get(self.class.analytics_record_getter)
+        else
+          __send__(self.class.analytics_record_getter)
+        end
       end
 
       def analytics_params_for(event)

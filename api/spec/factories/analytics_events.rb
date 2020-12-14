@@ -13,5 +13,11 @@ FactoryBot.define do
       name { "view #{record.model_name.param_key}" }
     end
 
+    trait :completed_project_view do
+      name { "view project" }
+      time { Time.current - 5.minutes }
+      properties { {record.model_name.param_key => record.id, ended_at: Time.current } }
+    end
+
   end
 end

@@ -16,7 +16,5 @@ FactoryBot.define do
     device_type { "Desktop" }
     started_at { Time.current - (rand * 100).hours }
     ended_at { visit_duration.present? ? (started_at + visit_duration) : nil}
-
-    user
   end
 end

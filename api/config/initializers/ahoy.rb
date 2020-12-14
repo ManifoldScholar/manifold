@@ -1,15 +1,16 @@
-class Ahoy::Store < Ahoy::DatabaseStore
-  def visit_model
-    Analytics::Visit
+module Ahoy
+  class Store < Ahoy::DatabaseStore
+    def visit_model
+      Analytics::Visit
+    end
+
+    def event_model
+      Analytics::Event
+    end
+
+    # Disable linking visits to Users
+    def authenticate(_data); end
   end
-
-  def event_model
-    Analytics::Event
-  end
-
-  # Disable linking visits to Users
-  def authenticate(_data); end
-
 end
 
 Ahoy.api = true

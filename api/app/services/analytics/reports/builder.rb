@@ -95,8 +95,10 @@ module Analytics
       end
 
       def set_default_dates
+        # rubocop:disable Naming/MemoizedInstanceVariableName
         @start_date ||= (Date.current - 8.days)
         @end_date ||= (Date.current - 1.day)
+        # rubocop:enable Naming/MemoizedInstanceVariableName
       end
 
       def cached_analytics
@@ -104,7 +106,11 @@ module Analytics
         cache_key = "analytics/#{self.class.name.demodulize}/#{@scope&.id || 'all'}"
         @cached_result = true
 
-        Rails.cache.fetch(cache_key, force: force_cache_refresh, skip_nil: true, expires_in: (Time.now.end_of_day - Time.now).seconds, race_condition_ttl: 10.seconds) do
+        Rails.cache.fetch(cache_key,
+                          force: force_cache_refresh,
+                          skip_nil: true,
+                          expires_in: (Time.now.end_of_day - Time.now).seconds,
+                          race_condition_ttl: 10.seconds) do
           compose self.class, scope: @scope, start_date: @start_date, end_date: @end_date
         end
       end
@@ -112,26 +118,26 @@ module Analytics
       # Placeholders
 
       def sub_placeholders(sql)
-        tz = start_date.to_time.zone
+        zone = start_date.to_time.zone
 
-        sql.gsub(VISIT_DATE_PLACEHOLDER, visit_date_sql(tz))
+        sql.gsub(VISIT_DATE_PLACEHOLDER, visit_date_sql(zone))
           .gsub(START_DATE_PLACEHOLDER, start_date_sql)
           .gsub(END_DATE_PLACEHOLDER, end_date_sql)
-          .gsub(TZ_PLACEHOLDER, quote(tz))
+          .gsub(TZ_PLACEHOLDER, quote(zone))
           .gsub(SCOPE_PLACEHOLDER, quote(respond_to?(:scope) ? scope&.id : nil))
       end
 
-      def start_date_sql(tz = start_date.to_time.zone)
-        "(TIMESTAMP #{quote(start_date)} AT TIME ZONE #{quote(tz)})::date"
+      def start_date_sql(zone = start_date.to_time.zone)
+        "(TIMESTAMP #{quote(start_date)} AT TIME ZONE #{quote(zone)})::date"
       end
 
-      def end_date_sql(tz = end_date.to_time.zone)
-        "(TIMESTAMP #{quote(end_date)} AT TIME ZONE #{quote(tz)})::date"
+      def end_date_sql(zone = end_date.to_time.zone)
+        "(TIMESTAMP #{quote(end_date)} AT TIME ZONE #{quote(zone)})::date"
       end
 
-      def visit_date_sql(tz = start_date.to_time.zone)
-        %(started_at >= (TIMESTAMP #{quote(start_date)} AT TIME ZONE '#{tz}')::date
-          AND (ended_at IS NULL OR ended_at <= (TIMESTAMP #{quote(end_date)} AT TIME ZONE '#{tz}')::date))
+      def visit_date_sql(zone = start_date.to_time.zone)
+        %(started_at >= (TIMESTAMP #{quote(start_date)} AT TIME ZONE '#{zone}')::date
+          AND (ended_at IS NULL OR ended_at <= (TIMESTAMP #{quote(end_date)} AT TIME ZONE '#{zone}')::date))
       end
 
       def require_cte!(cte_name)
@@ -160,7 +166,7 @@ module Analytics
         ApplicationRecord.connection.quote(value)
       end
 
-      def build_simple_query(name:, type:, value:, from: self.class.base_ctes.first, filter: nil, **metadata)
+      def build_simple_query(name:, type:, value:, from: self.class.base_ctes.first, filter: nil, **metadata) # rubocop:disable Metrics/ParameterLists
         <<~SQL
           SELECT
             '#{name}' AS name,
@@ -171,7 +177,7 @@ module Analytics
         SQL
       end
 
-      def build_agg_query(name:, type:, query_or_table_name:, from: self.class.base_ctes.first, filter: nil, **metadata)
+      def build_agg_query(name:, type:, query_or_table_name:, from: self.class.base_ctes.first, filter: nil, **metadata) # rubocop:disable Metrics/ParameterLists
         <<~SQL
           SELECT
             '#{name}' AS name,

@@ -21,10 +21,9 @@ module API
       end
 
       def create
-        
         @outcome = Analytics::RecordEvent.record_event create_event_params.to_h.merge(analytics_visit: @analytics_visit)
-        @outcome.valid? ? head(200) : render(json: {errors: @outcome.errors.messages}, status: 400)
-        #head(@outcome.valid? ? 200 : 400)
+        @outcome.valid? ? head(200) : render(json: { errors: @outcome.errors.messages }, status: 400)
+        # head(@outcome.valid? ? 200 : 400)
       end
 
       def leave

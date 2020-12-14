@@ -9,17 +9,19 @@ module Analytics
     set_callback :type_check, :before, :extract_tokens
 
     def execute
-      existing_visit || track_new_visit
+      visit || track_new_visit
     end
 
     private
 
     def extract_tokens
+      # rubocop:disable Naming/MemoizedInstanceVariableName
       @visit_token ||= request.headers["HTTP_VISIT_TOKEN"]
       @visitor_token ||= request.headers["HTTP_VISITOR_TOKEN"]
+      # rubocop:enable Naming/MemoizedInstanceVariableName
     end
 
-    def existing_visit
+    def visit
       @visit ||= Analytics::Visit.find_by(visit_token: visit_token)
     end
 
@@ -33,7 +35,11 @@ module Analytics
     end
 
     def tracker_args
-      {visit_token: visit_token, visitor_token: visitor_token, request: request}.compact
+      {
+        visit_token: visit_token,
+        visitor_token: visitor_token,
+        request: request
+      }.compact
     end
 
   end

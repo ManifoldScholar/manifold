@@ -14,7 +14,7 @@ RSpec.describe Analytics::Reports::Global, interaction: true do
       end
 
       it "should return results for all analytics" do
-        analytics = running_the_interaction!.map { |h| h["name"] }
+        analytics = running_the_interaction!.data.map { |h| h["name"] }
 
         expect(analytics.to_set).to eq described_class.analytics.map(&:to_s).to_set
       end
@@ -34,7 +34,7 @@ RSpec.describe Analytics::Reports::Global, interaction: true do
 
       it "should return a subset of analytics if defined" do
         pick_one = [described_class.analytics[rand(described_class.analytics.size - 1)]]
-        expect(running_the_interaction!(analytics: pick_one).size).to be 1
+        expect(running_the_interaction!(analytics: pick_one).data.size).to be 1
       end
     end
   end
@@ -63,7 +63,7 @@ RSpec.describe Analytics::Reports::Global, interaction: true do
 
       it "should filter by provided dates" do
         result = run_the_interaction! start_date: start_date, end_date: end_date, analytics: [:daily_visitors]
-        dataset = JSON.parse(result.find { |h| h["name"] == "daily_visitors" }["data"])
+        dataset = result.data.find { |h| h["name"] == "daily_visitors" }["data"]
 
         expect(dataset.all? { |h| Chronic.parse(h["x"]).between?(start_date, end_date)}).to be true
       end
@@ -120,5 +120,5 @@ RSpec.describe Analytics::Reports::Global, interaction: true do
 end
 
 def visit_for(user, visitor_token, start_time, end_time)
-  FactoryBot.create(:analytics_visit, started_at: start_time, ended_at: end_time, user: user, visitor_token: visitor_token)
+  FactoryBot.create(:analytics_visit, started_at: start_time, ended_at: end_time, visitor_token: visitor_token)
 end
