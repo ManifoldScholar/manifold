@@ -103,18 +103,21 @@ module Analytics
 
       def cached_analytics
         set_default_dates
-        cache_key = "analytics/#{self.class.name.demodulize}/#{@scope&.id || 'all'}"
         @cached_result = true
 
         result = Rails.cache.fetch(cache_key,
-                          force: force_cache_refresh,
-                          skip_nil: true,
-                          expires_in: (Time.now.end_of_day - Time.now).seconds,
-                          race_condition_ttl: 10.seconds) do
+                                   force: force_cache_refresh,
+                                   skip_nil: true,
+                                   expires_in: (Time.now.end_of_day - Time.now).seconds,
+                                   race_condition_ttl: 10.seconds) do
           compose(self.class, scope: @scope, start_date: @start_date, end_date: @end_date).result
         end
 
         compose Analytics::Reports::AnalyticsResult, data: result, **inputs
+      end
+
+      def cache_key
+        @cache_key ||= "analytics/#{self.class.name.demodulize}/#{@scope&.id || 'all'}"
       end
 
       # Placeholders
