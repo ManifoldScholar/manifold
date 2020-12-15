@@ -106,13 +106,15 @@ module Analytics
         cache_key = "analytics/#{self.class.name.demodulize}/#{@scope&.id || 'all'}"
         @cached_result = true
 
-        Rails.cache.fetch(cache_key,
+        result = Rails.cache.fetch(cache_key,
                           force: force_cache_refresh,
                           skip_nil: true,
                           expires_in: (Time.now.end_of_day - Time.now).seconds,
                           race_condition_ttl: 10.seconds) do
-          compose self.class, scope: @scope, start_date: @start_date, end_date: @end_date
+          compose(self.class, scope: @scope, start_date: @start_date, end_date: @end_date).result
         end
+
+        compose Analytics::Reports::AnalyticsResult, data: result, **inputs
       end
 
       # Placeholders
@@ -136,8 +138,8 @@ module Analytics
       end
 
       def visit_date_sql(zone = start_date.to_time.zone)
-        %(started_at >= (TIMESTAMP #{quote(start_date)} AT TIME ZONE '#{zone}')::date
-          AND (ended_at IS NULL OR ended_at <= (TIMESTAMP #{quote(end_date)} AT TIME ZONE '#{zone}')::date))
+        %(started_at::date >= (TIMESTAMP #{quote(start_date)} AT TIME ZONE '#{zone}')::date
+          AND (started_at::date <= (TIMESTAMP #{quote(end_date)} AT TIME ZONE '#{zone}')::date))
       end
 
       def require_cte!(cte_name)

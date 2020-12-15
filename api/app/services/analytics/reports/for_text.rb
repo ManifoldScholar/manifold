@@ -27,7 +27,7 @@ module Analytics
 
       register_cte! :daily_text_visitors, <<~SQL
         SELECT
-          time::date AS x,
+          started_at::date AS x,
           COUNT(DISTINCT visitor_token) AS y
         FROM text_visits
         GROUP BY x
@@ -66,7 +66,7 @@ module Analytics
         WHERE text_section_events.time::date BETWEEN #{START_DATE_PLACEHOLDER} AND #{END_DATE_PLACEHOLDER}
           AND text_section_events.name = 'view text_section'
         GROUP BY text_sections.id, text_sections.name
-        ORDER BY view_count
+        ORDER BY count
       SQL
 
       register_cte! :share_clicks, <<~SQL

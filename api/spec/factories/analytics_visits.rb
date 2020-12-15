@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :analytics_visit, class: Analytics::Visit do
     transient do
-      visit_duration { (rand * 60).minutes }
+      visit_duration { 60.minutes }
     end
 
     visit_token { Faker::Internet.uuid }

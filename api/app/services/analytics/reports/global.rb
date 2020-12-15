@@ -76,7 +76,7 @@ module Analytics
           ON visits.id = events.visit_id
         WHERE name = 'search'
         GROUP BY search_term
-        ORDER BY count
+        ORDER BY count DESC
         LIMIT #{SEARCH_TERM_LIMIT}
       SQL
 

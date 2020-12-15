@@ -27,7 +27,7 @@ module Analytics
 
       register_cte! :daily_project_visitors, <<~SQL
         SELECT
-          time::date AS x,
+          started_at::date AS x,
           COUNT(DISTINCT visitor_token) AS y
         FROM visits
         GROUP BY x
