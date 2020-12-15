@@ -21,30 +21,18 @@ module API
       end
 
       def create
-        @outcome = Analytics::RecordEvent.record_event create_event_params.to_h.merge(analytics_visit: @analytics_visit)
+        @outcome = Analytics::RecordEvent.record_event create_analytics_event_params.to_h.merge(analytics_visit: @analytics_visit)
         @outcome.valid? ? head(200) : render(json: { errors: @outcome.errors.messages }, status: 400)
       end
 
       def leave
         ahoy.track_visit
 
-        outcome = Analytics::RecordLeaveEvent.run leave_params.to_h.merge(analytics_visit: @analytics_visit)
+        outcome = Analytics::RecordLeaveEvent.run analytics_leave_params.to_h.merge(analytics_visit: @analytics_visit)
         head(outcome.valid? ? 200 : 400)
       end
 
       private
-
-      def get_analytics_params
-        params.permit(:record_type, :record_id, :start_date, :end_date, analytics: [])
-      end
-
-      def create_event_params
-        params.permit(:record_type, :record_id, :name, :properties, :time, :visit_token, :visitor_token)
-      end
-
-      def leave_params
-        params.permit(:visit_token, :visitor_token, :record_type, :record_id)
-      end
 
       def fetch_visit
         @analytics_visit = Analytics::FetchVisit.run! request: request
