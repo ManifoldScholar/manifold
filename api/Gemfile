@@ -124,6 +124,10 @@ gem "with_advisory_lock", "~> 4.0"
 gem "zaru", "~> 0.3.0"
 gem "zhong", "~> 0.2"
 
+group :development, :production do
+  gem "newrelic_rpm", "~> 6.14.0"
+end
+
 group :development, :test do
   gem "factory_bot_rails", "~> 4.0"
   gem "parallel_tests", "~> 2.29.2"

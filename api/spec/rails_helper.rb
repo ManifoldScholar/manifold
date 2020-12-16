@@ -93,16 +93,23 @@ RSpec.configure do |config|
   # Allow elastic search for tests tagged with elasticsearch
   config.around(:all) do |example|
     if example.metadata[:elasticsearch]
-      WebMock.disable_net_connect!(allow: [
-                                     /127\.0\.0\.1:2?9200/,
-                                     /localhost:2?9200/
-                                   ])
+      WebMock.disable_net_connect!(
+        allow: [
+          /169\.254\.169\.254/,
+          /127\.0\.0\.1:2?9200/,
+          /localhost:2?9200/
+        ],
+        allow_localhost: true
+      )
       example.run
     else
+      #stub_request(:any, /169\.254\.169\.254/)
       stub_request(:any, /127\.0\.0\.1:2?9200/)
       stub_request(:any, /localhost:2?9200/)
-      WebMock.disable_net_connect!(allow: /googleapis\.com/)
+      WebMock.disable_net_connect!(allow: [/googleapis\.com/, /169\.254\.169\.254/], allow_localhost: true)
       example.run
     end
+
+    WebMock.allow_net_connect!
   end
 end
