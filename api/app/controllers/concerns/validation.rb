@@ -322,7 +322,8 @@ module Validation
           :restricted_access_heading,
           :restricted_access_body,
           :disable_engagement,
-          :disable_reading_groups
+          :disable_reading_groups,
+          :disable_internal_analytics
         ]
       },
       {

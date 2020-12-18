@@ -30,7 +30,8 @@ module V1
       restricted_access_body: Types::String,
       restricted_access_body_formatted: Types::String,
       disable_engagement: Types::Bool,
-      disable_reading_groups: Types::Bool
+      disable_reading_groups: Types::Bool,
+      disable_internal_analytics: Types::Bool
     ) do |object, _params|
       object.general.merge(restricted_access_body_formatted: object.restricted_access_body_formatted)
     end
