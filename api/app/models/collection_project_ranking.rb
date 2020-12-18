@@ -7,4 +7,5 @@ class CollectionProjectRanking < ApplicationRecord
 
   scope :globally_ranked, -> { reorder(:global_ranking) }
   scope :ranked, -> { reorder(:ranking) }
+  scope :by_collection, ->(collection = nil) { where(project_collection: collection) if collection.present? }
 end

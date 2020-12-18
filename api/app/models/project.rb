@@ -189,19 +189,6 @@ class Project < ApplicationRecord
   scope :standalone_enforced, -> { where(standalone_mode: :enforced) }
   scope :standalone_unforced, -> { where.not(standalone_mode: :enforced) }
 
-  scope :ranked_by_collection, (lambda do
-    is_same_project = CollectionProjectRanking
-        .arel_table[:project_id]
-        .eq(arel_table[:id])
-
-    in_same_collection = CollectionProject
-        .arel_table[:id]
-        .eq(CollectionProjectRanking.arel_table[:collection_project_id])
-
-    joins(:collection_project_rankings).merge(CollectionProjectRanking.ranked)
-      .where(is_same_project.and(in_same_collection))
-  end)
-
   scope :with_order, ->(by = nil) { by.present? ? order(by) : order(:sort_title, :title) }
 
   scope :by_standalone_mode_enforced, ->(enforced) { to_boolean(enforced) ? standalone_enforced : standalone_unforced }
@@ -219,12 +206,30 @@ class Project < ApplicationRecord
   scope :pending_bag_it_export, -> { exports_as_bag_it.sans_current_bag_it_export }
 
   scope :in_collection, ->(collection) { joins(:collection_projects).merge(CollectionProject.by_collection(collection)) }
+
+  scope :ranked_by_collection, ->(collection = nil) do
+    cp = CollectionProject.arel_table
+    cpr = CollectionProjectRanking.arel_table
+
+    is_same_project = cpr[:project_id].eq(arel_table[:id])
+
+    in_same_collection_project = cp[:id].eq(cpr[:collection_project_id])
+
+    in_same_project_collection = cp[:project_collection_id].eq(cpr[:project_collection_id])
+
+    rankings = CollectionProjectRanking.ranked.by_collection(collection)
+
+    conditions = is_same_project.and(in_same_collection_project).and(in_same_project_collection)
+
+    joins(:collection_project_rankings).merge(rankings).where(conditions)
+  end
+
   scope :with_collection_order, ->(collection_id = nil) do
     next unless collection_id.present?
 
     collection = ProjectCollection.friendly.find(collection_id)
 
-    ranked_by_collection.in_collection(collection)
+    ranked_by_collection(collection).merge(CollectionProject.by_collection(collection))
   end
 
   # Search

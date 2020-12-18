@@ -444,4 +444,20 @@ RSpec.describe Project, type: :model do
   it_should_behave_like "a model that stores its fingerprint" do
     subject { FactoryBot.create :project }
   end
+
+  describe ".with_collection_order" do
+    context "when a project is in more than one collection" do
+      let!(:project_1) { FactoryBot.create :project }
+      let!(:project_2) { FactoryBot.create :project }
+      let!(:collection_1) { FactoryBot.create :project_collection }
+      let!(:collection_2) { FactoryBot.create :project_collection }
+
+      it "returns the correct count" do
+        expect do
+          collection_1.projects = [project_1, project_2]
+          collection_2.projects = [project_1, project_2]
+        end.to change { Project.with_collection_order(collection_1.slug).count }.by(2)
+      end
+    end
+  end
 end
