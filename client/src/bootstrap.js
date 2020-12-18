@@ -6,9 +6,10 @@ import { authenticateWithCookie } from "store/middleware/currentUserMiddleware";
 const { request } = entityStoreActions;
 import { settingsAPI, requests } from "api";
 
-// Currently, the Manifold Bootstrap does two things:
+// Currently, the Manifold Bootstrap (aka "Initialization") does two things:
 // 1. Load the settings.
 // 2. Authenticate the user from a cookie.
+// This process is universal, and can be called on the server or the browser.
 export default function bootstrap(getState, dispatch, cookieHelper) {
   const promises = [];
   const state = getState();
@@ -27,10 +28,10 @@ export default function bootstrap(getState, dispatch, cookieHelper) {
     const settingsPromise = dispatch(settingsRequest).promise;
     settingsPromise.then(
       () => {
-        ch.notice("Settings loaded", "control_knobs");
+        ch.notice("Initialization: settings loaded", "ok_hand");
       },
       () => {
-        ch.error("Settings failed to load");
+        ch.error("Initialization: settings failed to load");
       }
     );
     promises.push(settingsPromise);
@@ -43,11 +44,11 @@ export default function bootstrap(getState, dispatch, cookieHelper) {
     const authPromise = authenticateWithCookie(dispatch, cookieHelper);
     authPromise.then(
       () => {
-        ch.notice("User authenticated", "wink");
+        ch.notice("Initialization: user authenticated", "ok_hand");
         resolve();
       },
       () => {
-        ch.notice("Unable to authenticate user", "rage");
+        ch.notice("Initialization: unable to authenticate user", "thumbsdown");
         resolve();
       }
     );
