@@ -18,7 +18,8 @@ class Settings < ApplicationRecord
       library_disabled: false,
       restricted_access: false,
       disable_engagement: false,
-      disable_reading_groups: false
+      disable_reading_groups: false,
+      disable_internal_analytics: false
     },
     email: {
       from_address: "do-not-reply@manifoldapp.org",
