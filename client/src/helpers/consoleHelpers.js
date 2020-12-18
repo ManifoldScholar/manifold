@@ -48,7 +48,7 @@ function error(string, emojiKey = "fire") {
   log(out, "red", true);
 }
 
-function notice(string, emojiKey = "floppy_disk") {
+function notice(string, emojiKey = "ok_hand") {
   const out = baseString(emojiKey) + string;
   log(out, "gray", true);
 }
