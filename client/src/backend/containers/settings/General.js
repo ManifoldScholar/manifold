@@ -106,6 +106,15 @@ export class SettingsGeneralContainer extends PureComponent {
                 </Form.FieldGroup>
                 <Form.FieldGroup label="Behaviors">
                   <Form.Switch
+                    className="form-toggle-secondary"
+                    wide
+                    label="Disable Internal Analytics"
+                    instructions="By default, Manifold tracks anonymous usage data including visits and views.
+                    This tracking requires that a cookie be set on the user's machine. If tracking is disabled
+                    no data will be collected, and analytics views will not be visible in the backend."
+                    name="attributes[general][disableInternalAnalytics]"
+                  />
+                  <Form.Switch
                     wide
                     className="form-toggle-secondary"
                     label="Restrict Access to All Projects"
