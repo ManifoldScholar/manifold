@@ -81,6 +81,7 @@ export default {
   bePermissionDestroy: "backend-permission-destroy",
   beResourceImportFetch: "backend-resource-import-fetch",
   beVersions: "backend-versions",
+  beProjectAnalytics: "backend-project-analytics",
   beProjectCollections: "backend-project-collections",
   beProjectCollection: "backend-project-collection",
   beProjectCollectionDestroy: "backend-project-collection-destroy",
