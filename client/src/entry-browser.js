@@ -38,7 +38,7 @@ class EntryBrowser {
   performBootstrap() {
     const store = this.store;
     const cookie = new CookieHelper();
-    ch.error("Bootstrapping on the client.", "rain_cloud");
+    ch.error("Initializing client application...", "rain_cloud");
     return manifoldBootstrap(store.getState, store.dispatch, cookie).catch(
       e => {
         console.log(e, "Bootstrap failed.");
@@ -47,17 +47,17 @@ class EntryBrowser {
   }
 
   bootstrapUnnecessary(resolve) {
-    ch.info("Bootstrapped on server.", "sparkles");
+    ch.info("Client application initialized on server.", "sparkles");
     resolve();
   }
 
   bootstrapSuccess(resolve) {
-    ch.info("Client bootstrapping successful.", "sparkles");
+    ch.info("Client application initialized.", "sparkles");
     resolve();
   }
 
   bootstrapFailure(reject) {
-    ch.error("Client bootstrapping failed unexpectedly.", "fire");
+    ch.error("Client application initialization failure.", "fire");
     reject();
   }
 
