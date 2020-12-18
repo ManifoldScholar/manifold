@@ -13,6 +13,7 @@ import HeadContent from "global/components/HeadContent";
 import some from "lodash/some";
 import withSettings from "hoc/with-settings";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
+import EventTracker, { EVENTS } from "global/components/EventTracker";
 
 const { request, flush } = entityStoreActions;
 
@@ -111,6 +112,7 @@ export class ResourceDetailContainer extends PureComponent {
 
     return (
       <div>
+        <EventTracker event={EVENTS.VIEW} resource={this.props.resource} />
         <CheckFrontendMode debugLabel="ResourceDetail" isProjectSubpage />
 
         <HeadContent

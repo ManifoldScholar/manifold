@@ -14,6 +14,7 @@ import lh from "helpers/linkHandler";
 import BackLink from "frontend/components/back-link";
 import withSettings from "hoc/with-settings";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
+import EventTracker, { EVENTS } from "global/components/EventTracker";
 
 const { request, flush } = entityStoreActions;
 const page = 1;
@@ -210,6 +211,7 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     );
     return (
       <div>
+        <EventTracker event={EVENTS.VIEW} resource={this.props.resourceCollection} />
         <CheckFrontendMode
           debugLabel="ResourceCollectionDetail"
           isProjectSubpage
