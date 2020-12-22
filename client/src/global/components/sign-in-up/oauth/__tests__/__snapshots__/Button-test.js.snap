@@ -50,103 +50,111 @@ exports[`global/components/sign-in-up/oauth/Button matches the snapshot 1`] = `
       <ContextProvider
         value={
           Object {
-            "isLibrary": true,
-            "isStandalone": false,
+            "track": [Function],
           }
         }
       >
-        <Connect(WithSettings('Button))
-          dispatch={[Function]}
-          provider="twitter"
-          settings={
+        <ContextProvider
+          value={
             Object {
-              "attributes": Object {
-                "abilities": Object {
-                  "create": true,
-                  "createEntitlements": true,
-                  "createPermissions": true,
-                  "createResourceCollections": true,
-                  "createResources": true,
-                  "createTexts": true,
-                  "createTwitterQueries": true,
-                  "delete": true,
-                  "manageEntitlements": true,
-                  "manageEvents": true,
-                  "managePermissions": true,
-                  "manageResourceCollections": true,
-                  "manageResources": true,
-                  "manageSocials": true,
-                  "manageTexts": true,
-                  "manageTwitterQueries": true,
-                  "read": true,
-                  "readDeleted": true,
-                  "readDrafts": true,
-                  "readLog": true,
-                  "readSecrets": true,
-                  "update": true,
-                  "updateMakers": true,
-                },
-                "copyrightFormatted": "2015-2016 6 University of Minnesota Press",
-                "general": Object {
-                  "contactUrl": "http://www.dailyrowan.com",
-                  "copyright": "2015-2016 6 University of Minnesota Press",
-                  "installationName": "Manifold",
-                },
-                "integrations": Object {
-                  "facebookAppId": null,
-                  "gaProfileId": null,
-                  "gaTrackingId": null,
-                  "googleClientEmail": null,
-                  "googleClientId": null,
-                  "googleOauthClientId": null,
-                  "googlePrivateKeyId": null,
-                  "googleProjectId": null,
-                  "twitterAccessToken": null,
-                  "twitterAppId": null,
-                },
-                "oauth": Object {
-                  "facebook": Object {
-                    "enabled": false,
-                  },
-                  "googleOauth2": Object {
-                    "enabled": true,
-                    "name": "google",
-                  },
-                  "twitter": Object {
-                    "enabled": true,
-                    "name": "twitter",
-                  },
-                },
-                "pressLogoStyles": Object {
-                  "largeLandscape": null,
-                  "medium": null,
-                  "mediumLandscape": null,
-                  "mediumPortrait": null,
-                  "mediumSquare": null,
-                  "original": null,
-                  "small": null,
-                  "smallLandscape": null,
-                  "smallPortrait": null,
-                  "smallSquare": null,
-                },
-                "secrets": Object {
-                  "facebookAppSecret": null,
-                  "googleOauthClientSecret": null,
-                  "googlePrivateKey": null,
-                  "twitterAccessTokenSecret": null,
-                  "twitterAppSecret": null,
-                },
-                "theme": Object {
-                  "logoStyles": "{\\"left\\": -1}",
-                  "typekitId": "typekitId",
-                },
-              },
-              "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-              "relationships": Object {},
-              "type": "settings",
+              "isLibrary": true,
+              "isStandalone": false,
             }
           }
-        />
+        >
+          <Connect(WithSettings('Button))
+            dispatch={[Function]}
+            provider="twitter"
+            settings={
+              Object {
+                "attributes": Object {
+                  "abilities": Object {
+                    "create": true,
+                    "createEntitlements": true,
+                    "createPermissions": true,
+                    "createResourceCollections": true,
+                    "createResources": true,
+                    "createTexts": true,
+                    "createTwitterQueries": true,
+                    "delete": true,
+                    "manageEntitlements": true,
+                    "manageEvents": true,
+                    "managePermissions": true,
+                    "manageResourceCollections": true,
+                    "manageResources": true,
+                    "manageSocials": true,
+                    "manageTexts": true,
+                    "manageTwitterQueries": true,
+                    "read": true,
+                    "readDeleted": true,
+                    "readDrafts": true,
+                    "readLog": true,
+                    "readSecrets": true,
+                    "update": true,
+                    "updateMakers": true,
+                  },
+                  "copyrightFormatted": "2015-2016 6 University of Minnesota Press",
+                  "general": Object {
+                    "contactUrl": "http://www.dailyrowan.com",
+                    "copyright": "2015-2016 6 University of Minnesota Press",
+                    "installationName": "Manifold",
+                  },
+                  "integrations": Object {
+                    "facebookAppId": null,
+                    "gaProfileId": null,
+                    "gaTrackingId": null,
+                    "googleClientEmail": null,
+                    "googleClientId": null,
+                    "googleOauthClientId": null,
+                    "googlePrivateKeyId": null,
+                    "googleProjectId": null,
+                    "twitterAccessToken": null,
+                    "twitterAppId": null,
+                  },
+                  "oauth": Object {
+                    "facebook": Object {
+                      "enabled": false,
+                    },
+                    "googleOauth2": Object {
+                      "enabled": true,
+                      "name": "google",
+                    },
+                    "twitter": Object {
+                      "enabled": true,
+                      "name": "twitter",
+                    },
+                  },
+                  "pressLogoStyles": Object {
+                    "largeLandscape": null,
+                    "medium": null,
+                    "mediumLandscape": null,
+                    "mediumPortrait": null,
+                    "mediumSquare": null,
+                    "original": null,
+                    "small": null,
+                    "smallLandscape": null,
+                    "smallPortrait": null,
+                    "smallSquare": null,
+                  },
+                  "secrets": Object {
+                    "facebookAppSecret": null,
+                    "googleOauthClientSecret": null,
+                    "googlePrivateKey": null,
+                    "twitterAccessTokenSecret": null,
+                    "twitterAppSecret": null,
+                  },
+                  "theme": Object {
+                    "logoStyles": "{\\"left\\": -1}",
+                    "typekitId": "typekitId",
+                  },
+                },
+                "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                "relationships": Object {},
+                "type": "settings",
+              }
+            }
+          />
+        </ContextProvider>
       </ContextProvider>
     </Provider>
   </HelmetProvider>

@@ -6,7 +6,7 @@ import Panel from "./parts/Panel";
 import lh from "helpers/linkHandler";
 import trim from "lodash/trim";
 import IconComposer from "global/components/utility/IconComposer";
-
+import withEventTracker from "hoc/analytics/with-event-tracker";
 import withSettings from "hoc/with-settings";
 
 class AnnotationPopupSecondaryShare extends PureComponent {
@@ -79,11 +79,22 @@ class AnnotationPopupSecondaryShare extends PureComponent {
     return `"${this.props.selection.text}" from Manifold:`;
   }
 
+  handleCiteClick = event => {
+    const { trackEvent, section } = this.props;
+    trackEvent("cite", section.type, section.id);
+    this.props.onCiteClick(event);
+  };
+
   canCite() {
     if (!this.props.section) return false;
     const attr = this.props.section.attributes;
     const citations = Object.keys(attr.citations);
     return citations.length > 0;
+  }
+
+  trackShare(typeIgnored) {
+    const { trackEvent, section } = this.props;
+    trackEvent("share", section.type, section.id);
   }
 
   render() {
@@ -95,7 +106,7 @@ class AnnotationPopupSecondaryShare extends PureComponent {
       >
         {this.canCite() ? (
           <Button
-            onClick={this.props.onCiteClick}
+            onClick={this.handleCiteClick}
             kind="any"
             label="Cite"
             icon="socialCite32"
@@ -105,6 +116,7 @@ class AnnotationPopupSecondaryShare extends PureComponent {
           url={this.url()}
           message={this.message()}
           windowOptions={this.twitterWindowOptions}
+          onClick={() => this.trackShare("twitter")}
           className="annotation-popup__button"
         >
           <IconComposer
@@ -119,6 +131,7 @@ class AnnotationPopupSecondaryShare extends PureComponent {
             url={this.url()}
             message={this.message()}
             windowOptions={this.twitterWindowOptions}
+            onClick={() => this.trackShare("facebook")}
             appId={this.facebookAppId()}
             className="annotation-popup__button"
           >
@@ -142,4 +155,4 @@ class AnnotationPopupSecondaryShare extends PureComponent {
   }
 }
 
-export default withSettings(AnnotationPopupSecondaryShare);
+export default withSettings(withEventTracker(AnnotationPopupSecondaryShare));

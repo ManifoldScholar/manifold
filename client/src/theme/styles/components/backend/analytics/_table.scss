@@ -1,7 +1,7 @@
 .analytics-table {
   $_indent-increment: 1em;
 
-  --link-indent: 0px;
+  --link-indent: 0;
 
   width: 100%;
   text-align: left;
@@ -21,8 +21,8 @@
   }
 
   &__link {
+    margin-left: var(--link-indent, 0);
     text-decoration: none;
-    margin-left: var(--link-indent, 0px);
 
     @for $i from 2 through 6 {
       &--depth-#{$i} {

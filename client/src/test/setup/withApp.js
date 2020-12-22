@@ -1,6 +1,9 @@
 /* global $store, fixtures, $helmetContext, $store, $frontendContext */
 import { wrapWithRouter } from "test/helpers/routing";
-import { FrontendModeContext } from "helpers/contexts";
+import {
+  FrontendModeContext,
+  ManifoldAnalyticsContext
+} from "helpers/contexts";
 import { HelmetProvider } from "react-helmet-async";
 import { Provider } from "react-redux";
 import React from "react";
@@ -20,9 +23,11 @@ def("withApp", () => {
     return wrapWithRouter(
       <HelmetProvider context={$helmetContext}>
         <Provider store={$store}>
-          <FrontendModeContext.Provider value={$frontendContext}>
-            {component}
-          </FrontendModeContext.Provider>
+          <ManifoldAnalyticsContext.Provider value={{ track: () => {} }}>
+            <FrontendModeContext.Provider value={$frontendContext}>
+              {component}
+            </FrontendModeContext.Provider>
+          </ManifoldAnalyticsContext.Provider>
         </Provider>
       </HelmetProvider>
     );

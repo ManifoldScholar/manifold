@@ -49,7 +49,9 @@ const initialState = {
   authenticating: false,
   authToken: null,
   currentUser: null,
-  error: null
+  error: null,
+  visitToken: null,
+  visitorToken: null
 };
 
 describe("store/reducers/authentication", () => {

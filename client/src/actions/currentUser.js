@@ -52,6 +52,16 @@ export const deleteCurrentUserFavorite = createAction(
   favoritableId => favoritableId
 );
 
+export const setVisitToken = createAction(
+  "LOGIN_SET_VISIT_TOKEN",
+  visitToken => visitToken
+);
+
+export const setVisitorToken = createAction(
+  "LOGIN_SET_VISITOR_TOKEN",
+  visitorToken => visitorToken
+);
+
 export default {
   follow,
   unfollow,
@@ -62,6 +72,8 @@ export default {
   logout,
   setCurrentUser,
   setAuthToken,
+  setVisitToken,
+  setVisitorToken,
   updateCurrentUser,
   deleteCurrentUserFavorite
 };

@@ -6,6 +6,55 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
     debugLabel="ProjectCollectionDetail"
     isProjectSubpage={true}
   />
+  <EventTracker
+    event="view resource"
+    resource={
+      Object {
+        "attributes": Object {
+          "abilities": Object {
+            "create": true,
+            "createEntitlements": true,
+            "createPermissions": true,
+            "createResourceCollections": true,
+            "createResources": true,
+            "createTexts": true,
+            "createTwitterQueries": true,
+            "delete": true,
+            "manageEntitlements": true,
+            "manageEvents": true,
+            "managePermissions": true,
+            "manageResourceCollections": true,
+            "manageResources": true,
+            "manageSocials": true,
+            "manageTexts": true,
+            "manageTwitterQueries": true,
+            "read": true,
+            "readDeleted": true,
+            "readDrafts": true,
+            "readLog": true,
+            "readSecrets": true,
+            "update": true,
+            "updateMakers": true,
+          },
+          "descriptionFormatted": "The publisher can include a descriptive sentence or paragraph to help describe this Collection. If you want to go this route it might be a good idea for the text describing your custom collection to be a little longer than a single short sentence.",
+          "featuredOnly": false,
+          "heroLayout": "square_inset",
+          "icon": "lamp",
+          "manuallySorted": true,
+          "numberOfProjects": null,
+          "smart": false,
+          "socialDescription": "Bar Foo",
+          "socialTitle": "Foo Bar",
+          "sortOrder": "manual",
+          "tagList": Array [],
+          "title": "A Project Collection",
+        },
+        "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+        "relationships": Object {},
+        "type": "projectCollections",
+      }
+    }
+  />
   <Utility.BackLinkPrimary
     backText="Back to Project Collections"
     link="/projects/project-collections"
