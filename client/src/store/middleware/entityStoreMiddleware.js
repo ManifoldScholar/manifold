@@ -4,11 +4,10 @@ import get from "lodash/get";
 import has from "lodash/has";
 import { entityStoreActions } from "actions";
 
-function sendRequest(request, authToken) {
+function sendRequest(request, tokens) {
   const client = new ApiClient();
-  const token = authToken;
   const { endpoint, method } = request;
-  const options = { ...request.options, authToken: token };
+  const options = { ...request.options, ...tokens };
   return client.call(endpoint, method, options);
 }
 
@@ -68,26 +67,40 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
       ? action.payload.request.options.authToken
       : state.authentication.authToken;
 
+    const visitToken = has(action, "payload.request.options.visitToken")
+      ? action.payload.request.options.visitToken
+      : state.authentication.visitToken;
+
+    const visitorToken = has(action, "payload.request.options.visitorToken")
+      ? action.payload.request.options.visitorToken
+      : state.authentication.visitorToken;
+
     // Inject headers, etc. from state
-    const requestPromise = sendRequest(action.payload.request, authToken);
+    const requestPromise = sendRequest(action.payload.request, {
+      authToken,
+      visitToken,
+      visitorToken
+    });
 
-    setTimeout(() => {
-      // Start and stop loading indication based on this promise.
-      dispatch({ type: "START_LOADING", payload: action.meta });
-    }, 0);
+    if (!action.payload.silent) {
+      setTimeout(() => {
+        // Start and stop loading indication based on this promise.
+        dispatch({ type: "START_LOADING", payload: action.meta });
+      }, 0);
 
-    requestPromise
-      .then(
-        () => {
+      requestPromise
+        .then(
+          () => {
+            dispatch({ type: "STOP_LOADING", payload: action.meta });
+          },
+          () => {
+            dispatch({ type: "STOP_LOADING", payload: action.meta });
+          }
+        )
+        .catch(() => {
           dispatch({ type: "STOP_LOADING", payload: action.meta });
-        },
-        () => {
-          dispatch({ type: "STOP_LOADING", payload: action.meta });
-        }
-      )
-      .catch(() => {
-        dispatch({ type: "STOP_LOADING", payload: action.meta });
-      });
+        });
+    }
 
     // Pass through the request action with updated state
     // We add the promise to the payload so that it can be used in fetch data to delay

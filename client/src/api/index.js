@@ -1,3 +1,4 @@
+export analyticsAPI from "./resources/analytics";
 export annotationsAPI from "./resources/annotations";
 export resourceCollectionsAPI from "./resources/resourceCollections";
 export favoriteProjectsAPI from "./resources/favoriteProjects";

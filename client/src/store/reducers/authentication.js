@@ -7,7 +7,9 @@ const initialState = {
   authenticating: false,
   authToken: null,
   currentUser: null,
-  error: null
+  error: null,
+  visitToken: null,
+  visitorToken: null
 };
 
 const deleteFavorite = (state, action) => {
@@ -21,6 +23,16 @@ const deleteFavorite = (state, action) => {
 const setError = (state, action) => {
   const error = action.payload;
   return { ...state, error };
+};
+
+const setVisitToken = (state, action) => {
+  const visitToken = action.payload;
+  return { ...state, visitToken };
+};
+
+const setVisitorToken = (state, action) => {
+  const visitorToken = action.payload;
+  return { ...state, visitorToken };
 };
 
 const logout = () => {
@@ -96,6 +108,8 @@ export default handleActions(
     LOGIN_SET_AUTH_TOKEN: setAuthToken,
     LOGIN_COMPLETE: endLogin,
     LOGIN_SET_ERROR: setError,
+    LOGIN_SET_VISITOR_TOKEN: setVisitorToken,
+    LOGIN_SET_VISIT_TOKEN: setVisitToken,
     LOGOUT: logout
   },
   initialState

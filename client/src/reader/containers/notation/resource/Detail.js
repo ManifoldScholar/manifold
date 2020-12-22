@@ -7,6 +7,7 @@ import { select, meta } from "utils/entityUtils";
 import Overlay from "global/components/Overlay";
 import Notation from "reader/components/notation";
 import lh from "helpers/linkHandler";
+import EventTracker, { EVENTS } from "global/components/EventTracker";
 
 const { request, flush } = entityStoreActions;
 
@@ -54,17 +55,23 @@ export class NotationResourceDetailContainer extends PureComponent {
   render() {
     if (!this.props.resource) return null;
     return (
-      <Overlay
-        closeCallback={this.handleClose}
-        appearance="overlay-full bg-neutral90"
-      >
-        <div className="notation-detail">
-          <Notation.Resource.Detail
-            resource={this.props.resource}
-            handleClose={this.handleClose}
-          />
-        </div>
-      </Overlay>
+      <>
+        <EventTracker
+          event={EVENTS.VIEW_RESOURCE}
+          resource={this.props.resource}
+        />
+        <Overlay
+          closeCallback={this.handleClose}
+          appearance="overlay-full bg-neutral90"
+        >
+          <div className="notation-detail">
+            <Notation.Resource.Detail
+              resource={this.props.resource}
+              handleClose={this.handleClose}
+            />
+          </div>
+        </Overlay>
+      </>
     );
   }
 }
