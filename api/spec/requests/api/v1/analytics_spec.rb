@@ -4,10 +4,15 @@ RSpec.describe "Analytics API", type: :request do
   let(:project) { FactoryBot.create(:project) }
 
   path "/analytics" do
-    include_examples "an API create request", model: Analytics::Event, response_body: false, additional_parameters: [
-      { name: "HTTP_VISIT_TOKEN", in: :header, type: :string },
-      { name: "HTTP_VISITOR_TOKEN", in: :header, type: :string }
-    ] do
+    include_examples "an API create request",
+                     model: Analytics::Event,
+                     response_body: false,
+                     additional_parameters: [
+                       { name: "HTTP_VISIT_TOKEN", in: :header, type: :string },
+                       { name: "HTTP_VISITOR_TOKEN", in: :header, type: :string }
+                     ],
+                     success_response_code: 204,
+                     success_description: "No body returned for response" do
       let(:body) do
         {
           data: {

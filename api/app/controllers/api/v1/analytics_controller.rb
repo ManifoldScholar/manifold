@@ -22,7 +22,7 @@ module API
 
       def create
         @outcome = Analytics::RecordEvent.record_event analytics_attributes
-        @outcome.valid? ? head(201) : render(json: { errors: @outcome.errors.messages }, status: 400)
+        @outcome.valid? ? head(204) : render(json: { errors: @outcome.errors.messages }, status: 400)
       end
 
       def leave
