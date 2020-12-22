@@ -78,21 +78,21 @@
         position: absolute;
         top: 50%;
         left: 0;
-        transform: translateY(-50%);
+        display: block;
         width: 1px;
         height: 100%;
-        content: "";
-        display: block;
+        content: '';
         background-color: currentColor;
+        transform: translateY(-50%);
       }
 
       .analytics-block__stat {
-        color: $neutralUILight;
+        position: relative;
+        top: ($_stat-font-size-large - $_stat-font-size-small - 2) / 2;
         font-size: $_stat-font-size-small;
         // simulate baseline alignment with larger stat
         line-height: $_stat-font-size-large;
-        position: relative;
-        top: ($_stat-font-size-large - $_stat-font-size-small - 2) / 2;
+        color: $neutralUILight;
       }
     }
   }

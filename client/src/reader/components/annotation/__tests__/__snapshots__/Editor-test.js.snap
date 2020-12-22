@@ -50,20 +50,28 @@ exports[`reader/components/annotation/Editor matches the snapshot 1`] = `
       <ContextProvider
         value={
           Object {
-            "isLibrary": true,
-            "isStandalone": false,
+            "track": [Function],
           }
         }
       >
-        <Connect(HigherOrder.WithReadingGroups(Connect(HigherOrder.WithCurrentUser('Annotation.Editor))))
-          cancel={[MockFunction]}
-          endChar={13}
-          endNode="another-node"
-          saveAnnotation={[MockFunction]}
-          startChar={4}
-          startNode="some-node"
-          subject="Gods, Earths, and 85ers"
-        />
+        <ContextProvider
+          value={
+            Object {
+              "isLibrary": true,
+              "isStandalone": false,
+            }
+          }
+        >
+          <Connect(HigherOrder.WithReadingGroups(Connect(HigherOrder.WithCurrentUser('Annotation.Editor))))
+            cancel={[MockFunction]}
+            endChar={13}
+            endNode="another-node"
+            saveAnnotation={[MockFunction]}
+            startChar={4}
+            startNode="some-node"
+            subject="Gods, Earths, and 85ers"
+          />
+        </ContextProvider>
       </ContextProvider>
     </Provider>
   </HelmetProvider>

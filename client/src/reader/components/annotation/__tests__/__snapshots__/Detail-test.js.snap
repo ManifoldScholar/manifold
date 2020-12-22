@@ -50,56 +50,64 @@ exports[`reader/components/annotation/Detail matches the snapshot 1`] = `
       <ContextProvider
         value={
           Object {
-            "isLibrary": true,
-            "isStandalone": false,
+            "track": [Function],
           }
         }
       >
-        <Connect(Annotation.Annotation.UserContent)
-          annotation={
+        <ContextProvider
+          value={
             Object {
-              "attributes": Object {
-                "abilities": Object {
-                  "create": true,
-                  "createEntitlements": true,
-                  "createPermissions": true,
-                  "createResourceCollections": true,
-                  "createResources": true,
-                  "createTexts": true,
-                  "createTwitterQueries": true,
-                  "delete": true,
-                  "manageEntitlements": true,
-                  "manageEvents": true,
-                  "managePermissions": true,
-                  "manageResourceCollections": true,
-                  "manageResources": true,
-                  "manageSocials": true,
-                  "manageTexts": true,
-                  "manageTwitterQueries": true,
-                  "read": true,
-                  "readDeleted": true,
-                  "readDrafts": true,
-                  "readLog": true,
-                  "readSecrets": true,
-                  "update": true,
-                  "updateMakers": true,
-                },
-                "body": "Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.",
-                "createdAt": "2017-04-24T23:25:50.161Z",
-                "creatorAvatarStyles": Object {},
-                "endChar": 13,
-                "endNode": "another-node",
-                "startChar": 4,
-                "startNode": "some-node",
-                "subject": "Gods, Earths, and 85ers",
-              },
-              "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-              "relationships": Object {},
-              "type": "annotations",
+              "isLibrary": true,
+              "isStandalone": false,
             }
           }
-          showLogin={[MockFunction]}
-        />
+        >
+          <Connect(Annotation.Annotation.UserContent)
+            annotation={
+              Object {
+                "attributes": Object {
+                  "abilities": Object {
+                    "create": true,
+                    "createEntitlements": true,
+                    "createPermissions": true,
+                    "createResourceCollections": true,
+                    "createResources": true,
+                    "createTexts": true,
+                    "createTwitterQueries": true,
+                    "delete": true,
+                    "manageEntitlements": true,
+                    "manageEvents": true,
+                    "managePermissions": true,
+                    "manageResourceCollections": true,
+                    "manageResources": true,
+                    "manageSocials": true,
+                    "manageTexts": true,
+                    "manageTwitterQueries": true,
+                    "read": true,
+                    "readDeleted": true,
+                    "readDrafts": true,
+                    "readLog": true,
+                    "readSecrets": true,
+                    "update": true,
+                    "updateMakers": true,
+                  },
+                  "body": "Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.",
+                  "createdAt": "2017-04-24T23:25:50.161Z",
+                  "creatorAvatarStyles": Object {},
+                  "endChar": 13,
+                  "endNode": "another-node",
+                  "startChar": 4,
+                  "startNode": "some-node",
+                  "subject": "Gods, Earths, and 85ers",
+                },
+                "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+                "relationships": Object {},
+                "type": "annotations",
+              }
+            }
+            showLogin={[MockFunction]}
+          />
+        </ContextProvider>
       </ContextProvider>
     </Provider>
   </HelmetProvider>

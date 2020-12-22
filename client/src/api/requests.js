@@ -164,5 +164,6 @@ export default {
   gPasswordReset: "global-password-reset",
   gCreateUser: "global-create-user",
   gContactForm: "global-contact-form",
-  settings: "settings"
+  settings: "settings",
+  analyticsEventCreate: "analytics-event-create"
 };

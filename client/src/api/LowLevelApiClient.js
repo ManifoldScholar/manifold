@@ -33,14 +33,20 @@ export default class LowLevelApiClient {
       this._adjustedEndpoint(rawEndpoint),
       options.params
     );
+
+    const baseHeaders = rawOptions.headers || {};
+    const headers = {
+      ...baseHeaders,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${options.authToken}`
+    };
+
     const fetchConfig = {
       method,
       body: options.body,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${options.authToken}`
-      }
+      headers
     };
+
     const out = fetch(endpoint, fetchConfig).catch(error => {
       return new Promise((resolve, reject) => {
         reject({

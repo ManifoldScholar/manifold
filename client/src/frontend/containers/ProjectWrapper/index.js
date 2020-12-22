@@ -9,6 +9,7 @@ import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import withSettings from "hoc/with-settings";
+import EventTracker, { EVENTS } from "global/components/EventTracker";
 
 const { request } = entityStoreActions;
 
@@ -74,6 +75,12 @@ export class ProjectWrapper extends Component {
   render() {
     return (
       <>
+        {this.props.project && (
+          <EventTracker
+            event={EVENTS.VIEW_RESOURCE}
+            resource={this.props.project}
+          />
+        )}
         <CheckFrontendMode
           debugLabel="ProjectWrapper"
           project={this.props.project}

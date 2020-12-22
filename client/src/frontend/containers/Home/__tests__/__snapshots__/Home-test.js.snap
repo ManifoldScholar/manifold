@@ -8,6 +8,9 @@ exports[`frontend/containers/Home/Home matches the snapshot 1`] = `
     }
   }
 >
+  <EventTracker
+    event="view library"
+  />
   <withRouter(Connect(HigherOrder.FetchData('HomeFeatureContainer)))
     authentication={
       Object {

@@ -21,7 +21,7 @@ import isEqual from "lodash/isEqual";
 import { childRoutes } from "helpers/router";
 import HeadContent from "global/components/HeadContent";
 import values from "lodash/values";
-
+import EventTracker, { EVENTS } from "global/components/EventTracker";
 import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
@@ -213,6 +213,10 @@ export class SectionContainer extends Component {
 
     return (
       <>
+        <EventTracker
+          event={EVENTS.VIEW_RESOURCE}
+          resource={this.props.section}
+        />
         {this.renderStyles(this.props)}
         <HeadContent
           title={metaTitle}

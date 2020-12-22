@@ -58,7 +58,11 @@ class App extends Component {
     };
   }
 
-  settings() {
+  get authToken() {
+    return get(this.props.store.getState(), "authentication.authToken");
+  }
+
+  get settings() {
     return get(
       this.props.store.getState(),
       "entityStore.entities.settings.0.attributes"
@@ -91,7 +95,10 @@ class App extends Component {
     return (
       <Provider store={this.props.store} key="provider">
         <Router {...routerProps}>
-          <Analytics settings={this.settings()}>
+          <Analytics
+            dispatch={this.props.store.dispatch}
+            settings={this.settings}
+          >
             <HelmetProvider context={this.props.helmetContext}>
               <Manifold confirm={this.renderConfirm()} />
             </HelmetProvider>
