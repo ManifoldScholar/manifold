@@ -8,8 +8,16 @@ class NotFound extends Component {
     dispatch: PropTypes.func.isRequired
   };
 
-  UNSAFE_componentWillMount() {
+  trigger404() {
     this.props.dispatch(fatalErrorActions.trigger404());
+  }
+
+  componentDidMount() {
+    this.trigger404();
+  }
+
+  UNSAFE_componentWillMount() {
+    if (__SERVER__) this.trigger404();
   }
 
   render() {
