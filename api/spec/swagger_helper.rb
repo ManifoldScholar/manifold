@@ -6,7 +6,8 @@ require "api_docs/helpers/request"
 
 include_dirs = [
   "api_docs/examples/*.rb",
-  "api_docs/definitions/resources/*.rb"
+  "api_docs/definitions/resources/*.rb",
+  "api_docs/definitions/resources/analytics/*.rb"
 ]
 
 include_dirs.each do |include_dir|
@@ -22,7 +23,6 @@ require "api_docs/config"
 # end
 
 # get all definitions in the swagger_definitions folder
-
 Dir[File.join(File.dirname(__FILE__), "swagger_definitions/*.rb")].each do |file|
   require file
 end

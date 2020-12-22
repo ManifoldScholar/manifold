@@ -11,24 +11,23 @@ module API
 
         interaction_outcome = case scope
                               when nil
-                                Analytics::Reports::Global.run(allow_cached_result: false, **get_analytics_params)
+                                Analytics::Reports::Global.run(allow_cached_result: false, **analytics_params)
                               else
                                 reporter_class = "Analytics::Reports::For#{scope.class.name}".constantize
-                                reporter_class.run scope: scope, **get_analytics_params.to_h.symbolize_keys
+                                reporter_class.run scope: scope, **analytics_filter_params.to_h.symbolize_keys
                               end
 
         render_jsonapi(interaction_outcome.result, serializer: ::V1::AnalyticsResultSerializer)
       end
 
       def create
-        @outcome = Analytics::RecordEvent.record_event create_analytics_event_params.to_h.merge(analytics_visit: @analytics_visit)
-        @outcome.valid? ? head(200) : render(json: { errors: @outcome.errors.messages }, status: 400)
+        @outcome = Analytics::RecordEvent.record_event analytics_attributes
+        @outcome.valid? ? head(201) : render(json: { errors: @outcome.errors.messages }, status: 400)
       end
 
       def leave
         ahoy.track_visit
-
-        outcome = Analytics::RecordLeaveEvent.run analytics_leave_params.to_h.merge(analytics_visit: @analytics_visit)
+        outcome = Analytics::RecordLeaveEvent.run analytics_leave_attributes
         head(outcome.valid? ? 200 : 400)
       end
 
@@ -38,13 +37,21 @@ module API
         @analytics_visit = Analytics::FetchVisit.run! request: request
       end
 
-      def analytics_scope
-        return unless get_analytics_params[:record_type].present? && get_analytics_params[:record_id].present?
+      def analytics_leave_attributes
+        analytics_leave_params[:data][:attributes].to_h.merge(analytics_visit: @analytics_visit)
+      end
 
-        scope_class = get_analytics_params[:record_type].safe_constantize
+      def analytics_attributes
+        analytics_params[:data][:attributes].to_h.merge(analytics_visit: @analytics_visit)
+      end
+
+      def analytics_scope
+        return unless analytics_params[:record_type].present? && analytics_params[:record_id].present?
+
+        scope_class = analytics_params[:record_type].safe_constantize
         return head(400) unless scope_class.present?
 
-        scope_class.find(get_analytics_params[:record_id])
+        scope_class.find(analytics_params[:record_id])
       end
 
     end

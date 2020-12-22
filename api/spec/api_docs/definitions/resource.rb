@@ -125,6 +125,7 @@ module APIDocs
       ######################################
 
       def resource_response_data
+        return nil unless serializer
         return partial_resource_response_data if serializer.partial_only?
 
         full_resource_response_data
@@ -133,7 +134,7 @@ module APIDocs
       def full_resource_response_data
         resource_data(
           attributes: (filter_response_attributes(all_attributes) if all_attributes?),
-          relationships: (full_relationships if full_relationships?),
+          relationships: (full_relationships if full_relationships?)
         )
       end
 
@@ -201,6 +202,8 @@ module APIDocs
 
       def serializer
         "V1::#{name.demodulize}Serializer".constantize
+      rescue NameError
+        nil
       end
 
       def attributes

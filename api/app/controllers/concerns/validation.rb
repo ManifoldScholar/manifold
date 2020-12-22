@@ -459,6 +459,21 @@ module Validation
     params.permit(param_config)
   end
 
+  def analytics_filter_params
+    params.permit(:record_type, :record_id, :start_date, :end_date, analytics: [])
+  end
+
+  def analytics_params
+    params.require(:data)
+    attributes = [:record_type, :record_id, :name, :time, :visit_token, :visitor_token, { properties: [] }]
+    param_config = structure_params(attributes: attributes)
+    params.permit(param_config)
+  end
+
+  def analytics_leave_params
+    params.permit(:visit_token, :visitor_token, :record_type, :record_id)
+  end
+
   def favoritable_params
     structure_params
   end
@@ -561,18 +576,6 @@ module Validation
 
   def maker_filter_params
     params.permit(filter: [:keyword, :typeahead, :order])[:filter]
-  end
-
-  def get_analytics_params
-    params.permit(:record_type, :record_id, :start_date, :end_date, analytics: [])
-  end
-
-  def create_analytics_event_params
-    params.permit(:record_type, :record_id, :name, :properties, :time, :visit_token, :visitor_token)
-  end
-
-  def analytics_leave_params
-    params.permit(:visit_token, :visitor_token, :record_type, :record_id)
   end
 
   def attributes_from(valid_params)

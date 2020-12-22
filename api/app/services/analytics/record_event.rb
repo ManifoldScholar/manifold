@@ -1,8 +1,8 @@
 module Analytics
   class RecordEvent < ActiveInteraction::Base
 
-    VIEW_EVENT_MATCHER = /view(:?\s[\w\s]+)?/.freeze
-    SEARCH_EVENT_MATCHER = /search/.freeze
+    VIEW_EVENT_MATCHER = "view resource".freeze
+    SEARCH_EVENT_MATCHER = "search resource".freeze
 
     record :analytics_visit, class: Analytics::Visit
 

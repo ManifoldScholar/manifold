@@ -2,7 +2,7 @@ module Analytics
   class RecordCustomEvent < Analytics::RecordEvent
 
     string :name
-    hash :properties, strip: false
+    hash :properties, strip: false, default: {}
     time :time, default: Time.current
 
     def execute

@@ -19,3 +19,8 @@ Ahoy.job_queue = :low_priority
 # GDPR Compliance
 Ahoy.cookies = false
 Ahoy.mask_ips = true
+
+# We have tests against analytics that need tracking to occur. Ahoy will see
+# our tests as bots, which will cause it to exclude visits unless we tell it to
+# tack bots.
+Ahoy.track_bots = true if Rails.env.test?

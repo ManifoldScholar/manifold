@@ -11,6 +11,8 @@ module APIDocs
       def definitions
         defined = {}
         APIDocs::Definitions::Resources.constants.each do |resource_class|
+          next unless resource_klass(resource_class).respond_to?(:resource_response)
+
           defined[resource_class] = resource_klass(resource_class).send(:resource_response)
         end
         defined
