@@ -16,6 +16,8 @@ class TextSummary < ApplicationRecord
 
   serialize :toc, Array
 
+  alias_attribute :toc_section_id, :toc_section
+
   def readonly?
     true
   end
