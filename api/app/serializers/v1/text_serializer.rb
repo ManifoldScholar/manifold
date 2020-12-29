@@ -3,6 +3,12 @@ module V1
 
     include ::V1::Concerns::ManifoldSerializer
 
+    INCLUDE_TOC = proc do |object, params|
+      next true if full?(params)
+
+      params[:include_toc] && object.id.in?(params[:include_toc])
+    end
+
     typed_attribute :title, Types::String
     typed_attribute :creator_names, Types::String.meta(read_only: true)
     typed_attribute :created_at, Types::DateTime.meta(read_only: true)
@@ -38,11 +44,9 @@ module V1
           )
         )
       )
-    ).meta(read_only: true), if: proc { |object, params|
-      next true if full?(params)
+    ).meta(read_only: true), if: INCLUDE_TOC
 
-      params[:include_toc] && params[:include_toc].include?(object.id)
-    }
+    typed_attribute :toc_section_id, Types::String.optional.meta(read_only: true), if: INCLUDE_TOC
 
     typed_attribute :cover_styles, Types::Serializer::Attachment.meta(read_only: true)
 

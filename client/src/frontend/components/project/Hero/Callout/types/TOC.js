@@ -4,7 +4,10 @@ import classNames from "classnames";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import Utility from "global/components/utility";
+import getOr from "lodash/fp/getOr";
 import Error from "./Error";
+
+const getText = getOr({}, "props.callout.relationships.text.attributes");
 
 export default class ProjectHeroCalloutTOC extends PureComponent {
   static displayName = "ProjectHero.CalloutTOC";
@@ -18,12 +21,20 @@ export default class ProjectHeroCalloutTOC extends PureComponent {
     return this.props.callout.attributes.button;
   }
 
-  get typeClass() {
-    return this.isButton ? "button" : "link";
+  get href() {
+    const textAttributes = getText(this);
+
+    const { slug, tocSectionId } = textAttributes;
+
+    if (tocSectionId) {
+      return lh.link("readerSection", slug, tocSectionId);
+    } else {
+      return lh.link("reader", slug);
+    }
   }
 
-  get slug() {
-    return this.props.callout.relationships.text.attributes.slug;
+  get typeClass() {
+    return this.isButton ? "button" : "link";
   }
 
   get title() {
@@ -63,7 +74,7 @@ export default class ProjectHeroCalloutTOC extends PureComponent {
     });
 
     return (
-      <Link to={lh.link("reader", this.slug)} className={calloutClass}>
+      <Link to={this.href} className={calloutClass}>
         {this.renderIcon()}
         <span className={`${blockClass}__${this.typeClass}-text`}>
           {this.title}

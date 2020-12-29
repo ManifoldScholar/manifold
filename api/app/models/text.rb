@@ -223,6 +223,16 @@ class Text < ApplicationRecord
     text_sections.find_by(position: position)
   end
 
+  def section_by_id(section_id)
+    if text_sections.loaded?
+      text_sections.detect do |section|
+        section.id == section_id
+      end
+    else
+      text_sections.where(id: section_id).first
+    end
+  end
+
   def calculated_start_text_section_id
     start_text_section_id || spine[0] || text_sections.first.try(:id)
   end
@@ -265,6 +275,28 @@ class Text < ApplicationRecord
       landmark["source_path"] == source_path
     end
   end
+
+  memoize def toc_landmark
+    Array(landmarks).detect do |landmark|
+      landmark["type"].match? "toc"
+    end
+  end
+
+  memoize def toc_section
+    landmark = toc_landmark
+
+    return nil if landmark.blank?
+
+    toc_entry = toc_entry_detect do |entry|
+      entry["anchor"] == landmark["anchor"]
+    end
+
+    return nil if toc_entry.blank?
+
+    section_by_id toc_entry["id"]
+  end
+
+  delegate :id, to: :toc_section, prefix: true, allow_nil: true
 
   # @api private
   # @param [<Hash>] list
