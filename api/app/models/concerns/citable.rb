@@ -1,7 +1,13 @@
 module Citable
   extend ActiveSupport::Concern
 
+  include ActiveSupport::Configurable
+
   included do
+    config_accessor :citable_children, instance_writer: false do
+      []
+    end
+
     before_save :update_citations if respond_to? :before_save
   end
 
@@ -44,21 +50,18 @@ module Citable
 
     UpdateCitatableChildren.perform_later(self)
   end
+
   class_methods do
+    attr_reader :citable_children
+
     def with_citation(method = nil, &block)
       @generate_citation = block_given? ? block : method
     end
 
     def with_citable_children(*children)
-      attr_reader :citable_children
-
       after_commit :update_citable_children if respond_to? :after_commit
 
-      @citable_children = children
-
-      after_initialize do
-        @citable_children = children
-      end
+      config.citable_children = children
     end
 
     def generate_citation(model)
