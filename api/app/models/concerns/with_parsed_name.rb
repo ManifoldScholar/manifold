@@ -1,6 +1,8 @@
 module WithParsedName
   extend ActiveSupport::Concern
 
+  include ActiveSupport::Configurable
+
   KEY_MAP = {
     title: :prefix,
     given: :first_name,
@@ -12,6 +14,10 @@ module WithParsedName
   included do
     validate :nickname_not_blank!
     validates :first_name, :last_name, length: { maximum: 50 }
+
+    config_accessor :full_name_properties, instance_writer: false do
+      []
+    end
 
     before_save :cache_name, if: :full_name_db_cacheable?
     before_validation :ensure_nickname
@@ -67,13 +73,7 @@ module WithParsedName
 
   class_methods do
     def with_parsed_name(*properties)
-      attr_reader :full_name_properties
-
-      @full_name_properties = properties
-
-      after_initialize do
-        @full_name_properties = properties
-      end
+      config.full_name_properties = properties
     end
 
     def parse_name(name)
