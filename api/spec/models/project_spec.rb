@@ -444,4 +444,6 @@ RSpec.describe Project, type: :model do
   it_should_behave_like "a model that stores its fingerprint" do
     subject { FactoryBot.create :project }
   end
+
+  it_should_behave_like "a model with formatted attributes"
 end

@@ -1,9 +1,8 @@
 class TextSummary < ApplicationRecord
+  include Attachments
+  include View
 
   self.primary_key = :id
-
-  include Attachments
-  include HasFormattedAttributes
 
   belongs_to :project
   belongs_to :text
@@ -25,5 +24,4 @@ class TextSummary < ApplicationRecord
   def age
     (Time.zone.today - created_at.to_date).to_i
   end
-
 end

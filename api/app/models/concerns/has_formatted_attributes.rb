@@ -1,18 +1,49 @@
-require "uber/inheritable_attr"
-
 module HasFormattedAttributes
   extend ActiveSupport::Concern
 
   included do
-    extend Uber::InheritableAttr unless singleton_class < Uber::InheritableAttr
+    self.formatted_attributes = FormattedAttributes::Configuration.new model: self
 
-    inheritable_attr :formatted_attributes
+    formatted_attributes.add_cache_type_attribute!
 
-    self.formatted_attributes = Set.new
+    delegate :formatted_attributes, to: :class
+
+    before_save :recalculate_formatted_attributes_cache!, if: :should_recalculate_formatted_attributes_cache?
+  end
+
+  # @param [String, Symbol] needle
+  # @return [FormattedAttributes::FormattedAttributeType]
+  def formatted_attribute(needle)
+    fa_cache.fetch(needle)
+  end
+
+  # @return [void]
+  def recalculate_formatted_attributes_cache!
+    fa_cache.refresh_all!
+  end
+
+  # @return [void]
+  def refresh_formatted_attributes_cache!
+    recalculate_formatted_attributes_cache!
+
+    maybe_save_formatted_attributes_cache!
+  end
+
+  # @return [void]
+  def maybe_save_formatted_attributes_cache!
+    update_column :fa_cache, fa_cache.as_json if fa_cache_changed?
+  end
+
+  def should_recalculate_formatted_attributes_cache?
+    formatted_attributes.should_recalculate? self
   end
 
   class_methods do
     # rubocop:disable Naming/PredicateName
+
+    # @!scope class
+    # @return [FormattedAttributes::Configuration]
+    attr_accessor :formatted_attributes
 
     # @param [<Symbol>] attributes
     # @param [Hash] shared_options
@@ -24,23 +55,30 @@ module HasFormattedAttributes
       end
     end
 
+    def has_formatted_attributes?
+      formatted_attributes.present?
+    end
+
     # @param [Symbol] attribute
-    # @param [Boolean] include_wrap
+    # @param [Hash] options
     # @return [void]
-    def has_formatted_attribute(attribute,
-                                include_wrap: true,
-                                renderer_options: nil,
-                                container: nil)
-      options = {
-        include_wrap: include_wrap,
-        renderer_options: renderer_options,
-        container: container
-      }
-      definition = FormattedAttributes::Definition.new attribute, options
+    def has_formatted_attribute(attribute, **options)
+      formatted_attributes.define! attribute, options
+    end
 
-      raise "Already defined formatted_attribute: #{attribute}" unless formatted_attributes.add?(definition)
+    def inherited(subclass)
+      super if defined? super
 
-      include definition.methods_module
+      subclass.formatted_attributes = formatted_attributes.clone_for subclass
+
+      subclass.formatted_attributes.add_cache_type_attribute!
+    end
+
+    # @return [void]
+    def refresh_all_formatted_attribute_caches!
+      find_each do |model|
+        FormattedAttributes::RefreshCacheJob.perform_later model
+      end
     end
 
     # rubocop:enable Naming/PredicateName
