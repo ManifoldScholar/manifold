@@ -50,7 +50,7 @@ module Entitlements
     def find_expires_on!
       return if expiration.blank?
 
-      parsed_date = Chronic.parse(expiration, CHRONIC_OPTIONS.deep_dup).try(:to_date)
+      parsed_date = Chronic.parse(expiration, CHRONIC_OPTIONS.deep_dup.merge(now: Time.current)).try(:to_date)
 
       if parsed_date.blank?
         errors.add :expiration, "did not produce a valid date"
