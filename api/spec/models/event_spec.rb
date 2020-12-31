@@ -48,4 +48,5 @@ RSpec.describe Event, type: :model do
     end
   end
 
+  it_should_behave_like "a model with formatted attributes"
 end

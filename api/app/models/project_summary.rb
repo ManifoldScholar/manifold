@@ -1,19 +1,14 @@
 class ProjectSummary < ApplicationRecord
+  include Attachments
+  include View
 
   self.primary_key = :id
-
-  include Attachments
-  include HasFormattedAttributes
 
   belongs_to :project
 
   manifold_has_attached_file :avatar, :image
 
   serialize :toc, Array
-
-  def readonly?
-    true
-  end
 
   def updated?
     updated_at.strftime("%F") != created_at.strftime("%F")
@@ -26,5 +21,4 @@ class ProjectSummary < ApplicationRecord
   def recently_updated?
     updated? && updated_at >= Time.current - 1.week
   end
-
 end

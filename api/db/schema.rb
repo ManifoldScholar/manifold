@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_07_011750) do
+ActiveRecord::Schema.define(version: 2020_12_31_001706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension("citext") unless extensions.include?("citext")
@@ -306,6 +306,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.string "external_subject_id"
     t.string "external_subject_type"
     t.uuid "twitter_query_id"
+    t.jsonb "fa_cache", default: {}, null: false
     t.index ["created_at"], name: "index_events_on_created_at"
     t.index %w[external_subject_type external_subject_id], name: "index_subj_on_subj_type_and_subj_id"
     t.index ["project_id"], name: "index_events_on_project_id"
@@ -366,6 +367,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.jsonb "background_data"
     t.jsonb "foreground_data"
     t.boolean "include_sign_up", default: false, null: false
+    t.jsonb "fa_cache", default: {}, null: false
   end
 
   create_table "flags", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -517,6 +519,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.boolean "open_in_new_tab", default: false
     t.uuid "creator_id"
     t.string "purpose", default: "supplemental_content"
+    t.jsonb "fa_cache", default: {}, null: false
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
@@ -555,6 +558,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.jsonb "social_image_data"
     t.text "social_description"
     t.text "social_title"
+    t.jsonb "fa_cache", default: {}, null: false
     t.index ["creator_id"], name: "index_project_collections_on_creator_id"
     t.index ["homepage_end_date"], name: "index_project_collections_on_homepage_end_date"
     t.index ["homepage_start_date"], name: "index_project_collections_on_homepage_start_date"
@@ -660,10 +664,6 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.boolean "finished", default: false
     t.integer "resource_collections_count", default: 0
     t.integer "resources_count", default: 0
-    t.string "cached_title_formatted"
-    t.string "cached_subtitle_formatted"
-    t.string "cached_title_plaintext"
-    t.string "cached_subtitle_plaintext"
     t.text "fingerprint", null: false
     t.jsonb "export_configuration", default: {}, null: false
     t.boolean "restricted_access", default: false, null: false
@@ -671,6 +671,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.text "restricted_access_body"
     t.boolean "open_access", default: false, null: false
     t.boolean "disable_engagement", default: false
+    t.jsonb "fa_cache", default: {}, null: false
     t.index "((export_configuration @> '{\"bag_it\": true}'::jsonb))", name: "index_projects_export_configuration_exports_as_bag_it"
     t.index ["fingerprint"], name: "index_projects_on_fingerprint"
     t.index ["open_access"], name: "index_projects_on_open_access"
@@ -718,6 +719,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.integer "collection_resources_count", default: 0
     t.integer "events_count", default: 0
     t.jsonb "thumbnail_data"
+    t.jsonb "fa_cache", default: {}, null: false
     t.index ["project_id"], name: "index_resource_collections_on_project_id"
     t.index ["slug"], name: "index_resource_collections_on_slug", unique: true
   end
@@ -851,6 +853,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.jsonb "variant_thumbnail_data"
     t.jsonb "variant_poster_data"
     t.string "pending_sort_title"
+    t.jsonb "fa_cache", default: {}, null: false
     t.index ["project_id"], name: "index_resources_on_project_id"
     t.index ["slug"], name: "index_resources_on_slug", unique: true
   end
@@ -893,6 +896,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.jsonb "press_logo_footer_data"
     t.jsonb "press_logo_mobile_data"
     t.jsonb "favicon_data"
+    t.jsonb "fa_cache", default: {}, null: false
     t.index ["singleton_guard"], name: "index_settings_on_singleton_guard", unique: true
   end
 
@@ -1009,8 +1013,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "text_id"
-    t.string "cached_value_formatted"
-    t.string "cached_value_plaintext"
+    t.jsonb "fa_cache", default: {}, null: false
     t.index ["text_id"], name: "index_text_titles_on_text_id"
   end
 
@@ -1036,11 +1039,10 @@ ActiveRecord::Schema.define(version: 2020_12_07_011750) do
     t.integer "events_count", default: 0
     t.jsonb "cover_data"
     t.boolean "published", default: false, null: false
-    t.string "cached_description_formatted"
     t.text "fingerprint", null: false
     t.jsonb "export_configuration", default: {}, null: false
-    t.string "cached_description_plaintext"
     t.boolean "ignore_access_restrictions", default: false
+    t.jsonb "fa_cache", default: {}, null: false
     t.index "((export_configuration @> '{\"epub_v3\": true}'::jsonb))", name: "index_texts_export_configuration_exports_as_epub_v3"
     t.index ["category_id"], name: "index_texts_on_category_id"
     t.index ["created_at"], name: "index_texts_on_created_at", using: :brin
@@ -1473,87 +1475,6 @@ UNION ALL
      LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
   GROUP BY u.id;
   SQL
-  create_view "project_summaries", sql_definition: <<-SQL
-    SELECT p.id,
-    p.id AS project_id,
-    p.title,
-    p.cached_title_formatted AS title_formatted,
-    p.cached_title_plaintext AS title_plaintext,
-    p.subtitle,
-    p.cached_subtitle_formatted AS subtitle_formatted,
-    p.cached_subtitle_plaintext AS subtitle_plaintext,
-    p.publication_date,
-    p.created_at,
-    p.updated_at,
-    p.slug,
-    p.avatar_color,
-    p.avatar_data,
-    p.draft,
-    p.finished,
-    pm.creator_names
-   FROM (projects p
-     LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
-            string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
-           FROM (collaborators c
-             JOIN makers m ON ((m.id = c.maker_id)))
-          WHERE (((c.collaboratable_type)::text = 'Project'::text) AND (c.collaboratable_id = p.id))) pm ON (true));
-  SQL
-  create_view "text_summaries", sql_definition: <<-SQL
-    SELECT t.project_id,
-    t.id,
-    t.id AS text_id,
-    t.created_at,
-    t.updated_at,
-    t.published,
-    t.slug,
-    t.category_id,
-    t."position",
-    t.description,
-    t.cached_description_formatted AS description_formatted,
-    t.cached_description_plaintext AS description_plaintext,
-    t.start_text_section_id,
-    t.publication_date,
-    t.cover_data,
-    t.toc,
-    t.ignore_access_restrictions,
-    tb.id AS toc_section,
-    ta.subtitle,
-    ta.subtitle_formatted,
-    ta.subtitle_plaintext,
-    ta.title,
-    ta.title_formatted,
-    ta.title_plaintext,
-    tm.creator_names,
-    tm.collaborator_names,
-    COALESCE(tac.annotations_count, (0)::bigint) AS annotations_count,
-    COALESCE(tac.highlights_count, (0)::bigint) AS highlights_count,
-    COALESCE(tac.orphaned_annotations_count, (0)::bigint) AS orphaned_annotations_count,
-    COALESCE(tac.orphaned_highlights_count, (0)::bigint) AS orphaned_highlights_count
-   FROM ((((texts t
-     LEFT JOIN LATERAL ( SELECT count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
-            count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
-            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count
-           FROM (annotations a
-             JOIN text_sections ts ON ((ts.id = a.text_section_id)))
-          WHERE (ts.text_id = t.id)) tac ON (true))
-     LEFT JOIN LATERAL ( SELECT (array_agg(tt.value ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title,
-            (array_agg(tt.value ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle,
-            (array_agg(tt.cached_value_formatted ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title_formatted,
-            (array_agg(tt.cached_value_formatted ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle_formatted,
-            (array_agg(tt.cached_value_plaintext ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'main'::text)))[1] AS title_plaintext,
-            (array_agg(tt.cached_value_plaintext ORDER BY tt.created_at) FILTER (WHERE ((tt.kind)::text = 'subtitle'::text)))[1] AS subtitle_plaintext
-           FROM text_titles tt
-          WHERE (tt.text_id = t.id)) ta ON (true))
-     LEFT JOIN LATERAL ( SELECT ts.id
-           FROM text_sections ts
-          WHERE ((ts.text_id = t.id) AND ((ts.kind)::text = 'navigation'::text))) tb ON (true))
-     LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
-            string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
-           FROM (collaborators c
-             JOIN makers m ON ((m.id = c.maker_id)))
-          WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
-  SQL
   create_view "reading_group_membership_counts", sql_definition: <<-SQL
     SELECT rgm.id AS reading_group_membership_id,
     count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
@@ -1573,5 +1494,96 @@ UNION ALL
    FROM (reading_groups rg
      LEFT JOIN annotations a ON ((a.reading_group_id = rg.id)))
   GROUP BY rg.id;
+  SQL
+  create_view "text_title_summaries", sql_definition: <<-SQL
+    SELECT text_titles.text_id,
+    jsonb_object_agg(text_titles.kind, (jsonb_build_object('raw', text_titles.value) || (text_titles.fa_cache -> 'value'::text)) ORDER BY text_titles.created_at DESC) AS titles
+   FROM text_titles
+  WHERE (text_titles.kind IS NOT NULL)
+  GROUP BY text_titles.text_id;
+  SQL
+  create_view "text_summaries", sql_definition: <<-SQL
+    SELECT t.project_id,
+    t.id,
+    t.id AS text_id,
+    t.created_at,
+    t.updated_at,
+    t.published,
+    t.slug,
+    t.category_id,
+    t."position",
+    t.description,
+    (t.fa_cache #>> '{description,formatted}'::text[]) AS description_formatted,
+    (t.fa_cache #>> '{description,plaintext}'::text[]) AS description_plaintext,
+    t.start_text_section_id,
+    t.publication_date,
+    t.cover_data,
+    t.toc,
+    t.ignore_access_restrictions,
+    tb.id AS toc_section,
+    ta.subtitle,
+    ta.subtitle_formatted,
+    ta.subtitle_plaintext,
+    ta.title,
+    ta.title_formatted,
+    ta.title_plaintext,
+    tm.creator_names,
+    tm.collaborator_names,
+    COALESCE(tac.annotations_count, (0)::bigint) AS annotations_count,
+    COALESCE(tac.highlights_count, (0)::bigint) AS highlights_count,
+    COALESCE(tac.orphaned_annotations_count, (0)::bigint) AS orphaned_annotations_count,
+    COALESCE(tac.orphaned_highlights_count, (0)::bigint) AS orphaned_highlights_count
+   FROM (((((texts t
+     LEFT JOIN LATERAL ( SELECT count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+            count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
+            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count
+           FROM (annotations a
+             JOIN text_sections ts ON ((ts.id = a.text_section_id)))
+          WHERE (ts.text_id = t.id)) tac ON (true))
+     LEFT JOIN text_title_summaries tts ON ((t.id = tts.text_id)))
+     LEFT JOIN LATERAL ( SELECT (tts.titles #>> '{main,raw}'::text[]) AS title,
+            (tts.titles #>> '{subtitle,raw}'::text[]) AS subtitle,
+            (tts.titles #>> '{main,formatted}'::text[]) AS title_formatted,
+            (tts.titles #>> '{subtitle,formatted}'::text[]) AS subtitle_formatted,
+            (tts.titles #>> '{main,plaintext}'::text[]) AS title_plaintext,
+            (tts.titles #>> '{subtitle,plaintext}'::text[]) AS subtitle_plaintext
+           FROM text_titles tt
+          WHERE (tt.text_id = t.id)) ta ON (true))
+     LEFT JOIN LATERAL ( SELECT ts.id
+           FROM text_sections ts
+          WHERE ((ts.text_id = t.id) AND ((ts.kind)::text = 'navigation'::text))
+          ORDER BY ts.created_at
+         LIMIT 1) tb ON (true))
+     LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
+            string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
+           FROM (collaborators c
+             JOIN makers m ON ((m.id = c.maker_id)))
+          WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
+  SQL
+  create_view "project_summaries", sql_definition: <<-SQL
+    SELECT p.id,
+    p.id AS project_id,
+    p.title,
+    (p.fa_cache #>> '{title,formatted}'::text[]) AS title_formatted,
+    (p.fa_cache #>> '{title,plaintext}'::text[]) AS title_plaintext,
+    p.subtitle,
+    (p.fa_cache #>> '{subtitle,formatted}'::text[]) AS subtitle_formatted,
+    (p.fa_cache #>> '{subtitle,plaintext}'::text[]) AS subtitle_plaintext,
+    p.publication_date,
+    p.created_at,
+    p.updated_at,
+    p.slug,
+    p.avatar_color,
+    p.avatar_data,
+    p.draft,
+    p.finished,
+    pm.creator_names
+   FROM (projects p
+     LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
+            string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
+           FROM (collaborators c
+             JOIN makers m ON ((m.id = c.maker_id)))
+          WHERE (((c.collaboratable_type)::text = 'Project'::text) AND (c.collaboratable_id = p.id))) pm ON (true));
   SQL
 end
