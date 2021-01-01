@@ -32,4 +32,16 @@ FactoryBot.define do
     end
 
   end
+
+  factory :analytics_event_request, class: Analytics::Event do
+    transient do
+      subject { FactoryBot.create(:project) }
+    end
+
+    name { Faker::Lorem.word }
+    properties { { Faker::Lorem.word => Faker::Lorem.word } }
+    # properties { {subject_type: subject.class.name, subject_id: subject.id} }
+    # subject_type { subject.class.name }
+    # subject_id { subject.id }
+  end
 end

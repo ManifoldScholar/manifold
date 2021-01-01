@@ -13,8 +13,8 @@ class AnalyticsResultAuthorizer < ApplicationAuthorizer
     def readable_by?(user, _options = {})
       return false unless user.present?
 
-      scope_readable = options[:scope]&.readable_by?(user, options)
-      admin_permissions?(user) && (scope_readable.nil? ? true : scope_readable)
+      subject_readable = options[:subject]&.readable_by?(user, options)
+      admin_permissions?(user) && (subject_readable.nil? ? true : subject_readable)
     end
 
   end

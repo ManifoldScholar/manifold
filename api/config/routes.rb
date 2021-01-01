@@ -171,8 +171,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resource :analytics, only: [:create, :show]
-      post "analytics/leave" => "analytics#leave"
+      resource :analytics, only: [:show, :create]
 
       resources :passwords, only: [:create, :update]
       post "passwords/admin_reset_password" => "passwords#admin_reset_password"

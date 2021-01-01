@@ -1,34 +1,36 @@
 module API
   module V1
     class AnalyticsController < Ahoy::BaseController
+      include Validation
 
-      before_action :fetch_visit, only: [:create, :leave]
+      before_action :fetch_visit, only: :create
 
       def show
-        scope = analytics_scope
+        subject = analytics_subject
 
-        AnalyticsResultAuthorizer.readable_by? current_user, scope: scope
+        AnalyticsResultAuthorizer.readable_by? current_user, subject: subject
 
-        interaction_outcome = case scope
+        interaction_outcome = case subject
                               when nil
                                 Analytics::Reports::Global.run(allow_cached_result: false, **analytics_params)
                               else
-                                reporter_class = "Analytics::Reports::For#{scope.class.name}".constantize
-                                reporter_class.run scope: scope, **analytics_filter_params.to_h.symbolize_keys
+                                reporter_class = "Analytics::Reports::For#{subject.class.name}".constantize
+                                reporter_class.run subject: subject, **get_analytics_params.to_h.symbolize_keys
                               end
 
         render_jsonapi(interaction_outcome.result, serializer: ::V1::AnalyticsResultSerializer)
       end
 
       def create
-        @outcome = Analytics::RecordEvent.record_event analytics_attributes
-        @outcome.valid? ? head(204) : render(json: { errors: @outcome.errors.messages }, status: 400)
-      end
+        errors = []
+        events = []
 
-      def leave
-        ahoy.track_visit
-        outcome = Analytics::RecordLeaveEvent.run analytics_leave_attributes
-        head(outcome.valid? ? 200 : 400)
+        create_analytics_event_params.each do |event|
+          outcome = Analytics::RecordEvent.record_event event.to_h.merge(analytics_visit: @analytics_visit)
+          outcome.valid? ? events.push(outcome.result) : errors.push(outcome.errors)
+        end
+
+        render_jsonapi({ events: events, errors: errors }, serializer: ::V1::AnalyticsEventSerializer)
       end
 
       private
@@ -37,21 +39,13 @@ module API
         @analytics_visit = Analytics::FetchVisit.run! request: request
       end
 
-      def analytics_leave_attributes
-        analytics_leave_params[:data][:attributes].to_h.merge(analytics_visit: @analytics_visit)
-      end
+      def analytics_subject
+        return unless get_analytics_params[:subject].present? && get_analytics_params[:subject_id].present?
 
-      def analytics_attributes
-        analytics_params[:data][:attributes].to_h.merge(analytics_visit: @analytics_visit)
-      end
+        subject_class = get_analytics_params[:subject].classify.safe_constantize
+        return head(400) unless subject_class.present?
 
-      def analytics_scope
-        return unless analytics_params[:record_type].present? && analytics_params[:record_id].present?
-
-        scope_class = analytics_params[:record_type].safe_constantize
-        return head(400) unless scope_class.present?
-
-        scope_class.find(analytics_params[:record_id])
+        subject_class.find(get_analytics_params[:subject_id])
       end
 
     end

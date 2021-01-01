@@ -2,7 +2,7 @@ module Analytics
   module Reports
     class ForText < Analytics::Reports::Builder
 
-      record :scope, class: Text
+      record :subject, class: Text
 
       # BEGIN CTES
 
@@ -21,7 +21,7 @@ module Analytics
           ON analytics_visits.id = analytics_events.visit_id
         WHERE #{VISIT_DATE_PLACEHOLDER}
           AND analytics_events.name = 'view text'
-          AND analytics_events.properties ->> 'text' = #{SCOPE_PLACEHOLDER}
+          AND analytics_events.properties ->> 'text' = #{SUBJECT_PLACEHOLDER}
         ORDER BY analytics_visits.started_at
       SQL
 
@@ -45,7 +45,7 @@ module Analytics
         JOIN texts
           ON text_sections.text_id = texts.id
         WHERE annotations.created_at BETWEEN #{START_DATE_PLACEHOLDER} AND #{END_DATE_PLACEHOLDER}
-          AND texts.id = #{SCOPE_PLACEHOLDER}
+          AND texts.id = #{SUBJECT_PLACEHOLDER}
         GROUP BY annotations.format, annotations.private
       SQL
 
@@ -58,7 +58,7 @@ module Analytics
         JOIN analytics_events text_events
           ON analytics_visits.id = text_events.visit_id
         JOIN texts
-          ON text_events.properties ->> 'text' = #{SCOPE_PLACEHOLDER}
+          ON text_events.properties ->> 'text' = #{SUBJECT_PLACEHOLDER}
         JOIN text_sections
           ON texts.id = text_sections.text_id
         JOIN analytics_events text_section_events
@@ -78,7 +78,7 @@ module Analytics
           ON (analytics_events.properties ->> 'text_section')::uuid = text_sections.id
         JOIN texts
           ON text_sections.text_id = texts.id
-        WHERE analytics_events.name = 'share button click' AND texts.id = #{SCOPE_PLACEHOLDER}
+        WHERE analytics_events.name = 'share button click' AND texts.id = #{SUBJECT_PLACEHOLDER}
         GROUP BY action
       SQL
 

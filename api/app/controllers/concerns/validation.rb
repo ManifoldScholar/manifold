@@ -578,6 +578,16 @@ module Validation
     params.permit(filter: [:keyword, :typeahead, :order])[:filter]
   end
 
+  def get_analytics_params
+    params.permit(:subject, :subject_id, :start_date, :end_date, analytics: [])
+  end
+
+  def create_analytics_event_params
+    params.permit(
+      events: [:id, :name, :properties, :time, :visit_token, :visitor_token]
+    )[:events]
+  end
+
   def attributes_from(valid_params)
     attr = valid_params["data"]["attributes"]
     attr[:id] = valid_params["data"]["id"] if

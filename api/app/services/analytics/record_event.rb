@@ -2,7 +2,8 @@ module Analytics
   class RecordEvent < ActiveInteraction::Base
 
     VIEW_EVENT_MATCHER = "view resource".freeze
-    SEARCH_EVENT_MATCHER = "search resource".freeze
+    SEARCH_EVENT_MATCHER = "search".freeze
+    LEAVE_EVENT_MATCHER = "leave"
 
     record :analytics_visit, class: Analytics::Visit
 
@@ -20,6 +21,8 @@ module Analytics
                         Analytics::RecordViewEvent
                       when SEARCH_EVENT_MATCHER
                         Analytics::RecordSearchEvent
+                      when LEAVE_EVENT_MATCHER
+                        Analytics::RecordLeaveEvent
                       else
                         Analytics::RecordCustomEvent
                       end
@@ -33,14 +36,13 @@ module Analytics
     def set_visit
       return if analytics_visit.present? || request.blank?
 
-      get_tokens
-
+      get_tokens_from_headers if visit_token.blank?
       return if visit_token.blank?
 
       @analytics_visit = Analytics::FetchVisit.run!(visit_token: visit_token, visitor_token: visitor_token, request: request)
     end
 
-    def get_tokens
+    def get_tokens_from_headers
       # rubocop:disable Naming/MemoizedInstanceVariableName
       @visit_token ||= request.headers["HTTP_VISIT_TOKEN"]
       @visitor_token ||= request.headers["HTTP_VISITOR_TOKEN"]

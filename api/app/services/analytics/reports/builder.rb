@@ -7,7 +7,7 @@ module Analytics
       START_DATE_PLACEHOLDER = "{{ START DATE }}".freeze
       END_DATE_PLACEHOLDER = "{{ END DATE }}".freeze
       TZ_PLACEHOLDER = "{{ TIME ZONE }}".freeze
-      SCOPE_PLACEHOLDER = "{{ SCOPE ID }}".freeze
+      SUBJECT_PLACEHOLDER = "{{ SUBJECT ID }}".freeze
 
       attr_reader :cached_result
 
@@ -110,14 +110,14 @@ module Analytics
                                    skip_nil: true,
                                    expires_in: (Time.now.end_of_day - Time.now).seconds,
                                    race_condition_ttl: 10.seconds) do
-          compose(self.class, scope: @scope, start_date: @start_date, end_date: @end_date).result
+          compose(self.class, subject: @subject, start_date: @start_date, end_date: @end_date).result
         end
 
         compose Analytics::Reports::AnalyticsResult, data: result, **inputs
       end
 
       def cache_key
-        @cache_key ||= "analytics/#{self.class.name.demodulize}/#{@scope&.id || 'all'}"
+        @cache_key ||= "analytics/#{self.class.name.demodulize}/#{@subject&.id || 'all'}"
       end
 
       # Placeholders
@@ -129,7 +129,7 @@ module Analytics
           .gsub(START_DATE_PLACEHOLDER, start_date_sql)
           .gsub(END_DATE_PLACEHOLDER, end_date_sql)
           .gsub(TZ_PLACEHOLDER, quote(zone))
-          .gsub(SCOPE_PLACEHOLDER, quote(respond_to?(:scope) ? scope&.id : nil))
+          .gsub(SUBJECT_PLACEHOLDER, quote(respond_to?(:subject) ? subject&.id : nil))
       end
 
       def start_date_sql(zone = start_date.to_time.zone)

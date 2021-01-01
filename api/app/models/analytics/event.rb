@@ -30,11 +30,10 @@ module Analytics
       end
 
       def find_view_event_for(visit:, record:, before_time:)
-        where(before_time.present ? arel_table[:time].lt(before_time) : nil)
+        where(before_time.present? ? arel_table[:time].lt(before_time) : nil)
           .find_by visit: visit,
-                    record: record,
-                    name: "view #{record.model_name.param_key}",
-                    properties: { record.model_name.param_key => record.id }
+                   name: "view #{record.model_name.param_key}",
+                   properties: { record.model_name.param_key => record.id }
       end
     end
 

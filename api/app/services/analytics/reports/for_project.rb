@@ -2,7 +2,7 @@ module Analytics
   module Reports
     class ForProject < Analytics::Reports::Builder
 
-      record :scope, class: Project
+      record :subject, class: Project
 
       # BEGIN CTES
 
@@ -21,7 +21,7 @@ module Analytics
           ON analytics_visits.id = analytics_events.visit_id
         WHERE #{VISIT_DATE_PLACEHOLDER}
           AND analytics_events.name = 'view project'
-          AND analytics_events.properties ->> 'project' = #{SCOPE_PLACEHOLDER}
+          AND analytics_events.properties ->> 'project' = #{SUBJECT_PLACEHOLDER}
         ORDER BY analytics_visits.started_at
       SQL
 
@@ -47,7 +47,7 @@ module Analytics
         JOIN projects
           ON texts.project_id = projects.id
         WHERE annotations.created_at BETWEEN #{START_DATE_PLACEHOLDER} AND #{END_DATE_PLACEHOLDER}
-          AND projects.id = #{SCOPE_PLACEHOLDER}
+          AND projects.id = #{SUBJECT_PLACEHOLDER}
         GROUP BY annotations.format, annotations.private
       SQL
 
@@ -56,7 +56,7 @@ module Analytics
           COUNT(*) AS total_favorites,
           (SELECT COUNT(*) FROM favorites WHERE created_at BETWEEN #{START_DATE_PLACEHOLDER} AND #{END_DATE_PLACEHOLDER}) AS favorites_this_period
         FROM favorites
-        WHERE favoritable_type = 'Project' AND favoritable_id = #{SCOPE_PLACEHOLDER}
+        WHERE favoritable_type = 'Project' AND favoritable_id = #{SUBJECT_PLACEHOLDER}
       SQL
 
       # END CTES

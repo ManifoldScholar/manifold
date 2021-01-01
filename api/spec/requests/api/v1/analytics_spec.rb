@@ -28,11 +28,15 @@ RSpec.describe "Analytics API", type: :request do
       let(:HTTP_VISITOR_TOKEN) { "22222222-2222-2222-2222-222222222222" }
     end
 
-    # include_examples "an API show request",
-    #                 model: Analytics::Reports::AnalyticsResult,
-    #                 factory: :analytics_result,
-    #                 resource_name: "analytics_result",
-    #                 authorized_user: :admin,
-    #                 exclude: ["404", "401"]
+    include_examples "an API show request",
+                    model: Analytics::Reports::AnalyticsResult,
+                    factory: :analytics_result,
+                    resource_name: "analytics_result",
+                    authorized_user: :admin,
+                    exclude: ["404", "401"]
+
+    include_examples "an API create request",
+                      factory: :analytics_event_request,
+                      resource_name: "analytics_event"
   end
 end
