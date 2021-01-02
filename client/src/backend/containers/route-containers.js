@@ -21,6 +21,7 @@ import Content from "backend/containers/content-block";
 import ActionCallout from "backend/containers/action-callout";
 import ExportTargets from "backend/containers/export-targets";
 import Entitlements from "backend/containers/entitlements";
+import Analytics from "backend/containers/analytics";
 
 export default {
   Backend,
@@ -42,6 +43,7 @@ export default {
   ResourceCollectionGeneral: ResourceCollection.General,
   ResourceCollectionResources: ResourceCollection.Resources,
   TextWrapper: Text.Wrapper,
+  TextAnalytics: Text.Analytics,
   TextStyles: Text.Styles,
   StylesheetEdit: Stylesheet.Edit,
   TextMetadata: Text.Metadata,
@@ -65,6 +67,9 @@ export default {
   ProjectResourceCollections: Project.ResourceCollections,
   ProjectAccessWrapper: Project.Access.Wrapper,
   ProjectPermissions: Project.Permissions,
+  ProjectLog: Project.Log,
+  ProjectGeneral: Project.General,
+  ProjectAnalytics: Project.Analytics,
   PermissionNew: Permission.New,
   PermissionEdit: Permission.Edit,
   ProjectCollaborators: Project.Collaborators,
@@ -78,8 +83,6 @@ export default {
   ProjectContent: Project.Content,
   ContentBlockNew: Content.New,
   ContentBlockEdit: Content.Edit,
-  ProjectLog: Project.Log,
-  ProjectGeneral: Project.General,
   Records,
   UsersList: Users.List,
   UsersNew: Users.New,
@@ -110,5 +113,6 @@ export default {
   ActionCalloutNew: ActionCallout.New,
   ActionCalloutEdit: ActionCallout.Edit,
   EntitlementsList: Entitlements.List,
-  EntitlementsNew: Entitlements.New
+  EntitlementsNew: Entitlements.New,
+  AnalyticsWrapper: Analytics.Wrapper
 };

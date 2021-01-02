@@ -5,16 +5,23 @@
 
   @include panelRoundedDark;
 
+  &--spaceBottom {
+    margin-bottom: 30px;
+  }
+
   // layout elements
   &__inner {
-    padding: $containerPaddingNarrow $containerPaddingNarrow + 5;
+    padding: $containerPaddingNarrow * 0.6 $containerPaddingNarrow * 0.75;
     margin-right: auto;
     margin-left: auto;
 
+    @include respond($break60) {
+      padding: $containerPaddingNarrow * 0.8 $containerPaddingNarrow * 1.2;
+    }
+
     &--padded {
       @include respond($break35) {
-        padding-right: $containerPaddingResp;
-        padding-left: $containerPaddingResp;
+        padding: $containerPaddingNarrow $containerPaddingResp;
       }
 
       @include respond($break120) {
@@ -30,26 +37,15 @@
       padding-top: 48px;
       padding-bottom: 48px;
     }
-
-    &--narrow {
-      padding: $containerPaddingNarrow * 0.6 $containerPaddingNarrow * 0.75;
-
-      @include respond($break60) {
-        padding: $containerPaddingNarrow * 0.8 $containerPaddingNarrow * 1.2;
-      }
-    }
   }
 
   &__content-wrapper {
-    display: -ms-grid;
     display: grid;
     grid-template:
       'figure title' auto
       'figure utility' auto / auto 1fr;
     row-gap: 9px;
     column-gap: 25px;
-    -ms-grid-rows: auto 9px auto;
-    -ms-grid-columns: auto 25px 1fr;
   }
 
   &__content-flex-wrapper {
@@ -77,21 +73,19 @@
 
   &__title-block {
     grid-area: title;
-    -ms-grid-row: 1;
-    -ms-grid-column: 3;
   }
 
   &__utility-block {
     grid-area: utility;
-    -ms-grid-row: 3;
-    -ms-grid-column: 3;
+
+    &--flex {
+      flex-grow: 1;
+      text-align: right;
+    }
   }
 
   &__figure-block {
     grid-area: figure;
-    -ms-grid-row: 1;
-    -ms-grid-column: 1;
-    -ms-grid-row-span: 3;
 
     &--shift-left {
       margin-left: -14px;
@@ -129,16 +123,7 @@
     color: $neutral20;
 
     @include respond($break65) {
-      font-size: 23px;
-    }
-
-    &--large {
-      margin-top: -0.133em;
-      font-size: 20px;
-
-      @include respond($break60) {
-        font-size: 30px;
-      }
+      font-size: 22px;
     }
   }
 
@@ -204,7 +189,6 @@
     &--alt-accented {
       color: $analyticsHighlightColor;
     }
-
   }
 
   &__type-icon {
@@ -219,7 +203,8 @@
     &--project {
       margin-top: 4px;
 
-      @at-root svg#{&} { // override `svg:not(:root)` normalize selector
+      @at-root svg#{&} {
+        // override `svg:not(:root)` normalize selector
         overflow: visible;
       }
     }

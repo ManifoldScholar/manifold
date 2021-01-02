@@ -1,4 +1,5 @@
 export default {
+  beAnalyticsReport: "backend-analytics-report",
   beProjects: "backend-projects",
   beProject: "backend-project",
   beRecentProjects: "backend-recent-projects",
@@ -81,6 +82,7 @@ export default {
   bePermissionDestroy: "backend-permission-destroy",
   beResourceImportFetch: "backend-resource-import-fetch",
   beVersions: "backend-versions",
+  beProjectAnalytics: "backend-project-analytics",
   beProjectCollections: "backend-project-collections",
   beProjectCollection: "backend-project-collection",
   beProjectCollectionDestroy: "backend-project-collection-destroy",

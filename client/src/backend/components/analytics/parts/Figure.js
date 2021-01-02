@@ -11,7 +11,7 @@ function Figure({ stat, caption }) {
 }
 
 Figure.propTypes = {
-  stat: PropTypes.string.isRequired,
+  stat: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   caption: PropTypes.string.isRequired
 };
 

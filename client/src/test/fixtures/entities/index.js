@@ -1,5 +1,5 @@
 import actionCallout from "./action-callout";
-import analyticsResults from "./analyticsResults";
+import { globalAnalytics, projectAnalytics } from "./analytics";
 import annotation from "./annotation";
 import category from "./category";
 import collectionProject from "./collection-project";
@@ -33,7 +33,6 @@ import version from "./version";
 
 export default {
   actionCallout,
-  analyticsResults,
   annotation,
   category,
   collectionProject,
@@ -43,11 +42,13 @@ export default {
   event,
   exportTarget,
   feature,
+  globalAnalytics,
   ingestion,
   maker,
   page,
   permission,
   project,
+  projectAnalytics,
   projectCollection,
   readingGroup,
   readingGroupMembership,

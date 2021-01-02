@@ -1,75 +1,54 @@
 import React from "react";
-import { storiesOf } from "helpers/storybook/exports";
-import { select } from "@storybook/addon-knobs";
-import Block, {
-  Chart,
-  Figure,
-  Grid,
-  List,
-  Table,
-  Time,
-  ProjectRow
-} from "backend/components/analytics";
-import { chart, time, list, table, projectTable } from "./sampleBlocks";
+import { storiesOf, fixtures } from "helpers/storybook/exports";
+import { ComposedAnalytics, Grid } from "backend/components/analytics";
 
-storiesOf("Backend/Analytics/Dashboard", module).add("Global", () => {
-  const columns = select(
-    "Columns (on desktop)",
-    {
-      2: 2,
-      3: 3,
-      4: 4
-    },
-    4
-  );
+const statistics = {
+  attributes: {
+    totalProjectCount: 80,
+    totalTextCount: 179,
+    totalResourceCount: 98,
+    totalUserCount: 38,
+    totalAnnotationCount: 103,
+    totalCommentCount: 26
+  }
+};
 
-  return (
-    <Grid columns={columns}>
-      <Block
-        width={100}
-        icon={chart.icon}
-        title={chart.title}
-        description={chart.description}
-      >
-        <Chart data={chart.data} dataLabel={chart.dataLabel} />
-      </Block>
-      <Block width={25} icon="reload32" title="Return Visits">
-        <Figure
-          stat="87%"
-          caption="274 of 316 visitors were making a return visit"
-        />
-      </Block>
-      <Block width={25} icon="timerClock32" title={time.title}>
-        <Time time={time.data.value} />
-      </Block>
-      <Block width={25} icon="resourceInteractive64" title="Interaction">
-        <Figure stat="18%" caption="46 visitors used annotations or comments" />
-      </Block>
-      <Block width={25} icon="bookmark32" title="Followed">
-        <Figure
-          stat="6"
-          caption="Average number of followed projects for each visitor"
-        />
-      </Block>
-      <Block
-        width={100}
-        icon={list.icon}
-        title={list.title}
-        description={list.description}
-      >
-        <List items={list.items} />
-      </Block>
-      <Block width={50} icon={projectTable.icon} title={projectTable.title}>
-        <Table
-          headers={projectTable.headers}
-          rowComponent={ProjectRow}
-          rows={projectTable.rows}
-          allLink="testUrl"
-        />
-      </Block>
-      <Block width={50} icon={table.icon} title={table.title}>
-        <Table {...table} />
-      </Block>
+function findData(name, factory = "globalAnalytics") {
+  const {
+    attributes: { data }
+  } = fixtures.factory(factory);
+  return data.find(element => element.name === name);
+}
+
+storiesOf("Backend/Analytics/Dashboard", module)
+  .add("Global", () => (
+    <Grid columns={4}>
+      <ComposedAnalytics.Visitors data={findData("daily_visitors")} />
+      <ComposedAnalytics.ReturnVisits data={findData("returning_visitors")} />
+      <ComposedAnalytics.AverageVisit
+        data={findData("average_visit_duration")}
+      />
+      <ComposedAnalytics.Interactions data={findData("active_users")} />
+      <ComposedAnalytics.Followed data={findData("favorited_projects")} />
+      <ComposedAnalytics.SiteStatistics statistics={statistics} />
+      <ComposedAnalytics.TopProjects data={findData("top_projects")} />
+      <ComposedAnalytics.TopSearches data={findData("top_search_terms")} />
     </Grid>
-  );
-});
+  ))
+  .add("Project", () => (
+    <Grid columns={3}>
+      <ComposedAnalytics.Visitors
+        data={findData("daily_visitors", "projectAnalytics")}
+      />
+      <ComposedAnalytics.Annotations />
+      <ComposedAnalytics.Highlights
+        data={findData("annotations", "projectAnalytics")}
+      />
+      <ComposedAnalytics.NewFollowers
+        data={findData("favorites_this_period", "projectAnalytics")}
+      />
+      <ComposedAnalytics.AllFollowers
+        data={findData("total_favorites", "projectAnalytics")}
+      />
+    </Grid>
+  ));

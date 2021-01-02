@@ -64,6 +64,14 @@ export default class Activity extends Component {
               {stats.totalUserCount}
             </span>
           </li>
+          <li className="backend-activity-stats__list-item">
+            <span className="backend-activity-stats__list-text">
+              Reading Groups
+            </span>
+            <span className="backend-activity-stats__list-text--highlighted">
+              {stats.totalReadingGroupCount}
+            </span>
+          </li>
         </ul>
       </div>
     );

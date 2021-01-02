@@ -120,6 +120,13 @@ class Navigation {
             route: "backendSettingsEmail"
           }
         ]
+      },
+      {
+        label: "Analytics",
+        route: "backendAnalytics",
+        entity: "statistics",
+        ability: "read",
+        children: []
       }
     ];
   });
@@ -242,6 +249,13 @@ class Navigation {
         route: "backendProjectLog",
         entity: project,
         ability: "readLog",
+        args
+      },
+      {
+        label: "Analytics",
+        route: "backendProjectAnalytics",
+        entity: project,
+        ability: "update",
         args
       }
     ];
@@ -376,6 +390,13 @@ class Navigation {
   static text = memoize(text => {
     const args = [text.id];
     return [
+      {
+        label: "Analytics",
+        route: "backendTextAnalytics",
+        entity: text,
+        ability: "update",
+        args
+      },
       {
         label: "General",
         route: "backendTextGeneral",

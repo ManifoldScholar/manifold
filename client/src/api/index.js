@@ -1,4 +1,5 @@
-export analyticsAPI from "./resources/analytics";
+export analyticEventsAPI from "./resources/analyticEvents";
+export analyticReportsAPI from "./resources/analyticReports";
 export annotationsAPI from "./resources/annotations";
 export resourceCollectionsAPI from "./resources/resourceCollections";
 export favoriteProjectsAPI from "./resources/favoriteProjects";

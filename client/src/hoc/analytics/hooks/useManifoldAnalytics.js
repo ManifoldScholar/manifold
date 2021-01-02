@@ -5,7 +5,7 @@ import config from "config";
 import ch from "helpers/consoleHelpers";
 import uuid from "uuid";
 import { entityStoreActions } from "actions";
-import { analyticsAPI, requests } from "api";
+import { analyticEventsAPI, requests } from "api";
 
 const { request } = entityStoreActions;
 const cookie = new CookieHelper();
@@ -64,7 +64,7 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
         recordId: resourceId
       }
     };
-    const call = analyticsAPI.create(visitorToken, visitToken, payload);
+    const call = analyticEventsAPI.create(visitorToken, visitToken, payload);
     const trackRequest = request(call, requests.analyticsEventCreate);
     dispatch(trackRequest);
   };
