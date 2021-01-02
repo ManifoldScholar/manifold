@@ -8,8 +8,8 @@
     @include respond($break60) {
       display: grid;
       grid-template:
-        "label label" auto
-        "input actions" auto / 1fr auto;
+        'label label' auto
+        'input actions' auto / 1fr auto;
     }
 
     label {
@@ -101,9 +101,9 @@
     }
   }
 
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
+  input[type='text'],
+  input[type='email'],
+  input[type='password'] {
     @include formInputPrimary;
     width: 100%;
     // Explicit height so that elements can line up
@@ -357,7 +357,7 @@
   &.radio {
     line-height: 1.25em;
 
-    input[type="radio"] {
+    input[type='radio'] {
       &:focus-visible ~ .toggle-label {
         @include defaultFocusStyle;
         outline-color: $defaultFocusColor;
@@ -395,7 +395,7 @@
         width: 0.625em;
         height: 0.625em;
         vertical-align: top;
-        content: "";
+        content: '';
         background-color: $neutralOffBlack;
         border-radius: 100%;
         opacity: 0;
@@ -568,9 +568,9 @@
     &__day {
       height: 1.7rem;
       line-height: 1.45rem;
+      line-height: 1.45rem;
       color: inherit;
       border: 1px solid transparent;
-      line-height: 1.45rem;
       border-radius: 50%;
       transition: color $duration $timing, border-color $duration $timing,
         background-color $duration $timing;
@@ -732,7 +732,7 @@
           z-index: 10; // Local z-index
           width: 0;
           height: 0;
-          content: "";
+          content: '';
           border-color: transparent transparent transparent $neutral40;
           border-style: solid;
           border-width: 1.2em 0 1.2em 1em;
@@ -763,7 +763,7 @@
         width: calc(100% + 4px);
         height: calc(100% + 4px);
         pointer-events: none;
-        content: "";
+        content: '';
         background: transparent;
         border: 2px solid $neutralUIExtraDark;
       }
@@ -900,7 +900,7 @@
     left: 0;
     width: 0;
     height: 0;
-    content: "";
+    content: '';
     border-color: $neutral05 transparent transparent transparent;
     border-style: solid;
     border-width: 1.2em 0 1.2em 1em;
@@ -913,7 +913,7 @@
     left: 0;
     width: 0;
     height: 0;
-    content: "";
+    content: '';
     border-color: transparent transparent $neutral05 transparent;
     border-style: solid;
     border-width: 1.2em 0 1.2em 1em;

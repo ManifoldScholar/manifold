@@ -14,7 +14,7 @@ function ProjectRow({ projectId, projectTitle, viewCount }) {
           <span dangerouslySetInnerHTML={{ __html: projectTitle }} />
         </Link>
       </td>
-      <td>{`${viewCount}`}</td>
+      <td>{`${viewCount.toLocaleString()}`}</td>
     </tr>
   );
 }

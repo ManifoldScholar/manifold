@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
-function TextNodeRow({ id, depth, textSlug, anchor, label }) {
-  const value = Math.floor(Math.random() * 100);
+function TextNodeRow({ id, depth, textSlug, anchor, label, count }) {
   return (
     <tr className="analytics-table__row">
       <td>
@@ -15,7 +14,7 @@ function TextNodeRow({ id, depth, textSlug, anchor, label }) {
           {label}
         </Link>
       </td>
-      <td>{`${value}`}</td>
+      <td>{`${count.toLocaleString()}`}</td>
     </tr>
   );
 }
@@ -23,6 +22,7 @@ function TextNodeRow({ id, depth, textSlug, anchor, label }) {
 TextNodeRow.propTypes = {
   id: PropTypes.string.isRequired,
   depth: PropTypes.number,
+  count: PropTypes.number.isRequired,
   textSlug: PropTypes.string.isRequired,
   anchor: PropTypes.string,
   label: PropTypes.string.isRequired

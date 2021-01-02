@@ -156,7 +156,6 @@ export default class DetailHeader extends PureComponent {
         title={this.title}
         subtitle={this.subtitle}
         post={this.secondaryLinks && this.sectionNav()}
-        smallTitle
         padded={!this.isProjectCollection}
         allowTitleHTML
         iconSize={this.isProjectCollection ? 44 : null}

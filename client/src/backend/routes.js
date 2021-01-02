@@ -171,6 +171,13 @@ const routes = {
               helper: (t, ss) => `/backend/projects/text/${t}/styles/${ss}`
             },
             {
+              name: "backendTextAnalytics",
+              exact: true,
+              component: "TextAnalytics",
+              path: "/backend/projects/text/:id/analytics",
+              helper: t => `/backend/projects/text/${t}/analytics`
+            },
+            {
               name: "backendTextMetadata",
               exact: true,
               component: "TextMetadata",
@@ -490,6 +497,13 @@ const routes = {
               helper: p => `/backend/projects/${p}/log`
             },
             {
+              name: "backendProjectAnalytics",
+              exact: true,
+              component: "ProjectAnalytics",
+              path: "/backend/projects/:id/analytics",
+              helper: p => `/backend/projects/${p}/analytics`
+            },
+            {
               name: "backendProjectGeneral",
               exact: true,
               component: "ProjectGeneral",
@@ -644,6 +658,14 @@ const routes = {
           helper: () => `/backend/records/features`
         }
       ]
+    },
+    {
+      name: "backendAnalytics",
+      exact: false,
+      component: "AnalyticsWrapper",
+      path: "/backend/analytics",
+      helper: () => "/backend/analytics",
+      routes: []
     },
     {
       name: "backendSettings",

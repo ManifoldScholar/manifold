@@ -7,7 +7,7 @@ function FigureList({ figures }) {
     <ul className="analytics-block__figure-list">
       {/* eslint-disable react/no-array-index-key */}
       {figures.map((figure, index) => (
-        <li className="analytics-block__figure-list-item">
+        <li key={index} className="analytics-block__figure-list-item">
           <Figure key={index} {...figure} />
         </li>
       ))}
@@ -19,7 +19,8 @@ function FigureList({ figures }) {
 FigureList.propTypes = {
   figures: PropTypes.arrayOf(
     PropTypes.shape({
-      stat: PropTypes.string.isRequired,
+      stat: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+        .isRequired,
       caption: PropTypes.string.isRequired
     })
   )

@@ -1,4 +1,7 @@
 .analytics-chart {
+  font-size: 12px;
+  font-weight: $semibold;
+
   &__label {
     @include utilityPrimary;
     font-size: 12px;
@@ -28,19 +31,5 @@
     margin-top: 6px;
     font-size: 17px;
     color: $analyticsHighlightColor;
-  }
-}
-
-// ApexCharts library overrides
-.apexcharts-tooltip {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.apexcharts-gridlines-horizontal {
-  .apexcharts-gridline:last-child {
-    // hide grid line that overlaps with x-axis
-    display: none;
   }
 }

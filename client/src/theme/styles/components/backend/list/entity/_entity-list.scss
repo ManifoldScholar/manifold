@@ -140,7 +140,7 @@
     }
 
     &--sortable {
-      @include dropzone(9px, ".show-dropzone");
+      @include dropzone(9px, '.show-dropzone');
       padding-top: 9px;
       padding-bottom: 9px;
       margin-top: -9px;

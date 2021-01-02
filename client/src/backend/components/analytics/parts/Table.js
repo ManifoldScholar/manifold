@@ -22,7 +22,6 @@ function Table({
   const RowComponent = rowComponent || Row;
   const defaultActiveState = useSorting ? sortOptions[0] : [];
   const [activeSortParam, setActiveSortParam] = useState(defaultActiveState);
-  const [sortedRows, setSortedRows] = useState(rows); // eslint-disable-line no-unused-vars
 
   function handleSortChange(value) {
     const selectedSort = sortOptions.find(option => option.value === value);
@@ -38,7 +37,7 @@ function Table({
           onChange={handleSortChange}
         />
       )}
-      <table className="analytics-table">
+      <table id="pagination-target" className="analytics-table">
         <thead className="analytics-table__header">
           <tr>
             {/* eslint-disable react/no-array-index-key */}
@@ -53,7 +52,7 @@ function Table({
         <tbody>
           {!hasRows && <EmptyRow message={emptyMessage} />}
           {hasRows &&
-            sortedRows.map(row => (
+            rows.map(row => (
               <RowComponent key={RowComponent.generateId(row)} {...row} />
             ))}
         </tbody>

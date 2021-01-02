@@ -34,12 +34,10 @@ export default class ViewHeader extends PureComponent {
     className: PropTypes.string,
     spaceBottom: PropTypes.bool,
     leftPadded: PropTypes.bool,
-    narrow: PropTypes.bool,
     iconAccented: PropTypes.bool,
     iconAltAccented: PropTypes.bool,
     iconRounded: PropTypes.bool,
     iconSize: PropTypes.number,
-    smallTitle: PropTypes.bool,
     icon: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
@@ -49,23 +47,11 @@ export default class ViewHeader extends PureComponent {
   };
 
   static defaultProps = {
-    spaceBottom: false,
-    narrow: false,
-    smallTitle: false
+    spaceBottom: false
   };
 
   get renderedTitle() {
-    const {
-      children,
-      count,
-      title,
-      subtitle,
-      allowTitleHTML,
-      smallTitle
-    } = this.props;
-    const titleClasses = classNames("backend-header__title", {
-      "backend-header__title--large": !smallTitle
-    });
+    const { children, count, title, subtitle, allowTitleHTML } = this.props;
     if (!isString(children) && !isEmpty(children)) return children;
 
     const titleValue = title || children;
@@ -76,7 +62,7 @@ export default class ViewHeader extends PureComponent {
     );
 
     return (
-      <h1 className={titleClasses}>
+      <h1 className="backend-header__title">
         {count && <em className="backend-header__emphasis">{count} </em>}
         {renderTitle}
         {subtitle && (
@@ -89,7 +75,6 @@ export default class ViewHeader extends PureComponent {
   render() {
     const {
       spaceBottom,
-      narrow,
       icon,
       iconRounded,
       iconAccented,
@@ -110,7 +95,6 @@ export default class ViewHeader extends PureComponent {
     });
 
     const innerClasses = classNames("backend-header__inner", {
-      "backend-header__inner--narrow": narrow,
       "backend-header__inner--padded": padded
     });
 

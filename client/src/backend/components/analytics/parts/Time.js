@@ -1,34 +1,48 @@
 import React from "react";
 import PropTypes from "prop-types";
-import intervalToDuration from "date-fns/intervalToDuration";
 
 function Time({ time }) {
-  const interval = {
-    start: new Date("October 26, 2020 00:00:00"),
-    end: new Date(`October 26, 2020 ${time}`)
+  const localeParams = {
+    minimumIntegerDigits: 2,
+    useGrouping: false
   };
-  const { minutes, seconds } = intervalToDuration(interval);
+  const hours = Math.floor(time / 60 / 60).toLocaleString(
+    "en-US",
+    localeParams
+  );
+  const minutes = Math.floor((time - hours * 60 * 60) / 60).toLocaleString(
+    "en-US",
+    localeParams
+  );
+  const seconds = Math.floor(
+    time - hours * 60 * 60 - minutes * 60
+  ).toLocaleString("en-US", localeParams);
+
+  const values =
+    hours > 0
+      ? [hours, minutes, "hour", "min", "hours", "minutes"]
+      : [minutes, seconds, "min", "sec", "minutes", "seconds"];
 
   return (
     <figure>
       <div aria-hidden className="analytics-time-block">
-        <span className="analytics-time-block__value analytics-time-block__value--minute">{`${minutes}`}</span>
+        <span className="analytics-time-block__value analytics-time-block__value--minute">{`${values[0]}`}</span>
         <span className="analytics-time-block__divider">:</span>
-        <span className="analytics-time-block__value analytics-time-block__value--second">{`${seconds}`}</span>
+        <span className="analytics-time-block__value analytics-time-block__value--second">{`${values[1]}`}</span>
         <span className="analytics-time-block__label analytics-time-block__label--minute">
-          min
+          {values[2]}
         </span>
         <span className="analytics-time-block__label analytics-time-block__label--second">
-          sec
+          {values[3]}
         </span>
       </div>
-      <span className="screen-reader-text">{`${minutes} minutes ${seconds} seconds`}</span>
+      <span className="screen-reader-text">{`${values[0]} ${values[4]} ${values[1]} ${values[5]}`}</span>
     </figure>
   );
 }
 
 Time.propTypes = {
-  time: PropTypes.string.isRequired
+  time: PropTypes.number.isRequired
 };
 
 Time.displayName = "Analytics.Block.Time";

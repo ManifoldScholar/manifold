@@ -36,34 +36,54 @@ Array [
                   class="entity-list"
                   id="entities-list-1"
                 >
-                  <h2
-                    aria-atomic="true"
-                    aria-live="polite"
-                    class="entity-list__title-block entity-list__title"
-                    role="status"
+                  <header
+                    class="backend-header entity-list__title-block"
                   >
-                    <a
-                      href="/backend/projects"
+                    <div
+                      class="backend-header__inner"
                     >
-                      <figure
-                        class="entity-list__title-icon"
+                      <div
+                        class="backend-header__content-flex-wrapper"
                       >
-                        <svg
-                          aria-hidden="true"
-                          class="manicon-svg svg-icon--BEProject64"
-                          fill="currentColor"
-                          viewBox="0 0 64 64"
-                          xmlns="http://www.w3.org/2000/svg"
+                        <figure
+                          class="backend-header__figure-block"
                         >
-                          <path
-                            d="M9.103,24.948 L32.045,34.722 L54.984,24.948 L32.045,15.174 L9.103,24.948 Z M32.045,36.896 L4,24.948 L32.045,13 L60.086,24.948 L32.045,36.896 Z M60.009,32.175 L60.009,30 L32.01,41.94 L4,30.021 L4,32.194 L32.011,44.113 L60.009,32.175 Z M60.009,39.175 L60.009,37 L32.01,48.94 L4,37.02 L4,39.194 L32.011,51.113 L60.009,39.175 Z"
-                            fill-rule="evenodd"
-                          />
-                        </svg>
-                      </figure>
-                      2 Projects
-                    </a>
-                  </h2>
+                          <div
+                            class="backend-header__figure backend-header__figure--accented"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="manicon-svg svg-icon--BEProject64"
+                              fill="currentColor"
+                              height="34"
+                              viewBox="0 0 64 64"
+                              width="34"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M9.103,24.948 L32.045,34.722 L54.984,24.948 L32.045,15.174 L9.103,24.948 Z M32.045,36.896 L4,24.948 L32.045,13 L60.086,24.948 L32.045,36.896 Z M60.009,32.175 L60.009,30 L32.01,41.94 L4,30.021 L4,32.194 L32.011,44.113 L60.009,32.175 Z M60.009,39.175 L60.009,37 L32.01,48.94 L4,37.02 L4,39.194 L32.011,51.113 L60.009,39.175 Z"
+                                fill-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                        </figure>
+                        <div
+                          class="backend-header__title-block"
+                        >
+                          <h1
+                            class="backend-header__title"
+                          >
+                            <em
+                              class="backend-header__emphasis"
+                            >
+                              2 
+                            </em>
+                            Projects
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
+                  </header>
                   <div
                     class="entity-list__contents-wrapper"
                   >
@@ -134,6 +154,32 @@ Array [
                       <div
                         class="entity-list__button-set"
                       />
+                      <div
+                        class="entity-list__count"
+                      >
+                        <p
+                          aria-hidden="true"
+                          class="list-total"
+                        >
+                          Showing 
+                          <span>
+                            1-1
+                          </span>
+                           of 
+                          <span>
+                            2
+                          </span>
+                           projects: 
+                        </p>
+                        <div
+                          aria-atomic="true"
+                          aria-live="polite"
+                          class="screen-reader-text"
+                          role="status"
+                        >
+                          2 projects. Showing results 1 through 1.
+                        </div>
+                      </div>
                     </div>
                     <ul
                       aria-describedby="entities-list-instructions-1"
@@ -388,137 +434,7 @@ Array [
           </div>
           <div
             class="right"
-          >
-            <div
-              class="dashboard-panel"
-            >
-              <div
-                class="panel"
-              >
-                <div
-                  class="entity-list"
-                  id="entities-list-1"
-                >
-                  <h2
-                    class="entity-list__title-block entity-list__title"
-                  >
-                    <figure
-                      class="entity-list__title-icon"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="manicon-svg svg-icon--BEProject64"
-                        fill="currentColor"
-                        viewBox="0 0 64 64"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M9.103,24.948 L32.045,34.722 L54.984,24.948 L32.045,15.174 L9.103,24.948 Z M32.045,36.896 L4,24.948 L32.045,13 L60.086,24.948 L32.045,36.896 Z M60.009,32.175 L60.009,30 L32.01,41.94 L4,30.021 L4,32.194 L32.011,44.113 L60.009,32.175 Z M60.009,39.175 L60.009,37 L32.01,48.94 L4,37.02 L4,39.194 L32.011,51.113 L60.009,39.175 Z"
-                          fill-rule="evenodd"
-                        />
-                      </svg>
-                    </figure>
-                    Recently Updated
-                  </h2>
-                  <div
-                    class="entity-list__contents-wrapper"
-                  >
-                    <ul
-                      aria-describedby="entities-list-instructions-1"
-                      class="entity-list__list entity-list__list--rows"
-                    >
-                      <li
-                        class="entity-row entity-list__entity"
-                      >
-                        <a
-                          aria-describedby="1-describedby"
-                          class="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag"
-                          href="/backend/projects/2"
-                        >
-                          <div
-                            class="entity-row__inner entity-row__inner--in-rows entity-row__inner--with-row-link"
-                          >
-                            <div
-                              class="entity-row__text entity-row__text--in-rows"
-                            >
-                              <h3
-                                class="entity-row__title entity-row__title--in-rows"
-                              >
-                                <span
-                                  class="entity-row__title-inner"
-                                >
-                                  <span>
-                                    Rowan Test
-                                  </span>
-                                </span>
-                                <span
-                                  class="aria-describedby"
-                                  id="1-describedby"
-                                >
-                                  View Rowan Test
-                                </span>
-                              </h3>
-                              <h4
-                                class="entity-row__subtitle entity-row__subtitle--in-rows"
-                              >
-                                <span />
-                              </h4>
-                              <div
-                                class="entity-row__meta entity-row__meta--in-rows"
-                              />
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li
-                        class="entity-row entity-list__entity"
-                      >
-                        <a
-                          aria-describedby="1-describedby"
-                          class="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag"
-                          href="/backend/projects/3"
-                        >
-                          <div
-                            class="entity-row__inner entity-row__inner--in-rows entity-row__inner--with-row-link"
-                          >
-                            <div
-                              class="entity-row__text entity-row__text--in-rows"
-                            >
-                              <h3
-                                class="entity-row__title entity-row__title--in-rows"
-                              >
-                                <span
-                                  class="entity-row__title-inner"
-                                >
-                                  <span>
-                                    Rowan Test
-                                  </span>
-                                </span>
-                                <span
-                                  class="aria-describedby"
-                                  id="1-describedby"
-                                >
-                                  View Rowan Test
-                                </span>
-                              </h3>
-                              <h4
-                                class="entity-row__subtitle entity-row__subtitle--in-rows"
-                              >
-                                <span />
-                              </h4>
-                              <div
-                                class="entity-row__meta entity-row__meta--in-rows"
-                              />
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          />
         </section>
       </div>
     </section>

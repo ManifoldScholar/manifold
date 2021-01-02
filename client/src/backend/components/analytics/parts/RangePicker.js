@@ -63,13 +63,13 @@ function humanReadableDate(date) {
 
 function RangePicker({
   onNewRangeSelected,
-  defaultStart,
-  defaultEnd,
+  initialStart,
+  initialEnd,
   className,
   setScreenReaderStatus
 }) {
-  const [startDate, setStartDate] = useState(defaultStart);
-  const [endDate, setEndDate] = useState(defaultEnd);
+  const [startDate, setStartDate] = useState(initialStart);
+  const [endDate, setEndDate] = useState(initialEnd);
 
   useEffect(() => {
     if (!startDate || !endDate) return;
@@ -132,7 +132,7 @@ function RangePicker({
               inputId={`range-picker-${id}-end-date`}
               value={endDate}
               onChange={validateAndSetEnd}
-              label="Start Date"
+              label="End Date"
             />
           </div>
           <div className="range-picker__section">
@@ -163,8 +163,8 @@ RangePicker.displayName = "Analytics.RangePicker";
 
 RangePicker.propTypes = {
   onNewRangeSelected: PropTypes.func.isRequired,
-  defaultStart: PropTypes.instanceOf(Date).isRequired,
-  defaultEnd: PropTypes.instanceOf(Date).isRequired,
+  initialStart: PropTypes.instanceOf(Date).isRequired,
+  initialEnd: PropTypes.instanceOf(Date).isRequired,
   className: PropTypes.string
 };
 

@@ -6,7 +6,7 @@ import DashboardComponents from "backend/components/dashboard";
 import Layout from "backend/components/layout";
 import { select, meta } from "utils/entityUtils";
 import isEqual from "lodash/isEqual";
-import { projectsAPI, statisticsAPI, requests } from "api";
+import { projectsAPI, requests } from "api";
 import Authorization from "helpers/authorization";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
@@ -14,6 +14,7 @@ import EntitiesList, {
   Search,
   ProjectRow
 } from "backend/components/list/EntitiesList";
+import withAnalyticsReport from "hoc/analytics/with-analytics-report";
 import withFilteredLists, { projectFilters } from "hoc/with-filtered-lists";
 import Authorize from "hoc/authorize";
 
@@ -24,7 +25,6 @@ const perPage = 10;
 class DashboardsAdminContainerImplementation extends PureComponent {
   static mapStateToProps = state => {
     return {
-      statistics: select(requests.beStats, state.entityStore),
       projects: select(requests.beProjects, state.entityStore),
       projectsMeta: meta(requests.beProjects, state.entityStore),
       recentProjects: select(requests.beRecentProjects, state.entityStore),
@@ -34,13 +34,19 @@ class DashboardsAdminContainerImplementation extends PureComponent {
 
   static propTypes = {
     projects: PropTypes.array,
-    statistics: PropTypes.object,
     dispatch: PropTypes.func,
     projectsMeta: PropTypes.object,
     recentProjects: PropTypes.array,
     authentication: PropTypes.object,
     entitiesListSearchProps: PropTypes.func.isRequired,
-    entitiesListSearchParams: PropTypes.object.isRequired
+    entitiesListSearchParams: PropTypes.object.isRequired,
+    statistics: PropTypes.object,
+    analytics: PropTypes.object,
+    fetchStats: PropTypes.func.isRequired,
+    fetchAnalytics: PropTypes.func.isRequired,
+    updateAnalyticsRange: PropTypes.func.isRequired,
+    analyticsStartDate: PropTypes.instanceOf(Date),
+    analyticsEndDate: PropTypes.instanceOf(Date)
   };
 
   constructor(props) {
@@ -53,7 +59,10 @@ class DashboardsAdminContainerImplementation extends PureComponent {
     const page = pagination ? pagination.number : 1;
     this.fetchProjects(page);
     this.fetchRecentProjects();
-    this.fetchStats();
+    if (this.canReadStats) {
+      this.props.fetchStats();
+      this.props.fetchAnalytics("global");
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -83,16 +92,12 @@ class DashboardsAdminContainerImplementation extends PureComponent {
     this.props.dispatch(recentProjectsRequest);
   }
 
-  fetchStats() {
-    const readStats = this.authorization.authorizeAbility({
+  get canReadStats() {
+    return this.authorization.authorizeAbility({
       authentication: this.props.authentication,
       entity: "statistics",
       ability: "read"
     });
-    if (readStats) {
-      const statsRequest = request(statisticsAPI.show(), requests.beStats);
-      this.props.dispatch(statsRequest);
-    }
   }
 
   filtersChanged(prevProps) {
@@ -140,65 +145,66 @@ class DashboardsAdminContainerImplementation extends PureComponent {
             <section className="backend-dashboard">
               <div className="left">
                 {this.props.projects && this.props.projectsMeta && (
-                  <Layout.DashboardPanel>
-                    <EntitiesList
-                      entities={this.props.projects}
-                      entityComponent={ProjectRow}
-                      entityComponentProps={{
-                        placeholderMode: "small"
-                      }}
-                      title="Projects"
-                      titleLink={lh.link("backendProjects")}
-                      titleIcon="BEProject64"
-                      showCountInTitle
-                      unit="project"
-                      pagination={this.props.projectsMeta.pagination}
-                      callbacks={{
-                        onPageClick: this.updateHandlerCreator
-                      }}
-                      emptyMessage={this.noProjects()}
-                      search={
-                        <Search
-                          searchStyle="vertical"
-                          {...this.props.entitiesListSearchProps("projects")}
-                        />
-                      }
-                      buttons={[
-                        <Button
-                          path={lh.link("backendProjectsNew")}
-                          text="Add a new project"
-                          authorizedFor="project"
-                          authorizedTo="create"
-                          type="add"
-                        />
-                      ]}
-                    />
-                  </Layout.DashboardPanel>
+                  <div className="dashboard-panel">
+                    <div className="panel">
+                      <EntitiesList
+                        entities={this.props.projects}
+                        entityComponent={ProjectRow}
+                        entityComponentProps={{
+                          placeholderMode: "small"
+                        }}
+                        title="Projects"
+                        titleLink={lh.link("backendProjects")}
+                        titleIcon="BEProject64"
+                        titleStyle="bar"
+                        showCount
+                        showCountInTitle
+                        unit="project"
+                        pagination={this.props.projectsMeta.pagination}
+                        callbacks={{
+                          onPageClick: this.updateHandlerCreator
+                        }}
+                        emptyMessage={this.noProjects()}
+                        search={
+                          <Search
+                            searchStyle="vertical"
+                            {...this.props.entitiesListSearchProps("projects")}
+                          />
+                        }
+                        buttons={[
+                          <Button
+                            path={lh.link("backendProjectsNew")}
+                            text="Add a new project"
+                            authorizedFor="project"
+                            authorizedTo="create"
+                            type="add"
+                          />
+                        ]}
+                      />
+                    </div>
+                  </div>
                 )}
               </div>
               <div className="right">
-                {this.props.recentProjects && (
-                  <Layout.DashboardPanel>
-                    <EntitiesList
-                      entities={this.props.recentProjects}
-                      entityComponent={ProjectRow}
-                      entityComponentProps={{ compact: true }}
-                      title="Recently Updated"
-                      titleIcon="BEProject64"
-                    />
-                  </Layout.DashboardPanel>
-                )}
                 <Authorize entity="statistics" ability={"read"}>
-                  <Layout.DashboardPanel icon={"BEActivity64"} title="Activity">
-                    <DashboardComponents.Activity
-                      statistics={this.props.statistics}
-                    />
-                  </Layout.DashboardPanel>
-                  <Layout.DashboardPanel icon={"lamp64"} title="Statistics">
-                    <DashboardComponents.Counts
-                      statistics={this.props.statistics}
-                    />
-                  </Layout.DashboardPanel>
+                  <Layout.ViewHeader
+                    spaceBottom
+                    icon="BEAnalytics64"
+                    iconAltAccented
+                    link={{
+                      path: lh.link("backendAnalytics"),
+                      label: "see all"
+                    }}
+                  >
+                    Analytics
+                  </Layout.ViewHeader>
+                  <DashboardComponents.Analytics
+                    analytics={this.props.analytics}
+                    statistics={this.props.statistics}
+                    onNewRangeSelected={this.props.updateAnalyticsRange}
+                    defaultStart={this.props.analyticsStartDate}
+                    defaultEnd={this.props.analyticsStartDate}
+                  />
                 </Authorize>
               </div>
             </section>
@@ -208,11 +214,10 @@ class DashboardsAdminContainerImplementation extends PureComponent {
     );
   }
 }
-export const DashboardsAdminContainer = withFilteredLists(
-  DashboardsAdminContainerImplementation,
-  {
+export const DashboardsAdminContainer = withAnalyticsReport(
+  withFilteredLists(DashboardsAdminContainerImplementation, {
     projects: projectFilters({ snapshotState: true })
-  }
+  })
 );
 
 export default connectAndFetch(DashboardsAdminContainer);

@@ -21,6 +21,7 @@ import ArrowUp32 from "./32/ArrowUp";
 import Avatar24 from "./24/Avatar";
 import Avatar64 from "./64/Avatar";
 import BEActivity64 from "./64/BEActivity";
+import BEAnalytics64 from "./64/BEAnalytics";
 import BECollectionManual64 from "./64/BECollectionManual";
 import BECollectionSmart64 from "./64/BECollectionSmart";
 import BELibrary64 from "./64/BELibrary";
@@ -69,6 +70,7 @@ import Grabber32 from "./32/Grabber";
 import GrabberInactive32 from "./32/GrabberInactive";
 import Info16 from "./16/Info";
 import InteractAnnotate32 from "./32/InteractAnnotate";
+import InteractHighlight32 from "./32/InteractHighlight";
 import InteractComment32 from "./32/InteractComment";
 import Key32 from "./32/Key";
 import Lamp64 from "./64/Lamp";
@@ -118,6 +120,7 @@ import Search24 from "./24/Search";
 import Search32 from "./32/Search";
 import Settings32 from "./32/Settings";
 import Share24 from "./24/Share";
+import Share32 from "./32/Share";
 import SocialCite32 from "./32/SocialCite";
 import SocialEmail32 from "./32/SocialEmail";
 import SocialFacebook32 from "./32/SocialFacebook";
@@ -129,6 +132,8 @@ import SocialSlack32 from "./32/SocialSlack";
 import SocialTwitter32 from "./32/SocialTwitter";
 import Speaker24 from "./24/Speaker";
 import SpeakerMuted24 from "./24/SpeakerMuted";
+import StarSquircle32 from "./32/StarSquircle";
+import StarSquircleFilled32 from "./32/StarSquircleFilled";
 import StopSign64 from "./64/StopSign";
 import Text24 from "./24/Text";
 import TextsBook64 from "./64/TextsBook";
@@ -168,6 +173,7 @@ export default {
   Avatar24,
   Avatar64,
   BEActivity64,
+  BEAnalytics64,
   BECollectionManual64,
   BECollectionSmart64,
   BELibrary64,
@@ -216,6 +222,7 @@ export default {
   GrabberInactive32,
   Info16,
   InteractAnnotate32,
+  InteractHighlight32,
   InteractComment32,
   Key32,
   Lamp64,
@@ -265,6 +272,7 @@ export default {
   Search32,
   Settings32,
   Share24,
+  Share32,
   SocialCite32,
   SocialEmail32,
   SocialFacebook32,
@@ -276,6 +284,8 @@ export default {
   SocialTwitter32,
   Speaker24,
   SpeakerMuted24,
+  StarSquircle32,
+  StarSquircleFilled32,
   StopSign64,
   Text24,
   TextsBook64,

@@ -3,44 +3,85 @@ import PropTypes from "prop-types";
 import Loadable from "react-loadable";
 import cloneDeep from "lodash/cloneDeep";
 import merge from "lodash/merge";
-import defaultOptions from "./chartDefaultOptions";
+import isDate from "date-fns/isDate";
+import chartOptions from "./chartOptions";
+import { zonedTimeToUtc } from "date-fns-tz";
+
+function stringToDate(dateStr) {
+  // TODO: Remove hardcoded time zone once it's removed from the API.
+  return isDate(dateStr)
+    ? dateStr
+    : zonedTimeToUtc(dateStr, "America/Los_Angeles");
+}
+
+function shapeData({ x, y }) {
+  return {
+    x: stringToDate(x),
+    y
+  };
+}
 
 /* eslint-disable react/prop-types */
 const LoadableChart = Loadable({
-  loader: () =>
-    import(/* webpackChunkName: "apex-charts" */ "./ApexChart").then(
-      ApexChart => ApexChart.default
-    ),
+  loader: () => import(/* webpackChunkName: "recharts" */ "./Recharts"),
   loading: () => null,
-  render(LineGraph, props) {
-    return <LineGraph {...props} />;
+  render(loaded, props) {
+    const {
+      LineChart,
+      Line,
+      XAxis,
+      CartesianGrid,
+      Tooltip,
+      ResponsiveContainer
+    } = loaded;
+    const {
+      data,
+      chartProps,
+      gridProps,
+      xAxisProps,
+      tooltipProps,
+      lineProps
+    } = props;
+
+    return (
+      <ResponsiveContainer>
+        <LineChart data={data} {...chartProps}>
+          <CartesianGrid {...gridProps} />
+          <XAxis dataKey="x" {...xAxisProps} />
+          <Tooltip {...tooltipProps} />
+          <Line dataKey="y" {...lineProps} />
+        </LineChart>
+      </ResponsiveContainer>
+    );
   }
 });
 /* eslint-enable react/prop-types */
 
-function Chart({ options, data, dataLabel, type = "line", height = 175 }) {
-  const series = [
-    {
-      name: dataLabel,
-      data: data.map(point => point.y)
-    }
-  ];
-  const withLabels = {
-    labels: data.map(point => new Date(point.x).getTime())
-  };
+function Chart({ options, data, tooltipLabel, height = 170 }) {
+  const shapedData = data.map(point => shapeData(point));
+  const start = shapedData[0]?.x.getTime() || "auto";
+  const end = shapedData[shapedData.length - 1]?.x.getTime() || "auto";
+  const xAxisDomain = [start, end];
   const mergedOptions = merge(
     {},
-    cloneDeep(defaultOptions),
+    cloneDeep(chartOptions({ tooltipLabel })),
     options,
-    withLabels
+    {
+      xAxisProps: {
+        domain: xAxisDomain
+      }
+    }
   );
+
   const chartProps = {
-    series,
-    options: mergedOptions,
-    type,
-    height
+    ...mergedOptions,
+    data: shapedData
   };
-  return <LoadableChart {...chartProps} />;
+  return (
+    <div className="analytics-chart" style={{ width: "100%", height }}>
+      <LoadableChart {...chartProps} />
+    </div>
+  );
 }
 
 Chart.propTypes = {
@@ -50,7 +91,6 @@ Chart.propTypes = {
       y: PropTypes.number
     })
   ).isRequired,
-  dataLabel: PropTypes.string.isRequired,
   options: PropTypes.object,
   type: PropTypes.string,
   height: PropTypes.number

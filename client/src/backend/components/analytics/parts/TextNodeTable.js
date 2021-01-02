@@ -41,7 +41,11 @@ function TextNodeTable({
       <tbody>
         {!hasRows && <EmptyRow message={emptyMessage} />}
         {flattenedRows.map(row => (
-          <TextNodeRow key={row.id} textSlug={slug} {...row} />
+          <TextNodeRow
+            key={`${row.id}#${row.anchor}`}
+            textSlug={slug}
+            {...row}
+          />
         ))}
       </tbody>
     </table>

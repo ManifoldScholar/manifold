@@ -113,9 +113,9 @@ body {
   --default-notice-color: #{$spNoticeLight};
   color: $neutralTextLight;
 
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
   select {
     color: $neutralTextExtraLight;
   }
@@ -131,7 +131,7 @@ body {
   color: $defaultHoverColor;
 }
 
-@mixin defaultFocusState($property: "outline", $value: "solid 2px") {
+@mixin defaultFocusState($property: 'outline', $value: 'solid 2px') {
   &:focus:not(:focus-visible) {
     outline: 0;
   }
@@ -141,7 +141,7 @@ body {
   }
 }
 
-@mixin defaultHoverState($property: "color", $value: $defaultHoverColor) {
+@mixin defaultHoverState($property: 'color', $value: $defaultHoverColor) {
   transition: #{$property} $duration $timing;
 
   &:hover {
@@ -150,11 +150,11 @@ body {
 }
 
 @mixin outlineOnFocusVisible($color: $defaultFocusColor) {
-  @include defaultFocusState("outline", "solid 2px #{$color}");
+  @include defaultFocusState('outline', 'solid 2px #{$color}');
 }
 
 @mixin fillOnFocusVisible($color: $accentPrimary) {
-  @include defaultFocusState("background-color", $color);
+  @include defaultFocusState('background-color', $color);
 
   &:focus-visible {
     outline: 0;
@@ -162,7 +162,7 @@ body {
 }
 
 @mixin fillOnHover($color: $defaultHoverColor) {
-  @include defaultHoverState("background-color", $color);
+  @include defaultHoverState('background-color', $color);
 }
 
 // Utility
@@ -670,7 +670,7 @@ body {
 }
 
 // Drag and Drop styles
-@mixin dropzone($margin: 9px, $active-selector: "--show-dropzone") {
+@mixin dropzone($margin: 9px, $active-selector: '--show-dropzone') {
   @include panelRoundedDark;
   display: block;
   padding: 0 $margin;
