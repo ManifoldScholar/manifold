@@ -44,20 +44,33 @@ class ApplicationController < ActionController::API
   end
 
   def page_size
-    params.dig(:page, :size) || 20
+    provided = params.dig(:page, :size).to_i.nonzero? || default_per_page
+
+    provided.clamp(min_per_page, max_per_page)
+  end
+
+  def default_per_page
+    20
+  end
+
+  def min_per_page
+    5
+  end
+
+  def max_per_page
+    100
   end
 
   def page_number
-    params.dig(:page, :number) || 1
+    params.dig(:page, :number).to_i.clamp(1, Float::INFINITY)
   end
 
-  def with_pagination!(filter_params = {})
+  def with_pagination!(filter_params = {}, enforced: false)
     filter_params = {} if filter_params.nil?
-    return filter_params if params.dig(:no_pagination)
 
-    filter_params[:page] = page_number
-    filter_params[:per_page] = page_size
-    filter_params
+    return filter_params if !enforced && params.dig(:no_pagination)
+
+    filter_params.merge(page: page_number, per_page: page_size)
   end
 
   def pagination_dict(object)

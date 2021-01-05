@@ -1,7 +1,10 @@
 import { ApiClient } from "api";
 import { constantizeMeta } from "utils/entityUtils";
+import copy from "fast-copy";
 import get from "lodash/get";
 import has from "lodash/has";
+import set from "lodash/set";
+import property from "lodash/property";
 import { entityStoreActions } from "actions";
 
 function sendRequest(request, tokens) {
@@ -26,6 +29,24 @@ function buildResponseAction(requestAction, payload, meta, error) {
   return { type, error, payload, meta };
 }
 
+function buildEagerLoadRequestAction(originalAction, nextPage) {
+  const {
+    type,
+    meta,
+    payload: { request: originalRequest, appends }
+  } = originalAction;
+
+  const request = copy(originalRequest);
+
+  set(request, "options.params.page.number", nextPage);
+
+  const payload = { appends, request, state: 0 };
+
+  const action = { type, meta, payload };
+
+  return action;
+}
+
 function buildRemovesAction(entity) {
   const type = `ENTITY_STORE_REMOVE`;
   return { type, payload: { entity } };
@@ -41,12 +62,16 @@ function buildAddsAction(meta, entity) {
   return { type, payload: { meta, entity } };
 }
 
+const getNextPage = property("meta.pagination.nextPage");
+const shouldEagerLoad = property("payload.request.eagerLoad");
+
 export default function entityStoreMiddleware({ dispatch, getState }) {
   return next => action => {
     // Guards
     if (action.type !== "API_REQUEST") {
       return next(action);
     }
+
     if (action.payload.state !== 0) return next(action);
 
     const state = getState();
@@ -111,7 +136,7 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     if (!Array.isArray(newMeta)) newMeta = [action.meta];
 
     newMeta.forEach(meta => {
-      const type = `API_REQUEST/${meta.toUpperCase().replace(/-/g, "_")}`;
+      const type = `API_REQUEST/${constantizeMeta(meta)}`;
       const adjustedRequestAction = {
         type,
         payload: requestPayload,
@@ -124,10 +149,18 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     requestPromise.then(
       response => {
         newMeta.forEach(meta => {
-          const payload = response || {};
-          payload.request = action.payload.request;
+          // const payload = response || {};
+          // payload.request = action.payload.request;
           dispatch(buildResponseAction(action, response, meta, false));
         });
+
+        if (shouldEagerLoad(action)) {
+          const nextPage = getNextPage(response);
+
+          if (nextPage && nextPage > 1) {
+            dispatch(buildEagerLoadRequestAction(action, nextPage));
+          }
+        }
       },
       response => {
         newMeta.forEach(meta => {
