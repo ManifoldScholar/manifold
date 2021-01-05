@@ -6,10 +6,11 @@ export default {
     filterParams.orphaned = false;
 
     return {
+      eagerLoad: true,
       endpoint: `/api/v1/text_sections/${sectionId}/relationships/annotations`,
       method: "GET",
       options: {
-        params: { filter: filterParams, page }
+        params: { filter: filterParams, page: { ...page, size: 25 } }
       }
     };
   },

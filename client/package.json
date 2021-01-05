@@ -105,6 +105,7 @@
     "entities": "^2.x",
     "es6-promise": "^4.0.5",
     "express-session": "^1.12.1",
+    "fast-copy": "^2.1.0",
     "filesize": "^4.x",
     "focus-trap-react": "^3.1.2",
     "focus-visible": "^5.0.1",
