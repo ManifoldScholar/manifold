@@ -124,10 +124,15 @@ export class SectionContainer extends Component {
   }
 
   fetchAnnotations(props) {
-    const annotationsCall = annotationsAPI.forSection(
-      props.match.params.sectionId
+    const sectionId = props.match.params.sectionId;
+
+    const annotationsCall = annotationsAPI.forSection(sectionId);
+
+    props.dispatch(
+      request(annotationsCall, requests.rAnnotations, {
+        appends: `annotations-for-${sectionId}`
+      })
     );
-    props.dispatch(request(annotationsCall, requests.rAnnotations));
   }
 
   fetchResources(props) {

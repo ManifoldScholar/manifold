@@ -8,11 +8,11 @@ module API
           before_action :set_text_section, only: [:create, :index]
 
           resourceful! Annotation, authorize_options: { except: [:index] } do
-            scope = @text_section.nil? ? Annotation : @text_section.annotations
+            scope = @text_section.nil? ? Annotation.all : @text_section.annotations
             scope = scope.with_read_ability(current_user, exclude_public_annotations?)
             scope = scope.includes(:reading_group, :text, :creator)
             Annotation.filtered(
-              annotation_filter_params || {},
+              with_pagination!(annotation_filter_params || {}, enforced: true),
               scope: scope
             )
           end

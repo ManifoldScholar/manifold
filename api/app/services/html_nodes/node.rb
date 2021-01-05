@@ -1,5 +1,7 @@
 module HTMLNodes
   class Node < Types::FlexibleStruct
+    include Enumerable
+
     HTML_NODES = Types::Array.of(HTMLNodes::Node).default { [] }.freeze
     ATTRIBUTES = Types::Hash.default { {} }.freeze
 
@@ -62,6 +64,26 @@ module HTMLNodes
 
     def has_epub_type?
       epub_type.present?
+    end
+
+    def has_tag?(name)
+      tag == name.to_s
+    end
+
+    def each
+      return enum_for(__method__) unless block_given?
+
+      children.each do |child|
+        yield child
+      end
+    end
+
+    def with_paths(path: [], parent: nil)
+      each_with_index.reduce [{ path: path, node: self, parent: parent }] do |acc, (child, index)|
+        new_path = [*path, "children", index]
+
+        acc + child.with_paths(path: new_path, parent: self)
+      end
     end
   end
 end
