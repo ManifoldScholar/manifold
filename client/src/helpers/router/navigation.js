@@ -168,6 +168,13 @@ class Navigation {
     const args = [project.id];
     return [
       {
+        label: "Analytics",
+        route: "backendProjectAnalytics",
+        entity: project,
+        ability: "update",
+        args
+      },
+      {
         label: "General",
         route: "backendProjectGeneral",
         entity: project,
@@ -249,13 +256,6 @@ class Navigation {
         route: "backendProjectLog",
         entity: project,
         ability: "readLog",
-        args
-      },
-      {
-        label: "Analytics",
-        route: "backendProjectAnalytics",
-        entity: project,
-        ability: "update",
         args
       }
     ];

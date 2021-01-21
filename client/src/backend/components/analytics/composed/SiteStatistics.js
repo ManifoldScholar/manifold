@@ -9,9 +9,9 @@ export default class SiteStatistics extends Component {
   static propTypes = {};
 
   get stats() {
-    const { statistics } = this.props;
-    if (!statistics) return {};
-    return statistics.attributes;
+    const { data } = this.props;
+    if (!data) return {};
+    return data.attributes;
   }
 
   get items() {

@@ -55,10 +55,7 @@ const rechartsOptions = ({ tooltipLabel }) => ({
   },
   tooltipProps: {
     cursor: false,
-    allowEscapeViewBox: {
-      x: true,
-      y: true
-    },
+    allowEscapeViewBox: false,
     content: CustomTooltip({ tooltipLabel })
   },
   lineProps: {

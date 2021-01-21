@@ -114,5 +114,8 @@ export default {
   ActionCalloutEdit: ActionCallout.Edit,
   EntitlementsList: Entitlements.List,
   EntitlementsNew: Entitlements.New,
-  AnalyticsWrapper: Analytics.Wrapper
+  AnalyticsWrapper: Analytics.Wrapper,
+  AnalyticsGlobal: Analytics.Global,
+  AnalyticsTopProjects: Analytics.TopProjects,
+  AnalyticsTopSearches: Analytics.TopSearches
 };

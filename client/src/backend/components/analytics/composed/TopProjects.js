@@ -3,23 +3,25 @@ import PropTypes from "prop-types";
 import Block from "../Block";
 import Table from "../parts/Table";
 import ProjectRow from "../parts/ProjectRow";
+import lh from "helpers/linkHandler";
 
 export default class TopProjects extends Component {
   static displayName = "Analytics.Composed.TopProjects";
 
   static propTypes = {
     withSort: PropTypes.bool,
-    data: PropTypes.shape({
-      data: PropTypes.array
-    })
+    withAllLink: PropTypes.bool,
+    data: PropTypes.array,
+    pagination: PropTypes.object
   };
 
   static defaultProps = {
-    withSort: false
+    withSort: false,
+    withAllLink: false
   };
 
   get data() {
-    return this.props.data.data;
+    return this.props.data;
   }
 
   get sortOptions() {
@@ -44,6 +46,8 @@ export default class TopProjects extends Component {
   }
 
   render() {
+    const { pagination, paginationClickHandler, withAllLink } = this.props;
+
     return (
       <Block
         width={this.blockWidth}
@@ -52,10 +56,12 @@ export default class TopProjects extends Component {
       >
         <Table
           rowComponent={ProjectRow}
-          paginationClickHandler={() => {}}
           headers={["Project", "Visits"]}
           rows={this.data}
+          paginationClickHandler={paginationClickHandler}
+          pagination={pagination}
           sortOptions={this.sortOptions}
+          allLink={withAllLink ? lh.link("backendAnalyticsTopProjects") : null}
         />
       </Block>
     );

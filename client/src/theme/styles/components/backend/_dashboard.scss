@@ -1,39 +1,22 @@
 .backend-dashboard {
-  @include clearfix;
-  display: flex;
-  flex-direction: column;
+  --gap: 42px;
+
+  display: grid;
+  grid-template-columns: 100%;
+  grid-gap: var(--gap);
   padding-top: 0;
 
-  @include respond($break75) {
-    flex-direction: row;
+  @include respond($break50) {
+    --gap: 60px;
   }
 
-  .left, .right {
-    @include respond($break75) {
-      flex: 1;
-    }
-
-    // Pad dashboard sections
-    section + section {
-      padding-top: 55px;
-    }
+  @include respond($dashboard-layout-breakpoint) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    --gap: 7.6vw;
   }
 
-  .right {
-    margin-top: 42px;
-
-    @include respond($break50) {
-      margin-top: 60px;
-    }
-
-    @include respond($break75) {
-      padding-left: 7.6vw;
-      margin-top: 0;
-    }
-
-    @include respond($containerWidthFull) {
-      padding-left: 95px;
-    }
+  @include respond($containerWidthFull) {
+    --gap: 95px;
   }
 
   .list-pagination-secondary .ordinal {

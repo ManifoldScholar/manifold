@@ -9,7 +9,7 @@ export default class ShareClicks extends Component {
   static propTypes = {};
 
   get data() {
-    return this.props.data.data;
+    return this.props.data;
   }
 
   get total() {
@@ -23,7 +23,7 @@ export default class ShareClicks extends Component {
   render() {
     return (
       <Block width={this.blockWidth} icon="share32" title="Shares">
-        <Figure stat={`${this.total}`} caption="Shares sent" />
+        <Figure stat={`${this.total}`} caption="Share links clicked" />
       </Block>
     );
   }

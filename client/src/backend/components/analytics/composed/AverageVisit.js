@@ -9,7 +9,7 @@ export default class AverageVisit extends Component {
   static propTypes = {};
 
   get data() {
-    return this.props.data.data;
+    return this.props.data;
   }
 
   get averageTime() {
