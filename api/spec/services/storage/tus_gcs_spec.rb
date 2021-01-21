@@ -1,7 +1,7 @@
 require "rails_helper"
 require "storage/tus_gcs"
 
-RSpec.describe Storage::TusGcs, slow: true do
+RSpec.describe Storage::TusGcs, integration: true, slow: true do
   before(:all) do
     Settings.instance.update_from_environment!
   end
