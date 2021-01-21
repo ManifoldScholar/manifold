@@ -16,9 +16,9 @@ module FormattedAttributes
     ].freeze
 
     # @return [void]
-    def perform
+    def perform(synchronous: false)
       MODEL_NAMES.each do |model_name|
-        FormattedAttributes::RefreshModelCachesJob.perform_later model_name
+        FormattedAttributes::RefreshModelCachesJob.perform_later model_name, synchronous: synchronous
       end
     end
   end
