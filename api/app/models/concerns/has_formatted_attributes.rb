@@ -38,7 +38,7 @@ module HasFormattedAttributes
     formatted_attributes.should_recalculate? self
   end
 
-  class_methods do
+  module ClassMethods
     # rubocop:disable Naming/PredicateName
 
     # @!scope class
@@ -75,9 +75,13 @@ module HasFormattedAttributes
     end
 
     # @return [void]
-    def refresh_all_formatted_attribute_caches!
+    def refresh_all_formatted_attribute_caches!(synchronous: false)
       find_each do |model|
-        FormattedAttributes::RefreshCacheJob.perform_later model
+        if synchronous
+          model.refresh_formatted_attributes_cache!
+        else
+          FormattedAttributes::RefreshCacheJob.perform_later model
+        end
       end
     end
 

@@ -1,10 +1,25 @@
 module SystemUpgrades
   module Upgrades
     class Manifold060000 < SystemUpgrades::AbstractVersion
+      # Models that implement FormattedAttributes as of version 6
+      FA_MODEL_NAMES = %w[
+        Event
+        Feature
+        Page
+        Project
+        ProjectCollection
+        Resource
+        ResourceCollection
+        Settings
+        Text
+        TextTitle
+      ].freeze
 
       # rubocop:disable Metrics/MethodLength
       def perform!
         migrate_ingestion_uploader_attachments!
+
+        populate_formatted_attribute_caches!
       end
 
       private
@@ -30,6 +45,28 @@ module SystemUpgrades
         end
       end
       # rubocop:enable Metrics/MethodLength
+
+      def populate_formatted_attribute_caches!
+        log_with_separator("Populating database cache for formatted attributes")
+
+        FA_MODEL_NAMES.each do |model_name|
+          populate_caches_for! model_name
+        end
+      end
+
+      def populate_caches_for!(model_name)
+        log_with_separator("Populating attribute cache for #{model_name}")
+
+        klass = model_name.constantize
+
+        klass.refresh_all_formatted_attribute_caches!(synchronous: true)
+      end
+
+      def log_with_separator(message)
+        logger.info("=" * 67)
+        logger.info("#{message.ljust(63)}.   ")
+        logger.info("=" * 67)
+      end
     end
   end
 end

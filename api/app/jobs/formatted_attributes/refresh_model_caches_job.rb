@@ -6,12 +6,12 @@ module FormattedAttributes
 
     # @param [String] model_name
     # @return [void]
-    def perform(model_name)
+    def perform(model_name, synchronous: false)
       model = model_name.constantize
 
       raise FormattedAttributes::InvalidModel, "#{model_name.inspect} has no caches" unless valid_model?(model)
 
-      model.refresh_all_formatted_attribute_caches!
+      model.refresh_all_formatted_attribute_caches! synchronous: synchronous
     end
 
     private
