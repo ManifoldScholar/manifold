@@ -4,7 +4,7 @@ import CookieHelper from "helpers/cookie/Browser";
 import config from "config";
 import ch from "helpers/consoleHelpers";
 import uuid from "uuid";
-import { entityStoreActions } from "actions";
+import { entityStoreActions, currentUserActions } from "actions";
 import { analyticEventsAPI, requests } from "api";
 
 const { request } = entityStoreActions;
@@ -31,16 +31,18 @@ function generateVisitToken() {
 function getTokens() {
   const visitorToken = cookie.read("visitorToken") || generateVisitorToken();
   const visitToken = cookie.read("visitToken") || generateVisitToken();
+
   return { visitToken, visitorToken };
 }
-const ensureTokens = getTokens;
 
 export default function useManifoldAnalytics(location, settings, dispatch) {
   if (!manifoldAnalyticsEnabled(settings))
     return { track: nullTracker, leave: nullTracker };
 
   useEffect(() => {
-    ensureTokens();
+    const { visitToken, visitorToken } = getTokens();
+    dispatch(currentUserActions.setVisitorToken(visitorToken));
+    dispatch(currentUserActions.setVisitToken(visitToken));
     if (config.environment.isDevelopment) {
       ch.notice(`Manifold analytics initialized.`, "chart_with_upwards_trend");
     }
@@ -65,7 +67,9 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
       }
     };
     const call = analyticEventsAPI.create(visitorToken, visitToken, payload);
-    const trackRequest = request(call, requests.analyticsEventCreate);
+    const trackRequest = request(call, requests.analyticsEventCreate, {
+      silent: true
+    });
     dispatch(trackRequest);
   };
 

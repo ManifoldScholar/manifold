@@ -8,9 +8,7 @@ export default class TextSectionViews extends Component {
 
   static propTypes = {
     withSort: PropTypes.bool,
-    data: PropTypes.shape({
-      data: PropTypes.array
-    })
+    data: PropTypes.array
   };
 
   static defaultProps = {
@@ -18,7 +16,7 @@ export default class TextSectionViews extends Component {
   };
 
   get data() {
-    return this.props.data.data;
+    return this.props.data;
   }
 
   get blockWidth() {
@@ -28,6 +26,11 @@ export default class TextSectionViews extends Component {
   get toc() {
     const { text } = this.props;
     return text.attributes.toc;
+  }
+
+  get slug() {
+    const { text } = this.props;
+    return text.attributes.slug;
   }
 
   get rows() {
@@ -53,11 +56,12 @@ export default class TextSectionViews extends Component {
       <Block
         width={this.blockWidth}
         icon="eyeOpen32"
-        title="Most Viewed Projects"
+        title="Text Section Views"
       >
         <TextNodeTable
           headers={["Section Title", "View Count"]}
           rows={this.rows}
+          slug={this.slug}
         />
       </Block>
     );

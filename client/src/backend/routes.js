@@ -665,7 +665,32 @@ const routes = {
       component: "AnalyticsWrapper",
       path: "/backend/analytics",
       helper: () => "/backend/analytics",
-      routes: []
+      routes: [
+        {
+          name: "backendAnalyticsGlobal",
+          exact: true,
+          component: "AnalyticsGlobal",
+          path: "/backend/analytics",
+          helper: () => "/backend/analytics",
+          routes: []
+        },
+        {
+          name: "backendAnalyticsTopProjects",
+          exact: true,
+          component: "AnalyticsTopProjects",
+          path: "/backend/analytics/top-projects",
+          helper: () => "/backend/analytics/top-projects",
+          routes: []
+        },
+        {
+          name: "backendAnalyticsTopSearches",
+          exact: true,
+          component: "AnalyticsTopSearches",
+          path: "/backend/analytics/top-searches",
+          helper: () => "/backend/analytics/top-searches",
+          routes: []
+        }
+      ]
     },
     {
       name: "backendSettings",

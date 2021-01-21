@@ -3,7 +3,7 @@ import Annotations from "./Annotations";
 import AverageVisit from "./AverageVisit";
 import Followed from "./Followed";
 import Highlights from "./Highlights";
-import Interactions from "./Interactions";
+import Engagement from "./Engagement";
 import NewFollowers from "./NewFollowers";
 import ReturnVisits from "./ReturnVisits";
 import SiteStatistics from "./SiteStatistics";
@@ -20,7 +20,7 @@ export default {
   AverageVisit,
   Followed,
   Highlights,
-  Interactions,
+  Engagement,
   NewFollowers,
   ReturnVisits,
   SiteStatistics,

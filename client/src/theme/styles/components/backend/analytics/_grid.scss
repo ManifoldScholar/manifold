@@ -4,17 +4,30 @@
 * This grid has 2, 3, or 4 columns depending on the width of its container.
 * Without container queries in CSS yet :(, it's necessary to use separate media queries
 * for each layout context, and adjust the flow of grid items within that context.
-* Grid layouts in the RangePicker component also need to be defined per context,
-* as do a few minor changes to chart styles
+* Grid layouts in the RangePicker component also need to be defined per context.
 */
 
 $_item-min-width: 250px;
 $_gap: 30px;
+$_stack-breakpoint: $_item-min-width * 2 + $_gap;
+$_2-col-breakpoint: 1150px;
+$_3-col-breakpoint: 960px;
+$_4-col-breakpoint: $_item-min-width * 4 + $_gap * 3;
 
 .analytics-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 100%;
   grid-gap: $_gap;
+
+  @include respond($_stack-breakpoint - 1, max) {
+    .analytics-grid__item {
+      grid-column-end: -1;
+    }
+  }
+
+  @include respond($_stack-breakpoint) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
   .range-picker,
   .range-picker__preset-group-inner {
@@ -22,7 +35,7 @@ $_gap: 30px;
   }
 
   &--4-col {
-    @include respond($_item-min-width * 4 + $_gap * 3) {
+    @include respond($_4-col-breakpoint) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
 
       .range-picker {
@@ -36,7 +49,7 @@ $_gap: 30px;
   }
 
   &--3-col {
-    @include respond($_item-min-width * 3 + $_gap * 2) {
+    @include respond($_3-col-breakpoint) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
 
       .analytics-grid__item--50 {
@@ -50,6 +63,16 @@ $_gap: 30px;
       .range-picker__preset-group-inner {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       }
+    }
+  }
+
+  &--2-col {
+    @include respond($dashboard-layout-breakpoint) {
+      grid-template-columns: 100%;
+    }
+
+    @include respond($_2-col-breakpoint) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 

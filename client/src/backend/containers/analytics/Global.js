@@ -1,20 +1,17 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
 import {
   AnalyticsFactory,
   Grid,
   RangePicker
 } from "backend/components/analytics";
-
+import Layout from "backend/components/layout";
 import withAnalyticsReport from "hoc/analytics/with-analytics-report";
-import Authorize from "hoc/authorize";
 
-export class AnalyticsContainer extends PureComponent {
-  static displayName = "Project.Analytics";
-
+class AnalyticsGlobalContainer extends PureComponent {
   static propTypes = {
-    project: PropTypes.object.isRequired,
+    route: PropTypes.object,
+    statistics: PropTypes.object,
     analytics: PropTypes.object,
     fetchStats: PropTypes.func.isRequired,
     fetchAnalytics: PropTypes.func.isRequired,
@@ -24,31 +21,25 @@ export class AnalyticsContainer extends PureComponent {
   };
 
   componentDidMount() {
-    const { project } = this.props;
-    this.props.fetchAnalytics("project", {
-      record_type: "Project",
-      record_id: project.id
-    });
+    this.props.fetchStats();
+    this.props.fetchAnalytics("global");
   }
 
   render() {
     const {
-      project,
       analytics,
+      statistics,
       updateAnalyticsRange,
       analyticsStartDate,
-      analyticsEndDate,
-      analyticsRangeInWords
+      analyticsEndDate
     } = this.props;
 
     return (
-      <Authorize
-        entity={project}
-        ability="update"
-        failureNotification
-        failureRedirect={lh.link("backendProject", project.id)}
-      >
-        <Grid columns={3}>
+      <>
+        <Layout.ViewHeader spaceBottom icon="BEAnalytics64" iconAltAccented>
+          Analytics
+        </Layout.ViewHeader>
+        <Grid columns={4}>
           {analytics && (
             <>
               <RangePicker
@@ -60,39 +51,47 @@ export class AnalyticsContainer extends PureComponent {
               <AnalyticsFactory
                 view="Visitors"
                 report="daily_visitors"
-                additionalReport="unique_visitors"
                 data={analytics}
-                rangeInWords={analyticsRangeInWords}
               />
               <AnalyticsFactory
-                view="Annotations"
-                report="annotations"
+                view="ReturnVisits"
+                report="returning_visitors"
                 data={analytics}
-                rangeInWords={analyticsRangeInWords}
               />
               <AnalyticsFactory
-                view="Highlights"
-                report="annotations"
+                view="AverageVisit"
+                report="average_visit_duration"
                 data={analytics}
-                rangeInWords={analyticsRangeInWords}
               />
               <AnalyticsFactory
-                view="NewFollowers"
-                report="favorites_this_period"
+                view="Engagement"
+                report="active_visitors"
                 data={analytics}
-                rangeInWords={analyticsRangeInWords}
               />
               <AnalyticsFactory
-                view="AllFollowers"
-                report="total_favorites"
+                view="Followed"
+                report="favorited_projects"
                 data={analytics}
+              />
+              <AnalyticsFactory view="SiteStatistics" data={statistics} />
+              <AnalyticsFactory
+                view="TopProjects"
+                report="top_projects"
+                data={analytics}
+                withAllLink
+              />
+              <AnalyticsFactory
+                view="TopSearches"
+                report="top_search_terms"
+                data={analytics}
+                withAllLink
               />
             </>
           )}
         </Grid>
-      </Authorize>
+      </>
     );
   }
 }
 
-export default withAnalyticsReport(AnalyticsContainer);
+export default withAnalyticsReport(AnalyticsGlobalContainer);

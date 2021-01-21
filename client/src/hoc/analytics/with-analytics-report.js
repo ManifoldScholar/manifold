@@ -2,9 +2,11 @@ import React from "react";
 import hoistStatics from "hoist-non-react-statics";
 import { connect } from "react-redux";
 import { entityStoreActions } from "actions";
-import { select } from "utils/entityUtils";
+import { select, meta } from "utils/entityUtils";
 import { statisticsAPI, analyticReportsAPI, requests } from "api";
 import subDays from "date-fns/subDays";
+import intervalToDuration from "date-fns/intervalToDuration";
+import formatDuration from "date-fns/formatDuration";
 import uuid from "uuid";
 
 const { request } = entityStoreActions;
@@ -25,7 +27,8 @@ export default function withAnalyticsReport(WrappedComponent) {
     static mapStateToProps = state => {
       return {
         statistics: select(requests.beStats, state.entityStore),
-        analytics: select(requestName, state.entityStore)
+        analytics: select(requestName, state.entityStore),
+        analyticsMeta: meta(requestName, state.entityStore)
       };
     };
 
@@ -63,6 +66,24 @@ export default function withAnalyticsReport(WrappedComponent) {
       return new Date();
     }
 
+    get analyticsPagination() {
+      const { analyticsMeta } = this.props;
+      if (!analyticsMeta || !analyticsMeta.pagination) return null;
+      return analyticsMeta.pagination;
+    }
+
+    get analyticsDuration() {
+      const { analyticsStartDate: start, analyticsEndDate: end } = this.state;
+      if (!start || !end) return null;
+      return formatDuration(
+        intervalToDuration({
+          start,
+          end
+        }),
+        { format: ["years", "months", "weeks", "days"], delimiter: ", " }
+      );
+    }
+
     fetchStats = () => {
       const { dispatch } = this.props;
       const statsRequest = request(statisticsAPI.show(), requests.beStats);
@@ -84,6 +105,15 @@ export default function withAnalyticsReport(WrappedComponent) {
       dispatch(analyticsRequest);
     };
 
+    analyticsPaginationClickHandler = page => {
+      return () => {
+        this.fetchAnalytics(this.state.lastReportType, {
+          ...this.state.lastReportParams,
+          page: { number: page }
+        });
+      };
+    };
+
     updateAnalyticsRange = (startDate, endDate) => {
       this.setState({
         analyticsStartDate: startDate,
@@ -94,11 +124,14 @@ export default function withAnalyticsReport(WrappedComponent) {
     render() {
       const props = {
         ...this.props,
+        analyticsPagination: this.analyticsPagination,
         fetchStats: this.fetchStats,
         fetchAnalytics: this.fetchAnalytics,
         updateAnalyticsRange: this.updateAnalyticsRange,
+        analyticsPaginationClickHandler: this.analyticsPaginationClickHandler,
         analyticsStartDate: this.state.analyticsStartDate,
-        analyticsEndDate: this.state.analyticsEndDate
+        analyticsEndDate: this.state.analyticsEndDate,
+        analyticsRangeInWords: this.analyticsDuration
       };
       return React.createElement(WrappedComponent, props);
     }

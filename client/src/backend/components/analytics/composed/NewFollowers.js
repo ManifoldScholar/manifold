@@ -9,11 +9,18 @@ export default class NewFollowers extends Component {
   static propTypes = {};
 
   get data() {
-    return this.props.data.data;
+    return this.props.data;
   }
 
   get blockWidth() {
     return this.props.width || 25;
+  }
+
+  get caption() {
+    const { rangeInWords } = this.props;
+    return rangeInWords
+      ? `New project followers in ${rangeInWords}.`
+      : "New project followers";
   }
 
   render() {
@@ -23,10 +30,7 @@ export default class NewFollowers extends Component {
         icon="starSquircle32"
         title="New Followers"
       >
-        <Figure
-          stat={`${this.data.value}`}
-          caption="Average number of followed projects for each visitor"
-        />
+        <Figure stat={`${this.data.value}`} caption={this.caption} />
       </Block>
     );
   }

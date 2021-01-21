@@ -9,11 +9,11 @@ export default class Citations extends Component {
   static propTypes = {};
 
   get data() {
-    return this.props.data.data;
+    return this.props.data;
   }
 
   get total() {
-    return 42;
+    return this.props.data.value;
   }
 
   get blockWidth() {
@@ -23,7 +23,7 @@ export default class Citations extends Component {
   render() {
     return (
       <Block width={this.blockWidth} icon="SocialCite32" title="citations">
-        <Figure stat={`${this.total}`} caption="Citations Made" />
+        <Figure stat={`${this.total}`} caption="Citations generated" />
       </Block>
     );
   }

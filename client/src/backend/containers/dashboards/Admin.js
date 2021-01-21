@@ -14,7 +14,6 @@ import EntitiesList, {
   Search,
   ProjectRow
 } from "backend/components/list/EntitiesList";
-import withAnalyticsReport from "hoc/analytics/with-analytics-report";
 import withFilteredLists, { projectFilters } from "hoc/with-filtered-lists";
 import Authorize from "hoc/authorize";
 
@@ -27,7 +26,6 @@ class DashboardsAdminContainerImplementation extends PureComponent {
     return {
       projects: select(requests.beProjects, state.entityStore),
       projectsMeta: meta(requests.beProjects, state.entityStore),
-      recentProjects: select(requests.beRecentProjects, state.entityStore),
       authentication: state.authentication
     };
   };
@@ -36,17 +34,9 @@ class DashboardsAdminContainerImplementation extends PureComponent {
     projects: PropTypes.array,
     dispatch: PropTypes.func,
     projectsMeta: PropTypes.object,
-    recentProjects: PropTypes.array,
     authentication: PropTypes.object,
     entitiesListSearchProps: PropTypes.func.isRequired,
-    entitiesListSearchParams: PropTypes.object.isRequired,
-    statistics: PropTypes.object,
-    analytics: PropTypes.object,
-    fetchStats: PropTypes.func.isRequired,
-    fetchAnalytics: PropTypes.func.isRequired,
-    updateAnalyticsRange: PropTypes.func.isRequired,
-    analyticsStartDate: PropTypes.instanceOf(Date),
-    analyticsEndDate: PropTypes.instanceOf(Date)
+    entitiesListSearchParams: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -58,11 +48,6 @@ class DashboardsAdminContainerImplementation extends PureComponent {
     const pagination = this.props.savedSearchPaginationState("projects");
     const page = pagination ? pagination.number : 1;
     this.fetchProjects(page);
-    this.fetchRecentProjects();
-    if (this.canReadStats) {
-      this.props.fetchStats();
-      this.props.fetchAnalytics("global");
-    }
   }
 
   componentDidUpdate(prevProps) {
@@ -79,25 +64,6 @@ class DashboardsAdminContainerImplementation extends PureComponent {
       requests.beProjects
     );
     this.props.dispatch(projectsRequest);
-  }
-
-  fetchRecentProjects() {
-    const recentProjectsRequest = request(
-      projectsAPI.index(
-        this.filterParams(this.props, { order: "updated_at DESC" }),
-        { size: 5 }
-      ),
-      requests.beRecentProjects
-    );
-    this.props.dispatch(recentProjectsRequest);
-  }
-
-  get canReadStats() {
-    return this.authorization.authorizeAbility({
-      authentication: this.props.authentication,
-      entity: "statistics",
-      ability: "read"
-    });
   }
 
   filtersChanged(prevProps) {
@@ -198,13 +164,7 @@ class DashboardsAdminContainerImplementation extends PureComponent {
                   >
                     Analytics
                   </Layout.ViewHeader>
-                  <DashboardComponents.Analytics
-                    analytics={this.props.analytics}
-                    statistics={this.props.statistics}
-                    onNewRangeSelected={this.props.updateAnalyticsRange}
-                    defaultStart={this.props.analyticsStartDate}
-                    defaultEnd={this.props.analyticsStartDate}
-                  />
+                  <DashboardComponents.Analytics />
                 </Authorize>
               </div>
             </section>
@@ -214,10 +174,11 @@ class DashboardsAdminContainerImplementation extends PureComponent {
     );
   }
 }
-export const DashboardsAdminContainer = withAnalyticsReport(
-  withFilteredLists(DashboardsAdminContainerImplementation, {
+export const DashboardsAdminContainer = withFilteredLists(
+  DashboardsAdminContainerImplementation,
+  {
     projects: projectFilters({ snapshotState: true })
-  })
+  }
 );
 
 export default connectAndFetch(DashboardsAdminContainer);

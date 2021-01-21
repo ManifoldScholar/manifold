@@ -280,3 +280,5 @@ $standalone-header-layout: (
 @function standalone-header-layout($property) {
   @return map-get($standalone-header-layout, $property);
 }
+
+$dashboard-layout-breakpoint: $break75;

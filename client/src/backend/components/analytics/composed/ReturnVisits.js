@@ -10,7 +10,7 @@ export default class ReturnVisits extends Component {
   static propTypes = {};
 
   get data() {
-    return this.props.data.data;
+    return this.props.data;
   }
 
   get percentage() {

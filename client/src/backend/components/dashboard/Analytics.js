@@ -1,15 +1,24 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
-  ComposedAnalytics,
+  AnalyticsFactory,
   Grid,
   RangePicker
 } from "backend/components/analytics";
+import withAnalyticsReport from "hoc/analytics/with-analytics-report";
 
-export default class DashboardAnalytics extends Component {
+class DashboardAnalytics extends Component {
   static displayName = "Dashboard.Analytics";
 
-  static propTypes = {};
+  static propTypes = {
+    statistics: PropTypes.object,
+    analytics: PropTypes.object,
+    fetchStats: PropTypes.func.isRequired,
+    fetchAnalytics: PropTypes.func.isRequired,
+    updateAnalyticsRange: PropTypes.func.isRequired,
+    analyticsStartDate: PropTypes.instanceOf(Date),
+    analyticsEndDate: PropTypes.instanceOf(Date)
+  };
 
   get reports() {
     if (!this.props.analytics) return [];
@@ -23,38 +32,58 @@ export default class DashboardAnalytics extends Component {
     return this.reports.find(element => element.name === name);
   }
 
-  render() {
-    const { analytics, statistics } = this.props;
+  componentDidMount() {
+    this.props.fetchStats();
+    this.props.fetchAnalytics("global");
+  }
 
+  render() {
+    const { analytics, statistics, analyticsRangeInWords } = this.props;
     return (
       <Grid columns={2}>
         {analytics && (
           <>
             <RangePicker
-              onNewRangeSelected={this.props.onNewRangeSelected}
-              defaultStart={this.props.defaultStart}
-              defaultEnd={this.props.defaultEnd}
+              onNewRangeSelected={this.props.updateAnalyticsRange}
+              initialStart={this.props.analyticsStartDate}
+              initialEnd={this.props.analyticsEndDate}
               className="analytics-grid__item--100"
             />
-            <ComposedAnalytics.Visitors data={this.find("daily_visitors")} />
-            <ComposedAnalytics.ReturnVisits
-              data={this.find("returning_visitors")}
+            <AnalyticsFactory
+              view="Visitors"
+              report="daily_visitors"
+              additionalReport="unique_visitors"
+              data={analytics}
+              rangeInWords={analyticsRangeInWords}
             />
-            <ComposedAnalytics.AverageVisit
-              data={this.find("average_visit_duration")}
+            <AnalyticsFactory
+              view="ReturnVisits"
+              report="returning_visitors"
+              data={analytics}
             />
-            <ComposedAnalytics.Interactions
-              data={this.find("active_visitors")}
+            <AnalyticsFactory
+              view="AverageVisit"
+              report="average_visit_duration"
+              data={analytics}
             />
-            <ComposedAnalytics.Followed
-              data={this.find("favorited_projects")}
+            <AnalyticsFactory
+              view="Engagement"
+              report="active_visitors"
+              data={analytics}
+            />
+            <AnalyticsFactory
+              view="Followed"
+              report="favorited_projects"
+              data={analytics}
             />
           </>
         )}
         {statistics && (
-          <ComposedAnalytics.SiteStatistics statistics={statistics} />
+          <AnalyticsFactory view="SiteStatistics" data={statistics} />
         )}
       </Grid>
     );
   }
 }
+
+export default withAnalyticsReport(DashboardAnalytics);

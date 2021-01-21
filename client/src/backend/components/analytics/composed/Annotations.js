@@ -9,7 +9,7 @@ export default class Annotations extends Component {
   static propTypes = {};
 
   get data() {
-    return this.props.data.data;
+    return this.props.data ? this.props.data[0] : {};
   }
 
   get blockWidth() {
@@ -17,35 +17,41 @@ export default class Annotations extends Component {
   }
 
   get totalFigure() {
+    const { rangeInWords } = this.props;
+    const stat = Object.values(this.data).reduce((a, b) => a + b);
     return {
-      stat: "623",
-      caption: "Annotations created in the last 30 days"
+      stat,
+      caption: rangeInWords
+        ? `Annotations created in ${rangeInWords}.`
+        : "Annotations created"
     };
   }
 
   get publicFigure() {
+    const stat = this.data.publicAnnotations;
     return {
-      stat: "461",
+      stat,
       caption: "Public"
     };
   }
 
   get privateFigure() {
+    const stat = this.data.privateAnnotations;
     return {
-      stat: "162",
+      stat,
       caption: "Private"
     };
   }
 
   get readingGroupFigure() {
+    const stat = this.data.readingGroupAnnotations;
     return {
-      stat: "224",
+      stat,
       caption: "in Reading Groups"
     };
   }
 
   get figures() {
-    // TODO: get actual data.
     return [
       this.totalFigure,
       this.publicFigure,

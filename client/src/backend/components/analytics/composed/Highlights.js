@@ -9,7 +9,7 @@ export default class Highlights extends Component {
   static propTypes = {};
 
   get data() {
-    return this.props.data.data;
+    return this.props.data ? this.props.data[0] : {};
   }
 
   get blockWidth() {
@@ -17,7 +17,14 @@ export default class Highlights extends Component {
   }
 
   get total() {
-    return 42;
+    return this.data.highlights;
+  }
+
+  get caption() {
+    const { rangeInWords } = this.props;
+    return rangeInWords
+      ? `Highlights made in ${rangeInWords}.`
+      : "Highlights made";
   }
 
   render() {
@@ -27,10 +34,7 @@ export default class Highlights extends Component {
         icon="interactHighlight32"
         title="Highlights"
       >
-        <Figure
-          stat={`${this.total}`}
-          caption="Highlights made in the last 30 days"
-        />
+        <Figure stat={`${this.total}`} caption={this.caption} />
       </Block>
     );
   }
