@@ -26,7 +26,8 @@ module V1
       ClientURL.call(:join_reading_group, invitation_code: object.invitation_code)
     end
 
-    typed_has_many :texts, serializer: TextOptionsSerializer, record_type: "textOptions"
+    typed_has_many :annotated_texts, serializer: TextOptionsSerializer, record_type: "textOptions"
+
     typed_has_many :reading_group_memberships
 
   end
