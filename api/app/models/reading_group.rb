@@ -15,7 +15,7 @@ class ReadingGroup < ApplicationRecord
 
   has_one :reading_group_count
 
-  has_many :texts, -> { group(:id) }, through: :annotations
+  has_many :annotated_texts, -> { distinct.reorder(nil) }, through: :annotations, source: :text
 
   delegate :annotations_count, to: :reading_group_count
   delegate :highlights_count, to: :reading_group_count
