@@ -19,7 +19,7 @@ module API
       def show
         @reading_group = uuid? ? load_and_authorize_reading_group : lookup_reading_group
         render_single_resource @reading_group,
-                               include: ["texts", "reading_group_memberships.user"]
+                               include: ["annotated_texts", "reading_group_memberships.user"]
       end
 
       def create
