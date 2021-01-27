@@ -1,5 +1,3 @@
-require "uuid"
-
 module API
   module V1
     # Reading groups controller
@@ -47,12 +45,8 @@ module API
       end
 
       def lookup_reading_group
-        rg = ReadingGroup.by_invitation_code(params[:id])
-        raise ActiveRecord::RecordNotFound unless rg
-
-        rg
+        ReadingGroup.by_invitation_code(params[:id])
       end
-
     end
   end
 end
