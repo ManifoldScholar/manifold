@@ -33,14 +33,6 @@ class ReadingGroup < ApplicationRecord
   scope :non_public, -> { where.not(privacy: "public") }
   scope :visible_to_public, -> { where(privacy: "public") }
 
-  class << self
-
-    def arel_id_is_null_or_within_scope(scope)
-      arel_table[:id].eq(nil).or(arel_table[:id].in(Arel.sql(scope.to_sql)))
-    end
-
-  end
-
   def private?
     privacy == "private"
   end
@@ -52,14 +44,6 @@ class ReadingGroup < ApplicationRecord
   def public?
     privacy == "public"
   end
-
-  def self.by_invitation_code(code)
-    return ReadingGroup.none if code.blank?
-
-    ReadingGroup.find_by(invitation_code: code.upcase)
-  end
-
-  # private
 
   def update_annotations_privacy
     # Use of update_all is intentional. We don't care about validations here.
@@ -86,4 +70,18 @@ class ReadingGroup < ApplicationRecord
     users << creator unless users.include? creator
   end
 
+  class << self
+    # @param [String] code
+    # @raise [ActiveRecord::RecordNotFound]
+    # @return [ReadingGroup]
+    def by_invitation_code(code)
+      query = code.present? ? where(invitation_code: code.upcase) : none
+
+      query.first!
+    end
+
+    def arel_id_is_null_or_within_scope(scope)
+      arel_table[:id].eq(nil).or(arel_table[:id].in(Arel.sql(scope.to_sql)))
+    end
+  end
 end
