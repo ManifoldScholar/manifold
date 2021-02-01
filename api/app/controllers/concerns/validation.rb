@@ -15,7 +15,8 @@ module Validation
             { margins: [:current, :max, :min] }
           ],
           reading_groups: [:current_reading_group]
-        }
+        },
+        locale: [:language]
       }
     }
     notification_preferences_by_kind = {

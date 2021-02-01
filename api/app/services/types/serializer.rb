@@ -73,6 +73,9 @@ module Types
         reading_groups: Types::Hash.schema(
           current_reading_group: Types::Serializer::ID
         )
+      ),
+      locale: Types::Hash.schema(
+        language: Types::String.enum("en", "es", "nl")
       )
     )
 
