@@ -1,0 +1,131 @@
+.c-language-select {
+  position: relative;
+  top: 10px;
+  left: 10px;
+  padding: 0;
+  margin: 0;
+  color: white;
+  border: 0;
+
+  .a-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  &__tag {
+    display: none;
+    // font-size: 14px;
+    // font-weight: bold;
+    // display: inline-block;
+    // margin-right: 8px;
+
+    // @include respond($break50) {
+    //   font-size: 12px;
+    // }
+  }
+
+  &__switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    text-align: left;
+    vertical-align: middle;
+    background-color: var(--accent-interaction-dark);
+    border-radius: 25px;
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__label {
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 0 solid var(--accent-interaction-dark);
+    border-radius: 20px;
+
+    .inner {
+      display: block;
+      width: 200%;
+      margin-left: -100%;
+      transition: margin 0.1s ease-in 0s;
+
+      &.es {
+        margin-left: 0;
+      }
+
+      &::before,
+      &::after {
+        box-sizing: border-box;
+        display: block;
+        float: left;
+        width: 50%;
+        height: 30px;
+        padding: 0;
+        font-weight: normal;
+        line-height: 30px;
+        color: white;
+      }
+
+      &::before {
+        padding-left: 10px;
+        color: var(--turquoise90);
+        content: "En";
+        background-color: var(--accent-interaction-dark);
+      }
+
+      &::after {
+        padding-right: 10px;
+        color: var(--turquoise90);
+        text-align: right;
+        content: "Es";
+        background-color: var(--accent-interaction-dark);
+      }
+    }
+
+    .switch {
+      position: absolute;
+      top: -1px;
+      right: 27px;
+      bottom: 0;
+      display: block;
+      width: 24px;
+      height: 23px;
+      margin: 5px;
+      background: var(--accent-primary-dark);
+      border: 0 solid var(--accent-interaction-dark);
+      border-radius: 20px;
+      transition: all 0.1s ease-in 0s;
+
+      &.es {
+        right: 0;
+      }
+
+      &::after {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        display: block;
+        width: 24px;
+        height: 24px;
+        color: white;
+        content: "En";
+      }
+
+      &.es::after {
+        top: 3px;
+        left: 6px;
+        content: "Es";
+      }
+    }
+  }
+}

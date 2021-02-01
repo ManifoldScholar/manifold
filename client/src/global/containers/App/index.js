@@ -8,6 +8,7 @@ import get from "lodash/get";
 import { hot } from "react-hot-loader/root";
 import Analytics from "hoc/analytics";
 import { HelmetProvider } from "react-helmet-async";
+import "utils/i18n";
 
 class App extends Component {
   static propTypes = {

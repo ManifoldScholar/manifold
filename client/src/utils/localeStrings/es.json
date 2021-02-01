@@ -1,0 +1,27 @@
+{
+  "key": "en",
+  "translation": {
+    "english-site-name": "English",
+    "espanol-site-name": "Español",
+    "localize-content": "Localizar el contenido del sitio",
+    "error-title": "Error",
+    "error-text": "Ha habido un error.",
+    "page-not-found-title": "Página no encontrada",
+    "page-not-found-text": "No se encontró la página que estás buscando.",
+    "exit-editor-mode": "Salir del modo editor",
+    "exit-author-mode": "Salir del modo de autor",
+    "exit-admin-mode": "Salir del modo de administrador",
+    "enter-admin-mode": "Entrar en modo administrador",
+    "enter-editor-mode": "Entrar en modo editor",
+    "contact-form": {
+      "contact-us": "Contact us",
+      "email": "Email",
+      "inquiry": "Inquiry",
+      "send": "Send",
+      "sending": "Sending…",
+      "reset": "Reset form",
+      "success": "Thank you. We’ve received your message.",
+      "error": "We seem to have run into a problem."
+    }
+  }
+}
