@@ -10,6 +10,7 @@ import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
 import withSettings from "hoc/with-settings";
 import Authorize from "hoc/authorize";
+import LanguageSelect from "global/components/LanguageSelect";
 
 export class NavigationStatic extends PureComponent {
   static displayName = "Navigation.Static";
@@ -167,6 +168,9 @@ export class NavigationStatic extends PureComponent {
               hideUserMenu={props.commonActions.toggleUserPanel}
               hidePanel={props.commonActions.hideUserPanel}
             />
+          </li>
+          <li>
+            <LanguageSelect />
           </li>
         </ul>
       </nav>

@@ -9,6 +9,7 @@ import Analytics from "hoc/analytics";
 import { HelmetProvider } from "react-helmet-async";
 import { Global as GlobalStyles } from "@emotion/react";
 import styles from "theme/styles/globalStyles";
+import "utils/i18n";
 
 class App extends Component {
   static propTypes = {
