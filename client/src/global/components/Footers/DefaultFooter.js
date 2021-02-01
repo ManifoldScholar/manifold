@@ -4,6 +4,7 @@ import FooterParts from "./Parts";
 import { withRouter } from "react-router-dom";
 import withPluginReplacement from "hoc/with-plugin-replacement";
 import links from "./Parts/helpers/links";
+import LanguageSelect from "global/components/LanguageSelect";
 
 class DefaultFooter extends Component {
   get authenticated() {
@@ -15,7 +16,10 @@ class DefaultFooter extends Component {
       <footer className="app-footer app-footer--default">
         <FooterParts.Columns>
           <FooterParts.Column position="right">
-            <FooterParts.Search push={this.props.history.push} />
+            <div className="c-footer-forms">
+              <FooterParts.Search push={this.props.history.push} />
+              <LanguageSelect />
+            </div>
           </FooterParts.Column>
           <FooterParts.Column position="left">
             <FooterParts.Navigation>{links(this.props)}</FooterParts.Navigation>

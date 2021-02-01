@@ -56,3 +56,5 @@ doc
 client/plugins*
 
 __MACOSX
+
+Brewfile.lock.json

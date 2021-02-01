@@ -1,4 +1,5 @@
 import Check from "./Check";
+import Globe from "./Globe";
 import Minus from "./Minus";
 import Plus from "./Plus";
 import BooksOnShelfColor from "./BooksOnShelfColor";
@@ -12,6 +13,7 @@ import Notes from "./Notes";
 
 export default {
   CheckUnique: Check,
+  GlobeUnique: Globe,
   MinusUnique: Minus,
   PlusUnique: Plus,
   BooksOnShelfColorUnique: BooksOnShelfColor,
