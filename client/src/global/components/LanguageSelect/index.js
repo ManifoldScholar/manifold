@@ -5,11 +5,15 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { updateI18n } from "utils/i18n";
 
-function LanguageSelect({ language }) {
+function LanguageSelect({ authentication, language }) {
   const { t } = useTranslation();
-  const currentLanguage = language;
-  // const currentLanguage = "en";
-  const [toEs, setToEs] = useState(currentLanguage !== "en");
+  const userLanguage =
+    authentication?.currentUser?.attributes?.persistentUi?.reader?.locale
+      ?.language;
+
+  const initialLanguage = userLanguage || language;
+  const [lang, setLang] = useState(initialLanguage);
+  updateI18n(initialLanguage);
 
   const dispatch = useDispatch();
   const updateLanguage = useCallback(
@@ -22,50 +26,38 @@ function LanguageSelect({ language }) {
     [dispatch]
   );
 
-  const handleChange = ({ target: { checked } }) => {
-    setToEs(checked);
-    const newLang = checked ? "es" : "en";
+  const handleChange = event => {
+    const newLang = event.target?.value || "en";
+    setLang(newLang);
     // dispatch
     updateLanguage(newLang);
-    // update translation library
+    // and update the I18n
     updateI18n(newLang);
   };
 
   return (
     <fieldset className="c-language-select">
-      <legend className="a-hidden">{t("localize-content")}</legend>
-      <div className="c-language-select__inner">
-        <span className="c-language-select__tag">Language</span>
-        <div className="c-language-select__switch">
-          <input
-            className="c-language-select__input"
-            type="checkbox"
-            name="langSelect"
-            id="langSelect"
-            onChange={handleChange}
-          />
-          <label className="c-language-select__label" htmlFor="langSelect">
-            <span
-              className={classNames({
-                inner: true,
-                es: toEs
-              })}
-            />
-            <span
-              className={classNames({
-                switch: true,
-                es: toEs
-              })}
-            />
-          </label>
-        </div>
-      </div>
+      <label htmlFor="langSelect" className="a-hidden">
+        {t("localize-content")}
+      </label>
+      <select
+        name="langSelect"
+        id="langSelect"
+        value={lang}
+        onChange={handleChange}
+      >
+        <option value="none">Select language:</option>
+        <option value="en">{t(`english-site-name`)}</option>
+        <option value="es">{t(`espanol-site-name`)}</option>
+        <option value="nl">{t(`dutch-site-name`)}</option>
+      </select>
     </fieldset>
   );
 }
 
 LanguageSelect.mapStateToProps = state => {
   return {
+    authentication: state.authentication,
     language: state.ui.persistent.reader.locale.language
   };
 };

@@ -35,6 +35,7 @@ module APIDocs
               colors: Types::Hash, # TODO: Flesh out class abilities
               typography: Types::Hash, # TODO: Flesh out class abilities
               reading_groups: Types::Hash # TODO: Flesh out class abilities
+              locale: Types::Hash,
             )
           ),
           notification_preferences_by_kind: Types::Array.of(
