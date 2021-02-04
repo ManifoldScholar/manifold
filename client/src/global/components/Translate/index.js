@@ -9,8 +9,8 @@ import { Trans, useTranslation } from "react-i18next";
   Hello <strong title={t('nameTitle')}>{{name}}</strong>, you have {{count}} unread message. <Link to="/msgs">Go to messages</Link>.
 </T> */
 // HERE IS WHAT THE en.json looks like
-// "userMessagesUnread": "Hello <1>{{name}}</1>, you have {{count}} unread message. <5>Go to message</5>.",
-// "userMessagesUnread_plural": "Hello <1>{{name}}</1>, you have {{count}} unread messages.  <5>Go to messages</5>.",
+// "userMessagesUnread": "Hello <1>{{name}}</1>, you have {{count}} unread message. <2>Go to message</2>.",
+// "userMessagesUnread_plural": "Hello <1>{{name}}</1>, you have {{count}} unread messages.  <2>Go to messages</2>.",
 // SEE: https://react.i18next.com/legacy-v9/trans-component
 
 const T = ({ children, components, i18nKey, translate, values }) => {
