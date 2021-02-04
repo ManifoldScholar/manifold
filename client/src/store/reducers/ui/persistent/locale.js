@@ -5,11 +5,11 @@ const initialState = {
 };
 
 const setLocale = (state, action) => {
-  return { ...state, ...action.payload.locale };
+  return { ...state, ...action.payload };
 };
 
 const setPersistentUI = (state, action) => {
-  return { ...state, ...action.payload.locale };
+  return { ...state, ...action.payload };
 };
 
 export default handleActions(

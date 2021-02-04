@@ -1,25 +1,23 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
-import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { updateI18n } from "utils/i18n";
 
 function LanguageSelect({ authentication, language }) {
   const { t } = useTranslation();
   const userLanguage =
-    authentication?.currentUser?.attributes?.persistentUi?.reader?.locale
-      ?.language;
+    authentication?.currentUser?.attributes?.persistentUi?.locale?.language;
 
   const initialLanguage = userLanguage || language;
   const [lang, setLang] = useState(initialLanguage);
 
   const dispatch = useDispatch();
   const updateLanguage = useCallback(
-    lang => {
+    l => {
       dispatch({
         type: "SET_LOCALE",
-        payload: { locale: { language: lang } }
+        payload: { language: l }
       });
     },
     [dispatch]
@@ -62,7 +60,7 @@ function LanguageSelect({ authentication, language }) {
 LanguageSelect.mapStateToProps = state => {
   return {
     authentication: state.authentication,
-    language: state.ui.persistent.reader.locale.language
+    language: state.ui.persistent.locale.language
   };
 };
 
