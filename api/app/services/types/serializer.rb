@@ -57,9 +57,6 @@ module Types
         colors: Types::Hash.schema(
           color_scheme: Types::String.enum("light", "dark")
         ),
-        locale: Types::Hash.schema(
-          language: Types::String.enum("en", "es", "nl")
-        ),
         typography: Types::Hash.schema(
           font: Types::String.meta(example: "serif"),
           margins: Types::Hash.schema(
@@ -76,6 +73,9 @@ module Types
         reading_groups: Types::Hash.schema(
           current_reading_group: Types::Serializer::ID
         )
+      ),
+      locale: Types::Hash.schema(
+        language: Types::String.enum("en", "es", "nl")
       )
     )
 
