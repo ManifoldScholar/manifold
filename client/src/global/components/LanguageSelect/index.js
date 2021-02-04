@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import classNames from "classnames";
@@ -13,7 +13,6 @@ function LanguageSelect({ authentication, language }) {
 
   const initialLanguage = userLanguage || language;
   const [lang, setLang] = useState(initialLanguage);
-  updateI18n(initialLanguage);
 
   const dispatch = useDispatch();
   const updateLanguage = useCallback(
@@ -34,6 +33,11 @@ function LanguageSelect({ authentication, language }) {
     // and update the I18n
     updateI18n(newLang);
   };
+
+  useEffect(() => {
+    setLang(initialLanguage);
+    updateI18n(initialLanguage);
+  }, [initialLanguage]);
 
   return (
     <fieldset className="c-language-select">
