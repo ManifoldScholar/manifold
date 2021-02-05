@@ -247,9 +247,11 @@ export default class AnnotationPopupPositioner extends PureComponent {
       <div
         onMouseDown={this.stopPropagation}
         onClick={this.stopPropagation}
+        onKeyDown={this.stopPropagation}
         role="presentation"
         className={popupClass}
         ref={this.setPopupRef}
+        tabIndex="0"
       >
         {this.visible ? this.props.children(this.state) : null}
       </div>
