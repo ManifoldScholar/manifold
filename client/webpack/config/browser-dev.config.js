@@ -4,8 +4,10 @@ import {
   HotModuleReplacementPlugin,
   NamedModulesPlugin
 } from "webpack";
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import merge from "webpack-merge";
 import environment from "../helpers/environment";
+import paths from "../helpers/paths";
 
 const config = merge.smart(baseConfig, {
   entry: {
@@ -17,6 +19,27 @@ const config = merge.smart(baseConfig, {
 
   devtool: "cheap-module-eval-source-map",
 
+  mode: "development",
+  module: {
+    rules: [
+      // Javascript loader
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        include: [paths.src, paths.plugins],
+        use: [
+          {
+            loader: require.resolve("babel-loader"),
+            options: {
+              cacheDirectory: true,
+              plugins: [require.resolve("react-refresh/babel")]
+            }
+          }
+        ]
+      }
+    ]
+  },
+
   devServer: {
     hot: true,
     headers: {
@@ -26,12 +49,11 @@ const config = merge.smart(baseConfig, {
         "X-Requested-With, content-type, Authorization"
     }
   },
-  resolve: {
-    alias: {
-      "react-dom": "@hot-loader/react-dom"
-    }
-  },
-  plugins: [new HotModuleReplacementPlugin(), new NamedModulesPlugin()]
+  plugins: [
+    new NamedModulesPlugin(),
+    new HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin()
+  ]
 });
 
 export default config;
