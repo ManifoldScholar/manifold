@@ -18,12 +18,7 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v1
 
-      - name: "Set up Ruby 2.6"
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.6.x
-
-      - name: "Install Node"
+      - name: "Install Node 12.x"
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
@@ -62,7 +57,7 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v1
 
-      - name: "Install Node"
+      - name: "Install Node 12.x"
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
@@ -101,7 +96,7 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v1
 
-      - name: "Set up Ruby 2.6"
+      - name: "Install Ruby 2.6.x"
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.6.x
@@ -114,16 +109,16 @@ jobs:
         uses: actions/cache@v1
         with:
           path: api/vendor
-          key: ${{ runner.OS }}-gem-cache-${{ hashFiles('**/api/Gemfile.lock') }}
+          key: ${{ runner.OS }}-gem-1-cache-${{ hashFiles('**/api/Gemfile.lock') }}
           restore-keys: |
-            ${{ runner.OS }}-gem-cache-
+            ${{ runner.OS }}-gem-1-cache-
 
       - name: "Install Gem dependencies"
         env:
           RAILS_ENV: test
         run: |
           cd api
-          gem install bundler -v 1.17.2
+          gem install bundler -v 1.17.3
           bundle install --deployment --jobs 4 --retry 3
 
       - name: "Run Rubopcop"
@@ -150,7 +145,7 @@ jobs:
     - name: "Checkout code"
       uses: actions/checkout@v1
 
-    - name: "Set up Ruby 2.6"
+    - name: "Install Ruby 2.6.x"
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.x
@@ -168,16 +163,16 @@ jobs:
       uses: actions/cache@v1
       with:
         path: api/vendor
-        key: ${{ runner.OS }}-gem-cache-${{ hashFiles('**/api/Gemfile.lock') }}
+        key: ${{ runner.OS }}-gem-2-cache-${{ hashFiles('**/api/Gemfile.lock') }}
         restore-keys: |
-          ${{ runner.OS }}-gem-cache-
+          ${{ runner.OS }}-gem-2-cache-
 
     - name: "Install Gem dependencies"
       env:
         RAILS_ENV: test
       run: |
         cd api
-        gem install bundler -v 1.17.2
+        gem install bundler -v 1.17.3
         bundle install --deployment --jobs 4 --retry 3
 
     - name: "Setup test database"
