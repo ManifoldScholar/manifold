@@ -5,7 +5,6 @@ import Dialog from "backend/components/dialog";
 import { Provider } from "react-redux";
 import Manifold from "global/containers/Manifold";
 import get from "lodash/get";
-import { hot } from "react-hot-loader/root";
 import Analytics from "hoc/analytics";
 import { HelmetProvider } from "react-helmet-async";
 
@@ -102,4 +101,4 @@ class App extends Component {
   }
 }
 
-export default hot(App);
+export default App;
