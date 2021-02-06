@@ -101,9 +101,13 @@ function mergeEntities(
   return { ...stateEntities, ...mergedEntities };
 }
 
-function mergeCollections(stateResponse, payloadResults) {
-  if (!get(stateResponse, "appends")) return payloadResults;
-  return unionWith(stateResponse.collection, payloadResults, isEqual);
+function maybeMergeCollections(appendTo, stateResponses, payloadResults) {
+  if (!appendTo || !has(stateResponses, appendTo)) return payloadResults;
+  return unionWith(
+    stateResponses[appendTo].collection,
+    payloadResults,
+    isEqual
+  );
 }
 
 function deriveType(entityOrCollection) {
@@ -165,8 +169,9 @@ function touchResponses(responses, entities) {
 
 function successResponse(state, action) {
   const payload = normalizePayload(action.payload);
-  const meta = action.meta;
   const isNull = !payload;
+  const appends = !isNull && action.payload.appends;
+  const meta = action.meta;
   const shouldTouchResponses = !isNull && !action.payload.noTouch;
   const overwritePartials = !isNull && action.payload.force;
   const isCollection = !isNull && Array.isArray(payload.results);
@@ -179,7 +184,7 @@ function successResponse(state, action) {
     [meta]: {
       entity: isEntity ? payload.results : null,
       collection: isCollection
-        ? mergeCollections(baseResponses[meta], payload.results)
+        ? maybeMergeCollections(appends, baseResponses, payload.results)
         : null,
       meta: buildMeta(action.payload, { modified: false }),
       links: get(action.payload, "links"),
@@ -189,6 +194,7 @@ function successResponse(state, action) {
       appends: get(baseResponses[meta], "appends", false)
     }
   };
+
   if (isNull) {
     return { ...state, responses };
   }
