@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { updateI18n } from "utils/i18n";
+import UniqueIcons from "global/components/icon/unique";
+import Utility from "global/components/utility";
 
 function LanguageSelect({ authentication, language }) {
   const { t } = useTranslation();
@@ -53,6 +55,8 @@ function LanguageSelect({ authentication, language }) {
         <option value="es">{t(`espanol-site-name`)}</option>
         <option value="nl">{t(`dutch-site-name`)}</option>
       </select>
+      <UniqueIcons.GlobeUnique />
+      <Utility.IconComposer icon="disclosureDown24" />
     </fieldset>
   );
 }

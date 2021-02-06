@@ -1,4 +1,5 @@
 .c-language-select {
+  position: relative;
   margin: 10px 0;
   padding: 0;
   border: 0;
@@ -17,16 +18,36 @@
     font-family: "sofia-pro", "trueno", sans-serif;
     padding: 0.438em 1.125em 0.563em;
     background: transparent;
-    border: 1px solid #9a9a9a;
-    border-radius: 0;
     appearance: none;
     outline: none;
     width: 100%;
+    height: 40px;
     padding-left: 40px;
-    border-width: 1px;
-    border-radius: 8px;
-    border-color: #c3c3c3;
-    appearance: none;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    border: 1px solid #b2b2b2;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  select + svg {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    width: 20px;
+    height: 20px;
+    color: #b2b2b2;
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+  svg + svg {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    width: 20px;
+    height: 20px;
+    color: #b2b2b2;
+    pointer-events: none;
+    transform: translateY(-50%);
   }
 }
