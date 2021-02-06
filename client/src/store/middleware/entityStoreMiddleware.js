@@ -18,6 +18,7 @@ function buildResponseAction(requestAction, payload, meta, error) {
   const type = `API_RESPONSE/${constantizeMeta(meta)}`;
   /* eslint-disable no-param-reassign */
   if (payload) {
+    payload.appends = get(requestAction, "payload.appends") || null;
     payload.notificationScope =
       get(requestAction, "payload.notificationScope") || "global";
     payload.suppressErrors =
@@ -33,17 +34,14 @@ function buildEagerLoadRequestAction(originalAction, nextPage) {
   const {
     type,
     meta,
-    payload: { request: originalRequest, appends }
+    payload: { request: originalRequest }
   } = originalAction;
 
   const request = copy(originalRequest);
 
   set(request, "options.params.page.number", nextPage);
-
-  const payload = { appends, request, state: 0 };
-
+  const payload = { appends: meta, request, state: 0 };
   const action = { type, meta, payload };
-
   return action;
 }
 
@@ -63,7 +61,14 @@ function buildAddsAction(meta, entity) {
 }
 
 const getNextPage = property("meta.pagination.nextPage");
-const shouldEagerLoad = property("payload.request.eagerLoad");
+const canEagerLoad = property("payload.request.eagerLoad");
+const willEagerLoad = (action, response) => {
+  if (canEagerLoad(action)) {
+    const nextPage = getNextPage(response);
+    return nextPage && nextPage > 1;
+  }
+  return false;
+};
 
 export default function entityStoreMiddleware({ dispatch, getState }) {
   return next => action => {
@@ -113,18 +118,17 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
         dispatch({ type: "START_LOADING", payload: action.meta });
       }, 0);
 
-      requestPromise
-        .then(
-          () => {
-            dispatch({ type: "STOP_LOADING", payload: action.meta });
-          },
-          () => {
-            dispatch({ type: "STOP_LOADING", payload: action.meta });
-          }
-        )
-        .catch(() => {
+      const maybeStopLoading = (response) => {
+        if (!willEagerLoad(action, response)) {
           dispatch({ type: "STOP_LOADING", payload: action.meta });
-        });
+        }
+      };
+
+      const stopLoading = () => {
+        dispatch({ type: "STOP_LOADING", payload: action.meta });
+      };
+
+      requestPromise.then(maybeStopLoading, maybeStopLoading).catch(stopLoading);
     }
 
     // Pass through the request action with updated state
@@ -149,18 +153,11 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     requestPromise.then(
       response => {
         newMeta.forEach(meta => {
-          // const payload = response || {};
-          // payload.request = action.payload.request;
           dispatch(buildResponseAction(action, response, meta, false));
         });
 
-        if (shouldEagerLoad(action)) {
-          const nextPage = getNextPage(response);
-
-          if (nextPage && nextPage > 1) {
-            dispatch(buildEagerLoadRequestAction(action, nextPage));
-          }
-        }
+        if (willEagerLoad(action, response))
+          dispatch(buildEagerLoadRequestAction(action, getNextPage(response)));
       },
       response => {
         newMeta.forEach(meta => {
