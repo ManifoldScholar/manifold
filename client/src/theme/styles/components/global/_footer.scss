@@ -4,7 +4,7 @@
 
   padding-top: 32px;
   color: $neutralTextLight;
-  background-color: $neutral85;
+  background-color: $neutral95;
 
   @include respond($break50) {
     padding-top: 40px;
@@ -229,7 +229,7 @@
   display: block;
   padding-top: 30px;
   padding-bottom: 30px;
-  background-color: $neutral90;
+  background-color: $neutral110;
   transition: background-color $duration $timing;
 
   &--reader {
