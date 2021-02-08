@@ -16,8 +16,10 @@ class DefaultFooter extends Component {
       <footer className="app-footer app-footer--default">
         <FooterParts.Columns>
           <FooterParts.Column position="right">
-            <FooterParts.Search push={this.props.history.push} />
-            <LanguageSelect />
+            <div className="c-footer-forms">
+              <FooterParts.Search push={this.props.history.push} />
+              <LanguageSelect />
+            </div>
           </FooterParts.Column>
           <FooterParts.Column position="left">
             <FooterParts.Navigation>{links(this.props)}</FooterParts.Navigation>

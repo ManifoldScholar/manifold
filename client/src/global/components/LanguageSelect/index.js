@@ -50,7 +50,7 @@ function LanguageSelect({ authentication, language }) {
         value={lang}
         onChange={handleChange}
       >
-        <option value="none">Select language:</option>
+        <option value="none">Language:</option>
         <option value="en">{t(`english-site-name`)}</option>
         <option value="es">{t(`espanol-site-name`)}</option>
         <option value="nl">{t(`dutch-site-name`)}</option>
