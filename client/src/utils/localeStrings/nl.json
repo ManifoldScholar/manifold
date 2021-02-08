@@ -1,0 +1,28 @@
+{
+  "key": "en",
+  "translation": {
+    "english-site-name": "English",
+    "espanol-site-name": "Español",
+    "dutch-site-name": "Dutch",
+    "localize-content": "Localize site content - nl",
+    "error-title": "Error",
+    "error-text": "There has been an error.",
+    "page-not-found-title": "Page not found",
+    "page-not-found-text": "The page you're looking for was not found.",
+    "exit-editor-mode": "Exit Editor Mode - nl",
+    "exit-author-mode": "Exit Author Mode - nl",
+    "exit-admin-mode": "Exit Admin Mode - nl",
+    "enter-admin-mode": "Enter Admin Mode - nl",
+    "enter-editor-mode": "Enter Editor Mode - nl",
+    "contact-form": {
+      "contact-us": "Contact us",
+      "email": "Email",
+      "inquiry": "Inquiry",
+      "send": "Send",
+      "sending": "Sending…",
+      "reset": "Reset form",
+      "success": "Thank you. We’ve received your message.",
+      "error": "We seem to have run into a problem."
+    }
+  }
+}

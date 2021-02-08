@@ -21,6 +21,7 @@ const plugins = [
   "@babel/plugin-syntax-dynamic-import",
   "@babel/plugin-syntax-import-meta",
   "@babel/plugin-transform-destructuring",
+  "i18next-extract",
   [
     "module-resolver",
     {

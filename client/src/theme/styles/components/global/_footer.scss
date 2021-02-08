@@ -4,7 +4,7 @@
 
   padding-top: 32px;
   color: $neutralTextLight;
-  background-color: $neutral85;
+  background-color: $neutral95;
 
   @include respond($break50) {
     padding-top: 40px;
@@ -34,7 +34,7 @@
   &--standalone {
     --default-focus-color: #{$accentInteractionLight};
 
-    padding-top: 0;
+    padding-top: 40px;
   }
 
   &__columns {
@@ -90,7 +90,6 @@
 
   &__column {
     &--right {
-
       padding-top: 30px;
 
       @include respond($break65) {
@@ -139,9 +138,7 @@
     a {
       color: inherit;
     }
-
   }
-
 
   &__press-logo {
     display: none;
@@ -159,9 +156,7 @@
     max-width: 328px;
     max-height: 202px;
   }
-
 }
-
 
 .app-footer-navigation {
   &--mobile {
@@ -205,7 +200,6 @@
       max-width: 160px;
       margin-right: 70px;
     }
-
   }
 
   &__item {
@@ -235,7 +229,7 @@
   display: block;
   padding-top: 30px;
   padding-bottom: 30px;
-  background-color: $neutral90;
+  background-color: $neutral110;
   transition: background-color $duration $timing;
 
   &--reader {
@@ -353,14 +347,12 @@
   &__postscript {
     margin-top: 20px;
   }
-
 }
-
 
 .app-footer-search-form {
   input {
     border-width: 1px;
-    border-radius: 8px;
+    border-radius: 20px;
   }
 
   &--with-top-margin {
@@ -369,7 +361,5 @@
     @include respond($break65) {
       margin-top: 60px;
     }
-
   }
-
 }

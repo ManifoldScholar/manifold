@@ -35,6 +35,7 @@ class ManifoldContainer extends PureComponent {
       authentication: state.authentication,
       visibility: state.ui.transitory.visibility,
       frontendMode: state.ui.transitory.frontendMode,
+      language: state.ui.persistent.locale.language,
       loading: state.ui.transitory.loading.active,
       fatalError: state.fatalError,
       routing: state.routing,
@@ -44,6 +45,7 @@ class ManifoldContainer extends PureComponent {
 
   static propTypes = {
     dispatch: PropTypes.func,
+    language: PropTypes.string,
     loading: PropTypes.bool,
     visibility: PropTypes.object,
     authentication: PropTypes.object,
