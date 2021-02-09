@@ -7,8 +7,11 @@ class ReadingGroup < ApplicationRecord
   include SerializedAbilitiesFor
   include TrackedCreator
 
+  resourcify
+
   has_many :reading_group_memberships, dependent: :destroy
-  has_many :users, through: :reading_group_memberships
+  has_many :moderators, -> { merge(ReadingGroupMembership.moderators) }, through: :reading_group_memberships, source: :user
+  has_many :users, -> { merge(ReadingGroupMembership.active) }, through: :reading_group_memberships
   # We intentionally leave out the :dependent option here because we apply out own logic
   # to child annotations on reading group delete in the :update_annotations_privacy
   # before_destroy callback below.
@@ -16,6 +19,7 @@ class ReadingGroup < ApplicationRecord
 
   has_one :reading_group_collection, inverse_of: :reading_group
   has_one :reading_group_count
+  has_many :reading_group_visibilities
 
   has_many :annotated_texts, -> { distinct.reorder(nil) }, through: :annotations, source: :text
 
@@ -35,12 +39,15 @@ class ReadingGroup < ApplicationRecord
 
   before_validation :ensure_invitation_code
   before_validation :upcase_invitation_code
-  before_save :ensure_creator_membership
+  after_save :ensure_creator_membership
   before_destroy :update_annotations_privacy
 
   scope :with_order, ->(by = nil) { by.present? ? order(by) : order(created_at: :desc) }
   scope :non_public, -> { where.not(privacy: "public") }
   scope :visible_to_public, -> { where(privacy: "public") }
+  scope :visible_to, ->(user) do
+    where(id: ReadingGroupVisibility.visible_to(user).select(:reading_group_id))
+  end
 
   def private?
     privacy == "private"
@@ -76,7 +83,9 @@ class ReadingGroup < ApplicationRecord
   end
 
   def ensure_creator_membership
-    users << creator unless users.include? creator
+    return if creator.in?(users)
+
+    reading_group_memberships.create!(user: creator, role: :moderator)
   end
 
   class << self
