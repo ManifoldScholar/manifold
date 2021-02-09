@@ -34,6 +34,8 @@ module V1
 
     typed_has_many :collection_resources
 
+    serialize_collectable_attributes!
+
     # rubocop:disable Metrics/BlockLength
     when_full do
       abilities

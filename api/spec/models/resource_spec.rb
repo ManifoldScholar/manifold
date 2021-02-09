@@ -286,4 +286,6 @@ RSpec.describe Resource, type: :model do
       expect(resource.attachment_checksum).to eq sha
     end
   end
+
+  it_should_behave_like "a collectable"
 end

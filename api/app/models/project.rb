@@ -19,6 +19,7 @@ class Project < ApplicationRecord
 
   # Concerns
   include Authority::Abilities
+  include Collectable
   include Entitleable
   include SerializedAbilitiesFor
   include StoresFingerprints

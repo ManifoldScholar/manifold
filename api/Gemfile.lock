@@ -189,6 +189,13 @@ GEM
       dry-configurable (~> 0.1, >= 0.1.3)
     dry-core (0.5.0)
       concurrent-ruby (~> 1.0)
+    dry-effects (0.1.5)
+      concurrent-ruby (~> 1.0)
+      dry-container (~> 0.7, >= 0.7.2)
+      dry-core (~> 0.4, >= 0.4.7)
+      dry-equalizer (~> 0.2, >= 0.2.2)
+      dry-inflector (~> 0.1, >= 0.1.2)
+      dry-initializer (~> 3.0)
     dry-equalizer (0.3.0)
     dry-events (0.2.0)
       concurrent-ruby (~> 1.0)
@@ -196,6 +203,9 @@ GEM
       dry-equalizer (~> 0.2)
     dry-inflector (0.2.0)
     dry-initializer (3.0.4)
+    dry-initializer-rails (3.1.1)
+      dry-initializer (>= 2.4, < 4)
+      rails (> 3.0)
     dry-logic (1.1.0)
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.5, >= 0.5)
@@ -205,6 +215,10 @@ GEM
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.4, >= 0.4.4)
       dry-equalizer
+    dry-rails (0.3.0)
+      dry-schema (~> 1.5)
+      dry-system (~> 0.18.0, >= 0.18.1)
+      dry-validation (~> 1.5)
     dry-schema (1.6.1)
       concurrent-ruby (~> 1.0)
       dry-configurable (~> 0.8, >= 0.8.3)
@@ -766,9 +780,12 @@ DEPENDENCIES
   debase
   dotenv-rails (~> 2.0)
   draper (~> 3.1)
+  dry-effects
   dry-equalizer
   dry-initializer
+  dry-initializer-rails (~> 3.1.1)
   dry-monads (~> 1.0)
+  dry-rails (~> 0.3.0)
   dry-struct
   dry-system
   dry-transaction

@@ -14,6 +14,7 @@ class Resource < ApplicationRecord
   }
   # Concerns
   include Authority::Abilities
+  include Collectable
   include SerializedAbilitiesFor
   include TrackedCreator
   include Filterable
