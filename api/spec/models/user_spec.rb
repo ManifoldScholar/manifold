@@ -23,8 +23,8 @@ RSpec.describe User, type: :model do
     user = FactoryBot.create(:user)
     project = FactoryBot.create(:project)
     text = FactoryBot.create(:text)
-    user.favorites.create(favoritable: project)
-    user.favorites.create(favoritable: text)
+    user.collect_model! project
+    user.collect_model! text
     expect(user.favorite_projects.length).to be(1)
   end
 

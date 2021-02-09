@@ -185,6 +185,7 @@ Rails.application.routes.draw do
           resources :reading_groups, only: [:index]
           resources :favorite_projects, only: [:index]
           resources :annotations, only: [:index]
+          resource :collection, only: %i[show create update destroy]
         end
       end
 
