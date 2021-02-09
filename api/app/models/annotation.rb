@@ -29,16 +29,12 @@ class Annotation < ApplicationRecord
     TYPE_COLLECTION
   ].freeze
 
-  # Associations
   # Annotations can become orphaned when the text section is deleted.
   belongs_to :text_section, optional: true
   belongs_to :reading_group, optional: true
   belongs_to :resource, optional: true
   belongs_to :resource_collection, optional: true
   has_many :reading_group_memberships, through: :reading_group
-  has_one :reading_group_membership,
-          ->(annotation) { where user_id: annotation.creator_id },
-          class_name: "ReadingGroupMembership"
   has_many :comments, as: :subject, dependent: :destroy, inverse_of: :subject,
                       counter_cache: :comments_count
   has_one :text, through: :text_section
@@ -48,6 +44,9 @@ class Annotation < ApplicationRecord
           as: :subject,
           dependent: :destroy,
           inverse_of: :subject
+
+  has_one :annotation_reading_group_membership
+  has_one :reading_group_membership, through: :annotation_reading_group_membership
 
   # Validations
   validates :text_section, presence: true
@@ -103,13 +102,12 @@ class Annotation < ApplicationRecord
   scope :by_reading_group, lambda { |reading_group|
     where(reading_group: reading_group) if reading_group.present?
   }
-  scope :by_reading_group_membership, lambda { |reading_group_membership|
-    rgm = if reading_group_membership.instance_of?(ActiveRecord::Base)
-            reading_group_membership
-          else
-            ReadingGroupMembership.find(reading_group_membership)
-          end
-    where(reading_group: rgm.reading_group_id, creator: rgm.user_id) if rgm.present?
+  scope :by_reading_group_membership, lambda { |rgm|
+    if rgm.present?
+      condition = AnnotationReadingGroupMembership.by_reading_group_membership(rgm).active
+
+      joins(:annotation_reading_group_membership).merge(condition)
+    end
   }
   scope :by_text_section, lambda { |text_section|
     where(text_section: text_section) if text_section.present?
@@ -120,6 +118,10 @@ class Annotation < ApplicationRecord
 
   scope :maybe_sans_public_annotations_not_owned_by, lambda { |sans, user|
     sans_public_annotations_not_owned_by(user) if sans
+  }
+
+  scope :sans_archived_reading_group_memberships, -> {
+    all # left_outer_joins(:reading_group_membership).where.not(reading_group_memberships: { aasm_state: :archived })
   }
 
   scope :with_read_ability_when_reading_groups_disabled, lambda { |user, exclude_public = false|
@@ -141,6 +143,7 @@ class Annotation < ApplicationRecord
     # Exclude annotations that have a non-public reading group that the user does not belong to.
     if user.present?
       left_outer_joins(:reading_group)
+        .sans_archived_reading_group_memberships
         .sans_private_annotations_not_owned_by(user)
         .maybe_sans_public_annotations_not_owned_by(exclude_public, user)
         .where(arel_reading_groups_for_user(user, with_membership_only: exclude_public))
@@ -148,6 +151,7 @@ class Annotation < ApplicationRecord
       return only_resource_annotations if exclude_public
 
       left_outer_joins(:reading_group)
+        .sans_archived_reading_group_memberships
         .non_private
         .where(reading_groups: { id: [nil, ReadingGroup.visible_to_public] })
     end
@@ -191,11 +195,7 @@ class Annotation < ApplicationRecord
     # rubocop:enable Metrics/AbcSize
 
     def arel_reading_groups_for_user(user, with_membership_only: false)
-      id_scope = if with_membership_only
-                   ReadingGroupMembership.joined_reading_group_ids_for(user)
-                 else
-                   ReadingGroupMembership.visible_reading_group_ids_for(user)
-                 end
+      id_scope = ReadingGroupVisibility.visible_or_joined_reading_group_ids_for(user, joined: with_membership_only)
 
       ReadingGroup.arel_id_is_null_or_within_scope(id_scope).or(arel_table[:creator_id].eq(user.id))
     end

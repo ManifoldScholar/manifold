@@ -30,16 +30,22 @@ Rails.application.routes.draw do
       resources :test_mails, only: [:create]
       resources :pages
 
-      resources :reading_group_memberships, only: [:destroy, :create]
+      resources :reading_group_memberships, only: [:show, :create, :update, :destroy] do
+        member do
+          post :activate
+          post :archive
+        end
+      end
+
       resources :reading_groups do
         collection do
           get "lookup"
         end
         scope module: :reading_groups do
           namespace :relationships do
-            resources :reading_group_memberships, only: [:index]
             resources :annotations, only: [:index]
             resources :reading_group_categories, only: %i[index show create update destroy]
+            resources :reading_group_memberships, only: [:index]
 
             # Collections:
             resources :projects, only: [:index]

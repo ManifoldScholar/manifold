@@ -1,9 +1,7 @@
 # The User model
 class User < ApplicationRecord
-  # Constants
   TYPEAHEAD_ATTRIBUTES = [:title, :first_name, :last_name, :email].freeze
 
-  # Concerns
   include Authority::Abilities
   include Authority::UserAbilities
   include SerializedAbilitiesOn
@@ -20,10 +18,8 @@ class User < ApplicationRecord
   classy_enum_attr :role, enum: "RoleName", allow_blank: false, default: :reader
   classy_enum_attr :kind, enum: "RoleName", allow_blank: false, default: :reader
 
-  # Rolify
   rolify after_add: :synchronize_kind!, after_remove: :synchronize_kind!
 
-  # Associations
   has_many :identities, inverse_of: :user, autosave: true, dependent: :destroy
   has_many :annotations, foreign_key: "creator_id", dependent: :destroy,
            inverse_of: :creator
@@ -42,14 +38,18 @@ class User < ApplicationRecord
   has_many :created_flags, class_name: "Flag", foreign_key: "creator_id",
            dependent: :destroy, inverse_of: :creator
   has_many :reading_group_memberships, dependent: :destroy
-  has_many :reading_groups, through: :reading_group_memberships
+  has_many :reading_groups, -> { merge(ReadingGroupMembership.active) }, through: :reading_group_memberships
+  has_many :archived_reading_groups, -> { merge(ReadingGroupMembership.archived) },
+           through: :reading_group_memberships, source: :reading_group
+  has_many :reading_group_visibilities
+  has_many :visible_reading_groups, -> { merge(ReadingGroupVisibility.visible) },
+           through: :reading_group_visibilities, source: :reading_group
   has_many :entitlement_user_links, inverse_of: :user, dependent: :destroy
   has_many :granted_entitlements, through: :entitlement_user_links, source: :entitlement
   has_many :permissions
 
   has_one :derived_role, inverse_of: :user, class_name: "UserDerivedRole"
 
-  # Validation
   validates :password, length: { minimum: 8 }, allow_nil: true, confirmation: true
   validate :password_not_blank!
   validates :email, presence: true, case_sensitive: false
