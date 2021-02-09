@@ -26,6 +26,8 @@ module V1
 
     typed_has_many :creators, serializer: ::V1::MakerSerializer, record_type: :maker
 
+    serialize_collectable_attributes!
+
     # rubocop:disable Metrics/BlockLength
     when_full do
       metadata(metadata: true, properties: true, formatted: true)
