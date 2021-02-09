@@ -10,6 +10,8 @@ module API
         ReadingGroup.includes(:reading_group_collection)
       end
 
+      authority_actions do_clone: :update, join: :read
+
       def index
         @reading_groups = load_reading_groups
 
@@ -39,6 +41,38 @@ module API
       def destroy
         @reading_group = load_and_authorize_reading_group
         @reading_group.destroy
+      end
+
+      # @note API endpoint is clone. Named `do_clone` to avoid overriding core ruby method
+      #   and potentially introducing hard-to-track-down bugs.
+      def do_clone
+        @reading_group = load_and_authorize_reading_group
+
+        options = {
+          reading_group: @reading_group,
+          user: current_user
+        }
+
+        handle_monadic_operation! "reading_groups.clone", options do |m|
+          m.success do |cloned_reading_group|
+            render_single_resource cloned_reading_group
+          end
+        end
+      end
+
+      def join
+        @reading_group = load_and_authorize_reading_group
+
+        options = {
+          reading_group: @reading_group,
+          user: current_user
+        }
+
+        handle_monadic_operation! "reading_groups.join_public", options do |m|
+          m.success do |reading_group_membership|
+            render_single_resource reading_group_membership
+          end
+        end
       end
 
       private
