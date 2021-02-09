@@ -14,6 +14,14 @@ module V1
     typed_attribute :highlights_count, Types::Integer.meta(read_only: true)
     typed_attribute :created_at, Types::DateTime.meta(read_only: true)
     typed_attribute :creator_id, Types::Serializer::ID.meta(read_only: true)
+    typed_attribute :course, Types::Hash.schema(
+      enabled: Types::Bool,
+      starts_on: Types::Date.optional,
+      ends_on: Types::Date.optional
+    ) do |object, _params|
+      object.course.as_json
+    end
+
     typed_attribute :all_annotations_count, Types::Integer.meta(read_only: true) do |object, _params|
       object.annotations_count + object.highlights_count
     end
