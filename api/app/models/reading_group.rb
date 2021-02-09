@@ -9,6 +9,10 @@ class ReadingGroup < ApplicationRecord
 
   resourcify
 
+  attribute :course, ReadingGroups::CourseConfiguration.to_type
+
+  belongs_to :reading_group_kind, optional: true, inverse_of: :reading_groups
+
   has_many :reading_group_memberships, dependent: :destroy
   has_many :moderators, -> { merge(ReadingGroupMembership.moderators) }, through: :reading_group_memberships, source: :user
   has_many :users, -> { merge(ReadingGroupMembership.active) }, through: :reading_group_memberships
