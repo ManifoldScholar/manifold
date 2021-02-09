@@ -17,7 +17,7 @@ module API
 
         respond_with_forbidden("reading groups", "list") && return unless ReadingGroup.listable_by?(current_user)
 
-        render_multiple_resources @reading_groups
+        render_multiple_resources @reading_groups, includes: %i[kind]
       end
 
       def show
