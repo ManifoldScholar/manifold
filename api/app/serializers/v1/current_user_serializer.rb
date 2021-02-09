@@ -33,6 +33,10 @@ module V1
 
     typed_has_many :favorites
 
+    typed_has_one :collection, serializer: V1::UserCollectionSerializer do |object, _params|
+      object.composed_collection
+    end
+
     class << self
 
       private

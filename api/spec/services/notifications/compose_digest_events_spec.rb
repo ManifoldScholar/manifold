@@ -16,8 +16,8 @@ RSpec.describe Notifications::ComposeDigestEvents, interaction: true do
   let!(:c_collection_event) { past_event :resource_collection_added, on: project_c }
 
   before(:each) do
-    user.favorite_projects << project_a
-    user.favorite_projects << project_c
+    user.collect_model! project_a
+    user.collect_model! project_c
   end
 
   def past_event(*traits, on:, at: Date.current.yesterday, **other_attrs)
