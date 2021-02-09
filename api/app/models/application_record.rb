@@ -25,5 +25,15 @@ class ApplicationRecord < ActiveRecord::Base
     def in_the_week_of(date)
       where(created_at: date.to_week_range)
     end
+
+    def sample(num = nil)
+      randomized = reorder(Arel.sql("RANDOM()"))
+
+      if num.is_a?(Integer) && num >= 1
+        randomized.limit(num)
+      else
+        randomized.first
+      end
+    end
   end
 end
