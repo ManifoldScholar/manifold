@@ -1,9 +1,30 @@
 # A reading group is a cohort of users who are collaboratively consuming Manifold content.
 class ReadingGroupMembership < ApplicationRecord
+  upsert_keys %i[reading_group_id user_id]
 
+  include AASM
   include Authority::Abilities
   include SerializedAbilitiesFor
   include Filterable
+
+  ANONYMOUS_LABELS = [
+    "Folio", "Bifolium", "Broadside", "Catchword", "Colophon",
+    "Compositor", "Coucher", "Deckle", "Printer’s Devil", "Font",
+    "Forme", "Typeface", "Incunabula", "Leaf", "Mould", "Paratext",
+    "Recto", "Running-Title", "Shelfmark", "Quire", "Sheet", "Verso",
+    "Watermark", "Witness", "Binding", "Boards", "Book Jacket",
+    "Broadsheet", "Binding", "Conjugate Leaf", "Dust Jacket", "Edition",
+    "End Paper", "Flyleaf", "Foxing", "Frontispiece", "Gathering",
+    "Hinge", "Imprint", "Marbled Edge", "Octavo", "Presentation Copy",
+    "Quarter Binding", "Quarto", "Slipcase", "Variant", "Wrapper",
+    "Duodecimo", "Serif", "Engraving", "Intaglio", "Woodcut",
+    "Lithograph"
+  ].freeze
+
+  classy_enum_attr :annotation_style, default: :solid, allow_blank: false
+  classy_enum_attr :role, enum: "ReadingGroupRole", default: :member, allow_blank: false
+
+  scope :moderators, -> { active.where(role: "moderator") }
 
   validates :user_id, uniqueness: { scope: :reading_group_id }
 
@@ -15,41 +36,34 @@ class ReadingGroupMembership < ApplicationRecord
   delegate :anonymous?, to: :reading_group, prefix: true
   delegate :annotations_count, to: :reading_group_membership_count, allow_nil: true
   delegate :highlights_count, to: :reading_group_membership_count, allow_nil: true
+  delegate :moderator?, :member?, to: :role
 
   before_validation :ensure_anonymous_label
+  after_save :ensure_user_roles!
   after_commit :enqueue_notification, on: [:create]
   after_create :create_entitlements!
   before_destroy :remove_entitlements!
+  after_destroy :remove_user_roles!
 
-  ANONYMOUS_LABELS = ["Folio", "Bifolium", "Broadside", "Catchword", "Colophon",
-                      "Compositor", "Coucher", "Deckle", "Printer’s Devil", "Font",
-                      "Forme", "Typeface", "Incunabula", "Leaf", "Mould", "Paratext",
-                      "Recto", "Running-Title", "Shelfmark", "Quire", "Sheet", "Verso",
-                      "Watermark", "Witness", "Binding", "Boards", "Book Jacket",
-                      "Broadsheet", "Binding", "Conjugate Leaf", "Dust Jacket", "Edition",
-                      "End Paper", "Flyleaf", "Foxing", "Frontispiece", "Gathering",
-                      "Hinge", "Imprint", "Marbled Edge", "Octavo", "Presentation Copy",
-                      "Quarter Binding", "Quarto", "Slipcase", "Variant", "Wrapper",
-                      "Duodecimo", "Serif", "Engraving", "Intaglio", "Woodcut",
-                      "Lithograph"].freeze
-  class << self
+  aasm do
+    state :active, initial: true
+    state :archived
 
-    def visible_reading_group_ids_for(user)
-      return none if user.blank?
+    event :archive do
+      transitions from: :active, to: :archived
 
-      joins(:reading_group).where(user: user)
-        .or(joins(:reading_group)
-          .merge(ReadingGroup.visible_to_public))
-        .select(:reading_group_id)
+      after do
+        touch :archived_at
+      end
     end
 
-    def joined_reading_group_ids_for(user)
-      return none if user.blank?
+    event :activate do
+      transitions from: :archived, to: :active
 
-      joins(:reading_group).where(user: user)
-        .select(:reading_group_id)
+      after do
+        update_column :archived_at, nil
+      end
     end
-
   end
 
   def creator?
@@ -61,6 +75,20 @@ class ReadingGroupMembership < ApplicationRecord
   end
 
   private
+
+  # @return [void]
+  def ensure_user_roles!
+    if moderator? && active?
+      user.add_role :moderator, reading_group
+    else
+      user.remove_role :moderator, reading_group
+    end
+  end
+
+  # @return [void]
+  def remove_user_roles!
+    user.remove_role :moderator, reading_group if moderator?
+  end
 
   # @return [void]
   def create_entitlements!
@@ -95,5 +123,4 @@ class ReadingGroupMembership < ApplicationRecord
     end
     label
   end
-
 end
