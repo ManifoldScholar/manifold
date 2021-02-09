@@ -5,6 +5,7 @@ class Text < ApplicationRecord
 
   # Concerns
   include Authority::Abilities
+  include Collectable
   include SerializedAbilitiesFor
   include Sluggable
   include StoresFingerprints

@@ -7,6 +7,7 @@ class ResourceCollection < ApplicationRecord
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
   # Concerns
+  include Collectable
   include Filterable
   include Attachments
   include Authority::Abilities

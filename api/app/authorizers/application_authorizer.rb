@@ -1,6 +1,9 @@
 # Other authorizers should subclass this one
 class ApplicationAuthorizer < Authority::Authorizer
+  include ActiveSupport::Configurable
   include SerializableAuthorization
+
+  config.allowed_by_default = false
 
   delegate :admin_permissions?, :editor_permissions?,
            :project_creator_permissions?, :marketeer_permissions?,
@@ -64,7 +67,7 @@ class ApplicationAuthorizer < Authority::Authorizer
     def default(_adjective, _user, _options = {})
       # 'Whitelist' strategy for security: anything not explicitly allowed is
       # considered forbidden.
-      false
+      config.allowed_by_default
     end
 
     def reading_groups_disabled?

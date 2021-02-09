@@ -33,6 +33,11 @@ Metrics/ModuleLength:
 Metrics/ClassLength:
   Enabled: false
 
+Metrics/AbcSize:
+  Enabled: true
+  Exclude:
+    - 'app/services/collections'
+
 Layout/HashAlignment:
   EnforcedLastArgumentHashStyle: ignore_implicit
 

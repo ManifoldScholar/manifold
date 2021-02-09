@@ -1,7 +1,8 @@
 # A reading group is a cohort of users who are collaboratively consuming Manifold content.
 class ReadingGroup < ApplicationRecord
-
   include Authority::Abilities
+  include Collector
+  include CollectsReadingGroupEntries
   include ReceivesEntitlements
   include SerializedAbilitiesFor
   include TrackedCreator
@@ -13,9 +14,17 @@ class ReadingGroup < ApplicationRecord
   # before_destroy callback below.
   has_many :annotations
 
+  has_one :reading_group_collection, inverse_of: :reading_group
   has_one :reading_group_count
 
   has_many :annotated_texts, -> { distinct.reorder(nil) }, through: :annotations, source: :text
+
+  has_many :reading_group_categories, -> { in_order }, inverse_of: :reading_group, dependent: :destroy
+
+  collects_reading_group_entry! "ReadingGroupProject", categorized: true
+  collects_reading_group_entry! "ReadingGroupResource", categorized: true
+  collects_reading_group_entry! "ReadingGroupResourceCollection", categorized: true
+  collects_reading_group_entry! "ReadingGroupText", categorized: true
 
   delegate :annotations_count, to: :reading_group_count
   delegate :highlights_count, to: :reading_group_count
