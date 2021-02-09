@@ -55,8 +55,8 @@ module Validation
 
   def reading_group_params
     params.require(:data)
-    attributes = [:privacy, :name, :invitation_code, :notify_on_join]
-    relationships = [:users]
+    attributes = [:privacy, :name, :invitation_code, :notify_on_join, { course: [:enabled, :starts_on, :ends_on] }]
+    relationships = [:kind, :users]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
