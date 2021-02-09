@@ -1,3 +1,4 @@
+# rubocop:disable Naming/MethodName
 module Types
   include Dry.Types
 
@@ -122,6 +123,13 @@ module Types
     ENSURE_EXISTING_PATH[value]
   end
 
+  ClassName = Types::Class.constructor do |value|
+    case value
+    when String then value.safe_constantize
+    when Class then value
+    end
+  end
+
   class FlexibleStruct < Dry::Struct
     extend Memoist
 
@@ -139,4 +147,27 @@ module Types
       end
     end
   end
+
+  class << self
+    def Implements(mod)
+      Types::Class.constrained(lt: mod)
+    end
+
+    def InstanceOrClass(mod)
+      instance = Instance(mod)
+      klass = Implements(mod)
+
+      instance | klass
+    end
+  end
+
+  Model = InstanceOrClass(ActiveRecord::Base)
+
+  ModelProxy = Constructor(Utility::ModelProxy) do |value|
+    case value
+    when Utility::ModelProxy then value
+    when String then Utility::ModelProxy.new value
+    end
+  end
 end
+# rubocop:enable Naming/MethodName
