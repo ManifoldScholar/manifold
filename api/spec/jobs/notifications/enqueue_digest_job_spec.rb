@@ -13,8 +13,8 @@ RSpec.describe Notifications::EnqueueDigestsJob, type: :job do
     let(:project_a) { FactoryBot.create(:project) }
 
     before(:each) do
-      user.favorite_projects << project_a
-      user.save
+      user.collect_model! project_a
+      user.save!
       Timecop.freeze(Date.today - 1.day) do
         @a_annotation_event = FactoryBot.create(:event,
                                                 event_type: EventType[:text_annotated],

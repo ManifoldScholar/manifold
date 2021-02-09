@@ -61,7 +61,7 @@ RSpec.describe "Projects API", type: :request do
 
   context "my favorite projects" do
     let!(:project) { FactoryBot.create(:project) }
-    let!(:favorite) { FactoryBot.create(:favorite, user: admin, favoritable: project) }
+    let!(:favorite) { FactoryBot.create(:user_collected_project, user: admin, project: project) }
 
     path "/me/relationships/favorite_projects" do
       include_examples "an API index request",
