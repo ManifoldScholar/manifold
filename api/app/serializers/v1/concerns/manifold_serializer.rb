@@ -61,6 +61,24 @@ module V1
           end
         end
 
+        def link_with_meta(*args, **options)
+          method = options.delete(:method)
+          meta_proc = options.delete(:meta)
+
+          meta_builder = build_meta_for_link(method: method, builder: meta_proc)
+
+          link *args do |object, params|
+            href = yield object, params
+
+            meta = meta_builder.call(object, params)
+
+            {
+              href: href,
+              meta: meta
+            }
+          end
+        end
+
         def when_full
           @in_full_block = true
           yield
@@ -183,6 +201,26 @@ module V1
           return { read: true } unless include_abilities?(object, params)
 
           object.serialized_abilities_for(params[:authority_user])
+        end
+
+        def build_meta_for_link(builder: nil, **static_options)
+          if builder.respond_to?(:call) && static_options.present?
+            ->(object, params) do
+              builder_result = builder.call(object, params)
+
+              Types::Coercible::Hash[builder_result].merge(static_options)
+            end
+          elsif builder.respond_to?(:call)
+            ->(object, params) do
+              builder_result = builder.call(object, params)
+
+              Types::Coercible::Hash[builder_result]
+            end
+          elsif static_options.present?
+            ->(*) { static_options }
+          else
+            ->(*) { {} }
+          end
         end
       end
       # rubocop:enable Metrics/BlockLength

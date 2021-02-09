@@ -41,5 +41,9 @@ class RoleKind::ScopedEntitlement < RoleKind
   has_expected_resource!
 end
 
+class RoleKind::ReadingGroup < RoleKind
+  has_expected_resource!
+end
+
 class RoleKind::Unknown < RoleKind
 end
