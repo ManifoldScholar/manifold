@@ -1,14 +1,4 @@
 class ReadingGroupMembershipAuthorizer < ApplicationAuthorizer
-
-  # There are cases where all users can CRUD annotations.
-  def self.default(_able, _user, _options = {})
-    true
-  end
-
-  def self.readable_by?(_user, _options = {})
-    true
-  end
-
   def creatable_by?(user, _options = {})
     return false unless known_user?(user)
     return false if reading_groups_disabled?
@@ -27,14 +17,26 @@ class ReadingGroupMembershipAuthorizer < ApplicationAuthorizer
 
   def updatable_by?(user, _options = {})
     return false if reading_groups_disabled?
+    return true if user.id == resource.user_id
 
     resource.reading_group.updatable_by?(user)
   end
 
   def readable_by?(user, _options = {})
     return false if reading_groups_disabled?
+    return true if admin_permissions?(user)
 
-    resource.reading_group.users.exists?(user)
+    resource.reading_group.users.where(id: user).exists?
   end
 
+  class << self
+    # There are cases where all users can CRUD annotations.
+    def default(_able, _user, _options = {})
+      true
+    end
+
+    def readable_by?(_user, _options = {})
+      true
+    end
+  end
 end
