@@ -1,10 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "Reading Group Memberships API", type: :request do
-
   include_context("authenticated request")
   include_context("param helpers")
-
 
   let(:reading_group) { FactoryBot.create(:reading_group) }
 
@@ -75,8 +73,99 @@ RSpec.describe "Reading Group Memberships API", type: :request do
         expect(response).to have_http_status(403)
       end
     end
-
-
   end
 
+  describe "archiving a reading group membership" do
+    include_context "simple auth request"
+
+    let!(:reading_group_creator) { FactoryBot.create :user }
+    let!(:member) { current_user }
+
+    let!(:reading_group) { FactoryBot.create :reading_group, creator: reading_group_creator }
+
+    let!(:reading_group_membership) { FactoryBot.create :reading_group_membership, user: member, reading_group: reading_group }
+
+    def expect_request
+      expect do
+        post archive_api_v1_reading_group_membership_path(reading_group_membership), headers: auth_headers
+      end
+    end
+
+    context "when the membership is active" do
+      it "succeeds" do
+        expect_request.to change { reading_group_membership.reload.archived? }.from(false).to(true)
+
+        expect(response).to be_successful
+      end
+
+      context "as a different user" do
+        let(:member) { FactoryBot.create :user }
+
+        it "fails" do
+          expect_request.to keep_the_same { reading_group_membership.reload.archived? }
+
+          expect(response).to be_forbidden
+        end
+      end
+    end
+
+    context "when the membership is already archived" do
+      before(:each) do
+        reading_group_membership.archive!
+      end
+
+      it "fails" do
+        expect_request.to keep_the_same { reading_group_membership.reload.archived? }
+
+        expect(response).to have_http_status 422
+      end
+    end
+  end
+
+  describe "(re)activating a reading group membership" do
+    include_context "simple auth request"
+
+    let!(:reading_group_creator) { FactoryBot.create :user }
+    let!(:member) { current_user }
+
+    let!(:reading_group) { FactoryBot.create :reading_group, creator: reading_group_creator }
+
+    let!(:reading_group_membership) { FactoryBot.create :reading_group_membership, user: member, reading_group: reading_group }
+
+    def expect_request
+      expect do
+        post activate_api_v1_reading_group_membership_path(reading_group_membership), headers: auth_headers
+      end
+    end
+
+    context "when the membership is archived" do
+      before(:each) do
+        reading_group_membership.archive!
+      end
+
+      it "succeeds" do
+        expect_request.to change { reading_group_membership.reload.active? }.from(false).to(true)
+
+        expect(response).to be_successful
+      end
+
+      context "as a different user" do
+        let(:member) { FactoryBot.create :user }
+
+        it "fails" do
+          expect_request.to keep_the_same { reading_group_membership.reload.active? }
+
+          expect(response).to be_forbidden
+        end
+      end
+    end
+
+    context "when the membership is already active" do
+      it "fails" do
+        expect_request.to keep_the_same { reading_group_membership.reload.active? }
+
+        expect(response).to have_http_status 422
+      end
+    end
+  end
 end
