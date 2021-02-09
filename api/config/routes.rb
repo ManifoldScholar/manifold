@@ -30,6 +30,8 @@ Rails.application.routes.draw do
       resources :test_mails, only: [:create]
       resources :pages
 
+      resources :reading_group_kinds
+
       resources :reading_group_memberships, only: [:show, :create, :update, :destroy] do
         member do
           post :activate
