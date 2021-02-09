@@ -52,6 +52,8 @@ module V1
 
     typed_belongs_to :category
 
+    serialize_collectable_attributes!
+
     # rubocop: disable Metrics/BlockLength
     when_full do
       abilities
