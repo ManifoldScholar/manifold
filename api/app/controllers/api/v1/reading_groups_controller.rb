@@ -2,15 +2,17 @@ module API
   module V1
     # Reading groups controller
     class ReadingGroupsController < ApplicationController
+      include MonadicControllerActions
 
       before_action :authenticate_request!
 
       resourceful! ReadingGroup do
-        ReadingGroup.all
+        ReadingGroup.includes(:reading_group_collection)
       end
 
       def index
         @reading_groups = load_reading_groups
+
         respond_with_forbidden("reading groups", "list") && return unless ReadingGroup.listable_by?(current_user)
 
         render_multiple_resources @reading_groups
@@ -18,6 +20,7 @@ module API
 
       def show
         @reading_group = uuid? ? load_and_authorize_reading_group : lookup_reading_group
+
         render_single_resource @reading_group,
                                include: ["annotated_texts", "reading_group_memberships.user"]
       end

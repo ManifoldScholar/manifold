@@ -625,4 +625,16 @@ module Validation
       data: data
     }
   end
+
+  module ClassMethods
+    # @param [Class, #model_name] klass
+    # @return [Symbol, nil]
+    def filter_param_method_for(klass)
+      prefix = klass.model_name.singular
+
+      :"#{prefix}_filter_params".yield_self do |filter_method|
+        filter_method if method_defined? filter_method
+      end
+    end
+  end
 end
