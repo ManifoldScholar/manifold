@@ -2,7 +2,8 @@ require "swagger_helper"
 
 RSpec.describe "Favorites", type: :request do
   context "my favorites" do
-    let(:resource) { FactoryBot.create(:favorite, user: admin) }
+    let(:user_collected_project) { FactoryBot.create :user_collected_project, user: admin }
+    let(:resource) { user_collected_project && Favorite.where(favoritable: user_collected_project.project, user: admin).first! }
 
     path "/me/relationships/favorites" do
       include_examples "an API index request",
@@ -21,13 +22,13 @@ RSpec.describe "Favorites", type: :request do
                        "favorited, the server will respond with a 422 code and a message that "\
                        "the resource is already taken.",
                        included_relationships: [:creator] do
-        let(:comment) { FactoryBot.create(:comment) }
+        let(:project) { FactoryBot.create(:project) }
         let(:body) do
           build_json_structure(relationships: {
                                  favoritable: {
                                    data: {
-                                     id: comment.id,
-                                     type: "comment"
+                                     id: project.id,
+                                     type: "project"
                                    }
                                  }
                                })

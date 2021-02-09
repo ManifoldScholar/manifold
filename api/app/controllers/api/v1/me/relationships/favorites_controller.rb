@@ -2,8 +2,8 @@ module API
   module V1
     module Me
       module Relationships
-        # Favorites Controller
         class FavoritesController < ApplicationController
+          include MonadicControllerActions
 
           before_action :authenticate_request!
 
@@ -13,32 +13,34 @@ module API
 
           def index
             @favorites = load_favorites
-            render_multiple_resources(
-              @favorites,
-              location: location
-            )
-          end
 
-          def create
-            updater = ::Updaters::Default.new(favorite_params)
-            @favorite = updater.update(current_user.favorites.build)
-            # The response here is fairly non-standard and unexpected. We should likely
-            # refactor this at some point.
-            if @favorite.valid?
-              render_authenticated_user(current_user, include_token: false, status: :created)
-            else
-              render_single_resource(@favorite, location: location)
-            end
+            render_multiple_resources(@favorites, location: location)
           end
 
           def show
             @favorite = load_and_authorize_favorite
+
             render_single_resource(@favorite, location: location)
+          end
+
+          def create
+            handle_monadic_operation! "legacy.add_favorite", user: current_user, params: params do |m|
+              m.success do
+                # The response here is fairly non-standard and unexpected. We should likely
+                # refactor this at some point.
+                render_authenticated_user(current_user, include_token: false, status: :created)
+              end
+            end
           end
 
           def destroy
             @favorite = load_and_authorize_favorite
-            @favorite.destroy
+
+            handle_monadic_operation! "legacy.unfavorite", favorite: @favorite do |m|
+              m.success do
+                head :no_content
+              end
+            end
           end
 
           private
@@ -46,7 +48,6 @@ module API
           def location
             [:api, :v1, :me]
           end
-
         end
       end
     end
