@@ -6,6 +6,8 @@ class ProjectSummary < ApplicationRecord
 
   belongs_to :project
 
+  delegate :collected_by?, to: :project
+
   manifold_has_attached_file :avatar, :image
 
   serialize :toc, Array

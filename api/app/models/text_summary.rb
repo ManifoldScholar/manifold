@@ -15,6 +15,8 @@ class TextSummary < ApplicationRecord
 
   serialize :toc, Array
 
+  delegate :collected_by?, to: :text
+
   alias_attribute :toc_section_id, :toc_section
 
   def readonly?

@@ -150,7 +150,7 @@ module API
         end
 
         def detect_model_serializer
-          "#{detect_model_name}Serializer".safe_constantize
+          "::V1::#{detect_model_name}Serializer".safe_constantize
         end
       end
       # rubocop:enable Metrics/BlockLength

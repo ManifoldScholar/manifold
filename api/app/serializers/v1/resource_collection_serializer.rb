@@ -24,5 +24,6 @@ module V1
     typed_has_many :resources
     typed_belongs_to :project
 
+    serialize_collectable_attributes!
   end
 end

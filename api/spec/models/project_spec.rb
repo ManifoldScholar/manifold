@@ -446,4 +446,6 @@ RSpec.describe Project, type: :model do
   end
 
   it_should_behave_like "a model with formatted attributes"
+
+  it_should_behave_like "a collectable"
 end

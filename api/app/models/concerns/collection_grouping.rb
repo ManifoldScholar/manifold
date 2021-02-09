@@ -1,0 +1,2 @@
+module CollectionGrouping
+end
