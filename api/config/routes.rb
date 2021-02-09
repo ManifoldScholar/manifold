@@ -37,6 +37,8 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :public_reading_groups, only: %i[index]
+
       resources :reading_groups do
         collection do
           get "lookup"
