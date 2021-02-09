@@ -39,9 +39,19 @@ Rails.application.routes.draw do
           namespace :relationships do
             resources :reading_group_memberships, only: [:index]
             resources :annotations, only: [:index]
+            resources :reading_group_categories, only: %i[index show create update destroy]
+
+            # Collections:
+            resources :projects, only: [:index]
+            resources :resources, only: [:index]
+            resources :resource_collections, only: [:index]
+            resources :texts, only: [:index]
+            resource :collection, only: %i[show create update destroy]
           end
         end
       end
+
+      resources :operations, only: %i[create]
 
       resources :entitlements, only: %i[index show create destroy]
       resources :entitlement_targets, only: %i[index]

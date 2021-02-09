@@ -28,4 +28,5 @@ RSpec.describe ResourceCollection, type: :model do
     FactoryBot.create(:resource_collection, project: project)
   end
 
+  it_should_behave_like "a collectable"
 end
