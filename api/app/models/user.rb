@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   include Authority::Abilities
   include Authority::UserAbilities
+  include Collector
   include SerializedAbilitiesOn
   include SerializedAbilitiesFor
   include NotificationPreferences
@@ -22,7 +23,7 @@ class User < ApplicationRecord
   has_many :identities, inverse_of: :user, autosave: true, dependent: :destroy
   has_many :annotations, foreign_key: "creator_id", dependent: :destroy,
            inverse_of: :creator
-  has_many :favorites, dependent: :destroy
+  has_many :favorites
   has_many :favorite_projects, through: :favorites, source: :favoritable,
            source_type: "Project"
   has_many :favorite_texts, through: :favorites, source: :favoritable, source_type: "Text"
@@ -46,6 +47,10 @@ class User < ApplicationRecord
   has_many :entitlement_user_links, inverse_of: :user, dependent: :destroy
   has_many :granted_entitlements, through: :entitlement_user_links, source: :entitlement
   has_many :permissions
+
+  has_one :user_collection, inverse_of: :user
+
+  has_many_collectables!
 
   has_one :derived_role, inverse_of: :user, class_name: "UserDerivedRole"
 
@@ -115,12 +120,15 @@ class User < ApplicationRecord
     has_role? :project_resource_editor, resource
   end
 
+  # @return [Favorite]
   def favorite(favoritable)
-    favorites.create(favoritable: favoritable)
+    collect_model!(favoritable).favorite
   end
 
   def favorite?(favoritable)
-    favorites.where(favoritable_id: favoritable.id).count.positive?
+    favoritable = favoritable.favoritable if favoritable.is_a?(Favorite)
+
+    collectable_scope_for(favoritable).exists?
   end
 
   def to_s
