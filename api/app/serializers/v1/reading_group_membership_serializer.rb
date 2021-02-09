@@ -1,9 +1,15 @@
 module V1
   class ReadingGroupMembershipSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     current_user_is_creator?
+
+    typed_belongs_to :reading_group
+    typed_has_one :user, if: ->(object, params) { has_visible_user?(object, params) }
+
+    typed_attribute :annotation_style, Types::String
+
+    typed_attribute :label, Types::String
 
     typed_attribute :annotations_count, Types::Integer.meta(read_only: true)
     typed_attribute :highlights_count, Types::Integer.meta(read_only: true)
@@ -20,12 +26,33 @@ module V1
       anonymous_label(object)
     end
 
-    typed_has_one :user, if: proc { |object, params|
-      not_anonymous?(object) || can_see_identity?(object, params)
-    }
+    typed_attribute :state, Types::String.meta(read_only: true) do |object|
+      object.aasm_state
+    end
+
+    SHOW_ACTIVATE_LINK = ->(object, params) do
+      next false unless object.may_activate?
+      next false unless params[:current_user].present?
+
+      params[:current_user].can_update?(object)
+    end
+
+    link :activate, if: SHOW_ACTIVATE_LINK do |object|
+      routes.activate_api_v1_reading_group_membership_path(object)
+    end
+
+    SHOW_ARCHIVE_LINK = ->(object, params) do
+      next false unless object.may_archive?
+      next false unless params[:current_user].present?
+
+      params[:current_user].can_update?(object)
+    end
+
+    link :archive, if: SHOW_ARCHIVE_LINK do |object|
+      routes.archive_api_v1_reading_group_membership_path(object)
+    end
 
     class << self
-
       def not_anonymous?(object)
         !object.reading_group_anonymous?
       end
@@ -41,7 +68,9 @@ module V1
         object.anonymous_label || "Anonymous"
       end
 
+      def has_visible_user?(object, params)
+        not_anonymous?(object) || can_see_identity?(object, params)
+      end
     end
-
   end
 end
