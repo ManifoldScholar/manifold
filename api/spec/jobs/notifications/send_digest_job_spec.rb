@@ -10,7 +10,7 @@ RSpec.describe Notifications::SendDigestJob, type: :job do
 
     let!(:project) do
       FactoryBot.create(:project).tap do |project|
-        user.favorite_projects << project
+        user.collect_model! project
       end
     end
 
