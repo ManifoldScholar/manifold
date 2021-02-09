@@ -34,5 +34,19 @@ module V1
       object.composed_collection
     end
 
+    link_with_meta :clone, if: guard_user_authorized_to(:update), method: "POST" do |object, _params|
+      routes.clone_api_v1_reading_group_path(object)
+    end
+
+    CAN_JOIN = ->(object, params) do
+      next unless params[:current_user].present?
+      next unless object.public?
+
+      !ReadingGroupMembership.where(reading_group: object, user: params[:current_user]).exists?
+    end
+
+    link_with_meta :join, if: CAN_JOIN, method: "POST" do |object, _params|
+      routes.join_api_v1_reading_group_path(object)
+    end
   end
 end
