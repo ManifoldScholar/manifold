@@ -186,15 +186,16 @@ RSpec.describe Annotation, type: :model do
 
     shared_examples_for "a readable annotation" do |label, annotation_sym, exclude_public = false|
       it "when the annotation is a #{label}" do
+        collection = Annotation.with_read_ability(user, exclude_public)
         annotation = send(annotation_sym)
-        expect(Annotation.with_read_ability(user, exclude_public).pluck(:id)).to include annotation.id
+        expect(collection.ids).to include annotation.id
       end
     end
 
     shared_examples_for "a non-readable annotation" do |label, annotation_sym, exclude_public = false|
       it "when the annotation is a #{label}" do
         annotation = send(annotation_sym)
-        expect(Annotation.with_read_ability(user, exclude_public).pluck(:id)).to_not include annotation.id
+        expect(Annotation.with_read_ability(user, exclude_public).ids).to_not include annotation.id
       end
     end
 
