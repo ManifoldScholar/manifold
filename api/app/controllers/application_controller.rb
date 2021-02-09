@@ -1,5 +1,3 @@
-require "naught"
-
 # The base application controller
 class ApplicationController < ActionController::API
 
@@ -18,26 +16,9 @@ class ApplicationController < ActionController::API
     @authority_user ||= current_user || anonymous_user
   end
 
-  # rubocop:disable Lint/NestedMethodDefinition
   def anonymous_user
-    @anonymous_user ||= Naught.build do |config|
-      config.impersonate User
-      config.predicates_return false
-
-      def role
-        nil
-      end
-
-      def kind
-        nil
-      end
-
-      def can_read?(resource, *other)
-        resource.readable_by? self, *other
-      end
-    end.new
+    @anonymous_user ||= AnonymousUser.new
   end
-  # rubocop:enable Lint/NestedMethodDefinition
 
   def user_for_paper_trail
     current_user&.to_global_id.to_s if current_user
