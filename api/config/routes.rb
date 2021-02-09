@@ -41,6 +41,13 @@ Rails.application.routes.draw do
         collection do
           get "lookup"
         end
+
+        member do
+          post :clone, action: :do_clone
+
+          post :join
+        end
+
         scope module: :reading_groups do
           namespace :relationships do
             resources :annotations, only: [:index]
