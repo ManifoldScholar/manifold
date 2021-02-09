@@ -12,6 +12,7 @@ env:
 jobs:
 
   client-lint:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
 
     steps:
@@ -51,6 +52,8 @@ jobs:
           yarn lint
 
   client-tests:
+    if: github.event.pull_request.draft == false
+
     runs-on: ubuntu-latest
 
     steps:
@@ -90,6 +93,8 @@ jobs:
           yarn test-ci
 
   api-lint:
+    if: github.event.pull_request.draft == false
+
     runs-on: ubuntu-latest
 
     steps:
@@ -127,6 +132,7 @@ jobs:
           bin/rubocop
 
   api-tests:
+    if: github.event.pull_request.draft == false
 
     runs-on: ubuntu-latest
 
