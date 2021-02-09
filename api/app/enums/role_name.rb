@@ -62,6 +62,12 @@ class RoleName < ClassyEnum::Base
     editor? || any_editor?
   end
 
+  def siblings
+    self.class.select do |enum|
+      enum.kind == kind && enum != self
+    end
+  end
+
   # @!endgroup
 
   class << self
@@ -174,6 +180,10 @@ class RoleName < ClassyEnum::Base
       config.provides_full_read_access = true
     end
 
+    def reading_group!
+      set_kind! :reading_group
+    end
+
     def scoped!
       set_kind! :scoped
     end
@@ -257,4 +267,12 @@ class RoleName::ReadAccess < RoleName
   scoped_entitlement!
 
   provides_full_read_access!
+end
+
+class RoleName::Moderator < RoleName
+  reading_group!
+end
+
+class RoleName::Member < RoleName
+  reading_group!
 end
