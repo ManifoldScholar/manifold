@@ -8,7 +8,7 @@ class UserCollectionAuthorizer < ApplicationAuthorizer
 
   class << self
     def default(_ability, user, options = {})
-      target_user = options.fetch(:target)
+      target_user = options[:target]
 
       return user == target_user if target_user.present?
 
