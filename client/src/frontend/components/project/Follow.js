@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import get from "lodash/get";
 import has from "lodash/has";
 import { currentUserActions } from "actions";
-import Project from "global/components/project";
+import CollectToggle from "frontend/components/utility/CollectToggle";
 
 import withScreenReaderStatus from "hoc/with-screen-reader-status";
 
@@ -29,6 +29,14 @@ class ProjectFollow extends Component {
     return has(this.props.favorites, this.props.project.id);
   }
 
+  get project() {
+    return this.props.project;
+  }
+
+  get projectTitle() {
+    return this.project.attributes.titlePlaintext;
+  }
+
   handleFollow = () => {
     const { id, type } = this.props.project;
     this.props.dispatch(currentUserActions.follow({ id, type }));
@@ -46,14 +54,15 @@ class ProjectFollow extends Component {
   render() {
     if (!this.props.authenticated) return null;
     return (
-      <Project.CoverButton
-        addText="Follow"
-        removeText="Unfollow"
+      <CollectToggle
+        key={this.selected}
+        addText="Add"
+        removeText="Remove"
+        srAddMessage={`Collect ${this.projectTitle}`}
+        srRemoveMessage={`Uncollect ${this.projectTitle}`}
         selected={this.selected}
-        addHandler={this.handleFollow}
-        removeHandler={this.handleUnfollow}
-        project={this.props.project}
-        confirm
+        onAdd={this.handleFollow}
+        onRemove={this.handleUnfollow}
       />
     );
   }

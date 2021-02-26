@@ -1,0 +1,147 @@
+$_light-color: $neutral05;
+$_dark-color: $neutral75;
+$_inactive-color: $neutral70;
+$_highlight-fg-color: $neutral90;
+$_highlight-bg-color: $spBlue45;
+
+.collect-toggle {
+  @include buttonUnstyled;
+  @include utilityPrimary;
+  font-size: 12px;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &--project-cover {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 28px;
+    height: 28px;
+
+    @include respond($break75) {
+      top: calc(2.105vw + 15px);
+      left: calc(2.105vw - 15px);
+    }
+
+    @include respond($break120) {
+      top: 40px;
+      left: 10px;
+    }
+  }
+
+  &--sr-only {
+    &:focus-visible ~ .collect-toggle {
+      @include defaultFocusStyle;
+      outline-color: $defaultFocusColor;
+    }
+  }
+
+  &__inner {
+    @include boxShadow(2px, 4px, 10px, 0, $neutral90, 0.36);
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: $_highlight-fg-color;
+    background-color: $_inactive-color;
+    border-radius: 0.667em;
+    transition: color $duration $timing,
+      background-color $duration $timing;
+
+    .icon-star {
+      &__foreground {
+        fill: currentColor;
+      }
+
+      &__background {
+        fill: transparent;
+      }
+    }
+
+    &--add-active,
+    &--remove-active,
+    &--remove-confirm-active {
+      max-width: 145px;
+      transition: max-width $durationSlow ease-out;
+    }
+
+    &--remove-active,
+    &--remove-confirm-active {
+      color: $_light-color;
+      background-color: $_dark-color;
+    }
+
+    &--add,
+    &--remove,
+    &--remove-confirm-active {
+      color: $_light-color;
+    }
+
+    &--remove,
+    &--add-active {
+      color: $_highlight-fg-color;
+      background-color: $_highlight-bg-color;
+    }
+  }
+
+  &__text {
+    display: block;
+    padding: 7px 14px 0px 32px;
+    line-height: 1;
+
+    &-enter {
+      opacity: 0;
+    }
+
+    &-enter-active {
+      opacity: 1;
+      transition: opacity $duration * 3 $timing;
+    }
+
+    &-exit {
+      opacity: 1;
+    }
+
+    &-exit.collect-toggle__text-exit-active {
+      opacity: 0;
+      transition: opacity $duration * 3 $timing;
+    }
+  }
+
+  &__icons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform $duration $timing;
+
+    .collect-toggle__inner--add &,
+    .collect-toggle__inner--add-active &,
+    .collect-toggle__inner--remove & {
+      transform: translateY(-100%);
+    }
+
+    .collect-toggle__inner--remove-confirm-active & {
+      transform: translateY(100%);
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    transition: transform $duration $timing;
+
+    &--confirm {
+      top: -100%;
+    }
+
+    &--add {
+      top: 100%;
+    }
+  }
+}
