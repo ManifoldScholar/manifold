@@ -53,6 +53,7 @@ function normalizeEntity(payload) {
 function normalizePayload(payload) {
   let out;
   if (payload === null) return out;
+
   if (Array.isArray(payload.data)) {
     out = normalizeCollection(payload);
   } else {

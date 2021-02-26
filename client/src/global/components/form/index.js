@@ -12,6 +12,7 @@ import MaskedTextInput from "./MaskedTextInput";
 import NumberInput from "./NumberInput";
 import Radios from "./Radios";
 import Save from "./Save";
+import SectionLabel from "./SectionLabel";
 import Select from "./Select";
 import setter from "./setter";
 import Switch from "./Switch";
@@ -46,6 +47,7 @@ export default {
   NumberInput,
   Radios,
   Save,
+  SectionLabel,
   Select,
   setter,
   Switch,
