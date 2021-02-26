@@ -119,7 +119,7 @@ class DialogWrapper extends PureComponent {
         timeout={{ enter: 1, exit: 200 }}
         unmountOnExit
       >
-        <FocusTrap className="dialog-primary dialog-appear">
+        <FocusTrap className="dialog-wrapper dialog-appear">
           {/* The <div> element's role is declared dynamically, confusing jsx-a11y */}
           {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <div
@@ -132,7 +132,7 @@ class DialogWrapper extends PureComponent {
             aria-labelledby={this.props.labelledBy}
             aria-describedby={this.props.describedBy}
             className={classnames(
-              "dialog-box",
+              "dialog",
               this.props.className,
               this.state.additionalClassNames
             )}
@@ -141,11 +141,11 @@ class DialogWrapper extends PureComponent {
             {this.props.showCloseButton ? (
               <div
                 onClick={this.handleCloseClick}
-                className="close-button-primary"
+                className="dialog__close"
                 role="button"
                 tabIndex="0"
               >
-                <IconComposer icon="close16" size="default" />
+                <IconComposer icon="close16" size={24} />
                 <span className="screen-reader-text">Close Dialog</span>
               </div>
             ) : null}

@@ -1,7 +1,7 @@
 // Browse Components Manifest
 // --------------------------
 
-@import './collection/index';
+@import './resource-collection/index';
 @import './event/index';
 @import './layout/index';
 @import './project/index';
@@ -14,3 +14,4 @@
 @import './subscriptions/index';
 @import './project-collection/index';
 @import './groups/index';
+@import 'collecting';
