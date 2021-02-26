@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
+import SectionLabel from "global/components/form/SectionLabel";
 
 export default class ResourceImportControlsParsed extends PureComponent {
   static displayName = "ResourceImport.Controls.Parsed";
@@ -26,9 +27,9 @@ export default class ResourceImportControlsParsed extends PureComponent {
 
     return (
       <>
-        <header className="form-section-label">
-          <span>Step 4. Import Resources</span>
-        </header>
+        <SectionLabel
+          label="Step 4. Import Resources"
+        />
         <p className="instructional-copy">
           {`The import is ready to begin. The list below is a preview of what will
           happen. Press the \u0022start import\u0022 button below to begin.`}

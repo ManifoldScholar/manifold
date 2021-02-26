@@ -118,7 +118,7 @@ export class ResetPasswordBase extends PureComponent {
     return (
       <form
         method="put"
-        className="form-secondary"
+        className="dialog__body form-secondary"
         onSubmit={event => this.resetUserPassword(event, this.props.user)}
       >
         <div className="row-1-p">
@@ -170,7 +170,7 @@ export class ResetPasswordBase extends PureComponent {
   renderInitial() {
     return (
       <div>
-        <header className="dialog-header-small">
+        <header className="dialog__header">
           <h2>{this.props.uiProps.heading}</h2>
         </header>
 
@@ -180,7 +180,7 @@ export class ResetPasswordBase extends PureComponent {
         {this.state.editing ? (
           this.renderResetForm()
         ) : (
-          <div className="form-input">
+          <div className="dialog__body form-input">
             <button
               onClick={event => this.handleStateChange(event, "confirm", true)}
               className="button-secondary button-secondary--outlined"
