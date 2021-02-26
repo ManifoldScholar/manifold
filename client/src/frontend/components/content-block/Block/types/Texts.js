@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import TextList from "frontend/components/TextList";
+import TextList from "./TextsBlock/List";
 import pick from "lodash/pick";
 
 export default class ProjectContentBlockTextsBlock extends PureComponent {

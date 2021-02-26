@@ -57,7 +57,7 @@
   }
 
   &__ordered-list {
-    @include listUnstyled
+    @include listUnstyled;
 
       @include respond($layoutBreakpoint) {
       display: none;

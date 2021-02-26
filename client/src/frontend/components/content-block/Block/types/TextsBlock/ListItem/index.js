@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import Content from "./Content";
 import Meta from "./Meta";
 import lh from "helpers/linkHandler";
-import { withRouter } from "react-router-dom";
-import { closest } from "utils/domUtils";
 
 class TextListListItem extends Component {
   static displayName = "TextList.ListItem";
@@ -23,13 +21,6 @@ class TextListListItem extends Component {
 
   static defaultProps = {
     baseClass: "text-block"
-  };
-
-  onClick = event => {
-    const link = closest(event.target, "a");
-    if (link) return;
-    event.preventDefault();
-    this.props.history.push(this.readUrl);
   };
 
   get isPublished() {
@@ -70,7 +61,7 @@ class TextListListItem extends Component {
     const baseClass = this.props.baseClass;
 
     return (
-      <div role="menuitem" className={baseClass} onClick={this.onClick}>
+      <div className={baseClass}>
         <Content
           text={text}
           readUrl={this.readUrl}
@@ -95,4 +86,4 @@ class TextListListItem extends Component {
   }
 }
 
-export default withRouter(TextListListItem);
+export default TextListListItem;

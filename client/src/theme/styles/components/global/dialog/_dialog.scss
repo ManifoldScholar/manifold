@@ -1,0 +1,81 @@
+.dialog {
+  @include utilityPrimary;
+  @include boxShadow(0, 31px, 44px, 2px);
+  position: relative;
+  width: 100%;
+  max-width: 880px;
+  padding: 27px 6.818% 50px;
+  margin: 0 auto;
+  text-transform: none;
+  letter-spacing: 0;
+
+  @include respond($break90) {
+    padding: 29px 40px 50px;
+  }
+
+  .backend & {
+    --default-hover-color: #{$accentInteractionLight};
+
+    @include panelRoundedDark;
+  }
+
+  .browse &,
+  .reader & {
+    @include panelRoundedLight;
+  }
+
+  &__header {
+    padding: 11px 0 22px;
+
+    h1, h2, h3, h4, h5, h6 {
+      @include templateHead;
+      margin: 0;
+      font-size: 22px;
+
+      .backend & {
+        color: $neutralWhite;
+      }
+    }
+  }
+
+  &__body {
+    margin-top: 34px;
+    margin-bottom: 0;
+  }
+
+  &__close {
+    position: absolute;
+    top: auto;
+    right: 32px;
+    cursor: pointer;
+  }
+
+  // Special centering for form submits
+  .form-input.submit {
+    text-align: center;
+  }
+
+  p {
+    letter-spacing: 0.075em;
+  }
+}
+
+.dialog.dialog-error {
+  max-width: 500px;
+
+  .backend & {
+    color: $neutralOffBlack;
+    background-color: $spErrorExtraLight;
+    font-weight: $regular;
+  }
+
+  .dialog__header {
+    h1, h2, h3, h4, h5, h6 {
+      color: inherit;
+    }
+  }
+
+  .close-button-primary {
+    color: inherit;
+  }
+}

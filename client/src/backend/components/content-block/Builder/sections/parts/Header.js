@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import SectionLabel from "global/components/form/SectionLabel";
 
 export default class ProjectContentSectionsPartsHeader extends PureComponent {
   static displayName = "Project.Content.Sections.Parts.Header";
@@ -16,9 +17,10 @@ export default class ProjectContentSectionsPartsHeader extends PureComponent {
     return (
       <>
         {this.props.title && (
-          <header className="form-section-label">
-            <h2 id={this.props.headerId}>{this.props.title}</h2>
-          </header>
+          <SectionLabel
+            label={this.props.title}
+            id={this.props.headerId}
+          />
         )}
         {this.props.children && (
           <span id={this.props.instructionsId} className="instructions">

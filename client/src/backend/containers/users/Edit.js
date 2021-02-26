@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import Dialog from "backend/components/dialog";
+import Dialog from "global/components/dialog";
 import withConfirmation from "hoc/with-confirmation";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
