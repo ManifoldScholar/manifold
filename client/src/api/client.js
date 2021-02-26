@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import isPlainObject from "lodash/isPlainObject";
+import has from "lodash/has";
 import LowLevelApiClient from "./LowLevelApiClient";
 
 require("isomorphic-fetch");
@@ -58,9 +59,13 @@ export default class ApiClient {
     if (json === null) return Promise.resolve({ json, response });
     if (!isPlainObject(json)) return Promise.reject({ json, response });
     const out = { data: [], included: [] };
-    out.data = json.data;
+    out.data = has(json, "data") ? json.data : {};
+
     if (json.included) {
       out.included = json.included;
+    }
+    if (json["atomic:results"]) {
+      out.atomicResults = json["atomic:results"];
     }
     if (json.links) {
       out.links = json.links;

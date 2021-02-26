@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
+import SectionLabel from "global/components/form/SectionLabel";
 
 export default class ResourceImportControlsImporting extends PureComponent {
   static displayName = "ResourceImport.Controls.Importing";
@@ -16,9 +17,9 @@ export default class ResourceImportControlsImporting extends PureComponent {
 
     return (
       <>
-        <header className="form-section-label">
-          <span>Step 4. Import Resources</span>
-        </header>
+        <SectionLabel
+          label="Step 4. Import Resources"
+        />
         <p className="instructional-copy">
           The import is in progress. Each resource is updated in the background.
           This list below will refresh every 5 seconds, or you can press the
