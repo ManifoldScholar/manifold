@@ -164,8 +164,8 @@ table
 }
 
 .col_header {
-  @include text_headline()
-    font-weight: $medium;
+  @include text_headline;
+  font-weight: $medium;
 }
 
 
