@@ -393,6 +393,10 @@
         width: calc(50% - 17px);
       }
     }
+
+    &--in-dialog {
+      margin-bottom: 0;
+    }
   }
 
   // Swap full/abbreviated text if there is any

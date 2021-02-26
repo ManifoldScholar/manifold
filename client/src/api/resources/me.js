@@ -35,5 +35,13 @@ export default {
         params: { filter, page }
       }
     };
+  },
+
+  myCollection() {
+    return {
+      endpoint: "/api/v1/me/relationships/collection",
+      method: "GET",
+      options: {}
+    };
   }
 };

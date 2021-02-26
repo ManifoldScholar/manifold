@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
+import SectionLabel from "global/components/form/SectionLabel";
 
 export default class ResourceImportControlsImported extends PureComponent {
   static displayName = "ResourceImport.Controls.Imported";
@@ -26,9 +27,9 @@ export default class ResourceImportControlsImported extends PureComponent {
 
     return (
       <>
-        <header className="form-section-label">
-          <span>Step 4. Import Resources</span>
-        </header>
+        <SectionLabel
+          label="Step 4. Import Resources"
+        />
         <p className="instructional-copy">
           This import is complete. You may go back, edit the mapping, and rerun
           the import. Or, if the source is a google sheet, you can reset the
