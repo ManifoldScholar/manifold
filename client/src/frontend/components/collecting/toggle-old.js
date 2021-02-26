@@ -7,17 +7,11 @@ import {
 } from "react-transition-group";
 import IconComposer from "global/components/utility/IconComposer";
 
-export default class CollectToggle extends Component {
-  static displayName = "Utility.CollectToggle";
+export default class CollectingToggle extends Component {
+  static displayName = "Collecting.Toggle";
 
   static propTypes = {
-    selected: PropTypes.bool,
-    onAdd: PropTypes.func.isRequired,
-    onRemove: PropTypes.func.isRequired,
-    addText: PropTypes.string.isRequired,
-    removeText: PropTypes.string.isRequired,
-    srAddMessage: PropTypes.string.isRequired,
-    srRemoveMessage: PropTypes.string.isRequired
+    collectable: PropTypes.object.isRequired
   };
 
   constructor(props) {

@@ -42,3 +42,4 @@ export actionCalloutsAPI from "./resources/actionCallouts";
 export readingGroupsAPI from "./resources/readingGroups";
 export readingGroupMembershipsAPI from "./resources/readingGroupMemberships";
 export collectionProjectsAPI from "./resources/collectionProjects";
+export collectingAPI from "./resources/collecting";

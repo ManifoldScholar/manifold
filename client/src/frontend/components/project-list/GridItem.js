@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import Project from "frontend/components/project";
 import GlobalProject from "global/components/project";
 import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import lh from "helpers/linkHandler";
 import has from "lodash/has";
+import Collecting from "frontend/components/collecting";
 
 export default class ProjectGridItem extends Component {
   static displayName = "Project.GridItem";
@@ -148,12 +148,7 @@ export default class ProjectGridItem extends Component {
           </figure>
           {projectMeta}
         </Link>
-        <Project.Follow
-          project={project}
-          authenticated={this.props.authenticated}
-          favorites={this.props.favorites}
-          dispatch={this.props.dispatch}
-        />
+        <Collecting.Toggle collectable={project} />
       </>
     );
   }
