@@ -5,6 +5,7 @@ import Block from "./Block";
 import Forms from "./forms";
 import Drawer from "global/containers/drawer";
 import ActionCallouts from "./ActionCallouts";
+import SectionLabel from "global/components/form/SectionLabel";
 
 export default class Builder extends PureComponent {
   static displayName = "Project.Hero.Builder";
@@ -72,9 +73,10 @@ export default class Builder extends PureComponent {
                 aria-labelledby={`${id}-header`}
                 aria-describedby={`${id}-instructions`}
               >
-                <header className="form-section-label">
-                  <h2 id={`${id}-header`}>Hero Block</h2>
-                </header>
+                <SectionLabel
+                  label="Hero Block"
+                  id={`${id}-header`}
+                />
                 <span id={`${id}-instructions`} className="instructions">
                   The Hero Block is the top of your project page. Customize its
                   content, layout, and settings here.

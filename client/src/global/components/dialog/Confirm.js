@@ -45,7 +45,8 @@ export default class DialogConfirm extends PureComponent {
   get buttonClasses() {
     return classNames(
       "buttons-icon-horizontal__button",
-      "button-icon-secondary"
+      "buttons-icon-horizontal__button--in-dialog",
+      "button-icon-secondary",
     );
   }
 
@@ -92,7 +93,7 @@ export default class DialogConfirm extends PureComponent {
             labelledBy={`${id}-label`}
             describedBy={`${id}-description`}
           >
-            <header className="dialog-header-small">
+            <header className="dialog__header">
               <h2 id={`${id}-label`}>{this.props.heading}</h2>
             </header>
 
@@ -102,7 +103,7 @@ export default class DialogConfirm extends PureComponent {
               this.props.message
             )}
 
-            <div className="buttons-icon-horizontal">
+            <div className="dialog__body buttons-icon-horizontal">
               {this.canHandleResolve && (
                 <button
                   onClick={this.handleResolveClick}
