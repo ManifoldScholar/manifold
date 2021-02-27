@@ -4,20 +4,39 @@ $_inactive-color: $neutral70;
 $_highlight-fg-color: $neutral90;
 $_highlight-bg-color: $spBlue45;
 
+.sr-collect-toggle {
+  @include screenReaderText;
+
+  &:focus-visible ~ .collect-toggle {
+    @include defaultFocusStyle;
+    outline-color: $defaultFocusColor;
+  }
+}
+
 .collect-toggle {
+  --toggle-size: 24px;
+  --toggle-color: #{$_highlight-fg-color};
+  --toggle-bg-color: #{$_inactive-color};
+  --icon-transform: none;
+  --text-top-padding: 5px;
+
   @include buttonUnstyled;
   @include utilityPrimary;
+  position: relative;
+  width: var(--toggle-size);
+  height: var(--toggle-size);
   font-size: 12px;
   text-align: left;
   white-space: nowrap;
   cursor: pointer;
 
   &--project-cover {
+    --toggle-size: 28px;
+    --text-top-padding: 7px;
+
     position: absolute;
     top: 25px;
     left: 0;
-    width: 28px;
-    height: 28px;
 
     @include respond($break75) {
       top: calc(2.105vw + 15px);
@@ -30,35 +49,21 @@ $_highlight-bg-color: $spBlue45;
     }
   }
 
-  &--sr-only {
-    &:focus-visible ~ .collect-toggle {
-      @include defaultFocusStyle;
-      outline-color: $defaultFocusColor;
-    }
-  }
-
   &__inner {
-    @include boxShadow(2px, 4px, 10px, 0, $neutral90, 0.36);
     position: absolute;
     top: 0;
     left: 0;
     max-width: 100%;
     height: 100%;
     overflow: hidden;
-    color: $_highlight-fg-color;
-    background-color: $_inactive-color;
+    color: var(--toggle-color);
+    background-color: var(--toggle-bg-color);
     border-radius: 0.667em;
     transition: color $duration $timing,
       background-color $duration $timing;
 
-    .icon-star {
-      &__foreground {
-        fill: currentColor;
-      }
-
-      &__background {
-        fill: transparent;
-      }
+    .collect-toggle--project-cover & {
+      @include boxShadow(2px, 4px, 10px, 0, $neutral90, 0.36);
     }
 
     &--add-active,
@@ -70,26 +75,44 @@ $_highlight-bg-color: $spBlue45;
 
     &--remove-active,
     &--remove-confirm-active {
-      color: $_light-color;
-      background-color: $_dark-color;
+      --toggle-color: #{$_light-color};
+      --toggle-bg-color: #{$_dark-color};
     }
 
     &--add,
     &--remove,
     &--remove-confirm-active {
-      color: $_light-color;
+      --toggle-color: #{$_light-color};
     }
 
     &--remove,
     &--add-active {
-      color: $_highlight-fg-color;
-      background-color: $_highlight-bg-color;
+      --toggle-color: #{$_highlight-fg-color};
+      --toggle-bg-color: #{$_highlight-bg-color};
+    }
+
+    &--add,
+    &--remove {
+      .collect-toggle--inline & {
+        --toggle-color: currentColor;
+        --toggle-bg-color: transparent;
+      }
+    }
+
+    &--add,
+    &--add-active,
+    &--remove {
+      --icon-transform: translateY(-100%);
+    }
+
+    &--remove-confirm-active {
+      --icon-transform: translateY(100%);
     }
   }
 
   &__text {
     display: block;
-    padding: 7px 14px 0px 32px;
+    padding: var(--text-top-padding) 14px 0px 32px;
     line-height: 1;
 
     &-enter {
@@ -115,26 +138,16 @@ $_highlight-bg-color: $spBlue45;
     position: absolute;
     width: 100%;
     height: 100%;
+    transform: var(--icon-transform);
     transition: transform $duration $timing;
-
-    .collect-toggle__inner--add &,
-    .collect-toggle__inner--add-active &,
-    .collect-toggle__inner--remove & {
-      transform: translateY(-100%);
-    }
-
-    .collect-toggle__inner--remove-confirm-active & {
-      transform: translateY(100%);
-    }
   }
 
   &__icon {
     position: absolute;
     top: 0;
     left: 0;
-    width: 28px;
-    height: 28px;
-    transition: transform $duration $timing;
+    width: var(--toggle-size);
+    height: var(--toggle-size);
 
     &--confirm {
       top: -100%;
@@ -143,5 +156,19 @@ $_highlight-bg-color: $spBlue45;
     &--add {
       top: 100%;
     }
+  }
+
+  .icon-star-fill {
+    &__foreground {
+      fill: currentColor;
+    }
+
+    &__background {
+      fill: transparent;
+    }
+  }
+
+  .icon-star-outline {
+    fill: currentColor;
   }
 }

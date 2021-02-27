@@ -1,39 +1,52 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import classNames from "classnames";
 import get from "lodash/get";
-import {
-  TransitionGroup as ReactTransitionGroup,
-  CSSTransition
-} from "react-transition-group";
 import { collectingAPI, requests } from "api";
 import { useDispatch } from "react-redux";
 import { entityStoreActions } from "actions";
 import IconComposer from "global/components/utility/IconComposer";
+import Text from "./Text";
 
 const { request } = entityStoreActions;
 
-export default function CollectingToggle({ collectable }) {
-  const collected = get(collectable, "attributes.collectedByCurrentUser");
+function determineView(collected, hovered, confirmed) {
+  if (collected) {
+    if (hovered && !confirmed) return "remove-active";
+    if (hovered && confirmed) return "remove-confirm-active";
+    return "remove";
+  } else {
+    if (hovered) return "add-active";
+    return "add";
+  }
+}
+
+function CollectingToggle({ collectable, inline, className }) {
   const [hovered, setHovered] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const dispatch = useDispatch();
 
-  function determineView() {
-    if (collected) {
-      if (hovered && !confirmed) return "remove-active";
-      if (hovered && confirmed) return "remove-confirm-active";
-      return "remove";
-    } else {
-      if (hovered) return "add-active";
-      return "add";
+  const collected = get(collectable, "attributes.collectedByCurrentUser");
+  const view = determineView(collected, hovered, confirmed);
+  const collectableTitle = collectable.attributes.title;
+  const useOutlinedStarIcon = inline && (view === "add" || view === "remove");
+
+  const screenReaderText = () => {
+    switch (view) {
+      case "add":
+      case "add-active":
+        return `Collect ${collectableTitle}`;
+      case "remove":
+      case "remove-active":
+        return `Uncollect ${collectableTitle}`;
+      default:
+        return null;
     }
   }
 
-  function screenReaderText() {
-    return "figure out some SR text here";
+  function onSRClick() {
+    collected ? doUncollect() : doCollect();
   }
-
-  function onSRClick() {}
 
   function doCollect() {
     const call = collectingAPI.collect([collectable]);
@@ -59,15 +72,13 @@ export default function CollectingToggle({ collectable }) {
     setHovered(false);
   }
 
-  return <button onClick={onClick}>{collected ? "remove" : "collect"}</button>;
-
   return (
     <div>
       <button
         className="collect-toggle collect-toggle--sr-only screen-reader-text"
         onClick={onSRClick}
       >
-        {screenReaderText()}
+        {screenReaderText}
       </button>
       <button
         onClick={onClick}
@@ -75,8 +86,9 @@ export default function CollectingToggle({ collectable }) {
         onMouseLeave={onLeave}
         className={classNames({
           "collect-toggle": true,
-          "collect-toggle--project-cover": true,
-          [`collect-toggle--${determineView()}`]: true
+          "collect-toggle--inline": inline,
+          "collect-toggle--project-cover": !inline,
+          [`${className}`]: !!className,
         })}
         aria-hidden="true"
         tabIndex={-1}
@@ -84,7 +96,7 @@ export default function CollectingToggle({ collectable }) {
         <div
           className={classNames({
             "collect-toggle__inner": true,
-            [`collect-toggle__inner--${determineView()}`]: true
+            [`collect-toggle__inner--${view}`]: true
           })}
           aria-hidden="true"
         >
@@ -99,15 +111,38 @@ export default function CollectingToggle({ collectable }) {
               size={28}
               iconClass="collect-toggle__icon collect-toggle__icon--confirm"
             />
-            <IconComposer
-              icon="StarFillUnique"
-              size="default"
-              iconClass="collect-toggle__icon collect-toggle__icon--add"
-            />
+            {!useOutlinedStarIcon && (
+              <IconComposer
+                icon="StarFillUnique"
+                size="default"
+                iconClass="collect-toggle__icon collect-toggle__icon--add"
+              />
+            )}
+            {useOutlinedStarIcon && (
+              <IconComposer
+                icon="StarOutlineUnique"
+                size="default"
+                iconClass="collect-toggle__icon collect-toggle__icon--add"
+              />
+            )}
           </div>
-          {collected ? "IN" : "OUT"}
+          <Text view={view} />
         </div>
       </button>
     </div>
   );
 }
+
+CollectingToggle.displayName = "Collecting.Toggle";
+
+CollectingToggle.propTypes = {
+  collectable: PropTypes.object.isRequired,
+  inline: PropTypes.bool,
+  className: PropTypes.string,
+}
+
+CollectingToggle.defaultProps = {
+  inline: true,
+}
+
+export default CollectingToggle;

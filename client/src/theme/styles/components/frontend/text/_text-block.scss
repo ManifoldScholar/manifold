@@ -128,6 +128,16 @@
       display: inline-block;
       padding-top: 0.143em;
     }
+
+    &:not(:last-child) {
+      margin-right: 12px;
+    }
+  }
+
+  &__collect-toggle {
+    @include respond($break80) {
+      transform: translateY(-24%);
+    }
   }
 
   &__creators {

@@ -148,7 +148,7 @@ export default class ProjectGridItem extends Component {
           </figure>
           {projectMeta}
         </Link>
-        <Collecting.Toggle collectable={project} />
+        <Collecting.Toggle collectable={project} inline={false} />
       </>
     );
   }
