@@ -42,6 +42,10 @@ module V1
       object.composed_collection
     end
 
+    typed_has_one :kind, serializer: V1::ReadingGroupKindSerializer do |object, _params|
+      object.reading_group_kind
+    end
+
     link_with_meta :clone, if: guard_user_authorized_to(:update), method: "POST" do |object, _params|
       routes.clone_api_v1_reading_group_path(object)
     end
