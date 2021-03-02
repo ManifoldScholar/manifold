@@ -6,8 +6,10 @@ module API
 
       before_action :authenticate_request!
 
+      SERIALIZED_INCLUDES = %i[kind collection]
+
       resourceful! ReadingGroup do
-        ReadingGroup.includes(:reading_group_collection)
+        ReadingGroup.includes(:reading_group_collection, :reading_group_kind, reading_group_memberships: %i[user])
       end
 
       authority_actions do_clone: :update, join: :read
@@ -17,14 +19,14 @@ module API
 
         respond_with_forbidden("reading groups", "list") && return unless ReadingGroup.listable_by?(current_user)
 
-        render_multiple_resources @reading_groups, includes: %i[kind]
+        render_multiple_resources @reading_groups, include: SERIALIZED_INCLUDES
       end
 
       def show
         @reading_group = uuid? ? load_and_authorize_reading_group : lookup_reading_group
 
         render_single_resource @reading_group,
-                               include: ["annotated_texts", "reading_group_memberships.user"]
+                               include: [*SERIALIZED_INCLUDES, "annotated_texts", "reading_group_memberships.user"]
       end
 
       def create
