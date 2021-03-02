@@ -12,6 +12,7 @@ import FrontendLayout from "frontend/components/layout";
 import withConfirmation from "hoc/with-confirmation";
 import get from "lodash/get";
 import IconComposer from "global/components/utility/IconComposer";
+import SectionLabel from "global/components/form/SectionLabel";
 
 import Authorize from "hoc/authorize";
 
@@ -208,9 +209,9 @@ class FeatureDetailContainer extends PureComponent {
               <section>
                 {previewFeature ? (
                   <div className="form-secondary form-section form-section--primary">
-                    <header className="form-section-label">
-                      <span>Feature Preview</span>
-                    </header>
+                    <SectionLabel
+                      label="Feature Preview"
+                    />
                     <div className="form-input-group form-input-group--primary">
                       <div className="form-input wide">
                         <FrontendLayout.Splash

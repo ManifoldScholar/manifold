@@ -4,16 +4,16 @@ $_inactive-color: $neutral70;
 $_highlight-fg-color: $neutral90;
 $_highlight-bg-color: $spBlue45;
 
-.sr-collect-toggle {
+.sr-collecting-toggle {
   @include screenReaderText;
 
-  &:focus-visible ~ .collect-toggle {
+  &:focus-visible ~ .collecting-toggle {
     @include defaultFocusStyle;
     outline-color: $defaultFocusColor;
   }
 }
 
-.collect-toggle {
+.collecting-toggle {
   --toggle-size: 24px;
   --toggle-color: #{$_highlight-fg-color};
   --toggle-bg-color: #{$_inactive-color};
@@ -62,7 +62,7 @@ $_highlight-bg-color: $spBlue45;
     transition: color $duration $timing,
       background-color $duration $timing;
 
-    .collect-toggle--project-cover & {
+    .collecting-toggle--project-cover & {
       @include boxShadow(2px, 4px, 10px, 0, $neutral90, 0.36);
     }
 
@@ -93,7 +93,7 @@ $_highlight-bg-color: $spBlue45;
 
     &--add,
     &--remove {
-      .collect-toggle--inline & {
+      .collecting-toggle--inline & {
         --toggle-color: currentColor;
         --toggle-bg-color: transparent;
       }
@@ -128,7 +128,7 @@ $_highlight-bg-color: $spBlue45;
       opacity: 1;
     }
 
-    &-exit.collect-toggle__text-exit-active {
+    &-exit.collecting-toggle__text-exit-active {
       opacity: 0;
       transition: opacity $duration * 3 $timing;
     }

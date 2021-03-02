@@ -133,6 +133,7 @@ export default {
   feCollectionProjects: "frontend-collection-projects",
   feCollectCollectable: "frontend-collect-collectable",
   feUncollectCollectable: "frontend-uncollect-collectable",
+  feMyCollection: "frontend-my-collection",
   rText: "reader-text",
   rSection: "reader-section",
   rAnnotations: "reader-annotations",

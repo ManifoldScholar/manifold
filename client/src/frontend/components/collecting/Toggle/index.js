@@ -5,8 +5,10 @@ import get from "lodash/get";
 import { collectingAPI, requests } from "api";
 import { useDispatch } from "react-redux";
 import { entityStoreActions } from "actions";
-import IconComposer from "global/components/utility/IconComposer";
+import { useCurrentUser, useDispatchReadingGroups, useSelectReadingGroups, useDispatchMyCollection, useSelectMyCollection } from "hooks";
+import Dialog from "frontend/components/collecting/Dialog";
 import Text from "./Text";
+import Icons from "./Icons";
 
 const { request } = entityStoreActions;
 
@@ -21,13 +23,30 @@ function determineView(collected, hovered, confirmed) {
   }
 }
 
+/*
+* TODO:
+* [X] get current user (& hide if not authenticated)
+* [X] get My Collection (for Dialog)
+* [] middleware updates to collectingAPI
+* [] finish wiring doCollect() and doRemove() (factor in which group)
+* [] finish wiring checkbox state for reading groups (needs middleware update)
+*/
+
 function CollectingToggle({ collectable, inline, className }) {
   const [hovered, setHovered] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+
+  useDispatchReadingGroups();
+  useDispatchMyCollection();
+  const myReadingGroups = useSelectReadingGroups();
+  const myCollection = useSelectMyCollection();
+  const currentUser = useCurrentUser();
   const dispatch = useDispatch();
 
   const collected = get(collectable, "attributes.collectedByCurrentUser");
   const view = determineView(collected, hovered, confirmed);
+  const hasReadingGroups = myReadingGroups?.length > 0;
   const collectableTitle = collectable.attributes.title;
   const useOutlinedStarIcon = inline && (view === "add" || view === "remove");
 
@@ -40,31 +59,45 @@ function CollectingToggle({ collectable, inline, className }) {
       case "remove-active":
         return `Uncollect ${collectableTitle}`;
       default:
-        return null;
+        return "";
     }
   }
 
   function onSRClick() {
+    // show dialog if user belongs to any RGs
+    if (hasReadingGroups) return setShowDialog(true);
     collected ? doUncollect() : doCollect();
   }
 
-  function doCollect() {
+  function doCollect(group = "me") {
     const call = collectingAPI.collect([collectable]);
     const collectRequest = request(call, requests.feCollectCollectable);
     dispatch(collectRequest);
   }
 
-  function doRemove() {
+  function doRemove(group = "me") {
     const call = collectingAPI.remove([collectable]);
     const collectRequest = request(call, requests.feCollectCollectable);
     dispatch(collectRequest);
+
+    setConfirmed(false);
   }
 
   function onClick() {
-    collected ? doRemove() : doCollect();
+    // if confirmed, we're ready to remove
+    if (confirmed) return doRemove();
+    // show dialog if user belongs to any RGs
+    if (hasReadingGroups) return setShowDialog(true);
+
+    // user belongs to no RGs;
+    // if collected previously, confirm removal request;
+    // otherwise collect
+    collected ? setConfirmed(true) : doCollect();
   }
 
   function onEnter() {
+    // don't change toggle presentation if user needs to open dialog
+    if (collected && hasReadingGroups) return;
     setHovered(true);
   }
 
@@ -72,22 +105,29 @@ function CollectingToggle({ collectable, inline, className }) {
     setHovered(false);
   }
 
+  function onDialogChange(group, collected) {
+    if (collected) return doRemove(group);
+    doCollect(group);
+  }
+
+  if (!currentUser) return null;
+
   return (
     <div>
       <button
-        className="collect-toggle collect-toggle--sr-only screen-reader-text"
+        className="sr-collecting-toggle screen-reader-text"
         onClick={onSRClick}
       >
-        {screenReaderText}
+        {screenReaderText()}
       </button>
       <button
         onClick={onClick}
         onMouseEnter={onEnter}
         onMouseLeave={onLeave}
         className={classNames({
-          "collect-toggle": true,
-          "collect-toggle--inline": inline,
-          "collect-toggle--project-cover": !inline,
+          "collecting-toggle": true,
+          "collecting-toggle--inline": inline,
+          "collecting-toggle--project-cover": !inline,
           [`${className}`]: !!className,
         })}
         aria-hidden="true"
@@ -95,40 +135,24 @@ function CollectingToggle({ collectable, inline, className }) {
       >
         <div
           className={classNames({
-            "collect-toggle__inner": true,
-            [`collect-toggle__inner--${view}`]: true
+            "collecting-toggle__inner": true,
+            [`collecting-toggle__inner--${view}`]: true
           })}
           aria-hidden="true"
         >
-          <div className="collect-toggle__icons">
-            <IconComposer
-              icon="MinusUnique"
-              size={28}
-              iconClass="collect-toggle__icon collect-toggle__icon--remove"
-            />
-            <IconComposer
-              icon="CheckUnique"
-              size={28}
-              iconClass="collect-toggle__icon collect-toggle__icon--confirm"
-            />
-            {!useOutlinedStarIcon && (
-              <IconComposer
-                icon="StarFillUnique"
-                size="default"
-                iconClass="collect-toggle__icon collect-toggle__icon--add"
-              />
-            )}
-            {useOutlinedStarIcon && (
-              <IconComposer
-                icon="StarOutlineUnique"
-                size="default"
-                iconClass="collect-toggle__icon collect-toggle__icon--add"
-              />
-            )}
-          </div>
+          <Icons useOutline={useOutlinedStarIcon} />
           <Text view={view} />
         </div>
       </button>
+      {showDialog && (
+        <Dialog
+          collectable={collectable}
+          readingGroups={myReadingGroups}
+          myCollection={myCollection}
+          onChange={onDialogChange}
+          onClose={() => setShowDialog(false)}
+        />
+      )}
     </div>
   );
 }

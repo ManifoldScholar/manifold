@@ -34,7 +34,7 @@ function determineText(view) {
 function ToggleText({ view }) {
   const transitionProps = {
     mountOnEnter: true,
-    classNames: "collect-toggle__text",
+    classNames: "collecting-toggle__text",
     timeout: { enter: 0, exit: 200 }
   };
 
@@ -43,7 +43,7 @@ function ToggleText({ view }) {
   return (
     <ReactTransitionGroup>
       <CSSTransition key={key} {...transitionProps}>
-        <span className="collect-toggle__text">{text}</span>
+        <span className="collecting-toggle__text">{text}</span>
       </CSSTransition>
     </ReactTransitionGroup>
   )
