@@ -282,3 +282,13 @@ $standalone-header-layout: (
 }
 
 $dashboard-layout-breakpoint: $break75;
+
+$toc-drawer: (
+  width: 477px,
+  base-inline-start-padding: 12.579%,
+  base-inline-end-padding: 10.482%,
+);
+
+@function toc-drawer($property) {
+  @return map-get($toc-drawer, $property);
+}
