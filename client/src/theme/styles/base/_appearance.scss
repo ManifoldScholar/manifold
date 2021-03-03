@@ -70,6 +70,7 @@ $analyticsHighlightColorPale: var(
 
 // Light & Dark Client Themes
 // --------------------
+$defaultColor: var(--default-color, #{$neutralTextDark});
 $defaultFocusColor: var(--default-focus-color, #{$accentInteractionLight});
 $defaultHoverColor: var(--default-hover-color, #{$accentInteractionLight});
 $defaultErrorColor: var(--default-error-color, #{$spErrorLight});
@@ -89,30 +90,30 @@ body {
   --accent-interaction-dark: #{$_accentInteractionDark};
   --analytics-highlight-color: #{$_analyticsHighlightColor};
   --analytics-highlight-color-pale: #{$_analyticsHighlightColorPale};
+
+  color: $defaultColor;
 }
 
 .browse,
 .reader.scheme-light,
 .bg-white {
+  --default-color: #{$neutralTextDark};
+  --default-strong-color: #{$neutralTextExtraDark};
   --default-focus-color: #{$neutralUIDark};
   --default-hover-color: #{$accentInteractionDark};
   --default-error-color: #{$spErrorDark};
   --default-warning-color: #{$spWarningDark};
   --default-notice-color: #{$spNoticeDark};
-  color: $neutralTextDark;
 }
 
-.backend,
-.drawer--backend,
-.reader.scheme-dark,
-.bg-neutral90,
-.bg-neutral95 {
+.backend, .drawer--backend, .reader.scheme-dark, .bg-neutral90, .bg-neutral95 {
+  --default-color: #{$neutralTextLight};
+  --default-strong-color: #{$neutralTextExtraLight};
   --default-focus-color: #{$accentInteractionLight};
   --default-hover-color: #{$accentInteractionLight};
   --default-error-color: #{$spErrorLight};
   --default-warning-color: #{$spWarningLight};
   --default-notice-color: #{$spNoticeLight};
-  color: $neutralTextLight;
 
   input[type='text'],
   input[type='email'],
