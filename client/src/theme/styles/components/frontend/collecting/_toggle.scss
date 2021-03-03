@@ -169,6 +169,6 @@ $_highlight-bg-color: $spBlue45;
   }
 
   .icon-star-outline {
-    fill: currentColor;
+    fill: var(--default-strong-color);
   }
 }

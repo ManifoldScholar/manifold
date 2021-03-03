@@ -35,7 +35,7 @@ function determineView(collected, hovered, confirmed) {
 function CollectingToggle({ collectable, inline, className }) {
   const [hovered, setHovered] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
-  const [showDialog, setShowDialog] = useState(false);
+  const [dialogVisible, setDialogVisible] = useState(false);
 
   useDispatchReadingGroups();
   useDispatchMyCollection();
@@ -45,7 +45,7 @@ function CollectingToggle({ collectable, inline, className }) {
   const dispatch = useDispatch();
 
   const collected = get(collectable, "attributes.collectedByCurrentUser");
-  const view = determineView(collected, hovered, confirmed);
+  const view = determineView(collected, hovered, confirmed, dialogVisible);
   const hasReadingGroups = myReadingGroups?.length > 0;
   const collectableTitle = collectable.attributes.title;
   const useOutlinedStarIcon = inline && (view === "add" || view === "remove");
@@ -65,7 +65,7 @@ function CollectingToggle({ collectable, inline, className }) {
 
   function onSRClick() {
     // show dialog if user belongs to any RGs
-    if (hasReadingGroups) return setShowDialog(true);
+    if (hasReadingGroups) return setDialogVisible(true);
     collected ? doUncollect() : doCollect();
   }
 
@@ -87,7 +87,7 @@ function CollectingToggle({ collectable, inline, className }) {
     // if confirmed, we're ready to remove
     if (confirmed) return doRemove();
     // show dialog if user belongs to any RGs
-    if (hasReadingGroups) return setShowDialog(true);
+    if (hasReadingGroups) return setDialogVisible(true);
 
     // user belongs to no RGs;
     // if collected previously, confirm removal request;
@@ -113,7 +113,7 @@ function CollectingToggle({ collectable, inline, className }) {
   if (!currentUser) return null;
 
   return (
-    <div>
+    <>
       <button
         className="sr-collecting-toggle screen-reader-text"
         onClick={onSRClick}
@@ -127,8 +127,7 @@ function CollectingToggle({ collectable, inline, className }) {
         className={classNames({
           "collecting-toggle": true,
           "collecting-toggle--inline": inline,
-          "collecting-toggle--project-cover": !inline,
-          [`${className}`]: !!className,
+          "collecting-toggle--project-cover": !inline
         })}
         aria-hidden="true"
         tabIndex={-1}
@@ -144,16 +143,16 @@ function CollectingToggle({ collectable, inline, className }) {
           <Text view={view} />
         </div>
       </button>
-      {showDialog && (
+      {dialogVisible && (
         <Dialog
           collectable={collectable}
           readingGroups={myReadingGroups}
           myCollection={myCollection}
           onChange={onDialogChange}
-          onClose={() => setShowDialog(false)}
+          onClose={() => setDialogVisible(false)}
         />
       )}
-    </div>
+    </>
   );
 }
 
@@ -162,7 +161,6 @@ CollectingToggle.displayName = "Collecting.Toggle";
 CollectingToggle.propTypes = {
   collectable: PropTypes.object.isRequired,
   inline: PropTypes.bool,
-  className: PropTypes.string,
 }
 
 CollectingToggle.defaultProps = {
