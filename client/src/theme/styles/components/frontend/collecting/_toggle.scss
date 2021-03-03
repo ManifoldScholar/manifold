@@ -91,9 +91,8 @@ $_highlight-bg-color: $spBlue45;
       --toggle-bg-color: #{$_highlight-bg-color};
     }
 
-    &--add,
-    &--remove {
-      .collecting-toggle--inline & {
+    &--add {
+      .collecting-toggle--outlined & {
         --toggle-color: currentColor;
         --toggle-bg-color: transparent;
       }
@@ -169,6 +168,6 @@ $_highlight-bg-color: $spBlue45;
   }
 
   .icon-star-outline {
-    fill: currentColor;
+    fill: var(--default-strong-color);
   }
 }
