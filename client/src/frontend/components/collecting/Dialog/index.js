@@ -7,9 +7,8 @@ import Dialog from "global/components/dialog";
 import SectionLabel from "global/components/form/SectionLabel";
 import Checkbox from "./Checkbox";
 
-function CollectingDialog({ collectable, myCollection, readingGroups, onChange, onClose }) {
+function CollectingDialog({ collectable, title, myCollection, readingGroups, onChange, onClose }) {
   const uidSeed = useUIDSeed();
-  const { title } = collectable.attributes;
 
   function inMyCollection() {
     if (!myCollection) return false;
@@ -32,6 +31,11 @@ function CollectingDialog({ collectable, myCollection, readingGroups, onChange, 
     const collected = groupID === "me" ? inMyCollection() : inReadingGroup(value);
 
     onChange(groupID, collected);
+  }
+
+  function handleCloseClick(event) {
+    event.stopPropagation();
+    onClose();
   }
 
   return (
@@ -73,7 +77,7 @@ function CollectingDialog({ collectable, myCollection, readingGroups, onChange, 
         </fieldset>
         <div className="collecting-dialog__footer">
           <button
-            onClick={onClose}
+            onClick={handleCloseClick}
             className="collecting-dialog__close-button button-secondary"
           >
             Close
@@ -88,7 +92,8 @@ CollectingDialog.displayName = "Collecting.Dialog";
 
 CollectingDialog.propTypes = {
   collectable: PropTypes.object.isRequired,
-  myCollection: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+  myCollection: PropTypes.object.isRequired,
   readingGroups: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,

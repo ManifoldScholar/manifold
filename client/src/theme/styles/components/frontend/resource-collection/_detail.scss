@@ -1,5 +1,16 @@
 .collection-detail {
-  &__heading {}
+  &__title-and-toggle {
+    display: flex;
+  }
+
+  &__collecting-toggle {
+    margin-left: 12px;
+    transform: translateY(2px);
+
+    @include respond($break60) {
+      transform: translateY(6px);
+    }
+  }
 
   &__utility {
     padding: 26px 0 12px;
