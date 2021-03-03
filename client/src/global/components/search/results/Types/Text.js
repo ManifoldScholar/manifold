@@ -64,6 +64,7 @@ class SearchResultsTypeText extends PureComponent {
         parentUrl={this.parentUrl}
         description={this.description}
         label="text"
+        collectable={this.result}
         figure={
           <EntityThumbnail.Text
             entity={this.model}

@@ -297,12 +297,16 @@ body {
   @include utilityPrimary;
   display: flex;
   align-items: center;
-  padding: 8px 14px;
-  font-size: 11px;
-  hyphens: none;
-  color: $accentPrimaryDark;
-  text-align: center;
+  padding: 0.417em 0.75em 0.5em;
+  color: var(--default-strong-color);
   background-color: $neutral10;
+  border-radius: 0.25em;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.104em;
+  text-decoration: none;
+  white-space: nowrap;
+  hyphens: none;
 
   &.secondary {
     color: $defaultErrorColor;

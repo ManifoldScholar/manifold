@@ -64,6 +64,7 @@ class SearchResultsTypeProject extends PureComponent {
         attribution={this.creatorsString}
         description={this.description}
         label="project"
+        collectable={this.result}
         figure={
           <EntityThumbnail.Project
             placeholderAttributes={{ mode: "small" }}
