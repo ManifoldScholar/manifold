@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import classNames from "classnames";
 import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
 import isEmpty from "lodash/isEmpty";
 import Drawer from "global/components/drawer";
 import IconComposer from "global/components/utility/IconComposer";
+import TocNode from "./TocNode";
 
 class Toc extends PureComponent {
   static propTypes = {
@@ -18,9 +18,8 @@ class Toc extends PureComponent {
     history: PropTypes.object
   };
 
-  constructor() {
-    super();
-    this.counter = 0;
+  constructor(props) {
+    super(props);
     this.state = {
       mounted: false
     };
@@ -31,6 +30,30 @@ class Toc extends PureComponent {
     this.setState({ mounted: true });
   }
   /* eslint-enable react/no-did-mount-set-state */
+
+  get text() {
+    return this.props.text;
+  }
+
+  get attributes() {
+    return this.text.attributes;
+  }
+
+  get metadata() {
+    return this.attributes.metadata;
+  }
+
+  get toc() {
+    return this.attributes.toc;
+  }
+
+  get slug() {
+    return this.attributes.slug;
+  }
+
+  get section() {
+    return this.props.section;
+  }
 
   UIHideTocDrawer = () => {
     if (this.props.tocDrawerVisible) {
@@ -48,13 +71,14 @@ class Toc extends PureComponent {
     return hasChildren;
   };
 
-  visitNode = node => {
-    this.counter += 1;
+  visitNode = (node, depth) => {
     let children = null;
     if (node.children && node.children.length > 0) {
       children = (
-        <ol className="toc-nested-level">
-          {node.children.map(this.visitNode)}
+        <ol
+          className={`table-of-contents__list table-of-contents__list--depth-${depth + 1}`}
+        >
+          {node.children.map(n => this.visitNode(n, depth + 1))}
         </ol>
       );
     }
@@ -65,42 +89,42 @@ class Toc extends PureComponent {
     const active = this.isNodeActive(node);
 
     return (
-      <li key={this.counter}>
-        <Link
-          to={lh.link(
-            "readerSection",
-            this.props.text.attributes.slug,
-            node.id,
-            anchor
-          )}
-          onClick={this.UIHideTocDrawer}
-          data-id="hide-drawer"
-          className={active ? "active" : null}
-        >
-          {node.label}
-        </Link>
-        {children}
-      </li>
+      <TocNode
+        key={node.id}
+        node={node}
+        linkTo={lh.link(
+          "readerSection",
+          this.slug,
+          node.id,
+          anchor
+        )}
+        onClick={this.UIHideTocDrawer}
+        active={active}
+        children={children}
+      />
     );
   };
 
   isNodeActive(node) {
-    if (!this.props.section) return false;
+    if (!this.section) return false;
     if (!this.state.mounted) return false;
     const { location } = this.props.history;
     const nodeId = node.id;
     const nodeHash = node.anchor ? `#${node.anchor}` : "";
-    return this.props.section.id === nodeId && location.hash === nodeHash;
+    return this.section.id === nodeId && location.hash === nodeHash;
   }
 
   showMeta = () => {
     this.props.showMeta();
   };
 
-  renderContents(text) {
-    if (text.attributes.toc.length <= 0) return this.renderEmpty();
+  renderContents() {
+    const initialDepth = 0;
+    if (this.toc.length <= 0) return this.renderEmpty();
     return (
-      <ol className="toc-list">{text.attributes.toc.map(this.visitNode)}</ol>
+      <ol className={`table-of-contents__list table-of-contents__list--depth-0`}>
+        {this.toc.map(node => this.visitNode(node, initialDepth))}
+      </ol>
     );
   }
 
@@ -116,14 +140,6 @@ class Toc extends PureComponent {
   }
 
   render() {
-    const text = this.props.text;
-    const metadata = text.attributes.metadata;
-
-    const tocClass = classNames({
-      "table-of-contents": true,
-      "multi-level": this.hasChildren(text.attributes.toc)
-    });
-
     const drawerProps = {
       open: this.props.tocDrawerVisible,
       context: "reader",
@@ -138,9 +154,9 @@ class Toc extends PureComponent {
 
     return (
       <Drawer.Wrapper {...drawerProps}>
-        <nav className={tocClass} aria-label="Table of Contents">
-          {this.renderContents(text)}
-          {!isEmpty(metadata) ? (
+        <nav className="table-of-contents" aria-label="Table of Contents">
+          {this.renderContents()}
+          {!isEmpty(this.metadata) ? (
             <div className="toc-footer">
               <button onClick={this.showMeta} className="toc-footer__button">
                 <IconComposer

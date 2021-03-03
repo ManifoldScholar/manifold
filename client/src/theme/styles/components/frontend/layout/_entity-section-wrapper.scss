@@ -46,7 +46,7 @@
         }
       }
 
-      .manicon-svg {
+      .manicon-svg:not(.collecting-toggle__icon) {
         position: relative;
         top: 2px;
         flex-shrink: 0;

@@ -191,8 +191,8 @@ export default class Header extends Component {
             </div>
             {this.props.section && (
               <TextTitles
-                textTitle={this.props.text.attributes.titleFormatted}
-                sectionTitle={this.props.section.attributes.name}
+                text={this.props.text}
+                section={this.props.section}
                 showSection={!this.props.scrollAware.top}
               />
             )}
