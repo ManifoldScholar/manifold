@@ -30,10 +30,6 @@
       font-size: 16px;
     }
 
-    &:hover {
-      color: $headerForegroundHoverColor;
-    }
-
     &--active {
       color: $headerForegroundActiveColor;
 
@@ -59,6 +55,14 @@
       &:focus-visible {
         @include outlineOnFocusVisible;
         outline-offset: 2px;
+      }
+
+      &:hover {
+        color: $headerForegroundActiveColor;
+
+        .site-nav--backend & {
+          color: $neutralWhite;
+        }
       }
     }
   }
