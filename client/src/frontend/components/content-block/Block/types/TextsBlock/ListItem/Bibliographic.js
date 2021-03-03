@@ -67,23 +67,24 @@ export default class TextListListItemBibliographic extends Component {
   render() {
     return (
       <div className={`${this.baseClass}__bibliographic`}>
-        <Link to={this.readUrl}>
-          <h4 className={`${this.baseClass}__name`}>
-            <span className={`${this.baseClass}__title`}>{this.props.title}</span>
+        <h4 className={`${this.baseClass}__name`}>
+          <Link to={this.readUrl} className={`${this.baseClass}__title-link`}>
+            <span className={`${this.baseClass}__title`}>{this.title}</span>
             {this.subtitle && (
               <span className={`${this.baseClass}__subtitle`}>
                 {this.subtitle}
               </span>
             )}
-            <span className={`${this.baseClass}__subtitle`}>
-                Subtitle here
-              </span>
-            <Collecting.Toggle
-              collectable={this.text}
-              className={`${this.baseClass}__collect-toggle`}
-            />
-          </h4>
-        </Link>
+          </Link>
+          <span
+            className={classNames({
+              [`${this.baseClass}__collect-toggle`]: true,
+              [`${this.baseClass}__collect-toggle--with-subtitle`]: !!this.subtitle,
+            })}
+          >
+            <Collecting.Toggle collectable={this.text} />
+          </span>
+        </h4>
         {this.creatorNames && (
           <div className={`${this.baseClass}__creators`}>
             <span style={{ fontStyle: "italic" }}>by </span>

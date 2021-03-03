@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import has from "lodash/has";
 import isPlainObject from "lodash/isPlainObject";
+import Collecting from "frontend/components/collecting";
 import withSearchResultHelper from "../searchResultHelper";
 import Excerpts from "./Excerpts";
 
@@ -37,7 +38,7 @@ class SearchResultsTypeGeneric extends PureComponent {
 
   wrapWithLink(url, contents) {
     if (!url) return contents;
-    return <Link to={url}>{contents}</Link>;
+    return <Link to={url} className="search-result__title-link">{contents}</Link>;
   }
 
   render() {
@@ -92,6 +93,11 @@ class SearchResultsTypeGeneric extends PureComponent {
                 <div className="search-result__label">
                   {this.valueFor("label")}
                 </div>
+                {this.hasProp("collectable") && (
+                  <div className="search-result__collecting-toggle">
+                    <Collecting.Toggle collectable={this.valueFor("collectable")} />
+                  </div>
+                )}
               </div>
             </div>
             {this.hasProp("description") && (

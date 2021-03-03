@@ -6,20 +6,6 @@
     flex-direction: row;
   }
 
-  &:hover, &:focus-within {
-    cursor: pointer;
-    outline: 0;
-
-    .text-block__cover--svg,
-    .text-block__name {
-      @include defaultHoverStyle;
-    }
-
-    .text-block__cover-image {
-      border-color: $defaultHoverColor;
-    }
-  }
-
   a {
     &:focus-visible {
       outline: 0;
@@ -87,16 +73,28 @@
   }
 
   &__name {
+    display: flex;
     margin: 0;
     font-size: 16px;
     font-weight: $semibold;
     line-height: 1.188;
-    color: $neutralTextExtraDark;
+    color: var(--title-color);
     white-space: normal;
     transition: color $duration $timing;
 
     @include respond($break80) {
       font-size: 21px;
+    }
+  }
+
+  &__title-link {
+    --title-color: #{$neutralTextExtraDark};
+
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      --title-color: #{$defaultHoverColor};
     }
   }
 
@@ -119,6 +117,7 @@
   }
 
   &__subtitle {
+    margin-right: 12px;
     font-style: italic;
     font-weight: $regular;
     letter-spacing: 0.031em;
@@ -128,15 +127,14 @@
       display: inline-block;
       padding-top: 0.143em;
     }
-
-    &:not(:last-child) {
-      margin-right: 12px;
-    }
   }
 
   &__collect-toggle {
-    @include respond($break80) {
-      transform: translateY(-24%);
+    flex-grow: 1;
+    transform: translateY(-0.238em);
+
+    &--with-subtitle {
+      transform: translateY(-0.19em);
     }
   }
 

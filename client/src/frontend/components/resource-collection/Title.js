@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import FormattedDate from "global/components/FormattedDate";
 import Utility from "global/components/utility";
+import Collecting from "frontend/components/collecting";
 
 export default class ResourceCollectionTitle extends Component {
   static displayName = "ResourceCollection.Title";
@@ -16,22 +17,27 @@ export default class ResourceCollectionTitle extends Component {
     showCreatedAt: true
   };
 
-  renderDate(attributes) {
-    if (!this.props.showCreatedAt) return null;
-    return (
-      <span className="date">
-        <FormattedDate
-          prefix="Collection created"
-          format="MMMM, yyyy"
-          date={attributes.createdAt}
-        />
-      </span>
-    );
+  get collection() {
+    return this.props.resourceCollection;
+  }
+
+  get attributes() {
+    return this.collection.attributes;
+  }
+
+  get title() {
+    return this.attributes.title;
+  }
+
+  get createdAt() {
+    return this.attributes.createdAt;
+  }
+
+  get showCreatedAt() {
+    return this.props.showCreatedAt;
   }
 
   render() {
-    const attr = this.props.resourceCollection.attributes;
-
     return (
       <header
         className={classNames(
@@ -44,8 +50,24 @@ export default class ResourceCollectionTitle extends Component {
         <div className="main">
           <Utility.IconComposer size={54} icon="resourceCollection64" />
           <div className="body">
-            <h1 className="title">{attr.title}</h1>
-            {this.renderDate(attr)}
+            <div className="collection-detail__title-and-toggle">
+              <h1
+                className="title"
+                dangerouslySetInnerHTML={{ __html: this.title }}
+              />
+              <span className="collection-detail__collecting-toggle">
+                <Collecting.Toggle collectable={this.collection} />
+              </span>
+            </div>
+            {this.showCreatedAt && (
+              <span className="date">
+                <FormattedDate
+                  prefix="Collection created"
+                  format="MMMM, yyyy"
+                  date={this.createdAt}
+                />
+              </span>
+            )}
           </div>
         </div>
       </header>

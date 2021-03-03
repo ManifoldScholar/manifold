@@ -73,6 +73,7 @@ class SearchResultsTypeResource extends PureComponent {
         attribution={this.creatorsString}
         description={this.description}
         label="resource"
+        collectable={this.result}
         figure={
           <EntityThumbnail.Resource
             entity={this.model}
