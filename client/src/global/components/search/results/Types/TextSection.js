@@ -69,6 +69,7 @@ class SearchResultsTypeTextSection extends PureComponent {
         parentUrl={lh.link("reader", this.text.slug)}
         url={lh.link("readerSection", this.text.slug, this.model.id)}
         label="full text"
+        collectable={this.result}
         figure={
           <EntityThumbnail.TextSection
             entity={this.model}

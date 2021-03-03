@@ -1,0 +1,48 @@
+.resource-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 23px;
+  padding-bottom: 26px;
+  text-decoration: none;
+
+  &__icon {
+    display: none;
+    padding-right: 18px;
+
+    @include respond($break60) {
+      display: inline-block;
+    }
+
+    svg {
+      fill: $neutral50;
+    }
+  }
+
+  &__title {
+    @include templateHead;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 26px;
+    font-weight: $medium;
+    hyphens: none;
+
+    @include respond($break60) {
+      width: auto;
+    }
+  }
+
+  &__title-and-toggle {
+    display: flex;
+  }
+
+  &__collecting-toggle {
+    margin-left: 12px;
+    transform: translateY(5px);
+  }
+
+  + .resource-content {
+    margin-top: -8px;
+  }
+}
