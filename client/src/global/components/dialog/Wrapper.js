@@ -7,6 +7,7 @@ import classnames from "classnames";
 import FocusTrap from "focus-trap-react";
 import isString from "lodash/isString";
 import IconComposer from "global/components/utility/IconComposer";
+import BodyClass from "hoc/body-class";
 
 class DialogWrapper extends PureComponent {
   static displayName = "Dialog.Wrapper";
@@ -85,11 +86,13 @@ class DialogWrapper extends PureComponent {
     return this.closeWithNoAction();
   }
 
-  handleOverlayClick = eventIgnored => {
+  handleOverlayClick = event => {
+    event.stopPropagation();
     if (this.props.closeOnOverlayClick) this.doClose();
   };
 
-  handleCloseClick = eventIgnored => {
+  handleCloseClick = event => {
+    event.stopPropagation();
     this.doClose();
   };
 
@@ -119,39 +122,41 @@ class DialogWrapper extends PureComponent {
         timeout={{ enter: 1, exit: 200 }}
         unmountOnExit
       >
-        <FocusTrap className="dialog-wrapper dialog-appear">
-          {/* The <div> element's role is declared dynamically, confusing jsx-a11y */}
-          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-          <div
-            className="dialog-overlay"
-            onClick={this.handleOverlayClick}
-            role={this.overlayRole}
-          />
-          <div
-            role="dialog"
-            aria-labelledby={this.props.labelledBy}
-            aria-describedby={this.props.describedBy}
-            className={classnames(
-              "dialog",
-              this.props.className,
-              this.state.additionalClassNames
-            )}
-            style={this.style()}
-          >
-            {this.props.showCloseButton ? (
-              <div
-                onClick={this.handleCloseClick}
-                className="dialog__close"
-                role="button"
-                tabIndex="0"
-              >
-                <IconComposer icon="close16" size={24} />
-                <span className="screen-reader-text">Close Dialog</span>
-              </div>
-            ) : null}
-            {this.renderChildren()}
-          </div>
-        </FocusTrap>
+        <BodyClass className={"no-scroll"}>
+          <FocusTrap className="dialog-wrapper dialog-appear">
+            {/* The <div> element's role is declared dynamically, confusing jsx-a11y */}
+            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+            <div
+              className="dialog-overlay"
+              onClick={this.handleOverlayClick}
+              role={this.overlayRole}
+            />
+            <div
+              role="dialog"
+              aria-labelledby={this.props.labelledBy}
+              aria-describedby={this.props.describedBy}
+              className={classnames(
+                "dialog",
+                this.props.className,
+                this.state.additionalClassNames
+              )}
+              style={this.style()}
+            >
+              {this.props.showCloseButton ? (
+                <div
+                  onClick={this.handleCloseClick}
+                  className="dialog__close"
+                  role="button"
+                  tabIndex="0"
+                >
+                  <IconComposer icon="close16" size={24} />
+                  <span className="screen-reader-text">Close Dialog</span>
+                </div>
+              ) : null}
+              {this.renderChildren()}
+            </div>
+          </FocusTrap>
+        </BodyClass>
       </CSSTransition>
     );
 

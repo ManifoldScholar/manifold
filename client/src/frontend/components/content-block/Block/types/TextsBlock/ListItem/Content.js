@@ -33,13 +33,11 @@ export default class TextListListItemContent extends Component {
     return (
       <div className={`${baseClass}__content`}>
         <div className={`${baseClass}__inner`}>
-          <Link to={readUrl}>
-            <Text.Cover
-              text={text}
-              baseClass={baseClass}
-              iconOnly={!showCovers}
-            />
-          </Link>
+          <Text.Cover
+            text={text}
+            baseClass={baseClass}
+            iconOnly={!showCovers}
+          />
           <Bibliographic
             baseClass={baseClass}
             text={text}

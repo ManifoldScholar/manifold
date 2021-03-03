@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import Collecting from "frontend/components/collecting";
 
 export default class ProjectHeroHeading extends PureComponent {
   static displayName = "ProjectHero.Heading";
@@ -8,6 +9,10 @@ export default class ProjectHeroHeading extends PureComponent {
   static propTypes = {
     project: PropTypes.object.isRequired
   };
+
+  get project() {
+    return this.props.project;
+  }
 
   get showTitle() {
     return this.props.project.attributes.titleFormatted;
@@ -37,9 +42,21 @@ export default class ProjectHeroHeading extends PureComponent {
     });
   }
 
+  get titleAndToggleClasses() {
+    return classNames({
+      "project-hero__title-and-toggle": true,
+    });
+  }
+
   get titleClasses() {
     return classNames({
       "project-hero__title": true
+    });
+  }
+
+  get toggleClasses() {
+    return classNames({
+      "project-hero__collecting-toggle": true,
     });
   }
 
@@ -56,10 +73,15 @@ export default class ProjectHeroHeading extends PureComponent {
       <header className={this.headerClasses}>
         <div className={this.innerClasses}>
           {this.showTitle && (
-            <h1
-              className={this.titleClasses}
-              dangerouslySetInnerHTML={{ __html: this.title }}
-            />
+            <div className={this.titleAndToggleClasses}>
+              <h1
+                className={this.titleClasses}
+                dangerouslySetInnerHTML={{ __html: this.title }}
+              />
+              <span className={this.toggleClasses}>
+                <Collecting.Toggle collectable={this.project} />
+              </span>
+            </div>
           )}
           {this.showSubtitle && (
             <div
@@ -67,6 +89,7 @@ export default class ProjectHeroHeading extends PureComponent {
               dangerouslySetInnerHTML={{ __html: this.subtitle }}
             />
           )}
+
         </div>
       </header>
     );

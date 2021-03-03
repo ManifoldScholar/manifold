@@ -1,15 +1,4 @@
 .toc-drawer {
-  .drawer {
-    width: 565px;
-    max-width: 90vw;
-  }
-
-  .no-scroll.overlay & {
-    overflow: hidden;
-  }
-
-  // Scoped table of contents styles, some may be abstracted later
-  // <nav> around nested uls
   @mixin tocBasePadding($nested: 0) {
     padding-right: 20px;
     padding-left: 30px + $nested;
@@ -25,78 +14,16 @@
     @include respond($break95) {
       padding-left: 84px + $nested;
     }
+}
+
+  .drawer {
+    width: toc-drawer(width);
+    max-width: 90vw;
+    background-color: $neutral10;
   }
 
-  $tocNestedPadding: 23;
-
-  .table-of-contents {
-    background-color: $neutral05;
-
-    // Global Styles
-    ol {
-      @include listUnstyled;
-      @include templateHead;
-
-      a {
-        display: block;
-        width: 100%;
-        hyphens: none;
-        line-height: 1.2;
-        color: $neutralTextExtraDark;
-        text-decoration: none;
-        border-bottom: 1px solid $neutral40;
-        transition: background-color $duration $timing;
-
-        &:hover, &:focus-visible {
-          background-color: $accentPrimaryPale;
-          outline: 0;
-        }
-
-        &.active {
-          background-color: $neutral10;
-        }
-      }
-    }
-
-    // Top Level links
-    > ol > li {
-      > a {
-        @include tocBasePadding;
-        padding-top: 1.091em;
-        padding-bottom: 1.136em;
-        font-size: 18px;
-
-        @include respond($break50) {
-          font-size: 22px;
-        }
-      }
-
-      > ol > li {
-        // Secondary level globals
-        a {
-          @include tocBasePadding;
-          padding-top: 0.5em;
-          padding-bottom: 0.667em;
-          font-size: 16px;
-
-          @include respond($break50) {
-            font-size: 18px;
-          }
-        }
-
-        // Third level indenting
-        // scss-lint:disable SelectorDepth
-        > ol > li > a {
-          @include tocBasePadding($tocNestedPadding);
-        }
-
-        // Fourth level (and on) indenting
-        // scss-lint:disable SelectorDepth
-        > ol > li > ol > li > a {
-          @include tocBasePadding($tocNestedPadding * 2);
-        }
-      }
-    }
+  .no-scroll.overlay & {
+    overflow: hidden;
   }
 
   .toc-empty {
@@ -120,27 +47,23 @@
 
     &__button {
       @include buttonUnstyled;
-      @include tocBasePadding;
       display: flex;
       align-items: center;
       width: 100%;
-      padding-top: 29px;
-      padding-bottom: 70px;
+      margin-top: 15px;
+      padding: 16.362px toc-drawer(base-inline-end-padding) 16.362px toc-drawer(base-inline-start-padding);
       color: $neutralTextDark;
       text-decoration: none;
-      transition:
-        color $duration $timing,
-        background-color $duration $timing;
+      transition: background-color $duration $timing;
 
       &:hover, &:focus-visible {
-        color: $neutralTextExtraDark;
-        background-color: $accentPrimaryPale;
+        background-color: $neutral30;
         outline: 0;
       }
 
       @include respond($break50) {
-        padding-top: 40px;
-        padding-bottom: 40px;
+        padding-top: 17px;
+        padding-bottom: 17px;
       };
     }
 

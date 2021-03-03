@@ -9,22 +9,19 @@
   @include reactSlideTransition('right', '.user-menu');
   @include reactSlideTransition('right', '.search-menu');
 
+  @include boxShadow(0, -10px, 20px, 7px, $neutralBlack, 0.25);
   position: fixed;
   top: 0;
   width: 100%;
   color: $neutralTextDark;
 
-  /* stylelint-disable property-no-vendor-prefix */
   &__inner {
     position: relative;
-    display: -ms-grid;
     display: grid;
     grid-template: 'menu-group-left title-bar menu-group-right' 46px / max-content 1fr max-content;
     width: 200vw;
     background-color: $neutral05;
     transition: transform $duration ease-out;
-    -ms-grid-rows: 46px;
-    -ms-grid-columns: max-content 1fr max-content;
 
     &--shifted {
       transform: translateX(-100vw);
@@ -40,8 +37,6 @@
 
     &--left {
       grid-area: menu-group-left;
-      -ms-grid-row: 1;
-      -ms-grid-column: 1;
       width: 100vw;
 
       @include respond($break50) {
@@ -51,8 +46,6 @@
 
     &--right {
       grid-area: menu-group-right;
-      -ms-grid-row: 1;
-      -ms-grid-column: 3;
       width: 100vw;
 
       @include respond($break50) {
@@ -66,35 +59,34 @@
     position: relative;
     display: none;
     grid-area: title-bar;
-    -ms-grid-row: 1;
-    -ms-grid-column: 2;
     height: 100%;
     overflow: hidden;
+    font-size: 18px;
+    font-weight: $medium; // OD
 
     @include respond($break75) {
       display: block;
     }
   }
-  /* stylelint-enable property-no-vendor-prefix */
 
-  &__title-bar-text {
-    @include templateHead;
+  &__title-bar-inner {
     position: relative;
-    display: flex;
-    align-items: center;
     width: 100%;
     height: 100%;
     padding-right: $paddingLateral;
     padding-left: $paddingLateral;
     margin: 0;
-    overflow: hidden;
-    font-size: 18px;
-    font-weight: $medium; // OD
     transition: transform 0.4s $timing;
 
     .reader-header__title-bar--show-section & {
       transform: translateY(-100%);
     }
+  }
+
+  &__title-bar-text {
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
 
   &__title-inner-text {
@@ -104,6 +96,11 @@
     line-height: 1.5;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  &__title-bar-collecting-toggle {
+    margin-left: 12px;
+    transform: translateY(-3px);
   }
 
   &__button {
