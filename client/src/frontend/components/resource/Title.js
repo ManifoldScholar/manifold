@@ -24,13 +24,13 @@ export default class ResourceTitle extends Component {
     return (
       <div className="resource-title">
         {this.props.showIcon ? (
-          <figure className={`resource-icon ${attr.kind}`}>
+          <figure className={`resource-title__icon ${attr.kind}`}>
             <IconComputed.Resource icon={attr.kind} size={60} />
           </figure>
         ) : null}
         <div>
           <div className="resource-title__title-and-toggle">
-            <h1 dangerouslySetInnerHTML={{ __html: attr.titleFormatted }} />
+            <h1 className="resource-title__title" dangerouslySetInnerHTML={{ __html: attr.titleFormatted }} />
             <span className="resource-title__collecting-toggle">
               <Collecting.Toggle collectable={this.props.resource} />
             </span>
