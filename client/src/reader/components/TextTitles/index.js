@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import Collecting from "frontend/components/collecting";
 
 export default class TextTitles extends Component {
   static propTypes = {
-    textTitle: PropTypes.string,
-    sectionTitle: PropTypes.string,
+    text: PropTypes.object.isRequired,
+    section: PropTypes.object.isRequired,
     showSection: PropTypes.bool
   };
 
@@ -14,6 +15,22 @@ export default class TextTitles extends Component {
     this.state = {
       showSection: true
     };
+  }
+
+  get text() {
+    return this.props.text;
+  }
+
+  get textTitle() {
+    return this.text.attributes.titleFormatted;
+  }
+
+  get section() {
+    return this.props.section;
+  }
+
+  get sectionTitle() {
+    return this.section.attributes.name;
   }
 
   toggleTitles() {
@@ -31,12 +48,19 @@ export default class TextTitles extends Component {
     }
   }
 
-  handleTitleClick = () => {
+  handleTitleClick = (event) => {
+    console.log(event.target);
+
     // Not using event, but handler stub will allow it if it becomes necessary
     this.toggleTitles();
   };
 
   render() {
+    const propsShowSection = this.props.showSection;
+    const stateShowSection = this.state.showSection;
+
+    console.log({ propsShowSection, stateShowSection });
+
     const titleClass = classNames({
       "reader-header__title-bar": true,
       "reader-header__title-bar--show-section":
@@ -47,19 +71,27 @@ export default class TextTitles extends Component {
       /* eslint-disable jsx-a11y/no-static-element-interactions */
       <div className={titleClass} onClick={this.handleTitleClick}>
         <h1 className="screen-reader-text">
-          {`${this.props.textTitle}: ${this.props.sectionTitle}`}
+          {`${this.textTitle}: ${this.sectionTitle}`}
         </h1>
-        <h1 className="reader-header__title-bar-text" aria-hidden="true">
-          <span
-            className="reader-header__title-inner-text"
-            dangerouslySetInnerHTML={{ __html: this.props.textTitle }}
-          />
-        </h1>
-        <h1 className="reader-header__title-bar-text" aria-hidden="true">
-          <span className="reader-header__title-inner-text">
-            {this.props.sectionTitle}
-          </span>
-        </h1>
+        <div className="reader-header__title-bar-inner">
+          <div className="reader-header__title-bar-text" aria-hidden="true">
+            <span
+              className="reader-header__title-inner-text"
+              dangerouslySetInnerHTML={{ __html: this.textTitle }}
+            />
+            <span className="reader-header__title-bar-collecting-toggle">
+              <Collecting.Toggle collectable={this.text} />
+            </span>
+          </div>
+          <div className="reader-header__title-bar-text" aria-hidden="true">
+            <span className="reader-header__title-inner-text">
+              {this.sectionTitle}
+            </span>
+            <span className="reader-header__title-bar-collecting-toggle">
+              <Collecting.Toggle collectable={this.section} />
+            </span>
+          </div>
+        </div>
       </div>
       /* eslint-enable jsx-a11y/no-static-element-interactions */
     );
