@@ -63,12 +63,6 @@ function CollectingToggle({ collectable, inline, className }) {
     }
   }
 
-  function onSRClick() {
-    // show dialog if user belongs to any RGs
-    if (hasReadingGroups) return setDialogVisible(true);
-    collected ? doUncollect() : doCollect();
-  }
-
   function doCollect(group = "me") {
     const call = collectingAPI.collect([collectable]);
     const collectRequest = request(call, requests.feCollectCollectable);
@@ -83,7 +77,15 @@ function CollectingToggle({ collectable, inline, className }) {
     setConfirmed(false);
   }
 
-  function onClick() {
+  function onSRClick(event) {
+    event.stopPropagation();
+    // show dialog if user belongs to any RGs
+    if (hasReadingGroups) return setDialogVisible(true);
+    collected ? doUncollect() : doCollect();
+  }
+
+  function onClick(event) {
+    event.stopPropagation();
     // if confirmed, we're ready to remove
     if (confirmed) return doRemove();
     // show dialog if user belongs to any RGs
@@ -108,6 +110,11 @@ function CollectingToggle({ collectable, inline, className }) {
   function onDialogChange(group, collected) {
     if (collected) return doRemove(group);
     doCollect(group);
+  }
+
+  function onDialogClose(event) {
+    event.stopPropagation();
+    setDialogVisible(false);
   }
 
   if (!currentUser) return null;
@@ -149,7 +156,7 @@ function CollectingToggle({ collectable, inline, className }) {
           readingGroups={myReadingGroups}
           myCollection={myCollection}
           onChange={onDialogChange}
-          onClose={() => setDialogVisible(false)}
+          onClose={onDialogClose}
         />
       )}
     </>
