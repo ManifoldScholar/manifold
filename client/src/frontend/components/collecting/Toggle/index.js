@@ -48,7 +48,7 @@ function CollectingToggle({ collectable, inline, className }) {
   const view = determineView(collected, hovered, confirmed, dialogVisible);
   const hasReadingGroups = myReadingGroups?.length > 0;
   const collectableTitle = collectable.attributes.title;
-  const useOutlinedStarIcon = inline && (view === "add" || view === "remove");
+  const useOutlinedStarIcon = inline && view === "add";
 
   const screenReaderText = () => {
     switch (view) {
