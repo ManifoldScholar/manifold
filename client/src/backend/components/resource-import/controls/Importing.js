@@ -17,9 +17,7 @@ export default class ResourceImportControlsImporting extends PureComponent {
 
     return (
       <>
-        <SectionLabel
-          label="Step 4. Import Resources"
-        />
+        <SectionLabel label="Step 4. Import Resources" />
         <p className="instructional-copy">
           The import is in progress. Each resource is updated in the background.
           This list below will refresh every 5 seconds, or you can press the

@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import { useUIDSeed } from "react-uid";
 import flatMap from "lodash/flatMap";
 import IconComposer from "global/components/utility/IconComposer";
@@ -7,13 +7,21 @@ import Dialog from "global/components/dialog";
 import SectionLabel from "global/components/form/SectionLabel";
 import Checkbox from "./Checkbox";
 
-function CollectingDialog({ collectable, title, myCollection, readingGroups, onChange, onClose }) {
+function CollectingDialog({
+  collectable,
+  title,
+  myCollection,
+  readingGroups,
+  onChange,
+  onClose
+}) {
   const uidSeed = useUIDSeed();
 
   function inMyCollection() {
     if (!myCollection) return false;
 
-    const collectables = myCollection.attributes.categoryMappings["$uncategorized$"];
+    const collectables =
+      myCollection.attributes.categoryMappings.$uncategorized$;
     const flattened = flatMap(collectables);
 
     return flattened.includes(collectable.id);
@@ -21,14 +29,15 @@ function CollectingDialog({ collectable, title, myCollection, readingGroups, onC
 
   function inReadingGroup(id) {
     const group = readingGroups.find(rg => rg.id === id);
-    console.log({ group });
+    // console.log({ group });
 
     return false;
   }
 
   function onCheckboxChange(event) {
     const groupID = event.target.value;
-    const collected = groupID === "me" ? inMyCollection() : inReadingGroup(value);
+    const collected =
+      groupID === "me" ? inMyCollection() : inReadingGroup(groupID);
 
     onChange(groupID, collected);
   }
@@ -48,8 +57,14 @@ function CollectingDialog({ collectable, title, myCollection, readingGroups, onC
     >
       <div className="collecting-dialog__inner">
         <header className="collecting-dialog__header">
-          <h2 id={uidSeed("label")} className="collecting-dialog__title">{title}</h2>
-          <IconComposer icon="TextsLoosePages64" size={48} iconClass="collecting-dialog__header-icon" />
+          <h2 id={uidSeed("label")} className="collecting-dialog__title">
+            {title}
+          </h2>
+          <IconComposer
+            icon="TextsLoosePages64"
+            size={48}
+            iconClass="collecting-dialog__header-icon"
+          />
         </header>
         <fieldset className="collecting-dialog__fieldset">
           <SectionLabel as="legend" label="Add this to:" />
@@ -61,7 +76,10 @@ function CollectingDialog({ collectable, title, myCollection, readingGroups, onC
               checked={inMyCollection()}
             />
             {readingGroups.map(group => {
-              const { id, attributes: { name, privacy }} = group;
+              const {
+                id,
+                attributes: { name, privacy }
+              } = group;
               return (
                 <Checkbox
                   key={id}
@@ -85,7 +103,7 @@ function CollectingDialog({ collectable, title, myCollection, readingGroups, onC
         </div>
       </div>
     </Dialog.Wrapper>
-  )
+  );
 }
 
 CollectingDialog.displayName = "Collecting.Dialog";
@@ -96,7 +114,7 @@ CollectingDialog.propTypes = {
   myCollection: PropTypes.object.isRequired,
   readingGroups: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
-}
+  onClose: PropTypes.func.isRequired
+};
 
 export default CollectingDialog;

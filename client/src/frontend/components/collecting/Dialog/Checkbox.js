@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useUID } from "react-uid";
 import {
   TransitionGroup as ReactTransitionGroup,
@@ -13,10 +13,16 @@ const transitionProps = {
   timeout: { enter: 0, exit: 0 }
 };
 
-function CollectingDialogCheckbox({ label, value, checked, onChange, showLock }) {
+function CollectingDialogCheckbox({
+  label,
+  value,
+  checked,
+  onChange,
+  showLock
+}) {
   const uid = useUID();
   const [hovering, setHovering] = useState(false);
-  const icon = (checked || hovering) ? "StarFillUnique" : "StarOutlineUnique";
+  const icon = checked || hovering ? "StarFillUnique" : "StarOutlineUnique";
 
   return (
     <label
@@ -38,7 +44,11 @@ function CollectingDialogCheckbox({ label, value, checked, onChange, showLock })
         <span className="collecting-dialog-checkbox__icon-block">
           <ReactTransitionGroup>
             <CSSTransition key={icon} {...transitionProps}>
-              <IconComposer icon={icon} size="default" iconClass="collecting-dialog-checkbox__icon" />
+              <IconComposer
+                icon={icon}
+                size="default"
+                iconClass="collecting-dialog-checkbox__icon"
+              />
             </CSSTransition>
           </ReactTransitionGroup>
         </span>
@@ -52,7 +62,7 @@ function CollectingDialogCheckbox({ label, value, checked, onChange, showLock })
         )}
       </span>
     </label>
-  )
+  );
 }
 
 CollectingDialogCheckbox.displayName = "Collecting.Dialog.Checkbox";
@@ -62,7 +72,7 @@ CollectingDialogCheckbox.propTypes = {
   value: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
-  showLock: PropTypes.bool,
-}
+  showLock: PropTypes.bool
+};
 
-export default CollectingDialogCheckbox
+export default CollectingDialogCheckbox;
