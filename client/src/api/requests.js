@@ -117,7 +117,6 @@ export default {
   feReadingGroupMembershipDestroy: "frontend-reading-group-membership-destroy",
   feProjectsFiltered: "frontend-projects-filtered",
   feProjectsFeatured: "frontend-projects-featured",
-  feProjectsFollowed: "frontend-projects-followed",
   feFeatures: "frontend-features",
   feEvents: "frontend-events",
   feSubjects: "frontend-subjects",
