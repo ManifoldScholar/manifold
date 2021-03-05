@@ -38,7 +38,11 @@ class SearchResultsTypeGeneric extends PureComponent {
 
   wrapWithLink(url, contents) {
     if (!url) return contents;
-    return <Link to={url} className="search-result__title-link">{contents}</Link>;
+    return (
+      <Link to={url} className="search-result__title-link">
+        {contents}
+      </Link>
+    );
   }
 
   render() {
@@ -95,7 +99,9 @@ class SearchResultsTypeGeneric extends PureComponent {
                 </div>
                 {this.hasProp("collectable") && (
                   <div className="search-result__collecting-toggle">
-                    <Collecting.Toggle collectable={this.valueFor("collectable")} />
+                    <Collecting.Toggle
+                      collectable={this.valueFor("collectable")}
+                    />
                   </div>
                 )}
               </div>
