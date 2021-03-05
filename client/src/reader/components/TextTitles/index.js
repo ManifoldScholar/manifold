@@ -48,7 +48,7 @@ export default class TextTitles extends Component {
     }
   }
 
-  handleTitleClick = (eventIgnored) => {
+  handleTitleClick = eventIgnored => {
     this.toggleTitles();
   };
 
