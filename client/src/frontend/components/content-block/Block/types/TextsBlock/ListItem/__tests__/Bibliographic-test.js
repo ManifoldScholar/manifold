@@ -6,12 +6,8 @@ describe("frontend/components/TextList/ListItem/Bibliographic", () => {
     <Bibliographic
       readUrl="/foo"
       baseClass={"text-block"}
-      description={$text.attributes.description}
-      subtitle={$text.attributes.subtitle}
-      date={$text.attributes.createdAt}
       datePrefix={"Added"}
-      title={$text.attributes.title}
-      creatorNames={$text.attributes.creatorNames}
+      text={$text}
     />
   ));
 

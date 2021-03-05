@@ -2,19 +2,19 @@
 
 exports[`backend/components/dialog/Wrapper matches the snapshot 1`] = `
 <focus-trap-react
-  classname="dialog-primary dialog-appear"
+  classname="dialog-wrapper dialog-appear"
 >
   <div
     class="dialog-overlay"
     role="button"
   />
   <div
-    class="dialog-box dialog-confirm"
+    class="dialog dialog-confirm"
     role="dialog"
     style="max-width:400px"
   >
     <div
-      class="close-button-primary"
+      class="dialog__close"
       role="button"
       tabindex="0"
     >
@@ -22,9 +22,9 @@ exports[`backend/components/dialog/Wrapper matches the snapshot 1`] = `
         aria-hidden="true"
         class="manicon-svg svg-icon--close16"
         fill="currentColor"
-        height="16"
+        height="24"
         viewBox="0 0 16 16"
-        width="16"
+        width="24"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
