@@ -15,13 +15,29 @@ export default class ProjectCollectionProjectCover extends PureComponent {
     addable: PropTypes.bool
   };
 
-  renderAddButton(props) {
-    if (!props.addable || !props.selectedProjectIds) return null;
+  get addable() {
+    return this.props.addable;
+  }
+
+  get project() {
+    return this.props.entity;
+  }
+
+  get selectedProjectIds() {
+    return this.props.selectedProjectIds;
+  }
+
+  get selected() {
+    return this.selectedProjectIds.includes(this.project.id);
+  }
+
+  renderAddButton() {
+    if (!this.addable || !this.selectedProjectIds) return null;
 
     return (
       <AddButton
-        selectedProjectIds={props.selectedProjectIds}
-        project={props.entity}
+        selected={this.selected}
+        project={this.project}
         handleAdd={this.props.addHandler}
         handleRemove={this.props.removeHandler}
       />
@@ -29,17 +45,15 @@ export default class ProjectCollectionProjectCover extends PureComponent {
   }
 
   render() {
-    const project = this.props.entity;
-
     const figureClass = classNames("cover", {
-      "cover-placeholder": project.attributes.avatarStyles.small,
-      dim: project.attributes.draft
+      "cover-placeholder": this.project.attributes.avatarStyles.small,
+      dim: this.project.attributes.draft
     });
 
     return (
       <figure className={figureClass}>
-        <Project.Avatar project={project} />
-        {this.renderAddButton(this.props)}
+        <Project.Avatar project={this.project} />
+        {this.renderAddButton()}
       </figure>
     );
   }
