@@ -75,7 +75,23 @@
       border-bottom: $borderStyle;
     }
 
-    &--empty {}
+
+    &--large {
+      font-weight: $medium;
+
+      @include respond($break80) {
+        font-size: 20px;
+      }
+
+      .toc-block__from-title {
+        @include templateCopy;
+        margin-left: 12px;
+        font-size: 17px;
+        font-style: italic;
+        font-weight: $regular;
+        letter-spacing: 0.017em;
+      }
+    }
   }
 
   &__node {

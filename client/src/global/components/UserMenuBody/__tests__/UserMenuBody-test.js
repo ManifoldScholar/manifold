@@ -9,7 +9,6 @@ describe("global/components/UserMenuBody/UserMenuBody", () => {
       hideUserMenu={$hideUserMenu}
       startLogout={$startLogout}
       showLoginOverlay={$showLoginOverlay}
-      history={fixtures.history()}
       visible={false}
     />
   ));

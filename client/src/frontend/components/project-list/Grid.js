@@ -20,9 +20,11 @@ export default class ProjectListGrid extends Component {
     favorites: PropTypes.object,
     dispatch: PropTypes.func,
     pagination: PropTypes.object,
+    paginationTarget: PropTypes.string,
     paginationClickHandler: PropTypes.func,
     viewAllUrl: PropTypes.string,
-    viewAllLabel: PropTypes.string
+    viewAllLabel: PropTypes.string,
+    hideCollectingToggle: PropTypes.bool
   };
 
   static defaultProps = {
@@ -53,6 +55,26 @@ export default class ProjectListGrid extends Component {
     } else {
       this.enableAnimation = false;
     }
+  }
+
+  get pagination() {
+    return this.props.pagination;
+  }
+
+  get showPagination() {
+    return this.pagination?.totalPages > 1;
+  }
+
+  get paginationTarget() {
+    return this.props.paginationTarget;
+  }
+
+  get paginationClickHandler() {
+    return this.props.paginationClickHandler;
+  }
+
+  get hideCollectingToggle() {
+    return this.props.hideCollectingToggle;
   }
 
   projectsList() {
@@ -94,12 +116,15 @@ export default class ProjectListGrid extends Component {
     );
   }
 
-  renderPagination(props) {
+  renderPagination() {
+    if (!this.showPagination) return null;
+
     return (
       <div className="entity-section-wrapper__pagination">
         <Utility.Pagination
-          paginationClickHandler={props.paginationClickHandler}
-          pagination={props.pagination}
+          paginationClickHandler={this.paginationClickHandler}
+          pagination={this.pagination}
+          paginationTarget={this.paginationTarget}
         />
       </div>
     );
@@ -129,6 +154,7 @@ export default class ProjectListGrid extends Component {
                       dispatch={this.props.dispatch}
                       project={project}
                       hideDesc={hideDesc}
+                      hideCollectingToggle={this.hideCollectingToggle}
                     />
                   </li>
                 </CSSTransition>
@@ -137,7 +163,7 @@ export default class ProjectListGrid extends Component {
           </ReactTransitionGroup>
         </div>
         {this.props.pagination
-          ? this.renderPagination(this.props)
+          ? this.renderPagination()
           : this.renderViewAll(this.props)}
       </>
     );
