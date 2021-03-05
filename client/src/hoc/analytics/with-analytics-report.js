@@ -97,13 +97,17 @@ export default function withAnalyticsReport(WrappedComponent) {
         analyticReportsAPI.index({
           ...params,
           reportType: report,
-          startDate: this.state.analyticsStartDate.toISOString(),
-          endDate: this.state.analyticsEndDate.toISOString()
+          startDate: this.formatDateForFetch(this.state.analyticsStartDate),
+          endDate: this.formatDateForFetch(this.state.analyticsEndDate)
         }),
         requestName
       );
       dispatch(analyticsRequest);
     };
+
+    formatDateForFetch = (date) => {
+      return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    }
 
     analyticsPaginationClickHandler = page => {
       return () => {
