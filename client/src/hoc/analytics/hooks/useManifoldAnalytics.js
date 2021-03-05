@@ -68,7 +68,8 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
     };
     const call = analyticEventsAPI.create(visitorToken, visitToken, payload);
     const trackRequest = request(call, requests.analyticsEventCreate, {
-      silent: true
+      silent: true,
+      suppressErrors: true
     });
     dispatch(trackRequest);
   };
