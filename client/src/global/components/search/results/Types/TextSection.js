@@ -17,6 +17,15 @@ class SearchResultsTypeTextSection extends PureComponent {
     return this.props.result;
   }
 
+  get collectable() {
+    const { searchableType, searchableId } = this.result.attributes;
+
+    return {
+      type: searchableType,
+      id: searchableId
+    };
+  }
+
   get model() {
     return this.props.result.relationships.model;
   }
@@ -71,7 +80,7 @@ class SearchResultsTypeTextSection extends PureComponent {
         parentUrl={lh.link("reader", this.text.slug)}
         url={lh.link("readerSection", this.text.slug, this.model.id)}
         label="full text"
-        collectable={this.result}
+        collectable={this.collectable}
         figure={
           <EntityThumbnail.TextSection
             entity={this.model}

@@ -41,6 +41,10 @@
   &__body {
     margin-top: 34px;
     margin-bottom: 0;
+
+    .buttons-icon-horizontal {
+      margin-bottom: 0;
+    }
   }
 
   &__close {
@@ -56,7 +60,8 @@
   }
 
   p {
-    letter-spacing: 0.075em;
+    font-size: 18px;
+    font-weight: $regular;
   }
 }
 

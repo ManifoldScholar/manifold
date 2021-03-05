@@ -134,6 +134,7 @@ import Speaker24 from "./24/Speaker";
 import SpeakerMuted24 from "./24/SpeakerMuted";
 import StarSquircle32 from "./32/StarSquircle";
 import StarSquircleFilled32 from "./32/StarSquircleFilled";
+import Star24 from "./24/Star";
 import StopSign64 from "./64/StopSign";
 import Text24 from "./24/Text";
 import TextsBook64 from "./64/TextsBook";
@@ -286,6 +287,7 @@ export default {
   SpeakerMuted24,
   StarSquircle32,
   StarSquircleFilled32,
+  Star24,
   StopSign64,
   Text24,
   TextsBook64,

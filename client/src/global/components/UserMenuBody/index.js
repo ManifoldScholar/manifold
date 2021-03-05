@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import IconComposer from "global/components/utility/IconComposer";
 import withCurrentUser from "hoc/with-current-user";
+import Link from "./Link";
 
-export class UserMenuBodyComponent extends Component {
+export class UserMenuBody extends Component {
   static propTypes = {
     hideUserMenu: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
     startLogout: PropTypes.func.isRequired,
     showLoginOverlay: PropTypes.func.isRequired,
     visible: PropTypes.bool,
@@ -20,35 +18,30 @@ export class UserMenuBodyComponent extends Component {
     context: "frontend"
   };
 
-  logout = () => {
-    this.props.startLogout();
-    this.props.hideUserMenu();
-  };
-
-  get canAccessReadingGroups() {
-    const { currentUser } = this.props;
-    if (!currentUser) return false;
-    return currentUser.attributes.classAbilities.readingGroup.read;
+  get currentUser() {
+    return this.props.currentUser;
   }
 
-  handleProfileClick = event => {
-    event.preventDefault();
+  get canAccessReadingGroups() {
+    if (!this.currentUser) return false;
+    return this.currentUser.attributes.classAbilities.readingGroup.read;
+  }
+
+  handleProfileClick = eventIgnored => {
     this.props.hideUserMenu();
     this.props.showLoginOverlay();
   };
 
-  handleNotificationsClick = event => {
-    event.preventDefault();
+  handleLogoutClick = () => {
+    this.props.startLogout();
     this.props.hideUserMenu();
-    this.props.history.push(lh.link("subscriptions"));
   };
 
-  handleReadingGroupsClick = event => {
-    event.preventDefault();
-    this.props.hideUserMenu();
-    this.props.history.push(lh.link("frontendReadingGroups"));
-  };
+  // jsx-a11y chokes on <Link as="button" /> here,
+  // but that's just the name of the component.
+  // The correct HTML element is used in <Link />.
 
+  /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
     const menuClass = classNames({
       "user-menu": true,
@@ -63,80 +56,48 @@ export class UserMenuBodyComponent extends Component {
           <i className="user-menu__tail tail" />
         )}
         <ul className="user-menu__list">
-          <li className="user-menu__item">
-            <button
-              className="user-menu__link"
-              onClick={this.handleProfileClick}
-              aria-describedby="user-menu-edit-profile"
-            >
-              <IconComposer
-                icon="editProfile24"
-                size={32}
-                iconClass="user-menu__icon"
-              />
-              <span className="user-menu__link-text">Edit Profile</span>
-            </button>
-            <span id="user-menu-edit-profile" className="aria-describedby">
-              Edit your profile
-            </span>
-          </li>
-          <li className="user-menu__item">
-            <button
-              className="user-menu__link"
-              onClick={this.handleNotificationsClick}
-              aria-describedby="user-menu-notifications"
-            >
-              <IconComposer
-                icon="notifications24"
-                size={32}
-                iconClass="user-menu__icon"
-              />
-              <span className="user-menu__link-text">Notifications</span>
-            </button>
-            <span id="user-menu-notifications" className="aria-describedby">
-              Edit your notification settings
-            </span>
-          </li>
-          {this.canAccessReadingGroups && (
-            <li className="user-menu__item">
-              <button
-                className="user-menu__link"
-                onClick={this.handleReadingGroupsClick}
-                aria-describedby="user-menu-groups"
-              >
-                <IconComposer
-                  icon="annotationGroup24"
-                  size={32}
-                  iconClass="user-menu__icon"
-                />
-                <span className="user-menu__link-text">Manage Groups</span>
-              </button>
-              <span id="user-menu-groups" className="aria-describedby">
-                Manage your Reading Groups
-              </span>
-            </li>
+          {!!this.currentUser && (
+            <Link
+              to={lh.link("frontendStarred")}
+              title="My Starred"
+              srTitle="View My Starred page"
+              icon="star24"
+              onClick={() => this.props.hideUserMenu()}
+            />
           )}
-          <li className="user-menu__item">
-            <button
-              className="user-menu__link"
-              onClick={this.logout}
-              aria-describedby="user-menu-logout"
-            >
-              <IconComposer
-                icon="logout24"
-                size={32}
-                iconClass="user-menu__icon"
-              />
-              <span className="user-menu__link-text">Logout</span>
-            </button>
-            <span id="user-menu-logout" className="aria-describedby">
-              Logout of Manifold
-            </span>
-          </li>
+          {this.canAccessReadingGroups && (
+            <Link
+              to={lh.link("frontendReadingGroups")}
+              title="My Reading Groups"
+              icon="annotationGroup24"
+              onClick={() => this.props.hideUserMenu()}
+            />
+          )}
+          <Link
+            as="button"
+            title="Edit Profile"
+            srTitle="Edit my profile"
+            icon="editProfile24"
+            onClick={this.handleProfileClick}
+          />
+          <Link
+            to={lh.link("subscriptions")}
+            title="Notifications"
+            srTitle="Edit my notification settings"
+            icon="notifications24"
+            onClick={() => this.props.hideUserMenu()}
+          />
+          <Link
+            as="button"
+            title="Logout"
+            icon="logout24"
+            onClick={this.handleLogoutClick}
+          />
         </ul>
       </nav>
     );
   }
+  /* eslint-enable jsx-a11y/anchor-is-valid */
 }
 
-export default withRouter(withCurrentUser(UserMenuBodyComponent));
+export default withCurrentUser(UserMenuBody);

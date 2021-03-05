@@ -54,13 +54,32 @@
         height: 56px;
         margin-right: 6px;
         margin-left: -4px;
-        color: $neutralUIDullDark;
+        color: var(--content-color, $neutralUIDullDark);
 
         @include respond($break60) {
           width: 60px;
           height: 60px;
           margin-right: 14px;
         }
+
+        &.icon-star-fill {
+          width: clamp(40px, 7.742vw, 48px);
+          height: clamp(40px, 7.742vw, 48px);
+        }
+      }
+    }
+
+    .icon-star-fill--header {
+      width: 48px;
+      height: 48px;
+      fill: transparent;
+
+      .icon-star-fill__foreground {
+        fill: $neutralTextExtraDark;
+      }
+
+      .icon-star-fill__background {
+        fill: $iconFillStarBgColor;
       }
     }
   }
@@ -173,7 +192,7 @@
     @include respond($break75) {
       order: 0;
       margin-top: 28px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     &:not(.entity-section-wrapper__details--wide) {
@@ -194,6 +213,10 @@
       @include respond($break75) {
         margin-top: 12px;
       }
+    }
+
+    &--padded-top {
+      margin-top: min(7.895vw, 60px);
     }
 
     .description {
