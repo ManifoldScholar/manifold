@@ -262,7 +262,7 @@
         }
       }
 
-      svg {
+      svg:not(.collecting-toggle__icon) {
         position: relative;
         top: -4px;
         left: -4px;
@@ -329,7 +329,7 @@
       @include respond($break65) {
         margin-bottom: 14px;
 
-        img, svg {
+        img, svg:not(.collecting-toggle__icon) {
           left: 0;
           width: auto;
           height: 120px;

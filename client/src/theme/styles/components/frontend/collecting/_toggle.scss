@@ -1,6 +1,6 @@
-$_light-color: $neutral05;
-$_dark-color: $neutral75;
-$_inactive-color: $neutral70;
+$_light-color: var(--collecting-toggle-light-color, $neutral05);
+$_dark-color: var(--collecting-toggle-dark-color, $neutral75);
+$_inactive-color: var(--collecting-toggle-inactive-color, $neutral70);
 $_highlight-fg-color: $neutral90;
 $_highlight-bg-color: $spBlue45;
 
@@ -49,6 +49,25 @@ $_highlight-bg-color: $spBlue45;
     }
   }
 
+  &--small-project-cover {
+    --toggle-size: 28px;
+    --text-top-padding: 7px;
+
+    position: absolute;
+    top: 10px;
+    left: -15px;
+
+    @include respond($break75) {
+      top: 15px;
+    }
+  }
+
+  .backend & {
+    --collecting-toggle-light-color: #{$neutral75};
+    --collecting-toggle-dark-color: #{$neutral05};
+    --collecting-toggle-inactive-color: #{$neutral10};
+  }
+
   &__inner {
     position: absolute;
     top: 0;
@@ -62,7 +81,8 @@ $_highlight-bg-color: $spBlue45;
     transition: color $duration $timing,
       background-color $duration $timing;
 
-    .collecting-toggle--project-cover & {
+    .collecting-toggle--project-cover &,
+    .collecting-toggle--small-project-cover & {
       @include boxShadow(2px, 4px, 10px, 0, $neutral90, 0.36);
     }
 
@@ -105,6 +125,10 @@ $_highlight-bg-color: $spBlue45;
     }
 
     &--remove-confirm-active {
+      --icon-transform: translateY(100%);
+    }
+
+    .backend &--remove {
       --icon-transform: translateY(100%);
     }
   }
@@ -171,3 +195,5 @@ $_highlight-bg-color: $spBlue45;
     fill: var(--default-strong-color);
   }
 }
+
+
