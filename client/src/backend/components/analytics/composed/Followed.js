@@ -21,7 +21,7 @@ export default class Followed extends Component {
       <Block width={this.blockWidth} icon="starSquircle32" title="Followed">
         <Figure
           stat={`${this.data.value}`}
-          caption="Average number of projects your users are following"
+          caption="Average number of projects your users are following."
         />
       </Block>
     );

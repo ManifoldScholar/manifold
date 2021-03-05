@@ -25,7 +25,7 @@ export default class AllFollowers extends Component {
       >
         <Figure
           stat={`${this.data.value}`}
-          caption="Total number of project followers"
+          caption="Total number of project followers."
         />
       </Block>
     );
