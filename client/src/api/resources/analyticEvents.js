@@ -5,10 +5,8 @@ export default {
       method: "POST",
       options: {
         body: JSON.stringify({ type: "analyticsEvent", data: event }),
-        headers: {
-          "VISIT-TOKEN": visitToken,
-          "VISITOR-TOKEN": visitorToken
-        }
+        visitToken,
+        visitorToken
       }
     };
   }
