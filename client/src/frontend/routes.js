@@ -207,14 +207,6 @@ const routes = {
       ]
     },
     {
-      name: "frontendFollowing",
-      exact: true,
-      component: "Following",
-      path: "/following",
-      isLibrary: true,
-      helper: () => "/following"
-    },
-    {
       name: "frontendFeatured",
       exact: true,
       component: "Featured",

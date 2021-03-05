@@ -2,7 +2,6 @@ import { HomeContainer } from "../";
 
 describe("frontend/containers/Home/Home", () => {
   def("projects", () => collectionFactory("project"));
-  def("followedProjects", () => collectionFactory("project"));
   def("featuredProjects", () => collectionFactory("project"));
   def("user", () => {
     const user = factory("user");
@@ -16,7 +15,6 @@ describe("frontend/containers/Home/Home", () => {
   def("root", () => (
     <HomeContainer
       authentication={$authentication}
-      followedProjects={$followedProjects}
       projects={$projects}
       fetchData={jest.fn()}
     />
