@@ -93,7 +93,7 @@ export default class SelectFilter extends React.PureComponent {
               <Filter
                 value={this.state.filter ? this.state.filter.title : undefined}
                 onChange={this.updateTextFilter}
-                label={"All Texts"}
+                label={"All Texts:"}
                 options={this.titles}
               />
               <Filter
@@ -103,7 +103,7 @@ export default class SelectFilter extends React.PureComponent {
                     : undefined
                 }
                 onChange={this.updateMemberFilter}
-                label={"All Members"}
+                label={"All Members:"}
                 options={this.members}
               />
             </div>

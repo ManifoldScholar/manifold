@@ -24,9 +24,11 @@ export default class EntityCount extends PureComponent {
       <>
         <p className="list-total" aria-hidden>
           {"Showing "}
-          <span>{this.props.showRange ? `${start}-${end}` : end}</span>
+          <span className="list-total__highlighted">
+            {this.props.showRange ? `${start}-${end}` : end}
+          </span>
           {" of "}
-          <span>{totalCount}</span>
+          <span className="list-total__highlighted">{totalCount}</span>
           {label && ` ${label}: `}
         </p>
         {/* Better readout for screen readers */}

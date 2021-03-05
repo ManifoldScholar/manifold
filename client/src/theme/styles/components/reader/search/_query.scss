@@ -9,6 +9,7 @@
     width: 100%;
     padding: 0.444em 0.889em;
     font-size: 16px;
+    /* stylelint-disable-next-line declaration-no-important */
     color: $neutralTextDark !important; // necessary to win specifity battle :(
     background-color: $neutral05;
     border: 3px solid transparent;
