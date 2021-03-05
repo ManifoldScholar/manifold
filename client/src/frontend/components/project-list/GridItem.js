@@ -16,16 +16,12 @@ export default class ProjectGridItem extends Component {
     hideMeta: PropTypes.bool,
     hideDate: PropTypes.bool,
     hideDesc: PropTypes.bool,
-    authenticated: PropTypes.bool,
-    favorites: PropTypes.object,
-    dispatch: PropTypes.func
+    hideCollectingToggle: PropTypes.bool
   };
 
-  static defaultProps = {
-    hideMeta: false,
-    hideDate: false,
-    hideDesc: false
-  };
+  get hideCollectingToggle() {
+    return this.props.hideCollectingToggle;
+  }
 
   shouldShowUpdated(project) {
     const { updated, finished } = project.attributes;
@@ -148,11 +144,13 @@ export default class ProjectGridItem extends Component {
           </figure>
           {projectMeta}
         </Link>
-        <Collecting.Toggle
-          collectable={project}
-          inline={false}
-          outlined={false}
-        />
+        {!this.hideCollectingToggle && (
+          <Collecting.Toggle
+            collectable={project}
+            inline={false}
+            outlined={false}
+          />
+        )}
       </>
     );
   }

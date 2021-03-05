@@ -5,8 +5,8 @@ import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import has from "lodash/has";
 
-export default class ProjectContentBlockIncomplete extends PureComponent {
-  static displayName = "Project.Content.Block.Incomplete";
+export default class ContentBlockIncomplete extends PureComponent {
+  static displayName = "ContentBlock.Incomplete";
 
   static propTypes = {
     block: PropTypes.object

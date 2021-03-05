@@ -112,6 +112,9 @@ $spYellow75: #706b2c;
 $_analyticsHighlightColor: $spBlue45;
 $_analyticsHighlightColorPale: desaturate(darken($spBlue45, 10), 19);
 
+// Unique Icons
+$iconFillStarBgColor: $spBlue45;
+
 // Default colors that meet WCAG AA color contrast guidelines
 // Namespaced functionally by usage and context (light/dark modes)
 // --------------------------------------------------------

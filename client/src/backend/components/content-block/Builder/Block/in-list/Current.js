@@ -43,7 +43,7 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
 
   render() {
     const TypeComponent = this.props.typeComponent;
-    const baseClass = "content-block";
+    const baseClass = "backend-content-block";
 
     return (
       <TypeComponent>

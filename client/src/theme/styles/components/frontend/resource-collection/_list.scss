@@ -1,24 +1,17 @@
+$_breakpoint: $break60;
+$_max-gap: 30px;
+$_responsive-gap: $_max-gap / $_breakpoint * 100vw;
+
 // Nav wrapping a ul
 .resource-collections-list {
   ul {
     @include listUnstyled;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-gap: min(#{$_responsive-gap}, #{$_max-gap});
 
-    @include respond($break60) {
-      display: flex;
-      flex-wrap: wrap;
-      margin-left: -25px;
-    }
-  }
-
-  li {
-    display: flex;
-    width: 100%;
-    margin-bottom: 20px;
-
-    @include respond($break60) {
-      width: 50%;
-      padding-left: 25px;
-      margin-bottom: 30px;
+    @include respond($_breakpoint) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
@@ -54,7 +47,7 @@
     justify-content: space-between;
     width: 100%;
     hyphens: none;
-    background-color: transparentize($neutralBlack, 0.5);
+    background-color: transparentize($neutralBlack, 0.2);
     border-radius: 0 0 8px 8px;
     transition: background-color $duration ease-out;
 
@@ -108,6 +101,10 @@
     @include respond($break75) {
       padding: 18px 24px 18px 0;
       font-size: 14px;
+    }
+
+    @include respond($break90) {
+      transform: translateY(-5px);
     }
 
     span {

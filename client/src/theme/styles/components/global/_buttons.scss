@@ -251,11 +251,11 @@
   align-items: center;
   padding: 0.667em 17px 0.778em;
   font-size: 16px;
-  color: $accentPrimary;
+  color: var(--default-highlight-color);
   text-align: left;
   text-decoration: none;
   letter-spacing: 0.015em;
-  border: 1px solid $accentPrimary;
+  border: 1px solid var(--default-highlight-color);
   transition: color $duration $timing, background-color $duration $timing,
     border-color $duration $timing;
 
@@ -296,8 +296,9 @@
 
   &:hover:not([disabled]),
   &:active:not([disabled]) {
-    color: $neutral90;
-    background-color: $defaultHoverColor;
+    color: $neutralTextExtraDark;
+    background-color: $accentPrimary;
+    border-color: $accentPrimary;
   }
 
   &:focus-visible:disabled {
@@ -305,18 +306,18 @@
   }
 
   &--dull {
-    color: $neutralTextLight;
-    border-color: $neutralTextLight;
+    color: var(--default-color);
+    border-color: var(--default-color);
 
     &:hover:not([disabled]),
     &:active:not([disabled]) {
-      color: $defaultHoverColor;
+      color: var(--default-hover-color);
       background-color: transparent;
-      border-color: $defaultHoverColor;
+      border-color: var(--default-hover-color);
     }
 
     &:focus-visible:not([disabled]) {
-      color: $neutralTextExtraLight;
+      color: var(--default-strong-color);
       background-color: rgba($neutralUIDark, 0.3);
       outline: 0;
     }
@@ -336,7 +337,7 @@
     font-size: 12px;
     font-weight: $semibold;
     text-transform: uppercase;
-    letter-spacing: 0.075em;
+    letter-spacing: 0.115em;
   }
 
   &--in-drawer {
@@ -361,10 +362,14 @@
 // to vertical by default, can maintain horizontal
 // progress with class "maintain"
 .buttons-icon-horizontal {
+  $_gap: 20px;
+
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: -1 * $_gap;
   margin-bottom: 35px;
+  margin-left: -1 * $_gap;
 
   &.right {
     justify-content: flex-end;
@@ -374,7 +379,8 @@
     flex-wrap: nowrap;
 
     .buttons-icon-horizontal__button {
-      width: calc(50% - 8px);
+      flex-basis: 100%;
+      max-width: 360px;
       margin-bottom: 0;
     }
   }
@@ -387,10 +393,12 @@
     margin-bottom: 15px;
 
     &:not(.button-icon-secondary--in-drawer) {
-      width: 100%;
+      flex-basis: calc(50% - #{$_gap});
+      margin-top: $_gap;
+      margin-left: $_gap;
 
-      @include respond($break85) {
-        width: calc(50% - 17px);
+      &:not(:only-child) {
+        flex-grow: 1;
       }
     }
 
@@ -541,7 +549,7 @@
     background-color: $accentPrimaryPale;
 
     &:hover {
-      background-color: $defaultHoverColor;
+      background-color: $accentPrimary;
     }
 
     &.button-secondary--dull {

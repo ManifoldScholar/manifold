@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 
-export default class ProjectContentBlockHeading extends PureComponent {
-  static displayName = "Project.Content.Block.Parts.Heading";
+export default class ContentBlockHeading extends PureComponent {
+  static displayName = "ContentBlock.Parts.Heading";
 
   static propTypes = {
     icon: PropTypes.string,

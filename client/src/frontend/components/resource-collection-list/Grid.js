@@ -7,7 +7,6 @@ export default class ResourceCollectionGrid extends Component {
   static displayName = "ResourceCollection.Grid";
 
   static propTypes = {
-    project: PropTypes.object.isRequired,
     resourceCollections: PropTypes.array.isRequired,
     itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
   };
@@ -15,7 +14,7 @@ export default class ResourceCollectionGrid extends Component {
   urlCreator = collection => {
     return lh.link(
       "frontendProjectResourceCollection",
-      this.props.project.attributes.slug,
+      collection.attributes.projectSlug,
       collection.attributes.slug
     );
   };

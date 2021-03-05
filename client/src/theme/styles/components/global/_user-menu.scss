@@ -56,7 +56,7 @@
   right: -20px;
   color: $neutralTextDark;
   white-space: nowrap;
-  background-color: $neutral10;
+  background-color: $neutral05;
 
   &--frontend,
   &--backend {
@@ -75,7 +75,7 @@
   }
 
   &__tail {
-    @include tailUp($neutral10, $tailHeight);
+    @include tailUp($neutral05, $tailHeight);
     position: absolute;
     top: -$tailHeight;
     right: 25px;
