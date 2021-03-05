@@ -12,7 +12,6 @@ export class LayoutButtonNavigation extends Component {
   static propTypes = {
     grayBg: PropTypes.bool,
     showProjects: PropTypes.bool,
-    showFollowing: PropTypes.bool,
     showProjectCollections: PropTypes.bool,
     hideAtNarrow: PropTypes.bool,
     currentUser: PropTypes.object
@@ -21,7 +20,6 @@ export class LayoutButtonNavigation extends Component {
   static defaultProps = {
     grayBg: true,
     showProjects: true,
-    showFollowing: true,
     showProjectCollections: false
   };
 
@@ -59,31 +57,19 @@ export class LayoutButtonNavigation extends Component {
     );
   };
 
-  renderFollowingButton = () => {
-    if (!this.props.currentUser) return null;
-    if (this.props.showFollowing !== true) return null;
-    return (
-      <Link to={lh.link("frontendFollowing")} className="button-icon-primary">
-        {this.renderButtonInner("following64", "Projects You’re Following")}
-      </Link>
-    );
-  };
-
   render() {
     const sectionClass = classNames({
       "show-50": this.props.hideAtNarrow === true,
       "bg-neutral05": this.props.grayBg === true
     });
 
-    if (!this.renderProjectsButton() && !this.renderFollowingButton())
-      return null;
+    if (!this.renderProjectsButton()) return null;
     return (
       <section className={sectionClass}>
         <div className="container">
           <h2 className="screen-reader-text">Project Navigation</h2>
           <div className="button-nav button-nav--default">
             {this.renderProjectsButton()}
-            {this.renderFollowingButton()}
           </div>
         </div>
       </section>

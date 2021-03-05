@@ -93,7 +93,7 @@ export class HomeContainer extends Component {
         )}
 
         {this.hasVisibleProjects && (
-          <Layout.ButtonNavigation grayBg={false} showFollowing />
+          <Layout.ButtonNavigation grayBg={false} />
         )}
       </div>
     );
