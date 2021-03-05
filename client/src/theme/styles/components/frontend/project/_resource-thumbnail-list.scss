@@ -1,30 +1,29 @@
+$_breakpoint: $break60;
+$_max-gap: 25px;
+$_min-gap: 20px;
+$_responsive-gap: $_max-gap / $_breakpoint * 100vw;
+$_item-min-width: 195px;
+
 .resource-thumbnail-list {
   ul {
     @include listUnstyled;
-    display: flex;
-    flex-wrap: wrap;
-    // push it 20px to the left to negate the left padding on the resources
-    margin-left: -20px;
-  }
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-gap: clamp(#{$_min-gap}, #{$_responsive-gap}, #{$_max-gap});
 
-  li {
-    display: flex;
-    width: 50%;
-    padding-left: 20px;
-    margin-bottom: 20px;
-
-    @include respond($break80) {
-      width: 20%;
+    @include respond($_breakpoint) {
+      grid-template-columns: repeat(auto-fill, minmax($_item-min-width, 1fr));
     }
   }
 
   a {
     display: flex;
     width: 100%;
+    height: 100%;
     text-decoration: none;
 
     .icon-thumbnail-primary {
-      background-color: $neutral05;
+      background-color: var(--card-bg-color, #{$neutral05});
       border-radius: $panelRoundedRadius;
       transition:
         color $duration $timing,
