@@ -13,7 +13,7 @@ class AnalyticReportAuthorizer < ApplicationAuthorizer
     def readable_by?(user, options = {})
       return false unless user.present?
 
-      scope_readable = options[:report_scope]&.readable_by?(user, options)
+      scope_readable = options[:report_scope]&.updatable_by?(user, options)
       admin_permissions?(user) && (scope_readable.nil? ? true : scope_readable)
     end
 
