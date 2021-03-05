@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 import Collecting from "frontend/components/collecting";

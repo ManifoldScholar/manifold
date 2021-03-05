@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import Bibliographic from "./Bibliographic";
 import Text from "global/components/text";
 

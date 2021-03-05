@@ -5,7 +5,13 @@ import get from "lodash/get";
 import { collectingAPI, requests } from "api";
 import { useDispatch } from "react-redux";
 import { entityStoreActions } from "actions";
-import { useCurrentUser, useDispatchReadingGroups, useSelectReadingGroups, useDispatchMyCollection, useSelectMyCollection } from "hooks";
+import {
+  useCurrentUser,
+  useDispatchReadingGroups,
+  useSelectReadingGroups,
+  useDispatchMyCollection,
+  useSelectMyCollection
+} from "hooks";
 import Dialog from "frontend/components/collecting/Dialog";
 import Text from "./Text";
 import Icons from "./Icons";
@@ -30,17 +36,23 @@ function normalizeTitle(collectable) {
 }
 
 /*
-* TODO:
-* [X] get current user (& hide if not authenticated)
-* [X] get My Collection (for Dialog)
-* [] middleware updates to collectingAPI
-* [] finish wiring doCollect() and doRemove() (factor in which group)
-* [] finish wiring checkbox state for reading groups (needs middleware update)
-* [] need `collectedByCurrentUser` for text sections
-* [] optimize API fetching (expensive in projects, reader views)
-*/
+ * TODO:
+ * [X] get current user (& hide if not authenticated)
+ * [X] get My Collection (for Dialog)
+ * [] middleware updates to collectingAPI
+ * [] finish wiring doCollect() and doRemove() (factor in which group)
+ * [] finish wiring checkbox state for reading groups (needs middleware update)
+ * [] need `collectedByCurrentUser` for text sections
+ * [] optimize API fetching (expensive in projects, reader views)
+ */
 
-function CollectingToggle({ collectable, inline = true, outlined = true, onDialogOpen, onDialogClose }) {
+function CollectingToggle({
+  collectable,
+  inline = true,
+  outlined = true,
+  onDialogOpen,
+  onDialogClose
+}) {
   const [hovered, setHovered] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
@@ -74,7 +86,7 @@ function CollectingToggle({ collectable, inline = true, outlined = true, onDialo
       default:
         return "";
     }
-  }
+  };
 
   function doCollect(group = "me") {
     const call = collectingAPI.collect([collectable]);
@@ -94,7 +106,7 @@ function CollectingToggle({ collectable, inline = true, outlined = true, onDialo
     event.stopPropagation();
     // show dialog if user belongs to any RGs
     if (hasReadingGroups) return setDialogVisible(true);
-    collected ? doUncollect() : doCollect();
+    collected ? doRemove() : doCollect();
   }
 
   function onClick(event) {
@@ -120,8 +132,8 @@ function CollectingToggle({ collectable, inline = true, outlined = true, onDialo
     setHovered(false);
   }
 
-  function handleDialogChange(group, collected) {
-    if (collected) return doRemove(group);
+  function handleDialogChange(group, isCollected) {
+    if (isCollected) return doRemove(group);
     doCollect(group);
   }
 
@@ -186,7 +198,7 @@ CollectingToggle.propTypes = {
   onDialogOpen: PropTypes.func,
   onDialogClose: PropTypes.func,
   inline: PropTypes.bool,
-  outlined: PropTypes.bool,
-}
+  outlined: PropTypes.bool
+};
 
 export default CollectingToggle;

@@ -44,7 +44,7 @@ export default class ProjectHeroHeading extends PureComponent {
 
   get titleAndToggleClasses() {
     return classNames({
-      "project-hero__title-and-toggle": true,
+      "project-hero__title-and-toggle": true
     });
   }
 
@@ -56,7 +56,7 @@ export default class ProjectHeroHeading extends PureComponent {
 
   get toggleClasses() {
     return classNames({
-      "project-hero__collecting-toggle": true,
+      "project-hero__collecting-toggle": true
     });
   }
 
@@ -89,7 +89,6 @@ export default class ProjectHeroHeading extends PureComponent {
               dangerouslySetInnerHTML={{ __html: this.subtitle }}
             />
           )}
-
         </div>
       </header>
     );

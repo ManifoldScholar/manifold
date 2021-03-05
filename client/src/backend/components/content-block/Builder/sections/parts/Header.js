@@ -17,10 +17,7 @@ export default class ProjectContentSectionsPartsHeader extends PureComponent {
     return (
       <>
         {this.props.title && (
-          <SectionLabel
-            label={this.props.title}
-            id={this.props.headerId}
-          />
+          <SectionLabel label={this.props.title} id={this.props.headerId} />
         )}
         {this.props.children && (
           <span id={this.props.instructionsId} className="instructions">

@@ -79,7 +79,8 @@ export default class TextListListItemBibliographic extends Component {
           <span
             className={classNames({
               [`${this.baseClass}__collect-toggle`]: true,
-              [`${this.baseClass}__collect-toggle--with-subtitle`]: !!this.subtitle,
+              [`${this.baseClass}__collect-toggle--with-subtitle`]: !!this
+                .subtitle
             })}
           >
             <Collecting.Toggle collectable={this.text} />

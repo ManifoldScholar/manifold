@@ -48,16 +48,11 @@ export default class TextTitles extends Component {
     }
   }
 
-  handleTitleClick = (eventIgnored) => {
+  handleTitleClick = eventIgnored => {
     this.toggleTitles();
   };
 
   render() {
-    const propsShowSection = this.props.showSection;
-    const stateShowSection = this.state.showSection;
-
-    console.log({ propsShowSection, stateShowSection });
-
     const titleClass = classNames({
       "reader-header__title-bar": true,
       "reader-header__title-bar--show-section":
