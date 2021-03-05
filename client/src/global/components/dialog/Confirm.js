@@ -103,36 +103,38 @@ export default class DialogConfirm extends PureComponent {
               this.props.message
             )}
 
-            <div className="dialog__body buttons-icon-horizontal">
-              {this.canHandleResolve && (
+            <div className="dialog__body">
+              <div className="buttons-icon-horizontal">
+                {this.canHandleResolve && (
+                  <button
+                    onClick={this.handleResolveClick}
+                    className={this.buttonClasses}
+                    data-id="accept"
+                  >
+                    <IconComposer
+                      icon="checkmark16"
+                      size="default"
+                      iconClass="button-icon-secondary__icon"
+                    />
+                    <span>{this.resolveLabel}</span>
+                  </button>
+                )}
                 <button
-                  onClick={this.handleResolveClick}
-                  className={this.buttonClasses}
-                  data-id="accept"
+                  className={classNames(
+                    this.buttonClasses,
+                    "button-icon-secondary--dull"
+                  )}
+                  onClick={this.handleRejectClick}
+                  data-id="reject"
                 >
                   <IconComposer
-                    icon="checkmark16"
+                    icon="close16"
                     size="default"
                     iconClass="button-icon-secondary__icon"
                   />
-                  <span>{this.resolveLabel}</span>
+                  <span>{this.rejectLabel}</span>
                 </button>
-              )}
-              <button
-                className={classNames(
-                  this.buttonClasses,
-                  "button-icon-secondary--dull"
-                )}
-                onClick={this.handleRejectClick}
-                data-id="reject"
-              >
-                <IconComposer
-                  icon="close16"
-                  size="default"
-                  iconClass="button-icon-secondary__icon"
-                />
-                <span>{this.rejectLabel}</span>
-              </button>
+              </div>
             </div>
           </Wrapper>
         )}

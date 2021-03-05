@@ -8,22 +8,22 @@ export default class ResourceListThumbnails extends Component {
   static displayName = "ResourceList.Thumbnails";
 
   static propTypes = {
-    project: PropTypes.object.isRequired,
     resources: PropTypes.array
   };
 
   render() {
-    if (!this.props.resources) return null;
+    if (!this.props.resources?.length > 0) return null;
     return (
       <div className="resource-thumbnail-list">
         <ul>
           {this.props.resources.map(resource => {
+            const { projectSlug } = resource.attributes;
             return (
               <li key={resource.id}>
                 <Link
                   to={lh.link(
                     "frontendProjectResource",
-                    this.props.project.attributes.slug,
+                    projectSlug,
                     resource.attributes.slug
                   )}
                   className="resource-link"
