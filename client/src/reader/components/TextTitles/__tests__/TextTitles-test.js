@@ -1,10 +1,12 @@
 import TextTitles from "../";
 
 describe("reader/components/TextTitles/TextTitles", () => {
+  def("text", () => factory("text"));
+  def("textSection", () => factory("textSection"));
   def("root", () => (
     <TextTitles
-      textTitle="Rowan: Greatest Dog"
-      sectionTitle="Chapter 1"
+      text={$text}
+      section={$textSection}
       showSection
     />
   ));
