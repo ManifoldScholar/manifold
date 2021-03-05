@@ -113,23 +113,23 @@ export default class ProjectCollectionAddButton extends Component {
   };
 
   determineText() {
-    switch(this.state.view) {
+    switch (this.state.view) {
       case "remove-active":
         return {
           key: "add",
-          text: "Exclude",
+          text: "Exclude"
         };
       case "add-active":
         return {
           key: "remove",
-          text: "Include",
+          text: "Include"
         };
       default:
         return {
           key: "empty",
           text: ""
-        }
-    };
+        };
+    }
   }
 
   renderButtonGroup() {

@@ -46,7 +46,7 @@ export default class DialogConfirm extends PureComponent {
     return classNames(
       "buttons-icon-horizontal__button",
       "buttons-icon-horizontal__button--in-dialog",
-      "button-icon-secondary",
+      "button-icon-secondary"
     );
   }
 

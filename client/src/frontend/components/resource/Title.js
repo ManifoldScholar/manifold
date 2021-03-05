@@ -30,7 +30,10 @@ export default class ResourceTitle extends Component {
         ) : null}
         <div>
           <div className="resource-title__title-and-toggle">
-            <h1 className="resource-title__title" dangerouslySetInnerHTML={{ __html: attr.titleFormatted }} />
+            <h1
+              className="resource-title__title"
+              dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
+            />
             <span className="resource-title__collecting-toggle">
               <Collecting.Toggle collectable={this.props.resource} />
             </span>
