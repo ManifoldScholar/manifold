@@ -43,7 +43,7 @@ export default class ResourceCollectionCover extends Component {
             <Title>{attr.title}</Title>
             <div className="icon">
               <Utility.IconComposer size={48} icon="resourceCollection64" />
-              <span>{"Resource Collection"}</span>
+              <span>{"Collection"}</span>
             </div>
           </div>
         </Link>
