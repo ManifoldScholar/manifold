@@ -27,9 +27,7 @@ export default class ResourceImportControlsImported extends PureComponent {
 
     return (
       <>
-        <SectionLabel
-          label="Step 4. Import Resources"
-        />
+        <SectionLabel label="Step 4. Import Resources" />
         <p className="instructional-copy">
           This import is complete. You may go back, edit the mapping, and rerun
           the import. Or, if the source is a google sheet, you can reset the

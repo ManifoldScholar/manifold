@@ -73,10 +73,7 @@ export default class Builder extends PureComponent {
                 aria-labelledby={`${id}-header`}
                 aria-describedby={`${id}-instructions`}
               >
-                <SectionLabel
-                  label="Hero Block"
-                  id={`${id}-header`}
-                />
+                <SectionLabel label="Hero Block" id={`${id}-header`} />
                 <span id={`${id}-instructions`} className="instructions">
                   The Hero Block is the top of your project page. Customize its
                   content, layout, and settings here.

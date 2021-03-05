@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
 
 function Icons({ useOutline }) {
@@ -30,13 +30,13 @@ function Icons({ useOutline }) {
         />
       )}
     </div>
-  )
+  );
 }
 
 Icons.displayName = "Collecting.Toggle.Icons";
 
 Icons.propTypes = {
-  useOutline: PropTypes.bool,
-}
+  useOutline: PropTypes.bool
+};
 
 export default Icons;

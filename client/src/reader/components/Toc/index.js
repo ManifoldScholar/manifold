@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
 import isEmpty from "lodash/isEmpty";
@@ -76,7 +75,8 @@ class Toc extends PureComponent {
     if (node.children && node.children.length > 0) {
       children = (
         <ol
-          className={`table-of-contents__list table-of-contents__list--depth-${depth + 1}`}
+          className={`table-of-contents__list table-of-contents__list--depth-${depth +
+            1}`}
         >
           {node.children.map(n => this.visitNode(n, depth + 1))}
         </ol>
@@ -92,16 +92,12 @@ class Toc extends PureComponent {
       <TocNode
         key={node.id}
         node={node}
-        linkTo={lh.link(
-          "readerSection",
-          this.slug,
-          node.id,
-          anchor
-        )}
+        linkTo={lh.link("readerSection", this.slug, node.id, anchor)}
         onClick={this.UIHideTocDrawer}
         active={active}
-        children={children}
-      />
+      >
+        {children}
+      </TocNode>
     );
   };
 
@@ -122,7 +118,9 @@ class Toc extends PureComponent {
     const initialDepth = 0;
     if (this.toc.length <= 0) return this.renderEmpty();
     return (
-      <ol className={`table-of-contents__list table-of-contents__list--depth-0`}>
+      <ol
+        className={`table-of-contents__list table-of-contents__list--depth-0`}
+      >
         {this.toc.map(node => this.visitNode(node, initialDepth))}
       </ol>
     );

@@ -27,9 +27,7 @@ export default class ResourceImportControlsParsed extends PureComponent {
 
     return (
       <>
-        <SectionLabel
-          label="Step 4. Import Resources"
-        />
+        <SectionLabel label="Step 4. Import Resources" />
         <p className="instructional-copy">
           {`The import is ready to begin. The list below is a preview of what will
           happen. Press the \u0022start import\u0022 button below to begin.`}
