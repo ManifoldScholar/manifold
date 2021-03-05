@@ -30,6 +30,15 @@ class SearchResultsTypeProject extends PureComponent {
     return this.props.result;
   }
 
+  get collectable() {
+    const { searchableType, searchableId } = this.result.attributes;
+
+    return {
+      type: searchableType,
+      id: searchableId
+    };
+  }
+
   get model() {
     return this.props.result.relationships.model;
   }
@@ -64,7 +73,7 @@ class SearchResultsTypeProject extends PureComponent {
         attribution={this.creatorsString}
         description={this.description}
         label="project"
-        collectable={this.result}
+        collectable={this.collectable}
         figure={
           <EntityThumbnail.Project
             placeholderAttributes={{ mode: "small" }}

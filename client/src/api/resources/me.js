@@ -43,5 +43,15 @@ export default {
       method: "GET",
       options: {}
     };
+  },
+
+  myCollected(entity, page = {}) {
+    return {
+      endpoint: `/api/v1/me/relationships/${entity}`,
+      method: "GET",
+      options: {
+        params: { page }
+      }
+    };
   }
 };

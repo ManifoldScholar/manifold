@@ -75,7 +75,20 @@
       border-bottom: $borderStyle;
     }
 
-    &--empty {}
+
+    &--large {
+      padding-top: min(3.75vw, 30px);
+      padding-bottom: min(3.75vw, 30px);
+      font-weight: $medium;
+
+      @include respond($break80) {
+        font-size: 20px;
+      }
+
+      .toc-block__node + .toc-block__node {
+        margin-top: min(1.25vw, 10px);
+      }
+    }
   }
 
   &__node {
@@ -108,5 +121,15 @@
     @include templateCopy;
     padding-left: 0.889em;
     letter-spacing: 0.015em;
+  }
+
+  &__from-title {
+    margin-left: 6px;
+    color: var(--default-color);
+    transition: color $duration $timing;
+
+    .toc-block__link:hover & {
+      color: inherit;
+    }
   }
 }
