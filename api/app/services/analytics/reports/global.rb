@@ -51,7 +51,8 @@ module Analytics
           projects.id AS project_id,
           projects.title AS project_title,
           COUNT(*) AS view_count
-        FROM analytics_events
+        FROM visits
+        JOIN analytics_events ON visits.id = analytics_events.visit_id
         JOIN projects ON projects.id = (analytics_events.properties ->> '#{Project.model_name.param_key}')::uuid
         WHERE analytics_events.name = '#{Analytics::Event.event_name_for(:view, Project)}'
         GROUP BY project_id, project_title
