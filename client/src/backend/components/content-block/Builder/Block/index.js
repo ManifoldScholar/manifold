@@ -84,7 +84,7 @@ export default class ProjectContentBlock extends PureComponent {
   render() {
     const TypeComponent = this.typeComponent;
     const ListContextBlock = this.inAvailableList ? Available : Current;
-    const baseClass = "content-block";
+    const baseClass = "backend-content-block";
 
     if (this.disabled)
       return (
