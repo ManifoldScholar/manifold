@@ -207,6 +207,14 @@ const routes = {
       ]
     },
     {
+      name: "frontendStarred",
+      exact: true,
+      component: "MyStarred",
+      path: "/my/starred",
+      isLibrary: true,
+      helper: () => "/my/starred"
+    },
+    {
       name: "frontendFeatured",
       exact: true,
       component: "Featured",

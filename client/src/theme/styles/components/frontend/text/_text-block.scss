@@ -47,7 +47,7 @@
     &--svg {
       margin-right: 5px;
       margin-left: -10px;
-      color: $neutralUIDullDark;
+      color: var(--content-color, #{$neutralUIDullDark});
       transition: color $duration $timing;
     }
   }
@@ -78,7 +78,7 @@
     font-size: 16px;
     font-weight: $semibold;
     line-height: 1.188;
-    color: var(--title-color);
+    color: var(--default-strong-color);
     white-space: normal;
     transition: color $duration $timing;
 
@@ -88,14 +88,7 @@
   }
 
   &__title-link {
-    --title-color: #{$neutralTextExtraDark};
-
     text-decoration: none;
-
-    &:hover,
-    &:focus-visible {
-      --title-color: #{$defaultHoverColor};
-    }
   }
 
   &__title {
@@ -218,11 +211,11 @@
     font-size: 12px;
     font-weight: $semibold;
     line-height: 1;
-    color: $neutralWhite;
+    color: var(--default-strong-color);
     text-transform: uppercase;
     letter-spacing: 0.134em;
     vertical-align: middle;
-    background-color: $defaultHoverColor;
+    background-color: var(--accent-primary);
     border-radius: 3px;
 
     @include respond($break80) {
@@ -257,7 +250,10 @@
   }
 
   &__interaction-icon {
-    margin-right: 5px;
-    color: $defaultHoverColor;
+    margin-right: 6px;
+  }
+
+  &__interaction-label {
+    color: var(--default-strong-color);
   }
 }

@@ -1,0 +1,53 @@
+.frontend-content-block {
+  &--shaded {
+    padding-bottom: 30px;
+    background-color: $neutral05;
+
+    @include respond($break60) {
+      padding-top: 2.429vw;
+    }
+
+    @include respond($break120) {
+      padding-top: 30px;
+    }
+  }
+
+  &--default {
+    &:last-child {
+      margin-bottom: 50px;
+
+      @include respond($break60) {
+        margin-bottom: 8.065vw;
+      }
+
+      @include respond($break80) {
+        margin-bottom: 65px;
+      }
+    }
+
+    + .frontend-content-block {
+      margin-top: 25px;
+
+      @include respond($break60) {
+        margin-top: 4.453vw;
+      }
+
+      @include respond($break120) {
+        margin-top: 55px;
+      }
+    }
+  }
+
+  &--box {
+    --content-color: #{$neutralTextDark};
+    --card-bg-color: #{$neutralWhite};
+
+    padding-bottom: 45px;
+    background-color: $neutral05;
+    border-radius: $panelRoundedRadius;
+
+    & + & {
+      margin-top: clamp(40px, 6.452vw, 50px);
+    }
+  }
+}
