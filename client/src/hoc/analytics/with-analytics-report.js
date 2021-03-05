@@ -7,6 +7,9 @@ import { statisticsAPI, analyticReportsAPI, requests } from "api";
 import subDays from "date-fns/subDays";
 import intervalToDuration from "date-fns/intervalToDuration";
 import formatDuration from "date-fns/formatDuration";
+import startOfDay from "date-fns/startOfDay";
+import endOfDay from "date-fns/endOfDay";
+import sub from "date-fns/sub";
 import uuid from "uuid";
 
 const { request } = entityStoreActions;
@@ -73,7 +76,9 @@ export default function withAnalyticsReport(WrappedComponent) {
     }
 
     get analyticsDuration() {
-      const { analyticsStartDate: start, analyticsEndDate: end } = this.state;
+      const { analyticsStartDate, analyticsEndDate } = this.state;
+      const start = sub(startOfDay(analyticsStartDate), { seconds: 1 });
+      const end = endOfDay(analyticsEndDate);
       if (!start || !end) return null;
       return formatDuration(
         intervalToDuration({
