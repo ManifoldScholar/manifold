@@ -9,6 +9,7 @@
   @include reactSlideTransition('right', '.user-menu');
   @include reactSlideTransition('right', '.search-menu');
 
+  @include boxShadow(0, -10px, 20px, 7px, $neutralBlack, 0.25);
   position: fixed;
   top: 0;
   width: 100%;

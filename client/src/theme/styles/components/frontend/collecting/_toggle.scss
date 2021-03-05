@@ -92,7 +92,7 @@ $_highlight-bg-color: $spBlue45;
     }
 
     &--add {
-      .collecting-toggle--inline & {
+      .collecting-toggle--outlined & {
         --toggle-color: currentColor;
         --toggle-bg-color: transparent;
       }

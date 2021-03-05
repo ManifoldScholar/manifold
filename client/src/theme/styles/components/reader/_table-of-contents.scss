@@ -1,0 +1,72 @@
+$_padding-increment: 20px;
+$_levels: 1, 2, 3, 4, 5;
+$_toggle-width: 24px;
+$_toggle-padding: 12px;
+$_inline-end-padding: calc(#{toc-drawer(base-inline-end-padding)} + #{$_toggle-width + $_toggle-padding});
+
+.table-of-contents {
+  @include templateHead;
+  padding-top: 10px;
+  color: $neutralTextExtraDark;
+  background-color: $neutral10;
+  overflow: hidden;
+
+  &__list {
+    --toc-inline-start-padding: #{toc-drawer(base-inline-start-padding)};
+    --toc-font-size: 18px;
+
+    @include respond($break50) {
+      --toc-font-size: 22px;
+    }
+
+    // all nested levels
+    &:not(.table-of-contents__list--depth-0) {
+      --toc-font-size: 16px;
+
+      @include respond($break50) {
+        --toc-font-size: 18px;
+      }
+    }
+
+    @each $level in $_levels {
+      &--depth-#{$level} {
+        --toc-inline-start-padding: calc(#{toc-drawer(base-inline-start-padding)} + #{$_padding-increment} * #{$level});
+      }
+    }
+
+    @include listUnstyled;
+    font-size: var(--toc-font-size);
+  }
+
+  &__item-inner {
+    position: relative;
+    display: flex;
+  }
+
+  &__collecting-toggle {
+    position: absolute;
+    top: 42%;
+    right: toc-drawer(base-inline-end-padding);
+    transform: translateY(-50%);
+  }
+
+  &__link {
+    flex-grow: 1;
+    width: 100%;
+    padding: 0.773em $_inline-end-padding 0.773em var(--toc-inline-start-padding);
+    text-decoration: none;
+    line-height: 1.2;
+    hyphens: none;
+    transition: background-color $duration $timing;
+
+    &:hover,
+    &:focus-visible {
+      outline: 0;
+      color: inherit;
+    }
+
+    &--active {
+      background-color: $neutral30;
+    }
+  }
+}

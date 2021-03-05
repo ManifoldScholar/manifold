@@ -252,3 +252,13 @@ $standalone-header-layout: (
 @function standalone-header-layout($property) {
   @return map-get($standalone-header-layout, $property);
 }
+
+$toc-drawer: (
+  width: 477px,
+  base-inline-start-padding: 12.579%,
+  base-inline-end-padding: 10.482%,
+);
+
+@function toc-drawer($property) {
+  @return map-get($toc-drawer, $property);
+}
