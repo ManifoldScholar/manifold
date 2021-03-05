@@ -4,7 +4,7 @@ class Navigation {
   static frontend = memoize((authentication, settings) => {
     if (settings.attributes.general.libraryDisabled) return [];
 
-    const out = [
+    return [
       {
         label: "Home",
         route: "frontend",
@@ -25,14 +25,6 @@ class Navigation {
         ]
       }
     ];
-
-    if (authentication.currentUser) {
-      out.push({
-        label: "Following",
-        route: "frontendFollowing"
-      });
-    }
-    return out;
   });
 
   static backend = memoize(() => {
