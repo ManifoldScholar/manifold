@@ -2,20 +2,20 @@
 
 exports[`frontend/components/resource-slide/LoadingCaption matches the snapshot 1`] = `
 <div
-  className="slide-caption"
+  className="resource-slideshow__caption"
 >
   <header>
     <p
-      className="resource-title"
+      className="resource-slideshow__title"
     />
   </header>
   <div
-    className="resource-description"
+    className="resource-slideshow__description"
   >
     <p />
   </div>
   <div
-    className="resource-utility"
+    className="resource-slideshow__utility"
   />
 </div>
 `;

@@ -514,11 +514,8 @@ exports[`frontend/components/project-list/GridItem matches the snapshot 1`] = `
       </p>
     </div>
   </Link>
-  <WithScreenReaderStatus('Project.Follow)
-    authenticated={true}
-    dispatch={[Function]}
-    favorites={Object {}}
-    project={
+  <Collecting.Toggle
+    collectable={
       Object {
         "attributes": Object {
           "abilities": Object {
@@ -998,6 +995,8 @@ exports[`frontend/components/project-list/GridItem matches the snapshot 1`] = `
         "type": "projects",
       }
     }
+    inline={false}
+    outlined={false}
   />
 </Fragment>
 `;
