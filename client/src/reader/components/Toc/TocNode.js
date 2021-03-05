@@ -30,16 +30,17 @@ function TocNode({ node, onClick, linkTo, active, children }) {
         <span
           onMouseEnter={() => setHovering(true)}
           onMouseLeave={() => setHovering(false)}
-          className="table-of-contents__collecting-toggle"
+          className={classNames({
+            "table-of-contents__collecting-toggle": true,
+            "table-of-contents__collecting-toggle--hidden": !showToggle
+          })}
         >
-          {showToggle && (
-            <Collecting.Toggle
-              collectable={node}
-              outlined={false}
-              onDialogOpen={() => setHovering(true)}
-              onDialogClose={() => setHovering(false)}
-            />
-          )}
+          <Collecting.Toggle
+            collectable={node}
+            outlined={false}
+            onDialogOpen={() => setHovering(true)}
+            onDialogClose={() => setHovering(false)}
+          />
         </span>
       </div>
       {children}

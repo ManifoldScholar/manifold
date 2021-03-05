@@ -48,6 +48,11 @@ $_inline-end-padding: calc(#{toc-drawer(base-inline-end-padding)} + #{$_toggle-w
     top: 42%;
     right: toc-drawer(base-inline-end-padding);
     transform: translateY(-50%);
+
+    &--hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
   }
 
   &__link {
