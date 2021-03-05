@@ -203,7 +203,6 @@ export class ProjectsContainer extends Component {
         {this.hasVisibleProjects && (
           <Layout.ButtonNavigation
             showProjectCollections
-            showFollowing={false}
             showProjects={false}
             grayBg={false}
           />
