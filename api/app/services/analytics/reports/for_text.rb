@@ -80,24 +80,30 @@ module Analytics
         SELECT
           COUNT(*) AS count,
           analytics_events.properties ->> 'action' AS action
-        FROM analytics_events
+        FROM (SELECT DISTINCT id FROM visits) visits
+        JOIN analytics_events
+          ON visits.id = analytics_events.visit_id
         JOIN text_sections
           ON (analytics_events.properties ->> '#{TextSection.model_name.param_key}')::uuid = text_sections.id
         JOIN texts
           ON text_sections.text_id = texts.id
-        WHERE analytics_events.name = '#{Analytics::Event.event_name_for(:share, TextSection)}' AND texts.id = #{RESOURCE_PLACEHOLDER}
+        WHERE analytics_events.name = '#{Analytics::Event.event_name_for(:share, TextSection)}'
+          AND texts.id = #{RESOURCE_PLACEHOLDER}
         GROUP BY action
       SQL
 
       register_cte! :text_section_citations, <<~SQL
         SELECT
           COUNT(*) AS count
-        FROM analytics_events
+        FROM (SELECT DISTINCT id FROM visits) visits
+        JOIN analytics_events
+          ON visits.id = analytics_events.visit_id
         JOIN text_sections
           ON (analytics_events.properties ->> '#{TextSection.model_name.param_key}')::uuid = text_sections.id
         JOIN texts
           ON text_sections.text_id = texts.id
-        WHERE analytics_events.name = '#{Analytics::Event.event_name_for(:cite, TextSection)}' AND texts.id = #{RESOURCE_PLACEHOLDER}
+        WHERE analytics_events.name = '#{Analytics::Event.event_name_for(:cite, TextSection)}'
+          AND texts.id = #{RESOURCE_PLACEHOLDER}
       SQL
 
       # END CTES
