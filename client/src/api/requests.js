@@ -135,6 +135,12 @@ export default {
   feCollectCollectable: "frontend-collect-collectable",
   feUncollectCollectable: "frontend-uncollect-collectable",
   feMyCollection: "frontend-my-collection",
+  feMyCollectedProjects: "frontend-my-collected-projects",
+  feMyCollectedTexts: "frontend-my-collected-texts",
+  feMyCollectedTextSections: "frontend-my-collected-text-sections",
+  feMyCollectedResourceCollections:
+    "frontend-my-collected-resource-collections",
+  feMyCollectedResources: "frontend-my-collected-resources",
   rText: "reader-text",
   rSection: "reader-section",
   rAnnotations: "reader-annotations",

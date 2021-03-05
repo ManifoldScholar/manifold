@@ -1,6 +1,7 @@
 .list-total {
   @include utilityPrimary;
   font-size: 14px;
+  color: var(--default-weak-color);
   transition: color $duration $timing;
 
   &--extra-bottom {
@@ -10,6 +11,10 @@
   &--empty {
     padding-top: 20px;
     border-bottom: 0;
+  }
+
+  &__highlighted {
+    color: var(--default-strong-color);
   }
 
   .section-heading-secondary & {

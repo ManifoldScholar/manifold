@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import LoadingBlock from "global/components/loading-block";
 import Layout from "frontend/components/layout";
 import Hero from "./Hero";
-import ContentBlock from "frontend/components/content-block";
+import Content from "./Content/index";
 import { FrontendModeContext } from "helpers/contexts";
 import withSettings from "hoc/with-settings";
 import AccessDenied from "./AccessDenied";
@@ -41,7 +41,7 @@ class Detail extends Component {
           >
             <AccessDenied project={project} />
           </Authorize>
-          <ContentBlock project={project} />
+          <Content project={project} />
         </section>
         {!this.context.isStandalone && !this.isLibraryDisabled && (
           <Layout.ButtonNavigation />
