@@ -15,7 +15,7 @@ function googleAnalyticsEnabled(settings) {
 }
 
 export default function useGoogleAnalytics(location, settings) {
-  if (!googleAnalyticsEnabled(settings)) return nullTracker;
+  if (!googleAnalyticsEnabled(settings)) return { track: nullTracker };
   const googleAnalyticsId = getGoogleAnalyticsId(settings);
 
   useEffect(() => {
