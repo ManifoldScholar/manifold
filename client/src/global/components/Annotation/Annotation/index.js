@@ -16,7 +16,8 @@ class Annotation extends PureComponent {
   static propTypes = {
     annotation: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    visitHandler: PropTypes.func
+    visitHandler: PropTypes.func,
+    showCommentsToggleAsBlock: PropTypes.bool
   };
 
   deleteHandler = () => {
@@ -48,6 +49,10 @@ class Annotation extends PureComponent {
     );
   }
 
+  get showCommentsToggleAsBlock() {
+    return this.props.showCommentsToggleAsBlock;
+  }
+
   get highlightAnnotation() {
     return <HighlightAnnotation {...this.props} {...this.injectedProps} />;
   }
@@ -59,7 +64,8 @@ class Annotation extends PureComponent {
   get injectedProps() {
     return {
       deleteHandler: this.deleteHandler,
-      visitHandler: this.visitHandler
+      visitHandler: this.visitHandler,
+      showCommentsToggleAsBlock: this.showCommentsToggleAsBlock
     };
   }
 

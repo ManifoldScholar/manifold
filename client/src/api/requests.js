@@ -141,6 +141,8 @@ export default {
   feMyCollectedResourceCollections:
     "frontend-my-collected-resource-collections",
   feMyCollectedResources: "frontend-my-collected-resources",
+  feMyAnnotations: "frontend-my-annotations",
+  feMyAnnotatedTexts: "frontend-my-annotated-texts",
   rText: "reader-text",
   rSection: "reader-section",
   rAnnotations: "reader-annotations",
