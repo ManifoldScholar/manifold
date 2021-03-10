@@ -62,7 +62,8 @@
           margin-right: 14px;
         }
 
-        &.icon-star-fill {
+        &.icon-star-fill,
+        &.icon-notes-unique {
           width: clamp(40px, 7.742vw, 48px);
           height: clamp(40px, 7.742vw, 48px);
         }
@@ -80,6 +81,18 @@
 
       .icon-star-fill__background {
         fill: $iconFillStarBgColor;
+      }
+    }
+
+    .icon-notes-unique {
+      fill: transparent;
+
+      &__foreground {
+        fill: $neutralTextExtraDark;
+      }
+
+      &__background {
+        fill: $neutralTextExtraLight;
       }
     }
   }
