@@ -1,17 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useUIDSeed } from "react-uid";
-import flatMapDepth from "lodash/flatMapDepth";
-import identity from "lodash/identity";
 import IconComposer from "global/components/utility/IconComposer";
 import Dialog from "global/components/dialog";
 import SectionLabel from "global/components/form/SectionLabel";
 import Checkbox from "./Checkbox";
+import { inCollection } from "../helpers";
 
 function CollectingDialog({
   collectable,
   title,
-  myCollection,
   readingGroups,
   currentUser,
   onChange,
@@ -19,29 +17,16 @@ function CollectingDialog({
 }) {
   const uidSeed = useUIDSeed();
 
-  function collectedIdsForCollection(collection) {
-    if (!collection) return [];
-    const mappings = collection.attributes.categoryMappings;
-    return flatMapDepth(
-      Object.values(mappings).map(mapping => Object.values(mapping)),
-      identity,
-      2
-    );
-  }
-
-  function inCollection(collection) {
-    const collectedIds = collectedIdsForCollection(collection);
-    return collectedIds.includes(collectable.id);
-  }
-
   function inMyCollection() {
-    return inCollection(myCollection);
+    return inCollection(currentUser, collectable);
+  }
+
+  function getReadingGroup(id) {
+    return readingGroups.find(rg => rg.id === id);
   }
 
   function inReadingGroup(id) {
-    const group = readingGroups.find(rg => rg.id === id);
-    if (!group) return false;
-    return inCollection(group.relationships.collection);
+    return inCollection(getReadingGroup(id), collectable);
   }
 
   function collectionForId(id) {
@@ -126,7 +111,6 @@ CollectingDialog.displayName = "Collecting.Dialog";
 CollectingDialog.propTypes = {
   collectable: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
-  myCollection: PropTypes.object.isRequired,
   readingGroups: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired
