@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useUIDSeed } from "react-uid";
-import flatMap from "lodash/flatMap";
+import flatMapDepth from "lodash/flatMapDepth";
+import identity from "lodash/identity";
 import IconComposer from "global/components/utility/IconComposer";
 import Dialog from "global/components/dialog";
 import SectionLabel from "global/components/form/SectionLabel";
@@ -12,34 +13,48 @@ function CollectingDialog({
   title,
   myCollection,
   readingGroups,
+  currentUser,
   onChange,
   onClose
 }) {
   const uidSeed = useUIDSeed();
 
+  function collectedIdsForCollection(collection) {
+    if (!collection) return [];
+    const mappings = collection.attributes.categoryMappings;
+    return flatMapDepth(
+      Object.values(mappings).map(mapping => Object.values(mapping)),
+      identity,
+      2
+    );
+  }
+
+  function inCollection(collection) {
+    const collectedIds = collectedIdsForCollection(collection);
+    return collectedIds.includes(collectable.id);
+  }
+
   function inMyCollection() {
-    if (!myCollection) return false;
-
-    const collectables =
-      myCollection.attributes.categoryMappings.$uncategorized$;
-    const flattened = flatMap(collectables);
-
-    return flattened.includes(collectable.id);
+    return inCollection(myCollection);
   }
 
   function inReadingGroup(id) {
     const group = readingGroups.find(rg => rg.id === id);
-    // console.log({ group });
+    if (!group) return false;
+    return inCollection(group.relationships.collection);
+  }
 
-    return false;
+  function collectionForId(id) {
+    if (id === "me") return currentUser;
+    return readingGroups.find(rg => rg.id === id);
   }
 
   function onCheckboxChange(event) {
-    const groupID = event.target.value;
+    const collectionId = event.target.value;
+    const collection = collectionForId(collectionId);
     const collected =
-      groupID === "me" ? inMyCollection() : inReadingGroup(groupID);
-
-    onChange(groupID, collected);
+      collectionId === "me" ? inMyCollection() : inReadingGroup(collectionId);
+    onChange(collected, collection);
   }
 
   function handleCloseClick(event) {
