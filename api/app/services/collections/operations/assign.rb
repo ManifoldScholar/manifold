@@ -17,7 +17,7 @@ module Collections
       option :_collectable, Types.Instance(Collections::CollectableDefinition),
              as: :collectable_definition, default: proc { collector_definition[collectable] }
 
-      # @return [Dry::Results::Monad<CollectionEntry>]
+      # @return [Dry::Monads::Result(ComposedCollection)]
       def call
         yield upsert_entry!
 
