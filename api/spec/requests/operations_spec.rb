@@ -37,10 +37,12 @@ RSpec.describe "Operations API", type: :request do
 
         expect_operation_result_to_include_json({
           data: {
-            categories: [],
-            category_mappings: {
-              "$uncategorized$" => {
-                collectable_mapping_key => [collectable.id],
+            attributes: {
+              categories: [],
+              category_mappings: {
+                "$uncategorized$" => {
+                  collectable_mapping_key => [collectable.id],
+                },
               },
             },
           },

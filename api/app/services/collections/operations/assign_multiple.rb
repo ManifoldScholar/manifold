@@ -29,7 +29,7 @@ module Collections
         end
       end
 
-      # @return [Dry::Monads::Result]
+      # @return [Dry::Monads::Result(ComposedCollection)]
       def call
         yield upsert_entries!
 
