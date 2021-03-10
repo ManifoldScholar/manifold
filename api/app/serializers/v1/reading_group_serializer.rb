@@ -38,7 +38,7 @@ module V1
 
     typed_has_many :reading_group_memberships
 
-    typed_has_one :collection, serializer: V1::ReadingGroupCollectionSerializer do |object, _params|
+    typed_has_one :collection, serializer: V1::ReadingGroupCollectionSerializer, record_type: "readingGroupCollections" do |object, _params|
       object.composed_collection
     end
 
