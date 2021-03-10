@@ -7,6 +7,6 @@ export default class Passthrough extends React.PureComponent {
   };
 
   render() {
-    return <span>{this.props.children}</span>;
+    return <>{this.props.children}</>;
   }
 }

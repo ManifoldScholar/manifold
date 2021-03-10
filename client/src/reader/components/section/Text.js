@@ -121,6 +121,7 @@ export default class Text extends Component {
           ref={el => {
             this.el = el;
           }}
+          className="main-content"
         >
           <section className={readerAppearanceClass}>
             <Annotation.Annotatable
