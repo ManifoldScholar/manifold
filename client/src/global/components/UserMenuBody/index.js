@@ -66,12 +66,20 @@ export class UserMenuBody extends Component {
             />
           )}
           {this.canAccessReadingGroups && (
-            <Link
-              to={lh.link("frontendReadingGroups")}
-              title="My Reading Groups"
-              icon="annotationGroup24"
-              onClick={() => this.props.hideUserMenu()}
-            />
+            <>
+              <Link
+                to={lh.link("frontendAnnotations")}
+                title="My Notes + Comments"
+                icon="notes24"
+                onClick={() => this.props.hideUserMenu()}
+              />
+              <Link
+                to={lh.link("frontendReadingGroups")}
+                title="My Reading Groups"
+                icon="annotationGroup24"
+                onClick={() => this.props.hideUserMenu()}
+              />
+            </>
           )}
           <Link
             as="button"

@@ -137,4 +137,12 @@ $readerContainerWidths: (1063px, 916px, 790px, 680px, 500px);
   float: right;
 }
 
+.global-container {
+  @include flexViewport(true);
+}
+
+.flex-viewport {
+  @include flexViewport;
+}
+
 @import 'grids';

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import Utility from "global/components/utility";
 import Footers from "global/components/Footers";
 import BackLink from "frontend/components/back-link";
@@ -92,14 +93,18 @@ export class FrontendContainer extends Component {
     }
   }
 
-  render() {
-    const mainClasses = get(
+  get mainClassName() {
+    const hasPressLogo = get(
       this.props.settings,
       "attributes.pressLogoStyles.small"
-    )
-      ? "extra-top"
-      : "";
+    );
+    return classNames({
+      "main-content": true,
+      "extra-top": hasPressLogo
+    });
+  }
 
+  render() {
     return (
       <BodyClass className={"browse"}>
         <BackLink.Provider>
@@ -119,7 +124,7 @@ export class FrontendContainer extends Component {
               this.mainContainer = mainContainer;
             }}
             id="skip-to-main"
-            className={mainClasses}
+            className={this.mainClassName}
           >
             <div>{renderRoutes(this.props.route.routes)}</div>
           </main>

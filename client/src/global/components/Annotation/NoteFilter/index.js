@@ -6,9 +6,12 @@ import Filter from "./Filter";
 import isEmpty from "lodash/isEmpty";
 import omitBy from "lodash/omitBy";
 
-export default class SelectFilter extends React.PureComponent {
+export default class AnnotationNoteFilter extends React.PureComponent {
+  static displayName = "Annotation.NoteFilter";
+
   static propTypes = {
-    readingGroup: PropTypes.object.isRequired,
+    texts: PropTypes.array,
+    memberships: PropTypes.array,
     pagination: PropTypes.object.isRequired
   };
 
@@ -34,9 +37,14 @@ export default class SelectFilter extends React.PureComponent {
     );
   }
 
-  get members() {
-    const { readingGroup } = this.props;
-    return readingGroup.relationships.readingGroupMemberships.map(rgm => {
+  get pagination() {
+    return this.props.pagination;
+  }
+
+  get memberships() {
+    if (!this.props.memberships) return [];
+
+    return this.props.memberships.map(rgm => {
       return {
         label: this.memberLabel(rgm),
         value: rgm.id
@@ -44,9 +52,12 @@ export default class SelectFilter extends React.PureComponent {
     });
   }
 
-  get titles() {
-    const { readingGroup } = this.props;
-    return readingGroup.relationships.texts.map(text => {
+  get hasMemberships() {
+    return this.props.memberships?.length > 0;
+  }
+
+  get texts() {
+    return this.props.texts.map(text => {
       return {
         label: text.attributes.title,
         value: text.id
@@ -71,12 +82,10 @@ export default class SelectFilter extends React.PureComponent {
   };
 
   render() {
-    const { pagination } = this.props;
-
     return (
       <div className={"notes-filter"}>
         <Utility.EntityCount
-          pagination={pagination}
+          pagination={this.pagination}
           singularUnit="Note"
           pluralUnit="Notes"
         />
@@ -91,21 +100,21 @@ export default class SelectFilter extends React.PureComponent {
                 Notes filters
               </p>
               <Filter
-                value={this.state.filter ? this.state.filter.title : undefined}
+                value={this.state.filter?.text || ""}
                 onChange={this.updateTextFilter}
-                label={"All Texts:"}
-                options={this.titles}
+                label={"Filter by text"}
+                allOption={{ label: "All texts", value: "" }}
+                options={this.texts}
               />
-              <Filter
-                value={
-                  this.state.filter
-                    ? this.state.filter.readingGroupMembership
-                    : undefined
-                }
-                onChange={this.updateMemberFilter}
-                label={"All Members:"}
-                options={this.members}
-              />
+              {this.hasMemberships && (
+                <Filter
+                  value={this.state.filter?.readingGroupMembership || ""}
+                  onChange={this.updateMemberFilter}
+                  label={"Filter by member"}
+                  allOption={{ label: "All members", value: "" }}
+                  options={this.memberships}
+                />
+              )}
             </div>
           )}
         </UID>

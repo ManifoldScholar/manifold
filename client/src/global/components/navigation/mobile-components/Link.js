@@ -2,10 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { NavLink, withRouter } from "react-router-dom";
 import { useUID } from "react-uid";
+import IconComposer from "global/components/utility/IconComposer";
 
-function UserLink({ as = "a", to, title, srTitle, iconComponent, onClick }) {
+function UserLink({ as = "a", to, title, srTitle, icon, onClick }) {
   const Tag = as === "a" ? NavLink : "button";
-  const uid = useUID();
+  const uid = srTitle ? useUID() : null;
   return (
     <li className="nested-nav__item">
       <Tag
@@ -15,25 +16,31 @@ function UserLink({ as = "a", to, title, srTitle, iconComponent, onClick }) {
         aria-describedby={uid}
       >
         <div className="nested-nav__grid-item">
-          {iconComponent}
+          <IconComposer
+            icon={icon}
+            size={32}
+            iconClass="nested-nav__button-icon"
+          />
           <span className="nested-nav__button-text">{title}</span>
         </div>
       </Tag>
-      <span id={uid} className="aria-describedby">
-        {srTitle}
-      </span>
+      {srTitle && (
+        <span id={uid} className="aria-describedby">
+          {srTitle}
+        </span>
+      )}
     </li>
   );
 }
 
-UserLink.displayName = "UserMenuBody.Link";
+UserLink.displayName = "Navigation.Mobile.Link";
 
 UserLink.propTypes = {
   as: PropTypes.oneOf(["a", "button"]),
   to: PropTypes.string,
   title: PropTypes.string.isRequired,
   srTitle: PropTypes.string,
-  iconComponent: PropTypes.element.isRequired,
+  icon: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired
 };
 
