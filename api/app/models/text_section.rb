@@ -14,6 +14,7 @@ class TextSection < ApplicationRecord
 
   # Authority
   include Authority::Abilities
+  include Collectable
   include SerializedAbilitiesFor
   self.authorizer_name = "TextSectionAuthorizer"
 
@@ -26,6 +27,7 @@ class TextSection < ApplicationRecord
 
   # Associations
   belongs_to :text, inverse_of: :text_sections
+  has_one :project, through: :text
   has_one :text_started_by, class_name: "Text", foreign_key: "start_text_section_id",
           dependent: :nullify, inverse_of: :start_text_section
   belongs_to :ingestion_source
