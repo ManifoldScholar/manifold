@@ -36,6 +36,10 @@ module Testing
       get("/api/v1/me/relationships/collection")
     end
 
+    def my_collected(type)
+      get("/api/v1/me/relationships/#{type}")
+    end
+
     def reading_groups
       get("/api/v1/reading_groups")
     end
