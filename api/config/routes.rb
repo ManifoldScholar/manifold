@@ -24,6 +24,14 @@ Rails.application.routes.draw do
     end
 
     namespace :v1 do
+      concern :collected_models do
+        resources :projects, only: [:index]
+        resources :resources, only: [:index]
+        resources :resource_collections, only: [:index]
+        resources :texts, only: [:index]
+        resources :text_sections, only: %[index]
+      end
+
       resources :action_callouts, only: [:show, :update, :destroy]
       resources :contacts, only: [:create]
       resources :content_blocks, only: [:show, :update, :destroy]
@@ -58,12 +66,7 @@ Rails.application.routes.draw do
             resources :reading_group_categories, only: %i[index show create update destroy]
             resources :reading_group_memberships, only: [:index]
 
-            # Collections:
-            resources :projects, only: [:index]
-            resources :resources, only: [:index]
-            resources :resource_collections, only: [:index]
-            resources :texts, only: [:index]
-            resource :collection, only: %i[show create update destroy]
+            concerns :collected_models
           end
         end
       end
@@ -189,7 +192,10 @@ Rails.application.routes.draw do
           resources :reading_groups, only: [:index]
           resources :favorite_projects, only: [:index]
           resources :annotations, only: [:index]
-          resource :collection, only: %i[show create update destroy]
+
+          resource :collection, only: %i[show]
+
+          concerns :collected_models
         end
       end
 
