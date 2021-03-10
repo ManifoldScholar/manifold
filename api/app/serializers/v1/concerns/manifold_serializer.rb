@@ -52,7 +52,9 @@ module V1
         def serialize_collection_attributes!
           typed_attribute :categories, V1::Concerns::ManifoldSerializer::COLLECTION_CATEGORIES
 
-          typed_attribute :category_mappings, V1::Concerns::ManifoldSerializer::COLLECTION_CATEGORY_MAPPINGS
+          typed_attribute :category_mappings, V1::Concerns::ManifoldSerializer::COLLECTION_CATEGORY_MAPPINGS do |object|
+            camelize_hash(object.category_mappings)
+          end
         end
 
         def serialize_collectable_attributes!
