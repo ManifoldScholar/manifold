@@ -1,13 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { meAPI, requests } from "api";
+import { requests } from "api";
 import { select, loaded } from "utils/entityUtils";
 import hoistStatics from "hoist-non-react-statics";
 import { connect } from "react-redux";
-import { entityStoreActions, uiReadingGroupActions } from "actions";
+import { uiReadingGroupActions } from "actions";
 import { ReaderContext } from "helpers/contexts";
-
-const { request } = entityStoreActions;
+import get from "lodash/get";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -21,14 +20,15 @@ export default function withReadingGroups(WrappedComponent) {
   class WithReadingGroups extends React.PureComponent {
     static mapStateToProps = state => {
       return {
-        _authentication: state.authentication,
         readingGroups: select(requests.feMyReadingGroups, state.entityStore),
         readingGroupsLoaded: loaded(
           requests.feMyReadingGroups,
           state.entityStore
         ),
-        currentReadingGroup:
-          state.ui.persistent.reader.readingGroups.currentReadingGroup
+        currentReadingGroup: get(
+          state,
+          "ui.persistent.reader.readingGroups.currentReadingGroup"
+        )
       };
     };
 
@@ -38,38 +38,30 @@ export default function withReadingGroups(WrappedComponent) {
 
     static propTypes = {
       readingGroups: PropTypes.array,
+      readingGroupsLoaded: PropTypes.bool,
       currentReadingGroup: PropTypes.string
     };
 
     static contextType = ReaderContext;
 
-    componentDidMount() {
-      if (!this.props.readingGroupsLoaded) {
-        this.fetchReadingGroups();
-      }
-    }
-
     componentDidUpdate(prevProps) {
-      // Refetch reading groups if the user logged in.
+      const {
+        readingGroupsLoaded,
+        readingGroups,
+        currentReadingGroup,
+        dispatch
+      } = this.props;
+      const { readingGroups: previousReadingGroups } = prevProps;
       if (
-        prevProps._authentication.authenticated === false &&
-        this.props._authentication.authenticated === true
-      ) {
-        this.fetchReadingGroups();
-      }
-
-      // When the groups are loaded, we need to validate that the selected group is still
-      // available to the user.
-      if (
-        !prevProps.readingGroupsLoaded &&
-        this.props.readingGroupsLoaded &&
-        this.props.currentReadingGroup
+        readingGroupsLoaded &&
+        previousReadingGroups !== readingGroups &&
+        currentReadingGroup
       ) {
         const currentGroup = this.adjustedReadingGroups.find(
-          group => group.id === this.props.currentReadingGroup
+          group => group.id === currentReadingGroup
         );
         if (!currentGroup)
-          this.props.dispatch(
+          dispatch(
             uiReadingGroupActions.setReadingGroup(this.defaultReadingGroup)
           );
       }
@@ -79,12 +71,6 @@ export default function withReadingGroups(WrappedComponent) {
       return "private";
     }
 
-    get canReadReadingGroups() {
-      const { currentUser } = this.props;
-      if (!currentUser) return false;
-      return currentUser.attributes.classAbilities.readingGroup.read;
-    }
-
     get childProps() {
       return {
         setReadingGroup: this.setReadingGroup
@@ -92,8 +78,7 @@ export default function withReadingGroups(WrappedComponent) {
     }
 
     get canEngagePublicly() {
-      // Generally speaking, this HOC should not be used outside of the reader context.
-      // However, there are cases where it could be, in which case we won't have access
+      // When this HOC is used outside of the reader context, we won't have access
       // to project abilities. In that case, we'll assume that public engagement is
       // possible. For example, we list annotations and the annotation editor in
       // reading groups, and don't have easy access to the parent project. We mitigate
@@ -123,16 +108,6 @@ export default function withReadingGroups(WrappedComponent) {
       );
       if (validGroup) return currentReadingGroup;
       return this.defaultReadingGroup;
-    }
-
-    fetchReadingGroups() {
-      if (!this.canReadReadingGroups) return;
-      const readingGroupsFetch = meAPI.readingGroups();
-      const readingGroupsAction = request(
-        readingGroupsFetch,
-        requests.feMyReadingGroups
-      );
-      this.props.dispatch(readingGroupsAction);
     }
 
     setReadingGroup = id => {
