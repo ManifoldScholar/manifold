@@ -1,6 +1,9 @@
 import actions from "actions/currentUser";
-import { ApiClient, tokensAPI, meAPI, favoritesAPI } from "api";
+import { ApiClient, tokensAPI, meAPI, favoritesAPI, requests } from "api";
 import BrowserCookieHelper from "helpers/cookie/Browser";
+import { entityStoreActions } from "actions";
+
+const { request } = entityStoreActions;
 
 function generateErrorPayload(status = 401) {
   const heading = "Login Failed";
@@ -75,6 +78,7 @@ function handleAuthenticationSuccess(
 ) {
   dispatch(actions.setCurrentUser(options.user));
   dispatch(actions.setAuthToken(options.authToken));
+  dispatch(request(meAPI.readingGroups(), requests.feMyReadingGroups));
   dispatch(actions.loginComplete());
   if (options.setCookie) setCookie(options.authToken, options.cookieHelper);
 }
