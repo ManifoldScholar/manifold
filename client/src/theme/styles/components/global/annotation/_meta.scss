@@ -18,8 +18,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 32px;
-    height: 32px;
+    width: annotation-list(avatar-height);
+    height: annotation-list(avatar-height);
     color: $neutralUIDark;
 
     &--dull {
@@ -34,8 +34,8 @@
   }
 
   &__avatar-placeholder-container {
-    width: 38px;
-    margin-left: -2px;
+    width: annotation-list(avatar-placeholder-width);
+    margin-left: annotation-list(avatar-placeholder-margin-inline-start);
   }
 
   &__avatar-image-container {
