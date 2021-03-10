@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import Utility from "frontend/components/utility";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import IconComposer from "global/components/utility/IconComposer";
 import SourceSummary from "../SourceSummary/index";
 import Authorize from "hoc/authorize";
 
@@ -41,24 +42,31 @@ export default class HighlightDetail extends PureComponent {
 
     return (
       <div className={wrapperClasses}>
-        <span className="annotation-selection__highlight-text">
-          {annotation.attributes.subject}
-        </span>
-        <SourceSummary
-          includeDate
-          includeCreator
-          annotation={annotation}
-          onClick={visitHandler}
-          onHover={this.hoverHandler}
-        />
-        <Authorize entity={annotation} ability={"delete"}>
-          <div className="annotation-selection__action-buttons">
-            <Utility.ConfirmableButton
-              label="Delete"
-              confirmHandler={deleteHandler}
-            />
-          </div>
-        </Authorize>
+        <div className="annotation-selection__container">
+          <IconComposer
+            icon="interactHighlight32"
+            size="default"
+            iconClass="annotation-selection__icon"
+          />
+          <span className="annotation-selection__highlight-text">
+            {annotation.attributes.subject}
+          </span>
+          <SourceSummary
+            includeDate
+            includeCreator
+            annotation={annotation}
+            onClick={visitHandler}
+            onHover={this.hoverHandler}
+          />
+          <Authorize entity={annotation} ability={"delete"}>
+            <div className="annotation-selection__action-buttons">
+              <Utility.ConfirmableButton
+                label="Delete"
+                confirmHandler={deleteHandler}
+              />
+            </div>
+          </Authorize>
+        </div>
       </div>
     );
   }
