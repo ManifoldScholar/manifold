@@ -18,6 +18,7 @@ class ReadingGroupCategory < ApplicationRecord
   collects_reading_group_entry! "ReadingGroupResource"
   collects_reading_group_entry! "ReadingGroupResourceCollection"
   collects_reading_group_entry! "ReadingGroupText"
+  collects_reading_group_entry! "ReadingGroupTextSection"
 
   acts_as_list scope: %i[reading_group_id]
 
