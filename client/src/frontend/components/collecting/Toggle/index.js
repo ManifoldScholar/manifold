@@ -5,13 +5,8 @@ import get from "lodash/get";
 import { collectingAPI, requests } from "api";
 import { useDispatch } from "react-redux";
 import { entityStoreActions } from "actions";
-import {
-  useCurrentUser,
-  useDispatchReadingGroups,
-  useSelectReadingGroups,
-  useDispatchMyCollection,
-  useSelectMyCollection
-} from "hooks";
+import withReadingGroups from "hoc/with-reading-groups";
+import withCurrentUser from "hoc/with-current-user";
 import Dialog from "frontend/components/collecting/Dialog";
 import Text from "./Text";
 import Icons from "./Icons";
@@ -51,8 +46,12 @@ function CollectingToggle({
   inline = true,
   outlined = true,
   onDialogOpen,
-  onDialogClose
+  onDialogClose,
+  readingGroups: myReadingGroups,
+  currentUser
 }) {
+  if (!currentUser) return null;
+
   const [hovered, setHovered] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
@@ -62,11 +61,8 @@ function CollectingToggle({
     onDialogOpen();
   }, [dialogVisible]);
 
-  useDispatchReadingGroups();
-  useDispatchMyCollection();
-  const myReadingGroups = useSelectReadingGroups();
-  const myCollection = useSelectMyCollection();
-  const currentUser = useCurrentUser();
+  const myCollection = currentUser.relationships.collection;
+
   const dispatch = useDispatch();
 
   const collected = get(collectable, "attributes.collectedByCurrentUser");
@@ -142,8 +138,6 @@ function CollectingToggle({
     if (onDialogClose) onDialogClose();
   }
 
-  if (!currentUser) return null;
-
   return (
     <>
       <button
@@ -201,4 +195,4 @@ CollectingToggle.propTypes = {
   outlined: PropTypes.bool
 };
 
-export default CollectingToggle;
+export default withReadingGroups(withCurrentUser(CollectingToggle));
