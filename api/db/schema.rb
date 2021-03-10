@@ -701,6 +701,7 @@ ActiveRecord::Schema.define(version: 2021_04_06_161945) do
     t.text "collectable_jsonapi_type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "reading_group_text_section_id"
     t.index ["collectable_type", "collectable_id"], name: "index_rgce_collectable_reference"
     t.index ["reading_group_category_id"], name: "index_rgce_category_reference"
     t.index ["reading_group_id", "collectable_type", "collectable_id"], name: "index_rgce_uniqueness", unique: true
@@ -709,6 +710,7 @@ ActiveRecord::Schema.define(version: 2021_04_06_161945) do
     t.index ["reading_group_resource_collection_id"], name: "index_rgce_resource_collection_reference"
     t.index ["reading_group_resource_id"], name: "index_rgce_resource_reference"
     t.index ["reading_group_text_id"], name: "index_rgce_text_reference"
+    t.index ["reading_group_text_section_id"], name: "index_rgce_text_section_reference"
   end
 
   create_table "reading_group_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -776,6 +778,20 @@ ActiveRecord::Schema.define(version: 2021_04_06_161945) do
     t.index ["reading_group_id", "resource_id"], name: "index_reading_group_resources_uniqueness", unique: true
     t.index ["reading_group_id"], name: "index_reading_group_resources_on_reading_group_id"
     t.index ["resource_id"], name: "index_reading_group_resources_on_resource_id"
+  end
+
+  create_table "reading_group_text_sections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "reading_group_id", null: false
+    t.uuid "text_section_id", null: false
+    t.uuid "reading_group_category_id"
+    t.integer "position"
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["reading_group_category_id"], name: "index_reading_group_text_sections_on_reading_group_category_id"
+    t.index ["reading_group_id", "reading_group_category_id", "position"], name: "index_rg_text_sections_ordering"
+    t.index ["reading_group_id", "text_section_id"], name: "index_rg_text_sections_uniqueness", unique: true
+    t.index ["reading_group_id"], name: "index_reading_group_text_sections_on_reading_group_id"
+    t.index ["text_section_id"], name: "index_rg_text_section_reference"
   end
 
   create_table "reading_group_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1195,12 +1211,14 @@ ActiveRecord::Schema.define(version: 2021_04_06_161945) do
     t.text "collectable_jsonapi_type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "user_collected_text_section_id"
     t.index ["collectable_type", "collectable_id"], name: "index_ucce_collectable_reference"
     t.index ["project_id"], name: "index_ucce_inferred_project_reference"
     t.index ["user_collected_project_id"], name: "index_ucce_project_reference"
     t.index ["user_collected_resource_collection_id"], name: "index_ucce_resource_collection_reference"
     t.index ["user_collected_resource_id"], name: "index_ucce_resource_reference"
     t.index ["user_collected_text_id"], name: "index_ucce_text_reference"
+    t.index ["user_collected_text_section_id"], name: "index_ucce_text_section_reference"
     t.index ["user_id", "collectable_type", "collectable_id"], name: "index_ucce_uniqueness", unique: true
     t.index ["user_id"], name: "index_ucce_user_reference"
   end
@@ -1233,6 +1251,16 @@ ActiveRecord::Schema.define(version: 2021_04_06_161945) do
     t.index ["resource_id"], name: "index_uc_resource_reference"
     t.index ["user_id", "resource_id"], name: "index_uc_resource_uniqueness", unique: true
     t.index ["user_id"], name: "index_user_collected_resources_on_user_id"
+  end
+
+  create_table "user_collected_text_sections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "text_section_id", null: false
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["text_section_id"], name: "index_uc_text_section_reference"
+    t.index ["user_id", "text_section_id"], name: "index_uc_text_section_uniqueness", unique: true
+    t.index ["user_id"], name: "index_user_collected_text_sections_on_user_id"
   end
 
   create_table "user_collected_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1336,6 +1364,7 @@ ActiveRecord::Schema.define(version: 2021_04_06_161945) do
   add_foreign_key "reading_group_composite_entries", "reading_group_projects", on_delete: :cascade
   add_foreign_key "reading_group_composite_entries", "reading_group_resource_collections", on_delete: :cascade
   add_foreign_key "reading_group_composite_entries", "reading_group_resources", on_delete: :cascade
+  add_foreign_key "reading_group_composite_entries", "reading_group_text_sections", on_delete: :cascade
   add_foreign_key "reading_group_composite_entries", "reading_group_texts", on_delete: :cascade
   add_foreign_key "reading_group_composite_entries", "reading_groups", on_delete: :cascade
   add_foreign_key "reading_group_memberships", "reading_groups", on_delete: :cascade
@@ -1349,6 +1378,9 @@ ActiveRecord::Schema.define(version: 2021_04_06_161945) do
   add_foreign_key "reading_group_resources", "reading_group_categories", on_delete: :nullify
   add_foreign_key "reading_group_resources", "reading_groups", on_delete: :cascade
   add_foreign_key "reading_group_resources", "resources", on_delete: :cascade
+  add_foreign_key "reading_group_text_sections", "reading_group_categories", on_delete: :nullify
+  add_foreign_key "reading_group_text_sections", "reading_groups", on_delete: :cascade
+  add_foreign_key "reading_group_text_sections", "text_sections", on_delete: :cascade
   add_foreign_key "reading_group_texts", "reading_group_categories", on_delete: :nullify
   add_foreign_key "reading_group_texts", "reading_groups", on_delete: :cascade
   add_foreign_key "reading_group_texts", "texts", on_delete: :cascade
@@ -1364,6 +1396,7 @@ ActiveRecord::Schema.define(version: 2021_04_06_161945) do
   add_foreign_key "user_collected_composite_entries", "user_collected_projects", on_delete: :cascade
   add_foreign_key "user_collected_composite_entries", "user_collected_resource_collections", on_delete: :cascade
   add_foreign_key "user_collected_composite_entries", "user_collected_resources", on_delete: :cascade
+  add_foreign_key "user_collected_composite_entries", "user_collected_text_sections", on_delete: :cascade
   add_foreign_key "user_collected_composite_entries", "user_collected_texts", on_delete: :cascade
   add_foreign_key "user_collected_composite_entries", "users", on_delete: :cascade
   add_foreign_key "user_collected_projects", "projects", on_delete: :cascade
@@ -1372,6 +1405,8 @@ ActiveRecord::Schema.define(version: 2021_04_06_161945) do
   add_foreign_key "user_collected_resource_collections", "users", on_delete: :cascade
   add_foreign_key "user_collected_resources", "resources", on_delete: :cascade
   add_foreign_key "user_collected_resources", "users", on_delete: :cascade
+  add_foreign_key "user_collected_text_sections", "text_sections", on_delete: :cascade
+  add_foreign_key "user_collected_text_sections", "users", on_delete: :cascade
   add_foreign_key "user_collected_texts", "texts", on_delete: :cascade
   add_foreign_key "user_collected_texts", "users", on_delete: :cascade
   add_foreign_key "users_roles", "roles", on_delete: :cascade
