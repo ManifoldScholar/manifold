@@ -60,19 +60,12 @@ const startLogin = state => {
 
 const updateStateFromUser = (state, payload) => {
   const adjustedUser = { ...payload.data };
-  const favorites = {};
-  if (payload.included) {
-    payload.included
-      .filter(inc => {
-        return inc.type === "favorites";
-      })
-      .forEach(fave => {
-        const id = fave.attributes.favoritableId;
-        favorites[id] = fave;
-      });
-  }
   delete adjustedUser.relationships;
-  adjustedUser.favorites = favorites;
+  adjustedUser.relationships = {
+    collection: payload.included.find(inc => {
+      return inc.type === "userCollections";
+    })
+  };
   const newState = {
     authenticated: !state.authenticating,
     currentUser: adjustedUser,
