@@ -55,20 +55,8 @@ export class BackendContainer extends PureComponent {
     this.commonActions = commonActions(props.dispatch);
   }
 
-  componentDidMount() {
-    this.setMinHeight();
-  }
-
   componentWillUnmount() {
     this.props.dispatch(uiStateSnapshotActions.resetSnapshots());
-  }
-
-  setMinHeight() {
-    if (!this.mainContainer) return;
-    const mainHeight = this.mainContainer.offsetHeight;
-    const offsetHeight =
-      this.mainContainer.parentNode.offsetHeight - mainHeight;
-    this.mainContainer.style.minHeight = `calc(100vh - ${offsetHeight}px)`;
   }
 
   childProps() {
@@ -110,11 +98,7 @@ export class BackendContainer extends PureComponent {
               authentication={this.props.authentication}
               commonActions={this.commonActions}
             />
-            <div
-              ref={mainContainer => {
-                this.mainContainer = mainContainer;
-              }}
-            >
+            <div className="main-content">
               {childRoutes(this.props.route, { childProps: this.childProps() })}
             </div>
             <Footers.FrontendFooter

@@ -8,6 +8,7 @@ import MarginDecrease from "./MarginDecrease";
 import MarginIncrease from "./MarginIncrease";
 import StarFill from "./StarFill";
 import StarOutline from "./StarOutline";
+import Notes from "./Notes";
 
 export default {
   CheckUnique: Check,
@@ -19,5 +20,6 @@ export default {
   MarginDecreaseUnique: MarginDecrease,
   MarginIncreaseUnique: MarginIncrease,
   StarFillUnique: StarFill,
-  StarOutlineUnique: StarOutline
+  StarOutlineUnique: StarOutline,
+  NotesUnique: Notes
 };

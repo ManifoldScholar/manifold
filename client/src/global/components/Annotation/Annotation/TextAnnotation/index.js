@@ -12,7 +12,8 @@ class Annotation extends PureComponent {
     annotation: PropTypes.object.isRequired,
     visitHandler: PropTypes.func.isRequired,
     displayFormat: PropTypes.string,
-    deleteHandler: PropTypes.func
+    deleteHandler: PropTypes.func,
+    showCommentsToggleAsBlock: PropTypes.bool
   };
 
   get annotationListClassNames() {
@@ -20,6 +21,10 @@ class Annotation extends PureComponent {
       "annotation-list": true,
       "annotation-list--dark": this.props.displayFormat === "fullPage"
     });
+  }
+
+  get showCommentsToggleAsBlock() {
+    return this.props.showCommentsToggleAsBlock;
   }
 
   render() {
@@ -40,6 +45,7 @@ class Annotation extends PureComponent {
             annotation={annotation}
             includeComments={false}
             includeMarkers={false}
+            showCommentsToggleAsBlock={this.showCommentsToggleAsBlock}
           />
         </ul>
       </>

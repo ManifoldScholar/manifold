@@ -234,6 +234,7 @@ export class ReaderContainer extends Component {
     const { route, ...otherProps } = this.props;
     /* eslint-enable no-unused-vars */
     const childProps = { ...otherProps, ...this.readerActions };
+
     return childRoutes(this.props.route, { childProps, switch: false });
   }
 
@@ -244,46 +245,44 @@ export class ReaderContainer extends Component {
     return (
       <BodyClass className={this.bodyClass}>
         <ReaderContext.Provider value={this.props.text}>
-          <div>
-            <EventTracker
-              event={EVENTS.VIEW_RESOURCE}
-              resource={this.props.text}
-            />
-            <CheckFrontendMode
-              debugLabel="ReaderWrapper"
-              project={this.props.text.relationships.project}
-            />
-            <ScrollAware>
-              {/* Header inside scroll-aware HOC */}
-              <Header
-                // Props required by body component
-                text={this.props.text}
-                section={this.props.section}
-                authentication={this.props.authentication}
-                visibility={this.props.visibility}
-                location={this.props.location}
-                appearance={this.props.appearance}
-                notifications={this.props.notifications}
-                commonActions={this.commonActions}
-                history={this.props.history}
-                match={this.props.match}
-                {...this.readerActions}
-              />
-            </ScrollAware>
-            <Toc
+          <EventTracker
+            event={EVENTS.VIEW_RESOURCE}
+            resource={this.props.text}
+          />
+          <CheckFrontendMode
+            debugLabel="ReaderWrapper"
+            project={this.props.text.relationships.project}
+          />
+          <ScrollAware>
+            {/* Header inside scroll-aware HOC */}
+            <Header
+              // Props required by body component
               text={this.props.text}
               section={this.props.section}
-              tocDrawerVisible={this.props.visibility.uiPanels.tocDrawer}
-              hideTocDrawer={this.hideTocDrawer}
-              showMeta={this.toggleMeta}
+              authentication={this.props.authentication}
+              visibility={this.props.visibility}
+              location={this.props.location}
+              appearance={this.props.appearance}
+              notifications={this.props.notifications}
+              commonActions={this.commonActions}
+              history={this.props.history}
+              match={this.props.match}
+              {...this.readerActions}
             />
-            <main id="skip-to-main">
-              {this.maybeRenderOverlay(this.props)}
-              {this.renderRoutes()}
-            </main>
-            <Footers.ReaderFooter text={this.props.text} />
-            <Layout.PostFooter />
-          </div>
+          </ScrollAware>
+          <Toc
+            text={this.props.text}
+            section={this.props.section}
+            tocDrawerVisible={this.props.visibility.uiPanels.tocDrawer}
+            hideTocDrawer={this.hideTocDrawer}
+            showMeta={this.toggleMeta}
+          />
+          <main id="skip-to-main" className="main-content flex-viewport">
+            {this.maybeRenderOverlay(this.props)}
+            {this.renderRoutes()}
+          </main>
+          <Footers.ReaderFooter text={this.props.text} />
+          <Layout.PostFooter />
         </ReaderContext.Provider>
       </BodyClass>
     );
