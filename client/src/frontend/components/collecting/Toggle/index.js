@@ -84,17 +84,16 @@ function CollectingToggle({
     }
   };
 
-  function doCollect(group = "me") {
-    const call = collectingAPI.collect([collectable]);
+  function doCollect(collection = currentUser) {
+    const call = collectingAPI.collect([collectable], collection);
     const collectRequest = request(call, requests.feCollectCollectable);
     dispatch(collectRequest);
   }
 
-  function doRemove(group = "me") {
-    const call = collectingAPI.remove([collectable]);
+  function doRemove(collection = currentUser) {
+    const call = collectingAPI.remove([collectable], collection);
     const collectRequest = request(call, requests.feCollectCollectable);
     dispatch(collectRequest);
-
     setConfirmed(false);
   }
 
@@ -128,9 +127,9 @@ function CollectingToggle({
     setHovered(false);
   }
 
-  function handleDialogChange(group, isCollected) {
-    if (isCollected) return doRemove(group);
-    doCollect(group);
+  function handleDialogChange(isCollected, collection) {
+    if (isCollected) return doRemove(collection);
+    doCollect(collection);
   }
 
   function handleDialogClose() {
@@ -176,6 +175,7 @@ function CollectingToggle({
           collectable={collectable}
           title={collectableTitle}
           readingGroups={myReadingGroups}
+          currentUser={currentUser}
           myCollection={myCollection}
           onChange={handleDialogChange}
           onClose={handleDialogClose}
