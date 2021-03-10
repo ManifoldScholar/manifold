@@ -1,18 +1,18 @@
 .annotation-list {
   @include listUnstyled;
-  @include drawerPadding(padding-right);
-  @include drawerPadding(padding-left);
-  padding-bottom: 37px;
 
   &--dark {
-    @include drawerPadding(padding-right);
+    // @include drawerPadding(padding-right);
     background-color: $neutral05;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: $panelRoundedRadius;
+    border-bottom-left-radius: $panelRoundedRadius;
   }
 
   .annotation-comments {
+    @include drawerPadding(padding-right);
+    @include drawerPadding(padding-left);
     padding-top: 32px;
+    padding-bottom: 37px;
 
     @include respond($break65) {
       padding-top: 40px;

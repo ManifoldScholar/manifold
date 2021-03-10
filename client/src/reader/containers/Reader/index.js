@@ -234,6 +234,7 @@ export class ReaderContainer extends Component {
     const { route, ...otherProps } = this.props;
     /* eslint-enable no-unused-vars */
     const childProps = { ...otherProps, ...this.readerActions };
+
     return childRoutes(this.props.route, { childProps, switch: false });
   }
 

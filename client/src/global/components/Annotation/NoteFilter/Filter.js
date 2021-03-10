@@ -3,10 +3,14 @@ import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import { UID } from "react-uid";
 
-export default class SelectFilter extends React.PureComponent {
+export default class AnnotationNoteFilterFilter extends React.PureComponent {
+  static displayName = "Annotation.NoteFilter.Filter";
+
   static propTypes = {
-    options: PropTypes.array,
-    label: PropTypes.string
+    value: PropTypes.string.isRequired,
+    options: PropTypes.array.isRequired,
+    allOption: PropTypes.object.isRequired,
+    label: PropTypes.string.isRequired
   };
 
   get labelName() {
@@ -15,6 +19,10 @@ export default class SelectFilter extends React.PureComponent {
 
   get idPrefix() {
     return "filter";
+  }
+
+  get allOption() {
+    return this.props.allOption;
   }
 
   render() {
@@ -32,7 +40,9 @@ export default class SelectFilter extends React.PureComponent {
                 onChange={this.props.onChange}
                 className={"notes-filter__select"}
               >
-                <option value={""}>{this.labelName}</option>
+                <option value={this.allOption.value}>
+                  {this.allOption.label}
+                </option>
                 {this.props.options.map(option => {
                   return (
                     <option value={option.value} key={option.value}>

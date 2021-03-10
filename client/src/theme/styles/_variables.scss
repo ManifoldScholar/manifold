@@ -295,3 +295,13 @@ $toc-drawer: (
 @function toc-drawer($property) {
   @return map-get($toc-drawer, $property);
 }
+
+$annotation-list: (
+  avatar-height: 32px,
+  avatar-placeholder-width: 38px,
+  avatar-placeholder-margin-inline-start: -2px
+);
+
+@function annotation-list($property) {
+  @return map-get($annotation-list, $property);
+}

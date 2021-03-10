@@ -27,6 +27,13 @@ export default {
     };
   },
 
+  annotatedTexts() {
+    return {
+      endpoint: `/api/v1/me/relationships/annotated_texts`,
+      method: "GET"
+    };
+  },
+
   readingGroups(filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/me/relationships/reading_groups`,

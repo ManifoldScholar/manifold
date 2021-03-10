@@ -31,6 +31,7 @@ import ReadingGroupEdit from "frontend/containers/ReadingGroup/Edit";
 import Login from "frontend/containers/Login";
 import SignUp from "frontend/containers/SignUp";
 import MyStarred from "frontend/containers/MyStarred";
+import MyAnnotations from "frontend/containers/MyAnnotations";
 
 export default {
   NotFound,
@@ -65,5 +66,6 @@ export default {
   ReadingGroupMembers,
   Login,
   SignUp,
-  MyStarred
+  MyStarred,
+  MyAnnotations
 };

@@ -20,7 +20,7 @@
     position: relative;
 
     @include respond($break65) {
-      width: 200px;
+      width: 220px;
     }
 
     &:not(:first-child) {
@@ -55,5 +55,6 @@
     top: 9px;
     right: 10px;
     color: $neutralTextDark;
+    pointer-events: none;
   }
 }

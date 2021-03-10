@@ -46,20 +46,20 @@
     }
 
     &--rounded-corners {
-      border-radius: 8px;
+      border-radius: $panelRoundedRadius;
     }
 
     &--hovering {
       position: relative;
 
-      .annotation-selection__hover-arrow {
-        opacity: 1;
-      }
-
       .truncated__wrapper--blur {
         &::after {
           opacity: 1;
         }
+      }
+
+      .annotation-selection__arrow-icon {
+        transform: translateX(20%);
       }
     }
   }
@@ -80,9 +80,12 @@
     position: absolute;
     top: 2px;
     left: 0;
-    color: $defaultHoverColor;
-    transform: rotateX(180deg);
-    transform: rotateX(180deg) translateZ(-1px);
+    color: var(--default-weak-color);
+
+    &--flipped {
+      transform: rotateX(180deg);
+      transform: rotateX(180deg) translateZ(-1px);
+    }
   }
 
   &__button {
@@ -110,6 +113,7 @@
 
   &__source-summary-link {
     display: flex;
+    color: var(--default-color);
     text-decoration: none;
 
     &:hover {
@@ -126,13 +130,12 @@
     }
   }
 
-  &__hover-arrow {
+  &__arrow-icon {
     position: relative;
     top: -2px;
     flex-shrink: 0;
     margin-left: 12px;
-    opacity: 0;
-    transition: opacity $duration $timing;
+    transition: transform $duration $timing;
   }
 
   &__action-buttons {

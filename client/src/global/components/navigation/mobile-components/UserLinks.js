@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import Avatar from "global/components/avatar";
-import IconComposer from "global/components/utility/IconComposer";
+import Link from "./Link";
 
 export default class UserLinks extends PureComponent {
   static propTypes = {
@@ -20,36 +20,26 @@ export default class UserLinks extends PureComponent {
     return currentUser.attributes.classAbilities.readingGroup.read;
   }
 
-  handleProfileClick = event => {
-    event.preventDefault();
+  handleProfileClick = eventIgnored => {
     this.props.commonActions.toggleSignInUpOverlay();
     this.props.closeNavigation();
   };
 
-  handleNotificationsClick = event => {
-    event.preventDefault();
-    this.props.closeNavigation();
-    this.props.history.push(lh.link("subscriptions"));
-  };
-
-  handleLogOutClick = event => {
-    event.preventDefault();
+  handleLogOutClick = eventIgnored => {
     this.props.commonActions.logout();
     this.props.closeNavigation();
   };
 
-  handleLoginClick = event => {
-    event.preventDefault();
+  handleLoginClick = eventIgnored => {
     this.props.commonActions.toggleSignInUpOverlay();
     this.props.closeNavigation();
   };
 
-  handleReadingGroupsClick = event => {
-    event.preventDefault();
-    this.props.history.push(lh.link("frontendReadingGroups"));
-    this.props.closeNavigation();
-  };
+  // jsx-a11y chokes on <Link as="button" /> here,
+  // but that's just the name of the component.
+  // The correct HTML element is used in <Link />.
 
+  /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
     if (!this.props.authentication.authenticated)
       return (
@@ -95,89 +85,53 @@ export default class UserLinks extends PureComponent {
             </span>
           </div>
         </li>
-        <li className="nested-nav__item">
-          <button
-            className="nested-nav__button"
-            onClick={this.handleProfileClick}
-            aria-describedby="user-menu-edit-profile-mobile"
-          >
-            <div className="nested-nav__grid-item">
-              <IconComposer
-                icon="editProfile24"
-                size={32}
-                iconClass="nested-nav__button-icon"
-              />
-              <span className="nested-nav__button-text">Edit Profile</span>
-            </div>
-          </button>
-          <span id="user-menu-edit-profile-mobile" className="aria-describedby">
-            Edit your profile
-          </span>
-        </li>
-        <li className="nested-nav__item">
-          <button
-            className="nested-nav__button"
-            onClick={this.handleNotificationsClick}
-            aria-describedby="user-menu-notifications-mobile"
-          >
-            <div className="nested-nav__grid-item">
-              <IconComposer
-                icon="notifications24"
-                size={32}
-                iconClass="nested-nav__button-icon"
-              />
-              <span className="nested-nav__button-text">Notifications</span>
-            </div>
-          </button>
-          <span
-            id="user-menu-notifications-mobile"
-            className="aria-describedby"
-          >
-            Edit your notification settings
-          </span>
-        </li>
-        {this.canAccessReadingGroups && (
-          <li className="nested-nav__item">
-            <button
-              className="nested-nav__button"
-              onClick={this.handleReadingGroupsClick}
-              aria-describedby="user-menu-groups-mobile"
-            >
-              <div className="nested-nav__grid-item">
-                <IconComposer
-                  icon="annotationGroup24"
-                  size={32}
-                  iconClass="nested-nav__button-icon"
-                />
-                <span className="nested-nav__button-text">Manage Groups</span>
-              </div>
-            </button>
-            <span id="user-menu-groups-mobile" className="aria-describedby">
-              Manage your Reading Groups
-            </span>
-          </li>
+        {!!currentUser && (
+          <Link
+            to={lh.link("frontendStarred")}
+            title="My Starred"
+            icon="star24"
+            onClick={() => this.props.closeNavigation()}
+          />
         )}
-        <li className="nested-nav__item">
-          <button
-            className="nested-nav__button"
-            onClick={this.handleLogOutClick}
-            aria-describedby="user-menu-logout-mobile"
-          >
-            <div className="nested-nav__grid-item">
-              <IconComposer
-                icon="logout24"
-                size={32}
-                iconClass="nested-nav__button-icon"
-              />
-              <span className="nested-nav__button-text">Logout</span>
-            </div>
-          </button>
-          <span id="user-menu-logout-mobile" className="aria-describedby">
-            Logout of Manifold
-          </span>
-        </li>
+        {this.canAccessReadingGroups && (
+          <>
+            <Link
+              to={lh.link("frontendAnnotations")}
+              title="My Notes + Comments"
+              icon="notes24"
+              onClick={() => this.props.closeNavigation()}
+            />
+            <Link
+              to={lh.link("frontendReadingGroups")}
+              title="My Reading Groups"
+              icon="annotationGroup24"
+              onClick={() => this.props.closeNavigation()}
+            />
+          </>
+        )}
+        <Link
+          to={lh.link("subscriptions")}
+          title="Notifications"
+          srTitle="Edit my notification settings"
+          icon="notifications24"
+          onClick={() => this.props.closeNavigation()}
+        />
+        <Link
+          as="button"
+          title="Edit Profile"
+          srTitle="Edit my profile"
+          icon="editProfile24"
+          onClick={this.handleProfileClick}
+        />
+        <Link
+          as="button"
+          title="Logout"
+          icon="logout24"
+          onClick={this.handleLogOutClick}
+        />
         <li className="nested-nav__footer">{this.props.backendButton}</li>
       </ul>
     );
   }
+  /* eslint-enable jsx-a11y/anchor-is-valid */
 }

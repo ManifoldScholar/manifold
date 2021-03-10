@@ -215,6 +215,14 @@ const routes = {
       helper: () => "/my/starred"
     },
     {
+      name: "frontendAnnotations",
+      exact: true,
+      component: "MyAnnotations",
+      path: "/my/notes",
+      isLibrary: true,
+      helper: () => "/my/notes"
+    },
+    {
       name: "frontendFeatured",
       exact: true,
       component: "Featured",

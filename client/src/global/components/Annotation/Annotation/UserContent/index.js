@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Helper from "global/components/helper";
 import Utility from "frontend/components/utility";
+import IconComposer from "global/components/utility/IconComposer";
 import Editor from "../../Editor";
 import Meta from "./Meta";
 import CommentContainer from "global/containers/comment";
@@ -21,7 +22,8 @@ class AnnotationDetail extends PureComponent {
     dispatch: PropTypes.func.isRequired,
     annotation: PropTypes.object.isRequired,
     showLogin: PropTypes.func,
-    includeComments: PropTypes.bool.isRequired
+    includeComments: PropTypes.bool.isRequired,
+    showCommentsToggleAsBlock: PropTypes.bool
   };
 
   static defaultProps = {
@@ -34,6 +36,7 @@ class AnnotationDetail extends PureComponent {
       action: null,
       includeComments: this.props.includeComments && this.canIncludeComments
     };
+    this.threadRef = React.createRef();
   }
 
   startReply = () => {
@@ -84,6 +87,9 @@ class AnnotationDetail extends PureComponent {
 
   loadComments = () => {
     this.setState({ includeComments: true });
+
+    if (!this.threadRef?.current) return;
+    this.threadRef.current.focus();
   };
 
   get commentsCount() {
@@ -109,31 +115,86 @@ class AnnotationDetail extends PureComponent {
     return this.commentsCount > 0;
   }
 
+  get showCommentsToggleAsBlock() {
+    return this.props.showCommentsToggleAsBlock;
+  }
+
+  get showInlineCommentsToggle() {
+    return (
+      !this.includeComments &&
+      this.hasComments &&
+      !this.showCommentsToggleAsBlock
+    );
+  }
+
+  get showBlockCommentsToggle() {
+    return (
+      !this.includeComments &&
+      this.hasComments &&
+      this.showCommentsToggleAsBlock
+    );
+  }
+
   get listButtonBaseClassNames() {
-    return "annotation-comments__list-button";
+    return "annotation-comments__inline-list-button";
   }
 
   get replyButtonClassNames() {
     return classNames({
-      "annotation-comments__list-button": true,
-      "annotation-comments__list-button--active":
+      "annotation-comments__inline-list-button": true,
+      "annotation-comments__inline-list-button--active":
         this.state.action === "replying"
     });
   }
 
   get editButtonClassNames() {
     return classNames({
-      "annotation-comments__list-button": true,
-      "annotation-comments__list-button--active":
+      "annotation-comments__inline-list-button": true,
+      "annotation-comments__inline-list-button--active":
         this.state.action === "editing"
     });
   }
 
   get secondaryButtonClassNames() {
     return classNames({
-      "annotation-comments__list-button": true,
-      "annotation-comments__list-button--secondary": true
+      "annotation-comments__inline-list-button": true,
+      "annotation-comments__inline-list-button--secondary": true
     });
+  }
+
+  renderInlineCommentsToggle() {
+    if (!this.showInlineCommentsToggle) return null;
+
+    return (
+      <li>
+        <button
+          className={this.editButtonClassNames}
+          onClick={this.loadComments}
+        >
+          {`${this.commentsCount} ${this.commentsCountLabel}`}
+        </button>
+      </li>
+    );
+  }
+
+  renderBlockCommentsToggle() {
+    if (!this.showBlockCommentsToggle) return null;
+
+    return (
+      <button className="annotation-footer-button" onClick={this.loadComments}>
+        <span className="annotation-footer-button__inner">
+          <span className="annotation-footer-button__icon-container">
+            <IconComposer icon="interactComment32" size="default" />
+          </span>
+          <span className="annotation-footer-button__text">{`${this.commentsCount} ${this.commentsCountLabel}`}</span>
+          <IconComposer
+            icon="arrowLongRight16"
+            size={24}
+            iconClass="annotation-footer-button__arrow-icon"
+          />
+        </span>
+      </button>
+    );
   }
 
   render() {
@@ -143,114 +204,115 @@ class AnnotationDetail extends PureComponent {
     const creator = this.props.annotation.relationships.creator;
 
     return (
-      <li className="annotation-comments">
-        <Meta
-          annotation={annotation}
-          creator={creator}
-          includeMarkers={this.props.includeMarkers}
-        />
-        {this.state.action === "editing" ? (
-          <Editor
+      <>
+        <li className="annotation-comments">
+          <Meta
             annotation={annotation}
-            saveAnnotation={this.saveAnnotation}
-            cancel={this.stopAction}
+            creator={creator}
+            includeMarkers={this.props.includeMarkers}
           />
-        ) : (
-          <div>
-            <section className="annotation-comments__body">
-              <Helper.SimpleFormat text={annotation.attributes.body} />
-            </section>
-            <Authorize kind={"any"}>
-              <div className="annotation-comments__utility">
-                <ul className="annotation-comments__utility-list">
-                  {this.includeComments ? (
-                    <li>
-                      <button
-                        className={this.replyButtonClassNames}
-                        onClick={this.startReply}
-                      >
-                        {"Reply"}
-                      </button>
-                    </li>
-                  ) : null}
-                  <Authorize entity={annotation} ability={"update"}>
-                    <li>
-                      <button
-                        className={this.editButtonClassNames}
-                        onClick={this.startEdit}
-                      >
-                        {"Edit"}
-                      </button>
-                    </li>
-                  </Authorize>
-                  <Authorize entity={annotation} ability={"delete"}>
-                    <li>
-                      <Utility.ConfirmableButton
-                        label="Delete"
-                        confirmHandler={this.deleteAnnotation}
-                      />
-                    </li>
-                  </Authorize>
-                  {annotation.attributes.flagged ? (
-                    <li>
-                      <button
-                        className={this.secondaryButtonClassNames}
-                        onClick={this.handleUnflag}
-                      >
-                        {"Unflag"}
-                      </button>
-                    </li>
-                  ) : (
-                    <li>
-                      <button
-                        onClick={this.handleFlag}
-                        className={this.listButtonBaseClassNames}
-                      >
-                        {"Flag"}
-                      </button>
-                    </li>
-                  )}
-                  {!this.includeComments && this.hasComments ? (
-                    <li>
-                      <button
-                        className={this.editButtonClassNames}
-                        onClick={this.loadComments}
-                      >
-                        {`${this.commentsCount} ${this.commentsCountLabel}`}
-                      </button>
-                    </li>
-                  ) : null}
-                </ul>
-                {this.state.action === "replying" ? (
-                  <CommentContainer.Editor
-                    subject={annotation}
-                    cancel={this.stopAction}
-                  />
-                ) : null}
-              </div>
-            </Authorize>
-            {this.props.showLogin && (
-              <Authorize kind="unauthenticated">
-                <nav className="annotation-comments__utility">
+          {this.state.action === "editing" ? (
+            <Editor
+              annotation={annotation}
+              saveAnnotation={this.saveAnnotation}
+              cancel={this.stopAction}
+            />
+          ) : (
+            <div>
+              <section className="annotation-comments__body">
+                <Helper.SimpleFormat text={annotation.attributes.body} />
+              </section>
+              <Authorize kind={"any"}>
+                <div className="annotation-comments__utility">
                   <ul className="annotation-comments__utility-list">
-                    <li>
-                      <button
-                        onClick={this.props.showLogin}
-                        className={this.listButtonBaseClassNames}
-                      >
-                        {"Login to reply"}
-                      </button>
-                    </li>
+                    {this.includeComments ? (
+                      <li>
+                        <button
+                          className={this.replyButtonClassNames}
+                          onClick={this.startReply}
+                        >
+                          {"Reply"}
+                        </button>
+                      </li>
+                    ) : null}
+                    <Authorize entity={annotation} ability={"update"}>
+                      <li>
+                        <button
+                          className={this.editButtonClassNames}
+                          onClick={this.startEdit}
+                        >
+                          {"Edit"}
+                        </button>
+                      </li>
+                    </Authorize>
+                    <Authorize entity={annotation} ability={"delete"}>
+                      <li>
+                        <Utility.ConfirmableButton
+                          label="Delete"
+                          confirmHandler={this.deleteAnnotation}
+                        />
+                      </li>
+                    </Authorize>
+                    {annotation.attributes.flagged ? (
+                      <li>
+                        <button
+                          className={this.secondaryButtonClassNames}
+                          onClick={this.handleUnflag}
+                        >
+                          {"Unflag"}
+                        </button>
+                      </li>
+                    ) : (
+                      <li>
+                        <button
+                          onClick={this.handleFlag}
+                          className={this.listButtonBaseClassNames}
+                        >
+                          {"Flag"}
+                        </button>
+                      </li>
+                    )}
+                    {this.renderInlineCommentsToggle()}
                   </ul>
-                </nav>
+                  {this.state.action === "replying" && (
+                    <CommentContainer.Editor
+                      subject={annotation}
+                      cancel={this.stopAction}
+                    />
+                  )}
+                </div>
               </Authorize>
+              {this.props.showLogin && (
+                <Authorize kind="unauthenticated">
+                  <nav className="annotation-comments__utility">
+                    <ul className="annotation-comments__utility-list">
+                      <li>
+                        <button
+                          onClick={this.props.showLogin}
+                          className={this.listButtonBaseClassNames}
+                        >
+                          {"Login to reply"}
+                        </button>
+                      </li>
+                    </ul>
+                  </nav>
+                </Authorize>
+              )}
+            </div>
+          )}
+          <div
+            ref={this.threadRef}
+            tabIndex={-1}
+            aria-label="Comments thread"
+            className="annotation-comments__thread-container"
+          >
+            {this.includeComments && (
+              <CommentContainer.Thread subject={annotation} />
             )}
           </div>
-        )}
-        {this.includeComments ? (
-          <CommentContainer.Thread subject={annotation} />
-        ) : null}
-      </li>
+        </li>
+        {this.renderBlockCommentsToggle()}
+      </>
     );
   }
 }
