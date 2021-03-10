@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import get from "lodash/get";
 import { collectingAPI, requests } from "api";
 import { useDispatch } from "react-redux";
 import { entityStoreActions } from "actions";
@@ -10,6 +9,7 @@ import withCurrentUser from "hoc/with-current-user";
 import Dialog from "frontend/components/collecting/Dialog";
 import Text from "./Text";
 import Icons from "./Icons";
+import { inCollections } from "../helpers";
 
 const { request } = entityStoreActions;
 
@@ -35,9 +35,8 @@ function normalizeTitle(collectable) {
  * [X] get current user (& hide if not authenticated)
  * [X] get My Collection (for Dialog)
  * [] middleware updates to collectingAPI
- * [] finish wiring doCollect() and doRemove() (factor in which group)
- * [] finish wiring checkbox state for reading groups (needs middleware update)
- * [] need `collectedByCurrentUser` for text sections
+ * [X] finish wiring doCollect() and doRemove() (factor in which group)
+ * [X] finish wiring checkbox state for reading groups (needs middleware update)
  * [] optimize API fetching (expensive in projects, reader views)
  */
 
@@ -61,11 +60,10 @@ function CollectingToggle({
     onDialogOpen();
   }, [dialogVisible]);
 
-  const myCollection = currentUser.relationships.collection;
-
   const dispatch = useDispatch();
 
-  const collected = get(collectable, "attributes.collectedByCurrentUser");
+  const collected = inCollections(collectable, currentUser, ...myReadingGroups);
+
   const view = determineView(collected, hovered, confirmed, dialogVisible);
   const hasReadingGroups = myReadingGroups?.length > 0;
   const collectableTitle = normalizeTitle(collectable);
@@ -176,7 +174,6 @@ function CollectingToggle({
           title={collectableTitle}
           readingGroups={myReadingGroups}
           currentUser={currentUser}
-          myCollection={myCollection}
           onChange={handleDialogChange}
           onClose={handleDialogClose}
         />
