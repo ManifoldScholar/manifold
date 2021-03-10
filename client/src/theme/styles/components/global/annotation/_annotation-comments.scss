@@ -28,7 +28,7 @@
     }
   }
 
-  &__list-button {
+  &__inline-list-button {
     @include buttonUnstyled;
     @include utilityPrimary;
     font-size: 12px;
@@ -47,6 +47,12 @@
       &--active, &:focus-visible {
         color: $defaultErrorColor;
       }
+    }
+  }
+
+  &__thread-container {
+    &:focus {
+      outline: none;
     }
   }
 }
