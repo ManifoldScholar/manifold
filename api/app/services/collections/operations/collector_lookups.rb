@@ -1,6 +1,6 @@
 module Collections
   module Operations
-    # rubocop:disable Style/GuardClause
+    # rubocop:disable Style/GuardClause, Metrics/MethodLength
     class CollectorLookups
       extend Dry::Initializer
 
@@ -12,7 +12,7 @@ module Collections
       # @param [String] id
       # @return [ApplicationRecord]
       def collection(id)
-        find_with! definition.collection, id, failure_message: "Could not find collection: #{id}"
+        find_with! definition.collection, { definition.collector_foreign_key => id }, failure_message: "Could not find collection: #{id}"
       end
 
       # @param [String] id
@@ -84,7 +84,16 @@ module Collections
           end
         end
 
-        Success model_proxy.klass.find(id)
+        klass = model_proxy.klass
+
+        case id
+        when Hash
+          Success klass.find_by id
+        when String, Integer
+          Success klass.find id
+        else
+          operation_error failure_code, failure_message
+        end
       rescue ActiveRecord::RecordNotFound
         operation_error failure_code, failure_message
       end
@@ -99,6 +108,6 @@ module Collections
         "#{model.model_name}(#{model.id.inspect})"
       end
     end
-    # rubocop:enable Style/GuardClause
+    # rubocop:enable Style/GuardClause, Metrics/MethodLength
   end
 end
