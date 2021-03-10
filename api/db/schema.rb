@@ -1744,38 +1744,6 @@ UNION ALL
      LEFT JOIN reading_group_resource_collections rgerc ON ((rgce.reading_group_resource_collection_id = rgerc.id)))
      LEFT JOIN reading_group_texts rget ON ((rgce.reading_group_text_id = rget.id)));
   SQL
-  create_view "reading_group_collections", sql_definition: <<-SQL
-    WITH category_type_ids AS (
-         SELECT x.reading_group_id,
-            COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text) AS category_id,
-            x.collectable_jsonapi_type,
-            jsonb_agg(x.collectable_id ORDER BY x."position") AS ids
-           FROM reading_group_composite_entry_rankings x
-          GROUP BY x.reading_group_id, COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text), x.collectable_jsonapi_type
-        ), category_mappings AS (
-         SELECT cti.reading_group_id,
-            cti.category_id,
-            jsonb_object_agg(cti.collectable_jsonapi_type, cti.ids) AS mapping
-           FROM category_type_ids cti
-          GROUP BY cti.reading_group_id, cti.category_id
-        ), collection_mappings AS (
-         SELECT cm_1.reading_group_id,
-            jsonb_object_agg(cm_1.category_id, cm_1.mapping) AS mapping
-           FROM category_mappings cm_1
-          GROUP BY cm_1.reading_group_id
-        ), category_lists AS (
-         SELECT rgc.reading_group_id,
-            jsonb_agg(jsonb_build_object('id', rgc.id, 'title', (rgc.fa_cache -> 'title'::text), 'description', (rgc.fa_cache -> 'description'::text), 'position', rgc."position") ORDER BY rgc."position") AS categories
-           FROM reading_group_categories rgc
-          GROUP BY rgc.reading_group_id
-        )
- SELECT rg.id AS reading_group_id,
-    COALESCE(cl.categories, '[]'::jsonb) AS categories,
-    COALESCE(cm.mapping, '{}'::jsonb) AS category_mappings
-   FROM ((reading_groups rg
-     LEFT JOIN category_lists cl ON ((cl.reading_group_id = rg.id)))
-     LEFT JOIN collection_mappings cm ON ((cm.reading_group_id = rg.id)));
-  SQL
   create_view "reading_group_visibilities", sql_definition: <<-SQL
     SELECT rg.id AS reading_group_id,
     rgm.id AS reading_group_membership_id,
@@ -1799,32 +1767,6 @@ UNION ALL
    FROM (annotations a
      LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = a.reading_group_id) AND (rgm.user_id = a.creator_id))))
   WHERE ((a.creator_id IS NOT NULL) AND (a.reading_group_id IS NOT NULL));
-  SQL
-  create_view "user_collections", sql_definition: <<-SQL
-    WITH category_type_ids AS (
-         SELECT x.user_id,
-            '$uncategorized$'::text AS category_id,
-            x.collectable_jsonapi_type,
-            jsonb_agg(x.collectable_id ORDER BY x.created_at DESC) AS ids
-           FROM user_collected_composite_entries x
-          GROUP BY x.user_id, '$uncategorized$'::text, x.collectable_jsonapi_type
-        ), category_mappings AS (
-         SELECT cti.user_id,
-            cti.category_id,
-            jsonb_object_agg(cti.collectable_jsonapi_type, cti.ids) AS mapping
-           FROM category_type_ids cti
-          GROUP BY cti.user_id, cti.category_id
-        ), collection_mappings AS (
-         SELECT cm_1.user_id,
-            jsonb_object_agg(cm_1.category_id, cm_1.mapping) AS mapping
-           FROM category_mappings cm_1
-          GROUP BY cm_1.user_id
-        )
- SELECT u.id AS user_id,
-    '[]'::jsonb AS categories,
-    COALESCE(cm.mapping, '{}'::jsonb) AS category_mappings
-   FROM (users u
-     LEFT JOIN collection_mappings cm ON ((cm.user_id = u.id)));
   SQL
   create_view "favorites", sql_definition: <<-SQL
     SELECT user_collected_composite_entries.id,
@@ -1887,5 +1829,65 @@ UNION ALL
            FROM (collaborators c
              JOIN makers m ON ((m.id = c.maker_id)))
           WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
+  SQL
+  create_view "user_collections", sql_definition: <<-SQL
+    WITH category_type_ids AS (
+         SELECT x.user_id,
+            '$uncategorized$'::text AS category_id,
+            x.collectable_jsonapi_type,
+            jsonb_agg(x.collectable_id ORDER BY x.created_at DESC) AS ids
+           FROM user_collected_composite_entries x
+          GROUP BY x.user_id, '$uncategorized$'::text, x.collectable_jsonapi_type
+        ), category_mappings AS (
+         SELECT cti.user_id,
+            cti.category_id,
+            jsonb_object_agg(cti.collectable_jsonapi_type, cti.ids) AS mapping
+           FROM category_type_ids cti
+          GROUP BY cti.user_id, cti.category_id
+        ), collection_mappings AS (
+         SELECT cm_1.user_id,
+            jsonb_object_agg(cm_1.category_id, cm_1.mapping) AS mapping
+           FROM category_mappings cm_1
+          GROUP BY cm_1.user_id
+        )
+ SELECT ((u.id)::text || '-collection'::text) AS id,
+    u.id AS user_id,
+    '[]'::jsonb AS categories,
+    COALESCE(cm.mapping, '{}'::jsonb) AS category_mappings
+   FROM (users u
+     LEFT JOIN collection_mappings cm ON ((cm.user_id = u.id)));
+  SQL
+  create_view "reading_group_collections", sql_definition: <<-SQL
+    WITH category_type_ids AS (
+         SELECT x.reading_group_id,
+            COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text) AS category_id,
+            x.collectable_jsonapi_type,
+            jsonb_agg(x.collectable_id ORDER BY x."position") AS ids
+           FROM reading_group_composite_entry_rankings x
+          GROUP BY x.reading_group_id, COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text), x.collectable_jsonapi_type
+        ), category_mappings AS (
+         SELECT cti.reading_group_id,
+            cti.category_id,
+            jsonb_object_agg(cti.collectable_jsonapi_type, cti.ids) AS mapping
+           FROM category_type_ids cti
+          GROUP BY cti.reading_group_id, cti.category_id
+        ), collection_mappings AS (
+         SELECT cm_1.reading_group_id,
+            jsonb_object_agg(cm_1.category_id, cm_1.mapping) AS mapping
+           FROM category_mappings cm_1
+          GROUP BY cm_1.reading_group_id
+        ), category_lists AS (
+         SELECT rgc.reading_group_id,
+            jsonb_agg(jsonb_build_object('id', rgc.id, 'title', (rgc.fa_cache -> 'title'::text), 'description', (rgc.fa_cache -> 'description'::text), 'position', rgc."position") ORDER BY rgc."position") AS categories
+           FROM reading_group_categories rgc
+          GROUP BY rgc.reading_group_id
+        )
+ SELECT ((rg.id)::text || '-collection'::text) AS id,
+    rg.id AS reading_group_id,
+    COALESCE(cl.categories, '[]'::jsonb) AS categories,
+    COALESCE(cm.mapping, '{}'::jsonb) AS category_mappings
+   FROM ((reading_groups rg
+     LEFT JOIN category_lists cl ON ((cl.reading_group_id = rg.id)))
+     LEFT JOIN collection_mappings cm ON ((cm.reading_group_id = rg.id)));
   SQL
 end
