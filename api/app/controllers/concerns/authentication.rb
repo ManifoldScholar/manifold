@@ -14,7 +14,7 @@ module Authentication
 
   CURRENT_USER_PRELOADS = %w(roles favorites).freeze
 
-  protected
+  private
 
   def load_current_user
     @current_user = User.preload(CURRENT_USER_PRELOADS).find(decoded_auth_token[:user_id])
@@ -40,8 +40,6 @@ module Authentication
   rescue JWT::VerificationError, JWT::DecodeError
     raise APIExceptions::NotAuthenticatedError
   end
-
-  private
 
   # Authentication Related Helper Methods
   # ------------------------------------------------------------
