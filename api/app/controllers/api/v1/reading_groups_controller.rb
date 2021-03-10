@@ -6,7 +6,7 @@ module API
 
       before_action :authenticate_request!
 
-      SERIALIZED_INCLUDES = %i[kind collection]
+      SERIALIZED_INCLUDES = %i[kind collection].freeze
 
       resourceful! ReadingGroup do
         ReadingGroup.includes(:reading_group_collection, :reading_group_kind, reading_group_memberships: %i[user])
