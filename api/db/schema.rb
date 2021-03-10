@@ -1487,6 +1487,64 @@ ActiveRecord::Schema.define(version: 2021_03_10_015102) do
             ELSE NULL::character varying
         END);
   SQL
+  create_view "text_export_statuses", sql_definition: <<-SQL
+    SELECT t.id AS text_id,
+    te.id AS text_export_id,
+        CASE te.export_kind
+            WHEN 'epub_v3'::text THEN (t.export_configuration @> '{"epub_v3": true}'::jsonb)
+            ELSE false
+        END AS autoexport,
+    te.export_kind,
+    te.fingerprint AS export_fingerprint,
+    (t.fingerprint = te.fingerprint) AS current,
+    (t.fingerprint <> te.fingerprint) AS stale,
+    te.created_at AS exported_at
+   FROM (texts t
+     JOIN text_exports te ON ((t.id = te.text_id)));
+  SQL
+  create_view "project_export_statuses", sql_definition: <<-SQL
+    SELECT p.id AS project_id,
+    pe.id AS project_export_id,
+        CASE pe.export_kind
+            WHEN 'bag_it'::text THEN (p.export_configuration @> '{"bag_it": true}'::jsonb)
+            ELSE false
+        END AS autoexport,
+    pe.export_kind,
+    pe.fingerprint AS export_fingerprint,
+    (p.fingerprint = pe.fingerprint) AS current,
+    (p.fingerprint <> pe.fingerprint) AS stale,
+    pe.created_at AS exported_at
+   FROM (projects p
+     JOIN project_exports pe ON ((p.id = pe.project_id)));
+  SQL
+  create_view "user_derived_roles", sql_definition: <<-SQL
+    SELECT u.id AS user_id,
+    COALESCE((array_agg(r.name ORDER BY
+        CASE r.name
+            WHEN 'admin'::text THEN 1
+            WHEN 'editor'::text THEN 2
+            WHEN 'project_creator'::text THEN 3
+            WHEN 'marketeer'::text THEN 4
+            WHEN 'reader'::text THEN 8
+            ELSE 20
+        END) FILTER (WHERE (r.kind = 'global'::text)))[1], 'reader'::character varying) AS role,
+    COALESCE((array_agg(r.name ORDER BY
+        CASE r.name
+            WHEN 'admin'::text THEN 1
+            WHEN 'editor'::text THEN 2
+            WHEN 'project_creator'::text THEN 3
+            WHEN 'marketeer'::text THEN 4
+            WHEN 'project_editor'::text THEN 5
+            WHEN 'project_resource_editor'::text THEN 6
+            WHEN 'project_author'::text THEN 7
+            WHEN 'reader'::text THEN 8
+            ELSE 20
+        END) FILTER (WHERE (r.kind = ANY (ARRAY['global'::text, 'scoped'::text]))))[1], 'reader'::character varying) AS kind
+   FROM ((users u
+     LEFT JOIN users_roles ur ON ((ur.user_id = u.id)))
+     LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
+  GROUP BY u.id;
+  SQL
   create_view "entitlement_assigned_roles", sql_definition: <<-SQL
     SELECT ur.user_id,
     er.id AS entitlement_role_id,
@@ -1653,64 +1711,6 @@ UNION ALL
   GROUP BY ur.user_id, r.resource_id, r.resource_type
  HAVING ((r.resource_id IS NOT NULL) AND (r.resource_type IS NOT NULL));
   SQL
-  create_view "project_export_statuses", sql_definition: <<-SQL
-    SELECT p.id AS project_id,
-    pe.id AS project_export_id,
-        CASE pe.export_kind
-            WHEN 'bag_it'::text THEN (p.export_configuration @> '{"bag_it": true}'::jsonb)
-            ELSE false
-        END AS autoexport,
-    pe.export_kind,
-    pe.fingerprint AS export_fingerprint,
-    (p.fingerprint = pe.fingerprint) AS current,
-    (p.fingerprint <> pe.fingerprint) AS stale,
-    pe.created_at AS exported_at
-   FROM (projects p
-     JOIN project_exports pe ON ((p.id = pe.project_id)));
-  SQL
-  create_view "text_export_statuses", sql_definition: <<-SQL
-    SELECT t.id AS text_id,
-    te.id AS text_export_id,
-        CASE te.export_kind
-            WHEN 'epub_v3'::text THEN (t.export_configuration @> '{"epub_v3": true}'::jsonb)
-            ELSE false
-        END AS autoexport,
-    te.export_kind,
-    te.fingerprint AS export_fingerprint,
-    (t.fingerprint = te.fingerprint) AS current,
-    (t.fingerprint <> te.fingerprint) AS stale,
-    te.created_at AS exported_at
-   FROM (texts t
-     JOIN text_exports te ON ((t.id = te.text_id)));
-  SQL
-  create_view "user_derived_roles", sql_definition: <<-SQL
-    SELECT u.id AS user_id,
-    COALESCE((array_agg(r.name ORDER BY
-        CASE r.name
-            WHEN 'admin'::text THEN 1
-            WHEN 'editor'::text THEN 2
-            WHEN 'project_creator'::text THEN 3
-            WHEN 'marketeer'::text THEN 4
-            WHEN 'reader'::text THEN 8
-            ELSE 20
-        END) FILTER (WHERE (r.kind = 'global'::text)))[1], 'reader'::character varying) AS role,
-    COALESCE((array_agg(r.name ORDER BY
-        CASE r.name
-            WHEN 'admin'::text THEN 1
-            WHEN 'editor'::text THEN 2
-            WHEN 'project_creator'::text THEN 3
-            WHEN 'marketeer'::text THEN 4
-            WHEN 'project_editor'::text THEN 5
-            WHEN 'project_resource_editor'::text THEN 6
-            WHEN 'project_author'::text THEN 7
-            WHEN 'reader'::text THEN 8
-            ELSE 20
-        END) FILTER (WHERE (r.kind = ANY (ARRAY['global'::text, 'scoped'::text]))))[1], 'reader'::character varying) AS kind
-   FROM ((users u
-     LEFT JOIN users_roles ur ON ((ur.user_id = u.id)))
-     LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
-  GROUP BY u.id;
-  SQL
   create_view "reading_group_membership_counts", sql_definition: <<-SQL
     SELECT rgm.id AS reading_group_membership_id,
     count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
@@ -1838,16 +1838,6 @@ UNION ALL
      LEFT JOIN reading_group_resource_collections rgerc ON ((rgce.reading_group_resource_collection_id = rgerc.id)))
      LEFT JOIN reading_group_texts rget ON ((rgce.reading_group_text_id = rget.id)));
   SQL
-  create_view "annotation_reading_group_memberships", sql_definition: <<-SQL
-    SELECT a.id AS annotation_id,
-    a.reading_group_id,
-    a.creator_id AS user_id,
-    rgm.id AS reading_group_membership_id,
-    rgm.aasm_state
-   FROM (annotations a
-     LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = a.reading_group_id) AND (rgm.user_id = a.creator_id))))
-  WHERE ((a.creator_id IS NOT NULL) AND (a.reading_group_id IS NOT NULL));
-  SQL
   create_view "reading_group_visibilities", sql_definition: <<-SQL
     SELECT rg.id AS reading_group_id,
     rgm.id AS reading_group_membership_id,
@@ -1861,6 +1851,16 @@ UNION ALL
    FROM ((users u
      CROSS JOIN reading_groups rg)
      LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = rg.id) AND (rgm.user_id = u.id))));
+  SQL
+  create_view "annotation_reading_group_memberships", sql_definition: <<-SQL
+    SELECT a.id AS annotation_id,
+    a.reading_group_id,
+    a.creator_id AS user_id,
+    rgm.id AS reading_group_membership_id,
+    rgm.aasm_state
+   FROM (annotations a
+     LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = a.reading_group_id) AND (rgm.user_id = a.creator_id))))
+  WHERE ((a.creator_id IS NOT NULL) AND (a.reading_group_id IS NOT NULL));
   SQL
   create_view "favorites", sql_definition: <<-SQL
     SELECT user_collected_composite_entries.id,
