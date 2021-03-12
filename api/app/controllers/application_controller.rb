@@ -65,7 +65,7 @@ class ApplicationController < ActionController::API
     params.dig(:page, :number).to_i.clamp(1, Float::INFINITY)
   end
 
-  def with_pagination!(filter_params = {}, enforced: false)
+  def with_pagination!(filter_params, enforced: false)
     filter_params = {} if filter_params.nil?
 
     return filter_params if !enforced && params.dig(:no_pagination)
