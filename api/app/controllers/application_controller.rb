@@ -1,6 +1,7 @@
 # The base application controller
 class ApplicationController < ActionController::API
 
+  include ActiveSupport::Configurable
   include Authentication
   include Validation
   include JSONAPI
@@ -9,6 +10,10 @@ class ApplicationController < ActionController::API
   before_action :set_paper_trail_whodunnit
 
   rescue_from APIExceptions::StandardError, with: :render_error_response
+
+  config_accessor :pagination_enforced, instance_writer: false do
+    false
+  end
 
   protected
 
@@ -46,7 +51,7 @@ class ApplicationController < ActionController::API
     params.dig(:page, :number).to_i.clamp(1, Float::INFINITY)
   end
 
-  def with_pagination!(filter_params, enforced: false)
+  def with_pagination!(filter_params, enforced: pagination_enforced)
     filter_params = {} if filter_params.nil?
 
     return filter_params if !enforced && params.dig(:no_pagination)
