@@ -3,13 +3,16 @@ module API
     module Me
       module Relationships
         # Annotations controller
-        class AnnotationsController < ApplicationController
-
-          before_action :authenticate_request!
+        class AnnotationsController < AbstractController
+          config.pagination_enforced = true
 
           resourceful! Annotation do
             scope = Annotation.created_by(current_user)
-            Annotation.filtered(annotation_filter_params, scope: scope)
+
+            Annotation.filtered(
+              with_pagination!(annotation_filter_params),
+              scope: scope
+            )
           end
 
           def index
@@ -26,7 +29,7 @@ module API
           private
 
           def meta
-            return {} unless params[:filter][:text]
+            return {} unless params.dig(:filter, :text).present?
 
             {
               annotated: Annotation.created_by(current_user)
@@ -41,7 +44,6 @@ module API
               text_section_id: @annotation.text_section_id
             )
           end
-
         end
       end
     end
