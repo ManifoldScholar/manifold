@@ -188,6 +188,7 @@ Rails.application.routes.draw do
       resource :me, only: [:show, :update], controller: "me"
       namespace :me do
         namespace :relationships do
+          resources :annotated_texts, only: %i[index]
           resources :favorites, except: [:update]
           resources :reading_groups, only: [:index]
           resources :favorite_projects, only: [:index]
