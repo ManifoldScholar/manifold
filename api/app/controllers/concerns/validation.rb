@@ -548,10 +548,13 @@ module Validation
   def annotation_filter_params
     coerce_filter_to_hash(:filter, :ids)
     coerce_filter_to_hash(:filter, :formats)
-    params.permit(filter: [:orphaned,
-                           :text, :text_section, :reading_group_membership,
-                           { ids: [] },
-                           [{ formats: [] }]])[:filter]
+    params.permit(
+      filter: [
+        :orphaned, :text, :text_section, :reading_group_membership,
+        { ids: [] },
+        [{ formats: [] }]
+      ]
+    )[:filter] || {}
   end
 
   def subject_filter_params
