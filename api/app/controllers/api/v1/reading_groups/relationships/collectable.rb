@@ -42,7 +42,7 @@ module API
             def define_resourceful_scope_for!(klass)
               config.collectable_model = klass
 
-              filter_params_name = filter_param_method_for(klass) || :params
+              filter_params_name = filter_param_method_for(klass) || :empty_filter_params
 
               config.filter_params_name = filter_params_name
 

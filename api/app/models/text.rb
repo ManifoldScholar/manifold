@@ -12,6 +12,7 @@ class Text < ApplicationRecord
   extend Memoist
   include Collaborative
   include Citable
+  include Filterable
   include TrackedCreator
   include Metadata
   include Attachments
