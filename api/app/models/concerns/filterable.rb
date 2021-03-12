@@ -12,8 +12,11 @@ module Filterable
       validate_paginated_results params, results
     end
 
+    # @param [#to_hash] params
+    # @param [User, nil] user
+    # @return [ActiveRecord::Relation]
     def filter_with_query(params, user = nil)
-      params.to_hash.inject all do |results, (key, value)|
+      Hash(params.try(:to_hash)).inject all do |results, (key, value)|
         key_s = key.to_s
         if scope_requires_user?(key_s)
           next results unless results.respond_to? key
