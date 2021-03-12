@@ -16,6 +16,7 @@ class TextSection < ApplicationRecord
   # Authority
   include Authority::Abilities
   include Collectable
+  include Filterable
   include SerializedAbilitiesFor
   self.authorizer_name = "TextSectionAuthorizer"
 
