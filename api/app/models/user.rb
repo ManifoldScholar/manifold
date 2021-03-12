@@ -23,6 +23,7 @@ class User < ApplicationRecord
   has_many :identities, inverse_of: :user, autosave: true, dependent: :destroy
   has_many :annotations, foreign_key: "creator_id", dependent: :destroy,
            inverse_of: :creator
+  has_many :annotated_texts, -> { distinct }, through: :annotations, source: :text
   has_many :favorites
   has_many :favorite_projects, through: :favorites, source: :favoritable,
            source_type: "Project"

@@ -32,6 +32,14 @@ module Testing
       get("/api/v1/me")
     end
 
+    def my_annotations
+      get("/api/v1/me/relationships/annotations")
+    end
+
+    def my_annotated_texts
+      get("/api/v1/me/relationships/annotated_texts")
+    end
+
     def my_collection
       get("/api/v1/me/relationships/collection")
     end
