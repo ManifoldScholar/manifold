@@ -15,7 +15,6 @@ class TextListListItem extends Component {
     showDates: PropTypes.bool,
     showDescriptions: PropTypes.bool,
     showSubtitles: PropTypes.bool,
-    history: PropTypes.object.isRequired,
     utilityPosition: PropTypes.oneOf(["meta", "content"])
   };
 
