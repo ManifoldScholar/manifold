@@ -7,9 +7,9 @@ $_inline-end-padding: calc(#{toc-drawer(base-inline-end-padding)} + #{$_toggle-w
 .table-of-contents {
   @include templateHead;
   padding-top: 10px;
+  overflow: hidden;
   color: $neutralTextExtraDark;
   background-color: $neutral10;
-  overflow: hidden;
 
   &__list {
     --toc-inline-start-padding: #{toc-drawer(base-inline-start-padding)};
@@ -50,8 +50,8 @@ $_inline-end-padding: calc(#{toc-drawer(base-inline-end-padding)} + #{$_toggle-w
     transform: translateY(-50%);
 
     &--hidden {
-      opacity: 0;
       visibility: hidden;
+      opacity: 0;
     }
   }
 
@@ -59,15 +59,15 @@ $_inline-end-padding: calc(#{toc-drawer(base-inline-end-padding)} + #{$_toggle-w
     flex-grow: 1;
     width: 100%;
     padding: 0.773em $_inline-end-padding 0.773em var(--toc-inline-start-padding);
-    text-decoration: none;
-    line-height: 1.2;
     hyphens: none;
+    line-height: 1.2;
+    text-decoration: none;
     transition: background-color $duration $timing;
 
     &:hover,
     &:focus-visible {
-      outline: 0;
       color: inherit;
+      outline: 0;
     }
 
     &--active {
