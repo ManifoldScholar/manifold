@@ -1,11 +1,13 @@
 const isServer = typeof __SERVER__ === "undefined" || __SERVER__;
 const isBrowser = !isServer;
 const name = process.env.NODE_ENV.toLowerCase() || "development";
+const skipSSR = process.env.SKIP_SSR || false;
 
 const baseConfig = {
   isBrowser,
   isServer,
-  name
+  name,
+  skipSSR
 };
 
 const environmentSpecificConfig = {
