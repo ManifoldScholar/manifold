@@ -1,6 +1,7 @@
 import { handleActions } from "redux-actions";
 import { constantizeMeta } from "utils/entityUtils";
 import { requests } from "api";
+import update from "immutability-helper";
 
 const initialState = {
   authenticated: false,
@@ -58,6 +59,14 @@ const startLogin = state => {
   return { ...state, authenticating: true };
 };
 
+const replaceUserCollection = (state, action) => {
+  if (!state.currentUser || !state.currentUser.relationships) return state;
+  const newState = update(state, {
+    currentUser: { relationships: { collection: { $set: action.payload } } }
+  });
+  return newState;
+};
+
 const updateStateFromUser = (state, payload) => {
   const adjustedUser = { ...payload.data };
   delete adjustedUser.relationships;
@@ -97,6 +106,7 @@ export default handleActions(
     LOGIN: startLogin,
     LOGIN_SET_CURRENT_USER: setCurrentUser,
     UPDATE_CURRENT_USER: setCurrentUser,
+    REPLACE_USER_COLLECTION: replaceUserCollection,
     DELETE_CURRENT_USER_FAVORITE: deleteFavorite,
     LOGIN_SET_AUTH_TOKEN: setAuthToken,
     LOGIN_COMPLETE: endLogin,

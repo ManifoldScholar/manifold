@@ -7,8 +7,9 @@ import notificationMiddleware from "./middleware/notificationMiddleware";
 import apiErrorMiddleware from "./middleware/apiErrorMiddleware";
 import websocketMiddleware from "./middleware/websocketMiddleware";
 import pluginMiddleware from "./middleware/pluginMiddleware";
-import onPersistentUIChange from "./subscriptions/onPersistentUIChange";
-import onUserIsCurrentUserUpdate from "./subscriptions/onUserIsCurrentUserUpdate";
+import updatePersistentUi from "./subscriptions/updatePersistentUi";
+import updateCurrentUser from "./subscriptions/updateCurrentUser";
+
 import promiseMiddleware from "redux-promise";
 import reducers from "./reducers";
 import pluginInitializer from "services/plugin/initializer";
@@ -46,8 +47,8 @@ export default function createStore(data) {
   /* eslint-enable no-unused-vars */
 
   const store = finalCreateStore(reducers, data);
-  store.subscribe(onPersistentUIChange(store));
-  store.subscribe(onUserIsCurrentUserUpdate(store));
+  store.subscribe(updatePersistentUi(store));
+  store.subscribe(updateCurrentUser(store));
 
   pluginInitializer.initialize(store);
 

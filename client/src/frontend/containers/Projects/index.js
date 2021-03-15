@@ -72,15 +72,6 @@ export class ProjectsContainer extends Component {
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.authentication.currentUser !==
-      prevProps.authentication.currentUser
-    ) {
-      this.props.fetchData(this.props);
-    }
-  }
-
   get hasVisibleProjects() {
     return get(this.props.settings, "attributes.calculated.hasVisibleProjects");
   }

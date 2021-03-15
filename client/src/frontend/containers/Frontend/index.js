@@ -69,10 +69,26 @@ export class FrontendContainer extends Component {
 
   componentDidUpdate(prevProps) {
     // The store will be cleared if the user has changed. If this happens, reload content.
+    let shouldFetchData = false;
     if (
-      this.props.authentication.currentUser !==
+      !this.props.authentication.currentUser &&
       prevProps.authentication.currentUser
-    ) {
+    )
+      shouldFetchData = true;
+    if (
+      this.props.authentication.currentUser &&
+      !prevProps.authentication.currentUser
+    )
+      shouldFetchData = true;
+    if (
+      this.props.authentication.currentUser &&
+      prevProps.authentication.currentUser &&
+      this.props.authentication.currentUser.id !==
+        prevProps.authentication.currentUser.id
+    )
+      shouldFetchData = true;
+
+    if (shouldFetchData) {
       this.props.fetchData(this.props);
     }
   }

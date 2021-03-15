@@ -3,7 +3,7 @@ import { entityStoreActions } from "actions";
 
 const { request } = entityStoreActions;
 
-export default function onPersistentUIChange(store) {
+export default function updatePersistentUi(store) {
   let currentState = store.getState();
   let lastState;
   return () => {
