@@ -54,15 +54,6 @@ export class HomeContainer extends Component {
     this.commonActions = commonActions(props.dispatch);
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.authentication.currentUser !==
-      prevProps.authentication.currentUser
-    ) {
-      this.props.fetchData(this.props);
-    }
-  }
-
   get showProjects() {
     return this.constructor.showProjects(this.props.settings);
   }
@@ -92,9 +83,7 @@ export class HomeContainer extends Component {
           <Collections authentication={this.props.authentication} />
         )}
 
-        {this.hasVisibleProjects && (
-          <Layout.ButtonNavigation grayBg={false} />
-        )}
+        {this.hasVisibleProjects && <Layout.ButtonNavigation grayBg={false} />}
       </div>
     );
   }
