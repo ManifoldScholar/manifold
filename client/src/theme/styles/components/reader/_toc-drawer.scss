@@ -14,7 +14,7 @@
     @include respond($break95) {
       padding-left: 84px + $nested;
     }
-}
+  }
 
   .drawer {
     width: toc-drawer(width);
@@ -50,8 +50,8 @@
       display: flex;
       align-items: center;
       width: 100%;
-      margin-top: 15px;
       padding: 16.362px toc-drawer(base-inline-end-padding) 16.362px toc-drawer(base-inline-start-padding);
+      margin-top: 15px;
       color: $neutralTextDark;
       text-decoration: none;
       transition: background-color $duration $timing;
