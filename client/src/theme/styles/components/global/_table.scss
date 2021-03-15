@@ -59,7 +59,7 @@
   &__ordered-list {
     @include listUnstyled;
 
-      @include respond($layoutBreakpoint) {
+    @include respond($layoutBreakpoint) {
       display: none;
     }
   }
