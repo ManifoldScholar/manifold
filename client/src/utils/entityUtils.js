@@ -23,7 +23,7 @@ function hydrateEntity({ id, type }, entities, hydrationMap = {}) {
     // setWith is like mkdir deep for objects. The "with" part ensures that each segment
     // of the path is an object, rather than an array.
     setWith(hydrationMap, entityPath, entity, Object);
-    // Disbaling the linter because it's going to complain about hydrateRelationships
+    // Disabling the linter because it's going to complain about hydrateRelationships
     // being called before it's defined. Nothing we can do about that, since this is a
     // recursive scenario, and the two functions call each other.
     entity.relationships = hydrateRelationships(entity, entities, hydrationMap); // eslint-disable-line

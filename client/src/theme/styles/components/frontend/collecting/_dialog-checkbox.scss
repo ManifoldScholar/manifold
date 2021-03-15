@@ -14,14 +14,14 @@ $_icon-size: 28px;
 
   &__input {
     position: absolute;
-    opacity: 0;
     z-index: -1;
+    opacity: 0;
   }
 
   &__label {
     display: grid;
-    align-items: center;
     grid-template-columns: auto 1fr auto;
+    align-items: center;
   }
 
   &__icon-block {
