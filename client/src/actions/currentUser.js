@@ -1,15 +1,5 @@
 import { createAction } from "redux-actions";
 
-// Target is a reference to a model with the form of: { id, type }
-export const follow = createAction("FOLLOW", target => target);
-
-// FavoritableId = the ID of the object being unfavorited
-// FavoriteId = the ID of the favorite record being deleted
-export const unfollow = createAction(
-  "UNFOLLOW",
-  (favoritableId, favoriteId) => ({ favoritableId, favoriteId })
-);
-
 // The login hash can be an auth token (string) or a an { email, password } object.
 export const login = createAction("LOGIN", loginHash => loginHash);
 
@@ -46,6 +36,12 @@ export const updateCurrentUser = createAction(
   user => user
 );
 
+// A user model or promise returned from the API
+export const replaceUserCollection = createAction(
+  "REPLACE_USER_COLLECTION",
+  collection => collection
+);
+
 // The ID of the object that is no longer favorited
 export const deleteCurrentUserFavorite = createAction(
   "DELETE_CURRENT_USER_FAVORITE",
@@ -63,8 +59,6 @@ export const setVisitorToken = createAction(
 );
 
 export default {
-  follow,
-  unfollow,
   login,
   loginStart,
   loginComplete,
@@ -75,5 +69,6 @@ export default {
   setVisitToken,
   setVisitorToken,
   updateCurrentUser,
-  deleteCurrentUserFavorite
+  deleteCurrentUserFavorite,
+  replaceUserCollection
 };
