@@ -64,9 +64,9 @@
   max-width: 500px;
 
   .backend & {
+    font-weight: $regular;
     color: $neutralOffBlack;
     background-color: $spErrorExtraLight;
-    font-weight: $regular;
   }
 
   .dialog__header {
