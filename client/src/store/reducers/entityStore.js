@@ -1,137 +1,15 @@
 import get from "lodash/get";
-import has from "lodash/has";
 import pickBy from "lodash/pickBy";
 import isArray from "lodash/isArray";
 import forEach from "lodash/forEach";
 import findIndex from "lodash/findIndex";
-import intersection from "lodash/intersection";
-import unionWith from "lodash/unionWith";
-import isEqual from "lodash/isEqual";
+import update from "immutability-helper";
 
 export const initialState = {
   responses: {},
   entities: {},
   slugMap: {}
 };
-
-function normalizeCollection(payload) {
-  const entities = {};
-  const slugMap = {};
-  const results = [];
-  payload.data.forEach(entity => {
-    if (!entities.hasOwnProperty(entity.type)) {
-      entities[entity.type] = {};
-    }
-    if (!slugMap.hasOwnProperty(entity.type)) {
-      slugMap[entity.type] = {};
-    }
-    entities[entity.type][entity.id] = entity;
-    if (entity.attributes && entity.attributes.slug) {
-      slugMap[entity.type][entity.attributes.slug] = entity.id;
-    }
-    results.push({ id: entity.id, type: entity.type });
-  });
-  return { entities, results, slugMap };
-}
-
-function normalizeEntity(payload) {
-  const entity = payload.data;
-  const entities = {
-    [entity.type]: {}
-  };
-  const slugMap = {
-    [entity.type]: {}
-  };
-  const results = { id: entity.id, type: entity.type };
-  entities[entity.type][entity.id] = entity;
-  if (entity.attributes && entity.attributes.slug) {
-    slugMap[entity.type][entity.attributes.slug] = entity.id;
-  }
-  return { entities, results, slugMap };
-}
-
-function normalizePayload(payload) {
-  let out;
-  if (payload === null) return out;
-
-  if (Array.isArray(payload.data)) {
-    out = normalizeCollection(payload);
-  } else {
-    out = normalizeEntity(payload);
-  }
-  if (!payload.included) return out;
-  payload.included.forEach(entity => {
-    if (entity) {
-      if (!out.entities.hasOwnProperty(entity.type)) {
-        out.entities[entity.type] = {};
-      }
-      out.entities[entity.type][entity.id] = entity;
-    }
-  });
-  return out;
-}
-
-function mergeSlugMap(stateSlugMap, payloadSlugMap) {
-  if (!payloadSlugMap) return stateSlugMap;
-  const mergedSlugMap = {};
-  Object.keys(payloadSlugMap).forEach(type => {
-    mergedSlugMap[type] = {
-      ...stateSlugMap[type],
-      ...payloadSlugMap[type]
-    };
-  });
-  return { ...stateSlugMap, ...mergedSlugMap };
-}
-
-function mergeEntities(
-  stateEntities,
-  payloadEntities,
-  overwritePartials = false
-) {
-  const mergedEntities = {};
-  Object.keys(payloadEntities).forEach(type => {
-    const adjusted = pickBy(payloadEntities[type], (e, uuid) => {
-      if (overwritePartials) return true;
-      const stateEntity = get(stateEntities, `${type}.${uuid}`);
-      if (!stateEntity) return true; // pick it if there's no existing entity
-      if (get(e, "meta.partial") === false) return true; // pick it if new entity is not partial
-      return get(stateEntity, "meta.partial") === true; // pick it if the state entity is partial
-    });
-    mergedEntities[type] = { ...stateEntities[type], ...adjusted };
-  });
-  return { ...stateEntities, ...mergedEntities };
-}
-
-function maybeMergeCollections(appendTo, stateResponses, payloadResults) {
-  if (!appendTo || !has(stateResponses, appendTo)) return payloadResults;
-  return unionWith(
-    stateResponses[appendTo].collection,
-    payloadResults,
-    isEqual
-  );
-}
-
-function deriveType(entityOrCollection) {
-  if (has(entityOrCollection, "type")) return entityOrCollection.type;
-  if (
-    isArray(entityOrCollection) &&
-    entityOrCollection.length > 0 &&
-    has(entityOrCollection[0], "type")
-  ) {
-    return entityOrCollection[0].type;
-  }
-}
-
-function buildMeta(object, baseMeta = {}) {
-  const meta = { ...get(object, "meta"), ...baseMeta, relationships: {} };
-  const relationships = get(object, "data.relationships") || {};
-  Object.keys(relationships).forEach(relationship => {
-    if (!relationships[relationship].meta) return null;
-    meta.relationships[relationship] = relationships[relationship].meta;
-  });
-
-  return meta;
-}
 
 function errorResponse(state, action) {
   const meta = action.meta;
@@ -148,65 +26,220 @@ function errorResponse(state, action) {
   return { ...state, responses };
 }
 
-function touchResponses(responses, entities) {
-  let touched = [];
-  const newResponses = {};
-  forEach(entities, (groupedEntities, typeIgnored) => {
-    touched = touched.concat(Object.keys(groupedEntities));
+function ensureArray(thing) {
+  if (Array.isArray(thing)) return thing;
+  return [thing];
+}
+
+function isCollection(results) {
+  return Array.isArray(results);
+}
+
+function isEntity(results) {
+  return !isCollection(results);
+}
+
+function buildMeta(meta, modified = false) {
+  const base = meta || {};
+  return update(base, { modified: { $set: modified } });
+}
+
+function entitiesToTypedHash(entities, addTo = {}) {
+  if (!entities || Object.keys(entities).length === 0) return addTo;
+  /* eslint-disable no-param-reassign */
+  return ensureArray(entities).reduce((typedHash, entity) => {
+    const { type, id } = entity;
+    if (!typedHash[type]) typedHash[type] = {};
+    typedHash[type][id] = entity;
+    return typedHash;
+  }, addTo);
+  /* eslint-enable no-param-reassign */
+}
+
+function typedHashToSlugMap(entities) {
+  if (!entities || Object.keys(entities).length === 0) return {};
+  /* eslint-disable no-param-reassign */
+  return Object.keys(entities).reduce((slugMap, type) => {
+    if (!slugMap[type]) slugMap[type] = {};
+    slugMap[type] = Object.values(entities[type]).reduce(
+      (entityHash, entity) => {
+        if (
+          !entity ||
+          !entity.attributes ||
+          !entity.attributes.slug ||
+          !entity.id
+        )
+          return entityHash;
+        entityHash[entity.attributes.slug] = entity.id;
+        return entityHash;
+      },
+      {}
+    );
+    return slugMap;
+  }, {});
+  /* eslint-enable no-param-reassign */
+}
+
+function extractResults(data) {
+  if (!data) return null;
+  if (!Array.isArray(data) && Object.keys(data).length === 0) return null;
+  if (Array.isArray(data)) return data.map(({ id, type }) => ({ id, type }));
+  return { id: data.id, type: data.type };
+}
+
+function normalizeResponseAction(action) {
+  const { payload: actionPayload } = action;
+  const payload = actionPayload || {};
+  const {
+    atomicResults = [],
+    included = {},
+    data = {},
+    meta = {},
+    request = {},
+    links = {},
+    force = false,
+    noTouch = false
+  } = payload;
+  const options = { force, noTouch };
+  const typedIncluded = entitiesToTypedHash(included);
+
+  const adjustedAtomicResults = atomicResults.map(r => r.data);
+
+  const withAtomicUpdates = entitiesToTypedHash(
+    adjustedAtomicResults,
+    typedIncluded
+  );
+  const entities = entitiesToTypedHash(data, withAtomicUpdates);
+  const results = extractResults(data);
+  const slugMap = typedHashToSlugMap(entities);
+  const newPayload = {
+    entities,
+    results,
+    slugMap,
+    request,
+    meta,
+    links,
+    options
+  };
+  const updatedPayload = update(action, {
+    payload: {
+      $set: newPayload
+    },
+    options: { $set: options }
   });
-  forEach(responses, (response, meta) => {
-    let responseIds = [];
-    if (response.entity) responseIds.push(response.entity.id);
-    if (response.collection && response.collection.length > 0) {
-      const collectionIds = response.collection.map(e => e.id);
-      responseIds = responseIds.concat(collectionIds);
-    }
-    if (intersection(touched, responseIds).length > 0) {
-      newResponses[meta] = { ...response };
+  return updatedPayload;
+}
+
+function typedEntitiesToIdArray(entities) {
+  return Object.keys(entities).reduce((ids, type) => {
+    return ids.concat(Object.keys(entities[type]));
+  }, []);
+}
+
+function deriveType(entityOrCollection) {
+  if (isEntity(entityOrCollection)) return entityOrCollection.type || null;
+  if (isCollection(entityOrCollection) && entityOrCollection.length > 0)
+    return entityOrCollection[0].type || null;
+  return null;
+}
+
+function responseFromPayload(payload, previousResponse) {
+  const { results, links, meta, request } = payload;
+  const includedEntityIds = typedEntitiesToIdArray(payload.entities);
+  return {
+    entity: isEntity(results) ? results : null,
+    collection: isCollection(results) ? results : null,
+    meta: buildMeta(meta, false),
+    links,
+    includedEntityIds,
+    type: deriveType(results),
+    request,
+    loaded: true,
+    appends: get(previousResponse, "appends", false)
+  };
+}
+
+function transformStateTouchResponses(state, payload) {
+  const { entities, options } = payload;
+  if (options.noTouch) return state;
+  const entityIds = typedEntitiesToIdArray(entities);
+  let newState = state;
+  forEach(state.responses, (response, meta) => {
+    if (!response.includedEntityIds) return;
+    if (
+      response.includedEntityIds.some(includedEntityId =>
+        entityIds.includes(includedEntityId)
+      )
+    ) {
+      newState = update(newState, {
+        responses: { [meta]: { $set: { ...response } } }
+      });
     }
   });
-  return { ...responses, ...newResponses };
+  return newState;
+}
+
+function transformStateEntities(state, payload) {
+  const { entities } = state;
+  const { entities: newEntities, options } = payload;
+  const forceOverwrite = options.force;
+
+  const mergedEntities = {};
+  Object.keys(newEntities).forEach(type => {
+    const adjusted = pickBy(newEntities[type], (e, uuid) => {
+      if (forceOverwrite) return true;
+      const stateEntity = get(entities, `${type}.${uuid}`);
+      if (!stateEntity) return true; // pick it if there's no existing entity
+      if (get(e, "meta.partial") === false) return true; // pick it if new entity is not partial
+      return get(stateEntity, "meta.partial") === true; // pick it if the state entity is partial
+    });
+    mergedEntities[type] = { ...entities[type], ...adjusted };
+  });
+  return update(state, {
+    entities: { $set: { ...entities, ...mergedEntities } }
+  });
+}
+
+function transformStateSlugMap(state, payload) {
+  const { slugMap } = state;
+  const { slugMap: newSlugMap } = payload;
+  if (!newSlugMap) return slugMap;
+  const mergedSlugMap = {};
+  Object.keys(newSlugMap).forEach(type => {
+    mergedSlugMap[type] = {
+      ...slugMap[type],
+      ...newSlugMap[type]
+    };
+  });
+  return update(state, {
+    slugMap: { $set: { ...slugMap, ...mergedSlugMap } }
+  });
+}
+
+function transformStateAddResponse(state, meta, payload) {
+  if (!payload.results) return state;
+  const response = responseFromPayload(payload, state.responses[meta]);
+  return update(state, { responses: { [meta]: { $set: response } } });
 }
 
 function successResponse(state, action) {
-  const payload = normalizePayload(action.payload);
-  const isNull = !payload;
-  const appends = !isNull && action.payload.appends;
-  const meta = action.meta;
-  const shouldTouchResponses = !isNull && !action.payload.noTouch;
-  const overwritePartials = !isNull && action.payload.force;
-  const isCollection = !isNull && Array.isArray(payload.results);
-  const isEntity = !isNull && !isCollection;
-  const baseResponses = shouldTouchResponses
-    ? touchResponses(state.responses, payload.entities)
-    : state.responses;
-  const responses = {
-    ...baseResponses,
-    [meta]: {
-      entity: isEntity ? payload.results : null,
-      collection: isCollection
-        ? maybeMergeCollections(appends, baseResponses, payload.results)
-        : null,
-      meta: buildMeta(action.payload, { modified: false }),
-      links: get(action.payload, "links"),
-      type: !isNull ? deriveType(payload.results) : null,
-      request: get(action, "payload.request"),
-      loaded: true,
-      appends: get(baseResponses[meta], "appends", false)
-    }
-  };
+  const { payload, meta } = normalizeResponseAction(action);
 
-  if (isNull) {
-    return { ...state, responses };
-  }
-  const entities = responses[meta].appends
-    ? Object.assign(
-        state.entities,
-        mergeEntities(state.entities, payload.entities, overwritePartials)
-      )
-    : mergeEntities(state.entities, payload.entities, overwritePartials);
-  const slugMap = mergeSlugMap(state.slugMap, payload.slugMap);
-  return { ...state, responses, entities, slugMap };
+  let newState = state;
+
+  // Add the payload response to the state.
+  newState = transformStateAddResponse(newState, meta, payload);
+
+  // Touch all responses that reference response entities.
+  newState = transformStateTouchResponses(newState, payload);
+
+  // Merge new entities into the state.
+  newState = transformStateEntities(newState, payload);
+
+  // Merge new slugMap entries into the state.
+  newState = transformStateSlugMap(newState, payload);
+
+  return newState;
 }
 
 function handleResponse(state, action) {
@@ -266,7 +299,7 @@ function handleRemove(state, action) {
     if (index === -1) return true;
     const newCollection = response.collection.slice();
     newCollection.splice(index, 1);
-    const newMeta = buildMeta(response, { modified: true });
+    const newMeta = buildMeta(response, true);
     const newResponse = {
       ...response,
       collection: newCollection,
