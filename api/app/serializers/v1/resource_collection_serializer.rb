@@ -16,7 +16,7 @@ module V1
     typed_attribute :slug, Types::String.meta(read_only: true)
     typed_attribute :pending_slug, Types::String
     typed_attribute :thumbnail_styles, Types::Serializer::Attachment.meta(read_only: true)
-
+    typed_attribute :project_slug, Types::String.meta(read_only: true)
     typed_attribute :resource_tags, Types::Array.of(Types::String) do |object, _params|
       object.resource_tags.sort
     end

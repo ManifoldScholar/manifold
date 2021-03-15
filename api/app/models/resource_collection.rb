@@ -35,7 +35,7 @@ class ResourceCollection < ApplicationRecord
           as: :subject,
           dependent: :destroy,
           inverse_of: :subject
-
+  delegate :slug, to: :project, prefix: true
   has_formatted_attributes :title,
                            include_wrap: false
   has_formatted_attribute :description
