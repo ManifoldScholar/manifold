@@ -60,7 +60,7 @@ export default function withReadingGroups(WrappedComponent) {
         const currentGroup = this.adjustedReadingGroups.find(
           group => group.id === currentReadingGroup
         );
-        if (!currentGroup)
+        if (!currentGroup && currentReadingGroup !== this.defaultReadingGroup)
           dispatch(
             uiReadingGroupActions.setReadingGroup(this.defaultReadingGroup)
           );
