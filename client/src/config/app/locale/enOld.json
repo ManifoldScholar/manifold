@@ -1,0 +1,37 @@
+{
+  "key": "en",
+  "translation": {
+    "english-site-name": "English",
+    "espanol-site-name": "Español",
+    "dutch-site-name": "Dutch",
+    "localize-content": "Localize site content",
+    "error-title": "Error",
+    "error-text": "There has been an error.",
+    "page-not-found-title": "Page not found",
+    "page-not-found-text": "The page you're looking for was not found.",
+    "exit-editor-mode": "Exit Editor Mode",
+    "exit-author-mode": "Exit Author Mode",
+    "exit-admin-mode": "Exit Admin Mode",
+    "enter-admin-mode": "Enter Admin Mode",
+    "enter-editor-mode": "Enter Editor Mode",
+    "uh-oh-library-empty": "Uh-oh. This Manifold library is empty.",
+    "library-empty": "This Manifold library is empty.",
+    "check-back-soon": "Please check back soon!",
+    "add-a-new-project": "Add a New Project",
+    "but-its-easy": "But it’s easy to create and publish projects with Manifold. If you have backend access, ",
+    "and-select": " and select ",
+    "for-more-help": ". For more help, you can learn about creating and publishing Manifold Projects ",
+    "here": "here",
+    "head-to-the-backend": "head to the backend",
+    "contact-form": {
+      "contact-us": "Contact us",
+      "email": "Email",
+      "inquiry": "Inquiry",
+      "send": "Send",
+      "sending": "Sending…",
+      "reset": "Reset form",
+      "success": "Thank you. We’ve received your message.",
+      "error": "We seem to have run into a problem."
+    }
+  }
+}
