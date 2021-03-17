@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { entityStoreActions } from "actions";
 import withReadingGroups from "hoc/with-reading-groups";
 import withCurrentUser from "hoc/with-current-user";
+import withScreenReaderStatus from "hoc/with-screen-reader-status";
 import Dialog from "frontend/components/collecting/Dialog";
 import Text from "./Text";
 import Icons from "./Icons";
@@ -13,10 +14,12 @@ import { inCollections } from "../helpers";
 
 const { request } = entityStoreActions;
 
-function determineView(collected, hovered, confirmed) {
+function determineView(collected, hovered, confirmed, isCollecting) {
   if (collected) {
     if (hovered && !confirmed) return "remove-active";
     if (hovered && confirmed) return "remove-confirm-active";
+    return "remove";
+  } else if (isCollecting) {
     return "remove";
   } else {
     if (hovered) return "add-active";
@@ -30,16 +33,6 @@ function normalizeTitle(collectable) {
   return "";
 }
 
-/*
- * TODO:
- * [X] get current user (& hide if not authenticated)
- * [X] get My Collection (for Dialog)
- * [] middleware updates to collectingAPI
- * [X] finish wiring doCollect() and doRemove() (factor in which group)
- * [X] finish wiring checkbox state for reading groups (needs middleware update)
- * [] optimize API fetching (expensive in projects, reader views)
- */
-
 function CollectingToggle({
   collectable,
   inline = true,
@@ -47,29 +40,34 @@ function CollectingToggle({
   onDialogOpen,
   onDialogClose,
   readingGroups: myReadingGroups,
-  currentUser
+  currentUser,
+  setScreenReaderStatus
 }) {
-  if (!currentUser) return null;
-
   const [hovered, setHovered] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
+  const [isCollecting, setIsCollecting] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
 
   useEffect(() => {
     if (!dialogVisible || (!onDialogOpen && !onDialogClose)) return;
     onDialogOpen();
-  }, [dialogVisible]);
+  }, [dialogVisible]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const dispatch = useDispatch();
 
   const collected = inCollections(collectable, currentUser, ...myReadingGroups);
 
-  const view = determineView(collected, hovered, confirmed, dialogVisible);
+  useEffect(() => {
+    setIsCollecting(false);
+  }, [collected]);
+
+  const view = determineView(collected, hovered, confirmed, isCollecting);
   const hasReadingGroups = myReadingGroups?.length > 0;
   const collectableTitle = normalizeTitle(collectable);
   const useOutlinedStarIcon = outlined && view === "add";
 
-  const screenReaderText = () => {
+  const screenReaderButtonText = () => {
+    if (hasReadingGroups) return "Toggle collecting dialog";
     switch (view) {
       case "add":
       case "add-active":
@@ -82,10 +80,21 @@ function CollectingToggle({
     }
   };
 
+  const screenReaderButtonProps = () => {
+    if (!hasReadingGroups) return {};
+    return {
+      "aria-haspopup": true,
+      "aria-expanded": dialogVisible
+    };
+  };
+
   function doCollect(collection = currentUser) {
     const call = collectingAPI.collect([collectable], collection);
     const collectRequest = request(call, requests.feCollectCollectable);
     dispatch(collectRequest);
+    setHovered(false);
+    setIsCollecting(true);
+    setScreenReaderStatus(`You collected ${collectableTitle}`);
   }
 
   function doRemove(collection = currentUser) {
@@ -93,6 +102,8 @@ function CollectingToggle({
     const collectRequest = request(call, requests.feCollectCollectable);
     dispatch(collectRequest);
     setConfirmed(false);
+    setHovered(false);
+    setScreenReaderStatus(`You uncollected ${collectableTitle}`);
   }
 
   function onSRClick(event) {
@@ -123,6 +134,7 @@ function CollectingToggle({
 
   function onLeave() {
     setHovered(false);
+    setConfirmed(false);
   }
 
   function handleDialogChange(isCollected, collection) {
@@ -135,13 +147,16 @@ function CollectingToggle({
     if (onDialogClose) onDialogClose();
   }
 
+  if (!currentUser) return null;
+
   return (
     <>
       <button
         className="sr-collecting-toggle screen-reader-text"
         onClick={onSRClick}
+        {...screenReaderButtonProps()}
       >
-        {screenReaderText()}
+        {screenReaderButtonText()}
       </button>
       <button
         onClick={onClick}
@@ -186,10 +201,15 @@ CollectingToggle.displayName = "Collecting.Toggle";
 
 CollectingToggle.propTypes = {
   collectable: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
+  readingGroups: PropTypes.array,
   onDialogOpen: PropTypes.func,
   onDialogClose: PropTypes.func,
+  setScreenReaderStatus: PropTypes.func,
   inline: PropTypes.bool,
   outlined: PropTypes.bool
 };
 
-export default withReadingGroups(withCurrentUser(CollectingToggle));
+export default withReadingGroups(
+  withCurrentUser(withScreenReaderStatus(CollectingToggle))
+);
