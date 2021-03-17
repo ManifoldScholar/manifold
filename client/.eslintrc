@@ -125,6 +125,10 @@
     // Rules we should eventually enable.
     "react/require-default-props": 0,
 
+    // Hooks rules
+    "react-hooks/rules-of-hooks": 2,
+    "react-hooks/exhaustive-deps": 1,
+
     // Rules for WCAG we naturally follow
     "jsx-a11y/html-has-lang": 2,
     "jsx-a11y/iframe-has-title": 2,
@@ -181,7 +185,7 @@
     "jsx-a11y/scope": 0,
   },
   "plugins": [
-    "react", "import", "prettier", "jsx-a11y"
+    "react", "react-hooks", "import", "prettier", "jsx-a11y"
   ],
   "settings": {
     "import/parser": "babel-eslint",
