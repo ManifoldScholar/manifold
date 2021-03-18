@@ -50,7 +50,7 @@ function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
                     iconClass="checkbox__icon"
                   />
                 </div>
-                Select all
+                Everything
               </label>
             </div>
             <ul className="search-query__filter-group-list">

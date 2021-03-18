@@ -182,6 +182,18 @@ const routes = {
           },
           routes: [
             {
+              name: "frontendReadingGroupAnnotations",
+              exact: true,
+              component: "ReadingGroupAnnotations",
+              path: "/my/groups/:id/annotations",
+              helper: (rg, params = {}) => {
+                const query = queryString.stringify(params);
+                const base = `/my/groups/${rg}/annotations`;
+                if (!query) return base;
+                return `${base}/?${query}`;
+              }
+            },
+            {
               name: "frontendReadingGroupMembers",
               exact: true,
               component: "ReadingGroupMembers",
@@ -190,13 +202,20 @@ const routes = {
             },
             {
               exact: false,
-              component: "ReadingGroupDetail",
+              component: "ReadingGroupHomepage",
               path: "/my/groups/:id",
               routes: [
                 {
-                  name: "frontendReadingGroupEdit",
+                  name: "frontendReadingGroupHomepageStatic",
                   exact: true,
-                  component: "ReadingGroupEdit",
+                  component: "ReadingGroupHomepageStatic",
+                  path: "/my/groups/:id",
+                  helper: rg => `/my/groups/${rg}`
+                },
+                {
+                  name: "frontendReadingGroupHomepageEdit",
+                  exact: true,
+                  component: "ReadingGroupHomepageEdit",
                   path: "/my/groups/:id/edit",
                   helper: rg => `/my/groups/${rg}/edit`
                 }

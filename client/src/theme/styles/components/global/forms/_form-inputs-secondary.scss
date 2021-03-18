@@ -141,19 +141,20 @@
     }
 
     textarea {
-      @include templateCopy;
       width: 100%;
       padding: 1.2em;
       font-size: 16px;
-      color: $neutralTextExtraLight;
+      font-family: var(--textarea-font-family);
+      color: var(--default-color);
       resize: vertical;
-      background-color: transparent;
-      border: 1px solid $neutralUIDullLight;
+      background-color: var(--textarea-bg-color);
+      border: 1px solid var(--textarea-border-color);
+      border-radius: $panelRoundedRadius;
       outline: none;
       transition: border-color $duration $timing;
 
       @include respond($break70) {
-        padding: 1.579em;
+        padding: 1.25em 1.389em;
         font-size: 18px;
       }
 
@@ -162,7 +163,7 @@
       }
 
       &:focus-visible {
-        border-color: $accentPrimary;
+        border-color: var(--default-highlight-color);
       }
     }
 
@@ -210,7 +211,7 @@
 
       .toggle-indicator {
         position: absolute;
-        top: 2px;
+        top: -3px;
         right: 0;
       }
 
@@ -372,7 +373,8 @@
     justify-content: center;
     max-width: 350px;
     min-height: 200px;
-    border: 1px solid $neutralUIDullLight;
+    border: 1px solid var(--textarea-border-color);
+    border-radius: $panelRoundedRadius;
     transition: border-color 0.2s;
 
     .primary {

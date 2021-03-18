@@ -2,7 +2,7 @@
   $layoutBreakpoint: $break65;
 
   &__count-container {
-    @include panelRoundedLight;
+    @include panelRounded;
     padding: 15px 22px;
     margin-bottom: 8px;
   }
