@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import Utility from "global/components/utility";
 import Annotation from "global/components/Annotation";
-
-import Authorize from "hoc/authorize";
 import {
   useDispatchMyAnnotations,
   useSelectMyAnnotations,
@@ -55,52 +52,50 @@ function MyAnnotationsContainer() {
   const isFiltered = "text" in filterState;
 
   return (
-    <Authorize kind="any" failureRedirect={lh.link("frontendLogin")}>
-      <>
-        <HeadContent title="My Notes + Comments" appendTitle />
-        <section className="bg-white">
-          <div className="container">
-            <header className="entity-section-wrapper__heading entity-section-wrapper__heading--wide section-heading">
-              <div className="main">
-                <Utility.IconComposer size={48} icon="NotesUnique" />
-                <div className="body">
-                  <h1 className="title">My Notes + Comments</h1>
-                </div>
+    <>
+      <HeadContent title="My Notes + Comments" appendTitle />
+      <section className="bg-white">
+        <div className="container">
+          <header className="entity-section-wrapper__heading entity-section-wrapper__heading--wide section-heading">
+            <div className="main">
+              <Utility.IconComposer size={48} icon="NotesUnique" />
+              <div className="body">
+                <h1 className="title">My Notes + Comments</h1>
               </div>
-            </header>
-            {hasAnnotatedTexts && (
-              <div style={{ marginTop: 50, marginBottom: 40 }}>
-                <Annotation.NoteFilter
-                  texts={annotatedTexts}
-                  updateAnnotations={handleFilterChange}
-                  initialFilterState={filterState}
-                  pagination={annotationsMeta.pagination}
-                />
-              </div>
-            )}
-            <div
-              className="entity-section-wrapper__body"
-              style={{ marginTop: 40 }}
-            >
-              {hasAnnotations && (
-                <Annotation.List.Default
-                  annotations={annotations}
-                  pagination={annotationsMeta.pagination}
-                  paginationClickHandler={pageChangeHandlerCreator}
-                  showCommentsToggleAsBlock
-                />
-              )}
-              {!hasAnnotations && (
-                <Annotation.List.Placeholder
-                  isGroup={false}
-                  isFiltered={isFiltered}
-                />
-              )}
             </div>
+          </header>
+          {hasAnnotatedTexts && (
+            <div style={{ marginTop: 50, marginBottom: 40 }}>
+              <Annotation.NoteFilter
+                texts={annotatedTexts}
+                updateAnnotations={handleFilterChange}
+                initialFilterState={filterState}
+                pagination={annotationsMeta.pagination}
+              />
+            </div>
+          )}
+          <div
+            className="entity-section-wrapper__body"
+            style={{ marginTop: 40 }}
+          >
+            {hasAnnotations && (
+              <Annotation.List.Default
+                annotations={annotations}
+                pagination={annotationsMeta.pagination}
+                paginationClickHandler={pageChangeHandlerCreator}
+                showCommentsToggleAsBlock
+              />
+            )}
+            {!hasAnnotations && (
+              <Annotation.List.Placeholder
+                isGroup={false}
+                isFiltered={isFiltered}
+              />
+            )}
           </div>
-        </section>
-      </>
-    </Authorize>
+        </div>
+      </section>
+    </>
   );
 }
 

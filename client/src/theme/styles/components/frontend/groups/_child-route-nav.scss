@@ -1,0 +1,64 @@
+$_link-lateral-padding: 12px;
+$_link-min-width: 200px + $_link-lateral-padding * 2;
+$_breakpoint: $break80;
+
+.group-child-nav {
+  @include utilityPrimary;
+  display: grid;
+  grid-template-columns: 1fr;
+  font-size: 15px;
+  color: $neutral80;
+
+  > :first-child {
+    border-top-right-radius: var(--box-border-radius);
+    border-top-left-radius: var(--box-border-radius);
+
+    @include respond($_breakpoint) {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: var(--box-border-radius);
+    }
+  }
+
+  > :last-child {
+      border-bottom-right-radius: var(--box-border-radius);
+      border-bottom-left-radius: var(--box-border-radius);
+
+    @include respond($_breakpoint) {
+      border-top-right-radius: var(--box-border-radius);
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  @include respond($_breakpoint) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px $_link-lateral-padding;
+    text-decoration: none;
+    background-color: var(--box-bg-color);
+    transition: color $duration $timing, background-color $duration $timing;
+
+    &--active {
+      --box-bg-color: #{$neutral10};
+
+      color: var(--default-strong-color);
+    }
+
+    &:focus-visible,
+    &:hover {
+      --box-bg-color: #{$neutral20};
+
+      outline: none;
+      color: var(--default-strong-color);
+    }
+  }
+
+  &__link-text {
+    margin-left: 9px;
+    transform: translateY(-1px);
+  }
+}
