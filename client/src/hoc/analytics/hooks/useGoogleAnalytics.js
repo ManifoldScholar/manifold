@@ -15,26 +15,29 @@ function googleAnalyticsEnabled(settings) {
 }
 
 export default function useGoogleAnalytics(location, settings) {
-  if (!googleAnalyticsEnabled(settings)) return { track: nullTracker };
   const googleAnalyticsId = getGoogleAnalyticsId(settings);
 
   useEffect(() => {
-    ReactGA.initialize(googleAnalyticsId, { debug: false });
-    if (config.environment.isDevelopment) {
-      ch.notice(
-        `Google Analytics initialized for ${googleAnalyticsId}.`,
-        "chart_with_upwards_trend"
-      );
+    if (googleAnalyticsEnabled(settings)) {
+      ReactGA.initialize(googleAnalyticsId, { debug: false });
+      if (config.environment.isDevelopment) {
+        ch.notice(
+          `Google Analytics initialized for ${googleAnalyticsId}.`,
+          "chart_with_upwards_trend"
+        );
+      }
     }
-  }, []);
+  }, [googleAnalyticsId, settings]);
 
   useEffect(() => {
-    const path = location.pathname + location.search;
-    ReactGA.pageview(path);
-    if (config.environment.isDevelopment) {
-      ch.notice(`Tracking GA pageview: ${path}.`, "chart_with_upwards_trend");
+    if (googleAnalyticsEnabled(settings)) {
+      const path = location.pathname + location.search;
+      ReactGA.pageview(path);
+      if (config.environment.isDevelopment) {
+        ch.notice(`Tracking GA pageview: ${path}.`, "chart_with_upwards_trend");
+      }
     }
-  }, [location]);
+  }, [location, settings]);
 
   // For now, we're not tracking Manifold events in Analytics. However, we could
   // easily send them as custom events.
