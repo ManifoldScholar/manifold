@@ -194,9 +194,11 @@ $containerPaddingMin: 15px; // Minimum gutter padding
 
 $readerHeaderHeight: 46px;
 
-// Font Weights
-// These are convenience variables to keep font weight declarations consistent
+// Fonts
 // --------------------------------------------------------
+$fontStackSans: 'sofia-pro', 'trueno', sans-serif;
+$fontStackSerif: 'freight-text-pro', 'aleo', serif;
+
 $light: 200;
 $book: 300;
 $medium: 500;
@@ -304,4 +306,13 @@ $annotation-list: (
 
 @function annotation-list($property) {
   @return map-get($annotation-list, $property);
+}
+
+$dialog: (
+  padding-top: 30px,
+  padding-bottom: 50px
+);
+
+@function dialog($property) {
+  @return map-get($dialog, $property);
 }
