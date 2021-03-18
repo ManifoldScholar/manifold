@@ -6,14 +6,14 @@ import IconComposer from "global/components/utility/IconComposer";
 
 function UserLink({ as = "a", to, title, srTitle, icon, onClick }) {
   const Tag = as === "a" ? NavLink : "button";
-  const uid = srTitle ? useUID() : null;
+  const uid = useUID();
   return (
     <li className="nested-nav__item">
       <Tag
         to={to}
         className="nested-nav__button"
         onClick={onClick}
-        aria-describedby={uid}
+        aria-describedby={srTitle ? uid : null}
       >
         <div className="nested-nav__grid-item">
           <IconComposer

@@ -43,8 +43,6 @@ function CollectingToggle({
   currentUser,
   setScreenReaderStatus
 }) {
-  if (!currentUser) return null;
-
   const [hovered, setHovered] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [isCollecting, setIsCollecting] = useState(false);
@@ -53,7 +51,7 @@ function CollectingToggle({
   useEffect(() => {
     if (!dialogVisible || (!onDialogOpen && !onDialogClose)) return;
     onDialogOpen();
-  }, [dialogVisible]);
+  }, [dialogVisible]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const dispatch = useDispatch();
 
@@ -91,6 +89,8 @@ function CollectingToggle({
   };
 
   function doCollect(collection = currentUser) {
+    console.log(collectable);
+
     const call = collectingAPI.collect([collectable], collection);
     const collectRequest = request(call, requests.feCollectCollectable);
     dispatch(collectRequest);
@@ -148,6 +148,8 @@ function CollectingToggle({
     setDialogVisible(false);
     if (onDialogClose) onDialogClose();
   }
+
+  if (!currentUser) return null;
 
   return (
     <>

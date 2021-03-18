@@ -15,9 +15,7 @@ function getRequestName(entity) {
 }
 
 export default function useSelectMyCollected(entity) {
-  const requestName = getRequestName(entity);
-  // eslint-disable-next-line no-console
-  if (!requestName) return console.error(`"${entity}" is not a valid request.`);
+  const requestName = getRequestName(entity) || "";
 
   const collection = useSelector(state =>
     select(requests[requestName], state.entityStore)

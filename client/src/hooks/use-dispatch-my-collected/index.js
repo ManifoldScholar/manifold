@@ -19,17 +19,16 @@ function getRequestName(entity) {
 
 export default function useDispatchMyCollected(entity, page) {
   const dispatch = useDispatch();
-
   const requestName = getRequestName(entity);
-  // eslint-disable-next-line no-console
-  if (!requestName) return console.error(`"${entity}" is not a valid request.`);
 
   useEffect(() => {
-    const myCollectionFetch = meAPI.myCollected(entity, page);
-    const myCollectionAction = request(
-      myCollectionFetch,
-      requests[requestName]
-    );
-    dispatch(myCollectionAction);
-  }, [dispatch, entity, page]);
+    if (requestName) {
+      const myCollectionFetch = meAPI.myCollected(entity, page);
+      const myCollectionAction = request(
+        myCollectionFetch,
+        requests[requestName]
+      );
+      dispatch(myCollectionAction);
+    }
+  }, [dispatch, entity, page, requestName]);
 }
