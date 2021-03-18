@@ -23,6 +23,12 @@ class Navigation {
             route: "frontendProjectCollections"
           }
         ]
+      },
+      {
+        label: "Reading Groups",
+        route: "frontendReadingGroups",
+        entity: "readingGroup",
+        ability: "read"
       }
     ];
   });
