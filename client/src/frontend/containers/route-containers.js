@@ -25,9 +25,9 @@ import ReadingGroups from "frontend/containers/ReadingGroups";
 import ReadingGroupsList from "frontend/containers/ReadingGroups/List";
 import ReadingGroupsNew from "frontend/containers/ReadingGroups/New";
 import ReadingGroup from "frontend/containers/ReadingGroup";
-import ReadingGroupDetail from "frontend/containers/ReadingGroup/Detail";
 import ReadingGroupMembers from "frontend/containers/ReadingGroup/Members";
-import ReadingGroupEdit from "frontend/containers/ReadingGroup/Edit";
+import ReadingGroupAnnotations from "frontend/containers/ReadingGroup/Annotations";
+import ReadingGroupHomepage from "frontend/containers/ReadingGroup/Homepage";
 import Login from "frontend/containers/Login";
 import SignUp from "frontend/containers/SignUp";
 import MyStarred from "frontend/containers/MyStarred";
@@ -61,9 +61,9 @@ export default {
   ReadingGroupsList,
   ReadingGroupsNew,
   ReadingGroup,
-  ReadingGroupDetail,
-  ReadingGroupEdit,
   ReadingGroupMembers,
+  ReadingGroupAnnotations,
+  ReadingGroupHomepage,
   Login,
   SignUp,
   MyStarred,

@@ -35,6 +35,15 @@ export default {
     };
   },
 
+  collected(id, entity) {
+    return {
+      eagerLoad: true,
+      endpoint: `/api/v1/reading_groups/${id}/relationships/${entity}`,
+      method: "GET",
+      options: {}
+    };
+  },
+
   create(readingGroup) {
     return {
       endpoint: `/api/v1/reading_groups`,

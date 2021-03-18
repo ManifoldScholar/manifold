@@ -1,0 +1,32 @@
+.group-collection-category {
+  @include panelRounded;
+  padding-top: 42px;
+  padding-bottom: 45px;
+
+  & + & {
+    margin-top: 50px;
+  }
+
+  &__header {
+    color: var(--default-strong-color);
+    margin-bottom: 20px;
+  }
+
+  &__heading {
+    @include headingQuaternary;
+    font-weight: $medium;
+  }
+
+  &__description {
+    @include templateHead;
+    margin: 1.438em 0 0;
+    font-size: 16px;
+    line-height: 1.438;
+  }
+
+  &__bottom-margin-offset {
+    @include respond($break75) {
+      margin-bottom: -18px;
+    }
+  }
+}

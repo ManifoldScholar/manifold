@@ -182,25 +182,28 @@ const routes = {
           },
           routes: [
             {
+              exact: true,
+              component: "ReadingGroupHomepage",
+              path: "/my/groups/:id"
+            },
+            {
+              name: "frontendReadingGroupAnnotations",
+              exact: true,
+              component: "ReadingGroupAnnotations",
+              path: "/my/groups/:id/annotations",
+              helper: (rg, params = {}) => {
+                const query = queryString.stringify(params);
+                const base = `/my/groups/${rg}/annotations`;
+                if (!query) return base;
+                return `${base}/?${query}`;
+              }
+            },
+            {
               name: "frontendReadingGroupMembers",
               exact: true,
               component: "ReadingGroupMembers",
               path: "/my/groups/:id/members",
               helper: rg => `/my/groups/${rg}/members`
-            },
-            {
-              exact: false,
-              component: "ReadingGroupDetail",
-              path: "/my/groups/:id",
-              routes: [
-                {
-                  name: "frontendReadingGroupEdit",
-                  exact: true,
-                  component: "ReadingGroupEdit",
-                  path: "/my/groups/:id/edit",
-                  helper: rg => `/my/groups/${rg}/edit`
-                }
-              ]
             }
           ]
         }

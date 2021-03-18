@@ -1,53 +1,69 @@
-import React from "react";
-import Utility from "global/components/utility";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
-import GroupNavButtons from "./GroupNavButtons";
+import { useUID } from "react-uid";
+import { Collapse } from "react-collapse";
+import Title from "./Title";
+import DetailsToggle from "./DetailsToggle";
+import ChildNav from "./ChildNav";
+import ManageGroup from "./ManageGroup";
+import GroupSummaryBox from "./GroupSummaryBox";
 
-export default class Heading extends React.PureComponent {
-  static propTypes = {
-    children: PropTypes.node,
-    subtitle: PropTypes.node,
-    buttons: PropTypes.array
-  };
+function Heading({ readingGroup, canUpdateGroup }) {
+  const uid = useUID();
+  const summaryRef = useRef();
 
-  static defaultProps = {
-    buttons: []
-  };
+  const [showDetails, setShowDetails] = useState(false);
 
-  get hasButtons() {
-    const { buttons } = this.props;
-    return buttons.length > 0;
-  }
+  useEffect(() => {
+    if (showDetails && summaryRef.current) {
+      summaryRef.current.focus();
+    }
+  }, [showDetails]);
 
-  get textContainerClassNames() {
-    return classNames({
-      "group-page-heading__text-container": true,
-      "group-page-heading__text-container--narrow": this.hasButtons
-    });
-  }
+  const groupName = readingGroup.attributes.name;
 
-  render() {
-    const { children, subtitle, buttons } = this.props;
-    return (
-      <div className={"group-page-heading"}>
-        <div className={this.textContainerClassNames}>
-          <Utility.IconComposer
-            icon="annotationGroup24"
-            size={32}
-            iconClass={"group-page-heading__icon"}
-          />
-          <h1 className={"heading-primary group-page-heading__text"}>
-            {children}
-            {subtitle && (
-              <span className={"group-page-heading__subtitle"}>
-                {": Members"}
-              </span>
-            )}
-          </h1>
+  return (
+    <header className="group-page-heading">
+      <div className="group-page-heading__container">
+        <div className="group-page-heading__flex-container">
+          <Title groupName={groupName} />
+          <div className="group-page-heading__button-container">
+            <DetailsToggle
+              onClick={() => setShowDetails(prevState => !prevState)}
+              controls={uid}
+              active={showDetails}
+            />
+          </div>
         </div>
-        {this.hasButtons && <GroupNavButtons links={buttons} />}
       </div>
-    );
-  }
+      <div className="group-page-heading__container group-page-heading__nav-container">
+        <ChildNav readingGroup={readingGroup} />
+      </div>
+      <Collapse isOpened={showDetails}>
+        <div
+          ref={summaryRef}
+          id={uid}
+          tabIndex={-1}
+          aria-label="Group details"
+          className="group-page-heading__container group-page-heading__summary-container"
+        >
+          <GroupSummaryBox readingGroup={readingGroup} />
+        </div>
+      </Collapse>
+      {canUpdateGroup && (
+        <div className="group-page-heading__container">
+          <ManageGroup readingGroup={readingGroup} />
+        </div>
+      )}
+    </header>
+  );
 }
+
+Heading.displayName = "ReadingGroup.Heading";
+
+Heading.propTypes = {
+  readingGroup: PropTypes.object.isRequired,
+  canUpdateGroup: PropTypes.bool
+};
+
+export default Heading;

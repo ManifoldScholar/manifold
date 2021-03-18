@@ -25,6 +25,25 @@ export function collectedIdsForCollection(collection) {
   );
 }
 
+export function collectedIdsForCollectionByType(collection) {
+  if (!collection) return [];
+  const mappings = collection.attributes.categoryMappings;
+  return Object.assign({}, ...Object.values(mappings));
+}
+
+export function getCollectionCategories(collection) {
+  return collection.attributes.categories;
+}
+
+export function getMappingsForCollectionCategory(collection, categoryId) {
+  return collection.attributes.categoryMappings[categoryId];
+}
+
+export function collectionHasUncategorized(collection) {
+  const categories = Object.keys(collection.attributes.categoryMappings);
+  return categories.includes("$uncategorized$");
+}
+
 export function inCollection(collectionOrEntity, collectable) {
   const collection = isCollection(collectionOrEntity)
     ? collectionOrEntity

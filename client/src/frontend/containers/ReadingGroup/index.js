@@ -1,10 +1,18 @@
 import React, { Component } from "react";
-import { childRoutes } from "helpers/router";
-import connectAndFetch from "utils/connectAndFetch";
-import { entityStoreActions } from "actions";
-import { grab } from "utils/entityUtils";
-import { readingGroupsAPI, requests } from "api";
 import get from "lodash/get";
+import { readingGroupsAPI, requests } from "api";
+import { childRoutes } from "helpers/router";
+import lh from "helpers/linkHandler";
+import Authorization from "helpers/authorization";
+import connectAndFetch from "utils/connectAndFetch";
+import { grab } from "utils/entityUtils";
+import { entityStoreActions } from "actions";
+import HeadContent from "global/components/HeadContent";
+import Drawer from "global/containers/drawer";
+import BackLink from "frontend/components/back-link";
+import Heading from "frontend/components/reading-group/Heading";
+import Settings from "frontend/components/reading-group/Settings";
+import SearchDialog from "frontend/components/collecting/SearchDialog";
 
 const { request } = entityStoreActions;
 
@@ -34,33 +42,134 @@ class ReadingGroup extends Component {
     };
   };
 
-  renderRoutes() {
-    const {
-      readingGroup,
-      readingGroupMembers,
-      route,
+  constructor(props) {
+    super(props);
+    this.authorization = new Authorization();
+  }
+
+  get readingGroup() {
+    return this.props.readingGroup;
+  }
+
+  get groupName() {
+    return this.readingGroup.attributes.name;
+  }
+
+  get route() {
+    return this.props.route;
+  }
+
+  get history() {
+    return this.props.history;
+  }
+
+  get location() {
+    return this.props.location;
+  }
+
+  get currentHash() {
+    return this.history.location.hash;
+  }
+
+  get canUpdateGroup() {
+    return this.authorization.authorizeAbility({
+      entity: this.readingGroup,
+      ability: "update"
+    });
+  }
+
+  get showSettingsDrawer() {
+    return this.currentHash === "#settings";
+  }
+
+  get showSearchDialog() {
+    return this.currentHash === "#search";
+  }
+
+  get childProps() {
+    const { settings, dispatch, fetchData, history } = this.props;
+    return {
       settings,
       dispatch,
-      fetchData
-    } = this.props;
+      fetchData,
+      history,
+      readingGroup: this.readingGroup
+    };
+  }
 
-    return childRoutes(route, {
-      childProps: {
-        settings,
-        dispatch,
-        fetchData,
-        readingGroup,
-        readingGroupMembers
-      }
+  get settingsProps() {
+    const { dispatch, history } = this.props;
+    return {
+      dispatch,
+      history,
+      readingGroup: this.readingGroup
+    };
+  }
+
+  get drawerProps() {
+    return {
+      open: this.showSettingsDrawer,
+      context: "frontend",
+      size: "wide",
+      position: "overlay",
+      lockScroll: "always",
+      closeCallback: () => this.handleClose()
+    };
+  }
+
+  handleClose() {
+    const { pathname, search = "" } = this.location;
+    const url = `${pathname}${search}`;
+    this.history.push(url);
+  }
+
+  renderSettingsDrawer() {
+    return (
+      <Drawer.Wrapper {...this.drawerProps}>
+        <Settings {...this.settingsProps} />
+      </Drawer.Wrapper>
+    );
+  }
+
+  renderSearchDialog() {
+    if (!this.showSearchDialog) return null;
+
+    return (
+      <SearchDialog
+        heading={this.groupName}
+        onClose={() => this.handleClose()}
+      />
+    );
+  }
+
+  renderChildRoutes() {
+    return childRoutes(this.route, {
+      childProps: this.childProps
     });
   }
 
   render() {
-    if (!this.props.readingGroup) return null;
+    if (!this.readingGroup) return null;
+
     return (
-      <section>
-        <div className="container">{this.renderRoutes()}</div>
-      </section>
+      <>
+        {this.renderSettingsDrawer()}
+        <HeadContent title={this.groupName} appendTitle />
+        <section>
+          <div className="container">
+            <BackLink.Register
+              link={lh.link("frontendReadingGroups")}
+              backText={"Manage Reading Groups"}
+            />
+            <Heading
+              readingGroup={this.readingGroup}
+              canUpdateGroup={this.canUpdateGroup}
+            />
+            {this.renderChildRoutes()}
+            {this.renderSearchDialog()}
+          </div>
+        </section>
+      </>
     );
   }
 }

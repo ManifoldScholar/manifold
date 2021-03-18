@@ -89,8 +89,6 @@ function CollectingToggle({
   };
 
   function doCollect(collection = currentUser) {
-    console.log(collectable);
-
     const call = collectingAPI.collect([collectable], collection);
     const collectRequest = request(call, requests.feCollectCollectable);
     dispatch(collectRequest);

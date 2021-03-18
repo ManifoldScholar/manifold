@@ -55,7 +55,7 @@ class SearchContainer extends PureComponent {
             />
           </div>
         </div>
-        {this.props.results ? (
+        {results && (
           <div className="search-results-frontend">
             <div className="container">
               <h2 className="screen-reader-text">Search Results</h2>
@@ -67,7 +67,7 @@ class SearchContainer extends PureComponent {
               />
             </div>
           </div>
-        ) : null}
+        )}
       </div>
     );
   }

@@ -305,3 +305,12 @@ $annotation-list: (
 @function annotation-list($property) {
   @return map-get($annotation-list, $property);
 }
+
+$dialog: (
+  padding-top: 30px,
+  padding-bottom: 50px
+);
+
+@function dialog($property) {
+  @return map-get($dialog, $property);
+}
