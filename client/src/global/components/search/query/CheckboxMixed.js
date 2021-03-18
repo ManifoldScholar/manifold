@@ -10,7 +10,7 @@ function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
 
   useEffect(() => {
     onChange(checked);
-  }, [checked]);
+  }, [checked]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function updateChecked(key) {
     setChecked(prevChecked => {

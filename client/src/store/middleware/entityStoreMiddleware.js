@@ -118,7 +118,7 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
         dispatch({ type: "START_LOADING", payload: action.meta });
       }, 0);
 
-      const maybeStopLoading = (response) => {
+      const maybeStopLoading = response => {
         if (!willEagerLoad(action, response)) {
           dispatch({ type: "STOP_LOADING", payload: action.meta });
         }
@@ -128,7 +128,9 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
         dispatch({ type: "STOP_LOADING", payload: action.meta });
       };
 
-      requestPromise.then(maybeStopLoading, maybeStopLoading).catch(stopLoading);
+      requestPromise
+        .then(maybeStopLoading, maybeStopLoading)
+        .catch(stopLoading);
     }
 
     // Pass through the request action with updated state

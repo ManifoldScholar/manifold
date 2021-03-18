@@ -74,7 +74,7 @@ function RangePicker({
   useEffect(() => {
     if (!startDate || !endDate) return;
     onNewRangeSelected(startDate, endDate);
-  }, [startDate, endDate]);
+  }, [startDate, endDate, onNewRangeSelected]);
 
   const handleInvalidStart = () => {
     const newDate = subDays(endDate, 1);

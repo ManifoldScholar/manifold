@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import withSettings from "hoc/with-settings";
 import { withRouter } from "react-router-dom";
@@ -15,10 +15,13 @@ function Analytics({ location, settings, children, dispatch }) {
     dispatch
   );
 
-  const onTrack = trackedEvent => {
-    googleTrack(trackedEvent);
-    manifoldTrack(trackedEvent);
-  };
+  const onTrack = useCallback(
+    trackedEvent => {
+      googleTrack(trackedEvent);
+      manifoldTrack(trackedEvent);
+    },
+    [googleTrack, manifoldTrack]
+  );
 
   // Trigger a global leave event before unloading the client application.
   useEffect(() => {
@@ -29,7 +32,7 @@ function Analytics({ location, settings, children, dispatch }) {
     return () => {
       window.removeEventListener("beforeunload", handler);
     };
-  }, []);
+  }, [onTrack]);
 
   return (
     <ManifoldAnalyticsContext.Provider value={{ track: onTrack }}>

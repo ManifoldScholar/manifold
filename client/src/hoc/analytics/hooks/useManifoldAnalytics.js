@@ -36,17 +36,19 @@ function getTokens() {
 }
 
 export default function useManifoldAnalytics(location, settings, dispatch) {
-  if (!manifoldAnalyticsEnabled(settings))
-    return { track: nullTracker, leave: nullTracker };
-
   useEffect(() => {
-    const { visitToken, visitorToken } = getTokens();
-    dispatch(currentUserActions.setVisitorToken(visitorToken));
-    dispatch(currentUserActions.setVisitToken(visitToken));
-    if (config.environment.isDevelopment) {
-      ch.notice(`Manifold analytics initialized.`, "chart_with_upwards_trend");
+    if (manifoldAnalyticsEnabled(settings)) {
+      const { visitToken, visitorToken } = getTokens();
+      dispatch(currentUserActions.setVisitorToken(visitorToken));
+      dispatch(currentUserActions.setVisitToken(visitToken));
+      if (config.environment.isDevelopment) {
+        ch.notice(
+          `Manifold analytics initialized.`,
+          "chart_with_upwards_trend"
+        );
+      }
     }
-  }, []);
+  }, [dispatch, settings]);
 
   const track = trackedEvent => {
     const { visitToken, visitorToken } = getTokens();
@@ -73,6 +75,9 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
     });
     dispatch(trackRequest);
   };
+
+  if (!manifoldAnalyticsEnabled(settings))
+    return { track: nullTracker, leave: nullTracker };
 
   return { track };
 }
