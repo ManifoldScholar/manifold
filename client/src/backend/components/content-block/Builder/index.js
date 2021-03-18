@@ -50,8 +50,8 @@ export class ProjectContent extends PureComponent {
     };
   }
 
-  onDragStart = draggable => {
-    this.setState({ activeDraggableType: draggable.type });
+  onDragStart = ({ type }) => {
+    this.setState({ activeDraggableType: type });
   };
 
   onDragEnd = draggable => {

@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import MembersTable from "frontend/components/reading-group/Table/Members";
-import Heading from "frontend/components/reading-group/Heading";
 import { readingGroupsAPI, readingGroupMembershipsAPI, requests } from "api";
 import { meta, select } from "utils/entityUtils";
 import queryString from "query-string";
 import connectAndFetch from "utils/connectAndFetch";
-import BackLink from "frontend/components/back-link";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import withConfirmation from "hoc/with-confirmation";
@@ -168,25 +166,15 @@ class ReadingGroupsMembersContainer extends Component {
     if (!readingGroupMembers) return null;
 
     return (
-      <>
-        <BackLink.Register
-          title={readingGroup.attributes.name}
-          link={lh.link("frontendReadingGroupDetail", readingGroup.id)}
-          backText={"Reading Group Details"}
+      <div style={{ marginTop: 60 }}>
+        <MembersTable
+          readingGroup={readingGroup}
+          members={readingGroupMembers}
+          pagination={readingGroupMembersMeta.pagination}
+          onPageClick={this.pageChangeHandlerCreator}
+          onRemoveMember={this.removeMember}
         />
-        <Heading buttons={this.buttons} subtitle="Members">
-          {readingGroup.attributes.name}
-        </Heading>
-        <div style={{ marginTop: 50, marginBottom: 50 }}>
-          <MembersTable
-            readingGroup={readingGroup}
-            members={readingGroupMembers}
-            pagination={readingGroupMembersMeta.pagination}
-            onPageClick={this.pageChangeHandlerCreator}
-            onRemoveMember={this.removeMember}
-          />
-        </div>
-      </>
+      </div>
     );
   }
   /* eslint-enable no-console */

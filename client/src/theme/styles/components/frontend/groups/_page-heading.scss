@@ -1,35 +1,67 @@
-.group-page-heading {
-  color: $neutralTextExtraDark;
+$_text-gap: 20px;
+$_container-gap: 30px;
 
-  @include respond($break80) {
+.group-page-heading {
+  &__container {
+    &:not(:last-child) {
+      padding-bottom: $_container-gap;
+    }
+  }
+
+  &__flex-container {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    margin-top: $_text-gap * -1;
+    margin-left: $_text-gap * -1;
+
+    &--justify-start {
+      justify-content: flex-start;
+    }
+
+    > * {
+      margin-top: $_text-gap;
+      margin-left: $_text-gap;
+    }
   }
 
   &__text-container {
     display: flex;
 
-    &--narrow {
-      @include respond($break80) {
-        max-width: calc(100% - 292px);
-        padding-right: 13px;
-      }
+    @include respond($break80) {
+      transform: translateY(-2px);
+    }
+  }
+
+  &__nav-container {
+    padding-top: 20px;
+  }
+
+  &__summary-container {
+    padding-bottom: $_container-gap;
+
+    &:focus {
+      outline: none;
     }
   }
 
   &__icon {
-    min-width: 32px;
+    width: 32px;
+    height: 32px;
+    transform: translateY(2px);
+
     @include respond($break80) {
-      margin-top: 3px;
+      transform: translateY(4px);
     }
   }
 
   &__text {
-    padding-left: 13px;
+    margin-left: 15px;
     margin-bottom: 0;
-    font-size: 18px;
+    font-size: 23px;
     word-wrap: break-word;
+    color: var(--default-strong-color);
 
     @include respond($break80) {
       font-size: 26px;
@@ -40,16 +72,13 @@
     color: $neutralTextDark;
   }
 
-  &__button-container {
-    padding-top: 18px;
-
-    @include respond($break80) {
-      padding-top: 0;
-    }
-  }
-
   &__nav-button {
     @include buttonTertiary;
+    border: none;
+
+    &--active {
+      background-color: var(--accent-interaction-light);
+    }
 
     &:not(:first-child) {
       margin-left: 10px;
