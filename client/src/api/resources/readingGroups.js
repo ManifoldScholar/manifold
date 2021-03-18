@@ -35,12 +35,29 @@ export default {
     };
   },
 
+  collected(id, entity) {
+    return {
+      eagerLoad: true,
+      endpoint: `/api/v1/reading_groups/${id}/relationships/${entity}`,
+      method: "GET",
+      options: {}
+    };
+  },
+
+  categories(id) {
+    return {
+      endpoint: `/api/v1/reading_groups/${id}/relationships/reading_group_categories`,
+      method: "GET",
+      options: {}
+    };
+  },
+
   create(readingGroup) {
     return {
       endpoint: `/api/v1/reading_groups`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "readingsGroups", data: readingGroup })
+        body: JSON.stringify({ type: "readingGroups", data: readingGroup })
       }
     };
   },
@@ -52,6 +69,34 @@ export default {
       options: {
         body: JSON.stringify({ type: "readingGroup", data: readingGroup })
       }
+    };
+  },
+
+  createCategory(id, category) {
+    return {
+      endpoint: `/api/v1/reading_groups/${id}/relationships/reading_group_categories`,
+      method: "POST",
+      options: {
+        body: JSON.stringify({ type: "readingGroupCategories", data: category })
+      }
+    };
+  },
+
+  updateCategory(groupId, categoryId, category) {
+    return {
+      endpoint: `/api/v1/reading_groups/${groupId}/relationships/reading_group_categories/${categoryId}`,
+      method: "PUT",
+      options: {
+        body: JSON.stringify({ type: "readingGroup", data: category })
+      }
+    };
+  },
+
+  destroyCategory(groupId, categoryId) {
+    return {
+      endpoint: `/api/v1/reading_groups/${groupId}/relationships/reading_group_categories/${categoryId}`,
+      method: "DELETE",
+      options: {}
     };
   }
 };

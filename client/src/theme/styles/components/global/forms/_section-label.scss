@@ -3,7 +3,7 @@
 
   .browse &,
   .reader & {
-    @include panelRoundedLight;
+    @include panelRounded;
     background-color: $neutral10;
   }
 

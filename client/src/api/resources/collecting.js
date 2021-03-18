@@ -18,7 +18,12 @@ function collectionRef(collection) {
 function mapCollectables(collectables) {
   return collectables.map(collectable => ({
     collectableType: collectable.type,
-    collectableId: collectable.id
+    collectableId: collectable.id,
+    groupingId:
+      collectable.groupingId === "$uncategorized$"
+        ? null
+        : collectable.groupingId,
+    position: collectable.position
   }));
 }
 

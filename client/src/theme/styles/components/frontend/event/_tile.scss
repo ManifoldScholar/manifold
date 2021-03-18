@@ -17,7 +17,7 @@
   }
 
   .browse & {
-    @include panelRoundedLight;
+    @include panelRounded;
   }
 
   &--linked {

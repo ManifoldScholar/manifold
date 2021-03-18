@@ -162,6 +162,8 @@ export class FormContainer extends PureComponent {
     const dirty = this.props.session.dirty;
     const source = this.props.session.source;
     if (!this.props.update) return;
+    console.log(dirty);
+
     const call = this.props.update(source.id, {
       attributes: dirty.attributes,
       relationships: this.adjustedRelationships(dirty.relationships)

@@ -6,6 +6,14 @@
     flex-direction: row;
   }
 
+  &--loading {
+    --default-strong-color: #{$neutral30};
+
+    svg {
+      color: $neutral40;
+    }
+  }
+
   a {
     &:focus-visible {
       outline: 0;

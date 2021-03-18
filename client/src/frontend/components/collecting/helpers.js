@@ -7,11 +7,11 @@ export function getEntityCollection(entity, relationship = "collection") {
   return get(entity, `relationships.${relationship}`);
 }
 
-export function isCollection(possibleCollection) {
+function isCollection(possibleCollection) {
   return has(possibleCollection, "attributes.categoryMappings");
 }
 
-export function hasCollection(possibleEntity, relationship = "collection") {
+function hasCollection(possibleEntity, relationship = "collection") {
   return has(possibleEntity, `relationships.${relationship}`);
 }
 
@@ -40,4 +40,13 @@ export function inCollections(collectable, ...collectionsOrEntities) {
   return collectionsOrEntities.some(collectionOrEntity =>
     inCollection(collectionOrEntity, collectable)
   );
+}
+
+export function getResponse(id, responses) {
+  return responses.find(res => res.id === id);
+}
+
+export function idInResponses(id, responses) {
+  if (responses?.length < 1) return false;
+  return responses.map(res => res.id).includes(id);
 }

@@ -8,7 +8,8 @@ export default class ContentBlockWrapper extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     id: PropTypes.string,
-    theme: PropTypes.oneOf(["default", "shaded", "box"])
+    theme: PropTypes.oneOf(["default", "shaded", "box", "nested"]),
+    nested: PropTypes.bool
   };
 
   static defaultProps = {
@@ -23,18 +24,29 @@ export default class ContentBlockWrapper extends PureComponent {
     return this.props.theme;
   }
 
+  get nested() {
+    return this.props.nested;
+  }
+
+  get outerClassName() {
+    return classNames({
+      "frontend-content-block": true,
+      [`frontend-content-block--${this.theme}`]: !!this.theme
+    });
+  }
+
+  get innerClassName() {
+    return classNames({
+      "entity-section-wrapper": true,
+      container: !this.nested,
+      flush: !this.nested
+    });
+  }
+
   render() {
     return (
-      <section
-        id={this.id}
-        className={classNames({
-          "frontend-content-block": true,
-          [`frontend-content-block--${this.theme}`]: !!this.theme
-        })}
-      >
-        <div className="container flush entity-section-wrapper">
-          {this.props.children}
-        </div>
+      <section id={this.id} className={this.outerClassName}>
+        <div className={this.innerClassName}>{this.props.children}</div>
       </section>
     );
   }

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import GroupsTable from "frontend/components/reading-group/Table/Groups";
-import Heading from "frontend/components/reading-group/Heading";
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import queryString from "query-string";
 import { meAPI, requests } from "api";
@@ -130,7 +129,7 @@ class ReadingGroupsListContainer extends Component {
           <div className="container">
             {this.props.projectBackLink}
             {this.renderRoutes()}
-            <Heading
+            {/* <Heading
               buttons={[
                 {
                   to: lh.link("frontendReadingGroupsNew"),
@@ -139,7 +138,7 @@ class ReadingGroupsListContainer extends Component {
               ]}
             >
               Manage Reading Groups
-            </Heading>
+            </Heading> */}
             <div style={{ marginTop: 50, marginBottom: 50 }}>
               <JoinBox onJoin={this.updateResults} />
             </div>

@@ -9,6 +9,7 @@ export default class FormSave extends Component {
   static propTypes = {
     text: PropTypes.string,
     cancelRoute: PropTypes.string,
+    cancelCallback: PropTypes.func,
     theme: PropTypes.oneOf(["frontend", "backend", "reader"])
   };
 
@@ -20,7 +21,7 @@ export default class FormSave extends Component {
   render() {
     return (
       <div className="form-input submit wide">
-        {this.props.cancelRoute ? (
+        {this.props.cancelRoute && (
           <Link
             to={this.props.cancelRoute}
             className={classNames({
@@ -32,7 +33,21 @@ export default class FormSave extends Component {
           >
             {"Cancel"}
           </Link>
-        ) : null}
+        )}
+        {this.props.cancelCallback && (
+          <button
+            type="button"
+            onClick={this.props.cancelCallback}
+            className={classNames({
+              "button-secondary": true,
+              "button-secondary--dull": true,
+              "button-secondary--outlined": this.props.theme === "backend",
+              "button-secondary--accent-pale": this.props.theme === "frontend"
+            })}
+          >
+            {"Cancel"}
+          </button>
+        )}
         <input
           className={classNames({
             "button-secondary": true,
