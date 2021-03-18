@@ -36,7 +36,8 @@
     .icon-thumbnail-icon {
       padding: 10px 0 6px;
 
-      svg {
+      svg,
+      .collectable-placeholder-content {
         width: 48px;
         height: 48px;
       }
@@ -44,7 +45,8 @@
       @include respond($break60) {
         padding: 14px 0;
 
-        svg {
+        svg,
+        .collectable-placeholder-content {
           width: 64px;
           height: 64px;
         }

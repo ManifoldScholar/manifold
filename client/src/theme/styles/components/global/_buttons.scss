@@ -549,6 +549,7 @@
     background-color: $accentPrimaryPale;
 
     &:hover {
+      color: $neutral95;
       background-color: $accentPrimary;
     }
 
@@ -626,21 +627,23 @@
 @mixin buttonTertiary {
   @include utilityPrimary;
   display: inline-block;
-  padding: 0.76em 1.7em;
-  font-size: 11.18px;
+  padding: 5px 14px 7px;
+  font-size: 12px;
   color: $neutral90;
   text-align: center;
   text-decoration: none;
   letter-spacing: 0.134em;
   white-space: nowrap;
   background-color: $accentPrimaryPale;
+  border: 1px solid $accentPrimaryPale;
   border-radius: 4px;
-  transition: color $duration $timing, background-color $duration $timing;
+  transition: color $duration $timing, background-color $duration $timing, border-color $duration $timing;
 
   &:hover,
   &:focus-visible {
     color: $neutralTextExtraDark;
     background-color: $accentInteractionLight;
+    border-color: $accentInteractionLight;
     outline: 0;
   }
 }
@@ -708,7 +711,7 @@
   transition: color $duration $timing, background-color $duration $timing;
 
   @include respond($break40) {
-    padding: 26px 0 25px;
+    padding: 21px 0 20px;
     font-size: 14px;
   }
 
@@ -739,16 +742,16 @@
   &__container {
     position: relative;
     width: 100%;
-    padding-left: calc(#{$containerPaddingResp} + 26px);
+    padding-left: calc(#{$containerPaddingResp} + 32px);
 
     @include respond($break120) {
-      padding-left: calc(#{$containerPaddingFull} + 26px);
+      padding-left: calc(#{$containerPaddingFull} + 32px);
     }
   }
 
   &__icon {
     position: absolute;
-    top: 3px;
+    top: -1.5px;
     left: $containerPaddingResp;
 
     @include respond($break120) {
