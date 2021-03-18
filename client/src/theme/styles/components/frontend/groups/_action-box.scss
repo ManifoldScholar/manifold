@@ -1,0 +1,52 @@
+$_base-padding-vertical: 24px;
+$_base-padding-lateral: 30px;
+$_gap: 12px;
+
+.group-action-box {
+  @include panelRounded;
+  padding: $_base-padding-vertical $_base-padding-lateral;
+  font-size: 14px;
+  color: var(--default-strong-color);
+
+  @include respond($break65) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: $_base-padding-vertical - $_gap;
+    padding-left: $_base-padding-lateral - $_gap;
+
+    > * {
+      margin-top: $_gap;
+      margin-left: $_gap;
+    }
+  }
+
+  &__heading {
+    flex-grow: 1;
+    flex-basis: 50%;
+  }
+
+  &__heading-text {
+    @include utilityPrimary;
+    display: block;
+    padding-bottom: 5px;
+    font-size: inherit;
+
+    @include respond($break65) {
+      display: inline-block;
+      padding-right: 12px;
+    }
+  }
+
+  &__instructions {
+    @include subtitlePrimary;
+    display: inline-block;
+    padding-bottom: 25px;
+    font-size: 18px;
+
+    @include respond($break65) {
+      padding-bottom: 0;
+    }
+  }
+}

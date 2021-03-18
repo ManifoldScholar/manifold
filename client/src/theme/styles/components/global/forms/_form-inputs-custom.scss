@@ -35,44 +35,39 @@
   }
 }
 
-@mixin booleanPrimary($height) {
+.boolean-primary {
+  $_height: 26px;
+  $_width: $_height * 2;
+  $_padding: 4px;
+
   position: relative;
   display: block;
-  width: $height * 2;
-  height: $height;
+  width: $_height * 2;
+  height: $_height;
   cursor: pointer;
-  // Disabled to use built-in function
-  // scss-lint:disable NameFormat
-  background: $neutral50 linear-gradient(90deg, transparentize($neutral90, 0.5), transparentize($neutral90, 1));
-  background-blend-mode: multiply;
-  border-radius: $height;
-  transition: background $durationSlow $timing;
+  background-color: var(--inactive-switch-bg-color);
+  border-radius: $_height;
+  transition: background-color $durationSlow $timing;
 
   &.checked {
-    // Disabled to use built-in function
-    // scss-lint:disable NameFormat
-    background: $accentPrimary linear-gradient(270deg, transparentize($neutral90, 0.5), transparentize($neutral90, 1));
+    background-color: var(--active-switch-bg-color);
 
     &::before {
-      left: calc(100% - #{$height});
+      transform: translateX($_width - $_height);
     }
   }
 
   &::before {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: $height;
-    height: $height;
+    top: $_padding;
+    left: $_padding;
+    width: $_height - $_padding * 2;
+    height: $_height - $_padding * 2;
     content: '';
-    background-color: $neutral20;
-    border-radius: $height;
-    transition: left $duration $timing;
+    background-color: var(--switch-toggle-color);
+    border-radius: $_height;
+    transition: transform $duration cubic-bezier(0.46,0.03,0.52,0.96);
   }
-}
-
-.boolean-primary {
-  @include booleanPrimary(20px);
 }
 
 .repeater-primary {

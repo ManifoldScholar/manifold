@@ -4,13 +4,14 @@
   position: relative;
   width: 100%;
   max-width: 880px;
-  padding: 27px 6.818% 50px;
+  padding: dialog(padding-top) 6.818% dialog(padding-bottom);
   margin: 0 auto;
   text-transform: none;
   letter-spacing: 0;
 
   @include respond($break90) {
-    padding: 29px 40px 50px;
+    padding-right: 40px;
+    padding-left: 40px;
   }
 
   .backend & {
@@ -21,7 +22,7 @@
 
   .browse &,
   .reader & {
-    @include panelRoundedLight;
+    @include panelRounded;
   }
 
   &__header {
@@ -59,7 +60,7 @@
     text-align: center;
   }
 
-  p {
+  p:not([class]) {
     font-size: 18px;
     font-weight: $regular;
   }

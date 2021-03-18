@@ -1,17 +1,4 @@
 .frontend-content-block {
-  &--shaded {
-    padding-bottom: 30px;
-    background-color: $neutral05;
-
-    @include respond($break60) {
-      padding-top: 2.429vw;
-    }
-
-    @include respond($break120) {
-      padding-top: 30px;
-    }
-  }
-
   &--default {
     &:last-child {
       margin-bottom: 50px;
@@ -38,16 +25,39 @@
     }
   }
 
+  &--shaded {
+    padding-bottom: 30px;
+    background-color: $neutral05;
+
+    @include respond($break60) {
+      padding-top: 2.429vw;
+    }
+
+    @include respond($break120) {
+      padding-top: 30px;
+    }
+  }
+
   &--box {
     --content-color: #{$neutralTextDark};
     --card-bg-color: #{$neutralWhite};
 
+    padding-top: 15px;
     padding-bottom: 45px;
     background-color: $neutral05;
     border-radius: $panelRoundedRadius;
 
     & + & {
       margin-top: clamp(40px, 6.452vw, 50px);
+    }
+  }
+
+  &--nested {
+    --content-color: #{$neutralTextDark};
+    --card-bg-color: #{$neutralWhite};
+
+    & + & {
+      margin-top: clamp(20px, 3.225vw, 30px);
     }
   }
 }
