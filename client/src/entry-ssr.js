@@ -19,6 +19,7 @@ import { matchRoutes } from "react-router-config";
 import { createLocation } from "history";
 import getRoutes from "/routes";
 import FatalError from "global/components/FatalError";
+import { resetServerContext as resetDndServerContext } from "react-beautiful-dnd";
 
 // Node 8.x on Ubuntu 18 leads to failed SSL handshakes. Setting this
 // default TLS value appears to fix this. I believe this issue has
@@ -73,6 +74,8 @@ const render = (req, res, store) => {
       store={store}
     />
   );
+
+  resetDndServerContext();
 
   let renderString = "";
   let isError = false;

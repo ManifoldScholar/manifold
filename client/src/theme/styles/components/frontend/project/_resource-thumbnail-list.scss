@@ -16,12 +16,15 @@ $_item-min-width: 195px;
     }
   }
 
-  a {
+  a,
+  .resource-link-placeholder {
     display: flex;
     width: 100%;
     height: 100%;
     text-decoration: none;
+  }
 
+  a {
     .icon-thumbnail-primary {
       background-color: var(--card-bg-color, #{$neutral05});
       border-radius: $panelRoundedRadius;
@@ -42,6 +45,30 @@ $_item-min-width: 195px;
         @include boxShadow(0, 20px, 30px, 2px);
         @include defaultHoverStyle;
       }
+    }
+  }
+
+  .resource-link-placeholder {
+    .icon-thumbnail-primary {
+      background-color: $neutral20;
+      border-radius: $panelRoundedRadius;
+    }
+
+    .wrapper {
+      align-items: center;
+      min-height: 132px;
+
+      @include respond($_breakpoint) {
+        min-height: 160px;
+      }
+    }
+
+    .icon-thumbnail-title {
+      width: 100%;
+    }
+
+    svg {
+      color: $neutral40;
     }
   }
 
