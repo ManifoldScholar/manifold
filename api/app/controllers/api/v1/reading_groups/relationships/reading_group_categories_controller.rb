@@ -59,7 +59,8 @@ module API
 
             param_config = structure_params(attributes: attributes, relationships: relationships)
 
-            params.require(:data).permit(param_config)
+            params.require(:data)
+            params.permit(param_config)
           end
         end
       end
