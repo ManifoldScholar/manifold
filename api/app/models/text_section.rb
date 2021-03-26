@@ -55,7 +55,7 @@ class TextSection < ApplicationRecord
   validates :kind, inclusion: { in: ALLOWED_KINDS }
 
   # Callbacks
-  after_commit :maybe_adopt_or_orphan_annotations!
+  after_commit :maybe_adopt_or_orphan_annotations!, on: [:update, :destroy]
 
   # Scopes
   scope :in_texts, lambda { |texts|
