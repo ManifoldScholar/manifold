@@ -12,13 +12,15 @@ module Demonstration
     end
 
     def load
-      clear_db
-      seed_db
-      create_admin_user
-      create_fake_users
-      create_pages
-      create_featured_projects_collection
-      import_projects
+      Searchkick.callbacks(false) do
+        clear_db
+        seed_db
+        create_admin_user
+        create_fake_users
+        create_pages
+        create_featured_projects_collection
+        import_projects
+      end
       reindex_records
     end
 
@@ -115,11 +117,11 @@ module Demonstration
     end
 
     def create_admin_user
-      u = User.find_or_create_by(email: "admin@manifold.app")
+      u = User.find_or_create_by(email: "admin@castironcoding.com")
       u.first_name = "Admin"
       u.last_name = "User"
-      u.password = "manifold"
-      u.password_confirmation = "manifold"
+      u.password = "Test123!"
+      u.password_confirmation = "Test123!"
       u.role = :admin
       u.save
       info("Creating admin user: #{u.email}")
