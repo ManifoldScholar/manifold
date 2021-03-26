@@ -48,7 +48,7 @@ module API
 
               config.collectable_definition = Collections::Mapping[ReadingGroup][klass]
 
-              association_name = collectable_definition.collectable_associations.uncategorized_collectables
+              association_name = collectable_definition.collectable_associations.collectables
 
               resourceful! klass do
                 if klass < ::Filterable
