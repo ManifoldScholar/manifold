@@ -9,7 +9,7 @@ Rails.application.routes.draw do
               controller: "/api/v1/permissions"
   end
 
-  constraints ->(request) { AuthConstraint.new(request).admin? } do
+  constraints ->(request) { AuthConstraint.new(request).admin? || Rails.env.development? } do
     mount Sidekiq::Web => "/api/sidekiq"
     mount Zhong::Web, at: "/api/zhong"
   end
