@@ -1,6 +1,6 @@
 module Attachments
   class StyleConfigurer < ActiveInteraction::Base
-    file :upload
+    object :shrine_uploaded_file, class: Object
     interface :model
     hash :attachment_options do
       symbol :type
@@ -27,13 +27,13 @@ module Attachments
     end
 
     def alpha_channel?
-      pdf? || upload.extension == "png" || upload.extension == "gif"
+      pdf? || shrine_uploaded_file.extension == "png" || shrine_uploaded_file.extension == "gif"
     end
 
     # rubocop:disable Lint/Void
     def pdf?
-      !upload.mime_type.match(Regexp.union(CONFIG[:pdf][:allowed_mime])).nil?
-      !upload.extension.match(Regexp.union(CONFIG[:pdf][:allowed_ext])).nil?
+      !shrine_uploaded_file.mime_type.match(Regexp.union(CONFIG[:pdf][:allowed_mime])).nil?
+      !shrine_uploaded_file.extension.match(Regexp.union(CONFIG[:pdf][:allowed_ext])).nil?
     end
     # rubocop:enable Lint/Void
 

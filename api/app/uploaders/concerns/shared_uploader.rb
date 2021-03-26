@@ -30,10 +30,15 @@ module SharedUploader
 
     def generate_location(io, **options)
       identifier = options[:record].public_send(opts[:pretty_location][:identifier])
-      splittable = identifier.is_a?(Array) ? identifier.first : identifier
-      parts = splittable.to_s[0..2].split("")
-      parts.push(identifier) unless identifier.is_a? Array
-      parts += identifier if identifier.is_a? Array
+      parts = nil
+      if identifier.blank?
+        parts = ["new_record"]
+      else
+        splittable = identifier.is_a?(Array) ? identifier.first : identifier
+        parts = splittable.to_s[0..2].split("")
+        parts.push(identifier) unless identifier.is_a? Array
+        parts += identifier if identifier.is_a? Array
+      end
       pretty_location(io, identifier: parts, **options)
     end
   end

@@ -33,11 +33,11 @@ class AttachmentUploader < Shrine
     validate_extension_inclusion conf.validations.allowed_ext unless Rails.env.test?
   end
 
-  Attacher.derivatives_processor do |_original|
+  Attacher.derivatives_processor do |file_resource|
     attachment_options = context[:record].shrine_options_for context[:name]
-
     outcome = Attachments::Processor.run!(
-      upload: file,
+      shrine_uploaded_file: file,
+      file_resource: file_resource,
       model: context[:record],
       attachment_options: attachment_options
     )
