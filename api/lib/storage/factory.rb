@@ -146,7 +146,7 @@ module Storage
         return gcs_storage(cache_bucket, cache_prefix) if primary_store_is_gcs?
         return aws_storage(cache_bucket, cache_prefix) if primary_store_is_aws?
 
-        file_storage(primary_storage_path, cache_prefix)
+        file_storage(cache_storage_path, cache_prefix)
       end
 
       def tus_storage
