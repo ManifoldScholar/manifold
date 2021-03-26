@@ -8,7 +8,7 @@ class AuthConstraint
 
   def admin?
     token = request.cookies["authToken"]
-    return false unless token
+    return false unless token.present?
 
     decoded = AuthToken.decode(token)
     id = decoded["user_id"]
@@ -18,6 +18,8 @@ class AuthConstraint
     return false unless user
 
     user.admin?
+  rescue JWT::DecodeError
+    false
   end
 
 end
