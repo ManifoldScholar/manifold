@@ -1,7 +1,9 @@
 # Helper service for creating Ingestions through the CLI.
 # Its primary use is in rake tasks where the source file is not being received as an
 # upload through Tus.
-
+#
+# As of upgrade to Shrine v3, this service is no longer necessary. Leaving it in place
+# for other code that depends on it, but at this point it's purely pass-through. -ZD
 module Ingestions
   class CreateManually < ActiveInteraction::Base
     object :project
@@ -10,35 +12,8 @@ module Ingestions
     file :source
 
     def execute
-      attributes = inputs.slice(:project, :creator)
-
-      Shrine.storages[:store].upload(source, source_id)
-
-      Ingestion.create! attributes do |ingestion|
-        source_data = source_data_params
-
-        shrine_source = IngestionUploader.uploaded_file(source_data)
-
-        ingestion.source_attacher.set shrine_source
-      end
+      Ingestion.create(source: source, project: project, creator: creator)
     end
 
-    private
-
-    def source_id
-      @source_id ||= File.basename(source.path)
-    end
-
-    def source_data_params
-      {
-        storage: :store,
-        id: source_id,
-        metadata: {
-          filename: source_id,
-          size: source.size,
-          mime_type: Marcel::MimeType.for(source)
-        }
-      }.deep_stringify_keys
-    end
   end
 end
