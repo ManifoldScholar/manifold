@@ -2,8 +2,8 @@ require "image_processing/mini_magick"
 
 module Attachments
   class VersionProcessor < ActiveInteraction::Base
-    file :local_source
-    file :attachment
+    file :file_resource
+    object :shrine_uploaded_file, class: Object
     hash :config, strip: false
 
     def execute
@@ -24,9 +24,9 @@ module Attachments
 
     def animated_gif?
       @animated_gif ||= begin
-        return false unless attachment.extension == "gif"
+        return false unless shrine_uploaded_file.extension == "gif"
 
-        image = MiniMagick::Image.new(local_source.path)
+        image = MiniMagick::Image.new(shrine_uploaded_file.path)
         return false unless image.type == "GIF"
         return false unless image.pages&.length&.positive?
 
@@ -37,11 +37,11 @@ module Attachments
     def process_animated_gif
       image = ImageProcessing::MiniMagick.apply(animated_gif_config)
       image << "+repage"
-      image.call(local_source)
+      image.call(file_resource)
     end
 
     def process_image
-      ImageProcessing::MiniMagick.apply(config).loader(page: 0).call(local_source)
+      ImageProcessing::MiniMagick.apply(config).loader(page: 0).call(file_resource)
     end
 
   end

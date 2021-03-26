@@ -16,9 +16,13 @@ module Attachments
         name: params[:name],
         file: params[:file_data]
       )
-      attacher.promote unless attacher.stored?
-      attacher.create_derivatives
-      attacher.record.save
+
+      attacher.file.open do
+        attacher.create_derivatives(attacher.file.tempfile) if attacher.respond_to?(:create_derivatives)
+      end
+      attacher.atomic_promote
+    rescue Shrine::AttachmentChanged, ActiveRecord::RecordNotFound
+      # attachment has changed or record has been deleted, nothing to do
     end
 
     def exclusive_lock_name
