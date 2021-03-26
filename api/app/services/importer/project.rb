@@ -45,6 +45,7 @@ module Importer
     # rubocop:disable all
     def upsert_project(include_texts)
       project = find_project
+      project.draft = false
       if project.new_record?
         @logger.info "Creating new project: #{@project_json[:attributes][:title]}"
       else
