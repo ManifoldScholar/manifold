@@ -1,7 +1,23 @@
 module Manifold
   module SearchTask
     def self.types
-      %w(ResourceCollection Resource Event Maker Project User Subject)
+      %w(
+        Annotation
+        Event
+        Maker
+        Project
+        Resource
+        ResourceCollection
+        Subject
+        Tag
+        Text
+        TextSection
+        User
+      )
+    end
+
+    def self.to_task_name(klass)
+      klass.pluralize.underscore.to_sym
     end
   end
 end
@@ -10,16 +26,21 @@ namespace :manifold do
   namespace :search do
     desc "Reindex searchable models."
     task reindex: :environment do
-      Rake::Task["searchkick:reindex:all"].invoke
+      Manifold::SearchTask.types.each do |klass|
+        msg = "Reindex #{klass}."
+        Manifold::Rake.logger.info msg
+        klass.constantize.reindex
+      end
     end
 
     namespace :reindex do
-      Manifold::SearchTask.types.each do |class_name|
-        desc "Reindex #{class_name.downcase} models."
-        task class_name.downcase.to_sym => :environment do
-          ENV["CLASS"] = class_name
-          Manifold::Rake.logger.info "Reindexing #{ENV['CLASS'].downcase} models."
-          Rake::Task["searchkick:reindex"].invoke
+      Manifold::SearchTask.types.each do |klass|
+        msg = "Reindex #{klass}."
+        desc msg
+        task Manifold::SearchTask.to_task_name(klass).to_sym => :environment do
+          ENV["CLASS"] = klass
+          Manifold::Rake.logger.info msg
+          klass.constantize.reindex
         end
       end
     end
