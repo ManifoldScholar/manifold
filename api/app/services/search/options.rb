@@ -162,6 +162,8 @@ module Search
         :debug,
         :load,
         :request_params,
+        :per_page,
+        page: :page_number,
         index_name: :search_indexes
       )
     end
