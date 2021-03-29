@@ -62,6 +62,8 @@ class SearchResultsTypeTextSection extends PureComponent {
   }
 
   render() {
+    if (!this.model) return null;
+
     return (
       <Generic
         title={this.title}
