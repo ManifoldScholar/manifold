@@ -195,11 +195,14 @@ export class FormContainer extends PureComponent {
     const action = request(call, this.props.name, this.requestOptions());
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty("promise") && this.props.onSuccess) {
-      res.promise.then(() => {
-        this.setState({ preventDirtyWarning: true }, () => {
-          this.props.onSuccess(this.props.response.entity);
-        });
-      });
+      res.promise.then(
+        () => {
+          this.setState({ preventDirtyWarning: true }, () => {
+            this.props.onSuccess(this.props.response.entity);
+          });
+        },
+        () => {}
+      );
     }
   }
 
