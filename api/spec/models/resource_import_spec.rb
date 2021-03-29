@@ -63,7 +63,6 @@ RSpec.shared_examples "after parsing" do
   it "has correct automapping" do
     expected = {
       "Allow High-Res Download" => "allow_download",
-      "Allow High-Res Viewing" => "allow_high_res",
       "Alt-Text" => "metadata.alt_text",
       "Caption" => "caption",
       "Collection" => "resource_collections",
