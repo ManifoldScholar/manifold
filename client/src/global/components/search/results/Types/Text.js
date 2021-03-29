@@ -56,6 +56,8 @@ class SearchResultsTypeText extends PureComponent {
   }
 
   render() {
+    if (!this.model) return null;
+
     return (
       <Generic
         url={this.url}
