@@ -26,7 +26,7 @@ export class ExportTargetsNewContainer extends PureComponent {
   }
 
   redirectToExportTarget(exportTarget) {
-    const path = lh.link("backendRecordsExportTargets", exportTarget.id);
+    const path = lh.link("backendSettingsExportTargets", exportTarget.id);
     this.props.history.push(path, { keepNotifications: true });
   }
 

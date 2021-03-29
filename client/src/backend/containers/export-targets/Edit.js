@@ -61,7 +61,7 @@ export class ExportTargetsEditContainer extends PureComponent {
     );
 
     dispatch(exportTargetRequest).promise.then(() => {
-      history.push(lh.link("backendRecordsExportTargets"));
+      history.push(lh.link("backendSettingsExportTargets"));
     });
   };
 

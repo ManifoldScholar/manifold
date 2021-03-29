@@ -16,7 +16,7 @@ export default class ExportTargetRow extends PureComponent {
 
     return (
       <EntityRow
-        onRowClick={lh.link("backendRecordsExportTargetEdit", exportTarget.id)}
+        onRowClick={lh.link("backendSettingsExportTargetEdit", exportTarget.id)}
         rowClickMode="block"
         title={name}
         label={label}

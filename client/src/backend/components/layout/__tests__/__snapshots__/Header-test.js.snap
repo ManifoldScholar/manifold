@@ -189,19 +189,12 @@ exports[`Backend.Layout.Header component matches the snapshot 1`] = `
                     "label": "Features",
                     "route": "backendRecordsFeatures",
                   },
-                  Object {
-                    "ability": "update",
-                    "entity": "exportTarget",
-                    "label": "Export Targets",
-                    "route": "backendRecordsExportTargets",
-                  },
                 ],
                 "entity": Array [
                   "user",
                   "maker",
                   "page",
                   "feature",
-                  "exportTarget",
                 ],
                 "label": "Records",
                 "route": "backendRecords",
@@ -228,6 +221,12 @@ exports[`Backend.Layout.Header component matches the snapshot 1`] = `
                   Object {
                     "label": "Email",
                     "route": "backendSettingsEmail",
+                  },
+                  Object {
+                    "ability": "update",
+                    "entity": "exportTarget",
+                    "label": "Export Targets",
+                    "route": "backendSettingsExportTargets",
                   },
                 ],
                 "entity": "settings",

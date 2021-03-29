@@ -62,7 +62,7 @@ export class ExportTargetsContainerImplementation extends PureComponent {
     if (!exportTargets) return null;
     const active = match.params.id || "";
     const drawerProps = {
-      closeUrl: lh.link("backendRecordsExportTargets")
+      closeUrl: lh.link("backendSettingsExportTargets")
     };
 
     return (
@@ -80,7 +80,7 @@ export class ExportTargetsContainerImplementation extends PureComponent {
           }}
           buttons={[
             <Button
-              path={lh.link("backendRecordsExportTargetsNew")}
+              path={lh.link("backendSettingsExportTargetsNew")}
               text="Add a new export target"
               authorizedFor="exportTarget"
               type="add"

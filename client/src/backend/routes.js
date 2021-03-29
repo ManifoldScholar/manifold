@@ -545,29 +545,6 @@ const routes = {
           ]
         },
         {
-          name: "backendRecordsExportTargets",
-          exact: false,
-          component: "ExportTargetsList",
-          path: "/backend/records/export-targets",
-          helper: () => "/backend/records/export-targets",
-          routes: [
-            {
-              name: "backendRecordsExportTargetsNew",
-              exact: true,
-              component: "ExportTargetsNew",
-              path: "/backend/records/export-targets/new",
-              helper: () => "/backend/records/export-targets/new"
-            },
-            {
-              name: "backendRecordsExportTargetEdit",
-              exact: true,
-              component: "ExportTargetsEdit",
-              path: "/backend/records/export-targets/:id",
-              helper: et => `/backend/records/export-targets/${et}`
-            }
-          ]
-        },
-        {
           name: "backendRecordsMakers",
           component: "MakersList",
           exact: true,
@@ -736,6 +713,30 @@ const routes = {
             }
           ]
         },
+        {
+          name: "backendSettingsExportTargets",
+          exact: false,
+          component: "ExportTargetsList",
+          path: "/backend/settings/export-targets",
+          helper: () => "/backend/settings/export-targets",
+          routes: [
+            {
+              name: "backendSettingsExportTargetsNew",
+              exact: true,
+              component: "ExportTargetsNew",
+              path: "/backend/settings/export-targets/new",
+              helper: () => "/backend/settings/export-targets/new"
+            },
+            {
+              name: "backendSettingsExportTargetEdit",
+              exact: true,
+              component: "ExportTargetsEdit",
+              path: "/backend/settings/export-targets/:id",
+              helper: et => `/backend/settings/export-targets/${et}`
+            }
+          ]
+        },
+
         {
           name: "backendSettingsEmail",
           exact: true,
