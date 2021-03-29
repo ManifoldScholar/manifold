@@ -170,7 +170,7 @@ export class ProjecExportations extends PureComponent {
                     export targets.
                   </div>
                   <Button
-                    path={lh.link("backendRecordsExportTargetsNew")}
+                    path={lh.link("backendSettingsExportTargetsNew")}
                     text="Create a new export target"
                     type="add"
                   />

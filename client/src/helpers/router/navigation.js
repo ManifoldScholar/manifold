@@ -58,7 +58,7 @@ class Navigation {
       {
         label: "Records",
         route: "backendRecords",
-        entity: ["user", "maker", "page", "feature", "exportTarget"],
+        entity: ["user", "maker", "page", "feature"],
         ability: "update",
         children: [
           {
@@ -83,12 +83,6 @@ class Navigation {
             label: "Features",
             route: "backendRecordsFeatures",
             entity: "feature",
-            ability: "update"
-          },
-          {
-            label: "Export Targets",
-            route: "backendRecordsExportTargets",
-            entity: "exportTarget",
             ability: "update"
           }
         ]
@@ -118,6 +112,12 @@ class Navigation {
           {
             label: "Email",
             route: "backendSettingsEmail"
+          },
+          {
+            label: "Export Targets",
+            route: "backendSettingsExportTargets",
+            entity: "exportTarget",
+            ability: "update"
           }
         ]
       },
@@ -303,12 +303,6 @@ class Navigation {
         route: "backendRecordsFeatures",
         entity: "feature",
         ability: "update"
-      },
-      {
-        label: "Export Targets",
-        route: "backendRecordsExportTargets",
-        entity: "exportTarget",
-        ability: "update"
       }
     ];
   });
@@ -382,6 +376,12 @@ class Navigation {
         label: "Email",
         route: "backendSettingsEmail",
         entity: "settings",
+        ability: "update"
+      },
+      {
+        label: "Export Targets",
+        route: "backendSettingsExportTargets",
+        entity: "exportTarget",
         ability: "update"
       }
     ];
