@@ -128,7 +128,7 @@ export class ResourceImportWrapper extends PureComponent {
           title={"Bulk Add Resources"}
           showUtility={false}
           note={`Import resources from CSV or Google Sheet, with file assets stored in a
-          google drive folder.`}
+          Google Drive folder.`}
         />
         <Layout.BackendPanel>
           <div>{this.renderRoutes()}</div>
