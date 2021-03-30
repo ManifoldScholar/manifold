@@ -98,6 +98,10 @@ class User < ApplicationRecord
     }
   end
 
+  def email=(value)
+    super(value.try(:strip))
+  end
+
   def project_author_of?(resource)
     has_role? :project_author, resource
   end

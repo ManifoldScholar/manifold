@@ -112,9 +112,12 @@ export class CreateContainer extends Component {
   };
 
   handleInputChange = event => {
+    const { name, value } = event.target;
+    const adjustedValue = name === "email" ? value.trim() : value;
+
     const user = {
       ...this.state.user,
-      [event.target.name]: event.target.value
+      [name]: adjustedValue
     };
     this.setState({ user });
   };
