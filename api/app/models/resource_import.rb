@@ -49,7 +49,7 @@ class ResourceImport < ApplicationRecord
 
   def self.attribute_columns
     %w(
-      title kind sub_kind caption description fingerprint external_url
+      title kind sub_kind caption description fingerprint external_url pending_sort_title
       external_id external_type allow_download slug minimum_width minimum_height tag_list
       resource_collections
     )
