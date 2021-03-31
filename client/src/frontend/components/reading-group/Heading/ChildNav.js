@@ -9,26 +9,29 @@ function ChildNav({ readingGroup }) {
     {
       to: lh.link("frontendReadingGroupDetail", readingGroup.id),
       text: "Home",
-      icon: "star24"
+      icon: "star24",
+      exact: false
     },
     {
       to: lh.link("frontendReadingGroupAnnotations", readingGroup.id),
       text: "Notes + Comments",
-      icon: "notes24"
+      icon: "notes24",
+      exact: true
     },
     {
       to: lh.link("frontendReadingGroupMembers", readingGroup.id),
       text: "Members",
-      icon: "readingGroup24"
+      icon: "readingGroup24",
+      exact: true
     }
   ];
   return (
     <nav aria-label="Reading Group subpages" className="group-child-nav">
-      {links.map(({ to, text, icon }) => (
+      {links.map(({ to, exact, text, icon }) => (
         <NavLink
           key={text}
           to={to}
-          exact
+          exact={exact}
           className="group-child-nav__link"
           activeClassName="group-child-nav__link--active"
         >

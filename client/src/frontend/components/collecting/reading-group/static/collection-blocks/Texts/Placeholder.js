@@ -1,6 +1,6 @@
 import React from "react";
 import IconComposer from "global/components/utility/IconComposer";
-import Skeleton from "../ContentSkeleton";
+import Skeleton from "frontend/components/collecting/ContentSkeleton";
 
 function Placeholder() {
   return (

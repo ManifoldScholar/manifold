@@ -68,7 +68,7 @@ class ReadingGroup extends Component {
   }
 
   get currentHash() {
-    return this.history.location.hash;
+    return this.location.hash;
   }
 
   get canUpdateGroup() {
@@ -164,6 +164,8 @@ class ReadingGroup extends Component {
             <Heading
               readingGroup={this.readingGroup}
               canUpdateGroup={this.canUpdateGroup}
+              history={this.history}
+              location={this.location}
             />
             {this.renderChildRoutes()}
             {this.renderSearchDialog()}

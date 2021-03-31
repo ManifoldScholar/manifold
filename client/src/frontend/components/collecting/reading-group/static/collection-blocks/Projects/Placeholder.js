@@ -1,5 +1,5 @@
 import React from "react";
-import Skeleton from "../ContentSkeleton";
+import Skeleton from "frontend/components/collecting/ContentSkeleton";
 
 function Placeholder() {
   return (

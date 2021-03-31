@@ -67,7 +67,7 @@ CollectionCategory.propTypes = {
   description: PropTypes.shape({
     formatted: PropTypes.node.isRequired
   }),
-  mappings: PropTypes.object.isRequired,
+  mappings: PropTypes.object,
   responses: PropTypes.object.isRequired
 };
 

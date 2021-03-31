@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import ReadingGroupForm from "frontend/components/reading-group/Form";
+import SettingsForm from "frontend/components/reading-group/Form";
 import PropTypes from "prop-types";
 import Navigation from "backend/components/navigation";
 import { readingGroupsAPI, requests } from "api";
@@ -57,7 +57,7 @@ class ReadingGroupSettings extends PureComponent {
             }
           ]}
         />
-        <ReadingGroupForm
+        <SettingsForm
           mode="edit"
           group={this.props.readingGroup}
           onSuccess={this.props.closeDrawer}

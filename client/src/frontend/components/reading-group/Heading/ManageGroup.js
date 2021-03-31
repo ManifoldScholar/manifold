@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import lh from "helpers/linkHandler";
 import Switch from "global/components/form/Switch";
 import ActionBox from "frontend/components/reading-group/ActionBox";
 
-function HeadingManageGroup({ readingGroup }) {
-  const [showEditMode, setShowEditMode] = useState(false);
+function HeadingManageGroup({ readingGroup, history, location }) {
+  const homepageStaticPath = lh.link(
+    "frontendReadingGroupHomepageStatic",
+    readingGroup.id
+  );
+  const homepageEditPath = lh.link(
+    "frontendReadingGroupHomepageEdit",
+    readingGroup.id
+  );
+  const inEditMode = location.pathname === homepageEditPath;
 
-  function handleModeChange(value) {
-    console.log(value);
-    setShowEditMode(prevState => !prevState);
+  function handleSwitchChange() {
+    if (!inEditMode) return history.push(homepageEditPath);
+    history.push(homepageStaticPath);
   }
 
   return (
@@ -17,12 +27,28 @@ function HeadingManageGroup({ readingGroup }) {
       instructions="Edit the Home Page or the settings for your Reading Group."
       actions={
         <div className="group-page-heading__flex-container group-page-heading__flex-container--justify-start">
-          <Switch
-            label="Edit Home Page:"
-            set={handleModeChange}
-            value={showEditMode}
-            className="group-homepage-mode-toggle"
-          />
+          <div aria-hidden>
+            <Switch
+              label="Edit Home Page:"
+              set={handleSwitchChange}
+              value={inEditMode}
+              className="group-homepage-mode-toggle"
+            />
+          </div>
+          <Link
+            to={homepageStaticPath}
+            className="screen-reader-text"
+            tabIndex={-1}
+          >
+            View group homepage
+          </Link>
+          <Link
+            to={homepageEditPath}
+            className="screen-reader-text"
+            tabIndex={-1}
+          >
+            Edit group homepage
+          </Link>
           <a href="#settings" className="group-settings-link">
             Edit settings
           </a>
@@ -35,7 +61,9 @@ function HeadingManageGroup({ readingGroup }) {
 HeadingManageGroup.displayName = "ReadingGroup.Heading.ManageGroup";
 
 HeadingManageGroup.propTypes = {
-  readingGroup: PropTypes.object.isRequired
+  readingGroup: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 };
 
 export default HeadingManageGroup;

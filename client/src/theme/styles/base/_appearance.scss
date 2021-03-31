@@ -110,7 +110,9 @@ body {
   --active-switch-bg-color: #17986D;
   --switch-toggle-color: #{$neutral05};
   --box-bg-color: #{$neutral05};
+  --box-medium-bg-color: #{$neutral10};
   --box-strong-bg-color: #{$neutral20};
+  --dropzone-bg-color: #{$neutral30};
 }
 
 .backend, .drawer--backend, .reader.scheme-dark, .bg-neutral90, .bg-neutral95 {
@@ -127,7 +129,9 @@ body {
   --active-switch-bg-color: #{$accentInteractionLight};
   --switch-toggle-color: #{$neutral90};
   --box-bg-color: #{$neutral95};
+  --box-medium-bg-color: #{$neutral90};
   --box-strong-bg-color: #{$neutral90};
+  --dropzone-bg-color: #{lighten($neutral90, 5%)};
 
   input[type='text'],
   input[type='email'],
@@ -686,17 +690,17 @@ body {
 }
 
 // Drag and Drop styles
-@mixin dropzone($margin: 9px, $active-selector: '--show-dropzone') {
-  @include panelRoundedDark;
+@mixin dropzone($_margin: 9px, $_active-selector: '--show-dropzone') {
+  @include panelRounded;
   display: block;
-  padding: 0 $margin;
-  margin-right: -$margin;
-  margin-left: -$margin;
+  padding: 0 $_margin;
+  margin-right: -$_margin;
+  margin-left: -$_margin;
   background-color: transparent;
   transition: background-color 0.4s ease;
 
-  &#{$active-selector} {
-    background-color: lighten($neutral90, 5%);
+  &#{$_active-selector} {
+    background-color: var(--dropzone-bg-color, #{$neutral30});
   }
 }
 

@@ -182,9 +182,25 @@ const routes = {
           },
           routes: [
             {
-              exact: true,
+              exact: false,
               component: "ReadingGroupHomepage",
-              path: "/my/groups/:id"
+              path: "/my/groups/:id",
+              routes: [
+                {
+                  name: "frontendReadingGroupHomepageStatic",
+                  exact: true,
+                  component: "ReadingGroupHomepageStatic",
+                  path: "/my/groups/:id",
+                  helper: rg => `/my/groups/${rg}`
+                },
+                {
+                  name: "frontendReadingGroupHomepageEdit",
+                  exact: true,
+                  component: "ReadingGroupHomepageEdit",
+                  path: "/my/groups/:id/edit",
+                  helper: rg => `/my/groups/${rg}/edit`
+                }
+              ]
             },
             {
               name: "frontendReadingGroupAnnotations",

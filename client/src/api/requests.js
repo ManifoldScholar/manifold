@@ -123,6 +123,12 @@ export default {
     "frontend-reading-group-collected-resource-collections",
   feReadingGroupCollectedResources:
     "frontend-reading-group-collected-resources",
+  feReadingGroupCollectionCategoryCreate:
+    "frontend-reading-group-collection-category-create",
+  feReadingGroupCollectionCategoryUpdate:
+    "frontend-reading-group-collection-category-update",
+  feReadingGroupCollectionCategoryDestroy:
+    "frontend-reading-group-collection-category-destroy",
   feProjectsFiltered: "frontend-projects-filtered",
   feProjectsFeatured: "frontend-projects-featured",
   feFeatures: "frontend-features",

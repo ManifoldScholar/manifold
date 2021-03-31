@@ -8,7 +8,7 @@ import ChildNav from "./ChildNav";
 import ManageGroup from "./ManageGroup";
 import GroupSummaryBox from "./GroupSummaryBox";
 
-function Heading({ readingGroup, canUpdateGroup }) {
+function Heading({ readingGroup, canUpdateGroup, history, location }) {
   const uid = useUID();
   const summaryRef = useRef();
 
@@ -52,7 +52,11 @@ function Heading({ readingGroup, canUpdateGroup }) {
       </Collapse>
       {canUpdateGroup && (
         <div className="group-page-heading__container">
-          <ManageGroup readingGroup={readingGroup} />
+          <ManageGroup
+            readingGroup={readingGroup}
+            history={history}
+            location={location}
+          />
         </div>
       )}
     </header>
@@ -63,6 +67,8 @@ Heading.displayName = "ReadingGroup.Heading";
 
 Heading.propTypes = {
   readingGroup: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
   canUpdateGroup: PropTypes.bool
 };
 

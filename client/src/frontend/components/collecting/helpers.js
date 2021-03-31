@@ -2,6 +2,7 @@ import flatMapDepth from "lodash/flatMapDepth";
 import identity from "lodash/identity";
 import has from "lodash/has";
 import get from "lodash/get";
+import cloneDeep from "lodash/cloneDeep";
 
 export function getEntityCollection(entity, relationship = "collection") {
   return get(entity, `relationships.${relationship}`);
@@ -33,6 +34,23 @@ export function collectedIdsForCollectionByType(collection) {
 
 export function getCollectionCategories(collection) {
   return collection.attributes.categories;
+}
+
+export function getSortableCategories(collection) {
+  const categories = getCollectionCategories(collection);
+
+  if (categories?.length < 1) return [];
+
+  const cloned = cloneDeep(categories);
+  return cloned.map(category => buildSortableCategory(category, collection));
+}
+
+function buildSortableCategory(category, collection) {
+  return {
+    id: category.id,
+    position: category.position,
+    mappings: getMappingsForCollectionCategory(collection, category.id) || []
+  };
 }
 
 export function getMappingsForCollectionCategory(collection, categoryId) {
