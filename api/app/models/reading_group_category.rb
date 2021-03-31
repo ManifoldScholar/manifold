@@ -24,9 +24,17 @@ class ReadingGroupCategory < ApplicationRecord
 
   scope :in_order, -> { order(position: :asc) }
 
-  validates :title, :description, presence: true
+  validates :title, presence: true
 
   private
+
+  before_validation :set_default_description!
+
+  # @api private
+  # @return [void]
+  def set_default_description!
+    self.description = "" unless description?
+  end
 
   def slug_candidates
     fa_cache.title.refresh!
