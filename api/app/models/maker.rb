@@ -36,6 +36,7 @@ class Maker < ApplicationRecord
 
   def search_data
     {
+      search_result_type: search_result_type,
       title: full_name,
       first_name: first_name,
       middle_name: middle_name,

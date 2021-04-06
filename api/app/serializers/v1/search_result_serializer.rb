@@ -55,11 +55,11 @@ module V1
     class << self
 
       def camelized_type(object)
-        object._type&.camelize(:lower)
+        object.search_result_type&.camelize(:lower)
       end
 
       def parents(object)
-        message = "parents_for_#{object._type}"
+        message = "parents_for_#{object.search_result_type}"
         return send(message, object) if respond_to? message
 
         {}

@@ -131,6 +131,7 @@ class Resource < ApplicationRecord
   # rubocop:disable Metrics/AbcSize
   def search_data
     {
+      search_result_type: search_result_type,
       title: title_plaintext,
       full_text: [description_plaintext, caption].reject(&:blank?).join("\n"),
       parent_project: project&.id,

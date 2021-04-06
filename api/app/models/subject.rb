@@ -41,6 +41,7 @@ class Subject < ApplicationRecord
 
   def search_data
     {
+      search_result_type: search_result_type,
       title: title,
       hidden: false
     }

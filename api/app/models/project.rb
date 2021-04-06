@@ -241,6 +241,7 @@ class Project < ApplicationRecord
   # rubocop:disable Metrics/AbcSize
   def search_data
     {
+      search_result_type: search_result_type,
       title: title,
       full_text: description_plaintext,
       keywords: (tag_list + texts.map(&:title) + subjects.map(&:title) + hashtag).reject(&:blank?),

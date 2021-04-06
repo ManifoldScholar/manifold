@@ -208,6 +208,7 @@ class Annotation < ApplicationRecord
 
   def search_data
     {
+      search_result_type: search_result_type,
       title: subject,
       full_text: body,
       creator: creator&.full_name,

@@ -59,6 +59,7 @@ class Event < ApplicationRecord
 
   def search_data
     {
+      search_result_type: search_result_type,
       title: subject_title_formatted,
       full_text: attribution_name,
       parent_project: project&.id,

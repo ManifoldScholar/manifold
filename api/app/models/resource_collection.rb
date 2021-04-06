@@ -64,6 +64,7 @@ class ResourceCollection < ApplicationRecord
 
   def search_data
     {
+      search_result_type: search_result_type,
       title: title_plaintext,
       full_text: description_plaintext,
       parent_project: project&.id,
