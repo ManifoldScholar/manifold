@@ -53,13 +53,13 @@ server {
     proxy_set_header X-Forwarded-For $remote_addr;
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header X-Sendfile-Type X-Accel-Redirect;
-    proxy_set_header X-Accel-Mapping <%= root %>/api/=/__send_file_accel/;
+    proxy_set_header X-Accel-Mapping <%= parent_dir %>/=/__send_file_accel/;
     proxy_pass http://<%= name %>-api.<%= tld.strip %>;
   }
 
   location /__send_file_accel {
     internal;
-    alias <%= root %>/api;
+    alias <%= parent_dir %>;
   }
 
   location /system {

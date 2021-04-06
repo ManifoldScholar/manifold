@@ -9,6 +9,7 @@ fi
 
 PROJ_DIR=$(pwd)
 PROJ_NAME=$(basename "$PWD")
+PARENT_DIR="$(dirname "$PROJ_DIR")"
 
 # Bootstrap first
 echo "==> Execute ./script/bootstrap"
@@ -34,6 +35,7 @@ fi
 ./script/helpers/setup-nginx-conf $PROJ_NAME $PROJ_DIR config/dev/nginx.conf.erb \
     --extra-val=api_socket_dir=$PROJ_DIR/api/tmp/sockets \
     --extra-val=client_socket_dir=$PROJ_DIR/client/tmp/sockets \
-    --extra-val=log_dir=$PROJ_DIR/log
+    --extra-val=log_dir=$PROJ_DIR/log \
+    --extra-val=parent_dir=$PARENT_DIR
 exit
 
