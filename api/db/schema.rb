@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_31_001706) do
+ActiveRecord::Schema.define(version: 2021_04_06_161945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -1498,65 +1498,6 @@ UNION ALL
   WHERE (text_titles.kind IS NOT NULL)
   GROUP BY text_titles.text_id;
   SQL
-  create_view "text_summaries", sql_definition: <<-SQL
-    SELECT t.project_id,
-    t.id,
-    t.id AS text_id,
-    t.created_at,
-    t.updated_at,
-    t.published,
-    t.slug,
-    t.category_id,
-    t."position",
-    t.description,
-    (t.fa_cache #>> '{description,formatted}'::text[]) AS description_formatted,
-    (t.fa_cache #>> '{description,plaintext}'::text[]) AS description_plaintext,
-    t.start_text_section_id,
-    t.publication_date,
-    t.cover_data,
-    t.toc,
-    t.ignore_access_restrictions,
-    tb.id AS toc_section,
-    ta.subtitle,
-    ta.subtitle_formatted,
-    ta.subtitle_plaintext,
-    ta.title,
-    ta.title_formatted,
-    ta.title_plaintext,
-    tm.creator_names,
-    tm.collaborator_names,
-    COALESCE(tac.annotations_count, (0)::bigint) AS annotations_count,
-    COALESCE(tac.highlights_count, (0)::bigint) AS highlights_count,
-    COALESCE(tac.orphaned_annotations_count, (0)::bigint) AS orphaned_annotations_count,
-    COALESCE(tac.orphaned_highlights_count, (0)::bigint) AS orphaned_highlights_count
-   FROM (((((texts t
-     LEFT JOIN LATERAL ( SELECT count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
-            count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
-            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count
-           FROM (annotations a
-             JOIN text_sections ts ON ((ts.id = a.text_section_id)))
-          WHERE (ts.text_id = t.id)) tac ON (true))
-     LEFT JOIN text_title_summaries tts ON ((t.id = tts.text_id)))
-     LEFT JOIN LATERAL ( SELECT (tts.titles #>> '{main,raw}'::text[]) AS title,
-            (tts.titles #>> '{subtitle,raw}'::text[]) AS subtitle,
-            (tts.titles #>> '{main,formatted}'::text[]) AS title_formatted,
-            (tts.titles #>> '{subtitle,formatted}'::text[]) AS subtitle_formatted,
-            (tts.titles #>> '{main,plaintext}'::text[]) AS title_plaintext,
-            (tts.titles #>> '{subtitle,plaintext}'::text[]) AS subtitle_plaintext
-           FROM text_titles tt
-          WHERE (tt.text_id = t.id)) ta ON (true))
-     LEFT JOIN LATERAL ( SELECT ts.id
-           FROM text_sections ts
-          WHERE ((ts.text_id = t.id) AND ((ts.kind)::text = 'navigation'::text))
-          ORDER BY ts.created_at
-         LIMIT 1) tb ON (true))
-     LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
-            string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
-           FROM (collaborators c
-             JOIN makers m ON ((m.id = c.maker_id)))
-          WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
-  SQL
   create_view "project_summaries", sql_definition: <<-SQL
     SELECT p.id,
     p.id AS project_id,
@@ -1581,5 +1522,57 @@ UNION ALL
            FROM (collaborators c
              JOIN makers m ON ((m.id = c.maker_id)))
           WHERE (((c.collaboratable_type)::text = 'Project'::text) AND (c.collaboratable_id = p.id))) pm ON (true));
+  SQL
+  create_view "text_summaries", sql_definition: <<-SQL
+    SELECT t.project_id,
+    t.id,
+    t.id AS text_id,
+    t.created_at,
+    t.updated_at,
+    t.published,
+    t.slug,
+    t.category_id,
+    t."position",
+    t.description,
+    (t.fa_cache #>> '{description,formatted}'::text[]) AS description_formatted,
+    (t.fa_cache #>> '{description,plaintext}'::text[]) AS description_plaintext,
+    t.start_text_section_id,
+    t.publication_date,
+    t.cover_data,
+    t.toc,
+    t.ignore_access_restrictions,
+    tb.id AS toc_section,
+    (tts.titles #>> '{subtitle,raw}'::text[]) AS subtitle,
+    (tts.titles #>> '{subtitle,formatted}'::text[]) AS subtitle_formatted,
+    (tts.titles #>> '{subtitle,plaintext}'::text[]) AS subtitle_plaintext,
+    (tts.titles #>> '{main,raw}'::text[]) AS title,
+    (tts.titles #>> '{main,formatted}'::text[]) AS title_formatted,
+    (tts.titles #>> '{main,plaintext}'::text[]) AS title_plaintext,
+    tts.titles,
+    tm.creator_names,
+    tm.collaborator_names,
+    COALESCE(tac.annotations_count, (0)::bigint) AS annotations_count,
+    COALESCE(tac.highlights_count, (0)::bigint) AS highlights_count,
+    COALESCE(tac.orphaned_annotations_count, (0)::bigint) AS orphaned_annotations_count,
+    COALESCE(tac.orphaned_highlights_count, (0)::bigint) AS orphaned_highlights_count
+   FROM ((((texts t
+     LEFT JOIN LATERAL ( SELECT count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+            count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
+            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count
+           FROM (annotations a
+             JOIN text_sections ts ON ((ts.id = a.text_section_id)))
+          WHERE (ts.text_id = t.id)) tac ON (true))
+     LEFT JOIN text_title_summaries tts ON ((t.id = tts.text_id)))
+     LEFT JOIN LATERAL ( SELECT ts.id
+           FROM text_sections ts
+          WHERE ((ts.text_id = t.id) AND ((ts.kind)::text = 'navigation'::text))
+          ORDER BY ts.created_at
+         LIMIT 1) tb ON (true))
+     LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
+            string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
+           FROM (collaborators c
+             JOIN makers m ON ((m.id = c.maker_id)))
+          WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
   SQL
 end
