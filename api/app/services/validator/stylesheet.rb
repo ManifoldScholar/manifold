@@ -255,7 +255,7 @@ module Validator
     # @param value [String]
     # @return [String]
     def hex_color_value(value)
-      ::Chroma.paint(value).to_hex
+      ::Chroma.paint(value.dup).to_hex
     end
 
     # Inverts a given color value
