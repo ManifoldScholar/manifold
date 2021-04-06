@@ -12,7 +12,7 @@ exports[`frontend/components/utility/BackLinkPrimary matches the snapshot 1`] = 
       fill="currentColor"
       icon="arrowLeft16"
       iconClass="back-link-primary__icon"
-      size="default"
+      size={24}
       svgProps={
         Object {
           "aria-hidden": true,

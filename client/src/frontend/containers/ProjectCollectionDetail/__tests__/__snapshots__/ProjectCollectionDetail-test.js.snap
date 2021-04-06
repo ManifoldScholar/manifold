@@ -1699,7 +1699,6 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
   <Connect(HigherOrder.WithCurrentUser('Layout.ButtonNavigation))
     grayBg={false}
     hideAtNarrow={true}
-    showFollowing={false}
     showProjectCollections={true}
     showProjects={false}
   />
