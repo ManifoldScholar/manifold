@@ -292,7 +292,16 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
         }
       />
       <UIPanel
-        bodyComponent={[Function]}
+        bodyComponent={
+          Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "displayName": "Connect(HigherOrder.WithCurrentUser('UserMenuBody))",
+            "mapStateToProps": [Function],
+            "type": [Function],
+          }
+        }
         context="reader"
         hidePanel={[Function]}
         hideUserMenu={[Function]}
