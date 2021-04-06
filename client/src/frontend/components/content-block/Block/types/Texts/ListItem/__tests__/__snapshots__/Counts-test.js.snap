@@ -9,7 +9,7 @@ exports[`frontend/components/TextList/ListItem/Counts matches the snapshot 1`] =
   >
     <IconComposer
       fill="currentColor"
-      icon="comment32"
+      icon="interactAnnotate32"
       iconClass="text-counts__interaction-icon"
       size={32}
       svgProps={
@@ -17,6 +17,10 @@ exports[`frontend/components/TextList/ListItem/Counts matches the snapshot 1`] =
           "aria-hidden": true,
         }
       }
+    />
+    <span
+      aria-hidden={true}
+      className="text-counts__interaction-label"
     />
     <span
       className="screen-reader-text"
@@ -30,7 +34,7 @@ exports[`frontend/components/TextList/ListItem/Counts matches the snapshot 1`] =
   >
     <IconComposer
       fill="currentColor"
-      icon="annotate32"
+      icon="interactHighlight32"
       iconClass="text-counts__interaction-icon"
       size={32}
       svgProps={
@@ -38,6 +42,10 @@ exports[`frontend/components/TextList/ListItem/Counts matches the snapshot 1`] =
           "aria-hidden": true,
         }
       }
+    />
+    <span
+      aria-hidden={true}
+      className="text-counts__interaction-label"
     />
     <span
       className="screen-reader-text"
