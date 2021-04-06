@@ -404,9 +404,12 @@ exports[`frontend/components/TextList/ListItem/Content matches the snapshot 1`] 
         }
       }
     />
-    <TextList.ListItem.Bibliographic
+    <ContentBlock.Types.Texts.ListItem.Bibliographic
       baseClass="text-block"
       readUrl="/foo"
+      showAuthors={true}
+      showDescriptions={true}
+      showSubtitles={true}
       text={
         Object {
           "attributes": Object {

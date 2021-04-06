@@ -10,7 +10,7 @@ exports[`global/components/Annotation/Annotation/TextContent/Wrapper matches the
     <IconComposer
       fill="currentColor"
       icon="socialCite32"
-      iconClass="annotation-selection__icon"
+      iconClass="annotation-selection__icon annotation-selection__icon--flipped"
       size="default"
       svgProps={
         Object {

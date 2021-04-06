@@ -261,7 +261,7 @@ exports[`frontend/containers/Frontend/Frontend matches the snapshot 1`] = `
       }
     />
     <main
-      className=""
+      className="main-content"
       id="skip-to-main"
     >
       <div>
