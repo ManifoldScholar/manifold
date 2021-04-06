@@ -27,9 +27,7 @@ exports[`frontend/components/project-list/Grid matches the snapshot 1`] = `
             authenticated={true}
             dispatch={[Function]}
             favorites={Object {}}
-            hideDate={false}
             hideDesc={true}
-            hideMeta={false}
             project={
               Object {
                 "attributes": Object {

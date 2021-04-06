@@ -253,7 +253,7 @@ exports[`global/components/comment/detail/Detail matches the snapshot 1`] = `
       >
         <li>
           <button
-            className="annotation-reply__list-button"
+            className="annotation-reply__inline-list-button"
             onClick={[Function]}
           >
             Reply
@@ -395,7 +395,7 @@ exports[`global/components/comment/detail/Detail matches the snapshot 1`] = `
         >
           <li>
             <button
-              className="annotation-reply__list-button"
+              className="annotation-reply__inline-list-button"
               onClick={[Function]}
             >
               Edit
@@ -538,7 +538,7 @@ exports[`global/components/comment/detail/Detail matches the snapshot 1`] = `
         >
           <li>
             <button
-              className="annotation-reply__list-button"
+              className="annotation-reply__inline-list-button"
               onClick={[Function]}
             >
               Delete
@@ -547,7 +547,7 @@ exports[`global/components/comment/detail/Detail matches the snapshot 1`] = `
         </Connect(withRouter(AuthorizeComponent))>
         <li>
           <button
-            className="annotation-reply__list-button"
+            className="annotation-reply__inline-list-button"
             onClick={[Function]}
           >
             Flag
@@ -567,7 +567,7 @@ exports[`global/components/comment/detail/Detail matches the snapshot 1`] = `
       >
         <li>
           <button
-            className="annotation-reply__list-button"
+            className="annotation-reply__inline-list-button"
           >
             Login to reply
           </button>

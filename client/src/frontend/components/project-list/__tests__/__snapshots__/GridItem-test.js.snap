@@ -556,7 +556,7 @@ exports[`frontend/components/project-list/GridItem matches the snapshot 1`] = `
       </p>
     </div>
   </Link>
-  <Collecting.Toggle
+  <Connect(HigherOrder.WithReadingGroups(Connect(HigherOrder.WithCurrentUser('WithScreenReaderStatus('Collecting.Toggle)))))
     collectable={
       Object {
         "attributes": Object {

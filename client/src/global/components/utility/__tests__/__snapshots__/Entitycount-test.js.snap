@@ -7,11 +7,15 @@ exports[`global/components/utility/Entitycount matches the snapshot 1`] = `
     className="list-total"
   >
     Showing 
-    <span>
+    <span
+      className="list-total__highlighted"
+    >
       1-1
     </span>
      of 
-    <span>
+    <span
+      className="list-total__highlighted"
+    >
       2
     </span>
      babies: 
