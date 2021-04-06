@@ -1,13 +1,21 @@
 require "rails_helper"
 require "storage/tus_gcs"
 
-RSpec.describe Storage::TusGcs, integration: true, slow: true do
+RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true do
   before(:all) do
     Settings.instance.update_from_environment!
   end
 
   before(:each) do
     WebMock.allow_net_connect!
+  end
+
+  around(:example) do
+    if bucket.present?
+      example.run
+    else
+      skip('skipping tus_gcs integration ENV["MANIFOLD_SETTINGS_STORAGE_TEST_BUCKET"] is blank')
+    end
   end
 
   let(:bucket) { ENV["MANIFOLD_SETTINGS_STORAGE_TEST_BUCKET"] }
