@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_31_001706) do
+ActiveRecord::Schema.define(version: 2021_04_06_161945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -1247,64 +1247,6 @@ ActiveRecord::Schema.define(version: 2020_12_31_001706) do
             ELSE NULL::character varying
         END);
   SQL
-  create_view "text_export_statuses", sql_definition: <<-SQL
-    SELECT t.id AS text_id,
-    te.id AS text_export_id,
-        CASE te.export_kind
-            WHEN 'epub_v3'::text THEN (t.export_configuration @> '{"epub_v3": true}'::jsonb)
-            ELSE false
-        END AS autoexport,
-    te.export_kind,
-    te.fingerprint AS export_fingerprint,
-    (t.fingerprint = te.fingerprint) AS current,
-    (t.fingerprint <> te.fingerprint) AS stale,
-    te.created_at AS exported_at
-   FROM (texts t
-     JOIN text_exports te ON ((t.id = te.text_id)));
-  SQL
-  create_view "project_export_statuses", sql_definition: <<-SQL
-    SELECT p.id AS project_id,
-    pe.id AS project_export_id,
-        CASE pe.export_kind
-            WHEN 'bag_it'::text THEN (p.export_configuration @> '{"bag_it": true}'::jsonb)
-            ELSE false
-        END AS autoexport,
-    pe.export_kind,
-    pe.fingerprint AS export_fingerprint,
-    (p.fingerprint = pe.fingerprint) AS current,
-    (p.fingerprint <> pe.fingerprint) AS stale,
-    pe.created_at AS exported_at
-   FROM (projects p
-     JOIN project_exports pe ON ((p.id = pe.project_id)));
-  SQL
-  create_view "user_derived_roles", sql_definition: <<-SQL
-    SELECT u.id AS user_id,
-    COALESCE((array_agg(r.name ORDER BY
-        CASE r.name
-            WHEN 'admin'::text THEN 1
-            WHEN 'editor'::text THEN 2
-            WHEN 'project_creator'::text THEN 3
-            WHEN 'marketeer'::text THEN 4
-            WHEN 'reader'::text THEN 8
-            ELSE 20
-        END) FILTER (WHERE (r.kind = 'global'::text)))[1], 'reader'::character varying) AS role,
-    COALESCE((array_agg(r.name ORDER BY
-        CASE r.name
-            WHEN 'admin'::text THEN 1
-            WHEN 'editor'::text THEN 2
-            WHEN 'project_creator'::text THEN 3
-            WHEN 'marketeer'::text THEN 4
-            WHEN 'project_editor'::text THEN 5
-            WHEN 'project_resource_editor'::text THEN 6
-            WHEN 'project_author'::text THEN 7
-            WHEN 'reader'::text THEN 8
-            ELSE 20
-        END) FILTER (WHERE (r.kind = ANY (ARRAY['global'::text, 'scoped'::text]))))[1], 'reader'::character varying) AS kind
-   FROM ((users u
-     LEFT JOIN users_roles ur ON ((ur.user_id = u.id)))
-     LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
-  GROUP BY u.id;
-  SQL
   create_view "entitlement_assigned_roles", sql_definition: <<-SQL
     SELECT ur.user_id,
     er.id AS entitlement_role_id,
@@ -1471,6 +1413,64 @@ UNION ALL
   GROUP BY ur.user_id, r.resource_id, r.resource_type
  HAVING ((r.resource_id IS NOT NULL) AND (r.resource_type IS NOT NULL));
   SQL
+  create_view "project_export_statuses", sql_definition: <<-SQL
+    SELECT p.id AS project_id,
+    pe.id AS project_export_id,
+        CASE pe.export_kind
+            WHEN 'bag_it'::text THEN (p.export_configuration @> '{"bag_it": true}'::jsonb)
+            ELSE false
+        END AS autoexport,
+    pe.export_kind,
+    pe.fingerprint AS export_fingerprint,
+    (p.fingerprint = pe.fingerprint) AS current,
+    (p.fingerprint <> pe.fingerprint) AS stale,
+    pe.created_at AS exported_at
+   FROM (projects p
+     JOIN project_exports pe ON ((p.id = pe.project_id)));
+  SQL
+  create_view "text_export_statuses", sql_definition: <<-SQL
+    SELECT t.id AS text_id,
+    te.id AS text_export_id,
+        CASE te.export_kind
+            WHEN 'epub_v3'::text THEN (t.export_configuration @> '{"epub_v3": true}'::jsonb)
+            ELSE false
+        END AS autoexport,
+    te.export_kind,
+    te.fingerprint AS export_fingerprint,
+    (t.fingerprint = te.fingerprint) AS current,
+    (t.fingerprint <> te.fingerprint) AS stale,
+    te.created_at AS exported_at
+   FROM (texts t
+     JOIN text_exports te ON ((t.id = te.text_id)));
+  SQL
+  create_view "user_derived_roles", sql_definition: <<-SQL
+    SELECT u.id AS user_id,
+    COALESCE((array_agg(r.name ORDER BY
+        CASE r.name
+            WHEN 'admin'::text THEN 1
+            WHEN 'editor'::text THEN 2
+            WHEN 'project_creator'::text THEN 3
+            WHEN 'marketeer'::text THEN 4
+            WHEN 'reader'::text THEN 8
+            ELSE 20
+        END) FILTER (WHERE (r.kind = 'global'::text)))[1], 'reader'::character varying) AS role,
+    COALESCE((array_agg(r.name ORDER BY
+        CASE r.name
+            WHEN 'admin'::text THEN 1
+            WHEN 'editor'::text THEN 2
+            WHEN 'project_creator'::text THEN 3
+            WHEN 'marketeer'::text THEN 4
+            WHEN 'project_editor'::text THEN 5
+            WHEN 'project_resource_editor'::text THEN 6
+            WHEN 'project_author'::text THEN 7
+            WHEN 'reader'::text THEN 8
+            ELSE 20
+        END) FILTER (WHERE (r.kind = ANY (ARRAY['global'::text, 'scoped'::text]))))[1], 'reader'::character varying) AS kind
+   FROM ((users u
+     LEFT JOIN users_roles ur ON ((ur.user_id = u.id)))
+     LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
+  GROUP BY u.id;
+  SQL
   create_view "reading_group_membership_counts", sql_definition: <<-SQL
     SELECT rgm.id AS reading_group_membership_id,
     count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
@@ -1498,65 +1498,6 @@ UNION ALL
   WHERE (text_titles.kind IS NOT NULL)
   GROUP BY text_titles.text_id;
   SQL
-  create_view "text_summaries", sql_definition: <<-SQL
-    SELECT t.project_id,
-    t.id,
-    t.id AS text_id,
-    t.created_at,
-    t.updated_at,
-    t.published,
-    t.slug,
-    t.category_id,
-    t."position",
-    t.description,
-    (t.fa_cache #>> '{description,formatted}'::text[]) AS description_formatted,
-    (t.fa_cache #>> '{description,plaintext}'::text[]) AS description_plaintext,
-    t.start_text_section_id,
-    t.publication_date,
-    t.cover_data,
-    t.toc,
-    t.ignore_access_restrictions,
-    tb.id AS toc_section,
-    ta.subtitle,
-    ta.subtitle_formatted,
-    ta.subtitle_plaintext,
-    ta.title,
-    ta.title_formatted,
-    ta.title_plaintext,
-    tm.creator_names,
-    tm.collaborator_names,
-    COALESCE(tac.annotations_count, (0)::bigint) AS annotations_count,
-    COALESCE(tac.highlights_count, (0)::bigint) AS highlights_count,
-    COALESCE(tac.orphaned_annotations_count, (0)::bigint) AS orphaned_annotations_count,
-    COALESCE(tac.orphaned_highlights_count, (0)::bigint) AS orphaned_highlights_count
-   FROM (((((texts t
-     LEFT JOIN LATERAL ( SELECT count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
-            count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
-            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count
-           FROM (annotations a
-             JOIN text_sections ts ON ((ts.id = a.text_section_id)))
-          WHERE (ts.text_id = t.id)) tac ON (true))
-     LEFT JOIN text_title_summaries tts ON ((t.id = tts.text_id)))
-     LEFT JOIN LATERAL ( SELECT (tts.titles #>> '{main,raw}'::text[]) AS title,
-            (tts.titles #>> '{subtitle,raw}'::text[]) AS subtitle,
-            (tts.titles #>> '{main,formatted}'::text[]) AS title_formatted,
-            (tts.titles #>> '{subtitle,formatted}'::text[]) AS subtitle_formatted,
-            (tts.titles #>> '{main,plaintext}'::text[]) AS title_plaintext,
-            (tts.titles #>> '{subtitle,plaintext}'::text[]) AS subtitle_plaintext
-           FROM text_titles tt
-          WHERE (tt.text_id = t.id)) ta ON (true))
-     LEFT JOIN LATERAL ( SELECT ts.id
-           FROM text_sections ts
-          WHERE ((ts.text_id = t.id) AND ((ts.kind)::text = 'navigation'::text))
-          ORDER BY ts.created_at
-         LIMIT 1) tb ON (true))
-     LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
-            string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
-           FROM (collaborators c
-             JOIN makers m ON ((m.id = c.maker_id)))
-          WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
-  SQL
   create_view "project_summaries", sql_definition: <<-SQL
     SELECT p.id,
     p.id AS project_id,
@@ -1581,5 +1522,57 @@ UNION ALL
            FROM (collaborators c
              JOIN makers m ON ((m.id = c.maker_id)))
           WHERE (((c.collaboratable_type)::text = 'Project'::text) AND (c.collaboratable_id = p.id))) pm ON (true));
+  SQL
+  create_view "text_summaries", sql_definition: <<-SQL
+    SELECT t.project_id,
+    t.id,
+    t.id AS text_id,
+    t.created_at,
+    t.updated_at,
+    t.published,
+    t.slug,
+    t.category_id,
+    t."position",
+    t.description,
+    (t.fa_cache #>> '{description,formatted}'::text[]) AS description_formatted,
+    (t.fa_cache #>> '{description,plaintext}'::text[]) AS description_plaintext,
+    t.start_text_section_id,
+    t.publication_date,
+    t.cover_data,
+    t.toc,
+    t.ignore_access_restrictions,
+    tb.id AS toc_section,
+    (tts.titles #>> '{subtitle,raw}'::text[]) AS subtitle,
+    (tts.titles #>> '{subtitle,formatted}'::text[]) AS subtitle_formatted,
+    (tts.titles #>> '{subtitle,plaintext}'::text[]) AS subtitle_plaintext,
+    (tts.titles #>> '{main,raw}'::text[]) AS title,
+    (tts.titles #>> '{main,formatted}'::text[]) AS title_formatted,
+    (tts.titles #>> '{main,plaintext}'::text[]) AS title_plaintext,
+    tts.titles,
+    tm.creator_names,
+    tm.collaborator_names,
+    COALESCE(tac.annotations_count, (0)::bigint) AS annotations_count,
+    COALESCE(tac.highlights_count, (0)::bigint) AS highlights_count,
+    COALESCE(tac.orphaned_annotations_count, (0)::bigint) AS orphaned_annotations_count,
+    COALESCE(tac.orphaned_highlights_count, (0)::bigint) AS orphaned_highlights_count
+   FROM ((((texts t
+     LEFT JOIN LATERAL ( SELECT count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+            count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
+            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count
+           FROM (annotations a
+             JOIN text_sections ts ON ((ts.id = a.text_section_id)))
+          WHERE (ts.text_id = t.id)) tac ON (true))
+     LEFT JOIN text_title_summaries tts ON ((t.id = tts.text_id)))
+     LEFT JOIN LATERAL ( SELECT ts.id
+           FROM text_sections ts
+          WHERE ((ts.text_id = t.id) AND ((ts.kind)::text = 'navigation'::text))
+          ORDER BY ts.created_at
+         LIMIT 1) tb ON (true))
+     LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
+            string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
+           FROM (collaborators c
+             JOIN makers m ON ((m.id = c.maker_id)))
+          WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
   SQL
 end
