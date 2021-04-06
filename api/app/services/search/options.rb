@@ -85,7 +85,6 @@ module Search
     def apply_indices_boost!(search)
       indices_boost = INDICES_BOOST.each_with_object({}) do |(key, boost), memo|
         index = key.respond_to?(:searchkick_index) ? key.searchkick_index.name : key
-
         index_by_alias = index_alias_for index
 
         memo[index_by_alias || index] = boost

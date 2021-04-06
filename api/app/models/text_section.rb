@@ -68,11 +68,9 @@ class TextSection < ApplicationRecord
     batch_size: 25,
     merge_mappings: true,
     mappings: {
-      text_section: {
-        properties: {
-          text_nodes: {
-            type: "nested"
-          }
+      properties: {
+        text_nodes: {
+          type: "nested"
         }
       }
     }
@@ -90,6 +88,7 @@ class TextSection < ApplicationRecord
 
   def search_data
     {
+      search_result_type: search_result_type,
       title: name,
       parent_text: text&.id,
       parent_project: project&.id,

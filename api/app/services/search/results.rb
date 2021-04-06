@@ -113,7 +113,10 @@ module Search
     end
 
     def result_model_reference(result)
-      result.values_at("_type", "_id")
+      [
+        result.dig("_source", "search_result_type") || result.dig("search_result_type"),
+        result.dig("_id")
+      ]
     end
 
     def models_in(results)

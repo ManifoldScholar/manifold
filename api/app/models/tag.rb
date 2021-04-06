@@ -19,6 +19,7 @@ class Tag < ActsAsTaggableOn::Tag
 
   def search_data
     {
+      search_result_type: search_result_type,
       title: title
     }
   end
