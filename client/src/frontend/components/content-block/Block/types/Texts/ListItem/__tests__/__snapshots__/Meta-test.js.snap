@@ -7,7 +7,7 @@ exports[`frontend/components/TextList/ListItem/Meta matches the snapshot 1`] = `
   <div
     className="text-block__status text-block__status--inline"
   >
-    <TextList.ListItem.Date
+    <ContentBlock.Types.Texts.ListItem.Date
       baseClass="text-block"
       date="2017-04-24T23:25:50.161Z"
       datePrefix="Added"
@@ -19,7 +19,7 @@ exports[`frontend/components/TextList/ListItem/Meta matches the snapshot 1`] = `
       Published
     </span>
   </div>
-  <TextList.ListItem.Counts
+  <ContentBlock.Types.Texts.ListItem.Counts
     baseClass="text-block"
     text={
       Object {

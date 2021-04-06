@@ -162,11 +162,15 @@ Array [
                           class="list-total"
                         >
                           Showing 
-                          <span>
+                          <span
+                            class="list-total__highlighted"
+                          >
                             1-1
                           </span>
                            of 
-                          <span>
+                          <span
+                            class="list-total__highlighted"
+                          >
                             2
                           </span>
                            projects: 
