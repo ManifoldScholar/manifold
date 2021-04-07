@@ -136,11 +136,7 @@ class ManifoldContainer extends PureComponent {
   }
 
   reload() {
-    if (__BROWSER__) {
-      window.location.reload();
-    } else {
-      this.redirectToHome();
-    }
+    this.redirectToHome();
   }
 
   redirectToHome() {
