@@ -131,7 +131,7 @@ export class SettingsThemeContainer extends PureComponent {
                 label="Color"
                 name="attributes[theme][topBarColor]"
                 placeholder="Enter Top Bar Color"
-                instructions="Enter a hex code beginning with #"
+                instructions="Enter a color in one of the following formats: CSS color keyword, hexadecimal, rgb, rgba, hsl, hsla, or hwb. Leave blank to restore default accent color."
               />
               <Form.TextInput
                 label="URL"
