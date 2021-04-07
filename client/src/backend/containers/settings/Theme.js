@@ -35,11 +35,11 @@ export class SettingsThemeContainer extends PureComponent {
           >
             <Form.FieldGroup label={"Branding"}>
               <Form.TextInput
-                label="Press Website URL"
+                label="Website URL"
                 name="attributes[general][pressSite]"
                 placeholder="Enter URL"
                 wide
-                instructions="If present, the footer press logo image will link to this URL."
+                instructions="If present, the footer logo will link to this URL."
               />
               <Form.Upload
                 accepts="images"
@@ -59,7 +59,7 @@ export class SettingsThemeContainer extends PureComponent {
               />
               <Form.Upload
                 accepts="images"
-                label="Press Footer Logo"
+                label="Footer Logo"
                 readFrom="attributes[pressLogoFooterStyles][small]"
                 name="attributes[pressLogoFooter]"
                 remove="attributes[removePressLogoFooter]"
