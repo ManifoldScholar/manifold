@@ -34,5 +34,37 @@ RSpec.shared_examples_for "a model with formatted attributes" do
         end.to execute_safely
       end
     end
+
+    context "with metadata" do
+      before do
+        skip "does not use metadata" unless described_class < ::Metadata && described_class.metadata_properties.present?
+      end
+
+      let(:instance) { FactoryBot.create described_class.model_name.singular }
+
+      it "tracks changes to formatted metadata" do
+        property = described_class.metadata_properties.first
+
+        first_value = "first value"
+
+        expect do
+          instance.metadata[property] = first_value
+
+          instance.save!
+        end.to execute_safely.and change { instance.public_send(:"#{property}_formatted") }.to(first_value)
+
+        expect(instance.metadata_formatted).to include_json(property => first_value)
+
+        second_value = "second value"
+
+        expect do
+          instance.metadata[property] = second_value
+
+          instance.save!
+        end.to execute_safely.and change { instance.public_send(:"#{property}_formatted") }.from(first_value).to(second_value)
+
+        expect(instance.metadata_formatted).to include_json(property => second_value)
+      end
+    end
   end
 end
