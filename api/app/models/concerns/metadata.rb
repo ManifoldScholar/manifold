@@ -50,6 +50,8 @@ module Metadata
 
   class_methods do
     def with_metadata(properties)
+      attribute :metadata, :indifferent_hash
+
       config.metadata_properties = properties
       config.camelized_metadata_properties = properties.map { |p| p.camelize(:lower) }
 
