@@ -215,10 +215,7 @@ export default {
     },
     doi: {
       placeholder: "Enter a digital object identifier",
-      type: "MaskedTextInput",
-      inputProps: {
-        mask: "doi"
-      }
+      type: "TextInput"
     },
     resourcesDoi: {
       placeholder: "Enter a digital object identifier",
