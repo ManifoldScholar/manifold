@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import isEqual from "lodash/isEqual";
-import cloneDeep from "lodash/cloneDeep";
+// import isEqual from "lodash/isEqual";
+// import cloneDeep from "lodash/cloneDeep";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import DraggableEventHelper from "../helpers/draggableEvent";
 
@@ -10,16 +10,23 @@ function cloneArray(items) {
   return items.length > 0 ? cloneDeep(items) : [];
 }
 
-function SortableCategories({ categories, onUpdateCollection, children }) {
-  const cloned = cloneArray(categories);
-  const [sorted, setSorted] = useState([]);
+function SortableCategories({ collection, onUpdateCollection, children }) {
+  const {
+    attributes: { categories }
+  } = collection;
+  const sortedCategories = categories.map(cat => ({
+    id: cat.id,
+    position: cat.position
+  }));
+
+  const [sorted, setSorted] = useState(sortedCategories);
   const [prevCategories, setPrevCategories] = useState(undefined);
   const [activeType, setActiveType] = useState(null);
 
-  if (!isEqual(cloned, prevCategories)) {
-    setSorted(cloned);
-    setPrevCategories(cloned);
-  }
+  // if (!isEqual(cloned, prevCategories)) {
+  //   setSorted(cloned);
+  //   setPrevCategories(cloned);
+  // }
 
   function handleDragStart(draggable) {
     setActiveType(draggable.type);
@@ -32,6 +39,7 @@ function SortableCategories({ categories, onUpdateCollection, children }) {
 
     if (!draggableHelper.actionable) return;
 
+    console.log(draggableHelper.resorted, "resorted?");
     if (draggableHelper.isCategory) return setSorted(draggableHelper.resorted);
 
     const action = draggableHelper.collectableAction;
@@ -69,7 +77,7 @@ SortableCategories.displayName =
   "ReadingGroup.Collecting.CollectionEditor.SortableCategories";
 
 SortableCategories.propTypes = {
-  categories: PropTypes.array.isRequired,
+  collection: PropTypes.object.isRequired,
   onUpdateCollection: PropTypes.func.isRequired,
   children: PropTypes.func.isRequired
 };

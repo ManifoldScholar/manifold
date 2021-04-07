@@ -1,12 +1,12 @@
-export function reorderCategories(categories, sortedCollection) {
-  if (categories?.length < 1 || sortedCollection?.length < 1) return [];
-  const sorted = categories.sort(function(a, b) {
-    const sortedA = sortedCollection.find(category => (category.id = a.id));
-    const sortedB = sortedCollection.find(category => (category.id = b.id));
-    return sortedA.position - sortedB.position;
-  });
-  return sorted;
-}
+// export function reorderCategories(categories, sortedCollection) {
+//   if (categories?.length < 1 || sortedCollection?.length < 1) return [];
+//   const sorted = categories.sort(function(a, b) {
+//     const sortedA = sortedCollection.find(category => (category.id = a.id));
+//     const sortedB = sortedCollection.find(category => (category.id = b.id));
+//     return sortedA.position - sortedB.position;
+//   });
+//   return sorted;
+// }
 
 export function getResponse(id, responses) {
   return responses.find(res => res.id === id);

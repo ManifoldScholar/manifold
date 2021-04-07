@@ -71,13 +71,13 @@ function CollectionEditor({ readingGroup, responses, refresh }) {
       <CategoryCreator onSubmit={createCategory} />
       {hasPopulatedCategories && (
         <SortableCategories
-          categories={getSortableCategories(collection)}
+          collection={collection}
           onUpdateCollection={updateCollection}
         >
           {(sorted, activeType) => (
             <CategoriesList
               collection={collection}
-              categories={reorderCategories(categories, sorted)}
+              categoryOrder={sorted}
               responses={responses}
               onCollectableRemove={removeCollectable}
               activeType={activeType}

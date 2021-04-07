@@ -5,23 +5,32 @@ import { getMappingsForCollectionCategory } from "frontend/components/collecting
 
 const CategoriesList = React.memo(function CategoriesList({
   collection,
-  categories,
+  categoryOrder,
   responses,
   onCollectableRemove,
   activeType
 }) {
-  return categories.map(({ id, ...restProps }, index) => (
-    <Category
-      key={id}
-      id={id}
-      index={index}
-      mappings={getMappingsForCollectionCategory(collection, id)}
-      responses={responses}
-      onCollectableRemove={onCollectableRemove}
-      activeType={activeType}
-      {...restProps}
-    />
-  ));
+  const {
+    attributes: { categories, categoryMappings }
+  } = collection;
+
+  return categoryOrder.map(({ id }, index) => {
+    const category = categories.find(cat => cat.id === id);
+    const categoryMapping = categoryMappings[id] || null;
+
+    return (
+      <Category
+        key={id}
+        id={id}
+        index={index}
+        category={category}
+        categoryMapping={categoryMapping}
+        responses={responses}
+        onCollectableRemove={onCollectableRemove}
+        activeType={activeType}
+      />
+    );
+  });
 });
 
 CategoriesList.displayName =
@@ -29,7 +38,6 @@ CategoriesList.displayName =
 
 CategoriesList.propTypes = {
   collection: PropTypes.object.isRequired,
-  categories: PropTypes.array.isRequired,
   responses: PropTypes.object.isRequired,
   onCollectableRemove: PropTypes.func.isRequired,
   activeType: PropTypes.string

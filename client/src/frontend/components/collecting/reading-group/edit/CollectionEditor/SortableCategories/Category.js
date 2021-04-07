@@ -14,16 +14,15 @@ import {
 function Category({
   id,
   index,
-  title,
-  description,
-  mappings,
+  categoryMapping,
+  category,
   responses,
   onCollectableRemove,
   activeType
 }) {
   function getCollectedIdsByType(type) {
-    if (!mappings || !mappings[type]) return [];
-    return mappings[type];
+    if (!categoryMapping || !categoryMapping[type]) return [];
+    return categoryMapping[type];
   }
 
   function getResponsesByType(type) {
@@ -47,6 +46,8 @@ function Category({
       "collection-category-builder__category--is-dragging": snapshot.isDragging
     });
   };
+
+  const { title } = category;
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -96,14 +97,9 @@ Category.displayName = "ReadingGroup.Collecting.CollectionEditor.Category";
 Category.propTypes = {
   id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
-  title: PropTypes.shape({
-    plaintext: PropTypes.string.isRequired
-  }).isRequired,
-  description: PropTypes.shape({
-    formatted: PropTypes.node.isRequired
-  }),
   responses: PropTypes.object.isRequired,
-  mappings: PropTypes.object,
+  category: PropTypes.object.isRequired,
+  categoryMapping: PropTypes.object,
   onCollectableRemove: PropTypes.func.isRequired,
   activeType: PropTypes.string
 };
