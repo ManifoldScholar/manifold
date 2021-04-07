@@ -19,18 +19,15 @@ export default function FooterPartsNavigationLink({
     );
   };
 
-  if (has(item, "href"))
+  if (has(item, "href")) {
+    const target = item.target || item.openInNewTab ? "_blank" : null;
     return (
-      <a
-        target={item.target}
-        rel={item.rel}
-        href={item.href}
-        className={className}
-      >
+      <a target={target} rel={item.rel} href={item.href} className={className}>
         {icon(item)}
         {!hideLabel && item.title}
       </a>
     );
+  }
 
   if (has(item, "onClick"))
     return (

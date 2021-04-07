@@ -34,11 +34,20 @@ export function manifoldLinks() {
 
 export function pageLinks({ pages }) {
   const collection = sortedPages(visiblePages(pages || []));
-  return collection.map(page => ({
-    to: lh.link("frontendPage", page.attributes.slug),
-    title: page.attributes.navTitle || page.attributes.title,
-    openInNewTab: page.attributes.openInNewTab
-  }));
+  return collection.map(page => {
+    const {
+      navTitle,
+      title: pageTitle,
+      openInNewTab,
+      slug,
+      isExternalLink,
+      externalLink
+    } = page.attributes;
+    const title = navTitle || pageTitle;
+    const to = isExternalLink ? null : lh.link("frontendPage", slug);
+    const href = isExternalLink ? externalLink : null;
+    return { title, to, openInNewTab, href };
+  });
 }
 
 export function authenticationLink({
