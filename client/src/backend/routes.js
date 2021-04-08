@@ -110,11 +110,11 @@ const routes = {
               helper: r => `/backend/projects/resource/${r}/metadata`
             },
             {
-              name: "backendResourceGeneral",
+              name: "backendResourceProperties",
               exact: true,
-              component: "ResourceGeneral",
-              path: "/backend/projects/resource/:id/general",
-              helper: r => `/backend/projects/resource/${r}/general`
+              component: "ResourceProperties",
+              path: "/backend/projects/resource/:id/properties",
+              helper: r => `/backend/projects/resource/${r}/properties`
             }
           ]
         },
@@ -126,11 +126,12 @@ const routes = {
           helper: r => `/backend/projects/resource-collection/${r}`,
           routes: [
             {
-              name: "backendResourceCollectionGeneral",
+              name: "backendResourceCollectionProperties",
               exact: true,
-              component: "ResourceCollectionGeneral",
-              path: "/backend/projects/resource-collection/:id/general",
-              helper: r => `/backend/projects/resource-collection/${r}/general`
+              component: "ResourceCollectionProperties",
+              path: "/backend/projects/resource-collection/:id/properties",
+              helper: r =>
+                `/backend/projects/resource-collection/${r}/properties`
             },
             {
               name: "backendResourceCollectionResources",
@@ -228,11 +229,11 @@ const routes = {
               modal: false
             },
             {
-              name: "backendTextGeneral",
+              name: "backendTextProperties",
               exact: true,
-              component: "TextGeneral",
-              path: "/backend/projects/text/:id/general",
-              helper: t => `/backend/projects/text/${t}/general`
+              component: "TextProperties",
+              path: "/backend/projects/text/:id/properties",
+              helper: t => `/backend/projects/text/${t}/properties`
             }
           ]
         },
@@ -504,11 +505,11 @@ const routes = {
               helper: p => `/backend/projects/${p}/analytics`
             },
             {
-              name: "backendProjectGeneral",
+              name: "backendProjectProperties",
               exact: true,
-              component: "ProjectGeneral",
-              path: "/backend/projects/:id/general",
-              helper: p => `/backend/projects/${p}/general`
+              component: "ProjectProperties",
+              path: "/backend/projects/:id/properties",
+              helper: p => `/backend/projects/${p}/properties`
             }
           ]
         }
@@ -589,11 +590,11 @@ const routes = {
               helper: p => `/backend/records/pages/${p}/body`
             },
             {
-              name: "backendRecordsPageGeneral",
+              name: "backendRecordsPageProperties",
               exact: true,
-              component: "PagesGeneral",
-              path: "/backend/records/pages/:id/general",
-              helper: p => `/backend/records/pages/${p}/general`
+              component: "PagesProperties",
+              path: "/backend/records/pages/:id/properties",
+              helper: p => `/backend/records/pages/${p}/properties`
             }
           ]
         },
@@ -612,9 +613,9 @@ const routes = {
               helper: () => `/backend/records/features/new`
             },
             {
-              name: "backendRecordsFeatureGeneral",
+              name: "backendRecordsFeatureProperties",
               exact: true,
-              component: "FeaturesGeneral",
+              component: "FeaturesProperties",
               path: "/backend/records/features/:id",
               helper: p => `/backend/records/features/${p}`
             }
@@ -745,11 +746,11 @@ const routes = {
           helper: () => "/backend/settings/email"
         },
         {
-          name: "backendSettingsGeneral",
+          name: "backendSettingsProperties",
           exact: true,
-          component: "SettingsGeneral",
-          path: "/backend/settings/general",
-          helper: () => "/backend/settings/general"
+          component: "SettingsProperties",
+          path: "/backend/settings/properties",
+          helper: () => "/backend/settings/properties"
         }
       ]
     },

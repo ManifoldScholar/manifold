@@ -1,11 +1,11 @@
 import List from "./List";
 import New from "./New";
 import Detail from "./Detail";
-import General from "./General";
+import Properties from "./Properties";
 
 export default {
   List,
   New,
   Detail,
-  General
+  Properties
 };

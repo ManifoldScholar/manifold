@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import lh from "helpers/linkHandler";
-import General from "./General";
+import Properties from "./Properties";
 
 class FeaturesNewContainer extends PureComponent {
   static displayName = "Features.New";
@@ -14,7 +14,7 @@ class FeaturesNewContainer extends PureComponent {
   };
 
   redirectToFeature(feature) {
-    const path = lh.link("backendRecordsFeatureGeneral", feature.id);
+    const path = lh.link("backendRecordsFeatureProperties", feature.id);
     this.props.history.push(path);
   }
 
@@ -24,7 +24,7 @@ class FeaturesNewContainer extends PureComponent {
 
   render() {
     return (
-      <General
+      <Properties
         onSuccess={this.handleSuccess}
         sessionName={this.props.sessionName}
       />

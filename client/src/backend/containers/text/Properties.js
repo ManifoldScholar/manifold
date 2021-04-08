@@ -4,8 +4,8 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { textsAPI } from "api";
 
-export default class TextGeneralContainer extends PureComponent {
-  static displayName = "Text.General";
+export default class TextPropertiesContainer extends PureComponent {
+  static displayName = "Text.Properties";
 
   static propTypes = {
     text: PropTypes.object
@@ -16,12 +16,12 @@ export default class TextGeneralContainer extends PureComponent {
       <section>
         <FormContainer.Form
           model={this.props.text}
-          name="backend-text-general"
+          name="backend-text-properties"
           update={textsAPI.update}
           create={textsAPI.create}
           className="form-secondary"
         >
-          <Form.FieldGroup label="General">
+          <Form.FieldGroup label="Properties">
             <Form.TextInput
               wide
               label="Title"
