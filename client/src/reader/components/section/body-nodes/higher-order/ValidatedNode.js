@@ -42,7 +42,10 @@ export default RenderComponent => {
       // component, so we're going to do a double check here.
       if (this.el) {
         const domEl = ReactDOM.findDOMNode(this.el);
-        if (domEl) smoothScroll(domEl, 100);
+        if (domEl) {
+          smoothScroll(domEl, 100);
+          domEl.focus({ preventScroll: true });
+        }
       }
     }
     /* eslint-enabnle react/no-find-dom-node */
