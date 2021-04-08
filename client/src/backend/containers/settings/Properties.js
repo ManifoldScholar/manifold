@@ -8,7 +8,7 @@ import { settingsAPI, requests } from "api";
 import { select } from "utils/entityUtils";
 import config from "../../../config";
 
-export class SettingsGeneralContainer extends PureComponent {
+export class SettingsPropertiesContainer extends PureComponent {
   static mapStateToProps = state => {
     return {
       settings: select(requests.settings, state.entityStore)
@@ -23,7 +23,7 @@ export class SettingsGeneralContainer extends PureComponent {
     if (!this.props.settings) return null;
     return (
       <div>
-        <Layout.ViewHeader>General Settings</Layout.ViewHeader>
+        <Layout.ViewHeader>Settings</Layout.ViewHeader>
         <Layout.BackendPanel>
           <FormContainer.Form
             model={this.props.settings}
@@ -202,6 +202,6 @@ export class SettingsGeneralContainer extends PureComponent {
   }
 }
 
-export default connect(SettingsGeneralContainer.mapStateToProps)(
-  SettingsGeneralContainer
+export default connect(SettingsPropertiesContainer.mapStateToProps)(
+  SettingsPropertiesContainer
 );

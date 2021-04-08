@@ -8,14 +8,14 @@ import connectAndFetch from "utils/connectAndFetch";
 
 import withFormSession from "hoc/with-form-session";
 
-class PagesGeneralContainer extends PureComponent {
+class PagesPropertiesContainer extends PureComponent {
   static mapStateToProps = state => {
     return {
       page: select("backend-page", state.entityStore)
     };
   };
 
-  static displayName = "Pages.General";
+  static displayName = "Pages.Properties";
 
   static propTypes = {
     page: PropTypes.object.isRequired,
@@ -93,7 +93,7 @@ class PagesGeneralContainer extends PureComponent {
           create={pagesAPI.create}
           className="form-secondary"
         >
-          <Form.FieldGroup label="General">
+          <Form.FieldGroup label="Properties">
             <Form.TextInput
               wide
               validation={["required"]}
@@ -164,6 +164,6 @@ class PagesGeneralContainer extends PureComponent {
 }
 
 export default withFormSession(
-  connectAndFetch(PagesGeneralContainer),
+  connectAndFetch(PagesPropertiesContainer),
   "backend-page-update"
 );

@@ -203,8 +203,8 @@ exports[`Backend.Layout.Header component matches the snapshot 1`] = `
                 "ability": "update",
                 "children": Array [
                   Object {
-                    "label": "General",
-                    "route": "backendSettingsGeneral",
+                    "label": "Properties",
+                    "route": "backendSettingsProperties",
                   },
                   Object {
                     "label": "Theme",

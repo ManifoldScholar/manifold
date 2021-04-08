@@ -94,8 +94,8 @@ class Navigation {
         ability: "update",
         children: [
           {
-            label: "General",
-            route: "backendSettingsGeneral"
+            label: "Properties",
+            route: "backendSettingsProperties"
           },
           {
             label: "Theme",
@@ -135,8 +135,8 @@ class Navigation {
     const args = [collection.id];
     return [
       {
-        label: "General",
-        route: "backendResourceCollectionGeneral",
+        label: "Properties",
+        route: "backendResourceCollectionProperties",
         entity: collection,
         ability: "update",
         args
@@ -155,8 +155,8 @@ class Navigation {
     const args = [page.id];
     return [
       {
-        label: "General",
-        route: "backendRecordsPageGeneral",
+        label: "Properties",
+        route: "backendRecordsPageProperties",
         entity: page,
         ability: "update",
         args
@@ -175,8 +175,8 @@ class Navigation {
         args
       },
       {
-        label: "General",
-        route: "backendProjectGeneral",
+        label: "Properties",
+        route: "backendProjectProperties",
         entity: project,
         ability: "update",
         args
@@ -314,8 +314,8 @@ class Navigation {
     const args = [resource.id];
     const out = [
       {
-        label: "General",
-        route: "backendResourceGeneral",
+        label: "Properties",
+        route: "backendResourceProperties",
         entity: project,
         ability: "update",
         args
@@ -349,8 +349,8 @@ class Navigation {
   static settings = memoize(() => {
     return [
       {
-        label: "General",
-        route: "backendSettingsGeneral",
+        label: "Properties",
+        route: "backendSettingsProperties",
         entity: "settings",
         ability: "update"
       },
@@ -398,8 +398,8 @@ class Navigation {
         args
       },
       {
-        label: "General",
-        route: "backendTextGeneral",
+        label: "Properties",
+        route: "backendTextProperties",
         entity: text,
         ability: "update",
         args
