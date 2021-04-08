@@ -105,8 +105,8 @@ class Resource < ApplicationRecord
       .where("collection_resources.resource_collection_id = ?", id)
       .order("collection_resources.position ASC")
   }
-  scope :with_order, lambda { |by|
-    return order(:created_at, :sort_title) unless by.present?
+  scope :with_order, lambda { |by = nil|
+    return order(:sort_title, :created_at) unless by.present?
 
     order(by)
   }
