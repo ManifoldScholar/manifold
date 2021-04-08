@@ -26,7 +26,7 @@ module Attachments
       @animated_gif ||= begin
         return false unless shrine_uploaded_file.extension == "gif"
 
-        image = MiniMagick::Image.new(shrine_uploaded_file.path)
+        image = MiniMagick::Image.new(file_resource.path)
         return false unless image.type == "GIF"
         return false unless image.pages&.length&.positive?
 
