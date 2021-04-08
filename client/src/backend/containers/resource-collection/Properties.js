@@ -5,8 +5,8 @@ import FormContainer from "global/containers/form";
 import { resourceCollectionsAPI } from "api";
 import { connect } from "react-redux";
 
-export class ResourceCollectionGeneralContainer extends PureComponent {
-  static displayName = "resourceCollection.General";
+export class ResourceCollectionPropertiesContainer extends PureComponent {
+  static displayName = "resourceCollection.Properties";
 
   static propTypes = {
     resourceCollection: PropTypes.object,
@@ -61,6 +61,6 @@ export class ResourceCollectionGeneralContainer extends PureComponent {
   }
 }
 
-export default connect(ResourceCollectionGeneralContainer.mapStateToProps)(
-  ResourceCollectionGeneralContainer
+export default connect(ResourceCollectionPropertiesContainer.mapStateToProps)(
+  ResourceCollectionPropertiesContainer
 );

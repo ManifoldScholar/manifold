@@ -1,4 +1,4 @@
-import General from "./General";
+import Properties from "./Properties";
 import Metadata from "./Metadata";
 import Wrapper from "./Wrapper";
 import Collaborators from "./Collaborators";
@@ -7,7 +7,7 @@ import Styles from "./Styles";
 import Analytics from "./Analytics";
 
 export default {
-  General,
+  Properties,
   Metadata,
   Wrapper,
   Collaborators,

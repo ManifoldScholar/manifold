@@ -1,9 +1,9 @@
-import { ResourceCollectionGeneralContainer } from "../General";
+import { ResourceCollectionPropertiesContainer } from "../Properties";
 
-describe("backend/containers/resource-collection/General", () => {
+describe("backend/containers/resource-collection/Properties", () => {
   def("resourceCollection", () => factory("resourceCollection"));
   def("root", () => (
-    <ResourceCollectionGeneralContainer
+    <ResourceCollectionPropertiesContainer
       resourceCollection={$resourceCollection}
     />
   ));

@@ -11,8 +11,8 @@ import { entityStoreActions } from "actions";
 const { request } = entityStoreActions;
 import withDispatch from "hoc/with-dispatch";
 
-class ProjectGeneralContainer extends PureComponent {
-  static displayName = "Project.General";
+class ProjectPropertiesContainer extends PureComponent {
+  static displayName = "Project.Properties";
 
   static propTypes = {
     project: PropTypes.object
@@ -49,7 +49,7 @@ class ProjectGeneralContainer extends PureComponent {
             create={projectsAPI.create}
             className="form-secondary"
           >
-            <Form.FieldGroup label="General">
+            <Form.FieldGroup label="Properties">
               <Form.TextInput
                 wide
                 validation={["required"]}
@@ -167,4 +167,4 @@ class ProjectGeneralContainer extends PureComponent {
   }
 }
 
-export default withDispatch(ProjectGeneralContainer);
+export default withDispatch(ProjectPropertiesContainer);

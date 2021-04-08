@@ -1,4 +1,4 @@
-import General from "./General";
+import Properties from "./Properties";
 import Theme from "./Theme";
 import Wrapper from "./Wrapper";
 import Placeholder from "./Placeholder";
@@ -7,7 +7,7 @@ import Email from "./Email";
 import Subjects from "./subjects";
 
 export default {
-  General,
+  Properties,
   Wrapper,
   Theme,
   Placeholder,

@@ -1,11 +1,11 @@
-import General from "./General";
+import Properties from "./Properties";
 import Metadata from "./Metadata";
 import New from "./New";
 import Variants from "./Variants";
 import Wrapper from "./Wrapper";
 
 export default {
-  General,
+  Properties,
   Metadata,
   New,
   Variants,

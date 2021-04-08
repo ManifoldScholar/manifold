@@ -5,8 +5,8 @@ import FormContainer from "global/containers/form";
 import { featuresAPI } from "api";
 import connectAndFetch from "utils/connectAndFetch";
 
-class FeaturesGeneralContainer extends PureComponent {
-  static displayName = "Features.General";
+class FeaturesPropertiesContainer extends PureComponent {
+  static displayName = "Features.Properties";
 
   static propTypes = {
     feature: PropTypes.object,
@@ -26,7 +26,7 @@ class FeaturesGeneralContainer extends PureComponent {
           create={featuresAPI.create}
           className="form-secondary"
         >
-          <Form.FieldGroup label="General">
+          <Form.FieldGroup label="Properties">
             <Form.Switch
               wide
               label="Published"
@@ -138,4 +138,4 @@ class FeaturesGeneralContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(FeaturesGeneralContainer);
+export default connectAndFetch(FeaturesPropertiesContainer);
