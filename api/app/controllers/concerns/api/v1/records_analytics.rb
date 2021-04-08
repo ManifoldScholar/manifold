@@ -5,13 +5,23 @@ module API
 
       included do
         after_action :record_analytics_event
+
+        def internal_analytics_disabled?
+          self.class.internal_analytics_disabled?
+        end
       end
 
       class_methods do
         attr_reader :analytics
         attr_reader :analytics_record_getter
 
+        def internal_analytics_disabled?
+          Settings.instance.general[:disable_internal_analytics]
+        end
+
         def record_analytics_for_actions(*action_names, event:)
+          # return if internal_analytics_disabled?
+
           event = AnalyticsEventType.build(event)
           return unless event.is_a?(AnalyticsEventType)
 
@@ -24,6 +34,8 @@ module API
       end
 
       def record_analytics_event
+        # return if self.internal_analytics_disabled?
+
         registered_events = self.class.analytics[action_name]
 
         return unless registered_events.present? &&
@@ -57,6 +69,8 @@ module API
 
       def visit
         @visit ||= ::Analytics::FetchVisit.run(request: request, visit_token: visit_token, visitor_token: visitor_token).result
+      rescue ActiveRecord::RecordInvalid
+        @visit = nil
       end
 
       def visit_token
