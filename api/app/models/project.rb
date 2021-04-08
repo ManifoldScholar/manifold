@@ -86,7 +86,7 @@ class Project < ApplicationRecord
   has_many :favorites, as: :favoritable, dependent: :destroy, inverse_of: :favoritable
   has_many :events, -> { order "events.created_at DESC" }, dependent: :destroy,
                                                            inverse_of: :project
-  has_many :resources, dependent: :destroy, inverse_of: :project
+  has_many :resources, -> { with_order }, dependent: :destroy, inverse_of: :project
   has_many :resource_collections, dependent: :destroy, inverse_of: :project
   has_many :collection_resources, through: :resource_collections, inverse_of: :project
   has_many :project_subjects, dependent: :destroy, inverse_of: :project
@@ -303,15 +303,18 @@ class Project < ApplicationRecord
     filtered_events.pluck(:event_type).uniq
   end
 
+  def unsorted_resources
+    resources.reorder(nil)
+  end
+
   def resource_kinds
-    resources
-      .select("resources.kind")
-      .distinct
+    unsorted_resources
+      .distinct("resources.kind")
       .pluck(:kind)
   end
 
   def resource_tags
-    resources.joins(:tags).distinct.pluck("tags.name")
+    unsorted_resources.joins(:tags).distinct.pluck("tags.name")
   end
 
   def sorted_resource_tags
