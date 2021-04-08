@@ -47,7 +47,7 @@ class SearchResultsTypeTextSection extends PureComponent {
 
   get hasExcerpts() {
     const textNodes = this.textNodes;
-    return textNodes && textNodes.total > 0;
+    return textNodes && textNodes.total.value > 0;
   }
 
   get excerpts() {
