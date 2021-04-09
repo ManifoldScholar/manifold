@@ -14,6 +14,7 @@ module Ingestions
 
     def preprocess_manifest!
       manifest.merge! compose PreProcessors::ExtractStylesheets
+      manifest.merge! compose PreProcessors::InjectGlobalStyles
     end
 
     def preprocess_build_files!

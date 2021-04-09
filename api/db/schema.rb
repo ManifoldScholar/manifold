@@ -894,6 +894,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
     t.jsonb "press_logo_mobile_data"
     t.jsonb "favicon_data"
     t.jsonb "fa_cache", default: {}, null: false
+    t.jsonb "ingestion", default: {}
     t.index ["singleton_guard"], name: "index_settings_on_singleton_guard", unique: true
   end
 

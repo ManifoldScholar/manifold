@@ -102,6 +102,10 @@ class Navigation {
             route: "backendSettingsTheme"
           },
           {
+            label: "Ingestion",
+            route: "backendSettingsIngestion"
+          },
+          {
             label: "Integrations",
             route: "backendSettingsIntegrations"
           },
@@ -363,6 +367,12 @@ class Navigation {
       {
         label: "Integrations",
         route: "backendSettingsIntegrations",
+        entity: "settings",
+        ability: "update"
+      },
+      {
+        label: "Ingestion",
+        route: "backendSettingsIngestion",
         entity: "settings",
         ability: "update"
       },
