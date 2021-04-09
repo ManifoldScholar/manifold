@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import setter from "../setter";
 import withDispatch from "hoc/with-dispatch";
 import Errorable from "global/components/form/Errorable";
-import isString from "lodash/isString";
 import Loadable from "react-loadable";
 
 /* eslint-disable react/prop-types */
@@ -22,7 +21,7 @@ const CodeAreaInput = Loadable({
           label={props.label}
         >
           <h4 className="form-input-heading">{props.label}</h4>
-          {isString(props.instructions) ? (
+          {props.instructions ? (
             <span className="instructions">{props.instructions}</span>
           ) : null}
           <Editor {...props} />
@@ -41,13 +40,13 @@ class FormCodeArea extends Component {
     label: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
     value: PropTypes.string,
-    instructions: PropTypes.string,
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     errors: PropTypes.array,
     set: PropTypes.func,
     height: PropTypes.string,
     name: PropTypes.string,
     readOnly: PropTypes.bool,
-    mode: PropTypes.oneOf(["css", "javascript", "html"]).isRequired
+    mode: PropTypes.oneOf(["css", "javascript", "html"])
   };
 
   static defaultProps = {

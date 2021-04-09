@@ -109,6 +109,7 @@ export default {
   SettingsSubjectsNew: Settings.Subjects.New,
   SettingsSubjectsEdit: Settings.Subjects.Edit,
   SettingsEmail: Settings.Email,
+  SettingsIngestion: Settings.Ingestion,
   SettingsProperties: Settings.Properties,
   ActionCalloutNew: ActionCallout.New,
   ActionCalloutEdit: ActionCallout.Edit,

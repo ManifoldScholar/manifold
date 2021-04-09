@@ -35,7 +35,10 @@ module V1
     ) do |object, _params|
       object.general.merge(restricted_access_body_formatted: object.restricted_access_body_formatted)
     end
-
+    typed_attribute :ingestion, Types::Hash.schema(
+      global_styles: Types::String,
+      mammoth_style_map: Types::String
+    )
     typed_attribute :theme, Types::Hash.schema(
       logo_styles: Types::String,
       typekit_id: Types::String,

@@ -337,6 +337,12 @@ module Validation
         ]
       },
       {
+        ingestion: [
+          :global_styles,
+          :mammoth_style_map
+        ]
+      },
+      {
         integrations: [
           :facebook_app_id,
           :twitter_app_id,

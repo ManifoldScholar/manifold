@@ -6,7 +6,7 @@ class Settings < ApplicationRecord
   include HasFormattedAttributes
   include SerializedAbilitiesFor
 
-  SECTIONS = [:general, :integrations, :secrets, :email, :theme].freeze
+  SECTIONS = [:general, :integrations, :ingestion, :secrets, :email, :theme].freeze
 
   # rubocop/disable Layout/LineLength
   DEFAULTS = {
@@ -28,6 +28,10 @@ class Settings < ApplicationRecord
       reply_to_name: "Manifold Scholarship",
       closing: "Sincerely,\nThe Manifold Team",
       delivery_method: "sendmail"
+    },
+    ingestion: {
+      global_styles: "",
+      mammoth_style_map: ""
     }
   }.freeze
   # rubocop/enable Layout/LineLength

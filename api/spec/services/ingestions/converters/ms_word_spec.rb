@@ -21,7 +21,7 @@ RSpec.describe Ingestions::Converters::MsWord do
 
     it "extracts media files to dirs matching source file name" do
       @sources.each do |source|
-        image_path = Pathname.new(File.join(context.source_root, File.basename(source, ".*"), "media", "image1.jpg"))
+        image_path = Pathname.new(File.join(context.source_root, File.basename(source, ".*"), "media", "1.jpeg"))
         expect(File.file?(image_path)).to eq true
       end
     end

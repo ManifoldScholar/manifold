@@ -5,6 +5,7 @@ module Ingestions
       object :text
       hash :attributes do
         string :name
+        boolean :ingested, default: true
         integer :position, default: nil
         string :source_identifier, default: nil
         string :hashed_content
@@ -35,7 +36,7 @@ module Ingestions
 
       def adjusted_attributes
         attributes.clone.tap do |hash|
-          hash[:ingested] = true
+          hash[:ingested] = attributes[:ingested]
           hash[:raw_styles] = raw_styles
           hash[:ingestion_source] = ingestion_source
           hash[:creator] = context.creator

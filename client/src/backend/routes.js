@@ -737,7 +737,13 @@ const routes = {
             }
           ]
         },
-
+        {
+          name: "backendSettingsIngestion",
+          exact: true,
+          component: "SettingsIngestion",
+          path: "/backend/settings/ingestion",
+          helper: () => "/backend/settings/ingestion"
+        },
         {
           name: "backendSettingsEmail",
           exact: true,

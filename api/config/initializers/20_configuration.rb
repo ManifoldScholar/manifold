@@ -12,7 +12,9 @@ m.protocol = ssl_enabled ? "https" : "http"
 m.domain = ENV["DOMAIN"]
 m.url ||= ENV["CLIENT_URL"] || "#{ssl_enabled ? 'https' : 'http'}://#{m.domain}"
 m.api_url ||= ENV["CLIENT_BROWSER_API_URL"] || m.url
-m.elastic_search!.url ||= ENV["ELASTICSEARCH_URL"]
+m.elastic_search_url ||= ENV["ELASTICSEARCH_URL"]
+m.mammoth_path ||= ENV["MAMMOTH_PATH"] || Rails.root.join("..", "client/node_modules/mammoth/bin/mammoth")
+
 m.url_options = {
   protocol: m.protocol,
   host: m.domain

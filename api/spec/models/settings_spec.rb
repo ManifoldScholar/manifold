@@ -8,6 +8,14 @@ RSpec.describe Settings, type: :model do
     expect(s.general["a"]).to eq "a"
   end
 
+  it "sets ingestion settings correctly" do
+    s = Settings.instance
+    s.ingestion = { mammoth_style_map: "foo bar" }
+    s.save
+    s.reload
+    expect(s.ingestion[:mammoth_style_map]).to eq "foo bar"
+  end
+
   it "has default values" do
     s = Settings.instance()
     expect(s.general["installation_name"]).to eq "Manifold"

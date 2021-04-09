@@ -147,6 +147,15 @@ module Ingestions
         path.to_s.start_with?("http://", "https://")
       end
 
+      def ensure_dir(dir)
+        path = Pathname.new(dir)
+        absolute = path.absolute?
+        abs_dir = absolute ? dir : abs(dir)
+        validate_path(abs_dir)
+        FileUtils.mkdir_p(abs_dir) unless File.exist?(abs_dir)
+        abs_dir
+      end
+
       protected
 
       def file_operation(msg, rel_path, args = [])

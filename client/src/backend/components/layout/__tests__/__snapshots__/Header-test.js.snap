@@ -211,6 +211,10 @@ exports[`Backend.Layout.Header component matches the snapshot 1`] = `
                     "route": "backendSettingsTheme",
                   },
                   Object {
+                    "label": "Ingestion",
+                    "route": "backendSettingsIngestion",
+                  },
+                  Object {
                     "label": "Integrations",
                     "route": "backendSettingsIntegrations",
                   },
