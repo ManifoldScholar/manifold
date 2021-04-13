@@ -41,8 +41,7 @@ export default class FormSave extends Component {
             className={classNames({
               "button-secondary": true,
               "button-secondary--dull": true,
-              "button-secondary--outlined": this.props.theme === "backend",
-              "button-secondary--accent-pale": this.props.theme === "frontend"
+              "button-secondary--outlined": this.props.theme === "backend"
             })}
           >
             {"Cancel"}
@@ -51,8 +50,7 @@ export default class FormSave extends Component {
         <input
           className={classNames({
             "button-secondary": true,
-            "button-secondary--outlined": this.props.theme === "backend",
-            "button-secondary--accent-pale": this.props.theme === "frontend"
+            "button-secondary--outlined": this.props.theme === "backend"
           })}
           type="submit"
           value={this.props.text}

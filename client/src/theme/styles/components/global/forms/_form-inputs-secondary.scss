@@ -67,24 +67,9 @@
   }
 
   .instructions {
-    @include templateCopy;
+    @include formInstructions;
     display: block;
     margin-top: 0.75em;
-    font-size: 15px;
-    font-style: italic;
-    text-transform: none;
-
-    @include respond($break60) {
-      font-size: 17px;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    &.space-bottom {
-      margin-bottom: 2em;
-    }
 
     &--inline {
       display: inline;
@@ -109,7 +94,7 @@
     margin-top: 0.75em;
     font-size: 17px;
     font-style: italic;
-    color: $accentInteractionLight;
+    color: var(--default-highlight-color);
     text-align: right;
     text-transform: none;
   }
@@ -128,6 +113,14 @@
 
       &.secondary {
         font-weight: normal;
+      }
+
+      &.toggle {
+        margin-bottom: 1em;
+      }
+
+      &.pad-bottom {
+        margin-bottom: 1em;
       }
     }
 
@@ -286,6 +279,10 @@
 
   // Dropdown
   .form-select {
+    $_icon-size: 24px;
+    $_icon-padding: 12px;
+    $_select-inline-end-padding: $_icon-size + 2 * $_icon-padding;
+
     width: auto;
 
     &__icon {
@@ -304,7 +301,7 @@
 
     select {
       @include formInputSecondary;
-      padding: 0 42px 0.75em 0; // OD
+      padding: 0 $_select-inline-end-padding 0.75em 0; // OD
       font-size: 16px;
       line-height: normal;
       text-transform: none; // OD
@@ -322,11 +319,10 @@
       .form-select__icon {
         position: absolute;
         top: 50%;
-        right: 8px;
-        width: auto;
-        width: 22px;
-        height: 22px;
-        color: $neutralUIDullLight;
+        right: $_icon-padding;
+        width: $_icon-size;
+        height: $_icon-size;
+        color: currentColor;
         pointer-events: none;
         transform: translateY(-50%);
 
@@ -340,21 +336,16 @@
       select {
         @include unstyledSelect;
         @include utilityPrimary;
+        @include textTruncate;
         width: auto;
-        height: 2.857em;
-        padding-right: 32px;
+        height: 40px;
+        padding-right: $_select-inline-end-padding;
         padding-bottom: 0;
         padding-left: 13px;
-        overflow: hidden;
-        font-size: 16px;
-        font-weight: $regular;
-        text-overflow: ellipsis;
-        text-transform: none;
-        letter-spacing: normal;
-        white-space: nowrap;
-        background-color: $neutral90; // required for `option` to inherit in FF
+        font-size: 13px;
+        background-color: var(--select-bg-color); // required for `option` to inherit in FF
         border: 1px solid $neutralUIDullLight;
-        border-radius: 8px;
+        border-radius: $panelRoundedRadius;
         transition: border-color $duration $timing;
 
         &:focus-visible {

@@ -49,7 +49,7 @@ function ReadingGroupHomepageContainer({
   );
 
   return (
-    <div style={{ marginTop: 60 }}>
+    <div className="group-page-body">
       {childRoutes(route, {
         childProps: {
           readingGroup,

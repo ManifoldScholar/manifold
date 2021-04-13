@@ -86,7 +86,7 @@ function ReadingGroupAnnotationsContainer({
 
   return (
     <>
-      <div style={{ marginTop: 60, marginBottom: 40 }}>
+      <div className="group-page-body">
         <Annotation.NoteFilter
           memberships={memberships}
           texts={annotatedTexts}
