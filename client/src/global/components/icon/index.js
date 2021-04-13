@@ -7,6 +7,7 @@ import Annotate24 from "./24/Annotate";
 import Annotate32 from "./32/Annotate";
 import AnnotationGroup24 from "./24/AnnotationGroup";
 import AnnotationGroupAlt24 from "./24/AnnotationGroupAlt";
+import Archive24 from "./24/Archive";
 import Arrow24 from "./24/Arrow";
 import ArrowDown16 from "./16/ArrowDown";
 import ArrowDown32 from "./32/ArrowDown";
@@ -31,6 +32,7 @@ import BEResourcesBox64 from "./64/BEResourcesBox";
 import BEResourcesBoxes64 from "./64/BEResourcesBoxes";
 import Bookmark24 from "./24/Bookmark";
 import Bookmark32 from "./32/Bookmark";
+import Calendar24 from "./24/Calendar";
 import Checkmark16 from "./16/Checkmark";
 import CircleArrowDown64 from "./64/CircleArrowDown";
 import CircleArrowLeft64 from "./64/CircleArrowLeft";
@@ -48,6 +50,7 @@ import Comment32 from "./32/Comment";
 import CommentPencil32 from "./32/CommentPencil";
 import CommentPost32 from "./32/CommentPost";
 import Copy24 from "./24/Copy";
+import Delete24 from "./24/Delete";
 import Delete32 from "./32/Delete";
 import DisclosureDown16 from "./16/DisclosureDown";
 import DisclosureDown24 from "./24/DisclosureDown";
@@ -55,8 +58,10 @@ import DisclosureDown32 from "./32/DisclosureDown";
 import DisclosureUp16 from "./16/DisclosureUp";
 import DisclosureUp24 from "./24/DisclosureUp";
 import DisclosureUp32 from "./32/DisclosureUp";
+import Duplicate24 from "./24/Duplicate";
 import Duplicate32 from "./32/Duplicate";
 import EditProfile24 from "./24/EditProfile";
+import Export24 from "./24/Export";
 import EyeClosed32 from "./32/EyeClosed";
 import EyeOpen16 from "./16/EyeOpen";
 import EyeOpen32 from "./32/EyeOpen";
@@ -160,6 +165,7 @@ export default {
   Annotate32,
   AnnotationGroup24,
   AnnotationGroupAlt24,
+  Archive24,
   Arrow24,
   ArrowDown16,
   ArrowDown32,
@@ -184,6 +190,7 @@ export default {
   BEResourcesBoxes64,
   Bookmark24,
   Bookmark32,
+  Calendar24,
   Checkmark16,
   CircleArrowDown64,
   CircleArrowLeft64,
@@ -201,6 +208,7 @@ export default {
   CommentPencil32,
   CommentPost32,
   Copy24,
+  Delete24,
   Delete32,
   DisclosureDown16,
   DisclosureDown24,
@@ -208,8 +216,10 @@ export default {
   DisclosureUp16,
   DisclosureUp24,
   DisclosureUp32,
+  Duplicate24,
   Duplicate32,
   EditProfile24,
+  Export24,
   EyeClosed32,
   EyeOpen16,
   EyeOpen32,

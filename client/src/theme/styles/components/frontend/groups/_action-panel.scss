@@ -1,0 +1,58 @@
+$_base-padding-vertical: 38px;
+$_base-padding-lateral: 38px;
+$_gap: 20px;
+
+.group-action-panel {
+  @include panelRounded;
+  padding: $_base-padding-vertical $_base-padding-lateral;
+  color: var(--default-strong-color);
+
+  &__label {
+    @include formLabelPrimary;
+    margin-top: 0;
+    margin-bottom: 2.5em;
+    color: var(--default-color);
+  }
+
+  &__heading {
+    @include headingSecondary;
+    margin-bottom: 0.5em;
+  }
+
+  &__instructions {
+    @include formInstructions;
+  }
+
+  &__inputs {
+    margin-top: 40px;
+  }
+
+  &__checkbox {
+    display: flex;
+
+    & + & {
+      margin-top: 12px;
+      margin-left: 0;
+    }
+  }
+
+  &__checkbox-text {
+    @include utilityPrimary;
+    font-size: 14px;
+    transform: translateY(2px);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 40px;
+    margin-top: -1 * $_gap;
+    margin-left: -1 * $_gap;
+
+    > * {
+      flex-grow: 1;
+      margin-top: $_gap;
+      margin-left: $_gap;
+    }
+  }
+}
