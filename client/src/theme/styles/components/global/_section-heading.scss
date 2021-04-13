@@ -98,12 +98,9 @@
   margin-bottom: 25px;
 
   .instructions {
-    @include templateCopy;
+    @include formInstructions;
     display: block;
     margin-bottom: 1em;
-    font-size: 17px;
-    font-style: italic;
-    text-transform: none;
 
     a:visited {
       color: inherit;

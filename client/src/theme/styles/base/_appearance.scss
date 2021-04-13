@@ -112,11 +112,13 @@ body {
   --box-bg-color: #{$neutral05};
   --box-medium-bg-color: #{$neutral10};
   --box-strong-bg-color: #{$neutral20};
+  --box-x-strong-bg-color: #{$neutral20};
   --dropzone-bg-color: #{$neutral30};
   --select-bg-color: transparent;
   --textarea-bg-color: #{$neutralWhite};
   --textarea-border-color: transparent;
   --textarea-font-family: #{$fontStackSans};
+  --button-dull-bg-color: #{$neutral30};
 }
 
 .backend, .drawer--backend, .reader.scheme-dark, .bg-neutral90, .bg-neutral95 {
@@ -135,11 +137,13 @@ body {
   --box-bg-color: #{$neutral95};
   --box-medium-bg-color: #{$neutral90};
   --box-strong-bg-color: #{$neutral90};
+  --box-x-strong-bg-color: #{$neutral80};
   --dropzone-bg-color: #{lighten($neutral90, 5%)};
   --select-bg-color: #{$neutral90};
   --textarea-bg-color: transparent;
   --textarea-border-color: #{$neutralUIDullLight};
   --textarea-font-family: #{$fontStackSerif};
+  --button-dull-bg-color: #{$neutral10};
 
   input[type='text'],
   input[type='email'],

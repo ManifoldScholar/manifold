@@ -11,7 +11,7 @@ import subWeeks from "date-fns/subWeeks";
 import startOfMonth from "date-fns/startOfMonth";
 import endOfMonth from "date-fns/endOfMonth";
 import subMonths from "date-fns/subMonths";
-import DatePicker from "./DatePicker";
+import DatePicker from "global/components/form/DatePicker/PickerComponent";
 
 import withScreenReaderStatus from "hoc/with-screen-reader-status";
 
