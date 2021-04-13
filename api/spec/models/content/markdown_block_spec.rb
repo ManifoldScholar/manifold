@@ -8,7 +8,7 @@ RSpec.describe Content::MarkdownBlock do
   end
 
   it "is configurable" do
-    expect(markdown_block.configurable?).to eq true
+    expect(markdown_block).to be_configurable
   end
 
   it "is invalid if style is blank" do
@@ -26,14 +26,16 @@ RSpec.describe Content::MarkdownBlock do
   describe "#renderable?" do
     context "when :style and :body are present" do
       it "is true" do
-        expect(FactoryBot.build(:markdown_block).renderable?).to eq true
+        expect(FactoryBot.build(:markdown_block)).to be_renderable
       end
     end
 
     context "when :style or :body are not present" do
       it "is false" do
-        expect(FactoryBot.build(:markdown_block, style: "").renderable?).to eq false
+        expect(FactoryBot.build(:markdown_block, style: "")).not_to be_renderable
       end
     end
   end
+
+  it_should_behave_like "a model with formatted attributes"
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_06_161945) do
+ActiveRecord::Schema.define(version: 2021_04_13_160540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -212,6 +212,7 @@ ActiveRecord::Schema.define(version: 2021_04_06_161945) do
     t.uuid "project_id"
     t.boolean "visible", default: true, null: false
     t.integer "access", default: 0, null: false
+    t.jsonb "fa_cache", default: {}, null: false
     t.index ["project_id"], name: "index_content_blocks_on_project_id"
   end
 
