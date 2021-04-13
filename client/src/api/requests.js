@@ -110,11 +110,16 @@ export default {
   feNewReadingGroup: "frontend-new-reading-group",
   feReadingGroup: "frontend-reading-group",
   feReadingGroupDestroy: "frontend-reading-group-destroy",
+  feReadingGroupClone: "frontend-reading-group-clone",
   feReadingGroupMembers: "frontend-reading-group-members",
   feReadingGroupAnnotations: "frontend-reading-group-annotations",
   feReadingGroupsLookup: "frontend-reading-groups-lookup",
   feReadingGroupMembershipCreate: "frontend-reading-group-membership-create",
   feReadingGroupMembershipDestroy: "frontend-reading-group-membership-destroy",
+  feReadingGroupMembershipShow: "frontend-reading-group-membership-show",
+  feReadingGroupMembershipArchive: "frontend-reading-group-membership-archive",
+  feReadingGroupMembershipActivate:
+    "frontend-reading-group-membership-activate",
   feReadingGroupCollectedProjects: "frontend-reading-group-collected-projects",
   feReadingGroupCollectedTexts: "frontend-reading-group-collected-texts",
   feReadingGroupCollectedTextSections:
