@@ -8,6 +8,8 @@ export { default as useDispatchReadingGroupAnnotations } from "./use-dispatch-re
 export { default as useSelectReadingGroupAnnotations } from "./use-select-reading-group-annotations";
 export { default as useDispatchReadingGroupMembers } from "./use-dispatch-reading-group-members";
 export { default as useSelectReadingGroupMembers } from "./use-select-reading-group-members";
+export { default as useDispatchReadingGroupMembership } from "./use-dispatch-reading-group-membership";
+export { default as useSelectReadingGroupMembership } from "./use-select-reading-group-membership";
 export { default as useDispatchReadingGroupCategories } from "./use-dispatch-reading-group-categories";
 export { default as useSelectReadingGroupCategories } from "./use-select-reading-group-categories";
 export { default as useDispatchReadingGroupCollected } from "./use-dispatch-reading-group-collected";

@@ -3,13 +3,21 @@
 
 // <div> wrapper around form fields
 .form-input {
-  /* stylelint-disable property-no-vendor-prefix */
   &--with-actions {
+    display: grid;
+    grid-template:
+      'label label' auto
+      'input input' auto
+      'actions notification' auto / auto 1fr;
+
     @include respond($break60) {
-      display: grid;
       grid-template:
-        'label label' auto
-        'input actions' auto / 1fr auto;
+        'label label label' auto
+        'input notification actions' auto / 1fr auto auto;
+
+      .form-input__action {
+        transform: translateY(5px);
+      }
     }
 
     label {
@@ -20,11 +28,30 @@
       grid-area: input;
     }
 
+    .notification {
+      grid-area: notification;
+
+      @include respond($break60) {
+        padding-right: 10px;
+        padding-left: 10px;
+        margin-top: 7px !important; // stylelint-disable-line
+        border-bottom: 1px solid $neutral80;
+      }
+    }
+
+    .instructions {
+      grid-column: 1 / -1;
+      margin-bottom: 1em !important; // stylelint-disable-line
+
+      @include respond($break60) {
+        margin-bottom: 0 !important; // stylelint-disable-line
+      }
+    }
+
     .form-input__action-group {
       grid-area: actions;
     }
   }
-  /* stylelint-enable property-no-vendor-prefix */
 
   & + & {
     margin-top: 40px;
@@ -37,16 +64,11 @@
   }
 
   &__action-group {
-    margin-top: 18px;
+    margin-top: 12px;
 
     @include respond($break60) {
       margin-top: 0;
       border-bottom: 1px solid $neutral80;
-      transition: border-color $duration $timing;
-
-      input:focus-visible + & {
-        border-color: $accentPrimary;
-      }
     }
   }
 
@@ -85,12 +107,9 @@
   }
 
   .instructions {
-    @include templateCopy;
+    @include formInstructions;
     display: block;
     margin-bottom: 1em;
-    font-size: 17px;
-    font-style: italic;
-    text-transform: none;
 
     a:visited {
       color: inherit;
@@ -99,9 +118,13 @@
     &.space-bottom {
       margin-bottom: 2em;
     }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
-  input[type='text'],
+  input[type='text']:not(.range-picker__input),
   input[type='email'],
   input[type='password'] {
     @include formInputPrimary;
@@ -184,7 +207,6 @@
     &__title {
       @include formLabelPrimary;
       display: inline-block;
-      margin-bottom: 1em;
     }
 
     &__prompt {
@@ -508,7 +530,7 @@
   .react-datepicker {
     @include templateHead;
     @include boxShadow;
-    color: $neutralTextLight;
+    color: var(--default-color);
     background-color: transparent;
     border: none;
 
@@ -550,10 +572,16 @@
     &__header {
       background-color: $neutral110;
       border: none;
+
+      .browse &,
+      .reader.scheme-light &,
+      .bg-white & {
+        background-color: var(--box-medium-bg-color);
+      }
     }
 
     &__current-month {
-      color: $neutralTextExtraLight;
+      color: var(--default-strong-color);
     }
 
     &__day-name {
@@ -561,7 +589,7 @@
     }
 
     &__month-container {
-      background-color: $neutral95;
+      background-color: var(--box-bg-color);
       border-radius: 8px;
     }
 
@@ -578,12 +606,12 @@
       &--keyboard-selected,
       &--selected {
         @include defaultHoverStyle;
-        background-color: $neutral80;
+        background-color: var(--box-x-strong-bg-color);
       }
 
       &:hover {
         @include defaultHoverStyle;
-        background-color: $neutral90;
+        background-color: var(--box-strong-bg-color);
       }
     }
   }

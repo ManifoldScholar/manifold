@@ -1,0 +1,22 @@
+.group-settings-form {
+  $_gap: 30px;
+
+  margin-top: $_gap;
+
+  input,
+  .instructions {
+    color: var(--default-strong-color);
+  }
+
+  &__course-radios,
+  &__date-picker-section {
+    padding-bottom: 20px;
+  }
+
+  &__date-picker-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 245px);
+    grid-gap: 30px;
+    padding-bottom: 20px;
+  }
+}

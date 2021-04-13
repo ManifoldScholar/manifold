@@ -26,5 +26,13 @@ export default {
       method: "DELETE",
       options: {}
     };
+  },
+
+  show(id) {
+    return {
+      endpoint: `/api/v1/reading_group_memberships/${id}`,
+      method: "GET",
+      options: {}
+    };
   }
 };

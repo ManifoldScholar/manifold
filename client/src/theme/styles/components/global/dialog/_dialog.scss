@@ -32,6 +32,7 @@
       @include templateHead;
       margin: 0;
       font-size: 22px;
+      hyphens: none;
 
       .backend & {
         color: $neutralWhite;

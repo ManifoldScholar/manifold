@@ -75,6 +75,10 @@ class FormSelect extends Component {
       wide: this.props.wide
     });
 
+    const labelClassName = classNames({
+      "pad-bottom": this.props.rounded
+    });
+
     return (
       <UID>
         {id => (
@@ -86,13 +90,16 @@ class FormSelect extends Component {
               label={this.props.label}
               idForError={`${this.idForErrorPrefix}-${id}`}
             >
-              <label htmlFor={`${this.idPrefix}-${id}`}>
+              <label
+                htmlFor={`${this.idPrefix}-${id}`}
+                className={labelClassName}
+              >
                 {this.props.label}
               </label>
               <div className="form-select">
                 <IconComposer
-                  icon="disclosureDown16"
-                  size={20}
+                  icon="disclosureDown24"
+                  size={24}
                   iconClass="form-select__icon"
                 />
                 <select

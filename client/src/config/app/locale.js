@@ -72,7 +72,7 @@ export default {
       },
       join: {
         heading: "Please Confirm",
-        message: `You are about to join the "<%= readingGroup.attributes.name %>" reading group. Please press yes to confirm.`
+        message: `You are about to join the “<%= readingGroup.attributes.name %>” reading group. Click yes to confirm.`
       },
       joinNotFound: {
         heading: "Reading group not found",
@@ -88,6 +88,11 @@ export default {
         heading: "Are you sure you want to delete this reading group?",
         message:
           "If the reading group is anonymous or private, all annotations within the group will be made private and only visible to the annotation creator. If the group is public, annotations will be public. This action can not be undone."
+      },
+      archive: {
+        heading: "Are you sure you want to archive this group?",
+        message:
+          "This group’s annotations will be hidden for you in the reader. Groups can be reactivated at any time."
       }
     }
   },

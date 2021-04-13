@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { UnmountClosed as Collapse } from "react-collapse";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { readingGroupsAPI, requests } from "api";
@@ -25,8 +26,13 @@ class ReadingGroupForm extends React.PureComponent {
     const token = this.token();
     this.state = {
       invitationCode: token,
-      invitationUrl: `${config.services.client.url}/my/groups?join=${token}`
+      invitationUrl: `${config.services.client.url}/my/groups?join=${token}`,
+      courseEnabled: this.isCourseEnabled
     };
+  }
+
+  get isCourseEnabled() {
+    return this.props.group.attributes.course.enabled;
   }
 
   get isNew() {
@@ -98,6 +104,10 @@ class ReadingGroupForm extends React.PureComponent {
     if (msg !== null) return this.props.confirm(heading, msg, () => {});
   };
 
+  handleCourseChange = (initialValueIgnored, oldValueIgnored, newEvent) => {
+    this.setState({ courseEnabled: newEvent.target.value === "true" });
+  };
+
   render() {
     const { group, onSuccess } = this.props;
     return (
@@ -108,7 +118,7 @@ class ReadingGroupForm extends React.PureComponent {
         create={readingGroupsAPI.create}
         options={{ adds: requests.feMyReadingGroups }}
         onSuccess={onSuccess}
-        className="form-secondary permissions-form"
+        className="form-secondary group-settings-form"
         notificationScope="drawer"
       >
         {getModelValue => (
@@ -122,7 +132,6 @@ class ReadingGroupForm extends React.PureComponent {
             />
             <Form.Radios
               label="Privacy"
-              prompt="Set privacy for all annotations from this group."
               name="attributes[privacy]"
               defaultValue={"private"}
               beforeOnChange={this.warnOnPrivacyChange}
@@ -169,6 +178,43 @@ class ReadingGroupForm extends React.PureComponent {
                 }
               ]}
             />
+            <Form.Select
+              label="Type"
+              options={[
+                { label: "Select a type", value: "" },
+                { label: "Course", value: "course" }
+              ]}
+              name="relationships[kind]"
+              rounded
+            />
+            <Form.Radios
+              label="Course"
+              name="attributes[course][enabled]"
+              defaultValue={false}
+              instructions={`Is this reading group a course? Some text about courses, and how start/end dates will be used.`}
+              options={[
+                { label: "Yes", value: true },
+                { label: "No", value: false }
+              ]}
+              beforeOnChange={this.handleCourseChange}
+              inputClasses="group-settings-form__course-radios"
+              inline
+              wide
+            />
+            <div className="group-settings-form__date-picker-section">
+              <Collapse isOpened={this.state.courseEnabled}>
+                <div className="group-settings-form__date-picker-group">
+                  <Form.DatePicker
+                    label="Course Start Date:"
+                    name="attributes[course][startsOn]"
+                  />
+                  <Form.DatePicker
+                    label="Course End Date:"
+                    name="attributes[course][endsOn]"
+                  />
+                </div>
+              </Collapse>
+            </div>
             <Form.Switch
               wide
               label="Notifications"
