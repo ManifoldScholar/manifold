@@ -4,6 +4,8 @@ RSpec.describe Content::TextsBlock do
   let(:text) { FactoryBot.create(:text) }
   let(:texts_block) { FactoryBot.create(:texts_block, project: text.project) }
 
+  subject { texts_block }
+
   it "has a valid factory" do
     expect(FactoryBot.build(:texts_block)).to be_valid
   end
@@ -83,8 +85,8 @@ RSpec.describe Content::TextsBlock do
   end
 
   describe "#renderable?" do
-    it "is true" do
-      expect(texts_block.renderable?).to eq true
-    end
+    it { is_expected.to be_renderable }
   end
+
+  it_should_behave_like "a model with formatted attributes"
 end
