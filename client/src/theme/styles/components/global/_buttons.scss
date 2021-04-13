@@ -430,15 +430,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1.214em 16px 1.286em;
+  padding: 0.857em 30px 0.929em;
   font-size: 12px;
   font-weight: $semibold;
-  color: $neutralTextExtraDark;
+  color: var(--default-strong-color);
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.089em;
-  background-color: $accentPrimary;
+  background-color: var(--accent-primary);
   transition: color $duration $timing, background-color $duration $timing;
 
   @include respond($break60) {
@@ -447,14 +447,13 @@
 
   &:hover,
   &:focus-visible {
-    color: $neutral80;
-    background-color: $accentPrimaryDull;
+    color: var(--default-strong-color);
+    background-color: var(--accent-primary-dull);
     outline: 0;
   }
 
   &:active {
-    color: $neutralWhite;
-    background-color: $accentPrimaryDark;
+    background-color: var(--accent-primary-medium);
   }
 
   &--with-room {
@@ -462,17 +461,11 @@
   }
 
   &--dull {
-    color: $neutral70;
-    background-color: $neutral10;
-    border-color: $neutral70;
+    background-color: var(--button-dull-bg-color);
 
-    &:hover {
-      background-color: $neutral10;
-    }
-
+    &:hover,
     &:focus-visible {
-      background-color: $neutral30;
-      outline: 0;
+      background-color: $neutral20;
     }
 
     &:active {
@@ -481,83 +474,57 @@
     }
   }
 
-  .bg-neutral90 & {
-    &:hover {
-      color: $neutral90;
-      background-color: $accentPrimaryDull;
-    }
-
-    &:focus-visible {
-      color: $neutralWhite;
-      background-color: $neutral95;
-      outline: 0;
-    }
-
-    &:active {
-      color: $neutral90;
-      background-color: $accentPrimaryDark;
-    }
-  }
-
   &--outlined {
-    padding: 1em 30px 1.2em;
-    color: $accentPrimary;
+    color: var(--default-highlight-color);
     background: none;
-    border: 1px solid $accentPrimary;
+    border: 1px solid var(--default-hover-color);
 
     &:hover,
     &:focus-visible {
-      color: $neutral90;
-      background-color: $accentPrimary;
+      color: $neutralTextExtraDark;
+      background-color: var(--default-hover-color);
       outline: 0;
     }
 
     .bg-neutral90 &,
     .bg-neutral100 &,
     .drawer-backend & {
-      color: $neutralWhite;
+      --default-highlight-color: #{$neutralWhite};
 
-      &:not(.button-secondary--dull):hover {
-        color: $neutral90;
-        background-color: $accentPrimary;
-      }
-
+      &:not(.button-secondary--dull):hover,
       &:not(.button-secondary--dull):focus-visible {
-        color: $neutral100;
-        background-color: $accentPrimaryPale;
-        border-color: $accentPrimaryPale;
+        color: $neutralTextExtraDark;
+        background-color: var(--default-hover-color);
       }
     }
 
     &.button-secondary--dull {
+      --default-highlight-color: #{$neutral45};
+      --default-hover-color: #{$neutral45};
+
       @include fillOnFocusVisible(rgba($neutral70, 0.2));
-      color: $neutral45;
-      border-color: $neutral45;
 
       &:hover {
-        color: $neutral90;
-        background-color: $neutral45;
+        color: $neutralTextExtraDark;
+        background-color: var(--default-highlight-color);
         outline: 0;
       }
     }
   }
 
   &--accent-pale {
-    @include fillOnFocusVisible($accentPrimary);
-    padding: 1em 30px 1.2em;
-    color: $neutral90;
-    background-color: $accentPrimaryPale;
+    background-color: var(--accent-primary-pale);
 
-    &:hover {
-      color: $neutral95;
-      background-color: $accentPrimary;
+    &:hover,
+    &:focus-visible {
+      background-color: var(--accent-primary);
     }
 
     &.button-secondary--dull {
-      @include fillOnFocusVisible($neutral30);
       background-color: $neutral10;
 
-      &:hover {
+      &:hover,
+      &:focus-visible {
         background-color: $neutral20;
       }
     }
@@ -565,21 +532,18 @@
 
   &--dark {
     justify-content: flex-start;
-    color: $neutral40;
+    color: $neutralUIExtraLight;
     text-align: left;
     background-color: $neutral80;
 
     .bg-neutral90 & {
-      &:hover {
-        color: $neutral95;
+      &:hover,
+      &:active {
+        color: $neutralTextExtraDark;
       }
 
       &:focus-visible {
-        background-color: $neutral95;
-      }
-
-      &:active {
-        color: $neutral95;
+        background-color: $neutralTextExtraDark;
       }
     }
 

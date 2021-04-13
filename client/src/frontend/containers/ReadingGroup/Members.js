@@ -166,7 +166,7 @@ class ReadingGroupsMembersContainer extends Component {
     if (!readingGroupMembers) return null;
 
     return (
-      <div style={{ marginTop: 60 }}>
+      <div className="group-page-body">
         <MembersTable
           readingGroup={readingGroup}
           members={readingGroupMembers}

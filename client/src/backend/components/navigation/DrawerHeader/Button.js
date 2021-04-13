@@ -13,7 +13,8 @@ export default class DrawerEntityHeaderButton extends PureComponent {
     label: PropTypes.string.isRequired,
     iconClass: PropTypes.string,
     ability: PropTypes.string,
-    entity: PropTypes.object
+    entity: PropTypes.object,
+    ariaProps: PropTypes.object
   };
 
   static defaultProps = {
@@ -30,6 +31,7 @@ export default class DrawerEntityHeaderButton extends PureComponent {
         className="utility-button"
         onClick={this.props.onClick}
         type="button"
+        {...this.props.ariaProps}
       >
         <Utility.IconComposer
           icon={this.props.icon}
