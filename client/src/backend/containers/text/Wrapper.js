@@ -112,7 +112,7 @@ export class TextWrapperContainer extends PureComponent {
             size={26}
             iconClass="utility-button__icon utility-button__icon--highlight"
           />
-          <span className="utility-button__text">Preview</span>
+          <span className="utility-button__text">View</span>
         </Link>
         <button onClick={this.handleTextDestroy} className="utility-button">
           <IconComposer

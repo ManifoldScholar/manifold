@@ -24,6 +24,20 @@ export default class ProjectCollectionHeader extends PureComponent {
     return (
       <div className="utility-button-group utility-button-group--inline">
         <Link
+          to={lh.link(
+            "frontendProjectCollection",
+            projectCollection.attributes.slug
+          )}
+          className="utility-button"
+        >
+          <IconComposer
+            icon="eyeOpen32"
+            size={26}
+            iconClass="utility-button__icon utility-button__icon--highlight"
+          />
+          <span className="utility-button__text">View</span>
+        </Link>
+        <Link
           to={lh.link("backendProjectCollectionSettings", projectCollection.id)}
           className="utility-button"
         >

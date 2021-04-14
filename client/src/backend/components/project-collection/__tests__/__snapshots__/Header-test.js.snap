@@ -12,6 +12,27 @@ exports[`backend/components/project-collection/Header matches the snapshot 1`] =
     >
       <ForwardRef
         className="utility-button"
+        to="/projects/project-collection/undefined"
+      >
+        <IconComposer
+          fill="currentColor"
+          icon="eyeOpen32"
+          iconClass="utility-button__icon utility-button__icon--highlight"
+          size={26}
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
+        <span
+          className="utility-button__text"
+        >
+          View
+        </span>
+      </ForwardRef>
+      <ForwardRef
+        className="utility-button"
         to="/backend/projects/project-collections/AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/settings"
       >
         <IconComposer
