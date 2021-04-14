@@ -8,6 +8,7 @@ class Subject < ApplicationRecord
   include Authority::Abilities
   include SerializedAbilitiesFor
   include Filterable
+  include SearchIndexable
 
   # Associations
   has_many :text_subjects, dependent: :destroy

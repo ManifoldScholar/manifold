@@ -13,6 +13,8 @@ module SystemUpgrades
         Settings
         Text
         TextTitle
+        Content::MarkdownBlock
+        Content::TextsBlock
       ].freeze
 
       # rubocop:disable Metrics/MethodLength

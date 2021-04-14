@@ -26,6 +26,7 @@ class Resource < ApplicationRecord
   include Taggable
   include Sluggable
   include Metadata
+  include SearchIndexable
 
   # Magic
   with_metadata %w(

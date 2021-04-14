@@ -5,6 +5,7 @@ class TextSection < ApplicationRecord
 
   # Misc. Concerns
   include Citable
+  include SearchIndexable
 
   # Constants
   KIND_COVER_IMAGE = "cover_image".freeze

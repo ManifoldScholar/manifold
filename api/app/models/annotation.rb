@@ -11,6 +11,7 @@ class Annotation < ApplicationRecord
   include TrackedCreator
   include Filterable
   include FlaggableResource
+  include SearchIndexable
 
   # Constants
   TYPE_ANNOTATION = "annotation".freeze

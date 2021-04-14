@@ -14,6 +14,7 @@ class Text < ApplicationRecord
   include TrackedCreator
   include Metadata
   include Attachments
+  include SearchIndexable
 
   # PaperTrail
   has_paper_trail meta: {

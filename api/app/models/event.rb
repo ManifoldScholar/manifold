@@ -16,6 +16,7 @@ class Event < ApplicationRecord
   # Concerns
   include Filterable
   include HasFormattedAttributes
+  include SearchIndexable
 
   has_formatted_attribute :subject_title
 
