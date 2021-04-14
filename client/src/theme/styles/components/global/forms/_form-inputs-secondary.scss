@@ -78,6 +78,10 @@
       font-size: 17px;
     }
 
+    &:last-child {
+      margin-bottom: 0;
+    }
+
     &.space-bottom {
       margin-bottom: 2em;
     }
