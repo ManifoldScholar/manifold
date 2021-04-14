@@ -136,7 +136,7 @@ export default class ProjectGridItem extends Component {
     }
 
     const figureClass = classNames("cover", {
-      "cover-placeholder": project.attributes.avatarStyles.small,
+      "cover-placeholder": !project.attributes.avatarStyles.small,
       dim: project.attributes.draft
     });
 

@@ -6,7 +6,7 @@ exports[`frontend/components/project-list/GridItem matches the snapshot 1`] = `
     to="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
   >
     <figure
-      className="cover"
+      className="cover cover-placeholder"
     >
       <Project.Avatar
         project={
