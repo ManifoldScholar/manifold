@@ -10,6 +10,7 @@ class Maker < ApplicationRecord
   include Authority::Abilities
   include SerializedAbilitiesFor
   include WithParsedName
+  include SearchIndexable
 
   # Associations
   has_many :collaborators, dependent: :destroy

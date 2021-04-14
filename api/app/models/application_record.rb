@@ -17,10 +17,6 @@ class ApplicationRecord < ActiveRecord::Base
     errors.details.merge!(other.details) { |_, ary1, ary2| ary1 + ary2 }
   end
 
-  def search_result_type
-    self.class.name.underscore
-  end
-
   class << self
     def in_the_week_of(date)
       where(created_at: date.to_week_range)

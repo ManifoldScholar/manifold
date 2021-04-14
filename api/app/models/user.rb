@@ -15,6 +15,7 @@ class User < ApplicationRecord
   include Recoverable
   include Attachments
   include WithParsedName
+  include SearchIndexable
 
   classy_enum_attr :role, enum: "RoleName", allow_blank: false, default: :reader
   classy_enum_attr :kind, enum: "RoleName", allow_blank: false, default: :reader

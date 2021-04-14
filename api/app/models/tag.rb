@@ -5,6 +5,7 @@ class Tag < ActsAsTaggableOn::Tag
   include Authority::Abilities
   include SerializedAbilitiesFor
   include Filterable
+  include SearchIndexable
 
   scope :by_kind, lambda { |kind|
     joins(:taggings).where(taggings: { taggable_type: kind }) if kind.present?

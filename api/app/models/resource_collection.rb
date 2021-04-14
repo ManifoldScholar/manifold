@@ -12,6 +12,7 @@ class ResourceCollection < ApplicationRecord
   include Authority::Abilities
   include Sluggable
   include SerializedAbilitiesFor
+  include SearchIndexable
 
   self.authorizer_name = "ProjectChildAuthorizer"
 

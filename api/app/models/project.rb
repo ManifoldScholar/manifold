@@ -35,6 +35,7 @@ class Project < ApplicationRecord
   include HasSortTitle
   include WithPermittedUsers
   include Sluggable
+  include SearchIndexable
 
   # Magic
   has_formatted_attributes :description, :subtitle, :image_credits
