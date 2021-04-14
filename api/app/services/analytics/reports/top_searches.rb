@@ -12,6 +12,7 @@ module Analytics
         WHERE #{VISIT_DATE_PLACEHOLDER}
           AND analytics_events.name = '#{Analytics::Event::SEARCH_EVENT_NAME}'
         GROUP BY keyword
+        ORDER BY count DESC
         #{PAGINATION_PLACEHOLDER}
       SQL
 

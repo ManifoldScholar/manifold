@@ -68,6 +68,26 @@ RSpec.describe Analytics::Reports::Global do
       }
     end
 
+    context "with different values for search counts" do
+      let(:search_events) do
+        [3, 1, 2].each do |count|
+          word = Faker::Lorem.word
+
+          count.times do
+            FactoryBot.create(:analytics_event, visit: visits.first, name: "search", properties: { keyword: word })
+          end
+        end
+      end
+
+      it "should sort search results by count" do
+        outcome = run_the_interaction!
+        search_results = outcome.result.find { |r| r["name"] == "top_search_terms" }["data"]
+        sorted = search_results.sort_by { |d| d["count"] }.reverse
+
+        expect(sorted.map.with_index { |d, i| d["count"] == search_results.dig(i, "count") }).to all(be true)
+      end
+    end
+
   end
 
 end
