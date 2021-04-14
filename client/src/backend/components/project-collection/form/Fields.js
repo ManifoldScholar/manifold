@@ -89,25 +89,24 @@ class Fields extends Component {
           name="attributes[homepage]"
         />
         {this.homepageVisible && (
-          <>
-            <Form.Instructions
-              className="form-input"
-              instructions="If dates set, project collection will automatically appear on homepage during specified time period."
-            />
+          <Form.FieldGroup instructions="If dates set, project collection will automatically appear on homepage during specified time period.">
             <Form.DatePicker
               label="Homepage Visibility Start"
               name="attributes[homepageStartDate]"
+              wide
             />
             <Form.DatePicker
               label="Homepage Visibility End"
               name="attributes[homepageEndDate]"
+              wide
             />
             <Form.NumberInput
               label="Projects Shown:"
               name="attributes[homepageCount]"
               instructions="Number of projects shown in homepage blade (0 - 40).  Will show all if none is set."
+              wide
             />
-          </>
+          </Form.FieldGroup>
         )}
         <IconPicker {...this.props} />
         <Form.Upload
