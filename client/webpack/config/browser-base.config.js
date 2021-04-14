@@ -10,7 +10,8 @@ import merge from "webpack-merge";
 
 const config = merge(baseConfig("web"), {
   entry: {
-    "build/manifold-client-browser": ["./src/entry-browser.js"]
+    "build/manifold-client-browser": ["./src/entry-browser.js"],
+    "build/manifold-client-print": ["./src/theme/print.js"]
   },
 
   // Webpack mocks node's global "process". We don't want it to in this case, because

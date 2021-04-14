@@ -47,7 +47,12 @@ export default class Html extends Component {
     return reduce(
       chunks,
       (entries, assets, chunkName) => {
-        if (!["build/manifold-client-browser"].includes(chunkName))
+        if (
+          ![
+            "build/manifold-client-browser",
+            "build/manifold-client-print"
+          ].includes(chunkName)
+        )
           return entries;
         if (isString(assets) && test(assets)) entries.push(assets);
         if (isArray(assets)) {
@@ -64,16 +69,21 @@ export default class Html extends Component {
   stylesheets = () => {
     if (!this.props.stats && !this.props.stats.assetsByChunkName) return null;
     const stylesheets = this.reduceAssets(".css");
-    return stylesheets.map(stylesheet => (
-      <link
-        href={`/${stylesheet}`}
-        key={stylesheet}
-        media="screen, projection"
-        rel="stylesheet"
-        type="text/css"
-        charSet="UTF-8"
-      />
-    ));
+    return stylesheets.map(stylesheet => {
+      const media = stylesheet.includes("print")
+        ? "print"
+        : "screen, projection";
+      return (
+        <link
+          href={`/${stylesheet}`}
+          key={stylesheet}
+          rel="stylesheet"
+          media={media}
+          type="text/css"
+          charSet="UTF-8"
+        />
+      );
+    });
   };
 
   javascripts = () => {
