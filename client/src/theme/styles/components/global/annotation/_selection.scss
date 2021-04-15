@@ -118,8 +118,8 @@
   }
 
   &__source-summary-text {
-    @include templateCopy
-      font-size: 14px;
+    @include templateCopy;
+    font-size: 14px;
 
     @include respond($break80) {
       font-size: 16px;
