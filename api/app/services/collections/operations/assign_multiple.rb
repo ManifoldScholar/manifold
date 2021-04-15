@@ -21,11 +21,7 @@ module Collections
         def upsert_entry!
           entry_collection = yield entry_collection_scope
 
-          attributes = build_attributes
-
-          Success entry_collection.upsert!(attributes)
-        rescue ActiveRecord::RecordInvalid => e
-          operation_error title: "Failed Upsert", detail: e.message, code: :invalid_entry
+          handle_upsert_for! entry_collection
         end
       end
 
