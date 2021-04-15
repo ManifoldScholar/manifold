@@ -33,9 +33,15 @@ module Collections
         def load!(collector, collector_definition)
           collectable = collector_definition.lookup.collectable(collectable_type, collectable_id).to_validated
           grouping = collector_definition.lookup.grouping_for(collector, grouping_id).to_validated
-          position = Success(position).to_validated
+          position = validated_position
 
           List::Validated[collectable, grouping, position].traverse.to_result
+        end
+
+        private
+
+        def validated_position
+          Valid position
         end
       end
 
