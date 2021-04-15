@@ -62,6 +62,7 @@ function withFormOptions(WrappedComponent) {
       optionToInstructions: PropTypes.func,
       optionToString: PropTypes.func,
       newToValue: PropTypes.func,
+      beforeOnChange: PropTypes.func,
       beforeSetValue: PropTypes.func,
       beforeGetValue: PropTypes.func,
       optionFilter: PropTypes.func
@@ -75,6 +76,7 @@ function withFormOptions(WrappedComponent) {
       optionToInstructions: WithFormOptions.optionToInstructions,
       optionToString: WithFormOptions.valueToString,
       newToValue: WithFormOptions.passthrough,
+      beforeOnChange: WithFormOptions.passthrough,
       beforeSetValue: WithFormOptions.passthrough,
       beforeGetValue: WithFormOptions.passthrough,
       predictive: false,
@@ -467,7 +469,16 @@ function withFormOptions(WrappedComponent) {
 
     onChange = event => {
       const value = event.target.value;
-      this.select(value);
+      const res = this.props.beforeOnChange(this.currentValue, value, event);
+      if (!isPromise(res)) return this.select(value);
+      res.then(
+        () => {
+          return this.select(value);
+        },
+        () => {
+          // Do nothing!
+        }
+      );
     };
 
     activateOptionByValue = value => {
