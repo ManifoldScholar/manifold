@@ -143,6 +143,7 @@ export default {
   feMyCollectedResources: "frontend-my-collected-resources",
   feMyAnnotations: "frontend-my-annotations",
   feMyAnnotatedTexts: "frontend-my-annotated-texts",
+  feIssuesFiltered: "frontend-projects-filtered",
   rText: "reader-text",
   rSection: "reader-section",
   rAnnotations: "reader-annotations",

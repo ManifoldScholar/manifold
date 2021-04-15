@@ -216,7 +216,8 @@ export class ProjectCollectionDetailContainer extends Component {
         <Layout.ButtonNavigation
           showProjects={false}
           grayBg={false}
-          showProjectCollections
+          label="See All Projects"
+          link="frontendProjectsAll"
           hideAtNarrow
         />
       </div>

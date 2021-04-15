@@ -13,14 +13,14 @@ import omitBy from "lodash/omitBy";
 import debounce from "lodash/debounce";
 import withSettings from "hoc/with-settings";
 import { CSSTransition } from "react-transition-group";
+import IssueGridItem from "../../components/project-list/IssueGridItem";
 import difference from "lodash/difference";
-import ProjectGridItem from "../../components/project-list/ProjectGridItem";
 
 const { request } = entityStoreActions;
 const defaultPage = 1;
 const perPage = 20;
 
-export class ProjectsContainer extends Component {
+export class IssuesListContainer extends Component {
   static fetchData = (getState, dispatch, location) => {
     const search = queryString.parse(location.search);
 
@@ -34,34 +34,34 @@ export class ProjectsContainer extends Component {
       size: perPage
     };
 
-    const projectsFetch = projectsAPI.index(
+    const issuesFetch = projectsAPI.index(
       Object.assign(baseFilters, filters),
       pagination
     );
-    const projectsAction = request(projectsFetch, requests.feProjectsFiltered);
-    const { promise: one } = dispatch(projectsAction);
+    const issuesAction = request(issuesFetch, requests.feProjectsFiltered);
+    const { promise: one } = dispatch(issuesAction);
     const promises = [one];
     return Promise.all(promises);
   };
 
   static mapStateToProps = state => {
     return {
-      projects: select(requests.feProjectsFiltered, state.entityStore),
+      issues: select(requests.feProjectsFiltered, state.entityStore),
       subjects: select(requests.feSubjects, state.entityStore),
-      projectsMeta: meta(requests.feProjectsFiltered, state.entityStore),
+      issuesMeta: meta(requests.feProjectsFiltered, state.entityStore),
       authentication: state.authentication
     };
   };
 
   static propTypes = {
     authentication: PropTypes.object,
-    projects: PropTypes.array,
+    issues: PropTypes.array,
     location: PropTypes.object,
     history: PropTypes.object,
     dispatch: PropTypes.func,
     fetchData: PropTypes.func.isRequired,
     subjects: PropTypes.array,
-    projectsMeta: PropTypes.object,
+    issuesMeta: PropTypes.object,
     settings: PropTypes.object
   };
 
@@ -77,8 +77,8 @@ export class ProjectsContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const prevProjects = prevProps.projects || [];
-    const currentProjects = this.props.projects || [];
+    const prevProjects = prevProps.issues || [];
+    const currentProjects = this.props.issues || [];
     const currentIds = currentProjects.map(p => p.id);
     const prevIds = prevProjects.map(p => p.id);
     const diffA = difference(currentIds, prevIds).length;
@@ -90,7 +90,7 @@ export class ProjectsContainer extends Component {
     }
   }
 
-  get hasVisibleProjects() {
+  hasVisibleIssues() {
     return get(this.props.settings, "attributes.calculated.hasVisibleProjects");
   }
 
@@ -151,18 +151,18 @@ export class ProjectsContainer extends Component {
   };
 
   showPlaceholder() {
-    const { location, projects } = this.props;
+    const { location, issues } = this.props;
     if (location.search) return false; // There are search filters applied, skip the check
-    if (!projects || projects.length === 0) return true;
+    if (!issues || issues.length === 0) return true;
   }
 
   renderProjectLibrary() {
     const {
       authentication,
-      projects,
+      issues,
       subjects,
       dispatch,
-      projectsMeta,
+      issuesMeta,
       authenticated,
       favorites
     } = this.props;
@@ -175,7 +175,7 @@ export class ProjectsContainer extends Component {
             <div className="main">
               <Utility.IconComposer size={56} icon="projects64" />
               <div className="body">
-                <h2 className="title">{"All Projects"}</h2>
+                <h2 className="title">{"All Issues"}</h2>
               </div>
             </div>
           </header>
@@ -187,9 +187,9 @@ export class ProjectsContainer extends Component {
           />
           <div className="entity-section-wrapper__details">
             <Utility.EntityCount
-              pagination={get(projectsMeta, "pagination")}
-              singularUnit="project"
-              pluralUnit="projects"
+              pagination={get(issuesMeta, "pagination")}
+              singularUnit="issue"
+              pluralUnit="issues"
               countOnly
             />
           </div>
@@ -197,12 +197,12 @@ export class ProjectsContainer extends Component {
             authenticated={authentication.authenticated}
             favorites={get(authentication, "currentUser.favorites")}
             dispatch={dispatch}
-            projects={projects}
-            pagination={get(projectsMeta, "pagination")}
+            projects={issues}
+            pagination={get(issuesMeta, "pagination")}
             paginationClickHandler={this.pageChangeHandlerCreator}
             limit={perPage}
           >
-            {projects.map(project => {
+            {issues.map(project => {
               return (
                 <CSSTransition
                   enter={this.enableAnimation}
@@ -210,7 +210,7 @@ export class ProjectsContainer extends Component {
                   timeout={{ enter: 250, exit: 250 }}
                 >
                   <li key={project.id} className="project-list__item--pos-rel">
-                    <ProjectGridItem
+                    <IssueGridItem
                       authenticated={authenticated}
                       favorites={favorites}
                       dispatch={dispatch}
@@ -229,7 +229,7 @@ export class ProjectsContainer extends Component {
   }
 
   render() {
-    if (!this.props.projectsMeta) return null;
+    if (!this.props.issuesMeta) return null;
 
     return (
       <div
@@ -237,12 +237,12 @@ export class ProjectsContainer extends Component {
           overflowX: "hidden"
         }}
       >
-        <h1 className="screen-reader-text">All Projects</h1>
+        <h1 className="screen-reader-text">All Issues</h1>
         {this.renderProjectLibrary()}
-        {this.hasVisibleProjects && (
+        {this.hasVisibleIssues() && (
           <Layout.ButtonNavigation
-            label="See All Collections"
-            link="frontendProjectCollections"
+            label="See All Journals"
+            link="frontendJournals"
             showProjects={false}
             grayBg={false}
           />
@@ -252,4 +252,4 @@ export class ProjectsContainer extends Component {
   }
 }
 
-export default connectAndFetch(withSettings(ProjectsContainer));
+export default connectAndFetch(withSettings(IssuesListContainer));

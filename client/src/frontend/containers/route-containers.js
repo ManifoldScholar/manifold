@@ -1,6 +1,8 @@
 import NotFound from "global/containers/NotFound";
 import ApiDocs from "frontend/containers/Api";
 import Frontend from "frontend/containers/Frontend";
+import IssuesList from "frontend/containers/IssuesList";
+import JournalsWrapper from "frontend/containers/JournalsWrapper";
 import ProjectsWrapper from "frontend/containers/ProjectsWrapper";
 import Projects from "frontend/containers/Projects";
 import ProjectCollections from "frontend/containers/ProjectCollections";
@@ -37,6 +39,8 @@ export default {
   NotFound,
   ApiDocs,
   Frontend,
+  IssuesList,
+  JournalsWrapper,
   ProjectsWrapper,
   Projects,
   ProjectCollections,

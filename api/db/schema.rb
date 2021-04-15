@@ -1763,56 +1763,6 @@ UNION ALL
              JOIN makers m ON ((m.id = c.maker_id)))
           WHERE (((c.collaboratable_type)::text = 'Project'::text) AND (c.collaboratable_id = p.id))) pm ON (true));
   SQL
-  create_view "reading_group_composite_entry_rankings", sql_definition: <<-SQL
-    SELECT rgce.id AS reading_group_composite_entry_id,
-    rgce.reading_group_id,
-    rgce.reading_group_category_id,
-    rgce.collectable_type,
-    rgce.collectable_id,
-    rgce.collectable_jsonapi_type,
-    rgc."position" AS category_position,
-    COALESCE(rgep."position", rger."position", rgerc."position", rget."position") AS "position"
-   FROM (((((reading_group_composite_entries rgce
-     LEFT JOIN reading_group_categories rgc ON ((rgce.reading_group_category_id = rgc.id)))
-     LEFT JOIN reading_group_projects rgep ON ((rgce.reading_group_project_id = rgep.id)))
-     LEFT JOIN reading_group_resources rger ON ((rgce.reading_group_resource_id = rger.id)))
-     LEFT JOIN reading_group_resource_collections rgerc ON ((rgce.reading_group_resource_collection_id = rgerc.id)))
-     LEFT JOIN reading_group_texts rget ON ((rgce.reading_group_text_id = rget.id)));
-  SQL
-  create_view "reading_group_visibilities", sql_definition: <<-SQL
-    SELECT rg.id AS reading_group_id,
-    rgm.id AS reading_group_membership_id,
-    u.id AS user_id,
-    rg.privacy,
-    ((rgm.id IS NULL) AND ((rg.privacy)::text = 'public'::text)) AS joinable,
-    ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'active'::text)) AS joined,
-    ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'archived'::text)) AS archived,
-    (((rgm.id IS NULL) AND ((rg.privacy)::text = 'public'::text)) OR ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'active'::text))) AS visible,
-    (rg.creator_id = u.id) AS created
-   FROM ((users u
-     CROSS JOIN reading_groups rg)
-     LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = rg.id) AND (rgm.user_id = u.id))));
-  SQL
-  create_view "annotation_reading_group_memberships", sql_definition: <<-SQL
-    SELECT a.id AS annotation_id,
-    a.reading_group_id,
-    a.creator_id AS user_id,
-    rgm.id AS reading_group_membership_id,
-    rgm.aasm_state
-   FROM (annotations a
-     LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = a.reading_group_id) AND (rgm.user_id = a.creator_id))))
-  WHERE ((a.creator_id IS NOT NULL) AND (a.reading_group_id IS NOT NULL));
-  SQL
-  create_view "favorites", sql_definition: <<-SQL
-    SELECT user_collected_composite_entries.id,
-    user_collected_composite_entries.user_id,
-    user_collected_composite_entries.collectable_type AS favoritable_type,
-    user_collected_composite_entries.collectable_id AS favoritable_id,
-    user_collected_composite_entries.project_id,
-    user_collected_composite_entries.created_at,
-    user_collected_composite_entries.updated_at
-   FROM user_collected_composite_entries;
-  SQL
   create_view "text_summaries", sql_definition: <<-SQL
     SELECT t.project_id,
     t.id,
@@ -1864,6 +1814,56 @@ UNION ALL
            FROM (collaborators c
              JOIN makers m ON ((m.id = c.maker_id)))
           WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
+  SQL
+  create_view "reading_group_composite_entry_rankings", sql_definition: <<-SQL
+    SELECT rgce.id AS reading_group_composite_entry_id,
+    rgce.reading_group_id,
+    rgce.reading_group_category_id,
+    rgce.collectable_type,
+    rgce.collectable_id,
+    rgce.collectable_jsonapi_type,
+    rgc."position" AS category_position,
+    COALESCE(rgep."position", rger."position", rgerc."position", rget."position") AS "position"
+   FROM (((((reading_group_composite_entries rgce
+     LEFT JOIN reading_group_categories rgc ON ((rgce.reading_group_category_id = rgc.id)))
+     LEFT JOIN reading_group_projects rgep ON ((rgce.reading_group_project_id = rgep.id)))
+     LEFT JOIN reading_group_resources rger ON ((rgce.reading_group_resource_id = rger.id)))
+     LEFT JOIN reading_group_resource_collections rgerc ON ((rgce.reading_group_resource_collection_id = rgerc.id)))
+     LEFT JOIN reading_group_texts rget ON ((rgce.reading_group_text_id = rget.id)));
+  SQL
+  create_view "reading_group_visibilities", sql_definition: <<-SQL
+    SELECT rg.id AS reading_group_id,
+    rgm.id AS reading_group_membership_id,
+    u.id AS user_id,
+    rg.privacy,
+    ((rgm.id IS NULL) AND ((rg.privacy)::text = 'public'::text)) AS joinable,
+    ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'active'::text)) AS joined,
+    ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'archived'::text)) AS archived,
+    (((rgm.id IS NULL) AND ((rg.privacy)::text = 'public'::text)) OR ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'active'::text))) AS visible,
+    (rg.creator_id = u.id) AS created
+   FROM ((users u
+     CROSS JOIN reading_groups rg)
+     LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = rg.id) AND (rgm.user_id = u.id))));
+  SQL
+  create_view "annotation_reading_group_memberships", sql_definition: <<-SQL
+    SELECT a.id AS annotation_id,
+    a.reading_group_id,
+    a.creator_id AS user_id,
+    rgm.id AS reading_group_membership_id,
+    rgm.aasm_state
+   FROM (annotations a
+     LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = a.reading_group_id) AND (rgm.user_id = a.creator_id))))
+  WHERE ((a.creator_id IS NOT NULL) AND (a.reading_group_id IS NOT NULL));
+  SQL
+  create_view "favorites", sql_definition: <<-SQL
+    SELECT user_collected_composite_entries.id,
+    user_collected_composite_entries.user_id,
+    user_collected_composite_entries.collectable_type AS favoritable_type,
+    user_collected_composite_entries.collectable_id AS favoritable_id,
+    user_collected_composite_entries.project_id,
+    user_collected_composite_entries.created_at,
+    user_collected_composite_entries.updated_at
+   FROM user_collected_composite_entries;
   SQL
   create_view "user_collections", sql_definition: <<-SQL
     WITH category_type_ids AS (

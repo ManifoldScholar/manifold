@@ -7,6 +7,28 @@ const routes = {
   isLibrary: true,
   routes: [
     {
+      name: "frontendJournals",
+      exact: false,
+      component: "JournalsWrapper",
+      path: "/journals",
+      isLibrary: true,
+      helper: () => "/journals",
+      routes: [
+        {
+          name: "frontendIssuesList",
+          exact: true,
+          component: "IssuesList",
+          path: "/journals/issues",
+          isLibrary: true,
+          helper: (params = {}) => {
+            const query = queryString.stringify(params);
+            if (!query) return "/journals/issues";
+            return `/journals/issues?${query}`;
+          }
+        }
+      ]
+    },
+    {
       name: "frontendProjects",
       exact: false,
       component: "ProjectsWrapper",
