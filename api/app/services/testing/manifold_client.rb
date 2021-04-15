@@ -7,7 +7,14 @@ module Testing
     COLLECTABLE_HASH = Types::Hash.schema(
       collectable_type: Types::String,
       collectable_id: Types::String,
-      position?: Types::Integer
+      position?: Types::Integer,
+      grouping_id?: Types::String
+    )
+
+    ORDERING_HASH = Types::Hash.schema(
+      collectable: Types.Instance(Collectable),
+      position: Types::Integer,
+      grouping_id?: Types::String
     )
 
     option :user, model: "User", optional: true
@@ -68,6 +75,12 @@ module Testing
       collection_operation(*collectables, op: :update, collector: reading_group)
     end
 
+    def reading_group_collect_reorder(collectable, position, reading_group:, grouping_id: nil)
+      hsh = collectable_to_hash(collectable, position: position, grouping_id: grouping_id)
+
+      reading_group_collect hsh, reading_group: reading_group
+    end
+
     def reading_group_uncollect(*collectables, reading_group:)
       collection_operation(*collectables, op: :remove, collector: reading_group)
     end
@@ -106,9 +119,15 @@ module Testing
       collectables.map do |collectable|
         case collectable
         when Collectable
-          { collectable_type: to_jsonapi_type(collectable), collectable_id: collectable.id }
+          collectable_to_hash(collectable)
         when COLLECTABLE_HASH
           collectable
+        when ORDERING_HASH
+          hsh = collectable.symbolize_keys
+
+          collectable = hsh[:collectable]
+
+          collectable_to_hash(collectable, position: hsh[:position], grouping_id: hsh[:grouping_id])
         else
           raise TypeError, "Don't know how to serialize #{collectable.inspect}"
         end
@@ -122,6 +141,13 @@ module Testing
       }.tap do |h|
         h[:id] = collector.id if include_collector_id
         h[:lid] = "me" if for_current_user
+      end
+    end
+
+    def collectable_to_hash(collectable, position: nil, grouping_id: nil)
+      { collectable_type: to_jsonapi_type(collectable), collectable_id: collectable.id }.tap do |h|
+        h[:position] = position if position.present?
+        h[:grouping_id] = grouping_id if grouping_id.present?
       end
     end
 
