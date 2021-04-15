@@ -12,12 +12,34 @@ module Collections
         option :position, Types::Coercible::Integer.optional, optional: true
       end
 
+      def handle_upsert_for!(entry_collection)
+        attributes = build_attributes
+
+        entry = entry_collection.upsert! attributes
+
+        #entry = entry_collection.find entry.id
+
+        reposition! entry if position.present?
+
+        Dry::Monads.Success entry
+      rescue ActiveRecord::RecordInvalid => e
+        operation_error title: "Failed Upsert", detail: e.message, code: :invalid_entry
+      end
+
       private
 
       def entry_collection_scope
         collector_definition.lookup.collectable_definition(collectable).fmap do |collectable_definition|
           collectable_definition.entry_collection_scope_for collector
         end
+      end
+
+      def reposition!(entry)
+        return unless position.present?
+
+        entry.position = position
+
+        entry.save!
       end
 
       def build_attributes
