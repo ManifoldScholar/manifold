@@ -30,9 +30,7 @@ module Collections
       def upsert_entry!
         entry_collection = collectable_definition.entry_collection_scope_for collector
 
-        attributes = build_attributes
-
-        Success entry_collection.upsert!(attributes)
+        handle_upsert_for! entry_collection
       end
     end
   end
