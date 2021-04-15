@@ -79,7 +79,7 @@ class ReadingGroupForm extends React.PureComponent {
   };
   /* eslint-enable no-param-reassign */
 
-  warnOnPrivacyChange = (initialValue, oldValueIgnored, newValue) => {
+  warnOnPrivacyChange = (initialValue, newValue) => {
     let msg = null;
     const {
       heading,
