@@ -20,6 +20,7 @@ module Ingestions
         end
         insert_style_tag!
         ensure_header_ids!
+        clean_links!
         document_parsed.to_s
       end
 
@@ -101,6 +102,27 @@ module Ingestions
         node["class"] = classes
       end
 
+      def clean_links!
+        document_parsed.css('a[href^="https://www.google.com/url"]').each do |anchor|
+          remove_google_url_guard_from! anchor
+        end
+      end
+
+      def remove_google_url_guard_from!(anchor)
+        raw_href = anchor.attr("href")
+
+        query = parse_querystring_in(raw_href)
+
+        return if query.blank? || query["q"].blank?
+
+        anchor["href"] = query["q"].then { |url| CGI.unescape url }
+      end
+
+      def parse_querystring_in(url)
+        # rubocop:disable Style/RescueModifier
+        Rack::Utils.parse_nested_query(URI(url).query) rescue {}
+        # rubocop:enable Style/RescueModifier
+      end
     end
   end
 end
