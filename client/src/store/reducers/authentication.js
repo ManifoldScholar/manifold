@@ -71,9 +71,9 @@ const updateStateFromUser = (state, payload) => {
   const adjustedUser = { ...payload.data };
   delete adjustedUser.relationships;
   adjustedUser.relationships = {
-    collection: payload.included.find(inc => {
+    collection: payload.included ? payload.included.find(inc => {
       return inc.type === "userCollections";
-    })
+    }) : null
   };
   const newState = {
     authenticated: !state.authenticating,
