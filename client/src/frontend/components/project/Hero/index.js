@@ -16,7 +16,12 @@ export default class ProjectHero extends PureComponent {
   static displayName = "Project.Hero";
 
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
+    showBackground: PropTypes.bool
+  };
+
+  static defaultProps = {
+    showBackground: true
   };
 
   static contextType = FrontendModeContext;
@@ -93,7 +98,8 @@ export default class ProjectHero extends PureComponent {
   get hasBackgroundImage() {
     return Boolean(
       this.backgroundImage.mediumLandscape &&
-        this.backgroundImage.largeLandscape
+        this.backgroundImage.largeLandscape &&
+        this.props.showBackground
     );
   }
 
@@ -213,10 +219,12 @@ export default class ProjectHero extends PureComponent {
             copy={this.credits}
           />
         </div>
-        <Image
-          {...this.props}
-          backgroundImage={this.props.project.attributes.heroStyles}
-        />
+        {this.hasBackgroundImage && (
+          <Image
+            {...this.props}
+            backgroundImage={this.props.project.attributes.heroStyles}
+          />
+        )}
       </section>
     );
   }

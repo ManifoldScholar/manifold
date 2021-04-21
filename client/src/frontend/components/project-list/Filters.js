@@ -4,6 +4,7 @@ import omitBy from "lodash/omitBy";
 import { UID } from "react-uid";
 import isEmpty from "lodash/isEmpty";
 import Utility from "global/components/utility";
+import { isUndefined } from "lodash";
 
 import withScreenReaderStatus from "hoc/with-screen-reader-status";
 
@@ -15,7 +16,8 @@ export class ProjectListFilters extends Component {
     initialFilterState: PropTypes.object,
     resetFilterState: PropTypes.object,
     subjects: PropTypes.array,
-    hideFeatured: PropTypes.bool
+    hideFeatured: PropTypes.bool,
+    showResetButton: PropTypes.bool
   };
 
   constructor(props) {
@@ -33,7 +35,10 @@ export class ProjectListFilters extends Component {
   }
 
   get showResetButton() {
-    return !isEmpty(this.state.filters);
+    const { showResetButton } = this.props;
+    return !isUndefined(showResetButton)
+      ? showResetButton
+      : !isEmpty(this.state.filters);
   }
 
   get resetMessage() {

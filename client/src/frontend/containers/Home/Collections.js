@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ProjectCollection from "frontend/components/project-collection";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
@@ -41,20 +40,8 @@ export class HomeCollectionsContainer extends Component {
   };
 
   render() {
-    if (!this.props.projectCollections) return null;
-
-    return this.props.projectCollections.map((projectCollection, index) => {
-      return (
-        <ProjectCollection.Summary
-          key={projectCollection.id}
-          authentication={this.props.authentication}
-          projectCollection={projectCollection}
-          dispatch={this.props.dispatch}
-          ordinal={index}
-          limit={projectCollection.attributes.homepageCount}
-        />
-      );
-    });
+    const { children } = this.props;
+    return <div>{children}</div>;
   }
 }
 

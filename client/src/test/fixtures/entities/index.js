@@ -14,6 +14,7 @@ import maker from "./maker";
 import page from "./page";
 import permission from "./permission";
 import project from "./project";
+import issue from "./issue";
 import projectCollection from "./project-collection";
 import readingGroup from "./reading-group";
 import readingGroupMembership from "./reading-group-membership";
@@ -48,6 +49,7 @@ export default {
   page,
   permission,
   project,
+  issue,
   projectAnalytics,
   projectCollection,
   readingGroup,

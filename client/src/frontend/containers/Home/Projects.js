@@ -8,6 +8,8 @@ import { projectsAPI, requests } from "api";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import Utility from "global/components/utility";
+import { CSSTransition } from "react-transition-group";
+import ProjectGridItem from "../../components/project-list/ProjectGridItem";
 
 const { request } = entityStoreActions;
 const perPage = 20;
@@ -54,6 +56,7 @@ export class HomeProjectsContainer extends Component {
   }
 
   render() {
+    const { authentication, dispatch, projects } = this.props;
     if (this.showPlaceholder()) return <ProjectList.Placeholder />;
 
     return (
@@ -68,13 +71,26 @@ export class HomeProjectsContainer extends Component {
             </div>
           </header>
           <ProjectList.Grid
-            authenticated={this.props.authentication.authenticated}
-            favorites={get(this.props.authentication, "currentUser.favorites")}
-            dispatch={this.props.dispatch}
-            projects={this.props.projects}
+            authenticated={authentication.authenticated}
+            favorites={get(authentication, "currentUser.favorites")}
+            dispatch={dispatch}
             limit={16}
             viewAllUrl={lh.link("frontendProjectsAll")}
-          />
+          >
+            {projects.map((project, i) => {
+              return (
+                <CSSTransition enter exit timeout={{ enter: 250, exit: 250 }}>
+                  <li key={project.id} className="project-list__item--pos-rel">
+                    <ProjectGridItem
+                      project={project}
+                      hideDesc
+                      hideCollectingToggle={this.hideCollectingToggle}
+                    />
+                  </li>
+                </CSSTransition>
+              );
+            })}
+          </ProjectList.Grid>
         </div>
       </section>
     );

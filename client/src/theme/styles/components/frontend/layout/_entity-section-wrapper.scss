@@ -5,10 +5,78 @@
   flex-direction: column;
   padding-top: 30px;
 
-  @include respond($break75) {
+  @include respond($break95) {
     flex-flow: row wrap;
     align-items: center;
     justify-content: space-between;
+  }
+
+  &__header-row {
+
+    &.journals {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      grid-template-rows: 1fr 1fr;
+      grid-template-areas: "section-heading tools"
+    "list-total list-total";
+      align-items: center;
+
+      @include respond($break95, "max") {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: "section-heading"
+        "list-total"
+        "tools";
+      }
+
+      .section-heading {
+        grid-area: section-heading;
+      }
+
+      .entity-section-wrapper {
+        &__details {
+          grid-area: list-total;
+        }
+      }
+
+      .form-list-filter {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "search-input select-group";
+        margin: 0;
+        grid-area: tools;
+        align-self: center;
+
+        @include respond($break95, "max") {
+          display: flex;
+          margin-bottom: 36px;
+        }
+
+        .search-input {
+          grid-area: search-input;
+          justify-self: right;
+          width: 100%;
+          max-width: 200px;
+
+          @include respond($break95, "max") {
+            width: auto;
+            max-width: 100%;
+          }
+        }
+
+        .select-group {
+          grid-area: select-group;
+
+          &.inline {
+            display: flex;
+
+            @include respond($break95, "max") {
+              display: block;
+            }
+          }
+        }
+      }
+    }
   }
 
   &__heading {
@@ -17,12 +85,12 @@
     margin-bottom: 20px;
 
     + .entity-section-wrapper__body { // if no .list-tools or .details
-      @include respond($break75) {
+      @include respond($break95) {
         margin-top: 34px;
       }
     }
 
-    @include respond($break75) {
+    @include respond($break95) {
       order: 0;
       margin-bottom: 0;
     }
@@ -41,7 +109,7 @@
       align-items: center;
 
       .title {
-        @include respond($break75, max) {
+        @include respond($break95, max) {
           font-size: 18px;
         }
       }
@@ -109,7 +177,7 @@
     + .entity-section-wrapper__body { // if no .details
       margin-top: 18px;
 
-      @include respond($break75) {
+      @include respond($break95) {
         margin-top: 28px;
 
         &--pad-top {
@@ -202,7 +270,7 @@
     margin-bottom: 20px;
     line-height: 1.4;
 
-    @include respond($break75) {
+    @include respond($break95) {
       order: 0;
       margin-top: 28px;
       margin-bottom: 24px;

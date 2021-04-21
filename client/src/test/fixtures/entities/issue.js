@@ -1,7 +1,7 @@
 import abilities from "../structures/abilities";
 import metadata from "../structures/metadata";
 
-const project = () => ({
+const issue = () => ({
   type: "projects",
   attributes: {
     slug: "",
@@ -14,6 +14,8 @@ const project = () => ({
     descriptionFormatted:
       "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
     subtitle: "World's Greatest Dog",
+    volume: "1",
+    issue: "3",
     darkMode: false,
     heroStyles: {},
     coverStyles: {},
@@ -37,4 +39,4 @@ const project = () => ({
   }
 });
 
-export default project;
+export default issue;

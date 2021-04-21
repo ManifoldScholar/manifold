@@ -10,6 +10,8 @@ import { projectsAPI, subjectsAPI, requests } from "api";
 import get from "lodash/get";
 import HeadContent from "global/components/HeadContent";
 import Utility from "global/components/utility";
+import { CSSTransition } from "react-transition-group";
+import ProjectGridItem from "../../components/project-list/ProjectGridItem";
 
 const { setProjectFilters } = uiFilterActions;
 const { request, flush } = entityStoreActions;
@@ -106,7 +108,21 @@ export class FeaturedContainer extends Component {
                 )}
                 dispatch={this.props.dispatch}
                 projects={this.props.featuredProjects}
-              />
+              >
+                {this.props.featuredProjects.map(project => {
+                  return (
+                    <CSSTransition key={project.id} timeout={250}>
+                      <li className="project-list__item--pos-rel">
+                        <ProjectGridItem
+                          project={project}
+                          hideDesc
+                          hideCollectingToggle
+                        />
+                      </li>
+                    </CSSTransition>
+                  );
+                })}
+              </ProjectList.Grid>
             ) : null}
           </div>
         </section>
