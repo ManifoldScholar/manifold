@@ -2,20 +2,20 @@ $_sticky-min-height: 900px;
 
 .search-dialog {
   // conceal top/bottom of dialog so content below form doesn't show on scroll
-  @mixin sticky-pseudo-background($position: "below") {
-    background-color: var(--box-bg-color);
+  @mixin sticky-pseudo-background($position: 'below') {
     z-index: 1;
+    background-color: var(--box-bg-color);
 
     &::before {
       position: absolute;
       left: 0;
+      display: block;
       width: 100%;
       height: dialog(padding-top);
-      background-color: var(--box-bg-color);
-      display: block;
       content: '';
+      background-color: var(--box-bg-color);
 
-      @if ($position == "below") {
+      @if ($position == 'below') {
         bottom: 100%;
         height: dialog(padding-top);
       } @else {
@@ -77,13 +77,13 @@ $_sticky-min-height: 900px;
   }
 
   &__footer {
-    margin-top: 10px;
     padding-top: 20px;
+    margin-top: 10px;
 
     @include respond($_sticky-min-height, min, height) {
       position: sticky;
       bottom: 0;
-      @include sticky-pseudo-background("above");
+      @include sticky-pseudo-background('above');
     }
   }
 
