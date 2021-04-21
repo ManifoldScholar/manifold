@@ -22,7 +22,7 @@
   }
 
   &__categories {
-    @include dropzone(18px, "--active");
+    @include dropzone(18px, '--active');
   }
 
   &__category-wrapper {
@@ -49,14 +49,14 @@
       padding-top: 40px;
       padding-bottom: 40px;
       box-shadow: inset 0 $_shadow-size $_shadow-size (-$_shadow-size / 2)
-          rgba($neutralBlack, 0.08),
+        rgba($neutralBlack, 0.08),
         inset 0 ($_shadow-size * -1) $_shadow-size (-$_shadow-size / 2)
-          rgba($neutralBlack, 0.08);
+        rgba($neutralBlack, 0.08);
     }
   }
 
   &__collectable-type {
-    @include dropzone(18px, "--active");
+    @include dropzone(18px, '--active');
     padding-top: $_collectable-type-vertical-padding;
     padding-bottom: $_collectable-type-vertical-padding;
   }
@@ -112,8 +112,8 @@
   }
 
   &__actions {
-    flex-shrink: 0;
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     margin-left: 10px;
     color: var(--default-color);
@@ -139,8 +139,8 @@
     display: block;
     margin-bottom: var(--label-margin-bottom, 20px);
     font-size: 14px;
-    letter-spacing: 0.089em;
     color: var(--label-color);
+    letter-spacing: 0.089em;
 
     &--category {
       @include textTruncate;
@@ -194,9 +194,9 @@
 
     &:hover,
     &:focus-visible {
-      outline: none;
       color: var(--default-strong-color);
       background-color: $accentPrimaryLight;
+      outline: none;
     }
 
     > * + * {
@@ -237,10 +237,10 @@
 
   &__collectable-title {
     @include textTruncate;
+    // prevent clipping of descenders
+    padding-bottom: 1px;
     margin-top: 0;
     margin-bottom: 0;
     font: inherit;
-    // prevent clipping of descenders
-    padding-bottom: 1px;
   }
 }
