@@ -13,6 +13,6 @@ describe("global/components/UserMenuBody/UserMenuBody", () => {
     />
   ));
   it("matches the snapshot", () => {
-    expect(shallow($root)).toMatchSnapshot();
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
 });
