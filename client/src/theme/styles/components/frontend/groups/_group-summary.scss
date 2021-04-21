@@ -32,8 +32,8 @@ $_gap: 30px;
 
   &__section-list {
     display: grid;
-    grid-template-columns: auto;
     grid-template-rows: minmax(24px, auto);
+    grid-template-columns: auto;
     row-gap: 14px;
     column-gap: $_gap;
     align-items: center;
@@ -52,8 +52,8 @@ $_gap: 30px;
     font: inherit;
 
     &::after {
-      content: ":";
       display: inline;
+      content: ':';
     }
   }
 

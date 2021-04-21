@@ -12,10 +12,7 @@ function CategoryRemove({ onRemove, confirm }) {
   }
 
   return (
-    <button
-      onClick={handleClick}
-      className="group-collection-editor__action"
-    >
+    <button onClick={handleClick} className="group-collection-editor__action">
       <IconComposer icon="delete32" size="default" />
       <span className="screen-reader-text">Delete category</span>
     </button>

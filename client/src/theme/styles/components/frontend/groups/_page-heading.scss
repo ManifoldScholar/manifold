@@ -57,11 +57,11 @@ $_container-gap: 30px;
   }
 
   &__text {
-    margin-left: 15px;
     margin-bottom: 0;
+    margin-left: 15px;
     font-size: 23px;
-    word-wrap: break-word;
     color: var(--default-strong-color);
+    word-wrap: break-word;
 
     @include respond($break80) {
       font-size: 26px;

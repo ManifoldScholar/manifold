@@ -4,9 +4,9 @@ $_inner-padding-lateral: max(4.5%, 20px);
 .collection-placeholder {
   @include panelRounded;
   @include templateHead;
-  text-align: center;
   font-size: 16px;
   line-height: 1.438;
+  text-align: center;
 
   &__inner {
     max-width: calc(#{$_inner-max-width} + #{$_inner-padding-lateral} * 2);
@@ -17,9 +17,9 @@ $_inner-padding-lateral: max(4.5%, 20px);
 
   &__heading {
     @include headingQuaternary;
-    color: var(--default-strong-color);
     margin-bottom: 0.667em;
     font-weight: $medium;
+    color: var(--default-strong-color);
 
     &:not(:first-child) {
       margin-top: 1.867em;
