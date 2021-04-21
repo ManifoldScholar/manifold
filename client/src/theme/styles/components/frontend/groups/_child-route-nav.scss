@@ -10,8 +10,8 @@ $_breakpoint: $break80;
   color: $neutral80;
 
   > :first-child {
-    border-top-right-radius: var(--box-border-radius);
     border-top-left-radius: var(--box-border-radius);
+    border-top-right-radius: var(--box-border-radius);
 
     @include respond($_breakpoint) {
       border-top-right-radius: 0;
@@ -20,8 +20,8 @@ $_breakpoint: $break80;
   }
 
   > :last-child {
-      border-bottom-right-radius: var(--box-border-radius);
-      border-bottom-left-radius: var(--box-border-radius);
+    border-bottom-right-radius: var(--box-border-radius);
+    border-bottom-left-radius: var(--box-border-radius);
 
     @include respond($_breakpoint) {
       border-top-right-radius: var(--box-border-radius);
@@ -51,9 +51,9 @@ $_breakpoint: $break80;
     &:focus-visible,
     &:hover {
       --box-bg-color: #{$neutral20};
+      color: var(--default-strong-color);
 
       outline: none;
-      color: var(--default-strong-color);
     }
   }
 
