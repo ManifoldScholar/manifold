@@ -9,10 +9,7 @@ function SortableCollectables({ categoryId, type, ...restProps }) {
   return (
     <Droppable droppableId={id} type={type}>
       {provided => (
-        <ul
-          ref={provided.innerRef}
-          className="group-collection-editor__list"
-        >
+        <ul ref={provided.innerRef} className="group-collection-editor__list">
           <CollectablesList type={type} {...restProps} />
           {provided.placeholder}
         </ul>
