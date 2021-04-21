@@ -15,10 +15,10 @@
     @include utilityPrimary;
     width: 100%;
     padding: 7px 14px;
+    font-size: inherit;
     background-color: $neutralWhite;
     border: 1px solid $neutralWhite;
     border-radius: 4px;
-    font-size: inherit;
 
     &:focus-visible {
       outline: 0;
@@ -28,7 +28,7 @@
   &__button {
     @include buttonUnstyled;
     @include utilityPrimary;
-    padding: 0px 22px;
+    padding: 0 22px;
     margin-left: 12px;
     font-size: inherit;
     color: var(--default-strong-color);
