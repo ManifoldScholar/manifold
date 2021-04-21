@@ -1,5 +1,7 @@
 export { default as useDispatchMyCollected } from "./use-dispatch-my-collected";
 export { default as useSelectMyCollected } from "./use-select-my-collected";
+export { default as useDispatchJournals } from "./use-dispatch-journals";
+export { default as useDispatchIssues } from "./use-dispatch-issues";
 export { default as useDispatchMyAnnotations } from "./use-dispatch-my-annotations";
 export { default as useSelectMyAnnotations } from "./use-select-my-annotations";
 export { default as useDispatchMyAnnotatedTexts } from "./use-dispatch-my-annotated-texts";

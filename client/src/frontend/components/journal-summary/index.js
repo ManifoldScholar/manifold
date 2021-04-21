@@ -5,15 +5,15 @@ import get from "lodash/get";
 import memoize from "lodash/memoize";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
-import Header from "./Header";
+import Header from "../project-collection/Header";
 import { CSSTransition } from "react-transition-group";
-import ProjectGridItem from "../project-list/ProjectGridItem";
+import JournalGridItem from "../project-list/JournalGridItem";
 
-export default class ProjectCollectionSummary extends Component {
-  static displayName = "ProjectCollectionSummary";
+export default class JournalSummary extends Component {
+  static displayName = "JournalSummary";
 
   static propTypes = {
-    projectCollection: PropTypes.object.isRequired,
+    journalCollection: PropTypes.object.isRequired,
     limit: PropTypes.number,
     dispatch: PropTypes.func,
     authentication: PropTypes.object,
@@ -30,22 +30,22 @@ export default class ProjectCollectionSummary extends Component {
   }
 
   get collection() {
-    return this.props.projectCollection;
+    return this.props.journalCollection;
   }
 
-  get projects() {
-    return this.mappedProjects(this.collection);
+  get journals() {
+    return this.mappedJournals(this.collection);
   }
 
-  get projectsCount() {
+  get journalsCount() {
     return this.collection.attributes.projectsCount;
   }
 
-  get hasProjects() {
-    return this.projects.length > 0;
+  get hasJournals() {
+    return this.journals.length > 0;
   }
 
-  mappedProjects = memoize(() => {
+  mappedJournals = memoize(() => {
     return this.collection.relationships.collectionProjects.map(
       cp => cp.relationships.project
     );
@@ -62,40 +62,36 @@ export default class ProjectCollectionSummary extends Component {
     return (
       <section key={this.collection.id} className={backgroundClasses}>
         <div className="container">
-          <Header projectCollection={this.props.projectCollection} hasLink />
-          {this.hasProjects ? (
+          <Header projectCollection={this.props.journalCollection} hasLink />
+          {this.hasJournals ? (
             <ProjectList.Grid
               authenticated={this.props.authentication.authenticated}
               favorites={get(
                 this.props.authentication,
                 "currentUser.favorites"
               )}
+              projects={this.journals}
               dispatch={this.props.dispatch}
               limit={this.limit}
-              showViewAll={this.projects.length < this.projectsCount}
+              showViewAll={this.journals.length < this.journalsCount}
               viewAllUrl={lh.link(
-                "frontendProjectCollection",
+                "frontendJournals",
                 this.collection.attributes.slug
               )}
-              viewAllLabel={"See the full collection"}
+              viewAllLabel={"See all journals"}
             >
-              {this.projects.map(project => {
+              {this.journals.map(journal => {
                 return (
-                  <CSSTransition
-                    key={project.id}
-                    enter
-                    exit
-                    timeout={{ enter: 250, exit: 250 }}
-                  >
+                  <CSSTransition key={journal.id} timeout={250}>
                     <li className="project-list__item--pos-rel">
-                      <ProjectGridItem
+                      <JournalGridItem
                         authenticated={this.props.authentication.authenticated}
                         favorites={get(
                           this.props.authentication,
                           "currentUser.favorites"
                         )}
                         dispatch={this.props.dispatch}
-                        project={project}
+                        journal={journal}
                       />
                     </li>
                   </CSSTransition>

@@ -7,6 +7,7 @@ import { select } from "utils/entityUtils";
 import { requests } from "api";
 import Collections from "./Collections";
 import Projects from "./Projects";
+import JournalSummary from "frontend/components/journal-summary";
 import Feature from "./Feature";
 import withSettings from "hoc/with-settings";
 import Layout from "frontend/components/layout";
@@ -33,6 +34,10 @@ export class HomeContainer extends Component {
 
   static mapStateToProps = state => {
     return {
+      projectCollections: select(
+        requests.feProjectCollections,
+        state.entityStore
+      ),
       authentication: state.authentication
     };
   };
@@ -80,7 +85,21 @@ export class HomeContainer extends Component {
             authentication={this.props.authentication}
           />
         ) : (
-          <Collections authentication={this.props.authentication} />
+          <Collections authentication={this.props.authentication}>
+            {this.props.projectCollections.map((projectCollection, index) => {
+              return (
+                <JournalSummary
+                  key={projectCollection.id}
+                  authentication={this.props.authentication}
+                  journalCollection={projectCollection}
+                  dispatch={this.props.dispatch}
+                  ordinal={index}
+                  limit={projectCollection.attributes.homepageCount}
+                />
+              );
+            })}
+            ; }
+          </Collections>
         )}
 
         {this.hasVisibleProjects && <Layout.ButtonNavigation grayBg={false} />}

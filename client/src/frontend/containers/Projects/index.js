@@ -12,6 +12,9 @@ import queryString from "query-string";
 import omitBy from "lodash/omitBy";
 import debounce from "lodash/debounce";
 import withSettings from "hoc/with-settings";
+import { CSSTransition } from "react-transition-group";
+import difference from "lodash/difference";
+import ProjectGridItem from "../../components/project-list/ProjectGridItem";
 
 const { request } = entityStoreActions;
 const defaultPage = 1;
@@ -70,6 +73,21 @@ export class ProjectsContainer extends Component {
     super(props);
     this.state = this.initialState(queryString.parse(props.location.search));
     this.updateResults = debounce(this.updateResults.bind(this), 250);
+    this.enableAnimation = false;
+  }
+
+  componentDidUpdate(prevProps) {
+    const prevProjects = prevProps.projects || [];
+    const currentProjects = this.props.projects || [];
+    const currentIds = currentProjects.map(p => p.id);
+    const prevIds = prevProjects.map(p => p.id);
+    const diffA = difference(currentIds, prevIds).length;
+    const diffB = difference(prevIds, currentIds).length;
+    if (diffA + diffB === 1) {
+      this.enableAnimation = true;
+    } else {
+      this.enableAnimation = false;
+    }
   }
 
   get hasVisibleProjects() {
@@ -139,6 +157,13 @@ export class ProjectsContainer extends Component {
   }
 
   renderProjectLibrary() {
+    const {
+      authentication,
+      projects,
+      subjects,
+      dispatch,
+      projectsMeta
+    } = this.props;
     if (this.showPlaceholder()) return <ProjectList.Placeholder />;
 
     return (
@@ -156,25 +181,43 @@ export class ProjectsContainer extends Component {
             filterChangeHandler={this.filterChangeHandler}
             initialFilterState={this.state.filter}
             resetFilterState={this.initialFilterState()}
-            subjects={this.props.subjects}
+            subjects={subjects}
           />
           <div className="entity-section-wrapper__details">
             <Utility.EntityCount
-              pagination={get(this.props.projectsMeta, "pagination")}
+              pagination={get(projectsMeta, "pagination")}
               singularUnit="project"
               pluralUnit="projects"
               countOnly
             />
           </div>
           <ProjectList.Grid
-            authenticated={this.props.authentication.authenticated}
-            favorites={get(this.props.authentication, "currentUser.favorites")}
-            dispatch={this.props.dispatch}
-            projects={this.props.projects}
-            pagination={get(this.props.projectsMeta, "pagination")}
+            authenticated={authentication.authenticated}
+            favorites={get(authentication, "currentUser.favorites")}
+            dispatch={dispatch}
+            pagination={get(projectsMeta, "pagination")}
             paginationClickHandler={this.pageChangeHandlerCreator}
             limit={perPage}
-          />
+          >
+            {projects.map((project, i) => {
+              return (
+                <CSSTransition
+                  key={i}
+                  enter={this.enableAnimation}
+                  exit={this.enableAnimation}
+                  timeout={{ enter: 250, exit: 250 }}
+                >
+                  <li key={project.id} className="project-list__item--pos-rel">
+                    <ProjectGridItem
+                      project={project}
+                      hideDesc
+                      hideCollectingToggle={this.hideCollectingToggle}
+                    />
+                  </li>
+                </CSSTransition>
+              );
+            })}
+          </ProjectList.Grid>
         </div>
       </section>
     );
@@ -193,7 +236,8 @@ export class ProjectsContainer extends Component {
         {this.renderProjectLibrary()}
         {this.hasVisibleProjects && (
           <Layout.ButtonNavigation
-            showProjectCollections
+            label="See All Collections"
+            link="frontendProjectCollections"
             showProjects={false}
             grayBg={false}
           />

@@ -5,6 +5,8 @@ import Utility from "global/components/utility";
 import get from "lodash/get";
 import Header from "./Header";
 import Filters from "./Filters";
+import { CSSTransition } from "react-transition-group";
+import ProjectGridItem from "../project-list/ProjectGridItem";
 
 export default class ProjectCollectionDetail extends Component {
   static displayName = "ProjectCollectionDetail";
@@ -46,14 +48,29 @@ export default class ProjectCollectionDetail extends Component {
               countOnly
             />
           </div>
+
           <ProjectList.Grid
             authenticated={this.props.authentication.authenticated}
             favorites={get(this.props.authentication, "currentUser.favorites")}
-            projects={this.props.projects}
             dispatch={this.props.dispatch}
-            paginationClickHandler={this.props.paginationClickHandler}
             pagination={this.props.pagination}
-          />
+            paginationClickHandler={this.props.paginationClickHandler}
+          >
+            {this.props.projects.map(project => {
+              return (
+                <CSSTransition
+                  key={project.id}
+                  enter
+                  exit
+                  timeout={{ enter: 250, exit: 250 }}
+                >
+                  <li className="project-list__item--pos-rel">
+                    <ProjectGridItem project={project} />
+                  </li>
+                </CSSTransition>
+              );
+            })}
+          </ProjectList.Grid>
         </div>
       </section>
     );

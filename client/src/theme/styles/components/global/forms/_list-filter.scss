@@ -29,6 +29,7 @@
     letter-spacing: 0.01em;
     background-color: transparent;
     border: 1px solid $neutralUIDark;
+    border-radius: 6px;
 
     &:focus-visible::placeholder {
       color: $defaultFocusColor;
@@ -150,6 +151,7 @@
         height: $inputHeight;
         font-size: 14px;
         border: 1px solid $neutralUIDark;
+        border-radius: 6px;
         transition: border-color $duration $timing;
 
         &:focus-visible {
