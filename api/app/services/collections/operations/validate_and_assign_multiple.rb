@@ -61,8 +61,6 @@ module Collections
         assign! collector, collectables
       end
 
-      private
-
       def authorize_collector!(collector)
         action_authorized(:update, collector.composed_collection, user)
       end

@@ -17,7 +17,7 @@ module Collections
 
         entry = entry_collection.upsert! attributes
 
-        #entry = entry_collection.find entry.id
+        # entry = entry_collection.find entry.id
 
         reposition! entry if position.present?
 
