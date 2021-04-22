@@ -25,6 +25,7 @@ class ReadingGroupMembership < ApplicationRecord
   classy_enum_attr :role, enum: "ReadingGroupRole", default: :member, allow_blank: false
 
   scope :moderators, -> { active.where(role: "moderator") }
+  scope :for_user, ->(user) { where(user: user) }
 
   validates :user_id, uniqueness: { scope: :reading_group_id }
 
