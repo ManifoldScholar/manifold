@@ -16,6 +16,10 @@ module UserCollectedEntry
 
     has_one :project, through: collectable unless collectable_project?
 
+    has_one :user_collected_composite_entry, dependent: :destroy
+
+    has_one :favorite, through: :user_collected_composite_entry
+
     scope :in_order, -> { order(created_at: :desc) }
 
     after_save :update_collection_entry!
