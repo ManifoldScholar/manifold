@@ -77,7 +77,7 @@ export class HomeProjectsContainer extends Component {
             limit={16}
             viewAllUrl={lh.link("frontendProjectsAll")}
           >
-            {projects.map((project, i) => {
+            {projects.map(project => {
               return (
                 <CSSTransition enter exit timeout={{ enter: 250, exit: 250 }}>
                   <li key={project.id} className="project-list__item--pos-rel">

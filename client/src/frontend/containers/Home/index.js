@@ -98,7 +98,6 @@ export class HomeContainer extends Component {
                 />
               );
             })}
-            ; }
           </Collections>
         )}
 

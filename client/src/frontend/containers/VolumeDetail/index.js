@@ -1,6 +1,6 @@
 import React from "react";
 
-const VolumeDetail = ({ volume }) => {
+const VolumeDetail = () => {
   return <div>Volume Detail</div>;
 };
 

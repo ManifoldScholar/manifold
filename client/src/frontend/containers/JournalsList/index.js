@@ -70,7 +70,7 @@ const JournalsList = ({
 
   useEffect(() => {
     doUpdate();
-  }, [filter, pagination]);
+  }, [filter, pagination]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const filterChangeHandler = f => {
     setFilter(f);

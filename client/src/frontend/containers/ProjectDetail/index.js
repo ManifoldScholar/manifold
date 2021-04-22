@@ -17,7 +17,6 @@ export default class ProjectDetailContainer extends Component {
   };
 
   render() {
-    console.log("project detail");
     if (!this.props.projectResponse) return null;
     if (this.props.projectResponse.status === 401)
       return <Redirect to={lh.link("frontend")} />;

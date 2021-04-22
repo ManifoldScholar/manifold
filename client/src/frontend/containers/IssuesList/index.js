@@ -73,7 +73,7 @@ const IssuesListContainer = ({
 
   useEffect(() => {
     doUpdate();
-  }, [filter, pagination]);
+  }, [filter, pagination]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const hasVisibleIssues = () => {
     return get(settings, "attributes.calculated.hasVisibleProjects");
