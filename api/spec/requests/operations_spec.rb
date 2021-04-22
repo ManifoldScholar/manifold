@@ -39,7 +39,7 @@ RSpec.describe "Operations API", type: :request do
           data: {
             attributes: {
               categories: [],
-              category_mappings: {
+              categoryMappings: {
                 "$uncategorized$" => {
                   collectable_mapping_key => [collectable.id],
                 },
