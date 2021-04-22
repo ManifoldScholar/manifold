@@ -55,7 +55,10 @@ export default class UIPanel extends Component {
               Close Panel
             </button>
             {/* Second argument as props */}
-            {React.createElement(this.props.bodyComponent, { ...this.props })}
+            {React.createElement(this.props.bodyComponent, {
+              ...this.props,
+              closeCallback: this.props.hidePanel
+            })}
           </FocusTrap>
         </div>
       </CSSTransition>
