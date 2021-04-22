@@ -57,7 +57,7 @@ export default class Filters extends Component {
     return (
       <fieldset className="notes-filters">
         <div className="notes-filters__inner">
-          <legend className="notes-filters__label">Show my:</legend>
+          <legend className="notes-filters__label">Show:</legend>
           <div className="notes-filters__checkbox-group">
             {this.renderCheckBox("Highlights", "highlight")}
             {this.renderCheckBox("Annotations", "annotation")}
