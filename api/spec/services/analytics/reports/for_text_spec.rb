@@ -34,9 +34,7 @@ RSpec.describe Analytics::Reports::ForText do
     end
 
     let(:expectations) do
-      l_daily_visitors = (visit_days - 1).times.map do |t|
-        { "x" => (Date.yesterday - (t + 1).days).to_s, "y" => repeat_visitor_count }
-      end.tap { |a| a.push({ "x" => Date.yesterday.to_s, "y" => visitor_count }) }
+      l_daily_visitors = build_expected_daily_visitors from_date: Date.yesterday
 
       l_annotations = [{
         "highlights" => per_group_annotations_count * 4,
