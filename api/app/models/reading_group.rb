@@ -66,6 +66,12 @@ class ReadingGroup < ApplicationRecord
     privacy == "public"
   end
 
+  def reading_group_memberships_for_user(user)
+    return nil unless user
+
+    reading_group_memberships.for_user(user)
+  end
+
   def update_annotations_privacy
     # Use of update_all is intentional. We don't care about validations here.
     annotations.update_all(private: true, reading_group_id: nil) if private? || anonymous?
