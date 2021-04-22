@@ -12,21 +12,20 @@
   }
 
   &__header-row {
-
     &.journals {
       display: grid;
-      grid-template-columns: max-content 1fr;
+      grid-template: 'section-heading tools'
+        'list-total list-total';
       grid-template-rows: 1fr 1fr;
-      grid-template-areas: "section-heading tools"
-    "list-total list-total";
+      grid-template-columns: max-content 1fr;
       align-items: center;
 
-      @include respond($break95, "max") {
-        grid-template-columns: 1fr;
+      @include respond($break95, 'max') {
+        grid-template-areas: 'section-heading'
+          'list-total'
+          'tools';
         grid-template-rows: auto;
-        grid-template-areas: "section-heading"
-        "list-total"
-        "tools";
+        grid-template-columns: 1fr;
       }
 
       .section-heading {
@@ -41,13 +40,13 @@
 
       .form-list-filter {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: "search-input select-group";
-        margin: 0;
         grid-area: tools;
+        grid-template-areas: 'search-input select-group';
+        grid-template-columns: 1fr 1fr;
         align-self: center;
+        margin: 0;
 
-        @include respond($break95, "max") {
+        @include respond($break95, 'max') {
           display: flex;
           margin-bottom: 36px;
         }
@@ -58,7 +57,7 @@
           width: 100%;
           max-width: 200px;
 
-          @include respond($break95, "max") {
+          @include respond($break95, 'max') {
             width: auto;
             max-width: 100%;
           }
@@ -70,7 +69,7 @@
           &.inline {
             display: flex;
 
-            @include respond($break95, "max") {
+            @include respond($break95, 'max') {
               display: block;
             }
           }

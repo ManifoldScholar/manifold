@@ -199,15 +199,10 @@ export class ProjectsContainer extends Component {
             paginationClickHandler={this.pageChangeHandlerCreator}
             limit={perPage}
           >
-            {projects.map((project, i) => {
+            {projects.map(project => {
               return (
-                <CSSTransition
-                  key={i}
-                  enter={this.enableAnimation}
-                  exit={this.enableAnimation}
-                  timeout={{ enter: 250, exit: 250 }}
-                >
-                  <li key={project.id} className="project-list__item--pos-rel">
+                <CSSTransition key={project.id} timeout={250}>
+                  <li className="project-list__item--pos-rel">
                     <ProjectGridItem
                       project={project}
                       hideDesc

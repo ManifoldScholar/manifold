@@ -73,7 +73,6 @@ export class ProjectWrapper extends Component {
   }
 
   render() {
-    console.log("project wrapper");
     return (
       <>
         {this.props.project && (

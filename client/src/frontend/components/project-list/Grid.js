@@ -7,7 +7,6 @@ import classNames from "classnames";
 
 const ProjectListGrid = ({
   children,
-  authenticated,
   limit = 0,
   pagination,
   paginationTarget,
