@@ -30,7 +30,8 @@ export default class ReaderDrawer extends PureComponent {
       lockScroll: "always",
       includeDrawerFrontMatter: true,
       focusTrap: false,
-      title: "My Notes"
+      title: "Notes",
+      closeCallback: this.props.closeCallback
     };
 
     return (
