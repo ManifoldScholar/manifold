@@ -2,6 +2,7 @@ module Testing
   class CollectEverything < ActiveInteraction::Base
     object :collector
 
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def execute
       definition = Collections::Mapping[collector]
 
@@ -13,7 +14,7 @@ module Testing
         attrs_for = ->(collectable) do
           {
             associations.collector.singular => collector,
-            associations.collectable.singular => collectable,
+            associations.collectable.singular => collectable
           }
         end
 
@@ -22,7 +23,7 @@ module Testing
         collectable_klass.find_each do |collectable|
           attrs = attrs_for[collectable]
 
-          entry_klass.upsert! attrs          
+          entry_klass.upsert! attrs
 
           counter += 1
         end
@@ -31,4 +32,5 @@ module Testing
       end.to_h
     end
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 end
