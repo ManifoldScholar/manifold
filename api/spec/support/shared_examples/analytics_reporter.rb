@@ -17,26 +17,41 @@ shared_context "with analytics visits" do
     FactoryBot.create(:analytics_visit, started_at: start_time, ended_at: end_time, visitor_token: visitor_token)
   end
 
-  Timecop.freeze do
-    let(:single_visitor_count) { 2 }
-    let!(:single_visitors) { FactoryBot.create_list(:user, single_visitor_count) }
-    let(:repeat_visitor_count) { 2 }
-    let!(:repeat_visitors) { FactoryBot.create_list(:user, repeat_visitor_count) }
-    let(:active_visitors) { repeat_visitors }
+  def build_expected_daily_visitors(from_date: Date.yesterday)
+    max_offset = visit_days - 1
 
-    let(:visitor_count) { single_visitor_count + repeat_visitor_count }
+    max_offset.downto(0).map do |offset|
+      day = from_date - offset.days
 
-    let(:visit_days) { 3 }
-    let(:visit_duration) { 1.hour }
+      result = {}.tap do |res|
+        res["x"] = day.to_s
+        res["y"] = offset == 0 ? visitor_count : repeat_visitor_count
+      end
+    end
+  end
 
-    let(:tokens) do
+  let(:single_visitor_count) { 2 }
+  let!(:single_visitors) { Timecop.freeze { FactoryBot.create_list(:user, single_visitor_count) } }
+  let(:repeat_visitor_count) { 2 }
+  let!(:repeat_visitors) { Timecop.freeze { FactoryBot.create_list(:user, repeat_visitor_count) } }
+  let(:active_visitors) { repeat_visitors }
+
+  let(:visitor_count) { single_visitor_count + repeat_visitor_count }
+
+  let(:visit_days) { 3 }
+  let(:visit_duration) { 1.hour }
+
+  let(:tokens) do
+    Timecop.freeze do
       repeat_visitors.each_with_object({}) { |u, h| h[u] = SecureRandom.uuid }
         .merge(single_visitors.each_with_object({}) { |u, h| h[u] = SecureRandom.uuid })
     end
+  end
 
-    let!(:visits) do
-      yesterday = Time.now - 1.day
-      
+  let!(:visits) do
+    Timecop.freeze do
+      yesterday = 1.day.ago
+
       repeat_visits = visit_days.times.map do |t|
         ago = t.days
         repeat_visitors.map { |u| visit_for(tokens[u], yesterday - ago, (yesterday - ago) + visit_duration) }
@@ -230,6 +245,7 @@ shared_examples_for "analytics reporter events" do
     outcome = running_the_interaction
     expect(outcome).to be_valid
   end
+
 
   # Generating database state and running query is time-consuming, so run all expectations in one go
   # It is important that nothing in this proc mutates the database or result set

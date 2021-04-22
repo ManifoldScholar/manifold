@@ -133,7 +133,7 @@ module Analytics
         Rails.cache.fetch(cache_key,
                           force: force_cache_refresh,
                           skip_nil: true,
-                          expires_in: (Time.now.end_of_day - Time.now).seconds,
+                          expires_in: (Time.current.end_of_day - Time.current).seconds,
                           race_condition_ttl: 10.seconds) do
           compose(self.class, **inputs).data
         end
@@ -153,7 +153,7 @@ module Analytics
           .gsub(GENERATE_SERIES_PLACEHOLDER, generate_series_sql)
       end
 
-      def timezone_sql(zone = start_date.to_time.zone)
+      def timezone_sql(zone = start_date.in_time_zone.zone)
         "AT TIME ZONE 'UTC' AT TIME ZONE #{quote(zone)}"
       end
 
