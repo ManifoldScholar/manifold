@@ -21,5 +21,7 @@ class UserCollectedCompositeEntry < ApplicationRecord
 
   has_many :subjects, through: :project
 
+  has_one :favorite, foreign_key: :id, inverse_of: :user_collected_composite_entry
+
   validates :collectable_jsonapi_type, presence: true
 end
