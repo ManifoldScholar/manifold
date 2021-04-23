@@ -74,6 +74,9 @@ import Globe64 from "./64/Globe";
 import Grabber32 from "./32/Grabber";
 import GrabberInactive32 from "./32/GrabberInactive";
 import Info16 from "./16/Info";
+import InteractAnnotate24 from "./24/InteractAnnotate";
+import InteractHighlight24 from "./24/InteractHighlight";
+import InteractComment24 from "./24/InteractComment";
 import InteractAnnotate32 from "./32/InteractAnnotate";
 import InteractHighlight32 from "./32/InteractHighlight";
 import InteractComment32 from "./32/InteractComment";
@@ -232,6 +235,9 @@ export default {
   Grabber32,
   GrabberInactive32,
   Info16,
+  InteractAnnotate24,
+  InteractHighlight24,
+  InteractComment24,
   InteractAnnotate32,
   InteractHighlight32,
   InteractComment32,

@@ -145,7 +145,7 @@ function RangePicker({
                   <button
                     key={key}
                     onClick={() => handlePresetClick(dateProps)}
-                    className="range-picker__preset button-lozenge"
+                    className="range-picker__preset button-lozenge-secondary"
                   >
                     <span>{label}</span>
                   </button>

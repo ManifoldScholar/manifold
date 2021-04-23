@@ -178,7 +178,7 @@ const routes = {
             const query = queryString.stringify(params);
             const base = `/my/groups/${rg}`;
             if (!query) return base;
-            return `${base}/?${query}`;
+            return `${base}?${query}`;
           },
           routes: [
             {
@@ -190,7 +190,7 @@ const routes = {
                 const query = queryString.stringify(params);
                 const base = `/my/groups/${rg}/annotations`;
                 if (!query) return base;
-                return `${base}/?${query}`;
+                return `${base}?${query}`;
               }
             },
             {
