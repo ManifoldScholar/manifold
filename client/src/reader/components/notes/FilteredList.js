@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 import Partial from "./partial";
 import EmptyMessage from "./EmptyMessage";
 
@@ -44,6 +45,11 @@ export default class FilteredList extends PureComponent {
           className="notes-filtered-list__see-all button-primary"
         >
           <span className="button-primary__text">See all</span>
+          <IconComposer
+            icon="link24"
+            size="default"
+            iconClass="button-primary__icon"
+          />
         </button>
       </div>
     );
