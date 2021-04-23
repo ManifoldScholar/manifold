@@ -1,7 +1,7 @@
 .list-total {
   @include utilityPrimary;
   font-size: 14px;
-  color: var(--default-weak-color);
+  color: var(--default-color);
   transition: color $duration $timing;
 
   &--extra-bottom {
