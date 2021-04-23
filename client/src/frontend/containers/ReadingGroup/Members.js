@@ -172,6 +172,7 @@ class ReadingGroupsMembersContainer extends Component {
           members={readingGroupMembers}
           pagination={readingGroupMembersMeta.pagination}
           onPageClick={this.pageChangeHandlerCreator}
+          onEditMember={() => {}}
           onRemoveMember={this.removeMember}
         />
       </div>
