@@ -76,7 +76,7 @@ class TableRow extends React.PureComponent {
       return (
         <Cell {...this.cellProps(child)}>
           {isFunction(child.props.children)
-            ? child.props.children({ model })
+            ? child.props.children({ model, hovering: this.state.hovering })
             : null}
         </Cell>
       );

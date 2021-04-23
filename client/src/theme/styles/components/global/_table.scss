@@ -1,5 +1,17 @@
 .table {
-  $layoutBreakpoint: $break65;
+  $_layout-breakpoint: $break65;
+  $_cell-padding-vertical: 16px;
+  $_cell-padding-lateral-static: 30px;
+  $_cell-padding-lateral-responsive: $_cell-padding-lateral-static /
+    $containerWidthFull * 100 + 0vw;
+  $_cell-padding-lateral: min(
+    #{$_cell-padding-lateral-static},
+    #{$_cell-padding-lateral-responsive}
+  );
+
+  &__responsive-container {
+    overflow: auto;
+  }
 
   &__count-container {
     @include panelRounded;
@@ -13,7 +25,7 @@
 
   &__row {
     position: relative;
-    padding: 15px 22px 16px;
+    padding: 16px;
     margin: 0;
     border-bottom: 1px solid $neutral45;
     transition: background-color $duration $timing;
@@ -22,7 +34,7 @@
       cursor: pointer;
 
       &.table__row--is-hovering {
-        background-color: $neutral05;
+        background-color: var(--box-bg-color);
       }
     }
   }
@@ -30,7 +42,7 @@
   &__list {
     display: grid;
 
-    @include respond($layoutBreakpoint) {
+    @include respond($_layout-breakpoint) {
       @include screenReaderText;
     }
   }
@@ -40,27 +52,52 @@
   }
 
   &__list-value {
-    margin-inline-start: 0;
+    padding-top: 3px;
+    margin-top: 0;
   }
 
   &__table {
     display: none;
     width: 100%;
 
-    @include respond($layoutBreakpoint) {
+    @include respond($_layout-breakpoint) {
       display: table;
     }
   }
 
   &__th {
+    padding: $_cell-padding-vertical $_cell-padding-lateral;
     text-align: left;
   }
 
   &__ordered-list {
     @include listUnstyled;
 
-    @include respond($layoutBreakpoint) {
+    @include respond($_layout-breakpoint) {
       display: none;
+    }
+  }
+
+  &__link-arrow {
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity $duration $timing, transform $duration $timing;
+
+    &--active {
+      opacity: 1;
+      transform: translateX(20%);
+    }
+
+    &:not(:first-child) {
+      margin-left: 12px;
+    }
+
+    .table__avatar--image ~ & {
+      transform: translateY(1px);
+
+      &--active {
+        transform: translate(20%, 1px);
+      }
     }
   }
 
@@ -87,14 +124,14 @@
     border-radius: 15px;
     transition: background-color $duration $timing;
 
-    @include respond($layoutBreakpoint) {
+    @include respond($_layout-breakpoint) {
       margin-left: 17px;
     }
 
     &:hover,
     &:focus-visible {
       color: inherit;
-      background-color: $neutral05;
+      background-color: var(--box-bg-color);
 
       .table__nested-link-arrow {
         opacity: 1;
@@ -104,15 +141,27 @@
 
   &__name {
     display: flex;
-    align-items: baseline;
+    flex-wrap: wrap;
+    align-items: center;
     width: 100%;
+    margin-top: -6px;
+    margin-left: -12px;
     text-decoration: none;
+
+    @include respond($_layout-breakpoint) {
+      width: auto;
+    }
 
     &--with-link {
       &:hover,
       &:focus-visible {
         outline: 0;
       }
+    }
+
+    > * {
+      margin-top: 6px;
+      margin-left: 12px;
     }
   }
 
@@ -138,7 +187,7 @@
   }
 
   &__padded-cell {
-    padding: 13px 20px;
+    padding: $_cell-padding-vertical $_cell-padding-lateral;
   }
 
   &__row-link {
@@ -154,45 +203,50 @@
     @include templateHead;
     position: relative;
     margin: 0;
-    color: $neutralTextExtraDark;
-    vertical-align: baseline;
+    color: var(--default-strong-color);
   }
 
   &__value-large {
     display: inline-flex;
     align-items: center;
-    width: 100%;
     padding: 10px 0 20px;
     margin: 0;
     font-size: 18px;
     font-weight: $medium;
 
-    @include respond($layoutBreakpoint) {
-      padding: 17px 22px 18px;
+    @include respond($_layout-breakpoint) {
+      width: 100%;
+      min-width: 250px;
+      padding: $_cell-padding-vertical $_cell-padding-lateral;
       font-size: 21px;
     }
   }
 
   &__inline-value {
     display: inline-block;
-    margin-right: 6px;
-    margin-left: 6px;
+
+    &--underlined {
+      line-height: 1.6;
+    }
+
+    &:not(:first-child) {
+      margin-left: min(20px, #{20px / $containerWidthFull * 100 + 0vw});
+    }
   }
 
   &__inline-icon {
     position: relative;
     top: -1px;
     margin-right: 5px;
-    color: $neutralUIDark;
+    color: var(--default-color);
   }
 
   &__name-container {
-    overflow: hidden;
+    @include textTruncate;
     line-height: 1.4;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    transform: translateY(1px);
 
-    @include respond($layoutBreakpoint) {
+    @include respond($_layout-breakpoint) {
       overflow: visible;
       line-height: inherit;
       white-space: normal;
@@ -201,17 +255,24 @@
 
   &__tag {
     @include blockLabelRound;
-    position: relative;
-    top: -2px;
     display: inline-block;
     flex-shrink: 0;
-    padding: 0.273em 5px 0.364em;
-    margin-left: 1em;
+    padding: 5px 12px 6px;
     font-size: 11px;
     line-height: 1.2em;
-    color: $neutralTextExtraDark;
+    color: var(--default-strong-color);
     vertical-align: middle;
-    background-color: $neutral20;
+    background-color: var(--box-medium-bg-color);
+    transform: translateY(3px);
+  }
+
+  &__actions {
+    display: flex;
+
+    > * + * {
+      flex-shrink: 0;
+      margin-left: 7px;
+    }
   }
 
   &__no-left-padding {
@@ -241,11 +302,11 @@
 
   &__value-standard {
     @include utilityPrimary;
-    font-size: 14px;
+    font-size: 12px;
   }
 
   &__centered {
-    @include respond($layoutBreakpoint) {
+    @include respond($_layout-breakpoint) {
       text-align: center;
     }
   }
@@ -255,25 +316,32 @@
   }
 
   &__cell {
-    &--small {
-      width: 55px;
+    &--fit-content {
+      @include respond($_layout-breakpoint) {
+        width: 1%;
+        white-space: nowrap;
+      }
+    }
+
+    &--truncate {
+      @include textTruncate;
     }
 
     &--medium {
-      width: 135px;
+      // width: 135px;
     }
 
     &--header-has-icon {
       padding-left: 32px;
 
-      @include respond($layoutBreakpoint) {
+      @include respond($_layout-breakpoint) {
         padding-left: 20px;
       }
     }
   }
 
   &__small-padding-left {
-    @include respond($layoutBreakpoint) {
+    @include respond($_layout-breakpoint) {
       padding-left: 10px;
     }
   }
@@ -288,33 +356,28 @@
   }
 
   &__avatar {
+    flex-shrink: 0;
+
     &--image {
-      position: relative;
-      top: 2px;
-      width: 32px;
-      height: 32px;
-      margin-right: 12px;
+      width: 30px;
+      height: 30px;
+      margin: -1px 14px -1px 3px;
       border: 1px solid $neutral50;
       border-radius: 100%;
-
-      @include respond($layoutBreakpoint) {
-        margin-right: 0;
-      }
     }
 
     &--placeholder {
-      margin-right: 6px;
-      margin-left: -3px;
-      color: $neutralUIDark;
-
-      @include respond($layoutBreakpoint) {
-        margin-right: -3px;
-      }
+      margin: -3px 10px -4px 0;
+      color: $neutral50;
 
       svg {
-        width: 37px;
-        height: 37px;
+        width: 36px;
+        height: 36px;
       }
+    }
+
+    + .table__name {
+      transform: translateY(-2px);
     }
   }
 
@@ -325,7 +388,7 @@
   }
 
   &__hide-desktop {
-    @include respond($layoutBreakpoint) {
+    @include respond($_layout-breakpoint) {
       display: none;
     }
   }
@@ -333,7 +396,7 @@
   &__hide-mobile {
     display: none;
 
-    @include respond($layoutBreakpoint) {
+    @include respond($_layout-breakpoint) {
       display: inline-block;
     }
   }

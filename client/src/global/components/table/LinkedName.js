@@ -21,17 +21,15 @@ export default class LinkedName extends React.PureComponent {
 
   render() {
     return (
-      <>
-        <span className="table__name">
-          {this.props.to && (
-            <Link to={this.props.to} className="table__sr-link">
-              View Details
-            </Link>
-          )}
-          <span className="table__name-container">{this.name}</span>
-          {this.tag && <span className="table__tag">{this.tag}</span>}
-        </span>
-      </>
+      <span className="table__name">
+        {this.props.to && (
+          <Link to={this.props.to} className="table__sr-link">
+            View Details
+          </Link>
+        )}
+        <span className="table__name-container">{this.name}</span>
+        {this.tag && <span className="table__tag">{this.tag}</span>}
+      </span>
     );
   }
 }

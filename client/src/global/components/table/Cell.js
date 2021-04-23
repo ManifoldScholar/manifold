@@ -10,10 +10,14 @@ export default class TableCell extends React.PureComponent {
     align: PropTypes.oneOf(["center", "right", "left"]),
     textStyle: PropTypes.oneOf(["valueLarge"]),
     cellPadding: PropTypes.oneOf(["rightUnpadded", "leftSmall"]),
-    cellSize: PropTypes.oneOf(["cellSmall", "cellMedium"]),
+    cellSize: PropTypes.oneOf(["cellTruncate", "cellFitContent"]),
     columnPosition: PropTypes.oneOf(["all", "left", "right"]),
     viewportVisibility: PropTypes.oneOf(["hideMobile"]),
     maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  };
+
+  static defaultProps = {
+    align: "left"
   };
 
   static displayName = "GenericTable.Cell";
@@ -32,8 +36,8 @@ export default class TableCell extends React.PureComponent {
       "table__value-standard": !textStyle,
       "table__padded-cell": this.isTable,
       "table__list-value": !this.isTable,
-      "table__cell--small": cellSize === "cellSmall",
-      "table__cell--medium": cellSize === "cellMedium",
+      "table__cell--fit-content": cellSize === "cellFitContent",
+      "table__cell--truncate": cellSize === "cellTruncate",
       "table__cell--header-has-icon": !isNil(headerIcon)
     });
   }
