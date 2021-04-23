@@ -10,7 +10,7 @@ exports[`reader/components/notes/partial/Filters matches the snapshot 1`] = `
     <legend
       className="notes-filters__label"
     >
-      Show my:
+      Show:
     </legend>
     <div
       className="notes-filters__checkbox-group"
