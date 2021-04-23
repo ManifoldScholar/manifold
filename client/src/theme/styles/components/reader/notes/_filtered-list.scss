@@ -18,13 +18,18 @@
   }
 
   &__see-all {
-    padding-top: 9px;
-    padding-bottom: 11px;
+    padding: 5px 9px 6px 13px;
     margin-top: 20px;
+    font-size: 13px;
 
     @include respond($break50) {
       margin-top: 0;
     }
+  }
+
+  &__see-all-icon {
+    top: 0;
+    margin-left: 6px;
   }
 
   &__section-list {

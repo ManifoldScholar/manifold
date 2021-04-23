@@ -180,6 +180,10 @@
     }
   }
 
+  &--rounded {
+    border-radius: 6px;
+  }
+
   &__icon {
     position: relative;
     top: 1px;
