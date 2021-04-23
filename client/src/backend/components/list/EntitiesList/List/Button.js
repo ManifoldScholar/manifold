@@ -57,7 +57,7 @@ export default class ListEntitiesListButtonSet extends PureComponent {
   render() {
     const buttonClassNames = classNames({
       "entity-list__button": true,
-      "button-lozenge": true
+      "button-lozenge-secondary": true
     });
 
     return this.maybeAuthorize(

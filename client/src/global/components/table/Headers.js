@@ -27,7 +27,6 @@ export default class TableHeaders extends React.PureComponent {
 
   cellClassNames(cellPadding, cellAlignment) {
     return classNames({
-      "table__padded-cell": true,
       table__th: true,
       "table__small-padding-left": cellPadding === "leftSmall",
       table__centered: cellAlignment === "center",
