@@ -3,6 +3,7 @@
 exports[`backend/containers/project/category/New matches the snapshot 1`] = `
 <div>
   <Drawer.EntityHeader
+    buttonlayout="stack"
     buttons={Array []}
     title="Create Category"
   />
