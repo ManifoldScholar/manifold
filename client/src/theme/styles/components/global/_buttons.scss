@@ -706,16 +706,16 @@
   &__container {
     position: relative;
     width: 100%;
-    padding-left: calc(#{$containerPaddingResp} + 32px);
+    padding-left: calc(#{$containerPaddingResp} + 40px);
 
     @include respond($break120) {
-      padding-left: calc(#{$containerPaddingFull} + 32px);
+      padding-left: calc(#{$containerPaddingFull} + 40px);
     }
   }
 
   &__icon {
     position: absolute;
-    top: -1.5px;
+    top: -2px;
     left: $containerPaddingResp;
 
     @include respond($break120) {
@@ -810,7 +810,30 @@
   cursor: pointer;
 }
 
-.button-lozenge {
+.button-lozenge-primary {
+  @include utilityPrimary;
+  padding: 6px 13px;
+  font-size: 12px;
+  background-color: var(--box-bg-color);
+  border: none;
+  border-radius: 1em;
+  transition: color $duration $timing, background-color $duration $timing;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--accent-primary);
+  }
+
+  &--warn {
+    &:hover,
+    &:focus-visible {
+      color: $neutralWhite;
+      background-color: var(--default-error-color);
+    }
+  }
+}
+
+.button-lozenge-secondary {
   @include utilityPrimary;
   display: inline-flex;
   align-items: center;

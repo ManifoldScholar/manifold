@@ -5,7 +5,9 @@ import Column from "global/components/table/Column";
 import Avatar from "global/components/avatar";
 import LinkedName from "global/components/table/LinkedName";
 import InlineValue from "global/components/table/InlineValue";
-import RemoveMemberButton from "./RemoveMember";
+import IconComposer from "global/components/utility/IconComposer";
+import NoteStyle from "./NoteStyle";
+import { RemoveMember, EditMember } from "./actions";
 import get from "lodash/get";
 import classNames from "classnames";
 import Authorize from "hoc/authorize";
@@ -17,6 +19,7 @@ export default class MembersTable extends PureComponent {
     readingGroup: PropTypes.object.isRequired,
     pagination: PropTypes.object.isRequired,
     onPageClick: PropTypes.func.isRequired,
+    onEditMember: PropTypes.func.isRequired,
     onRemoveMember: PropTypes.func.isRequired
   };
 
@@ -57,7 +60,7 @@ export default class MembersTable extends PureComponent {
   }
 
   render() {
-    const { readingGroup, onRemoveMember } = this.props;
+    const { readingGroup, onRemoveMember, onEditMember } = this.props;
 
     return (
       <Table
@@ -67,37 +70,18 @@ export default class MembersTable extends PureComponent {
         singularUnit={"Member"}
         pluralUnit={"Members"}
         linkCreator={model =>
-          lh.link("frontendReadingGroupDetail", readingGroup.id, {
+          lh.link("frontendReadingGroupAnnotations", readingGroup.id, {
+            page: 1,
             readingGroupMembership: model.id
           })
         }
       >
         <Column
-          viewportVisibility="hideMobile"
-          cellPadding="rightUnpadded"
-          align="right"
-          cellSize="cellSmall"
-        >
-          {({ model }) => (
-            <Avatar
-              iconSize={24}
-              url={this.avatarUrl(model)}
-              className={classNames({
-                table__avatar: true,
-                "table__hide-mobile": true,
-                "table__avatar--image": this.avatarUrl(model),
-                "table__avatar--placeholder": !this.avatarUrl(model)
-              })}
-            />
-          )}
-        </Column>
-        <Column
-          header={"Name"}
+          header={"Member Name"}
           textStyle={"valueLarge"}
           columnPosition={"all"}
-          cellPadding={"leftSmall"}
         >
-          {({ model }) => {
+          {({ model, hovering }) => {
             return (
               <>
                 <Avatar
@@ -105,49 +89,75 @@ export default class MembersTable extends PureComponent {
                   url={this.avatarUrl(model)}
                   className={classNames({
                     table__avatar: true,
-                    "table__hide-desktop": true,
                     "table__avatar--image": this.avatarUrl(model),
                     "table__avatar--placeholder": !this.avatarUrl(model)
                   })}
                 />
                 <LinkedName
                   name={this.nameFor(model)}
-                  to={lh.link("frontendReadingGroupDetail", readingGroup.id, {
-                    readingGroupMembership: model.id
+                  to={lh.link(
+                    "frontendReadingGroupAnnotations",
+                    readingGroup.id,
+                    {
+                      page: 1,
+                      readingGroupMembership: model.id
+                    }
+                  )}
+                  tag={model.attributes.label}
+                  hovering={hovering}
+                />
+                <IconComposer
+                  icon="arrowRight16"
+                  size={20}
+                  iconClass={classNames({
+                    "table__link-arrow": true,
+                    "table__link-arrow--active": hovering
                   })}
                 />
               </>
             );
           }}
         </Column>
-        <Column header="Role" columnPosition={"left"} cellSize={"cellMedium"}>
+        <Column
+          header="Role"
+          columnPosition={"left"}
+          cellSize={"cellFitContent"}
+        >
           {({ model }) => this.roleFor(model)}
         </Column>
-        <Column header="Notations" align="center">
+        <Column header="Activity" cellSize={"cellFitContent"}>
           {({ model }) => (
             <>
               <InlineValue
                 label={model.attributes.annotationsCount}
-                icon="comment24"
+                icon="interactAnnotate24"
                 srLabel={`${model.attributes.annotationsCount} annotations.`}
               />
               <InlineValue
                 label={model.attributes.highlightsCount}
-                icon="annotate24"
+                icon="interactHighlight24"
                 srLabel={`${model.attributes.highlightsCount} highlights.`}
+              />
+              <InlineValue
+                label={model.attributes.commentsCount || 9}
+                icon="interactComment24"
+                srLabel={`${model.attributes.commentsCount || 9} comments.`}
               />
             </>
           )}
         </Column>
-        <Column key="actions" columnPosition={"left"} cellSize={"cellMedium"}>
+        <Column header="Note Style" cellSize={"cellFitContent"}>
+          {({ model }) => <NoteStyle membership={model} />}
+        </Column>
+        <Column header="Actions" cellSize={"cellFitContent"}>
           {({ model }) => {
-            if (model.attributes.isCreator) return null;
+            if (model.attributes.currentUserIsCreator) return null;
             return (
               <Authorize entity={this.props.readingGroup} ability={"update"}>
-                <RemoveMemberButton
-                  readingGroupMembership={model}
-                  onRemoveMember={onRemoveMember}
-                />
+                <div className="table__actions">
+                  <EditMember onClick={() => onEditMember(model)} />
+                  <RemoveMember onClick={() => onRemoveMember(model)} />
+                </div>
               </Authorize>
             );
           }}

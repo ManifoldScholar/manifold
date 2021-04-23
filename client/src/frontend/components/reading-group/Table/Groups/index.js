@@ -47,17 +47,14 @@ export default class GroupsTable extends PureComponent {
             );
           }}
         </Column>
-        <Column
-          header="Role"
-          columnPosition={"left"}
-          cellSize={this.cellMedium}
-        >
+        <Column header="Role" columnPosition="left" cellSize="cellFitContent">
           {({ model }) => model.attributes.currentUserRole}
         </Column>
         <Column
           header="Members"
           headerIcon="avatar24"
           align="center"
+          cellSize="cellFitContent"
           rowPosition={2}
         >
           {({ model }) => (
