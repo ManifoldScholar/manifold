@@ -34,4 +34,16 @@ module MonadicControllerActions
   def monadic_failure_to_errors(err)
     JSONAPI::Helpers::Error.unroll err
   end
+
+  def parse_jsonapi_params(**options)
+    parser = JSONAPI::ParseParams.new params.to_unsafe_h, **options
+
+    parser.call.value_or do |failure|
+      raise "Failed to parse options: #{failure.inspect}"
+    end
+  end
+
+  def parse_jsonapi_attributes(**options)
+    parse_jsonapi_params(**options)[:data][:attributes]
+  end
 end

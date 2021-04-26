@@ -71,6 +71,14 @@ module Testing
       collection_operation(*collectables, op: :remove, collector: user)
     end
 
+    def reading_group_clone(reading_group, **options)
+      body = { data: { attributes: options } }.deep_transform_keys do |k|
+        k.to_s.camelize(:lower)
+      end
+
+      post("/api/v1/reading_groups/#{reading_group.id}/clone", body: body.to_json)
+    end
+
     def reading_group_collect(*collectables, reading_group:)
       collection_operation(*collectables, op: :update, collector: reading_group)
     end

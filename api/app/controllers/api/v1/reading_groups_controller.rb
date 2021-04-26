@@ -50,7 +50,10 @@ module API
       def do_clone
         @reading_group = load_and_authorize_reading_group
 
+        provided_options = parse_jsonapi_attributes(attribute_parser: ::ReadingGroups::Clone::Options)
+
         options = {
+          **provided_options,
           reading_group: @reading_group,
           user: current_user
         }
