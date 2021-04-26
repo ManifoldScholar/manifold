@@ -15,11 +15,12 @@ module ReadingGroups
       option :user, model: "User", optional: true
 
       option :archive, Types::Bool, optional: true, default: proc { false }
+      option :clone_owned_annotations, Types::Bool, optional: true, default: proc { false }
 
       def call
         new_reading_group = yield clone_reading_group!
 
-        yield clone_annotations! new_reading_group
+        yield maybe_clone_annotations! new_reading_group
 
         yield maybe_archive_membership!
 
@@ -39,7 +40,9 @@ module ReadingGroups
         monadic_save group
       end
 
-      def clone_annotations!(new_reading_group)
+      def maybe_clone_annotations!(new_reading_group)
+        return Success(false) unless clone_owned_annotations
+
         annotations = Annotation.where(reading_group: reading_group, creator: user)
 
         overrides = { reading_group: new_reading_group }
