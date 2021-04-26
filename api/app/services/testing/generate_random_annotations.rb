@@ -4,6 +4,8 @@ module Testing
 
     record :text_section
 
+    record :reading_group, default: nil
+
     record :user, default: proc { User.cli_user }
 
     integer :annotation_count, default: 50
@@ -24,6 +26,8 @@ module Testing
 
     def generate_random_annotation!(format: "annotation")
       model = text_section.annotations.build creator: user, format: format
+
+      model.reading_group = reading_group if reading_group.present?
 
       model.body = "TEST_ANNOTATION"
 
