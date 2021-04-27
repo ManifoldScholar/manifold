@@ -1,0 +1,28 @@
+.journal-detail {
+  display: grid;
+  gap: 2em;
+  grid-template-rows: 300px 1fr;
+  font-family: $fontStackSans;
+
+  &__banner {
+    width : 100%;
+    height: 300px;
+    overflow: hidden;
+    background-color:#B4A075;
+  }
+
+  &__body {
+    display: grid;
+    gap: 2em;
+    grid-template-columns: 2fr 1fr;
+
+    &--left {
+      &__title {
+        display: grid;
+        grid-template-columns: max-content max-content;
+        font-size: 30px;
+        align-content: center;
+      }
+    }
+  }
+}

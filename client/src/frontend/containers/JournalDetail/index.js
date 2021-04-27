@@ -6,40 +6,48 @@ import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import Schema from "global/components/schema";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
+import Image from "../../components/project/Hero/Image";
+import JournalDetail from "../../components/journal";
 
-export default class JournalDetailContainer extends Component {
-  static propTypes = {
-    journal: PropTypes.object,
-    journalResponse: PropTypes.object,
-    settings: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    fetchData: PropTypes.func
+const JournalDetailContainer = ({
+  journal,
+  journalResponse,
+  settings,
+  dispatch,
+  fetchData,
+  ...props
+}) => {
+  const hasBackgroundImage = () => {
+    return true;
   };
 
-  render() {
-    if (!this.props.journalResponse) return null;
-    if (this.props.journalResponse.status === 401)
-      return <Redirect to={lh.link("frontend")} />;
-    const { journal, settings } = this.props;
-    if (!journal) return null;
+  if (!journalResponse) return null;
+  if (journalResponse.status === 401)
+    return <Redirect to={lh.link("frontend")} />;
+  if (!journal) return null;
 
-    return (
-      <div className="project-detail">
-        <CheckFrontendMode debugLabel="JournalDetail" isProjectHomePage />
-        <HeadContent
-          title={`\u201c${this.props.journal.attributes.titlePlaintext}\u201d on ${settings.attributes.general.installationName}`}
-          description={this.props.journal.attributes.description}
-        />
-        <Project.Detail
-          project={this.props.journal}
-          dispatch={this.props.dispatch}
-          backgroundImage={false}
-        />
-        <Schema.Project
-          attributes={journal.attributes}
-          relationships={journal.relationships}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <CheckFrontendMode debugLabel="JournalDetail" isProjectHomePage />
+      <HeadContent
+        title={`\u201c${journal.attributes.titlePlaintext}\u201d on ${settings.attributes.general.installationName}`}
+        description={journal.attributes.description}
+      />
+      <JournalDetail journal={journal} />
+      <Schema.Project
+        attributes={journal.attributes}
+        relationships={journal.relationships}
+      />
+    </div>
+  );
+};
+
+JournalDetailContainer.propTypes = {
+  journal: PropTypes.object,
+  journalResponse: PropTypes.object,
+  settings: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  fetchData: PropTypes.func
+};
+
+export default JournalDetailContainer;

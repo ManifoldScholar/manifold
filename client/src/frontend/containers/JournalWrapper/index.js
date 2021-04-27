@@ -74,12 +74,12 @@ export class JournalWrapper extends Component {
           />
         )}
         <CheckFrontendMode
-          debugLabel="IssueWrapper"
+          debugLabel="JournalWrapper"
           project={this.props.journal}
           isProjectHomePage={this.isIssueHomepage}
         />
         <RedirectToFirstMatch
-          from={lh.link("frontendIssue")}
+          from={lh.link("frontendJournalsList")}
           candidates={[
             {
               label: "All Journals",
