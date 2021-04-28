@@ -164,6 +164,7 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
             "avatarMeta": Object {},
             "avatarStyles": Object {},
             "coverStyles": Object {},
+            "creatorNames": "Rowan and His Human Max",
             "darkMode": false,
             "description": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
             "descriptionFormatted": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
@@ -684,6 +685,7 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
             "avatarMeta": Object {},
             "avatarStyles": Object {},
             "coverStyles": Object {},
+            "creatorNames": "Rowan and His Human Max",
             "darkMode": false,
             "description": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
             "descriptionFormatted": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
@@ -1204,6 +1206,7 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
             "avatarMeta": Object {},
             "avatarStyles": Object {},
             "coverStyles": Object {},
+            "creatorNames": "Rowan and His Human Max",
             "darkMode": false,
             "description": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
             "descriptionFormatted": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
@@ -1699,7 +1702,8 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
   <Connect(HigherOrder.WithCurrentUser('Layout.ButtonNavigation))
     grayBg={false}
     hideAtNarrow={true}
-    showProjectCollections={true}
+    label="See All Projects"
+    link="frontendProjectsAll"
     showProjects={false}
   />
 </div>

@@ -4,6 +4,7 @@ describe("frontend/components/project-list/GridItem", () => {
   def("project", () => factory("project"));
   def("root", () => (
     <GridItem
+      children={null}
       dispatch={$dispatch}
       project={$project}
       favorites={{}}
