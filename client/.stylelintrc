@@ -20,7 +20,6 @@
     "number-leading-zero": "always",
     "number-no-trailing-zeros": true,
     "string-quotes": "single",
-    "length-zero-no-unit": true,
     "unit-case": "lower",
     "value-keyword-case": "lower",
     "value-list-comma-space-after": "always-single-line",
