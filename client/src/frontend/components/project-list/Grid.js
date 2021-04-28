@@ -17,11 +17,11 @@ const ProjectListGrid = ({
 }) => {
   const itemsList = () => {
     if (limit === 0) return [];
-    return limit ? children.slice(0, limit) : children;
+    return limit ? React.Children.toArray(children).slice(0, limit) : React.Children.toArray(children);
   };
 
   const viewAll = () => {
-    return showViewAll || (limit && viewAllUrl && children.length > limit);
+    return showViewAll || (limit && viewAllUrl && React.Children.count(children) > limit);
   };
 
   const renderViewAll = () => {
@@ -71,7 +71,7 @@ const ProjectListGrid = ({
 ProjectListGrid.displayName = "ProjectList.Grid";
 
 ProjectListGrid.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   limit: PropTypes.number,
   pagination: PropTypes.object,
   paginationTarget: PropTypes.string,
