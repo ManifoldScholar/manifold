@@ -98,6 +98,7 @@ body {
 .reader.scheme-light,
 .bg-white {
   --default-color: #{$neutralTextDark};
+  --default-bg-color: #{$neutralWhite};
   --default-strong-color: #{$neutralTextExtraDark};
   --default-weak-color: #{$neutralUIDullLight};
   --default-highlight-color: #{$accentInteractionDark};
@@ -123,6 +124,7 @@ body {
 
 .backend, .drawer--backend, .reader.scheme-dark, .bg-neutral90, .bg-neutral95 {
   --default-color: #{$neutralTextLight};
+  --default-bg-color: #{$neutral90};
   --default-strong-color: #{$neutralTextExtraLight};
   --default-weak-color: #{$neutralUIDullDark};
   --default-highlight-color: #{$accentInteractionLight};

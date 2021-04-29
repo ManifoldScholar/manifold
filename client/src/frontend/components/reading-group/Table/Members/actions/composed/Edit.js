@@ -1,15 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "../Button";
+import Buttonish from "../Buttonish";
+import lh from "helpers/linkHandler";
 
-function EditMember({ onClick }) {
-  return <Button onClick={onClick}>Edit</Button>;
+function EditMember({ membership, readingGroup }) {
+  return (
+    <Buttonish
+      to={lh.link("frontendReadingGroupMember", readingGroup.id, membership.id)}
+    >
+      Edit
+    </Buttonish>
+  );
 }
 
 EditMember.displayName = "MembersTable.Member.Edit";
 
 EditMember.propTypes = {
-  onClick: PropTypes.func.isRequired
+  membership: PropTypes.object.isRequired,
+  readingGroup: PropTypes.object.isRequired
 };
 
 export default EditMember;

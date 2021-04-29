@@ -16,7 +16,7 @@
   &__date-picker-group {
     display: grid;
     grid-template-columns: repeat(auto-fit, 245px);
-    grid-gap: 30px;
+    grid-gap: $_gap;
     padding-bottom: 20px;
   }
 }
