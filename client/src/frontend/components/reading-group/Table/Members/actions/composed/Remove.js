@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "../Button";
+import Buttonish from "../Buttonish";
 
 function RemoveMember({ onClick }) {
   return (
-    <Button onClick={onClick} className="button-lozenge-primary--warn">
+    <Buttonish onClick={onClick} className="button-lozenge-primary--warn">
       Remove
-    </Button>
+    </Buttonish>
   );
 }
 

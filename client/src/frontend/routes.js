@@ -195,10 +195,19 @@ const routes = {
             },
             {
               name: "frontendReadingGroupMembers",
-              exact: true,
+              exact: false,
               component: "ReadingGroupMembers",
               path: "/my/groups/:id/members",
-              helper: rg => `/my/groups/${rg}/members`
+              helper: rg => `/my/groups/${rg}/members`,
+              routes: [
+                {
+                  name: "frontendReadingGroupMember",
+                  exact: true,
+                  component: "ReadingGroupMemberEdit",
+                  path: "/my/groups/:id/members/:membershipId",
+                  helper: (rg, m) => `/my/groups/${rg}/members/${m}`
+                }
+              ]
             },
             {
               exact: false,

@@ -51,11 +51,6 @@ class FormSelect extends Component {
     return "select-instructions";
   }
 
-  onChange = event => {
-    const value = event.target.value;
-    this.props.select(value === "" ? null : value);
-  };
-
   render() {
     const options = this.props.options.map(option => {
       return (
@@ -105,7 +100,7 @@ class FormSelect extends Component {
                 <select
                   id={`${this.idPrefix}-${id}`}
                   aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
-                  onChange={this.onChange}
+                  onChange={this.props.onChange}
                   value={this.props.optionsMeta.stringValue}
                   ref={input => {
                     this.inputElement = input;
