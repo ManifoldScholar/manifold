@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import SettingsForm from "frontend/components/reading-group/Form";
+import { GroupSettingsForm } from "frontend/components/reading-group/forms";
 import PropTypes from "prop-types";
 import { UnmountClosed as Collapse } from "react-collapse";
 import Navigation from "backend/components/navigation";
@@ -54,7 +54,7 @@ class ReadingGroupSettings extends PureComponent {
         onClick: this.handleDelete,
         icon: "delete24",
         label: "Delete",
-        iconClass
+        iconClass: `${iconClass} ${iconClass}--notice`
       }
     ];
 
@@ -141,7 +141,7 @@ class ReadingGroupSettings extends PureComponent {
             />
           </Collapse>
         </div>
-        <SettingsForm
+        <GroupSettingsForm
           mode="edit"
           group={this.props.readingGroup}
           onSuccess={this.props.closeDrawer}

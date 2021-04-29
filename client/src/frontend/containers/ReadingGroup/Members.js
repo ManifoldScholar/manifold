@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import MembersTable from "frontend/components/reading-group/Table/Members";
+import queryString from "query-string";
 import { readingGroupsAPI, readingGroupMembershipsAPI, requests } from "api";
 import { meta, select } from "utils/entityUtils";
-import queryString from "query-string";
 import connectAndFetch from "utils/connectAndFetch";
+import config from "config";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
+import { childRoutes } from "helpers/router";
+import MembersTable from "frontend/components/reading-group/Table/Members";
+
 import withConfirmation from "hoc/with-confirmation";
-import config from "config";
 
 const { request } = entityStoreActions;
 const defaultPage = 1;
@@ -71,6 +73,14 @@ class ReadingGroupsMembersContainer extends Component {
     };
   }
 
+  get groupsRoute() {
+    return lh.link("frontendReadingGroups");
+  }
+
+  get membersRoute() {
+    lh.link("frontendReadingGroupMembers", this.props.readingGroup.id);
+  }
+
   handlePageChange = pageParam => {
     const pagination = { ...this.state.pagination, number: pageParam };
     this.setState({ pagination }, this.doUpdate);
@@ -127,58 +137,56 @@ class ReadingGroupsMembersContainer extends Component {
       requests.feReadingGroupMembershipDestroy,
       options
     );
-    return this.props.dispatch(readingGroupMembershipRequest);
+    this.props.dispatch(readingGroupMembershipRequest).promise.then(() => {
+      this.props.history.push(this.membersRoute);
+    });
   }
 
-  get buttons() {
-    const { readingGroup, readingGroupMembers } = this.props;
-    const buttons = [];
-    if (!readingGroup.attributes.currentUserIsCreator) {
-      buttons.push({
-        onClick: () => {
-          const {
-            heading,
-            message
-          } = config.app.locale.dialogs.readingGroupMembership.leave;
-          this.props.confirm(heading, message, () => {
-            const readingGroupMembership = readingGroupMembers.find(rgm => {
-              return rgm.attributes.isCurrentUser;
-            });
-            const { promise } = this.destroyMembership(readingGroupMembership);
-            promise.then(() => {
-              this.props.history.push(lh.link("frontendReadingGroups"));
-            });
-          });
-        },
-        text: "Leave Group"
-      });
-    }
-    return buttons;
+  renderRoutes() {
+    const { route, confirm, dispatch, readingGroup } = this.props;
+    return childRoutes(route, {
+      drawer: true,
+      drawerProps: {
+        closeUrl: this.membersRoute,
+        context: "frontend",
+        size: "wide",
+        position: "overlay",
+        lockScroll: "always"
+      },
+      childProps: {
+        confirm,
+        dispatch,
+        readingGroup,
+        onRemoveClick: this.removeMember,
+        onEditSuccess: () => this.props.history.push(this.membersRoute)
+      }
+    });
   }
 
-  /* eslint-disable no-console */
   render() {
     const {
       readingGroup,
       readingGroupMembers,
       readingGroupMembersMeta
     } = this.props;
+
     if (!readingGroupMembers) return null;
 
     return (
-      <div className="group-page-body">
-        <MembersTable
-          readingGroup={readingGroup}
-          members={readingGroupMembers}
-          pagination={readingGroupMembersMeta.pagination}
-          onPageClick={this.pageChangeHandlerCreator}
-          onEditMember={() => {}}
-          onRemoveMember={this.removeMember}
-        />
-      </div>
+      <>
+        <div className="group-page-body">
+          <MembersTable
+            readingGroup={readingGroup}
+            members={readingGroupMembers}
+            pagination={readingGroupMembersMeta.pagination}
+            onPageClick={this.pageChangeHandlerCreator}
+            onRemoveMember={this.removeMember}
+          />
+        </div>
+        {this.renderRoutes()}
+      </>
     );
   }
-  /* eslint-enable no-console */
 }
 
 export default connectAndFetch(withConfirmation(ReadingGroupsMembersContainer));

@@ -814,6 +814,7 @@
   @include utilityPrimary;
   padding: 6px 13px;
   font-size: 12px;
+  text-decoration: none;
   background-color: var(--box-bg-color);
   border: none;
   border-radius: 1em;
@@ -821,6 +822,7 @@
 
   &:hover,
   &:focus-visible {
+    color: inherit;
     background-color: var(--accent-primary);
   }
 

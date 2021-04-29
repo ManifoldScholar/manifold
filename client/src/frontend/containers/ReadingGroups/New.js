@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import SettingsForm from "frontend/components/reading-group/Form";
+import { GroupSettingsForm } from "frontend/components/reading-group/forms";
 import connectAndFetch from "utils/connectAndFetch";
 import Navigation from "backend/components/navigation";
 
@@ -19,7 +19,7 @@ class ReadingGroupsNewContainer extends PureComponent {
     return (
       <section>
         <Navigation.DrawerHeader title="New Reading Group" />
-        <SettingsForm mode="new" onSuccess={this.closeDrawer} />
+        <GroupSettingsForm mode="new" onSuccess={this.closeDrawer} />
       </section>
     );
   }

@@ -26,6 +26,7 @@ import ReadingGroupsList from "frontend/containers/ReadingGroups/List";
 import ReadingGroupsNew from "frontend/containers/ReadingGroups/New";
 import ReadingGroup from "frontend/containers/ReadingGroup";
 import ReadingGroupMembers from "frontend/containers/ReadingGroup/Members";
+import ReadingGroupMemberEdit from "frontend/containers/ReadingGroup/MemberEdit";
 import ReadingGroupAnnotations from "frontend/containers/ReadingGroup/Annotations";
 import ReadingGroupHomepage from "frontend/containers/ReadingGroup/Homepage";
 import Login from "frontend/containers/Login";
@@ -62,6 +63,7 @@ export default {
   ReadingGroupsNew,
   ReadingGroup,
   ReadingGroupMembers,
+  ReadingGroupMemberEdit,
   ReadingGroupAnnotations,
   ReadingGroupHomepage: ReadingGroupHomepage.Wrapper,
   ReadingGroupHomepageStatic: ReadingGroupHomepage.Static,

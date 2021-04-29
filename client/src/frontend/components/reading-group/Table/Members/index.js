@@ -19,9 +19,12 @@ export default class MembersTable extends PureComponent {
     readingGroup: PropTypes.object.isRequired,
     pagination: PropTypes.object.isRequired,
     onPageClick: PropTypes.func.isRequired,
-    onEditMember: PropTypes.func.isRequired,
     onRemoveMember: PropTypes.func.isRequired
   };
+
+  get readingGroup() {
+    return this.props.readingGroup;
+  }
 
   get members() {
     return this.props.members;
@@ -46,21 +49,26 @@ export default class MembersTable extends PureComponent {
     );
   }
 
-  roleFor(readingGroupMembership) {
-    if (!readingGroupMembership.relationships.user) return "member";
-    const { readingGroup } = this.props;
-    return readingGroupMembership.relationships.user.id ===
-      readingGroup.attributes.creatorId
-      ? "creator"
-      : "member";
+  roleFor(membership) {
+    const { role } = membership.attributes;
+    if (!membership.relationships.user) return "member";
+    const isCreator = this.userIsGroupCreator(membership);
+    return isCreator ? "creator" : role;
   }
 
-  nameFor(readingGroupMembership) {
-    return readingGroupMembership.attributes.name;
+  userIsGroupCreator(membership) {
+    return (
+      membership.relationships.user.id ===
+      this.readingGroup.attributes.creatorId
+    );
+  }
+
+  nameFor(membership) {
+    return membership.attributes.name;
   }
 
   render() {
-    const { readingGroup, onRemoveMember, onEditMember } = this.props;
+    const { readingGroup, onRemoveMember } = this.props;
 
     return (
       <Table
@@ -139,9 +147,9 @@ export default class MembersTable extends PureComponent {
                 srLabel={`${model.attributes.highlightsCount} highlights.`}
               />
               <InlineValue
-                label={model.attributes.commentsCount || 9}
+                label={model.attributes.commentsCount}
                 icon="interactComment24"
-                srLabel={`${model.attributes.commentsCount || 9} comments.`}
+                srLabel={`${model.attributes.commentsCount} comments.`}
               />
             </>
           )}
@@ -151,14 +159,22 @@ export default class MembersTable extends PureComponent {
         </Column>
         <Column header="Actions" cellSize={"cellFitContent"}>
           {({ model }) => {
-            if (model.attributes.currentUserIsCreator) return null;
+            const isCreator = this.userIsGroupCreator(model);
             return (
-              <Authorize entity={this.props.readingGroup} ability={"update"}>
-                <div className="table__actions">
-                  <EditMember onClick={() => onEditMember(model)} />
-                  <RemoveMember onClick={() => onRemoveMember(model)} />
-                </div>
-              </Authorize>
+              <div className="table__actions">
+                <EditMember
+                  membership={model}
+                  readingGroup={this.props.readingGroup}
+                />
+                {!isCreator && (
+                  <Authorize
+                    entity={this.props.readingGroup}
+                    ability={"update"}
+                  >
+                    <RemoveMember onClick={() => onRemoveMember(model)} />
+                  </Authorize>
+                )}
+              </div>
             );
           }}
         </Column>

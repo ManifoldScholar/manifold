@@ -307,7 +307,7 @@
       text-transform: none; // OD
 
       &:focus-visible {
-        border-color: $accentPrimaryLight;
+        border-color: var(--default-highlight-color);
       }
     }
 
@@ -332,7 +332,6 @@
         }
       }
 
-
       select {
         @include unstyledSelect;
         @include utilityPrimary;
@@ -349,7 +348,7 @@
         transition: border-color $duration $timing;
 
         &:focus-visible {
-          border-color: $accentPrimary;
+          border-color: var(--default-highlight-color);
         }
       }
     }

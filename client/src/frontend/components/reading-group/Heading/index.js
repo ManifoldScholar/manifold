@@ -5,7 +5,6 @@ import { Collapse } from "react-collapse";
 import classNames from "classnames";
 import Title from "./Title";
 import DetailsToggle from "./DetailsToggle";
-import ArchiveToggle from "./ArchiveToggle";
 import ChildNav from "./ChildNav";
 import ManageGroup from "./ManageGroup";
 import GroupSummaryBox from "./GroupSummaryBox";
@@ -35,7 +34,7 @@ function Heading({ readingGroup, canUpdateGroup, history, location }) {
         <div className="group-page-heading__flex-container">
           <Title groupName={groupName} />
           <div className="group-page-heading__button-container">
-            <ArchiveToggle readingGroup={readingGroup} />
+            {/* <ArchiveToggle readingGroup={readingGroup} /> */}
             <DetailsToggle
               onClick={() => setShowDetails(prevState => !prevState)}
               controls={uid}

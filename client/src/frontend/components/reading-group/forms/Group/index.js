@@ -9,7 +9,7 @@ import memoize from "lodash/memoize";
 import withConfirmation from "hoc/with-confirmation";
 
 class ReadingGroupForm extends React.PureComponent {
-  static displayName = "ReadingGroup.Form.Settings";
+  static displayName = "ReadingGroup.Forms.GroupSettings";
 
   static propTypes = {
     mode: PropTypes.oneOf(["new", "edit"]),

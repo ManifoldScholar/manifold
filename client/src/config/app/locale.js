@@ -56,6 +56,15 @@ export default {
         heading: "Are you sure you want to leave this reading group?",
         message:
           "Pressing yes will remove you from this group. Your annotations will remain in the group until you edit and save them."
+      },
+      warn: {
+        roleChange: {
+          heading: "Confirm Role Change.",
+          memberToModerator:
+            "Some text about what happens if the member’s role is changed from Member to Moderator",
+          moderatorToMember:
+            "Some text about what happens if the member’s role is changed from Moderator to Member"
+        }
       }
     },
     readingGroup: {

@@ -117,6 +117,7 @@ export default {
   feReadingGroupMembershipCreate: "frontend-reading-group-membership-create",
   feReadingGroupMembershipDestroy: "frontend-reading-group-membership-destroy",
   feReadingGroupMembershipShow: "frontend-reading-group-membership-show",
+  feReadingGroupMembershipEdit: "frontend-reading-group-membership-edit",
   feReadingGroupMembershipArchive: "frontend-reading-group-membership-archive",
   feReadingGroupMembershipActivate:
     "frontend-reading-group-membership-activate",

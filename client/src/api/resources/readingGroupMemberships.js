@@ -34,5 +34,15 @@ export default {
       method: "GET",
       options: {}
     };
+  },
+
+  update(id, data) {
+    return {
+      endpoint: `/api/v1/reading_group_memberships/${id}`,
+      method: "PUT",
+      options: {
+        body: JSON.stringify({ type: "readingGroupMemberships", data })
+      }
+    };
   }
 };
