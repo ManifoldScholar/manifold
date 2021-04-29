@@ -7,16 +7,6 @@ $_gap: 30px;
   font-size: 13px;
 
   &__list {
-    // display: flex;
-    // flex-wrap: wrap;
-    // margin-top: -1 * $_gap;
-    // margin-left: -1 * $_gap;
-
-    // > * {
-    //   margin-top: $_gap;
-    //   margin-left: $_gap;
-    // }
-
     display: grid;
     grid-template-columns: auto;
     gap: $_gap;

@@ -468,7 +468,7 @@ function withFormOptions(WrappedComponent) {
     }
 
     onChange = event => {
-      const value = event.target.value;
+      const value = event.target.value === "" ? null : event.target.value;
       const res = this.props.beforeOnChange(this.currentValue, value, event);
       if (!isPromise(res)) return this.select(value);
       res.then(

@@ -1,0 +1,34 @@
+.member-settings-form {
+  margin-top: 30px;
+
+  input,
+  .instructions {
+    color: var(--default-strong-color);
+  }
+
+  &__style-preview {
+    @include panelRounded;
+    @include templateHead;
+    padding: 1.3em 1.6em 1.6em;
+    margin-top: 20px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--default-strong-color);
+
+    @include respond($break60) {
+      font-size: 20px;
+    }
+
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+
+      @include respond($break60) {
+        margin-bottom: 40px;
+      }
+    }
+  }
+}

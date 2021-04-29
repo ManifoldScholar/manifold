@@ -227,7 +227,7 @@
   }
 }
 
-@function encodeColor($string) {
+@function encode-color($string) {
   @if type-of($string) == 'color' and str-index(#{$string}, '#') == 1 {
     $hex: str-slice(ie-hex-str($string), 4);
     $string: unquote('#{$hex}');
