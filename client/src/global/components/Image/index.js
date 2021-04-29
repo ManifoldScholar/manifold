@@ -6,8 +6,11 @@ const position = (x, y) => {
   return `${x || 50}% ${y || 50}%`;
 };
 
-const srcSetEntry = ({ distributionUrl, width }) =>
-  `${distributionUrl} ${width}w`;
+const srcSetEntry = ({ distributionUrl, dimensions }) => {
+  if (dimensions) {
+    return `${distributionUrl} ${dimensions.width}w`;
+  }
+};
 
 const getSizes = (renditions, maxWidth) => {
   const filteredRenditions = renditions.filter(
