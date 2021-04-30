@@ -34,11 +34,13 @@ module JSONAPI
     end
 
     def maybe_validate_type(normalized)
-      return Success(true) unless type.present? || normalized[:data][:type] == type
+      data_type = normalized.dig(:data, :type)
 
-      return Success(true) if normalized[:data][:type].blank?
+      return Success(true) unless type.present? || data_type == type
 
-      Failure[:mismatched_type, "Expected data of type: #{type.inspect}, got #{normalized[:data][:type].inspect}"]
+      return Success(true) if allow_blank_type && data_type.blank?
+
+      Failure[:mismatched_type, "Expected data of type: #{type.inspect}, got #{data_type.inspect}"]
     end
 
     def params_struct
@@ -46,15 +48,15 @@ module JSONAPI
     end
 
     def build_params_struct
-      attribute_struct = attribute_parser || Types::Hash.default { {} }
+      attribute_struct = attribute_parser || Types::Hash
 
       data_struct = Class.new(Types::FlexibleStruct).class_eval do
-        attribute? :attributes, attribute_struct
-        attribute? :type, Types::String.optional
+        attribute :attributes, attribute_struct
+        attribute :type, Types::String.optional
       end
 
       Class.new(Types::FlexibleStruct).class_eval do
-        attribute? :data, data_struct
+        attribute :data, data_struct.default { { attributes: {}, type: nil } }
       end
     end
   end
