@@ -66,10 +66,12 @@ class ReadingGroup < ApplicationRecord
     privacy == "public"
   end
 
-  def reading_group_memberships_for_user(user)
+  # @param [User] user
+  # @return [ReadingGroupMembership, nil]
+  def reading_group_membership_for_user(user)
     return nil unless user
 
-    reading_group_memberships.for_user(user)
+    reading_group_memberships.for_user(user).first
   end
 
   def update_annotations_privacy

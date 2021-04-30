@@ -26,8 +26,14 @@ module V1
       object.annotations_count + object.highlights_count
     end
 
-    typed_attribute :current_user_role, Types::String.enum("moderator", "member").meta(read_only: true) do |object, params|
-      calculate_current_user_is_creator?(object, params) ? "moderator" : "member"
+    typed_attribute :current_user_role, Types::String.enum("moderator", "member", "none").meta(read_only: true) do |object, params|
+      if calculate_current_user_is_creator?(object, params)
+        "moderator"
+      else
+        rgm = object.reading_group_membership_for_user(params[:current_user])
+
+        rgm ? rgm.role.to_s : "none"
+      end
     end
 
     typed_attribute :invitation_url, Types::Serializer::URL.meta(read_only: true) do |object, _params|
@@ -39,7 +45,7 @@ module V1
     typed_has_many :reading_group_memberships
 
     typed_has_one :current_user_reading_group_membership, serializer: V1::ReadingGroupMembershipSerializer do |object, params|
-      object.reading_group_memberships_for_user params[:current_user]
+      object.reading_group_membership_for_user params[:current_user]
     end
 
     typed_has_one :collection, serializer: V1::ReadingGroupCollectionSerializer, record_type: "readingGroupCollections" do |object, _params|
