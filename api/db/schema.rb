@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_160540) do
+ActiveRecord::Schema.define(version: 2021_04_30_182454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
     t.index ["created_at"], name: "index_annotations_on_created_at", using: :brin
     t.index ["creator_id"], name: "index_annotations_on_creator_id"
     t.index ["format"], name: "index_annotations_on_format"
+    t.index ["id", "creator_id", "reading_group_id", "format", "orphaned"], name: "index_annotations_for_membership_counts"
     t.index ["reading_group_id"], name: "index_annotations_on_reading_group_id"
     t.index ["resource_id"], name: "index_annotations_on_resource_id"
     t.index ["text_section_id"], name: "index_annotations_on_text_section_id"
@@ -191,6 +192,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
     t.integer "events_count", default: 0
     t.index ["created_at"], name: "index_comments_on_created_at", using: :brin
     t.index ["creator_id"], name: "index_comments_on_creator_id"
+    t.index ["id", "subject_type", "subject_id", "creator_id"], name: "index_comments_on_annotations_by_user", where: "((subject_type)::text = 'Annotation'::text)"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["subject_type", "subject_id"], name: "index_comments_on_subject_type_and_subject_id"
   end
@@ -1489,64 +1491,6 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
             ELSE NULL::character varying
         END);
   SQL
-  create_view "text_export_statuses", sql_definition: <<-SQL
-    SELECT t.id AS text_id,
-    te.id AS text_export_id,
-        CASE te.export_kind
-            WHEN 'epub_v3'::text THEN (t.export_configuration @> '{"epub_v3": true}'::jsonb)
-            ELSE false
-        END AS autoexport,
-    te.export_kind,
-    te.fingerprint AS export_fingerprint,
-    (t.fingerprint = te.fingerprint) AS current,
-    (t.fingerprint <> te.fingerprint) AS stale,
-    te.created_at AS exported_at
-   FROM (texts t
-     JOIN text_exports te ON ((t.id = te.text_id)));
-  SQL
-  create_view "project_export_statuses", sql_definition: <<-SQL
-    SELECT p.id AS project_id,
-    pe.id AS project_export_id,
-        CASE pe.export_kind
-            WHEN 'bag_it'::text THEN (p.export_configuration @> '{"bag_it": true}'::jsonb)
-            ELSE false
-        END AS autoexport,
-    pe.export_kind,
-    pe.fingerprint AS export_fingerprint,
-    (p.fingerprint = pe.fingerprint) AS current,
-    (p.fingerprint <> pe.fingerprint) AS stale,
-    pe.created_at AS exported_at
-   FROM (projects p
-     JOIN project_exports pe ON ((p.id = pe.project_id)));
-  SQL
-  create_view "user_derived_roles", sql_definition: <<-SQL
-    SELECT u.id AS user_id,
-    COALESCE((array_agg(r.name ORDER BY
-        CASE r.name
-            WHEN 'admin'::text THEN 1
-            WHEN 'editor'::text THEN 2
-            WHEN 'project_creator'::text THEN 3
-            WHEN 'marketeer'::text THEN 4
-            WHEN 'reader'::text THEN 8
-            ELSE 20
-        END) FILTER (WHERE (r.kind = 'global'::text)))[1], 'reader'::character varying) AS role,
-    COALESCE((array_agg(r.name ORDER BY
-        CASE r.name
-            WHEN 'admin'::text THEN 1
-            WHEN 'editor'::text THEN 2
-            WHEN 'project_creator'::text THEN 3
-            WHEN 'marketeer'::text THEN 4
-            WHEN 'project_editor'::text THEN 5
-            WHEN 'project_resource_editor'::text THEN 6
-            WHEN 'project_author'::text THEN 7
-            WHEN 'reader'::text THEN 8
-            ELSE 20
-        END) FILTER (WHERE (r.kind = ANY (ARRAY['global'::text, 'scoped'::text]))))[1], 'reader'::character varying) AS kind
-   FROM ((users u
-     LEFT JOIN users_roles ur ON ((ur.user_id = u.id)))
-     LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
-  GROUP BY u.id;
-  SQL
   create_view "entitlement_assigned_roles", sql_definition: <<-SQL
     SELECT ur.user_id,
     er.id AS entitlement_role_id,
@@ -1713,15 +1657,63 @@ UNION ALL
   GROUP BY ur.user_id, r.resource_id, r.resource_type
  HAVING ((r.resource_id IS NOT NULL) AND (r.resource_type IS NOT NULL));
   SQL
-  create_view "reading_group_membership_counts", sql_definition: <<-SQL
-    SELECT rgm.id AS reading_group_membership_id,
-    count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
-    count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-    count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
-    count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count
-   FROM (reading_group_memberships rgm
-     LEFT JOIN annotations a ON (((a.creator_id = rgm.user_id) AND (a.reading_group_id = rgm.reading_group_id))))
-  GROUP BY rgm.id;
+  create_view "project_export_statuses", sql_definition: <<-SQL
+    SELECT p.id AS project_id,
+    pe.id AS project_export_id,
+        CASE pe.export_kind
+            WHEN 'bag_it'::text THEN (p.export_configuration @> '{"bag_it": true}'::jsonb)
+            ELSE false
+        END AS autoexport,
+    pe.export_kind,
+    pe.fingerprint AS export_fingerprint,
+    (p.fingerprint = pe.fingerprint) AS current,
+    (p.fingerprint <> pe.fingerprint) AS stale,
+    pe.created_at AS exported_at
+   FROM (projects p
+     JOIN project_exports pe ON ((p.id = pe.project_id)));
+  SQL
+  create_view "text_export_statuses", sql_definition: <<-SQL
+    SELECT t.id AS text_id,
+    te.id AS text_export_id,
+        CASE te.export_kind
+            WHEN 'epub_v3'::text THEN (t.export_configuration @> '{"epub_v3": true}'::jsonb)
+            ELSE false
+        END AS autoexport,
+    te.export_kind,
+    te.fingerprint AS export_fingerprint,
+    (t.fingerprint = te.fingerprint) AS current,
+    (t.fingerprint <> te.fingerprint) AS stale,
+    te.created_at AS exported_at
+   FROM (texts t
+     JOIN text_exports te ON ((t.id = te.text_id)));
+  SQL
+  create_view "user_derived_roles", sql_definition: <<-SQL
+    SELECT u.id AS user_id,
+    COALESCE((array_agg(r.name ORDER BY
+        CASE r.name
+            WHEN 'admin'::text THEN 1
+            WHEN 'editor'::text THEN 2
+            WHEN 'project_creator'::text THEN 3
+            WHEN 'marketeer'::text THEN 4
+            WHEN 'reader'::text THEN 8
+            ELSE 20
+        END) FILTER (WHERE (r.kind = 'global'::text)))[1], 'reader'::character varying) AS role,
+    COALESCE((array_agg(r.name ORDER BY
+        CASE r.name
+            WHEN 'admin'::text THEN 1
+            WHEN 'editor'::text THEN 2
+            WHEN 'project_creator'::text THEN 3
+            WHEN 'marketeer'::text THEN 4
+            WHEN 'project_editor'::text THEN 5
+            WHEN 'project_resource_editor'::text THEN 6
+            WHEN 'project_author'::text THEN 7
+            WHEN 'reader'::text THEN 8
+            ELSE 20
+        END) FILTER (WHERE (r.kind = ANY (ARRAY['global'::text, 'scoped'::text]))))[1], 'reader'::character varying) AS kind
+   FROM ((users u
+     LEFT JOIN users_roles ur ON ((ur.user_id = u.id)))
+     LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
+  GROUP BY u.id;
   SQL
   create_view "reading_group_counts", sql_definition: <<-SQL
     SELECT rg.id AS reading_group_id,
@@ -1764,56 +1756,6 @@ UNION ALL
            FROM (collaborators c
              JOIN makers m ON ((m.id = c.maker_id)))
           WHERE (((c.collaboratable_type)::text = 'Project'::text) AND (c.collaboratable_id = p.id))) pm ON (true));
-  SQL
-  create_view "reading_group_composite_entry_rankings", sql_definition: <<-SQL
-    SELECT rgce.id AS reading_group_composite_entry_id,
-    rgce.reading_group_id,
-    rgce.reading_group_category_id,
-    rgce.collectable_type,
-    rgce.collectable_id,
-    rgce.collectable_jsonapi_type,
-    rgc."position" AS category_position,
-    COALESCE(rgep."position", rger."position", rgerc."position", rget."position") AS "position"
-   FROM (((((reading_group_composite_entries rgce
-     LEFT JOIN reading_group_categories rgc ON ((rgce.reading_group_category_id = rgc.id)))
-     LEFT JOIN reading_group_projects rgep ON ((rgce.reading_group_project_id = rgep.id)))
-     LEFT JOIN reading_group_resources rger ON ((rgce.reading_group_resource_id = rger.id)))
-     LEFT JOIN reading_group_resource_collections rgerc ON ((rgce.reading_group_resource_collection_id = rgerc.id)))
-     LEFT JOIN reading_group_texts rget ON ((rgce.reading_group_text_id = rget.id)));
-  SQL
-  create_view "reading_group_visibilities", sql_definition: <<-SQL
-    SELECT rg.id AS reading_group_id,
-    rgm.id AS reading_group_membership_id,
-    u.id AS user_id,
-    rg.privacy,
-    ((rgm.id IS NULL) AND ((rg.privacy)::text = 'public'::text)) AS joinable,
-    ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'active'::text)) AS joined,
-    ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'archived'::text)) AS archived,
-    (((rgm.id IS NULL) AND ((rg.privacy)::text = 'public'::text)) OR ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'active'::text))) AS visible,
-    (rg.creator_id = u.id) AS created
-   FROM ((users u
-     CROSS JOIN reading_groups rg)
-     LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = rg.id) AND (rgm.user_id = u.id))));
-  SQL
-  create_view "annotation_reading_group_memberships", sql_definition: <<-SQL
-    SELECT a.id AS annotation_id,
-    a.reading_group_id,
-    a.creator_id AS user_id,
-    rgm.id AS reading_group_membership_id,
-    rgm.aasm_state
-   FROM (annotations a
-     LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = a.reading_group_id) AND (rgm.user_id = a.creator_id))))
-  WHERE ((a.creator_id IS NOT NULL) AND (a.reading_group_id IS NOT NULL));
-  SQL
-  create_view "favorites", sql_definition: <<-SQL
-    SELECT user_collected_composite_entries.id,
-    user_collected_composite_entries.user_id,
-    user_collected_composite_entries.collectable_type AS favoritable_type,
-    user_collected_composite_entries.collectable_id AS favoritable_id,
-    user_collected_composite_entries.project_id,
-    user_collected_composite_entries.created_at,
-    user_collected_composite_entries.updated_at
-   FROM user_collected_composite_entries;
   SQL
   create_view "text_summaries", sql_definition: <<-SQL
     SELECT t.project_id,
@@ -1866,6 +1808,56 @@ UNION ALL
            FROM (collaborators c
              JOIN makers m ON ((m.id = c.maker_id)))
           WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
+  SQL
+  create_view "reading_group_composite_entry_rankings", sql_definition: <<-SQL
+    SELECT rgce.id AS reading_group_composite_entry_id,
+    rgce.reading_group_id,
+    rgce.reading_group_category_id,
+    rgce.collectable_type,
+    rgce.collectable_id,
+    rgce.collectable_jsonapi_type,
+    rgc."position" AS category_position,
+    COALESCE(rgep."position", rger."position", rgerc."position", rget."position") AS "position"
+   FROM (((((reading_group_composite_entries rgce
+     LEFT JOIN reading_group_categories rgc ON ((rgce.reading_group_category_id = rgc.id)))
+     LEFT JOIN reading_group_projects rgep ON ((rgce.reading_group_project_id = rgep.id)))
+     LEFT JOIN reading_group_resources rger ON ((rgce.reading_group_resource_id = rger.id)))
+     LEFT JOIN reading_group_resource_collections rgerc ON ((rgce.reading_group_resource_collection_id = rgerc.id)))
+     LEFT JOIN reading_group_texts rget ON ((rgce.reading_group_text_id = rget.id)));
+  SQL
+  create_view "reading_group_visibilities", sql_definition: <<-SQL
+    SELECT rg.id AS reading_group_id,
+    rgm.id AS reading_group_membership_id,
+    u.id AS user_id,
+    rg.privacy,
+    ((rgm.id IS NULL) AND ((rg.privacy)::text = 'public'::text)) AS joinable,
+    ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'active'::text)) AS joined,
+    ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'archived'::text)) AS archived,
+    (((rgm.id IS NULL) AND ((rg.privacy)::text = 'public'::text)) OR ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'active'::text))) AS visible,
+    (rg.creator_id = u.id) AS created
+   FROM ((users u
+     CROSS JOIN reading_groups rg)
+     LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = rg.id) AND (rgm.user_id = u.id))));
+  SQL
+  create_view "annotation_reading_group_memberships", sql_definition: <<-SQL
+    SELECT a.id AS annotation_id,
+    a.reading_group_id,
+    a.creator_id AS user_id,
+    rgm.id AS reading_group_membership_id,
+    rgm.aasm_state
+   FROM (annotations a
+     LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = a.reading_group_id) AND (rgm.user_id = a.creator_id))))
+  WHERE ((a.creator_id IS NOT NULL) AND (a.reading_group_id IS NOT NULL));
+  SQL
+  create_view "favorites", sql_definition: <<-SQL
+    SELECT user_collected_composite_entries.id,
+    user_collected_composite_entries.user_id,
+    user_collected_composite_entries.collectable_type AS favoritable_type,
+    user_collected_composite_entries.collectable_id AS favoritable_id,
+    user_collected_composite_entries.project_id,
+    user_collected_composite_entries.created_at,
+    user_collected_composite_entries.updated_at
+   FROM user_collected_composite_entries;
   SQL
   create_view "user_collections", sql_definition: <<-SQL
     WITH category_type_ids AS (
@@ -1926,5 +1918,18 @@ UNION ALL
    FROM ((reading_groups rg
      LEFT JOIN category_lists cl ON ((cl.reading_group_id = rg.id)))
      LEFT JOIN collection_mappings cm ON ((cm.reading_group_id = rg.id)));
+  SQL
+  create_view "reading_group_membership_counts", sql_definition: <<-SQL
+    SELECT rgm.id AS reading_group_membership_id,
+    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count,
+    count(DISTINCT c.id) FILTER (WHERE (NOT a.orphaned)) AS comments_count,
+    count(DISTINCT c.id) FILTER (WHERE a.orphaned) AS orphaned_comments_count
+   FROM ((reading_group_memberships rgm
+     LEFT JOIN annotations a ON ((a.reading_group_id = rgm.reading_group_id)))
+     LEFT JOIN comments c ON ((((c.subject_type)::text = 'Annotation'::text) AND (c.subject_id = a.id) AND (c.creator_id = rgm.user_id))))
+  GROUP BY rgm.id;
   SQL
 end
