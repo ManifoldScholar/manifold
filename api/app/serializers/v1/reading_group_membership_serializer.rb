@@ -27,6 +27,8 @@ module V1
       anonymous_label(object)
     end
 
+    typed_attribute :role, Types::String
+
     typed_attribute :state, Types::String.meta(read_only: true) do |object|
       object.aasm_state
     end
