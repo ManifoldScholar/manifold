@@ -2,8 +2,6 @@ module V1
   class ReadingGroupMembershipSerializer < ManifoldSerializer
     include ::V1::Concerns::ManifoldSerializer
 
-    current_user_is_creator?
-
     typed_belongs_to :reading_group
     typed_has_one :user, if: ->(object, params) { has_visible_user?(object, params) }
 
