@@ -12,6 +12,7 @@ module V1
     typed_attribute :label, Types::String
 
     typed_attribute :annotations_count, Types::Integer.meta(read_only: true)
+    typed_attribute :comments_count, Types::Integer.meta(read_only: true)
     typed_attribute :highlights_count, Types::Integer.meta(read_only: true)
     typed_attribute :anonymous_label, Types::String.meta(read_only: true)
     typed_attribute :is_current_user, Types::Bool.meta(read_only: true) do |object, params|
