@@ -35,8 +35,7 @@ class ReadingGroupMembership < ApplicationRecord
 
   delegate :full_name, to: :user, prefix: true
   delegate :anonymous?, to: :reading_group, prefix: true
-  delegate :annotations_count, to: :reading_group_membership_count, allow_nil: true
-  delegate :highlights_count, to: :reading_group_membership_count, allow_nil: true
+  delegate :annotations_count, :comments_count, :highlights_count, to: :reading_group_membership_count, allow_nil: true
   delegate :moderator?, :member?, to: :role
 
   before_validation :ensure_anonymous_label
