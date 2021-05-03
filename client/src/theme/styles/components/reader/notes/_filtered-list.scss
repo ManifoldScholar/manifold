@@ -18,9 +18,10 @@
   }
 
   &__see-all {
-    padding: 5px 9px 6px 13px;
+    padding: 6px 9px 8px 13px;
     margin-top: 20px;
     font-size: 13px;
+    border-color: var(--select-border-color);
 
     @include respond($break50) {
       margin-top: 0;
