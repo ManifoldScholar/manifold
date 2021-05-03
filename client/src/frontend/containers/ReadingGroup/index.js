@@ -10,7 +10,7 @@ import { entityStoreActions } from "actions";
 import HeadContent from "global/components/HeadContent";
 import Drawer from "global/containers/drawer";
 import BackLink from "frontend/components/back-link";
-import Heading from "frontend/components/reading-group/Heading";
+import { GroupHeading } from "frontend/components/reading-group/headings";
 import Settings from "frontend/components/reading-group/Settings";
 import SearchDialog from "frontend/components/collecting/SearchDialog";
 
@@ -171,10 +171,10 @@ class ReadingGroup extends Component {
         <section>
           <div className="container">
             <BackLink.Register
-              link={lh.link("frontendReadingGroups")}
+              link={lh.link("frontendMyReadingGroups")}
               backText={"Manage Reading Groups"}
             />
-            <Heading
+            <GroupHeading
               readingGroup={this.readingGroup}
               canUpdateGroup={this.canUpdateGroup}
               history={this.history}

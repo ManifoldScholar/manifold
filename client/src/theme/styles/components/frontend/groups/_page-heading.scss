@@ -73,13 +73,6 @@ $_container-gap: 30px;
   }
 
   &__nav-button {
-    @include buttonTertiary;
-    border: none;
-
-    &--active {
-      background-color: var(--accent-interaction-light);
-    }
-
     &:not(:first-child) {
       margin-left: 10px;
     }
