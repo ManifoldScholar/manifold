@@ -4,7 +4,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import Partial from "./partial";
 import EmptyMessage from "./EmptyMessage";
 
-export default class FilteredList extends PureComponent {
+class FilteredList extends PureComponent {
   static displayName = "Notes.FilteredList";
 
   static propTypes = {
@@ -38,6 +38,10 @@ export default class FilteredList extends PureComponent {
       <div className="notes-filtered-list__header">
         <Partial.Filters
           filterChangeHandler={handleFilterChange}
+          filter={filter}
+        />
+        <Partial.GroupFilter
+          onReadingGroupChange={handleFilterChange}
           filter={filter}
         />
         <button
@@ -85,3 +89,5 @@ export default class FilteredList extends PureComponent {
     );
   }
 }
+
+export default FilteredList;
