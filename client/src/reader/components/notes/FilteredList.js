@@ -4,7 +4,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import Partial from "./partial";
 import EmptyMessage from "./EmptyMessage";
 
-export default class FilteredList extends PureComponent {
+class FilteredList extends PureComponent {
   static displayName = "Notes.FilteredList";
 
   static propTypes = {
@@ -12,6 +12,7 @@ export default class FilteredList extends PureComponent {
     sortedAnnotations: PropTypes.array,
     handleSeeAllClick: PropTypes.func,
     handleFilterChange: PropTypes.func,
+    handleReadingGroupChange: PropTypes.func,
     handleVisitAnnotation: PropTypes.func,
     currentSectionId: PropTypes.string,
     filter: PropTypes.object,
@@ -33,13 +34,19 @@ export default class FilteredList extends PureComponent {
   }
 
   renderHeading() {
-    const { handleSeeAllClick, handleFilterChange, filter } = this.props;
+    const {
+      handleSeeAllClick,
+      handleFilterChange,
+      handleReadingGroupChange,
+      filter
+    } = this.props;
     return (
       <div className="notes-filtered-list__header">
         <Partial.Filters
           filterChangeHandler={handleFilterChange}
           filter={filter}
         />
+        <Partial.GroupFilter onReadingGroupChange={handleReadingGroupChange} />
         <button
           onClick={handleSeeAllClick}
           className="notes-filtered-list__see-all button-primary"
@@ -85,3 +92,5 @@ export default class FilteredList extends PureComponent {
     );
   }
 }
+
+export default FilteredList;

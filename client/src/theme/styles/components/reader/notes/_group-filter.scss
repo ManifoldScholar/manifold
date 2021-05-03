@@ -1,0 +1,33 @@
+.group-filter {
+  position: relative;
+
+  &__select {
+    @include filterSelectBase;
+    @include outlineOnFocusVisible;
+    position: relative;
+    width: 100%;
+    height: 40px;
+    padding-bottom: 3px;
+    font-size: 13px;
+    color: $neutralTextExtraDark;
+    border: 1px solid $neutralTextDark;
+    border-radius: 6px;
+    max-width: 220px;
+
+    &:focus-visible {
+      border-color: $defaultFocusColor;
+    }
+  }
+
+  &__text {
+    padding-right: 3px;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    color: $neutralTextDark;
+    pointer-events: none;
+  }
+}

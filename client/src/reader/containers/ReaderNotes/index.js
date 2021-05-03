@@ -131,6 +131,14 @@ export class ReaderNotesContainer extends Component {
     );
   };
 
+  // eslint-disable-next-line no-unused-vars
+  handleReadingGroupChange = rgId => {
+    // TODO: Send API call here
+    // this.setState({ filter }, () =>
+    //   this.fetchAnnotations(this.state, this.props)
+    // );
+  };
+
   mapAnnotationsToSections(props) {
     const { text, myAnnotations } = props;
     const annotationGroups = groupBy(myAnnotations, "attributes.textSectionId");
