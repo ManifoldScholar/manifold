@@ -131,12 +131,13 @@ export class ReaderNotesContainer extends Component {
     );
   };
 
-  // eslint-disable-next-line no-unused-vars
   handleReadingGroupChange = rgId => {
-    // TODO: Send API call here
-    // this.setState({ filter }, () =>
-    //   this.fetchAnnotations(this.state, this.props)
-    // );
+    // TODO: Check against API, set proper filter prop
+    const filter = { ...this.state.filter };
+    filter.reading_group = rgId;
+    this.setState({ filter }, () =>
+      this.fetchAnnotations(this.state, this.props)
+    );
   };
 
   mapAnnotationsToSections(props) {
@@ -166,6 +167,7 @@ export class ReaderNotesContainer extends Component {
       handleVisitAnnotation: this.handleVisitAnnotation,
       handleFilterChange: this.handleFilterChange,
       handleSeeAllClick: this.handleSeeAllClick,
+      handleReadingGroupChange: this.handleReadingGroupChange,
       annotated: props.annotated,
       loaded: props.loaded,
       filter: this.state.filter
