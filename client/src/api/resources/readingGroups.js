@@ -1,4 +1,24 @@
 export default {
+  index(filter = {}, page = {}) {
+    return {
+      endpoint: "/api/v1/reading_groups",
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
+  publicIndex(filter = {}, page = {}) {
+    return {
+      endpoint: "/api/v1/public_reading_groups",
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
   show(id) {
     return {
       endpoint: `/api/v1/reading_groups/${id}`,

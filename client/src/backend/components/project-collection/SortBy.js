@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { UID } from "react-uid";
-import IconComposer from "global/components/utility/IconComposer";
+import { ListFilters } from "global/components/list";
 
 export default class ProjectCollectionSortBy extends PureComponent {
   static displayName = "ProjectCollection.SortBy";
@@ -16,15 +15,47 @@ export default class ProjectCollectionSortBy extends PureComponent {
     return "collection-sort";
   }
 
-  isManualSort(projectCollection) {
-    if (!projectCollection) return false;
-    return projectCollection.attributes.manuallySorted;
+  get projectCollection() {
+    return this.props.projectCollection;
+  }
+
+  get isManualSort() {
+    return this.projectCollection.attributes.manuallySorted;
+  }
+
+  get sortOrder() {
+    return this.projectCollection.attributes.sortOrder;
+  }
+
+  get filters() {
+    return [
+      {
+        label: "Order Collection By:",
+        value: this.sortOrder,
+        onChange: this.handleChange,
+        options: [
+          { label: "Date Created (Newest First)", value: "created_at_desc" },
+          { label: "Date Created (Oldest First)", value: "created_at_asc" },
+          { label: "Last Updated (Newest First)", value: "updated_at_desc" },
+          { label: "Last Updated (Oldest First)", value: "updated_at_asc" },
+          { label: "Title A to Z", value: "title_asc" },
+          { label: "Title Z to A", value: "title_desc" },
+          {
+            label: "Publication Date (Newest First)",
+            value: "publication_date_desc"
+          },
+          {
+            label: "Publication Date (Oldest First)",
+            value: "publication_date_asc"
+          }
+        ]
+      }
+    ];
   }
 
   handleClick = event => {
     event.preventDefault();
-    const manual = this.isManualSort(this.props.projectCollection);
-    const order = manual ? "created_at_asc" : "manual";
+    const order = this.isManualSort ? "created_at_asc" : "manual";
     return this.props.sortChangeHandler(order);
   };
 
@@ -38,78 +69,16 @@ export default class ProjectCollectionSortBy extends PureComponent {
     event.preventDefault();
   };
 
-  renderSortList(projectCollection) {
-    if (this.isManualSort(projectCollection))
-      return (
-        <div className="instructional-copy">
-          Click and drag projects to rearrange them.
-        </div>
-      );
-    const selected = projectCollection.attributes.sortOrder;
-
-    return (
-      <UID name={id => `${this.idPrefix}-${id}`}>
-        {id => (
-          <div className="select-group">
-            <label htmlFor={id}>Order Collection By:</label>
-            <div className="select" key="filter[order]">
-              <select
-                id={id}
-                onChange={this.handleChange}
-                value={selected}
-                data-id={"filter"}
-              >
-                <option key="created_at_desc" value="created_at_desc">
-                  Date Created (Newest First)
-                </option>
-                <option key="created_at_asc" value="created_at_asc">
-                  Date Created (Oldest First)
-                </option>
-                <option key="updated_at_desc" value="updated_at_desc">
-                  Last Updated (Newest First)
-                </option>
-                <option key="updated_at_asc" value="updated_at_asc">
-                  Last Updated (Oldest First)
-                </option>
-                <option key="title_asc" value="title_asc">
-                  Title A to Z
-                </option>
-                <option key="title_desc" value="title_desc">
-                  Title Z to A
-                </option>
-                <option
-                  key="publication_date_desc"
-                  value="publication_date_desc"
-                >
-                  Publication Date (Newest First)
-                </option>
-                <option key="publication_date_asc" value="publication_date_asc">
-                  Publication Date (Oldest First)
-                </option>
-              </select>
-              <IconComposer
-                icon="disclosureDown16"
-                size={22}
-                iconClass="form-select__disclosure-icon"
-              />
-            </div>
-          </div>
-        )}
-      </UID>
-    );
-  }
-
-  renderToggle(projectCollection) {
-    if (projectCollection.attributes.smart) return null;
-    const toggled = this.isManualSort(projectCollection);
+  renderToggle() {
+    if (this.projectCollection.attributes.smart) return null;
 
     const classes = classnames({
       "boolean-primary": true,
-      checked: toggled
+      checked: this.isManualSort
     });
 
     return (
-      <form className="form-secondary">
+      <div className="form-secondary">
         <div className="form-input">
           <div className="form-input-heading">Order Manually</div>
           <div className="toggle-indicator">
@@ -118,7 +87,7 @@ export default class ProjectCollectionSortBy extends PureComponent {
               className={classes}
               role="button"
               tabIndex="0"
-              aria-pressed={toggled}
+              aria-pressed={this.isManualSort}
             >
               <span className="screen-reader-text">
                 Order collection manually
@@ -126,7 +95,15 @@ export default class ProjectCollectionSortBy extends PureComponent {
             </div>
           </div>
         </div>
-      </form>
+      </div>
+    );
+  }
+
+  renderManualInstructions() {
+    return (
+      <div className="project-collection-sort__instructional-copy">
+        Click and drag projects to rearrange them.
+      </div>
     );
   }
 
@@ -135,12 +112,11 @@ export default class ProjectCollectionSortBy extends PureComponent {
 
     return (
       <div className="project-collection-sort">
-        <form className="form-search-filter" onSubmit={this.handleSubmit}>
-          <div className="form-list-filter">
-            {this.renderSortList(this.props.projectCollection)}
-          </div>
-        </form>
-        {this.renderToggle(this.props.projectCollection)}
+        {this.isManualSort && this.renderManualInstructions()}
+        {!this.isManualSort && (
+          <ListFilters filters={this.filters} onSubmit={this.handleSubmit} />
+        )}
+        {this.renderToggle()}
       </div>
     );
   }

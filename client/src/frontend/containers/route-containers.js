@@ -21,9 +21,10 @@ import Page from "frontend/containers/Page";
 import Subscriptions from "frontend/containers/Subscriptions";
 import Unsubscribe from "frontend/containers/Unsubscribe";
 import Home from "frontend/containers/Home";
-import ReadingGroups from "frontend/containers/ReadingGroups";
-import ReadingGroupsList from "frontend/containers/ReadingGroups/List";
-import ReadingGroupsNew from "frontend/containers/ReadingGroups/New";
+import MyReadingGroups from "frontend/containers/MyReadingGroups";
+import MyReadingGroupsList from "frontend/containers/MyReadingGroups/List";
+import MyReadingGroupsNew from "frontend/containers/MyReadingGroups/New";
+import PublicReadingGroups from "frontend/containers/PublicReadingGroups";
 import ReadingGroup from "frontend/containers/ReadingGroup";
 import ReadingGroupMembers from "frontend/containers/ReadingGroup/Members";
 import ReadingGroupMemberEdit from "frontend/containers/ReadingGroup/MemberEdit";
@@ -58,9 +59,10 @@ export default {
   Subscriptions,
   Unsubscribe,
   Home,
-  ReadingGroups,
-  ReadingGroupsList,
-  ReadingGroupsNew,
+  MyReadingGroups,
+  MyReadingGroupsList,
+  MyReadingGroupsNew,
+  PublicReadingGroups,
   ReadingGroup,
   ReadingGroupMembers,
   ReadingGroupMemberEdit,

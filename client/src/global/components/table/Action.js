@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 
-function MemberActionButtonish({ to, onClick, className, children }) {
+function Action({ to, onClick, className, children }) {
   if (to)
     return (
       <Link
@@ -31,13 +31,13 @@ function MemberActionButtonish({ to, onClick, className, children }) {
   );
 }
 
-MemberActionButtonish.displayName = "MembersTable.Member.ActionButtonish";
+Action.displayName = "GenericTable.Action";
 
-MemberActionButtonish.propTypes = {
+Action.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
   to: PropTypes.string,
   className: PropTypes.string
 };
 
-export default MemberActionButtonish;
+export default Action;
