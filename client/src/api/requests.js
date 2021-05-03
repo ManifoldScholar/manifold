@@ -107,6 +107,7 @@ export default {
   feProject: "frontend-project",
   tmpProject: "project-detail",
   feMyReadingGroups: "frontend-my-reading-groups",
+  fePublicReadingGroups: "frontend-public-reading-groups",
   feNewReadingGroup: "frontend-new-reading-group",
   feReadingGroup: "frontend-reading-group",
   feReadingGroupDestroy: "frontend-reading-group-destroy",

@@ -26,13 +26,10 @@ function CollectionPlaceholder() {
           any other Reading Group you are managing).
         </p>
         <div className="collection-placeholder__actions">
-          <Link
-            to={lh.link("frontendProjects")}
-            className="collection-placeholder__link"
-          >
+          <Link to={lh.link("frontendProjects")} className="button-tertiary">
             Browse library
           </Link>
-          <a href="#search" className="collection-placeholder__link">
+          <a href="#search" className="button-tertiary">
             Search by keyword
           </a>
         </div>
@@ -47,7 +44,7 @@ function CollectionPlaceholder() {
           address.
         </p>
         <div className="collection-placeholder__actions">
-          <a href="#settings" className="collection-placeholder__link">
+          <a href="#settings" className="button-tertiary">
             Edit group info
           </a>
         </div>

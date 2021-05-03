@@ -24,7 +24,10 @@ function ReadingGroupHomepageEditContainer({
           title="Search + add content:"
           instructions="Search for and star the content you want to add to the home page:"
           actions={
-            <a href="#search" className="group-page-heading__nav-button">
+            <a
+              href="#search"
+              className="group-page-heading__nav-button button-tertiary"
+            >
               Add content
             </a>
           }

@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Buttonish from "../Buttonish";
+import Action from "global/components/table/Action";
 import lh from "helpers/linkHandler";
 
 function EditMember({ membership, readingGroup }) {
   return (
-    <Buttonish
+    <Action
       to={lh.link("frontendReadingGroupMember", readingGroup.id, membership.id)}
     >
       Edit
-    </Buttonish>
+    </Action>
   );
 }
 

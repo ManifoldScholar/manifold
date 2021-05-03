@@ -72,7 +72,7 @@ class TableRow extends React.PureComponent {
   render() {
     const { children, model } = this.props;
 
-    const cells = React.Children.map(children, child => {
+    const cells = React.Children.map(children.filter(Boolean), child => {
       return (
         <Cell {...this.cellProps(child)}>
           {isFunction(child.props.children)

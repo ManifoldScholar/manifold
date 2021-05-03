@@ -149,22 +149,27 @@ const routes = {
       ]
     },
     {
-      name: "frontendReadingGroups",
+      name: "frontendMyReadingGroups",
       exact: false,
-      component: "ReadingGroups",
+      component: "MyReadingGroups",
       path: "/my/groups",
-      helper: () => "/my/groups",
+      helper: (params = {}) => {
+        const query = queryString.stringify(params);
+        const base = `/my/groups`;
+        if (!query) return base;
+        return `${base}?${query}`;
+      },
       routes: [
         {
           exact: true,
-          component: "ReadingGroupsList",
+          component: "MyReadingGroupsList",
           path: "/my/groups/:new(new)?",
           routes: [
             {
-              name: "frontendReadingGroupsNew",
+              name: "frontendMyReadingGroupsNew",
               exact: true,
               path: "/my/groups/new",
-              component: "ReadingGroupsNew",
+              component: "MyReadingGroupsNew",
               helper: () => "/my/groups/new"
             }
           ]
@@ -249,6 +254,18 @@ const routes = {
       path: "/my/notes",
       isLibrary: true,
       helper: () => "/my/notes"
+    },
+    {
+      name: "frontendPublicReadingGroups",
+      exact: true,
+      component: "PublicReadingGroups",
+      path: "/groups",
+      helper: (params = {}) => {
+        const query = queryString.stringify(params);
+        const base = `/groups`;
+        if (!query) return base;
+        return `${base}?${query}`;
+      }
     },
     {
       name: "frontendFeatured",

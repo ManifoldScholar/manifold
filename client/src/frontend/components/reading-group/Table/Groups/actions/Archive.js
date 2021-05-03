@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import config from "config";
 import { requests } from "api";
+import Action from "global/components/table/Action";
 import { entityStoreActions } from "actions";
 import withConfirmation from "hoc/with-confirmation";
 import {
@@ -12,11 +13,11 @@ import {
 
 const { request } = entityStoreActions;
 
-function HeadingArchiveToggle({ readingGroup, confirm }) {
+function ArchiveGroup({ readingGroup, confirm }) {
   const dispatch = useDispatch();
 
   const currentUserMembershipId =
-    readingGroup.relationships.currentUserReadingGroupMembership[0].id;
+    readingGroup.relationships.currentUserReadingGroupMembership.id;
 
   useDispatchReadingGroupMembership(currentUserMembershipId);
   const {
@@ -65,18 +66,15 @@ function HeadingArchiveToggle({ readingGroup, confirm }) {
   if (!archive && !activate) return null;
 
   return (
-    <button onClick={handleClick} className="group-page-heading__nav-button">
-      {archive ? "Archive" : "Activate"}
-      {" Group"}
-    </button>
+    <Action onClick={handleClick}>{archive ? "Archive" : "Activate"}</Action>
   );
 }
 
-HeadingArchiveToggle.displayName = "ReadingGroup.Heading.ArchiveToggle";
+ArchiveGroup.displayName = "GroupsTable.Group.Archive";
 
-HeadingArchiveToggle.propTypes = {
+ArchiveGroup.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   confirm: PropTypes.func.isRequired
 };
 
-export default withConfirmation(HeadingArchiveToggle);
+export default withConfirmation(ArchiveGroup);
