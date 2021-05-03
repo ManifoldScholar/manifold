@@ -13,12 +13,6 @@
     overflow: auto;
   }
 
-  &__count-container {
-    @include panelRounded;
-    padding: 15px 22px;
-    margin-bottom: 8px;
-  }
-
   &__heading-small {
     @include formLabelPrimary;
   }
@@ -82,31 +76,24 @@
     flex-shrink: 0;
     opacity: 0;
     transition: opacity $duration $timing, transform $duration $timing;
+    transform: translateY(1px);
 
     &--active {
       opacity: 1;
-      transform: translateX(20%);
+      transform: translate(20%, 1px);
     }
 
     &:not(:first-child) {
       margin-left: 12px;
     }
 
-    .table__avatar--image ~ & {
-      transform: translateY(1px);
+    .table__avatar--placeholder ~ & {
+      transform: translateY(0);
 
       &--active {
-        transform: translate(20%, 1px);
+        transform: translateX(20%);
       }
     }
-  }
-
-  &__nested-link-arrow {
-    position: absolute;
-    top: 9px;
-    right: 12px;
-    opacity: 0;
-    transition: opacity $duration $timing;
   }
 
   &__private-icon {
@@ -121,11 +108,11 @@
     padding: 4px 32px 5px 17px;
     margin-left: -17px;
     text-decoration: none;
-    border-radius: 15px;
+    border-radius: 13px;
     transition: background-color $duration $timing;
 
     @include respond($_layout-breakpoint) {
-      margin-left: 17px;
+      // margin-left: 17px;
     }
 
     &:hover,
@@ -135,8 +122,18 @@
 
       .table__nested-link-arrow {
         opacity: 1;
+        transform: translate(20%, -50%);
       }
     }
+  }
+
+  &__nested-link-arrow {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    opacity: 0;
+    transition: opacity $duration $timing, transform $duration $timing;
+    transform: translate(0, -50%);
   }
 
   &__name {
@@ -144,6 +141,7 @@
     flex-wrap: wrap;
     align-items: center;
     width: 100%;
+    padding-bottom: 3px;
     margin-top: -6px;
     margin-left: -12px;
     text-decoration: none;
@@ -157,6 +155,10 @@
       &:focus-visible {
         outline: 0;
       }
+    }
+
+    .table__avatar ~ & {
+      padding-bottom: 0;
     }
 
     > * {
@@ -352,7 +354,7 @@
     vertical-align: middle;
   }
 
-  &__pagination {
+  &__pagination:not(:empty) {
     padding-top: 30px;
   }
 

@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { NavLink } from "react-router-dom";
-import IconComposer from "global/components/utility/IconComposer";
+import { Navigation } from "../parts";
 
 function ChildNav({ readingGroup }) {
   const homePaths = {
@@ -37,23 +36,7 @@ function ChildNav({ readingGroup }) {
       isActive: null
     }
   ];
-  return (
-    <nav aria-label="Reading Group subpages" className="group-child-nav">
-      {links.map(({ to, exact, isActive, text, icon }) => (
-        <NavLink
-          key={text}
-          to={to}
-          exact={exact}
-          isActive={isActive}
-          className="group-child-nav__link"
-          activeClassName="group-child-nav__link--active"
-        >
-          <IconComposer icon={icon} size="default" />
-          <span className="group-child-nav__link-text">{text}</span>
-        </NavLink>
-      ))}
-    </nav>
-  );
+  return <Navigation ariaLabel="Reading Group subpages" links={links} />;
 }
 
 ChildNav.displayName = "ReadingGroup.Heading.ChildNav";

@@ -6,20 +6,14 @@ import Navigation from "backend/components/navigation";
 
 class ReadingGroupsNewContainer extends PureComponent {
   static propTypes = {
-    history: PropTypes.object.isRequired,
-    closeUrl: PropTypes.string.isRequired
-  };
-
-  closeDrawer = () => {
-    const { history, closeUrl } = this.props;
-    history.push(closeUrl);
+    onSuccess: PropTypes.func.isRequired
   };
 
   render() {
     return (
       <section>
         <Navigation.DrawerHeader title="New Reading Group" />
-        <GroupSettingsForm mode="new" onSuccess={this.closeDrawer} />
+        <GroupSettingsForm mode="new" onSuccess={this.props.onSuccess} />
       </section>
     );
   }

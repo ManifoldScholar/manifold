@@ -32,14 +32,17 @@ export default class TableBody extends React.PureComponent {
     });
 
     let i = 0;
-    const headers = React.Children.map(this.props.children, child => {
-      return {
-        key: i++,
-        label: child.props.header,
-        icon: child.props.headerIcon,
-        align: child.props.align
-      };
-    });
+    const headers = React.Children.map(
+      this.props.children.filter(Boolean),
+      child => {
+        return {
+          key: i++,
+          label: child.props.header,
+          icon: child.props.headerIcon,
+          align: child.props.align
+        };
+      }
+    );
 
     return (
       <TableHeaderContext.Provider value={context}>

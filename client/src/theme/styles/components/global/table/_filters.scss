@@ -1,0 +1,29 @@
+.table-filter-container {
+  $_input-gap: entity-filter-form(gap);
+  $_select-min-width: entity-filter-form(select-min-width);
+  $_search-min-width: entity-filter-form(search-min-width);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: baseline;
+  padding-top: 6px;
+  padding-bottom: 14px;
+  margin-bottom: 8px;
+
+  &--count-only {
+    @include panelRounded;
+    padding-top: 14px;
+    padding-right: 22px;
+    padding-left: 22px;
+  }
+
+  &__start {
+    flex-grow: 999;
+  }
+
+  &__end {
+    flex-basis: $_search-min-width + $_input-gap + $_select-min-width;
+    flex-grow: 1;
+  }
+}

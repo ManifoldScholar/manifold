@@ -74,7 +74,7 @@ export class UserMenuBody extends Component {
                 onClick={() => this.props.hideUserMenu()}
               />
               <Link
-                to={lh.link("frontendReadingGroups")}
+                to={lh.link("frontendMyReadingGroups")}
                 title="My Reading Groups"
                 icon="annotationGroup24"
                 onClick={() => this.props.hideUserMenu()}
