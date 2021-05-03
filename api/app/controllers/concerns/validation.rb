@@ -41,7 +41,7 @@ module Validation
 
   def reading_group_membership_params
     params.require(:data)
-    attributes = [:annotation_style]
+    attributes = [:label, :annotation_style]
 
     if @reading_group.present? && current_user&.can_update?(@reading_group)
       attributes << :role
