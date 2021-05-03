@@ -1,41 +1,5 @@
 // Secondary form inputs. These include all of the form inputs (and more)
 // Outlined in 'form-inputs-primary', but change visually with this wrapper.
-@mixin formInputSecondary {
-  @include formInputPrimary;
-  box-sizing: border-box;
-  width: 100%;
-  // Explicit height so that elements can line up
-  height: 32px;
-  // Declared in em as it should change with font size
-  padding: 0;
-  font-size: 16px;
-  vertical-align: top;
-  background-color: transparent;
-  // Override border
-  border: 0;
-  border-bottom: 1px solid $neutralUIDullLight;
-  outline: 0;
-  transition: border-color $duration $timing;
-
-  @include respond($break60) {
-    height: 42px;
-    font-size: 18px;
-  }
-
-  &::placeholder {
-    color: $neutralUILight;
-  }
-
-  .bg-neutral90 & {
-    &:-webkit-autofill {
-      box-shadow: 0 0 0 1000px $neutral90 inset;
-      // Important required to override chrome default
-      /* stylelint-disable declaration-no-important */
-      -webkit-text-fill-color: $accentPrimaryPale !important;
-      /* stylelint-enable declaration-no-important */
-    }
-  }
-}
 
 /* I'm sorry for everything --ZD */
 .form-section .form-input-group > .form-input .form-select--rounded .form-select {

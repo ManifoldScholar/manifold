@@ -32,6 +32,7 @@ class ReadingGroupForm extends React.PureComponent {
   }
 
   get isCourseEnabled() {
+    if (this.isNew) return false;
     return this.props.group.attributes.course.enabled;
   }
 
@@ -49,7 +50,10 @@ class ReadingGroupForm extends React.PureComponent {
     return {
       attributes: {
         privacy: "private",
-        invitationCode: this.state.invitationCode
+        invitationCode: this.state.invitationCode,
+        course: {
+          enabled: false
+        }
       }
     };
   }
@@ -88,6 +92,8 @@ class ReadingGroupForm extends React.PureComponent {
   /* eslint-enable no-param-reassign */
 
   warnOnPrivacyChange = (initialValue, newValue) => {
+    if (this.isNew) return;
+
     let msg = null;
     const {
       heading,

@@ -153,19 +153,44 @@
 }
 
 @mixin formInputSecondary {
-  @include templateHead;
-  font-size: $type40;
-  text-transform: uppercase;
-  letter-spacing: 0.115em;
-  border-radius: 0;
-  appearance: none;
+  @include formInputPrimary;
+  width: 100%;
+  // Explicit height so that elements can line up
+  height: 32px;
+  padding: 0;
+  font-size: 16px;
+  vertical-align: top;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--input-border-color);
+  outline: 0;
+  transition: border-color $duration $timing;
+
+  @include respond($break60) {
+    height: 42px;
+    font-size: 18px;
+  }
+
+  &::placeholder {
+    color: var(--input-placeholder-color);
+  }
+
+  .bg-neutral90 & {
+    &:-webkit-autofill {
+      box-shadow: 0 0 0 1000px $neutral90 inset;
+      // Important required to override chrome default
+      /* stylelint-disable declaration-no-important */
+      -webkit-text-fill-color: $accentPrimaryPale !important;
+      /* stylelint-enable declaration-no-important */
+    }
+  }
 }
 
 @mixin formInputMessage {
   @include templateHead;
   font-size: $type50;
   font-weight: $semibold;
-  letter-spacing: 0.115em;
+  letter-spacing: 0.05em;
 }
 
 @mixin formInstructions {

@@ -1,19 +1,13 @@
 $_link-lateral-padding: 12px;
-$_link-min-width: 200px + $_link-lateral-padding * 2;
-$_breakpoint: $break80;
+$_count-2-breakpoint: 600px;
+$_count-3-breakpoint: $break80;
 
-.group-child-nav {
-  @include utilityPrimary;
-  display: grid;
-  grid-template-columns: 1fr;
-  font-size: 15px;
-  color: $neutral80;
-
+@mixin _setResponsiveLayout($count, $breakpoint) {
   > :first-child {
     border-top-left-radius: var(--box-border-radius);
     border-top-right-radius: var(--box-border-radius);
 
-    @include respond($_breakpoint) {
+    @include respond($breakpoint) {
       border-top-right-radius: 0;
       border-bottom-left-radius: var(--box-border-radius);
     }
@@ -23,14 +17,60 @@ $_breakpoint: $break80;
     border-bottom-right-radius: var(--box-border-radius);
     border-bottom-left-radius: var(--box-border-radius);
 
-    @include respond($_breakpoint) {
+    @include respond($breakpoint) {
       border-top-right-radius: var(--box-border-radius);
       border-bottom-left-radius: 0;
     }
   }
+}
 
-  @include respond($_breakpoint) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+.group-child-nav {
+  @include utilityPrimary;
+  display: grid;
+  // flex-grow: 1;
+  grid-template-columns: 1fr;
+  font-size: 15px;
+  color: $neutral80;
+
+  &--count-2 {
+    @include _setResponsiveLayout(2, $_count-2-breakpoint);
+
+    &.group-child-nav--layout-grid {
+      @include respond($_count-2-breakpoint) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    &.group-child-nav--layout-flex {
+      width: 100%;
+
+      @include respond($_count-2-breakpoint) {
+        display: flex;
+        width: auto;
+      }
+    }
+  }
+
+  &--count-3 {
+    @include _setResponsiveLayout(3, $_count-3-breakpoint);
+
+    &.group-child-nav--layout-grid {
+      @include respond($_count-3-breakpoint) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    &.group-child-nav--layout-flex {
+      @include respond($_count-3-breakpoint) {
+        display: flex;
+      }
+    }
+  }
+
+  &--layout-flex {
+    > * {
+      flex-grow: 1;
+    }
   }
 
   &__link {
@@ -41,6 +81,11 @@ $_breakpoint: $break80;
     text-decoration: none;
     background-color: var(--box-bg-color);
     transition: color $duration $timing, background-color $duration $timing;
+
+    &--padded {
+      padding-right: min(5vw, 50px);
+      padding-left: min(5vw, 50px);
+    }
 
     &--active {
       --box-bg-color: #{$neutral10};

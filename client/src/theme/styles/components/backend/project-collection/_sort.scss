@@ -1,63 +1,22 @@
 .project-collection-sort {
   display: flex;
   flex-direction: column;
+  gap: 20px;
   justify-content: space-between;
+  margin-bottom: 20px;
 
   @include respond($break60) {
     flex-flow: row wrap;
-    align-items: flex-start;
+    align-items: center;
   }
 
-  .form-list-filter {
-    display: flex;
-    flex-direction: column;
-    padding-top: 0;
-    padding-bottom: 0;
+  &__order-select {
+    padding-top: 5px;
+  }
 
-    @include respond($break60) {
-      flex-basis: 100%;
-      flex-direction: row;
-    }
-
-    .instructional-copy {
-      @include formInstructions;
-      margin-top: 0;
-    }
-
-    .select-group {
-      flex: 0 1 auto;
-      margin-bottom: 20px;
-
-      & + & {
-        margin-top: 0;
-      }
-
-      @include respond($break60) {
-        flex: 0 1 auto;
-        margin-right: 11px;
-        margin-left: 11px;
-
-        &:first-child {
-          margin-left: 0;
-        }
-
-        &:last-child {
-          margin-right: 0;
-        }
-
-        + .select-group {
-          margin-top: 0;
-        }
-      }
-
-      label {
-        font-size: 14px;
-      }
-
-      .select {
-        min-width: 260px;
-      }
-    }
+  &__instructional-copy {
+    @include formInstructions;
+    font-size: 13px;
   }
 
   // scope .form-secondary styles
@@ -66,18 +25,18 @@
 
     .form-input {
       display: flex;
+      align-items: center;
       justify-content: space-between;
 
       @include respond($break60) {
         justify-content: flex-end;
-        margin-bottom: 20px;
       }
 
       .form-input-heading {
         margin-right: 12px;
         margin-bottom: 0;
-        font-size: 14px;
-        letter-spacing: 0.115em;
+        font-size: 13px;
+        transform: translateY(-1px);
       }
 
       .toggle-indicator {

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Utility from "global/components/utility";
 import classNames from "classnames";
+import Filters from "./Filters";
 import Pagination from "./Pagination";
 import Body from "./Body";
 import Column from "./Column";
@@ -14,6 +14,7 @@ export default class Table extends PureComponent {
     onPageClick: PropTypes.func.isRequired,
     singularUnit: PropTypes.string.isRequired,
     pluralUnit: PropTypes.string.isRequired,
+    filters: PropTypes.node,
     children: props => {
       React.Children.toArray(props.children).every(
         child => child.type === Column
@@ -31,18 +32,20 @@ export default class Table extends PureComponent {
     return "#sample-target";
   }
 
+  get entityCountProps() {
+    return {
+      pagination: this.props.pagination,
+      singularUnit: this.props.singularUnit,
+      pluralUnit: this.props.pluralUnit,
+      showRange: false
+    };
+  }
+
   render() {
-    const { pagination, onPageClick, countLabel } = this.props;
+    const { pagination, onPageClick, countLabel, filters } = this.props;
     return (
       <div className={this.containerClassNames}>
-        <div className={"table__count-container"}>
-          <Utility.EntityCount
-            pagination={pagination}
-            singularUnit={this.props.singularUnit}
-            pluralUnit={this.props.pluralUnit}
-            showRange={false}
-          />
-        </div>
+        <Filters filters={filters} entityCountProps={this.entityCountProps} />
         <Body {...this.props} markup="table" label={countLabel} />
         <Body {...this.props} markup="dl" label={countLabel} />
         <Pagination

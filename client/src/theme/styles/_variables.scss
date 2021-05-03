@@ -316,3 +316,13 @@ $dialog: (
 @function dialog($property) {
   @return map-get($dialog, $property);
 }
+
+$entity-filter-form: (
+  gap: 10px,
+  select-min-width: 200px,
+  search-min-width: 182px
+);
+
+@function entity-filter-form($property) {
+  @return map-get($entity-filter-form, $property);
+}

@@ -1,6 +1,9 @@
 // Arranges section-heading, any details, search/filters, and body of section using flexbox
 // Used on All Projects, Project Detail, & Project Collections detail pages
 .entity-section-wrapper {
+  $_filter-gap: entity-filter-form(gap);
+  $_filter-min-width: entity-filter-form(select-min-width);
+
   display: flex;
   flex-direction: column;
   padding-top: 30px;
@@ -16,7 +19,8 @@
     order: -1;
     margin-bottom: 20px;
 
-    + .entity-section-wrapper__body { // if no .list-tools or .details
+    + .entity-section-wrapper__body {
+      // if no .list-tools or .details
       @include respond($break75) {
         margin-top: 34px;
       }
@@ -99,14 +103,12 @@
 
   &__tools {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
     width: 100%;
     padding-bottom: 0;
     margin-bottom: 36px;
 
-    + .entity-section-wrapper__body { // if no .details
+    + .entity-section-wrapper__body {
+      // if no .details
       margin-top: 18px;
 
       @include respond($break75) {
@@ -119,80 +121,25 @@
     }
 
     @include respond($break75) {
-      flex-direction: row;
       margin-top: 10px;
     }
 
     @include respond($break95) {
-      align-self: flex-start;
-      justify-content: flex-end;
-      width: auto;
-      margin-top: 11px;
+      flex-basis: $_filter-min-width * 3 + $_filter-gap * 2;
+      margin-top: 0;
       margin-bottom: 0;
     }
 
-    &.form-list-filter {
-      .search-input {
-        width: auto;
-
-        @include respond($break75) {
-          flex-grow: 1;
-        }
-
-        @include respond($break95) {
-          width: 200px;
-        }
-      }
-
-      .select-group.inline {
-        @include respond($break75) {
-          width: auto;
-          padding-top: 0;
-          margin-left: 0;
-        }
-      }
-
-      .reset-button {
-        position: absolute;
-        top: 100%;
-        left: 0;
-      }
-
-      &:not(.entity-section-wrapper__tools--wide) {
-        @include respond($break95) {
-          right: 0;
-          left: unset;
-          text-align: right;
-        }
-      }
+    .form-list-filter__reset-button {
+      position: absolute;
+      top: 100%;
+      left: 0;
     }
 
-    &--wide.form-list-filter {
-      flex-basis: auto;
+    &--wide {
+      flex-basis: 100%;
+      margin-top: 30px;
       margin-bottom: 46px;
-
-      @include respond($break75) {
-        flex-basis: 100%;
-        flex-direction: column;
-        margin-top: 30px;
-
-        .select:first-child {
-          margin-left: 0;
-        }
-      }
-
-      @include respond($break90) {
-        flex-direction: row;
-      }
-
-      .select-group.inline {
-        padding-top: 15px;
-
-        @include respond($break90) {
-          padding-top: 0;
-          padding-left: 15px;
-        }
-      }
     }
   }
 
@@ -269,12 +216,14 @@
     &--warning {
       font-style: italic;
 
-      i, em {
+      i,
+      em {
         font-style: normal;
       }
     }
 
-    &--incomplete, &--notice {
+    &--incomplete,
+    &--notice {
       @include templateHead;
       display: flex;
       flex-direction: column;
@@ -344,9 +293,7 @@
         color: $defaultNoticeColor;
       }
     }
-
   }
-
 
   &__utility {
     @include utilityPrimary;

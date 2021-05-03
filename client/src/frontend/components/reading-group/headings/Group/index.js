@@ -9,7 +9,7 @@ import ChildNav from "./ChildNav";
 import ManageGroup from "./ManageGroup";
 import GroupSummaryBox from "./GroupSummaryBox";
 
-function Heading({ readingGroup, canUpdateGroup, history, location }) {
+function GroupHeading({ readingGroup, canUpdateGroup, history, location }) {
   const uid = useUID();
   const summaryRef = useRef();
 
@@ -34,7 +34,6 @@ function Heading({ readingGroup, canUpdateGroup, history, location }) {
         <div className="group-page-heading__flex-container">
           <Title groupName={groupName} />
           <div className="group-page-heading__button-container">
-            {/* <ArchiveToggle readingGroup={readingGroup} /> */}
             <DetailsToggle
               onClick={() => setShowDetails(prevState => !prevState)}
               controls={uid}
@@ -70,13 +69,13 @@ function Heading({ readingGroup, canUpdateGroup, history, location }) {
   );
 }
 
-Heading.displayName = "ReadingGroup.Heading";
+GroupHeading.displayName = "ReadingGroup.GroupHeading";
 
-Heading.propTypes = {
+GroupHeading.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   canUpdateGroup: PropTypes.bool
 };
 
-export default Heading;
+export default GroupHeading;

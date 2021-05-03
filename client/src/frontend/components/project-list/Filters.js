@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import omitBy from "lodash/omitBy";
-import { UID } from "react-uid";
 import isEmpty from "lodash/isEmpty";
-import Utility from "global/components/utility";
+import { ListFilters } from "global/components/list";
 
 import withScreenReaderStatus from "hoc/with-screen-reader-status";
 
@@ -40,8 +39,67 @@ export class ProjectListFilters extends Component {
     return "Search and filters reset.";
   }
 
-  get idPrefix() {
-    return "project-filter";
+  get searchProps() {
+    return {
+      inputRef: this.searchInput,
+      value: this.state.filters.keyword || "",
+      onChange: event => this.setFilters(event, "keyword")
+    };
+  }
+
+  get subjectOptions() {
+    if (!this.props.subjects?.length) return [];
+    return this.props.subjects.map(subject => {
+      return {
+        label: subject.attributes.name,
+        value: subject.id
+      };
+    });
+  }
+
+  get featuredOptions() {
+    if (this.props.hideFeatured) return null;
+    return { label: "Featured Projects", value: "featured" };
+  }
+
+  get sortFilter() {
+    return {
+      label: "Sort results",
+      value: this.state.filters.order || "",
+      onChange: event => this.setFilters(event, "order"),
+      options: [
+        {
+          label: "Sort",
+          value: ""
+        },
+        {
+          label: "A–Z",
+          value: "sort_title ASC"
+        },
+        {
+          label: "Z–A",
+          value: "sort_title DESC"
+        }
+      ]
+    };
+  }
+
+  get featuredAndSubjectFilter() {
+    const options = [this.featuredOptions, ...this.subjectOptions];
+
+    if (options.length < 1) return null;
+
+    return {
+      label: "Filter results",
+      value: this.filterValue(),
+      onChange: this.setFilters,
+      options: options.filter(Boolean)
+    };
+  }
+
+  get filters() {
+    const filters = [this.sortFilter, this.featuredAndSubjectFilter];
+    return filters.filter(Boolean);
   }
 
   setFilters = (event, label) => {
@@ -87,22 +145,6 @@ export class ProjectListFilters extends Component {
     this.props.filterChangeHandler(filter);
   };
 
-  subjectOptions() {
-    if (!this.props.subjects || this.props.subjects.length === 0) return null;
-    return this.props.subjects.map(subject => {
-      return (
-        <option key={subject.id} value={subject.id}>
-          {subject.attributes.name}
-        </option>
-      );
-    });
-  }
-
-  featuredOptions() {
-    if (this.props.hideFeatured) return null;
-    return <option value="featured">Featured Projects</option>;
-  }
-
   filterValue() {
     const { featured, subject } = this.state.filters;
     if (featured === true || featured === "true") return "featured";
@@ -110,117 +152,16 @@ export class ProjectListFilters extends Component {
     return "";
   }
 
-  renderSearch() {
-    return (
-      <div className="search-input">
-        <button className="search-button" type="submit">
-          <span className="screen-reader-text">Search…</span>
-          <Utility.IconComposer
-            className="search-icon"
-            icon="search16"
-            size={20}
-          />
-        </button>
-        <UID name={id => `${this.idPrefix}-${id}`}>
-          {id => (
-            <>
-              <label htmlFor={id} className="screen-reader-text">
-                Enter Search Criteria
-              </label>
-              <input
-                ref={this.searchInput}
-                value={this.state.filters.keyword || ""}
-                type="text"
-                id={id}
-                onChange={event => this.setFilters(event, "keyword")}
-                placeholder="Search…"
-              />
-            </>
-          )}
-        </UID>
-      </div>
-    );
-  }
-
-  renderSort() {
-    return (
-      <UID name={id => `${this.idPrefix}-${id}`}>
-        {id => (
-          <>
-            <div className="select">
-              <label htmlFor={id} className="screen-reader-text">
-                Sort results
-              </label>
-              <select
-                id={id}
-                onChange={event => this.setFilters(event, "order")}
-                value={this.state.filters.order || ""}
-              >
-                <option value="">Sort</option>
-                <option value="sort_title ASC">A-Z</option>
-                <option value="sort_title DESC">Z-A</option>
-              </select>
-              <Utility.IconComposer
-                icon="disclosureDown16"
-                size={20}
-                iconClass="select__icon"
-              />
-            </div>
-          </>
-        )}
-      </UID>
-    );
-  }
-
-  renderFilters() {
-    if (!this.featuredOptions() && !this.subjectOptions()) return null;
-
-    return (
-      <UID name={id => `${this.idPrefix}-${id}`}>
-        {id => (
-          <>
-            <div className="select">
-              <label htmlFor={id} className="screen-reader-text">
-                Filter results
-              </label>
-              <select
-                id={id}
-                value={this.filterValue()}
-                onChange={this.setFilters}
-              >
-                <option value="">Show All</option>
-                {this.featuredOptions()}
-                {this.subjectOptions()}
-              </select>
-              <Utility.IconComposer
-                icon="disclosureDown16"
-                size={20}
-                iconClass="select__icon"
-              />
-            </div>
-          </>
-        )}
-      </UID>
-    );
-  }
-
   render() {
     return (
-      <form
-        className="form-list-filter entity-section-wrapper__tools"
+      <ListFilters
+        searchProps={this.searchProps}
+        filters={this.filters}
         onSubmit={this.updateResults}
-      >
-        {this.renderSearch()}
-        <div className="select-group inline">
-          {this.renderSort()}
-          {this.renderFilters()}
-        </div>
-        {this.showResetButton && (
-          <button className="reset-button" onClick={this.resetFilters}>
-            {"Reset Search + Filters"}
-          </button>
-        )}
-      </form>
+        onReset={this.resetFilters}
+        showResetButton={this.showResetButton}
+        className="entity-section-wrapper__tools"
+      />
     );
   }
 }

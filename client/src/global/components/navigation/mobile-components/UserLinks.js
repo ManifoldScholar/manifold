@@ -102,7 +102,7 @@ export default class UserLinks extends PureComponent {
               onClick={() => this.props.closeNavigation()}
             />
             <Link
-              to={lh.link("frontendReadingGroups")}
+              to={lh.link("frontendMyReadingGroups")}
               title="My Reading Groups"
               icon="annotationGroup24"
               onClick={() => this.props.closeNavigation()}

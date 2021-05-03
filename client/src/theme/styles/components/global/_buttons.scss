@@ -588,12 +588,12 @@
   }
 }
 
-@mixin buttonTertiary {
+.button-tertiary {
   @include utilityPrimary;
   display: inline-block;
   padding: 5px 14px 7px;
   font-size: 12px;
-  color: $neutral90;
+  color: var(--default-strong-color);
   text-align: center;
   text-decoration: none;
   letter-spacing: 0.134em;
@@ -604,11 +604,17 @@
   transition: color $duration $timing, background-color $duration $timing, border-color $duration $timing;
 
   &:hover,
-  &:focus-visible {
-    color: $neutralTextExtraDark;
+  &:focus-visible,
+  &--active {
+    color: var(--default-strong-color);
     background-color: $accentInteractionLight;
     border-color: $accentInteractionLight;
     outline: 0;
+  }
+
+  &--neutral {
+    background-color: var(--default-bg-color);
+    border-color: currentColor;
   }
 }
 

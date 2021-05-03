@@ -10,7 +10,8 @@ function HeadingDetailsToggle({ onClick, controls, active }) {
       aria-controls={controls}
       className={classNames({
         "group-page-heading__nav-button": true,
-        "group-page-heading__nav-button--active": active
+        "button-tertiary": true,
+        "button-tertiary--active": active
       })}
     >
       Details

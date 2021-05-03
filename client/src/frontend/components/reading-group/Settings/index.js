@@ -120,7 +120,7 @@ class ReadingGroupSettings extends PureComponent {
 
   redirectToList() {
     const { history } = this.props;
-    history.push(lh.link("frontendReadingGroups"));
+    history.push(lh.link("frontendMyReadingGroups"));
   }
 
   render() {

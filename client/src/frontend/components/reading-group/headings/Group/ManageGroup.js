@@ -49,7 +49,10 @@ function HeadingManageGroup({ readingGroup, history, location }) {
           >
             Edit group homepage
           </Link>
-          <a href="#settings" className="group-settings-link">
+          <a
+            href="#settings"
+            className="button-tertiary button-tertiary--neutral"
+          >
             Edit settings
           </a>
         </div>

@@ -7,7 +7,7 @@ export default class InlineValue extends React.PureComponent {
   static displayName = "GenericTable.InlineValue";
 
   static propTypes = {
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     srLabel: PropTypes.string,
     icon: PropTypes.string
   };

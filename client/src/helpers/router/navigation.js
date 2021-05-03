@@ -26,7 +26,7 @@ class Navigation {
       },
       {
         label: "Reading Groups",
-        route: "frontendReadingGroups",
+        route: "frontendMyReadingGroups",
         entity: "readingGroup",
         ability: "read"
       }
