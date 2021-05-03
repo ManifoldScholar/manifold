@@ -1,127 +1,168 @@
 .journal-detail {
-  $layout-breakpoint: $break60;
-
+  $row-gap-medium: 3.159vw;
+  $column-gap-medium: 4.839vw;
   display: grid;
-  grid-template-rows: 300px max-content 1fr;
-  gap: 2em;
-  font-family: $fontStackSans;
+  grid-template-rows: 25vw max-content auto;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: $column-gap-medium;
+  overflow-x: hidden;
 
-  &__callout-block {
-    &--mobile {
-      display: block;
-
-      @include respond($layout-breakpoint) {
-        display: none;
-      }
-    }
-
-    &--desktop {
-      display: none;
-
-      @include respond($layout-breakpoint) {
-        display: block;
-        width: 100%;
-      }
-    }
-
-    & + & {
-      margin-top: 12px;
-    }
-
-    + &__social-block {
-      margin-top: 35px;
-    }
-
-    .action-callout-list {
-      &--inline {
-        flex-flow: column;
-        width: auto;
-      }
-
-      &__link {
-        svg {
-          margin-right: 12px;
-        }
-      }
-
-      &__button {
-        &--secondary {
-          height: 40px;
-          border-radius: 6px;
-        }
-
-        &--left {
-          grid-template: 'icon text' auto / max-content 1fr;
-        }
-
-        &-text {
-          padding: 0 4px;
-          font-size: 14px;
-          text-align: left;
-          white-space: nowrap;
-        }
-      }
-    }
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 300px;
   }
 
-  &__banner {
-    width : 100%;
-    height: 300px;
-    overflow: hidden;
-    background-color:#B4A075;
+  &__header,
+  &__footer {
+    grid-column: 1 / span 5;
   }
 
-  &__body {
+  &__main {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 2em;
+    grid-template-rows: max-content 1fr;
 
-    &--left {
-      margin-left: 150px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column: 1 / span 5;
+    column-gap: 6vw;
+    max-width: 1178px;
+    padding: 70px 10vw 0;
 
-      &--titleRow {
-        display: grid;
-        grid-template-columns: max-content max-content;
-        gap: 15px;
-        align-content: center;
-        font-size: 30px;
+    &__title-description {
+      grid-column: 1 / span 3;
+    }
 
-        &__collecting {
-          align-self: center;
-          transform: translateY(-8px);
+    &__social {
+      margin: 40px 0 90px;
+    }
+
+    &__callout-list {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      min-width: 220px;
+    }
+
+    @include respond($break60, 'max') {
+      &__title-description,
+      &__callout-list {
+        grid-column: 1 / span 5;
+      }
+    }
+  }
+
+  &__title-row {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    gap: 15px;
+    align-content: center;
+    padding-bottom: 40px;
+    font-size: 30px;
+
+    &__collecting {
+      align-self: center;
+      transform: translateY(-8px);
+    }
+  }
+
+  &__callouts {
+    grid-column: span 2;
+    .journal-detail__callout-block {
+      .action-callout-list {
+        flex-flow: column;
+
+        &__button {
+          &--secondary {
+            height: 40px;
+            border-radius: 6px;
+          }
+
+          &--left {
+            grid-template: 'icon text' auto / max-content 1fr;
+          }
+
+          &-text {
+            padding: 0 4px;
+            font-size: 14px;
+            text-align: left;
+          }
+        }
+
+        &__link {
+          &-text {
+            margin: auto 0 auto 10px;
+          }
+        }
+
+        &--inline {
+          margin: 0;
         }
       }
-
-      &__description {
-        margin: 40px 0;
-      }
     }
+  }
 
-    &--right {
-      padding: 0 150px 0 75px;
+  &__social-link {
+    margin: 0 8px;
+  }
+
+  @media (max-width: $break60) {
+    &__main,
+    &__main__callouts {
+      grid-column: 1 / span 5;
     }
+  }
+
+  &__footer {
+    display: flex;
   }
 
   &__volumes {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    max-width: 1178px;
+    padding: 0 10vw;
+    margin-bottom: 5vw;
+
+    &__label {
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      line-height: 17px;
+      color: #696969;
+      margin-bottom: 30px;
+
+      &--numeric {
+        color: #363636;
+        font-weight: 600;
+      }
+    }
+
     .volume {
+      display: flex;
+      flex-flow: column;
+      width: 100%;
       padding: 0;
-      margin: 30px 150px;
+      margin-bottom: 60px;
+      overflow-x: scroll;
       background-color: #F7F7F7;
       border-radius: 6px;
-      overflow: hidden;
 
-      &__titleBar {
-        display: grid;
-        grid-template: auto / max-content min-content;
-        gap: 1em;
-        align-content: center;
-        align-items: center;
-        padding: 20px 48px;
+      &__title-bar {
+        display: flex;
+        flex-flow: row;
+        width: 100%;
+        padding: 19px 48px;
         cursor: pointer;
         transition: background-color 250ms;
 
         &:hover {
           background-color: #ECECEC;
+
+          .volume__title-bar-icon {
+            opacity: 1;
+          }
         }
 
         &-title {
@@ -132,23 +173,20 @@
         }
 
         &-icon {
+          margin: auto 0 auto 14px;
           opacity: 0;
           transition: opacity 250ms;
-
-          &:hover {
-            opacity: 1;
-          }
         }
       }
 
       &__issuesBar {
+        display: flex;
+        flex-flow: wrap;
         padding: 0 30px;
-        display: grid;
-        grid-auto-flow: column;
 
         &-issue {
-          transform: scale(.75);
           margin-top: -30px;
+          transform: scale(0.75);
         }
       }
     }
