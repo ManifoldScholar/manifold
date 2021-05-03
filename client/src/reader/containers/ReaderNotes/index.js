@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { meAPI, requests } from "api";
+import { meAPI, readingGroupsAPI, requests } from "api";
 import { select, grab, meta, loaded } from "utils/entityUtils";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
@@ -91,7 +91,16 @@ export class ReaderNotesContainer extends Component {
   };
 
   fetchAnnotations(state, props) {
-    const annotationsCall = meAPI.annotations(state.filter);
+    const {
+      filter: { reading_group: readingGroup, ...filters }
+    } = state;
+    // By default, show only my annotations
+    let annotationsCall = meAPI.annotations(filters);
+
+    if (readingGroup && readingGroup !== "") {
+      annotationsCall = readingGroupsAPI.annotations(readingGroup, filters);
+    }
+
     props.dispatch(request(annotationsCall, this.requestName));
   }
 
@@ -158,6 +167,7 @@ export class ReaderNotesContainer extends Component {
       handleVisitAnnotation: this.handleVisitAnnotation,
       handleFilterChange: this.handleFilterChange,
       handleSeeAllClick: this.handleSeeAllClick,
+      handleReadingGroupChange: this.handleReadingGroupChange,
       annotated: props.annotated,
       loaded: props.loaded,
       filter: this.state.filter
