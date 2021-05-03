@@ -6,9 +6,9 @@ import PropTypes from "prop-types";
 const Volume = ({ volume }) => {
   return (
     <div className="volume">
-      <div className="volume__titleBar">
-        <div className="volume__titleBar-title">{volume.title}</div>
-        <div className="volume__titleBar-icon">
+      <div className="volume__title-bar">
+        <div className="volume__title-bar-title">{volume.title}</div>
+        <div className="volume__title-bar-icon">
           <Utility.IconComposer icon="arrowRight16" size={24} />
         </div>
       </div>

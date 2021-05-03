@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ResponsiveImage from "../../../global/components/ResponsiveImage";
 import Social from "../project/Hero/Social";
 import Collecting from "frontend/components/collecting";
@@ -9,6 +9,7 @@ import Authorization from "../../../helpers/authorization";
 import abilities from "../../../test/fixtures/structures/abilities";
 import metadata from "../../../test/fixtures/structures/metadata";
 import Volume from "./volume/volume";
+import Content from "../project/Content";
 
 const issue = {
   id: "61d04422-fc06-4197-9525-62f33417dbc0",
@@ -85,6 +86,13 @@ const JournalDetail = ({
     }
     volumes.push(vol);
   }
+
+  const [issuesLength, setIssuesLength] = useState(() => {
+    let len = 0;
+    volumes.forEach(vol => (len += vol.issues.length));
+    return len;
+  });
+
   const authorization = new Authorization();
   const authorized = authorization.authorizeAbility({
     entity: journal,
@@ -120,7 +128,7 @@ const JournalDetail = ({
       ac.attributes.kind = "iconButton";
       const iconType = ac.attributes.button ? "share24" : "arrowRight16";
       // eslint-disable-next-line no-param-reassign
-      ac.attributes.icon = { svg: iconType, size: 16 };
+      ac.attributes.icon = { svg: iconType, size: 24 };
 
       return ac;
     });
@@ -143,61 +151,64 @@ const JournalDetail = ({
   };
   return (
     <div className={blockClass}>
-      <div className={`${blockClass}__banner`}>
+      <header className={`${blockClass}__header`}>
         {hasBackgroundImage() && (
           <ResponsiveImage {...props} image={getSrcSet()} />
         )}
-      </div>
-      <div className={`${blockClass}__body`}>
-        <div className={`${blockClass}__body--left`}>
-          <div className={`${blockClass}__body--left--titleRow`}>
-            <div className={`${blockClass}__body--left--titleRow__title`}>
+      </header>
+      <main className={`${blockClass}__main`}>
+        <div className={`${blockClass}__main__title-description`}>
+          <div className={`${blockClass}__title-row`}>
+            <div className={`${blockClass}__title-row__title`}>
               {journal.attributes.title}
             </div>
-            <div className={`${blockClass}__body--left--titleRow__collecting`}>
+            <div className={`${blockClass}__title-row__collecting`}>
               <Collecting.Toggle collectable={journal} />
             </div>
           </div>
           <div
-            className={`${blockClass}__body--left__description`}
+            className={`${blockClass}__main__description`}
             dangerouslySetInnerHTML={{
               __html: journal.attributes.descriptionFormatted
             }}
           />
-          <div>
+          <div className={`${blockClass}__main__social`}>
+            <Social blockClass={blockClass} project={journal} />
+          </div>
+        </div>
+        <div className={`${blockClass}__main__callout-list`}>
+          <aside className={`${blockClass}__callouts`}>
             <CalloutList
               authorized={authorized}
               blockClass={blockClass}
               callouts={callouts()}
-              layoutClass={"stacked"}
+              layoutClass={"inline"}
               showErrors={showErrors}
-              visibilityClass={"mobile"}
+              visibilityClass={"desktop"}
             />
-          </div>
-          <div className={`${blockClass}__social`}>
-            <Social
-              wrapperClassName={`${blockClass}__left-bottom-block`}
-              blockClass={blockClass}
-              project={journal}
-            />
-          </div>
+          </aside>
         </div>
-        <div className="journal-detail__body--right">
-          <CalloutList
-            authorized={authorized}
-            blockClass={blockClass}
-            callouts={callouts()}
-            layoutClass={"inline"}
-            showErrors={showErrors}
-            visibilityClass={"desktop"}
-          />
+      </main>
+
+      <footer className={`${blockClass}__footer`}>
+        <div className={`${blockClass}__volumes`}>
+          <div className={`${blockClass}__volumes__label`}>
+            There are{" "}
+            <span className={`${blockClass}__volumes__label--numeric`}>
+              {issuesLength}
+            </span>{" "}
+            issues in{" "}
+            <span className={`${blockClass}__volumes__label--numeric`}>
+              {volumes.length}
+            </span>{" "}
+            volumes
+          </div>
+          {volumes.map(volume => {
+            return <Volume key={volume.id} volume={volume} />;
+          })}
         </div>
-      </div>
-      <div className="journal-detail__volumes">
-        {volumes.map(volume => {
-          return <Volume volume={volume} />;
-        })}
-      </div>
+        {/* <Content project={journal} /> */}
+      </footer>
     </div>
   );
 };
