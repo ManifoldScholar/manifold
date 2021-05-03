@@ -74,7 +74,7 @@ class ReadingGroupsMembersContainer extends Component {
   }
 
   get groupsRoute() {
-    return lh.link("frontendReadingGroups");
+    return lh.link("frontendMyReadingGroups");
   }
 
   get membersRoute() {

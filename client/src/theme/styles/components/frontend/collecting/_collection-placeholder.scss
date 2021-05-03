@@ -38,8 +38,4 @@ $_inner-padding-lateral: max(4.5%, 20px);
       margin-left: 10px;
     }
   }
-
-  &__link {
-    @include buttonTertiary;
-  }
 }

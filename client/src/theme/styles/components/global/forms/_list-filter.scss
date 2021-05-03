@@ -1,198 +1,144 @@
-// NB: There may be more than one of these in the future,
-// but for the time being, this is specific to the inline
-// Search + dropdown filters on the frontend
 .form-list-filter {
-  // Height Defined in em units to be responsive to type size
-  $inputHeight: 2.857em;
-  display: block;
-  padding-bottom: 26px;
-  font-size: 0;
+  $_input-gap: entity-filter-form(gap);
+  $_select-min-width: entity-filter-form(select-min-width);
+  $_search-min-width: entity-filter-form(search-min-width);
 
-  @include respond($break90) {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -1 * $_input-gap;
+  margin-left: -1 * $_input-gap;
+
+  > * {
+    flex-grow: 1;
+    margin-top: $_input-gap;
+    margin-left: $_input-gap;
+  }
+
+  @supports (gap: 10px) {
+    gap: $_input-gap;
+    margin-top: 0;
+    margin-left: 0;
+
+    > * {
+      margin-top: 0;
+      margin-left: 0;
+    }
   }
 
   .resource-totals + & {
     padding-top: 40px;
   }
 
-  input[type='text'] {
+  &__label {
+    @include utilityPrimary;
+    display: block;
+    margin-bottom: $_input-gap;
+    font-size: 13px;
+  }
+
+  &__text-input {
     @include templateHead;
     width: 100%;
-    height: $inputHeight;
-    padding-right: 15px;
-    padding-left: 15px;
-    font-size: 14px;
-    letter-spacing: 0.01em;
+    padding: 6px 40px 8px 15px;
+    font-size: 17px;
     background-color: transparent;
-    border: 1px solid $neutralUIDark;
+    border: 1px solid;
 
     &:focus-visible::placeholder {
       color: $defaultFocusColor;
     }
-  }
 
-  .search-input {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-
-    @include respond($break75) {
-      width: 70%;
-    }
-
-    @include respond($break95) {
-      width: 40%;
-    }
-
-    .search-button {
-      @include buttonUnstyled;
-      @include outlineOnFocusVisible;
-      position: absolute;
-      top: 10px;
-      left: 14px;
-      font-size: 13px;
-
-      &:hover {
-        @include defaultHoverStyle;
-      }
-    }
-
-    input[type='text'] {
-      padding-left: 40px;
+    &--search {
+      padding-left: 44px;
+      border-radius: 20px;
 
       &:focus-visible {
-        outline: 0;
+        outline: none;
       }
     }
   }
 
-  .select-group {
+  &__search-field {
     position: relative;
-    display: block;
-    max-width: 100%;
-    padding-top: 15px;
-    margin-left: -10px;
+    display: inline-block;
+    flex-basis: 0;
+    flex-grow: 999;
+    width: 100%;
+    min-width: $_search-min-width;
+  }
 
-    + .select-group {
-      margin-top: 25px;
+  &__search-button {
+    @include buttonUnstyled;
+    @include outlineOnFocusVisible;
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    transform: translateY(-50%);
 
-      @include respond($break90) {
-        margin-top: 0;
-        margin-left: 0;
-      }
-    }
-
-    @include respond($break90) {
-      display: flex;
-    }
-
-    label {
-      @include utilityPrimary;
-      position: absolute;
-      top: 0;
-      left: 10px;
-      font-size: 13px;
-      color: $neutral50;
-    }
-
-    &.inline {
-      margin-bottom: 0;
-
-      @include respond($break75) {
-        display: block;
-        width: 100%;
-      }
-
-      @include respond($break95) {
-        display: inline-block;
-        width: 60%;
-        padding-top: 0;
-        margin-top: 0;
-        white-space: nowrap;
-      }
-
-
-      .select {
-        margin-top: 0;
-      }
-
-      .select + .select {
-        margin-top: 10px;
-
-        @include respond($break75) {
-          margin-top: 0;
-        }
-      }
-    }
-
-    .select {
-      position: relative;
-      width: 100%;
-      margin-top: 10px;
-      margin-left: 10px;
-
-      @include respond($break75) {
-        display: inline-block;
-        width: 200px;
-
-        .form-search-filter & {
-          width: 100%;
-        }
-      }
-
-      select {
-        @include filterSelectBase;
-        width: 100%;
-        height: $inputHeight;
-        font-size: 14px;
-        border: 1px solid $neutralUIDark;
-        transition: border-color $duration $timing;
-
-        &:focus-visible {
-          border-color: $defaultHoverColor;
-        }
-
-        .form-search-filter & {
-          font-size: 13px;
-
-          &:focus-visible {
-            border-color: $defaultFocusColor;
-          }
-        }
-
-        option {
-          color: $neutralBlack;
-        }
-      }
-
-      &__icon {
-        position: absolute;
-        top: 50%;
-        right: 12px;
-        color: $defaultHoverColor;
-        pointer-events: none;
-        transform: translateY(-50%);
-
-        // Use native dropdown arrow in IE9
-        .ie9 & {
-          display: none;
-        }
-      }
+    &:hover {
+      @include defaultHoverStyle;
     }
   }
 
-  .reset-button {
+  &__select-group {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax($_select-min-width, 1fr));
+    grid-gap: $_input-gap;
+    gap: $_input-gap;
+    margin-bottom: 0;
+
+    &--count-2 {
+      flex-basis: $_select-min-width * 2 + $_input-gap;
+    }
+
+    &--count-3 {
+      flex-basis: $_select-min-width * 3 + $_input-gap * 2;
+    }
+  }
+
+  &__select-field {
+    position: relative;
+  }
+
+  &__select-input {
+    @include filterSelectBase;
+    width: 100%;
+    padding-top: 11px;
+    padding-bottom: 12px;
+    font-size: 13px;
+    border: 1px solid var(--select-border-color);
+    border-radius: 6px;
+    transition: border-color $duration $timing;
+
+    &:focus-visible {
+      border-color: var(--default-hover-color);
+    }
+
+    option {
+      color: $neutralBlack;
+    }
+  }
+
+  &__select-icon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    color: var(--select-border-color);
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  &__reset-button {
     @include buttonUnstyled;
     @include utilityPrimary;
     margin-top: 8px;
     font-size: 14px;
 
     &:focus-visible {
-      color: $defaultFocusColor;
+      color: var(--default-focus-color);
     }
   }
 }

@@ -35,6 +35,7 @@ export class ProjectsContainer extends Component {
       Object.assign(baseFilters, filters),
       pagination
     );
+
     const projectsAction = request(projectsFetch, requests.feProjectsFiltered);
     const { promise: one } = dispatch(projectsAction);
     const promises = [one];

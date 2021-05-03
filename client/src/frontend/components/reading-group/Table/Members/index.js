@@ -14,6 +14,8 @@ import Authorize from "hoc/authorize";
 import lh from "helpers/linkHandler";
 
 export default class MembersTable extends PureComponent {
+  static displayName = "ReadingGroup.Table.Members";
+
   static propTypes = {
     members: PropTypes.array.isRequired,
     readingGroup: PropTypes.object.isRequired,
