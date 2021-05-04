@@ -125,7 +125,10 @@ export default class IssueGridItem extends Component {
 
     return (
       <>
-        <Link to={lh.link("frontendIssueDetail", issue.attributes.slug)}>
+        <Link
+          style={{ textDecoration: "none" }}
+          to={lh.link("frontendIssueDetail", issue.attributes.slug)}
+        >
           <figure className={figureClass}>
             <GlobalProject.Avatar project={issue} />
           </figure>

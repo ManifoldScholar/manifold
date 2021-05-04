@@ -12,10 +12,10 @@ const Volume = ({ volume }) => {
           <Utility.IconComposer icon="arrowRight16" size={24} />
         </div>
       </div>
-      <div className="volume__issuesBar">
+      <div className="volume__issues-bar">
         {volume.issues.map(issue => {
           return (
-            <div className="volume__issuesBar-issue">
+            <div className="volume__issues-bar-issue">
               <IssueGridItem
                 key={issue.id}
                 issue={issue}

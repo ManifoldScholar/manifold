@@ -26,7 +26,7 @@
     grid-template-columns: repeat(4, 1fr);
     grid-column: 1 / span 5;
     column-gap: 6vw;
-    max-width: 1178px;
+    max-width: 1380px;
     padding: 70px 10vw 0;
 
     &__title-description {
@@ -121,7 +121,7 @@
     display: flex;
     flex-flow: column;
     width: 100%;
-    max-width: 1178px;
+    max-width: 1380px;
     padding: 0 10vw;
     margin-bottom: 5vw;
 
@@ -143,7 +143,7 @@
       display: flex;
       flex-flow: column;
       width: 100%;
-      padding: 0;
+      padding-bottom: 68px;
       margin-bottom: 60px;
       overflow-x: scroll;
       background-color: #F7F7F7;
@@ -154,6 +154,7 @@
         flex-flow: row;
         width: 100%;
         padding: 19px 48px;
+        margin-bottom: 23px;
         cursor: pointer;
         transition: background-color 250ms;
 
@@ -179,14 +180,58 @@
         }
       }
 
-      &__issuesBar {
+      &__issues-bar {
         display: flex;
         flex-flow: wrap;
-        padding: 0 30px;
+        padding: 0 73px;
 
         &-issue {
-          margin-top: -30px;
-          transform: scale(0.75);
+          width: 200px;
+          margin: 23px 0;
+
+          a {
+            .cover {
+              width: 120px;
+              height: 177px;
+              border: 1px solid #b2b2b2;
+
+              img {
+                max-width: 100%;
+              }
+            }
+
+            .meta {
+
+              line-height: 20px;
+
+              .name {
+                margin: 20px 0 11px 0;
+                font-size: 17px;
+                color: #555555;
+              }
+              .relations-list {
+                font-size: 16px;
+                font-family: $fontStackSerif;
+              }
+              .date {
+                font-family: $fontStackSerif;
+                font-style: italic;
+                margin-top: 15px;
+              }
+            }
+
+            .meta {
+              .name {
+                .title-text {
+                  color: #363636;
+                  font-size: 17px;
+                  line-height: 20px;
+                  text-align: left;
+                  text-decoration: none;
+                }
+              }
+            }
+          }
         }
       }
     }
