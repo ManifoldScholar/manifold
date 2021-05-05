@@ -1,4 +1,4 @@
-import Grid from "./Grid";
+import Grid from "../atomic/grid-list";
 import Filters from "./Filters";
 import Placeholder from "./Placeholder";
 

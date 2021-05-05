@@ -287,7 +287,7 @@
       }
     }
 
-    + .entity-section-wrapper__body.project-list.empty {
+    + .entity-section-wrapper__body.grid-list.empty {
       margin-top: 6px;
 
       @include respond($break75) {
@@ -317,7 +317,7 @@
   }
 
   &__body {
-    &:not(.project-list) {
+    &:not(.grid-list) {
       width: 100%;
     }
 

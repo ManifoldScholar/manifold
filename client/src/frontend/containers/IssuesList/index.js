@@ -141,7 +141,7 @@ const IssuesListContainer = ({
             {issues.map(issue => {
               return (
                 <CSSTransition key={issue.id} timeout={250}>
-                  <li className="project-list__item--pos-rel">
+                  <li className="grid-list__item--pos-rel">
                     <IssueGridItem
                       issue={issue}
                       hideDesc

@@ -134,7 +134,7 @@ const JournalsList = ({
             {journals.map(journal => {
               return (
                 <CSSTransition key={journal.id} timeout={250}>
-                  <li className="project-list__item--pos-rel">
+                  <li className="grid-list__item--pos-rel">
                     <JournalGridItem
                       journal={journal}
                       hideDesc

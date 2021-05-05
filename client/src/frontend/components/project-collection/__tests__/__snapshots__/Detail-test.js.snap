@@ -1675,7 +1675,7 @@ exports[`frontend/components/project-collection/Detail matches the snapshot 1`] 
         }
       >
         <li
-          className="project-list__item--pos-rel"
+          className="grid-list__item--pos-rel"
         >
           <Project.GridItem
             project={
@@ -2216,7 +2216,7 @@ exports[`frontend/components/project-collection/Detail matches the snapshot 1`] 
         }
       >
         <li
-          className="project-list__item--pos-rel"
+          className="grid-list__item--pos-rel"
         >
           <Project.GridItem
             project={
@@ -2757,7 +2757,7 @@ exports[`frontend/components/project-collection/Detail matches the snapshot 1`] 
         }
       >
         <li
-          className="project-list__item--pos-rel"
+          className="grid-list__item--pos-rel"
         >
           <Project.GridItem
             project={

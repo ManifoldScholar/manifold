@@ -9,10 +9,10 @@ function CollectedProjects({ collectedIds, responses }) {
 
   return (
     <CollectionBlock title="Projects" icon="projects64" nested>
-      <div className="project-list grid entity-section-wrapper__body group-collection-category__bottom-margin-offset">
+      <div className="grid-list grid entity-section-wrapper__body group-collection-category__bottom-margin-offset">
         <ul>
           {collectedIds.map(id => (
-            <li key={id} className="project-list__item--pos-rel">
+            <li key={id} className="grid-list__item--pos-rel">
               <DeferredCollectable
                 id={id}
                 type="projects"

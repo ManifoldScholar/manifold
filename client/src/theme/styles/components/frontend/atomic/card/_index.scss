@@ -15,11 +15,14 @@
       width: 100%;
       padding: 19px 48px;
       margin-bottom: 23px;
+      background-color: rgba(236, 236, 236, 1);
       transition: background-color 250ms;
 
       &.is-linked {
+        background-color: rgba(236, 236, 236, 0);
+
         &:hover {
-          background-color: #ECECEC;
+          background-color: rgba(236, 236, 236, 1);
 
           .card__header-icon {
             opacity: 1;

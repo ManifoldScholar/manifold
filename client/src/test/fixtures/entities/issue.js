@@ -53,6 +53,18 @@ const issue = () => ({
       original:
         "http://localhost:3020/system/project/6/1/d/61d04422-fc06-4197-9525-62f33417dbc0/avatar/ed55038842cd470e076b2af304c41613.jpg"
     },
+    toc: [
+      "Letter from the Editor",
+      "Presidential Rhetoric and Congressional Support: A Case Study of the Impact of Presidential Rhetoric on Foreign Policy",
+      "The Lived Experience of Community College Student-Parents",
+      "Burning Greenhouses with Miles Davis: Class, Empathy, and Toxic Masculinity",
+      "Connecting the Pieces: John Altoon’s Ocean Park Series Fragments",
+      "Forces that Propelled the Civil War in El Salvador: Peasant Mobilization, the Catholic Church, and United States Intervention",
+      "Unseen and Unforgiving: Massage Brothels and the Sex Trafficking of Chinese Women",
+      "A Poor Divorce: The Impact of Economic Class on Divorce Accessibility and Processes",
+      "This Year's Staff",
+      "Author Biographies"
+    ],
     collectedByCurrentUser: false
   },
   relationships: { creators: [] },

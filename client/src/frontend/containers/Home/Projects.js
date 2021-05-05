@@ -80,7 +80,7 @@ export class HomeProjectsContainer extends Component {
             {projects.map(project => {
               return (
                 <CSSTransition enter exit timeout={{ enter: 250, exit: 250 }}>
-                  <li key={project.id} className="project-list__item--pos-rel">
+                  <li key={project.id} className="grid-list__item--pos-rel">
                     <ProjectGridItem
                       project={project}
                       hideDesc

@@ -26,7 +26,7 @@ storiesOf("Frontend/Journals", module).add("Grid", () => {
         {journals.map(issue => {
           return (
             <CSSTransition enter exit timeout={{ enter: 250, exit: 250 }}>
-              <li key={issue.id} className="project-list__item--pos-rel">
+              <li key={issue.id} className="grid-list__item--pos-rel">
                 <ProjectGridItem
                   project={issue}
                   hideDesc

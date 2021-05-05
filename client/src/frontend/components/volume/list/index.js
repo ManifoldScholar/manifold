@@ -1,7 +1,7 @@
 import React from "react";
 import IssueGridItem from "../../project-list/IssueGridItem";
 import PropTypes from "prop-types";
-import ProjectList from "frontend/components/project-list";
+import GridList from "../../atomic/grid-list";
 import Card from "../../atomic/card";
 
 const VolumeList = ({ volume, title, authorized }) => {
@@ -14,10 +14,10 @@ const VolumeList = ({ volume, title, authorized }) => {
         iconSize={24}
         link={["frontendVolumeDetail", volume.id, volume.attributes.number]}
       >
-        <ProjectList.Grid authenticated={authorized} limit={100}>
+        <GridList authenticated={authorized} limit={100}>
           {volume.issues.map(issue => {
             return (
-              <li className="project-list__item--pos-rel">
+              <li className="grid-list__item--pos-rel">
                 <IssueGridItem
                   key={issue.id}
                   issue={issue}
@@ -27,7 +27,7 @@ const VolumeList = ({ volume, title, authorized }) => {
               </li>
             );
           })}
-        </ProjectList.Grid>
+        </GridList>
       </Card>
     </div>
   );

@@ -1,6 +1,7 @@
 .journal-detail {
   $row-gap-medium: 3.159vw;
   $column-gap-medium: 4.839vw;
+  font-family: $fontStackSans;
   display: grid;
   grid-template-rows: 25vw max-content auto;
   grid-template-columns: repeat(4, 1fr);

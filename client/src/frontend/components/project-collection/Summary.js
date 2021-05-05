@@ -87,7 +87,7 @@ export default class ProjectCollectionSummary extends Component {
                     exit
                     timeout={{ enter: 250, exit: 250 }}
                   >
-                    <li className="project-list__item--pos-rel">
+                    <li className="grid-list__item--pos-rel">
                       <ProjectGridItem
                         authenticated={this.props.authentication.authenticated}
                         favorites={get(
@@ -103,7 +103,7 @@ export default class ProjectCollectionSummary extends Component {
               })}
             </ProjectList.Grid>
           ) : (
-            <div className="entity-section-wrapper__body project-list empty">
+            <div className="entity-section-wrapper__body grid-list empty">
               <p className="message">
                 {"This Project Collection is currently empty."}
               </p>

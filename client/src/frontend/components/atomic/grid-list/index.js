@@ -5,7 +5,7 @@ import { TransitionGroup as ReactTransitionGroup } from "react-transition-group"
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 
-const ProjectListGrid = ({
+const GridList = ({
   children,
   limit = 0,
   pagination,
@@ -73,9 +73,9 @@ const ProjectListGrid = ({
   );
 };
 
-ProjectListGrid.displayName = "ProjectList.Grid";
+GridList.displayName = "ProjectList.Grid";
 
-ProjectListGrid.propTypes = {
+GridList.propTypes = {
   children: PropTypes.node,
   limit: PropTypes.number,
   pagination: PropTypes.object,
@@ -86,4 +86,4 @@ ProjectListGrid.propTypes = {
   viewAllLabel: PropTypes.string
 };
 
-export default ProjectListGrid;
+export default GridList;

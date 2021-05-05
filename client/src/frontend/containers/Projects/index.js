@@ -202,7 +202,7 @@ export class ProjectsContainer extends Component {
             {projects.map(project => {
               return (
                 <CSSTransition key={project.id} timeout={250}>
-                  <li className="project-list__item--pos-rel">
+                  <li className="grid-list__item--pos-rel">
                     <ProjectGridItem
                       project={project}
                       hideDesc

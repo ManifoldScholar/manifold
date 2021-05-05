@@ -64,7 +64,7 @@ export default class ProjectCollectionDetail extends Component {
                   exit
                   timeout={{ enter: 250, exit: 250 }}
                 >
-                  <li className="project-list__item--pos-rel">
+                  <li className="grid-list__item--pos-rel">
                     <ProjectGridItem project={project} />
                   </li>
                 </CSSTransition>

@@ -83,7 +83,7 @@ export default class JournalSummary extends Component {
               {this.journals.map(journal => {
                 return (
                   <CSSTransition key={journal.id} timeout={250}>
-                    <li className="project-list__item--pos-rel">
+                    <li className="grid-list__item--pos-rel">
                       <JournalGridItem
                         authenticated={this.props.authentication.authenticated}
                         favorites={get(
@@ -99,7 +99,7 @@ export default class JournalSummary extends Component {
               })}
             </ProjectList.Grid>
           ) : (
-            <div className="entity-section-wrapper__body project-list empty">
+            <div className="entity-section-wrapper__body grid-list empty">
               <p className="message">
                 {"This Project Collection is currently empty."}
               </p>
