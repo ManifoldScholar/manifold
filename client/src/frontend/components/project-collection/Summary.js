@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ProjectList from "frontend/components/project-list";
+import GridList from "../atomic/grid-list";
 import get from "lodash/get";
 import memoize from "lodash/memoize";
 import classnames from "classnames";
@@ -64,7 +64,7 @@ export default class ProjectCollectionSummary extends Component {
         <div className="container">
           <Header projectCollection={this.props.projectCollection} hasLink />
           {this.hasProjects ? (
-            <ProjectList.Grid
+            <GridList
               authenticated={this.props.authentication.authenticated}
               favorites={get(
                 this.props.authentication,
@@ -101,7 +101,7 @@ export default class ProjectCollectionSummary extends Component {
                   </CSSTransition>
                 );
               })}
-            </ProjectList.Grid>
+            </GridList>
           ) : (
             <div className="entity-section-wrapper__body grid-list empty">
               <p className="message">

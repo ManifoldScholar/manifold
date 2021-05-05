@@ -1650,7 +1650,7 @@ exports[`frontend/components/project-collection/Detail matches the snapshot 1`] 
         singularUnit="project"
       />
     </div>
-    <ProjectList.Grid
+    <GridList
       pagination={
         Object {
           "currentPage": 1,
@@ -3286,7 +3286,7 @@ exports[`frontend/components/project-collection/Detail matches the snapshot 1`] 
           />
         </li>
       </Component>
-    </ProjectList.Grid>
+    </GridList>
   </div>
 </section>
 `;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ProjectList from "frontend/components/project-list";
+import GridList from "../atomic/grid-list";
 import Utility from "global/components/utility";
 import get from "lodash/get";
 import Header from "./Header";
@@ -49,7 +49,7 @@ export default class ProjectCollectionDetail extends Component {
             />
           </div>
 
-          <ProjectList.Grid
+          <GridList
             authenticated={this.props.authentication.authenticated}
             favorites={get(this.props.authentication, "currentUser.favorites")}
             dispatch={this.props.dispatch}
@@ -70,7 +70,7 @@ export default class ProjectCollectionDetail extends Component {
                 </CSSTransition>
               );
             })}
-          </ProjectList.Grid>
+          </GridList>
         </div>
       </section>
     );

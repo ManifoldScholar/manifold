@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Layout from "frontend/components/layout";
 import ProjectList from "frontend/components/project-list";
+import GridList from "../../components/atomic/grid-list";
 import Utility from "global/components/utility";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
@@ -191,7 +192,7 @@ export class ProjectsContainer extends Component {
               countOnly
             />
           </div>
-          <ProjectList.Grid
+          <GridList
             authenticated={authentication.authenticated}
             favorites={get(authentication, "currentUser.favorites")}
             dispatch={dispatch}
@@ -212,7 +213,7 @@ export class ProjectsContainer extends Component {
                 </CSSTransition>
               );
             })}
-          </ProjectList.Grid>
+          </GridList>
         </div>
       </section>
     );

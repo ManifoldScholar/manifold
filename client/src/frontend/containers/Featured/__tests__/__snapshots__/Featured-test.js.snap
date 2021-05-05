@@ -54,7 +54,7 @@ exports[`frontend/containers/Featured/Featured matches the snapshot 1`] = `
         hideFeatured={true}
         updateAction={[Function]}
       />
-      <ProjectList.Grid
+      <GridList
         authenticated={true}
         projects={
           Array [
@@ -3232,7 +3232,7 @@ exports[`frontend/containers/Featured/Featured matches the snapshot 1`] = `
             />
           </li>
         </Component>
-      </ProjectList.Grid>
+      </GridList>
     </div>
   </section>
   <Connect(HigherOrder.WithCurrentUser('Layout.ButtonNavigation))

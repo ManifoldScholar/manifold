@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf, fixtures } from "helpers/storybook/exports";
 import { number } from "@storybook/addon-knobs";
-import ProjectList from "frontend/components/project-list";
+import GridList from "../../atomic/grid-list";
 import { CSSTransition } from "react-transition-group";
 import ProjectGridItem from "../ProjectGridItem";
 
@@ -17,7 +17,7 @@ storiesOf("Frontend/Journals", module).add("Grid", () => {
 
   return (
     <Context>
-      <ProjectList.Grid
+      <GridList
         authenticated
         pagination={pagination}
         paginationClickHandler={() => null}
@@ -36,7 +36,7 @@ storiesOf("Frontend/Journals", module).add("Grid", () => {
             </CSSTransition>
           );
         })}
-      </ProjectList.Grid>
+      </GridList>
     </Context>
   );
 });

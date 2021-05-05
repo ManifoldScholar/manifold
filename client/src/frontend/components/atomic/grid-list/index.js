@@ -73,7 +73,7 @@ const GridList = ({
   );
 };
 
-GridList.displayName = "ProjectList.Grid";
+GridList.displayName = "Atomic.GridList";
 
 GridList.propTypes = {
   children: PropTypes.node,

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "frontend/components/layout";
 import ProjectList from "frontend/components/project-list";
+import GridList from "../../components/atomic/grid-list";
 import { bindActionCreators } from "redux";
 import { uiFilterActions, entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
@@ -100,7 +101,7 @@ export class FeaturedContainer extends Component {
               hideFeatured
             />
             {this.props.featuredProjects ? (
-              <ProjectList.Grid
+              <GridList
                 authenticated={this.props.authentication.authenticated}
                 favorites={get(
                   this.props.authentication,
@@ -122,7 +123,7 @@ export class FeaturedContainer extends Component {
                     </CSSTransition>
                   );
                 })}
-              </ProjectList.Grid>
+              </GridList>
             ) : null}
           </div>
         </section>

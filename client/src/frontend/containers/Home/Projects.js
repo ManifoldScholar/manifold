@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ProjectList from "frontend/components/project-list";
+import GridList from "../../components/atomic/grid-list";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
@@ -70,7 +71,7 @@ export class HomeProjectsContainer extends Component {
               </div>
             </div>
           </header>
-          <ProjectList.Grid
+          <GridList
             authenticated={authentication.authenticated}
             favorites={get(authentication, "currentUser.favorites")}
             dispatch={dispatch}
@@ -90,7 +91,7 @@ export class HomeProjectsContainer extends Component {
                 </CSSTransition>
               );
             })}
-          </ProjectList.Grid>
+          </GridList>
         </div>
       </section>
     );

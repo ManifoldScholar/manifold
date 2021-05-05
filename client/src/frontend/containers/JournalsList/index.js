@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import ProjectList from "frontend/components/project-list";
+import GridList from "../../components/atomic/grid-list";
 import Utility from "global/components/utility";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
@@ -123,7 +124,7 @@ const JournalsList = ({
               subjects={subjects}
             />
           </div>
-          <ProjectList.Grid
+          <GridList
             authenticated={authentication.authenticated}
             favorites={get(authentication, "currentUser.favorites")}
             dispatch={dispatch}
@@ -144,7 +145,7 @@ const JournalsList = ({
                 </CSSTransition>
               );
             })}
-          </ProjectList.Grid>
+          </GridList>
         </div>
       </section>
     );
