@@ -4,6 +4,7 @@
 @import './resource-collection/index';
 @import './event/index';
 @import './journal/index';
+@import './volume/index';
 @import './layout/index';
 @import './project/index';
 @import './project-list/index';
@@ -17,3 +18,4 @@
 @import './groups/index';
 @import 'content-block';
 @import 'collecting';
+@import './atomic/card';

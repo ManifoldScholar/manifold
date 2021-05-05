@@ -7,15 +7,15 @@
   column-gap: $column-gap-medium;
   overflow-x: hidden;
 
-  &__header {
+  &__banner {
     display: flex;
     align-items: center;
     justify-content: center;
     max-height: 300px;
   }
 
-  &__header,
-  &__footer {
+  &__banner,
+  &__volumes-info {
     grid-column: 1 / span 5;
   }
 
@@ -27,7 +27,7 @@
     grid-column: 1 / span 5;
     column-gap: 6vw;
     max-width: 1380px;
-    padding: 70px 10vw 0;
+    padding: 70px 7vw 0;
 
     &__title-description {
       grid-column: 1 / span 3;
@@ -36,15 +36,21 @@
     &__social {
       margin: 40px 0 90px;
     }
+    @include respond($break75, 'max') {
+      &__social {
+        margin: 36px 0;
+      }
+    }
 
     &__callout-list {
       display: flex;
       align-items: center;
       justify-content: start;
       min-width: 220px;
+      margin-bottom: 50px;
     }
 
-    @include respond($break60, 'max') {
+    @include respond($break75, 'max') {
       &__title-description,
       &__callout-list {
         grid-column: 1 / span 5;
@@ -68,6 +74,7 @@
 
   &__callouts {
     grid-column: span 2;
+
     .journal-detail__callout-block {
       .action-callout-list {
         flex-flow: column;
@@ -106,15 +113,16 @@
     margin: 0 8px;
   }
 
-  @media (max-width: $break60) {
+  @media (max-width: $break75) {
     &__main,
     &__main__callouts {
       grid-column: 1 / span 5;
     }
   }
 
-  &__footer {
+  &__volumes-info {
     display: flex;
+    flex-flow: column;
   }
 
   &__volumes {
@@ -122,118 +130,50 @@
     flex-flow: column;
     width: 100%;
     max-width: 1380px;
-    padding: 0 10vw;
-    margin-bottom: 5vw;
+    padding: 0 7vw;
+    margin-bottom: 80px;
+
+    div:last-of-type {
+      margin-bottom: 0;
+    }
 
     &__label {
-      text-transform: uppercase;
+      margin-bottom: 30px;
       font-size: 14px;
-      letter-spacing: 1.5px;
       line-height: 17px;
       color: #696969;
-      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
 
       &--numeric {
-        color: #363636;
         font-weight: 600;
+        color: #363636;
+      }
+    }
+    @include respond($break75, 'max') {
+      &__label {
+        text-align: center;
+      }
+    }
+  }
+
+  &__meta {
+    padding: 0 7vw;
+
+    main {
+      .entity-section-wrapper__heading {
+        display: none;
       }
     }
 
-    .volume {
-      display: flex;
-      flex-flow: column;
-      width: 100%;
-      padding-bottom: 68px;
-      margin-bottom: 60px;
-      overflow-x: scroll;
-      background-color: #F7F7F7;
-      border-radius: 6px;
-
-      &__title-bar {
-        display: flex;
-        flex-flow: row;
-        width: 100%;
-        padding: 19px 48px;
-        margin-bottom: 23px;
-        cursor: pointer;
-        transition: background-color 250ms;
-
-        &:hover {
-          background-color: #ECECEC;
-
-          .volume__title-bar-icon {
-            opacity: 1;
-          }
-        }
-
-        &-title {
-          font-size: 26px;
-          line-height: 34px;
-          color: #2E2E2E;
-          text-align: left;
-        }
-
-        &-icon {
-          margin: auto 0 auto 14px;
-          opacity: 0;
-          transition: opacity 250ms;
-        }
-      }
-
-      &__issues-bar {
-        display: flex;
-        flex-flow: wrap;
-        padding: 0 73px;
-
-        &-issue {
-          width: 200px;
-          margin: 23px 0;
-
-          a {
-            .cover {
-              width: 120px;
-              height: 177px;
-              border: 1px solid #b2b2b2;
-
-              img {
-                max-width: 100%;
-              }
-            }
-
-            .meta {
-
-              line-height: 20px;
-
-              .name {
-                margin: 20px 0 11px 0;
-                font-size: 17px;
-                color: #555555;
-              }
-              .relations-list {
-                font-size: 16px;
-                font-family: $fontStackSerif;
-              }
-              .date {
-                font-family: $fontStackSerif;
-                font-style: italic;
-                margin-top: 15px;
-              }
-            }
-
-            .meta {
-              .name {
-                .title-text {
-                  color: #363636;
-                  font-size: 17px;
-                  line-height: 20px;
-                  text-align: left;
-                  text-decoration: none;
-                }
-              }
-            }
-          }
-        }
-      }
+    .meta-value {
+      font-size: 18px;
     }
+  }
+}
+
+@include respond($break75, 'max') {
+  .journal-detail {
+    grid-template-rows: 200px max-content auto;
   }
 }

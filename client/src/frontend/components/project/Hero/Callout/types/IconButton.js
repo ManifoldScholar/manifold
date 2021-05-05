@@ -28,7 +28,6 @@ const IconButton = ({ callout, blockClass }) => {
   };
 
   if (!url) return null;
-  console.log(iconSize());
   return (
     <Helper.UserLink url={url} className={calloutClass()}>
       <>

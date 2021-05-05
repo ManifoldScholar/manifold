@@ -1,12 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import Project from "frontend/components/project";
 import { Redirect } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import Schema from "global/components/schema";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
-import Image from "../../components/project/Hero/Image";
 import JournalDetail from "../../components/journal";
 
 const JournalDetailContainer = ({
@@ -17,10 +15,6 @@ const JournalDetailContainer = ({
   fetchData,
   ...props
 }) => {
-  const hasBackgroundImage = () => {
-    return true;
-  };
-
   if (!journalResponse) return null;
   if (journalResponse.status === 401)
     return <Redirect to={lh.link("frontend")} />;

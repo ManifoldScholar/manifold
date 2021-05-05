@@ -6,6 +6,7 @@ import JournalsList from "frontend/containers/JournalsList";
 import JournalWrapper from "frontend/containers/JournalWrapper";
 import JournalDetail from "frontend/containers/JournalDetail";
 import VolumeDetail from "frontend/containers/VolumeDetail";
+import VolumeWrapper from "frontend/containers/VolumeWrapper";
 import IssuesList from "frontend/containers/IssuesList";
 import IssueWrapper from "frontend/containers/IssueWrapper";
 import IssueDetail from "frontend/containers/IssueDetail";
@@ -49,6 +50,7 @@ export default {
   JournalsList,
   JournalWrapper,
   JournalDetail,
+  VolumeWrapper,
   VolumeDetail,
   IssuesList,
   IssueWrapper,

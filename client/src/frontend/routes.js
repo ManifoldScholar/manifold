@@ -74,11 +74,20 @@ const routes = {
               helper: p => `/journals/${p}`
             },
             {
-              name: "frontendVolumeDetail",
-              exact: true,
-              component: "VolumeDetail",
+              name: "frontendVolume",
+              exact: false,
+              component: "VolumeWrapper",
               path: "/journals/:id/volumes/:number",
-              helper: (p, n) => `/journals/${p}/volumes/${n}`
+              helper: (p, n) => `/journals/${p}/volumes/${n}`,
+              routes: [
+                {
+                  name: "frontendVolumeDetail",
+                  exact: true,
+                  component: "VolumeDetail",
+                  path: "/journals/:id/volumes/:number",
+                  helper: (p, n) => `/journals/${p}/volumes/${n}`
+                }
+              ]
             }
           ]
         }

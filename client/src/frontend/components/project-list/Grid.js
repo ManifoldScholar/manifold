@@ -17,11 +17,16 @@ const ProjectListGrid = ({
 }) => {
   const itemsList = () => {
     if (limit === 0) return [];
-    return limit ? React.Children.toArray(children).slice(0, limit) : React.Children.toArray(children);
+    return limit
+      ? React.Children.toArray(children).slice(0, limit)
+      : React.Children.toArray(children);
   };
 
   const viewAll = () => {
-    return showViewAll || (limit && viewAllUrl && React.Children.count(children) > limit);
+    return (
+      showViewAll ||
+      (limit && viewAllUrl && React.Children.count(children) > limit)
+    );
   };
 
   const renderViewAll = () => {
