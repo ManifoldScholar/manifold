@@ -211,11 +211,15 @@ jobs:
         cd api
         bin/rails db:setup
 
+    - name: "Increase file nodes"
+      run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
     - name: "Run API specs"
       env:
         PGHOST: localhost
         PGUSER: postgres
         RAILS_ENV: test
+
       run: |
         cd api
         bin/rspec spec --tag="~integration" --tag="~slow" --tag="~elasticsearch"
