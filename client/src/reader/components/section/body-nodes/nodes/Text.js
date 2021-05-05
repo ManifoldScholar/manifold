@@ -244,6 +244,7 @@ export default class TextNode extends Component {
 
     return (
       <span
+        tabIndex="1"
         {...props}
         ref={el => {
           this.el = el;
