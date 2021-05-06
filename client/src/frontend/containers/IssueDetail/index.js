@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Project from "frontend/components/project";
+import IssueDetail from "../../components/issue";
 import { Redirect } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
@@ -24,16 +25,16 @@ export default class IssueDetailContainer extends Component {
     if (!issue) return null;
 
     return (
-      <div className="project-detail">
+      <div>
         <CheckFrontendMode debugLabel="IssueDetail" isProjectHomePage />
         <HeadContent
           title={`\u201c${this.props.issue.attributes.titlePlaintext}\u201d on ${settings.attributes.general.installationName}`}
           description={this.props.issue.attributes.description}
         />
-        <Project.Detail
-          project={this.props.issue}
+        <IssueDetail
+          issue={this.props.issue}
           dispatch={this.props.dispatch}
-          backgroundImage={false}
+          backgroundImage
         />
         <Schema.Project
           attributes={issue.attributes}

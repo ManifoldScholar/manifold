@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import CollectionBlock from "frontend/components/collecting/CollectionBlock";
 import DeferredCollectable from "frontend/components/collecting/reading-group/static/DeferredCollectable";
-import GridItem from "frontend/components/project-list/GridItem";
+import ProjectGridItem from "frontend/components/grid-list-items/ProjectGridItem";
 
 function CollectedProjects({ collectedIds, responses }) {
   if (collectedIds.length < 1) return null;
@@ -20,7 +20,7 @@ function CollectedProjects({ collectedIds, responses }) {
               >
                 {response => {
                   return (
-                    <GridItem
+                    <ProjectGridItem
                       authenticated={false}
                       project={response}
                       hideCollectingToggle

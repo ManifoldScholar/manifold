@@ -12,7 +12,7 @@ import queryString from "query-string";
 import omitBy from "lodash/omitBy";
 import withSettings from "hoc/with-settings";
 import { CSSTransition } from "react-transition-group";
-import JournalGridItem from "../../components/project-list/JournalGridItem";
+import JournalGridItem from "../../components/grid-list-items/JournalGridItem";
 import { useDispatchJournals } from "hooks";
 
 const { request } = entityStoreActions;

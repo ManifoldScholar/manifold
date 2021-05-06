@@ -1,5 +1,5 @@
 import React from "react";
-import IssueGridItem from "../../project-list/IssueGridItem";
+import IssueGridItem from "../../grid-list-items/IssueGridItem";
 import PropTypes from "prop-types";
 import GridList from "../../atomic/grid-list";
 import Card from "../../atomic/card";

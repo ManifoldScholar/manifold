@@ -13,7 +13,7 @@ import queryString from "query-string";
 import omitBy from "lodash/omitBy";
 import withSettings from "hoc/with-settings";
 import { CSSTransition } from "react-transition-group";
-import IssueGridItem from "../../components/project-list/IssueGridItem";
+import IssueGridItem from "../../components/grid-list-items/IssueGridItem";
 import { useDispatchIssues } from "hooks";
 
 const { request } = entityStoreActions;

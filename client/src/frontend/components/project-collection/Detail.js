@@ -6,7 +6,7 @@ import get from "lodash/get";
 import Header from "./Header";
 import Filters from "./Filters";
 import { CSSTransition } from "react-transition-group";
-import ProjectGridItem from "../project-list/ProjectGridItem";
+import ProjectGridItem from "../grid-list-items/ProjectGridItem";
 
 export default class ProjectCollectionDetail extends Component {
   static displayName = "ProjectCollectionDetail";

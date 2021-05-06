@@ -12,7 +12,7 @@ import get from "lodash/get";
 import HeadContent from "global/components/HeadContent";
 import Utility from "global/components/utility";
 import { CSSTransition } from "react-transition-group";
-import ProjectGridItem from "../../components/project-list/ProjectGridItem";
+import ProjectGridItem from "../../components/grid-list-items/ProjectGridItem";
 
 const { setProjectFilters } = uiFilterActions;
 const { request, flush } = entityStoreActions;

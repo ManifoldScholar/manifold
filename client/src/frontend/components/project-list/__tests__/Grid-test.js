@@ -1,6 +1,6 @@
 import Grid from "../Grid";
 
-describe("frontend/components/project-list/Grid", () => {
+describe("frontend/components/atomic/grid-list", () => {
   def("projects", () => collectionFactory("project"));
   def("root", () => (
     <Grid

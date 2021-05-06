@@ -15,7 +15,7 @@ import debounce from "lodash/debounce";
 import withSettings from "hoc/with-settings";
 import { CSSTransition } from "react-transition-group";
 import difference from "lodash/difference";
-import ProjectGridItem from "../../components/project-list/ProjectGridItem";
+import ProjectGridItem from "../../components/grid-list-items/ProjectGridItem";
 
 const { request } = entityStoreActions;
 const defaultPage = 1;

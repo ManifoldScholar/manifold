@@ -7,7 +7,7 @@ import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import Header from "./Header";
 import { CSSTransition } from "react-transition-group";
-import ProjectGridItem from "../project-list/ProjectGridItem";
+import ProjectGridItem from "../grid-list-items/ProjectGridItem";
 
 export default class ProjectCollectionSummary extends Component {
   static displayName = "ProjectCollectionSummary";

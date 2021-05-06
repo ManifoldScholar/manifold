@@ -7,7 +7,7 @@ import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import Header from "../project-collection/Header";
 import { CSSTransition } from "react-transition-group";
-import JournalGridItem from "../project-list/JournalGridItem";
+import JournalGridItem from "../grid-list-items/JournalGridItem";
 
 export default class JournalSummary extends Component {
   static displayName = "JournalSummary";

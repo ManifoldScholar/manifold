@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "../../atomic/card";
 import Utility from "global/components/utility";
-import IssueGridItem from "../../project-list/IssueGridItem";
+import IssueGridItem from "../../grid-list-items/IssueGridItem";
 import classNames from "classnames";
 
 const VolumeDetail = ({ volume, blockClass = "volume-detail" }) => {
