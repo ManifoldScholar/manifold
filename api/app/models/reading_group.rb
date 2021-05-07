@@ -3,6 +3,7 @@ class ReadingGroup < ApplicationRecord
   include Authority::Abilities
   include Collector
   include CollectsReadingGroupEntries
+  include Filterable
   include ReceivesEntitlements
   include SerializedAbilitiesFor
   include TrackedCreator
