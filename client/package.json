@@ -118,7 +118,7 @@
     "immutability-helper": "^3.x",
     "isomorphic-fetch": "^2.2.0",
     "js-cookie": "^2.2.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mammoth": "^1.4.16",
     "minimist": "^1.2.3",
     "mkdirp": "^0.5.1",
