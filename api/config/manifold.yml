@@ -183,6 +183,7 @@ common: &1
           - text/html
           - text/yaml
           - application/markdown
+          - text/x-web-markdown
           - application/x-latex
           - text/x-latex
           - application/x-tex
@@ -373,6 +374,7 @@ common: &1
           - text/x-latex
           - application/x-tex
           - text/markdown
+          - text/x-web-markdown
           - text/x-tex
           - text/css
           - text/csv
