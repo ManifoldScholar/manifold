@@ -1,60 +1,27 @@
-.notes-filter {
+.notes-filter-container {
+  $_input-gap: entity-filter-form(gap);
+  $_select-min-width: entity-filter-form(select-min-width);
 
-  @include respond($break65) {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: baseline;
+  margin-top: 50px;
+  margin-bottom: 40px;
+
+  &__start {
+    flex-grow: 999;
   }
 
-  &__dropdown-container {
-    padding-top: 30px;
+  &__end {
+    flex-grow: 1;
 
-    @include respond($break65) {
-      display: flex;
-      padding-top: 0;
-      padding-left: 20px;
-    }
-  }
-
-  &__select-container {
-    position: relative;
-
-    @include respond($break65) {
-      width: 220px;
+    &--count-1 {
+      flex-basis: $_select-min-width;
     }
 
-    &:not(:first-child) {
-      margin-top: 12px;
-
-      @include respond($break65) {
-        margin-top: 0;
-        margin-left: 12px;
-      }
+    &--count-2 {
+      flex-basis: $_select-min-width * 2 + $_input-gap;
     }
-  }
-
-  &__select {
-    @include filterSelectBase;
-    @include outlineOnFocusVisible;
-    position: relative;
-    width: 100%;
-    height: 40px;
-    padding-bottom: 3px;
-    font-size: 13px;
-    color: $neutralTextExtraDark;
-    border: 1px solid $neutralTextDark;
-    border-radius: 6px;
-
-    &:focus-visible {
-      border-color: $defaultFocusColor;
-    }
-  }
-
-  &__icon {
-    position: absolute;
-    top: 9px;
-    right: 10px;
-    color: $neutralTextDark;
-    pointer-events: none;
   }
 }
