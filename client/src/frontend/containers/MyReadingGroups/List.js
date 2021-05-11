@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import queryString from "query-string";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
-import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import HeadContent from "global/components/HeadContent";
 import GroupsTable from "frontend/components/reading-group/Table/Groups";
@@ -46,7 +45,7 @@ function ReadingGroupsListContainer({
   );
 
   function updateUrlFromState() {
-    const pathname = lh.link("frontendMyReadingGroups");
+    const { pathname } = location;
     const params = { ...filterState, page: paginationState.number };
     const search = queryString.stringify(params);
     history.push({ pathname, search });
