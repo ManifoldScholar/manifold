@@ -7,6 +7,7 @@ import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import Schema from "global/components/schema";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
+import issueFixture from "../../../test/fixtures/entities/issue";
 
 export default class IssueDetailContainer extends Component {
   static propTypes = {
@@ -18,6 +19,7 @@ export default class IssueDetailContainer extends Component {
   };
 
   render() {
+    console.log(issueFixture().data);
     if (!this.props.issueResponse) return null;
     if (this.props.issueResponse.status === 401)
       return <Redirect to={lh.link("frontend")} />;
@@ -32,7 +34,7 @@ export default class IssueDetailContainer extends Component {
           description={this.props.issue.attributes.description}
         />
         <IssueDetail
-          issue={this.props.issue}
+          issue={issueFixture().data}
           dispatch={this.props.dispatch}
           backgroundImage
         />

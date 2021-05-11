@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ResponsiveImage from "../../../global/components/ResponsiveImage";
+import ResponsiveImage from "../../../global/components/atomic/ResponsiveImage";
 import Social from "../project/Hero/Social";
 import Collecting from "frontend/components/collecting";
 import CalloutList from "../project/Hero/CalloutList";
@@ -10,9 +10,10 @@ import Utility from "global/components/utility";
 import classNames from "classnames";
 import Block from "../project/Content/Block";
 import issueFixture from "../../../test/fixtures/entities/issue";
+import { getSrcSet } from "../../../helpers/images";
 
 // temporary
-const issue = issueFixture();
+const issue = issueFixture().data;
 const volumes = [];
 for (let i = 0; i < 3; i++) {
   const vol = {
@@ -56,21 +57,6 @@ const JournalDetail = ({
     // TODO: this will be data-driven
     return true;
   };
-  const getSrcSet = () => {
-    const attrs = journal.attributes;
-    return {
-      renditions: [
-        {
-          width: attrs.avatarMeta.mediumLandscape,
-          distributionUrl: attrs.heroStyles.mediumLandscape
-        },
-        {
-          width: attrs.avatarMeta.largeLandscape,
-          distributionUrl: attrs.heroStyles.largeLandscape
-        }
-      ]
-    };
-  };
 
   const callouts = set => {
     // TODO: This needs to come from the backend
@@ -105,7 +91,16 @@ const JournalDetail = ({
     <div className={blockClass}>
       <header className={`${blockClass}__banner`}>
         {hasBackgroundImage() && (
-          <ResponsiveImage {...props} image={getSrcSet()} />
+          <ResponsiveImage
+            {...props}
+            image={getSrcSet(
+              journal.attributes,
+              "avatarMeta",
+              "heroStyles",
+              ["medium", "large"],
+              "landscape"
+            )}
+          />
         )}
       </header>
       <main className={`${blockClass}__main`}>

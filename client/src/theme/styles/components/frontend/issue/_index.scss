@@ -30,8 +30,40 @@
     max-width: 1380px;
     padding: 70px 7vw 0;
 
+    &__title-row {
+      display: grid;
+      grid-template-columns: max-content max-content;
+      gap: 15px;
+      align-content: center;
+      padding-bottom: 20px;
+      font-size: 32px;
+
+      &__collecting {
+        align-self: center;
+        transform: translateY(-8px);
+      }
+    }
+
+    &__season-year {
+      font-family: $fontStackSerif;
+      font-size: 24px;
+      font-style: italic;
+      padding-bottom: 20px;
+    }
+
+    &__makers {
+      font-family: $fontStackSerif;
+      font-size: 20px;
+      padding-bottom: 20px;
+    }
+
     &__title-description {
       grid-column: 1 / span 3;
+    }
+
+    &__description {
+      font-family: $fontStackSerif;
+      font-size: 17px;
     }
 
     &__social {
@@ -59,59 +91,71 @@
     }
   }
 
-  &__title-row {
-    display: grid;
-    grid-template-columns: max-content max-content;
-    gap: 15px;
-    align-content: center;
-    padding-bottom: 40px;
-    font-size: 30px;
+  &__articles-info {
+    grid-column: 1 / span 5;
+  }
 
-    &__collecting {
-      align-self: center;
-      transform: translateY(-8px);
-    }
+  &__figure {
+    padding: 0 0 22px 19px;
   }
 
   &__callouts {
     grid-column: span 2;
+  }
 
-    .issue-detail__callout-block {
-      .action-callout-list {
-        flex-flow: column;
+  &__callout-block {
+    .action-callout-list {
+      flex-flow: column;
 
-        &__button {
-          &--secondary {
-            height: 40px;
-            border-radius: 6px;
-          }
-
-          &--left {
-            grid-template: 'icon text' auto / max-content 1fr;
-          }
-
-          &-text {
-            padding: 0 4px;
-            font-size: 14px;
-            text-align: left;
-          }
+      &__button {
+        &--secondary {
+          height: 40px;
+          border-radius: 6px;
         }
 
-        &__link {
-          &-text {
-            margin: auto 0 auto 10px;
-          }
+        &--left {
+          grid-template: 'icon text' auto / max-content 1fr;
         }
 
-        &--inline {
-          margin: 0;
+        &-text {
+          padding: 0 4px;
+          font-size: 14px;
+          text-align: left;
         }
+      }
+
+      &__link {
+        &-text {
+          margin: auto 0 auto 10px;
+        }
+      }
+
+      &--inline {
+        margin: 0;
       }
     }
   }
 
   &__social-link {
     margin: 0 8px;
+  }
+
+  &__credits-text {
+    @include templateCopy;
+    padding: 65px 0 0 19px;
+    margin: 0;
+    font-size: 16px;
+    font-style: italic;
+    color: $neutralTextDark;
+    letter-spacing: 0.012em;
+
+    em {
+      font-style: normal;
+    }
+
+    .project-hero--dark & {
+      color: $neutralTextLight;
+    }
   }
 
   @media (max-width: $break75) {

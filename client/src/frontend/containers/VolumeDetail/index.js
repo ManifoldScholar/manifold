@@ -15,7 +15,7 @@ const vol = volumeFixture();
 const issues = [];
 
 for (let j = 0; j < 4; j++) {
-  const iss = issue();
+  const iss = issue().data;
   iss.id = uuid.v1();
   vol.relationships.issues.push(iss);
 }
