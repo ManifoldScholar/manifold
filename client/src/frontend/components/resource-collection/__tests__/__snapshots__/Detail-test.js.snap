@@ -3733,7 +3733,7 @@ exports[`frontend/components/resource-collection/Detail matches the snapshot 1`]
         }
       }
     />
-    <WithScreenReaderStatus('ResourceList.Filters)
+    <ResourceList.Filters
       filterChangeHandler={[MockFunction]}
       initialFilterState={null}
       kinds={
