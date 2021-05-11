@@ -68,10 +68,10 @@ const IssueDetail = ({
   );
 
   const visibilityProps = {
-    showAuthors: false,
+    showAuthors: true,
     showCategoryLabels: false,
-    showDates: true,
-    showDescriptions: false,
+    showDates: false,
+    showDescriptions: true,
     showSubtitles: true,
     showCollectingToggle: false
   };
