@@ -50,7 +50,7 @@ function PublicReadingGroupsContainer({
   );
 
   function updateUrlFromState() {
-    const pathname = lh.link("frontendPublicReadingGroups");
+    const { pathname } = location;
     const params = { ...filterState, page: paginationState.number };
     const search = queryString.stringify(params);
     history.push({ pathname, search });
@@ -141,7 +141,6 @@ function PublicReadingGroupsContainer({
 }
 
 PublicReadingGroupsContainer.propTypes = {
-  match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,

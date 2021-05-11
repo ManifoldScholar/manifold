@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
-import Utility from "global/components/utility";
-import Filter from "./Filter";
 import isEmpty from "lodash/isEmpty";
 import omitBy from "lodash/omitBy";
+import Utility from "global/components/utility";
+import { ListFilters } from "global/components/list";
 
 export default class AnnotationNoteFilter extends React.PureComponent {
   static displayName = "Annotation.NoteFilter";
@@ -57,12 +56,38 @@ export default class AnnotationNoteFilter extends React.PureComponent {
   }
 
   get texts() {
+    if (!this.props.texts) return [];
     return this.props.texts.map(text => {
       return {
         label: text.attributes.title,
         value: text.id
       };
     });
+  }
+
+  get textFilter() {
+    return {
+      label: "Filter by text",
+      value: this.state.filter?.text || "",
+      onChange: this.updateTextFilter,
+      options: [{ label: "All texts", value: "" }, ...this.texts]
+    };
+  }
+
+  get membershipsFilter() {
+    if (!this.hasMemberships) return null;
+
+    return {
+      label: "Filter by member",
+      value: this.state.filter?.readingGroupMembership || "",
+      onChange: this.updateMemberFilter,
+      options: [{ label: "All members", value: "" }, ...this.memberships]
+    };
+  }
+
+  get filters() {
+    const filters = [this.textFilter, this.membershipsFilter];
+    return filters.filter(Boolean);
   }
 
   memberLabel(readingGroupMembership) {
@@ -83,41 +108,19 @@ export default class AnnotationNoteFilter extends React.PureComponent {
 
   render() {
     return (
-      <div className={"notes-filter"}>
-        <Utility.EntityCount
-          pagination={this.pagination}
-          singularUnit="Note"
-          pluralUnit="Notes"
-        />
-        <UID name={id => `notes-filter-${id}`}>
-          {id => (
-            <div
-              role="group"
-              aria-labelledby={`${id}-header`}
-              className={"notes-filter__dropdown-container"}
-            >
-              <p id={`${id}-header`} className="screen-reader-text">
-                Notes filters
-              </p>
-              <Filter
-                value={this.state.filter?.text || ""}
-                onChange={this.updateTextFilter}
-                label={"Filter by text"}
-                allOption={{ label: "All texts", value: "" }}
-                options={this.texts}
-              />
-              {this.hasMemberships && (
-                <Filter
-                  value={this.state.filter?.readingGroupMembership || ""}
-                  onChange={this.updateMemberFilter}
-                  label={"Filter by member"}
-                  allOption={{ label: "All members", value: "" }}
-                  options={this.memberships}
-                />
-              )}
-            </div>
-          )}
-        </UID>
+      <div className="notes-filter-container">
+        <div className="notes-filter-container__start">
+          <Utility.EntityCount
+            pagination={this.pagination}
+            singularUnit="Note"
+            pluralUnit="Notes"
+          />
+        </div>
+        <div
+          className={`notes-filter-container__end notes-filter-container__end--count-${this.filters.length}`}
+        >
+          <ListFilters filters={this.filters} />
+        </div>
       </div>
     );
   }

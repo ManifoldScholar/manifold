@@ -5,24 +5,10 @@
 
   display: flex;
   flex-wrap: wrap;
-  margin-top: -1 * $_input-gap;
-  margin-left: -1 * $_input-gap;
+  gap: $_input-gap;
 
   > * {
     flex-grow: 1;
-    margin-top: $_input-gap;
-    margin-left: $_input-gap;
-  }
-
-  @supports (gap: 10px) {
-    gap: $_input-gap;
-    margin-top: 0;
-    margin-left: 0;
-
-    > * {
-      margin-top: 0;
-      margin-left: 0;
-    }
   }
 
   .resource-totals + & {
@@ -87,6 +73,10 @@
     grid-gap: $_input-gap;
     gap: $_input-gap;
     margin-bottom: 0;
+
+    &--count-1 {
+      flex-basis: $_select-min-width;
+    }
 
     &--count-2 {
       flex-basis: $_select-min-width * 2 + $_input-gap;
