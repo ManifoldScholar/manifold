@@ -601,7 +601,8 @@
   background-color: $accentPrimaryPale;
   border: 1px solid $accentPrimaryPale;
   border-radius: 4px;
-  transition: color $duration $timing, background-color $duration $timing, border-color $duration $timing;
+  transition: color $duration $timing, background-color $duration $timing,
+    border-color $duration $timing;
 
   &:hover,
   &:focus-visible,
@@ -614,6 +615,11 @@
 
   &--neutral {
     background-color: var(--default-bg-color);
+    border-color: currentColor;
+  }
+
+  &--outlined {
+    background-color: transparent;
     border-color: currentColor;
   }
 }
