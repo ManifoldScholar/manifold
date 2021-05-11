@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import queryString from "query-string";
+import isEmpty from "lodash/isEmpty";
 import HeadContent from "global/components/HeadContent";
 import Utility from "global/components/utility";
 import Annotation from "global/components/Annotation";
@@ -11,17 +14,48 @@ import {
 
 const DEFAULT_PAGE = 1;
 const PER_PAGE = 10;
-const INIT_PAGINATION_STATE = {
-  number: DEFAULT_PAGE,
-  size: PER_PAGE
-};
 const INIT_FILTER_STATE = {
   formats: ["highlight", "annotation", "bookmark"]
 };
 
-function MyAnnotationsContainer() {
-  const [filterState, setFilterState] = useState(INIT_FILTER_STATE);
-  const [paginationState, setPaginationState] = useState(INIT_PAGINATION_STATE);
+function getSearch(location) {
+  return queryString.parse(location.search);
+}
+
+function setInitialFilterState(location) {
+  const { page, ...filters } = getSearch(location);
+  if (isEmpty(filters)) return INIT_FILTER_STATE;
+  return filters;
+}
+
+function setInitialPaginationState(location) {
+  const { page } = getSearch(location);
+  return {
+    number: page || DEFAULT_PAGE,
+    size: PER_PAGE
+  };
+}
+
+function MyAnnotationsContainer({ location, history }) {
+  const [filterState, setFilterState] = useState(
+    setInitialFilterState(location)
+  );
+  const [paginationState, setPaginationState] = useState(
+    setInitialPaginationState(location)
+  );
+
+  function updateUrlFromState() {
+    const { pathname } = location;
+    const params = { ...filterState, page: paginationState.number };
+    const search = queryString.stringify(params);
+    history.push({ pathname, search });
+  }
+
+  useEffect(
+    () => updateUrlFromState(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [JSON.stringify(filterState), JSON.stringify(paginationState)]
+  );
 
   useDispatchMyAnnotations(filterState, paginationState);
   useDispatchMyAnnotatedTexts();
@@ -65,14 +99,12 @@ function MyAnnotationsContainer() {
             </div>
           </header>
           {hasAnnotatedTexts && (
-            <div style={{ marginTop: 50, marginBottom: 40 }}>
-              <Annotation.NoteFilter
-                texts={annotatedTexts}
-                updateAnnotations={handleFilterChange}
-                initialFilterState={filterState}
-                pagination={annotationsMeta.pagination}
-              />
-            </div>
+            <Annotation.NoteFilter
+              texts={annotatedTexts}
+              updateAnnotations={handleFilterChange}
+              initialFilterState={filterState}
+              pagination={annotationsMeta.pagination}
+            />
           )}
           <div
             className="entity-section-wrapper__body"
@@ -98,5 +130,10 @@ function MyAnnotationsContainer() {
     </>
   );
 }
+
+MyAnnotationsContainer.propTypes = {
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};
 
 export default MyAnnotationsContainer;

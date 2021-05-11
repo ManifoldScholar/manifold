@@ -12,8 +12,9 @@ function Filters({
   showResetButton,
   className
 }) {
+  const Wrapper = onSubmit ? "form" : "div";
   return (
-    <form
+    <Wrapper
       onSubmit={onSubmit}
       className={classNames({
         "form-list-filter": true,
@@ -36,7 +37,7 @@ function Filters({
           {"Reset Search + Filters"}
         </button>
       )}
-    </form>
+    </Wrapper>
   );
 }
 
@@ -53,7 +54,7 @@ Filters.propTypes = {
       ...filterShape
     }).isRequired
   ),
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
   onReset: PropTypes.func,
   showResetButton: PropTypes.bool,
   className: PropTypes.string
