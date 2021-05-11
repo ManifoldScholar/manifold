@@ -12,7 +12,6 @@ import IconComposer from "global/components/utility/IconComposer";
 import { ArchiveGroup, EditGroup, JoinGroup } from "./actions";
 import { ListFilters } from "global/components/list";
 import lh from "helpers/linkHandler";
-import withScreenReaderStatus from "hoc/with-screen-reader-status";
 
 class GroupsTable extends PureComponent {
   static displayName = "ReadingGroup.Table.Groups";
@@ -31,7 +30,6 @@ class GroupsTable extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.initialState(props.initialFilterState);
-    this.searchInput = React.createRef();
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -43,11 +41,9 @@ class GroupsTable extends PureComponent {
   }
 
   get showResetButton() {
-    return !isEmpty(this.state.filters);
-  }
-
-  get resetMessage() {
-    return "Search and filters reset.";
+    const filterValues = Object.values(this.state.filters);
+    const appliedFilters = filterValues.filter(Boolean);
+    return !isEmpty(appliedFilters);
   }
 
   get groups() {
@@ -72,7 +68,6 @@ class GroupsTable extends PureComponent {
 
   get searchProps() {
     return {
-      inputRef: this.searchInput,
       value: this.state.filters.keyword || "",
       onChange: event => this.setFilters(event, "keyword")
     };
@@ -115,16 +110,11 @@ class GroupsTable extends PureComponent {
     return { filters };
   }
 
-  resetFilters = event => {
-    event.preventDefault();
+  resetFilters = () => {
     const newState = this.props.resetFilterState
       ? { filters: { ...this.props.resetFilterState } }
       : this.initialState();
     this.setState(newState, this.updateResults);
-    // update SR message
-    this.props.setScreenReaderStatus(this.resetMessage);
-    // focus on search field
-    this.searchInput.current.focus();
   };
 
   updateResults = event => {
@@ -234,4 +224,4 @@ class GroupsTable extends PureComponent {
   }
 }
 
-export default withScreenReaderStatus(GroupsTable);
+export default GroupsTable;

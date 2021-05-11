@@ -102,7 +102,6 @@
   }
 
   &__tools {
-    position: relative;
     width: 100%;
     padding-bottom: 0;
     margin-bottom: 36px;
@@ -128,12 +127,6 @@
       flex-basis: $_filter-min-width * 3 + $_filter-gap * 2;
       margin-top: 0;
       margin-bottom: 0;
-    }
-
-    .form-list-filter__reset-button {
-      position: absolute;
-      top: 100%;
-      left: 0;
     }
 
     &--wide {

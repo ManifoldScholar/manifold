@@ -43,7 +43,6 @@ export default class ProjectCollectionDetail extends Component {
               pagination={this.props.pagination}
               singularUnit="project"
               pluralUnit="projects"
-              countOnly
             />
           </div>
           <ProjectList.Grid

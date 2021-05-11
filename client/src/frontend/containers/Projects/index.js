@@ -164,7 +164,6 @@ export class ProjectsContainer extends Component {
               pagination={get(this.props.projectsMeta, "pagination")}
               singularUnit="project"
               pluralUnit="projects"
-              countOnly
             />
           </div>
           <ProjectList.Grid
