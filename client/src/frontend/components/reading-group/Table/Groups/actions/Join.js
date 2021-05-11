@@ -39,7 +39,7 @@ function JoinGroup({ confirm, readingGroup }) {
   return (
     <button
       onClick={handleClick}
-      className="button-tertiary button-tertiary--neutral"
+      className="button-tertiary button-tertiary--outlined"
     >
       Join
     </button>

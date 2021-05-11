@@ -36,7 +36,7 @@ function init(initialState) {
 
 function sortingReducer(state, action) {
   switch (action.type) {
-    case "categories":
+    case "sortCategories":
       return { ...state, categories: action.payload };
     case "sortMappings": {
       const { categoryId, type, sortedCollectables } = action.payload;
