@@ -1,29 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/resource-list/Filters matches the snapshot 1`] = `
-<Fragment>
-  <div
-    aria-atomic={true}
-    aria-live="polite"
-    className="screen-reader-text"
-    role="status"
-  />
-  <ResourceList.Filters
-    filterChangeHandler={[MockFunction]}
-    initialFilterState={Object {}}
-    kinds={
-      Array [
-        "image",
-        "video",
-      ]
+<WithScreenReaderStatus('Global.List.Filters)
+  className="entity-section-wrapper__tools entity-section-wrapper__tools--wide"
+  filters={
+    Array [
+      Object {
+        "label": "Kind",
+        "onChange": [Function],
+        "options": Array [
+          Object {
+            "label": "Type:",
+            "value": "",
+          },
+          Object {
+            "label": "Image",
+            "value": "image",
+          },
+          Object {
+            "label": "Video",
+            "value": "video",
+          },
+        ],
+        "value": "",
+      },
+      Object {
+        "label": "Tag",
+        "onChange": [Function],
+        "options": Array [
+          Object {
+            "label": "Tag:",
+            "value": "",
+          },
+          Object {
+            "label": "Dog",
+            "value": "dog",
+          },
+          Object {
+            "label": "Puppy",
+            "value": "puppy",
+          },
+        ],
+        "value": "",
+      },
+      Object {
+        "label": "Sort results",
+        "onChange": [Function],
+        "options": Array [
+          Object {
+            "label": "Sort",
+            "value": "",
+          },
+          Object {
+            "label": "A–Z",
+            "value": "sort_title ASC",
+          },
+          Object {
+            "label": "Z–A",
+            "value": "sort_title DESC",
+          },
+        ],
+        "value": "",
+      },
+    ]
+  }
+  onReset={[Function]}
+  onSubmit={[Function]}
+  searchProps={
+    Object {
+      "onChange": [Function],
+      "value": "",
     }
-    setScreenReaderStatus={[Function]}
-    tags={
-      Array [
-        "dog",
-        "puppy",
-      ]
-    }
-  />
-</Fragment>
+  }
+  showResetButton={false}
+/>
 `;

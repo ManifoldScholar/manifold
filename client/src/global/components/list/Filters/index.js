@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Search from "./Search";
 import Filter, { filterShape } from "./Filter";
+
+import withScreenReaderStatus from "hoc/with-screen-reader-status";
 
 function Filters({
   searchProps,
@@ -10,9 +12,18 @@ function Filters({
   onSubmit,
   onReset,
   showResetButton,
+  setScreenReaderStatus,
   className
 }) {
+  const searchInput = useRef(null);
   const Wrapper = onSubmit ? "form" : "div";
+
+  function handleReset() {
+    onReset();
+    setScreenReaderStatus("Search and filters reset.");
+    if (searchInput.current) searchInput.current.focus();
+  }
+
   return (
     <Wrapper
       onSubmit={onSubmit}
@@ -21,7 +32,7 @@ function Filters({
         [className]: !!className
       })}
     >
-      {searchProps && <Search {...searchProps} />}
+      {searchProps && <Search inputRef={searchInput} {...searchProps} />}
       <div
         className={classNames({
           "form-list-filter__select-group": true,
@@ -33,7 +44,11 @@ function Filters({
         ))}
       </div>
       {showResetButton && (
-        <button className="form-list-filter__reset-button" onClick={onReset}>
+        <button
+          type="button"
+          className="form-list-filter__reset-button"
+          onClick={handleReset}
+        >
           {"Reset Search + Filters"}
         </button>
       )}
@@ -45,7 +60,6 @@ Filters.displayName = "Global.List.Filters";
 
 Filters.propTypes = {
   searchProps: PropTypes.shape({
-    inputRef: PropTypes.object.isRequired,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired
   }),
@@ -57,7 +71,8 @@ Filters.propTypes = {
   onSubmit: PropTypes.func,
   onReset: PropTypes.func,
   showResetButton: PropTypes.bool,
+  setScreenReaderStatus: PropTypes.func.isRequired,
   className: PropTypes.string
 };
 
-export default Filters;
+export default withScreenReaderStatus(Filters);
