@@ -1623,7 +1623,7 @@ exports[`frontend/components/project-collection/Detail matches the snapshot 1`] 
     <div
       className="project-collection-header__filter"
     >
-      <WithScreenReaderStatus('ProjectCollection.Filters)
+      <ProjectCollection.Filters
         filterChangeHandler={[Function]}
       />
     </div>
@@ -1631,7 +1631,7 @@ exports[`frontend/components/project-collection/Detail matches the snapshot 1`] 
       className="entity-section-wrapper__details"
     >
       <EntityCount
-        countOnly={true}
+        countOnly={false}
         pagination={
           Object {
             "currentPage": 1,
