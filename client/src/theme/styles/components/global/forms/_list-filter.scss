@@ -3,6 +3,7 @@
   $_select-min-width: entity-filter-form(select-min-width);
   $_search-min-width: entity-filter-form(search-min-width);
 
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: $_input-gap;
@@ -124,8 +125,11 @@
   &__reset-button {
     @include buttonUnstyled;
     @include utilityPrimary;
+    position: absolute;
+    top: 100%;
+    left: 0;
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 13px;
 
     &:focus-visible {
       color: var(--default-focus-color);

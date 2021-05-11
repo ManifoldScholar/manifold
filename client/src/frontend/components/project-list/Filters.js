@@ -4,8 +4,6 @@ import omitBy from "lodash/omitBy";
 import isEmpty from "lodash/isEmpty";
 import { ListFilters } from "global/components/list";
 
-import withScreenReaderStatus from "hoc/with-screen-reader-status";
-
 export class ProjectListFilters extends Component {
   static displayName = "ProjectList.Filters";
 
@@ -20,7 +18,6 @@ export class ProjectListFilters extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState(props.initialFilterState);
-    this.searchInput = React.createRef();
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -32,16 +29,13 @@ export class ProjectListFilters extends Component {
   }
 
   get showResetButton() {
-    return !isEmpty(this.state.filters);
-  }
-
-  get resetMessage() {
-    return "Search and filters reset.";
+    const filterValues = Object.values(this.state.filters);
+    const appliedFilters = filterValues.filter(Boolean);
+    return !isEmpty(appliedFilters);
   }
 
   get searchProps() {
     return {
-      inputRef: this.searchInput,
       value: this.state.filters.keyword || "",
       onChange: event => this.setFilters(event, "keyword")
     };
@@ -93,7 +87,7 @@ export class ProjectListFilters extends Component {
       label: "Filter results",
       value: this.filterValue(),
       onChange: this.setFilters,
-      options: options.filter(Boolean)
+      options: [{ label: "Show all", value: "" }, ...options.filter(Boolean)]
     };
   }
 
@@ -127,16 +121,11 @@ export class ProjectListFilters extends Component {
     return { filters };
   }
 
-  resetFilters = event => {
-    event.preventDefault();
+  resetFilters = () => {
     const newState = this.props.resetFilterState
       ? { filters: { ...this.props.resetFilterState } }
       : this.initialState();
     this.setState(newState, this.updateResults);
-    // update SR message
-    this.props.setScreenReaderStatus(this.resetMessage);
-    // focus on search field
-    this.searchInput.current.focus();
   };
 
   updateResults = event => {
@@ -166,4 +155,4 @@ export class ProjectListFilters extends Component {
   }
 }
 
-export default withScreenReaderStatus(ProjectListFilters);
+export default ProjectListFilters;
