@@ -74,7 +74,7 @@ export default class ProjectGridItem extends Component {
       names = project.attributes.creatorNames;
     } else if (
       project.relationships.creators &&
-      project.relationships.creators.legnth > 0
+      project.relationships.creators.length > 0
     ) {
       names = project.relationships.creators
         .map(maker => maker.attributes.fullName)

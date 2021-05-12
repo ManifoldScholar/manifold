@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useUID } from "react-uid";
-import ProjectList from "frontend/components/project-list";
+import GridList from "../../../atomic/grid-list";
 import CollectionBlock from "frontend/components/collecting/CollectionBlock";
 
 import { useDispatchMyCollected, useSelectMyCollected } from "hooks";
@@ -40,7 +40,7 @@ function CollectedProjectsBlock() {
       title="Projects"
       icon="projects64"
     >
-      <ProjectList.Grid
+      <GridList
         authenticated={false}
         projects={collection}
         pagination={collectionMeta.pagination}

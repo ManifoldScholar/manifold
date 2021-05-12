@@ -1,5 +1,4 @@
-// Global .project-list.grid styles scoped for frontend
-.project-list {
+.grid-list {
   .browse & {
     li {
       border-color: $neutralUIDullDark;
@@ -80,7 +79,7 @@
 
         a {
           transition: background-color $duration ease-out,
-            box-shadow $duration ease-out;
+          box-shadow $duration ease-out;
         }
 
         a:hover, a:focus-visible {
@@ -94,10 +93,6 @@
 
         .cover {
           height: 160px;
-
-          &.cover-placeholder {
-            height: auto;
-          }
 
           > svg {
             max-width: 130px;

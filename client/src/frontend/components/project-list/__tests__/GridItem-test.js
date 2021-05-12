@@ -1,9 +1,10 @@
-import GridItem from "../GridItem";
+import ProjectGridItem from "../../grid-list-items/ProjectGridItem";
 
-describe("frontend/components/project-list/GridItem", () => {
+describe("frontend/components/grid-list-items/ProjectGridItem", () => {
   def("project", () => factory("project"));
   def("root", () => (
-    <GridItem
+    <ProjectGridItem
+      children={null}
       dispatch={$dispatch}
       project={$project}
       favorites={{}}
