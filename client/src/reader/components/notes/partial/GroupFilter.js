@@ -1,11 +1,11 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ReaderContext } from "helpers/contexts";
 import withReadingGroups from "hoc/with-reading-groups";
 
 import Filters from "global/components/list/Filters";
 
-class GroupFilter extends PureComponent {
+class GroupFilter extends Component {
   static displayName = "Notes.Partial.GroupFilter";
 
   static propTypes = {

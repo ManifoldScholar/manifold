@@ -13,7 +13,8 @@ export default class Group extends Component {
     readerSection: PropTypes.object,
     annotations: PropTypes.array,
     sectionName: PropTypes.string,
-    visitHandler: PropTypes.func
+    visitHandler: PropTypes.func,
+    showAnnotationCreator: PropTypes.bool
   };
 
   constructor(props) {
@@ -44,6 +45,7 @@ export default class Group extends Component {
       "notes-filtered-list__group": true,
       "notes-filtered-list__group--expanded": this.state.expanded
     });
+    const { showAnnotationCreator } = this.props;
 
     return (
       <Collapse isOpened={this.state.expanded}>
@@ -54,6 +56,7 @@ export default class Group extends Component {
                 key={annotation.id}
                 annotation={annotation}
                 visitHandler={this.props.visitHandler}
+                showAnnotationCreator={showAnnotationCreator}
               />
             );
           })}

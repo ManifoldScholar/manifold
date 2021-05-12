@@ -208,38 +208,26 @@
     white-space: nowrap;
   }
 
-  &__tag {
+  &__item-creator {
     display: flex;
     align-items: center;
+  }
+
+  &__item-creator-avatar {
+    width: 16px;
+    margin-right: 4px;
+  }
+
+  &__item-tag {
+    flex-shrink: 0;
     width: fit-content;
     max-width: 65%;
-    padding: 2px 15px 3px;
     margin-top: 12px;
-    line-height: 1.4;
-    background-color: $neutral05;
-    border-radius: 12px;
 
     @include respond($break95) {
-      flex-shrink: 0;
-      max-width: 225px;
       margin-top: -3px;
       margin-left: 40px;
     }
-  }
-
-  &__tag-text {
-    overflow: hidden;
-    font-size: 14px;
-    font-weight: regular;
-    color: $neutral75;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  &__tag-icon {
-    flex-shrink: 0;
-    margin-left: 6px;
-    color: $neutral75;
   }
   /* stylelint-enable property-no-vendor-prefix */
 }
