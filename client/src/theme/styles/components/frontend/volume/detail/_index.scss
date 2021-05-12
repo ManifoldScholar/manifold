@@ -1,0 +1,32 @@
+.volume-detail {
+  max-width: 1440px;
+  margin: 70px 6vw;
+  font-family: $fontStackSans;
+
+  .grid {
+    width: 200px;
+  }
+
+  .issue-toc {
+    .section-heading {
+      border-bottom: 1px solid #B2B2B2;
+      padding: 43px 0 23px;
+    }
+    .toc {
+      border-bottom: 1px solid #B2B2B2;
+      margin-bottom: 107px;
+
+      ul {
+        padding: 6px 0 30px 0;
+        margin: 0;
+        list-style-type: none;
+
+        li {
+          margin: 18px 0;
+          font-size: 18px;
+          color: #363636;
+        }
+      }
+    }
+  }
+}

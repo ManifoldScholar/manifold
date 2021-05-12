@@ -14,7 +14,12 @@ class Detail extends Component {
 
   static propTypes = {
     project: PropTypes.object,
-    settings: PropTypes.object
+    settings: PropTypes.object,
+    backgroundImage: PropTypes.bool
+  };
+
+  static defaultProps = {
+    backgroundImage: true
   };
 
   static contextType = FrontendModeContext;
@@ -28,12 +33,12 @@ class Detail extends Component {
   }
 
   render() {
-    const { project } = this.props;
+    const { project, backgroundImage } = this.props;
     if (!project) return <LoadingBlock />;
     return (
       <>
         <section>
-          <Hero project={project} />
+          <Hero showBackground={backgroundImage} project={project} />
           <Authorize
             entity={project}
             ability="fullyRead"
