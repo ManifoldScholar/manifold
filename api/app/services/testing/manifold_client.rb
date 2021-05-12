@@ -113,6 +113,14 @@ module Testing
       post("/api/v1/operations", body: body.to_json)
     end
 
+    def get_with_query(uri, filter: {}, **keys)
+      query = keys.merge(filter: filter.presence).compact
+
+      query_string = query.to_param
+
+      get "#{uri}?#{query_string}"
+    end
+
     private
 
     def apply_user!

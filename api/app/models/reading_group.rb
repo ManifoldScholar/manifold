@@ -48,6 +48,10 @@ class ReadingGroup < ApplicationRecord
   after_save :ensure_creator_membership
   before_destroy :update_annotations_privacy
 
+  scope :for_serialization, -> { includes(:reading_group_kind, :reading_group_count, reading_group_memberships: :user) }
+
+  scope :by_keyword, ->(value) { build_keyword_scope(value) if value.present? }
+  scope :with_sort_order, ->(value) { build_sort_order_scope(value) }
   scope :with_order, ->(by = nil) { by.present? ? order(by) : order(created_at: :desc) }
   scope :non_public, -> { where.not(privacy: "public") }
   scope :visible_to_public, -> { where(privacy: "public") }
@@ -103,6 +107,47 @@ class ReadingGroup < ApplicationRecord
   end
 
   class << self
+    def build_keyword_scope(value)
+      needle = "%#{value.gsub("%", "\\%")}%"
+
+      where arel_table[:name].matches(needle)
+    end
+
+    def build_sort_order_scope(value)
+      values = value.split(",")
+
+      return order(created_at: :asc) unless values.present?
+
+      values.reduce(all) do |q, value|
+        q.apply_sort_order_scope_value(value)
+      end
+    end
+
+    def apply_sort_order_scope_value(value)
+      case value
+      when /\A(?<attr>created_at|name)(?:_(?<dir>asc|desc))\z/i
+        dir = build_sort_order_direction(Regexp.last_match[:dir])
+
+        attr = arel_table[Regexp.last_match[:attr]]
+
+        order attr.public_send(dir)
+      when /\Acourse_(?<key>(?:starts|ends)_on)(?:_(?<dir>asc|desc))\z/i
+        dir = build_sort_order_direction(Regexp.last_match[:dir]).to_s.upcase
+
+        expression = Arel.sql(<<~SQL.strip_heredoc.squish.strip)
+        (course ->> '#{Regexp.last_match[:key]}')::date #{dir} NULLS LAST
+        SQL
+
+        order expression
+      else
+        all
+      end
+    end
+
+    def build_sort_order_direction(value)
+      /desc/i.match?(value) ? :desc : :asc
+    end
+
     # @param [String] code
     # @raise [ActiveRecord::RecordNotFound]
     # @return [ReadingGroup]
