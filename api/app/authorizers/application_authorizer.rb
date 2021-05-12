@@ -77,6 +77,8 @@ class ApplicationAuthorizer < Authority::Authorizer
     # @see RoleName::Admin
     # @param [User] user
     def admin_permissions?(user)
+      return false if user.blank?
+
       user.admin?
     end
 
