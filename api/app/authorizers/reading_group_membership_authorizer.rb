@@ -23,6 +23,7 @@ class ReadingGroupMembershipAuthorizer < ApplicationAuthorizer
   end
 
   def readable_by?(user, _options = {})
+    return false if user.blank?
     return false if reading_groups_disabled?
     return true if admin_permissions?(user)
 
@@ -35,8 +36,16 @@ class ReadingGroupMembershipAuthorizer < ApplicationAuthorizer
       true
     end
 
-    def readable_by?(_user, _options = {})
-      true
+    def readable_by?(user, options = {})
+      return false if reading_groups_disabled?
+
+      return true if admin_permissions? user
+
+      if options[:reading_group]
+        options[:reading_group].users.where(id: user).exists?
+      else
+        true
+      end
     end
   end
 end
