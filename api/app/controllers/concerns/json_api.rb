@@ -88,6 +88,7 @@ module JSONAPI
     params[:authority_user] = authority_user
     params[:pagination] = request.params[:page]
     params[:full] = (options[:full] || false)
+    params[:calculate_all_abilities] = (options[:calculate_all_abilities] || false)
     params
   end
 
