@@ -8,19 +8,13 @@ module API
       ].freeze
 
       resourceful! ReadingGroup, authorize_options: { except: [:index, :show] } do
-        ReadingGroup.includes(*EAGER_LOADS).visible_to_public.filtered(filter_options)
+        ReadingGroup.includes(*EAGER_LOADS).visible_to_public.filtered(with_pagination!(reading_group_filter_params))
       end
 
       def index
         @reading_groups = load_reading_groups
 
         render_multiple_resources @reading_groups, include: SERIALIZED_INCLUDES
-      end
-
-      private
-
-      def filter_options
-        with_pagination!({})
       end
     end
   end
