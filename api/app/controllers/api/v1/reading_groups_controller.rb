@@ -75,7 +75,7 @@ module API
 
         handle_monadic_operation! "reading_groups.join_public", options do |m|
           m.success do |reading_group_membership|
-            render_single_resource reading_group_membership
+            render_single_resource reading_group_membership, serializer: ::V1::ReadingGroupMembershipSerializer
           end
         end
       end
