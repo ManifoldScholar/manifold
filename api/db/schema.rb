@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_30_182454) do
+ActiveRecord::Schema.define(version: 2021_05_12_053226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -816,7 +816,6 @@ ActiveRecord::Schema.define(version: 2021_04_30_182454) do
     t.string "privacy", default: "private"
     t.string "invitation_code"
     t.boolean "notify_on_join", default: true
-    t.integer "memberships_count", default: 0, null: false
     t.uuid "creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1715,16 +1714,6 @@ UNION ALL
      LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
   GROUP BY u.id;
   SQL
-  create_view "reading_group_counts", sql_definition: <<-SQL
-    SELECT rg.id AS reading_group_id,
-    count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
-    count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-    count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
-    count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count
-   FROM (reading_groups rg
-     LEFT JOIN annotations a ON ((a.reading_group_id = rg.id)))
-  GROUP BY rg.id;
-  SQL
   create_view "text_title_summaries", sql_definition: <<-SQL
     SELECT text_titles.text_id,
     jsonb_object_agg(text_titles.kind, (jsonb_build_object('raw', text_titles.value) || (text_titles.fa_cache -> 'value'::text)) ORDER BY text_titles.created_at DESC) AS titles
@@ -1931,5 +1920,20 @@ UNION ALL
      LEFT JOIN annotations a ON ((a.reading_group_id = rgm.reading_group_id)))
      LEFT JOIN comments c ON ((((c.subject_type)::text = 'Annotation'::text) AND (c.subject_id = a.id) AND (c.creator_id = rgm.user_id))))
   GROUP BY rgm.id;
+  SQL
+  create_view "reading_group_counts", sql_definition: <<-SQL
+    SELECT rg.id AS reading_group_id,
+    count(DISTINCT rgm.id) AS memberships_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count,
+    count(DISTINCT c.id) FILTER (WHERE (NOT a.orphaned)) AS comments_count,
+    count(DISTINCT c.id) FILTER (WHERE a.orphaned) AS orphaned_comments_count
+   FROM (((reading_groups rg
+     LEFT JOIN annotations a ON ((a.reading_group_id = rg.id)))
+     LEFT JOIN reading_group_memberships rgm ON ((rgm.reading_group_id = rg.id)))
+     LEFT JOIN comments c ON ((((c.subject_type)::text = 'Annotation'::text) AND (c.subject_id = a.id) AND (c.creator_id = rgm.user_id))))
+  GROUP BY rg.id;
   SQL
 end
