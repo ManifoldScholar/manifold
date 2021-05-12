@@ -14,6 +14,7 @@ module ReadingGroups
 
       option :user, model: "User", optional: true
 
+      option :name, Types::String.optional, optional: true, default: proc { nil }
       option :archive, Types::Bool, optional: true, default: proc { false }
       option :clone_owned_annotations, Types::Bool, optional: true, default: proc { false }
 
@@ -34,6 +35,8 @@ module ReadingGroups
         attrs = reading_group.slice *CLONEABLE_ATTRIBUTES
 
         group = ReadingGroup.new attrs
+
+        group.name = name if name.present?
 
         group.creator = user
 
