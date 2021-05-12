@@ -229,6 +229,9 @@
 
   &__tag-text {
     overflow: hidden;
+    font-size: 14px;
+    font-weight: regular;
+    color: $neutral75;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -236,6 +239,7 @@
   &__tag-icon {
     flex-shrink: 0;
     margin-left: 6px;
+    color: $neutral75;
   }
   /* stylelint-enable property-no-vendor-prefix */
 }
