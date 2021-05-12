@@ -36,8 +36,7 @@ class ReadingGroup < ApplicationRecord
   collects_reading_group_entry! "ReadingGroupText", categorized: true
   collects_reading_group_entry! "ReadingGroupTextSection", categorized: true
 
-  delegate :annotations_count, to: :reading_group_count
-  delegate :highlights_count, to: :reading_group_count
+  delegate :annotations_count, :highlights_count, :comments_count, :memberships_count, to: :reading_group_count
 
   validates :privacy, inclusion: { in: %w(public private anonymous) }
   validates :name, presence: true

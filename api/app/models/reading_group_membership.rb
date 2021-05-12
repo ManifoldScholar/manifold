@@ -30,7 +30,7 @@ class ReadingGroupMembership < ApplicationRecord
   validates :user_id, uniqueness: { scope: :reading_group_id }
 
   belongs_to :user, optional: false
-  belongs_to :reading_group, optional: false, counter_cache: :memberships_count
+  belongs_to :reading_group, optional: false
   has_one :reading_group_membership_count
 
   delegate :full_name, to: :user, prefix: true
