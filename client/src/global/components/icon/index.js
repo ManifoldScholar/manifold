@@ -19,6 +19,7 @@ import ArrowRight16 from "./16/ArrowRight";
 import ArrowRight32 from "./32/ArrowRight";
 import ArrowUp16 from "./16/ArrowUp";
 import ArrowUp32 from "./32/ArrowUp";
+import Avatar16 from "./16/Avatar";
 import Avatar24 from "./24/Avatar";
 import Avatar64 from "./64/Avatar";
 import BEActivity64 from "./64/BEActivity";
@@ -74,6 +75,7 @@ import Globe64 from "./64/Globe";
 import Grabber32 from "./32/Grabber";
 import GrabberInactive32 from "./32/GrabberInactive";
 import Info16 from "./16/Info";
+import InteractComment16 from "./16/InteractComment";
 import InteractAnnotate24 from "./24/InteractAnnotate";
 import InteractHighlight24 from "./24/InteractHighlight";
 import InteractComment24 from "./24/InteractComment";
@@ -180,6 +182,7 @@ export default {
   ArrowRight32,
   ArrowUp16,
   ArrowUp32,
+  Avatar16,
   Avatar24,
   Avatar64,
   BEActivity64,
@@ -235,6 +238,7 @@ export default {
   Grabber32,
   GrabberInactive32,
   Info16,
+  InteractComment16,
   InteractAnnotate24,
   InteractHighlight24,
   InteractComment24,

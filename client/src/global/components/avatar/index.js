@@ -9,7 +9,7 @@ export default class Avatar extends Component {
     style: PropTypes.object,
     ariaHidden: PropTypes.bool,
     className: PropTypes.string,
-    iconSize: PropTypes.oneOf([24, 64])
+    iconSize: PropTypes.oneOf([16, 24, 64])
   };
 
   static defaultProps = {
