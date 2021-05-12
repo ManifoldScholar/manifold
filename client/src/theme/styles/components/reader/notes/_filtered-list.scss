@@ -10,22 +10,44 @@
     padding-top: 20px;
     padding-bottom: 20px;
 
+    > * + * {
+      margin-top: 8px;
+    }
+
     @include respond($break50) {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
+
+      > * + * {
+        margin-top: 0;
+        margin-right: 12px;
+      }
+    }
+  }
+
+  &__header-right {
+    > * + * {
+      margin-top: 8px;
+    }
+
+    @include respond($break50) {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: baseline;
+
+      > * + * {
+        margin-top: 0;
+        margin-left: 12px;
+      }
     }
   }
 
   &__see-all {
     padding: 6px 9px 8px 13px;
-    margin-top: 20px;
     font-size: 13px;
     border-color: var(--select-border-color);
-
-    @include respond($break50) {
-      margin-top: 0;
-    }
   }
 
   &__see-all-icon {
