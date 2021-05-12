@@ -62,6 +62,9 @@ class FilteredList extends PureComponent {
   }
 
   renderList() {
+    const {
+      filter: { reading_group: readingGroup }
+    } = this.props;
     if (!this.hasAnnotations) {
       return <EmptyMessage annotated={this.props.annotated} />;
     }
@@ -75,6 +78,7 @@ class FilteredList extends PureComponent {
               sectionName={group.name}
               readerSection={this.props.section}
               visitHandler={this.props.handleVisitAnnotation}
+              showAnnotationCreator={!!readingGroup}
             />
           );
         })}

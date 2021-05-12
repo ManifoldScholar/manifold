@@ -1,0 +1,45 @@
+.annotation-tag {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: $neutral05;
+  border-radius: 12px;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    padding: 3px 15px;
+    line-height: 1.4;
+
+    @include respond($break95) {
+      flex-shrink: 0;
+      max-width: 225px;
+    }
+
+    & + & {
+      padding-left: 8px;
+    }
+
+    > * + * {
+      margin-left: 4px;
+    }
+
+    &--dark {
+      background-color: $neutral10;
+    }
+  }
+
+  &__text {
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: medium;
+    color: $neutral75;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    color: $neutral75;
+  }
+}
