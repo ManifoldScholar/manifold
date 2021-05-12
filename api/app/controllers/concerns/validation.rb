@@ -486,6 +486,10 @@ module Validation
     structure_params
   end
 
+  def reading_group_filter_params
+    params.permit(filter: [:keyword, :sort_order])[:filter] || {}
+  end
+
   def reading_group_membership_filter_params
     params.permit(filter: [:order])[:filter]
   end
