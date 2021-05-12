@@ -79,6 +79,10 @@ module Testing
       post("/api/v1/reading_groups/#{reading_group.id}/clone", body: body.to_json)
     end
 
+    def reading_group_join(reading_group, **options)
+      post("/api/v1/reading_groups/#{reading_group.id}/join")
+    end
+
     def reading_group_collect(*collectables, reading_group:)
       collection_operation(*collectables, op: :update, collector: reading_group)
     end

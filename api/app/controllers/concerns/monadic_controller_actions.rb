@@ -23,8 +23,8 @@ module MonadicControllerActions
 
   # @api private
   # @see #monadic_failure_to_errors
-  def handle_default_monadic_failure!(_err)
-    errors = monadic_failure_to_errors
+  def handle_default_monadic_failure!(err)
+    errors = monadic_failure_to_errors err
 
     render json: { errors: errors }, status: :unprocessable_entity
   end
