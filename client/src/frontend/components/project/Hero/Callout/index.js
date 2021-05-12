@@ -4,6 +4,7 @@ import Read from "./types/Read";
 import TOC from "./types/TOC";
 import Download from "./types/Download";
 import Link from "./types/Link";
+import IconButton from "./types/IconButton";
 
 export default class ProjectHeroCallout extends PureComponent {
   static displayName = "ProjectHero.Callout";
@@ -32,6 +33,7 @@ export default class ProjectHeroCallout extends PureComponent {
       toc: TOC,
       download: Download,
       link: Link,
+      iconButton: IconButton,
       default: null
     };
 

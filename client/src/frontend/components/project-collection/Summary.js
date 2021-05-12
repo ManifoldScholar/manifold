@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ProjectList from "frontend/components/project-list";
+import GridList from "../atomic/grid-list";
 import memoize from "lodash/memoize";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import Header from "./Header";
+import { CSSTransition } from "react-transition-group";
+import ProjectGridItem from "../grid-list-items/ProjectGridItem";
 
 export default class ProjectCollectionSummary extends Component {
   static displayName = "ProjectCollectionSummary";
@@ -61,9 +63,8 @@ export default class ProjectCollectionSummary extends Component {
         <div className="container">
           <Header projectCollection={this.props.projectCollection} hasLink />
           {this.hasProjects ? (
-            <ProjectList.Grid
+            <GridList
               authenticated={this.props.authentication.authenticated}
-              projects={this.projects}
               dispatch={this.props.dispatch}
               limit={this.limit}
               showViewAll={this.projects.length < this.projectsCount}
@@ -72,9 +73,32 @@ export default class ProjectCollectionSummary extends Component {
                 this.collection.attributes.slug
               )}
               viewAllLabel={"See the full collection"}
-            />
+            >
+              {this.projects.map(project => {
+                return (
+                  <CSSTransition
+                    key={project.id}
+                    enter
+                    exit
+                    timeout={{ enter: 250, exit: 250 }}
+                  >
+                    <li className="grid-list__item--pos-rel">
+                      <ProjectGridItem
+                        authenticated={this.props.authentication.authenticated}
+                        favorites={get(
+                          this.props.authentication,
+                          "currentUser.favorites"
+                        )}
+                        dispatch={this.props.dispatch}
+                        project={project}
+                      />
+                    </li>
+                  </CSSTransition>
+                );
+              })}
+            </GridList>
           ) : (
-            <div className="entity-section-wrapper__body project-list empty">
+            <div className="entity-section-wrapper__body grid-list empty">
               <p className="message">
                 {"This Project Collection is currently empty."}
               </p>

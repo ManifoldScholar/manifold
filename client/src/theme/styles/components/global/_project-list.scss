@@ -1,6 +1,6 @@
 // Global list styles for projects
 // Can switch to a grid-style layout at larger viewport sizes with `.grid`
-.project-list {
+.grid-list {
   ul {
     @include listUnstyled;
     display: flex;

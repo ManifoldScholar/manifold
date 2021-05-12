@@ -3,12 +3,15 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "frontend/components/layout";
 import ProjectList from "frontend/components/project-list";
+import GridList from "../../components/atomic/grid-list";
 import { bindActionCreators } from "redux";
 import { uiFilterActions, entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, subjectsAPI, requests } from "api";
 import HeadContent from "global/components/HeadContent";
 import Utility from "global/components/utility";
+import { CSSTransition } from "react-transition-group";
+import ProjectGridItem from "../../components/grid-list-items/ProjectGridItem";
 
 const { setProjectFilters } = uiFilterActions;
 const { request, flush } = entityStoreActions;
@@ -97,11 +100,25 @@ export class FeaturedContainer extends Component {
               hideFeatured
             />
             {this.props.featuredProjects ? (
-              <ProjectList.Grid
+              <GridList
                 authenticated={this.props.authentication.authenticated}
                 dispatch={this.props.dispatch}
                 projects={this.props.featuredProjects}
-              />
+              >
+                {this.props.featuredProjects.map(project => {
+                  return (
+                    <CSSTransition key={project.id} timeout={250}>
+                      <li className="project-list__item--pos-rel">
+                        <ProjectGridItem
+                          project={project}
+                          hideDesc
+                          hideCollectingToggle
+                        />
+                      </li>
+                    </CSSTransition>
+                  );
+                })}
+              </GridList>
             ) : null}
           </div>
         </section>

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ProjectList from "frontend/components/project-list";
+import GridList from "../atomic/grid-list";
 import Utility from "global/components/utility";
 import Header from "./Header";
 import Filters from "./Filters";
+import { CSSTransition } from "react-transition-group";
+import ProjectGridItem from "../grid-list-items/ProjectGridItem";
 
 export default class ProjectCollectionDetail extends Component {
   static displayName = "ProjectCollectionDetail";
@@ -44,13 +46,28 @@ export default class ProjectCollectionDetail extends Component {
               pluralUnit="projects"
             />
           </div>
-          <ProjectList.Grid
+
+          <GridList
             authenticated={this.props.authentication.authenticated}
-            projects={this.props.projects}
             dispatch={this.props.dispatch}
-            paginationClickHandler={this.props.paginationClickHandler}
             pagination={this.props.pagination}
-          />
+            paginationClickHandler={this.props.paginationClickHandler}
+          >
+            {this.props.projects.map(project => {
+              return (
+                <CSSTransition
+                  key={project.id}
+                  enter
+                  exit
+                  timeout={{ enter: 250, exit: 250 }}
+                >
+                  <li className="grid-list__item--pos-rel">
+                    <ProjectGridItem project={project} />
+                  </li>
+                </CSSTransition>
+              );
+            })}
+          </GridList>
         </div>
       </section>
     );

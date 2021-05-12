@@ -1,0 +1,72 @@
+.frontend {
+  .card {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    padding-bottom: 68px;
+    margin-bottom: 60px;
+    overflow-x: scroll;
+    background-color: #F7F7F7;
+    border-radius: 6px;
+
+    &__header {
+      display: flex;
+      flex-flow: row;
+      width: 100%;
+      padding: 19px 48px;
+      margin-bottom: 23px;
+      background-color: rgba(236, 236, 236, 1);
+      transition: background-color 250ms;
+
+      &.is-linked {
+        background-color: rgba(236, 236, 236, 0);
+
+        &:hover {
+          background-color: rgba(236, 236, 236, 1);
+
+          .card__header-icon {
+            opacity: 1;
+          }
+        }
+      }
+
+      &-title {
+        font-size: 26px;
+        line-height: 34px;
+        color: #2E2E2E;
+        text-align: left;
+      }
+
+      &-icon {
+        margin: 6px 0 0 14px;
+
+        &.is-linked {
+          opacity: 0;
+          transition: opacity 250ms;
+        }
+      }
+    }
+
+    @include respond($break75, 'max') {
+      &__header {
+        flex-flow: column;
+        justify-content: center;
+        text-align: center;
+
+        &-icon {
+          display: none;
+        }
+      }
+    }
+
+    &__body {
+      padding: 0 73px;
+    }
+    @include respond($break75, 'max') {
+      &__body {
+        padding: 0;
+        margin: 0 18px;
+      }
+    }
+  }
+}

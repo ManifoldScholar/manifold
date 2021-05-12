@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ProjectList from "frontend/components/project-list";
+import GridList from "../../components/atomic/grid-list";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import Utility from "global/components/utility";
+import { CSSTransition } from "react-transition-group";
+import ProjectGridItem from "../../components/grid-list-items/ProjectGridItem";
 
 const { request } = entityStoreActions;
 const perPage = 20;
@@ -53,6 +56,7 @@ export class HomeProjectsContainer extends Component {
   }
 
   render() {
+    const { authentication, dispatch, projects } = this.props;
     if (this.showPlaceholder()) return <ProjectList.Placeholder />;
 
     return (
@@ -66,13 +70,26 @@ export class HomeProjectsContainer extends Component {
               </div>
             </div>
           </header>
-          <ProjectList.Grid
-            authenticated={this.props.authentication.authenticated}
-            dispatch={this.props.dispatch}
-            projects={this.props.projects}
+          <GridList
+            authenticated={authentication.authenticated}
+            dispatch={dispatch}
             limit={16}
             viewAllUrl={lh.link("frontendProjectsAll")}
-          />
+          >
+            {projects.map(project => {
+              return (
+                <CSSTransition enter exit timeout={{ enter: 250, exit: 250 }}>
+                  <li key={project.id} className="grid-list__item--pos-rel">
+                    <ProjectGridItem
+                      project={project}
+                      hideDesc
+                      hideCollectingToggle={this.hideCollectingToggle}
+                    />
+                  </li>
+                </CSSTransition>
+              );
+            })}
+          </GridList>
         </div>
       </section>
     );
