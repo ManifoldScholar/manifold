@@ -14,9 +14,8 @@ module API
 
           def index
             @reading_groups = load_reading_groups
-            render_multiple_resources @reading_groups, include: SERIALIZED_INCLUDES
+            render_multiple_resources @reading_groups, include: SERIALIZED_INCLUDES, calculate_all_abilities: true
           end
-
         end
       end
     end

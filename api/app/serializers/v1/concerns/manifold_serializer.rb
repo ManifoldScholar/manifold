@@ -196,7 +196,7 @@ module V1
         end
 
         def include_abilities?(object, params)
-          params[:action] != "index" && object.respond_to?(:serialized_abilities_for)
+          (params[:action] != "index" || params[:calculate_all_abilities]) && object.respond_to?(:serialized_abilities_for)
         end
 
         def calculate_abilities(object, params)
