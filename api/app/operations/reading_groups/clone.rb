@@ -7,6 +7,7 @@ module ReadingGroups
     end
 
     class Options < Types::FlexibleStruct
+      attribute? :name, Types::String.optional
       attribute? :archive, Types::Bool.default { false }
       attribute? :clone_owned_annotations, Types::Bool.default { false }
     end
