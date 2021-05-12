@@ -8,7 +8,7 @@ module JSONAPI
 
     option :attribute_parser, Types::Implements(Types::FlexibleStruct), optional: true
 
-    option :type, Types::String, optional: true
+    option :type, Types::String.optional, optional: true, default: proc { nil }
     option :allow_blank_type, Types::Bool, optional: true, default: proc { true }
 
     def call
@@ -52,7 +52,7 @@ module JSONAPI
 
       data_struct = Class.new(Types::FlexibleStruct).class_eval do
         attribute :attributes, attribute_struct
-        attribute :type, Types::String.optional
+        attribute? :type, Types::String.optional
       end
 
       Class.new(Types::FlexibleStruct).class_eval do
