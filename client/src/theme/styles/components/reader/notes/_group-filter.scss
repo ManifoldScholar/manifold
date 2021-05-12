@@ -1,33 +1,13 @@
-.group-filter {
-  position: relative;
+.notes-group-filter {
+  margin-top: 12px;
+  margin-bottom: 8px;
 
-  &__select {
-    @include filterSelectBase;
-    @include outlineOnFocusVisible;
-    position: relative;
-    width: 100%;
-    max-width: 220px;
-    height: 40px;
-    padding-bottom: 3px;
-    font-size: 13px;
-    color: $neutralTextExtraDark;
-    border: 1px solid $neutralTextDark;
-    border-radius: 6px;
-
-    &:focus-visible {
-      border-color: $defaultFocusColor;
-    }
+  @include respond($break120) {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
-  &__text {
-    padding-right: 3px;
-  }
-
-  &__icon {
-    position: absolute;
-    top: 9px;
-    right: 10px;
-    color: $neutralTextDark;
-    pointer-events: none;
+  @include respond($break50) {
+    flex: 1 1 150px;
   }
 }

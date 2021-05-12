@@ -1,5 +1,7 @@
 .notes-filters {
   @include utilityPrimary;
+  flex: 1 0 auto;
+  flex-wrap: wrap;
   padding: 0;
   margin: 0;
   font-size: 13px;
@@ -8,9 +10,10 @@
   &__inner {
     padding: 0;
 
-    @include respond($break90) {
+    @include respond($break80) {
       display: flex;
       align-items: baseline;
+      padding-right: 12px;
     }
   }
 

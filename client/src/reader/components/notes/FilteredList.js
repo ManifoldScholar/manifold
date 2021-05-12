@@ -40,21 +40,23 @@ class FilteredList extends PureComponent {
           filterChangeHandler={handleFilterChange}
           filter={filter}
         />
-        <Partial.GroupFilter
-          onReadingGroupChange={handleFilterChange}
-          filter={filter}
-        />
-        <button
-          onClick={handleSeeAllClick}
-          className="notes-filtered-list__see-all button-primary button-primary--dull button-primary--rounded"
-        >
-          <span className="button-primary__text">See all</span>
-          <IconComposer
-            icon="link24"
-            size="default"
-            iconClass="notes-filtered-list__see-all-icon button-primary__icon"
+        <div className="notes-filtered-list__header-right">
+          <Partial.GroupFilter
+            onReadingGroupChange={handleFilterChange}
+            filter={filter}
           />
-        </button>
+          <button
+            onClick={handleSeeAllClick}
+            className="notes-filtered-list__see-all button-primary button-primary--dull button-primary--rounded"
+          >
+            <span className="button-primary__text">See all</span>
+            <IconComposer
+              icon="link24"
+              size="default"
+              iconClass="notes-filtered-list__see-all-icon button-primary__icon"
+            />
+          </button>
+        </div>
       </div>
     );
   }

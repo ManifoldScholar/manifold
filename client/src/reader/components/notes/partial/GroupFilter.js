@@ -51,7 +51,7 @@ class GroupFilter extends PureComponent {
         value: selectedGroup,
         options: [
           {
-            label: "My Annotations",
+            label: "My Notes",
             value: ""
           },
           ...options
@@ -64,7 +64,7 @@ class GroupFilter extends PureComponent {
   }
 
   render() {
-    return <div className="group-filter">{this.renderSelect()}</div>;
+    return <div className="notes-group-filter">{this.renderSelect()}</div>;
   }
 }
 
