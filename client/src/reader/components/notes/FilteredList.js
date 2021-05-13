@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 import Partial from "./partial";
 import EmptyMessage from "./EmptyMessage";
@@ -14,14 +15,12 @@ class FilteredList extends PureComponent {
     handleFilterChange: PropTypes.func,
     handleVisitAnnotation: PropTypes.func,
     currentSectionId: PropTypes.string,
-    filter: PropTypes.object,
+    filters: PropTypes.object,
+    defaultFormats: PropTypes.array,
     annotated: PropTypes.bool,
-    loaded: PropTypes.bool
-  };
-
-  static defaultProps = {
-    annotated: false,
-    loaded: false
+    loaded: PropTypes.bool,
+    readingGroups: PropTypes.array,
+    setAnnotationOverlayReadingGroup: PropTypes.func
   };
 
   static defaultProps = {
@@ -32,19 +31,66 @@ class FilteredList extends PureComponent {
     return this.props.sortedAnnotations.length > 0;
   }
 
+  get filters() {
+    return this.props.filters;
+  }
+
+  get readingGroups() {
+    return this.props.readingGroups;
+  }
+
+  get hasReadingGroups() {
+    return this.readingGroups?.length > 0;
+  }
+
+  get selectedGroup() {
+    return this.filters.readingGroup;
+  }
+
+  get formatFilters() {
+    return this.filters.formats;
+  }
+
+  get defaultFormats() {
+    return this.props.defaultFormats;
+  }
+
+  get formatFiltersChanged() {
+    return this.formatFilters.length !== this.defaultFormats.length;
+  }
+
+  get setAnnotationOverlayReadingGroup() {
+    return this.props.setAnnotationOverlayReadingGroup;
+  }
+
   renderHeading() {
-    const { handleSeeAllClick, handleFilterChange, filter } = this.props;
+    const { handleSeeAllClick, handleFilterChange } = this.props;
+    const { readingGroup, ...restFilters } = this.filters;
+
     return (
       <div className="notes-filtered-list__header">
-        <Partial.Filters
-          filterChangeHandler={handleFilterChange}
-          filter={filter}
-        />
-        <div className="notes-filtered-list__header-right">
-          <Partial.GroupFilter
-            onReadingGroupChange={handleFilterChange}
-            filter={filter}
+        <div className="notes-filtered-list__header-start">
+          <Partial.Filters
+            filterChangeHandler={handleFilterChange}
+            filters={restFilters}
           />
+        </div>
+        <div
+          className={classNames({
+            "notes-filtered-list__header-end": true,
+            "notes-filtered-list__header-end--has-select": this.hasReadingGroups
+          })}
+        >
+          {this.hasReadingGroups && (
+            <Partial.GroupFilter
+              filterChangeHandler={handleFilterChange}
+              selectedGroup={this.selectedGroup}
+              readingGroups={this.readingGroups}
+              setAnnotationOverlayReadingGroup={
+                this.setAnnotationOverlayReadingGroup
+              }
+            />
+          )}
           <button
             onClick={handleSeeAllClick}
             className="notes-filtered-list__see-all button-primary button-primary--dull button-primary--rounded"
@@ -61,13 +107,16 @@ class FilteredList extends PureComponent {
     );
   }
 
+  renderEmptyMessage() {
+    if (this.formatFiltersChanged) return <EmptyMessage.NoResults />;
+    if (this.selectedGroup === "me")
+      return <EmptyMessage.TextNotAnnotatedByMe />;
+    return <EmptyMessage.TextNotAnnotatedByGroup />;
+  }
+
   renderList() {
-    const {
-      filter: { reading_group: readingGroup }
-    } = this.props;
-    if (!this.hasAnnotations) {
-      return <EmptyMessage annotated={this.props.annotated} />;
-    }
+    if (!this.hasAnnotations) return this.renderEmptyMessage();
+
     return (
       <ul className="notes-filtered-list__section-list">
         {this.props.sortedAnnotations.map(group => {
@@ -78,7 +127,7 @@ class FilteredList extends PureComponent {
               sectionName={group.name}
               readerSection={this.props.section}
               visitHandler={this.props.handleVisitAnnotation}
-              showAnnotationCreator={!!readingGroup}
+              showAnnotationCreator={this.selectedGroup !== "me"}
             />
           );
         })}
@@ -90,7 +139,7 @@ class FilteredList extends PureComponent {
     return (
       <div className="notes-filtered-list">
         {this.renderHeading()}
-        <div>{this.props.loaded ? this.renderList() : null}</div>
+        {this.renderList()}
       </div>
     );
   }

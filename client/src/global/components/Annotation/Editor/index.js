@@ -95,11 +95,13 @@ class AnnotationEditor extends PureComponent {
   }
 
   get currentGroupName() {
-    if (this.props.currentReadingGroup === "public") return this.publicLabel;
-    if (this.props.currentReadingGroup === "private") return this.privateLabel;
+    if (this.props.currentAnnotatingReadingGroup === "public")
+      return this.publicLabel;
+    if (this.props.currentAnnotatingReadingGroup === "private")
+      return this.privateLabel;
 
     const currentGroup = this.readingGroups.find(
-      group => group.id === this.props.currentReadingGroup
+      group => group.id === this.props.currentAnnotatingReadingGroup
     );
 
     if (!currentGroup) return this.setReadingGroup("private");
@@ -120,16 +122,19 @@ class AnnotationEditor extends PureComponent {
   handleSubmit = event => {
     event.preventDefault();
     const {
-      currentReadingGroup,
+      currentAnnotatingReadingGroup,
       closeOnSave,
       saveAnnotation,
       annotation
     } = this.props;
     const { errorsIgnored, ...attributes } = this.state;
     const mutableAttributes = { ...attributes };
-    mutableAttributes.private = currentReadingGroup === "private";
-    if (currentReadingGroup !== "private" && currentReadingGroup !== "public") {
-      mutableAttributes.readingGroupId = currentReadingGroup;
+    mutableAttributes.private = currentAnnotatingReadingGroup === "private";
+    if (
+      currentAnnotatingReadingGroup !== "private" &&
+      currentAnnotatingReadingGroup !== "public"
+    ) {
+      mutableAttributes.readingGroupId = currentAnnotatingReadingGroup;
     } else {
       mutableAttributes.readingGroupId = null;
     }
@@ -172,7 +177,7 @@ class AnnotationEditor extends PureComponent {
 
   setReadingGroup = id => {
     this.setState({ pickerOpen: false });
-    this.props.setReadingGroup(id);
+    this.props.setAnnotatingReadingGroup(id);
   };
 
   handleErrors(errors) {
@@ -180,7 +185,7 @@ class AnnotationEditor extends PureComponent {
   }
 
   isSelected(option) {
-    if (option === this.props.currentReadingGroup) return true;
+    if (option === this.props.currentAnnotatingReadingGroup) return true;
     return false;
   }
 
@@ -194,7 +199,7 @@ class AnnotationEditor extends PureComponent {
         aria-labelledby={`${id}-label`}
         className="screen-reader-text"
         onChange={event => this.setReadingGroup(event.target.value)}
-        value={this.props.currentReadingGroup}
+        value={this.props.currentAnnotatingReadingGroup}
       >
         {this.canEngagePublicly && (
           <option value="public">{this.publicLabel}</option>

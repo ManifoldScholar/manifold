@@ -65,7 +65,7 @@
   }
 
   &__label {
-    @include blockLabel;
+    @include marker;
   }
 
   &__collecting-toggle {

@@ -1,50 +1,42 @@
 .notes-filtered-list {
-  $iconSize: 24px;
-  $columnGapMobile: 10px;
-  $columnGapDesktop: 16px;
+  $_icon-size: 24px;
+  $_column-gap-mobile: 10px;
+  $_column-gap-desktop: 16px;
+  $_breakpoint: $break50;
+  $_collapse-duration: 350ms;
+  $_collapse-easing: linear;
+  $_see-all-min-width: 109px;
+  $_group-select-min-width: entity-filter-form(select-min-width);
+  $_input-gap: entity-filter-form(gap);
 
-  /* stylelint-disable property-no-vendor-prefix */
   &__header {
     @include drawerPadding(padding-right, narrow);
     @include drawerPadding(padding-left, narrow);
+    display: flex;
+    flex-wrap: wrap;
+    gap: $_input-gap;
+    align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
-
-    > * + * {
-      margin-top: 8px;
-    }
-
-    @include respond($break50) {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-
-      > * + * {
-        margin-top: 0;
-        margin-right: 12px;
-      }
-    }
   }
 
-  &__header-right {
-    > * + * {
-      margin-top: 8px;
-    }
+  &__header-start {
+    flex-grow: 999;
+  }
 
-    @include respond($break50) {
-      display: flex;
-      flex: 1 1 auto;
-      align-items: baseline;
+  &__header-end {
+    display: flex;
+    flex-basis: $_see-all-min-width;
+    flex-grow: 1;
+    gap: $_input-gap;
 
-      > * + * {
-        margin-top: 0;
-        margin-left: 12px;
-      }
+    &--has-select {
+      flex-basis: $_group-select-min-width + $_input-gap + $_see-all-min-width;
     }
   }
 
   &__see-all {
+    flex-shrink: 0;
     padding: 6px 9px 8px 13px;
     font-size: 13px;
     border-color: var(--select-border-color);
@@ -58,9 +50,8 @@
   &__section-list {
     @include listUnstyled;
     @include templateHead;
+    color: var(--default-strong-color);
   }
-
-  &__section {}
 
   &__section-button {
     @include buttonUnstyled;
@@ -70,39 +61,32 @@
     width: 100%;
     padding-top: 11px;
     padding-bottom: 13px;
-    color: $neutralTextExtraDark;
     text-align: left;
-    background-color: $neutral05;
+    background-color: var(--box-bg-color);
     transition: background-color $duration $timing;
 
-    &:hover, &:focus-visible {
-      color: $neutralTextExtraDark;
-      background-color: $neutral10;
+    &:hover,
+    &:focus-visible {
+      color: inherit;
+      background-color: var(--box-medium-bg-color);
       outline: 0;
     }
   }
 
   &__section-button-inner {
-    display: flex;
-    display: -ms-grid;
     display: grid;
-    grid-template: 'icon label' auto / $iconSize 1fr;
-    column-gap: $columnGapMobile;
+    grid-template: 'icon label' auto / $_icon-size 1fr;
+    column-gap: $_column-gap-mobile;
     align-items: center;
-    -ms-grid-rows: auto;
-    -ms-grid-columns: $iconSize $columnGapMobile 1fr;
 
-    @include respond($break50) {
-      column-gap: $columnGapDesktop;
-      -ms-grid-columns: $iconSize $columnGapDesktop 1fr;
+    @include respond($_breakpoint) {
+      column-gap: $_column-gap-desktop;
     }
   }
 
   &__section-label {
     display: block;
     grid-area: label;
-    -ms-grid-row: 1;
-    -ms-grid-column: 3;
     overflow: hidden;
     font-size: 18px;
     font-weight: $medium;
@@ -111,7 +95,7 @@
     white-space: nowrap;
     cursor: inherit;
 
-    @include respond($break50) {
+    @include respond($_breakpoint) {
       font-size: 21px;
     }
   }
@@ -120,9 +104,7 @@
     position: relative;
     top: 2px;
     grid-area: icon;
-    -ms-grid-row: 1;
-    -ms-grid-column: 1;
-    transition: transform $duration $timing;
+    transition: transform $_collapse-duration $_collapse-easing;
     transform: rotate(-0.25turn);
 
     &--expanded {
@@ -134,13 +116,11 @@
     @include listUnstyled;
     padding-top: 15px;
     padding-bottom: 15px;
-
-    &--expanded {}
   }
 
-  &__item {}
-
   &__item-button {
+    --darker-tag-bg-color: var(--box-medium-bg-color);
+
     @include buttonUnstyled;
     @include drawerPadding(padding-right, narrow);
     @include drawerPadding(padding-left, narrow);
@@ -149,79 +129,81 @@
     padding-top: 11px;
     padding-bottom: 11px;
     font-size: 16px;
-    color: $neutralTextExtraDark;
     text-align: left;
     transition: background-color $duration $timing;
 
-    &:hover, &:focus-visible {
-      color: $neutralTextExtraDark;
-      background-color: $neutral10;
+    &:hover,
+    &:focus-visible {
+      --darker-tag-bg-color: var(--box-strong-bg-color);
+
+      color: inherit;
+      background-color: var(--box-medium-bg-color);
       outline: 0;
     }
   }
 
   &__item-button-inner {
-    display: flex;
-    display: -ms-grid;
     display: grid;
-    -ms-grid-rows: auto;
-    -ms-grid-columns: $iconSize $columnGapMobile 1fr;
-    grid-template: 'icon inner' auto / $iconSize 1fr;
-    column-gap: $columnGapMobile;
+    grid-template: 'icon inner' auto / $_icon-size minmax(0, 1fr);
+    column-gap: $_column-gap-mobile;
 
-    @include respond($break50) {
-      -ms-grid-columns: $iconSize $columnGapDesktop 1fr;
-      column-gap: $columnGapDesktop;
+    @include respond($_breakpoint) {
+      column-gap: $_column-gap-desktop;
     }
 
     @include respond($break95) {
-      -ms-grid-columns: $iconSize $columnGapDesktop $iconSize $columnGapDesktop 1fr;
-      grid-template: '. icon inner' auto / $iconSize $iconSize 1fr;
+      grid-template: '. icon inner' auto / $_icon-size $_icon-size minmax(
+        0,
+        1fr
+      );
     }
   }
 
   &__item-icon {
     grid-area: icon;
-    -ms-grid-row: 1;
-    -ms-grid-column: 1;
-    color: $neutralUIDark;
+    color: var(--default-weak-color);
   }
 
   &__item-inner {
     display: flex;
     flex-direction: column;
     grid-area: inner;
-    -ms-grid-row: 1;
-    -ms-grid-column: 3;
-    min-width: 0;
+    align-items: baseline;
 
     @include respond($break95) {
       flex-direction: row;
-      -ms-grid-column: 5;
     }
   }
 
   &__item-text {
+    @include textTruncate;
     flex-grow: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    width: 100%;
+    line-height: $_icon-size - 3px;
   }
 
   &__item-creator {
     display: flex;
+    gap: 4px;
     align-items: center;
   }
 
   &__item-creator-avatar {
-    width: 16px;
-    margin-right: 4px;
+    flex-shrink: 0;
+
+    &--image {
+      @include buttonAvatar(14, var(--default-strong-color));
+      margin-right: 2px;
+      margin-left: 1px;
+      transform: translateY(1px);
+    }
+
+    &--default {
+      transform: translateY(-1px);
+    }
   }
 
   &__item-tag {
-    flex-shrink: 0;
-    width: fit-content;
-    max-width: 65%;
     margin-top: 12px;
 
     @include respond($break95) {
@@ -229,5 +211,4 @@
       margin-left: 40px;
     }
   }
-  /* stylelint-enable property-no-vendor-prefix */
 }

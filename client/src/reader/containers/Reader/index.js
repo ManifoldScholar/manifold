@@ -6,11 +6,10 @@ import Overlay from "global/components/Overlay";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import TextMeta from "reader/components/TextMeta";
 import Layout from "reader/components/layout";
-import Notes from "reader/components/notes";
 import Toc from "reader/components/Toc";
 import Footers from "global/components/Footers";
 import Header from "reader/components/Header";
-import ReaderNotes from "reader/containers/ReaderNotes";
+import ReaderFullNotes from "reader/containers/ReaderFullNotes";
 import { select, grab, isEntityLoaded } from "utils/entityUtils";
 import { commonActions } from "actions/helpers";
 import { textsAPI, requests } from "api";
@@ -180,7 +179,7 @@ export class ReaderContainer extends Component {
 
   maybeRenderOverlay(props) {
     if (this.state.showMeta) return this.renderTextMetaOverlay();
-    if (props.location.hash === "#my-annotations")
+    if (props.location.hash === "#group-annotations")
       return this.renderNotesOverlay();
     return null;
   }
@@ -204,16 +203,13 @@ export class ReaderContainer extends Component {
     return (
       <Authorize kind="any">
         <CSSTransition {...this.transitionProps}>
-          <Overlay
+          <ReaderFullNotes
+            text={this.props.text}
+            match={this.props.match}
+            history={this.props.history}
+            dispatch={this.props.dispatch}
             closeCallback={this.props.history.goBack}
-            title={"My Notes"}
-            icon="notes24"
-            contentWidth={850}
-          >
-            <ReaderNotes>
-              <Notes.DetailedList />
-            </ReaderNotes>
-          </Overlay>
+          />
         </CSSTransition>
       </Authorize>
     );

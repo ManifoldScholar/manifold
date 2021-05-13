@@ -1,4 +1,4 @@
-.overlay-full-primary {
+.overlay-login {
   --default-focus-color: #{$accentInteractionLight};
   --default-hover-color: #{$accentInteractionLight};
 
@@ -37,42 +37,6 @@
     padding-bottom: 100px;
   }
 
-  .overlay-header {
-    position: fixed;
-    z-index: 5; // Local z-index inside overlay
-    width: 100%;
-
-    .container {
-      @include headerContainerPrimary;
-    }
-
-    .logo {
-      @extend .header-logo;
-    }
-  }
-
-  // Button
-  .overlay-close {
-    @include buttonClose;
-    @include outlineOnFocusVisible;
-    position: absolute;
-    top: -10px;
-    right: 0;
-    display: flex;
-    align-items: center;
-    transition: color $duration $timing;
-
-    &:hover {
-      color: $accentPrimary;
-    }
-
-    &__text {
-      line-height: 1;
-    }
-
-    &__icon {}
-  }
-
   .overlay-content {
     position: absolute;
     top: 80px;
@@ -104,18 +68,14 @@
   .login-form {
     @include loginFormPrimary;
 
-    input[type='text'], input[type='password'], input[type='submit'] {
+    input[type='text'],
+    input[type='password'],
+    input[type='submit'] {
       width: 100%;
     }
   }
 
-
   .login-external {
     margin-top: 45px;
-  }
-
-  .button-secondary--dark {
-    display: flex;
-    width: 100%;
   }
 }

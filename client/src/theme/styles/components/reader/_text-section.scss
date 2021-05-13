@@ -2,14 +2,9 @@
   @include resetWordWrap;
   padding: 60px 0;
   overflow: hidden;
-  color: $neutralOffBlack;
-  background-color: $neutralWhite;
+  color: var(--reader-color);
+  background-color: var(--default-bg-color);
   transition: background-color $duration $timing;
-
-  &.scheme-dark {
-    color: $neutralWhite;
-    background-color: $neutralOffBlack;
-  }
 
   .reader-debug {
     position: relative;

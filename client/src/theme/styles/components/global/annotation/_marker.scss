@@ -1,0 +1,21 @@
+.marker {
+  @include marker;
+  max-width: 240px;
+
+  &[href] {
+    transition: background-color $duration $timing;
+
+    &:hover {
+      color: inherit;
+      background-color: var(--box-medium-bg-color);
+    }
+  }
+
+  &--secondary {
+    color: var(--default-error-color);
+  }
+
+  & + & {
+    margin-left: 8px;
+  }
+}

@@ -170,6 +170,9 @@ export default {
   rAnnotations: "reader-annotations",
   rMyAnnotationsForText: "reader-my-annotations-for-text",
   rMyFilteredAnnotationsForText: "reader-my-filtered-annotations-for-text",
+  rReadingGroupAnnotationsForText: "reader-reading-group-annotations-for-text",
+  rReadingGroupFilteredAnnotationsForText:
+    "reader-reading-group-filtered-annotations-for-text",
   rResources: "reader-resources",
   rSectionResources: "reader-section-resources",
   rSectionResourceCollections: "reader-section-resource-collections",

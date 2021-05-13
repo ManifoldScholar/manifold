@@ -25,9 +25,13 @@ export default function withReadingGroups(WrappedComponent) {
           requests.feMyReadingGroups,
           state.entityStore
         ),
-        currentReadingGroup: get(
+        currentAnnotatingReadingGroup: get(
           state,
-          "ui.persistent.reader.readingGroups.currentReadingGroup"
+          "ui.persistent.reader.readingGroups.currentAnnotatingReadingGroup"
+        ),
+        currentAnnotationOverlayReadingGroup: get(
+          state,
+          "ui.persistent.reader.readingGroups.currentAnnotationOverlayReadingGroup"
         )
       };
     };
@@ -39,7 +43,8 @@ export default function withReadingGroups(WrappedComponent) {
     static propTypes = {
       readingGroups: PropTypes.array,
       readingGroupsLoaded: PropTypes.bool,
-      currentReadingGroup: PropTypes.string
+      currentAnnotatingReadingGroup: PropTypes.string,
+      currentAnnotationOverlayReadingGroup: PropTypes.string
     };
 
     static contextType = ReaderContext;
@@ -48,32 +53,38 @@ export default function withReadingGroups(WrappedComponent) {
       const {
         readingGroupsLoaded,
         readingGroups,
-        currentReadingGroup,
+        currentAnnotatingReadingGroup,
         dispatch
       } = this.props;
       const { readingGroups: previousReadingGroups } = prevProps;
       if (
         readingGroupsLoaded &&
         previousReadingGroups !== readingGroups &&
-        currentReadingGroup
+        currentAnnotatingReadingGroup
       ) {
-        const currentGroup = this.adjustedReadingGroups.find(
-          group => group.id === currentReadingGroup
+        const currentAnnotatingGroup = this.adjustedReadingGroups.find(
+          group => group.id === currentAnnotatingReadingGroup
         );
-        if (!currentGroup && currentReadingGroup !== this.defaultReadingGroup)
+        if (
+          !currentAnnotatingGroup &&
+          currentAnnotatingReadingGroup !== this.defaultAnnotatingReadingGroup
+        )
           dispatch(
-            uiReadingGroupActions.setReadingGroup(this.defaultReadingGroup)
+            uiReadingGroupActions.setAnnotatingReadingGroup(
+              this.defaultAnnotatingReadingGroup
+            )
           );
       }
     }
 
-    get defaultReadingGroup() {
+    get defaultAnnotatingReadingGroup() {
       return "private";
     }
 
     get childProps() {
       return {
-        setReadingGroup: this.setReadingGroup
+        setAnnotatingReadingGroup: this.setAnnotatingReadingGroup,
+        setAnnotationOverlayReadingGroup: this.setAnnotationOverlayReadingGroup
       };
     }
 
@@ -98,20 +109,31 @@ export default function withReadingGroups(WrappedComponent) {
     }
 
     get validatedCurrentReadingGroup() {
-      const { currentReadingGroup } = this.props;
-      if (currentReadingGroup === "public" && this.canEngagePublicly)
-        return currentReadingGroup;
-      if (currentReadingGroup === "private") return currentReadingGroup;
+      const { currentAnnotatingReadingGroup } = this.props;
+      if (currentAnnotatingReadingGroup === "public" && this.canEngagePublicly)
+        return currentAnnotatingReadingGroup;
+      if (currentAnnotatingReadingGroup === "private")
+        return currentAnnotatingReadingGroup;
 
       const validGroup = this.adjustedReadingGroups.find(
-        group => group.id === currentReadingGroup
+        group => group.id === currentAnnotatingReadingGroup
       );
-      if (validGroup) return currentReadingGroup;
-      return this.defaultReadingGroup;
+      if (validGroup) return currentAnnotatingReadingGroup;
+      return this.defaultAnnotatingReadingGroup;
     }
 
-    setReadingGroup = id => {
-      this.props.dispatch(uiReadingGroupActions.setReadingGroup(id));
+    get currentAnnotationOverlayReadingGroup() {
+      return this.props.currentAnnotationOverlayReadingGroup;
+    }
+
+    setAnnotatingReadingGroup = id => {
+      this.props.dispatch(uiReadingGroupActions.setAnnotatingReadingGroup(id));
+    };
+
+    setAnnotationOverlayReadingGroup = id => {
+      this.props.dispatch(
+        uiReadingGroupActions.setAnnotationOverlayReadingGroup(id)
+      );
     };
 
     render() {
@@ -120,7 +142,9 @@ export default function withReadingGroups(WrappedComponent) {
         ...otherProps,
         ...this.childProps,
         readingGroups: this.adjustedReadingGroups,
-        currentReadingGroup: this.validatedCurrentReadingGroup
+        currentAnnotatingReadingGroup: this.validatedCurrentReadingGroup,
+        currentAnnotationOverlayReadingGroup: this
+          .currentAnnotationOverlayReadingGroup
       };
       return React.createElement(WrappedComponent, props);
     }

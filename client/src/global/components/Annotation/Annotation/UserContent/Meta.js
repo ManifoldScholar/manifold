@@ -79,34 +79,32 @@ export default class AnnotationMeta extends PureComponent {
     return (
       <div className="markers">
         {annotation.attributes.authorCreated && (
-          <div className="marker tertiary">Author</div>
+          <div className="marker marker--tertiary">Author</div>
         )}
         {annotation.attributes.private && (
-          <div className="marker secondary">{"Private"}</div>
+          <div className="marker marker--secondary">{"Private"}</div>
         )}
         {annotation.attributes.flagsCount > 0 && (
           <Authorize kind="admin">
-            <div className="marker secondary">
+            <div className="marker marker--secondary">
               {annotation.attributes.flagsCount}
               {annotation.attributes.flagsCount === 1 ? " flag" : " flags"}
             </div>
           </Authorize>
         )}
         {annotation.attributes.readingGroupId && (
-          <div className="marker tertiary">
-            <Link
-              to={lh.link(
-                "frontendReadingGroupDetail",
-                annotation.attributes.readingGroupId,
-                {
-                  text: annotation.attributes.textId
-                }
-              )}
-              className="marker__link"
-            >
-              {annotation.attributes.readingGroupName}
-            </Link>
-          </div>
+          <Link
+            to={lh.link(
+              "frontendReadingGroupDetail",
+              annotation.attributes.readingGroupId,
+              {
+                text: annotation.attributes.textId
+              }
+            )}
+            className="marker marker--tertiary"
+          >
+            {annotation.attributes.readingGroupName}
+          </Link>
         )}
       </div>
     );

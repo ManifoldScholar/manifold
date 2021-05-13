@@ -3,6 +3,7 @@
   bottom: 0;
   width: 100%;
   overflow: auto;
+  background-color: var(--default-bg-color);
   transition: transform $duration $timing;
 
   // context
@@ -22,14 +23,7 @@
     }
   }
 
-  &--frontend {
-    background-color: $neutralWhite;
-  }
-
   &--reader {
-    color: $neutralOffBlack;
-    background-color: $neutralWhite;
-
     &.drawer--pos-default {
       top: $readerHeaderHeight;
     }
