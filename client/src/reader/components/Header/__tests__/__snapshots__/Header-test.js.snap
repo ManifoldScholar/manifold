@@ -258,7 +258,8 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
               "colorScheme": "light",
             },
             "readingGroups": Object {
-              "currentReadingGroup": "public",
+              "currentAnnotatingReadingGroup": "public",
+              "currentAnnotationOverlayReadingGroup": "me",
             },
             "typography": Object {
               "font": "serif",

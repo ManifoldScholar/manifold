@@ -1,4 +1,7 @@
+import { collectionFactory } from "../../../../test/fixtures/factory";
 import FilteredList from "../FilteredList";
+
+const DEFAULT_FORMATS = ["highlight", "annotation", "bookmark"];
 
 describe("reader/components/notes/FilteredList", () => {
   def("annotations", () => collectionFactory("annotation"));
@@ -11,14 +14,17 @@ describe("reader/components/notes/FilteredList", () => {
   ]);
   def("textSection", () => factory("textSection"));
   def("clickMock", () => jest.fn());
-  def("filter", () => ({ formats: ["highlight", "annotation", "bookmark"] }));
+  def("filters", () => ({ formats: DEFAULT_FORMATS }));
   def("root", () => (
     <FilteredList
       sortedAnnotations={$sortedAnnotations}
       handleSeeAllClick={$clickMock}
       handleFilterChange={$clickMock}
       section={$textSection}
-      filter={$filter}
+      filters={$filters}
+      defaultFormats={DEFAULT_FORMATS}
+      readingGroups={[]}
+      annotated
       loaded
     />
   ));

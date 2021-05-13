@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import get from "lodash/get";
+import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 import Tag from "global/components/Annotation/Tag";
 import Avatar from "global/components/avatar";
@@ -53,20 +54,23 @@ class GroupItem extends Component {
 
   get avatarUrl() {
     // TODO: Point to the right URL
-    return get(this.props, "annotation.attributes.creatorAvatarStyles.small");
+    return get(
+      this.props,
+      "annotation.attributes.creatorAvatarStyles.smallSquare"
+    );
   }
 
   getIcon(format) {
     let icon = null;
     switch (format) {
       case "annotation":
-        icon = "comment24";
+        icon = "interactComment24";
         break;
       case "highlight":
-        icon = "annotate24";
+        icon = "interactAnnotate24";
         break;
       case "bookmark":
-        icon = "bookmark24";
+        icon = "interactHighlight24";
         break;
       default:
         break;
@@ -86,29 +90,31 @@ class GroupItem extends Component {
         <Avatar
           iconSize={16}
           url={this.avatarUrl}
-          className={"notes-filtered-list__item-creator-avatar"}
+          className={classNames({
+            "notes-filtered-list__item-creator-avatar": true,
+            "notes-filtered-list__item-creator-avatar--image": this.avatarUrl,
+            "notes-filtered-list__item-creator-avatar--default": !this.avatarUrl
+          })}
         />
-        {creatorName}
+        <span className="truncate-text-overflow">{creatorName}</span>
       </span>
     );
+    const tagProps =
+      commentsCount === 0
+        ? {}
+        : {
+            icon: "interactComment16",
+            iconSize: 16,
+            iconCount: commentsCount
+          };
 
-    return commentsCount > 0 ? (
-      <Tag icon="interactComment16" iconSize={16} iconCount={commentsCount}>
-        {creator}
-      </Tag>
-    ) : (
-      <Tag>{creator}</Tag>
-    );
+    return <Tag {...tagProps}>{creator}</Tag>;
   }
 
   renderReadingGroupTag() {
-    return this.showLock ? (
-      <Tag icon="lock16" iconSize={14}>
-        {this.currentGroupName}
-      </Tag>
-    ) : (
-      <Tag>{this.currentGroupName}</Tag>
-    );
+    const tagProps = !this.showLock ? {} : { icon: "lock16", iconSize: 14 };
+
+    return <Tag {...tagProps}>{this.currentGroupName}</Tag>;
   }
 
   render() {

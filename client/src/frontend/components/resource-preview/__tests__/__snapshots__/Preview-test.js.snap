@@ -15,7 +15,7 @@ exports[`frontend/components/resource-preview/Preview matches the snapshot 1`] =
     }
     unmountOnExit={true}
   >
-    <Overlay
+    <Global.Overlay
       appearance="overlay-full bg-neutral90"
       closeCallback={[Function]}
     >
@@ -146,7 +146,7 @@ exports[`frontend/components/resource-preview/Preview matches the snapshot 1`] =
           }
         }
       />
-    </Overlay>
+    </Global.Overlay>
   </Component>
   <div
     className="resource-preview-wrapper"

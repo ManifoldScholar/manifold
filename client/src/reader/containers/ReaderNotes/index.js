@@ -1,155 +1,71 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
-import { meAPI, readingGroupsAPI, requests } from "api";
-import { select, grab, meta, loaded } from "utils/entityUtils";
-import connectAndFetch from "utils/connectAndFetch";
-import { entityStoreActions } from "actions";
-import { commonActions } from "actions/helpers";
+import { useDispatch } from "react-redux";
 import groupBy from "lodash/groupBy";
-import get from "lodash/get";
 import isString from "lodash/isString";
+import { commonActions as commonActionsHelper } from "actions/helpers";
+import lh from "helpers/linkHandler";
+import {
+  useDispatchAnnotations,
+  useSelectAnnotations,
+  useGrabCurrentText,
+  useGrabCurrentTextSection
+} from "hooks";
+import withReadingGroups from "hoc/with-reading-groups";
 
-const { request } = entityStoreActions;
+const DEFAULT_FORMATS = ["highlight", "annotation", "bookmark"];
 
-const INITIAL_FORMATS = ["highlight", "annotation", "bookmark"];
-
-export class ReaderNotesContainer extends Component {
-  static mapStateToProps = (state, ownProps) => {
-    const requestName = ownProps.filterable
-      ? requests.rMyFilteredAnnotationsForText
-      : requests.rMyAnnotationsForText;
-
-    const newState = {
-      myAnnotations: select(requestName, state.entityStore) || null,
-      loaded: loaded(requestName, state.entityStore),
-      annotated: get(meta(requestName, state.entityStore), "annotated"),
-      text: grab("texts", ownProps.match.params.textId, state.entityStore),
-      section: grab(
-        "textSections",
-        ownProps.match.params.sectionId,
-        state.entityStore
-      )
-    };
-    return { ...newState, ...ownProps };
+function setInitialFilterState(text, currentGroup) {
+  return {
+    orphaned: false,
+    text: text?.id,
+    formats: [...DEFAULT_FORMATS],
+    readingGroup: currentGroup
   };
+}
 
-  static displayName = "Reader.ReaderNotes";
+function getSectionName(text, sectionId) {
+  const { sectionsMap } = text.attributes;
+  const section = sectionsMap.find(s => s.id === sectionId);
+  if (!section) return null;
+  return section.name;
+}
 
-  static propTypes = {
-    myAnnotations: PropTypes.array,
-    annotations: PropTypes.array,
-    filterable: PropTypes.bool,
-    section: PropTypes.object,
-    text: PropTypes.object,
-    match: PropTypes.object,
-    history: PropTypes.object,
-    dispatch: PropTypes.func,
-    children: PropTypes.object
-  };
+function ReaderNotesContainer({
+  match,
+  history,
+  readingGroups,
+  currentAnnotationOverlayReadingGroup: currentGroup,
+  setAnnotationOverlayReadingGroup,
+  children
+}) {
+  const dispatch = useDispatch();
+  const text = useGrabCurrentText(match);
+  const section = useGrabCurrentTextSection(match);
+  const [filterState, setFilterState] = useState(
+    setInitialFilterState(text, currentGroup)
+  );
 
-  static defaultProps = {
-    filterable: false
-  };
+  const { readingGroup, ...fetchFilters } = filterState;
 
-  constructor(props) {
-    super(props);
-    this.state = this.setInitialState(props);
-    this.requestName = this.getRequestName(props);
-    this.commonActions = commonActions(props.dispatch);
-  }
+  useDispatchAnnotations(fetchFilters, {}, readingGroup, "reader", true);
+  const { annotations, annotationsMeta, loaded } = useSelectAnnotations(
+    readingGroup,
+    "reader",
+    true
+  );
 
-  componentDidMount() {
-    if (this.props.myAnnotations) return null;
-    this.fetchAnnotations(this.state, this.props);
-  }
+  const commonActions = commonActionsHelper(dispatch);
 
-  getRequestName(props) {
-    if (props.filterable) return requests.rMyFilteredAnnotationsForText;
-    return requests.rMyAnnotationsForText;
-  }
-
-  getSectionName(text, sectionId) {
-    const attrs = text.attributes;
-    const section = attrs.sectionsMap.find(s => s.id === sectionId);
-    if (!section) return null;
-    return section.name;
-  }
-
-  setInitialState = props => {
-    return {
-      filter: {
-        orphaned: false,
-        text: props.text.id,
-        formats: [...INITIAL_FORMATS]
-      }
-    };
-  };
-
-  triggerHideNotes = () => {
-    this.commonActions.panelToggle("notes");
-  };
-
-  fetchAnnotations(state, props) {
-    const {
-      filter: { reading_group: readingGroup, ...filters }
-    } = state;
-    // By default, show only my annotations
-    let annotationsCall = meAPI.annotations(filters);
-
-    if (readingGroup && readingGroup !== "") {
-      annotationsCall = readingGroupsAPI.annotations(readingGroup, filters);
-    }
-
-    props.dispatch(request(annotationsCall, this.requestName));
-  }
-
-  handleVisitAnnotation = annotation => {
-    const { match, history } = this.props;
-    const attr = annotation.attributes;
-    const url = lh.link(
-      "readerSection",
-      match.params.textId,
-      attr.textSectionId,
-      `#annotation-${annotation.id}`
-    );
-
-    this.triggerHideNotes();
-    this.commonActions.showMyNotes();
-    return history.push(url);
-  };
-
-  handleSeeAllClick = event => {
-    event.preventDefault();
-    const { match, history } = this.props;
-    const url = lh.link(
-      "readerSection",
-      match.params.textId,
-      match.params.sectionId,
-      "#my-annotations"
-    );
-
-    return history.push(url);
-  };
-
-  handleFilterChange = (key, filters) => {
-    const filter = { ...this.state.filter };
-    filter[key] = filters;
-    this.setState({ filter }, () =>
-      this.fetchAnnotations(this.state, this.props)
-    );
-  };
-
-  mapAnnotationsToSections(props) {
-    const { text, myAnnotations } = props;
-    const annotationGroups = groupBy(myAnnotations, "attributes.textSectionId");
+  function mapAnnotationsToSections() {
+    const annotationGroups = groupBy(annotations, "attributes.textSectionId");
     const out = [];
 
     text.attributes.spine.map(sectionId => {
       if (!annotationGroups[sectionId]) return null;
       return out.push({
         sectionId,
-        name: this.getSectionName(text, sectionId),
+        name: getSectionName(text, sectionId),
         annotations: annotationGroups[sectionId]
       });
     });
@@ -157,32 +73,65 @@ export class ReaderNotesContainer extends Component {
     return out;
   }
 
-  childProps(props) {
-    const sortedAnnotations = this.mapAnnotationsToSections(props);
-
-    return {
-      sortedAnnotations,
-      annotations: props.annotations,
-      section: props.section,
-      handleVisitAnnotation: this.handleVisitAnnotation,
-      handleFilterChange: this.handleFilterChange,
-      handleSeeAllClick: this.handleSeeAllClick,
-      handleReadingGroupChange: this.handleReadingGroupChange,
-      annotated: props.annotated,
-      loaded: props.loaded,
-      filter: this.state.filter
-    };
+  function handleFilterChange(label, value) {
+    const filters = { ...filterState };
+    filters[label] = value;
+    setFilterState(filters);
   }
 
-  renderChildren() {
-    if (!this.props.children) return null;
-    if (isString(this.props.children.type)) return this.props.children;
-    return React.cloneElement(this.props.children, this.childProps(this.props));
+  function handleVisitAnnotation(annotation) {
+    const { textSectionId } = annotation.attributes;
+    const url = lh.link(
+      "readerSection",
+      match.params.textId,
+      textSectionId,
+      `#annotation-${annotation.id}`
+    );
+    commonActions.panelToggle("notes");
+    commonActions.showMyNotes();
+    history.push(url);
   }
 
-  render() {
-    return this.renderChildren();
+  function handleSeeAllClick(event) {
+    event.preventDefault();
+    const url = lh.link(
+      "readerSection",
+      match.params.textId,
+      match.params.sectionId,
+      "#group-annotations"
+    );
+    history.push(url);
   }
+
+  if (!loaded || !annotations || !annotationsMeta) return null;
+
+  const sortedAnnotations = mapAnnotationsToSections();
+
+  const childProps = {
+    sortedAnnotations,
+    section,
+    handleVisitAnnotation,
+    handleFilterChange,
+    handleSeeAllClick,
+    setAnnotationOverlayReadingGroup,
+    annotated: annotationsMeta.annotated,
+    filters: filterState,
+    defaultFormats: DEFAULT_FORMATS,
+    readingGroups
+  };
+
+  if (!children) return null;
+  if (isString(children.type)) return children;
+  return React.cloneElement(children, childProps);
 }
 
-export default connectAndFetch(ReaderNotesContainer);
+ReaderNotesContainer.propTypes = {
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  readingGroups: PropTypes.array,
+  setAnnotationOverlayReadingGroup: PropTypes.func.isRequired,
+  currentAnnotationOverlayReadingGroup: PropTypes.string
+};
+
+export default withReadingGroups(ReaderNotesContainer);

@@ -38,8 +38,8 @@ class AnnotatablePopup extends PureComponent {
   };
 
   handleReadingGroupSelect = id => {
-    if (id !== this.props.currentReadingGroup) {
-      this.props.setReadingGroup(id);
+    if (id !== this.props.currentAnnotatingReadingGroup) {
+      this.props.setAnnotatingReadingGroup(id);
     }
     this.closeSecondary();
   };
@@ -79,7 +79,7 @@ class AnnotatablePopup extends PureComponent {
             activeAnnotation={this.props.activeAnnotation}
             text={this.props.text}
             readingGroups={this.props.readingGroups}
-            currentReadingGroup={this.props.currentReadingGroup}
+            currentReadingGroup={this.props.currentAnnotatingReadingGroup}
           />
         )}
         {activePanel === "secondary" && (
@@ -100,7 +100,7 @@ class AnnotatablePopup extends PureComponent {
             onBackClick={this.closeSecondary}
             onSelect={this.handleReadingGroupSelect}
             readingGroups={this.props.readingGroups}
-            currentReadingGroup={this.props.currentReadingGroup}
+            currentReadingGroup={this.props.currentAnnotatingReadingGroup}
           />
         )}
       </div>

@@ -1,11 +1,16 @@
 import { handleActions } from "redux-actions";
 
 const getInitialState = () => ({
-  currentReadingGroup: "public"
+  currentAnnotatingReadingGroup: "public",
+  currentAnnotationOverlayReadingGroup: "me"
 });
 
-const setReadingGroup = (state, action) => {
-  return { ...state, currentReadingGroup: action.payload };
+const setAnnotatingReadingGroup = (state, action) => {
+  return { ...state, currentAnnotatingReadingGroup: action.payload };
+};
+
+const setAnnotationOverlayReadingGroup = (state, action) => {
+  return { ...state, currentAnnotationOverlayReadingGroup: action.payload };
 };
 
 const resetReadingGroup = () => {
@@ -19,7 +24,8 @@ const setPersistentUI = (state, action) => {
 export default handleActions(
   {
     SET_PERSISTENT_UI: setPersistentUI,
-    SET_READING_GROUP: setReadingGroup,
+    SET_ANNOTATING_READING_GROUP: setAnnotatingReadingGroup,
+    SET_ANNOTATION_OVERLAY_READING_GROUP: setAnnotationOverlayReadingGroup,
     LOGOUT: resetReadingGroup
   },
   getInitialState()

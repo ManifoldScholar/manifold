@@ -6,8 +6,14 @@
   flex-wrap: wrap;
   gap: 20px;
   align-items: baseline;
-  margin-top: 50px;
-  margin-bottom: 40px;
+
+  &:not(:first-child) {
+    margin-top: 50px;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 40px;
+  }
 
   &__start {
     flex-grow: 999;
@@ -22,6 +28,10 @@
 
     &--count-2 {
       flex-basis: $_select-min-width * 2 + $_input-gap;
+    }
+
+    &--count-3 {
+      flex-basis: $_select-min-width * 3 + $_input-gap * 2;
     }
   }
 }

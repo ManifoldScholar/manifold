@@ -10,7 +10,7 @@
     @include drawerIndent(padding-left);
     font-weight: $regular;
     line-height: 1.375;
-    color: $neutralTextExtraDark;
+    color: var(--default-strong-color);
   }
 
   &__utility {
@@ -22,6 +22,7 @@
     @include drawerIndent(padding-left);
     display: flex;
     flex-wrap: wrap;
+    color: var(--default-medium-color);
 
     > li:not(:last-child) {
       margin-right: 26px;
@@ -42,10 +43,10 @@
     }
 
     &--secondary {
-      color: $defaultErrorColor;
+      color: var(--default-error-color);
 
       &--active, &:focus-visible {
-        color: $defaultErrorColor;
+        color: var(--default-error-color);
       }
     }
   }

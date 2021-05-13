@@ -6,8 +6,8 @@ import HeadContent from "global/components/HeadContent";
 import Utility from "global/components/utility";
 import Annotation from "global/components/Annotation";
 import {
-  useDispatchMyAnnotations,
-  useSelectMyAnnotations,
+  useDispatchAnnotations,
+  useSelectAnnotations,
   useDispatchMyAnnotatedTexts,
   useSelectMyAnnotatedTexts
 } from "hooks";
@@ -57,9 +57,12 @@ function MyAnnotationsContainer({ location, history }) {
     [JSON.stringify(filterState), JSON.stringify(paginationState)]
   );
 
-  useDispatchMyAnnotations(filterState, paginationState);
+  useDispatchAnnotations(filterState, paginationState, "me", "frontend");
   useDispatchMyAnnotatedTexts();
-  const { annotations, annotationsMeta } = useSelectMyAnnotations();
+  const { annotations, annotationsMeta } = useSelectAnnotations(
+    "me",
+    "frontend"
+  );
   const annotatedTexts = useSelectMyAnnotatedTexts();
 
   function handleFilterChange(filterParam) {
@@ -101,7 +104,7 @@ function MyAnnotationsContainer({ location, history }) {
           {hasAnnotatedTexts && (
             <Annotation.NoteFilter
               texts={annotatedTexts}
-              updateAnnotations={handleFilterChange}
+              filterChangeHandler={handleFilterChange}
               initialFilterState={filterState}
               pagination={annotationsMeta.pagination}
             />

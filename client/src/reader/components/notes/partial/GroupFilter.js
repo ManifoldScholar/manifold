@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ReaderContext } from "helpers/contexts";
-import withReadingGroups from "hoc/with-reading-groups";
 
 import Filters from "global/components/list/Filters";
 
@@ -10,62 +9,59 @@ class GroupFilter extends Component {
 
   static propTypes = {
     readingGroups: PropTypes.array.isRequired,
-    onReadingGroupChange: PropTypes.func,
-    filter: PropTypes.object
+    filterChangeHandler: PropTypes.func,
+    setAnnotationOverlayReadingGroup: PropTypes.func,
+    selectedGroup: PropTypes.string
   };
 
   static contextType = ReaderContext;
-
-  constructor(props) {
-    super(props);
-    const { filter } = props;
-    this.state = {
-      selectedGroup: filter && filter.reading_group ? filter.reading_group : ""
-    };
-  }
 
   get readingGroups() {
     return this.props.readingGroups;
   }
 
-  handleReadingGroupChange = event => {
-    event.preventDefault();
-    const value = event.target.value;
-    const { onReadingGroupChange } = this.props;
+  get selectedGroup() {
+    return this.props.selectedGroup;
+  }
 
-    this.setState({ selectedGroup: value });
-
-    if (onReadingGroupChange) onReadingGroupChange("reading_group", value);
-  };
-
-  renderSelect() {
-    const { selectedGroup } = this.state;
-    const options = this.readingGroups.map(({ id, attributes: { name } }) => ({
+  get groupOptions() {
+    return this.readingGroups.map(({ id, attributes: { name } }) => ({
       value: id,
       label: name
     }));
+  }
 
-    const filters = [
-      {
-        label: "Reading Group",
-        value: selectedGroup,
-        options: [
-          {
-            label: "My Notes",
-            value: ""
-          },
-          ...options
-        ],
-        onChange: this.handleReadingGroupChange
-      }
-    ];
+  handleFilterChange = ({ target: { value } }) => {
+    this.props.filterChangeHandler("readingGroup", value);
+    this.props.setAnnotationOverlayReadingGroup(value);
+  };
 
-    return <Filters filters={filters} />;
+  get groupFilter() {
+    return {
+      label: "Reading Group",
+      value: this.selectedGroup,
+      options: [
+        {
+          label: "My Notes",
+          value: "me"
+        },
+        ...this.groupOptions
+      ],
+      onChange: this.handleFilterChange
+    };
+  }
+
+  get filters() {
+    return [this.groupFilter];
   }
 
   render() {
-    return <div className="notes-group-filter">{this.renderSelect()}</div>;
+    return (
+      <div className="notes-group-filter">
+        <Filters filters={this.filters} />
+      </div>
+    );
   }
 }
 
-export default withReadingGroups(GroupFilter);
+export default GroupFilter;

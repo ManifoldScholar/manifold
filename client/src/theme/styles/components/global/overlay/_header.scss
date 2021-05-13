@@ -1,0 +1,16 @@
+.overlay-header {
+  position: fixed;
+  z-index: 5; // Local z-index inside overlay
+  width: 100%;
+
+  &__inner {
+    @include headerContainerPrimary;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    @extend .header-logo;
+  }
+}

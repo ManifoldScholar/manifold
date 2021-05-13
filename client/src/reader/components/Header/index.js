@@ -275,6 +275,8 @@ export default class Header extends Component {
               visibility={this.props.visibility.uiPanels}
               visible={this.props.visibility.uiPanels.notes}
               bodyComponent={Notes.ReaderDrawer}
+              match={this.props.match}
+              history={this.props.history}
               hidePanel={this.props.commonActions.hideNotesPanel}
             />
             <UIPanel

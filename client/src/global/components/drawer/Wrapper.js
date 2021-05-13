@@ -256,17 +256,10 @@ export default class DrawerWrapper extends PureComponent {
                 className={this.closeButtonClasses}
               >
                 <span className="drawer-bar__close-text">Close</span>
-                {/*
                 <Utility.IconComposer
-                  icon="close32"
-                  size={46.222}
-                  iconClass="drawer-bar__close-icon drawer-bar__close-icon--large"
-                />
-                */}
-                <Utility.IconComposer
-                  icon="close16"
+                  icon="close24"
                   size={24}
-                  iconClass="drawer-bar__close-icon drawer-bar__close-icon--small"
+                  iconClass="drawer-bar__close-icon"
                 />
               </button>
             ) : null}

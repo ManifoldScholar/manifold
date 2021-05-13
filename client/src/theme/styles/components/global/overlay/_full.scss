@@ -21,12 +21,8 @@
     background-color: $neutralWhite;
   }
 
-  .overlay-full-header + .container {
-    padding-top: 97px;
-
-    @include respond($break70) {
-      padding-top: 195px;
-    }
+  .overlay-full-header + * {
+    padding-top: 50px;
   }
 
   .overlay-full-appear & {
@@ -54,33 +50,5 @@
   .overlay-full-exit.overlay-full-exit-active & {
     opacity: 0.01;
     transition: opacity $duration $timing;
-  }
-
-  // Button
-  .overlay-close {
-    @include buttonClose;
-    @include outlineOnFocusVisible;
-    position: absolute;
-    top: 8px;
-    right: 8px;
-
-    @include respond($break70) {
-      top: 4.444vh;
-      right: 35px;
-
-      @include respond($hbreak90, min, height) {
-        top: 40px;
-      }
-    }
-
-    &__icon {
-      margin-left: 4px;
-
-      @include respond($break70) {
-        width: 56.889px;
-        height: 56.889px;
-        margin-left: 14px;
-      }
-    }
   }
 }
