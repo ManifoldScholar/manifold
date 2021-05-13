@@ -29,7 +29,7 @@ server {
 
   ssl_certificate <%= root %>/config/dev/ssl/<%= name %>.<%= tld.strip %>.crt;
   ssl_certificate_key <%= root %>/config/dev/ssl/<%= name %>.<%= tld.strip %>.key;
-  ssl_protocols  SSLv2 SSLv3 TLSv1;
+  ssl_protocols SSLv2 SSLv3 TLSv1.2 TLSv1.3;
   ssl_ciphers  HIGH:!aNULL:!MD5;
   ssl_prefer_server_ciphers   on;
   ssl_session_timeout 10m;
