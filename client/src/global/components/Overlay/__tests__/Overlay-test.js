@@ -13,7 +13,7 @@ describe("global/components/Overlay", () => {
     const wrapper = mount($root);
     $mock.mockClear();
     wrapper
-      .find('[data-id="overlay-close"]')
+      .find('.overlay-close')
       .first()
       .simulate("click");
     expect($mock).toHaveBeenCalled();

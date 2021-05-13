@@ -80,7 +80,8 @@ function DatePickerComponent({ parentId, inputId, value, onChange, label }) {
 DatePickerComponent.displayName = "Global.Form.DatePicker.PickerComponent";
 
 DatePickerComponent.propTypes = {
-  parentId: PropTypes.string.isRequired,
+  parentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
   inputId: PropTypes.string.isRequired,
   value: PropTypes.instanceOf(Date),
   onChange: PropTypes.func.isRequired,

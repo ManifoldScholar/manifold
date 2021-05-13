@@ -28,7 +28,7 @@ describe("global/components/sign-in-up/Overlay", () => {
   it("should trigger hideSignInUpOverlay callback when close overlay is clicked", () => {
     $hideOverlayMock.mockClear();
     $wrapper
-      .find('[data-id="overlay-close"]')
+      .find('.overlay-close')
       .first()
       .simulate("click", $fakeDomEvent);
     expect($hideOverlayMock).toHaveBeenCalled();

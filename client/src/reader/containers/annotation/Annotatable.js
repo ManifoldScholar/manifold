@@ -22,7 +22,7 @@ export class Annotatable extends Component {
 
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    currentReadingGroup: PropTypes.string,
+    currentAnnotatingReadingGroup: PropTypes.string,
     debug: PropTypes.bool.isRequired,
     text: PropTypes.object.isRequired,
     textId: PropTypes.string.isRequired,
@@ -166,14 +166,15 @@ export class Annotatable extends Component {
   };
 
   createHighlight = () => {
-    const { currentReadingGroup } = this.props;
+    const { currentAnnotatingReadingGroup } = this.props;
     const attributes = {
       ...this.state.selectionState.selectionAnnotation,
       format: "highlight",
-      private: currentReadingGroup === "private",
+      private: currentAnnotatingReadingGroup === "private",
       readingGroupId:
-        currentReadingGroup !== "private" && currentReadingGroup !== "public"
-          ? currentReadingGroup
+        currentAnnotatingReadingGroup !== "private" &&
+        currentAnnotatingReadingGroup !== "public"
+          ? currentAnnotatingReadingGroup
           : null
     };
     this.createAnnotation({ attributes });

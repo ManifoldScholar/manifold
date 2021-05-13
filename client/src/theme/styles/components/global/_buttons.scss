@@ -158,18 +158,14 @@
   &--dull {
     border-color: $neutralUIDark;
 
-    &:hover {
+    &:hover,
+    &:active {
       background-color: $neutral10;
       border-color: $neutralUIDark;
     }
 
     &:focus-visible {
       background-color: $focusSecondary;
-    }
-
-    &:active {
-      color: $neutralWhite;
-      background-color: $neutral50;
     }
 
     .bg-neutral05 & {
@@ -548,13 +544,6 @@
 
       &:focus-visible {
         background-color: $neutralTextExtraDark;
-      }
-    }
-
-    .overlay-full-primary & {
-      &:hover,
-      &:focus-visible {
-        color: $neutral80;
       }
     }
   }

@@ -4,10 +4,7 @@ import queryString from "query-string";
 import isEmpty from "lodash/isEmpty";
 import Annotation from "global/components/Annotation";
 
-import {
-  useDispatchReadingGroupAnnotations,
-  useSelectReadingGroupAnnotations
-} from "hooks";
+import { useDispatchAnnotations, useSelectAnnotations } from "hooks";
 
 const DEFAULT_PAGE = 1;
 const PER_PAGE = 20;
@@ -54,8 +51,16 @@ function ReadingGroupAnnotationsContainer({
     [filterState, paginationState]
   );
 
-  useDispatchReadingGroupAnnotations(match, filterState, paginationState);
-  const { annotations, annotationsMeta } = useSelectReadingGroupAnnotations();
+  useDispatchAnnotations(
+    filterState,
+    paginationState,
+    match.params.id,
+    "frontend"
+  );
+  const { annotations, annotationsMeta } = useSelectAnnotations(
+    "group",
+    "frontend"
+  );
 
   function handleFilterChange(filterParam) {
     setFilterState(filterParam);
@@ -90,7 +95,7 @@ function ReadingGroupAnnotationsContainer({
         <Annotation.NoteFilter
           memberships={memberships}
           texts={annotatedTexts}
-          updateAnnotations={handleFilterChange}
+          filterChangeHandler={handleFilterChange}
           initialFilterState={filterState}
           pagination={annotationsMeta.pagination}
         />

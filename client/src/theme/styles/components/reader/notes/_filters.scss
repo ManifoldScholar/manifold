@@ -1,6 +1,6 @@
 .notes-filters {
   @include utilityPrimary;
-  flex: 1 0 auto;
+  flex-grow: 999;
   flex-wrap: wrap;
   padding: 0;
   margin: 0;
@@ -8,13 +8,10 @@
   border: 0;
 
   &__inner {
-    padding: 0;
-
-    @include respond($break80) {
-      display: flex;
-      align-items: baseline;
-      padding-right: 12px;
-    }
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    padding-right: 12px;
   }
 
   &__label {
@@ -23,14 +20,8 @@
   }
 
   &__checkbox-group {
-    padding-top: 8px;
-
     @include respond($break50) {
       display: flex;
-    }
-
-    @include respond($break90) {
-      padding-top: 0;
     }
   }
 
@@ -51,6 +42,7 @@
   .checkbox__indicator {
     position: relative;
     top: -1px;
-    background-color: $neutral10;
+    color: var(--default-strong-color);
+    background-color: var(--box-medium-bg-color);
   }
 }
