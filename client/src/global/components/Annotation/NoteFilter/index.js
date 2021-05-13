@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
-import omitBy from "lodash/omitBy";
+import classNames from "classnames";
 import Utility from "global/components/utility";
 import { ListFilters } from "global/components/list";
 
@@ -9,50 +9,51 @@ export default class AnnotationNoteFilter extends React.PureComponent {
   static displayName = "Annotation.NoteFilter";
 
   static propTypes = {
+    pagination: PropTypes.object.isRequired,
+    filterChangeHandler: PropTypes.func.isRequired,
+    initialFilterState: PropTypes.object,
     texts: PropTypes.array,
+    sections: PropTypes.array,
     memberships: PropTypes.array,
-    pagination: PropTypes.object.isRequired
+    showSearch: PropTypes.bool
   };
 
   constructor(props) {
     super(props);
-    this.state = {
-      filter: props.initialFilterState
-    };
+    this.state = this.initialState(props.initialFilterState);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.filterChanged(prevState)) {
-      const filters = omitBy(this.state.filter, isEmpty);
-      this.props.updateAnnotations(filters);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.initialFilterState !== prevState.filters) {
+      return { ...nextProps.initialFilterState };
     }
+
+    return null;
   }
 
-  filterChanged(prevState) {
-    if (this.state.filter.text !== prevState.filter.text) return true;
-    return (
-      this.state.filter.readingGroupMembership !==
-      prevState.filter.readingGroupMembership
-    );
+  initialState(init) {
+    const filters = { ...init };
+    return { filters };
+  }
+
+  get showResetButton() {
+    if (!this.props.showSearch) return false;
+
+    const filterValues = Object.values(this.state.filters);
+    const appliedFilters = filterValues.filter(Boolean);
+    return !isEmpty(appliedFilters);
   }
 
   get pagination() {
     return this.props.pagination;
   }
 
-  get memberships() {
-    if (!this.props.memberships) return [];
-
-    return this.props.memberships.map(rgm => {
-      return {
-        label: this.memberLabel(rgm),
-        value: rgm.id
-      };
-    });
-  }
-
-  get hasMemberships() {
-    return this.props.memberships?.length > 0;
+  get searchProps() {
+    if (!this.props.showSearch) return null;
+    return {
+      value: this.state.filters.keyword || "",
+      onChange: event => this.setFilters(event, "keyword")
+    };
   }
 
   get texts() {
@@ -65,48 +66,118 @@ export default class AnnotationNoteFilter extends React.PureComponent {
     });
   }
 
+  get hasTexts() {
+    return this.texts.length > 0;
+  }
+
+  get sections() {
+    if (!this.props.sections) return [];
+    return this.props.sections.map(({ name, id }) => {
+      return {
+        label: name,
+        value: id
+      };
+    });
+  }
+
+  get hasSections() {
+    return this.sections.length > 0;
+  }
+
+  get memberships() {
+    if (!this.props.memberships) return [];
+
+    return this.props.memberships.map(rgm => {
+      return {
+        label: rgm.attributes.name,
+        value: rgm.id
+      };
+    });
+  }
+
+  get hasMemberships() {
+    return this.memberships.length > 0;
+  }
+
   get textFilter() {
+    if (!this.hasTexts) return null;
+
     return {
       label: "Filter by text",
-      value: this.state.filter?.text || "",
-      onChange: this.updateTextFilter,
+      value: this.state.filters?.text || "",
+      onChange: event => this.setFilters(event, "text"),
       options: [{ label: "All texts", value: "" }, ...this.texts]
     };
   }
 
-  get membershipsFilter() {
+  get sectionFilter() {
+    if (!this.hasSections) return null;
+
+    return {
+      label: "Filter by text section",
+      value: this.state.filters?.textSection || "",
+      onChange: event => this.setFilters(event, "textSection"),
+      options: [{ label: "All sections", value: "" }, ...this.sections]
+    };
+  }
+
+  get membershipFilter() {
     if (!this.hasMemberships) return null;
 
     return {
       label: "Filter by member",
-      value: this.state.filter?.readingGroupMembership || "",
-      onChange: this.updateMemberFilter,
+      value: this.state.filters?.readingGroupMembership || "",
+      onChange: event => this.setFilters(event, "readingGroupMembership"),
       options: [{ label: "All members", value: "" }, ...this.memberships]
     };
   }
 
   get filters() {
-    const filters = [this.textFilter, this.membershipsFilter];
+    const filters = [
+      this.textFilter,
+      this.sectionFilter,
+      this.membershipFilter
+    ];
     return filters.filter(Boolean);
   }
 
-  memberLabel(readingGroupMembership) {
-    return readingGroupMembership.attributes.name;
+  filterChanged(prevState) {
+    if (this.state.filter.text !== prevState.filter.text) return true;
+    if (this.state.filter.textSection !== prevState.filter.textSection)
+      return true;
+    return (
+      this.state.filter.readingGroupMembership !==
+      prevState.filter.readingGroupMembership
+    );
   }
 
-  updateTextFilter = event => {
-    const text = event.target.value;
-    const filter = { ...this.state.filter, text };
-    this.setState({ filter });
+  setFilters = (event, label) => {
+    const value = event.target.value;
+    const filters = { ...this.state.filters };
+    filters[label] = value;
+    if (label === "keyword") return this.setState({ filters });
+    this.setState({ filters }, () =>
+      this.props.filterChangeHandler(this.state.filters)
+    );
   };
 
-  updateMemberFilter = event => {
-    const readingGroupMembership = event.target.value;
-    const filter = { ...this.state.filter, readingGroupMembership };
-    this.setState({ filter });
+  resetFilters = () => {
+    const newState = this.initialState(this.props.initialFilterState);
+
+    this.setState(newState, () =>
+      this.props.filterChangeHandler(this.state.filters)
+    );
   };
 
   render() {
+    const filterCount = this.props.showSearch
+      ? this.filters.length + 1
+      : this.filters.length;
+    const endClassName = classNames({
+      "notes-filter-container__end": true,
+      [`notes-filter-container__end--count-${filterCount}`]: true
+    });
+
     return (
       <div className="notes-filter-container">
         <div className="notes-filter-container__start">
@@ -116,10 +187,14 @@ export default class AnnotationNoteFilter extends React.PureComponent {
             pluralUnit="Notes"
           />
         </div>
-        <div
-          className={`notes-filter-container__end notes-filter-container__end--count-${this.filters.length}`}
-        >
-          <ListFilters filters={this.filters} />
+        <div className={endClassName}>
+          <ListFilters
+            searchProps={this.searchProps}
+            filters={this.filters}
+            onSubmit={() => this.props.filterChangeHandler(this.state.filters)}
+            onReset={this.resetFilters}
+            showResetButton={this.showResetButton}
+          />
         </div>
       </div>
     );

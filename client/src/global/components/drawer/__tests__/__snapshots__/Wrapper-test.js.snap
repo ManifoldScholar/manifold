@@ -52,8 +52,8 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
               </span>
               <IconComposer
                 fill="currentColor"
-                icon="close16"
-                iconClass="drawer-bar__close-icon drawer-bar__close-icon--small"
+                icon="close24"
+                iconClass="drawer-bar__close-icon"
                 size={24}
                 svgProps={
                   Object {

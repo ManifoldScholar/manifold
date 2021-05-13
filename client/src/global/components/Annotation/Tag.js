@@ -22,7 +22,9 @@ const Tag = ({ className, children, icon, iconSize, iconCount }) => (
           size={iconSize}
           iconClass="annotation-tag__icon"
         />
-        <span className="annotation-tag__text">{iconCount}</span>
+        <span className="annotation-tag__text annotation-tag__text--count">
+          {iconCount}
+        </span>
       </span>
     )}
   </span>

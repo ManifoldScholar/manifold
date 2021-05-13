@@ -1,13 +1,4 @@
 .notes-group-filter {
-  margin-top: 12px;
-  margin-bottom: 8px;
-
-  @include respond($break120) {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  @include respond($break50) {
-    flex: 1 1 150px;
-  }
+  flex-basis: entity-filter-form(select-min-width);
+  flex-grow: 1;
 }
