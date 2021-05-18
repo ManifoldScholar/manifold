@@ -78,9 +78,12 @@ function handleAuthenticationSuccess(
 ) {
   dispatch(actions.setCurrentUser(options.user));
   dispatch(actions.setAuthToken(options.authToken));
-  dispatch(request(meAPI.readingGroups(), requests.feMyReadingGroups));
+  const { promise } = dispatch(
+    request(meAPI.readingGroups(), requests.feMyReadingGroups)
+  );
   dispatch(actions.loginComplete());
   if (options.setCookie) setCookie(options.authToken, options.cookieHelper);
+  return promise;
 }
 
 function handleAuthenticationFailure(
@@ -119,21 +122,24 @@ function authenticateWithPassword(email, password, dispatch) {
 }
 
 function authenticateWithToken(authToken, dispatch) {
-  const promise = getUserFromToken(authToken);
-  promise.then(
-    user => {
-      handleAuthenticationSuccess(dispatch, {
-        authToken,
-        user,
-        setCookie: true
-      });
-    },
-    response => {
-      const { status } = response;
-      handleAuthenticationFailure(dispatch, { status, destroyCookie: true });
-    }
-  );
-  return promise;
+  return new Promise((resolve, reject) => {
+    getUserFromToken(authToken).then(
+      user => {
+        handleAuthenticationSuccess(dispatch, {
+          authToken,
+          user,
+          setCookie: true
+        }).finally(() => {
+          resolve();
+        });
+      },
+      response => {
+        const { status } = response;
+        handleAuthenticationFailure(dispatch, { status, destroyCookie: true });
+        reject();
+      }
+    );
+  });
 }
 
 // This function can be called on the server or the client. It's called outside of the
@@ -146,26 +152,30 @@ function authenticateWithToken(authToken, dispatch) {
 export function authenticateWithCookie(dispatch, cookieHelper) {
   const authToken = cookieHelper.read("authToken");
   if (!authToken) return Promise.reject();
-  const promise = getUserFromToken(authToken);
-  promise.then(
-    user => {
-      handleAuthenticationSuccess(dispatch, {
-        authToken,
-        user,
-        cookieHelper,
-        setCookie: false
-      });
-    },
-    response => {
-      const { status } = response;
-      handleAuthenticationFailure(dispatch, {
-        status,
-        cookieHelper,
-        destroyCookie: `${status}`[0] !== 5
-      });
-    }
-  );
-  return promise;
+
+  return new Promise((resolve, reject) => {
+    getUserFromToken(authToken).then(
+      user => {
+        handleAuthenticationSuccess(dispatch, {
+          authToken,
+          user,
+          cookieHelper,
+          setCookie: false
+        }).finally(() => {
+          resolve();
+        });
+      },
+      response => {
+        const { status } = response;
+        handleAuthenticationFailure(dispatch, {
+          status,
+          cookieHelper,
+          destroyCookie: `${status}`[0] !== 5
+        });
+        reject();
+      }
+    );
+  });
 }
 
 export default function currentUserMiddleware({ dispatch, getState }) {
