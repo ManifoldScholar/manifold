@@ -5,7 +5,7 @@ import { entityStoreActions } from "actions";
 
 const { request } = entityStoreActions;
 
-export default function useDispatchMyReadingGroups(filter, page) {
+export default function useDispatchMyReadingGroups(filter, page, fetchVersion) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,5 +15,5 @@ export default function useDispatchMyReadingGroups(filter, page) {
       requests.feMyReadingGroups
     );
     dispatch(myReadingGroupsAction);
-  }, [dispatch, filter, page]);
+  }, [dispatch, JSON.stringify(filter), JSON.stringify(page), fetchVersion]); // eslint-disable-line react-hooks/exhaustive-deps
 }

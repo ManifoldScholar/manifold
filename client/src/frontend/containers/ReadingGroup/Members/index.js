@@ -1,9 +1,9 @@
 import List from "./List";
-import New from "./New";
+import MemberEdit from "./MemberEdit";
 import Wrapper from "./Wrapper";
 
 export default {
   List,
-  New,
+  MemberEdit,
   Wrapper
 };

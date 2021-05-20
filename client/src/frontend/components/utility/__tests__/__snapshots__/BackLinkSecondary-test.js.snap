@@ -25,7 +25,7 @@ exports[`frontend/components/utility/BackLinkSecondary matches the snapshot 1`] 
       <span
         className="back-link-secondary__back-text"
       >
-        Back to Project
+        Back to Project:
       </span>
       <span
         className="back-link-secondary__project-title"

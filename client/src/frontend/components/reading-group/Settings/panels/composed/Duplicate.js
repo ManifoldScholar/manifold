@@ -7,12 +7,13 @@ import Checkbox from "../parts/Checkbox";
 function DuplicatePanel({ readingGroup, onProceed, onCancel }) {
   const uidSeed = useUIDSeed();
   const [name, setName] = useState(readingGroup.attributes.name);
-  const [copyAnnotations, setCopyAnnotations] = useState(true);
-  const [openOnProceed, setOpenOnProceed] = useState(true);
+  const [copyAnnotations, setCopyAnnotations] = useState(false);
+  const [archive, setArchive] = useState(false);
+  const [openOnProceed, setOpenOnProceed] = useState(false);
 
   function handleProceed(event) {
     event.preventDefault();
-    onProceed({ name, copyAnnotations, openOnProceed });
+    onProceed({ name, copyAnnotations, archive, openOnProceed });
   }
 
   return (
@@ -39,6 +40,12 @@ function DuplicatePanel({ readingGroup, onProceed, onCancel }) {
             label="Copy my anotations"
             checked={copyAnnotations}
             onChange={event => setCopyAnnotations(event.target.checked)}
+          />
+          <Checkbox
+            id={uidSeed("archive")}
+            label="Archive copied group"
+            checked={archive}
+            onChange={event => setArchive(event.target.checked)}
           />
           <Checkbox
             id={uidSeed("openOnProceed")}
