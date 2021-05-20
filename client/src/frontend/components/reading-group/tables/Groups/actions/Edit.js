@@ -4,6 +4,10 @@ import Action from "global/components/table/Action";
 import lh from "helpers/linkHandler";
 
 function EditGroup({ readingGroup }) {
+  const canEdit = readingGroup.attributes.abilities.update;
+
+  if (!canEdit) return null;
+
   const baseLink = lh.link(
     "frontendReadingGroupHomepageStatic",
     readingGroup.id

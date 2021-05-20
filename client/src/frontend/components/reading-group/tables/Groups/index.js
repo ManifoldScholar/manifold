@@ -17,12 +17,13 @@ class GroupsTable extends PureComponent {
   static displayName = "ReadingGroup.Table.Groups";
 
   static propTypes = {
-    groups: PropTypes.array.isRequired,
+    readingGroups: PropTypes.array.isRequired,
     pagination: PropTypes.object.isRequired,
     onPageClick: PropTypes.func.isRequired,
     initialFilterState: PropTypes.object.isRequired,
     resetFilterState: PropTypes.func.isRequired,
     filterChangeHandler: PropTypes.func.isRequired,
+    currentUser: PropTypes.object,
     hideActions: PropTypes.bool,
     hideTags: PropTypes.bool
   };
@@ -47,7 +48,11 @@ class GroupsTable extends PureComponent {
   }
 
   get groups() {
-    return this.props.groups;
+    return this.props.readingGroups;
+  }
+
+  get currentUser() {
+    return this.props.currentUser;
   }
 
   get pagination() {
@@ -76,12 +81,44 @@ class GroupsTable extends PureComponent {
   get sortFilter() {
     return {
       label: "Sort results",
-      value: this.state.filters.order || "",
-      onChange: event => this.setFilters(event, "order"),
+      value: this.state.filters.sort_order || "",
+      onChange: event => this.setFilters(event, "sort_order"),
       options: [
         {
           label: "Sort by:",
           value: ""
+        },
+        {
+          label: "A–Z",
+          value: "name_asc"
+        },
+        {
+          label: "Z–A",
+          value: "name_desc"
+        },
+        {
+          label: "Newest groups first",
+          value: "created_at_asc"
+        },
+        {
+          label: "Oldest groups first",
+          value: "created_at_desc"
+        },
+        {
+          label: "Earliest course start date",
+          value: "course_starts_on_asc"
+        },
+        {
+          label: "Latest course start date",
+          value: "course_starts_on_desc"
+        },
+        {
+          label: "Earliest course end date",
+          value: "course_ends_on_asc"
+        },
+        {
+          label: "Latest course end date",
+          value: "course_ends_on_desc"
         }
       ]
     };
@@ -163,16 +200,18 @@ class GroupsTable extends PureComponent {
             );
           }}
         </Column>
-        <Column header="Role" columnPosition="left" cellSize="cellFitContent">
-          {({ model }) => {
-            const showJoin = this.userCanJoin(model);
-            return showJoin ? (
-              <JoinGroup readingGroup={model} />
-            ) : (
-              model.attributes.currentUserRole
-            );
-          }}
-        </Column>
+        {this.currentUser && (
+          <Column header="Role" columnPosition="left" cellSize="cellFitContent">
+            {({ model }) => {
+              const showJoin = this.userCanJoin(model);
+              return showJoin ? (
+                <JoinGroup readingGroup={model} />
+              ) : (
+                model.attributes.currentUserRole
+              );
+            }}
+          </Column>
+        )}
         <Column header="Members" cellSize="cellFitContent">
           {({ model }) => {
             const wrapInLink = !this.userCanJoin(model);

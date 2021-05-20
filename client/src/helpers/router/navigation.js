@@ -26,9 +26,7 @@ class Navigation {
       },
       {
         label: "Reading Groups",
-        route: "frontendMyReadingGroups",
-        entity: "readingGroup",
-        ability: "read"
+        route: "frontendPublicReadingGroups"
       }
     ];
   });

@@ -84,17 +84,32 @@ class ReadingGroupSettings extends PureComponent {
     this.setState({ showActionPanel: null });
   };
 
-  doDuplicate = ({ openOnProceed }) => {
-    const { href: endpoint, meta } = this.duplicateLink;
+  doDuplicate = ({ name, copyAnnotations, archive, openOnProceed }) => {
+    const options = {
+      body: JSON.stringify({
+        type: "readingGroups",
+        data: {
+          attributes: {
+            name,
+            archive,
+            cloneOwnedAnnotations: copyAnnotations
+          }
+        }
+      })
+    };
+    const {
+      href: endpoint,
+      meta: { method }
+    } = this.duplicateLink;
     const call = {
       endpoint,
-      options: {},
-      ...meta
+      method,
+      options
     };
     const duplicateRequest = request(call, requests.feReadingGroupClone, {});
-    this.props.dispatch(duplicateRequest).promise.then(() => {
+    this.props.dispatch(duplicateRequest).promise.then(({ data: { id } }) => {
       if (openOnProceed) {
-        this.redirectToDuplicatedGroup();
+        this.props.history.push(lh.link("frontendReadingGroupDetail", id));
       } else {
         this.setState({ showActionPanel: null });
       }
@@ -113,15 +128,10 @@ class ReadingGroupSettings extends PureComponent {
         options
       );
       this.props.dispatch(readingGroupRequest).promise.then(() => {
-        this.redirectToList();
+        this.props.history.push(lh.link("frontendMyReadingGroups"));
       });
     });
   };
-
-  redirectToList() {
-    const { history } = this.props;
-    history.push(lh.link("frontendMyReadingGroups"));
-  }
 
   render() {
     return (

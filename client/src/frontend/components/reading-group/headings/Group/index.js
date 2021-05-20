@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import { useUID } from "react-uid";
 import { Collapse } from "react-collapse";
 import classNames from "classnames";
-import Title from "./Title";
+import { Title } from "../parts";
 import DetailsToggle from "./DetailsToggle";
 import ChildNav from "./ChildNav";
 import ManageGroup from "./ManageGroup";
 import GroupSummaryBox from "./GroupSummaryBox";
 
-function GroupHeading({ readingGroup, canUpdateGroup, history, location }) {
+function GroupHeading({ readingGroup, history, location }) {
   const uid = useUID();
   const summaryRef = useRef();
 
@@ -22,6 +22,7 @@ function GroupHeading({ readingGroup, canUpdateGroup, history, location }) {
   }, [showDetails]);
 
   const groupName = readingGroup.attributes.name;
+  const canUpdateGroup = readingGroup.attributes.abilities.update;
 
   return (
     <header
@@ -32,7 +33,7 @@ function GroupHeading({ readingGroup, canUpdateGroup, history, location }) {
     >
       <div className="group-page-heading__container">
         <div className="group-page-heading__flex-container">
-          <Title groupName={groupName} />
+          <Title title={groupName} />
           <div className="group-page-heading__button-container">
             <DetailsToggle
               onClick={() => setShowDetails(prevState => !prevState)}
@@ -74,8 +75,7 @@ GroupHeading.displayName = "ReadingGroup.GroupHeading";
 GroupHeading.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  canUpdateGroup: PropTypes.bool
+  location: PropTypes.object.isRequired
 };
 
 export default GroupHeading;

@@ -13,7 +13,7 @@ function ReadingGroupHomepageStaticContainer({
 }) {
   const collection = getEntityCollection(readingGroup);
   const uncategorizedMappings =
-    collection.attributes.categoryMappings.$uncategorized$;
+    collection.attributes?.categoryMappings.$uncategorized$;
 
   const hasPopulatedCategories = categories?.length > 0;
   const hasUncategorized = !!uncategorizedMappings;

@@ -675,8 +675,10 @@
   padding: 16px 0 15px;
   font-size: 13px;
   line-height: 1.4;
+  color: var(--default-weak-color);
   text-decoration: none !important;
-  background-color: $neutral05;
+  letter-spacing: 0.1em;
+  background-color: var(--box-bg-color);
   transition: color $duration $timing, background-color $duration $timing;
 
   @include respond($break40) {
@@ -689,23 +691,21 @@
   }
 
   .bg-neutral95 & {
-    background-color: $neutral95;
-
     &:hover,
+    &:active,
     &:focus-visible {
-      background-color: $neutral95;
+      color: var(--default-hover-color);
+      background-color: inherit;
       outline: 0;
     }
   }
 
   &:hover,
-  &:active {
-    background-color: $neutral20;
-  }
-
+  &:active,
   &:focus-visible {
-    background-color: $focusTertiary;
-    outline: 0;
+    color: inherit;
+    background-color: var(--box-strong-bg-color);
+    outline: none;
   }
 
   &__container {
@@ -729,31 +729,27 @@
   }
 
   &__back-text {
-    margin-right: 10px;
+    margin-right: 8px;
   }
 
   &__title {
-    display: inline-block;
-    font-size: 14px;
-    font-weight: $regular;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
+    display: inline;
   }
 }
 
 .back-link-secondary {
+  @include utilityPrimary;
   display: block;
+  font-size: 14px;
   text-decoration: none !important;
-  background-color: $neutral10;
-  transition: background-color $duration $timing;
+  background-color: var(--box-medium-bg-color);
+  transition: color $duration $timing, background-color $duration $timing;
 
   &:hover,
-  &:active {
-    background-color: $neutral20;
-  }
-
+  &:active,
   &:focus-visible {
-    background-color: $focusTertiary;
+    color: inherit;
+    background-color: var(--box-strong-bg-color);
     outline: 0;
   }
 
@@ -766,44 +762,13 @@
     padding-bottom: 28px;
   }
 
-  &__icon,
-  &__project-title {
-    .back-link-secondary:hover & {
-      color: $neutral70;
-    }
-
-    .back-link-secondary:focus-visible & {
-      color: $neutral80;
-    }
-
-    .back-link-secondary:active & {
-      color: $accentPrimary;
-    }
-  }
-
   &__icon {
     margin-right: 16px;
-    color: $neutral50;
-    transition: color $duration $timing;
   }
 
   &__text {
     width: 100%;
-  }
-
-  &__back-text {
-    @include utilityPrimary;
-    font-size: 14px;
-    color: $neutral75;
-  }
-
-  &__project-title {
-    @include templateHead;
-    display: block;
-    font-size: 17px;
-    line-height: 1.556;
-    color: $neutral50;
-    transition: color $duration $timing;
+    transform: translateY(-1px);
   }
 }
 /* stylelint-enable  declaration-no-important */

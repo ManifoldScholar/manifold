@@ -3,7 +3,6 @@ import get from "lodash/get";
 import { readingGroupsAPI, requests } from "api";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
-import Authorization from "helpers/authorization";
 import connectAndFetch from "utils/connectAndFetch";
 import { grab } from "utils/entityUtils";
 import { entityStoreActions } from "actions";
@@ -47,11 +46,6 @@ class ReadingGroup extends Component {
     };
   };
 
-  constructor(props) {
-    super(props);
-    this.authorization = new Authorization();
-  }
-
   get readingGroup() {
     return this.props.readingGroup;
   }
@@ -80,11 +74,12 @@ class ReadingGroup extends Component {
     return this.location.hash;
   }
 
+  get abilities() {
+    return this.readingGroup.attributes.abilities;
+  }
+
   get canUpdateGroup() {
-    return this.authorization.authorizeAbility({
-      entity: this.readingGroup,
-      ability: "update"
-    });
+    return this.abilities.update;
   }
 
   get showSettingsDrawer() {
@@ -123,6 +118,18 @@ class ReadingGroup extends Component {
       position: "overlay",
       lockScroll: "always",
       closeCallback: () => this.handleClose()
+    };
+  }
+
+  get backLinkProps() {
+    if (this.readingGroup.attributes.currentUserRole === "none")
+      return {
+        link: lh.link("frontendPublicReadingGroups"),
+        backText: "Back to: Public Reading Groups"
+      };
+    return {
+      link: lh.link("frontendMyReadingGroups"),
+      backText: "Back to: My Reading Groups"
     };
   }
 
@@ -170,13 +177,9 @@ class ReadingGroup extends Component {
         <HeadContent title={this.groupName} appendTitle />
         <section>
           <div className="container">
-            <BackLink.Register
-              link={lh.link("frontendMyReadingGroups")}
-              backText={"Manage Reading Groups"}
-            />
+            <BackLink.Register {...this.backLinkProps} />
             <GroupHeading
               readingGroup={this.readingGroup}
-              canUpdateGroup={this.canUpdateGroup}
               history={this.history}
               location={this.location}
             />

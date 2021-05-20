@@ -22,12 +22,9 @@ import Subscriptions from "frontend/containers/Subscriptions";
 import Unsubscribe from "frontend/containers/Unsubscribe";
 import Home from "frontend/containers/Home";
 import MyReadingGroups from "frontend/containers/MyReadingGroups";
-import MyReadingGroupsList from "frontend/containers/MyReadingGroups/List";
-import MyReadingGroupsNew from "frontend/containers/MyReadingGroups/New";
 import PublicReadingGroups from "frontend/containers/PublicReadingGroups";
 import ReadingGroup from "frontend/containers/ReadingGroup";
 import ReadingGroupMembers from "frontend/containers/ReadingGroup/Members";
-import ReadingGroupMemberEdit from "frontend/containers/ReadingGroup/MemberEdit";
 import ReadingGroupAnnotations from "frontend/containers/ReadingGroup/Annotations";
 import ReadingGroupHomepage from "frontend/containers/ReadingGroup/Homepage";
 import Login from "frontend/containers/Login";
@@ -59,17 +56,20 @@ export default {
   Subscriptions,
   Unsubscribe,
   Home,
-  MyReadingGroups,
-  MyReadingGroupsList,
-  MyReadingGroupsNew,
-  PublicReadingGroups,
+  MyReadingGroups: MyReadingGroups.Wrapper,
+  MyReadingGroupsList: MyReadingGroups.List,
+  MyReadingGroupsNew: MyReadingGroups.New,
+  PublicReadingGroups: PublicReadingGroups.Wrapper,
+  PublicReadingGroupsList: PublicReadingGroups.List,
   ReadingGroup,
-  ReadingGroupMembers,
-  ReadingGroupMemberEdit,
+  ReadingGroupMembers: ReadingGroupMembers.Wrapper,
+  ReadingGroupMembersList: ReadingGroupMembers.List,
+  ReadingGroupMemberEdit: ReadingGroupMembers.MemberEdit,
   ReadingGroupAnnotations,
   ReadingGroupHomepage: ReadingGroupHomepage.Wrapper,
   ReadingGroupHomepageStatic: ReadingGroupHomepage.Static,
   ReadingGroupHomepageEdit: ReadingGroupHomepage.Edit,
+  ReadingGroupHomepageFetch: ReadingGroupHomepage.Fetch,
   Login,
   SignUp,
   MyStarred,

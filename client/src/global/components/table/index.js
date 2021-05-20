@@ -37,7 +37,7 @@ export default class Table extends PureComponent {
       pagination: this.props.pagination,
       singularUnit: this.props.singularUnit,
       pluralUnit: this.props.pluralUnit,
-      showRange: false
+      showRange: true
     };
   }
 

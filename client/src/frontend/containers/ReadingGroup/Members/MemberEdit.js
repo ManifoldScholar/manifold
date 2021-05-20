@@ -11,7 +11,7 @@ import {
 
 const { flush } = entityStoreActions;
 
-function MemberEdit({
+function ReadingGroupMemberEditContainer({
   match,
   readingGroup,
   confirm,
@@ -58,7 +58,7 @@ function MemberEdit({
   );
 }
 
-MemberEdit.propTypes = {
+ReadingGroupMemberEditContainer.propTypes = {
   match: PropTypes.object.isRequired,
   readingGroup: PropTypes.object.isRequired,
   confirm: PropTypes.func.isRequired,
@@ -67,4 +67,4 @@ MemberEdit.propTypes = {
   onEditSuccess: PropTypes.func.isRequired
 };
 
-export default MemberEdit;
+export default ReadingGroupMemberEditContainer;

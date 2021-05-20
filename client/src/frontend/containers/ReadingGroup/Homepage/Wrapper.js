@@ -1,75 +1,37 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
+import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import {
-  useDispatchReadingGroupCollected,
-  useSelectReadingGroupCollected,
-  useDispatchReadingGroupCategories,
-  useSelectReadingGroupCategories
-} from "hooks";
+import { hasItemsInCollection } from "frontend/components/collecting/helpers";
 
-function ReadingGroupHomepageContainer({
-  readingGroup,
-  route,
-  dispatch,
-  history,
-  onRefresh
-}) {
-  const groupId = readingGroup.id;
-  const [fetchVersion, setFetchVersion] = useState(1);
+/*
+Some RGs may choose to only use annotation features and not do any collecting.
+In such cases we'll just redirect to the annotations page (except for moderators,
+who have collecting privileges) rather than show the empty homepage.
+*/
+function ReadingGroupHomepageContainer({ route, readingGroup, ...restProps }) {
+  const canUpdateGroup = readingGroup.attributes.abilities.update;
+  const showHomepage = canUpdateGroup || hasItemsInCollection(readingGroup);
 
-  useDispatchReadingGroupCategories(groupId, fetchVersion);
+  if (!showHomepage)
+    return (
+      <Redirect
+        to={lh.link("frontendReadingGroupAnnotations", readingGroup.id)}
+      />
+    );
 
-  useDispatchReadingGroupCollected(groupId, "projects", fetchVersion);
-  useDispatchReadingGroupCollected(groupId, "texts", fetchVersion);
-  useDispatchReadingGroupCollected(groupId, "text_sections", fetchVersion);
-  useDispatchReadingGroupCollected(
-    groupId,
-    "resource_collections",
-    fetchVersion
-  );
-  useDispatchReadingGroupCollected(groupId, "resources", fetchVersion);
-
-  const categories = useSelectReadingGroupCategories() || [];
-
-  const responses = {
-    projects: useSelectReadingGroupCollected("projects"),
-    texts: useSelectReadingGroupCollected("texts"),
-    textSections: useSelectReadingGroupCollected("text_sections"),
-    resourceCollections: useSelectReadingGroupCollected("resource_collections"),
-    resources: useSelectReadingGroupCollected("resources")
-  };
-
-  const refresh = useCallback(
-    () => {
-      setFetchVersion(current => current + 1);
-      onRefresh();
-    },
-    [] // eslint-disable-line react-hooks/exhaustive-deps
-  );
-
-  return (
-    <div className="group-page-body">
-      {childRoutes(route, {
-        childProps: {
-          readingGroup,
-          categories,
-          responses,
-          dispatch,
-          history,
-          refresh
-        }
-      })}
-    </div>
-  );
+  return childRoutes(route, {
+    childProps: {
+      readingGroup,
+      ...restProps
+    }
+  });
 }
 
 ReadingGroupHomepageContainer.propTypes = {
   readingGroup: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  onRefresh: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired
 };
 
 export default ReadingGroupHomepageContainer;

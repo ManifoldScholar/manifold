@@ -1,1 +1,1 @@
-export { default as DuplicatePanel } from "./composed/DuplicatePanel";
+export { default as DuplicatePanel } from "./composed/Duplicate";

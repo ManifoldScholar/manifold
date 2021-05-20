@@ -17,5 +17,5 @@ export default function useSelectAnnotations(groupId, context, filtered) {
     loaded(requests[requestName], state.entityStore)
   );
 
-  return { annotations, annotationsMeta, loaded: annotationsLoaded };
+  return { annotations, annotationsMeta, annotationsLoaded };
 }

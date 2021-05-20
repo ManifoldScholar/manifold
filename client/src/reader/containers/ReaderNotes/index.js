@@ -49,11 +49,11 @@ function ReaderNotesContainer({
   const { readingGroup, ...fetchFilters } = filterState;
 
   useDispatchAnnotations(fetchFilters, {}, readingGroup, "reader", true);
-  const { annotations, annotationsMeta, loaded } = useSelectAnnotations(
-    readingGroup,
-    "reader",
-    true
-  );
+  const {
+    annotations,
+    annotationsMeta,
+    annotationsLoaded
+  } = useSelectAnnotations(readingGroup, "reader", true);
 
   const commonActions = commonActionsHelper(dispatch);
 
@@ -103,7 +103,7 @@ function ReaderNotesContainer({
     history.push(url);
   }
 
-  if (!loaded || !annotations || !annotationsMeta) return null;
+  if (!annotationsLoaded || !annotations || !annotationsMeta) return null;
 
   const sortedAnnotations = mapAnnotationsToSections();
 

@@ -3,7 +3,7 @@ $_container-gap: 30px;
 
 .group-page-heading {
   &__container {
-    &:not(:last-child) {
+    &:not(:last-child):not(:empty) {
       padding-bottom: $_container-gap;
     }
   }
@@ -34,7 +34,7 @@ $_container-gap: 30px;
     }
   }
 
-  &__nav-container {
+  &__nav-container:not(:empty) {
     padding-top: 20px;
   }
 

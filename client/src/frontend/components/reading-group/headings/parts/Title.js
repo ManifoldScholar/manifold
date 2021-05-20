@@ -2,17 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
 
-function HeadingTitle({ groupName }) {
+function HeadingTitle({ title, icon = "readingGroup24" }) {
   return (
     <div className="group-page-heading__text-container">
       <IconComposer
-        icon="readingGroup24"
+        icon={icon}
         size={32}
         iconClass={"group-page-heading__icon"}
       />
-      <h1 className={"heading-primary group-page-heading__text"}>
-        {groupName}
-      </h1>
+      <h1 className={"heading-primary group-page-heading__text"}>{title}</h1>
     </div>
   );
 }
@@ -20,7 +18,8 @@ function HeadingTitle({ groupName }) {
 HeadingTitle.displayName = "ReadingGroup.Heading.Title";
 
 HeadingTitle.propTypes = {
-  groupName: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.string
 };
 
 export default HeadingTitle;
