@@ -1,6 +1,7 @@
 .group-collection-editor {
   $_category-vertical-padding: 19px;
   $_collectable-min-height: 50px;
+  $_input-height: $_collectable-min-height;
   $_collectable-vertical-padding: 5px;
   $_collectable-type-vertical-padding: 10px;
 
@@ -160,7 +161,8 @@
 
   &__input {
     flex-grow: 1;
-    padding: 14px 20px 16px;
+    height: $_input-height;
+    padding: 0 20px 2px;
     font: inherit;
     background-color: var(--box-bg-color);
     border: none;
@@ -183,6 +185,7 @@
     @include utilityPrimary;
     display: flex;
     align-items: center;
+    height: $_input-height;
     padding-right: 27px;
     padding-left: 27px;
     font-size: 14px;

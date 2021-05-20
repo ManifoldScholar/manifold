@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
 import Utility from "global/components/utility";
+import { getEntityCollection } from "frontend/components/collecting/helpers";
 import Section from "./Section";
 import Item from "./Item";
-import { getEntityCollection } from "frontend/components/collecting/helpers";
 
 function collectedIdsForCollectionByType(readingGroup) {
   const collection = getEntityCollection(readingGroup);
-  if (!collection) return [];
+  if (!collection?.attributes) return [];
   const mappings = collection.attributes.categoryMappings;
   return Object.assign({}, ...Object.values(mappings));
 }

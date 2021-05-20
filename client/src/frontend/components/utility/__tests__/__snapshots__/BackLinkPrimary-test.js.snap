@@ -22,7 +22,7 @@ exports[`frontend/components/utility/BackLinkPrimary matches the snapshot 1`] = 
     <span
       className="back-link-primary__back-text"
     >
-      Back to Project
+      Back to Project:
     </span>
     <span
       className="back-link-primary__title"
