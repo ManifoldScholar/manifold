@@ -8,7 +8,7 @@ import config from "config";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import MembersTable from "frontend/components/reading-group/Table/Members";
+import MembersTable from "frontend/components/reading-group/tables/Members";
 
 import withConfirmation from "hoc/with-confirmation";
 
@@ -16,7 +16,7 @@ const { request } = entityStoreActions;
 const defaultPage = 1;
 const perPage = 10;
 
-class ReadingGroupsMembersContainer extends Component {
+class ReadingGroupsMembersListContainer extends Component {
   static propTypes = {
     confirm: PropTypes.func.isRequired
   };
@@ -38,7 +38,7 @@ class ReadingGroupsMembersContainer extends Component {
 
   static fetchData = (getState, dispatch, location, match) => {
     const params = queryString.parse(location.search);
-    const promise = ReadingGroupsMembersContainer.fetchMembers(
+    const promise = ReadingGroupsMembersListContainer.fetchMembers(
       dispatch,
       params.page,
       match
@@ -78,7 +78,7 @@ class ReadingGroupsMembersContainer extends Component {
   }
 
   get membersRoute() {
-    lh.link("frontendReadingGroupMembers", this.props.readingGroup.id);
+    return lh.link("frontendReadingGroupMembers", this.props.readingGroup.id);
   }
 
   handlePageChange = pageParam => {
@@ -189,4 +189,6 @@ class ReadingGroupsMembersContainer extends Component {
   }
 }
 
-export default connectAndFetch(withConfirmation(ReadingGroupsMembersContainer));
+export default connectAndFetch(
+  withConfirmation(ReadingGroupsMembersListContainer)
+);

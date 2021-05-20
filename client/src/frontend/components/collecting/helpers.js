@@ -2,6 +2,7 @@ import flatMapDepth from "lodash/flatMapDepth";
 import identity from "lodash/identity";
 import has from "lodash/has";
 import get from "lodash/get";
+import isEmpty from "lodash/isEmpty";
 
 export function getEntityCollection(entity, relationship = "collection") {
   return get(entity, `relationships.${relationship}`);
@@ -49,4 +50,10 @@ export function getResponse(id, responses) {
 export function idInResponses(id, responses) {
   if (responses?.length < 1) return false;
   return responses.map(res => res.id).includes(id);
+}
+
+export function hasItemsInCollection(entity) {
+  const collection = getEntityCollection(entity);
+  if (!collection?.attributes) return false;
+  return !isEmpty(collection.attributes.categoryMappings);
 }

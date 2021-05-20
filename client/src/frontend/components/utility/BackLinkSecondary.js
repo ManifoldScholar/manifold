@@ -13,7 +13,7 @@ export default class UtilityBackLinkSecondary extends Component {
   };
 
   static defaultProps = {
-    backText: "Back to Project"
+    backText: "Back to Project:"
   };
 
   render() {

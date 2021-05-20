@@ -67,7 +67,9 @@ export default class DraggableEventHelper {
 
   get actionableCollectable() {
     if (!this.destination) return false;
-    return true;
+    const idMatches = this.sourceId === this.destinationId;
+    const indexMatches = this.source.index === this.destination.index;
+    return !idMatches || !indexMatches;
   }
 
   get action() {

@@ -529,7 +529,7 @@ exports[`frontend/containers/EventList/EventList matches the snapshot 1`] = `
     }
   />
   <BackLinkRegister
-    backText="Back to Project"
+    backText="Back to Project:"
     link="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
     title="Rowan Test"
   />

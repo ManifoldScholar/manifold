@@ -60,7 +60,7 @@ export class EventList extends Component {
           isProjectSubpage
         />
         <BackLink.Register
-          backText="Back to Project"
+          backText="Back to Project:"
           link={this.projectUrl()}
           title={project.attributes.title}
         />

@@ -4,12 +4,16 @@ import queryString from "query-string";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import { childRoutes } from "helpers/router";
-import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import GroupsTable from "frontend/components/reading-group/tables/Groups";
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";
-import { useDispatchMyReadingGroups, useSelectMyReadingGroups } from "hooks";
+
+import {
+  useDispatchPublicReadingGroups,
+  useSelectPublicReadingGroups
+} from "hooks";
+import withCurrentUser from "hoc/with-current-user";
 
 const DEFAULT_SORT_ORDER = "";
 const DEFAULT_PAGE = 1;
@@ -36,7 +40,12 @@ function setInitialPaginationState(location) {
   };
 }
 
-function MyReadingGroupsListContainer({ location, history, route }) {
+function PublicReadingGroupsListContainer({
+  location,
+  history,
+  route,
+  currentUser
+}) {
   const [filterState, setFilterState] = useState(
     setInitialFilterState(location)
   );
@@ -59,12 +68,8 @@ function MyReadingGroupsListContainer({ location, history, route }) {
 
   const [fetchVersion, setFetchVersion] = useState(1);
 
-  useDispatchMyReadingGroups(filterState, paginationState, fetchVersion);
-  const {
-    readingGroups,
-    readingGroupsMeta,
-    readingGroupsLoaded
-  } = useSelectMyReadingGroups();
+  useDispatchPublicReadingGroups(filterState, paginationState, fetchVersion);
+  const { readingGroups, readingGroupsMeta } = useSelectPublicReadingGroups();
 
   function handleFilterChange(filterParam) {
     setFilterState(filterParam);
@@ -86,7 +91,7 @@ function MyReadingGroupsListContainer({ location, history, route }) {
   };
 
   function handleNewGroupSuccess() {
-    history.push(lh.link("frontendMyReadingGroups"));
+    updateUrlFromState();
     setFetchVersion(current => current + 1);
   }
 
@@ -97,30 +102,37 @@ function MyReadingGroupsListContainer({ location, history, route }) {
       size: "wide",
       position: "overlay",
       lockScroll: "always",
-      closeUrl: lh.link("frontendMyReadingGroups")
+      closeCallback: updateUrlFromState
     },
     childProps: {
       onSuccess: handleNewGroupSuccess
     }
   };
 
+  const showTable = readingGroups && readingGroupsMeta;
+
   return (
     <>
       <HeadContent title="My Reading Groups" appendTitle />
       <section>
         <div className="container groups-page-container">
-          <GroupsHeading />
-          {readingGroupsLoaded && (
+          <GroupsHeading currentUser={currentUser} />
+          {showTable && (
             <GroupsTable
               readingGroups={readingGroups}
+              currentUser={currentUser}
               pagination={get(readingGroupsMeta, "pagination")}
               onPageClick={pageChangeHandlerCreator}
               initialFilterState={filterState}
               resetFilterState={handleFilterReset}
               filterChangeHandler={handleFilterChange}
+              hideActions
+              hideTags
             />
           )}
-          <JoinBox onJoin={() => setFetchVersion(current => current + 1)} />
+          {currentUser && (
+            <JoinBox onJoin={() => setFetchVersion(current => current + 1)} />
+          )}
         </div>
       </section>
       {childRoutes(route, childRouteProps)}
@@ -128,13 +140,11 @@ function MyReadingGroupsListContainer({ location, history, route }) {
   );
 }
 
-MyReadingGroupsListContainer.propTypes = {
-  match: PropTypes.object.isRequired,
+PublicReadingGroupsListContainer.propTypes = {
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
-  settings: PropTypes.object,
-  projectBackLink: PropTypes.node
+  currentUser: PropTypes.object
 };
 
-export default MyReadingGroupsListContainer;
+export default withCurrentUser(PublicReadingGroupsListContainer);
