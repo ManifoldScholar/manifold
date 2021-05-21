@@ -15,7 +15,6 @@ class ReadingGroupAuthorizer < ApplicationAuthorizer
   end
 
   def readable_by?(user, _options = {})
-    return false unless known_user?(user)
     return false if reading_groups_disabled?
 
     creator_or_has_admin_permissions?(user, resource) || resource.users.include?(user) || resource.public?

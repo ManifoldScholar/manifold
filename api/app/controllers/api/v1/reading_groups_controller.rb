@@ -4,8 +4,6 @@ module API
     class ReadingGroupsController < ApplicationController
       include MonadicControllerActions
 
-      before_action :authenticate_request!
-
       SERIALIZED_INCLUDES = %i[kind collection].freeze
 
       resourceful! ReadingGroup do
