@@ -121,11 +121,11 @@ function MyAnnotationsContainer({ location, history }) {
                 showCommentsToggleAsBlock
               />
             )}
-            {!hasAnnotations && (
-              <Annotation.List.Placeholder
-                isGroup={false}
-                isFiltered={isFiltered}
-              />
+            {!hasAnnotations && isFiltered && (
+              <Annotation.List.FilteredPlaceholder />
+            )}
+            {!hasAnnotations && !isFiltered && (
+              <Annotation.List.MyPlaceholder />
             )}
           </div>
         </div>

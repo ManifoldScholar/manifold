@@ -75,6 +75,23 @@ class ProjectResourceCollectionsContainer extends Component {
     };
   };
 
+  placeholderActions(id) {
+    return [
+      {
+        children: (
+          <Authorize entity="project" ability="create">
+            <Link
+              to={lh.link("backendProjectResourceCollectionsNew", id)}
+              className="button-tertiary"
+            >
+              Create a Collection
+            </Link>
+          </Authorize>
+        )
+      }
+    ];
+  }
+
   get hasCollections() {
     return (
       this.props.resourceCollections &&
@@ -107,18 +124,7 @@ class ProjectResourceCollectionsContainer extends Component {
             </Authorize>
           </>
         </ContentPlaceholder.Body>
-        <ContentPlaceholder.Actions>
-          <Authorize entity="project" ability="create">
-            <Link
-              to={lh.link("backendProjectResourceCollectionsNew", id)}
-              className="button-icon-primary"
-            >
-              <span className="button-icon-primary__text">
-                {"Create a Collection"}
-              </span>
-            </Link>
-          </Authorize>
-        </ContentPlaceholder.Actions>
+        <ContentPlaceholder.Actions actions={this.placeholderActions(id)} />
       </ContentPlaceholder.Wrapper>
     );
   }

@@ -109,16 +109,16 @@ function ReadingGroupAnnotationsContainer({
             showCommentsToggleAsBlock
           />
         )}
-        {!hasAnnotations && (
-          <Annotation.List.Placeholder isGroup isFiltered={isFiltered} />
+        {!hasAnnotations && isFiltered && (
+          <Annotation.List.FilteredPlaceholder />
+        )}
+        {!hasAnnotations && !isFiltered && (
+          <Annotation.List.GroupPlaceholder readingGroup={readingGroup} />
         )}
       </div>
     </>
   );
 }
-
-ReadingGroupAnnotationsContainer.displayName =
-  "ReadingGroup.AnnotationContainer";
 
 ReadingGroupAnnotationsContainer.propTypes = {
   readingGroup: PropTypes.object.isRequired,

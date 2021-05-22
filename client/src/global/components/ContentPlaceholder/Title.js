@@ -8,7 +8,7 @@ const PlaceholderTitle = ({ icon, iconProps, children }) => (
         <IconComposer
           icon={icon}
           iconClass="content-placeholder__icon"
-          size={120}
+          size={48}
           {...iconProps}
         />
       </div>

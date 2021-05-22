@@ -1,11 +1,13 @@
 import GroupedBySection from "./GroupedBySection";
 import GroupedBySelection from "./GroupedBySelection";
 import Default from "./Default";
-import Placeholder from "./Placeholder";
+import { Filtered, Group, My } from "./placeholders";
 
 export default {
   GroupedBySelection,
   GroupedBySection,
   Default,
-  Placeholder
+  FilteredPlaceholder: Filtered,
+  GroupPlaceholder: Group,
+  MyPlaceholder: My
 };

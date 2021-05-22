@@ -7,9 +7,11 @@ import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import GroupsTable from "frontend/components/reading-group/tables/Groups";
+import GroupsTablePlaceholder from "frontend/components/reading-group/tables/Groups/Placeholder";
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";
 import { useDispatchMyReadingGroups, useSelectMyReadingGroups } from "hooks";
+import withCurrentUser from "hoc/with-current-user";
 
 const DEFAULT_SORT_ORDER = "";
 const DEFAULT_PAGE = 1;
@@ -36,7 +38,12 @@ function setInitialPaginationState(location) {
   };
 }
 
-function MyReadingGroupsListContainer({ location, history, route }) {
+function MyReadingGroupsListContainer({
+  location,
+  history,
+  route,
+  currentUser
+}) {
   const [filterState, setFilterState] = useState(
     setInitialFilterState(location)
   );
@@ -104,13 +111,16 @@ function MyReadingGroupsListContainer({ location, history, route }) {
     }
   };
 
+  const showTable = readingGroupsLoaded && !!readingGroups?.length;
+  const showPlaceholder = readingGroupsLoaded && !readingGroups?.length;
+
   return (
     <>
       <HeadContent title="My Reading Groups" appendTitle />
       <section>
         <div className="container groups-page-container">
-          <GroupsHeading />
-          {readingGroupsLoaded && (
+          <GroupsHeading currentUser={currentUser} />
+          {showTable && (
             <GroupsTable
               readingGroups={readingGroups}
               pagination={get(readingGroupsMeta, "pagination")}
@@ -119,6 +129,9 @@ function MyReadingGroupsListContainer({ location, history, route }) {
               resetFilterState={handleFilterReset}
               filterChangeHandler={handleFilterChange}
             />
+          )}
+          {showPlaceholder && (
+            <GroupsTablePlaceholder currentUser={currentUser} />
           )}
           <JoinBox onJoin={() => setFetchVersion(current => current + 1)} />
         </div>
@@ -133,8 +146,9 @@ MyReadingGroupsListContainer.propTypes = {
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
   settings: PropTypes.object,
   projectBackLink: PropTypes.node
 };
 
-export default MyReadingGroupsListContainer;
+export default withCurrentUser(MyReadingGroupsListContainer);
