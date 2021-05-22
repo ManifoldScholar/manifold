@@ -12,7 +12,8 @@ export default function useDispatchAnnotations(
   page,
   groupId,
   context,
-  filtered
+  filtered,
+  fetchVersion
 ) {
   const dispatch = useDispatch();
   const groupType = groupId === "me" ? "me" : "group";
@@ -33,6 +34,7 @@ export default function useDispatchAnnotations(
     JSON.stringify(page),
     groupId,
     context,
-    filtered
+    filtered,
+    fetchVersion
   ]);
 }

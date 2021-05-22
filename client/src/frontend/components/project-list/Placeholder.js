@@ -6,6 +6,20 @@ import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
 export default class ProjectListPlaceholder extends React.PureComponent {
+  get actions() {
+    return [
+      {
+        children: (
+          <Authorize entity="project" ability="create">
+            <Link to={lh.link("backendProjects")} className="button-tertiary">
+              Publish a Project Now
+            </Link>
+          </Authorize>
+        )
+      }
+    ];
+  }
+
   renderAdminMessage() {
     const helpLink = "https://manifoldapp.org/docs/";
     return (
@@ -64,18 +78,7 @@ export default class ProjectListPlaceholder extends React.PureComponent {
                 />
               </>
             </ContentPlaceholder.Body>
-            <ContentPlaceholder.Actions>
-              <Authorize entity="project" ability="create">
-                <Link
-                  to={lh.link("backendProjects")}
-                  className="button-icon-primary"
-                >
-                  <span className="button-icon-primary__text">
-                    {"Publish a Project Now"}
-                  </span>
-                </Link>
-              </Authorize>
-            </ContentPlaceholder.Actions>
+            <ContentPlaceholder.Actions actions={this.actions} />
           </ContentPlaceholder.Wrapper>
         </div>
       </section>

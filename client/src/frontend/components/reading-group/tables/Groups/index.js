@@ -24,6 +24,7 @@ class GroupsTable extends PureComponent {
     resetFilterState: PropTypes.func.isRequired,
     filterChangeHandler: PropTypes.func.isRequired,
     currentUser: PropTypes.object,
+    history: PropTypes.object,
     hideActions: PropTypes.bool,
     hideTags: PropTypes.bool
   };
@@ -160,6 +161,10 @@ class GroupsTable extends PureComponent {
     this.props.filterChangeHandler(filter);
   };
 
+  handleJoinSuccess = group => {
+    this.props.history.push(lh.link("frontendReadingGroupDetail", group.id));
+  };
+
   render() {
     return (
       <Table
@@ -205,7 +210,11 @@ class GroupsTable extends PureComponent {
             {({ model }) => {
               const showJoin = this.userCanJoin(model);
               return showJoin ? (
-                <JoinGroup readingGroup={model} />
+                <JoinGroup
+                  readingGroup={model}
+                  onSuccess={() => this.handleJoinSuccess(model)}
+                  outlined
+                />
               ) : (
                 model.attributes.currentUserRole
               );
