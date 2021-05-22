@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import template from "lodash/template";
+import classNames from "classnames";
 import config from "config";
 import { requests } from "api";
 import { entityStoreActions } from "actions";
@@ -9,7 +10,7 @@ import withConfirmation from "hoc/with-confirmation";
 
 const { request } = entityStoreActions;
 
-function JoinGroup({ confirm, readingGroup }) {
+function JoinGroup({ confirm, readingGroup, onSuccess, buttonText, outlined }) {
   const dispatch = useDispatch();
 
   function doJoin() {
@@ -27,7 +28,9 @@ function JoinGroup({ confirm, readingGroup }) {
       requests.feReadingGroupMembershipCreate,
       {}
     );
-    dispatch(joinRequest);
+    dispatch(joinRequest).promise.then(() => {
+      if (onSuccess) onSuccess();
+    });
   }
 
   function handleClick() {
@@ -39,9 +42,12 @@ function JoinGroup({ confirm, readingGroup }) {
   return (
     <button
       onClick={handleClick}
-      className="button-tertiary button-tertiary--outlined"
+      className={classNames({
+        "button-tertiary": true,
+        "button-tertiary--outlined": outlined
+      })}
     >
-      Join
+      {buttonText || "Join"}
     </button>
   );
 }
@@ -50,7 +56,10 @@ JoinGroup.displayName = "GroupsTable.Group.Join";
 
 JoinGroup.propTypes = {
   confirm: PropTypes.func.isRequired,
-  readingGroup: PropTypes.object.isRequired
+  readingGroup: PropTypes.object.isRequired,
+  onSuccess: PropTypes.func,
+  buttonText: PropTypes.string,
+  outlined: PropTypes.bool
 };
 
 export default withConfirmation(JoinGroup);

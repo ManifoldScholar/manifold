@@ -8,6 +8,23 @@ import ContentPlaceholder from "global/components/ContentPlaceholder";
 export default class ProjectCollectionPlaceholder extends Component {
   static displayName = "ProjectCollection.Placeholder";
 
+  get actions() {
+    return [
+      {
+        children: (
+          <Authorize entity="project" ability="create">
+            <Link
+              to={lh.link("backendProjectCollections")}
+              className="button-tertiary"
+            >
+              Create a collection now
+            </Link>
+          </Authorize>
+        )
+      }
+    ];
+  }
+
   renderAdminMessage() {
     const helpLink = "https://manifoldapp.org/docs/";
     const adminLink = lh.link("backendProjectCollections");
@@ -67,18 +84,7 @@ export default class ProjectCollectionPlaceholder extends Component {
                 />
               </>
             </ContentPlaceholder.Body>
-            <ContentPlaceholder.Actions>
-              <Authorize entity="project" ability="create">
-                <Link
-                  to={lh.link("backendProjectCollections")}
-                  className="button-icon-primary"
-                >
-                  <span className="button-icon-primary__text">
-                    {"Create a collection Now"}
-                  </span>
-                </Link>
-              </Authorize>
-            </ContentPlaceholder.Actions>
+            <ContentPlaceholder.Actions actions={this.actions} />
           </ContentPlaceholder.Wrapper>
         </div>
       </section>

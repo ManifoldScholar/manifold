@@ -586,13 +586,13 @@
   display: inline-block;
   padding: 5px 14px 7px;
   font-size: 12px;
-  color: var(--default-strong-color);
+  color: $neutralTextExtraDark;
   text-align: center;
   text-decoration: none;
   letter-spacing: 0.134em;
   white-space: nowrap;
-  background-color: $accentPrimaryPale;
-  border: 1px solid $accentPrimaryPale;
+  background-color: var(--button-tertiary-bg-color);
+  border: 1px solid var(--button-tertiary-bg-color);
   border-radius: 4px;
   transition: color $duration $timing, background-color $duration $timing,
     border-color $duration $timing;
@@ -600,9 +600,9 @@
   &:hover,
   &:focus-visible,
   &--active {
-    color: var(--default-strong-color);
-    background-color: $accentInteractionLight;
-    border-color: $accentInteractionLight;
+    color: $neutralTextExtraDark;
+    background-color: var(--button-tertiary-bg-hover-color);
+    border-color: var(--button-tertiary-bg-hover-color);
     outline: 0;
   }
 
