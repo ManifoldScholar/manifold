@@ -126,6 +126,8 @@ body {
   --textarea-border-color: transparent;
   --textarea-font-family: #{$fontStackSans};
   --button-dull-bg-color: #{$neutral30};
+  --button-tertiary-bg-color: #{$accentPrimaryPale};
+  --button-tertiary-bg-hover-color: #{$accentPrimaryLight};
   --reader-color: var(--default-strong-color);
 
   color: var(--default-color);
@@ -158,6 +160,8 @@ body {
   --textarea-border-color: #{$neutralUIDullLight};
   --textarea-font-family: #{$fontStackSerif};
   --button-dull-bg-color: #{$neutral10};
+  --button-tertiary-bg-color: #{$accentPrimary};
+  --button-tertiary-bg-hover-color: #{$accentPrimaryPale};
   --reader-color: #{$neutralWhite};
 
   color: var(--default-color);

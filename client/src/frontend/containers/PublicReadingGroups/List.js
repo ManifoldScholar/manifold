@@ -6,6 +6,7 @@ import get from "lodash/get";
 import { childRoutes } from "helpers/router";
 import HeadContent from "global/components/HeadContent";
 import GroupsTable from "frontend/components/reading-group/tables/Groups";
+import GroupsTablePlaceholder from "frontend/components/reading-group/tables/Groups/Placeholder";
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";
 
@@ -69,7 +70,11 @@ function PublicReadingGroupsListContainer({
   const [fetchVersion, setFetchVersion] = useState(1);
 
   useDispatchPublicReadingGroups(filterState, paginationState, fetchVersion);
-  const { readingGroups, readingGroupsMeta } = useSelectPublicReadingGroups();
+  const {
+    readingGroups,
+    readingGroupsMeta,
+    readingGroupsLoaded
+  } = useSelectPublicReadingGroups();
 
   function handleFilterChange(filterParam) {
     setFilterState(filterParam);
@@ -109,11 +114,12 @@ function PublicReadingGroupsListContainer({
     }
   };
 
-  const showTable = readingGroups && readingGroupsMeta;
+  const showTable = readingGroupsLoaded && !!readingGroups?.length;
+  const showPlaceholder = readingGroupsLoaded && !readingGroups?.length;
 
   return (
     <>
-      <HeadContent title="My Reading Groups" appendTitle />
+      <HeadContent title="Public Reading Groups" appendTitle />
       <section>
         <div className="container groups-page-container">
           <GroupsHeading currentUser={currentUser} />
@@ -126,9 +132,13 @@ function PublicReadingGroupsListContainer({
               initialFilterState={filterState}
               resetFilterState={handleFilterReset}
               filterChangeHandler={handleFilterChange}
+              history={history}
               hideActions
               hideTags
             />
+          )}
+          {showPlaceholder && (
+            <GroupsTablePlaceholder currentUser={currentUser} isPublic />
           )}
           {currentUser && (
             <JoinBox onJoin={() => setFetchVersion(current => current + 1)} />

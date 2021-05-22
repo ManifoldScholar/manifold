@@ -12,7 +12,7 @@ body.fatal-error-page {
 /* stylelint-enable */
 
 .fatal-error {
-  height: 100%;
+  min-height: 100%;
   border: 20px solid $defaultErrorColor;
 
   .error-wrapper {
