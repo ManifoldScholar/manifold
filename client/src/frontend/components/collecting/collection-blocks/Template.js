@@ -5,7 +5,7 @@ import {
   Wrapper
 } from "frontend/components/content-block/Block/parts";
 
-function CollectionBlock({ id, title, icon, children, nested }) {
+function CollectionBlockTemplate({ id, title, icon, children, nested }) {
   return (
     <Wrapper id={id} theme={nested ? "nested" : "box"} nested={nested}>
       <Heading title={title} icon={icon} />
@@ -14,9 +14,9 @@ function CollectionBlock({ id, title, icon, children, nested }) {
   );
 }
 
-CollectionBlock.displayName = "Collecting.CollectionBlock";
+CollectionBlockTemplate.displayName = "Collecting.CollectionBlockTemplate";
 
-CollectionBlock.propTypes = {
+CollectionBlockTemplate.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
@@ -24,4 +24,4 @@ CollectionBlock.propTypes = {
   nested: PropTypes.bool
 };
 
-export default CollectionBlock;
+export default CollectionBlockTemplate;

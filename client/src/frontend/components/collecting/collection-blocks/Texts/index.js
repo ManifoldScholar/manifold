@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CollectionBlock from "frontend/components/collecting/CollectionBlock";
-import DeferredCollectable from "frontend/components/collecting/reading-group/static/DeferredCollectable";
 import ListItem from "frontend/components/content-block/Block/types/Texts/ListItem";
+import Template from "../Template";
+import DeferredCollectable from "../DeferredCollectable";
 
-function CollectedTexts({ collectedIds, responses, onUncollect }) {
+function CollectedTexts({ collectedIds, responses, onUncollect, nested }) {
   if (collectedIds.length < 1) return null;
 
   return (
-    <CollectionBlock title="Texts" icon="textsStacked64" nested>
+    <Template title="Texts" icon="textsStacked64" nested={nested}>
       <div className="text-list__category">
         <ul className="text-list__list text-list__list--no-label">
           {collectedIds.map(id => (
@@ -31,7 +31,7 @@ function CollectedTexts({ collectedIds, responses, onUncollect }) {
           ))}
         </ul>
       </div>
-    </CollectionBlock>
+    </Template>
   );
 }
 
@@ -40,7 +40,8 @@ CollectedTexts.displayName = "ReadingGroup.Collecting.CollectedTexts";
 CollectedTexts.propTypes = {
   collectedIds: PropTypes.array.isRequired,
   responses: PropTypes.array.isRequired,
-  onUncollect: PropTypes.func
+  onUncollect: PropTypes.func,
+  nested: PropTypes.bool
 };
 
 export default CollectedTexts;

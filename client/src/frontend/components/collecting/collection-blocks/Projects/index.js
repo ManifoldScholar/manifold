@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CollectionBlock from "frontend/components/collecting/CollectionBlock";
-import DeferredCollectable from "frontend/components/collecting/reading-group/static/DeferredCollectable";
 import GridItem from "frontend/components/project-list/GridItem";
+import Template from "../Template";
+import DeferredCollectable from "../DeferredCollectable";
 
-function CollectedProjects({ collectedIds, responses, onUncollect }) {
+function CollectedProjects({ collectedIds, responses, onUncollect, nested }) {
   if (collectedIds.length < 1) return null;
 
   return (
-    <CollectionBlock title="Projects" icon="projects64" nested>
+    <Template title="Projects" icon="projects64" nested={nested}>
       <div className="project-list grid entity-section-wrapper__body group-collection-category__bottom-margin-offset">
         <ul>
           {collectedIds.map(id => (
@@ -32,7 +32,7 @@ function CollectedProjects({ collectedIds, responses, onUncollect }) {
           ))}
         </ul>
       </div>
-    </CollectionBlock>
+    </Template>
   );
 }
 
@@ -41,7 +41,8 @@ CollectedProjects.displayName = "ReadingGroup.Collecting.CollectedProjects";
 CollectedProjects.propTypes = {
   collectedIds: PropTypes.array.isRequired,
   responses: PropTypes.array.isRequired,
-  onUncollect: PropTypes.func
+  onUncollect: PropTypes.func,
+  nested: PropTypes.bool
 };
 
 export default CollectedProjects;

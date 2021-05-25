@@ -1,16 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CollectionBlock from "frontend/components/collecting/CollectionBlock";
-import DeferredCollectable from "frontend/components/collecting/reading-group/static/DeferredCollectable";
 import Resourceish from "frontend/components/resourceish";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
+import Template from "../Template";
+import DeferredCollectable from "../DeferredCollectable";
 
-function CollectedResources({ collectedIds, responses }) {
+function CollectedResources({ collectedIds, responses, nested }) {
   if (collectedIds.length < 1) return null;
 
   return (
-    <CollectionBlock title="Resources" icon="resources64" nested>
+    <Template title="Resources" icon="resources64" nested={nested}>
       <div className="resource-thumbnail-list">
         <ul>
           {collectedIds.map(id => (
@@ -40,7 +40,7 @@ function CollectedResources({ collectedIds, responses }) {
           ))}
         </ul>
       </div>
-    </CollectionBlock>
+    </Template>
   );
 }
 
@@ -48,7 +48,8 @@ CollectedResources.displayName = "ReadingGroup.Collecting.CollectedResources";
 
 CollectedResources.propTypes = {
   collectedIds: PropTypes.array.isRequired,
-  responses: PropTypes.array.isRequired
+  responses: PropTypes.array.isRequired,
+  nested: PropTypes.bool
 };
 
 export default CollectedResources;

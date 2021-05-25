@@ -19,7 +19,7 @@ export default class ContentBlockHeading extends PureComponent {
       <>
         <header className="entity-section-wrapper__heading section-heading">
           <div className="main">
-            <Utility.IconComposer icon={icon} />
+            <Utility.IconComposer icon={icon} size={56} />
             <div className="body">
               <h2 className="title">{title}</h2>
             </div>

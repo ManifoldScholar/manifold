@@ -6,7 +6,7 @@ import {
   CollectedTextSections,
   CollectedResourceCollections,
   CollectedResources
-} from "./collection-blocks";
+} from "frontend/components/collecting/collection-blocks";
 
 function Category({ category, mappings, responses, onUncollect }) {
   const categoryMapping = mappings[category.id] || null;
@@ -25,7 +25,8 @@ function Category({ category, mappings, responses, onUncollect }) {
     return {
       collectedIds: getCollectedIdsByType(type),
       responses: getResponsesByType(type),
-      onUncollect
+      onUncollect,
+      nested: true
     };
   }
 
