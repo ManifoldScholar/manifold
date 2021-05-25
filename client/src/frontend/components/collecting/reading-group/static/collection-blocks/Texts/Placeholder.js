@@ -4,8 +4,8 @@ import Skeleton from "frontend/components/collecting/ContentSkeleton";
 
 function Placeholder() {
   return (
-    <div className="text-block text-block--loading" aria-hidden>
-      <div className="text-block__content">
+    <div className="text-block text-block--loading">
+      <div className="text-block__content" aria-hidden>
         <div className="text-block__inner">
           <figure className="text-block__cover text-block__cover--svg">
             <IconComposer
@@ -45,6 +45,7 @@ function Placeholder() {
           </li>
         </ul>
       </div>
+      <span className="screen-reader-text">Loading</span>
     </div>
   );
 }

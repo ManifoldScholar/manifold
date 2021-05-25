@@ -16,6 +16,7 @@ function Placeholder() {
           </div>
         </div>
       </div>
+      <span className="screen-reader-text">Loading</span>
     </li>
   );
 }
