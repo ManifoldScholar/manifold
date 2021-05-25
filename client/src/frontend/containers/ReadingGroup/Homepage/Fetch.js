@@ -1,7 +1,6 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { childRoutes } from "helpers/router";
-
 import {
   useDispatchReadingGroupCollected,
   useSelectReadingGroupCollected,
@@ -14,10 +13,10 @@ function ReadingGroupHomepageFetchContainer({
   route,
   dispatch,
   history,
-  onRefresh
+  refresh,
+  fetchVersion
 }) {
   const groupId = readingGroup.id;
-  const [fetchVersion, setFetchVersion] = useState(1);
 
   useDispatchReadingGroupCategories(groupId, fetchVersion);
 
@@ -41,14 +40,6 @@ function ReadingGroupHomepageFetchContainer({
     resources: useSelectReadingGroupCollected("resources")
   };
 
-  const refresh = useCallback(
-    () => {
-      setFetchVersion(current => current + 1);
-      onRefresh();
-    },
-    [] // eslint-disable-line react-hooks/exhaustive-deps
-  );
-
   return (
     <div className="group-page-body">
       {childRoutes(route, {
@@ -69,7 +60,7 @@ ReadingGroupHomepageFetchContainer.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  onRefresh: PropTypes.func.isRequired,
+  refresh: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired
 };
 
