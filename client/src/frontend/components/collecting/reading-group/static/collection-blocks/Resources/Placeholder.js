@@ -4,8 +4,8 @@ import Skeleton from "frontend/components/collecting/ContentSkeleton";
 
 function Placeholder() {
   return (
-    <div className="resource-link-placeholder" aria-hidden>
-      <div className="icon-thumbnail-primary title">
+    <div className="resource-link-placeholder">
+      <div className="icon-thumbnail-primary title" aria-hidden>
         <div className="wrapper">
           <figure className="icon-thumbnail-type">
             <figcaption>
@@ -20,6 +20,7 @@ function Placeholder() {
           </h4>
         </div>
       </div>
+      <span className="screen-reader-text">Loading</span>
     </div>
   );
 }

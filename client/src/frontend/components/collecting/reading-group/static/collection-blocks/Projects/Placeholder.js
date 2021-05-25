@@ -3,11 +3,11 @@ import Skeleton from "frontend/components/collecting/ContentSkeleton";
 
 function Placeholder() {
   return (
-    <div className="item-wrapper" aria-hidden>
-      <figure className="cover">
+    <div className="item-wrapper">
+      <figure className="cover" aria-hidden>
         <Skeleton style={{ maxWidth: 110 }} />
       </figure>
-      <div className="meta">
+      <div className="meta" aria-hidden>
         <h3 className="name">
           <Skeleton style={{ maxWidth: 300 }} />
         </h3>
@@ -20,6 +20,7 @@ function Placeholder() {
           <Skeleton style={{ maxWidth: 75 }} />
         </div>
       </div>
+      <span className="screen-reader-text">Loading</span>
     </div>
   );
 }
