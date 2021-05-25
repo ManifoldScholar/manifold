@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useUID } from "react-uid";
 import TextList from "frontend/components/content-block/Block/types/Texts";
 import Utility from "global/components/utility";
@@ -15,9 +15,10 @@ const INIT_PAGINATION_STATE = {
 
 function CollectedTextsBlock() {
   const uid = useUID();
+  const [fetchVersion, setFetchVersion] = useState(1);
   const [paginationState, setPaginationState] = useState(INIT_PAGINATION_STATE);
 
-  useDispatchMyCollected("texts", paginationState);
+  useDispatchMyCollected("texts", paginationState, fetchVersion);
   const { collection, collectionMeta } = useSelectMyCollected("texts");
 
   function handlePageChange(pageParam) {
@@ -33,13 +34,16 @@ function CollectedTextsBlock() {
     };
   };
 
+  const onUncollect = useCallback(() => {
+    setFetchVersion(current => current + 1);
+  }, []);
+
   const visibilityProps = {
     showAuthors: false,
     showCategoryLabels: false,
     showDates: true,
     showDescriptions: false,
-    showSubtitles: true,
-    showCollectingToggle: false
+    showSubtitles: true
   };
 
   if (!collection?.length > 0 || !collectionMeta) return null;
@@ -52,7 +56,11 @@ function CollectedTextsBlock() {
       title="Texts"
       icon="textsStacked64"
     >
-      <TextList texts={collection} {...visibilityProps} />
+      <TextList
+        texts={collection}
+        onUncollect={onUncollect}
+        {...visibilityProps}
+      />
       {showPagination && (
         <div className="entity-section-wrapper__pagination">
           <Utility.Pagination

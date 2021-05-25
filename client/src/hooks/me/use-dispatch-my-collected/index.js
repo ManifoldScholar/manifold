@@ -17,7 +17,7 @@ function getRequestName(entity) {
   return requestMap[entity];
 }
 
-export default function useDispatchMyCollected(entity, page) {
+export default function useDispatchMyCollected(entity, page, fetchVersion) {
   const dispatch = useDispatch();
   const requestName = getRequestName(entity);
 
@@ -30,5 +30,5 @@ export default function useDispatchMyCollected(entity, page) {
       );
       dispatch(myCollectionAction);
     }
-  }, [dispatch, entity, page, requestName]);
+  }, [dispatch, entity, page, fetchVersion, requestName]);
 }
