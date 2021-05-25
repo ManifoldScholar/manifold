@@ -7,7 +7,7 @@ import {
   ResourcePlaceholder,
   TextPlaceholder,
   TextSectionPlaceholder
-} from "./collection-blocks/placeholders";
+} from "./placeholders";
 import {
   getResponse,
   idInResponses

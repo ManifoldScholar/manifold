@@ -17,18 +17,18 @@ function getRequestName(entity) {
   return requestMap[entity];
 }
 
-export default function useDispatchMyCollected(entity, page, fetchVersion) {
+export default function useDispatchMyCollected(entity, fetchVersion) {
   const dispatch = useDispatch();
   const requestName = getRequestName(entity);
 
   useEffect(() => {
     if (requestName) {
-      const myCollectionFetch = meAPI.myCollected(entity, page);
+      const myCollectionFetch = meAPI.myCollected(entity);
       const myCollectionAction = request(
         myCollectionFetch,
         requests[requestName]
       );
       dispatch(myCollectionAction);
     }
-  }, [dispatch, entity, page, fetchVersion, requestName]);
+  }, [dispatch, entity, fetchVersion, requestName]);
 }
