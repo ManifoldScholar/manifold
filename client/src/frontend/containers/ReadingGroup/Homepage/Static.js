@@ -9,8 +9,13 @@ import { getEntityCollection } from "frontend/components/collecting/helpers";
 function ReadingGroupHomepageStaticContainer({
   readingGroup,
   categories,
-  responses
+  responses,
+  refresh
 }) {
+  function handleUncollect(collection) {
+    if (collection.id === readingGroup.id) refresh();
+  }
+
   const collection = getEntityCollection(readingGroup);
   const uncategorizedMappings =
     collection.attributes?.categoryMappings.$uncategorized$;
@@ -37,6 +42,7 @@ function ReadingGroupHomepageStaticContainer({
             category={category}
             mappings={collection.attributes.categoryMappings}
             responses={responses}
+            onUncollect={handleUncollect}
           />
         ))}
       {hasUncategorized && (
@@ -44,6 +50,7 @@ function ReadingGroupHomepageStaticContainer({
           category={uncategorized}
           mappings={collection.attributes.categoryMappings}
           responses={responses}
+          onUncollect={handleUncollect}
         />
       )}
     </>
@@ -57,7 +64,8 @@ ReadingGroupHomepageStaticContainer.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   categories: PropTypes.array,
   responses: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  refresh: PropTypes.func.isRequired
 };
 
 export default ReadingGroupHomepageStaticContainer;

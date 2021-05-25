@@ -15,7 +15,7 @@ export default class ContentBlockTextsBlockList extends Component {
     showDates: PropTypes.bool,
     showDescriptions: PropTypes.bool,
     showSubtitles: PropTypes.bool,
-    showCollectingToggle: PropTypes.bool
+    onUncollect: PropTypes.func
   };
 
   static defaultProps = {
@@ -59,7 +59,7 @@ export default class ContentBlockTextsBlockList extends Component {
                   showDates={this.props.showDates}
                   showDescriptions={this.props.showDescriptions}
                   showSubtitles={this.props.showSubtitles}
-                  showCollectingToggle={this.props.showCollectingToggle}
+                  onUncollect={this.props.onUncollect}
                   utilityPosition={this.utilityPosition}
                 />
               </li>

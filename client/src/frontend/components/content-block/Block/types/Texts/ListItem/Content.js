@@ -13,11 +13,11 @@ export default class TextListListItemContent extends Component {
     showDescriptions: PropTypes.bool,
     showSubtitles: PropTypes.bool,
     showCovers: PropTypes.bool,
-    showCollectingToggle: PropTypes.bool,
     datesVisible: PropTypes.bool,
     datePrefix: PropTypes.string,
     publishedVisible: PropTypes.bool,
-    readUrl: PropTypes.string.isRequired
+    readUrl: PropTypes.string.isRequired,
+    onUncollect: PropTypes.func
   };
 
   render() {
@@ -28,11 +28,11 @@ export default class TextListListItemContent extends Component {
       showSubtitles,
       showDescriptions,
       showAuthors,
-      showCollectingToggle,
       datesVisible,
       readUrl,
       datePrefix,
-      publishedVisible
+      publishedVisible,
+      onUncollect
     } = this.props;
 
     return (
@@ -53,7 +53,7 @@ export default class TextListListItemContent extends Component {
             showDescriptions={showDescriptions}
             showAuthors={showAuthors}
             datesVisible={datesVisible}
-            showCollectingToggle={showCollectingToggle}
+            onUncollect={onUncollect}
           />
         </div>
       </div>

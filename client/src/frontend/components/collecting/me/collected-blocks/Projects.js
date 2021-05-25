@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useUID } from "react-uid";
 import ProjectList from "frontend/components/project-list";
 import CollectionBlock from "frontend/components/collecting/CollectionBlock";
@@ -14,9 +14,10 @@ const INIT_PAGINATION_STATE = {
 
 function CollectedProjectsBlock() {
   const uid = useUID();
+  const [fetchVersion, setFetchVersion] = useState(1);
   const [paginationState, setPaginationState] = useState(INIT_PAGINATION_STATE);
 
-  useDispatchMyCollected("projects", paginationState);
+  useDispatchMyCollected("projects", paginationState, fetchVersion);
   const { collection, collectionMeta } = useSelectMyCollected("projects");
 
   function handlePageChange(pageParam) {
@@ -31,6 +32,10 @@ function CollectedProjectsBlock() {
       handlePageChange(pageParam);
     };
   };
+
+  const onUncollect = useCallback(() => {
+    setFetchVersion(current => current + 1);
+  }, []);
 
   if (!collection?.length > 0 || !collectionMeta) return null;
 
@@ -47,7 +52,7 @@ function CollectedProjectsBlock() {
         paginationTarget={`#collected-block-${uid}`}
         paginationClickHandler={pageChangeHandlerCreator}
         limit={PER_PAGE}
-        hideCollectingToggle
+        onUncollect={onUncollect}
       />
     </CollectionBlock>
   );

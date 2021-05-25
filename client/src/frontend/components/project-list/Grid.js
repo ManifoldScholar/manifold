@@ -24,7 +24,7 @@ export default class ProjectListGrid extends Component {
     paginationClickHandler: PropTypes.func,
     viewAllUrl: PropTypes.string,
     viewAllLabel: PropTypes.string,
-    hideCollectingToggle: PropTypes.bool
+    onUncollect: PropTypes.func
   };
 
   static defaultProps = {
@@ -71,10 +71,6 @@ export default class ProjectListGrid extends Component {
 
   get paginationClickHandler() {
     return this.props.paginationClickHandler;
-  }
-
-  get hideCollectingToggle() {
-    return this.props.hideCollectingToggle;
   }
 
   projectsList() {
@@ -154,7 +150,7 @@ export default class ProjectListGrid extends Component {
                       dispatch={this.props.dispatch}
                       project={project}
                       hideDesc={hideDesc}
-                      hideCollectingToggle={this.hideCollectingToggle}
+                      onUncollect={this.props.onUncollect}
                     />
                   </li>
                 </CSSTransition>

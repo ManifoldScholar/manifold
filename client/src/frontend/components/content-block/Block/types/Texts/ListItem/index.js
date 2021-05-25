@@ -15,8 +15,8 @@ class TextListListItem extends Component {
     showDates: PropTypes.bool,
     showDescriptions: PropTypes.bool,
     showSubtitles: PropTypes.bool,
-    showCollectingToggle: PropTypes.bool,
-    utilityPosition: PropTypes.oneOf(["meta", "content"])
+    utilityPosition: PropTypes.oneOf(["meta", "content"]),
+    onUncollect: PropTypes.func
   };
 
   static defaultProps = {
@@ -70,10 +70,10 @@ class TextListListItem extends Component {
           showSubtitles={this.props.showSubtitles}
           showDescriptions={this.props.showDescriptions}
           showCovers={this.props.showCovers}
-          showCollectingToggle={this.props.showCollectingToggle}
           datesVisible={this.utilityInContent && this.props.showDates}
           datePrefix={this.datePrefix}
           publishedVisible={this.utilityInContent && this.isPublished}
+          onUncollect={this.props.onUncollect}
         />
         <Meta
           text={text}

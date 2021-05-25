@@ -19,7 +19,7 @@ export default class TextListListItemBibliographic extends Component {
     showDescriptions: PropTypes.bool,
     showSubtitles: PropTypes.bool,
     showCovers: PropTypes.bool,
-    showCollectingToggle: PropTypes.bool
+    onUncollect: PropTypes.func
   };
 
   get text() {
@@ -74,10 +74,6 @@ export default class TextListListItemBibliographic extends Component {
     return this.props.datesVisible;
   }
 
-  get showCollectingToggle() {
-    return this.props.showCollectingToggle;
-  }
-
   get readUrl() {
     return this.props.readUrl;
   }
@@ -98,17 +94,18 @@ export default class TextListListItemBibliographic extends Component {
               </span>
             )}
           </Link>
-          {this.showCollectingToggle && (
-            <span
-              className={classNames({
-                [`${this.baseClass}__collect-toggle`]: true,
-                [`${this.baseClass}__collect-toggle--with-subtitle`]: !!this
-                  .subtitle
-              })}
-            >
-              <Collecting.Toggle collectable={this.text} />
-            </span>
-          )}
+          <span
+            className={classNames({
+              [`${this.baseClass}__collect-toggle`]: true,
+              [`${this.baseClass}__collect-toggle--with-subtitle`]: !!this
+                .subtitle
+            })}
+          >
+            <Collecting.Toggle
+              collectable={this.text}
+              onUncollect={this.props.onUncollect}
+            />
+          </span>
         </h4>
         {this.creatorNames && (
           <div className={`${this.baseClass}__creators`}>
