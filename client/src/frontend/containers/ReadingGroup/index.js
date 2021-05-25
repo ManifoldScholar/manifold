@@ -46,6 +46,11 @@ class ReadingGroup extends Component {
     };
   };
 
+  constructor(props) {
+    super(props);
+    this.state = { fetchVersion: 1 };
+  }
+
   get readingGroup() {
     return this.props.readingGroup;
   }
@@ -95,7 +100,8 @@ class ReadingGroup extends Component {
     return {
       settings,
       dispatch,
-      onRefresh: this.refreshReadingGroup,
+      refresh: this.refreshReadingGroup,
+      fetchVersion: this.state.fetchVersion,
       history,
       readingGroup: this.readingGroup
     };
@@ -134,7 +140,18 @@ class ReadingGroup extends Component {
   }
 
   refreshReadingGroup = () => {
-    ReadingGroup.fetchReadingGroup(this.groupId, this.props.dispatch);
+    const promise = ReadingGroup.fetchReadingGroup(
+      this.groupId,
+      this.props.dispatch
+    );
+    promise.then(() =>
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          fetchVersion: prevState.fetchVersion + 1
+        };
+      })
+    );
   };
 
   handleClose() {
