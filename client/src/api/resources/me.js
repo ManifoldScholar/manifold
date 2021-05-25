@@ -52,13 +52,12 @@ export default {
     };
   },
 
-  myCollected(entity, page = {}) {
+  myCollected(entity) {
     return {
+      eagerLoad: true,
       endpoint: `/api/v1/me/relationships/${entity}`,
       method: "GET",
-      options: {
-        params: { page }
-      }
+      options: {}
     };
   }
 };
