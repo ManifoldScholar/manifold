@@ -41,7 +41,8 @@ function CollectingToggle({
   onDialogClose,
   readingGroups: myReadingGroups,
   currentUser,
-  setScreenReaderStatus
+  setScreenReaderStatus,
+  onUncollect
 }) {
   const [hovered, setHovered] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
@@ -100,7 +101,9 @@ function CollectingToggle({
   function doRemove(collection = currentUser) {
     const call = collectingAPI.remove([collectable], collection);
     const collectRequest = request(call, requests.feCollectCollectable);
-    dispatch(collectRequest);
+    dispatch(collectRequest).promise.then(() => {
+      if (onUncollect) onUncollect(collection);
+    });
     setConfirmed(false);
     setHovered(false);
     setScreenReaderStatus(`You uncollected ${collectableTitle}`);
@@ -206,6 +209,7 @@ CollectingToggle.propTypes = {
   onDialogOpen: PropTypes.func,
   onDialogClose: PropTypes.func,
   setScreenReaderStatus: PropTypes.func,
+  onUncollect: PropTypes.func,
   inline: PropTypes.bool,
   outlined: PropTypes.bool
 };
