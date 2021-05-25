@@ -1,9 +1,11 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
+import isEmpty from "lodash/isEmpty";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import Utility from "global/components/utility";
 import CollectedCount from "frontend/components/collecting/me/CollectedCount";
+import CollectionPlaceholder from "frontend/components/collecting/me/CollectionPlaceholder";
 import {
   CollectedProjects,
   CollectedTexts,
@@ -43,9 +45,10 @@ function MyStarredContainer({ currentUser }) {
     resources: useSelectMyCollected("resources")
   };
   const collection = getEntityCollection(currentUser);
+  const mapping = collection.attributes?.categoryMappings.$uncategorized$;
+  const hasCollecteds = !isEmpty(mapping);
 
   function getCollectedIdsByType(type) {
-    const mapping = collection.attributes?.categoryMappings.$uncategorized$;
     if (!mapping || !mapping[type]) return [];
     return mapping[type];
   }
@@ -94,18 +97,27 @@ function MyStarredContainer({ currentUser }) {
               </div>
             </div>
           </header>
-          <div className="entity-section-wrapper__details entity-section-wrapper__details--padded-top">
-            <CollectedCount collection={collection} />
-          </div>
-          <div className="entity-section-wrapper__body">
-            <CollectedProjects {...getCollectedProps("projects")} />
-            <CollectedTexts {...getCollectedProps("texts")} />
-            <CollectedTextSections {...getCollectedProps("textSections")} />
-            <CollectedResourceCollections
-              {...getCollectedProps("resourceCollections")}
-            />
-            <CollectedResources {...getCollectedProps("resources")} />
-          </div>
+          {hasCollecteds && (
+            <>
+              <div className="entity-section-wrapper__details entity-section-wrapper__details--padded-top">
+                <CollectedCount collection={collection} />
+              </div>
+              <div className="entity-section-wrapper__body">
+                <CollectedProjects {...getCollectedProps("projects")} />
+                <CollectedTexts {...getCollectedProps("texts")} />
+                <CollectedTextSections {...getCollectedProps("textSections")} />
+                <CollectedResourceCollections
+                  {...getCollectedProps("resourceCollections")}
+                />
+                <CollectedResources {...getCollectedProps("resources")} />
+              </div>
+            </>
+          )}
+          {!hasCollecteds && (
+            <div className="entity-section-wrapper__body">
+              <CollectionPlaceholder />
+            </div>
+          )}
         </div>
       </section>
     </Authorize>

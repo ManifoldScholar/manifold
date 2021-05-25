@@ -53,6 +53,7 @@ function CollectionPlaceholder() {
   );
 }
 
-CollectionPlaceholder.displayName = "Collecting.CollectionPlaceholder";
+CollectionPlaceholder.displayName =
+  "Collecting.ReadingGroup.CollectionPlaceholder";
 
 export default CollectionPlaceholder;
