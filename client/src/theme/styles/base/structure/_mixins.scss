@@ -59,7 +59,6 @@
   }
 }
 
-
 // Layout
 // --------------------------------------------------------
 @mixin containerPrototype {
@@ -135,6 +134,29 @@
   }
 }
 
+@mixin aspectRatio($width, $height) {
+  &::before {
+    float: left;
+    padding-top: ($height / $width) * 100%;
+    content: '';
+  }
+
+  &::after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+
+  @supports (aspect-ratio: 1 / 1) {
+    aspect-ratio: $width / $height;
+
+    &::before,
+    &::after {
+      content: none;
+    }
+  }
+}
+
 // Lists
 // --------------------------------------------------------
 @mixin listUnstyled {
@@ -151,7 +173,6 @@
     display: inline-block;
   }
 }
-
 
 // Form Layout
 // --------------------------------------------------------
@@ -200,7 +221,9 @@
     @include inputLabelPrimary;
   }
 
-  input[type='text'], input[type='password'], input[type='email'] {
+  input[type='text'],
+  input[type='password'],
+  input[type='email'] {
     @include inputPrimary;
   }
 
@@ -227,6 +250,8 @@
   }
 }
 
+// Functions
+// --------------------------------------------------------
 @function encode-color($string) {
   @if type-of($string) == 'color' and str-index(#{$string}, '#') == 1 {
     $hex: str-slice(ie-hex-str($string), 4);
@@ -236,4 +261,8 @@
   }
 
   @return $string;
+}
+
+@function responsive-size($max-width, $breakpoint: $containerWidthInner) {
+  @return min(#{$max-width / $breakpoint * 100vw}, #{$max-width});
 }
