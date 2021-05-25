@@ -1,18 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CollectionBlock from "frontend/components/collecting/CollectionBlock";
-import DeferredCollectable from "frontend/components/collecting/reading-group/static/DeferredCollectable";
 import ResourceCollection from "frontend/components/resource-collection";
 import lh from "helpers/linkHandler";
+import Template from "../Template";
+import DeferredCollectable from "../DeferredCollectable";
 
-function CollectedResourceCollections({ collectedIds, responses }) {
+function CollectedResourceCollections({ collectedIds, responses, nested }) {
   if (collectedIds.length < 1) return null;
 
   return (
-    <CollectionBlock
+    <Template
       title="Resource Collections"
       icon="resourceCollection64"
-      nested
+      nested={nested}
     >
       <div className="resource-collections-list">
         <ul>
@@ -43,7 +43,7 @@ function CollectedResourceCollections({ collectedIds, responses }) {
           ))}
         </ul>
       </div>
-    </CollectionBlock>
+    </Template>
   );
 }
 
@@ -52,7 +52,8 @@ CollectedResourceCollections.displayName =
 
 CollectedResourceCollections.propTypes = {
   collectedIds: PropTypes.array.isRequired,
-  responses: PropTypes.array.isRequired
+  responses: PropTypes.array.isRequired,
+  nested: PropTypes.bool
 };
 
 export default CollectedResourceCollections;
