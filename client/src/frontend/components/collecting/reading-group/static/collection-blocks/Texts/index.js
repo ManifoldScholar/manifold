@@ -4,7 +4,7 @@ import CollectionBlock from "frontend/components/collecting/CollectionBlock";
 import DeferredCollectable from "frontend/components/collecting/reading-group/static/DeferredCollectable";
 import ListItem from "frontend/components/content-block/Block/types/Texts/ListItem";
 
-function CollectedTexts({ collectedIds, responses }) {
+function CollectedTexts({ collectedIds, responses, onUncollect }) {
   if (collectedIds.length < 1) return null;
 
   return (
@@ -22,7 +22,7 @@ function CollectedTexts({ collectedIds, responses }) {
                       showDates
                       showDescriptions={false}
                       showSubtitles
-                      showCollectingToggle={false}
+                      onUncollect={onUncollect}
                     />
                   );
                 }}
@@ -39,7 +39,8 @@ CollectedTexts.displayName = "ReadingGroup.Collecting.CollectedTexts";
 
 CollectedTexts.propTypes = {
   collectedIds: PropTypes.array.isRequired,
-  responses: PropTypes.array.isRequired
+  responses: PropTypes.array.isRequired,
+  onUncollect: PropTypes.func
 };
 
 export default CollectedTexts;

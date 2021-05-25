@@ -4,7 +4,7 @@ import CollectionBlock from "frontend/components/collecting/CollectionBlock";
 import DeferredCollectable from "frontend/components/collecting/reading-group/static/DeferredCollectable";
 import GridItem from "frontend/components/project-list/GridItem";
 
-function CollectedProjects({ collectedIds, responses }) {
+function CollectedProjects({ collectedIds, responses, onUncollect }) {
   if (collectedIds.length < 1) return null;
 
   return (
@@ -23,7 +23,7 @@ function CollectedProjects({ collectedIds, responses }) {
                     <GridItem
                       authenticated={false}
                       project={response}
-                      hideCollectingToggle
+                      onUncollect={onUncollect}
                     />
                   );
                 }}
@@ -40,7 +40,8 @@ CollectedProjects.displayName = "ReadingGroup.Collecting.CollectedProjects";
 
 CollectedProjects.propTypes = {
   collectedIds: PropTypes.array.isRequired,
-  responses: PropTypes.array.isRequired
+  responses: PropTypes.array.isRequired,
+  onUncollect: PropTypes.func
 };
 
 export default CollectedProjects;
