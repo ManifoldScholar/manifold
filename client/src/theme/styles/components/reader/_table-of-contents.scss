@@ -46,7 +46,7 @@ $_inline-end-padding: calc(#{toc-drawer(base-inline-end-padding)} + #{$_toggle-w
   &__collecting-toggle {
     position: absolute;
     top: 42%;
-    right: toc-drawer(base-inline-end-padding);
+    right: calc(#{toc-drawer(base-inline-end-padding)} + 2%);
     transform: translateY(-50%);
 
     &--hidden {
