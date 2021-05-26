@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import Block from "../Block";
 import Figure from "../parts/Figure";
 
-export default class NewFollowers extends Component {
-  static displayName = "Analytics.Composed.NewFollowers";
+export default class NewCollectors extends Component {
+  static displayName = "Analytics.Composed.NewCollectors";
 
   static propTypes = {};
 
@@ -19,17 +19,13 @@ export default class NewFollowers extends Component {
   get caption() {
     const { rangeInWords } = this.props;
     return rangeInWords
-      ? `New project followers in ${rangeInWords}.`
-      : "New project followers";
+      ? `New stars project has received in ${rangeInWords}.`
+      : "New stars project has received";
   }
 
   render() {
     return (
-      <Block
-        width={this.blockWidth}
-        icon="starSquircle32"
-        title="New Followers"
-      >
+      <Block width={this.blockWidth} icon="starSquircle32" title="New Stars">
         <Figure stat={`${this.data.value}`} caption={this.caption} />
       </Block>
     );

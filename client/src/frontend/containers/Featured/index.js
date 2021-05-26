@@ -7,7 +7,6 @@ import { bindActionCreators } from "redux";
 import { uiFilterActions, entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, subjectsAPI, requests } from "api";
-import get from "lodash/get";
 import HeadContent from "global/components/HeadContent";
 import Utility from "global/components/utility";
 
@@ -100,10 +99,6 @@ export class FeaturedContainer extends Component {
             {this.props.featuredProjects ? (
               <ProjectList.Grid
                 authenticated={this.props.authentication.authenticated}
-                favorites={get(
-                  this.props.authentication,
-                  "currentUser.favorites"
-                )}
                 dispatch={this.props.dispatch}
                 projects={this.props.featuredProjects}
               />

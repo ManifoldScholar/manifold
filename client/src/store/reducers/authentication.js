@@ -13,14 +13,6 @@ const initialState = {
   visitorToken: null
 };
 
-const deleteFavorite = (state, action) => {
-  if (action.error === true) return state;
-  const favorites = { ...state.currentUser.favorites };
-  delete favorites[action.payload];
-  const currentUser = { ...state.currentUser, favorites };
-  return { ...state, currentUser };
-};
-
 const setError = (state, action) => {
   const error = action.payload;
   return { ...state, error };
@@ -109,7 +101,6 @@ export default handleActions(
     LOGIN_SET_CURRENT_USER: setCurrentUser,
     UPDATE_CURRENT_USER: setCurrentUser,
     REPLACE_USER_COLLECTION: replaceUserCollection,
-    DELETE_CURRENT_USER_FAVORITE: deleteFavorite,
     LOGIN_SET_AUTH_TOKEN: setAuthToken,
     LOGIN_COMPLETE: endLogin,
     LOGIN_SET_ERROR: setError,

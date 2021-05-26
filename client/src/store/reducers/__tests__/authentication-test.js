@@ -15,26 +15,9 @@ const user = {
   }
 };
 
-const favorite = {
-  id: "22222222-2222-2222-2222-222222222222",
-  type: "favorites",
-  attributes: {
-    favoritableId: "33333333-3333-3333-3333-333333333333",
-    favoritableType: "Project"
-  },
-  relationships: {
-    favoritable: {
-      data: {
-        id: "abc",
-        type: "projects"
-      }
-    }
-  }
-};
-
 const response = {
   data: user,
-  included: [favorite]
+  included: []
 };
 
 const initialState = {

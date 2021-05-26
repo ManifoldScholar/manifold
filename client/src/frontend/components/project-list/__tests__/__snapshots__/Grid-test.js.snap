@@ -26,7 +26,6 @@ exports[`frontend/components/project-list/Grid matches the snapshot 1`] = `
           <Project.GridItem
             authenticated={true}
             dispatch={[Function]}
-            favorites={Object {}}
             hideDesc={true}
             project={
               Object {

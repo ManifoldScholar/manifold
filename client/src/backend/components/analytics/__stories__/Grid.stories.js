@@ -29,7 +29,7 @@ storiesOf("Backend/Analytics/Dashboard", module)
         data={findData("average_visit_duration")}
       />
       <ComposedAnalytics.Interactions data={findData("active_users")} />
-      <ComposedAnalytics.Followed data={findData("favorited_projects")} />
+      <ComposedAnalytics.Collected data={findData("favorited_projects")} />
       <ComposedAnalytics.SiteStatistics statistics={statistics} />
       <ComposedAnalytics.TopProjects data={findData("top_projects")} />
       <ComposedAnalytics.TopSearches data={findData("top_search_terms")} />
@@ -44,10 +44,10 @@ storiesOf("Backend/Analytics/Dashboard", module)
       <ComposedAnalytics.Highlights
         data={findData("annotations", "projectAnalytics")}
       />
-      <ComposedAnalytics.NewFollowers
+      <ComposedAnalytics.NewCollectors
         data={findData("favorites_this_period", "projectAnalytics")}
       />
-      <ComposedAnalytics.AllFollowers
+      <ComposedAnalytics.AllCollectors
         data={findData("total_favorites", "projectAnalytics")}
       />
     </Grid>

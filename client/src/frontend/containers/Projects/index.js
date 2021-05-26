@@ -168,7 +168,6 @@ export class ProjectsContainer extends Component {
           </div>
           <ProjectList.Grid
             authenticated={this.props.authentication.authenticated}
-            favorites={get(this.props.authentication, "currentUser.favorites")}
             dispatch={this.props.dispatch}
             projects={this.props.projects}
             pagination={get(this.props.projectsMeta, "pagination")}

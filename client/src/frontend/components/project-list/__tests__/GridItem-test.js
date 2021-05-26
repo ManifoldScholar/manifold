@@ -6,7 +6,6 @@ describe("frontend/components/project-list/GridItem", () => {
     <GridItem
       dispatch={$dispatch}
       project={$project}
-      favorites={{}}
       authenticated
     />
   ));
