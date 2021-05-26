@@ -17,7 +17,6 @@ export default class ProjectListGrid extends Component {
     projects: PropTypes.array,
     limit: PropTypes.number,
     authenticated: PropTypes.bool,
-    favorites: PropTypes.object,
     dispatch: PropTypes.func,
     pagination: PropTypes.object,
     paginationTarget: PropTypes.string,
@@ -39,7 +38,6 @@ export default class ProjectListGrid extends Component {
 
   shouldComponentUpdate(nextProps) {
     if (nextProps.projects !== this.props.projects) return true;
-    if (nextProps.favorites !== this.props.favorites) return true;
     return nextProps.authenticated !== this.props.authenticated;
   }
 
@@ -146,7 +144,6 @@ export default class ProjectListGrid extends Component {
                   <li className="project-list__item--pos-rel">
                     <GridItem
                       authenticated={this.props.authenticated}
-                      favorites={this.props.favorites}
                       dispatch={this.props.dispatch}
                       project={project}
                       hideDesc={hideDesc}

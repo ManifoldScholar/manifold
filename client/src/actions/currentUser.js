@@ -42,12 +42,6 @@ export const replaceUserCollection = createAction(
   collection => collection
 );
 
-// The ID of the object that is no longer favorited
-export const deleteCurrentUserFavorite = createAction(
-  "DELETE_CURRENT_USER_FAVORITE",
-  favoritableId => favoritableId
-);
-
 export const setVisitToken = createAction(
   "LOGIN_SET_VISIT_TOKEN",
   visitToken => visitToken
@@ -69,6 +63,5 @@ export default {
   setVisitToken,
   setVisitorToken,
   updateCurrentUser,
-  deleteCurrentUserFavorite,
   replaceUserCollection
 };

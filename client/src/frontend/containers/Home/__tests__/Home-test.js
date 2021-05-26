@@ -3,12 +3,7 @@ import { HomeContainer } from "../";
 describe("frontend/containers/Home/Home", () => {
   def("projects", () => collectionFactory("project"));
   def("featuredProjects", () => collectionFactory("project"));
-  def("user", () => {
-    const user = factory("user");
-    user.favorites = {
-      0: factory("project")
-    };
-  });
+  def("user", () => factory("user"));
   def("authentication", () =>
     fixtures.authentication({ user: $user })
   );

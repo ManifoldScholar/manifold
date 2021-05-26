@@ -1,10 +1,10 @@
-import AllFollowers from "./AllFollowers";
+import AllCollectors from "./AllCollectors";
 import Annotations from "./Annotations";
 import AverageVisit from "./AverageVisit";
-import Followed from "./Followed";
+import Collected from "./Collected";
 import Highlights from "./Highlights";
 import Engagement from "./Engagement";
-import NewFollowers from "./NewFollowers";
+import NewCollectors from "./NewCollectors";
 import ReturnVisits from "./ReturnVisits";
 import SiteStatistics from "./SiteStatistics";
 import TopProjects from "./TopProjects";
@@ -16,12 +16,12 @@ import TextSectionViews from "./TextSectionViews";
 
 export default {
   Annotations,
-  AllFollowers,
+  AllCollectors,
   AverageVisit,
-  Followed,
+  Collected,
   Highlights,
   Engagement,
-  NewFollowers,
+  NewCollectors,
   ReturnVisits,
   SiteStatistics,
   TopProjects,
