@@ -1,5 +1,5 @@
 import actions from "actions/currentUser";
-import { ApiClient, tokensAPI, meAPI, favoritesAPI, requests } from "api";
+import { ApiClient, tokensAPI, meAPI, requests } from "api";
 import BrowserCookieHelper from "helpers/cookie/Browser";
 import { entityStoreActions } from "actions";
 
@@ -24,32 +24,6 @@ function generateErrorPayload(status = 401) {
       break;
   }
   return { id: "LOGIN_NOTIFICATION", level, heading, body };
-}
-
-function follow(project, token, dispatch) {
-  const client = new ApiClient();
-  const { endpoint, method, options } = favoritesAPI.create(project);
-  options.authToken = token;
-  const promise = client.call(endpoint, method, options);
-  dispatch(actions.updateCurrentUser(promise));
-}
-
-function unfollow(target, token, dispatch) {
-  const { favoritableId, favoriteId } = target;
-  const client = new ApiClient();
-  const { endpoint, method, options } = favoritesAPI.destroy(favoriteId);
-  options.authToken = token;
-  const promise = new Promise((resolve, reject) => {
-    client.call(endpoint, method, options).then(
-      () => {
-        resolve(favoritableId);
-      },
-      response => {
-        reject(response);
-      }
-    );
-  });
-  dispatch(actions.deleteCurrentUserFavorite(promise));
 }
 
 function setCookie(authToken, cookieHelper = null) {
@@ -178,7 +152,7 @@ export function authenticateWithCookie(dispatch, cookieHelper) {
   });
 }
 
-export default function currentUserMiddleware({ dispatch, getState }) {
+export default function currentUserMiddleware({ dispatch }) {
   return next => action => {
     const payload = action.payload;
 
@@ -198,14 +172,6 @@ export default function currentUserMiddleware({ dispatch, getState }) {
 
     if (action.type === "LOGOUT") {
       destroyCookie();
-    }
-
-    if (action.type === "FOLLOW") {
-      follow(payload, getState().authentication.authToken, dispatch);
-    }
-
-    if (action.type === "UNFOLLOW") {
-      unfollow(payload, getState().authentication.authToken, dispatch);
     }
 
     return next(action);

@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import Block from "../Block";
 import Figure from "../parts/Figure";
 
-export default class AllFollowers extends Component {
-  static displayName = "Analytics.Composed.AllFollowers";
+export default class AllCollectors extends Component {
+  static displayName = "Analytics.Composed.AllCollectors";
 
   static propTypes = {};
 
@@ -21,11 +21,11 @@ export default class AllFollowers extends Component {
       <Block
         width={this.blockWidth}
         icon="starSquircleFilled32"
-        title="All Followers"
+        title="All Stars"
       >
         <Figure
           stat={`${this.data.value}`}
-          caption="Total number of project followers."
+          caption="Total number of times project has been starred."
         />
       </Block>
     );
