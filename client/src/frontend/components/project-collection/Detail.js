@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ProjectList from "frontend/components/project-list";
 import Utility from "global/components/utility";
-import get from "lodash/get";
 import Header from "./Header";
 import Filters from "./Filters";
 
@@ -47,7 +46,6 @@ export default class ProjectCollectionDetail extends Component {
           </div>
           <ProjectList.Grid
             authenticated={this.props.authentication.authenticated}
-            favorites={get(this.props.authentication, "currentUser.favorites")}
             projects={this.props.projects}
             dispatch={this.props.dispatch}
             paginationClickHandler={this.props.paginationClickHandler}

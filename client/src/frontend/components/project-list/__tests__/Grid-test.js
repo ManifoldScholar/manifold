@@ -8,7 +8,6 @@ describe("frontend/components/project-list/Grid", () => {
       dispatch={$dispatch}
       projects={$projects}
       authenticated
-      favorites={{}}
     />
   ));
 
