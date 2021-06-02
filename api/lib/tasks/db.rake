@@ -1,12 +1,11 @@
 namespace :db do
   task kill: :environment do
-    Manifold::Rake.logger.info "Killing all DB connections"
-    db_name = "#{File.basename(Rails.root)}_#{Rails.env}"
-
+    rails_db_name = ENV["RAILS_DB_NAME"]
+    Manifold::Rake.logger.info "Terminating database connections to #{rails_db_name}"
     sh = <<EOF
   ps xa \
     | grep postgres: \
-    | grep #{db_name} \
+    | grep #{rails_db_name} \
     | grep -v grep \
     | awk '{print $1}' \
     | xargs kill
