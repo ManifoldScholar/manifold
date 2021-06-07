@@ -18,10 +18,8 @@
     "library-empty": "This Manifold library is empty. -es",
     "check-back-soon": "Por favor check back soon! -es",
     "add-a-new-project": "Add a New Project -es",
-    "but-its-easy": "But it’s easy to create and publish projects with Manifold. If you have backend access, -es",
-    "and-select": " and select -es",
-    "for-more-help": ". For more help, you can learn about creating and publishing Manifold Projects -es",
-    "here": "here -es",
+    "empty-projects-message": "<1>SPANISH But it’s easy to create and publish projects with Manifold. If you have backend access, <2>head to the backend</2> and select <3>Add a New Project</3>. For more help, you can learn about creating and publishing Manifold Projects <4>here</4>.</1>",
+    "dont-fret": "SPANISH But don't fret, it's easy to start following projects. Just browse through the available projects, and when you find one you like, select the green plus symbol. When the green plus is replaced with a blue checkmark, you're done!",
     "head-to-the-backend": "head to the backend -es",
     "contact-form": {
       "contact-us": "Contact us",

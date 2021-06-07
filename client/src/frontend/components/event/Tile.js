@@ -4,6 +4,7 @@ import classNames from "classnames";
 import FormattedDate from "global/components/FormattedDate";
 import Utility from "global/components/utility";
 import { withRouter } from "react-router-dom";
+import { Translation } from "react-i18next";
 
 export class EventTile extends Component {
   static displayName = "Event.Tile";
@@ -76,66 +77,74 @@ export class EventTile extends Component {
     });
 
     return (
-      <this.tileTag className={this.props.itemClass}>
-        {/* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex */}
-        <div
-          role={this.hasLink ? "link" : null}
-          tabIndex={this.hasLink ? "0" : null}
-          className={tileClass}
-          onClick={this.handleTileClick}
-        >
-          {/* eslint-enable jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex */}
-          <div className={`${baseClass}__inner`}>
-            {icon && (
-              <Utility.IconComposer
-                icon={icon}
-                size={48}
-                className={`${baseClass}__icon`}
-              />
+      <Translation>
+        {t => (
+          <this.tileTag className={this.props.itemClass}>
+            {/* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex */}
+            <div
+              role={this.hasLink ? "link" : null}
+              tabIndex={this.hasLink ? "0" : null}
+              className={tileClass}
+              onClick={this.handleTileClick}
+            >
+              {/* eslint-enable jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex */}
+              <div className={`${baseClass}__inner`}>
+                {icon && (
+                  <Utility.IconComposer
+                    icon={icon}
+                    size={48}
+                    className={`${baseClass}__icon`}
+                  />
+                )}
+                {header && (
+                  <div className={`${baseClass}__header`}>{t(header)}</div>
+                )}
+                {title && (
+                  <h3
+                    className={`${baseClass}__title`}
+                    dangerouslySetInnerHTML={{ __html: title }}
+                  />
+                )}
+                {subtitle && (
+                  <span className={`${baseClass}__subtitle`}>{subtitle}</span>
+                )}
+                {preAttribution && (
+                  <div className={`${baseClass}__user`}>{preAttribution}</div>
+                )}
+                {content && (
+                  <div className={`${baseClass}__content`}>{content}</div>
+                )}
+                {postAttribution && (
+                  <div className={`${baseClass}__user`}>{postAttribution}</div>
+                )}
+                {date && (
+                  <span className={`${baseClass}__footer`}>
+                    <FormattedDate format={dateFormat} date={date} />
+                  </span>
+                )}
+              </div>
+            </div>
+            {this.props.destroyCallback && (
+              <div
+                className="utility-button"
+                data-id={"destroy"}
+                onClick={this.props.destroyCallback}
+                role="button"
+                tabIndex="0"
+              >
+                <Utility.IconComposer
+                  icon="delete32"
+                  size={26}
+                  className={
+                    "utility-button__icon utility-button__icon--notice"
+                  }
+                />
+                <span className="screen-reader-text">{t(`delete-event`)}</span>
+              </div>
             )}
-            {header && <div className={`${baseClass}__header`}>{header}</div>}
-            {title && (
-              <h3
-                className={`${baseClass}__title`}
-                dangerouslySetInnerHTML={{ __html: title }}
-              />
-            )}
-            {subtitle && (
-              <span className={`${baseClass}__subtitle`}>{subtitle}</span>
-            )}
-            {preAttribution && (
-              <div className={`${baseClass}__user`}>{preAttribution}</div>
-            )}
-            {content && (
-              <div className={`${baseClass}__content`}>{content}</div>
-            )}
-            {postAttribution && (
-              <div className={`${baseClass}__user`}>{postAttribution}</div>
-            )}
-            {date && (
-              <span className={`${baseClass}__footer`}>
-                <FormattedDate format={dateFormat} date={date} />
-              </span>
-            )}
-          </div>
-        </div>
-        {this.props.destroyCallback && (
-          <div
-            className="utility-button"
-            data-id={"destroy"}
-            onClick={this.props.destroyCallback}
-            role="button"
-            tabIndex="0"
-          >
-            <Utility.IconComposer
-              icon="delete32"
-              size={26}
-              className={"utility-button__icon utility-button__icon--notice"}
-            />
-            <span className="screen-reader-text">Delete Event</span>
-          </div>
+          </this.tileTag>
         )}
-      </this.tileTag>
+      </Translation>
     );
   }
 }

@@ -4,6 +4,7 @@ import { oauthActions } from "actions";
 import { get } from "lodash";
 import { providerSetting } from "utils/oauth";
 import IconComposer from "global/components/utility/IconComposer";
+import { Translation } from 'react-i18next';
 
 import withSettings from "hoc/with-settings";
 
@@ -68,9 +69,13 @@ class Button extends Component {
     const label = this.props.children ? (
       this.props.children
     ) : (
-      <span className="button-secondary__text">
-        Log in with {this.props.provider}
-      </span>
+      <Translation>
+        {t => (
+          <span className="button-secondary__text">
+            {t(`log-in-with`)} {this.props.provider}
+          </span>
+        )}
+      </Translation>
     );
 
     return (

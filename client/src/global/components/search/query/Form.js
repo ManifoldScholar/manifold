@@ -5,6 +5,7 @@ import classNames from "classnames";
 import Utility from "global/components/utility";
 import Option from "global/components/form/Radio/Option";
 import CheckboxMixed from "./CheckboxMixed";
+import { Translation } from 'react-i18next';
 
 export default class SearchQueryForm extends PureComponent {
   static displayName = "Search.Query.Form";
@@ -213,21 +214,25 @@ export default class SearchQueryForm extends PureComponent {
       return false;
 
     return (
-      <div className="search-query__footer">
-        {this.props.description ? (
-          <div className="search-query__description">
-            {this.props.description}
-          </div>
-        ) : null}
-        {this.props.searchType === "frontend" ? (
-          <button
-            type="submit"
-            className="search-query__button-primary button-primary"
-          >
-            <span className="button-primary__text">Search</span>
-          </button>
-        ) : null}
-      </div>
+      <Translation>
+        {t => (
+        <div className="search-query__footer">
+          {this.props.description ? (
+            <div className="search-query__description">
+              {t(this.props.description)}
+            </div>
+          ) : null}
+          {this.props.searchType === "frontend" ? (
+            <button
+              type="submit"
+              className="search-query__button-primary button-primary"
+            >
+              <span className="button-primary__text">Search</span>
+            </button>
+          ) : null}
+        </div>
+        )}
+      </Translation>
     );
   }
 

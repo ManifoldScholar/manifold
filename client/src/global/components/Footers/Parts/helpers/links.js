@@ -22,11 +22,11 @@ export function manifoldLinks() {
   const links = [
     {
       to: lh.link("frontendProjectsAll"),
-      title: "Projects"
+      title: "projects"
     },
     {
       to: lh.link("frontend"),
-      title: "Home"
+      title: "home"
     }
   ];
   return links;
@@ -57,18 +57,18 @@ export function authenticationLink({
   if (authenticated)
     return {
       onClick: commonActions.logout,
-      title: "Log Out"
+      title: "log-out"
     };
   return {
     onClick: commonActions.toggleSignInUpOverlay,
-    title: "Log In"
+    title: "log-in"
   };
 }
 
 export function emailLink({ settings }) {
   if (!settings || !settings.attributes.general.contactEmail) return null;
   return {
-    title: "Email",
+    title: "email",
     to: lh.link("frontendContact"),
     icon: "socialEmail32"
   };

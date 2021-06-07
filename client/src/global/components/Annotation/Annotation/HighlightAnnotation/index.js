@@ -5,6 +5,7 @@ import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 import SourceSummary from "../SourceSummary/index";
 import Authorize from "hoc/authorize";
+import { Translation } from 'react-i18next';
 
 export default class HighlightDetail extends PureComponent {
   static displayName = "Annotation.HighlightAnnotation";
@@ -41,33 +42,37 @@ export default class HighlightDetail extends PureComponent {
     });
 
     return (
-      <div className={wrapperClasses}>
-        <div className="annotation-selection__container">
-          <IconComposer
-            icon="interactHighlight32"
-            size="default"
-            className="annotation-selection__icon"
-          />
-          <span className="annotation-selection__highlight-text">
-            {annotation.attributes.subject}
-          </span>
-          <SourceSummary
-            includeDate
-            includeCreator
-            annotation={annotation}
-            onClick={visitHandler}
-            onHover={this.hoverHandler}
-          />
-          <Authorize entity={annotation} ability={"delete"}>
-            <div className="annotation-selection__action-buttons">
-              <Utility.ConfirmableButton
-                label="Delete"
-                confirmHandler={deleteHandler}
+      <Translation>
+        {t => (
+          <div className={wrapperClasses}>
+            <div className="annotation-selection__container">
+              <IconComposer
+                icon="interactHighlight32"
+                size="default"
+                className="annotation-selection__icon"
               />
+              <span className="annotation-selection__highlight-text">
+                {annotation.attributes.subject}
+              </span>
+              <SourceSummary
+                includeDate
+                includeCreator
+                annotation={annotation}
+                onClick={visitHandler}
+                onHover={this.hoverHandler}
+              />
+              <Authorize entity={annotation} ability={"delete"}>
+                <div className="annotation-selection__action-buttons">
+                  <Utility.ConfirmableButton
+                    label={t(`delete`)}
+                    confirmHandler={deleteHandler}
+                  />
+                </div>
+              </Authorize>
             </div>
-          </Authorize>
-        </div>
-      </div>
+          </div>
+        )}
+      </Translation>
     );
   }
 }

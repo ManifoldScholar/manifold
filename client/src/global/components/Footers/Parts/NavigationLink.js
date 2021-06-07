@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Utility from "global/components/utility";
 import has from "lodash/has";
+import { Translation } from "react-i18next";
 
 export default function FooterPartsNavigationLink({
   item,
@@ -21,16 +22,22 @@ export default function FooterPartsNavigationLink({
 
   if (item.to)
     return (
-      <Link
-        to={item.to}
-        target={item.openInNewTab ? "_blank" : null}
-        className={className}
-      >
-        {icon(item)}
-        {!hideLabel && (
-          <span className="app-footer-navigation__link-text">{item.title}</span>
+      <Translation>
+        {t => (
+          <Link
+            to={item.to}
+            target={item.openInNewTab ? "_blank" : null}
+            className={className}
+          >
+            {icon(item)}
+            {!hideLabel && (
+              <span className="app-footer-navigation__link-text">
+                {t(item.title)}
+              </span>
+            )}
+          </Link>
         )}
-      </Link>
+      </Translation>
     );
 
   if (has(item, "href")) {
@@ -45,17 +52,23 @@ export default function FooterPartsNavigationLink({
 
   if (has(item, "onClick"))
     return (
-      <span
-        role="button"
-        tabIndex="0"
-        onClick={item.onClick}
-        className={className}
-      >
-        {icon(item)}
-        {!hideLabel && (
-          <span className="app-footer-navigation__link-text">{item.title}</span>
+      <Translation>
+        {t => (
+          <span
+            role="button"
+            tabIndex="0"
+            onClick={item.onClick}
+            className={className}
+          >
+            {icon(item)}
+            {!hideLabel && (
+              <span className="app-footer-navigation__link-text">
+                {t(item.title)}
+              </span>
+            )}
+          </span>
         )}
-      </span>
+      </Translation>
     );
 
   return null;

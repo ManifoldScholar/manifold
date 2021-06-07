@@ -18,6 +18,7 @@ import EntitiesList, {
   UserRow
 } from "backend/components/list/EntitiesList";
 import { text } from "@storybook/addon-knobs";
+import { Translation } from "react-i18next";
 
 const users = fixtures.collectionFactory("user", 8);
 const makers = fixtures.collectionFactory("maker", 8);
@@ -124,23 +125,29 @@ const callbacks = {
 storiesOf("Backend/List/Entities", module)
   .add("Users", () => {
     return (
-      <EntitiesList
-        title={"A List of Users"}
-        entities={users}
-        entityComponent={UserRow}
-        showCount
-        unit="resource"
-        pagination={pagination}
-        callbacks={callbacks}
-        buttons={[<Button path="/foo" text="Add a new user" type="add" />]}
-        search={
-          <Search
-            filters={threeFilters}
-            sortOptions={sortOptions}
-            onChange={callbacks.onSearchChange}
+      <Translation>
+        {t => (
+          <EntitiesList
+            title={t(`a-list-of-users`)} // ALERT LEONOR: This was a string wrapped in curly braces, does this work or do you need to double curly braces?   Original: title={"A List of Users"}
+            entities={users}
+            entityComponent={UserRow}
+            showCount
+            unit="resource"
+            pagination={pagination}
+            callbacks={callbacks}
+            buttons={[
+              <Button path="/foo" text={t(`add-a-new-user`)} type="add" />
+            ]}
+            search={
+              <Search
+                filters={threeFilters}
+                sortOptions={sortOptions}
+                onChange={callbacks.onSearchChange}
+              />
+            }
           />
-        }
-      />
+        )}
+      </Translation>
     );
   })
 
