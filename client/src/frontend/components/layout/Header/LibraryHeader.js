@@ -7,6 +7,7 @@ import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import BackLink from "frontend/components/back-link";
 import SetCSSProperty from "global/components/utility/SetCSSProperty";
+import { Translation } from 'react-i18next';
 
 export default class LayoutLibraryHeader extends PureComponent {
   static displayName = "Layout.LibraryHeader";
@@ -100,7 +101,11 @@ export default class LayoutLibraryHeader extends PureComponent {
             <div className="library-header__inner">
               {this.linkLogo(
                 <>
-                  <span className="screen-reader-text">Return to home</span>
+                  <Translation>
+                    {t => (
+                    <span className="screen-reader-text">{t(`return-to-home`)}</span>
+                    )}
+                  </Translation>
                   <PressLogo
                     url={logoUrl}
                     mobileUrl={mobileLogoUrl}

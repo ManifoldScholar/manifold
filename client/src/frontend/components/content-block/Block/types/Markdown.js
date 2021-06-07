@@ -9,7 +9,7 @@ export default class ProjectContentBlockMarkdownBlock extends PureComponent {
   };
 
   static get placeholderTitle() {
-    return "Markdown";
+    return "markdown";
   }
 
   static get icon() {

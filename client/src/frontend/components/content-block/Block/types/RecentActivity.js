@@ -11,7 +11,7 @@ export default class ProjectContentBlockRecentActivityBlock extends PureComponen
   };
 
   static get title() {
-    return "Recent Activity";
+    return "recent-activity";
   }
 
   static get icon() {

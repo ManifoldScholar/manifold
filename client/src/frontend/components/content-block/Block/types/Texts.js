@@ -12,7 +12,7 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
   };
 
   static get title() {
-    return "Texts";
+    return "texts";
   }
 
   static get icon() {
@@ -86,7 +86,7 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
           ))}
           {this.visibility.showUncategorized && (
             <TextList
-              label="Uncategorized"
+              label="uncategorized"
               texts={this.uncategorizedTexts}
               {...this.visibility}
             />

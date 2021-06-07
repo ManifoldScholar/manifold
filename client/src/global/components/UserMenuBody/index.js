@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 import withCurrentUser from "hoc/with-current-user";
+import { Translation } from 'react-i18next';
 
 export class UserMenuBodyComponent extends Component {
   static propTypes = {
@@ -58,83 +59,87 @@ export class UserMenuBodyComponent extends Component {
     });
 
     return (
-      <nav className={menuClass}>
-        {this.props.context !== "reader" && (
-          <i className="user-menu__tail tail" />
+      <Translation>
+        {t => (
+          <nav className={menuClass}>
+            {this.props.context !== "reader" && (
+              <i className="user-menu__tail tail" />
+            )}
+            <ul className="user-menu__list">
+              <li className="user-menu__item">
+                <button
+                  className="user-menu__link"
+                  onClick={this.handleProfileClick}
+                  aria-describedby="user-menu-edit-profile"
+                >
+                  <IconComposer
+                    icon="editProfile24"
+                    size={32}
+                    iconClass="user-menu__icon"
+                  />
+                  <span className="user-menu__link-text">{t(`edit-profile`)}</span>
+                </button>
+                <span id="user-menu-edit-profile" className="aria-describedby">
+                  {t(`edit-your-profile`)}
+                </span>
+              </li>
+              <li className="user-menu__item">
+                <button
+                  className="user-menu__link"
+                  onClick={this.handleNotificationsClick}
+                  aria-describedby="user-menu-notifications"
+                >
+                  <IconComposer
+                    icon="notifications24"
+                    size={32}
+                    iconClass="user-menu__icon"
+                  />
+                  <span className="user-menu__link-text">{t(`notifications`)}</span>
+                </button>
+                <span id="user-menu-notifications" className="aria-describedby">
+                  {t(`edit-your-notification-settings`)}
+                </span>
+              </li>
+              {this.canAccessReadingGroups && (
+                <li className="user-menu__item">
+                  <button
+                    className="user-menu__link"
+                    onClick={this.handleReadingGroupsClick}
+                    aria-describedby="user-menu-groups"
+                  >
+                    <IconComposer
+                      icon="annotationGroup24"
+                      size={32}
+                      iconClass="user-menu__icon"
+                    />
+                    <span className="user-menu__link-text">{t(`manage-groups`)}</span>
+                  </button>
+                  <span id="user-menu-groups" className="aria-describedby">
+                    {t(`manage-your-reading-groups`)}
+                  </span>
+                </li>
+              )}
+              <li className="user-menu__item">
+                <button
+                  className="user-menu__link"
+                  onClick={this.logout}
+                  aria-describedby="user-menu-logout"
+                >
+                  <IconComposer
+                    icon="logout24"
+                    size={32}
+                    iconClass="user-menu__icon"
+                  />
+                  <span className="user-menu__link-text">{t(`logout`)}</span>
+                </button>
+                <span id="user-menu-logout" className="aria-describedby">
+                  {t(`logout-of-manifold`)}
+                </span>
+              </li>
+            </ul>
+          </nav>
         )}
-        <ul className="user-menu__list">
-          <li className="user-menu__item">
-            <button
-              className="user-menu__link"
-              onClick={this.handleProfileClick}
-              aria-describedby="user-menu-edit-profile"
-            >
-              <IconComposer
-                icon="editProfile24"
-                size={32}
-                iconClass="user-menu__icon"
-              />
-              <span className="user-menu__link-text">Edit Profile</span>
-            </button>
-            <span id="user-menu-edit-profile" className="aria-describedby">
-              Edit your profile
-            </span>
-          </li>
-          <li className="user-menu__item">
-            <button
-              className="user-menu__link"
-              onClick={this.handleNotificationsClick}
-              aria-describedby="user-menu-notifications"
-            >
-              <IconComposer
-                icon="notifications24"
-                size={32}
-                iconClass="user-menu__icon"
-              />
-              <span className="user-menu__link-text">Notifications</span>
-            </button>
-            <span id="user-menu-notifications" className="aria-describedby">
-              Edit your notification settings
-            </span>
-          </li>
-          {this.canAccessReadingGroups && (
-            <li className="user-menu__item">
-              <button
-                className="user-menu__link"
-                onClick={this.handleReadingGroupsClick}
-                aria-describedby="user-menu-groups"
-              >
-                <IconComposer
-                  icon="annotationGroup24"
-                  size={32}
-                  iconClass="user-menu__icon"
-                />
-                <span className="user-menu__link-text">Manage Groups</span>
-              </button>
-              <span id="user-menu-groups" className="aria-describedby">
-                Manage your Reading Groups
-              </span>
-            </li>
-          )}
-          <li className="user-menu__item">
-            <button
-              className="user-menu__link"
-              onClick={this.logout}
-              aria-describedby="user-menu-logout"
-            >
-              <IconComposer
-                icon="logout24"
-                size={32}
-                iconClass="user-menu__icon"
-              />
-              <span className="user-menu__link-text">Logout</span>
-            </button>
-            <span id="user-menu-logout" className="aria-describedby">
-              Logout of Manifold
-            </span>
-          </li>
-        </ul>
-      </nav>
+      </Translation>
     );
   }
 }

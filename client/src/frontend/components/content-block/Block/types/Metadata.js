@@ -11,7 +11,7 @@ export default class ProjectContentBlockMetadataBlock extends PureComponent {
   };
 
   static get title() {
-    return "Metadata";
+    return "metadata";
   }
 
   static get icon() {

@@ -5,6 +5,7 @@ import classNames from "classnames";
 import lh from "helpers/linkHandler";
 import withCurrentUser from "hoc/with-current-user";
 import IconComposer from "global/components/utility/IconComposer";
+import { Translation } from 'react-i18next';
 
 export class LayoutButtonNavigation extends Component {
   static displayName = "Layout.ButtonNavigation";
@@ -33,7 +34,11 @@ export class LayoutButtonNavigation extends Component {
           size={48}
           iconClass="button-icon-primary__icon"
         />
-        <span className="button-icon-primary__text">{label}</span>
+        <Translation>
+          {t => (
+            <span className="button-icon-primary__text">{t(label)}</span>
+          )}
+        </Translation>
       </>
     );
   }
@@ -46,10 +51,10 @@ export class LayoutButtonNavigation extends Component {
 
     if (this.props.showProjects) {
       url = lh.link("frontendProjectsAll");
-      label = "See All Projects";
+      label = "see-all-projects";
     } else if (this.props.showProjectCollections) {
       url = lh.link("frontendProjectCollections");
-      label = "See Project Collections";
+      label = "see-project-collections";
     }
 
     return (
@@ -64,7 +69,7 @@ export class LayoutButtonNavigation extends Component {
     if (this.props.showFollowing !== true) return null;
     return (
       <Link to={lh.link("frontendFollowing")} className="button-icon-primary">
-        {this.renderButtonInner("following64", "Projects You’re Following")}
+        {this.renderButtonInner("following64", "projects-youre-following")}
       </Link>
     );
   };
@@ -78,15 +83,19 @@ export class LayoutButtonNavigation extends Component {
     if (!this.renderProjectsButton() && !this.renderFollowingButton())
       return null;
     return (
-      <section className={sectionClass}>
-        <div className="container">
-          <h2 className="screen-reader-text">Project Navigation</h2>
-          <div className="button-nav button-nav--default">
-            {this.renderProjectsButton()}
-            {this.renderFollowingButton()}
-          </div>
-        </div>
-      </section>
+      <Translation>
+        {t => (
+          <section className={sectionClass}>
+            <div className="container">
+              <h2 className="screen-reader-text">{t(`project-navigation`)}</h2>
+              <div className="button-nav button-nav--default">
+                {this.renderProjectsButton()}
+                {this.renderFollowingButton()}
+              </div>
+            </div>
+          </section>
+        )}
+      </Translation>
     );
   }
 }

@@ -5,6 +5,7 @@ import Heading from "./parts/Heading";
 import Wrapper from "./parts/Wrapper";
 import Incomplete from "./parts/Incomplete";
 import Authorization from "helpers/authorization";
+import { Translation } from 'react-i18next';
 
 export default class ProjectContentBlock extends PureComponent {
   static displayName = "Project.Content.Blocks.Block";
@@ -82,18 +83,22 @@ export default class ProjectContentBlock extends PureComponent {
     const TypeComponent = this.typeComponent;
 
     return (
-      <Wrapper additionalClasses={this.style}>
-        <Heading
-          title={title}
-          icon={this.icon}
-          description={this.description}
-        />
-        {this.renderable ? (
-          <TypeComponent {...this.props} />
-        ) : (
-          <Incomplete block={this.block} />
+      <Translation>
+        {t => (
+          <Wrapper additionalClasses={this.style}>
+            <Heading
+              title={t(title)}
+              icon={this.icon}
+              description={this.description}
+            />
+            {this.renderable ? (
+              <TypeComponent {...this.props} />
+            ) : (
+              <Incomplete block={this.block} />
+            )}
+          </Wrapper>
         )}
-      </Wrapper>
+      </Translation>
     );
   }
 }

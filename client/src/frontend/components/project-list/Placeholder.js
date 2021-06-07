@@ -8,19 +8,21 @@ import { Translation } from 'react-i18next';
 
 export default class ProjectListPlaceholder extends React.PureComponent {
   renderAdminMessage() {
-    const helpLink = "https://manifoldapp.org/docs/";
+    const helpLink = "https://manifoldapp.org/docs/"; // ALERT LEONOR: Test the translation key below with user account w backend access
     return (
-      <Translation>
-        {t => (
-          <p>
-            {t(`but-its-easy`)}
-            <Link to={lh.link("backend")}>{t(`head-to-the-backend`)}</Link>
-            {t(`and-select`)}
-            <em>{t(`add-a-new-project`)}</em>
-            {t(`for-more-help`)}
-            <a href={helpLink}>{t(`here`)}</a>.
-          </p>
-        )}
+      <Translation i18nKey="empty-projects-message"> 
+        <p>
+        {
+          "But it’s easy to create and publish projects with Manifold. If you have backend access, "
+        }
+        <Link to={lh.link("backend")}>head to the backend</Link>
+        {" and select "}
+        <em>Add a New Project</em>
+        {
+          ". For more help, you can learn about creating and publishing Manifold Projects "
+        }
+        <a href={helpLink}>here</a>.
+      </p>
       </Translation>
     );
   }
@@ -74,7 +76,7 @@ export default class ProjectListPlaceholder extends React.PureComponent {
                       className="button-icon-primary"
                     >
                       <span className="button-icon-primary__text">
-                        {"Publish a Project Now"}
+                        {t(`publish-a-project-now`)}
                       </span>
                     </Link>
                   </Authorize>

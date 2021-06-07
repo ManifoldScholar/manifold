@@ -3,6 +3,7 @@ import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { Translation } from 'react-i18next';
 
 export default class Search extends PureComponent {
   static displayName = "Global.Footers.Parts.Search";
@@ -41,28 +42,32 @@ export default class Search extends PureComponent {
     );
 
     return (
-      <form className={containerClasses} onSubmit={this.doSearch}>
-        <div className="search-button-inline">
-          <label htmlFor="app-footer-search" className="screen-reader-text">
-            Site Search
-          </label>
-          <input
-            type="text"
-            id="app-footer-search"
-            placeholder="Search"
-            value={this.state.keyword}
-            onChange={this.updateSearchWord}
-          />
-          <button className="icon">
-            <Utility.IconComposer
-              className="search-icon"
-              icon="search16"
-              size={20}
-            />
-            <span className="screen-reader-text">Search</span>
-          </button>
-        </div>
-      </form>
+      <Translation>
+        {t => ( 
+          <form className={containerClasses} onSubmit={this.doSearch}>
+            <div className="search-button-inline">
+              <label htmlFor="app-footer-search" className="screen-reader-text">
+                {t(`site-search`)}
+              </label>
+              <input
+                type="text"
+                id="app-footer-search"
+                placeholder={t(`search`)}
+                value={this.state.keyword}
+                onChange={this.updateSearchWord}
+              />
+              <button className="icon">
+                <Utility.IconComposer
+                  className="search-icon"
+                  icon="search16"
+                  size={20}
+                />
+                <span className="screen-reader-text">{t(`search`)}</span>
+              </button>
+            </div>
+          </form>
+        )}
+      </Translation>
     );
   }
 }

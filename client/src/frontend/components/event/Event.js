@@ -102,7 +102,7 @@ export default class Event extends PureComponent {
     return {
       type: attr.eventType,
       date: attr.createdAt,
-      header: "Text Added",
+      header: "text-added",
       dateFormat: "MMMM dd, yyyy",
       title: attr.subjectTitle,
       icon: "activityText64",
@@ -114,7 +114,7 @@ export default class Event extends PureComponent {
     return {
       type: attr.eventType,
       date: attr.createdAt,
-      header: "Resource Added",
+      header: "resource-added",
       dateFormat: "MMMM dd, yyyy",
       title: attr.subjectTitle,
       icon: "activityResource64",
@@ -130,7 +130,7 @@ export default class Event extends PureComponent {
     return {
       type: attr.eventType,
       date: attr.createdAt,
-      header: "Resource Collection Added",
+      header: "resource-collection-added",
       dateFormat: "MMMM dd, yyyy",
       title: attr.subjectTitle,
       icon: "activityResource64",

@@ -1,4 +1,5 @@
 import React from "react";
+import { Translation } from 'react-i18next';
 
 export default class Layout extends React.Component {
   get getComponent() {
@@ -36,12 +37,16 @@ export default class Layout extends React.Component {
 
     if (loadingStatus === "failed") {
       loadingMessage = (
-        <div className="info">
-          <div className="loading-container">
-            <h4 className="title">Failed to load API definition.</h4>
-            <Errors />
-          </div>
-        </div>
+        <Translation>
+          {t => (
+            <div className="info">
+              <div className="loading-container">
+                <h4 className="title">{t(`failed-to-load-api-definition`)}</h4>
+                <Errors />
+              </div>
+            </div>
+          )}
+        </Translation>
       );
     }
 
@@ -49,29 +54,39 @@ export default class Layout extends React.Component {
       const lastErr = errSelectors.lastError();
       const lastErrMsg = lastErr ? lastErr.get("message") : "";
       loadingMessage = (
-        <div
-          className="info"
-          style={{
-            maxWidth: "880px",
-            marginLeft: "auto",
-            marginRight: "auto",
-            textAlign: "center"
-          }}
-        >
-          <div className="loading-container">
-            <h4 className="title">Failed to load remote configuration.</h4>
-            <p>{lastErrMsg}</p>
-          </div>
-        </div>
+        <Translation>
+          {t => (
+            <div
+              className="info"
+              style={{
+                maxWidth: "880px",
+                marginLeft: "auto",
+                marginRight: "auto",
+                textAlign: "center"
+              }}
+            >
+              <div className="loading-container">
+                <h4 className="title">{t(`failed-to-load-remote-config`)}</h4>
+                <p>{lastErrMsg}</p>
+              </div>
+            </div>
+          )}
+        </Translation>
       );
     }
 
     if (!loadingMessage && isSpecEmpty) {
-      loadingMessage = <h4>No API definition provided.</h4>;
+      loadingMessage = (
+        <Translation>
+          {t => (
+            <h4>{t(`no-api-definition-provided`)}</h4>
+          )}
+        </Translation>
+      );
     }
 
     if (loadingMessage) {
-      return (
+      return ( 
         <div className="swagger-ui">
           <div className="loading-container">{loadingMessage}</div>
         </div>
