@@ -5,6 +5,7 @@ import classNames from "classnames";
 import lh from "helpers/linkHandler";
 import withCurrentUser from "hoc/with-current-user";
 import IconComposer from "global/components/utility/IconComposer";
+import { Translation } from "react-i18next";
 
 export class LayoutButtonNavigation extends Component {
   static displayName = "Layout.ButtonNavigation";
@@ -23,7 +24,7 @@ export class LayoutButtonNavigation extends Component {
     showProjectCollections: false
   };
 
-  renderButtonInner(icon, label) {
+  renderButtonInner(icon, label, t) {
     return (
       <>
         <IconComposer
@@ -31,28 +32,26 @@ export class LayoutButtonNavigation extends Component {
           size={48}
           className="button-icon-primary__icon"
         />
-        <span className="button-icon-primary__text">{label}</span>
+        <span className="button-icon-primary__text">{t(label)}</span>
       </>
     );
   }
 
-  renderProjectsButton = () => {
-    if (!this.props.showProjects && !this.props.showProjectCollections)
-      return null;
+  renderProjectsButton = t => {
     let url = null;
     let label = null;
 
     if (this.props.showProjects) {
       url = lh.link("frontendProjectsAll");
-      label = "See All Projects";
+      label = "see-all-projects";
     } else if (this.props.showProjectCollections) {
       url = lh.link("frontendProjectCollections");
-      label = "See Project Collections";
+      label = "see-project-collections";
     }
 
     return (
       <Link to={url} className="button-icon-primary">
-        {this.renderButtonInner("projects64", label)}
+        {this.renderButtonInner("projects64", label, t)}
       </Link>
     );
   };
@@ -63,16 +62,21 @@ export class LayoutButtonNavigation extends Component {
       "bg-neutral05": this.props.grayBg === true
     });
 
-    if (!this.renderProjectsButton()) return null;
+    if (!this.props.showProjects && !this.props.showProjectCollections)
+      return null;
     return (
-      <section className={sectionClass}>
-        <div className="container">
-          <h2 className="screen-reader-text">Project Navigation</h2>
-          <div className="button-nav button-nav--default">
-            {this.renderProjectsButton()}
-          </div>
-        </div>
-      </section>
+      <Translation>
+        {t => (
+          <section className={sectionClass}>
+            <div className="container">
+              <h2 className="screen-reader-text">{t(`project-navigation`)}</h2>
+              <div className="button-nav button-nav--default">
+                {this.renderProjectsButton(t)}
+              </div>
+            </div>
+          </section>
+        )}
+      </Translation>
     );
   }
 }

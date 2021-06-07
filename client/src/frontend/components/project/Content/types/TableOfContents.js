@@ -10,7 +10,7 @@ export default class ProjectContentBlockTableOfContentsBlock extends PureCompone
   };
 
   static get title() {
-    return "Table of Contents";
+    return "table-of-contents";
   }
 
   static get icon() {

@@ -110,8 +110,8 @@ export class NavigationStatic extends PureComponent {
       Boolean(this.isLibraryDisabled && this.context.project);
 
     const description = scopeToProject
-      ? "Search across all project content"
-      : "Search across all content and projects";
+      ? "search-across-all-project-content"
+      : "search-across-all-content-and-projects";
     const projectId = scopeToProject ? this.context.project.id : null;
 
     return (

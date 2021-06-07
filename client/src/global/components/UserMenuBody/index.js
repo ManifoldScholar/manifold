@@ -4,6 +4,7 @@ import classNames from "classnames";
 import lh from "helpers/linkHandler";
 import withCurrentUser from "hoc/with-current-user";
 import Link from "./Link";
+import { Translation } from "react-i18next";
 
 export class UserMenuBody extends Component {
   static propTypes = {
@@ -51,58 +52,62 @@ export class UserMenuBody extends Component {
     });
 
     return (
-      <nav className={menuClass}>
-        {this.props.context !== "reader" && (
-          <i className="user-menu__tail tail" />
+      <Translation>
+        {t => (
+          <nav className={menuClass}>
+            {this.props.context !== "reader" && (
+              <i className="user-menu__tail tail" />
+            )}
+            <ul className="user-menu__list">
+              {!!this.currentUser && (
+                <Link
+                  to={lh.link("frontendStarred")}
+                  title="My Starred"
+                  srTitle="View My Starred page"
+                  icon="star24"
+                  onClick={() => this.props.hideUserMenu()}
+                />
+              )}
+              {this.canAccessReadingGroups && (
+                <>
+                  <Link
+                    to={lh.link("frontendAnnotations")}
+                    title="My Notes + Comments"
+                    icon="notes24"
+                    onClick={() => this.props.hideUserMenu()}
+                  />
+                  <Link
+                    to={lh.link("frontendMyReadingGroups")}
+                    title="My Reading Groups"
+                    icon="annotationGroup24"
+                    onClick={() => this.props.hideUserMenu()}
+                  />
+                </>
+              )}
+              <Link
+                as="button"
+                title={t(`edit-profile`)}
+                srTitle={t(`edit-your-profile`)}
+                icon="editProfile24"
+                onClick={this.handleProfileClick}
+              />
+              <Link
+                to={lh.link("subscriptions")}
+                title={t(`notifications`)}
+                srTitle={t(`edit-your-notification-settings`)}
+                icon="notifications24"
+                onClick={() => this.props.hideUserMenu()}
+              />
+              <Link
+                as="button"
+                title={t(`logout`)}
+                icon="logout24"
+                onClick={this.handleLogoutClick}
+              />
+            </ul>
+          </nav>
         )}
-        <ul className="user-menu__list">
-          {!!this.currentUser && (
-            <Link
-              to={lh.link("frontendStarred")}
-              title="My Starred"
-              srTitle="View My Starred page"
-              icon="star24"
-              onClick={() => this.props.hideUserMenu()}
-            />
-          )}
-          {this.canAccessReadingGroups && (
-            <>
-              <Link
-                to={lh.link("frontendAnnotations")}
-                title="My Notes + Comments"
-                icon="notes24"
-                onClick={() => this.props.hideUserMenu()}
-              />
-              <Link
-                to={lh.link("frontendMyReadingGroups")}
-                title="My Reading Groups"
-                icon="annotationGroup24"
-                onClick={() => this.props.hideUserMenu()}
-              />
-            </>
-          )}
-          <Link
-            as="button"
-            title="Edit Profile"
-            srTitle="Edit my profile"
-            icon="editProfile24"
-            onClick={this.handleProfileClick}
-          />
-          <Link
-            to={lh.link("subscriptions")}
-            title="Notifications"
-            srTitle="Edit my notification settings"
-            icon="notifications24"
-            onClick={() => this.props.hideUserMenu()}
-          />
-          <Link
-            as="button"
-            title="Logout"
-            icon="logout24"
-            onClick={this.handleLogoutClick}
-          />
-        </ul>
-      </nav>
+      </Translation>
     );
   }
   /* eslint-enable jsx-a11y/anchor-is-valid */

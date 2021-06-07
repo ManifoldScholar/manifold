@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import ResourceCollectionList from "frontend/components/resource-collection-list";
 import ResourceList from "frontend/components/resource-list";
+import { Translation } from "react-i18next";
 
 export default class ProjectContentBlockResourcesBlock extends PureComponent {
   static displayName = "Project.Content.Block.Resources";
@@ -12,7 +13,7 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
   };
 
   static get title() {
-    return "Resources";
+    return "resources";
   }
 
   static get icon() {
@@ -75,28 +76,34 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
 
   render() {
     return (
-      <div className="entity-section-wrapper__body">
-        {this.hasVisibleCollections && (
-          <>
-            <h3 className="screen-reader-text">Resource Collections</h3>
-            <ResourceCollectionList.Grid
-              resourceCollections={this.visibleCollections}
-            />
-            <ResourceCollectionList.Totals
+      <Translation>
+        {t => (
+          <div className="entity-section-wrapper__body">
+            {this.hasVisibleCollections && (
+              <>
+                <h3 className="screen-reader-text">
+                  {t(`resource-collections`)}
+                </h3>
+                <ResourceCollectionList.Grid
+                  resourceCollections={this.visibleCollections}
+                />
+                <ResourceList.Totals
+                  alignLeft={this.isSparse}
+                  project={this.project}
+                  count={this.resourcesTotal}
+                />
+              </>
+            )}
+            <h3 className="screen-reader-text">{t(`single-resources`)}</h3>
+            <ResourceList.Thumbnails resources={this.visibleResources} />
+            <ResourceList.Totals
               alignLeft={this.isSparse}
               project={this.project}
-              count={this.countProjectCollections}
+              count={this.resourcesTotal}
             />
-          </>
+          </div>
         )}
-        <h3 className="screen-reader-text">Single Resources</h3>
-        <ResourceList.Thumbnails resources={this.visibleResources} />
-        <ResourceList.Totals
-          alignLeft={this.isSparse}
-          project={this.project}
-          count={this.resourcesTotal}
-        />
-      </div>
+      </Translation>
     );
   }
 }

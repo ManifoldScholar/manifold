@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Node from "./Node";
+import { Translation } from "react-i18next";
 
 export default class ContentBlockTocBlockList extends PureComponent {
   static displayName = "ContentBlock.Types.TOC.List";
@@ -84,16 +85,18 @@ export default class ContentBlockTocBlockList extends PureComponent {
 
   renderEmpty() {
     return (
-      <>
-        <div
-          className={classNames(
-            `${this.props.blockClass}__list`,
-            `${this.props.blockClass}__list--empty`
-          )}
-        >
-          This text does not have a table of contents.
-        </div>
-      </>
+      <Translation>
+        {t => (
+          <div
+            className={classNames(
+              `${this.props.blockClass}__list`,
+              `${this.props.blockClass}__list--empty`
+            )}
+          >
+            {t(`this-text-does-not-have-a-table-of-contents`)}
+          </div>
+        )}
+      </Translation>
     );
   }
 

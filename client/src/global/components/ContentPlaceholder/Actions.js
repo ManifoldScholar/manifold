@@ -1,29 +1,36 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Action, { actionProps } from "./Action";
+import { Translation } from "react-i18next";
 
 const DOCS_URL = "https://manifoldscholar.github.io/manifold-docusaurus/docs";
 
 const PlaceholderActions = ({ actions = [] }) => {
-  const allActions = [
-    ...actions,
-    {
-      title: "Visit our documentation",
-      linkProps: {
-        href: DOCS_URL,
-        target: "_blank",
-        rel: "noopener norefferer"
+  const allActions = t => {
+    return [
+      ...actions,
+      {
+        title: t(`visit-our-documentation`),
+        linkProps: {
+          href: DOCS_URL,
+          target: "_blank",
+          rel: "noopener norefferer"
+        }
       }
-    }
-  ];
+    ];
+  };
 
   return (
-    <div className="content-placeholder__actions">
-      {allActions.map((action, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <Action key={index} {...action} />
-      ))}
-    </div>
+    <Translation>
+      {t => (
+        <div className="content-placeholder__actions">
+          {allActions(t).map((action, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Action key={index} {...action} />
+          ))}
+        </div>
+      )}
+    </Translation>
   );
 };
 
