@@ -194,6 +194,32 @@ module Testing
 
       base_uri "http://manifold.lvh"
     end
+
+    module ResponseWrapping
+      def get(...)
+        wrap_response super
+      end
+
+      def post(...)
+        wrap_response super
+      end
+
+      def put(...)
+        wrap_response super
+      end
+
+      def delete(...)
+        wrap_response super
+      end
+
+      def wrap_response(response)
+        return response unless response.is_a?(HTTParty::Response) && response.ok? && response.parsed_response.is_a?(Hash)
+
+        response.parsed_response.with_indifferent_access
+      end
+    end
+
+    prepend ResponseWrapping
   end
   # rubocop:enable Layout/FirstHashElementIndentation, Style/TrailingCommaInHashLiteral
   # rubocop:enable Metrics/ParameterLists, Lint/UnusedMethodArgument, Naming/MethodParameterName, Layout/LineLength

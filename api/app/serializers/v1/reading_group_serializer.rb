@@ -73,5 +73,23 @@ module V1
     link_with_meta :join, if: CAN_JOIN, method: "POST" do |object, _params|
       routes.join_api_v1_reading_group_path(object)
     end
+
+    SHOW_ARCHIVE_LINK = ->(reading_group, params) do
+      next false unless params[:current_user].present?
+
+      membership = reading_group.membership_for params[:current_user]
+
+      next false unless membership.present? && membership.may_archive?
+
+      params[:current_user].can_update?(membership)
+    end
+
+    link :archive, if: SHOW_ARCHIVE_LINK do |reading_group, params|
+      membership = reading_group.membership_for params[:current_user]
+
+      next nil if membership.blank?
+
+      routes.archive_api_v1_reading_group_membership_path(membership)
+    end
   end
 end
