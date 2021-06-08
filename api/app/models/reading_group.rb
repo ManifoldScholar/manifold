@@ -78,6 +78,8 @@ class ReadingGroup < ApplicationRecord
     reading_group_memberships.for_user(user).first
   end
 
+  alias membership_for reading_group_membership_for_user
+
   def update_annotations_privacy
     # Use of update_all is intentional. We don't care about validations here.
     annotations.update_all(private: true, reading_group_id: nil) if private? || anonymous?
