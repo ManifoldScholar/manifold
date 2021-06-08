@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_12_053226) do
+ActiveRecord::Schema.define(version: 2021_06_08_162317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -1935,5 +1935,20 @@ UNION ALL
      LEFT JOIN reading_group_memberships rgm ON ((rgm.reading_group_id = rg.id)))
      LEFT JOIN comments c ON ((((c.subject_type)::text = 'Annotation'::text) AND (c.subject_id = a.id) AND (c.creator_id = rgm.user_id))))
   GROUP BY rg.id;
+  SQL
+  create_view "reading_group_user_counts", sql_definition: <<-SQL
+    SELECT rg.id AS reading_group_id,
+    rgm.user_id,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count,
+    count(DISTINCT c.id) FILTER (WHERE (NOT a.orphaned)) AS comments_count,
+    count(DISTINCT c.id) FILTER (WHERE a.orphaned) AS orphaned_comments_count
+   FROM (((reading_groups rg
+     LEFT JOIN annotations a ON ((a.reading_group_id = rg.id)))
+     LEFT JOIN reading_group_memberships rgm ON ((rgm.reading_group_id = rg.id)))
+     LEFT JOIN comments c ON ((((c.subject_type)::text = 'Annotation'::text) AND (c.subject_id = a.id) AND (c.creator_id = rgm.user_id))))
+  GROUP BY rg.id, rgm.user_id;
   SQL
 end
