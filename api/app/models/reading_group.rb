@@ -25,6 +25,7 @@ class ReadingGroup < ApplicationRecord
   has_one :reading_group_collection, inverse_of: :reading_group
   has_one :reading_group_count
   has_many :reading_group_visibilities
+  has_many :reading_group_user_counts
 
   has_many :annotated_texts, -> { distinct.reorder(nil) }, through: :annotations, source: :text
 
