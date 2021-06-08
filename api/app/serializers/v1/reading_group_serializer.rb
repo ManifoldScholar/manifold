@@ -27,6 +27,14 @@ module V1
       object.annotations_count + object.highlights_count
     end
 
+    typed_attribute :current_user_counts, Users::ReadingGroupCount::SCHEMA.meta(read_only: true) do |object, params|
+      params[:current_user].then do |user|
+        next Users::ReadingGroupCount.new if user.blank? || user.anonymous?
+
+        user.reading_group_count_for object
+      end.as_json
+    end
+
     typed_attribute :current_user_role, Types::String.enum("moderator", "member", "none").meta(read_only: true) do |object, params|
       if calculate_current_user_is_creator?(object, params)
         "moderator"
