@@ -20,7 +20,7 @@ class ReadingGroupCategory < ApplicationRecord
   collects_reading_group_entry! "ReadingGroupText"
   collects_reading_group_entry! "ReadingGroupTextSection"
 
-  acts_as_list scope: %i[reading_group_id]
+  acts_as_list scope: %i[reading_group_id], add_new_at: :top
 
   scope :in_order, -> { order(position: :asc) }
 
