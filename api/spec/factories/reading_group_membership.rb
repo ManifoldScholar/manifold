@@ -3,6 +3,10 @@ FactoryBot.define do
     reading_group
     user
 
+    trait :member do
+      role { :member }
+    end
+
     trait :moderator do
       role { :moderator }
     end
