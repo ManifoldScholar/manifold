@@ -44,6 +44,7 @@ class User < ApplicationRecord
   has_many :archived_reading_groups, -> { merge(ReadingGroupMembership.archived) },
            through: :reading_group_memberships, source: :reading_group
   has_many :reading_group_visibilities
+  has_many :reading_group_user_counts
   has_many :visible_reading_groups, -> { merge(ReadingGroupVisibility.visible) },
            through: :reading_group_visibilities, source: :reading_group
   has_many :entitlement_user_links, inverse_of: :user, dependent: :destroy
@@ -149,6 +150,23 @@ class User < ApplicationRecord
     return false unless resource.respond_to? :creator
 
     resource.creator == self
+  end
+
+  # @param [ReadingGroup]
+  # @return [ReadingGroupUserCount, nil]
+  def reading_group_count_for(reading_group)
+    reading_group_user_counts.then do |counts|
+      count =
+        if counts.loaded?
+          counts.detect { |c| c.reading_group_id == reading_group.id }
+        else
+          counts.all.detect { |c| c.reading_group_id == reading_group.id }
+        end
+
+      attrs = count.present? ? count.as_json : {}
+
+      Users::ReadingGroupCount.new attrs
+    end
   end
 
   # @api private
