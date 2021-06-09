@@ -110,7 +110,9 @@ class ReadingGroup < ApplicationRecord
 
   class << self
     def build_keyword_scope(value)
-      needle = "%#{value.gsub("%", "\\%")}%"
+      escaped = value.gsub("%", "\\%")
+
+      needle = "%#{escaped}%"
 
       where arel_table[:name].matches(needle)
     end
@@ -120,11 +122,12 @@ class ReadingGroup < ApplicationRecord
 
       return order(created_at: :asc) unless values.present?
 
-      values.reduce(all) do |q, value|
-        q.apply_sort_order_scope_value(value)
+      values.reduce(all) do |q, v|
+        q.apply_sort_order_scope_value(v)
       end
     end
 
+    # rubocop:disable Metrics/AbcSize
     def apply_sort_order_scope_value(value)
       case value
       when /\A(?<attr>created_at|name)(?:_(?<dir>asc|desc))\z/i
@@ -145,6 +148,7 @@ class ReadingGroup < ApplicationRecord
         all
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     def build_sort_order_direction(value)
       /desc/i.match?(value) ? :desc : :asc
