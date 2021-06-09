@@ -83,7 +83,7 @@ class ResourceImport < ApplicationRecord
   end
 
   def column_automap_with_headers
-    column_automap.transform_keys { |k| headers[k] }
+    column_automap.transform_keys { |key| headers[key] }
   end
 
   def google_sheet?

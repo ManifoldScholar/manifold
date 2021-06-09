@@ -177,6 +177,9 @@ Style/OptionalBooleanParameter:
 Style/RedundantAssignment:
   Enabled: true
 
+Style/RedundantBegin:
+  Enabled: false
+
 Style/RedundantFileExtensionInRequire:
   Enabled: true
 
@@ -185,7 +188,6 @@ Style/SingleArgumentDig:
 
 Style/StringConcatenation:
   Enabled: false
-
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -267,7 +269,7 @@ Style/RedundantRegexpEscape:
   Enabled: true
 
 Style/SlicingWithRange:
-  Enabled: true
+  Enabled: false
 
 Style/ClassEqualityComparison:
   Enabled: true

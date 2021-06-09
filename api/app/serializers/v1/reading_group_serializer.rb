@@ -52,14 +52,18 @@ module V1
     typed_has_many :annotated_texts, serializer: TextOptionsSerializer, record_type: "textOptions"
 
     typed_has_many :reading_group_memberships do |object, params|
-      ReadingGroupMembership.readable_by?(params[:current_user], reading_group: object) ? object.reading_group_memberships : object.reading_group_memberships.none
+      if ReadingGroupMembership.readable_by?(params[:current_user], reading_group: object)
+        object.reading_group_memberships
+      else
+        object.reading_group_memberships.none
+      end
     end
 
     typed_has_one :current_user_reading_group_membership, serializer: V1::ReadingGroupMembershipSerializer do |object, params|
       object.reading_group_membership_for_user params[:current_user]
     end
 
-    typed_has_one :collection, serializer: V1::ReadingGroupCollectionSerializer, record_type: "readingGroupCollections" do |object, _params|
+    typed_has_one :collection, serializer: V1::ReadingGroupCollectionSerializer, record_type: "readingGroupCollections" do |object, _|
       object.composed_collection
     end
 
