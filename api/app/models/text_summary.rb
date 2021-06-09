@@ -1,5 +1,6 @@
 class TextSummary < ApplicationRecord
   include Attachments
+  include TableOfContentsWithCollected
   include View
 
   self.primary_key = :id
