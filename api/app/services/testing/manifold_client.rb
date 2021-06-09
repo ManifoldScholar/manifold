@@ -63,6 +63,14 @@ module Testing
       get("/api/v1/reading_groups/#{id}")
     end
 
+    def reading_group_annotations_by_membership(rg, rgm, filter: {}, **query)
+      filter[:reading_group_membership] = rgm.to_param
+
+      options = { **query, filter: filter }
+
+      get_with_query "/api/v1/reading_groups/#{rg.to_param}/relationships/annotations", **options
+    end
+
     def favorite(*collectables)
       collection_operation(*collectables, op: :update, collector: user)
     end

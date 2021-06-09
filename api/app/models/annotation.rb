@@ -47,6 +47,8 @@ class Annotation < ApplicationRecord
 
   has_one :annotation_reading_group_membership
   has_one :reading_group_membership, through: :annotation_reading_group_membership
+  has_many :annotation_membership_comments
+  has_many :membership_comments, through: :annotation_membership_comments, source: :comment
 
   # Validations
   validates :text_section, presence: true
@@ -102,13 +104,9 @@ class Annotation < ApplicationRecord
   scope :by_reading_group, lambda { |reading_group|
     where(reading_group: reading_group) if reading_group.present?
   }
-  scope :by_reading_group_membership, lambda { |rgm|
-    if rgm.present?
-      condition = AnnotationReadingGroupMembership.by_reading_group_membership(rgm).active
 
-      joins(:annotation_reading_group_membership).merge(condition)
-    end
-  }
+  scope :by_reading_group_membership, ->(rgm) { build_by_reading_group_membership_scope(rgm) }
+
   scope :by_text_section, lambda { |text_section|
     where(text_section: text_section) if text_section.present?
   }
@@ -198,6 +196,24 @@ class Annotation < ApplicationRecord
       id_scope = ReadingGroupVisibility.visible_or_joined_reading_group_ids_for(user, joined: with_membership_only)
 
       ReadingGroup.arel_id_is_null_or_within_scope(id_scope).or(arel_table[:creator_id].eq(user.id))
+    end
+  end
+
+  # @param [ReadingGroupMembership, String] rgm
+  # @return [<Comment>]
+  def filtered_membership_comments_for(rgm)
+    return [] if rgm.blank?
+
+    user_id = rgm.is_a?(ReadingGroupMembership) ? rgm.user_id : ReadingGroupMembership.where(id: rgm).first&.user_id
+
+    return [] if user_id.blank?
+
+    membership_comments.then do |comments|
+      if comments.loaded?
+        comments.select { |comm| comm.creator_id == user_id }
+      else
+        comments.by_creator(user_id).to_a
+      end
     end
   end
 
@@ -292,4 +308,23 @@ class Annotation < ApplicationRecord
     Event.trigger(EventType[:text_annotated], self)
   end
 
+  class << self
+    # @param [ReadingGroupMembership, String] rgm
+    # @return [ActiveRecord::Relation<ReadingGroup>]
+    # rubocop:disable Metrics/AbcSize
+    def build_by_reading_group_membership_scope(rgm)
+      return all if rgm.blank?
+
+      made_by_member = arel_quote_query AnnotationReadingGroupMembership.by_reading_group_membership(rgm).active.select(:annotation_id)
+
+      commented_on_by_member = arel_quote_query AnnotationMembershipComment.by_reading_group_membership(rgm).active.select(:annotation_id)
+
+      id = arel_table[:id]
+
+      condition = arel_grouping arel_expr_in_query(id, made_by_member).or(arel_expr_in_query(id, commented_on_by_member))
+
+      includes(:membership_comments).where(condition)
+    end
+    # rubocop:enable Metrics/AbcSize
+  end
 end

@@ -90,6 +90,7 @@ module JSONAPI
     params[:pagination] = request.params[:page]
     params[:full] = (options[:full] || false)
     params[:calculate_all_abilities] = (options[:calculate_all_abilities] || false)
+    params[:filters] = request.params[:filter].presence || {}.with_indifferent_access
     params
   end
   # rubocop:enable Metrics/AbcSize
