@@ -14,6 +14,8 @@ class Comment < ApplicationRecord
   include Filterable
 
   # Scopes
+  scope :by_creator, ->(creator) { where(creator: creator) }
+
   scope :by_subject, lambda { |subject|
     next all unless subject.present?
 

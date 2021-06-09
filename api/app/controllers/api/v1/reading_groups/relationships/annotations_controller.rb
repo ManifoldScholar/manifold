@@ -15,11 +15,17 @@ module API
           end
 
           def index
+            includes = [:creator]
+
+            filter_params = annotation_filter_params
+
+            includes << :membership_comments if filter_params[:reading_group_membership].present?
+
             @annotations = load_annotations
             location = api_v1_reading_group_relationships_annotations_url(@reading_group.id)
             render_multiple_resources(
               @annotations,
-              include: [:creator],
+              include: includes,
               location: location
             )
           end
@@ -35,7 +41,6 @@ module API
           def set_reading_group
             @reading_group = reading_group
           end
-
         end
       end
     end

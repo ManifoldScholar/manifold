@@ -59,6 +59,14 @@ module V1
                      if: proc { |object, params| creator_identity_visible?(object, params) },
                      serializer: ::V1::UserSerializer
 
+    typed_has_many :membership_comments, serializer: ::V1::CommentSerializer, record_type: "comment" do |object, params|
+      rgm = params[:filters][:reading_group_membership]
+
+      next [] if rgm.blank?
+
+      object.filtered_membership_comments_for rgm
+    end
+
     class << self
 
       def include_abilities?(_object, _params)
@@ -80,8 +88,6 @@ module V1
       def anonymous?(object, _params)
         object.reading_group_id && object.reading_group.anonymous?
       end
-
     end
-
   end
 end
