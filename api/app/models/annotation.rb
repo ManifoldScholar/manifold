@@ -81,7 +81,7 @@ class Annotation < ApplicationRecord
 
   delegate :avatar_styles, to: :creator, allow_nil: true, prefix: true
 
-  delegate :anonymous_label, to: :reading_group_membership, allow_nil: true
+  delegate :annotation_style, :anonymous_label, to: :reading_group_membership, allow_nil: true
 
   delegate :text_node_for, to: :text_section, prefix: true
   delegate :text_nodes, to: :text_section, prefix: true
