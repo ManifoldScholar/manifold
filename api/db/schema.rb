@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_08_162317) do
+ActiveRecord::Schema.define(version: 2021_06_08_203933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -1950,5 +1950,19 @@ UNION ALL
      LEFT JOIN reading_group_memberships rgm ON ((rgm.reading_group_id = rg.id)))
      LEFT JOIN comments c ON ((((c.subject_type)::text = 'Annotation'::text) AND (c.subject_id = a.id) AND (c.creator_id = rgm.user_id))))
   GROUP BY rg.id, rgm.user_id;
+  SQL
+  create_view "annotation_membership_comments", sql_definition: <<-SQL
+    SELECT c.id AS comment_id,
+    c.creator_id AS user_id,
+    c.subject_id AS annotation_id,
+    c.parent_id,
+    a.creator_id AS annotation_user_id,
+    a.reading_group_id,
+    rgm.id AS reading_group_membership_id,
+    rgm.aasm_state
+   FROM ((comments c
+     JOIN annotations a ON ((a.id = c.subject_id)))
+     JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = a.reading_group_id) AND (rgm.user_id = c.creator_id))))
+  WHERE (((c.subject_type)::text = 'Annotation'::text) AND (a.reading_group_id IS NOT NULL) AND (a.creator_id IS NOT NULL) AND (a.creator_id <> c.creator_id));
   SQL
 end
