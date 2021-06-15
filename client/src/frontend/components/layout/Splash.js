@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import classNames from "classnames";
+import lh from "helpers/linkHandler";
+import { Link } from "react-router-dom";
 
 export default class Splash extends Component {
   static displayName = "Layout.Splash";
@@ -52,11 +54,6 @@ export default class Splash extends Component {
       this.imgEl.style.maxWidth = `${this.imgEl.naturalWidth}px`;
       this.imgEl.style.maxHeight = `${this.imgEl.naturalHeight}px`;
     }
-  };
-
-  handleSignUp = event => {
-    event.preventDefault();
-    this.props.toggleSignInUpOverlay();
   };
 
   feature(props) {
@@ -213,12 +210,11 @@ export default class Splash extends Component {
                 </a>
               ) : null}
               {this.showSignUpButton() ? (
-                <span
-                  onClick={this.handleSignUp}
-                  target="blank"
+                <Link
                   className="utility-button"
                   role="button"
                   tabIndex="0"
+                  to={lh.link("frontendSignUp")}
                 >
                   <span
                     className={classNames(
@@ -231,7 +227,7 @@ export default class Splash extends Component {
                   >
                     {"Sign Up"}
                   </span>
-                </span>
+                </Link>
               ) : null}
             </div>
           </div>
