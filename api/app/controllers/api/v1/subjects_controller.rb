@@ -8,7 +8,7 @@ module API
       end
 
       def index
-        @subjects = load_subjects
+        @subjects = load_subjects.with_order
         render_multiple_resources(
           @subjects
         )

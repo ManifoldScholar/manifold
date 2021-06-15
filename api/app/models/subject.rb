@@ -24,6 +24,10 @@ class Subject < ApplicationRecord
     joins(:projects).where("projects.featured = true")
   }
 
+  scope :with_order, lambda {
+    order(name: :asc)
+  }
+
   scope :by_used, lambda { |used|
     return all unless used.present?
 
