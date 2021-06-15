@@ -60,8 +60,7 @@ module V1
       google_private_key_id: Types::String,
       google_client_email: Types::String,
       google_client_id: Types::String,
-      ga_tracking_id: Types::String,
-      ga_profile_id: Types::String.meta(example: "ga:343245632")
+      ga_tracking_id: Types::String
     )
     typed_attribute :email, Types::Hash.schema(
       from_address: Types::Serializer::Email,

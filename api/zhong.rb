@@ -12,8 +12,6 @@ Zhong.schedule do
     every(15.minutes, "refresh_project_collections") do
       ::ProjectCollectionJobs::QueueCacheCollectionProjectsJob.perform_later
     end
-
-    every(4.hours, "update_statistics") { ::UpdateAnalyticsCache.perform_later }
   end
 
   category "entitlements" do

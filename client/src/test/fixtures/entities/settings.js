@@ -14,7 +14,6 @@ const settings = () => ({
       logoStyles: `{"left": -1}`
     },
     integrations: {
-      gaProfileId: null,
       gaTrackingId: null,
       twitterAppId: null,
       facebookAppId: null,

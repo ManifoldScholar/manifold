@@ -105,25 +105,6 @@ export class SettingsIntegrationsContainer extends PureComponent {
               />
             </Form.FieldGroup>
             <Form.FieldGroup label="Google Analytics">
-              <Form.MaskedTextInput
-                label="Google Analytics Profile ID"
-                name="attributes[integrations][gaProfileId]"
-                placeholder="ga:123456789"
-                mask={[
-                  "g",
-                  "a",
-                  ":",
-                  /\d/,
-                  /\d/,
-                  /\d/,
-                  /\d/,
-                  /\d/,
-                  /\d/,
-                  /\d/,
-                  /\d/,
-                  /\d/
-                ]}
-              />
               <Form.TextInput
                 label="Google Analytics Tracking ID"
                 name="attributes[integrations][gaTrackingId]"
