@@ -4,6 +4,7 @@
 
   display: none;
   background-color: $neutralWhite;
+  background-color: $headerBackgroundColor;
 
   &--dark {
     --default-hover-color: #{$accentInteractionLight};
@@ -29,11 +30,11 @@
     width: 100%;
     padding: 0;
     margin-top: 20px;
-    border: 1px solid;
+    border: 1px solid $headerForegroundColor;
 
     .search-query {
       input[type='text'] {
-        background-color: $neutralWhite;
+        background-color: $headerBackgroundColor;
       }
 
       .input-magnify {
@@ -44,8 +45,8 @@
         display: none;
       }
 
-      .search-icon {
-        color: $accentPrimary;
+      &__search-icon {
+        color: $headerForegroundColor;
       }
     }
   }
@@ -103,7 +104,7 @@
       height: auto;
       padding-top: 30px;
       text-align: left;
-      background-color: $neutral05;
+      background-color: $headerBackgroundColorLight;
 
       .nested-nav--dark & {
         background-color: $neutral95;
@@ -124,7 +125,7 @@
     }
 
     &.active {
-      color: $neutral100;
+      color: $headerForegroundActiveColor;
     }
 
     .nested-nav--dark &.active {

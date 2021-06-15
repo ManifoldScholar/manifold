@@ -155,6 +155,11 @@ export default class ColorScheme extends Component {
         if (!stringValue) return;
         const value = colorHelper(stringValue).toHexString();
         rules.push(`${varName}: ${value};`);
+        rules.push(
+          `${varName}-light: ${colorHelper(stringValue)
+            .lighten(5)
+            .toHexString()};`
+        );
       });
     } catch (error) {
       /* eslint-disable no-console */

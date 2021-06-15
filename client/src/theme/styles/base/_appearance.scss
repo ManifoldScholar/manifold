@@ -49,6 +49,7 @@ $accentInteractionDark: var(
   #{$_accentInteractionDark}
 );
 $headerBackgroundColor: var(--header-background-color, #{$neutralWhite});
+$headerBackgroundColorLight: var(--header-background-color-light, #{$neutral05});
 $headerForegroundColor: var(--header-foreground-color, #{$neutralTextDark});
 $headerForegroundActiveColor: var(
   --header-foreground-active-color,
