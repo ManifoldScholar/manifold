@@ -2,18 +2,20 @@
 
 require 'logger'
 
-url = "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.12.0-darwin-x86_64.tar.gz"
+url_base = "https://artifacts.elastic.co/downloads/elasticsearch/"
 archive_filename = "elasticsearch-7.12.0-darwin-x86_64.tar.gz"
+url = "#{url_base}#{archive_filename}"
 es_dir_name = "elasticsearch-7.12.0"
 
 logger = Logger.new(STDOUT)
 root = File.expand_path(File.join(__dir__, ".."))
 services_dir = File.join(root, "services")
 es_dir = File.join(services_dir, es_dir_name)
+es_bin_dir = File.join(es_dir, "bin")
+es_config_path = File.join(es_dir, "config", "elasticsearch.yml")
 
 if File.directory? es_dir
     logger.warn "ElasticSearch directory already exists at #{es_dir}"
-    exit(0)
 else
     logger.info "ElasticSearch directory does not exist"
 end
@@ -24,5 +26,22 @@ unless File.directory? services_dir
 end
 
 Dir.chdir services_dir
-system "curl -L -O #{url}"
-system "tar -xvf #{archive_filename}"
+
+unless File.exist?(File.join(services_dir, archive_filename))
+  system "curl -L -O #{url}"
+end
+
+unless File.directory? es_bin_dir
+  system "tar -xvf #{archive_filename}"
+end
+
+File.delete(es_config_path)
+
+settings = <<~HEREDOC
+  cluster.name: "manifold-dev-cluster"
+  cluster.routing.allocation.disk.threshold_enabled: false
+  node.name: "manifold-dev-node-1"
+HEREDOC
+
+File.write(es_config_path, settings)
+logger.info "Updating ES settings."
