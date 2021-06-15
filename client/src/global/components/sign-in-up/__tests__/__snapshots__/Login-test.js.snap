@@ -116,7 +116,6 @@ exports[`global/components/sign-in-up/Login matches the snapshot 1`] = `
           },
           "integrations": Object {
             "facebookAppId": null,
-            "gaProfileId": null,
             "gaTrackingId": null,
             "googleClientEmail": null,
             "googleClientId": null,
