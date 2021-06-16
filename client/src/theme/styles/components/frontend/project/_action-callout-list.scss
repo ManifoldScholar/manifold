@@ -155,13 +155,19 @@
   /* stylelint-enable property-no-vendor-prefix */
 
   &__link {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
     min-height: 17.33px;
 
     &:hover {
       .action-callout-list__link-icon {
         @include defaultHoverStyle;
       }
+    }
+
+    &-text {
+      margin-left: 10px;
     }
 
     &--error {

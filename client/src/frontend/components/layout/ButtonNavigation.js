@@ -14,7 +14,9 @@ export class LayoutButtonNavigation extends Component {
     showProjects: PropTypes.bool,
     showProjectCollections: PropTypes.bool,
     hideAtNarrow: PropTypes.bool,
-    currentUser: PropTypes.object
+    currentUser: PropTypes.object,
+    label: PropTypes.string,
+    link: PropTypes.string
   };
 
   static defaultProps = {
@@ -37,21 +39,10 @@ export class LayoutButtonNavigation extends Component {
   }
 
   renderProjectsButton = () => {
-    if (!this.props.showProjects && !this.props.showProjectCollections)
-      return null;
-    let url = null;
-    let label = null;
-
-    if (this.props.showProjects) {
-      url = lh.link("frontendProjectsAll");
-      label = "See All Projects";
-    } else if (this.props.showProjectCollections) {
-      url = lh.link("frontendProjectCollections");
-      label = "See Project Collections";
-    }
-
+    const { label, link } = this.props;
+    if (!label && !link) return null;
     return (
-      <Link to={url} className="button-icon-primary">
+      <Link to={lh.link(link)} className="button-icon-primary">
         {this.renderButtonInner("projects64", label)}
       </Link>
     );

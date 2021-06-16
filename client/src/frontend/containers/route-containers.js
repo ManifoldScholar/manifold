@@ -1,6 +1,15 @@
 import NotFound from "global/containers/NotFound";
 import ApiDocs from "frontend/containers/Api";
 import Frontend from "frontend/containers/Frontend";
+import JournalsWrapper from "frontend/containers/JournalsWrapper";
+import JournalsList from "frontend/containers/JournalsList";
+import JournalWrapper from "frontend/containers/JournalWrapper";
+import JournalDetail from "frontend/containers/JournalDetail";
+import VolumeDetail from "frontend/containers/VolumeDetail";
+import VolumeWrapper from "frontend/containers/VolumeWrapper";
+import IssuesList from "frontend/containers/IssuesList";
+import IssueWrapper from "frontend/containers/IssueWrapper";
+import IssueDetail from "frontend/containers/IssueDetail";
 import ProjectsWrapper from "frontend/containers/ProjectsWrapper";
 import Projects from "frontend/containers/Projects";
 import ProjectCollections from "frontend/containers/ProjectCollections";
@@ -36,6 +45,15 @@ export default {
   NotFound,
   ApiDocs,
   Frontend,
+  JournalsWrapper,
+  JournalsList,
+  JournalWrapper,
+  JournalDetail,
+  VolumeWrapper,
+  VolumeDetail,
+  IssuesList,
+  IssueWrapper,
+  IssueDetail,
   ProjectsWrapper,
   Projects,
   ProjectCollections,

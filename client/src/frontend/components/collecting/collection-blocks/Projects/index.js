@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import GridItem from "frontend/components/project-list/GridItem";
+import ProjectGridItem from "frontend/components/grid-list-items/ProjectGridItem";
 import Template from "../Template";
 import DeferredCollectable from "../DeferredCollectable";
 
@@ -9,10 +9,10 @@ function CollectedProjects({ collectedIds, responses, onUncollect, nested }) {
 
   return (
     <Template title="Projects" icon="projects64" nested={nested}>
-      <div className="project-list grid entity-section-wrapper__body group-collection-category__bottom-margin-offset">
+      <div className="grid-list grid entity-section-wrapper__body group-collection-category__bottom-margin-offset">
         <ul>
           {collectedIds.map(id => (
-            <li key={id} className="project-list__item--pos-rel">
+            <li key={id} className="grid-list__item--pos-rel">
               <DeferredCollectable
                 id={id}
                 type="projects"
@@ -20,7 +20,7 @@ function CollectedProjects({ collectedIds, responses, onUncollect, nested }) {
               >
                 {response => {
                   return (
-                    <GridItem
+                    <ProjectGridItem
                       authenticated={false}
                       project={response}
                       onUncollect={onUncollect}
