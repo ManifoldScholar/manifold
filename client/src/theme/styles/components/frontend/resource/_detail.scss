@@ -212,6 +212,10 @@
 
     .comment-list {
       padding-left: 0;
+
+      .comment-list {
+        @include drawerIndent(padding-left);
+      }
     }
 
     > .annotation-editor {
