@@ -35,22 +35,28 @@ module V1
         anchor: Types::String,
         type: Types::String.optional,
         id: Types::Serializer::ID,
+        collected: Types::Bool.optional,
         children: Types::Array.of(
           Types::Hash.schema(
             label: Types::String,
             anchor: Types::String,
             type: Types::String.optional,
-            id: Types::Serializer::ID
+            id: Types::Serializer::ID,
+            collected: Types::Bool.optional
           )
         )
       )
-    ).meta(read_only: true), if: INCLUDE_TOC
+    ).meta(read_only: true), if: INCLUDE_TOC do |object, params|
+      object.toc_with_collected_for(params[:current_user])
+    end
 
     typed_attribute :toc_section_id, Types::String.optional.meta(read_only: true), if: INCLUDE_TOC
 
     typed_attribute :cover_styles, Types::Serializer::Attachment.meta(read_only: true)
 
     typed_belongs_to :category
+
+    serialize_collectable_attributes!
 
     # rubocop: disable Metrics/BlockLength
     when_full do

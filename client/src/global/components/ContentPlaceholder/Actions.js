@@ -1,23 +1,36 @@
 import React from "react";
+import PropTypes from "prop-types";
+import Action, { actionProps } from "./Action";
 
-const helpLink = "https://manifoldapp.org/docs/";
+const DOCS_URL = "https://manifoldapp.org/docs/";
 
-const PlaceholderActions = ({ children }) => (
-  <div className="content-placeholder__actions">
-    {children}
-    <div className="content-placeholder__ext-link-wrapper">
-      <a
-        href={helpLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="content-placeholder__ext-link"
-      >
-        Visit our documentation
-      </a>
+const PlaceholderActions = ({ actions = [] }) => {
+  const allActions = [
+    ...actions,
+    {
+      title: "Visit our documentation",
+      linkProps: {
+        href: DOCS_URL,
+        target: "_blank",
+        rel: "noopener norefferer"
+      }
+    }
+  ];
+
+  return (
+    <div className="content-placeholder__actions">
+      {allActions.map((action, index) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <Action key={index} {...action} />
+      ))}
     </div>
-  </div>
-);
+  );
+};
 
 PlaceholderActions.displayName = "ContentPlaceholder.Actions";
+
+PlaceholderActions.propTypes = {
+  actions: PropTypes.arrayOf(PropTypes.shape(actionProps))
+};
 
 export default PlaceholderActions;

@@ -111,20 +111,20 @@ export default class CommentDetail extends PureComponent {
   }
 
   get listButtonBaseClassNames() {
-    return "annotation-reply__list-button";
+    return "annotation-reply__inline-list-button";
   }
 
   get replyButtonClassNames() {
     return classNames({
-      "annotation-reply__list-button": true,
-      "annotation-reply__list-button--active": this.state.replying
+      "annotation-reply__inline-list-button": true,
+      "annotation-reply__inline-list-button--active": this.state.replying
     });
   }
 
   get secondaryButtonClassNames() {
     return classNames({
-      "annotation-reply__list-button": true,
-      "annotation-reply__list-button--secondary": true
+      "annotation-reply__inline-list-button": true,
+      "annotation-reply__inline-list-button--secondary": true
     });
   }
 

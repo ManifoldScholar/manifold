@@ -42,6 +42,8 @@ module V1
       object.anonymous_label
     end
 
+    typed_attribute :annotation_style, Types::String.optional
+
     typed_attribute :creator_avatar_styles, Types::Serializer::Attachment.meta(read_only: true) do |object, params|
       creator_identity_visible?(object, params) ? camelize_hash(object.creator_avatar_styles) : {}
     end
@@ -56,6 +58,14 @@ module V1
                      record_type: :user,
                      if: proc { |object, params| creator_identity_visible?(object, params) },
                      serializer: ::V1::UserSerializer
+
+    typed_has_many :membership_comments, serializer: ::V1::CommentSerializer, record_type: "comment" do |object, params|
+      rgm = params[:filters][:reading_group_membership]
+
+      next [] if rgm.blank?
+
+      object.filtered_membership_comments_for rgm
+    end
 
     class << self
 
@@ -78,8 +88,6 @@ module V1
       def anonymous?(object, _params)
         object.reading_group_id && object.reading_group.anonymous?
       end
-
     end
-
   end
 end

@@ -6,17 +6,11 @@
     flex-direction: row;
   }
 
-  &:hover, &:focus-within {
-    cursor: pointer;
-    outline: 0;
+  &--loading {
+    --default-strong-color: #{$neutral30};
 
-    .text-block__cover--svg,
-    .text-block__name {
-      @include defaultHoverStyle;
-    }
-
-    .text-block__cover-image {
-      border-color: $defaultHoverColor;
+    svg {
+      color: $neutral40;
     }
   }
 
@@ -61,7 +55,7 @@
     &--svg {
       margin-right: 5px;
       margin-left: -10px;
-      color: $neutralUIDullDark;
+      color: var(--content-color, #{$neutralUIDullDark});
       transition: color $duration $timing;
     }
   }
@@ -87,17 +81,22 @@
   }
 
   &__name {
+    display: flex;
     margin: 0;
     font-size: 16px;
     font-weight: $semibold;
     line-height: 1.188;
-    color: $neutralTextExtraDark;
+    color: var(--default-strong-color);
     white-space: normal;
     transition: color $duration $timing;
 
     @include respond($break80) {
       font-size: 21px;
     }
+  }
+
+  &__title-link {
+    text-decoration: none;
   }
 
   &__title {
@@ -119,6 +118,7 @@
   }
 
   &__subtitle {
+    margin-right: 12px;
     font-style: italic;
     font-weight: $regular;
     letter-spacing: 0.031em;
@@ -127,6 +127,15 @@
     @include respond($break80) {
       display: inline-block;
       padding-top: 0.143em;
+    }
+  }
+
+  &__collect-toggle {
+    flex-grow: 1;
+    transform: translateY(-0.238em);
+
+    &--with-subtitle {
+      transform: translateY(-0.19em);
     }
   }
 
@@ -210,11 +219,11 @@
     font-size: 12px;
     font-weight: $semibold;
     line-height: 1;
-    color: $neutralWhite;
+    color: var(--default-strong-color);
     text-transform: uppercase;
     letter-spacing: 0.134em;
     vertical-align: middle;
-    background-color: $defaultHoverColor;
+    background-color: var(--accent-primary);
     border-radius: 3px;
 
     @include respond($break80) {
@@ -249,7 +258,10 @@
   }
 
   &__interaction-icon {
-    margin-right: 5px;
-    color: $defaultHoverColor;
+    margin-right: 6px;
+  }
+
+  &__interaction-label {
+    color: var(--default-strong-color);
   }
 }

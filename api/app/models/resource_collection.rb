@@ -7,6 +7,7 @@ class ResourceCollection < ApplicationRecord
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
   # Concerns
+  include Collectable
   include Filterable
   include Attachments
   include Authority::Abilities
@@ -34,7 +35,7 @@ class ResourceCollection < ApplicationRecord
           as: :subject,
           dependent: :destroy,
           inverse_of: :subject
-
+  delegate :slug, to: :project, prefix: true
   has_formatted_attributes :title,
                            include_wrap: false
   has_formatted_attribute :description

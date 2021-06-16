@@ -1,0 +1,22 @@
+.group-homepage-editor {
+  color: var(--default-strong-color);
+
+  &__heading {
+    @include headingQuaternary;
+    font-weight: $semibold;
+  }
+
+  &__instructions {
+    @include subtitlePrimary;
+    margin-top: 1em;
+    font-size: 18px;
+  }
+
+  &__actions {
+    margin-top: 32px;
+  }
+
+  &__body {
+    margin-top: 40px;
+  }
+}

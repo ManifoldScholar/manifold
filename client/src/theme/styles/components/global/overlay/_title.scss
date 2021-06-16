@@ -1,0 +1,23 @@
+.overlay-title {
+  @include templateHead;
+  display: flex;
+  align-items: center;
+  padding: 0.85em 0;
+  margin: 0;
+  font-size: 22px;
+  font-weight: $medium;
+
+  @include respond($break65) {
+    justify-content: center;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    transform: translateY(1px);
+  }
+
+  &__text {
+    @include textTruncate;
+    margin-left: 10px;
+  }
+}

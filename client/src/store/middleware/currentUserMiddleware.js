@@ -1,6 +1,9 @@
 import actions from "actions/currentUser";
-import { ApiClient, tokensAPI, meAPI, favoritesAPI } from "api";
+import { ApiClient, tokensAPI, meAPI, requests } from "api";
 import BrowserCookieHelper from "helpers/cookie/Browser";
+import { entityStoreActions } from "actions";
+
+const { request } = entityStoreActions;
 
 function generateErrorPayload(status = 401) {
   const heading = "Login Failed";
@@ -21,32 +24,6 @@ function generateErrorPayload(status = 401) {
       break;
   }
   return { id: "LOGIN_NOTIFICATION", level, heading, body };
-}
-
-function follow(project, token, dispatch) {
-  const client = new ApiClient();
-  const { endpoint, method, options } = favoritesAPI.create(project);
-  options.authToken = token;
-  const promise = client.call(endpoint, method, options);
-  dispatch(actions.updateCurrentUser(promise));
-}
-
-function unfollow(target, token, dispatch) {
-  const { favoritableId, favoriteId } = target;
-  const client = new ApiClient();
-  const { endpoint, method, options } = favoritesAPI.destroy(favoriteId);
-  options.authToken = token;
-  const promise = new Promise((resolve, reject) => {
-    client.call(endpoint, method, options).then(
-      () => {
-        resolve(favoritableId);
-      },
-      response => {
-        reject(response);
-      }
-    );
-  });
-  dispatch(actions.deleteCurrentUserFavorite(promise));
 }
 
 function setCookie(authToken, cookieHelper = null) {
@@ -75,8 +52,12 @@ function handleAuthenticationSuccess(
 ) {
   dispatch(actions.setCurrentUser(options.user));
   dispatch(actions.setAuthToken(options.authToken));
+  const { promise } = dispatch(
+    request(meAPI.readingGroups(), requests.feMyReadingGroups)
+  );
   dispatch(actions.loginComplete());
   if (options.setCookie) setCookie(options.authToken, options.cookieHelper);
+  return promise;
 }
 
 function handleAuthenticationFailure(
@@ -115,21 +96,24 @@ function authenticateWithPassword(email, password, dispatch) {
 }
 
 function authenticateWithToken(authToken, dispatch) {
-  const promise = getUserFromToken(authToken);
-  promise.then(
-    user => {
-      handleAuthenticationSuccess(dispatch, {
-        authToken,
-        user,
-        setCookie: true
-      });
-    },
-    response => {
-      const { status } = response;
-      handleAuthenticationFailure(dispatch, { status, destroyCookie: true });
-    }
-  );
-  return promise;
+  return new Promise((resolve, reject) => {
+    getUserFromToken(authToken).then(
+      user => {
+        handleAuthenticationSuccess(dispatch, {
+          authToken,
+          user,
+          setCookie: true
+        }).finally(() => {
+          resolve();
+        });
+      },
+      response => {
+        const { status } = response;
+        handleAuthenticationFailure(dispatch, { status, destroyCookie: true });
+        reject();
+      }
+    );
+  });
 }
 
 // This function can be called on the server or the client. It's called outside of the
@@ -142,29 +126,33 @@ function authenticateWithToken(authToken, dispatch) {
 export function authenticateWithCookie(dispatch, cookieHelper) {
   const authToken = cookieHelper.read("authToken");
   if (!authToken) return Promise.reject();
-  const promise = getUserFromToken(authToken);
-  promise.then(
-    user => {
-      handleAuthenticationSuccess(dispatch, {
-        authToken,
-        user,
-        cookieHelper,
-        setCookie: false
-      });
-    },
-    response => {
-      const { status } = response;
-      handleAuthenticationFailure(dispatch, {
-        status,
-        cookieHelper,
-        destroyCookie: `${status}`[0] !== 5
-      });
-    }
-  );
-  return promise;
+
+  return new Promise((resolve, reject) => {
+    getUserFromToken(authToken).then(
+      user => {
+        handleAuthenticationSuccess(dispatch, {
+          authToken,
+          user,
+          cookieHelper,
+          setCookie: false
+        }).finally(() => {
+          resolve();
+        });
+      },
+      response => {
+        const { status } = response;
+        handleAuthenticationFailure(dispatch, {
+          status,
+          cookieHelper,
+          destroyCookie: `${status}`[0] !== 5
+        });
+        reject();
+      }
+    );
+  });
 }
 
-export default function currentUserMiddleware({ dispatch, getState }) {
+export default function currentUserMiddleware({ dispatch }) {
   return next => action => {
     const payload = action.payload;
 
@@ -184,14 +172,6 @@ export default function currentUserMiddleware({ dispatch, getState }) {
 
     if (action.type === "LOGOUT") {
       destroyCookie();
-    }
-
-    if (action.type === "FOLLOW") {
-      follow(payload, getState().authentication.authToken, dispatch);
-    }
-
-    if (action.type === "UNFOLLOW") {
-      unfollow(payload, getState().authentication.authToken, dispatch);
     }
 
     return next(action);

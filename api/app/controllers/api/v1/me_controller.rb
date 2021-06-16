@@ -31,7 +31,7 @@ module API
       private
 
       def includes
-        [:favorites]
+        [:collection, :favorites]
       end
 
     end

@@ -7,6 +7,7 @@ import Annotate24 from "./24/Annotate";
 import Annotate32 from "./32/Annotate";
 import AnnotationGroup24 from "./24/AnnotationGroup";
 import AnnotationGroupAlt24 from "./24/AnnotationGroupAlt";
+import Archive24 from "./24/Archive";
 import Arrow24 from "./24/Arrow";
 import ArrowDown16 from "./16/ArrowDown";
 import ArrowDown32 from "./32/ArrowDown";
@@ -18,6 +19,7 @@ import ArrowRight16 from "./16/ArrowRight";
 import ArrowRight32 from "./32/ArrowRight";
 import ArrowUp16 from "./16/ArrowUp";
 import ArrowUp32 from "./32/ArrowUp";
+import Avatar16 from "./16/Avatar";
 import Avatar24 from "./24/Avatar";
 import Avatar64 from "./64/Avatar";
 import BEActivity64 from "./64/BEActivity";
@@ -31,6 +33,7 @@ import BEResourcesBox64 from "./64/BEResourcesBox";
 import BEResourcesBoxes64 from "./64/BEResourcesBoxes";
 import Bookmark24 from "./24/Bookmark";
 import Bookmark32 from "./32/Bookmark";
+import Calendar24 from "./24/Calendar";
 import Checkmark16 from "./16/Checkmark";
 import CircleArrowDown64 from "./64/CircleArrowDown";
 import CircleArrowLeft64 from "./64/CircleArrowLeft";
@@ -48,6 +51,7 @@ import Comment32 from "./32/Comment";
 import CommentPencil32 from "./32/CommentPencil";
 import CommentPost32 from "./32/CommentPost";
 import Copy24 from "./24/Copy";
+import Delete24 from "./24/Delete";
 import Delete32 from "./32/Delete";
 import DisclosureDown16 from "./16/DisclosureDown";
 import DisclosureDown24 from "./24/DisclosureDown";
@@ -55,8 +59,10 @@ import DisclosureDown32 from "./32/DisclosureDown";
 import DisclosureUp16 from "./16/DisclosureUp";
 import DisclosureUp24 from "./24/DisclosureUp";
 import DisclosureUp32 from "./32/DisclosureUp";
+import Duplicate24 from "./24/Duplicate";
 import Duplicate32 from "./32/Duplicate";
 import EditProfile24 from "./24/EditProfile";
+import Export24 from "./24/Export";
 import EyeClosed32 from "./32/EyeClosed";
 import EyeOpen16 from "./16/EyeOpen";
 import EyeOpen32 from "./32/EyeOpen";
@@ -69,6 +75,10 @@ import Globe64 from "./64/Globe";
 import Grabber32 from "./32/Grabber";
 import GrabberInactive32 from "./32/GrabberInactive";
 import Info16 from "./16/Info";
+import InteractComment16 from "./16/InteractComment";
+import InteractAnnotate24 from "./24/InteractAnnotate";
+import InteractHighlight24 from "./24/InteractHighlight";
+import InteractComment24 from "./24/InteractComment";
 import InteractAnnotate32 from "./32/InteractAnnotate";
 import InteractHighlight32 from "./32/InteractHighlight";
 import InteractComment32 from "./32/InteractComment";
@@ -134,6 +144,7 @@ import Speaker24 from "./24/Speaker";
 import SpeakerMuted24 from "./24/SpeakerMuted";
 import StarSquircle32 from "./32/StarSquircle";
 import StarSquircleFilled32 from "./32/StarSquircleFilled";
+import Star24 from "./24/Star";
 import StopSign64 from "./64/StopSign";
 import Text24 from "./24/Text";
 import TextsBook64 from "./64/TextsBook";
@@ -159,6 +170,7 @@ export default {
   Annotate32,
   AnnotationGroup24,
   AnnotationGroupAlt24,
+  Archive24,
   Arrow24,
   ArrowDown16,
   ArrowDown32,
@@ -170,6 +182,7 @@ export default {
   ArrowRight32,
   ArrowUp16,
   ArrowUp32,
+  Avatar16,
   Avatar24,
   Avatar64,
   BEActivity64,
@@ -183,6 +196,7 @@ export default {
   BEResourcesBoxes64,
   Bookmark24,
   Bookmark32,
+  Calendar24,
   Checkmark16,
   CircleArrowDown64,
   CircleArrowLeft64,
@@ -200,6 +214,7 @@ export default {
   CommentPencil32,
   CommentPost32,
   Copy24,
+  Delete24,
   Delete32,
   DisclosureDown16,
   DisclosureDown24,
@@ -207,8 +222,10 @@ export default {
   DisclosureUp16,
   DisclosureUp24,
   DisclosureUp32,
+  Duplicate24,
   Duplicate32,
   EditProfile24,
+  Export24,
   EyeClosed32,
   EyeOpen16,
   EyeOpen32,
@@ -221,6 +238,10 @@ export default {
   Grabber32,
   GrabberInactive32,
   Info16,
+  InteractComment16,
+  InteractAnnotate24,
+  InteractHighlight24,
+  InteractComment24,
   InteractAnnotate32,
   InteractHighlight32,
   InteractComment32,
@@ -286,6 +307,7 @@ export default {
   SpeakerMuted24,
   StarSquircle32,
   StarSquircleFilled32,
+  Star24,
   StopSign64,
   Text24,
   TextsBook64,

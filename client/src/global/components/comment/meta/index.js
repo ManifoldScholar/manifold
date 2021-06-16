@@ -56,14 +56,14 @@ export default class CommentMeta extends PureComponent {
         </div>
         <div className="markers">
           {comment.attributes.authorCreated ? (
-            <div className="marker tertiary">{"Author"}</div>
+            <div className="marker marker--tertiary">{"Author"}</div>
           ) : null}
           {comment.attributes.deleted ? (
-            <div className="marker secondary">Deleted</div>
+            <div className="marker marker--secondary">Deleted</div>
           ) : null}
           <Authorize kind="admin">
             {comment.attributes.flagsCount > 0 ? (
-              <div className="marker secondary">
+              <div className="marker marker--secondary">
                 {comment.attributes.flagsCount}
                 {comment.attributes.flagsCount === 1 ? " flag" : " flags"}
               </div>

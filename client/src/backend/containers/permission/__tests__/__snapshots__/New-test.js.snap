@@ -3,6 +3,7 @@
 exports[`backend/containers/permission/New matches the snapshot 1`] = `
 <section>
   <Drawer.EntityHeader
+    buttonlayout="stack"
     buttons={Array []}
     title="Grant Permissions"
   />

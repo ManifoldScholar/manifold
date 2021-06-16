@@ -1,6 +1,7 @@
 import { handleActions } from "redux-actions";
 import { constantizeMeta } from "utils/entityUtils";
 import { requests } from "api";
+import update from "immutability-helper";
 
 const initialState = {
   authenticated: false,
@@ -10,14 +11,6 @@ const initialState = {
   error: null,
   visitToken: null,
   visitorToken: null
-};
-
-const deleteFavorite = (state, action) => {
-  if (action.error === true) return state;
-  const favorites = { ...state.currentUser.favorites };
-  delete favorites[action.payload];
-  const currentUser = { ...state.currentUser, favorites };
-  return { ...state, currentUser };
 };
 
 const setError = (state, action) => {
@@ -58,21 +51,24 @@ const startLogin = state => {
   return { ...state, authenticating: true };
 };
 
+const replaceUserCollection = (state, action) => {
+  if (!state.currentUser || !state.currentUser.relationships) return state;
+  const newState = update(state, {
+    currentUser: { relationships: { collection: { $set: action.payload } } }
+  });
+  return newState;
+};
+
 const updateStateFromUser = (state, payload) => {
   const adjustedUser = { ...payload.data };
-  const favorites = {};
-  if (payload.included) {
-    payload.included
-      .filter(inc => {
-        return inc.type === "favorites";
-      })
-      .forEach(fave => {
-        const id = fave.attributes.favoritableId;
-        favorites[id] = fave;
-      });
-  }
   delete adjustedUser.relationships;
-  adjustedUser.favorites = favorites;
+  adjustedUser.relationships = {
+    collection: payload.included
+      ? payload.included.find(inc => {
+          return inc.type === "userCollections";
+        })
+      : null
+  };
   const newState = {
     authenticated: !state.authenticating,
     currentUser: adjustedUser,
@@ -104,7 +100,7 @@ export default handleActions(
     LOGIN: startLogin,
     LOGIN_SET_CURRENT_USER: setCurrentUser,
     UPDATE_CURRENT_USER: setCurrentUser,
-    DELETE_CURRENT_USER_FAVORITE: deleteFavorite,
+    REPLACE_USER_COLLECTION: replaceUserCollection,
     LOGIN_SET_AUTH_TOKEN: setAuthToken,
     LOGIN_COMPLETE: endLogin,
     LOGIN_SET_ERROR: setError,

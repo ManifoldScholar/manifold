@@ -5,16 +5,19 @@ class Text < ApplicationRecord
 
   # Concerns
   include Authority::Abilities
+  include Collectable
   include SerializedAbilitiesFor
   include Sluggable
   include StoresFingerprints
   extend Memoist
   include Collaborative
   include Citable
+  include Filterable
   include TrackedCreator
   include Metadata
   include Attachments
   include SearchIndexable
+  include TableOfContentsWithCollected
 
   # PaperTrail
   has_paper_trail meta: {

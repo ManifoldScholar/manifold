@@ -158,7 +158,8 @@
   &--dull {
     border-color: $neutralUIDark;
 
-    &:hover {
+    &:hover,
+    &:active {
       background-color: $neutral10;
       border-color: $neutralUIDark;
     }
@@ -167,17 +168,16 @@
       background-color: $focusSecondary;
     }
 
-    &:active {
-      color: $neutralWhite;
-      background-color: $neutral50;
-    }
-
     .bg-neutral05 & {
       &:hover {
         color: $neutralWhite;
         background-color: $neutral50;
       }
     }
+  }
+
+  &--rounded {
+    border-radius: 6px;
   }
 
   &__icon {
@@ -251,11 +251,11 @@
   align-items: center;
   padding: 0.667em 17px 0.778em;
   font-size: 16px;
-  color: $accentPrimary;
+  color: var(--default-highlight-color);
   text-align: left;
   text-decoration: none;
   letter-spacing: 0.015em;
-  border: 1px solid $accentPrimary;
+  border: 1px solid var(--default-highlight-color);
   transition: color $duration $timing, background-color $duration $timing,
     border-color $duration $timing;
 
@@ -296,8 +296,9 @@
 
   &:hover:not([disabled]),
   &:active:not([disabled]) {
-    color: $neutral90;
-    background-color: $defaultHoverColor;
+    color: $neutralTextExtraDark;
+    background-color: $accentPrimary;
+    border-color: $accentPrimary;
   }
 
   &:focus-visible:disabled {
@@ -305,18 +306,18 @@
   }
 
   &--dull {
-    color: $neutralTextLight;
-    border-color: $neutralTextLight;
+    color: var(--default-color);
+    border-color: var(--default-color);
 
     &:hover:not([disabled]),
     &:active:not([disabled]) {
-      color: $defaultHoverColor;
+      color: var(--default-hover-color);
       background-color: transparent;
-      border-color: $defaultHoverColor;
+      border-color: var(--default-hover-color);
     }
 
     &:focus-visible:not([disabled]) {
-      color: $neutralTextExtraLight;
+      color: var(--default-strong-color);
       background-color: rgba($neutralUIDark, 0.3);
       outline: 0;
     }
@@ -336,7 +337,7 @@
     font-size: 12px;
     font-weight: $semibold;
     text-transform: uppercase;
-    letter-spacing: 0.075em;
+    letter-spacing: 0.115em;
   }
 
   &--in-drawer {
@@ -361,10 +362,14 @@
 // to vertical by default, can maintain horizontal
 // progress with class "maintain"
 .buttons-icon-horizontal {
+  $_gap: 20px;
+
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: -1 * $_gap;
   margin-bottom: 35px;
+  margin-left: -1 * $_gap;
 
   &.right {
     justify-content: flex-end;
@@ -374,7 +379,8 @@
     flex-wrap: nowrap;
 
     .buttons-icon-horizontal__button {
-      width: calc(50% - 8px);
+      flex-basis: 100%;
+      max-width: 360px;
       margin-bottom: 0;
     }
   }
@@ -387,11 +393,17 @@
     margin-bottom: 15px;
 
     &:not(.button-icon-secondary--in-drawer) {
-      width: 100%;
+      flex-basis: calc(50% - #{$_gap});
+      margin-top: $_gap;
+      margin-left: $_gap;
 
-      @include respond($break85) {
-        width: calc(50% - 17px);
+      &:not(:only-child) {
+        flex-grow: 1;
       }
+    }
+
+    &--in-dialog {
+      margin-bottom: 0;
     }
   }
 
@@ -418,15 +430,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1.214em 16px 1.286em;
+  padding: 0.857em 30px 0.929em;
   font-size: 12px;
   font-weight: $semibold;
-  color: $neutralTextExtraDark;
+  color: var(--default-strong-color);
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.089em;
-  background-color: $accentPrimary;
+  background-color: var(--accent-primary);
   transition: color $duration $timing, background-color $duration $timing;
 
   @include respond($break60) {
@@ -435,14 +447,13 @@
 
   &:hover,
   &:focus-visible {
-    color: $neutral80;
-    background-color: $accentPrimaryDull;
+    color: var(--default-strong-color);
+    background-color: var(--accent-primary-dull);
     outline: 0;
   }
 
   &:active {
-    color: $neutralWhite;
-    background-color: $accentPrimaryDark;
+    background-color: var(--accent-primary-medium);
   }
 
   &--with-room {
@@ -450,17 +461,11 @@
   }
 
   &--dull {
-    color: $neutral70;
-    background-color: $neutral10;
-    border-color: $neutral70;
+    background-color: var(--button-dull-bg-color);
 
-    &:hover {
-      background-color: $neutral10;
-    }
-
+    &:hover,
     &:focus-visible {
-      background-color: $neutral30;
-      outline: 0;
+      background-color: $neutral20;
     }
 
     &:active {
@@ -469,82 +474,57 @@
     }
   }
 
-  .bg-neutral90 & {
-    &:hover {
-      color: $neutral90;
-      background-color: $accentPrimaryDull;
-    }
-
-    &:focus-visible {
-      color: $neutralWhite;
-      background-color: $neutral95;
-      outline: 0;
-    }
-
-    &:active {
-      color: $neutral90;
-      background-color: $accentPrimaryDark;
-    }
-  }
-
   &--outlined {
-    padding: 1em 30px 1.2em;
-    color: $accentPrimary;
+    color: var(--default-highlight-color);
     background: none;
-    border: 1px solid $accentPrimary;
+    border: 1px solid var(--default-hover-color);
 
     &:hover,
     &:focus-visible {
-      color: $neutral90;
-      background-color: $accentPrimary;
+      color: $neutralTextExtraDark;
+      background-color: var(--default-hover-color);
       outline: 0;
     }
 
     .bg-neutral90 &,
     .bg-neutral100 &,
     .drawer-backend & {
-      color: $neutralWhite;
+      --default-highlight-color: #{$neutralWhite};
 
-      &:not(.button-secondary--dull):hover {
-        color: $neutral90;
-        background-color: $accentPrimary;
-      }
-
+      &:not(.button-secondary--dull):hover,
       &:not(.button-secondary--dull):focus-visible {
-        color: $neutral100;
-        background-color: $accentPrimaryPale;
-        border-color: $accentPrimaryPale;
+        color: $neutralTextExtraDark;
+        background-color: var(--default-hover-color);
       }
     }
 
     &.button-secondary--dull {
+      --default-highlight-color: #{$neutral45};
+      --default-hover-color: #{$neutral45};
+
       @include fillOnFocusVisible(rgba($neutral70, 0.2));
-      color: $neutral45;
-      border-color: $neutral45;
 
       &:hover {
-        color: $neutral90;
-        background-color: $neutral45;
+        color: $neutralTextExtraDark;
+        background-color: var(--default-highlight-color);
         outline: 0;
       }
     }
   }
 
   &--accent-pale {
-    @include fillOnFocusVisible($accentPrimary);
-    padding: 1em 30px 1.2em;
-    color: $neutral90;
-    background-color: $accentPrimaryPale;
+    background-color: var(--accent-primary-pale);
 
-    &:hover {
-      background-color: $defaultHoverColor;
+    &:hover,
+    &:focus-visible {
+      background-color: var(--accent-primary);
     }
 
     &.button-secondary--dull {
-      @include fillOnFocusVisible($neutral30);
       background-color: $neutral10;
 
-      &:hover {
+      &:hover,
+      &:focus-visible {
         background-color: $neutral20;
       }
     }
@@ -552,28 +532,18 @@
 
   &--dark {
     justify-content: flex-start;
-    color: $neutral40;
+    color: $neutralUIExtraLight;
     text-align: left;
     background-color: $neutral80;
 
     .bg-neutral90 & {
-      &:hover {
-        color: $neutral95;
-      }
-
-      &:focus-visible {
-        background-color: $neutral95;
-      }
-
-      &:active {
-        color: $neutral95;
-      }
-    }
-
-    .overlay-full-primary & {
       &:hover,
+      &:active {
+        color: $neutralTextExtraDark;
+      }
+
       &:focus-visible {
-        color: $neutral80;
+        background-color: $neutralTextExtraDark;
       }
     }
   }
@@ -611,25 +581,39 @@
   }
 }
 
-@mixin buttonTertiary {
+.button-tertiary {
   @include utilityPrimary;
   display: inline-block;
-  padding: 0.76em 1.7em;
-  font-size: 11.18px;
-  color: $neutral90;
+  padding: 5px 14px 7px;
+  font-size: 12px;
+  color: $neutralTextExtraDark;
   text-align: center;
   text-decoration: none;
   letter-spacing: 0.134em;
   white-space: nowrap;
-  background-color: $accentPrimaryPale;
+  background-color: var(--button-tertiary-bg-color);
+  border: 1px solid var(--button-tertiary-bg-color);
   border-radius: 4px;
-  transition: color $duration $timing, background-color $duration $timing;
+  transition: color $duration $timing, background-color $duration $timing,
+    border-color $duration $timing;
 
   &:hover,
-  &:focus-visible {
+  &:focus-visible,
+  &--active {
     color: $neutralTextExtraDark;
-    background-color: $accentInteractionLight;
+    background-color: var(--button-tertiary-bg-hover-color);
+    border-color: var(--button-tertiary-bg-hover-color);
     outline: 0;
+  }
+
+  &--neutral {
+    background-color: var(--default-bg-color);
+    border-color: currentColor;
+  }
+
+  &--outlined {
+    background-color: transparent;
+    border-color: currentColor;
   }
 }
 
@@ -683,158 +667,6 @@
   }
 }
 
-.project-cover-button-wrapper {
-  @include buttonUnstyled;
-  position: absolute;
-  top: 10px;
-  left: -15px;
-  width: 28px;
-  height: 28px;
-
-  @include respond($break75) {
-    top: 15px;
-    width: 30px;
-    height: 30px;
-  }
-
-  .project-list__item--pos-rel & {
-    // aligned to <li> to separate button from anchor
-    top: 25px;
-    left: 0;
-
-    @include respond($break75) {
-      top: calc(2.105vw + 15px);
-      left: calc(2.105vw - 15px);
-    }
-
-    @include respond($break120) {
-      top: 40px;
-      left: 10px;
-    }
-  }
-
-  &.active {
-    width: 100%;
-  }
-}
-
-.project-cover-button {
-  @include templateHead;
-  @include boxShadow(2px, 4px, 10px, 0, $neutral90, 0.36);
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  max-width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-size: 16px;
-  color: $neutral90;
-  text-align: left;
-  white-space: nowrap;
-  cursor: pointer;
-  background-color: $accentPrimary;
-  border-radius: 22.5px;
-  transition: max-width $duration $timing, background-color $duration $timing;
-
-  @include respond($break75) {
-    font-size: 18px;
-  }
-
-  &--sr-only {
-    &:focus-visible ~ .project-cover-button-wrapper {
-      @include defaultFocusStyle;
-      outline-color: $defaultFocusColor;
-    }
-  }
-
-  .remove & {
-    background-color: $spBlue45;
-  }
-
-  .action-text {
-    display: block;
-    padding-right: 14px;
-    padding-left: 30px;
-    line-height: 1.65;
-
-    @include respond($break75) {
-      padding-left: 32px;
-      line-height: 1.5;
-    }
-  }
-
-  .button-enter,
-  .button-exit.action-text-hide-immediately {
-    display: none;
-  }
-
-  .button-enter.action-text-show-immediately {
-    display: inline;
-  }
-
-  .add-active &,
-  .remove-active &,
-  .remove-confirm-active & {
-    max-width: 200px;
-    transition: max-width $durationSlow ease-out;
-  }
-
-  .add-active & {
-    background-color: $spBlue45;
-  }
-
-  .remove-active &,
-  .remove-confirm-active & {
-    background-color: $neutral40;
-  }
-
-  .icons {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transition: transform $duration $timing;
-
-    .add & {
-      transform: translateY(-100%);
-    }
-
-    .add-active & {
-      transform: translateY(-100%);
-    }
-
-    .remove-active & {
-      transform: translateY(100%);
-    }
-
-    .manicon-svg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 28px;
-      height: 28px;
-      transition: transform $duration $timing;
-
-      @include respond($break75) {
-        width: 30px;
-        height: 30px;
-      }
-
-      &.minus {
-        top: -100%;
-      }
-
-      &.plus {
-        top: 100%;
-
-        .follow-active & {
-          transform: rotate(-90deg);
-        }
-      }
-    }
-  }
-}
-
 /* stylelint-disable declaration-no-important */
 .back-link-primary {
   @include utilityPrimary;
@@ -843,12 +675,14 @@
   padding: 16px 0 15px;
   font-size: 13px;
   line-height: 1.4;
+  color: var(--default-weak-color);
   text-decoration: none !important;
-  background-color: $neutral05;
+  letter-spacing: 0.1em;
+  background-color: var(--box-bg-color);
   transition: color $duration $timing, background-color $duration $timing;
 
   @include respond($break40) {
-    padding: 26px 0 25px;
+    padding: 21px 0 20px;
     font-size: 14px;
   }
 
@@ -857,38 +691,36 @@
   }
 
   .bg-neutral95 & {
-    background-color: $neutral95;
-
     &:hover,
+    &:active,
     &:focus-visible {
-      background-color: $neutral95;
+      color: var(--default-hover-color);
+      background-color: inherit;
       outline: 0;
     }
   }
 
   &:hover,
-  &:active {
-    background-color: $neutral20;
-  }
-
+  &:active,
   &:focus-visible {
-    background-color: $focusTertiary;
-    outline: 0;
+    color: inherit;
+    background-color: var(--box-strong-bg-color);
+    outline: none;
   }
 
   &__container {
     position: relative;
     width: 100%;
-    padding-left: calc(#{$containerPaddingResp} + 26px);
+    padding-left: calc(#{$containerPaddingResp} + 40px);
 
     @include respond($break120) {
-      padding-left: calc(#{$containerPaddingFull} + 26px);
+      padding-left: calc(#{$containerPaddingFull} + 40px);
     }
   }
 
   &__icon {
     position: absolute;
-    top: 3px;
+    top: -2px;
     left: $containerPaddingResp;
 
     @include respond($break120) {
@@ -897,31 +729,27 @@
   }
 
   &__back-text {
-    margin-right: 10px;
+    margin-right: 8px;
   }
 
   &__title {
-    display: inline-block;
-    font-size: 14px;
-    font-weight: $regular;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
+    display: inline;
   }
 }
 
 .back-link-secondary {
+  @include utilityPrimary;
   display: block;
+  font-size: 14px;
   text-decoration: none !important;
-  background-color: $neutral10;
-  transition: background-color $duration $timing;
+  background-color: var(--box-medium-bg-color);
+  transition: color $duration $timing, background-color $duration $timing;
 
   &:hover,
-  &:active {
-    background-color: $neutral20;
-  }
-
+  &:active,
   &:focus-visible {
-    background-color: $focusTertiary;
+    color: inherit;
+    background-color: var(--box-strong-bg-color);
     outline: 0;
   }
 
@@ -934,44 +762,13 @@
     padding-bottom: 28px;
   }
 
-  &__icon,
-  &__project-title {
-    .back-link-secondary:hover & {
-      color: $neutral70;
-    }
-
-    .back-link-secondary:focus-visible & {
-      color: $neutral80;
-    }
-
-    .back-link-secondary:active & {
-      color: $accentPrimary;
-    }
-  }
-
   &__icon {
     margin-right: 16px;
-    color: $neutral50;
-    transition: color $duration $timing;
   }
 
   &__text {
     width: 100%;
-  }
-
-  &__back-text {
-    @include utilityPrimary;
-    font-size: 14px;
-    color: $neutral75;
-  }
-
-  &__project-title {
-    @include templateHead;
-    display: block;
-    font-size: 17px;
-    line-height: 1.556;
-    color: $neutral50;
-    transition: color $duration $timing;
+    transform: translateY(-1px);
   }
 }
 /* stylelint-enable  declaration-no-important */
@@ -983,7 +780,32 @@
   cursor: pointer;
 }
 
-.button-lozenge {
+.button-lozenge-primary {
+  @include utilityPrimary;
+  padding: 6px 13px;
+  font-size: 12px;
+  text-decoration: none;
+  background-color: var(--box-bg-color);
+  border: none;
+  border-radius: 1em;
+  transition: color $duration $timing, background-color $duration $timing;
+
+  &:hover,
+  &:focus-visible {
+    color: inherit;
+    background-color: var(--accent-primary);
+  }
+
+  &--warn {
+    &:hover,
+    &:focus-visible {
+      color: $neutralWhite;
+      background-color: var(--default-error-color);
+    }
+  }
+}
+
+.button-lozenge-secondary {
   @include utilityPrimary;
   display: inline-flex;
   align-items: center;

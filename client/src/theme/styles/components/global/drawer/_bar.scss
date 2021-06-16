@@ -1,4 +1,6 @@
 .drawer-bar {
+  $_close-icon-size: 24px;
+
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -24,7 +26,8 @@
   &--reader {
     padding-top: 10px;
     padding-bottom: 12px;
-    background-color: $neutral10;
+    color: var(--default-strong-color);
+    background-color: var(--box-medium-bg-color);
   }
 
   &__title {
@@ -73,18 +76,12 @@
     margin-right: 10px;
     font-size: 13px;
     font-weight: $semibold;
+    line-height: $_close-icon-size;
     letter-spacing: 0.125em;
   }
 
   &__close-icon {
-    &--large {
-      margin-right: -9px;
-
-      @include respond($break50) {
-        width: 56.889px;
-        height: 56.889px;
-        margin-right: -12px;
-      }
-    }
+    width: $_close-icon-size;
+    height: $_close-icon-size;
   }
 }

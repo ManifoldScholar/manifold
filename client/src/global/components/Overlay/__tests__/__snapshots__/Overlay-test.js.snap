@@ -15,24 +15,9 @@ exports[`global/components/Overlay matches the snapshot 1`] = `
         }
       }
     >
-      <button
-        className="overlay-close"
-        data-id="overlay-close"
-        onClick={[Function]}
-      >
-        Close
-        <IconComposer
-          fill="currentColor"
-          icon="close32"
-          iconClass="overlay-close__icon"
-          size={37.334}
-          svgProps={
-            Object {
-              "aria-hidden": true,
-            }
-          }
-        />
-      </button>
+      <Global.Overlay.Header
+        onCloseClick={[Function]}
+      />
       <div
         className="container"
         style={

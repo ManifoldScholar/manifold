@@ -5,14 +5,6 @@
     color: $neutral50;
   }
 
-  .overlay-full & {
-    padding-top: 70px;
-
-    @include respond($break70) {
-      padding-top: 120px;
-    }
-  }
-
   .resource-slideshow {
     margin-top: 14px;
 
@@ -29,6 +21,10 @@
         padding-left: 0;
       }
     }
+  }
+
+  .resource-title__title {
+    color: var(--default-strong-color);
   }
 
   .button-secondary {

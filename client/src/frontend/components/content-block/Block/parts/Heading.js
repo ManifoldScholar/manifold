@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 
-export default class ProjectContentBlockHeading extends PureComponent {
-  static displayName = "Project.Content.Block.Parts.Heading";
+export default class ContentBlockHeading extends PureComponent {
+  static displayName = "ContentBlock.Parts.Heading";
 
   static propTypes = {
     icon: PropTypes.string,
@@ -19,7 +19,7 @@ export default class ProjectContentBlockHeading extends PureComponent {
       <>
         <header className="entity-section-wrapper__heading section-heading">
           <div className="main">
-            <Utility.IconComposer icon={icon} />
+            <Utility.IconComposer icon={icon} size={56} />
             <div className="body">
               <h2 className="title">{title}</h2>
             </div>

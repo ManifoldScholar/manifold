@@ -23,14 +23,6 @@ describe("frontend/components/layout/ButtonNavigation", () => {
     });
   });
 
-  context("when the showFollowing prop is false", () => {
-    def("props", () => ({ showFollowing: false }));
-
-    it("matches the snapshot", () => {
-      expect(render($withApp($root))).toMatchSnapshot();
-    });
-  });
-
   context("when the showCollections prop is true", () => {
     def("props", () => ({ showCollections: false }));
 

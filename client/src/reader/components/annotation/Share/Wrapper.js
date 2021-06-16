@@ -62,7 +62,7 @@ export default class AnnotationShareWrapper extends PureComponent {
             <IconComposer
               icon="socialCite32"
               size="default"
-              iconClass="annotation-selection__icon"
+              iconClass="annotation-selection__icon annotation-selection__icon--flipped"
             />
             {this.maybeTruncateSelection()}
           </div>

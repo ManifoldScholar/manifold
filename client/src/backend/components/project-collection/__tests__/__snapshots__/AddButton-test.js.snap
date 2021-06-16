@@ -1,533 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`backend/components/project-collection/AddButton matches the snapshot 1`] = `
-<Project.CoverButton
-  addHandler={[MockFunction]}
-  addText="Include"
-  project={
-    Object {
-      "attributes": Object {
-        "abilities": Object {
-          "create": true,
-          "createEntitlements": true,
-          "createPermissions": true,
-          "createResourceCollections": true,
-          "createResources": true,
-          "createTexts": true,
-          "createTwitterQueries": true,
-          "delete": true,
-          "manageEntitlements": true,
-          "manageEvents": true,
-          "managePermissions": true,
-          "manageResourceCollections": true,
-          "manageResources": true,
-          "manageSocials": true,
-          "manageTexts": true,
-          "manageTwitterQueries": true,
-          "read": true,
-          "readDeleted": true,
-          "readDrafts": true,
-          "readLog": true,
-          "readSecrets": true,
-          "update": true,
-          "updateMakers": true,
-        },
-        "avatarColor": "primary",
-        "avatarMeta": Object {},
-        "avatarStyles": Object {},
-        "coverStyles": Object {},
-        "darkMode": false,
-        "description": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
-        "descriptionFormatted": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
-        "downloadCallToAction": "Download the greatest dog",
-        "hashtag": "cute_dog",
-        "heroStyles": Object {},
-        "hideActivity": false,
-        "imageCreditsFormatted": "<p>Rowan, <em>The Dog</em></p>",
-        "metadata": Object {
-          "abstract": "some-value",
-          "archive": "some-value",
-          "archiveLocation": "some-value",
-          "archivePlace": "some-value",
-          "authority": "some-value",
-          "callNumber": "some-value",
-          "chapterNumber": "some-value",
-          "collectionNumber": "some-value",
-          "collectionTitle": "some-value",
-          "containerTitle": "some-value",
-          "dimensions": "some-value",
-          "edition": "some-value",
-          "event": "some-value",
-          "eventPlace": "some-value",
-          "isbn": "some-value",
-          "issn": "some-value",
-          "issue": "some-value",
-          "jurisdiction": "some-value",
-          "medium": "some-value",
-          "number": "some-value",
-          "numberOfPages": "some-value",
-          "numberOfVolumes": "some-value",
-          "originalPublisher": "some-value",
-          "originalPublisherPlace": "some-value",
-          "originalTitle": "some-value",
-          "pmcid": "some-value",
-          "pmid": "some-value",
-          "publisher": "some-value",
-          "publisherPlace": "some-value",
-          "reviewedTitle": "some-value",
-          "section": "some-value",
-          "version": "some-value",
-          "volume": "some-value",
-          "yearSuffix": "some-value",
-        },
-        "metadataFormatted": Object {
-          "abstract": "some-value",
-          "archive": "some-value",
-          "archiveLocation": "some-value",
-          "archivePlace": "some-value",
-          "authority": "some-value",
-          "callNumber": "some-value",
-          "chapterNumber": "some-value",
-          "collectionNumber": "some-value",
-          "collectionTitle": "some-value",
-          "containerTitle": "some-value",
-          "dimensions": "some-value",
-          "edition": "some-value",
-          "event": "some-value",
-          "eventPlace": "some-value",
-          "isbn": "some-value",
-          "issn": "some-value",
-          "issue": "some-value",
-          "jurisdiction": "some-value",
-          "medium": "some-value",
-          "number": "some-value",
-          "numberOfPages": "some-value",
-          "numberOfVolumes": "some-value",
-          "originalPublisher": "some-value",
-          "originalPublisherPlace": "some-value",
-          "originalTitle": "some-value",
-          "pmcid": "some-value",
-          "pmid": "some-value",
-          "publisher": "some-value",
-          "publisherPlace": "some-value",
-          "reviewedTitle": "some-value",
-          "section": "some-value",
-          "version": "some-value",
-          "volume": "some-value",
-          "yearSuffix": "some-value",
-        },
-        "metadataProperties": Array [
-          "abstract",
-          "archive",
-          "archiveLocation",
-          "archivePlace",
-          "authority",
-          "callNumber",
-          "collectionTitle",
-          "containerTitle",
-          "dimensions",
-          "event",
-          "eventPlace",
-          "isbn",
-          "issn",
-          "jurisdiction",
-          "medium",
-          "originalPublisher",
-          "originalPublisherPlace",
-          "originalTitle",
-          "pmcid",
-          "pmid",
-          "publisher",
-          "publisherPlace",
-          "reviewedTitle",
-          "section",
-          "version",
-          "yearSuffix",
-          "chapterNumber",
-          "collectionNumber",
-          "edition",
-          "issue",
-          "number",
-          "numberOfPages",
-          "numberOfVolumes",
-          "volume",
-        ],
-        "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-        "subtitle": "World's Greatest Dog",
-        "title": "Rowan Test",
-        "titleFormatted": "Rowan Test",
-        "titlePlaintext": "Rowan Test",
-      },
-      "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-      "relationships": Object {
-        "actionCallouts": Array [
-          Object {
-            "attributes": Object {
-              "button": true,
-              "externalLink": true,
-              "kind": "link",
-              "location": "left",
-              "position": 1,
-              "title": "Start Reading",
-              "url": "https://github.com/ManifoldScholar/manifold",
-            },
-            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-            "relationships": Object {
-              "project": null,
-            },
-            "type": "actionCallouts",
-          },
-        ],
-        "makers": Array [
-          Object {
-            "attributes": Object {
-              "avatarStyles": Object {},
-              "firstName": "John",
-              "fullName": "John Milton",
-              "lastName": "Milton",
-            },
-            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-            "relationships": Object {},
-            "type": "maker",
-          },
-        ],
-        "resources": Array [
-          Object {
-            "attributes": Object {
-              "abilities": Object {
-                "create": true,
-                "createEntitlements": true,
-                "createPermissions": true,
-                "createResourceCollections": true,
-                "createResources": true,
-                "createTexts": true,
-                "createTwitterQueries": true,
-                "delete": true,
-                "manageEntitlements": true,
-                "manageEvents": true,
-                "managePermissions": true,
-                "manageResourceCollections": true,
-                "manageResources": true,
-                "manageSocials": true,
-                "manageTexts": true,
-                "manageTwitterQueries": true,
-                "read": true,
-                "readDeleted": true,
-                "readDrafts": true,
-                "readLog": true,
-                "readSecrets": true,
-                "update": true,
-                "updateMakers": true,
-              },
-              "attachmentStyles": Object {
-                "medium": null,
-                "mediumSquare": "original-image.mock",
-                "original": "original-image.mock",
-              },
-              "captionFormatted": "World's Greatest Dog",
-              "createdAt": "2017-04-24T23:25:50.161Z",
-              "descriptionFormatted": "Black and white freckles",
-              "downloadable": true,
-              "kind": "image",
-              "metadata": Object {
-                "abstract": "some-value",
-                "archive": "some-value",
-                "archiveLocation": "some-value",
-                "archivePlace": "some-value",
-                "authority": "some-value",
-                "callNumber": "some-value",
-                "chapterNumber": "some-value",
-                "collectionNumber": "some-value",
-                "collectionTitle": "some-value",
-                "containerTitle": "some-value",
-                "dimensions": "some-value",
-                "edition": "some-value",
-                "event": "some-value",
-                "eventPlace": "some-value",
-                "isbn": "some-value",
-                "issn": "some-value",
-                "issue": "some-value",
-                "jurisdiction": "some-value",
-                "medium": "some-value",
-                "number": "some-value",
-                "numberOfPages": "some-value",
-                "numberOfVolumes": "some-value",
-                "originalPublisher": "some-value",
-                "originalPublisherPlace": "some-value",
-                "originalTitle": "some-value",
-                "pmcid": "some-value",
-                "pmid": "some-value",
-                "publisher": "some-value",
-                "publisherPlace": "some-value",
-                "reviewedTitle": "some-value",
-                "section": "some-value",
-                "version": "some-value",
-                "volume": "some-value",
-                "yearSuffix": "some-value",
-              },
-              "metadataFormatted": Object {
-                "abstract": "some-value",
-                "archive": "some-value",
-                "archiveLocation": "some-value",
-                "archivePlace": "some-value",
-                "authority": "some-value",
-                "callNumber": "some-value",
-                "chapterNumber": "some-value",
-                "collectionNumber": "some-value",
-                "collectionTitle": "some-value",
-                "containerTitle": "some-value",
-                "dimensions": "some-value",
-                "edition": "some-value",
-                "event": "some-value",
-                "eventPlace": "some-value",
-                "isbn": "some-value",
-                "issn": "some-value",
-                "issue": "some-value",
-                "jurisdiction": "some-value",
-                "medium": "some-value",
-                "number": "some-value",
-                "numberOfPages": "some-value",
-                "numberOfVolumes": "some-value",
-                "originalPublisher": "some-value",
-                "originalPublisherPlace": "some-value",
-                "originalTitle": "some-value",
-                "pmcid": "some-value",
-                "pmid": "some-value",
-                "publisher": "some-value",
-                "publisherPlace": "some-value",
-                "reviewedTitle": "some-value",
-                "section": "some-value",
-                "version": "some-value",
-                "volume": "some-value",
-                "yearSuffix": "some-value",
-              },
-              "projectSlug": "delegated-project-slug",
-              "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-              "tagList": Array [
-                "dog",
-                "puppy",
-                "GOAT",
-              ],
-              "title": "Image",
-              "titleFormatted": "Image",
-            },
-            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-            "relationships": Object {
-              "collectionResources": Array [],
-            },
-            "type": "resources",
-          },
-        ],
-        "texts": Array [
-          Object {
-            "attributes": Object {
-              "abilities": Object {
-                "create": true,
-                "createEntitlements": true,
-                "createPermissions": true,
-                "createResourceCollections": true,
-                "createResources": true,
-                "createTexts": true,
-                "createTwitterQueries": true,
-                "delete": true,
-                "manageEntitlements": true,
-                "manageEvents": true,
-                "managePermissions": true,
-                "manageResourceCollections": true,
-                "manageResources": true,
-                "manageSocials": true,
-                "manageTexts": true,
-                "manageTwitterQueries": true,
-                "read": true,
-                "readDeleted": true,
-                "readDrafts": true,
-                "readLog": true,
-                "readSecrets": true,
-                "update": true,
-                "updateMakers": true,
-              },
-              "coverStyles": Object {},
-              "createdAt": "2017-04-24T23:25:50.161Z",
-              "creatorNames": "Andre3000, Big Boi",
-              "metadata": Object {
-                "abstract": "some-value",
-                "archive": "some-value",
-                "archiveLocation": "some-value",
-                "archivePlace": "some-value",
-                "authority": "some-value",
-                "callNumber": "some-value",
-                "chapterNumber": "some-value",
-                "collectionNumber": "some-value",
-                "collectionTitle": "some-value",
-                "containerTitle": "some-value",
-                "dimensions": "some-value",
-                "edition": "some-value",
-                "event": "some-value",
-                "eventPlace": "some-value",
-                "isbn": "some-value",
-                "issn": "some-value",
-                "issue": "some-value",
-                "jurisdiction": "some-value",
-                "medium": "some-value",
-                "number": "some-value",
-                "numberOfPages": "some-value",
-                "numberOfVolumes": "some-value",
-                "originalPublisher": "some-value",
-                "originalPublisherPlace": "some-value",
-                "originalTitle": "some-value",
-                "pmcid": "some-value",
-                "pmid": "some-value",
-                "publisher": "some-value",
-                "publisherPlace": "some-value",
-                "reviewedTitle": "some-value",
-                "section": "some-value",
-                "version": "some-value",
-                "volume": "some-value",
-                "yearSuffix": "some-value",
-              },
-              "metadataFormatted": Object {
-                "abstract": "some-value",
-                "archive": "some-value",
-                "archiveLocation": "some-value",
-                "archivePlace": "some-value",
-                "authority": "some-value",
-                "callNumber": "some-value",
-                "chapterNumber": "some-value",
-                "collectionNumber": "some-value",
-                "collectionTitle": "some-value",
-                "containerTitle": "some-value",
-                "dimensions": "some-value",
-                "edition": "some-value",
-                "event": "some-value",
-                "eventPlace": "some-value",
-                "isbn": "some-value",
-                "issn": "some-value",
-                "issue": "some-value",
-                "jurisdiction": "some-value",
-                "medium": "some-value",
-                "number": "some-value",
-                "numberOfPages": "some-value",
-                "numberOfVolumes": "some-value",
-                "originalPublisher": "some-value",
-                "originalPublisherPlace": "some-value",
-                "originalTitle": "some-value",
-                "pmcid": "some-value",
-                "pmid": "some-value",
-                "publisher": "some-value",
-                "publisherPlace": "some-value",
-                "reviewedTitle": "some-value",
-                "section": "some-value",
-                "version": "some-value",
-                "volume": "some-value",
-                "yearSuffix": "some-value",
-              },
-              "metadataProperties": Array [
-                "abstract",
-                "archive",
-                "archiveLocation",
-                "archivePlace",
-                "authority",
-                "callNumber",
-                "collectionTitle",
-                "containerTitle",
-                "dimensions",
-                "event",
-                "eventPlace",
-                "isbn",
-                "issn",
-                "jurisdiction",
-                "medium",
-                "originalPublisher",
-                "originalPublisherPlace",
-                "originalTitle",
-                "pmcid",
-                "pmid",
-                "publisher",
-                "publisherPlace",
-                "reviewedTitle",
-                "section",
-                "version",
-                "yearSuffix",
-                "chapterNumber",
-                "collectionNumber",
-                "edition",
-                "issue",
-                "number",
-                "numberOfPages",
-                "numberOfVolumes",
-                "volume",
-              ],
-              "publicationDate": "2001-12-04",
-              "published": true,
-              "rights": "All Rights Reserved",
-              "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-              "title": "Ain't No Thang",
-              "titleFormatted": "Ain't No Thang",
-              "titlePlaintext": "Ain't No Thang",
-              "toc": Array [
-                Object {
-                  "anchor": "cvi",
-                  "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-                  "label": "Cover",
-                },
-                Object {
-                  "anchor": "bk",
-                  "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-                  "label": "Title Page",
-                },
-                Object {
-                  "anchor": "cip",
-                  "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-                  "label": "Copyright Page",
-                },
-                Object {
-                  "anchor": "toc",
-                  "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-                  "label": "Contents",
-                },
-                Object {
-                  "anchor": "ch01",
-                  "children": Array [
-                    Object {
-                      "anchor": "ch01sec01",
-                      "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-                      "label": "Chapter 1 Section 1",
-                    },
-                    Object {
-                      "anchor": "ch01sec02",
-                      "children": Array [
-                        Object {
-                          "anchor": "ch01sec01subsec01",
-                          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-                          "label": "Chapter 1 Section 2 Subsection 1",
-                        },
-                      ],
-                      "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-                      "label": "Chapter 1 Section 2",
-                    },
-                  ],
-                  "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-                  "label": "Chapter 1",
-                },
-              ],
-            },
-            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-            "relationships": Object {
-              "category": "category",
-              "project": "project",
-              "stylesheets": Array [
-                "stylesheet",
-              ],
-            },
-            "type": "texts",
-          },
-        ],
-      },
-      "type": "projects",
-    }
-  }
-  removeHandler={[MockFunction]}
-  removeText="Exclude"
-  selected={true}
-/>
+<Fragment>
+  <button
+    className="sr-collecting-toggle screen-reader-text"
+    onClick={[Function]}
+  >
+    Include Rowan Test
+  </button>
+  <button
+    aria-hidden="true"
+    className="collecting-toggle collecting-toggle--small-project-cover"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    tabIndex={-1}
+  >
+    <div
+      aria-hidden="true"
+      className="collecting-toggle__inner collecting-toggle__inner--add"
+    >
+      <div
+        className="collecting-toggle__icons"
+      >
+        <IconComposer
+          fill="currentColor"
+          icon="MinusUnique"
+          iconClass="collecting-toggle__icon collecting-toggle__icon--remove"
+          size={28}
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
+        <IconComposer
+          fill="currentColor"
+          icon="CheckUnique"
+          iconClass="collecting-toggle__icon collecting-toggle__icon--confirm"
+          size={28}
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
+        <IconComposer
+          fill="currentColor"
+          icon="PlusUnique"
+          iconClass="collecting-toggle__icon collecting-toggle__icon--add"
+          size={28}
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
+      </div>
+      <TransitionGroup
+        childFactory={[Function]}
+        component="div"
+      >
+        <Component
+          classNames="collecting-toggle__text"
+          key="empty"
+          mountOnEnter={true}
+        >
+          <span
+            className="collecting-toggle__text"
+          />
+        </Component>
+      </TransitionGroup>
+    </div>
+  </button>
+</Fragment>
 `;

@@ -7,23 +7,11 @@
   z-index: 700;
 }
 
-.overlay-full-primary, .overlay-full-secondary {
+.overlay-full, .overlay-login {
   z-index: 600;
 }
 
-.overlay-full {
-  z-index: 600;
-
-  .container {
-    z-index: 310;
-  }
-
-  .overlay-close {
-    z-index: 320;
-  }
-}
-
-.dialog-primary, .range-picker__dialog {
+.dialog-wrapper, .range-picker__dialog {
   z-index: 600;
 }
 
@@ -124,10 +112,6 @@
 
 .annotation-selection__button-absolute {
   z-index: 50;
-}
-
-.notes-filter__icon {
-  z-index: -5;
 }
 
 .standalone-header {

@@ -1,14 +1,19 @@
 .selection-group-heading {
+  @include panelRounded;
+  @include templateHead;
+  padding: 0.833em min(3.75vw, 30px);
   margin-bottom: 26px;
+  font-size: 18px;
+  font-weight: $medium;
+  color: var(--default-strong-color);
 
-  h2 {
-    @include templateHead;
+  @include respond($break80) {
+    font-size: 21px;
+  }
+
+  > * {
     margin: 0;
-    font-size: 24px;
-
-    @include respond($break65) {
-      font-size: 32px;
-    }
+    font-weight: inherit;
   }
 }
 

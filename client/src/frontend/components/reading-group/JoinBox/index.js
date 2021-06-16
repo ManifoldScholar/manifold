@@ -8,6 +8,7 @@ import { readingGroupsAPI, readingGroupMembershipsAPI, requests } from "api";
 import { withRouter } from "react-router-dom";
 import template from "lodash/template";
 import { entityStoreActions } from "actions";
+import ActionBox from "frontend/components/reading-group/ActionBox";
 
 const { request } = entityStoreActions;
 import queryString from "query-string";
@@ -109,34 +110,32 @@ class JoinBox extends PureComponent {
 
   render() {
     return (
-      <div className="group-join-box">
-        <div>
-          <span className="group-join-box__heading-text">Join a group:</span>
-          <span className="group-join-box__instructions">
-            To join a group, enter the code and select Join.
-          </span>
-        </div>
-        <form onSubmit={this.handleSubmit} className="group-join-box__form">
-          <UID name={id => `join-box-${id}`}>
-            {id => (
-              <label htmlFor={id} className="group-join-box__label">
-                <span className="screen-reader-text">Code to join</span>
-                <input
-                  id={id}
-                  value={this.state.code}
-                  onChange={this.updateCode}
-                  placeholder="Enter Code"
-                  className="group-join-box__input"
-                  required
-                />
-              </label>
-            )}
-          </UID>
-          <button type="submit" className="group-join-box__button">
-            Join
-          </button>
-        </form>
-      </div>
+      <ActionBox
+        title="Join a group:"
+        instructions="To join a group, enter the code and select Join."
+        actions={
+          <form onSubmit={this.handleSubmit} className="group-join-form">
+            <UID name={id => `join-box-${id}`}>
+              {id => (
+                <label htmlFor={id} className="group-join-form__label">
+                  <span className="screen-reader-text">Code to join</span>
+                  <input
+                    id={id}
+                    value={this.state.code}
+                    onChange={this.updateCode}
+                    placeholder="Enter Code"
+                    className="group-join-form__input"
+                    required
+                  />
+                </label>
+              )}
+            </UID>
+            <button type="submit" className="group-join-form__button">
+              Join
+            </button>
+          </form>
+        }
+      />
     );
   }
 }

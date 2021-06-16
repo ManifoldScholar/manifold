@@ -6,7 +6,7 @@
   }
 
   &__category-heading {
-    @include panelRoundedLight;
+    @include panelRounded;
     @include templateHead;
     padding: 0.857em 1.643em 1em;
     margin-top: 0;

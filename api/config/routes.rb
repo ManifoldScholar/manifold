@@ -24,24 +24,54 @@ Rails.application.routes.draw do
     end
 
     namespace :v1 do
+      concern :collected_models do
+        resources :projects, only: [:index]
+        resources :resources, only: [:index]
+        resources :resource_collections, only: [:index]
+        resources :texts, only: [:index]
+        resources :text_sections, only: %[index]
+      end
+
       resources :action_callouts, only: [:show, :update, :destroy]
       resources :contacts, only: [:create]
       resources :content_blocks, only: [:show, :update, :destroy]
       resources :test_mails, only: [:create]
       resources :pages
 
-      resources :reading_group_memberships, only: [:destroy, :create]
+      resources :reading_group_kinds
+
+      resources :reading_group_memberships, only: [:show, :create, :update, :destroy] do
+        member do
+          post :activate
+          post :archive
+        end
+      end
+
+      resources :public_reading_groups, only: %i[index]
+
       resources :reading_groups do
         collection do
           get "lookup"
         end
+
+        member do
+          post :clone, action: :do_clone
+
+          post :join
+        end
+
         scope module: :reading_groups do
           namespace :relationships do
-            resources :reading_group_memberships, only: [:index]
             resources :annotations, only: [:index]
+            resources :reading_group_categories, only: %i[index show create update destroy]
+            resources :reading_group_memberships, only: [:index]
+
+            concerns :collected_models
           end
         end
       end
+
+      resources :operations, only: %i[create]
 
       resources :entitlements, only: %i[index show create destroy]
       resources :entitlement_targets, only: %i[index]
@@ -158,10 +188,15 @@ Rails.application.routes.draw do
       resource :me, only: [:show, :update], controller: "me"
       namespace :me do
         namespace :relationships do
+          resources :annotated_texts, only: %i[index]
           resources :favorites, except: [:update]
           resources :reading_groups, only: [:index]
           resources :favorite_projects, only: [:index]
           resources :annotations, only: [:index]
+
+          resource :collection, only: %i[show]
+
+          concerns :collected_models
         end
       end
 

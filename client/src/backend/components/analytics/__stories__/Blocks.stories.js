@@ -24,8 +24,8 @@ storiesOf("Backend/Analytics/Block", module)
   .add("Average Visit", () => (
     <ComposedAnalytics.AverageVisit data={findData("average_visit_duration")} />
   ))
-  .add("Followed", () => (
-    <ComposedAnalytics.Followed data={findData("favorited_projects")} />
+  .add("Collected", () => (
+    <ComposedAnalytics.Collected data={findData("favorited_projects")} />
   ))
   .add("Interaction", () => (
     <ComposedAnalytics.Interactions data={findData("active_users")} />

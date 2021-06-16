@@ -4,21 +4,12 @@ exports[`backend/components/project-collection/SortBy matches the snapshot 1`] =
 <div
   className="project-collection-sort"
 >
-  <form
-    className="form-search-filter"
-    onSubmit={[Function]}
+  <div
+    className="project-collection-sort__instructional-copy"
   >
-    <div
-      className="form-list-filter"
-    >
-      <div
-        className="instructional-copy"
-      >
-        Click and drag projects to rearrange them.
-      </div>
-    </div>
-  </form>
-  <form
+    Click and drag projects to rearrange them.
+  </div>
+  <div
     className="form-secondary"
   >
     <div
@@ -47,6 +38,6 @@ exports[`backend/components/project-collection/SortBy matches the snapshot 1`] =
         </div>
       </div>
     </div>
-  </form>
+  </div>
 </div>
 `;

@@ -35,6 +35,7 @@ export class ProjectsContainer extends Component {
       Object.assign(baseFilters, filters),
       pagination
     );
+
     const projectsAction = request(projectsFetch, requests.feProjectsFiltered);
     const { promise: one } = dispatch(projectsAction);
     const promises = [one];
@@ -70,15 +71,6 @@ export class ProjectsContainer extends Component {
     super(props);
     this.state = this.initialState(queryString.parse(props.location.search));
     this.updateResults = debounce(this.updateResults.bind(this), 250);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.authentication.currentUser !==
-      prevProps.authentication.currentUser
-    ) {
-      this.props.fetchData(this.props);
-    }
   }
 
   get hasVisibleProjects() {
@@ -172,12 +164,10 @@ export class ProjectsContainer extends Component {
               pagination={get(this.props.projectsMeta, "pagination")}
               singularUnit="project"
               pluralUnit="projects"
-              countOnly
             />
           </div>
           <ProjectList.Grid
             authenticated={this.props.authentication.authenticated}
-            favorites={get(this.props.authentication, "currentUser.favorites")}
             dispatch={this.props.dispatch}
             projects={this.props.projects}
             pagination={get(this.props.projectsMeta, "pagination")}
@@ -203,7 +193,6 @@ export class ProjectsContainer extends Component {
         {this.hasVisibleProjects && (
           <Layout.ButtonNavigation
             showProjectCollections
-            showFollowing={false}
             showProjects={false}
             grayBg={false}
           />

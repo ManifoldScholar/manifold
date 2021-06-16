@@ -77,13 +77,13 @@ export class AnalyticsContainer extends PureComponent {
                 rangeInWords={analyticsRangeInWords}
               />
               <AnalyticsFactory
-                view="NewFollowers"
+                view="NewCollectors"
                 report="favorites_this_period"
                 data={analytics}
                 rangeInWords={analyticsRangeInWords}
               />
               <AnalyticsFactory
-                view="AllFollowers"
+                view="AllCollectors"
                 report="total_favorites"
                 data={analytics}
               />

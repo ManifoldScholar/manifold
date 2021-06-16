@@ -13,7 +13,6 @@ import ResourceDetail from "frontend/containers/ResourceDetail";
 import ProjectResourceCollections from "frontend/containers/ProjectResourceCollections";
 import ResourceCollectionDetail from "frontend/containers/ResourceCollectionDetail";
 import EventList from "frontend/containers/EventList";
-import Following from "frontend/containers/Following";
 import Featured from "frontend/containers/Featured";
 import Search from "frontend/containers/Search";
 import Contact from "frontend/containers/Contact";
@@ -22,15 +21,16 @@ import Page from "frontend/containers/Page";
 import Subscriptions from "frontend/containers/Subscriptions";
 import Unsubscribe from "frontend/containers/Unsubscribe";
 import Home from "frontend/containers/Home";
-import ReadingGroups from "frontend/containers/ReadingGroups";
-import ReadingGroupsList from "frontend/containers/ReadingGroups/List";
-import ReadingGroupsNew from "frontend/containers/ReadingGroups/New";
+import MyReadingGroups from "frontend/containers/MyReadingGroups";
+import PublicReadingGroups from "frontend/containers/PublicReadingGroups";
 import ReadingGroup from "frontend/containers/ReadingGroup";
-import ReadingGroupDetail from "frontend/containers/ReadingGroup/Detail";
 import ReadingGroupMembers from "frontend/containers/ReadingGroup/Members";
-import ReadingGroupEdit from "frontend/containers/ReadingGroup/Edit";
+import ReadingGroupAnnotations from "frontend/containers/ReadingGroup/Annotations";
+import ReadingGroupHomepage from "frontend/containers/ReadingGroup/Homepage";
 import Login from "frontend/containers/Login";
 import SignUp from "frontend/containers/SignUp";
+import MyStarred from "frontend/containers/MyStarred";
+import MyAnnotations from "frontend/containers/MyAnnotations";
 
 export default {
   NotFound,
@@ -48,7 +48,6 @@ export default {
   ProjectResourceCollections,
   ResourceCollectionDetail,
   EventList,
-  Following,
   Featured,
   Search,
   Contact,
@@ -57,13 +56,22 @@ export default {
   Subscriptions,
   Unsubscribe,
   Home,
-  ReadingGroups,
-  ReadingGroupsList,
-  ReadingGroupsNew,
+  MyReadingGroups: MyReadingGroups.Wrapper,
+  MyReadingGroupsList: MyReadingGroups.List,
+  MyReadingGroupsNew: MyReadingGroups.New,
+  PublicReadingGroups: PublicReadingGroups.Wrapper,
+  PublicReadingGroupsList: PublicReadingGroups.List,
   ReadingGroup,
-  ReadingGroupDetail,
-  ReadingGroupEdit,
-  ReadingGroupMembers,
+  ReadingGroupMembers: ReadingGroupMembers.Wrapper,
+  ReadingGroupMembersList: ReadingGroupMembers.List,
+  ReadingGroupMemberEdit: ReadingGroupMembers.MemberEdit,
+  ReadingGroupAnnotations,
+  ReadingGroupHomepage: ReadingGroupHomepage.Wrapper,
+  ReadingGroupHomepageStatic: ReadingGroupHomepage.Static,
+  ReadingGroupHomepageEdit: ReadingGroupHomepage.Edit,
+  ReadingGroupHomepageFetch: ReadingGroupHomepage.Fetch,
   Login,
-  SignUp
+  SignUp,
+  MyStarred,
+  MyAnnotations
 };

@@ -20,7 +20,7 @@ export default class ProjectContentBlockVisibilityToggle extends PureComponent {
   }
 
   render() {
-    const baseClass = "content-block";
+    const baseClass = "backend-content-block";
     if (!this.props.visible) return null;
 
     if (this.isVisible)

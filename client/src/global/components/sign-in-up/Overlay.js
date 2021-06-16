@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import FocusTrap from "focus-trap-react";
 import Utility from "global/components/utility";
+import CloseButton from "global/components/Overlay/Close";
 import { withRouter } from "react-router-dom";
 import Interface from "./Interface";
 
@@ -18,31 +19,18 @@ class Overlay extends Component {
   render() {
     return (
       <BodyClass className={"no-scroll"}>
-        <div className="overlay-full-primary">
+        <div className="overlay-login">
           <FocusTrap
             focusTrapOptions={{
               onDeactivate: this.props.hideSignInUpOverlay
             }}
           >
             <div className="overlay-header">
-              <div className="container">
-                <div className="rel">
-                  <figure className="header-logo" aria-hidden="true">
-                    <Utility.IconComposer size={26} icon="manifoldLogo32" />
-                  </figure>
-                  <button
-                    onClick={this.props.hideSignInUpOverlay}
-                    className="overlay-close"
-                    data-id="overlay-close"
-                  >
-                    <span className="overlay-close__text">Cancel</span>
-                    <Utility.IconComposer
-                      size={56.889}
-                      icon="close32"
-                      iconClass="overlay-close__icon"
-                    />
-                  </button>
-                </div>
+              <div className="overlay-header__inner">
+                <figure className="overlay-header__logo" aria-hidden="true">
+                  <Utility.IconComposer size={26} icon="manifoldLogo32" />
+                </figure>
+                <CloseButton onClick={this.props.hideSignInUpOverlay} />
               </div>
             </div>
             <div className="overlay-content focus">

@@ -101,7 +101,7 @@ export class BaseAccessDenied extends Component {
     const body = fetchTextPath(this.props, "body");
 
     return (
-      <section className="project-content-block">
+      <section className="frontend-content-block">
         <div className="container flush entity-section-wrapper">
           <div className="entity-section-wrapper__body entity-section-wrapper__body--notice">
             <Utility.IconComposer icon="stopSign64" size={50} />

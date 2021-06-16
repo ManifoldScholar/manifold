@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ProjectList from "frontend/components/project-list";
-import get from "lodash/get";
 import memoize from "lodash/memoize";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
@@ -64,10 +63,6 @@ export default class ProjectCollectionSummary extends Component {
           {this.hasProjects ? (
             <ProjectList.Grid
               authenticated={this.props.authentication.authenticated}
-              favorites={get(
-                this.props.authentication,
-                "currentUser.favorites"
-              )}
               projects={this.projects}
               dispatch={this.props.dispatch}
               limit={this.limit}

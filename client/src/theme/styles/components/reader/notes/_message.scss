@@ -1,13 +1,9 @@
 .notes-message {
-  padding: 18px 20px;
-  color: $neutral80;
-  @include respond($break65) {
-    max-width: 600px;
-    padding: 32px;
-  }
+  margin-top: 42px;
 
   .heading-primary {
     margin-bottom: 0.8em;
+    color: var(--default-strong-color);
   }
 
   p {
@@ -15,11 +11,9 @@
     font-size: 19px;
   }
 
-  .overlay-full & {
-    max-width: none;
-    padding: 0 60px;
-    text-align: center;
+  .drawer & {
+    @include drawerPadding(padding-right, narrow);
+    @include drawerPadding(padding-left, narrow);
+    margin-top: 0;
   }
-
 }
-

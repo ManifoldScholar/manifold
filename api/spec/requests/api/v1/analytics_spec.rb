@@ -28,8 +28,8 @@ RSpec.describe "Analytics API", type: :request do
       let(:HTTP_VISITOR_TOKEN) { "883d1769-4352-419c-839f-104406fd2d91" }
     end
 
-    let(:start_date) { Date.yesterday }
-    let(:end_date) { Date.today }
+    let(:start_date) { Date.current.yesterday }
+    let(:end_date) { Date.current }
     let(:report_type) { "global" }
     let(:resource) { Analytics::Reports::Global.run(start_date: start_date, end_date: end_date).result }
 

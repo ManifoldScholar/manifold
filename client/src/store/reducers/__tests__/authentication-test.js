@@ -11,37 +11,13 @@ const user = {
     role: null
   },
   relationships: {
-    favorites: {
-      data: [
-        {
-          id: "22222222-2222-2222-2222-222222222222",
-          type: "favorites"
-        }
-      ]
-    }
-  }
-};
-
-const favorite = {
-  id: "22222222-2222-2222-2222-222222222222",
-  type: "favorites",
-  attributes: {
-    favoritableId: "33333333-3333-3333-3333-333333333333",
-    favoritableType: "Project"
-  },
-  relationships: {
-    favoritable: {
-      data: {
-        id: "abc",
-        type: "projects"
-      }
-    }
+    collection: null
   }
 };
 
 const response = {
   data: user,
-  included: [favorite]
+  included: []
 };
 
 const initialState = {
@@ -77,7 +53,7 @@ describe("store/reducers/authentication", () => {
           id: user.id,
           type: user.type,
           attributes: user.attributes,
-          favorites: {}
+          relationships: { collection: null }
         }
       })
     );
@@ -115,19 +91,9 @@ describe("store/reducers/authentication", () => {
           id: user.id,
           type: user.type,
           attributes: user.attributes,
-          favorites: {}
+          relationships: { collection: null }
         }
       })
     );
-  });
-
-  it("Transforms the user's favorites into a hash that is keyed by the favoritable UUID", () => {
-    const action = {
-      type: "LOGIN_SET_CURRENT_USER",
-      payload: response
-    };
-    const state = authenticationReducer(initialState, action);
-    const favoritableId = favorite.attributes.favoritableId;
-    expect(state.currentUser.favorites[favoritableId]).toBe(favorite);
   });
 });

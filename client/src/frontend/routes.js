@@ -149,56 +149,101 @@ const routes = {
       ]
     },
     {
-      name: "frontendReadingGroups",
+      name: "frontendPublicReadingGroups",
       exact: false,
-      component: "ReadingGroups",
-      path: "/my/groups",
-      helper: () => "/my/groups",
+      component: "PublicReadingGroups",
+      path: "/groups",
+      helper: (params = {}) => {
+        const query = queryString.stringify(params);
+        const base = `/groups`;
+        if (!query) return base;
+        return `${base}?${query}`;
+      },
       routes: [
         {
+          name: "frontendPublicReadingGroupsList",
           exact: true,
-          component: "ReadingGroupsList",
-          path: "/my/groups/:new(new)?",
-          routes: [
-            {
-              name: "frontendReadingGroupsNew",
-              exact: true,
-              path: "/my/groups/new",
-              component: "ReadingGroupsNew",
-              helper: () => "/my/groups/new"
-            }
-          ]
+          component: "PublicReadingGroupsList",
+          path: "/groups",
+          helper: (params = {}) => {
+            const query = queryString.stringify(params);
+            const base = `/groups`;
+            if (!query) return base;
+            return `${base}?${query}`;
+          }
         },
         {
           name: "frontendReadingGroupDetail",
           exact: false,
           component: "ReadingGroup",
-          path: "/my/groups/:id",
+          path: "/groups/:id",
           helper: (rg, params = {}) => {
             const query = queryString.stringify(params);
-            const base = `/my/groups/${rg}`;
+            const base = `/groups/${rg}`;
             if (!query) return base;
-            return `${base}/?${query}`;
+            return `${base}?${query}`;
           },
           routes: [
             {
-              name: "frontendReadingGroupMembers",
+              name: "frontendReadingGroupAnnotations",
               exact: true,
+              component: "ReadingGroupAnnotations",
+              path: "/groups/:id/annotations",
+              helper: (rg, params = {}) => {
+                const query = queryString.stringify(params);
+                const base = `/groups/${rg}/annotations`;
+                if (!query) return base;
+                return `${base}?${query}`;
+              }
+            },
+            {
+              name: "frontendReadingGroupMembers",
+              exact: false,
               component: "ReadingGroupMembers",
-              path: "/my/groups/:id/members",
-              helper: rg => `/my/groups/${rg}/members`
+              path: "/groups/:id/members",
+              helper: rg => `/groups/${rg}/members`,
+              routes: [
+                {
+                  exact: true,
+                  component: "ReadingGroupMembersList",
+                  path: "/groups/:id/members/:membershipId?",
+                  routes: [
+                    {
+                      name: "frontendReadingGroupMember",
+                      exact: true,
+                      component: "ReadingGroupMemberEdit",
+                      path: "/groups/:id/members/:membershipId",
+                      helper: (rg, m) => `/groups/${rg}/members/${m}`
+                    }
+                  ]
+                }
+              ]
             },
             {
               exact: false,
-              component: "ReadingGroupDetail",
-              path: "/my/groups/:id",
+              component: "ReadingGroupHomepage",
+              path: "/groups/:id",
               routes: [
                 {
-                  name: "frontendReadingGroupEdit",
-                  exact: true,
-                  component: "ReadingGroupEdit",
-                  path: "/my/groups/:id/edit",
-                  helper: rg => `/my/groups/${rg}/edit`
+                  exact: false,
+                  component: "ReadingGroupHomepageFetch",
+                  path: "/groups/:id",
+                  routes: [
+                    {
+                      name: "frontendReadingGroupHomepageStatic",
+                      exact: true,
+                      component: "ReadingGroupHomepageStatic",
+                      path: "/groups/:id",
+                      helper: rg => `/groups/${rg}`
+                    },
+                    {
+                      name: "frontendReadingGroupHomepageEdit",
+                      exact: true,
+                      component: "ReadingGroupHomepageEdit",
+                      path: "/groups/:id/edit",
+                      helper: rg => `/groups/${rg}/edit`
+                    }
+                  ]
                 }
               ]
             }
@@ -207,12 +252,48 @@ const routes = {
       ]
     },
     {
-      name: "frontendFollowing",
+      name: "frontendMyReadingGroups",
+      exact: false,
+      component: "MyReadingGroups",
+      path: "/my/groups",
+      helper: (params = {}) => {
+        const query = queryString.stringify(params);
+        const base = `/my/groups`;
+        if (!query) return base;
+        return `${base}?${query}`;
+      },
+      routes: [
+        {
+          exact: true,
+          component: "MyReadingGroupsList",
+          path: "/my/groups/:new(new)?",
+          routes: [
+            {
+              name: "frontendMyReadingGroupsNew",
+              exact: true,
+              path: "/my/groups/new",
+              component: "MyReadingGroupsNew",
+              helper: () => "/my/groups/new"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: "frontendStarred",
       exact: true,
-      component: "Following",
-      path: "/following",
+      component: "MyStarred",
+      path: "/my/starred",
       isLibrary: true,
-      helper: () => "/following"
+      helper: () => "/my/starred"
+    },
+    {
+      name: "frontendAnnotations",
+      exact: true,
+      component: "MyAnnotations",
+      path: "/my/notes",
+      isLibrary: true,
+      helper: () => "/my/notes"
     },
     {
       name: "frontendFeatured",

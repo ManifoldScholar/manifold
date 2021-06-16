@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { BrowserRouter, StaticRouter } from "react-router-dom";
-import Dialog from "backend/components/dialog";
+import Dialog from "global/components/dialog";
 import { Provider } from "react-redux";
 import Manifold from "global/containers/Manifold";
 import get from "lodash/get";

@@ -72,7 +72,7 @@ class DashboardAnalytics extends Component {
               data={analytics}
             />
             <AnalyticsFactory
-              view="Followed"
+              view="Collected"
               report="favorited_projects"
               data={analytics}
             />

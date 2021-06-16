@@ -51,11 +51,6 @@ class FormSelect extends Component {
     return "select-instructions";
   }
 
-  onChange = event => {
-    const value = event.target.value;
-    this.props.select(value === "" ? null : value);
-  };
-
   render() {
     const options = this.props.options.map(option => {
       return (
@@ -75,6 +70,10 @@ class FormSelect extends Component {
       wide: this.props.wide
     });
 
+    const labelClassName = classNames({
+      "pad-bottom": this.props.rounded
+    });
+
     return (
       <UID>
         {id => (
@@ -86,19 +85,22 @@ class FormSelect extends Component {
               label={this.props.label}
               idForError={`${this.idForErrorPrefix}-${id}`}
             >
-              <label htmlFor={`${this.idPrefix}-${id}`}>
+              <label
+                htmlFor={`${this.idPrefix}-${id}`}
+                className={labelClassName}
+              >
                 {this.props.label}
               </label>
               <div className="form-select">
                 <IconComposer
-                  icon="disclosureDown16"
-                  size={20}
+                  icon="disclosureDown24"
+                  size={24}
                   iconClass="form-select__icon"
                 />
                 <select
                   id={`${this.idPrefix}-${id}`}
                   aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
-                  onChange={this.onChange}
+                  onChange={this.props.onChange}
                   value={this.props.optionsMeta.stringValue}
                   ref={input => {
                     this.inputElement = input;

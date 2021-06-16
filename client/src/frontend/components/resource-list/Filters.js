@@ -3,10 +3,7 @@ import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
 import omitBy from "lodash/omitBy";
 import isEmpty from "lodash/isEmpty";
-import { UID } from "react-uid";
-import Utility from "global/components/utility";
-
-import withScreenReaderStatus from "hoc/with-screen-reader-status";
+import { ListFilters } from "global/components/list";
 
 export class ResourceListFilters extends Component {
   static displayName = "ResourceList.Filters";
@@ -21,7 +18,6 @@ export class ResourceListFilters extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState(props.initialFilterState);
-    this.searchInput = React.createRef();
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -33,15 +29,80 @@ export class ResourceListFilters extends Component {
   }
 
   get showResetButton() {
-    return !isEmpty(this.state.filters);
+    const filterValues = Object.values(this.state.filters);
+    const appliedFilters = filterValues.filter(Boolean);
+    return !isEmpty(appliedFilters);
   }
 
-  get resetMessage() {
-    return "Search and filters reset.";
+  get searchProps() {
+    return {
+      value: this.state.filters.keyword || "",
+      onChange: event => this.setFilters(event, "keyword")
+    };
   }
 
-  get idPrefix() {
-    return "filters-search";
+  get kindOptions() {
+    if (!this.props.kinds?.length) return [];
+    return this.props.kinds.map(kind => {
+      return {
+        label: capitalize(kind),
+        value: kind
+      };
+    });
+  }
+
+  get tagOptions() {
+    if (!this.props.tags?.length) return [];
+    return this.props.tags.map(tag => {
+      return {
+        label: capitalize(tag),
+        value: tag
+      };
+    });
+  }
+
+  get kindFilter() {
+    return {
+      label: "Kind",
+      value: this.state.filters.kind || "",
+      onChange: event => this.setFilters(event, "kind"),
+      options: [{ label: "Type:", value: "" }, ...this.kindOptions]
+    };
+  }
+
+  get tagFilter() {
+    return {
+      label: "Tag",
+      value: this.state.filters.tag || "",
+      onChange: event => this.setFilters(event, "tag"),
+      options: [{ label: "Tag:", value: "" }, ...this.tagOptions]
+    };
+  }
+
+  get sortFilter() {
+    return {
+      label: "Sort results",
+      value: this.state.filters.order || "",
+      onChange: event => this.setFilters(event, "order"),
+      options: [
+        {
+          label: "Sort",
+          value: ""
+        },
+        {
+          label: "A–Z",
+          value: "sort_title ASC"
+        },
+        {
+          label: "Z–A",
+          value: "sort_title DESC"
+        }
+      ]
+    };
+  }
+
+  get filters() {
+    return [this.kindFilter, this.tagFilter, this.sortFilter];
   }
 
   setFilters = (event, label) => {
@@ -64,117 +125,23 @@ export class ResourceListFilters extends Component {
     return { filters };
   }
 
-  resetFilters = event => {
+  resetFilters = () => {
     event.preventDefault();
     this.setState(this.initialState(), this.updateResults);
-    // update SR message
-    this.props.setScreenReaderStatus(this.resetMessage);
-    // focus on search field
-    this.searchInput.current.focus();
   };
 
   render() {
     return (
-      <form
-        className="form-list-filter entity-section-wrapper__tools entity-section-wrapper__tools--wide"
+      <ListFilters
+        searchProps={this.searchProps}
+        filters={this.filters}
         onSubmit={this.updateResults}
-      >
-        <div className="search-input">
-          <button className="search-button" type="submit">
-            <span className="screen-reader-text">Search</span>
-            <Utility.IconComposer
-              className="search-icon"
-              icon="search16"
-              size={20}
-            />
-          </button>
-          <UID name={id => `${this.idPrefix}-${id}`}>
-            {id => (
-              <>
-                <label htmlFor={id} className="screen-reader-text">
-                  Enter Search Criteria
-                </label>
-                <input
-                  ref={this.searchInput}
-                  value={this.state.filters.keyword || ""}
-                  type="text"
-                  id={id}
-                  onChange={event => this.setFilters(event, "keyword")}
-                  placeholder="Search"
-                />
-              </>
-            )}
-          </UID>
-        </div>
-        <div className="select-group inline">
-          <div className="select">
-            <select
-              onChange={event => this.setFilters(event, "kind")}
-              value={this.state.filters.kind || ""}
-            >
-              <option value="">Type:</option>
-              {this.props.kinds
-                ? this.props.kinds.map(kind => {
-                    return (
-                      <option key={kind} value={kind}>
-                        {capitalize(kind)}
-                      </option>
-                    );
-                  })
-                : null}
-            </select>
-            <Utility.IconComposer
-              icon="disclosureDown16"
-              size={20}
-              iconClass="select__icon"
-            />
-          </div>
-          <div className="select">
-            <select
-              onChange={event => this.setFilters(event, "tag")}
-              value={this.state.filters.tag || ""}
-            >
-              <option value="">Tag:</option>
-              {this.props.tags
-                ? this.props.tags.map(tag => {
-                    return (
-                      <option key={tag} value={tag}>
-                        {capitalize(tag)}
-                      </option>
-                    );
-                  })
-                : null}
-            </select>
-            <Utility.IconComposer
-              icon="disclosureDown16"
-              size={20}
-              iconClass="select__icon"
-            />
-          </div>
-          <div className="select">
-            <select
-              onChange={event => this.setFilters(event, "order")}
-              value={this.state.filters.order || ""}
-            >
-              <option value="default">Sort By:</option>
-              <option value="sort_title ASC">A-Z</option>
-              <option value="sort_title DESC">Z-A</option>
-            </select>
-            <Utility.IconComposer
-              icon="disclosureDown16"
-              size={20}
-              iconClass="select__icon"
-            />
-          </div>
-        </div>
-        {this.showResetButton && (
-          <button className="reset-button" onClick={this.resetFilters}>
-            {"Reset Search + Filters"}
-          </button>
-        )}
-      </form>
+        onReset={this.resetFilters}
+        showResetButton={this.showResetButton}
+        className="entity-section-wrapper__tools entity-section-wrapper__tools--wide"
+      />
     );
   }
 }
 
-export default withScreenReaderStatus(ResourceListFilters);
+export default ResourceListFilters;

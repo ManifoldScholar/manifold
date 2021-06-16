@@ -7,7 +7,7 @@ const PlaceholderWrapper = props => {
   return (
     <section>
       <div className={`content-placeholder content-placeholder--${context}`}>
-        {children}
+        <div className="content-placeholder__inner">{children}</div>
       </div>
     </section>
   );

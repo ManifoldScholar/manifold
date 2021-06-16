@@ -1,0 +1,7 @@
+$_container-gap: 50px;
+
+.groups-page-container {
+  > * + * {
+    margin-top: $_container-gap;
+  }
+}

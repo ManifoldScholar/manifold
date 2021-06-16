@@ -41,7 +41,13 @@ module Validation
 
   def reading_group_membership_params
     params.require(:data)
-    attributes = []
+    attributes = [:label, :annotation_style]
+
+    if @reading_group.present? && current_user&.can_update?(@reading_group)
+      attributes << :role
+      attributes << :label
+    end
+
     relationships = [:reading_group, :user]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -49,8 +55,8 @@ module Validation
 
   def reading_group_params
     params.require(:data)
-    attributes = [:privacy, :name, :invitation_code, :notify_on_join]
-    relationships = [:users]
+    attributes = [:privacy, :name, :invitation_code, :notify_on_join, { course: [:enabled, :starts_on, :ends_on] }]
+    relationships = [:kind, :users]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
@@ -479,6 +485,10 @@ module Validation
     structure_params
   end
 
+  def reading_group_filter_params
+    params.permit(filter: [:keyword, :sort_order])[:filter] || {}
+  end
+
   def reading_group_membership_filter_params
     params.permit(filter: [:order])[:filter]
   end
@@ -528,6 +538,10 @@ module Validation
     params.permit(filter: [:keyword, :typeahead, :tag_scope])[:filter]
   end
 
+  def empty_filter_params
+    {}
+  end
+
   def search_params
     params[:facets] = params[:facets].values if params.dig(:facets).respond_to? :values
     params.permit(
@@ -547,10 +561,13 @@ module Validation
   def annotation_filter_params
     coerce_filter_to_hash(:filter, :ids)
     coerce_filter_to_hash(:filter, :formats)
-    params.permit(filter: [:orphaned,
-                           :text, :text_section, :reading_group_membership,
-                           { ids: [] },
-                           [{ formats: [] }]])[:filter]
+    params.permit(
+      filter: [
+        :orphaned, :text, :text_section, :reading_group_membership,
+        { ids: [] },
+        [{ formats: [] }]
+      ]
+    )[:filter] || {}
   end
 
   def subject_filter_params
@@ -623,5 +640,17 @@ module Validation
     {
       data: data
     }
+  end
+
+  module ClassMethods
+    # @param [Class, #model_name] klass
+    # @return [Symbol, nil]
+    def filter_param_method_for(klass)
+      prefix = klass.model_name.singular
+
+      :"#{prefix}_filter_params".yield_self do |filter_method|
+        filter_method if method_defined? filter_method
+      end
+    end
   end
 end

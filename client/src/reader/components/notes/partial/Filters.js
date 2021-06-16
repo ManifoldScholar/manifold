@@ -7,7 +7,7 @@ export default class Filters extends Component {
 
   static propTypes = {
     filterChangeHandler: PropTypes.func,
-    filter: PropTypes.object
+    filters: PropTypes.object
   };
 
   filteredBy(filter, format) {
@@ -16,7 +16,7 @@ export default class Filters extends Component {
 
   toggleFormat = (event, format) => {
     event.preventDefault();
-    const formatsFilter = this.props.filter.formats;
+    const formatsFilter = this.props.filters.formats;
     if (this.filteredBy(formatsFilter, format)) {
       formatsFilter.splice(formatsFilter.indexOf(format), 1);
     } else {
@@ -26,7 +26,7 @@ export default class Filters extends Component {
   };
 
   renderCheckBox(label, format) {
-    const formats = this.props.filter.formats;
+    const formats = this.props.filters.formats;
     const checked = this.filteredBy(formats, format);
     const checkboxId = format + "-checkbox";
 
@@ -57,7 +57,7 @@ export default class Filters extends Component {
     return (
       <fieldset className="notes-filters">
         <div className="notes-filters__inner">
-          <legend className="notes-filters__label">Show my:</legend>
+          <legend className="notes-filters__label">Show:</legend>
           <div className="notes-filters__checkbox-group">
             {this.renderCheckBox("Highlights", "highlight")}
             {this.renderCheckBox("Annotations", "annotation")}

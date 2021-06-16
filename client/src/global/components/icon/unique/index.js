@@ -6,6 +6,9 @@ import BooksOnShelfStroke from "./BooksOnShelfStroke";
 import ProjectPlaceholder from "./ProjectPlaceholder";
 import MarginDecrease from "./MarginDecrease";
 import MarginIncrease from "./MarginIncrease";
+import StarFill from "./StarFill";
+import StarOutline from "./StarOutline";
+import Notes from "./Notes";
 
 export default {
   CheckUnique: Check,
@@ -15,5 +18,8 @@ export default {
   BooksOnShelfStrokeUnique: BooksOnShelfStroke,
   ProjectPlaceholderUnique: ProjectPlaceholder,
   MarginDecreaseUnique: MarginDecrease,
-  MarginIncreaseUnique: MarginIncrease
+  MarginIncreaseUnique: MarginIncrease,
+  StarFillUnique: StarFill,
+  StarOutlineUnique: StarOutline,
+  NotesUnique: Notes
 };

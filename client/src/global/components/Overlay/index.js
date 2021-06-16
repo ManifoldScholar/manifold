@@ -1,146 +1,95 @@
-import React, { Component } from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import FocusTrap from "focus-trap-react";
-import isString from "lodash/isString";
+import Header from "./Header";
 
 import BodyClass from "hoc/body-class";
-import IconComposer from "global/components/utility/IconComposer";
 
-export default class Overlay extends Component {
-  static propTypes = {
-    open: PropTypes.bool,
-    history: PropTypes.object,
-    children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-    title: PropTypes.string,
-    icon: PropTypes.string,
-    closeUrl: PropTypes.string,
-    closeCallback: PropTypes.func,
-    contentWidth: PropTypes.number,
-    appearance: PropTypes.string,
-    triggerScrollToTop: PropTypes.any
-  };
+function Overlay({
+  title,
+  subtitle,
+  icon,
+  appearance,
+  contentWidth,
+  closeCallback,
+  closeUrl,
+  history,
+  triggerScrollToTop,
+  children
+}) {
+  const overlayRef = useRef(null);
 
-  constructor() {
-    super();
-    this.state = {
-      view: null
-    };
-  }
-
-  componentDidMount() {
-    window.addEventListener("keyup", this.handleEscape);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.triggerScrollToTop !== this.props.triggerScrollToTop) {
-      this.scrollableEl.scrollTop = 0;
+  function handleCloseEvent(event) {
+    if (closeCallback) {
+      closeCallback(event);
     }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("keyup", this.handleEscape);
-  }
-
-  handleCloseEvent = event => {
-    if (this.props.closeCallback) {
-      this.props.closeCallback(event);
-    }
-    if (this.props.closeUrl) {
+    if (closeUrl) {
       setTimeout(() => {
-        this.props.history.push(this.props.closeUrl);
+        history.push(closeUrl);
       }, 200);
     }
-  };
+  }
 
-  handleEscape = event => {
+  function handleEscape(event) {
     if (event.keyCode === 27) {
-      this.handleCloseEvent(event);
+      handleCloseEvent(event);
     }
-  };
-
-  overlayClass() {
-    return this.props.appearance ? this.props.appearance : "overlay-full";
   }
 
-  renderChildren() {
-    if (!this.props.children) return null;
-    if (isString(this.props.children.type)) return this.props.children;
-    return React.cloneElement(this.props.children, {
-      closeDrawer: this.handleLeaveEvent
-    });
-  }
+  useEffect(() => {
+    window.addEventListener("keyup", handleEscape);
 
-  renderTitle(icon, title) {
-    return (
-      <div className="container">
-        <h3 className="overlay-title">
-          <IconComposer icon={icon} size={32} iconClass="overlay-title__icon" />
-          <span className="overlay-title__text">{title}</span>
-        </h3>
-      </div>
-    );
-  }
+    return () => {
+      window.removeEventListener("keyup", handleEscape);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  renderHeader(props) {
-    if (!props.title) return null;
-    return (
-      <header className="overlay-full-header" key={"globalOverlayHeader"}>
-        {this.renderTitle(this.props.icon, this.props.title)}
-        <button
-          onClick={this.handleCloseEvent}
-          className="overlay-close"
-          data-id="overlay-close"
-        >
-          Close
-          <IconComposer
-            icon="close32"
-            size={37.334}
-            iconClass="overlay-close__icon"
-          />
-        </button>
-      </header>
-    );
-  }
+  useEffect(() => {
+    if (!overlayRef.current) return;
+    overlayRef.current.scrollTop = 0;
+  }, [triggerScrollToTop]);
 
-  render() {
-    return (
-      <BodyClass className={"no-scroll overlay"}>
-        <div
-          className={this.overlayClass()}
-          key={"globalOverlay"}
-          ref={el => {
-            this.scrollableEl = el;
+  return (
+    <BodyClass className="no-scroll overlay">
+      <div
+        className={appearance || "overlay-full"}
+        key="globalOverlay"
+        ref={overlayRef}
+      >
+        <FocusTrap
+          focusTrapOptions={{
+            escapeDeactivates: false
           }}
         >
-          <FocusTrap
-            focusTrapOptions={{
-              escapeDeactivates: false
-            }}
-          >
-            {this.renderHeader(this.props)}
-            {!this.props.title ? (
-              <button
-                onClick={this.handleCloseEvent}
-                className="overlay-close"
-                data-id="overlay-close"
-              >
-                Close
-                <IconComposer
-                  icon="close32"
-                  size={37.334}
-                  iconClass="overlay-close__icon"
-                />
-              </button>
-            ) : null}
-            <div
-              style={{ maxWidth: this.props.contentWidth }}
-              className="container"
-            >
-              {this.renderChildren()}
-            </div>
-          </FocusTrap>
-        </div>
-      </BodyClass>
-    );
-  }
+          <Header
+            title={title}
+            subtitle={subtitle}
+            icon={icon}
+            onCloseClick={handleCloseEvent}
+          />
+          <div style={{ maxWidth: contentWidth }} className="container">
+            {children}
+          </div>
+        </FocusTrap>
+      </div>
+    </BodyClass>
+  );
 }
+
+Overlay.displayName = "Global.Overlay";
+
+Overlay.propTypes = {
+  open: PropTypes.bool,
+  history: PropTypes.object,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  icon: PropTypes.string,
+  closeUrl: PropTypes.string,
+  closeCallback: PropTypes.func,
+  contentWidth: PropTypes.number,
+  appearance: PropTypes.string,
+  triggerScrollToTop: PropTypes.any
+};
+
+export default Overlay;

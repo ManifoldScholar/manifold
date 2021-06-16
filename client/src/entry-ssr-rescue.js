@@ -30,7 +30,8 @@ const app = webApp("SSR Rescue", {
   proxyAPI: config.services.client.proxiesEnabled
 });
 
-app.use("/", makeRendererProxy(stats, requestHandler));
+if (!config.environment.skipSSR)
+  app.use("/", makeRendererProxy(stats, requestHandler));
 app.use(requestHandler);
 
 webServer(app, "SSR Rescue", { port, socket });

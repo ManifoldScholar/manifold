@@ -11,7 +11,7 @@ import subWeeks from "date-fns/subWeeks";
 import startOfMonth from "date-fns/startOfMonth";
 import endOfMonth from "date-fns/endOfMonth";
 import subMonths from "date-fns/subMonths";
-import DatePicker from "./DatePicker";
+import DatePicker from "global/components/form/DatePicker/PickerComponent";
 
 import withScreenReaderStatus from "hoc/with-screen-reader-status";
 
@@ -145,7 +145,7 @@ function RangePicker({
                   <button
                     key={key}
                     onClick={() => handlePresetClick(dateProps)}
-                    className="range-picker__preset button-lozenge"
+                    className="range-picker__preset button-lozenge-secondary"
                   >
                     <span>{label}</span>
                   </button>

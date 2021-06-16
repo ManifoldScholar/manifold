@@ -5,7 +5,6 @@ import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
-import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import Utility from "global/components/utility";
 
@@ -69,7 +68,6 @@ export class HomeProjectsContainer extends Component {
           </header>
           <ProjectList.Grid
             authenticated={this.props.authentication.authenticated}
-            favorites={get(this.props.authentication, "currentUser.favorites")}
             dispatch={this.props.dispatch}
             projects={this.props.projects}
             limit={16}

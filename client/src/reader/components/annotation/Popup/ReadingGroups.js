@@ -113,7 +113,7 @@ class AnnotationPopupSecondaryReadingGroup extends PureComponent {
     return (
       <div className="annotation-group-options__footer">
         <Link
-          to={lh.link("frontendReadingGroups")}
+          to={lh.link("frontendMyReadingGroups")}
           className="annotation-group-options__link"
         >
           <span className="annotation-group-options__link-text">

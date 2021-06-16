@@ -1,4 +1,4 @@
-.content-block {
+.backend-content-block {
   padding-top: 9px;
   padding-bottom: 9px;
 
@@ -27,7 +27,7 @@
     color: inherit;
     border: 1px solid transparent;
 
-    .content-block--current & {
+    .backend-content-block--current & {
       padding-right: 12px;
       cursor: default;
 
@@ -36,11 +36,11 @@
       }
     }
 
-    .content-block--is-dragging & {
+    .backend-content-block--is-dragging & {
       @include dragging;
     }
 
-    .content-block--inactive & {
+    .backend-content-block--inactive & {
       cursor: not-allowed;
     }
 
@@ -48,8 +48,8 @@
       border-color: $accentPrimary;
       outline: 0;
 
-      .content-block--available.content-block--active & {
-        .content-block__heading {
+      .backend-content-block--available.backend-content-block--active & {
+        .backend-content-block__heading {
           color: $accentPrimary;
         }
       }
@@ -69,11 +69,11 @@
       grid-template-columns: max-content auto;
     }
 
-    .content-block--active & {
+    .backend-content-block--active & {
       color: $neutralTextExtraLight;
     }
 
-    .content-block--active.content-block--available &:hover {
+    .backend-content-block--active.backend-content-block--available &:hover {
       @include defaultHoverStyle;
     }
   }

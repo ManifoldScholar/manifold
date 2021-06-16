@@ -177,8 +177,67 @@ RSpec.describe "Reading Groups API", type: :request do
         expect(response).to have_http_status(403)
       end
     end
-
-
   end
 
+  describe "cloning a reading group" do
+    include_context "simple auth request"
+
+    let!(:reading_group_creator) { FactoryBot.create :user }
+
+    let!(:reading_group) { FactoryBot.create :reading_group, creator: reading_group_creator }
+
+    def expect_request
+      expect do
+        post clone_api_v1_reading_group_path(reading_group), headers: auth_headers
+      end
+    end
+
+    shared_examples_for "able to clone" do
+      it "is allowed" do
+        expect_request.to change(ReadingGroup, :count).by(1)
+
+        expect(response).to be_successful
+      end
+    end
+
+    shared_examples_for "forbidden to clone" do
+      it "is forbidden" do
+        expect_request.to keep_the_same(ReadingGroup, :count)
+
+        expect(response).to have_http_status 403
+      end
+    end
+
+    context "as an unaffiliated user" do
+      include_examples "forbidden to clone"
+    end
+
+    context "as a member" do
+      let!(:reading_group_membership) do
+        FactoryBot.create :reading_group_membership, user: current_user, reading_group: reading_group
+      end
+
+      include_examples "forbidden to clone"
+    end
+
+    context "as a moderator" do
+      let!(:reading_group_membership) do
+        FactoryBot.create :reading_group_membership, :moderator, user: current_user, reading_group: reading_group
+      end
+
+      include_examples "able to clone"
+    end
+
+    context "as the creator" do
+      let(:reading_group_creator) { current_user }
+
+      include_examples "able to clone"
+    end
+
+    context "as an admin" do
+      let(:current_user) { FactoryBot.create :user, :admin }
+
+      include_examples "able to clone"
+    end
+  end
 end

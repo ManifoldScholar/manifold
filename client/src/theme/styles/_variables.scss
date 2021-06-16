@@ -112,6 +112,9 @@ $spYellow75: #706b2c;
 $_analyticsHighlightColor: $spBlue45;
 $_analyticsHighlightColorPale: desaturate(darken($spBlue45, 10), 19);
 
+// Unique Icons
+$iconFillStarBgColor: $spBlue45;
+
 // Default colors that meet WCAG AA color contrast guidelines
 // Namespaced functionally by usage and context (light/dark modes)
 // --------------------------------------------------------
@@ -191,9 +194,11 @@ $containerPaddingMin: 15px; // Minimum gutter padding
 
 $readerHeaderHeight: 46px;
 
-// Font Weights
-// These are convenience variables to keep font weight declarations consistent
+// Fonts
 // --------------------------------------------------------
+$fontStackSans: 'sofia-pro', 'trueno', sans-serif;
+$fontStackSerif: 'freight-text-pro', 'aleo', serif;
+
 $light: 200;
 $book: 300;
 $medium: 500;
@@ -282,3 +287,42 @@ $standalone-header-layout: (
 }
 
 $dashboard-layout-breakpoint: $break75;
+
+$toc-drawer: (
+  width: 477px,
+  base-inline-start-padding: 12.579%,
+  base-inline-end-padding: 10.482%,
+);
+
+@function toc-drawer($property) {
+  @return map-get($toc-drawer, $property);
+}
+
+$annotation-list: (
+  avatar-height: 32px,
+  avatar-placeholder-width: 38px,
+  avatar-placeholder-margin-inline-start: -2px
+);
+
+@function annotation-list($property) {
+  @return map-get($annotation-list, $property);
+}
+
+$dialog: (
+  padding-top: 30px,
+  padding-bottom: 50px
+);
+
+@function dialog($property) {
+  @return map-get($dialog, $property);
+}
+
+$entity-filter-form: (
+  gap: 10px,
+  select-min-width: 200px,
+  search-min-width: 182px
+);
+
+@function entity-filter-form($property) {
+  @return map-get($entity-filter-form, $property);
+}

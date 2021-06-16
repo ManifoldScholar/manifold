@@ -17,12 +17,13 @@ export default class ProjectListGrid extends Component {
     projects: PropTypes.array,
     limit: PropTypes.number,
     authenticated: PropTypes.bool,
-    favorites: PropTypes.object,
     dispatch: PropTypes.func,
     pagination: PropTypes.object,
+    paginationTarget: PropTypes.string,
     paginationClickHandler: PropTypes.func,
     viewAllUrl: PropTypes.string,
-    viewAllLabel: PropTypes.string
+    viewAllLabel: PropTypes.string,
+    onUncollect: PropTypes.func
   };
 
   static defaultProps = {
@@ -37,7 +38,6 @@ export default class ProjectListGrid extends Component {
 
   shouldComponentUpdate(nextProps) {
     if (nextProps.projects !== this.props.projects) return true;
-    if (nextProps.favorites !== this.props.favorites) return true;
     return nextProps.authenticated !== this.props.authenticated;
   }
 
@@ -53,6 +53,22 @@ export default class ProjectListGrid extends Component {
     } else {
       this.enableAnimation = false;
     }
+  }
+
+  get pagination() {
+    return this.props.pagination;
+  }
+
+  get showPagination() {
+    return this.pagination?.totalPages > 1;
+  }
+
+  get paginationTarget() {
+    return this.props.paginationTarget;
+  }
+
+  get paginationClickHandler() {
+    return this.props.paginationClickHandler;
   }
 
   projectsList() {
@@ -94,12 +110,15 @@ export default class ProjectListGrid extends Component {
     );
   }
 
-  renderPagination(props) {
+  renderPagination() {
+    if (!this.showPagination) return null;
+
     return (
       <div className="entity-section-wrapper__pagination">
         <Utility.Pagination
-          paginationClickHandler={props.paginationClickHandler}
-          pagination={props.pagination}
+          paginationClickHandler={this.paginationClickHandler}
+          pagination={this.pagination}
+          paginationTarget={this.paginationTarget}
         />
       </div>
     );
@@ -125,10 +144,10 @@ export default class ProjectListGrid extends Component {
                   <li className="project-list__item--pos-rel">
                     <GridItem
                       authenticated={this.props.authenticated}
-                      favorites={this.props.favorites}
                       dispatch={this.props.dispatch}
                       project={project}
                       hideDesc={hideDesc}
+                      onUncollect={this.props.onUncollect}
                     />
                   </li>
                 </CSSTransition>
@@ -137,7 +156,7 @@ export default class ProjectListGrid extends Component {
           </ReactTransitionGroup>
         </div>
         {this.props.pagination
-          ? this.renderPagination(this.props)
+          ? this.renderPagination()
           : this.renderViewAll(this.props)}
       </>
     );

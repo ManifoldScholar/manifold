@@ -1,8 +1,7 @@
-require "naught"
-
 # The base application controller
 class ApplicationController < ActionController::API
 
+  include ActiveSupport::Configurable
   include Authentication
   include Validation
   include JSONAPI
@@ -12,32 +11,19 @@ class ApplicationController < ActionController::API
 
   rescue_from APIExceptions::StandardError, with: :render_error_response
 
+  config_accessor :pagination_enforced, instance_writer: false do
+    false
+  end
+
   protected
 
   def authority_user
     @authority_user ||= current_user || anonymous_user
   end
 
-  # rubocop:disable Lint/NestedMethodDefinition
   def anonymous_user
-    @anonymous_user ||= Naught.build do |config|
-      config.impersonate User
-      config.predicates_return false
-
-      def role
-        nil
-      end
-
-      def kind
-        nil
-      end
-
-      def can_read?(resource, *other)
-        resource.readable_by? self, *other
-      end
-    end.new
+    @anonymous_user ||= AnonymousUser.new
   end
-  # rubocop:enable Lint/NestedMethodDefinition
 
   def user_for_paper_trail
     current_user&.to_global_id.to_s if current_user
@@ -65,7 +51,7 @@ class ApplicationController < ActionController::API
     params.dig(:page, :number).to_i.clamp(1, Float::INFINITY)
   end
 
-  def with_pagination!(filter_params, enforced: false)
+  def with_pagination!(filter_params, enforced: pagination_enforced)
     filter_params = {} if filter_params.nil?
 
     return filter_params if !enforced && params.dig(:no_pagination)

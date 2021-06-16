@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import get from "lodash/get";
+import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
+import Tag from "global/components/Annotation/Tag";
+import Avatar from "global/components/avatar";
 
 import withReadingGroups from "hoc/with-reading-groups";
 
@@ -9,7 +13,8 @@ class GroupItem extends Component {
 
   static propTypes = {
     annotation: PropTypes.object,
-    visitHandler: PropTypes.func
+    visitHandler: PropTypes.func,
+    showAnnotationCreator: PropTypes.bool
   };
 
   get currentGroupName() {
@@ -43,17 +48,29 @@ class GroupItem extends Component {
     return "My Private Annotations";
   }
 
+  get annotationAttributes() {
+    return get(this.props, "annotation.attributes");
+  }
+
+  get avatarUrl() {
+    // TODO: Point to the right URL
+    return get(
+      this.props,
+      "annotation.attributes.creatorAvatarStyles.smallSquare"
+    );
+  }
+
   getIcon(format) {
     let icon = null;
     switch (format) {
       case "annotation":
-        icon = "comment24";
+        icon = "interactComment24";
         break;
       case "highlight":
-        icon = "annotate24";
+        icon = "interactAnnotate24";
         break;
       case "bookmark":
-        icon = "bookmark24";
+        icon = "interactHighlight24";
         break;
       default:
         break;
@@ -66,25 +83,44 @@ class GroupItem extends Component {
     this.props.visitHandler(this.props.annotation);
   };
 
-  renderReadingGroupTag() {
-    return (
-      <span className="notes-filtered-list__tag">
-        <span className="notes-filtered-list__tag-text">
-          {this.currentGroupName}
-        </span>
-        {this.showLock && (
-          <IconComposer
-            icon="lock16"
-            size={14}
-            iconClass="notes-filtered-list__tag-icon"
-          />
-        )}
+  renderCreatorTag() {
+    const { creatorName, commentsCount } = this.annotationAttributes;
+    const creator = (
+      <span className="notes-filtered-list__item-creator">
+        <Avatar
+          iconSize={16}
+          url={this.avatarUrl}
+          className={classNames({
+            "notes-filtered-list__item-creator-avatar": true,
+            "notes-filtered-list__item-creator-avatar--image": this.avatarUrl,
+            "notes-filtered-list__item-creator-avatar--default": !this.avatarUrl
+          })}
+        />
+        <span className="truncate-text-overflow">{creatorName}</span>
       </span>
     );
+    const tagProps =
+      commentsCount === 0
+        ? {}
+        : {
+            icon: "interactComment16",
+            iconSize: 16,
+            iconCount: commentsCount
+          };
+
+    return <Tag {...tagProps}>{creator}</Tag>;
+  }
+
+  renderReadingGroupTag() {
+    const tagProps = !this.showLock ? {} : { icon: "lock16", iconSize: 14 };
+
+    return <Tag {...tagProps}>{this.currentGroupName}</Tag>;
   }
 
   render() {
-    const { format, subject } = this.props.annotation.attributes;
+    const { format, subject } = this.annotationAttributes;
+    const { showAnnotationCreator } = this.props;
+
     const icon = this.getIcon(format);
     return (
       <li className="notes-filtered-list__item">
@@ -103,7 +139,11 @@ class GroupItem extends Component {
             )}
             <span className="notes-filtered-list__item-inner">
               <span className="notes-filtered-list__item-text">{subject}</span>
-              {this.renderReadingGroupTag()}
+              <span className="notes-filtered-list__item-tag">
+                {showAnnotationCreator
+                  ? this.renderCreatorTag()
+                  : this.renderReadingGroupTag()}
+              </span>
             </span>
           </div>
         </button>

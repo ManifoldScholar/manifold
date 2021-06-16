@@ -214,7 +214,6 @@ export class ProjectCollectionDetailContainer extends Component {
         </h1>
         {this.renderProjects(this.props)}
         <Layout.ButtonNavigation
-          showFollowing={false}
           showProjects={false}
           grayBg={false}
           showProjectCollections

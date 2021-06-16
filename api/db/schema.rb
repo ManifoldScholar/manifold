@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_160540) do
+ActiveRecord::Schema.define(version: 2021_06_08_203933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
     t.index ["created_at"], name: "index_annotations_on_created_at", using: :brin
     t.index ["creator_id"], name: "index_annotations_on_creator_id"
     t.index ["format"], name: "index_annotations_on_format"
+    t.index ["id", "creator_id", "reading_group_id", "format", "orphaned"], name: "index_annotations_for_membership_counts"
     t.index ["reading_group_id"], name: "index_annotations_on_reading_group_id"
     t.index ["resource_id"], name: "index_annotations_on_resource_id"
     t.index ["text_section_id"], name: "index_annotations_on_text_section_id"
@@ -191,6 +192,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
     t.integer "events_count", default: 0
     t.index ["created_at"], name: "index_comments_on_created_at", using: :brin
     t.index ["creator_id"], name: "index_comments_on_creator_id"
+    t.index ["id", "subject_type", "subject_id", "creator_id"], name: "index_comments_on_annotations_by_user", where: "((subject_type)::text = 'Annotation'::text)"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["subject_type", "subject_id"], name: "index_comments_on_subject_type_and_subject_id"
   end
@@ -320,16 +322,6 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_export_targets_on_slug", unique: true
     t.index ["strategy"], name: "index_export_targets_on_strategy"
-  end
-
-  create_table "favorites", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "favoritable_id"
-    t.string "favoritable_type"
-    t.uuid "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable_type_and_favoritable_id"
-    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "features", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -469,6 +461,16 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
     t.index ["project_id"], name: "index_ingestions_on_project_id"
     t.index ["state"], name: "index_ingestions_on_state"
     t.index ["text_id"], name: "index_ingestions_on_text_id"
+  end
+
+  create_table "legacy_favorites", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid "favoritable_id"
+    t.string "favoritable_type"
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["favoritable_type", "favoritable_id"], name: "index_legacy_favorites_on_favoritable_type_and_favoritable_id"
+    t.index ["user_id"], name: "index_legacy_favorites_on_user_id"
   end
 
   create_table "makers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -676,16 +678,137 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 
+  create_table "reading_group_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "reading_group_id", null: false
+    t.integer "position"
+    t.text "title", null: false
+    t.text "description", null: false
+    t.text "slug", null: false
+    t.jsonb "fa_cache", default: {}, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reading_group_id", "position"], name: "index_reading_group_categories_ordering"
+    t.index ["reading_group_id", "slug"], name: "index_reading_group_categories_uniqueness", unique: true
+    t.index ["reading_group_id"], name: "index_reading_group_categories_on_reading_group_id"
+  end
+
+  create_table "reading_group_composite_entries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "reading_group_id", null: false
+    t.string "collectable_type", null: false
+    t.uuid "collectable_id", null: false
+    t.uuid "reading_group_category_id"
+    t.uuid "reading_group_project_id"
+    t.uuid "reading_group_resource_id"
+    t.uuid "reading_group_resource_collection_id"
+    t.uuid "reading_group_text_id"
+    t.text "collectable_jsonapi_type", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "reading_group_text_section_id"
+    t.index ["collectable_type", "collectable_id"], name: "index_rgce_collectable_reference"
+    t.index ["reading_group_category_id"], name: "index_rgce_category_reference"
+    t.index ["reading_group_id", "collectable_type", "collectable_id"], name: "index_rgce_uniqueness", unique: true
+    t.index ["reading_group_id"], name: "index_rgce_reading_group_reference"
+    t.index ["reading_group_project_id"], name: "index_rgce_project_reference"
+    t.index ["reading_group_resource_collection_id"], name: "index_rgce_resource_collection_reference"
+    t.index ["reading_group_resource_id"], name: "index_rgce_resource_reference"
+    t.index ["reading_group_text_id"], name: "index_rgce_text_reference"
+    t.index ["reading_group_text_section_id"], name: "index_rgce_text_section_reference"
+  end
+
+  create_table "reading_group_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "name", null: false
+    t.text "slug", null: false
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+  end
+
   create_table "reading_group_memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
     t.uuid "reading_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "anonymous_label"
+    t.text "aasm_state", default: "active", null: false
+    t.text "role", default: "member", null: false
+    t.text "label", default: ""
+    t.text "annotation_style", default: "solid", null: false
+    t.datetime "archived_at"
+    t.index ["aasm_state"], name: "index_reading_group_memberships_on_aasm_state"
     t.index ["reading_group_id", "anonymous_label"], name: "anonymous_label_index", unique: true
     t.index ["reading_group_id"], name: "index_reading_group_memberships_on_reading_group_id"
     t.index ["user_id", "reading_group_id"], name: "index_reading_group_memberships_on_user_id_and_reading_group_id", unique: true
     t.index ["user_id"], name: "index_reading_group_memberships_on_user_id"
+  end
+
+  create_table "reading_group_projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "reading_group_id", null: false
+    t.uuid "project_id", null: false
+    t.uuid "reading_group_category_id"
+    t.integer "position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_reading_group_projects_on_project_id"
+    t.index ["reading_group_category_id"], name: "index_reading_group_projects_on_reading_group_category_id"
+    t.index ["reading_group_id", "project_id"], name: "index_reading_group_projects_uniqueness", unique: true
+    t.index ["reading_group_id", "reading_group_category_id", "position"], name: "index_reading_group_projects_ordering"
+    t.index ["reading_group_id"], name: "index_reading_group_projects_on_reading_group_id"
+  end
+
+  create_table "reading_group_resource_collections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "reading_group_id", null: false
+    t.uuid "resource_collection_id", null: false
+    t.uuid "reading_group_category_id"
+    t.integer "position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reading_group_category_id"], name: "index_reading_group_resource_collection_category_reference"
+    t.index ["reading_group_id", "reading_group_category_id", "position"], name: "index_reading_group_resource_collections_ordering"
+    t.index ["reading_group_id", "resource_collection_id"], name: "index_reading_group_resource_collections_uniqueness", unique: true
+    t.index ["reading_group_id"], name: "index_reading_group_resource_collections_on_reading_group_id"
+    t.index ["resource_collection_id"], name: "index_reading_group_resource_collection_reference"
+  end
+
+  create_table "reading_group_resources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "reading_group_id", null: false
+    t.uuid "resource_id", null: false
+    t.uuid "reading_group_category_id"
+    t.integer "position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reading_group_category_id"], name: "index_reading_group_resources_on_reading_group_category_id"
+    t.index ["reading_group_id", "reading_group_category_id", "position"], name: "index_reading_group_resources_ordering"
+    t.index ["reading_group_id", "resource_id"], name: "index_reading_group_resources_uniqueness", unique: true
+    t.index ["reading_group_id"], name: "index_reading_group_resources_on_reading_group_id"
+    t.index ["resource_id"], name: "index_reading_group_resources_on_resource_id"
+  end
+
+  create_table "reading_group_text_sections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "reading_group_id", null: false
+    t.uuid "text_section_id", null: false
+    t.uuid "reading_group_category_id"
+    t.integer "position"
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["reading_group_category_id"], name: "index_reading_group_text_sections_on_reading_group_category_id"
+    t.index ["reading_group_id", "reading_group_category_id", "position"], name: "index_rg_text_sections_ordering"
+    t.index ["reading_group_id", "text_section_id"], name: "index_rg_text_sections_uniqueness", unique: true
+    t.index ["reading_group_id"], name: "index_reading_group_text_sections_on_reading_group_id"
+    t.index ["text_section_id"], name: "index_rg_text_section_reference"
+  end
+
+  create_table "reading_group_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "reading_group_id", null: false
+    t.uuid "text_id", null: false
+    t.uuid "reading_group_category_id"
+    t.integer "position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reading_group_category_id"], name: "index_reading_group_texts_on_reading_group_category_id"
+    t.index ["reading_group_id", "reading_group_category_id", "position"], name: "index_reading_group_texts_ordering"
+    t.index ["reading_group_id", "text_id"], name: "index_reading_group_texts_uniqueness", unique: true
+    t.index ["reading_group_id"], name: "index_reading_group_texts_on_reading_group_id"
+    t.index ["text_id"], name: "index_reading_group_texts_on_text_id"
   end
 
   create_table "reading_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -693,12 +816,15 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
     t.string "privacy", default: "private"
     t.string "invitation_code"
     t.boolean "notify_on_join", default: true
-    t.integer "memberships_count", default: 0, null: false
     t.uuid "creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "reading_group_kind_id"
+    t.jsonb "course", default: {}, null: false
+    t.index ["course"], name: "index_reading_groups_on_course", using: :gin
     t.index ["creator_id"], name: "index_reading_groups_on_creator_id"
     t.index ["invitation_code"], name: "index_reading_groups_on_invitation_code", unique: true
+    t.index ["reading_group_kind_id"], name: "index_reading_groups_on_reading_group_kind_id"
   end
 
   create_table "resource_collections", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -1076,6 +1202,80 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_collected_composite_entries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.string "collectable_type", null: false
+    t.uuid "collectable_id", null: false
+    t.uuid "project_id"
+    t.uuid "user_collected_project_id"
+    t.uuid "user_collected_resource_id"
+    t.uuid "user_collected_resource_collection_id"
+    t.uuid "user_collected_text_id"
+    t.text "collectable_jsonapi_type", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "user_collected_text_section_id"
+    t.index ["collectable_type", "collectable_id"], name: "index_ucce_collectable_reference"
+    t.index ["project_id"], name: "index_ucce_inferred_project_reference"
+    t.index ["user_collected_project_id"], name: "index_ucce_project_reference"
+    t.index ["user_collected_resource_collection_id"], name: "index_ucce_resource_collection_reference"
+    t.index ["user_collected_resource_id"], name: "index_ucce_resource_reference"
+    t.index ["user_collected_text_id"], name: "index_ucce_text_reference"
+    t.index ["user_collected_text_section_id"], name: "index_ucce_text_section_reference"
+    t.index ["user_id", "collectable_type", "collectable_id"], name: "index_ucce_uniqueness", unique: true
+    t.index ["user_id"], name: "index_ucce_user_reference"
+  end
+
+  create_table "user_collected_projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "project_id", null: false
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["project_id"], name: "index_uc_project_reference"
+    t.index ["user_id", "project_id"], name: "index_uc_project_uniqueness", unique: true
+    t.index ["user_id"], name: "index_user_collected_projects_on_user_id"
+  end
+
+  create_table "user_collected_resource_collections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "resource_collection_id", null: false
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["resource_collection_id"], name: "index_uc_resource_collection_reference"
+    t.index ["user_id", "resource_collection_id"], name: "index_uc_resource_collection_uniqueness", unique: true
+    t.index ["user_id"], name: "index_user_collected_resource_collections_on_user_id"
+  end
+
+  create_table "user_collected_resources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "resource_id", null: false
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["resource_id"], name: "index_uc_resource_reference"
+    t.index ["user_id", "resource_id"], name: "index_uc_resource_uniqueness", unique: true
+    t.index ["user_id"], name: "index_user_collected_resources_on_user_id"
+  end
+
+  create_table "user_collected_text_sections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "text_section_id", null: false
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["text_section_id"], name: "index_uc_text_section_reference"
+    t.index ["user_id", "text_section_id"], name: "index_uc_text_section_uniqueness", unique: true
+    t.index ["user_id"], name: "index_user_collected_text_sections_on_user_id"
+  end
+
+  create_table "user_collected_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "text_id", null: false
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["text_id"], name: "index_uc_text_reference"
+    t.index ["user_id", "text_id"], name: "index_uc_text_uniqueness", unique: true
+    t.index ["user_id"], name: "index_user_collected_texts_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.citext "email"
     t.string "first_name"
@@ -1162,8 +1362,32 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
   add_foreign_key "project_exportations", "projects", on_delete: :cascade
   add_foreign_key "project_exportations", "users", on_delete: :nullify
   add_foreign_key "project_exports", "projects", on_delete: :restrict
+  add_foreign_key "reading_group_categories", "reading_groups", on_delete: :cascade
+  add_foreign_key "reading_group_composite_entries", "reading_group_categories", on_delete: :nullify
+  add_foreign_key "reading_group_composite_entries", "reading_group_projects", on_delete: :cascade
+  add_foreign_key "reading_group_composite_entries", "reading_group_resource_collections", on_delete: :cascade
+  add_foreign_key "reading_group_composite_entries", "reading_group_resources", on_delete: :cascade
+  add_foreign_key "reading_group_composite_entries", "reading_group_text_sections", on_delete: :cascade
+  add_foreign_key "reading_group_composite_entries", "reading_group_texts", on_delete: :cascade
+  add_foreign_key "reading_group_composite_entries", "reading_groups", on_delete: :cascade
   add_foreign_key "reading_group_memberships", "reading_groups", on_delete: :cascade
   add_foreign_key "reading_group_memberships", "users", on_delete: :cascade
+  add_foreign_key "reading_group_projects", "projects", on_delete: :cascade
+  add_foreign_key "reading_group_projects", "reading_group_categories", on_delete: :nullify
+  add_foreign_key "reading_group_projects", "reading_groups", on_delete: :cascade
+  add_foreign_key "reading_group_resource_collections", "reading_group_categories", on_delete: :nullify
+  add_foreign_key "reading_group_resource_collections", "reading_groups", on_delete: :cascade
+  add_foreign_key "reading_group_resource_collections", "resource_collections", on_delete: :cascade
+  add_foreign_key "reading_group_resources", "reading_group_categories", on_delete: :nullify
+  add_foreign_key "reading_group_resources", "reading_groups", on_delete: :cascade
+  add_foreign_key "reading_group_resources", "resources", on_delete: :cascade
+  add_foreign_key "reading_group_text_sections", "reading_group_categories", on_delete: :nullify
+  add_foreign_key "reading_group_text_sections", "reading_groups", on_delete: :cascade
+  add_foreign_key "reading_group_text_sections", "text_sections", on_delete: :cascade
+  add_foreign_key "reading_group_texts", "reading_group_categories", on_delete: :nullify
+  add_foreign_key "reading_group_texts", "reading_groups", on_delete: :cascade
+  add_foreign_key "reading_group_texts", "texts", on_delete: :cascade
+  add_foreign_key "reading_groups", "reading_group_kinds", on_delete: :nullify
   add_foreign_key "reading_groups", "users", column: "creator_id", on_delete: :nullify
   add_foreign_key "resource_import_row_transitions", "resource_import_rows"
   add_foreign_key "resource_import_rows", "resource_imports", on_delete: :cascade
@@ -1171,6 +1395,23 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
   add_foreign_key "resource_imports", "projects", on_delete: :cascade
   add_foreign_key "resource_imports", "users", column: "creator_id"
   add_foreign_key "text_exports", "texts", on_delete: :restrict
+  add_foreign_key "user_collected_composite_entries", "projects", on_delete: :cascade
+  add_foreign_key "user_collected_composite_entries", "user_collected_projects", on_delete: :cascade
+  add_foreign_key "user_collected_composite_entries", "user_collected_resource_collections", on_delete: :cascade
+  add_foreign_key "user_collected_composite_entries", "user_collected_resources", on_delete: :cascade
+  add_foreign_key "user_collected_composite_entries", "user_collected_text_sections", on_delete: :cascade
+  add_foreign_key "user_collected_composite_entries", "user_collected_texts", on_delete: :cascade
+  add_foreign_key "user_collected_composite_entries", "users", on_delete: :cascade
+  add_foreign_key "user_collected_projects", "projects", on_delete: :cascade
+  add_foreign_key "user_collected_projects", "users", on_delete: :cascade
+  add_foreign_key "user_collected_resource_collections", "resource_collections", on_delete: :cascade
+  add_foreign_key "user_collected_resource_collections", "users", on_delete: :cascade
+  add_foreign_key "user_collected_resources", "resources", on_delete: :cascade
+  add_foreign_key "user_collected_resources", "users", on_delete: :cascade
+  add_foreign_key "user_collected_text_sections", "text_sections", on_delete: :cascade
+  add_foreign_key "user_collected_text_sections", "users", on_delete: :cascade
+  add_foreign_key "user_collected_texts", "texts", on_delete: :cascade
+  add_foreign_key "user_collected_texts", "users", on_delete: :cascade
   add_foreign_key "users_roles", "roles", on_delete: :cascade
   add_foreign_key "users_roles", "users", on_delete: :cascade
 
@@ -1248,64 +1489,6 @@ ActiveRecord::Schema.define(version: 2021_04_13_160540) do
             WHEN sv.ascending THEN dsv.dynamic_sort_value
             ELSE NULL::character varying
         END);
-  SQL
-  create_view "text_export_statuses", sql_definition: <<-SQL
-    SELECT t.id AS text_id,
-    te.id AS text_export_id,
-        CASE te.export_kind
-            WHEN 'epub_v3'::text THEN (t.export_configuration @> '{"epub_v3": true}'::jsonb)
-            ELSE false
-        END AS autoexport,
-    te.export_kind,
-    te.fingerprint AS export_fingerprint,
-    (t.fingerprint = te.fingerprint) AS current,
-    (t.fingerprint <> te.fingerprint) AS stale,
-    te.created_at AS exported_at
-   FROM (texts t
-     JOIN text_exports te ON ((t.id = te.text_id)));
-  SQL
-  create_view "project_export_statuses", sql_definition: <<-SQL
-    SELECT p.id AS project_id,
-    pe.id AS project_export_id,
-        CASE pe.export_kind
-            WHEN 'bag_it'::text THEN (p.export_configuration @> '{"bag_it": true}'::jsonb)
-            ELSE false
-        END AS autoexport,
-    pe.export_kind,
-    pe.fingerprint AS export_fingerprint,
-    (p.fingerprint = pe.fingerprint) AS current,
-    (p.fingerprint <> pe.fingerprint) AS stale,
-    pe.created_at AS exported_at
-   FROM (projects p
-     JOIN project_exports pe ON ((p.id = pe.project_id)));
-  SQL
-  create_view "user_derived_roles", sql_definition: <<-SQL
-    SELECT u.id AS user_id,
-    COALESCE((array_agg(r.name ORDER BY
-        CASE r.name
-            WHEN 'admin'::text THEN 1
-            WHEN 'editor'::text THEN 2
-            WHEN 'project_creator'::text THEN 3
-            WHEN 'marketeer'::text THEN 4
-            WHEN 'reader'::text THEN 8
-            ELSE 20
-        END) FILTER (WHERE (r.kind = 'global'::text)))[1], 'reader'::character varying) AS role,
-    COALESCE((array_agg(r.name ORDER BY
-        CASE r.name
-            WHEN 'admin'::text THEN 1
-            WHEN 'editor'::text THEN 2
-            WHEN 'project_creator'::text THEN 3
-            WHEN 'marketeer'::text THEN 4
-            WHEN 'project_editor'::text THEN 5
-            WHEN 'project_resource_editor'::text THEN 6
-            WHEN 'project_author'::text THEN 7
-            WHEN 'reader'::text THEN 8
-            ELSE 20
-        END) FILTER (WHERE (r.kind = ANY (ARRAY['global'::text, 'scoped'::text]))))[1], 'reader'::character varying) AS kind
-   FROM ((users u
-     LEFT JOIN users_roles ur ON ((ur.user_id = u.id)))
-     LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
-  GROUP BY u.id;
   SQL
   create_view "entitlement_assigned_roles", sql_definition: <<-SQL
     SELECT ur.user_id,
@@ -1473,25 +1656,63 @@ UNION ALL
   GROUP BY ur.user_id, r.resource_id, r.resource_type
  HAVING ((r.resource_id IS NOT NULL) AND (r.resource_type IS NOT NULL));
   SQL
-  create_view "reading_group_membership_counts", sql_definition: <<-SQL
-    SELECT rgm.id AS reading_group_membership_id,
-    count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
-    count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-    count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
-    count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count
-   FROM (reading_group_memberships rgm
-     LEFT JOIN annotations a ON (((a.creator_id = rgm.user_id) AND (a.reading_group_id = rgm.reading_group_id))))
-  GROUP BY rgm.id;
+  create_view "project_export_statuses", sql_definition: <<-SQL
+    SELECT p.id AS project_id,
+    pe.id AS project_export_id,
+        CASE pe.export_kind
+            WHEN 'bag_it'::text THEN (p.export_configuration @> '{"bag_it": true}'::jsonb)
+            ELSE false
+        END AS autoexport,
+    pe.export_kind,
+    pe.fingerprint AS export_fingerprint,
+    (p.fingerprint = pe.fingerprint) AS current,
+    (p.fingerprint <> pe.fingerprint) AS stale,
+    pe.created_at AS exported_at
+   FROM (projects p
+     JOIN project_exports pe ON ((p.id = pe.project_id)));
   SQL
-  create_view "reading_group_counts", sql_definition: <<-SQL
-    SELECT rg.id AS reading_group_id,
-    count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
-    count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-    count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
-    count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count
-   FROM (reading_groups rg
-     LEFT JOIN annotations a ON ((a.reading_group_id = rg.id)))
-  GROUP BY rg.id;
+  create_view "text_export_statuses", sql_definition: <<-SQL
+    SELECT t.id AS text_id,
+    te.id AS text_export_id,
+        CASE te.export_kind
+            WHEN 'epub_v3'::text THEN (t.export_configuration @> '{"epub_v3": true}'::jsonb)
+            ELSE false
+        END AS autoexport,
+    te.export_kind,
+    te.fingerprint AS export_fingerprint,
+    (t.fingerprint = te.fingerprint) AS current,
+    (t.fingerprint <> te.fingerprint) AS stale,
+    te.created_at AS exported_at
+   FROM (texts t
+     JOIN text_exports te ON ((t.id = te.text_id)));
+  SQL
+  create_view "user_derived_roles", sql_definition: <<-SQL
+    SELECT u.id AS user_id,
+    COALESCE((array_agg(r.name ORDER BY
+        CASE r.name
+            WHEN 'admin'::text THEN 1
+            WHEN 'editor'::text THEN 2
+            WHEN 'project_creator'::text THEN 3
+            WHEN 'marketeer'::text THEN 4
+            WHEN 'reader'::text THEN 8
+            ELSE 20
+        END) FILTER (WHERE (r.kind = 'global'::text)))[1], 'reader'::character varying) AS role,
+    COALESCE((array_agg(r.name ORDER BY
+        CASE r.name
+            WHEN 'admin'::text THEN 1
+            WHEN 'editor'::text THEN 2
+            WHEN 'project_creator'::text THEN 3
+            WHEN 'marketeer'::text THEN 4
+            WHEN 'project_editor'::text THEN 5
+            WHEN 'project_resource_editor'::text THEN 6
+            WHEN 'project_author'::text THEN 7
+            WHEN 'reader'::text THEN 8
+            ELSE 20
+        END) FILTER (WHERE (r.kind = ANY (ARRAY['global'::text, 'scoped'::text]))))[1], 'reader'::character varying) AS kind
+   FROM ((users u
+     LEFT JOIN users_roles ur ON ((ur.user_id = u.id)))
+     LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
+  GROUP BY u.id;
   SQL
   create_view "text_title_summaries", sql_definition: <<-SQL
     SELECT text_titles.text_id,
@@ -1576,5 +1797,172 @@ UNION ALL
            FROM (collaborators c
              JOIN makers m ON ((m.id = c.maker_id)))
           WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
+  SQL
+  create_view "reading_group_composite_entry_rankings", sql_definition: <<-SQL
+    SELECT rgce.id AS reading_group_composite_entry_id,
+    rgce.reading_group_id,
+    rgce.reading_group_category_id,
+    rgce.collectable_type,
+    rgce.collectable_id,
+    rgce.collectable_jsonapi_type,
+    rgc."position" AS category_position,
+    COALESCE(rgep."position", rger."position", rgerc."position", rget."position") AS "position"
+   FROM (((((reading_group_composite_entries rgce
+     LEFT JOIN reading_group_categories rgc ON ((rgce.reading_group_category_id = rgc.id)))
+     LEFT JOIN reading_group_projects rgep ON ((rgce.reading_group_project_id = rgep.id)))
+     LEFT JOIN reading_group_resources rger ON ((rgce.reading_group_resource_id = rger.id)))
+     LEFT JOIN reading_group_resource_collections rgerc ON ((rgce.reading_group_resource_collection_id = rgerc.id)))
+     LEFT JOIN reading_group_texts rget ON ((rgce.reading_group_text_id = rget.id)));
+  SQL
+  create_view "reading_group_visibilities", sql_definition: <<-SQL
+    SELECT rg.id AS reading_group_id,
+    rgm.id AS reading_group_membership_id,
+    u.id AS user_id,
+    rg.privacy,
+    ((rgm.id IS NULL) AND ((rg.privacy)::text = 'public'::text)) AS joinable,
+    ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'active'::text)) AS joined,
+    ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'archived'::text)) AS archived,
+    (((rgm.id IS NULL) AND ((rg.privacy)::text = 'public'::text)) OR ((rgm.id IS NOT NULL) AND (rgm.aasm_state = 'active'::text))) AS visible,
+    (rg.creator_id = u.id) AS created
+   FROM ((users u
+     CROSS JOIN reading_groups rg)
+     LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = rg.id) AND (rgm.user_id = u.id))));
+  SQL
+  create_view "annotation_reading_group_memberships", sql_definition: <<-SQL
+    SELECT a.id AS annotation_id,
+    a.reading_group_id,
+    a.creator_id AS user_id,
+    rgm.id AS reading_group_membership_id,
+    rgm.aasm_state
+   FROM (annotations a
+     LEFT JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = a.reading_group_id) AND (rgm.user_id = a.creator_id))))
+  WHERE ((a.creator_id IS NOT NULL) AND (a.reading_group_id IS NOT NULL));
+  SQL
+  create_view "favorites", sql_definition: <<-SQL
+    SELECT user_collected_composite_entries.id,
+    user_collected_composite_entries.user_id,
+    user_collected_composite_entries.collectable_type AS favoritable_type,
+    user_collected_composite_entries.collectable_id AS favoritable_id,
+    user_collected_composite_entries.project_id,
+    user_collected_composite_entries.created_at,
+    user_collected_composite_entries.updated_at
+   FROM user_collected_composite_entries;
+  SQL
+  create_view "user_collections", sql_definition: <<-SQL
+    WITH category_type_ids AS (
+         SELECT x.user_id,
+            '$uncategorized$'::text AS category_id,
+            x.collectable_jsonapi_type,
+            jsonb_agg(x.collectable_id ORDER BY x.created_at DESC) AS ids
+           FROM user_collected_composite_entries x
+          GROUP BY x.user_id, '$uncategorized$'::text, x.collectable_jsonapi_type
+        ), category_mappings AS (
+         SELECT cti.user_id,
+            cti.category_id,
+            jsonb_object_agg(cti.collectable_jsonapi_type, cti.ids) AS mapping
+           FROM category_type_ids cti
+          GROUP BY cti.user_id, cti.category_id
+        ), collection_mappings AS (
+         SELECT cm_1.user_id,
+            jsonb_object_agg(cm_1.category_id, cm_1.mapping) AS mapping
+           FROM category_mappings cm_1
+          GROUP BY cm_1.user_id
+        )
+ SELECT ((u.id)::text || '-collection'::text) AS id,
+    u.id AS user_id,
+    '[]'::jsonb AS categories,
+    COALESCE(cm.mapping, '{}'::jsonb) AS category_mappings
+   FROM (users u
+     LEFT JOIN collection_mappings cm ON ((cm.user_id = u.id)));
+  SQL
+  create_view "reading_group_collections", sql_definition: <<-SQL
+    WITH category_type_ids AS (
+         SELECT x.reading_group_id,
+            COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text) AS category_id,
+            x.collectable_jsonapi_type,
+            jsonb_agg(x.collectable_id ORDER BY x."position") AS ids
+           FROM reading_group_composite_entry_rankings x
+          GROUP BY x.reading_group_id, COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text), x.collectable_jsonapi_type
+        ), category_mappings AS (
+         SELECT cti.reading_group_id,
+            cti.category_id,
+            jsonb_object_agg(cti.collectable_jsonapi_type, cti.ids) AS mapping
+           FROM category_type_ids cti
+          GROUP BY cti.reading_group_id, cti.category_id
+        ), collection_mappings AS (
+         SELECT cm_1.reading_group_id,
+            jsonb_object_agg(cm_1.category_id, cm_1.mapping) AS mapping
+           FROM category_mappings cm_1
+          GROUP BY cm_1.reading_group_id
+        ), category_lists AS (
+         SELECT rgc.reading_group_id,
+            jsonb_agg(jsonb_build_object('id', rgc.id, 'title', (rgc.fa_cache -> 'title'::text), 'description', (rgc.fa_cache -> 'description'::text), 'position', rgc."position") ORDER BY rgc."position") AS categories
+           FROM reading_group_categories rgc
+          GROUP BY rgc.reading_group_id
+        )
+ SELECT ((rg.id)::text || '-collection'::text) AS id,
+    rg.id AS reading_group_id,
+    COALESCE(cl.categories, '[]'::jsonb) AS categories,
+    COALESCE(cm.mapping, '{}'::jsonb) AS category_mappings
+   FROM ((reading_groups rg
+     LEFT JOIN category_lists cl ON ((cl.reading_group_id = rg.id)))
+     LEFT JOIN collection_mappings cm ON ((cm.reading_group_id = rg.id)));
+  SQL
+  create_view "reading_group_membership_counts", sql_definition: <<-SQL
+    SELECT rgm.id AS reading_group_membership_id,
+    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count,
+    count(DISTINCT c.id) FILTER (WHERE (NOT a.orphaned)) AS comments_count,
+    count(DISTINCT c.id) FILTER (WHERE a.orphaned) AS orphaned_comments_count
+   FROM ((reading_group_memberships rgm
+     LEFT JOIN annotations a ON ((a.reading_group_id = rgm.reading_group_id)))
+     LEFT JOIN comments c ON ((((c.subject_type)::text = 'Annotation'::text) AND (c.subject_id = a.id) AND (c.creator_id = rgm.user_id))))
+  GROUP BY rgm.id;
+  SQL
+  create_view "reading_group_counts", sql_definition: <<-SQL
+    SELECT rg.id AS reading_group_id,
+    count(DISTINCT rgm.id) AS memberships_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count,
+    count(DISTINCT c.id) FILTER (WHERE (NOT a.orphaned)) AS comments_count,
+    count(DISTINCT c.id) FILTER (WHERE a.orphaned) AS orphaned_comments_count
+   FROM (((reading_groups rg
+     LEFT JOIN annotations a ON ((a.reading_group_id = rg.id)))
+     LEFT JOIN reading_group_memberships rgm ON ((rgm.reading_group_id = rg.id)))
+     LEFT JOIN comments c ON ((((c.subject_type)::text = 'Annotation'::text) AND (c.subject_id = a.id) AND (c.creator_id = rgm.user_id))))
+  GROUP BY rg.id;
+  SQL
+  create_view "reading_group_user_counts", sql_definition: <<-SQL
+    SELECT rg.id AS reading_group_id,
+    rgm.user_id,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count,
+    count(DISTINCT c.id) FILTER (WHERE (NOT a.orphaned)) AS comments_count,
+    count(DISTINCT c.id) FILTER (WHERE a.orphaned) AS orphaned_comments_count
+   FROM (((reading_groups rg
+     LEFT JOIN annotations a ON ((a.reading_group_id = rg.id)))
+     LEFT JOIN reading_group_memberships rgm ON ((rgm.reading_group_id = rg.id)))
+     LEFT JOIN comments c ON ((((c.subject_type)::text = 'Annotation'::text) AND (c.subject_id = a.id) AND (c.creator_id = rgm.user_id))))
+  GROUP BY rg.id, rgm.user_id;
+  SQL
+  create_view "annotation_membership_comments", sql_definition: <<-SQL
+    SELECT c.id AS comment_id,
+    c.creator_id AS user_id,
+    c.subject_id AS annotation_id,
+    c.parent_id,
+    a.creator_id AS annotation_user_id,
+    a.reading_group_id,
+    rgm.id AS reading_group_membership_id,
+    rgm.aasm_state
+   FROM ((comments c
+     JOIN annotations a ON ((a.id = c.subject_id)))
+     JOIN reading_group_memberships rgm ON (((rgm.reading_group_id = a.reading_group_id) AND (rgm.user_id = c.creator_id))))
+  WHERE (((c.subject_type)::text = 'Annotation'::text) AND (a.reading_group_id IS NOT NULL) AND (a.creator_id IS NOT NULL) AND (a.creator_id <> c.creator_id));
   SQL
 end

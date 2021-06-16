@@ -10,7 +10,7 @@ exports[`frontend/components/resource-list/Thumbnails matches the snapshot 1`] =
     >
       <Link
         className="resource-link"
-        to="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resource/slug-resource-0"
+        to="/projects/delegated-project-slug/resource/slug-resource-0"
       >
         <Resourceish.Thumbnail
           additionalClasses=""
@@ -672,7 +672,7 @@ exports[`frontend/components/resource-list/Thumbnails matches the snapshot 1`] =
     >
       <Link
         className="resource-link"
-        to="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resource/slug-resource-1"
+        to="/projects/delegated-project-slug/resource/slug-resource-1"
       >
         <Resourceish.Thumbnail
           additionalClasses=""
@@ -1334,7 +1334,7 @@ exports[`frontend/components/resource-list/Thumbnails matches the snapshot 1`] =
     >
       <Link
         className="resource-link"
-        to="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resource/slug-resource-2"
+        to="/projects/delegated-project-slug/resource/slug-resource-2"
       >
         <Resourceish.Thumbnail
           additionalClasses=""

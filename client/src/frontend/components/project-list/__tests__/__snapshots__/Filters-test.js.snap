@@ -1,44 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/project-list/Filters matches the snapshot 1`] = `
-<Fragment>
-  <div
-    aria-atomic={true}
-    aria-live="polite"
-    className="screen-reader-text"
-    role="status"
-  />
-  <ProjectList.Filters
-    setScreenReaderStatus={[Function]}
-    subjects={
-      Array [
-        Object {
-          "attributes": Object {
-            "name": "Hip Hop",
+<WithScreenReaderStatus('Global.List.Filters)
+  className="entity-section-wrapper__tools"
+  filters={
+    Array [
+      Object {
+        "label": "Sort results",
+        "onChange": [Function],
+        "options": Array [
+          Object {
+            "label": "Sort",
+            "value": "",
           },
-          "id": "subject-0",
-          "relationships": Object {},
-          "type": "subjects",
-        },
-        Object {
-          "attributes": Object {
-            "name": "Hip Hop",
+          Object {
+            "label": "A–Z",
+            "value": "sort_title ASC",
           },
-          "id": "subject-1",
-          "relationships": Object {},
-          "type": "subjects",
-        },
-        Object {
-          "attributes": Object {
-            "name": "Hip Hop",
+          Object {
+            "label": "Z–A",
+            "value": "sort_title DESC",
           },
-          "id": "subject-2",
-          "relationships": Object {},
-          "type": "subjects",
-        },
-      ]
+        ],
+        "value": "",
+      },
+      Object {
+        "label": "Filter results",
+        "onChange": [Function],
+        "options": Array [
+          Object {
+            "label": "Show all",
+            "value": "",
+          },
+          Object {
+            "label": "Featured Projects",
+            "value": "featured",
+          },
+          Object {
+            "label": "Hip Hop",
+            "value": "subject-0",
+          },
+          Object {
+            "label": "Hip Hop",
+            "value": "subject-1",
+          },
+          Object {
+            "label": "Hip Hop",
+            "value": "subject-2",
+          },
+        ],
+        "value": "",
+      },
+    ]
+  }
+  onReset={[Function]}
+  onSubmit={[Function]}
+  searchProps={
+    Object {
+      "onChange": [Function],
+      "value": "",
     }
-    updateAction={[MockFunction]}
-  />
-</Fragment>
+  }
+  showResetButton={false}
+/>
 `;

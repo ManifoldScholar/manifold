@@ -8,13 +8,15 @@ export default class ReaderDrawer extends PureComponent {
   static displayName = "Notes.ReaderDrawer";
 
   static propTypes = {
+    match: PropTypes.object,
+    history: PropTypes.object,
     visible: PropTypes.bool
   };
 
-  renderNotesDrawerContents(props) {
-    if (!props.visible) return null;
+  renderNotesDrawerContents() {
+    if (!this.props.visible) return null;
     return (
-      <ReaderNotes filterable>
+      <ReaderNotes match={this.props.match} history={this.props.history}>
         <FilteredList />
       </ReaderNotes>
     );
@@ -30,12 +32,13 @@ export default class ReaderDrawer extends PureComponent {
       lockScroll: "always",
       includeDrawerFrontMatter: true,
       focusTrap: false,
-      title: "My Notes"
+      title: "Notes",
+      closeCallback: this.props.closeCallback
     };
 
     return (
       <GlobalDrawer.Wrapper {...drawerProps}>
-        {this.renderNotesDrawerContents(this.props)}
+        {this.renderNotesDrawerContents()}
       </GlobalDrawer.Wrapper>
     );
   }

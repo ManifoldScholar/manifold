@@ -27,6 +27,13 @@ export default {
     };
   },
 
+  annotatedTexts() {
+    return {
+      endpoint: `/api/v1/me/relationships/annotated_texts`,
+      method: "GET"
+    };
+  },
+
   readingGroups(filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/me/relationships/reading_groups`,
@@ -34,6 +41,23 @@ export default {
       options: {
         params: { filter, page }
       }
+    };
+  },
+
+  myCollection() {
+    return {
+      endpoint: "/api/v1/me/relationships/collection",
+      method: "GET",
+      options: {}
+    };
+  },
+
+  myCollected(entity) {
+    return {
+      eagerLoad: true,
+      endpoint: `/api/v1/me/relationships/${entity}`,
+      method: "GET",
+      options: {}
     };
   }
 };

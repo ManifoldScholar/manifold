@@ -4,8 +4,7 @@ import GroupsTable from "../Table/Groups";
 import MembersTable from "../Table/Members";
 import JoinBox from "../JoinBox";
 import Heading from "../Heading";
-import GroupSummaryBox from "../GroupSummaryBox";
-import NoteFilter from "../NoteFilter";
+import GroupSummaryBox from "../Heading/GroupSummaryBox";
 
 const groups = fixtures.collectionFactory("readingGroup", 8);
 const user = fixtures.factory("user");
@@ -51,26 +50,8 @@ storiesOf("Frontend/ReadingGroup", module)
     return <JoinBox />;
   })
   .add("Heading", () => {
-    return (
-      <Heading
-        buttons={[
-          {
-            to: "/foo",
-            text: "See all Members"
-          },
-          {
-            to: "/bar",
-            text: "Edit Group"
-          }
-        ]}
-      >
-        Heading text here
-      </Heading>
-    );
+    return <Heading readingGroup={group} />;
   })
   .add("Group Summary Box", () => {
     return <GroupSummaryBox readingGroup={group} />;
-  })
-  .add("Note Filter", () => {
-    return <NoteFilter readingGroup={group} pagination={pagination} />;
   });

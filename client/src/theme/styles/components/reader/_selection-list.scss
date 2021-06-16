@@ -1,10 +1,5 @@
 .selection-list {
   @include listUnstyled;
-  padding-bottom: 50px;
-
-  @include respond($break75) {
-    padding-bottom: 110px;
-  }
 
   // Separated list, used on list pages/overlays
   &--separated {

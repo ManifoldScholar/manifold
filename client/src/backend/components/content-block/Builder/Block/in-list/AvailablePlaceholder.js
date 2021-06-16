@@ -16,7 +16,7 @@ export default class ProjectContentBlockInListAvailablePlaceholder extends PureC
     return (
       <TypeComponent>
         {block => (
-          <div className="content-block__inner">
+          <div className="backend-content-block__inner">
             <Identity icon={block.icon} title={block.title} />
             <Utility.IconComposer icon="circlePlus32" size={32} />
           </div>

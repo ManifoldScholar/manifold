@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.7
   DisplayCopNames: true
   Exclude:
       - 'vendor/**/*'
@@ -32,6 +32,11 @@ Metrics/ModuleLength:
 
 Metrics/ClassLength:
   Enabled: false
+
+Metrics/AbcSize:
+  Enabled: true
+  Exclude:
+    - 'app/services/collections'
 
 Layout/HashAlignment:
   EnforcedLastArgumentHashStyle: ignore_implicit
@@ -172,6 +177,9 @@ Style/OptionalBooleanParameter:
 Style/RedundantAssignment:
   Enabled: true
 
+Style/RedundantBegin:
+  Enabled: false
+
 Style/RedundantFileExtensionInRequire:
   Enabled: true
 
@@ -180,7 +188,6 @@ Style/SingleArgumentDig:
 
 Style/StringConcatenation:
   Enabled: false
-
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -262,7 +269,7 @@ Style/RedundantRegexpEscape:
   Enabled: true
 
 Style/SlicingWithRange:
-  Enabled: true
+  Enabled: false
 
 Style/ClassEqualityComparison:
   Enabled: true

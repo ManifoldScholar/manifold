@@ -1,5 +1,6 @@
 class TextSummary < ApplicationRecord
   include Attachments
+  include TableOfContentsWithCollected
   include View
 
   self.primary_key = :id
@@ -14,6 +15,8 @@ class TextSummary < ApplicationRecord
   manifold_has_attached_file :cover, :image
 
   serialize :toc, Array
+
+  delegate :collected_by?, to: :text
 
   alias_attribute :toc_section_id, :toc_section
 

@@ -10,7 +10,8 @@ export default class AnnotationListDefault extends PureComponent {
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func,
     annotations: PropTypes.array,
-    handleVisitAnnotation: PropTypes.func
+    handleVisitAnnotation: PropTypes.func,
+    showCommentsToggleAsBlock: PropTypes.bool
   };
 
   get notesListClassNames() {
@@ -19,6 +20,10 @@ export default class AnnotationListDefault extends PureComponent {
 
   get selectionListClassNames() {
     return "notes-list__item-outer";
+  }
+
+  get showCommentsToggleAsBlock() {
+    return this.props.showCommentsToggleAsBlock;
   }
 
   render() {
@@ -33,16 +38,19 @@ export default class AnnotationListDefault extends PureComponent {
                   visitHandler={this.props.handleVisitAnnotation}
                   annotation={annotation}
                   displayFormat="fullPage"
+                  showCommentsToggleAsBlock={this.showCommentsToggleAsBlock}
                 />
               </li>
             );
           })}
         </ul>
         {pagination && (
-          <Utility.Pagination
-            paginationClickHandler={paginationClickHandler}
-            pagination={pagination}
-          />
+          <div className="entity-section-wrapper__pagination">
+            <Utility.Pagination
+              paginationClickHandler={paginationClickHandler}
+              pagination={pagination}
+            />
+          </div>
         )}
       </>
     );

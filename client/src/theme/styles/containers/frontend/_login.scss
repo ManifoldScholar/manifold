@@ -1,15 +1,22 @@
 .login-page {
-  width: 300px;
+  width: 100%;
+  max-width: calc(300px + #{$containerPaddingNarrow} * 2);
   margin: auto;
 
+  @include respond($break35) {
+    max-width: calc(300px + #{$containerPaddingResp} * 2);
+  }
+
+  @include respond($break120) {
+    max-width: calc(300px + #{$containerPaddingFull} * 2);
+  }
+
   .login-form {
-
-    width: 300px;
-
     @include loginFormPrimary;
+    @include templateCopy;
+    font-size: 18px;
 
     input[type='text'], input[type='email'], input[type='password'] {
-      width: 300px;
       border-color: $neutral40;
     }
   }

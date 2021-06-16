@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`frontend/components/TextList/ListItem/Counts matches the snapshot 1`] = `
+<ul
+  className="text-counts__interaction-list"
+>
+  <li
+    className="text-counts__interaction"
+  >
+    <IconComposer
+      fill="currentColor"
+      icon="interactAnnotate32"
+      iconClass="text-counts__interaction-icon"
+      size={32}
+      svgProps={
+        Object {
+          "aria-hidden": true,
+        }
+      }
+    />
+    <span
+      aria-hidden={true}
+      className="text-counts__interaction-label"
+    />
+    <span
+      className="screen-reader-text"
+    >
+      This text has 
+       annotations
+    </span>
+  </li>
+  <li
+    className="text-counts__interaction"
+  >
+    <IconComposer
+      fill="currentColor"
+      icon="interactHighlight32"
+      iconClass="text-counts__interaction-icon"
+      size={32}
+      svgProps={
+        Object {
+          "aria-hidden": true,
+        }
+      }
+    />
+    <span
+      aria-hidden={true}
+      className="text-counts__interaction-label"
+    />
+    <span
+      className="screen-reader-text"
+    >
+      This text has 
+       highlights
+    </span>
+  </li>
+</ul>
+`;

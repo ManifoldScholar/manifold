@@ -1,41 +1,5 @@
 // Secondary form inputs. These include all of the form inputs (and more)
 // Outlined in 'form-inputs-primary', but change visually with this wrapper.
-@mixin formInputSecondary {
-  @include formInputPrimary;
-  box-sizing: border-box;
-  width: 100%;
-  // Explicit height so that elements can line up
-  height: 32px;
-  // Declared in em as it should change with font size
-  padding: 0;
-  font-size: 16px;
-  vertical-align: top;
-  background-color: transparent;
-  // Override border
-  border: 0;
-  border-bottom: 1px solid $neutralUIDullLight;
-  outline: 0;
-  transition: border-color $duration $timing;
-
-  @include respond($break60) {
-    height: 42px;
-    font-size: 18px;
-  }
-
-  &::placeholder {
-    color: $neutralUILight;
-  }
-
-  .bg-neutral90 & {
-    &:-webkit-autofill {
-      box-shadow: 0 0 0 1000px $neutral90 inset;
-      // Important required to override chrome default
-      /* stylelint-disable declaration-no-important */
-      -webkit-text-fill-color: $accentPrimaryPale !important;
-      /* stylelint-enable declaration-no-important */
-    }
-  }
-}
 
 /* I'm sorry for everything --ZD */
 .form-section .form-input-group > .form-input .form-select--rounded .form-select {
@@ -67,24 +31,9 @@
   }
 
   .instructions {
-    @include templateCopy;
+    @include formInstructions;
     display: block;
     margin-top: 0.75em;
-    font-size: 15px;
-    font-style: italic;
-    text-transform: none;
-
-    @include respond($break60) {
-      font-size: 17px;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    &.space-bottom {
-      margin-bottom: 2em;
-    }
 
     &--inline {
       display: inline;
@@ -109,7 +58,7 @@
     margin-top: 0.75em;
     font-size: 17px;
     font-style: italic;
-    color: $accentInteractionLight;
+    color: var(--default-highlight-color);
     text-align: right;
     text-transform: none;
   }
@@ -129,6 +78,14 @@
       &.secondary {
         font-weight: normal;
       }
+
+      &.toggle {
+        margin-bottom: 1em;
+      }
+
+      &.pad-bottom {
+        margin-bottom: 1em;
+      }
     }
 
     input[type='text'], input[type='email'], input[type='password'], input[type='number'] {
@@ -141,19 +98,20 @@
     }
 
     textarea {
-      @include templateCopy;
       width: 100%;
       padding: 1.2em;
+      font-family: var(--textarea-font-family);
       font-size: 16px;
-      color: $neutralTextExtraLight;
+      color: var(--default-color);
       resize: vertical;
-      background-color: transparent;
-      border: 1px solid $neutralUIDullLight;
+      background-color: var(--textarea-bg-color);
+      border: 1px solid var(--textarea-border-color);
+      border-radius: $panelRoundedRadius;
       outline: none;
       transition: border-color $duration $timing;
 
       @include respond($break70) {
-        padding: 1.579em;
+        padding: 1.25em 1.389em;
         font-size: 18px;
       }
 
@@ -162,7 +120,7 @@
       }
 
       &:focus-visible {
-        border-color: $accentPrimary;
+        border-color: var(--default-highlight-color);
       }
     }
 
@@ -210,7 +168,7 @@
 
       .toggle-indicator {
         position: absolute;
-        top: 2px;
+        top: -3px;
         right: 0;
       }
 
@@ -285,6 +243,10 @@
 
   // Dropdown
   .form-select {
+    $_icon-size: 24px;
+    $_icon-padding: 12px;
+    $_select-inline-end-padding: $_icon-size + 2 * $_icon-padding;
+
     width: auto;
 
     &__icon {
@@ -303,13 +265,13 @@
 
     select {
       @include formInputSecondary;
-      padding: 0 42px 0.75em 0; // OD
+      padding: 0 $_select-inline-end-padding 0.75em 0; // OD
       font-size: 16px;
       line-height: normal;
       text-transform: none; // OD
 
       &:focus-visible {
-        border-color: $accentPrimaryLight;
+        border-color: var(--default-highlight-color);
       }
     }
 
@@ -321,11 +283,10 @@
       .form-select__icon {
         position: absolute;
         top: 50%;
-        right: 8px;
-        width: auto;
-        width: 22px;
-        height: 22px;
-        color: $neutralUIDullLight;
+        right: $_icon-padding;
+        width: $_icon-size;
+        height: $_icon-size;
+        color: currentColor;
         pointer-events: none;
         transform: translateY(-50%);
 
@@ -335,29 +296,23 @@
         }
       }
 
-
       select {
         @include unstyledSelect;
         @include utilityPrimary;
+        @include textTruncate;
         width: auto;
-        height: 2.857em;
-        padding-right: 32px;
+        height: 40px;
+        padding-right: $_select-inline-end-padding;
         padding-bottom: 0;
         padding-left: 13px;
-        overflow: hidden;
-        font-size: 16px;
-        font-weight: $regular;
-        text-overflow: ellipsis;
-        text-transform: none;
-        letter-spacing: normal;
-        white-space: nowrap;
-        background-color: $neutral90; // required for `option` to inherit in FF
+        font-size: 13px;
+        background-color: var(--select-bg-color); // required for `option` to inherit in FF
         border: 1px solid $neutralUIDullLight;
-        border-radius: 8px;
+        border-radius: $panelRoundedRadius;
         transition: border-color $duration $timing;
 
         &:focus-visible {
-          border-color: $accentPrimary;
+          border-color: var(--default-highlight-color);
         }
       }
     }
@@ -372,7 +327,8 @@
     justify-content: center;
     max-width: 350px;
     min-height: 200px;
-    border: 1px solid $neutralUIDullLight;
+    border: 1px solid var(--textarea-border-color);
+    border-radius: $panelRoundedRadius;
     transition: border-color 0.2s;
 
     .primary {

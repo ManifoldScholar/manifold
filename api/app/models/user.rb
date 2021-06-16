@@ -1,11 +1,10 @@
 # The User model
 class User < ApplicationRecord
-  # Constants
   TYPEAHEAD_ATTRIBUTES = [:title, :first_name, :last_name, :email].freeze
 
-  # Concerns
   include Authority::Abilities
   include Authority::UserAbilities
+  include Collector
   include SerializedAbilitiesOn
   include SerializedAbilitiesFor
   include NotificationPreferences
@@ -20,14 +19,13 @@ class User < ApplicationRecord
   classy_enum_attr :role, enum: "RoleName", allow_blank: false, default: :reader
   classy_enum_attr :kind, enum: "RoleName", allow_blank: false, default: :reader
 
-  # Rolify
   rolify after_add: :synchronize_kind!, after_remove: :synchronize_kind!
 
-  # Associations
   has_many :identities, inverse_of: :user, autosave: true, dependent: :destroy
   has_many :annotations, foreign_key: "creator_id", dependent: :destroy,
            inverse_of: :creator
-  has_many :favorites, dependent: :destroy
+  has_many :annotated_texts, -> { distinct }, through: :annotations, source: :text
+  has_many :favorites
   has_many :favorite_projects, through: :favorites, source: :favoritable,
            source_type: "Project"
   has_many :favorite_texts, through: :favorites, source: :favoritable, source_type: "Text"
@@ -42,14 +40,23 @@ class User < ApplicationRecord
   has_many :created_flags, class_name: "Flag", foreign_key: "creator_id",
            dependent: :destroy, inverse_of: :creator
   has_many :reading_group_memberships, dependent: :destroy
-  has_many :reading_groups, through: :reading_group_memberships
+  has_many :reading_groups, -> { merge(ReadingGroupMembership.active) }, through: :reading_group_memberships
+  has_many :archived_reading_groups, -> { merge(ReadingGroupMembership.archived) },
+           through: :reading_group_memberships, source: :reading_group
+  has_many :reading_group_visibilities
+  has_many :reading_group_user_counts
+  has_many :visible_reading_groups, -> { merge(ReadingGroupVisibility.visible) },
+           through: :reading_group_visibilities, source: :reading_group
   has_many :entitlement_user_links, inverse_of: :user, dependent: :destroy
   has_many :granted_entitlements, through: :entitlement_user_links, source: :entitlement
   has_many :permissions
 
+  has_one :user_collection, inverse_of: :user
+
+  has_many_collectables!
+
   has_one :derived_role, inverse_of: :user, class_name: "UserDerivedRole"
 
-  # Validation
   validates :password, length: { minimum: 8 }, allow_nil: true, confirmation: true
   validate :password_not_blank!
   validates :email, presence: true, case_sensitive: false
@@ -116,12 +123,15 @@ class User < ApplicationRecord
     has_role? :project_resource_editor, resource
   end
 
+  # @return [Favorite]
   def favorite(favoritable)
-    favorites.create(favoritable: favoritable)
+    collect_model!(favoritable).favorite
   end
 
   def favorite?(favoritable)
-    favorites.where(favoritable_id: favoritable.id).count.positive?
+    favoritable = favoritable.favoritable if favoritable.is_a?(Favorite)
+
+    collectable_scope_for(favoritable).exists?
   end
 
   def to_s
@@ -140,6 +150,23 @@ class User < ApplicationRecord
     return false unless resource.respond_to? :creator
 
     resource.creator == self
+  end
+
+  # @param [ReadingGroup]
+  # @return [ReadingGroupUserCount, nil]
+  def reading_group_count_for(reading_group)
+    reading_group_user_counts.then do |counts|
+      count =
+        if counts.loaded?
+          counts.detect { |c| c.reading_group_id == reading_group.id }
+        else
+          counts.all.detect { |c| c.reading_group_id == reading_group.id }
+        end
+
+      attrs = count.present? ? count.as_json : {}
+
+      Users::ReadingGroupCount.new attrs
+    end
   end
 
   # @api private

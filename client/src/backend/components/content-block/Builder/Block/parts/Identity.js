@@ -51,7 +51,7 @@ export default class ProjectContentBlockIdentity extends PureComponent {
   render() {
     const size = this.props.size;
     const iconSize = size === "large" ? 46 : 36;
-    const baseClass = "content-block";
+    const baseClass = "backend-content-block";
     const titleClasses = `${baseClass}__title ${baseClass}__title--${size}`;
     const iconClasses = classnames(
       `${baseClass}__icon ${baseClass}__icon--dark ${baseClass}__icon--${size}`,
@@ -59,7 +59,7 @@ export default class ProjectContentBlockIdentity extends PureComponent {
     );
 
     return (
-      <header className="content-block__heading">
+      <header className="backend-content-block__heading">
         <Utility.IconComposer
           icon={this.icon}
           iconClass={iconClasses}
@@ -68,10 +68,10 @@ export default class ProjectContentBlockIdentity extends PureComponent {
         <span className={titleClasses}>
           {this.props.title}
           {this.showVisibility && !this.visible && (
-            <span className="content-block__label">Hidden</span>
+            <span className="backend-content-block__label">Hidden</span>
           )}
           {this.access && (
-            <span className="content-block__label">{this.access}</span>
+            <span className="backend-content-block__label">{this.access}</span>
           )}
         </span>
       </header>

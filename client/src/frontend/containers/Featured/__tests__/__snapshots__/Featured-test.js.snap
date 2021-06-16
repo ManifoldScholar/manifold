@@ -50,7 +50,7 @@ exports[`frontend/containers/Featured/Featured matches the snapshot 1`] = `
           </div>
         </div>
       </header>
-      <WithScreenReaderStatus('ProjectList.Filters)
+      <ProjectList.Filters
         hideFeatured={true}
         updateAction={[Function]}
       />
