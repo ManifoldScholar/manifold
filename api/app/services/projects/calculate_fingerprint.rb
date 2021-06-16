@@ -36,8 +36,20 @@ module Projects
     def add_details!
       update_digest_with! project, *COLUMNS, *ATTACHMENTS
 
-      calculate_fingerprints_for! project.texts.published(true)
+      calculate_fingerprints_for! published_texts
       calculate_fingerprints_for! project.resources
+    end
+
+    private
+
+    def published_texts
+      if project.published_texts.loaded?
+        project.published_texts
+      elsif project.texts.loaded?
+        project.texts.select(&:published?)
+      else
+        project.texts.published(true)
+      end
     end
   end
 end

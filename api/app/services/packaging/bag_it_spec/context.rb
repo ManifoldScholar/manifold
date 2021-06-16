@@ -66,6 +66,8 @@ module Packaging
         builder.simple! :compilation_version, "manifold/compilation_version", compilation_version
         builder.simple! :manifold_version, "manifold/version", manifold_version
         builder.json! :project_metadata, "metadata.json", project_metadata
+
+        builder.extract_maker_avatar_entries_from! project, base: ""
       end
     end
   end

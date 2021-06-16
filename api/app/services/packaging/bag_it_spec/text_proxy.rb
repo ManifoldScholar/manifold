@@ -98,6 +98,8 @@ module Packaging
         builder.local! :cover, cover_path, cover_asset_path if has_cover?
         builder.local! :epub, epub_path, asset_path
         builder.json! :metadata, metadata_path, metadata
+
+        builder.extract_maker_avatar_entries_from! text, base: text_root
       end
     end
   end

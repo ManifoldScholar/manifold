@@ -1,6 +1,5 @@
 # Tracks the relationship between texts and makers
 class Collaborator < ApplicationRecord
-
   ROLE_CREATOR = "creator".freeze
   ROLE_CONTRIBUTOR = "contributor".freeze
 
@@ -15,7 +14,13 @@ class Collaborator < ApplicationRecord
   belongs_to :collaboratable, polymorphic: true
   belongs_to :maker
 
+  scope :by_role, ->(role = nil) { where(role: role) if role.present? }
+
   delegate :name, to: :maker, prefix: true
+
+  def packaging_metadata
+    maker.packaging_metadata.merge(slice(:role))
+  end
 
   def to_s
     "#{role} #{maker}"

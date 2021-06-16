@@ -356,6 +356,16 @@ class Project < ApplicationRecord
       .pluck("content_block_references.referencable_id")
   end
 
+  # @return [Packaging::Preservation::ExportProjectToBagIt]
+  def export_to_bag_it!(force: false)
+    Packaging::Preservation::ExportProjectToBagIt.run project: self, force: force
+  end
+
+  # @return [void]
+  def packaging_metadata
+    Packaging::Preservation::ExportProjectMetadata.run! project: self
+  end
+
   private
 
   def assign_publisher_defaults!

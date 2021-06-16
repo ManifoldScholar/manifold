@@ -24,6 +24,14 @@ module Packaging
 
         # @param [String] identifier
         # @param [Pathname, String] target_path
+        # @param [Shrine::UploadedFile] uploaded_file
+        # @return [void]
+        def attachment!(identifier, target_path, uploaded_file)
+          add_entry! "Attachment", identifier, target_path, uploaded_file
+        end
+
+        # @param [String] identifier
+        # @param [Pathname, String] target_path
         # @param [#as_json] json_content
         # @return [void]
         def json!(identifier, target_path, json_content)
@@ -47,6 +55,15 @@ module Packaging
         # @return [void]
         def simple!(identifier, target_path, content, **options)
           add_entry! "Simple", identifier, target_path, content, options
+        end
+
+        # @param [Collaborative] collaborative
+        # @param [Pathname, String] base
+        # @return [void]
+        def extract_maker_avatar_entries_from!(collaborative, base: "")
+          collaborative.packaging_maker_avatar_entries(base: base).each do |(identifier, target_path, uploaded_file)|
+            attachment! identifier, target_path, uploaded_file
+          end
         end
 
         private
