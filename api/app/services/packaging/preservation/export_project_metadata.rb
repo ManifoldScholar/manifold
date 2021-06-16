@@ -16,6 +16,7 @@ module Packaging
         store :description
         store :publication_date
         store :metadata
+        store :collaborators, :collaborator_packaging_metadata
       end
 
       private

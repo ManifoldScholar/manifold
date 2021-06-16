@@ -7,6 +7,8 @@ module Collaborators
 
     def add_details!
       update_digest_with! collaborator, :id, :maker_id, :role, :maker_name
+
+      calculate_fingerprint_for! collaborator.maker
     end
   end
 end

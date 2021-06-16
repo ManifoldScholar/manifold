@@ -1,8 +1,11 @@
 # A person or organization involved with the creation of a text
 class Maker < ApplicationRecord
-
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:first_name, :last_name].freeze
+
+  PACKAGING_ATTRIBUTES = %i[id name first_name middle_name last_name display_name suffix prefix].freeze
+
+  PACKAGING_AVATAR_FORMAT = %[%<name>s_%<id>s.%<extension>s].freeze
 
   # Concerns
   include Filterable
@@ -50,6 +53,24 @@ class Maker < ApplicationRecord
     full_name
   end
 
+  def packaging_avatar_filename
+    return unless avatar?
+
+    parameters = {
+      id: id,
+      name: name.to_s.parameterize.presence || "maker",
+      extension: avatar.extension
+    }
+
+    filename = PACKAGING_AVATAR_FORMAT % parameters
+
+    Zaru.sanitize! filename
+  end
+
+  def packaging_metadata
+    slice(*PACKAGING_ATTRIBUTES).compact
+  end
+
   class << self
     def arel_coalesce(*args)
       args.map! { |arg| Arel::Nodes.build_quoted(arg) }
@@ -72,5 +93,4 @@ class Maker < ApplicationRecord
 
     errors.add(:base, "requires at least a first or last name")
   end
-
 end
