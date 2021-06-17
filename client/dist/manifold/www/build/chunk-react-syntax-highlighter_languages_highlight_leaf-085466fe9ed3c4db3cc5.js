@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[91],{1637:function(n,e){n.exports=function(n){return{contains:[{className:"function",begin:"#+[A-Za-z_0-9]*\\(",end:" {",returnBegin:!0,excludeEnd:!0,contains:[{className:"keyword",begin:"#+"},{className:"title",begin:"[A-Za-z_][A-Za-z_0-9]*"},{className:"params",begin:"\\(",end:"\\)",endsParent:!0,contains:[{className:"string",begin:'"',end:'"'},{className:"variable",begin:"[A-Za-z_][A-Za-z_0-9]*"}]}]}]}}}}]);
-//# sourceMappingURL=chunk-react-syntax-highlighter_languages_highlight_leaf-085466fe9ed3c4db3cc5.js.map
