@@ -28,9 +28,8 @@ module Ingestions
         @drive_file_pointer ||=
           session.file_by_url(url)
       rescue Google::Apis::ClientError
-        raise Fetchers::FetchFailed, "Unable to fetch google doc. Double check the share
-          URL and make sure the doc is publicly available or available to the Manifold
-          google service user."
+        raise Fetchers::FetchFailed,
+              "Unable to fetch google doc."
       end
 
       def fetch
@@ -47,15 +46,13 @@ module Ingestions
       end
 
       def drive_session_error
-        raise Fetchers::FetchFailed, "Unable to start google drive session.  Double check
-            that google integration has been configured correctly and the drive API
-            enabled. See more at https://manifoldapp.org/docs/customizing/settings/external_services/google/index.html."
+        raise Fetchers::FetchFailed,
+              "Unable to start google drive session."
       end
 
       def authorization_error
-        raise Fetchers::FetchFailed, "Unable to start google drive session. Double check
-            this installation's google integration credentials.
-            See more at https://manifoldapp.org/docs/customizing/settings/external_services/google/index.html."
+        raise Fetchers::FetchFailed,
+              "Unable to start google drive session due to authorization error."
       end
 
     end
