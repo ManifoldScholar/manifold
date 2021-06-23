@@ -105,7 +105,7 @@ RSpec.describe Ingestions::Strategies::Manifest do
       expected = [
         { "label" => "Section1", "source_path" => "2b4f3aa2fe044dbd607d21f2e949eb06.html", "start_section" => true },
         { "label" => "Section2", "source_path" => "e9e7fd64ac05018a6c9289f686581212.html", "children" => [
-          { "label" => "Section2-a", "source_path" => "a6b4fe5e132fe438611f444deec4f90a.html" }
+          { "label" => "Section2-a", "source_path" => "793379e6893534fc68ab8ffa781258c3.html" }
         ] }
       ]
       expect(manifest[:attributes][:toc]).to eq expected
