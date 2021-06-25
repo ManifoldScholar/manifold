@@ -13,7 +13,7 @@ module Packaging
         param :attachment_proxy, Types.Instance(Attachments::Proxy)
 
         delegate :resource, to: :resource_proxy
-        delegate :content_type, :local_path, :metadata, :name, :original_filename, to: :attachment_proxy
+        delegate :content_type, :metadata, :name, :original_filename, :uploaded_file, to: :attachment_proxy
 
         # @!attribute [r] root
         # @return [Pathname]
@@ -22,7 +22,7 @@ module Packaging
         end
 
         def build_entries(builder)
-          builder.local! :file, root.join(original_filename), local_path
+          builder.attachment! :file, root.join(original_filename), uploaded_file
           builder.json! :metadata, root.join("metadata.json"), metadata
           builder.simple! :mimetype, root.join("mimetype"), content_type
         end
