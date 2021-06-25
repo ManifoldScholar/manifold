@@ -140,7 +140,7 @@ end
 
 group :development do
   gem "debase"
-  gem "listen", ">= 3.0.5", "< 3.2"
+  gem "listen", "~> 3.2"
   gem "rubocop", "~> 0.60"
   gem "rubocop-rspec", "~> 1.32"
   gem "ruby-debug-ide"
