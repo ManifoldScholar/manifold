@@ -7,15 +7,27 @@ module Ingestions
 
     def initialize(ingestion, loggable = nil)
       @ingestion = ingestion
-      @source_path = ingestion.ingestion_source
       @identifier = ingestion.id
       @creator = ingestion.creator
+      source = ingestion_source_tempfile(ingestion)
+      @source = source[:file]
+      @source_title = source[:title]
+      @source_path = @source.path
       @loggable = loggable
       @source_provided = false
 
       initialize_working_dirs
+      update_working_dirs @source, @source_title
+    end
 
-      yield self if block_given?
+    def ingestion_source_tempfile(ingestion)
+      return { file: ingestion.source_tempfile, title: nil } if ingestion.file_based_ingestion?
+
+      outcome = Ingestions::Fetcher.run(context: self, url: ingestion.external_source_url)
+
+      raise IngestionError, "Unable to fetch ingestion source from #{ingestion.external_source_url}" unless outcome.valid?
+
+      outcome.result
     end
 
     def logger
@@ -24,20 +36,6 @@ module Ingestions
 
     def source_provided?
       @source_provided.present?
-    end
-
-    def source=(fetched)
-      raise IngestionError, "Already provided source" if source_provided?
-
-      source, title = if fetched.present?
-                        [fetched[:file].path, fetched[:title]]
-                      else
-                        [source_path, nil]
-                      end
-
-      update_working_dirs source, title
-
-      @source_provided = true
     end
 
     def google_doc_url?

@@ -75,15 +75,13 @@ RSpec.describe Ingestions::Strategies::Manifest do
     end
   end
 
+  let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
+  let!(:context) { create_context(ingestion) }
+  let!(:manifest) { described_class.run(context: context).result }
+
+
   context "when collection of different file kinds" do
-    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
-    let(:context) { create_context(ingestion) }
-    let!(:manifest) { described_class.run(context: context).result }
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local.zip") }
 
     include_examples "outcome assertions"
   end
@@ -93,14 +91,8 @@ RSpec.describe Ingestions::Strategies::Manifest do
       Settings.instance.update_from_environment!
     end
 
-    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_remote") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
-    let(:context) { create_context(ingestion) }
-    let!(:manifest) { described_class.run(context: context).result }
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_remote.zip") }
+
     it "has the correct TOC" do
       expected = [
         { "label" => "Section1", "source_path" => "2b4f3aa2fe044dbd607d21f2e949eb06.html", "start_section" => true },

@@ -27,10 +27,6 @@ RSpec.describe ExportUploader do
     expect(attachment.metadata["sha256"]).to be_a String
   end
 
-  it "adds a path method to the model" do
-    expect(text_export.respond_to?(:asset_path)).to be true
-  end
-
   it "adds a file name method to the model" do
     expect(text_export.respond_to?(:asset_file_name)).to be true
   end

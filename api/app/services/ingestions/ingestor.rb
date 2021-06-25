@@ -29,11 +29,7 @@ module Ingestions
     private
 
     def build_context
-      Ingestions::Context.new(ingestion, logger) do |context|
-        fetched = compose Ingestions::Fetcher, context.to_fetcher_inputs if context.url?
-
-        context.source = fetched
-      end
+      Ingestions::Context.new(ingestion, logger)
     end
 
     def text

@@ -5,6 +5,7 @@ class ExternalSourceUploader < Shrine
   plugin :determine_mime_type, analyzer: :marcel
   plugin :validation_helpers
   plugin :backgrounding
+  plugin :tempfile
 
   Attacher.destroy_block do
     Attachments::DestroyAttachmentJob.perform_later(self.class.name, data)
@@ -35,12 +36,6 @@ class ExternalSourceUploader < Shrine
       def #{@name}_file_name
         #{@name}&.original_filename
       end
-
-      def #{@name}_path
-        @local_#{@name}_file ||= #{@name}&.respond_to?(:download) ? #{@name}.download : #{@name}&.open
-        @local_#{@name}_file&.path
-      end
-      alias #{@name}_local_path #{@name}_path
 
       RUBY
     end

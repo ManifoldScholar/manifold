@@ -24,10 +24,6 @@ RSpec.describe ExternalSourceUploader do
     expect(cached_external_source.respond_to?(:has_no_asset?)).to be true
   end
 
-  it "adds a path method to the model" do
-    expect(cached_external_source.respond_to?(:asset_path)).to be true
-  end
-
   it "adds a file name method to the model" do
     expect(cached_external_source.respond_to?(:asset_file_name)).to be true
   end

@@ -5,6 +5,7 @@ class IngestionUploader < TusUploader
   plugin :determine_mime_type, analyzer: :marcel
   plugin :validation_helpers
   plugin :backgrounding
+  plugin :tempfile
 
   Attacher.destroy_block do
     Attachments::DestroyAttachmentJob.perform_later(self.class.name, data)
@@ -29,12 +30,6 @@ class IngestionUploader < TusUploader
       def #{@name}_file_name
         #{@name}&.original_filename
       end
-
-      def local_#{@name}_path
-        file = #{@name}&.respond_to?(:download) ? #{@name}.download : #{@name}&.open
-        file&.path
-      end
-      alias #{@name}_path local_#{@name}_path
 
       RUBY
     end

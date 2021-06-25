@@ -63,6 +63,10 @@ class Ingestion < ApplicationRecord
     external_source_url.blank?
   end
 
+  def source_tempfile
+    source.download
+  end
+
   def ingestable?
     valid?
   end
@@ -97,12 +101,6 @@ class Ingestion < ApplicationRecord
   def commit_log
     self.log = log_buffer
     self.log_buffer = []
-  end
-
-  def ingestion_source
-    return local_source_path if file_based_ingestion?
-
-    external_source_url
   end
 
   # rubocop:disable Metrics/MethodLength

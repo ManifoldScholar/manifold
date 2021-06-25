@@ -2,6 +2,7 @@ class ArchiveUploader < Shrine
   include SharedUploader
 
   plugin :add_metadata
+  plugin :tempfile
   plugin :determine_mime_type, analyzer: :marcel
   plugin :pretty_location, class_underscore: true, identifier: :location_identifier
   plugin :validation_helpers
@@ -55,12 +56,6 @@ class ArchiveUploader < Shrine
       def #{@name}_file_name
         #{@name}&.original_filename
       end
-
-      def #{@name}_path
-        @local_#{@name}_file ||= #{@name}&.respond_to?(:download) ? #{@name}.download : #{@name}&.open
-        @local_#{@name}_file&.path
-      end
-      alias #{@name}_local_path #{@name}_path
 
       RUBY
     end
