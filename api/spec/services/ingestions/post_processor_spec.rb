@@ -4,11 +4,7 @@ RSpec.describe Ingestions::PostProcessor do
   include TestHelpers::IngestionHelper
 
   let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
-  let(:ingestion) do
-    ingestion = FactoryBot.create(:ingestion, text: nil)
-    allow(ingestion).to receive(:ingestion_source).and_return(path)
-    ingestion
-  end
+  let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
   let(:context) { create_context(ingestion) }
   let(:manifest) do
     manifest = Ingestions::Strategies::Epub.run(context: context).result
@@ -66,11 +62,7 @@ RSpec.describe Ingestions::PostProcessor do
 
     let(:after_path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3-less.zip") }
     let(:after_source) { File.open(after_path) }
-    let(:after_ingestion) do
-      after_ingestion = FactoryBot.create(:ingestion, text: text)
-      allow(after_ingestion).to receive(:ingestion_source).and_return(after_path)
-      after_ingestion
-    end
+    let!(:after_ingestion) { FactoryBot.create :ingestion, :file_source, text: text, source_path: after_path }
     let(:reingestion_context) { create_context(after_ingestion) }
     let(:reingestion_manifest) do
       reingestion_manifest = Ingestions::Strategies::Epub.run(context: reingestion_context).result

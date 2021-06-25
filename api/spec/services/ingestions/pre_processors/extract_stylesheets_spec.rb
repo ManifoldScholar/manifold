@@ -4,12 +4,8 @@ RSpec.describe Ingestions::PreProcessors::ExtractStylesheets do
   include TestHelpers::IngestionHelper
 
   describe "an EPUB ingestion" do
-    let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2.zip") }
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { create_context(ingestion) }
     let(:manifest) { Ingestions::Strategies::Epub.run(context: context).result }
 
@@ -21,12 +17,8 @@ RSpec.describe Ingestions::PreProcessors::ExtractStylesheets do
   end
 
   describe "a document ingestion" do
-    let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal.zip") }
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { create_context(ingestion) }
     let(:manifest) { Ingestions::Strategies::Document.run(context: context).result }
 
@@ -40,12 +32,8 @@ RSpec.describe Ingestions::PreProcessors::ExtractStylesheets do
   end
 
   describe "a manifest ingestion" do
-    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local.zip") }
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { create_context(ingestion) }
     let(:manifest) { Ingestions::Strategies::Manifest.run(context: context).result }
 

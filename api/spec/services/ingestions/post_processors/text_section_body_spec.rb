@@ -3,12 +3,8 @@ require "rails_helper"
 RSpec.describe Ingestions::PostProcessors::TextSectionBody do
   include TestHelpers::IngestionHelper
 
-  let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "encoded_path") }
-  let(:ingestion) do
-    ingestion = FactoryBot.create(:ingestion, text: nil)
-    allow(ingestion).to receive(:ingestion_source).and_return(path)
-    ingestion
-  end
+  let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "encoded_path.zip") }
+  let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
   let!(:context) { create_context(ingestion) }
   let(:manifest) do
     manifest = Ingestions::Strategies::Document.run(context: context).result

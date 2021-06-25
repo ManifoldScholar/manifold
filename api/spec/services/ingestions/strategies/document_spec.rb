@@ -3,6 +3,11 @@ require "rails_helper"
 RSpec.describe Ingestions::Strategies::Document do
   include TestHelpers::IngestionHelper
 
+  let(:path) { nil }
+  let(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
+  let(:context) { create_context(ingestion) }
+  let!(:manifest) { described_class.run(context: context).result }
+
   shared_examples "outcome assertions" do
     it "sets the ingestion type to document" do
       expect(context.ingestion.ingestion_type).to eq "document"
@@ -60,13 +65,6 @@ RSpec.describe Ingestions::Strategies::Document do
 
   context "when structured HTML file" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "structured", "index.html") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      allow(ingestion).to receive(:source_file_name).and_return("index.html")
-      ingestion
-    end
-    let(:context) { create_context(ingestion) }
     let(:toc) {
       [{"label"=>"Header 0",
         "anchor"=>"header-0",
@@ -140,14 +138,6 @@ RSpec.describe Ingestions::Strategies::Document do
   context "when HTML file" do
     context "when single HTML page" do
       let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html") }
-      let(:ingestion) do
-        ingestion = FactoryBot.create(:ingestion, text: nil)
-        allow(ingestion).to receive(:ingestion_source).and_return(path)
-        allow(ingestion).to receive(:source_file_name).and_return("index.html")
-        ingestion
-      end
-      let(:context) { create_context(ingestion) }
-      let!(:manifest) { described_class.run(context: context).result }
 
       include_examples "outcome assertions"
 
@@ -164,14 +154,6 @@ RSpec.describe Ingestions::Strategies::Document do
     context "when HTML page with external stylesheet" do
       context "when ZIP" do
         let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal.zip") }
-        let(:ingestion) do
-          ingestion = FactoryBot.create(:ingestion, text: nil)
-          allow(ingestion).to receive(:ingestion_source).and_return(path)
-          allow(ingestion).to receive(:source_file_name).and_return("minimal.zip")
-          ingestion
-        end
-        let(:context) { create_context(ingestion) }
-        let!(:manifest) { described_class.run(context: context).result }
 
         include_examples "outcome assertions"
 
@@ -186,15 +168,7 @@ RSpec.describe Ingestions::Strategies::Document do
       end
 
       context "when dir" do
-        let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal") }
-        let(:ingestion) do
-          ingestion = FactoryBot.create(:ingestion, text: nil)
-          allow(ingestion).to receive(:ingestion_source).and_return(path)
-          allow(ingestion).to receive(:source_file_name).and_return("minimal")
-          ingestion
-        end
-        let(:context) { create_context(ingestion) }
-        let!(:manifest) { described_class.run(context: context).result }
+        let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal.zip") }
 
         include_examples "outcome assertions"
 
@@ -212,14 +186,6 @@ RSpec.describe Ingestions::Strategies::Document do
 
   context "when markdown file" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "markdown", "minimal-single", "minimal-single.md") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      allow(ingestion).to receive(:source_file_name).and_return("minimal-single.md")
-      ingestion
-    end
-    let(:context) { create_context(ingestion) }
-    let!(:manifest) { described_class.run(context: context).result }
 
     include_examples "outcome assertions"
 
@@ -236,14 +202,6 @@ RSpec.describe Ingestions::Strategies::Document do
   context "when latex" do
 
     let(:path) { Rails.root.join("spec", "data", "ingestion", "latex", "example.tex") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      allow(ingestion).to receive(:source_file_name).and_return("example.tex")
-      ingestion
-    end
-    let(:context) { create_context(ingestion) }
-    let!(:manifest) { described_class.run(context: context).result }
 
     it "has one text section" do
       expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "Pandoc User’s Guide", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
@@ -258,28 +216,30 @@ RSpec.describe Ingestions::Strategies::Document do
 
   context "when google doc", slow: true do
 
+    let(:url) { "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/edit?usp=sharing" }
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, external_source_url: url }
+
     before(:all) do
       Settings.instance.update_from_environment!
-      url = "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/edit?usp=sharing"
-      ingestion = FactoryBot.create(:ingestion, external_source_url: url)
       WebMock.allow_net_connect!
-      context = create_context(ingestion)
+    end
+
+    after(:all) do
       WebMock.disable_net_connect!
-      @manifest = described_class.run(context: context).result
     end
 
     it "has one main title" do
       expected = [{ "value" => "Google Doc Prime", "position" => 1, "kind" => TextTitle::KIND_MAIN }]
-      expect(@manifest[:relationships][:text_titles]).to eq expected
+      expect(manifest[:relationships][:text_titles]).to eq expected
     end
 
     it "has one text section" do
       expected = [{"source_identifier"=>"eacf331f0ffc35d4b482f1d15a887d3b", "name"=>"Google Doc Prime", "kind"=>"section", "position"=>1, "build"=>"build/index.html"}]
-      expect(@manifest[:relationships][:text_sections]).to eq expected
+      expect(manifest[:relationships][:text_sections]).to eq expected
     end
 
     it "has one ingestion source" do
-      expect(@manifest[:relationships][:ingestion_sources].length).to eq 1
+      expect(manifest[:relationships][:ingestion_sources].length).to eq 1
     end
 
   end
@@ -287,14 +247,6 @@ RSpec.describe Ingestions::Strategies::Document do
   context "when microsoft word" do
 
     let(:path) { Rails.root.join("spec", "data", "ingestion", "ms_word", "example.docx") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      allow(ingestion).to receive(:source_file_name).and_return("example.docx")
-      ingestion
-    end
-    let(:context) { create_context(ingestion) }
-    let!(:manifest) { described_class.run(context: context).result }
 
     it "has an ingestion source for document and each media item" do
       expect(manifest[:relationships][:ingestion_sources].length).to eq 2

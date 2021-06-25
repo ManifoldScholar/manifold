@@ -14,11 +14,7 @@ RSpec.describe Ingestions::PostProcessors::SetStartSection do
   end
 
   context "when manifest" do
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { create_context(ingestion) }
     let(:manifest) do
       manifest = Ingestions::Strategies::Manifest.run(context: context).result
@@ -28,7 +24,7 @@ RSpec.describe Ingestions::PostProcessors::SetStartSection do
     let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
 
     context "when starting section source is referenced multiple times" do
-      let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local") }
+      let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local.zip") }
 
       include_examples "the start section assignment", "Title Set From TOC"
     end
@@ -41,11 +37,7 @@ RSpec.describe Ingestions::PostProcessors::SetStartSection do
   end
 
   context "when epub" do
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { create_context(ingestion) }
     let(:manifest) do
       manifest = Ingestions::Strategies::Epub.run(context: context).result
@@ -55,13 +47,13 @@ RSpec.describe Ingestions::PostProcessors::SetStartSection do
     let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
 
     context "when V2" do
-      let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2") }
+      let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2.zip") }
 
       include_examples "the start section assignment", "Section 2"
     end
 
     context "when V3" do
-      let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3") }
+      let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
 
       include_examples "the start section assignment", "Section 2"
     end

@@ -5,12 +5,9 @@ RSpec.describe Ingestions::Compiler do
   let(:logger_target) { StringIO.new }
   let(:logger) { Logger.new(logger_target) }
   let(:context) { create_context(ingestion, logger) }
-  let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "with_ds_store") }
-  let(:ingestion) do
-    ingestion = FactoryBot.create(:ingestion, text: nil)
-    allow(ingestion).to receive(:ingestion_source).and_return(path)
-    ingestion
-  end
+  let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "with_ds_store.zip") }
+  let(:extracted_path) { Rails.root.join("spec", "data", "ingestion", "manifest", "with_ds_store") }
+  let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
   let(:text) { FactoryBot.create(:text) }
   let(:outcome) do
     Ingestions::Compilers::IngestionSource.run(
@@ -27,7 +24,7 @@ RSpec.describe Ingestions::Compiler do
         "source_identifier" => "82bf1a14c3653b352525e73d280dd3d8",
         "source_path" => "stylesheet.css",
         "kind" => "publication_resource",
-        "attachment" => File.open(File.join(path, "stylesheet.css"))
+        "attachment" => File.open(File.join(extracted_path, "stylesheet.css"))
       }
     end
 
@@ -42,7 +39,7 @@ RSpec.describe Ingestions::Compiler do
         "source_identifier" => "82bf1a14c3653b352525e73d280dd3d8",
         "source_path" => "_DS_Store",
         "kind" => "publication_resource",
-        "attachment" => File.open(File.join(path, "_DS_Store"))
+        "attachment" => File.open(File.join(extracted_path, "_DS_Store"))
       }
     end
 

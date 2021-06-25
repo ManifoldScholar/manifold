@@ -5,11 +5,7 @@ RSpec.describe Ingestions::Converters::MsWord do
 
   describe "when ingesting doc with media assets" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "ms_word", "docs_with_media.zip") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { create_context(ingestion) }
 
     before(:each) do
@@ -28,11 +24,7 @@ RSpec.describe Ingestions::Converters::MsWord do
 
     describe "the outputted html file" do
       let(:path) { Rails.root.join("spec", "data", "ingestion", "ms_word", "example.docx") }
-      let(:ingestion) do
-        ingestion = FactoryBot.create(:ingestion, text: nil)
-        allow(ingestion).to receive(:ingestion_source).and_return(path)
-        ingestion
-      end
+      let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
       let(:context) { Ingestions::Context.new(ingestion) }
       let(:output) { Ingestions::Converters::MsWord.run context: context, source_path: context.rel(context.source_path) }
       let!(:parsed) { Nokogiri::HTML output.result }

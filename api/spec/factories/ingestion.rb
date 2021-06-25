@@ -5,7 +5,7 @@ FactoryBot.define do
     end
 
     state { "sleeping" }
-    external_source_url { "http://www.dailyrowan.com" }
+    external_source_url { "http://example.com/index.md" }
     association :creator, factory: :user
     project
     text

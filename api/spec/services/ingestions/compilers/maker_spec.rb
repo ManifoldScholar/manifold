@@ -4,11 +4,7 @@ RSpec.describe Ingestions::Compiler do
   include TestHelpers::IngestionHelper
   let(:context) { create_context(ingestion) }
   let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
-  let(:ingestion) do
-    ingestion = FactoryBot.create(:ingestion, text: nil)
-    allow(ingestion).to receive(:ingestion_source).and_return(path)
-    ingestion
-  end
+  let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
 
   it "skips makers when the name cannot be parsed" do
     FactoryBot.create(:maker)
