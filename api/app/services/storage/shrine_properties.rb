@@ -23,11 +23,9 @@ module Storage
 
       def models
         tables.map do |table|
-          begin
-            table.classify.constantize
-          rescue StandardError
-            nil
-          end
+          table.classify.constantize
+        rescue StandardError
+          nil
         end.compact + plural_models
       end
 

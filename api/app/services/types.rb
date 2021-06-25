@@ -43,17 +43,15 @@ module Types
   NOKOGIRI_NODE = Types.Instance(Nokogiri::XML::Node)
 
   URI = Types.Constructor(Types.Instance(Addressable::URI)) do |value|
-    begin
-      case value
-      when Addressable::URI then value
-      when String
-        Addressable::URI.parse value
-      else
-        Dry::Types::Undefined
-      end
-    rescue Addressable::URI::InvalidURIError, TypeError
+    case value
+    when Addressable::URI then value
+    when String
+      Addressable::URI.parse value
+    else
       Dry::Types::Undefined
     end
+  rescue Addressable::URI::InvalidURIError, TypeError
+    Dry::Types::Undefined
   end
 
   RULE_PREDICATE = ->(predicate_name, *curried_args) do

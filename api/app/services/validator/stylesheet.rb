@@ -34,11 +34,9 @@ module Validator
     # rubocop:disable Style/CharacterLiteral, Style/RescueStandardError
     def encode_css_for_parser(string)
       parts = string.chars.map do |c|
-        begin
-          c.encode("binary", "utf-8")
-        rescue
-          "\\#{c.ord.to_s(16).rjust(4, ?0)}"
-        end
+        c.encode("binary", "utf-8")
+      rescue
+        "\\#{c.ord.to_s(16).rjust(4, ?0)}"
       end
       parts.join
     end

@@ -185,12 +185,10 @@ module Importer
 
     def update_attachment_attributes(model, row, attachment_attributes)
       attachment_attributes.each do |sheet_attr, model_attr|
-        begin
-          import_model_attachment(model, model_attr, row[sheet_attr])
-        rescue Google::Apis::TransmissionError
-          @logger.warn "    Caught Google::Apis::TransmissionError. Trying again"
-          import_model_attachment(model, model_attr, row[sheet_attr])
-        end
+        import_model_attachment(model, model_attr, row[sheet_attr])
+      rescue Google::Apis::TransmissionError
+        @logger.warn "    Caught Google::Apis::TransmissionError. Trying again"
+        import_model_attachment(model, model_attr, row[sheet_attr])
       end
     end
 
@@ -258,12 +256,10 @@ module Importer
 
     def attributes_from_row(row, attr_list)
       attr_list.each_with_object({}) do |pair, out|
-        begin
-          out[pair[1]] = row[pair[0]]
-        rescue GoogleDrive::Error => e
-          @logger.log_google_drive_error e
-          next
-        end
+        out[pair[1]] = row[pair[0]]
+      rescue GoogleDrive::Error => e
+        @logger.log_google_drive_error e
+        next
       end
     end
 

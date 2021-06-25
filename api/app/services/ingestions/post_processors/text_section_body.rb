@@ -131,12 +131,12 @@ module Ingestions
       def to_absolute_package_path(path, source_doc_path)
         uri = URI(path)
         package_path = if uri.absolute? || uri.path.start_with?("/")
-                         uri.path[1..-1]
+                         uri.path[1..]
                        else
                          File.expand_path("/" +
                                             File.dirname(source_doc_path) +
                                             "/" +
-                                            uri.path)[1..-1]
+                                            uri.path)[1..]
                        end
         CGI.unescape package_path
       end
