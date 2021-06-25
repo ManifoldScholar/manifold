@@ -36,7 +36,7 @@ module Resources
     end
 
     def parsed_url_path
-      @parsed_url_path ||= parsed_url.path[1..-1]
+      @parsed_url_path ||= parsed_url.path[1..]
     end
 
     def parsed_url_params

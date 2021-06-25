@@ -112,11 +112,9 @@ module FingerprintInteraction
   # @return [void]
   def update_digest_with!(obj, *method_names)
     method_names.flatten.each do |method_name|
-      begin
-        update_digest! obj.public_send method_name
-      rescue Errno::ENOENT
-        Rails.logger.error("File not found error while fingerprinting #{method_name} on #{obj}")
-      end
+      update_digest! obj.public_send method_name
+    rescue Errno::ENOENT
+      Rails.logger.error("File not found error while fingerprinting #{method_name} on #{obj}")
     end
   end
 
