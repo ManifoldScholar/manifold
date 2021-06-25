@@ -1,11 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Ingestions::Converters::HTML do
-  let(:ingestion) do
-    ingestion = FactoryBot.create(:ingestion, text: nil)
-    allow(ingestion).to receive(:ingestion_source).and_return(path)
-    ingestion
-  end
+  let(:path) { nil }
+  let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
   let(:context) { Ingestions::Context.new(ingestion) }
   let(:output) { Ingestions::Converters::HTML.run context: context, source_path: context.rel(context.source_path) }
   let(:parsed) { Nokogiri::HTML(output.result) }

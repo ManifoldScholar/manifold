@@ -3,6 +3,11 @@ require "rails_helper"
 RSpec.describe Ingestions::Strategies::Epub do
   include TestHelpers::IngestionHelper
 
+  let(:path) { nil }
+  let(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
+  let(:context) { create_context(ingestion) }
+  let!(:manifest) { described_class.run(context: context).result }
+
   shared_examples "outcome assertions" do
     it "sets the ingestion type to epub" do
       expect(context.ingestion.ingestion_type).to eq "epub"
@@ -53,13 +58,6 @@ RSpec.describe Ingestions::Strategies::Epub do
 
   context "when V3" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
-    let(:context) { create_context(ingestion) }
-    let!(:manifest) { described_class.run(context: context).result }
 
     include_examples "outcome assertions"
 
@@ -97,13 +95,6 @@ RSpec.describe Ingestions::Strategies::Epub do
 
   context "when V2" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2.zip") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
-    let(:context) { create_context(ingestion) }
-    let!(:manifest) { described_class.run(context: context).result }
 
     include_examples "outcome assertions"
 
@@ -139,34 +130,37 @@ RSpec.describe Ingestions::Strategies::Epub do
   end
 
   context "when url", slow: true do
+
+    let(:url) { "https://storage.googleapis.com/manifold-assets/spec/e-t-a-hoffmann_master-flea.epub3" }
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, external_source_url: url }
+
     before(:all) do
       Settings.instance.update_from_environment!
-      @path = "https://storage.googleapis.com/manifold-assets/spec/e-t-a-hoffmann_master-flea.epub3"
-      ingestion = FactoryBot.create(:ingestion, external_source_url: @path, text: nil)
       WebMock.allow_net_connect!
-      context = create_context(ingestion)
+    end
+
+    after(:all) do
       WebMock.disable_net_connect!
-      @manifest = described_class.run(context: context).result
     end
 
     describe "the returned manifest" do
       describe "its text attributes" do
         it "has the correct language" do
-          expect(@manifest[:attributes][:metadata][:language]).to eq "en-GB"
+          expect(manifest[:attributes][:metadata][:language]).to eq "en-GB"
         end
 
         it "has the correct rights" do
           expected = "The source text and artwork in this ebook edition are believed to be in the U.S. public domain. This ebook edition is released under the terms in the CC0 1.0 Universal Public Domain Dedication, available at https://creativecommons.org/publicdomain/zero/1.0/. For full license information see the Uncopyright file included at the end of this ebook."
-          expect(@manifest[:attributes][:metadata][:rights]).to eq expected
+          expect(manifest[:attributes][:metadata][:rights]).to eq expected
         end
 
         it "has the correct description" do
           expected = "A gentleman bachelor gains an epic advantage of tiny proportions in this allegorical, Romantic, fairy-tale novel."
-          expect(@manifest[:attributes][:description]).to eq expected
+          expect(manifest[:attributes][:description]).to eq expected
         end
 
         it "has the correct date" do
-          expect(@manifest[:attributes][:publication_date]).to eq "2017-07-24T20:46:32Z"
+          expect(manifest[:attributes][:publication_date]).to eq "2017-07-24T20:46:32Z"
         end
 
         it "has the correct landmarks" do
@@ -178,11 +172,11 @@ RSpec.describe Ingestions::Strategies::Epub do
             { "label" => "Colophon", "anchor" => nil, "source_path" => "epub/text/colophon.xhtml", "type" => "backmatter colophon" },
             { "label" => "Uncopyright", "anchor" => nil, "source_path" => "epub/text/uncopyright.xhtml", "type" => "backmatter copyright-page" }
           ]
-          expect(@manifest[:attributes][:landmarks]).to eq expected
+          expect(manifest[:attributes][:landmarks]).to eq expected
         end
 
         it "has the correct page list" do
-          expect(@manifest[:attributes][:page_list]).to eq []
+          expect(manifest[:attributes][:page_list]).to eq []
         end
       end
     end
@@ -190,14 +184,14 @@ RSpec.describe Ingestions::Strategies::Epub do
     describe "its relationships" do
       it "has the correct titles" do
         expected = [{ "value" => "Master Flea", "position" => nil, "kind" => nil }]
-        expect(@manifest[:relationships][:text_titles]).to eq expected
+        expect(manifest[:relationships][:text_titles]).to eq expected
       end
 
       it "has one creator for every unique creator name" do
         expected = [
           { "name" => "E. T. A. Hoffmann" }
         ]
-        expect(@manifest[:relationships][:creators]).to eq expected
+        expect(manifest[:relationships][:creators]).to eq expected
       end
 
       it "has one contributor for every unique contributor name" do
@@ -209,7 +203,7 @@ RSpec.describe Ingestions::Strategies::Epub do
           { "name" => "Jared Updike" },
           { "name" => "Alex Cabal" }
         ]
-        expect(@manifest[:relationships][:contributors]).to eq expected
+        expect(manifest[:relationships][:contributors]).to eq expected
       end
 
       it "has one text section for every unique ingestion source referenced in TOC" do
@@ -228,11 +222,11 @@ RSpec.describe Ingestions::Strategies::Epub do
           { "source_identifier" => "uncopyright.xhtml", "name" => "Uncopyright", "kind" => "section", "position" => 11, "build" => "build/uncopyright.xhtml" }
         ]
 
-        expect(@manifest[:relationships][:text_sections]).to eq expected
+        expect(manifest[:relationships][:text_sections]).to eq expected
       end
 
       it "has one ingestion source for every unique source file" do
-        expect(@manifest[:relationships][:ingestion_sources].length).to eq 18
+        expect(manifest[:relationships][:ingestion_sources].length).to eq 18
       end
     end
   end

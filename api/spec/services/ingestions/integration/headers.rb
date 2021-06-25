@@ -4,12 +4,7 @@ RSpec.describe "When ingesting document without header ids", integration: true d
   include TestHelpers::IngestionHelper
 
   let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "without_header_ids", "index.html") }
-  let(:ingestion) do
-    ingestion = FactoryBot.create(:ingestion, text: nil)
-    allow(ingestion).to receive(:ingestion_source).and_return(path)
-    allow(ingestion).to receive(:source_file_name).and_return("index.html")
-    ingestion
-  end
+  let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
   let!(:text) { Ingestions::Ingestor.run ingestion: ingestion }
 
   it "the resulting text has IDs for headers" do

@@ -4,11 +4,10 @@ require "rails_helper"
 RSpec.describe Ingestions::Concerns::FileOperations do
   include TestHelpers::IngestionHelper
 
-  let(:ingestion) { FactoryBot.create(:ingestion) }
+  let(:path) { Rails.root.join("spec","data","ingestion", "epubs", "minimal-v3.zip") }
+  let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
 
   subject do
-    path = Rails.root.join("spec","data","ingestion", "epubs", "minimal-v3")
-    allow(ingestion).to receive(:ingestion_source).and_return path
     create_context(ingestion)
   end
 
@@ -17,19 +16,19 @@ RSpec.describe Ingestions::Concerns::FileOperations do
   end
 
   it("should open a relative path in a source package") do
-    expect(subject.open("source/EPUB/xhtml/section0001.xhtml")).to be_a File
+    expect(subject.open("source/minimal-v3/EPUB/xhtml/section0001.xhtml")).to be_a File
   end
 
   it("should confirm that a file exists in a source package") do
-    expect(subject.file?("source/EPUB/xhtml/section0001.xhtml")).to be true
+    expect(subject.file?("source/minimal-v3/EPUB/xhtml/section0001.xhtml")).to be true
   end
 
   it("should read a relative path in a source package") do
-    expect(subject.read("source/EPUB/xhtml/section0001.xhtml")).to be_a String
+    expect(subject.read("source/minimal-v3/EPUB/xhtml/section0001.xhtml")).to be_a String
   end
 
   it("should convert a relative path in a source package to an absolute path") do
-    rel_path = "source/EPUB/xhtml/section0001.xhtml"
+    rel_path = "source/minimal-v3/EPUB/xhtml/section0001.xhtml"
     abs_path = Pathname.new(subject.abs(rel_path))
     expect(abs_path.absolute?).to be true
   end
@@ -49,11 +48,7 @@ RSpec.describe Ingestions::Concerns::FileOperations do
   end
 
   it("returns the ingestion basename") do
-    expect(subject.basename).to eq "minimal-v3"
-  end
-
-  it("does not return an extension when a directory is the ingestion subject") do
-    expect(subject.extension).to be nil
+    expect(subject.basename.present?).to be true
   end
 
   it("returns the package working directory") do
@@ -73,10 +68,8 @@ RSpec.describe Ingestions::Concerns::FileOperations do
   end
 
   context "when poorly named sources" do
-    let!(:subject) do
-      path = Rails.root.join("spec","data","ingestion", "manifest", "badly_named_sources.zip")
-      allow(ingestion).to receive(:ingestion_source).and_return path
-    end
+    let(:path) { Rails.root.join("spec","data","ingestion", "manifest", "badly_named_sources.zip") }
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { create_context(ingestion) }
 
     it "handles file names with spaces and quotes" do

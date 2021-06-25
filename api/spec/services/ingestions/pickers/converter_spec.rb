@@ -3,12 +3,8 @@ require "rails_helper"
 RSpec.describe Ingestions::Pickers::Converter do
 
   context "when no converter is found" do
-    let(:path) { "an/invalid/file.fail" }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2.epub") }
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { Ingestions::Context.new(ingestion) }
     let!(:outcome) { Ingestions::Pickers::Converter.run context: context, source_path: path }
 
@@ -19,11 +15,7 @@ RSpec.describe Ingestions::Pickers::Converter do
 
   context "when Markdown" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "markdown", "minimal-single", "minimal-single.md") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { Ingestions::Context.new(ingestion) }
     let!(:outcome) { Ingestions::Pickers::Converter.run context: context, source_path: path.to_s }
 
@@ -34,11 +26,7 @@ RSpec.describe Ingestions::Pickers::Converter do
 
   context "when HTML" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { Ingestions::Context.new(ingestion) }
     let!(:outcome) { Ingestions::Pickers::Converter.run context: context, source_path: path.to_s }
 
