@@ -25,20 +25,19 @@ end
 RSpec.describe Ingestions::PostProcessors::TOC do
   include TestHelpers::IngestionHelper
 
+  let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
+  let!(:context) { create_context(ingestion) }
+  let(:manifest) do
+    manifest = strategy.run(context: context).result
+    manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+    manifest
+  end
+  let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+
+
   describe "an epub ingestion" do
-    let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
-    let!(:context) { create_context(ingestion) }
-    let(:manifest) do
-      manifest = Ingestions::Strategies::Epub.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
-      manifest
-    end
-    let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
+    let(:strategy) { Ingestions::Strategies::Epub }
     let(:hashed) { text.toc.detect { |item| item["label"] == "Section 2#1" } }
     let(:unhashed) { text.toc.detect { |item| item["label"] == "Section 2" } }
 
@@ -46,19 +45,8 @@ RSpec.describe Ingestions::PostProcessors::TOC do
   end
 
   describe "a manifest ingestion" do
-    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
-    let!(:context) { create_context(ingestion) }
-    let(:manifest) do
-      manifest = Ingestions::Strategies::Manifest.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
-      manifest
-    end
-    let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local.zip") }
+    let(:strategy) { Ingestions::Strategies::Manifest }
     let(:hashed) { text.toc.detect { |item| item["label"] == "Section 1#1" } }
     let(:unhashed) { text.toc.detect { |item| item["label"] == "Title Set From TOC" } }
 
@@ -66,19 +54,8 @@ RSpec.describe Ingestions::PostProcessors::TOC do
   end
 
   describe "a document ingestion" do
-    let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "structured") }
-    let(:ingestion) do
-      ingestion = FactoryBot.create(:ingestion, text: nil)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
-      ingestion
-    end
-    let!(:context) { create_context(ingestion) }
-    let(:manifest) do
-      manifest = Ingestions::Strategies::Document.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
-      manifest
-    end
-    let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "structured.zip") }
+    let(:strategy) { Ingestions::Strategies::Document }
     let(:hashed) { text.toc.detect { |item| item["label"] == "Header 2" } }
 
     before(:each) { described_class.run text: text, context: context }

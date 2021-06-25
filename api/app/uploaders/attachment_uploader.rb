@@ -4,6 +4,7 @@ class AttachmentUploader < Shrine
 
   plugin :backgrounding
   plugin :validation_helpers
+  plugin :tempfile
   plugin :derivatives, versions_compatibility: true
   plugin :remote_url, max_size: 20 * 1024 * 1024
   plugin :determine_mime_type, analyzer: :marcel
@@ -147,12 +148,6 @@ class AttachmentUploader < Shrine
       def #{@name}_is_pdf?
         shrine_upload_matches_type?(#{@name}_original, type: :pdf)
       end
-
-      def #{@name}_path
-        @local_#{@name}_file ||= #{@name}&.respond_to?(:download) ? #{@name}.download : #{@name}&.open
-        @local_#{@name}_file&.path
-      end
-      alias #{@name}_local_path #{@name}_path
 
       RUBY
     end

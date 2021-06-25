@@ -43,9 +43,7 @@ module Ingestions
       protected
 
       def tmp_pointer(name, ext)
-        tmp = Tempfile.new([name, ".#{ext}"])
-        tmp.close
-        tmp
+        Tempfile.new([name, ".#{ext}"])
       end
 
     end

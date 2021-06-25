@@ -21,10 +21,6 @@ RSpec.describe IngestionUploader do
     expect(attachment.storage_key).to eq(:store)
   end
 
-  it "adds a path method to the model" do
-    expect(ingestion.respond_to?(:source_path)).to be true
-  end
-
   it "adds a file name method to the model" do
     expect(ingestion.respond_to?(:source_file_name)).to be true
   end
