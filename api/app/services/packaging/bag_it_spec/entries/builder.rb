@@ -40,16 +40,6 @@ module Packaging
 
         # @param [String] identifier
         # @param [Pathname, String] target_path
-        # @param [Pathname, String] source_path
-        # @return [void]
-        def local_path!(identifier, target_path, source_path)
-          add_entry! "LocalPath", identifier, target_path, source_path
-        end
-
-        alias local! local_path!
-
-        # @param [String] identifier
-        # @param [Pathname, String] target_path
         # @param [String, #to_s] content
         # @param [{ Symbol => Object }] options
         # @return [void]

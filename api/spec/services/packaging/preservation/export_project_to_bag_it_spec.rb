@@ -5,6 +5,7 @@ RSpec.describe Packaging::Preservation::ExportProjectToBagIt, interaction: true,
 
   context "with an epub ingestion" do
     let!(:ingestion_source_path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
+    let!(:resource) { FactoryBot.create :resource, :image, project: project }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, project: project, source_path: ingestion_source_path }
     let!(:ingestion_result) { Ingestions::Ingestor.run ingestion: ingestion }
     let!(:text) do

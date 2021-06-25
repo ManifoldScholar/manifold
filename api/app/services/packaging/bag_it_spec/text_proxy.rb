@@ -12,14 +12,14 @@ module Packaging
       param :text_export, Types.Instance(TextExport)
 
       delegate :cover_original, to: :text
-      delegate :asset_path, to: :text_export
+      delegate :asset, to: :text_export
       delegate :content_type, to: :cover_original, prefix: :cover, allow_nil: true
 
       # The path to the cover asset on the filesystem, {#has_cover? if present}.
       #
       # @return [String]
-      def cover_asset_path
-        cover_original.to_io.path if has_cover?
+      def cover_asset
+        cover_original if has_cover?
       end
 
       # @!attribute [r] cover_name
@@ -95,8 +95,8 @@ module Packaging
       end
 
       def build_entries(builder)
-        builder.local! :cover, cover_path, cover_asset_path if has_cover?
-        builder.local! :epub, epub_path, asset_path
+        builder.attachment! :cover, cover_path, cover_asset if has_cover?
+        builder.attachment! :epub, epub_path, asset
         builder.json! :metadata, metadata_path, metadata
 
         builder.extract_maker_avatar_entries_from! text, base: text_root
