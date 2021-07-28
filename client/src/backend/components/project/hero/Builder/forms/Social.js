@@ -42,10 +42,9 @@ export default class Social extends PureComponent {
             onSuccess={this.closeDrawer}
             className="form-secondary"
           >
-            <Form.MaskedTextInput
+            <Form.TextInput
               label="Hashtag"
               name="attributes[hashtag]"
-              mask="hashtag"
               placeholder="Enter Project Hashtag"
             />
             <Form.TextInput
