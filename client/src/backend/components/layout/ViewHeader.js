@@ -5,6 +5,7 @@ import Utility from "global/components/utility";
 import { Link } from "react-router-dom";
 import isString from "lodash/isString";
 import isEmpty from "lodash/isEmpty";
+import isNil from "lodash/isNil";
 
 export default class ViewHeader extends PureComponent {
   static displayName = "Layout.ViewHeader";
@@ -63,7 +64,9 @@ export default class ViewHeader extends PureComponent {
 
     return (
       <h1 className="backend-header__title">
-        {count && <em className="backend-header__emphasis">{count} </em>}
+        {!isNil(count) && (
+          <em className="backend-header__emphasis">{count} </em>
+        )}
         {renderTitle}
         {subtitle && (
           <span className="backend-header__subtitle">{subtitle}</span>
