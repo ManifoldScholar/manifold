@@ -6,9 +6,11 @@ class AnnotationsFilter {
       return this.filters.readingGroups[id] === true;
     });
     this.showYourPublicAnnotations =
+      this.enabledGroups.length === 0 ||
       this.enabledGroups.includes("all") ||
       this.enabledGroups.includes("public");
     this.showYourPrivateAnnotations =
+      this.enabledGroups.length === 0 ||
       this.enabledGroups.includes("all") ||
       this.enabledGroups.includes("private");
   }
