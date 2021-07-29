@@ -14,7 +14,7 @@ export default class ReturnVisits extends Component {
   }
 
   get percentage() {
-    return parseFloat(this.data.fraction * 100).toFixed(1) + "%";
+    return parseFloat(this.data.fraction * 100).toFixed(0) + "%";
   }
 
   get returnVisits() {
