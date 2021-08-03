@@ -280,7 +280,7 @@ class Text < ApplicationRecord
 
   memoize def toc_landmark
     Array(landmarks).detect do |landmark|
-      landmark["type"].match? "toc"
+      landmark["type"]&.match? "toc"
     end
   end
 
