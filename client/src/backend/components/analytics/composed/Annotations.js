@@ -18,7 +18,10 @@ export default class Annotations extends Component {
 
   get totalFigure() {
     const { rangeInWords } = this.props;
-    const stat = Object.values(this.data).reduce((a, b) => a + b);
+    const stat =
+      this.data.publicAnnotations +
+      this.data.privateAnnotations +
+      this.data.readingGroupAnnotations;
     return {
       stat,
       caption: rangeInWords
