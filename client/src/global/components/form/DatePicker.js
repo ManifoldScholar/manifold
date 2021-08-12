@@ -24,7 +24,7 @@ class DatePicker extends PureComponent {
 
   static defaultProps = {
     setFormat: "yyyy-MM-dd",
-    placeholder: "MM/dd/yyyy"
+    placeholder: "MM/DD/YYYY"
   };
 
   get value() {
@@ -100,7 +100,7 @@ class DatePicker extends PureComponent {
               }
               placeholderText={placeholder}
               dropdownMode="scroll"
-              dateFormat="mm/dd/yyyy"
+              dateFormat="MM/dd/yyyy"
               selected={this.value}
               onChange={this.handleChange}
               renderCustomHeader={props => <Header uid={id} {...props} />}
