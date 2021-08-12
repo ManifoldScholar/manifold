@@ -15,11 +15,6 @@ RSpec.describe Flag, type: :model do
   describe "is invalid when" do
     let(:flag) { FactoryBot.build(:flag) }
 
-    it "creator is nil" do
-      flag.creator = nil
-      expect(flag).to_not be_valid
-    end
-
     it "flaggable is nil" do
       flag.flaggable = nil
       expect(flag).to_not be_valid

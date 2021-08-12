@@ -37,7 +37,7 @@ module V1
       anonymous?(object, params)
     end
     typed_attribute :creator_name, Types::String.meta(read_only: true) do |object, params|
-      next object.creator.full_name if creator_identity_visible?(object, params)
+      next object.creator&.full_name if creator_identity_visible?(object, params)
 
       object.anonymous_label
     end

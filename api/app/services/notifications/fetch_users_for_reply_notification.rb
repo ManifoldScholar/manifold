@@ -10,17 +10,17 @@ module Notifications
 
     def execute
       [].tap do |recipients|
-        recipients.push(parent.creator) if notify_parent_creator?
-        recipients.push(subject.creator) if notify_subject_creator?
+        recipients.push(parent.creator) if notify_parent_creator? && parent.creator.present?
+        recipients.push(subject.creator) if notify_subject_creator? && subject.creator.present?
       end
     end
 
     def notify_parent_creator?
-      parent.present? && !reply_to_self? && creator_wants_notification?(parent.creator)
+      parent.present? && !reply_to_self? && parent.creator.present? && creator_wants_notification?(parent.creator)
     end
 
     def notify_subject_creator?
-      on_annotation? && creator_wants_notification?(subject.creator)
+      on_annotation? && subject.creator && creator_wants_notification?(subject.creator)
     end
 
     private

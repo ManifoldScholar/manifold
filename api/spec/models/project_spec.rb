@@ -59,9 +59,9 @@ RSpec.describe Project, type: :model do
     expect(project).to be_valid
   end
 
-  it "is invalid without a creator" do
+  it "is valid without a creator" do
     project = FactoryBot.build(:project, creator: nil)
-    expect(project).to_not be_valid
+    expect(project).to be_valid
   end
 
   it "triggers an event on create" do
@@ -307,7 +307,7 @@ RSpec.describe Project, type: :model do
       end
 
       1.upto(3).each do |page_number|
-        include_examples "valid counts for a page", page_number 
+        include_examples "valid counts for a page", page_number
       end
     end
 

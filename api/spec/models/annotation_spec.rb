@@ -78,9 +78,9 @@ RSpec.describe Annotation, type: :model do
     expect(@annotation).to be_valid
   end
 
-  it "invalid without a creator" do
+  it "valid without a creator" do
     @annotation.creator = nil
-    expect(@annotation).to_not be_valid
+    expect(@annotation).to be_valid
   end
 
   it "enqueues a TEXT_ANNOTATED event on creation" do
