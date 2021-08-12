@@ -1,5 +1,5 @@
 # Service object to format settings as we want
-class Settings < ApplicationRecord
+module SettingsService
   class AdjustGoogleConfig < ActiveInteraction::Base
     hash :config, strip: false
 

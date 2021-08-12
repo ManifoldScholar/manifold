@@ -1,4 +1,4 @@
-class Settings < ApplicationRecord
+module SettingsService
   # Get the current version of Manifold
   #
   # @see Settings.manifold_version

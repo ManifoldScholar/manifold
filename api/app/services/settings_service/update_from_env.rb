@@ -1,4 +1,4 @@
-class Settings < ApplicationRecord
+module SettingsService
   # After reading settings from `ENV`, merge them into
   # their respective attributes on {Settings}.
   #
@@ -8,7 +8,7 @@ class Settings < ApplicationRecord
 
     # @return [void]
     def execute
-      env_settings = compose Settings::ReadFromEnv
+      env_settings = compose SettingsService::ReadFromEnv
 
       env_settings.each do |(section, section_settings)|
         settings.merge_settings_into! section, section_settings
