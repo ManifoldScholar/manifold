@@ -1,4 +1,4 @@
-class Settings < ApplicationRecord
+module SettingsService
   class UpdateOauthProviders < ActiveInteraction::Base
     object :settings, default: proc { Settings.instance }
 

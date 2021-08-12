@@ -1,4 +1,4 @@
-class Settings < ApplicationRecord
+module SettingsService
   # Read settings from `ENV` and transform into a suitable hash
   # that can be merged into {Settings}.
   class ReadFromEnv < ActiveInteraction::Base
@@ -54,7 +54,7 @@ class Settings < ApplicationRecord
       case setting
       when :google_service
         data = JSON.parse(File.read(config_path)).to_h
-        Settings::AdjustGoogleConfig.run! config: data
+        SettingsService::AdjustGoogleConfig.run! config: data
       end
     end
   end

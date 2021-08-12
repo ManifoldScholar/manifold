@@ -22,7 +22,7 @@ module Updaters
 
       data = JSON.parse(URI::Data.new(raw_data).data)
 
-      ::Settings::AdjustGoogleConfig.run! config: data
+      ::SettingsService::AdjustGoogleConfig.run! config: data
     end
 
   end

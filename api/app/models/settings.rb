@@ -78,16 +78,16 @@ class Settings < ApplicationRecord
     self[section] = current.merge(new_values)
   end
 
-  # @see [Settings::UpdateFromEnv]
+  # @see [SettingsService::UpdateFromEnv]
   # @return [void]
   def update_from_environment!
-    Settings::UpdateFromEnv.run! settings: self
+    SettingsService::UpdateFromEnv.run! settings: self
   end
 
-  # @see [Settings::UpdateOauthProviders]
+  # @see [SettingsService::UpdateOauthProviders]
   # @return [void]
   def update_oauth_providers!
-    Settings::UpdateOauthProviders.run!
+    SettingsService::UpdateOauthProviders.run!
   end
 
   def calculated(current_user = nil)
@@ -124,10 +124,10 @@ class Settings < ApplicationRecord
 
     # @!attribute [r] manifold_version
     # @!scope class
-    # @see Settings::ReadManifoldVersion
+    # @see SettingsService::ReadManifoldVersion
     # @return [Gem::Version]
     def manifold_version
-      @manifold_version ||= Settings::ReadManifoldVersion.run!
+      @manifold_version ||= SettingsService::ReadManifoldVersion.run!
     end
 
     def update_from_environment?

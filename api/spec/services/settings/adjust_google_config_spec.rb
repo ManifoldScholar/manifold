@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Settings::AdjustGoogleConfig do
+RSpec.describe SettingsService::AdjustGoogleConfig do
   let(:config_path) { "spec/data/sample_config/google_service.json" }
   let(:adjusted_config) {
     {
@@ -19,7 +19,7 @@ RSpec.describe Settings::AdjustGoogleConfig do
 
   it 'correctly formats the config' do
     data = JSON.parse File.read(config_path)
-    expect(Settings::AdjustGoogleConfig.run!(config: data)).to eq adjusted_config
+    expect(SettingsService::AdjustGoogleConfig.run!(config: data)).to eq adjusted_config
   end
 
 end

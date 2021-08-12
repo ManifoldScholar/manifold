@@ -7,7 +7,7 @@ module Factory
     # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/PerceivedComplexity
     def self.config
-      env_config = Settings::ReadFromEnv.run.result
+      env_config = SettingsService::ReadFromEnv.run.result
 
       db_config = ActiveRecord::Base.connection_pool.with_connection do |conn|
         if conn.table_exists? "settings"
