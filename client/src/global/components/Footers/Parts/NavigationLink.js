@@ -19,6 +19,20 @@ export default function FooterPartsNavigationLink({
     );
   };
 
+  if (item.to)
+    return (
+      <Link
+        to={item.to}
+        target={item.openInNewTab ? "_blank" : null}
+        className={className}
+      >
+        {icon(item)}
+        {!hideLabel && (
+          <span className="app-footer-navigation__link-text">{item.title}</span>
+        )}
+      </Link>
+    );
+
   if (has(item, "href")) {
     const target = item.target || item.openInNewTab ? "_blank" : null;
     return (
@@ -42,20 +56,6 @@ export default function FooterPartsNavigationLink({
           <span className="app-footer-navigation__link-text">{item.title}</span>
         )}
       </span>
-    );
-
-  if (item.to)
-    return (
-      <Link
-        to={item.to}
-        target={item.openInNewTab ? "_blank" : null}
-        className={className}
-      >
-        {icon(item)}
-        {!hideLabel && (
-          <span className="app-footer-navigation__link-text">{item.title}</span>
-        )}
-      </Link>
     );
 
   return null;
