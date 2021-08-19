@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[23],{1724:function(n,e){n.exports=function(n){return{contains:[{className:"attribute",begin:/</,end:/>/},{begin:/::=/,starts:{end:/$/,contains:[{begin:/</,end:/>/},n.C_LINE_COMMENT_MODE,n.C_BLOCK_COMMENT_MODE,n.APOS_STRING_MODE,n.QUOTE_STRING_MODE]}}]}}}}]);
+//# sourceMappingURL=chunk-react-syntax-highlighter_languages_highlight_bnf-626774e8f77df0df1b09.js.map
