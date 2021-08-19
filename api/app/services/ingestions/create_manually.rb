@@ -8,11 +8,11 @@ module Ingestions
   class CreateManually < ActiveInteraction::Base
     object :project
     object :creator, class: "User", default: proc { User.cli_user }
-
-    file :source
+    string :url, default: nil
+    file :source, default: nil
 
     def execute
-      Ingestion.create(source: source, project: project, creator: creator)
+      Ingestion.create(source: source, external_source_url: url, project: project, creator: creator)
     end
 
   end
