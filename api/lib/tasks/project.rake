@@ -22,6 +22,22 @@ namespace :manifold do
       end
     end
 
+    desc "Ingest a project text from a URL"
+    task :ingest_url, [:project_id, :url] => :environment do |_t, args|
+      Manifold::Rake.logger.info "Ingesting #{args[:path]}"
+      project = Project.find(args[:project_id])
+      ingestion = Ingestions::CreateManually.run(project: project,
+                                                 url: args[:url],
+                                                 creator: User.cli_user).result
+      outcome = Ingestions::Ingestor.run ingestion: ingestion,
+                                         logger: Logger.new($stdout)
+      if outcome.valid?
+        Manifold::Rake.logger.info "Ingested text: #{outcome.result.id}"
+      else
+        Manifold::Rake.logger.info "Could not ingest #{args[:path]}"
+      end
+    end
+
     desc "Import a project form a JSON definition"
     task :import, [:path, :include_texts] => :environment do |_t, args|
       cli_user = Manifold::Rake.cli_user
