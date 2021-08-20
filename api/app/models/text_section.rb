@@ -135,11 +135,7 @@ class TextSection < ApplicationRecord
 
       if (inline.include?(node["parent"]) && nodes[-1]) || once_more
         # Append inline content to previous node
-        begin
-          nodes[-1][:content] = nodes[-1][:content].dup.insert(0, node["content"] + " ")
-        rescue
-          binding.pry
-        end
+        nodes[-1][:content] = nodes[-1][:content].dup.insert(0, node["content"] + " ")
         # Collect wrapped up uuids
         nodes[-1][:contains] << node[:node_uuid]
         nodes[-1][:node_uuid] = node[:node_uuid]
