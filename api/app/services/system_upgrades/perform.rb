@@ -46,10 +46,13 @@ module SystemUpgrades
       begin
         Searchkick.models.each do |model|
           logger.info("Reindexing #{model.name}...")
+          model.searchkick_index.delete
           model.reindex
         end
       rescue Faraday::ConnectionFailed
         elastic_connection_error
+      rescue Elasticsearch::Transport::Transport::Errors::BadRequest => e
+        logger.error(e)
       end
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
