@@ -51,7 +51,8 @@ module SystemUpgrades
         end
       rescue Faraday::ConnectionFailed
         elastic_connection_error
-      rescue Elasticsearch::Transport::Transport::Errors::BadRequest => e
+      rescue StandardError => e
+        # We really do want to continue if reindexing fails.
         logger.error(e)
       end
     end
