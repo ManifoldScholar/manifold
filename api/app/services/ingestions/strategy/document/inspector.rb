@@ -17,7 +17,14 @@ module Ingestions
         def title
           dublin_core_metadata("dc.title") ||
             first_tag_content("title") ||
+            header_with_title_class_content ||
             File.basename(source, ".*").titleize
+        end
+
+        def header_with_title_class_content
+          return unless index_path.present?
+
+          index_parsed.at("//h1[@class=\"textTitle\"]")&.content
         end
 
         def language

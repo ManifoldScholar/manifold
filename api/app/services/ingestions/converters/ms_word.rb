@@ -60,9 +60,16 @@ module Ingestions
         end
       end
 
+      def style_map
+        <<~HEREDOC
+        p[style-name='title'] => h1.textTitle
+        #{Settings.instance.ingestion[:mammoth_style_map]}
+        HEREDOC
+      end
+
       def with_style_map
         map = Tempfile.new
-        map.write(Settings.instance.ingestion[:mammoth_style_map])
+        map.write(style_map)
         map.close
         yield(map.path)
         map.unlink
