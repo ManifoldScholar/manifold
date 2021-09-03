@@ -87,7 +87,7 @@ gem "pry-rails", git: "https://github.com/manifoldscholar/pry-rails.git", branch
 gem "puma", "~> 5.0"
 gem "rack", ">= 2.0.6"
 gem "rack-cors", "~> 1.0"
-gem "rails", "~> 6.0.3.7"
+gem "rails", "~> 6.0.4"
 gem "rainbow", "~> 3.0"
 gem "redcarpet", "~> 3.5"
 gem "redis", "~> 4.0"
