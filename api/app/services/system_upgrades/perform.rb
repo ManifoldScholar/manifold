@@ -46,7 +46,7 @@ module SystemUpgrades
       begin
         Searchkick.models.each do |model|
           logger.info("Reindexing #{model.name}...")
-          model.searchkick_index.delete
+          model.searchkick_index.delete if model.searchkick_index.exists?
           model.reindex
         end
       rescue Faraday::ConnectionFailed
