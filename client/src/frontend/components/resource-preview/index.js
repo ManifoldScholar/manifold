@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { UID } from "react-uid";
 import Preview from "./Types";
 import { CSSTransition } from "react-transition-group";
 import GlobalOverlay from "global/components/Overlay";
@@ -74,39 +75,38 @@ export default class ResourcePreview extends Component {
 
   render() {
     const PreviewComponent = this.getPreviewComponent(this.props.resource);
-    const linkWrapperClass = "resource-link-wrapper";
 
-    if (!PreviewComponent)
-      return (
-        <div className={linkWrapperClass}>
-          {this.renderChildren(this.props.resource)}
-        </div>
-      );
+    if (!PreviewComponent) return this.renderChildren(this.props.resource);
 
     return (
-      <div className={linkWrapperClass}>
-        <CSSTransition
-          in={this.state.overlayOpen}
-          classNames="overlay-full"
-          timeout={{ enter: 300, exit: 300 }}
-          unmountOnExit
-        >
-          <GlobalOverlay
-            appearance="overlay-full bg-neutral90"
-            closeCallback={this.closeOverlay}
-          >
-            <PreviewComponent resource={this.props.resource} />
-          </GlobalOverlay>
-        </CSSTransition>
-        <div
-          className="resource-preview-wrapper"
-          onClick={this.handleOpenPreviewClick}
-          role="button"
-          tabIndex="0"
-        >
-          {this.renderChildren()}
-        </div>
-      </div>
+      <UID>
+        {id => (
+          <>
+            <CSSTransition
+              in={this.state.overlayOpen}
+              classNames="overlay-full"
+              timeout={{ enter: 300, exit: 300 }}
+              unmountOnExit
+            >
+              <GlobalOverlay
+                appearance="overlay-full bg-neutral90"
+                closeCallback={this.closeOverlay}
+                id={id}
+              >
+                <PreviewComponent resource={this.props.resource} />
+              </GlobalOverlay>
+            </CSSTransition>
+            <button
+              className="resource-preview-wrapper"
+              onClick={this.handleOpenPreviewClick}
+              aria-controls={id}
+              aria-expanded={this.state.overlayOpen}
+            >
+              {this.renderChildren()}
+            </button>
+          </>
+        )}
+      </UID>
     );
   }
 }

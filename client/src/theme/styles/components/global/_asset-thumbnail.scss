@@ -7,9 +7,13 @@
   background-color: $neutral10;
 
   &.bg-image {
+    --default-hover-color: #{$accentInteractionLight};
+    --default-focus-color: #{$accentInteractionLight};
+
     color: $neutralWhite;
     background-position: 0 0;
     background-size: cover;
+    transition: color $duration $timing;
 
     &::before {
       position: absolute;
@@ -160,7 +164,6 @@
         padding-bottom: 0.5em;
       }
     }
-
 
     .icon-thumbnail-title {
       @include templateHead;

@@ -25,7 +25,12 @@ export default class ResourceLink extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="button-primary__text">Visit Page</span>
+            <span className="button-primary__text" aria-hidden>
+              Visit Page
+            </span>
+            <span className="screen-reader-text">
+              {`Visit link “${attr.title}”`}
+            </span>
             <IconComposer
               icon="arrowRight16"
               size="default"
@@ -39,10 +44,12 @@ export default class ResourceLink extends Component {
           <a
             href={attr.attachmentStyles.original}
             className={this.props.buttonClass}
-            target="_blank"
-            rel="noopener noreferrer"
+            download={attr.slug}
           >
-            <span className="button-primary__text">Download</span>
+            <span className="button-primary__text" aria-hidden>
+              Download
+            </span>
+            <span className="screen-reader-text">{`Download ${attr.kind} “${attr.title}”`}</span>
             <IconComposer
               icon="arrowDown16"
               size="default"

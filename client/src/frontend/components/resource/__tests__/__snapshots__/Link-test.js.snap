@@ -3,14 +3,19 @@
 exports[`frontend/components/resource/Link matches the snapshot 1`] = `
 <a
   className="button-primary"
+  download="slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
   href="original-image.mock"
-  rel="noopener noreferrer"
-  target="_blank"
 >
   <span
+    aria-hidden={true}
     className="button-primary__text"
   >
     Download
+  </span>
+  <span
+    className="screen-reader-text"
+  >
+    Download image “Image”
   </span>
   <IconComposer
     fill="currentColor"
