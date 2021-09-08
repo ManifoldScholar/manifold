@@ -46,7 +46,7 @@ export default {
       expiration: defaultExpiration
     };
   },
-  "editor-backend-settings": payloadIgnored => {
+  "backend-settings": payloadIgnored => {
     return {
       level: 0,
       id: "SETTINGS_UPDATED",
@@ -123,7 +123,7 @@ export default {
       expiration: defaultExpiration
     };
   },
-  "editor-backend-edit-user": payload => {
+  "backend-user-update": payload => {
     return {
       level: 0,
       heading: "Success!",
@@ -133,7 +133,7 @@ export default {
       expiration: defaultExpiration
     };
   },
-  "editor-backend-create-project": () => {
+  "backend-create-project": () => {
     return {
       level: 0,
       heading: "Your project has been created.",
@@ -141,7 +141,7 @@ export default {
       expiration: defaultExpiration
     };
   },
-  "editor-backend-project-update": payload => {
+  "backend-project-update": payload => {
     return {
       level: 0,
       heading: "Success!",
@@ -149,7 +149,7 @@ export default {
       expiration: defaultExpiration
     };
   },
-  "editor-backend-resource-create": payloadIgnored => {
+  "backend-resource-create": payloadIgnored => {
     return {
       level: 0,
       heading: "Your resource has been created.",
@@ -157,7 +157,7 @@ export default {
       expiration: defaultExpiration
     };
   },
-  "editor-backend-maker-update": payload => {
+  "backend-maker-update": payload => {
     return {
       level: 0,
       heading: "Success!",
@@ -165,7 +165,7 @@ export default {
       expiration: defaultExpiration
     };
   },
-  "editor-backend-resource-update": payload => {
+  "backend-resource-update": payload => {
     return {
       level: 0,
       heading: "Success!",
