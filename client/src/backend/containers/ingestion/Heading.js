@@ -89,7 +89,11 @@ export default class IngestionHeader extends Component {
             {this.figureBlock()}
             {this.titleBlock()}
           </header>
-          <div className="backend-header__body ingestion-output__properties">
+          <div
+            aria-live="polite"
+            aria-atomic
+            className="backend-header__body ingestion-output__properties"
+          >
             <Property label="Current state" value={this.currentState} />
             <Property label="Strategy" value={this.strategy} />
             <Property label="Text ID" value={this.textId} />

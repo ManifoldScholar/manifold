@@ -1,10 +1,12 @@
 .ingestion-output {
+  .backend-header {
+    margin-bottom: 30px;
+  }
+
   &__label {
-    @include formInputSecondary;
+    @include utilityPrimary;
     margin-top: 20px;
     font-size: 12px;
-    font-weight: $semibold;
-    letter-spacing: 0.125em;
   }
 
   &__value {
@@ -26,7 +28,8 @@
     }
   }
 
-  &__log {}
+  &__log {
+  }
 
   &__log-value {
     @include utilityPrimary;
