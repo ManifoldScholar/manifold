@@ -14,6 +14,10 @@ export default class IngestionActions extends Component {
     complete: PropTypes.func.isRequired
   };
 
+  componentDidMount() {
+    if (this.startButtonRef) this.startButtonRef.focus();
+  }
+
   get ingestion() {
     return this.props.ingestion;
   }
@@ -47,6 +51,9 @@ export default class IngestionActions extends Component {
 
     return (
       <button
+        ref={el => {
+          this.startButtonRef = el;
+        }}
         onClick={this.props.start}
         className={this.buttonClasses}
         disabled={this.inProgress}
