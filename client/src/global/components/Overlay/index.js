@@ -15,6 +15,7 @@ function Overlay({
   closeUrl,
   history,
   triggerScrollToTop,
+  id,
   children
 }) {
   const overlayRef = useRef(null);
@@ -55,6 +56,7 @@ function Overlay({
         className={appearance || "overlay-full"}
         key="globalOverlay"
         ref={overlayRef}
+        id={id}
       >
         <FocusTrap
           focusTrapOptions={{
@@ -89,7 +91,8 @@ Overlay.propTypes = {
   closeCallback: PropTypes.func,
   contentWidth: PropTypes.number,
   appearance: PropTypes.string,
-  triggerScrollToTop: PropTypes.any
+  triggerScrollToTop: PropTypes.any,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
 
 export default Overlay;

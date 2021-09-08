@@ -1,7 +1,7 @@
 .resource-card {
   display: flex;
 
-  .resource-link-wrapper {
+  &__preview {
     display: flex;
     width: 37.8%;
 
@@ -18,7 +18,7 @@
     }
   }
 
-  &__link {
+  &__preview-inner {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -30,12 +30,17 @@
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: cover;
+  }
 
-    &:hover, &:focus-visible {
+  &__preview-link {
+    width: 100%;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
       outline: 0;
 
-      .icon-thumbnail-type,
-      .icon-thumbnail-icon {
+      .icon-thumbnail-primary {
         @include defaultHoverStyle;
       }
 
@@ -64,11 +69,10 @@
     padding: 1em 6px;
     font-size: 12px;
     line-height: 13px;
+    color: var(--default-color);
     white-space: nowrap;
     background-color: $neutral20;
-    transition:
-      color $duration $timing,
-      background-color $duration $timing;
+    transition: color $duration $timing, background-color $duration $timing;
 
     @include respond($break50) {
       padding: 1em 10px;
@@ -78,8 +82,9 @@
       font-size: 14px;
     }
 
-    .resource-card__link:hover &,
-    .resource-card__link:focus-visible &,
+    .resource-card__preview-link:hover &,
+    .resource-card__preview-link:focus-visible &,
+    .resource-preview-wrapper:hover &,
     .resource-preview-wrapper:focus-visible & {
       color: $neutralWhite;
       background-color: $defaultHoverColor;
@@ -123,7 +128,8 @@
       width: calc(100% - 155px);
     }
 
-    &--hover, &:focus-visible {
+    &--hover,
+    &:focus-visible {
       cursor: pointer;
       outline: 0;
     }
@@ -142,9 +148,7 @@
     text-decoration: none;
     background-color: $neutral20;
     border-radius: 100%;
-    transition:
-      color $duration $timing,
-      background-color $duration $timing;
+    transition: color $duration $timing, background-color $duration $timing;
 
     @include respond($break40) {
       right: -17.5px;
@@ -194,12 +198,14 @@
   .resource-preview-wrapper {
     display: flex;
     width: 100%;
+    padding: 0;
+    border: none;
 
+    &:hover,
     &:focus-visible {
       outline: 0;
 
-      .icon-thumbnail-type,
-      .icon-thumbnail-icon {
+      .icon-thumbnail-primary {
         @include defaultHoverStyle;
       }
     }

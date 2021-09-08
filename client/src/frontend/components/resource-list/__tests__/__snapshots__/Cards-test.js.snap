@@ -29,7 +29,7 @@ exports[`frontend/components/resource-list/Cards matches the snapshot 1`] = `
       <Meta.DOI />
     </div>
     <ul>
-      <withRouter(Card)
+      <ResourceCard
         key="resource-0"
         project={
           Object {
@@ -1200,7 +1200,7 @@ exports[`frontend/components/resource-list/Cards matches the snapshot 1`] = `
           }
         }
       />
-      <withRouter(Card)
+      <ResourceCard
         key="resource-1"
         project={
           Object {
@@ -2371,7 +2371,7 @@ exports[`frontend/components/resource-list/Cards matches the snapshot 1`] = `
           }
         }
       />
-      <withRouter(Card)
+      <ResourceCard
         key="resource-2"
         project={
           Object {

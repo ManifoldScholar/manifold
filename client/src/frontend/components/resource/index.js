@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Card from "./Card/index";
 import Detail from "./Detail";
 import Hero from "./Hero";
 import Link from "./Link";

@@ -10,6 +10,10 @@
   // <ul>
   .meta-list-secondary {
     margin-bottom: 22px;
+
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
   }
 
   // Only shown on mobile
