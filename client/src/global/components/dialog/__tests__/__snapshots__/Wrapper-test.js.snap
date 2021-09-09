@@ -9,6 +9,7 @@ exports[`backend/components/dialog/Wrapper matches the snapshot 1`] = `
     role="button"
   />
   <div
+    aria-modal="true"
     class="dialog dialog-confirm"
     role="dialog"
     style="max-width:400px"

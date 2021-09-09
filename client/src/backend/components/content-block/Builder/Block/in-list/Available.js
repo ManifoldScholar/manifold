@@ -25,7 +25,7 @@ export default class ProjectContentBlockInListAvailable extends PureComponent {
             <Identity icon={block.icon} title={block.title} />
             <button
               className="backend-content-block__button"
-              title="Add content block"
+              aria-label={`Add content block “${block.title}”`}
               onClick={this.props.onClickAdd}
               disabled={this.props.disabled}
             >

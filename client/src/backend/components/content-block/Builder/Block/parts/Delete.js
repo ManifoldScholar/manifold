@@ -7,7 +7,8 @@ export default class ProjectContentBlockInListPartsDelete extends PureComponent 
 
   static propTypes = {
     baseClass: PropTypes.string.isRequired,
-    clickHandler: PropTypes.func.isRequired
+    clickHandler: PropTypes.func.isRequired,
+    blockTitle: PropTypes.string
   };
 
   render() {
@@ -17,7 +18,7 @@ export default class ProjectContentBlockInListPartsDelete extends PureComponent 
       <button
         className={`${this.props.baseClass}__button ${this.props.baseClass}__button--delete`}
         onClick={this.props.clickHandler}
-        title="Delete content block"
+        aria-label={`Delete content block “${this.props.blockTitle}”`}
       >
         <Utility.IconComposer icon="delete32" size={26} iconClass={iconClass} />
       </button>

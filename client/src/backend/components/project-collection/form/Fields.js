@@ -37,7 +37,11 @@ class Fields extends Component {
 
     return (
       <>
-        <Navigation.DrawerHeader buttons={buttons}>
+        <Navigation.DrawerHeader
+          title="Manage project collection"
+          hideTitle
+          buttons={buttons}
+        >
           <Form.TextInput
             wide
             focusOnMount

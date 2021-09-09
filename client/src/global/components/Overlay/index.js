@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import FocusTrap from "focus-trap-react";
+import { useUID } from "react-uid";
 import Header from "./Header";
 
 import BodyClass from "hoc/body-class";
@@ -19,6 +20,7 @@ function Overlay({
   children
 }) {
   const overlayRef = useRef(null);
+  const headerId = useUID();
 
   function handleCloseEvent(event) {
     if (closeCallback) {
@@ -57,6 +59,9 @@ function Overlay({
         key="globalOverlay"
         ref={overlayRef}
         id={id}
+        role="dialog"
+        aria-modal
+        aria-labelledby={headerId}
       >
         <FocusTrap
           focusTrapOptions={{
@@ -68,6 +73,7 @@ function Overlay({
             subtitle={subtitle}
             icon={icon}
             onCloseClick={handleCloseEvent}
+            headerId={headerId}
           />
           <div style={{ maxWidth: contentWidth }} className="container">
             {children}

@@ -63,10 +63,10 @@ export default class Builder extends PureComponent {
     const DrawerContents = this.drawerComponent;
 
     return (
-      <>
-        <section className="hero-builder form-secondary">
-          <UID name={id => `hero-builder-${id}`}>
-            {id => (
+      <UID name={id => `hero-builder-${id}`}>
+        {id => (
+          <>
+            <section className="hero-builder form-secondary">
               <div
                 className="form-section form-section--primary"
                 role="group"
@@ -83,12 +83,16 @@ export default class Builder extends PureComponent {
                   title="Description + Images"
                   description="Description Text, Cover Art, and Background Image"
                   onEdit={this.openDescriptionDrawer}
+                  ariaControls={`${id}-drawer`}
+                  ariaExpanded={this.state.drawer === Forms.Description}
                 />
                 <Block
                   title="Calls-to-Action"
                   description="Buttons and links to related resources"
                   onEdit={this.toggleActionCallouts}
                   open={this.isActionCalloutsOpen}
+                  ariaControls={`${id}-disclosure`}
+                  ariaExpanded={this.isActionCalloutsOpen}
                 >
                   {this.props.actionCallouts && (
                     <ActionCallouts
@@ -104,21 +108,26 @@ export default class Builder extends PureComponent {
                   title="Social Links"
                   description="Links to social platforms and hashtag"
                   onEdit={this.openSocialDrawer}
+                  ariaControls={`${id}-drawer`}
+                  ariaExpanded={this.state.drawer === Forms.Social}
                 />
               </div>
-            )}
-          </UID>
-        </section>
-        <Drawer.Wrapper
-          lockScroll="always"
-          lockScrollClickCloses={false}
-          closeCallback={this.onDrawerClose}
-          open={this.isDrawerOpen}
-          context="backend"
-        >
-          {this.isDrawerOpen ? <DrawerContents project={this.project} /> : null}
-        </Drawer.Wrapper>
-      </>
+            </section>
+            <Drawer.Wrapper
+              lockScroll="always"
+              lockScrollClickCloses={false}
+              closeCallback={this.onDrawerClose}
+              open={this.isDrawerOpen}
+              context="backend"
+              id={`${id}-drawer`}
+            >
+              {this.isDrawerOpen ? (
+                <DrawerContents project={this.project} />
+              ) : null}
+            </Drawer.Wrapper>
+          </>
+        )}
+      </UID>
     );
   }
 }

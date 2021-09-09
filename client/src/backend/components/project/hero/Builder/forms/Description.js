@@ -12,7 +12,8 @@ export default class Description extends PureComponent {
 
   static propTypes = {
     project: PropTypes.object.isRequired,
-    closeDrawer: PropTypes.func
+    closeDrawer: PropTypes.func,
+    headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   };
 
   get project() {
@@ -36,6 +37,7 @@ export default class Description extends PureComponent {
           <Navigation.DrawerHeader
             icon="projects64"
             title="Description + Images"
+            headerId={this.props.headerId}
           />
           <FormContainer.Form
             model={this.project}

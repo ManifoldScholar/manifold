@@ -9,9 +9,13 @@
 
 
   &__header {
+    @include buttonUnstyled;
+    width: 100%;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: $heroBlockPadding / 2;
-    cursor: pointer;
+    text-align: start;
 
     &:hover {
       color: $neutralTextLight;
@@ -42,9 +46,10 @@
   }
 
   &__button {
-    @include buttonUnstyled;
+    display: flex;
+    align-items: center;
 
-    &:focus-visible {
+    .hero-builder-block__header:focus-visible & {
       svg {
         color: $defaultHoverColor;
       }

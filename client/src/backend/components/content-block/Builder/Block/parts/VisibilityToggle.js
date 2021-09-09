@@ -8,7 +8,8 @@ export default class ProjectContentBlockVisibilityToggle extends PureComponent {
   static propTypes = {
     visible: PropTypes.bool.isRequired,
     entity: PropTypes.object.isRequired,
-    entityCallbacks: PropTypes.object.isRequired
+    entityCallbacks: PropTypes.object.isRequired,
+    blockTitle: PropTypes.string
   };
 
   get entity() {
@@ -27,7 +28,7 @@ export default class ProjectContentBlockVisibilityToggle extends PureComponent {
       return (
         <button
           className={`${baseClass}__button`}
-          title="Hide content block"
+          aria-label={`Hide content block “${this.props.blockTitle}”`}
           onClick={this.props.entityCallbacks.hideBlock}
         >
           <Utility.IconComposer
@@ -41,7 +42,7 @@ export default class ProjectContentBlockVisibilityToggle extends PureComponent {
     return (
       <button
         className={`${baseClass}__button`}
-        title="Show content block"
+        aria-label={`Show content block “${this.props.blockTitle}”`}
         onClick={this.props.entityCallbacks.showBlock}
       >
         <Utility.IconComposer

@@ -5,8 +5,11 @@ exports[`global/components/Overlay matches the snapshot 1`] = `
   className="no-scroll overlay"
 >
   <div
+    aria-labelledby="abcdef"
+    aria-modal={true}
     className="overlay-full"
     key="globalOverlay"
+    role="dialog"
   >
     <focus-trap-react
       focusTrapOptions={
@@ -16,6 +19,7 @@ exports[`global/components/Overlay matches the snapshot 1`] = `
       }
     >
       <Global.Overlay.Header
+        headerId="abcdef"
         onCloseClick={[Function]}
       />
       <div

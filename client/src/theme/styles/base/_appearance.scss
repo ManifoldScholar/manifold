@@ -169,7 +169,8 @@ body {
   input[type='text'],
   input[type='email'],
   input[type='password'],
-  select {
+  select,
+  textarea {
     color: var(--default-strong-color);
   }
 }

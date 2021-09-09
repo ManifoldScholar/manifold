@@ -8,7 +8,8 @@ export default class ProjectContentBlockInListPartsEdit extends PureComponent {
   static propTypes = {
     visible: PropTypes.bool.isRequired,
     baseClass: PropTypes.string.isRequired,
-    clickHandler: PropTypes.func.isRequired
+    clickHandler: PropTypes.func.isRequired,
+    blockTitle: PropTypes.string
   };
 
   render() {
@@ -19,7 +20,7 @@ export default class ProjectContentBlockInListPartsEdit extends PureComponent {
       <button
         className={`${this.props.baseClass}__button`}
         onClick={this.props.clickHandler}
-        title="Edit content block"
+        aria-label={`Edit content block “${this.props.blockTitle}”`}
       >
         <Utility.IconComposer
           icon="annotate32"

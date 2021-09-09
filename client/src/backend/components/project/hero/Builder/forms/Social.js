@@ -12,7 +12,8 @@ export default class Social extends PureComponent {
 
   static propTypes = {
     project: PropTypes.object.isRequired,
-    closeDrawer: PropTypes.func
+    closeDrawer: PropTypes.func,
+    headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   };
 
   get project() {
@@ -33,7 +34,11 @@ export default class Social extends PureComponent {
         failureRedirect={lh.link("backendProject", this.project.id)}
       >
         <section>
-          <Navigation.DrawerHeader icon="projects64" title="Social Links" />
+          <Navigation.DrawerHeader
+            icon="projects64"
+            title="Social Links"
+            headerId={this.props.headerId}
+          />
           <FormContainer.Form
             model={this.project}
             name="backend-project-update"

@@ -61,6 +61,7 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
                 <Delete
                   baseClass={baseClass}
                   clickHandler={this.props.entityCallbacks.deleteBlock}
+                  blockTitle={block.title}
                 />
               </Authorize>
               <Authorize entity={this.entity} ability="update">
@@ -68,16 +69,19 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
                   visible={this.hideable}
                   entity={this.entity}
                   entityCallbacks={this.props.entityCallbacks}
+                  blockTitle={block.title}
                 />
                 <Edit
                   visible={this.configurable}
                   baseClass={baseClass}
                   clickHandler={this.props.entityCallbacks.editBlock}
+                  blockTitle={block.title}
                 />
                 <Drag
                   visible={this.orderable}
                   baseClass={baseClass}
                   dragHandleProps={this.props.dragHandleProps}
+                  blockTitle={block.title}
                 />
               </Authorize>
             </div>
