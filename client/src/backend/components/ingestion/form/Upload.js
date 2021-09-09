@@ -4,6 +4,7 @@ import classNames from "classnames";
 import Form from "global/components/form";
 import setter from "global/components/form/setter";
 import IconComposer from "global/components/utility/IconComposer";
+import { DrawerContext } from "helpers/contexts";
 
 class IngestionFormUpload extends PureComponent {
   static displayName = "ProjectDetail.Text.Ingestion.Form.Upload";
@@ -78,57 +79,63 @@ class IngestionFormUpload extends PureComponent {
 
     /* eslint-disable max-len */
     return (
-      <div>
-        <Form.Header label={formHeader} />
-        <Form.TusUpload
-          inlineStyle={{ width: "100%" }}
-          layout="landscape"
-          instructions={fileInstructions}
-          label="Upload a file"
-          value={this.props.getModelValue("attributes[source]")}
-          initialValue={this.props.getModelValue("attributes[sourceFileName]")}
-          set={this.onSourceChange}
-          accepts="any"
-        />
-        <div className="form-divider">or</div>
-        <Form.TextInput
-          label="URL"
-          focusOnMount
-          instructions="Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
-          value={this.props.getModelValue("attributes[externalSourceUrl]")}
-          onChange={event => this.onUrlChange(event)}
-        />
-        <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
-          {this.props.cancelUrl ? (
-            <button
-              onClick={this.handleCancelClick}
-              className={classNames(
-                this.buttonClasses,
-                "button-icon-secondary--dull"
+      <DrawerContext.Consumer>
+        {contextProps => (
+          <div>
+            <Form.Header label={formHeader} id={contextProps?.headerId} />
+            <Form.TusUpload
+              inlineStyle={{ width: "100%" }}
+              layout="landscape"
+              instructions={fileInstructions}
+              label="Upload a file"
+              value={this.props.getModelValue("attributes[source]")}
+              initialValue={this.props.getModelValue(
+                "attributes[sourceFileName]"
               )}
-            >
-              <IconComposer
-                icon="close16"
-                size="default"
-                iconClass="button-icon-secondary__icon"
-              />
-              <span>Cancel</span>
-            </button>
-          ) : null}
-          <button
-            type="submit"
-            className={this.buttonClasses}
-            disabled={!this.valid}
-          >
-            <IconComposer
-              icon="checkmark16"
-              size="default"
-              iconClass="button-icon-secondary__icon"
+              set={this.onSourceChange}
+              accepts="any"
             />
-            <span>Continue</span>
-          </button>
-        </div>
-      </div>
+            <div className="form-divider">or</div>
+            <Form.TextInput
+              label="URL"
+              focusOnMount
+              instructions="Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
+              value={this.props.getModelValue("attributes[externalSourceUrl]")}
+              onChange={event => this.onUrlChange(event)}
+            />
+            <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
+              {this.props.cancelUrl ? (
+                <button
+                  onClick={this.handleCancelClick}
+                  className={classNames(
+                    this.buttonClasses,
+                    "button-icon-secondary--dull"
+                  )}
+                >
+                  <IconComposer
+                    icon="close16"
+                    size="default"
+                    iconClass="button-icon-secondary__icon"
+                  />
+                  <span>Cancel</span>
+                </button>
+              ) : null}
+              <button
+                type="submit"
+                className={this.buttonClasses}
+                disabled={!this.valid}
+              >
+                <IconComposer
+                  icon="checkmark16"
+                  size="default"
+                  iconClass="button-icon-secondary__icon"
+                />
+                <span>Continue</span>
+              </button>
+            </div>
+          </div>
+        )}
+      </DrawerContext.Consumer>
     );
   }
 }

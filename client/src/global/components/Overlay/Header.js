@@ -4,12 +4,12 @@ import Title from "./Title";
 import Subtitle from "./Subtitle";
 import CloseButton from "./Close";
 
-function Header({ title, subtitle, icon, onCloseClick }) {
+function Header({ title, subtitle, icon, onCloseClick, headerId }) {
   return (
     <header className="overlay-full-header" key="globalOverlayHeader">
       <div className="overlay-full-header__inner">
         <div className="overlay-full-header__middle">
-          {title && <Title title={title} icon={icon} />}
+          {title && <Title id={headerId} title={title} icon={icon} />}
         </div>
         <div className="overlay-full-header__start">
           {subtitle && <Subtitle subtitle={subtitle} />}
@@ -28,7 +28,8 @@ Header.propTypes = {
   onCloseClick: PropTypes.func.isRequired,
   icon: PropTypes.string,
   title: PropTypes.string,
-  subtitle: PropTypes.string
+  subtitle: PropTypes.string,
+  headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 export default Header;

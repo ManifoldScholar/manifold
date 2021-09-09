@@ -1,71 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
-<Component
-  classNames="drawer"
-  in={true}
-  timeout={
-    Object {
-      "enter": 500,
-      "exit": 300,
-    }
-  }
-  unmountOnExit={true}
+<mockConstructor
+  name={[Function]}
 >
-  <div>
-    <Utility.EdgeLockScroll>
-      <div
-        className="drawer drawer--backend drawer--right drawer--default drawer--pad-default drawer--pos-default"
-        key="drawer"
-      >
-        <focus-trap-react
-          active={false}
-          focusTrapOptions={
-            Object {
-              "clickOutsideDeactivates": true,
-              "escapeDeactivates": false,
-              "returnFocusOnDeactivate": true,
-            }
-          }
-        >
-          <div
-            className="drawer-bar drawer-bar--default"
-          >
-            <div
-              className="drawer-bar__title"
-            >
-              <span
-                className="drawer-bar__title-text"
-              >
-                wrapper
-              </span>
-            </div>
-            <button
-              className="drawer-bar__close-button drawer-bar__close-button--light"
-              onClick={[Function]}
-              tabIndex="0"
-            >
-              <span
-                className="drawer-bar__close-text"
-              >
-                Close
-              </span>
-              <IconComposer
-                fill="currentColor"
-                icon="close24"
-                iconClass="drawer-bar__close-icon"
-                size={24}
-                svgProps={
-                  Object {
-                    "aria-hidden": true,
-                  }
-                }
-              />
-            </button>
-          </div>
-        </focus-trap-react>
-      </div>
-    </Utility.EdgeLockScroll>
-  </div>
-</Component>
+  <Component />
+</mockConstructor>
 `;

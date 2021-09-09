@@ -133,6 +133,7 @@ class DialogWrapper extends PureComponent {
             />
             <div
               role="dialog"
+              aria-modal
               aria-labelledby={this.props.labelledBy}
               aria-describedby={this.props.describedBy}
               className={classnames(

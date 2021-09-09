@@ -1,16 +1,19 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
-import { UnmountClosed as Collapse } from "react-collapse";
+import { Collapse } from "react-collapse";
 
 export default class Block extends PureComponent {
   static displayName = "Project.Hero.Builder.Block";
 
   static propTypes = {
     title: PropTypes.string.isRequired,
+    titleId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     description: PropTypes.string,
     onEdit: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
+    ariaControls: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    ariaExpanded: PropTypes.bool,
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
@@ -38,34 +41,57 @@ export default class Block extends PureComponent {
     return this.props.title;
   }
 
+  get titleId() {
+    return this.props.titleId;
+  }
+
   get open() {
     return this.props.open;
+  }
+
+  get ariaExpanded() {
+    return this.props.ariaExpanded;
+  }
+
+  get ariaControls() {
+    return this.props.ariaControls;
+  }
+
+  get hasDisclosure() {
+    return React.isValidElement(this.props.children);
   }
 
   render() {
     return (
       <div className="hero-builder-block full-width">
-        <div
+        <button
           className="hero-builder-block__header"
-          role="button"
           onClick={this.onEdit}
+          aria-expanded={this.ariaExpanded}
+          aria-controls={this.ariaControls}
         >
           <div className="hero-builder-block__header-details">
-            <h3 className="hero-builder-block__title">{this.title}</h3>
+            <h3 id={this.titleId} className="hero-builder-block__title">
+              {this.title}
+            </h3>
             {this.hasDescription && (
               <p className="hero-builder-block__description">
                 {this.description}
               </p>
             )}
           </div>
-          <button className="hero-builder-block__button">
+          <div className="hero-builder-block__button">
             <span className="hero-builder-block__button-label">Edit</span>
             <Utility.IconComposer icon="annotate32" size={26} />
-          </button>
-        </div>
-        <Collapse isOpened={this.open}>
-          <div className="hero-builder-block__body">{this.props.children}</div>
-        </Collapse>
+          </div>
+        </button>
+        {this.hasDisclosure && (
+          <Collapse id={this.ariaControls} isOpened={this.open} aria-hidden>
+            <div className="hero-builder-block__body">
+              {this.props.children}
+            </div>
+          </Collapse>
+        )}
       </div>
     );
   }

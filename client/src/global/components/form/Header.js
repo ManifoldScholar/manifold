@@ -5,13 +5,14 @@ export default class FormHeader extends Component {
   static displayName = "Form.Header";
 
   static propTypes = {
-    label: PropTypes.string.isRequired
+    label: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   };
 
   render() {
     return (
       <header className="form-header">
-        <h2>{this.props.label}</h2>
+        <h2 id={this.props.id}>{this.props.label}</h2>
       </header>
     );
   }

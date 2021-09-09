@@ -1,16 +1,17 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
-import Utility from "global/components/utility";
-import Notifications from "global/containers/Notifications";
-import isString from "lodash/isString";
 import FocusTrap from "focus-trap-react";
 import tabbable from "tabbable";
 import has from "lodash/has";
+import isString from "lodash/isString";
 import classNames from "classnames";
-import { notificationActions } from "actions";
-import IconComposer from "global/components/utility/IconComposer";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import { UID } from "react-uid";
+import Utility from "global/components/utility";
+import Notifications from "global/containers/Notifications";
+import { notificationActions } from "actions";
+import { DrawerContext } from "helpers/contexts";
 
 export default class DrawerWrapper extends PureComponent {
   static mapStateToProps() {
@@ -42,7 +43,8 @@ export default class DrawerWrapper extends PureComponent {
     includeDrawerFrontMatter: PropTypes.bool,
     returnFocusOnDeactivate: PropTypes.bool,
     focusTrap: PropTypes.bool,
-    includeSRCloseButton: PropTypes.bool
+    includeSRCloseButton: PropTypes.bool,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   };
 
   static childContextTypes = {
@@ -227,7 +229,7 @@ export default class DrawerWrapper extends PureComponent {
     );
   }
 
-  renderDrawerFrontMatter(props) {
+  renderDrawerFrontMatter(props, headerId) {
     const hasTitle = props.title || props.icon;
     const hasClose = props.closeCallback || props.closeUrl;
 
@@ -238,14 +240,16 @@ export default class DrawerWrapper extends PureComponent {
             {hasTitle ? (
               <div className="drawer-bar__title">
                 {props.icon && (
-                  <IconComposer
+                  <Utility.IconComposer
                     icon={props.icon}
                     size={24}
                     iconClass="drawer-bar__title-icon"
                   />
                 )}
                 {props.title && (
-                  <span className="drawer-bar__title-text">{props.title}</span>
+                  <span id={headerId} className="drawer-bar__title-text">
+                    {props.title}
+                  </span>
                 )}
               </div>
             ) : null}
@@ -278,12 +282,17 @@ export default class DrawerWrapper extends PureComponent {
     );
   }
 
-  renderDrawer() {
+  renderDrawer(headerId) {
     return (
       <div
         key="drawer"
         className={this.drawerClasses}
         ref={this.scrollableNode}
+        id={this.props.id}
+        role="dialog"
+        aria-modal={this.props.focusTrap}
+        aria-label={this.props.ariaLabel}
+        aria-labelledby={headerId}
       >
         <FocusTrap
           ref={this.focusTrapNode}
@@ -294,12 +303,14 @@ export default class DrawerWrapper extends PureComponent {
             returnFocusOnDeactivate: this.props.returnFocusOnDeactivate
           }}
         >
-          {this.renderDrawerFrontMatter(this.props)}
+          {this.renderDrawerFrontMatter(this.props, headerId)}
           {this.props.connected && (
             <Notifications scope="drawer" style="drawer" animate={false} />
           )}
           {/* Render children without props if they aren't a component */}
-          {this.renderChildren()}
+          <DrawerContext.Provider value={{ headerId }}>
+            {this.renderChildren()}
+          </DrawerContext.Provider>
         </FocusTrap>
       </div>
     );
@@ -313,11 +324,13 @@ export default class DrawerWrapper extends PureComponent {
     });
   }
 
-  renderDrawerWrapper() {
+  renderDrawerWrapper(headerId) {
     if (this.props.lockScroll === "hover") {
       return (
         <div className={this.props.identifier}>
-          <Utility.EdgeLockScroll>{this.renderDrawer()}</Utility.EdgeLockScroll>
+          <Utility.EdgeLockScroll>
+            {this.renderDrawer(headerId)}
+          </Utility.EdgeLockScroll>
         </div>
       );
     }
@@ -325,24 +338,28 @@ export default class DrawerWrapper extends PureComponent {
       return (
         <div className={this.props.identifier}>
           <div className={this.overlayClasses} />
-          {this.renderDrawer()}
+          {this.renderDrawer(headerId)}
         </div>
       );
     }
 
-    return this.renderDrawer();
+    return this.renderDrawer(headerId);
   }
 
   render() {
     return (
-      <CSSTransition
-        in={this.props.open}
-        classNames="drawer"
-        timeout={{ enter: 500, exit: 300 }}
-        unmountOnExit
-      >
-        {this.renderDrawerWrapper()}
-      </CSSTransition>
+      <UID name={id => `drawer-header-${id}`}>
+        {id => (
+          <CSSTransition
+            in={this.props.open}
+            classNames="drawer"
+            timeout={{ enter: 500, exit: 300 }}
+            unmountOnExit
+          >
+            {this.renderDrawerWrapper(id)}
+          </CSSTransition>
+        )}
+      </UID>
     );
   }
 }

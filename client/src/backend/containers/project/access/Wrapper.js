@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { UID } from "react-uid";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import PermissionsContainer from "backend/containers/permission";
@@ -58,61 +59,68 @@ class ProjectAccessWrapper extends Component {
             <PermissionsContainer.List entity={project} />
           </Layout.BackendPanel>
           <Layout.BackendPanel>
-            <EntitlementsContainer.List
-              entity={project}
-              preList={
-                <div style={{ marginBottom: 44, marginTop: 22 }}>
-                  <ProjectHero.Block
-                    title="Configure Access Restrictions"
-                    description="Enable access restrictions and adjust messaging"
-                    onEdit={this.toggleAccessSettings}
-                    open={this.state.accessSettingsOpen}
-                  >
-                    <FormContainer.Form
-                      style={{ paddingTop: 24, paddingBottom: 24 }}
-                      model={project}
-                      name="backend-project-update"
-                      update={updateProject}
-                      className="form-secondary"
-                    >
-                      {this.defaultIsOpen && (
-                        <Form.Switch
-                          className="form-toggle-secondary"
-                          label="Project Access is Restricted"
-                          name="attributes[restrictedAccess]"
-                        />
-                      )}
-                      {this.defaultIsRestricted && (
-                        <Form.Switch
-                          className="form-toggle-secondary"
-                          label="Project is Open Access"
-                          name="attributes[openAccess]"
-                        />
-                      )}
-                      <Form.TextInput
-                        className="form-toggle-secondary"
-                        label="Restricted Access Notice Header"
-                        name="attributes[restrictedAccessHeading]"
-                        placeholder={
-                          config.app.locale.notifications
-                            .projectAuthorizationNotice.heading
-                        }
-                      />
-                      <Form.TextArea
-                        className="form-toggle-secondary"
-                        label="Restricted Access Notice Body"
-                        name="attributes[restrictedAccessBody]"
-                        placeholder={
-                          config.app.locale.notifications
-                            .projectAuthorizationNotice.body
-                        }
-                      />
-                      <Form.Save text="Update Access Settings" />
-                    </FormContainer.Form>
-                  </ProjectHero.Block>
-                </div>
-              }
-            />
+            <UID name={id => `entitlement-block-${id}`}>
+              {id => (
+                <EntitlementsContainer.List
+                  entity={project}
+                  preList={
+                    <div style={{ marginBottom: 44, marginTop: 22 }}>
+                      <ProjectHero.Block
+                        title="Configure Access Restrictions"
+                        titleId={`${id}-title`}
+                        description="Enable access restrictions and adjust messaging"
+                        onEdit={this.toggleAccessSettings}
+                        open={this.state.accessSettingsOpen}
+                        ariaExpanded={this.state.accessSettingsOpen}
+                        ariaControls={`${id}-disclosure`}
+                      >
+                        <FormContainer.Form
+                          style={{ paddingTop: 24, paddingBottom: 24 }}
+                          model={project}
+                          name="backend-project-update"
+                          update={updateProject}
+                          className="form-secondary"
+                        >
+                          {this.defaultIsOpen && (
+                            <Form.Switch
+                              className="form-toggle-secondary"
+                              label="Project Access is Restricted"
+                              name="attributes[restrictedAccess]"
+                            />
+                          )}
+                          {this.defaultIsRestricted && (
+                            <Form.Switch
+                              className="form-toggle-secondary"
+                              label="Project is Open Access"
+                              name="attributes[openAccess]"
+                            />
+                          )}
+                          <Form.TextInput
+                            className="form-toggle-secondary"
+                            label="Restricted Access Notice Header"
+                            name="attributes[restrictedAccessHeading]"
+                            placeholder={
+                              config.app.locale.notifications
+                                .projectAuthorizationNotice.heading
+                            }
+                          />
+                          <Form.TextArea
+                            className="form-toggle-secondary"
+                            label="Restricted Access Notice Body"
+                            name="attributes[restrictedAccessBody]"
+                            placeholder={
+                              config.app.locale.notifications
+                                .projectAuthorizationNotice.body
+                            }
+                          />
+                          <Form.Save text="Update Access Settings" />
+                        </FormContainer.Form>
+                      </ProjectHero.Block>
+                    </div>
+                  }
+                />
+              )}
+            </UID>
           </Layout.BackendPanel>
         </Authorize>
         {childRoutes(this.props.route, {
