@@ -36,10 +36,10 @@ class SearchResultsTypeGeneric extends PureComponent {
     return value;
   }
 
-  wrapWithLink(url, contents) {
+  wrapWithLink({ url, contents, tabIndex = 0 }) {
     if (!url) return contents;
     return (
-      <Link to={url} className="search-result__title-link">
+      <Link to={url} className="search-result__title-link" tabIndex={tabIndex}>
         {contents}
       </Link>
     );
@@ -51,15 +51,18 @@ class SearchResultsTypeGeneric extends PureComponent {
         <article className="search-result__content-wrapper">
           <div className="search-result__figure-column">
             {this.hasProp("figure") &&
-              this.wrapWithLink(
-                this.props.url,
-                <figure
-                  className="search-result__figure"
-                  {...this.attributesFor("figure")}
-                >
-                  {this.valueFor("figure")}
-                </figure>
-              )}
+              this.wrapWithLink({
+                url: this.props.url,
+                contents: (
+                  <figure
+                    className="search-result__figure"
+                    {...this.attributesFor("figure")}
+                  >
+                    {this.valueFor("figure")}
+                  </figure>
+                ),
+                tabIndex: -1
+              })}
           </div>
           <div className="search-result__text-column">
             <div className="search-result__text-column-top">
@@ -69,22 +72,24 @@ class SearchResultsTypeGeneric extends PureComponent {
                     className="search-result__parent"
                     {...this.attributesFor("parent")}
                   >
-                    {this.wrapWithLink(
-                      this.props.parentUrl,
-                      this.valueFor("parent")
-                    )}
+                    {this.wrapWithLink({
+                      url: this.props.parentUrl,
+                      contents: this.valueFor("parent")
+                    })}
                   </div>
                 )}
                 {this.hasProp("title") &&
-                  this.wrapWithLink(
-                    this.props.url,
-                    <h3
-                      className="search-result__title"
-                      {...this.attributesFor("title")}
-                    >
-                      {this.valueFor("title")}
-                    </h3>
-                  )}
+                  this.wrapWithLink({
+                    url: this.props.url,
+                    contents: (
+                      <h3
+                        className="search-result__title"
+                        {...this.attributesFor("title")}
+                      >
+                        {this.valueFor("title")}
+                      </h3>
+                    )
+                  })}
                 {this.hasProp("attribution") && (
                   <address className="search-result__attribution">
                     <span {...this.attributesFor("attribution")}>
