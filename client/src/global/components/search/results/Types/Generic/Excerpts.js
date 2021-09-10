@@ -81,6 +81,9 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
           isOpened={this.state.open}
           onWork={this.holdScroll}
           onRest={this.holdScroll}
+          id="all-excerpts"
+          role="region"
+          aria-labelledby="expand-toggle"
         >
           <div className="search-result__excerpt-shim" />
           {this.expandedExcerpts.map(excerpt => (
@@ -104,6 +107,9 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
           <button
             className="search-result__excerpt-open-button"
             onClick={this.toggle}
+            aria-expanded={this.state.open}
+            aria-controls="all-excerpts"
+            id="expand-toggle"
           >
             {!this.state.open
               ? "Show all excerpts"
