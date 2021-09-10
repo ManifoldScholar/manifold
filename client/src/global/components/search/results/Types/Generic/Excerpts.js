@@ -90,7 +90,7 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
           <Collapse.Toggle className="search-result__excerpt-open-button">
             {(visible, labelProps) => (
               <span {...labelProps}>
-                {visible
+                {!visible
                   ? "Show all excerpts"
                   : "Only show most relevant excerpts"}
               </span>
