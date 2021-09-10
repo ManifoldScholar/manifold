@@ -5,3 +5,4 @@ export FrontendModeContext from "./FrontendModeContext";
 export BackLinkContext from "./BackLinkContext";
 export ReaderContext from "./ReaderContext";
 export DrawerContext from "./DrawerContext";
+export CollapseContext from "./CollapseContext";
