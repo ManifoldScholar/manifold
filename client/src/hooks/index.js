@@ -28,3 +28,5 @@ export { default as useSelectSearchResults } from "./search/use-select-search-re
 
 export { default as useGrabCurrentText } from "./texts/use-grab-current-text";
 export { default as useGrabCurrentTextSection } from "./texts/use-grab-current-text-section";
+
+export { default as useCollapseContext } from "./contexts/use-collapse-context";
