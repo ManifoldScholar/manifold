@@ -1,0 +1,26 @@
+.collapse {
+  &__content {
+    --height: 0;
+    --heightToMs: 0;
+    --delay: 0;
+    --diff: 0;
+
+    overflow: hidden;
+
+    &--visible {
+      height: var(--height);
+      opacity: 1;
+      visibility: 1;
+      transition: height var(--heightToMs) linear 0ms,
+        opacity var(--diff) ease var(--delay);
+    }
+    &--hidden {
+      height: 0;
+      opacity: 0;
+      visibility: 0;
+      transition: height var(--diff) linear 0ms,
+        opacity var(--heightToMs) ease var(--delay),
+        visibility var(--heightToMs);
+    }
+  }
+}
