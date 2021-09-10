@@ -6,6 +6,8 @@ import { useCollapseContext } from "hooks";
 function Content({ children, className }) {
   const { visible, contentProps } = useCollapseContext();
   const { ref: resizeRef, height } = useResizeObserver();
+  const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+  const heightFactor = clamp(height / 400, 0.4, 1) * 1000;
 
   return (
     <div
@@ -15,7 +17,8 @@ function Content({ children, className }) {
         height: visible ? height : 0,
         opacity: visible ? 1 : 0,
         visibility: visible ? "visible" : "hidden",
-        transition: "height 500ms, opacity 500ms"
+        transition: `height ${heightFactor}ms, opacity ${heightFactor}ms ease-out, ${heightFactor}ms`,
+        overflow: "hidden"
       }}
     >
       <div ref={resizeRef}>
