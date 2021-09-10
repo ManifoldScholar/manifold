@@ -4,9 +4,16 @@ import { useCollapseContext } from "hooks";
 
 function Toggle({ children, className }) {
   const { visible, toggleProps, labelProps } = useCollapseContext();
+  const applyLabelPropsToToggle =
+    !React.isValidElement(children) || typeof children === "string";
+  const mergedToggleProps = {
+    ...toggleProps,
+    ...(applyLabelPropsToToggle ? labelProps : {}),
+    className
+  };
 
   return (
-    <button {...toggleProps} className={className}>
+    <button {...mergedToggleProps}>
       {typeof children === "function"
         ? children(visible, labelProps)
         : children}
