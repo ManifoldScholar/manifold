@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import withSearchResultHelper from "../searchResultHelper";
 import isArray from "lodash/isArray";
-import classNames from "classnames";
-import { Collapse } from "react-collapse";
+import Collapse from "global/components/Collapse";
 
 class SearchResultsTypeGenericExcerpts extends PureComponent {
   static propTypes = {
@@ -14,7 +13,6 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = { open: false };
     this.scrollTarget = React.createRef();
   }
 
@@ -43,18 +41,8 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
     this.scrollTarget.current.scrollIntoView({ block: "center" });
   };
 
-  toggle = event => {
-    event.preventDefault();
-    this.setState({ open: !this.state.open });
-  };
-
   render() {
     if (!this.hasExcerpts) return null;
-
-    const expandedClass = classNames({
-      "search-result__excerpts-expanded": true,
-      "search-result__excerpts-expanded--open": this.state.open
-    });
 
     return (
       <>
@@ -75,41 +63,40 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
             </blockquote>
           ))}
         </div>
-
-        <Collapse
-          className={expandedClass}
-          isOpened={this.state.open}
-          onWork={this.holdScroll}
-          onRest={this.holdScroll}
-        >
-          <div className="search-result__excerpt-shim" />
-          {this.expandedExcerpts.map(excerpt => (
-            <blockquote
-              key={excerpt.nodeUuid}
-              className="search-result__excerpt"
-            >
-              <Link
-                to={excerpt.url}
-                dangerouslySetInnerHTML={{
-                  __html: this.props.joinHighlightedFragments(
-                    excerpt.contentHighlighted
-                  )
-                }}
-              />
-            </blockquote>
-          ))}
+        <Collapse>
+          <Collapse.Content>
+            {visible => (
+              <>
+                <div className="search-result__excerpt-shim" />
+                {this.expandedExcerpts.map(excerpt => (
+                  <blockquote
+                    key={excerpt.nodeUuid}
+                    className="search-result__excerpt"
+                  >
+                    <Link
+                      to={excerpt.url}
+                      dangerouslySetInnerHTML={{
+                        __html: this.props.joinHighlightedFragments(
+                          excerpt.contentHighlighted
+                        )
+                      }}
+                      tabIndex={visible ? 0 : -1}
+                    />
+                  </blockquote>
+                ))}
+              </>
+            )}
+          </Collapse.Content>
+          <Collapse.Toggle className="search-result__excerpt-open-button">
+            {(visible, labelProps) => (
+              <span {...labelProps}>
+                {visible
+                  ? "Show all excerpts"
+                  : "Only show most relevant excerpts"}
+              </span>
+            )}
+          </Collapse.Toggle>
         </Collapse>
-
-        {this.expandable && (
-          <button
-            className="search-result__excerpt-open-button"
-            onClick={this.toggle}
-          >
-            {!this.state.open
-              ? "Show all excerpts"
-              : "Only show most relevant excerpts"}
-          </button>
-        )}
       </>
     );
   }
