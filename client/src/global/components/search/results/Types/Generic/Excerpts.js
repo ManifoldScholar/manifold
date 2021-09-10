@@ -63,40 +63,40 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
             </blockquote>
           ))}
         </div>
-        <Collapse>
-          <Collapse.Content>
-            {visible => (
-              <>
-                <div className="search-result__excerpt-shim" />
-                {this.expandedExcerpts.map(excerpt => (
-                  <blockquote
-                    key={excerpt.nodeUuid}
-                    className="search-result__excerpt"
-                  >
-                    <Link
-                      to={excerpt.url}
-                      dangerouslySetInnerHTML={{
-                        __html: this.props.joinHighlightedFragments(
-                          excerpt.contentHighlighted
-                        )
-                      }}
-                      tabIndex={visible ? 0 : -1}
-                    />
-                  </blockquote>
-                ))}
-              </>
-            )}
-          </Collapse.Content>
-          <Collapse.Toggle className="search-result__excerpt-open-button">
-            {(visible, labelProps) => (
-              <span {...labelProps}>
-                {!visible
+        {!!this.expandedExcerpts?.length && (
+          <Collapse>
+            <Collapse.Content>
+              {visible => (
+                <>
+                  <div className="search-result__excerpt-shim" />
+                  {this.expandedExcerpts.map(excerpt => (
+                    <blockquote
+                      key={excerpt.nodeUuid}
+                      className="search-result__excerpt"
+                    >
+                      <Link
+                        to={excerpt.url}
+                        dangerouslySetInnerHTML={{
+                          __html: this.props.joinHighlightedFragments(
+                            excerpt.contentHighlighted
+                          )
+                        }}
+                        tabIndex={visible ? 0 : -1}
+                      />
+                    </blockquote>
+                  ))}
+                </>
+              )}
+            </Collapse.Content>
+            <Collapse.Toggle className="search-result__excerpt-open-button">
+              {visible =>
+                !visible
                   ? "Show all excerpts"
-                  : "Only show most relevant excerpts"}
-              </span>
-            )}
-          </Collapse.Toggle>
-        </Collapse>
+                  : "Only show most relevant excerpts"
+              }
+            </Collapse.Toggle>
+          </Collapse>
+        )}
       </>
     );
   }

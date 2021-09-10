@@ -30,7 +30,7 @@ function Collapse({ initialVisible, children }) {
       labelProps,
       contentProps
     }),
-    [visible] // eslint-disable-line react-hooks/exhaustive-deps
+    [visible, idSeed] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   return (
