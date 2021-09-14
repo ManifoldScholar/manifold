@@ -11,7 +11,7 @@ export default class ProjectsWrapper extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <RedirectToFirstMatch
           from={lh.link("frontendProjects")}
           candidates={[
@@ -22,7 +22,7 @@ export default class ProjectsWrapper extends Component {
           ]}
         />
         {renderRoutes(this.props.route.routes)}
-      </div>
+      </>
     );
   }
 }

@@ -48,57 +48,51 @@ export default class ResourceDetail extends Component {
     /* false positive, as the child Link component does in fact render an a tag with a  */
     /* href.                                                                            */
     return (
-      <div>
-        <section>
-          <section className="resource-detail">
-            <div className="container flush-top flush-bottom">
-              <Title resource={resource} showIcon={false} />
+      <section className="resource-detail main-content">
+        <div className="container flush-top flush-bottom">
+          <Title resource={resource} showIcon={false} />
+        </div>
+
+        <Hero resource={resource} />
+
+        <div className="container flush-top">
+          <aside>
+            <Link attributes={attr} />
+            <Utility.ShareBar url={resourceUrl} />
+            <Meta resource={resource} layout={"secondary"} />
+            <VariantList resource={resource} />
+          </aside>
+          <div className="resource-meta-mobile">
+            <Meta resource={resource} layout={"secondary"} />
+          </div>
+          <div className="resource-variants-mobile">
+            <VariantList resource={resource} />
+          </div>
+          <div className="resource-content left">
+            <div dangerouslySetInnerHTML={{ __html: attr.captionFormatted }} />
+
+            <h2 className="attribute-header">Full Description</h2>
+            <div
+              dangerouslySetInnerHTML={this.createDescription(
+                attr.descriptionFormatted
+              )}
+            />
+            <div className="resource-comments">
+              {this.canEngagePublicly && (
+                <>
+                  <CommentContainer.Thread subject={resource} />
+                  <CommentContainer.Editor
+                    focus={false}
+                    label={"Add Comment"}
+                    subject={resource}
+                    cancel={event => this.cancelComment(event)}
+                  />
+                </>
+              )}
             </div>
-
-            <Hero resource={resource} />
-
-            <div className="container flush-top">
-              <aside>
-                <Link attributes={attr} />
-                <Utility.ShareBar url={resourceUrl} />
-                <Meta resource={resource} layout={"secondary"} />
-                <VariantList resource={resource} />
-              </aside>
-              <div className="resource-meta-mobile">
-                <Meta resource={resource} layout={"secondary"} />
-              </div>
-              <div className="resource-variants-mobile">
-                <VariantList resource={resource} />
-              </div>
-              <div className="resource-content left">
-                <div
-                  dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
-                />
-
-                <h2 className="attribute-header">Full Description</h2>
-                <div
-                  dangerouslySetInnerHTML={this.createDescription(
-                    attr.descriptionFormatted
-                  )}
-                />
-                <div className="resource-comments">
-                  {this.canEngagePublicly && (
-                    <>
-                      <CommentContainer.Thread subject={resource} />
-                      <CommentContainer.Editor
-                        focus={false}
-                        label={"Add Comment"}
-                        subject={resource}
-                        cancel={event => this.cancelComment(event)}
-                      />
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
-          </section>
-        </section>
-      </div>
+          </div>
+        </div>
+      </section>
     );
     /* eslint-enable jsx-a11y/anchor-is-valid */
   }
