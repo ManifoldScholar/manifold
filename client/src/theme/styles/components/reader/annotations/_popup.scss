@@ -7,6 +7,7 @@
   $panelBgColorLight: $neutralWhite;
   $tailSize: 16px;
 
+  --default-focus-color: #{$accentInteractionLight};
   --default-hover-color: #{$accentInteractionLight};
 
   position: absolute;
@@ -140,6 +141,10 @@
     text-align: left;
     transition: color $duration $timing, background-color $duration $timing;
 
+    &:focus-visible {
+      outline-offset: -2px;
+    }
+
     .scheme-dark & {
       color: $neutral85;
     }
@@ -185,9 +190,11 @@
     }
 
     &:hover,
+    &:focus-visible,
     &--selected {
       color: $panelBgColor;
       background-color: $defaultHoverColor;
+      outline: none;
     }
   }
 

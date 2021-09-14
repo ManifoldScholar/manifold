@@ -252,6 +252,7 @@ export default class AnnotatableCaptureSelection extends Component {
   render() {
     return (
       <div
+        className="no-focus-outline"
         onTouchEnd={this.handleTouchEnd}
         onMouseUp={this.handleMouseUp}
         onKeyUp={this.handleKeyUp}

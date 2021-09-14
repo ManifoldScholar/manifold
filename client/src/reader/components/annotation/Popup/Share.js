@@ -147,7 +147,7 @@ class AnnotationPopupSecondaryShare extends PureComponent {
           onClick={this.props.onBackClick}
           kind="any"
           label="Back"
-          className="annotation-popup__button--dark"
+          className="annotation-popup__button--secondary-dark"
           icon="arrowLeft32"
         />
       </Panel>

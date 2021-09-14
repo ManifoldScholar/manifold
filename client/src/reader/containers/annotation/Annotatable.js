@@ -226,7 +226,6 @@ export class Annotatable extends Component {
   };
 
   openViewAnnotationsDrawer = (ids, event = null) => {
-    console.log({ ids });
     this.setState({
       annotation: ids[0],
       annotationState: "locked",

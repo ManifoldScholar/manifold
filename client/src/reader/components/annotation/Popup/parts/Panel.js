@@ -14,12 +14,28 @@ export default class Panel extends PureComponent {
     name: PropTypes.string
   };
 
+  constructor(props) {
+    super(props);
+
+    this.panelRef = React.createRef();
+  }
+
   get isPrimary() {
     return this.props.primary === true;
   }
 
   get isSecondary() {
     return !this.isPrimary;
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      const firstInteractiveEl = this.panelRef.current.querySelector(
+        "button, [href], [tabindex]"
+      );
+      if (!firstInteractiveEl) return;
+      firstInteractiveEl.focus();
+    }, 200);
   }
 
   renderChild(child, position) {
@@ -61,7 +77,7 @@ export default class Panel extends PureComponent {
         appear
         timeout={{ appear: 300, exit: 300 }}
       >
-        <section className={pageClass}>
+        <section ref={this.panelRef} className={pageClass}>
           {this.renderChildren()}
           <div className={tailClass} />
         </section>
