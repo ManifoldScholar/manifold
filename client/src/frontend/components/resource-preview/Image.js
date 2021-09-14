@@ -8,14 +8,24 @@ export default class ResourcePreviewImage extends Component {
     resource: PropTypes.object.isRequired
   };
 
+  get image() {
+    return this.props.resource.attributes;
+  }
+
+  get src() {
+    return this.image.attachmentStyles?.original;
+  }
+
+  get altText() {
+    return this.image.altText;
+  }
+
   render() {
-    const resource = this.props.resource;
-    const resourceImage = resource.attributes.attachmentStyles.original;
-    if (!resourceImage) return null;
+    if (!this.image || !this.src) return null;
 
     return (
       <div className="resource-preview resource-preview-image">
-        <img src={resourceImage} alt={resource.attributes.title} />
+        <img src={this.src} alt={this.altText} />
       </div>
     );
   }

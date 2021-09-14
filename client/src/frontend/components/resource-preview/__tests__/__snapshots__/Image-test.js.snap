@@ -5,7 +5,6 @@ exports[`frontend/components/resource-preview/Image matches the snapshot 1`] = `
   className="resource-preview resource-preview-image"
 >
   <img
-    alt="Image"
     src="original-image.mock"
   />
 </div>

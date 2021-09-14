@@ -130,13 +130,9 @@ exports[`frontend/components/resource-slide/SlideImage matches the snapshot 1`] 
       }
     }
   />
-  <div
+  <img
     className="figure-image"
-    style={
-      Object {
-        "backgroundImage": "url(null)",
-      }
-    }
+    src={null}
   />
 </Fragment>
 `;

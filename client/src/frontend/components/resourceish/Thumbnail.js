@@ -136,7 +136,7 @@ export default class ResourceishThumbnail extends Component {
               <div className="icon-thumbnail-image">
                 <img
                   src={this.getImage(resourceish)}
-                  alt={resourceish.attributes.title}
+                  alt={resourceish.attributes.altText}
                 />
                 <div className="image-overlay" />
               </div>
