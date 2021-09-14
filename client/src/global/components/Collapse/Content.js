@@ -6,10 +6,10 @@ import classNames from "classnames";
 
 const getAnimationParams = height => {
   const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-  const heightToMs = (clamp(height / 700, 0.3, 1) * 1000).toFixed(0);
-  const delay = clamp(heightToMs / 10, 25, 75).toFixed(0);
-  const diff = heightToMs - delay;
-  return { heightToMs, delay, diff };
+  const duration = (clamp(height / 700, 0.3, 1) * 1000).toFixed(0);
+  const delay = clamp(duration / 10, 25, 75).toFixed(0);
+  const diff = duration - delay;
+  return { duration, delay, diff };
 };
 
 function Content({ children, className }) {
@@ -27,11 +27,17 @@ function Content({ children, className }) {
 
   useLayoutEffect(() => {
     if (contentRef.current) {
-      const { heightToMs, delay, diff } = getAnimationParams(height);
-      contentRef.current.style.setProperty("--height", `${height}px`);
-      contentRef.current.style.setProperty("--heightToMs", `${heightToMs}ms`);
-      contentRef.current.style.setProperty("--delay", `${delay}ms`);
-      contentRef.current.style.setProperty("--diff", `${diff}ms`);
+      const { duration, delay, diff } = getAnimationParams(height);
+      contentRef.current.style.setProperty("--collapse-height", `${height}px`);
+      contentRef.current.style.setProperty(
+        "--collapse-duration",
+        `${duration}ms`
+      );
+      contentRef.current.style.setProperty("--collapse-delay", `${delay}ms`);
+      contentRef.current.style.setProperty(
+        "--collapse-durationAfterDelay",
+        `${diff}ms`
+      );
     }
   }, [height]);
 
