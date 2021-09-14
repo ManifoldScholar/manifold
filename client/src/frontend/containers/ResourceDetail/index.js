@@ -111,13 +111,12 @@ export class ResourceDetailContainer extends PureComponent {
     }
 
     return (
-      <div>
+      <>
         <EventTracker
           event={EVENTS.VIEW_RESOURCE}
           resource={this.props.resource}
         />
         <CheckFrontendMode debugLabel="ResourceDetail" isProjectSubpage />
-
         <HeadContent
           title={`\u201c${resource.attributes.titlePlaintext}\u201d Resource on ${settings.attributes.general.installationName}`}
           description={resource.attributes.captionPlaintext}
@@ -158,7 +157,7 @@ export class ResourceDetailContainer extends PureComponent {
             />
           </section>
         ) : null}
-      </div>
+      </>
     );
   }
 }

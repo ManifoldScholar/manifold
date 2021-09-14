@@ -100,6 +100,7 @@ export class FrontendContainer extends Component {
     );
     return classNames({
       "main-content": true,
+      "flex-viewport": true,
       "extra-top": hasPressLogo
     });
   }
@@ -126,7 +127,7 @@ export class FrontendContainer extends Component {
             id="skip-to-main"
             className={this.mainClassName}
           >
-            <div>{renderRoutes(this.props.route.routes)}</div>
+            {renderRoutes(this.props.route.routes)}
           </main>
           <Footers.FrontendFooter
             pages={this.props.pages}

@@ -260,12 +260,10 @@ exports[`frontend/containers/Frontend/Frontend matches the snapshot 1`] = `
       }
     />
     <main
-      className="main-content"
+      className="main-content flex-viewport"
       id="skip-to-main"
     >
-      <div>
-        <Switch />
-      </div>
+      <Switch />
     </main>
     <Connect(WithSettings('Connect(withPluginReplacement('FrontendFooter))))
       authentication={
