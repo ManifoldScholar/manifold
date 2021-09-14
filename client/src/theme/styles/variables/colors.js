@@ -93,6 +93,11 @@ export const interactionColors = {
     .saturate(17.01)
     .darken(35.29)
     .toHexString(), // #077A57
+  extraDark: colorHelper(accentPrimaryBase)
+    .spin(5)
+    .saturate(12.02)
+    .darken(40.78)
+    .toHexString(), // #085d43
   focusSecondary: `var(${createCustomPropertyName("color", "baseNeutral20")})`,
   focusTertiary: `var(${createCustomPropertyName("color", "baseNeutral30")})`
 };

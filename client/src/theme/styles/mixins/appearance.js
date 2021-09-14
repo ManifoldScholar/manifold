@@ -205,14 +205,14 @@ export const unstyledSelect = `
 
   &:focus-visible:-moz-focusring {
     color: transparent;
-    text-shadow: 0 0 0 var(--default-medium-color);
+    text-shadow: 0 0 0 var(--medium-color);
   }
 `;
 
 export const selectPrimary = `
   position: relative;
   display: inline-block;
-  color: var(--default-medium-color);
+  color: var(--medium-color);
 
   select {
     ${utilityPrimary}

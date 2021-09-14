@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { throttle } from "lodash";
-import classNames from "classnames";
+import throttle from "lodash/throttle";
 
 export default class AnnotationPopupPositioner extends PureComponent {
   static displayName = "Annotation.Popup.Positioner";
@@ -16,7 +15,9 @@ export default class AnnotationPopupPositioner extends PureComponent {
       selectionAnnotation: PropTypes.object,
       popupTriggerX: PropTypes.number,
       popupTriggerY: PropTypes.number
-    })
+    }),
+    setPopupRef: PropTypes.func,
+    className: PropTypes.string
   };
 
   static defaultProps = {
@@ -46,13 +47,9 @@ export default class AnnotationPopupPositioner extends PureComponent {
   }
 
   setPopupRef = el => {
-    this.popupRef = el;
+    this.popupRef = this.props.popupRef?.current || el;
+    this.props.setPopupRef(el);
   };
-
-  get visible() {
-    const { selection, selectionComplete } = this.props.selectionState;
-    return selection && selectionComplete;
-  }
 
   get isMobile() {
     // TODO: Implement mobile detection.
@@ -238,22 +235,12 @@ export default class AnnotationPopupPositioner extends PureComponent {
   }
 
   render() {
-    const popupClass = classNames({
-      "annotation-popup": true,
-      "annotation-popup--visible": this.visible
-    });
-
     return (
-      <div
-        onMouseDown={this.stopPropagation}
-        onClick={this.stopPropagation}
-        onKeyDown={this.stopPropagation}
-        role="presentation"
-        className={popupClass}
-        ref={this.setPopupRef}
-        tabIndex="0"
-      >
-        {this.visible ? this.props.children(this.state) : null}
+      <div ref={this.setPopupRef} className={this.props.className}>
+        {this.props.children({
+          direction: this.state.direction,
+          visible: this.visible
+        })}
       </div>
     );
   }

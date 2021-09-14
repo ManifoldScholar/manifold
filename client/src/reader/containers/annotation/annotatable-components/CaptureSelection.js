@@ -15,8 +15,14 @@ export default class AnnotatableCaptureSelection extends Component {
       popupTriggerY: PropTypes.number
     }),
     updateSelection: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    popupRef: PropTypes.object
   };
+
+  constructor(props) {
+    super(props);
+    this.lastSelection = React.createRef();
+  }
 
   componentDidMount() {
     document.addEventListener("selectionchange", this.handleSelectionChange);
@@ -245,13 +251,33 @@ export default class AnnotatableCaptureSelection extends Component {
       this.updateSelectionState(event, true);
   };
 
+  get focusInPopup() {
+    const selection = document.getSelection();
+    return (
+      this.props.popupRef?.contains(document.activeElement) ||
+      this.props.popupRef?.contains(selection.focusNode)
+    );
+  }
+
+  /**
+   * When the annotation popup appears and focus is set inside it,
+   * Safari and Firefox detect a `selectionchange` event, causing the selection
+   * to be cleared and the popup to be hidden. (Chromium browsers don't do this.)
+   * So we check if the popup contains focus before doing anything with the selection change.
+   */
   handleSelectionChange = event => {
+    if (this.focusInPopup) return;
+
+    this.lastSelection.current = document.getSelection();
     this.updateSelectionState(event);
   };
 
   render() {
+    /* Element captures events that bubble from nested interactive elements */
+    /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
+        className="no-focus-outline"
         onTouchEnd={this.handleTouchEnd}
         onMouseUp={this.handleMouseUp}
         onKeyUp={this.handleKeyUp}

@@ -1,11 +1,10 @@
-import Link from "../Link";
+import FollowLink from "../menus/FollowLink";
 
-describe("reader/components/annotation/Popup/Link", () => {
+describe("reader/components/annotation/popup/menus/FollowLink", () => {
   def("root", () => (
-    <Link
-      selectedLink={<a href="www.dailyrowan.com" />}
-      annotations={[]}
-      showAnnotationsInDrawer={() => {}}
+    <FollowLink
+      activeEvent={{ link: { href: "www.dailyrowan.com" }, annotationIds: [] }}
+      actions={{ openViewAnnotationsDrawer: () => {} }}
     />
   ));
   it("matches the snapshot when rendered", () => {

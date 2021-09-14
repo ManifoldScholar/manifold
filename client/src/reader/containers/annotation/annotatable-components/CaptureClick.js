@@ -99,6 +99,8 @@ export default class AnnotatableCaptureClick extends Component {
   }
 
   render() {
+    /* Element captures events that bubble from nested interactive elements */
+    /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
         className="no-focus-outline"
