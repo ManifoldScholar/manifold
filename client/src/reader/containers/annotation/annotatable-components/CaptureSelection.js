@@ -239,8 +239,10 @@ export default class AnnotatableCaptureSelection extends Component {
     this.updateSelectionState(event, true);
   };
 
-  handleKeyDown = event => {
-    this.updateSelectionState(event, true);
+  handleKeyUp = event => {
+    const { key, shiftKey } = event;
+    if (key === "Shift" && shiftKey === false)
+      this.updateSelectionState(event, true);
   };
 
   handleSelectionChange = event => {
@@ -250,13 +252,10 @@ export default class AnnotatableCaptureSelection extends Component {
   render() {
     return (
       <div
-        role="presentation"
-        className="no-focus-outline"
-        tabIndex="-1"
         onTouchEnd={this.handleTouchEnd}
         onMouseUp={this.handleMouseUp}
-        onKeyDown={this.handleKeyDown}
-        onClick={this.handleClick}
+        onKeyUp={this.handleKeyUp}
+        tabIndex={-1}
       >
         {this.props.children}
       </div>
