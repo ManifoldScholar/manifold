@@ -182,6 +182,14 @@ export default class TextNode extends Component {
       const removableHighlightId = removableHighlight
         ? removableHighlight.id
         : "";
+      const interactiveAttributes =
+        !!textAnnotationIds.length || removableHighlight
+          ? {
+              tabIndex: 0,
+              role: "button",
+              "aria-haspopup": "dialog"
+            }
+          : {};
 
       return (
         <span
@@ -190,6 +198,7 @@ export default class TextNode extends Component {
           data-removable-highlight-id={removableHighlightId}
           data-text-annotation-ids={textAnnotationIds}
           data-annotation-ids={map[index].map(a => a.id)}
+          {...interactiveAttributes}
         >
           {chunk}
           {endingResources.length > 0 ? (

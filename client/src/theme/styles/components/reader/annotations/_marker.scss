@@ -17,12 +17,20 @@ $spHighlightTertiaryPale: #f4dcf4;
 $spHighlightTertiaryPaleLowContrast: #775e77;
 
 .annotation-underline {
+  @include outlineOnFocusVisible;
+
   cursor: pointer;
   background-repeat: repeat-x;
   background-position: 0 100%;
   background-size: 2px 2px;
 
+  &:hover {
+    color: inherit;
+  }
+
   &.primary {
+    --default-focus-color: #{$spHighlightPrimary};
+
     // Built in css function
     // scss-lint:disable NameFormat
     background-image: linear-gradient($spHighlightPrimaryLight, $spHighlightPrimaryLight);
@@ -45,6 +53,8 @@ $spHighlightTertiaryPaleLowContrast: #775e77;
   }
 
   &.secondary {
+    --default-focus-color: #{$spHighlightSecondary};
+
     // Built in css function
     // scss-lint:disable NameFormat
     background-image: linear-gradient($spHighlightSecondaryLight, $spHighlightSecondaryLight);
@@ -65,6 +75,8 @@ $spHighlightTertiaryPaleLowContrast: #775e77;
   }
 
   &.tertiary {
+    --default-focus-color: #{$spHighlightTertiary};
+
     // Built in css function
     // scss-lint:disable NameFormat
     background-image: linear-gradient($spHighlightTertiaryLight, $spHighlightTertiaryLight);
@@ -86,7 +98,15 @@ $spHighlightTertiaryPaleLowContrast: #775e77;
 }
 
 .annotation-highlight {
+  @include outlineOnFocusVisible;
+
+  &:hover {
+    color: inherit;
+  }
+
   &.primary {
+    --default-focus-color: #{$spHighlightPrimary};
+
     background-color: $spHighlightPrimaryPale;
 
     .scheme-dark & {
@@ -99,6 +119,8 @@ $spHighlightTertiaryPaleLowContrast: #775e77;
   }
 
   &.secondary {
+    --default-focus-color: #{$spHighlightSecondary};
+
     background-color: $spHighlightSecondaryPale;
 
     .scheme-dark & {
@@ -111,6 +133,8 @@ $spHighlightTertiaryPaleLowContrast: #775e77;
   }
 
   &.tertiary {
+    --default-focus-color: #{$spHighlightTertiary};
+
     background-color: $spHighlightTertiaryPale;
 
     .scheme-dark & {
@@ -123,6 +147,8 @@ $spHighlightTertiaryPaleLowContrast: #775e77;
   }
 
   &.mixed {
+    --default-focus-color: #{$spHighlightPrimary};
+
     background-color: darken(mix($spHighlightPrimaryPale, $spHighlightSecondaryPale), 20%);
   }
 }
