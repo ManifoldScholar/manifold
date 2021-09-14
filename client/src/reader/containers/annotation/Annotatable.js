@@ -5,7 +5,7 @@ import { annotationsAPI, requests } from "api";
 import { entityStoreActions, uiVisibilityActions } from "actions";
 import AnnotatableDebug from "./annotatable-components/Debug";
 import AnnotatableDrawer from "./annotatable-components/Drawer";
-import AnnotatablePopup from "./annotatable-components/Popup";
+import AnnotatablePopup from "./annotatable-components/Popup/index";
 import CaptureSelection from "./annotatable-components/CaptureSelection";
 import CaptureClick from "./annotatable-components/CaptureClick";
 import AnnotationNotationViewer from "./annotatable-components/NotationViewer";
@@ -102,6 +102,10 @@ export class Annotatable extends Component {
 
   setAnnotatableRef = el => {
     this.annotatableRef = el;
+  };
+
+  setPopupRef = el => {
+    this.popupRef = el;
   };
 
   setSelectionState = selectionState => {
@@ -226,7 +230,6 @@ export class Annotatable extends Component {
   };
 
   openViewAnnotationsDrawer = (ids, event = null) => {
-    console.log({ ids });
     this.setState({
       annotation: ids[0],
       annotationState: "locked",
@@ -281,6 +284,14 @@ export class Annotatable extends Component {
   };
 
   render() {
+    const { annotationState, selectionState } = this.state;
+    // const pendingAnnotation =
+    //   annotationState === "locked" ||
+    //   (annotationState === "pending" && selectionState.selectionComplete)
+    //     ? selectionState.selectionAnnotation
+    //     : null;
+    const pendingAnnotation =
+      annotationState === "locked" ? selectionState.selectionAnnotation : null;
     return (
       <>
         {this.debuggable && (
@@ -294,8 +305,9 @@ export class Annotatable extends Component {
           annotatableRef={this.annotatableRef}
           activeAnnotation={this.state.annotation}
           activeEvent={this.state.activeEvent}
-          selectionState={this.state.selectionState}
+          selectionState={selectionState}
           updateSelection={this.setSelectionState}
+          popupRef={this.popupRef}
         >
           <CaptureClick
             activeAnnotation={this.state.annotation}
@@ -308,25 +320,22 @@ export class Annotatable extends Component {
               className="annotatable"
               ref={this.setAnnotatableRef}
             >
-              {this.props.render(
-                this.state.annotationState === "locked"
-                  ? this.state.selectionState.selectionAnnotation
-                  : null
-              )}
+              {this.props.render(pendingAnnotation)}
             </div>
           </CaptureClick>
         </CaptureSelection>
 
         <AnnotatablePopup
           dispatch={this.props.dispatch}
-          selectionState={this.state.selectionState}
+          selectionState={selectionState}
           annotatableRef={this.annotatableRef}
           actions={this.actions}
           text={this.props.text}
           section={this.props.section}
           activeEvent={this.state.activeEvent}
           activeAnnotation={this.activeAnnotationObject}
-          annotationState={this.state.annotationState}
+          annotationState={annotationState}
+          setPopupRef={this.setPopupRef}
         />
         <AnnotatableDrawer
           drawerState={this.state.drawerState}

@@ -1,13 +1,11 @@
-import Button from "./Button";
-import CurrentReadingGroup from "./CurrentReadingGroup";
-import Link from "./Menu/Link";
+import Menu from "./Menu";
+import MenuItem from "./MenuItem";
 import Panel from "./Panel";
-import ReadingGroupOption from "./ReadingGroupOption";
+import RGMenuItem from "./RGMenuItem/index";
 
 export default {
-  Button,
-  CurrentReadingGroup,
-  Link,
+  Menu,
+  MenuItem,
   Panel,
-  ReadingGroupOption
+  RGMenuItem
 };

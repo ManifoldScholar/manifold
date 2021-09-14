@@ -52,6 +52,7 @@ function CollectingDialog({
       describedBy={uidSeed("description")}
       closeCallback={onClose}
       maxWidth={550}
+      onClick={event => event.stopPropagation()}
     >
       <Styled.Inner>
         <Styled.Header>

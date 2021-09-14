@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { UIDConsumer } from "react-uid";
 import classNames from "classnames";
-import ReadingGroupOption from "reader/components/annotation/Popup/parts/ReadingGroupOption";
-import withReadingGroups from "hoc/withReadingGroups";
+import RGMenuItem from "reader/components/annotation/popup/parts/RGMenuItem";
 import { ReaderContext } from "helpers/contexts";
 import withCurrentUser from "hoc/withCurrentUser";
+import withReadingGroups from "hoc/withReadingGroups";
 
 class AnnotationEditor extends PureComponent {
   static displayName = "Annotation.Editor";
@@ -222,20 +222,20 @@ class AnnotationEditor extends PureComponent {
         tabIndex="-1"
         className={classNames({
           "annotation-group-options": true,
-          "annotation-group-options--popup": true,
-          "annotation-group-options--light": true,
           "annotation-group-options--hidden": !this.state.pickerOpen
         })}
       >
-        <ul className="annotation-group-options__list">
+        <div className="annotation-group-options__list">
           {this.canEngagePublicly && (
-            <ReadingGroupOption
+            <RGMenuItem
+              as="button"
               label={this.publicLabel}
               onClick={() => this.setReadingGroup("public")}
               selected={this.isSelected("public")}
             />
           )}
-          <ReadingGroupOption
+          <RGMenuItem
+            as="button"
             label={this.privateLabel}
             onClick={() => this.setReadingGroup("private")}
             privateGroup
@@ -243,29 +243,24 @@ class AnnotationEditor extends PureComponent {
           />
           {this.hasReadingGroups &&
             this.readingGroups.map(rg => (
-              <ReadingGroupOption
+              <RGMenuItem
                 key={rg.id}
+                as="button"
                 label={rg.attributes.name}
                 onClick={() => this.setReadingGroup(rg.id)}
                 privateGroup={this.isPrivateGroup(rg.attributes.privacy)}
                 selected={this.isSelected(rg.id)}
               />
             ))}
-        </ul>
+        </div>
         {this.canAccessReadingGroups && (
           <div className="annotation-group-options__footer">
             <Link
               to={lh.link("frontendMyReadingGroups")}
-              className="annotation-group-options__link"
+              className="annotation-manage-groups-link"
             >
-              <span className="annotation-group-options__link-text">
-                Manage Groups
-              </span>
-              <IconComposer
-                icon="link24"
-                size="default"
-                className="annotation-group-options__icon annotation-group-options__icon--link"
-              />
+              <span>Manage Groups</span>
+              <IconComposer icon="link24" size="default" />
             </Link>
           </div>
         )}

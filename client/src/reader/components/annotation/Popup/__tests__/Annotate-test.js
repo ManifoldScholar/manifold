@@ -1,7 +1,7 @@
-import Annotate from "../Annotate";
+import MainMenu from "../menus/Main";
 import { ReaderContext } from "helpers/contexts";
 
-describe("reader/components/annotation/Popup/Annotate", () => {
+describe("reader/components/annotation/popup/menus/Main", () => {
   def("text", () => factory("text"));
   def("root", () => (
     <ReaderContext.Provider value={$text}>

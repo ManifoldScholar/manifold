@@ -43,6 +43,11 @@ export { default as useFrontendModeContext } from "./useFrontendModeContext";
 export { default as useAuthentication } from "./useAuthentication";
 
 export { default as useFromStore } from "./useFromStore";
-
 export { default as useDispatchAllIssues } from "./useDispatchAllIssues";
 export { default as useSelectAllIssues } from "./useSelectAllIssues";
+export { default as useSettings } from "./useSettings";
+
+export { default as useEventTracker } from "./useEventTracker";
+
+export { default as useAnalyticsContext } from "./useAnalyticsContext";
+export { default as useReaderContext } from "./useReaderContext";

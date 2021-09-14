@@ -2,16 +2,48 @@ import {
   defaultTransitionProps,
   rgba,
   utilityPrimary,
-  buttonUnstyled
+  buttonUnstyled,
+  outlineOnFocus
 } from "theme/styles/mixins";
 
-const panelBgColor = "var(--color-base-neutral85)";
-const panelBgColorLight = "var(--color-base-neutral-white)";
 const tailSize = "16px";
+const transitionDuration = "0.3s";
 
 export default `
   .annotation-popup {
-    --hover-color: var(--color-interaction-light);
+    --focus-color: var(--color-accent-interaction-light);
+    --hover-color: var(--color-accent-interaction-light);
+    --menu-color: var(--color-base-neutral-white);
+    --menu-bg-color: var(--color-base-neutral85);
+    --menu-secondary-color: var(--color-neutral-text-light);
+    --menu-secondary-bg-color: var(--color-base-neutral95);
+    --menu-button-color: var(--menu-color);
+    --menu-button-bg-color: var(--menu-bg-color);
+    --menu-button-hover-color: var(--menu-bg-color);
+    --menu-dark-button-color: var(--color-base-neutral70);
+    --menu-dark-button-bg-color: var(--menu-bg-color);
+    --menu-selected-button-interaction-color: var(--accent-primary-pale);
+    --menu-tail-color: var(--menu-bg-color);
+    --menu-dark-tail-color: var(--color-base-neutral95);
+    --group-button-hover-color: var(--menu-bg-color);
+    --group-button-hover-bg-color: var(--hover-color);
+    --group-button-private-icon-color: var(--menu-secondary-color);
+    --manage-groups-link-color: var(--color-neutral-text-light);
+
+    .scheme-dark & {
+      --menu-color: var(--color-base-neutral85);
+      --menu-bg-color: var(--color-base-neutral-white);
+      --menu-secondary-color: var(--color-base-neutral85);
+      --menu-secondary-bg-color: var(--color-base-neutral10);
+      --menu-button-hover-color: var(--menu-color);
+      --menu-dark-button-color: var(--color-base-neutral85);
+      --menu-dark-button-bg-color: var(--color-base-neutral70);
+      --menu-selected-button-interaction-color: var(--accent-interaction-extra-dark);
+      --menu-dark-tail-color: var(--color-base-neutral10);
+      --group-button-hover-color: var(--menu-button-hover-color);
+      --group-button-private-icon-color: var(--color-neutral-ui-light);
+      --manage-groups-link-color: #5c5c5c;
+    }
 
     position: absolute;
     margin-top: -30px;
@@ -27,85 +59,62 @@ export default `
       opacity: 1;
     }
 
-    &__panel {
-      position: relative;
-      left: 50%;
-      background-color: ${panelBgColor};
+    &__menu {
+      /* overrides to reakit inline styles */
+      position: absolute !important;
+      top: 0 !important;
+      left: 50% !important;
+      display: block !important;
+      /* end overrides to reakit inline styles */
+      color: var(--menu-color);
+      background-color: var(--menu-bg-color);
       border-radius: var(--box-border-radius);
       box-shadow: 0 12px 22px -3px ${rgba("neutralBlack", 0.39)};
-      transition: opacity ${defaultTransitionProps},
-        transform ${defaultTransitionProps};
-      transform: translateX(-50%);
-
-      &--secondary {
-      }
-
-      &--secondary-group {
-        position: relative;
-      }
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        opacity ${transitionDuration} var(--transition-timing-function),
+        transform ${transitionDuration} var(--transition-timing-function);
+      transform: translateX(25%);
 
       &--top {
-        top: 0;
+        /* override reakit inline styles */
+        top: 0 !important;
       }
 
       &--bottom {
+        /* override reakit inline styles */
+        top: auto !important;
         bottom: 0;
       }
 
-      &.panel-appear {
-        opacity: 0.01;
-        transform: translateX(25%);
-
-        &.panel-appear-active {
-          opacity: 1;
-          transition: opacity ${defaultTransitionProps},
-            transform ${defaultTransitionProps};
-          transform: translateX(-50%);
-        }
-      }
-
-      &.panel-exit {
+      &--active {
         opacity: 1;
+        pointer-events: auto;
         transform: translateX(-50%);
-
-        &.panel-exit-active {
-          opacity: 0;
-          transition: opacity var(--transition-duration-slow)
-              var(--transition-timing-function),
-            transform var(--transition-duration-slow)
-              var(--transition-timing-function);
-          transform: translateX(25%);
-        }
+        transition:
+          opacity ${transitionDuration} var(--transition-timing-function),
+          transform ${transitionDuration} var(--transition-timing-function);
       }
 
-      .scheme-dark & {
-        background-color: ${panelBgColorLight};
+      &:focus {
+        outline: none;
+      }
+
+      &:focus-visible {
+        ${outlineOnFocus("var(--menu-bg-color)")}
+        outline-offset: 2px;
       }
     }
 
     &__note {
-      font-family: var(--font-family-heading);
       padding: 1em 17px 1.063em;
       font-size: 16px;
-      color: var(--color-base-neutral-white);
+      font-family: var(--font-family-sans);
       text-align: center;
       letter-spacing: 0.005em;
-      background-color: var(--color-base-neutral95);
-
-      &--top {
-        border-top-left-radius: var(--box-border-radius);
-        border-top-right-radius: var(--box-border-radius);
-      }
-
-      &--bottom {
-        border-bottom-right-radius: var(--box-border-radius);
-        border-bottom-left-radius: var(--box-border-radius);
-      }
-
-      .scheme-dark & {
-        color: var(--color-base-neutral85);
-        background-color: var(--color-base-neutral-white);
-      }
+      border-bottom-right-radius: var(--box-border-radius);
+      border-bottom-left-radius: var(--box-border-radius);
     }
 
     &__header {
@@ -114,83 +123,89 @@ export default `
       align-items: center;
       padding: 14px 20px;
       font-size: 14px;
-      color: var(--color-base-neutral45);
-      background-color: var(--color-base-neutral95);
+      color: var(--menu-secondary-color);
+      background-color: var(--menu-secondary-bg-color);
       border-top-left-radius: var(--box-border-radius);
       border-top-right-radius: var(--box-border-radius);
-
-      .scheme-dark & {
-        color: var(--color-base-neutral85);
-        background-color: var(--color-base-neutral10);
-      }
     }
 
     &__heading {
       margin-left: 1em;
     }
 
+    &__footer {
+      margin: 20px 20px 0;
+    }
+
+    &__button-group {
+      display: flex;
+      flex-direction: column;
+      max-height: 336px; /* equals 8 items */
+      padding-top: 14px;
+      padding-bottom: 14px;
+      overflow: auto;
+    }
+
     &__button {
       ${buttonUnstyled}
       ${utilityPrimary}
-    display: flex;
+      display: flex;
       align-items: center;
       width: 100%;
       padding: 11px 24px 11px 15px;
       font-size: 14px;
       line-height: 23px;
-      color: var(--color-base-neutral-white);
-      text-align: left;
+      text-align: start;
+      text-decoration: none;
+      color: var(--menu-button-color);
+      background-color: var(--menu-button-bg-color);
       transition: color ${defaultTransitionProps},
         background-color ${defaultTransitionProps};
 
-      .scheme-dark & {
-        color: var(--color-base-neutral85);
-      }
-
       &--dark {
-        color: var(--color-base-neutral70);
-        background-color: ${panelBgColor};
+        --menu-button-color: var(--menu-dark-button-color);
+        --menu-button-bg-color: var(--menu-dark-button-bg-color);
 
         + .annotation-popup__tail--down {
-          border-color: var(--color-base-neutral90) transparent transparent;
-        }
-
-        .scheme-dark & {
-          color: ${panelBgColor};
-          background-color: var(--color-base-neutral70);
+          --menu-tail-color: var(--color-base-neutral90);
         }
       }
 
       &--secondary-dark {
+        --menu-button-color: var(--menu-secondary-color);
+        --menu-button-bg-color: var(--menu-secondary-bg-color);
+
         padding-right: 20px;
         padding-left: 20px;
         color: var(--color-base-neutral45);
         background-color: var(--color-base-neutral95);
-
-        .scheme-dark & {
-          color: var(--color-base-neutral85);
-          background-color: var(--color-base-neutral10);
-        }
       }
 
       &--stacked {
         display: block;
       }
 
-      &:first-of-type:not(:last-of-type):not(.annotation-popup__button--selected) {
+      &:first-child {
         border-top-left-radius: var(--box-border-radius);
         border-top-right-radius: var(--box-border-radius);
       }
 
-      &:last-of-type:not(.annotation-popup__button--selected) {
+      &:last-child {
         border-bottom-right-radius: var(--box-border-radius);
         border-bottom-left-radius: var(--box-border-radius);
       }
 
       &:hover,
+      &:focus,
       &--selected {
-        color: ${panelBgColor};
+        color: var(--menu-button-hover-color);
         background-color: var(--hover-color);
+        outline: none;
+      }
+
+      &--selected:hover,
+      &--selected:focus {
+        background-color: var(--menu-selected-button-interaction-color);
       }
     }
 
@@ -226,16 +241,7 @@ export default `
       max-width: 175px;
     }
 
-    .button-group {
-      + .annotation-popup__button,
-      + .button-group {
-        border-top: 1.5px var(--color-base-neutral90) solid;
-      }
-    }
-
     &__tail {
-      --tail-color: ${panelBgColor};
-
       position: absolute;
       left: 50%;
       display: block;
@@ -247,38 +253,22 @@ export default `
 
       &--down {
         top: 100%;
-        border-color: var(--tail-color, ${panelBgColor}) transparent transparent;
+        border-color: var(--menu-tail-color) transparent transparent;
         border-width: ${tailSize} ${tailSize} 0;
 
-        &.annotation-popup__tail--highlight {
-          border-color: var(--color-accent-primary) transparent transparent;
-        }
-
         .annotation-popup__button--secondary-dark + & {
-          --tail-color: var(--color-base-neutral95);
+          --menu-tail-color: var(--color-base-neutral95);
         }
       }
 
       &--up {
-        top: -${tailSize};
-        border-color: transparent transparent var(--tail-color, ${panelBgColor});
-        border-width: 0 ${tailSize} ${tailSize};
-
-        &.annotation-popup__tail--highlight {
-          border-color: transparent transparent var(--color-accent-primary);
-        }
-      }
-
-      .scheme-dark & {
-        --tail-color: var(--color-base-neutral-white);
+        top: ${tailSize};
+        border-color: transparent transparent var(--menu-tail-color);
+        border-width: 0 ${tailSize};
       }
 
       &--dark {
-        --tail-color: var(--color-base-neutral95);
-
-        .scheme-dark & {
-          --tail-color: var(--color-base-neutral10);
-        }
+        --menu-tail-color: var(--menu-tail-dark-color);
       }
     }
   }

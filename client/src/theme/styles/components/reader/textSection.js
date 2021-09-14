@@ -25,7 +25,7 @@ export default `
       background: var(--color-base-yellow20);
 
       .scheme-dark & {
-        background: var(--color-neutral-ui-extra-dark);
+        background: var(--color-base-yellow75);
       }
     }
 
