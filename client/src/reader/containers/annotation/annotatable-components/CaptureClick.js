@@ -101,6 +101,7 @@ export default class AnnotatableCaptureClick extends Component {
   render() {
     return (
       <div
+        className="no-focus-outline"
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         onMouseUp={this.handleMouseUp}
