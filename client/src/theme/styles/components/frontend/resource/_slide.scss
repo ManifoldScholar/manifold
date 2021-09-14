@@ -80,9 +80,7 @@
     width: 100%;
     height: 100%;
     background-color: $neutralBlack;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: contain;
+    object-fit: contain;
   }
 
   .figure-video {

@@ -10,10 +10,10 @@
 
   &__header {
     @include buttonUnstyled;
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
     margin-bottom: $heroBlockPadding / 2;
     text-align: start;
 

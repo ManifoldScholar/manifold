@@ -14,22 +14,23 @@ export default class ResourceListSlideImage extends Component {
     enableZoom: true
   };
 
-  get background() {
-    const { resource } = this.props;
-    if (!resource.attributes.attachmentStyles) return null;
-    return resource.attributes.attachmentStyles.medium;
+  get image() {
+    return this.props.resource.attributes;
+  }
+
+  get src() {
+    return this.image.attachmentStyles?.medium;
+  }
+
+  get altText() {
+    return this.image.altText;
   }
 
   render() {
     return (
       <>
         {this.props.enableZoom && <Zoom resource={this.props.resource} />}
-        <div
-          className="figure-image"
-          style={{
-            backgroundImage: `url(${this.background})`
-          }}
-        />
+        <img src={this.src} alt={this.altText} className="figure-image" />
       </>
     );
   }
