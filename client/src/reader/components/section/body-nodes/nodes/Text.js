@@ -33,37 +33,28 @@ export default class TextNode extends Component {
     }
   }
 
-  getAnnotation(id) {
-    return this.props.openAnnotations[id];
+  get scrollAnnotation() {
+    return this.props.scrollAnnotation;
   }
 
-  doScroll(withTimeout = false) {
-    const { scrollAnnotation } = this.props;
-    const target = scrollAnnotation
-      ? document.querySelector(`[data-annotation-ids*="${scrollAnnotation}"]`)
-      : this.el;
-    const annotation = scrollAnnotation
-      ? this.getAnnotation(scrollAnnotation)
-      : null;
-    const doClick = annotation && annotation.attributes.format === "annotation";
-    const scroll = () => {
-      smoothScroll(target, 100, 500, () => {
-        if (doClick) target.click();
-      });
-    };
-    if (withTimeout) {
-      setTimeout(scroll, 0);
-    } else {
-      scroll();
-    }
+  get openAnnotations() {
+    return this.props.openAnnotations;
   }
 
-  containsAnnotations() {
-    return !isEmpty(this.props.openAnnotations);
+  get containsAnnotations() {
+    return !isEmpty(this.openAnnotations);
   }
 
-  propsToLocalAnnotationsArray(openAnnotations) {
-    return values(openAnnotations).map(a => {
+  get annotation() {
+    return this.openAnnotations[this.scrollAnnotation];
+  }
+
+  get content() {
+    return this.props.content;
+  }
+
+  get localAnnotationsArray() {
+    return values(this.openAnnotations).map(a => {
       const id = a.id;
       const type = a.attributes.format;
       const isCreator =
@@ -76,12 +67,14 @@ export default class TextNode extends Component {
         a.attributes.endNode === this.props.nodeUuid
           ? a.attributes.endChar
           : null;
-      const startNode = a.attributes.startNode;
-      const endNode = a.attributes.endNode;
-      const resourceId = a.attributes.resourceId;
-      const resourceCollectionId = a.attributes.resourceCollectionId;
-      const authorCreated = a.attributes.authorCreated;
-      const abilities = a.attributes.abilities;
+      const {
+        startNode,
+        endNode,
+        resourceId,
+        resourceCollectionId,
+        authorCreated,
+        abilities
+      } = a.attributes;
       return {
         id,
         type,
@@ -98,27 +91,24 @@ export default class TextNode extends Component {
     });
   }
 
-  annotatedContent() {
-    const annotations = this.propsToLocalAnnotationsArray(
-      this.props.openAnnotations
-    );
-    const content = this.props.content;
-
+  get annotatedContent() {
     // Create an array that includes all the points in the string where we'll split.
     // Because our annotation.ends are inclusive, we need to add 1 to each of them
     // since substring's second argument is exclusive.
     const splits = union(
-      [content.length + 1],
-      annotations.filter(el => el.start != null).map(a => a.start),
-      annotations
+      [this.content.length + 1],
+      this.localAnnotationsArray
+        .filter(el => el.start != null)
+        .map(a => a.start),
+      this.localAnnotationsArray
         .filter(el => el.end != null)
-        .map(a => a.end + 1 || content.length)
+        .map(a => a.end + 1 || this.content.length)
     ).sort((a, b) => a - b);
 
     // Build a map of IDs to the splits
     const map = splits.map(split => {
-      return annotations.filter(annotation => {
-        const rangeEnd = annotation.end || content.length;
+      return this.localAnnotationsArray.filter(annotation => {
+        const rangeEnd = annotation.end || this.content.length;
         const rangeStart = annotation.start || 0;
         return rangeStart < split && rangeEnd + 1 >= split;
       });
@@ -147,13 +137,8 @@ export default class TextNode extends Component {
     const chunks = splits.map((split, index) => {
       const substringStart = index === 0 ? 0 : splits[index - 1] - 1;
       const substringEnd = index === splits.length - 1 ? split + 1 : split - 1;
-      return content.substring(substringStart, substringEnd);
+      return this.content.substring(substringStart, substringEnd);
     });
-
-    // console.log(map, 'map');
-    // console.log(chunks, 'chunks');
-    // console.log(ends, 'ends');
-    // console.log(starts, 'starts');
 
     // map the chunks to outputs.
     return chunks.map((chunk, index) => {
@@ -215,42 +200,45 @@ export default class TextNode extends Component {
     });
   }
 
-  content() {
-    return this.props.content;
-  }
-
-  commentsCount() {
-    const annotations = Object.values(this.props.openAnnotations);
+  get commentsCount() {
+    const annotations = Object.values(this.openAnnotations);
     return annotations.reduce(
       (memo, a) => a.attributes.commentsCount + memo,
       0
     );
   }
 
-  render() {
-    const containsAnnotations = this.containsAnnotations();
-    const content = containsAnnotations
-      ? this.annotatedContent()
-      : this.content();
-    const commentsCount = containsAnnotations ? this.commentsCount() : null;
-
-    const props = {
-      "data-text-digest": this.props.textDigest,
-      "data-node-uuid": this.props.nodeUuid
+  doScroll(withTimeout = false) {
+    const target = this.scrollAnnotation
+      ? document.querySelector(
+          `[data-annotation-ids*="${this.scrollAnnotation}"]`
+        )
+      : this.el;
+    const annotation = this.scrollAnnotation ? this.annotation : null;
+    const doClick = annotation && annotation.attributes.format === "annotation";
+    const scroll = () => {
+      smoothScroll(target, 100, 500, () => {
+        if (doClick) target.click();
+      });
     };
-    if (commentsCount) {
-      props["data-comments"] = commentsCount;
+    if (withTimeout) {
+      setTimeout(scroll, 0);
+    } else {
+      scroll();
     }
+  }
 
+  render() {
     return (
       <span
-        tabIndex="1"
-        {...props}
         ref={el => {
           this.el = el;
         }}
+        data-text-digest={this.props.textDigest}
+        data-node-uuid={this.props.nodeUuid}
+        data-comments={this.containsAnnotations ? this.commentsCount : null}
       >
-        {content}
+        {this.containsAnnotations ? this.annotatedContent : this.content}
       </span>
     );
   }
