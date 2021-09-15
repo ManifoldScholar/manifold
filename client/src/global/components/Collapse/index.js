@@ -1,18 +1,19 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useUIDSeed } from "react-uid";
 import { CollapseContext } from "helpers/contexts";
 import Toggle from "./Toggle";
 import Content from "./Content";
 
-function Collapse({ initialVisible, children }) {
+function Collapse({ initialVisible, externalClose, children }) {
   const [visible, setVisible] = useState(initialVisible);
+  const toggleVisible = () => setVisible(!visible);
   const idSeed = useUIDSeed();
   const toggleProps = {
     type: "button",
     "aria-expanded": visible,
     "aria-controls": idSeed("content"),
-    onClick: useCallback(() => setVisible(prevVisible => !prevVisible), [])
+    onClick: toggleVisible
   };
   const labelProps = {
     id: idSeed("label")
@@ -28,7 +29,8 @@ function Collapse({ initialVisible, children }) {
       visible,
       toggleProps,
       labelProps,
-      contentProps
+      contentProps,
+      toggleVisible
     }),
     [visible, idSeed] // eslint-disable-line react-hooks/exhaustive-deps
   );
