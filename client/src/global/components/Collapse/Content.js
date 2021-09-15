@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import useResizeObserver from "use-resize-observer";
 import { useCollapseContext } from "hooks";
@@ -12,7 +12,7 @@ const getAnimationParams = height => {
   return { duration, delay, diff };
 };
 
-function Content({ children, className }) {
+function Content({ children, className, activeClassName, focusOnVisible }) {
   const { visible, contentProps } = useCollapseContext();
   const { ref: resizeRef, height } = useResizeObserver();
 
@@ -20,10 +20,17 @@ function Content({ children, className }) {
     collapse__content: true,
     "collapse__content--visible": visible,
     "collapse__content--hidden": !visible,
-    [className]: className
+    [className]: className,
+    [activeClassName]: activeClassName
   });
 
   const contentRef = useRef();
+
+  useEffect(() => {
+    if (visible && contentRef.current) {
+      contentRef.current.focus();
+    }
+  }, [visible]);
 
   useLayoutEffect(() => {
     if (contentRef.current) {
@@ -42,7 +49,12 @@ function Content({ children, className }) {
   }, [height]);
 
   return (
-    <div {...contentProps} ref={contentRef} className={finalClassName}>
+    <div
+      {...contentProps}
+      ref={contentRef}
+      className={finalClassName}
+      tabIndex={focusOnVisible ? -1 : null}
+    >
       <div ref={resizeRef}>
         {typeof children === "function" ? children(visible) : children}
       </div>
