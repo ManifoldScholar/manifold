@@ -139,14 +139,189 @@ Array [
                             Reset
                           </button>
                           <button
-                            aria-expanded="false"
-                            aria-haspopup="true"
+                            aria-controls="1-content"
                             class="entity-list-search__text-button entity-list-search__text-button--foregrounded"
+                            id="1-label"
+                            type="button"
                           >
                             Options
                           </button>
                         </div>
                       </form>
+                      <div
+                        aria-labelledby="1-label"
+                        class="collapse__content collapse__content--hidden"
+                        id="1-content"
+                        role="region"
+                      >
+                        <div>
+                          <div
+                            class="entity-list-search__options entity-list-search__options--vertical"
+                          >
+                            <div
+                              class="entity-list-search__option entity-list-search__option--vertical"
+                            >
+                              <div
+                                class="select"
+                              >
+                                <span
+                                  class="select__label "
+                                >
+                                  Filter Results:
+                                </span>
+                                <div
+                                  class="select__wrapper"
+                                >
+                                  <label
+                                    class="screen-reader-text"
+                                    for="1-filter-0"
+                                  >
+                                    Filter results by Draft
+                                  </label>
+                                  <select
+                                    id="1-filter-0"
+                                  >
+                                    <option
+                                      selected=""
+                                      value=""
+                                    >
+                                      All projects
+                                    </option>
+                                    <option
+                                      value="true"
+                                    >
+                                      Only draft projects
+                                    </option>
+                                    <option
+                                      value="false"
+                                    >
+                                      Only published projects
+                                    </option>
+                                  </select>
+                                  <svg
+                                    aria-hidden="true"
+                                    class="manicon-svg svg-icon--disclosureDown24"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <polygon
+                                      points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              class="entity-list-search__option entity-list-search__option--vertical"
+                            >
+                              <div
+                                class="select"
+                              >
+                                <span
+                                  class="select__label select__label--empty"
+                                >
+                                   
+                                </span>
+                                <div
+                                  class="select__wrapper"
+                                >
+                                  <label
+                                    class="screen-reader-text"
+                                    for="1-filter-1"
+                                  >
+                                    Filter results by Creator
+                                  </label>
+                                  <select
+                                    id="1-filter-1"
+                                  >
+                                    <option
+                                      selected=""
+                                      value=""
+                                    >
+                                      Created by anyone
+                                    </option>
+                                    <option
+                                      value="true"
+                                    >
+                                      Created by me
+                                    </option>
+                                  </select>
+                                  <svg
+                                    aria-hidden="true"
+                                    class="manicon-svg svg-icon--disclosureDown24"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <polygon
+                                      points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              class="entity-list-search__option entity-list-search__option--vertical"
+                            >
+                              <div
+                                class="select"
+                              >
+                                <span
+                                  class="select__label"
+                                >
+                                  Order Results:
+                                </span>
+                                <div
+                                  class="select__wrapper"
+                                >
+                                  <label
+                                    class="screen-reader-text"
+                                    for="1-order"
+                                  >
+                                    Order results
+                                  </label>
+                                  <select
+                                    id="1-order"
+                                  >
+                                    <option
+                                      value="updated_at ASC"
+                                    >
+                                      Most recently updated
+                                    </option>
+                                    <option
+                                      value="sort_title ASC"
+                                    >
+                                      Alphabetical by title
+                                    </option>
+                                    <option
+                                      value="created_at DESC"
+                                    >
+                                      Newest projects first
+                                    </option>
+                                    <option
+                                      value="created_at ASC"
+                                    >
+                                      Oldest projects first
+                                    </option>
+                                  </select>
+                                  <svg
+                                    aria-hidden="true"
+                                    class="manicon-svg svg-icon--disclosureDown24"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <polygon
+                                      points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div
                       class="entity-list__header"

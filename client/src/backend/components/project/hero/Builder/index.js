@@ -89,10 +89,6 @@ export default class Builder extends PureComponent {
                 <Block
                   title="Calls-to-Action"
                   description="Buttons and links to related resources"
-                  onEdit={this.toggleActionCallouts}
-                  open={this.isActionCalloutsOpen}
-                  ariaControls={`${id}-disclosure`}
-                  ariaExpanded={this.isActionCalloutsOpen}
                 >
                   {this.props.actionCallouts && (
                     <ActionCallouts
