@@ -1,11 +1,11 @@
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useUIDSeed } from "react-uid";
 import { CollapseContext } from "helpers/contexts";
 import Toggle from "./Toggle";
 import Content from "./Content";
 
-function Collapse({ initialVisible, externalClose, children }) {
+function Collapse({ initialVisible, children }) {
   const [visible, setVisible] = useState(initialVisible);
   const toggleVisible = () => setVisible(!visible);
   const idSeed = useUIDSeed();
@@ -34,6 +34,10 @@ function Collapse({ initialVisible, externalClose, children }) {
     }),
     [visible, idSeed] // eslint-disable-line react-hooks/exhaustive-deps
   );
+
+  useEffect(() => {
+    setVisible(initialVisible);
+  }, [initialVisible]);
 
   return (
     <CollapseContext.Provider value={value}>
