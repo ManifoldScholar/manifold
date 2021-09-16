@@ -5,7 +5,9 @@ import classNames from "classnames";
 import Categories from "./Categories";
 import Uncategorized from "./Uncategorized";
 
-export default class CategoryList extends PureComponent {
+import withScreenReaderStatus from "hoc/with-screen-reader-status";
+
+class CategoryList extends PureComponent {
   static displayName = "Category.List";
 
   static propTypes = {
@@ -20,6 +22,10 @@ export default class CategoryList extends PureComponent {
     this.state = { activeType: null };
   }
 
+  get announce() {
+    return this.props.setScreenReaderStatus;
+  }
+
   onDragStart = draggable => {
     this.setState({ activeType: draggable.type });
   };
@@ -30,6 +36,56 @@ export default class CategoryList extends PureComponent {
     if (draggable.type === "category") this.updateCategoryPosition(draggable);
     if (draggable.type === "text")
       this.updateTextCategoryAndPosition(draggable);
+  };
+
+  determineDestination(sourceIndex, direction) {
+    const isLastCategory = sourceIndex === this.categories.length - 1;
+    const isUncategorized = sourceIndex === -1;
+
+    if (isLastCategory)
+      return direction === "down"
+        ? undefined
+        : this.categories[sourceIndex - 1];
+
+    if (isUncategorized) return this.categories[this.categories.length - 1];
+
+    return direction === "down"
+      ? this.categories[sourceIndex + 1]
+      : this.categories[sourceIndex - 1];
+  }
+
+  determinePosition(destination, direction) {
+    if (direction === "down") return 1;
+    const destinationTexts = this.texts.filter(
+      text => text.relationships.category?.id === destination.id
+    );
+    return destinationTexts?.length + 1 || 1;
+  }
+
+  onTextKeyboardMove = ({ text, sourceId, direction }) => {
+    const sourceIndex = this.categories.findIndex(c => c.id === sourceId);
+
+    if (sourceId === "uncategorized" && direction === "down") {
+      this.announce("Cannot move down. Text is already in the last category.");
+      return;
+    }
+    if (sourceIndex === 0 && direction === "up") {
+      this.announce("Cannot move up. Text is already in the first category.");
+      return;
+    }
+
+    const destination = this.determineDestination(sourceIndex, direction);
+    const position = this.determinePosition(destination, direction);
+
+    this.props.callbacks.updateTextCategoryAndPosition(
+      text,
+      destination,
+      position
+    );
+    this.announce(
+      `Text moved to category “${destination?.attributes.title ||
+        "Uncategorized"}”`
+    );
   };
 
   get project() {
@@ -109,6 +165,7 @@ export default class CategoryList extends PureComponent {
                   texts={this.texts}
                   project={this.project}
                   callbacks={this.callbacks}
+                  onTextKeyboardMove={this.onTextKeyboardMove}
                 />
                 {provided.placeholder}
               </div>
@@ -119,9 +176,12 @@ export default class CategoryList extends PureComponent {
             project={this.project}
             activeType={this.state.activeType}
             texts={this.uncategorizedTexts}
+            onTextKeyboardMove={this.onTextKeyboardMove}
           />
         </section>
       </DragDropContext>
     );
   }
 }
+
+export default withScreenReaderStatus(CategoryList);

@@ -10,7 +10,8 @@ export default class CategoryListUncategorized extends PureComponent {
     project: PropTypes.object.isRequired,
     category: PropTypes.object,
     texts: PropTypes.array.isRequired,
-    callbacks: PropTypes.object.isRequired
+    callbacks: PropTypes.object.isRequired,
+    onTextKeyboardMove: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -47,6 +48,7 @@ export default class CategoryListUncategorized extends PureComponent {
           activeType={this.props.activeType}
           callbacks={this.callbacks}
           texts={this.texts}
+          onTextKeyboardMove={this.props.onTextKeyboardMove}
         />
       </div>
     );
