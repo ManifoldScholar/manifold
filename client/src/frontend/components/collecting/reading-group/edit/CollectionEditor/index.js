@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import findKey from "lodash/findKey";
 import { readingGroupsAPI, collectingAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import CategoryCreator from "./CategoryCreator";
 import SortableCategories from "./SortableCategories";
 import CategoriesList from "./SortableCategories/CategoriesList";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
+
+import withScreenReaderStatus from "hoc/with-screen-reader-status";
 
 const { request } = entityStoreActions;
 
@@ -14,7 +17,8 @@ function CollectionEditor({
   categories,
   responses,
   refresh,
-  dispatch
+  dispatch,
+  setScreenReaderStatus: announce
 }) {
   const collection = getEntityCollection(readingGroup);
 
@@ -59,12 +63,63 @@ function CollectionEditor({
     dispatch(updateRequest).promise.then(() => refresh());
   }
 
+  function determineMovePosition(destinationId, type, direction) {
+    if (direction === "down") return 1;
+    const destinationCollectables =
+      collection.attributes.categoryMappings[destinationId][type];
+    return destinationCollectables?.length + 1 || 1;
+  }
+
+  function handleCollectableMove({ id, type, direction }) {
+    const mappings = collection.attributes.categoryMappings;
+    const sourceId = findKey(mappings, category =>
+      category[type]?.includes(id)
+    );
+    // get array of IDs and move '$uncategorized$' to end to reflect UI order
+    const sortedCategories = [
+      ...Object.keys(mappings).slice(1),
+      Object.keys(mappings)[0]
+    ];
+    const sourceIndex = sortedCategories.indexOf(sourceId);
+
+    if (sourceIndex === sortedCategories.length - 1 && direction === "down") {
+      announce("Cannot move down. Item is already in the last category.");
+      return;
+    }
+    if (sourceIndex === 0 && direction === "up") {
+      announce("Cannot move up. Item is already in the first category.");
+      return;
+    }
+
+    const destinationId =
+      direction === "down"
+        ? sortedCategories[sourceIndex + 1]
+        : sortedCategories[sourceIndex - 1];
+    const destination = collection.attributes.categories.find(
+      c => c.id === destinationId
+    );
+    const position = determineMovePosition(destinationId, type, direction);
+
+    const updatedCollectable = {
+      groupingId: destinationId,
+      id,
+      position,
+      type
+    };
+    updateCollectable(updatedCollectable);
+    announce(
+      `Item moved to category “${destination?.title.plaintext ||
+        "Uncategorized"}”`
+    );
+  }
+
   const callbacks = {
     onCategoryEdit: refresh,
-    onCategoryUpdate: updateCategory,
+    onCategoryDrag: updateCategory,
     onCategoryRemove: removeCategory,
-    onCollectableUpdate: updateCollectable,
-    onCollectableRemove: removeCollectable
+    onCollectableDrag: updateCollectable,
+    onCollectableRemove: removeCollectable,
+    onCollectableMove: handleCollectableMove
   };
 
   return (
@@ -100,4 +155,4 @@ CollectionEditor.propTypes = {
   refresh: PropTypes.func.isRequired
 };
 
-export default CollectionEditor;
+export default withScreenReaderStatus(CollectionEditor);

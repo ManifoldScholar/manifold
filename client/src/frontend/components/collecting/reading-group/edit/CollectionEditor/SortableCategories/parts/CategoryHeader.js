@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { UnmountClosed as Collapse } from "react-collapse";
+import { useUID } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
 import CategoryEdit from "./CategoryEdit";
 import CategoryRemove from "./CategoryRemove";
@@ -12,6 +13,7 @@ function CategoryHeader({
   onCategoryEdit,
   onCategoryRemove
 }) {
+  const groupLabelId = useUID();
   const [showDrawer, setShowDrawer] = useState(false);
 
   function handleSuccess() {
@@ -30,11 +32,18 @@ function CategoryHeader({
   return (
     <>
       <header className="group-collection-editor__block group-collection-editor__block--category">
-        <h3 className="group-collection-editor__label group-collection-editor__label--category">
+        <h3
+          id={groupLabelId}
+          className="group-collection-editor__label group-collection-editor__label--category"
+        >
           {category?.attributes.title}
         </h3>
         {dragProps && (
-          <div className="group-collection-editor__actions">
+          <div
+            role="group"
+            aria-labelledby={groupLabelId}
+            className="group-collection-editor__actions"
+          >
             <CategoryRemove onRemove={handleRemove} />
             <button
               onClick={() => setShowDrawer(prevState => !prevState)}
@@ -49,6 +58,7 @@ function CategoryHeader({
               className="group-collection-editor__action"
             >
               <IconComposer icon="grabber32" size="default" />
+              <span className="screen-reader-text">Drag category</span>
             </div>
           </div>
         )}
