@@ -6,7 +6,7 @@ import get from "lodash/get";
 import debounce from "lodash/debounce";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
-import { Collapse } from "react-collapse";
+import Collapse from "global/components/Collapse";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourceListSlideCaption extends Component {
@@ -126,23 +126,27 @@ export default class ResourceListSlideCaption extends Component {
   renderDescription(resource) {
     if (!this.hasCaption(resource)) return null;
     const attr = resource.attributes;
-    const descriptionClasses = classNames({
-      "resource-slideshow__description": true,
-      "resource-slideshow__description--expanded": this.state.expanded
-    });
     const contents = this.createDescription(attr.captionFormatted);
 
     return (
-      <Collapse isOpened onRest={this.checkCollapsed}>
-        <div className={descriptionClasses} ref={e => (this._description = e)}>
+      <Collapse.Content>
+        {visible => (
           <div
-            ref={e => {
-              this._descriptionContents = e;
-            }}
-            dangerouslySetInnerHTML={contents}
-          />
-        </div>
-      </Collapse>
+            className={classNames({
+              "resource-slideshow__description": true,
+              "resource-slideshow__description--expanded": visible
+            })}
+            ref={e => (this._description = e)}
+          >
+            <div
+              ref={e => {
+                this._descriptionContents = e;
+              }}
+              dangerouslySetInnerHTML={contents}
+            />
+          </div>
+        )}
+      </Collapse.Content>
     );
   }
 
