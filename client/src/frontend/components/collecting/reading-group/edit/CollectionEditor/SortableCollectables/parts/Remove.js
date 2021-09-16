@@ -15,7 +15,8 @@ function Remove({ id, type, onRemove, confirm }) {
       onClick={handleClick}
       className="group-collection-editor__action group-collection-editor__action--padded"
     >
-      Remove
+      <span>Remove</span>
+      <span className="screen-reader-text">item</span>
     </button>
   );
 }

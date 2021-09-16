@@ -96,7 +96,7 @@ function SortableCategories({ collection, responses, callbacks, children }) {
   const [activeType, setActiveType] = useState(null);
 
   const { categories, mappings } = state;
-  const { onCategoryUpdate, onCollectableUpdate } = callbacks;
+  const { onCategoryDrag, onCollectableDrag } = callbacks;
 
   function handleDragStart({ type }) {
     setActiveType(type);
@@ -119,7 +119,7 @@ function SortableCategories({ collection, responses, callbacks, children }) {
           type: "sortCategories",
           payload: draggableHelper.sortedCategories
         });
-        return onCategoryUpdate(draggableHelper.sortedCategory);
+        return onCategoryDrag(draggableHelper.sortedCategory);
       }
       case "sortMappings": {
         dispatch({
@@ -130,7 +130,7 @@ function SortableCategories({ collection, responses, callbacks, children }) {
             sortedCollectables: draggableHelper.sortedType
           }
         });
-        return onCollectableUpdate(draggableHelper.sortedCollectable);
+        return onCollectableDrag(draggableHelper.sortedCollectable);
       }
       case "migrateMapping": {
         dispatch({
@@ -147,7 +147,7 @@ function SortableCategories({ collection, responses, callbacks, children }) {
             }
           }
         });
-        return onCollectableUpdate(draggableHelper.sortedCollectable);
+        return onCollectableDrag(draggableHelper.sortedCollectable);
       }
       default:
         return null;

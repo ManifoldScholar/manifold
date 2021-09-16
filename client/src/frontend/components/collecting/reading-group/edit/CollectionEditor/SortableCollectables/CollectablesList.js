@@ -7,7 +7,8 @@ const CollectablesList = React.memo(function CollectablesList({
   type,
   collectedIds,
   responses,
-  onRemove
+  onRemove,
+  onMove
 }) {
   const hasCollectables = collectedIds.length > 0;
 
@@ -26,6 +27,7 @@ const CollectablesList = React.memo(function CollectablesList({
         type={type}
         responses={responses}
         onRemove={onRemove}
+        onMove={onMove}
       />
     </li>
   ));
@@ -38,7 +40,8 @@ CollectablesList.propTypes = {
   type: PropTypes.string.isRequired,
   collectedIds: PropTypes.array.isRequired,
   responses: PropTypes.array.isRequired,
-  onRemove: PropTypes.func.isRequired
+  onRemove: PropTypes.func.isRequired,
+  onMove: PropTypes.func.isRequired
 };
 
 export default CollectablesList;

@@ -37,6 +37,7 @@ function Category({
       collectedIds: getCollectedIdsByType(type),
       responses: getResponsesByType(type),
       onRemove: callbacks.onCollectableRemove,
+      onMove: callbacks.onCollectableMove,
       showDropzone: activeType === type
     };
   }

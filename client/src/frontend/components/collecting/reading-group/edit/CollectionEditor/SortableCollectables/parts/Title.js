@@ -13,7 +13,7 @@ function getCollectableTitle(response) {
   return attributes.title;
 }
 
-function CollectableTitle({ id, responses }) {
+function CollectableTitle({ id, responses, labelId }) {
   const isLoaded = idInResponses(id, responses);
 
   if (!isLoaded)
@@ -33,6 +33,7 @@ function CollectableTitle({ id, responses }) {
 
   return (
     <h5
+      id={labelId}
       dangerouslySetInnerHTML={{ __html: getCollectableTitle(response) }}
       className="group-collection-editor__collectable-title"
     />
@@ -44,7 +45,8 @@ CollectableTitle.displayName =
 
 CollectableTitle.propTypes = {
   id: PropTypes.string.isRequired,
-  responses: PropTypes.array.isRequired
+  responses: PropTypes.array.isRequired,
+  labelId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 export default CollectableTitle;

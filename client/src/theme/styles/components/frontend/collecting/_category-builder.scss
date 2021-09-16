@@ -115,12 +115,47 @@
   &__actions {
     display: flex;
     flex-shrink: 0;
+    gap: min(1vw, 10px);
     align-items: center;
     margin-left: 10px;
     color: var(--default-color);
+  }
 
-    > * + * {
-      margin-left: min(1vw, 10px);
+  &__collectable-actions {
+    transition: transform $duration $duration $timing;
+    transform: translateX(80px);
+
+    &--keyboard-actions-visible {
+      transition: transform $duration $timing;
+      transform: translateX(0);
+    }
+
+    @include respond($break50, max) {
+      transition: none;
+      transform: translateX(0);
+    }
+  }
+
+  &__keyboard-actions {
+    display: inherit;
+    gap: inherit;
+    align-items: inherit;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity $duration $timing,
+      visibility $duration $duration $timing;
+
+    .group-collection-editor__collectable-actions--keyboard-actions-visible & {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity $duration $duration / 2 $timing,
+        visibility $duration $duration / 2 $timing;
+    }
+
+    @include respond($break50, max) {
+      width: 0;
+      margin-left: 0;
+      transition: none;
     }
   }
 
@@ -240,7 +275,8 @@
 
   &__collectable-title {
     @include textTruncate;
-    // prevent clipping of descenders
+    // prevent clipping of italics, descenders
+    padding-right: 2px;
     padding-bottom: 1px;
     margin-top: 0;
     margin-bottom: 0;
