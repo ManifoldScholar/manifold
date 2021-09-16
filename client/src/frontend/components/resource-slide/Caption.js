@@ -126,27 +126,23 @@ export default class ResourceListSlideCaption extends Component {
   renderDescription(resource) {
     if (!this.hasCaption(resource)) return null;
     const attr = resource.attributes;
+    const descriptionClasses = classNames({
+      "resource-slideshow__description": true,
+      "resource-slideshow__description--expanded": this.state.expanded
+    });
     const contents = this.createDescription(attr.captionFormatted);
 
     return (
-      <Collapse.Content>
-        {visible => (
+      <Collapse isOpened onRest={this.checkCollapsed}>
+        <div className={descriptionClasses} ref={e => (this._description = e)}>
           <div
-            className={classNames({
-              "resource-slideshow__description": true,
-              "resource-slideshow__description--expanded": visible
-            })}
-            ref={e => (this._description = e)}
-          >
-            <div
-              ref={e => {
-                this._descriptionContents = e;
-              }}
-              dangerouslySetInnerHTML={contents}
-            />
-          </div>
-        )}
-      </Collapse.Content>
+            ref={e => {
+              this._descriptionContents = e;
+            }}
+            dangerouslySetInnerHTML={contents}
+          />
+        </div>
+      </Collapse>
     );
   }
 
