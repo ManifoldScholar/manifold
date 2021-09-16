@@ -11,7 +11,8 @@ export default class CategoryListTexts extends PureComponent {
     activeType: PropTypes.string,
     category: PropTypes.object,
     texts: PropTypes.array.isRequired,
-    callbacks: PropTypes.object.isRequired
+    callbacks: PropTypes.object.isRequired,
+    onTextKeyboardMove: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -55,6 +56,7 @@ export default class CategoryListTexts extends PureComponent {
               callbacks={this.callbacks}
               texts={this.texts}
               category={this.category}
+              onTextKeyboardMove={this.props.onTextKeyboardMove}
             />
             {provided.placeholder}
           </div>

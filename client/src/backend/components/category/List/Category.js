@@ -16,7 +16,8 @@ export default class CategoryListCategory extends PureComponent {
     activeType: PropTypes.string,
     texts: PropTypes.array.isRequired,
     callbacks: PropTypes.object.isRequired,
-    index: PropTypes.number.isRequired
+    index: PropTypes.number.isRequired,
+    onTextKeyboardMove: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -102,7 +103,7 @@ export default class CategoryListCategory extends PureComponent {
                     {...provided.dragHandleProps}
                   >
                     <Utility.IconComposer icon="grabber32" size={26} />
-                    <span className="screen-reader-text">Move Category</span>
+                    <span className="screen-reader-text">Drag Category</span>
                   </div>
                 </div>
               </header>
@@ -111,6 +112,7 @@ export default class CategoryListCategory extends PureComponent {
                 callbacks={this.callbacks}
                 texts={this.texts}
                 activeType={this.props.activeType}
+                onTextKeyboardMove={this.props.onTextKeyboardMove}
               />
             </div>
             {provided.placeholder}

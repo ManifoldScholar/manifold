@@ -130,6 +130,18 @@
     align-items: flex-start;
     justify-content: flex-start;
     margin-left: 14px;
+    transition: transform $duration $duration $timing;
+    transform: translateX(80px);
+
+    &--keyboard-buttons-visible {
+      transition: transform $duration $timing;
+      transform: translateX(0);
+    }
+
+    @include respond($break35, max) {
+      transition: none;
+      transform: translateX(0);
+    }
 
     > * + * {
       margin-left: 14px;
@@ -149,4 +161,26 @@
     }
   }
 
+  &__keyboard-buttons {
+    display: inherit;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity $duration $timing, visibility $duration $duration $timing;
+
+    .texts-list__utility--keyboard-buttons-visible & {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity $duration $duration / 2 $timing, visibility $duration $duration / 2 $timing;
+    }
+
+    @include respond($break35, max) {
+      width: 0;
+      margin-left: 0;
+      transition: none;
+    }
+
+    > * + * {
+      margin-left: 14px;
+    }
+  }
 }

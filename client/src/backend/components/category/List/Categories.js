@@ -10,7 +10,8 @@ export default class CategoryListCategories extends PureComponent {
     texts: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     activeType: PropTypes.string,
-    callbacks: PropTypes.object.isRequired
+    callbacks: PropTypes.object.isRequired,
+    onTextKeyboardMove: PropTypes.func.isRequired
   };
 
   get categories() {
@@ -55,6 +56,7 @@ export default class CategoryListCategories extends PureComponent {
         index={index}
         category={category}
         texts={this.categoryTexts(category)}
+        onTextKeyboardMove={this.props.onTextKeyboardMove}
       />
     ));
   }
