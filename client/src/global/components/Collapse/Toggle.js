@@ -1,23 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useCollapseContext } from "hooks";
-import classNames from "classnames";
 
-function Toggle({ children, className, activeClassName }) {
+function Toggle({ children, className }) {
   const { visible, toggleProps, labelProps } = useCollapseContext();
   const applyLabelPropsToToggle =
     !React.isValidElement(children) || typeof children === "string";
   const mergedToggleProps = {
     ...toggleProps,
-    ...(applyLabelPropsToToggle ? labelProps : {})
+    ...(applyLabelPropsToToggle ? labelProps : {}),
+    className
   };
-  const finalClassName = classNames({
-    [className]: true,
-    [activeClassName]: visible
-  });
 
   return (
-    <button className={finalClassName} {...mergedToggleProps}>
+    <button {...mergedToggleProps}>
       {typeof children === "function"
         ? children(visible, labelProps)
         : children}
