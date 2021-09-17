@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { UID } from "react-uid";
 import Utility from "global/components/utility";
-import Collapse from "global/components/Collapse";
+import { UnmountClosed as Collapse } from "react-collapse";
 import classNames from "classnames";
 import has from "lodash/has";
 import isPlainObject from "lodash/isPlainObject";
@@ -27,6 +27,7 @@ export default class ListEntitiesListSearch extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      open: false,
       keyword: ""
     };
     this.searchInput = React.createRef();
@@ -149,6 +150,11 @@ export default class ListEntitiesListSearch extends PureComponent {
     return isPlainObject(param);
   }
 
+  toggleOptions = event => {
+    event.preventDefault();
+    this.setState({ open: !this.state.open });
+  };
+
   resetSearch = event => {
     event.preventDefault();
     this.setState({ keyword: "" });
@@ -173,153 +179,150 @@ export default class ListEntitiesListSearch extends PureComponent {
 
     return (
       <div className={`entity-list__search ${baseClass}`}>
-        <Collapse>
-          {this.hasKeywordParam && (
-            <form onSubmit={this.submitKeywordForm}>
-              <div className={`${baseClass}__keyword-row`}>
-                <button className={`${baseClass}__search-button`}>
-                  <Utility.IconComposer icon="search16" size={20} />
-                  <span className="screen-reader-text">Search</span>
-                </button>
-                <div className={`${baseClass}__keyword-input-wrapper`}>
-                  <UID name={id => `${this.idPrefix}-${id}`}>
-                    {id => (
-                      <>
-                        <label htmlFor={id} className="screen-reader-text">
-                          Enter Search Criteria
-                        </label>
-                        <input
-                          ref={this.searchInput}
-                          className={`${baseClass}__keyword-input`}
-                          id={id}
-                          value={this.state.keyword}
-                          type="text"
-                          placeholder={this.paramLabel(this.keywordParam)}
-                          onChange={e => this.setKeywordState(e)}
-                        />
-                      </>
-                    )}
-                  </UID>
-                </div>
-                <button
-                  onClick={this.resetSearch}
-                  className={`${baseClass}__text-button`}
-                >
-                  Reset
-                </button>
-                {this.hasOptions && (
-                  <Collapse.Toggle
-                    className={`${baseClass}__text-button ${baseClass}__text-button--foregrounded`}
-                  >
-                    Options
-                  </Collapse.Toggle>
-                )}
+        {this.hasKeywordParam && (
+          <form onSubmit={this.submitKeywordForm}>
+            <div className={`${baseClass}__keyword-row`}>
+              <button className={`${baseClass}__search-button`}>
+                <Utility.IconComposer icon="search16" size={20} />
+                <span className="screen-reader-text">Search</span>
+              </button>
+              <div className={`${baseClass}__keyword-input-wrapper`}>
+                <UID name={id => `${this.idPrefix}-${id}`}>
+                  {id => (
+                    <>
+                      <label htmlFor={id} className="screen-reader-text">
+                        Enter Search Criteria
+                      </label>
+                      <input
+                        ref={this.searchInput}
+                        className={`${baseClass}__keyword-input`}
+                        id={id}
+                        value={this.state.keyword}
+                        type="text"
+                        placeholder={this.paramLabel(this.keywordParam)}
+                        onChange={e => this.setKeywordState(e)}
+                      />
+                    </>
+                  )}
+                </UID>
               </div>
-            </form>
-          )}
-          {this.hasOptions && (
-            <Collapse.Content>
-              <UID name={id => `${this.idPrefix}-${id}`}>
-                {id => (
-                  <div role="group" aria-labelledby={`${id}-header`}>
-                    <p id={`${id}-header`} className="screen-reader-text">
-                      Search options
-                    </p>
-                    <div
-                      className={this.classNameWithStyle(
-                        `${baseClass}__options`
-                      )}
-                    >
-                      {this.filterParams.map((param, i) => (
-                        <div
-                          key={i}
-                          className={this.classNameWithStyle(
-                            `${baseClass}__option`
-                          )}
-                        >
-                          <div className={`select`}>
-                            <span
-                              className={`select__label ${
-                                i > 0 ? `select__label--empty` : ""
-                              }`}
+              <button
+                onClick={this.resetSearch}
+                className={`${baseClass}__text-button`}
+              >
+                Reset
+              </button>
+              {this.hasOptions && (
+                <button
+                  onClick={this.toggleOptions}
+                  className={`${baseClass}__text-button ${baseClass}__text-button--foregrounded`}
+                  aria-haspopup
+                  aria-expanded={this.state.open}
+                >
+                  Options
+                </button>
+              )}
+            </div>
+          </form>
+        )}
+        {this.hasOptions && (
+          <Collapse isOpened={this.state.open}>
+            <UID name={id => `${this.idPrefix}-${id}`}>
+              {id => (
+                <div role="group" aria-labelledby={`${id}-header`}>
+                  <p id={`${id}-header`} className="screen-reader-text">
+                    Search options
+                  </p>
+                  <div
+                    className={this.classNameWithStyle(`${baseClass}__options`)}
+                  >
+                    {this.filterParams.map((param, i) => (
+                      <div
+                        key={i}
+                        className={this.classNameWithStyle(
+                          `${baseClass}__option`
+                        )}
+                      >
+                        <div className={`select`}>
+                          <span
+                            className={`select__label ${
+                              i > 0 ? `select__label--empty` : ""
+                            }`}
+                          >
+                            {i === 0 ? "Filter Results:" : "\u00A0"}
+                          </span>
+                          <div className={`select__wrapper`}>
+                            <label
+                              htmlFor={`${id}-filter-${i}`}
+                              className="screen-reader-text"
                             >
-                              {i === 0 ? "Filter Results:" : "\u00A0"}
-                            </span>
-                            <div className={`select__wrapper`}>
-                              <label
-                                htmlFor={`${id}-filter-${i}`}
-                                className="screen-reader-text"
-                              >
-                                {`Filter results by ${param.label}`}
-                              </label>
-                              <select
-                                id={`${id}-filter-${i}`}
-                                onChange={e => this.setParam(e, param)}
-                                value={this.paramValue(param)}
-                              >
-                                {this.paramOptions(param).map(
-                                  (option, optionIndex) => (
-                                    <option
-                                      key={optionIndex}
-                                      value={option.value || ""}
-                                    >
-                                      {option.label}
-                                    </option>
-                                  )
-                                )}
-                              </select>
-                              <Utility.IconComposer icon="disclosureDown24" />
-                            </div>
+                              {`Filter results by ${param.label}`}
+                            </label>
+                            <select
+                              id={`${id}-filter-${i}`}
+                              onChange={e => this.setParam(e, param)}
+                              value={this.paramValue(param)}
+                            >
+                              {this.paramOptions(param).map(
+                                (option, optionIndex) => (
+                                  <option
+                                    key={optionIndex}
+                                    value={option.value || ""}
+                                  >
+                                    {option.label}
+                                  </option>
+                                )
+                              )}
+                            </select>
+                            <Utility.IconComposer icon="disclosureDown24" />
                           </div>
                         </div>
-                      ))}
-                      {this.hasOrderParam && (
-                        <div
-                          className={this.classNameWithStyle(
-                            `${baseClass}__option`
-                          )}
-                        >
-                          <div className={`select`}>
-                            <span className={`select__label`}>
-                              Order Results:
-                            </span>
-                            <div className={`select__wrapper`}>
-                              <label
-                                htmlFor={`${id}-order`}
-                                className="screen-reader-text"
-                              >
-                                {`Order results`}
-                              </label>
-                              <select
-                                id={`${id}-order`}
-                                onChange={e =>
-                                  this.setParam(e, this.orderParam)
-                                }
-                                value={this.paramValue(this.orderParam)}
-                              >
-                                {this.paramOptions(this.orderParam).map(
-                                  (option, optionIndex) => (
-                                    <option
-                                      key={optionIndex}
-                                      value={option.value || ""}
-                                    >
-                                      {option.label}
-                                    </option>
-                                  )
-                                )}
-                              </select>
-                              <Utility.IconComposer icon="disclosureDown24" />
-                            </div>
+                      </div>
+                    ))}
+                    {this.hasOrderParam && (
+                      <div
+                        className={this.classNameWithStyle(
+                          `${baseClass}__option`
+                        )}
+                      >
+                        <div className={`select`}>
+                          <span className={`select__label`}>
+                            Order Results:
+                          </span>
+                          <div className={`select__wrapper`}>
+                            <label
+                              htmlFor={`${id}-order`}
+                              className="screen-reader-text"
+                            >
+                              {`Order results`}
+                            </label>
+                            <select
+                              id={`${id}-order`}
+                              onChange={e => this.setParam(e, this.orderParam)}
+                              value={this.paramValue(this.orderParam)}
+                            >
+                              {this.paramOptions(this.orderParam).map(
+                                (option, optionIndex) => (
+                                  <option
+                                    key={optionIndex}
+                                    value={option.value || ""}
+                                  >
+                                    {option.label}
+                                  </option>
+                                )
+                              )}
+                            </select>
+                            <Utility.IconComposer icon="disclosureDown24" />
                           </div>
                         </div>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
-                )}
-              </UID>
-            </Collapse.Content>
-          )}
-        </Collapse>
+                </div>
+              )}
+            </UID>
+          </Collapse>
+        )}
       </div>
     );
   }

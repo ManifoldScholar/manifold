@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Collapse from "global/components/Collapse";
+import Collapse from "global/components/collapse";
 import IconComposer from "global/components/utility/IconComposer";
 import CategoryEdit from "./CategoryEdit";
 import CategoryRemove from "./CategoryRemove";
@@ -12,6 +12,17 @@ function CategoryHeader({
   onCategoryEdit,
   onCategoryRemove
 }) {
+  const [showDrawer, setShowDrawer] = useState(false);
+
+  function handleSuccess() {
+    setShowDrawer(false);
+    onCategoryEdit();
+  }
+
+  function handleCancel() {
+    setShowDrawer(false);
+  }
+
   function handleRemove() {
     onCategoryRemove(category);
   }
@@ -42,15 +53,13 @@ function CategoryHeader({
         {dragProps && (
           <Collapse.Content>
             {(visible, toggleVisible) => {
+              console.log(toggleVisible);
               return (
                 <div className="group-collection-editor__category-inner group-collection-editor__category-inner--drawer">
                   <CategoryEdit
                     category={category}
                     groupId={groupId}
-                    onSuccess={() => {
-                      onCategoryEdit();
-                      toggleVisible();
-                    }}
+                    onSuccess={handleSuccess}
                     onCancel={toggleVisible}
                   />
                 </div>

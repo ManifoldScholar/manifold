@@ -26,6 +26,8 @@ function Content({ children, className, activeClassName, focusOnVisible }) {
 
   const contentRef = useRef();
 
+  console.log(toggleVisible);
+
   useEffect(() => {
     if (visible && contentRef.current) {
       contentRef.current.focus();
