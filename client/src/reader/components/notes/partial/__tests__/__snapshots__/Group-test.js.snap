@@ -1,20 +1,177 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`reader/components/notes/partial/Group matches the snapshot 1`] = `
-<Global.Collapse
-  initialVisible={false}
+<li
+  className="notes-filtered-list__section"
 >
-  <li
-    className="notes-filtered-list__section"
+  <button
+    aria-expanded={false}
+    className="notes-filtered-list__section-button"
+    onClick={[Function]}
   >
-    <Global.Collapse.Toggle
-      className="notes-filtered-list__section-button"
+    <div
+      className="notes-filtered-list__section-button-inner"
     >
-      <Component />
-    </Global.Collapse.Toggle>
-    <Global.Collapse.Content>
-      <Component />
-    </Global.Collapse.Content>
-  </li>
-</Global.Collapse>
+      <IconComposer
+        fill="currentColor"
+        icon="disclosureDown24"
+        iconClass="notes-filtered-list__disclosure-icon"
+        size="default"
+        svgProps={
+          Object {
+            "aria-hidden": true,
+          }
+        }
+      />
+      <span
+        className="notes-filtered-list__section-label"
+      >
+        Test
+      </span>
+    </div>
+  </button>
+  <UnmountClosed
+    isOpened={false}
+  >
+    <ul
+      className="notes-filtered-list__group"
+    >
+      <Connect(HigherOrder.WithReadingGroups(Notes.Partial.GroupItem))
+        annotation={
+          Object {
+            "attributes": Object {
+              "abilities": Object {
+                "create": true,
+                "createEntitlements": true,
+                "createPermissions": true,
+                "createResourceCollections": true,
+                "createResources": true,
+                "createTexts": true,
+                "createTwitterQueries": true,
+                "delete": true,
+                "manageEntitlements": true,
+                "manageEvents": true,
+                "managePermissions": true,
+                "manageResourceCollections": true,
+                "manageResources": true,
+                "manageSocials": true,
+                "manageTexts": true,
+                "manageTwitterQueries": true,
+                "read": true,
+                "readDeleted": true,
+                "readDrafts": true,
+                "readLog": true,
+                "readSecrets": true,
+                "update": true,
+                "updateMakers": true,
+              },
+              "body": "Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.",
+              "createdAt": "2017-04-24T23:25:50.161Z",
+              "creatorAvatarStyles": Object {},
+              "endChar": 13,
+              "endNode": "another-node",
+              "startChar": 4,
+              "startNode": "some-node",
+              "subject": "Gods, Earths, and 85ers",
+            },
+            "id": "annotation-0",
+            "relationships": Object {},
+            "type": "annotations",
+          }
+        }
+        key="annotation-0"
+      />
+      <Connect(HigherOrder.WithReadingGroups(Notes.Partial.GroupItem))
+        annotation={
+          Object {
+            "attributes": Object {
+              "abilities": Object {
+                "create": true,
+                "createEntitlements": true,
+                "createPermissions": true,
+                "createResourceCollections": true,
+                "createResources": true,
+                "createTexts": true,
+                "createTwitterQueries": true,
+                "delete": true,
+                "manageEntitlements": true,
+                "manageEvents": true,
+                "managePermissions": true,
+                "manageResourceCollections": true,
+                "manageResources": true,
+                "manageSocials": true,
+                "manageTexts": true,
+                "manageTwitterQueries": true,
+                "read": true,
+                "readDeleted": true,
+                "readDrafts": true,
+                "readLog": true,
+                "readSecrets": true,
+                "update": true,
+                "updateMakers": true,
+              },
+              "body": "Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.",
+              "createdAt": "2017-04-24T23:25:50.161Z",
+              "creatorAvatarStyles": Object {},
+              "endChar": 13,
+              "endNode": "another-node",
+              "startChar": 4,
+              "startNode": "some-node",
+              "subject": "Gods, Earths, and 85ers",
+            },
+            "id": "annotation-1",
+            "relationships": Object {},
+            "type": "annotations",
+          }
+        }
+        key="annotation-1"
+      />
+      <Connect(HigherOrder.WithReadingGroups(Notes.Partial.GroupItem))
+        annotation={
+          Object {
+            "attributes": Object {
+              "abilities": Object {
+                "create": true,
+                "createEntitlements": true,
+                "createPermissions": true,
+                "createResourceCollections": true,
+                "createResources": true,
+                "createTexts": true,
+                "createTwitterQueries": true,
+                "delete": true,
+                "manageEntitlements": true,
+                "manageEvents": true,
+                "managePermissions": true,
+                "manageResourceCollections": true,
+                "manageResources": true,
+                "manageSocials": true,
+                "manageTexts": true,
+                "manageTwitterQueries": true,
+                "read": true,
+                "readDeleted": true,
+                "readDrafts": true,
+                "readLog": true,
+                "readSecrets": true,
+                "update": true,
+                "updateMakers": true,
+              },
+              "body": "Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.",
+              "createdAt": "2017-04-24T23:25:50.161Z",
+              "creatorAvatarStyles": Object {},
+              "endChar": 13,
+              "endNode": "another-node",
+              "startChar": 4,
+              "startNode": "some-node",
+              "subject": "Gods, Earths, and 85ers",
+            },
+            "id": "annotation-2",
+            "relationships": Object {},
+            "type": "annotations",
+          }
+        }
+        key="annotation-2"
+      />
+    </ul>
+  </UnmountClosed>
+</li>
 `;

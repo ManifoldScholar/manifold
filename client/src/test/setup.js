@@ -44,16 +44,7 @@ jest.mock("react-uid", () => {
   return {
     UID: jest.fn(props => props.children(1)),
     UIDConsumer: jest.fn(props => props.children(1)),
-    useUID: jest.fn(() => "abcdef"),
-    useUIDSeed: jest.fn(() => {
-      return label => `1-${label}`;
-    })
-  };
-});
-
-jest.mock("use-resize-observer", () => {
-  return () => {
-    return { width: 1000 };
+    useUID: jest.fn(() => "abcdef")
   };
 });
 
