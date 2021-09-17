@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import Utility from "global/components/utility";
 import Collapse from "global/components/Collapse";
-import HeaderDetail from "./BlockHeaderDetail";
 
 export default class Block extends PureComponent {
   static displayName = "Project.Hero.Builder.Block";
@@ -65,29 +65,40 @@ export default class Block extends PureComponent {
     return (
       <div className="hero-builder-block full-width">
         {!this.hasDisclosure && (
-          <button
-            className="hero-builder-block__header"
-            onClick={this.onEdit}
-            aria-expanded={this.ariaExpanded}
-            aria-controls={this.ariaControls}
-          >
-            <HeaderDetail
-              title={this.title}
-              titleId={this.titleId}
-              description={this.description}
-              hasDescription={this.hasDescription}
-            />
+          <button className="hero-builder-block__header" onClick={this.onEdit}>
+            <div className="hero-builder-block__header-details">
+              <h3 id={this.titleId} className="hero-builder-block__title">
+                {this.title}
+              </h3>
+              {this.hasDescription && (
+                <p className="hero-builder-block__description">
+                  {this.description}
+                </p>
+              )}
+            </div>
+            <div className="hero-builder-block__button">
+              <span className="hero-builder-block__button-label">Edit</span>
+              <Utility.IconComposer icon="annotate32" size={26} />
+            </div>
           </button>
         )}
         {this.hasDisclosure && (
           <Collapse>
             <Collapse.Toggle className="hero-builder-block__header">
-              <HeaderDetail
-                title={this.title}
-                titleId={this.titleId}
-                description={this.description}
-                hasDescription={this.hasDescription}
-              />
+              <div className="hero-builder-block__header-details">
+                <h3 id={this.titleId} className="hero-builder-block__title">
+                  {this.title}
+                </h3>
+                {this.hasDescription && (
+                  <p className="hero-builder-block__description">
+                    {this.description}
+                  </p>
+                )}
+              </div>
+              <div className="hero-builder-block__button">
+                <span className="hero-builder-block__button-label">Edit</span>
+                <Utility.IconComposer icon="annotate32" size={26} />
+              </div>
             </Collapse.Toggle>
             <Collapse.Content
               id={this.ariaControls}
