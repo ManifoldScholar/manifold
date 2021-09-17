@@ -6,7 +6,7 @@ import get from "lodash/get";
 import debounce from "lodash/debounce";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
-import Collapse from "global/components/Collapse";
+import { Collapse } from "react-collapse";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourceListSlideCaption extends Component {

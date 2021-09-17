@@ -221,10 +221,7 @@ export default class ListEntitiesListSearch extends PureComponent {
             <Collapse.Content>
               <UID name={id => `${this.idPrefix}-${id}`}>
                 {id => (
-                  <div role="group" aria-labelledby={`${id}-header`}>
-                    <p id={`${id}-header`} className="screen-reader-text">
-                      Search options
-                    </p>
+                  <>
                     <div
                       className={this.classNameWithStyle(
                         `${baseClass}__options`
@@ -314,7 +311,7 @@ export default class ListEntitiesListSearch extends PureComponent {
                         </div>
                       )}
                     </div>
-                  </div>
+                  </>
                 )}
               </UID>
             </Collapse.Content>
