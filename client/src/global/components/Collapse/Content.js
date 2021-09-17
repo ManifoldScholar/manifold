@@ -13,7 +13,7 @@ const getAnimationParams = height => {
 };
 
 function Content({ children, className, activeClassName, focusOnVisible }) {
-  const { visible, contentProps, toggleVisible } = useCollapseContext();
+  const { visible, contentProps } = useCollapseContext();
   const { ref: resizeRef, height } = useResizeObserver();
 
   const finalClassName = classNames({
@@ -25,8 +25,6 @@ function Content({ children, className, activeClassName, focusOnVisible }) {
   });
 
   const contentRef = useRef();
-
-  console.log(toggleVisible);
 
   useEffect(() => {
     if (visible && contentRef.current) {
@@ -58,9 +56,7 @@ function Content({ children, className, activeClassName, focusOnVisible }) {
       tabIndex={focusOnVisible ? -1 : null}
     >
       <div ref={resizeRef}>
-        {typeof children === "function"
-          ? children(visible, toggleVisible)
-          : children}
+        {typeof children === "function" ? children(visible) : children}
       </div>
     </div>
   );
