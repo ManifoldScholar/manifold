@@ -40,7 +40,7 @@ function CategoryHeader({
           )}
         </header>
         {dragProps && (
-          <Collapse.Content>
+          <Collapse.Content maxDuration={500}>
             {(visible, toggleVisible) => {
               return (
                 <div className="group-collection-editor__category-inner group-collection-editor__category-inner--drawer">

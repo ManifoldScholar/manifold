@@ -12,8 +12,8 @@ function Toggle({ children, className, activeClassName }) {
     ...(applyLabelPropsToToggle ? labelProps : {})
   };
   const finalClassName = classNames({
-    [className]: true,
-    [activeClassName]: visible
+    [className]: !!className,
+    [activeClassName]: activeClassName ? visible : false
   });
 
   return (
@@ -33,7 +33,8 @@ Toggle.propTypes = {
     PropTypes.node,
     PropTypes.func
   ]),
-  className: PropTypes.string
+  className: PropTypes.string,
+  activeClassName: PropTypes.string
 };
 
 export default Toggle;
