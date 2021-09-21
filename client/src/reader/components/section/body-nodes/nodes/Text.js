@@ -187,7 +187,10 @@ export default class TextNode extends Component {
           ? {
               tabIndex: 0,
               role: "button",
-              "aria-haspopup": "dialog"
+              "aria-haspopup": "dialog",
+              "aria-label": removableHighlight
+                ? this.ariaLabelForHighlight(chunk)
+                : this.ariaLabelForAnnotation(chunk)
             }
           : {};
 
@@ -215,6 +218,14 @@ export default class TextNode extends Component {
       (memo, a) => a.attributes.commentsCount + memo,
       0
     );
+  }
+
+  ariaLabelForHighlight(chunk) {
+    return `Manage highlight or annotate text node “${chunk}”. `
+  }
+
+  ariaLabelForAnnotation(chunk) {
+    return `View annotations for text node “${chunk}”.`
   }
 
   doScroll(withTimeout = false) {
