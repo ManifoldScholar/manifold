@@ -1,4 +1,4 @@
-import NotificationsForm from "./NotificationsForm";
+import NotificationsForm from "./NotificationsForm/index";
 
 export default {
   NotificationsForm
