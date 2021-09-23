@@ -41,7 +41,7 @@ function Category({ category, mappings, responses, onUncollect }) {
         {descriptionFormatted && (
           <div
             dangerouslySetInnerHTML={{ __html: descriptionFormatted }}
-            className="group-collection-category__description"
+            className="group-collection-category__description markdown"
           />
         )}
       </header>
