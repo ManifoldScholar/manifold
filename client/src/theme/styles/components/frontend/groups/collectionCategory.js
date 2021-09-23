@@ -23,12 +23,7 @@ export default `
     &__description {
       font-family: var(--font-family-heading);
       margin: 1.438em 0 0;
-      font-size: 16px;
-      line-height: 1.438;
-
-      p {
-        margin-bottom: 0.719em;
-      }
+      color: inherit;
     }
 
     &__bottom-margin-offset {
