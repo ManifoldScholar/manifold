@@ -45,6 +45,7 @@ function DatePickerComponent({ parentId, inputId, value, onChange, label }) {
             onClick={() => {
               pickerOpen ? onBlur() : onClick();
             }}
+            type="button"
             aria-hidden
             tabIndex={-1}
             className="range-picker__picker-toggle"
