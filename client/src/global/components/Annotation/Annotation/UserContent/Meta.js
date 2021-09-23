@@ -103,7 +103,9 @@ export default class AnnotationMeta extends PureComponent {
             )}
             className="marker marker--tertiary"
           >
-            {annotation.attributes.readingGroupName}
+            <div className="overflow-wrapper truncate-text-overflow">
+              {annotation.attributes.readingGroupName}
+            </div>
           </Link>
         )}
       </div>

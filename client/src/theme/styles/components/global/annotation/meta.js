@@ -84,5 +84,9 @@ export default `
 
       ${respond(`padding: 0;`, 50)}
     }
+
+    .overflow-wrapper {
+      width: 100%;
+    }
   }
 `;
