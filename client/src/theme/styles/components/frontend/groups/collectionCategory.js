@@ -25,6 +25,10 @@ export default `
       margin: 1.438em 0 0;
       font-size: 16px;
       line-height: 1.438;
+
+      p {
+        margin-bottom: 0.719em;
+      }
     }
 
     &__bottom-margin-offset {
