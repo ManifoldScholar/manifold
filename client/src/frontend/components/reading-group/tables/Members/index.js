@@ -12,6 +12,7 @@ import get from "lodash/get";
 import classNames from "classnames";
 import Authorize from "hoc/authorize";
 import lh from "helpers/linkHandler";
+import Authorization from "helpers/Authorization";
 
 export default class MembersTable extends PureComponent {
   static displayName = "ReadingGroup.Table.Members";
@@ -67,6 +68,11 @@ export default class MembersTable extends PureComponent {
 
   nameFor(membership) {
     return membership.attributes.name;
+  }
+
+  getUpdateAuthorizationStatus({ entity, ability }) {
+    const authorization = new Authorization();
+    return authorization.authorize({ ability, entity });
   }
 
   render() {
@@ -159,27 +165,27 @@ export default class MembersTable extends PureComponent {
         <Column header="Note Style" cellSize={"cellFitContent"}>
           {({ model }) => <NoteStyle membership={model} />}
         </Column>
-        <Column header="Actions" cellSize={"cellFitContent"}>
-          {({ model }) => {
-            const isCreator = this.userIsGroupCreator(model);
-            return (
-              <div className="table__actions">
-                <EditMember
-                  membership={model}
-                  readingGroup={this.props.readingGroup}
-                />
-                {!isCreator && (
-                  <Authorize
-                    entity={this.props.readingGroup}
-                    ability={"update"}
-                  >
+        {this.getUpdateAuthorizationStatus({
+          entity: this.props.readingGroup,
+          ability: "update"
+        }) && (
+          <Column header="Actions" cellSize={"cellFitContent"}>
+            {({ model }) => {
+              const isCreator = this.userIsGroupCreator(model);
+              return (
+                <div className="table__actions">
+                  <EditMember
+                    membership={model}
+                    readingGroup={this.props.readingGroup}
+                  />
+                  {!isCreator && (
                     <RemoveMember onClick={() => onRemoveMember(model)} />
-                  </Authorize>
-                )}
-              </div>
-            );
-          }}
-        </Column>
+                  )}
+                </div>
+              );
+            }}
+          </Column>
+        )}
       </Table>
     );
   }
