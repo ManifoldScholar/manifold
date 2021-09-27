@@ -194,7 +194,7 @@ class VisibilityMenuBody extends PureComponent {
     return this.renderFilter("reading group", label, children);
   }
 
-  renderCheckboxGroup(format, filterState = {}, block) {
+  renderCheckboxGroup(format, filterState = {}, flex) {
     const label = `${capitalize(format)}s`;
     return this.renderFilter(
       format,
@@ -206,19 +206,19 @@ class VisibilityMenuBody extends PureComponent {
           filterState,
           format,
           index,
-          block
+          flex
         );
       })
     );
   }
 
-  renderCheckbox(key, label, filterState, format, index, block) {
+  renderCheckbox(key, label, filterState, format, index, flex) {
     const checkboxId = format + "-checkbox-" + index;
     const adjustedLabel = key === "all" ? "Show All" : label;
     const checkboxClasses = classNames({
       "checkbox checkbox--white": true,
       "visibility-menu__checkbox": true,
-      "visibility-menu__checkbox--flex": block
+      "visibility-menu__checkbox--flex": flex
     });
     return (
       <label
