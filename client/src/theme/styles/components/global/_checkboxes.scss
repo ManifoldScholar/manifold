@@ -33,6 +33,7 @@
     vertical-align: middle;
     background-color: $neutralWhite;
     border-radius: 3px;
+    flex-shrink: 0;
 
     .checkbox--gray & {
       background-color: $neutral20;

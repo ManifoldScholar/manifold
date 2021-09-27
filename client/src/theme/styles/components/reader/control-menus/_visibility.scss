@@ -43,15 +43,16 @@
     font-size: 13px;
   }
 
-  &__filters {}
+  &__filters {
+  }
 
   &__checkbox {
     & + & {
       margin-left: 32px;
     }
 
-    &--block {
-      display: block;
+    &--flex {
+      display: flex;
 
       & + & {
         margin-top: 14px;
