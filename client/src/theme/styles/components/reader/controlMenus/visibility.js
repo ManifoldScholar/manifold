@@ -38,8 +38,8 @@ export default `
         margin-left: 32px;
       }
 
-      &--block {
-        display: block;
+      &--flex{
+        display: flex;
 
         & + & {
           margin-top: 14px;

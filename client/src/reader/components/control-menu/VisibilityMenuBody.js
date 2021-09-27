@@ -218,7 +218,7 @@ class VisibilityMenuBody extends PureComponent {
     const checkboxClasses = classNames({
       "checkbox checkbox--white": true,
       "visibility-menu__checkbox": true,
-      "visibility-menu__checkbox--block": block
+      "visibility-menu__checkbox--flex": block
     });
     return (
       <label
@@ -239,7 +239,7 @@ class VisibilityMenuBody extends PureComponent {
             iconClass="checkbox__icon"
           />
         </div>
-        {adjustedLabel}
+        <span>{adjustedLabel}</span>
       </label>
     );
   }
