@@ -10,7 +10,6 @@ import NoteStyle from "./NoteStyle";
 import { RemoveMember, EditMember } from "./actions";
 import get from "lodash/get";
 import classNames from "classnames";
-import Authorize from "hoc/authorize";
 import lh from "helpers/linkHandler";
 import Authorization from "helpers/Authorization";
 
