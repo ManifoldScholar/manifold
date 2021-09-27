@@ -24,6 +24,11 @@ export default class MembersTable extends PureComponent {
     onRemoveMember: PropTypes.func.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.authorization = new Authorization();
+  }
+
   get readingGroup() {
     return this.props.readingGroup;
   }
@@ -70,8 +75,7 @@ export default class MembersTable extends PureComponent {
   }
 
   getUpdateAuthorizationStatus({ entity, ability }) {
-    const authorization = new Authorization();
-    return authorization.authorize({ ability, entity });
+    return this.authorization.authorize({ entity, ability });
   }
 
   render() {
