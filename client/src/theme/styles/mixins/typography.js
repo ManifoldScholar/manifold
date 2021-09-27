@@ -57,6 +57,7 @@ export const textTruncate = `
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  padding-bottom: 1px;
 `;
 
 // // Labels
