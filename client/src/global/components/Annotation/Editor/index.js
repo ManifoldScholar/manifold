@@ -111,11 +111,11 @@ class AnnotationEditor extends PureComponent {
   setReadingGroupFromAnnotationEdit() {
     const { annotation } = this.props;
     if (annotation.attributes.readingGroupId) {
-      this.props.setReadingGroup(annotation.attributes.readingGroupId);
+      this.setReadingGroup(annotation.attributes.readingGroupId);
     } else if (annotation.attributes.private) {
-      this.props.setReadingGroup("private");
+      this.setReadingGroup("private");
     } else {
-      this.props.setReadingGroup("public");
+      this.setReadingGroup("public");
     }
   }
 
