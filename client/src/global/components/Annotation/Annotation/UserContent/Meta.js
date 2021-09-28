@@ -77,9 +77,9 @@ export default class AnnotationMeta extends PureComponent {
 
   renderMarkers(annotation) {
     return (
-      <div className="markers">
+      <div className="annotation-tag annotation-tag__group">
         {annotation.attributes.authorCreated && (
-          <div className="marker marker--tertiary">Author</div>
+          <div className="annotation-tag__inner">Author</div>
         )}
         {annotation.attributes.private && (
           <div className="marker marker--secondary">{"Private"}</div>
@@ -101,9 +101,9 @@ export default class AnnotationMeta extends PureComponent {
                 text: annotation.attributes.textId
               }
             )}
-            className="marker"
+            className="annotation-tag__inner"
           >
-            <div className="truncate-text-overflow">
+            <div className="annotation-tag__text">
               {annotation.attributes.readingGroupName}
             </div>
           </Link>
