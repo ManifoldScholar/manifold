@@ -101,20 +101,27 @@ class GroupItem extends Component {
     );
     const tagProps =
       commentsCount === 0
-        ? {}
+        ? { className: "annotation-tag--creator" }
         : {
             icon: "interactComment16",
             iconSize: 16,
-            iconCount: commentsCount
+            iconCount: commentsCount,
+            className: "annotation-tag--creator"
           };
 
     return <Tag {...tagProps}>{creator}</Tag>;
   }
 
   renderReadingGroupTag() {
-    const tagProps = !this.showLock ? {} : { icon: "lock16", iconSize: 14 };
+    const tagProps = !this.showLock
+      ? { className: "annotation-tag--group" }
+      : { icon: "lock16", iconSize: 14, className: "annotation-tag--group" };
 
-    return <Tag {...tagProps}>{this.currentGroupName}</Tag>;
+    return (
+      <span className="annotation-tag__left-align">
+        <Tag {...tagProps}>{this.currentGroupName}</Tag>
+      </span>
+    );
   }
 
   render() {
