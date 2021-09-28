@@ -77,16 +77,18 @@ export default class AnnotationMeta extends PureComponent {
 
   renderMarkers(annotation) {
     return (
-      <div className="annotation-tag annotation-tag__group">
+      <div className="annotation-tag annotation-tag--group">
         {annotation.attributes.authorCreated && (
           <div className="annotation-tag__inner">Author</div>
         )}
         {annotation.attributes.private && (
-          <div className="marker marker--secondary">{"Private"}</div>
+          <div className="annotation-tag__inner annotation-tag--secondary">
+            {"Private"}
+          </div>
         )}
         {annotation.attributes.flagsCount > 0 && (
           <Authorize kind="admin">
-            <div className="marker marker--secondary">
+            <div className="annotation-tag__inner annotation-tag--secondary">
               {annotation.attributes.flagsCount}
               {annotation.attributes.flagsCount === 1 ? " flag" : " flags"}
             </div>

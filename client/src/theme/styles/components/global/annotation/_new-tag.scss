@@ -12,7 +12,7 @@
   border-radius: 12px;
   line-height: 1.4;
 
-  &__group {
+  &--group {
     max-width: $_group-tag-width;
     font-size: 14px;
   }
@@ -23,7 +23,7 @@
     width: $_group-tag-width;
   }
 
-  &__creator {
+  &--creator {
     width: $_creator-tag-width;
     font-size: 12px;
   }
