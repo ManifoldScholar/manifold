@@ -5,7 +5,7 @@ describe("reader/components/annotation/popup/menus/Main", () => {
   def("text", () => factory("text"));
   def("root", () => (
     <ReaderContext.Provider value={$text}>
-      <Annotate
+      <MainMenu
         readingGroups={[]}
         showReadingGroups={jest.fn()}
         currentReadingGroup="public"
@@ -16,8 +16,11 @@ describe("reader/components/annotation/popup/menus/Main", () => {
           showLogin: jest.fn(),
           createHighlight: jest.fn()
         }}
-        showShare={() => {}}
         text={$text}
+        activeMenu="main"
+        onKeyDown={jest.fn}
+        openSubmenu={jest.fn}
+        menu={{ visible: true }}
       />
     </ReaderContext.Provider>
   ));

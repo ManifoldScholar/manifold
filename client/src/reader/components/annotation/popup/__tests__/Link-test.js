@@ -5,6 +5,7 @@ describe("reader/components/annotation/popup/menus/FollowLink", () => {
     <FollowLink
       activeEvent={{ link: { href: "www.dailyrowan.com" }, annotationIds: [] }}
       actions={{ openViewAnnotationsDrawer: () => {} }}
+      menu={{}}
     />
   ));
   it("matches the snapshot when rendered", () => {
