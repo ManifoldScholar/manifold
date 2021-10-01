@@ -65,7 +65,7 @@ function ReaderFullNotesContainer({
   const {
     annotations,
     annotationsMeta,
-    loaded: annotationsLoaded
+    annotationsLoaded
   } = useSelectAnnotations(currentGroupId, "reader", true);
 
   const commonActions = commonActionsHelper(dispatch);
