@@ -11,7 +11,7 @@ import { RemoveMember, EditMember } from "./actions";
 import get from "lodash/get";
 import classNames from "classnames";
 import lh from "helpers/linkHandler";
-import Authorization from "helpers/Authorization";
+import Authorization from "helpers/authorization";
 
 export default class MembersTable extends PureComponent {
   static displayName = "ReadingGroup.Table.Members";

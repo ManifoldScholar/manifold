@@ -1,40 +1,76 @@
 .annotation-tag {
-  $_tag-width: 166px;
+  $_creator-tag-width: 167px;
+  $_group-tag-width: 167px;
+  $_count-width: 56px;
+  @include templateHead;
+
   display: flex;
   align-items: center;
-
-  width: $_tag-width;
   overflow: hidden;
-  font-size: 14px;
   color: var(--default-color);
   background-color: var(--box-bg-color);
   border-radius: 12px;
+  line-height: 1.4;
+
+  &--group {
+    max-width: $_group-tag-width;
+    font-size: 14px;
+  }
+
+  &__left-align {
+    display: flex;
+    align-items: flex-start;
+    width: $_group-tag-width;
+  }
+
+  &--creator {
+    width: $_creator-tag-width;
+    font-size: 12px;
+  }
 
   &__inner {
     display: flex;
-    flex: 1 1 auto;
     align-items: center;
-    min-width: 0;
-    padding: 2px 10px 3px;
-    line-height: 1.4;
+    flex: 1 1 auto;
+    min-width: $_count-width;
+    padding-left: 10px;
+    padding-right: 10px;
 
     & + & {
       padding-left: 8px;
     }
 
     > * + * {
-      margin-left: 4px;
+      margin-left: 6px;
     }
 
     &--dark {
       flex-shrink: 0;
       background-color: var(--darker-tag-bg-color);
       transition: background-color $duration $timing;
+      padding-top: 2px;
+      padding-bottom: 3px;
     }
+
+    &[href] {
+      transition: background-color $duration $timing;
+      text-decoration: none;
+
+      &:hover {
+        color: inherit;
+        background-color: var(--box-medium-bg-color);
+      }
+    }
+  }
+
+  &--secondary {
+    color: var(--default-error-color);
   }
 
   &__text {
     @include textTruncate;
+    padding-top: 2px;
+    padding-bottom: 3px;
 
     &--count {
       letter-spacing: 0.083em;
