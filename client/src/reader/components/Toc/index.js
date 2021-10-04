@@ -90,7 +90,7 @@ class Toc extends PureComponent {
 
     return (
       <TocNode
-        key={node.id}
+        key={node.label}
         node={node}
         linkTo={lh.link("readerSection", this.slug, node.id, anchor)}
         onClick={this.UIHideTocDrawer}

@@ -131,6 +131,8 @@ class DialogWrapper extends PureComponent {
               onClick={this.handleOverlayClick}
               role={this.overlayRole}
             />
+            {/* Prevent clicking in the modal from triggering handleGlobalClick */}
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
             <div
               role="dialog"
               aria-modal
@@ -142,6 +144,7 @@ class DialogWrapper extends PureComponent {
                 this.state.additionalClassNames
               )}
               style={this.style()}
+              onClick={e => e.stopPropagation()}
             >
               {this.props.showCloseButton ? (
                 <div

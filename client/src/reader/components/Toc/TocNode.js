@@ -36,7 +36,11 @@ function TocNode({ node, onClick, linkTo, active, children }) {
           })}
         >
           <Collecting.Toggle
-            collectable={{ id: node.id, type: "textSections" }}
+            collectable={{
+              id: node.id,
+              type: "textSections",
+              label: node.label
+            }}
             outlined={false}
             onDialogOpen={() => setHovering(true)}
             onDialogClose={() => setHovering(false)}
