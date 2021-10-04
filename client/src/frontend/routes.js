@@ -148,6 +148,93 @@ const routes = {
         }
       ]
     },
+    // {
+    //   name: "frontendIssuesList",
+    //   exact: true,
+    //   component: "IssuesList",
+    //   path: "/journals/issues",
+    //   isLibrary: true,
+    //   helper: (params = {}) => {
+    //     const query = queryString.stringify(params);
+    //     if (!query) return "/journals/issues";
+    //     return `/journals/issues?${query}`;
+    //   },
+    //   routes: []
+    // },
+    // {
+    //   name: "frontendIssue",
+    //   exact: false,
+    //   component: "IssueWrapper",
+    //   path: "/journals/issues/:id",
+    //   helper: p => `/journals/issues/${p}`,
+    //   routes: [
+    //     {
+    //       name: "frontendIssueDetail",
+    //       exact: true,
+    //       component: "IssueDetail",
+    //       path: "/journals/issues/:id",
+    //       helper: p => `/journals/issues/${p}`
+    //     },
+    //     {
+    //       component: NotFound
+    //     }
+    //   ]
+    // },
+    // {
+    //   name: "frontendJournals",
+    //   exact: false,
+    //   component: "JournalsWrapper",
+    //   path: "/journals",
+    //   isLibrary: true,
+    //   helper: () => "/journals",
+    //   routes: [
+    //     {
+    //       name: "frontendJournalsList",
+    //       exact: true,
+    //       component: "JournalsList",
+    //       path: "/journals/all",
+    //       isLibrary: true,
+    //       helper: (params = {}) => {
+    //         const query = queryString.stringify(params);
+    //         if (!query) return "/journals/all";
+    //         return `/journals/all?${query}`;
+    //       },
+    //       routes: []
+    //     },
+    //     {
+    //       name: "frontendJournal",
+    //       exact: false,
+    //       component: "JournalWrapper",
+    //       path: "/journals/:id",
+    //       helper: p => `/journals/${p}`,
+    //       routes: [
+    //         {
+    //           name: "frontendJournalDetail",
+    //           exact: true,
+    //           component: "JournalDetail",
+    //           path: "/journals/:id",
+    //           helper: p => `/journals/${p}`
+    //         },
+    //         {
+    //           name: "frontendVolume",
+    //           exact: false,
+    //           component: "VolumeWrapper",
+    //           path: "/journals/:id/volumes/:number",
+    //           helper: (p, n) => `/journals/${p}/volumes/${n}`,
+    //           routes: [
+    //             {
+    //               name: "frontendVolumeDetail",
+    //               exact: true,
+    //               component: "VolumeDetail",
+    //               path: "/journals/:id/volumes/:number",
+    //               helper: (p, n) => `/journals/${p}/volumes/${n}`
+    //             }
+    //           ]
+    //         }
+    //       ]
+    //     }
+    //   ]
+    // },
     {
       name: "frontendPublicReadingGroups",
       exact: false,
