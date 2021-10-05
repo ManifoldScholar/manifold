@@ -1,5 +1,5 @@
 import React from "react";
-import { storiesOf, fixtures } from "helpers/storybook/exports";
+import { fixtures } from "helpers/storybook/exports";
 import { ComposedAnalytics, Grid } from "backend/components/analytics";
 
 const statistics = {
@@ -19,6 +19,10 @@ function findData(name, factory = "globalAnalytics") {
   } = fixtures.factory(factory);
   return data.find(element => element.name === name);
 }
+
+export default {
+  title: "Backend/Analytics/Dashboard"
+};
 
 storiesOf("Backend/Analytics/Dashboard", module)
   .add("Global", () => (

@@ -1,5 +1,5 @@
 import React from "react";
-import { storiesOf, fixtures } from "helpers/storybook/exports";
+import { fixtures } from "helpers/storybook/exports";
 import { ComposedAnalytics } from "backend/components/analytics";
 
 const statistics = {
@@ -20,28 +20,38 @@ function findData(name) {
   return data.find(element => element.name === name);
 }
 
-storiesOf("Backend/Analytics/Block", module)
-  .add("Average Visit", () => (
-    <ComposedAnalytics.AverageVisit data={findData("average_visit_duration")} />
-  ))
-  .add("Collected", () => (
-    <ComposedAnalytics.Collected data={findData("favorited_projects")} />
-  ))
-  .add("Interaction", () => (
-    <ComposedAnalytics.Interactions data={findData("active_users")} />
-  ))
-  .add("Return Visits", () => (
-    <ComposedAnalytics.ReturnVisits data={findData("returning_visitors")} />
-  ))
-  .add("Site Statistics", () => (
-    <ComposedAnalytics.SiteStatistics statistics={statistics} />
-  ))
-  .add("Most Viewed Projects", () => (
-    <ComposedAnalytics.TopProjects data={findData("top_projects")} />
-  ))
-  .add("Top Searches", () => (
-    <ComposedAnalytics.TopSearches data={findData("top_search_terms")} />
-  ))
-  .add("Visitors", () => (
-    <ComposedAnalytics.Visitors data={findData("daily_visitors")} />
-  ));
+export default {
+  title: "Backend/Analytics/Block"
+};
+
+export const AverageVisit = () => (
+  <ComposedAnalytics.AverageVisit data={findData("average_visit_duration")} />
+);
+
+export const Collected = () => (
+  <ComposedAnalytics.Collected data={findData("favorited_projects")} />
+);
+
+export const Interaction = () => (
+  <ComposedAnalytics.Interactions data={findData("active_users")} />
+);
+
+export const ReturnVisits = () => (
+  <ComposedAnalytics.ReturnVisits data={findData("returning_visitors")} />
+);
+
+export const SiteStatistics = () => (
+  <ComposedAnalytics.SiteStatistics statistics={statistics} />
+);
+
+export const MostViewedProjects = () => (
+  <ComposedAnalytics.TopProjects data={findData("top_projects")} />
+);
+
+export const TopSearches = () => (
+  <ComposedAnalytics.TopSearches data={findData("top_search_terms")} />
+);
+
+export const Visitors = () => (
+  <ComposedAnalytics.Visitors data={findData("daily_visitors")} />
+);

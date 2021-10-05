@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { UID } from "react-uid";
 import classNames from "classnames";
-import ReadingGroupOption from "reader/components/annotation/Popup/parts/ReadingGroupOption";
+import ReadingGroupOption from "reader/components/annotation/popup/parts/ReadingGroupOption";
 import withReadingGroups from "hoc/with-reading-groups";
 import { ReaderContext } from "helpers/contexts";
 import withCurrentUser from "hoc/with-current-user";

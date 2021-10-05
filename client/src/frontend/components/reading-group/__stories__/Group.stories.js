@@ -1,10 +1,9 @@
 import React from "react";
 import { storiesOf, fixtures } from "helpers/storybook/exports";
-import GroupsTable from "../Table/Groups";
-import MembersTable from "../Table/Members";
+import GroupsTable from "../tables/Groups";
+import MembersTable from "../tables/Members";
 import JoinBox from "../JoinBox";
-import Heading from "../Heading";
-import GroupSummaryBox from "../Heading/GroupSummaryBox";
+import { GroupHeading } from "../headings";
 
 const groups = fixtures.collectionFactory("readingGroup", 8);
 const user = fixtures.factory("user");
@@ -50,8 +49,5 @@ storiesOf("Frontend/ReadingGroup", module)
     return <JoinBox />;
   })
   .add("Heading", () => {
-    return <Heading readingGroup={group} />;
-  })
-  .add("Group Summary Box", () => {
-    return <GroupSummaryBox readingGroup={group} />;
+    return <GroupHeading readingGroup={group} />;
   });
