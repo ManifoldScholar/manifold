@@ -9,7 +9,7 @@ const issue = () => ({
       title: "Vol. 23, No. 9",
       titleFormatted: "Vol. 23, No. 9",
       titlePlaintext: "Vol. 23, No. 9",
-      subtitle: "Aug 1984",
+      subtitle: "Issue subtitle",
       subtitleFormatted: "Aug 1984",
       subtitlePlaintext: "Aug 1984",
       description:
