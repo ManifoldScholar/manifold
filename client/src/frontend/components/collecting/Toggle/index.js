@@ -150,6 +150,7 @@ function CollectingToggle({
     if (onDialogClose) onDialogClose();
   }
 
+  console.log(currentUser);
   if (!currentUser) return null;
 
   return (
