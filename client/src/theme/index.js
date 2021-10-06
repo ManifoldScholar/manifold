@@ -1,1 +1,1 @@
-require("./styles/_index.scss");
+require("./styles/scss/_index.scss");

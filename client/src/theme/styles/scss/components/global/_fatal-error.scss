@@ -55,14 +55,14 @@ body.fatal-error-page {
       @include templateHead;
       font-size: 20px;
       font-weight: $regular;
-      color: $neutralOffBlack;
+      color: $neutral90;
 
       @include respond($break60) {
         font-size: 24px;
       }
 
       .backend & {
-        color: $neutralOffWhite;
+        color: $neutral05;
       }
     }
 
