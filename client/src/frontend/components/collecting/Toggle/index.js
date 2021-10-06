@@ -5,12 +5,12 @@ import { collectingAPI, requests } from "api";
 import { useDispatch } from "react-redux";
 import { entityStoreActions } from "actions";
 import withReadingGroups from "hoc/with-reading-groups";
-import withCurrentUser from "hoc/with-current-user";
 import withScreenReaderStatus from "hoc/with-screen-reader-status";
 import Dialog from "frontend/components/collecting/Dialog";
 import Text from "./Text";
 import Icons from "./Icons";
 import { inCollections } from "../helpers";
+import { useCurrentUser } from "hooks";
 
 const { request } = entityStoreActions;
 
@@ -40,7 +40,7 @@ function CollectingToggle({
   onDialogOpen,
   onDialogClose,
   readingGroups: myReadingGroups,
-  currentUser,
+  userMock,
   setScreenReaderStatus,
   onUncollect
 }) {
@@ -53,6 +53,8 @@ function CollectingToggle({
     if (!dialogVisible || (!onDialogOpen && !onDialogClose)) return;
     onDialogOpen();
   }, [dialogVisible]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const currentUser = useCurrentUser(userMock);
 
   const dispatch = useDispatch();
 
@@ -150,7 +152,6 @@ function CollectingToggle({
     if (onDialogClose) onDialogClose();
   }
 
-  console.log(currentUser);
   if (!currentUser) return null;
 
   return (
@@ -205,7 +206,7 @@ CollectingToggle.displayName = "Collecting.Toggle";
 
 CollectingToggle.propTypes = {
   collectable: PropTypes.object.isRequired,
-  currentUser: PropTypes.object,
+  userMock: PropTypes.object,
   readingGroups: PropTypes.array,
   onDialogOpen: PropTypes.func,
   onDialogClose: PropTypes.func,
@@ -215,6 +216,4 @@ CollectingToggle.propTypes = {
   outlined: PropTypes.bool
 };
 
-export default withReadingGroups(
-  withCurrentUser(withScreenReaderStatus(CollectingToggle))
-);
+export default withReadingGroups(withScreenReaderStatus(CollectingToggle));

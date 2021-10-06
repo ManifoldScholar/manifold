@@ -5,7 +5,7 @@ import EntityAvatar from "./EntityAvatar";
 import EntityMetadata from "./EntityMetadata";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
-import classNames from "classnames";
+import * as Styled from "./EntityThumbnail.styles";
 
 export default function EntityThumbnail({
   entity,
@@ -13,19 +13,20 @@ export default function EntityThumbnail({
   hideMeta = false,
   hideDesc = false,
   hideDate = false,
-  user
+  userMock = false
 }) {
-  const figureClass = classNames("cover", {
-    "cover-placeholder": !entity.attributes.avatarStyles.small,
-    dim: entity.attributes.draft
-  });
+  const placeholder = !entity.attributes.avatarStyles.original;
 
   return (
-    <div className="project-list li item-wrapper">
-      <Link to={lh.link("frontendProjectDetail", entity.attributes.slug)}>
-        <figure className={figureClass}>
+    <>
+      <Link
+        /* Don't leave this in. Needs global resets for link styles */
+        style={{ textDecoration: "none" }}
+        to={lh.link("frontendProjectDetail", entity.attributes.slug)}
+      >
+        <Styled.Cover placeholder={placeholder}>
           <EntityAvatar entity={entity} />
-        </figure>
+        </Styled.Cover>
         {!hideMeta && (
           <EntityMetadata
             entity={entity}
@@ -39,9 +40,9 @@ export default function EntityThumbnail({
         onUncollect={onUncollect}
         inline={false}
         outlined={false}
-        currentUser={user}
+        userMock={userMock}
       />
-    </div>
+    </>
   );
 }
 
@@ -51,5 +52,6 @@ EntityThumbnail.propTypes = {
   hideMeta: PropTypes.bool,
   hideDate: PropTypes.bool,
   hideDesc: PropTypes.bool,
-  user: PropTypes.object
+  /* For stories */
+  userMock: PropTypes.object
 };
