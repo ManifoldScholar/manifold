@@ -1,38 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import FormattedDate from "global/components/FormattedDate";
+import * as Styled from "./EntityMetadata.styles";
 
-const DraftMarker = () => (
-  <div className="block-label" aria-hidden>
-    {"Draft"}
-  </div>
-);
+const DraftMarker = () => <Styled.Tag aria-hidden>{"Draft"}</Styled.Tag>;
 
-const Markers = ({ names }) => (
-  <div className="relations-list" aria-hidden>
+const Creators = ({ names }) => (
+  <Styled.Creators aria-hidden>
     <span>{names}</span>
-  </div>
+  </Styled.Creators>
 );
 
-const Description = ({ subtitle }) => (
-  <p className="description" aria-hidden>
-    {subtitle}
-  </p>
+const Subtitle = ({ subtitle }) => (
+  <Styled.Subtitle aria-hidden>{subtitle}</Styled.Subtitle>
+);
+
+const Description = ({ description }) => (
+  <Styled.Description aria-hidden>{description}</Styled.Description>
 );
 
 const Date = ({ date, showUpdated, recentlyUpdated }) => {
-  const className = showUpdated
-    ? classNames({
-        date: true,
-        alert: recentlyUpdated
-      })
-    : "date";
   const prefix = showUpdated ? "Updated" : "Published";
   return (
-    <div className={className} aria-hidden>
+    <Styled.Date recentlyUpdated={recentlyUpdated} aria-hidden>
       <FormattedDate prefix={prefix} format="MMMM, yyyy" date={date} />
-    </div>
+    </Styled.Date>
   );
 };
 
@@ -53,17 +45,17 @@ export default function EntityMetadata({ entity, hideDescription, hideDate }) {
       : null;
 
   return (
-    <div className="meta">
-      <h3 className="name">
-        <span
-          className="title-text"
+    <Styled.MetadataWrapper>
+      <Styled.TitleWrapper>
+        <Styled.TitleText
           dangerouslySetInnerHTML={{
             __html: data.titleFormatted
           }}
         />
         {data.draft && <DraftMarker />}
-      </h3>
-      {names && <Markers names={names} />}
+      </Styled.TitleWrapper>
+      {data.subtitle && <Subtitle subtitle={data.subtitle} />}
+      {names && <Creators names={names} />}
       {!hideDate && date && !data.draft && (
         <Date
           date={date}
@@ -71,10 +63,10 @@ export default function EntityMetadata({ entity, hideDescription, hideDate }) {
           recentlyUpdated={data.recentlyUpdated}
         />
       )}
-      {!hideDescription && data.subtitle && (
-        <Description subtitle={data.subtitle} />
+      {!hideDescription && data.description && (
+        <Description description={data.description} />
       )}
-    </div>
+    </Styled.MetadataWrapper>
   );
 }
 
