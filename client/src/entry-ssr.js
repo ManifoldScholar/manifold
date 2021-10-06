@@ -20,6 +20,7 @@ import { createLocation } from "history";
 import getRoutes from "/routes";
 import FatalError from "global/components/FatalError";
 import { resetServerContext as resetDndServerContext } from "react-beautiful-dnd";
+import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 
 // Node 8.x on Ubuntu 18 leads to failed SSL handshakes. Setting this
 // default TLS value appears to fix this. I believe this issue has
@@ -77,24 +78,31 @@ const render = (req, res, store) => {
 
   resetDndServerContext();
 
+  const sheet = new ServerStyleSheet();
+
   let renderString = "";
   let isError = false;
 
   try {
     renderString = ReactDOM.renderToString(
-      <Html
-        helmetContext={helmetContext}
-        component={appComponent}
-        stats={stats}
-        store={store}
-      />
+      <StyleSheetManager sheet={sheet.instance}>
+        <Html
+          helmetContext={helmetContext}
+          component={appComponent}
+          stats={stats}
+          store={store}
+        />
+      </StyleSheetManager>
     );
+    // do i need to do something with this or just call it?
+    const styleTags = sheet.getStyleTags(); // eslint-disable-line no-unused-vars
   } catch (renderError) {
     isError = true;
     ch.error("Server-side render failed in server-react.js");
     const errorComponent = exceptionRenderer(renderError);
     renderString = fatalErrorOutput(errorComponent, store);
   } finally {
+    sheet.seal();
     // Redirect if the routing context has a url prop.
     if (routingContext.url) {
       respondWithRedirect(res, routingContext.url);

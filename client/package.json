@@ -94,6 +94,7 @@
     "brackets2dots": "^1.1.0",
     "classnames": "^2.2.1",
     "cli-spinner": "^0.2.8",
+    "color": "3.2.1",
     "common-tags": "^1.8.0",
     "compression": "^1.6.0",
     "connect": "^3.6.6",
@@ -166,6 +167,7 @@
     "sass": "^1.32.8",
     "serialize-javascript": "^3.x",
     "serve-static": "^1.13.2",
+    "styled-components": "^5.3.1",
     "swagger-ui-react": "^3.25.0",
     "text-mask-addons": "^3.7.1",
     "tinycolor2": "^1.4.1",
@@ -207,6 +209,7 @@
     "babel-plugin-dynamic-import-node": "^2.2",
     "babel-plugin-module-resolver": "^3.0",
     "babel-plugin-react-require": "^3.1.1",
+    "babel-plugin-styled-components": "^1.13.2",
     "bdd-lazy-var": "^2.5.2",
     "cfonts": "^2.3.0",
     "circular-dependency-plugin": "^5.0.2",
@@ -264,5 +267,9 @@
   },
   "engines": {
     "node": ">=8.0.0 <13.0.0"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ]
 }

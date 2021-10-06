@@ -7,6 +7,7 @@ import Manifold from "global/containers/Manifold";
 import get from "lodash/get";
 import Analytics from "hoc/analytics";
 import { HelmetProvider } from "react-helmet-async";
+import GlobalStyles from "theme/styles/GlobalStyles";
 
 class App extends Component {
   static propTypes = {
@@ -99,6 +100,7 @@ class App extends Component {
             settings={this.settings}
           >
             <HelmetProvider context={this.props.helmetContext}>
+              <GlobalStyles />
               <Manifold confirm={this.renderConfirm()} />
             </HelmetProvider>
           </Analytics>
