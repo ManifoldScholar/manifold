@@ -20,7 +20,7 @@ exports[`frontend/components/TextList/ListItem/Bibliographic matches the snapsho
     <span
       className="text-block__collect-toggle"
     >
-      <Connect(HigherOrder.WithReadingGroups(Connect(HigherOrder.WithCurrentUser('WithScreenReaderStatus('Collecting.Toggle)))))
+      <Connect(HigherOrder.WithReadingGroups(WithScreenReaderStatus('Collecting.Toggle)))
         collectable={
           Object {
             "attributes": Object {

@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf, fixtures } from "helpers/storybook/exports";
-import EntityThumbnail from "../EntityThumbnail";
+import EntityThumbnail from "frontend/components/EntityThumbnail";
 import * as Styled from "../EntityThumbnail.styles";
 
 const issue = fixtures.entities.issue();

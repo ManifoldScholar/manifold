@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Collecting from "frontend/components/collecting";
-import EntityAvatar from "./EntityAvatar";
-import EntityMetadata from "./EntityMetadata";
+import { EntityAvatar, PlaceholderAvatar } from "./avatar";
+import EntityMetadata from "frontend/components/EntityThumbnail/EntityMetadata";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import * as Styled from "./EntityThumbnail.styles";
@@ -25,7 +25,11 @@ export default function EntityThumbnail({
         to={lh.link("frontendProjectDetail", entity.attributes.slug)}
       >
         <Styled.Cover placeholder={placeholder}>
-          <EntityAvatar entity={entity} />
+          {placeholder ? (
+            <PlaceholderAvatar entity={entity} />
+          ) : (
+            <EntityAvatar entity={entity} />
+          )}
         </Styled.Cover>
         {!hideMeta && (
           <EntityMetadata
@@ -47,7 +51,7 @@ export default function EntityThumbnail({
 }
 
 EntityThumbnail.propTypes = {
-  entity: PropTypes.object,
+  entity: PropTypes.object.isRequired,
   onUncollect: PropTypes.func,
   hideMeta: PropTypes.bool,
   hideDate: PropTypes.bool,

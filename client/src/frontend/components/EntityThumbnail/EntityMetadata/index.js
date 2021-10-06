@@ -3,36 +3,12 @@ import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import * as Styled from "./EntityMetadata.styles";
 
-const DraftMarker = () => <Styled.Tag aria-hidden>{"Draft"}</Styled.Tag>;
-
-const Creators = ({ names }) => (
-  <Styled.Creators aria-hidden>
-    <span>{names}</span>
-  </Styled.Creators>
-);
-
-const Subtitle = ({ subtitle }) => (
-  <Styled.Subtitle aria-hidden>{subtitle}</Styled.Subtitle>
-);
-
-const Description = ({ description }) => (
-  <Styled.Description aria-hidden>{description}</Styled.Description>
-);
-
-const Date = ({ date, showUpdated, recentlyUpdated }) => {
-  const prefix = showUpdated ? "Updated" : "Published";
-  return (
-    <Styled.Date recentlyUpdated={recentlyUpdated} aria-hidden>
-      <FormattedDate prefix={prefix} format="MMMM, yyyy" date={date} />
-    </Styled.Date>
-  );
-};
-
 export default function EntityMetadata({ entity, hideDescription, hideDate }) {
   const data = entity.attributes;
 
   const showUpdated = !data.finished && !!data.updated;
   const date = showUpdated ? data.updatedAt : data.publicationDate;
+  const prefix = showUpdated ? "Updated" : "Published";
 
   /* eslint-disable no-nested-ternary */
   const names =
@@ -52,19 +28,23 @@ export default function EntityMetadata({ entity, hideDescription, hideDate }) {
             __html: data.titleFormatted
           }}
         />
-        {data.draft && <DraftMarker />}
+        {data.draft && <Styled.Tag aria-hidden>{"Draft"}</Styled.Tag>}
       </Styled.TitleWrapper>
-      {data.subtitle && <Subtitle subtitle={data.subtitle} />}
-      {names && <Creators names={names} />}
+      {data.subtitle && (
+        <Styled.Subtitle aria-hidden>{data.subtitle}</Styled.Subtitle>
+      )}
+      {names && (
+        <Styled.Creators aria-hidden>
+          <span>{names}</span>
+        </Styled.Creators>
+      )}
       {!hideDate && date && !data.draft && (
-        <Date
-          date={date}
-          showUpdated={showUpdated}
-          recentlyUpdated={data.recentlyUpdated}
-        />
+        <Styled.Date recentlyUpdated={data.recentlyUpdated} aria-hidden>
+          <FormattedDate prefix={prefix} format="MMMM, yyyy" date={date} />
+        </Styled.Date>
       )}
       {!hideDescription && data.description && (
-        <Description description={data.description} />
+        <Styled.Description aria-hidden>{data.description}</Styled.Description>
       )}
     </Styled.MetadataWrapper>
   );
