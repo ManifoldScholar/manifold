@@ -8,6 +8,7 @@ export const MetadataWrapper = styled.div`
   vertical-align: top;
   padding-right: 0;
   padding-left: 15px;
+  line-height: 20px;
 `;
 
 export const TitleWrapper = styled.h3`
@@ -15,9 +16,9 @@ export const TitleWrapper = styled.h3`
   font-size: 17px;
   font-weight: 600; /* $semibold */
   hyphens: none;
-  line-height: 1.188;
   white-space: normal;
   transition: color 0.2s ease; /* $duration $timing */
+  color: #363636; /* $neutral90 */
 `;
 
 export const TitleText = styled.span`
@@ -27,11 +28,12 @@ export const TitleText = styled.span`
   font-family: "sofia-pro", "trueno", sans-serif;
 `;
 
-export const Subtitle = styled.p`
+export const Subtitle = styled.h4`
+  margin: 0;
   display: block;
-  padding-top: 0.389em;
+  padding-top: 0.625em;
   font-size: 14px;
-  color: #c3c3c3; /* $neutral40 */
+  color: #555555; /* $neutral80 */
   transition: color 0.2s ease; /* $duration $timing */
 
   /* @include subtitlePrimary */
@@ -44,9 +46,7 @@ export const Subtitle = styled.p`
 `;
 
 export const Tag = styled.div`
-  padding-right: 8px;
-  padding-left: 8px;
-  margin: 10px 0 0;
+  margin: 0.625em 0 0;
   font-size: 12px;
   vertical-align: middle;
 
@@ -55,11 +55,10 @@ export const Tag = styled.div`
   padding: 0.333em 8px;
   font-weight: 600; /* $semibold */
   color: #ffffff; /*$neutralWhite*/
-  background-color: #61caff; /* $defaultNoticeColor */
+  background-color: #19678f; /* $defaultNoticeColor */
   border-radius: 3px;
 
   /* @include utilityPrimary */
-  font-weight: 600; /* $semibold */
   text-transform: uppercase;
   letter-spacing: 0.115em;
 
@@ -69,22 +68,22 @@ export const Tag = styled.div`
 
 export const Creators = styled.div`
   hyphens: none;
-  line-height: 1.25;
   transition: color 0.2s ease; /* $duration $timing */
   padding-top: 0.625em;
+  color: #555555; /* $neutral80 */
+  font-size: 16px;
 
   /* @include templateCopy */
   font-family: "freight-text-pro", "aleo", serif;
 `;
 
-export const Description = styled.p`
+export const Description = styled.div`
   /* @include templateHead */
   font-family: "sofia-pro", "trueno", sans-serif;
 
   margin-bottom: 20px;
   font-size: 14px;
-  line-height: 1.5;
-  color: $neutral80;
+  color: #555555; /* $neutral80 */
 
   /* &:only-child:not(.pad-bottom) {
     margin-bottom: 0;
@@ -99,6 +98,7 @@ export const Date = styled.div`
   font-size: 14px;
   font-style: italic;
   padding-top: 0.625em;
+  color: #555555; /* $neutral80 */
 
   /* @include templateCopy */
   font-family: "freight-text-pro", "aleo", serif;

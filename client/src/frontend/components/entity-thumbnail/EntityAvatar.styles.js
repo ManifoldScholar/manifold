@@ -11,4 +11,5 @@ export const Avatar = styled.img`
 export const Placeholder = styled.div`
   width: auto;
   height: 100%;
+  padding-left: 15px;
 `;

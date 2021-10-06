@@ -15,7 +15,7 @@ export const EntityListItemWrapper = styled.div`
 export const Cover = styled.figure`
   position: relative;
   width: 100%;
-  min-width: 100%;
+  max-width: 50px;
   height: 160px;
   padding-top: 0;
   margin-bottom: 16px;
@@ -32,9 +32,6 @@ export const Cover = styled.figure`
       color: #9a9a9a; /*$neutralUILight*/
 
       display: flex;
-      width: 100%;
-      height: auto;
-      /* padding-top: 107px; */
       color: #ffffff; /*$neutralWhite*/
       text-decoration: none;
       background-repeat: no-repeat;
@@ -48,7 +45,8 @@ export const Cover = styled.figure`
 
       &[href]:hover,
       &[href]:focus-visible {
-        @include boxShadow(0, 20px, 30px, 2px);
+        /* @include boxShadow(0, 20px, 30px, 2px) */
+        box-shadow: 0 20px 30px 2px rgba(#000000, 0.13);
         color: #52e3ac; /* $defaultHoverColor */
         outline: 0;
       }
