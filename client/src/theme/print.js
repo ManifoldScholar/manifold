@@ -1,1 +1,1 @@
-require("./styles/_print.scss");
+require("./styles/scss/_print.scss");
