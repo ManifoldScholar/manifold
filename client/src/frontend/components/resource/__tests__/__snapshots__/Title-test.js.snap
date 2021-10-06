@@ -27,7 +27,7 @@ exports[`frontend/components/resource/Title matches the snapshot 1`] = `
       <span
         className="resource-title__collecting-toggle"
       >
-        <Connect(HigherOrder.WithReadingGroups(Connect(HigherOrder.WithCurrentUser('WithScreenReaderStatus('Collecting.Toggle)))))
+        <Connect(HigherOrder.WithReadingGroups(WithScreenReaderStatus('Collecting.Toggle)))
           collectable={
             Object {
               "attributes": Object {
