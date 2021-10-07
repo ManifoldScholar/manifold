@@ -1,27 +1,31 @@
 import React from "react";
-import {
-  TransitionGroup as ReactTransitionGroup,
-  CSSTransition
-} from "react-transition-group";
-import EntityThumbnail from "components/EntityThumbnail";
+import EntityThumbnail from "frontend/components/EntityThumbnail";
+import * as Styled from "./ThumbnailGrid.styles";
+import PropTypes from "prop-types";
 
-export default function ThumbnailGrid({ entities, onUncollect }) {
+export default function ThumbnailGrid({ entities, onUncollect, userMock }) {
   return (
-    <ReactTransitionGroup component="ul">
-      {entities.map(entity => {
-        return (
-          <CSSTransition
-            key={entity.id}
-            enter={this.enableAnimation}
-            exit={this.enableAnimation}
-            timeout={{ enter: 250, exit: 250 }}
-          >
-            <li className="project-list__item--pos-rel">
-              <EntityThumbnail project={entity} onUncollect={onUncollect} />
-            </li>
-          </CSSTransition>
-        );
-      })}
-    </ReactTransitionGroup>
+    <Styled.GridWrapper>
+      <Styled.GridList>
+        {entities.map((entity, i) => {
+          return (
+            <Styled.GridItem key={i}>
+              <EntityThumbnail
+                entity={entity}
+                onUncollect={onUncollect}
+                userMock={userMock}
+              />
+            </Styled.GridItem>
+          );
+        })}
+      </Styled.GridList>
+    </Styled.GridWrapper>
   );
 }
+
+EntityThumbnail.propTypes = {
+  entities: PropTypes.array,
+  onUncollect: PropTypes.func,
+  /* For stories */
+  userMock: PropTypes.object
+};
