@@ -7,7 +7,7 @@
     position: sticky;
 
     @supports (position: sticky) {
-      @include boxShadow(0, -10px, 20px, 7px, $neutralBlack, 0.25);
+      box-shadow: 0 -10px 20px 7px rgba($neutralBlack, 0.25);
     }
   }
 

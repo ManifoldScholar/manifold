@@ -86,6 +86,7 @@
     }
   },
   "dependencies": {
+    "@castiron/style-mixins": "^1.0.6",
     "actioncable": "~5.0.2",
     "autolinker": "^1.x",
     "autoprefixer": "^9.0",

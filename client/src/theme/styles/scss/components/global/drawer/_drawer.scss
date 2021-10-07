@@ -114,7 +114,17 @@
   }
 
   .list-pagination-primary {
-    @include constrainedPaginationResponsive;
+    span {
+      display: inline-block;
+
+      @include respond($break65) {
+        display: none;
+      }
+
+      @include respond($break90) {
+        display: inline-block;
+      }
+    }
   }
 
   // full width selects

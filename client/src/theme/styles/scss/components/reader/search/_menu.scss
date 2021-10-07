@@ -54,10 +54,10 @@
   background-color: $neutral10;
 
   .header-app & {
-    @include boxShadow(5px, 15px, 35px, 8px);
     z-index: 1; // ensure menu is on top of .header-app
     padding: 28px 22px 22px;
     border-radius: $panelRoundedRadius;
+    box-shadow: 5px 15px 35px 8px rgba($neutralBlack, 0.13);
 
     @include respond($break40) {
       padding: 20px 24px 22px;
