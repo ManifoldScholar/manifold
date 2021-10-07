@@ -8,12 +8,12 @@
   @include reactSlideTransition('left', '.reader-return-menu');
   @include reactSlideTransition('right', '.user-menu');
   @include reactSlideTransition('right', '.search-menu');
-
-  @include boxShadow(0, -10px, 20px, 7px, $neutralBlack, 0.25);
   position: fixed;
   top: 0;
   width: 100%;
   color: $neutralTextDark;
+
+  box-shadow: 0 -10px 20px 7px rgba($neutralBlack, 0.25);
 
   &__inner {
     position: relative;

@@ -144,10 +144,10 @@ export default class ColorScheme extends Component {
   otherColorVarsAsCSS() {
     const rules = [];
     const vars = {
-      "--header-background-color": "headerBackgroundColor",
-      "--header-foreground-color": "headerForegroundColor",
-      "--header-foreground-active-color": "headerForegroundActiveColor",
-      "--header-foreground-hover-color": "headerForegroundActiveColor"
+      "--color-header-background": "headerBackgroundColor",
+      "--color-header-foreground": "headerForegroundColor",
+      "--color-header-foreground-active": "headerForegroundActiveColor",
+      "--color-header-foreground-hover": "headerForegroundActiveColor"
     };
     try {
       Object.keys(vars).forEach(varName => {

@@ -38,9 +38,9 @@ $_responsive-gap: $_max-gap / $_breakpoint * 100vw;
     };
 
     &[href]:hover, &[href]:focus-visible {
-      @include boxShadow(0, 20px, 30px, 2px);
       color: $defaultHoverColor;
       outline: 0;
+      box-shadow: 0 20px 30px 2px rgba($neutralBlack, 0.13);
     }
   }
 

@@ -233,23 +233,6 @@
   }
 }
 
-// Pagination
-// --------------------------------------------------------
-// Show/hide pagination button text
-@mixin constrainedPaginationResponsive {
-  span {
-    display: inline-block;
-
-    @include respond($break65) {
-      display: none;
-    }
-
-    @include respond($break90) {
-      display: inline-block;
-    }
-  }
-}
-
 // Functions
 // --------------------------------------------------------
 @function encode-color($string) {
