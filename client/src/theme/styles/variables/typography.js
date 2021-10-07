@@ -1,4 +1,4 @@
-import { createCSSVariables } from "../mixins/common";
+import { createCSSVariables } from "../mixins";
 
 export const fontFamily = {
   sans: "'sofia-pro', 'trueno', sans-serif",

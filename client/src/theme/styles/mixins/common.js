@@ -1,4 +1,5 @@
 import humps from "humps";
+import { respondBase } from "@castiron/style-mixins";
 
 // takes an object of key/value pairs and returns a CSS variable for each entry
 export function createCSSVariables(namespace, tokenObj) {
@@ -11,4 +12,13 @@ export function createCSSVariables(namespace, tokenObj) {
         };`
     )
     .join("");
+}
+
+export function respond(
+  content,
+  pxSize = getVariable("breakpoint", "wide"),
+  operator = "min",
+  aspect = "width"
+) {
+  return respondBase(content, pxSize, operator, aspect);
 }

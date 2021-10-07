@@ -1,4 +1,4 @@
-import { createCSSVariables } from "../mixins/common";
+import { createCSSVariables } from "../mixins";
 
 const Color = require("color");
 

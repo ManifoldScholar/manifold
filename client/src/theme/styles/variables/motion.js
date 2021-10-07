@@ -1,4 +1,4 @@
-import { createCSSVariables } from "../mixins/common";
+import { createCSSVariables } from "../mixins";
 
 export const duration = {
   fast: "0.1s",
