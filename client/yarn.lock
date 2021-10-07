@@ -1188,6 +1188,11 @@
   resolved "https://registry.yarnpkg.com/@braintree/sanitize-url/-/sanitize-url-4.1.1.tgz#671b3cfdbcc40d1449036ce586e882ab6150828e"
   integrity sha512-epVksusKVEpwBs2vRg3SWssxn9KXs9CxEYNOcgeSRLRjq070ABj5bLPxkmtQpVeSPCHj8kfAE9J6z2WsLr4wZg==
 
+"@castiron/style-mixins@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@castiron/style-mixins/-/style-mixins-1.0.6.tgz#b22673bc2ee4aa8a1fe66e129f3bdcfe43b81053"
+  integrity sha512-7+xwX1AMpwtjhwgmakxyhheXxdjQnm/+zD1Cq46KoPOPxelMN40mD3DuR7gM1XqcHSdJU/QexYBOTOW3O+uUsg==
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"

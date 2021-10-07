@@ -7,8 +7,8 @@
   --header-foreground-color: $neutral75;
 
   &--visible {
-    @include boxShadow(0, -10px, 20px, 7px, $neutralBlack, 0.25);
     background-color: $neutral100;
+    box-shadow: 0 -10px 20px 7px rgba($neutralBlack, 0.25);
     transition: background-color $duration $timing;
   }
 
@@ -18,8 +18,8 @@
   }
 
   &--light:not(.standalone-header--hidden) {
-    @include boxShadow(0, -10px, 20px, 7px, $neutralBlack, 0.25);
     background-color: $neutral10;
+    box-shadow: 0 -10px 20px 7px rgba($neutralBlack, 0.25);
   }
 
   &--hidden {

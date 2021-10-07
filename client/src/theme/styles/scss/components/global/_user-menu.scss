@@ -63,7 +63,7 @@
     z-index: 1; // ensure menu is on top of .header-app
     min-width: $menuWidth;
     border-radius: $panelRoundedRadius;
-    @include boxShadow(5px, 15px, 35px, 8px);
+    box-shadow: 5px 15px 35px 8px rgba($neutralBlack, 0.13);
   }
 
   &--reader {
@@ -99,9 +99,7 @@
     width: 100%;
     padding: 8px 20px;
     text-decoration: none;
-    transition:
-      color $duration $timing,
-      background-color $duration $timing;
+    transition: color $duration $timing, background-color $duration $timing;
 
     &:hover,
     &:focus-visible {
@@ -118,7 +116,8 @@
     }
   }
 
-  &__link-text {}
+  &__link-text {
+  }
 
   &__icon {
     position: relative;

@@ -1,6 +1,5 @@
 .dialog {
   @include utilityPrimary;
-  @include boxShadow(0, 31px, 44px, 2px);
   position: relative;
   width: 100%;
   max-width: 880px;
@@ -8,6 +7,7 @@
   margin: 0 auto;
   text-transform: none;
   letter-spacing: 0;
+  box-shadow: 0 31px 44px 2px rgba($neutralBlack, 0.13);
 
   @include respond($break90) {
     padding-right: 40px;
