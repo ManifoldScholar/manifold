@@ -135,8 +135,8 @@
 
         @include respond($break65) {
           @include panelRoundedDark;
-          @include boxShadow(0, 31px, 26px, -13px, $neutralBlack, 0.33);
           color: inherit;
+          box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
         }
       }
     }

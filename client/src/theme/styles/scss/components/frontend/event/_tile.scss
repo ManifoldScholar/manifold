@@ -25,11 +25,11 @@
 
     &:hover,
     &:focus-visible {
-      @include boxShadow(0, 10px, 30px, 2px);
       outline: 0;
+      box-shadow: 0 10px 30px 2px rgba($neutralBlack, 0.13);
 
       @include respond($break60) {
-        @include boxShadow(0, 20px, 30px, 2px);
+        box-shadow: 0 20px 30px 2px rgba($neutralBlack, 0.13);
       }
     }
   }

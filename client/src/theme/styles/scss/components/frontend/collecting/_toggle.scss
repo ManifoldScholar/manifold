@@ -83,7 +83,7 @@ $_highlight-bg-color: $spBlue45;
 
     .collecting-toggle--project-cover &,
     .collecting-toggle--small-project-cover & {
-      @include boxShadow(2px, 4px, 10px, 0, $neutral90, 0.36);
+      box-shadow: 2px 4px 10px 0 rgba($neutral90, 0.36);
     }
 
     &--add-active,

@@ -24,13 +24,6 @@ $neutral95: #2e2e2e;
 $neutral100: #262626;
 $neutral110: #222222;
 
-// ---> For SVG interpolation
-$neutral40hex: str-slice(#{$neutral40}, 2);
-
-// Separated as this is often used for base template elements (like plain text)
-$neutralOffWhite: $neutral05;
-$neutralOffBlack: $neutral90;
-
 $_accentPrimary: #52e3ac !default;
 $_accentPrimaryDark: darken(
   desaturate($_accentPrimary, 20.97),
@@ -159,20 +152,12 @@ $spHighlightPrimaryPale: lighten(
 // TODO: Swap variables for hard-coded values, to refactor towards
 // larger abstractions, like broader typography settings
 // --------------------------------------------------------
-$type180: 59px;
-// $type130: ;
-$type120: 35px;
-$type110: 30px;
 $type100: 26px;
-$type90: 25px;
-$type80: 22px;
 $type70: 20px;
 $type60: 18px;
 $type50: 16px;
 $type40: 14px;
 $type30: 13px;
-$type20: 12px;
-// $type10: ;
 
 // Measurements
 // Structural measurements used site wide that are kept in one place
@@ -218,7 +203,6 @@ $timing: ease;
 // Responsive Breakpoints
 // Maintained in one place to keep major breakpoints consistent
 // --------------------------------------------------------
-$break125: 1250px;
 $break120: $containerWidthFull;
 $break110: 1130px;
 $break95: 1024px;
@@ -234,13 +218,6 @@ $break40: 480px;
 $break35: 450px;
 $break30: 400px;
 $break20: 350px;
-// Minimum site width
-$break10: $containerWidthMin;
-
-// Height Breakpoints
-// --------------------------
-// Rarely used, but helpful for things like modals and height dependent interfaces
-$hbreak90: 900px;
 
 // Appearance variables
 // --------------------------
