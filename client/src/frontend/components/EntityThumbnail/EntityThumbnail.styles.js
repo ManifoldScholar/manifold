@@ -7,6 +7,14 @@ export const EntityListItemWrapper = styled.div`
   color: inherit;
   text-decoration: none;
 
+  &[href]:hover,
+  &[href]:focus-visible {
+    /* @include boxShadow(0, 20px, 30px, 2px) */
+    box-shadow: 0 20px 30px 2px rgba(#000000, 0.13);
+    color: var(--hover-color);
+    outline: 0;
+  }
+
   ${respond(
     css`
       flex-direction: column;
@@ -54,13 +62,6 @@ export const Cover = styled.figure`
         80
       )}
 
-      &[href]:hover,
-      &[href]:focus-visible {
-        /* @include boxShadow(0, 20px, 30px, 2px) */
-        box-shadow: 0 20px 30px 2px rgba(#000000, 0.13);
-        color: var(--hover-color);
-        outline: 0;
-      }
     `}
   }
 `;
