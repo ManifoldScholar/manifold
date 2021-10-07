@@ -11,7 +11,7 @@ export default function EntityThumbnail({
   entity,
   onUncollect,
   hideMeta = false,
-  hideDesc = false,
+  hideDesc = true,
   hideDate = false,
   userMock = false
 }) {
