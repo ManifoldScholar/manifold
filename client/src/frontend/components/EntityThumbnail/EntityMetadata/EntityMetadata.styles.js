@@ -7,24 +7,47 @@ export const MetadataWrapper = styled.div`
   flex-grow: 1;
   width: 100%;
   vertical-align: top;
-  padding-right: 0;
+  padding-right: 20px;
   padding-left: 15px;
   line-height: 20px;
+
+  ${respond(
+    css`
+      padding-left: 0;
+      padding-right: 0;
+    `,
+    75
+  )}
 `;
 
 export const TitleWrapper = styled.h3`
   margin: 0;
-  font-size: 17px;
-  font-weight: var(--font-weight-semibold);
+  font-size: 16px;
+  font-weight: var(--font-weight-regular);
   hyphens: none;
   white-space: normal;
   transition: color var(--transition-duration-default)
     var(--transition-timing-function);
   color: var(--color-base-neutral90);
+
+  ${respond(
+    css`
+      font-size: 17px;
+      font-weight: var(--font-weight-semibold);
+    `,
+    75
+  )}
 `;
 
 export const TitleText = styled.span`
-  display: block;
+  display: inline-block;
+
+  ${respond(
+    css`
+      display: block;
+    `,
+    75
+  )}
 
   /* @include templateHead */
   font-family: "sofia-pro", "trueno", sans-serif;
@@ -33,7 +56,7 @@ export const TitleText = styled.span`
 export const Subtitle = styled.h4`
   margin: 0;
   display: block;
-  padding-top: 0.625em;
+  padding-top: 0.4em;
   font-size: 14px;
   color: var(--color-base-neutral80);
   transition: color var(--transition-duration-default)
@@ -46,11 +69,20 @@ export const Subtitle = styled.h4`
 
   /* @include templateCopy */
   font-family: "freight-text-pro", "aleo", serif;
+
+  ${respond(
+    css`
+      padding-top: 0.625em;
+    `,
+    75
+  )}
 `;
 
 export const Tag = styled.div`
-  margin: 0.625em 0 0;
-  font-size: 12px;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin: 2px 0 5px 9px;
+  font-size: 9px;
   vertical-align: middle;
 
   /* @include blockLabelRound */
@@ -67,18 +99,37 @@ export const Tag = styled.div`
 
   /* @include templateHead */
   font-family: "sofia-pro", "trueno", sans-serif;
+
+  ${respond(
+    css`
+      padding-top: 0.625em;
+      padding-right: 8px;
+      padding-left: 8px;
+      margin: 10px 0 0;
+      font-size: 12px;
+    `,
+    75
+  )}
 `;
 
 export const Creators = styled.div`
   hyphens: none;
   transition: color var(--transition-duration-default)
     var(--transition-timing-function);
-  padding-top: 0.625em;
+  padding-top: 0.4em;
   color: var(--color-base-neutral80);
-  font-size: 16px;
+  font-size: 15px;
 
   /* @include templateCopy */
   font-family: "freight-text-pro", "aleo", serif;
+
+  ${respond(
+    css`
+      font-size: 16px;
+      padding-top: 0.625em;
+    `,
+    75
+  )}
 `;
 
 export const Description = styled.div`
@@ -96,6 +147,7 @@ export const Description = styled.div`
   ${respond(
     css`
       font-size: 16px;
+      padding-top: 0.625em;
     `,
     75
   )}
@@ -104,7 +156,7 @@ export const Description = styled.div`
 export const Date = styled.div`
   font-size: 14px;
   font-style: italic;
-  padding-top: 0.625em;
+  padding-top: 0.4em;
   color: var(--color-base-neutral80);
 
   /* @include templateCopy */
@@ -113,6 +165,7 @@ export const Date = styled.div`
   ${respond(
     css`
       font-size: 16px;
+      padding-top: 0.625em;
     `,
     75
   )}
