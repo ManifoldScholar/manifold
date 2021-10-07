@@ -15,6 +15,7 @@ import page from "./page";
 import permission from "./permission";
 import project from "./project";
 import issue from "./issue";
+import journal from "./journal";
 import projectCollection from "./project-collection";
 import volume from "./volume";
 import readingGroup from "./reading-group";
@@ -51,6 +52,7 @@ export default {
   permission,
   project,
   issue,
+  journal,
   projectAnalytics,
   projectCollection,
   volume,
