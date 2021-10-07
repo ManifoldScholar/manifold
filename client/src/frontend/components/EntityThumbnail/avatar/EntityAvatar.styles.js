@@ -4,7 +4,8 @@ export const Avatar = styled.img`
   width: 50px;
   height: auto;
   border: 1px solid transparent;
-  transition: border $duration $timing;
+  transition: border var(--transition-duration-default)
+    var(--transition-timing-function);
 `;
 
 /* Just something until I have time to deal with the icon styles */
