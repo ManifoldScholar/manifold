@@ -4,14 +4,13 @@ import Collecting from "frontend/components/collecting";
 import { EntityAvatar, PlaceholderAvatar } from "./avatar";
 import EntityMetadata from "frontend/components/EntityThumbnail/EntityMetadata";
 import lh from "helpers/linkHandler";
-import { Link } from "react-router-dom";
 import * as Styled from "./EntityThumbnail.styles";
 
 export default function EntityThumbnail({
   entity,
   onUncollect,
   hideMeta = false,
-  hideDesc = true,
+  hideDescription = true,
   hideDate = false,
   userMock = false
 }) {
@@ -19,12 +18,10 @@ export default function EntityThumbnail({
 
   return (
     <>
-      <Link
-        /* Don't leave this in. Needs global resets for link styles */
-        style={{ textDecoration: "none" }}
+      <Styled.ItemLink
         to={lh.link("frontendProjectDetail", entity.attributes.slug)}
       >
-        <Styled.Cover placeholder={placeholder}>
+        <Styled.Cover>
           {placeholder ? (
             <PlaceholderAvatar entity={entity} />
           ) : (
@@ -34,11 +31,11 @@ export default function EntityThumbnail({
         {!hideMeta && (
           <EntityMetadata
             entity={entity}
-            hideDescription={hideDesc}
+            hideDescription={hideDescription}
             hideDate={hideDate}
           />
         )}
-      </Link>
+      </Styled.ItemLink>
       <Collecting.Toggle
         collectable={entity}
         onUncollect={onUncollect}
@@ -55,7 +52,7 @@ EntityThumbnail.propTypes = {
   onUncollect: PropTypes.func,
   hideMeta: PropTypes.bool,
   hideDate: PropTypes.bool,
-  hideDesc: PropTypes.bool,
+  hideDescription: PropTypes.bool,
   /* For stories */
   userMock: PropTypes.object
 };
