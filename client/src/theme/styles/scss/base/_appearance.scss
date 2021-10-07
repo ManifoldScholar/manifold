@@ -221,15 +221,6 @@ body {
 
 // Utility
 // --------------------------------------------------------
-.fake-link {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.invisible {
-  visibility: hidden;
-}
-
 @mixin screenReaderText {
   position: absolute;
   width: 1px;
