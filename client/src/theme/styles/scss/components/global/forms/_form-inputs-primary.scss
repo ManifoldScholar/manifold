@@ -525,10 +525,10 @@
 
   .react-datepicker {
     @include templateHead;
-    @include boxShadow;
     color: var(--default-color);
     background-color: transparent;
     border: none;
+    box-shadow: 10px 31px 44px 2px rgba($neutralBlack, 0.13);
 
     &-wrapper {
       width: 100%;

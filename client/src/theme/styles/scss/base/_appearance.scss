@@ -221,15 +221,6 @@ body {
 
 // Utility
 // --------------------------------------------------------
-.fake-link {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.invisible {
-  visibility: hidden;
-}
-
 @mixin screenReaderText {
   position: absolute;
   width: 1px;
@@ -274,17 +265,6 @@ body {
 
 .bg-neutral95 {
   background-color: $neutral95;
-}
-
-@mixin boxShadow(
-  $x: 10px,
-  $y: 31px,
-  $blur: 44px,
-  $spread: 2px,
-  $color: $neutralBlack,
-  $opacity: 0.13
-) {
-  box-shadow: $x $y $blur $spread rgba($color, $opacity);
 }
 
 // SVG Icons
@@ -720,5 +700,5 @@ body {
 }
 
 @mixin dragging {
-  @include boxShadow(0, 31px, 26px, -13px, $neutralBlack, 0.33);
+  box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
 }

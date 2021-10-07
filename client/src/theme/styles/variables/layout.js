@@ -1,4 +1,4 @@
-import { createCSSVariables } from "../mixins/common";
+import { createCSSVariables } from "./helpers";
 
 const fullContainerWidth = 1235;
 const fullContainerPadding = 50;

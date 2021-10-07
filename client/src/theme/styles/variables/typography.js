@@ -1,8 +1,13 @@
-import { createCSSVariables } from "../mixins/common";
+import { createCSSVariables } from "./helpers";
+
+const fontFamilySans = "'sofia-pro', 'trueno', sans-serif";
+const fontFamilySerif = "'freight-text-pro', 'aleo', serif";
 
 export const fontFamily = {
-  sans: "'sofia-pro', 'trueno', sans-serif",
-  serif: "'freight-text-pro', 'aleo', serif"
+  sans: fontFamilySans,
+  serif: fontFamilySerif,
+  copy: fontFamilySerif,
+  heading: fontFamilySans
 };
 
 export const fontWeight = {

@@ -1,4 +1,4 @@
-import { createCSSVariables } from "../mixins/common";
+import { createCSSVariables } from "./helpers";
 import { containerWidth } from "./layout";
 
 export const breakpoints = {

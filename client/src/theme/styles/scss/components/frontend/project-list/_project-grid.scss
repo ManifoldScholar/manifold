@@ -84,8 +84,8 @@
         }
 
         a:hover, a:focus-visible {
-          @include boxShadow(0, 31px, 44px, 2px);
           background-color: $neutral05;
+          box-shadow: 0 31px 44px 2px rgba($neutralBlack, 0.13);
 
           .title-text {
             color: $neutralTextExtraDark;
