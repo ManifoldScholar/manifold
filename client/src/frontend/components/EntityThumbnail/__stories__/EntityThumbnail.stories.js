@@ -8,12 +8,14 @@ const user = fixtures.entities.user();
 storiesOf("Frontend/EntityThumbnail", module)
   .add("Journal Issue", () => {
     return (
-      <EntityThumbnail
-        entity={issue.data}
-        onUncollect={() => console.log("clicked (un)collect")}
-        userMock={user.attributes}
-        hideDesc
-      />
+      <div style={{ maxWidth: "300px" }}>
+        <EntityThumbnail
+          entity={issue.data}
+          onUncollect={() => console.log("clicked (un)collect")}
+          userMock={user.attributes}
+          hideDesc
+        />
+      </div>
     );
   })
   .add("Recently Updated", () => {
