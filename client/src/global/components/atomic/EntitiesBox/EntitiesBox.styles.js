@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { panelRounded } from "theme/styles/mixins";
 
 export const Box = styled.div`
-  background-color: var(--color-base-neutral05);
+  ${panelRounded}
   padding: 60px 130px;
 `;
