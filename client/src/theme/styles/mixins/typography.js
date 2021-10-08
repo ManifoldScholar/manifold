@@ -1,112 +1,79 @@
+import { respond, fluidScale } from "./common";
+
 // // Headings
 // // --------------------------------------------------------
-// export function headingPrimaryFontSizing {
-//   font-size: 22px;
+const headingBase = `
+  margin: 0;
+  font-family: var(--font-family-heading);
+`;
 
-//   @include respond($break60) {
-//     font-size: 26px;
-//   }
-// }
+export const headingPrimaryFontSizing = `
+  font-size: ${fluidScale("26px", "22px")};
+`;
 
-// export function headingPrimary {
-//   @include templateHead;
-//   @include headingPrimaryFontSizing;
-//   margin-top: 0;
-//   // Default margin
-//   margin-bottom: 1.2em;
-//   font-weight: $medium;
-//   hyphens: none;
-//   line-height: 1.32;
-// }
+export const headingPrimary = `
+  ${headingBase}
+  ${headingPrimaryFontSizing}
+  margin-bottom: 1.2em;
+  font-weight: var(--font-weight-medium);
+  hyphens: none;
+  line-height: 1.32;
+`;
 
-// .heading-primary {
-//   @include headingPrimary;
-// }
+export const headingSecondary = `
+  ${headingPrimary}
+  font-size: ${fluidScale("22px", "20px")};
+`;
 
-// export function headingSecondary {
-//   @include headingPrimary;
-//   font-size: 20px;
+export const headingTertiary = `
+  ${headingBase}
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+`;
 
-//   @include respond($break60) {
-//     font-size: 22px;
-//   }
-// }
-
-// .heading-secondary {
-//   @include headingSecondary;
-// }
-
-// export function headingTertiary {
-//   @include templateHead;
-//   margin-top: 0;
-//   font-size: 16px;
-//   font-weight: $semibold;
-// }
-
-// export function headingQuaternary {
-//   @include templateHead;
-//   margin: 0;
-//   font-size: 25px;
-
-//   @include respond($break70) {
-//     font-size: 28px;
-//   }
-
-//   @include respond($break90) {
-//     font-size: 30px;
-//   }
-// }
-
-// .heading-quaternary {
-//   @include headingQuaternary;
-// }
+export const headingQuaternary = `
+  ${headingBase}
+  font-size: ${fluidScale("30px", "25px")};
+`;
 
 // // Utility (Browser UI, buttons, etc.)
 // // --------------------------------------------------------
 export const utilityPrimary = `
   font-family: var(--font-family-sans);
   font-size: 16px;
-  font-weight: $semibold;
+  font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
   letter-spacing: 0.115em;
 `;
 
-// .utility-primary {
-//   @include utilityPrimary;
-// }
+export const resetWordWrap = `
+  hyphens: none;
+  word-wrap: normal;
+  overflow-wrap: normal;
+`;
 
-// export function resetWordWrap {
-//   hyphens: none;
-//   word-wrap: normal;
-//   overflow-wrap: normal;
-// }
-
-// export function textTruncate {
-//   overflow: hidden;
-//   text-overflow: ellipsis;
-//   white-space: nowrap;
-// }
-
-// .truncate-text-overflow {
-//   @include textTruncate;
-// }
+export const textTruncate = `
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 
 // // Labels
 // // --------------------------------------------------------
-// export function subtitlePrimary {
-//   @include templateCopy;
-//   font-style: italic;
-//   font-weight: $regular; // OD
-//   letter-spacing: 0.031em;
-// }
+export const subtitlePrimary = `
+  font-family: var(--font-family-serif);
+  font-style: italic;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: 0.031em;
+`;
 
-// export function formLabelPrimary {
-//   @include templateHead;
-//   font-size: 12px;
-//   font-weight: $semibold;
-//   text-transform: uppercase;
-//   letter-spacing: 0.125em;
-// }
+export const formLabelPrimary = `
+  font-size: 12px;
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.125em;
+`;
 
 // // Forms
 // // --------------------------------------------------------
@@ -160,7 +127,7 @@ export const utilityPrimary = `
 // export function formInputMessage {
 //   @include templateHead;
 //   font-size: $type50;
-//   font-weight: $semibold;
+//   font-weight: var(--font-weight-semibold);
 //   letter-spacing: 0.05em;
 // }
 

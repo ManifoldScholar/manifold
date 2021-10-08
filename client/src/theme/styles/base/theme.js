@@ -34,9 +34,10 @@ export default `
     --button-tertiary-bg-color: var(--color-accent-primary-pale);
     --button-tertiary-bg-hover-color: var(--color-accent-primary-light);
     --reader-color: var(--strong-color);
-    --textarea-bg-color: var(--color-base-neutral-white);
-    --textarea-border-color: transparent;
-    --textarea-font-family: var(--font-family-sans);
+    --input-color: var(--color);
+    --input-bg-color: var(--color-base-neutral-white);
+    --input-border-color: transparent;
+    --input-font-family: var(--font-family-sans);
 
     color: var(--color);
   }
@@ -68,9 +69,10 @@ export default `
     --button-tertiary-bg-color: var(--color-accent-primary);
     --button-tertiary-bg-hover-color: var(--color-accent-primary-pale);
     --reader-color: var(--color-base-neutral-white);
-    --textarea-bg-color: transparent;
-    --textarea-border-color: var(--color-neutral-ui-dull-light);
-    --textarea-font-family: var(--font-family-serif);
+    --input-color: var(--strong-color);
+    --input-bg-color: transparent;
+    --input-border-color: var(--color-neutral-ui-dull-light);
+    --input-font-family: var(--font-family-serif);
 
     color: var(--color);
 
@@ -79,7 +81,7 @@ export default `
     input[type='password'],
     select,
     textarea {
-      color: var(--strong-color);
+      color: var(--input-color);
     }
   }
 `;

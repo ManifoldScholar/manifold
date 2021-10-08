@@ -122,9 +122,9 @@ body {
   --dropzone-bg-color: #{$neutral30};
   --select-bg-color: transparent;
   --select-border-color: currentColor;
-  --textarea-bg-color: #{$neutralWhite};
-  --textarea-border-color: transparent;
-  --textarea-font-family: #{$fontStackSans};
+  --input-bg-color: #{$neutralWhite};
+  --input-border-color: transparent;
+  --input-font-family: #{$fontStackSans};
   --button-dull-bg-color: #{$neutral30};
   --button-tertiary-bg-color: #{$accentPrimaryPale};
   --button-tertiary-bg-hover-color: #{$accentPrimaryLight};
@@ -156,9 +156,9 @@ body {
   --dropzone-bg-color: #{lighten($neutral90, 5%)};
   --select-bg-color: #{$neutral90};
   --select-border-color: #{$neutral45};
-  --textarea-bg-color: transparent;
-  --textarea-border-color: #{$neutralUIDullLight};
-  --textarea-font-family: #{$fontStackSerif};
+  --input-bg-color: transparent;
+  --input-border-color: #{$neutralUIDullLight};
+  --input-font-family: #{$fontStackSerif};
   --button-dull-bg-color: #{$neutral10};
   --button-tertiary-bg-color: #{$accentPrimary};
   --button-tertiary-bg-hover-color: #{$accentPrimaryPale};

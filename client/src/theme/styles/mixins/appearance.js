@@ -1,4 +1,5 @@
-import { utilityPrimary } from "./typography";
+import { respond } from "./common";
+import { utilityPrimary, subtitlePrimary } from "./typography";
 
 // Interactions
 // --------------------
@@ -126,9 +127,9 @@ export const blockLabelRound = `
   display: inline-block;
   padding: 0.333em 8px;
   font-size: 12px;
-  font-weight: $semibold;
-  color: $neutralWhite;
-  background-color: $defaultNoticeColor;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-base-neutral-white);
+  background-color: var(--notice-color);
   border-radius: 3px;
 }`;
 
@@ -136,363 +137,335 @@ export const blockLabelRound = `
 // // --------------------------------------------------------
 // // Styled select
 // // based on: https://github.com/mdo/wtf-forms/blob/master/wtf-forms.css
-// export function unstyledSelect {
-//   cursor: pointer;
-//   // Styled select prototype,
-//   // Ready for restyling
+export const unstyledSelect = `
+  cursor: pointer;
+  background: transparent;
+  border-radius: 0;
+  outline: 0;
+  appearance: none;
 
-//   // Must be applied to a <select>
-//   background: transparent;
-//   border-radius: 0;
-//   outline: 0;
-//   -webkit-appearance: none; // stylelint-disable-line
-//   appearance: none; // stylelint-disable-line
-//   &:focus-visible:-moz-focusring {
-//     color: transparent;
-//     // Add color back to text
-//     text-shadow: 0 0 0 var(--default-medium-color);
-//   }
+  &:focus-visible:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 var(--default-medium-color);
+  }
 
-//   &::-ms-expand {
-//     display: none;
-//   }
-// }
+  &::-ms-expand {
+    display: none;
+  }
+`;
 
-// export function selectPrimary {
-//   position: relative;
-//   display: inline-block;
-//   color: var(--default-medium-color);
+export const selectPrimary = `
+  position: relative;
+  display: inline-block;
+  color: var(--default-medium-color);
 
-//   select {
-//     @include utilityPrimary;
-//     @include unstyledSelect;
-//     display: inline-block;
-//     width: 100%;
-//     padding: 9px 13px 11px;
-//     margin: 0;
-//     font-size: $type40;
-//     line-height: $baseLineHeight;
-//     border: 2px solid $neutral40;
+  select {
+    ${utilityPrimary}
+    @include unstyledSelect;
+    display: inline-block;
+    width: 100%;
+    padding: 9px 13px 11px;
+    margin: 0;
+    font-size: var(--font-size-40);
+    line-height: var(--line-height);
+    border: 2px solid var(--color-neutral40);
 
-//     &:focus-visible {
-//       border-color: $accentPrimary;
-//     }
-//   }
-// }
+    &:focus-visible {
+      border-color: var(--focus-color);
+    }
+  }
+}`;
 
 // // Styled Checkbox (also from wtf forms)
 // // Should be applied to a label with an input type="checkbox" inside
-// export function checkboxStyled {
-//   position: relative;
-//   display: inline-block;
-//   cursor: pointer;
+export const checkboxStyled = `
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
 
-//   // Hide actual input
-//   input {
-//     position: absolute;
-//     // Relative negative z-index
-//     z-index: -1;
-//     opacity: 0;
-//   }
-// }
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+`;
+
+const inputBase = `
+  font-family: var(--input-font-family);
+  color: var(--input-color);
+  background-color: var(--input-bg-color);
+  border-color: var(--input-border-color);
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--focus-color);
+  }
+`;
 
 // // Inputs/Textareas
-// export function inputSecondary {
-//   @include templateCopy;
-//   padding: 7px 10px;
-//   font-size: $type70;
-//   color: $accentPrimary;
-//   background: transparent;
-//   border: 2px solid $accentPrimary;
-//   outline: none;
+export const inputLabelPrimary = `
+  display: block;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  font-size: var(--font-size-30);
+  font-family: var(--input-font-family);
+  color: var(--color-base-neutral50);
+`;
 
-//   &:focus-visible {
-//     border-color: $neutralWhite;
-//   }
-// }
-
-// export function inputLabelPrimary {
-//   @include templateHead;
-//   display: block;
-//   margin-bottom: 12px;
-//   font-size: $type30;
-//   color: $neutral50;
-//   text-transform: uppercase;
-// }
-
-// export function inputPrimary {
-//   @include templateHead;
-//   padding: 8px 13px 12px;
-//   font-size: $type70;
-//   color: $neutral90;
-//   background-color: $neutralWhite;
-//   border: 3px solid $neutralWhite;
-//   outline: none;
-
-//   &:focus-visible {
-//     border-color: $accentPrimary;
-//   }
-// }
-
-// export function inputSecondary {
-//   @include templateCopy;
-//   padding: 7px 10px;
-//   font-size: $type70;
-//   color: $accentPrimary;
-//   background: transparent;
-//   border: 3px solid $accentPrimary;
-//   outline: none;
-
-//   &:focus-visible {
-//     border-color: $neutralWhite;
-//   }
-// }
+export const inputPrimary = `
+  ${inputBase}
+  padding: 8px 13px 12px;
+  font-size: var(--font-size-70);
+  border: 3px solid;
+`;
 
 // // Dark input with border
-// export function inputQuaternary {
-//   @include templateHead;
-//   padding: 0.438em 1.125em 0.563em;
-//   background: transparent;
-//   border: 1px solid $neutralUILight;
-//   border-radius: 0;
-//   appearance: none;
-//   outline: none;
+export const inputQuaternary = `
+  ${inputBase}
+  padding: 0.438em 1.125em 0.563em;
+  background: transparent;
+  border: 1px solid;
+  border-radius: 0;
+  appearance: none;
+  outline: none;
 
-//   &:focus-visible {
-//     outline: none;
+  &:focus-visible {
+    outline: none;
 
-//     &::placeholder {
-//       color: $accentPrimary;
-//     }
-//   }
-// }
+    &::placeholder {
+      color: var(--highlight-color);
+    }
+  }
+`;
 
-// export function panelRounded {
-//   background-color: var(--box-bg-color);
-//   border-radius: var(--box-border-radius);
-// }
+export const panelRounded = `
+  background-color: var(--box-bg-color);
+  border-radius: var(--box-border-radius);
+`;
 
-// export function panelRoundedDark {
-//   @include panelRounded;
-//   color: $neutralUILight;
-// }
+export const panelRoundedDark = `
+  --color: var(--color-neutral-ui-light);
 
-// export function roundedHeader {
-//   @include panelRoundedDark;
-//   display: table;
-//   width: 100%;
-//   padding: 0.75em 1.5em 0.875em;
-//   margin-bottom: 20px;
-//   font-size: 16px;
-//   background-color: $neutral95;
+  ${panelRounded}
+  color: var(--color);
+`;
 
-//   // if using a rounded label, pad any of its siblings
-//   ~ :not(.full-width) {
-//     padding-right: min(3.158vw, 24px);
-//     padding-left: min(3.158vw, 24px);
-//   }
-// }
+export const roundedHeader = `
+  ${panelRoundedDark}
+  display: table;
+  width: 100%;
+  padding: 0.75em 1.5em 0.875em;
+  margin-bottom: 20px;
+  font-size: 16px;
 
-// export function roundedFormHeader {
-//   --label-color: #{$accentPrimary};
+  // if using a rounded label, pad any of its siblings
+  ~ :not(.full-width) {
+    padding-right: min(3.158vw, 24px);
+    padding-left: min(3.158vw, 24px);
+  }
+`;
 
-//   @include roundedHeader;
+export const roundedFormHeader = `
+  --label-color: var(--highlight-color);
 
-//   .browse &,
-//   .reader & {
-//     --label-color: #{$neutralTextDark};
-//   }
+  ${roundedHeader}
 
-//   > * {
-//     @include utilityPrimary;
-//     display: table-cell;
-//     width: 100%;
-//     font-size: 14px;
-//     font-weight: $semibold;
-//     color: var(--label-color);
-//     letter-spacing: 0.1em;
-//   }
-// }
+  .browse &,
+  .reader & {
+    --label-color: var(--color);
+  }
+
+  > * {
+    ${utilityPrimary}
+    display: table-cell;
+    width: 100%;
+    font-size: 14px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--label-color);
+    letter-spacing: 0.1em;
+  }
+`;
 
 // // Shared Component Styles
 // // --------------------------------------------------------
 // // Project List Item styles, used in global .project-list class,
 // // plus draggable Project Collection items, which aren't nested
-// export function projectListItem {
-//   display: flex;
-//   padding: 15px 0;
-//   color: inherit;
-//   text-decoration: none;
+export const projectListItem = `
+  display: flex;
+  padding: 15px 0;
+  color: inherit;
+  text-decoration: none;
 
-//   .cover {
-//     position: relative;
-//     min-width: 50px;
-//     max-width: 50px;
-//     height: auto;
-//     padding-top: 0;
-//     margin-bottom: 0;
-//     line-height: 1;
+  .cover {
+    position: relative;
+    min-width: 50px;
+    max-width: 50px;
+    height: auto;
+    padding-top: 0;
+    margin-bottom: 0;
+    line-height: 1;
 
-//     + .meta {
-//       padding-left: 15px;
-//     }
+    + .meta {
+      padding-left: 15px;
+    }
 
-//     > img,
-//     > svg {
-//       width: 50px;
-//       height: auto;
-//     }
+    > img,
+    > svg {
+      width: 50px;
+      height: auto;
+    }
 
-//     > img {
-//       border: 1px solid transparent;
-//       transition: border $duration $timing;
-//     }
+    > img {
+      border: 1px solid transparent;
+      transition: border var(--transition-duration-default) var(--transition-timing-function);
+    }
 
-//     > svg {
-//       max-height: 50px;
-//       overflow: visible;
-//       transition: fill $duration $timing;
-//     }
-//   }
+    > svg {
+      max-height: 50px;
+      overflow: visible;
+      transition: fill var(--transition-duration-default) var(--transition-timing-function);
+    }
+  }
 
-//   .meta {
-//     display: flex;
-//     flex-flow: column;
-//     flex-grow: 1;
-//     width: 100%;
-//     padding-right: 20px;
-//     vertical-align: top;
-//   }
+  .meta {
+    display: flex;
+    flex-flow: column;
+    flex-grow: 1;
+    width: 100%;
+    padding-right: 20px;
+    vertical-align: top;
+  }
 
-//   .name {
-//     margin: 0;
-//     font-size: 16px;
-//     font-weight: $semibold;
-//     hyphens: none;
-//     line-height: 1.188;
-//     white-space: normal;
-//     transition: color $duration $timing;
+  .name {
+    margin: 0;
+    font-size: 16px;
+    font-weight: var(--font-weight-semibold);
+    hyphens: none;
+    line-height: 1.188;
+    white-space: normal;
+    transition: color var(--transition-duration-default) var(--transition-timing-function);
 
-//     .title-text {
-//       @include templateHead;
-//       display: inline-block;
-//     }
+    .title-text {
+      display: inline-block;
+      font-family: var(--font-family-sans);
+    }
 
-//     .subtitle {
-//       @include subtitlePrimary;
-//       display: block;
-//       padding-top: 0.143em;
-//       font-size: 14px;
-//       color: $neutral40;
-//       transition: color $duration $timing;
+    .subtitle {
+      ${subtitlePrimary}
+      display: block;
+      padding-top: 0.143em;
+      font-size: 14px;
+      color: var(--color-base-neutral40);
+      transition: color var(--transition-duration-default) var(--transition-timing-function);
 
-//       &:empty {
-//         display: none;
-//       }
-//     }
-//   }
+      &:empty {
+        display: none;
+      }
+    }
+  }
 
-//   .block-label {
-//     @include blockLabelRound;
-//     padding-right: 5px;
-//     padding-left: 5px;
-//     margin: 2px 0 5px 9px;
-//     font-size: 9px;
-//     vertical-align: middle;
-//   }
+  .block-label {
+    ${blockLabelRound}
+    padding-right: 5px;
+    padding-left: 5px;
+    margin: 2px 0 5px 9px;
+    font-size: 9px;
+    vertical-align: middle;
+  }
 
-//   .relations-list {
-//     @include templateCopy;
-//     hyphens: none;
-//     line-height: 1.25;
-//     transition: color $duration $timing;
-//   }
+  .relations-list {
+    font-family: var(--font-family-serif);
+    hyphens: none;
+    line-height: 1.25;
+    transition: color var(--transition-duration-default) var(--transition-timing-function);
+  }
 
-//   .date {
-//     @include templateCopy;
-//     font-size: 14px;
-//     font-style: italic;
+  .date {
+    font-family: var(--font-family-serif);
+    font-size: 14px;
+    font-style: italic;
 
-//     @include respond($break75) {
-//       font-size: 16px;
-//     }
-//   }
-// }
+    ${respond(`font-size: 16px;`, 75)}
+  }
+`;
 
-// export function projectGridItem {
-//   @include projectListItem;
+export const projectGridItem = `
+  ${projectListItem}
 
-//   @include respond($break75) {
-//     flex-direction: column;
-//     height: 100%;
-//     padding: 2.105vw;
+  ${respond(
+    `
+      flex-direction: column;
+      height: 100%;
+      padding: 2.105vw;
 
-//     .cover {
-//       width: 100%;
-//       min-width: 100%;
-//       margin-bottom: 16px;
+      .cover {
+        width: 100%;
+        min-width: 100%;
+        margin-bottom: 16px;
 
-//       + .meta {
-//         padding-left: 0;
-//       }
+        + .meta {
+          padding-left: 0;
+        }
 
-//       > img,
-//       > svg {
-//         width: auto;
-//         height: 100%;
-//       }
-//     }
+        > img,
+        > svg {
+          width: auto;
+          height: 100%;
+        }
+      }
 
-//     .meta {
-//       padding-right: 0;
-//     }
+      .meta {
+        padding-right: 0;
+      }
 
-//     .name {
-//       .title-text {
-//         display: block;
-//       }
+      .name {
+        .title-text {
+          display: block;
+        }
 
-//       .subtitle {
-//         padding-top: 0.389em;
-//       }
-//     }
+        .subtitle {
+          padding-top: 0.389em;
+        }
+      }
 
-//     .block-label {
-//       padding-right: 8px;
-//       padding-left: 8px;
-//       margin: 10px 0 0;
-//       font-size: 12px;
-//     }
-//   }
-
-//   @include respond($break120) {
-//     padding: 25px;
-//   }
-// }
+      .block-label {
+        padding-right: 8px;
+        padding-left: 8px;
+        margin: 10px 0 0;
+        font-size: 12px;
+      }
+    `,
+    75
+  )}
+`;
 
 // // Drag and Drop styles
-// export function dropzone($_margin: 9px, $_active-selector: '--show-dropzone') {
-//   @include panelRounded;
-//   display: block;
-//   padding: 0 $_margin;
-//   margin-right: -$_margin;
-//   margin-left: -$_margin;
-//   background-color: transparent;
-//   transition: background-color 0.4s ease;
+export function dropzone(margin = "9px", activeSelector = "--show-dropzone") {
+  return `
+    ${panelRounded}
+    display: block;
+    padding: 0 ${margin};
+    margin-right: -${margin};
+    margin-left: -${margin};
+    background-color: transparent;
+    transition: background-color 0.4s ease;
 
-//   &#{$_active-selector} {
-//     background-color: var(--dropzone-bg-color, #{$neutral30});
-//   }
-// }
+    &#{${activeSelector}} {
+      background-color: var(--dropzone-bg-color);
+    }
+  `;
+}
 
-// export function draggable {
-//   @include panelRoundedDark;
-//   cursor: move; // fallback for older browsers
-//   cursor: grab;
-//   transition: color $duration $timing, background-color $duration $timing,
-//     border-color $duration $timing;
-// }
+export const draggable = `
+  ${panelRoundedDark}
+  cursor: move; // fallback for older browsers
+  cursor: grab;
+  transition:
+    color var(--transition-duration-default) var(--transition-timing-function),
+    background-color var(--transition-duration-default) var(--transition-timing-function),
+    border-color var(--transition-duration-default) var(--transition-timing-function);
+`;
 
-// export function dragging {
-//   @include boxShadow(0, 31px, 26px, -13px, $neutralBlack, 0.33);
-// }
+export const dragging = `
+  box-shadow: 0 31px 26px -13px rgba(0 0 0 / 0.33);
+`;
