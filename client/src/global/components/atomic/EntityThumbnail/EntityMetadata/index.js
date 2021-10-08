@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import * as Styled from "./EntityMetadata.styles";
 
-export default function EntityMetadata({ entity, hideDescription, hideDate }) {
+export default function EntityMetadata({
+  entity,
+  hideDescription,
+  hideDate,
+  stack
+}) {
   const data = entity.attributes;
 
   const showUpdated = !data.finished && !!data.updated;
@@ -21,14 +26,19 @@ export default function EntityMetadata({ entity, hideDescription, hideDate }) {
       : null;
 
   return (
-    <Styled.MetadataWrapper>
-      <Styled.TitleWrapper>
+    <Styled.MetadataWrapper stack={stack}>
+      <Styled.TitleWrapper stack={stack}>
         <Styled.TitleText
+          stack={stack}
           dangerouslySetInnerHTML={{
             __html: data.titleFormatted
           }}
         />
-        {data.draft && <Styled.Tag aria-hidden>{"Draft"}</Styled.Tag>}
+        {data.draft && (
+          <Styled.Tag aria-hidden stack={stack}>
+            {"Draft"}
+          </Styled.Tag>
+        )}
       </Styled.TitleWrapper>
       {data.subtitle && (
         <Styled.Subtitle aria-hidden>{data.subtitle}</Styled.Subtitle>
@@ -53,5 +63,6 @@ export default function EntityMetadata({ entity, hideDescription, hideDate }) {
 EntityMetadata.propTypes = {
   entity: PropTypes.object,
   hideDescription: PropTypes.bool,
-  hideDate: PropTypes.bool
+  hideDate: PropTypes.bool,
+  stack: PropTypes.bool
 };

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as Styled from "./EntityAvatar.styles";
 
-const AvatarIcon = ({ entity }) => {
+const EntityAvatar = ({ entity }) => {
   const meta = entity.attributes.avatarMeta.original;
   const avatarSrc =
     meta.width >= meta.height
@@ -13,8 +13,9 @@ const AvatarIcon = ({ entity }) => {
   return <Styled.Avatar src={avatarSrc} alt="" />;
 };
 
-AvatarIcon.propTypes = {
-  entity: PropTypes.object
+EntityAvatar.propTypes = {
+  entity: PropTypes.object,
+  stack: PropTypes.bool
 };
 
-export default AvatarIcon;
+export default EntityAvatar;
