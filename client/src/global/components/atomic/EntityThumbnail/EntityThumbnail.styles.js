@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const ItemLink = styled(Link)`
   display: flex;
-  padding: 15px 15px 0;
+  padding: 15px 0;
   color: inherit;
   text-decoration: none;
   transition: background-color var(--transition-duration-default)
