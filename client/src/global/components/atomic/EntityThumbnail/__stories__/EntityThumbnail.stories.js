@@ -1,11 +1,11 @@
 import React from "react";
 import { storiesOf, fixtures } from "helpers/storybook/exports";
-import EntityThumbnail from "frontend/components/EntityThumbnail";
+import EntityThumbnail from "..";
 
 const issue = fixtures.entities.issue();
 const user = fixtures.entities.user();
 
-storiesOf("Frontend/EntityThumbnail", module)
+storiesOf("Global/EntityThumbnail", module)
   .add("Journal Issue", () => {
     return (
       <div style={{ maxWidth: "300px" }}>
@@ -14,6 +14,7 @@ storiesOf("Frontend/EntityThumbnail", module)
           onUncollect={() => console.log("clicked (un)collect")}
           userMock={user.attributes}
           hideDesc
+          stack
         />
       </div>
     );
@@ -22,15 +23,59 @@ storiesOf("Frontend/EntityThumbnail", module)
     const attrs = issue.data.attributes;
     const updated = { ...attrs, recentlyUpdated: true };
     return (
-      <EntityThumbnail
-        entity={{ ...issue.data, attributes: updated }}
-        onUncollect={() => console.log("clicked (un)collect")}
-        userMock={user.attributes}
-        hideDesc
-      />
+      <div style={{ maxWidth: "300px" }}>
+        <EntityThumbnail
+          entity={{ ...issue.data, attributes: updated }}
+          onUncollect={() => console.log("clicked (un)collect")}
+          userMock={user.attributes}
+          hideDesc
+        />
+      </div>
     );
   })
   .add("Draft", () => {
+    const attrs = issue.data.attributes;
+    const updated = { ...attrs, recentlyUpdated: true, draft: true };
+    return (
+      <div style={{ maxWidth: "300px" }}>
+        <EntityThumbnail
+          entity={{ ...issue.data, attributes: updated }}
+          onUncollect={() => console.log("clicked (un)collect")}
+          userMock={user.attributes}
+          hideDesc
+        />
+      </div>
+    );
+  })
+  .add("With Non-primary Color", () => {
+    const attrs = issue.data.attributes;
+    const updated = { ...attrs, avatarColor: "quinary" };
+    return (
+      <div style={{ maxWidth: "300px" }}>
+        <EntityThumbnail
+          entity={{ ...issue.data, attributes: updated }}
+          onUncollect={() => console.log("clicked (un)collect")}
+          userMock={user.attributes}
+          hideDesc
+        />
+      </div>
+    );
+  })
+  .add("No Subtitle", () => {
+    const attrs = issue.data.attributes;
+    const updated = { ...attrs, subtitle: null };
+    return (
+      <div style={{ maxWidth: "300px" }}>
+        <EntityThumbnail
+          entity={{ ...issue.data, attributes: updated }}
+          onUncollect={() => console.log("clicked (un)collect")}
+          userMock={user.attributes}
+          hideDesc
+        />
+      </div>
+    );
+  })
+  .add("Side-by-Side", () => {
     const attrs = issue.data.attributes;
     const updated = { ...attrs, recentlyUpdated: true, draft: true };
     return (
@@ -39,30 +84,7 @@ storiesOf("Frontend/EntityThumbnail", module)
         onUncollect={() => console.log("clicked (un)collect")}
         userMock={user.attributes}
         hideDesc
-      />
-    );
-  })
-  .add("With Non-primary Color", () => {
-    const attrs = issue.data.attributes;
-    const updated = { ...attrs, avatarColor: "quinary" };
-    return (
-      <EntityThumbnail
-        entity={{ ...issue.data, attributes: updated }}
-        onUncollect={() => console.log("clicked (un)collect")}
-        userMock={user.attributes}
-        hideDesc
-      />
-    );
-  })
-  .add("No Subtitle", () => {
-    const attrs = issue.data.attributes;
-    const updated = { ...attrs, subtitle: null };
-    return (
-      <EntityThumbnail
-        entity={{ ...issue.data, attributes: updated }}
-        onUncollect={() => console.log("clicked (un)collect")}
-        userMock={user.attributes}
-        hideDesc
+        stack={false}
       />
     );
   });
