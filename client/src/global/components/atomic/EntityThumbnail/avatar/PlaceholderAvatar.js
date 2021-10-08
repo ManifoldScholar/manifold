@@ -17,7 +17,8 @@ const PlaceholderAvatar = ({ entity }) => {
 };
 
 PlaceholderAvatar.propTypes = {
-  entity: PropTypes.object
+  entity: PropTypes.object,
+  stack: PropTypes.bool
 };
 
 export default PlaceholderAvatar;
