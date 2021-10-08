@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { respond } from "theme/styles/mixins/common";
 
 export const Avatar = styled.img`
   width: 50px;
@@ -8,27 +7,37 @@ export const Avatar = styled.img`
   transition: border var(--transition-duration-default)
     var(--transition-timing-function);
 
-  ${respond(
+  ${({ stack }) =>
+    stack &&
     css`
       width: auto;
       height: 100%;
-    `,
-    75
-  )}
+    `}
 `;
 
-/* These styles should be applied to the svg but trying to see if a wrapper will serve. */
+/* These styles should be applied to the svg component but trying to see if a wrapper will serve. */
 export const Placeholder = styled.div`
   width: 50px;
   height: auto;
-  transition: fill $var(--transition-duration-default)
-    var(--transition-timing-function);
 
-  ${respond(
+  > svg {
+    width: 50px;
+    height: auto;
+    transition: fill $var(--transition-duration-default)
+      var(--transition-timing-function);
+
+    ${({ stack }) =>
+      stack &&
+      css`
+        width: auto;
+        height: 100%;
+      `}
+  }
+
+  ${({ stack }) =>
+    stack &&
     css`
       width: auto;
       height: 100%;
-    `,
-    75
-  )}
+    `}
 `;

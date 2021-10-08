@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Collecting from "frontend/components/collecting";
 import { EntityAvatar, PlaceholderAvatar } from "./avatar";
-import EntityMetadata from "frontend/components/EntityThumbnail/EntityMetadata";
+import EntityMetadata from "./EntityMetadata";
 import lh from "helpers/linkHandler";
 import * as Styled from "./EntityThumbnail.styles";
 
@@ -12,20 +12,22 @@ export default function EntityThumbnail({
   hideMeta = false,
   hideDescription = true,
   hideDate = false,
-  userMock = false
+  userMock = false,
+  stack = true
 }) {
   const placeholder = !entity.attributes.avatarStyles.original;
 
   return (
     <>
       <Styled.ItemLink
+        stack={stack}
         to={lh.link("frontendProjectDetail", entity.attributes.slug)}
       >
-        <Styled.Cover>
+        <Styled.Cover stack={stack}>
           {placeholder ? (
-            <PlaceholderAvatar entity={entity} />
+            <PlaceholderAvatar entity={entity} stack={stack} />
           ) : (
-            <EntityAvatar entity={entity} />
+            <EntityAvatar entity={entity} stack={stack} />
           )}
         </Styled.Cover>
         {!hideMeta && (
@@ -33,6 +35,7 @@ export default function EntityThumbnail({
             entity={entity}
             hideDescription={hideDescription}
             hideDate={hideDate}
+            stack={stack}
           />
         )}
       </Styled.ItemLink>
@@ -53,6 +56,7 @@ EntityThumbnail.propTypes = {
   hideMeta: PropTypes.bool,
   hideDate: PropTypes.bool,
   hideDescription: PropTypes.bool,
+  stack: PropTypes.bool,
   /* For stories */
   userMock: PropTypes.object
 };

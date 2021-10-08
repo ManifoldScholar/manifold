@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import * as Styled from "./EntityMetadata.styles";
 
-export default function EntityMetadata({ entity, hideDescription, hideDate }) {
+export default function EntityMetadata({
+  entity,
+  hideDescription,
+  hideDate,
+  stack
+}) {
   const data = entity.attributes;
 
   const showUpdated = !data.finished && !!data.updated;
@@ -21,30 +26,43 @@ export default function EntityMetadata({ entity, hideDescription, hideDate }) {
       : null;
 
   return (
-    <Styled.MetadataWrapper>
-      <Styled.TitleWrapper>
+    <Styled.MetadataWrapper stack={stack}>
+      <Styled.TitleWrapper stack={stack}>
         <Styled.TitleText
+          stack={stack}
           dangerouslySetInnerHTML={{
             __html: data.titleFormatted
           }}
         />
-        {data.draft && <Styled.Tag aria-hidden>{"Draft"}</Styled.Tag>}
+        {data.draft && (
+          <Styled.Tag aria-hidden stack={stack}>
+            {"Draft"}
+          </Styled.Tag>
+        )}
       </Styled.TitleWrapper>
       {data.subtitle && (
-        <Styled.Subtitle aria-hidden>{data.subtitle}</Styled.Subtitle>
+        <Styled.Subtitle aria-hidden stack={stack}>
+          {data.subtitle}
+        </Styled.Subtitle>
       )}
       {names && (
-        <Styled.Creators aria-hidden>
+        <Styled.Creators aria-hidden stack={stack}>
           <span>{names}</span>
         </Styled.Creators>
       )}
       {!hideDate && date && !data.draft && (
-        <Styled.Date recentlyUpdated={data.recentlyUpdated} aria-hidden>
+        <Styled.Date
+          recentlyUpdated={data.recentlyUpdated}
+          aria-hidden
+          stack={stack}
+        >
           <FormattedDate prefix={prefix} format="MMMM, yyyy" date={date} />
         </Styled.Date>
       )}
       {!hideDescription && data.description && (
-        <Styled.Description aria-hidden>{data.description}</Styled.Description>
+        <Styled.Description aria-hidden stack={stack}>
+          {data.description}
+        </Styled.Description>
       )}
     </Styled.MetadataWrapper>
   );
@@ -53,5 +71,6 @@ export default function EntityMetadata({ entity, hideDescription, hideDate }) {
 EntityMetadata.propTypes = {
   entity: PropTypes.object,
   hideDescription: PropTypes.bool,
-  hideDate: PropTypes.bool
+  hideDate: PropTypes.bool,
+  stack: PropTypes.bool
 };
