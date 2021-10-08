@@ -1,4 +1,3 @@
-import { createCSSVariables } from "./helpers";
 import { containerWidth } from "./layout";
 
 export const breakpoints = {
@@ -19,6 +18,4 @@ export const breakpoints = {
   20: "350px"
 };
 
-export default `
-  ${createCSSVariables("breakpoint", breakpoints)}
-`;
+export default ``;

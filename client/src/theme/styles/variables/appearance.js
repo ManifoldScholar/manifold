@@ -1,4 +1,4 @@
-import { createCSSVariables } from "./helpers";
+import { createCustomPropertyName, createCSSVariables } from "./helpers";
 
 const Color = require("color");
 
@@ -50,16 +50,16 @@ export const baseColors = {
 // Namespaced functionally by usage and context (light/dark modes)
 // --------------------------------------------------------
 export const neutralColors = {
-  uiDullLight: baseColors.neutral70, // decorative or inactive elements against dark bgs
-  textExtraLight: baseColors.neutral10, // for neutral75 bg
-  uiExtraLight: baseColors.neutral40, // ""
-  textLight: baseColors.neutral45, // for neutral80 ↑ bg
-  uiLight: baseColors.neutral50, // ""
-  uiDullDark: baseColors.neutral45, // decorative or inactive elements against dark bgs
-  textDark: baseColors.neutral75, // for neutral10 ↓ bg
-  uiDark: baseColors.neutral70, // ""
-  textExtraDark: baseColors.neutral90, // for informational hierarchy with neutralTextDark
-  uiExtraDark: baseColors.neutral85 // ""
+  uiDullLight: `var(${createCustomPropertyName("color", "baseNeutral70")})`, // decorative or inactive elements against dark bgs
+  textExtraLight: `var(${createCustomPropertyName("color", "baseNeutral10")})`, // for neutral75 bg
+  uiExtraLight: `var(${createCustomPropertyName("color", "baseNeutral40")})`, // ""
+  textLight: `var(${createCustomPropertyName("color", "baseNeutral45")})`, // for neutral80 ↑ bg
+  uiLight: `var(${createCustomPropertyName("color", "baseNeutral50")})`, // ""
+  uiDullDark: `var(${createCustomPropertyName("color", "baseNeutral45")})`, // decorative or inactive elements against dark bgs
+  textDark: `var(${createCustomPropertyName("color", "baseNeutral75")})`, // for neutral10 ↓ bg
+  uiDark: `var(${createCustomPropertyName("color", "baseNeutral70")})`, // ""
+  textExtraDark: `var(${createCustomPropertyName("color", "baseNeutral90")})`, // for informational hierarchy with neutralTextDark
+  uiExtraDark: `var(${createCustomPropertyName("color", "baseNeutral85")})` // ""
 };
 
 const accentPrimaryBase = Color("#52e3ac");
@@ -119,47 +119,68 @@ export const interactionColors = {
     .saturate(0.1701)
     .darken(0.3529)
     .hex(), // #077A57
-  focusSecondary: baseColors.neutral20,
-  focusTertiary: baseColors.neutral30
+  focusSecondary: `var(${createCustomPropertyName("color", "baseNeutral20")})`,
+  focusTertiary: `var(${createCustomPropertyName("color", "baseNeutral30")})`
 };
 
 export const notificationColors = {
-  errorExtraLight: baseColors.red20,
-  errorLight: baseColors.red45,
-  errorDark: baseColors.red75,
+  errorExtraLight: `var(${createCustomPropertyName("color", "baseRed20")})`,
+  errorLight: `var(${createCustomPropertyName("color", "baseRed45")})`,
+  errorDark: `var(${createCustomPropertyName("color", "baseRed75")})`,
 
-  warningExtraLight: baseColors.yellow20,
-  warningLight: baseColors.yellow45,
-  warningDark: baseColors.yellow75,
+  warningExtraLight: `var(${createCustomPropertyName(
+    "color",
+    "baseYellow20"
+  )})`,
+  warningLight: `var(${createCustomPropertyName("color", "baseYellow45")})`,
+  warningDark: `var(${createCustomPropertyName("color", "baseYellow75")})`,
 
-  noticeExtraLight: baseColors.blue20,
-  noticeLight: baseColors.blue45,
-  noticeDark: baseColors.blue75
+  noticeExtraLight: `var(${createCustomPropertyName("color", "baseBlue20")})`,
+  noticeLight: `var(${createCustomPropertyName("color", "baseBlue45")})`,
+  noticeDark: `var(${createCustomPropertyName("color", "baseBlue75")})`
 };
 
 // default heading theming that's customizable in the backend
 export const headerColors = {
-  background: baseColors.neutralWhite,
-  backgroundLight: baseColors.neutral05,
-  foreground: neutralColors.textDark,
-  foregroundActive: neutralColors.textExtraDark,
-  foregroundHover: interactionColors.light
+  background: `var(${createCustomPropertyName("color", "baseNeutralWhite")})`,
+  backgroundLight: `var(${createCustomPropertyName("color", "baseNeutral05")})`,
+  foreground: `var(${createCustomPropertyName("color", "neutralTextDark")})`,
+  foregroundActive: `var(${createCustomPropertyName(
+    "color",
+    "neutralTextExtraDark"
+  )})`,
+  foregroundHover: `var(${createCustomPropertyName(
+    "color",
+    "interactionLight"
+  )})`
 };
 
 export const inputColors = {
-  placeholder: neutralColors.uiLight,
-  border: neutralColors.uiDullLight
+  placeholder: `var(${createCustomPropertyName("color", "neutralUiLight")})`,
+  border: `var(${createCustomPropertyName("color", "neutralUiDullLight")})`
 };
 
 // global defaults
 export const defaultColors = {
-  color: neutralColors.textDark,
-  backgroundColor: baseColors.neutralWhite,
-  hoverColor: interactionColors.light,
-  focusColor: interactionColors.light,
-  errorColor: notificationColors.errorDark,
-  warningColor: notificationColors.warningDark,
-  noticeColor: notificationColors.noticeDark
+  color: `var(${createCustomPropertyName("color", "neutralTextDark")})`,
+  backgroundColor: `var(${createCustomPropertyName(
+    "color",
+    "baseNeutralWhite"
+  )})`,
+  hoverColor: `var(${createCustomPropertyName("color", "interactionDark")})`,
+  focusColor: `var(${createCustomPropertyName("color", "interactionDark")})`,
+  errorColor: `var(${createCustomPropertyName(
+    "color",
+    "notificationErrorDark"
+  )})`,
+  warningColor: `var(${createCustomPropertyName(
+    "color",
+    "notificationWarningDark"
+  )})`,
+  noticeColor: `var(${createCustomPropertyName(
+    "color",
+    "notificationNoticeDark"
+  )})`
 };
 
 export const boxBorderRadius = "8px";
