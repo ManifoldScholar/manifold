@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { respond } from "theme/styles/mixins/common";
 
 export const MetadataWrapper = styled.div`
   display: flex;
@@ -11,13 +10,12 @@ export const MetadataWrapper = styled.div`
   padding-left: 15px;
   line-height: 20px;
 
-  ${respond(
+  ${({ stack }) =>
+    stack &&
     css`
       padding-left: 0;
       padding-right: 0;
-    `,
-    75
-  )}
+    `}
 `;
 
 export const TitleWrapper = styled.h3`
@@ -30,24 +28,22 @@ export const TitleWrapper = styled.h3`
     var(--transition-timing-function);
   color: var(--color-base-neutral90);
 
-  ${respond(
+  ${({ stack }) =>
+    stack &&
     css`
       font-size: 17px;
       font-weight: var(--font-weight-semibold);
-    `,
-    75
-  )}
+    `}
 `;
 
 export const TitleText = styled.span`
   display: inline-block;
 
-  ${respond(
+  ${({ stack }) =>
+    stack &&
     css`
       display: block;
-    `,
-    75
-  )}
+    `}
 
   /* @include templateHead */
   font-family: "sofia-pro", "trueno", sans-serif;
@@ -70,12 +66,11 @@ export const Subtitle = styled.h4`
   /* @include templateCopy */
   font-family: "freight-text-pro", "aleo", serif;
 
-  ${respond(
+  ${({ stack }) =>
+    stack &&
     css`
       padding-top: 0.625em;
-    `,
-    75
-  )}
+    `}
 `;
 
 export const Tag = styled.div`
@@ -101,15 +96,14 @@ export const Tag = styled.div`
   /* @include templateHead */
   font-family: "sofia-pro", "trueno", sans-serif;
 
-  ${respond(
+  ${({ stack }) =>
+    stack &&
     css`
       padding-right: 8px;
       padding-left: 8px;
       margin: 0.625em 0 0;
       font-size: 12px;
-    `,
-    75
-  )}
+    `}
 `;
 
 export const Creators = styled.div`
@@ -123,13 +117,12 @@ export const Creators = styled.div`
   /* @include templateCopy */
   font-family: "freight-text-pro", "aleo", serif;
 
-  ${respond(
+  ${({ stack }) =>
+    stack &&
     css`
       font-size: 16px;
       padding-top: 0.625em;
-    `,
-    75
-  )}
+    `}
 `;
 
 export const Description = styled.div`
@@ -144,13 +137,12 @@ export const Description = styled.div`
     margin-bottom: 0;
   } */
 
-  ${respond(
+  ${({ stack }) =>
+    stack &&
     css`
       font-size: 16px;
       padding-top: 0.625em;
-    `,
-    75
-  )}
+    `}
 `;
 
 export const Date = styled.div`
@@ -162,13 +154,12 @@ export const Date = styled.div`
   /* @include templateCopy */
   font-family: "freight-text-pro", "aleo", serif;
 
-  ${respond(
+  ${({ stack }) =>
+    stack &&
     css`
       font-size: 16px;
       padding-top: 0.625em;
-    `,
-    75
-  )}
+    `}
 
   ${({ recentlyUpdated }) =>
     recentlyUpdated &&

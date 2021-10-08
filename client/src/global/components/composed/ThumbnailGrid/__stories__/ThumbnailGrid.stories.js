@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf, fixtures } from "helpers/storybook/exports";
-import ThumbnailGrid from "frontend/components/ThumbnailGrid";
+import ThumbnailGrid from "..";
 
 const issue = fixtures.entities.issue();
 const project = fixtures.entities.project();

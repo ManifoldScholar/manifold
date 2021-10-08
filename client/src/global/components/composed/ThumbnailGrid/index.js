@@ -1,5 +1,5 @@
 import React from "react";
-import EntityThumbnail from "frontend/components/EntityThumbnail";
+import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import * as Styled from "./ThumbnailGrid.styles";
 import PropTypes from "prop-types";
 

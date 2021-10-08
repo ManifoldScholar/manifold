@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import UniqueIcons from "global/components/icon/unique";
 import * as Styled from "./EntityAvatar.styles";
 
-const PlaceholderAvatar = ({ entity }) => {
+const PlaceholderAvatar = ({ entity, stack }) => {
   if (!entity.attributes.avatarColor) return null;
   return (
-    <Styled.Placeholder>
+    <Styled.Placeholder stack={stack}>
       <UniqueIcons.ProjectPlaceholderUnique
         mode="responsive"
         color={entity.attributes.avatarColor}
@@ -17,7 +17,8 @@ const PlaceholderAvatar = ({ entity }) => {
 };
 
 PlaceholderAvatar.propTypes = {
-  entity: PropTypes.object
+  entity: PropTypes.object,
+  stack: PropTypes.bool
 };
 
 export default PlaceholderAvatar;
