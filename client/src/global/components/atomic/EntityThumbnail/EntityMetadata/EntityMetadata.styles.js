@@ -84,12 +84,13 @@ export const Tag = styled.div`
   margin: 2px 0 5px 9px;
   font-size: 9px;
   vertical-align: middle;
+  line-height: 1.188;
 
   /* @include blockLabelRound */
   display: inline-block;
-  padding: 0.333em 8px;
+  padding: 0.333em 5px;
   font-weight: var(--font-weight-semibold);
-  color: var(--color-base-neutralWhite);
+  color: var(--color-base-neutral-white);
   background-color: var(--notice-color);
   border-radius: 3px;
 
@@ -102,10 +103,9 @@ export const Tag = styled.div`
 
   ${respond(
     css`
-      padding-top: 0.625em;
       padding-right: 8px;
       padding-left: 8px;
-      margin: 10px 0 0;
+      margin: 0.625em 0 0;
       font-size: 12px;
     `,
     75
@@ -179,7 +179,7 @@ export const Date = styled.div`
         height: 7px;
         margin-right: 5px;
         margin-bottom: 2px;
-        color: var(--color-base-neutralWhite);
+        color: var(--color-base-neutral-white);
         content: "";
         background-color: var(--color-base-red45);
         border-radius: 50%;
