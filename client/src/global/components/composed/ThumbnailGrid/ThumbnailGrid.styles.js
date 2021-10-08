@@ -65,6 +65,7 @@ export const GridItem = styled.li`
   transition: background-color var(--transition-duration-default) ease-out,
     box-shadow var(--transition-duration-default) ease-out;
   position: relative;
+  padding-left: 14px;
 
   ${respond(
     css`
