@@ -7,9 +7,9 @@ export default function ThumbnailGrid({ entities, onUncollect, userMock }) {
   return (
     <Styled.GridWrapper>
       <Styled.GridList>
-        {entities.map((entity, i) => {
+        {entities.map(entity => {
           return (
-            <Styled.GridItem key={i}>
+            <Styled.GridItem key={entity.id}>
               <EntityThumbnail
                 entity={entity}
                 onUncollect={onUncollect}

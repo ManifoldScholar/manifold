@@ -3,7 +3,7 @@ import { storiesOf, fixtures } from "helpers/storybook/exports";
 import GroupsTable from "../tables/Groups";
 import MembersTable from "../tables/Members";
 import JoinBox from "../JoinBox";
-import GroupHeading from "../headings";
+import { GroupHeading } from "../headings";
 import GroupSummaryBox from "../headings/Group/GroupSummaryBox";
 
 const groups = fixtures.collectionFactory("readingGroup", 8);
