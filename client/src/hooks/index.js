@@ -31,4 +31,4 @@ export { default as useGrabCurrentTextSection } from "./texts/use-grab-current-t
 
 export { default as useCollapseContext } from "./contexts/use-collapse-context";
 
-export { default as useCurrentUser } from "./use-current-user";
+export { default as useCurrentUser } from "./user/use-current-user";

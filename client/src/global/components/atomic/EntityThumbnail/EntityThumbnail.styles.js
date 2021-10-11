@@ -1,8 +1,12 @@
 import styled, { css } from "styled-components";
-import { respond } from "theme/styles/mixins/common";
 import { Link } from "react-router-dom";
 
 export const ItemLink = styled(Link)`
+  --Avatar-width: ${({ stack }) => (stack ? "auto" : "50px")};
+  --Avatar-height: ${({ stack }) => (stack ? "100%" : "auto")};
+  --Cover-width: ${({ stack }) => (stack ? "100%" : "50px")};
+  --Cover-margin-bottom: ${({ stack }) => (stack ? "16px" : 0)};
+
   display: flex;
   padding: 15px 0;
   color: inherit;
@@ -20,20 +24,14 @@ export const ItemLink = styled(Link)`
       css`
         flex-direction: column;
         height: 100%;
-        padding: 2.105vw;
+        padding: min(2.105vw, 25px);
 
         &:hover,
         &:focus-visible {
           outline: 0;
           box-shadow: 0 31px 44px 2px rgba(0, 0, 0, 0.13);
-          background-color: var(--base-color-neutral10);
+          background-color: var(--box-medium-bg-color);
         }
-        ${respond(
-          css`
-            padding: 25px;
-          `,
-          120
-        )}
       `
     );
   }}
@@ -41,17 +39,8 @@ export const ItemLink = styled(Link)`
 
 export const Cover = styled.figure`
   position: relative;
-  min-width: 50px;
-  max-width: 50px;
+  width: var(--Cover-width);
   padding-top: 0;
-  margin-bottom: 0;
+  margin-bottom: var(--Cover-margin-bottom);
   line-height: 1;
-
-  ${({ stack }) =>
-    stack &&
-    css`
-      width: 100%;
-      min-width: 100%;
-      margin-bottom: 16px;
-    `}
 `;
