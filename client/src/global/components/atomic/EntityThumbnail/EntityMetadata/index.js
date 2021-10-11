@@ -41,28 +41,20 @@ export default function EntityMetadata({
         )}
       </Styled.TitleWrapper>
       {data.subtitle && (
-        <Styled.Subtitle aria-hidden stack={stack}>
-          {data.subtitle}
-        </Styled.Subtitle>
+        <Styled.Subtitle aria-hidden>{data.subtitle}</Styled.Subtitle>
       )}
       {names && (
-        <Styled.Creators aria-hidden stack={stack}>
+        <Styled.Creators aria-hidden>
           <span>{names}</span>
         </Styled.Creators>
       )}
       {!hideDate && date && !data.draft && (
-        <Styled.Date
-          recentlyUpdated={data.recentlyUpdated}
-          aria-hidden
-          stack={stack}
-        >
+        <Styled.Date recentlyUpdated={data.recentlyUpdated} aria-hidden>
           <FormattedDate prefix={prefix} format="MMMM, yyyy" date={date} />
         </Styled.Date>
       )}
       {!hideDescription && data.description && (
-        <Styled.Description aria-hidden stack={stack}>
-          {data.description}
-        </Styled.Description>
+        <Styled.Description aria-hidden>{data.description}</Styled.Description>
       )}
     </Styled.MetadataWrapper>
   );

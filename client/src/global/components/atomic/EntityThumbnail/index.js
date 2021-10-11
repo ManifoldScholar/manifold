@@ -23,11 +23,11 @@ export default function EntityThumbnail({
         stack={stack}
         to={lh.link("frontendProjectDetail", entity.attributes.slug)}
       >
-        <Styled.Cover stack={stack}>
+        <Styled.Cover>
           {placeholder ? (
-            <PlaceholderAvatar entity={entity} stack={stack} />
+            <PlaceholderAvatar entity={entity} />
           ) : (
-            <EntityAvatar entity={entity} stack={stack} />
+            <EntityAvatar entity={entity} />
           )}
         </Styled.Cover>
         {!hideMeta && (

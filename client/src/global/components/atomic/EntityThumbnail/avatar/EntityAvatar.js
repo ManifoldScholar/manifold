@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as Styled from "./EntityAvatar.styles";
 
-const AvatarIcon = ({ entity, stack }) => {
+const EntityAvatar = ({ entity }) => {
   const meta = entity.attributes.avatarMeta.original;
   const avatarSrc =
     meta.width >= meta.height
@@ -10,12 +10,12 @@ const AvatarIcon = ({ entity, stack }) => {
       : entity.attributes.avatarStyles.small;
 
   /* need to fix the alt here */
-  return <Styled.Avatar src={avatarSrc} alt="" stack={stack} />;
+  return <Styled.Avatar src={avatarSrc} alt="" />;
 };
 
-AvatarIcon.propTypes = {
+EntityAvatar.propTypes = {
   entity: PropTypes.object,
   stack: PropTypes.bool
 };
 
-export default AvatarIcon;
+export default EntityAvatar;

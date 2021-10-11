@@ -1,43 +1,22 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const Avatar = styled.img`
-  width: 50px;
-  height: auto;
+  width: var(--Avatar-width);
+  height: var(--Avatar-height);
   border: 1px solid transparent;
   transition: border var(--transition-duration-default)
     var(--transition-timing-function);
-
-  ${({ stack }) =>
-    stack &&
-    css`
-      width: auto;
-      height: 100%;
-    `}
 `;
 
 /* These styles should be applied to the svg component but trying to see if a wrapper will serve. */
 export const Placeholder = styled.div`
-  width: 50px;
-  height: auto;
+  width: var(--Avatar-width);
+  height: var(--Avatar-height);
 
   > svg {
-    width: 50px;
-    height: auto;
-    transition: fill $var(--transition-duration-default)
+    width: var(--Avatar-width);
+    height: var(--Avatar-height);
+    transition: fill var(--transition-duration-default)
       var(--transition-timing-function);
-
-    ${({ stack }) =>
-      stack &&
-      css`
-        width: auto;
-        height: 100%;
-      `}
   }
-
-  ${({ stack }) =>
-    stack &&
-    css`
-      width: auto;
-      height: 100%;
-    `}
 `;
