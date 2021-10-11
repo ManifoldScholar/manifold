@@ -8,7 +8,7 @@ const user = fixtures.entities.user();
 storiesOf("Global/EntityThumbnail", module)
   .add("Journal Issue", () => {
     return (
-      <div style={{ maxWidth: "300px" }}>
+      <div style={{ maxWidth: "300px" }} className="bg-white">
         <EntityThumbnail
           entity={issue.data}
           onUncollect={() => console.log("clicked (un)collect")}
@@ -23,7 +23,7 @@ storiesOf("Global/EntityThumbnail", module)
     const attrs = issue.data.attributes;
     const updated = { ...attrs, recentlyUpdated: true };
     return (
-      <div style={{ maxWidth: "300px" }}>
+      <div style={{ maxWidth: "300px" }} className="bg-white">
         <EntityThumbnail
           entity={{ ...issue.data, attributes: updated }}
           onUncollect={() => console.log("clicked (un)collect")}
@@ -37,7 +37,7 @@ storiesOf("Global/EntityThumbnail", module)
     const attrs = issue.data.attributes;
     const updated = { ...attrs, recentlyUpdated: true, draft: true };
     return (
-      <div style={{ maxWidth: "300px" }}>
+      <div style={{ maxWidth: "300px" }} className="bg-white">
         <EntityThumbnail
           entity={{ ...issue.data, attributes: updated }}
           onUncollect={() => console.log("clicked (un)collect")}
@@ -51,7 +51,7 @@ storiesOf("Global/EntityThumbnail", module)
     const attrs = issue.data.attributes;
     const updated = { ...attrs, avatarColor: "quinary" };
     return (
-      <div style={{ maxWidth: "300px" }}>
+      <div style={{ maxWidth: "300px" }} className="bg-white">
         <EntityThumbnail
           entity={{ ...issue.data, attributes: updated }}
           onUncollect={() => console.log("clicked (un)collect")}
@@ -65,7 +65,7 @@ storiesOf("Global/EntityThumbnail", module)
     const attrs = issue.data.attributes;
     const updated = { ...attrs, subtitle: null };
     return (
-      <div style={{ maxWidth: "300px" }}>
+      <div style={{ maxWidth: "300px" }} className="bg-white">
         <EntityThumbnail
           entity={{ ...issue.data, attributes: updated }}
           onUncollect={() => console.log("clicked (un)collect")}
