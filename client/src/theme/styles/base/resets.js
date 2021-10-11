@@ -79,6 +79,10 @@ export default `
     text-rendering: inherit;
   }
 
+  input {
+    line-height: normal;
+  }
+
   button {
     margin: 0;
   }

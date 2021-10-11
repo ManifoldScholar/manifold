@@ -2,12 +2,14 @@ import { createCSSVariables } from "./helpers";
 
 const fontFamilySans = "'sofia-pro', 'trueno', sans-serif";
 const fontFamilySerif = "'freight-text-pro', 'aleo', serif";
+const fontFamilyMono = "Menlo, Monaco, Consolas, 'Courier New', monospace";
 
 export const fontFamily = {
   sans: fontFamilySans,
   serif: fontFamilySerif,
   copy: fontFamilySerif,
-  heading: fontFamilySans
+  heading: fontFamilySans,
+  mono: fontFamilyMono
 };
 
 export const fontWeight = {

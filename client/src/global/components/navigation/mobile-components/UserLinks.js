@@ -55,7 +55,7 @@ export default class UserLinks extends PureComponent {
                 <span className="nested-nav__button-text">Login</span>
               </div>
             </button>
-            <span id="user-menu-login-mobile" className="aria-describedby">
+            <span id="user-menu-login-mobile" className="screen-reader-text">
               Login to Manifold
             </span>
           </li>

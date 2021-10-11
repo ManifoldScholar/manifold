@@ -111,7 +111,7 @@ export default class ResourceishThumbnail extends Component {
 
     const wrapperClass = classNames({
       "icon-thumbnail-primary": true,
-      "bg-image": hasImage && !this.props.noCrop,
+      "bg-image bg-neutral90": hasImage && !this.props.noCrop,
       title: this.props.showTitle
     });
 

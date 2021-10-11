@@ -27,17 +27,15 @@ export default class SkipLink extends PureComponent {
     return (
       <>
         <a
-          className="skip-to-main screen-reader-text"
+          className="skip-to-main"
           href={`#${this.props.skipId}`}
           onClick={this.activateSkipMessage}
         >
           {this.props.skipLinkText}
         </a>
-        {this.state.skipped ? (
-          <span className="screen-reader-text" role="alert">
-            {this.props.skipMessage}
-          </span>
-        ) : null}
+        <span className="screen-reader-text" role="alert">
+          {this.state.skipped && this.props.skipMessage}
+        </span>
       </>
     );
   }
