@@ -8,7 +8,6 @@ export const Avatar = styled.img`
     var(--transition-timing-function);
 `;
 
-/* These styles should be applied to the svg component but trying to see if a wrapper will serve. */
 export const Placeholder = styled.div`
   width: var(--Avatar-width);
   height: var(--Avatar-height);
