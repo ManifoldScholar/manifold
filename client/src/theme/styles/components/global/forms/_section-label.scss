@@ -1,0 +1,13 @@
+.form-section-label {
+  @include roundedFormHeader;
+
+  .browse &,
+  .reader & {
+    @include panelRounded;
+    background-color: $neutral10;
+  }
+
+  .backend & {
+    @include panelRoundedDark;
+  }
+}

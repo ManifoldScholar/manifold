@@ -1,0 +1,99 @@
+// Form Inputs that live outside a form element
+// These are just as abstract as form elements, but don't require a wrapper
+
+.checkbox-primary {
+  @include formLabelPrimary;
+  line-height: 25px;
+  cursor: pointer;
+
+  .bg-neutral90 & {
+    .toggle-indicator {
+      background-color: transparent;
+      border: 1px solid $neutral80;
+    }
+
+    &.checked {
+      .toggle-indicator {
+        background-color: $neutral30;
+      }
+    }
+  }
+
+  .toggle-indicator {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    padding: 7px 6px;
+    vertical-align: middle;
+    background-color: $neutral30;
+  }
+
+  .label {
+    display: inline-block;
+    margin-left: 9px;
+    vertical-align: middle;
+  }
+}
+
+.boolean-primary {
+  $_height: 26px;
+  $_width: $_height * 2;
+  $_padding: 4px;
+
+  position: relative;
+  display: block;
+  width: $_height * 2;
+  height: $_height;
+  cursor: pointer;
+  background-color: var(--inactive-switch-bg-color);
+  border-radius: $_height;
+  transition: background-color $durationSlow $timing;
+
+  &.checked {
+    background-color: var(--active-switch-bg-color);
+
+    &::before {
+      transform: translateX($_width - $_height);
+    }
+  }
+
+  &::before {
+    position: absolute;
+    top: $_padding;
+    left: $_padding;
+    width: $_height - $_padding * 2;
+    height: $_height - $_padding * 2;
+    content: '';
+    background-color: var(--switch-toggle-color);
+    border-radius: $_height;
+    transition: transform $duration cubic-bezier(0.46,0.03,0.52,0.96);
+  }
+}
+
+.repeater-primary {
+  .buttons-icon-horizontal {
+    margin-bottom: 0;
+  }
+
+  .repeatable-input {
+    position: relative;
+
+    + .repeatable-input {
+      margin-top: 24px;
+
+      @include respond($break60) {
+        margin-top: 24px;
+      }
+    }
+  }
+}
+
+@mixin filterSelectBase {
+  @include unstyledSelect;
+  @include utilityPrimary;
+  padding-right: 36px;
+  padding-left: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

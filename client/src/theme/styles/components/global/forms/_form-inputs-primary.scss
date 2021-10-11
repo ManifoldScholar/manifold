@@ -1,0 +1,946 @@
+// Default form styles across the board
+// These do not require a wrapper
+
+// <div> wrapper around form fields
+.form-input {
+  &--with-actions {
+    display: grid;
+    grid-template:
+      'label label' auto
+      'input input' auto
+      'actions notification' auto / auto 1fr;
+
+    @include respond($break60) {
+      grid-template:
+        'label label label' auto
+        'input notification actions' auto / 1fr auto auto;
+
+      .form-input__action {
+        transform: translateY(5px);
+      }
+    }
+
+    label {
+      grid-area: label;
+    }
+
+    input {
+      grid-area: input;
+    }
+
+    .notification {
+      grid-area: notification;
+
+      @include respond($break60) {
+        padding-right: 10px;
+        padding-left: 10px;
+        margin-top: 7px !important; // stylelint-disable-line
+        border-bottom: 1px solid $neutral80;
+      }
+    }
+
+    .instructions {
+      grid-column: 1 / -1;
+      margin-bottom: 1em !important; // stylelint-disable-line
+
+      @include respond($break60) {
+        margin-bottom: 0 !important; // stylelint-disable-line
+      }
+    }
+
+    .form-input__action-group {
+      grid-area: actions;
+    }
+  }
+
+  & + & {
+    margin-top: 40px;
+  }
+
+  &__wrapper {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  &__action-group {
+    margin-top: 12px;
+
+    @include respond($break60) {
+      margin-top: 0;
+      border-bottom: 1px solid $neutral80;
+    }
+  }
+
+  &__action {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    @include fillOnFocusVisible($accentInteractionLight);
+    padding: 0.333em 1em;
+    font-size: 12px;
+    font-weight: $semibold;
+    text-decoration: none;
+    letter-spacing: 0.125em;
+    background-color: $neutral10;
+    border: 1px solid $neutral10;
+    border-radius: 16px;
+    transition: color $duration $timing, background-color $duration $timing;
+
+    &:hover {
+      background-color: $neutral20;
+    }
+
+    & + & {
+      margin-left: 8px;
+    }
+  }
+
+  // Avoid styling checkbox/radio labels
+  label:not(.checkbox):not(.radio):not(.toggle):not(.icon-picker):not(.form-switch) {
+    @include formLabelPrimary;
+    display: block;
+    margin-bottom: 1em;
+
+    &.has-instructions {
+      margin-bottom: 0.5em;
+    }
+  }
+
+  .instructions {
+    @include formInstructions;
+    display: block;
+    margin-bottom: 1em;
+
+    a:visited {
+      color: inherit;
+    }
+
+    &.space-bottom {
+      margin-bottom: 2em;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  input[type='text']:not(.range-picker__input),
+  input[type='email'],
+  input[type='password'] {
+    @include formInputPrimary;
+    width: 100%;
+    // Explicit height so that elements can line up
+    height: 60px;
+    // Declared in em as it should change with font size
+    padding: 0.7em 1em;
+    background-color: $neutral05;
+    border: 1px solid transparent;
+    border-radius: 0;
+    outline: 0;
+    transition: border-color $duration $timing;
+    appearance: none;
+
+    &:focus-visible {
+      border-color: $defaultHoverColor;
+    }
+
+    .bg-neutral05 & {
+      background-color: $neutralWhite;
+    }
+  }
+
+  textarea {
+    @include formInputPrimary;
+    width: 100%;
+    padding: 1.2em 1.5em;
+    resize: vertical;
+    background-color: $neutral05;
+    border: 1px solid transparent;
+    outline: none;
+    transition: border-color $duration $timing;
+
+    &:focus-visible {
+      border-color: $defaultHoverColor;
+    }
+
+    .bg-neutral05 & {
+      background-color: $neutralWhite;
+    }
+
+    &.wide {
+      padding: 0.7em 1em;
+    }
+
+    &.large {
+      min-height: 250px;
+    }
+  }
+
+  // Default button appearance
+  .button-secondary {
+    display: block;
+    width: 100%;
+
+    + .button-secondary {
+      margin-top: 21px;
+    }
+  }
+
+  & &-radios {
+    &__wrapper,
+    &__legend {
+      padding: 0;
+      margin: 0;
+      border: none;
+    }
+
+    &__legend {
+      + .instructions {
+        margin-top: 7px;
+      }
+    }
+
+    &__title {
+      @include formLabelPrimary;
+      display: inline-block;
+    }
+
+    &__prompt {
+      @include utilityPrimary;
+      display: block;
+      font-size: 18px;
+      font-weight: $regular;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+  }
+
+  // Error list
+  .errors {
+    display: block;
+  }
+}
+
+.form-error {
+  .error {
+    @include formInputMessage;
+    display: inline-block;
+    margin-top: 15px;
+    color: $defaultErrorColor;
+  }
+}
+
+.form-error-grouped {
+  margin-bottom: 15px;
+
+  .dialog & {
+    max-width: 80%;
+  }
+
+  .error {
+    margin-top: 0;
+  }
+}
+
+.form-select {
+  position: relative;
+  display: inline-block;
+  // Default width
+  width: 100%;
+
+  // Dropdown icon included in markup
+  &__disclosure-icon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    color: $defaultHoverColor;
+    pointer-events: none;
+    transform: translateY(-50%);
+
+    // Use native dropdown arrow in IE9
+    .ie9 & {
+      display: none;
+    }
+  }
+
+  select {
+    @include formInputSecondary;
+    display: inline-block;
+    width: 100%;
+    height: 4.286em;
+    padding: 1.286em 55px 1.286em 2.214em;
+    margin: 0;
+    cursor: pointer;
+    background-color: $neutral05;
+    border: 1px solid transparent;
+    border-radius: 0;
+    outline: none;
+    transition: border-color $duration $timing;
+    appearance: none;
+
+    .bg-neutral05 & {
+      background-color: $neutralWhite;
+    }
+
+    &:focus-visible {
+      border-color: $defaultHoverColor;
+    }
+
+    &:focus-visible:-moz-focusring {
+      color: transparent;
+      text-shadow: 0 0 0 $neutralTextDark;
+
+      .backend & {
+        text-shadow: 0 0 0 $neutralTextExtraLight;
+      }
+    }
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    option {
+      color: $neutralTextExtraDark;
+    }
+  }
+}
+
+.form-toggle {
+  @include formLabelPrimary;
+  position: relative;
+  display: block;
+  padding-left: 33px;
+  margin-bottom: 0; // OD
+  font-size: 13px;
+  cursor: pointer;
+
+  @include respond($break60) {
+    font-size: 16px;
+  }
+
+  + .form-toggle {
+    margin-top: 18px;
+  }
+
+  &.horizontal {
+    display: inline-block;
+
+    + .form-toggle {
+      margin-top: 0;
+      margin-left: 38px;
+    }
+  }
+
+  &.annotated {
+    @include formInputPrimary;
+    color: $neutralTextExtraDark;
+    text-transform: none;
+  }
+
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+    &:focus-visible ~ .toggle-indicator {
+      background-color: $accentPrimaryLight;
+    }
+  }
+
+  .toggle-indicator {
+    position: absolute;
+    left: 0;
+    display: block;
+    user-select: none;
+    background-color: $neutral30;
+    transition: background-color $duration $timing;
+
+    .bg-neutral90 &,
+    .form-callout & {
+      background-color: $neutralUIDark;
+    }
+  }
+
+  &.checkbox {
+    // To match indicator
+    line-height: 1.563em;
+
+    .toggle-indicator {
+      width: 1.563em;
+      height: 1.563em;
+      padding: 0.438em 0.375em;
+    }
+  }
+
+  &.radio {
+    line-height: 1.25em;
+
+    input[type='radio'] {
+      &:focus-visible ~ .toggle-label {
+        @include defaultFocusStyle;
+        outline-color: $defaultFocusColor;
+        outline-offset: 2px;
+      }
+    }
+
+    .toggle-label {
+      font-size: 14px;
+    }
+
+    + .toggle-instructions {
+      @include templateCopy;
+      display: block;
+      padding-left: 33px;
+      margin-top: 6px;
+      font-size: 16px;
+      font-style: italic;
+      text-transform: none;
+
+      + .form-toggle.radio {
+        margin-top: 16px;
+      }
+    }
+
+    .toggle-indicator {
+      width: 1.25em;
+      height: 1.25em;
+      padding-top: 0.313em;
+      text-align: center;
+      border-radius: 100%;
+
+      &::before {
+        display: inline-block;
+        width: 0.625em;
+        height: 0.625em;
+        vertical-align: top;
+        content: '';
+        background-color: $neutral90;
+        border-radius: 100%;
+        opacity: 0;
+        transition: opacity $duration $timing;
+      }
+    }
+
+    &.checked .toggle-indicator {
+      background-color: $accentPrimaryLight;
+    }
+
+    &.inline {
+      display: block;
+      font-size: 16px;
+
+      @include respond($break50) {
+        display: inline-block;
+
+        + .radio {
+          margin-top: 0;
+          margin-left: 35px;
+        }
+      }
+    }
+  }
+
+  .toggle-note {
+    @include templateCopy;
+    display: block;
+    margin-top: 13px;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.375;
+  }
+
+  &.checked .toggle-indicator {
+    // For radio buttons
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.form-switch {
+  position: relative;
+  display: block;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+    &:focus-visible ~ .toggle-indicator .boolean-primary {
+      @include defaultFocusStyle;
+      outline-color: $defaultFocusColor;
+      outline-offset: 2px;
+    }
+  }
+}
+
+// Form Date Input
+// --------------------------
+.form-date {
+  .input-day {
+    margin-left: 15px;
+  }
+
+  .form-input {
+    position: relative;
+    display: inline-block;
+    margin-left: 15px;
+    vertical-align: bottom;
+
+    .input-year {
+      .form-primary & {
+        display: inline;
+        width: calc(91vw - 242px);
+        min-width: 49px;
+        max-width: 100px;
+
+        @include respond($break40) {
+          width: calc(91vw - 372px);
+        }
+      }
+    }
+  }
+}
+
+// Form DatePicker
+// --------------------------
+.form-date-picker,
+.range-picker {
+  position: relative;
+
+  &__button {
+    @include utilityPrimary;
+    @include buttonUnstyled;
+    position: absolute;
+    right: 0;
+    bottom: 1em;
+    z-index: 10;
+    font-size: 12px;
+
+    @include respond($break60) {
+      bottom: 1.45em;
+    }
+  }
+
+  .react-datepicker {
+    @include templateHead;
+    color: var(--default-color);
+    background-color: transparent;
+    border: none;
+    box-shadow: 10px 31px 44px 2px rgba($neutralBlack, 0.13);
+
+    &-wrapper {
+      width: 100%;
+    }
+
+    &__triangle {
+      display: none;
+    }
+
+    &__navigation {
+      top: 9px;
+      width: auto;
+      height: auto;
+      font-size: 16px;
+      line-height: 1;
+      text-indent: unset;
+      background-color: transparent;
+      border: none;
+
+      &--previous {
+        left: 20px;
+      }
+
+      &--next {
+        right: 20px;
+      }
+    }
+
+    &__input-container {
+      display: block;
+    }
+
+    &__close-icon {
+      display: none;
+    }
+
+    &__header {
+      background-color: $neutral110;
+      border: none;
+
+      .browse &,
+      .reader.scheme-light &,
+      .bg-white & {
+        background-color: var(--box-medium-bg-color);
+      }
+    }
+
+    &__current-month {
+      color: var(--default-strong-color);
+    }
+
+    &__day-name {
+      color: inherit;
+    }
+
+    &__month-container {
+      background-color: var(--box-bg-color);
+      border-radius: 8px;
+    }
+
+    &__day {
+      height: 1.7rem;
+      line-height: 1.45rem;
+      line-height: 1.45rem;
+      color: inherit;
+      border: 1px solid transparent;
+      border-radius: 50%;
+      transition: color $duration $timing, border-color $duration $timing,
+        background-color $duration $timing;
+
+      &--keyboard-selected,
+      &--selected {
+        @include defaultHoverStyle;
+        background-color: var(--box-x-strong-bg-color);
+      }
+
+      &:hover {
+        @include defaultHoverStyle;
+        background-color: var(--box-strong-bg-color);
+      }
+    }
+  }
+}
+
+// Form Callout
+// --------------------------
+.form-callout {
+  padding: 54px 30px;
+  background-color: $neutral10;
+
+  header {
+    @include formLabelPrimary;
+    padding-bottom: 53px;
+    text-align: center;
+  }
+
+  + .form-input {
+    margin-top: 40px;
+  }
+}
+
+// Form Column Mapping (used for mapping CSV, Spreadsheet assets)
+// --------------------------
+.form-column-map {
+  @include respond($break80) {
+    display: flex;
+    margin-left: -35px;
+  }
+
+  .column {
+    @include respond($break80) {
+      padding-left: 35px;
+    }
+
+    + .column {
+      margin-top: 30px;
+
+      @include respond($break80) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .column-mappable {
+    flex-grow: 1;
+    width: 100%;
+
+    @include respond($break80) {
+      width: calc(100% - 28vw);
+    }
+
+    @include respond($break85) {
+      width: calc(100% - 29vw);
+    }
+
+    @include respond($break110) {
+      width: calc(100% - 360px);
+    }
+  }
+
+  // Group of draggable, available columns
+  .available {
+    max-height: 700px;
+    padding: 0.8em;
+    margin-top: 10px;
+    overflow-y: scroll;
+    font-size: 14px;
+    user-select: none;
+    background-color: $neutral85;
+
+    @include respond($break50) {
+      margin-top: 15px;
+    }
+
+    @include respond($break90) {
+      font-size: 16px;
+    }
+
+    .form-column-listing + .form-column-listing {
+      margin-top: 0.8em;
+    }
+  }
+
+  // <ul> of dragging wells with labels
+  .mappable {
+    @include listUnstyled;
+    max-height: 700px;
+    padding: 0.8em;
+    margin-top: 10px;
+    overflow-y: scroll;
+    font-size: 14px;
+    background-color: $neutralUIExtraDark;
+
+    @include respond($break50) {
+      margin-top: 15px;
+    }
+
+    @include respond($break90) {
+      font-size: 16px;
+    }
+
+    li + li {
+      margin-top: calc(0.8em - 2px);
+    }
+
+    .mapping {
+      @include clearfix;
+      @include templateHead;
+      position: relative;
+      width: 100%;
+
+      .column-label {
+        position: relative;
+        float: left;
+        width: 50%;
+        padding: 0.6em 0.8em;
+        font-weight: $medium;
+        color: $neutralTextExtraDark;
+        background-color: $neutral40;
+
+        @include respond($break80) {
+          width: calc(100% - 21vw);
+        }
+
+        @include respond($break85) {
+          width: calc(100% - 23vw);
+        }
+
+        @include respond($break110) {
+          width: calc(100% - 300px);
+        }
+
+        .truncate {
+          display: block;
+          max-width: 350px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        &::after {
+          position: absolute;
+          top: 0;
+          right: -1em;
+          z-index: 10; // Local z-index
+          width: 0;
+          height: 0;
+          content: '';
+          border-color: transparent transparent transparent $neutral40;
+          border-style: solid;
+          border-width: 1.2em 0 1.2em 1em;
+        }
+      }
+    }
+
+    .well {
+      float: left;
+      width: 50%;
+
+      @include respond($break80) {
+        width: 21vw;
+      }
+
+      @include respond($break85) {
+        width: 23vw;
+      }
+
+      @include respond($break110) {
+        width: 300px;
+      }
+
+      &::before {
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        pointer-events: none;
+        content: '';
+        background: transparent;
+        border: 2px solid $neutralUIExtraDark;
+      }
+
+      &.drag-over::before {
+        border-color: $accentPrimary;
+      }
+
+      &.matched {
+        .placeholder {
+          position: absolute;
+        }
+      }
+
+      @keyframes cancelAppear {
+        0% {
+          visibility: hidden;
+          opacity: 0;
+        }
+
+        1% {
+          visibility: visible;
+          opacity: 0;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+
+      // Show cancel buttons inside mappings
+      .cancel {
+        visibility: visible;
+        opacity: 1;
+        animation: cancelAppear $durationFast $timing 0s 1;
+      }
+    }
+
+    .placeholder {
+      top: 0;
+      z-index: -1;
+      display: block;
+      padding: 0.6em 0.8em 0.6em 1.6em;
+      color: $neutral45;
+    }
+
+    [data-rbd-placeholder-context-id] {
+      height: 0 !important; /* stylelint-disable-line declaration-no-important */
+    }
+  }
+}
+
+.form-column-listing {
+  position: relative;
+
+  .cancel {
+    @include buttonUnstyled;
+    @include outlineOnFocusVisible($defaultErrorColor);
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 38px;
+    height: 100%;
+    font-size: 0;
+    color: $neutralTextExtraDark;
+    transform: translateY(-50%);
+
+    &:hover {
+      color: $defaultErrorColor;
+    }
+
+    &:focus-visible {
+      outline-offset: -4px;
+    }
+  }
+}
+
+// Declared globally so it can be used during drag
+.form-column-available {
+  position: relative;
+  width: 100%;
+  padding-left: calc(1em - 1px);
+  list-style: none;
+  outline: none;
+
+  @include respond($break80) {
+    width: 21vw;
+  }
+
+  @include respond($break85) {
+    width: 23vw;
+  }
+
+  @include respond($break110) {
+    width: 300px;
+  }
+
+  .text {
+    @include templateHead;
+    display: block;
+    padding: 0.6em 0.8em;
+    overflow: hidden;
+    font-weight: $semibold;
+    color: $neutralTextExtraDark;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: $neutral05;
+    transition: background-color $duration $timing;
+
+    .matched & {
+      padding-right: 40px;
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    .text {
+      background-color: $accentPrimaryPale;
+    }
+
+    &::before {
+      border-color: $accentPrimaryPale transparent transparent transparent;
+    }
+
+    &::after {
+      border-color: transparent transparent $accentPrimaryPale transparent;
+    }
+  }
+
+  // Flag edge
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    content: '';
+    border-color: $neutral05 transparent transparent transparent;
+    border-style: solid;
+    border-width: 1.2em 0 1.2em 1em;
+    transition: border-color $duration $timing;
+  }
+
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    content: '';
+    border-color: transparent transparent $neutral05 transparent;
+    border-style: solid;
+    border-width: 1.2em 0 1.2em 1em;
+    transition: border-color $duration $timing;
+  }
+}

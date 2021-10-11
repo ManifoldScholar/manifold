@@ -7,7 +7,9 @@ export default `
 
   .browse,
   .scheme-light,
-  .bg-white {
+  .bg-white,
+  .bg-neutral05,
+  .bg-neutral10 {
     --color: var(--color-neutral-text-dark);
     --background-color: var(--color-base-neutral-white);
     --strong-color: var(--color-neutral-text-extra-dark);

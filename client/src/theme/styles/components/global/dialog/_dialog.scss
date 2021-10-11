@@ -1,0 +1,88 @@
+.dialog {
+  @include utilityPrimary;
+  position: relative;
+  width: 100%;
+  max-width: 880px;
+  padding: dialog(padding-top) 6.818% dialog(padding-bottom);
+  margin: 0 auto;
+  text-transform: none;
+  letter-spacing: 0;
+  box-shadow: 0 31px 44px 2px rgba($neutralBlack, 0.13);
+
+  @include respond($break90) {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+
+  .backend & {
+    --default-hover-color: #{$accentInteractionLight};
+
+    @include panelRoundedDark;
+  }
+
+  .browse &,
+  .reader & {
+    @include panelRounded;
+  }
+
+  &__header {
+    padding: 11px 0 22px;
+
+    h1, h2, h3, h4, h5, h6 {
+      @include templateHead;
+      margin: 0;
+      font-size: 22px;
+      hyphens: none;
+
+      .backend & {
+        color: $neutralWhite;
+      }
+    }
+  }
+
+  &__body {
+    margin-top: 34px;
+    margin-bottom: 0;
+
+    .buttons-icon-horizontal {
+      margin-bottom: 0;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: auto;
+    right: 32px;
+    cursor: pointer;
+  }
+
+  // Special centering for form submits
+  .form-input.submit {
+    text-align: center;
+  }
+
+  p:not([class]) {
+    font-size: 18px;
+    font-weight: $regular;
+  }
+}
+
+.dialog.dialog-error {
+  max-width: 500px;
+
+  .backend & {
+    font-weight: $regular;
+    color: $neutral90;
+    background-color: $spErrorExtraLight;
+  }
+
+  .dialog__header {
+    h1, h2, h3, h4, h5, h6 {
+      color: inherit;
+    }
+  }
+
+  .close-button-primary {
+    color: inherit;
+  }
+}

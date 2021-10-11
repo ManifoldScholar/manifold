@@ -1,0 +1,69 @@
+// Site navigation menu in site header
+//===============
+
+.site-nav {
+  @include respond($break75) {
+    margin-left: 25px;
+  }
+
+  &__list {
+    @include listHorizontal;
+  }
+
+  &__item {
+    margin-right: 18px;
+    margin-bottom: header-layout(padding-vertical-mobile);
+
+    @include respond($break40) {
+      margin-right: 25px;
+      margin-bottom: header-layout(padding-vertical-desktop);
+    }
+  }
+
+  &__link {
+    @include templateHead;
+    position: relative;
+    font-size: 14px;
+    text-decoration: none;
+
+    @include respond($break40) {
+      font-size: 16px;
+    }
+
+    &--active {
+      color: $headerForegroundActiveColor;
+
+      .site-nav--backend & {
+        color: $neutralWhite;
+      }
+
+      &::before {
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 2px;
+        content: '';
+        background-color: $neutral90;
+
+        .site-nav--backend & {
+          display: none;
+        }
+      }
+
+      &:focus-visible {
+        @include outlineOnFocusVisible;
+        outline-offset: 2px;
+      }
+
+      &:hover {
+        color: $headerForegroundActiveColor;
+
+        .site-nav--backend & {
+          color: $neutralWhite;
+        }
+      }
+    }
+  }
+}

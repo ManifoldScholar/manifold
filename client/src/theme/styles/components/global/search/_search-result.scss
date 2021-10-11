@@ -1,0 +1,196 @@
+.search-result {
+  @include templateCopy;
+  padding: 29px 20px 23px;
+
+  mark {
+    background-color: $spWarningExtraLight;
+  }
+
+  a, a:visited {
+    color: $neutralTextExtraDark;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  & + & {
+    border-top: 1px solid $neutralUIDullDark;
+  }
+
+  &__wrapper-link {
+    text-decoration: none;
+  }
+
+  &__content-wrapper {
+    display: flex;
+  }
+
+  &__figure-column {
+    display: none;
+    padding-right: 5px;
+
+    @include respond($break60) {
+      display: block;
+      padding-right: 15px;
+    }
+  }
+
+
+  &__text-column {
+    width: 100%;
+  }
+
+  &__text-column-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  &__text-column-top-left {
+    flex-grow: 1;
+    padding-right: 20px;
+    margin-bottom: 16px;
+  }
+
+  &__text-column-top-right {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    margin-top: 2px;
+    text-align: right;
+  }
+
+  &__label {
+    @include marker;
+  }
+
+  &__collecting-toggle {
+    margin-left: 10px;
+    transform: translateY(-1px);
+  }
+
+  &__title-link {
+    display: block;
+    margin: 0 0 16px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__title {
+    @include templateHead;
+    margin: 0;
+    font-size: 21px;
+    font-weight: $semibold;
+  }
+
+  &__subtitle {
+    color: $neutralTextDark;
+  }
+
+  &__parent {
+    @include templateHead;
+    margin: 0 0 12px;
+    font-size: 18px;
+    font-weight: $semibold;
+    color: $neutralTextDark;
+
+    a, a:visited {
+      color: inherit;
+    }
+  }
+
+  &__description {
+    @include templateCopy;
+    margin-bottom: 16px;
+    line-height: 23px;
+  }
+
+  &__meta {
+    font-style: italic;
+  }
+
+  &__attribution {
+    @include templateCopy;
+    font-style: normal;
+  }
+
+  // A few portrait SVGs need a little tweak to make them wider so they line up.
+  svg.search-result--figure-narrow-svg {
+    max-width: 76px;
+    margin-left: -10px;
+  }
+
+  &__figure {
+    position: relative;
+    width: 76px;
+
+    img {
+      margin-top: 6px;
+    }
+
+    img, svg {
+      max-width: 56px;
+      color: $neutralUIDark;
+    }
+
+  }
+
+  img.search-result__avatar {
+    border: 2px solid $neutral50;
+    border-radius: 50%;
+  }
+
+  .search-result__avatar svg {
+    position: relative;
+    left: -6px;
+    width: 68px;
+    max-width: 68px;
+    height: 68px;
+  }
+
+
+  &__excerpt-open-button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    margin-top: 30px;
+    font-size: 13px;
+    font-weight: $semibold;
+  }
+
+  &__excerpt-shim {
+    min-height: 25px;
+  }
+
+  &__excerpt {
+    margin: 0;
+    font-size: 16px;
+    line-height: 23px;
+    border-left: 4px solid $neutralUIDullDark;
+
+    &:hover,
+    &:focus-visible {
+      background-color: $neutral05;
+      outline: 0;
+    }
+
+    a {
+      display: block;
+      padding: 10px 31px 10px 28px;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+  }
+
+  .search-result__excerpt + .search-result__excerpt {
+    margin-top: 25px;
+  }
+
+}

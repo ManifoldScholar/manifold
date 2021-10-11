@@ -1,0 +1,97 @@
+.checkbox {
+  @include defaultHoverState;
+  position: relative;
+  display: block;
+  cursor: pointer;
+
+  &--white {
+    &:hover {
+      color: $neutral90;
+    }
+  }
+
+  @include respond($break20) {
+    display: inline-block;
+  }
+
+  @include respond($break50) {
+    & + & {
+      margin-left: 32px;
+    }
+  }
+
+  + .instructions {
+    display: inline-block;
+  }
+
+  &__indicator {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: $neutralWhite;
+    border-radius: 3px;
+
+    .checkbox--gray & {
+      background-color: $neutral20;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    top: 1px;
+    color: $neutralWhite;
+    visibility: hidden;
+
+    .checkbox--gray &,
+    .checkbox--white & {
+      color: $neutral90;
+    }
+
+    .checkbox.checked & {
+      visibility: visible;
+    }
+  }
+
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  input:checked ~ .checkbox__indicator {
+    background-color: $accentPrimary;
+
+    .checkbox__icon {
+      visibility: visible;
+    }
+  }
+
+  &--gray {
+    input:checked ~ .checkbox__indicator {
+      background-color: $neutral20;
+    }
+  }
+
+  &--white {
+    input:checked ~ .checkbox__indicator {
+      background-color: $neutralWhite;
+    }
+  }
+
+  input:focus-visible {
+    outline: 0;
+
+    ~ .checkbox__indicator {
+      @include defaultFocusStyle;
+    }
+  }
+}
+
+.checkbox-wrapper {
+  &--inline {
+    display: inline;
+  }
+}
