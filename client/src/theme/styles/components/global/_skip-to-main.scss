@@ -1,0 +1,23 @@
+.skip-to-main {
+  @include buttonUnstyled;
+  @include utilityPrimary;
+  position: fixed;
+  top: 0;
+  left: -400px;
+  width: auto;
+  height: auto;
+  padding: 14px 18px;
+  margin: 0;
+  clip: unset;
+  font-size: 15px;
+  color: $accentPrimary;
+  text-decoration: none;
+  background: $neutral85;
+  opacity: 0.95;
+  transition: left $durationSlow $timing;
+
+  &:focus-visible {
+    left: 0;
+    outline-offset: -3px;
+  }
+}

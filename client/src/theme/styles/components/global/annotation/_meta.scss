@@ -1,0 +1,76 @@
+.annotation-meta {
+  @include drawerIndent(padding-left);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  margin-bottom: 10px;
+
+  @include respond($break50) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &:only-child {
+    margin-bottom: 0;
+  }
+
+  &__avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: annotation-list(avatar-height);
+    height: annotation-list(avatar-height);
+    color: $neutralUIDark;
+
+    &--dull {
+      color: $neutral20;
+      cursor: default;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__avatar-placeholder-container {
+    width: annotation-list(avatar-placeholder-width);
+    margin-left: annotation-list(avatar-placeholder-margin-inline-start);
+  }
+
+  &__avatar-image-container {
+    width: 32px;
+    border: 1px solid $neutral50;
+    border-radius: 100%;
+  }
+
+  &__author-name {
+    @include templateHead;
+    margin: 0;
+    font-weight: $semibold;
+    hyphens: none;
+    color: var(--default-strong-color);
+  }
+
+  &__deleted-message {
+    @include subtitlePrimary;
+    margin-top: 8px;
+    margin-bottom: 11px;
+  }
+
+  &__datetime,
+  &__subtitle {
+    @include subtitlePrimary;
+    margin-top: 2px;
+  }
+
+  .markers {
+    display: flex;
+    padding-top: 6px;
+
+    @include respond($break50) {
+      padding: 0;
+    }
+  }
+}

@@ -1,0 +1,142 @@
+// User Menu button and panel global styles
+.button-avatar {
+  @include buttonUnstyled;
+  height: 100%;
+  vertical-align: middle;
+
+  .avatar {
+    @include buttonAvatar(32, var(--header-foreground-color, $neutralTextDark));
+  }
+
+  &--frontend,
+  &--backend {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    .avatar {
+      transition: color $duration $timing;
+    }
+
+    &:hover,
+    &.button-active {
+      .avatar {
+        @include defaultHoverStyle;
+      }
+    }
+  }
+
+  &--frontend {
+    &:focus-visible {
+      outline: 0;
+
+      .avatar {
+        @include defaultHoverStyle;
+      }
+    }
+  }
+
+  &--reader {
+    .avatar {
+      color: inherit;
+    }
+  }
+
+  svg {
+    color: inherit;
+  }
+}
+
+// Global styles
+.user-menu {
+  $menuWidth: 251px;
+  $tailHeight: 17px;
+
+  // browse styles
+  position: absolute;
+  right: -20px;
+  color: $neutralTextDark;
+  white-space: nowrap;
+  background-color: $neutral05;
+
+  &--frontend,
+  &--backend {
+    z-index: 1; // ensure menu is on top of .header-app
+    min-width: $menuWidth;
+    border-radius: $panelRoundedRadius;
+    box-shadow: 5px 15px 35px 8px rgba($neutralBlack, 0.13);
+  }
+
+  &--reader {
+    width: 100%;
+
+    @include respond($break50) {
+      width: auto;
+    }
+  }
+
+  &__tail {
+    @include tailUp($neutral05, $tailHeight);
+    position: absolute;
+    top: -$tailHeight;
+    right: 25px;
+  }
+
+  &__list {
+    @include listUnstyled;
+    padding-top: 11px;
+    padding-bottom: 15px;
+  }
+
+  &__item {
+    @include templateHead;
+    font-size: 16px;
+  }
+
+  &__link {
+    @include buttonUnstyled;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 8px 20px;
+    text-decoration: none;
+    transition: color $duration $timing, background-color $duration $timing;
+
+    &:hover,
+    &:focus-visible {
+      color: $neutral90;
+
+      .user-menu--reader & {
+        background-color: $neutral30;
+      }
+    }
+
+    &:focus-visible {
+      background-color: $neutral30;
+      outline: 0;
+    }
+  }
+
+  &__link-text {
+  }
+
+  &__icon {
+    position: relative;
+    top: 2px;
+    margin-right: 10px;
+    transition: color $duration $timing;
+
+    .user-menu--frontend &,
+    .user-menu--backend & {
+      color: $neutralUIDark;
+    }
+
+    .user-menu__link:hover &,
+    .user-menu__link:focus-visible & {
+      color: $neutral90;
+    }
+  }
+
+  @include respond($break40) {
+    right: -24px;
+  }
+}

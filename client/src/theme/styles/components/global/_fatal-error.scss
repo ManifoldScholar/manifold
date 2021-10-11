@@ -1,0 +1,137 @@
+/* stylelint-disable */
+body.fatal-error-page {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  #content {
+    flex-grow: 1;
+    min-height: 100%;
+  }
+}
+/* stylelint-enable */
+
+.fatal-error {
+  min-height: 100%;
+  border: 20px solid $defaultErrorColor;
+
+  .error-wrapper {
+    padding: 10vh 4vh 4vh;
+    vertical-align: middle;
+  }
+
+  .container {
+    max-width: $containerWidthFocus;
+    text-align: center;
+  }
+
+  &__stop-icon {
+    margin-bottom: 20px;
+    color: $defaultErrorColor;
+  }
+
+  header {
+    // Relative to font-size
+    margin-bottom: 1.375em;
+    font-size: 24px;
+
+    @include respond($break60) {
+      font-size: 32px;
+    }
+
+    h3 {
+      @include templateHead;
+      margin: 0;
+      // Relative to font-size declared in parent
+      font-size: 1em;
+      font-weight: $regular;
+      line-height: 1.333;
+      color: $neutral50;
+    }
+  }
+
+  .error-description {
+    h1 {
+      @include templateHead;
+      font-size: 20px;
+      font-weight: $regular;
+      color: $neutral90;
+
+      @include respond($break60) {
+        font-size: 24px;
+      }
+
+      .backend & {
+        color: $neutral05;
+      }
+    }
+
+    p {
+      @include subtitlePrimary;
+      font-size: 18px;
+      line-height: 1.421;
+      color: $neutral75;
+
+      .backend & {
+        color: $neutral20;
+      }
+
+      .dismiss {
+        @include buttonUnstyled;
+        margin-top: 10px;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+    }
+  }
+
+  .stacks {
+    margin-top: 5vh;
+    font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+
+    .stack + .stack {
+      margin-top: 50px;
+    }
+
+    h3 {
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .footnote {
+      display: block;
+      font-size: 12px;
+      font-style: italic;
+      color: $neutral40;
+      text-align: center;
+    }
+
+    ol {
+      background-color: $neutral05;
+      padding-inline-start: 50px;
+
+      li {
+        padding: 5px;
+      }
+
+      li:nth-child(even) {
+        background-color: darken($neutral05, 2.5);
+      }
+
+      span.highlight {
+        color: $defaultErrorColor;
+      }
+
+      span.location {
+        display: block;
+        padding-top: 4px;
+        font-size: 13px;
+      }
+
+    }
+
+  }
+
+
+}

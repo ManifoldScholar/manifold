@@ -1,0 +1,54 @@
+.overlay-full {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 48px;
+  overflow: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  @include respond($break60) {
+    padding-bottom: 80px;
+  }
+
+  @include respond($break75) {
+    padding-bottom: 110px;
+  }
+
+  // Background default
+  &:not([class*='bg-']) {
+    background-color: $neutralWhite;
+  }
+
+  .overlay-full-header + * {
+    padding-top: 50px;
+  }
+
+  .overlay-full-appear & {
+    opacity: 0.01;
+  }
+
+  .overlay-full-appear.overlay-full-appear-active & {
+    opacity: 1;
+    transition: opacity $duration $timing;
+  }
+
+  .overlay-full-enter & {
+    opacity: 0.01;
+  }
+
+  .overlay-full-enter.overlay-full-enter-active & {
+    opacity: 1;
+    transition: opacity $duration $timing;
+  }
+
+  .overlay-full-exit & {
+    opacity: 1;
+  }
+
+  .overlay-full-exit.overlay-full-exit-active & {
+    opacity: 0.01;
+    transition: opacity $duration $timing;
+  }
+}

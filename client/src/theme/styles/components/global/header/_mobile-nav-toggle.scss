@@ -1,0 +1,13 @@
+.mobile-nav-toggle {
+  @include buttonUnstyled;
+  position: relative;
+
+  @include respond($break75) {
+    display: none;
+  }
+
+  &:focus-visible {
+    @include defaultHoverStyle;
+    outline: 0;
+  }
+}

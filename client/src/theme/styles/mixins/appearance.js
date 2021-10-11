@@ -36,10 +36,13 @@ export function setFocusStyle(property = "outline", value = "solid 2px") {
   `;
 }
 
-export function setHoverStyle(property = "color", value = "var(--hover-color") {
+export function setHoverStyle(
+  property = "color",
+  value = "var(--hover-color)"
+) {
   return css`
     transition: ${property} var(--transition-duration-default)
-      var(--transition-timing-export function);
+      var(--transition-timing-function);
 
     &:hover {
       ${property}: ${value};

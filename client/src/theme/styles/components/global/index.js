@@ -1,1 +1,5 @@
-export default ``;
+import assetThumbnail from "./assetThumbnail";
+
+export default `
+  ${assetThumbnail}
+`;

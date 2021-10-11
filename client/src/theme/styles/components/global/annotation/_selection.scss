@@ -1,0 +1,144 @@
+.annotation-selection {
+  &__text-container {
+    @include templateHead;
+    @include drawerPadding(padding-right);
+    @include drawerPadding(padding-left);
+    font-size: 16px;
+    line-height: 1.3;
+    color: var(--default-strong-color);
+    word-wrap: break-word;
+    transition: background-color $duration $timing;
+
+    @include respond($break80) {
+      font-size: 18px;
+    }
+
+    &--dark {
+      padding-top: 23px;
+      padding-bottom: 23px;
+      background-color: var(--box-medium-bg-color);
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+
+      @include respond($break80) {
+        padding-top: 31px;
+        padding-bottom: 25px;
+      }
+
+      &.annotation-selection__text-container--hovering {
+        background-color: var(--box-strong-bg-color);
+      }
+    }
+
+    &--light {
+      padding-top: 30px;
+      padding-bottom: 26px;
+      background-color: var(--box-bg-color);
+
+      @include respond($break80) {
+        padding-top: 41px;
+        padding-bottom: 34px;
+      }
+
+      &.annotation-selection__text-container--hovering {
+        background-color: var(--box-medium-bg-color);
+      }
+    }
+
+    &--rounded-corners {
+      border-radius: $panelRoundedRadius;
+    }
+
+    &--hovering {
+      position: relative;
+
+      .truncated__wrapper--blur {
+        &::after {
+          opacity: 1;
+        }
+      }
+
+      .annotation-selection__arrow-icon {
+        transform: translateX(20%);
+      }
+    }
+  }
+
+  &__highlight-text {
+    width: 100%;
+    line-height: 1.6;
+    background-color: $spHighlightPrimaryPale;
+  }
+
+  &__container {
+    @include drawerIndent(padding-left);
+    position: relative;
+    padding-right: 0; // OD
+  }
+
+  &__icon {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    color: $accentPrimary;
+
+    &--flipped {
+      transform: rotateX(180deg);
+      transform: rotateX(180deg) translateZ(-1px);
+    }
+  }
+
+  &__button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    @include drawerIndent(margin-left);
+    display: block;
+    margin-top: 20px;
+    font-size: 13px;
+    color: $defaultHoverColor;
+  }
+
+  &__button-absolute {
+    @include buttonUnstyled;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__source-summary {
+    padding-top: 10px;
+  }
+
+  &__source-summary-link {
+    display: flex;
+    color: var(--default-color);
+    text-decoration: none;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+
+  &__source-summary-text {
+    @include templateCopy;
+    font-size: 14px;
+
+    @include respond($break80) {
+      font-size: 16px;
+    }
+  }
+
+  &__arrow-icon {
+    position: relative;
+    top: -2px;
+    flex-shrink: 0;
+    margin-left: 12px;
+    transition: transform $duration $timing;
+  }
+
+  &__action-buttons {
+    position: relative;
+  }
+}

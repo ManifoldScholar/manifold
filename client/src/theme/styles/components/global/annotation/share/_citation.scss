@@ -1,0 +1,65 @@
+.citation {
+  padding-top: 28px;
+
+  &__radios {
+    display: block;
+    padding: 0;
+    margin: 0;
+    color: $neutral50;
+    border: none;
+  }
+
+  &__legend {
+    @include utilityPrimary;
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+
+  &__radio {
+    @include utilityPrimary;
+    position: relative;
+    font-size: 14px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition:
+      color $duration $timing,
+      border-color $duration $timing;
+
+    &:hover,
+    &--active {
+      color: $neutralBlack;
+      border-color: $neutralBlack;
+    }
+
+    & + & {
+      margin-left: 24px;
+    }
+  }
+
+  &__input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+    &:focus-visible ~ .citation__label {
+      @include defaultFocusStyle;
+      outline-offset: 4px;
+    }
+  }
+
+  &__notice {
+    @include formInputMessage;
+    color: $defaultErrorColor;
+  }
+
+  &__copyable {
+    @include formInputPrimary;
+    width: 100%;
+    padding: 1.2em 1.5em;
+    margin-top: 32px;
+    margin-bottom: 20px;
+    color: $neutral90;
+    background-color: $neutral10;
+    border-radius: $panelRoundedRadius;
+  }
+}

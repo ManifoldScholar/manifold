@@ -22,6 +22,10 @@ export default css`
     background-color: var(--color-base-neutral05);
   }
 
+  .bg-neutral10 {
+    background-color: var(--color-base-neutral10);
+  }
+
   .bg-neutral90 {
     background-color: var(--color-base-neutral90);
   }

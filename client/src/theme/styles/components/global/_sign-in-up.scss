@@ -1,0 +1,30 @@
+.sign-in-up-update {
+  .form-group + .form-group {
+    margin-top: 0;
+
+    @include respond($break60) {
+      margin-top: 40px;
+    }
+  }
+
+  .nickname {
+    @include headingPrimary;
+    margin-bottom: 30px;
+    color: $accentPrimary;
+  }
+
+  .overlay-copy {
+    margin-bottom: 20px;
+  }
+
+  .form-heading-image {
+    @include headingPrimary;
+    margin-top: 60px;
+    margin-bottom: 20px;
+  }
+
+  .avatar {
+    @include buttonAvatar(65);
+    margin: 25px auto;
+  }
+}
