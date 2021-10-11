@@ -12,7 +12,9 @@ export const ItemLink = styled(Link)`
   color: inherit;
   text-decoration: none;
   transition: background-color var(--transition-duration-default)
-    var(--transition-timing-function);
+      var(--transition-timing-function),
+    box-shadow var(--transition-duration-default)
+      var(--transition-timing-function);
 
   &:hover {
     color: inherit;
