@@ -1,6 +1,7 @@
 import React from "react";
 import { storiesOf, fixtures } from "helpers/storybook/exports";
 import ThumbnailGrid from "..";
+import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import shuffle from "lodash/shuffle";
 
 const issues = fixtures
@@ -20,28 +21,43 @@ const projects = fixtures.collectionFactory("project", 3).map(issue => {
 });
 const journals = fixtures.collectionFactory("journal", 3);
 const user = fixtures.entities.user();
+const entities = shuffle(projects.concat(journals).concat(issues));
 
 storiesOf("Global/ThumbnailGrid", module)
   .add("Grid", () => {
     return (
-      <div style={{ padding: "5% 10%" }}>
-        <ThumbnailGrid
-          entities={shuffle(projects.concat(journals).concat(issues))}
-          userMock={user}
-          onUncollect={() => console.log("clicked uncollect")}
-        />
+      <div style={{ padding: "5% 10%" }} className="bg-white">
+        <ThumbnailGrid>
+          {entities.map(item => (
+            <EntityThumbnail
+              entity={item}
+              userMock={user}
+              onUncollect={() => console.log("clicked uncollect")}
+            />
+          ))}
+        </ThumbnailGrid>
       </div>
     );
   })
   .add("List", () => {
     return (
-      <div style={{ padding: "5% 10%", width: "500px" }}>
-        <ThumbnailGrid
-          entities={shuffle(projects.concat(journals).concat(issues))}
-          userMock={user}
-          onUncollect={() => console.log("clicked uncollect")}
-          grid={false}
-        />
+      <div style={{ padding: "5% 10%", width: "400px" }} className="bg-white">
+        <ThumbnailGrid>
+          {entities.map(item => (
+            <EntityThumbnail
+              entity={item}
+              userMock={user}
+              onUncollect={() => console.log("clicked uncollect")}
+            />
+          ))}
+        </ThumbnailGrid>
+      </div>
+    );
+  })
+  .add("Empty", () => {
+    return (
+      <div style={{ padding: "5% 10%" }} className="bg-white">
+        <ThumbnailGrid />
       </div>
     );
   });
