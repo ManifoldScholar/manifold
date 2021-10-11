@@ -79,9 +79,16 @@ module.exports = async ({ config, mode }) => {
     path.resolve(__dirname, "../", "src"),
     "node_modules"
   ];
-  config.resolve.alias.userVariables$ = sassNoOp;
-  config.resolve.alias.userStyles$ = sassNoOp;
-  config.resolve.alias.plugins$ = pluginNoOp;
+  config.resolve.alias = {
+    ...config.resolve.alias,
+    userVariables$: sassNoOp,
+    userStyles$: sassNoOp,
+    plugins$: pluginNoOp,
+    "hooks/use-current-user": path.resolve(
+      __dirname,
+      "./__mocks__/useCurrentUser"
+    )
+  };
 
   // Return the altered config
   return config;

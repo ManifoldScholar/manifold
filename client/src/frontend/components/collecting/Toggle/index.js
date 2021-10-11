@@ -10,7 +10,7 @@ import Dialog from "frontend/components/collecting/Dialog";
 import Text from "./Text";
 import Icons from "./Icons";
 import { inCollections } from "../helpers";
-import { useCurrentUser } from "hooks";
+import useCurrentUser from "hooks/use-current-user";
 
 const { request } = entityStoreActions;
 
@@ -55,6 +55,7 @@ function CollectingToggle({
   }, [dialogVisible]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const currentUser = useCurrentUser(userMock);
+  console.log(currentUser);
 
   const dispatch = useDispatch();
 

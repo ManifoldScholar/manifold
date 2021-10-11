@@ -12,7 +12,6 @@ storiesOf("Global/EntityThumbnail", module)
         <EntityThumbnail
           entity={issue.data}
           onUncollect={() => console.log("clicked (un)collect")}
-          userMock={user.attributes}
           hideDesc
           stack
         />
