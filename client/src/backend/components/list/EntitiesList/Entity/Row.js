@@ -331,7 +331,7 @@ export default class EntitiesListRow extends PureComponent {
                       {this.hasLabels && <LabelSet labels={this.labels} />}
                       <span
                         id={`${id}-describedby`}
-                        className="aria-describedby"
+                        className="screen-reader-text"
                       >
                         {`View ${this.titlePlainText}`}
                       </span>

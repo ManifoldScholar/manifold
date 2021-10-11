@@ -1,8 +1,0 @@
-.header-border {
-  position: absolute;
-  width: 100%;
-  visibility: hidden;
-  border-bottom: 1px solid $neutral40;
-  opacity: 0;
-  transition: opacity $duration $timing, visibility $duration $timing;
-}

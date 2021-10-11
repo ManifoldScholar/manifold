@@ -19,7 +19,7 @@ function UserMenuBodyLink({ as = "a", to, title, srTitle, icon, onClick }) {
         <span className="user-menu__link-text">{title}</span>
       </Tag>
       {srTitle && (
-        <span id={uid} className="aria-describedby">
+        <span id={uid} className="screen-reader-text">
           {srTitle}
         </span>
       )}

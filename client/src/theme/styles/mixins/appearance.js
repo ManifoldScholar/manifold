@@ -20,7 +20,7 @@ export function show(size, display = "inherit") {
 
 // Interactions
 // --------------------
-export const defaultFocusStyle = `outline: solid 2px;`;
+export const defaultFocusStyle = `outline: solid 2px var(--focus-color);`;
 export const defaultHoverStyle = `color: var(--hover-color);`;
 
 export function setFocusStyle(property = "outline", value = "solid 2px") {
@@ -41,7 +41,7 @@ export function setHoverStyle(
 ) {
   return `
     transition: ${property} var(--transition-duration-default)
-      var(--transition-timing-export function);
+      var(--transition-timing-function);
 
     &:hover {
       ${property}: ${value};
@@ -78,6 +78,8 @@ export const screenReaderText = `
   overflow: hidden;
   clip: rect(0 0 0 0);
 `;
+
+export const defaultTransitionProps = `var(--transition-duration-default) var(--transition-timing-function)`;
 
 // Layout
 // --------------------------------------------------------
@@ -130,6 +132,29 @@ export function buttonAvatar(size = 36, color = "inherit") {
   `;
 }
 
+export const buttonTrimPrimary = `
+  ${buttonUnstyled}
+  ${utilityPrimary}
+  display: block;
+  width: 100%;
+  padding-bottom: 13px;
+  font-size: 14px;
+  text-align: left;
+
+  &:hover {
+    color: var(--color-accent-primary-medium);
+  }
+
+  &:focus-visible {
+    color: var(--color-base-neutral95);
+    outline: 0;
+  }
+
+  &:active {
+    color: var(--hover-color);
+  }
+`;
+
 export const marker = `
   display: flex;
   align-items: center;
@@ -152,7 +177,7 @@ export const blockLabelRound = `
   color: var(--color-base-neutral-white);
   background-color: var(--notice-color);
   border-radius: 3px;
-}`;
+`;
 
 // // Browser UI
 // // --------------------------------------------------------
@@ -237,7 +262,7 @@ export const inputPrimary = `
   ${inputBase}
   padding: 8px 13px 12px;
   font-size: var(--font-size-70);
-  border: 3px solid;
+  border: 3px solid var(--input-border-color);
 `;
 
 // // Dark input with border
@@ -259,17 +284,23 @@ export const inputQuaternary = `
   }
 `;
 
+export const filterSelectBase = `
+  ${unstyledSelect}
+  ${utilityPrimary}
+  padding-right: 36px;
+  padding-left: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
 export const panelRounded = `
+  color: var(--box-color);
   background-color: var(--box-bg-color);
   border-radius: var(--box-border-radius);
 `;
 
-export const panelRoundedDark = `
-  --color: var(--color-neutral-ui-light);
-
-  ${panelRounded}
-  color: var(--color);
-`;
+export const panelRoundedDark = panelRounded; // exporting separately to match Sass mixins
 
 export const roundedHeader = `
   ${panelRoundedDark}

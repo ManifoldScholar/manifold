@@ -12,9 +12,10 @@ const readerContainerWidths = ["1063px", "916px", "790px", "680px", "500px"];
 const readerContainerWidthClasses = readerContainerWidths
   .map(
     (width, index) => `
-  &.container-width-${index} {
-    ${logicalWithFallback({ "max-inline-size": width })}
-`
+    &.container-width-${index} {
+      ${logicalWithFallback({ "max-inline-size": width })}
+    }
+  `
   )
   .join("");
 
