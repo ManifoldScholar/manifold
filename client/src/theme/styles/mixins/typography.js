@@ -1,7 +1,5 @@
-import { baseColors } from "../variables/appearance";
 import { respond, fluidScale } from "./common";
-
-const Color = require("color");
+import { uriEncodeHex } from "./color";
 
 // // Headings
 // // --------------------------------------------------------
@@ -148,26 +146,25 @@ export const overlayCopy = `
 // NOTE: color must be an encoded hex for this to work, so can't pass a CSS var
 
 function underlineBgImage(style, color) {
+  const encodedColor = uriEncodeHex(color);
+
   switch (style) {
     case "dots":
-      return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4.01344 1.79315' fill='${color}'%3E%3Cpath d='M.75844,1.64657a.75456.75456,0,0,1-.755-.75.746.746,0,0,1,.745-.75h.01a.75.75,0,0,1,0,1.5'/%3E%3C/svg%3E")`;
+      return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4.01344 1.79315' fill='${encodedColor}'%3E%3Cpath d='M.75844,1.64657a.75456.75456,0,0,1-.755-.75.746.746,0,0,1,.745-.75h.01a.75.75,0,0,1,0,1.5'/%3E%3C/svg%3E")`;
     case "dashes":
-      return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 1.79315' fill='${color}'%3E%3Crect y='0.39657' width='3' height='1'/%3E%3C/svg%3E")`;
+      return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 1.79315' fill='${encodedColor}'%3E%3Crect y='0.39657' width='3' height='1'/%3E%3C/svg%3E")`;
     case "wavy":
-      return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8.28101 1.79315' fill='${color}'%3E%3Cpath d='M8.083,0A5.49633,5.49633,0,0,0,5.984.42719a4.48742,4.48742,0,0,1-1.888.366,4.48409,4.48409,0,0,1-1.891-.367A5.52606,5.52606,0,0,0,.10425,0H0V.99445a4.50067,4.50067,0,0,1,1.84491.36468,5.45027,5.45027,0,0,0,2.251.434,5.42948,5.42948,0,0,0,2.25-.435,4.48329,4.48329,0,0,1,1.888-.366c.01776,0,.02966.00219.04706.00232V0Z'/%3E%3C/svg%3E")`;
+      return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8.28101 1.79315' fill='${encodedColor}'%3E%3Cpath d='M8.083,0A5.49633,5.49633,0,0,0,5.984.42719a4.48742,4.48742,0,0,1-1.888.366,4.48409,4.48409,0,0,1-1.891-.367A5.52606,5.52606,0,0,0,.10425,0H0V.99445a4.50067,4.50067,0,0,1,1.84491.36468,5.45027,5.45027,0,0,0,2.251.434,5.42948,5.42948,0,0,0,2.25-.435,4.48329,4.48329,0,0,1,1.888-.366c.01776,0,.02966.00219.04706.00232V0Z'/%3E%3C/svg%3E")`;
     default:
-      return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8.28101 1.79315' fill='${color}'%3E%3Cpolygon points='0 1.397 8.28 1.397 8.28 0.397 0 0.397 0 1.397'/%3E%3C/svg%3E")`;
+      return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8.28101 1.79315' fill='${encodedColor}'%3E%3Cpolygon points='0 1.397 8.28 1.397 8.28 0.397 0 0.397 0 1.397'/%3E%3C/svg%3E")`;
   }
 }
 
-export function styledUnderline(style = "solid", color = baseColors.neutral75) {
-  const underlineColor = Color(color);
-  const encodedColor = underlineColor.hex().replace("#", "%23");
-
+export function styledUnderline(style = "solid", color = "neutral75") {
   return `
     background-repeat: repeat-x;
     background-position: 0% 99%;
     background-size: 8px 2.5px;
-    background-image: ${underlineBgImage(style, encodedColor)};
+    background-image: ${underlineBgImage(style, color)};
   `;
 }

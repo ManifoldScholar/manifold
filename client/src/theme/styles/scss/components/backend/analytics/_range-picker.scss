@@ -112,7 +112,7 @@
 
   &__preset {
     @include buttonUnstyled;
-    @include fillOnFocusVisible($analyticsHighlightColorPale);
+    @include fillOnFocus($analyticsHighlightColorPale);
     color: $analyticsHighlightColor;
   }
 }

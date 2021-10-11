@@ -167,7 +167,7 @@
   }
 
   &__button {
-    @include fillOnFocusVisible($accentPrimaryPale);
+    @include fillOnFocus($accentPrimaryPale);
 
     & + & {
       margin-top: 24px;

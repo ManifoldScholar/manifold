@@ -47,7 +47,7 @@ export const dialog = {
 };
 
 export const entityFilterForm = {
-  gap: "10px",
-  selectMinWidth: "200px",
-  searchMinWidth: "182px"
+  gap: 10,
+  selectMinWidth: 200,
+  searchMinWidth: 182
 };
