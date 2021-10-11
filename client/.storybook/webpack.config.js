@@ -84,7 +84,7 @@ module.exports = async ({ config, mode }) => {
     userVariables$: sassNoOp,
     userStyles$: sassNoOp,
     plugins$: pluginNoOp,
-    "hooks/use-current-user": path.resolve(
+    "hooks/user/use-current-user": path.resolve(
       __dirname,
       "./__mocks__/useCurrentUser"
     )
