@@ -39,7 +39,7 @@ export function setHoverStyle(
   property = "color",
   value = "var(--hover-color)"
 ) {
-  return css`
+  return `
     transition: ${property} var(--transition-duration-default)
       var(--transition-timing-function);
 
