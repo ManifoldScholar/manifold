@@ -1,0 +1,41 @@
+$_inner-max-width: 740px;
+$_inner-padding-lateral: max(4.5%, 20px);
+
+.collection-placeholder {
+  @include panelRounded;
+  @include templateHead;
+  font-size: 16px;
+  line-height: 1.438;
+  text-align: center;
+
+  &__inner {
+    max-width: calc(#{$_inner-max-width} + #{$_inner-padding-lateral} * 2);
+    padding: min(6.872vw, 78px) $_inner-padding-lateral min(8.37vw, 95px);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  &__heading {
+    @include headingQuaternary;
+    margin-bottom: 0.667em;
+    font-weight: $medium;
+    color: var(--default-strong-color);
+
+    &:not(:first-child) {
+      margin-top: 1.867em;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 22px;
+    margin-left: -10px;
+
+    > * {
+      margin-top: 10px;
+      margin-left: 10px;
+    }
+  }
+}

@@ -1,0 +1,285 @@
+.group-collection-editor {
+  $_category-vertical-padding: 19px;
+  $_collectable-min-height: 50px;
+  $_input-height: $_collectable-min-height;
+  $_collectable-vertical-padding: 5px;
+  $_collectable-type-vertical-padding: 10px;
+
+  --label-color: var(--default-strong-color);
+  --label-margin-bottom: 16px;
+
+  @include templateHead;
+  font-size: 17px;
+  font-weight: $medium;
+  color: var(--default-strong-color);
+
+  > * + * {
+    margin-top: $_category-vertical-padding;
+  }
+
+  &__category-creator {
+    --label-color: #{$neutral80};
+    --label-margin-bottom: 20px;
+  }
+
+  &__categories {
+    @include dropzone(18px, '--active');
+  }
+
+  &__category-wrapper {
+    padding-top: $_category-vertical-padding;
+    padding-bottom: $_category-vertical-padding;
+    margin-top: 0;
+  }
+
+  &__category {
+    @include panelRounded;
+
+    &--is-dragging {
+      @include dragging;
+    }
+  }
+
+  &__category-inner {
+    padding: 32px - $_collectable-type-vertical-padding
+      clamp(20px, 2.857vw, 32px);
+
+    &--drawer {
+      $_shadow-size: 10px;
+
+      padding-top: 40px;
+      padding-bottom: 40px;
+      box-shadow: inset 0 $_shadow-size $_shadow-size (-$_shadow-size / 2)
+        rgba($neutralBlack, 0.08),
+        inset 0 ($_shadow-size * -1) $_shadow-size (-$_shadow-size / 2)
+        rgba($neutralBlack, 0.08);
+    }
+  }
+
+  &__collectable-type {
+    @include dropzone(18px, '--active');
+    padding-top: $_collectable-type-vertical-padding;
+    padding-bottom: $_collectable-type-vertical-padding;
+  }
+
+  &__list {
+    @include listUnstyled;
+    position: relative;
+    min-height: $_collectable-min-height + $_collectable-vertical-padding * 2;
+    margin-top: -$_collectable-vertical-padding;
+    margin-bottom: -$_collectable-vertical-padding;
+  }
+
+  &__block {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: var(--box-medium-bg-color);
+
+    &--category {
+      --label-margin-bottom: 18px;
+
+      border-top-left-radius: var(--box-border-radius);
+      border-top-right-radius: var(--box-border-radius);
+    }
+
+    &--collectable {
+      padding-left: 14px;
+      border-radius: var(--box-border-radius);
+    }
+
+    &--is-dragging {
+      @include dragging;
+    }
+
+    &--empty {
+      --label-margin-bottom: 0;
+
+      align-items: center;
+      justify-content: center;
+      padding-top: 9px;
+      padding-bottom: 9px;
+      color: $neutral80;
+      border-radius: var(--box-border-radius);
+
+      > * + * {
+        margin-left: 8px;
+      }
+
+      svg {
+        transform: translateY(1px);
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-shrink: 0;
+    gap: min(1vw, 10px);
+    align-items: center;
+    margin-left: 10px;
+    color: var(--default-color);
+  }
+
+  &__collectable-actions {
+    transition: transform $duration $duration $timing;
+    transform: translateX(80px);
+
+    &--keyboard-actions-visible {
+      transition: transform $duration $timing;
+      transform: translateX(0);
+    }
+
+    @include respond($break50, max) {
+      transition: none;
+      transform: translateX(0);
+    }
+  }
+
+  &__keyboard-actions {
+    display: inherit;
+    gap: inherit;
+    align-items: inherit;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity $duration $timing,
+      visibility $duration $duration $timing;
+
+    .group-collection-editor__collectable-actions--keyboard-actions-visible & {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity $duration $duration / 2 $timing,
+        visibility $duration $duration / 2 $timing;
+    }
+
+    @include respond($break50, max) {
+      width: 0;
+      margin-left: 0;
+      transition: none;
+    }
+  }
+
+  &__action {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    font-size: 12px;
+
+    &--padded {
+      margin-right: 6px;
+      margin-left: 6px;
+    }
+  }
+
+  &__label {
+    @include utilityPrimary;
+    display: block;
+    margin-bottom: var(--label-margin-bottom, 20px);
+    font-size: 14px;
+    color: var(--label-color);
+    letter-spacing: 0.089em;
+
+    &--category {
+      @include textTruncate;
+      margin-top: 16px;
+    }
+
+    &--collectable-type {
+      margin-top: 0;
+      font-size: 13px;
+      color: inherit;
+    }
+  }
+
+  &__input-container {
+    display: flex;
+  }
+
+  &__input {
+    flex-grow: 1;
+    height: $_input-height;
+    padding: 0 20px 2px;
+    font: inherit;
+    background-color: var(--box-bg-color);
+    border: none;
+    border-top-left-radius: var(--box-border-radius);
+    border-bottom-left-radius: var(--box-border-radius);
+    appearance: none;
+
+    &::placeholder {
+      font-weight: $regular;
+      color: var(--label-color);
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &__submit-button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    display: flex;
+    align-items: center;
+    height: $_input-height;
+    padding-right: 27px;
+    padding-left: 27px;
+    font-size: 14px;
+    letter-spacing: 0.089em;
+    background-color: var(--box-medium-bg-color);
+    border-top-right-radius: var(--box-border-radius);
+    border-bottom-right-radius: var(--box-border-radius);
+    transition: color $duration $timing, background-color $duration $timing;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--default-strong-color);
+      background-color: $accentPrimaryLight;
+      outline: none;
+    }
+
+    > * + * {
+      margin-left: 0.5em;
+    }
+  }
+
+  &__collectable-wrapper {
+    padding-top: $_collectable-vertical-padding;
+    padding-bottom: $_collectable-vertical-padding;
+
+    &--empty {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: $_collectable-min-height + $_collectable-vertical-padding * 2;
+    }
+  }
+
+  &__collectable-header {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    margin-top: 6px;
+    margin-bottom: 8px;
+
+    > * + * {
+      margin-left: 15px;
+    }
+
+    svg {
+      flex-shrink: 0;
+      color: $neutral80;
+      transform: translateY(2px);
+    }
+  }
+
+  &__collectable-title {
+    @include textTruncate;
+    // prevent clipping of italics, descenders
+    padding-right: 2px;
+    padding-bottom: 1px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font: inherit;
+  }
+}
