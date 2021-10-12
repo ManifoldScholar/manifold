@@ -1,5 +1,6 @@
 import get from "lodash/get";
 import { breakpoints } from "../variables/media";
+import { containerWidth } from "../variables/layout";
 import { respond } from "./common";
 import { utilityPrimary } from "./typography";
 
@@ -16,6 +17,12 @@ export function show(size, display = "inherit") {
     display: none;
     ${respond(`display: ${display};`, breakpoint)}
   `;
+}
+
+export function fluidShrink(maxWidth, breakpoint = containerWidth.inner) {
+  /* eslint-disable radix */
+  return `min(${(parseInt(maxWidth) / parseInt(breakpoint)) *
+    100}vw, ${maxWidth})`;
 }
 
 // Interactions
