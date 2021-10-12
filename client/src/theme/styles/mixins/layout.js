@@ -1,4 +1,3 @@
-import { css } from "styled-components";
 import { logicalWithFallback } from "@castiron/style-mixins";
 import { respond, fluidScale } from "./common";
 import { breakpoints } from "../variables/media";
@@ -10,7 +9,7 @@ import { headerLayout } from "../variables/crossComponent";
 export function clearfix(mode = "light") {
   switch (mode) {
     case "heavy":
-      return css`
+      return `
         &::before,
         &::after {
           display: table;
@@ -22,7 +21,7 @@ export function clearfix(mode = "light") {
         }
       `;
     default:
-      return css`
+      return `
         &::after {
           display: block;
           clear: both;
@@ -34,7 +33,7 @@ export function clearfix(mode = "light") {
 
 // Layout
 // --------------------------------------------------------
-export const containerPrototype = css`
+export const containerPrototype = `
   max-width: var(--container-width-full);
   ${logicalWithFallback({
     "padding-inline": fluidScale(
@@ -47,7 +46,7 @@ export const containerPrototype = css`
   })}
 `;
 
-export const containerFocus = css`
+export const containerFocus = `
   max-width: var(--container-width-focus);
   ${logicalWithFallback({
     "padding-inline": "var(--container-padding-min)",
@@ -55,7 +54,7 @@ export const containerFocus = css`
   })}
 `;
 
-export const headerContainerPrimary = css`
+export const headerContainerPrimary = `
   ${containerPrototype}
   position: relative;
   padding-top: ${fluidScale(
@@ -65,7 +64,7 @@ export const headerContainerPrimary = css`
 `;
 
 export function drawerPadding(property = "padding-right", scale = "wide") {
-  return css`
+  return `
     ${property}: 20px;
 
     ${respond(`${property}: ${scale === "wide" ? "5.859vw" : "3.906vw"}`, 95)}
@@ -78,12 +77,12 @@ export function drawerIndent(property, dimension = 1) {
 }
 
 export function flexViewport(full) {
-  return css`
+  return `
     display: flex;
     flex-direction: column;
 
     ${full &&
-      css`
+      `
         min-height: 100vh;
         & > .main-content {
           flex-grow: 1;
@@ -94,14 +93,14 @@ export function flexViewport(full) {
 
 // Lists
 // --------------------------------------------------------
-export const listUnstyled = css`
+export const listUnstyled = `
   padding-left: 0;
   margin-top: 0;
   margin-bottom: 0;
   list-style-type: none;
 `;
 
-export const listHorizontal = css`
+export const listHorizontal = `
   ${listUnstyled}
 
   li {

@@ -1,4 +1,3 @@
-import { css } from "styled-components";
 import { logicalWithFallback } from "@castiron/style-mixins";
 import { breakpoints } from "../variables/media";
 import { respond, fluidScale } from "../mixins/common";
@@ -19,7 +18,7 @@ const readerContainerWidthClasses = readerContainerWidths
   )
   .join("");
 
-export default css`
+export default `
   .no-scroll {
     overflow: hidden;
   }

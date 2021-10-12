@@ -1,4 +1,3 @@
-import { css } from "styled-components";
 import { fluidScale } from "../mixins/common";
 import {
   headingPrimary,
@@ -62,7 +61,7 @@ const underlineClasses = styles
   )
   .join("");
 
-export default css`
+export default `
   .heading-primary {
     ${headingPrimary}
   }

@@ -1,7 +1,6 @@
-import { css } from "styled-components";
 import { outlineOnFocus, setHoverStyle } from "../mixins/appearance";
 
-export default css`
+export default `
   // Default hover styles
   button,
   [role="button"],

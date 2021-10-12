@@ -1,4 +1,3 @@
-import { css } from "styled-components";
 import { baseColors } from "../variables/appearance";
 import { respond, fluidScale } from "./common";
 
@@ -6,16 +5,16 @@ const Color = require("color");
 
 // // Headings
 // // --------------------------------------------------------
-const headingBase = css`
+const headingBase = `
   margin: 0;
   font-family: var(--font-family-heading);
 `;
 
-export const headingPrimaryFontSizing = css`
+export const headingPrimaryFontSizing = `
   font-size: ${fluidScale("26px", "22px")};
 `;
 
-export const headingPrimary = css`
+export const headingPrimary = `
   ${headingBase}
   ${headingPrimaryFontSizing}
   margin-bottom: 1.2em;
@@ -24,25 +23,25 @@ export const headingPrimary = css`
   line-height: 1.32;
 `;
 
-export const headingSecondary = css`
+export const headingSecondary = `
   ${headingPrimary}
   font-size: ${fluidScale("22px", "20px")};
 `;
 
-export const headingTertiary = css`
+export const headingTertiary = `
   ${headingBase}
   font-size: 16px;
   font-weight: var(--font-weight-semibold);
 `;
 
-export const headingQuaternary = css`
+export const headingQuaternary = `
   ${headingBase}
   font-size: ${fluidScale("30px", "25px")};
 `;
 
 // // Utility (Browser UI, buttons, etc.)
 // // --------------------------------------------------------
-export const utilityPrimary = css`
+export const utilityPrimary = `
   font-family: var(--font-family-sans);
   font-size: 16px;
   font-weight: var(--font-weight-semibold);
@@ -50,13 +49,13 @@ export const utilityPrimary = css`
   letter-spacing: 0.115em;
 `;
 
-export const resetWordWrap = css`
+export const resetWordWrap = `
   hyphens: none;
   word-wrap: normal;
   overflow-wrap: normal;
 `;
 
-export const textTruncate = css`
+export const textTruncate = `
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -64,14 +63,14 @@ export const textTruncate = css`
 
 // // Labels
 // // --------------------------------------------------------
-export const subtitlePrimary = css`
+export const subtitlePrimary = `
   font-family: var(--font-family-serif);
   font-style: italic;
   font-weight: var(--font-weight-regular);
   letter-spacing: 0.031em;
 `;
 
-export const formLabelPrimary = css`
+export const formLabelPrimary = `
   font-size: 12px;
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-semibold);
@@ -81,7 +80,7 @@ export const formLabelPrimary = css`
 
 // // Forms
 // // --------------------------------------------------------
-export const formInputPrimary = css`
+export const formInputPrimary = `
   font-size: ${fluidScale("20px", "17px")};
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-regular);
@@ -90,7 +89,7 @@ export const formInputPrimary = css`
   appearance: none;
 `;
 
-export const formInputSecondary = css`
+export const formInputSecondary = `
   ${formInputPrimary}
   width: 100%;
   // Explicit height so that elements can line up
@@ -117,14 +116,14 @@ export const formInputSecondary = css`
   }
 `;
 
-export const formInputMessage = css`
+export const formInputMessage = `
   font-size: var(--font-size-50);
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.05em;
 `;
 
-export const formInstructions = css`
+export const formInstructions = `
   font-size: ${fluidScale("18px", "15px")};
   font-family: var(--font-family-copy);
   font-style: italic;
@@ -133,7 +132,7 @@ export const formInstructions = css`
 
 // // Overlay
 // // --------------------------------------------------------
-export const overlayCopy = css`
+export const overlayCopy = `
   font-size: var(--font-size-60);
   font-family: var(--font-family-copy);
   color: var(--color-base-neutral30);
@@ -165,7 +164,7 @@ export function styledUnderline(style = "solid", color = baseColors.neutral75) {
   const underlineColor = Color(color);
   const encodedColor = underlineColor.hex().replace("#", "%23");
 
-  return css`
+  return `
     background-repeat: repeat-x;
     background-position: 0% 99%;
     background-size: 8px 2.5px;

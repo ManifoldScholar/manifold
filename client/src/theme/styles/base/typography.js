@@ -1,6 +1,4 @@
-import { css } from "styled-components";
-
-export default css`
+export default `
   html {
     font-size: 22px;
     -webkit-font-smoothing: antialiased;

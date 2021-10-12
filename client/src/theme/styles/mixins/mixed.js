@@ -1,4 +1,3 @@
-import { css } from "styled-components";
 import { respond } from "./common";
 import { subtitlePrimary } from "./typography";
 import {
@@ -13,7 +12,7 @@ import {
 
 // // Project List Item styles, used in global .project-list class,
 // // plus draggable Project Collection items, which aren't nested
-export const projectListItem = css`
+export const projectListItem = `
   display: flex;
   padding: 15px 0;
   color: inherit;
@@ -117,11 +116,11 @@ export const projectListItem = css`
   }
 `;
 
-export const projectGridItem = css`
+export const projectGridItem = `
   ${projectListItem}
 
   ${respond(
-    css`
+    `
       flex-direction: column;
       height: 100%;
       padding: 2.105vw;
@@ -170,7 +169,7 @@ export const projectGridItem = css`
 // Form Layout
 // --------------------------------------------------------
 // TODO: This combines appearance mixins and should be a shared class or mixin
-export const loginFormPrimary = css`
+export const loginFormPrimary = `
   .field + .field {
     margin-top: 27px;
   }

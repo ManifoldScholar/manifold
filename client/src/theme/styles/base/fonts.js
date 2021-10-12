@@ -1,7 +1,6 @@
-import { css } from "styled-components";
 import { fontWeight } from "../variables/typography";
 
-export default css`
+export default `
   // TypeKit fallback serif font
   // --------------------------
   @font-face {

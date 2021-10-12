@@ -1,4 +1,3 @@
-import { css } from "styled-components";
 import get from "lodash/get";
 import { breakpoints } from "../variables/media";
 import { respond } from "./common";
@@ -13,7 +12,7 @@ export function hide(size) {
 
 export function show(size, display = "inherit") {
   const breakpoint = get(breakpoints, size, size);
-  return css`
+  return `
     display: none;
     ${respond(`display: ${display};`, breakpoint)}
   `;
@@ -25,7 +24,7 @@ export const defaultFocusStyle = `outline: solid 2px;`;
 export const defaultHoverStyle = `color: var(--hover-color);`;
 
 export function setFocusStyle(property = "outline", value = "solid 2px") {
-  return css`
+  return `
     &:focus:not(:focus-visible) {
       outline: 0;
     }
@@ -40,7 +39,7 @@ export function setHoverStyle(
   property = "color",
   value = "var(--hover-color)"
 ) {
-  return css`
+  return `
     transition: ${property} var(--transition-duration-default)
       var(--transition-timing-function);
 
@@ -55,7 +54,7 @@ export function outlineOnFocus(color = "var(--focus-color)") {
 }
 
 export function fillOnFocus(color = "var(--hover-color)") {
-  return css`
+  return `
     ${setFocusStyle("background-color", color)}
 
     &:focus-visible {
@@ -70,7 +69,7 @@ export function fillOnHover(color = "var(--hover-color)") {
 
 // Utility
 // --------------------------------------------------------
-export const screenReaderText = css`
+export const screenReaderText = `
   position: absolute;
   width: 1px;
   height: 1px;
@@ -84,7 +83,7 @@ export const screenReaderText = css`
 // --------------------------------------------------------
 // Apply to a pseudo element to get a tail/triangle pointing up
 export function tailUp(color = "var(--color-base-neutral10)", height = "17px") {
-  return css`
+  return `
     width: 0;
     height: 0;
     border-color: transparent transparent ${color};
@@ -95,7 +94,7 @@ export function tailUp(color = "var(--color-base-neutral10)", height = "17px") {
 
 // // Buttons
 // // --------------------------------------------------------
-export const buttonUnstyled = css`
+export const buttonUnstyled = `
   padding: 0;
   cursor: pointer;
   background: transparent;
@@ -105,13 +104,13 @@ export const buttonUnstyled = css`
   appearance: none;
 `;
 
-export const buttonRounded = css`
+export const buttonRounded = `
   cursor: pointer;
   border-radius: 7px;
 `;
 
 export function buttonAvatar(size = 36, color = "inherit") {
-  return css`
+  return `
     ${buttonUnstyled}
     width: ${size}px;
     height: ${size}px;
@@ -131,7 +130,7 @@ export function buttonAvatar(size = 36, color = "inherit") {
   `;
 }
 
-export const marker = css`
+export const marker = `
   display: flex;
   align-items: center;
   padding: 3px 10px 5px;
@@ -144,7 +143,7 @@ export const marker = css`
   border-radius: 12px;
 `;
 
-export const blockLabelRound = css`
+export const blockLabelRound = `
   ${utilityPrimary}
   display: inline-block;
   padding: 0.333em 8px;
@@ -159,7 +158,7 @@ export const blockLabelRound = css`
 // // --------------------------------------------------------
 // // Styled select
 // // based on: https://github.com/mdo/wtf-forms/blob/master/wtf-forms.css
-export const unstyledSelect = css`
+export const unstyledSelect = `
   cursor: pointer;
   background: transparent;
   border-radius: 0;
@@ -176,7 +175,7 @@ export const unstyledSelect = css`
   }
 `;
 
-export const selectPrimary = css`
+export const selectPrimary = `
   position: relative;
   display: inline-block;
   color: var(--default-medium-color);
@@ -200,7 +199,7 @@ export const selectPrimary = css`
 
 // // Styled Checkbox (also from wtf forms)
 // // Should be applied to a label with an input type="checkbox" inside
-export const checkboxStyled = css`
+export const checkboxStyled = `
   position: relative;
   display: inline-block;
   cursor: pointer;
@@ -212,7 +211,7 @@ export const checkboxStyled = css`
   }
 `;
 
-const inputBase = css`
+const inputBase = `
   font-family: var(--input-font-family);
   color: var(--input-color);
   background-color: var(--input-bg-color);
@@ -225,7 +224,7 @@ const inputBase = css`
 `;
 
 // // Inputs/Textareas
-export const inputLabelPrimary = css`
+export const inputLabelPrimary = `
   display: block;
   margin-bottom: 12px;
   text-transform: uppercase;
@@ -234,7 +233,7 @@ export const inputLabelPrimary = css`
   color: var(--color-base-neutral50);
 `;
 
-export const inputPrimary = css`
+export const inputPrimary = `
   ${inputBase}
   padding: 8px 13px 12px;
   font-size: var(--font-size-70);
@@ -242,7 +241,7 @@ export const inputPrimary = css`
 `;
 
 // // Dark input with border
-export const inputQuaternary = css`
+export const inputQuaternary = `
   ${inputBase}
   padding: 0.438em 1.125em 0.563em;
   background: transparent;
@@ -260,19 +259,19 @@ export const inputQuaternary = css`
   }
 `;
 
-export const panelRounded = css`
+export const panelRounded = `
   background-color: var(--box-bg-color);
   border-radius: var(--box-border-radius);
 `;
 
-export const panelRoundedDark = css`
+export const panelRoundedDark = `
   --color: var(--color-neutral-ui-light);
 
   ${panelRounded}
   color: var(--color);
 `;
 
-export const roundedHeader = css`
+export const roundedHeader = `
   ${panelRoundedDark}
   display: table;
   width: 100%;
@@ -287,7 +286,7 @@ export const roundedHeader = css`
   }
 `;
 
-export const roundedFormHeader = css`
+export const roundedFormHeader = `
   --label-color: var(--highlight-color);
 
   ${roundedHeader}
@@ -310,7 +309,7 @@ export const roundedFormHeader = css`
 
 // // Drag and Drop styles
 export function dropzone(margin = "9px", activeSelector = "--show-dropzone") {
-  return css`
+  return `
     ${panelRounded}
     display: block;
     padding: 0 ${margin};
@@ -325,7 +324,7 @@ export function dropzone(margin = "9px", activeSelector = "--show-dropzone") {
   `;
 }
 
-export const draggable = css`
+export const draggable = `
   ${panelRoundedDark}
   cursor: move; // fallback for older browsers
   cursor: grab;
@@ -337,7 +336,7 @@ export const draggable = css`
       var(--transition-timing-function);
 `;
 
-export const dragging = css`
+export const dragging = `
   box-shadow: 0 31px 26px -13px rgba(0 0 0 / 0.33);
 `;
 
@@ -346,7 +345,7 @@ export function reactSlideTransition(
   selector = "&",
   prefix = "panel"
 ) {
-  return css`
+  return `
     .${prefix}-enter ${selector} {
       transform: translateX(${from === "right" ? "100%" : "-100%"});
     }

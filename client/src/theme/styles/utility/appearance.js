@@ -1,7 +1,6 @@
-import { css } from "styled-components";
 import { screenReaderText, show, hide } from "../mixins/appearance";
 
-export default css`
+export default `
   .screen-reader-text {
     ${screenReaderText}
   }

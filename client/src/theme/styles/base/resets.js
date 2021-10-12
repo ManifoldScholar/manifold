@@ -1,10 +1,9 @@
-import { css } from "styled-components";
 import { logicalWithFallback } from "@castiron/style-mixins";
 
 // Resets
 // --------------------
 
-export default css`
+export default `
   /* Box sizing rules */
   *,
   *::before,

@@ -1,6 +1,4 @@
-import { css } from "styled-components";
-
-export default css`
+export default `
   // Library defaults with some overrides by CIC
 
   .rh5v-DefaultPlayer_component {

@@ -1,7 +1,5 @@
-import { css } from "styled-components";
-
 // CSS color vars defined by context in Manifold
-export default css`
+export default `
   body {
     color: var(--color);
     background-color: var(--background-color);

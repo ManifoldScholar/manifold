@@ -1,7 +1,5 @@
-import { css } from "styled-components";
-
 // Z-Indices for all top level components, all in one place, all in order
-export default css`
+export default `
   .loading-bar,
   .skip-to-main {
     z-index: 700;

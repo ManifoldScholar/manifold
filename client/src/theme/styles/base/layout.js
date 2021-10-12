@@ -1,6 +1,4 @@
-import { css } from "styled-components";
-
-export default css`
+export default `
   body {
     width: 100%;
 
