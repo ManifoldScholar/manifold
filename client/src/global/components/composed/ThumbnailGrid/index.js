@@ -16,29 +16,15 @@ export default function ThumbnailGrid({ minItemWidth = "200px", children }) {
     }
   });
 
-  /* eslint-disable no-nested-ternary */
-  const items =
-    typeof children === "function" ? (
-      Array.isArray(children({ stack: useGrid })) ? (
-        children({ stack: useGrid }).map(child => (
-          <Styled.Item>{child}</Styled.Item>
-        ))
-      ) : (
-        <Styled.Item>{children({ stack: useGrid })}</Styled.Item>
-      )
-    ) : (
-      <Styled.Item>{children}</Styled.Item>
-    );
-
   return (
-    <Styled.List
+    <Styled.Grid
       ref={resizeRef}
       $grid={useGrid}
       $minItemWidth={minItemWidth}
       $empty={!children}
     >
-      {items}
-    </Styled.List>
+      {typeof children === "function" ? children({ stack: useGrid }) : children}
+    </Styled.Grid>
   );
 }
 

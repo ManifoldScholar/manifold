@@ -18,7 +18,7 @@ export default function EntityThumbnail({
   const placeholder = !entity.attributes.avatarStyles.original;
 
   return (
-    <>
+    <div>
       <Styled.ItemLink
         stack={stack}
         to={lh.link("frontendProjectDetail", entity.attributes.slug)}
@@ -46,7 +46,7 @@ export default function EntityThumbnail({
         outlined={false}
         userMock={userMock}
       />
-    </>
+    </div>
   );
 }
 

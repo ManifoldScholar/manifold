@@ -1,8 +1,8 @@
-import { css } from "styled-components";
 import { baseColors } from "theme/styles/variables/appearance";
 import { respond } from "theme/styles/mixins";
 
 const Color = require("color");
+
 const bgColorBase = Color(baseColors.neutral90);
 
 export default `
