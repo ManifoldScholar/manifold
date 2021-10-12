@@ -1,4 +1,3 @@
-import { css } from "styled-components";
 import {
   respond,
   screenReaderText,
@@ -7,7 +6,7 @@ import {
   utilityPrimary
 } from "theme/styles/mixins";
 
-export default css`
+export default `
   .sr-collecting-toggle {
     ${screenReaderText}
 
@@ -58,7 +57,7 @@ export default css`
       left: 0;
 
       ${respond(
-        css`
+        `
           top: calc(2.105vw + 15px);
           left: calc(2.105vw - 15px);
         `,
@@ -66,7 +65,7 @@ export default css`
       )}
 
       ${respond(
-        css`
+        `
           top: 40px;
           left: 10px;
         `,
@@ -83,10 +82,10 @@ export default css`
       left: -15px;
 
       ${respond(
-        css`
+        `
           top: 15px;
         `,
-        75
+        120
       )}
     }
 
