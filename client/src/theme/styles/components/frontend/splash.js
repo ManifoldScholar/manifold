@@ -12,14 +12,14 @@ export default `
     }
 
     .container {
-      ${clearfix}
+      ${clearfix()}
     }
 
     &.feature-dark-style {
-      --default-hover-color: var(--color-neutral-textExtraDark);
-      --default-focus-color: var(--color-neutral-textExtraDark);
+      --default-hover-color: var(--color-neutral-text-extra-dark);
+      --default-focus-color: var(--color-neutral-text-extra-dark);
 
-      color: var(--color-neutral-textExtraDark);
+      color: var(--color-neutral-text-extra-dark);
       background-color: var(--color-accent-primary);
     }
 
@@ -27,7 +27,7 @@ export default `
       --default-hover-color: var(--color-interaction-dark);
       --default-focus-color: var(--color-interaction-dark);
 
-      background-color: var(--color-accent-primaryOffWhite);
+      background-color: var(--color-accent-primary-off-white);
 
       .heading-primary, .heading-secondary {
         color: var(--color-interaction-dark);
@@ -59,7 +59,7 @@ export default `
       )}
 
       p {
-        font-family: var(--font-family-copy)
+        font-family: var(--font-family-copy);
         line-height: 1.353em;
 
         + p {
