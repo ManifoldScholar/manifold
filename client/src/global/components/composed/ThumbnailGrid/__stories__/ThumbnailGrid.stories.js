@@ -28,13 +28,16 @@ storiesOf("Global/ThumbnailGrid", module)
     return (
       <div style={{ padding: "5% 10%" }} className="bg-white">
         <ThumbnailGrid>
-          {entities.map(item => (
-            <EntityThumbnail
-              entity={item}
-              userMock={user}
-              onUncollect={() => console.log("clicked uncollect")}
-            />
-          ))}
+          {({ stack }) =>
+            entities.map(item => (
+              <EntityThumbnail
+                entity={item}
+                userMock={user}
+                onUncollect={() => console.log("clicked uncollect")}
+                stack={stack}
+              />
+            ))
+          }
         </ThumbnailGrid>
       </div>
     );
@@ -43,13 +46,16 @@ storiesOf("Global/ThumbnailGrid", module)
     return (
       <div style={{ padding: "5% 10%", width: "400px" }} className="bg-white">
         <ThumbnailGrid>
-          {entities.map(item => (
-            <EntityThumbnail
-              entity={item}
-              userMock={user}
-              onUncollect={() => console.log("clicked uncollect")}
-            />
-          ))}
+          {({ stack }) =>
+            entities.map(item => (
+              <EntityThumbnail
+                entity={item}
+                userMock={user}
+                onUncollect={() => console.log("clicked uncollect")}
+                stack={stack}
+              />
+            ))
+          }
         </ThumbnailGrid>
       </div>
     );

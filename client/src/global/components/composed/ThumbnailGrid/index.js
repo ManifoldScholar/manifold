@@ -16,6 +16,20 @@ export default function ThumbnailGrid({ minItemWidth = "200px", children }) {
     }
   });
 
+  /* eslint-disable no-nested-ternary */
+  const items =
+    typeof children === "function" ? (
+      Array.isArray(children({ stack: useGrid })) ? (
+        children({ stack: useGrid }).map(child => (
+          <Styled.Item>{child}</Styled.Item>
+        ))
+      ) : (
+        <Styled.Item>{children({ stack: useGrid })}</Styled.Item>
+      )
+    ) : (
+      <Styled.Item>{children}</Styled.Item>
+    );
+
   return (
     <Styled.List
       ref={resizeRef}
@@ -23,13 +37,7 @@ export default function ThumbnailGrid({ minItemWidth = "200px", children }) {
       $minItemWidth={minItemWidth}
       $empty={!children}
     >
-      {Array.isArray(children)
-        ? children.map(child => (
-            <Styled.Item>
-              {React.cloneElement(child, { stack: useGrid })}
-            </Styled.Item>
-          ))
-        : children && <Styled.Item>{children({ stack: useGrid })}</Styled.Item>}
+      {items}
     </Styled.List>
   );
 }
