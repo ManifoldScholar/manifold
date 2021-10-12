@@ -3,6 +3,7 @@ import { respondBase, fluidScaleBase } from "@castiron/style-mixins";
 import { breakpoints } from "../variables/media";
 
 // for replacing Sass `@include respond($break65 - 1, max)`
+/* eslint-disable radix */
 export function breakpointLessOne(value) {
   const breakpoint = get(breakpoints, value, value);
   return `${parseInt(breakpoint) - 1}px`;
