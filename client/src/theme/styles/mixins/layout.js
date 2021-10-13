@@ -91,6 +91,29 @@ export function flexViewport(full) {
   `;
 }
 
+export function aspectRatio(width, height) {
+  return `&::before {
+    float: left;
+    padding-top: ${(height / width) * 100}%;
+    content: '';
+  }
+
+  &::after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+
+  @supports (aspect-ratio: 1 / 1) {
+    aspect-ratio: ${width / height};
+
+    &::before,
+    &::after {
+      content: none;
+    }
+  }`;
+}
+
 // Lists
 // --------------------------------------------------------
 export const listUnstyled = `
