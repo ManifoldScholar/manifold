@@ -15,7 +15,9 @@ function colorConstructor(color) {
 }
 
 export function rgba(color, alpha) {
-  return colorConstructor(color).alpha(alpha).string();
+  return colorConstructor(color)
+    .alpha(alpha)
+    .string();
 }
 
 export function transparentize(color, amount) {
@@ -23,7 +25,9 @@ export function transparentize(color, amount) {
 }
 
 export function uriEncodeHex(color) {
-  return colorConstructor(color).hex().replace("#", "%23");
+  return colorConstructor(color)
+    .hex()
+    .replace("#", "%23");
 }
 
 export function darken(color, amount) {

@@ -3,8 +3,24 @@ import {
   screenReaderText,
   defaultFocusStyle,
   buttonUnstyled,
-  utilityPrimary
+  utilityPrimary,
+  defaultTransitionProps
 } from "theme/styles/mixins";
+
+const lightColor = `var(
+  --collecting-toggle-light-color,
+  var(--color-base-neutral05)
+)`;
+const darkColor = `var(
+  --collecting-toggle-dark-color,
+  var(--color-base-neutral75)
+)`;
+const inactiveColor = `var(
+  --collecting-toggle-inactive-color,
+  var(--color-base-neutral70)
+)`;
+const highlightFgColor = `var(--color-base-neutral90)`;
+const highlightBgColor = `var(--color-base-blue45)`;
 
 export default `
   .sr-collecting-toggle {
@@ -17,23 +33,9 @@ export default `
   }
 
   .collecting-toggle {
-    --light-color: var(
-      --collecting-toggle-light-color,
-      var(--color-base-neutral05)
-    );
-    --dark-color: var(
-      --collecting-toggle-dark-color,
-      var(--color-base-neutral75)
-    );
-    --inactive-color: var(
-      --collecting-toggle-inactive-color,
-      var(--color-base-neutral70)
-    );
-    --highlight-fg-color: var(--color-base-neutral90);
-    --highlight-bg-color: var(--color-base-blue45);
     --toggle-size: 24px;
-    --toggle-color: var(--highlight-fg-color);
-    --toggle-bg-color: var(--inactive-color);
+    --toggle-color: ${highlightFgColor};
+    --toggle-bg-color: ${inactiveColor};
     --icon-transform: none;
     --text-top-padding: 5px;
 
@@ -105,10 +107,8 @@ export default `
       color: var(--toggle-color);
       background-color: var(--toggle-bg-color);
       border-radius: 0.667em;
-      transition: color var(--transition-duration-default)
-          var(--transition-timing-function),
-        background-color var(--transition-duration-default)
-          var(--transition-timing-function);
+      transition: color ${defaultTransitionProps},
+        background-color ${defaultTransitionProps};
 
       .collecting-toggle--project-cover &,
       .collecting-toggle--small-project-cover & {
@@ -124,20 +124,20 @@ export default `
 
       &--remove-active,
       &--remove-confirm-active {
-        --toggle-color: var(--light-color);
-        --toggle-bg-color: var(--dark-color);
+        --toggle-color: ${lightColor};
+        --toggle-bg-color: ${darkColor};
       }
 
       &--add,
       &--remove,
       &--remove-confirm-active {
-        --toggle-color: var(--light-color);
+        --toggle-color: ${lightColor};
       }
 
       &--remove,
       &--add-active {
-        --toggle-color: var(--highlight-fg-color);
-        --toggle-bg-color: var(--highlight-bg-color);
+        --toggle-color: ${highlightFgColor};
+        --toggle-bg-color: ${highlightBgColor};
       }
 
       &--add {
@@ -173,7 +173,7 @@ export default `
 
       &-enter-active {
         opacity: 1;
-        transition: opacity var(--transition-duration-default) * 3
+        transition: opacity calc(var(--transition-duration-default) * 3)
           var(--transition-timing-function);
       }
 
@@ -183,7 +183,7 @@ export default `
 
       &-exit.collecting-toggle__text-exit-active {
         opacity: 0;
-        transition: opacity var(--transition-duration-default) * 3
+        transition: opacity calc(var(--transition-duration-default) * 3)
           var(--transition-timing-function);
       }
     }
@@ -192,8 +192,7 @@ export default `
       position: absolute;
       width: 100%;
       height: 100%;
-      transition: transform var(--transition-duration-default)
-        var(--transition-timing-function);
+      transition: transform ${defaultTransitionProps};
       transform: var(--icon-transform);
     }
 
