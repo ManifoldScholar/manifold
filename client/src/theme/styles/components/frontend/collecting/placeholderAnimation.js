@@ -1,4 +1,4 @@
-import { respond, aspectRatio } from "theme/styles/mixins";
+import { respond, aspectRatio, responsiveSize } from "theme/styles/mixins";
 
 const maxWidth = `640px`;
 const hideBreakpoint = `675px`;
@@ -6,7 +6,19 @@ const collectingIconSize = `24px`;
 const animationDuration = 750;
 const animationDelay = animationDuration / 2;
 const animationEasing = `ease-out`;
-const blockArray = `1, 2, 3, 4, 5`;
+const blockArray = [1, 2, 3, 4, 5];
+
+const blocks = blockArray.map(
+  block => `
+    &:nth-child(${block}) {
+      /* stagger block skeleton fade-in */
+      --skeleton-delay: ${animationDelay * block - animationDelay}ms;
+      /* stagger collecting icon fill and block title transition, and time to start when third skeleton is faded in */
+      --content-delay: ${animationDelay * (block + blockArray.length - 2) -
+        animationDelay}ms;
+    }
+  `
+);
 
 export default `
   .collecting-placeholder-animation {
@@ -38,21 +50,10 @@ export default `
 
       opacity: 1;
 
-      /* > * {
-        @each $block in $_block-array {
-          &:nth-child(#{$block}) {
-            $content-start-index: $block + length($_block-array) - 2;
-            // stagger block skeleton fade-in
-            --skeleton-delay: #{$_animation-delay *
-              $block -
-              $_animation-delay}ms;
-            // stagger collecting icon fill and block title transition, and time to start when third skeleton is faded in
-            --content-delay: #{$_animation-delay *
-              $content-start-index -
-              $_animation-delay}ms;
-          }
+      > * {
+        ${blocks.join(" ")}
         }
-      } */
+      }
     }
 
     &__block {
@@ -80,8 +81,8 @@ export default `
       transition-delay: var(--content-delay);
 
       svg {
-        width: responsive-size(64px, 850px);
-        height: responsive-size(64px, 850px);
+        width: ${responsiveSize("64px", "850px")};
+        height: ${responsiveSize("64px", "850px")};
       }
     }
 
