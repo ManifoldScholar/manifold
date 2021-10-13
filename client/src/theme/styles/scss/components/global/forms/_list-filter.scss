@@ -56,7 +56,7 @@
 
   &__search-button {
     @include buttonUnstyled;
-    @include outlineOnFocusVisible;
+    @include outlineOnFocus;
     position: absolute;
     top: 50%;
     left: 14px;

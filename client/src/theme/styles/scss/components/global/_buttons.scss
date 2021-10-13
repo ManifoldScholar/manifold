@@ -32,10 +32,6 @@
     &--notice {
       color: $defaultErrorColor;
     }
-
-    &--download {
-      color: $neutral30;
-    }
   }
 
   &__text {
@@ -220,7 +216,7 @@
   }
 
   .browse & {
-    @include fillOnFocusVisible($accentPrimaryExtraPale);
+    @include fillOnFocus($accentPrimaryExtraPale);
   }
 
   &__icon {
@@ -502,7 +498,7 @@
       --default-highlight-color: #{$neutral45};
       --default-hover-color: #{$neutral45};
 
-      @include fillOnFocusVisible(rgba($neutral70, 0.2));
+      @include fillOnFocus(rgba($neutral70, 0.2));
 
       &:hover {
         color: $neutralTextExtraDark;

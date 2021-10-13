@@ -75,7 +75,7 @@
   &__action {
     @include buttonUnstyled;
     @include utilityPrimary;
-    @include fillOnFocusVisible($accentInteractionLight);
+    @include fillOnFocus($accentInteractionLight);
     padding: 0.333em 1em;
     font-size: 12px;
     font-weight: $semibold;
@@ -845,7 +845,7 @@
 
   .cancel {
     @include buttonUnstyled;
-    @include outlineOnFocusVisible($defaultErrorColor);
+    @include outlineOnFocus($defaultErrorColor);
     position: absolute;
     top: 50%;
     right: 0;

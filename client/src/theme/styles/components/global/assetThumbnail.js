@@ -1,9 +1,4 @@
-import { css } from "styled-components";
-import { baseColors } from "theme/styles/variables/appearance";
-import { respond } from "theme/styles/mixins";
-
-const Color = require("color");
-const bgColorBase = Color(baseColors.neutral90);
+import { respond, transparentize } from "theme/styles/mixins";
 
 export default `
   .icon-thumbnail-primary {
@@ -26,7 +21,7 @@ export default `
         width: 100%;
         height: 100%;
         content: "";
-        background-color: ${bgColorBase.fade(0.3)};
+        background-color: ${transparentize("neutral90", 0.3)};
       }
     }
 

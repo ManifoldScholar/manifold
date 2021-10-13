@@ -18,4 +18,9 @@ export default `
   [data-react-beautiful-dnd-drag-handle] {
     ${outlineOnFocus()}
   }
+
+  .manicon-svg {
+    display: inline-block;
+    vertical-align: middle;
+  }
 `;

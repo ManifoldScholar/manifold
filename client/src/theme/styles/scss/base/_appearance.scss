@@ -203,11 +203,11 @@ body {
   }
 }
 
-@mixin outlineOnFocusVisible($color: $defaultFocusColor) {
+@mixin outlineOnFocus($color: $defaultFocusColor) {
   @include defaultFocusState('outline', 'solid 2px #{$color}');
 }
 
-@mixin fillOnFocusVisible($color: $accentPrimary) {
+@mixin fillOnFocus($color: $accentPrimary) {
   @include defaultFocusState('background-color', $color);
 
   &:focus-visible {

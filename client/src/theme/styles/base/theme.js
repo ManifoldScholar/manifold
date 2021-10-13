@@ -13,6 +13,7 @@ export default `
     --color: var(--color-neutral-text-dark);
     --background-color: var(--color-base-neutral-white);
     --strong-color: var(--color-neutral-text-extra-dark);
+    --extra-strong-color: var(--base-neutral-black);
     --medium-color: var(--color-base-neutral80);
     --weak-color: var(--color-neutral-ui-dull-light);
     --highlight-color: var(--color-interaction-dark);
@@ -53,6 +54,7 @@ export default `
     --color: var(--color-neutral-text-light);
     --background-color: var(--color-base-neutral90);
     --strong-color: var(--color-neutral-text-extra-light);
+    --extra-strong-color: var(--base-neutral-white);
     --medium-color: var(--color-base-neutral20);
     --weak-color: var(--color-neutral-ui-dull-dark);
     --highlight-color: var(--color-interaction-light);

@@ -36,7 +36,7 @@
     white-space: nowrap;
     // background-color: $neutral90; // required for `option` to inherit in FF
     background-color: var(--select-bg-color, inherit);
-    border: 1px solid $neutralUIDullLight;
+    border: 1px solid var(--color-neutral-ui-dull-light);
     border-radius: 8px;
     transition: border-color $duration $timing;
 

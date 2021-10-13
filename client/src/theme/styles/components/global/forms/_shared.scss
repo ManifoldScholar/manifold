@@ -7,7 +7,7 @@
   // <button>
   .icon {
     @include buttonUnstyled;
-    @include outlineOnFocusVisible;
+    @include outlineOnFocus;
     position: absolute;
     top: 50%;
     left: 10px;
@@ -164,6 +164,6 @@
     width: 45%;
     height: 1px;
     content: '';
-    background-color: $neutralUIDullLight;
+    background-color: var(--color-neutral-ui-dull-light);
   }
 }

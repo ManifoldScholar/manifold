@@ -33,11 +33,6 @@ export default `
     background-color: var(--color-base-neutral95);
   }
 
-  .manicon-svg {
-    display: inline-block;
-    vertical-align: middle;
-  }
-
   .show-50 {
     ${show(50)}
   }

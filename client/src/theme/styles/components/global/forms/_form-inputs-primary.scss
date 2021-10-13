@@ -75,7 +75,7 @@
   &__action {
     @include buttonUnstyled;
     @include utilityPrimary;
-    @include fillOnFocusVisible($accentInteractionLight);
+    @include fillOnFocus($accentInteractionLight);
     padding: 0.333em 1em;
     font-size: 12px;
     font-weight: $semibold;
@@ -845,7 +845,7 @@
 
   .cancel {
     @include buttonUnstyled;
-    @include outlineOnFocusVisible($defaultErrorColor);
+    @include outlineOnFocus($defaultErrorColor);
     position: absolute;
     top: 50%;
     right: 0;
@@ -905,15 +905,15 @@
   &:hover,
   &:focus-visible {
     .text {
-      background-color: $accentPrimaryPale;
+      background-color: var(--color-accent-primary-pale);
     }
 
     &::before {
-      border-color: $accentPrimaryPale transparent transparent transparent;
+      border-color: var(--color-accent-primary-pale) transparent transparent transparent;
     }
 
     &::after {
-      border-color: transparent transparent $accentPrimaryPale transparent;
+      border-color: transparent transparent var(--color-accent-primary-pale) transparent;
     }
   }
 

@@ -79,6 +79,8 @@ export const screenReaderText = `
   clip: rect(0 0 0 0);
 `;
 
+export const defaultTransitionProps = `var(--transition-duration-default) var(--transition-timing-function)`;
+
 // Layout
 // --------------------------------------------------------
 // Apply to a pseudo element to get a tail/triangle pointing up
