@@ -4,10 +4,10 @@ import Authorize from "hoc/authorize";
 import Utility from "global/components/utility";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import { Translation } from "react-i18next";
+import { Trans, Translation } from "react-i18next";
 
 export default class ProjectListPlaceholder extends React.PureComponent {
-  get actions() {
+  getActions(t) {
     return [
       {
         children: (
@@ -22,27 +22,20 @@ export default class ProjectListPlaceholder extends React.PureComponent {
   }
 
   renderAdminMessage() {
-                         const helpLink =
-                           "https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/projects"; // ALERT LEONOR: Test the translation key below with user account w backend access
-                         return (
-                           <Translation i18nKey="empty-projects-message">
-                             <p>
-                               {
-                                 "But it’s easy to create and publish projects with Manifold. If you have backend access, "
-                               }
-                               <Link to={lh.link("backend")}>
-                                 head to the backend
-                               </Link>
-                               {" and select "}
-                               <em>Add a New Project</em>
-                               {
-                                 ". For more help, you can learn about creating and publishing Manifold Projects "
-                               }
-                               <a href={helpLink}>here</a>.
-                             </p>
-                           </Translation>
-                         );
-                       }
+    const helpLink =
+      "https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/projects"; // ALERT LEONOR: Test the translation key below with user account w backend access
+    return (
+      <p>
+        <Trans i18nKey="empty-projects-message">
+          But it’s easy to create and publish projects with Manifold. If you
+          have backend access,{" "}
+          <Link to={lh.link("backend")}>head to the backend</Link> and select{" "}
+          <em>Add a New Project</em>. For more help, you can learn about
+          creating and publishing Manifold Projects <a href={helpLink}>here</a>.
+        </Trans>
+      </p>
+    );
+  }
 
   render() {
     const wrapperStyle = {
@@ -86,7 +79,7 @@ export default class ProjectListPlaceholder extends React.PureComponent {
                     />
                   </>
                 </ContentPlaceholder.Body>
-                <ContentPlaceholder.Actions actions={this.actions} />
+                <ContentPlaceholder.Actions actions={this.getActions(t)} />
               </ContentPlaceholder.Wrapper>
             </div>
           </section>
