@@ -1,4 +1,4 @@
-import { eventEntity } from "./events";
+import { eventEntity } from "theme/styles/variables/crossComponent";
 import {
   panelRounded,
   panelRoundedDark,
@@ -42,6 +42,10 @@ export default `
           `box-shadow: 0 20px 30px 2px ${rgba("neutralBlack", 0.13)};`,
           60
         )}
+
+        & .event-tile__icon {
+          ${defaultHoverStyle}
+        }
       }
     }
 
@@ -70,8 +74,8 @@ export default `
       position: absolute;
       top: 0;
       left: 0;
-      width: ${eventEntity.iconSizeSmall};
-      height: ${eventEntity.iconSizeSmall};
+      width: ${eventEntity.iconSize.small};
+      height: ${eventEntity.iconSize.small};
       color: var(--color-neutral-ui-light);
       background-color: var(--color-base-neutral-white);
       border-radius: 100%;
@@ -85,19 +89,14 @@ export default `
         ${respond(`display: block;`, 60)}
       }
 
-      .event-tile--linked:hover  &,
-      > + > .event-tile--linked:focus-visible {
-        ${defaultHoverStyle}
-      }
-
       ${respond(
-        `width: ${eventEntity.iconSizeMed};
-        height: ${eventEntity.iconSizeMed};`,
+        `width: ${eventEntity.iconSize.med};
+        height: ${eventEntity.iconSize.med};`,
         60
       )}
       ${respond(
-        `width: ${eventEntity.iconSizeLarge};
-        height: ${eventEntity.iconSizeLarge};`,
+        `width: ${eventEntity.iconSize.large};
+        height: ${eventEntity.iconSize.large};`,
         75
       )}
     }

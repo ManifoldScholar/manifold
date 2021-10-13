@@ -1,5 +1,6 @@
 import get from "lodash/get";
 import { breakpoints } from "../variables/media";
+import { containerWidth } from "../variables/layout";
 import { respond } from "./common";
 import { utilityPrimary } from "./typography";
 
@@ -16,6 +17,10 @@ export function show(size, display = "inherit") {
     display: none;
     ${respond(`display: ${display};`, breakpoint)}
   `;
+}
+
+export function responsiveSize(maxWidth, breakpoint = containerWidth.inner) {
+  return `min(${maxWidth} / ${breakpoint} * 100vw, ${maxWidth})`;
 }
 
 // Interactions

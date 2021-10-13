@@ -1,17 +1,5 @@
 import { listUnstyled, respond } from "theme/styles/mixins";
-import { breakpoints } from "theme/styles/variables/media";
-
-export const eventEntity = {
-  listMarginTop: "17px",
-  listLayoutBreakpoint: breakpoints[65],
-  rowGap: "28px",
-  flexMaxWidth: "460.5px",
-  minWidth: "332px",
-  iconSizeSmall: "40px",
-  iconSizeMed: "44px",
-  iconSizeLarge: "48px",
-  panelBreakpoint: breakpoints[60]
-};
+import { eventEntity } from "theme/styles/variables/crossComponent";
 
 export default `
   .event-list {
@@ -21,7 +9,7 @@ export default `
     margin-top: -${eventEntity.rowGap};
 
     ${respond(
-      `margin-left: -${eventEntity.iconSizeLarge};`,
+      `margin-left: -${eventEntity.iconSize.large};`,
       eventEntity.panelBreakpoint
     )}
 
@@ -50,7 +38,7 @@ export default `
 
       ${respond(
         `
-        padding-left: ${eventEntity.iconSizeSmall};`,
+        padding-left: ${eventEntity.iconSize.small};`,
         eventEntity.panelBreakpoint
       )}
       ${respond(
