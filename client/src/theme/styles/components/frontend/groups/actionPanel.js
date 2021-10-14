@@ -8,7 +8,7 @@ import {
 
 const basePaddingVertical = "38px";
 const basePaddingLateral = "38px";
-const gap = 20;
+const gap = "20px";
 
 export default `
   .group-action-panel {
@@ -55,13 +55,13 @@ export default `
       display: flex;
       flex-wrap: wrap;
       padding-top: 40px;
-      margin-top: ${-gap}px;
-      margin-left: ${-gap}px;
+      margin-top: -${gap};
+      margin-left: -${gap};
 
       > * {
         flex-grow: 1;
-        margin-top: ${gap}px;
-        margin-left: ${gap}px;
+        margin-top: ${gap};
+        margin-left: ${gap};
       }
     }
   }

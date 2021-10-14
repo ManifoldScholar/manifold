@@ -22,8 +22,7 @@ export default `
       ${headingQuaternary}
       margin-bottom: 0.667em;
       font-weight: var(--font-weight-medium);
-      /* --default-strong-color */
-      color: var(--color-neutral-text-extra-dark);
+      color: var(--strong-color);
 
       &:not(:first-child) {
         margin-top: 1.867em;

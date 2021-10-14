@@ -17,17 +17,19 @@ export default `
     color: var(--strong-color);
 
     ${respond(
-      `display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: ${basePaddingVertical - gap});
-      padding-left: ${basePaddingLateral - gap});
+      `
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: calc(${basePaddingVertical} - ${gap});
+        padding-left: calc(${basePaddingLateral} - ${gap});
 
-      > * {
-        margin-top: ${gap};
-        margin-left: ${gap};
-      }`,
+        > * {
+          margin-top: ${gap};
+          margin-left: ${gap};
+        }
+      `,
       65
     )}
 
@@ -37,7 +39,7 @@ export default `
     }
 
     &__heading-text {
-      ${utilityPrimary};
+      ${utilityPrimary}
       display: block;
       padding-bottom: 5px;
       font-size: inherit;
@@ -50,7 +52,7 @@ export default `
     }
 
     &__instructions {
-      ${subtitlePrimary};
+      ${subtitlePrimary}
       display: inline-block;
       padding-bottom: 25px;
       font-size: 18px;
