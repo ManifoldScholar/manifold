@@ -12,7 +12,7 @@
   margin-bottom: 8px;
 
   &--count-only {
-    @include panelRounded;
+    ${panelRounded}
     padding-top: 14px;
     padding-right: 22px;
     padding-left: 22px;

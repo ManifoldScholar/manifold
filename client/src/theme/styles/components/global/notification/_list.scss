@@ -11,11 +11,11 @@
     position: fixed;
     top: calc(var(--library-header-height, 50px) + var(--press-header-height, 0px));
 
-    @include respond($break40) {
+    ${respond(``, 40)}
       top: calc(var(--library-header-height, 72px) + var(--press-header-height, 0px));
     }
 
-    @include respond($break75) {
+    ${respond(``, 75)}
       top: calc(var(--library-header-height, 82px) + var(--press-header-height, 0px));
     }
   }
@@ -41,7 +41,7 @@
 
     .notifications-list--context-header & {
       + .notifications-list__inner {
-        border-top: 1px solid $neutralUIExtraDark;
+        border-top: 1px solid var(--color-neutral-ui-extra-dark);
       }
 
       &.notification-exit {

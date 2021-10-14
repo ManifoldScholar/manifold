@@ -6,16 +6,16 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  padding-right: $containerPaddingResp;
-  padding-left: $containerPaddingResp;
+  padding-right: var(--container-padding-responsive);
+  padding-left: var(--container-padding-responsive);
   visibility: visible;
   opacity: 1;
-  transition: opacity $duration $timing,
-    visibility $duration $timing;
+  transition: opacity ${defaultTransitionProps},
+    visibility ${defaultTransitionProps};
 
-  @include respond($break120) {
-    padding-right: $containerPaddingFull;
-    padding-left: $containerPaddingFull;
+  ${respond(``, 120)}
+    padding-right: var(--container-padding-full);
+    padding-left: var(--container-padding-full);
   }
 
   &.dialog-appear {

@@ -1,20 +1,20 @@
 .checkbox {
-  @include defaultHoverState;
+  ${setHoverStyle()}
   position: relative;
   display: block;
   cursor: pointer;
 
   &--white {
     &:hover {
-      color: $neutral90;
+      color: var(--color-base-neutral90);
     }
   }
 
-  @include respond($break20) {
+  ${respond(``, 20)}
     display: inline-block;
   }
 
-  @include respond($break50) {
+  ${respond(``, 50)}
     & + & {
       margin-left: 32px;
     }
@@ -31,23 +31,23 @@
     margin-right: 12px;
     text-align: center;
     vertical-align: middle;
-    background-color: $neutralWhite;
+    background-color: var(--color-base-neutral-white);
     border-radius: 3px;
 
     .checkbox--gray & {
-      background-color: $neutral20;
+      background-color: var(--color-base-neutral20);
     }
   }
 
   &__icon {
     position: relative;
     top: 1px;
-    color: $neutralWhite;
+    color: var(--color-base-neutral-white);
     visibility: hidden;
 
     .checkbox--gray &,
     .checkbox--white & {
-      color: $neutral90;
+      color: var(--color-base-neutral90);
     }
 
     .checkbox.checked & {
@@ -62,7 +62,7 @@
   }
 
   input:checked ~ .checkbox__indicator {
-    background-color: $accentPrimary;
+    background-color: var(--highlight-color);
 
     .checkbox__icon {
       visibility: visible;
@@ -71,13 +71,13 @@
 
   &--gray {
     input:checked ~ .checkbox__indicator {
-      background-color: $neutral20;
+      background-color: var(--color-base-neutral20);
     }
   }
 
   &--white {
     input:checked ~ .checkbox__indicator {
-      background-color: $neutralWhite;
+      background-color: var(--color-base-neutral-white);
     }
   }
 
@@ -85,7 +85,7 @@
     outline: 0;
 
     ~ .checkbox__indicator {
-      @include defaultFocusStyle;
+      ${defaultFocusStyle}
     }
   }
 }

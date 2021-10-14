@@ -7,7 +7,7 @@
   justify-content: flex-start;
   margin-bottom: 30px;
 
-  @include respond($break95) {
+  ${respond(``, 95)}
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -24,15 +24,15 @@
       .title {
         @include headingPrimary;
         margin-bottom: 2px;
-        color: $neutralTextExtraDark;
+        color: var(--color-neutral-text-extra-dark);
 
         .bg-neutral90 & {
-          color: $neutralTextExtraLight;
+          color: var(--color-neutral-text-extra-light);
         }
       }
 
       .date {
-        @include subtitlePrimary;
+        ${subtitlePrimary}
         font-size: 14px;
       }
 
@@ -50,7 +50,7 @@
     font-style: italic;
 
     a {
-      color: $neutral50;
+      color: var(--color-base-neutral50);
 
       + a {
         margin-left: 14px;
@@ -61,12 +61,12 @@
   .utility {
     margin-top: 20px;
 
-    @include respond($break95) {
+    ${respond(``, 95)}
       margin-top: 0;
     }
 
     .right {
-      @include respond($break95) {
+      ${respond(``, 95)}
         position: absolute;
         top: 0;
         right: 0;
@@ -75,7 +75,7 @@
       .button-primary {
         margin-bottom: 20px;
 
-        @include respond($break95) {
+        ${respond(``, 95)}
           margin-bottom: 0;
         }
       }
@@ -84,13 +84,13 @@
 }
 
 .sub-section-heading {
-  @include utilityPrimary;
+  ${utilityPrimary}
   padding: 1.143em 2.143em 1.357em;
   margin-top: 0;
   margin-bottom: 2.929em;
   font-size: 14px;
   color: $accentPrimaryDark;
-  background-color: $neutral05;
+  background-color: var(--color-base-neutral05);
 }
 
 .form-heading {
@@ -98,7 +98,7 @@
   margin-bottom: 25px;
 
   .instructions {
-    @include formInstructions;
+    ${formInstructions}
     display: block;
     margin-bottom: 1em;
 

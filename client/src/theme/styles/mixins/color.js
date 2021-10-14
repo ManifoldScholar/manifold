@@ -25,3 +25,7 @@ export function transparentize(color, amount) {
 export function uriEncodeHex(color) {
   return colorConstructor(color).hex().replace("#", "%23");
 }
+
+export function darken(color, amount) {
+  return colorConstructor(color).darken(amount).hex();
+}

@@ -1,13 +1,13 @@
 .selection-group-heading {
-  @include panelRounded;
-  @include templateHead;
+  ${panelRounded}
+  font-family: var(--font-family-sans);
   padding: 0.833em min(3.75vw, 30px);
   margin-bottom: 26px;
   font-size: 18px;
-  font-weight: $medium;
-  color: var(--default-strong-color);
+  font-weight: var(--font-weight-medium);
+  color: var(--strong-color);
 
-  @include respond($break80) {
+  ${respond(``, 80)}
     font-size: 21px;
   }
 
@@ -25,7 +25,7 @@
     .comment-list {
       padding-left: 0;
 
-      @include respond($break70) {
+      ${respond(``, 70)}
         @include drawerIndent(padding-left);
       };
     }
@@ -35,7 +35,7 @@
       .comment-list {
         padding-left: 0;
 
-        @include respond($break95) {
+        ${respond(``, 95)}
           @include drawerIndent(padding-left);
         }
       }
@@ -52,7 +52,7 @@
   }
 
   .comment-list {
-    @include listUnstyled;
+    ${listUnstyled}
     @include drawerIndent(padding-left);
 
     .annotation-reply {

@@ -1,11 +1,11 @@
 .annotation-list {
-  @include listUnstyled;
+  ${listUnstyled}
 
   &--dark {
     // @include drawerPadding(padding-right);
-    background-color: $neutral05;
-    border-bottom-right-radius: $panelRoundedRadius;
-    border-bottom-left-radius: $panelRoundedRadius;
+    background-color: var(--color-base-neutral05);
+    border-bottom-right-radius: var(--box-border-radius);
+    border-bottom-left-radius: var(--box-border-radius);
   }
 
   .annotation-comments {
@@ -14,13 +14,13 @@
     padding-top: 32px;
     padding-bottom: 37px;
 
-    @include respond($break65) {
+    ${respond(``, 65)}
       padding-top: 40px;
     }
 
     + .annotation-comments {
       margin-top: 23px;
-      border-top: 1px solid $neutral40;
+      border-top: 1px solid var(--color-base-neutral40);
     }
   }
 

@@ -1,16 +1,16 @@
 /* stylelint-disable property-no-vendor-prefix */
 .nested-nav {
-  --default-hover-color: #{$accentInteractionDark};
+  --hover-color: #{$accentInteractionDark};
 
   display: none;
-  background-color: $neutralWhite;
+  background-color: var(--color-base-neutral-white);
   background-color: $headerBackgroundColor;
 
   &--dark {
-    --default-hover-color: #{$accentInteractionLight};
+    --hover-color: #{$accentInteractionLight};
     --header-foreground-color: #{$accentInteractionLight};
 
-    background-color: $neutral110;
+    background-color: var(--color-base-neutral110);
   }
 
   &--open {
@@ -22,7 +22,7 @@
     height: 100%;
   }
 
-  @include respond($break40) {
+  ${respond(``, 40)}
     min-height: 32px;
   }
 
@@ -71,7 +71,7 @@
   }
 
   &__list {
-    @include listUnstyled;
+    ${listUnstyled}
 
     &--nested {
       display: none;
@@ -107,20 +107,20 @@
       background-color: $headerBackgroundColorLight;
 
       .nested-nav--dark & {
-        background-color: $neutral95;
+        background-color: var(--color-base-neutral95);
       }
     }
   }
 
   &__item,
   &__link {
-    @include templateHead;
+    font-family: var(--font-family-sans);
     position: relative;
     font-size: 17px;
     text-decoration: none;
-    transition: color $duration $timing;
+    transition: color ${defaultTransitionProps};
 
-    @include respond($break40) {
+    ${respond(``, 40)}
       font-size: 20px;
     }
 
@@ -129,11 +129,11 @@
     }
 
     .nested-nav--dark &.active {
-      color: $neutralWhite;
+      color: var(--color-base-neutral-white);
     }
 
     .nested-nav--dark & {
-      color: $neutral45;
+      color: var(--color-base-neutral45);
     }
   }
 
@@ -169,7 +169,7 @@
   &__button,
   &__disclosure-button {
     &:focus-visible {
-      @include defaultHoverStyle;
+      ${defaultHoverStyle}
       outline: 0;
     }
   }
@@ -184,7 +184,7 @@
 
   &__button,
   &__disclosure-button {
-    @include buttonUnstyled;
+    ${buttonUnstyled}
   }
 
   &__button {
@@ -202,11 +202,11 @@
 
   &__disclosure-icon {
     color: inherit;
-    transition: transform $duration $timing;
+    transition: transform ${defaultTransitionProps};
     transform: rotate(0deg);
 
     .nested-nav__disclosure-button:hover & {
-      @include defaultHoverStyle;
+      ${defaultHoverStyle}
     }
 
     .nested-nav__item--open & {
@@ -228,7 +228,7 @@
     color: inherit;
     cursor: default;
 
-    @include respond($break40) {
+    ${respond(``, 40)}
       @include buttonAvatar(32);
       color: inherit;
       cursor: default;
@@ -244,20 +244,20 @@
   }
 
   &__standalone-title {
-    @include templateHead;
+    font-family: var(--font-family-sans);
     display: inline-block;
     margin: 0 8px 0 0;
     font-size: 18px;
-    font-weight: $semibold;
+    font-weight: var(--font-weight-semibold);
 
-    @include respond($break40) {
+    ${respond(``, 40)}
       margin-right: 12px;
       font-size: 21px;
     }
   }
 
   &__standalone-subtitle {
-    @include templateCopy;
+    font-family: var(--font-family-copy);
     display: inline-block;
     font-size: 18px;
     font-style: italic;

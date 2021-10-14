@@ -2,7 +2,7 @@
   &__wrapper {
     position: relative;
     overflow: hidden;
-    transition: height $duration $timing;
+    transition: height ${defaultTransitionProps};
 
     &::before,
     &::after {
@@ -16,15 +16,15 @@
     }
 
     &::before {
-      transition: opacity $durationSlow $timing $duration;
+      transition: opacity $durationSlow var(--transition-timing-function) $duration;
     }
 
     &--light::before {
-      background: linear-gradient(to top, $neutral05 10%, transparentize($neutral05, 1) 100%);
+      background: linear-gradient(to top, var(--color-base-neutral05) 10%, transparentize(var(--color-base-neutral05), 1) 100%);
     }
 
     &--dark::before {
-      background: linear-gradient(to top, $neutral10 10%, transparentize($neutral10, 1) 100%);
+      background: linear-gradient(to top, var(--color-base-neutral10) 10%, transparentize(var(--color-base-neutral10), 1) 100%);
     }
 
     &--blur::before {
@@ -32,9 +32,9 @@
     }
 
     &::after {
-      // hover effect (approximates bumping gradient to $neutral20)
-      background: linear-gradient(to top, transparentize($neutral30, 0.8) 10%, transparentize($neutral30, 1) 100%);
-      transition: opacity $duration $timing;
+      // hover effect (approximates bumping gradient to var(--color-base-neutral20))
+      background: linear-gradient(to top, transparentize(var(--color-base-neutral30), 0.8) 10%, transparentize(var(--color-base-neutral30), 1) 100%);
+      transition: opacity ${defaultTransitionProps};
     }
   }
 
@@ -45,22 +45,22 @@
     padding-bottom: 0;
     margin-top: -8px;
     font-size: 13px;
-    color: $neutral90;
+    color: var(--color-base-neutral90);
     visibility: visible;
     border: 0; // OD
-    border-top: 1px solid $neutral90;
+    border-top: 1px solid var(--color-base-neutral90);
     opacity: 1;
     transition:
       margin $duration linear,
-      color $duration $timing,
-      border-color $duration $timing,
-      padding-top $duration $timing $durationFast,
-      opacity $duration $timing $durationFast,
-      visibility $duration $timing $durationFast;
+      color ${defaultTransitionProps},
+      border-color ${defaultTransitionProps},
+      padding-top ${defaultTransitionProps} var(--transition-duration-fast),
+      opacity ${defaultTransitionProps} var(--transition-duration-fast),
+      visibility ${defaultTransitionProps} var(--transition-duration-fast);
 
     &:hover {
-      @include defaultHoverStyle;
-      border-color: $defaultHoverColor;
+      ${defaultHoverStyle}
+      border-color: var(--hover-color);
     }
 
     &--hidden {

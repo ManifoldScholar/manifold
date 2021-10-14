@@ -8,17 +8,17 @@
   overflow: auto;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 
-  @include respond($break60) {
+  ${respond(``, 60)}
     padding-bottom: 80px;
   }
 
-  @include respond($break75) {
+  ${respond(``, 75)}
     padding-bottom: 110px;
   }
 
   // Background default
   &:not([class*='bg-']) {
-    background-color: $neutralWhite;
+    background-color: var(--color-base-neutral-white);
   }
 
   .overlay-full-header + * {
@@ -31,7 +31,7 @@
 
   .overlay-full-appear.overlay-full-appear-active & {
     opacity: 1;
-    transition: opacity $duration $timing;
+    transition: opacity ${defaultTransitionProps};
   }
 
   .overlay-full-enter & {
@@ -40,7 +40,7 @@
 
   .overlay-full-enter.overlay-full-enter-active & {
     opacity: 1;
-    transition: opacity $duration $timing;
+    transition: opacity ${defaultTransitionProps};
   }
 
   .overlay-full-exit & {
@@ -49,6 +49,6 @@
 
   .overlay-full-exit.overlay-full-exit-active & {
     opacity: 0.01;
-    transition: opacity $duration $timing;
+    transition: opacity ${defaultTransitionProps};
   }
 }

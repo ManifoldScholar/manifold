@@ -3,23 +3,23 @@
   align-items: center;
 
   &__label {
-    @include utilityPrimary;
+    ${utilityPrimary}
     margin-right: 8px;
     font-size: 14px;
     line-height: 15px;
   }
 
   &__list {
-    @include listUnstyled;
+    ${listUnstyled}
     display: flex;
     align-items: center;
   }
 
   &__link {
-    @include buttonUnstyled;
+    ${buttonUnstyled}
     padding-right: 8px;
     padding-left: 8px;
-    color: $neutralUIDark;
+    color: var(--color-neutral-ui-dark);
     text-decoration: none;
   }
 }

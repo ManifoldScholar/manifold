@@ -6,7 +6,7 @@
   align-items: baseline;
   margin-bottom: 10px;
 
-  @include respond($break50) {
+  ${respond(``, 50)}
     flex-direction: row;
     justify-content: space-between;
   }
@@ -21,10 +21,10 @@
     left: 0;
     width: annotation-list(avatar-height);
     height: annotation-list(avatar-height);
-    color: $neutralUIDark;
+    color: var(--color-neutral-ui-dark);
 
     &--dull {
-      color: $neutral20;
+      color: var(--color-base-neutral20);
       cursor: default;
     }
 
@@ -41,27 +41,27 @@
 
   &__avatar-image-container {
     width: 32px;
-    border: 1px solid $neutral50;
+    border: 1px solid var(--color-base-neutral50);
     border-radius: 100%;
   }
 
   &__author-name {
-    @include templateHead;
+    font-family: var(--font-family-sans);
     margin: 0;
-    font-weight: $semibold;
+    font-weight: var(--font-weight-semibold);
     hyphens: none;
-    color: var(--default-strong-color);
+    color: var(--strong-color);
   }
 
   &__deleted-message {
-    @include subtitlePrimary;
+    ${subtitlePrimary}
     margin-top: 8px;
     margin-bottom: 11px;
   }
 
   &__datetime,
   &__subtitle {
-    @include subtitlePrimary;
+    ${subtitlePrimary}
     margin-top: 2px;
   }
 
@@ -69,7 +69,7 @@
     display: flex;
     padding-top: 6px;
 
-    @include respond($break50) {
+    ${respond(``, 50)}
       padding: 0;
     }
   }

@@ -5,7 +5,7 @@
   top: 0;
   justify-content: center;
   width: 100%;
-  color: var(--default-strong-color);
+  color: var(--strong-color);
   background-color: var(--box-bg-color);
 
   &__inner {
@@ -41,7 +41,7 @@
   }
 
   &__subtitle {
-    @include utilityPrimary;
+    ${utilityPrimary}
     font-size: 13px;
   }
 }

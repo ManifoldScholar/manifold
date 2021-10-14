@@ -4,10 +4,10 @@
   }
 
   &__list {
-    @include listUnstyled;
+    ${listUnstyled}
     margin: 14px 0;
-    border-top: 1px solid $neutral40;
-    border-bottom: 1px solid $neutral40;
+    border-top: 1px solid var(--color-base-neutral40);
+    border-bottom: 1px solid var(--color-base-neutral40);
   }
 
 }

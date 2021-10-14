@@ -1,11 +1,11 @@
 // User Menu button and panel global styles
 .button-avatar {
-  @include buttonUnstyled;
+  ${buttonUnstyled}
   height: 100%;
   vertical-align: middle;
 
   .avatar {
-    @include buttonAvatar(32, var(--header-foreground-color, $neutralTextDark));
+    @include buttonAvatar(32, var(--header-foreground-color, var(--color-neutral-text-dark)));
   }
 
   &--frontend,
@@ -14,13 +14,13 @@
     padding-bottom: 5px;
 
     .avatar {
-      transition: color $duration $timing;
+      transition: color ${defaultTransitionProps};
     }
 
     &:hover,
     &.button-active {
       .avatar {
-        @include defaultHoverStyle;
+        ${defaultHoverStyle}
       }
     }
   }
@@ -30,7 +30,7 @@
       outline: 0;
 
       .avatar {
-        @include defaultHoverStyle;
+        ${defaultHoverStyle}
       }
     }
   }
@@ -54,64 +54,64 @@
   // browse styles
   position: absolute;
   right: -20px;
-  color: $neutralTextDark;
+  color: var(--color-neutral-text-dark);
   white-space: nowrap;
-  background-color: $neutral05;
+  background-color: var(--color-base-neutral05);
 
   &--frontend,
   &--backend {
     z-index: 1; // ensure menu is on top of .header-app
     min-width: $menuWidth;
-    border-radius: $panelRoundedRadius;
-    box-shadow: 5px 15px 35px 8px rgba($neutralBlack, 0.13);
+    border-radius: var(--box-border-radius);
+    box-shadow: 5px 15px 35px 8px rgba(var(--color-base-neutral-black), 0.13);
   }
 
   &--reader {
     width: 100%;
 
-    @include respond($break50) {
+    ${respond(``, 50)}
       width: auto;
     }
   }
 
   &__tail {
-    @include tailUp($neutral05, $tailHeight);
+    @include tailUp(var(--color-base-neutral05), $tailHeight);
     position: absolute;
     top: -$tailHeight;
     right: 25px;
   }
 
   &__list {
-    @include listUnstyled;
+    ${listUnstyled}
     padding-top: 11px;
     padding-bottom: 15px;
   }
 
   &__item {
-    @include templateHead;
+    font-family: var(--font-family-sans);
     font-size: 16px;
   }
 
   &__link {
-    @include buttonUnstyled;
+    ${buttonUnstyled}
     display: flex;
     align-items: center;
     width: 100%;
     padding: 8px 20px;
     text-decoration: none;
-    transition: color $duration $timing, background-color $duration $timing;
+    transition: color ${defaultTransitionProps}, background-color ${defaultTransitionProps};
 
     &:hover,
     &:focus-visible {
-      color: $neutral90;
+      color: var(--color-base-neutral90);
 
       .user-menu--reader & {
-        background-color: $neutral30;
+        background-color: var(--color-base-neutral30);
       }
     }
 
     &:focus-visible {
-      background-color: $neutral30;
+      background-color: var(--color-base-neutral30);
       outline: 0;
     }
   }
@@ -123,20 +123,20 @@
     position: relative;
     top: 2px;
     margin-right: 10px;
-    transition: color $duration $timing;
+    transition: color ${defaultTransitionProps};
 
     .user-menu--frontend &,
     .user-menu--backend & {
-      color: $neutralUIDark;
+      color: var(--color-neutral-ui-dark);
     }
 
     .user-menu__link:hover &,
     .user-menu__link:focus-visible & {
-      color: $neutral90;
+      color: var(--color-base-neutral90);
     }
   }
 
-  @include respond($break40) {
+  ${respond(``, 40)}
     right: -24px;
   }
 }

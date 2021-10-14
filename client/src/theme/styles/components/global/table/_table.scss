@@ -14,15 +14,15 @@
   }
 
   &__heading-small {
-    @include formLabelPrimary;
+    ${formLabelPrimary}
   }
 
   &__row {
     position: relative;
     padding: 16px;
     margin: 0;
-    border-bottom: 1px solid $neutral45;
-    transition: background-color $duration $timing;
+    border-bottom: 1px solid var(--color-base-neutral45);
+    transition: background-color ${defaultTransitionProps};
 
     &--is-link {
       cursor: pointer;
@@ -37,7 +37,7 @@
     display: grid;
 
     @include respond($_layout-breakpoint) {
-      @include screenReaderText;
+      ${screenReaderText}
     }
   }
 
@@ -65,7 +65,7 @@
   }
 
   &__ordered-list {
-    @include listUnstyled;
+    ${listUnstyled}
 
     @include respond($_layout-breakpoint) {
       display: none;
@@ -75,7 +75,7 @@
   &__link-arrow {
     flex-shrink: 0;
     opacity: 0;
-    transition: opacity $duration $timing, transform $duration $timing;
+    transition: opacity ${defaultTransitionProps}, transform ${defaultTransitionProps};
     transform: translateY(1px);
 
     &--active {
@@ -100,7 +100,7 @@
     position: relative;
     top: -2.5px;
     margin-left: 10px;
-    color: $neutralUIDark;
+    color: var(--color-neutral-ui-dark);
   }
 
   &__nested-link {
@@ -109,7 +109,7 @@
     margin-left: -17px;
     text-decoration: none;
     border-radius: 13px;
-    transition: background-color $duration $timing;
+    transition: background-color ${defaultTransitionProps};
 
     @include respond($_layout-breakpoint) {
       // margin-left: 17px;
@@ -132,7 +132,7 @@
     top: 50%;
     right: 12px;
     opacity: 0;
-    transition: opacity $duration $timing, transform $duration $timing;
+    transition: opacity ${defaultTransitionProps}, transform ${defaultTransitionProps};
     transform: translate(0, -50%);
   }
 
@@ -168,13 +168,13 @@
   }
 
   &__sr-link {
-    @include screenReaderText;
+    ${screenReaderText}
 
     &:focus-visible {
       outline: 0;
 
       ~ .table__name-container {
-        @include defaultFocusStyle;
+        ${defaultFocusStyle}
       }
     }
   }
@@ -183,7 +183,7 @@
     display: flex;
     justify-content: space-between;
 
-    @include respond($break40) {
+    ${respond(``, 40)}
       justify-content: flex-start;
     }
   }
@@ -202,10 +202,10 @@
   }
 
   &__body-text {
-    @include templateHead;
+    font-family: var(--font-family-sans);
     position: relative;
     margin: 0;
-    color: var(--default-strong-color);
+    color: var(--strong-color);
   }
 
   &__value-large {
@@ -214,7 +214,7 @@
     padding: 10px 0 20px;
     margin: 0;
     font-size: 18px;
-    font-weight: $medium;
+    font-weight: var(--font-weight-medium);
 
     @include respond($_layout-breakpoint) {
       width: 100%;
@@ -240,11 +240,11 @@
     position: relative;
     top: -1px;
     margin-right: 5px;
-    color: var(--default-color);
+    color: var(--color);
   }
 
   &__name-container {
-    @include textTruncate;
+    ${textTruncate}
     line-height: 1.4;
     transform: translateY(1px);
 
@@ -262,7 +262,7 @@
     padding: 5px 12px 6px;
     font-size: 11px;
     line-height: 1.2em;
-    color: var(--default-strong-color);
+    color: var(--strong-color);
     white-space: nowrap;
     vertical-align: middle;
     background-color: var(--box-medium-bg-color);
@@ -304,7 +304,7 @@
   }
 
   &__value-standard {
-    @include utilityPrimary;
+    ${utilityPrimary}
     font-size: 12px;
   }
 
@@ -327,7 +327,7 @@
     }
 
     &--truncate {
-      @include textTruncate;
+      ${textTruncate}
     }
 
     &--medium {
@@ -365,13 +365,13 @@
       width: 30px;
       height: 30px;
       margin: -1px 14px -1px 3px;
-      border: 1px solid $neutral50;
+      border: 1px solid var(--color-base-neutral50);
       border-radius: 100%;
     }
 
     &--placeholder {
       margin: -3px 10px -4px 0;
-      color: $neutral50;
+      color: var(--color-base-neutral50);
 
       svg {
         width: 36px;

@@ -2,7 +2,7 @@
   .form-group + .form-group {
     margin-top: 0;
 
-    @include respond($break60) {
+    ${respond(``, 60)}
       margin-top: 40px;
     }
   }
@@ -10,7 +10,7 @@
   .nickname {
     @include headingPrimary;
     margin-bottom: 30px;
-    color: $accentPrimary;
+    color: var(--highlight-color);
   }
 
   .overlay-copy {

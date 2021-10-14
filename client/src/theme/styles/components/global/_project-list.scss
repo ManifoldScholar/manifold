@@ -2,7 +2,7 @@
 // Can switch to a grid-style layout at larger viewport sizes with `.grid`
 .project-list {
   ul {
-    @include listUnstyled;
+    ${listUnstyled}
     display: flex;
     flex-direction: column;
   }
@@ -22,7 +22,7 @@
         outline: 0;
 
         .title-text, .label {
-          @include defaultHoverStyle;
+          ${defaultHoverStyle}
         }
       }
     }
@@ -38,7 +38,7 @@
       @include projectGridItem;
     }
 
-    @include respond($break75) {
+    ${respond(``, 75)}
       width: calc(100% + 4.21vw);
       margin-right: -2.105vw;
       margin-left: -2.105vw;
@@ -67,7 +67,7 @@
       }
     }
 
-    @include respond($break120) {
+    ${respond(``, 120)}
       width: calc(100% + 52px);
       margin-right: -26px;
       margin-left: -26px;
@@ -78,7 +78,7 @@
       padding-top: 0;
       text-align: left;
 
-      @include respond($break75) {
+      ${respond(``, 75)}
         margin: auto;
       }
     }

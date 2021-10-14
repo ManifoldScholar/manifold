@@ -1,39 +1,39 @@
 .search-query {
-  --default-hover-color: #{$accentInteractionDark};
+  --hover-color: #{$accentInteractionDark};
 
-  color: $neutralTextDark;
+  color: var(--color-neutral-text-dark);
 
   // Input defaults
   &__input {
-    @include templateHead;
+    font-family: var(--font-family-sans);
     width: 100%;
     padding: 0.722em 0.889em;
     font-size: 16px;
-    font-weight: $regular;
+    font-weight: var(--font-weight-regular);
     /* stylelint-disable-next-line declaration-no-important */
-    color: var(--default-strong-color) !important; // necessary to win specifity battle :(
-    background-color: $neutral05;
+    color: var(--strong-color) !important; // necessary to win specifity battle :(
+    background-color: var(--color-base-neutral05);
     border: 3px solid transparent;
     outline: none;
     appearance: none;
 
     &::placeholder {
-      color: var(--default-color);
+      color: var(--color);
     }
 
     &:focus-visible {
       outline: 0;
 
       &::placeholder {
-        color: var(--default-strong-color);
+        color: var(--strong-color);
       }
     }
 
     .search-menu & {
-      background-color: $neutralWhite;
+      background-color: var(--color-base-neutral-white);
     }
 
-    @include respond($break70) {
+    ${respond(``, 70)}
       font-size: 18px;
     }
   }
@@ -43,7 +43,7 @@
     position: relative;
     width: 100%;
 
-    @include respond($break40) {
+    ${respond(``, 40)}
       min-width: 380px;
     }
 
@@ -55,7 +55,7 @@
 
   // Can be button or a simple icon
   &__submit {
-    @include buttonUnstyled;
+    ${buttonUnstyled}
     position: absolute;
     top: 50%;
     left: 20px;
@@ -80,21 +80,21 @@
   }
 
   &__filter-group-list {
-    @include listUnstyled;
+    ${listUnstyled}
     display: flex;
     flex-wrap: wrap;
 
     > *:not(:last-child) {
       margin-right: 36px;
 
-      @include respond($break70) {
+      ${respond(``, 70)}
         margin-right: 30px;
       }
     }
   }
 
   &__group-label {
-    @include utilityPrimary;
+    ${utilityPrimary}
     position: relative;
     display: block;
     padding-top: 2px;
@@ -106,7 +106,7 @@
 
   &__checkbox,
   .form-toggle.radio .toggle-label {
-    @include utilityPrimary;
+    ${utilityPrimary}
     font-size: 13px;
   }
 
@@ -117,12 +117,12 @@
     width: 100%;
     margin-bottom: 10px;
 
-    @include respond($break50) {
+    ${respond(``, 50)}
       width: auto;
       margin-bottom: 14px;
     }
 
-    @include respond($break70) {
+    ${respond(``, 70)}
       margin-bottom: 14px;
     }
 
@@ -147,7 +147,7 @@
   }
 
   &__description {
-    @include templateCopy;
+    font-family: var(--font-family-copy);
     font-size: 14px;
     font-style: italic;
   }

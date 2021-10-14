@@ -3,7 +3,7 @@
   max-width: 240px;
 
   &[href] {
-    transition: background-color $duration $timing;
+    transition: background-color ${defaultTransitionProps};
 
     &:hover {
       color: inherit;
@@ -12,7 +12,7 @@
   }
 
   &--secondary {
-    color: var(--default-error-color);
+    color: var(--error-color);
   }
 
   & + & {

@@ -6,7 +6,7 @@
   @include drawerPadding(padding-left);
   padding-top: 32px;
 
-  @include respond($break90) {
+  ${respond(``, 90)}
     padding-top: 48px;
   }
 
@@ -24,14 +24,14 @@
   }
 
   &__editor-label {
-    @include utilityPrimary;
+    ${utilityPrimary}
     display: flex;
     align-items: center;
     margin: 0; // OD
     margin-bottom: 1.313em;
     font-size: 14px;
 
-    @include respond($break60) {
+    ${respond(``, 60)}
       font-size: 16px;
     }
   }
@@ -39,9 +39,9 @@
   &__label-icon {
     margin-right: 7px;
     margin-left: -3px;
-    color: $neutralUIDark;
+    color: var(--color-neutral-ui-dark);
 
-    @include respond($break60) {
+    ${respond(``, 60)}
       width: 54px;
       height: 54px;
       margin-right: 9px;
@@ -49,31 +49,31 @@
   }
 
   &__textarea {
-    @include templateHead;
+    font-family: var(--font-family-sans);
     width: 100%;
     padding: 1em 1.5em;
     font-size: 16px;
-    color: $neutralTextExtraDark;
+    color: var(--color-neutral-text-extra-dark);
     resize: vertical;
-    background-color: $neutral10;
+    background-color: var(--color-base-neutral10);
     border: 0;
-    border-radius: $panelRoundedRadius;
+    border-radius: var(--box-border-radius);
     outline: 0;
 
-    @include respond($break60) {
+    ${respond(``, 60)}
       font-size: 18px;
     }
 
-    @include respond($break90) {
+    ${respond(``, 90)}
       font-size: 20px;
     }
 
     &::placeholder {
-      color: $neutralTextDark;
+      color: var(--color-neutral-text-dark);
     }
 
     &:focus-visible::placeholder {
-      color: $neutralTextExtraDark;
+      color: var(--color-neutral-text-extra-dark);
     }
   }
 
@@ -84,14 +84,14 @@
     justify-content: space-between;
     margin-top: 10px - $actionMarginTop;
 
-    @include respond($break90) {
+    ${respond(``, 90)}
       margin-top: 20px - $actionMarginTop;
     }
 
     .form-input {
       width: 100%;
 
-      @include respond($break95) {
+      ${respond(``, 95)}
         width: auto;
       }
     }
@@ -102,14 +102,14 @@
     flex-direction: column;
     margin-top: $actionMarginTop;
 
-    @include respond($break60) {
+    ${respond(``, 60)}
       flex-direction: row;
       align-items: center;
     }
   }
 
   &__action-label {
-    @include utilityPrimary;
+    ${utilityPrimary}
     display: flex;
     align-items: center;
     margin-right: 16px;
@@ -117,7 +117,7 @@
     font-size: 14px;
     letter-spacing: 0.125em;
 
-    @include respond($break60) {
+    ${respond(``, 60)}
       margin-bottom: 0;
     }
   }
@@ -128,29 +128,29 @@
 
   &__group-picker {
     position: relative;
-    color: $neutralTextExtraDark;
+    color: var(--color-neutral-text-extra-dark);
   }
 
   &__group-picker-toggle {
-    @include buttonUnstyled;
-    @include templateHead;
+    ${buttonUnstyled}
+    font-family: var(--font-family-sans);
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 250px;
     padding: 7.5px 16px 9.5px 18px;
     font-size: 17px;
-    background-color: $neutral10;
+    background-color: var(--color-base-neutral10);
     border-radius: 20px;
-    transition: background-color $duration $timing;
+    transition: background-color ${defaultTransitionProps};
 
     &:hover {
       color: inherit;
-      background-color: $neutral20;
+      background-color: var(--color-base-neutral20);
     }
 
     &:focus-visible {
-      background-color: $neutral20;
+      background-color: var(--color-base-neutral20);
       outline: 0;
     }
 
@@ -199,7 +199,7 @@
     .button-secondary {
       &[disabled='disabled'],
       &.button-secondary:disabled {
-        color: $neutralTextExtraDark;
+        color: var(--color-neutral-text-extra-dark);
         background-color: $accentPrimaryDull;
       }
 
@@ -210,8 +210,8 @@
   }
 
   .placeholder button {
-    @include buttonUnstyled;
-    @include utilityPrimary;
+    ${buttonUnstyled}
+    ${utilityPrimary}
     font-size: 14px;
     border: 0;
   }

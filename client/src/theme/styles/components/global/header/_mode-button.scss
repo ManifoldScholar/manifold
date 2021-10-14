@@ -1,23 +1,23 @@
 .mode-button {
-  @include utilityPrimary;
+  ${utilityPrimary}
   display: inline-block;
   padding: 0.76em 1.7em;
   font-size: 11.18px;
-  color: $neutral75;
-  color: var(--header-foreground-color, $neutral75);
+  color: var(--color-base-neutral75);
+  color: var(--header-foreground-color, var(--color-base-neutral75));
   text-decoration: none;
   letter-spacing: 0.134em;
   white-space: nowrap;
   border: 1px solid;
   border-radius: 4px;
   transition:
-    color $duration $timing,
-    background-color $duration $timing,
-    border-color $duration $timing;
+    color ${defaultTransitionProps},
+    background-color ${defaultTransitionProps},
+    border-color ${defaultTransitionProps};
 
   &:hover,
   &:focus-visible {
-    color: $neutralTextExtraDark;
+    color: var(--color-neutral-text-extra-dark);
     background-color: $accentInteractionLight;
     border-color: $accentInteractionLight;
     outline: 0;
@@ -28,7 +28,7 @@
   .user-nav--dark & {
     &:hover,
     &:focus-visible {
-      color: $neutral90;
+      color: var(--color-base-neutral90);
     }
   }
 }

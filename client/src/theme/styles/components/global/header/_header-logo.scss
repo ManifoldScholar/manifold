@@ -2,27 +2,27 @@
   grid-area: logo;
   align-self: center;
   max-width: 300px;
-  color: $accentPrimary;
+  color: var(--highlight-color);
   text-decoration: none;
   vertical-align: middle;
 
   .library-header--dark & {
-    color: $neutralUILight;
+    color: var(--color-neutral-ui-light);
   }
 
   &:hover,
   &:focus-visible {
-    color: $defaultHoverColor;
+    color: var(--hover-color);
     outline: 0;
   }
 
   .manicon-svg {
-    @include respond($break40) {
+    ${respond(``, 40)}
       width: 32px;
       height: 32px;
     }
 
-    @include respond($break75) {
+    ${respond(``, 75)}
       width: 38px;
       height: 38px;
     }

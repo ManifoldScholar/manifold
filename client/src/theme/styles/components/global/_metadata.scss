@@ -1,15 +1,15 @@
 .meta-list-secondary {
-  @include listUnstyled;
+  ${listUnstyled}
 
   &.columnar {
-    @include respond($break60) {
+    ${respond(``, 60)}
       max-width: 810px;
       column-count: 2;
     }
   }
 
   li {
-    @include utilityPrimary;
+    ${utilityPrimary}
     display: block;
     width: 100%;
     font-size: 13px;
@@ -27,10 +27,10 @@
 
     .meta-value {
       margin-top: 3px;
-      color: $neutralTextExtraDark;
+      color: var(--color-neutral-text-extra-dark);
 
       .bg-neutral90 & {
-        color: $neutralTextExtraLight;
+        color: var(--color-neutral-text-extra-light);
       }
 
       a {
@@ -41,25 +41,25 @@
 }
 
 .meta-list-primary {
-  @include listUnstyled;
+  ${listUnstyled}
 
   &.columnar {
-    @include respond($break60) {
+    ${respond(``, 60)}
       column-gap: 10.2vw;
       columns: 2;
     }
 
-    @include respond($break75) {
+    ${respond(``, 75)}
       column-gap: 30px;
     }
 
-    @include respond($break85) {
+    ${respond(``, 85)}
       columns: 3;
     }
   }
 
   + .meta-list-primary {
-    @include respond($break60) {
+    ${respond(``, 60)}
       margin-top: 30px;
     }
   }
@@ -71,32 +71,32 @@
   }
 
   .meta-label {
-    @include utilityPrimary;
+    ${utilityPrimary}
     display: block;
     font-size: 12px;
 
-    @include respond($break60) {
+    ${respond(``, 60)}
       font-size: 14px;
     }
   }
 
   .meta-value {
-    @include templateHead;
+    font-family: var(--font-family-sans);
     margin-top: 7px;
     margin-bottom: 1.667em;
     font-size: 15px;
-    color: $neutralTextExtraDark;
+    color: var(--color-neutral-text-extra-dark);
 
-    @include respond($break60) {
+    ${respond(``, 60)}
       margin-top: 10px;
       font-size: 18px;
     }
 
     .bg-neutral90 & {
-      color: $neutralTextExtraLight;
+      color: var(--color-neutral-text-extra-light);
     }
 
-    @include respond($break40) {
+    ${respond(``, 40)}
       font-size: 20px;
     }
   }

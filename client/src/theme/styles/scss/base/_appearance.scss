@@ -314,6 +314,30 @@ body {
   }
 }
 
+// Text only button with full width bottom border
+@mixin buttonTrimPrimary {
+  @include buttonUnstyled;
+  @include utilityPrimary;
+  display: block;
+  width: 100%;
+  padding-bottom: 13px;
+  font-size: 14px;
+  text-align: left;
+
+  &:hover {
+    color: $accentPrimaryMedium;
+  }
+
+  &:focus-visible {
+    color: var(--color-base-neutral95);
+    outline: 0;
+  }
+
+  &:active {
+    color: $defaultHoverColor;
+  }
+}
+
 @mixin marker {
   @include templateHead;
   display: flex;
@@ -471,6 +495,16 @@ body {
       color: $accentPrimary;
     }
   }
+}
+
+@mixin filterSelectBase {
+  @include unstyledSelect;
+  @include utilityPrimary;
+  padding-right: 36px;
+  padding-left: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @mixin panelRounded {

@@ -6,11 +6,11 @@
   height: 100%;
 
   .backend & {
-    background-color: transparentize($neutralBlack, 0.35);
+    background-color: transparentize(var(--color-base-neutral-black), 0.35);
   }
 
   .browse &,
   .reader & {
-    background-color: transparentize($neutralWhite, 0.1);
+    background-color: transparentize(var(--color-base-neutral-white), 0.1);
   }
 }

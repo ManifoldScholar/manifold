@@ -1,8 +1,8 @@
-import { css } from "styled-components";
 import {
   breakpointLessOne,
   respond,
   buttonUnstyled,
+  buttonTrimPrimary,
   utilityPrimary,
   defaultTransitionProps,
   defaultHoverStyle,
@@ -10,7 +10,7 @@ import {
   rgba
 } from "theme/styles/mixins";
 
-export default css`
+export default `
   .utility-button {
     ${buttonUnstyled}
     display: inline-flex;
@@ -230,11 +230,11 @@ export default css`
 
     &__icon {
       margin-right: 7px;
-      color: $neutral50;
+      color: var(--color-base-neutral50);
       transition: color ${defaultTransitionProps};
 
       .button-icon-primary:hover & {
-        color: $neutralUIExtraDark;
+        color: var(--color-neutral-ui-extra-dark);
       }
 
       ${respond(
@@ -311,18 +311,18 @@ export default css`
     }
 
     &--dull {
-      color: var(--default-color);
-      border-color: var(--default-color);
+      color: var(--color);
+      border-color: var(--color);
 
       &:hover:not([disabled]),
       &:active:not([disabled]) {
-        color: var(--default-hover-color);
+        color: var(--hover-color);
         background-color: transparent;
-        border-color: var(--default-hover-color);
+        border-color: var(--hover-color);
       }
 
       &:focus-visible:not([disabled]) {
-        color: var(--default-strong-color);
+        color: var(--strong-color);
         background-color: rgba("neutral70", 0.3);
         outline: 0;
       }
@@ -340,7 +340,7 @@ export default css`
       padding-top: 1.125em;
       padding-bottom: 1.375em;
       font-size: 12px;
-      font-weight: $semibold;
+      font-weight: var(--font-weight-semibold);
       text-transform: uppercase;
       letter-spacing: 0.115em;
     }
@@ -348,18 +348,14 @@ export default css`
     &--in-drawer {
       width: 100%;
 
-      @include respond($break90) {
-        width: calc(50% - 17px);
-      }
+      ${respond(`width: calc(50% - 17px);`, 90)}
     }
 
     &--wide {
       width: 100%;
       margin-bottom: 15px;
 
-      @include respond($break85) {
-        width: calc(50% - 17px);
-      }
+      ${respond(`width: calc(50% - 17px);`, 85)}
     }
   }
 
@@ -367,14 +363,11 @@ export default css`
   // to vertical by default, can maintain horizontal
   // progress with class "maintain"
   .buttons-icon-horizontal {
-    $_gap: 20px;
-
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: -1 * $_gap;
+    gap: 20px;
     margin-bottom: 35px;
-    margin-left: -1 * $_gap;
 
     &.right {
       justify-content: flex-end;
@@ -390,17 +383,13 @@ export default css`
       }
     }
 
-    @include respond($break85) {
-      font-size: 0;
-    }
+    ${respond(`font-size: 0;`, 85)}
 
     &__button {
       margin-bottom: 15px;
 
       &:not(.button-icon-secondary--in-drawer) {
-        flex-basis: calc(50% - #{$_gap});
-        margin-top: $_gap;
-        margin-left: $_gap;
+        flex-basis: calc(50% - 20px);
 
         &:not(:only-child) {
           flex-grow: 1;
@@ -416,29 +405,25 @@ export default css`
     .full {
       display: none;
 
-      @include respond($break85) {
-        display: inline;
-      }
+      ${respond(`display: inline;`, 85)}
     }
 
     .abbreviated {
-      @include respond($break85) {
-        display: none;
-      }
+      ${respond(`display: none;`, 85)}
     }
   }
 
   // Can be an <input>, <button>, or an <a>
   .button-secondary {
-    @include buttonUnstyled;
-    @include templateHead;
+    ${buttonUnstyled}
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0.857em 30px 0.929em;
     font-size: 12px;
-    font-weight: $semibold;
-    color: var(--default-strong-color);
+    font-family: var(--font-family-sans);
+    font-weight: var(--font-weight-semibold);
+    color: var(--strong-color);
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
@@ -447,13 +432,11 @@ export default css`
     transition: color ${defaultTransitionProps},
       background-color ${defaultTransitionProps};
 
-    @include respond($break60) {
-      font-size: 14px;
-    }
+    ${respond(`font-size: 14px;`, 60)}
 
     &:hover,
     &:focus-visible {
-      color: var(--default-strong-color);
+      color: var(--strong-color);
       background-color: var(--accent-primary-dull);
       outline: 0;
     }
@@ -471,47 +454,47 @@ export default css`
 
       &:hover,
       &:focus-visible {
-        background-color: $neutral20;
+        background-color: var(--color-base-neutral20);
       }
 
       &:active {
-        color: $neutralWhite;
-        background-color: $neutral50;
+        color: var(--color-base-neutral-white);
+        background-color: var(--color-base-neutral20);
       }
     }
 
     &--outlined {
       color: var(--highlight-color);
       background: none;
-      border: 1px solid var(--default-hover-color);
+      border: 1px solid var(--hover-color);
 
       &:hover,
       &:focus-visible {
-        color: $neutralTextExtraDark;
-        background-color: var(--default-hover-color);
+        color: var(--color-neutral-text-extra-dark);
+        background-color: var(--hover-color);
         outline: 0;
       }
 
       .bg-neutral90 &,
       .bg-neutral100 &,
       .drawer-backend & {
-        --highlight-color: #{$neutralWhite};
+        --highlight-color: var(--color-base-neutral-white);
 
         &:not(.button-secondary--dull):hover,
         &:not(.button-secondary--dull):focus-visible {
-          color: $neutralTextExtraDark;
-          background-color: var(--default-hover-color);
+          color: var(--color-neutral-text-extra-dark);
+          background-color: var(--hover-color);
         }
       }
 
       &.button-secondary--dull {
-        --highlight-color: #{$neutral45};
-        --default-hover-color: #{$neutral45};
+        --highlight-color: var(--color-base-neutral45);
+        --hover-color: var(--color-base-neutral45);
 
         ${fillOnFocus(rgba("neutral70", 0.2))}
 
         &:hover {
-          color: $neutralTextExtraDark;
+          color: var(--color-neutral-text-extra-dark);
           background-color: var(--highlight-color);
           outline: 0;
         }
@@ -527,35 +510,35 @@ export default css`
       }
 
       &.button-secondary--dull {
-        background-color: $neutral10;
+        background-color: var(--color-base-neutral10);
 
         &:hover,
         &:focus-visible {
-          background-color: $neutral20;
+          background-color: var(--color-base-neutral20);
         }
       }
     }
 
     &--dark {
       justify-content: flex-start;
-      color: $neutralUIExtraLight;
+      color: var(--color-neutral-ui-extra-light);
       text-align: left;
-      background-color: $neutral80;
+      background-color: var(--color-base-neutral80);
 
       .bg-neutral90 & {
         &:hover,
         &:active {
-          color: $neutralTextExtraDark;
+          color: var(--color-neutral-text-extra-dark);
         }
 
         &:focus-visible {
-          background-color: $neutralTextExtraDark;
+          background-color: var(--color-neutral-text-extra-dark);
         }
       }
     }
 
     &--color-white {
-      color: $neutralWhite;
+      color: var(--color-base-neutral-white);
     }
 
     &__icon {
@@ -569,7 +552,7 @@ export default css`
 
     &__text {
       &--white {
-        color: $neutralWhite;
+        color: var(--color-base-neutral-white);
       }
 
       &--hover-dark {
@@ -577,7 +560,7 @@ export default css`
 
         .button-secondary:hover &,
         .button-secondary:focus-visible & {
-          color: $neutral90;
+          color: var(--color-base-neutral90);
         }
       }
 
@@ -588,11 +571,11 @@ export default css`
   }
 
   .button-tertiary {
-    @include utilityPrimary;
+    ${utilityPrimary}
     display: inline-block;
     padding: 5px 14px 7px;
     font-size: 12px;
-    color: $neutralTextExtraDark;
+    color: var(--color-neutral-text-extra-dark);
     text-align: center;
     text-decoration: none;
     letter-spacing: 0.134em;
@@ -607,14 +590,14 @@ export default css`
     &:hover,
     &:focus-visible,
     &--active {
-      color: $neutralTextExtraDark;
+      color: var(--color-neutral-text-extra-dark);
       background-color: var(--button-tertiary-bg-hover-color);
       border-color: var(--button-tertiary-bg-hover-color);
       outline: 0;
     }
 
     &--neutral {
-      background-color: var(--default-bg-color);
+      background-color: var(--background-color);
       border-color: currentColor;
     }
 
@@ -624,32 +607,8 @@ export default css`
     }
   }
 
-  // Text only button with full width bottom border
-  @mixin buttonTrimPrimary {
-    @include buttonUnstyled;
-    @include utilityPrimary;
-    display: block;
-    width: 100%;
-    padding-bottom: 13px;
-    font-size: 14px;
-    text-align: left;
-
-    &:hover {
-      color: $accentPrimaryMedium;
-    }
-
-    &:focus-visible {
-      color: $neutral95;
-      outline: 0;
-    }
-
-    &:active {
-      color: var(--hover-color);
-    }
-  }
-
   .button-trim-primary {
-    @include buttonTrimPrimary;
+    ${buttonTrimPrimary}
   }
 
   // TODO: Refactor login into form (default) with overlay (modified) and remove this
@@ -659,40 +618,28 @@ export default css`
     }
   }
 
-  @mixin listButtonSimple {
-    @include buttonUnstyled;
-    @include utilityPrimary;
-    font-size: 14px;
-    color: $neutral40;
-    border: 0;
-    transition: color ${defaultTransitionProps};
-
-    &:hover,
-    &.active,
-    &:focus-visible {
-      color: $accentPrimaryDark;
-    }
-  }
-
   /* stylelint-disable declaration-no-important */
   .back-link-primary {
-    @include utilityPrimary;
+    ${utilityPrimary}
     display: inline-flex;
     align-items: center;
     padding: 16px 0 15px;
     font-size: 13px;
     line-height: 1.4;
-    color: var(--default-weak-color);
+    color: var(--weak-color);
     text-decoration: none !important;
     letter-spacing: 0.1em;
     background-color: var(--box-bg-color);
     transition: color ${defaultTransitionProps},
       background-color ${defaultTransitionProps};
 
-    @include respond($break40) {
-      padding: 21px 0 20px;
-      font-size: 14px;
-    }
+    ${respond(
+      `
+        padding: 21px 0 20px;
+        font-size: 14px;
+      `,
+      40
+    )}
 
     &--full {
       display: flex;
@@ -702,7 +649,7 @@ export default css`
       &:hover,
       &:active,
       &:focus-visible {
-        color: var(--default-hover-color);
+        color: var(--hover-color);
         background-color: inherit;
         outline: 0;
       }
@@ -719,21 +666,20 @@ export default css`
     &__container {
       position: relative;
       width: 100%;
-      padding-left: calc(#{$containerPaddingResp} + 40px);
+      padding-left: calc(var(--container-padding-responsive) + 40px);
 
-      @include respond($break120) {
-        padding-left: calc(#{$containerPaddingFull} + 40px);
-      }
+      ${respond(
+        `padding-left: calc(var(--container-padding-full) + 40px);`,
+        120
+      )}
     }
 
     &__icon {
       position: absolute;
       top: -2px;
-      left: $containerPaddingResp;
+      left: var(--container-padding-responsive);
 
-      @include respond($break120) {
-        left: $containerPaddingFull;
-      }
+      ${respond(`left: var(--container-padding-full);`, 120)}
     }
 
     &__back-text {
@@ -746,7 +692,7 @@ export default css`
   }
 
   .back-link-secondary {
-    @include utilityPrimary;
+    ${utilityPrimary}
     display: block;
     font-size: 14px;
     text-decoration: none !important;
@@ -780,17 +726,16 @@ export default css`
       transform: translateY(-1px);
     }
   }
-  /* stylelint-enable  declaration-no-important */
 
   .close-button-primary {
     font-size: 15px;
-    color: $neutral50;
+    color: var(--color-base-neutral50);
     text-decoration: none;
     cursor: pointer;
   }
 
   .button-lozenge-primary {
-    @include utilityPrimary;
+    ${utilityPrimary}
     padding: 6px 13px;
     font-size: 12px;
     text-decoration: none;
@@ -809,21 +754,21 @@ export default css`
     &--warn {
       &:hover,
       &:focus-visible {
-        color: $neutralWhite;
-        background-color: var(--default-error-color);
+        color: var(--color-base-neutral-white);
+        background-color: var(--error-color);
       }
     }
   }
 
   .button-lozenge-secondary {
-    @include utilityPrimary;
+    ${utilityPrimary}
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding-right: 15px;
     padding-left: 15px;
     font-size: 14px;
-    font-weight: $medium;
+    font-weight: var(--font-weight-medium);
     text-decoration: none;
     text-transform: none;
     letter-spacing: 0;
@@ -834,14 +779,15 @@ export default css`
       border-color ${defaultTransitionProps};
 
     &:hover {
-      color: $neutralTextExtraDark;
+      color: var(--color-neutral-text-extra-dark);
       background-color: var(--hover-color);
       border-color: var(--hover-color);
     }
 
     &:focus-visible {
-      color: $neutralTextExtraDark;
+      color: var(--color-neutral-text-extra-dark);
       border-color: var(--hover-color);
+      outline: none;
     }
 
     span {

@@ -1,15 +1,15 @@
 .overlay-login {
-  --default-focus-color: #{$accentInteractionLight};
-  --default-hover-color: #{$accentInteractionLight};
+  --focus-color: #{$accentInteractionLight};
+  --hover-color: #{$accentInteractionLight};
 
-  @include templateCopy;
+  font-family: var(--font-family-copy);
   position: fixed;
   top: 0;
   width: 100%;
   height: 100%;
   font-size: 18px;
-  color: $neutralTextLight;
-  background-color: transparentize($neutral90, 0.025);
+  color: var(--color-neutral-text-light);
+  background-color: transparentize(var(--color-base-neutral90), 0.025);
   opacity: 1;
   transition: opacity, 0s, linear;
 
@@ -23,12 +23,12 @@
 
   &.overlay-full-enter-active {
     opacity: 1;
-    transition: opacity, $duration, $timing;
+    transition: opacity, $duration, var(--transition-timing-function);
   }
 
   &.overlay-full-exit {
     opacity: 0;
-    transition: opacity, $duration, $timing;
+    transition: opacity, $duration, var(--transition-timing-function);
   }
 
   // Firefox won't obey padding on the parent overlay
@@ -46,7 +46,7 @@
     overflow: auto;
 
     &.focus {
-      @include respond($break90) {
+      ${respond(``, 90)}
         top: 0;
       }
 
@@ -54,11 +54,11 @@
         max-width: 340px;
         margin: 0 auto;
 
-        @include respond($break40) {
+        ${respond(``, 40)}
           padding-top: 35px;
         }
 
-        @include respond($break90) {
+        ${respond(``, 90)}
           padding-top: 126px;
         }
       }

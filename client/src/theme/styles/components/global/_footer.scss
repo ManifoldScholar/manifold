@@ -1,16 +1,16 @@
 .app-footer {
-  --default-hover-color: #{$accentInteractionLight};
-  --default-focus-color: #{$accentInteractionLight};
+  --hover-color: #{$accentInteractionLight};
+  --focus-color: #{$accentInteractionLight};
 
   padding-top: 32px;
-  color: $neutralTextLight;
-  background-color: $neutral85;
+  color: var(--color-neutral-text-light);
+  background-color: var(--color-base-neutral85);
 
-  @include respond($break50) {
+  ${respond(``, 50)}
     padding-top: 40px;
   }
 
-  @include respond($break65) {
+  ${respond(``, 65)}
     padding-top: 67px;
   }
 
@@ -22,7 +22,7 @@
   &--branded {
     .app-footer__column--right {
       display: none;
-      @include respond($break65) {
+      ${respond(``, 65)}
         display: block;
       }
     }
@@ -32,7 +32,7 @@
   }
 
   &--standalone {
-    --default-focus-color: #{$accentInteractionLight};
+    --focus-color: #{$accentInteractionLight};
 
     padding-top: 0;
   }
@@ -42,7 +42,7 @@
 
     margin-bottom: 30px;
 
-    @include respond($break65) {
+    ${respond(``, 65)}
       min-height: 105px;
     }
   }
@@ -51,7 +51,7 @@
     display: flex;
     flex-direction: column-reverse;
 
-    @include respond($break65) {
+    ${respond(``, 65)}
       flex-direction: row;
       align-items: flex-start;
       justify-content: space-between;
@@ -65,7 +65,7 @@
   }
 
   &__socials-list {
-    @include listUnstyled;
+    ${listUnstyled}
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -79,7 +79,7 @@
       outline: 0;
 
       svg {
-        @include defaultHoverStyle;
+        ${defaultHoverStyle}
       }
     }
 
@@ -93,14 +93,14 @@
 
       padding-top: 30px;
 
-      @include respond($break65) {
+      ${respond(``, 65)}
         order: 2;
         padding-top: 0;
       }
     }
 
     &--left {
-      @include respond($break65) {
+      ${respond(``, 65)}
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -114,14 +114,14 @@
     position: relative;
     padding-bottom: 20px;
     font-size: 14px;
-    @include templateCopy;
+    font-family: var(--font-family-copy);
 
-    @include respond($break30) {
+    ${respond(``, 30)}
       padding-top: 8px;
       padding-bottom: 25px;
     }
 
-    @include respond($break40) {
+    ${respond(``, 40)}
       font-size: 16px;
     }
 
@@ -131,7 +131,7 @@
 
     &--with-top-margin {
       margin-top: 30px;
-      @include respond($break65) {
+      ${respond(``, 65)}
         padding-top: 67px;
       }
     }
@@ -148,7 +148,7 @@
     padding: 0;
     margin-bottom: 14px;
 
-    @include respond($break65) {
+    ${respond(``, 65)}
       display: inline-block;
       float: right;
       margin-bottom: 0;
@@ -165,7 +165,7 @@
 
 .app-footer-navigation {
   &--mobile {
-    @include respond($break85) {
+    ${respond(``, 85)}
       display: none;
     }
   }
@@ -173,35 +173,35 @@
   &--desktop {
     display: none;
 
-    @include respond($break85) {
+    ${respond(``, 85)}
       display: block;
     }
   }
 
   margin-top: -20px;
   margin-bottom: 20px;
-  @include listUnstyled;
+  ${listUnstyled}
   font-size: 16px;
 
-  @include respond($break75) {
+  ${respond(``, 75)}
     margin-bottom: 0;
   }
 
   &__list {
-    @include listUnstyled;
+    ${listUnstyled}
     display: flex;
     flex-wrap: wrap;
-    @include respond($break85) {
+    ${respond(``, 85)}
     }
   }
 
   &__group {
-    @include listUnstyled;
+    ${listUnstyled}
     max-width: 150px;
     margin-right: 30px;
     margin-bottom: 0.8em;
 
-    @include respond($break90) {
+    ${respond(``, 90)}
       max-width: 160px;
       margin-right: 70px;
     }
@@ -213,10 +213,10 @@
       margin-top: 0.8em;
     }
 
-    @include templateHead;
+    font-family: var(--font-family-sans);
     display: flex;
     font-size: 17px;
-    font-weight: $medium;
+    font-weight: var(--font-weight-medium);
   }
 
   &__icon {
@@ -235,8 +235,8 @@
   display: block;
   padding-top: 30px;
   padding-bottom: 30px;
-  background-color: $neutral90;
-  transition: background-color $duration $timing;
+  background-color: var(--color-base-neutral90);
+  transition: background-color ${defaultTransitionProps};
 
   &--reader {
     padding-top: 42px;
@@ -246,19 +246,19 @@
   &--with-hover {
     &:hover,
     &:focus-visible {
-      background-color: $defaultHoverColor;
+      background-color: var(--hover-color);
       outline: 0;
 
       .app-footer-powered-by__logo-icon,
       .app-footer-powered-by__logo-text--neutral,
       .app-footer-powered-by__logo-text--white {
-        color: $neutralTextExtraDark;
+        color: var(--color-neutral-text-extra-dark);
       }
     }
   }
 
   &__copyright {
-    @include templateCopy;
+    font-family: var(--font-family-copy);
     display: inline-block;
     margin-top: 10px;
     margin-left: 0;
@@ -267,7 +267,7 @@
     line-height: 1.4em;
     vertical-align: top;
 
-    @include respond($break65) {
+    ${respond(``, 65)}
       margin-top: -6px;
       margin-left: 6px;
       font-size: 17px;
@@ -275,17 +275,17 @@
   }
 
   &__logo {
-    @include templateHead;
+    font-family: var(--font-family-sans);
     display: block;
     font-size: 20px;
-    font-weight: $semibold;
+    font-weight: var(--font-weight-semibold);
     line-height: 33px;
-    color: $neutralWhite;
+    color: var(--color-base-neutral-white);
     text-decoration: none;
 
     &--dull {
-      @include respond($break65) {
-        color: $neutral30;
+      ${respond(``, 65)}
+        color: var(--color-base-neutral30);
       }
     }
 
@@ -293,7 +293,7 @@
       display: flex;
       flex-direction: column;
 
-      @include respond($break65) {
+      ${respond(``, 65)}
         flex-direction: row;
       }
     }
@@ -306,7 +306,7 @@
         .app-footer-powered-by__logo-icon,
         .app-footer-powered-by__logo-text--neutral,
         .app-footer-powered-by__logo-text--white {
-          color: $neutralWhite;
+          color: var(--color-base-neutral-white);
         }
       }
     }
@@ -317,12 +317,12 @@
     top: -2px;
     flex-shrink: 0;
     margin-right: 14px;
-    color: $accentPrimary;
-    transition: color $duration $timing;
+    color: var(--highlight-color);
+    transition: color ${defaultTransitionProps};
 
     &--dull {
-      @include respond($break65) {
-        color: $neutral70;
+      ${respond(``, 65)}
+        color: var(--color-base-neutral70);
       }
     }
   }
@@ -334,19 +334,19 @@
       margin-top: 11px;
       font-size: 12px;
       line-height: 1.4em;
-      @include respond($break65) {
+      ${respond(``, 65)}
         margin-top: 0;
         font-size: 13px;
       }
     }
 
     &--neutral {
-      color: $neutralTextLight;
-      transition: color $duration $timing;
+      color: var(--color-neutral-text-light);
+      transition: color ${defaultTransitionProps};
     }
 
     &--white {
-      transition: color $duration $timing;
+      transition: color ${defaultTransitionProps};
     }
   }
 
@@ -366,7 +366,7 @@
   &--with-top-margin {
     margin-top: 30px;
 
-    @include respond($break65) {
+    ${respond(``, 65)}
       margin-top: 60px;
     }
 

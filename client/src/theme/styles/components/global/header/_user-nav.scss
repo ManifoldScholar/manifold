@@ -7,7 +7,7 @@
   }
 
   &__list {
-    @include listUnstyled;
+    ${listUnstyled}
     position: relative;
     display: flex;
     align-items: baseline;
@@ -18,11 +18,11 @@
     // height: 100%;
     padding-bottom: header-layout(padding-vertical-mobile);
 
-    @include respond($break40) {
+    ${respond(``, 40)}
       padding-bottom: header-layout(padding-vertical-desktop);
     }
 
-    @include respond($break80) {
+    ${respond(``, 80)}
       position: relative;
     }
 
@@ -64,7 +64,7 @@
   .search-menu {
     padding: 28px 22px 22px;
 
-    @include respond($break40) {
+    ${respond(``, 40)}
       padding: 20px 24px 22px;
     }
   }
@@ -78,7 +78,7 @@
   .panel-enter-active .search-menu,
   .panel-enter-active .user-menu {
     opacity: 1;
-    transition: opacity $duration $timing, transform $duration $timing;
+    transition: opacity ${defaultTransitionProps}, transform ${defaultTransitionProps};
     transform: translateY(0);
   }
 
@@ -91,7 +91,7 @@
   .panel-exit-active .search-menu,
   .panel-exit-active .user-menu {
     opacity: 0;
-    transition: opacity $duration $timing, transform $duration $timing;
+    transition: opacity ${defaultTransitionProps}, transform ${defaultTransitionProps};
     transform: translateY(-1 * header-layout(menu-slide-distance));
   }
 }

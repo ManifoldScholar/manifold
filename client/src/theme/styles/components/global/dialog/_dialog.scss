@@ -1,5 +1,5 @@
 .dialog {
-  @include utilityPrimary;
+  ${utilityPrimary}
   position: relative;
   width: 100%;
   max-width: 880px;
@@ -7,35 +7,35 @@
   margin: 0 auto;
   text-transform: none;
   letter-spacing: 0;
-  box-shadow: 0 31px 44px 2px rgba($neutralBlack, 0.13);
+  box-shadow: 0 31px 44px 2px rgba(var(--color-base-neutral-black), 0.13);
 
-  @include respond($break90) {
+  ${respond(``, 90)}
     padding-right: 40px;
     padding-left: 40px;
   }
 
   .backend & {
-    --default-hover-color: #{$accentInteractionLight};
+    --hover-color: #{$accentInteractionLight};
 
     @include panelRoundedDark;
   }
 
   .browse &,
   .reader & {
-    @include panelRounded;
+    ${panelRounded}
   }
 
   &__header {
     padding: 11px 0 22px;
 
     h1, h2, h3, h4, h5, h6 {
-      @include templateHead;
+      font-family: var(--font-family-sans);
       margin: 0;
       font-size: 22px;
       hyphens: none;
 
       .backend & {
-        color: $neutralWhite;
+        color: var(--color-base-neutral-white);
       }
     }
   }
@@ -63,7 +63,7 @@
 
   p:not([class]) {
     font-size: 18px;
-    font-weight: $regular;
+    font-weight: var(--font-weight-regular);
   }
 }
 
@@ -71,8 +71,8 @@
   max-width: 500px;
 
   .backend & {
-    font-weight: $regular;
-    color: $neutral90;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-base-neutral90);
     background-color: $spErrorExtraLight;
   }
 

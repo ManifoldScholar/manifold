@@ -25,7 +25,7 @@ $_sticky-min-height: 900px;
     }
   }
 
-  --box-bg-color: #{$neutralWhite};
+  --box-bg-color: #{var(--color-base-neutral-white)};
 
   position: relative;
   max-height: 95vh;
@@ -36,12 +36,12 @@ $_sticky-min-height: 900px;
     z-index: 2;
     margin-top: min(5.26vw, 50px);
     margin-bottom: min(4.737vw, 45px);
-    color: var(--default-strong-color);
+    color: var(--strong-color);
   }
 
   &__heading {
-    @include headingQuaternary;
-    font-weight: $semibold;
+    ${headingQuaternary}
+    font-weight: var(--font-weight-semibold);
   }
 
   &__subheading {
@@ -54,7 +54,7 @@ $_sticky-min-height: 900px;
 
   &__instructions {
     &, &:is(p) {
-      @include subtitlePrimary;
+      ${subtitlePrimary}
       margin-top: 1em;
       font-size: 16px;
       line-height: 1.5;
@@ -73,7 +73,7 @@ $_sticky-min-height: 900px;
   }
 
   &__results {
-    font-weight: $regular;
+    font-weight: var(--font-weight-regular);
   }
 
   &__footer {

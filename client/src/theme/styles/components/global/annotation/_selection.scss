@@ -1,15 +1,15 @@
 .annotation-selection {
   &__text-container {
-    @include templateHead;
+    font-family: var(--font-family-sans);
     @include drawerPadding(padding-right);
     @include drawerPadding(padding-left);
     font-size: 16px;
     line-height: 1.3;
-    color: var(--default-strong-color);
+    color: var(--strong-color);
     word-wrap: break-word;
-    transition: background-color $duration $timing;
+    transition: background-color ${defaultTransitionProps};
 
-    @include respond($break80) {
+    ${respond(``, 80)}
       font-size: 18px;
     }
 
@@ -20,7 +20,7 @@
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
 
-      @include respond($break80) {
+      ${respond(``, 80)}
         padding-top: 31px;
         padding-bottom: 25px;
       }
@@ -35,7 +35,7 @@
       padding-bottom: 26px;
       background-color: var(--box-bg-color);
 
-      @include respond($break80) {
+      ${respond(``, 80)}
         padding-top: 41px;
         padding-bottom: 34px;
       }
@@ -46,7 +46,7 @@
     }
 
     &--rounded-corners {
-      border-radius: $panelRoundedRadius;
+      border-radius: var(--box-border-radius);
     }
 
     &--hovering {
@@ -80,7 +80,7 @@
     position: absolute;
     top: 2px;
     left: 0;
-    color: $accentPrimary;
+    color: var(--highlight-color);
 
     &--flipped {
       transform: rotateX(180deg);
@@ -89,17 +89,17 @@
   }
 
   &__button {
-    @include buttonUnstyled;
-    @include utilityPrimary;
+    ${buttonUnstyled}
+    ${utilityPrimary}
     @include drawerIndent(margin-left);
     display: block;
     margin-top: 20px;
     font-size: 13px;
-    color: $defaultHoverColor;
+    color: var(--hover-color);
   }
 
   &__button-absolute {
-    @include buttonUnstyled;
+    ${buttonUnstyled}
     position: absolute;
     top: 0;
     left: 0;
@@ -113,7 +113,7 @@
 
   &__source-summary-link {
     display: flex;
-    color: var(--default-color);
+    color: var(--color);
     text-decoration: none;
 
     &:hover {
@@ -122,10 +122,10 @@
   }
 
   &__source-summary-text {
-    @include templateCopy;
+    font-family: var(--font-family-copy);
     font-size: 14px;
 
-    @include respond($break80) {
+    ${respond(``, 80)}
       font-size: 16px;
     }
   }
@@ -135,7 +135,7 @@
     top: -2px;
     flex-shrink: 0;
     margin-left: 12px;
-    transition: transform $duration $timing;
+    transition: transform ${defaultTransitionProps};
   }
 
   &__action-buttons {

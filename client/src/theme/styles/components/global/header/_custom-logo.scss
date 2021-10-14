@@ -6,21 +6,21 @@
     height: auto;
     max-height: 26px;
 
-    @include respond($break75) {
+    ${respond(``, 75)}
       max-width: 100%;
       max-height: 59px;
     }
 
     &--desktop {
       display: none;
-      @include respond($break75) {
+      ${respond(``, 75)}
         display: block;
       }
     }
 
     &--mobile {
       display: block;
-      @include respond($break75) {
+      ${respond(``, 75)}
         display: none;
       }
     }

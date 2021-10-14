@@ -168,7 +168,7 @@ export default `
       }
 
       .icon-thumbnail-title {
-        @include templateHead;
+        font-family: var(--font-family-sans);
         padding-top: 8px;
         font-size: 14px;
         font-family: var(--font-family-heading);

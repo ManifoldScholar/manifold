@@ -2,7 +2,7 @@
   position: absolute;
   width: 100%;
   visibility: hidden;
-  border-bottom: 1px solid $neutral40;
+  border-bottom: 1px solid var(--color-base-neutral40);
   opacity: 0;
-  transition: opacity $duration $timing, visibility $duration $timing;
+  transition: opacity ${defaultTransitionProps}, visibility ${defaultTransitionProps};
 }

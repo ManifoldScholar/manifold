@@ -13,7 +13,7 @@ body.fatal-error-page {
 
 .fatal-error {
   min-height: 100%;
-  border: 20px solid $defaultErrorColor;
+  border: 20px solid var(--error-color);
 
   .error-wrapper {
     padding: 10vh 4vh 4vh;
@@ -27,7 +27,7 @@ body.fatal-error-page {
 
   &__stop-icon {
     margin-bottom: 20px;
-    color: $defaultErrorColor;
+    color: var(--error-color);
   }
 
   header {
@@ -35,49 +35,49 @@ body.fatal-error-page {
     margin-bottom: 1.375em;
     font-size: 24px;
 
-    @include respond($break60) {
+    ${respond(``, 60)}
       font-size: 32px;
     }
 
     h3 {
-      @include templateHead;
+      font-family: var(--font-family-sans);
       margin: 0;
       // Relative to font-size declared in parent
       font-size: 1em;
-      font-weight: $regular;
+      font-weight: var(--font-weight-regular);
       line-height: 1.333;
-      color: $neutral50;
+      color: var(--color-base-neutral50);
     }
   }
 
   .error-description {
     h1 {
-      @include templateHead;
+      font-family: var(--font-family-sans);
       font-size: 20px;
-      font-weight: $regular;
-      color: $neutral90;
+      font-weight: var(--font-weight-regular);
+      color: var(--color-base-neutral90);
 
-      @include respond($break60) {
+      ${respond(``, 60)}
         font-size: 24px;
       }
 
       .backend & {
-        color: $neutral05;
+        color: var(--color-base-neutral05);
       }
     }
 
     p {
-      @include subtitlePrimary;
+      ${subtitlePrimary}
       font-size: 18px;
       line-height: 1.421;
-      color: $neutral75;
+      color: var(--color-base-neutral75);
 
       .backend & {
-        color: $neutral20;
+        color: var(--color-base-neutral20);
       }
 
       .dismiss {
-        @include buttonUnstyled;
+        ${buttonUnstyled}
         margin-top: 10px;
         text-decoration: underline;
         cursor: pointer;
@@ -103,12 +103,12 @@ body.fatal-error-page {
       display: block;
       font-size: 12px;
       font-style: italic;
-      color: $neutral40;
+      color: var(--color-base-neutral40);
       text-align: center;
     }
 
     ol {
-      background-color: $neutral05;
+      background-color: var(--color-base-neutral05);
       padding-inline-start: 50px;
 
       li {
@@ -116,11 +116,11 @@ body.fatal-error-page {
       }
 
       li:nth-child(even) {
-        background-color: darken($neutral05, 2.5);
+        background-color: darken(var(--color-base-neutral05), 2.5);
       }
 
       span.highlight {
-        color: $defaultErrorColor;
+        color: var(--error-color);
       }
 
       span.location {

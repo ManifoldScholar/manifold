@@ -1,13 +1,13 @@
 .mobile-nav-toggle {
-  @include buttonUnstyled;
+  ${buttonUnstyled}
   position: relative;
 
-  @include respond($break75) {
+  ${respond(``, 75)}
     display: none;
   }
 
   &:focus-visible {
-    @include defaultHoverStyle;
+    ${defaultHoverStyle}
     outline: 0;
   }
 }

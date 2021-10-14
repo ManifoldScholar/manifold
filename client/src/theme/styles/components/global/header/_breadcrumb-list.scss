@@ -1,12 +1,12 @@
 .breadcrumb-list {
-  @include templateHead;
+  font-family: var(--font-family-sans);
 
   &__link {
     display: inline;
     font-size: 17px;
     text-decoration: none;
 
-    @include respond($break40) {
+    ${respond(``, 40)}
       font-size: 20px;
     }
   }

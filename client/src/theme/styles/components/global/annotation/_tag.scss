@@ -6,7 +6,7 @@
   width: $_tag-width;
   overflow: hidden;
   font-size: 14px;
-  color: var(--default-color);
+  color: var(--color);
   background-color: var(--box-bg-color);
   border-radius: 12px;
 
@@ -29,12 +29,12 @@
     &--dark {
       flex-shrink: 0;
       background-color: var(--darker-tag-bg-color);
-      transition: background-color $duration $timing;
+      transition: background-color ${defaultTransitionProps};
     }
   }
 
   &__text {
-    @include textTruncate;
+    ${textTruncate}
 
     &--count {
       letter-spacing: 0.083em;

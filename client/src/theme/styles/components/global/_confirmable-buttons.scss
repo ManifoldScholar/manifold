@@ -1,6 +1,6 @@
 .confirmable-button {
   &__confirm-list {
-    @include listUnstyled;
+    ${listUnstyled}
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -9,12 +9,12 @@
   &__confirm-item {}
 
   &__button {
-    @include buttonUnstyled;
-    @include utilityPrimary;
+    ${buttonUnstyled}
+    ${utilityPrimary}
     font-size: 12px;
 
     &--delete:not(:disabled):hover {
-      @include defaultHoverStyle;
+      ${defaultHoverStyle}
     }
 
     &--confirm {
@@ -26,7 +26,7 @@
 
       &:hover,
       &:focus-visible {
-        color: $defaultErrorColor;
+        color: var(--error-color);
       }
     }
   }

@@ -25,11 +25,13 @@ export default `
     --inactive-switch-bg-color: var(--color-base-neutral70);
     --active-switch-bg-color: #17986d;
     --switch-toggle-color: var(--color-base-neutral05);
+    --box-color: var(--color);
     --box-bg-color: var(--color-base-neutral05);
     --box-weak-bg-color: var(--color-base-neutral05);
     --box-medium-bg-color: var(--color-base-neutral10);
     --box-strong-bg-color: var(--color-base-neutral20);
     --box-x-strong-bg-color: var(--color-base-neutral20);
+    --drawer-bg-color: var(--background-color);
     --dropzone-bg-color: var(--color-base-neutral30);
     --select-bg-color: transparent;
     --select-border-color: currentColor;
@@ -39,7 +41,8 @@ export default `
     --reader-color: var(--strong-color);
     --input-color: var(--color);
     --input-bg-color: var(--color-base-neutral-white);
-    --input-border-color: transparent;
+    --input-border-color: var(--color-neutral-ui-dull-light);
+    --input-placeholder-color: var(--color-neutral-ui-light);
     --input-autofill-color: var(--highlight-color);
     --input-font-family: var(--font-family-sans);
 
@@ -66,11 +69,13 @@ export default `
     --inactive-switch-bg-color: var(--color-base-neutral70);
     --active-switch-bg-color: var(--color-interaction-light);
     --switch-toggle-color: var(--color-base-neutral90);
+    --box-color: var(--color-neutral-ui-light);
     --box-bg-color: var(--color-base-neutral95);
     --box-weak-bg-color: var(--color-base-neutral85);
     --box-medium-bg-color: var(--color-base-neutral90);
     --box-strong-bg-color: var(--color-base-neutral90);
     --box-x-strong-bg-color: var(--color-base-neutral80);
+    --drawer-bg-color: var(--color-base-neutral100);
     --dropzone-bg-color: var(--color-base-neutral30);
     --select-bg-color: var(--color-base-neutral90);
     --select-border-color: var(--color-base-neutral45);
@@ -81,6 +86,7 @@ export default `
     --input-color: var(--strong-color);
     --input-bg-color: transparent;
     --input-border-color: var(--color-neutral-ui-dull-light);
+    --input-placeholder-color: var(--color-neutral-ui-light);
     --input-autofill-color: var(--color-accent-primary-pale);
     --input-font-family: var(--font-family-serif);
 

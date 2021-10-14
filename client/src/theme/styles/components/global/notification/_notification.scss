@@ -1,6 +1,6 @@
 .notification {
   width: 100%;
-  color: $neutralTextExtraDark;
+  color: var(--color-neutral-text-extra-dark);
 
   &--notice {
     background-color: $spNoticeLight;
@@ -15,7 +15,7 @@
   }
 
   &--context-drawer {
-    background-color: $neutral90;
+    background-color: var(--color-base-neutral90);
   }
 
   &__container {
@@ -25,7 +25,7 @@
     padding-top: 23px;
     padding-bottom: 25px;
 
-    @include respond($break120) {
+    ${respond(``, 120)}
       max-width: $containerWidthFull - 50px;
       padding: 23px 26px 25px;
     }
@@ -40,25 +40,25 @@
     padding-right: 67px;
     margin: 0;
     font-size: 18px;
-    font-weight: $semibold;
+    font-weight: var(--font-weight-semibold);
 
-    @include respond($break70) {
+    ${respond(``, 70)}
       font-size: 20px;
     }
 
     .notification--context-drawer & {
       font-size: 20px;
-      color: $neutral30;
+      color: var(--color-base-neutral30);
     }
   }
 
   &__body {
-    @include templateCopy;
+    font-family: var(--font-family-copy);
     padding-right: 67px;
     margin-top: 10px;
     font-size: 16px;
 
-    @include respond($break70) {
+    ${respond(``, 70)}
       font-size: 20px;
     }
 
@@ -68,25 +68,25 @@
       margin-top: 8px;
       font-size: 16px;
       font-weight: normal;
-      color: $neutral30;
+      color: var(--color-base-neutral30);
     }
   }
 
   &__button {
-    @include buttonUnstyled;
+    ${buttonUnstyled}
 
     .notification--context-header & {
       position: absolute;
       top: 50%;
-      right: $containerPaddingResp;
+      right: var(--container-padding-responsive);
       transform: translateY(-50%);
 
-      @include respond($break120) {
+      ${respond(``, 120)}
         right: 26px;
       }
 
       &:focus-visible {
-        outline-color: $neutral90;
+        outline-color: var(--color-base-neutral90);
       }
 
       &:hover {
@@ -100,14 +100,14 @@
       right: auto;
       margin: 8px 0 0;
       font-size: inherit;
-      color: $neutral50;
+      color: var(--color-base-neutral50);
 
       &:hover {
-        color: $neutral20;
+        color: var(--color-base-neutral20);
       }
 
       .screen-reader-text {
-        @include utilityPrimary;
+        ${utilityPrimary}
         position: relative;
         margin: 0;
         overflow: visible;

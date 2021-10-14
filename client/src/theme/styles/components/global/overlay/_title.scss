@@ -1,13 +1,13 @@
 .overlay-title {
-  @include templateHead;
+  font-family: var(--font-family-sans);
   display: flex;
   align-items: center;
   padding: 0.85em 0;
   margin: 0;
   font-size: 22px;
-  font-weight: $medium;
+  font-weight: var(--font-weight-medium);
 
-  @include respond($break65) {
+  ${respond(``, 65)}
     justify-content: center;
   }
 
@@ -17,7 +17,7 @@
   }
 
   &__text {
-    @include textTruncate;
+    ${textTruncate}
     margin-left: 10px;
   }
 }

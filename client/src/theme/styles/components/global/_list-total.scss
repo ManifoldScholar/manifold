@@ -1,8 +1,8 @@
 .list-total {
-  @include utilityPrimary;
+  ${utilityPrimary}
   font-size: 13px;
-  color: var(--default-color);
-  transition: color $duration $timing;
+  color: var(--color);
+  transition: color ${defaultTransitionProps};
 
   &--extra-bottom {
     margin-bottom: 20px;
@@ -14,7 +14,7 @@
   }
 
   &__highlighted {
-    color: var(--default-strong-color);
+    color: var(--strong-color);
   }
 
   .section-heading-secondary & {
@@ -22,6 +22,6 @@
   }
 
   .section-heading-secondary a:hover & {
-    color: $defaultHoverColor;
+    color: var(--hover-color);
   }
 }

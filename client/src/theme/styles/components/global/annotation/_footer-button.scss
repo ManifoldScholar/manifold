@@ -1,23 +1,23 @@
 .annotation-footer-button {
   @include drawerPadding(padding-right);
   @include drawerPadding(padding-left);
-  @include buttonUnstyled;
-  @include utilityPrimary;
+  ${buttonUnstyled}
+  ${utilityPrimary}
   display: block;
   width: 100%;
   padding-top: 18px;
   padding-bottom: 18px;
   font-size: 13px;
   text-align: left;
-  background-color: $neutral10;
-  border-bottom-right-radius: $panelRoundedRadius;
-  border-bottom-left-radius: $panelRoundedRadius;
-  transition: color $duration $timing, background-color $duration $timing;
+  background-color: var(--color-base-neutral10);
+  border-bottom-right-radius: var(--box-border-radius);
+  border-bottom-left-radius: var(--box-border-radius);
+  transition: color ${defaultTransitionProps}, background-color ${defaultTransitionProps};
 
   &:hover,
   &:focus-visible {
-    color: var(--default-strong-color);
-    background-color: $neutral20;
+    color: var(--strong-color);
+    background-color: var(--color-base-neutral20);
   }
 
   &:not(:first-child) {
@@ -49,7 +49,7 @@
 
   &__arrow-icon {
     margin-left: 12px;
-    transition: transform $duration $timing;
+    transition: transform ${defaultTransitionProps};
     transform: translate(0, -0.5px);
 
     .annotation-footer-button:hover & {

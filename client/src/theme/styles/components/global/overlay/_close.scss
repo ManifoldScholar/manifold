@@ -1,8 +1,8 @@
 .overlay-close {
   $_icon-size: 24px;
 
-  @include buttonUnstyled;
-  @include utilityPrimary;
+  ${buttonUnstyled}
+  ${utilityPrimary}
   display: flex;
   align-items: center;
   font-size: 13px;

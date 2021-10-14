@@ -1,15 +1,15 @@
 .annotation-group-options {
-  $lightBgColor: $neutral10;
-  $darkBgColor: $neutral85;
+  var(--font-weight-light)BgColor: var(--color-base-neutral10);
+  $darkBgColor: var(--color-base-neutral85);
 
   width: 290px;
   padding-bottom: 20px;
-  background-color: $lightBgColor;
-  border-radius: $panelRoundedRadius;
+  background-color: var(--font-weight-light)BgColor;
+  border-radius: var(--box-border-radius);
 
   &--light {
     padding-top: 30px;
-    background-color: $lightBgColor;
+    background-color: var(--font-weight-light)BgColor;
   }
 
   &--dark {
@@ -17,7 +17,7 @@
     background-color: $darkBgColor;
 
     .scheme-dark & {
-      background-color: $neutralWhite;
+      background-color: var(--color-base-neutral-white);
     }
   }
 
@@ -29,10 +29,10 @@
     z-index: 1;
     outline: 0;
 
-    box-shadow: 5px 15px 35px 8px rgba($neutralBlack, 0.13);
+    box-shadow: 5px 15px 35px 8px rgba(var(--color-base-neutral-black), 0.13);
     transition:
-      opacity $duration $timing,
-      visibility $duration $timing;
+      opacity ${defaultTransitionProps},
+      visibility ${defaultTransitionProps};
     transform: translateX(-50%);
 
     &::after {
@@ -44,7 +44,7 @@
       height: 0;
       margin-left: -$tailSize;
       content: '';
-      border-color: transparent transparent $lightBgColor;
+      border-color: transparent transparent var(--font-weight-light)BgColor;
       border-style: solid;
       border-width: 0 $tailSize $tailSize;
     }
@@ -56,7 +56,7 @@
   }
 
   &__list {
-    @include listUnstyled;
+    ${listUnstyled}
     max-height: 336px; // equals 8 items
     overflow: auto;
   }
@@ -64,28 +64,28 @@
   &__option {}
 
   &__button {
-    @include buttonUnstyled;
+    ${buttonUnstyled}
     width: 100%;
     text-align: left;
     transition:
-      color $duration $timing,
-      background-color $duration $timing;
+      color ${defaultTransitionProps},
+      background-color ${defaultTransitionProps};
 
     .annotation-group-options--light & {
-      color: $neutral90;
+      color: var(--color-base-neutral90);
 
       &:hover,
       &:focus-visible {
-        background-color: $neutral30;
+        background-color: var(--color-base-neutral30);
         outline: 0;
       }
     }
 
     .annotation-group-options--dark & {
-      color: $neutralWhite;
+      color: var(--color-base-neutral-white);
 
       .scheme-dark & {
-        color: $neutral85;
+        color: var(--color-base-neutral85);
       }
 
       &:hover,
@@ -111,7 +111,7 @@
   }
 
   &__button-text {
-    @include templateHead;
+    font-family: var(--font-family-sans);
     display: block;
     grid-area: label;
     -ms-grid-row: 1;
@@ -135,17 +135,17 @@
       -ms-grid-row: 1;
       -ms-grid-column: 5;
       margin-top: 2px;
-      transition: color $duration $timing;
+      transition: color ${defaultTransitionProps};
 
       .annotation-group-options--light & {
-        color: $neutral50;
+        color: var(--color-base-neutral50);
       }
 
       .annotation-group-options--dark & {
-        color: $neutral45;
+        color: var(--color-base-neutral45);
 
         .scheme-dark & {
-          color: $neutral50;
+          color: var(--color-base-neutral50);
         }
       }
 
@@ -162,7 +162,7 @@
   /* stylelint-enable property-no-vendor-prefix */
 
   &__link {
-    @include utilityPrimary;
+    ${utilityPrimary}
     display: flex;
     align-items: center;
     justify-content: center;
@@ -172,16 +172,16 @@
     border: 1px solid;
     border-radius: 4px;
     transition:
-      color $duration $timing,
-      background-color $duration $timing,
-      border-color $duration $timing;
+      color ${defaultTransitionProps},
+      background-color ${defaultTransitionProps},
+      border-color ${defaultTransitionProps};
 
     .annotation-group-options--light & {
       color: #5c5c5c;
     }
 
     .annotation-group-options--dark & {
-      color: $neutral45;
+      color: var(--color-base-neutral45);
 
       .scheme-dark & {
         color: #5c5c5c;
@@ -190,7 +190,7 @@
 
     &:hover,
     &:focus-visible {
-      color: $neutral85;
+      color: var(--color-base-neutral85);
       background-color: $accentInteractionLight;
       border-color: $accentInteractionLight;
       outline: 0;

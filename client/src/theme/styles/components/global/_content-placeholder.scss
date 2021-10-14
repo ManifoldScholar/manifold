@@ -1,8 +1,8 @@
 .content-placeholder {
-  @include panelRounded;
-  @include templateHead;
+  ${panelRounded}
+  font-family: var(--font-family-sans);
   padding: min(6.846vw, 70px);
-  color: var(--default-strong-color);
+  color: var(--strong-color);
   text-align: center;
 
   &__inner {
@@ -33,20 +33,20 @@
     }
 
     .content-placeholder--frontend & {
-      color: var(--default-strong-color);
+      color: var(--strong-color);
     }
   }
 
   &__title {
     margin: 0;
     font-size: 25px;
-    font-weight: $medium;
+    font-weight: var(--font-weight-medium);
 
-    @include respond($break70) {
+    ${respond(``, 70)}
       font-size: 28px;
     }
 
-    @include respond($break90) {
+    ${respond(``, 90)}
       font-size: 30px;
     }
   }
@@ -64,7 +64,7 @@
       text-decoration: underline;
 
       &:visited {
-        color: $defaultHoverColor;
+        color: var(--hover-color);
       }
     }
   }

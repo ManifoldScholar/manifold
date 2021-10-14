@@ -1,9 +1,9 @@
 .screen-reader-text {
-  @include screenReaderText;
+  ${screenReaderText}
 }
 
 .instructional-copy {
-  @include templateCopy;
+  font-family: var(--font-family-copy);
   display: block;
   padding-bottom: 12px;
   margin-top: 0.75em;

@@ -2,7 +2,7 @@
   width: 150px;
   height: auto;
 
-  @include respond($break80) {
+  ${respond(``, 80)}
     width: 180px;
   }
 }

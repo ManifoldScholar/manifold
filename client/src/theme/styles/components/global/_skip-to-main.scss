@@ -1,6 +1,6 @@
 .skip-to-main {
-  @include buttonUnstyled;
-  @include utilityPrimary;
+  ${buttonUnstyled}
+  ${utilityPrimary}
   position: fixed;
   top: 0;
   left: -400px;
@@ -10,11 +10,11 @@
   margin: 0;
   clip: unset;
   font-size: 15px;
-  color: $accentPrimary;
+  color: var(--highlight-color);
   text-decoration: none;
-  background: $neutral85;
+  background: var(--color-base-neutral85);
   opacity: 0.95;
-  transition: left $durationSlow $timing;
+  transition: left $durationSlow var(--transition-timing-function);
 
   &:focus-visible {
     left: 0;
