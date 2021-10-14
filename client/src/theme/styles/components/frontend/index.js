@@ -3,6 +3,7 @@ import collecting from "./collecting";
 import contentBlock from "./content-block";
 import events from "./event";
 import groups from "./groups";
+import layout from "./layout";
 
 export default `
   ${splash}
@@ -10,4 +11,5 @@ export default `
   ${events}
   ${groups}
   ${contentBlock}
+  ${layout}
 `;
