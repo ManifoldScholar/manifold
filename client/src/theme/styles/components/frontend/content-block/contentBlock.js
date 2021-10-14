@@ -9,6 +9,7 @@ export default `
         ${respond(`margin-bottom: 8.065vw;`, 60)}
 
         ${respond(`margin-bottom: 65px;`, 80)}
+      }
 
       + .frontend-content-block {
         margin-top: 25px;

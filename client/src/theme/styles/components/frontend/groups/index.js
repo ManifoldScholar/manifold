@@ -10,7 +10,7 @@ import joinForm from "./joinForm";
 import homepageModeToggle from "./homepageModeToggle";
 import settingsFormGroup from "./settingsFormGroup";
 import settingsFormMember from "./settingsFormMember";
-import collectionCategory from "collectionCategory";
+import collectionCategory from "./collectionCategory";
 import collectablePlaceholderContent from "./collectablePlaceholderContent";
 import homepageEditor from "./homepageEditor";
 import groupsPageContainer from "./groupsPageContainer";
@@ -29,4 +29,7 @@ ${settingsFormGroup}
 ${settingsFormMember}
 ${notesFilter}
 ${childRouteNav}
+${joinForm}
+${pageHeading}
+${summary}
 `;

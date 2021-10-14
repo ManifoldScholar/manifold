@@ -1,11 +1,10 @@
 import { entityFilterForm } from "theme/styles/variables/crossComponent";
-import { stripUnit } from "@castiron/style-mixins";
 
 const inputGap = entityFilterForm.gap;
 const selectMinWidth = entityFilterForm.selectMinWidth;
 
-const flexBasis2Count = stripUnit(selectMinWidth) * 2 + stripUnit(inputGap);
-const flexBasis3Count = stripUnit(selectMinWidth) * 3 + stripUnit(inputGap) * 2;
+const flexBasis2Count = `calc((${selectMinWidth} * 2) + ${inputGap})`;
+const flexBasis3Count = `calc((${selectMinWidth} * 3) + (${inputGap} * 2))`;
 
 export default `
   .notes-filter-container {
