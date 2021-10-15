@@ -22,8 +22,8 @@ export default `
     }
 
     &--dark {
-      --default-hover-color: var(--color-interaction-light);
-      --default-focus-color: var(--color-interaction-light);
+      --hover-color: var(--color-interaction-light);
+      --focus-color: var(--color-interaction-light);
     }
 
     &--light:not(.standalone-header--hidden) {
@@ -89,7 +89,7 @@ export default `
     }
 
     &__title-link {
-      --default-hover-color: var(--color-base-neutral-white);
+      --hover-color: var(--color-base-neutral-white);
 
       hyphens: none;
       line-height: 1.45;
@@ -99,7 +99,7 @@ export default `
       }
 
       .standalone-header--light & {
-        --default-hover-color: var(--color-base-neutral80);
+        --hover-color: var(--color-base-neutral80);
       }
     }
 
@@ -132,20 +132,13 @@ export default `
 
     .user-nav {
       grid-area: user-nav;
-      -ms-grid-row: 1;
-      -ms-grid-column: 3;
       justify-self: end;
-      -ms-grid-column-align: end;
     }
 
     .mobile-nav-toggle {
       grid-area: hamburger;
-      -ms-grid-row: 1;
-      -ms-grid-column: 3;
       align-self: baseline;
       justify-self: flex-end;
-      -ms-grid-column-align: end;
-      -ms-grid-row-align: baseline;
     }
   }
 `;

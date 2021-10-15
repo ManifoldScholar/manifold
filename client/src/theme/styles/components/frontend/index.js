@@ -4,6 +4,7 @@ import contentBlock from "./content-block";
 import events from "./event";
 import groups from "./groups";
 import layout from "./layout";
+import page from "./page";
 
 export default `
   ${splash}
@@ -12,4 +13,5 @@ export default `
   ${groups}
   ${contentBlock}
   ${layout}
+  ${page}
 `;

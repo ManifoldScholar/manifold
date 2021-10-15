@@ -16,16 +16,16 @@ export default `
     }
 
     &.feature-dark-style {
-      --default-hover-color: var(--color-neutral-text-extra-dark);
-      --default-focus-color: var(--color-neutral-text-extra-dark);
+      --hover-color: var(--color-neutral-text-extra-dark);
+      --focus-color: var(--color-neutral-text-extra-dark);
 
       color: var(--color-neutral-text-extra-dark);
       background-color: var(--color-accent-primary);
     }
 
     &.feature-light-style {
-      --default-hover-color: var(--color-interaction-dark);
-      --default-focus-color: var(--color-interaction-dark);
+      --hover-color: var(--color-interaction-dark);
+      --focus-color: var(--color-interaction-dark);
 
       background-color: var(--color-accent-primary-off-white);
 
