@@ -184,7 +184,7 @@ export const blockLabelRound = `
   color: var(--color-base-neutral-white);
   background-color: var(--notice-color);
   border-radius: 3px;
-}`;
+`;
 
 // // Browser UI
 // // --------------------------------------------------------
@@ -269,7 +269,7 @@ export const inputPrimary = `
   ${inputBase}
   padding: 8px 13px 12px;
   font-size: var(--font-size-70);
-  border: 3px solid;
+  border: 3px solid var(--input-border-color);
 `;
 
 // // Dark input with border

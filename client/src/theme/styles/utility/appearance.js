@@ -56,4 +56,8 @@ export default `
   .rel {
     position: relative;
   }
+
+  .no-focus-outline:focus-visible {
+    outline: 0;
+  }
 `;

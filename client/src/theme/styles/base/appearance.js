@@ -4,7 +4,7 @@ export default `
   // Default hover styles
   button,
   [role="button"],
-  [href],
+  a,
   [data-react-beautiful-dnd-drag-handle] {
     ${setHoverStyle()}
   }
@@ -12,7 +12,7 @@ export default `
   // Default focus outlines
   button,
   [role="button"],
-  [href],
+  a,
   input,
   select,
   [data-react-beautiful-dnd-drag-handle] {

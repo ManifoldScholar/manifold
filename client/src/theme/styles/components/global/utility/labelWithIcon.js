@@ -1,7 +1,6 @@
-import { css } from "styled-components";
 import { formLabelPrimary } from "theme/styles/mixins";
 
-export default css`
+export default `
   .label-with-icon {
     ${formLabelPrimary}
     white-space: nowrap;

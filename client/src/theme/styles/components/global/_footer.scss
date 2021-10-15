@@ -1,6 +1,6 @@
 .app-footer {
-  --hover-color: #{$accentInteractionLight};
-  --focus-color: #{$accentInteractionLight};
+  --hover-color: #{var(--color-interaction-light)};
+  --focus-color: #{var(--color-interaction-light)};
 
   padding-top: 32px;
   color: var(--color-neutral-text-light);
@@ -32,7 +32,7 @@
   }
 
   &--standalone {
-    --focus-color: #{$accentInteractionLight};
+    --focus-color: #{var(--color-interaction-light)};
 
     padding-top: 0;
   }

@@ -1,8 +1,0 @@
-.demo-animation {
-  width: 150px;
-  height: auto;
-
-  ${respond(``, 80)}
-    width: 180px;
-  }
-}

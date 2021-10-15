@@ -18,7 +18,7 @@
   }
 
   &__utility-list {
-    @include listHorizontal;
+    ${listHorizontal}
     @include drawerIndent(padding-left);
     display: flex;
     flex-wrap: wrap;

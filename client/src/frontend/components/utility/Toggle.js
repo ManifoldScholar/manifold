@@ -96,7 +96,7 @@ export default class Toggle extends Component {
             {options.map((option, index) =>
               this.renderOption(option, id, index)
             )}
-            <span id={id} className="aria-describedby">
+            <span id={id} className="screen-reader-text">
               {`Toggle ${this.props.label} to ${this.unselected}`}
             </span>
           </div>

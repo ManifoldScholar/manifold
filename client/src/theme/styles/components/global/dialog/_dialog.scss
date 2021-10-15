@@ -15,7 +15,7 @@
   }
 
   .backend & {
-    --hover-color: #{$accentInteractionLight};
+    --hover-color: #{var(--color-interaction-light)};
 
     @include panelRoundedDark;
   }
