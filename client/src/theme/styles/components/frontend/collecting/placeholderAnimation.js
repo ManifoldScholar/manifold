@@ -1,4 +1,5 @@
-import { respond, aspectRatio, responsiveSize } from "theme/styles/mixins";
+import { respond, fluidShrink } from "theme/styles/mixins";
+import { lSetAspectRatio } from "@castiron/style-mixins";
 
 const maxWidth = `640px`;
 const hideBreakpoint = `675px`;
@@ -68,7 +69,7 @@ export default `
     }
 
     &__type-icon {
-      ${aspectRatio(1, 1)}
+      ${lSetAspectRatio(1, 1)}
       display: flex;
       grid-row: 1 / 3;
       grid-column: 1;
@@ -81,8 +82,8 @@ export default `
       transition-delay: var(--content-delay);
 
       svg {
-        width: ${responsiveSize("64px", "850px")};
-        height: ${responsiveSize("64px", "850px")};
+        width: ${fluidShrink("64px", "850px")};
+        height: ${fluidShrink("64px", "850px")};
       }
     }
 

@@ -223,7 +223,7 @@ export default `
     }
 
     .icon-star-outline {
-      fill: var(--default-strong-color);
+      fill: var(--strong-color);
     }
   }
 `;

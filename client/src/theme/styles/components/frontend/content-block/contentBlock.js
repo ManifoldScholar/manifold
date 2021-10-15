@@ -1,32 +1,21 @@
-import { respond } from "theme/styles/mixins";
+import { fluidScale } from "theme/styles/mixins";
 
 export default `
   .frontend-content-block {
     &--default {
       &:last-child {
-        margin-bottom: 50px;
-
-        ${respond(`margin-bottom: 8.065vw;`, 60)}
-
-        ${respond(`margin-bottom: 65px;`, 80)}
+        margin-bottom: ${fluidScale("65px", "50px")};
       }
 
       + .frontend-content-block {
-        margin-top: 25px;
-
-        ${respond(`margin-bottom: 4.453vw;`, 60)}
-
-        ${respond(`margin-bottom: 55px;`, 80)}
+        margin-top: ${fluidScale("55px", "25px")};
       }
     }
 
     &--shaded {
       padding-bottom: 30px;
       background-color: var(--color-base-neutral05);
-
-      ${respond(`margin-bottom: 2.429vw;`, 60)}
-
-      ${respond(`margin-bottom: 30px;`, 120)}
+      padding-top: ${fluidScale("30px", "0px")};
     }
 
     &--box {
@@ -36,7 +25,7 @@ export default `
       padding-top: 15px;
       padding-bottom: 45px;
       background-color: var(--color-base-neutral05);
-      border-radius: var(--panel-rounded-radius);
+      border-radius: var(--box-border-radius);
 
       & + & {
         margin-top: clamp(40px, 6.452vw, 50px);

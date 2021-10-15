@@ -306,7 +306,7 @@ export default `
       a {
         display: flex;
         align-items: center;
-        color: $neutral80;
+        color: var(--color-base-neutral80);
         text-decoration: none;
 
         &:hover {

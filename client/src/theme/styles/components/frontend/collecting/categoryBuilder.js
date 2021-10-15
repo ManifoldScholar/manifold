@@ -161,13 +161,13 @@ export default `
       visibility: hidden;
       opacity: 0;
       transition: opacity ${defaultTransitionProps},
-        visibility transform var(--transition-duration-default) ${defaultTransitionProps};
+        visibility transform var(--transition-duration-default) var(--transition-duration-default) var(--transition-timing-function);
 
       .group-collection-editor__collectable-actions--keyboard-actions-visible
         & {
         visibility: visible;
         opacity: 1;
-        transition: opacity var(--transition-duration-default) calc(var(--transition-duration-default) / 2) $timing,
+        transition: opacity var(--transition-duration-default) calc(var(--transition-duration-default) / 2) var(--transition-timing-function),
           visibility var(--transition-duration-default) calc(var(--transition-duration-default) / 2) var(--transition-timing-function);
       }
 

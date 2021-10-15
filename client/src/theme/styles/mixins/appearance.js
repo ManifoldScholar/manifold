@@ -19,8 +19,10 @@ export function show(size, display = "inherit") {
   `;
 }
 
-export function responsiveSize(maxWidth, breakpoint = containerWidth.inner) {
-  return `min(${maxWidth} / ${breakpoint} * 100vw, ${maxWidth})`;
+export function fluidShrink(maxWidth, breakpoint = containerWidth.inner) {
+  /* eslint-disable radix */
+  return `min(${(parseInt(maxWidth) / parseInt(breakpoint)) *
+    100}vw, ${maxWidth})`;
 }
 
 // Interactions
