@@ -66,10 +66,13 @@ export default `
         75
       )}
 
-      ${respond(`max-width: 1024px;`, `${(parseInt(breakpoints[95]) * 4) / 3}px`)}
+      ${respond(
+        `max-width: 1024px;`,
+        `${(parseInt(breakpoints[95], 10) * 4) / 3}px`
+      )}
       ${respond(
         `width: calc((100vw - var(--container-width-inner) / 2));`,
-        `${parseInt(breakpoints[120]) + 1000}px`
+        `${parseInt(breakpoints[120], 10) + 1000}px`
       )}
     }
 
@@ -85,7 +88,10 @@ export default `
     &--pad-large {
       ${respond(`padding: 33px 48px;`, 65)}
       ${respond(`padding: 33px 156px 66px 98px;`, 90)}
-      ${respond(`padding: 33px 70px;`, `${parseInt(breakpoints[120]) + 1000}px`)}
+      ${respond(
+        `padding: 33px 70px;`,
+        `${parseInt(breakpoints[120], 10) + 1000}px`
+      )}
     }
 
     .utility-primary {

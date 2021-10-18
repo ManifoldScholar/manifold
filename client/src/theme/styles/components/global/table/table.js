@@ -11,7 +11,7 @@ import {
   textTruncate
 } from "theme/styles/mixins";
 
-const FULL_CONTAINER_WIDTH = parseInt(containerWidth.full);
+const FULL_CONTAINER_WIDTH = parseInt(containerWidth.full, 10);
 const LAYOUT_BREAKPOINT = 65;
 const CELL_PADDING_VERTICAL = "16px";
 const CELL_PADDING_LATERAL_STATIC = 30;

@@ -77,7 +77,6 @@ export default `
         }
       }
 
-      // Override padding for standard thumbnail
       .wrapper {
         padding: 0;
       }

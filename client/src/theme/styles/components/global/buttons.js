@@ -109,7 +109,6 @@ export default `
     }
   }
 
-  // Can be a <button> or an <a>
   .button-primary {
     ${buttonUnstyled}
     ${utilityPrimary}
@@ -191,7 +190,6 @@ export default `
     }
   }
 
-  // Large transparent button with icon on the left
   .button-icon-primary {
     ${buttonUnstyled}
     ${utilityPrimary}
@@ -222,6 +220,7 @@ export default `
     &:active {
       color: var(--color-neutral-text-extra-dark);
       background-color: var(--color-interaction-light);
+      border-color: var(--color-interaction-light);
     }
 
     .browse & {
@@ -247,11 +246,8 @@ export default `
     }
   }
 
-  // Used in backend for "add" buttons
-  // Can be an <a> or a <button>
   .button-icon-secondary {
     ${buttonUnstyled}
-    ${utilityPrimary}
     display: inline-flex;
     align-items: center;
     padding: 0.667em 17px 0.778em;
@@ -359,9 +355,6 @@ export default `
     }
   }
 
-  // Button group, starts horizontal and drops
-  // to vertical by default, can maintain horizontal
-  // progress with class "maintain"
   .buttons-icon-horizontal {
     display: flex;
     flex-wrap: wrap;
@@ -401,7 +394,6 @@ export default `
       }
     }
 
-    // Swap full/abbreviated text if there is any
     .full {
       display: none;
 
@@ -413,7 +405,6 @@ export default `
     }
   }
 
-  // Can be an <input>, <button>, or an <a>
   .button-secondary {
     ${buttonUnstyled}
     display: inline-flex;
@@ -611,14 +602,12 @@ export default `
     ${buttonTrimPrimary}
   }
 
-  // TODO: Refactor login into form (default) with overlay (modified) and remove this
   .login-external {
     .button-secondary--dark + .button-secondary--dark {
       margin-top: 21px;
     }
   }
 
-  /* stylelint-disable declaration-no-important */
   .back-link-primary {
     ${utilityPrimary}
     display: inline-flex;

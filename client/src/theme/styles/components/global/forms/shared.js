@@ -136,7 +136,7 @@ export default `
 
     &__visibility-toggle {
       position: absolute;
-      top: ${-1 / 4 * VISIBILITY_TOGGLE_SIZE - 1}px;
+      top: ${(-1 / 4) * VISIBILITY_TOGGLE_SIZE - 1}px;
       left: 80px;
       width: ${VISIBILITY_TOGGLE_SIZE}px;
       height: ${VISIBILITY_TOGGLE_SIZE}px;

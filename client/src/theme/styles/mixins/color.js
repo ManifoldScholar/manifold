@@ -31,5 +31,7 @@ export function uriEncodeHex(color) {
 }
 
 export function darken(color, amount) {
-  return colorConstructor(color).darken(amount).hex();
+  return colorConstructor(color)
+    .darken(amount)
+    .hex();
 }

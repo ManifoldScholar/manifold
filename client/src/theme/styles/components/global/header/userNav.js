@@ -46,7 +46,7 @@ export default `
 
     @keyframes menuSlideFade {
       from {
-        transform: translateY(${-1 * parseInt(menuSlideDistance)}px);
+        transform: translateY(${-1 * parseInt(menuSlideDistance, 10)}px);
       }
 
       to {
@@ -69,7 +69,7 @@ export default `
     .panel-enter .search-menu,
     .panel-enter .user-menu {
       opacity: 0;
-      transform: translateY(${-1 * parseInt(menuSlideDistance)}px);
+      transform: translateY(${-1 * parseInt(menuSlideDistance, 10)}px);
     }
 
     .panel-enter-active .search-menu,
@@ -91,7 +91,7 @@ export default `
       opacity: 0;
       transition: opacity ${defaultTransitionProps},
         transform ${defaultTransitionProps};
-      transform: translateY(${-1 * parseInt(menuSlideDistance)}px);
+      transform: translateY(${-1 * parseInt(menuSlideDistance, 10)}px);
     }
   }
 `;
