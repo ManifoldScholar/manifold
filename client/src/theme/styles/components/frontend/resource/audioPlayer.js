@@ -1,6 +1,6 @@
 import {
   utilityPrimary,
-  defaultFocusState,
+  setFocusStyle,
   defaultHoverStyle,
   respond,
   transparentize
@@ -17,7 +17,7 @@ export default `
     height: 100%;
 
     .cover {
-      ${defaultFocusState}
+      ${setFocusStyle}
       position: absolute;
       top: 0;
       left: 0;
