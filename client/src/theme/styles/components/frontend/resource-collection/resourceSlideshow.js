@@ -2,7 +2,8 @@ import {
   respond,
   containerPrototype,
   utilityPrimary,
-  buttonUnstyled
+  buttonUnstyled,
+  transparentize
 } from "theme/styles/mixins";
 import { containerPadding } from "theme/styles/variables/layout";
 
@@ -53,7 +54,7 @@ export default `
       width: 100%;
       color: var(--color-neutral-text-light);
       text-align: center;
-      background-color: transparentize(var(--color-base-neutral90), 0.1);
+      background-color: ${transparentize("neutral90", 0.1)};
 
       ${respond(
         `  position: static;
