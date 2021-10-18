@@ -24,7 +24,7 @@ import overlay from "./overlay";
 import paginationCount from "./paginationCount";
 import projectList from "./projectList";
 import search from "./search";
-import sectionHeading from "./sectionHeading";
+import sectionHeading from "./sectiongsHeading";
 import sectionHeadingSecondary from "./sectionHeadingSecondary";
 import signInUpUpdate from "./signInUpUpdate";
 import shareNavPrimary from "./shareNavPrimary";
@@ -34,7 +34,6 @@ import userMenu from "./userMenu";
 import utility from "./utility";
 
 export default `
-  ${forms}
   ${fatalError}
   ${assetThumbnail}
   ${breadcrumbs}

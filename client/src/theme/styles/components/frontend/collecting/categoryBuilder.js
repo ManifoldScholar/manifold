@@ -115,7 +115,7 @@ export default `
         justify-content: center;
         padding-top: 9px;
         padding-bottom: 9px;
-        color: $neutral80;
+        color: var(--color-base-neutral80);
         border-radius: var(--box-border-radius);
 
         > * + * {

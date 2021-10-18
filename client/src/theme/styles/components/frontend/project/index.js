@@ -9,4 +9,5 @@ ${meta}
 ${actionCalloutList}
 ${projectThumbPlaceholder}
 ${resourceThumbnailList}
+${hero}
 `;
