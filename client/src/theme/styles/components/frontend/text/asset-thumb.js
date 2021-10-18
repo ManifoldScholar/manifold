@@ -9,7 +9,7 @@ import {
 export default `
   .asset-thumb {
     .asset-link {
-      ${clearfix}
+      ${clearfix()}
     }
 
     .asset-image {

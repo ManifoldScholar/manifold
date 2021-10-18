@@ -197,9 +197,7 @@ export default `
 
       &--expandable {
         &::before {
-          /* Resource utility fade that hides part of the
-          // above description
-          // Only displayed if description is present */
+          /* Resource utility fade that hides part of the above description. Only displayed if description is present */
           position: absolute;
           bottom: 100%;
           left: 0;

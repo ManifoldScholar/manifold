@@ -8,11 +8,11 @@ import {
 
 export default `
 .resource-detail {
-  ${clearfix}
+  ${clearfix()}
   padding-top: 22px;
 
   .container {
-    ${clearfix}
+    ${clearfix()}
   }
 
   .resource-slide-audio {

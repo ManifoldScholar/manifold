@@ -17,7 +17,7 @@ export default `
     height: 100%;
 
     .cover {
-      ${setFocusStyle}
+      ${setFocusStyle()}
       position: absolute;
       top: 0;
       left: 0;

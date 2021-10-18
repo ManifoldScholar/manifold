@@ -16,10 +16,6 @@ export default `
     margin-bottom: ${gapSize};
     color: var(--color-base-neutral90);
 
-    /* For the configurations where the description is at the
-    // bottom of the grid, but there is no description present.
-    // The cell will still exist but the content will not, so the
-    // grid-gap will serve as an unwanted additional bottom padding. */
     &--no-description {
       margin-bottom: 0;
     }
@@ -37,8 +33,6 @@ export default `
             "image description";
           grid-template-rows: auto 1fr;
           grid-template-columns: ${heroMaxHeight} auto;
-          /* Add the margin bottom back in for the square configuration
-          // where the description is not at the bottom of the grid. */
           margin-bottom: ${gapSize};
         `,
         75
@@ -71,16 +65,11 @@ export default `
     }
 
     &__filter {
-      /* While the designs would call for the standard gap size here,
-      // a little extra space should be given for the reset search button. */
       margin-bottom: ${gapSize} + 10px;
     }
 
     &__title {
       margin: 0;
-
-      /* These two rules are temporary additions and should be eventually
-      // defined by the parent component */
       font-size: 26px;
       font-weight: 500;
     }
@@ -118,8 +107,6 @@ export default `
       }
 
       &--full {
-        /* Break the full bleed hero out of the container so it spans the
-        // full width of the page. */
         position: relative;
         right: 50%;
         left: 50%;

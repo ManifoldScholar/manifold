@@ -23,11 +23,11 @@ export default `
   ${layout}
   ${page}
   ${project}
+  ${projectCollection}
   ${projectList}
   ${resourceCollection}
   ${search}
   ${text}
   ${subscriptions}
   ${resource}
-  ${projectCollection}
 `;

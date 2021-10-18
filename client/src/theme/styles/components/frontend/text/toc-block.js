@@ -15,13 +15,7 @@ const indents = [2, 3, 4, 5, 6].map(
 );
 
 export default `
-/* A nested list of TOC nodes with an optional heading for the text
-//
-// By default, nested node lists become progressively more indented.
-// However, to allow links to span the entire width of the list, we indent the
-// links themselves using var(--link-indent) where CSS custom properties are
-// supported. Then, the value of --link-indent is updated within the scope of
-// each depth level. */
+/* A nested list of TOC nodes with an optional heading for the text. By default, nested node lists become progressively more indented. However, to allow links to span the entire width of the list, we indent the links themselves using var(--link-indent) where CSS custom properties are supported. Then, the value of --link-indent is updated within the scope of each depth level. */
 
 .toc-block {
   --link-indent: ${firstLevelPadding};

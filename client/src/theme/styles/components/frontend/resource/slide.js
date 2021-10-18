@@ -44,7 +44,7 @@ export default `
       }
     }
 
-    // Transition classes
+    /* Transition classes */
     .slide-left-enter figure {
       transform: translate3d(100%, 0, 0);
     }
