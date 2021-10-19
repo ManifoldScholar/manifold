@@ -1,0 +1,20 @@
+@mixin uiPanelMenu {
+  --hover-color: var(--color-interaction-dark;
+
+  @include reactSlideTransition;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background-color: var(--color-base-neutral05);
+
+  @include respond($break50) {
+    width: auto;
+  }
+}
+
+.panel-hidden {
+  .screen-reader-text {
+    visibility: hidden;
+  }
+}
