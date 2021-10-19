@@ -24,7 +24,7 @@ import overlay from "./overlay";
 import paginationCount from "./paginationCount";
 import projectList from "./projectList";
 import search from "./search";
-import sectionHeading from "./sectiongsHeading";
+import sectionHeading from "./sectionHeading";
 import sectionHeadingSecondary from "./sectionHeadingSecondary";
 import signInUpUpdate from "./signInUpUpdate";
 import shareNavPrimary from "./shareNavPrimary";
