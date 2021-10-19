@@ -2,10 +2,12 @@ import {
   listUnstyled,
   respond,
   buttonUnstyled,
-  defaultTransitionProps
+  defaultTransitionProps,
+  defaultHoverStyle
 } from "theme/styles/mixins";
+import { uiPanelMenu } from "../uiPanelMenu";
 
-export default css`
+export default `
   .appearance-menu {
     --focus-color: var(--hover-color);
 
@@ -24,16 +26,17 @@ export default css`
         padding: 0;
         border-top: none;
 
-        @include respond($break50) {
-          &:last-child {
-            padding: 0;
-            border-top: none;
+        ${respond(
+          `
+            &:last-child {
+              padding: 0;
+              border-top: none;
 
-            @include respond($break40) {
-              padding: 30px 28px;
+              ${respond(`padding: 30px 28px;`, 40)}
             }
-          }
-        }
+          `,
+          50
+        )}
       }
     }
 
@@ -108,9 +111,7 @@ export default css`
       padding-top: 16px;
       padding-bottom: 16px;
 
-      @include respond($break50) {
-        grid-row-gap: 29px;
-      }
+      ${respond(`grid-row-gap: 29px;`, 50)}
     }
 
     &__font-style-control {
@@ -146,22 +147,17 @@ export default css`
         font-family: var(--font-family-copy);
         font-size: 25px;
 
-        @include respond($break50) {
-          font-size: 22px;
-        }
+        ${respond(`font-size: 22px;`, 50)}
       }
 
       &--sans-serif {
         font-family: var(--font-family-heading);
         font-size: 24px;
 
-        @include respond($break50) {
-          font-size: 21px;
-        }
+        ${respond(`font-size: 21px;`, 50)}
       }
     }
 
-    // Set of buttons for setting font-size
     &__font-size-button {
       ${buttonUnstyled}
       width: 44px;
@@ -171,20 +167,22 @@ export default css`
       background-color: var(--color-base-neutral-white);
       border-radius: 100%;
 
-      @include respond($break50) {
-        width: 35px;
-        height: 35px;
-      }
+      ${respond(
+        `width: 35px;
+      height: 35px;`,
+        50
+      )}
 
       &:disabled {
         color: var(--color-neutral-text-light);
         background-color: var(--color-base-neutral20);
       }
 
-      @include respond($break50) {
-        width: 35px;
-        height: 35px;
-      }
+      ${respond(
+        `width: 35px;
+      height: 35px;`,
+        50
+      )}
 
       &:disabled,
       &[aria-disabled="true"] {
@@ -211,9 +209,7 @@ export default css`
       border: 3px solid transparent;
       transition: border-color ${defaultTransitionProps};
 
-      @include respond($break50) {
-        width: 96px;
-      }
+      ${respond(`width: 96px;`, 50)}
 
       &--light {
         color: var(--color-neutral-text-extra-dark);
@@ -250,9 +246,7 @@ export default css`
       display: none;
       border-top: none;
 
-      @include respond($break50) {
-        display: block;
-      }
+      ${respond(`display: block;`, 50)}
     }
 
     &__menu-icon {
