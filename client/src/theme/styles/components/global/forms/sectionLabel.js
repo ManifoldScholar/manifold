@@ -5,5 +5,9 @@ export default `
     ${roundedFormHeader}
     ${panelRounded}
     background-color: var(--box-medium-bg-color);
+
+    .backend & {
+      background-color: var(--box-bg-color);
+    }
   }
 `;

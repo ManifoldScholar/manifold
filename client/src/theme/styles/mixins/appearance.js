@@ -345,7 +345,7 @@ export const roundedFormHeader = `
   }
 `;
 
-// // Drag and Drop styles
+// Drag and Drop styles
 export function dropzone(margin = "9px", activeSelector = "--show-dropzone") {
   return `
     ${panelRounded}
@@ -363,8 +363,8 @@ export function dropzone(margin = "9px", activeSelector = "--show-dropzone") {
 }
 
 export const draggable = `
-  ${panelRoundedDark}
-  cursor: move; // fallback for older browsers
+  ${panelRounded}
+  cursor: move; /* fallback for older browsers */
   cursor: grab;
   transition: color var(--transition-duration-default)
       var(--transition-timing-function),
