@@ -51,3 +51,5 @@ export const entityFilterForm = {
   selectMinWidth: 200,
   searchMinWidth: 182
 };
+
+export const dashboardLayoutBreakpoint = breakpoints[75];
