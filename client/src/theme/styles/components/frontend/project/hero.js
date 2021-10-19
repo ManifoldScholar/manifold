@@ -38,7 +38,7 @@ export default `
     }
 
     &--standalone {
-      padding-top: calc(${gridGapSmall} + var(--standalone-header-height);
+      padding-top: calc(${gridGapSmall} + var(--standalone-header-height));
 
       ${respond(`padding-top: 30px;`, layoutBreakpoint)}
     }

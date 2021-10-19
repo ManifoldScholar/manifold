@@ -92,7 +92,7 @@ export default `
       flex-grow: 1;
       width: auto;
       height: auto;
-      padding: ${fluidScale("20px 24px", "18px 16px")};
+      padding: ${fluidScale("20px", "18px")} ${fluidScale("24px", "16px")};
       font-size: ${fluidScale("18px", "20px")};
       font-weight: var(--font-weight-medium);
       hyphens: none;
