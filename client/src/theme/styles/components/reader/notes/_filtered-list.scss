@@ -1,0 +1,214 @@
+.notes-filtered-list {
+  $_icon-size: 24px;
+  $_column-gap-mobile: 10px;
+  $_column-gap-desktop: 16px;
+  $_breakpoint: $break50;
+  $_collapse-duration: 350ms;
+  $_collapse-easing: linear;
+  $_see-all-min-width: 109px;
+  $_group-select-min-width: entity-filter-form(select-min-width);
+  $_input-gap: entity-filter-form(gap);
+
+  &__header {
+    @include drawerPadding(padding-right, narrow);
+    @include drawerPadding(padding-left, narrow);
+    display: flex;
+    flex-wrap: wrap;
+    gap: $_input-gap;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  &__header-start {
+    flex-grow: 999;
+  }
+
+  &__header-end {
+    display: flex;
+    flex-basis: $_see-all-min-width;
+    flex-grow: 1;
+    gap: $_input-gap;
+
+    &--has-select {
+      flex-basis: $_group-select-min-width + $_input-gap + $_see-all-min-width;
+    }
+  }
+
+  &__see-all {
+    flex-shrink: 0;
+    padding: 6px 9px 8px 13px;
+    font-size: 13px;
+    border-color: var(--select-border-color);
+  }
+
+  &__see-all-icon {
+    top: 0;
+    margin-left: 6px;
+  }
+
+  &__section-list {
+    ${listUnstyled}
+    font-family: var(--font-family-heading);
+    color: var(--strong-color);
+  }
+
+  &__section-button {
+    ${buttonUnstyled}
+    @include drawerPadding(padding-right, narrow);
+    @include drawerPadding(padding-left, narrow);
+    display: block;
+    width: 100%;
+    padding-top: 11px;
+    padding-bottom: 13px;
+    text-align: left;
+    background-color: var(--box-bg-color);
+    transition: background-color ${defaultTransitionProps};
+
+    &:hover,
+    &:focus-visible {
+      color: inherit;
+      background-color: var(--box-medium-bg-color);
+      outline: 0;
+    }
+  }
+
+  &__section-button-inner {
+    display: grid;
+    grid-template: 'icon label' auto / $_icon-size 1fr;
+    column-gap: $_column-gap-mobile;
+    align-items: center;
+
+    @include respond($_breakpoint) {
+      column-gap: $_column-gap-desktop;
+    }
+  }
+
+  &__section-label {
+    display: block;
+    grid-area: label;
+    overflow: hidden;
+    font-size: 18px;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: inherit;
+
+    @include respond($_breakpoint) {
+      font-size: 21px;
+    }
+  }
+
+  &__disclosure-icon {
+    position: relative;
+    top: 2px;
+    grid-area: icon;
+    transition: transform $_collapse-duration $_collapse-easing;
+    transform: rotate(-0.25turn);
+
+    &--expanded {
+      transform: rotate(0);
+    }
+  }
+
+  &__group {
+    ${listUnstyled}
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  &__item-button {
+    --darker-tag-bg-color: var(--box-medium-bg-color);
+
+    ${buttonUnstyled}
+    @include drawerPadding(padding-right, narrow);
+    @include drawerPadding(padding-left, narrow);
+    display: block;
+    width: 100%;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    font-size: 16px;
+    text-align: left;
+    transition: background-color ${defaultTransitionProps};
+
+    &:hover,
+    &:focus-visible {
+      --darker-tag-bg-color: var(--box-strong-bg-color);
+
+      color: inherit;
+      background-color: var(--box-medium-bg-color);
+      outline: 0;
+    }
+  }
+
+  &__item-button-inner {
+    display: grid;
+    grid-template: 'icon inner' auto / $_icon-size minmax(0, 1fr);
+    column-gap: $_column-gap-mobile;
+
+    @include respond($_breakpoint) {
+      column-gap: $_column-gap-desktop;
+    }
+
+    @include respond($break95) {
+      grid-template: '. icon inner' auto / $_icon-size $_icon-size minmax(
+        0,
+        1fr
+      );
+    }
+  }
+
+  &__item-icon {
+    grid-area: icon;
+    color: var(--weak-color);
+  }
+
+  &__item-inner {
+    display: flex;
+    flex-direction: column;
+    grid-area: inner;
+    align-items: baseline;
+
+    @include respond($break95) {
+      flex-direction: row;
+    }
+  }
+
+  &__item-text {
+    @include textTruncate;
+    flex-grow: 1;
+    width: 100%;
+    line-height: $_icon-size - 3px;
+  }
+
+  &__item-creator {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  &__item-creator-avatar {
+    flex-shrink: 0;
+
+    &--image {
+      @include buttonAvatar(14, var(--strong-color));
+      margin-right: 2px;
+      margin-left: 1px;
+      transform: translateY(1px);
+    }
+
+    &--default {
+      transform: translateY(-1px);
+    }
+  }
+
+  &__item-tag {
+    margin-top: 12px;
+
+    @include respond($break95) {
+      margin-top: -3px;
+      margin-left: 40px;
+    }
+  }
+}

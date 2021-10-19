@@ -1,0 +1,22 @@
+.notation-marker {
+  color: $neutralUIDark;
+  transition: color ${defaultTransitionProps};
+
+  .scheme-dark & {
+    color: $neutralUILight;
+  }
+
+  &--active {
+    color: var(--hover-color);
+
+    .scheme-dark & {
+      color: var(--hover-color);
+    }
+  }
+
+  &__icon {
+    position: relative;
+    top: -1px;
+    color: inherit;
+  }
+}
