@@ -1,0 +1,211 @@
+.entity-list {
+  & + & {
+    margin-top: 64px;
+  }
+
+  &--indented {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .instructional-copy {
+    padding-bottom: 0; // sorry. hacked it.
+  }
+
+  &__title-block {
+    margin: 0 0 32px;
+  }
+
+  &__title {
+    font-family: var(--font-family-sans);
+    font-size: 16px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-text-extra-light);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    a,
+    a:visited {
+      color: var(--color-neutral-text-extra-light);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--hover-color);
+    }
+
+    .utility-button {
+      color: var(--color-neutral-text-light);
+    }
+  }
+
+  &__title-icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    color: var(--hover-color);
+  }
+
+  &__list {
+    ${listUnstyled}
+
+    &--tiles {
+      display: flex;
+      flex-flow: row wrap;
+
+      @supports (grid-auto-columns: min-content) {
+        display: grid;
+        grid-template-columns: auto;
+      }
+
+      @include respond(event-entity(panel-breakpoint)) {
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(event-entity(min-width), 1fr)
+        );
+        margin-top: event-entity(list-margin-top) - event-entity(row-gap);
+        margin-left: -1 * event-entity(icon-size-small);
+      }
+
+      @include respond(event-entity(list-layout-breakpoint)) {
+        margin-left: -1 / 2 * event-entity(icon-size-large);
+      }
+
+      // breakpoint equal to event-entity(min-width) * 2 + gutter + remaining viewport space
+      @include respond(952px) {
+        grid-template-columns: repeat(2, minmax(event-entity(min-width), 1fr));
+      }
+
+      li {
+        min-width: 100%;
+
+        @include respond(event-entity(panel-breakpoint)) {
+          padding-left: event-entity(icon-size-small);
+          margin-top: event-entity(row-gap);
+        }
+
+        @include respond(event-entity(list-layout-breakpoint)) {
+          flex-basis: 50%;
+          min-width: event-entity(min-width);
+          max-width: event-entity(flex-max-width);
+          padding-left: event-entity(column-gap);
+
+          @supports (grid-auto-columns: min-content) {
+            max-width: none;
+          }
+        }
+      }
+    }
+
+    &--well {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      padding: 10px 20px 20px;
+      background-color: var(--color-base-neutral95);
+      border-radius: 10px;
+    }
+
+    &--grid {
+      $grid-item-min-width: 192px;
+
+      ${respond(``, 65)}
+        display: flex;
+        flex-flow: row wrap;
+        margin-top: 22px;
+        margin-left: -25px;
+
+        @supports (grid-auto-columns: min-content) {
+          display: grid;
+          grid-template-columns: repeat(
+            auto-fill,
+            minmax($grid-item-min-width, 1fr)
+          );
+        }
+
+        li {
+          flex-basis: 33.333%;
+          flex-grow: 1;
+          min-width: $grid-item-min-width;
+          border-bottom: none;
+        }
+      }
+
+      ${respond(``, 85)}
+        li {
+          flex-basis: 25%;
+        }
+      }
+    }
+
+    &--sortable {
+      @include dropzone(9px, '.show-dropzone');
+      padding-top: 9px;
+      padding-bottom: 9px;
+      margin-top: -9px;
+      margin-bottom: -9px;
+    }
+  }
+
+  &__header {
+    padding-top: 8px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-neutral-ui-dull-light);
+  }
+
+  &--bare {
+    .entity-list__header {
+      padding-top: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+  }
+
+  &__pagination {
+    margin-top: 32px;
+  }
+
+  &__button {
+    @include fillOnFocus(var(--color-accent-primary-pale));
+
+    & + & {
+      margin-top: 24px;
+    }
+
+    ${respond(``, 60)}
+      display: inline-flex;
+
+      & + & {
+        margin-top: 0;
+        margin-left: 12px;
+      }
+    }
+  }
+
+  .entity-list__button-set {
+    margin-bottom: 22px;
+  }
+
+  &__search {
+    margin-bottom: 24px;
+  }
+
+  &__empty-message {
+    font-family: var(--font-family-serif);
+    padding: 18px 0;
+    font-size: 17px;
+    font-style: italic;
+    border-bottom: 1px solid $neutralTextDark;
+
+    &--well {
+      ${utilityPrimary}
+      padding: 31px 25px;
+      font-size: 14px;
+      font-style: normal;
+      background-color: var(--color-base-neutral95);
+      border: none;
+      border-radius: 10px;
+    }
+  }
+}

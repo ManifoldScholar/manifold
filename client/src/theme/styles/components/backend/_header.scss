@@ -1,0 +1,236 @@
+// Global backend header design
+/* stylelint-disable property-no-vendor-prefix */
+.backend-header {
+  $border-radius: 8px;
+
+  ${panelRoundedDark}
+
+  &--spaceBottom {
+    margin-bottom: 30px;
+  }
+
+  // layout elements
+  &__inner {
+    padding: var(--container-padding-narrow) * 0.6 var(--container-padding-narrow) * 0.75;
+    margin-right: auto;
+    margin-left: auto;
+
+    ${respond(``, 60)}
+      padding: var(--container-padding-narrow) * 0.8 var(--container-padding-narrow) * 1.2;
+    }
+
+    &--padded {
+      ${respond(``, 35)}
+        padding: var(--container-padding-narrow) var(--container-padding-responsive);
+      }
+
+      ${respond(``, 120)}
+        padding-right: var(--container-padding-full);
+        padding-left: var(--container-padding-full);
+      }
+    }
+
+    &--empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+  }
+
+  &__content-wrapper {
+    display: grid;
+    grid-template:
+      'figure title' auto
+      'figure utility' auto / auto 1fr;
+    row-gap: 9px;
+    column-gap: 25px;
+  }
+
+  &__content-flex-wrapper {
+    display: flex;
+    align-items: center;
+
+    &--aib {
+      align-items: baseline;
+    }
+
+    > * + * {
+      margin-left: 8px;
+
+      ${respond(``, 60)}
+        margin-left: 20px;
+      }
+    }
+
+    &--tight {
+      > * + * {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  &__title-block {
+    grid-area: title;
+  }
+
+  &__utility-block {
+    grid-area: utility;
+
+    &--flex {
+      flex-grow: 1;
+      text-align: right;
+    }
+  }
+
+  &__figure-block {
+    grid-area: figure;
+
+    &--shift-left {
+      margin-left: -14px;
+    }
+  }
+
+  &__section-nav {
+    display: block;
+    border-radius: 0 0 $border-radius $border-radius;
+
+    &.open {
+      border-radius: 0;
+    }
+
+    ul {
+      border-radius: 0 0 $border-radius $border-radius;
+    }
+
+    ${respond(``, 65)}
+      display: none;
+    }
+  }
+
+  &__body {
+    margin-top: 20px;
+  }
+
+  // single elements
+  &__title {
+    font-family: var(--font-family-sans);
+    margin: 0;
+    font-size: 16px;
+    font-weight: var(--font-weight-medium);
+    hyphens: none;
+    color: var(--color-base-neutral20);
+
+    ${respond(``, 65)}
+      font-size: 22px;
+    }
+  }
+
+  &__h2-title {
+    position: relative;
+    top: -1px;
+    padding: 0.75em 1.5em 0.875em;
+    margin: 0;
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent-primary);
+    letter-spacing: 0.143em;
+  }
+
+  &__subtitle {
+    font-family: var(--font-family-serif);
+    margin-left: 0.433em;
+    font-size: 1.071em;
+    color: var(--color-neutral-text-light);
+  }
+
+  &__emphasis {
+    font-style: normal;
+    color: var(--color-accent-primary);
+  }
+
+  &__empty-text {
+    font-family: var(--font-family-sans);
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+  }
+
+  &__note {
+    font-family: var(--font-family-serif);
+    font-size: 14px;
+    line-height: initial;
+
+    ${respond(``, 65)}
+      font-size: 17px;
+    }
+  }
+
+  &__figure {
+    &--rounded {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background-color: var(--color-base-neutral90);
+      border-radius: $border-radius;
+
+      ${respond(``, 65)}
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    &--accented {
+      color: var(--color-accent-primary);
+    }
+
+    &--alt-accented {
+      color: var(--color-accent-secondary);
+    }
+  }
+
+  &__type-icon {
+    width: 59px;
+    height: 59px;
+
+    ${respond(``, 65)}
+      width: 64px;
+      height: 64px;
+    }
+
+    &--project {
+      margin-top: 4px;
+
+      @at-root svg#{&} {
+        // override `svg:not(:root)` normalize selector
+        overflow: visible;
+      }
+    }
+
+    &--small {
+      width: 26px;
+      height: 26px;
+
+      ${respond(``, 65)}
+        width: 34px;
+        height: 34px;
+      }
+    }
+
+    .backend-header__figure--rounded & {
+      width: 40px;
+      height: 40px;
+
+      ${respond(``, 65)}
+        width: 44px;
+        height: 44px;
+      }
+    }
+  }
+
+  &__breadcrumbs {
+    border-radius: $border-radius $border-radius 0 0;
+  }
+}

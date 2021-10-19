@@ -35,3 +35,9 @@ export function darken(color, amount) {
     .darken(amount)
     .hex();
 }
+
+export function lighten(color, amount) {
+  return colorConstructor(color)
+    .lighten(amount)
+    .hex();
+}

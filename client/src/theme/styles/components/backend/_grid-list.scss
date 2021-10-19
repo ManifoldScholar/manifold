@@ -1,0 +1,43 @@
+// Grid-style list of items
+// single column on mobile, grid on wider viewports
+@mixin gridList {
+  ${listUnstyled}
+  display: flex;
+  flex-direction: column;
+
+  ${respond(``, 75)}
+    flex-flow: row wrap;
+  }
+
+  li {
+    ${respond(``, 75)}
+      flex: 1 1 25%;
+      max-width: 25%;
+    }
+
+    ${respond(``, 90)}
+      flex-basis: 20%;
+      max-width: 20%;
+    }
+  }
+}
+
+.grid-list {
+  margin-bottom: 24px;
+
+  ul {
+    @include gridList;
+  }
+
+  .drawer-backend & {
+    li {
+      padding: 15px 0;
+
+      ${respond(``, 90)}
+        flex-basis: 25%;
+        max-width: 25%;
+        padding: 15px;
+      }
+    }
+  }
+}
