@@ -121,7 +121,7 @@ export default `
             margin-right: calc(-100vw / 2 + ${containerWidth.inner} / 2);
             margin-left: calc(-100vw / 2 + ${containerWidth.inner} / 2);
           `,
-          containerWidth.full
+          120
         )}
       }
     }

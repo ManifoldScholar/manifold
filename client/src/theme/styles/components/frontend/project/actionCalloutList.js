@@ -22,15 +22,10 @@ export default `
       ${respond(
         `
           flex-flow: row wrap;
-          margin-top: ${calloutGutter};
-          margin-bottom: -${calloutGutter};
-          margin-left: -${calloutGutter};
+          gap: ${calloutGutter};
 
           > * {
             width: auto;
-            margin-top: 0;
-            margin-bottom: ${calloutGutter};
-            margin-left: ${calloutGutter};
           }
         `,
         60
@@ -166,7 +161,7 @@ export default `
 
     &__link-icon {
       margin-right: 8px;
-      color: $neutral50;
+      color: var(--color-base-neutral50);
       transition: color ${defaultTransitionProps};
 
       .project-hero--dark & {

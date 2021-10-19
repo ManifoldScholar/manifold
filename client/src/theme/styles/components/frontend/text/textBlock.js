@@ -64,9 +64,6 @@ export default `
       }
     }
 
-    &__cover-svg {
-    }
-
     &__cover-image {
       width: 56px;
       height: auto;

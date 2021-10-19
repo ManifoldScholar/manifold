@@ -60,8 +60,7 @@ export default `
   }
 
   .resource-content {
-    /* Default font-treatment */
-    var(--font-family-copy);
+    font-family: var(--font-family-copy);
     font-size: 14px;
     line-height: 1.4;
 

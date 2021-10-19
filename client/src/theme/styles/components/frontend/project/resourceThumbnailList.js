@@ -3,15 +3,14 @@ import {
   listUnstyled,
   defaultTransitionProps,
   rgba,
-  defaultHoverStyle
+  defaultHoverStyle,
+  fluidScale
 } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
 
 const breakpoint = breakpoints[60];
 const maxGap = "25px";
 const minGap = "20px";
-/* eslint-disable radix */
-const responsiveGap = `${(parseInt(maxGap) / parseInt(breakpoint)) * 100}vw`;
 const itemMinWidth = "195px";
 
 export default `.resource-thumbnail-list {
@@ -19,7 +18,7 @@ export default `.resource-thumbnail-list {
     ${listUnstyled}
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-gap: clamp(${minGap}, ${responsiveGap}, ${maxGap});
+    grid-gap: ${fluidScale(maxGap, minGap)};
 
     ${respond(
       `grid-template-columns: repeat(auto-fill, minmax(${itemMinWidth}, 1fr));`,

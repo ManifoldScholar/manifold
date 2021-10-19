@@ -1,8 +1,8 @@
-import assetThumb from "./asset-thumb";
-import textsGroup from "./texts-group";
-import textBlock from "./text-block";
-import textList from "./text-list";
-import tocBlock from "./toc-block";
+import assetThumb from "./assetThumb";
+import textsGroup from "./textsGroup";
+import textBlock from "./textBlock";
+import textList from "./textList";
+import tocBlock from "./tocBlock";
 
 export default `
 ${textList}

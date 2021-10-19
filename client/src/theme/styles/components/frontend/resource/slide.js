@@ -175,9 +175,6 @@ export default `
         ${defaultHoverStyle}
       }
 
-      &__text {
-      }
-
       &__icon {
         margin-left: 4px;
       }

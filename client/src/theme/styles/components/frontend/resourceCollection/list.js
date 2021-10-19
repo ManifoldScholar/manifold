@@ -5,13 +5,13 @@ import {
   panelRoundedDark,
   defaultTransitionProps,
   rgba,
-  transparentize
+  transparentize,
+  fluidShrink,
+  fluidScale
 } from "theme/styles/mixins";
 
 const breakpoint = breakpoints[60];
 const maxGap = "30px";
-/* eslint-disable radix */
-const responsiveGap = `${(parseInt(maxGap) / parseInt(breakpoint)) * 100}vw`;
 
 export default `
   /* Nav wrapping a ul */
@@ -20,7 +20,7 @@ export default `
       ${listUnstyled}
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      grid-gap: min(${responsiveGap}, ${maxGap});
+      grid-gap: ${fluidShrink(maxGap, breakpoint)};
 
       ${respond(
         `grid-template-columns: repeat(2, minmax(0, 1fr));`,
@@ -92,18 +92,12 @@ export default `
       flex-grow: 1;
       width: auto;
       height: auto;
-      padding: 18px 16px;
-      font-size: 18px;
+      padding: ${fluidScale("20px 24px", "18px 16px")};
+      font-size: ${fluidScale("18px", "20px")};
       font-weight: var(--font-weight-medium);
       hyphens: none;
 
-      ${respond(`padding: 18px 21px;`, 70)}
-
       ${respond(`flex-grow: 1;`, 80)}
-
-      ${respond(`font-size: 20px;`, 85)}
-
-      ${respond(`padding: 20px 24px;`, 95)}
     }
 
     .icon {

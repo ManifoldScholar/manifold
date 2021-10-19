@@ -34,6 +34,7 @@ import userMenu from "./userMenu";
 import utility from "./utility";
 
 export default `
+  ${forms}
   ${fatalError}
   ${assetThumbnail}
   ${breadcrumbs}
