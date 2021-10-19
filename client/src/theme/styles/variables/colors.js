@@ -183,6 +183,39 @@ export const defaultColors = {
   )})`
 };
 
+const highlightPrimaryBase = Color("#2bd1fa");
+
+const annotationHighlightColors = {
+  primaryBase: highlightPrimaryBase.hex(),
+  primaryPale: highlightPrimaryBase
+    .rotate(-1)
+    .desaturate(0.1444)
+    .lighten(0.3431)
+    .hex(), // #d9f5fb
+  primaryLight: highlightPrimaryBase
+    .desaturate(0.1325)
+    .lighten(0.2059)
+    .hex(), // #99e3f5
+  primaryPaleLowContrast: Color(highlightPrimaryBase.hue() + 15)
+    .desaturate(0.835)
+    .darken(0.0196)
+    .hex(), // #808f9b
+  secondaryBase: "#70c930",
+  secondaryLight: "#c6eaac",
+  secondaryPale: "#eaf7e0",
+  secondaryPaleLowContrast: "#677b61",
+  tertiaryBase: "#ff12ff",
+  tertiaryLight: "#edaaed",
+  tertiaryPale: "#f4dcf4",
+  tertiaryPaleLowContrast: "#775e77",
+  get mixed() {
+    return Color(this.primaryPale)
+      .mix(Color(this.secondaryPale))
+      .darken(0.2)
+      .hex();
+  }
+};
+
 export default `
   ${createCSSVariables("color-base", baseColors)}
   ${createCSSVariables("color-neutral", neutralColors)}
@@ -192,4 +225,5 @@ export default `
   ${createCSSVariables("color-header", headerColors)}
   ${createCSSVariables("color-input", inputColors)}
   ${createCSSVariables(null, defaultColors)}
+  ${createCSSVariables("color-annotation", annotationHighlightColors)}
 `;

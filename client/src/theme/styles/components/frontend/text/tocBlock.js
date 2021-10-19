@@ -8,11 +8,13 @@ const firstLevelPadding = "1em";
 const nestedLevelPadding = "1.611em";
 const borderStyle = "1px solid var(--color-base-neutral40)";
 
-const indents = [2, 3, 4, 5, 6].map(
-  level => `&--depth-${level} {
+const indents = [2, 3, 4, 5, 6]
+  .map(
+    level => `&--depth-${level} {
   --link-indent: calc(${firstLevelPadding} + ${nestedLevelPadding} * (${level} - 1));
 }`
-);
+  )
+  .join("");
 
 export default `
 /* A nested list of TOC nodes with an optional heading for the text. By default, nested node lists become progressively more indented. However, to allow links to span the entire width of the list, we indent the links themselves using var(--link-indent) where CSS custom properties are supported. Then, the value of --link-indent is updated within the scope of each depth level. */
