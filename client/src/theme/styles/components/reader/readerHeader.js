@@ -1,19 +1,30 @@
+import {
+  reactSlideTransition,
+  respond,
+  rgba,
+  listHorizontal,
+  buttonUnstyled,
+  utilityPrimary,
+  defaultTransitionProps
+} from "theme/styles/mixins";
+
+export default `
 .reader-header {
-  $paddingLateral: $containerPaddingNarrow;
-  $paddingLateralNarrow: 11px;
+  --padding-lateral: var(--container-padding-narrow);
+  --padding-lateral-narrow: 11px;
 
-  --header-foreground-color: #{var(--color-base-neutral75)};
-  --hover-color: var(--color-interaction-dark;
+  --header-foreground-color: var(--color-base-neutral75);
+  --hover-color: var(--color-interaction-dark);
 
-  @include reactSlideTransition("left", ".reader-return-menu");
-  @include reactSlideTransition("right", ".user-menu");
-  @include reactSlideTransition("right", ".search-menu");
+  ${reactSlideTransition("left", ".reader-return-menu")}
+  ${reactSlideTransition("right", ".user-menu")}
+  ${reactSlideTransition("right", ".search-menu")}
+
   position: fixed;
   top: 0;
   width: 100%;
   color: var(--color-neutral-text-dark);
-
-  box-shadow: 0 -10px 20px 7px rgba("neutralBlack", 0.25);
+  box-shadow: 0 -10px 20px 7px ${rgba("neutralBlack", 0.25)};
 
   &__inner {
     position: relative;
@@ -27,9 +38,7 @@
       transform: translateX(-100vw);
     }
 
-    @include respond($break50) {
-      width: 100%;
-    }
+    ${respond(`width: 100%;`, 50)}
   }
 
   &__menu-group {
@@ -39,18 +48,14 @@
       grid-area: menu-group-left;
       width: 100vw;
 
-      @include respond($break50) {
-        width: auto;
-      }
+      ${respond(`width: auto;`, 50)}
     }
 
     &--right {
       grid-area: menu-group-right;
       width: 100vw;
 
-      @include respond($break50) {
-        width: auto;
-      }
+      ${respond(`width: auto;`, 50)}
     }
   }
 
@@ -62,19 +67,17 @@
     height: 100%;
     overflow: hidden;
     font-size: 18px;
-    font-weight: var(--font-weight-medium); // OD
+    font-weight: var(--font-weight-medium);
 
-    @include respond($break75) {
-      display: block;
-    }
+    ${respond(`display: block;`, 75)}
   }
 
   &__title-bar-inner {
     position: relative;
     width: 100%;
     height: 100%;
-    padding-right: $paddingLateral;
-    padding-left: $paddingLateral;
+    padding-right: var(--padding-lateral);
+    padding-left: var(--padding-lateral);
     margin: 0;
     transition: transform 0.4s var(--transition-timing-function);
 
@@ -115,9 +118,7 @@
     font-size: 13px;
     transition: color ${defaultTransitionProps}, background-color ${defaultTransitionProps};
 
-    @include respond($break50) {
-      font-size: 14px;
-    }
+    ${respond(`font-size: 14px;`, 50)}
 
     &:active,
     &.button-active,
@@ -129,13 +130,13 @@
     }
 
     &--pad-default {
-      padding-right: $paddingLateral;
-      padding-left: $paddingLateral;
+      padding-right: var(--padding-lateral);
+      padding-left: var(--padding-lateral);
     }
 
     &--pad-narrow {
-      padding-right: $paddingLateralNarrow;
-      padding-left: $paddingLateralNarrow;
+      padding-right: var(--padding-lateral-narrow);
+      padding-left: var(--padding-lateral-narrow);
     }
 
     &--gray {
@@ -149,18 +150,14 @@
     &--large {
       display: none;
 
-      @include respond($break50) {
-        display: block;
-      }
+      ${respond(`display: block;`, 50)}
     }
 
     &--small {
       position: relative;
       top: 1px;
 
-      @include respond($break50) {
-        display: none;
-      }
+      ${respond(`display: none;`, 50)}
     }
   }
 
@@ -173,9 +170,7 @@
     justify-content: flex-end;
     width: 110px;
 
-    @include respond($break50) {
-      display: none;
-    }
+    ${respond(`display: none;`, 50)}
   }
 
   &__options-button-icon {
@@ -199,10 +194,11 @@
       width: 28px;
       height: 28px;
 
-      @include respond($break50) {
-        width: 32px;
-        height: 32px;
-      }
+      ${respond(
+        `width: 32px;
+      height: 32px;`,
+        50
+      )}
     }
   }
 
@@ -231,3 +227,4 @@
     right: 0;
   }
 }
+`;

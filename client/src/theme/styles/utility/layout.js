@@ -8,8 +8,14 @@ import {
   clearfix
 } from "../mixins/layout";
 
-const readerContainerWidths = ["1063px", "916px", "790px", "680px", "500px"];
-const readerContainerWidthClasses = readerContainerWidths
+export const readerContainerWidths = [
+  "1063px",
+  "916px",
+  "790px",
+  "680px",
+  "500px"
+];
+export const readerContainerWidthClasses = readerContainerWidths
   .map(
     (width, index) => `
     &.container-width-${index} {

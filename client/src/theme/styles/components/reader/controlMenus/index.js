@@ -4,4 +4,6 @@ import visibility from "./visibility";
 
 export default `
 ${appearance}
+${base}
+${visibility}
 `;

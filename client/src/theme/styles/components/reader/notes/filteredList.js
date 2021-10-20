@@ -1,20 +1,33 @@
-.notes-filtered-list {
-  $_icon-size: 24px;
-  $_column-gap-mobile: 10px;
-  $_column-gap-desktop: 16px;
-  $_breakpoint: $break50;
-  $_collapse-duration: 350ms;
-  $_collapse-easing: linear;
-  $_see-all-min-width: 109px;
-  $_group-select-min-width: entity-filter-form(select-min-width);
-  $_input-gap: entity-filter-form(gap);
+import {
+  drawerPadding,
+  listUnstyled,
+  respond,
+  buttonUnstyled,
+  defaultTransitionProps,
+  textTruncate,
+  buttonAvatar
+} from "theme/styles/mixins";
+import { breakpoints } from "theme/styles/variables/media";
+import { entityFilterForm } from "theme/styles/variables/crossComponent";
 
+const iconSize = "24px";
+const columnGapMobile = "10px";
+const columnGapDesktop = "16px";
+const breakpoint = breakpoints[50];
+const collapseDuration = "350ms";
+const collapseEasing = "linear";
+const seeAllMinWidth = "109px";
+const groupSelectMinWidth = entityFilterForm.selectMinWidth;
+const inputGap = entityFilterForm.gap;
+
+export default `
+.notes-filtered-list {
   &__header {
-    @include drawerPadding(padding-right, narrow);
-    @include drawerPadding(padding-left, narrow);
+    ${drawerPadding("padding-right", "narrow")}
+    ${drawerPadding("padding-left", "narrow")}
     display: flex;
     flex-wrap: wrap;
-    gap: $_input-gap;
+    gap: ${inputGap}px;
     align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -26,12 +39,12 @@
 
   &__header-end {
     display: flex;
-    flex-basis: $_see-all-min-width;
+    flex-basis: ${seeAllMinWidth};
     flex-grow: 1;
-    gap: $_input-gap;
+    gap: ${inputGap}px;
 
     &--has-select {
-      flex-basis: $_group-select-min-width + $_input-gap + $_see-all-min-width;
+      flex-basis: calc(${groupSelectMinWidth}px + ${inputGap}px + ${seeAllMinWidth});
     }
   }
 
@@ -55,8 +68,8 @@
 
   &__section-button {
     ${buttonUnstyled}
-    @include drawerPadding(padding-right, narrow);
-    @include drawerPadding(padding-left, narrow);
+    ${drawerPadding("padding-right", "narrow")}
+    ${drawerPadding("padding-left", "narrow")}
     display: block;
     width: 100%;
     padding-top: 11px;
@@ -75,13 +88,11 @@
 
   &__section-button-inner {
     display: grid;
-    grid-template: 'icon label' auto / $_icon-size 1fr;
-    column-gap: $_column-gap-mobile;
+    grid-template: 'icon label' auto / ${iconSize} 1fr;
+    column-gap: ${columnGapMobile};
     align-items: center;
 
-    @include respond($_breakpoint) {
-      column-gap: $_column-gap-desktop;
-    }
+    ${respond(`column-gap: ${columnGapDesktop};`, breakpoint)}
   }
 
   &__section-label {
@@ -95,16 +106,14 @@
     white-space: nowrap;
     cursor: inherit;
 
-    @include respond($_breakpoint) {
-      font-size: 21px;
-    }
+    ${respond(`font-size: 21px;`, breakpoint)}
   }
 
   &__disclosure-icon {
     position: relative;
     top: 2px;
     grid-area: icon;
-    transition: transform $_collapse-duration $_collapse-easing;
+    transition: transform ${collapseDuration} ${collapseEasing};
     transform: rotate(-0.25turn);
 
     &--expanded {
@@ -122,8 +131,8 @@
     --darker-tag-bg-color: var(--box-medium-bg-color);
 
     ${buttonUnstyled}
-    @include drawerPadding(padding-right, narrow);
-    @include drawerPadding(padding-left, narrow);
+    ${drawerPadding("padding-right", "narrow")}
+    ${drawerPadding("padding-left", "narrow")}
     display: block;
     width: 100%;
     padding-top: 11px;
@@ -144,19 +153,20 @@
 
   &__item-button-inner {
     display: grid;
-    grid-template: 'icon inner' auto / $_icon-size minmax(0, 1fr);
-    column-gap: $_column-gap-mobile;
+    grid-template: 'icon inner' auto / ${iconSize} minmax(0, 1fr);
+    column-gap: ${columnGapMobile};
 
-    @include respond($_breakpoint) {
-      column-gap: $_column-gap-desktop;
-    }
+    ${respond(`column-gap: ${columnGapDesktop};`, breakpoint)}
 
-    @include respond($break95) {
-      grid-template: '. icon inner' auto / $_icon-size $_icon-size minmax(
-        0,
-        1fr
-      );
-    }
+    ${respond(
+      `
+        grid-template: ". icon inner" auto / ${iconSize} ${iconSize} minmax(
+            0,
+            1fr
+          );
+      `,
+      95
+    )}
   }
 
   &__item-icon {
@@ -170,16 +180,14 @@
     grid-area: inner;
     align-items: baseline;
 
-    @include respond($break95) {
-      flex-direction: row;
-    }
+    ${respond(`flex-direction: row;`, 95)}
   }
 
   &__item-text {
-    @include textTruncate;
+    ${textTruncate}
     flex-grow: 1;
     width: 100%;
-    line-height: $_icon-size - 3px;
+    line-height: calc(${iconSize} - 3px);
   }
 
   &__item-creator {
@@ -192,7 +200,7 @@
     flex-shrink: 0;
 
     &--image {
-      @include buttonAvatar(14, var(--strong-color));
+      ${buttonAvatar(14, "var(--strong-color)")}
       margin-right: 2px;
       margin-left: 1px;
       transform: translateY(1px);
@@ -206,9 +214,11 @@
   &__item-tag {
     margin-top: 12px;
 
-    @include respond($break95) {
-      margin-top: -3px;
-      margin-left: 40px;
-    }
+    ${respond(
+      `margin-top: -3px;
+    margin-left: 40px;`,
+      95
+    )}
   }
 }
+`;

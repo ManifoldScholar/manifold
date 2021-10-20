@@ -11,10 +11,10 @@ export const uiPanelMenu = `
   background-color: var(--color-base-neutral05);
 
   ${respond(`width: auto;`, 50)}
-}
 
 .panel-hidden {
   .screen-reader-text {
     visibility: hidden;
   }
+}
 `;
