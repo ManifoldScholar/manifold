@@ -389,7 +389,7 @@ export function reactSlideTransition(
     }
 
     .${prefix}-enter-active ${selector} {
-      transition: transform $duration $timing;
+      transition: transform ${defaultTransitionProps};
       transform: translateX(0);
     }
 
@@ -398,7 +398,7 @@ export function reactSlideTransition(
     }
 
     .${prefix}-exit.${prefix}-exit-active ${selector} {
-      transition: transform $duration $timing;
+      transition: transform ${defaultTransitionProps};
       transform: translateX(${from === "right" ? "100%" : "-100%"});
     }
   `;
