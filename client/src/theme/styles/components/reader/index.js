@@ -7,6 +7,13 @@ import readerHeader from "./readerHeader";
 import responsiveIframe from "./responsiveIframe";
 import textMeta from "./textMeta";
 import selectionList from "./selectionList";
+import textSection from "./textSection";
+import sectionCategoryLabel from "./sectionCategoryLabel";
+import sectionPagination from "./sectionPagination";
+import sectionNextSection from "./sectionNextSection";
+import returnMenu from "./returnMenu";
+import tableOfContents from "./tableOfContents";
+import tocDrawer from "./tocDrawer";
 
 export default `
 ${annotations}
@@ -18,4 +25,11 @@ ${readerHeader}
 ${responsiveIframe}
 ${textMeta}
 ${selectionList}
+${textSection}
+${sectionCategoryLabel}
+${sectionPagination}
+${sectionNextSection}
+${returnMenu}
+${tableOfContents}
+${tocDrawer}
 `;
