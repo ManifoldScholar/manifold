@@ -22,7 +22,7 @@ const levelClasses = levels
       }
     `
   )
-  .join();
+  .join("");
 
 export default `
   .table-of-contents {
