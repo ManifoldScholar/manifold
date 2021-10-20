@@ -15,12 +15,12 @@ const inlineEndPadding = `calc(${tocDrawer.baseInlineEndPadding} + calc(${toggle
 const levelClasses = levels
   .map(
     level => `
-    &--depth-${level} {
-      --toc-inline-start-padding: calc(
-        ${tocDrawer.baseInlineStartPadding} + ${paddingIncrement} * ${level}
-      );
-    }
-  `
+      &--depth-${level} {
+        --toc-inline-start-padding: calc(
+          ${tocDrawer.baseInlineStartPadding} + ${paddingIncrement} * ${level}
+        );
+      }
+    `
   )
   .join();
 
