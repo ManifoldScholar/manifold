@@ -22,11 +22,7 @@ export default `
     ${uiPanelMenu}
     color: var(--color-base-neutral75);
 
-    ${respond(
-      `min-width: 286px;
-    max-width: 286px;`,
-      50
-    )}
+    ${respond(`width: 286px;`, 50)}
 
     &__section-list {
       ${listUnstyled}
@@ -52,9 +48,6 @@ export default `
     &__legend {
       ${utilityPrimary}
       font-size: 13px;
-    }
-
-    &__filters {
     }
 
     &__checkbox {
