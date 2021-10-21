@@ -8,16 +8,11 @@ import {
   fluidScale
 } from "theme/styles/mixins";
 
-const tocBasePadding = (nested = 0) =>
-  `
-    padding-right: ${fluidScale("30px", "20px")};
-    padding-left: ${fluidScale(`${84 + nested}px`, `${30 + nested}px`)};
-  `;
-
 export default `
   .toc-drawer {
-    ${tocBasePadding()}
-    
+    padding-right: ${fluidScale("30px", "20px")};
+    padding-left: ${fluidScale("84px", "30px")};
+
     .drawer {
       width: ${tocDrawer.width};
       max-width: 90vw;

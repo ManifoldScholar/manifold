@@ -15,17 +15,17 @@ const widths = readerContainerWidths
 
       /* Responsively show/hide notation viewer list */
       .viewer-list {
-        ${respond(`display: block;`, width + 392)}
+        ${respond(`display: block;`, `${parseInt(width, 10) + 392}px`)}
       }
 
       /* Responsively show/hide notation footer preview */
       .notation-preview-footer {
-        ${respond(`display: none;`, width + 392)}
+        ${respond(`display: none;`, `${parseInt(width, 10) + 392}px`)}
       }
     }
   `
   )
-  .join();
+  .join("");
 
 const resourceOverflowFade = `
       &::before {

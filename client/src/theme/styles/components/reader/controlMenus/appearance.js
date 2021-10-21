@@ -25,18 +25,7 @@ export default `
       &:last-child {
         padding: 0;
         border-top: none;
-
-        ${respond(
-          `
-            &:last-child {
-              padding: 0;
-              border-top: none;
-
-              ${respond(`padding: 30px 28px;`, 40)}
-            }
-          `,
-          50
-        )}
+        ${respond(`padding: 30px 28px;`, 40)}
       }
     }
 
@@ -58,9 +47,6 @@ export default `
       position: absolute;
       z-index: -5;
       opacity: 0;
-
-      &:focus-visible {
-      }
     }
 
     &__radio-label {
@@ -102,7 +88,6 @@ export default `
     }
 
     &__font-control-group {
-      display: -ms-grid;
       display: grid;
       grid-template:
         "font-style size-serif" auto
