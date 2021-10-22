@@ -1,4 +1,4 @@
-import { respond } from "theme/styles/mixins";
+import { respond, breakpointLessOne } from "theme/styles/mixins";
 import { dashboardLayoutBreakpoint } from "theme/styles/variables/crossComponent";
 
 /*
@@ -23,8 +23,22 @@ export default `
     grid-template-columns: 100%;
     grid-gap: ${GAP}px;
 
+    &__item {
+      &--100 {
+        grid-column: 1 / -1;
+      }
+
+      &--50 {
+        grid-column-end: span 2;
+      }
+
+      &--25 {
+        grid-column-end: span 1;
+      }
+    }
+
     ${respond(
-      `.analytics-grid__item {
+      `&__item {
       grid-column-end: -1;
     }`,
       `${STACK_BREAKPOINT - 1}px`,
@@ -56,7 +70,7 @@ export default `
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
           }
         `,
-        FOUR_COL_BREAKPOINT
+        `${FOUR_COL_BREAKPOINT}px`
       )}
     }
 
@@ -77,7 +91,7 @@ export default `
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
           }
         `,
-        THREE_COL_BREAKPOINT
+        `${THREE_COL_BREAKPOINT}px`
       )}
     }
 
@@ -86,22 +100,8 @@ export default `
 
       ${respond(
         `grid-template-columns: repeat(2, minmax(0, 1fr));`,
-        TWO_COL_BREAKPOINT
+        `${TWO_COL_BREAKPOINT}px`
       )}
-    }
-
-    &__item {
-      &--100 {
-        grid-column: 1 / -1;
-      }
-
-      &--50 {
-        grid-column-end: span 2;
-      }
-
-      &--25 {
-        grid-column-end: span 1;
-      }
     }
   }
 `;

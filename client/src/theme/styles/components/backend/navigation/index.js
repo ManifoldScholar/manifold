@@ -1,5 +1,5 @@
-import secondaryNav from "secondaryNav";
-import dropdown from "dropdown";
+import secondaryNav from "./secondaryNav";
+import dropdown from "./dropdown";
 
 export default `
 ${dropdown}

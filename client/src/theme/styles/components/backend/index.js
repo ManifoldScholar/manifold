@@ -17,6 +17,7 @@ import category from "./category";
 import analytics from "./analytics";
 import kindPicker from "./kindPicker";
 import listEntity from "./listEntity";
+import detail from "./detail";
 
 export default `
   ${buttonSwitch}
@@ -38,4 +39,5 @@ export default `
   ${analytics}
   ${kindPicker}
   ${listEntity}
+  ${detail}
 `;

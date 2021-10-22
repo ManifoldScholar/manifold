@@ -129,7 +129,7 @@ export default `.entity-list {
           display: grid;
           grid-template-columns: repeat(
             auto-fill,
-            minmax($grid-item-min-width, 1fr)
+            minmax(${GRID_ITEM_MIN_WIDTH}, 1fr)
           );
 
           li {
