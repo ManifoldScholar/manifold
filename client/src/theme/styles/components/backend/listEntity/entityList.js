@@ -1,4 +1,16 @@
-.entity-list {
+import {
+  listUnstyled,
+  respond,
+  dropzone,
+  fillOnFocus,
+  utilityPrimary
+} from "theme/styles/mixins";
+import { accentColors } from "theme/styles/variables/colors";
+import { eventEntity } from "theme/styles/variables/crossComponent";
+
+const GRID_ITEM_MIN_WIDTH = "192px";
+
+export default `.entity-list {
   & + & {
     margin-top: 64px;
   }
@@ -9,7 +21,7 @@
   }
 
   .instructional-copy {
-    padding-bottom: 0; // sorry. hacked it.
+    padding-bottom: 0;
   }
 
   &__title-block {
@@ -51,50 +63,52 @@
     ${listUnstyled}
 
     &--tiles {
-      display: flex;
-      flex-flow: row wrap;
+      display: grid;
+      grid-template-columns: auto;
 
-      @supports (grid-auto-columns: min-content) {
-        display: grid;
-        grid-template-columns: auto;
-      }
+      ${respond(
+        `
+          grid-template-columns: repeat(
+            auto-fit,
+            minmax(${eventEntity.minWidth}, 1fr)
+          );
+          margin-top: calc(
+            ${eventEntity.listMarginTop} - ${eventEntity.rowGap}
+          );
+          margin-left: calc(-1 * ${eventEntity.iconSize.small}));
+        `,
+        eventEntity.panelBreakpoint
+      )}
 
-      @include respond(event-entity(panel-breakpoint)) {
-        grid-template-columns: repeat(
-          auto-fit,
-          minmax(event-entity(min-width), 1fr)
-        );
-        margin-top: event-entity(list-margin-top) - event-entity(row-gap);
-        margin-left: -1 * event-entity(icon-size-small);
-      }
+      ${respond(
+        `margin-left: -1 / 2 * event-entity(icon-size-large);`,
+        eventEntity.listLayoutBreakpoint
+      )}
 
-      @include respond(event-entity(list-layout-breakpoint)) {
-        margin-left: -1 / 2 * event-entity(icon-size-large);
-      }
-
-      // breakpoint equal to event-entity(min-width) * 2 + gutter + remaining viewport space
-      @include respond(952px) {
-        grid-template-columns: repeat(2, minmax(event-entity(min-width), 1fr));
-      }
+      /* breakpoint equal to event-entity(min-width) * 2 + gutter + remaining viewport space */
+      ${respond(
+        `grid-template-columns: repeat(2, minmax(event-entity(min-width), 1fr));`,
+        "952px"
+      )}
 
       li {
         min-width: 100%;
 
-        @include respond(event-entity(panel-breakpoint)) {
-          padding-left: event-entity(icon-size-small);
-          margin-top: event-entity(row-gap);
-        }
+        ${respond(
+          `padding-left: ${eventEntity.iconSize.small};
+        margin-top: ${eventEntity.rowGap};`,
+          eventEntity.panelBreakpoint
+        )}
 
-        @include respond(event-entity(list-layout-breakpoint)) {
-          flex-basis: 50%;
-          min-width: event-entity(min-width);
-          max-width: event-entity(flex-max-width);
-          padding-left: event-entity(column-gap);
-
-          @supports (grid-auto-columns: min-content) {
+        ${respond(
+          `
+            flex-basis: 50%;
+            min-width: ${eventEntity.minWidth};
             max-width: none;
-          }
-        }
+            padding-left: ${eventEntity.columnGap};
+          `,
+          eventEntity.listLayoutBreakpoint
+        )}
       }
     }
 
@@ -108,39 +122,38 @@
     }
 
     &--grid {
-      $grid-item-min-width: 192px;
-
-      ${respond(``, 65)}
-        display: flex;
-        flex-flow: row wrap;
-        margin-top: 22px;
-        margin-left: -25px;
-
-        @supports (grid-auto-columns: min-content) {
+      ${respond(
+        `
+          margin-top: 22px;
+          margin-left: -25px;
           display: grid;
           grid-template-columns: repeat(
             auto-fill,
             minmax($grid-item-min-width, 1fr)
           );
-        }
 
-        li {
-          flex-basis: 33.333%;
-          flex-grow: 1;
-          min-width: $grid-item-min-width;
-          border-bottom: none;
-        }
-      }
+          li {
+            flex-basis: 33.333%;
+            flex-grow: 1;
+            min-width: ${GRID_ITEM_MIN_WIDTH};
+            border-bottom: none;
+          }
+        `,
+        65
+      )}
 
-      ${respond(``, 85)}
-        li {
-          flex-basis: 25%;
-        }
-      }
+      ${respond(
+        `
+          li {
+            flex-basis: 25%;
+          }
+        `,
+        85
+      )}
     }
 
     &--sortable {
-      @include dropzone(9px, '.show-dropzone');
+      ${dropzone()}
       padding-top: 9px;
       padding-bottom: 9px;
       margin-top: -9px;
@@ -167,20 +180,23 @@
   }
 
   &__button {
-    @include fillOnFocus(var(--color-accent-primary-pale));
+    ${fillOnFocus(accentColors.primaryPale)}
 
     & + & {
       margin-top: 24px;
     }
 
-    ${respond(``, 60)}
-      display: inline-flex;
+    ${respond(
+      `
+        display: inline-flex;
 
-      & + & {
-        margin-top: 0;
-        margin-left: 12px;
-      }
-    }
+        & + & {
+          margin-top: 0;
+          margin-left: 12px;
+        }
+      `,
+      60
+    )}
   }
 
   .entity-list__button-set {
@@ -196,7 +212,7 @@
     padding: 18px 0;
     font-size: 17px;
     font-style: italic;
-    border-bottom: 1px solid $neutralTextDark;
+    border-bottom: 1px solid var(--color-neutral-text-dark);
 
     &--well {
       ${utilityPrimary}
@@ -209,3 +225,4 @@
     }
   }
 }
+`;

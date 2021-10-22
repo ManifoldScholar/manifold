@@ -7,13 +7,16 @@ import layout from "./layout";
 import project from "./project";
 import projectCollection from "./project-collection";
 import activityStats from "./activityStats";
-import permissions from "./permissions";
+import permissionForm from "./permissionForm";
 import orderedRecords from "./orderedRecords";
-import notification from "./notification";
+import notificationList from "./notificationList";
 import navigation from "./navigation";
-import ingestion from "./ingestion";
+import ingest from "./ingest";
 import gridList from "./gridList";
 import category from "./category";
+import analytics from "./analytics";
+import kindPicker from "./kindPicker";
+import listEntity from "./listEntity";
 
 export default `
   ${buttonSwitch}
@@ -25,11 +28,14 @@ export default `
   ${project}
   ${projectCollection}
   ${activityStats}
-  ${permissions}
+  ${permissionForm}
   ${orderedRecords}
-  ${notification}
+  ${notificationList}
   ${navigation}
-  ${ingestion}
+  ${ingest}
   ${gridList}
   ${category}
+  ${analytics}
+  ${kindPicker}
+  ${listEntity}
 `;
