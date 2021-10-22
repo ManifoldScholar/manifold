@@ -1,3 +1,6 @@
+import { listUnstyled, respond, buttonUnstyled } from "theme/styles/mixins";
+
+export default `
 .notification-list-block {
   ul {
     ${listUnstyled}
@@ -17,16 +20,13 @@
         color: var(--color-base-neutral40);
         letter-spacing: 0.015em;
 
-        ${respond(``, 30)}
-          font-size: 18px;
+        ${respond(`font-size: 18px;`, 30)}
         }
 
-        ${respond(``, 75)}
-          font-size: 16px;
+        ${respond(`font-size: 16px;`, 75)}
         }
 
-        ${respond(``, 85)}
-          font-size: 18px;
+        ${respond(`font-size: 18px;`, 85)}
         }
 
         a {
@@ -36,7 +36,7 @@
     }
   }
 
-  // Close button
+  /* Close button */
   &__close-button {
     ${buttonUnstyled}
     position: absolute;
@@ -46,3 +46,4 @@
     color: var(--color-base-neutral40);
   }
 }
+`;

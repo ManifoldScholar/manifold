@@ -1,3 +1,6 @@
+import { respond } from "theme/styles/mixins";
+
+export default `
 .backend-activity-stats {
   &__list {
     padding: 0;
@@ -15,8 +18,7 @@
       padding-top: 0;
     }
 
-    ${respond(``, 40)}
-      padding: 11px 0 6px;
+    ${respond(`padding: 11px 0 6px;`, 40)}
     }
   }
 
@@ -25,8 +27,7 @@
     font-size: 15px;
     letter-spacing: 0.015em;
 
-    ${respond(``, 40)}
-      font-size: 18px;
+    ${respond(`font-size: 18px;`, 40)}
     }
 
     &--highlighted {
@@ -34,9 +35,9 @@
       font-size: 24px;
       color: var(--color-accent-primary);
 
-      ${respond(``, 40)}
-        font-size: 27px;
+      ${respond(`font-size: 27px;`, 40)}
       }
     }
   }
 }
+`;

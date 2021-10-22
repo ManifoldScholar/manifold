@@ -1,4 +1,6 @@
-.permissions-form {
+import { respond, defaultTransitionProps } from "theme/styles/mixins";
+
+export default `.permissions-form {
   .user {
     display: flex;
     align-items: center;
@@ -18,15 +20,13 @@
         letter-spacing: 0.015em;
         transition: color ${defaultTransitionProps};
 
-        ${respond(``, 80)}
-          font-size: 18px;
+        ${respond(`font-size: 18px;`, 80)}
         }
 
         &.large {
           font-size: 18px;
 
-          ${respond(``, 80)}
-            font-size: 22px;
+          ${respond(`font-size: 22px;`, 80)}
           }
         }
       }
@@ -51,3 +51,4 @@
     }
   }
 }
+`;
