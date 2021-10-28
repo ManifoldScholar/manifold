@@ -65,7 +65,6 @@ export const neutralColors = {
 const accentPrimaryBase = "#52e3ac";
 const accentPrimaryColorScheme = new ColorSchemeGenerator(accentPrimaryBase);
 
-
 const accentPrimaryCustomProperties = accentPrimaryColorScheme.generatedRules.join(
   "\n"
 );

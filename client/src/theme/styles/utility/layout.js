@@ -30,12 +30,11 @@ export default `
     overflow: hidden;
   }
 
-  // Layout
-  // --------------------------------------------------------
+  /* Layout */
   .container {
     ${containerPrototype}
 
-    // Section can be abstracted to more specific section class (or body class) if necessary
+    /* Section can be abstracted to more specific section class (or body class) if necessary */
     &:not(.flush) {
       section > & {
         ${logicalWithFallback({

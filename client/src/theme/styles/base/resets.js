@@ -39,7 +39,6 @@ export default `
   /* Set core root defaults */
   html {
     scroll-behavior: smooth;
-    // Set the base font size here, which will correspond to 1em inside <body>
     font-size: 100%;
   }
 
