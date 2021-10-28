@@ -4,6 +4,7 @@ import contentBlock from "./contentBlock";
 import events from "./event";
 import groups from "./groups";
 import layout from "./layout";
+import loginPage from "./loginPage";
 import page from "./page";
 import project from "./project";
 import projectCollection from "./projectCollection";
@@ -30,4 +31,5 @@ export default `
   ${text}
   ${subscriptions}
   ${resource}
+  ${loginPage}
 `;
