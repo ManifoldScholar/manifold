@@ -30,7 +30,7 @@ export default class ProjectCollectionHeader extends PureComponent {
 
   get iconFill() {
     if (this.collectionAttributes.icon === "new-round") {
-      return "var(--accent-primary, #52e3ac)";
+      return "var(--color-accent-primary, #52e3ac)";
     }
 
     return "currentColor";

@@ -7,7 +7,6 @@ import {
   buttonUnstyled,
   fillOnFocus
 } from "theme/styles/mixins";
-import { accentColors } from "theme/styles/variables/colors";
 
 const CONTAINER_WIDTH = parseInt(containerWidth.inner, 10);
 const COLUMNS = 4;

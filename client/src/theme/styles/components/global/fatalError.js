@@ -114,7 +114,7 @@ export default `
         }
 
         li:nth-child(even) {
-          background-color: ${darken("neutral05", 0.025)};
+          background-color: ${darken("neutral05", 2.5)};
         }
 
         span.highlight {

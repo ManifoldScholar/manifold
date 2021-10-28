@@ -15,7 +15,7 @@ export default `
 
     &--active {
       .action-callout-slot__content {
-        background-color: ${lighten("neutral90", 0.05)};
+        background-color: ${lighten("neutral90", 5)};
       }
     }
 

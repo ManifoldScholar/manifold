@@ -82,7 +82,7 @@ export default `
       transition: background-color 0.4s ease;
 
       &--active {
-        background-color: ${lighten("neutral90", 0.03)};
+        background-color: ${lighten("neutral90", 3)};
       }
     }
   }

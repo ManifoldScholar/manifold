@@ -78,7 +78,7 @@ export default `
     --box-strong-bg-color: var(--color-base-neutral90);
     --box-x-strong-bg-color: var(--color-base-neutral80);
     --drawer-bg-color: var(--color-base-neutral100);
-    --dropzone-bg-color: ${lighten("neutral90", 0.05)};
+    --dropzone-bg-color: ${lighten("neutral90", 5)};
     --select-bg-color: var(--color-base-neutral90);
     --select-border-color: var(--color-base-neutral45);
     --button-dull-bg-color: var(--color-base-neutral10);
