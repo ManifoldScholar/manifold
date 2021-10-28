@@ -33,7 +33,7 @@ export default `
     &__text-button {
       ${buttonUnstyled}
       ${utilityPrimary}
-    display: none;
+      display: none;
       margin-right: 14px;
       font-size: 13px;
       letter-spacing: 2px;
@@ -61,6 +61,7 @@ export default `
       width: 100%;
       padding-left: 14px;
       border: 0;
+      font-family: var(--font-family-sans);
     }
 
     &__options {

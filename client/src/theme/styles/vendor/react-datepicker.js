@@ -1,8 +1,5 @@
-import { css } from "styled-components";
-
-export default css`
-  .react-datepicker-popper[data-placement^="bottom"]
-    .react-datepicker__triangle,
+export default `
+  .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle,
   .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle,
   .react-datepicker__year-read-view--down-arrow,
   .react-datepicker__month-read-view--down-arrow,
@@ -11,8 +8,7 @@ export default css`
     position: absolute;
   }
 
-  .react-datepicker-popper[data-placement^="bottom"]
-    .react-datepicker__triangle,
+  .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle,
   .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle,
   .react-datepicker__year-read-view--down-arrow,
   .react-datepicker__month-read-view--down-arrow,
@@ -857,7 +853,7 @@ export default css`
     text-align: center;
     display: table-cell;
     vertical-align: middle;
-    content: "\00d7";
+    content: "\\00d7";
   }
 
   .react-datepicker__today-button {

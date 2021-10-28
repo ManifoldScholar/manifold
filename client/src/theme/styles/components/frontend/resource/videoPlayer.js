@@ -2,7 +2,7 @@ import { transparentize } from "theme/styles/mixins";
 
 export default `
   .rh5v-DefaultPlayer_component {
-    font-family: font-family: var(--font-family-heading);
+    font-family: var(--font-family-heading);
 
     &:fullscreen {
       background-color: var(--color-base-neutral-black);

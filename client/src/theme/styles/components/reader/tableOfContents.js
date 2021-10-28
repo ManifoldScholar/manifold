@@ -29,8 +29,8 @@ export default `
     font-family: var(--font-family-heading);
     padding-top: 10px;
     overflow: hidden;
-    color: var(--color-neutral-text-extra-dark);
-    background-color: var(--color-base-neutral10);
+    color: var(--strong-color);
+    background-color: var(--box-bg-color);
 
     &__list {
       --toc-inline-start-padding: ${tocDrawer.baseInlineStartPadding};
@@ -84,7 +84,7 @@ export default `
       }
 
       &--active {
-        background-color: var(--color-base-neutral30);
+        background-color: var(--box-x-strong-bg-color);
       }
     }
   }

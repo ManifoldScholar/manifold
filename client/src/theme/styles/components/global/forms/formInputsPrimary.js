@@ -13,7 +13,8 @@ import {
   formInputSecondary,
   listUnstyled,
   clearfix,
-  respond
+  respond,
+  rgba
 } from "theme/styles/mixins";
 
 export default `
@@ -97,7 +98,7 @@ export default `
     &__action {
       ${buttonUnstyled}
       ${utilityPrimary}
-      ${fillOnFocus("var(--accent-interaction-light)")}
+      ${fillOnFocus("var(--color-interaction-light)")}
       padding: 0.333em 1em;
       font-size: 12px;
       font-weight: var(--font-weight-semibold);
@@ -429,7 +430,7 @@ export default `
       }
 
       &.checked .toggle-indicator {
-        background-color: var(--accent-primary-light);
+        background-color: var(--color-accent-primary-light);
       }
 
       &.inline {
@@ -526,7 +527,7 @@ export default `
       color: var(--color);
       background-color: transparent;
       border: none;
-      box-shadow: 10px 31px 44px 2px rgba(var(--color-base-neutral-black), 0.13);
+      box-shadow: 10px 31px 44px 2px ${rgba("neutralBlack", 0.13)};
       font-family: var(--font-family-sans);
 
       &-wrapper {

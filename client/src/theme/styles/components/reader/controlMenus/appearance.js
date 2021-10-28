@@ -19,7 +19,7 @@ export default `
 
     &__section {
       &:nth-child(even) {
-        background-color: var(--color-base-neutral10);
+        background-color: var(--box-medium-bg-color);
       }
 
       &:last-child {
@@ -57,8 +57,8 @@ export default `
           var(--transition-timing-function);
 
       .appearance-menu__font-style--active & {
-        color: var(--color-neutral-text-extra-dark);
-        border-color: var(--color-neutral-text-extra-dark);
+        color: var(--strong-color);
+        border-color: var(--strong-color);
       }
 
       .appearance-menu__font-style:hover &,
@@ -147,21 +147,10 @@ export default `
       ${buttonUnstyled}
       width: 44px;
       height: 44px;
-      color: var(--color-neutral-text-extra-dark);
+      color: var(--strong-color);
       vertical-align: top;
-      background-color: var(--color-base-neutral-white);
+      background-color: var(--background-color);
       border-radius: 100%;
-
-      ${respond(
-        `width: 35px;
-      height: 35px;`,
-        50
-      )}
-
-      &:disabled {
-        color: var(--color-neutral-text-light);
-        background-color: var(--color-base-neutral20);
-      }
 
       ${respond(
         `width: 35px;
@@ -171,9 +160,9 @@ export default `
 
       &:disabled,
       &[aria-disabled="true"] {
-        color: var(--color-neutral-text-light);
+        color: var(--disabled-control-color);
         cursor: default;
-        background-color: var(--color-base-neutral20);
+        background-color: var(--disabled-control-bg-color);
       }
 
       &:not(:first-child) {
@@ -234,20 +223,10 @@ export default `
       ${respond(`display: block;`, 50)}
     }
 
-    &__menu-icon {
-      &--dark {
-        fill: var(--color-base-neutral80);
-      }
-
-      &--light {
-        fill: var(--color-base-neutral40);
-      }
-    }
-
     &__margin-button {
       width: 96px;
       height: 46px;
-      background-color: var(--color-base-neutral-white);
+      background-color: var(--background-color);
 
       > svg path {
         transition: fill ${defaultTransitionProps};
@@ -258,14 +237,15 @@ export default `
           outline: 0;
 
           > svg path {
-            fill: var(--color-neutral-text-extra-dark);
+            fill: var(--strong-color);
           }
         }
       }
 
       &[aria-disabled="true"] {
         cursor: default;
-        background-color: var(--color-base-neutral20);
+        color: var(--disabled-control-color);
+        background-color: var(--disabled-control-bg-color);
 
         > svg {
           opacity: 0.5;

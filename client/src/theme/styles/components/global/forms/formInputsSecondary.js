@@ -47,6 +47,10 @@ export default `
         display: inline;
       }
 
+      &.space-bottom {
+        margin-bottom: 2em;
+      }
+
       + .form-input-group--primary {
         margin-top: 32px;
       }
@@ -112,7 +116,7 @@ export default `
         font-size: 16px;
         resize: vertical;
         background-color: var(--input-bg-color);
-        border: 1px solid var(--input-border-color);
+        border: 1px solid var(--textarea-border-color);
         border-radius: var(--box-border-radius);
         outline: none;
         transition: border-color ${defaultTransitionProps};
@@ -265,7 +269,6 @@ export default `
       select {
         ${formInputSecondary}
         padding: 0 ${FORM_SELECT_INLINE_END_PADDING}px 0.75em 0;
-        font-size: 16px;
         line-height: normal;
         text-transform: none;
 
@@ -282,9 +285,9 @@ export default `
         .form-select__icon {
           position: absolute;
           top: 50%;
-          right: ${FORM_SELECT_ICON_PADDING};
-          width: ${FORM_SELECT_ICON_SIZE};
-          height: ${FORM_SELECT_ICON_SIZE};
+          right: ${FORM_SELECT_ICON_PADDING}px;
+          width: ${FORM_SELECT_ICON_SIZE}px;
+          height: ${FORM_SELECT_ICON_SIZE}px;
           color: currentColor;
           pointer-events: none;
           transform: translateY(-50%);

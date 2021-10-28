@@ -132,11 +132,11 @@ export default `
       text-decoration: none;
 
       &:focus-visible {
-        background-color: ${lighten("neutral75", 0.02)};
-        border-color: ${lighten("neutral75", 0.02)};
+        background-color: ${lighten("neutral75", 2)};
+        border-color: ${lighten("neutral75", 2)};
         outline: none;
-        box-shadow: -21px 0 0 1px ${lighten("neutral75", 0.02)},
-          21px 0 0 1px ${lighten("neutral75", 0.02)};
+        box-shadow: -21px 0 0 1px ${lighten("neutral75", 2)},
+          21px 0 0 1px ${lighten("neutral75", 2)};
       }
 
       &.entity-row__row-link--in-grid {
@@ -235,6 +235,7 @@ export default `
 
     &__utility {
       align-self: center;
+      flex-shrink: 0;
     }
 
     &__utility-button {
@@ -350,6 +351,7 @@ export default `
           svg:not(.collecting-toggle__icon) {
             left: 0;
             width: auto;
+            max-width: none;
             height: 120px;
 
             &.project-thumb-placeholder {

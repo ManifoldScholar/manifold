@@ -53,7 +53,6 @@ export default `
 
       > * {
         ${blocks.join(" ")}
-        }
       }
     }
 
@@ -101,7 +100,7 @@ export default `
 
     .icon-star-fill {
       &__foreground {
-        fill: var(--collecting-icon-foreground-color);
+        fill: var(--collecting-icon-background-color);
         transition: fill ${animationDuration}ms ${animationEasing};
         transition-delay: var(--content-delay);
       }

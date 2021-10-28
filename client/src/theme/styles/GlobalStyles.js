@@ -9,8 +9,8 @@ const GlobalStyles = createGlobalStyle`
   ${rootVariables}
   ${vendorStyles}
   ${baseStyles}
-  ${componentStyles}
   ${utilityStyles}
+  ${componentStyles}
 `;
 
 export default GlobalStyles;

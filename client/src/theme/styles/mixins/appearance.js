@@ -214,7 +214,7 @@ export const selectPrimary = `
 
   select {
     ${utilityPrimary}
-    @include unstyledSelect;
+    ${unstyledSelect}
     display: inline-block;
     width: 100%;
     padding: 9px 13px 11px;
@@ -227,7 +227,7 @@ export const selectPrimary = `
       border-color: var(--focus-color);
     }
   }
-}`;
+`;
 
 // // Styled Checkbox (also from wtf forms)
 // // Should be applied to a label with an input type="checkbox" inside
@@ -317,7 +317,7 @@ export const roundedHeader = `
   margin-bottom: 20px;
   font-size: 16px;
 
-  // if using a rounded label, pad any of its siblings
+  /* if using a rounded label, pad any of its siblings */
   ~ :not(.full-width) {
     padding-right: min(3.158vw, 24px);
     padding-left: min(3.158vw, 24px);

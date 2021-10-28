@@ -1,8 +1,8 @@
 export default `
-  // Library defaults with some overrides by CIC
+  /* Library defaults with some overrides by CIC */
 
   .rh5v-DefaultPlayer_component {
-    // CIC override default sizing
+    /* CIC override default sizing */
     position: absolute;
     width: 100%;
     height: 100%;

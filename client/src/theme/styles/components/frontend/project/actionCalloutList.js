@@ -86,7 +86,7 @@ export default `
         }
 
         .project-hero--dark & {
-          color: $neutral95;
+          color: var(--color-base-neutral95);
           background-color: var(--color-neutral-ui-light);
           border-color: var(--color-neutral-ui-light);
 

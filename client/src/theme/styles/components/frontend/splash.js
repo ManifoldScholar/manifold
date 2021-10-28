@@ -1,4 +1,3 @@
-import { css } from "styled-components";
 import { respond, clearfix } from "theme/styles/mixins";
 
 export default `
@@ -45,14 +44,14 @@ export default `
       hyphens: none;
 
       ${respond(
-        css`
+        `
           width: 50%;
         `,
         75
       )}
 
       ${respond(
-        css`
+        `
           padding-right: 4em;
         `,
         95
@@ -78,7 +77,7 @@ export default `
       padding-left: 1.475em;
 
       ${respond(
-        css`
+        `
           display: block;
         `,
         75
@@ -98,14 +97,14 @@ export default `
       font-size: 22px;
 
       ${respond(
-        css`
+        `
           font-size: 24px;
         `,
         60
       )}
 
       ${respond(
-        css`
+        `
           font-size: 1.5em;
         `,
         90

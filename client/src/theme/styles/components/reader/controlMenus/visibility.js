@@ -1,26 +1,10 @@
-import {
-  buttonUnstyled,
-  respond,
-  listUnstyled,
-  utilityPrimary
-} from "theme/styles/mixins";
+import { respond, listUnstyled, utilityPrimary } from "theme/styles/mixins";
 import { uiPanelMenu } from "../uiPanelMenu";
 
 export default `
-  .button-visibility {
-    ${buttonUnstyled}
-    position: relative;
-    height: 100%;
-    padding: 0 14px;
-    color: var(--color-base-neutral50);
-    transition: color var(--transition-duration-fast)
-      var(--transition-timing-function);
-  }
-
   .visibility-menu {
     font-family: var(--font-family-heading);
     ${uiPanelMenu}
-    color: var(--color-base-neutral75);
 
     ${respond(`width: 286px;`, 50)}
 
@@ -37,7 +21,6 @@ export default `
     &__group-icon {
       margin-right: 12px;
       margin-left: -2px;
-      color: var(--color-base-neutral75);
     }
 
     &__group-name {

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import Navigation from "global/components/navigation";
 import PressLogo from "global/components/PressLogo";
 import HeaderNotifications from "global/components/HeaderNotifications";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import Utility from "global/components/utility";
+import { HeaderLogo } from "global/components/atomic";
 
 import BlurOnLocationChange from "hoc/blur-on-location-change";
 
@@ -37,10 +37,10 @@ export default class LayoutHeader extends Component {
           <Utility.SkipLink />
           <div className="library-header library-header--dark">
             <div className="library-header__inner">
-              <Link to={lh.link("backend")} className="header-logo">
+              <HeaderLogo as="Link" to={lh.link("backend")}>
                 <span className="screen-reader-text">Return to home</span>
                 <PressLogo aria-hidden="true" />
-              </Link>
+              </HeaderLogo>
               <Navigation.Primary
                 links={links}
                 commonActions={this.props.commonActions}

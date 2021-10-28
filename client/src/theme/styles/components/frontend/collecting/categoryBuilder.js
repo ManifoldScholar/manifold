@@ -17,6 +17,7 @@ const inputHeight = collectableMinHeight;
 const collectableVerticalPadding = `5px`;
 const collectableTypeVerticalPadding = `10px`;
 const shadowSize = `10px`;
+const halfShadowSize = `5px`;
 
 export default `
   .group-collection-editor {
@@ -62,9 +63,9 @@ export default `
       &--drawer {
         padding-top: 40px;
         padding-bottom: 40px;
-        box-shadow: inset 0 ${shadowSize} ${shadowSize} calc(-${shadowSize} / 2)
+        box-shadow: inset 0 ${shadowSize} ${shadowSize} -${halfShadowSize}
             ${rgba("neutralBlack", 0.08)},
-          inset 0 (${shadowSize} * -1) ${shadowSize} calc(-${shadowSize} / 2)
+          inset 0 -${shadowSize} ${shadowSize} -${halfShadowSize}
             ${rgba("neutralBlack", 0.08)};
       }
     }
@@ -259,7 +260,7 @@ export default `
       }
 
       > * + * {
-        margin-left: 0.5em;
+        margin-left: 0.75em;
       }
     }
 

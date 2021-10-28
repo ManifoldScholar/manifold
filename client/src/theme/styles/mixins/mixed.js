@@ -164,6 +164,8 @@ export const projectGridItem = `
     `,
     75
   )}
+
+  ${respond(`padding: 25px;`, 120)}
 `;
 
 // Form Layout
@@ -222,42 +224,4 @@ export const loginFormPrimary = `
     display: flex;
     margin-top: 30px;
   }
-`;
-
-export const headerLogo = `
-  grid-area: logo;
-  align-self: center;
-  max-width: 300px;
-  color: var(--color-accent-primary);
-  text-decoration: none;
-  vertical-align: middle;
-
-  .library-header--dark & {
-    color: var(--color-neutral-ui-light);
-  }
-
-  &[href]:hover,
-  &[href]:focus-visible {
-    color: var(--hover-color);
-    outline: 0;
-  }
-
-  .manicon-svg {
-    ${respond(
-      `
-        width: 32px;
-        height: 32px;
-      `,
-      40
-    )}
-
-    ${respond(
-      `
-        width: 38px;
-        height: 38px;
-      `,
-      75
-    )}
-  }
-}
 `;
