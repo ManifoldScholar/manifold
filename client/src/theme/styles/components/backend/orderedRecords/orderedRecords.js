@@ -1,6 +1,4 @@
-import { listUnstyled, utilityPrimary } from "theme/styles/mixins";
-
-const Color = require("color");
+import { listUnstyled, utilityPrimary, lighten } from "theme/styles/mixins";
 
 export default `
   .ordered-records {
@@ -10,9 +8,7 @@ export default `
     transition: background-color 0.4s ease;
 
     &--active {
-      background-color: ${Color("#363636")
-        .lighten(0.03)
-        .hex()};
+      background-color: ${lighten("neutral90", 0.03)};
     }
 
     &--empty {
@@ -37,9 +33,7 @@ export default `
       transition: background-color 0.4s ease;
 
       &--active {
-        background-color: ${Color("#363636")
-          .lighten(0.03)
-          .hex()};
+        background-color: ${lighten("neutral90", 0.03)};
       }
     }
   }

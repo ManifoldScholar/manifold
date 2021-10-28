@@ -4,10 +4,11 @@ import {
   dragging,
   defaultHoverStyle,
   buttonUnstyled,
-  panelRoundedDark,
+  panelRounded,
   rgba,
   blockLabelRound,
-  breakpointLessOne
+  breakpointLessOne,
+  lighten
 } from "theme/styles/mixins";
 
 export default `
@@ -83,7 +84,7 @@ export default `
         }
 
         .show-dropzone & {
-          border-bottom: 1px solid #424242;
+          border-bottom: 1px solid var(--color-base-neutral85);
           border-radius: 9px;
         }
 
@@ -131,11 +132,11 @@ export default `
       text-decoration: none;
 
       &:focus-visible {
-        background-color: lighten(var(--color-neutral-text-dark), 2%);
-        border-color: lighten(var(--color-neutral-text-dark), 2%);
+        background-color: ${lighten("neutral75", 0.02)};
+        border-color: ${lighten("neutral75", 0.02)};
         outline: none;
-        box-shadow: -21px 0 0 1px lighten(var(--color-neutral-text-dark), 2%),
-          21px 0 0 1px lighten(var(--color-neutral-text-dark), 2%);
+        box-shadow: -21px 0 0 1px ${lighten("neutral75", 0.02)},
+          21px 0 0 1px ${lighten("neutral75", 0.02)};
       }
 
       &.entity-row__row-link--in-grid {
@@ -146,19 +147,23 @@ export default `
         &:focus-visible {
           outline: 0;
 
-          ${respond(``, 65)}
-          ${panelRoundedDark}
-          color: inherit;
-          box-shadow: 0 31px 26px -13px ${rgba("neutralBlack", 0.33)};
+          ${respond(
+            `
+              ${panelRounded}
+              color: inherit;
+              box-shadow: 0 31px 26px -13px ${rgba("neutralBlack", 0.33)};
+            `,
+            65
+          )}
         }
       }
     }
 
     &__text {
-      font-family: var(--font-family-serif);
       flex-grow: 1;
       align-self: flex-start;
       font-size: 17px;
+      font-family: var(--font-family-serif);
       font-weight: var(--font-weight-regular);
       hyphens: none;
 

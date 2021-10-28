@@ -1,5 +1,5 @@
 import {
-  panelRoundedDark,
+  panelRounded,
   listUnstyled,
   utilityPrimary,
   respond
@@ -10,11 +10,11 @@ const STAT_FONT_SIZE_SMALL = "52px";
 
 export default `
   .analytics-block {
-    --default-focus-color: var(--color-accent-secondary);
-    --default-hover-color: var(--color-accent-secondary);
+    --focus-color: var(--color-accent-secondary);
+    --hover-color: var(--color-accent-secondary);
     --select-bg-color: var(--color-base-neutral95);
 
-    ${panelRoundedDark}
+    ${panelRounded}
     font-family: var(--font-family-sans);
     padding: 25px 30px 30px;
     font-size: 17px;

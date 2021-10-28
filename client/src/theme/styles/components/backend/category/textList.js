@@ -6,10 +6,9 @@ import {
   blockLabelRound,
   buttonUnstyled,
   respond,
-  outlineOnFocus
+  outlineOnFocus,
+  lighten
 } from "theme/styles/mixins";
-
-const Color = require("color");
 
 export default `
   .texts-list {
@@ -24,9 +23,7 @@ export default `
     transition: background-color 0.4s ease;
 
     &--active {
-      background-color: ${Color("#363636")
-        .lighten(0.03)
-        .hex()};
+      background-color: ${lighten("neutral90", 0.03)};
     }
 
     &--empty {

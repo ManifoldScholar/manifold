@@ -1,8 +1,8 @@
-import { panelRoundedDark, respond, fluidScale } from "theme/styles/mixins";
+import { panelRounded, respond, fluidScale } from "theme/styles/mixins";
 
 export default `
   .backend-header {
-    ${panelRoundedDark}
+    ${panelRounded}
 
     &--spaceBottom {
       margin-bottom: 30px;

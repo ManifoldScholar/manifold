@@ -20,8 +20,8 @@ const ICON_PADDING = 6;
 
 export default `
   .range-picker {
-    --default-focus-color: var(--color-accent-secondary);
-    --default-hover-color: var(--color-accent-secondary);
+    --focus-color: var(--color-accent-secondary);
+    --hover-color: var(--color-accent-secondary);
 
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(0, ${TRACK_MAX_WIDTH}px));
@@ -56,10 +56,8 @@ export default `
       height: 32px;
       /* Declared in em as it should change with font size */
       padding: 0;
-      /* stylelint-disable declaration-no-important */
       padding-right: ${TOGGLE_SIZE + TOGGLE_PADDING}px !important;
       padding-left: ${ICON_SIZE + ICON_PADDING}px !important;
-      /* stylelint-enable declaration-no-important */
       font-size: 16px;
       vertical-align: top;
       background-color: transparent;

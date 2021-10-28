@@ -33,7 +33,10 @@ export default `
     }
 
     .project-collections .drawer-backend.flexible & {
-      ${respond(`width: 807px;`, `${(parseInt(breakpoints[95], 10) * 4) / 3}px`)}
+      ${respond(
+        `width: 807px;`,
+        `${(parseInt(breakpoints[95], 10) * 4) / 3}px`
+      )}
     }
   }
 

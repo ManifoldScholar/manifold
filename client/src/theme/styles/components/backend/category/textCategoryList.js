@@ -1,16 +1,15 @@
 import {
   dragging,
-  panelRoundedDark,
+  panelRounded,
   utilityPrimary,
-  buttonUnstyled
+  buttonUnstyled,
+  lighten
 } from "theme/styles/mixins";
-
-const Color = require("color");
 
 export default `
   .text-categories {
     &__category {
-      ${panelRoundedDark}
+      ${panelRounded}
       margin-bottom: 16px;
       background: var(--color-base-neutral95);
 
@@ -74,7 +73,7 @@ export default `
     }
 
     &__dropzone {
-      ${panelRoundedDark}
+      ${panelRounded}
       padding: 16px 16px 4px;
       margin-right: -16px;
       margin-bottom: 16px;
@@ -83,9 +82,7 @@ export default `
       transition: background-color 0.4s ease;
 
       &--active {
-        background-color: ${Color("#363636")
-          .lighten(0.03)
-          .hex()};
+        background-color: ${lighten("neutral90", 0.03)};
       }
     }
   }

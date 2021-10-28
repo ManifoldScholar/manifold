@@ -1,4 +1,4 @@
-import { respond, breakpointLessOne } from "theme/styles/mixins";
+import { respond } from "theme/styles/mixins";
 import { dashboardLayoutBreakpoint } from "theme/styles/variables/crossComponent";
 
 /*
