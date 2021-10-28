@@ -429,7 +429,7 @@ export default `
       }
 
       &.checked .toggle-indicator {
-        background-color: var(--accent-primary-light);
+        background-color: var(--color-accent-primary-light);
       }
 
       &.inline {

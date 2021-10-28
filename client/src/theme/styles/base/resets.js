@@ -1,7 +1,10 @@
 import { logicalWithFallback } from "@castiron/style-mixins";
 
-// Resets
-// --------------------
+/**
+ * Resets
+ *
+ * A mix of Normalize.css v8 and @castiron/global-styles
+ */
 
 export default `
   /* Box sizing rules */
@@ -23,12 +26,6 @@ export default `
   /* Remove default margin */
   html,
   body,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
   p,
   ul,
   ol,
@@ -72,11 +69,18 @@ export default `
   input,
   button,
   textarea,
-  select {
+  select,
+  optgroup {
     color: inherit;
     font: inherit;
     letter-spacing: inherit;
     text-rendering: inherit;
+  }
+
+  /* Remove the inheritance of text transform in Edge, Firefox, and IE */
+  button,
+  select {
+    text-transform: none;
   }
 
   input {
@@ -87,6 +91,27 @@ export default `
     margin: 0;
   }
 
+  /**
+  * Remove the inner border and padding in Firefox.
+  */
+  button::-moz-focus-inner,
+  [type="button"]::-moz-focus-inner,
+  [type="reset"]::-moz-focus-inner,
+  [type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+  }
+
+  /**
+  * Restore the focus styles unset by the previous rule.
+  */
+  button:-moz-focusring,
+  [type="button"]:-moz-focusring,
+  [type="reset"]:-moz-focusring,
+  [type="submit"]:-moz-focusring {
+    outline: 1px dotted ButtonText;
+  }
+
   fieldset {
     margin: 0;
     padding: 0;
@@ -95,6 +120,43 @@ export default `
 
   legend {
     padding: 0;
+  }
+
+  /**
+  * Correct the cursor style of increment and decrement buttons in Chrome.
+  */
+
+  [type="number"]::-webkit-inner-spin-button,
+  [type="number"]::-webkit-outer-spin-button {
+    height: auto;
+  }
+
+  /**
+  * 1. Correct the odd appearance in Chrome and Safari.
+  * 2. Correct the outline style in Safari.
+  */
+
+  [type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    outline-offset: -2px; /* 2 */
+  }
+
+  /**
+  * Remove the inner padding in Chrome and Safari on macOS.
+  */
+
+  [type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+
+  /**
+  * 1. Correct the inability to style clickable types in iOS and Safari.
+  * 2. Change font properties to inherit in Safari.
+  */
+
+  ::-webkit-file-upload-button {
+    -webkit-appearance: button; /* 1 */
+    font: inherit; /* 2 */
   }
 
   /* Remove all animations for people that prefer not to see them */
@@ -136,5 +198,54 @@ export default `
 
   a {
     color: inherit;
+  }
+
+  /**
+  * 1. Correct the inheritance and scaling of font size in all browsers.
+  * 2. Correct the odd em font sizing in all browsers.
+  */
+
+  pre {
+    font-family: monospace, monospace; /* 1 */
+    font-size: 1em; /* 2 */
+  }
+
+  /**
+  * 1. Correct the inheritance and scaling of font size in all browsers.
+  * 2. Correct the odd em font sizing in all browsers.
+  */
+
+  code,
+  kbd,
+  samp {
+    font-family: monospace, monospace; /* 1 */
+    font-size: 1em; /* 2 */
+  }
+
+  /**
+  * Add the correct font size in all browsers.
+  */
+  small {
+    font-size: 80%;
+  }
+
+  /**
+  * Prevent sub and sup elements from affecting the line height in
+  * all browsers.
+  */
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  sub {
+    bottom: -0.25em;
+  }
+
+  sup {
+    top: -0.5em;
   }
 `;

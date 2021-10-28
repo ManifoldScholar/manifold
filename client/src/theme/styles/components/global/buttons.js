@@ -419,7 +419,7 @@ export default `
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.089em;
-    background-color: var(--accent-primary);
+    background-color: var(--color-accent-primary);
     transition: color ${defaultTransitionProps},
       background-color ${defaultTransitionProps};
 
@@ -428,12 +428,12 @@ export default `
     &:hover,
     &:focus-visible {
       color: var(--strong-color);
-      background-color: var(--accent-primary-dull);
+      background-color: var(--color-accent-primary-dull);
       outline: 0;
     }
 
     &:active {
-      background-color: var(--accent-primary-medium);
+      background-color: var(--color-accent-primary-medium);
     }
 
     &--with-room {
@@ -493,11 +493,11 @@ export default `
     }
 
     &--accent-pale {
-      background-color: var(--accent-primary-pale);
+      background-color: var(--color-accent-primary-pale);
 
       &:hover,
       &:focus-visible {
-        background-color: var(--accent-primary);
+        background-color: var(--color-accent-primary);
       }
 
       &.button-secondary--dull {
@@ -737,7 +737,7 @@ export default `
     &:hover,
     &:focus-visible {
       color: inherit;
-      background-color: var(--accent-primary);
+      background-color: var(--color-accent-primary);
     }
 
     &--warn {
