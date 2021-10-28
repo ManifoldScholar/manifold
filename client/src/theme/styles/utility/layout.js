@@ -36,7 +36,7 @@ export default `
     ${containerPrototype}
 
     // Section can be abstracted to more specific section class (or body class) if necessary
-  &:not(.flush) {
+    &:not(.flush) {
       section > & {
         ${logicalWithFallback({
           "padding-block-start": fluidScale(
