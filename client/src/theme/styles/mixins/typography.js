@@ -78,8 +78,7 @@ export const formLabelPrimary = `
 
 // // Forms
 // // --------------------------------------------------------
-export const formInputPrimary = `
-  font-size: ${fluidScale("20px", "17px")};
+const formInputBase = `
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-regular);
   letter-spacing: 0.015em;
@@ -87,10 +86,15 @@ export const formInputPrimary = `
   appearance: none;
 `;
 
+export const formInputPrimary = `
+  ${formInputBase}
+  font-size: ${fluidScale("20px", "17px")};
+`;
+
 export const formInputSecondary = `
-  ${formInputPrimary}
+  ${formInputBase}
   width: 100%;
-  // Explicit height so that elements can line up
+  /* Explicit height so that elements can line up */
   height: 32px;
   padding: 0;
   font-size: ${fluidScale("18px", "16px")};

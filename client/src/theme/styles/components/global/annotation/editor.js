@@ -59,7 +59,7 @@ export default `
     &__textarea {
       width: 100%;
       padding: 1em 1.5em;
-      font-size: ${fluidScale("20px", "16px")}
+      font-size: ${fluidScale("20px", "16px")};
       font-family: var(--font-family-sans);
       color: var(--strong-color);
       resize: vertical;
@@ -143,11 +143,11 @@ export default `
 
       &:hover {
         color: inherit;
-        background-color: var(--color-base-neutral20);
+        background-color: var(--box-strong-bg-color);
       }
 
       &:focus-visible {
-        background-color: var(--color-base-neutral20);
+        background-color: var(--box-strong-bg-color);
         outline: 0;
       }
 
@@ -192,13 +192,16 @@ export default `
       }
 
       .button-secondary {
-        &[disabled='disabled'],
-        &.button-secondary:disabled {
-          color: var(--strong-color);
+        color: var(--color-neutral-text-dark);
+
+        &:disabled {
+          color: inherit;
           background-color: var(--color-accent-primary-dull);
+          cursor: default;
         }
 
-        &:active {
+        &:active,
+        &:hover {
           color: inherit;
         }
       }

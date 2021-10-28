@@ -47,6 +47,10 @@ export default `
     --input-placeholder-color: var(--color-neutral-ui-light);
     --input-autofill-color: var(--highlight-color);
     --input-font-family: var(--font-family-sans);
+    --textarea-border-color: transparent;
+    --disabled-control-color: var(--color-neutral-text-light);
+    --disabled-control-bg-color: var(--color-base-neutral20);
+    --header-foreground-color: var(--color-base-neutral75);
 
     color: var(--color);
   }
@@ -78,7 +82,7 @@ export default `
     --box-strong-bg-color: var(--color-base-neutral90);
     --box-x-strong-bg-color: var(--color-base-neutral80);
     --drawer-bg-color: var(--color-base-neutral100);
-    --dropzone-bg-color: ${lighten("neutral90", 0.05)};
+    --dropzone-bg-color: ${lighten("neutral90", 5)};
     --select-bg-color: var(--color-base-neutral90);
     --select-border-color: var(--color-base-neutral45);
     --button-dull-bg-color: var(--color-base-neutral10);
@@ -91,6 +95,10 @@ export default `
     --input-placeholder-color: var(--color-neutral-ui-light);
     --input-autofill-color: var(--color-accent-primary-pale);
     --input-font-family: var(--font-family-serif);
+    --textarea-border-color: var(--color-neutral-ui-dull-light);
+    --disabled-control-color: var(--color-neutral-ui-dark);
+    --disabled-control-bg-color: var(--color-base-neutral85);
+    --header-foreground-color: var(--color-interaction-light);
 
     color: var(--color);
 

@@ -1,7 +1,6 @@
 import get from "lodash/get";
+import colorHelper from "tinycolor2";
 import { baseColors } from "../variables/colors";
-
-const Color = require("color");
 
 /**
  * Drop-in replacements for Sass color functions plus a few extras
@@ -11,33 +10,37 @@ const Color = require("color");
 // and instantiate `Color`
 function colorConstructor(color) {
   const baseColor = get(baseColors, color, color);
-  return Color(baseColor);
+  return colorHelper(baseColor);
 }
 
 export function rgba(color, alpha) {
   return colorConstructor(color)
-    .alpha(alpha)
-    .string();
+    .setAlpha(alpha)
+    .toRgbString();
 }
 
 export function transparentize(color, amount) {
-  return colorConstructor(color).fade(amount);
+  const newColor = colorConstructor(color);
+  const alpha = newColor.getAlpha();
+  const newAlpha = Math.max(0, alpha - amount);
+  newColor.setAlpha(newAlpha);
+  return newColor.toRgbString();
 }
 
 export function uriEncodeHex(color) {
   return colorConstructor(color)
-    .hex()
+    .toHexString()
     .replace("#", "%23");
 }
 
 export function darken(color, amount) {
   return colorConstructor(color)
     .darken(amount)
-    .hex();
+    .toHexString();
 }
 
 export function lighten(color, amount) {
   return colorConstructor(color)
     .lighten(amount)
-    .hex();
+    .toHexString();
 }

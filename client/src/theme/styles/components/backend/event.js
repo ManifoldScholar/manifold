@@ -3,9 +3,6 @@ import { eventEntity } from "theme/styles/variables/crossComponent";
 
 export default `
   .event-entity-row {
-    $entity-column-gap: 40px;
-    $entity-row-gap: 28px;
-
     position: relative;
     border-bottom: 1px solid var(--color-neutral-ui-dull-light);
 

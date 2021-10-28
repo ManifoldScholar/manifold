@@ -1,17 +1,17 @@
 import {
   listUnstyled,
   buttonUnstyled,
-  respond,
+  fluidScale,
   defaultHoverStyle,
-  defaultTransitionProps
+  defaultTransitionProps,
+  rgba
 } from "theme/styles/mixins";
 
 export default `
   .reader-return-menu {
-    max-width: 330px;
-    background-color: var(--color-base-neutral10);
-
-    ${respond(`max-width: 390px;`, 60)}
+    max-width: ${fluidScale("390px", "330px")};
+    background-color: var(--box-bg-color);
+    box-shadow: 0 12px 22px -3px ${rgba("neutralBlack", 0.13)};
 
     &__list {
       ${listUnstyled}
@@ -20,7 +20,7 @@ export default `
 
     &__item {
       & + & {
-        border-top: 2px solid var(--color-base-neutral30);
+        border-top: 2px solid var(--box-x-strong-bg-color);
       }
     }
 
@@ -29,17 +29,11 @@ export default `
       font-family: var(--font-family-heading);
       display: block;
       width: 100%;
-      padding: 16px 20px;
-      font-size: 18px;
+      padding: 16px ${fluidScale("26px", "20px")};
+      font-size: ${fluidScale("22px", "18px")};
       text-align: left;
       text-decoration: none;
       letter-spacing: 0.004em;
-
-      ${respond(
-        `padding: 17px 26px;
-      font-size: 22px;`,
-        60
-      )}
 
       &:focus-visible {
         ${defaultHoverStyle}
@@ -64,14 +58,9 @@ export default `
     }
 
     &__link-icon {
-      margin-right: 14px;
-
-      ${respond(
-        `  width: 45.538px;
-        height: 45.538px;
-        margin-right: 16px;`,
-        60
-      )}
+      width: ${fluidScale("36px", "45px")};
+      height: ${fluidScale("36px", "45px")};
+      margin-right: ${fluidScale("16px", "14px")};
     }
 
     &__link-text {
@@ -80,35 +69,25 @@ export default `
     }
 
     &__logo-icon {
-      width: 28px;
-      height: 28px;
-      margin-right: 19px;
-      margin-left: 4px;
-
-      ${respond(
-        `width: 34px;
-      height: 34px;
-      margin-right: 22px;
-      margin-left: 5px;`,
-        60
-      )}
+      width: ${fluidScale("34px", "28px")};
+      height: ${fluidScale("34px", "28px")};
+      margin-right: ${fluidScale("22px", "19px")};
+      margin-left: 5px;
     }
 
     &__small-text {
       display: block;
       padding-bottom: 10px;
-      padding-left: 51px;
+      padding-left: ${fluidScale("61px", "51px")};
       font-size: 17px;
       hyphens: none;
       text-decoration: underline;
-
-      ${respond(`padding-left: 61px;`, 60)}
     }
 
     &__note {
       font-family: var(--font-family-heading);
       display: block;
-      padding: 0.5em 1.688em 1.75em 24.5px;
+      padding: 0.5em 1.688em 1.75em ${fluidScale("32px", "24px")};
       font-size: 16px;
       line-height: 1.5;
       text-decoration: underline;
@@ -118,8 +97,6 @@ export default `
       &:focus-visible {
         ${defaultHoverStyle}
       }
-
-      ${respond(`padding-left: 32px;`, 60)}
     }
 
     &__note-bold {

@@ -6,7 +6,7 @@ export default `
     display: inline-block;
     padding: 0.76em 1.7em;
     font-size: 11.18px;
-    color: var(--header-foreground-color, var(--color-base-neutral75));
+    color: var(--header-foreground-color);
     text-decoration: none;
     letter-spacing: 0.134em;
     white-space: nowrap;

@@ -5,7 +5,6 @@
 
 import "@babel/polyfill";
 import "focus-visible";
-import "theme";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "global/containers/App";

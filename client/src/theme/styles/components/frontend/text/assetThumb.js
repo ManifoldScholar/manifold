@@ -76,7 +76,7 @@ export default `
       .asset-date {
         ${utilityPrimary}
         font-size: 14px;
-        color: $neutral50;
+        color: var(--color-base-neutral50);
       }
     }
 

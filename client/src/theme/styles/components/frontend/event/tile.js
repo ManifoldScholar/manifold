@@ -24,10 +24,10 @@ export default `
       height: 100%;
 
       ${respond(panelRoundedDark, eventEntity.panelBreakpoint)}
+    }
 
-      .browse & {
-        ${panelRounded}
-      }
+    .browse & {
+      ${panelRounded}
     }
 
     &--linked {

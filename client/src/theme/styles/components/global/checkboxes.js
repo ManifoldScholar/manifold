@@ -9,7 +9,7 @@ export default `
 
     &--white {
       &:hover {
-        color: var(--color-base-neutral90);
+        color: var(--strong-color);
       }
     }
 

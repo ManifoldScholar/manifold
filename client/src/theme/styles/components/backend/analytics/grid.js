@@ -24,7 +24,7 @@ export default `
     grid-gap: ${GAP}px;
 
     ${respond(
-      `&__item {
+      `.analytics-grid__item {
         grid-column-end: -1;
       }`,
       `${STACK_BREAKPOINT - 1}px`,

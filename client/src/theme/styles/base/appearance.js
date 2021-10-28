@@ -1,7 +1,7 @@
 import { outlineOnFocus, setHoverStyle } from "../mixins/appearance";
 
 export default `
-  // Default hover styles
+  /* Default hover styles */
   button,
   [role="button"],
   a,
@@ -9,7 +9,7 @@ export default `
     ${setHoverStyle()}
   }
 
-  // Default focus outlines
+  /* Default focus outlines */
   button,
   [role="button"],
   a,
