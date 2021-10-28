@@ -132,7 +132,7 @@ export default `
 
       ${respond(
         `
-          flex-basis: calc(${filterMinWidth} * 3 + ${filterGap} * 2);
+          flex-basis: calc(${filterMinWidth}px * 3 + ${filterGap}px * 2);
           margin-top: 0;
           margin-bottom: 0;
         `,

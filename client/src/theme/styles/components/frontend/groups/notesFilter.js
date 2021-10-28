@@ -1,10 +1,9 @@
 import { entityFilterForm } from "theme/styles/variables/crossComponent";
 
-const inputGap = entityFilterForm.gap;
-const selectMinWidth = entityFilterForm.selectMinWidth;
+const { gap, selectMinWidth } = entityFilterForm;
 
-const flexBasis2Count = `calc((${selectMinWidth} * 2) + ${inputGap})`;
-const flexBasis3Count = `calc((${selectMinWidth} * 3) + (${inputGap} * 2))`;
+const flexBasis2Count = selectMinWidth * 2 + gap;
+const flexBasis3Count = selectMinWidth * 3 + gap * 2;
 
 export default `
   .notes-filter-container {
@@ -29,7 +28,7 @@ export default `
       flex-grow: 1;
 
       &--count-1 {
-        flex-basis: ${selectMinWidth};
+        flex-basis: ${selectMinWidth}px;
       }
 
       &--count-2 {

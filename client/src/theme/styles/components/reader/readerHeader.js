@@ -13,9 +13,6 @@ export default `
   --padding-lateral: var(--container-padding-narrow);
   --padding-lateral-narrow: 11px;
 
-  --header-foreground-color: var(--color-base-neutral75);
-  --hover-color: var(--color-interaction-dark);
-
   ${reactSlideTransition("left", ".reader-return-menu")}
   ${reactSlideTransition("right", ".user-menu")}
   ${reactSlideTransition("right", ".search-menu")}
@@ -23,7 +20,6 @@ export default `
   position: fixed;
   top: 0;
   width: 100%;
-  color: var(--color-neutral-text-dark);
   box-shadow: 0 -10px 20px 7px ${rgba("neutralBlack", 0.25)};
 
   &__inner {
@@ -31,7 +27,7 @@ export default `
     display: grid;
     grid-template: "menu-group-left title-bar menu-group-right" 46px / max-content 1fr max-content;
     width: 200vw;
-    background-color: var(--color-base-neutral05);
+    background-color: var(--box-bg-color);
     transition: transform var(--transition-duration-default) ease-out;
 
     &--shifted {
@@ -140,7 +136,7 @@ export default `
     }
 
     &--gray {
-      background-color: var(--color-base-neutral10);
+      background-color: var(--box-strong-bg-color);
     }
   }
 

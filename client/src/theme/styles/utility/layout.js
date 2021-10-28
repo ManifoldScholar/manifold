@@ -30,13 +30,12 @@ export default `
     overflow: hidden;
   }
 
-  // Layout
-  // --------------------------------------------------------
+  /* Layout */
   .container {
     ${containerPrototype}
 
-    // Section can be abstracted to more specific section class (or body class) if necessary
-  &:not(.flush) {
+    /* Section can be abstracted to more specific section class (or body class) if necessary */
+    &:not(.flush) {
       section > & {
         ${logicalWithFallback({
           "padding-block-start": fluidScale(
@@ -125,7 +124,7 @@ export default `
   }
 
   .flex-viewport {
-    ${flexViewport(true)}
+    ${flexViewport(false)}
   }
 
   .row-1-p {

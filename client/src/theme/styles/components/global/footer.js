@@ -11,6 +11,7 @@ export default `
   .app-footer {
     --hover-color: var(--color-interaction-light);
     --focus-color: var(--color-interaction-light);
+    --highlight-color: var(--color-interaction-light);
 
     padding-top: ${fluidScale("67px", "32px")};
     color: var(--color-neutral-text-light);
@@ -34,7 +35,7 @@ export default `
     }
 
     &__columns {
-      ${clearfix}
+      ${clearfix()}
 
       margin-bottom: 30px;
 
@@ -159,7 +160,6 @@ export default `
         `,
         65
       )}
-      }
     }
 
     &__press-logo-image {
@@ -253,7 +253,7 @@ export default `
         .app-footer-powered-by__logo-icon,
         .app-footer-powered-by__logo-text--neutral,
         .app-footer-powered-by__logo-text--white {
-          color: var(--color-neutral-text-extra-dark);
+          color: var(--color-base-neutral90);
         }
       }
     }
@@ -354,7 +354,6 @@ export default `
     &__postscript {
       margin-top: 20px;
     }
-
   }
 
 

@@ -1,8 +1,7 @@
 import { fontWeight } from "../variables/typography";
 
 export default `
-  // TypeKit fallback serif font
-  // --------------------------
+  /* TypeKit fallback serif font */
   @font-face {
     font-family: "aleo";
     font-style: normal;
@@ -35,8 +34,7 @@ export default `
     src: url("../../assets/fonts/aleo/Aleo-Light.woff") format("woff");
   }
 
-  // TypeKit fallback san-serif font
-  // --------------------------
+  /* TypeKit fallback sans-serif font */
   @font-face {
     font-family: "trueno";
     font-style: normal;

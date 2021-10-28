@@ -37,6 +37,8 @@ export default `
       }
 
       .search-menu & {
+        --strong-color: var(--color-neutral-text-extra-dark);
+
         background-color: var(--color-base-neutral-white);
       }
     }

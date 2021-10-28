@@ -57,6 +57,7 @@ export default `
     &__button {
       display: flex;
       align-items: center;
+      font-family: var(--font-family-sans);
 
       .hero-builder-block__header:focus-visible & {
         svg {

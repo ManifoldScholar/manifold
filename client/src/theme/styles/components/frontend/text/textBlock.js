@@ -221,7 +221,7 @@ export default `
       text-transform: uppercase;
       letter-spacing: 0.134em;
       vertical-align: middle;
-      background-color: var(--accent-primary);
+      background-color: var(--color-accent-primary);
       border-radius: 3px;
 
       ${respond(`font-size: 13px;`, 80)}

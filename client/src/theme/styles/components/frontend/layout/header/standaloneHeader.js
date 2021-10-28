@@ -7,7 +7,6 @@ import {
 import { standaloneHeaderLayout } from "theme/styles/variables/crossComponent";
 
 export default `
-  /* stylelint-disable property-no-vendor-prefix */
   .standalone-header {
     position: fixed;
     left: 0;

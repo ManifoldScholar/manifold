@@ -7,7 +7,7 @@ import {
 } from "theme/styles/mixins";
 import { eventEntity } from "theme/styles/variables/crossComponent";
 
-const GRID_ITEM_MIN_WIDTH = "192px";
+const GRID_ITEM_MIN_WIDTH = "194px";
 
 export default `.entity-list {
   & + & {

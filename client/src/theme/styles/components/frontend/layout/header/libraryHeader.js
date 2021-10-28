@@ -16,8 +16,7 @@ export default `
       ${headerContainerPrimary}
       display: -ms-grid;
       display: grid;
-      grid-template:
-      /* logo is in _header-logo.scss */ "logo breadcrumbs hamburger" / 1fr auto 1fr;
+      grid-template: "logo breadcrumbs hamburger" / 1fr auto 1fr;
       width: 100%;
       height: 100%;
 

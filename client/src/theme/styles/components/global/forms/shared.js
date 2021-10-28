@@ -126,8 +126,6 @@ export default `
   }
 
   .password-input {
-    $visibility-toggle-size: 32px;
-
     position: relative;
 
     .hidden {

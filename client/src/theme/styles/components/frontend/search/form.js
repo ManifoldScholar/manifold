@@ -27,7 +27,7 @@ export default `
         margin-top: 0.429em;
         font-size: 14px;
         font-style: italic;
-        color: $neutral70;
+        color: var(--color-base-neutral70);
       }
     }
 
