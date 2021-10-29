@@ -77,7 +77,9 @@ module ExportStrategies
           mkdir_safe! component
         end
 
-        sftp.upload! payload.source_path, payload.target_path
+        payload.with_local_export_source do |source|
+          sftp.upload! source.path, payload.target_path
+        end
 
         return payload
       end
