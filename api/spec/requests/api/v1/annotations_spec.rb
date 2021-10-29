@@ -34,7 +34,7 @@ RSpec.describe "Annotations", type: :request do
   end
 
   describe "for me" do
-    text = FactoryBot.create(:text)
+    let(:text) { FactoryBot.create :text }
     let(:text_section) { FactoryBot.create(:text_section, text: text) }
     let(:annotation) do
       FactoryBot.create(:annotation, creator: admin, text_section: text_section)
