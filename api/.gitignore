@@ -26,6 +26,7 @@ public/system
 doc
 .rakeTasks
 .generators
+/.rspec-local
 
 config/oauth.yml
 data/*
