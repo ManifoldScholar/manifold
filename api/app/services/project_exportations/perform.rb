@@ -25,6 +25,23 @@ module ProjectExportations
           transition_to! :failure, on: project_exportation, metadata: metadata
         end
       end
+    rescue StandardError => e
+      handle_uncaught_exception! e
+    end
+
+    private
+
+    # @param [Exception] e
+    # @return [void]
+    def handle_uncaught_exception!(e)
+      metadata = {
+        code: "uncaught_exception",
+        reason: "Something went wrong",
+        exception_class: e.class.name,
+        exception_message: e.message
+      }
+
+      transition_to! :failure, on: project_exportation, metadata: metadata
     end
   end
 end
