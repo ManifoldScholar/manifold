@@ -13,9 +13,6 @@ import "focus-visible";
 // the storybook theme, not to be confused with the manifold theme, below.
 import theme from "./theme";
 
-// Import global styles.
-import "theme";
-
 // Load all files ending in .stories.js
 const req = require.context("../src", true, /\.stories\.js$/);
 function loadStories() {

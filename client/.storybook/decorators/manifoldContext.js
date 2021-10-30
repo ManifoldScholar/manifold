@@ -5,7 +5,8 @@ import Provider from "react-redux/es/components/Provider";
 import fixtures from "test/fixtures";
 import storyRouter from "storybook-react-router";
 import startsWith from "lodash/startsWith";
-import GlobalStyles from "theme/styles/GlobalStyles";
+import { Global as GlobalStyles } from "@emotion/react";
+import styles from "theme/styles/globalStyles";
 
 const store = fixtures.createStore();
 const routeDecorator = storyRouter();
@@ -40,7 +41,7 @@ export default makeDecorator({
 
     return wrap(
       <Provider store={store}>
-        <GlobalStyles />
+        <GlobalStyles styles={styles} />
         {routeDecorator(wrapped)}
       </Provider>
     );

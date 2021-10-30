@@ -1,7 +1,7 @@
-import { css } from "@linaria/core";
+import styled from "@emotion/styled";
 import { respond } from "theme/styles/mixins";
 
-export const logoClass = css`
+export const Link = styled.a`
   grid-area: logo;
   align-self: center;
   max-width: 300px;

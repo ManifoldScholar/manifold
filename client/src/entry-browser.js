@@ -2,7 +2,6 @@
 /**
  * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
  */
-
 import "@babel/polyfill";
 import "focus-visible";
 import React from "react";
@@ -14,6 +13,8 @@ import manifoldBootstrap from "./bootstrap";
 import has from "lodash/has";
 import createStore from "store/createStore";
 import CookieHelper from "helpers/cookie/Browser";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
 
 class EntryBrowser {
   constructor() {
@@ -73,8 +74,14 @@ class EntryBrowser {
   }
 
   render = () => {
+    const cache = createCache({ key: "emotion" });
     const renderMethod = this.ssrIsPresent ? ReactDOM.hydrate : ReactDOM.render;
-    renderMethod(<App store={this.store} />, this.root);
+    renderMethod(
+      <CacheProvider value={cache}>
+        <App store={this.store} />
+      </CacheProvider>,
+      this.root
+    );
     if (config.environment.isDevelopment) this.enableDevelopment();
   };
 

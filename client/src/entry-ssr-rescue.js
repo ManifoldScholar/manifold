@@ -13,7 +13,6 @@ const socket = config.services.client.socket;
 
 // Handle requests
 const requestHandler = (req, res) => {
-
   const stats = readStats("Development");
   let render;
   try {

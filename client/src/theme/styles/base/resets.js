@@ -158,7 +158,6 @@ export default `
   }
 
   /* Remove all animations for people that prefer not to see them */
-  /* stylelint-disable scss/media-feature-value-dollar-variable, declaration-no-important */
   @media (prefers-reduced-motion: reduce) {
     * {
       animation-duration: 0.01ms !important;
