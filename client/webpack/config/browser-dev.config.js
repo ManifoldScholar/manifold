@@ -5,11 +5,11 @@ import {
   NamedModulesPlugin
 } from "webpack";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
-import merge from "webpack-merge";
+import { mergeWithRules} from "webpack-merge";
 import environment from "../helpers/environment";
 import paths from "../helpers/paths";
 
-const config = merge.smart(baseConfig, {
+const browserConfig = {
   entry: {
     "build/manifold-client-browser": [
       "webpack/hot/only-dev-server",
@@ -54,6 +54,22 @@ const config = merge.smart(baseConfig, {
     new HotModuleReplacementPlugin(),
     new ReactRefreshWebpackPlugin()
   ]
-});
+}
+
+const config = mergeWithRules({
+  module: {
+    rules: {
+      test: "match",
+      exclude: "replace",
+      use: {
+        loader: "match",
+        options: "replace",
+      },
+    },
+  },
+})(baseConfig, browserConfig)
+
+// const util = require('util')
+// console.log(util.inspect(config, {showHidden: false, depth: null, colors: true}))
 
 export default config;

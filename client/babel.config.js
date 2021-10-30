@@ -9,6 +9,7 @@ const presets = [
   ]
 ];
 const plugins = [
+  "@emotion",
   "@babel/plugin-proposal-class-properties",
   ["@babel/plugin-proposal-decorators", { legacy: true }],
   "@babel/plugin-proposal-export-default-from",
@@ -24,12 +25,6 @@ const plugins = [
     "module-resolver",
     {
       root: ["./src"]
-    }
-  ],
-  [
-    "styled-components",
-    {
-      ssr: true
     }
   ]
 ];

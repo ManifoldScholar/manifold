@@ -21,7 +21,9 @@ import { createLocation } from "history";
 import getRoutes from "/routes";
 import FatalError from "global/components/FatalError";
 import { resetServerContext as resetDndServerContext } from "react-beautiful-dnd";
-import { ServerStyleSheet, StyleSheetManager } from "styled-components";
+import { CacheProvider } from "@emotion/react";
+import createEmotionServer from "@emotion/server/create-instance";
+import createCache from "@emotion/cache";
 
 // Node 8.x on Ubuntu 18 leads to failed SSL handshakes. Setting this
 // default TLS value appears to fix this. I believe this issue has
@@ -79,28 +81,28 @@ const render = (req, res, store) => {
 
   resetDndServerContext();
 
-  const sheet = new ServerStyleSheet();
-
   let renderString = "";
   let isError = false;
-  let styleTags = "";
 
   const stats = readStats("Client");
+  const cache = createCache({ key: "emotion" });
+  const {
+    extractCriticalToChunks,
+    constructStyleTagsFromChunks
+  } = createEmotionServer(cache);
 
   try {
     renderString = ReactDOM.renderToString(
-      <StyleSheetManager sheet={sheet.instance}>
+      <CacheProvider value={cache}>
         <HtmlBody component={appComponent} stats={stats} store={store} />
-      </StyleSheetManager>
+      </CacheProvider>
     );
-    styleTags = sheet.getStyleTags(); // eslint-disable-line no-unused-vars
   } catch (renderError) {
     isError = true;
     ch.error("Server-side render failed in server-react.js");
     const errorComponent = exceptionRenderer(renderError);
     renderString = fatalErrorOutput(errorComponent, store);
   } finally {
-    sheet.seal();
     // Redirect if the routing context has a url prop.
     if (routingContext.url) {
       respondWithRedirect(res, routingContext.url);
@@ -111,6 +113,9 @@ const render = (req, res, store) => {
         const errorComponent = <FatalError fatalError={state.fatalError} />;
         renderString = fatalErrorOutput(errorComponent, store);
       }
+
+      const chunks = extractCriticalToChunks(renderString);
+      const styleTags = constructStyleTagsFromChunks(chunks);
       const htmlOutput = wrapHtmlBody({
         store,
         stats,

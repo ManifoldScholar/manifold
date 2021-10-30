@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import swaggerUIConstructor from "swagger-ui-react/swagger-ui";
+import { Global as GlobalStyles } from "@emotion/react";
+import styles from "theme/styles/apiDocsStyles";
 
 export default class SwaggerUI extends React.Component {
   static propTypes = {
@@ -42,7 +44,12 @@ export default class SwaggerUI extends React.Component {
   }
 
   render() {
-    return this.SwaggerUIComponent ? <this.SwaggerUIComponent /> : null;
+    return this.SwaggerUIComponent ? (
+      <>
+        <GlobalStyles styles={styles} />
+        <this.SwaggerUIComponent />
+      </>
+    ) : null;
   }
 
   componentDidUpdate(prevProps) {
