@@ -1,0 +1,1 @@
+require("./styles/globalStyles.js");

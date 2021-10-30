@@ -34,6 +34,10 @@ const config = merge.smart(baseConfig, {
               cacheDirectory: true,
               plugins: [require.resolve("react-refresh/babel")]
             }
+          },
+          {
+            loader: require.resolve("@linaria/webpack4-loader"),
+            options: { sourceMap: true }
           }
         ]
       }

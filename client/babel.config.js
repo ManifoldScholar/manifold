@@ -6,7 +6,8 @@ const presets = [
       useBuiltIns: "entry",
       corejs: "2.6.9"
     }
-  ]
+  ],
+  "@linaria"
 ];
 const plugins = [
   "@babel/plugin-proposal-class-properties",
@@ -24,12 +25,6 @@ const plugins = [
     "module-resolver",
     {
       root: ["./src"]
-    }
-  ],
-  [
-    "styled-components",
-    {
-      ssr: true
     }
   ]
 ];

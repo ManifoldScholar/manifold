@@ -6,9 +6,6 @@ import paths from "../helpers/paths";
 
 const nameTemplate = environment.production ? "[name]-[hash]" : "[name]";
 
-const postcssFocusVisible = require("postcss-focus-visible");
-const postcssCustomProperties = require("postcss-custom-properties");
-
 /* eslint-disable  global-require */
 export default function buildWebpackConfiguration(target = "web") {
   function styleLoader() {
@@ -16,6 +13,16 @@ export default function buildWebpackConfiguration(target = "web") {
     if (environment.isBuild) return MiniCssExtractPlugin.loader;
     return "style-loader";
   }
+
+  const cssLoaders = [
+    styleLoader(),
+    {
+      loader: "css-loader",
+      options: {
+        importLoaders: 2
+      }
+    }
+  ];
 
   const webpackConfiguration = {
     mode: environment.name,
@@ -44,37 +51,27 @@ export default function buildWebpackConfiguration(target = "web") {
               options: {
                 cacheDirectory: true
               }
+            },
+            {
+              loader: require.resolve("@linaria/webpack4-loader"),
+              options: { sourceMap: !environment.isBuild }
             }
           ]
         },
 
-        // SASS loader: sass > postcss > css > style or css extract into separate file.
+        // CSS loader: css > style or css extract into separate file.
         {
-          test: /\.(s?)css$/,
+          test: /\.css$/,
+          // include: [paths.src, paths.plugins],
+          use: [...cssLoaders].filter(loader => loader !== null)
+        },
+
+        // SASS loader: sass > css > style or css extract into separate file.
+        {
+          test: /\.(scss|sass)$/,
           // include: [paths.src, paths.plugins],
           use: [
-            styleLoader(),
-            {
-              loader: "css-loader",
-              options: {
-                importLoaders: 2
-              }
-            },
-            {
-              loader: "postcss-loader",
-              options: {
-                syntax: "postcss-scss",
-                plugins: () => [
-                  require("autoprefixer"),
-                  postcssFocusVisible({
-                    // don't preserve `:focus-visible` selector until wider browser support exists
-                    // https://github.com/jonathantneal/postcss-focus-visible/issues/6
-                    preserve: false
-                  }),
-                  postcssCustomProperties()
-                ]
-              }
-            },
+            ...cssLoaders,
             {
               loader: "sass-loader",
               options: {

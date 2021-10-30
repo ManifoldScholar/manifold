@@ -1,8 +1,6 @@
 const webpack = require("webpack");
 const DefinePlugin = webpack.DefinePlugin;
 const path = require("path");
-const postcssFocusVisible = require("postcss-focus-visible");
-const postcssCustomProperties = require("postcss-custom-properties");
 
 // Export a function. Accept the base config as the only param.
 module.exports = async ({ config, mode }) => {
@@ -13,24 +11,13 @@ module.exports = async ({ config, mode }) => {
   // Make whatever fine-grained changes you need
   config.module.rules.push({
     test: /\.scss$/,
-    loaders: [
-      "style-loader",
-      "css-loader",
-      {
-        loader: "postcss-loader",
-        options: {
-          syntax: "postcss-scss",
-          plugins: () => [
-            require("autoprefixer"),
-            postcssFocusVisible({
-              preserve: false
-            }),
-            postcssCustomProperties()
-          ]
-        }
-      },
-      "sass-loader"
-    ],
+    loaders: ["style-loader", "css-loader", "sass-loader"],
+    include: path.resolve(__dirname, "../")
+  });
+
+  config.module.rules.push({
+    test: /\.css$/,
+    loaders: ["style-loader", "css-loader"],
     include: path.resolve(__dirname, "../")
   });
 
