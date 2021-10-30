@@ -6,9 +6,6 @@ import paths from "../helpers/paths";
 
 const nameTemplate = environment.production ? "[name]-[hash]" : "[name]";
 
-const postcssFocusVisible = require("postcss-focus-visible");
-const postcssCustomProperties = require("postcss-custom-properties");
-
 /* eslint-disable  global-require */
 export default function buildWebpackConfiguration(target = "web") {
   function styleLoader() {
@@ -48,9 +45,9 @@ export default function buildWebpackConfiguration(target = "web") {
           ]
         },
 
-        // SASS loader: sass > postcss > css > style or css extract into separate file.
+        // CSS loader: css > style or css extract into separate file.
         {
-          test: /\.(s?)css$/,
+          test: /\.css$/,
           // include: [paths.src, paths.plugins],
           use: [
             styleLoader(),
@@ -58,29 +55,6 @@ export default function buildWebpackConfiguration(target = "web") {
               loader: "css-loader",
               options: {
                 importLoaders: 2
-              }
-            },
-            {
-              loader: "postcss-loader",
-              options: {
-                syntax: "postcss-scss",
-                plugins: () => [
-                  require("autoprefixer"),
-                  postcssFocusVisible({
-                    // don't preserve `:focus-visible` selector until wider browser support exists
-                    // https://github.com/jonathantneal/postcss-focus-visible/issues/6
-                    preserve: false
-                  }),
-                  postcssCustomProperties()
-                ]
-              }
-            },
-            {
-              loader: "sass-loader",
-              options: {
-                sassOptions: {
-                  outputStyle: "expanded"
-                }
               }
             }
           ].filter(loader => loader !== null)

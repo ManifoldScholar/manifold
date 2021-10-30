@@ -1,8 +1,6 @@
 const webpack = require("webpack");
 const DefinePlugin = webpack.DefinePlugin;
 const path = require("path");
-const postcssFocusVisible = require("postcss-focus-visible");
-const postcssCustomProperties = require("postcss-custom-properties");
 
 // Export a function. Accept the base config as the only param.
 module.exports = async ({ config, mode }) => {
@@ -12,25 +10,8 @@ module.exports = async ({ config, mode }) => {
 
   // Make whatever fine-grained changes you need
   config.module.rules.push({
-    test: /\.scss$/,
-    loaders: [
-      "style-loader",
-      "css-loader",
-      {
-        loader: "postcss-loader",
-        options: {
-          syntax: "postcss-scss",
-          plugins: () => [
-            require("autoprefixer"),
-            postcssFocusVisible({
-              preserve: false
-            }),
-            postcssCustomProperties()
-          ]
-        }
-      },
-      "sass-loader"
-    ],
+    test: /\.css$/,
+    loaders: ["style-loader", "css-loader"],
     include: path.resolve(__dirname, "../")
   });
 
@@ -63,11 +44,6 @@ module.exports = async ({ config, mode }) => {
     })
   );
 
-  const sassNoOp = path.resolve(
-    __dirname,
-    "../",
-    "src/utils/plugins/null.scss"
-  );
   const pluginNoOp = path.resolve(
     __dirname,
     "../",
@@ -79,8 +55,6 @@ module.exports = async ({ config, mode }) => {
     path.resolve(__dirname, "../", "src"),
     "node_modules"
   ];
-  config.resolve.alias.userVariables$ = sassNoOp;
-  config.resolve.alias.userStyles$ = sassNoOp;
   config.resolve.alias.plugins$ = pluginNoOp;
 
   // Return the altered config

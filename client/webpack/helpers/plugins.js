@@ -5,7 +5,6 @@ import fs from "fs";
 class Plugins {
 
   constructor() {
-    this.sassNoOp = path.resolve(paths.root, "src/utils/plugins/null.scss");
     this.pluginNoOp = path.resolve(paths.root, "src/utils/plugins/missingPluginsManifest.js");
     this.componentsEntry = path.resolve(paths.plugins, "components.js");
     this.stylesEntry = path.resolve(paths.plugins, "styles.js");
@@ -15,8 +14,6 @@ class Plugins {
 
   get webpackAliases() {
     const baseAliases = {
-      userVariables$: this.sassNoOp,
-      userStyles$: this.sassNoOp,
       plugins$: this.pluginNoOp
     };
 
