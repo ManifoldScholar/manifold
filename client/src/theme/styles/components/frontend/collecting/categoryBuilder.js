@@ -259,7 +259,7 @@ export default `
       }
 
       > * + * {
-        margin-left: 0.5em;
+        margin-left: 0.75em;
       }
     }
 

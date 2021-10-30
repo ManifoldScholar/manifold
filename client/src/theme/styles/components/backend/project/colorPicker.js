@@ -37,7 +37,6 @@ export default `
         `,
         95
       )}
-      }
     }
 
     &__inner {

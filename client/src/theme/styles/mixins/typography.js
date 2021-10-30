@@ -90,7 +90,7 @@ export const formInputPrimary = `
 export const formInputSecondary = `
   ${formInputPrimary}
   width: 100%;
-  // Explicit height so that elements can line up
+  /* Explicit height so that elements can line up */
   height: 32px;
   padding: 0;
   font-size: ${fluidScale("18px", "16px")};

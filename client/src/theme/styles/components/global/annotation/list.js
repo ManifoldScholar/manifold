@@ -37,7 +37,6 @@ export default `
           padding-left: 0;
 
           ${respond(drawerIndent("padding-left"), 95)}
-          }
         }
 
         .annotation-comment-thread {
@@ -45,7 +44,6 @@ export default `
             padding-left: 0;
           }
         }
-
       }
     }
 

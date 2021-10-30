@@ -63,11 +63,11 @@ export const neutralColors = {
 };
 
 const accentPrimaryBase = "#52e3ac";
-const accentPrimaryColorScheme = new ColorSchemeGenerator(accentPrimaryBase);
+// const accentPrimaryColorScheme = new ColorSchemeGenerator(accentPrimaryBase);
 
-const accentPrimaryCustomProperties = accentPrimaryColorScheme.generatedRules.join(
-  "\n"
-);
+// const accentPrimaryCustomProperties = accentPrimaryColorScheme.generatedRules.join(
+//   "\n"
+// );
 
 const accentSecondaryBase = "#61caff"; // formerly analyticsHighlight
 const accentTertiaryBase = "#2bd1fa"; // formerly spHighlight
@@ -194,7 +194,6 @@ export const defaultColors = {
 export default `
   ${createCSSVariables("color-base", baseColors)}
   ${createCSSVariables("color-neutral", neutralColors)}
-  ${accentPrimaryCustomProperties}
   ${createCSSVariables("color-accent", otherAccentColors)}
   ${createCSSVariables("color-interaction", interactionColors)}
   ${createCSSVariables("color-notification", notificationColors)}

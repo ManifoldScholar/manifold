@@ -21,8 +21,6 @@ export default `
     }
 
     &__text-input {
-      $_padding: 32px;
-
       &--padded-1x {
         padding-right: ${BUTTON_WIDTH + BUTTON_PADDING_LATERAL}px !important;
       }

@@ -110,7 +110,7 @@ export default `
       li::before {
         margin-right: 11px;
         color: var(--color-accent-primary);
-        content: "//2022";
+        content: "\\2022";
       }
     }
   }

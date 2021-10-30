@@ -259,5 +259,4 @@ export const headerLogo = `
       75
     )}
   }
-}
 `;

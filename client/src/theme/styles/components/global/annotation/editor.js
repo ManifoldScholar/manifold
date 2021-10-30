@@ -59,7 +59,7 @@ export default `
     &__textarea {
       width: 100%;
       padding: 1em 1.5em;
-      font-size: ${fluidScale("20px", "16px")}
+      font-size: ${fluidScale("20px", "16px")};
       font-family: var(--font-family-sans);
       color: var(--strong-color);
       resize: vertical;

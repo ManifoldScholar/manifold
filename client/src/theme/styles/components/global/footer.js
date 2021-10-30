@@ -34,7 +34,7 @@ export default `
     }
 
     &__columns {
-      ${clearfix}
+      ${clearfix()}
 
       margin-bottom: 30px;
 
@@ -159,7 +159,6 @@ export default `
         `,
         65
       )}
-      }
     }
 
     &__press-logo-image {
@@ -354,7 +353,6 @@ export default `
     &__postscript {
       margin-top: 20px;
     }
-
   }
 
 
