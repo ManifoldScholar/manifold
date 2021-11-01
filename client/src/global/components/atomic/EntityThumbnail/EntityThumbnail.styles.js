@@ -1,11 +1,11 @@
-import styled, { css } from "styled-components";
+import { styled } from "@linaria/react";
 import { Link } from "react-router-dom";
 
 export const ItemLink = styled(Link)`
-  --Avatar-width: ${({ stack }) => (stack ? "auto" : "50px")};
-  --Avatar-height: ${({ stack }) => (stack ? "100%" : "auto")};
-  --Cover-width: ${({ stack }) => (stack ? "100%" : "50px")};
-  --Cover-margin-bottom: ${({ stack }) => (stack ? "16px" : 0)};
+  --Avatar-width: ${({ $stack }) => ($stack ? "auto" : "50px")};
+  --Avatar-height: ${({ $stack }) => ($stack ? "100%" : "auto")};
+  --Cover-width: ${({ $stack }) => ($stack ? "100%" : "50px")};
+  --Cover-margin-bottom: ${({ $stack }) => ($stack ? "16px" : 0)};
 
   display: flex;
   padding: 15px 0;
@@ -20,23 +20,18 @@ export const ItemLink = styled(Link)`
     color: inherit;
   }
 
-  ${({ stack }) => {
-    return (
-      stack &&
-      css`
-        flex-direction: column;
-        height: 100%;
-        padding: min(2.105vw, 25px);
+  &.stack {
+    flex-direction: column;
+    height: 100%;
+    padding: min(2.105vw, 25px);
 
-        &:hover,
-        &:focus-visible {
-          outline: 0;
-          box-shadow: 0 31px 44px 2px rgba(0, 0, 0, 0.13);
-          background-color: var(--box-medium-bg-color);
-        }
-      `
-    );
-  }}
+    &:hover,
+    &:focus-visible {
+      outline: 0;
+      box-shadow: 0 31px 44px 2px rgba(0, 0, 0, 0.13);
+      background-color: var(--box-medium-bg-color);
+    }
+  }
 `;
 
 export const Cover = styled.figure`
@@ -45,4 +40,9 @@ export const Cover = styled.figure`
   padding-top: 0;
   margin-bottom: var(--Cover-margin-bottom);
   line-height: 1;
+  height: 160px;
+`;
+
+export const Wrapper = styled.div`
+  position: relative;
 `;
