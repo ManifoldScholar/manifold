@@ -22,6 +22,34 @@ module.exports = async ({ config, mode }) => {
   });
 
   config.module.rules.push({
+    test: /\.js$/,
+    include: path.resolve(__dirname, "../"),
+    exclude: /node_modules/,
+    use: [
+      {
+        loader: "babel-loader",
+        options: {
+          presets: [
+            require.resolve("@babel/preset-env"),
+            require.resolve("linaria/babel")
+          ]
+        }
+      },
+      {
+        loader: "@linaria/webpack4-loader",
+        options: {
+          babelOptions: {
+            presets: [
+              require.resolve("@babel/preset-env"),
+              require.resolve("linaria/babel")
+            ]
+          }
+        }
+      }
+    ]
+  });
+
+  config.module.rules.push({
     test: /\.font.js/,
     use: [
       "style-loader",
