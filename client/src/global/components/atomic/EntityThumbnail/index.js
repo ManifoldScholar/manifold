@@ -5,6 +5,7 @@ import { EntityAvatar, PlaceholderAvatar } from "./avatar";
 import EntityMetadata from "./EntityMetadata";
 import lh from "helpers/linkHandler";
 import * as Styled from "./EntityThumbnail.styles";
+import classnames from "classnames";
 
 export default function EntityThumbnail({
   entity,
@@ -18,9 +19,10 @@ export default function EntityThumbnail({
   const placeholder = !entity.attributes.avatarStyles.original;
 
   return (
-    <div>
+    <Styled.Wrapper>
       <Styled.ItemLink
-        stack={stack}
+        className={classnames({ stack })}
+        $stack={stack}
         to={lh.link("frontendProjectDetail", entity.attributes.slug)}
       >
         <Styled.Cover>
@@ -46,7 +48,7 @@ export default function EntityThumbnail({
         outlined={false}
         userMock={userMock}
       />
-    </div>
+    </Styled.Wrapper>
   );
 }
 
