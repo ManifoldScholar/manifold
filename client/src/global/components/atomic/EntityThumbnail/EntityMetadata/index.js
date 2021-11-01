@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
+import classnames from "classnames";
 import * as Styled from "./EntityMetadata.styles";
 
 export default function EntityMetadata({
@@ -26,16 +27,20 @@ export default function EntityMetadata({
       : null;
 
   return (
-    <Styled.MetadataWrapper stack={stack}>
-      <Styled.TitleWrapper stack={stack}>
+    <Styled.MetadataWrapper $stack={stack} className={classnames({ stack })}>
+      <Styled.TitleWrapper $stack={stack} className={classnames({ stack })}>
         <Styled.TitleText
-          stack={stack}
+          $stack={stack}
           dangerouslySetInnerHTML={{
             __html: data.titleFormatted
           }}
         />
         {data.draft && (
-          <Styled.Tag aria-hidden stack={stack}>
+          <Styled.Tag
+            aria-hidden
+            $stack={stack}
+            className={classnames({ stack })}
+          >
             {"Draft"}
           </Styled.Tag>
         )}
@@ -49,7 +54,10 @@ export default function EntityMetadata({
         </Styled.Creators>
       )}
       {!hideDate && date && !data.draft && (
-        <Styled.Date recentlyUpdated={data.recentlyUpdated} aria-hidden>
+        <Styled.Date
+          className={classnames({ "recently-updated": data.recentlyUpdated })}
+          aria-hidden
+        >
           <FormattedDate prefix={prefix} format="MMMM, yyyy" date={date} />
         </Styled.Date>
       )}

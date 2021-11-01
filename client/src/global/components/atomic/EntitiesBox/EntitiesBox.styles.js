@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "@linaria/react";
 import { panelRounded } from "theme/styles/mixins";
 
 export const Box = styled.div`

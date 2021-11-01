@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "@linaria/react";
 
 export const Avatar = styled.img`
   width: var(--Avatar-width);
@@ -15,6 +15,7 @@ export const Placeholder = styled.div`
   > svg {
     width: var(--Avatar-width);
     height: var(--Avatar-height);
+    max-height: 130px;
     transition: fill var(--transition-duration-default)
       var(--transition-timing-function);
   }
