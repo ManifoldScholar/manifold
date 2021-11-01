@@ -465,6 +465,18 @@ const routes = {
       }
     },
     {
+      name: "LDtest",
+      exact: true,
+      component: "Test",
+      isLibrary: true,
+      path: "/test",
+      helper: (params = {}) => {
+        const query = queryString.stringify(params);
+        if (!query) return "/";
+        return `/?${query}`;
+      }
+    },
+    {
       component: NotFound
     }
   ]

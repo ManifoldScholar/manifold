@@ -20,6 +20,7 @@ export default function ThumbnailGrid({ minItemWidth = "200px", children }) {
     <Styled.Grid
       ref={resizeRef}
       $grid={useGrid}
+      grid={"grid"}
       $minItemWidth={minItemWidth}
       $empty={!children}
     >
