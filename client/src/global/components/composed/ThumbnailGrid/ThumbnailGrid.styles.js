@@ -14,22 +14,20 @@ export const Grid = styled.div`
 
   ${listUnstyled}
 
-  ${({ $grid }) =>
-    $grid &&
-    `
-      width: calc(100% + 4.21vw);
-      margin-right: -2.105vw;
-      margin-left: -2.105vw;
+  &.grid {
+    width: calc(100% + 4.21vw);
+    margin-right: -2.105vw;
+    margin-left: -2.105vw;
 
-      ${respond(
-        `
-          width: calc(100% + 52px);
-          margin-right: -26px;
-          margin-left: -26px;
-        `,
-        120
-      )}
-    `}
+    ${respond(
+      `
+        width: calc(100% + 52px);
+        margin-right: -26px;
+        margin-left: -26px;
+      `,
+      120
+    )}
+  }
 
   ${({ $empty, $grid }) =>
     $empty &&
