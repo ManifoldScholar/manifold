@@ -59,7 +59,7 @@ export default `
   picture {
     display: block;
     ${logicalWithFallback({
-      "inline-size": "100%",
+      "max-inline-size": "100%",
       "block-size": "auto"
     })}
   }
@@ -246,5 +246,10 @@ export default `
 
   sup {
     top: -0.5em;
+  }
+
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
   }
 `;

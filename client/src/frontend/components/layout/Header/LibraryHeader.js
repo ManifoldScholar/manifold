@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import Navigation from "global/components/navigation";
 import PressLogo from "global/components/PressLogo";
-import { Link } from "react-router-dom";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import BackLink from "frontend/components/back-link";
 import SetCSSProperty from "global/components/utility/SetCSSProperty";
+import { HeaderLogo } from "global/components/atomic";
 
 export default class LayoutLibraryHeader extends PureComponent {
   static displayName = "Layout.LibraryHeader";
@@ -62,18 +62,17 @@ export default class LayoutLibraryHeader extends PureComponent {
   }
 
   linkLogo(children) {
-    const headerLogoClass = "header-logo";
     if (this.doesLogoRedirect) {
       return (
-        <a href={this.logoRedirectUrl} className={headerLogoClass}>
+        <HeaderLogo as="a" href={this.logoRedirectUrl}>
           {children}
-        </a>
+        </HeaderLogo>
       );
     }
     return (
-      <Link to={lh.link("frontend")} className={headerLogoClass}>
+      <HeaderLogo as="Link" to={lh.link("frontend")}>
         {children}
-      </Link>
+      </HeaderLogo>
     );
   }
 
