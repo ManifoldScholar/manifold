@@ -17,7 +17,7 @@ export default `
     align-items: center;
     font-size: 12px;
     font-family: var(--font-family-sans);
-    font-weight: var(--font-weight-semi-bold);
+    font-weight: var(--font-weight-semibold);
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.125em;

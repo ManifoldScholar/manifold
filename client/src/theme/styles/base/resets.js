@@ -247,4 +247,9 @@ export default `
   sup {
     top: -0.5em;
   }
+
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
 `;
