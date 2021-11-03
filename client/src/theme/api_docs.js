@@ -1,1 +1,1 @@
-require("./styles/scss/_api_docs.scss");
+require("./styles/apiDocsStyles.js");
