@@ -1,15 +1,14 @@
-import { createGlobalStyle } from "styled-components";
+import { css } from "@linaria/core";
 import rootVariables from "./variables";
-import vendorStyles from "./vendor";
 import baseStyles from "./base";
 import utilityStyles from "./utility";
+import apiDocsStyles from "./apiDocs";
 
-// TODO: update this to api docs styles
-const ApiDocsStyles = createGlobalStyle`
-  ${rootVariables}
-  ${vendorStyles}
-  ${baseStyles}
-  ${utilityStyles}
+export default css`
+  :global() {
+    ${rootVariables}
+    ${baseStyles}
+    ${utilityStyles}
+    ${apiDocsStyles}
+  }
 `;
-
-export default ApiDocsStyles;
