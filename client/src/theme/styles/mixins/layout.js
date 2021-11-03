@@ -57,8 +57,8 @@ export const containerFocus = `
 export const headerContainerPrimary = `
   ${containerPrototype}
   position: relative;
-  padding-top: headerLayout.paddingVerticalMobile;
-  ${respond(`padding-top: headerLayout.paddingVerticalDesktop`, 40)}
+  padding-top: ${headerLayout.paddingVerticalMobile};
+  ${respond(`padding-top: ${headerLayout.paddingVerticalDesktop}`, 40)}
 `;
 
 export function drawerPadding(property = "padding-right", scale = "wide") {

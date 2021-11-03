@@ -1,4 +1,4 @@
-import { headerContainerPrimary, headerLogo } from "theme/styles/mixins";
+import { headerContainerPrimary } from "theme/styles/mixins";
 
 export default `
   .overlay-header {
@@ -11,10 +11,6 @@ export default `
       display: flex;
       align-items: center;
       justify-content: space-between;
-    }
-
-    &__logo {
-      ${headerLogo}
     }
   }
 `;

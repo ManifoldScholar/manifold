@@ -9,7 +9,8 @@ export const logoClass = css`
   text-decoration: none;
 
   .library-header & {
-    margin-bottom: 20px;
+    margin-bottom: 9px;
+    ${respond(`margin-bottom: 20px`, 40)}
   }
 
   .library-header--dark & {
