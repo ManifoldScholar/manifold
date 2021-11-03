@@ -27,8 +27,6 @@ export default `
   html,
   body,
   p,
-  ul,
-  ol,
   figure,
   blockquote,
   dl,
