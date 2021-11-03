@@ -5,7 +5,7 @@ import { breakpoints } from "../variables/media";
 // for replacing Sass `@include respond($break65 - 1, max)`
 export function breakpointLessOne(value) {
   const breakpoint = get(breakpoints, value, value);
-  return `${parseInt(breakpoint) - 1, 10}px`;
+  return `${parseInt(breakpoint, 10) - 1}px`;
 }
 
 export function respond(content, size, operator = "min", aspect = "width") {

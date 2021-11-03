@@ -230,7 +230,6 @@ export const headerLogo = `
   max-width: 300px;
   color: var(--color-accent-primary);
   text-decoration: none;
-  vertical-align: middle;
 
   .library-header--dark & {
     color: var(--color-neutral-ui-light);

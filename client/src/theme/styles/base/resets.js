@@ -59,7 +59,7 @@ export default `
   picture {
     display: block;
     ${logicalWithFallback({
-      "inline-size": "100%",
+      "max-inline-size": "100%",
       "block-size": "auto"
     })}
   }
