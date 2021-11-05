@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Action, { actionProps } from "./Action";
 
-const DOCS_URL = "https://manifoldapp.org/docs/";
+const DOCS_URL = "https://manifoldscholar.github.io/manifold-docusaurus/docs";
 
 const PlaceholderActions = ({ actions = [] }) => {
   const allActions = [
