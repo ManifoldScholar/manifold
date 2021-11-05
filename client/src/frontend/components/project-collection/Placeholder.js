@@ -26,7 +26,8 @@ export default class ProjectCollectionPlaceholder extends Component {
   }
 
   renderAdminMessage() {
-    const helpLink = "https://manifoldapp.org/docs/";
+    const helpLink =
+      "https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/project_collections";
     const adminLink = lh.link("backendProjectCollections");
 
     return (
