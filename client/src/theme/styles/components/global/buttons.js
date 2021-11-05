@@ -750,6 +750,7 @@ export default `
   }
 
   .button-lozenge-secondary {
+    ${buttonUnstyled}
     ${utilityPrimary}
     display: inline-flex;
     align-items: center;

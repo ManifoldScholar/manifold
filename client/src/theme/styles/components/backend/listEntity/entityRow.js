@@ -235,6 +235,7 @@ export default `
 
     &__utility {
       align-self: center;
+      flex-shrink: 0;
     }
 
     &__utility-button {
@@ -350,6 +351,7 @@ export default `
           svg:not(.collecting-toggle__icon) {
             left: 0;
             width: auto;
+            max-inline-size: none;
             height: 120px;
 
             &.project-thumb-placeholder {

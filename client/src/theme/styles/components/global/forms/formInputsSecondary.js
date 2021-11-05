@@ -47,6 +47,10 @@ export default `
         display: inline;
       }
 
+      &.space-bottom {
+        margin-bottom: 2em;
+      }
+
       + .form-input-group--primary {
         margin-top: 32px;
       }
@@ -265,7 +269,6 @@ export default `
       select {
         ${formInputSecondary}
         padding: 0 ${FORM_SELECT_INLINE_END_PADDING}px 0.75em 0;
-        font-size: 16px;
         line-height: normal;
         text-transform: none;
 

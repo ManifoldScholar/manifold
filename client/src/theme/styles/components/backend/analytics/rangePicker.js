@@ -120,7 +120,6 @@ export default `
     }
 
     &__preset {
-      ${buttonUnstyled}
       ${fillOnFocus("var(--color-accent-secondary-pale)")}
       color: var(--color-accent-secondary);
     }
