@@ -47,7 +47,7 @@ export default class ColorSchemeGenerator {
   }
 
   get transformations() {
-    return this.constructor.customProperties;
+    return this.constructor.customProperties || {};
   }
 
   get domElement() {
