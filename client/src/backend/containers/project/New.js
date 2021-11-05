@@ -32,7 +32,6 @@ export class ProjectNewContainer extends PureComponent {
     };
   }
 
-  // TODO: Update documentation link when content block docs are added
   get layoutInstructions() {
     return (
       <span className="instructions">
@@ -41,7 +40,7 @@ export class ProjectNewContainer extends PureComponent {
         answers, don't worry, everything can be changed later. Learn more about
         these Layout options `}
         <a
-          href="https://manifoldapp.org/docs/projects/customizing/appearance"
+          href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/projects#creating-projects"
           target="_blank"
           rel="noopener noreferrer"
         >

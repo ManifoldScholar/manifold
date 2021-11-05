@@ -67,7 +67,7 @@ class IngestionFormUpload extends PureComponent {
         <br />
         See the{" "}
         <a
-          href="https://manifoldapp.org/docs/projects/preparing"
+          href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/texts#adding-texts"
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -21,7 +21,8 @@ export default class ProjectListPlaceholder extends React.PureComponent {
   }
 
   renderAdminMessage() {
-    const helpLink = "https://manifoldapp.org/docs/";
+    const helpLink =
+      "https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/projects";
     return (
       <p>
         {
