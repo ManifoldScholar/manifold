@@ -116,7 +116,7 @@ export default `
         font-size: 16px;
         resize: vertical;
         background-color: var(--input-bg-color);
-        border: 1px solid var(--input-border-color);
+        border: 1px solid var(--textarea-border-color);
         border-radius: var(--box-border-radius);
         outline: none;
         transition: border-color ${defaultTransitionProps};
@@ -285,9 +285,9 @@ export default `
         .form-select__icon {
           position: absolute;
           top: 50%;
-          right: ${FORM_SELECT_ICON_PADDING};
-          width: ${FORM_SELECT_ICON_SIZE};
-          height: ${FORM_SELECT_ICON_SIZE};
+          right: ${FORM_SELECT_ICON_PADDING}px;
+          width: ${FORM_SELECT_ICON_SIZE}px;
+          height: ${FORM_SELECT_ICON_SIZE}px;
           color: currentColor;
           pointer-events: none;
           transform: translateY(-50%);

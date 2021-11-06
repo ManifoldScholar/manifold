@@ -124,7 +124,7 @@ export default `
   }
 
   .flex-viewport {
-    ${flexViewport(true)}
+    ${flexViewport(false)}
   }
 
   .row-1-p {

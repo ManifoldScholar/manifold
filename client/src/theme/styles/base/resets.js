@@ -86,6 +86,7 @@ export default `
 
   button {
     margin: 0;
+    cursor: pointer;
   }
 
   /**

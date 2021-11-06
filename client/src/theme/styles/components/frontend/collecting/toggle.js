@@ -4,7 +4,8 @@ import {
   defaultFocusStyle,
   buttonUnstyled,
   utilityPrimary,
-  defaultTransitionProps
+  defaultTransitionProps,
+  rgba
 } from "theme/styles/mixins";
 
 const lightColor = `var(
@@ -71,7 +72,7 @@ export default `
           top: 40px;
           left: 10px;
         `,
-        75
+        120
       )}
     }
 
@@ -112,7 +113,7 @@ export default `
 
       .collecting-toggle--project-cover &,
       .collecting-toggle--small-project-cover & {
-        box-shadow: 2px 4px 10px 0 rgba(var(--color-base-neutral90), 0.36);
+        box-shadow: 2px 4px 10px 0 ${rgba("neutral90", 0.36)};
       }
 
       &--add-active,

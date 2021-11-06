@@ -79,13 +79,16 @@ export function flexViewport(full) {
     display: flex;
     flex-direction: column;
 
-    ${full &&
-      `
+    ${
+      full
+        ? `
         min-height: 100vh;
         & > .main-content {
           flex-grow: 1;
         }
-      `}
+      `
+        : ``
+    }
   `;
 }
 

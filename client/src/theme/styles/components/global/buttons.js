@@ -119,6 +119,7 @@ export default `
     font-size: 14px;
     text-decoration: none;
     letter-spacing: 0.089em;
+    color: var(--color);
     border: 1px solid var(--hover-color);
     transition: color ${defaultTransitionProps},
       background-color ${defaultTransitionProps},

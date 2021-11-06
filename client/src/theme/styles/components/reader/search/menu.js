@@ -12,14 +12,17 @@ export default `
   /* Search Menu button and panel global styles (see header styles for context specific styles) */
   .button-search {
     height: 100%;
-    color: var(--color-neutral-text-dark);
-    color: var(--header-foreground-color, var(--color-neutral-text-dark));
+    color: var(--header-foreground-color);
     vertical-align: middle;
     background: transparent;
     border: 0;
     border-radius: 0;
     outline: none;
     appearance: none;
+
+    .scheme-dark & {
+      --header-foreground-color: var(--color);
+    }
 
     .header-app & {
       --tail-height: 17px;

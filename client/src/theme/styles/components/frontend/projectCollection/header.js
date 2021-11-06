@@ -111,6 +111,7 @@ export default `
         right: 50%;
         left: 50%;
         width: 100vw;
+        max-width: none;
         margin-top: -60px;
         margin-bottom: 10px;
         margin-left: -50vw;

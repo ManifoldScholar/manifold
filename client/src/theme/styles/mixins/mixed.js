@@ -164,6 +164,8 @@ export const projectGridItem = `
     `,
     75
   )}
+
+  ${respond(`padding: 25px;`, 120)}
 `;
 
 // Form Layout

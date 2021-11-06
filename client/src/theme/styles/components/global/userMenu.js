@@ -16,10 +16,7 @@ export default `
     vertical-align: middle;
 
     .avatar {
-      ${buttonAvatar(
-        32,
-        "var(--header-foreground-color, var(--color-neutral-text-dark))"
-      )}
+      ${buttonAvatar(32, "var(--header-foreground-color)")}
     }
 
     &--frontend,

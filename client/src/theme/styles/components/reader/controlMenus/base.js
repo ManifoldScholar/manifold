@@ -15,7 +15,7 @@ export default `
     &__header {
       display: block;
       width: 100%;
-      background-color: var(--color-base-neutral10);
+      background-color: var(--box-medium-bg-color);
 
       &--with-icon {
         padding-top: 8px;
@@ -37,7 +37,7 @@ export default `
       min-height: 48px;
       padding: 12px 10px 10px;
       font-size: 13px;
-      background-color: var(--color-base-neutral10);
+      background-color: var(--box-medium-bg-color);
       transition: color ${defaultTransitionProps},
         background-color ${defaultTransitionProps};
 

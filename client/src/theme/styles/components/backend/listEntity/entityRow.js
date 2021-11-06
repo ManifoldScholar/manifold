@@ -351,7 +351,7 @@ export default `
           svg:not(.collecting-toggle__icon) {
             left: 0;
             width: auto;
-            max-inline-size: none;
+            max-width: none;
             height: 120px;
 
             &.project-thumb-placeholder {

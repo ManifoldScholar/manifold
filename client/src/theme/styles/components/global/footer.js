@@ -253,7 +253,7 @@ export default `
         .app-footer-powered-by__logo-icon,
         .app-footer-powered-by__logo-text--neutral,
         .app-footer-powered-by__logo-text--white {
-          color: var(--highlight-color);
+          color: var(--color-base-neutral90);
         }
       }
     }

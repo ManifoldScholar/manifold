@@ -5,7 +5,7 @@ export default `
     ${listUnstyled}
     padding: 0;
 
-    > li + li {
+    & > li + li {
       padding-top: 43px;
     }
   }
