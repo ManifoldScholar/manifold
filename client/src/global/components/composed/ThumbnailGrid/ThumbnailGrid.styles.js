@@ -29,15 +29,15 @@ export const Grid = styled.div`
     )}
   }
 
-  ${({ $empty, $grid }) =>
-    $empty &&
-    `
-      width: calc(100% - 4.21vw);
-      padding-top: 0;
-      text-align: left;
+  &.empty {
+    width: calc(100% - 4.21vw);
+    padding-top: 0;
+    text-align: left;
+  }
 
-      ${$grid && `margin: auto;`}
-    `}
+  &.empty.grid {
+    margin: auto;
+  }
 
   & > * {
     border-bottom: var(--list-item-border);

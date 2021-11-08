@@ -20,10 +20,9 @@ export default function ThumbnailGrid({ minItemWidth = "200px", children }) {
   return (
     <Styled.Grid
       ref={resizeRef}
-      className={classnames({ grid: useGrid })}
+      className={classnames({ grid: useGrid, empty: !children })}
       $grid={useGrid}
       $minItemWidth={minItemWidth}
-      $empty={!children}
     >
       {typeof children === "function" ? children({ stack: useGrid }) : children}
     </Styled.Grid>

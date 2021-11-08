@@ -174,29 +174,21 @@ export class ProjectsContainer extends Component {
               <ThumbnailGrid>
                 {({ stack }) =>
                   this.props.projects.map(item => (
-                    <EntityThumbnail
-                      entity={item}
-                      onUncollect={() => console.log("clicked uncollect")}
-                      stack={stack}
-                    />
+                    <EntityThumbnail entity={item} stack={stack} />
                   ))
                 }
               </ThumbnailGrid>
+            </EntitiesBox>
+          </div>
+          <div style={{ width: "100%" }}>
+            <EntitiesBox>
+              <ThumbnailGrid />
             </EntitiesBox>
           </div>
         </div>
       </section>
     );
   }
-
-  // <ProjectList.Grid
-  //   authenticated={this.props.authentication.authenticated}
-  //   dispatch={this.props.dispatch}
-  //   projects={this.props.projects}
-  //   pagination={get(this.props.projectsMeta, "pagination")}
-  //   paginationClickHandler={this.pageChangeHandlerCreator}
-  //   limit={perPage}
-  // />
 
   render() {
     if (!this.props.projectsMeta) return null;
