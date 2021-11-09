@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import classnames from "classnames";
-import * as Styled from "./EntityMetadata.styles";
+import * as Styled from "./styles";
 
 export default function EntityMetadata({
   entity,
