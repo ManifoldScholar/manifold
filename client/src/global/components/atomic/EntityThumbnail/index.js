@@ -4,7 +4,7 @@ import Collecting from "frontend/components/collecting";
 import { EntityAvatar, PlaceholderAvatar } from "./avatar";
 import EntityMetadata from "./EntityMetadata";
 import lh from "helpers/linkHandler";
-import * as Styled from "./EntityThumbnail.styles";
+import * as Styled from "./styles";
 import classnames from "classnames";
 
 export default function EntityThumbnail({
