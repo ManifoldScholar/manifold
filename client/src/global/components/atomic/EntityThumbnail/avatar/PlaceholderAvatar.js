@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import UniqueIcons from "global/components/icon/unique";
-import * as Styled from "./EntityAvatar.styles";
+import * as Styled from "./styles";
 
 const PlaceholderAvatar = ({ entity }) => {
   if (!entity.attributes.avatarColor) return null;
