@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
-import * as Styled from "./ThumbnailGrid.styles";
+import * as Styled from "./styles";
 import PropTypes from "prop-types";
 import useResizeObserver from "use-resize-observer";
 import classnames from "classnames";
