@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import * as Styled from "./EntityAvatar.styles";
+import * as Styled from "./styles";
 
 const EntityAvatar = ({ entity }) => {
   const meta = entity.attributes.avatarMeta.original;
