@@ -468,7 +468,7 @@ Array [
                                   </span>
                                 </span>
                                 <span
-                                  class="aria-describedby"
+                                  class="screen-reader-text"
                                   id="1-describedby"
                                 >
                                   View Rowan Test
