@@ -4,6 +4,7 @@ import vendorStyles from "./vendor";
 import baseStyles from "./base";
 import componentStyles from "./components";
 import utilityStyles from "./utility";
+import apiDocsStyles from "./apiDocs";
 
 export default css`
   :global() {
@@ -12,5 +13,6 @@ export default css`
     ${baseStyles}
     ${utilityStyles}
     ${componentStyles}
+    ${apiDocsStyles}
   }
 `;
