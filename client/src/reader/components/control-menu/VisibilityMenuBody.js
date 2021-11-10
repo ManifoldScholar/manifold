@@ -124,7 +124,7 @@ class VisibilityMenuBody extends PureComponent {
             <IconComposer
               icon={this.groupIcon(format)}
               size={32}
-              iconClass="visibility-menu__group-icon"
+              className="visibility-menu__group-icon"
             />
             <span className="visibility-menu__group-name">{label}</span>
           </legend>
@@ -236,7 +236,7 @@ class VisibilityMenuBody extends PureComponent {
           <IconComposer
             icon="checkmark16"
             size="default"
-            iconClass="checkbox__icon"
+            className="checkbox__icon"
           />
         </div>
         {adjustedLabel}

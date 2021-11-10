@@ -10,7 +10,7 @@ exports[`frontend/components/TextList/ListItem/Counts matches the snapshot 1`] =
     <IconComposer
       fill="currentColor"
       icon="interactAnnotate32"
-      iconClass="text-counts__interaction-icon"
+      className="text-counts__interaction-icon"
       size={32}
       svgProps={
         Object {
@@ -35,7 +35,7 @@ exports[`frontend/components/TextList/ListItem/Counts matches the snapshot 1`] =
     <IconComposer
       fill="currentColor"
       icon="interactHighlight32"
-      iconClass="text-counts__interaction-icon"
+      className="text-counts__interaction-icon"
       size={32}
       svgProps={
         Object {

@@ -6,14 +6,14 @@ export default class NotesUnique extends Component {
   static displayName = "Icon.NotesUnique";
 
   static propTypes = {
-    iconClass: PropTypes.string,
+    className: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     fill: PropTypes.string,
     svgProps: PropTypes.object
   };
 
   static defaultProps = {
-    iconClass: "",
+    className: "",
     size: "inherit",
     stroke: "currentColor",
     fill: "currentColor",
@@ -49,8 +49,8 @@ export default class NotesUnique extends Component {
   }
 
   get classes() {
-    const { iconClass } = this.props;
-    return classnames("manicon-svg", "icon-notes-unique", iconClass);
+    const { className } = this.props;
+    return classnames("manicon-svg", "icon-notes-unique", className);
   }
 
   get fill() {

@@ -29,7 +29,7 @@ export default class SearchMenuButton extends PureComponent {
         aria-expanded={this.props.active}
       >
         <Utility.IconComposer
-          iconClass="search-icon"
+          className="search-icon"
           icon="search24"
           size={32}
         />

@@ -14,7 +14,7 @@ export default class ProjectContentBlockInListPartsEdit extends PureComponent {
 
   render() {
     if (!this.props.visible) return null;
-    const iconClass = `${this.props.baseClass}__icon ${this.props.baseClass}__icon--light`;
+    const className = `${this.props.baseClass}__icon ${this.props.baseClass}__icon--light`;
 
     return (
       <button
@@ -25,7 +25,7 @@ export default class ProjectContentBlockInListPartsEdit extends PureComponent {
         <Utility.IconComposer
           icon="annotate32"
           size={26}
-          iconClass={iconClass}
+          className={className}
         />
       </button>
     );

@@ -23,7 +23,7 @@ export default class UtilityBackLinkSecondary extends Component {
           <IconComposer
             icon="circleArrowLeft64"
             size={56}
-            iconClass="back-link-secondary__icon"
+            className="back-link-secondary__icon"
           />
           <div className="back-link-secondary__text">
             <span className="back-link-secondary__back-text">

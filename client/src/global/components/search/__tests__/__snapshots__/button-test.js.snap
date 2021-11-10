@@ -11,7 +11,7 @@ exports[`global/components/search/button when it is active matches the snapshot 
   <IconComposer
     fill="currentColor"
     icon="search24"
-    iconClass="search-icon"
+    className="search-icon"
     size={32}
     svgProps={
       Object {
@@ -38,7 +38,7 @@ exports[`global/components/search/button when it isn't active matches the snapsh
   <IconComposer
     fill="currentColor"
     icon="search24"
-    iconClass="search-icon"
+    className="search-icon"
     size={32}
     svgProps={
       Object {

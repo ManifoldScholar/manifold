@@ -43,7 +43,7 @@ function GroupSummaryBox({ readingGroup }) {
               <Utility.IconComposer
                 icon="lock16"
                 size={16}
-                iconClass="group-summary__private-icon"
+                className="group-summary__private-icon"
               />
             )}
           </Item>

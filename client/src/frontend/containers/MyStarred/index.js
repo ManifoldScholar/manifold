@@ -90,7 +90,7 @@ function MyStarredContainer({ currentUser }) {
               <Utility.IconComposer
                 size={48}
                 icon="StarFillUnique"
-                iconClass="icon-star-fill--header"
+                className="icon-star-fill--header"
               />
               <div className="body">
                 <h1 className="title">My Starred</h1>

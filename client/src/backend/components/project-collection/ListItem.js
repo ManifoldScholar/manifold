@@ -20,7 +20,7 @@ export default class ProjectCollectionListItem extends PureComponent {
       return (
         <Utility.IconComposer
           size={30}
-          iconClass={"project-collection-list-item__icon eye-open"}
+          className={"project-collection-list-item__icon eye-open"}
           icon="eyeOpen32"
         />
       );
@@ -28,7 +28,7 @@ export default class ProjectCollectionListItem extends PureComponent {
     return (
       <Utility.IconComposer
         size={30}
-        iconClass={"project-collection-list-item__icon eye-closed"}
+        className={"project-collection-list-item__icon eye-closed"}
         icon="eyeClosed32"
       />
     );
@@ -117,7 +117,7 @@ export default class ProjectCollectionListItem extends PureComponent {
               <Utility.IconComposer
                 size={30}
                 icon="grabber32"
-                iconClass="project-collection-list-item__icon"
+                className="project-collection-list-item__icon"
               />
             </div>
           </div>

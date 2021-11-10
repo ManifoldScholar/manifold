@@ -61,7 +61,7 @@ export default class CurrentReadingGroup extends PureComponent {
             <IconComposer
               icon="disclosureUp16"
               size={22}
-              iconClass="annotation-popup__button-icon annotation-popup__button-icon--disclosure"
+              className="annotation-popup__button-icon annotation-popup__button-icon--disclosure"
             />
           </div>
         </button>

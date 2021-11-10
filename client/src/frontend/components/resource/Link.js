@@ -34,7 +34,7 @@ export default class ResourceLink extends Component {
             <IconComposer
               icon="arrowRight16"
               size="default"
-              iconClass="button-primary__icon"
+              className="button-primary__icon"
             />
           </a>
         );
@@ -53,7 +53,7 @@ export default class ResourceLink extends Component {
             <IconComposer
               icon="arrowDown16"
               size="default"
-              iconClass="button-primary__icon"
+              className="button-primary__icon"
             />
           </a>
         ) : null;

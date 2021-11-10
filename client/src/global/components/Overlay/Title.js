@@ -5,7 +5,7 @@ import IconComposer from "global/components/utility/IconComposer";
 function Title({ title, icon, id }) {
   return (
     <h2 id={id} className="overlay-title">
-      <IconComposer icon={icon} size={24} iconClass="overlay-title__icon" />
+      <IconComposer icon={icon} size={24} className="overlay-title__icon" />
       <span className="overlay-title__text">{title}</span>
     </h2>
   );

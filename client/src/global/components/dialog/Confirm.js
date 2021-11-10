@@ -114,7 +114,7 @@ export default class DialogConfirm extends PureComponent {
                     <IconComposer
                       icon="checkmark16"
                       size="default"
-                      iconClass="button-icon-secondary__icon"
+                      className="button-icon-secondary__icon"
                     />
                     <span>{this.resolveLabel}</span>
                   </button>
@@ -130,7 +130,7 @@ export default class DialogConfirm extends PureComponent {
                   <IconComposer
                     icon="close16"
                     size="default"
-                    iconClass="button-icon-secondary__icon"
+                    className="button-icon-secondary__icon"
                   />
                   <span>{this.rejectLabel}</span>
                 </button>

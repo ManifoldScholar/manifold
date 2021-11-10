@@ -243,7 +243,7 @@ export default class DrawerWrapper extends PureComponent {
                   <Utility.IconComposer
                     icon={props.icon}
                     size={24}
-                    iconClass="drawer-bar__title-icon"
+                    className="drawer-bar__title-icon"
                   />
                 )}
                 {props.title && (
@@ -263,7 +263,7 @@ export default class DrawerWrapper extends PureComponent {
                 <Utility.IconComposer
                   icon="close24"
                   size={24}
-                  iconClass="drawer-bar__close-icon"
+                  className="drawer-bar__close-icon"
                 />
               </button>
             ) : null}

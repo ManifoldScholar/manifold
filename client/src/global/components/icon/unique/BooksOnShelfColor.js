@@ -6,7 +6,7 @@ export default class SVGBooksOnShelfColor extends Component {
   static displayName = "SVG.BooksOnShelfColor";
 
   static propTypes = {
-    iconClass: PropTypes.string,
+    className: PropTypes.string,
     size: PropTypes.number
   };
 
@@ -19,7 +19,7 @@ export default class SVGBooksOnShelfColor extends Component {
   }
 
   render() {
-    const classes = classnames("manicon-svg", this.props.iconClass);
+    const classes = classnames("manicon-svg", this.props.className);
 
     return (
       <svg

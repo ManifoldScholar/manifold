@@ -8,7 +8,7 @@ function HeadingTitle({ title, icon = "readingGroup24" }) {
       <IconComposer
         icon={icon}
         size={32}
-        iconClass={"group-page-heading__icon"}
+        className={"group-page-heading__icon"}
       />
       <h1 className={"heading-primary group-page-heading__text"}>{title}</h1>
     </div>

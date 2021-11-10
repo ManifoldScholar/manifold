@@ -47,7 +47,7 @@ function CollectingDialogCheckbox({
           <IconComposer
             icon={icon}
             size="default"
-            iconClass="collecting-dialog-checkbox__icon"
+            className="collecting-dialog-checkbox__icon"
           />
         </span>
         <span className="collecting-dialog-checkbox__title">{label}</span>
@@ -55,7 +55,7 @@ function CollectingDialogCheckbox({
           <IconComposer
             icon="lock16"
             size={18}
-            iconClass="collecting-dialog-checkbox__lock-icon"
+            className="collecting-dialog-checkbox__lock-icon"
           />
         )}
       </span>

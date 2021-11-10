@@ -92,7 +92,7 @@ export class MakersEditContainer extends PureComponent {
               label: "Delete",
               entity: maker,
               ability: "delete",
-              iconClass: "utility-button__icon--notice"
+              className: "utility-button__icon--notice"
             }
           ]}
         />

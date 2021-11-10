@@ -13,7 +13,7 @@ function Search({ inputRef, value, onChange }) {
         <Utility.IconComposer
           icon="search16"
           size={20}
-          iconClass="form-list-filter__search-icon"
+          className="form-list-filter__search-icon"
         />
       </button>
       <label htmlFor={uid} className="screen-reader-text">

@@ -17,7 +17,7 @@ export default class ResourceListSlidePlaceholder extends Component {
             <Utility.IconComposer
               size={120}
               icon="resourceCollection64"
-              iconClass="resource-slide-figure__resource-icon"
+              className="resource-slide-figure__resource-icon"
             />
             <span className="resource-type">
               {"This collection has no resources"}
