@@ -141,7 +141,7 @@ class GroupItem extends Component {
               <IconComposer
                 icon={icon}
                 size={24}
-                iconClass="notes-filtered-list__item-icon"
+                className="notes-filtered-list__item-icon"
               />
             )}
             <span className="notes-filtered-list__item-inner">

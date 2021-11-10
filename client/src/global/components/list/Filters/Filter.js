@@ -26,7 +26,7 @@ function Filter({ label, value, options, onChange }) {
       <Utility.IconComposer
         icon="disclosureDown16"
         size={20}
-        iconClass="form-list-filter__select-icon"
+        className="form-list-filter__select-icon"
       />
     </div>
   );

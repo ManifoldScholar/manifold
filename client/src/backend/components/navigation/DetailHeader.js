@@ -104,7 +104,7 @@ export default class DetailHeader extends PureComponent {
       <UniqueIcons.ProjectPlaceholderUnique
         mode="small"
         color="outlined"
-        iconClass="backend-header__type-icon backend-header__type-icon--project"
+        className="backend-header__type-icon backend-header__type-icon--project"
         ariaLabel={null}
       />
     );
@@ -123,12 +123,12 @@ export default class DetailHeader extends PureComponent {
             <IconComposer
               icon="arrowLeft16"
               size="default"
-              iconClass="breadcrumbs__icon breadcrumbs__icon--small"
+              className="breadcrumbs__icon breadcrumbs__icon--small"
             />
             <IconComposer
               icon="arrowLeft32"
               size="default"
-              iconClass="breadcrumbs__icon breadcrumbs__icon--large"
+              className="breadcrumbs__icon breadcrumbs__icon--large"
             />
             {this.backLabel}
           </Link>

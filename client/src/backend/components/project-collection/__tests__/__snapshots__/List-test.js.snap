@@ -172,7 +172,7 @@ exports[`backend/components/project-collection/List matches the snapshot 1`] = `
       <IconComposer
         fill="currentColor"
         icon="plus16"
-        iconClass="button-icon-secondary__icon button-icon-secondary__icon--large"
+        className="button-icon-secondary__icon button-icon-secondary__icon--large"
         size={20}
         svgProps={
           Object {

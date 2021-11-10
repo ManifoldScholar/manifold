@@ -26,7 +26,7 @@ function DatePickerComponent({ parentId, inputId, value, onChange, label }) {
           <Utility.IconComposer
             icon="calendar24"
             size="default"
-            iconClass="range-picker__calendar-icon"
+            className="range-picker__calendar-icon"
           />
           <MaskedInput
             id={inputId}

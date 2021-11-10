@@ -14,7 +14,7 @@ export default function FooterPartsNavigationLink({
       <Utility.IconComposer
         icon={theItem.icon}
         size={24}
-        iconClass="app-footer-navigation__icon"
+        className="app-footer-navigation__icon"
       />
     );
   };

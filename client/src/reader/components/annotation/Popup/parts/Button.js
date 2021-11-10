@@ -54,7 +54,7 @@ export default class DefaultButton extends PureComponent {
               <IconComposer
                 icon={this.props.icon}
                 size={24}
-                iconClass="annotation-popup__button-icon"
+                className="annotation-popup__button-icon"
               />
             ) : null}
             <span className="annotation-popup__button-text">{label}</span>

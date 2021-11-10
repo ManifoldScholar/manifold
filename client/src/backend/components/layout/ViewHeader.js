@@ -112,7 +112,7 @@ export default class ViewHeader extends PureComponent {
       "backend-header__figure--alt-accented": iconAltAccented
     });
 
-    const iconClasses = classNames({
+    const classNamees = classNames({
       "backend-header__type-icon": iconType === "entity-type"
     });
 
@@ -128,7 +128,7 @@ export default class ViewHeader extends PureComponent {
                     <Utility.IconComposer
                       icon={icon}
                       size={iconSize || 34}
-                      iconClass={iconClasses}
+                      className={classNamees}
                     />
                   ) : (
                     React.Children.toArray(icon)

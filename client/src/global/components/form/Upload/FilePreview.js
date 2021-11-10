@@ -17,7 +17,7 @@ export default class FormUploadFilePreview extends PureComponent {
           <IconComposer
             icon="resourceDocument64"
             size="default"
-            iconClass="contents-icon-preview__icon"
+            className="contents-icon-preview__icon"
           />
           <p className="primary">{this.props.fileName}</p>
           <p className="secondary">

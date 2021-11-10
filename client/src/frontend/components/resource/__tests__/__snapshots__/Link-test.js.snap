@@ -20,7 +20,7 @@ exports[`frontend/components/resource/Link matches the snapshot 1`] = `
   <IconComposer
     fill="currentColor"
     icon="arrowDown16"
-    iconClass="button-primary__icon"
+    className="button-primary__icon"
     size="default"
     svgProps={
       Object {

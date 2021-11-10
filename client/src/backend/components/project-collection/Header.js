@@ -33,7 +33,7 @@ export default class ProjectCollectionHeader extends PureComponent {
           <IconComposer
             icon="eyeOpen32"
             size={26}
-            iconClass="utility-button__icon utility-button__icon--highlight"
+            className="utility-button__icon utility-button__icon--highlight"
           />
           <span className="utility-button__text">View</span>
         </Link>
@@ -44,7 +44,7 @@ export default class ProjectCollectionHeader extends PureComponent {
           <IconComposer
             icon="settings32"
             size={26}
-            iconClass="utility-button__icon utility-button__icon--highlight"
+            className="utility-button__icon utility-button__icon--highlight"
           />
           <span className="utility-button__text">Settings</span>
         </Link>
@@ -59,7 +59,7 @@ export default class ProjectCollectionHeader extends PureComponent {
             <IconComposer
               icon="BEProject64"
               size={26}
-              iconClass="utility-button__icon utility-button__icon--highlight"
+              className="utility-button__icon utility-button__icon--highlight"
             />
             <span className="utility-button__text">Manage Projects</span>
           </Link>

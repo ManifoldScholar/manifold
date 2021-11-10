@@ -32,7 +32,7 @@ export default class ProjectContentBlockInListAvailable extends PureComponent {
               <Utility.IconComposer
                 icon="circlePlus32"
                 size={32}
-                iconClass="backend-content-block__icon backend-content-block__icon--add"
+                className="backend-content-block__icon backend-content-block__icon--add"
               />
             </button>
           </div>

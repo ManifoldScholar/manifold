@@ -99,7 +99,7 @@ class FilteredList extends PureComponent {
             <IconComposer
               icon="link24"
               size="default"
-              iconClass="notes-filtered-list__see-all-icon button-primary__icon"
+              className="notes-filtered-list__see-all-icon button-primary__icon"
             />
           </button>
         </div>

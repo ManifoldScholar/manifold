@@ -53,7 +53,7 @@ export default class ProjectContentBlockIdentity extends PureComponent {
     const iconSize = size === "large" ? 46 : 36;
     const baseClass = "backend-content-block";
     const titleClasses = `${baseClass}__title ${baseClass}__title--${size}`;
-    const iconClasses = classnames(
+    const classNamees = classnames(
       `${baseClass}__icon ${baseClass}__icon--dark ${baseClass}__icon--${size}`,
       { [`${baseClass}__icon--incomplete`]: this.requiresAttention }
     );
@@ -62,7 +62,7 @@ export default class ProjectContentBlockIdentity extends PureComponent {
       <header className="backend-content-block__heading">
         <Utility.IconComposer
           icon={this.icon}
-          iconClass={iconClasses}
+          className={classNamees}
           size={iconSize}
         />
         <span className={titleClasses}>

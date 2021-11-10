@@ -419,7 +419,7 @@ export class UpdateFormContainer extends Component {
             <IconComposer
               icon="arrowLongRight16"
               size="default"
-              iconClass="button-secondary__icon"
+              className="button-secondary__icon"
             />
           </button>
         </div>

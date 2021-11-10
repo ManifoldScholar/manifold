@@ -14,7 +14,7 @@ export default class IconComposer extends PureComponent {
 
   static propTypes = {
     icon: PropTypes.string.isRequired,
-    iconClass: PropTypes.string,
+    className: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     fill: PropTypes.string,
     stroke: PropTypes.string,
@@ -50,13 +50,13 @@ export default class IconComposer extends PureComponent {
   }
 
   render() {
-    const { iconClass, size, fill, stroke, icon } = this.props;
+    const { className, size, fill, stroke, icon } = this.props;
     const IconComponent = this.iconComponent;
-    const adjustedIconClass = classNames(iconClass, `svg-icon--${icon}`);
+    const adjustedclassName = classNames(className, `svg-icon--${icon}`);
 
     const props = {
       svgProps: this.props.svgProps,
-      iconClass: adjustedIconClass,
+      className: adjustedclassName,
       icon,
       size,
       fill,

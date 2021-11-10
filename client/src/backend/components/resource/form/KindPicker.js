@@ -35,7 +35,7 @@ class KindPicker extends PureComponent {
             <IconComposer
               icon="disclosureDown16"
               size={22}
-              iconClass="form-select__icon"
+              className="form-select__icon"
             />
             <select
               id={id}
@@ -96,7 +96,7 @@ class KindPicker extends PureComponent {
               <IconComputed.Resource
                 size="default"
                 icon={safeKind}
-                iconClass="resource-kind-picker__icon"
+                className="resource-kind-picker__icon"
               />
             </label>
           );
