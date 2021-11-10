@@ -130,7 +130,7 @@ export default class Header extends Component {
           <Utility.IconComposer
             icon="close32"
             size="default"
-            iconClass="reader-header__options-button-icon"
+            className="reader-header__options-button-icon"
           />
         )}
       </button>
@@ -160,12 +160,12 @@ export default class Header extends Component {
         <Utility.IconComposer
           icon="disclosureDown24"
           size="default"
-          iconClass="reader-header__button-icon reader-header__button-icon--large"
+          className="reader-header__button-icon reader-header__button-icon--large"
         />
         <Utility.IconComposer
           icon="disclosureDown16"
           size={20}
-          iconClass="reader-header__button-icon reader-header__button-icon--small"
+          className="reader-header__button-icon reader-header__button-icon--small"
         />
       </button>
     );

@@ -58,7 +58,7 @@ function Text({ resource }) {
       <IconComposer
         icon={icon}
         size={iconSize}
-        iconClass="resource-card__view-icon"
+        className="resource-card__view-icon"
       />
     </>
   );

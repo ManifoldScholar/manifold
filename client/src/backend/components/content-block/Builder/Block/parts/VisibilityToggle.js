@@ -34,7 +34,7 @@ export default class ProjectContentBlockVisibilityToggle extends PureComponent {
           <Utility.IconComposer
             icon="eyeClosed32"
             size={26}
-            iconClass={`${baseClass}__icon ${baseClass}__icon--light`}
+            className={`${baseClass}__icon ${baseClass}__icon--light`}
           />
         </button>
       );
@@ -48,7 +48,7 @@ export default class ProjectContentBlockVisibilityToggle extends PureComponent {
         <Utility.IconComposer
           icon="eyeOpen32"
           size={26}
-          iconClass={`${baseClass}__icon ${baseClass}__icon--light`}
+          className={`${baseClass}__icon ${baseClass}__icon--light`}
         />
       </button>
     );

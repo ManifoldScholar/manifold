@@ -25,7 +25,7 @@ export default class ResourceVariantList extends Component {
           <IconComposer
             icon="arrowDown16"
             size="default"
-            iconClass="resource-variant-list__link-icon"
+            className="resource-variant-list__link-icon"
           />
           <span className="resource-variant-list__link-text">{filename}</span>
         </a>

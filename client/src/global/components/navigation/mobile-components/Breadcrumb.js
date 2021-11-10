@@ -64,7 +64,7 @@ export default class MobileBreadcrumb extends PureComponent {
                 <IconComposer
                   icon="disclosureDown16"
                   size="default"
-                  iconClass="breadcrumb-list__icon"
+                  className="breadcrumb-list__icon"
                 />
               )}
             </span>

@@ -25,7 +25,7 @@ export default class ResourceListSlideZoom extends PureComponent {
           <IconComposer
             icon="zoomIn16"
             size={21.333}
-            iconClass="zoom-indicator__icon"
+            className="zoom-indicator__icon"
           />
         </div>
       </ResourcePreview>

@@ -93,7 +93,7 @@ export class NavigationDropdown extends Component {
             <IconComposer
               icon="disclosureDown16"
               size="default"
-              iconClass="dropdown-nav__trigger-icon"
+              className="dropdown-nav__trigger-icon"
             />
           </div>
         </button>

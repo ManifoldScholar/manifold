@@ -17,7 +17,7 @@ export default class ResourceImportResultsFailed extends PureComponent {
         <IconComposer
           icon="close16"
           size={18}
-          iconClass="results-header__icon"
+          className="results-header__icon"
         />
         <span>
           {`Row #${resourceImportRow.lineNumber} failed with errors.`}

@@ -9,7 +9,7 @@ function CloseButton({ onClick }) {
       <IconComposer
         icon="close24"
         size="default"
-        iconClass="overlay-close__icon"
+        className="overlay-close__icon"
       />
     </button>
   );

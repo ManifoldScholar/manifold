@@ -19,7 +19,7 @@ export default class NestedLink extends React.PureComponent {
         <Utility.IconComposer
           icon="arrowRight16"
           size={14}
-          iconClass="table__nested-link-arrow"
+          className="table__nested-link-arrow"
         />
       </Link>
     );

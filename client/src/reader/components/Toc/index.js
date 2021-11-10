@@ -160,7 +160,7 @@ class Toc extends PureComponent {
                 <IconComposer
                   icon="info16"
                   size={32}
-                  iconClass="toc-footer__icon"
+                  className="toc-footer__icon"
                 />
                 <h4 className="toc-footer__text">About This Text</h4>
               </button>

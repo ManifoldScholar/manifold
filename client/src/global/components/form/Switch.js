@@ -144,7 +144,7 @@ class FormSwitch extends Component {
         <IconComposer
           icon="checkmark16"
           size="default"
-          iconClass="checkbox__icon"
+          className="checkbox__icon"
         />
       </span>
     );

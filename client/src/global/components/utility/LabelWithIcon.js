@@ -18,7 +18,7 @@ export default class LabelWithIcon extends React.PureComponent {
     return this.props.textStyle;
   }
 
-  get labelIconClass() {
+  get labelclassName() {
     return "label-with-icon__icon";
   }
 
@@ -36,7 +36,7 @@ export default class LabelWithIcon extends React.PureComponent {
           <IconComposer
             icon={this.icon}
             size={24}
-            iconClass={this.labelIconClass}
+            className={this.labelclassName}
           />
         )}
         {this.name && this.name + ":"}

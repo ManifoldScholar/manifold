@@ -180,7 +180,7 @@ export default class ResourcePlayerAudio extends Component {
           <div className="indicator">
             <IconComposer
               icon="stopSign64"
-              iconClass="indicator__icon"
+              className="indicator__icon"
               size={56.615}
             />
           </div>
@@ -207,7 +207,7 @@ export default class ResourcePlayerAudio extends Component {
         <div className="indicator">
           <IconComposer
             icon="playSolid24"
-            iconClass="indicator__icon"
+            className="indicator__icon"
             size={42.667}
           />
         </div>
@@ -237,7 +237,7 @@ export default class ResourcePlayerAudio extends Component {
             </span>
             <IconComposer
               icon={playPauseIcon}
-              iconClass="audio-player__icon audio-player__icon--play-pause"
+              className="audio-player__icon audio-player__icon--play-pause"
               size={19.2}
             />
           </button>
@@ -277,7 +277,7 @@ export default class ResourcePlayerAudio extends Component {
               </span>
               <IconComposer
                 icon={muteIcon}
-                iconClass="audio-player__icon audio-player__icon--mute"
+                className="audio-player__icon audio-player__icon--mute"
                 size={21.333}
               />
             </button>

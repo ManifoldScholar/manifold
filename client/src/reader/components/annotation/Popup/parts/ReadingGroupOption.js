@@ -26,7 +26,7 @@ export default class ReadingGroupOption extends PureComponent {
               <IconComposer
                 icon="checkmark16"
                 size={22}
-                iconClass="annotation-group-options__icon annotation-group-options__icon--selected"
+                className="annotation-group-options__icon annotation-group-options__icon--selected"
               />
             )}
             <span className="annotation-group-options__button-text">
@@ -36,7 +36,7 @@ export default class ReadingGroupOption extends PureComponent {
               <IconComposer
                 icon="lock16"
                 size={18}
-                iconClass="annotation-group-options__icon annotation-group-options__icon--private"
+                className="annotation-group-options__icon annotation-group-options__icon--private"
               />
             )}
           </div>
