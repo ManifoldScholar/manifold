@@ -60,7 +60,7 @@ const browserConfig = {
   ]
 }
 
-const config =   mergeWithRules({
+const config = mergeWithRules({
   module: {
     rules: {
       test: "match",
