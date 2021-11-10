@@ -15,7 +15,7 @@ function UserMenuBodyLink({ as = "a", to, title, srTitle, icon, onClick }) {
         onClick={onClick}
         aria-describedby={srTitle ? uid : null}
       >
-        <IconComposer icon={icon} size={32} iconClass="user-menu__icon" />
+        <IconComposer icon={icon} size={32} className="user-menu__icon" />
         <span className="user-menu__link-text">{title}</span>
       </Tag>
       {srTitle && (

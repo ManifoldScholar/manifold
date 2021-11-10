@@ -89,7 +89,7 @@ export default class SourceSummary extends React.PureComponent {
             <Utility.IconComposer
               icon="arrowLongRight16"
               size={24}
-              iconClass="annotation-selection__arrow-icon"
+              className="annotation-selection__arrow-icon"
             />
           )}
         </a>

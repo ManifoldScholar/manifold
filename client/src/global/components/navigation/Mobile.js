@@ -230,7 +230,7 @@ export class NavigationMobile extends Component {
             <IconComposer
               icon="disclosureDown16"
               size="default"
-              iconClass="nested-nav__disclosure-icon"
+              className="nested-nav__disclosure-icon"
             />
           </button>
         )}
@@ -315,7 +315,7 @@ export class NavigationMobile extends Component {
           <IconComposer
             icon={this.triggerIcon}
             size="default"
-            iconClass="mobile-nav-trigger__icon"
+            className="mobile-nav-trigger__icon"
           />
         </button>
       </>

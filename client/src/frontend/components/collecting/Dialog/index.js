@@ -63,7 +63,7 @@ function CollectingDialog({
           <IconComposer
             icon="TextsLoosePages64"
             size={48}
-            iconClass="collecting-dialog__header-icon"
+            className="collecting-dialog__header-icon"
           />
         </header>
         <fieldset className="collecting-dialog__fieldset">

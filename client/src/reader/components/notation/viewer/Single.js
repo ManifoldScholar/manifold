@@ -55,7 +55,7 @@ export default class NotationViewerSingle extends PureComponent {
             <IconComposer
               icon="close16"
               size="default"
-              iconClass="notation-delete__icon"
+              className="notation-delete__icon"
             />
           </button>
         </Authorize>

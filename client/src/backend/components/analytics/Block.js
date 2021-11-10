@@ -21,7 +21,7 @@ function Block({ icon, title, description, children, width }) {
           <Utility.IconComposer
             icon={icon}
             size={32}
-            iconClass="analytics-block__icon"
+            className="analytics-block__icon"
           />
           <span className="analytics-block__title-text">{title}</span>
         </h3>

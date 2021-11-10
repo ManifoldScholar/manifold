@@ -26,7 +26,7 @@ exports[`backend/components/project-collection/AddButton matches the snapshot 1`
         <IconComposer
           fill="currentColor"
           icon="MinusUnique"
-          iconClass="collecting-toggle__icon collecting-toggle__icon--remove"
+          className="collecting-toggle__icon collecting-toggle__icon--remove"
           size={28}
           svgProps={
             Object {
@@ -37,7 +37,7 @@ exports[`backend/components/project-collection/AddButton matches the snapshot 1`
         <IconComposer
           fill="currentColor"
           icon="CheckUnique"
-          iconClass="collecting-toggle__icon collecting-toggle__icon--confirm"
+          className="collecting-toggle__icon collecting-toggle__icon--confirm"
           size={28}
           svgProps={
             Object {
@@ -48,7 +48,7 @@ exports[`backend/components/project-collection/AddButton matches the snapshot 1`
         <IconComposer
           fill="currentColor"
           icon="PlusUnique"
-          iconClass="collecting-toggle__icon collecting-toggle__icon--add"
+          className="collecting-toggle__icon collecting-toggle__icon--add"
           size={28}
           svgProps={
             Object {

@@ -61,7 +61,7 @@ export default class IngestionActions extends Component {
         <IconComposer
           icon="arrowDown16"
           size="default"
-          iconClass="button-icon-secondary__icon"
+          className="button-icon-secondary__icon"
         />
         <span>{label}</span>
       </button>
@@ -83,7 +83,7 @@ export default class IngestionActions extends Component {
         <IconComposer
           icon="close16"
           size="default"
-          iconClass="button-icon-secondary__icon"
+          className="button-icon-secondary__icon"
         />
         <span>Change Source</span>
       </button>
@@ -98,7 +98,7 @@ export default class IngestionActions extends Component {
         <IconComposer
           icon="checkmark16"
           size="default"
-          iconClass="button-icon-secondary__icon"
+          className="button-icon-secondary__icon"
         />
         <span>Complete</span>
       </button>

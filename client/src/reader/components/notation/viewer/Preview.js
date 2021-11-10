@@ -39,7 +39,7 @@ export default class NotationViewerPreview extends PureComponent {
               <IconComposer
                 icon="resourceFilled16"
                 size="default"
-                iconClass="notation-preview-footer__cube-icon"
+                className="notation-preview-footer__cube-icon"
               />
               <Resourceish.Thumbnail
                 resourceish={notation}
@@ -57,7 +57,7 @@ export default class NotationViewerPreview extends PureComponent {
             <IconComposer
               icon="disclosureDown32"
               size="default"
-              iconClass="notation-preview-footer__caret-icon"
+              className="notation-preview-footer__caret-icon"
             />
           </div>
         </Link>

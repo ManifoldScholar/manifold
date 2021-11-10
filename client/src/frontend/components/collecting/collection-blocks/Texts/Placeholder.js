@@ -11,7 +11,7 @@ function Placeholder() {
             <IconComposer
               size={78}
               icon="textsLoosePages64"
-              iconClass={`text-block__cover-svg`}
+              className={`text-block__cover-svg`}
             />
           </figure>
           <div className="text-block__bibliographic">
@@ -27,7 +27,7 @@ function Placeholder() {
             <IconComposer
               size={32}
               icon="interactAnnotate32"
-              iconClass={`text-block__interaction-icon`}
+              className={`text-block__interaction-icon`}
             />
             <span aria-hidden="true" className="text-block__interaction-label">
               0
@@ -37,7 +37,7 @@ function Placeholder() {
             <IconComposer
               size={32}
               icon="interactHighlight32"
-              iconClass={`text-blcok__interaction-icon`}
+              className={`text-blcok__interaction-icon`}
             />
             <span aria-hidden="true" className="text-block__interaction-label">
               0

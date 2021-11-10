@@ -122,7 +122,7 @@ class AnnotationPopupSecondaryReadingGroup extends PureComponent {
           <IconComposer
             icon="link24"
             size="default"
-            iconClass="annotation-group-options__icon annotation-group-options__icon--link"
+            className="annotation-group-options__icon annotation-group-options__icon--link"
           />
         </Link>
       </div>

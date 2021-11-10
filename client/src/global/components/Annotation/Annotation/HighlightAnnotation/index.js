@@ -46,7 +46,7 @@ export default class HighlightDetail extends PureComponent {
           <IconComposer
             icon="interactHighlight32"
             size="default"
-            iconClass="annotation-selection__icon"
+            className="annotation-selection__icon"
           />
           <span className="annotation-selection__highlight-text">
             {annotation.attributes.subject}

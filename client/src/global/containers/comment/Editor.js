@@ -179,7 +179,7 @@ export class CommentEditor extends PureComponent {
             <IconComposer
               icon="commentPencil32"
               size={42}
-              iconClass="annotation-editor__label-icon"
+              className="annotation-editor__label-icon"
             />
             <span className="annotation-editor__label-text">
               {this.props.label}

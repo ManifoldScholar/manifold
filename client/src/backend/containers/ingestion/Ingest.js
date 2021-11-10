@@ -293,7 +293,7 @@ export class IngestionIngest extends Component {
               <Utility.IconComposer
                 icon="reload32"
                 size={24}
-                iconClass="utility-button__icon utility-button__icon--highlight"
+                className="utility-button__icon utility-button__icon--highlight"
               />
               <span className="utility-button__text">Restart Ingestion</span>
             </button>

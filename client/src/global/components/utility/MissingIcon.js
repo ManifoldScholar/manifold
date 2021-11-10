@@ -4,14 +4,14 @@ import classnames from "classnames";
 
 export default class MissingIcon extends Component {
   static propTypes = {
-    iconClass: PropTypes.string,
+    className: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     stroke: PropTypes.string,
     fill: PropTypes.string
   };
 
   static defaultProps = {
-    iconClass: "",
+    className: "",
     size: "inherit",
     stroke: "currentColor",
     fill: "currentColor"
@@ -46,8 +46,8 @@ export default class MissingIcon extends Component {
   }
 
   get classes() {
-    const { iconClass } = this.props;
-    return classnames("manicon-svg", iconClass);
+    const { className } = this.props;
+    return classnames("manicon-svg", className);
   }
 
   get fill() {

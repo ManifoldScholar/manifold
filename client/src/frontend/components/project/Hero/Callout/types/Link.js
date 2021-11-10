@@ -53,7 +53,7 @@ export default class ProjectHeroCalloutLink extends PureComponent {
       <Utility.IconComposer
         icon={this.icon}
         size={this.iconSize}
-        iconClass={`${this.blockClass}__${this.typeClass}-icon`}
+        className={`${this.blockClass}__${this.typeClass}-icon`}
       />
     );
   }

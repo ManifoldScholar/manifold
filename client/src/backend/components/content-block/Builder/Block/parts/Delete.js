@@ -12,7 +12,7 @@ export default class ProjectContentBlockInListPartsDelete extends PureComponent 
   };
 
   render() {
-    const iconClass = `${this.props.baseClass}__icon ${this.props.baseClass}__icon--light`;
+    const className = `${this.props.baseClass}__icon ${this.props.baseClass}__icon--light`;
 
     return (
       <button
@@ -20,7 +20,7 @@ export default class ProjectContentBlockInListPartsDelete extends PureComponent 
         onClick={this.props.clickHandler}
         aria-label={`Delete content block “${this.props.blockTitle}”`}
       >
-        <Utility.IconComposer icon="delete32" size={26} iconClass={iconClass} />
+        <Utility.IconComposer icon="delete32" size={26} className={className} />
       </button>
     );
   }

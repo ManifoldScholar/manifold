@@ -11,7 +11,7 @@ exports[`frontend/components/utility/BackLinkSecondary matches the snapshot 1`] 
     <IconComposer
       fill="currentColor"
       icon="circleArrowLeft64"
-      iconClass="back-link-secondary__icon"
+      className="back-link-secondary__icon"
       size={56}
       svgProps={
         Object {

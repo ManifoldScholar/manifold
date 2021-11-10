@@ -16,7 +16,7 @@ exports[`frontend/components/resource-slide/Loading matches the snapshot 1`] = `
       <IconComposer
         fill="currentColor"
         icon="resourceFile64"
-        iconClass="resource-slide-figure__resource-icon"
+        className="resource-slide-figure__resource-icon"
         size={120}
         svgProps={
           Object {

@@ -198,7 +198,7 @@ export default class ResourceListSlideCaption extends Component {
                 <IconComposer
                   icon="arrowDown16"
                   size="default"
-                  iconClass="resource-slideshow__download-icon"
+                  className="resource-slideshow__download-icon"
                 />
               </a>
             ) : null}

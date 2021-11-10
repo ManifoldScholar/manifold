@@ -49,7 +49,7 @@ export default class ResourceImportResultsQueued extends PureComponent {
         <IconComposer
           icon={this.icon}
           size={18}
-          iconClass="results-header__icon"
+          className="results-header__icon"
         />
         {this.renderMessage(resourceImportRow)}
       </>

@@ -35,7 +35,7 @@ class ReturnMenuBody extends PureComponent {
               <IconComposer
                 icon="circleArrowLeft64"
                 size={36.923}
-                iconClass="reader-return-menu__link-icon"
+                className="reader-return-menu__link-icon"
               />
               <span className="reader-return-menu__link-text">
                 {"Project Home"}
@@ -54,7 +54,7 @@ class ReturnMenuBody extends PureComponent {
                 <IconComposer
                   icon="projects64"
                   size={36.923}
-                  iconClass="reader-return-menu__link-icon"
+                  className="reader-return-menu__link-icon"
                 />
                 <span className="reader-return-menu__link-text">
                   {"Projects"}
@@ -72,7 +72,7 @@ class ReturnMenuBody extends PureComponent {
                 <IconComposer
                   icon="manifoldLogo32"
                   size={28}
-                  iconClass="reader-return-menu__logo-icon"
+                  className="reader-return-menu__logo-icon"
                 />
                 <span className="reader-return-menu__link-text">Sign-in</span>
               </button>
