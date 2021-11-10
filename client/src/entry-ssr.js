@@ -37,7 +37,6 @@ const socket = config.services.client.rescueEnabled
 const port = config.services.client.rescueEnabled
   ? config.services.client.sparePort
   : config.services.client.port;
-const stats = readStats("Client");
 
 const respondWithRedirect = (res, redirectLocation) => {
   res.writeHead(302, {
@@ -48,6 +47,7 @@ const respondWithRedirect = (res, redirectLocation) => {
 };
 
 const fatalErrorOutput = (errorComponent, store) => {
+  const stats = readStats("Client");
   return ReactDOM.renderToString(
     <Html
       component={errorComponent}
@@ -79,6 +79,8 @@ const render = (req, res, store) => {
 
   let renderString = "";
   let isError = false;
+
+  const stats = readStats("Client");
 
   try {
     renderString = ReactDOM.renderToString(
