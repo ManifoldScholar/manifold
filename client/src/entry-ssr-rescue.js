@@ -10,10 +10,11 @@ import readStats from "./servers/common/read-stats";
 
 const port = config.services.client.port;
 const socket = config.services.client.socket;
-const stats = readStats("Development");
 
 // Handle requests
 const requestHandler = (req, res) => {
+
+  const stats = readStats("Development");
   let render;
   try {
     render = ReactDOM.renderToString(<HtmlBody stats={stats} />);
@@ -35,7 +36,7 @@ const app = webApp("SSR Rescue", {
 });
 
 if (!config.environment.skipSSR)
-  app.use("/", makeRendererProxy(stats, requestHandler));
+  app.use("/", makeRendererProxy(requestHandler));
 app.use(requestHandler);
 
 webServer(app, "SSR Rescue", { port, socket });
