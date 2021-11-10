@@ -108,7 +108,7 @@ export class CommentThread extends PureComponent {
         <Utility.IconComposer
           icon="disclosureDown16"
           size={16}
-          iconClass="comment-more__icon"
+          className="comment-more__icon"
         />
       </button>
     );

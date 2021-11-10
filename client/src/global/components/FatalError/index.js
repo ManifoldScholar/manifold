@@ -101,7 +101,7 @@ export default class FatalError extends PureComponent {
                 <IconComposer
                   icon="stopSign64"
                   size={60}
-                  iconClass="fatal-error__stop-icon"
+                  className="fatal-error__stop-icon"
                 />
                 <h3>
                   {this.props.headerLineOne}

@@ -92,7 +92,7 @@ export class ExportTargetsEditContainer extends PureComponent {
               onClick: this.handleExportTargetDestroy,
               icon: "delete32",
               label: "Delete",
-              iconClass: "utility-button__icon--notice"
+              className: "utility-button__icon--notice"
             }
           ]}
         />

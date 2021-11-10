@@ -6,7 +6,7 @@ export default class IconCheck extends Component {
   static displayName = "Icon.Check";
 
   static propTypes = {
-    iconClass: PropTypes.string,
+    className: PropTypes.string,
     size: PropTypes.number,
     fill: PropTypes.string,
     stroke: PropTypes.string
@@ -18,8 +18,8 @@ export default class IconCheck extends Component {
   };
 
   render() {
-    const { iconClass, size, fill, stroke } = this.props;
-    const classes = classnames("manicon-svg", iconClass);
+    const { className, size, fill, stroke } = this.props;
+    const classes = classnames("manicon-svg", className);
 
     return (
       <svg

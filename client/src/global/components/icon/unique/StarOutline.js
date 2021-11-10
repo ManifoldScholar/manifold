@@ -6,7 +6,7 @@ export default class StarFill extends Component {
   static displayName = "Icon.StarFill";
 
   static propTypes = {
-    iconClass: PropTypes.string,
+    className: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     fill: PropTypes.string,
     stroke: PropTypes.string,
@@ -14,7 +14,7 @@ export default class StarFill extends Component {
   };
 
   static defaultProps = {
-    iconClass: "",
+    className: "",
     size: "inherit",
     stroke: "currentColor",
     fill: "currentColor",
@@ -50,8 +50,8 @@ export default class StarFill extends Component {
   }
 
   get classes() {
-    const { iconClass } = this.props;
-    return classnames("manicon-svg", "icon-star-outline", iconClass);
+    const { className } = this.props;
+    return classnames("manicon-svg", "icon-star-outline", className);
   }
 
   get fill() {

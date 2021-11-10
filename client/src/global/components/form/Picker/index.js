@@ -619,7 +619,7 @@ export class PickerComponent extends PureComponent {
                         <IconComposer
                           icon="close16"
                           size={20}
-                          iconClass="picker-input__icon picker-input__icon--reset"
+                          className="picker-input__icon picker-input__icon--reset"
                         />
                         <span className="screen-reader-text">
                           Clear selection
@@ -630,7 +630,7 @@ export class PickerComponent extends PureComponent {
                       <IconComposer
                         icon="disclosureDown16"
                         size={20}
-                        iconClass="picker-input__icon picker-input__icon--disclosure"
+                        className="picker-input__icon picker-input__icon--disclosure"
                       />
                     </div>
                   </div>
@@ -689,7 +689,7 @@ export class PickerComponent extends PureComponent {
                         <IconComposer
                           icon="circlePlus32"
                           size="default"
-                          iconClass="utility-button__icon utility-button__icon--highlight"
+                          className="utility-button__icon utility-button__icon--highlight"
                         />
                         <span className="utility-button__text">Add All</span>
                       </button>
@@ -701,7 +701,7 @@ export class PickerComponent extends PureComponent {
                         <IconComposer
                           icon="circleMinus32"
                           size="default"
-                          iconClass="utility-button__icon utility-button__icon--notice"
+                          className="utility-button__icon utility-button__icon--notice"
                         />
                         <span className="utility-button__text">Remove All</span>
                       </button>

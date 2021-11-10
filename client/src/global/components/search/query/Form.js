@@ -255,7 +255,7 @@ export default class SearchQueryForm extends PureComponent {
           </UIDConsumer>
           <button type="submit" className="search-query__submit">
             <Utility.IconComposer
-              iconClass="search-query__search-icon"
+              className="search-query__search-icon"
               icon="search16"
               size={22}
             />

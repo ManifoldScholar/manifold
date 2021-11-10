@@ -46,7 +46,7 @@ export default class ResourceImportControlsImported extends PureComponent {
             <IconComposer
               icon="arrowLeft16"
               size="default"
-              iconClass="button-icon-secondary__icon"
+              className="button-icon-secondary__icon"
             />
             <span>Back to Resources</span>
           </Link>
@@ -60,7 +60,7 @@ export default class ResourceImportControlsImported extends PureComponent {
             <IconComposer
               icon="checkmark16"
               size="default"
-              iconClass="button-icon-secondary__icon"
+              className="button-icon-secondary__icon"
             />
             <span>Reset Import</span>
           </button>

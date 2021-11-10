@@ -136,7 +136,7 @@ export class ResourceImportNew extends PureComponent {
             <IconComposer
               icon="checkmark16"
               size="default"
-              iconClass="button-icon-secondary__icon"
+              className="button-icon-secondary__icon"
             />
             <span>Continue</span>
           </button>

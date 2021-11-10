@@ -11,7 +11,7 @@ exports[`frontend/components/utility/BackLinkPrimary matches the snapshot 1`] = 
     <IconComposer
       fill="currentColor"
       icon="arrowLeft16"
-      iconClass="back-link-primary__icon"
+      className="back-link-primary__icon"
       size={24}
       svgProps={
         Object {

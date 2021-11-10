@@ -82,7 +82,7 @@ export class SettingsSubjectsEditContainer extends PureComponent {
               onClick: this.handleSubjectDestroy,
               icon: "delete32",
               label: "Delete",
-              iconClass: "utility-button__icon--notice"
+              className: "utility-button__icon--notice"
             }
           ]}
         />

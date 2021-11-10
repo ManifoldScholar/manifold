@@ -175,17 +175,17 @@ export default class ProjectCollectionAddButton extends Component {
               <IconComposer
                 icon="MinusUnique"
                 size={28}
-                iconClass="collecting-toggle__icon collecting-toggle__icon--remove"
+                className="collecting-toggle__icon collecting-toggle__icon--remove"
               />
               <IconComposer
                 icon="CheckUnique"
                 size={28}
-                iconClass="collecting-toggle__icon collecting-toggle__icon--confirm"
+                className="collecting-toggle__icon collecting-toggle__icon--confirm"
               />
               <IconComposer
                 icon="PlusUnique"
                 size={28}
-                iconClass="collecting-toggle__icon collecting-toggle__icon--add"
+                className="collecting-toggle__icon collecting-toggle__icon--add"
               />
             </div>
             {this.renderButtonGroup()}

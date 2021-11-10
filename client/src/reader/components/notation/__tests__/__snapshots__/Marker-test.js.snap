@@ -15,7 +15,7 @@ exports[`reader/components/notation/Marker matches the snapshot 1`] = `
     <IconComposer
       fill="currentColor"
       icon="resourceFilled24"
-      iconClass="notation-marker__icon"
+      className="notation-marker__icon"
       size={28}
       svgProps={
         Object {
@@ -37,7 +37,7 @@ exports[`reader/components/notation/Marker matches the snapshot 1`] = `
     <IconComposer
       fill="currentColor"
       icon="resourceFilled24"
-      iconClass="notation-marker__icon"
+      className="notation-marker__icon"
       size={28}
       svgProps={
         Object {
@@ -59,7 +59,7 @@ exports[`reader/components/notation/Marker matches the snapshot 1`] = `
     <IconComposer
       fill="currentColor"
       icon="resourceFilled24"
-      iconClass="notation-marker__icon"
+      className="notation-marker__icon"
       size={28}
       svgProps={
         Object {

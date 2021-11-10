@@ -113,7 +113,7 @@ export class ResourceImportMap extends PureComponent {
                 <IconComposer
                   icon="close16"
                   size="default"
-                  iconClass="button-icon-secondary__icon"
+                  className="button-icon-secondary__icon"
                 />
                 <span>Back</span>
               </Link>
@@ -121,7 +121,7 @@ export class ResourceImportMap extends PureComponent {
                 <IconComposer
                   icon="checkmark16"
                   size="default"
-                  iconClass="button-icon-secondary__icon"
+                  className="button-icon-secondary__icon"
                 />
                 <span>Continue</span>
               </button>

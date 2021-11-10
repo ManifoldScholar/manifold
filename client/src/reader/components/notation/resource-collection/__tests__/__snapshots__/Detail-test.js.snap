@@ -1112,7 +1112,7 @@ exports[`reader/components/notation/resource-collection/Detail matches the snaps
         <IconComposer
           fill="currentColor"
           icon="arrowRight16"
-          iconClass="button-secondary__icon"
+          className="button-secondary__icon"
           size="default"
           svgProps={
             Object {
@@ -1130,7 +1130,7 @@ exports[`reader/components/notation/resource-collection/Detail matches the snaps
         <IconComposer
           fill="currentColor"
           icon="arrowLeft16"
-          iconClass="button-secondary__icon"
+          className="button-secondary__icon"
           size="default"
           svgProps={
             Object {

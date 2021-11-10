@@ -13,7 +13,7 @@ function Checkbox({ checked, label, id, onChange }) {
         <IconComposer
           icon="checkmark16"
           size="default"
-          iconClass="checkbox__icon"
+          className="checkbox__icon"
         />
       </span>
       <span className="group-action-panel__checkbox-text">{label}</span>

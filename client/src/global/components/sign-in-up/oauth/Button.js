@@ -40,7 +40,7 @@ class Button extends Component {
     return provider.charAt(0).toUpperCase() + provider.slice(1);
   }
 
-  get iconClass() {
+  get className() {
     if (this.props.iconName) {
       return this.props.iconName;
     }
@@ -59,9 +59,9 @@ class Button extends Component {
 
     const icon = this.props.hasIcon ? (
       <IconComposer
-        icon={this.iconClass}
+        icon={this.className}
         size={26}
-        iconClass="button-secondary__icon"
+        className="button-secondary__icon"
       />
     ) : null;
 

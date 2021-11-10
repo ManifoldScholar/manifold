@@ -46,7 +46,7 @@ export default class ProjectCollectionList extends PureComponent {
             <IconComposer
               icon="plus16"
               size={20}
-              iconClass={classNames(
+              className={classNames(
                 "button-icon-secondary__icon",
                 "button-icon-secondary__icon--large"
               )}

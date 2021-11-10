@@ -37,7 +37,7 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
           <IconComposer
             fill="currentColor"
             icon="disclosureDown24"
-            iconClass="reader-header__button-icon reader-header__button-icon--large"
+            className="reader-header__button-icon reader-header__button-icon--large"
             size="default"
             svgProps={
               Object {
@@ -48,7 +48,7 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
           <IconComposer
             fill="currentColor"
             icon="disclosureDown16"
-            iconClass="reader-header__button-icon reader-header__button-icon--small"
+            className="reader-header__button-icon reader-header__button-icon--small"
             size={20}
             svgProps={
               Object {

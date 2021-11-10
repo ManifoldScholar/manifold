@@ -18,7 +18,7 @@ export default class ResourceImportResultsImporting extends PureComponent {
         <IconComposer
           icon="plus16"
           size={18}
-          iconClass="results-header__icon"
+          className="results-header__icon"
         />
         <span>{`Row #${resourceImportRow.lineNumber} is being imported.`}</span>
       </>

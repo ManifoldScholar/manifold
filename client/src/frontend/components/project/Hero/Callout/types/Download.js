@@ -40,7 +40,7 @@ export default class ProjectHeroCalloutDownload extends PureComponent {
       <Utility.IconComposer
         icon={this.icon}
         size={this.iconSize}
-        iconClass={`${this.props.blockClass}__${this.typeClass}-icon`}
+        className={`${this.props.blockClass}__${this.typeClass}-icon`}
       />
     );
   }

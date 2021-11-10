@@ -107,7 +107,7 @@ export class TextStylesContainer extends PureComponent {
               <IconComposer
                 icon="plus16"
                 size={18}
-                iconClass={classNames(
+                className={classNames(
                   "button-icon-secondary__icon",
                   "button-icon-secondary__icon--large"
                 )}

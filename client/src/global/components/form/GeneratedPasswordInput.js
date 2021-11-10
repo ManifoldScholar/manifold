@@ -110,7 +110,7 @@ class FormGeneratedPasswordInput extends Component {
               <IconComposer
                 icon={icon}
                 size="default"
-                iconClass="password-input__visibility-icon"
+                className="password-input__visibility-icon"
               />
               <span className="screen-reader-text">
                 {this.state.showPassword ? "hide password" : "show password"}

@@ -42,7 +42,7 @@ function ReadingGroupMemberEditContainer({
             onClick: () => onRemoveClick(membership),
             icon: "delete24",
             label: "Delete",
-            iconClass: "utility-button__icon utility-button__icon--notice"
+            className: "utility-button__icon utility-button__icon--notice"
           }
         ]}
         buttonLayout="inline"

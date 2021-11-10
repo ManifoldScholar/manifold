@@ -95,7 +95,7 @@ class FormSelect extends Component {
                 <IconComposer
                   icon="disclosureDown24"
                   size={24}
-                  iconClass="form-select__icon"
+                  className="form-select__icon"
                 />
                 <select
                   id={`${this.idPrefix}-${id}`}

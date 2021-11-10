@@ -96,7 +96,7 @@ export default class ColorPicker extends Component {
                       <IconComposer
                         icon="checkmark16"
                         size={18.5}
-                        iconClass="color-picker__indicator-icon"
+                        className="color-picker__indicator-icon"
                       />
                     )}
                   </span>

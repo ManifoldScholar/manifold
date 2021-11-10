@@ -264,7 +264,7 @@ class AnnotationEditor extends PureComponent {
               <IconComposer
                 icon="link24"
                 size="default"
-                iconClass="annotation-group-options__icon annotation-group-options__icon--link"
+                className="annotation-group-options__icon annotation-group-options__icon--link"
               />
             </Link>
           </div>
@@ -328,7 +328,7 @@ class AnnotationEditor extends PureComponent {
                       <IconComposer
                         icon="readingGroup24"
                         size="default"
-                        iconClass="annotation-editor__action-icon"
+                        className="annotation-editor__action-icon"
                       />
                       <span id={`${id}-label`}>
                         {this.canAccessReadingGroups
