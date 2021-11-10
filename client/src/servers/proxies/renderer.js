@@ -8,7 +8,7 @@ import CookieHelper from "helpers/cookie/Server";
 
 const ssrRenderUrl = `http://${config.services.client.domain}:${config.services.client.sparePort}`;
 
-export default function makeRendererProxy(stats, requestHandler) {
+export default function makeRendererProxy(requestHandler) {
   const reactServerProxy = proxy({
     target: ssrRenderUrl,
     changeOrigin: true,
