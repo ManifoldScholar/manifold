@@ -45,7 +45,7 @@ export default class Filters extends Component {
           <IconComposer
             icon="checkmark16"
             size="default"
-            iconClass="checkbox__icon"
+            className="checkbox__icon"
           />
         </div>
         {label}

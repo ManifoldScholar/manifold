@@ -48,13 +48,13 @@ class ReadingGroupSettings extends PureComponent {
   }
 
   get buttons() {
-    const iconClass = "utility-button__icon";
+    const className = "utility-button__icon";
     const buttons = [
       {
         onClick: this.handleDelete,
         icon: "delete24",
         label: "Delete",
-        iconClass: `${iconClass} ${iconClass}--notice`
+        className: `${className} ${className}--notice`
       }
     ];
 
@@ -63,7 +63,7 @@ class ReadingGroupSettings extends PureComponent {
         onClick: () => this.handleDrawerToggle("duplicate"),
         icon: "duplicate24",
         label: "Duplicate",
-        iconClass,
+        className,
         ariaProps: {
           "aria-expanded": this.state.showActionPanel === "duplicate",
           "aria-controls": "group-settings-duplicate-region"

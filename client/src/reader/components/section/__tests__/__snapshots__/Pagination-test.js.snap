@@ -20,7 +20,7 @@ exports[`reader/components/section/Pagination matches the snapshot 1`] = `
       <IconComposer
         fill="currentColor"
         icon="circleArrowRight64"
-        iconClass="section-pagination__icon section-pagination__icon--next"
+        className="section-pagination__icon section-pagination__icon--next"
         size={48}
         svgProps={
           Object {

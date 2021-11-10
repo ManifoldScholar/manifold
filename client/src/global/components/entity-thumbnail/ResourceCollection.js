@@ -39,7 +39,7 @@ export default class EntityThumbnailResource extends PureComponent {
     const { width, height, className } = this.props;
     return (
       <Utility.IconComposer
-        iconClass={className}
+        className={className}
         svgProps={{ width, height }}
         icon="resourceCollection64"
       />

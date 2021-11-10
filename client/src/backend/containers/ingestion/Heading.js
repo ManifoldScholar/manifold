@@ -59,7 +59,7 @@ export default class IngestionHeader extends Component {
           <IconComposer
             icon="textsBook64"
             size={56}
-            iconClass="backend-header__type-icon"
+            className="backend-header__type-icon"
           />
         </div>
       </figure>

@@ -256,7 +256,7 @@ class AppearanceMenuBody extends Component {
             <Utility.IconComposer
               icon="CheckUnique"
               size={30}
-              iconClass="appearance-menu__color-scheme-icon"
+              className="appearance-menu__color-scheme-icon"
             />
             <span className="screen-reader-text">{option.label}</span>
           </label>
@@ -374,7 +374,7 @@ class AppearanceMenuBody extends Component {
           >
             <Utility.IconComposer
               icon="MarginIncreaseUnique"
-              iconClass="appearance-menu__menu-icon"
+              className="appearance-menu__menu-icon"
             />
             <span className="screen-reader-text">
               {"Increase text margins"}
@@ -387,7 +387,7 @@ class AppearanceMenuBody extends Component {
           >
             <Utility.IconComposer
               icon="MarginDecreaseUnique"
-              iconClass="appearance-menu__menu-icon"
+              className="appearance-menu__menu-icon"
             />
             <span className="screen-reader-text">
               {"Decrease text margins"}
@@ -418,7 +418,7 @@ class AppearanceMenuBody extends Component {
             <Utility.IconComposer
               icon="reload24"
               size={32}
-              iconClass="appearance-menu__reload-icon"
+              className="appearance-menu__reload-icon"
             />
             <span>{"Reset to Defaults"}</span>
           </button>

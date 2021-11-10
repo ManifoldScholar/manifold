@@ -116,7 +116,7 @@ export default class AnnotationShareEditor extends PureComponent {
                 <IconComposer
                   icon="copy24"
                   size="default"
-                  iconClass="button-secondary__icon"
+                  className="button-secondary__icon"
                 />
                 <span className="button-secondary__text">Copy</span>
               </button>

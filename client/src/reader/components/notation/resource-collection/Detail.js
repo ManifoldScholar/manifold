@@ -87,7 +87,7 @@ export default class ResourceCollectionDetail extends PureComponent {
               <IconComposer
                 icon="arrowRight16"
                 size="default"
-                iconClass="button-secondary__icon"
+                className="button-secondary__icon"
               />
             </Link>
             <br />
@@ -103,7 +103,7 @@ export default class ResourceCollectionDetail extends PureComponent {
               <IconComposer
                 icon="arrowLeft16"
                 size="default"
-                iconClass="button-secondary__icon"
+                className="button-secondary__icon"
               />
               <span className="button-secondary__text">Return to Reader</span>
             </button>

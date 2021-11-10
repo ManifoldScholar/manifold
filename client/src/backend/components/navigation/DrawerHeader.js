@@ -48,7 +48,7 @@ export default class DrawerEntityHeader extends PureComponent {
                   <Utility.IconComposer
                     icon={this.props.icon}
                     size={44}
-                    iconClass="drawer-header__title-icon"
+                    className="drawer-header__title-icon"
                   />
                 )}
                 <span className="drawer-header__title-text">

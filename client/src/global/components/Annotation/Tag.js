@@ -11,7 +11,7 @@ const Tag = ({ className, children, icon, iconSize, iconCount }) => (
         <IconComposer
           icon={icon}
           size={iconSize}
-          iconClass="annotation-tag__icon"
+          className="annotation-tag__icon"
         />
       )}
     </span>
@@ -20,7 +20,7 @@ const Tag = ({ className, children, icon, iconSize, iconCount }) => (
         <IconComposer
           icon={icon}
           size={iconSize}
-          iconClass="annotation-tag__icon"
+          className="annotation-tag__icon"
         />
         <span className="annotation-tag__text annotation-tag__text--count">
           {iconCount}

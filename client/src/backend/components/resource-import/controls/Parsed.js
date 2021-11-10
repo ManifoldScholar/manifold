@@ -47,7 +47,7 @@ export default class ResourceImportControlsParsed extends PureComponent {
             <IconComposer
               icon="checkmark16"
               size="default"
-              iconClass="button-icon-secondary__icon"
+              className="button-icon-secondary__icon"
             />
             <span>Start Import</span>
           </button>
@@ -61,7 +61,7 @@ export default class ResourceImportControlsParsed extends PureComponent {
             <IconComposer
               icon="close16"
               size="default"
-              iconClass="button-icon-secondary__icon"
+              className="button-icon-secondary__icon"
             />
             <span>Back</span>
           </Link>

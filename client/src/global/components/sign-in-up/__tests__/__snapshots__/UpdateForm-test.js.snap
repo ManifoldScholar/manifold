@@ -213,7 +213,7 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
       <IconComposer
         fill="currentColor"
         icon="arrowLongRight16"
-        iconClass="button-secondary__icon"
+        className="button-secondary__icon"
         size="default"
         svgProps={
           Object {

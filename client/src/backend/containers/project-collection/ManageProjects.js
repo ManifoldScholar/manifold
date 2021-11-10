@@ -65,7 +65,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     );
   }
 
-  get buttonIconClasses() {
+  get buttonclassNamees() {
     return classNames(
       "button-icon-secondary__icon",
       "button-icon-secondary__icon--right",
@@ -264,7 +264,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
             <IconComposer
               icon="close16"
               size="default"
-              iconClass={this.buttonIconClasses}
+              className={this.buttonclassNamees}
             />
           </button>
         </div>

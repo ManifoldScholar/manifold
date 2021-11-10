@@ -1116,7 +1116,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                                       <IconComposer
                                                         fill="currentColor"
                                                         icon="upload64"
-                                                        iconClass="contents-empty__icon"
+                                                        className="contents-empty__icon"
                                                         size={82}
                                                         svgProps={
                                                           Object {
@@ -1127,7 +1127,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                                         <Upload
                                                           fill="currentColor"
                                                           icon="upload64"
-                                                          iconClass="contents-empty__icon svg-icon--upload64"
+                                                          className="contents-empty__icon svg-icon--upload64"
                                                           size={82}
                                                           stroke="currentColor"
                                                           svgProps={
@@ -1361,7 +1361,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   <IconComposer
                                     fill="currentColor"
                                     icon="checkmark16"
-                                    iconClass="button-icon-secondary__icon"
+                                    className="button-icon-secondary__icon"
                                     size="default"
                                     svgProps={
                                       Object {
@@ -1372,7 +1372,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     <Checkmark
                                       fill="currentColor"
                                       icon="checkmark16"
-                                      iconClass="button-icon-secondary__icon svg-icon--checkmark16"
+                                      className="button-icon-secondary__icon svg-icon--checkmark16"
                                       size="default"
                                       stroke="currentColor"
                                       svgProps={

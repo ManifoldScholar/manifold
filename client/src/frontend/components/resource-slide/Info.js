@@ -30,7 +30,7 @@ export default class Info extends Component {
         <IconComputed.Resource
           size={120}
           icon={kind}
-          iconClass="resource-slide-figure__resource-icon"
+          className="resource-slide-figure__resource-icon"
         />
         <span className="resource-type">{kind}</span>
         <span className="resource-date">

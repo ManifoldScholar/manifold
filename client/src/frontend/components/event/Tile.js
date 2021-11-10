@@ -90,7 +90,7 @@ export class EventTile extends Component {
               <Utility.IconComposer
                 icon={icon}
                 size={48}
-                iconClass={`${baseClass}__icon`}
+                className={`${baseClass}__icon`}
               />
             )}
             {header && <div className={`${baseClass}__header`}>{header}</div>}
@@ -130,7 +130,7 @@ export class EventTile extends Component {
             <Utility.IconComposer
               icon="delete32"
               size={26}
-              iconClass={"utility-button__icon utility-button__icon--notice"}
+              className={"utility-button__icon utility-button__icon--notice"}
             />
             <span className="screen-reader-text">Delete Event</span>
           </div>

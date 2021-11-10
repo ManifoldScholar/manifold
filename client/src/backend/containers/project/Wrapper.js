@@ -89,7 +89,7 @@ export class ProjectWrapperContainer extends PureComponent {
           <IconComposer
             icon="eyeOpen32"
             size={26}
-            iconClass="utility-button__icon utility-button__icon--highlight"
+            className="utility-button__icon utility-button__icon--highlight"
           />
           <span className="utility-button__text">View</span>
         </Link>
@@ -101,7 +101,7 @@ export class ProjectWrapperContainer extends PureComponent {
             <IconComposer
               icon="delete32"
               size={26}
-              iconClass="utility-button__icon utility-button__icon--notice"
+              className="utility-button__icon utility-button__icon--notice"
             />
             <span className="utility-button__text">Delete</span>
           </button>

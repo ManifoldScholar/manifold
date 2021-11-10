@@ -25,7 +25,7 @@ export default class FormUploadEmpty extends PureComponent {
         <IconComposer
           icon="upload64"
           size={82}
-          iconClass="contents-empty__icon"
+          className="contents-empty__icon"
         />
         <div className="message">
           <p className="primary">

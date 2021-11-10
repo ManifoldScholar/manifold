@@ -22,7 +22,7 @@ export default class ResourceImportResultsImported extends PureComponent {
         <IconComposer
           icon="checkmark16"
           size={18}
-          iconClass="results-header__icon"
+          className="results-header__icon"
         />
         <span>
           {`Row #${resourceImportRow.lineNumber} ${verb} `}

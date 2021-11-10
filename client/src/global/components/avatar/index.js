@@ -57,7 +57,7 @@ export default class Avatar extends Component {
         aria-hidden={this.props.ariaHidden}
       >
         <Utility.IconComposer
-          iconClass={`${this.baseClass}__icon`}
+          className={`${this.baseClass}__icon`}
           icon={this.icon}
           size={this.props.iconSize}
         />

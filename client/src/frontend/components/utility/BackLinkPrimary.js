@@ -26,7 +26,7 @@ export default class UtilityBackLinkPrimary extends Component {
           <IconComposer
             icon="arrowLeft16"
             size={24}
-            iconClass="back-link-primary__icon"
+            className="back-link-primary__icon"
           />
           <span className="back-link-primary__back-text">
             {this.props.backText}
