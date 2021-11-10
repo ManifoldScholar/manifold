@@ -19,7 +19,7 @@ function UserLink({ as = "a", to, title, srTitle, icon, onClick }) {
           <IconComposer
             icon={icon}
             size={32}
-            iconClass="nested-nav__button-icon"
+            className="nested-nav__button-icon"
           />
           <span className="nested-nav__button-text">{title}</span>
         </div>

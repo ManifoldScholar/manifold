@@ -18,7 +18,7 @@ export default class ResourceImportResultsSkipped extends PureComponent {
         <IconComposer
           icon="arrowRight16"
           size={18}
-          iconClass="results-header__icon"
+          className="results-header__icon"
         />
         <span>
           {`Row #${resourceImportRow.lineNumber} was skipped as marked.`}

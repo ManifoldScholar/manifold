@@ -31,7 +31,7 @@ export default class InlineValue extends React.PureComponent {
           <IconComposer
             icon={this.icon}
             size={24}
-            iconClass="table__inline-icon"
+            className="table__inline-icon"
           />
         )}
         <span aria-hidden={this.hasSrLabel}>{this.label}</span>

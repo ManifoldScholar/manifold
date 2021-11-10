@@ -24,7 +24,7 @@ function Info({ resource, detailUrl, itemHeadingLevel = 4 }) {
           <IconComposer
             icon="arrowRight16"
             size={20}
-            iconClass="resource-card__arrow-link-icon"
+            className="resource-card__arrow-link-icon"
           />
         </div>
       </div>

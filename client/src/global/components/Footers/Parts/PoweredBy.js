@@ -84,7 +84,7 @@ class PoweredBy extends PureComponent {
               <Utility.IconComposer
                 icon="manifoldLogo32"
                 size="default"
-                iconClass={classNames({
+                className={classNames({
                   "app-footer-powered-by__logo-icon": true,
                   "app-footer-powered-by__logo-icon--dull": this.dull
                 })}

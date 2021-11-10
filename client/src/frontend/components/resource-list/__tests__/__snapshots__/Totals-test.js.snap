@@ -18,7 +18,7 @@ exports[`frontend/components/resource-list/Totals matches the snapshot 1`] = `
     <IconComposer
       fill="currentColor"
       icon="arrowLongRight16"
-      iconClass="resource-total__icon"
+      className="resource-total__icon"
       size={30}
       svgProps={
         Object {

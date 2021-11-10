@@ -41,7 +41,7 @@ export default class FormColumnMapAttribute extends PureComponent {
                   <IconComposer
                     icon="close16"
                     size="default"
-                    iconClass="cancel__icon"
+                    className="cancel__icon"
                   />
                 </button>
               )}

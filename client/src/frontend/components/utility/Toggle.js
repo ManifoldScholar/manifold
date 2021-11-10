@@ -63,7 +63,7 @@ export default class Toggle extends Component {
           <IconComposer
             icon={option.icon}
             size={30}
-            iconClass="button-switch-primary__icon"
+            className="button-switch-primary__icon"
           />
         )}
         <span className="button-switch-primary__label">{option.label}</span>

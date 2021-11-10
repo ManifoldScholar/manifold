@@ -41,7 +41,7 @@ export default class TextCover extends PureComponent {
           <Utility.IconComposer
             size={78}
             icon="textsLoosePages64"
-            iconClass={`${this.props.baseClass}__cover-svg`}
+            className={`${this.props.baseClass}__cover-svg`}
           />
         )}
       </figure>

@@ -30,7 +30,7 @@ exports[`global/components/Notification matches the snapshot 1`] = `
       <IconComposer
         fill="currentColor"
         icon="close32"
-        iconClass="notification__button-icon"
+        className="notification__button-icon"
         size={36}
         svgProps={
           Object {

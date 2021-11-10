@@ -29,7 +29,7 @@ export class LayoutButtonNavigation extends Component {
         <IconComposer
           icon={icon}
           size={48}
-          iconClass="button-icon-primary__icon"
+          className="button-icon-primary__icon"
         />
         <span className="button-icon-primary__text">{label}</span>
       </>

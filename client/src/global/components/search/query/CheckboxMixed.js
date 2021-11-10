@@ -47,7 +47,7 @@ function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
                   <Utility.IconComposer
                     icon="checkmark16"
                     size="default"
-                    iconClass="checkbox__icon"
+                    className="checkbox__icon"
                   />
                 </div>
                 Everything
@@ -72,7 +72,7 @@ function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
                         <Utility.IconComposer
                           icon="checkmark16"
                           size="default"
-                          iconClass="checkbox__icon"
+                          className="checkbox__icon"
                         />
                       </div>
                       {label}

@@ -31,7 +31,7 @@ exports[`backend/components/project-collection/ListItem matches the snapshot 1`]
         <IconComposer
           fill="currentColor"
           icon="eyeClosed32"
-          iconClass="project-collection-list-item__icon eye-closed"
+          className="project-collection-list-item__icon eye-closed"
           size={30}
           svgProps={
             Object {
@@ -51,7 +51,7 @@ exports[`backend/components/project-collection/ListItem matches the snapshot 1`]
         <IconComposer
           fill="currentColor"
           icon="grabber32"
-          iconClass="project-collection-list-item__icon"
+          className="project-collection-list-item__icon"
           size={30}
           svgProps={
             Object {

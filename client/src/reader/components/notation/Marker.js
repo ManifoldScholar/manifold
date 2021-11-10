@@ -93,7 +93,7 @@ export class NotationMarker extends Component {
               <IconComposer
                 icon="resourceFilled24"
                 size={28}
-                iconClass="notation-marker__icon"
+                className="notation-marker__icon"
               />
             </span>
           );

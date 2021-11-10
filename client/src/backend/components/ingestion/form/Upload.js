@@ -115,7 +115,7 @@ class IngestionFormUpload extends PureComponent {
                   <IconComposer
                     icon="close16"
                     size="default"
-                    iconClass="button-icon-secondary__icon"
+                    className="button-icon-secondary__icon"
                   />
                   <span>Cancel</span>
                 </button>
@@ -128,7 +128,7 @@ class IngestionFormUpload extends PureComponent {
                 <IconComposer
                   icon="checkmark16"
                   size="default"
-                  iconClass="button-icon-secondary__icon"
+                  className="button-icon-secondary__icon"
                 />
                 <span>Continue</span>
               </button>

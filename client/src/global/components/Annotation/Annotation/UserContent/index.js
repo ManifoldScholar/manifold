@@ -190,7 +190,7 @@ class AnnotationDetail extends PureComponent {
           <IconComposer
             icon="arrowLongRight16"
             size={24}
-            iconClass="annotation-footer-button__arrow-icon"
+            className="annotation-footer-button__arrow-icon"
           />
         </span>
       </button>

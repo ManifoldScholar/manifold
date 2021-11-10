@@ -66,7 +66,7 @@ export default class DirectionalButton extends PureComponent {
         <IconComposer
           icon={this.circleArrowIcon}
           size={50}
-          iconClass={classNames(
+          className={classNames(
             "resource-slideshow__pagination-icon",
             `resource-slideshow__pagination-icon--${direction}`,
             "resource-slideshow__pagination-icon--large"
@@ -75,7 +75,7 @@ export default class DirectionalButton extends PureComponent {
         <IconComposer
           icon={this.arrowIcon}
           size="default"
-          iconClass={classNames(
+          className={classNames(
             "resource-slideshow__pagination-icon",
             `resource-slideshow__pagination-icon--${direction}`,
             "resource-slideshow__pagination-icon--small"

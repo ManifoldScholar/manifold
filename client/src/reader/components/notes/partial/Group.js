@@ -60,7 +60,7 @@ export default function Group(props) {
               <IconComposer
                 icon="disclosureDown24"
                 size="default"
-                iconClass={classNames({
+                className={classNames({
                   "notes-filtered-list__disclosure-icon": true,
                   "notes-filtered-list__disclosure-icon--expanded": visible
                 })}

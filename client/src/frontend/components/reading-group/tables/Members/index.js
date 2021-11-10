@@ -128,7 +128,7 @@ export default class MembersTable extends PureComponent {
                 <IconComposer
                   icon="arrowRight16"
                   size={20}
-                  iconClass={classNames({
+                  className={classNames({
                     "table__link-arrow": true,
                     "table__link-arrow--active": hovering
                   })}

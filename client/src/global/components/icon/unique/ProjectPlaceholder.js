@@ -9,7 +9,7 @@ export default class SVGProjectPlaceholder extends Component {
     color: PropTypes.string,
     ariaLabel: PropTypes.bool,
     mode: PropTypes.oneOf(["responsive", "small", "large"]),
-    iconClass: PropTypes.string
+    className: PropTypes.string
   };
 
   static defaultProps = {
@@ -21,8 +21,8 @@ export default class SVGProjectPlaceholder extends Component {
     return "project-thumb-placeholder";
   }
 
-  get iconClass() {
-    return this.props.iconClass;
+  get className() {
+    return this.props.className;
   }
 
   get ariaLabel() {
@@ -153,7 +153,7 @@ export default class SVGProjectPlaceholder extends Component {
 
     return classNames(
       this.blockClass,
-      this.iconClass,
+      this.className,
       `${this.blockClass}--${type}`,
       `${this.blockClass}--${colorModifier}`
     );

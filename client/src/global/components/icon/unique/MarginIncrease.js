@@ -4,7 +4,7 @@ import classnames from "classnames";
 
 export default class MarginIncrease extends Component {
   static propTypes = {
-    iconClass: PropTypes.string,
+    className: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     stroke: PropTypes.string,
     fill: PropTypes.string,
@@ -12,7 +12,7 @@ export default class MarginIncrease extends Component {
   };
 
   static defaultProps = {
-    iconClass: "appearance-menu__menu-icon",
+    className: "appearance-menu__menu-icon",
     size: "inherit",
     stroke: "currentColor",
     fill: "currentColor",
@@ -48,8 +48,8 @@ export default class MarginIncrease extends Component {
   }
 
   get classes() {
-    const { iconClass } = this.props;
-    return classnames("manicon-svg", "icon-two-color", iconClass);
+    const { className } = this.props;
+    return classnames("manicon-svg", "icon-two-color", className);
   }
 
   get fill() {

@@ -9,7 +9,7 @@ function ListItem({ icon, label, value }) {
         <Utility.IconComposer
           icon={icon}
           size={32}
-          iconClass="analytics-list-item__icon"
+          className="analytics-list-item__icon"
         />
         <h4>{label}</h4>
       </span>

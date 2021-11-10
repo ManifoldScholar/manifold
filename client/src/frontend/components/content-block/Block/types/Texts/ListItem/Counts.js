@@ -29,7 +29,7 @@ export default class TextListListItemCounts extends Component {
           <Utility.IconComposer
             size={32}
             icon="interactAnnotate32"
-            iconClass={`${this.props.baseClass}__interaction-icon`}
+            className={`${this.props.baseClass}__interaction-icon`}
           />
           <span
             aria-hidden
@@ -45,7 +45,7 @@ export default class TextListListItemCounts extends Component {
           <Utility.IconComposer
             size={32}
             icon="interactHighlight32"
-            iconClass={`${this.props.baseClass}__interaction-icon`}
+            className={`${this.props.baseClass}__interaction-icon`}
           />
           <span
             aria-hidden
