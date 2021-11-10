@@ -87,7 +87,11 @@
   },
   "dependencies": {
     "@castiron/style-mixins": "^1.0.6",
-    "linaria": "3.0.0-beta.14",
+    "@linaria/babel-preset": "^3.0.0-beta.13",
+    "@linaria/core": "^3.0.0-beta.13",
+    "@linaria/react": "^3.0.0-beta.13",
+    "@linaria/shaker": "^3.0.0-beta.13",
+    "@linaria/webpack4-loader": "^3.0.0-beta.13",
     "actioncable": "~5.0.2",
     "autolinker": "^1.x",
     "autoprefixer": "^9.0",

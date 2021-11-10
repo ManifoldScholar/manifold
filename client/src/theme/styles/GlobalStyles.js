@@ -5,12 +5,22 @@ import baseStyles from "./base";
 import componentStyles from "./components";
 import utilityStyles from "./utility";
 
-export default css`
+import aStyles from "./a"
+
+const styles = css`
   :global() {
-    ${rootVariables}
-    ${vendorStyles}
-    ${baseStyles}
-    ${utilityStyles}
-    ${componentStyles}
+    ${aStyles}
   }
 `;
+
+// const styles = css`
+//   :global() {
+//     ${rootVariables}
+//     ${vendorStyles}
+//     ${baseStyles}
+//     ${utilityStyles}
+//     ${componentStyles}
+//   }
+// `;
+
+

@@ -52,10 +52,6 @@ export default function buildWebpackConfiguration(target = "web") {
                 cacheDirectory: true
               }
             },
-            {
-              loader: require.resolve("@linaria/webpack4-loader"),
-              options: { sourceMap: !environment.isBuild }
-            }
           ]
         },
 
@@ -66,22 +62,6 @@ export default function buildWebpackConfiguration(target = "web") {
           use: [...cssLoaders].filter(loader => loader !== null)
         },
 
-        // SASS loader: sass > css > style or css extract into separate file.
-        {
-          test: /\.(scss|sass)$/,
-          // include: [paths.src, paths.plugins],
-          use: [
-            ...cssLoaders,
-            {
-              loader: "sass-loader",
-              options: {
-                sassOptions: {
-                  outputStyle: "expanded"
-                }
-              }
-            }
-          ].filter(loader => loader !== null)
-        },
 
         // url-loader includes small file in the bundle, inline, and passes large files to
         // file-loader
@@ -117,10 +97,10 @@ export default function buildWebpackConfiguration(target = "web") {
     },
 
     plugins: [
-      new MiniCssExtractPlugin({
-        filename: `${nameTemplate}.css`,
-        chunkFilename: `chunk-${nameTemplate}.css`
-      }),
+      // new MiniCssExtractPlugin({
+      //   filename: `${nameTemplate}.css`,
+      //   chunkFilename: `chunk-${nameTemplate}.css`
+      // }),
 
       new CircularDependencyPlugin({
         exclude: /a\.js|node_modules|src\/global\/containers\/comment\/|src\/global\/components\/comment\//,

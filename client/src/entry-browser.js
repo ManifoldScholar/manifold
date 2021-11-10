@@ -2,12 +2,12 @@
 /**
  * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
  */
-
 import "@babel/polyfill";
 import "focus-visible";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "global/containers/App";
+import Theme from "global/containers/Theme";
 import ch from "./helpers/consoleHelpers";
 import config from "config";
 import manifoldBootstrap from "./bootstrap";
@@ -74,7 +74,7 @@ class EntryBrowser {
 
   render = () => {
     const renderMethod = this.ssrIsPresent ? ReactDOM.hydrate : ReactDOM.render;
-    renderMethod(<App store={this.store} />, this.root);
+    renderMethod(<Theme><App store={this.store} /></Theme>, this.root);
     if (config.environment.isDevelopment) this.enableDevelopment();
   };
 

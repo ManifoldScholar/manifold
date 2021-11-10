@@ -37,7 +37,7 @@ const browserConfig = {
           },
           {
             loader: require.resolve("@linaria/webpack4-loader"),
-            options: { sourceMap: true }
+            options: { sourceMap: false }
           }
         ]
       }
@@ -72,4 +72,8 @@ const config = mergeWithRules({
     },
   },
 })(baseConfig, browserConfig)
+
+// const util = require('util')
+// console.log(util.inspect(config, {showHidden: false, depth: null, colors: true}))
+
 export default config;
