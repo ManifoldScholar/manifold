@@ -358,13 +358,13 @@ const routes = {
       path: "/unsubscribe/:token",
       helper: token => `/unsubscribe/${token}`
     },
-    {
-      name: "api",
-      exact: true,
-      component: "ApiDocs",
-      path: "/docs/api",
-      helper: () => "/docs/api"
-    },
+    // {
+    //   name: "api",
+    //   exact: true,
+    //   component: "ApiDocs",
+    //   path: "/docs/api",
+    //   helper: () => "/docs/api"
+    // },
     {
       name: "frontend",
       exact: true,
