@@ -1,4 +1,4 @@
-import { styled } from "@linaria/react";
+import styled from "@emotion/styled";
 
 export const Avatar = styled.img`
   width: var(--Avatar-width);
