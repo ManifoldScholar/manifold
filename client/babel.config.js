@@ -6,10 +6,10 @@ const presets = [
       useBuiltIns: "entry",
       corejs: "2.6.9"
     }
-  ],
-  "@linaria"
+  ]
 ];
 const plugins = [
+  "@emotion",
   "@babel/plugin-proposal-class-properties",
   ["@babel/plugin-proposal-decorators", { legacy: true }],
   "@babel/plugin-proposal-export-default-from",

@@ -3,7 +3,8 @@ import config from "config";
 import ch from "./helpers/consoleHelpers";
 import React from "react";
 import ReactDOM from "react-dom/server";
-import Html from "./helpers/Html";
+import HtmlBody from "./helpers/HtmlBody";
+import wrapHtmlBody from "./helpers/wrapHtmlBody";
 import App from "global/containers/App";
 import createStore from "./store/createStore";
 import webServer from "./servers/common/server";
@@ -20,6 +21,9 @@ import { createLocation } from "history";
 import getRoutes from "/routes";
 import FatalError from "global/components/FatalError";
 import { resetServerContext as resetDndServerContext } from "react-beautiful-dnd";
+import { CacheProvider } from "@emotion/react";
+import createEmotionServer from "@emotion/server/create-instance";
+import createCache from "@emotion/cache";
 
 // Node 8.x on Ubuntu 18 leads to failed SSL handshakes. Setting this
 // default TLS value appears to fix this. I believe this issue has
@@ -49,7 +53,7 @@ const respondWithRedirect = (res, redirectLocation) => {
 const fatalErrorOutput = (errorComponent, store) => {
   const stats = readStats("Client");
   return ReactDOM.renderToString(
-    <Html
+    <HtmlBody
       component={errorComponent}
       disableBrowserRender
       stats={stats}
@@ -81,15 +85,17 @@ const render = (req, res, store) => {
   let isError = false;
 
   const stats = readStats("Client");
+  const cache = createCache({ key: "emotion" });
+  const {
+    extractCriticalToChunks,
+    constructStyleTagsFromChunks
+  } = createEmotionServer(cache);
 
   try {
     renderString = ReactDOM.renderToString(
-      <Html
-        helmetContext={helmetContext}
-        component={appComponent}
-        stats={stats}
-        store={store}
-      />
+      <CacheProvider value={cache}>
+        <HtmlBody component={appComponent} stats={stats} store={store} />
+      </CacheProvider>
     );
   } catch (renderError) {
     isError = true;
@@ -107,13 +113,22 @@ const render = (req, res, store) => {
         const errorComponent = <FatalError fatalError={state.fatalError} />;
         renderString = fatalErrorOutput(errorComponent, store);
       }
+
+      const chunks = extractCriticalToChunks(renderString);
+      const styleTags = constructStyleTagsFromChunks(chunks);
+      const htmlOutput = wrapHtmlBody({
+        store,
+        stats,
+        styleTags,
+        body: renderString
+      });
       if (isError) {
         res.statusCode = 500;
         res.setHeader("Content-Type", "text/html");
-        res.end(renderString);
+        res.end(htmlOutput);
       } else {
         res.setHeader("Content-Type", "text/html");
-        res.end("<!doctype html>\n" + renderString);
+        res.end("<!doctype html>\n" + htmlOutput);
       }
     }
   }

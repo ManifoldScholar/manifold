@@ -7,13 +7,14 @@ import "focus-visible";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "global/containers/App";
-import Theme from "global/containers/Theme";
 import ch from "./helpers/consoleHelpers";
 import config from "config";
 import manifoldBootstrap from "./bootstrap";
 import has from "lodash/has";
 import createStore from "store/createStore";
 import CookieHelper from "helpers/cookie/Browser";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
 
 class EntryBrowser {
   constructor() {
@@ -73,8 +74,14 @@ class EntryBrowser {
   }
 
   render = () => {
+    const cache = createCache({ key: "emotion" });
     const renderMethod = this.ssrIsPresent ? ReactDOM.hydrate : ReactDOM.render;
-    renderMethod(<Theme><App store={this.store} /></Theme>, this.root);
+    renderMethod(
+      <CacheProvider value={cache}>
+        <App store={this.store} />
+      </CacheProvider>,
+      this.root
+    );
     if (config.environment.isDevelopment) this.enableDevelopment();
   };
 

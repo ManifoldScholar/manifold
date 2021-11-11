@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "theme/styles/GlobalStyles";
-import { Global } from '@emotion/react'
-console.log(styles, 'styles');
+import { Global } from "@emotion/react";
+import styles from "theme/styles/globalStyles";
+
 export default function Theme({ children }) {
   return (
     <>
-      <Global styles={styles}/ >
+      <Global styles={styles} />
       {children}
     </>
-  )
+  );
 }

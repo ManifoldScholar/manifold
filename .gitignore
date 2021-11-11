@@ -56,6 +56,3 @@ doc
 client/plugins*
 
 __MACOSX
-
-## Linaria cache ##
-client/.linaria-cache

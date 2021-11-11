@@ -2,6 +2,8 @@ import config from "config";
 import React from "react";
 import ReactDOM from "react-dom/server";
 import Html from "./helpers/Html";
+import HtmlBody from "./helpers/HtmlBody";
+import wrapHtmlBody from "./helpers/wrapHtmlBody";
 import makeRendererProxy from "./servers/proxies/renderer";
 import webServer from "./servers/common/server";
 import webApp from "./servers/common/app";
@@ -12,17 +14,19 @@ const socket = config.services.client.socket;
 
 // Handle requests
 const requestHandler = (req, res) => {
-
   const stats = readStats("Development");
   let render;
   try {
-    render =
-      "<!doctype html>\n" + ReactDOM.renderToString(<Html stats={stats} />);
+    render = ReactDOM.renderToString(<HtmlBody stats={stats} />);
   } catch (err) {
     console.log(err, "err"); // eslint-disable-line no-console
   }
+  const htmlOutput = wrapHtmlBody({
+    stats,
+    body: render
+  });
   res.setHeader("Content-Type", "text/html");
-  res.end(render);
+  res.end(htmlOutput);
 };
 
 // Create the app and the server
