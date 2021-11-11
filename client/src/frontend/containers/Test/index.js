@@ -12,7 +12,6 @@ import queryString from "query-string";
 import omitBy from "lodash/omitBy";
 import debounce from "lodash/debounce";
 import withSettings from "hoc/with-settings";
-import EntitiesBox from "global/components/atomic/EntitiesBox";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 
@@ -170,20 +169,13 @@ export class ProjectsContainer extends Component {
             />
           </div>
           <div style={{ width: "100%" }}>
-            <EntitiesBox>
-              <ThumbnailGrid>
-                {({ stack }) =>
-                  this.props.projects.map(item => (
-                    <EntityThumbnail entity={item} stack={stack} />
-                  ))
-                }
-              </ThumbnailGrid>
-            </EntitiesBox>
-          </div>
-          <div style={{ width: "100%" }}>
-            <EntitiesBox>
-              <ThumbnailGrid />
-            </EntitiesBox>
+            <ThumbnailGrid>
+              {({ stack }) =>
+                this.props.projects.map(item => (
+                  <EntityThumbnail entity={item} stack={stack} />
+                ))
+              }
+            </ThumbnailGrid>
           </div>
         </div>
       </section>
