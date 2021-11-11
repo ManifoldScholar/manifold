@@ -87,6 +87,7 @@
   },
   "dependencies": {
     "@castiron/style-mixins": "^1.0.6",
+    "@emotion/react": "^11.5.0",
     "@linaria/babel-preset": "^3.0.0-beta.13",
     "@linaria/core": "^3.0.0-beta.13",
     "@linaria/react": "^3.0.0-beta.13",

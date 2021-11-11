@@ -3,7 +3,7 @@ import { respond, clearfix } from "theme/styles/mixins";
 export default `
   .feature {
     position: relative;
-    font-size: 17px;
+    font-size: 20px;
 
     &.feature-preview {
       margin-bottom: 40px;
