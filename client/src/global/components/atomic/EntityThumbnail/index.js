@@ -5,7 +5,6 @@ import { EntityAvatar, PlaceholderAvatar } from "./avatar";
 import EntityMetadata from "./EntityMetadata";
 import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
-import classnames from "classnames";
 
 export default function EntityThumbnail({
   entity,
@@ -21,7 +20,6 @@ export default function EntityThumbnail({
   return (
     <Styled.Wrapper>
       <Styled.ItemLink
-        className={classnames({ stack })}
         $stack={stack}
         to={lh.link("frontendProjectDetail", entity.attributes.slug)}
       >

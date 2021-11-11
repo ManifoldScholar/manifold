@@ -1,4 +1,4 @@
-import { styled } from "@linaria/react";
+import styled from "@emotion/styled";
 import { blockLabelRound, subtitlePrimary } from "theme/styles/mixins";
 
 export const MetadataWrapper = styled.div`
@@ -15,10 +15,12 @@ export const MetadataWrapper = styled.div`
   padding-left: 15px;
   line-height: 20px;
 
-  &.stack {
-    padding-left: 0;
-    padding-right: 0;
-  }
+  ${({ $stack }) =>
+    $stack &&
+    `
+      padding-left: 0;
+      padding-right: 0;
+    `}
 `;
 
 export const TitleWrapper = styled.h3`
@@ -33,10 +35,12 @@ export const TitleWrapper = styled.h3`
     var(--transition-timing-function);
   color: var(--color-base-neutral90);
 
-  &.stack {
-    font-size: 17px;
-    font-weight: var(--font-weight-semibold);
-  }
+  ${({ $stack }) =>
+    $stack &&
+    `
+      font-size: 17px;
+      font-weight: var(--font-weight-semibold);
+    `}
 `;
 
 export const TitleText = styled.span`
@@ -66,12 +70,14 @@ export const Tag = styled.div`
   line-height: 1.188;
   font-family: var(--font-family-heading);
 
-  &.stack {
-    padding-right: 8px;
-    padding-left: 8px;
-    margin: 0.625em 0 0;
-    font-size: 12px;
-  }
+  ${({ $stack }) =>
+    $stack &&
+    `
+      padding-right: 8px;
+      padding-left: 8px;
+      margin: 0.625em 0 0;
+      font-size: 12px;
+    `}
 `;
 
 export const Creators = styled.div`
@@ -96,16 +102,18 @@ export const Date = styled.div`
   padding-top: var(--metadata-padding-top);
   font-family: var(--font-family-copy);
 
-  &.recently-updated {
-    &::before {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      margin-right: 5px;
-      margin-bottom: 2px;
-      content: "";
-      background-color: var(--error-color);
-      border-radius: 50%;
-    }
-  }
+  ${({ $recentlyUpdated }) =>
+    $recentlyUpdated &&
+    `
+      &::before {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        margin-right: 5px;
+        margin-bottom: 2px;
+        content: "";
+        background-color: var(--error-color);
+        border-radius: 50%;
+      }
+    `}
 `;
