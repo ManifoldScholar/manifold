@@ -1,4 +1,4 @@
-import { styled } from "@linaria/react";
+import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
 export const ItemLink = styled(Link)`
@@ -20,8 +20,9 @@ export const ItemLink = styled(Link)`
     color: inherit;
   }
 
-  &.stack {
-    flex-direction: column;
+  ${({ $stack }) =>
+    $stack &&
+    `flex-direction: column;
     height: 100%;
     padding: min(2.105vw, 25px);
 
@@ -30,8 +31,7 @@ export const ItemLink = styled(Link)`
       outline: 0;
       box-shadow: 0 31px 44px 2px rgba(0, 0, 0, 0.13);
       background-color: var(--box-medium-bg-color);
-    }
-  }
+    }`}
 `;
 
 export const Cover = styled.figure`
