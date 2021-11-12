@@ -569,9 +569,9 @@ exports[`reader/components/notation/resource/Detail matches the snapshot 1`] = `
           Visit Resource Page
         </span>
         <IconComposer
+          className="button-secondary__icon"
           fill="currentColor"
           icon="arrowRight16"
-          className="button-secondary__icon"
           size="default"
           svgProps={
             Object {
@@ -587,9 +587,9 @@ exports[`reader/components/notation/resource/Detail matches the snapshot 1`] = `
         onClick={[MockFunction]}
       >
         <IconComposer
+          className="button-secondary__icon"
           fill="currentColor"
           icon="arrowLeft16"
-          className="button-secondary__icon"
           size="default"
           svgProps={
             Object {

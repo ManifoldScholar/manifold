@@ -30,9 +30,9 @@ exports[`reader/components/notes/partial/Filters matches the snapshot 1`] = `
           className="checkbox__indicator"
         >
           <IconComposer
+            className="checkbox__icon"
             fill="currentColor"
             icon="checkmark16"
-            className="checkbox__icon"
             size="default"
             svgProps={
               Object {
@@ -58,9 +58,9 @@ exports[`reader/components/notes/partial/Filters matches the snapshot 1`] = `
           className="checkbox__indicator"
         >
           <IconComposer
+            className="checkbox__icon"
             fill="currentColor"
             icon="checkmark16"
-            className="checkbox__icon"
             size="default"
             svgProps={
               Object {

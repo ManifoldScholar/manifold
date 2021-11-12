@@ -16,9 +16,9 @@ exports[`frontend/components/resource-list/Totals matches the snapshot 1`] = `
     </span>
      Total Resources
     <IconComposer
+      className="resource-total__icon"
       fill="currentColor"
       icon="arrowLongRight16"
-      className="resource-total__icon"
       size={30}
       svgProps={
         Object {
