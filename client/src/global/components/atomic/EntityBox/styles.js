@@ -1,9 +1,25 @@
 import styled from "@emotion/styled";
-import { panelRounded } from "theme/styles/mixins";
+import {
+  panelRounded,
+  containerPrototype,
+  fluidScale
+} from "theme/styles/mixins";
+import { containerPadding } from "theme/styles/variables/layout";
+import { breakpoints } from "theme/styles/variables/media";
 
-export const Box = styled.div`
+export const Container = styled.section`
+  ${containerPrototype}
+  padding-inline: ${fluidScale(
+    containerPadding.full,
+    "0px",
+    breakpoints[120],
+    breakpoints[120]
+  )};
+  padding-block: var(--EntityBox-Container-padding-block, 0)}
+`;
+
+export const Background = styled.div`
   ${panelRounded}
-  padding-block: var(--entity-box-padding-vertical, 20px);
-  padding-inline-start: var(--entity-box-padding-left, 30px);
-  padding-inline-end: var(--entity-box-padding-right, 30px);
+  padding-block: var(--EntityBox-Background-padding-block, 20px);
+  padding-inline: var(--EntityBox-Background-padding-inline, 60px);
 `;

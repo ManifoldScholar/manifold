@@ -2,17 +2,9 @@ import styled from "@emotion/styled";
 import { headingPrimary, defaultTransitionProps } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 
-export const Wrapper = styled.div`
-  --entity-box-padding-left: 45px;
-  --entity-box-padding-vertical: 20px;
-  --entity-box-padding-right: 30px;
-
-  width: var(--entity-group-width, 90%);
-`;
-
 export const Icon = styled(IconComposer)`
   display: inline-block;
-  fill: var(--color-neutral-text-extra-dark);
+  fill: var(--strong-color);
 
   transition: opacity ${defaultTransitionProps},
     transform ${defaultTransitionProps};
@@ -26,14 +18,11 @@ export const Icon = styled(IconComposer)`
 export const GroupHeader = styled.div`
   background-color: var(--box-bg-color);
   padding-block: 22px;
-
-  /*  These are flipped to allow the heading to left align with the collecting toggle rather than the avatar. */
-  padding-inline-start: var(--entity-box-padding-right);
-  padding-inline-end: var(--entity-box-padding-left);
+  padding-inline: var(--EntityBox-Background-padding-inline);
 
   /* Ensure background hover color goes to edge of EntityBox. */
-  margin-block: calc(-1 * var(--entity-box-padding-vertical));
-  margin-inline-start: calc(-1 * var(--entity-box-padding-left));
+  margin-block: calc(-1 * var(--EntityBox-Background-padding-block));
+  margin-inline-start: calc(-1 * var(--EntityBox-Background-padding-inline));
   box-sizing: content-box;
 
   width: 100%;
@@ -45,10 +34,12 @@ export const GroupHeader = styled.div`
   ${({ $link }) =>
     $link &&
     `
+      text-decoration: none;
+
       &:hover,
       &:focus-visible {
         cursor: pointer;
-        background-color: var(--color-base-neutral10);
+        background-color: var(--box-medium-bg-color);
 
         ${Icon} {
           transform: translate(20%, 3px);
@@ -57,9 +48,10 @@ export const GroupHeader = styled.div`
     `}
 `;
 
-export const HeaderText = styled.span`
+export const HeaderText = styled.h2`
   ${headingPrimary}
+  margin-inline-start: -15px;
   margin-bottom: 0;
-  color: var(--color-neutral-text-extra-dark);
+  color: var(--strong-color);
   }
 `;
