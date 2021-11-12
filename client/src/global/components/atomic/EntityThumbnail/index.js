@@ -23,7 +23,7 @@ export default function EntityThumbnail({
         $stack={stack}
         to={lh.link("frontendProjectDetail", entity.attributes.slug)}
       >
-        <Styled.Cover>
+        <Styled.Cover $stack={stack}>
           {placeholder ? (
             <PlaceholderAvatar entity={entity} />
           ) : (
