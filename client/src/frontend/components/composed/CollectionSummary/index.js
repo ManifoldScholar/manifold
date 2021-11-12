@@ -8,20 +8,25 @@ import ProjectList from "frontend/components/project-list";
 import memoize from "lodash/memoize";
 import classnames from "classnames";
 import Header from "./Header";
+import * as Styled from "./styles"
 
-export default function CollectionSummary() {
+export default function CollectionSummary({entities, issueCount}) {
   /* handle limit here? */
   return (
     <section>
       <Container>
         <SummaryHeader />
-        {hasEntities ? (
-          {issues && <IssueCount />}
+        {entities ? (
+          issueCount && <Styled.IssueCount />
           <ThumbnailGrid>
             entities.map(entity => <EntityThumbnail />)
           </ThumbnailGrid>
         ) : (
-          <EmptyMessage />
+          <Styled.EmptyWrapper>
+          <Styled.EmptyMessage>
+          This Project Collection is currently empty.
+          </Styled.EmptyMessage>
+          </Styled.EmptyWrapper>
         )}
       </Container>
     </section>
