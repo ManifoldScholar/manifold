@@ -1110,9 +1110,9 @@ exports[`reader/components/notation/resource-collection/Detail matches the snaps
           Visit Collection Page
         </span>
         <IconComposer
+          className="button-secondary__icon"
           fill="currentColor"
           icon="arrowRight16"
-          className="button-secondary__icon"
           size="default"
           svgProps={
             Object {
@@ -1128,9 +1128,9 @@ exports[`reader/components/notation/resource-collection/Detail matches the snaps
         onClick={[MockFunction]}
       >
         <IconComposer
+          className="button-secondary__icon"
           fill="currentColor"
           icon="arrowLeft16"
-          className="button-secondary__icon"
           size="default"
           svgProps={
             Object {

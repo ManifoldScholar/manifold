@@ -170,9 +170,9 @@ exports[`backend/components/project-collection/List matches the snapshot 1`] = `
       onClick={[MockFunction]}
     >
       <IconComposer
+        className="button-icon-secondary__icon button-icon-secondary__icon--large"
         fill="currentColor"
         icon="plus16"
-        className="button-icon-secondary__icon button-icon-secondary__icon--large"
         size={20}
         svgProps={
           Object {

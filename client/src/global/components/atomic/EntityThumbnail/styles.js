@@ -40,7 +40,7 @@ export const Cover = styled.figure`
   padding-top: 0;
   margin-bottom: var(--Cover-margin-bottom);
   line-height: 1;
-  height: 160px;
+  height: ${({ $stack }) => ($stack ? "160px" : "auto")};
 `;
 
 export const Wrapper = styled.div`

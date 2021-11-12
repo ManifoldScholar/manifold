@@ -28,9 +28,9 @@ exports[`global/components/Notification matches the snapshot 1`] = `
       onClick={[Function]}
     >
       <IconComposer
+        className="notification__button-icon"
         fill="currentColor"
         icon="close32"
-        className="notification__button-icon"
         size={36}
         svgProps={
           Object {

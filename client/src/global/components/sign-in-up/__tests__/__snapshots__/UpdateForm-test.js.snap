@@ -211,9 +211,9 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
         Notification Settings
       </span>
       <IconComposer
+        className="button-secondary__icon"
         fill="currentColor"
         icon="arrowLongRight16"
-        className="button-secondary__icon"
         size="default"
         svgProps={
           Object {
