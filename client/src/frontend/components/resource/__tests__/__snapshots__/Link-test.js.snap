@@ -18,9 +18,9 @@ exports[`frontend/components/resource/Link matches the snapshot 1`] = `
     Download image “Image”
   </span>
   <IconComposer
+    className="button-primary__icon"
     fill="currentColor"
     icon="arrowDown16"
-    className="button-primary__icon"
     size="default"
     svgProps={
       Object {

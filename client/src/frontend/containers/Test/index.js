@@ -14,6 +14,7 @@ import debounce from "lodash/debounce";
 import withSettings from "hoc/with-settings";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
+import EntityGroup from "global/components/composed/EntityGroup";
 
 const { request } = entityStoreActions;
 const defaultPage = 1;
@@ -172,10 +173,38 @@ export class ProjectsContainer extends Component {
             <ThumbnailGrid>
               {({ stack }) =>
                 this.props.projects.map(item => (
-                  <EntityThumbnail entity={item} stack={stack} />
+                  <EntityThumbnail
+                    entity={item}
+                    stack={stack}
+                    key={item.attributes.slug}
+                  />
                 ))
               }
             </ThumbnailGrid>
+          </div>
+          <div style={{ width: "100%" }}>
+            <ThumbnailGrid />
+          </div>
+          <div
+            style={{
+              width: "100%",
+              height: "1200px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
+              alignItems: "center",
+              backgroundColor: "var(--color-base-neutral-white)"
+            }}
+          >
+            <EntityGroup
+              title="Volume 2"
+              entities={this.props.projects.slice(2, 6)}
+            />
+            <EntityGroup
+              title="Volume 3"
+              entities={this.props.projects.slice(6, 10)}
+              link
+            />
           </div>
         </div>
       </section>

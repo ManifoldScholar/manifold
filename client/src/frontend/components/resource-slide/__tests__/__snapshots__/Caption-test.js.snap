@@ -76,9 +76,9 @@ exports[`frontend/components/resource-slide/Caption matches the snapshot 1`] = `
           Download
         </span>
         <IconComposer
+          className="resource-slideshow__download-icon"
           fill="currentColor"
           icon="arrowDown16"
-          className="resource-slideshow__download-icon"
           size="default"
           svgProps={
             Object {

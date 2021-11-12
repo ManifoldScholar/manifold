@@ -16,9 +16,9 @@ exports[`frontend/components/resource-collection-list/Totals when the count is 3
     </span>
      Total Collections
     <IconComposer
+      className="resource-total__icon"
       fill="currentColor"
       icon="arrowLongRight16"
-      className="resource-total__icon"
       size={30}
       svgProps={
         Object {
