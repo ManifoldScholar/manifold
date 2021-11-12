@@ -26,20 +26,20 @@ export const Grid = styled.div`
   --list-item-padding: ${({ $grid }) => ($grid ? 0 : "14px")};
   --list-item-border: ${({ $grid }) => ($grid ? "none" : "1px solid")};
   --list-item-margin: ${({ $grid }) => ($grid ? "18px" : 0)};
-  --test-var: blue;
 
   display: grid;
-  grid-template-columns: ${({ $minItemWidth }) =>
-    `repeat(auto-fill, minmax(${$minItemWidth}, 1fr))`};
+  grid-template-columns: ${({ $minItemWidth, $grid }) =>
+    $grid ? `repeat(auto-fit, minmax(${$minItemWidth}, 1fr))` : "1fr"};
+
   padding-top: 30px;
 
   ${listUnstyled}
 
-  ${({ $grid, $empty }) => `
-    ${$grid && gridStyles}
-    ${$empty && emptyStyles}
-    ${$grid && $empty && $grid && `margin: auto;`}
-  `}
+  ${({ $grid, $empty }) => {
+    if ($grid && $empty) return gridStyles + `margin: auto;`;
+    if ($grid) return gridStyles;
+    if ($empty) return emptyStyles;
+  }}
 
   & > * {
     border-bottom: var(--list-item-border);

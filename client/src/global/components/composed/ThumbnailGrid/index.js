@@ -4,14 +4,16 @@ import * as Styled from "./styles";
 import PropTypes from "prop-types";
 import useResizeObserver from "use-resize-observer";
 
-/* BREAKPOINT must equal 2x minItemWidth for FE (and 3x for BE?) or icon size is off near the breakpoint. */
-const BREAKPOINT = 600;
-
-export default function ThumbnailGrid({ minItemWidth = "200px", children }) {
+export default function ThumbnailGrid({
+  minItemWidth = "200px",
+  minColumns = 2,
+  children
+}) {
   const [useGrid, setUseGrid] = useState(true);
+  const breakpoint = parseInt(minItemWidth, 10) * minColumns;
   const { ref: resizeRef } = useResizeObserver({
     onResize: ({ width }) => {
-      if (width > BREAKPOINT) return setUseGrid(true);
+      if (width > breakpoint) return setUseGrid(true);
       return setUseGrid(false);
     }
   });
