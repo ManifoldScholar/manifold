@@ -6,7 +6,7 @@ import HeaderNotifications from "global/components/HeaderNotifications";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import Utility from "global/components/utility";
-import { HeaderLogo } from "global/components/atomic";
+import HeaderLogo from "global/components/atomic/HeaderLogo";
 
 import BlurOnLocationChange from "hoc/blur-on-location-change";
 

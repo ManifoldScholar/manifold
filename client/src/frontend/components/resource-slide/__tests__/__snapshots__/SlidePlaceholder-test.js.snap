@@ -14,9 +14,9 @@ exports[`frontend/components/resource-slide/SlidePlaceholder matches the snapsho
       className="resource-info"
     >
       <IconComposer
+        className="resource-slide-figure__resource-icon"
         fill="currentColor"
         icon="resourceCollection64"
-        className="resource-slide-figure__resource-icon"
         size={120}
         svgProps={
           Object {

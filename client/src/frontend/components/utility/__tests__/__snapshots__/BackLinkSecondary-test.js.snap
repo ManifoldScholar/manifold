@@ -9,9 +9,9 @@ exports[`frontend/components/utility/BackLinkSecondary matches the snapshot 1`] 
     className="container flush back-link-secondary__container"
   >
     <IconComposer
+      className="back-link-secondary__icon"
       fill="currentColor"
       icon="circleArrowLeft64"
-      className="back-link-secondary__icon"
       size={56}
       svgProps={
         Object {

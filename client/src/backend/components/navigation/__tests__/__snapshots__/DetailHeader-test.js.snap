@@ -6,8 +6,8 @@ exports[`backend/components/navigation/DetailHeader matches the snapshot 1`] = `
   icon={
     <SVG.ProjectPlaceholder
       ariaLabel={null}
-      color="outlined"
       className="backend-header__type-icon backend-header__type-icon--project"
+      color="outlined"
       mode="small"
     />
   }

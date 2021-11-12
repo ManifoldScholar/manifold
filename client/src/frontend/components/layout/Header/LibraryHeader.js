@@ -6,7 +6,7 @@ import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import BackLink from "frontend/components/back-link";
 import SetCSSProperty from "global/components/utility/SetCSSProperty";
-import { HeaderLogo } from "global/components/atomic";
+import HeaderLogo from "global/components/atomic/HeaderLogo";
 
 export default class LayoutLibraryHeader extends PureComponent {
   static displayName = "Layout.LibraryHeader";
