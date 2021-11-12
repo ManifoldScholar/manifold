@@ -36,17 +36,9 @@ export const Grid = styled.div`
   ${listUnstyled}
 
   ${({ $grid, $empty }) => {
-    /* eslint-disable no-nested-ternary */
-    const finalStyles =
-      $grid && $empty
-        ? gridStyles + `margin: auto;`
-        : $grid
-        ? gridStyles
-        : $empty
-        ? emptyStyles
-        : null;
-    /* eslint-disable no-nested-ternary */
-    return finalStyles;
+    if ($grid && $empty) return gridStyles + `margin: auto;`;
+    if ($grid) return gridStyles;
+    if ($empty) return emptyStyles;
   }}
 
   & > * {

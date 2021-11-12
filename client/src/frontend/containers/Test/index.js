@@ -146,68 +146,60 @@ export class ProjectsContainer extends Component {
     if (this.showPlaceholder()) return <ProjectList.Placeholder />;
 
     return (
-      <section className="bg-neutral05">
-        <div className="entity-section-wrapper container">
-          <header className="entity-section-wrapper__heading section-heading">
-            <div className="main">
-              <Utility.IconComposer size={56} icon="projects64" />
-              <div className="body">
-                <h2 className="title">{"All Projects"}</h2>
+      <>
+        <section className="bg-neutral05">
+          <div className="entity-section-wrapper container">
+            <header className="entity-section-wrapper__heading section-heading">
+              <div className="main">
+                <Utility.IconComposer size={56} icon="projects64" />
+                <div className="body">
+                  <h2 className="title">{"All Projects"}</h2>
+                </div>
               </div>
+            </header>
+            <ProjectList.Filters
+              filterChangeHandler={this.filterChangeHandler}
+              initialFilterState={this.state.filter}
+              resetFilterState={this.initialFilterState()}
+              subjects={this.props.subjects}
+            />
+            <div className="entity-section-wrapper__details">
+              <Utility.EntityCount
+                pagination={get(this.props.projectsMeta, "pagination")}
+                singularUnit="project"
+                pluralUnit="projects"
+              />
             </div>
-          </header>
-          <ProjectList.Filters
-            filterChangeHandler={this.filterChangeHandler}
-            initialFilterState={this.state.filter}
-            resetFilterState={this.initialFilterState()}
-            subjects={this.props.subjects}
+            <div style={{ width: "100%" }}>
+              <ThumbnailGrid>
+                {({ stack }) =>
+                  this.props.projects.map(item => (
+                    <EntityThumbnail
+                      entity={item}
+                      stack={stack}
+                      key={item.attributes.slug}
+                    />
+                  ))
+                }
+              </ThumbnailGrid>
+            </div>
+            <div style={{ width: "100%" }}>
+              <ThumbnailGrid />
+            </div>
+          </div>
+        </section>
+        <div>
+          <EntityGroup
+            title="Volume 2"
+            entities={this.props.projects.slice(2, 6)}
           />
-          <div className="entity-section-wrapper__details">
-            <Utility.EntityCount
-              pagination={get(this.props.projectsMeta, "pagination")}
-              singularUnit="project"
-              pluralUnit="projects"
-            />
-          </div>
-          <div style={{ width: "100%" }}>
-            <ThumbnailGrid>
-              {({ stack }) =>
-                this.props.projects.map(item => (
-                  <EntityThumbnail
-                    entity={item}
-                    stack={stack}
-                    key={item.attributes.slug}
-                  />
-                ))
-              }
-            </ThumbnailGrid>
-          </div>
-          <div style={{ width: "100%" }}>
-            <ThumbnailGrid />
-          </div>
-          <div
-            style={{
-              width: "100%",
-              height: "1200px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-around",
-              alignItems: "center",
-              backgroundColor: "var(--color-base-neutral-white)"
-            }}
-          >
-            <EntityGroup
-              title="Volume 2"
-              entities={this.props.projects.slice(2, 6)}
-            />
-            <EntityGroup
-              title="Volume 3"
-              entities={this.props.projects.slice(6, 10)}
-              link
-            />
-          </div>
+          <EntityGroup
+            title="Volume 3"
+            entities={this.props.projects.slice(6, 10)}
+            to="/home"
+          />
         </div>
-      </section>
+      </>
     );
   }
 
