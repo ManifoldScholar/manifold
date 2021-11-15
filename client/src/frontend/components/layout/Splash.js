@@ -168,7 +168,6 @@ export default class Splash extends Component {
                 alt={this.header(false)}
               />
             ) : null}
-            &nbsp;
           </figure>
           <div className="left">
             <h1
