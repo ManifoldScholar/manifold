@@ -15,11 +15,14 @@ export const Container = styled.section`
     breakpoints[120],
     breakpoints[120]
   )};
-  padding-block: var(--EntityBox-Container-padding-block, 0)}
+  padding-block: var(--EntityBox-Container-padding-block, 0);
 `;
 
 export const Background = styled.div`
+  --EntityBox-Background-padding-block: 20px;
+  --EntityBox-Background-padding-inline: ${fluidScale("72px", "20px")};
+
   ${panelRounded}
-  padding-block: var(--EntityBox-Background-padding-block, 20px);
-  padding-inline: var(--EntityBox-Background-padding-inline, 60px);
+  padding-block: var(--EntityBox-Background-padding-block);
+  padding-inline: var(--EntityBox-Background-padding-inline);
 `;
