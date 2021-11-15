@@ -1,11 +1,18 @@
 import styled from "@emotion/styled";
-import { headingPrimary, defaultTransitionProps } from "theme/styles/mixins";
+import {
+  headingPrimary,
+  defaultTransitionProps,
+  fluidScale
+} from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
+import EntityBox from "global/components/atomic/EntityBox";
+
+export const Box = styled(EntityBox)`
+  --EntityBox-Container-padding-block: 30px;
+`;
 
 export const Icon = styled(IconComposer)`
   display: inline-block;
-  fill: var(--strong-color);
-
   transition: opacity ${defaultTransitionProps},
     transform ${defaultTransitionProps};
   transform: translateY(3px);
@@ -17,6 +24,7 @@ export const Icon = styled(IconComposer)`
 
 export const GroupHeader = styled.div`
   background-color: var(--box-bg-color);
+  color: var(--strong-color);
   padding-block: 22px;
   padding-inline: var(--EntityBox-Background-padding-inline);
 
@@ -40,6 +48,7 @@ export const GroupHeader = styled.div`
       &:focus-visible {
         cursor: pointer;
         background-color: var(--box-medium-bg-color);
+        color: var(--strong-color);
 
         ${Icon} {
           transform: translate(20%, 3px);
@@ -50,8 +59,7 @@ export const GroupHeader = styled.div`
 
 export const HeaderText = styled.h2`
   ${headingPrimary}
-  margin-inline-start: -15px;
+  margin-inline-start: calc(-1 * ${fluidScale("15px", "0px")});
   margin-bottom: 0;
-  color: var(--strong-color);
   }
 `;
