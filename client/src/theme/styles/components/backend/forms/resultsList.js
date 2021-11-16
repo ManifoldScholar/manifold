@@ -22,10 +22,6 @@ export default `
       color: var(--color-neutral-ui-dull-light);
     }
 
-    + .list-pagination-primary {
-      margin-top: 36px;
-    }
-
     ul {
       ${listUnstyled}
 

@@ -21,9 +21,5 @@ export default `
     )}
 
     ${respond(`--gap: 95px;`, 120)}
-
-    .list-pagination-secondary .ordinal {
-      ${respond(`display: none;`, 85, "max")}
-    }
   }
 `;

@@ -7,7 +7,6 @@ import layout from "./layout";
 import loginPage from "./loginPage";
 import page from "./page";
 import project from "./project";
-import projectCollection from "./projectCollection";
 import projectList from "./projectList";
 import resource from "./resource";
 import resourceCollection from "./resourceCollection";
@@ -24,7 +23,6 @@ export default `
   ${layout}
   ${page}
   ${project}
-  ${projectCollection}
   ${projectList}
   ${resourceCollection}
   ${search}

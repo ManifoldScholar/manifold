@@ -39,16 +39,14 @@ export default class ProjectContentBlockTableOfContentsBlock extends PureCompone
 
   render() {
     return (
-      <div className="entity-section-wrapper__body">
-        <nav aria-label="Table of Contents">
-          <TOCList
-            showTextTitle={this.showTextTitle}
-            showAuthors={this.showAuthors}
-            text={this.text}
-            depth={this.depth}
-          />
-        </nav>
-      </div>
+      <nav aria-label="Table of Contents">
+        <TOCList
+          showTextTitle={this.showTextTitle}
+          showAuthors={this.showAuthors}
+          text={this.text}
+          depth={this.depth}
+        />
+      </nav>
     );
   }
 }

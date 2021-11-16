@@ -75,7 +75,7 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
 
   render() {
     return (
-      <div className="entity-section-wrapper__body">
+      <>
         {this.hasVisibleCollections && (
           <>
             <h3 className="screen-reader-text">Resource Collections</h3>
@@ -96,7 +96,7 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
           project={this.project}
           count={this.resourcesTotal}
         />
-      </div>
+      </>
     );
   }
 }

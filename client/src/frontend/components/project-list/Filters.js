@@ -149,7 +149,6 @@ export class ProjectListFilters extends Component {
         onSubmit={this.updateResults}
         onReset={this.resetFilters}
         showResetButton={this.showResetButton}
-        className="entity-section-wrapper__tools"
       />
     );
   }
