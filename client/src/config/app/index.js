@@ -1,4 +1,4 @@
 import head from "./head";
-import locale from "./locale";
+import locale from "./localeOld";
 
 export default { head, locale };

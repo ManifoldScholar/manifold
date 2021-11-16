@@ -51,9 +51,9 @@ function LanguageSelect({ authentication, language }) {
         onChange={handleChange}
       >
         <option value="none">Language:</option>
-        <option value="en">{t(`english-site-name`)}</option>
-        <option value="es">{t(`espanol-site-name`)}</option>
-        <option value="nl">{t(`dutch-site-name`)}</option>
+        <option value="en">{t(`locales.en`)}</option>
+        <option value="en">{t(`locales.es`)}</option>
+        <option value="nl">{t(`locales.nl`)}</option>
       </select>
       <UniqueIcons.GlobeUnique />
       <Utility.IconComposer icon="disclosureDown24" />

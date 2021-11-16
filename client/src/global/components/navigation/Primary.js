@@ -4,7 +4,6 @@ import Static from "global/components/navigation/Static";
 import Mobile from "global/components/navigation/Mobile";
 import { Link, withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import T from "global/components/Translate";
 
 export class NavigationPrimary extends PureComponent {
   static displayName = "Navigation.Primary";
@@ -32,11 +31,11 @@ export class NavigationPrimary extends PureComponent {
       switch (currentUser.attributes.kind) {
         case "project_editor":
         case "project_resource_editor":
-          return "exit-editor-mode";
+          return "Exit Editor Mode";
         case "project_author":
-          return "exit-author-mode";
+          return "Exit Author Mode";
         default:
-          return "exit-admin-mode";
+          return "Exit Admin Mode";
       }
     } else {
       switch (currentUser.attributes.kind) {
@@ -44,10 +43,10 @@ export class NavigationPrimary extends PureComponent {
         case "editor":
         case "project_creator":
         case "marketeer":
-          return "enter-admin-mode";
+          return "Enter Admin Mode";
         case "project_editor":
         case "project_resource_editor":
-          return "enter-editor-mode";
+          return "Enter Editor Mode";
         case "project_author": // For now authors will not have access to the backend
         default:
           return null;
@@ -66,9 +65,7 @@ export class NavigationPrimary extends PureComponent {
     const backendButton =
       backendButtonLabel && currentUser ? (
         <Link className="mode-button" to={lh.link(linkTo)}>
-          <T
-            translate={this.backendButtonLabel(currentUser, this.props.mode)}
-          />
+          {this.backendButtonLabel(currentUser, this.props.mode)}
         </Link>
       ) : null;
 
