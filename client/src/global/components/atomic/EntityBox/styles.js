@@ -19,10 +19,10 @@ export const Container = styled.section`
 `;
 
 export const Background = styled.div`
-  --EntityBox-Background-padding-block: 20px;
-  --EntityBox-Background-padding-inline: ${fluidScale("72px", "20px")};
-
   ${panelRounded}
-  padding-block: var(--EntityBox-Background-padding-block);
-  padding-inline: var(--EntityBox-Background-padding-inline);
+  padding-block: var(--EntityBox-Background-padding-block, 20px);
+  padding-inline: var(
+    --EntityBox-Background-padding-inline,
+    ${fluidScale("72px", "20px")}
+  );
 `;

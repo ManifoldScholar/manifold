@@ -9,6 +9,8 @@ import EntityBox from "global/components/atomic/EntityBox";
 
 export const Box = styled(EntityBox)`
   --EntityBox-Container-padding-block: 30px;
+  --EntityBox-Background-padding-block: 20px;
+  --EntityBox-Background-padding-inline: ${fluidScale("72px", "20px")};
 `;
 
 export const Icon = styled(IconComposer)`
