@@ -30,9 +30,6 @@ export const Grid = styled.div`
   display: grid;
   grid-template-columns: ${({ $minItemWidth, $grid }) =>
     $grid ? `repeat(auto-fit, minmax(${$minItemWidth}, 1fr))` : "1fr"};
-
-  padding-top: 30px;
-
   ${listUnstyled}
 
   ${({ $grid, $empty }) => {

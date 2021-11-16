@@ -2,33 +2,29 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
 import Utility from "global/components/utility";
+import * as Styled from "./styles";
 
 function Search({ inputRef, value, onChange }) {
   const uid = useUID();
 
   return (
-    <div className="form-list-filter__search-field">
-      <button className="form-list-filter__search-button" type="submit">
+    <Styled.Wrapper>
+      <Styled.Button type="submit">
         <span className="screen-reader-text">Search…</span>
-        <Utility.IconComposer
-          icon="search16"
-          size={20}
-          className="form-list-filter__search-icon"
-        />
-      </button>
+        <Utility.IconComposer icon="search16" size={20} />
+      </Styled.Button>
       <label htmlFor={uid} className="screen-reader-text">
         Enter Search Criteria
       </label>
-      <input
+      <Styled.Input
         ref={inputRef}
         value={value}
         type="text"
         id={uid}
         onChange={onChange}
         placeholder="Search…"
-        className="form-list-filter__text-input form-list-filter__text-input--search"
       />
-    </div>
+    </Styled.Wrapper>
   );
 }
 

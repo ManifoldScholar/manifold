@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import range from "lodash/range";
 import isString from "lodash/isString";
-import classNames from "classnames";
-import IconComposer from "./IconComposer";
+import IconComposer from "../IconComposer";
+import * as Styled from "./styles";
 
 export default class UtilityPagination extends PureComponent {
   static displayName = "Utility.Pagination";
@@ -58,21 +58,19 @@ export default class UtilityPagination extends PureComponent {
     const handler = this.props.paginationClickHandler(pagination.prevPage);
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
 
-    const pageClassNames = classNames({
-      "list-pagination__page": true,
-      "list-pagination__page--prev": true,
-      "list-pagination__page--disabled": !pagination.prevPage
-    });
-
     return (
-      <li className={pageClassNames} key="previous">
-        <PageComponent {...pageProps} disabled={!pagination.prevPage}>
+      <li key="previous">
+        <Styled.Link
+          as={PageComponent}
+          aria-disabled={!pagination.prevPage}
+          {...pageProps}
+        >
           <IconComposer
             icon="arrowLongLeft16"
             screenReaderText="previous page"
           />
-          <span className="list-pagination__icon-label">PREV</span>
-        </PageComponent>
+          <span>Prev</span>
+        </Styled.Link>
       </li>
     );
   }
@@ -81,18 +79,16 @@ export default class UtilityPagination extends PureComponent {
     const handler = this.props.paginationClickHandler(pagination.nextPage);
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
 
-    const pageClassNames = classNames({
-      "list-pagination__page": true,
-      "list-pagination__page--next": true,
-      "list-pagination__page--disabled": !pagination.nextPage
-    });
-
     return (
-      <li className={pageClassNames} key="next">
-        <PageComponent {...pageProps}>
-          <span className="list-pagination__icon-label">NEXT</span>
+      <li key="next">
+        <Styled.Link
+          as={PageComponent}
+          aria-disabled={!pagination.nextPage}
+          {...pageProps}
+        >
+          <span>Next</span>
           <IconComposer icon="arrowLongRight16" screenReaderText="next page" />
-        </PageComponent>
+        </Styled.Link>
       </li>
     );
   }
@@ -100,17 +96,12 @@ export default class UtilityPagination extends PureComponent {
   number(page, handler) {
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
 
-    const pageClassNames = classNames({
-      "list-pagination__page": true,
-      "list-pagination__page--ordinal": true
-    });
-
     return (
-      <li className={pageClassNames} key={page.key}>
-        <PageComponent {...pageProps}>
+      <li key={page.key}>
+        <Styled.Link as={PageComponent} {...pageProps}>
           <span aria-hidden="true">{page.number}</span>
           <span className="screen-reader-text">Go to page: {page.number}</span>
-        </PageComponent>
+        </Styled.Link>
       </li>
     );
   }
@@ -118,18 +109,12 @@ export default class UtilityPagination extends PureComponent {
   current(page, handler) {
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
 
-    const pageClassNames = classNames({
-      "list-pagination__page": true,
-      "list-pagination__page--ordinal": true,
-      "list-pagination__page--disabled": true
-    });
-
     return (
-      <li className={pageClassNames} key={page.key}>
-        <PageComponent {...pageProps}>
+      <li key={page.key}>
+        <Styled.Link as={PageComponent} aria-current="page" {...pageProps}>
           <span aria-hidden="true">{page.number}</span>
           <span className="screen-reader-text">Go to page: {page.number}</span>
-        </PageComponent>
+        </Styled.Link>
       </li>
     );
   }
@@ -163,29 +148,24 @@ export default class UtilityPagination extends PureComponent {
     const pagination = this.props.pagination;
     if (pagination.totalPages === 1 || pagination.totalPages === 0) return null;
 
-    const wrapperClassNames = classNames({
-      "list-pagination": true,
-      "list-pagination--compact": this.props.compact
-    });
-
     return (
-      <nav className={wrapperClassNames} aria-label="Pagination">
-        <ul className="list-pagination__columns">
-          <li className="list-pagination__column">
+      <Styled.Nav aria-label="Pagination">
+        <Styled.Columns>
+          <Styled.Column>
             <ul>{this.previous(pagination)}</ul>
-          </li>
-          <li className="list-pagination__column-middle">
-            <ul className="list-pagination__pages">
+          </Styled.Column>
+          <Styled.Column>
+            <Styled.Pages>
               {this.props.compact
                 ? this.renderCompact(pagination)
                 : this.renderRange(pages)}
-            </ul>
-          </li>
-          <li className="list-pagination__column">
+            </Styled.Pages>
+          </Styled.Column>
+          <Styled.Column>
             <ul>{this.next(pagination)}</ul>
-          </li>
-        </ul>
-      </nav>
+          </Styled.Column>
+        </Styled.Columns>
+      </Styled.Nav>
     );
   }
 }

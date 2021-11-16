@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import Search from "./Search";
 import Filter, { filterShape } from "./Filter";
+import * as Styled from "./styles";
 
 import withScreenReaderStatus from "hoc/with-screen-reader-status";
 
@@ -16,7 +16,6 @@ function Filters({
   className
 }) {
   const searchInput = useRef(null);
-  const Wrapper = onSubmit ? "form" : "div";
 
   function handleReset() {
     onReset();
@@ -25,34 +24,24 @@ function Filters({
   }
 
   return (
-    <Wrapper
+    <Styled.Wrapper
+      as={onSubmit ? "form" : "div"}
       onSubmit={onSubmit}
-      className={classNames({
-        "form-list-filter": true,
-        [className]: !!className
-      })}
+      $count={filters.length}
+      className={className}
     >
       {searchProps && <Search inputRef={searchInput} {...searchProps} />}
-      <div
-        className={classNames({
-          "form-list-filter__select-group": true,
-          [`form-list-filter__select-group--count-${filters.length}`]: true
-        })}
-      >
+      <Styled.SelectGroup $count={filters.length}>
         {filters.map(filter => (
           <Filter key={filter.label} {...filter} />
         ))}
-      </div>
+      </Styled.SelectGroup>
       {showResetButton && (
-        <button
-          type="button"
-          className="form-list-filter__reset-button"
-          onClick={handleReset}
-        >
+        <Styled.ResetButton type="button" onClick={handleReset}>
           {"Reset Search + Filters"}
-        </button>
+        </Styled.ResetButton>
       )}
-    </Wrapper>
+    </Styled.Wrapper>
   );
 }
 

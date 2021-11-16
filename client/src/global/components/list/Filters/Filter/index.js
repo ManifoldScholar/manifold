@@ -1,34 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
-import Utility from "global/components/utility";
+import * as Styled from "./styles";
 
 function Filter({ label, value, options, onChange }) {
   const uid = useUID();
 
   return (
-    <div className="form-list-filter__select-field">
+    <Styled.Wrapper>
       <label htmlFor={uid} className="screen-reader-text">
         {label}
       </label>
-      <select
-        id={uid}
-        onChange={onChange}
-        value={value}
-        className="form-list-filter__select-input"
-      >
+      <Styled.Select id={uid} onChange={onChange} value={value}>
         {options.map(({ value: optValue, label: optLabel }) => (
           <option key={optLabel} value={optValue}>
             {optLabel}
           </option>
         ))}
-      </select>
-      <Utility.IconComposer
-        icon="disclosureDown16"
-        size={20}
-        className="form-list-filter__select-icon"
-      />
-    </div>
+      </Styled.Select>
+      <Styled.Icon icon="disclosureDown16" size={20} />
+    </Styled.Wrapper>
   );
 }
 

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import * as Styled from "./styles";
 
 export default class EntityCount extends PureComponent {
   static propTypes = {
@@ -22,15 +23,15 @@ export default class EntityCount extends PureComponent {
   renderRange(start, end, totalCount, label) {
     return (
       <>
-        <p className="list-total" aria-hidden>
+        <Styled.Total aria-hidden>
           {"Showing "}
-          <span className="list-total__highlighted">
+          <Styled.Highlighted>
             {this.props.showRange ? `${start}-${end}` : end}
-          </span>
+          </Styled.Highlighted>
           {" of "}
-          <span className="list-total__highlighted">{totalCount}</span>
+          <Styled.Highlighted>{totalCount}</Styled.Highlighted>
           {label && ` ${label}: `}
-        </p>
+        </Styled.Total>
         {/* Better readout for screen readers */}
         <div
           role="status"
@@ -47,10 +48,10 @@ export default class EntityCount extends PureComponent {
 
   renderCount(totalCount, label) {
     return (
-      <p className="list-total" role="status" aria-atomic aria-live="polite">
+      <Styled.Total role="status" aria-atomic aria-live="polite">
         <span>{totalCount}</span>
         {` ${label}`}
-      </p>
+      </Styled.Total>
     );
   }
 
