@@ -6,6 +6,7 @@ import {
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 import EntityBox from "global/components/atomic/EntityBox";
+import { transientOptions } from "helpers/emotionHelpers";
 
 export const Box = styled(EntityBox)`
   --EntityBox-Container-padding-block: 30px;
@@ -24,7 +25,7 @@ export const Icon = styled(IconComposer)`
   }
 `;
 
-export const GroupHeader = styled.div`
+export const GroupHeader = styled("div", transientOptions)`
   background-color: var(--box-bg-color);
   color: var(--strong-color);
   padding-block: 22px;
