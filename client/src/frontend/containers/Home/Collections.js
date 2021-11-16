@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ProjectCollection from "frontend/components/project-collection";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectCollectionsAPI, requests } from "api";
+import EntityCollection from "global/components/composed/EntityCollection";
 
 const { request } = entityStoreActions;
 
@@ -40,21 +40,21 @@ export class HomeCollectionsContainer extends Component {
     dispatch: PropTypes.func
   };
 
-  render() {
-    if (!this.props.projectCollections) return null;
+  get projectCollections() {
+    return this.props.projectCollections;
+  }
 
-    return this.props.projectCollections.map((projectCollection, index) => {
-      return (
-        <ProjectCollection.Summary
-          key={projectCollection.id}
-          authentication={this.props.authentication}
-          projectCollection={projectCollection}
-          dispatch={this.props.dispatch}
-          ordinal={index}
-          limit={projectCollection.attributes.homepageCount}
-        />
-      );
-    });
+  render() {
+    if (!this.projectCollections) return null;
+
+    return this.projectCollections.map((projectCollection, index) => (
+      <EntityCollection.ProjectCollectionSummary
+        key={projectCollection.id}
+        projectCollection={projectCollection}
+        limit={projectCollection.attributes.homepageCount}
+        bgColor={index % 2 === 0 ? "neutral05" : "white"}
+      />
+    ));
   }
 }
 

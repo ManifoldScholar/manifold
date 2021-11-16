@@ -27,7 +27,7 @@ export default class ProjectContentBlockMarkdownBlock extends PureComponent {
   render() {
     return (
       <div
-        className="entity-section-wrapper__body entity-section-wrapper__body--narrow page-content"
+        className="page-content"
         dangerouslySetInnerHTML={{ __html: this.formattedContent }}
       />
     );

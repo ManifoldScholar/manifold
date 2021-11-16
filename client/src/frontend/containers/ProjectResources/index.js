@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import Project from "frontend/components/project";
 import LoadingBlock from "global/components/loading-block";
 import { entityStoreActions, uiFrontendModeActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -13,17 +12,18 @@ import isNull from "lodash/isNull";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import BackLink from "frontend/components/back-link";
+import EntityCollection from "global/components/composed/EntityCollection";
 import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
-const page = 1;
+const defaultPage = 1;
 const perPage = 10;
 
 export class ProjectResourcesContainer extends Component {
   static fetchData = (getState, dispatch, location, match) => {
     const params = queryString.parse(location.search);
     const pagination = {
-      number: params.page ? params.page : page,
+      number: params.page ? params.page : defaultPage,
       size: perPage
     };
     const filter = omitBy(params, (v, k) => k === "page");
@@ -38,7 +38,7 @@ export class ProjectResourcesContainer extends Component {
   static mapStateToProps = state => {
     const props = {
       resources: select(requests.feResources, state.entityStore),
-      meta: meta(requests.feResources, state.entityStore)
+      resourcesMeta: meta(requests.feResources, state.entityStore)
     };
     return omitBy(props, isNull);
   };
@@ -47,7 +47,7 @@ export class ProjectResourcesContainer extends Component {
     project: PropTypes.object,
     settings: PropTypes.object.isRequired,
     resources: PropTypes.array,
-    meta: PropTypes.object,
+    resourcesMeta: PropTypes.object,
     dispatch: PropTypes.func,
     location: PropTypes.object.isRequired,
     history: PropTypes.object
@@ -75,13 +75,15 @@ export class ProjectResourcesContainer extends Component {
     this.props.dispatch(flush(requests.feResources));
   }
 
-  initialState(init) {
-    const filter = omitBy(init, (vIgnored, k) => k === "page");
+  initialFilterState(init = {}) {
+    return omitBy(init, (vIgnored, k) => k === "page");
+  }
 
+  initialState(init = {}) {
     return {
-      filter: { ...filter },
+      filter: { ...this.initialFilterState(init) },
       pagination: {
-        number: init.page || page,
+        number: init.page || defaultPage,
         size: perPage
       }
     };
@@ -115,9 +117,8 @@ export class ProjectResourcesContainer extends Component {
     this.props.history.push({ pathname, search });
   }
 
-  filterChange = filter => {
-    const pagination = { ...this.state.pagination, number: page };
-    this.setState({ filter, pagination }, this.doUpdate);
+  filterChangeHandler = filter => {
+    this.setState({ filter }, this.doUpdate);
   };
 
   handlePageChange = pageParam => {
@@ -133,11 +134,8 @@ export class ProjectResourcesContainer extends Component {
   };
 
   render() {
-    const { project, settings } = this.props;
+    const { project, settings, resources, resourcesMeta } = this.props;
     if (!project) return <LoadingBlock />;
-
-    const filter = this.state.filter;
-    const initialFilter = filter || null;
 
     return (
       <div>
@@ -150,17 +148,21 @@ export class ProjectResourcesContainer extends Component {
           link={lh.link("frontendProjectDetail", project.attributes.slug)}
           title={project.attributes.titlePlaintext}
         />
-        {this.props.resources ? (
-          <Project.Resources
-            project={project}
-            resources={this.props.resources}
-            pagination={this.props.meta.pagination}
-            paginationClickHandler={this.pageChangeHandlerCreator}
-            filterChange={this.filterChange}
-            initialFilterState={initialFilter}
-            itemHeadingLevel={3}
-          />
-        ) : null}
+        <EntityCollection.ProjectResources
+          project={project}
+          resources={resources}
+          resourcesMeta={resourcesMeta}
+          filterProps={{
+            filterChangeHandler: this.filterChangeHandler,
+            initialFilterState: this.state.filter,
+            resetFilterState: this.initialFilterState(),
+            project
+          }}
+          paginationProps={{
+            paginationClickHandler: this.pageChangeHandlerCreator
+          }}
+          itemHeadingLevel={3}
+        />
       </div>
     );
   }

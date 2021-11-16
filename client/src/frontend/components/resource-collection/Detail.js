@@ -55,7 +55,7 @@ export default class ResourceCollectionDetail extends PureComponent {
           pagination={this.props.slideshowPagination}
           dispatch={this.props.dispatch}
         />
-        <div className="container flush-top">
+        <div className="container flush-top collection-detail__resources">
           <h2 className="screen-reader-text">Resource List</h2>
           <ResourceList.Totals
             belongsTo="collection"

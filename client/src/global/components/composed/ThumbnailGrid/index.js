@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import useResizeObserver from "use-resize-observer";
 
 export default function ThumbnailGrid({
-  minItemWidth = "200px",
+  minItemWidth = "250px",
   minColumns = 2,
   children
 }) {

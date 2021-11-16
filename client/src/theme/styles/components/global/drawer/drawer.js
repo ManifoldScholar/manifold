@@ -98,15 +98,6 @@ export default `
       color: var(--color-base-neutral-white);
     }
 
-    .list-pagination-primary {
-      span {
-        display: inline-block;
-
-        ${respond(`display: none;`, 65)}
-        ${respond(`display: inline-block;`, 90)}
-      }
-    }
-
     .form-secondary .form-select {
       width: 100%;
     }

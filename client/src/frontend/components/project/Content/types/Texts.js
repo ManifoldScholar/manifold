@@ -70,28 +70,26 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
 
   render() {
     return (
-      <div className="entity-section-wrapper__body">
-        <div className="text-list">
-          {this.categories.map(category => (
-            <TextList
-              label={
-                this.visibility.showCategoryLabels
-                  ? category.attributes.title
-                  : null
-              }
-              texts={this.textsForCategory(category)}
-              key={category.id}
-              {...this.visibility}
-            />
-          ))}
-          {this.visibility.showUncategorized && (
-            <TextList
-              label="Uncategorized"
-              texts={this.uncategorizedTexts}
-              {...this.visibility}
-            />
-          )}
-        </div>
+      <div className="text-list">
+        {this.categories.map(category => (
+          <TextList
+            label={
+              this.visibility.showCategoryLabels
+                ? category.attributes.title
+                : null
+            }
+            texts={this.textsForCategory(category)}
+            key={category.id}
+            {...this.visibility}
+          />
+        ))}
+        {this.visibility.showUncategorized && (
+          <TextList
+            label="Uncategorized"
+            texts={this.uncategorizedTexts}
+            {...this.visibility}
+          />
+        )}
       </div>
     );
   }

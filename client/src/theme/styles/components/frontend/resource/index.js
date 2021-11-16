@@ -2,7 +2,6 @@ import audioPlayer from "./audioPlayer";
 import card from "./card";
 import detail from "./detail";
 import hero from "./hero";
-import list from "./list";
 import meta from "./meta";
 import preview from "./preview";
 import slide from "./slide";
@@ -21,7 +20,6 @@ ${tagList}
 ${slide}
 ${meta}
 ${preview}
-${list}
 ${hero}
 ${detail}
 ${card}

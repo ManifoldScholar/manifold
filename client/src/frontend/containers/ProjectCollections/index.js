@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import isEmpty from "lodash/isEmpty";
 import Utility from "frontend/components/utility";
 import ProjectCollection from "frontend/components/project-collection";
 import connectAndFetch from "utils/connectAndFetch";
@@ -11,6 +12,7 @@ import { select, meta } from "utils/entityUtils";
 import { projectCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import queryString from "query-string";
+import EntityCollection from "global/components/composed/EntityCollection";
 
 const { request } = entityStoreActions;
 const perPage = 8;
@@ -78,6 +80,33 @@ export class ProjectsCollectionsContainer extends Component {
     this.props.fetchData(this.props);
   }
 
+  get projectCollections() {
+    return this.props.projectCollections;
+  }
+
+  get projectCollectionsMeta() {
+    return this.props.projectCollectionsMeta;
+  }
+
+  get location() {
+    return this.props.location;
+  }
+
+  get showPlaceholder() {
+    if (this.location.search) return false; // There are search filters applied, skip the check
+    if (!this.projectCollections?.length) return true;
+  }
+
+  get showPagination() {
+    if (
+      isEmpty(this.projectCollectionsMeta) ||
+      !this.projectCollectionsMeta.pagination
+    )
+      return false;
+    if (this.projectCollectionsMeta.pagination.totalPages === 1) return false;
+    return true;
+  }
+
   currentQuery() {
     return queryString.parse(this.props.location.search);
   }
@@ -99,33 +128,22 @@ export class ProjectsCollectionsContainer extends Component {
     };
   };
 
-  showPlaceholder() {
-    const { location, projectCollections } = this.props;
-    if (location.search) return false; // There are search filters applied, skip the check
-    if (!projectCollections || projectCollections.length === 0) return true;
-  }
-
   renderProjectCollections() {
-    if (this.showPlaceholder()) return <ProjectCollection.Placeholder />;
+    if (this.showPlaceholder) return <ProjectCollection.Placeholder />;
 
-    return this.props.projectCollections.map((projectCollection, index) => {
-      return (
-        <ProjectCollection.Summary
-          key={projectCollection.id}
-          authentication={this.props.authentication}
-          projectCollection={projectCollection}
-          dispatch={this.props.dispatch}
-          limit={4}
-          ordinal={index}
-          invertColor
-        />
-      );
-    });
+    return this.projectCollections.map((projectCollection, index) => (
+      <EntityCollection.ProjectCollectionSummary
+        key={projectCollection.id}
+        projectCollection={projectCollection}
+        limit={4}
+        bgColor={index % 2 === 1 ? "neutral05" : "white"}
+      />
+    ));
   }
 
   render() {
     return (
-      <div style={{ overflowX: "hidden" }}>
+      <>
         <CheckFrontendMode debugLabel="ProjectCollections" isProjectSubpage />
         <Utility.BackLinkPrimary
           link={lh.link("frontendProjectsAll")}
@@ -133,13 +151,17 @@ export class ProjectsCollectionsContainer extends Component {
         />
         <h1 className="screen-reader-text">Project Collections</h1>
         {this.renderProjectCollections()}
-        {this.props.projectCollectionsMeta ? (
-          <GlobalUtility.Pagination
-            paginationClickHandler={this.pageChangeHandlerCreator}
-            pagination={this.props.projectCollectionsMeta.pagination}
-          />
-        ) : null}
-      </div>
+        {this.showPagination && (
+          <section>
+            <div className="container">
+              <GlobalUtility.Pagination
+                paginationClickHandler={this.pageChangeHandlerCreator}
+                pagination={this.projectCollectionsMeta.pagination}
+              />
+            </div>
+          </section>
+        )}
+      </>
     );
   }
 }

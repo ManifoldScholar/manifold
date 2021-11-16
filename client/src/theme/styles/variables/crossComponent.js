@@ -47,9 +47,17 @@ export const dialog = {
 };
 
 export const entityFilterForm = {
-  gap: 10,
+  gap: 12,
   selectMinWidth: 182,
-  searchMinWidth: 200
+  searchMinWidth: 200,
+  flexBasis(inputCount = 1, searchCount = 0) {
+    if (!Number.isInteger(inputCount) || !Number.isInteger(searchCount))
+      return "auto";
+    const gapCount = inputCount + searchCount - 1;
+    return `${this.selectMinWidth * inputCount +
+      this.searchMinWidth * searchCount +
+      this.gap * gapCount}px`;
+  }
 };
 
 export const dashboardLayoutBreakpoint = breakpoints[75];
