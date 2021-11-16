@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { blockLabelRound, subtitlePrimary } from "theme/styles/mixins";
+import { transientOptions } from "helpers/emotionHelpers";
 
-export const MetadataWrapper = styled.div`
+export const MetadataWrapper = styled("div", transientOptions)`
   --metadata-padding-top: ${({ $stack }) => ($stack ? "0.625em" : "0.4em")};
   --metadata-default-font-size: ${({ $stack }) => ($stack ? "16px" : "14px")};
   --metadata-creators-font-size: ${({ $stack }) => ($stack ? "16px" : "14px")};
@@ -23,7 +24,7 @@ export const MetadataWrapper = styled.div`
     `}
 `;
 
-export const TitleWrapper = styled.h3`
+export const TitleWrapper = styled("h3", transientOptions)`
   --title-display: ${({ $stack }) => ($stack ? "block" : "inline-block")};
 
   margin: 0;
@@ -59,7 +60,7 @@ export const Subtitle = styled.h4`
     var(--transition-timing-function);
 `;
 
-export const Tag = styled.div`
+export const Tag = styled("div", transientOptions)`
   ${blockLabelRound}
 
   padding-right: 5px;
@@ -96,7 +97,7 @@ export const Description = styled.div`
   padding-top: var(--metadata-padding-top);
 `;
 
-export const Date = styled.div`
+export const Date = styled("div", transientOptions)`
   font-size: var(--metadata-default-font-size);
   font-style: italic;
   padding-top: var(--metadata-padding-top);
