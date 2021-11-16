@@ -2,121 +2,56 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import ThumbnailGrid from "global/composed/ThumbnailGrid";
 import EntityThumbnail from "global/atomic/EntityThumbnail";
-import lh from "helpers/linkHandler";
-
-import ProjectList from "frontend/components/project-list";
-import memoize from "lodash/memoize";
+import SummaryHeader from "./SummaryHeader";
 import classnames from "classnames";
-import Header from "./Header";
-import * as Styled from "./styles"
+import * as Styled from "./styles";
 
-export default function CollectionSummary({entities, issueCount}) {
-  /* handle limit here? */
+export default function CollectionSummary({
+  collection,
+  entities,
+  issueCount,
+  hero,
+  background
+}) {
   return (
     <section>
-      <Container>
-        <SummaryHeader />
+      <Styled.Container className={classnames(("bg-neutral05": background))}>
+        <SummaryHeader collection={collection} hero={hero} />
         {entities ? (
-          issueCount && <Styled.IssueCount />
-          <ThumbnailGrid>
-            entities.map(entity => <EntityThumbnail />)
-          </ThumbnailGrid>
+          <>
+            {issueCount && (
+              <Styled.IssueCount>
+                Showing {entities.length} of {issueCount} issues
+              </Styled.IssueCount>
+            )}
+            <ThumbnailGrid>
+              {({ stack }) =>
+                entities.map(entity => (
+                  <EntityThumbnail
+                    entity={entity}
+                    stack={stack}
+                    key={entity.attributes.slug}
+                  />
+                ))
+              }
+            </ThumbnailGrid>
+          </>
         ) : (
           <Styled.EmptyWrapper>
-          <Styled.EmptyMessage>
-          This Project Collection is currently empty.
-          </Styled.EmptyMessage>
+            <Styled.EmptyMessage>
+              This Project Collection is currently empty.
+            </Styled.EmptyMessage>
           </Styled.EmptyWrapper>
         )}
-      </Container>
+      </Styled.Container>
     </section>
   );
 }
 
-CollectionSummary.propTypes ={
-  collection: PropTypes.object,
-  limit: PropTypes.number,
-  authenticated: PropTypes.bool,
-  order: PropTypes.number,
-  invertColor: PropTypes.bool
-}
-
-export class ProjectCollectionSummary extends Component {
-  static displayName = "ProjectCollectionSummary";
-
-  static propTypes = {
-    projectCollection: PropTypes.object.isRequired,
-    limit: PropTypes.number,
-    dispatch: PropTypes.func,
-    authentication: PropTypes.object,
-    ordinal: PropTypes.number,
-    invertColor: PropTypes.bool
-  };
-
-  static defaultProps = {
-    invertColor: false
-  };
-
-  get limit() {
-    return this.props.limit;
-  }
-
-  get collection() {
-    return this.props.projectCollection;
-  }
-
-  get projects() {
-    return this.mappedProjects(this.collection);
-  }
-
-  get projectsCount() {
-    return this.collection.attributes.projectsCount;
-  }
-
-  get hasProjects() {
-    return this.projects.length > 0;
-  }
-
-  mappedProjects = memoize(() => {
-    return this.collection.relationships.collectionProjects.map(
-      cp => cp.relationships.project
-    );
-  });
-
-  render() {
-    if (!this.collection) return null;
-
-    const backgroundClasses = classnames({
-      "bg-neutral05":
-        this.props.ordinal % 2 === (this.props.invertColor ? 1 : 0)
-    });
-
-    return (
-      <section key={this.collection.id} className={backgroundClasses}>
-        <div className="container">
-          <Header projectCollection={this.props.projectCollection} hasLink />
-          {this.hasProjects ? (
-            <ProjectList.Grid
-              authenticated={this.props.authentication.authenticated}
-              projects={this.projects}
-              dispatch={this.props.dispatch}
-              limit={this.limit}
-              showViewAll={this.projects.length < this.projectsCount}
-              viewAllUrl={lh.link(
-                "frontendProjectCollection",
-                this.collection.attributes.slug
-              )}
-              viewAllLabel={"See the full collection"}
-            />
-          ) : (
-            <div className="entity-section-wrapper__body project-list empty">
-              <p className="message">
-                {"This Project Collection is currently empty."}
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
-    );
-  }
-}
+CollectionSummary.propTypes = {
+  collection: PropTypes.object.isRequired,
+  background: PropTypes.bool,
+  entities: PropTypes.arrayOf(PropTypes.object),
+  issueCount: PropTypes.number,
+  hero: PropTypes.object
+};
