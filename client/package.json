@@ -243,6 +243,7 @@
     "rimraf": "^3.x",
     "storybook-addon-jsx": "^7.1.1",
     "storybook-react-router": "^1.0.3",
+    "string-replace-loader": "^3.0.3",
     "style-loader": "^1.x",
     "transform-imports": "^2.0.0",
     "true-case-path": "^2",
@@ -254,7 +255,7 @@
     "webpack-cli": "^3.0.0",
     "webpack-dev-server": "^3.1",
     "webpack-merge": "^5.8.0",
-    "webpack-node-externals": "^1.6.0"
+    "webpack-node-externals": "^3.0.0"
   },
   "engines": {
     "node": ">=8.0.0 <13.0.0"
