@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Collecting from "frontend/components/collecting";
-import { EntityAvatar, PlaceholderAvatar } from "./avatar";
+import EntityAvatar from "global/components/atomic/EntityAvatar";
 import EntityMetadata from "./EntityMetadata";
 import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
@@ -15,8 +15,6 @@ export default function EntityThumbnail({
   userMock = false,
   stack = true
 }) {
-  const placeholder = !entity.attributes.avatarStyles.original;
-
   return (
     <Styled.Wrapper>
       <Styled.ItemLink
@@ -24,11 +22,7 @@ export default function EntityThumbnail({
         to={lh.link("frontendProjectDetail", entity.attributes.slug)}
       >
         <Styled.Cover $stack={stack}>
-          {placeholder ? (
-            <PlaceholderAvatar entity={entity} />
-          ) : (
-            <EntityAvatar entity={entity} />
-          )}
+          <EntityAvatar entity={entity} />
         </Styled.Cover>
         {!hideMeta && (
           <EntityMetadata
