@@ -9,8 +9,7 @@ const CoverAvatar = ({ entity }) => {
       ? entity.attributes.avatarStyles.smallSquare
       : entity.attributes.avatarStyles.small;
 
-  /* need to fix the alt here */
-  return <Styled.Avatar src={avatarSrc} alt="cover image" />;
+  return <Styled.Avatar src={avatarSrc} alt="" />;
 };
 
 CoverAvatar.propTypes = {
