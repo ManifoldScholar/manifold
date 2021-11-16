@@ -201,10 +201,6 @@ export const unstyledSelect = `
     color: transparent;
     text-shadow: 0 0 0 var(--default-medium-color);
   }
-
-  &::-ms-expand {
-    display: none;
-  }
 `;
 
 export const selectPrimary = `

@@ -307,10 +307,6 @@ export default `
         }
       }
 
-      &::-ms-expand {
-        display: none;
-      }
-
       option {
         color: var(--color-neutral-text-extra-dark);
       }

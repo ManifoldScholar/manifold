@@ -187,7 +187,6 @@ export default `
             appearance: none;
           }
 
-          &::-ms-fill-lower,
           &::-moz-range-progress {
             color: var(--color-base-neutral80);
           }

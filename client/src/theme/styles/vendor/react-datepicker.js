@@ -789,7 +789,6 @@ export default `
   .react-datepicker__month-year-option:last-of-type {
     -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     border-bottom-left-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
