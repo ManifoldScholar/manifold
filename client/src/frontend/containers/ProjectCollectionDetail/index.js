@@ -4,7 +4,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import Layout from "frontend/components/layout";
 import Utility from "frontend/components/utility";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
-import ProjectCollection from "frontend/components/project-collection";
+import EntityCollection from "global/components/composed/EntityCollection";
 import { entityStoreActions } from "actions";
 import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
 import { projectCollectionsAPI, projectsAPI, requests } from "api";
@@ -18,7 +18,7 @@ import has from "lodash/has";
 import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
-const page = 1;
+const defaultPage = 1;
 const perPage = 20;
 
 export class ProjectCollectionDetailContainer extends Component {
@@ -37,20 +37,29 @@ export class ProjectCollectionDetailContainer extends Component {
       promises.push(promise);
     }
 
-    const params = queryString.parse(location.search);
+    const search = queryString.parse(location.search);
+
+    const baseFilters = {
+      collectionOrder: projectCollectionId
+    };
+
+    const { page, ...filters } = search;
     const pagination = {
-      number: params.page ? params.page : page,
+      number: page || defaultPage,
       size: perPage
     };
-    const filter = omitBy(params, (v, k) => k === "page");
-    filter.collectionOrder = projectCollectionId;
-    const projectsRequest = request(
-      projectsAPI.index(filter, pagination),
+
+    const projectsFetch = projectsAPI.index(
+      Object.assign(baseFilters, filters),
+      pagination
+    );
+
+    const projectsAction = request(
+      projectsFetch,
       requests.feCollectionProjects
     );
-    const { promise } = dispatch(projectsRequest);
-    promises.push(promise);
-
+    const { promise: one } = dispatch(projectsAction);
+    promises.push(one);
     return Promise.all(promises);
   };
 
@@ -94,16 +103,31 @@ export class ProjectCollectionDetailContainer extends Component {
     this.props.dispatch(flush(requests.feProjectCollection));
   }
 
-  initialState(init) {
+  initialFilterState(init = {}) {
     const filter = omitBy(init, (vIgnored, k) => k === "page");
+    // filter.collectionOrder = projectCollectionId;
+    return filter;
+  }
 
+  initialState(init = {}) {
     return {
-      filter: { ...filter },
+      filter: { ...this.initialFilterState(init) },
       pagination: {
-        number: init.page || page,
+        number: init.page || defaultPage,
         size: perPage
       }
     };
+  }
+
+  updateUrl() {
+    const pathname = this.props.location.pathname;
+    const filters = this.state.filter;
+    const pageParam = this.state.pagination.number;
+    const params = { ...filters };
+    if (pageParam !== 1) params.page = pageParam;
+
+    const search = queryString.stringify(params);
+    this.props.history.push({ pathname, search });
   }
 
   updateResults(filter = this.state.filter) {
@@ -119,15 +143,18 @@ export class ProjectCollectionDetailContainer extends Component {
     this.props.dispatch(action);
   }
 
+  doUpdate() {
+    this.updateResults();
+    this.updateUrl();
+  }
+
   filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.updateResults(filter);
-    });
+    this.setState({ filter }, this.doUpdate);
   };
 
   handlePageChange = pageParam => {
     const pagination = { ...this.state.pagination, number: pageParam };
-    this.setState({ pagination }, this.updateResults);
+    this.setState({ pagination }, this.doUpdate);
   };
 
   pageChangeHandlerCreator = pageParam => {
@@ -137,24 +164,19 @@ export class ProjectCollectionDetailContainer extends Component {
     };
   };
 
-  renderProjects(props) {
-    if (!props.projects || !props.projectsMeta) return null;
-
-    return (
-      <ProjectCollection.Detail
-        projectCollection={props.projectCollection}
-        projects={props.projects}
-        pagination={props.projectsMeta.pagination}
-        paginationClickHandler={this.pageChangeHandlerCreator}
-        authentication={props.authentication}
-        filterChangeHandler={this.filterChangeHandler}
-        initialState={this.state.filter || {}}
-        dispatch={this.props.dispatch}
-      />
-    );
+  get projectCollection() {
+    return this.props.projectCollection;
   }
 
-  get description() {
+  get projects() {
+    return this.props.projects;
+  }
+
+  get projectsMeta() {
+    return this.props.projectsMeta;
+  }
+
+  get ogDescription() {
     const { projectCollection } = this.props;
     if (!projectCollection) return null;
     const {
@@ -164,7 +186,7 @@ export class ProjectCollectionDetailContainer extends Component {
     return socialDescription || descriptionPlaintext;
   }
 
-  get title() {
+  get ogTitle() {
     const { projectCollection, settings } = this.props;
     if (!projectCollection || !settings) return null;
     const { socialTitle, title } = projectCollection.attributes;
@@ -174,7 +196,7 @@ export class ProjectCollectionDetailContainer extends Component {
     );
   }
 
-  get image() {
+  get ogImage() {
     const { projectCollection } = this.props;
     if (!projectCollection) return null;
     const { socialImageStyles, heroStyles } = projectCollection.attributes;
@@ -185,8 +207,7 @@ export class ProjectCollectionDetailContainer extends Component {
   }
 
   render() {
-    const { projectCollection } = this.props;
-    if (!projectCollection) return null;
+    if (!this.projectCollection) return null;
 
     return (
       <div>
@@ -194,7 +215,7 @@ export class ProjectCollectionDetailContainer extends Component {
           debugLabel="ProjectCollectionDetail"
           isProjectSubpage
         />
-        {this.props.projectCollection && (
+        {this.projectCollection && (
           <EventTracker
             event={EVENTS.VIEW_RESOURCE}
             resource={this.props.projectCollection}
@@ -205,14 +226,27 @@ export class ProjectCollectionDetailContainer extends Component {
           backText={"Back to Project Collections"}
         />
         <HeadContent
-          title={this.title}
-          description={this.description}
-          image={this.image}
+          title={this.ogTitle}
+          description={this.ogDescription}
+          image={this.ogImage}
         />
         <h1 className="screen-reader-text">
-          {this.props.projectCollection.attributes.title}
+          {this.projectCollection.attributes.title}
         </h1>
-        {this.renderProjects(this.props)}
+        <EntityCollection.ProjectCollectionDetail
+          projectCollection={this.projectCollection}
+          projects={this.projects}
+          projectsMeta={this.projectsMeta}
+          filterProps={{
+            filterChangeHandler: this.filterChangeHandler,
+            initialFilterState: this.state.filter || {},
+            resetFilterState: this.initialFilterState()
+          }}
+          paginationProps={{
+            paginationClickHandler: this.pageChangeHandlerCreator
+          }}
+          bgColor="neutral05"
+        />
         <Layout.ButtonNavigation
           showProjects={false}
           grayBg={false}

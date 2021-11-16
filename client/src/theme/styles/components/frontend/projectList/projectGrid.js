@@ -48,10 +48,6 @@ export default `
         border-radius: 50%;
       }
 
-      + .list-pagination-primary {
-        margin-top: 30px;
-      }
-
       &.empty {
         ${panelRoundedDark}
         width: 100%;

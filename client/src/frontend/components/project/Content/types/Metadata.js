@@ -27,10 +27,6 @@ export default class ProjectContentBlockMetadataBlock extends PureComponent {
 
     if (!metadata || isEmpty(metadata)) return null;
 
-    return (
-      <div className="entity-section-wrapper__body entity-section-wrapper__body--pad-top">
-        <Meta.List metadata={metadataFormatted} />
-      </div>
-    );
+    return <Meta.List metadata={metadataFormatted} />;
   }
 }

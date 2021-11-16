@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Layout from "frontend/components/layout";
 import ProjectList from "frontend/components/project-list";
-import Utility from "global/components/utility";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -12,6 +11,7 @@ import queryString from "query-string";
 import omitBy from "lodash/omitBy";
 import debounce from "lodash/debounce";
 import withSettings from "hoc/with-settings";
+import EntityCollection from "global/components/composed/EntityCollection";
 
 const { request } = entityStoreActions;
 const defaultPage = 1;
@@ -143,39 +143,20 @@ export class ProjectsContainer extends Component {
     if (this.showPlaceholder()) return <ProjectList.Placeholder />;
 
     return (
-      <section className="bg-neutral05">
-        <div className="entity-section-wrapper container">
-          <header className="entity-section-wrapper__heading section-heading">
-            <div className="main">
-              <Utility.IconComposer size={56} icon="projects64" />
-              <div className="body">
-                <h2 className="title">{"All Projects"}</h2>
-              </div>
-            </div>
-          </header>
-          <ProjectList.Filters
-            filterChangeHandler={this.filterChangeHandler}
-            initialFilterState={this.state.filter}
-            resetFilterState={this.initialFilterState()}
-            subjects={this.props.subjects}
-          />
-          <div className="entity-section-wrapper__details">
-            <Utility.EntityCount
-              pagination={get(this.props.projectsMeta, "pagination")}
-              singularUnit="project"
-              pluralUnit="projects"
-            />
-          </div>
-          <ProjectList.Grid
-            authenticated={this.props.authentication.authenticated}
-            dispatch={this.props.dispatch}
-            projects={this.props.projects}
-            pagination={get(this.props.projectsMeta, "pagination")}
-            paginationClickHandler={this.pageChangeHandlerCreator}
-            limit={perPage}
-          />
-        </div>
-      </section>
+      <EntityCollection.Projects
+        projects={this.props.projects}
+        projectsMeta={this.props.projectsMeta}
+        filterProps={{
+          filterChangeHandler: this.filterChangeHandler,
+          initialFilterState: this.state.filter,
+          resetFilterState: this.initialFilterState(),
+          subjects: this.props.subjects
+        }}
+        paginationProps={{
+          paginationClickHandler: this.pageChangeHandlerCreator
+        }}
+        bgColor="neutral05"
+      />
     );
   }
 
@@ -183,11 +164,7 @@ export class ProjectsContainer extends Component {
     if (!this.props.projectsMeta) return null;
 
     return (
-      <div
-        style={{
-          overflowX: "hidden"
-        }}
-      >
+      <>
         <h1 className="screen-reader-text">All Projects</h1>
         {this.renderProjectLibrary()}
         {this.hasVisibleProjects && (
@@ -197,7 +174,7 @@ export class ProjectsContainer extends Component {
             grayBg={false}
           />
         )}
-      </div>
+      </>
     );
   }
 }

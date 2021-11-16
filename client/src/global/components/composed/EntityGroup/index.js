@@ -12,7 +12,7 @@ export default function EntityGroup({ entities, title, to }) {
         <Styled.HeaderText>{title}</Styled.HeaderText>
         {!!to && <Styled.Icon icon="ArrowLongRight16" size={24} />}
       </Styled.GroupHeader>
-      <ThumbnailGrid minColumns={4} minItemWidth="180px">
+      <ThumbnailGrid minColumns={4} minItemWidth="210px">
         {({ stack }) =>
           entities.map(entity => (
             <EntityThumbnail

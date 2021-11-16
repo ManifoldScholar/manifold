@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import AllLink from "frontend/components/event/AllLink";
 import List from "frontend/components/event/List";
 
 export default class ProjectContentBlockRecentActivityBlock extends PureComponent {
@@ -22,23 +21,13 @@ export default class ProjectContentBlockRecentActivityBlock extends PureComponen
     return this.props.project;
   }
 
-  render() {
-    const { attributes, relationships } = this.project;
-    const { events } = relationships;
-    const baseClass = "entity-section-wrapper";
+  get events() {
+    return this.project.relationships.events;
+  }
 
+  render() {
     return (
-      <>
-        <AllLink
-          count={attributes.eventCount}
-          threshold={6}
-          project={this.project}
-          wrapperClasses={`${baseClass}__tools`}
-        />
-        <div className={`${baseClass}__body ${baseClass}__body--pad-top`}>
-          <List project={this.project} events={events} limit={6} columns={3} />
-        </div>
-      </>
+      <List project={this.project} events={this.events} limit={6} columns={3} />
     );
   }
 }

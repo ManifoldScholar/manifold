@@ -29,18 +29,16 @@ function ResourceCard({
   }
 
   return (
-    <li>
-      <article className="resource-card">
-        <div className="resource-card__preview">
-          <Preview resource={resource} detailUrl={getDetailUrl()} />
-        </div>
-        <Info
-          resource={resource}
-          detailUrl={getDetailUrl()}
-          itemHeadingLevel={itemHeadingLevel}
-        />
-      </article>
-    </li>
+    <article className="resource-card">
+      <div className="resource-card__preview">
+        <Preview resource={resource} detailUrl={getDetailUrl()} />
+      </div>
+      <Info
+        resource={resource}
+        detailUrl={getDetailUrl()}
+        itemHeadingLevel={itemHeadingLevel}
+      />
+    </article>
   );
 }
 

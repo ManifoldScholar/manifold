@@ -1,5 +1,4 @@
 import abilities from "../structures/abilities";
-import Constants from "frontend/components/project-collection/Constants";
 
 const projectCollection = () => ({
   type: "projectCollections",
@@ -15,7 +14,7 @@ const projectCollection = () => ({
     tagList: [],
     icon: "lamp",
     abilities: abilities(),
-    heroLayout: Constants.SQUARE,
+    heroLayout: "square_inset",
     socialTitle: "Foo Bar",
     socialDescription: "Bar Foo"
   },

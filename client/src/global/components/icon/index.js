@@ -83,6 +83,7 @@ import InteractAnnotate32 from "./32/InteractAnnotate";
 import InteractHighlight32 from "./32/InteractHighlight";
 import InteractComment32 from "./32/InteractComment";
 import Key32 from "./32/Key";
+import Journals64 from "./64/Journals";
 import Lamp64 from "./64/Lamp";
 import Link24 from "./24/Link";
 import Lock16 from "./16/Lock";
@@ -245,6 +246,7 @@ export default {
   InteractAnnotate32,
   InteractHighlight32,
   InteractComment32,
+  Journals64,
   Key32,
   Lamp64,
   Link24,
