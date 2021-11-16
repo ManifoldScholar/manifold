@@ -14,7 +14,6 @@ export default `
 
     &__inner {
       ${headerContainerPrimary}
-      display: -ms-grid;
       display: grid;
       grid-template: "logo breadcrumbs hamburger" / 1fr auto 1fr;
       width: 100%;
