@@ -1,12 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import typeResolver from "./helpers/resolver";
-import {
-  Heading,
-  Incomplete,
-  Wrapper
-} from "frontend/components/content-block/Block/parts";
+import { Incomplete } from "frontend/components/content-block/Block/parts";
 import Authorization from "helpers/authorization";
+import EntityCollection from "global/components/composed/EntityCollection/EntityCollection";
 
 export default class ProjectContentBlock extends PureComponent {
   static displayName = "Project.Content.Block";
@@ -44,8 +41,8 @@ export default class ProjectContentBlock extends PureComponent {
     return this.props.block;
   }
 
-  get style() {
-    return this.block.attributes.style;
+  get bgColor() {
+    return this.block.attributes.style === "shaded" ? "neutral05" : "white";
   }
 
   get renderable() {
@@ -84,18 +81,20 @@ export default class ProjectContentBlock extends PureComponent {
     const TypeComponent = this.typeComponent;
 
     return (
-      <Wrapper theme={this.style}>
-        <Heading
-          title={title}
-          icon={this.icon}
-          description={this.description}
-        />
-        {this.renderable ? (
-          <TypeComponent {...this.props} />
-        ) : (
-          <Incomplete block={this.block} />
-        )}
-      </Wrapper>
+      <EntityCollection
+        title={title}
+        icon={this.icon}
+        description={this.description}
+        UtilityComponent={() => <></>}
+        BodyComponent={() =>
+          this.renderable ? (
+            <TypeComponent {...this.props} />
+          ) : (
+            <Incomplete block={this.block} />
+          )
+        }
+        bgColor={this.bgColor}
+      />
     );
   }
 }

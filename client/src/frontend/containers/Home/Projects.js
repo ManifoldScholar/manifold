@@ -5,8 +5,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
-import lh from "helpers/linkHandler";
-import Utility from "global/components/utility";
+import EntityCollection from "global/components/composed/EntityCollection";
 
 const { request } = entityStoreActions;
 const perPage = 20;
@@ -54,27 +53,11 @@ export class HomeProjectsContainer extends Component {
 
   render() {
     if (this.showPlaceholder()) return <ProjectList.Placeholder />;
-
     return (
-      <section className="bg-neutral05">
-        <div className="entity-section-wrapper container">
-          <header className="entity-section-wrapper__heading section-heading">
-            <div className="main">
-              <Utility.IconComposer size={56} icon="projects64" />
-              <div className="body">
-                <h2 className="title">{"Our Projects"}</h2>
-              </div>
-            </div>
-          </header>
-          <ProjectList.Grid
-            authenticated={this.props.authentication.authenticated}
-            dispatch={this.props.dispatch}
-            projects={this.props.projects}
-            limit={16}
-            viewAllUrl={lh.link("frontendProjectsAll")}
-          />
-        </div>
-      </section>
+      <EntityCollection.ProjectsSummary
+        projects={this.props.projects}
+        bgColor="neutral05"
+      />
     );
   }
 }

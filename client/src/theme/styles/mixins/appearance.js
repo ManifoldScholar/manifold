@@ -101,6 +101,12 @@ export function tailUp(color = "var(--color-base-neutral10)", height = "17px") {
   `;
 }
 
+// // Links
+// // --------------------------------------------------------
+export const linkUnstyled = `
+  text-decoration: none;
+`;
+
 // // Buttons
 // // --------------------------------------------------------
 export const buttonUnstyled = `

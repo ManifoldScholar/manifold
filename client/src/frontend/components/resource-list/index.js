@@ -1,5 +1,5 @@
 import Thumbnails from "./Thumbnails";
-import Cards from "./Cards";
+import Cards from "./Cards/index";
 import Filters from "./Filters";
 import Totals from "./Totals";
 import Slideshow from "./Slideshow";

@@ -8,22 +8,21 @@ import { projectsAPI, requests } from "api";
 import { select, meta } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 import LoadingBlock from "global/components/loading-block";
-import GlobalUtility from "global/components/utility";
 import HeadContent from "global/components/HeadContent";
-import ResourceCollectionList from "frontend/components/resource-collection-list";
 import BackLink from "frontend/components/back-link";
 import ContentPlaceholder from "global/components/ContentPlaceholder";
+import EntityCollection from "global/components/composed/EntityCollection";
 import withSettings from "hoc/with-settings";
 import Authorize from "hoc/authorize";
 
 const { request, flush } = entityStoreActions;
-const page = 1;
+const defaultPage = 1;
 const perPage = 10;
 
 class ProjectResourceCollectionsContainer extends Component {
   static fetchData = (getState, dispatch, location, match) => {
     const pagination = {
-      number: page,
+      number: defaultPage,
       size: perPage
     };
     const resourceCollectionRequest = request(
@@ -40,14 +39,17 @@ class ProjectResourceCollectionsContainer extends Component {
         requests.feResourceCollections,
         state.entityStore
       ),
-      meta: meta(requests.feResourceCollections, state.entityStore)
+      resourceCollectionsMeta: meta(
+        requests.feResourceCollections,
+        state.entityStore
+      )
     };
   };
 
   static propTypes = {
     project: PropTypes.object,
     resourceCollections: PropTypes.array,
-    meta: PropTypes.object,
+    resourceCollectionsMeta: PropTypes.object,
     settings: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired
   };
@@ -68,10 +70,10 @@ class ProjectResourceCollectionsContainer extends Component {
     this.props.dispatch(action);
   }
 
-  handlePaginationClick = pageParam => {
+  pageChangeHandlerCreator = pageParam => {
     return event => {
       event.preventDefault();
-      return this.fetchResourceCollections(pageParam);
+      this.handlePageChange(pageParam);
     };
   };
 
@@ -93,10 +95,7 @@ class ProjectResourceCollectionsContainer extends Component {
   }
 
   get hasCollections() {
-    return (
-      this.props.resourceCollections &&
-      this.props.resourceCollections.length > 0
-    );
+    return !!this.props.resourceCollections?.length;
   }
 
   renderPlaceholder(id) {
@@ -134,7 +133,7 @@ class ProjectResourceCollectionsContainer extends Component {
     if (!project) return <LoadingBlock />;
 
     return (
-      <div>
+      <>
         <CheckFrontendMode
           debugLabel="ProjectResourceCollections"
           isProjectSubpage
@@ -151,26 +150,19 @@ class ProjectResourceCollectionsContainer extends Component {
           link={lh.link("frontendProjectDetail", project.attributes.slug)}
           title={project.attributes.titlePlaintext}
         />
-        <section>
-          <div className="container">
-            {!this.hasCollections ? (
-              this.renderPlaceholder(project.id)
-            ) : (
-              <ResourceCollectionList.Grid
-                project={this.props.project}
-                resourceCollections={this.props.resourceCollections}
-                itemHeadingLevel={2}
-              />
-            )}
-            {this.props.meta && (
-              <GlobalUtility.Pagination
-                paginationClickHandler={this.handlePaginationClick}
-                pagination={this.props.meta.pagination}
-              />
-            )}
-          </div>
-        </section>
-      </div>
+        {!this.hasCollections ? (
+          this.renderPlaceholder(project.id)
+        ) : (
+          <EntityCollection.ProjectResourceCollections
+            resourceCollections={this.props.resourceCollections}
+            resourceCollectionsMeta={this.props.resourceCollectionsMeta}
+            paginationProps={{
+              paginationClickHandler: this.pageChangeHandlerCreator
+            }}
+            itemHeadingLevel={2}
+          />
+        )}
+      </>
     );
   }
 }

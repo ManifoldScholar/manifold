@@ -9,10 +9,10 @@ export class ResourceListFilters extends Component {
   static displayName = "ResourceList.Filters";
 
   static propTypes = {
-    kinds: PropTypes.array,
-    tags: PropTypes.array,
     filterChangeHandler: PropTypes.func.isRequired,
-    initialFilterState: PropTypes.object
+    initialFilterState: PropTypes.object,
+    resetFilterState: PropTypes.object,
+    project: PropTypes.object
   };
 
   constructor(props) {
@@ -26,6 +26,18 @@ export class ResourceListFilters extends Component {
     }
 
     return null;
+  }
+
+  get project() {
+    return this.props.project;
+  }
+
+  get kinds() {
+    return this.project?.attributes.resourceKinds;
+  }
+
+  get tags() {
+    return this.project?.attributes.resourceTags;
   }
 
   get showResetButton() {
@@ -42,8 +54,8 @@ export class ResourceListFilters extends Component {
   }
 
   get kindOptions() {
-    if (!this.props.kinds?.length) return [];
-    return this.props.kinds.map(kind => {
+    if (!this.kinds?.length) return [];
+    return this.kinds.map(kind => {
       return {
         label: capitalize(kind),
         value: kind
@@ -52,8 +64,8 @@ export class ResourceListFilters extends Component {
   }
 
   get tagOptions() {
-    if (!this.props.tags?.length) return [];
-    return this.props.tags.map(tag => {
+    if (!this.tags?.length) return [];
+    return this.tags.map(tag => {
       return {
         label: capitalize(tag),
         value: tag
@@ -126,8 +138,10 @@ export class ResourceListFilters extends Component {
   }
 
   resetFilters = () => {
-    event.preventDefault();
-    this.setState(this.initialState(), this.updateResults);
+    const newState = this.props.resetFilterState
+      ? { filters: { ...this.props.resetFilterState } }
+      : this.initialState();
+    this.setState(newState, this.updateResults);
   };
 
   render() {
@@ -138,7 +152,6 @@ export class ResourceListFilters extends Component {
         onSubmit={this.updateResults}
         onReset={this.resetFilters}
         showResetButton={this.showResetButton}
-        className="entity-section-wrapper__tools entity-section-wrapper__tools--wide"
       />
     );
   }
