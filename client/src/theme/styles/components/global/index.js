@@ -11,7 +11,6 @@ import demoAnimation from "./demoAnimation";
 import dialog from "./dialog";
 import drawer from "./drawer";
 import fatalError from "./fatalError";
-import footer from "./footer";
 import forms from "./forms";
 import header from "./header";
 import instructionalCopy from "./instructionalCopy";
@@ -65,7 +64,6 @@ export default `
   ${paginationCount}
   ${annotation}
   ${commentMore}
-  ${footer}
   ${dialog}
   ${collapse}
 `;

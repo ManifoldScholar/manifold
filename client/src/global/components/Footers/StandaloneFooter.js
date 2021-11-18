@@ -1,25 +1,28 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import withPluginReplacement from "hoc/with-plugin-replacement";
 import FooterParts from "./Parts";
 import { socialLinks } from "./Parts/helpers/links";
 import LanguageSelect from "global/components/LanguageSelect";
+import styled from "@emotion/styled";
+import * as Styled from "./styles";
+
+const StyledSocialColumn = styled(FooterParts.Column)`
+  align-self: center;
+`;
 
 class StandaloneFooter extends Component {
   render() {
     return (
-      <footer className="app-footer app-footer--standalone">
-        <FooterParts.Columns>
+      <Styled.StandaloneFooter className="bg-neutral95">
+        <FooterParts.Columns standalone>
           <FooterParts.Column position="right">
-            <div className="c-footer-forms">
+            <Styled.Actions>
               <LanguageSelect />
-            </div>
+            </Styled.Actions>
           </FooterParts.Column>
-          <FooterParts.Column position="left">
-            <div className="container">
-              <FooterParts.Socials links={socialLinks(this.props)} />
-            </div>
-          </FooterParts.Column>
+          <StyledSocialColumn position="left">
+            <FooterParts.Socials links={socialLinks(this.props)} />
+          </StyledSocialColumn>
         </FooterParts.Columns>
         <FooterParts.PoweredBy type="standalone">
           {this.props.settings.attributes.copyrightFormatted && (
@@ -29,7 +32,7 @@ class StandaloneFooter extends Component {
             />
           )}
         </FooterParts.PoweredBy>
-      </footer>
+      </Styled.StandaloneFooter>
     );
   }
 }

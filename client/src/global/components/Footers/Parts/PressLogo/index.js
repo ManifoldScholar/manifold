@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import withPluginReplacement from "hoc/with-plugin-replacement";
+import * as Styled from "./styles";
 
 class PressLogo extends PureComponent {
   static displayName = "Global.Footers.Parts.PressLogo";
@@ -16,20 +17,22 @@ class PressLogo extends PureComponent {
     return this.settings.attributes.general.pressSite;
   }
 
+  get pressName() {
+    return this.settings.attributes.general.defaultPublisher;
+  }
+
   render() {
     return (
-      <a
+      <Styled.Link
         href={this.pressSite}
         target="_blank"
         rel="noopener noreferrer"
-        className="app-footer__press-logo"
       >
-        <img
-          className="app-footer__press-logo-image"
-          alt="Press Site"
+        <Styled.Image
+          alt={`Logo of ${this.pressName}`}
           src={this.pressLogo.original}
         />
-      </a>
+      </Styled.Link>
     );
   }
 }

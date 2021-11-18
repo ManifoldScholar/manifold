@@ -1,11 +1,11 @@
-import Column from "./Column";
-import Columns from "./Columns";
-import Search from "./Search";
-import Navigation from "./Navigation";
-import Copyright from "./Copyright";
-import PoweredBy from "./PoweredBy";
-import PressLogo from "./PressLogo";
-import Socials from "./Socials";
+import Column from "./Column/index";
+import Columns from "./Columns/index";
+import Search from "./Search/index";
+import Navigation from "./Navigation/index";
+import Copyright from "./Copyright/index";
+import PoweredBy from "./PoweredBy/index";
+import PressLogo from "./PressLogo/index";
+import Socials from "./Socials/index";
 
 export default {
   Column,

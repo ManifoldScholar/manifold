@@ -34,7 +34,7 @@ export default `
       width: 100%;
       padding-left: 40px;
       border-color: var(--color-base-neutral40);
-      border-radius: 0;
+      border-radius: 8px;
       appearance: none;
       transition: color ${defaultTransitionProps}, border-color ${defaultTransitionProps};
 

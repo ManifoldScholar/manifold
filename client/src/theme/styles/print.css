@@ -21,7 +21,7 @@
     display: none;
   }
 
-  body.reader .app-footer-powered-by__logo {
+  body.reader .app-footer {
     display: none;
   }
 }
