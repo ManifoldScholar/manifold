@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import classNames from "classnames";
+import * as Styled from "./styles";
 
 export default class Copyright extends PureComponent {
   static displayName = "Global.Footers.Parts.Copyright";
@@ -30,26 +30,16 @@ export default class Copyright extends PureComponent {
   }
 
   render() {
-    const containerClasses = classNames("app-footer__copyright", {
-      "app-footer__copyright": true,
-      "app-footer__copyright--with-top-margin": this.props.withTopMargin,
-      "app-footer__copyright--standalone": this.isStandalone
-    });
-
     const copyright = this.renderCopyright();
     if (!copyright) return null;
 
     return (
-      <section className={containerClasses}>
-        <div
-          className={classNames({
-            container: !this.isStandalone,
-            flush: !this.isStandalone
-          })}
-        >
-          <div className="app-footer__colophone">{this.renderCopyright()}</div>
-        </div>
-      </section>
+      <Styled.Section
+        $withTopMargin={this.props.withTopMargin}
+        $standalone={this.isStandalone}
+      >
+        <div>{this.renderCopyright()}</div>
+      </Styled.Section>
     );
   }
 }

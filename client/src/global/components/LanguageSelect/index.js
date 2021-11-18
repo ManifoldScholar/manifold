@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { updateI18n } from "utils/i18n";
-import UniqueIcons from "global/components/icon/unique";
-import Utility from "global/components/utility";
+import { Select } from "global/components/atomic/form";
 
 function LanguageSelect({ authentication, language }) {
   const { t } = useTranslation();
@@ -40,24 +39,26 @@ function LanguageSelect({ authentication, language }) {
   }, [initialLanguage]);
 
   return (
-    <fieldset className="c-language-select">
-      <label htmlFor="langSelect" className="a-hidden">
-        {t("localize-content")}
-      </label>
-      <select
-        name="langSelect"
-        id="langSelect"
-        value={lang}
-        onChange={handleChange}
-      >
-        <option value="none">Language:</option>
-        <option value="en">{t(`locales.en`)}</option>
-        <option value="en">{t(`locales.es`)}</option>
-        <option value="nl">{t(`locales.nl`)}</option>
-      </select>
-      <UniqueIcons.GlobeUnique />
-      <Utility.IconComposer icon="disclosureDown24" />
-    </fieldset>
+    <Select
+      label={t("localize-content")}
+      value={lang}
+      options={[
+        {
+          value: "en",
+          label: t(`locales.en`)
+        },
+        {
+          value: "es",
+          label: t(`locales.es`)
+        },
+        {
+          value: "nl",
+          label: t(`locales.nl`)
+        }
+      ]}
+      onChange={handleChange}
+      preIcon="languageGlobe24"
+    />
   );
 }
 
