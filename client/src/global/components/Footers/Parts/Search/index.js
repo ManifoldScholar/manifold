@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import * as Styled from "./styles";
 
 export default class Search extends PureComponent {
   static displayName = "Global.Footers.Parts.Search";
@@ -32,16 +32,13 @@ export default class Search extends PureComponent {
   };
 
   render() {
-    const containerClasses = classNames(
-      "app-footer-search-form",
-      "search-form",
-      {
-        "app-footer-search-form--with-top-margin": this.props.withTopMargin
-      }
-    );
-
     return (
-      <form className={containerClasses} onSubmit={this.doSearch}>
+      <Styled.Form
+        role="search"
+        className="search-form"
+        $withTopMargin={this.props.withTopMargin}
+        onSubmit={this.doSearch}
+      >
         <div className="search-button-inline">
           <label htmlFor="app-footer-search" className="screen-reader-text">
             Site Search
@@ -62,7 +59,7 @@ export default class Search extends PureComponent {
             <span className="screen-reader-text">Search</span>
           </button>
         </div>
-      </form>
+      </Styled.Form>
     );
   }
 }

@@ -84,6 +84,7 @@ import InteractHighlight32 from "./32/InteractHighlight";
 import InteractComment32 from "./32/InteractComment";
 import Key32 from "./32/Key";
 import Lamp64 from "./64/Lamp";
+import LanguageGlobe24 from "./24/LanguageGlobe";
 import Link24 from "./24/Link";
 import Lock16 from "./16/Lock";
 import Lock32 from "./32/Lock";
@@ -247,6 +248,7 @@ export default {
   InteractComment32,
   Key32,
   Lamp64,
+  LanguageGlobe24,
   Link24,
   Lock16,
   Lock32,

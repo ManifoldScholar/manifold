@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import withPluginReplacement from "hoc/with-plugin-replacement";
 import FooterParts from "./Parts";
+import * as Styled from "./styles";
 
 class ReaderFooter extends Component {
   get text() {
@@ -12,7 +12,6 @@ class ReaderFooter extends Component {
     if (!this.text.attributes.metadataFormatted.rights) return null;
     return (
       <div
-        className="app-footer-reader__rights"
         dangerouslySetInnerHTML={{
           __html: this.text.attributes.metadataFormatted.rights
         }}
@@ -22,11 +21,11 @@ class ReaderFooter extends Component {
 
   render() {
     return (
-      <footer className="app-footer app-footer--reader">
+      <Styled.ReaderFooter className="bg-neutral95 app-footer">
         <FooterParts.PoweredBy type="reader">
           {this.copyright}
         </FooterParts.PoweredBy>
-      </footer>
+      </Styled.ReaderFooter>
     );
   }
 }

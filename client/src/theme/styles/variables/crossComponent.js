@@ -48,8 +48,8 @@ export const dialog = {
 
 export const entityFilterForm = {
   gap: 10,
-  selectMinWidth: 200,
-  searchMinWidth: 182
+  selectMinWidth: 182,
+  searchMinWidth: 200
 };
 
 export const dashboardLayoutBreakpoint = breakpoints[75];
