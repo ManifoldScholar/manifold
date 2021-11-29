@@ -44,6 +44,8 @@ export default function EntityThumbnail({
   );
 }
 
+EntityThumbnail.displayName = "Global.Atomic.EntityThumbnail";
+
 EntityThumbnail.propTypes = {
   entity: PropTypes.object.isRequired,
   onUncollect: PropTypes.func,

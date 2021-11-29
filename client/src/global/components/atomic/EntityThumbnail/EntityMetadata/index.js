@@ -60,6 +60,8 @@ export default function EntityMetadata({
   );
 }
 
+EntityMetadata.displayName = "Global.Atomic.EntityThumbnail.Metadata";
+
 EntityMetadata.propTypes = {
   entity: PropTypes.object,
   hideDescription: PropTypes.bool,
