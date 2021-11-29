@@ -36,6 +36,24 @@ module.exports = async ({ config, mode }) => {
     ]
   });
 
+  config.module.rules.push(
+    // The following rule monkey patches an Emotion warning. The Manifold client uses Emotion's
+    // "advanced" approach to SSR, which means that the styles are inserted in the
+    // head, rather than before each component. Therefore, the first-child warning
+    // doesn't apply to our case. Sadly, emotion doesn't provide a viable way to
+    // disable this warning, so we're doing what we did in the client and
+    // monkey patching it in Storybook to stop it from spamming the console.
+    // See https://github.com/emotion-js/emotion/issues/1105
+    {
+      test: /node_modules\/@emotion\/cache\/(src|dist)/,
+      loader: "string-replace-loader",
+      options: {
+        search: "if (unsafePseudoClasses",
+        replace: "if (false && unsafePseudoClasses"
+      }
+    }
+  );
+
   if (!config.plugins) config.plugins = [];
   config.plugins.push(
     new DefinePlugin({
