@@ -8,3 +8,5 @@ export default function Box({ children, className }) {
     </Styled.Container>
   );
 }
+
+Box.displayName = "Global.Atomic.Box";

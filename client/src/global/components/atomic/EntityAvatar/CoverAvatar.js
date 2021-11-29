@@ -12,6 +12,8 @@ const CoverAvatar = ({ entity }) => {
   return <Styled.Avatar src={avatarSrc} alt="" />;
 };
 
+CoverAvatar.displayName = "Global.Atomic.EntityAvatar.Cover";
+
 CoverAvatar.propTypes = {
   entity: PropTypes.object,
   stack: PropTypes.bool
