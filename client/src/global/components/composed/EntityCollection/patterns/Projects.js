@@ -34,7 +34,7 @@ function ProjectsEntityCollection({
         </ThumbnailGrid>
       )}
       countProps={
-        !projectsMeta
+        isEmpty(projectsMeta)
           ? {}
           : {
               pagination: get(projectsMeta, "pagination"),
