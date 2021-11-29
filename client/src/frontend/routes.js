@@ -383,14 +383,6 @@ const routes = {
       helper: () => "/my/notes"
     },
     {
-      name: "frontendFeatured",
-      exact: true,
-      component: "Featured",
-      path: "/featured",
-      isLibrary: true,
-      helper: () => "/featured"
-    },
-    {
       name: "frontendSearch",
       exact: true,
       component: "Search",
