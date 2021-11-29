@@ -29,7 +29,10 @@ export default function ThumbnailGrid({
   );
 }
 
-EntityThumbnail.propTypes = {
+ThumbnailGrid.displayName = "Global.Composed.ThumbnailGrid";
+
+ThumbnailGrid.propTypes = {
   minItemWidth: PropTypes.string,
+  minColumns: PropTypes.number,
   children: PropTypes.node
 };
