@@ -22,7 +22,6 @@ import ResourceDetail from "frontend/containers/ResourceDetail";
 import ProjectResourceCollections from "frontend/containers/ProjectResourceCollections";
 import ResourceCollectionDetail from "frontend/containers/ResourceCollectionDetail";
 import EventList from "frontend/containers/EventList";
-import Featured from "frontend/containers/Featured";
 import Search from "frontend/containers/Search";
 import Contact from "frontend/containers/Contact";
 import PasswordReset from "frontend/containers/PasswordReset";
@@ -67,7 +66,6 @@ export default {
   ProjectResourceCollections,
   ResourceCollectionDetail,
   EventList,
-  Featured,
   Search,
   Contact,
   PasswordReset,
