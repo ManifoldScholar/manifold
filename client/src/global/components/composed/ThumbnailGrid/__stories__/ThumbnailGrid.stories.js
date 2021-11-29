@@ -26,11 +26,12 @@ const entities = shuffle(projects.concat(journals).concat(issues));
 storiesOf("Global/ThumbnailGrid", module)
   .add("Grid", () => {
     return (
-      <div style={{ padding: "5% 10%" }} className="bg-white">
+      <div className="container">
         <ThumbnailGrid>
           {({ stack }) =>
             entities.map(item => (
               <EntityThumbnail
+                key={item.id}
                 entity={item}
                 userMock={user}
                 onUncollect={() => console.log("clicked uncollect")}
@@ -44,11 +45,12 @@ storiesOf("Global/ThumbnailGrid", module)
   })
   .add("List", () => {
     return (
-      <div style={{ padding: "5% 10%", width: "400px" }} className="bg-white">
+      <div className="container" style={{ maxWidth: "500px" }}>
         <ThumbnailGrid>
           {({ stack }) =>
             entities.map(item => (
               <EntityThumbnail
+                key={item.id}
                 entity={item}
                 userMock={user}
                 onUncollect={() => console.log("clicked uncollect")}
@@ -62,7 +64,7 @@ storiesOf("Global/ThumbnailGrid", module)
   })
   .add("Empty", () => {
     return (
-      <div style={{ padding: "5% 10%" }} className="bg-white">
+      <div className="container">
         <ThumbnailGrid />
       </div>
     );
