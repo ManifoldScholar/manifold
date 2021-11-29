@@ -27,7 +27,7 @@ export default function EntityGroup({ entities, title, to }) {
   );
 }
 
-EntityGroup.displayName = "Atomics.EntityGroup";
+EntityGroup.displayName = "Global.Composed.EntityGroup";
 
 EntityGroup.propTypes = {
   entities: PropTypes.arrayOf(PropTypes.object).isRequired,

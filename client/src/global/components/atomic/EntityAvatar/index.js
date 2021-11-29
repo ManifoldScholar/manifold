@@ -13,6 +13,8 @@ export default function EntityAvatar({ entity }) {
   );
 }
 
+EntityAvatar.displayName = "Global.Atomic.EntityAvatar";
+
 EntityAvatar.propTypes = {
   entity: PropTypes.object.isRequired
 };
