@@ -117,7 +117,7 @@ class ProjectPropertiesContainer extends PureComponent {
                 wide
                 label="Featured"
                 name="attributes[featured]"
-                instructions="Featured projects are highlighted on the home page."
+                instructions="Featured projects can be automatically included in smart project collections."
               />
               <Form.Switch
                 className="form-toggle-secondary"
