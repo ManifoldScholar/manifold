@@ -6,10 +6,11 @@ import * as Styled from "./styles";
 
 export default function HeroCalloutList({
   callouts,
-  authorized = false,
+  authorized,
   showErrors = false,
   inline = false,
-  mobileVisible = false
+  mobileVisible = false,
+  lightMode = true
 }) {
   const visible = authorized
     ? callouts
@@ -29,6 +30,7 @@ export default function HeroCalloutList({
               showErrors={showErrors}
               key={callout.id}
               callout={callout}
+              lightMode={lightMode}
             />
           ))}
         </Styled.List>
@@ -40,6 +42,7 @@ export default function HeroCalloutList({
               showErrors={showErrors}
               key={callout.id}
               callout={callout}
+              lightMode={lightMode}
               link
             />
           ))}
@@ -54,5 +57,6 @@ HeroCalloutList.propTypes = {
   authorized: PropTypes.bool,
   showErrors: PropTypes.bool,
   inline: PropTypes.bool,
-  mobileVisible: PropTypes.bool
+  mobileVisible: PropTypes.bool,
+  lightMode: PropTypes.bool
 };

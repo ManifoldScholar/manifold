@@ -7,7 +7,7 @@ export default function HeroMeta({ entity }) {
   const description = entity.attributes.descriptionFormatted;
 
   const creators =
-    entity.relationships.creators.length === 0
+    entity.relationships.creators?.length === 0
       ? null
       : entity.relationships.creators;
   const showAvatars =
@@ -15,7 +15,7 @@ export default function HeroMeta({ entity }) {
     creators.every(creator => creator.attributes.avatarStyles.smallSquare);
 
   const contributors =
-    entity.relationships.contributors.length === 0
+    entity.relationships.contributors?.length === 0
       ? null
       : entity.relationships.contributors;
 

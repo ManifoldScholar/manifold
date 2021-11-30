@@ -8,22 +8,20 @@ export default function HeroTitle({ entity, standalone = false }) {
   const subtitle = entity.attributes.subtitleFormatted;
   return (
     <Styled.Wrapper $standalone={standalone}>
-      <Styled.Inner>
-        {title && (
-          <Styled.TitleWrapper>
-            <Styled.Title
-              dangerouslySetInnerHTML={{ __html: title }}
-              $standalone={standalone}
-            />
-            <Styled.Toggle>
-              <Collecting.Toggle collectable={entity} />
-            </Styled.Toggle>
-          </Styled.TitleWrapper>
-        )}
-        {subtitle && (
-          <Styled.Subtitle dangerouslySetInnerHTML={{ __html: subtitle }} />
-        )}
-      </Styled.Inner>
+      {title && (
+        <Styled.TitleWrapper>
+          <Styled.Title
+            dangerouslySetInnerHTML={{ __html: title }}
+            $standalone={standalone}
+          />
+          <Styled.Toggle>
+            <Collecting.Toggle collectable={entity} />
+          </Styled.Toggle>
+        </Styled.TitleWrapper>
+      )}
+      {subtitle && (
+        <Styled.Subtitle dangerouslySetInnerHTML={{ __html: subtitle }} />
+      )}
     </Styled.Wrapper>
   );
 }

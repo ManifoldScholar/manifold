@@ -1,7 +1,9 @@
 import lh from "helpers/linkHandler";
 
 export const getButtonParams = (data, type) => {
-  const { slug, tocSectionId } = data.relationships.text.attributes;
+  const slug = data.relationships?.texts?.attributes?.slug ?? null;
+  const tocSectionId =
+    data.relationships?.texts?.attributes.tocSectionId ?? null;
 
   switch (type) {
     case "READ":
@@ -49,7 +51,9 @@ export const getButtonParams = (data, type) => {
 };
 
 export const getLinkParams = (data, type) => {
-  const { slug, tocSectionId } = data.relationships.text.attributes;
+  const slug = data.relationships?.texts?.attributes?.slug ?? null;
+  const tocSectionId =
+    data.relationships?.texts?.attributes.tocSectionId ?? null;
 
   switch (type) {
     case "READ":
