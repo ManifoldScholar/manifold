@@ -120,9 +120,9 @@ export default class NotationViewerGroup extends PureComponent {
                     <Link params={params} notation={notation}>
                       <Notation
                         notation={notation}
-                        additionalClasses="minimal preview"
                         showTitle={false}
                         neverCrop
+                        isPreview
                       />
                     </Link>
                   </div>

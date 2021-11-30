@@ -10,7 +10,7 @@ import {
 
 export default `
 .reader-header {
-  --padding-lateral: var(--container-padding-narrow);
+  --padding-lateral: var(--container-padding-inline-narrow);
   --padding-lateral-narrow: 11px;
 
   ${reactSlideTransition("left", ".reader-return-menu")}

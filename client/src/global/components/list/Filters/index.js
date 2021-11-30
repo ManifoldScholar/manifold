@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
+import isEmpty from "lodash/isEmpty";
 import Search from "./Search";
 import Filter, { filterShape } from "./Filter";
 import * as Styled from "./styles";
@@ -28,9 +29,12 @@ function Filters({
       as={onSubmit ? "form" : "div"}
       onSubmit={onSubmit}
       $count={filters.length}
+      $searchCount={!isEmpty(searchProps) ? 1 : 0}
       className={className}
     >
-      {searchProps && <Search inputRef={searchInput} {...searchProps} />}
+      {!isEmpty(searchProps) && (
+        <Search inputRef={searchInput} {...searchProps} />
+      )}
       <Styled.SelectGroup $count={filters.length}>
         {filters.map(filter => (
           <Filter key={filter.label} {...filter} />

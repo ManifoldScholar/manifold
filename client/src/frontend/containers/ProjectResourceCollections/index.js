@@ -11,7 +11,7 @@ import LoadingBlock from "global/components/loading-block";
 import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import ContentPlaceholder from "global/components/ContentPlaceholder";
-import EntityCollection from "global/components/composed/EntityCollection";
+import EntityCollection from "frontend/components/composed/EntityCollection";
 import withSettings from "hoc/with-settings";
 import Authorize from "hoc/authorize";
 

@@ -5,6 +5,7 @@ import DOI from "global/components/meta/DOI";
 import Item from "global/components/meta/Item";
 import endsWith from "lodash/endsWith";
 import FormattedDate from "global/components/FormattedDate";
+import * as Styled from "./styles";
 
 export default class List extends Component {
   static displayName = "Meta.List";
@@ -24,6 +25,12 @@ export default class List extends Component {
   constructor(props) {
     super(props);
     this.state = this.regenerateState(props.metadata);
+  }
+
+  get listComponent() {
+    return this.props.level === "secondary"
+      ? Styled.SecondaryList
+      : Styled.PrimaryList;
   }
 
   regenerateState(metadata) {
@@ -49,17 +56,17 @@ export default class List extends Component {
 
     if (dateValues.includes(key))
       return (
-        <li key={key}>
+        <Styled.ListItem key={key}>
           <Item label={key}>
             <FormattedDate format="MMMM dd, yyyy" date={value} />
           </Item>
-        </li>
+        </Styled.ListItem>
       );
 
     return (
-      <li key={key}>
+      <Styled.ListItem key={key}>
         <Item label={key} value={value} />
-      </li>
+      </Styled.ListItem>
     );
   }
 
@@ -68,9 +75,9 @@ export default class List extends Component {
     if (!doi) return null;
 
     return (
-      <li key={doi}>
+      <Styled.ListItem key={doi}>
         <DOI label={"doi"} doi={doi} />
-      </li>
+      </Styled.ListItem>
     );
   }
 
@@ -81,14 +88,15 @@ export default class List extends Component {
     const metadataKeys = useMap
       ? this.props.map
       : Array.from(long, short).sort();
+    const ListComponent = this.listComponent;
 
     return (
-      <ul className={`meta-list-${this.props.level}`}>
+      <ListComponent>
         {metadataKeys.map(key => {
           return this.renderValue(key, metadata[key]);
         })}
         {this.renderDoi()}
-      </ul>
+      </ListComponent>
     );
   }
 
@@ -97,23 +105,24 @@ export default class List extends Component {
     const useMap = !!this.props.map;
     const shortKeys = useMap ? this.props.map : Object.keys(short).sort();
     const longKeys = useMap ? this.props.map : Object.keys(long).sort();
+    const ListComponent = this.listComponent;
 
     return (
       <>
         {!isEmpty(longKeys) && (
-          <ul className={`meta-list-${this.props.level}`}>
+          <ListComponent>
             {longKeys.map(key => {
               return this.renderValue(key, long[key]);
             })}
-          </ul>
+          </ListComponent>
         )}
         {!isEmpty(shortKeys) && (
-          <ul className={`meta-list-${this.props.level} columnar`}>
+          <ListComponent $columnar>
             {shortKeys.map(key => {
               return this.renderValue(key, short[key]);
             })}
             {this.renderDoi()}
-          </ul>
+          </ListComponent>
         )}
       </>
     );

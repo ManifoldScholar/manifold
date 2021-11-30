@@ -1,6 +1,5 @@
 import {
   respond,
-  defaultHoverStyle,
   defaultTransitionProps,
   utilityPrimary,
   subtitlePrimary
@@ -8,6 +7,8 @@ import {
 
 export default `
   .resource-card {
+    --Thumbnail-Icon-background-color: transparent;
+
     display: flex;
 
     &__preview {
@@ -42,14 +43,6 @@ export default `
       &:hover,
       &:focus-visible {
         outline: 0;
-
-        .icon-thumbnail-primary {
-          ${defaultHoverStyle}
-        }
-
-        .bg-image {
-          --hover-color: var(--color-interaction-light);
-        }
       }
 
       .icon-thumbnail-primary {
@@ -196,7 +189,7 @@ export default `
         outline: 0;
 
         .icon-thumbnail-primary {
-          ${defaultHoverStyle}
+          --Thumbnail-color: var(--hover-color);
         }
       }
     }

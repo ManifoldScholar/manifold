@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
-import classNames from "classnames";
-import Utility from "global/components/utility";
 import { ListFilters } from "global/components/list";
 
 export default class AnnotationNoteFilter extends React.PureComponent {
@@ -170,33 +168,14 @@ export default class AnnotationNoteFilter extends React.PureComponent {
   };
 
   render() {
-    const filterCount = this.props.showSearch
-      ? this.filters.length + 1
-      : this.filters.length;
-    const endClassName = classNames({
-      "notes-filter-container__end": true,
-      [`notes-filter-container__end--count-${filterCount}`]: true
-    });
-
     return (
-      <div className="notes-filter-container">
-        <div className="notes-filter-container__start">
-          <Utility.EntityCount
-            pagination={this.pagination}
-            singularUnit="Note"
-            pluralUnit="Notes"
-          />
-        </div>
-        <div className={endClassName}>
-          <ListFilters
-            searchProps={this.searchProps}
-            filters={this.filters}
-            onSubmit={() => this.props.filterChangeHandler(this.state.filters)}
-            onReset={this.resetFilters}
-            showResetButton={this.showResetButton}
-          />
-        </div>
-      </div>
+      <ListFilters
+        searchProps={this.searchProps}
+        filters={this.filters}
+        onSubmit={() => this.props.filterChangeHandler(this.state.filters)}
+        onReset={this.resetFilters}
+        showResetButton={this.showResetButton}
+      />
     );
   }
 }

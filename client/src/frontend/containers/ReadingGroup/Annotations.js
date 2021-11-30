@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import queryString from "query-string";
 import isEmpty from "lodash/isEmpty";
-import Annotation from "global/components/Annotation";
+import EntityCollection from "frontend/components/composed/EntityCollection";
 
 import { useDispatchAnnotations, useSelectAnnotations } from "hooks";
 
@@ -79,44 +79,32 @@ function ReadingGroupAnnotationsContainer({
     };
   };
 
-  if (!readingGroup || !annotations || !annotationsMeta) return null;
-
   const {
-    annotatedTexts,
+    annotatedTexts: texts,
     readingGroupMemberships: memberships
   } = readingGroup.relationships;
-  const hasAnnotations = annotations.length > 0;
   const isFiltered =
     "text" in filterState || "readingGroupMembership" in filterState;
 
   return (
-    <>
-      <div className="group-page-body">
-        <Annotation.NoteFilter
-          memberships={memberships}
-          texts={annotatedTexts}
-          filterChangeHandler={handleFilterChange}
-          initialFilterState={filterState}
-          pagination={annotationsMeta.pagination}
-        />
-      </div>
-      <div className="entity-section-wrapper__body" style={{ marginTop: 40 }}>
-        {hasAnnotations && (
-          <Annotation.List.Default
-            annotations={annotations}
-            pagination={annotationsMeta.pagination}
-            paginationClickHandler={pageChangeHandlerCreator}
-            showCommentsToggleAsBlock
-          />
-        )}
-        {!hasAnnotations && isFiltered && (
-          <Annotation.List.FilteredPlaceholder />
-        )}
-        {!hasAnnotations && !isFiltered && (
-          <Annotation.List.GroupPlaceholder readingGroup={readingGroup} />
-        )}
-      </div>
-    </>
+    <div className="group-page-body">
+      <EntityCollection.GroupAnnotations
+        readingGroup={readingGroup}
+        annotations={annotations}
+        annotationsMeta={annotationsMeta}
+        filterProps={{
+          memberships,
+          texts,
+          filterChangeHandler: handleFilterChange,
+          initialFilterState: filterState
+        }}
+        isFiltered={isFiltered}
+        paginationProps={{
+          paginationClickHandler: pageChangeHandlerCreator
+        }}
+        nested
+      />
+    </div>
   );
 }
 

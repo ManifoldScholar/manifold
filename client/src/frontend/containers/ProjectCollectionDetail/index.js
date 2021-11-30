@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "frontend/components/layout";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
-import EntityCollection from "global/components/composed/EntityCollection";
+import EntityCollection from "frontend/components/composed/EntityCollection";
 import { entityStoreActions } from "actions";
 import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
 import { projectCollectionsAPI, projectsAPI, requests } from "api";

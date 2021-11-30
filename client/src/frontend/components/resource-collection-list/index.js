@@ -1,7 +1,5 @@
-import Grid from "./Grid";
-import Totals from "./Totals";
+import Grid from "./Grid/index";
 
 export default {
-  Grid,
-  Totals
+  Grid
 };

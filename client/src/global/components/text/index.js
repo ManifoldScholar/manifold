@@ -1,4 +1,4 @@
-import Cover from "./Cover";
+import Cover from "./Cover/index";
 
 export default {
   Cover

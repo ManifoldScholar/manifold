@@ -4,7 +4,7 @@ import CoverAvatar from "./CoverAvatar";
 import PlaceholderAvatar from "./PlaceholderAvatar";
 
 export default function EntityAvatar({ entity }) {
-  const placeholder = !entity.attributes.avatarStyles.original;
+  const placeholder = !entity.attributes?.avatarStyles?.original;
 
   return placeholder ? (
     <PlaceholderAvatar entity={entity} />
