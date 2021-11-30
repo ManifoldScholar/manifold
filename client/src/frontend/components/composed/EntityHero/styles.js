@@ -30,7 +30,7 @@ export const Wrapper = styled("section", transientOptions)`
   ${({ $lightMode }) => {
     if ($lightMode) {
       return `
-      --link-color: var(--color-neutral-text-dark)
+      --link-color: var(--color-neutral-text-dark);
       color: var(--color-neutral-text-extra-dark);
       background-color: var(--color-base-neutral05);
       `;

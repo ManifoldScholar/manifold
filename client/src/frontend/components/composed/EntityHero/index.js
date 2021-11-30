@@ -9,12 +9,12 @@ import {
   Meta,
   Social,
   Title
-} from "./patterns";
+} from "./parts";
 import Authorization from "helpers/authorization";
 import { FrontendModeContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
-export default function EntityHero({ entity }) {
+export default function EntityHero({ entity, mock }) {
   const authorization = useRef(new Authorization());
   const resizeId = useRef(null);
   const rightColRef = useRef();
@@ -92,17 +92,19 @@ export default function EntityHero({ entity }) {
           <Meta entity={entity} />
           {leftCallouts && (
             <CalloutList
-              authorized={authorized}
+              authorized={authorized || mock}
               callouts={leftCallouts}
-              showErrors={showErrors}
+              showErrors={showErrors || mock}
+              lightMode={lightMode}
               inline
             />
           )}
           {callouts && (
             <CalloutList
-              authorized={authorized}
+              authorized={authorized || mock}
               callouts={orderedCallouts}
-              showErrors={showErrors}
+              showErrors={showErrors || mock}
+              lightMode={lightMode}
               mobileVisible
             />
           )}
@@ -121,9 +123,10 @@ export default function EntityHero({ entity }) {
           <Cover entity={entity} />
           {rightCallouts && (
             <CalloutList
-              authorized={authorized}
+              authorized={authorized ?? mock}
               callouts={rightCallouts}
-              showErrors={showErrors}
+              showErrors={showErrors ?? mock}
+              lightMode={lightMode}
             />
           )}
         </Styled.TopRight>

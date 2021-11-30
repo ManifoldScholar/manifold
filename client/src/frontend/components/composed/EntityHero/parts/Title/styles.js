@@ -18,8 +18,6 @@ export const Wrapper = styled("header", transientOptions)`
   ${respond(`display: block;`, BREAKPOINT)}`}
 `;
 
-export const Inner = styled.inner``;
-
 export const TitleWrapper = styled.div`
   display: flex;
 `;

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { getButtonParams } from "./params";
 import UserLink from "global/components/helper/UserLink";
-import * as Styled from "../styles";
+import * as Styled from "./styles";
 
 const calloutProps = (as, url) => {
   switch (as) {
@@ -17,24 +17,29 @@ const calloutProps = (as, url) => {
   }
 };
 
-const styleProps = type => {
+const styleProps = (type, lightMode) => {
   switch (type) {
     case "READ":
-      return { $color: "primary" };
+      return { $color: "primary", $lightMode: lightMode };
     case "DOWNLOAD":
-      return { $color: "secondary" };
+      return { $color: "secondary", $lightMode: lightMode };
     case "TOC":
-      return { $color: "secondary" };
+      return { $color: "secondary", $lightMode: lightMode };
     case "LINK":
-      return { $color: "secondary", $layout: "center" };
+      return { $color: "secondary", $layout: "center", $lightMode: lightMode };
     case "ERROR":
-      return { $color: "error", $layout: "center" };
+      return { $color: "error", $layout: "center", $lightMode: lightMode };
     default:
       return {};
   }
 };
 
-export default function Callout({ callout, showErrors = false, link = false }) {
+export default function Callout({
+  callout,
+  showErrors = false,
+  link = false,
+  lightMode = true
+}) {
   const type =
     (callout.attributes.kind === "read" || callout.attributes.kind === "toc") &&
     !callout.relationships.text
@@ -50,15 +55,17 @@ export default function Callout({ callout, showErrors = false, link = false }) {
 
   const CalloutComponent = link ? Styled.LinkCallout : Styled.ButtonCallout;
   const IconComponent = link ? Styled.LinkIcon : Styled.ButtonIcon;
-  const TextComponent = link ? Styled.LinkText : Styled.ButtonText;
+  const TextComponent = link ? "span" : Styled.ButtonText;
 
   return (
     <CalloutComponent
       as={as === "UserLink" ? UserLink : as}
       {...calloutProps(as, url)}
-      {...styleProps(type)}
+      {...styleProps(type, lightMode)}
     >
-      <IconComponent icon={icon} size={iconSize} {...styleProps(type)} />
+      {icon && (
+        <IconComponent icon={icon} size={iconSize} {...styleProps(type)} />
+      )}
       <TextComponent>{title ?? message}</TextComponent>
     </CalloutComponent>
   );
@@ -67,5 +74,6 @@ export default function Callout({ callout, showErrors = false, link = false }) {
 Callout.propTypes = {
   callout: PropTypes.object.isRequired,
   showErrors: PropTypes.bool,
-  link: PropTypes.bool
+  link: PropTypes.bool,
+  lightMode: PropTypes.bool
 };

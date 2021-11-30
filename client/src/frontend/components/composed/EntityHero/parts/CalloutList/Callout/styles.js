@@ -34,7 +34,7 @@ export const ButtonCallout = styled(Callout, transientOptions)`
   transition: background-color ${defaultTransitionProps},
     border-color ${defaultTransitionProps};
 
-  ${({ $color }) => {
+  ${({ $color, $lightMode }) => {
     if ($color === "primary") {
       return `background-color: var(--color-accent-primary);
 
@@ -50,36 +50,37 @@ export const ButtonCallout = styled(Callout, transientOptions)`
         }`;
     }
     if ($color === "secondary") {
+      if ($lightMode) {
+        return `
+        background-color: var(--color-base-neutral30);
+
+        &:focus-visible {
+          outline: 0;
+          border-color: var(--color-base-neutral70);
+        }
+
+        &:hover {
+          color: inherit;
+          background-color: ${rgba("neutral30", 0.7)};
+        }
+          `;
+      }
       return `
-      background-color: var(--color-base-neutral30);
+      color: var(--color-base-neutral95);
+      background-color: var(--color-neutral-ui-light);
+      border-color: var(--color-neutral-ui-light);
+
+      &:hover,
+      &:focus-visible {
+        color: var(--color-base-neutral95);
+        background-color: var(--color-base-neutral30);
+        border-color: var(--color-base-neutral30);
+      }
 
       &:focus-visible {
-        outline: 0;
-        border-color: var(--color-base-neutral70);
+        border-color: var(--color-base-neutral75);
       }
-
-      &:hover {
-        color: inherit;
-        background-color: ${rgba("neutral30", 0.7)};
-      }
-
-      /* set in hero */
-      .project-hero--dark & {
-        color: var(--color-base-neutral95);
-        background-color: var(--color-neutral-ui-light);
-        border-color: var(--color-neutral-ui-light);
-
-        &:hover,
-        &:focus-visible {
-          background-color: var(--color-base-neutral30);
-          border-color: var(--color-base-neutral30);
-        }
-
-        &:focus-visible {
-          border-color: var(--color-base-neutral75);
-        }
-      }
-      `;
+        `;
     }
     if ($color === "error") {
       return `
