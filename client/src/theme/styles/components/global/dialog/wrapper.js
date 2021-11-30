@@ -9,8 +9,8 @@ export default `
     align-items: center;
     width: 100%;
     height: 100%;
-    padding-right: var(--container-padding-responsive);
-    padding-left: var(--container-padding-responsive);
+    padding-right: var(--container-padding-inline-responsive);
+    padding-left: var(--container-padding-inline-responsive);
     visibility: visible;
     opacity: 1;
     transition: opacity ${defaultTransitionProps},
@@ -18,8 +18,8 @@ export default `
 
     ${respond(
       `
-      padding-right: var(--container-padding-full);
-      padding-left: var(--container-padding-full);
+      padding-right: var(--container-padding-inline-full);
+      padding-left: var(--container-padding-inline-full);
     `,
       120
     )}

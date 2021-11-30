@@ -11,7 +11,7 @@ import queryString from "query-string";
 import omitBy from "lodash/omitBy";
 import debounce from "lodash/debounce";
 import withSettings from "hoc/with-settings";
-import EntityCollection from "global/components/composed/EntityCollection";
+import EntityCollection from "frontend/components/composed/EntityCollection";
 
 const { request } = entityStoreActions;
 const defaultPage = 1;

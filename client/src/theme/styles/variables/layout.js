@@ -10,7 +10,7 @@ export const containerWidth = {
   focus: "680px"
 };
 
-export const containerPadding = {
+export const containerPaddingInline = {
   full: `${fullContainerPadding}px`,
   responsive: "4.5%",
   narrow: "20px",
@@ -18,10 +18,16 @@ export const containerPadding = {
   min: "15px"
 };
 
+export const containerPaddingBlock = {
+  start: "clamp(39px, calc(39px + 21 * (100vw - 620px) / 404), 60px)",
+  end: "clamp(45px, calc(45px + 25 * (100vw - 620px) / 404), 70px)"
+};
+
 export const readerHeaderHeight = "46px";
 
 export default `
   ${createCSSVariables("container-width", containerWidth)}
-  ${createCSSVariables("container-padding", containerPadding)}
+  ${createCSSVariables("container-padding-inline", containerPaddingInline)}
+  ${createCSSVariables("container-padding-block", containerPaddingBlock)}
   --reader-header-height: ${readerHeaderHeight};
 `;

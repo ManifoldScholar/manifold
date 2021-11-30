@@ -28,8 +28,8 @@ export const ItemLink = styled(Link, transientOptions)`
     padding: min(2.105vw, 25px);
     border-radius: var(--box-border-radius);
 
-    &:hover,
-    &:focus-visible {
+    &[href]:hover,
+    &[href]:focus-visible {
       outline: 0;
       box-shadow: 0 31px 44px 2px rgba(0, 0, 0, 0.13);
       background-color: var(--box-medium-bg-color);
@@ -47,4 +47,5 @@ export const Cover = styled("figure", transientOptions)`
 
 export const Wrapper = styled.div`
   position: relative;
+  height: 100%;
 `;

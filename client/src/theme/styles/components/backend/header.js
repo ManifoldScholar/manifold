@@ -9,26 +9,26 @@ export default `
     }
 
     &__inner {
-      padding: calc(var(--container-padding-narrow) * 0.6)
-        calc(var(--container-padding-narrow) * 0.75);
+      padding: calc(var(--container-padding-inline-narrow) * 0.6)
+        calc(var(--container-padding-inline-narrow) * 0.75);
       margin-right: auto;
       margin-left: auto;
 
       ${respond(
-        `padding: calc(var(--container-padding-narrow) * 0.8) calc(var(--container-padding-narrow) * 1.2);`,
+        `padding: calc(var(--container-padding-inline-narrow) * 0.8) calc(var(--container-padding-inline-narrow) * 1.2);`,
         60
       )}
 
       &--padded {
         ${respond(
-          `padding: var(--container-padding-narrow) var(--container-padding-responsive);`,
+          `padding: var(--container-padding-inline-narrow) var(--container-padding-inline-responsive);`,
           35
         )}
 
         ${respond(
           `
-        padding-right: var(--container-padding-full);
-        padding-left: var(--container-padding-full);
+        padding-right: var(--container-padding-inline-full);
+        padding-left: var(--container-padding-inline-full);
       `,
           120
         )}

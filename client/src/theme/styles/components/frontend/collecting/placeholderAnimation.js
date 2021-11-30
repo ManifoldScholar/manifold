@@ -100,7 +100,7 @@ export default `
 
     .icon-star-fill {
       &__foreground {
-        fill: var(--collecting-icon-background-color);
+        fill: var(--collecting-icon-foreground-color);
         transition: fill ${animationDuration}ms ${animationEasing};
         transition-delay: var(--content-delay);
       }

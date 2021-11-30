@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Tile from "./Tile";
+import Tile from "./Tile/index";
 import lh from "helpers/linkHandler";
 import Loadable from "react-loadable";
 
@@ -25,7 +25,7 @@ export default class Event extends PureComponent {
   static propTypes = {
     event: PropTypes.object,
     itemTag: PropTypes.oneOf(["li", "div"]),
-    itemClass: PropTypes.string,
+    className: PropTypes.string,
     destroyCallback: PropTypes.func,
     hideLink: PropTypes.bool
   };
@@ -67,7 +67,7 @@ export default class Event extends PureComponent {
     };
 
     return {
-      tileClass: "tweet",
+      italicizeContent: true,
       icon: "activityTweet64",
       type: attr.eventType,
       preAttribution: (
@@ -149,7 +149,7 @@ export default class Event extends PureComponent {
         hideLink={this.props.hideLink}
         destroyCallback={this.props.destroyCallback}
         itemTag={this.props.itemTag}
-        itemClass={this.props.itemClass}
+        className={this.props.className}
         {...tileProps}
       />
     );

@@ -78,7 +78,7 @@ export default `
 
     &--pad-default,
     &--pad-large {
-      padding: 20px var(--container-padding-responsive) 33px;
+      padding: 20px var(--container-padding-inline-responsive) 33px;
     }
 
     &--pad-default {

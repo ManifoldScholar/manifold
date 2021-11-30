@@ -10,7 +10,7 @@ import {
 const widths = readerContainerWidths
   .map(
     (width, i) => `
-    &.container-width-${i - 1} {
+    &.container-width-${i} {
       right: calc((100% - ${width}) / 2 + ${width});
 
       /* Responsively show/hide notation viewer list */
@@ -78,23 +78,10 @@ export default `
         &:focus,
         &.highlighted,
         .highlighted & {
+          --Thumbnail-ImageOverlay-opacity: 0.5;
+          --Thumbnail-Icon-background-color: var(--hover-color);
+
           outline: 0;
-
-          .icon-thumbnail-title {
-            ${defaultHoverStyle}
-          }
-
-          .image-overlay {
-            opacity: 0.5;
-          }
-
-          .icon-thumbnail-icon {
-            background-color: var(--hover-color);
-          }
-
-          svg {
-            fill: var(--color-base-neutral-white);
-          }
         }
       }
     }
@@ -139,11 +126,9 @@ export default `
     }
 
     &.highlight-exit {
-      opacity: 1;
+      --Thumbnail-Title-opacity: 0;
 
-      .icon-thumbnail-title {
-        opacity: 0;
-      }
+      opacity: 1;
     }
 
     &.highlight-exit-active {
@@ -151,16 +136,6 @@ export default `
 
       figure {
         transition: opacity ${defaultTransitionProps};
-      }
-    }
-
-    .notation-viewer .viewer-list &.highlighted {
-      .icon-thumbnail-title {
-        color: var(--hover-color);
-      }
-
-      .image-overlay {
-        opacity: 0.5;
       }
     }
 
@@ -249,18 +224,6 @@ export default `
         &.highlighted,
         a:focus-visible {
           outline: 0;
-
-          .icon-thumbnail-primary::before {
-            opacity: 0.5;
-          }
-
-          .icon-thumbnail-icon {
-            background-color: var(--hover-color);
-          }
-
-          svg {
-            fill: var(--color-base-neutral-white);
-          }
         }
       }
     }

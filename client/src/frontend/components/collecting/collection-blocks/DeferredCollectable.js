@@ -25,11 +25,17 @@ function getPlaceholder(type) {
   return placeholderMap[type];
 }
 
-function DeferredCollectable({ responses, type, id, children }) {
+function DeferredCollectable({
+  responses,
+  type,
+  id,
+  children,
+  ...passThroughProps
+}) {
   const isLoaded = idInResponses(id, responses);
   const Placeholder = getPlaceholder(type);
 
-  if (!isLoaded) return <Placeholder />;
+  if (!isLoaded) return <Placeholder {...passThroughProps} />;
 
   const response = getResponse(id, responses);
 
@@ -38,7 +44,7 @@ function DeferredCollectable({ responses, type, id, children }) {
   return children(response);
 }
 
-DeferredCollectable.displayName = "ReadingGroup.Collecting.DeferredCollectable";
+DeferredCollectable.displayName = "Collecting.DeferredCollectable";
 
 DeferredCollectable.propTypes = {
   responses: PropTypes.array.isRequired,

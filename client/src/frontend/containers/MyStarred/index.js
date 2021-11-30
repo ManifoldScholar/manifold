@@ -1,18 +1,8 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
-import Utility from "global/components/utility";
-import CollectedCount from "frontend/components/collecting/me/CollectedCount";
-import CollectionPlaceholder from "frontend/components/collecting/me/CollectionPlaceholder";
-import {
-  CollectedProjects,
-  CollectedTexts,
-  CollectedTextSections,
-  CollectedResourceCollections,
-  CollectedResources
-} from "frontend/components/collecting/collection-blocks";
+import EntityCollection from "frontend/components/composed/EntityCollection";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 
 import { useDispatchMyCollected, useSelectMyCollected } from "hooks";
@@ -45,18 +35,6 @@ function MyStarredContainer({ currentUser }) {
     resources: useSelectMyCollected("resources")
   };
   const collection = getEntityCollection(currentUser);
-  const mapping = collection.attributes?.categoryMappings.$uncategorized$;
-  const hasCollecteds = !isEmpty(mapping);
-
-  function getCollectedIdsByType(type) {
-    if (!mapping || !mapping[type]) return [];
-    return mapping[type];
-  }
-
-  function getResponsesByType(type) {
-    if (!responses || !responses[type]) return [];
-    return responses[type].collection || [];
-  }
 
   const onUncollect = useCallback(type => {
     setFetchVersion(prevState => {
@@ -67,15 +45,6 @@ function MyStarredContainer({ currentUser }) {
     });
   }, []);
 
-  function getCollectedProps(type) {
-    return {
-      collectedIds: getCollectedIdsByType(type),
-      responses: getResponsesByType(type),
-      onUncollect: () => onUncollect(type),
-      nested: false
-    };
-  }
-
   return (
     <Authorize
       kind="any"
@@ -83,43 +52,11 @@ function MyStarredContainer({ currentUser }) {
       failureNotification
     >
       <HeadContent title="My Starred" appendTitle />
-      <section className="bg-white">
-        <div className="entity-section-wrapper container">
-          <header className="entity-section-wrapper__heading section-heading">
-            <div className="main">
-              <Utility.IconComposer
-                size={48}
-                icon="StarFillUnique"
-                className="icon-star-fill--header"
-              />
-              <div className="body">
-                <h1 className="title">My Starred</h1>
-              </div>
-            </div>
-          </header>
-          {hasCollecteds && (
-            <>
-              <div className="entity-section-wrapper__details entity-section-wrapper__details--padded-top">
-                <CollectedCount collection={collection} />
-              </div>
-              <div className="entity-section-wrapper__body">
-                <CollectedProjects {...getCollectedProps("projects")} />
-                <CollectedTexts {...getCollectedProps("texts")} />
-                <CollectedTextSections {...getCollectedProps("textSections")} />
-                <CollectedResourceCollections
-                  {...getCollectedProps("resourceCollections")}
-                />
-                <CollectedResources {...getCollectedProps("resources")} />
-              </div>
-            </>
-          )}
-          {!hasCollecteds && (
-            <div className="entity-section-wrapper__body">
-              <CollectionPlaceholder />
-            </div>
-          )}
-        </div>
-      </section>
+      <EntityCollection.MyStarred
+        collection={collection}
+        responses={responses}
+        onUncollect={onUncollect}
+      />
     </Authorize>
   );
 }

@@ -9,20 +9,12 @@ describe("frontend/components/event/List", () => {
     expect(shallow($root)).toMatchSnapshot();
   });
 
-  it("has the event-list class", () => {
-    expect(
-      shallow($root)
-        .find("ul")
-        .is(".event-list")
-    ).toBe(true);
-  });
-
   it("matches the snapshot when rendered", () => {
     expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 
   it("renders a Tile for each event", () => {
-    expect(render($withApp($root)).find(".event-tile").length).toBe(
+    expect(render($withApp($root)).find("article").length).toBe(
       $events.length
     );
   });
