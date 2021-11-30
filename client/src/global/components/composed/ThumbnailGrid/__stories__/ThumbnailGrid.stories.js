@@ -20,7 +20,6 @@ const projects = fixtures.collectionFactory("project", 3).map(issue => {
   };
 });
 const journals = fixtures.collectionFactory("journal", 3);
-const user = fixtures.entities.user();
 const entities = shuffle(projects.concat(journals).concat(issues));
 
 storiesOf("Global/ThumbnailGrid", module)
@@ -33,7 +32,6 @@ storiesOf("Global/ThumbnailGrid", module)
               <EntityThumbnail
                 key={item.id}
                 entity={item}
-                userMock={user}
                 onUncollect={() => console.log("clicked uncollect")}
                 stack={stack}
               />
@@ -52,7 +50,6 @@ storiesOf("Global/ThumbnailGrid", module)
               <EntityThumbnail
                 key={item.id}
                 entity={item}
-                userMock={user}
                 onUncollect={() => console.log("clicked uncollect")}
                 stack={stack}
               />

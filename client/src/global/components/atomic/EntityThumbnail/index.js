@@ -12,7 +12,6 @@ export default function EntityThumbnail({
   hideMeta = false,
   hideDescription = true,
   hideDate = false,
-  userMock = false,
   stack = true
 }) {
   return (
@@ -38,7 +37,6 @@ export default function EntityThumbnail({
         onUncollect={onUncollect}
         inline={false}
         outlined={false}
-        userMock={userMock}
       />
     </Styled.Wrapper>
   );
@@ -52,7 +50,5 @@ EntityThumbnail.propTypes = {
   hideMeta: PropTypes.bool,
   hideDate: PropTypes.bool,
   hideDescription: PropTypes.bool,
-  stack: PropTypes.bool,
-  /* For stories */
-  userMock: PropTypes.object
+  stack: PropTypes.bool
 };

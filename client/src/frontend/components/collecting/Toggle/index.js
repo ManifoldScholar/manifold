@@ -10,7 +10,7 @@ import Dialog from "frontend/components/collecting/Dialog";
 import Text from "./Text";
 import Icons from "./Icons";
 import { inCollections } from "../helpers";
-import { useCurrentUser } from "hooks";
+import useCurrentUser from "hooks/user/use-current-user";
 
 const { request } = entityStoreActions;
 
@@ -40,7 +40,6 @@ function CollectingToggle({
   onDialogOpen,
   onDialogClose,
   readingGroups: myReadingGroups,
-  userMock,
   setScreenReaderStatus,
   onUncollect
 }) {
@@ -54,7 +53,7 @@ function CollectingToggle({
     onDialogOpen();
   }, [dialogVisible]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const currentUser = useCurrentUser(userMock);
+  const currentUser = useCurrentUser();
 
   const dispatch = useDispatch();
 
@@ -206,7 +205,6 @@ CollectingToggle.displayName = "Collecting.Toggle";
 
 CollectingToggle.propTypes = {
   collectable: PropTypes.object.isRequired,
-  userMock: PropTypes.object,
   readingGroups: PropTypes.array,
   onDialogOpen: PropTypes.func,
   onDialogClose: PropTypes.func,

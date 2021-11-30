@@ -34,5 +34,5 @@ ThumbnailGrid.displayName = "Global.Composed.ThumbnailGrid";
 ThumbnailGrid.propTypes = {
   minItemWidth: PropTypes.string,
   minColumns: PropTypes.number,
-  children: PropTypes.node
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 };
