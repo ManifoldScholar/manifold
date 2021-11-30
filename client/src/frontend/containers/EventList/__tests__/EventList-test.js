@@ -10,7 +10,7 @@ describe("frontend/containers/EventList/EventList", () => {
       dispatch={$dispatch}
       project={$project}
       events={$events}
-      meta={{ pagination: fixtures.pagination() }}
+      eventsMeta={{ pagination: fixtures.pagination() }}
     />
   ));
 

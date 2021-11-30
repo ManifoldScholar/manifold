@@ -1,5 +1,4 @@
 import annotation from "./annotation";
-import assetThumbnail from "./assetThumbnail";
 import buttons from "./buttons";
 import checkboxes from "./checkboxes";
 import collapse from "./collapse";
@@ -16,12 +15,10 @@ import header from "./header";
 import instructionalCopy from "./instructionalCopy";
 import listTotal from "./listTotal";
 import loadingBar from "./loadingBar";
-import metadata from "./metadata";
 import nestedNav from "./nestedNav";
 import notifications from "./notifications";
 import overlay from "./overlay";
 import paginationCount from "./paginationCount";
-import projectList from "./projectList";
 import search from "./search";
 import sectionHeading from "./sectionHeading";
 import sectionHeadingSecondary from "./sectionHeadingSecondary";
@@ -35,13 +32,11 @@ import utility from "./utility";
 export default `
   ${forms}
   ${fatalError}
-  ${assetThumbnail}
   ${buttons}
   ${confirmableButton}
   ${contentPlaceholder}
   ${demoAnimation}
   ${drawer}
-  ${metadata}
   ${utility}
   ${listTotal}
   ${overlay}
@@ -49,7 +44,6 @@ export default `
   ${header}
   ${notifications}
   ${loadingBar}
-  ${projectList}
   ${sectionHeading}
   ${sectionHeadingSecondary}
   ${shareNavPrimary}

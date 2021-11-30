@@ -6,7 +6,8 @@ import { entityFilterForm } from "theme/styles/variables/crossComponent";
 const { gap, selectMinWidth } = entityFilterForm;
 
 export const Wrapper = styled("div", transientOptions)`
-  flex-basis: ${({ $count }) => entityFilterForm.flexBasis($count, 1)};
+  flex-basis: ${({ $count, $searchCount }) =>
+    entityFilterForm.flexBasis($count, $searchCount)};
   flex-grow: 1;
   align-self: center;
   position: relative;
@@ -14,10 +15,6 @@ export const Wrapper = styled("div", transientOptions)`
   flex-wrap: wrap;
   gap: ${gap}px;
   margin: 0;
-
-  .resource-totals + & {
-    padding-top: 40px;
-  }
 `;
 
 export const SelectGroup = styled("div", transientOptions)`

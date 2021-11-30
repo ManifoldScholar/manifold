@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import humps from "humps";
 import isString from "lodash/isString";
+import * as Styled from "./styles";
 
 export default class Item extends Component {
   static displayName = "Meta.Item";
@@ -14,25 +15,20 @@ export default class Item extends Component {
 
   renderValue(children, value) {
     if (!children)
-      return (
-        <div
-          className="meta-value"
-          dangerouslySetInnerHTML={{ __html: value }}
-        />
-      );
+      return <Styled.Value dangerouslySetInnerHTML={{ __html: value }} />;
 
     const childEl = isString(this.props.children.type)
       ? this.props.children
       : React.cloneElement(this.props.children);
-    return <div className="meta-value">{childEl}</div>;
+    return <Styled.Value>{childEl}</Styled.Value>;
   }
 
   renderLabel(label) {
     if (!label) return null;
     return (
-      <span className="meta-label">
+      <Styled.Label>
         {humps.decamelize(this.props.label, { separator: " " })}
-      </span>
+      </Styled.Label>
     );
   }
 

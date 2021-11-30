@@ -4,7 +4,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectCollectionsAPI, requests } from "api";
-import EntityCollection from "global/components/composed/EntityCollection";
+import EntityCollection from "frontend/components/composed/EntityCollection";
 
 const { request } = entityStoreActions;
 

@@ -1,6 +1,4 @@
 import { logicalWithFallback } from "@castiron/style-mixins";
-import { breakpoints } from "../variables/media";
-import { respond, fluidScale } from "../mixins/common";
 import {
   containerPrototype,
   containerFocus,
@@ -33,68 +31,19 @@ export default `
   /* Layout */
   .container {
     ${containerPrototype}
-
-    /* Section can be abstracted to more specific section class (or body class) if necessary */
-    &:not(.flush) {
-      section > & {
-        ${logicalWithFallback({
-          "padding-block-start": fluidScale(
-            "60px",
-            "39px",
-            breakpoints[75],
-            breakpoints[60]
-          ),
-          "padding-block-end": fluidScale(
-            "70px",
-            "45px",
-            breakpoints[75],
-            breakpoints[60]
-          )
-        })}
-      }
-    }
+      padding-block-start: var(--container-padding-block-start);
+      padding-block-end: var(--container-padding-block-end);
 
     &.flush-top {
-      section > & {
-        ${logicalWithFallback({
-          "padding-block-start": 0,
-          "padding-block-end": fluidScale(
-            "70px",
-            "45px",
-            breakpoints[75],
-            breakpoints[60]
-          )
-        })}
-      }
-
-      &.flush-bottom {
-        section > & {
-          ${logicalWithFallback({
-            "padding-block-start": 0,
-            "padding-block-end": 0
-          })}
-        }
-      }
+      --container-padding-block-start: 0;
     }
 
     &.flush-bottom {
-      section > & {
-        ${logicalWithFallback({
-          "padding-block-start": fluidScale(
-            "60px",
-            "45px",
-            breakpoints[75],
-            breakpoints[60]
-          ),
-          "padding-block-end": 0
-        })}
-      }
+      --container-padding-block-end: 0;
     }
 
     &.extra-top {
-      section > & {
-        ${respond(logicalWithFallback({ "padding-top": "125px" }), 90)}
-      }
+      --container-padding-block-start: 125px;
     }
   }
 

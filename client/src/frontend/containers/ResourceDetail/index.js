@@ -13,7 +13,6 @@ import some from "lodash/some";
 import withSettings from "hoc/with-settings";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
-import Breadcrumbs from "global/components/atomic/Breadcrumbs";
 
 const { request, flush } = entityStoreActions;
 

@@ -1,7 +1,6 @@
 import { logicalWithFallback } from "@castiron/style-mixins";
 import { respond, fluidScale } from "./common";
-import { breakpoints } from "../variables/media";
-import { containerPadding } from "../variables/layout";
+import { containerPaddingInline } from "../variables/layout";
 import { headerLayout } from "../variables/crossComponent";
 
 // 'light' mode is sufficient for clearing floats,
@@ -37,10 +36,10 @@ export const containerPrototype = `
   max-width: var(--container-width-full);
   ${logicalWithFallback({
     "padding-inline": fluidScale(
-      containerPadding.full,
-      containerPadding.narrow,
-      breakpoints[120],
-      breakpoints[120]
+      containerPaddingInline.full,
+      containerPaddingInline.narrow,
+      120,
+      35
     ),
     "margin-inline": "auto"
   })}
@@ -49,7 +48,7 @@ export const containerPrototype = `
 export const containerFocus = `
   max-width: var(--container-width-focus);
   ${logicalWithFallback({
-    "padding-inline": "var(--container-padding-min)",
+    "padding-inline": "var(--container-padding-inline-min)",
     "margin-inline": "auto"
   })}
 `;

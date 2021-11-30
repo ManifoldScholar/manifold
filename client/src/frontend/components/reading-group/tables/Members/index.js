@@ -77,8 +77,7 @@ export default class MembersTable extends PureComponent {
         models={this.members}
         pagination={this.pagination}
         onPageClick={this.onPageClick}
-        singularUnit={"Member"}
-        pluralUnit={"Members"}
+        unit={"member"}
         linkCreator={model =>
           lh.link("frontendReadingGroupAnnotations", readingGroup.id, {
             page: 1,

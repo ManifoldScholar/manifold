@@ -5,7 +5,7 @@ import {
   buttonUnstyled,
   transparentize
 } from "theme/styles/mixins";
-import { containerPadding } from "theme/styles/variables/layout";
+import { containerPaddingInline } from "theme/styles/variables/layout";
 
 const slideCopyFocus = "570px";
 
@@ -28,7 +28,7 @@ export default `
 
     &__footer {
       position: relative;
-      padding: 10px ${containerPadding.responsive};
+      padding: 10px ${containerPaddingInline.responsive};
       color: var(--color-neutral-text-dark);
 
       ${respond(

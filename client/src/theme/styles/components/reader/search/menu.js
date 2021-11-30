@@ -61,7 +61,7 @@ export default `
     --focus-color: var(--color-neutral-ui-dark);
 
     position: absolute;
-    right: calc(-1 * var(--container-padding-responsive-global));
+    right: calc(-1 * var(--container-padding-inline-responsive-global));
     width: 100vw;
     max-width: 100vw;
     white-space: nowrap;
@@ -83,6 +83,6 @@ export default `
 
     ${respond(`width: auto;`, 70)}
 
-    ${respond(`right: calc(-1 * var(--container-padding-full));`, 120)}
+    ${respond(`right: calc(-1 * var(--container-padding-inline-full));`, 120)}
   }
 `;

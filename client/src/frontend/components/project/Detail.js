@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import LoadingBlock from "global/components/loading-block";
+import EntityCollection from "frontend/components/composed/EntityCollection/EntityCollection";
 import Layout from "frontend/components/layout";
 import EntityHero from "frontend/components/composed/EntityHero";
-import Content from "./Content/index";
+import ContentBlockList from "frontend/components/content-block-list/List";
+import { Warning } from "frontend/components/content-block/parts";
 import { FrontendModeContext } from "helpers/contexts";
 import withSettings from "hoc/with-settings";
-import AccessDenied from "./AccessDenied";
 import Authorize from "hoc/authorize";
 
 class Detail extends Component {
@@ -39,9 +40,11 @@ class Detail extends Component {
             ability="fullyRead"
             successBehavior="hide"
           >
-            <AccessDenied project={project} />
+            <EntityCollection
+              BodyComponent={() => <Warning.AccessDenied entity={project} />}
+            />
           </Authorize>
-          <Content project={project} />
+          <ContentBlockList entity={project} />
         </section>
         {!this.context.isStandalone && !this.isLibraryDisabled && (
           <Layout.ButtonNavigation />

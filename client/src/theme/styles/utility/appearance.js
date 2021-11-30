@@ -60,4 +60,17 @@ export default `
   .no-focus-outline:focus-visible {
     outline: 0;
   }
+
+  /* Icon styles */
+  .icon-notes-unique {
+    fill: transparent;
+
+    &__foreground {
+      fill: var(--strong-color);
+    }
+
+    &__background {
+      fill: var(--box-medium-bg-color);
+    }
+  }
 `;

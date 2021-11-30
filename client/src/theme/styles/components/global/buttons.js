@@ -121,6 +121,7 @@ export default `
     letter-spacing: 0.089em;
     color: var(--color);
     border: 1px solid var(--hover-color);
+    border-radius: var(--box-border-radius);
     transition: color ${defaultTransitionProps},
       background-color ${defaultTransitionProps},
       border-color ${defaultTransitionProps};
@@ -181,7 +182,7 @@ export default `
     }
 
     &--rounded {
-      border-radius: 6px;
+      --box-border-radius: 6px;
     }
 
     &__icon {
