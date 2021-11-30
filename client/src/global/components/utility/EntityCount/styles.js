@@ -14,6 +14,12 @@ export const Total = styled.p`
   .section-heading-secondary a:hover & {
     color: var(--hover-color);
   }
+
+  strong,
+  b {
+    font-weight: inherit;
+    color: var(--strong-color);
+  }
 `;
 
 export const Highlighted = styled.span`

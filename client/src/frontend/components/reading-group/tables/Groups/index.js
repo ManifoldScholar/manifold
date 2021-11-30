@@ -171,8 +171,7 @@ class GroupsTable extends PureComponent {
         models={this.groups}
         pagination={this.pagination}
         onPageClick={this.onPageClick}
-        singularUnit="Group"
-        pluralUnit="Groups"
+        unit="group"
         linkCreator={group => lh.link("frontendReadingGroupDetail", group.id)}
         filters={
           <ListFilters

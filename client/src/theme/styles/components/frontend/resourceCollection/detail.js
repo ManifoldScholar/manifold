@@ -33,12 +33,6 @@ export default `
       padding-top: 26px;
     }
 
-    .resource-total:not(:last-child) {
-      margin-bottom: 0;
-
-      ${respond(`margin-bottom: 25px;`, 60)}
-    }
-
     &__resources {
       display: grid;
       grid-template-columns: 100%;

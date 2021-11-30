@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import queryString from "query-string";
 import isEmpty from "lodash/isEmpty";
 import HeadContent from "global/components/HeadContent";
-import Utility from "global/components/utility";
-import Annotation from "global/components/Annotation";
+import EntityCollection from "frontend/components/composed/EntityCollection";
 import {
   useDispatchAnnotations,
   useSelectAnnotations,
@@ -82,54 +81,23 @@ function MyAnnotationsContainer({ location, history }) {
     };
   };
 
-  if (!annotations || !annotationsMeta) return null;
-
-  const hasAnnotations = annotations.length > 0;
-  const hasAnnotatedTexts = hasAnnotations && annotatedTexts?.length > 0;
-  const isFiltered = "text" in filterState;
-
   return (
     <>
       <HeadContent title="My Notes + Comments" appendTitle />
-      <section className="bg-white">
-        <div className="container">
-          <header className="entity-section-wrapper__heading entity-section-wrapper__heading--wide section-heading">
-            <div className="main">
-              <Utility.IconComposer size={48} icon="NotesUnique" />
-              <div className="body">
-                <h1 className="title">My Notes + Comments</h1>
-              </div>
-            </div>
-          </header>
-          {hasAnnotatedTexts && (
-            <Annotation.NoteFilter
-              texts={annotatedTexts}
-              filterChangeHandler={handleFilterChange}
-              initialFilterState={filterState}
-              pagination={annotationsMeta.pagination}
-            />
-          )}
-          <div
-            className="entity-section-wrapper__body"
-            style={{ marginTop: 40 }}
-          >
-            {hasAnnotations && (
-              <Annotation.List.Default
-                annotations={annotations}
-                pagination={annotationsMeta.pagination}
-                paginationClickHandler={pageChangeHandlerCreator}
-                showCommentsToggleAsBlock
-              />
-            )}
-            {!hasAnnotations && isFiltered && (
-              <Annotation.List.FilteredPlaceholder />
-            )}
-            {!hasAnnotations && !isFiltered && (
-              <Annotation.List.MyPlaceholder />
-            )}
-          </div>
-        </div>
-      </section>
+      <EntityCollection.MyAnnotations
+        annotations={annotations}
+        annotationsMeta={annotationsMeta}
+        annotatedTexts={annotatedTexts}
+        filterProps={{
+          texts: annotatedTexts,
+          filterChangeHandler: handleFilterChange,
+          initialFilterState: filterState
+        }}
+        isFiltered={"text" in filterState}
+        paginationProps={{
+          paginationClickHandler: pageChangeHandlerCreator
+        }}
+      />
     </>
   );
 }

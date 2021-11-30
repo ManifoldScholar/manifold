@@ -9,8 +9,9 @@ import AtomicBox from "global/components/atomic/Box";
 import { transientOptions } from "helpers/emotionHelpers";
 
 export const Box = styled(AtomicBox)`
-  --Box-Container-padding-block: 30px;
-  --Box-Background-padding-block: 20px;
+  --Box-padding-block: 30px;
+  --Box-Background-padding-block-start: 20px;
+  --Box-Background-padding-block-end: 20px;
   --Box-Background-padding-inline: ${fluidScale("72px", "20px")};
 `;
 
@@ -32,7 +33,8 @@ export const GroupHeader = styled("div", transientOptions)`
   padding-inline: var(--Box-Background-padding-inline);
 
   /* Ensure background hover color goes to edge of Box. */
-  margin-block: calc(-1 * var(--Box-Background-padding-block));
+  margin-block-start: calc(-1 * var(--Box-Background-padding-block-start));
+  margin-block-end: calc(-1 * var(--Box-Background-padding-block-end));
   margin-inline-start: calc(-1 * var(--Box-Background-padding-inline));
   box-sizing: content-box;
 

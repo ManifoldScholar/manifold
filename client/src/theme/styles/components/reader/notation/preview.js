@@ -3,7 +3,7 @@ import {
   respond,
   defaultHoverStyle
 } from "theme/styles/mixins";
-import { containerPadding } from "theme/styles/variables/layout";
+import { containerPaddingInline } from "theme/styles/variables/layout";
 
 export default `
   .notation-preview-footer {
@@ -53,18 +53,6 @@ export default `
       &:focus-visible {
         ${defaultHoverStyle}
         outline: 0;
-
-        .icon-thumbnail-primary {
-          background-color: var(--hover-color);
-
-          &::after {
-            opacity: 0.5;
-          }
-
-          svg {
-            fill: var(--color-base-neutral-white);
-          }
-        }
       }
     }
 
@@ -73,7 +61,7 @@ export default `
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      padding: 17px ${containerPadding.responsive};
+      padding: 17px ${containerPaddingInline.responsive};
 
       .scheme-dark & {
         color: var(--color-base-neutral-white);
@@ -81,49 +69,15 @@ export default `
     }
 
     &__figure {
+      --Thumbnail-width: 70px;
+      --Thumbnail-height: 43px;
+      --Thumbnail-background-color: var(--box-medium-bg-color);
+      --Thumbnail-Inner-padding: 61.429% 0 0;
+      --Thumbnail-Icon-display: flex;
+      --Thumbanil-Icon-size: 30px;
+
       display: flex;
       flex-grow: 2;
-
-      .icon-thumbnail-primary {
-        position: relative;
-        min-width: 70px;
-        max-width: 70px;
-        height: 43px;
-        background-color: var(--color-base-neutral10);
-        transition: background-color ${defaultTransitionProps};
-
-        &::after {
-          position: absolute;
-          display: none;
-          width: 100%;
-          height: 100%;
-          content: "";
-          background-color: var(--hover-color);
-          opacity: 0;
-          transition: opacity ${defaultTransitionProps};
-        }
-
-        &.icon-only.bg-image {
-          &::after {
-            display: block;
-          }
-
-          .wrapper {
-            padding-top: 61.429%;
-          }
-        }
-
-        .icon-thumbnail-icon {
-          display: flex;
-
-          svg {
-            width: 30px;
-            height: 30px;
-            margin: auto;
-            transition: fill ${defaultTransitionProps};
-          }
-        }
-      }
     }
 
     &__figcaption {

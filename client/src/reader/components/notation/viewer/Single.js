@@ -75,11 +75,7 @@ export default class NotationViewerSingle extends PureComponent {
               actions.makeActive(null);
             }}
           >
-            <Notation
-              notation={notation}
-              additionalClasses="minimal right"
-              showTitle={this.props.showTitle}
-            />
+            <Notation notation={notation} showTitle={this.props.showTitle} />
           </div>
         </Link>
       </div>

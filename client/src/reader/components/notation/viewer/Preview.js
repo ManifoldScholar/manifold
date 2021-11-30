@@ -45,7 +45,7 @@ export default class NotationViewerPreview extends PureComponent {
                 resourceish={notation}
                 showTitle={false}
                 showKind={false}
-                additionalClasses="icon-only"
+                iconOnly
               />
               <figcaption
                 className="notation-preview-footer__figcaption"

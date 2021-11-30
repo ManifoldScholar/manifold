@@ -86,7 +86,7 @@ export default `
       .notification--context-header & {
         position: absolute;
         top: 50%;
-        right: var(--container-padding-responsive);
+        right: var(--container-padding-inline-responsive);
         transform: translateY(-50%);
 
         ${respond(`right: 26px;`, 120)}

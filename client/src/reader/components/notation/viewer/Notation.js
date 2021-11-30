@@ -11,13 +11,12 @@ export default class NotationViewerNotation extends PureComponent {
 
   static propTypes = {
     notation: PropTypes.object,
-    additionalClasses: PropTypes.string,
     showTitle: PropTypes.bool,
-    neverCrop: PropTypes.bool
+    neverCrop: PropTypes.bool,
+    isPreview: PropTypes.bool
   };
 
   static defaultProps = {
-    additionalClasses: "minimal right",
     showTitle: true,
     neverCrop: false
   };
@@ -35,7 +34,7 @@ export default class NotationViewerNotation extends PureComponent {
   }
 
   renderNotation() {
-    const { notation, additionalClasses, showTitle, neverCrop } = this.props;
+    const { notation, showTitle, neverCrop } = this.props;
     let noCrop = false;
     if (this.hasImage && !neverCrop) noCrop = true;
     return (
@@ -46,7 +45,9 @@ export default class NotationViewerNotation extends PureComponent {
         noCrop={noCrop}
         showTitle={showTitle}
         variant={this.variant}
-        additionalClasses={additionalClasses}
+        isPreview={this.props.isPreview}
+        minimal
+        alignEnd
       />
     );
   }

@@ -12,8 +12,7 @@ export default class Table extends PureComponent {
   static propTypes = {
     pagination: PropTypes.object.isRequired,
     onPageClick: PropTypes.func.isRequired,
-    singularUnit: PropTypes.string.isRequired,
-    pluralUnit: PropTypes.string.isRequired,
+    unit: PropTypes.string.isRequired,
     filters: PropTypes.node,
     children: props => {
       React.Children.toArray(props.children).every(
@@ -35,8 +34,7 @@ export default class Table extends PureComponent {
   get entityCountProps() {
     return {
       pagination: this.props.pagination,
-      singularUnit: this.props.singularUnit,
-      pluralUnit: this.props.pluralUnit,
+      unit: this.props.unit,
       showRange: true
     };
   }

@@ -60,7 +60,7 @@ export const Button = styled("button", transientOptions)`
   padding-inline: 12px;
   color: var(--color-neutral-text-extra-dark);
   border: 2px solid transparent;
-  border-radius: 8px;
+  border-radius: var(--box-border-radius);
   background-color: var(--color-accent-primary);
   transition: background-color ${defaultTransitionProps},
     border-color ${defaultTransitionProps};
