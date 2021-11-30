@@ -3,7 +3,6 @@ import { storiesOf, fixtures } from "helpers/storybook/exports";
 import EntityThumbnail from "..";
 
 const issue = fixtures.entities.issue();
-const user = fixtures.entities.user();
 
 storiesOf("Global/EntityThumbnail", module)
   .add("Journal Issue", () => {
@@ -12,7 +11,6 @@ storiesOf("Global/EntityThumbnail", module)
         <EntityThumbnail
           entity={issue.data}
           onUncollect={() => console.log("clicked (un)collect")}
-          userMock={user.attributes}
           hideDesc
           stack
         />
@@ -27,7 +25,6 @@ storiesOf("Global/EntityThumbnail", module)
         <EntityThumbnail
           entity={{ ...issue.data, attributes: updated }}
           onUncollect={() => console.log("clicked (un)collect")}
-          userMock={user.attributes}
           hideDesc
         />
       </div>
@@ -41,7 +38,6 @@ storiesOf("Global/EntityThumbnail", module)
         <EntityThumbnail
           entity={{ ...issue.data, attributes: updated }}
           onUncollect={() => console.log("clicked (un)collect")}
-          userMock={user.attributes}
           hideDesc
         />
       </div>
@@ -55,7 +51,6 @@ storiesOf("Global/EntityThumbnail", module)
         <EntityThumbnail
           entity={{ ...issue.data, attributes: updated }}
           onUncollect={() => console.log("clicked (un)collect")}
-          userMock={user.attributes}
           hideDesc
         />
       </div>
@@ -69,7 +64,6 @@ storiesOf("Global/EntityThumbnail", module)
         <EntityThumbnail
           entity={{ ...issue.data, attributes: updated }}
           onUncollect={() => console.log("clicked (un)collect")}
-          userMock={user.attributes}
           hideDesc
         />
       </div>
@@ -83,7 +77,6 @@ storiesOf("Global/EntityThumbnail", module)
         <EntityThumbnail
           entity={{ ...issue.data, attributes: updated }}
           onUncollect={() => console.log("clicked (un)collect")}
-          userMock={user.attributes}
           hideDesc
           stack={false}
         />

@@ -27,7 +27,6 @@ const collectionProjects = fixtures.collectionFactory(
   "collectionProject",
   ENTITY_COUNT
 );
-console.log(fixtures.collectionFactory("resource", 4));
 
 storiesOf("Global/EntityCollection", module)
   .add("Projects", () => (
