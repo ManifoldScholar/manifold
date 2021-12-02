@@ -10,7 +10,8 @@ export default function HeroCalloutList({
   showErrors = false,
   inline = false,
   mobileVisible = false,
-  lightMode = true
+  lightMode = true,
+  buttonSize = "lg"
 }) {
   const visible = authorized
     ? callouts
@@ -31,6 +32,7 @@ export default function HeroCalloutList({
               key={callout.id}
               callout={callout}
               lightMode={lightMode}
+              buttonSize={buttonSize}
             />
           ))}
         </Styled.List>
@@ -43,7 +45,7 @@ export default function HeroCalloutList({
               key={callout.id}
               callout={callout}
               lightMode={lightMode}
-              link
+              isLink
             />
           ))}
         </Styled.List>
@@ -52,11 +54,14 @@ export default function HeroCalloutList({
   );
 }
 
+HeroCalloutList.displayName = "Frontend.Composed.EntityHero.Parts.CalloutList";
+
 HeroCalloutList.propTypes = {
   callouts: PropTypes.array.isRequired,
-  authorized: PropTypes.bool,
+  authorized: PropTypes.bool.isRequired,
   showErrors: PropTypes.bool,
   inline: PropTypes.bool,
   mobileVisible: PropTypes.bool,
-  lightMode: PropTypes.bool
+  lightMode: PropTypes.bool,
+  buttonSize: PropTypes.oneOf(["sm", "lg"])
 };

@@ -4,8 +4,6 @@ import IconComputed from "global/components/icon-computed";
 import * as Styled from "./styles";
 
 export default function HeroSocial({ hashtag, twitter, facebook, instagram }) {
-  if (!hashtag && !twitter && !facebook && !instagram) return null;
-
   const url = (service, id) => {
     switch (service) {
       case "twitter":
@@ -50,6 +48,8 @@ export default function HeroSocial({ hashtag, twitter, facebook, instagram }) {
     </Styled.SocialLinks>
   );
 }
+
+HeroSocial.displayName = "Frontend.Composed.EntityHero.Parts.Social";
 
 HeroSocial.propTypes = {
   hashtag: PropTypes.string,

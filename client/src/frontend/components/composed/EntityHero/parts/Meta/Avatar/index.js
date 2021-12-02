@@ -18,6 +18,8 @@ export default function MakerAvatar({ maker }) {
   );
 }
 
+MakerAvatar.displayName = "Frontend.Composed.EntityHero.Parts.Meta.Avatar";
+
 MakerAvatar.propTypes = {
-  maker: PropTypes.object
+  maker: PropTypes.object.isRequired
 };

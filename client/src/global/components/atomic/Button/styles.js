@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
-import { defaultTransitionProps, rgba } from "theme/styles/mixins";
+import { defaultTransitionProps, rgba, respond } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
+import { breakpoints } from "theme/styles/variables/media";
+import IconComposer from "global/components/utility/IconComposer";
+
+const HERO_BREAKPOINT = breakpoints[60];
 
 const aSecondaryButton = `
   background-color: var(--color-base-neutral10);
@@ -35,10 +39,13 @@ const aSecondaryButtonDark = `
 
 const aButtonLg = `
   --ButtonText-padding-block: 18px;
+  --ButtonIcon-margin: -6px;
 
   height: 50px;
   justify-content: center;
   border-radius: 6px;
+
+  ${respond(`--ButtonText-padding-block: 12px`, HERO_BREAKPOINT, "max")}
 `;
 
 export const Button = styled("button", transientOptions)`
@@ -48,7 +55,7 @@ export const Button = styled("button", transientOptions)`
   gap: 12px;
   align-items: center;
   height: 40px;
-  min-width: 200px;
+  min-width: min(200px, 100%);
   width: ${({ $width }) => $width && `${$width}px`};
   padding-inline: 12px;
   color: var(--color-neutral-text-extra-dark);
@@ -88,6 +95,10 @@ export const Button = styled("button", transientOptions)`
   ${({ $size }) => $size === "lg" && aButtonLg}
 `;
 
-export const ButtonText = styled("span", transientOptions)`
+export const ButtonText = styled.span`
   padding-block: var(--ButtonText-padding-block);
+`;
+
+export const ButtonIcon = styled(IconComposer)`
+  margin-inline-start: var(--ButtonIcon-margin);
 `;

@@ -5,6 +5,7 @@ import { transientOptions } from "helpers/emotionHelpers";
 import { SocialLinks } from "../Social/styles";
 
 const BREAKPOINT = breakpoints[60];
+const GUTTER = "20px";
 
 export const Wrapper = styled("div", transientOptions)`
   ${({ $mobile }) =>
@@ -12,25 +13,27 @@ export const Wrapper = styled("div", transientOptions)`
       ? `display: block; ${respond(`display: none;`, BREAKPOINT)}`
       : `display: none; ${respond(`display: block; width: 100%;`, BREAKPOINT)}`}
 
-  & + & {
-    margin-top: 12px;
+  * + & {
+    margin-block-start: 20px;
   }
 
   + ${SocialLinks} {
-    margin-top: 35px;
+    margin-block: 35px;
   }
 `;
-
-const calloutGutter = "19px";
 
 export const List = styled("div", transientOptions)`
   display: flex;
   flex-direction: column;
   width: 100%;
 
-  > * {
+  > *:not(:first-child) {
     width: 100%;
-    margin-top: ${calloutGutter};
+    margin-block-start: var(--CalloutList-gutter, ${GUTTER});
+  }
+
+  & + & {
+    margin-block-start: var(--CalloutList-margin, ${GUTTER});
   }
 
   ${({ $inline }) =>
@@ -38,10 +41,12 @@ export const List = styled("div", transientOptions)`
     respond(
       `
       flex-flow: row wrap;
-      gap: ${calloutGutter};
+      gap: ${GUTTER};
 
-      > * {
+      > *,
+      > *:not(:first-child) {
         width: auto;
+        margin-block-start: 0;
       }
     `,
       BREAKPOINT

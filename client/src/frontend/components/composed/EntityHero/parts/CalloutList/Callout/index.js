@@ -1,43 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getButtonParams } from "./params";
+import { getCalloutParams } from "./params";
+import Button from "global/components/atomic/Button";
 import UserLink from "global/components/helper/UserLink";
 import * as Styled from "./styles";
 
-const calloutProps = (as, url) => {
+const navProps = (as, url) => {
   switch (as) {
     case "a":
       return { href: url, target: "_blank", rel: "noopener noreferrer" };
     case "UserLink":
       return { url };
-    case "span":
-      return {};
     default:
       return { to: url };
-  }
-};
-
-const styleProps = (type, lightMode) => {
-  switch (type) {
-    case "READ":
-      return { $color: "primary", $lightMode: lightMode };
-    case "DOWNLOAD":
-      return { $color: "secondary", $lightMode: lightMode };
-    case "TOC":
-      return { $color: "secondary", $lightMode: lightMode };
-    case "LINK":
-      return { $color: "secondary", $layout: "center", $lightMode: lightMode };
-    case "ERROR":
-      return { $color: "error", $layout: "center", $lightMode: lightMode };
-    default:
-      return {};
   }
 };
 
 export default function Callout({
   callout,
   showErrors = false,
-  link = false,
+  isLink = false,
+  buttonSize,
   lightMode = true
 }) {
   const type =
@@ -45,35 +28,60 @@ export default function Callout({
     !callout.relationships.text
       ? "ERROR"
       : callout.attributes.kind.toUpperCase();
-  if (type === "ERROR" && !showErrors) return null;
 
-  const { icon, iconSize, url, title, message, as, mismatch } = getButtonParams(
-    callout,
-    type
-  );
+  if (type === "ERROR") {
+    if (!showErrors) {
+      return null;
+    }
+    return isLink ? (
+      <Styled.ErrorLink as="span">Text Missing</Styled.ErrorLink>
+    ) : (
+      <Styled.ErrorButton as="span" size={buttonSize}>
+        Text Missing
+      </Styled.ErrorButton>
+    );
+  }
+
+  const {
+    icon,
+    iconSize,
+    url,
+    title,
+    as,
+    primary,
+    mismatch
+  } = getCalloutParams(callout, type, isLink);
   if (mismatch) return null;
 
-  const CalloutComponent = link ? Styled.LinkCallout : Styled.ButtonCallout;
-  const IconComponent = link ? Styled.LinkIcon : Styled.ButtonIcon;
-  const TextComponent = link ? "span" : Styled.ButtonText;
-
-  return (
-    <CalloutComponent
+  return isLink ? (
+    <Styled.LinkCallout
       as={as === "UserLink" ? UserLink : as}
-      {...calloutProps(as, url)}
-      {...styleProps(type, lightMode)}
+      {...navProps(as, url)}
     >
-      {icon && (
-        <IconComponent icon={icon} size={iconSize} {...styleProps(type)} />
-      )}
-      <TextComponent>{title ?? message}</TextComponent>
-    </CalloutComponent>
+      {icon && <Styled.LinkIcon icon={icon} size={iconSize} />}
+      <span>{title}</span>
+    </Styled.LinkCallout>
+  ) : (
+    <Button
+      as={as === "UserLink" ? UserLink : as}
+      {...navProps(as, url)}
+      size={buttonSize}
+      dark={!lightMode}
+      secondary={!primary}
+      icon={icon}
+      iconSize={iconSize}
+    >
+      {title}
+    </Button>
   );
 }
+
+Callout.displayName = "Frontend.Composed.EntityHero.Parts.Callout";
 
 Callout.propTypes = {
   callout: PropTypes.object.isRequired,
   showErrors: PropTypes.bool,
-  link: PropTypes.bool,
-  lightMode: PropTypes.bool
+  isLink: PropTypes.bool,
+  lightMode: PropTypes.bool,
+  buttonSize: PropTypes.oneOf(["sm", "lg"])
 };
