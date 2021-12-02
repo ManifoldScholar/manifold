@@ -20,7 +20,10 @@ const journal = () => ({
     abilities: abilities(),
     metadataProperties: Object.keys(metadata()),
     metadata: metadata(),
-    metadataFormatted: metadata()
+    metadataFormatted: metadata(),
+    twitterId: "test",
+    instagramId: "test",
+    facebookId: "test"
   },
   relationships: {
     collectionProjects: [],

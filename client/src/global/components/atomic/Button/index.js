@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
 export default function Button({
@@ -21,7 +20,7 @@ export default function Button({
       $width={width}
       {...props}
     >
-      {icon && <IconComposer icon={icon} size={iconSize} />}
+      {icon && <Styled.ButtonIcon icon={icon} size={iconSize} />}
       {children && <Styled.ButtonText>{children}</Styled.ButtonText>}
     </Styled.Button>
   );
@@ -29,9 +28,11 @@ export default function Button({
 
 Button.propTypes = {
   children: PropTypes.string,
-  size: PropTypes.string,
+  size: PropTypes.oneOf(["sm", "lg"]),
   secondary: PropTypes.bool,
   dark: PropTypes.bool,
   icon: PropTypes.string,
   iconSize: PropTypes.number
 };
+
+Button.displayName = "Global.Atomic.Button";
