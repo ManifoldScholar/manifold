@@ -5,10 +5,10 @@ import { transientOptions } from "helpers/emotionHelpers";
 
 const BREAKPOINT = breakpoints[60];
 
-export const Wrapper = styled("header", transientOptions)`
+export const Header = styled("header", transientOptions)`
   position: relative;
   z-index: 50;
-  margin-bottom: 24px;
+  margin-block-end: 24px;
   hyphens: none;
   line-height: 1.188;
 
@@ -42,13 +42,13 @@ export const Toggle = styled.span`
 
 export const Subtitle = styled.div`
   font-family: var(--font-family-copy);
-  margin-top: 2px;
+  margin-block-start: 2px;
   font-size: 18px;
   font-style: italic;
   letter-spacing: 0.028em;
 
   ${respond(
-    `margin-top: 11px;
+    `margin-block-start: 11px;
     font-size: 24px;`,
     BREAKPOINT
   )}

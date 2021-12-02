@@ -10,6 +10,8 @@ export default function HeroCredits({ copy }) {
   );
 }
 
+HeroCredits.displayName = "Frontend.Composed.EntityHero.Parts.Credits";
+
 HeroCredits.propTypes = {
   copy: PropTypes.string.isRequired
 };
