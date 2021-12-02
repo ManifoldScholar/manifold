@@ -49,6 +49,15 @@ export const Wrapper = styled("section", transientOptions)`
     ${respond(`padding-top: 30px;`, BREAKPOINT)}`}
 `;
 
+export const JournalWrapper = styled(Wrapper)`
+  --Meta-font-family: var(--font-family-heading);
+  --Social-icons-color: var(--color-base-neutral80);
+  --link-color: var(--color-neutral-text-dark);
+
+  color: var(--color-neutral-text-extra-dark);
+  background-color: var(--color-base-neutral-white);
+`;
+
 export const Inner = styled.div`
   ${containerPrototype}
   position: relative;
@@ -97,7 +106,12 @@ export const TopRight = styled.div`
   ${respond(
     `grid-row: 1;
     grid-column: 2;
-    padding-right: 60px;`,
+    padding-right: 60px;
+
+    > *:first-child {
+      margin-top: 7px;
+    }
+    `,
     BREAKPOINT
   )}
 `;

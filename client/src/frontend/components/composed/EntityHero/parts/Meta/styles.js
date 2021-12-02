@@ -6,7 +6,7 @@ import { Wrapper as CalloutWrapper } from "../CalloutList/styles";
 const BREAKPOINT = breakpoints[60];
 
 export const Wrapper = styled.div`
-  font-family: var(--font-family-copy);
+  font-family: var(--Meta-font-family, var(--font-family-copy));
 
   + ${CalloutWrapper} {
     margin-top: 20px;
@@ -40,7 +40,7 @@ export const Creators = styled(NamesList)`
   )}
 
   + ${Contributors} {
-    margin-top: 12px;
+    margin-block-start: 12px;
   }
 
   .italic {
@@ -62,9 +62,21 @@ export const Name = styled.span`
 export const Description = styled.div`
   font-size: 16px;
   letter-spacing: 0.012em;
-  margin-top: 22px;
   line-height: 1.529em;
 
-  ${respond(`margin-top: 45px;`, BREAKPOINT)}
-  ${respond(`font-size: 17px;`, BREAKPOINT)}
+  ${Creators} + &,
+  ${Contributors} + & {
+    margin-block-start: 22px;
+  }
+
+  ${respond(
+    `
+    font-size: 17px;
+
+    ${Creators} + &,
+    ${Contributors} + & {
+      margin-block-start: 45px;
+    }`,
+    BREAKPOINT
+  )}
 `;

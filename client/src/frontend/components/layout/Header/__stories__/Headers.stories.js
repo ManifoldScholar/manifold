@@ -9,7 +9,7 @@ import BackLink from "frontend/components/back-link";
 import { commonActions } from "actions/helpers";
 import pickBy from "lodash/pickBy";
 import Header from "../index";
-import ProjectHero from "frontend/components/project/Hero";
+import EntityHero from "frontend/components/composed/EntityHero";
 import bookCover from "test/assets/book-cover.jpg";
 import heroBackground from "test/assets/hero-bg.jpg";
 import avatar from "test/assets/milton.jpg";
@@ -174,7 +174,7 @@ storiesOf("Integration/Project Detail", module).add(
             location={{ pathname: "" }}
             alwaysVisible={alwaysVisible}
           />
-          <ProjectHero project={projectWithKnobs} />
+          <EntityHero entity={projectWithKnobs} mock />
           <div style={{ height: 600 }}>&nbsp;</div>
         </BackLink.Provider>
       </FrontendModeContext.Provider>

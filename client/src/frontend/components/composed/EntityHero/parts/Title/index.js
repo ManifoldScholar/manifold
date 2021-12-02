@@ -7,7 +7,7 @@ export default function HeroTitle({ entity, standalone = false }) {
   const title = entity.attributes.titleFormatted;
   const subtitle = entity.attributes.subtitleFormatted;
   return (
-    <Styled.Wrapper $standalone={standalone}>
+    <Styled.Header $standalone={standalone}>
       {title && (
         <Styled.TitleWrapper>
           <Styled.Title
@@ -22,9 +22,11 @@ export default function HeroTitle({ entity, standalone = false }) {
       {subtitle && (
         <Styled.Subtitle dangerouslySetInnerHTML={{ __html: subtitle }} />
       )}
-    </Styled.Wrapper>
+    </Styled.Header>
   );
 }
+
+HeroTitle.displayName = "Frontend.Composed.EntityHero.Parts.Title";
 
 HeroTitle.propTypes = {
   entity: PropTypes.object.isRequired,

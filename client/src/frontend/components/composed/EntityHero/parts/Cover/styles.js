@@ -28,6 +28,7 @@ export const Cover = styled.figure`
   svg {
     width: 111px;
     height: 111px;
+    align-self: center;
 
     ${respond(
       `
