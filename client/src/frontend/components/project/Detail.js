@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import LoadingBlock from "global/components/loading-block";
 import Layout from "frontend/components/layout";
-import Hero from "./Hero";
+import EntityHero from "frontend/components/composed/EntityHero";
 import Content from "./Content/index";
 import { FrontendModeContext } from "helpers/contexts";
 import withSettings from "hoc/with-settings";
@@ -33,7 +33,7 @@ class Detail extends Component {
     return (
       <>
         <section>
-          <Hero project={project} />
+          <EntityHero entity={project} />
           <Authorize
             entity={project}
             ability="fullyRead"

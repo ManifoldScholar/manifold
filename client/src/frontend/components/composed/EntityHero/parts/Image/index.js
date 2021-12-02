@@ -19,6 +19,8 @@ export default function HeroImage({ image }) {
   );
 }
 
+HeroImage.displayName = "Frontend.Composed.EntityHero.Parts.Image";
+
 HeroImage.propTypes = {
   image: PropTypes.object.isRequired
 };

@@ -4,7 +4,7 @@ import EntityAvatar from "global/components/atomic/EntityAvatar";
 import * as Styled from "./styles";
 
 export default function HeroCover({ entity }) {
-  const cover = entity.attributes.coverStyles.medium ?? false;
+  const cover = entity.attributes.coverStyles?.medium ?? false;
 
   return (
     <Styled.Cover>
@@ -16,6 +16,8 @@ export default function HeroCover({ entity }) {
     </Styled.Cover>
   );
 }
+
+HeroCover.displayName = "Frontend.Composed.EntityHero.Parts.Cover";
 
 HeroCover.propTypes = {
   entity: PropTypes.object.isRequired

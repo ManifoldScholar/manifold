@@ -3,25 +3,14 @@ import PropTypes from "prop-types";
 import MakerAvatar from "./Avatar";
 import * as Styled from "./styles";
 
-export default function HeroMeta({ entity }) {
-  const description = entity.attributes.descriptionFormatted;
-
-  const creators =
-    entity.relationships.creators?.length === 0
-      ? null
-      : entity.relationships.creators;
+export default function HeroMeta({ creators, contributors, description }) {
   const showAvatars =
     creators?.length <= 2 &&
     creators.every(creator => creator.attributes.avatarStyles.smallSquare);
 
-  const contributors =
-    entity.relationships.contributors?.length === 0
-      ? null
-      : entity.relationships.contributors;
-
   return (
     <Styled.Wrapper>
-      {creators && (
+      {!!creators?.length && (
         <Styled.Creators>
           {!showAvatars && <span className="italic">by </span>}
           {creators.map(creator =>
@@ -35,7 +24,7 @@ export default function HeroMeta({ entity }) {
           )}
         </Styled.Creators>
       )}
-      {contributors && (
+      {!!contributors?.length && (
         <Styled.Contributors>
           <span className="italic">Contributors: </span>
           {contributors.map(contributor => (
@@ -52,6 +41,10 @@ export default function HeroMeta({ entity }) {
   );
 }
 
+HeroMeta.displayName = "Frontend.Composed.EntityHero.Parts.Meta";
+
 HeroMeta.propTypes = {
-  entity: PropTypes.object.isRequired
+  creators: PropTypes.array,
+  contributors: PropTypes.array,
+  description: PropTypes.string
 };
