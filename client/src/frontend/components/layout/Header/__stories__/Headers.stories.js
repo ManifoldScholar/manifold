@@ -174,7 +174,7 @@ storiesOf("Integration/Project Detail", module).add(
             location={{ pathname: "" }}
             alwaysVisible={alwaysVisible}
           />
-          <EntityHero entity={projectWithKnobs} mock />
+          <EntityHero.Project entity={projectWithKnobs} mock />
           <div style={{ height: 600 }}>&nbsp;</div>
         </BackLink.Provider>
       </FrontendModeContext.Provider>

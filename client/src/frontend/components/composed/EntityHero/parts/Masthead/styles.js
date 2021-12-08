@@ -1,12 +1,14 @@
 import styled from "@emotion/styled";
+import { fluidScale } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
 export const Wrapper = styled("div", transientOptions)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   max-height: 300px;
   min-height: 180px;
   width: 100%;
-  overflow: hidden;
-  position: relative;
   background-color: ${({ $color }) => $color && $color};
 `;
 
@@ -18,9 +20,7 @@ export const Image = styled.img`
 `;
 
 export const Logo = styled.img`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  max-height: 60%;
+  max-height: ${fluidScale("180px", "120px")};
+  padding-block: ${fluidScale("50px", "25px")};
+  box-sizing: content-box;
 `;

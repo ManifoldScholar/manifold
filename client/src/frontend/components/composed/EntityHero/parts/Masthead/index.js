@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { breakpoints } from "theme/styles/variables/media";
 import * as Styled from "./styles";
 
 const SIZES = { retina: 2560, large: 1280, medium: 640 };
+const BREAKPOINT = breakpoints[60];
 
 export default function Masthead({ image, logo, color }) {
   return (
@@ -13,6 +15,7 @@ export default function Masthead({ image, logo, color }) {
           ${image.largeLandscape} ${SIZES.large}w,
           ${image.mediumLandscape} ${SIZES.medium}w
         `}
+          sizes={`(max-width: ${BREAKPOINT}) ${SIZES.medium}px, (max-width: ${breakpoints[120]}) ${SIZES.large}px`}
           src={image.largeLandscape}
           alt=""
         />
@@ -20,12 +23,11 @@ export default function Masthead({ image, logo, color }) {
       {logo && (
         <Styled.Logo
           srcSet={`
-        ${logo.large} ${SIZES.large}w,
-        ${logo.medium} ${SIZES.medium}w
+        ${logo.large} 2x,
+        ${logo.medium} 1x
       `}
           src={logo.large}
           alt=""
-          height={"225px"}
         />
       )}
     </Styled.Wrapper>

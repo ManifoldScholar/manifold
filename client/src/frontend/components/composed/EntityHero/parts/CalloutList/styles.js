@@ -14,7 +14,7 @@ export const Wrapper = styled("div", transientOptions)`
       : `display: none; ${respond(`display: block; width: 100%;`, BREAKPOINT)}`}
 
   * + & {
-    margin-block-start: ${GUTTER};
+    margin-block-start: 20px;
   }
 
   + ${SocialLinks} {
@@ -29,12 +29,13 @@ export const List = styled("div", transientOptions)`
 
   > *:not(:first-child) {
     width: 100%;
-    margin-block-start: ${GUTTER};
+    margin-block-start: var(--CalloutList-gutter, ${GUTTER});
   }
 
   & + & {
-    margin-block-start: ${GUTTER};
+    margin-block-start: var(--CalloutList-margin, ${GUTTER});
   }
+
   ${({ $inline }) =>
     $inline &&
     respond(
@@ -42,8 +43,10 @@ export const List = styled("div", transientOptions)`
       flex-flow: row wrap;
       gap: ${GUTTER};
 
-      > * {
+      > *,
+      > *:not(:first-child) {
         width: auto;
+        margin-block-start: 0;
       }
     `,
       BREAKPOINT
