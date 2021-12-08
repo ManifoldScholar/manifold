@@ -9,6 +9,7 @@ tmp/*
 !tmp/.gitkeep
 !tmp/sockets/
 !tmp/sockets/.gitkeep
+storybook-static
 
 dist/manifold/www/browser.config.js
 dist/manifold/ssr/ssr.config.js
