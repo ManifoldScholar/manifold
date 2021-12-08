@@ -33,7 +33,7 @@ class Detail extends Component {
     return (
       <>
         <section>
-          <EntityHero entity={project} />
+          <EntityHero.Project entity={project} />
           <Authorize
             entity={project}
             ability="fullyRead"

@@ -147,7 +147,7 @@ const issueWithCallouts = {
   attributes: {
     ...issue.attributes,
     mastheadColor: "#B4A075",
-    logoStyles: { large: icon, medium: true },
+    logoStyles: { large: icon, medium: icon },
     avatarColor: "primary"
   },
   relationships: {
