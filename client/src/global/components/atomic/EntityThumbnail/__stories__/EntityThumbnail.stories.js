@@ -79,12 +79,14 @@ storiesOf("Global/EntityThumbnail", module)
     const attrs = issue.data.attributes;
     const updated = { ...attrs, recentlyUpdated: true, draft: true };
     return (
-      <EntityThumbnail
-        entity={{ ...issue.data, attributes: updated }}
-        onUncollect={() => console.log("clicked (un)collect")}
-        userMock={user.attributes}
-        hideDesc
-        stack={false}
-      />
+      <div className="bg-white">
+        <EntityThumbnail
+          entity={{ ...issue.data, attributes: updated }}
+          onUncollect={() => console.log("clicked (un)collect")}
+          userMock={user.attributes}
+          hideDesc
+          stack={false}
+        />
+      </div>
     );
   });
