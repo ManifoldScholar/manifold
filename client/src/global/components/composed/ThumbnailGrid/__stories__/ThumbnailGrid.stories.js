@@ -26,7 +26,7 @@ const entities = shuffle(projects.concat(journals).concat(issues));
 storiesOf("Global/ThumbnailGrid", module)
   .add("Grid", () => {
     return (
-      <div className="container">
+      <div className="container bg-white">
         <ThumbnailGrid>
           {({ stack }) =>
             entities.map(item => (
@@ -45,7 +45,7 @@ storiesOf("Global/ThumbnailGrid", module)
   })
   .add("List", () => {
     return (
-      <div className="container" style={{ maxWidth: "500px" }}>
+      <div className="container bg-white" style={{ maxWidth: "500px" }}>
         <ThumbnailGrid>
           {({ stack }) =>
             entities.map(item => (
@@ -64,7 +64,7 @@ storiesOf("Global/ThumbnailGrid", module)
   })
   .add("Empty", () => {
     return (
-      <div className="container">
+      <div className="container bg-white">
         <ThumbnailGrid />
       </div>
     );
