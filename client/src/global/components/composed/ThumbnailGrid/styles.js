@@ -24,7 +24,8 @@ const emptyStyles = `
 
 export const Grid = styled.div`
   --list-item-padding: ${({ $grid }) => ($grid ? 0 : "14px")};
-  --list-item-border: ${({ $grid }) => ($grid ? "none" : "1px solid")};
+  --list-item-border: ${({ $grid }) =>
+    $grid ? "none" : "1px solid var(--color-neutral-ui-dull-dark)"};
   --list-item-margin: ${({ $grid }) => ($grid ? "18px" : 0)};
 
   display: grid;

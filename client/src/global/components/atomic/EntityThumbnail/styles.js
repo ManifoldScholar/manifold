@@ -26,6 +26,7 @@ export const ItemLink = styled(Link, transientOptions)`
     `flex-direction: column;
     height: 100%;
     padding: min(2.105vw, 25px);
+    border-radius: var(--box-border-radius);
 
     &:hover,
     &:focus-visible {
