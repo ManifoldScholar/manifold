@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
-import { blockLabelRound, subtitlePrimary } from "theme/styles/mixins";
+import {
+  blockLabelRound,
+  subtitlePrimary,
+  defaultHoverStyle
+} from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
 export const MetadataWrapper = styled("div", transientOptions)`
@@ -34,7 +38,7 @@ export const TitleWrapper = styled("h3", transientOptions)`
   white-space: normal;
   transition: color var(--transition-duration-default)
     var(--transition-timing-function);
-  color: var(--color-base-neutral90);
+  color: var(--strong-color);
 
   ${({ $stack }) =>
     $stack &&
@@ -44,9 +48,16 @@ export const TitleWrapper = styled("h3", transientOptions)`
     `}
 `;
 
-export const TitleText = styled.span`
+export const TitleText = styled("span", transientOptions)`
   display: var(--title-display);
   font-family: var(--font-family-heading);
+
+  ${({ $stack }) =>
+    !$stack &&
+    `
+    &:hover{
+      ${defaultHoverStyle}
+    }`}
 `;
 
 export const Subtitle = styled.h4`
