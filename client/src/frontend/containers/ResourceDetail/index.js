@@ -1,19 +1,19 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import Utility from "frontend/components/utility";
 import Resource from "frontend/components/resource";
 import { entityStoreActions, fatalErrorActions } from "actions";
 import { select } from "utils/entityUtils";
 import { resourcesAPI, resourceCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import LoadingBlock from "global/components/loading-block";
-import BackLink from "frontend/components/back-link";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import HeadContent from "global/components/HeadContent";
 import some from "lodash/some";
 import withSettings from "hoc/with-settings";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
+import Breadcrumbs from "global/components/atomic/Breadcrumbs";
 
 const { request, flush } = entityStoreActions;
 
@@ -126,16 +126,22 @@ export class ResourceDetailContainer extends PureComponent {
           }
         />
         {resourceCollection ? (
-          <BackLink.Register
-            backText="Back to Collection"
-            link={this.collectionUrl()}
-            title={resourceCollection.attributes.title}
+          <RegisterBreadcrumbs
+            breadcrumbs={[
+              {
+                to: this.collectionUrl(),
+                label: `Back to Collection: ${resourceCollection.attributes.title}`
+              }
+            ]}
           />
         ) : (
-          <BackLink.Register
-            backText="Back to Project Resources"
-            link={this.projectUrl()}
-            title={project.attributes.titlePlaintext}
+          <RegisterBreadcrumbs
+            breadcrumbs={[
+              {
+                to: this.projectUrl(),
+                label: `Back to Project Resources: ${project.attributes.titlePlaintext}`
+              }
+            ]}
           />
         )}
         {resource ? (
@@ -150,12 +156,12 @@ export class ResourceDetailContainer extends PureComponent {
           <LoadingBlock />
         )}
         {project ? (
-          <section className="bg-neutral05">
-            <Utility.BackLinkSecondary
-              backText="Back to Project Resources"
-              link={this.projectUrl()}
-            />
-          </section>
+          <Breadcrumbs
+            secondary
+            breadcrumbs={[
+              { to: this.projectUrl(), label: "Back to Project Resources" }
+            ]}
+          />
         ) : null}
       </>
     );

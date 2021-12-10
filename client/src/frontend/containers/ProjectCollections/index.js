@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
-import Utility from "frontend/components/utility";
 import ProjectCollection from "frontend/components/project-collection";
 import connectAndFetch from "utils/connectAndFetch";
 import { commonActions } from "actions/helpers";
@@ -13,6 +12,7 @@ import { projectCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import queryString from "query-string";
 import EntityCollection from "global/components/composed/EntityCollection";
+import Breadcrumbs from "global/components/atomic/Breadcrumbs";
 
 const { request } = entityStoreActions;
 const perPage = 8;
@@ -145,9 +145,10 @@ export class ProjectsCollectionsContainer extends Component {
     return (
       <>
         <CheckFrontendMode debugLabel="ProjectCollections" isProjectSubpage />
-        <Utility.BackLinkPrimary
-          link={lh.link("frontendProjectsAll")}
-          backText={"Back to projects"}
+        <Breadcrumbs
+          breadcrumbs={[
+            { to: lh.link("frontendProjectsAll"), label: "Back to projects" }
+          ]}
         />
         <h1 className="screen-reader-text">Project Collections</h1>
         {this.renderProjectCollections()}

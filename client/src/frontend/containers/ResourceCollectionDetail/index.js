@@ -11,7 +11,7 @@ import debounce from "lodash/debounce";
 import omitBy from "lodash/omitBy";
 import isNull from "lodash/isNull";
 import lh from "helpers/linkHandler";
-import BackLink from "frontend/components/back-link";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import withSettings from "hoc/with-settings";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
@@ -225,9 +225,13 @@ export class ResourceCollectionDetailContainer extends PureComponent {
           description={resourceCollection.attributes.description}
           image={resourceCollection.attributes.thumbnailStyles.medium}
         />
-        <BackLink.Register
-          link={lh.link("frontendProjectDetail", project.attributes.slug)}
-          title={project.attributes.titlePlaintext}
+        <RegisterBreadcrumbs
+          breadcrumbs={[
+            {
+              to: lh.link("frontendProjectDetail", project.attributes.slug),
+              label: project.attributes.titlePlaintext
+            }
+          ]}
         />
         {this.props.slideshowResources && this.props.resources ? (
           <ResourceCollection.Detail

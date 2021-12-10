@@ -9,7 +9,7 @@ const crumbs = [
   { to: "/home", label: "Breadcrumb" }
 ];
 
-storiesOf("Frontend/Breadcrumbs", module)
+storiesOf("Global/Breadcrumbs", module)
   .add("Default", () => {
     return <Breadcrumbs breadcrumbs={single} />;
   })

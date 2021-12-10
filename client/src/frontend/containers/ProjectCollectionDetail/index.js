@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "frontend/components/layout";
-import Utility from "frontend/components/utility";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollection from "global/components/composed/EntityCollection";
 import { entityStoreActions } from "actions";
@@ -16,6 +15,7 @@ import debounce from "lodash/debounce";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import has from "lodash/has";
 import withSettings from "hoc/with-settings";
+import Breadcrumbs from "global/components/atomic/Breadcrumbs";
 
 const { request, flush } = entityStoreActions;
 const defaultPage = 1;
@@ -221,9 +221,13 @@ export class ProjectCollectionDetailContainer extends Component {
             resource={this.props.projectCollection}
           />
         )}
-        <Utility.BackLinkPrimary
-          link={lh.link("frontendProjectCollections")}
-          backText={"Back to Project Collections"}
+        <Breadcrumbs
+          breadcrumbs={[
+            {
+              to: lh.link("frontendProjectCollections"),
+              label: "Back to Project Collections"
+            }
+          ]}
         />
         <HeadContent
           title={this.ogTitle}
