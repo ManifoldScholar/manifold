@@ -149,14 +149,6 @@ export class ResourceDetailContainer extends PureComponent {
         ) : (
           <LoadingBlock />
         )}
-        {project ? (
-          <section className="bg-neutral05">
-            <Utility.BackLinkSecondary
-              backText="Back to Project Resources"
-              link={this.projectUrl()}
-            />
-          </section>
-        ) : null}
       </>
     );
   }
