@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import BackLink from "frontend/components/back-link";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
 import withSearch from "hoc/with-search";
@@ -37,9 +37,16 @@ class ProjectSearch extends Component {
       <div>
         <CheckFrontendMode debugLabel="ProjectSearch" isProjectSubpage />
 
-        <BackLink.Register
-          link={lh.link("frontendProjectDetail", this.project.attributes.slug)}
-          title={this.project.attributes.titlePlaintext}
+        <RegisterBreadcrumbs
+          breadcrumbs={[
+            {
+              to: lh.link(
+                "frontendProjectDetail",
+                this.project.attributes.slug
+              ),
+              label: this.project.attributes.titlePlaintext
+            }
+          ]}
         />
         <h1 className="screen-reader-text">Search</h1>
         <div className="search-form-frontend">
