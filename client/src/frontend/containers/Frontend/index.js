@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import Footers from "global/components/Footers";
-import BackLink from "frontend/components/back-link";
+import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 import Layout from "frontend/components/layout";
 import { commonActions } from "actions/helpers";
 import { pagesAPI, subjectsAPI, requests } from "api";
@@ -108,7 +108,7 @@ export class FrontendContainer extends Component {
   render() {
     return (
       <BodyClass className={"browse"}>
-        <BackLink.Provider>
+        <BreadcrumbsProvider>
           <Utility.ScrollToTop />
           <Layout.Header
             pages={this.props.pages}
@@ -135,7 +135,7 @@ export class FrontendContainer extends Component {
             commonActions={this.commonActions}
             settings={this.props.settings}
           />
-        </BackLink.Provider>
+        </BreadcrumbsProvider>
       </BodyClass>
     );
   }

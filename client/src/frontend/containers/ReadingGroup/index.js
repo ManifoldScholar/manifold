@@ -8,7 +8,7 @@ import { grab } from "utils/entityUtils";
 import { entityStoreActions } from "actions";
 import HeadContent from "global/components/HeadContent";
 import Drawer from "global/containers/drawer";
-import BackLink from "frontend/components/back-link";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { GroupHeading } from "frontend/components/reading-group/headings";
 import Settings from "frontend/components/reading-group/Settings";
 import SearchDialog from "frontend/components/collecting/SearchDialog";
@@ -127,15 +127,23 @@ class ReadingGroup extends Component {
     };
   }
 
-  get backLinkProps() {
+  get breadcrumbsProps() {
     if (this.readingGroup.attributes.currentUserRole === "none")
       return {
-        link: lh.link("frontendPublicReadingGroups"),
-        backText: "Back to: Public Reading Groups"
+        breadcrumbs: [
+          {
+            to: lh.link("frontendPublicReadingGroups"),
+            label: "Back to: Public Reading Groups"
+          }
+        ]
       };
     return {
-      link: lh.link("frontendMyReadingGroups"),
-      backText: "Back to: My Reading Groups"
+      breadcrumbs: [
+        {
+          to: lh.link("frontendMyReadingGroups"),
+          label: "Back to: My Reading Groups"
+        }
+      ]
     };
   }
 
@@ -194,7 +202,7 @@ class ReadingGroup extends Component {
         <HeadContent title={this.groupName} appendTitle />
         <section>
           <div className="container">
-            <BackLink.Register {...this.backLinkProps} />
+            <RegisterBreadcrumbs {...this.breadcrumbsProps} />
             <GroupHeading
               readingGroup={this.readingGroup}
               history={this.history}
