@@ -9,7 +9,7 @@ import { select, meta } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 import LoadingBlock from "global/components/loading-block";
 import HeadContent from "global/components/HeadContent";
-import BackLink from "frontend/components/back-link";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import ContentPlaceholder from "global/components/ContentPlaceholder";
 import EntityCollection from "global/components/composed/EntityCollection";
 import withSettings from "hoc/with-settings";
@@ -146,9 +146,13 @@ class ProjectResourceCollectionsContainer extends Component {
         <h1 className="screen-reader-text">
           {`${project.attributes.titlePlaintext} Resource Collections`}
         </h1>
-        <BackLink.Register
-          link={lh.link("frontendProjectDetail", project.attributes.slug)}
-          title={project.attributes.titlePlaintext}
+        <RegisterBreadcrumbs
+          breadcrumbs={[
+            {
+              to: lh.link("frontendProjectDetail", project.attributes.slug),
+              label: project.attributes.titlePlaintext
+            }
+          ]}
         />
         {!this.hasCollections ? (
           this.renderPlaceholder(project.id)

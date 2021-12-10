@@ -11,7 +11,7 @@ import omitBy from "lodash/omitBy";
 import isNull from "lodash/isNull";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
-import BackLink from "frontend/components/back-link";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollection from "global/components/composed/EntityCollection";
 import withSettings from "hoc/with-settings";
 
@@ -144,9 +144,13 @@ export class ProjectResourcesContainer extends Component {
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />
-        <BackLink.Register
-          link={lh.link("frontendProjectDetail", project.attributes.slug)}
-          title={project.attributes.titlePlaintext}
+        <RegisterBreadcrumbs
+          breadcrumbs={[
+            {
+              to: lh.link("frontendProjectDetail", project.attributes.slug),
+              label: project.attributes.titlePlaintext
+            }
+          ]}
         />
         <EntityCollection.ProjectResources
           project={project}

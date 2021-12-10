@@ -7,8 +7,8 @@ import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
-import BackLink from "frontend/components/back-link";
 import lh from "helpers/linkHandler";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 
 const { request } = entityStoreActions;
 
@@ -59,10 +59,13 @@ export class EventList extends Component {
           project={project}
           isProjectSubpage
         />
-        <BackLink.Register
-          backText="Back to Project:"
-          link={this.projectUrl()}
-          title={project.attributes.title}
+        <RegisterBreadcrumbs
+          breadcrumbs={[
+            {
+              to: this.projectUrl(),
+              label: `Back to Project: ${project.attributes.title}`
+            }
+          ]}
         />
         <Project.Events
           project={project}
