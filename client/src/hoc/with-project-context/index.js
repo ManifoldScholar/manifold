@@ -1,7 +1,7 @@
 import React from "react";
 import hoistStatics from "hoist-non-react-statics";
 import { FrontendModeContext } from "helpers/contexts";
-import BackLink from "frontend/components/back-link";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import lh from "helpers/linkHandler";
 
 function getDisplayName(WrappedComponent) {
@@ -23,9 +23,13 @@ export default function withProjectContext(WrappedComponent) {
     render() {
       const projectContext = this.context.project;
       const projectBackLink = projectContext ? (
-        <BackLink.Register
-          link={lh.link("frontendProjectDetail", projectContext.slug)}
-          title={projectContext.titleFormatted}
+        <RegisterBreadcrumbs
+          breadcrumbs={[
+            {
+              to: lh.link("frontendProjectDetail", projectContext.slug),
+              label: projectContext.titleFormatted
+            }
+          ]}
         />
       ) : null;
 
