@@ -5,7 +5,7 @@ import PressHeader from "../PressHeader";
 import LibraryHeader from "../LibraryHeader";
 import StandaloneHeader from "../StandaloneHeader";
 import { FrontendModeContext } from "helpers/contexts";
-import BackLink from "frontend/components/back-link";
+import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 import { commonActions } from "actions/helpers";
 import pickBy from "lodash/pickBy";
 import Header from "../index";
@@ -118,14 +118,14 @@ storiesOf("Global/Headers", module)
   .add("Library Header", () => {
     return (
       <FrontendModeContext.Provider value={{ isLibrary: true }}>
-        <BackLink.Provider>
+        <BreadcrumbsProvider>
           <LibraryHeader
             authentication={{}}
             commonActions={commonActions(() => {})}
             visibility={{ uiPanels: {} }}
             location={{ pathname: "" }}
           />
-        </BackLink.Provider>
+        </BreadcrumbsProvider>
       </FrontendModeContext.Provider>
     );
   })
@@ -138,9 +138,9 @@ storiesOf("Global/Headers", module)
           isStandalone: true
         }}
       >
-        <BackLink.Provider>
+        <BreadcrumbsProvider>
           <StandaloneHeader />
-        </BackLink.Provider>
+        </BreadcrumbsProvider>
       </FrontendModeContext.Provider>
     );
   });
@@ -166,7 +166,7 @@ storiesOf("Integration/Project Detail", module).add(
           isStandalone: standalone
         }}
       >
-        <BackLink.Provider>
+        <BreadcrumbsProvider>
           <Header
             authentication={{ currentUser: { attributes: { kind: "admin" } } }}
             commonActions={commonActions(() => {})}
@@ -176,7 +176,7 @@ storiesOf("Integration/Project Detail", module).add(
           />
           <EntityHero.Project entity={projectWithKnobs} mock />
           <div style={{ height: 600 }}>&nbsp;</div>
-        </BackLink.Provider>
+        </BreadcrumbsProvider>
       </FrontendModeContext.Provider>
     );
   }

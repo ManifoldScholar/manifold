@@ -10,11 +10,8 @@ const crumbs = [
 ];
 
 storiesOf("Global/Breadcrumbs", module)
-  .add("Default", () => {
+  .add("Single", () => {
     return <Breadcrumbs breadcrumbs={single} />;
-  })
-  .add("Secondary", () => {
-    return <Breadcrumbs breadcrumbs={single} secondary />;
   })
   .add("Multiple", () => {
     return <Breadcrumbs breadcrumbs={crumbs} />;

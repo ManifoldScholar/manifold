@@ -7,7 +7,7 @@ import {
   defaultTransitionProps
 } from "theme/styles/mixins";
 
-export const Outer = styled.div`
+export const Outer = styled.nav`
   width: 100%;
   background-color: var(--box-bg-color);
 `;
@@ -17,8 +17,6 @@ export const OuterSecondary = styled(Outer)`
 `;
 
 export const Inner = styled.div`
-  --Breadcrumb-hover-color: var(--color-neutral-text-dark);
-
   ${containerPrototype}
   position: relative;
   display: flex;
@@ -45,27 +43,26 @@ export const Breadcrumb = styled(Link)`
   line-height: 1.4;
   text-decoration: none !important;
   letter-spacing: 0.1em;
-  margin-inline-start: 16px;
   transition: color ${defaultTransitionProps};
 
   & + & {
     ::before {
       content: " / ";
       display: inline;
-      margin-inline-end: 16px;
+      margin-inline-start: 16px;
     }
 
     &:last-child {
       color: var(--color-neutral-text-extra-dark);
 
       &:hover {
-        color: var(--Breadcrumb-hover-color);
+        color: var(--hover-color);
       }
     }
   }
 
   &:hover {
-    color: var(--Breadcrumb-hover-color);
+    color: var(--hover-color);
   }
 
   ${respond(
@@ -75,4 +72,12 @@ export const Breadcrumb = styled(Link)`
   `,
     40
   )}
+`;
+
+export const Label = styled.span`
+  margin-inline-start: 16px;
+
+  svg + & {
+    padding-top: 2px;
+  }
 `;
