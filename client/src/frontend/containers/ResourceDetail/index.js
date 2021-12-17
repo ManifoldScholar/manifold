@@ -155,14 +155,6 @@ export class ResourceDetailContainer extends PureComponent {
         ) : (
           <LoadingBlock />
         )}
-        {project ? (
-          <Breadcrumbs
-            secondary
-            breadcrumbs={[
-              { to: this.projectUrl(), label: "Back to Project Resources" }
-            ]}
-          />
-        ) : null}
       </>
     );
   }
