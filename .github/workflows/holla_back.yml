@@ -24,7 +24,7 @@ jobs:
               },
               {
                 "cmd": "accept",
-                "labels": ["Type: Enhancement", "Status: Planned"],
+                "labels": ["Type: Enhancement", "Status: Accepted"],
                 "message": "master:.github/workflows/hollas/in_scope_accepted.md",
                 "close": false
               },
