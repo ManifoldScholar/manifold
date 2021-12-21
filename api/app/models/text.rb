@@ -83,7 +83,7 @@ class Text < ApplicationRecord
           -> { where(kind: TextSection::KIND_NAVIGATION) },
           class_name: "TextSection",
           inverse_of: :text
-  has_one :last_finished_ingestion, -> { where(state: "finished").order(updated_at: :desc) }, class_name: "Ingestion"
+  has_one :last_finished_ingestion, -> { where(state: "finished").order(created_at: :desc) }, class_name: "Ingestion"
   has_many :cached_external_source_links, inverse_of: :text, dependent: :destroy
   has_many :cached_external_sources, through: :cached_external_source_links
   has_many :text_exports, inverse_of: :text, dependent: :destroy
