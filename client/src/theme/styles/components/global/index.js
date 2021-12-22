@@ -1,6 +1,5 @@
 import annotation from "./annotation";
 import assetThumbnail from "./assetThumbnail";
-import breadcrumbs from "./breadcrumbs";
 import buttons from "./buttons";
 import checkboxes from "./checkboxes";
 import collapse from "./collapse";
@@ -36,7 +35,6 @@ export default `
   ${forms}
   ${fatalError}
   ${assetThumbnail}
-  ${breadcrumbs}
   ${buttons}
   ${confirmableButton}
   ${contentPlaceholder}
