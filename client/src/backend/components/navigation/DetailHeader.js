@@ -6,6 +6,7 @@ import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 import UniqueIcons from "global/components/icon/unique";
 import Layout from "backend/components/layout";
+import Breadcrumbs from "global/components/atomic/Breadcrumbs";
 
 export default class DetailHeader extends PureComponent {
   static displayName = "Navigation.DetailHeader";
@@ -112,28 +113,11 @@ export default class DetailHeader extends PureComponent {
 
   breadcrumbs() {
     return (
-      <nav
-        aria-label="Breadcrumbs"
-        className={classNames("backend-header__breadcrumbs", "breadcrumbs", {
-          "breadcrumbs--hidden-desktop": this.backHiddenDesktop
-        })}
-      >
-        <div className="breadcrumbs__inner">
-          <Link to={this.backUrl} className="breadcrumbs__link">
-            <IconComposer
-              icon="arrowLeft16"
-              size="default"
-              className="breadcrumbs__icon breadcrumbs__icon--small"
-            />
-            <IconComposer
-              icon="arrowLeft32"
-              size="default"
-              className="breadcrumbs__icon breadcrumbs__icon--large"
-            />
-            {this.backLabel}
-          </Link>
-        </div>
-      </nav>
+      <Breadcrumbs
+        backend
+        hideOnDesktop={this.backHiddenDesktop}
+        breadcrumbs={[{ to: this.backUrl, label: this.backLabel }]}
+      />
     );
   }
 

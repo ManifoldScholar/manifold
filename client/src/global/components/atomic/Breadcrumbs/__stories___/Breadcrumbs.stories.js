@@ -10,9 +10,24 @@ const crumbs = [
 ];
 
 storiesOf("Global/Breadcrumbs", module)
-  .add("Single", () => {
-    return <Breadcrumbs breadcrumbs={single} />;
+  .add("Frontend Single", () => {
+    return (
+      <div className="bg-neutral05">
+        <Breadcrumbs breadcrumbs={single} />
+      </div>
+    );
   })
-  .add("Multiple", () => {
-    return <Breadcrumbs breadcrumbs={crumbs} />;
+  .add("Frontend Multiple", () => {
+    return (
+      <div className="bg-neutral05">
+        <Breadcrumbs breadcrumbs={crumbs} />
+      </div>
+    );
+  })
+  .add("Backend", () => {
+    return (
+      <div className="bg-neutral90" style={{ padding: "20px" }}>
+        <Breadcrumbs breadcrumbs={single} backend />
+      </div>
+    );
   });
