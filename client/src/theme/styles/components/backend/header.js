@@ -197,9 +197,5 @@ export default `
         height: ${fluidScale("44px", "40px")};
       }
     }
-
-    &__breadcrumbs {
-      border-radius: var(--box-border-radius) var(--box-border-radius) 0 0;
-    }
   }
 `;
