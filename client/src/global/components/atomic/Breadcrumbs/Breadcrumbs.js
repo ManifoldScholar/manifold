@@ -42,7 +42,7 @@ export default function Breadcrumbs({
 Breadcrumbs.displayName = "Global.Atomic.Breadcrumbs";
 
 Breadcrumbs.propTypes = {
-  breadcrumbs: PropTypes.object.isRequired,
+  breadcrumbs: PropTypes.array.isRequired,
   backend: PropTypes.bool,
   hideOnDesktop: PropTypes.bool
 };

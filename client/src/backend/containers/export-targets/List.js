@@ -74,10 +74,7 @@ export class ExportTargetsContainerImplementation extends PureComponent {
           title="Manage Export Targets"
           titleStyle="bar"
           entities={exportTargets}
-          unit={{
-            singular: "export target",
-            plural: "export targets"
-          }}
+          unit="export target"
           buttons={[
             <Button
               path={lh.link("backendSettingsExportTargetsNew")}

@@ -1,23 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`global/components/utility/Pagination matches the snapshot 1`] = `
-<nav
+<Nav
   aria-label="Pagination"
-  className="list-pagination"
 >
-  <ul
-    className="list-pagination__columns"
-  >
-    <li
-      className="list-pagination__column"
-    >
+  <Columns>
+    <Column>
       <ul>
         <li
-          className="list-pagination__page list-pagination__page--prev list-pagination__page--disabled"
           key="previous"
         >
-          <a
-            disabled={true}
+          <Link
+            aria-disabled={true}
+            as="a"
             href="#pagination-target"
             onClick={[MockFunction]}
           >
@@ -31,26 +26,21 @@ exports[`global/components/utility/Pagination matches the snapshot 1`] = `
                 }
               }
             />
-            <span
-              className="list-pagination__icon-label"
-            >
-              PREV
+            <span>
+              Prev
             </span>
-          </a>
+          </Link>
         </li>
       </ul>
-    </li>
-    <li
-      className="list-pagination__column-middle"
-    >
-      <ul
-        className="list-pagination__pages"
-      >
+    </Column>
+    <Column>
+      <Pages>
         <li
-          className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
           key="1"
         >
-          <a
+          <Link
+            aria-current="page"
+            as="a"
             href="#pagination-target"
             onClick={[MockFunction]}
           >
@@ -65,13 +55,13 @@ exports[`global/components/utility/Pagination matches the snapshot 1`] = `
               Go to page: 
               1
             </span>
-          </a>
+          </Link>
         </li>
         <li
-          className="list-pagination__page list-pagination__page--ordinal"
           key="2"
         >
-          <a
+          <Link
+            as="a"
             href="#pagination-target"
             onClick={[MockFunction]}
           >
@@ -86,26 +76,23 @@ exports[`global/components/utility/Pagination matches the snapshot 1`] = `
               Go to page: 
               2
             </span>
-          </a>
+          </Link>
         </li>
-      </ul>
-    </li>
-    <li
-      className="list-pagination__column"
-    >
+      </Pages>
+    </Column>
+    <Column>
       <ul>
         <li
-          className="list-pagination__page list-pagination__page--next"
           key="next"
         >
-          <a
+          <Link
+            aria-disabled={false}
+            as="a"
             href="#pagination-target"
             onClick={[MockFunction]}
           >
-            <span
-              className="list-pagination__icon-label"
-            >
-              NEXT
+            <span>
+              Next
             </span>
             <IconComposer
               fill="currentColor"
@@ -117,32 +104,27 @@ exports[`global/components/utility/Pagination matches the snapshot 1`] = `
                 }
               }
             />
-          </a>
+          </Link>
         </li>
       </ul>
-    </li>
-  </ul>
-</nav>
+    </Column>
+  </Columns>
+</Nav>
 `;
 
 exports[`global/components/utility/Pagination when it is compact matches the snapshot 1`] = `
-<nav
+<Nav
   aria-label="Pagination"
-  className="list-pagination list-pagination--compact"
 >
-  <ul
-    className="list-pagination__columns"
-  >
-    <li
-      className="list-pagination__column"
-    >
+  <Columns>
+    <Column>
       <ul>
         <li
-          className="list-pagination__page list-pagination__page--prev list-pagination__page--disabled"
           key="previous"
         >
-          <a
-            disabled={true}
+          <Link
+            aria-disabled={true}
+            as="a"
             href="#pagination-target"
             onClick={[MockFunction]}
           >
@@ -156,21 +138,15 @@ exports[`global/components/utility/Pagination when it is compact matches the sna
                 }
               }
             />
-            <span
-              className="list-pagination__icon-label"
-            >
-              PREV
+            <span>
+              Prev
             </span>
-          </a>
+          </Link>
         </li>
       </ul>
-    </li>
-    <li
-      className="list-pagination__column-middle"
-    >
-      <ul
-        className="list-pagination__pages"
-      >
+    </Column>
+    <Column>
+      <Pages>
         <li>
           <span>
             Page 
@@ -181,24 +157,21 @@ exports[`global/components/utility/Pagination when it is compact matches the sna
             2
           </span>
         </li>
-      </ul>
-    </li>
-    <li
-      className="list-pagination__column"
-    >
+      </Pages>
+    </Column>
+    <Column>
       <ul>
         <li
-          className="list-pagination__page list-pagination__page--next"
           key="next"
         >
-          <a
+          <Link
+            aria-disabled={false}
+            as="a"
             href="#pagination-target"
             onClick={[MockFunction]}
           >
-            <span
-              className="list-pagination__icon-label"
-            >
-              NEXT
+            <span>
+              Next
             </span>
             <IconComposer
               fill="currentColor"
@@ -210,12 +183,12 @@ exports[`global/components/utility/Pagination when it is compact matches the sna
                 }
               }
             />
-          </a>
+          </Link>
         </li>
       </ul>
-    </li>
-  </ul>
-</nav>
+    </Column>
+  </Columns>
+</Nav>
 `;
 
 exports[`global/components/utility/Pagination when there are no pagination props renders to null 1`] = `""`;

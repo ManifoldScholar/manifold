@@ -4,7 +4,7 @@ exports[`frontend/containers/Frontend/Frontend matches the snapshot 1`] = `
 <SideEffect(BodyClass)
   className="browse"
 >
-  <BackLinkProvider>
+  <BreadcrumbsProvider>
     <withRouter(ScrollToTop) />
     <Layout.Header
       authentication={
@@ -479,6 +479,6 @@ exports[`frontend/containers/Frontend/Frontend matches the snapshot 1`] = `
         }
       }
     />
-  </BackLinkProvider>
+  </BreadcrumbsProvider>
 </SideEffect(BodyClass)>
 `;

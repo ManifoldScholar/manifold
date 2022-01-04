@@ -2,7 +2,6 @@
 
 exports[`frontend/components/resource-list/Filters matches the snapshot 1`] = `
 <WithScreenReaderStatus('Global.List.Filters)
-  className="entity-section-wrapper__tools entity-section-wrapper__tools--wide"
   filters={
     Array [
       Object {
@@ -12,14 +11,6 @@ exports[`frontend/components/resource-list/Filters matches the snapshot 1`] = `
           Object {
             "label": "Type:",
             "value": "",
-          },
-          Object {
-            "label": "Image",
-            "value": "image",
-          },
-          Object {
-            "label": "Video",
-            "value": "video",
           },
         ],
         "value": "",
@@ -31,14 +22,6 @@ exports[`frontend/components/resource-list/Filters matches the snapshot 1`] = `
           Object {
             "label": "Tag:",
             "value": "",
-          },
-          Object {
-            "label": "Dog",
-            "value": "dog",
-          },
-          Object {
-            "label": "Puppy",
-            "value": "puppy",
           },
         ],
         "value": "",

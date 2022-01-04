@@ -216,10 +216,7 @@ export class ProjecExportations extends PureComponent {
                 onPageClick: this.pageChangeHandlerCreator
               }}
               entities={projectExportations}
-              unit={{
-                singular: "export",
-                plural: "exports"
-              }}
+              unit="export"
             />
           </div>
         )}

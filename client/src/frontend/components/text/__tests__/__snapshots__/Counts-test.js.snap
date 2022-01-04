@@ -1,14 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`frontend/components/TextList/ListItem/Counts matches the snapshot 1`] = `
-<ul
-  className="text-counts__interaction-list"
->
-  <li
-    className="text-counts__interaction"
-  >
+exports[`frontend/components/text/Counts matches the snapshot 1`] = `
+<InteractionList>
+  <Interaction>
     <IconComposer
-      className="text-counts__interaction-icon"
       fill="currentColor"
       icon="interactAnnotate32"
       size={32}
@@ -18,9 +13,9 @@ exports[`frontend/components/TextList/ListItem/Counts matches the snapshot 1`] =
         }
       }
     />
-    <span
+    <InteractionLabel
       aria-hidden={true}
-      className="text-counts__interaction-label"
+      className="undefined__interaction-label"
     />
     <span
       className="screen-reader-text"
@@ -28,12 +23,9 @@ exports[`frontend/components/TextList/ListItem/Counts matches the snapshot 1`] =
       This text has 
        annotations
     </span>
-  </li>
-  <li
-    className="text-counts__interaction"
-  >
+  </Interaction>
+  <Interaction>
     <IconComposer
-      className="text-counts__interaction-icon"
       fill="currentColor"
       icon="interactHighlight32"
       size={32}
@@ -43,9 +35,9 @@ exports[`frontend/components/TextList/ListItem/Counts matches the snapshot 1`] =
         }
       }
     />
-    <span
+    <InteractionLabel
       aria-hidden={true}
-      className="text-counts__interaction-label"
+      className="undefined__interaction-label"
     />
     <span
       className="screen-reader-text"
@@ -53,6 +45,6 @@ exports[`frontend/components/TextList/ListItem/Counts matches the snapshot 1`] =
       This text has 
        highlights
     </span>
-  </li>
-</ul>
+  </Interaction>
+</InteractionList>
 `;

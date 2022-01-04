@@ -11,13 +11,7 @@ export default class ListEntitiesListSearch extends PureComponent {
   static propTypes = {
     pagination: PropTypes.object.isRequired,
     showCount: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
-    unit: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.shape({
-        singular: PropTypes.string,
-        plural: PropTypes.string
-      })
-    ])
+    unit: PropTypes.string
   };
 
   static defaultProps = {};
@@ -34,29 +28,13 @@ export default class ListEntitiesListSearch extends PureComponent {
     return this.props.showCount;
   }
 
-  get singularUnit() {
-    if (!this.unit) return null;
-    if (isString(this.unit)) return this.unit;
-    return this.unit.singular;
-  }
-
-  get pluralUnit() {
-    if (!this.unit) return null;
-    if (isString(this.unit)) return pluralize(this.unit);
-    return this.unit.plural;
-  }
-
   render() {
     return (
       <div className="entity-list__count">
         {!isBoolean(this.showCount) ? (
           this.showCount
         ) : (
-          <Utility.EntityCount
-            pagination={this.pagination}
-            singularUnit={this.singularUnit}
-            pluralUnit={this.pluralUnit}
-          />
+          <Utility.EntityCount pagination={this.pagination} unit={this.unit} />
         )}
       </div>
     );
