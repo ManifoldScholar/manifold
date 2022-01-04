@@ -55,9 +55,15 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
       }
     }
   />
-  <Utility.BackLinkPrimary
-    backText="Back to Project Collections"
-    link="/projects/project-collections"
+  <RegisterBreadcrumbs
+    breadcrumbs={
+      Array [
+        Object {
+          "label": "Back to Project Collections",
+          "to": "/projects/project-collections",
+        },
+      ]
+    }
   />
   <Connect(WithSettings('HeadContentComponent))
     description="Bar Foo"
@@ -69,22 +75,20 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
   >
     A Project Collection
   </h1>
-  <ProjectCollectionDetail
-    authentication={Object {}}
-    dispatch={[Function]}
-    filterChangeHandler={[Function]}
-    initialState={Object {}}
-    pagination={
+  <Frontend.Composed.EntityCollection.ProjectCollectionDetail
+    bgColor="neutral05"
+    filterProps={
       Object {
-        "currentPage": 1,
-        "nextPage": 2,
-        "perPage": 1,
-        "prevPage": 0,
-        "totalCount": 2,
-        "totalPages": 2,
+        "filterChangeHandler": [Function],
+        "initialFilterState": Object {},
+        "resetFilterState": Object {},
       }
     }
-    paginationClickHandler={[Function]}
+    paginationProps={
+      Object {
+        "paginationClickHandler": [Function],
+      }
+    }
     projectCollection={
       Object {
         "attributes": Object {
@@ -1694,6 +1698,18 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
           "type": "projects",
         },
       ]
+    }
+    projectsMeta={
+      Object {
+        "pagination": Object {
+          "currentPage": 1,
+          "nextPage": 2,
+          "perPage": 1,
+          "prevPage": 0,
+          "totalCount": 2,
+          "totalPages": 2,
+        },
+      }
     }
   />
   <Connect(HigherOrder.WithCurrentUser('Layout.ButtonNavigation))

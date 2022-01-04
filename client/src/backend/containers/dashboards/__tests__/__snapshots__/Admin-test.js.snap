@@ -333,31 +333,32 @@ Array [
                         class="entity-list__count"
                       >
                         <p
-                          aria-hidden="true"
-                          class="list-total"
-                        >
-                          Showing 
-                          <span
-                            class="list-total__highlighted"
-                          >
-                            1-1
-                          </span>
-                           of 
-                          <span
-                            class="list-total__highlighted"
-                          >
-                            2
-                          </span>
-                           projects: 
-                        </p>
-                        <div
-                          aria-atomic="true"
-                          aria-live="polite"
-                          class="screen-reader-text"
+                          class="css-1u3od4c-Total ej10trt1"
                           role="status"
                         >
-                          2 projects. Showing results 1 through 1.
-                        </div>
+                          <span
+                            aria-hidden="true"
+                          >
+                            Showing 
+                            <span
+                              class="css-1wkhjwo-Highlighted ej10trt0"
+                            >
+                              1-1
+                            </span>
+                             of 
+                            <span
+                              class="css-1wkhjwo-Highlighted ej10trt0"
+                            >
+                              2
+                            </span>
+                             projects:
+                          </span>
+                          <span
+                            class="screen-reader-text"
+                          >
+                            2 projects. Showing results 1 through 1.
+                          </span>
+                        </p>
                       </div>
                     </div>
                     <ul
@@ -492,20 +493,19 @@ Array [
                     >
                       <nav
                         aria-label="Pagination"
-                        class="list-pagination"
+                        class="css-1kn406k-Nav e1c2l6mw4"
                       >
                         <ul
-                          class="list-pagination__columns"
+                          class="css-shdi8l-Columns e1c2l6mw3"
                         >
                           <li
-                            class="list-pagination__column"
+                            class="css-ovcui1-Column e1c2l6mw2"
                           >
                             <ul>
-                              <li
-                                class="list-pagination__page list-pagination__page--prev list-pagination__page--disabled"
-                              >
+                              <li>
                                 <a
-                                  disabled=""
+                                  aria-disabled="true"
+                                  class="css-7d1j7a-Link e1c2l6mw0"
                                   href="#entities-list-1"
                                 >
                                   <svg
@@ -520,25 +520,23 @@ Array [
                                       transform="rotate(180 12 8)"
                                     />
                                   </svg>
-                                  <span
-                                    class="list-pagination__icon-label"
-                                  >
-                                    PREV
+                                  <span>
+                                    Prev
                                   </span>
                                 </a>
                               </li>
                             </ul>
                           </li>
                           <li
-                            class="list-pagination__column-middle"
+                            class="css-ovcui1-Column e1c2l6mw2"
                           >
                             <ul
-                              class="list-pagination__pages"
+                              class="css-px7ngz-Pages e1c2l6mw1"
                             >
-                              <li
-                                class="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
-                              >
+                              <li>
                                 <a
+                                  aria-current="page"
+                                  class="css-7d1j7a-Link e1c2l6mw0"
                                   href="#entities-list-1"
                                 >
                                   <span
@@ -553,10 +551,9 @@ Array [
                                   </span>
                                 </a>
                               </li>
-                              <li
-                                class="list-pagination__page list-pagination__page--ordinal"
-                              >
+                              <li>
                                 <a
+                                  class="css-7d1j7a-Link e1c2l6mw0"
                                   href="#entities-list-1"
                                 >
                                   <span
@@ -574,19 +571,17 @@ Array [
                             </ul>
                           </li>
                           <li
-                            class="list-pagination__column"
+                            class="css-ovcui1-Column e1c2l6mw2"
                           >
                             <ul>
-                              <li
-                                class="list-pagination__page list-pagination__page--next"
-                              >
+                              <li>
                                 <a
+                                  aria-disabled="false"
+                                  class="css-7d1j7a-Link e1c2l6mw0"
                                   href="#entities-list-1"
                                 >
-                                  <span
-                                    class="list-pagination__icon-label"
-                                  >
-                                    NEXT
+                                  <span>
+                                    Next
                                   </span>
                                   <svg
                                     aria-hidden="true"

@@ -1,14 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`frontend/components/TextList/ListItem/Content matches the snapshot 1`] = `
-<div
-  className="text-block__content"
->
-  <div
-    className="text-block__inner"
-  >
+exports[`frontend/components/text/Content matches the snapshot 1`] = `
+<Content>
+  <Inner>
     <Text.Cover
-      baseClass="text-block"
       iconOnly={true}
       text={
         Object {
@@ -404,8 +399,7 @@ exports[`frontend/components/TextList/ListItem/Content matches the snapshot 1`] 
         }
       }
     />
-    <ContentBlock.Types.Texts.ListItem.Bibliographic
-      baseClass="text-block"
+    <Text.Bibliographic
       readUrl="/foo"
       showAuthors={true}
       showDescriptions={true}
@@ -804,6 +798,6 @@ exports[`frontend/components/TextList/ListItem/Content matches the snapshot 1`] 
         }
       }
     />
-  </div>
-</div>
+  </Inner>
+</Content>
 `;
