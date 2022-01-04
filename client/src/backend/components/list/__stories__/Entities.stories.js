@@ -226,10 +226,7 @@ storiesOf("Backend/List/Entities", module)
         pagination={pagination}
         showCount
         showCountInTitle
-        unit={{
-          singular: "project",
-          plural: "projects"
-        }}
+        unit="project"
         search={
           <Search
             filters={threeFilters}

@@ -86,7 +86,7 @@ export class EventList extends Component {
         <RegisterBreadcrumbs
           breadcrumbs={[
             {
-              to: this.projectUrl(),
+              to: this.projectUrl,
               label: `Back to Project: ${this.project.attributes.title}`
             }
           ]}

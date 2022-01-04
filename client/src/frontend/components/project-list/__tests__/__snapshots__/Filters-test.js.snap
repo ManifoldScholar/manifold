@@ -2,7 +2,6 @@
 
 exports[`frontend/components/project-list/Filters matches the snapshot 1`] = `
 <WithScreenReaderStatus('Global.List.Filters)
-  className="entity-section-wrapper__tools"
   filters={
     Array [
       Object {

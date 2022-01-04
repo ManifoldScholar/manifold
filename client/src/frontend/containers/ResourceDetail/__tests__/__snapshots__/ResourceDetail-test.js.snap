@@ -138,10 +138,15 @@ exports[`frontend/containers/ResourceDetail/ResourceDetail matches the snapshot 
     image="original-image.mock"
     title="“undefined” Resource on Manifold"
   />
-  <BackLinkRegister
-    backText="Back to Project Resources"
-    link="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resources"
-    title="Rowan Test"
+  <RegisterBreadcrumbs
+    breadcrumbs={
+      Array [
+        Object {
+          "label": "Back to Project Resources: Rowan Test",
+          "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resources",
+        },
+      ]
+    }
   />
   <Resource.Detail
     dispatch={[Function]}
@@ -274,13 +279,5 @@ exports[`frontend/containers/ResourceDetail/ResourceDetail matches the snapshot 
     }
     resourceUrl="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resource/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
   />
-  <section
-    className="bg-neutral05"
-  >
-    <Utility.BackLinkSecondary
-      backText="Back to Project Resources"
-      link="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resources"
-    />
-  </section>
 </Fragment>
 `;

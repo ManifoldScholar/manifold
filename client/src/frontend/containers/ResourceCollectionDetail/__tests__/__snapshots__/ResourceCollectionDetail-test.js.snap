@@ -356,9 +356,15 @@ exports[`frontend/containers/ResourceCollectionDetail matches the snapshot 1`] =
   <Connect(WithSettings('HeadContentComponent))
     title="“Rowan” on Manifold"
   />
-  <BackLinkRegister
-    link="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
-    title="Rowan Test"
+  <RegisterBreadcrumbs
+    breadcrumbs={
+      Array [
+        Object {
+          "label": "Rowan Test",
+          "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+        },
+      ]
+    }
   />
   <ResourceCollection.Detail
     collectionResources={

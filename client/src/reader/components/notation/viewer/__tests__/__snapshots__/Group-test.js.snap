@@ -350,7 +350,7 @@ exports[`reader/components/notation/viewer/Group matches the snapshot 1`] = `
             }
           >
             <NotationViewer.Notation
-              additionalClasses="minimal preview"
+              isPreview={true}
               neverCrop={true}
               notation={
                 Object {
@@ -627,7 +627,7 @@ exports[`reader/components/notation/viewer/Group matches the snapshot 1`] = `
             }
           >
             <NotationViewer.Notation
-              additionalClasses="minimal preview"
+              isPreview={true}
               neverCrop={true}
               notation={
                 Object {

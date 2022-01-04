@@ -18,15 +18,6 @@ describe("global/components/utility/Pagination", () => {
     expect(shallow($root)).toMatchSnapshot();
   });
 
-  it("should trigger paginationClickHandler callback when pagination target is clicked", () => {
-    $pageChangeMock.mockClear();
-    $wrapper
-      .find('[href="#pagination-target"]')
-      .first()
-      .simulate("click", $fakeDomEvent);
-    expect($pageChangeMock).toHaveBeenCalled();
-  });
-
   context("when there are no pagination props", () => {
     def("root", () => (
       <Pagination paginationClickHandler={() => $pageChangeMock} />

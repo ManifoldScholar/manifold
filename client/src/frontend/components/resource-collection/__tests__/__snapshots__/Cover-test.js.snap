@@ -1,39 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/resource-collection/Cover matches the snapshot 1`] = `
-<li>
-  <Link
-    style={
-      Object {
-        "backgroundImage": "url(/static/images/resource-collection.jpg)",
-      }
+<Cover
+  style={
+    Object {
+      "backgroundImage": "url(/static/images/resource-collection.jpg)",
     }
-    to="/project/slug-1/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
-  >
-    <div
-      className="title-overlay"
+  }
+  to="/project/slug-1/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
+>
+  <TitleOverlay>
+    <Title
+      as="h4"
     >
-      <Title>
-        Rowan
-      </Title>
-      <div
-        className="icon"
-      >
-        <IconComposer
-          fill="currentColor"
-          icon="resourceCollection64"
-          size={48}
-          svgProps={
-            Object {
-              "aria-hidden": true,
-            }
+      Rowan
+    </Title>
+    <IconWrapper>
+      <IconComposer
+        fill="currentColor"
+        icon="resourceCollection64"
+        size={48}
+        svgProps={
+          Object {
+            "aria-hidden": true,
           }
-        />
-        <span>
-          Collection
-        </span>
-      </div>
-    </div>
-  </Link>
-</li>
+        }
+      />
+      <IconText>
+        Collection
+      </IconText>
+    </IconWrapper>
+  </TitleOverlay>
+</Cover>
 `;

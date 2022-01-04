@@ -1,26 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`frontend/components/TextList/ListItem/Meta matches the snapshot 1`] = `
-<div
-  className="text-block__meta"
->
-  <div
-    className="text-block__status text-block__status--inline"
-  >
-    <ContentBlock.Types.Texts.ListItem.Date
-      baseClass="text-block"
+exports[`frontend/components/text/Meta matches the snapshot 1`] = `
+<Meta>
+  <Status>
+    <Text.Date
       date="2017-04-24T23:25:50.161Z"
       datePrefix="Added"
       inline={true}
     />
-    <span
-      className="text-block__published"
-    >
+    <Published>
       Published
-    </span>
-  </div>
-  <ContentBlock.Types.Texts.ListItem.Counts
-    baseClass="text-block"
+    </Published>
+  </Status>
+  <Text.Counts
     text={
       Object {
         "attributes": Object {
@@ -415,5 +407,5 @@ exports[`frontend/components/TextList/ListItem/Meta matches the snapshot 1`] = `
       }
     }
   />
-</div>
+</Meta>
 `;

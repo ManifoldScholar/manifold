@@ -2,13 +2,10 @@
 
 exports[`global/components/meta/Item matches the snapshot 1`] = `
 <Fragment>
-  <span
-    className="meta-label"
-  >
+  <Label>
     a metadata property
-  </span>
-  <div
-    className="meta-value"
+  </Label>
+  <Value
     dangerouslySetInnerHTML={
       Object {
         "__html": "A Metadata Value",
@@ -20,17 +17,13 @@ exports[`global/components/meta/Item matches the snapshot 1`] = `
 
 exports[`global/components/meta/Item when passed a child component matches the snapshot 1`] = `
 <Fragment>
-  <span
-    className="meta-label"
-  >
+  <Label>
     a metadata property
-  </span>
-  <div
-    className="meta-value"
-  >
+  </Label>
+  <Value>
     <div>
       A Metadata Value
     </div>
-  </div>
+  </Value>
 </Fragment>
 `;
