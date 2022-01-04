@@ -12,7 +12,7 @@ import { projectCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import queryString from "query-string";
 import EntityCollection from "global/components/composed/EntityCollection";
-import Breadcrumbs from "global/components/atomic/Breadcrumbs";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 
 const { request } = entityStoreActions;
 const perPage = 8;
@@ -145,7 +145,7 @@ export class ProjectsCollectionsContainer extends Component {
     return (
       <>
         <CheckFrontendMode debugLabel="ProjectCollections" isProjectSubpage />
-        <Breadcrumbs
+        <RegisterBreadcrumbs
           breadcrumbs={[
             { to: lh.link("frontendProjectsAll"), label: "Back to projects" }
           ]}

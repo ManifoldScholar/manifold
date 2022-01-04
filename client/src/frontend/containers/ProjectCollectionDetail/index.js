@@ -15,7 +15,7 @@ import debounce from "lodash/debounce";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import has from "lodash/has";
 import withSettings from "hoc/with-settings";
-import Breadcrumbs from "global/components/atomic/Breadcrumbs";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 
 const { request, flush } = entityStoreActions;
 const defaultPage = 1;
@@ -221,7 +221,7 @@ export class ProjectCollectionDetailContainer extends Component {
             resource={this.props.projectCollection}
           />
         )}
-        <Breadcrumbs
+        <RegisterBreadcrumbs
           breadcrumbs={[
             {
               to: lh.link("frontendProjectCollections"),
