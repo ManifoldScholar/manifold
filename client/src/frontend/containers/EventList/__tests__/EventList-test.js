@@ -3,7 +3,7 @@ import { EventList } from "../";
 describe("frontend/containers/EventList/EventList", () => {
   def("events", () => collectionFactory("event"));
   def("project", () =>
-    factory("project", { relationhsips: { events: $events } })
+    factory("project", { relationships: { events: $events } })
   );
   def("root", () => (
     <EventList

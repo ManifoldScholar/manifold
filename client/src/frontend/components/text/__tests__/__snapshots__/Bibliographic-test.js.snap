@@ -1,24 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`frontend/components/TextList/ListItem/Bibliographic matches the snapshot 1`] = `
-<div
-  className="text-block__bibliographic"
->
-  <h4
-    className="text-block__name"
-  >
-    <Link
-      className="text-block__title-link"
+exports[`frontend/components/text/Bibliographic matches the snapshot 1`] = `
+<Bibliographic>
+  <Name>
+    <TitleLink
       to="/foo"
     >
-      <span
-        className="text-block__title"
-      >
+      <Title>
         Ain't No Thang
-      </span>
-    </Link>
-    <span
-      className="text-block__collect-toggle"
+      </Title>
+    </TitleLink>
+    <CollectingToggle
+      $hasSubtitle={false}
     >
       <Connect(HigherOrder.WithReadingGroups(WithScreenReaderStatus('Collecting.Toggle)))
         collectable={
@@ -415,7 +408,7 @@ exports[`frontend/components/TextList/ListItem/Bibliographic matches the snapsho
           }
         }
       />
-    </span>
-  </h4>
-</div>
+    </CollectingToggle>
+  </Name>
+</Bibliographic>
 `;

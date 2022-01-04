@@ -1,13 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/resource-collection-list/Grid matches the snapshot 1`] = `
-<div
-  className="resource-collections-list"
->
-  <ul>
+<Grid>
+  <li
+    key="resourceCollection-0"
+  >
     <ResourceCollection.Cover
       itemHeadingLevel={4}
-      key="resourceCollection-0"
       resourceCollection={
         Object {
           "attributes": Object {
@@ -354,9 +353,12 @@ exports[`frontend/components/resource-collection-list/Grid matches the snapshot 
       }
       urlCreator={[Function]}
     />
+  </li>
+  <li
+    key="resourceCollection-1"
+  >
     <ResourceCollection.Cover
       itemHeadingLevel={4}
-      key="resourceCollection-1"
       resourceCollection={
         Object {
           "attributes": Object {
@@ -703,9 +705,12 @@ exports[`frontend/components/resource-collection-list/Grid matches the snapshot 
       }
       urlCreator={[Function]}
     />
+  </li>
+  <li
+    key="resourceCollection-2"
+  >
     <ResourceCollection.Cover
       itemHeadingLevel={4}
-      key="resourceCollection-2"
       resourceCollection={
         Object {
           "attributes": Object {
@@ -1052,6 +1057,6 @@ exports[`frontend/components/resource-collection-list/Grid matches the snapshot 
       }
       urlCreator={[Function]}
     />
-  </ul>
-</div>
+  </li>
+</Grid>
 `;
