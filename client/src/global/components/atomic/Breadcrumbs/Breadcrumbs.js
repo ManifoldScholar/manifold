@@ -15,28 +15,25 @@ export default function Breadcrumbs({
   return (
     <Wrapper aria-label="Breadcrumb" $hideOnDesktop={hideOnDesktop}>
       <Inner>
-        {breadcrumbs.length === 1 &&
-          breadcrumbs.map(crumb => (
-            <Styled.Breadcrumb to={crumb.to} key={crumb.to}>
-              <Icon icon="arrowLeft16" size={backend ? "default" : 24} />
-              {backend && <Icon icon="arrowLeft32" size="default" $desktop />}
-              <Styled.Label>{crumb.label}</Styled.Label>
-            </Styled.Breadcrumb>
-          ))}
-        {breadcrumbs.length > 1 && (
-          <>
-            <Icon icon="arrowLeft16" size={24} />
-            {breadcrumbs.map((crumb, i) => (
-              <Styled.Breadcrumb
-                to={crumb.to}
-                key={crumb.to}
-                aria-current={i === breadcrumbs.length - 1 ? "page" : null}
-              >
-                <Styled.Label>{crumb.label}</Styled.Label>
-              </Styled.Breadcrumb>
-            ))}
-          </>
-        )}
+        {breadcrumbs.map((crumb, i) => (
+          <Styled.Breadcrumb
+            to={crumb.to}
+            key={crumb.to}
+            aria-current={
+              breadcrumbs.length > 1 && i === breadcrumbs.length - 1
+                ? "page"
+                : null
+            }
+          >
+            {i === 0 && (
+              <>
+                <Icon icon="arrowLeft16" size={backend ? "default" : 24} />
+                {backend && <Icon icon="arrowLeft32" size="default" $desktop />}
+              </>
+            )}
+            <Styled.Label>{crumb.label}</Styled.Label>
+          </Styled.Breadcrumb>
+        ))}
       </Inner>
     </Wrapper>
   );
