@@ -36,3 +36,4 @@ export { default as usePaginationState } from "./api/usePaginationState";
 
 export { default as useCurrentUser } from "./useCurrentUser";
 export { default as useAuthentication } from "./useAuthentication";
+export { default as useSelectSettings } from "./settings/use-select-settings";
