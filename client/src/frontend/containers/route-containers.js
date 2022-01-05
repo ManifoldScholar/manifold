@@ -40,6 +40,7 @@ import SignUp from "frontend/containers/SignUp";
 import MyStarred from "frontend/containers/MyStarred";
 import MyAnnotations from "frontend/containers/MyAnnotations";
 import Test from "frontend/containers/Test";
+import IssuesList from "frontend/containers/IssuesList";
 
 export default {
   NotFound,
@@ -91,5 +92,6 @@ export default {
   SignUp,
   MyStarred,
   MyAnnotations,
-  Test
+  Test,
+  IssuesList
 };
