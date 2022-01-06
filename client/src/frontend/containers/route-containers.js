@@ -42,6 +42,8 @@ import MyAnnotations from "frontend/containers/MyAnnotations";
 import IssuesList from "frontend/containers/IssuesList";
 import JournalsWrapper from "frontend/containers/JournalsWrapper";
 import JournalsList from "frontend/containers/JournalsList";
+import JournalWrapper from "frontend/containers/JournalWrapper";
+import JournalDetail from "frontend/containers/JournalDetail";
 
 export default {
   NotFound,
@@ -95,5 +97,7 @@ export default {
   MyAnnotations,
   IssuesList,
   JournalsWrapper,
-  JournalsList
+  JournalsList,
+  JournalWrapper,
+  JournalDetail
 };
