@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 // import get from "lodash/get";
-import { useSelectJournalIssues, useSelectSettings } from "hooks";
+import {
+  useSelectAllIssues,
+  useSelectSettings,
+  usePaginationState,
+  useFilterState
+} from "hooks";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import Layout from "frontend/components/layout";
 import queryString from "query-string";
@@ -30,7 +35,7 @@ function setInitialPaginationState(location) {
 }
 
 export default function IssuesListContainer({ location, history }) {
-  const { issues, issuesMeta } = useSelectJournalIssues();
+  const { issues, issuesMeta } = useSelectAllIssues();
   const settings = useSelectSettings();
   const [filterState, setFilterState] = useState(
     setInitialFilterState(location)
