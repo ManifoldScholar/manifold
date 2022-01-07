@@ -36,7 +36,7 @@ class Navigation {
       },
       {
         label: "Journals",
-        route: "frontendIssuesList"
+        route: "frontendJournalsList"
       },
       {
         label: "Reading Groups",

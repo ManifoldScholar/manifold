@@ -6,7 +6,6 @@ import shuffle from "lodash/shuffle";
 import { requests } from "api";
 import { entityStoreActions } from "actions";
 import { fixtures } from "helpers/storybook/exports";
-import queryString from "query-string";
 
 const { request } = entityStoreActions;
 const defaultPage = 1;
@@ -52,7 +51,7 @@ export default function useDispatchAllIssues(
   // }, [
   //   dispatch,
   //   activeFilters,
-  //   JSON.stringify(page),
+  //   page,
   //   context,
   //   fetchVersion,
   //   filtered
