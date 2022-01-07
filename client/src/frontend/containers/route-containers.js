@@ -44,6 +44,7 @@ import JournalsWrapper from "frontend/containers/JournalsWrapper";
 import JournalsList from "frontend/containers/JournalsList";
 import JournalWrapper from "frontend/containers/JournalWrapper";
 import JournalDetail from "frontend/containers/JournalDetail";
+import VolumeDetail from "frontend/containers/VolumeDetail";
 
 export default {
   NotFound,
@@ -99,5 +100,6 @@ export default {
   JournalsWrapper,
   JournalsList,
   JournalWrapper,
-  JournalDetail
+  JournalDetail,
+  VolumeDetail
 };
