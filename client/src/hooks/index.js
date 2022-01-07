@@ -41,3 +41,4 @@ export { default as useSelectAllJournals } from "./journals/use-select-all-journ
 export { default as useSelectJournal } from "./journals/use-select-journal";
 export { default as useSelectVolume } from "./journals/use-select-volume";
 export { default as useUrlFromState } from "./url/use-url-from-state";
+export { default as useDispatchAllJournals } from "./journals/use-dispatch-all-journals";
