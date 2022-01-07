@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import get from "lodash/get";
 import {
   useSelectAllIssues,
   useSelectSettings,
@@ -16,19 +15,16 @@ import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 export default function IssuesListContainer({ location }) {
   const { issues, issuesMeta } = useSelectAllIssues();
   const settings = useSelectSettings();
-
   const { filterState, updateFilterState } = useFilterState(location, {
     standaloneModeEnforced: false
   });
   const { paginationState, handlePageChange } = usePaginationState(location);
-  useDispatchAllIssues(filterState, paginationState, "frontend");
+
+  useDispatchAllIssues(filterState, paginationState.number, "frontend");
   useUrlFromState(location, filterState, paginationState.number);
 
   // Update when we have the api
-  // const hasVisibleIssues = get(
-  //   settings,
-  //   "attributes.calculated.hasVisibleIssues"
-  // );
+  // const hasVisibleIssues = settings?.attributes?.calculated?.hasVisibleIssues
 
   return issues ? (
     <>
@@ -62,6 +58,5 @@ export default function IssuesListContainer({ location }) {
 }
 
 IssuesListContainer.propTypes = {
-  location: PropTypes.object.isRequired,
-  authentication: PropTypes.object
+  location: PropTypes.object.isRequired
 };
