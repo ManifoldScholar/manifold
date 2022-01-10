@@ -15,9 +15,9 @@ exports[`global/components/FatalError matches the snapshot 1`] = `
       >
         <header>
           <IconComposer
+            className="fatal-error__stop-icon"
             fill="currentColor"
             icon="stopSign64"
-            className="fatal-error__stop-icon"
             size={60}
             svgProps={
               Object {

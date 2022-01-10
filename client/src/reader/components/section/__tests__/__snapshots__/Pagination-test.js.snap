@@ -18,9 +18,9 @@ exports[`reader/components/section/Pagination matches the snapshot 1`] = `
         Next
       </span>
       <IconComposer
+        className="section-pagination__icon section-pagination__icon--next"
         fill="currentColor"
         icon="circleArrowRight64"
-        className="section-pagination__icon section-pagination__icon--next"
         size={48}
         svgProps={
           Object {
