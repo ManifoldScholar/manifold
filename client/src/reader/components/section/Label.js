@@ -9,7 +9,7 @@ export default class Label extends PureComponent {
   render() {
     return (
       <div className="section-category-label">
-        <div className="container">
+        <div className="container flush">
           <div className="section-category-label__label">
             {this.props.label}
           </div>

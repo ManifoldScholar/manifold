@@ -5,7 +5,7 @@ exports[`reader/components/section/Label matches the snapshot 1`] = `
   className="section-category-label"
 >
   <div
-    className="container"
+    className="container flush"
   >
     <div
       className="section-category-label__label"
