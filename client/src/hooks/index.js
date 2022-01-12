@@ -32,13 +32,17 @@ export { default as useGrabCurrentTextSection } from "./texts/use-grab-current-t
 export { default as useCollapseContext } from "./contexts/use-collapse-context";
 
 export { default as useCurrentUser } from "./user/use-current-user";
+
 export { default as useSelectSettings } from "./settings/use-select-settings";
-export { default as useSelectAllIssues } from "./journals/use-select-all-issues";
+
 export { default as usePaginationState } from "./pagination/use-pagination-state";
 export { default as useFilterState } from "./filters/use-filter-state";
+export { default as useUrlFromState } from "./url/use-url-from-state";
+
+export { default as useSelectAllIssues } from "./journals/use-select-all-issues";
 export { default as useDispatchAllIssues } from "./journals/use-dispatch-all-issues";
 export { default as useSelectAllJournals } from "./journals/use-select-all-journals";
+export { default as useDispatchAllJournals } from "./journals/use-dispatch-all-journals";
 export { default as useSelectJournal } from "./journals/use-select-journal";
 export { default as useSelectVolume } from "./journals/use-select-volume";
-export { default as useUrlFromState } from "./url/use-url-from-state";
-export { default as useDispatchAllJournals } from "./journals/use-dispatch-all-journals";
+export { default as useDispatchJournal } from "./journals/use-dispatch-journal";
