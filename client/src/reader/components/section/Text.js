@@ -122,6 +122,7 @@ export default class Text extends Component {
             this.el = el;
           }}
           className="main-content"
+          style={{ flexGrow: 1 }}
         >
           <section className={readerAppearanceClass}>
             <Annotation.Annotatable

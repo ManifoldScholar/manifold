@@ -9,7 +9,7 @@ export default `
       ${respond(`flex-direction: row;`, 65)}
 
       &:not(.flush) {
-        padding-top: 42px;
+        --container-padding-block-start: 42px;
       }
 
       .backend-header + & {

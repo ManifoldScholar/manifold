@@ -34,6 +34,11 @@ export default `
       padding-block-start: var(--container-padding-block-start);
       padding-block-end: var(--container-padding-block-end);
 
+    &.flush {
+      --container-padding-block-start: 0;
+      --container-padding-block-end: 0;
+    }
+
     &.flush-top {
       --container-padding-block-start: 0;
     }
