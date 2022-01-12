@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useSelector } from "react-redux";
+import { requests } from "api";
+import { grab, select } from "utils/entityUtils";
 import { fixtures } from "helpers/storybook/exports";
 
-// Mock data until we have the api
-const sampleData = fixtures.collectionFactory("journal", 1);
+export default function useSelectJournal(match) {
+  const journalResponse = useSelector(state =>
+    select("journal", state.entityStore)
+  );
+  const baseJournal = useSelector(state =>
+    grab("journals", match.params.id, state.entityStore)
+  );
 
-export default function useSelectJournal() {
-  const journal = sampleData[0];
-  console.log(journal);
-  console.log(sampleData);
-  const issuesMeta = {
-    pagination: { totalCount: 12, perPage: 12, currentPage: 1 }
-  };
-  const issues = {};
-  return { journal, issuesMeta, issues };
+  // Update when we have the api for volume
+  const volume = fixtures.collectionFactory("volume", 1)[0];
+  const journal = baseJournal
+    ? {
+        ...baseJournal,
+        relationships: { volumes: [volume] }
+      }
+    : null;
+  return { journal, journalResponse };
 }
