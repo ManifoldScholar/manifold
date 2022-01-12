@@ -15,7 +15,7 @@ import {
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import Layout from "frontend/components/layout";
 
-export default function VolumeDetailContainer({ location, match }) {
+export default function VolumeDetailContainer({ location }) {
   const { journal } = useSelectJournal();
   const { volume, issues } = useSelectVolume();
   const settings = useSelectSettings();
