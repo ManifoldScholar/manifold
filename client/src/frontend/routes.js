@@ -218,6 +218,22 @@ const routes = {
               helper: (j, v) => `/journals/${j}/volumes/${v}`
             }
           ]
+        },
+        {
+          name: "frontendIssue",
+          exact: false,
+          component: "IssueWrapper",
+          path: "/journals/issue/:id",
+          helper: i => `/journals/issue/${i}`,
+          routes: [
+            {
+              name: "frontendIssueDetail",
+              exact: true,
+              component: "IssueDetail",
+              path: "/journals/issue/:id",
+              helper: i => `/journals/issue/${i}`
+            }
+          ]
         }
       ]
     },
