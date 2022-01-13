@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import ContentPlaceholder from "global/components/ContentPlaceholder";
 import { JoinGroup } from "frontend/components/reading-group/tables/Groups/actions";
 import withCurrentUser from "hoc/with-current-user";
+import { Actions, Body, Title, Wrapper } from "../parts";
 
-function Group({ readingGroup, currentUser }) {
+function GroupAnnotationsPlaceholder({ readingGroup, currentUser }) {
   // since RG data isn't refreshed when a user joins,
   // we store join status in component state (set initially by RG data)
   const [userIsMember, setUserIsMember] = useState(
@@ -63,23 +63,22 @@ function Group({ readingGroup, currentUser }) {
   const { title, body, actions } = getContent();
 
   return (
-    <ContentPlaceholder.Wrapper context="frontend">
-      <ContentPlaceholder.Title icon="readingGroup24">
-        {title}
-      </ContentPlaceholder.Title>
-      <ContentPlaceholder.Body>
+    <Wrapper context="frontend">
+      <Title icon="readingGroup24">{title}</Title>
+      <Body>
         <p>{body}</p>
-      </ContentPlaceholder.Body>
-      <ContentPlaceholder.Actions actions={actions} />
-    </ContentPlaceholder.Wrapper>
+      </Body>
+      <Actions actions={actions} />
+    </Wrapper>
   );
 }
 
-Group.displayName = "Annotation.List.Placeholder.Group";
+GroupAnnotationsPlaceholder.displayName =
+  "Global.Composed.EntityCollectionPlaceholder.GroupAnnotations";
 
-Group.propTypes = {
+GroupAnnotationsPlaceholder.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   currentUser: PropTypes.object
 };
 
-export default withCurrentUser(Group);
+export default withCurrentUser(GroupAnnotationsPlaceholder);
