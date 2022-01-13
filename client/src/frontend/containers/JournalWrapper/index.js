@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { useSelectSettings, useSelectJournal, useDispatchJournal } from "hooks";
+import { useSelectJournal, useDispatchJournal } from "hooks/journals";
+import { useSelectSettings } from "hooks/settings";
 import { RedirectToFirstMatch, childRoutes } from "helpers/router";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
