@@ -22,7 +22,7 @@ ContentBlockWarning.displayName = "ContentBlock.Warning";
 ContentBlockWarning.propTypes = {
   icon: PropTypes.string.isRequired,
   heading: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
+  body: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
   note: PropTypes.string,
   className: PropTypes.string
 };
