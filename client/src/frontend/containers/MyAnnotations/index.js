@@ -10,6 +10,7 @@ import {
   useDispatchMyAnnotatedTexts,
   useSelectMyAnnotatedTexts
 } from "hooks";
+import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 
 const DEFAULT_PAGE = 1;
 const PER_PAGE = 10;
@@ -74,13 +75,6 @@ function MyAnnotationsContainer({ location, history }) {
     });
   }
 
-  const pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      handlePageChange(pageParam);
-    };
-  };
-
   return (
     <>
       <HeadContent title="My Notes + Comments" appendTitle />
@@ -95,7 +89,7 @@ function MyAnnotationsContainer({ location, history }) {
         }}
         isFiltered={"text" in filterState}
         paginationProps={{
-          paginationClickHandler: pageChangeHandlerCreator
+          paginationClickHandler: pageChangeHandlerCreator(handlePageChange)
         }}
       />
     </>
