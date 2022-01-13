@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import queryString from "query-string";
 import isEmpty from "lodash/isEmpty";
 import EntityCollection from "frontend/components/composed/EntityCollection";
-
+import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 import { useDispatchAnnotations, useSelectAnnotations } from "hooks";
 
 const DEFAULT_PAGE = 1;
@@ -72,13 +72,6 @@ function ReadingGroupAnnotationsContainer({
     });
   }
 
-  const pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      handlePageChange(pageParam);
-    };
-  };
-
   const {
     annotatedTexts: texts,
     readingGroupMemberships: memberships
@@ -100,7 +93,7 @@ function ReadingGroupAnnotationsContainer({
         }}
         isFiltered={isFiltered}
         paginationProps={{
-          paginationClickHandler: pageChangeHandlerCreator
+          paginationClickHandler: pageChangeHandlerCreator(handlePageChange)
         }}
         nested
       />
