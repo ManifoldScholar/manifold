@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
-function FooterLink({ to, label }) {
+function FooterLink({ to, label, ...restProps }) {
   return (
-    <Styled.Link to={to}>
+    <Styled.Link to={to} {...restProps}>
       <span>{label}</span>
       <Styled.Icon icon="arrowLongRight16" />
     </Styled.Link>

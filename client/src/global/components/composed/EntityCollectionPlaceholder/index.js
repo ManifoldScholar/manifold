@@ -1,5 +1,6 @@
 import FilteredAnnotations from "./patterns/AnnotationsFiltered";
 import GroupAnnotations from "./patterns/AnnotationsGroup";
+import Journals from "./patterns/Journals";
 import MyAnnotations from "./patterns/AnnotationsMy";
 import MyStarred from "./patterns/MyStarred";
 import ProjectCollectionsBackend from "./patterns/ProjectCollectionsBackend";
@@ -11,6 +12,7 @@ import ResourceCollections from "./patterns/ResourceCollections";
 export default {
   FilteredAnnotations,
   GroupAnnotations,
+  Journals,
   MyAnnotations,
   MyStarred,
   ProjectCollectionsBackend,
