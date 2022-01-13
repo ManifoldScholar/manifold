@@ -9,7 +9,8 @@ import {
   useSelectSettings,
   useSelectJournal,
   usePaginationState,
-  useFilterState
+  useFilterState,
+  useUrlFromState
 } from "hooks";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import Layout from "frontend/components/layout";
@@ -18,8 +19,16 @@ import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 export default function JournalDetailContainer({ location, match }) {
   const { journal, journalResponse } = useSelectJournal(match);
   const settings = useSelectSettings();
-  const { paginationState, handlePageChange } = usePaginationState(location);
-  const { filterState, updateFilterState } = useFilterState(location);
+  const { paginationState, handlePageChange } = usePaginationState(
+    location,
+    20
+  );
+  const { filterState, updateFilterState } = useFilterState(location, {
+    collectionOrder: match.params.id
+  });
+  // TODO: add useDispatchIssues hook
+  // TODO: add useSelectIssues hook
+  useUrlFromState(location, filterState, paginationState.number);
   if (!journal) return null;
 
   const ogTitle = () => {
