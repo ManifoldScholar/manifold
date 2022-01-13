@@ -4,7 +4,10 @@ import queryString from "query-string";
 import isEmpty from "lodash/isEmpty";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
-import { useDispatchAnnotations, useSelectAnnotations } from "hooks";
+import {
+  useDispatchAnnotations,
+  useSelectAnnotations
+} from "hooks/annotations";
 
 const DEFAULT_PAGE = 1;
 const PER_PAGE = 20;

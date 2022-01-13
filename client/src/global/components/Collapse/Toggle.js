@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useCollapseContext } from "hooks";
+import { useCollapseContext } from "hooks/contexts";
 import classNames from "classnames";
 
 function Toggle({ children, className, activeClassName }) {

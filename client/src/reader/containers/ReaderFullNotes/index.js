@@ -6,7 +6,10 @@ import lh from "helpers/linkHandler";
 import Annotation from "global/components/Annotation";
 import Overlay from "global/components/Overlay";
 import EmptyMessage from "reader/components/notes/EmptyMessage";
-import { useDispatchAnnotations, useSelectAnnotations } from "hooks";
+import {
+  useDispatchAnnotations,
+  useSelectAnnotations
+} from "hooks/annotations";
 import withReadingGroups from "hoc/with-reading-groups";
 
 const INITIAL_FORMATS = ["highlight", "annotation", "bookmark"];

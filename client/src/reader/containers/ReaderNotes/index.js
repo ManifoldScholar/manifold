@@ -7,10 +7,9 @@ import { commonActions as commonActionsHelper } from "actions/helpers";
 import lh from "helpers/linkHandler";
 import {
   useDispatchAnnotations,
-  useSelectAnnotations,
-  useGrabCurrentText,
-  useGrabCurrentTextSection
-} from "hooks";
+  useSelectAnnotations
+} from "hooks/annotations";
+import { useGrabCurrentText, useGrabCurrentTextSection } from "hooks/texts";
 import withReadingGroups from "hoc/with-reading-groups";
 
 const DEFAULT_FORMATS = ["highlight", "annotation", "bookmark"];

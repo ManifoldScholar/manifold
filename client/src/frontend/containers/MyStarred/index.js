@@ -5,7 +5,7 @@ import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 
-import { useDispatchMyCollected, useSelectMyCollected } from "hooks";
+import { useDispatchMyCollected, useSelectMyCollected } from "hooks/me";
 import Authorize from "hoc/authorize";
 import withCurrentUser from "hoc/with-current-user";
 
