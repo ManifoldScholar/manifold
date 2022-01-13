@@ -166,8 +166,7 @@ const routes = {
             const query = queryString.stringify(params);
             if (!query) return "/journals/all";
             return `/journals/all?${query}`;
-          },
-          routes: []
+          }
         },
         {
           name: "frontendIssuesList",
@@ -179,29 +178,28 @@ const routes = {
             const query = queryString.stringify(params);
             if (!query) return "/journals/issues";
             return `/journals/issues?${query}`;
-          },
-          routes: []
+          }
         },
         {
           name: "frontendJournal",
           exact: false,
           component: "JournalWrapper",
           path: "/journals/:id",
-          helper: p => `/journals/${p}`,
+          helper: j => `/journals/${j}`,
           routes: [
             {
               name: "frontendJournalDetail",
               exact: true,
               component: "JournalDetail",
               path: "/journals/:id",
-              helper: p => `/journals/${p}`
+              helper: j => `/journals/${j}`
             },
             {
               name: "frontendVolumeDetail",
               exact: true,
               component: "VolumeDetail",
               path: "/journals/:id/volumes/:number",
-              helper: (p, n) => `/journals/${p}/volumes/${n}`
+              helper: (j, n) => `/journals/${j}/volumes/${n}`
             }
           ]
         },
@@ -210,14 +208,14 @@ const routes = {
           exact: false,
           component: "IssueWrapper",
           path: "/journals/issues/:id",
-          helper: p => `/journals/issues/${p}`,
+          helper: i => `/journals/issues/${i}`,
           routes: [
             {
               name: "frontendIssueDetail",
               exact: true,
               component: "IssueDetail",
               path: "/journals/issues/:id",
-              helper: p => `/journals/issues/${p}`
+              helper: i => `/journals/issues/${i}`
             }
           ]
         }
