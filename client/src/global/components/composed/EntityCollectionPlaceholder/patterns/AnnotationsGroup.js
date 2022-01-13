@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import ContentPlaceholder from "global/components/ContentPlaceholder";
 import { JoinGroup } from "frontend/components/reading-group/tables/Groups/actions";
 import { useCurrentUser } from "hooks";
+import { Actions, Body, Title, Wrapper } from "../parts";
 
 function Group({ readingGroup }) {
   // since RG data isn't refreshed when a user joins,
@@ -65,19 +65,18 @@ function Group({ readingGroup }) {
   const { title, body, actions } = getContent();
 
   return (
-    <ContentPlaceholder.Wrapper context="frontend">
-      <ContentPlaceholder.Title icon="readingGroup24">
-        {title}
-      </ContentPlaceholder.Title>
-      <ContentPlaceholder.Body>
+    <Wrapper context="frontend">
+      <Title icon="readingGroup24">{title}</Title>
+      <Body>
         <p>{body}</p>
-      </ContentPlaceholder.Body>
-      <ContentPlaceholder.Actions actions={actions} />
-    </ContentPlaceholder.Wrapper>
+      </Body>
+      <Actions actions={actions} />
+    </Wrapper>
   );
 }
 
-Group.displayName = "Annotation.List.Placeholder.Group";
+GroupAnnotationsPlaceholder.displayName =
+  "Global.Composed.EntityCollectionPlaceholder.GroupAnnotations";
 
 Group.propTypes = {
   readingGroup: PropTypes.object.isRequired

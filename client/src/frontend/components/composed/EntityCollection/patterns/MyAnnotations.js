@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import Annotation from "global/components/Annotation";
+import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "../EntityCollection";
 
 function MyAnnotationsEntityCollection({
@@ -49,9 +50,11 @@ function MyAnnotationsEntityCollection({
             />
           )}
           {!hasAnnotations && isFiltered && (
-            <Annotation.List.FilteredPlaceholder />
+            <EntityCollectionPlaceholder.FilteredAnnotations />
           )}
-          {!hasAnnotations && !isFiltered && <Annotation.List.MyPlaceholder />}
+          {!hasAnnotations && !isFiltered && (
+            <EntityCollectionPlaceholder.MyAnnotations />
+          )}
         </>
       )}
       paginationProps={

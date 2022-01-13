@@ -4,7 +4,6 @@ import checkboxes from "./checkboxes";
 import collapse from "./collapse";
 import commentMore from "./commentMore";
 import confirmableButton from "./confirmableButton";
-import contentPlaceholder from "./contentPlaceholder";
 import demoAnimation from "./demoAnimation";
 import dialog from "./dialog";
 import drawer from "./drawer";
@@ -31,7 +30,6 @@ export default `
   ${forms}
   ${buttons}
   ${confirmableButton}
-  ${contentPlaceholder}
   ${demoAnimation}
   ${drawer}
   ${utility}

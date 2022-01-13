@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
+import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import IconComposer from "global/components/utility/IconComposer";
-import CollectionPlaceholder from "frontend/components/collecting/me/CollectionPlaceholder";
 import {
   CollectedProjects,
   CollectedTexts,
@@ -74,7 +74,7 @@ function MyStarredEntityCollection({
             <CollectedResources {...getCollectedProps("resources")} />
           </>
         ) : (
-          <CollectionPlaceholder />
+          <EntityCollectionPlaceholder.MyStarred />
         )
       }
       {...passThroughProps}

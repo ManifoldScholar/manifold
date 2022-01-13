@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Layout from "frontend/components/layout";
-import ProjectList from "frontend/components/project-list";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -11,6 +10,7 @@ import queryString from "query-string";
 import omitBy from "lodash/omitBy";
 import debounce from "lodash/debounce";
 import withSettings from "hoc/withSettings";
+import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 
 const { request } = entityStoreActions;
@@ -140,7 +140,7 @@ export class ProjectsContainer extends Component {
   }
 
   renderProjectLibrary() {
-    if (this.showPlaceholder()) return <ProjectList.Placeholder />;
+    if (this.showPlaceholder()) return <EntityCollectionPlaceholder.Projects />;
 
     return (
       <EntityCollection.Projects
