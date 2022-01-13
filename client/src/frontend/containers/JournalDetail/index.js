@@ -13,9 +13,10 @@ import {
 } from "hooks";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import Layout from "frontend/components/layout";
+import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 
 export default function JournalDetailContainer({ location, match }) {
-  const { journal, issues, issuesMeta } = useSelectJournal();
+  const { journal, journalResponse } = useSelectJournal(match);
   const settings = useSelectSettings();
   const { paginationState, handlePageChange } = usePaginationState(location);
   const { filterState, updateFilterState } = useFilterState(location);
@@ -43,13 +44,6 @@ export default function JournalDetailContainer({ location, match }) {
     return null;
   };
 
-  const pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      handlePageChange(pageParam);
-    };
-  };
-
   return (
     <div>
       <CheckFrontendMode
@@ -74,6 +68,7 @@ export default function JournalDetailContainer({ location, match }) {
       />
       <h1 className="screen-reader-text">{journal.attributes.title}</h1>
       <h2>Journal Detail Container</h2>
+      <p>{JSON.stringify(journal)}</p>
       {/* <EntityCollection.ProjectCollectionDetail
         projectCollection={journal}
         projects={issues}
@@ -85,7 +80,7 @@ export default function JournalDetailContainer({ location, match }) {
           resetFilterState: () => updateFilterState({ reset: true })
         }}
         paginationProps={{
-          paginationClickHandler: pageChangeHandlerCreator
+          paginationClickHandler: pageChangeHandlerCreator(handlePageChange)
         }}
         bgColor="neutral05"
       /> */}

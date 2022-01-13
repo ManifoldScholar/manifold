@@ -14,10 +14,12 @@ import {
 } from "hooks";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import Layout from "frontend/components/layout";
+import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 
-export default function VolumeDetailContainer({ location }) {
-  const { journal } = useSelectJournal();
-  const { volume, issues } = useSelectVolume();
+export default function VolumeDetailContainer({ location, match }) {
+  const { journal } = useSelectJournal(match);
+  console.log(journal);
+  const { volume } = useSelectVolume(journal, match.params.number);
   const settings = useSelectSettings();
   const { paginationState, handlePageChange } = usePaginationState(location);
   const { filterState, updateFilterState } = useFilterState(location);
@@ -45,13 +47,6 @@ export default function VolumeDetailContainer({ location }) {
     return null;
   };
 
-  const pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      handlePageChange(pageParam);
-    };
-  };
-
   return (
     <div>
       <CheckFrontendMode
@@ -64,8 +59,8 @@ export default function VolumeDetailContainer({ location }) {
       <RegisterBreadcrumbs
         breadcrumbs={[
           {
-            to: lh.link("frontendProjectCollections"),
-            label: "Back to Project Collections"
+            to: lh.link("frontendJournalDetail", journal.id),
+            label: journal.attributes.titlePlaintext
           }
         ]}
       />
@@ -76,6 +71,7 @@ export default function VolumeDetailContainer({ location }) {
       />
       <h1 className="screen-reader-text">{journal.attributes.title}</h1>
       <h2> Volume Detail Container </h2>
+      <p>{JSON.stringify(volume)}</p>
       <Layout.ButtonNavigation
         showProjects={false}
         grayBg={false}
