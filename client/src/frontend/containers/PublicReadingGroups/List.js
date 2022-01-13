@@ -9,7 +9,7 @@ import GroupsTable from "frontend/components/reading-group/tables/Groups";
 import GroupsTablePlaceholder from "frontend/components/reading-group/tables/Groups/Placeholder";
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";
-
+import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 import {
   useDispatchPublicReadingGroups,
   useSelectPublicReadingGroups
@@ -88,13 +88,6 @@ function PublicReadingGroupsListContainer({
     setPaginationState(prevState => ({ ...prevState, number: pageParam }));
   }
 
-  const pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      handlePageChange(pageParam);
-    };
-  };
-
   function handleNewGroupSuccess() {
     updateUrlFromState();
     setFetchVersion(current => current + 1);
@@ -128,7 +121,7 @@ function PublicReadingGroupsListContainer({
               readingGroups={readingGroups}
               currentUser={currentUser}
               pagination={get(readingGroupsMeta, "pagination")}
-              onPageClick={pageChangeHandlerCreator}
+              onPageClick={pageChangeHandlerCreator(handlePageChange)}
               initialFilterState={filterState}
               resetFilterState={handleFilterReset}
               filterChangeHandler={handleFilterChange}
