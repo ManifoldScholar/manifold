@@ -10,7 +10,7 @@ import GroupsTable from "frontend/components/reading-group/tables/Groups";
 import GroupsTablePlaceholder from "frontend/components/reading-group/tables/Groups/Placeholder";
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";
-import { useDispatchMyReadingGroups, useSelectMyReadingGroups } from "hooks";
+import { useDispatchMyReadingGroups, useSelectMyReadingGroups } from "hooks/me";
 import withCurrentUser from "hoc/with-current-user";
 import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 

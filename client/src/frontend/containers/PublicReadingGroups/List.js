@@ -13,7 +13,7 @@ import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 import {
   useDispatchPublicReadingGroups,
   useSelectPublicReadingGroups
-} from "hooks";
+} from "hooks/reading-groups";
 import withCurrentUser from "hoc/with-current-user";
 
 const DEFAULT_SORT_ORDER = "";

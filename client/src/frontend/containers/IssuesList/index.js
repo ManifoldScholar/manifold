@@ -1,13 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  useSelectAllIssues,
-  useSelectSettings,
-  usePaginationState,
-  useFilterState,
-  useDispatchAllIssues,
-  useUrlFromState
-} from "hooks";
+import { useSelectAllIssues, useDispatchAllIssues } from "hooks/journals";
+import { useSelectSettings } from "hooks/settings";
+import { usePaginationState } from "hooks/pagination";
+import { useUrlFromState } from "hooks/url";
+import { useFilterState } from "hooks/filters";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import Layout from "frontend/components/layout";
 import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";

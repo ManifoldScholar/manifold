@@ -6,10 +6,12 @@ import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import {
   useDispatchAnnotations,
-  useSelectAnnotations,
+  useSelectAnnotations
+} from "hooks/annotations";
+import {
   useDispatchMyAnnotatedTexts,
   useSelectMyAnnotatedTexts
-} from "hooks";
+} from "hooks/me";
 import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 
 const DEFAULT_PAGE = 1;
