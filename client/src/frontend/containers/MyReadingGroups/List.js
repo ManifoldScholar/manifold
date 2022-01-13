@@ -15,6 +15,7 @@ import {
   useSelectMyReadingGroups,
   useCurrentUser
 } from "hooks";
+import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 
 const DEFAULT_SORT_ORDER = "";
 const DEFAULT_PAGE = 1;
@@ -85,13 +86,6 @@ function MyReadingGroupsListContainer({ location, history, route }) {
     setPaginationState(prevState => ({ ...prevState, number: pageParam }));
   }
 
-  const pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      handlePageChange(pageParam);
-    };
-  };
-
   function handleNewGroupSuccess() {
     history.push(lh.link("frontendMyReadingGroups"));
     setFetchVersion(current => current + 1);
@@ -124,7 +118,7 @@ function MyReadingGroupsListContainer({ location, history, route }) {
             <GroupsTable
               readingGroups={readingGroups}
               pagination={get(readingGroupsMeta, "pagination")}
-              onPageClick={pageChangeHandlerCreator}
+              onPageClick={pageChangeHandlerCreator(handlePageChange)}
               initialFilterState={filterState}
               resetFilterState={handleFilterReset}
               filterChangeHandler={handleFilterChange}
