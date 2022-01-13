@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Dialog from "global/components/dialog";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
-import { useDispatchSearchResults, useSelectSearchResults } from "hooks";
+import { useDispatchSearchResults, useSelectSearchResults } from "hooks/search";
 
 const DEFAULT_PAGE = 1;
 const PER_PAGE = 5;

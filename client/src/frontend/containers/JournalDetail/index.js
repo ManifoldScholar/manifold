@@ -5,13 +5,11 @@ import EntityCollection from "frontend/components/composed/EntityCollection";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
-import {
-  useSelectSettings,
-  useSelectJournal,
-  usePaginationState,
-  useFilterState,
-  useUrlFromState
-} from "hooks";
+import { useSelectJournal } from "hooks/journals";
+import { useSelectSettings } from "hooks/settings";
+import { usePaginationState } from "hooks/pagination";
+import { useUrlFromState } from "hooks/url";
+import { useFilterState } from "hooks/filters";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import Layout from "frontend/components/layout";
 import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";

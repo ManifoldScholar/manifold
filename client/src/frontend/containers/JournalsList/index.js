@@ -3,11 +3,8 @@ import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import GlobalUtility from "global/components/utility";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import lh from "helpers/linkHandler";
-import {
-  usePaginationState,
-  useSelectAllJournals,
-  useDispatchAllJournals
-} from "hooks";
+import { useSelectAllJournals, useDispatchAllJournals } from "hooks/journals";
+import { usePaginationState } from "hooks/pagination";
 import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 
 export default function JournalsListContainer({ location }) {

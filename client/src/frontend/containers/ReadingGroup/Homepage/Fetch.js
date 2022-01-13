@@ -6,7 +6,7 @@ import {
   useSelectReadingGroupCollected,
   useDispatchReadingGroupCategories,
   useSelectReadingGroupCategories
-} from "hooks";
+} from "hooks/reading-groups";
 
 function ReadingGroupHomepageFetchContainer({
   readingGroup,
