@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
 import { Link } from "react-router-dom";
+import isEmpty from "lodash/isEmpty";
 import lh from "helpers/linkHandler";
-import ContentPlaceholder from "global/components/ContentPlaceholder";
+import { Actions, Body, Title, Wrapper } from "../parts";
 
-function GroupsTablePlaceholder({ currentUser, isPublic }) {
+function ReadingGroupsPlaceholder({ currentUser, isPublic }) {
   const loggedIn = !isEmpty(currentUser);
 
   function getContent() {
@@ -67,23 +67,22 @@ function GroupsTablePlaceholder({ currentUser, isPublic }) {
   const { title, body, actions } = getContent();
 
   return (
-    <ContentPlaceholder.Wrapper context="frontend">
-      <ContentPlaceholder.Title icon="readingGroup24">
-        {title}
-      </ContentPlaceholder.Title>
-      <ContentPlaceholder.Body>
+    <Wrapper context="frontend">
+      <Title icon="readingGroup24">{title}</Title>
+      <Body>
         <p>{body}</p>
-      </ContentPlaceholder.Body>
-      <ContentPlaceholder.Actions actions={actions} />
-    </ContentPlaceholder.Wrapper>
+      </Body>
+      <Actions actions={actions} />
+    </Wrapper>
   );
 }
 
-GroupsTablePlaceholder.displayName = "ReadingGroup.Table.Groups.Placeholder";
+ReadingGroupsPlaceholder.displayName =
+  "Global.Composed.EntityCollectionPlaceholder.ReadingGroups";
 
-GroupsTablePlaceholder.propTypes = {
+ReadingGroupsPlaceholder.propTypes = {
   currentUser: PropTypes.object,
   isPublic: PropTypes.bool
 };
 
-export default GroupsTablePlaceholder;
+export default ReadingGroupsPlaceholder;

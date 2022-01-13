@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import classNames from "classnames";
 import Block from "./Block";
+import * as Styled from "./styles";
 
 function CollectingAnimation() {
   const [init, setInit] = useState(false);
@@ -19,18 +19,15 @@ function CollectingAnimation() {
     "resources"
   ];
   return (
-    <div
+    <Styled.Animation
       role="img"
-      aria-label="A grid of tiles with star icons that fades in."
-      className={classNames({
-        "collecting-placeholder-animation": true,
-        "collecting-placeholder-animation--animate": init
-      })}
+      aria-label="A grid of tiles with star icons that fade in."
+      $init={init}
     >
       {types.map(type => (
         <Block key={type} type={type} />
       ))}
-    </div>
+    </Styled.Animation>
   );
 }
 

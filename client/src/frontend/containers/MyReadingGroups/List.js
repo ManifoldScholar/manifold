@@ -7,7 +7,7 @@ import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import GroupsTable from "frontend/components/reading-group/tables/Groups";
-import GroupsTablePlaceholder from "frontend/components/reading-group/tables/Groups/Placeholder";
+import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";
 import {
@@ -125,7 +125,9 @@ function MyReadingGroupsListContainer({ location, history, route }) {
             />
           )}
           {showPlaceholder && (
-            <GroupsTablePlaceholder currentUser={currentUser} />
+            <EntityCollectionPlaceholder.ReadingGroups
+              currentUser={currentUser}
+            />
           )}
           <JoinBox onJoin={() => setFetchVersion(current => current + 1)} />
         </div>

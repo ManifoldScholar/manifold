@@ -25,6 +25,8 @@ export const actionProps = {
   children: PropTypes.node
 };
 
+Action.displayName = "Global.Composed.EntityCollectionPlaceholder.Action";
+
 Action.propTypes = actionProps;
 
 export default Action;
