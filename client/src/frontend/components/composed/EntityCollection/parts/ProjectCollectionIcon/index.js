@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import IconComputed from "global/components/icon-computed";
 
-function ProjectCollectionIcon({ projectCollection, ...props }) {
-  const { icon, customIconStyles } = projectCollection.attributes;
+function ProjectCollectionIcon({ collection, ...props }) {
+  const { icon, customIconStyles } = collection.attributes;
   const fill =
     icon === "new-round" ? "var(--color-interaction-light)" : undefined;
   if (customIconStyles?.smallSquare)
@@ -30,7 +30,7 @@ ProjectCollectionIcon.displayName =
   "Frontend.Composed.EntityCollection.ProjectCollectionIcon";
 
 ProjectCollectionIcon.propTypes = {
-  projectCollection: PropTypes.object.isRequired
+  collection: PropTypes.object.isRequired
 };
 
 export default ProjectCollectionIcon;

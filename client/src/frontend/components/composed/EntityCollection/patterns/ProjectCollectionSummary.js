@@ -44,7 +44,7 @@ function ProjectCollectionSummaryEntityCollection({
       IconComponent={props => (
         <ProjectCollectionIcon
           {...props}
-          projectCollection={projectCollection}
+          collection={projectCollection}
         />
       )}
       image={image}
