@@ -3,7 +3,6 @@ import dialog from "./dialog";
 import dialogCheckbox from "./dialogCheckbox";
 import collectionPlaceholder from "./collectionPlaceholder";
 import categoryBuilder from "./categoryBuilder";
-import placeholderAnimation from "./placeholderAnimation";
 
 export default `
   ${toggle}
@@ -11,5 +10,4 @@ export default `
   ${dialogCheckbox}
   ${collectionPlaceholder}
   ${categoryBuilder}
-  ${placeholderAnimation}
 `;

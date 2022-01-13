@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
@@ -10,10 +9,9 @@ import lh from "helpers/linkHandler";
 import LoadingBlock from "global/components/loading-block";
 import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import ContentPlaceholder from "global/components/ContentPlaceholder";
+import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import withSettings from "hoc/with-settings";
-import Authorize from "hoc/authorize";
 
 const { request, flush } = entityStoreActions;
 const defaultPage = 1;
@@ -77,55 +75,12 @@ class ProjectResourceCollectionsContainer extends Component {
     };
   };
 
-  placeholderActions(id) {
-    return [
-      {
-        children: (
-          <Authorize entity="project" ability="create">
-            <Link
-              to={lh.link("backendProjectResourceCollectionsNew", id)}
-              className="button-tertiary"
-            >
-              Create a Collection
-            </Link>
-          </Authorize>
-        )
-      }
-    ];
-  }
-
   get hasCollections() {
     return !!this.props.resourceCollections?.length;
   }
 
   renderPlaceholder(id) {
-    return (
-      <ContentPlaceholder.Wrapper context="frontend">
-        <ContentPlaceholder.Title icon="resourceCollection64">
-          <Authorize entity="projectCollection" ability="create">
-            Uh-oh. This project doesn’t have any collections yet.
-          </Authorize>
-          <Authorize entity="project" ability="create" successBehavior="hide">
-            This project doesn’t have any collections yet.
-          </Authorize>
-        </ContentPlaceholder.Title>
-        <ContentPlaceholder.Body>
-          <>
-            <Authorize entity="project" ability="create">
-              <p>
-                Resource collections are groupings of resources that can be used
-                to orient a reader around certain themes or as a means to place
-                a series of resources onto a text with one insertion.
-              </p>
-            </Authorize>
-            <Authorize entity="project" ability="create" successBehavior="hide">
-              <p>Please check back soon!</p>
-            </Authorize>
-          </>
-        </ContentPlaceholder.Body>
-        <ContentPlaceholder.Actions actions={this.placeholderActions(id)} />
-      </ContentPlaceholder.Wrapper>
-    );
+    return <EntityCollectionPlaceholder.ResourceCollections id={id} />;
   }
 
   render() {

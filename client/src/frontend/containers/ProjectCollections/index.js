@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
-import ProjectCollection from "frontend/components/project-collection";
 import connectAndFetch from "utils/connectAndFetch";
 import { commonActions } from "actions/helpers";
 import { entityStoreActions } from "actions";
@@ -11,6 +10,7 @@ import { select, meta } from "utils/entityUtils";
 import { projectCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import queryString from "query-string";
+import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 
@@ -129,7 +129,8 @@ export class ProjectsCollectionsContainer extends Component {
   };
 
   renderProjectCollections() {
-    if (this.showPlaceholder) return <ProjectCollection.Placeholder />;
+    if (this.showPlaceholder)
+      return <EntityCollectionPlaceholder.ProjectCollectionsFrontend />;
 
     return this.projectCollections.map((projectCollection, index) => (
       <EntityCollection.ProjectCollectionSummary

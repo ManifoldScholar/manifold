@@ -51,6 +51,7 @@ export default `
     --disabled-control-color: var(--color-neutral-text-light);
     --disabled-control-bg-color: var(--color-base-neutral20);
     --header-foreground-color: var(--color-base-neutral75);
+    --placeholder-icon-color: var(--strong-color);
 
     color: var(--color);
   }
@@ -99,6 +100,7 @@ export default `
     --disabled-control-color: var(--color-neutral-ui-dark);
     --disabled-control-bg-color: var(--color-base-neutral85);
     --header-foreground-color: var(--color-interaction-light);
+    --placeholder-icon-color: var(--highlight-color);
 
     color: var(--color);
 

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
+import * as Styled from "./styles";
 
 function getContent(type) {
   switch (type) {
@@ -41,17 +42,15 @@ function Block({ type }) {
   const { title, icon } = getContent(type);
 
   return (
-    <div className="collecting-placeholder-animation__block">
-      <div className="collecting-placeholder-animation__type-icon">
+    <Styled.Block>
+      <Styled.TypeIcon>
         <IconComposer icon={icon} size="default" />
-      </div>
-      <div className="collecting-placeholder-animation__collecting-icon">
+      </Styled.TypeIcon>
+      <Styled.CollectingIcon>
         <IconComposer icon="StarFillUnique" size="default" />
-      </div>
-      <div className="collecting-placeholder-animation__block-title">
-        {title}
-      </div>
-    </div>
+      </Styled.CollectingIcon>
+      <Styled.BlockTitle>{title}</Styled.BlockTitle>
+    </Styled.Block>
   );
 }
 
