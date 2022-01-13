@@ -76,7 +76,8 @@ EntityHero.propTypes = {
   BottomRightComponent: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.object,
-    PropTypes.bool
+    PropTypes.bool,
+    PropTypes.node
   ]),
   ImageComponent: PropTypes.oneOfType([
     PropTypes.func,

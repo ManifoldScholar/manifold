@@ -56,7 +56,7 @@ Header.displayName = "Frontend.Composed.EntityCollection.Header";
 export const headerProps = {
   title: PropTypes.string,
   icon: PropTypes.string,
-  IconComponent: PropTypes.node,
+  IconComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   description: PropTypes.string,
   image: PropTypes.string,
   headerLayout: PropTypes.string,

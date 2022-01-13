@@ -17,7 +17,7 @@ function ProjectResourcesEntityCollection({
 }) {
   const showPagination = !isEmpty(resourcesMeta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(resourcesMeta) && !isEmpty(filterProps);
-  return (
+  return resources && project ? (
     <EntityCollection
       title="All Project Resources"
       icon="resources64"
@@ -50,14 +50,14 @@ function ProjectResourcesEntityCollection({
       }
       {...passThroughProps}
     />
-  );
+  ) : null;
 }
 
 ProjectResourcesEntityCollection.displayName =
   "Frontend.Composed.EntityCollection.ProjectsResources";
 
 ProjectResourcesEntityCollection.propTypes = {
-  resources: PropTypes.arrayOf(PropTypes.object).isRequired,
+  resources: PropTypes.arrayOf(PropTypes.object),
   resourcesMeta: PropTypes.object,
   project: PropTypes.object,
   filterProps: shapes.filters,
