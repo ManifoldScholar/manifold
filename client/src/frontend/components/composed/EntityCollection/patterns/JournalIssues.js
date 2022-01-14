@@ -49,7 +49,7 @@ function JournalIssuesEntityCollection({
       )}
       image={image}
       headerLayout={headerLayout}
-      headerLink={lh.link("frontendJournal", slug)}
+      headerLink={lh.link("frontendJournal", journal.id)}
       BodyComponent={props =>
         !!issues?.length && (
           <ThumbnailGrid {...props}>

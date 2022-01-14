@@ -33,6 +33,7 @@ export function clearfix(mode = "light") {
 // Layout
 // --------------------------------------------------------
 export const containerPrototype = `
+  width: 100%;
   max-width: var(--container-width-full);
   ${logicalWithFallback({
     "padding-inline": fluidScale(
