@@ -13,7 +13,7 @@ export const getAuth = (entity, authorization) => {
 };
 
 export const getPartsData = entity => {
-  const callouts = entity.relationships.actionCallouts;
+  const callouts = entity.relationships?.actionCallouts ?? [];
   const orderedCallouts = orderBy(
     callouts,
     ["attributes.button", "attributes.location", "attributes.position"],
