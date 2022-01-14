@@ -19,7 +19,7 @@ export default function JournalWrapper({ location, match, route }) {
         <EventTracker event={EVENTS.VIEW_RESOURCE} resource={journal} />
       )}
       <CheckFrontendMode
-        debugLabel="ProjectWrapper"
+        debugLabel="JournalWrapper"
         project={journal}
         isProjectHomePage={isHomePage}
       />
