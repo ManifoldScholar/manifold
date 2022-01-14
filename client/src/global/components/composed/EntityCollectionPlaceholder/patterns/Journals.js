@@ -27,7 +27,9 @@ function JournalsPlaceholder({ bgColor = "neutral05" }) {
               {
                 "But it’s easy to create new journals with Manifold. If you have backend access, "
               }
-              <Link to={lh.link("backendProjectCollections")}>head to the backend</Link>
+              <Link to={lh.link("backendProjectCollections")}>
+                head to the backend
+              </Link>
               {" and select "}
               <em>Add a New Journal</em>
               {
