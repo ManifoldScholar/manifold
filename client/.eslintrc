@@ -124,6 +124,7 @@
 
     // Rules we should eventually enable.
     "react/require-default-props": 0,
+    "react/jsx-no-bind": 0,
 
     // Hooks rules
     "react-hooks/rules-of-hooks": 2,
