@@ -53,10 +53,7 @@ export default function JournalDetailContainer({ location, match }) {
 
   return (
     <div>
-      <CheckFrontendMode
-        debugLabel="ProjectCollectionDetail"
-        isProjectSubpage
-      />
+      <CheckFrontendMode debugLabel="JournalDetail" isProjectSubpage />
       {journal && (
         <EventTracker event={EVENTS.VIEW_RESOURCE} resource={journal} />
       )}

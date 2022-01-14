@@ -17,7 +17,7 @@ export default function JournalsListContainer({ location }) {
 
   return journals ? (
     <>
-      <CheckFrontendMode debugLabel="ProjectCollections" isProjectSubpage />
+      <CheckFrontendMode debugLabel="JournalsList" isProjectSubpage />
       <RegisterBreadcrumbs
         breadcrumbs={[
           { to: lh.link("frontendIssuesList"), label: "Back to issues list" }
