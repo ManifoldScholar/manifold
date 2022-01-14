@@ -62,13 +62,3 @@ export const getPartsData = entity => {
     cover
   };
 };
-
-/* Not the actual API */
-export const getMastheadData = entity => {
-  const logo =
-    entity.attributes.logoStyles?.large && entity.attributes.logoStyles?.medium
-      ? entity.attributes.logoStyles
-      : false;
-  const mastheadColor = entity.attributes.mastheadColor;
-  return { logo, mastheadColor };
-};
