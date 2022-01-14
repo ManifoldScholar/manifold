@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 import {
   headingPrimary,
   defaultTransitionProps,
-  fluidScale
+  fluidScale,
+  respond
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 import AtomicBox from "global/components/atomic/Box";
@@ -40,17 +41,14 @@ export const GroupHeader = styled("div", transientOptions)`
   width: 100%;
   display: inline-flex;
   align-items: center;
-  border-top-left-radius: var(--box-border-radius);
-  border-top-right-radius: var(--box-border-radius);
 
   ${({ $link }) =>
-    $link &&
-    `
+    $link
+      ? `
       text-decoration: none;
 
       &:hover,
       &:focus-visible {
-        cursor: pointer;
         background-color: var(--box-medium-bg-color);
         color: var(--strong-color);
 
@@ -58,17 +56,28 @@ export const GroupHeader = styled("div", transientOptions)`
           transform: translate(20%, 3px);
         }
       }
+    `
+      : `
+      color: var(--strong-color);
+      background-color: var(--box-medium-bg-color);
     `}
+
+  ${respond(
+    `
+      border-top-left-radius: var(--box-border-radius);
+      border-top-right-radius: var(--box-border-radius);
+    `,
+    60
+  )}
 `;
 
 export const HeaderText = styled.h2`
   ${headingPrimary}
   margin-inline-start: calc(-1 * ${fluidScale("15px", "0px")});
   margin-bottom: 0;
-  }
 `;
 
-export const GridWrapper = styled.div`
+export const Body = styled.div`
   margin-block-start: ${fluidScale("30px", "10px")};
 
   &:not(:first-child) {

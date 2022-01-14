@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import { CalloutList, Meta, Social, Title, Masthead } from "../parts";
+import { CalloutList, Meta, Social, Title } from "../parts";
+import EntityMasthead from "frontend/components/composed/EntityMasthead";
 import EntityHero from "../EntityHero";
-import { getAuth, getPartsData, getMastheadData } from "../helpers";
+import { getAuth, getPartsData } from "../helpers";
 import Authorization from "helpers/authorization";
 
 export default function JournalHero({ entity, mock }) {
@@ -11,7 +12,6 @@ export default function JournalHero({ entity, mock }) {
   const {
     callouts,
     orderedCallouts,
-    bgImage,
     twitter,
     instagram,
     facebook,
@@ -21,13 +21,9 @@ export default function JournalHero({ entity, mock }) {
     creators,
     contributors
   } = getPartsData(entity);
-  const { logo, mastheadColor } = getMastheadData(entity);
-
   return (
     <>
-      {(bgImage || logo) && (
-        <Masthead image={bgImage} logo={logo} color={mastheadColor} />
-      )}
+      <EntityMasthead entity={entity} />
       <EntityHero
         theme={"journal"}
         TitleComponent={({ isStandalone }) => (

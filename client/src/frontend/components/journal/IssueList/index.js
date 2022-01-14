@@ -16,13 +16,13 @@ function getCategories(journal) {
     {
       id: 1,
       title: "Volume 1",
-      slug: "vol-1",
+      slug: "volume-0",
       issues
     },
     {
       id: 2,
       title: "Volume 2",
-      slug: "vol-2",
+      slug: "volume-0",
       issues
     }
   ];
