@@ -46,10 +46,7 @@ export default function VolumeDetailContainer({ location, match }) {
 
   return (
     <div>
-      <CheckFrontendMode
-        debugLabel="ProjectCollectionDetail"
-        isProjectSubpage
-      />
+      <CheckFrontendMode debugLabel="VolumeDetail" isProjectSubpage />
       {journal && (
         <EventTracker event={EVENTS.VIEW_RESOURCE} resource={journal} />
       )}
