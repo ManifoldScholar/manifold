@@ -9,7 +9,6 @@ import AtomicBox from "global/components/atomic/Box";
 import { transientOptions } from "helpers/emotionHelpers";
 
 export const Box = styled(AtomicBox)`
-  --Box-padding-block: 30px;
   --Box-Background-padding-block-start: 20px;
   --Box-Background-padding-block-end: 20px;
   --Box-Background-padding-inline: ${fluidScale("72px", "20px")};
@@ -66,5 +65,13 @@ export const HeaderText = styled.h2`
   ${headingPrimary}
   margin-inline-start: calc(-1 * ${fluidScale("15px", "0px")});
   margin-bottom: 0;
+  }
+`;
+
+export const GridWrapper = styled.div`
+  margin-block-start: ${fluidScale("30px", "10px")};
+
+  &:not(:first-child) {
+    margin-block-start: ${fluidScale("40px", "20px")};
   }
 `;

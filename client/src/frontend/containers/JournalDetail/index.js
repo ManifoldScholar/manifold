@@ -1,34 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
-import EntityCollection from "frontend/components/composed/EntityCollection";
-import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
-import EventTracker, { EVENTS } from "global/components/EventTracker";
-import { useSelectJournal } from "hooks/journals";
-import { useSelectSettings } from "hooks/settings";
-import { usePaginationState } from "hooks/pagination";
-import { useUrlFromState } from "hooks/url";
-import { useFilterState } from "hooks/filters";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import Layout from "frontend/components/layout";
-import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
+import EntityHero from "frontend/components/composed/EntityHero";
+import Journal from "frontend/components/journal";
+import lh from "helpers/linkHandler";
 
-export default function JournalDetailContainer({ location, match }) {
-  const { journal, journalResponse } = useSelectJournal(match);
-  const settings = useSelectSettings();
-  const { paginationState, handlePageChange } = usePaginationState(
-    location,
-    20
-  );
-  const { filterState, updateFilterState } = useFilterState(location, {
-    collectionOrder: match.params.id
-  });
-  // TODO: add useDispatchIssues hook
-  // TODO: add useSelectIssues hook
-  useUrlFromState(location, filterState, paginationState.number);
-  if (!journal) return null;
-
+function JournalDetailContainer({ journal, journalResponse, settings }) {
   const ogTitle = () => {
     if (!settings) return null;
     const { socialTitle, title } = journal.attributes;
@@ -51,17 +31,25 @@ export default function JournalDetailContainer({ location, match }) {
     return null;
   };
 
+  if (!journalResponse) return null;
+
+  if (journalResponse.status === 401)
+    return <Redirect to={lh.link("frontend")} />;
+
+  if (!journal) return null;
+
   return (
-    <div>
-      <CheckFrontendMode debugLabel="JournalDetail" isProjectSubpage />
-      {journal && (
-        <EventTracker event={EVENTS.VIEW_RESOURCE} resource={journal} />
-      )}
+    <>
+      <CheckFrontendMode debugLabel="JournalDetail" isProjectHomePage />
       <RegisterBreadcrumbs
         breadcrumbs={[
           {
             to: lh.link("frontendJournalsList"),
             label: "Back to All Journals"
+          },
+          {
+            to: lh.link("frontendJournalDetail", journal.id),
+            label: journal.attributes.titlePlaintext
           }
         ]}
       />
@@ -70,30 +58,19 @@ export default function JournalDetailContainer({ location, match }) {
         description={ogDescription()}
         image={ogImage()}
       />
-      <h1 className="screen-reader-text">{journal.attributes.title}</h1>
-      <h2>Journal Detail Container</h2>
-      <p>{JSON.stringify(journal)}</p>
-      {/* <EntityCollection.ProjectCollectionDetail
-        projectCollection={journal}
-        projects={issues}
-        projectsMeta={journalMeta}
-        filterProps={{
-          filterChangeHandler: filterParam =>
-            updateFilterState({ param: filterParam }),
-          initialFilterState: filterState,
-          resetFilterState: () => updateFilterState({ reset: true })
-        }}
-        paginationProps={{
-          paginationClickHandler: pageChangeHandlerCreator(handlePageChange)
-        }}
-        bgColor="neutral05"
-      /> */}
-      <Layout.ButtonNavigation
-        showProjects={false}
-        grayBg={false}
-        showProjectCollections
-        hideAtNarrow
-      />
-    </div>
+      <EntityHero.Journal entity={journal} />
+      <Journal.IssueList journal={journal} />
+      <Journal.Metadata journal={journal} />
+    </>
   );
 }
+
+JournalDetailContainer.displayName = "Frontend.Containers.JournalDetail";
+
+JournalDetailContainer.propTypes = {
+  journal: PropTypes.object,
+  journalResponse: PropTypes.object,
+  settings: PropTypes.object
+};
+
+export default JournalDetailContainer;
