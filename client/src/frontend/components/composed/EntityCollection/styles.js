@@ -10,8 +10,8 @@ export const Wrapper = styled("section", transientOptions)`
   overflow: ${({ $nested, $boxed }) =>
     $nested || $boxed ? "visible" : "hidden"};
 
-  &.bg-white + &.bg-white > .container,
-  &.bg-neutral05 + &.bg-neutral05 > .container {
+  .bg-white + &.bg-white > .container,
+  .bg-neutral05 + &.bg-neutral05 > .container {
     padding-block-start: 0;
   }
 

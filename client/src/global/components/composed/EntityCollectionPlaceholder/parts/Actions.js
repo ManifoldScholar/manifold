@@ -28,7 +28,8 @@ const PlaceholderActions = ({ actions = [] }) => {
   );
 };
 
-PlaceholderActions.displayName = "Global.Composed.EntityCollectionPlaceholder.Actions";
+PlaceholderActions.displayName =
+  "Global.Composed.EntityCollectionPlaceholder.Actions";
 
 PlaceholderActions.propTypes = {
   actions: PropTypes.arrayOf(PropTypes.shape(actionProps))

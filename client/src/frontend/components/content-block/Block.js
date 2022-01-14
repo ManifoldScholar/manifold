@@ -37,6 +37,10 @@ function getTitle(block, typeComponent) {
   return title || typeComponent.title;
 }
 
+function getIcon(block, typeComponent) {
+  return block?.attributes?.icon ?? typeComponent.icon;
+}
+
 function UtilityComponent({ block, entity }) {
   if (block.type !== "recentActivityBlocks") return null;
   return <AllLink entity={entity} threshold={6} />;
@@ -49,6 +53,7 @@ function ContentBlock({ block, entity, ...passThroughProps }) {
   if (!showBlock(block, authorization)) return null;
 
   const title = getTitle(block, typeComponent);
+  const icon = getIcon(block, typeComponent);
   const {
     attributes: { descriptionFormatted, style }
   } = block;
@@ -58,7 +63,7 @@ function ContentBlock({ block, entity, ...passThroughProps }) {
   return (
     <EntityCollection
       title={title}
-      icon={typeComponent.icon}
+      icon={icon}
       description={descriptionFormatted}
       UtilityComponent={() => (
         <UtilityComponent block={block} entity={entity} />
