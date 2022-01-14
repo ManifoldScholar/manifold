@@ -46,25 +46,29 @@ function UtilityComponent({ block, entity }) {
   return <AllLink entity={entity} threshold={6} />;
 }
 
-function ContentBlock({ block, entity, ...passThroughProps }) {
+function ContentBlock({ block, entity, hideHeader, ...passThroughProps }) {
   const authorization = new Authorization();
   const typeComponent = typeToBlockComponent(block.attributes.type);
 
   if (!showBlock(block, authorization)) return null;
 
-  const title = getTitle(block, typeComponent);
-  const icon = getIcon(block, typeComponent);
   const {
     attributes: { descriptionFormatted, style }
   } = block;
+
+  const headerProps = hideHeader
+    ? {}
+    : {
+        title: getTitle(block, typeComponent),
+        icon: getIcon(block, typeComponent),
+        description: descriptionFormatted
+      };
 
   const TypeComponent = typeComponent;
 
   return (
     <EntityCollection
-      title={title}
-      icon={icon}
-      description={descriptionFormatted}
+      {...headerProps}
       UtilityComponent={() => (
         <UtilityComponent block={block} entity={entity} />
       )}

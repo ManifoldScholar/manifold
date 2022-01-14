@@ -5,7 +5,7 @@ import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import { Link } from "react-router-dom";
 import * as Styled from "./styles";
 
-export default function EntityGroup({ entities, title, to }) {
+export default function EntityGroup({ entities, title, to, children }) {
   return (
     <Styled.Box>
       {!!title && (
@@ -14,15 +14,22 @@ export default function EntityGroup({ entities, title, to }) {
           {!!to && <Styled.Icon icon="ArrowLongRight16" size={24} />}
         </Styled.GroupHeader>
       )}
-      <Styled.GridWrapper>
-        <ThumbnailGrid minColumns={4} minItemWidth="210px">
-          {({ stack }) =>
-            entities.map(entity => (
-              <EntityThumbnail entity={entity} stack={stack} key={entity.id} />
-            ))
-          }
-        </ThumbnailGrid>
-      </Styled.GridWrapper>
+      <Styled.Body>
+        {!!entities?.length && (
+          <ThumbnailGrid minColumns={4} minItemWidth="210px">
+            {({ stack }) =>
+              entities.map(entity => (
+                <EntityThumbnail
+                  entity={entity}
+                  stack={stack}
+                  key={entity.id}
+                />
+              ))
+            }
+          </ThumbnailGrid>
+        )}
+        {children}
+      </Styled.Body>
     </Styled.Box>
   );
 }
@@ -30,7 +37,8 @@ export default function EntityGroup({ entities, title, to }) {
 EntityGroup.displayName = "Global.Composed.EntityGroup";
 
 EntityGroup.propTypes = {
-  entities: PropTypes.arrayOf(PropTypes.object).isRequired,
-  title: PropTypes.string.isRequired,
-  to: PropTypes.string
+  entities: PropTypes.arrayOf(PropTypes.object),
+  title: PropTypes.string,
+  to: PropTypes.string,
+  children: PropTypes.node
 };

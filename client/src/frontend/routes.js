@@ -214,8 +214,8 @@ const routes = {
               name: "frontendVolumeDetail",
               exact: true,
               component: "VolumeDetail",
-              path: "/journals/:id/volumes/:number",
-              helper: (j, n) => `/journals/${j}/volumes/${n}`
+              path: "/journals/:id/volumes/:volumeSlug",
+              helper: (j, v) => `/journals/${j}/volumes/${v}`
             }
           ]
         }
