@@ -1,15 +1,8 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import {
-  CalloutList,
-  Cover,
-  Credits,
-  Meta,
-  Social,
-  Title,
-  Masthead
-} from "../parts";
-import { getAuth, getPartsData, getMastheadData } from "../helpers";
+import { CalloutList, Cover, Credits, Meta, Social, Title } from "../parts";
+import EntityMasthead from "frontend/components/composed/EntityMasthead";
+import { getAuth, getPartsData } from "../helpers";
 import EntityHero from "../EntityHero";
 import Authorization from "helpers/authorization";
 
@@ -31,13 +24,9 @@ export default function IssueHero({ entity, mock }) {
     contributors,
     cover
   } = getPartsData(entity);
-  const { logo, mastheadColor } = getMastheadData(entity);
-
   return (
     <>
-      {(bgImage || logo) && (
-        <Masthead image={bgImage} logo={logo} color={mastheadColor} />
-      )}
+      <EntityMasthead entity={entity} />
       <EntityHero
         theme={"journal"}
         TitleComponent={({ isStandalone }) => (

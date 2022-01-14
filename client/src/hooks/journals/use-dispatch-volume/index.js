@@ -6,20 +6,22 @@ import { fixtures } from "helpers/storybook/exports";
 
 const { request } = entityStoreActions;
 
-const sampleData = fixtures.factory("volume");
+const sampleData = fixtures.collectionFactory("journal", 1)[0];
 
-export default function useDispatchVolume(match) {
+export default function useDispatchJournal(match, fetchVersion) {
   const dispatch = useDispatch();
+  const requestName = "feJournal";
 
   // useEffect(() => {
-  // const journalVolumeRequest = request(
-  //   journalVolumesAPI.show(match.params.id),
-  //   requests.feJournalVolume
+  // const journalRequest = request(
+  //   journalsAPI.show(match.params.id),
+  //   requests.feJournal
   // );
-  //   dispatch(journalVolumeRequest);
+  //   dispatch(journalRequest);
   //   /* eslint-disable react-hooks/exhaustive-deps */
   // }, [
-  //   match.params.id
+  //   dispatch,
+  //   match
   //   fetchVersion,
   // ]);
 
@@ -27,7 +29,7 @@ export default function useDispatchVolume(match) {
     const mockAction = {
       type: "API_RESPONSE",
       payload: { data: sampleData },
-      meta: "journalVolume",
+      meta: "journal",
       error: false
     };
     dispatch(mockAction);
