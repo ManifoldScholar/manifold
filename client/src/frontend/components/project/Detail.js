@@ -24,7 +24,7 @@ class Detail extends Component {
     if (window && window.ScrollTo) window.scrollTo(0, 0);
   }
 
-  isLibraryDisabled() {
+  get isLibraryDisabled() {
     return this.props.settings.attributes.general.libraryDisabled;
   }
 
