@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Layout from "frontend/components/layout";
+import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -168,11 +168,7 @@ export class ProjectsContainer extends Component {
         <h1 className="screen-reader-text">All Projects</h1>
         {this.renderProjectLibrary()}
         {this.hasVisibleProjects && (
-          <Layout.ButtonNavigation
-            showProjectCollections
-            showProjects={false}
-            grayBg={false}
-          />
+          <CollectionNavigation entityType="projectCollections" />
         )}
       </>
     );

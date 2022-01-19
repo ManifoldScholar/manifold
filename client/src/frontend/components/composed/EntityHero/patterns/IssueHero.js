@@ -28,7 +28,7 @@ export default function IssueHero({ entity, mock }) {
     <>
       <EntityMasthead entity={entity} />
       <EntityHero
-        theme={"journal"}
+        theme="issue"
         TitleComponent={({ isStandalone }) => (
           <Title entity={entity} isStandalone={isStandalone} />
         )}

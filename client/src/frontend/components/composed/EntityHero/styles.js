@@ -7,10 +7,6 @@ import { standaloneHeaderLayout } from "theme/styles/variables/crossComponent";
 const BREAKPOINT = breakpoints[60];
 
 export const Wrapper = styled("section", transientOptions)`
-  --right-column-width: minmax(220px, 28%);
-  --right-column-padding: 60px;
-  --column-gap: ${fluidScale("100px", "4.839vw")};
-
   position: relative;
   padding-top: 20px;
   padding-bottom: 35px;
@@ -48,7 +44,6 @@ export const Wrapper = styled("section", transientOptions)`
 
 export const JournalWrapper = styled(Wrapper)`
   --right-column-width: 200px;
-  --right-column-padding: 0px;
   --left-column-width: 50%;
   --column-gap: ${fluidScale("180px", "60px")};
   --Meta-font-family: var(--font-family-heading);
@@ -61,20 +56,25 @@ export const JournalWrapper = styled(Wrapper)`
   background-color: var(--color-base-neutral-white);
 `;
 
+export const IssueWrapper = styled(Wrapper)`
+  --Social-icons-color: var(--color-base-neutral80);
+  --link-color: var(--color-neutral-text-dark);
+
+  color: var(--color-neutral-text-extra-dark);
+  background-color: var(--color-base-neutral-white);
+`;
+
 export const Inner = styled.div`
   ${containerPrototype}
   position: relative;
   z-index: 50;
-  max-width: ${standaloneHeaderLayout.maxWidth};
   display: grid;
   row-gap: ${fluidScale("48px", "30px", 120)};
-  column-gap: var(--column-gap);
+  column-gap: var(--column-gap, ${fluidScale("100px", "4.839vw")});
 
   ${respond(
     `
-    grid-template-columns: var(--left-column-width, 1fr) var(--right-column-width);
-    padding-right: 20px;
-    padding-left: 20px;
+    grid-template-columns: var(--left-column-width, 1fr) var(--right-column-width, clamp(220px, 28%, 260px));
   `,
     BREAKPOINT
   )}
@@ -102,7 +102,6 @@ export const TopRight = styled.div`
   ${respond(
     `grid-row: 1;
     grid-column: 2;
-    padding-right: var(--right-column-padding);
 
     > *:first-child {
       margin-top: 7px;

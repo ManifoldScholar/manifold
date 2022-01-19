@@ -6,7 +6,7 @@ import { usePaginationState } from "hooks/pagination";
 import { useUrlFromState } from "hooks/url";
 import { useFilterState } from "hooks/filters";
 import EntityCollection from "frontend/components/composed/EntityCollection";
-import Layout from "frontend/components/layout";
+import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 
 export default function IssuesListContainer({ location }) {
@@ -41,13 +41,9 @@ export default function IssuesListContainer({ location }) {
         bgColor="neutral05"
       />
       {/* Replace true with hasVisibleIssues once we have the setting */}
-      {true && (
-        <Layout.ButtonNavigation
-          showProjectCollections
-          showProjects={false}
-          grayBg={false}
-        />
-      )}
+      {/* {true && (
+        <CollectionNavigation entityType="journals" />
+      )} */}
     </>
   ) : null;
   // Will there be a placeholder component like for projects?
