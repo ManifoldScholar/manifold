@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
+import * as Styled from "./styles";
 
 function CollectingDialogCheckbox({
   label,
@@ -27,39 +28,27 @@ function CollectingDialogCheckbox({
   }
 
   return (
-    <label
+    <Styled.Label
       htmlFor={uid}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      className="collecting-dialog-checkbox"
     >
-      <input
+      <Styled.Input
         type="checkbox"
         id={uid}
         name="collecting-dialog"
         value={value}
         checked={checked}
         onChange={handleChange}
-        className="collecting-dialog-checkbox__input"
       />
-      <span className="collecting-dialog-checkbox__label">
-        <span className="collecting-dialog-checkbox__icon-block">
-          <IconComposer
-            icon={icon}
-            size="default"
-            className="collecting-dialog-checkbox__icon"
-          />
-        </span>
-        <span className="collecting-dialog-checkbox__title">{label}</span>
-        {showLock && (
-          <IconComposer
-            icon="lock16"
-            size={18}
-            className="collecting-dialog-checkbox__lock-icon"
-          />
-        )}
-      </span>
-    </label>
+      <Styled.Item>
+        <Styled.IconWrapper>
+          <Styled.Icon icon={icon} size="default" />
+        </Styled.IconWrapper>
+        <Styled.Title>{label}</Styled.Title>
+        {showLock && <IconComposer icon="lock16" size={18} />}
+      </Styled.Item>
+    </Styled.Label>
   );
 }
 

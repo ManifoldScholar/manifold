@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useUIDSeed } from "react-uid";
-import IconComposer from "global/components/utility/IconComposer";
-import Dialog from "global/components/dialog";
 import SectionLabel from "global/components/form/SectionLabel";
 import Checkbox from "./Checkbox";
 import { inCollection } from "../helpers";
+import * as Styled from "./styles";
 
 function CollectingDialog({
   collectable,
@@ -48,27 +47,20 @@ function CollectingDialog({
   }
 
   return (
-    <Dialog.Wrapper
+    <Styled.Wrapper
       labelledBy={uidSeed("label")}
       describedBy={uidSeed("description")}
       closeCallback={onClose}
       maxWidth={550}
-      className="collecting-dialog"
     >
-      <div className="collecting-dialog__inner">
-        <header className="collecting-dialog__header">
-          <h2 id={uidSeed("label")} className="collecting-dialog__title">
-            {title}
-          </h2>
-          <IconComposer
-            icon="TextsLoosePages64"
-            size={48}
-            className="collecting-dialog__header-icon"
-          />
-        </header>
-        <fieldset className="collecting-dialog__fieldset">
+      <Styled.Inner>
+        <Styled.Header>
+          <Styled.Title id={uidSeed("label")}>{title}</Styled.Title>
+          <Styled.Icon icon="TextsLoosePages64" size={48} />
+        </Styled.Header>
+        <Styled.Fields>
           <SectionLabel as="legend" label="Add this to:" />
-          <div className="collecting-dialog__checkbox-group">
+          <Styled.Group>
             <Checkbox
               label="My Collection"
               value="me"
@@ -91,18 +83,15 @@ function CollectingDialog({
                 />
               );
             })}
-          </div>
-        </fieldset>
-        <div className="collecting-dialog__footer">
-          <button
-            onClick={handleCloseClick}
-            className="collecting-dialog__close-button button-secondary"
-          >
+          </Styled.Group>
+        </Styled.Fields>
+        <Styled.Footer>
+          <Styled.Close onClick={handleCloseClick} className="button-secondary">
             Close
-          </button>
-        </div>
-      </div>
-    </Dialog.Wrapper>
+          </Styled.Close>
+        </Styled.Footer>
+      </Styled.Inner>
+    </Styled.Wrapper>
   );
 }
 
