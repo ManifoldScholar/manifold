@@ -3,17 +3,22 @@ import PropTypes from "prop-types";
 import IconComputed from "global/components/icon-computed";
 
 function ProjectCollectionIcon({ collection, ...props }) {
-  const {
-    icon,
-    customIconStyles: { smallSquare }
-  } = collection.attributes;
+  const { icon, customIconStyles } = collection.attributes;
   const fill =
     icon === "new-round" ? "var(--color-interaction-light)" : undefined;
 
-  if (!icon && !smallSquare) return null;
+  if (!icon && !customIconStyles?.smallSquare) return null;
 
-  if (smallSquare)
-    return <img src={smallSquare} alt="" width={60} height={60} {...props} />;
+  if (customIconStyles?.smallSquare)
+    return (
+      <img
+        src={customIconStyles.smallSquare}
+        alt=""
+        width={60}
+        height={60}
+        {...props}
+      />
+    );
 
   return (
     <IconComputed.ProjectCollection

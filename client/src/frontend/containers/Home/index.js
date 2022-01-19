@@ -7,7 +7,7 @@ import Collections from "./Collections";
 import Projects from "./Projects";
 import Feature from "./Feature";
 import withSettings from "hoc/withSettings";
-import Layout from "frontend/components/layout";
+import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 
 export class HomeContainer extends Component {
@@ -70,7 +70,9 @@ export class HomeContainer extends Component {
           <Collections authentication={this.props.authentication} />
         )}
 
-        {this.hasVisibleProjects && <Layout.ButtonNavigation grayBg={false} />}
+        {this.hasVisibleProjects && (
+          <CollectionNavigation entityType="projects" />
+        )}
       </div>
     );
   }
