@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import Layout from "frontend/components/layout";
+import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import { entityStoreActions } from "actions";
@@ -251,12 +251,7 @@ export class ProjectCollectionDetailContainer extends Component {
           }}
           bgColor="neutral05"
         />
-        <Layout.ButtonNavigation
-          showProjects={false}
-          grayBg={false}
-          showProjectCollections
-          hideAtNarrow
-        />
+        <CollectionNavigation entityType="projectCollections" />
       </div>
     );
   }

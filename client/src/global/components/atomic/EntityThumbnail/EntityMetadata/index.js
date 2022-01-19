@@ -24,6 +24,7 @@ export default function EntityMetadata({
           .map(maker => maker.attributes.fullName)
           .join(", ")
       : null;
+  /* eslint-enable no-nested-ternary */
 
   return (
     <Styled.MetadataWrapper $stack={stack}>
