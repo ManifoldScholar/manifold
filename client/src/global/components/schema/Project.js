@@ -6,51 +6,65 @@ export default class Project extends PureComponent {
   static displayName = "Schema.Project";
 
   static propTypes = {
-    url: PropTypes.string,
-    attributes: PropTypes.shape({
-      title: PropTypes.string,
-      metadata: PropTypes.shape({
-        isbn: PropTypes.string,
-        rightsHolder: PropTypes.string,
-        publisher: PropTypes.string,
-        seriesTitle: PropTypes.string,
-        doi: PropTypes.string,
-        edition: PropTypes.string
+    project: PropTypes.shape({
+      url: PropTypes.string,
+      attributes: PropTypes.shape({
+        title: PropTypes.string,
+        metadata: PropTypes.shape({
+          isbn: PropTypes.string,
+          rightsHolder: PropTypes.string,
+          publisher: PropTypes.string,
+          seriesTitle: PropTypes.string,
+          doi: PropTypes.string,
+          edition: PropTypes.string
+        }),
+        purchaseUrl: PropTypes.string,
+        purchasePrice: PropTypes.number,
+        purchasePriceCurrency: PropTypes.string,
+        avatarStyles: PropTypes.shape({
+          small: PropTypes.string
+        }),
+        publicationDate: PropTypes.string,
+        createdAt: PropTypes.string,
+        updatedAt: PropTypes.string
       }),
-      purchaseUrl: PropTypes.string,
-      purchasePrice: PropTypes.number,
-      purchasePriceCurrency: PropTypes.string,
-      avatarStyles: PropTypes.shape({
-        small: PropTypes.string
-      }),
-      publicationDate: PropTypes.string,
-      createdAt: PropTypes.string,
-      updatedAt: PropTypes.string
-    }),
-    relationships: PropTypes.shape({
-      creators: PropTypes.arrayOf(
-        PropTypes.shape({
-          attributes: PropTypes.shape({
-            fullName: PropTypes.string.isRequired
-          }).isRequired
-        })
-      ),
-      contributors: PropTypes.arrayOf(
-        PropTypes.shape({
-          attributes: PropTypes.shape({
-            fullName: PropTypes.string.isRequired
-          }).isRequired
-        })
-      )
-    })
+      relationships: PropTypes.shape({
+        creators: PropTypes.arrayOf(
+          PropTypes.shape({
+            attributes: PropTypes.shape({
+              fullName: PropTypes.string.isRequired
+            }).isRequired
+          })
+        ),
+        contributors: PropTypes.arrayOf(
+          PropTypes.shape({
+            attributes: PropTypes.shape({
+              fullName: PropTypes.string.isRequired
+            }).isRequired
+          })
+        )
+      })
+    }).isRequired
   };
+
+  get project() {
+    return this.props.project;
+  }
+
+  get attributes() {
+    return this.project.attributes;
+  }
+
+  get relationships() {
+    return this.project.relationships;
+  }
 
   get showOffer() {
     const {
       purchasePrice,
       purchasePriceCurrency,
       purchaseUrl
-    } = this.props.attributes;
+    } = this.attributes;
     return purchasePrice && purchasePriceCurrency && purchaseUrl;
   }
 
@@ -64,7 +78,7 @@ export default class Project extends PureComponent {
   }
 
   renderSeries() {
-    const { seriesTitle } = this.props.attributes.metadata;
+    const { seriesTitle } = this.attributes.metadata;
 
     return {
       "@type": "CreativeWorkSeries",
@@ -77,7 +91,7 @@ export default class Project extends PureComponent {
       purchasePrice,
       purchasePriceCurrency,
       purchaseUrl
-    } = this.props.attributes;
+    } = this.attributes;
     return {
       "@type": "Offer",
       price: purchasePrice,
@@ -95,8 +109,8 @@ export default class Project extends PureComponent {
       createdAt,
       updatedAt,
       avatarStyles
-    } = this.props.attributes;
-    const { creators, contributors } = this.props.relationships;
+    } = this.attributes;
+    const { creators, contributors } = this.relationships;
 
     return {
       "@type": "Book",
@@ -129,7 +143,9 @@ export default class Project extends PureComponent {
     return (
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(data)
+        }}
       />
     );
   }

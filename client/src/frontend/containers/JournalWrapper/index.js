@@ -2,13 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { useSelectJournal, useDispatchJournal } from "hooks/journals";
-import { useSelectSettings } from "hooks/settings";
 import { RedirectToFirstMatch, childRoutes } from "helpers/router";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 
 export default function JournalWrapper({ location, match, route }) {
-  const settings = useSelectSettings();
   const { journal, journalResponse } = useSelectJournal(match);
   const isHomePage = location.pathname === match.url;
   useDispatchJournal(match);
@@ -35,8 +33,7 @@ export default function JournalWrapper({ location, match, route }) {
       {childRoutes(route, {
         childProps: {
           journal,
-          journalResponse,
-          settings
+          journalResponse
         }
       })}
     </>
