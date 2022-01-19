@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import LoadingBlock from "global/components/loading-block";
 import EntityCollection from "frontend/components/composed/EntityCollection/EntityCollection";
@@ -6,52 +6,34 @@ import Layout from "frontend/components/layout";
 import EntityHero from "frontend/components/composed/EntityHero";
 import ContentBlockList from "frontend/components/content-block-list/List";
 import { Warning } from "frontend/components/content-block/parts";
-import { FrontendModeContext } from "helpers/contexts";
-import withSettings from "hoc/withSettings";
-import Authorize from "hoc/Authorize";
+import Authorize from "hoc/authorize";
+import { useSelectSettings, useFrontendModeContext } from "hooks";
 
-class Detail extends Component {
-  static displayName = "Project.Detail";
+function Detail({ project }) {
+  const { isStandalone } = useFrontendModeContext();
+  const settings = useSelectSettings();
+  const libraryDisabled = settings.attributes.general.libraryDisabled;
 
-  static propTypes = {
-    project: PropTypes.object,
-    settings: PropTypes.object
-  };
+  if (!project) return <LoadingBlock />;
 
-  static contextType = FrontendModeContext;
-
-  componentDidMount() {
-    if (window && window.ScrollTo) window.scrollTo(0, 0);
-  }
-
-  get isLibraryDisabled() {
-    return this.props.settings.attributes.general.libraryDisabled;
-  }
-
-  render() {
-    const { project } = this.props;
-    if (!project) return <LoadingBlock />;
-    return (
-      <>
-        <section>
-          <EntityHero.Project entity={project} />
-          <Authorize
-            entity={project}
-            ability="fullyRead"
-            successBehavior="hide"
-          >
-            <EntityCollection
-              BodyComponent={() => <Warning.AccessDenied entity={project} />}
-            />
-          </Authorize>
-          <ContentBlockList entity={project} />
-        </section>
-        {!this.context.isStandalone && !this.isLibraryDisabled && (
-          <Layout.ButtonNavigation />
-        )}
-      </>
-    );
-  }
+  return (
+    <>
+      <EntityHero.Project entity={project} />
+      <Authorize entity={project} ability="fullyRead" successBehavior="hide">
+        <EntityCollection
+          BodyComponent={() => <Warning.AccessDenied entity={project} />}
+        />
+      </Authorize>
+      <ContentBlockList entity={project} />
+      {!isStandalone && !libraryDisabled && <Layout.ButtonNavigation />}
+    </>
+  );
 }
 
-export default withSettings(Detail);
+Detail.displayName = "Project.Detail";
+
+Detail.propTypes = {
+  project: PropTypes.object
+};
+
+export default Detail;
