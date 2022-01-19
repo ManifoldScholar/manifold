@@ -40,8 +40,14 @@ export default function EntityHero({
     }
   }, [isStandalone]);
 
+  /* eslint-disable no-nested-ternary */
   const WrapperComponent =
-    theme === "journal" ? Styled.JournalWrapper : Styled.Wrapper;
+    theme === "journal"
+      ? Styled.JournalWrapper
+      : theme === "issue"
+      ? Styled.IssueWrapper
+      : Styled.Wrapper;
+  /* eslint-enable no-nested-ternary */
 
   return (
     <WrapperComponent $lightMode={lightMode} $standalone={isStandalone}>

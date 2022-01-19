@@ -2,45 +2,51 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import HeadContent from "global/components/HeadContent";
-import Schema from "global/components/schema";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
+import Issue from "frontend/components/issue";
+import { fixtures } from "helpers/storybook/exports";
 
-export default function IssueDetailContainer({
-  issue,
-  issueResponse,
-  settings
-}) {
+export default function IssueDetailContainer({ issue, issueResponse }) {
   if (!issueResponse) return null;
+
   if (issueResponse.status === 401)
     return <Redirect to={lh.link("frontend")} />;
 
-  return issue ? (
+  if (!issue) return null;
+
+  // TODO: update once API is in place
+  const parentJournal =
+    issue.relationships?.journal || fixtures.factory("journal");
+
+  return (
     <>
       <CheckFrontendMode debugLabel="ProjectDetail" isProjectHomePage />
-      <HeadContent
-        title={`\u201c${issue.attributes.titlePlaintext}\u201d on ${settings.attributes.general.installationName}`}
-        description={issue.attributes.description}
-        image={issue.attributes.heroStyles.medium}
+      <RegisterBreadcrumbs
+        breadcrumbs={[
+          {
+            to: lh.link("frontendIssuesList"),
+            label: "Back to All Issues"
+          },
+          // TODO: can remove condition once API is in place?
+          !!parentJournal && {
+            to: lh.link("frontendJournalDetail", parentJournal.id),
+            label: parentJournal.attributes.titlePlaintext
+          },
+          {
+            to: lh.link("frontendIssueDetail", issue.id),
+            label: issue.attributes.titlePlaintext
+          }
+        ].filter(Boolean)}
       />
-      <h2>Issue Detail Container</h2>
-      <p>{JSON.stringify(issue)}</p>
-      {/* What are the equivalent components for issue? */}
-      {/* <Project.Detail
-        project={this.props.project}
-        dispatch={this.props.dispatch}
-      /> */}
-      {/* <Schema.Project
-        attributes={project.attributes}
-        relationships={project.relationships}
-      /> */}
+      <EntityHeadContent entity={issue} parentEntity={parentJournal} />
+      <Issue.Detail issue={issue} />
     </>
-  ) : null;
+  );
 }
 
 IssueDetailContainer.propTypes = {
   issue: PropTypes.object,
-  issueResponse: PropTypes.object,
-  settings: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired
+  issueResponse: PropTypes.object
 };

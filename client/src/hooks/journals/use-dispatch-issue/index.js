@@ -25,8 +25,6 @@ export default function useDispatchJournal(match, fetchVersion) {
   //   fetchVersion,
   // ]);
 
-  console.log(sampleData);
-
   useEffect(() => {
     const mockAction = {
       type: "API_RESPONSE",
