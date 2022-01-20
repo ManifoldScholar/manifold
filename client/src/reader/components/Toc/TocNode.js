@@ -6,8 +6,6 @@ import Collecting from "frontend/components/collecting";
 
 function TocNode({ node, onClick, linkTo, active, children }) {
   const [hovering, setHovering] = useState(false);
-  const showToggle = hovering || node.attributes?.collectedByCurrentUser;
-  // const showToggle = true;
 
   return (
     <li className="table-of-contents__item">
@@ -31,8 +29,7 @@ function TocNode({ node, onClick, linkTo, active, children }) {
           onMouseEnter={() => setHovering(true)}
           onMouseLeave={() => setHovering(false)}
           className={classNames({
-            "table-of-contents__collecting-toggle": true,
-            "table-of-contents__collecting-toggle--hidden": !showToggle
+            "table-of-contents__collecting-toggle": true
           })}
         >
           <Collecting.Toggle
@@ -44,6 +41,7 @@ function TocNode({ node, onClick, linkTo, active, children }) {
             outlined={false}
             onDialogOpen={() => setHovering(true)}
             onDialogClose={() => setHovering(false)}
+            hiddenIfUncollected={!hovering}
           />
         </span>
       </div>

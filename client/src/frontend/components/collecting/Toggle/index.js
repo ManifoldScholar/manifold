@@ -41,7 +41,8 @@ function CollectingToggle({
   onDialogClose,
   readingGroups: myReadingGroups,
   setScreenReaderStatus,
-  onUncollect
+  onUncollect,
+  hiddenIfUncollected
 }) {
   const [hovered, setHovered] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
@@ -171,7 +172,9 @@ function CollectingToggle({
           "collecting-toggle--inline": inline,
           "collecting-toggle--project-cover": !inline,
           "collecting-toggle--outlined": outlined,
-          "collecting-toggle--filled-always": !outlined
+          "collecting-toggle--filled-always": !outlined,
+          "table-of-contents__collecting-toggle--hidden":
+            hiddenIfUncollected && !collected
         })}
         aria-hidden="true"
         tabIndex={-1}
@@ -211,7 +214,8 @@ CollectingToggle.propTypes = {
   setScreenReaderStatus: PropTypes.func,
   onUncollect: PropTypes.func,
   inline: PropTypes.bool,
-  outlined: PropTypes.bool
+  outlined: PropTypes.bool,
+  hiddenIfUncollected: PropTypes.bool
 };
 
 export default withReadingGroups(withScreenReaderStatus(CollectingToggle));
