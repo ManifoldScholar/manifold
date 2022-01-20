@@ -13,16 +13,16 @@ export const Wrapper = styled(Dialog.Wrapper)`
 `;
 
 export const Inner = styled.div`
-  padding-top: min(6.579vw, 50px);
-  padding-right: min(1.974vw, 15px);
-  padding-left: min(1.974vw, 15px);
+  padding-block-start: min(6.579vw, 50px);
+  padding-inline-end: min(1.974vw, 15px);
+  padding-inline-start: min(1.974vw, 15px);
 `;
 
 export const Header = styled.header`
   display: flex;
   align-items: baseline;
-  padding-right: ${lateralPadding};
-  padding-left: ${lateralPadding};
+  padding-inline-end: ${lateralPadding};
+  padding-inline-start: ${lateralPadding};
 `;
 
 export const Title = styled.h2`
@@ -34,27 +34,27 @@ export const Title = styled.h2`
 
 export const Icon = styled(IconComposer)`
   order: -1;
-  margin-right: 16px;
-  margin-left: -5px;
+  margin-inline-end: 16px;
+  margin-inline-start: -5px;
 `;
 
 export const Fields = styled.fieldset`
   padding: 0;
   margin: 0;
-  margin-top: 28px;
+  margin-block-start: 28px;
   border: none;
 `;
 
 export const Group = styled.div`
   max-height: ${maxListHeight};
-  margin-top: 10px;
+  margin-block-start: 10px;
   overflow: auto;
 `;
 
 export const Footer = styled.div`
-  padding-right: ${lateralPadding};
-  padding-left: ${lateralPadding};
-  margin-top: 50px;
+  padding-inline-end: ${lateralPadding};
+  padding-inline-start: ${lateralPadding};
+  margin-block-start: 50px;
 `;
 
 export const Close = styled.button`
