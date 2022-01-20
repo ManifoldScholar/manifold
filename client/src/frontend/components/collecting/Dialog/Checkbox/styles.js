@@ -18,7 +18,7 @@ export const Label = styled.label`
   }
 
   & + & {
-    margin-top: 18px;
+    margin-block-start: 18px;
   }
 
   .icon-star-fill {
@@ -44,7 +44,7 @@ export const IconWrapper = styled.span`
   position: relative;
   width: ${iconSize};
   height: ${iconSize};
-  margin-right: 12px;
+  margin-inline-end: 12px;
 `;
 
 export const Icon = styled(IconComposer)`
