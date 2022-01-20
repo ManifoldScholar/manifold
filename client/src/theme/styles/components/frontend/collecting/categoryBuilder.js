@@ -164,6 +164,11 @@ export default `
       transition: opacity ${defaultTransitionProps},
         visibility transform var(--transition-duration-default) var(--transition-duration-default) var(--transition-timing-function);
 
+      &--tab-direction {
+        display: inherit;
+        gap: inherit;
+      }
+
       .group-collection-editor__collectable-actions--keyboard-actions-visible
         & {
         visibility: visible;

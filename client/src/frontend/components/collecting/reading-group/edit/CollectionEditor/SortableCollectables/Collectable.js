@@ -9,8 +9,8 @@ import { getCollectableIcon } from "../helpers/resolvers";
 
 function Collectable({ responses, type, id, index, onRemove, onMove }) {
   const groupLabelId = useUID();
-  const [dragHandleFocused, setDragHandleFocused] = useState(false);
-  const [keyboardActionFocused, setKeyboardActionFocused] = useState(false);
+  const [keyboardActionsVisible, setKeyboardActionsVisible] = useState(false);
+  const [reverseTabDirection, setReverseTabDirection] = useState(false);
   const blockClassName = snapshot =>
     classNames({
       "group-collection-editor__block": true,
@@ -20,8 +20,7 @@ function Collectable({ responses, type, id, index, onRemove, onMove }) {
   const actionsClassName = classNames({
     "group-collection-editor__actions": true,
     "group-collection-editor__collectable-actions": true,
-    "group-collection-editor__collectable-actions--keyboard-actions-visible":
-      dragHandleFocused || keyboardActionFocused
+    "group-collection-editor__collectable-actions--keyboard-actions-visible": keyboardActionsVisible
   });
 
   return (
@@ -44,24 +43,46 @@ function Collectable({ responses, type, id, index, onRemove, onMove }) {
               aria-labelledby={groupLabelId}
             >
               <Remove id={id} type={type} onRemove={onRemove} />
-              <Drag
-                dragHandleProps={provided.dragHandleProps}
-                onFocus={() => setDragHandleFocused(true)}
-                onBlur={() => setDragHandleFocused(false)}
-              />
-              <div className="group-collection-editor__keyboard-actions">
-                <Move
-                  onClick={() => onMove({ id, type, direction: "up" })}
-                  onFocus={() => setKeyboardActionFocused(true)}
-                  onBlur={() => setKeyboardActionFocused(false)}
-                  direction="up"
+              <div
+                role="none"
+                onKeyDown={e => {
+                  if (e.shiftKey && e.key === "Tab") {
+                    setReverseTabDirection(true);
+                    return;
+                  }
+                  if (e.key === "Tab") {
+                    setReverseTabDirection(false);
+                  }
+                }}
+                className="group-collection-editor__keyboard-actions--tab-direction"
+              >
+                <Drag
+                  dragHandleProps={provided.dragHandleProps}
+                  onFocus={() => {
+                    setKeyboardActionsVisible(true);
+                  }}
+                  onBlur={() => {
+                    if (reverseTabDirection) {
+                      setKeyboardActionsVisible(false);
+                    }
+                  }}
                 />
-                <Move
-                  onClick={() => onMove({ id, type, direction: "down" })}
-                  onFocus={() => setKeyboardActionFocused(true)}
-                  onBlur={() => setKeyboardActionFocused(false)}
-                  direction="down"
-                />
+                <div className="group-collection-editor__keyboard-actions">
+                  <Move
+                    onClick={() => onMove({ id, type, direction: "up" })}
+                    direction="up"
+                  />
+                  <Move
+                    onClick={() => onMove({ id, type, direction: "down" })}
+                    onBlur={() => {
+                      if (reverseTabDirection) {
+                        return;
+                      }
+                      setKeyboardActionsVisible(false);
+                    }}
+                    direction="down"
+                  />
+                </div>
               </div>
             </div>
           </article>
