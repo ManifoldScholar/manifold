@@ -1,14 +1,16 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import BodyClass from "hoc/body-class";
+import { Redirect } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+import { Global as GlobalStyles } from "@emotion/react";
+import has from "lodash/has";
+import config from "config";
+import { fatalErrorActions, notificationActions } from "actions";
+import lh from "helpers/linkHandler";
+import styles from "theme/styles/globalStyles";
 import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
-import config from "config";
-import IconComposer from "global/components/utility/IconComposer";
-import { fatalErrorActions, notificationActions } from "actions";
-import has from "lodash/has";
-import lh from "helpers/linkHandler";
-import { Redirect } from "react-router-dom";
+import * as Styled from "./styles";
 
 export default class FatalError extends PureComponent {
   static propTypes = {
@@ -93,71 +95,64 @@ export default class FatalError extends PureComponent {
     const showDetail = config.environment.isDevelopment;
 
     return (
-      <BodyClass className="browse fatal-error-page">
-        <section className="fatal-error">
-          <div className="error-wrapper">
-            <div className="container">
-              <header>
-                <IconComposer
-                  icon="stopSign64"
-                  size={60}
-                  className="fatal-error__stop-icon"
-                />
-                <h3>
-                  {this.props.headerLineOne}
-                  {this.props.headerLineTwo ? (
-                    <span>
-                      <br />
-                      {this.props.headerLineTwo}
-                    </span>
-                  ) : null}
-                </h3>
-              </header>
-
-              <div
-                className="error-description"
-                role="alert"
-                aria-live="assertive"
-                aria-atomic="true"
-              >
-                {error ? (
-                  <h1>
-                    {error.status} Error: {error.heading}
-                  </h1>
-                ) : null}
-                {showDetail ? (
-                  <p>
-                    {error.body}
-                    {this.props.dismiss ? (
+      <HelmetProvider>
+        <GlobalStyles styles={styles} />
+        <Styled.Body className="browse">
+          <Styled.Wrapper>
+            <Styled.Inner>
+              <Styled.Container>
+                <Styled.Header>
+                  <Styled.Icon icon="stopSign64" size={60} />
+                  <Styled.Message>
+                    {this.props.headerLineOne}
+                    {this.props.headerLineTwo ? (
                       <span>
                         <br />
-                        <button
-                          role="link"
-                          onClick={this.props.dismiss}
-                          className="dismiss"
-                        >
-                          Try again.
-                        </button>
+                        {this.props.headerLineTwo}
                       </span>
                     ) : null}
-                  </p>
-                ) : null}
-              </div>
-            </div>
-            {showDetail ? (
-              <div>
-                {this.apiTrace ? <ApiTrace trace={this.apiTrace} /> : null}
-                {this.clientTrace ? (
-                  <ClientTrace
-                    trace={this.clientTrace}
-                    truncate={this.clientTraceTruncate}
-                  />
-                ) : null}
-              </div>
-            ) : null}
-          </div>
-        </section>
-      </BodyClass>
+                  </Styled.Message>
+                </Styled.Header>
+                <div role="alert" aria-live="assertive" aria-atomic="true">
+                  {error ? (
+                    <Styled.ErrorTitle>
+                      {error.status} Error: {error.heading}
+                    </Styled.ErrorTitle>
+                  ) : null}
+                  {showDetail ? (
+                    <Styled.ErrorBody>
+                      {error.body}
+                      {this.props.dismiss ? (
+                        <span>
+                          <br />
+                          <Styled.Link
+                            role="link"
+                            onClick={this.props.dismiss}
+                            className="dismiss"
+                          >
+                            Try again.
+                          </Styled.Link>
+                        </span>
+                      ) : null}
+                    </Styled.ErrorBody>
+                  ) : null}
+                </div>
+              </Styled.Container>
+              {showDetail ? (
+                <div>
+                  {this.apiTrace ? <ApiTrace trace={this.apiTrace} /> : null}
+                  {this.clientTrace ? (
+                    <ClientTrace
+                      trace={this.clientTrace}
+                      truncate={this.clientTraceTruncate}
+                    />
+                  ) : null}
+                </div>
+              ) : null}
+            </Styled.Inner>
+          </Styled.Wrapper>
+        </Styled.Body>
+      </HelmetProvider>
     );
   }
 }

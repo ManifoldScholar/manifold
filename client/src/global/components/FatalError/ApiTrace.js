@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import * as Styled from "./styles";
 
 export default class FatalErrorApiTrace extends PureComponent {
   static propTypes = {
@@ -13,24 +14,20 @@ export default class FatalErrorApiTrace extends PureComponent {
   render() {
     const trace = this.trace;
     return (
-      <div className={"stacks"}>
+      <Styled.Stacks>
         {Object.keys(trace).map(stackName => {
           return (
-            <div className={"stack"} key={stackName}>
-              <h3>API {stackName}</h3>
-              <ol>
+            <div key={stackName}>
+              <Styled.StackTitle>API {stackName}</Styled.StackTitle>
+              <Styled.LineList>
                 {Object.values(trace[stackName]).map(line => {
-                  return (
-                    <li className={"line"} key={line.id}>
-                      {line.trace}
-                    </li>
-                  );
+                  return <Styled.Line key={line.id}>{line.trace}</Styled.Line>;
                 })}
-              </ol>
+              </Styled.LineList>
             </div>
           );
         })}
-      </div>
+      </Styled.Stacks>
     );
   }
 }
