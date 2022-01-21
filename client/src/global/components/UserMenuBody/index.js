@@ -60,7 +60,6 @@ export class UserMenuBody extends Component {
             <Link
               to={lh.link("frontendStarred")}
               title="My Starred"
-              srTitle="View My Starred page"
               icon="star24"
               onClick={() => this.props.hideUserMenu()}
             />
@@ -84,14 +83,12 @@ export class UserMenuBody extends Component {
           <Link
             as="button"
             title="Edit Profile"
-            srTitle="Edit my profile"
             icon="editProfile24"
             onClick={this.handleProfileClick}
           />
           <Link
             to={lh.link("subscriptions")}
             title="Notifications"
-            srTitle="Edit my notification settings"
             icon="notifications24"
             onClick={() => this.props.hideUserMenu()}
           />
