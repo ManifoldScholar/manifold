@@ -29,12 +29,6 @@ export const standaloneHeaderLayout = {
   paddingTopDesktop: "45px"
 };
 
-export const tocDrawer = {
-  width: "477px",
-  baseInlineStartPadding: "12.579%",
-  baseInlineEndPadding: "10.482%"
-};
-
 export const annotationList = {
   avatarHeight: "32px",
   avatarPlaceholderWidth: "38px",

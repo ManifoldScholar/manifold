@@ -173,8 +173,7 @@ function CollectingToggle({
           "collecting-toggle--project-cover": !inline,
           "collecting-toggle--outlined": outlined,
           "collecting-toggle--filled-always": !outlined,
-          "table-of-contents__collecting-toggle--hidden":
-            hiddenIfUncollected && !collected
+          "collecting-toggle--toc-hidden": hiddenIfUncollected && !collected
         })}
         aria-hidden="true"
         tabIndex={-1}

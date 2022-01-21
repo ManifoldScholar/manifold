@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import classNames from "classnames";
 import Collecting from "frontend/components/collecting";
+import * as Styled from "./styles";
 
 function TocNode({ node, onClick, linkTo, active, children }) {
   const [hovering, setHovering] = useState(false);
 
   return (
-    <li className="table-of-contents__item">
-      <div className="table-of-contents__item-inner">
-        <Link
+    <li>
+      <Styled.Inner>
+        <Styled.ItemLink
           to={linkTo}
           onClick={onClick}
           onMouseEnter={() => setHovering(true)}
@@ -18,19 +17,13 @@ function TocNode({ node, onClick, linkTo, active, children }) {
           onFocus={() => setHovering(true)}
           onBlur={() => setHovering(false)}
           data-id="hide-drawer"
-          className={classNames({
-            "table-of-contents__link": true,
-            [`table-of-contents__link--active`]: active || hovering
-          })}
+          $active={active || hovering}
         >
           {node.label}
-        </Link>
-        <span
+        </Styled.ItemLink>
+        <Styled.Toggle
           onMouseEnter={() => setHovering(true)}
           onMouseLeave={() => setHovering(false)}
-          className={classNames({
-            "table-of-contents__collecting-toggle": true
-          })}
         >
           <Collecting.Toggle
             collectable={{
@@ -43,8 +36,8 @@ function TocNode({ node, onClick, linkTo, active, children }) {
             onDialogClose={() => setHovering(false)}
             hiddenIfUncollected={!hovering}
           />
-        </span>
-      </div>
+        </Styled.Toggle>
+      </Styled.Inner>
       {children}
     </li>
   );

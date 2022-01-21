@@ -226,5 +226,10 @@ export default `
     .icon-star-outline {
       fill: var(--strong-color);
     }
+
+    &--toc-hidden {
+      visibility: hidden;
+      opacity: 0;
+    }
   }
 `;
