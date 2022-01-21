@@ -364,6 +364,20 @@ export function dropzone(margin = "9px", activeSelector = "--show-dropzone") {
   `;
 }
 
+export function dropzoneStyled(margin = "9px", active = false) {
+  return `
+    ${panelRounded}
+    display: block;
+    padding: 0 ${margin};
+    margin-right: -${margin};
+    margin-left: -${margin};
+    background-color: transparent;
+    transition: background-color 0.4s ease;
+
+    ${active && `background-color: var(--dropzone-bg-color);`}
+  `;
+}
+
 export const draggable = `
   ${panelRounded}
   cursor: move; /* fallback for older browsers */

@@ -7,6 +7,7 @@ import CategoryCreator from "./CategoryCreator";
 import SortableCategories from "./SortableCategories";
 import CategoriesList from "./SortableCategories/CategoriesList";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
+import * as Styled from "./styles";
 
 import withScreenReaderStatus from "hoc/with-screen-reader-status";
 
@@ -123,7 +124,7 @@ function CollectionEditor({
   };
 
   return (
-    <div className="group-collection-editor">
+    <Styled.Editor>
       <CategoryCreator onSubmit={createCategory} />
       <SortableCategories
         collection={collection}
@@ -142,7 +143,7 @@ function CollectionEditor({
           />
         )}
       </SortableCategories>
-    </div>
+    </Styled.Editor>
   );
 }
 

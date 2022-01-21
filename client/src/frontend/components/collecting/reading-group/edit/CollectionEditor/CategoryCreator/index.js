@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
+import * as Styled from "./styles";
 
 function CategoryCreator({ onSubmit }) {
   const uid = useUID();
@@ -14,32 +15,23 @@ function CategoryCreator({ onSubmit }) {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="group-collection-editor__category-creator"
-    >
-      <label htmlFor={uid} className="group-collection-editor__label">
-        Create a new category:
-      </label>
-      <div className="group-collection-editor__input-container">
-        <input
+    <Styled.CategoryCreator onSubmit={handleSubmit}>
+      <Styled.Label htmlFor={uid}>Create a new category:</Styled.Label>
+      <Styled.InputWrapper>
+        <Styled.Input
           id={uid}
           type="text"
           value={inputValue}
           onChange={({ target: { value } }) => setInputValue(value)}
           placeholder="Enter Category Name…"
           required
-          className="group-collection-editor__input"
         />
-        <button
-          type="submit"
-          className="group-collection-editor__submit-button"
-        >
+        <Styled.Button type="submit">
           <IconComposer icon="circlePlus32" size={32} />
           <span>Add</span>
-        </button>
-      </div>
-    </form>
+        </Styled.Button>
+      </Styled.InputWrapper>
+    </Styled.CategoryCreator>
   );
 }
 

@@ -1,14 +1,15 @@
 import React from "react";
 import { TypeHeader } from "../parts";
 import SortableCollectables from "../../SortableCollectables";
-import { collectedShape, blockClassName } from "./helpers";
+import { collectedShape } from "./helpers";
+import * as Styled from "./styles";
 
 function CollectedProjects({ showDropzone, ...restProps }) {
   return (
-    <section className={blockClassName(showDropzone)}>
+    <Styled.Type $active={showDropzone}>
       <TypeHeader heading={"Projects:"} />
       <SortableCollectables type="projects" {...restProps} />
-    </section>
+    </Styled.Type>
   );
 }
 

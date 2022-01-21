@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import * as Styled from "./styles";
 
 function CategoryTypeHeader({ heading }) {
   return (
     <header>
-      <h4 className="group-collection-editor__label group-collection-editor__label--collectable-type">
-        {heading}
-      </h4>
+      <Styled.TypeHeaderText>{heading}</Styled.TypeHeaderText>
     </header>
   );
 }

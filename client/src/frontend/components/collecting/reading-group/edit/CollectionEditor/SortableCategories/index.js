@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useReducer } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import Uncategorized from "./Uncategorized";
 import DraggableEventHelper from "../helpers/draggableEvent";
+import * as Styled from "./styles";
 
 function setCategoriesFromProps(collection) {
   const {
@@ -158,17 +158,13 @@ function SortableCategories({ collection, responses, callbacks, children }) {
     <DragDropContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <Droppable droppableId="categories" type="categories">
         {provided => (
-          <div
+          <Styled.Categories
             ref={provided.innerRef}
-            className={classNames({
-              "group-collection-editor__categories": true,
-              "group-collection-editor__categories--active":
-                activeType === "categories"
-            })}
+            $active={activeType === "categories"}
           >
             {children(categories, mappings, activeType)}
             {provided.placeholder}
-          </div>
+          </Styled.Categories>
         )}
       </Droppable>
       <Uncategorized

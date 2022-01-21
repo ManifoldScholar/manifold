@@ -2,17 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
 import { getCollectableIcon } from "../helpers/resolvers";
+import * as Styled from "./styles";
 
 function Empty({ type }) {
   return (
-    <div className="group-collection-editor__collectable-wrapper group-collection-editor__collectable-wrapper--empty">
-      <div className="group-collection-editor__block group-collection-editor__block--empty">
+    <Styled.WrapperEmpty>
+      <Styled.CollectableEmpty>
         <IconComposer icon={getCollectableIcon(type)} size={32} />
-        <span className="group-collection-editor__label group-collection-editor__label--collectable-type">
-          Drag here to add
-        </span>
-      </div>
-    </div>
+        <Styled.Label>Drag here to add</Styled.Label>
+      </Styled.CollectableEmpty>
+    </Styled.WrapperEmpty>
   );
 }
 

@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { CategoryHeader } from "./parts";
 import {
   CollectedProjects,
@@ -9,6 +8,7 @@ import {
   CollectedResourceCollections,
   CollectedResources
 } from "./types";
+import * as Styled from "./styles";
 
 function Category({
   groupId,
@@ -43,28 +43,18 @@ function Category({
   }
 
   function getWrapperProps() {
-    const className = "group-collection-editor__category-wrapper";
-    if (!dragProps) return { className };
+    if (!dragProps) return;
     const { provided } = dragProps;
     return {
       ...provided.draggableProps,
       ref: provided.innerRef,
-      style: provided.draggableProps.style,
-      className
+      style: provided.draggableProps.style
     };
   }
 
-  function getBlockClassName() {
-    return classNames({
-      "group-collection-editor__category": true,
-      "group-collection-editor__category--is-dragging":
-        dragProps?.snapshot.isDragging
-    });
-  }
-
   return (
-    <div {...getWrapperProps()}>
-      <article className={getBlockClassName()}>
+    <Styled.Wrapper {...getWrapperProps()}>
+      <Styled.Category $isDragging={dragProps?.snapshot.isDragging}>
         <CategoryHeader
           dragProps={dragProps}
           category={category}
@@ -72,7 +62,7 @@ function Category({
           onCategoryEdit={callbacks.onCategoryEdit}
           onCategoryRemove={callbacks.onCategoryRemove}
         />
-        <div className="group-collection-editor__category-inner">
+        <Styled.Inner>
           <CollectedProjects {...getCollectedProps("projects")} />
           <CollectedTexts {...getCollectedProps("texts")} />
           <CollectedTextSections {...getCollectedProps("textSections")} />
@@ -80,9 +70,9 @@ function Category({
             {...getCollectedProps("resourceCollections")}
           />
           <CollectedResources {...getCollectedProps("resources")} />
-        </div>
-      </article>
-    </div>
+        </Styled.Inner>
+      </Styled.Category>
+    </Styled.Wrapper>
   );
 }
 

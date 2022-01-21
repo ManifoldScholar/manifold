@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
 import withConfirmation from "hoc/with-confirmation";
+import * as Styled from "./styles";
 
 function CategoryRemove({ onRemove, confirm }) {
   function handleClick() {
@@ -12,10 +13,10 @@ function CategoryRemove({ onRemove, confirm }) {
   }
 
   return (
-    <button onClick={handleClick} className="group-collection-editor__action">
+    <Styled.Button onClick={handleClick}>
       <IconComposer icon="delete32" size="default" />
       <span className="screen-reader-text">Delete category</span>
-    </button>
+    </Styled.Button>
   );
 }
 
