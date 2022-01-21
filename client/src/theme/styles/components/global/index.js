@@ -8,7 +8,6 @@ import contentPlaceholder from "./contentPlaceholder";
 import demoAnimation from "./demoAnimation";
 import dialog from "./dialog";
 import drawer from "./drawer";
-import fatalError from "./fatalError";
 import forms from "./forms";
 import header from "./header";
 import instructionalCopy from "./instructionalCopy";
@@ -30,7 +29,6 @@ import utility from "./utility";
 
 export default `
   ${forms}
-  ${fatalError}
   ${buttons}
   ${confirmableButton}
   ${contentPlaceholder}

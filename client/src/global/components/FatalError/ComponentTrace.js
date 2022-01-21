@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import * as Styled from "./styles";
 
 export default class FatalErrorCompnentTrace extends PureComponent {
   static propTypes = {
@@ -20,35 +21,37 @@ export default class FatalErrorCompnentTrace extends PureComponent {
 
   render() {
     return (
-      <div className={"stacks"}>
-        <div className={"stack"}>
-          <h3>Component Stack</h3>
-          <ol>
+      <Styled.Stacks>
+        <div>
+          <Styled.StackTitle>Component Stack</Styled.StackTitle>
+          <Styled.LineList>
             {this.stackLines.map(line => {
               return (
-                <li className={"line"} key={line.index}>
+                <Styled.Line key={line.index}>
                   {line.index === 0 ? (
                     <div>
                       {"The above error occurred in the "}
-                      <span className="highlight">
+                      <Styled.LineHighlight>
                         {"<"}
                         {line.component}
                         {">"}
-                      </span>
+                      </Styled.LineHighlight>
                       {" component"}
                     </div>
                   ) : (
                     <div>
                       {"in "}{" "}
-                      <span className="highlight">{line.component}</span>
+                      <Styled.LineHighlight>
+                        {line.component}
+                      </Styled.LineHighlight>
                     </div>
                   )}
-                </li>
+                </Styled.Line>
               );
             })}
-          </ol>
+          </Styled.LineList>
         </div>
-      </div>
+      </Styled.Stacks>
     );
   }
 }

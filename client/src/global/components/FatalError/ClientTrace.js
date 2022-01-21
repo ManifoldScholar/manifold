@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import * as Styled from "./styles";
 
 export default class FatalErrorClientTrace extends PureComponent {
   static adjustedStackLines(stackLines) {
@@ -51,29 +52,31 @@ export default class FatalErrorClientTrace extends PureComponent {
     if (!this.state.stackLines) return null;
 
     return (
-      <div className={"stacks"}>
-        <div className={"stack"}>
-          <h3>{this.props.truncate ? "Truncated" : null} Client Stack</h3>
-          <ol>
+      <Styled.Stacks>
+        <>
+          <Styled.StackTitle>
+            {this.props.truncate ? "Truncated" : null} Client Stack
+          </Styled.StackTitle>
+          <Styled.LineList>
             {this.state.stackLines.map(line => {
               return (
-                <li className={"line"} key={line.id}>
+                <Styled.Line key={line.id}>
                   {line.method}
-                  <span className="location">{line.location}</span>
-                </li>
+                  <Styled.LineLocation>{line.location}</Styled.LineLocation>
+                </Styled.Line>
               );
             })}
-          </ol>
+          </Styled.LineList>
           {this.state.hidden > 0 ? (
-            <span className="footnote">
+            <Styled.Footnote>
               {`${this.state.hidden} ${
                 this.state.hidden > 1 ? "lines" : "line"
               } hidden.`}
               {" Consult console for full stack trace."}
-            </span>
+            </Styled.Footnote>
           ) : null}
-        </div>
-      </div>
+        </>
+      </Styled.Stacks>
     );
   }
 }
