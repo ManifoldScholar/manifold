@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
 import isEmpty from "lodash/isEmpty";
-import Drawer from "global/components/drawer";
-import IconComposer from "global/components/utility/IconComposer";
 import TocNode from "./TocNode";
+import * as Styled from "./styles";
 
 class Toc extends PureComponent {
   static propTypes = {
@@ -74,12 +73,9 @@ class Toc extends PureComponent {
     let children = null;
     if (node.children && node.children.length > 0) {
       children = (
-        <ol
-          className={`table-of-contents__list table-of-contents__list--depth-${depth +
-            1}`}
-        >
+        <Styled.Sublist $level={depth + 1}>
           {node.children.map(n => this.visitNode(n, depth + 1))}
-        </ol>
+        </Styled.Sublist>
       );
     }
 
@@ -118,20 +114,18 @@ class Toc extends PureComponent {
     const initialDepth = 0;
     if (this.toc.length <= 0) return this.renderEmpty();
     return (
-      <ol
-        className={`table-of-contents__list table-of-contents__list--depth-0`}
-      >
+      <Styled.List>
         {this.toc.map(node => this.visitNode(node, initialDepth))}
-      </ol>
+      </Styled.List>
     );
   }
 
   renderEmpty() {
     return (
       <>
-        <div className="toc-empty">
+        <Styled.Empty>
           This text does not have a table of contents.
-        </div>
+        </Styled.Empty>
         <hr />
       </>
     );
@@ -151,23 +145,19 @@ class Toc extends PureComponent {
     };
 
     return (
-      <Drawer.Wrapper {...drawerProps}>
-        <nav className="table-of-contents" aria-label="Table of Contents">
+      <Styled.TocDrawer {...drawerProps}>
+        <Styled.Toc aria-label="Table of Contents">
           {this.renderContents()}
           {!isEmpty(this.metadata) ? (
-            <div className="toc-footer">
-              <button onClick={this.showMeta} className="toc-footer__button">
-                <IconComposer
-                  icon="info16"
-                  size={32}
-                  className="toc-footer__icon"
-                />
-                <h4 className="toc-footer__text">About This Text</h4>
-              </button>
-            </div>
+            <Styled.Footer>
+              <Styled.FooterButton onClick={this.showMeta}>
+                <Styled.FooterIcon icon="info16" size={32} />
+                <Styled.FooterText>About This Text</Styled.FooterText>
+              </Styled.FooterButton>
+            </Styled.Footer>
           ) : null}
-        </nav>
-      </Drawer.Wrapper>
+        </Styled.Toc>
+      </Styled.TocDrawer>
     );
   }
 }
