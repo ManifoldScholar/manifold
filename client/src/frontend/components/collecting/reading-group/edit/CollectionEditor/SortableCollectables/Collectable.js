@@ -1,49 +1,37 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { useUID } from "react-uid";
 import { Draggable } from "react-beautiful-dnd";
 import IconComposer from "global/components/utility/IconComposer";
 import { Title, Remove, Drag, Move } from "./parts";
 import { getCollectableIcon } from "../helpers/resolvers";
+import * as Styled from "./styles";
 
 function Collectable({ responses, type, id, index, onRemove, onMove }) {
   const groupLabelId = useUID();
   const [keyboardActionsVisible, setKeyboardActionsVisible] = useState(false);
   const [reverseTabDirection, setReverseTabDirection] = useState(false);
-  const blockClassName = snapshot =>
-    classNames({
-      "group-collection-editor__block": true,
-      "group-collection-editor__block--collectable": true,
-      "group-collection-editor__block--is-dragging": snapshot.isDragging
-    });
-  const actionsClassName = classNames({
-    "group-collection-editor__actions": true,
-    "group-collection-editor__collectable-actions": true,
-    "group-collection-editor__collectable-actions--keyboard-actions-visible": keyboardActionsVisible
-  });
 
   return (
     <Draggable draggableId={id} index={index}>
       {(provided, snapshot) => (
-        <div
+        <Styled.Wrapper
           {...provided.draggableProps}
           ref={provided.innerRef}
           style={provided.draggableProps.style}
-          className="group-collection-editor__collectable-wrapper"
         >
-          <article className={blockClassName(snapshot)}>
-            <header className="group-collection-editor__collectable-header">
+          <Styled.Collectable $isDragging={snapshot.isDragging}>
+            <Styled.Header>
               <IconComposer icon={getCollectableIcon(type)} size={36} />
               <Title id={id} responses={responses} labelId={groupLabelId} />
-            </header>
-            <div
-              className={actionsClassName}
+            </Styled.Header>
+            <Styled.Actions
+              $keyboardActions={keyboardActionsVisible}
               role="group"
               aria-labelledby={groupLabelId}
             >
               <Remove id={id} type={type} onRemove={onRemove} />
-              <div
+              <Styled.TabGroup
                 role="none"
                 onKeyDown={e => {
                   if (e.shiftKey && e.key === "Tab") {
@@ -54,7 +42,6 @@ function Collectable({ responses, type, id, index, onRemove, onMove }) {
                     setReverseTabDirection(false);
                   }
                 }}
-                className="group-collection-editor__keyboard-actions--tab-direction"
               >
                 <Drag
                   dragHandleProps={provided.dragHandleProps}
@@ -67,7 +54,7 @@ function Collectable({ responses, type, id, index, onRemove, onMove }) {
                     }
                   }}
                 />
-                <div className="group-collection-editor__keyboard-actions">
+                <Styled.KeyboardActions $visible={keyboardActionsVisible}>
                   <Move
                     onClick={() => onMove({ id, type, direction: "up" })}
                     direction="up"
@@ -82,11 +69,11 @@ function Collectable({ responses, type, id, index, onRemove, onMove }) {
                     }}
                     direction="down"
                   />
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
+                </Styled.KeyboardActions>
+              </Styled.TabGroup>
+            </Styled.Actions>
+          </Styled.Collectable>
+        </Styled.Wrapper>
       )}
     </Draggable>
   );

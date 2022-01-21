@@ -4,6 +4,7 @@ import Collapse from "global/components/Collapse";
 import IconComposer from "global/components/utility/IconComposer";
 import CategoryEdit from "./CategoryEdit";
 import CategoryRemove from "./CategoryRemove";
+import * as Styled from "./styles";
 
 function CategoryHeader({
   category,
@@ -19,31 +20,26 @@ function CategoryHeader({
   return (
     <>
       <Collapse>
-        <header className="group-collection-editor__block group-collection-editor__block--category">
-          <h3 className="group-collection-editor__label group-collection-editor__label--category">
-            {category?.attributes.title}
-          </h3>
+        <Styled.Header>
+          <Styled.Title>{category?.attributes.title}</Styled.Title>
           {dragProps && (
-            <div className="group-collection-editor__actions">
+            <Styled.Actions>
               <CategoryRemove onRemove={handleRemove} />
-              <Collapse.Toggle className="group-collection-editor__action">
+              <Styled.Action as={Collapse.Toggle}>
                 <IconComposer icon="annotate32" size="default" />
                 <span className="screen-reader-text">Edit category</span>
-              </Collapse.Toggle>
-              <div
-                {...dragProps.provided.dragHandleProps}
-                className="group-collection-editor__action"
-              >
+              </Styled.Action>
+              <Styled.Action {...dragProps.provided.dragHandleProps}>
                 <IconComposer icon="grabber32" size="default" />
-              </div>
-            </div>
+              </Styled.Action>
+            </Styled.Actions>
           )}
-        </header>
+        </Styled.Header>
         {dragProps && (
           <Collapse.Content maxDuration={400}>
             {(visible, toggleVisible) => {
               return (
-                <div className="group-collection-editor__category-inner group-collection-editor__category-inner--drawer">
+                <Styled.Inner>
                   <CategoryEdit
                     category={category}
                     groupId={groupId}
@@ -53,7 +49,7 @@ function CategoryHeader({
                     }}
                     onCancel={toggleVisible}
                   />
-                </div>
+                </Styled.Inner>
               );
             }}
           </Collapse.Content>

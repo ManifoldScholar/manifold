@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import withConfirmation from "hoc/with-confirmation";
+import * as Styled from "./styles";
 
 function Remove({ id, type, onRemove, confirm }) {
   function handleClick() {
@@ -11,13 +12,10 @@ function Remove({ id, type, onRemove, confirm }) {
   }
 
   return (
-    <button
-      onClick={handleClick}
-      className="group-collection-editor__action group-collection-editor__action--padded"
-    >
+    <Styled.ActionPadded onClick={handleClick}>
       <span>Remove</span>
       <span className="screen-reader-text">item</span>
-    </button>
+    </Styled.ActionPadded>
   );
 }
 

@@ -5,6 +5,7 @@ import {
   getResponse,
   idInResponses
 } from "frontend/components/collecting/helpers";
+import * as Styled from "./styles";
 
 function getCollectableTitle(response) {
   const { attributes, type } = response;
@@ -32,10 +33,9 @@ function CollectableTitle({ id, responses, labelId }) {
   const response = getResponse(id, responses);
 
   return (
-    <h5
+    <Styled.Title
       id={labelId}
       dangerouslySetInnerHTML={{ __html: getCollectableTitle(response) }}
-      className="group-collection-editor__collectable-title"
     />
   );
 }
