@@ -4,7 +4,7 @@ import Header from "./Header";
 import List from "./List";
 import ListItem from "./ListItem";
 import ProjectCover from "./ProjectCover";
-import SortBy from "./SortBy";
+import SortBy from "./SortBy/index";
 import EmptyPlaceholder from "./EmptyPlaceholder";
 
 export default {
