@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { ListFilters } from "global/components/list";
+import * as Styled from "./styles";
 
 export default class ProjectCollectionSortBy extends PureComponent {
   static displayName = "ProjectCollection.SortBy";
@@ -101,9 +101,9 @@ export default class ProjectCollectionSortBy extends PureComponent {
 
   renderManualInstructions() {
     return (
-      <div className="project-collection-sort__instructional-copy">
+      <Styled.Instructions>
         Click and drag projects to rearrange them.
-      </div>
+      </Styled.Instructions>
     );
   }
 
@@ -111,13 +111,16 @@ export default class ProjectCollectionSortBy extends PureComponent {
     if (!this.props.projectCollection) return null;
 
     return (
-      <div className="project-collection-sort">
+      <Styled.Wrapper>
         {this.isManualSort && this.renderManualInstructions()}
         {!this.isManualSort && (
-          <ListFilters filters={this.filters} onSubmit={this.handleSubmit} />
+          <Styled.ListFilters
+            filters={this.filters}
+            onSubmit={this.handleSubmit}
+          />
         )}
         {this.renderToggle()}
-      </div>
+      </Styled.Wrapper>
     );
   }
 }
