@@ -9,7 +9,7 @@ const BREAKPOINT = breakpoints[60];
 export const Wrapper = styled("section", transientOptions)`
   --right-column-width: minmax(220px, 28%);
   --right-column-padding: 60px;
-  --column-gap: ${fluidScale("100px", "4.839vw")};
+  --column-gap: min("100px", "4.839vw");
 
   position: relative;
   padding-top: 20px;
