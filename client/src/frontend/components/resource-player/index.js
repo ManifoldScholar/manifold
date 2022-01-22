@@ -1,4 +1,4 @@
-import Audio from "./Audio";
+import Audio from "./Audio/index";
 import Video from "./Video";
 import Iframe from "./Iframe";
 

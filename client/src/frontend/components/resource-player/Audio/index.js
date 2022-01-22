@@ -4,6 +4,7 @@ import debounce from "lodash/debounce";
 import throttle from "lodash/throttle";
 import { UID } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
+import * as Styled from "./styles";
 
 export default class ResourcePlayerAudio extends Component {
   static displayName = "Resource.Player.Audio";
@@ -175,21 +176,16 @@ export default class ResourcePlayerAudio extends Component {
     if (!this.state.error) return null;
 
     return (
-      <div className="audio-player">
-        <div className="cover error">
-          <div className="indicator">
-            <IconComposer
-              icon="stopSign64"
-              className="indicator__icon"
-              size={56.615}
-            />
-          </div>
-          <div
-            className="message"
+      <Styled.Player>
+        <Styled.Cover $isError>
+          <Styled.Indicator>
+            <IconComposer icon="stopSign64" size={56.615} />
+          </Styled.Indicator>
+          <Styled.ErrorMessage
             dangerouslySetInnerHTML={{ __html: this.state.error }}
           />
-        </div>
-      </div>
+        </Styled.Cover>
+      </Styled.Player>
     );
   }
 
@@ -197,21 +193,12 @@ export default class ResourcePlayerAudio extends Component {
     if (this.state.started) return null;
 
     return (
-      <div
-        className="cover"
-        onClick={this.startPlayback}
-        role="button"
-        tabIndex="0"
-      >
+      <Styled.Cover onClick={this.startPlayback} role="button" tabIndex="0">
         <span className="screen-reader-text">Start Playback</span>
-        <div className="indicator">
-          <IconComposer
-            icon="playSolid24"
-            className="indicator__icon"
-            size={42.667}
-          />
-        </div>
-      </div>
+        <Styled.Indicator $absoluteCenter>
+          <IconComposer icon="playSolid24" size={42.667} />
+        </Styled.Indicator>
+      </Styled.Cover>
     );
   }
 
@@ -224,28 +211,20 @@ export default class ResourcePlayerAudio extends Component {
     if (this.state.error) return this.renderError();
 
     return (
-      <div className="audio-player">
+      <Styled.Player>
         {this.renderUnstarted()}
-        <div
-          className="waveform"
-          ref={container => (this.container = container)}
-        />
-        <div className="control-bar">
-          <button className="play-pause" onClick={this.togglePlayback}>
+        <Styled.WaveForm ref={container => (this.container = container)} />
+        <Styled.ControlBar>
+          <button onClick={this.togglePlayback}>
             <span className="screen-reader-text">
               {this.state.playing ? "Pause Playback" : "Start Playback"}
             </span>
-            <IconComposer
-              icon={playPauseIcon}
-              className="audio-player__icon audio-player__icon--play-pause"
-              size={19.2}
-            />
+            <Styled.PlayPauseIcon icon={playPauseIcon} size={19.2} />
           </button>
-          <div className="progress">
-            <div className="time">{this.state.currentTime}</div>
-            <div className="slider">
-              <div
-                className="input-thumb"
+          <Styled.Progress>
+            <Styled.Time>{this.state.currentTime}</Styled.Time>
+            <Styled.Slider>
+              <Styled.ThumbInput
                 style={{
                   left: `calc(${this.state.percent}% - 10px)`
                 }}
@@ -256,7 +235,7 @@ export default class ResourcePlayerAudio extends Component {
                     <label htmlFor={id} className="screen-reader-text">
                       Progress Bar
                     </label>
-                    <input
+                    <Styled.RangeInput
                       id={id}
                       type="range"
                       min="0"
@@ -267,23 +246,18 @@ export default class ResourcePlayerAudio extends Component {
                   </>
                 )}
               </UID>
-            </div>
-            <div className="time duration">{this.state.durationFormatted}</div>
-          </div>
-          <div className="volume">
-            <button className="mute" onClick={this.toggleMute}>
+            </Styled.Slider>
+            <Styled.Time>{this.state.durationFormatted}</Styled.Time>
+          </Styled.Progress>
+          <Styled.Volume>
+            <Styled.Mute onClick={this.toggleMute}>
               <span className="screen-reader-text">
                 {this.state.muted ? "Unmute" : "Mute"}
               </span>
-              <IconComposer
-                icon={muteIcon}
-                className="audio-player__icon audio-player__icon--mute"
-                size={21.333}
-              />
-            </button>
-            <div className="slider">
-              <div
-                className="input-thumb"
+              <Styled.MuteIcon icon={muteIcon} size={21.333} />
+            </Styled.Mute>
+            <Styled.Slider>
+              <Styled.ThumbInput
                 style={{
                   left: `${volume * 0.7 - 10}px`
                 }}
@@ -294,7 +268,7 @@ export default class ResourcePlayerAudio extends Component {
                     <label htmlFor={id} className="screen-reader-text">
                       Adjust Volume
                     </label>
-                    <input
+                    <Styled.RangeInput
                       id={id}
                       type="range"
                       min="0"
@@ -305,10 +279,10 @@ export default class ResourcePlayerAudio extends Component {
                   </>
                 )}
               </UID>
-            </div>
-          </div>
-        </div>
-      </div>
+            </Styled.Slider>
+          </Styled.Volume>
+        </Styled.ControlBar>
+      </Styled.Player>
     );
   }
 }
