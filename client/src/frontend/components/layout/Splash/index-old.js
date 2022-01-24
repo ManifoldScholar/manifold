@@ -158,18 +158,6 @@ export default class Splash extends Component {
     return (
       <section style={this.backgroundStyle()} className={this.wrapperClass()}>
         <div className="container flush rel">
-          <figure ref={el => (this.rightEl = el)} className="right">
-            {this.hasForeground() ? (
-              <img
-                ref={el => (this.imgEl = el)}
-                style={this.foregroundStyle()}
-                onLoad={this.sizeForeground}
-                src={this.attribute("foregroundStyles.original")}
-                alt={this.header(false)}
-              />
-            ) : null}
-            &nbsp;
-          </figure>
           <div className="left">
             <h1
               style={this.headerStyle()}
@@ -188,7 +176,6 @@ export default class Splash extends Component {
               className="feature-body"
               dangerouslySetInnerHTML={{ __html: this.body() }}
             />
-            <div className="splash-content" />
             <div className="feature__buttons utility-button-group utility-button-group--inline">
               {this.hasLink() ? (
                 <a
@@ -231,6 +218,18 @@ export default class Splash extends Component {
               ) : null}
             </div>
           </div>
+          <figure ref={el => (this.rightEl = el)} className="right">
+            {this.hasForeground() ? (
+              <img
+                ref={el => (this.imgEl = el)}
+                style={this.foregroundStyle()}
+                onLoad={this.sizeForeground}
+                src={this.attribute("foregroundStyles.original")}
+                alt={this.header(false)}
+              />
+            ) : null}
+            &nbsp;
+          </figure>
         </div>
       </section>
     );

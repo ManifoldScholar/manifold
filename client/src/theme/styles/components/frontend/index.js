@@ -1,4 +1,3 @@
-import splash from "./splash";
 import collecting from "./collecting";
 import groups from "./groups";
 import layout from "./layout";
@@ -12,7 +11,6 @@ import subscriptions from "./subscriptions";
 import text from "./text";
 
 export default `
-  ${splash}
   ${collecting}
   ${groups}
   ${layout}
