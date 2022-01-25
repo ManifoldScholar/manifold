@@ -44,7 +44,8 @@ export default class ViewHeader extends PureComponent {
       PropTypes.node
     ]),
     iconType: PropTypes.string,
-    link: PropTypes.shape({ path: PropTypes.string, label: PropTypes.string })
+    link: PropTypes.shape({ path: PropTypes.string, label: PropTypes.string }),
+    titleTag: PropTypes.string
   };
 
   static defaultProps = {
@@ -52,7 +53,14 @@ export default class ViewHeader extends PureComponent {
   };
 
   get renderedTitle() {
-    const { children, count, title, subtitle, allowTitleHTML } = this.props;
+    const {
+      children,
+      count,
+      title,
+      subtitle,
+      allowTitleHTML,
+      titleTag
+    } = this.props;
     if (!isString(children) && !isEmpty(children)) return children;
 
     const titleValue = title || children;
@@ -62,8 +70,10 @@ export default class ViewHeader extends PureComponent {
       titleValue
     );
 
+    const Tag = titleTag || "h1";
+
     return (
-      <h1 className="backend-header__title">
+      <Tag className="backend-header__title">
         {!isNil(count) && (
           <em className="backend-header__emphasis">{count} </em>
         )}
@@ -71,7 +81,7 @@ export default class ViewHeader extends PureComponent {
         {subtitle && (
           <span className="backend-header__subtitle">{subtitle}</span>
         )}
-      </h1>
+      </Tag>
     );
   }
 
