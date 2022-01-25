@@ -42,8 +42,8 @@ export const Item = styled.span`
 
 export const IconWrapper = styled.span`
   position: relative;
-  width: ${iconSize};
-  height: ${iconSize};
+  inline-size: ${iconSize};
+  block-size: ${iconSize};
   margin-inline-end: 12px;
 `;
 

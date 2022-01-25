@@ -32,7 +32,6 @@ function Collectable({ responses, type, id, index, onRemove, onMove }) {
             >
               <Remove id={id} type={type} onRemove={onRemove} />
               <Styled.TabGroup
-                role="none"
                 onKeyDown={e => {
                   if (e.shiftKey && e.key === "Tab") {
                     setReverseTabDirection(true);
