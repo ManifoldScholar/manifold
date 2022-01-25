@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useEffect } from "react";
+import React, { useLayoutEffect, useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import useResizeObserver from "use-resize-observer";
 import { useCollapseContext } from "hooks";
@@ -27,6 +27,7 @@ function Content(props) {
   } = props;
   const { visible, contentProps, toggleVisible } = useCollapseContext();
   const { ref: resizeRef, height } = useResizeObserver();
+  const [isMounted, setIsMounted] = useState(false);
 
   const finalClassName = classNames({
     collapse__content: true,
@@ -61,7 +62,11 @@ function Content(props) {
   }, [height, maxDuration]);
 
   useEffect(() => {
-    if (contentRef.current) {
+    setIsMounted(true);
+  }, [setIsMounted]);
+
+  useEffect(() => {
+    if (isMounted && contentRef.current) {
       const interactiveElSelector = [
         "a[href]",
         "button:not(:disabled)",
@@ -80,7 +85,7 @@ function Content(props) {
         el.setAttribute("tabIndex", visible ? 0 : -1)
       );
     }
-  }, [visible]);
+  }, [visible, isMounted]);
 
   return (
     <div
