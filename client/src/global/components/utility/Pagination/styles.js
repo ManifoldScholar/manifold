@@ -35,7 +35,7 @@ export const Column = styled.li`
   flex: 0 0 auto;
 `;
 
-export const Pages = styled.ul`
+export const Pages = styled.div`
   ${listUnstyled}
   display: flex;
   justify-content: center;
