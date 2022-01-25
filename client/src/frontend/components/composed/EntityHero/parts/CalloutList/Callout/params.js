@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
 export const getCalloutParams = (data, type, isLink) => {
-  const slug = data.relationships?.texts?.attributes?.slug ?? null;
+  const slug = data.relationships?.text?.attributes?.slug ?? null;
   const tocSectionId =
-    data.relationships?.texts?.attributes.tocSectionId ?? null;
+    data.relationships?.text?.attributes.tocSectionId ?? null;
 
   switch (type) {
     case "READ":
@@ -12,7 +13,7 @@ export const getCalloutParams = (data, type, isLink) => {
         iconSize: isLink ? 17.333 : 46,
         url: lh.link("reader", slug),
         title: data.attributes.title || "Start Reading",
-        as: null,
+        as: Link,
         primary: true
       };
     case "DOWNLOAD":
@@ -39,7 +40,7 @@ export const getCalloutParams = (data, type, isLink) => {
           ? lh.link("readerSection", slug, tocSectionId)
           : lh.link("reader", slug),
         title: data.attributes.title || "View Contents",
-        as: "a"
+        as: Link
       };
     case "WEBSITE":
       return {

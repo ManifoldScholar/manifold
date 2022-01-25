@@ -5,10 +5,15 @@ import Button from "global/components/atomic/Button";
 import UserLink from "global/components/helper/UserLink";
 import * as Styled from "./styles";
 
-const navProps = (as, url) => {
+const navProps = (as, url, type) => {
   switch (as) {
     case "a":
-      return { href: url, target: "_blank", rel: "noopener noreferrer" };
+      return {
+        href: url,
+        target: "_blank",
+        rel: "noopener noreferrer",
+        download: type === "DOWNLOAD"
+      };
     case "UserLink":
       return { url };
     default:
@@ -51,12 +56,13 @@ export default function Callout({
     primary,
     mismatch
   } = getCalloutParams(callout, type, isLink);
+
   if (mismatch) return null;
 
   return isLink ? (
     <Styled.LinkCallout
       as={as === "UserLink" ? UserLink : as}
-      {...navProps(as, url)}
+      {...navProps(as, url, type)}
     >
       {icon && <Styled.LinkIcon icon={icon} size={iconSize} />}
       <span>{title}</span>
@@ -64,7 +70,7 @@ export default function Callout({
   ) : (
     <Button
       as={as === "UserLink" ? UserLink : as}
-      {...navProps(as, url)}
+      {...navProps(as, url, type)}
       size={buttonSize}
       dark={!lightMode}
       secondary={!primary}
