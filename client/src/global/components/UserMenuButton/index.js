@@ -27,6 +27,12 @@ export default class UserMenuButton extends Component {
     }
   };
 
+  screenReaderText = this.props.authentication.authenticated
+    ? "User settings"
+    : "Sign in";
+
+  ariaHasPopup = this.props.authentication.authenticated ? true : "dialog";
+
   render() {
     const buttonClass = classNames(this.props.className, {
       "button-avatar": true,
@@ -37,10 +43,10 @@ export default class UserMenuButton extends Component {
       <button
         onClick={this.clickHandler}
         className={buttonClass}
-        aria-haspopup
+        aria-haspopup={this.ariaHasPopup}
         aria-expanded={this.props.active}
       >
-        <span className="screen-reader-text">{"User settings"}</span>
+        <span className="screen-reader-text">{this.screenReaderText}</span>
         <Avatar
           url={get(
             this.props.authentication,
