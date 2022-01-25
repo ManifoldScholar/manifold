@@ -121,8 +121,17 @@ export default `
     &:hover,
     &:focus-visible {
       color: var(--color-neutral-text-extra-dark);
-      background-color: var(--color-interaction-light);
       outline: 0;
+    }
+
+    &.button-active:not(:focus-visible),
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-interaction-light);
+    }
+
+    &.button-active:focus-visible {
+      background-color: var(--color-interaction-dark);
     }
 
     &--pad-default {
