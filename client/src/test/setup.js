@@ -75,3 +75,5 @@ reactTransitionGroup.CSSTransition = ({ children }) => {
   return <>{children}</>;
 };
 jest.setMock("react-transition-group", reactTransitionGroup);
+
+jest.mock("theme/styles/globalStyles", () => "");
