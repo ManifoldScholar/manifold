@@ -34,27 +34,21 @@ export default function EntityMetadata({
             __html: data.titleFormatted
           }}
         />
-        {data.draft && (
-          <Styled.Tag aria-hidden $stack={stack}>
-            {"Draft"}
-          </Styled.Tag>
-        )}
+        {data.draft && <Styled.Tag $stack={stack}>{"Draft"}</Styled.Tag>}
       </Styled.TitleWrapper>
-      {data.subtitle && (
-        <Styled.Subtitle aria-hidden>{data.subtitle}</Styled.Subtitle>
-      )}
+      {data.subtitle && <Styled.Subtitle>{data.subtitle}</Styled.Subtitle>}
       {names && (
-        <Styled.Creators aria-hidden>
+        <Styled.Creators>
           <span>{names}</span>
         </Styled.Creators>
       )}
       {!hideDate && date && !data.draft && (
-        <Styled.Date $recentlyUpdated={data.recentlyUpdated} aria-hidden>
+        <Styled.Date $recentlyUpdated={data.recentlyUpdated}>
           <FormattedDate prefix={prefix} format="MMMM, yyyy" date={date} />
         </Styled.Date>
       )}
       {!hideDescription && data.description && (
-        <Styled.Description aria-hidden>{data.description}</Styled.Description>
+        <Styled.Description>{data.description}</Styled.Description>
       )}
     </Styled.MetadataWrapper>
   );
