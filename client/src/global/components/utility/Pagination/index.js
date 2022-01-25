@@ -59,19 +59,14 @@ export default class UtilityPagination extends PureComponent {
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
 
     return (
-      <li key="previous">
-        <Styled.Link
-          as={PageComponent}
-          aria-disabled={!pagination.prevPage}
-          {...pageProps}
-        >
-          <IconComposer
-            icon="arrowLongLeft16"
-            screenReaderText="previous page"
-          />
-          <span>Prev</span>
-        </Styled.Link>
-      </li>
+      <Styled.Link
+        as={PageComponent}
+        aria-disabled={!pagination.prevPage}
+        {...pageProps}
+      >
+        <IconComposer icon="arrowLongLeft16" screenReaderText="previous page" />
+        <span>Prev</span>
+      </Styled.Link>
     );
   }
 
@@ -80,16 +75,14 @@ export default class UtilityPagination extends PureComponent {
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
 
     return (
-      <li key="next">
-        <Styled.Link
-          as={PageComponent}
-          aria-disabled={!pagination.nextPage}
-          {...pageProps}
-        >
-          <span>Next</span>
-          <IconComposer icon="arrowLongRight16" screenReaderText="next page" />
-        </Styled.Link>
-      </li>
+      <Styled.Link
+        as={PageComponent}
+        aria-disabled={!pagination.nextPage}
+        {...pageProps}
+      >
+        <span>Next</span>
+        <IconComposer icon="arrowLongRight16" screenReaderText="next page" />
+      </Styled.Link>
     );
   }
 
@@ -97,12 +90,10 @@ export default class UtilityPagination extends PureComponent {
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
 
     return (
-      <li key={page.key}>
-        <Styled.Link as={PageComponent} {...pageProps}>
-          <span aria-hidden="true">{page.number}</span>
-          <span className="screen-reader-text">Go to page: {page.number}</span>
-        </Styled.Link>
-      </li>
+      <Styled.Link as={PageComponent} {...pageProps}>
+        <span aria-hidden="true">{page.number}</span>
+        <span className="screen-reader-text">Go to page: {page.number}</span>
+      </Styled.Link>
     );
   }
 
@@ -110,12 +101,10 @@ export default class UtilityPagination extends PureComponent {
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
 
     return (
-      <li key={page.key}>
-        <Styled.Link as={PageComponent} aria-current="page" {...pageProps}>
-          <span aria-hidden="true">{page.number}</span>
-          <span className="screen-reader-text">Go to page: {page.number}</span>
-        </Styled.Link>
-      </li>
+      <Styled.Link as={PageComponent} aria-current="page" {...pageProps}>
+        <span aria-hidden="true">{page.number}</span>
+        <span className="screen-reader-text">Go to page: {page.number}</span>
+      </Styled.Link>
     );
   }
 
@@ -131,13 +120,11 @@ export default class UtilityPagination extends PureComponent {
 
   renderCompact(pagination) {
     return (
-      <li>
-        <span>
-          Page {pagination.currentPage}
-          {` `}/{` `}
-          {pagination.totalPages}
-        </span>
-      </li>
+      <span>
+        Page {pagination.currentPage}
+        {` `}/{` `}
+        {pagination.totalPages}
+      </span>
     );
   }
 
@@ -151,9 +138,7 @@ export default class UtilityPagination extends PureComponent {
     return (
       <Styled.Nav aria-label="Pagination">
         <Styled.Columns>
-          <Styled.Column>
-            <ul>{this.previous(pagination)}</ul>
-          </Styled.Column>
+          <Styled.Column>{this.previous(pagination)}</Styled.Column>
           <Styled.Column>
             <Styled.Pages>
               {this.props.compact
@@ -161,9 +146,7 @@ export default class UtilityPagination extends PureComponent {
                 : this.renderRange(pages)}
             </Styled.Pages>
           </Styled.Column>
-          <Styled.Column>
-            <ul>{this.next(pagination)}</ul>
-          </Styled.Column>
+          <Styled.Column>{this.next(pagination)}</Styled.Column>
         </Styled.Columns>
       </Styled.Nav>
     );
