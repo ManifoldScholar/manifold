@@ -1,52 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`global/components/FatalError matches the snapshot 1`] = `
-<SideEffect(BodyClass)
-  className="browse fatal-error-page"
+<HelmetProvider
+  context={Object {}}
 >
-  <section
-    className="fatal-error"
+  <EmotionGlobal
+    styles=""
+  />
+  <Body
+    className="browse"
   >
-    <div
-      className="error-wrapper"
-    >
-      <div
-        className="container"
-      >
-        <header>
-          <IconComposer
-            className="fatal-error__stop-icon"
-            fill="currentColor"
-            icon="stopSign64"
-            size={60}
-            svgProps={
-              Object {
-                "aria-hidden": true,
+    <Wrapper>
+      <Inner>
+        <Container>
+          <Header>
+            <Icon
+              fill="currentColor"
+              icon="stopSign64"
+              size={60}
+              svgProps={
+                Object {
+                  "aria-hidden": true,
+                }
               }
-            }
-          />
-          <h3>
-            We're at a bit of a loose end.
-            <span>
-              <br />
-              Frightfully sorry.
-            </span>
-          </h3>
-        </header>
-        <div
-          aria-atomic="true"
-          aria-live="assertive"
-          className="error-description"
-          role="alert"
-        >
-          <h1>
-            404
-             Error: 
-            Kriss Kross'll make you
-          </h1>
-        </div>
-      </div>
-    </div>
-  </section>
-</SideEffect(BodyClass)>
+            />
+            <Message>
+              We're at a bit of a loose end.
+              <span>
+                <br />
+                Frightfully sorry.
+              </span>
+            </Message>
+          </Header>
+          <div
+            aria-atomic="true"
+            aria-live="assertive"
+            role="alert"
+          >
+            <ErrorTitle>
+              404
+               Error: 
+              Kriss Kross'll make you
+            </ErrorTitle>
+          </div>
+        </Container>
+      </Inner>
+    </Wrapper>
+  </Body>
+</HelmetProvider>
 `;

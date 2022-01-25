@@ -1,14 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`backend/components/project-collection/SortBy matches the snapshot 1`] = `
-<div
-  className="project-collection-sort"
->
-  <div
-    className="project-collection-sort__instructional-copy"
-  >
+<Wrapper>
+  <Instructions>
     Click and drag projects to rearrange them.
-  </div>
+  </Instructions>
   <div
     className="form-secondary"
   >
@@ -39,5 +35,5 @@ exports[`backend/components/project-collection/SortBy matches the snapshot 1`] =
       </div>
     </div>
   </div>
-</div>
+</Wrapper>
 `;
