@@ -24,6 +24,8 @@ function TocNode({ node, onClick, linkTo, active, children }) {
         <Styled.Toggle
           onMouseEnter={() => setHovering(true)}
           onMouseLeave={() => setHovering(false)}
+          onFocus={() => setHovering(true)}
+          onBlur={() => setHovering(false)}
         >
           <Collecting.Toggle
             collectable={{
