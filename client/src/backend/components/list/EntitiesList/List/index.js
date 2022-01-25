@@ -76,6 +76,7 @@ export default class ListEntities extends PureComponent {
     titleIcon: PropTypes.string,
     titleStyle: PropTypes.oneOf(["bar", "title", "section"]),
     titleLink: PropTypes.string,
+    titleTag: PropTypes.string,
     listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
     sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
     showCount: ListEntities.validateShowCounts,
@@ -245,6 +246,7 @@ export default class ListEntities extends PureComponent {
                 titleLink={this.titleLink}
                 pagination={this.pagination}
                 showCount={this.showCountInTitle}
+                titleTag={this.props.titleTag}
               />
             )}
             <div className={contentsWrapperClassName}>

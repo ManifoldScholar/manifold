@@ -10,7 +10,8 @@ export default class ListEntitiesListBarTitle extends PureComponent {
     title: PropTypes.node,
     titleIcon: PropTypes.string,
     titleLink: PropTypes.string,
-    count: PropTypes.node
+    count: PropTypes.node,
+    titleTag: PropTypes.string
   };
 
   get title() {
@@ -36,6 +37,7 @@ export default class ListEntitiesListBarTitle extends PureComponent {
         icon={this.titleIcon}
         iconAccented
         count={this.count}
+        titleTag={this.props.titleTag}
       >
         {this.title}
       </Layout.ViewHeader>

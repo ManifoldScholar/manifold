@@ -123,6 +123,7 @@ class DashboardsAdminContainerImplementation extends PureComponent {
                         titleLink={lh.link("backendProjects")}
                         titleIcon="BEProject64"
                         titleStyle="bar"
+                        titleTag="h2"
                         showCount
                         showCountInTitle
                         unit="project"
@@ -161,6 +162,7 @@ class DashboardsAdminContainerImplementation extends PureComponent {
                       path: lh.link("backendAnalytics"),
                       label: "see all"
                     }}
+                    titleTag="h2"
                   >
                     Analytics
                   </Layout.ViewHeader>
