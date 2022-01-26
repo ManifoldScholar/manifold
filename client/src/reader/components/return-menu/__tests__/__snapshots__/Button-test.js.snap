@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`reader/components/return-menu/Button matches the snapshot 1`] = `
-<button
+<Button
+  $expanded={false}
   aria-expanded={false}
   aria-haspopup={true}
-  className="reader-header__button reader-header__button--pad-default"
   data-id="toggle-menu"
   onClick={[Function]}
 >
   Menu
-</button>
+</Button>
 `;

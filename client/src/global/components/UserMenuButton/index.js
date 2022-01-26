@@ -27,11 +27,11 @@ export default class UserMenuButton extends Component {
     }
   };
 
-  screenReaderText = this.props.authentication.authenticated
+  screenReaderText = this.props.authentication?.authenticated
     ? "User settings"
     : "Sign in";
 
-  ariaHasPopup = this.props.authentication.authenticated ? true : "dialog";
+  ariaHasPopup = this.props.authentication?.authenticated ? true : "dialog";
 
   render() {
     const buttonClass = classNames(this.props.className, {

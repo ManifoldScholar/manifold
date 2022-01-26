@@ -2,14 +2,14 @@
 
 exports[`global/components/UserMenuButton/UserMenuButton matches the snapshot 1`] = `
 <button
-  aria-haspopup={true}
+  aria-haspopup="dialog"
   className="button-avatar button-avatar--frontend"
   onClick={[Function]}
 >
   <span
     className="screen-reader-text"
   >
-    User settings
+    Sign in
   </span>
   <Avatar
     ariaHidden={true}

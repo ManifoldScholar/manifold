@@ -3,9 +3,7 @@ import CreateUpdate from "../CreateUpdate";
 
 describe("global/components/sign-in-up/Login", () => {
   def("user", () => factory("user"));
-  def("authentication", () =>
-    fixtures.authentication({ user: $user })
-  );
+  def("authentication", () => fixtures.authentication({ user: $user }));
   def("handleViewChange", () => jest.fn());
   def("settings", () => factory("settings"));
   def("root", () => (
@@ -20,7 +18,7 @@ describe("global/components/sign-in-up/Login", () => {
   def("wrapper", () => mount($withApp($root)));
 
   it("matches the snapshot", () => {
-    expect(shallow($root)).toMatchSnapshot();
+    expect(mount($withApp($root))).toMatchSnapshot();
   });
 
   it("should trigger handleViewChange callback when show forgot is clicked", () => {

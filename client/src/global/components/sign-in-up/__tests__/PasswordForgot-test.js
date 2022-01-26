@@ -12,7 +12,7 @@ describe("global/components/sign-in-up/PasswordForgot", () => {
   def("wrapper", () => mount($withApp($root)));
 
   it("matches the snapshot", () => {
-    expect(shallow($root)).toMatchSnapshot();
+    expect(mount($withApp($root))).toMatchSnapshot();
   });
 
   it("should trigger handleViewChange callback when show login is clicked", () => {

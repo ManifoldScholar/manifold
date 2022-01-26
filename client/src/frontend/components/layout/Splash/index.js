@@ -33,7 +33,7 @@ export default function Splash(props) {
       $preview={preview}
       $lightMode={mode === "light"}
       $bgColor={backgroundColor}
-      $bgImage={backgroundStyles.original}
+      $bgImage={backgroundStyles?.original}
     >
       <Styled.Container>
         <Styled.Left>

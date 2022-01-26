@@ -1,54 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/layout/Splash matches the snapshot 1`] = `
-<section
-  className="feature feature-dark-style"
-  style={Object {}}
+<Wrapper
+  $lightMode={false}
 >
-  <div
-    className="container flush rel"
-  >
-    <figure
-      className="right"
-    >
-       
-    </figure>
-    <div
-      className="left"
-    >
-      <h1
-        className="heading-primary"
+  <Container>
+    <Left>
+      <Heading
         dangerouslySetInnerHTML={
           Object {
             "__html": "Rowan, Top Dog",
           }
         }
-        style={Object {}}
       />
-      <h2
-        className="heading-secondary"
+      <Subheading
         dangerouslySetInnerHTML={
           Object {
             "__html": "Blah blah blah",
           }
         }
-        style={Object {}}
       />
-      <div
-        className="feature-body"
+      <Body
         dangerouslySetInnerHTML={
           Object {
             "__html": "Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.",
           }
         }
-        style={Object {}}
       />
-      <div
-        className="splash-content"
-      />
-      <div
-        className="feature__buttons utility-button-group utility-button-group--inline"
-      >
+      <Buttons>
         <a
           className="utility-button"
           href="http://dogs.com"
@@ -60,8 +39,9 @@ exports[`frontend/components/layout/Splash matches the snapshot 1`] = `
             Click it, dog
           </span>
         </a>
-      </div>
-    </div>
-  </div>
-</section>
+      </Buttons>
+    </Left>
+    <Right />
+  </Container>
+</Wrapper>
 `;
