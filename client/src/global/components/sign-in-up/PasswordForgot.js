@@ -5,6 +5,7 @@ import { passwordsAPI, requests } from "api";
 import { entityStoreActions, notificationActions } from "actions";
 import get from "lodash/get";
 import GlobalForm from "global/components/form";
+import { UID } from "react-uid";
 
 const { request, flush } = entityStoreActions;
 
@@ -35,10 +36,15 @@ export class PasswordForgotContainer extends Component {
       email: "",
       errors: []
     };
+    this.formRef = React.createRef();
   }
 
   componentWillUnmount() {
     this.props.dispatch(flush([requests.gPasswordRequest]));
+  }
+
+  componentDidMount() {
+    if (this.formRef) this.formRef.focus();
   }
 
   handleSubmit = event => {
@@ -88,33 +94,46 @@ export class PasswordForgotContainer extends Component {
   render() {
     return (
       <div>
-        <form method="" onSubmit={event => this.handleSubmit(event)}>
-          <div className="row-1-p">
-            <div className="form-input form-error">
-              <label htmlFor="password-forgot-email">Email</label>
-              <GlobalForm.Errorable name="email" errors={this.state.errors}>
-                <input
-                  value={this.state.email}
-                  onChange={this.handleInputChange}
-                  name="email"
-                  type="text"
-                  id="password-forgot-email"
-                  placeholder="Email"
-                  aria-describedby="password-forgot-email-error"
-                />
-              </GlobalForm.Errorable>
-            </div>
-          </div>
-          <div className="row-1-p">
-            <div className="form-input">
-              <input
-                className="button-secondary button-secondary--with-room"
-                type="submit"
-                value="Send Password Reset Email"
-              />
-            </div>
-          </div>
-        </form>
+        <UID>
+          {id => (
+            <form
+              method=""
+              onSubmit={event => this.handleSubmit(event)}
+              aria-labelledby={id}
+              tabIndex={-1}
+              ref={el => (this.formRef = el)}
+            >
+              <h2 id={id} className="form-heading">
+                Reset Password
+              </h2>
+              <div className="row-1-p">
+                <div className="form-input form-error">
+                  <label htmlFor="password-forgot-email">Email</label>
+                  <GlobalForm.Errorable name="email" errors={this.state.errors}>
+                    <input
+                      value={this.state.email}
+                      onChange={this.handleInputChange}
+                      name="email"
+                      type="text"
+                      id="password-forgot-email"
+                      placeholder="Email"
+                      aria-describedby="password-forgot-email-error"
+                    />
+                  </GlobalForm.Errorable>
+                </div>
+              </div>
+              <div className="row-1-p">
+                <div className="form-input">
+                  <input
+                    className="button-secondary button-secondary--with-room"
+                    type="submit"
+                    value="Send Password Reset Email"
+                  />
+                </div>
+              </div>
+            </form>
+          )}
+        </UID>
         <p className="login-links">
           <button
             onClick={event =>

@@ -12,6 +12,7 @@ import values from "lodash/values";
 import capitalize from "lodash/capitalize";
 import LoginExternal from "./LoginExternal";
 import { has } from "lodash";
+import { UID } from "react-uid";
 
 const { request, flush } = entityStoreActions;
 
@@ -45,6 +46,11 @@ export class CreateContainer extends Component {
         passwordConfirmation: ""
       }
     };
+    this.formRef = React.createRef();
+  }
+
+  componentDidMount() {
+    if (this.formRef) this.formRef.focus();
   }
 
   componentDidUpdate(prevProps) {
@@ -151,96 +157,109 @@ export class CreateContainer extends Component {
 
     return (
       <div>
-        <form method="post" onSubmit={this.createUser}>
-          <h4 className="form-heading">Create Account</h4>
-          <div className="row-1-p">
-            <Form.Errorable
-              className="form-input"
-              name="attributes[email]"
-              errors={errors}
-              idForError="create-email-error"
+        <UID>
+          {id => (
+            <form
+              method="post"
+              onSubmit={this.createUser}
+              aria-labelledby={id}
+              tabIndex={-1}
+              ref={el => (this.formRef = el)}
+              s
             >
-              <label htmlFor="create-email">Email</label>
-              <input
-                value={this.state.user.email}
-                type="text"
-                name="email"
-                id="create-email"
-                aria-describedby="create-email-error"
-                onChange={this.handleInputChange}
-                placeholder="Email"
-              />
-            </Form.Errorable>
-          </div>
-          <div className="row-1-p">
-            <Form.Errorable
-              className="form-input"
-              idForError="create-name-error"
-              name={["attributes[firstName]", "attributes[lastName]"]}
-              errors={errors}
-            >
-              <label htmlFor="create-name">Name</label>
-              <input
-                value={this.state.user.name}
-                type="text"
-                id="create-name"
-                aria-describedby="create-name-error"
-                name="name"
-                onChange={this.handleInputChange}
-                placeholder="Name"
-              />
-            </Form.Errorable>
-          </div>
-          <div className="row-1-p">
-            <Form.Errorable
-              className="form-input"
-              idForError="create-password-error"
-              name="attributes[password]"
-              errors={errors}
-            >
-              <label htmlFor="create-password">Password</label>
-              <input
-                value={this.state.user.password}
-                type="password"
-                name="password"
-                id="create-password"
-                aria-describedby="create-password-error"
-                onChange={this.handleInputChange}
-                placeholder="Password"
-              />
-            </Form.Errorable>
-          </div>
-          <div className="row-1-p">
-            <Form.Errorable
-              className="form-input"
-              idForError="create-password-confirmation-error"
-              name="attributes[passwordConfirmation]"
-              errors={errors}
-            >
-              <label htmlFor="create-password-confirmation">
-                Confirm Password
-              </label>
-              <input
-                value={this.state.user.passwordConfirmation}
-                type="password"
-                name="passwordConfirmation"
-                id="create-password-confirmation"
-                aria-describedby="create-password-confirmation-error"
-                onChange={this.handleInputChange}
-                placeholder="Confirm Password"
-              />
-            </Form.Errorable>
-          </div>
-          <div className="row-1-p">
-            <div className="form-input">
-              <input
-                className="button-secondary button-secondary--with-room"
-                type="submit"
-                value="Create Account"
-              />
-            </div>
-          </div>
-        </form>
+              <h2 id={id} className="form-heading">
+                Create Account
+              </h2>
+              <div className="row-1-p">
+                <Form.Errorable
+                  className="form-input"
+                  name="attributes[email]"
+                  errors={errors}
+                  idForError="create-email-error"
+                >
+                  <label htmlFor="create-email">Email</label>
+                  <input
+                    value={this.state.user.email}
+                    type="text"
+                    name="email"
+                    id="create-email"
+                    aria-describedby="create-email-error"
+                    onChange={this.handleInputChange}
+                    placeholder="Email"
+                  />
+                </Form.Errorable>
+              </div>
+              <div className="row-1-p">
+                <Form.Errorable
+                  className="form-input"
+                  idForError="create-name-error"
+                  name={["attributes[firstName]", "attributes[lastName]"]}
+                  errors={errors}
+                >
+                  <label htmlFor="create-name">Name</label>
+                  <input
+                    value={this.state.user.name}
+                    type="text"
+                    id="create-name"
+                    aria-describedby="create-name-error"
+                    name="name"
+                    onChange={this.handleInputChange}
+                    placeholder="Name"
+                  />
+                </Form.Errorable>
+              </div>
+              <div className="row-1-p">
+                <Form.Errorable
+                  className="form-input"
+                  idForError="create-password-error"
+                  name="attributes[password]"
+                  errors={errors}
+                >
+                  <label htmlFor="create-password">Password</label>
+                  <input
+                    value={this.state.user.password}
+                    type="password"
+                    name="password"
+                    id="create-password"
+                    aria-describedby="create-password-error"
+                    onChange={this.handleInputChange}
+                    placeholder="Password"
+                  />
+                </Form.Errorable>
+              </div>
+              <div className="row-1-p">
+                <Form.Errorable
+                  className="form-input"
+                  idForError="create-password-confirmation-error"
+                  name="attributes[passwordConfirmation]"
+                  errors={errors}
+                >
+                  <label htmlFor="create-password-confirmation">
+                    Confirm Password
+                  </label>
+                  <input
+                    value={this.state.user.passwordConfirmation}
+                    type="password"
+                    name="passwordConfirmation"
+                    id="create-password-confirmation"
+                    aria-describedby="create-password-confirmation-error"
+                    onChange={this.handleInputChange}
+                    placeholder="Confirm Password"
+                  />
+                </Form.Errorable>
+              </div>
+              <div className="row-1-p">
+                <div className="form-input">
+                  <input
+                    className="button-secondary button-secondary--with-room"
+                    type="submit"
+                    value="Create Account"
+                  />
+                </div>
+              </div>
+            </form>
+          )}
+        </UID>
         {this.OAuthProviderNames && (
           <>
             <p className="login-links">
