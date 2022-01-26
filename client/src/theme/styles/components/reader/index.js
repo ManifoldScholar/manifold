@@ -11,7 +11,6 @@ import textSection from "./textSection";
 import sectionCategoryLabel from "./sectionCategoryLabel";
 import sectionPagination from "./sectionPagination";
 import sectionNextSection from "./sectionNextSection";
-import returnMenu from "./returnMenu";
 
 export default `
 ${annotations}
@@ -27,5 +26,4 @@ ${textSection}
 ${sectionCategoryLabel}
 ${sectionPagination}
 ${sectionNextSection}
-${returnMenu}
 `;
