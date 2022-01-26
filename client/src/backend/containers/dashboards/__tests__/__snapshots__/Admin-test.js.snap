@@ -70,7 +70,7 @@ Array [
                         <div
                           class="backend-header__title-block"
                         >
-                          <h1
+                          <h2
                             class="backend-header__title"
                           >
                             <em
@@ -79,7 +79,7 @@ Array [
                               2 
                             </em>
                             Projects
-                          </h1>
+                          </h2>
                         </div>
                       </div>
                     </div>
@@ -501,102 +501,90 @@ Array [
                           <li
                             class="css-ovcui1-Column e1c2l6mw2"
                           >
-                            <ul>
-                              <li>
-                                <a
-                                  aria-disabled="true"
-                                  class="css-7d1j7a-Link e1c2l6mw0"
-                                  href="#entities-list-1"
-                                >
-                                  <svg
-                                    aria-hidden="true"
-                                    class="manicon-svg svg-icon--arrowLongLeft16"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 16"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                                      transform="rotate(180 12 8)"
-                                    />
-                                  </svg>
-                                  <span>
-                                    Prev
-                                  </span>
-                                </a>
-                              </li>
-                            </ul>
+                            <a
+                              aria-disabled="true"
+                              class="css-7d1j7a-Link e1c2l6mw0"
+                              href="#entities-list-1"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                class="manicon-svg svg-icon--arrowLongLeft16"
+                                fill="currentColor"
+                                viewBox="0 0 24 16"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                                  transform="rotate(180 12 8)"
+                                />
+                              </svg>
+                              <span>
+                                Prev
+                              </span>
+                            </a>
                           </li>
                           <li
                             class="css-ovcui1-Column e1c2l6mw2"
                           >
-                            <ul
+                            <div
                               class="css-px7ngz-Pages e1c2l6mw1"
                             >
-                              <li>
-                                <a
-                                  aria-current="page"
-                                  class="css-7d1j7a-Link e1c2l6mw0"
-                                  href="#entities-list-1"
+                              <a
+                                aria-current="page"
+                                class="css-7d1j7a-Link e1c2l6mw0"
+                                href="#entities-list-1"
+                              >
+                                <span
+                                  aria-hidden="true"
                                 >
-                                  <span
-                                    aria-hidden="true"
-                                  >
-                                    1
-                                  </span>
-                                  <span
-                                    class="screen-reader-text"
-                                  >
-                                    Go to page: 1
-                                  </span>
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  class="css-7d1j7a-Link e1c2l6mw0"
-                                  href="#entities-list-1"
+                                  1
+                                </span>
+                                <span
+                                  class="screen-reader-text"
                                 >
-                                  <span
-                                    aria-hidden="true"
-                                  >
-                                    2
-                                  </span>
-                                  <span
-                                    class="screen-reader-text"
-                                  >
-                                    Go to page: 2
-                                  </span>
-                                </a>
-                              </li>
-                            </ul>
+                                  Go to page: 1
+                                </span>
+                              </a>
+                              <a
+                                class="css-7d1j7a-Link e1c2l6mw0"
+                                href="#entities-list-1"
+                              >
+                                <span
+                                  aria-hidden="true"
+                                >
+                                  2
+                                </span>
+                                <span
+                                  class="screen-reader-text"
+                                >
+                                  Go to page: 2
+                                </span>
+                              </a>
+                            </div>
                           </li>
                           <li
                             class="css-ovcui1-Column e1c2l6mw2"
                           >
-                            <ul>
-                              <li>
-                                <a
-                                  aria-disabled="false"
-                                  class="css-7d1j7a-Link e1c2l6mw0"
-                                  href="#entities-list-1"
-                                >
-                                  <span>
-                                    Next
-                                  </span>
-                                  <svg
-                                    aria-hidden="true"
-                                    class="manicon-svg svg-icon--arrowLongRight16"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 16"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                                    />
-                                  </svg>
-                                </a>
-                              </li>
-                            </ul>
+                            <a
+                              aria-disabled="false"
+                              class="css-7d1j7a-Link e1c2l6mw0"
+                              href="#entities-list-1"
+                            >
+                              <span>
+                                Next
+                              </span>
+                              <svg
+                                aria-hidden="true"
+                                class="manicon-svg svg-icon--arrowLongRight16"
+                                fill="currentColor"
+                                viewBox="0 0 24 16"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                                />
+                              </svg>
+                            </a>
                           </li>
                         </ul>
                       </nav>
