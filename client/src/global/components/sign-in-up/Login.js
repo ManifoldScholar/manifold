@@ -5,6 +5,7 @@ import { get } from "lodash";
 import classNames from "classnames";
 import LoginExternal from "./LoginExternal";
 import Notifications from "global/containers/Notifications";
+import { UID } from "react-uid";
 
 export default class Login extends Component {
   static propTypes = {
@@ -24,6 +25,11 @@ export default class Login extends Component {
   constructor() {
     super();
     this.state = { email: "", password: "" };
+    this.formRef = React.createRef();
+  }
+
+  componentDidMount() {
+    if (this.formRef) this.formRef.focus();
   }
 
   componentDidUpdate(prevProps) {
@@ -72,48 +78,66 @@ export default class Login extends Component {
             />
           </div>
         )}
-        <form method="post" onSubmit={this.handleLogin}>
-          <div className="row-1-p">
-            <div className="form-input form-error">
-              <label htmlFor="login-email">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={this.state.email}
-                onChange={this.updateInput}
-                id="login-email"
-                placeholder="Email"
-              />
-            </div>
-          </div>
-          <div className="row-1-p">
-            <div className="form-input">
-              <label htmlFor="login-password">Password</label>
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.updateInput}
-                id="login-password"
-                placeholder="Password"
-              />
-            </div>
-          </div>
-          <div className="row-1-p">
-            <div className={submitClass}>
-              {this.authenticationError() ? (
-                <span style={{ marginTop: 0 }} role="alert" className="error">
-                  {this.authenticationError()}
-                </span>
-              ) : null}
-              <input
-                className="button-secondary button-secondary--with-room"
-                type="submit"
-                value="Log in"
-              />
-            </div>
-          </div>
-        </form>
+        <UID>
+          {id => (
+            <form
+              method="post"
+              onSubmit={this.handleLogin}
+              aria-labelledby={id}
+              tabIndex={-1}
+              ref={el => (this.formRef = el)}
+            >
+              <h2 id={id} className="form-heading">
+                Log In
+              </h2>
+              <div className="row-1-p">
+                <div className="form-input form-error">
+                  <label htmlFor="login-email">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.updateInput}
+                    id="login-email"
+                    placeholder="Email"
+                    inputMode="email"
+                  />
+                </div>
+              </div>
+              <div className="row-1-p">
+                <div className="form-input">
+                  <label htmlFor="login-password">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.updateInput}
+                    id="login-password"
+                    placeholder="Password"
+                  />
+                </div>
+              </div>
+              <div className="row-1-p">
+                <div className={submitClass}>
+                  {this.authenticationError() ? (
+                    <span
+                      style={{ marginTop: 0 }}
+                      role="alert"
+                      className="error"
+                    >
+                      {this.authenticationError()}
+                    </span>
+                  ) : null}
+                  <input
+                    className="button-secondary button-secondary--with-room"
+                    type="submit"
+                    value="Log in"
+                  />
+                </div>
+              </div>
+            </form>
+          )}
+        </UID>
         <p className="login-links">
           <button
             onClick={event =>

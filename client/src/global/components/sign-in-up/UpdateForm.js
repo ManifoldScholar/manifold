@@ -10,6 +10,7 @@ import hasIn from "lodash/hasIn";
 import Dropzone from "react-dropzone";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
+import { UID } from "react-uid";
 
 const { request } = entityStoreActions;
 
@@ -36,6 +37,11 @@ export class UpdateFormContainer extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState(props);
+    this.formRef = React.createRef();
+  }
+
+  componentDidMount() {
+    if (this.formRef) this.formRef.focus();
   }
 
   componentDidUpdate(prevProps) {
@@ -375,35 +381,49 @@ export class UpdateFormContainer extends Component {
     if (!currentUser) return null;
     return (
       <section className="sign-in-up-update">
-        <form autoComplete="off" method="post" onSubmit={this.updateUser}>
-          {this.props.mode === "new" ? (
-            <div>
-              <h4 className="form-heading">Congratulations!</h4>
-              <p className="overlay-copy">
-                {`Your account has been successfully created and you are now
-                  logged in to Manifold. From now on, I'm going to call you`}
-              </p>
-              <h4 className="nickname">{this.displayNickname()}</h4>
-            </div>
-          ) : (
-            <div>
-              <h4 className="form-heading">
-                Hello,{" "}
-                <span className="nickname">{this.displayNickname()}</span>.
-              </h4>
-            </div>
+        <UID>
+          {id => (
+            <form
+              autoComplete="off"
+              method="post"
+              onSubmit={this.updateUser}
+              tabIndex={-1}
+              ref={el => (this.formRef = el)}
+              aria-labelledby={id}
+            >
+              <h2 id={id} className="screen-reader-text">
+                Account Update
+              </h2>
+              {this.props.mode === "new" ? (
+                <div>
+                  <h4 className="form-heading">Congratulations!</h4>
+                  <p className="overlay-copy">
+                    {`Your account has been successfully created and you are now
+                logged in to Manifold. From now on, I'm going to call you`}
+                  </p>
+                  <h4 className="nickname">{this.displayNickname()}</h4>
+                </div>
+              ) : (
+                <div>
+                  <h4 className="form-heading">
+                    Hello,{" "}
+                    <span className="nickname">{this.displayNickname()}</span>.
+                  </h4>
+                </div>
+              )}
+              {this.renderProfileForm(errors)}
+              <div className="row-1-p">
+                <div className="form-input form-error">
+                  <input
+                    className="button-secondary button-secondary--with-room"
+                    type="submit"
+                    value="Save Changes"
+                  />
+                </div>
+              </div>
+            </form>
           )}
-          {this.renderProfileForm(errors)}
-          <div className="row-1-p">
-            <div className="form-input form-error">
-              <input
-                className="button-secondary button-secondary--with-room"
-                type="submit"
-                value="Save Changes"
-              />
-            </div>
-          </div>
-        </form>
+        </UID>
 
         <div className="subscriptions">
           <span className="subscriptions__label">

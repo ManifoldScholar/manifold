@@ -38,9 +38,9 @@ class Overlay extends Component {
                     <figure className="overlay-header__logo" aria-hidden="true">
                       <Utility.IconComposer size={26} icon="manifoldLogo32" />
                     </figure>
-                    <h2 id={id} className="screen-reader-text">
+                    <h1 id={id} className="screen-reader-text">
                       Create/Manage Account
-                    </h2>
+                    </h1>
                     <CloseButton onClick={this.props.hideSignInUpOverlay} />
                   </div>
                 </div>
