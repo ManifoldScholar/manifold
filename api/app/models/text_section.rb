@@ -71,6 +71,15 @@ class TextSection < ApplicationRecord
     callbacks: :async,
     batch_size: 25,
     merge_mappings: true,
+    settings: {
+      index: {
+        mapping: {
+          nested_objects: {
+            limit: 20_000
+          }
+        }
+      }
+    },
     mappings: {
       properties: {
         text_nodes: {

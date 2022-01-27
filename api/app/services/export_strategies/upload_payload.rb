@@ -25,15 +25,6 @@ module ExportStrategies
 
     alias target_path target_name
 
-    # @!attribute [r] source_path
-    #
-    # The local path to the file on the filesystem.
-    #
-    # @return [String]
-    memoize def source_path
-      export.asset_path
-    end
-
     # @!attribute [r] target_directory
     # @return [String]
     memoize def target_directory
@@ -44,6 +35,19 @@ module ExportStrategies
     # @return [Dry::Monads::Result]
     def upload_with_chosen_strategy!
       configuration.upload_with_chosen_strategy! self
+    end
+
+    # Download a copy of the {ProjectExport}'s package into a tempfile and make it
+    # available for access, uploading, etc.
+    #
+    # @yield [source]
+    # @yieldparam [Tempfile] source the temporarily-downloaded export package
+    # @yieldreturn [void]
+    # @return [void]
+    def with_local_export_source
+      export.asset.download do |source|
+        yield source
+      end
     end
   end
 end

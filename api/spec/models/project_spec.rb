@@ -302,21 +302,29 @@ RSpec.describe Project, type: :model do
         it { is_expected.to have(expected_total_count).items }
 
         it "does not duplicate any items" do
-          expect(entire_collection.uniq).to have(expected_total_count).items
+          expect(entire_collection).to have(expected_total_count).items
         end
       end
 
       1.upto(3).each do |page_number|
-        include_examples "valid counts for a page", page_number 
+        include_examples "valid counts for a page", page_number
       end
     end
 
     context "for a manual collection" do
       let!(:project_collection) { FactoryBot.create :project_collection, smart: false }
+      let!(:other_manual_collection) { FactoryBot.create :project_collection, smart: false }
 
       let!(:collection_projects) do
         collected_projects.map do |project|
           FactoryBot.create :collection_project, project_collection: project_collection, project: project
+        end
+      end
+
+      # Ensure collection project rankings are not duplicated
+      let!(:other_manual_collection_projects) do
+        collected_projects.map do |project|
+          FactoryBot.create :collection_project, project_collection: other_manual_collection, project: project
         end
       end
 

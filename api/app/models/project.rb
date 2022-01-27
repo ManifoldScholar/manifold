@@ -70,7 +70,7 @@ class Project < ApplicationRecord
 
   # Associations
   has_many :collection_projects, dependent: :destroy, inverse_of: :project
-  has_many :collection_project_rankings, through: :collection_projects, source: :ranking
+  has_many :collection_project_rankings, source: :ranking
   has_many :project_collections, through: :collection_projects, dependent: :destroy
   has_many :texts, dependent: :destroy, inverse_of: :project
   has_many :text_summaries, inverse_of: :project
@@ -196,7 +196,7 @@ class Project < ApplicationRecord
         .arel_table[:id]
         .eq(CollectionProjectRanking.arel_table[:collection_project_id])
 
-    joins(:collection_project_rankings).merge(CollectionProjectRanking.ranked)
+    joins(:collection_projects).joins(:collection_project_rankings).merge(CollectionProjectRanking.ranked)
       .where(is_same_project.and(in_same_collection))
   end)
 
@@ -222,7 +222,9 @@ class Project < ApplicationRecord
 
     collection = ProjectCollection.friendly.find(collection_id)
 
-    ranked_by_collection.in_collection(collection)
+    in_collection(collection)
+      .ranked_by_collection
+      .merge(CollectionProjectRanking.by_collection(collection))
   end
 
   # Search
