@@ -2,7 +2,8 @@ import {
   transparentize,
   defaultTransitionProps,
   respond,
-  loginFormPrimary
+  loginFormPrimary,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 
 export default `
@@ -74,6 +75,17 @@ export default `
       input[type='password'],
       input[type='submit'] {
         width: 100%;
+      }
+
+      .focusable-form {
+        &:focus:not(:focus-visible) {
+          outline: 0;
+        }
+
+        &:focus-visible {
+          ${defaultFocusStyle}
+          outline-offset: 5px;
+        }
       }
     }
 
