@@ -10,6 +10,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { Global as GlobalStyles } from "@emotion/react";
 import styles from "theme/styles/globalStyles";
 import "utils/i18n";
+import { UIDReset } from "react-uid";
 
 class App extends Component {
   static propTypes = {
@@ -96,17 +97,19 @@ class App extends Component {
     const { routerProps, Router } = this.getRouter();
     return (
       <Provider store={this.props.store} key="provider">
-        <Router {...routerProps}>
-          <Analytics
-            dispatch={this.props.store.dispatch}
-            settings={this.settings}
-          >
-            <HelmetProvider context={this.props.helmetContext}>
-              <GlobalStyles styles={styles} />
-              <Manifold confirm={this.renderConfirm()} />
-            </HelmetProvider>
-          </Analytics>
-        </Router>
+        <UIDReset prefix="uid_">
+          <Router {...routerProps}>
+            <Analytics
+              dispatch={this.props.store.dispatch}
+              settings={this.settings}
+            >
+              <HelmetProvider context={this.props.helmetContext}>
+                <GlobalStyles styles={styles} />
+                <Manifold confirm={this.renderConfirm()} />
+              </HelmetProvider>
+            </Analytics>
+          </Router>
+        </UIDReset>
       </Provider>
     );
   }

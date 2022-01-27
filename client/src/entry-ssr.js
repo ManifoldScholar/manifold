@@ -70,13 +70,22 @@ const render = (req, res, store) => {
   };
 
   const helmetContext = {};
+
+  const cache = createCache({ key: "emotion" });
+  const {
+    extractCriticalToChunks,
+    constructStyleTagsFromChunks
+  } = createEmotionServer(cache);
+
   const appComponent = (
-    <App
-      helmetContext={helmetContext}
-      staticContext={routingContext}
-      staticRequest={req}
-      store={store}
-    />
+    <CacheProvider value={cache}>
+      <App
+        helmetContext={helmetContext}
+        staticContext={routingContext}
+        staticRequest={req}
+        store={store}
+      />
+    </CacheProvider>
   );
 
   resetDndServerContext();
@@ -85,17 +94,9 @@ const render = (req, res, store) => {
   let isError = false;
 
   const stats = readStats("Client");
-  const cache = createCache({ key: "emotion" });
-  const {
-    extractCriticalToChunks,
-    constructStyleTagsFromChunks
-  } = createEmotionServer(cache);
-
   try {
     renderString = ReactDOM.renderToString(
-      <CacheProvider value={cache}>
-        <HtmlBody component={appComponent} stats={stats} store={store} />
-      </CacheProvider>
+      <HtmlBody component={appComponent} stats={stats} store={store} />
     );
   } catch (renderError) {
     isError = true;
