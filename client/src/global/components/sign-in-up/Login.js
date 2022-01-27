@@ -86,6 +86,7 @@ export default class Login extends Component {
               aria-labelledby={id}
               tabIndex={-1}
               ref={el => (this.formRef = el)}
+              className="focusable-form"
             >
               <h2 id={id} className="form-heading">
                 Log In

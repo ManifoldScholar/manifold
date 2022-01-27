@@ -1,7 +1,18 @@
-import { respond, buttonAvatar, headingPrimary } from "theme/styles/mixins";
+import {
+  respond,
+  buttonAvatar,
+  headingPrimary,
+  defaultFocusStyle
+} from "theme/styles/mixins";
 
 export default `
   .sign-in-up-update {
+    form {
+      &:focus-visible {
+        ${defaultFocusStyle}
+        outline-offset: 5px;
+      }
+    }
     .form-group + .form-group {
       margin-top: 0;
 

@@ -24,6 +24,10 @@ export const loginFormPrimary = `
         margin-top: 14px;
         margin-left: 0;
       }
+
+      &:focus-visible {
+        color: var(--hover-color);
+      }
     }
 
     a {
