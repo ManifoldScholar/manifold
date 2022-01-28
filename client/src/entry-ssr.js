@@ -13,17 +13,13 @@ import readStats from "./servers/common/read-stats";
 import CookieHelper from "helpers/cookie/Server";
 import exceptionRenderer from "./helpers/exceptionRenderer";
 import manifoldBootstrap from "./bootstrap";
-import { isPromise } from "utils/promise";
-import isFunction from "lodash/isFunction";
 import has from "lodash/has";
-import { matchRoutes } from "react-router-config";
-import { createLocation } from "history";
-import getRoutes from "/routes";
 import FatalError from "global/components/FatalError";
 import { resetServerContext as resetDndServerContext } from "react-beautiful-dnd";
 import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
+import { createServerFetchDataContext } from "hooks/api/use-fetch";
 
 // Node 8.x on Ubuntu 18 leads to failed SSL handshakes. Setting this
 // default TLS value appears to fix this. I believe this issue has
@@ -62,13 +58,10 @@ const fatalErrorOutput = (errorComponent, store) => {
   );
 };
 
-const render = (req, res, store) => {
+const render = async (req, res, store) => {
   store.dispatch({ type: "SERVER_LOADED", payload: req.originalUrl });
 
-  const routingContext = {
-    fetchDataPromises: []
-  };
-
+  const routingContext = {};
   const helmetContext = {};
 
   const cache = createCache({ key: "emotion" });
@@ -77,15 +70,22 @@ const render = (req, res, store) => {
     constructStyleTagsFromChunks
   } = createEmotionServer(cache);
 
+  const {
+    ServerFetchDataContext,
+    isFetchingComplete
+  } = createServerFetchDataContext();
+
   const appComponent = (
-    <CacheProvider value={cache}>
-      <App
-        helmetContext={helmetContext}
-        staticContext={routingContext}
-        staticRequest={req}
-        store={store}
-      />
-    </CacheProvider>
+    <ServerFetchDataContext>
+      <CacheProvider value={cache}>
+        <App
+          helmetContext={helmetContext}
+          staticContext={routingContext}
+          staticRequest={req}
+          store={store}
+        />
+      </CacheProvider>
+    </ServerFetchDataContext>
   );
 
   resetDndServerContext();
@@ -94,7 +94,16 @@ const render = (req, res, store) => {
   let isError = false;
 
   const stats = readStats("Client");
+
   try {
+    ch.notice("Rendering application on server.", "floppy_disk");
+    ReactDOM.renderToString(
+      <HtmlBody component={appComponent} stats={stats} store={store} />
+    );
+
+    await isFetchingComplete();
+    ch.notice("ResolveData completed.", "floppy_disk");
+
     renderString = ReactDOM.renderToString(
       <HtmlBody component={appComponent} stats={stats} store={store} />
     );
@@ -135,42 +144,6 @@ const render = (req, res, store) => {
   }
 };
 
-const fetchRouteData = (req, store) => {
-  const routes = getRoutes();
-  const location = createLocation(req.url, {}, "SSR", null);
-  const branch = matchRoutes(routes, location.pathname);
-  const promises = branch.reduce((allPromises, matchedRoute) => {
-    const component = matchedRoute.route.component;
-    if (isFunction(component.fetchData)) {
-      const result = component.fetchData(
-        store.getState,
-        store.dispatch,
-        location,
-        matchedRoute.match
-      );
-      if (isPromise(result)) {
-        allPromises.push(result);
-      }
-      if (Array.isArray(result)) {
-        result.forEach(aResult => {
-          if (isPromise(aResult)) allPromises.push(aResult);
-        });
-      }
-      return allPromises;
-    }
-    return allPromises;
-  }, []);
-  promises.forEach(promise => {
-    promise.catch(resp => {
-      ch.error(
-        `API Error ${resp.status} ${resp.statusText}: ${resp.request.endpoint}`,
-        "rain_cloud"
-      );
-    });
-  });
-  return Promise.all(promises);
-};
-
 const performBootstrap = (req, res, store) => {
   const cookie = new CookieHelper(req, res);
   return manifoldBootstrap(store.getState, store.dispatch, cookie);
@@ -189,27 +162,16 @@ const requestHandler = (req, res) => {
   // 2. Fetch any data, as the user
   // 3. Send the response to the user
   /* eslint-disable max-len */
-  performBootstrap(req, res, store)
-    .then(
-      () => {
-        ch.plain("App bootstrapped");
-        return fetchRouteData(req, store);
-      },
-      () => {
-        ch.error("App bootstrap failed", "rain_cloud");
-        return fetchRouteData(req, store);
-      }
-    )
-    .then(
-      () => {
-        ch.plain("Route data fetched");
-        render(req, res, store);
-      },
-      () => {
-        ch.error("Unable to fetch route data", "rain_cloud");
-        render(req, res, store);
-      }
-    );
+  performBootstrap(req, res, store).then(
+    () => {
+      ch.plain("App bootstrapped");
+      render(req, res, store);
+    },
+    () => {
+      ch.error("App bootstrap failed", "rain_cloud");
+      render(req, res, store);
+    }
+  );
 };
 
 // Create the app and the server

@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { commonActions } from "actions/helpers";
 import get from "lodash/get";
-import { select } from "utils/entityUtils";
-import { requests } from "api";
 import Collections from "./Collections";
 import Projects from "./Projects";
 import Feature from "./Feature";
@@ -18,17 +16,6 @@ export class HomeContainer extends Component {
       settings,
       "attributes.calculated.hasVisibleHomeProjectCollections"
     );
-  }
-
-  static fetchData(getState, dispatch) {
-    const promises = [];
-    promises.push(Feature.fetchFeatures(getState, dispatch));
-    if (this.showProjects(select(requests.settings, getState().entityStore))) {
-      promises.push(Projects.fetchProjects(getState, dispatch));
-    } else {
-      promises.push(Collections.fetchCollections(getState, dispatch));
-    }
-    return Promise.all(promises);
   }
 
   static mapStateToProps = state => {
