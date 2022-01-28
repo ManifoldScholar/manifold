@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
 import Button from "global/components/atomic/Button";
 import { defaultTransitionProps, defaultHoverStyle } from "theme/styles/mixins";
+import { transientOptions } from "helpers/emotionHelpers";
 
 export const ErrorButton = styled(Button)`
   background-color: var(--color-notification-warning-light);
@@ -20,7 +21,7 @@ export const LinkIcon = styled(IconComposer)`
   transition: color ${defaultTransitionProps};
 `;
 
-export const LinkCallout = styled(Link)`
+export const LinkCallout = styled(Link, transientOptions)`
   font-family: var(--font-family-heading);
   font-size: 13px;
   font-weight: var(--font-weight-semibold);
