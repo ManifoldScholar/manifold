@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`backend/containers/Backend/index matches the snapshot when rendered 1`] = `null`;
+exports[`backend/containers/Backend/index matches the snapshot when rendered 1`] = `""`;

@@ -71,6 +71,10 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
               "toComponent": [Function],
               "toString": [Function],
             },
+            "priority": Object {
+              "toComponent": [Function],
+              "toString": [Function],
+            },
             "script": Object {
               "toComponent": [Function],
               "toString": [Function],
@@ -90,11 +94,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
       <Provider
         store={
           Object {
+            "@@observable": [Function],
             "dispatch": [Function],
             "getState": [Function],
             "replaceReducer": [Function],
             "subscribe": [Function],
-            Symbol(observable): [Function],
           }
         }
       >

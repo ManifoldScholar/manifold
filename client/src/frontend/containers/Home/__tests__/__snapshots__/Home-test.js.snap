@@ -138,7 +138,7 @@ exports[`frontend/containers/Home/Home matches the snapshot 1`] = `
       }
     }
   />
-  <withRouter(Connect(HigherOrder.FetchData('HomeProjectsContainer)))
+  <HomeProjectContainer
     authentication={
       Object {
         "authenticated": true,

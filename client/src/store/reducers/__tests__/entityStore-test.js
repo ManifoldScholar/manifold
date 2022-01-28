@@ -1,6 +1,5 @@
 import entityStoreReducer from "../entityStore";
 import { initialState } from "../entityStore";
-import { entityStoreActions } from "actions";
 
 describe("store/reducers/entityStore", () => {
   const model = {
@@ -127,19 +126,19 @@ describe("store/reducers/entityStore", () => {
   });
 
   it("should not mutate meta object", () => {
-    let state = entityStoreReducer(state, {
+    const stateA = entityStoreReducer(undefined, {
       meta: "test-response",
       payload: apiCollectionResponse,
       type: "API_RESPONSE"
     });
-    const firstMeta = state.responses["test-response"].meta;
+    const firstMeta = stateA.responses["test-response"].meta;
 
-    state = entityStoreReducer(state, {
+    const stateB = entityStoreReducer(stateA, {
       meta: "test-response",
       payload: apiCollectionResponse,
       type: "API_RESPONSE"
     });
-    const secondMeta = state.responses["test-response"].meta;
+    const secondMeta = stateB.responses["test-response"].meta;
 
     expect(firstMeta).not.toBe(secondMeta);
   });
