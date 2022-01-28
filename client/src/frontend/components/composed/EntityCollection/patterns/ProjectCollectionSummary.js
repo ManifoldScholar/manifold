@@ -15,8 +15,9 @@ const mapProjects = memoize(projectCollection =>
 );
 
 function getProjects(projectCollection, limit) {
+  const adjustedLimit = limit && limit > 0 ? limit : 100;
   const projects = mapProjects(projectCollection);
-  return projects.slice(0, limit);
+  return projects.slice(0, adjustedLimit);
 }
 
 function ProjectCollectionSummaryEntityCollection({
