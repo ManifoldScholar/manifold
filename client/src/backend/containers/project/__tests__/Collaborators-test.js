@@ -39,7 +39,7 @@ describe("backend/containers/project/Collaborators", () => {
     }));
 
     it("renders a null value", () => {
-      expect(render($withApp($root)).html()).toBeNull();
+      expect(render($withApp($root)).html()).toBe("");
     });
   });
 });

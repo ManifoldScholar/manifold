@@ -105,6 +105,7 @@ export default class Text extends Component {
     // Apply a conditional container class that maps to a size in CSS
     const containerClass = `container-focus container-width-${typography.margins.current}`;
 
+    // eslint-disable-next-line no-unused-vars
     const section = this.props.section;
 
     // Page used to generate key for transitions

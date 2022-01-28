@@ -27,7 +27,7 @@ describe("backend/components/project-collection/form/SmartAttributes", () => {
       factory("projectCollection", { attributes: { smart: false } })
     );
     it("renders does not render", () => {
-      expect(render($withApp($root)).html()).toBe(null);
+      expect(render($withApp($root)).html()).toBe("");
     });
   });
 });
