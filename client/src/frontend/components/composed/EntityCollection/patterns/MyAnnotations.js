@@ -25,7 +25,11 @@ function MyAnnotationsEntityCollection({
       icon="NotesUnique"
       UtilityComponent={props =>
         hasAnnotatedTexts && (
-          <Annotation.NoteFilter {...props} {...filterProps} />
+          <Annotation.NoteFilter
+            {...props}
+            {...annotationsMeta}
+            {...filterProps}
+          />
         )
       }
       countProps={
@@ -67,9 +71,9 @@ MyAnnotationsEntityCollection.displayName =
   "Frontend.Composed.EntityCollection.MyAnnotations";
 
 MyAnnotationsEntityCollection.propTypes = {
-  annotations: PropTypes.object,
+  annotations: PropTypes.array,
   annotationsMeta: PropTypes.object,
-  annotatedTexts: PropTypes.object,
+  annotatedTexts: PropTypes.array,
   filterProps: PropTypes.object,
   isFiltered: PropTypes.bool,
   paginationProps: PropTypes.object

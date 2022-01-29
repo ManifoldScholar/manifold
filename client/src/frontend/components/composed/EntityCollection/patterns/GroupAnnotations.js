@@ -20,9 +20,17 @@ function GroupAnnotationsEntityCollection({
 
   return (
     <EntityCollection
-      UtilityComponent={props => (
-        <Annotation.NoteFilter {...props} {...filterProps} />
-      )}
+      UtilityComponent={
+        isEmpty(annotationsMeta) || isEmpty(filterProps)
+          ? () => <></>
+          : props => (
+              <Annotation.NoteFilter
+                {...props}
+                {...annotationsMeta}
+                {...filterProps}
+              />
+            )
+      }
       countProps={
         isEmpty(annotationsMeta)
           ? {}
@@ -65,7 +73,7 @@ GroupAnnotationsEntityCollection.displayName =
 
 GroupAnnotationsEntityCollection.propTypes = {
   readingGroup: PropTypes.object,
-  annotations: PropTypes.object,
+  annotations: PropTypes.array,
   annotationsMeta: PropTypes.object,
   filterProps: PropTypes.object,
   isFiltered: PropTypes.bool,
