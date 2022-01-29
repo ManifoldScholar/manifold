@@ -55,7 +55,7 @@ RadioGroup.displayName = "NotificationsForm.RadioGroup";
 RadioGroup.propTypes = {
   preferences: PropTypes.object,
   options: PropTypes.object,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   inputProps: PropTypes.object

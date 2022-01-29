@@ -90,7 +90,7 @@ export default class UtilityPagination extends PureComponent {
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
 
     return (
-      <Styled.Link as={PageComponent} {...pageProps}>
+      <Styled.Link key={page.number} as={PageComponent} {...pageProps}>
         <span aria-hidden="true">{page.number}</span>
         <span className="screen-reader-text">Go to page: {page.number}</span>
       </Styled.Link>
@@ -101,7 +101,12 @@ export default class UtilityPagination extends PureComponent {
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
 
     return (
-      <Styled.Link as={PageComponent} aria-current="page" {...pageProps}>
+      <Styled.Link
+        key={page.number}
+        as={PageComponent}
+        aria-current="page"
+        {...pageProps}
+      >
         <span aria-hidden="true">{page.number}</span>
         <span className="screen-reader-text">Go to page: {page.number}</span>
       </Styled.Link>
