@@ -63,6 +63,7 @@ export default function wrapHtmlBody({
   const stylesheets = getStylesheetLinks(stats);
 
   return `
+    <!DOCTYPE html>
     <html lang="en-US">
       <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
