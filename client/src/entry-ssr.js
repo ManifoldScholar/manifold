@@ -19,7 +19,7 @@ import { resetServerContext as resetDndServerContext } from "react-beautiful-dnd
 import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
-import { createServerFetchDataContext } from "hooks/api/use-fetch";
+import { createServerFetchDataContext } from "hooks/api/contexts/InternalContext";
 
 // Node 8.x on Ubuntu 18 leads to failed SSL handshakes. Setting this
 // default TLS value appears to fix this. I believe this issue has
