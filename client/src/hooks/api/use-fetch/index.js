@@ -5,41 +5,13 @@ import React, {
   useRef,
   useState
 } from "react";
-import { useSelector, useStore, useDispatch } from "react-redux";
+import InternalContext from "../contexts/InternalContext";
+import { useSelector, useDispatch, useStore } from "react-redux";
 import { entityStoreActions } from "actions";
 import entityUtils from "utils/entityUtils";
 import { useUID } from "react-uid";
-import { isPromise } from "utils/promise";
 import config from "config";
 import ch from "helpers/consoleHelpers";
-
-export const InternalContext = React.createContext({
-  requests: [],
-  resolved: false
-});
-
-export const createServerFetchDataContext = () => {
-  const internalContextValue = {
-    requests: [],
-    resolved: false
-  };
-  function ServerFetchDataContext(props) {
-    return (
-      <InternalContext.Provider value={internalContextValue}>
-        {props.children}
-      </InternalContext.Provider>
-    );
-  }
-  const isFetchingComplete = async () => {
-    const effects = internalContextValue.requests.map(item => item.promise);
-    await Promise.all(effects);
-    internalContextValue.resolved = true;
-  };
-  return {
-    ServerFetchDataContext,
-    isFetchingComplete
-  };
-};
 
 function log(type, key) {
   if (config.environment.isDevelopment) {
@@ -47,75 +19,30 @@ function log(type, key) {
   }
 }
 
-/*
-This hook supports the old way of fetching data, with static fetchData methods on class
-components. When these components have been converted to functional components, it can
-be removed.
- */
-export function useDeprecatedFetchData(fetchData, location, match) {
-  const firstRun = useRef(true);
-  const dispatch = useDispatch();
-  const store = useStore();
-  const [requestKey] = useState(`fetch_${useUID()}`);
-  const getState = store.getState;
-
-  const internalContext = useContext(InternalContext);
-
-  /* eslint-disable react-hooks/exhaustive-deps */
-  const triggerFetchData = useCallback(() => {
-    log("useDeprecatedFetchData", requestKey);
-    return fetchData(getState, dispatch, location, match);
-  }, [getState, fetchData, requestKey, dispatch, location, match]);
-  /* eslint-enable react-hooks/exhaustive-deps */
-
-  // Fetch on the server
-  if (
-    firstRun.current &&
-    !internalContext.resolved &&
-    config.environment.isServer
-  ) {
-    const result = triggerFetchData();
-    const effects = [];
-    if (isPromise(result)) effects.push(result);
-    if (Array.isArray(result)) {
-      result.forEach(aResult => {
-        if (isPromise(aResult)) effects.push(aResult);
-      });
-    }
-    internalContext.requests.push({
-      id: requestKey,
-      promise: Promise.all(effects),
-      cancel: () => {}
-    });
-  }
-
-  // Fetch in the browser. Maintain previous fetchData behavior which was to only refetch
-  // when the URL changes.
-  /* eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => {
-    triggerFetchData();
-  }, [match.url]);
-  /* eslint-enable react-hooks/exhaustive-deps */
-
-  firstRun.current = false;
-  return triggerFetchData;
-}
-
-export default function useFetch({ request }) {
+export default function useFetch({ request, options = {} }) {
   const firstRun = useRef(true);
   const uid = `fetch_${useUID()}`;
   const [requestKey] = useState(`fetch_${useUID()}`);
+  const [count, setCount] = useState(1);
+  const store = useStore();
+  const getState = store.getState;
   const dispatch = useDispatch();
 
   const internalContext = useContext(InternalContext);
 
   const [apiCall, ...apiCallArgs] = request;
 
+  if (count > 25)
+    throw new Error(
+      "useFetch tried to fetch data more than 25 times. This suggests that an input to useFetch needs to be memoized."
+    );
+
   /* eslint-disable react-hooks/exhaustive-deps */
   const triggerFetchData = useCallback(() => {
     log("useFetch", requestKey);
+    setCount(count + 1);
     const apiFetch = apiCall(...apiCallArgs);
-    const action = entityStoreActions.request(apiFetch, requestKey);
+    const action = entityStoreActions.request(apiFetch, requestKey, options);
     const { promise } = dispatch(action);
     return promise;
   }, [apiCall, ...apiCallArgs, dispatch, requestKey]);
@@ -171,7 +98,8 @@ export default function useFetch({ request }) {
     entityUtils.loaded(requestKey, state.entityStore)
   );
 
-  firstRun.current = false;
+  const response = getState()?.entityStore?.responses?.requestKey;
 
-  return { data, meta, loaded, uid };
+  firstRun.current = false;
+  return { data, meta, loaded, uid, response, refresh: triggerFetchData };
 }

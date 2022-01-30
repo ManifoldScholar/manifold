@@ -31,7 +31,7 @@ export { default as useGrabCurrentTextSection } from "./texts/use-grab-current-t
 
 export { default as useCollapseContext } from "./contexts/use-collapse-context";
 
-export { useDeprecatedFetchData } from "./api/use-fetch";
+export { default as useDeprecatedFetchData } from "./api/use-deprecated-fetchdata";
 export { default as useFetch } from "./api/use-fetch";
 export { default as usePaginationState } from "./api/use-pagination-state";
 
