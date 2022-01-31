@@ -7,7 +7,7 @@ import classnames from "classnames";
 import FocusTrap from "focus-trap-react";
 import isString from "lodash/isString";
 import IconComposer from "global/components/utility/IconComposer";
-import BodyClass from "hoc/body-class";
+import BodyClass from "hoc/BodyClass";
 
 class DialogWrapper extends PureComponent {
   static displayName = "Dialog.Wrapper";

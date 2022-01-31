@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import setter from "../setter";
-import withDispatch from "hoc/with-dispatch";
+import withDispatch from "hoc/withDispatch";
 import Errorable from "global/components/form/Errorable";
 import Loadable from "@docusaurus/react-loadable";
 

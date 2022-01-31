@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import SetCSSProperty from "global/components/utility/SetCSSProperty";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 import { FrontendModeContext } from "helpers/contexts";
 import get from "lodash/get";
 

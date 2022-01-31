@@ -6,7 +6,7 @@ import { entityStoreActions } from "actions";
 import connectAndFetch from "utils/connectAndFetch";
 import { select } from "utils/entityUtils";
 import Navigation from "backend/components/navigation";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 
 const { request, flush } = entityStoreActions;
 

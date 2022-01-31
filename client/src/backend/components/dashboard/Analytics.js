@@ -5,7 +5,7 @@ import {
   Grid,
   RangePicker
 } from "backend/components/analytics";
-import withAnalyticsReport from "hoc/analytics/with-analytics-report";
+import withAnalyticsReport from "hoc/analytics/withAnalyticsReport";
 
 class DashboardAnalytics extends Component {
   static displayName = "Dashboard.Analytics";

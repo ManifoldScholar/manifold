@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 import { entityStoreActions } from "actions";
 import { textsAPI, textCategoriesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import Category from "backend/components/category";
 import { Link } from "react-router-dom";
 import cloneDeep from "lodash/cloneDeep";

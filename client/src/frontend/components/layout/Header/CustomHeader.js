@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import withPluginReplacement from "hoc/with-plugin-replacement";
+import withPluginReplacement from "hoc/withPluginReplacement";
 
 class LayoutCustomHeader extends PureComponent {
   static displayName = "Layout.Header.CustomHeader";

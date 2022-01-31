@@ -5,13 +5,13 @@ import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import PermissionsContainer from "backend/containers/permission";
 import EntitlementsContainer from "backend/containers/entitlements";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import Layout from "backend/components/layout";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import config from "config";
 import ProjectHero from "backend/components/project/hero";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 
 class ProjectAccessWrapper extends Component {
   static displayName = "Project.Access.Wrapper";

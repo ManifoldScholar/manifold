@@ -10,7 +10,7 @@ import EntitiesList, {
   Search,
   ProjectRow
 } from "backend/components/list/EntitiesList";
-import withFilteredLists, { projectFilters } from "hoc/with-filtered-lists";
+import withFilteredLists, { projectFilters } from "hoc/withFilteredLists";
 
 const { request, flush } = entityStoreActions;
 

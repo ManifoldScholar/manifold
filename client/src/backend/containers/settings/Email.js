@@ -8,7 +8,7 @@ import { settingsAPI, testMailsAPI, requests } from "api";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 
-import withFormSession from "hoc/with-form-session";
+import withFormSession from "hoc/withFormSession";
 
 const { request } = entityStoreActions;
 

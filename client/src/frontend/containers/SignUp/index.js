@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 import connectAndFetch from "utils/connectAndFetch";
-import withProjectContext from "hoc/with-project-context";
+import withProjectContext from "hoc/withProjectContext";
 import SignInUp from "global/components/sign-in-up";
 import get from "lodash/get";
 

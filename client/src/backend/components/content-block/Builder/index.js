@@ -5,7 +5,7 @@ import CurrentSection from "./sections/Current";
 import DraggableEventHelper from "../helpers/draggableEvent";
 import { contentBlocksAPI, requests } from "api";
 import { DragDropContext } from "react-beautiful-dnd";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 import lh from "helpers/linkHandler";
 import { entityStoreActions } from "actions";
 import configHelper from "../helpers/configurations";

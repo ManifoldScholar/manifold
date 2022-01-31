@@ -4,7 +4,7 @@ import lh from "helpers/linkHandler";
 import ActionBox from "frontend/components/reading-group/ActionBox";
 import { CollectionEditor } from "frontend/components/collecting/reading-group";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 function ReadingGroupHomepageEditContainer({
   readingGroup,

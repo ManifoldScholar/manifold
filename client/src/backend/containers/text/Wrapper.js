@@ -9,10 +9,10 @@ import { textsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 import IconComposer from "global/components/utility/IconComposer";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import { Link } from "react-router-dom";
 
 const { request } = entityStoreActions;

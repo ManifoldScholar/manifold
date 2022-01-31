@@ -13,7 +13,7 @@ import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollection from "frontend/components/composed/EntityCollection";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 
 const { request, flush } = entityStoreActions;
 const defaultPage = 1;

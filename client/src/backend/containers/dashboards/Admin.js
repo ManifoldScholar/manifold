@@ -14,8 +14,8 @@ import EntitiesList, {
   Search,
   ProjectRow
 } from "backend/components/list/EntitiesList";
-import withFilteredLists, { projectFilters } from "hoc/with-filtered-lists";
-import Authorize from "hoc/authorize";
+import withFilteredLists, { projectFilters } from "hoc/withFilteredLists";
+import Authorize from "hoc/Authorize";
 
 const { request } = entityStoreActions;
 

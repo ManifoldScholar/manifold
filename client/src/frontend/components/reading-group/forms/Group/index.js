@@ -6,7 +6,7 @@ import FormContainer from "global/containers/form";
 import { readingGroupsAPI, requests } from "api";
 import config from "config";
 import memoize from "lodash/memoize";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 
 class ReadingGroupForm extends React.PureComponent {
   static displayName = "ReadingGroup.Forms.GroupSettings";

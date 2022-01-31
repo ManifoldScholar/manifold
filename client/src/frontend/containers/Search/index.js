@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
 import PropTypes from "prop-types";
-import withSearch from "hoc/with-search";
+import withSearch from "hoc/withSearch";
 
 class SearchContainer extends PureComponent {
   static displayName = "Frontend.SearchContainer";

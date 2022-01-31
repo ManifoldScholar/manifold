@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 import { withRouter } from "react-router-dom";
 import { ManifoldAnalyticsContext } from "helpers/contexts";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";

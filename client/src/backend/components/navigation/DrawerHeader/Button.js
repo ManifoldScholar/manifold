@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Utility from "global/components/utility";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export default class DrawerEntityHeaderButton extends PureComponent {
   static displayName = "Drawer.EntityHeader.Button";

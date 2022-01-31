@@ -16,8 +16,8 @@ import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
 import Utility from "global/components/utility";
 
-import Authorize from "hoc/authorize";
-import BlurOnLocationChange from "hoc/blur-on-location-change";
+import Authorize from "hoc/Authorize";
+import BlurOnLocationChange from "hoc/BlurOnLocationChange";
 
 export default class Header extends Component {
   static propTypes = {

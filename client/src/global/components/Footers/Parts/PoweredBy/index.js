@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import withPluginReplacement from "hoc/with-plugin-replacement";
+import withPluginReplacement from "hoc/withPluginReplacement";
 import Utility from "global/components/utility";
 import { FrontendModeContext } from "helpers/contexts";
 import * as Styled from "./styles";

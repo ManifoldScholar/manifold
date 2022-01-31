@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 import { Route } from "react-router-dom";
 
 class RedirectIfLibraryModeDisabled extends Component {

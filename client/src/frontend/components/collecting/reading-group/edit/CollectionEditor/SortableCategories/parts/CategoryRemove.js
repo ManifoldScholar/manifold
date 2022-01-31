@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 import * as Styled from "./styles";
 
 function CategoryRemove({ onRemove, confirm }) {

@@ -12,8 +12,8 @@ import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import ContentPlaceholder from "global/components/ContentPlaceholder";
 import EntityCollection from "frontend/components/composed/EntityCollection";
-import withSettings from "hoc/with-settings";
-import Authorize from "hoc/authorize";
+import withSettings from "hoc/withSettings";
+import Authorize from "hoc/Authorize";
 
 const { request, flush } = entityStoreActions;
 const defaultPage = 1;

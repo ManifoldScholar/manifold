@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import lh from "helpers/linkHandler";
-import withCurrentUser from "hoc/with-current-user";
+import withCurrentUser from "hoc/withCurrentUser";
 import Link from "./Link";
 
 export class UserMenuBody extends Component {

@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import Avatar from "global/components/avatar/index";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";

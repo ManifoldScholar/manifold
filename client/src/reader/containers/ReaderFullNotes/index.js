@@ -7,7 +7,7 @@ import Annotation from "global/components/Annotation";
 import Overlay from "global/components/Overlay";
 import EmptyMessage from "reader/components/notes/EmptyMessage";
 import { useDispatchAnnotations, useSelectAnnotations } from "hooks";
-import withReadingGroups from "hoc/with-reading-groups";
+import withReadingGroups from "hoc/withReadingGroups";
 
 const INITIAL_FORMATS = ["highlight", "annotation", "bookmark"];
 const INITIAL_VISIBLE_FILTER_STATE = {

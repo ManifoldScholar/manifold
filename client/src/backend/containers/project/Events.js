@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, eventsAPI, requests } from "api";
@@ -11,9 +11,9 @@ import EntitiesList, {
   Search,
   EventRow
 } from "backend/components/list/EntitiesList";
-import withFilteredLists, { eventFilters } from "hoc/with-filtered-lists";
+import withFilteredLists, { eventFilters } from "hoc/withFilteredLists";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 const { request } = entityStoreActions;
 const perPage = 6;

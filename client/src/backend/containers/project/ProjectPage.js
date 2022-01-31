@@ -5,7 +5,7 @@ import FormContainer from "global/containers/form";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export default class ProjectProjectPageContainer extends PureComponent {
   static displayName = "Project.ProjectPage";

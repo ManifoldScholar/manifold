@@ -11,8 +11,8 @@ import FocusTrap from "focus-trap-react";
 import IconComposer from "global/components/utility/IconComposer";
 import { FrontendModeContext } from "helpers/contexts";
 
-import Authorize from "hoc/authorize";
-import BodyClass from "hoc/body-class";
+import Authorize from "hoc/Authorize";
+import BodyClass from "hoc/BodyClass";
 
 export class NavigationMobile extends Component {
   static displayName = "Navigation.Mobile";

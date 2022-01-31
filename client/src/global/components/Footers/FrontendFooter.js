@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import withPluginReplacement from "hoc/with-plugin-replacement";
-import withSettings from "hoc/with-settings";
+import withPluginReplacement from "hoc/withPluginReplacement";
+import withSettings from "hoc/withSettings";
 import DefaultFooter from "./DefaultFooter";
 import BrandedFooter from "./BrandedFooter";
 import StandaloneFooter from "./StandaloneFooter";

@@ -14,7 +14,7 @@ import queryString from "query-string";
 import debounce from "lodash/debounce";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import has from "lodash/has";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 
 const { request, flush } = entityStoreActions;

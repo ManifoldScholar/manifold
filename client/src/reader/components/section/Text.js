@@ -7,7 +7,7 @@ import Annotation from "reader/containers/annotation";
 import locationHelper from "helpers/location";
 import filterAnnotations from "./helpers/filter-annotations";
 
-import HtmlClass from "hoc/html-class";
+import HtmlClass from "hoc/HtmlClass";
 
 export default class Text extends Component {
   static filterAnnotations(visibilityFilters, annotations) {

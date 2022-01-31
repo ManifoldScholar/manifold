@@ -11,7 +11,7 @@ import classNames from "classnames";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import pluralize from "pluralize";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 const { request } = entityStoreActions;
 

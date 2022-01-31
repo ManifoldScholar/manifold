@@ -7,8 +7,8 @@ import EntityHero from "frontend/components/composed/EntityHero";
 import ContentBlockList from "frontend/components/content-block-list/List";
 import { Warning } from "frontend/components/content-block/parts";
 import { FrontendModeContext } from "helpers/contexts";
-import withSettings from "hoc/with-settings";
-import Authorize from "hoc/authorize";
+import withSettings from "hoc/withSettings";
+import Authorize from "hoc/Authorize";
 
 class Detail extends Component {
   static displayName = "Project.Detail";

@@ -11,7 +11,7 @@ import EntitiesList, {
   TwitterQueryRow
 } from "backend/components/list/EntitiesList";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 const { request } = entityStoreActions;
 const perPage = 10;

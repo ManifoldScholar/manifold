@@ -9,7 +9,7 @@ import EntitiesList, {
   Search,
   ResourceRow
 } from "backend/components/list/EntitiesList";
-import withFilteredLists, { resourceFilters } from "hoc/with-filtered-lists";
+import withFilteredLists, { resourceFilters } from "hoc/withFilteredLists";
 import isNil from "lodash/isNil";
 
 const { request, flush } = entityStoreActions;

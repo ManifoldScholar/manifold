@@ -10,7 +10,7 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import MembersTable from "frontend/components/reading-group/tables/Members";
 
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 
 const { request } = entityStoreActions;
 const defaultPage = 1;

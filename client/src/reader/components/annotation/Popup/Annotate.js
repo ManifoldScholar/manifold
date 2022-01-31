@@ -4,7 +4,7 @@ import Button from "./parts/Button";
 import Panel from "./parts/Panel";
 import CurrentReadingGroup from "./parts/CurrentReadingGroup";
 import classNames from "classnames";
-import withCurrentUser from "hoc/with-current-user";
+import withCurrentUser from "hoc/withCurrentUser";
 import { ReaderContext } from "helpers/contexts";
 
 class AnnotationPopupAnnotate extends PureComponent {

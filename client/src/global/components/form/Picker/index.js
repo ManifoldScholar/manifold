@@ -6,8 +6,8 @@ import classNames from "classnames";
 import setter from "../setter";
 import Developer from "global/components/developer";
 import IconComposer from "../../utility/IconComposer";
-import withFormOptions from "hoc/with-form-options";
-import withScreenReaderStatus from "hoc/with-screen-reader-status";
+import withFormOptions from "hoc/withFormOptions";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import List from "./List";
 import isString from "lodash/isString";
 
@@ -48,7 +48,7 @@ export class PickerComponent extends PureComponent {
     /* notation. For example: "attributes[tagList]"                             */
     name: PropTypes.string.isRequired,
     /* The options that should appear in the picker. These will be passed on to */
-    /* the with-form-options HOC, which is responsible for managing options and */
+    /* the withFormOptions HOC, which is responsible for managing options and */
     /* the current value. You may pass a function to this component. The        */
     /* function must return { endpoint, method, options }, which is typically   */
     /* what is returned from a Manifold API resource method. For example,       */
@@ -84,7 +84,7 @@ export class PickerComponent extends PureComponent {
     optionToLabel: PropTypes.func,
     /* By default, whatever is passed in as an option is the value that's set   */
     /* when the user makes a selection. However, in some cases, we want to      */
-    /* transform the options before they're set. When the with-form-options HOC */
+    /* transform the options before they're set. When the withFormOptions HOC */
     /* analyzes the options, this function will be called to transform the      */
     /* option. For example, in a tag picker, we might want to generate options  */
     /* from existing tag resources, but treat them as strings within the        */
@@ -92,7 +92,7 @@ export class PickerComponent extends PureComponent {
     /* can include an optionToValue transformer: tag => tag.attributes.name.    */
     optionToValue: PropTypes.func,
     /* Because HTML select inputs deal in strings rather than complex objects,  */
-    /* the with-form-options HOC needs to convert every option into a string    */
+    /* the withFormOptions HOC needs to convert every option into a string    */
     /* value. In most cases, it can do this without intervention, assuming all  */
     /* options have an id attribute or have a value that can be cast to a       */
     /* string. If you have an edge case, use this function to determine how the */

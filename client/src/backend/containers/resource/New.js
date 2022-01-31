@@ -12,7 +12,7 @@ import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 const { request } = entityStoreActions;
 

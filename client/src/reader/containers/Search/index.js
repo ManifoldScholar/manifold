@@ -4,7 +4,7 @@ import SearchResults from "global/components/search/results";
 import Overlay from "global/components/Overlay";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import withSearch from "hoc/with-search";
+import withSearch from "hoc/withSearch";
 
 class SearchContainer extends PureComponent {
   static displayName = "Reader.SearchContainer";

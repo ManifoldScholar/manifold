@@ -1,6 +1,6 @@
 import React from "react";
 import ContentPlaceholder from "global/components/ContentPlaceholder";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import Utility from "global/components/utility";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";

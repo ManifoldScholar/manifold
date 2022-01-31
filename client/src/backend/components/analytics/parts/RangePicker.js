@@ -13,7 +13,7 @@ import endOfMonth from "date-fns/endOfMonth";
 import subMonths from "date-fns/subMonths";
 import DatePicker from "global/components/form/DatePicker/PickerComponent";
 
-import withScreenReaderStatus from "hoc/with-screen-reader-status";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 const today = new Date();
 

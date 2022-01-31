@@ -6,7 +6,7 @@ import { childRoutes } from "helpers/router";
 import Manual from "./Manual";
 import Smart from "./Smart";
 import lh from "helpers/linkHandler";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export class ProjectCollectionDetail extends PureComponent {
   static displayName = "ProjectCollection.Detail";

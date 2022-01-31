@@ -5,7 +5,7 @@ import config from "config";
 import { requests } from "api";
 import Action from "global/components/table/Action";
 import { entityStoreActions } from "actions";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 import {
   useDispatchReadingGroupMembership,
   useSelectReadingGroupMembership

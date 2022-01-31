@@ -7,7 +7,7 @@ import { select } from "utils/entityUtils";
 import { twitterQueriesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 
 const { request, flush } = entityStoreActions;
 

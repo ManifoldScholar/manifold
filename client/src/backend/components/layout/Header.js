@@ -8,7 +8,7 @@ import navigation from "helpers/router/navigation";
 import Utility from "global/components/utility";
 import HeaderLogo from "global/components/atomic/HeaderLogo";
 
-import BlurOnLocationChange from "hoc/blur-on-location-change";
+import BlurOnLocationChange from "hoc/BlurOnLocationChange";
 
 export default class LayoutHeader extends Component {
   static displayName = "Layout.Header";

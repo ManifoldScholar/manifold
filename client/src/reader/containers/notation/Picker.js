@@ -10,7 +10,7 @@ import EntitiesList, {
   ResourceRow,
   ResourceCollectionRow
 } from "backend/components/list/EntitiesList";
-import withFilteredLists, { keywordFilter } from "hoc/with-filtered-lists";
+import withFilteredLists, { keywordFilter } from "hoc/withFilteredLists";
 
 const { request } = entityStoreActions;
 const perPage = 5;

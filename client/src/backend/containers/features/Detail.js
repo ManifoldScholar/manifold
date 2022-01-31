@@ -9,12 +9,12 @@ import { childRoutes } from "helpers/router";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
 import FrontendLayout from "frontend/components/layout";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 import get from "lodash/get";
 import IconComposer from "global/components/utility/IconComposer";
 import SectionLabel from "global/components/form/SectionLabel";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;

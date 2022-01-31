@@ -12,8 +12,8 @@ import EntitiesList, {
   Search,
   ProjectRow
 } from "backend/components/list/EntitiesList";
-import withFilteredLists, { projectFilters } from "hoc/with-filtered-lists";
-import withScreenReaderStatus from "hoc/with-screen-reader-status";
+import withFilteredLists, { projectFilters } from "hoc/withFilteredLists";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import IconComposer from "global/components/utility/IconComposer";
 
 const { request } = entityStoreActions;

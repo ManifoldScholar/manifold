@@ -6,8 +6,8 @@ import Panel from "./parts/Panel";
 import lh from "helpers/linkHandler";
 import trim from "lodash/trim";
 import IconComposer from "global/components/utility/IconComposer";
-import withEventTracker from "hoc/analytics/with-event-tracker";
-import withSettings from "hoc/with-settings";
+import withEventTracker from "hoc/analytics/withEventTracker";
+import withSettings from "hoc/withSettings";
 
 class AnnotationPopupSecondaryShare extends PureComponent {
   static displayName = "Annotation.Popup.Secondary.Share";

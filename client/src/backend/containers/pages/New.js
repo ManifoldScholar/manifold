@@ -6,7 +6,7 @@ import FormContainer from "global/containers/form";
 import connectAndFetch from "utils/connectAndFetch";
 import lh from "helpers/linkHandler";
 
-import withFormSession from "hoc/with-form-session";
+import withFormSession from "hoc/withFormSession";
 
 class PagesNewContainer extends PureComponent {
   static displayName = "Pages.New";

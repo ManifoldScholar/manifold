@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Resource from "./resource";
 import lh from "helpers/linkHandler";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export default class ProjectResourcesContainer extends PureComponent {
   static displayName = "Project.ResourcesContainer";

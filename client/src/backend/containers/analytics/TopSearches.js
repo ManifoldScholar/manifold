@@ -6,7 +6,7 @@ import {
   RangePicker
 } from "backend/components/analytics";
 import Layout from "backend/components/layout";
-import withAnalyticsReport from "hoc/analytics/with-analytics-report";
+import withAnalyticsReport from "hoc/analytics/withAnalyticsReport";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 

@@ -6,7 +6,7 @@ import Deleted from "global/components/comment/deleted";
 import Helper from "global/components/helper";
 import classNames from "classnames";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export default class CommentDetail extends PureComponent {
   static displayName = "Comment.Detail";

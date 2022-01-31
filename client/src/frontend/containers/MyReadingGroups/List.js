@@ -11,7 +11,7 @@ import GroupsTablePlaceholder from "frontend/components/reading-group/tables/Gro
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";
 import { useDispatchMyReadingGroups, useSelectMyReadingGroups } from "hooks";
-import withCurrentUser from "hoc/with-current-user";
+import withCurrentUser from "hoc/withCurrentUser";
 
 const DEFAULT_SORT_ORDER = "";
 const DEFAULT_PAGE = 1;

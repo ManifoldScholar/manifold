@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet-async";
 import config from "config";
 import get from "lodash/get";
 
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 
 export class HeadContentComponent extends Component {
   static propTypes = {

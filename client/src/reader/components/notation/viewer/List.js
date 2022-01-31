@@ -14,7 +14,7 @@ import config from "config";
 import throttle from "lodash/throttle";
 import isNil from "lodash/isNil";
 import { scrollOptions } from "utils/domUtils";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 
 const { request } = entityStoreActions;
 

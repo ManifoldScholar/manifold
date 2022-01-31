@@ -5,7 +5,7 @@ import Edit from "../parts/Edit";
 import Drag from "../parts/Drag";
 import Delete from "../parts/Delete";
 import VisibilityToggle from "../parts/VisibilityToggle";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export default class ProjectContentBlockInListCurrent extends PureComponent {
   static displayName = "Project.Content.Block.InList.Current";

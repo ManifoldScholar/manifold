@@ -4,7 +4,7 @@ import Navigation from "backend/components/navigation";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export default class ProjectsWrapper extends PureComponent {
   static propTypes = {

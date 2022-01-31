@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
 import EntitiesList, { LogRow } from "backend/components/list/EntitiesList";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 const perPage = 5;
 const { request } = entityStoreActions;

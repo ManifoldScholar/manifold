@@ -6,8 +6,8 @@ import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import PropTypes from "prop-types";
 import mapValues from "lodash/mapValues";
-import withProjectContext from "hoc/with-project-context";
-import Authorize from "hoc/authorize";
+import withProjectContext from "hoc/withProjectContext";
+import Authorize from "hoc/Authorize";
 
 const { request } = entityStoreActions;
 

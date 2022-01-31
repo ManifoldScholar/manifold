@@ -12,7 +12,7 @@ import size from "lodash/size";
 import lh from "helpers/linkHandler";
 import classnames from "classnames";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 const { request, flush } = entityStoreActions;
 

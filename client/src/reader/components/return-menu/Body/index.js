@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
-import Authorize from "hoc/authorize";
-import withSettings from "hoc/with-settings";
+import Authorize from "hoc/Authorize";
+import withSettings from "hoc/withSettings";
 import * as Styled from "./styles";
 
 function ReturnMenuBody({

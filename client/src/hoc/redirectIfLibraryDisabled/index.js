@@ -1,12 +1,12 @@
 import React from "react";
 import hoistStatics from "hoist-non-react-statics";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 import { Route } from "react-router-dom";
 import frontendRoutes from "frontend/routes";
 import { matchRoutes } from "react-router-config";
 import { withRouter } from "react-router-dom";
 import { fatalErrorActions } from "actions";
-import withDispatch from "hoc/with-dispatch";
+import withDispatch from "hoc/withDispatch";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";

@@ -6,8 +6,8 @@ import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 
-import BlurOnLocationChange from "hoc/blur-on-location-change";
-import Authorize from "hoc/authorize";
+import BlurOnLocationChange from "hoc/BlurOnLocationChange";
+import Authorize from "hoc/Authorize";
 
 export class NavigationDropdown extends Component {
   static displayName = "Navigation.Dropdown";

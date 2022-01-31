@@ -7,7 +7,7 @@ import { childRoutes } from "helpers/router";
 import { projectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import connectAndFetch from "utils/connectAndFetch";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import { select } from "utils/entityUtils";
 import get from "lodash/get";
 

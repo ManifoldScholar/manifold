@@ -12,8 +12,8 @@ import { select, isLoaded } from "utils/entityUtils";
 import connectAndFetch from "utils/connectAndFetch";
 import { renderRoutes } from "react-router-config";
 import get from "lodash/get";
-import BodyClass from "hoc/body-class";
-import redirectIfLibraryDisabled from "hoc/redirect-if-library-disabled";
+import BodyClass from "hoc/BodyClass";
+import redirectIfLibraryDisabled from "hoc/redirectIfLibraryDisabled";
 
 const { request } = entityStoreActions;
 

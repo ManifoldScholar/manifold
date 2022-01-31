@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import ContentPlaceholder from "global/components/ContentPlaceholder";
 import { JoinGroup } from "frontend/components/reading-group/tables/Groups/actions";
-import withCurrentUser from "hoc/with-current-user";
+import withCurrentUser from "hoc/withCurrentUser";
 
 function Group({ readingGroup, currentUser }) {
   // since RG data isn't refreshed when a user joins,

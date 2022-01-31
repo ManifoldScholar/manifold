@@ -17,7 +17,7 @@ import EntitiesList, {
 import Form from "/global/components/form";
 import FormContainer from "global/containers/form";
 import lh from "helpers/linkHandler";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 const { request } = entityStoreActions;
 
