@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { requests } from "api";
 import { select, meta, loaded } from "utils/entityUtils";
-import { getRequestName } from "../helpers";
+import { getRequestName } from "../annotationHelpers";
 
 export default function useSelectAnnotations(groupId, context, filtered) {
   const groupType = groupId === "me" ? "me" : "group";

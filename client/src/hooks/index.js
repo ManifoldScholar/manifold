@@ -29,8 +29,6 @@ export { default as useSelectSearchResults } from "./search/use-select-search-re
 export { default as useGrabCurrentText } from "./texts/use-grab-current-text";
 export { default as useGrabCurrentTextSection } from "./texts/use-grab-current-text-section";
 
-export { default as useCollapseContext } from "./contexts/use-collapse-context";
-
 export { default as useDeprecatedFetchData } from "./api/use-deprecated-fetchdata";
 export { default as useApiCallback } from "./api/use-api-callback";
 export { default as useFetch } from "./api/use-fetch";

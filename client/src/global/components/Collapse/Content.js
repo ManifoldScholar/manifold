@@ -1,8 +1,8 @@
 import React, { useLayoutEffect, useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import useResizeObserver from "use-resize-observer";
-import { useCollapseContext } from "hooks";
 import classNames from "classnames";
+import useCollapseContext from "./useCollapseContext";
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 

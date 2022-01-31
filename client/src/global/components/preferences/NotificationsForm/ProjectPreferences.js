@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import config from "config";
 import Collapse from "global/components/Collapse";
+import useCollapseContext from "global/components/Collapse/useCollapseContext";
 import RadioGroup from "./RadioGroup";
-import { useCollapseContext } from "hooks";
 
 function ProjectPreferences({ preferences, onChange, onDigestChange }) {
   const { toggleProps } = useCollapseContext();
