@@ -7,7 +7,10 @@ import classNames from "classnames";
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
 const getAnimationParams = (height, maxDuration) => {
-  /** An attempt to make it possible to pass in duration in either sec or ms. Might be a bad idea. Could instead force input in ms and convert here. */
+  /*
+  An attempt to make it possible to pass in duration in either sec or ms. Might be a bad
+  idea. Could instead force input in ms and convert here.
+  */
   const maxDurationSecs = maxDuration > 5 ? maxDuration / 1000 : maxDuration;
   const duration = (
     clamp(height / 700, 0.3, maxDurationSecs ?? 0.5) * 1000
