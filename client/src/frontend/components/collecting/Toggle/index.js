@@ -10,7 +10,7 @@ import Dialog from "frontend/components/collecting/Dialog";
 import Text from "./Text";
 import Icons from "./Icons";
 import { inCollections } from "../helpers";
-import useCurrentUser from "hooks/user/use-current-user";
+import { useCurrentUser } from "hooks";
 
 const { request } = entityStoreActions;
 
