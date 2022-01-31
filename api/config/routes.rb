@@ -88,6 +88,8 @@ Rails.application.routes.draw do
       resources :search_results, only: [:index]
       resource :statistics, only: [:show]
       resource :settings, except: [:destroy, :create]
+      resources :journal_issues, except: [:create, :index]
+      resources :journal_volumes, except: [:create, :index]
 
       resources :texts do
         put :toggle_export_epub_v3, on: :member, path: "export_epub_v3"
@@ -143,6 +145,16 @@ Rails.application.routes.draw do
             resources :annotations, only: [:index, :create, :update]
             resources :resources, only: [:index]
             resources :resource_collections, only: [:index]
+          end
+        end
+      end
+
+      resources :journals do
+        scope module: :journals do
+          namespace :relationships do
+            resources :action_callouts, only: [:index, :create]
+            resources :journal_issues, only: [:index, :create]
+            resources :journal_volumes, only: [:index, :create]
           end
         end
       end

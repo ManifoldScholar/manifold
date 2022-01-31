@@ -9,7 +9,7 @@ RSpec.describe "Project ActionCallout API", type: :request do
   describe "sends a list of project call to actions" do
     let(:path) { api_v1_project_relationships_action_callouts_path(project) }
 
-    before(:each) { 2.times { FactoryBot.create(:action_callout, project: project) } }
+    before(:each) { 2.times { FactoryBot.create(:action_callout, calloutable: project) } }
 
     describe "the response" do
       it "has a 200 status code" do
@@ -19,7 +19,7 @@ RSpec.describe "Project ActionCallout API", type: :request do
     end
   end
 
-  describe "creates a content block" do
+  describe "creates an action callout" do
     let(:path) { api_v1_project_relationships_action_callouts_path(project) }
     let(:text) { FactoryBot.create(:text, project: project) }
     let(:params) { {

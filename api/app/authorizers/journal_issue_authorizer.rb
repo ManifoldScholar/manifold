@@ -1,0 +1,3 @@
+class JournalIssueAuthorizer < JournalChildAuthorizer
+
+end

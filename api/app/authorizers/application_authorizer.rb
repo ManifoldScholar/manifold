@@ -56,6 +56,18 @@ class ApplicationAuthorizer < Authority::Authorizer
     project.then(&Proc.new)
   end
 
+  # @yield [journal] do something with a journal if it is present on the resource.
+  # @yieldparam [Journal] journal
+  # @yieldreturn [Boolean]
+  # @return [Boolean]
+  def with_journal
+    journal = resource.journal
+
+    return false if journal.blank?
+
+    journal.then(&Proc.new)
+  end
+
   class << self
     # Any class method from Authority::Authorizer that isn't overridden
     # will call its authorizer's default method.

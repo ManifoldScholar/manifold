@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :project do
     title { "A project title" }
-    avatar_color { Project::AVATAR_COLOR_PRIMARY }
+    avatar_color { "primary" }
     draft { false }
     association :creator, factory: :user
 

@@ -20,6 +20,10 @@ class ProjectSummary < ApplicationRecord
     []
   end
 
+  def journal_issue?
+    false
+  end
+
   def recently_updated?
     updated? && updated_at >= Time.current - 1.week
   end
