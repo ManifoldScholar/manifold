@@ -146,7 +146,7 @@ export default `
         }
 
         input[type='number'] {
-          text-align: right;
+          text-align: left;
         }
       }
 

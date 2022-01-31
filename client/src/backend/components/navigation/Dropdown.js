@@ -68,6 +68,11 @@ export class NavigationDropdown extends Component {
     );
   }
 
+  getSelected() {
+    // this was refactored out at some point. TODO: Circle back.
+    return null;
+  }
+
   renderStatic(props) {
     const selected = this.getSelected(props);
     const label = selected ? selected.label : "menu";

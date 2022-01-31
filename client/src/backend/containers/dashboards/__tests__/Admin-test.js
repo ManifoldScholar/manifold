@@ -18,6 +18,7 @@ describe("backend/containers/dashboards/Admin", () => {
       dispatch={$dispatch}
       projectsListSnapshot={{ page: 1 }}
       snapshotCreator={$snapshotCreator}
+      savedSearchPaginationState={() => null}
       authentication={$state.authentication}
     />
   ));

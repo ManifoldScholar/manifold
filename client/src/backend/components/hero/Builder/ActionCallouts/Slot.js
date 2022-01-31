@@ -8,7 +8,7 @@ import { Droppable } from "react-beautiful-dnd";
 import Chip from "./Chip";
 
 class Slot extends PureComponent {
-  static displayName = "Project.Hero.Builder.ActionCallouts.Slot";
+  static displayName = "Hero.Builder.ActionCallouts.Slot";
 
   static propTypes = {
     title: PropTypes.string.isRequired,
@@ -16,7 +16,9 @@ class Slot extends PureComponent {
     history: PropTypes.object.isRequired,
     actionCallouts: PropTypes.array.isRequired,
     id: PropTypes.string.isRequired,
-    project: PropTypes.object.isRequired
+    model: PropTypes.object.isRequired,
+    actionCalloutEditRoute: PropTypes.string.isRequired,
+    actionCalloutNewRoute: PropTypes.string.isRequired
   };
 
   get title() {
@@ -31,8 +33,8 @@ class Slot extends PureComponent {
     return this.props.attributes;
   }
 
-  get project() {
-    return this.props.project;
+  get model() {
+    return this.props.model;
   }
 
   get actionCallouts() {
@@ -40,10 +42,11 @@ class Slot extends PureComponent {
   }
 
   openNewDrawer = () => {
+    const { actionCalloutNewRoute } = this.props;
     const attributes = this.attributes;
     const actionCallout = { attributes };
     return this.props.history.push(
-      lh.link("backendProjectActionCalloutNew", this.project.id),
+      lh.link(actionCalloutNewRoute, this.model.id),
       { noScroll: true, actionCallout }
     );
   };
@@ -77,10 +80,11 @@ class Slot extends PureComponent {
                 {this.actionCallouts.map((actionCallout, index) => (
                   <Chip
                     key={actionCallout.id}
+                    actionCalloutEditRoute={this.props.actionCalloutEditRoute}
                     index={index}
                     actionCallout={actionCallout}
                     history={this.history}
-                    project={this.project}
+                    model={this.model}
                   />
                 ))}
                 {provided.placeholder}

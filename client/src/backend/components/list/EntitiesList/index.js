@@ -1,5 +1,6 @@
 import List from "./List";
 import Button from "./List/Button";
+import Instructions from "./List/Instructions";
 import Search from "./List/Search";
 import EntityRow from "./Entity/Row";
 import EventRow from "./Entity/EventRow";
@@ -12,6 +13,7 @@ import MakerRow from "./Entity/MakerRow";
 import PageRow from "./Entity/PageRow";
 import PermissionRow from "./Entity/PermissionRow";
 import ProjectRow from "./Entity/ProjectRow";
+import JournalRow from "./Entity/JournalRow";
 import CollectionProjectRow from "./Entity/CollectionProjectRow";
 import ResourceRow from "./Entity/ResourceRow";
 import ResourceCollectionRow from "./Entity/ResourceCollectionRow";
@@ -22,11 +24,14 @@ import TagRow from "./Entity/TagRow";
 import StringRow from "./Entity/StringRow";
 import TextCategoryRow from "./Entity/TextCategoryRow";
 import FormOptionRow from "./Entity/FormOptionRow";
+import JournalVolumeRow from "./Entity/JournalVolumeRow";
+import JournalIssueRow from "./Entity/JournalIssueRow";
 
 export default List;
 export {
   EntityRow,
   Button,
+  Instructions,
   Search,
   EventRow,
   ProjectExportationRow,
@@ -39,6 +44,7 @@ export {
   PermissionRow,
   CollectionProjectRow,
   ProjectRow,
+  JournalRow,
   ResourceRow,
   ResourceCollectionRow,
   SubjectRow,
@@ -47,5 +53,7 @@ export {
   TagRow,
   StringRow,
   TextCategoryRow,
-  FormOptionRow
+  FormOptionRow,
+  JournalVolumeRow,
+  JournalIssueRow
 };

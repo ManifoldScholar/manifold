@@ -1,5 +1,9 @@
 export default {
   beAnalyticsReport: "backend-analytics-report",
+  beJournals: "backend-journals",
+  beJournal: "backend-journal",
+  beJournalDestroy: "backend-journal-destroy",
+  beJournalActionCallouts: "backend-journal-action-callouts",
   beProjects: "backend-projects",
   beProject: "backend-project",
   beRecentProjects: "backend-recent-projects",
@@ -90,6 +94,7 @@ export default {
   beProjectCollectionUpdate: "backend-project-collection-update",
   beCollectionProjectReorder: "backend-collection-project-reorder",
   beCollectionProjectUpdate: "backend-collection-project-update",
+  beActionCallouts: "backend-action-callouts",
   beProjectActionCallouts: "backend-project-action-callouts",
   beCollectionProjects: "backend-collection-projects",
   beCollectionProjectsPaginated: "backend-collection-projects-paginated",

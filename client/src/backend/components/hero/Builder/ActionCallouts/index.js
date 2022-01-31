@@ -11,16 +11,21 @@ export default class ActionCallouts extends PureComponent {
   static displayName = "Project.Hero.Builder.ActionCallouts";
 
   static propTypes = {
-    project: PropTypes.object.isRequired
+    model: PropTypes.object.isRequired,
+    refreshActionCallouts: PropTypes.func,
+    actionCalloutEditRoute: PropTypes.string.isRequired,
+    actionCalloutNewRoute: PropTypes.string.isRequired,
+    actionCallouts: PropTypes.array,
+    actionCalloutSlots: PropTypes.array
   };
 
   static getDerivedStateFromProps(props, state) {
-    if (props.actionCalloutsResponse === state.response) return null;
+    if (props.actionCallouts === state.actionCallouts) return null;
 
     const slotCallouts = ActionCallouts.slotActionCallouts(
       props.actionCallouts
     );
-    return { slotCallouts, response: props.actionCalloutsResponse };
+    return { slotCallouts, actionCallouts: props.actionCallouts };
   }
 
   static slotActionCallouts(actionCallouts) {
@@ -86,8 +91,8 @@ export default class ActionCallouts extends PureComponent {
 
   onDragStart = () => {};
 
-  get project() {
-    return this.props.project;
+  get model() {
+    return this.props.model;
   }
 
   get slotIds() {
@@ -107,9 +112,12 @@ export default class ActionCallouts extends PureComponent {
       requests.beActionCalloutUpdate,
       options
     );
+
+    const { refreshActionCallouts } = this.props;
+    const refreshCallback = refreshActionCallouts || (() => {});
     this.props
       .dispatch(updateRequest)
-      .promise.then(this.props.refresh, this.props.refresh);
+      .promise.then(refreshCallback, refreshCallback);
   }
 
   moveToSlot(id, sourceSlotId, destinationSlotId, destinationIndex) {
@@ -153,17 +161,21 @@ export default class ActionCallouts extends PureComponent {
           onDragStart={this.onDragStart}
           onDragEnd={this.onDragEnd}
         >
-          {this.slotIds.map(slotId => {
-            return (
-              <Slot
-                key={slotId}
-                id={slotId}
-                {...this.findSlot(slotId)}
-                project={this.project}
-                actionCallouts={this.actionCalloutsBySlot(slotId)}
-              />
-            );
-          })}
+          {this.slotIds
+            .filter(slot => this.props.actionCalloutSlots.includes(slot))
+            .map(slotId => {
+              return (
+                <Slot
+                  key={slotId}
+                  id={slotId}
+                  {...this.findSlot(slotId)}
+                  model={this.model}
+                  actionCalloutEditRoute={this.props.actionCalloutEditRoute}
+                  actionCalloutNewRoute={this.props.actionCalloutNewRoute}
+                  actionCallouts={this.actionCalloutsBySlot(slotId)}
+                />
+              );
+            })}
         </DragDropContext>
       </div>
     );

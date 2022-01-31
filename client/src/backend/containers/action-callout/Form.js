@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { projectsAPI, actionCalloutsAPI, requests } from "api";
+import { actionCalloutsAPI, requests } from "api";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { entityStoreActions } from "actions";
@@ -15,11 +15,13 @@ export class ActionCalloutForm extends Component {
   static displayName = "ActionCallout.Form";
 
   static propTypes = {
-    project: PropTypes.object.isRequired,
+    calloutable: PropTypes.object.isRequired,
+    closeRoute: PropTypes.string.isRequired,
     confirm: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    actionCallout: PropTypes.object.isRequired
+    actionCallout: PropTypes.object.isRequired,
+    refreshActionCallouts: PropTypes.func
   };
 
   onDelete = () => {
@@ -43,8 +45,8 @@ export class ActionCalloutForm extends Component {
     });
   };
 
-  get project() {
-    return this.props.project;
+  get calloutable() {
+    return this.props.calloutable;
   }
 
   get requestName() {
@@ -92,18 +94,19 @@ export class ActionCalloutForm extends Component {
 
   get textOptions() {
     const options = [{ label: "Select Text", value: "" }];
-    const texts = this.project.relationships.texts.map(text => {
+    if (!this.calloutable.relationships.texts) return [];
+    const texts = this.calloutable.relationships.texts.map(text => {
       return { label: text.attributes.title, value: text };
     });
     return options.concat(texts);
   }
 
   closeDrawer = () => {
-    this.fetchActionCallouts();
-    return this.props.history.push(
-      lh.link("backendProjectLayout", this.project.id),
-      { noScroll: true }
-    );
+    const { closeRoute, refreshActionCallouts } = this.props;
+    if (refreshActionCallouts) refreshActionCallouts();
+    return this.props.history.push(lh.link(closeRoute, this.calloutable.id), {
+      noScroll: true
+    });
   };
 
   shouldShowTextsForKind(kind) {
@@ -124,16 +127,11 @@ export class ActionCalloutForm extends Component {
 
   create = model => {
     const adjusted = { ...model };
-    return actionCalloutsAPI.create(this.project.id, adjusted);
-  };
-
-  fetchActionCallouts = () => {
-    const call = projectsAPI.actionCallouts(this.project.id);
-    const actionCalloutsRequest = request(
-      call,
-      requests.beProjectActionCallouts
-    );
-    this.props.dispatch(actionCalloutsRequest);
+    const createFunc =
+      this.calloutable.type === "journals"
+        ? actionCalloutsAPI.createForJournal
+        : actionCalloutsAPI.createForProject;
+    return createFunc(this.calloutable.id, adjusted);
   };
 
   render() {

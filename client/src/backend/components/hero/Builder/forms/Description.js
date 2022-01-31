@@ -2,22 +2,29 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
-import { projectsAPI } from "api";
 import Authorize from "hoc/Authorize";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
 
 export default class Description extends PureComponent {
-  static displayName = "Project.Hero.Builder.Forms.Description";
+  static displayName = "Hero.Builder.Forms.Description";
 
   static propTypes = {
-    project: PropTypes.object.isRequired,
+    model: PropTypes.object.isRequired,
+    modelLabel: PropTypes.string.isRequired,
+    api: PropTypes.object.isRequired,
+    failureRedirectRoute: PropTypes.string.isRequired,
     closeDrawer: PropTypes.func,
+    withDarkMode: PropTypes.bool,
     headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   };
 
-  get project() {
-    return this.props.project;
+  static defaultProps = {
+    withDarkMode: true
+  };
+
+  get model() {
+    return this.props.model;
   }
 
   closeDrawer = () => {
@@ -26,36 +33,45 @@ export default class Description extends PureComponent {
   };
 
   render() {
+    const {
+      modelLabel,
+      failureRedirectRoute,
+      api,
+      headerId,
+      withDarkMode
+    } = this.props;
     return (
       <Authorize
-        entity={this.project}
+        entity={this.model}
         ability="update"
         failureNotification
-        failureRedirect={lh.link("backendProject", this.project.id)}
+        failureRedirect={lh.link(failureRedirectRoute, this.model.id)}
       >
         <section>
           <Navigation.DrawerHeader
             icon="projects64"
             title="Description + Images"
-            headerId={this.props.headerId}
+            headerId={headerId}
           />
           <FormContainer.Form
-            model={this.project}
-            name="backend-project-update"
-            update={projectsAPI.update}
-            create={projectsAPI.create}
+            model={this.model}
+            name="backend-hero-update"
+            update={api.update}
+            create={api.create}
             className="form-secondary"
             onSuccess={this.closeDrawer}
           >
-            <Form.Switch label="Dark Mode" name="attributes[darkMode]" />
+            {withDarkMode && (
+              <Form.Switch label="Dark Mode" name="attributes[darkMode]" />
+            )}
             <Form.TextArea
               wide
               focusOnMount
               height={250}
               label="Description"
               name="attributes[description]"
-              placeholder="Describe the project"
-              instructions="Enter a brief description of your project. This field accepts basic Markdown."
+              placeholder={`Describe the ${modelLabel}`}
+              instructions={`Enter a brief description of your ${modelLabel}. This field accepts basic Markdown.`}
             />
             <Form.Upload
               layout="landscape"
@@ -75,7 +91,7 @@ export default class Description extends PureComponent {
               readFrom="attributes[coverStyles][small]"
               name="attributes[cover]"
               remove="attributes[removeCover]"
-              instructions="If a cover is set for the project, it will appear over the hero, to the right of the description."
+              instructions={`If a cover is set for the ${modelLabel}, it will appear over the hero, to the right of the description.`}
             />
             <Form.TextArea
               label="Image Credits"

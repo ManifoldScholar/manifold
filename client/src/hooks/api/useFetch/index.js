@@ -31,11 +31,20 @@ export default function useFetch({ request, afterFetch, options = {} }) {
 
   const internalContext = useContext(InternalContext);
 
+  if (!Array.isArray(request)) {
+    throw new Error(
+      `useFetch expects the 'request' property to be an array. In most cases, the first
+       element in the array is the Manifold API function and subsequent elements are the
+       arguments that will be passed to that method.`
+    );
+  }
+
   const [apiCall, ...apiCallArgs] = request;
 
   if (count > 25)
     throw new Error(
-      "useFetch tried to fetch data more than 25 times. This suggests that an input to useFetch needs to be memoized."
+      `useFetch tried to fetch data more than 25 times. This suggests that an input to
+      useFetch needs to be memoized.`
     );
 
   /* eslint-disable react-hooks/exhaustive-deps */

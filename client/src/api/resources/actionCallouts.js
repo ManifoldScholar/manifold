@@ -7,9 +7,19 @@ export default {
     };
   },
 
-  create(pId, actionCallout) {
+  createForProject(pId, actionCallout) {
     return {
       endpoint: `/api/v1/projects/${pId}/relationships/action_callouts`,
+      method: "POST",
+      options: {
+        body: JSON.stringify({ type: "action_callout", data: actionCallout })
+      }
+    };
+  },
+
+  createForJournal(jId, actionCallout) {
+    return {
+      endpoint: `/api/v1/journals/${jId}/relationships/action_callouts`,
       method: "POST",
       options: {
         body: JSON.stringify({ type: "action_callout", data: actionCallout })

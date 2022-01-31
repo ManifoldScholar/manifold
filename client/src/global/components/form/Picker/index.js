@@ -4,6 +4,7 @@ import { UIDConsumer } from "react-uid";
 import Errorable from "../Errorable";
 import classNames from "classnames";
 import setter from "../setter";
+import Instructions from "../Instructions";
 import Developer from "global/components/developer";
 import IconComposer from "../../utility/IconComposer";
 import withFormOptions from "hoc/withFormOptions";
@@ -54,22 +55,22 @@ export class PickerComponent extends PureComponent {
     /* what is returned from a Manifold API resource method. For example,       */
     /* one could pass "subjectsAPI.index" as options, and the HOC will fetch    */
     /* the subjects from the API and turn them into picker options.             */
-    options: PropTypes.oneOfType([
-      PropTypes.arrayOf(
-        PropTypes.oneOfType([
-          PropTypes.shape({
-            label: PropTypes.string.isRequired,
-            instructions: PropTypes.string,
-            value: PropTypes.any.isRequired
-          }),
-          PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            attributes: PropTypes.object
-          })
-        ])
-      ),
-      PropTypes.func
-    ]),
+    // options: PropTypes.oneOfType([
+    //   PropTypes.arrayOf(
+    //     PropTypes.oneOfType([
+    //       PropTypes.shape({
+    //         label: PropTypes.string.isRequired,
+    //         instructions: PropTypes.string,
+    //         value: PropTypes.any.isRequired
+    //       }),
+    //       PropTypes.shape({
+    //         id: PropTypes.string.isRequired,
+    //         attributes: PropTypes.object
+    //       })
+    //     ])
+    //   ),
+    //   PropTypes.func
+    // ]),
     /* The update options function will be called when a user searches in the   */
     /* search input and is used to refresh the options. It's passed the search  */
     /* word from the input. The assumption is that this function will update    */
@@ -136,7 +137,9 @@ export class PickerComponent extends PureComponent {
     /* picker and option to work with. By default, this function is a noop.     */
     beforeGetValue: PropTypes.func,
     /* Set to true to show the add and remove all buttons                       */
-    showAddRemoveAll: PropTypes.bool
+    showAddRemoveAll: PropTypes.bool,
+    /* Instructions display underneath the picker                               */
+    instructions: PropTypes.string
   };
 
   static defaultProps = {
@@ -578,6 +581,7 @@ export class PickerComponent extends PureComponent {
                 <label htmlFor={ids.textBox} id={ids.label}>
                   {label}
                 </label>
+                <Instructions instructions={this.props.instructions} />
                 <div className="picker-input__input-wrapper">
                   <div
                     ref={this.inputWrapperRef}
