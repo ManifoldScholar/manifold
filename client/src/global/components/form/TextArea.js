@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import setter from "./setter";
 import Errorable from "global/components/form/Errorable";
 import isString from "lodash/isString";
@@ -48,7 +48,7 @@ class FormTextArea extends Component {
     });
 
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <div className={inputClasses}>
             <Errorable
@@ -76,7 +76,7 @@ class FormTextArea extends Component {
             </Errorable>
           </div>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

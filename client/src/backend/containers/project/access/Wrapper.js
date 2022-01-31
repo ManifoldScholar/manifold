@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import PermissionsContainer from "backend/containers/permission";
@@ -59,7 +59,7 @@ class ProjectAccessWrapper extends Component {
             <PermissionsContainer.List entity={project} />
           </Layout.BackendPanel>
           <Layout.BackendPanel>
-            <UID name={id => `entitlement-block-${id}`}>
+            <UIDConsumer name={id => `entitlement-block-${id}`}>
               {id => (
                 <EntitlementsContainer.List
                   entity={project}
@@ -120,7 +120,7 @@ class ProjectAccessWrapper extends Component {
                   }
                 />
               )}
-            </UID>
+            </UIDConsumer>
           </Layout.BackendPanel>
         </Authorize>
         {childRoutes(this.props.route, {

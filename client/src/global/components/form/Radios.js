@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import Errorable from "global/components/form/Errorable";
 import Option from "./Radio/Option";
 import RadioLabel from "./Radio/Label";
@@ -75,7 +75,7 @@ class FormRadios extends Component {
 
   render() {
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <Errorable
             className={this.inputClasses}
@@ -109,7 +109,7 @@ class FormRadios extends Component {
             </fieldset>
           </Errorable>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import MaskedInput from "react-text-mask";
 import createNumberMask from "text-mask-addons/dist/createNumberMask";
 import fill from "lodash/fill";
@@ -107,7 +107,7 @@ class FormMaskedTextInput extends Component {
     });
 
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <div className={inputClasses}>
             <label htmlFor={`${this.idPrefix}-${id}`} className={labelClass}>
@@ -131,7 +131,7 @@ class FormMaskedTextInput extends Component {
             />
           </div>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

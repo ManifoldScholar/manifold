@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import setter from "./setter";
 import Errorable from "global/components/form/Errorable";
 import generatePassword from "helpers/passwordGenerator";
@@ -91,7 +91,7 @@ class FormGeneratedPasswordInput extends Component {
     const icon = !this.state.showPassword ? "eyeClosed32" : "eyeOpen32";
 
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <Errorable
             className="form-input password-input"
@@ -119,7 +119,7 @@ class FormGeneratedPasswordInput extends Component {
             {this.renderInput(id)}
           </Errorable>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

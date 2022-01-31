@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import setter from "./setter";
 import parse from "date-fns/parseISO";
 import range from "lodash/range";
@@ -197,7 +197,7 @@ class FormDate extends Component {
     });
 
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <Errorable
             className={inputClasses}
@@ -271,7 +271,7 @@ class FormDate extends Component {
             </fieldset>
           </Errorable>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

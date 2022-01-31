@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import Errorable from "global/components/form/Errorable";
 import Instructions from "./Instructions";
 import withFormOptions from "hoc/with-form-options";
@@ -75,7 +75,7 @@ class FormSelect extends Component {
     });
 
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <div className={wrapperClassName}>
             <Errorable
@@ -116,7 +116,7 @@ class FormSelect extends Component {
             </Errorable>
           </div>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

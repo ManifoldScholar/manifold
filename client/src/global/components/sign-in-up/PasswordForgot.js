@@ -5,7 +5,7 @@ import { passwordsAPI, requests } from "api";
 import { entityStoreActions, notificationActions } from "actions";
 import get from "lodash/get";
 import GlobalForm from "global/components/form";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 
 const { request, flush } = entityStoreActions;
 
@@ -94,7 +94,7 @@ export class PasswordForgotContainer extends Component {
   render() {
     return (
       <div>
-        <UID>
+        <UIDConsumer>
           {id => (
             <form
               method=""
@@ -134,7 +134,7 @@ export class PasswordForgotContainer extends Component {
               </div>
             </form>
           )}
-        </UID>
+        </UIDConsumer>
         <p className="login-links">
           <button
             onClick={event =>

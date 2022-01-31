@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import Preview from "./Types";
 import { CSSTransition } from "react-transition-group";
 import GlobalOverlay from "global/components/Overlay";
@@ -79,7 +79,7 @@ export default class ResourcePreview extends Component {
     if (!PreviewComponent) return this.renderChildren(this.props.resource);
 
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <>
             <CSSTransition
@@ -106,7 +106,7 @@ export default class ResourcePreview extends Component {
             </button>
           </>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

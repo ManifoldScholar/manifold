@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import Block from "./Block";
 import Forms from "./forms";
 import Drawer from "global/containers/drawer";
@@ -63,7 +63,7 @@ export default class Builder extends PureComponent {
     const DrawerContents = this.drawerComponent;
 
     return (
-      <UID name={id => `hero-builder-${id}`}>
+      <UIDConsumer name={id => `hero-builder-${id}`}>
         {id => (
           <>
             <section className="hero-builder form-secondary">
@@ -123,7 +123,7 @@ export default class Builder extends PureComponent {
             </Drawer.Wrapper>
           </>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

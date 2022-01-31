@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isArray from "lodash/isArray";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import BaseInput from "./BaseInput";
 
 export default class FormTextInput extends Component {
@@ -52,7 +52,7 @@ export default class FormTextInput extends Component {
     const inputType = this.props.password ? "password" : "text";
 
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <BaseInput
             {...this.props}
@@ -64,7 +64,7 @@ export default class FormTextInput extends Component {
             buttons={this.props.buttons}
           />
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

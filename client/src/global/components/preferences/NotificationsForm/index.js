@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import config from "config";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import Collapse from "global/components/Collapse";
 import RadioGroup from "./RadioGroup";
 import ProjectPreferences from "./ProjectPreferences";
@@ -43,7 +43,7 @@ export default class NotificationsForm extends Component {
 
     return (
       <div className="subscriptions">
-        <UID name={id => `project-activity-${id}`}>
+        <UIDConsumer name={id => `project-activity-${id}`}>
           {id => (
             <div
               role="group"
@@ -72,8 +72,8 @@ export default class NotificationsForm extends Component {
               </div>
             </div>
           )}
-        </UID>
-        <UID name={id => `other-activity-${id}`}>
+        </UIDConsumer>
+        <UIDConsumer name={id => `other-activity-${id}`}>
           {id => (
             <div role="group" aria-labelledby={`${id}-header`}>
               <h2 id={`${id}-header`} className="section-heading-secondary">
@@ -84,7 +84,7 @@ export default class NotificationsForm extends Component {
               </div>
             </div>
           )}
-        </UID>
+        </UIDConsumer>
         <button
           className="utility-button"
           onClick={this.props.unsubscribeAllHandler}

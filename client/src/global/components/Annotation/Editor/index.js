@@ -4,7 +4,7 @@ import GlobalForm from "global/components/form";
 import IconComposer from "global/components/utility/IconComposer";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import classNames from "classnames";
 import ReadingGroupOption from "reader/components/annotation/Popup/parts/ReadingGroupOption";
 import withReadingGroups from "hoc/with-reading-groups";
@@ -321,7 +321,7 @@ class AnnotationEditor extends PureComponent {
 
           <div className="annotation-editor__actions">
             {this.shouldShowReadingGroups && (
-              <UID name={id => `${this.idPrefix}-${id}`}>
+              <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
                 {id => (
                   <div className="annotation-editor__action">
                     <div className="annotation-editor__action-label">
@@ -341,7 +341,7 @@ class AnnotationEditor extends PureComponent {
                     {this.renderSRSelect(id)}
                   </div>
                 )}
-              </UID>
+              </UIDConsumer>
             )}
             <div className="annotation-editor__buttons">
               <button

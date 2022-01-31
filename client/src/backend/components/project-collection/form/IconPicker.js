@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import GlobalForm from "global/components/form";
 import classNames from "classnames";
 import IconComputed from "global/components/icon-computed";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 
 export default class IconPicker extends Component {
   static displayName = "ProjectCollection.Form.IconPicker";
@@ -101,7 +101,7 @@ export default class IconPicker extends Component {
     });
 
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <div className={inputClasses}>
             <GlobalForm.Errorable
@@ -126,7 +126,7 @@ export default class IconPicker extends Component {
             </GlobalForm.Errorable>
           </div>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

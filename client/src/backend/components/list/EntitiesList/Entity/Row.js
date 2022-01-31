@@ -8,7 +8,7 @@ import isFunction from "lodash/isFunction";
 import has from "lodash/has";
 import LabelSet from "./LabelSet";
 import { Link } from "react-router-dom";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
 
 export default class EntitiesListRow extends PureComponent {
@@ -312,7 +312,7 @@ export default class EntitiesListRow extends PureComponent {
 
   render() {
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <li className="entity-row entity-list__entity">
             {this.blockLink(
@@ -363,7 +363,7 @@ export default class EntitiesListRow extends PureComponent {
             )}
           </li>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

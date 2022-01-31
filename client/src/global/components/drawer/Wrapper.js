@@ -7,7 +7,7 @@ import has from "lodash/has";
 import isString from "lodash/isString";
 import classNames from "classnames";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
 import Notifications from "global/containers/Notifications";
 import { notificationActions } from "actions";
@@ -348,7 +348,7 @@ export default class DrawerWrapper extends PureComponent {
 
   render() {
     return (
-      <UID name={id => `drawer-header-${id}`}>
+      <UIDConsumer name={id => `drawer-header-${id}`}>
         {id => (
           <CSSTransition
             in={this.props.open}
@@ -359,7 +359,7 @@ export default class DrawerWrapper extends PureComponent {
             {this.renderDrawerWrapper(id)}
           </CSSTransition>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

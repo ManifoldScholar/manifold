@@ -5,7 +5,7 @@ import Wrapper from "./Wrapper";
 import isString from "lodash/isString";
 import isFunction from "lodash/isFunction";
 import IconComposer from "global/components/utility/IconComposer";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 
 export default class DialogConfirm extends PureComponent {
   static displayName = "Dialog.Confirm";
@@ -83,7 +83,7 @@ export default class DialogConfirm extends PureComponent {
 
   render() {
     return (
-      <UID name={id => `dialog-${id}`}>
+      <UIDConsumer name={id => `dialog-${id}`}>
         {id => (
           <Wrapper
             className="dialog-confirm"
@@ -138,7 +138,7 @@ export default class DialogConfirm extends PureComponent {
             </div>
           </Wrapper>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

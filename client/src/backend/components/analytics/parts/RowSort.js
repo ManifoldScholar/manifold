@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
 
 function RowSort({ options, active, onChange }) {
@@ -10,7 +10,7 @@ function RowSort({ options, active, onChange }) {
         onSubmit={event => event.preventDefault()}
         className="analytics-block__sort-form"
       >
-        <UID name={id => `rowSort-${id}`}>
+        <UIDConsumer name={id => `rowSort-${id}`}>
           {id => (
             <div className="select">
               <label htmlFor={id} className="select__label">
@@ -32,7 +32,7 @@ function RowSort({ options, active, onChange }) {
               </div>
             </div>
           )}
-        </UID>
+        </UIDConsumer>
       </form>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import isBefore from "date-fns/isBefore";
 import addDays from "date-fns/addDays";
 import subDays from "date-fns/subDays";
@@ -114,7 +114,7 @@ function RangePicker({
   };
 
   return (
-    <UID>
+    <UIDConsumer>
       {id => (
         <div className={`range-picker ${className}`}>
           <div className="range-picker__section">
@@ -155,7 +155,7 @@ function RangePicker({
           </div>
         </div>
       )}
-    </UID>
+    </UIDConsumer>
   );
 }
 

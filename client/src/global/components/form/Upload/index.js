@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import setter from "../setter";
 import Base from "./Base";
 import get from "lodash/get";
@@ -132,7 +132,7 @@ export class FormUpload extends Component {
   render() {
     const { set: _set, setOther: _setOther, ...baseProps } = this.props;
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <Base
             {...baseProps}
@@ -143,7 +143,7 @@ export class FormUpload extends Component {
             idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
           />
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

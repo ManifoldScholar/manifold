@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class ColorPicker extends Component {
@@ -57,7 +57,7 @@ export default class ColorPicker extends Component {
     ];
 
     return (
-      <UID name={id => `${this.idForPrefix}-${id}`}>
+      <UIDConsumer name={id => `${this.idForPrefix}-${id}`}>
         {id => (
           <div
             className="color-picker__list"
@@ -105,7 +105,7 @@ export default class ColorPicker extends Component {
             })}
           </div>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 

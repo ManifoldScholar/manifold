@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -86,7 +86,7 @@ export default class Toggle extends Component {
     const options = [this.props.optionOne, this.props.optionTwo];
 
     return (
-      <UID name={id => `${this.idPrefix}-${id}`}>
+      <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
         {id => (
           <div
             role="group"
@@ -101,7 +101,7 @@ export default class Toggle extends Component {
             </span>
           </div>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

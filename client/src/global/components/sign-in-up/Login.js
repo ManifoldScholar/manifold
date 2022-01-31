@@ -5,7 +5,7 @@ import { get } from "lodash";
 import classNames from "classnames";
 import LoginExternal from "./LoginExternal";
 import Notifications from "global/containers/Notifications";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 
 export default class Login extends Component {
   static propTypes = {
@@ -78,7 +78,7 @@ export default class Login extends Component {
             />
           </div>
         )}
-        <UID>
+        <UIDConsumer>
           {id => (
             <form
               method="post"
@@ -138,7 +138,7 @@ export default class Login extends Component {
               </div>
             </form>
           )}
-        </UID>
+        </UIDConsumer>
         <p className="login-links">
           <button
             onClick={event =>
