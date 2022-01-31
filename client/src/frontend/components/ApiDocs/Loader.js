@@ -1,5 +1,5 @@
 import React from "react";
-import Loadable from "react-loadable";
+import Loadable from "@docusaurus/react-loadable";
 
 const SwaggerUI = Loadable({
   loader: () => {
