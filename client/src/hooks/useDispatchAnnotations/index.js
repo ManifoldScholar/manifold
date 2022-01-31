@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import omitBy from "lodash/omitBy";
 import { meAPI, readingGroupsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import { getRequestName } from "../helpers";
+import { getRequestName } from "../annotationHelpers";
 
 const { request } = entityStoreActions;
 
