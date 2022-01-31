@@ -5,7 +5,11 @@ describe("backend/components/category/List/Texts", () => {
   def("project", fixtures.project);
 
   def("root", () => (
-    <Texts texts={$project.relationships.texts} callbacks={{}} />
+    <Texts
+      texts={$project.relationships.texts}
+      callbacks={{}}
+      onTextKeyboardMove={() => {}}
+    />
   ));
 
   it("matches the snapshot", () => {

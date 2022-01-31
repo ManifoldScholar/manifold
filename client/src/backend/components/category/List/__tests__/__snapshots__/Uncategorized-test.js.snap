@@ -19,6 +19,7 @@ exports[`backend/components/category/List/Uncategorized matches the snapshot 1`]
   </header>
   <Category.List.Texts
     callbacks={Object {}}
+    onTextKeyboardMove={[Function]}
     texts={
       Array [
         Object {

@@ -9,6 +9,7 @@ describe("backend/components/category/List/Uncategorized", () => {
       project={$project}
       texts={$project.relationships.texts}
       callbacks={{}}
+      onTextKeyboardMove={() => {}}
     />
   ));
 

@@ -27,7 +27,7 @@ export const Item = styled.li`
   }
 `;
 
-export const ItemLink = styled(Link)`
+export const itemLinkStyles = `
   ${buttonUnstyled}
   font-family: var(--font-family-heading);
   display: block;
@@ -42,6 +42,10 @@ export const ItemLink = styled(Link)`
     ${defaultHoverStyle}
     outline-offset: -3px;
   }
+`;
+
+export const ItemLink = styled(Link)`
+  ${itemLinkStyles}
 `;
 
 const linkContentStyles = `
@@ -76,7 +80,8 @@ export const EntityTitle = styled.span`
   text-decoration: underline;
 `;
 
-export const SignInButton = styled(ItemLink)`
+export const SignInButton = styled.button`
+  ${itemLinkStyles}
   padding-block-end: 0.38em;
 `;
 

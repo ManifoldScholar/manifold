@@ -26,12 +26,14 @@ describe("store/reducers/ui/loading", () => {
     });
     const startAction = { type: "START_LOADING", payload: promise };
     const startState = loadingReducer(initialState, startAction);
-    promise.then(() => {
-      const stopAction = { type: "STOP_LOADING", payload: promise };
-      const stopState = loadingReducer(startState, stopAction);
-      expect(stopState.active).toBe(false);
-      done();
-    });
+    promise
+      .then(() => {
+        const stopAction = { type: "STOP_LOADING", payload: promise };
+        const stopState = loadingReducer(startState, stopAction);
+        expect(stopState.active).toBe(false);
+        done();
+      })
+      .catch(() => {});
   });
 });
 /* eslint-enable no-unused-expressions */

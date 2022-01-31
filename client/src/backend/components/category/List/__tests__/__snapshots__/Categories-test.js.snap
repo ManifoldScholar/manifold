@@ -17,6 +17,7 @@ Array [
     }
     index={0}
     key="1"
+    onTextKeyboardMove={[Function]}
     project={
       Object {
         "attributes": Object {
@@ -2385,6 +2386,7 @@ Array [
     }
     index={1}
     key="2"
+    onTextKeyboardMove={[Function]}
     project={
       Object {
         "attributes": Object {
