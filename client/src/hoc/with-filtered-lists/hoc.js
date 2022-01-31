@@ -110,15 +110,6 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       return this.state[key].initialValues;
     }
 
-    entitiesListSearchProps = key => {
-      return {
-        onReset: this.buildMemoizedHandler("onReset", key),
-        setParam: this.buildMemoizedHandler("setParam", key),
-        params: this.paramsFor(key),
-        values: this.valuesFor(key)
-      };
-    };
-
     entitiesListSearchParams = memoize(stateIgnored => {
       const params = {};
       this.managedLists.forEach(key => {
@@ -158,12 +149,21 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       return this.paramByName(key, name);
     }
 
-    buildMemoizedHandler = memoize((name, key) => {
+    buildMemoizedHandler = (name, key) => {
       const handler = this[name];
       return (...args) => {
         return handler(key, ...args);
       };
-    });
+    };
+
+    entitiesListSearchProps = key => {
+      return {
+        onReset: this.buildMemoizedHandler("onReset", key),
+        setParam: this.buildMemoizedHandler("setParam", key),
+        params: this.paramsFor(key),
+        values: this.valuesFor(key)
+      };
+    };
 
     paramsFor = key => {
       return this.state[key].params;
