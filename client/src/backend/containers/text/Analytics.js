@@ -7,8 +7,8 @@ import {
   RangePicker
 } from "backend/components/analytics";
 
-import withAnalyticsReport from "hoc/analytics/with-analytics-report";
-import Authorize from "hoc/authorize";
+import withAnalyticsReport from "hoc/analytics/withAnalyticsReport";
+import Authorize from "hoc/Authorize";
 
 export class AnalyticsContainer extends PureComponent {
   static displayName = "Text.Analytics";

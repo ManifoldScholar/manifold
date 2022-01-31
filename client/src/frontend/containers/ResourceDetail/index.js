@@ -10,7 +10,7 @@ import LoadingBlock from "global/components/loading-block";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import HeadContent from "global/components/HeadContent";
 import some from "lodash/some";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 

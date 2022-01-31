@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom/server";
 import serialize from "serialize-javascript";
-import BodyClass from "hoc/body-class";
+import BodyClass from "hoc/BodyClass";
 import reduceAssets from "./reduceAssets";
 
 function getJavascripts(stats) {

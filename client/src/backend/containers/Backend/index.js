@@ -10,8 +10,8 @@ import { uiStateSnapshotActions, entityStoreActions } from "actions";
 import entityUtils from "utils/entityUtils";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
-import BodyClass from "hoc/body-class";
-import Authorize from "hoc/authorize";
+import BodyClass from "hoc/BodyClass";
+import Authorize from "hoc/Authorize";
 
 const { request } = entityStoreActions;
 

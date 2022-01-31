@@ -7,7 +7,7 @@ import RadioLabel from "./Radio/Label";
 import classnames from "classnames";
 import isString from "lodash/isString";
 import Instructions from "./Instructions";
-import withFormOptions from "hoc/with-form-options";
+import withFormOptions from "hoc/withFormOptions";
 
 class FormRadios extends Component {
   static displayName = "Form.Radios";

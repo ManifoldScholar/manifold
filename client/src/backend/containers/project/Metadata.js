@@ -4,7 +4,7 @@ import Metadata from "backend/components/metadata";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export default class ProjectMetadataContainer extends PureComponent {
   static displayName = "Project.Metadata";

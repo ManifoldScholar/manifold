@@ -5,7 +5,7 @@ import { get } from "lodash";
 import { providerSetting } from "utils/oauth";
 import IconComposer from "global/components/utility/IconComposer";
 
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 
 class Button extends Component {
   static propTypes = {

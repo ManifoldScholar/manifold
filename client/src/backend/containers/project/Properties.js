@@ -5,11 +5,11 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { subjectsAPI, projectsAPI, tagsAPI } from "api";
 import lh from "helpers/linkHandler";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import { entityStoreActions } from "actions";
 
 const { request } = entityStoreActions;
-import withDispatch from "hoc/with-dispatch";
+import withDispatch from "hoc/withDispatch";
 
 class ProjectPropertiesContainer extends PureComponent {
   static displayName = "Project.Properties";

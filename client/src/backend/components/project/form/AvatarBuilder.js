@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 import Form from "global/components/form";
 import setter from "global/components/form/setter";
 import GlobalForm from "global/components/form";

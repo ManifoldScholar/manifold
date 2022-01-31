@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import Utility from "global/components/utility";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import ContentPlaceholder from "global/components/ContentPlaceholder";
 
 export default class ProjectCollectionPlaceholder extends Component {

@@ -5,7 +5,7 @@ import classNames from "classnames";
 import Categories from "./Categories";
 import Uncategorized from "./Uncategorized";
 
-import withScreenReaderStatus from "hoc/with-screen-reader-status";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 class CategoryList extends PureComponent {
   static displayName = "Category.List";

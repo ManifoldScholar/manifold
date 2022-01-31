@@ -12,7 +12,7 @@ import EntitiesList, {
   Search,
   UserRow
 } from "backend/components/list/EntitiesList";
-import withFilteredLists, { userFilters } from "hoc/with-filtered-lists";
+import withFilteredLists, { userFilters } from "hoc/withFilteredLists";
 
 const { request } = entityStoreActions;
 const perPage = 10;

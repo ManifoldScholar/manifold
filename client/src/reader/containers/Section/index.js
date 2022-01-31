@@ -22,7 +22,7 @@ import { childRoutes } from "helpers/router";
 import HeadContent from "global/components/HeadContent";
 import values from "lodash/values";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 
 const { request, flush } = entityStoreActions;
 

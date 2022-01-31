@@ -8,8 +8,8 @@ import UIPanel from "global/components/UIPanel";
 import { NavLink, withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
-import withSettings from "hoc/with-settings";
-import Authorize from "hoc/authorize";
+import withSettings from "hoc/withSettings";
+import Authorize from "hoc/Authorize";
 
 export class NavigationStatic extends PureComponent {
   static displayName = "Navigation.Static";

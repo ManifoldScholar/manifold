@@ -7,7 +7,7 @@ import CloseButton from "global/components/Overlay/Close";
 import { withRouter } from "react-router-dom";
 import Interface from "./Interface";
 
-import BodyClass from "hoc/body-class";
+import BodyClass from "hoc/BodyClass";
 
 class Overlay extends Component {
   static propTypes = {

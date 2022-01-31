@@ -11,7 +11,7 @@ import CaptureClick from "./annotatable-components/CaptureClick";
 import AnnotationNotationViewer from "./annotatable-components/NotationViewer";
 import selectionHelpers from "./annotatable-components/selectionHelpers";
 import locationHelper from "helpers/location";
-import withReadingGroups from "hoc/with-reading-groups";
+import withReadingGroups from "hoc/withReadingGroups";
 
 const { request } = entityStoreActions;
 

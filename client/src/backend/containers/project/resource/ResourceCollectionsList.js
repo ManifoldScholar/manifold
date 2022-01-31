@@ -12,7 +12,7 @@ import EntitiesList, {
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, {
   resourceCollectionFilters
-} from "hoc/with-filtered-lists";
+} from "hoc/withFilteredLists";
 
 const { request } = entityStoreActions;
 const perPage = 5;

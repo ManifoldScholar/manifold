@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
-import BodyClass from "hoc/body-class";
+import BodyClass from "hoc/BodyClass";
 
 export default class LockBodyScroll extends PureComponent {
   static displayName = "Utility.LockBodyScroll";

@@ -7,7 +7,7 @@ import Form from "global/components/form";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 
 const { request } = entityStoreActions;
 

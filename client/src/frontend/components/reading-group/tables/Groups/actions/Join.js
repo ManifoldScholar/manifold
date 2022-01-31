@@ -6,7 +6,7 @@ import classNames from "classnames";
 import config from "config";
 import { requests } from "api";
 import { entityStoreActions } from "actions";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 
 const { request } = entityStoreActions;
 

@@ -4,7 +4,7 @@ import FocusTrap from "focus-trap-react";
 import { useUID } from "react-uid";
 import Header from "./Header";
 
-import BodyClass from "hoc/body-class";
+import BodyClass from "hoc/BodyClass";
 
 function Overlay({
   title,

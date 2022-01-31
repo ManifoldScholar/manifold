@@ -26,9 +26,9 @@ import {
 import { setPersistentUI } from "actions/ui/persistentUi";
 import { CSSTransition } from "react-transition-group";
 import get from "lodash/get";
-import ScrollAware from "hoc/scroll-aware";
-import BodyClass from "hoc/body-class";
-import Authorize from "hoc/authorize";
+import ScrollAware from "hoc/ScrollAware";
+import BodyClass from "hoc/BodyClass";
+import Authorize from "hoc/Authorize";
 import { ReaderContext } from "helpers/contexts";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 
@@ -250,7 +250,7 @@ export class ReaderContainer extends Component {
             project={this.props.text.relationships.project}
           />
           <ScrollAware>
-            {/* Header inside scroll-aware HOC */}
+            {/* Header inside ScrollAware HOC */}
             <Header
               // Props required by body component
               text={this.props.text}

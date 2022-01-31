@@ -13,7 +13,7 @@ import IconComposer from "global/components/utility/IconComposer";
 const { request } = entityStoreActions;
 import GlobalForm from "global/components/form";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export class CommentEditor extends PureComponent {
   static mapStateToProps = (state, ownProps) => {

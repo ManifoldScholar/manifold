@@ -8,7 +8,7 @@ import { RedirectToFirstMatch, childRoutes } from "helpers/router";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 
 const { request } = entityStoreActions;

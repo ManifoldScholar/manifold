@@ -9,10 +9,10 @@ import { resourceCollectionsAPI, requests, projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 import IconComposer from "global/components/utility/IconComposer";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import { Link } from "react-router-dom";
 
 const { request, flush } = entityStoreActions;

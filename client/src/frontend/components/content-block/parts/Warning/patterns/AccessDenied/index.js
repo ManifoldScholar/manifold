@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import config from "config";
 import get from "lodash/get";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 import * as Styled from "./styles";
 
 const TEXT_PATHS = {

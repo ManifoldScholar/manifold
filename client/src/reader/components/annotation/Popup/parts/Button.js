@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export default class DefaultButton extends PureComponent {
   static displayName = "Annotation.Popup.button";

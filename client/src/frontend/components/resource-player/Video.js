@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { DefaultPlayer as Video } from "react-html5video";
-import withDispatch from "hoc/with-dispatch";
+import withDispatch from "hoc/withDispatch";
 import { notificationActions } from "actions";
 
 class ResourcePlayerVideo extends Component {

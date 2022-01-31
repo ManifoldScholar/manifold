@@ -6,7 +6,7 @@ import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export class SettingsWrapperContainer extends PureComponent {
   static propTypes = {

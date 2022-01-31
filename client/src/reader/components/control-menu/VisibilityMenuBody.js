@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
-import withReadingGroups from "hoc/with-reading-groups";
+import withReadingGroups from "hoc/withReadingGroups";
 import has from "lodash/has";
 import { ReaderContext } from "helpers/contexts";
-import withCurrentUser from "hoc/with-current-user";
+import withCurrentUser from "hoc/withCurrentUser";
 
 // This class is in need of refactoring. I did not have bandwidth to give it the refactor
 // it deserves during reading group development --ZD

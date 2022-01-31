@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Popup from "reader/components/annotation/Popup";
 
-import withReadingGroups from "hoc/with-reading-groups";
+import withReadingGroups from "hoc/withReadingGroups";
 
 class AnnotatablePopup extends PureComponent {
   static displayName = "Annotation.Popup.Menu";

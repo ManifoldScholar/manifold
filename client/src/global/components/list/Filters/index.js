@@ -5,7 +5,7 @@ import Search from "./Search";
 import Filter, { filterShape } from "./Filter";
 import * as Styled from "./styles";
 
-import withScreenReaderStatus from "hoc/with-screen-reader-status";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 function Filters({
   searchProps,

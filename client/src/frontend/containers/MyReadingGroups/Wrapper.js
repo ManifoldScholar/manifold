@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { childRoutes } from "helpers/router";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import lh from "helpers/linkHandler";
 
 export default class MyReadingGroupsContainer extends Component {

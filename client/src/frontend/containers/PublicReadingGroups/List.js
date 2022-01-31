@@ -14,7 +14,7 @@ import {
   useDispatchPublicReadingGroups,
   useSelectPublicReadingGroups
 } from "hooks";
-import withCurrentUser from "hoc/with-current-user";
+import withCurrentUser from "hoc/withCurrentUser";
 
 const DEFAULT_SORT_ORDER = "";
 const DEFAULT_PAGE = 1;

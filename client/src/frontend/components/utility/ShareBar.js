@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { TwitterButton, FacebookButton } from "react-sociable";
 import IconComposer from "global/components/utility/IconComposer";
 
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 
 class ShareBar extends Component {
   static displayName = "Utility.ShareBar";

@@ -8,7 +8,7 @@ import { entityStoreActions } from "actions";
 import IconComposer from "global/components/utility/IconComposer";
 
 import Stylesheet from "backend/components/stylesheet";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 
 const { request } = entityStoreActions;
 

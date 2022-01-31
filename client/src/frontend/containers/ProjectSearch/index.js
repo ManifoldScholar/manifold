@@ -4,7 +4,7 @@ import lh from "helpers/linkHandler";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
-import withSearch from "hoc/with-search";
+import withSearch from "hoc/withSearch";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 
 class ProjectSearch extends Component {

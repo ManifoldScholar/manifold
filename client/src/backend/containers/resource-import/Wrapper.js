@@ -9,7 +9,7 @@ import { resourceImportsAPI, projectsAPI, requests } from "api";
 import { grab, isEntityLoaded, select } from "utils/entityUtils";
 import { entityStoreActions } from "actions";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 const { request } = entityStoreActions;
 

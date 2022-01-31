@@ -9,11 +9,11 @@ import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
 import navigation from "helpers/router/navigation";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 import IconComposer from "global/components/utility/IconComposer";
 import { Link } from "react-router-dom";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;

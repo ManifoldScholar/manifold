@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import IconComposer from "global/components/utility/IconComposer";
-import BodyClass from "hoc/body-class";
+import BodyClass from "hoc/BodyClass";
 import {
   buttonUnstyled,
   subtitlePrimary,

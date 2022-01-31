@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { uiFrontendModeActions } from "actions";
 import { FrontendModeContext } from "helpers/contexts";
 import connectAndFetch from "utils/connectAndFetch";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 import queryString from "query-string";
 
 class CheckFrontendMode extends PureComponent {

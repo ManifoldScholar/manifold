@@ -7,9 +7,9 @@ import lh from "helpers/linkHandler";
 import { UIDConsumer } from "react-uid";
 import classNames from "classnames";
 import ReadingGroupOption from "reader/components/annotation/Popup/parts/ReadingGroupOption";
-import withReadingGroups from "hoc/with-reading-groups";
+import withReadingGroups from "hoc/withReadingGroups";
 import { ReaderContext } from "helpers/contexts";
-import withCurrentUser from "hoc/with-current-user";
+import withCurrentUser from "hoc/withCurrentUser";
 
 class AnnotationEditor extends PureComponent {
   static displayName = "Annotation.Editor";

@@ -10,7 +10,7 @@ import get from "lodash/get";
 import queryString from "query-string";
 import omitBy from "lodash/omitBy";
 import debounce from "lodash/debounce";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 
 const { request } = entityStoreActions;

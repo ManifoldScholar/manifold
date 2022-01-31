@@ -6,7 +6,7 @@ import { pagesAPI } from "api";
 import { select } from "utils/entityUtils";
 import connectAndFetch from "utils/connectAndFetch";
 
-import withFormSession from "hoc/with-form-session";
+import withFormSession from "hoc/withFormSession";
 
 class PagesPropertiesContainer extends PureComponent {
   static mapStateToProps = state => {

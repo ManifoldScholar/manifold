@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { projectsAPI } from "api";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
 

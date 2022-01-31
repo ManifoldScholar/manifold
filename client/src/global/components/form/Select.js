@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { UIDConsumer } from "react-uid";
 import Errorable from "global/components/form/Errorable";
 import Instructions from "./Instructions";
-import withFormOptions from "hoc/with-form-options";
+import withFormOptions from "hoc/withFormOptions";
 import IconComposer from "global/components/utility/IconComposer";
 import classNames from "classnames";
 

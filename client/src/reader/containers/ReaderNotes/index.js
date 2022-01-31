@@ -11,7 +11,7 @@ import {
   useGrabCurrentText,
   useGrabCurrentTextSection
 } from "hooks";
-import withReadingGroups from "hoc/with-reading-groups";
+import withReadingGroups from "hoc/withReadingGroups";
 
 const DEFAULT_FORMATS = ["highlight", "annotation", "bookmark"];
 

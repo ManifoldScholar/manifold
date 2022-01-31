@@ -9,7 +9,7 @@ import CategoriesList from "./SortableCategories/CategoriesList";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 import * as Styled from "./styles";
 
-import withScreenReaderStatus from "hoc/with-screen-reader-status";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 const { request } = entityStoreActions;
 

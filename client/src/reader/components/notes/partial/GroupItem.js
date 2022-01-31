@@ -6,7 +6,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import Tag from "global/components/Annotation/Tag";
 import Avatar from "global/components/avatar";
 
-import withReadingGroups from "hoc/with-reading-groups";
+import withReadingGroups from "hoc/withReadingGroups";
 
 class GroupItem extends Component {
   static displayName = "Notes.Partial.GroupItem";

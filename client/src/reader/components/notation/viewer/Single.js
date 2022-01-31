@@ -5,7 +5,7 @@ import Link from "./Link";
 import Notation from "./Notation";
 import IconComposer from "global/components/utility/IconComposer";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 // This class represents a single notation in the margin. It's used to show the active
 // notation when notations are grouped, and it's used to show a single notation in the

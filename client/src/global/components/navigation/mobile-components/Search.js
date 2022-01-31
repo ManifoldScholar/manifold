@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import SearchMenu from "global/components/search/menu";
 import { FrontendModeContext } from "helpers/contexts";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 
 class MobileSearch extends PureComponent {
   static propTypes = {

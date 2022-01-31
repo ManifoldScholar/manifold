@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import withPluginReplacement from "hoc/with-plugin-replacement";
+import withPluginReplacement from "hoc/withPluginReplacement";
 import * as Styled from "./styles";
 
 class PressLogo extends PureComponent {

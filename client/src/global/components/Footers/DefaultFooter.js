@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import FooterParts from "./Parts";
 import { withRouter } from "react-router-dom";
-import withPluginReplacement from "hoc/with-plugin-replacement";
+import withPluginReplacement from "hoc/withPluginReplacement";
 import links from "./Parts/helpers/links";
 import LanguageSelect from "global/components/LanguageSelect";
 import * as Styled from "./styles";

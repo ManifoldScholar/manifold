@@ -7,7 +7,7 @@ import ReadingGroupOption from "./parts/ReadingGroupOption";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 import { ReaderContext } from "helpers/contexts";
-import withCurrentUser from "hoc/with-current-user";
+import withCurrentUser from "hoc/withCurrentUser";
 
 class AnnotationPopupSecondaryReadingGroup extends PureComponent {
   static displayName = "Annotation.Popup.Secondary.ReadingGroup";

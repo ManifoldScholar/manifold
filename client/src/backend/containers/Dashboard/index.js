@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Dashboards from "backend/containers/dashboards";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export default class DashboardContainer extends PureComponent {
   static propTypes = {

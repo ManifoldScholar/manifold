@@ -59,11 +59,11 @@ jest.mock("use-resize-observer", () => {
 
 // Mocked fetchData is a noop component that renders its child.
 // see src/components/global/HigherOrder/__mocks__/fetchData.js
-jest.mock("hoc/fetch-data");
+jest.mock("hoc/fetchData");
 
 // Mocked withFormContext is a noop component that renders its child.
 // see src/containers/global/HigherOrder/__mocks__/withFormContext.js
-jest.mock("hoc/with-form-context");
+jest.mock("hoc/withFormContext");
 
 // To mock returned data or collection responses, adjust src/api/__mocks__/client.js
 jest.mock("api/client");

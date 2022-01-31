@@ -8,7 +8,7 @@ import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 
 const { request, flush } = entityStoreActions;
 

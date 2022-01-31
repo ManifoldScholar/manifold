@@ -6,8 +6,8 @@ import EntityCollection from "frontend/components/composed/EntityCollection";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 
 import { useDispatchMyCollected, useSelectMyCollected } from "hooks";
-import Authorize from "hoc/authorize";
-import withCurrentUser from "hoc/with-current-user";
+import Authorize from "hoc/Authorize";
+import withCurrentUser from "hoc/withCurrentUser";
 
 function MyStarredContainer({ currentUser }) {
   const [fetchVersion, setFetchVersion] = useState({

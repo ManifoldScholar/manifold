@@ -7,7 +7,7 @@ import FormContainer from "global/containers/form";
 import { settingsAPI, requests } from "api";
 import { select } from "utils/entityUtils";
 
-import withFormSession from "hoc/with-form-session";
+import withFormSession from "hoc/withFormSession";
 
 export class SettingsIngestionContainer extends PureComponent {
   static mapStateToProps = state => {

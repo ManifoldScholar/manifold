@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Utility from "global/components/utility";
-import withScreenReaderStatus from "hoc/with-screen-reader-status";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 class AppearanceMenuBody extends Component {
   static displayName = "ControlMenu.AppearanceMenuBody";

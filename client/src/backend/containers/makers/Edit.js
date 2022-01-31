@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { makersAPI, requests } from "api";

@@ -6,7 +6,7 @@ import get from "lodash/get";
 import Collections from "./Collections";
 import Projects from "./Projects";
 import Feature from "./Feature";
-import withSettings from "hoc/with-settings";
+import withSettings from "hoc/withSettings";
 import Layout from "frontend/components/layout";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 

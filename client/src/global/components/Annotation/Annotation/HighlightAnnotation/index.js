@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 import SourceSummary from "../SourceSummary/index";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export default class HighlightDetail extends PureComponent {
   static displayName = "Annotation.HighlightAnnotation";

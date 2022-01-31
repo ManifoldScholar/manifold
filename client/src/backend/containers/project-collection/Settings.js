@@ -1,13 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 import ProjectCollection from "backend/components/project-collection";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { projectCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 
 export class ProjectCollectionSettings extends PureComponent {
   static displayName = "ProjectCollection.Settings";

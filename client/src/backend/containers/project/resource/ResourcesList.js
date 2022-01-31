@@ -10,7 +10,7 @@ import EntitiesList, {
   Search,
   ResourceRow
 } from "backend/components/list/EntitiesList";
-import withFilteredLists, { resourceFilters } from "hoc/with-filtered-lists";
+import withFilteredLists, { resourceFilters } from "hoc/withFilteredLists";
 
 const { request } = entityStoreActions;
 const perPage = 5;

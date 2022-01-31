@@ -9,7 +9,7 @@ import { entityStoreActions } from "actions";
 import { DuplicatePanel } from "./panels";
 
 const { request } = entityStoreActions;
-import withConfirmation from "hoc/with-confirmation";
+import withConfirmation from "hoc/withConfirmation";
 import config from "config";
 
 class ReadingGroupSettings extends PureComponent {

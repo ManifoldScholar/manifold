@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import withPluginReplacement from "hoc/with-plugin-replacement";
+import withPluginReplacement from "hoc/withPluginReplacement";
 
 class LayoutPreHeader extends PureComponent {
   static displayName = "Reader.Layout.PreHeader";

@@ -6,7 +6,7 @@ import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import { entityStoreActions } from "actions";
 
 const { request } = entityStoreActions;

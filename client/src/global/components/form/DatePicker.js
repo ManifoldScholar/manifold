@@ -8,7 +8,7 @@ import classnames from "classnames";
 import isDate from "lodash/isDate";
 import format from "date-fns/format";
 
-import withScreenReaderStatus from "hoc/with-screen-reader-status";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 class DatePicker extends PureComponent {
   static propTypes = {

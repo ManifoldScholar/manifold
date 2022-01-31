@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Truncated from "./Truncated";
 import nl2br from "nl2br";
 import classNames from "classnames";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import IconComposer from "global/components/utility/IconComposer";
 import SourceSummary from "../SourceSummary";
 

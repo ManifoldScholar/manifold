@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import { UIDConsumer } from "react-uid";
-import withDispatch from "hoc/with-dispatch";
-import withConfirmation from "hoc/with-confirmation";
-import withCurrentUser from "hoc/with-current-user";
+import withDispatch from "hoc/withDispatch";
+import withConfirmation from "hoc/withConfirmation";
+import withCurrentUser from "hoc/withCurrentUser";
 import config from "config";
 import { readingGroupsAPI, readingGroupMembershipsAPI, requests } from "api";
 import { withRouter } from "react-router-dom";

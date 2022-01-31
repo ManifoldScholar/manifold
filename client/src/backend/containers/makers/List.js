@@ -8,7 +8,7 @@ import debounce from "lodash/debounce";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import withFilteredLists, { makerFilters } from "hoc/with-filtered-lists";
+import withFilteredLists, { makerFilters } from "hoc/withFilteredLists";
 
 import EntitiesList, {
   Search,
