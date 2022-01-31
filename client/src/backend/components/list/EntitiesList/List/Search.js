@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
 import Collapse from "global/components/Collapse";
 import classNames from "classnames";
@@ -182,7 +182,7 @@ export default class ListEntitiesListSearch extends PureComponent {
                   <span className="screen-reader-text">Search</span>
                 </button>
                 <div className={`${baseClass}__keyword-input-wrapper`}>
-                  <UID name={id => `${this.idPrefix}-${id}`}>
+                  <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
                     {id => (
                       <>
                         <label htmlFor={id} className="screen-reader-text">
@@ -199,7 +199,7 @@ export default class ListEntitiesListSearch extends PureComponent {
                         />
                       </>
                     )}
-                  </UID>
+                  </UIDConsumer>
                 </div>
                 <button
                   onClick={this.resetSearch}
@@ -219,7 +219,7 @@ export default class ListEntitiesListSearch extends PureComponent {
           )}
           {this.hasOptions && (
             <Collapse.Content>
-              <UID name={id => `${this.idPrefix}-${id}`}>
+              <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
                 {id => (
                   <>
                     <div
@@ -313,7 +313,7 @@ export default class ListEntitiesListSearch extends PureComponent {
                     </div>
                   </>
                 )}
-              </UID>
+              </UIDConsumer>
             </Collapse.Content>
           )}
         </Collapse>

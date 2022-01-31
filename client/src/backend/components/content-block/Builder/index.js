@@ -10,7 +10,7 @@ import lh from "helpers/linkHandler";
 import { entityStoreActions } from "actions";
 import configHelper from "../helpers/configurations";
 import cloneDeep from "lodash/cloneDeep";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 
 const { request } = entityStoreActions;
 
@@ -179,7 +179,7 @@ export class ProjectContent extends PureComponent {
   render() {
     return (
       <section className="backend-project-content">
-        <UID name={id => `content-block-builder-${id}`}>
+        <UIDConsumer name={id => `content-block-builder-${id}`}>
           {id => (
             <div
               className="form-secondary"
@@ -206,7 +206,7 @@ export class ProjectContent extends PureComponent {
               {this.props.children(this.drawerCloseCallback, this.pendingBlock)}
             </div>
           )}
-        </UID>
+        </UIDConsumer>
       </section>
     );
   }

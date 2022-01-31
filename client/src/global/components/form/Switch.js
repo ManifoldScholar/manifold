@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import setter from "./setter";
 import Instructions from "./Instructions";
 import IconComposer from "global/components/utility/IconComposer";
@@ -156,7 +156,7 @@ class FormSwitch extends Component {
 
   render() {
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <div className={this.wrapperClasses}>
             <label
@@ -183,7 +183,7 @@ class FormSwitch extends Component {
             </label>
           </div>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

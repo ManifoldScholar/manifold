@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import withDispatch from "hoc/with-dispatch";
 import withConfirmation from "hoc/with-confirmation";
 import withCurrentUser from "hoc/with-current-user";
@@ -115,7 +115,7 @@ class JoinBox extends PureComponent {
         instructions="To join a group, enter the code and select Join."
         actions={
           <form onSubmit={this.handleSubmit} className="group-join-form">
-            <UID name={id => `join-box-${id}`}>
+            <UIDConsumer name={id => `join-box-${id}`}>
               {id => (
                 <label htmlFor={id} className="group-join-form__label">
                   <span className="screen-reader-text">Code to join</span>
@@ -129,7 +129,7 @@ class JoinBox extends PureComponent {
                   />
                 </label>
               )}
-            </UID>
+            </UIDConsumer>
             <button type="submit" className="group-join-form__button">
               Join
             </button>

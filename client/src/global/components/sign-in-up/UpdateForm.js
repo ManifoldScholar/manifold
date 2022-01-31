@@ -10,7 +10,7 @@ import hasIn from "lodash/hasIn";
 import Dropzone from "react-dropzone";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 
 const { request } = entityStoreActions;
 
@@ -381,7 +381,7 @@ export class UpdateFormContainer extends Component {
     if (!currentUser) return null;
     return (
       <section className="sign-in-up-update">
-        <UID>
+        <UIDConsumer>
           {id => (
             <form
               autoComplete="off"
@@ -423,7 +423,7 @@ export class UpdateFormContainer extends Component {
               </div>
             </form>
           )}
-        </UID>
+        </UIDConsumer>
 
         <div className="subscriptions">
           <span className="subscriptions__label">

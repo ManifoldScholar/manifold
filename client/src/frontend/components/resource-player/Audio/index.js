@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
 import throttle from "lodash/throttle";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
@@ -229,7 +229,7 @@ export default class ResourcePlayerAudio extends Component {
                   left: `calc(${this.state.percent}% - 10px)`
                 }}
               />
-              <UID name={id => `${this.progressBarIdPrefix}-${id}`}>
+              <UIDConsumer name={id => `${this.progressBarIdPrefix}-${id}`}>
                 {id => (
                   <>
                     <label htmlFor={id} className="screen-reader-text">
@@ -245,7 +245,7 @@ export default class ResourcePlayerAudio extends Component {
                     />
                   </>
                 )}
-              </UID>
+              </UIDConsumer>
             </Styled.Slider>
             <Styled.Time>{this.state.durationFormatted}</Styled.Time>
           </Styled.Progress>
@@ -262,7 +262,7 @@ export default class ResourcePlayerAudio extends Component {
                   left: `${volume * 0.7 - 10}px`
                 }}
               />
-              <UID name={id => `${this.volumeBarIdPrefix}-${id}`}>
+              <UIDConsumer name={id => `${this.volumeBarIdPrefix}-${id}`}>
                 {id => (
                   <>
                     <label htmlFor={id} className="screen-reader-text">
@@ -278,7 +278,7 @@ export default class ResourcePlayerAudio extends Component {
                     />
                   </>
                 )}
-              </UID>
+              </UIDConsumer>
             </Styled.Slider>
           </Styled.Volume>
         </Styled.ControlBar>

@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isString from "lodash/isString";
 import classNames from "classnames";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import Instructions from "./Instructions";
 
 export default class FieldGroup extends PureComponent {
@@ -61,7 +61,7 @@ export default class FieldGroup extends PureComponent {
     });
 
     return (
-      <UID name={id => `field-group-${id}`}>
+      <UIDConsumer name={id => `field-group-${id}`}>
         {id => (
           <div
             className={sectionClasses}
@@ -86,7 +86,7 @@ export default class FieldGroup extends PureComponent {
             </div>
           </div>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

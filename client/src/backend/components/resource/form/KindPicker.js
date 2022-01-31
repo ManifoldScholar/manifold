@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import classNames from "classnames";
 import IconComputed from "global/components/icon-computed";
 import setter from "global/components/form/setter";
@@ -120,7 +120,7 @@ class KindPicker extends PureComponent {
     ];
 
     return (
-      <UID name={id => `${this.idPrefix}-${id}`}>
+      <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
         {id => (
           <div className="resource-kind-picker form-secondary">
             <div className="form-input">
@@ -131,7 +131,7 @@ class KindPicker extends PureComponent {
             </div>
           </div>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

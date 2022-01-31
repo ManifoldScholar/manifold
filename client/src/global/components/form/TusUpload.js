@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import setter from "./setter";
 import Base from "./Upload/Base";
 import tus from "tus-js-client";
@@ -112,7 +112,7 @@ export class FormTusUpload extends Component {
   render() {
     const { set: setIgnored, ...baseProps } = this.props;
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <Base
             {...baseProps}
@@ -128,7 +128,7 @@ export class FormTusUpload extends Component {
             idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
           />
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

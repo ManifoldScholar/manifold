@@ -12,7 +12,7 @@ import values from "lodash/values";
 import capitalize from "lodash/capitalize";
 import LoginExternal from "./LoginExternal";
 import { has } from "lodash";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 
 const { request, flush } = entityStoreActions;
 
@@ -157,7 +157,7 @@ export class CreateContainer extends Component {
 
     return (
       <div>
-        <UID>
+        <UIDConsumer>
           {id => (
             <form
               method="post"
@@ -259,7 +259,7 @@ export class CreateContainer extends Component {
               </div>
             </form>
           )}
-        </UID>
+        </UIDConsumer>
         {this.OAuthProviderNames && (
           <>
             <p className="login-links">

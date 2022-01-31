@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import BaseInput from "./BaseInput";
 import isNull from "lodash/isNull";
 import isUndefined from "lodash/isUndefined";
@@ -44,7 +44,7 @@ export default class FormNumberInput extends Component {
 
   render() {
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <BaseInput
             {...this.props}
@@ -56,7 +56,7 @@ export default class FormNumberInput extends Component {
             renderValue={this.renderValue}
           />
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

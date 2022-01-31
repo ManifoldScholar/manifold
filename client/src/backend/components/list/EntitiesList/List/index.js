@@ -12,7 +12,7 @@ import isPlainObject from "lodash/isPlainObject";
 import isFunction from "lodash/isFunction";
 import isBoolean from "lodash/isBoolean";
 import isNil from "lodash/isNil";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 
 export default class ListEntities extends PureComponent {
   static displayName = "List.Entities.List";
@@ -235,7 +235,7 @@ export default class ListEntities extends PureComponent {
     });
 
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <div id={`${this.idPrefix}-${id}`} className={wrapperClassNames}>
             {this.title && (
@@ -295,7 +295,7 @@ export default class ListEntities extends PureComponent {
             </div>
           </div>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

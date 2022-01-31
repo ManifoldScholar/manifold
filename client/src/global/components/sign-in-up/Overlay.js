@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import FocusTrap from "focus-trap-react";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
 import CloseButton from "global/components/Overlay/Close";
 import { withRouter } from "react-router-dom";
@@ -20,7 +20,7 @@ class Overlay extends Component {
   render() {
     return (
       <BodyClass className={"no-scroll"}>
-        <UID>
+        <UIDConsumer>
           {id => (
             <div
               className="overlay-login"
@@ -54,7 +54,7 @@ class Overlay extends Component {
               </FocusTrap>
             </div>
           )}
-        </UID>
+        </UIDConsumer>
       </BodyClass>
     );
   }

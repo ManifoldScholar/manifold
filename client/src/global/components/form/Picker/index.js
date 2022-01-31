@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import Errorable from "../Errorable";
 import classNames from "classnames";
 import setter from "../setter";
@@ -553,7 +553,7 @@ export class PickerComponent extends PureComponent {
     });
 
     return (
-      <UID>
+      <UIDConsumer>
         {id => {
           const ids = this.ids(id);
           return (
@@ -729,7 +729,7 @@ export class PickerComponent extends PureComponent {
             </Errorable>
           );
         }}
-      </UID>
+      </UIDConsumer>
     );
   }
 }

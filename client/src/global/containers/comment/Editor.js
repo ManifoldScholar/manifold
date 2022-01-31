@@ -7,7 +7,7 @@ import { entityStoreActions, uiVisibilityActions } from "actions";
 import { singularEntityName } from "utils/entityUtils";
 import { bindActionCreators } from "redux";
 import { commentsAPI } from "api";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
 
 const { request } = entityStoreActions;
@@ -193,7 +193,7 @@ export class CommentEditor extends PureComponent {
         </Authorize>
         <Authorize kind="any">
           <form onSubmit={this.handleSubmit}>
-            <UID>
+            <UIDConsumer>
               {id => (
                 <GlobalForm.Errorable
                   name="attributes[body]"
@@ -237,7 +237,7 @@ export class CommentEditor extends PureComponent {
                   </div>
                 </GlobalForm.Errorable>
               )}
-            </UID>
+            </UIDConsumer>
           </form>
         </Authorize>
       </div>

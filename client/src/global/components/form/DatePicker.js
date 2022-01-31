@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { UID } from "react-uid";
+import { UIDConsumer } from "react-uid";
 import setter from "./setter";
 import Errorable from "global/components/form/Errorable";
 import PickerComponent from "./DatePicker/PickerComponent";
@@ -61,7 +61,7 @@ class DatePicker extends PureComponent {
     const { name, errors, label } = this.props;
 
     return (
-      <UID>
+      <UIDConsumer>
         {id => (
           <Errorable
             className={inputClasses}
@@ -79,7 +79,7 @@ class DatePicker extends PureComponent {
             />
           </Errorable>
         )}
-      </UID>
+      </UIDConsumer>
     );
   }
 }
