@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import setter from "../setter";
 import withDispatch from "hoc/with-dispatch";
 import Errorable from "global/components/form/Errorable";
-import Loadable from "react-loadable";
+import Loadable from "@docusaurus/react-loadable";
 
 /* eslint-disable react/prop-types */
 const CodeAreaInput = Loadable({

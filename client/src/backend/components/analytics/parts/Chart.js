@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Loadable from "react-loadable";
+import Loadable from "@docusaurus/react-loadable";
 import cloneDeep from "lodash/cloneDeep";
 import merge from "lodash/merge";
 import isDate from "date-fns/isDate";

@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Tile from "./Tile/index";
 import lh from "helpers/linkHandler";
-import Loadable from "react-loadable";
+import Loadable from "@docusaurus/react-loadable";
 
 /* eslint-disable react/prop-types */
 const autolinkTweet = props => {
