@@ -64,7 +64,7 @@ ReturnMenuBody.displayName = "ReturnMenuBody";
 
 ReturnMenuBody.propTypes = {
   returnUrl: PropTypes.string.isRequired,
-  entityTitle: PropTypes.string.isRequired,
+  projectTitle: PropTypes.string.isRequired,
   toggleSignInUpOverlay: PropTypes.func.isRequired,
   moreLink: PropTypes.string,
   settings: PropTypes.object

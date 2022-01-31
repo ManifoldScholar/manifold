@@ -11,6 +11,7 @@ describe("backend/components/category/List/Category", () => {
       category={$project.relationships.categories[0]}
       callbacks={{}}
       index={1}
+      onTextKeyboardMove={() => {}}
     />
   ));
 

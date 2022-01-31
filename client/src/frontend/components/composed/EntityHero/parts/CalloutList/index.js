@@ -58,7 +58,7 @@ HeroCalloutList.displayName = "Frontend.Composed.EntityHero.Parts.CalloutList";
 
 HeroCalloutList.propTypes = {
   callouts: PropTypes.array.isRequired,
-  authorized: PropTypes.bool.isRequired,
+  authorized: PropTypes.bool,
   showErrors: PropTypes.bool,
   inline: PropTypes.bool,
   mobileVisible: PropTypes.bool,

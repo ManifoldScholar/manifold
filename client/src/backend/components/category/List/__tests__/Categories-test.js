@@ -10,6 +10,7 @@ describe("backend/components/category/List/Categories", () => {
       texts={$project.relationships.texts}
       categories={$project.relationships.categories}
       callbacks={{}}
+      onTextKeyboardMove={() => {}}
     />
   ));
 

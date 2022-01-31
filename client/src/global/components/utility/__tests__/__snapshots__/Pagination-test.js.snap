@@ -33,6 +33,7 @@ exports[`global/components/utility/Pagination matches the snapshot 1`] = `
           aria-current="page"
           as="a"
           href="#pagination-target"
+          key="1"
           onClick={[MockFunction]}
         >
           <span
@@ -50,6 +51,7 @@ exports[`global/components/utility/Pagination matches the snapshot 1`] = `
         <Link
           as="a"
           href="#pagination-target"
+          key="2"
           onClick={[MockFunction]}
         >
           <span
