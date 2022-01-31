@@ -12,6 +12,7 @@ import entityUtils from "utils/entityUtils";
 import { useUID } from "react-uid";
 import config from "config";
 import ch from "helpers/consoleHelpers";
+import { isFunction } from "lodash";
 
 function log(type, key) {
   if (config.environment.isDevelopment) {
@@ -19,7 +20,7 @@ function log(type, key) {
   }
 }
 
-export default function useFetch({ request, options = {} }) {
+export default function useFetch({ request, afterFetch, options = {} }) {
   const firstRun = useRef(true);
   const uid = `fetch_${useUID()}`;
   const [requestKey] = useState(`fetch_${useUID()}`);
@@ -82,9 +83,18 @@ export default function useFetch({ request, options = {} }) {
     }
   }
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    triggerFetchData();
+    triggerFetchData().then(
+      () => {
+        if (isFunction(afterFetch)) afterFetch();
+      },
+      () => {
+        // do nothing
+      }
+    );
   }, [triggerFetchData]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   const data = useSelector(state =>
     entityUtils.select(requestKey, state.entityStore)
