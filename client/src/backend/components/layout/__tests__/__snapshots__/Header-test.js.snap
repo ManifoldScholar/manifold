@@ -158,6 +158,10 @@ exports[`Backend.Layout.Header component matches the snapshot 1`] = `
                     "label": "Project Collections",
                     "route": "backendProjectCollections",
                   },
+                  Object {
+                    "label": "Journals",
+                    "route": "backendJournals",
+                  },
                 ],
                 "label": "Projects",
                 "route": "backendProjects",

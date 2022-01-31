@@ -22,6 +22,8 @@ import ActionCallout from "backend/containers/action-callout";
 import ExportTargets from "backend/containers/export-targets";
 import Entitlements from "backend/containers/entitlements";
 import Analytics from "backend/containers/analytics";
+import Journals from "backend/containers/journals";
+import Journal from "backend/containers/journal";
 
 export default {
   Backend,
@@ -80,7 +82,7 @@ export default {
   ProjectSocialWrapper: Project.Social.Wrapper,
   TwitterQueryNew: TwitterQuery.New,
   TwitterQueryEdit: TwitterQuery.Edit,
-  ProjectContent: Project.Content,
+  ProjectLayout: Project.Layout,
   ContentBlockNew: Content.New,
   ContentBlockEdit: Content.Edit,
   Records,
@@ -118,5 +120,20 @@ export default {
   AnalyticsWrapper: Analytics.Wrapper,
   AnalyticsGlobal: Analytics.Global,
   AnalyticsTopProjects: Analytics.TopProjects,
-  AnalyticsTopSearches: Analytics.TopSearches
+  AnalyticsTopSearches: Analytics.TopSearches,
+  JournalsWrapper: Journals.Wrapper,
+  JournalsList: Journals.List,
+  JournalsNew: Journals.New,
+  JournalWrapper: Journal.Wrapper,
+  JournalProperties: Journal.Properties,
+  JournalMetadata: Journal.Metadata,
+  JournalLayout: Journal.Layout,
+  JournalIssues: Journal.Issues,
+  JournalIssueEdit: Journal.IssueEdit,
+  JournalIssueNew: Journal.IssueNew,
+  JournalIssueWrapper: Journal.IssueWrapper,
+  JournalVolumes: Journal.Volumes,
+  JournalVolumeEdit: Journal.VolumeEdit,
+  JournalVolumeNew: Journal.VolumeNew,
+  JournalVolumeWrapper: Journal.VolumeWrapper
 };

@@ -91,6 +91,9 @@ export default class DetailHeader extends PureComponent {
       case "text":
         icon = "TextsStacked64";
         break;
+      case "journal":
+        icon = "Journals64";
+        break;
       default:
     }
 

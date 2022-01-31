@@ -74,6 +74,7 @@ export default class ProjectRow extends PureComponent {
 
   get label() {
     const labels = [];
+    if (this.attr.isJournalIssue) labels.push("Issue");
     if (this.attr.draft) labels.push("Draft");
     if (this.attr.featured) labels.push("Featured");
     return labels;

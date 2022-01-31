@@ -35,3 +35,4 @@ export { default as useFetch } from "./api/useFetch";
 export { default as usePaginationState } from "./api/usePaginationState";
 
 export { default as useCurrentUser } from "./useCurrentUser";
+export { default as useAuthentication } from "./useAuthentication";

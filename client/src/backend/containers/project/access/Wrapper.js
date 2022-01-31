@@ -10,7 +10,7 @@ import Layout from "backend/components/layout";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import config from "config";
-import ProjectHero from "backend/components/project/hero";
+import Hero from "backend/components/hero";
 import withSettings from "hoc/withSettings";
 
 class ProjectAccessWrapper extends Component {
@@ -65,7 +65,7 @@ class ProjectAccessWrapper extends Component {
                   entity={project}
                   preList={
                     <div style={{ marginBottom: 44, marginTop: 22 }}>
-                      <ProjectHero.Block
+                      <Hero.Block
                         title="Configure Access Restrictions"
                         titleId={`${id}-title`}
                         description="Enable access restrictions and adjust messaging"
@@ -115,7 +115,7 @@ class ProjectAccessWrapper extends Component {
                           />
                           <Form.Save text="Update Access Settings" />
                         </FormContainer.Form>
-                      </ProjectHero.Block>
+                      </Hero.Block>
                     </div>
                   }
                 />

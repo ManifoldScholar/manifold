@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import ContentBlock from "backend/components/content-block";
-import Hero from "backend/components/project/hero";
+import Hero from "backend/components/hero";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import { projectsAPI, requests } from "api";
@@ -13,8 +13,8 @@ import get from "lodash/get";
 
 const { request } = entityStoreActions;
 
-export class ProjectContentContainer extends PureComponent {
-  static displayName = "Project.ContentContainer";
+export class ProjectLayoutContainer extends PureComponent {
+  static displayName = "Project.Layout";
 
   static mapStateToProps = state => {
     return {
@@ -23,14 +23,7 @@ export class ProjectContentContainer extends PureComponent {
         state.entityStore.responses,
         requests.beProjectContentBlocks
       ),
-      actionCallouts: select(
-        requests.beProjectActionCallouts,
-        state.entityStore
-      ),
-      actionCalloutsResponse: get(
-        state.entityStore.responses,
-        requests.beProjectActionCallouts
-      )
+      actionCallouts: select(requests.beActionCallouts, state.entityStore)
     };
   };
 
@@ -39,19 +32,19 @@ export class ProjectContentContainer extends PureComponent {
     contentBlocks: PropTypes.array,
     contentBlocksResponse: PropTypes.object,
     actionCallouts: PropTypes.array,
-    actionCalloutsResponse: PropTypes.object,
     location: PropTypes.object,
     match: PropTypes.object,
     history: PropTypes.object,
     dispatch: PropTypes.func,
-    route: PropTypes.object
+    route: PropTypes.object,
+    refresh: PropTypes.func
   };
 
   static fetchData = (getState, dispatch, location, match) => {
     if (!match || !match.params || !match.params.id) return;
     return Promise.all([
-      ProjectContentContainer.fetchContentBlocks(match.params.id, dispatch),
-      ProjectContentContainer.fetchActionCallouts(match.params.id, dispatch)
+      ProjectLayoutContainer.fetchContentBlocks(match.params.id, dispatch),
+      ProjectLayoutContainer.fetchActionCallouts(match.params.id, dispatch)
     ]);
   };
 
@@ -64,10 +57,7 @@ export class ProjectContentContainer extends PureComponent {
 
   static fetchActionCallouts(projectId, dispatch) {
     const call = projectsAPI.actionCallouts(projectId);
-    const actionCalloutsRequest = request(
-      call,
-      requests.beProjectActionCallouts
-    );
+    const actionCalloutsRequest = request(call, requests.beActionCallouts);
     const { promise } = dispatch(actionCalloutsRequest);
     return promise;
   }
@@ -86,20 +76,29 @@ export class ProjectContentContainer extends PureComponent {
   }
 
   fetchContentBlocks = () => {
-    ProjectContentContainer.fetchContentBlocks(
+    ProjectLayoutContainer.fetchContentBlocks(
       this.projectId,
       this.props.dispatch
     );
   };
 
   fetchActionCallouts = () => {
-    ProjectContentContainer.fetchActionCallouts(
+    ProjectLayoutContainer.fetchActionCallouts(
       this.projectId,
       this.props.dispatch
     );
   };
 
   render() {
+    const {
+      dispatch,
+      history,
+      actionCallouts,
+      refresh,
+      contentBlocks,
+      contentBlocksResponse,
+      route
+    } = this.props;
     const project = this.props.project;
     if (!project) return null;
 
@@ -111,24 +110,30 @@ export class ProjectContentContainer extends PureComponent {
         failureRedirect={lh.link("backendProject", project.id)}
       >
         <Hero.Builder
-          dispatch={this.props.dispatch}
-          history={this.props.history}
-          actionCallouts={this.props.actionCallouts}
-          actionCalloutsResponse={this.props.actionCalloutsResponse}
-          refresh={this.fetchActionCallouts}
-          project={project}
+          dispatch={dispatch}
+          history={history}
+          actionCallouts={actionCallouts}
+          refresh={refresh}
+          refreshActionCallouts={this.fetchActionCallouts}
+          model={project}
         />
         <ContentBlock.Builder
-          dispatch={this.props.dispatch}
-          history={this.props.history}
+          dispatch={dispatch}
+          history={history}
           project={project}
-          contentBlocks={this.props.contentBlocks}
-          contentBlocksResponse={this.props.contentBlocksResponse}
+          contentBlocks={contentBlocks}
+          contentBlocksResponse={contentBlocksResponse}
           refresh={this.fetchContentBlocks}
         >
           {(closeCallback, pendingBlock) =>
-            childRoutes(this.props.route, {
-              childProps: { pendingBlock, project },
+            childRoutes(route, {
+              childProps: {
+                pendingBlock,
+                project,
+                refreshActionCallouts: this.fetchActionCallouts,
+                calloutable: project,
+                closeRoute: "backendProjectLayout"
+              },
               drawer: true,
               drawerProps: { wide: true, closeCallback, ...this.drawerProps }
             })
@@ -139,4 +144,4 @@ export class ProjectContentContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(ProjectContentContainer);
+export default connectAndFetch(ProjectLayoutContainer);

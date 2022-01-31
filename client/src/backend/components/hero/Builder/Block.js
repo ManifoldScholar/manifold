@@ -66,6 +66,6 @@ Block.propTypes = {
   ])
 };
 
-Block.displayName = "Project.Hero.Builder.Block";
+Block.displayName = "Hero.Builder.Block";
 
 export default Block;

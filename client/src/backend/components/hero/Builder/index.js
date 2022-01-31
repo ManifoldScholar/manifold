@@ -3,19 +3,41 @@ import PropTypes from "prop-types";
 import { UIDConsumer } from "react-uid";
 import Block from "./Block";
 import Forms from "./forms";
+import { projectsAPI } from "api";
 import Drawer from "global/containers/drawer";
 import ActionCallouts from "./ActionCallouts";
 import SectionLabel from "global/components/form/SectionLabel";
 
 export default class Builder extends PureComponent {
-  static displayName = "Project.Hero.Builder";
+  static displayName = "Hero.Builder";
 
   static propTypes = {
-    project: PropTypes.object.isRequired,
+    model: PropTypes.object.isRequired,
+    api: PropTypes.object,
+    modelLabel: PropTypes.string,
+    failureRedirectRoute: PropTypes.string,
+    actionCalloutEditRoute: PropTypes.string,
+    actionCalloutNewRoute: PropTypes.string,
     actionCallouts: PropTypes.array,
     actionCalloutsResponse: PropTypes.object,
-    refresh: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired
+    actionCalloutSlots: PropTypes.array,
+    refreshActionCallouts: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    withDarkMode: PropTypes.bool
+  };
+
+  static defaultProps = {
+    modelLabel: "project",
+    api: projectsAPI,
+    actionCalloutSlots: [
+      "left-button",
+      "left-link",
+      "right-button",
+      "right-link"
+    ],
+    failureRedirectRoute: "backendProject",
+    actionCalloutEditRoute: "backendProjectActionCalloutEdit",
+    actionCalloutNewRoute: "backendProjectActionCalloutNew"
   };
 
   constructor(props) {
@@ -30,8 +52,8 @@ export default class Builder extends PureComponent {
     this.setState({ drawer: null });
   };
 
-  get project() {
-    return this.props.project;
+  get model() {
+    return this.props.model;
   }
 
   get isDrawerOpen() {
@@ -75,8 +97,8 @@ export default class Builder extends PureComponent {
               >
                 <SectionLabel label="Hero Block" id={`${id}-header`} />
                 <span id={`${id}-instructions`} className="instructions">
-                  The Hero Block is the top of your project page. Customize its
-                  content, layout, and settings here.
+                  {`The Hero Block is the top of your ${this.props.modelLabel} page. Customize its
+                  content, layout, and settings here.`}
                 </span>
 
                 <Block
@@ -92,10 +114,13 @@ export default class Builder extends PureComponent {
                 >
                   {this.props.actionCallouts && (
                     <ActionCallouts
-                      refresh={this.props.refresh}
+                      refresh={this.props.refreshActionCallouts}
                       dispatch={this.props.dispatch}
-                      project={this.props.project}
+                      model={this.props.model}
+                      actionCalloutSlots={this.props.actionCalloutSlots}
                       actionCallouts={this.props.actionCallouts}
+                      actionCalloutNewRoute={this.props.actionCalloutNewRoute}
+                      actionCalloutEditRoute={this.props.actionCalloutEditRoute}
                       actionCalloutsResponse={this.props.actionCalloutsResponse}
                     />
                   )}
@@ -118,7 +143,14 @@ export default class Builder extends PureComponent {
               id={`${id}-drawer`}
             >
               {this.isDrawerOpen ? (
-                <DrawerContents project={this.project} />
+                <DrawerContents
+                  api={this.props.api}
+                  failureRedirectRoute={this.props.failureRedirectRoute}
+                  actionCalloutEditRoute={this.props.actionCalloutEditRoute}
+                  model={this.model}
+                  withDarkMode={this.props.withDarkMode}
+                  modelLabel={this.props.modelLabel}
+                />
               ) : null}
             </Drawer.Wrapper>
           </>

@@ -8,7 +8,9 @@ export class CallToActionNew extends PureComponent {
 
   static propTypes = {
     location: PropTypes.object,
-    project: PropTypes.object
+    refreshActionCallouts: PropTypes.func,
+    calloutable: PropTypes.object,
+    closeRoute: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -31,12 +33,19 @@ export class CallToActionNew extends PureComponent {
     this.state = { attributes };
   }
 
-  get project() {
-    return this.props.project;
+  get calloutable() {
+    return this.props.calloutable;
   }
 
   render() {
-    return <Form actionCallout={this.state} project={this.project} />;
+    return (
+      <Form
+        refreshActionCallouts={this.props.refreshActionCallouts}
+        actionCallout={this.state}
+        closeRoute={this.props.closeRoute}
+        calloutable={this.calloutable}
+      />
+    );
   }
 }
 

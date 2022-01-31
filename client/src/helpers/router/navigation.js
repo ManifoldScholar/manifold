@@ -58,6 +58,10 @@ class Navigation {
           {
             label: "Project Collections",
             route: "backendProjectCollections"
+          },
+          {
+            label: "Journals",
+            route: "backendJournals"
           }
         ]
       },
@@ -284,6 +288,53 @@ class Navigation {
         route: "backendProjectCollections",
         entity: "projectCollection",
         ability: "update"
+      },
+      {
+        label: "Journals",
+        route: "backendJournals",
+        entity: "journal",
+        ability: "update"
+      }
+    ];
+  });
+
+  static journal = memoize(journal => {
+    const args = [journal.id];
+    return [
+      {
+        label: "Properties",
+        route: "backendJournalProperties",
+        entity: journal,
+        ability: "update",
+        args
+      },
+      {
+        label: "Layout",
+        route: "backendJournalLayout",
+        entity: journal,
+        ability: "update",
+        args
+      },
+      {
+        label: "Metadata",
+        route: "backendJournalMetadata",
+        entity: journal,
+        ability: "update",
+        args
+      },
+      {
+        label: "Issues",
+        route: "backendJournalIssues",
+        entity: journal,
+        ability: "update",
+        args
+      },
+      {
+        label: "Volumes",
+        route: "backendJournalVolumes",
+        entity: journal,
+        ability: "update",
+        args
       }
     ];
   });

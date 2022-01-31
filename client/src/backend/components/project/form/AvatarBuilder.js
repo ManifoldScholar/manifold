@@ -12,7 +12,7 @@ class AvatarBuilder extends Component {
   static displayName = "Project.Form.AvatarBuilder";
 
   static propTypes = {
-    project: PropTypes.object,
+    label: PropTypes.string,
     confirm: PropTypes.func.isRequired,
     errors: PropTypes.array,
     getModelValue: PropTypes.func,
@@ -21,7 +21,8 @@ class AvatarBuilder extends Component {
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
+    label: "project"
   };
 
   onColorChange = color => {
@@ -51,8 +52,7 @@ class AvatarBuilder extends Component {
   }
 
   handleColorChange = color => {
-    const heading =
-      "Changing this will remove the project's current avatar image";
+    const heading = `Changing this will remove the ${this.props.label}'s current avatar image`;
     const message = "Do you wish to proceed?";
     this.props.confirm(heading, message, () => {
       this.removeAvatar();
@@ -117,7 +117,7 @@ class AvatarBuilder extends Component {
         label="Avatar"
       >
         <div className={inputClasses}>
-          <div className="form-input-heading">Project Thumbnail</div>
+          <div className="form-input-heading">Thumbnail</div>
           <div className="grid">
             <div className="section current">
               <span className="label" aria-hidden="true">

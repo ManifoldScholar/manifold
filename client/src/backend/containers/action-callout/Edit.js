@@ -15,7 +15,9 @@ export class CallToActionEdit extends Component {
     dispatch: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
-    project: PropTypes.object.isRequired,
+    calloutable: PropTypes.object.isRequired,
+    closeRoute: PropTypes.string.isRequired,
+    refreshActionCallouts: PropTypes.func,
     actionCallout: PropTypes.object
   };
 
@@ -35,8 +37,8 @@ export class CallToActionEdit extends Component {
     }
   }
 
-  get project() {
-    return this.props.project;
+  get calloutable() {
+    return this.props.calloutable;
   }
 
   get actionCallout() {
@@ -51,7 +53,14 @@ export class CallToActionEdit extends Component {
 
   render() {
     if (!this.actionCallout) return null;
-    return <Form actionCallout={this.actionCallout} project={this.project} />;
+    return (
+      <Form
+        refreshActionCallouts={this.props.refreshActionCallouts}
+        actionCallout={this.actionCallout}
+        closeRoute={this.props.closeRoute}
+        calloutable={this.calloutable}
+      />
+    );
   }
 }
 

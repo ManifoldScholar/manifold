@@ -6,25 +6,27 @@ import lh from "helpers/linkHandler";
 import classNames from "classnames";
 
 export default class Chip extends PureComponent {
-  static displayName = "Project.Hero.Builder.ActionCallouts.Chip";
+  static displayName = "Hero.Builder.ActionCallouts.Chip";
 
   static propTypes = {
     actionCallout: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
     history: PropTypes.object.isRequired,
-    project: PropTypes.object.isRequired
+    model: PropTypes.object.isRequired,
+    actionCalloutEditRoute: PropTypes.string.isRequired
   };
 
   onEdit = event => {
     event.preventDefault();
+    const { actionCalloutEditRoute } = this.props;
     return this.props.history.push(
-      lh.link("backendProjectActionCalloutEdit", this.projectId, this.id),
+      lh.link(actionCalloutEditRoute, this.modelId, this.id),
       { noScroll: true }
     );
   };
 
-  get projectId() {
-    return this.props.project.id;
+  get modelId() {
+    return this.props.model.id;
   }
 
   get title() {
