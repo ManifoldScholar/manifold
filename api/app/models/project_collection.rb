@@ -14,10 +14,11 @@ class ProjectCollection < ApplicationRecord
   include SerializedAbilitiesFor
   include Taggable
   include Sluggable
+  include WithProjectCollectionLayout
 
   # Attachments
-  manifold_has_attached_file :custom_icon, :image
   manifold_has_attached_file :hero, :image
+  manifold_has_attached_file :custom_icon, :image
   manifold_has_attached_file :social_image, :image
 
   # Ordering
@@ -27,12 +28,6 @@ class ProjectCollection < ApplicationRecord
   has_formatted_attribute :description, include_wrap: false
 
   resourcify
-
-  enum hero_layout: {
-    square_inset: 0,
-    wide_inset: 1,
-    full_bleed: 2
-  }
 
   # Relationships
   has_many :collection_projects, -> { ranked }, dependent: :destroy, inverse_of: :project_collection

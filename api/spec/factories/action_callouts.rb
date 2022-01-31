@@ -4,7 +4,7 @@ FactoryBot.define do
     url { Faker::Internet.url }
     kind { :link }
     location { :left }
-    project
+    association :calloutable, factory: :project
   end
 
   factory :read_action_callout, parent: :action_callout do

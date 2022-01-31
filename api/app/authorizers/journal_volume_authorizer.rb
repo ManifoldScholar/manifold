@@ -1,0 +1,3 @@
+class JournalVolumeAuthorizer < JournalChildAuthorizer
+
+end

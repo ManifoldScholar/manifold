@@ -23,7 +23,7 @@ module V1
     typed_attribute :recently_updated, Types::Bool.meta(read_only: true), &:recently_updated?
     typed_attribute :updated, Types::Bool.meta(read_only: true), &:updated?
     typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
-
+    typed_attribute :is_journal_issue, Types::Bool.meta(read_only: true), &:journal_issue?
     typed_has_many :creators, serializer: ::V1::MakerSerializer, record_type: :maker
 
     serialize_collectable_attributes!
@@ -69,6 +69,10 @@ module V1
       typed_attribute :event_types, Types::Array.of(Types::String).meta(read_only: true), &:uniq_event_types
       typed_attribute :resource_tags, Types::Array.of(Types::String).meta(read_only: true), &:sorted_resource_tags
       typed_attribute :disable_engagement, Types::Bool
+
+      typed_has_one :journal
+      typed_has_one :journal_volume
+      typed_has_one :journal_issue
 
       typed_has_many :texts,
                      object_method_name: :text_summaries,

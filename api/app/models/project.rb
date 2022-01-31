@@ -2,20 +2,6 @@
 class Project < ApplicationRecord
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:title, :maker_names].freeze
-  AVATAR_COLOR_PRIMARY = "primary".freeze
-  AVATAR_COLOR_SECONDARY = "secondary".freeze
-  AVATAR_COLOR_TERTIARY = "tertiary".freeze
-  AVATAR_COLOR_QUATERNARY = "quaternary".freeze
-  AVATAR_COLOR_QUINARY = "quinary".freeze
-  AVATAR_COLOR_SENTARY = "sentary".freeze
-  AVATAR_COLORS = [
-    AVATAR_COLOR_PRIMARY,
-    AVATAR_COLOR_SECONDARY,
-    AVATAR_COLOR_TERTIARY,
-    AVATAR_COLOR_QUATERNARY,
-    AVATAR_COLOR_QUINARY,
-    AVATAR_COLOR_SENTARY
-  ].freeze
 
   # Concerns
   include Authority::Abilities
@@ -37,6 +23,7 @@ class Project < ApplicationRecord
   include WithPermittedUsers
   include Sluggable
   include SearchIndexable
+  include WithConfigurableAvatar
 
   # Magic
   has_formatted_attributes :description, :subtitle, :image_credits
@@ -113,7 +100,11 @@ class Project < ApplicationRecord
   has_many :action_callouts,
            -> { order(:position) },
            dependent: :destroy,
-           inverse_of: :project
+           as: :calloutable
+
+  has_one :journal_issue, dependent: :destroy
+  has_one :journal, through: :journal_issue
+  has_one :journal_volume, through: :journal_issue
 
   has_many :project_exports, inverse_of: :project, dependent: :destroy
   has_many :project_export_statuses, inverse_of: :project
@@ -140,10 +131,6 @@ class Project < ApplicationRecord
   validates :purchase_price_currency,
             inclusion: { in: Money::Currency.all.map(&:iso_code) },
             allow_nil: true
-  validates :avatar_color,
-            presence: true,
-            inclusion: { in: AVATAR_COLORS },
-            unless: :avatar?
   validates :draft, inclusion: { in: [true, false] }
 
   enum standalone_mode: {
@@ -155,7 +142,6 @@ class Project < ApplicationRecord
   # Attachments
   manifold_has_attached_file :cover, :image
   manifold_has_attached_file :hero, :image
-  manifold_has_attached_file :avatar, :image
 
   scope :by_featured, lambda { |featured|
     next all if featured.nil?
@@ -264,6 +250,10 @@ class Project < ApplicationRecord
 
   def social_image
     hero? ? hero_styles[:medium] : nil
+  end
+
+  def journal_issue?
+    journal_issue_id.present?
   end
 
   # I believe this is here to allow us to pass `Project` as a scope in our resourceful

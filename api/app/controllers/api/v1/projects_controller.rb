@@ -47,7 +47,8 @@ module API
       def includes
         [:creators, :contributors, :texts, :text_categories, :events,
          :resource_collections, :resources, :subjects, :twitter_queries,
-         :permitted_users, :content_blocks, :action_callouts]
+         :permitted_users, :content_blocks, :action_callouts, :journal,
+         :journal_volume, :journal_issue]
       end
 
       def scope_for_projects

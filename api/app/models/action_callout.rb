@@ -6,10 +6,10 @@ class ActionCallout < ApplicationRecord
   include Attachments
 
   # Ordering
-  acts_as_list scope: [:project_id, :location, :button]
+  acts_as_list scope: [:calloutable_id, :location, :button]
 
   # Relationships
-  belongs_to :project
+  belongs_to :calloutable, polymorphic: true
   belongs_to :text, optional: true
 
   # Validations
@@ -40,6 +40,14 @@ class ActionCallout < ApplicationRecord
                              :resource,
                              no_styles: true,
                              validate_content_type: false
+
+  def project
+    calloutable if calloutable.is_a? Project
+  end
+
+  def journal
+    calloutable if calloutable.is_a? Journal
+  end
 
   private
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_08_203933) do
+ActiveRecord::Schema.define(version: 2022_01_12_202835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -27,12 +27,13 @@ ActiveRecord::Schema.define(version: 2021_06_08_203933) do
     t.jsonb "attachment_data"
     t.boolean "button", default: false
     t.integer "position", default: 1, null: false
-    t.uuid "project_id"
     t.uuid "text_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "visibility", default: 0, null: false
-    t.index ["project_id"], name: "index_action_callouts_on_project_id"
+    t.string "calloutable_type"
+    t.uuid "calloutable_id"
+    t.index ["calloutable_type", "calloutable_id"], name: "index_action_callouts_on_calloutable_type_and_calloutable_id"
     t.index ["text_id"], name: "index_action_callouts_on_text_id"
   end
 
@@ -461,6 +462,75 @@ ActiveRecord::Schema.define(version: 2021_06_08_203933) do
     t.index ["project_id"], name: "index_ingestions_on_project_id"
     t.index ["state"], name: "index_ingestions_on_state"
     t.index ["text_id"], name: "index_ingestions_on_text_id"
+  end
+
+  create_table "journal_issues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.uuid "journal_id", null: false
+    t.uuid "journal_volume_id"
+    t.uuid "project_id", null: false
+    t.uuid "creator_id"
+    t.integer "number"
+    t.text "subtitle"
+    t.index ["creator_id"], name: "index_journal_issues_on_creator_id"
+    t.index ["journal_id"], name: "index_journal_issues_on_journal_id"
+    t.index ["journal_volume_id"], name: "index_journal_issues_on_journal_volume_id"
+    t.index ["project_id"], name: "index_journal_issues_on_project_id", unique: true
+  end
+
+  create_table "journal_subjects", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.uuid "journal_id", null: false
+    t.uuid "subject_id", null: false
+    t.index ["journal_id"], name: "index_journal_subjects_on_journal_id"
+    t.index ["subject_id"], name: "index_journal_subjects_on_subject_id"
+  end
+
+  create_table "journal_volumes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.uuid "journal_id", null: false
+    t.uuid "creator_id"
+    t.integer "number"
+    t.text "subtitle"
+    t.integer "journal_issues_count", default: 0, null: false
+    t.index ["creator_id"], name: "index_journal_volumes_on_creator_id"
+    t.index ["journal_id"], name: "index_journal_volumes_on_journal_id"
+  end
+
+  create_table "journals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.string "title"
+    t.string "subtitle"
+    t.text "description"
+    t.string "instagram_id"
+    t.string "twitter_id"
+    t.string "website_url"
+    t.string "facebook_id"
+    t.jsonb "metadata", default: {}
+    t.uuid "creator_id"
+    t.string "slug"
+    t.boolean "draft", default: true, null: false
+    t.citext "sort_title"
+    t.integer "events_count", default: 0
+    t.jsonb "cover_data"
+    t.jsonb "hero_data"
+    t.integer "hero_layout"
+    t.jsonb "custom_icon_data"
+    t.jsonb "social_image_data"
+    t.text "social_description"
+    t.text "social_title"
+    t.jsonb "avatar_data"
+    t.string "hashtag"
+    t.text "image_credits"
+    t.string "avatar_color", default: "primary"
+    t.integer "journal_issues_count", default: 0, null: false
+    t.integer "journal_volumes_count", default: 0, null: false
+    t.jsonb "fa_cache", default: {}, null: false
+    t.index ["slug"], name: "index_journals_on_slug", unique: true
   end
 
   create_table "legacy_favorites", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -1490,6 +1560,64 @@ ActiveRecord::Schema.define(version: 2021_06_08_203933) do
             ELSE NULL::character varying
         END);
   SQL
+  create_view "text_export_statuses", sql_definition: <<-SQL
+    SELECT t.id AS text_id,
+    te.id AS text_export_id,
+        CASE te.export_kind
+            WHEN 'epub_v3'::text THEN (t.export_configuration @> '{"epub_v3": true}'::jsonb)
+            ELSE false
+        END AS autoexport,
+    te.export_kind,
+    te.fingerprint AS export_fingerprint,
+    (t.fingerprint = te.fingerprint) AS current,
+    (t.fingerprint <> te.fingerprint) AS stale,
+    te.created_at AS exported_at
+   FROM (texts t
+     JOIN text_exports te ON ((t.id = te.text_id)));
+  SQL
+  create_view "project_export_statuses", sql_definition: <<-SQL
+    SELECT p.id AS project_id,
+    pe.id AS project_export_id,
+        CASE pe.export_kind
+            WHEN 'bag_it'::text THEN (p.export_configuration @> '{"bag_it": true}'::jsonb)
+            ELSE false
+        END AS autoexport,
+    pe.export_kind,
+    pe.fingerprint AS export_fingerprint,
+    (p.fingerprint = pe.fingerprint) AS current,
+    (p.fingerprint <> pe.fingerprint) AS stale,
+    pe.created_at AS exported_at
+   FROM (projects p
+     JOIN project_exports pe ON ((p.id = pe.project_id)));
+  SQL
+  create_view "user_derived_roles", sql_definition: <<-SQL
+    SELECT u.id AS user_id,
+    COALESCE((array_agg(r.name ORDER BY
+        CASE r.name
+            WHEN 'admin'::text THEN 1
+            WHEN 'editor'::text THEN 2
+            WHEN 'project_creator'::text THEN 3
+            WHEN 'marketeer'::text THEN 4
+            WHEN 'reader'::text THEN 8
+            ELSE 20
+        END) FILTER (WHERE (r.kind = 'global'::text)))[1], 'reader'::character varying) AS role,
+    COALESCE((array_agg(r.name ORDER BY
+        CASE r.name
+            WHEN 'admin'::text THEN 1
+            WHEN 'editor'::text THEN 2
+            WHEN 'project_creator'::text THEN 3
+            WHEN 'marketeer'::text THEN 4
+            WHEN 'project_editor'::text THEN 5
+            WHEN 'project_resource_editor'::text THEN 6
+            WHEN 'project_author'::text THEN 7
+            WHEN 'reader'::text THEN 8
+            ELSE 20
+        END) FILTER (WHERE (r.kind = ANY (ARRAY['global'::text, 'scoped'::text]))))[1], 'reader'::character varying) AS kind
+   FROM ((users u
+     LEFT JOIN users_roles ur ON ((ur.user_id = u.id)))
+     LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
+  GROUP BY u.id;
+  SQL
   create_view "entitlement_assigned_roles", sql_definition: <<-SQL
     SELECT ur.user_id,
     er.id AS entitlement_role_id,
@@ -1655,64 +1783,6 @@ UNION ALL
   WHERE (r.kind = 'scoped'::text)
   GROUP BY ur.user_id, r.resource_id, r.resource_type
  HAVING ((r.resource_id IS NOT NULL) AND (r.resource_type IS NOT NULL));
-  SQL
-  create_view "project_export_statuses", sql_definition: <<-SQL
-    SELECT p.id AS project_id,
-    pe.id AS project_export_id,
-        CASE pe.export_kind
-            WHEN 'bag_it'::text THEN (p.export_configuration @> '{"bag_it": true}'::jsonb)
-            ELSE false
-        END AS autoexport,
-    pe.export_kind,
-    pe.fingerprint AS export_fingerprint,
-    (p.fingerprint = pe.fingerprint) AS current,
-    (p.fingerprint <> pe.fingerprint) AS stale,
-    pe.created_at AS exported_at
-   FROM (projects p
-     JOIN project_exports pe ON ((p.id = pe.project_id)));
-  SQL
-  create_view "text_export_statuses", sql_definition: <<-SQL
-    SELECT t.id AS text_id,
-    te.id AS text_export_id,
-        CASE te.export_kind
-            WHEN 'epub_v3'::text THEN (t.export_configuration @> '{"epub_v3": true}'::jsonb)
-            ELSE false
-        END AS autoexport,
-    te.export_kind,
-    te.fingerprint AS export_fingerprint,
-    (t.fingerprint = te.fingerprint) AS current,
-    (t.fingerprint <> te.fingerprint) AS stale,
-    te.created_at AS exported_at
-   FROM (texts t
-     JOIN text_exports te ON ((t.id = te.text_id)));
-  SQL
-  create_view "user_derived_roles", sql_definition: <<-SQL
-    SELECT u.id AS user_id,
-    COALESCE((array_agg(r.name ORDER BY
-        CASE r.name
-            WHEN 'admin'::text THEN 1
-            WHEN 'editor'::text THEN 2
-            WHEN 'project_creator'::text THEN 3
-            WHEN 'marketeer'::text THEN 4
-            WHEN 'reader'::text THEN 8
-            ELSE 20
-        END) FILTER (WHERE (r.kind = 'global'::text)))[1], 'reader'::character varying) AS role,
-    COALESCE((array_agg(r.name ORDER BY
-        CASE r.name
-            WHEN 'admin'::text THEN 1
-            WHEN 'editor'::text THEN 2
-            WHEN 'project_creator'::text THEN 3
-            WHEN 'marketeer'::text THEN 4
-            WHEN 'project_editor'::text THEN 5
-            WHEN 'project_resource_editor'::text THEN 6
-            WHEN 'project_author'::text THEN 7
-            WHEN 'reader'::text THEN 8
-            ELSE 20
-        END) FILTER (WHERE (r.kind = ANY (ARRAY['global'::text, 'scoped'::text]))))[1], 'reader'::character varying) AS kind
-   FROM ((users u
-     LEFT JOIN users_roles ur ON ((ur.user_id = u.id)))
-     LEFT JOIN roles r ON (((r.id = ur.role_id) AND (r.kind = ANY (ARRAY['global'::text, 'scoped'::text])))))
-  GROUP BY u.id;
   SQL
   create_view "text_title_summaries", sql_definition: <<-SQL
     SELECT text_titles.text_id,

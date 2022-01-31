@@ -35,4 +35,24 @@ RSpec.describe "Action Callouts", type: :request do
                        description: conditional_requirements
     end
   end
+
+  context "for a journal" do
+    let(:parent) { FactoryBot.create(:journal) }
+    let(:journal_id) { parent.id }
+
+    path "/journals/{journal_id}/relationships/action_callouts" do
+      include_examples "an API index request",
+                       parent: "journal",
+                       model: ActionCallout,
+                       url_parameters: [:journal_id]
+
+      include_examples "an API create request",
+                       parent: "journal",
+                       model: ActionCallout,
+                       authorized_user: :admin,
+                       url_parameters: [:journal_id],
+                       description: conditional_requirements
+    end
+  end
+
 end

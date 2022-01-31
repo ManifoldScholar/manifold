@@ -12,7 +12,7 @@ module V1
     typed_attribute :button, Types::Bool
     typed_attribute :attachment_styles, Types::Serializer::Attachment.meta(read_only: true)
 
-    typed_belongs_to :project
+    typed_belongs_to :calloutable
     typed_belongs_to :text
   end
 end

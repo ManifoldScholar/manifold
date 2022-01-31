@@ -78,6 +78,37 @@ module Validation
     params.permit(param_config)
   end
 
+  def journal_params
+    params.require(:data)
+    attributes = [:title, :subtitle, :hashtag, :description, :facebook_id, :twitter_id,
+                  :instagram_id, :remove_avatar, attachment(:avatar),
+                  attachment(:hero), attachment(:cover), :remove_hero, :draft,
+                  :remove_cover, metadata(Journal), :avatar_color, :pending_slug,
+                  { tag_list: [] }, :image_credits, :social_description,
+                  attachment(:custom_icon), :hero_layout, :remove_custom_icon,
+                  :social_title, attachment(:social_image), :remove_social_image]
+
+    relationships = [:collaborators, :creators, :contributors, :subjects]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
+  def journal_volume_params
+    params.require(:data)
+    attributes = [:number, :subtitle]
+    relationships = [:journal]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
+  def journal_issue_params
+    params.require(:data)
+    attributes = [:number, :subtitle]
+    relationships = [:journal, :project, :journal_volume]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   def feature_params
     params.require(:data)
     attributes = [:header, :subheader, :body, :link_text, :link_url, :link_target, :style,
@@ -149,7 +180,7 @@ module Validation
     params.require(:data)
     attributes = [:title, :kind, :location, :button, :position, :remove_attachment, :url,
                   :visibility, attachment(:attachment)]
-    relationships = [:project, :text]
+    relationships = [:calloutable, :text]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
@@ -584,6 +615,12 @@ module Validation
       filter: [:draft, :featured, :subject, :keyword, :order, :typeahead,
                :with_update_ability, :collection_order, :with_creator_role,
                :standalone_mode_enforced]
+    )[:filter]
+  end
+
+  def journal_filter_params
+    params.permit(
+      filter: [:draft, :keyword, :order, :typeahead, :with_update_ability]
     )[:filter]
   end
 
