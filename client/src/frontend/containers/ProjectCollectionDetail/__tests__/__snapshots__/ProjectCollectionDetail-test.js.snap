@@ -1712,7 +1712,7 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
       }
     }
   />
-  <Connect(HigherOrder.WithCurrentUser('Layout.ButtonNavigation))
+  <HigherOrder.WithCurrentUser('Layout.ButtonNavigation)
     grayBg={false}
     hideAtNarrow={true}
     showProjectCollections={true}

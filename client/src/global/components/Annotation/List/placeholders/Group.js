@@ -5,14 +5,16 @@ import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import ContentPlaceholder from "global/components/ContentPlaceholder";
 import { JoinGroup } from "frontend/components/reading-group/tables/Groups/actions";
-import withCurrentUser from "hoc/withCurrentUser";
+import { useCurrentUser } from "hooks";
 
-function Group({ readingGroup, currentUser }) {
+function Group({ readingGroup }) {
   // since RG data isn't refreshed when a user joins,
   // we store join status in component state (set initially by RG data)
   const [userIsMember, setUserIsMember] = useState(
     readingGroup.attributes.currentUserRole !== "none"
   );
+
+  const currentUser = useCurrentUser();
   const loggedIn = !isEmpty(currentUser);
 
   function getContent() {
@@ -78,8 +80,7 @@ function Group({ readingGroup, currentUser }) {
 Group.displayName = "Annotation.List.Placeholder.Group";
 
 Group.propTypes = {
-  readingGroup: PropTypes.object.isRequired,
-  currentUser: PropTypes.object
+  readingGroup: PropTypes.object.isRequired
 };
 
-export default withCurrentUser(Group);
+export default Group;

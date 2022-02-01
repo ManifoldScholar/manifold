@@ -1,15 +1,17 @@
 import React, { useState, useCallback } from "react";
-import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 
-import { useDispatchMyCollected, useSelectMyCollected } from "hooks";
+import {
+  useDispatchMyCollected,
+  useSelectMyCollected,
+  useCurrentUser
+} from "hooks";
 import Authorize from "hoc/Authorize";
-import withCurrentUser from "hoc/withCurrentUser";
 
-function MyStarredContainer({ currentUser }) {
+function MyStarredContainer() {
   const [fetchVersion, setFetchVersion] = useState({
     projects: 1,
     texts: 1,
@@ -34,6 +36,7 @@ function MyStarredContainer({ currentUser }) {
     resourceCollections: useSelectMyCollected("resource_collections"),
     resources: useSelectMyCollected("resources")
   };
+  const currentUser = useCurrentUser();
   const collection = getEntityCollection(currentUser);
 
   const onUncollect = useCallback(type => {
@@ -61,8 +64,4 @@ function MyStarredContainer({ currentUser }) {
   );
 }
 
-MyStarredContainer.propTypes = {
-  currentUser: PropTypes.object
-};
-
-export default withCurrentUser(MyStarredContainer);
+export default MyStarredContainer;
