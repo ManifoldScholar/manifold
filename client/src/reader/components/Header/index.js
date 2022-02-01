@@ -4,7 +4,6 @@ import lh from "helpers/linkHandler";
 import ControlMenu from "reader/components/control-menu";
 import Notes from "reader/components/notes";
 import TextTitles from "reader/components/TextTitles";
-import ReturnMenu from "reader/components/return-menu";
 import SearchMenu from "global/components/search/menu";
 import HeaderNotifications from "global/components/HeaderNotifications";
 import UserMenuBody from "global/components/UserMenuBody";
@@ -13,8 +12,9 @@ import UIPanel from "global/components/UIPanel";
 import Layout from "reader/components/layout";
 import memoize from "lodash/memoize";
 import classNames from "classnames";
-import isEmpty from "lodash/isEmpty";
 import Utility from "global/components/utility";
+import SiteNav from "./menus/SiteNav";
+import TableOfContents from "./menus/TableOfContents";
 
 import Authorize from "hoc/Authorize";
 import BlurOnLocationChange from "hoc/BlurOnLocationChange";
@@ -137,40 +137,6 @@ export default class Header extends Component {
     );
   }
 
-  renderContentsButton = textAttrs => {
-    if (textAttrs.toc.length <= 0 && isEmpty(textAttrs.metadata)) {
-      return null;
-    }
-
-    const buttonClassName = classNames({
-      "reader-header__button": true,
-      "reader-header__button--gray": true,
-      "reader-header__button--pad-default": true,
-      "button-active": this.props.visibility.uiPanels.tocDrawer
-    });
-
-    return (
-      <button
-        className={buttonClassName}
-        onClick={this.handleContentsButtonClick}
-        aria-haspopup
-        aria-expanded={this.props.visibility.uiPanels.tocDrawer}
-      >
-        <span className="reader-header__button-text">Contents</span>
-        <Utility.IconComposer
-          icon="disclosureDown24"
-          size="default"
-          className="reader-header__button-icon reader-header__button-icon--large"
-        />
-        <Utility.IconComposer
-          icon="disclosureDown16"
-          size={20}
-          className="reader-header__button-icon reader-header__button-icon--small"
-        />
-      </button>
-    );
-  };
-
   render() {
     const innerClassName = classNames({
       "reader-header__inner": true,
@@ -183,11 +149,24 @@ export default class Header extends Component {
           <Layout.PreHeader />
           <nav className={innerClassName}>
             <div className="reader-header__menu-group reader-header__menu-group--left">
-              <ReturnMenu.Button
-                toggleReaderMenu={this.panelToggleHandler("readerReturn")}
-                expanded={this.props.visibility.uiPanels.readerReturn}
+              <SiteNav
+                returnUrl={lh.link(
+                  "frontendProjectDetail",
+                  this.props.text.relationships.project.attributes.slug
+                )}
+                entityTitle={
+                  this.props.text.relationships.project.attributes
+                    .titlePlaintext
+                }
+                toggleSignInUpOverlay={
+                  this.props.commonActions.toggleSignInUpOverlay
+                }
               />
-              {this.renderContentsButton(this.props.text.attributes)}
+              <TableOfContents
+                text={this.props.text}
+                section={this.props.section}
+                showMeta={this.props.showMeta}
+              />
             </div>
             {this.props.section && (
               <TextTitles
@@ -247,27 +226,6 @@ export default class Header extends Component {
               </ul>
             </div>
           </nav>
-          <div className="reader-header__panels reader-header__panels--left">
-            <UIPanel
-              id="readerReturn"
-              visibility={this.props.visibility.uiPanels}
-              bodyComponent={ReturnMenu.Body}
-              returnUrl={lh.link(
-                "frontendProjectDetail",
-                this.props.text.relationships.project.attributes.slug
-              )}
-              projectId={this.props.text.relationships.project.id}
-              projectTitle={
-                this.props.text.relationships.project.attributes.titlePlaintext
-              }
-              toggleSignInUpOverlay={
-                this.props.commonActions.toggleSignInUpOverlay
-              }
-              hidePanel={this.props.commonActions.hideReaderReturnPanel}
-              // TODO: More link (and eventually, the link text) should be pulled from settings
-              moreLink="http://manifold.umn.edu/about/"
-            />
-          </div>
 
           <div className="reader-header__panels reader-header__panels--right">
             <UIPanel

@@ -255,6 +255,7 @@ export class ReaderContainer extends Component {
               // Props required by body component
               text={this.props.text}
               section={this.props.section}
+              showMeta={this.toggleMeta}
               authentication={this.props.authentication}
               visibility={this.props.visibility}
               location={this.props.location}
@@ -266,13 +267,6 @@ export class ReaderContainer extends Component {
               {...this.readerActions}
             />
           </ScrollAware>
-          <Toc
-            text={this.props.text}
-            section={this.props.section}
-            tocDrawerVisible={this.props.visibility.uiPanels.tocDrawer}
-            hideTocDrawer={this.hideTocDrawer}
-            showMeta={this.toggleMeta}
-          />
           <main id="skip-to-main" className="main-content flex-viewport">
             {this.maybeRenderOverlay(this.props)}
             {this.renderRoutes()}
