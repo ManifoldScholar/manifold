@@ -3,7 +3,7 @@ import { requests } from "api";
 import { grab, select } from "utils/entityUtils";
 
 // TODO: revise once API is in place
-export default function useSelectJournal(match) {
+export default function useSelectIssue(match) {
   const issueResponse = useSelector(state =>
     select("issue", state.entityStore)
   );

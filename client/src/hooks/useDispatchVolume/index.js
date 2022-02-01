@@ -6,11 +6,11 @@ import { fixtures } from "helpers/storybook/exports";
 
 const { request } = entityStoreActions;
 
-const sampleData = fixtures.collectionFactory("issue", 1)[0].data;
+const sampleData = fixtures.collectionFactory("journal", 1)[0];
 
-export default function useDispatchJournal(match, fetchVersion) {
+export default function useDispatchVolume(match, fetchVersion) {
   const dispatch = useDispatch();
-  const requestName = "feIssue";
+  const requestName = "feJournal";
 
   // useEffect(() => {
   // const journalRequest = request(
@@ -29,7 +29,7 @@ export default function useDispatchJournal(match, fetchVersion) {
     const mockAction = {
       type: "API_RESPONSE",
       payload: { data: sampleData },
-      meta: "issue",
+      meta: "journal",
       error: false
     };
     dispatch(mockAction);

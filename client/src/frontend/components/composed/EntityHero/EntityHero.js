@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import { useFrontendModeContext } from "hooks/contexts";
+import { useFrontendModeContext } from "hooks";
 import * as Styled from "./styles";
 
 export default function EntityHero({

@@ -1,19 +1,39 @@
 import React from "react";
+import queryString from "query-string";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import GlobalUtility from "global/components/utility";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import lh from "helpers/linkHandler";
-import { useSelectAllJournals, useDispatchAllJournals } from "hooks/journals";
-import { usePaginationState } from "hooks/pagination";
-import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
+import {
+  useSelectAllJournals,
+  useDispatchAllJournals,
+  usePaginationState
+} from "hooks";
+
+const DEFAULT_PAGE = 1;
+const DEFAULT_PER_PAGE = 20;
+
+function getSearch(location) {
+  return queryString.parse(location.search);
+}
+
+function setInitialPaginationState(location) {
+  const { page } = getSearch(location);
+  return {
+    number: page || DEFAULT_PAGE,
+    size: DEFAULT_PER_PAGE
+  };
+}
 
 export default function JournalsListContainer({ location }) {
   const { journals, journalsMeta } = useSelectAllJournals();
-  const { paginationState, handlePageChange } = usePaginationState(location);
+  const [pagination, setPageNumber] = usePaginationState(
+    setInitialPaginationState(location)
+  );
 
-  useDispatchAllJournals(paginationState.number, "frontend");
+  useDispatchAllJournals(pagination.number, "frontend");
 
   const hasJournals = !!journals?.length;
   const showPagination = journalsMeta?.pagination?.totalPages > 1;
@@ -41,9 +61,7 @@ export default function JournalsListContainer({ location }) {
         <section>
           <div className="container">
             <GlobalUtility.Pagination
-              paginationClickHandler={pageChangeHandlerCreator(
-                handlePageChange
-              )}
+              paginationClickHandler={setPageNumber}
               pagination={journalsMeta.pagination}
             />
           </div>

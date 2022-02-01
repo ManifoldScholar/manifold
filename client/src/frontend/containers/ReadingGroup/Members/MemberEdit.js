@@ -7,7 +7,7 @@ import { MemberSettingsForm } from "frontend/components/reading-group/forms";
 import {
   useDispatchReadingGroupMembership,
   useGrabReadingGroupMembership
-} from "hooks/reading-group-memberships";
+} from "hooks";
 
 const { flush } = entityStoreActions;
 

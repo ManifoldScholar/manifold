@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
-import Authorize from "hoc/authorize";
+import Authorize from "hoc/Authorize";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
 const HELP_LINK =
