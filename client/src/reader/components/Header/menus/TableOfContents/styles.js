@@ -38,27 +38,20 @@ export const Button = styled(MenuButton)`
 
   ${respond(`font-size: 14px;`, 50)}
 
-  ${({ visible }) => {
-    if (visible) {
-      return `
-      color: var(--color-neutral-text-extra-dark);
-      outline: 0;
-      background-color: var(--color-interaction-light);
+  &:hover,
+  &:focus-visible {
+    color: var(--color-neutral-text-extra-dark);
+    outline: 0;
+    background-color: var(--color-interaction-light);
+  }
 
-      &:focus-visible {
-        background-color: var(--color-interaction-dark);
-      }
-    `;
-    }
-    return `
-    &:hover,
-    &:focus-visible {
+  ${({ visible }) =>
+    visible &&
+    `
       color: var(--color-neutral-text-extra-dark);
       outline: 0;
       background-color: var(--color-interaction-light);
-    }
-  `;
-  }}
+    `}
 `;
 
 const ButtonIcon = styled(IconComposer)`
@@ -117,6 +110,25 @@ export const Toc = styled(Menu)`
   overflow: scroll;
   color: var(--strong-color);
   background-color: var(--box-bg-color);
+
+  .reakit-menu-item {
+    display: block;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--strong-color);
+      outline: 0;
+    }
+
+    &:focus-visible {
+      background-color: var(--box-x-strong-bg-color);
+
+      > ol {
+        background-color: var(--box-bg-color);
+      }
+    }
+  }
 `;
 
 export const List = styled.ol`
@@ -140,9 +152,15 @@ export const Sublist = styled(List, transientOptions)`
 
 export const Footer = styled(MenuItem)`
   display: block;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-base-neutral30);
+    outline: 0;
+  }
 `;
 
-export const FooterButton = styled.button`
+export const FooterContent = styled.div`
   ${buttonUnstyled}
   display: flex;
   align-items: center;
@@ -153,12 +171,6 @@ export const FooterButton = styled.button`
   color: var(--color-neutral-text-dark);
   text-decoration: none;
   transition: background-color ${defaultTransitionProps};
-
-  &:hover,
-  &:focus-visible {
-    background-color: var(--color-base-neutral30);
-    outline: 0;
-  }
 
   ${respond(
     `
