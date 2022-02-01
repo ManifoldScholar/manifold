@@ -10,8 +10,11 @@ import GroupsTable from "frontend/components/reading-group/tables/Groups";
 import GroupsTablePlaceholder from "frontend/components/reading-group/tables/Groups/Placeholder";
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";
-import { useDispatchMyReadingGroups, useSelectMyReadingGroups } from "hooks";
-import withCurrentUser from "hoc/withCurrentUser";
+import {
+  useDispatchMyReadingGroups,
+  useSelectMyReadingGroups,
+  useCurrentUser
+} from "hooks";
 
 const DEFAULT_SORT_ORDER = "";
 const DEFAULT_PAGE = 1;
@@ -38,12 +41,7 @@ function setInitialPaginationState(location) {
   };
 }
 
-function MyReadingGroupsListContainer({
-  location,
-  history,
-  route,
-  currentUser
-}) {
+function MyReadingGroupsListContainer({ location, history, route }) {
   const [filterState, setFilterState] = useState(
     setInitialFilterState(location)
   );
@@ -72,6 +70,8 @@ function MyReadingGroupsListContainer({
     readingGroupsMeta,
     readingGroupsLoaded
   } = useSelectMyReadingGroups();
+
+  const currentUser = useCurrentUser();
 
   function handleFilterChange(filterParam) {
     setFilterState(filterParam);
@@ -146,9 +146,8 @@ MyReadingGroupsListContainer.propTypes = {
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
-  currentUser: PropTypes.object.isRequired,
   settings: PropTypes.object,
   projectBackLink: PropTypes.node
 };
 
-export default withCurrentUser(MyReadingGroupsListContainer);
+export default MyReadingGroupsListContainer;

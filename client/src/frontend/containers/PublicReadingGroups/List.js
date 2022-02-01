@@ -12,9 +12,9 @@ import { GroupsHeading } from "frontend/components/reading-group/headings";
 
 import {
   useDispatchPublicReadingGroups,
-  useSelectPublicReadingGroups
+  useSelectPublicReadingGroups,
+  useCurrentUser
 } from "hooks";
-import withCurrentUser from "hoc/withCurrentUser";
 
 const DEFAULT_SORT_ORDER = "";
 const DEFAULT_PAGE = 1;
@@ -41,12 +41,7 @@ function setInitialPaginationState(location) {
   };
 }
 
-function PublicReadingGroupsListContainer({
-  location,
-  history,
-  route,
-  currentUser
-}) {
+function PublicReadingGroupsListContainer({ location, history, route }) {
   const [filterState, setFilterState] = useState(
     setInitialFilterState(location)
   );
@@ -75,6 +70,8 @@ function PublicReadingGroupsListContainer({
     readingGroupsMeta,
     readingGroupsLoaded
   } = useSelectPublicReadingGroups();
+
+  const currentUser = useCurrentUser();
 
   function handleFilterChange(filterParam) {
     setFilterState(filterParam);
@@ -153,8 +150,7 @@ function PublicReadingGroupsListContainer({
 PublicReadingGroupsListContainer.propTypes = {
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired,
-  currentUser: PropTypes.object
+  route: PropTypes.object.isRequired
 };
 
-export default withCurrentUser(PublicReadingGroupsListContainer);
+export default PublicReadingGroupsListContainer;

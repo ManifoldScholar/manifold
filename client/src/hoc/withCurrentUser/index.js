@@ -1,6 +1,6 @@
 import React from "react";
 import hoistStatics from "hoist-non-react-statics";
-import { connect } from "react-redux";
+import { useCurrentUser } from "hooks";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -11,29 +11,13 @@ export default function withCurrentUser(WrappedComponent) {
     WrappedComponent
   )})`;
 
-  class WithCurrentUser extends React.PureComponent {
-    static mapStateToProps = state => {
-      const user = state.authentication.authenticated
-        ? state.authentication.currentUser
-        : null;
-      return {
-        currentUser: user
-      };
-    };
+  function WithCurrentUser(props) {
+    const currentUser = useCurrentUser();
 
-    static WrappedComponent = WrappedComponent;
-
-    static displayName = displayName;
-
-    render() {
-      const props = { ...this.props };
-      return React.createElement(WrappedComponent, props);
-    }
+    return <WrappedComponent {...props} currentUser={currentUser} />;
   }
 
-  const ConnectedWithCurrentUser = connect(WithCurrentUser.mapStateToProps)(
-    WithCurrentUser
-  );
+  WithCurrentUser.displayName = displayName;
 
-  return hoistStatics(ConnectedWithCurrentUser, WrappedComponent);
+  return hoistStatics(WithCurrentUser, WrappedComponent);
 }

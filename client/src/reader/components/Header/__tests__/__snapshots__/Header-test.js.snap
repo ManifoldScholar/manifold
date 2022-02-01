@@ -184,7 +184,7 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
             "$$typeof": Symbol(react.memo),
             "WrappedComponent": [Function],
             "compare": null,
-            "displayName": "Connect(HigherOrder.WithReadingGroups(Connect(HigherOrder.WithCurrentUser('ControlMenu.VisibilityMenuBody))))",
+            "displayName": "Connect(HigherOrder.WithReadingGroups(HigherOrder.WithCurrentUser('ControlMenu.VisibilityMenuBody)))",
             "mapStateToProps": [Function],
             "type": [Function],
           }
@@ -293,16 +293,7 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
         }
       />
       <UIPanel
-        bodyComponent={
-          Object {
-            "$$typeof": Symbol(react.memo),
-            "WrappedComponent": [Function],
-            "compare": null,
-            "displayName": "Connect(HigherOrder.WithCurrentUser('UserMenuBody))",
-            "mapStateToProps": [Function],
-            "type": [Function],
-          }
-        }
+        bodyComponent={[Function]}
         context="reader"
         hidePanel={[Function]}
         hideUserMenu={[Function]}

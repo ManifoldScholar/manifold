@@ -62,7 +62,7 @@ exports[`reader/components/annotation/Editor matches the snapshot 1`] = `
             }
           }
         >
-          <Connect(HigherOrder.WithReadingGroups(Connect(HigherOrder.WithCurrentUser('Annotation.Editor))))
+          <Connect(HigherOrder.WithReadingGroups(HigherOrder.WithCurrentUser('Annotation.Editor)))
             cancel={[MockFunction]}
             endChar={13}
             endNode="another-node"
