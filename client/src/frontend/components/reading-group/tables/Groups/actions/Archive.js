@@ -9,7 +9,7 @@ import withConfirmation from "hoc/withConfirmation";
 import {
   useDispatchReadingGroupMembership,
   useSelectReadingGroupMembership
-} from "hooks/reading-group-memberships";
+} from "hooks";
 
 const { request } = entityStoreActions;
 
