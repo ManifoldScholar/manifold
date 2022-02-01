@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import HeadContent from "global/components/HeadContent";
-import { useSelectSettings } from "hooks/settings";
+import { useSelectSettings } from "hooks";
 
 function EntityHeadContent({ entity, parentEntity = { attributes: {} } }) {
   const settings = useSelectSettings();

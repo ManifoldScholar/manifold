@@ -1,6 +1,6 @@
 import { AuthorizeComponent } from "../";
 
-describe("hoc/authorize", () => {
+describe("hoc/Authorize", () => {
   def("user", () => factory("user"));
   def("authentication", () =>
     fixtures.authentication({ user: $user })

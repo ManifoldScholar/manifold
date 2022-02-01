@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import queryString from "query-string";
 import { useHistory } from "react-router-dom";
 
-export default function useUrlFromState(location, filterState, page) {
+export default function useSetUrlParamsFromState(location, filterState, page) {
   const history = useHistory();
 
   function updateUrlFromState() {

@@ -7,7 +7,7 @@ import { JoinGroup } from "frontend/components/reading-group/tables/Groups/actio
 import { useCurrentUser } from "hooks";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
-function Group({ readingGroup }) {
+function GroupAnnotationsPlaceholder({ readingGroup }) {
   // since RG data isn't refreshed when a user joins,
   // we store join status in component state (set initially by RG data)
   const [userIsMember, setUserIsMember] = useState(
@@ -78,8 +78,8 @@ function Group({ readingGroup }) {
 GroupAnnotationsPlaceholder.displayName =
   "Global.Composed.EntityCollectionPlaceholder.GroupAnnotations";
 
-Group.propTypes = {
+GroupAnnotationsPlaceholder.propTypes = {
   readingGroup: PropTypes.object.isRequired
 };
 
-export default Group;
+export default GroupAnnotationsPlaceholder;

@@ -1,24 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useSelectAllIssues, useDispatchAllIssues } from "hooks/journals";
-import { useSelectSettings } from "hooks/settings";
-import { usePaginationState } from "hooks/pagination";
-import { useUrlFromState } from "hooks/url";
-import { useFilterState } from "hooks/filters";
+import queryString from "query-string";
+import {
+  useSelectAllIssues,
+  useDispatchAllIssues,
+  usePaginationState,
+  useFilterState,
+  useSetUrlParamsFromState
+} from "hooks";
 import EntityCollection from "frontend/components/composed/EntityCollection";
-import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
+
+const DEFAULT_PAGE = 1;
+const DEFAULT_PER_PAGE = 20;
+const INIT_FILTER_STATE = {
+  standaloneModeEnforced: false
+};
+
+function getSearch(location) {
+  return queryString.parse(location.search);
+}
+
+function getInitialPageNumber(location) {
+  const { page } = getSearch(location);
+  return page || DEFAULT_PAGE;
+}
 
 export default function IssuesListContainer({ location }) {
   const { issues, issuesMeta } = useSelectAllIssues();
-  const settings = useSelectSettings();
-  const { filterState, updateFilterState } = useFilterState(location, {
-    standaloneModeEnforced: false
-  });
-  const { paginationState, handlePageChange } = usePaginationState(location);
+  const [filters, setFilters] = useFilterState(location, INIT_FILTER_STATE);
+  const initialNumber = getInitialPageNumber(location);
+  const [pagination, setPageNumber] = usePaginationState(
+    initialNumber,
+    DEFAULT_PER_PAGE
+  );
 
-  useDispatchAllIssues(filterState, paginationState.number, "frontend");
-  useUrlFromState(location, filterState, paginationState.number);
+  useDispatchAllIssues(filters, pagination.number, "frontend");
+  useSetUrlParamsFromState(location, filters, pagination.number);
 
   // Update when we have the api
   // const hasVisibleIssues = settings?.attributes?.calculated?.hasVisibleIssues
@@ -31,12 +49,12 @@ export default function IssuesListContainer({ location }) {
         issuesMeta={issuesMeta}
         filterProps={{
           filterChangeHandler: filterParam =>
-            updateFilterState({ param: filterParam }),
-          initialFilterState: filterState,
-          resetFilterState: () => updateFilterState({ reset: true })
+            setFilters({ param: filterParam }),
+          initialFilterState: filters,
+          resetFilterState: INIT_FILTER_STATE
         }}
         paginationProps={{
-          paginationClickHandler: pageChangeHandlerCreator(handlePageChange)
+          paginationClickHandler: pageChangeHandlerCreator(setPageNumber)
         }}
         bgColor="neutral05"
       />

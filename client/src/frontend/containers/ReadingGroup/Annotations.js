@@ -7,7 +7,7 @@ import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 import {
   useDispatchAnnotations,
   useSelectAnnotations
-} from "hooks/annotations";
+} from "hooks";
 
 const DEFAULT_PAGE = 1;
 const PER_PAGE = 20;

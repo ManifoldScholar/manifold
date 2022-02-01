@@ -2,12 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import lh from "helpers/linkHandler";
-import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import EntityMasthead from "frontend/components/composed/EntityMasthead";
 import Journal from "frontend/components/journal";
-import { useSelectVolume, useDispatchVolume } from "hooks/journals";
+import { useSelectVolume, useDispatchVolume } from "hooks";
 
 function VolumeDetailContainer({ match, journal }) {
   const { volume, volumeResponse } = useSelectVolume(match, journal);
