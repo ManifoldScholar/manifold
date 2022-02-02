@@ -48,6 +48,7 @@ module V1
       typed_has_many :journal_issues, serializer: ::V1::JournalIssueSerializer, record_type: "journalIssue"
       typed_has_many :permitted_users, serializer: ::V1::UserSerializer
       typed_has_many :subjects
+      typed_has_many :action_callouts
     end
   end
 end
