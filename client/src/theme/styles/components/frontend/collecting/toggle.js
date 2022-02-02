@@ -228,8 +228,12 @@ export default `
     }
 
     &--toc-hidden {
-      visibility: hidden;
       opacity: 0;
+      transition: opacity ${defaultTransitionProps};
+
+      &:focus-visible {
+        opacity: 1;
+      }
     }
   }
 `;

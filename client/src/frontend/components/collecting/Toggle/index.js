@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { collectingAPI, requests } from "api";
 import { useDispatch } from "react-redux";
+import { MenuItem } from "reakit/menu";
 import { entityStoreActions } from "actions";
 import withReadingGroups from "hoc/withReadingGroups";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
@@ -42,12 +43,15 @@ function CollectingToggle({
   readingGroups: myReadingGroups,
   setScreenReaderStatus,
   onUncollect,
-  hiddenIfUncollected
+  hiddenIfUncollected,
+  menu
 }) {
   const [hovered, setHovered] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [isCollecting, setIsCollecting] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
+
+  console.log(menu);
 
   useEffect(() => {
     if (!dialogVisible || (!onDialogOpen && !onDialogClose)) return;
@@ -154,6 +158,8 @@ function CollectingToggle({
 
   if (!currentUser) return null;
 
+  const ButtonTag = menu ? MenuItem : "button";
+
   return (
     <>
       <button
@@ -163,7 +169,8 @@ function CollectingToggle({
       >
         {screenReaderButtonText()}
       </button>
-      <button
+      <ButtonTag
+        {...menu}
         onClick={onClick}
         onMouseEnter={onEnter}
         onMouseLeave={onLeave}
@@ -188,7 +195,7 @@ function CollectingToggle({
           <Icons useOutline={useOutlinedStarIcon} />
           <Text view={view} />
         </div>
-      </button>
+      </ButtonTag>
       {dialogVisible && (
         <Dialog
           collectable={collectable}

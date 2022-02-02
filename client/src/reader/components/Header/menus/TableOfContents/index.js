@@ -53,15 +53,15 @@ export default function TableOfContents({ text, section, showMeta }) {
         <Styled.ButtonIconSm icon="disclosureDown16" size={20} />
       </Styled.Button>
       <Styled.Toc as="nav" aria-label="Table of Contents" {...menu}>
-        {contents}
-        {!isEmpty(metadata) ? (
-          <Styled.Footer {...menu} onClick={showMeta}>
-            <Styled.FooterContent>
+        <Styled.Inner>
+          {contents}
+          {!isEmpty(metadata) ? (
+            <Styled.Footer {...menu} onClick={showMeta}>
               <Styled.FooterIcon icon="info16" size={32} />
               <Styled.FooterText>About This Text</Styled.FooterText>
-            </Styled.FooterContent>
-          </Styled.Footer>
-        ) : null}
+            </Styled.Footer>
+          ) : null}
+        </Styled.Inner>
       </Styled.Toc>
     </>
   );

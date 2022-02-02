@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { tocDrawer } from "../styles";
-import { defaultTransitionProps } from "theme/styles/mixins";
+import { MenuItem } from "reakit/menu";
+import { defaultTransitionProps, defaultFocusStyle } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
 const toggleWidth = "24px";
@@ -25,7 +26,20 @@ export const Content = styled("div", transientOptions)`
     $active && `background-color: var(--box-x-strong-bg-color);`}
 `;
 
-export const Toggle = styled.span`
+export const Label = styled(MenuItem)`
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--strong-color);
+  }
+
+  &:focus-visible {
+    ${defaultFocusStyle}
+  }
+`;
+
+export const ToggleWrapper = styled.span`
   position: absolute;
   top: 42%;
   right: calc(${tocDrawer.baseInlineEndPadding} + 2%);

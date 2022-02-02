@@ -10,29 +10,30 @@ function TocNode({ node, linkTo, active, children, menu }) {
 
   return (
     <li>
-      <MenuItem as={Link} to={linkTo} {...menu} className="reakit-menu-item">
-        <Styled.Content
-          $active={active || showAsActive}
-          onMouseEnter={() => setShowAsActive(true)}
-          onMouseLeave={() => setShowAsActive(false)}
-        >
+      <Styled.Content
+        $active={active || showAsActive}
+        onMouseEnter={() => setShowAsActive(true)}
+        onMouseLeave={() => setShowAsActive(false)}
+      >
+        <Styled.Label as={Link} to={linkTo} {...menu}>
           {node.label}
-          <Styled.Toggle>
-            <Collecting.Toggle
-              collectable={{
-                id: node.id,
-                type: "textSections",
-                label: node.label
-              }}
-              outlined={false}
-              onDialogOpen={() => setShowAsActive(true)}
-              onDialogClose={() => setShowAsActive(false)}
-              hiddenIfUncollected={!showAsActive}
-            />
-          </Styled.Toggle>
-        </Styled.Content>
-        {children}
-      </MenuItem>
+        </Styled.Label>
+        <Styled.ToggleWrapper>
+          <Collecting.Toggle
+            menu={menu}
+            collectable={{
+              id: node.id,
+              type: "textSections",
+              label: node.label
+            }}
+            outlined={false}
+            onDialogOpen={() => setShowAsActive(true)}
+            onDialogClose={() => setShowAsActive(false)}
+            hiddenIfUncollected={!showAsActive}
+          />
+        </Styled.ToggleWrapper>
+      </Styled.Content>
+      {children}
     </li>
   );
 }

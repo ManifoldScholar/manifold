@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { MenuButton, Menu, MenuItem } from "reakit/menu";
 import IconComposer from "global/components/utility/IconComposer";
-import Drawer from "global/components/drawer";
 import {
   headingSecondary,
   respond,
@@ -9,7 +8,8 @@ import {
   utilityPrimary,
   defaultTransitionProps,
   fluidScale,
-  listUnstyled
+  listUnstyled,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
@@ -71,24 +71,17 @@ export const ButtonIconSm = styled(ButtonIcon)`
   ${respond(`display: none;`, 50)}
 `;
 
-// TODO: Componetize these styles when Drawer is migrated to styled.
-export const TocDrawer = styled(Drawer.Wrapper)`
+export const Toc = styled(Menu)`
   padding-inline-end: ${fluidScale("30px", "20px")};
   padding-inline-start: ${fluidScale("84px", "30px")};
+  height: 95vh;
+  overflow: hidden;
+  background-color: var(--box-bg-color);
+  z-index: 1;
 
-  .drawer {
-    width: ${tocDrawer.width};
-    max-width: 90vw;
-    background-color: var(--color-base-neutral10);
-  }
-
-  .no-scroll.overlay & {
-    overflow: hidden;
-  }
-
-  hr {
-    margin: 0;
-    border-top: 1px solid var(--color-base-neutral40);
+  &:focus-visible {
+    ${defaultFocusStyle}
+    outline-offset: -2px;
   }
 `;
 
@@ -102,33 +95,15 @@ export const Empty = styled(MenuItem)`
   ${respond(`padding: 60px 85px;`, 50)}
 `;
 
-export const Toc = styled(Menu)`
+export const Inner = styled.div`
   width: ${tocDrawer.width};
   max-width: 90vw;
   font-family: var(--font-family-heading);
   padding-block-start: 10px;
-  overflow: scroll;
+  height: 90vh;
   color: var(--strong-color);
   background-color: var(--box-bg-color);
-
-  .reakit-menu-item {
-    display: block;
-    text-decoration: none;
-
-    &:hover,
-    &:focus-visible {
-      color: var(--strong-color);
-      outline: 0;
-    }
-
-    &:focus-visible {
-      background-color: var(--box-x-strong-bg-color);
-
-      > ol {
-        background-color: var(--box-bg-color);
-      }
-    }
-  }
+  overflow: auto;
 `;
 
 export const List = styled.ol`
@@ -151,17 +126,8 @@ export const Sublist = styled(List, transientOptions)`
 `;
 
 export const Footer = styled(MenuItem)`
-  display: block;
-
-  &:hover,
-  &:focus-visible {
-    background-color: var(--color-base-neutral30);
-    outline: 0;
-  }
-`;
-
-export const FooterContent = styled.div`
   ${buttonUnstyled}
+  display: block;
   display: flex;
   align-items: center;
   width: 100%;
@@ -178,6 +144,12 @@ export const FooterContent = styled.div`
       padding-block-end: 17px;`,
     50
   )}
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-base-neutral30);
+    outline: 0;
+  }
 `;
 
 export const FooterIcon = styled(IconComposer)`
