@@ -1,29 +1,29 @@
 import { useState, useCallback } from "react";
-import isEmpty from "lodash/isEmpty";
 import queryString from "query-string";
+import { useLocation } from "react-router-dom";
 
-function getSearch(location) {
-  return queryString.parse(location.search);
-}
+export default function useFilterState(baseFilters = {}) {
+  const location = useLocation();
 
-export default function useFilterState(location, initialState = {}) {
+  const setInitialFilterState = useCallback(() => {
+    const { page, ...filterObj } = queryString.parse(location.search);
+    return { ...baseFilters, ...filterObj };
+  }, [baseFilters, location]);
+
   const [filters, setFilterState] = useState(setInitialFilterState());
 
-  function setInitialFilterState() {
-    const { page, ...filterObj } = getSearch(location);
-    if (isEmpty(filterObj)) return initialState;
-    return filterObj;
-  }
-
-  const setFilters = useCallback(({ reset, param }) => {
-    if (reset) {
-      setFilterState(setInitialFilterState(location));
-      return;
-    }
-    if (param) {
-      setFilterState(param);
-    }
-  });
+  const setFilters = useCallback(
+    ({ reset, newState }) => {
+      if (reset) {
+        setFilterState(setInitialFilterState());
+        return;
+      }
+      if (newState) {
+        setFilterState(newState);
+      }
+    },
+    [setInitialFilterState]
+  );
 
   return [filters, setFilters];
 }

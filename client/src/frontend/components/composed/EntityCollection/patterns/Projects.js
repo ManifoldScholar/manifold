@@ -10,13 +10,13 @@ import * as shapes from "../shapes";
 
 function ProjectsEntityCollection({
   projects,
-  projectsMeta,
+  meta,
   filterProps,
   paginationProps,
   ...passThroughProps
 }) {
-  const showPagination = !isEmpty(projectsMeta) && !isEmpty(paginationProps);
-  const showFilters = !isEmpty(projectsMeta) && !isEmpty(filterProps);
+  const showPagination = !isEmpty(meta) && !isEmpty(paginationProps);
+  const showFilters = !isEmpty(meta) && !isEmpty(filterProps);
   return (
     <EntityCollection
       title="All Projects"
@@ -34,10 +34,10 @@ function ProjectsEntityCollection({
         </ThumbnailGrid>
       )}
       countProps={
-        isEmpty(projectsMeta)
+        isEmpty(meta)
           ? {}
           : {
-              pagination: get(projectsMeta, "pagination"),
+              pagination: get(meta, "pagination"),
               unit: "project"
             }
       }
@@ -45,7 +45,7 @@ function ProjectsEntityCollection({
         !showPagination
           ? {}
           : {
-              pagination: get(projectsMeta, "pagination"),
+              pagination: get(meta, "pagination"),
               ...paginationProps
             }
       }
@@ -59,7 +59,7 @@ ProjectsEntityCollection.displayName =
 
 ProjectsEntityCollection.propTypes = {
   projects: PropTypes.arrayOf(PropTypes.object).isRequired,
-  projectsMeta: PropTypes.object,
+  meta: PropTypes.object,
   filterProps: shapes.filters,
   paginationProps: shapes.pagination
 };
