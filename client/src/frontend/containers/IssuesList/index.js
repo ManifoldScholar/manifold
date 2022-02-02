@@ -6,7 +6,7 @@ import {
   useDispatchAllIssues,
   usePaginationState,
   useFilterState,
-  useSetUrlParamsFromState
+  useSetLocation
 } from "hooks";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
@@ -36,7 +36,7 @@ export default function IssuesListContainer({ location }) {
   );
 
   useDispatchAllIssues(filters, pagination.number, "frontend");
-  useSetUrlParamsFromState(location, filters, pagination.number);
+  useSetLocation(filters, pagination.number);
 
   // Update when we have the api
   // const hasVisibleIssues = settings?.attributes?.calculated?.hasVisibleIssues
