@@ -21,10 +21,10 @@ module V1
     typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :project_slug, Types::String.meta(read_only: true)
 
-    typed_belongs_to :journal_volume
+    typed_belongs_to :journal_volume, record_type: "journalVolume"
     typed_belongs_to :journal
     typed_belongs_to :project
-    typed_has_many :project_content_blocks, serializer: ::V1::ContentBlockSerializer, record_type: :content_block
+    typed_has_many :project_content_blocks, serializer: ::V1::ContentBlockSerializer, record_type: "ContentBlock"
     typed_has_many :project_texts, serializer: ::V1::TextSerializer, record_type: :text
 
     when_full do

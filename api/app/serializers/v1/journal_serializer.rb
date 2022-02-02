@@ -27,8 +27,8 @@ module V1
     typed_attribute :social_title, Types::String.optional
     typed_attribute :social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
 
-    typed_has_many :recent_journal_volumes, serializer: ::V1::JournalVolumeSerializer, record_type: :journal_volume
-    typed_has_many :recent_journal_issues, serializer: ::V1::JournalIssueSerializer, record_type: :journal_issue
+    typed_has_many :recent_journal_volumes, serializer: ::V1::JournalVolumeSerializer, record_type: "journalVolume"
+    typed_has_many :recent_journal_issues, serializer: ::V1::JournalIssueSerializer, record_type: "journalIssue"
 
     when_full do
       metadata(metadata: true, properties: true, formatted: true)
@@ -44,8 +44,8 @@ module V1
       typed_attribute :image_credits_formatted, Types::String.meta(read_only: true)
       typed_attribute :pending_slug, Types::String
 
-      typed_has_many :journal_volumes, serializer: ::V1::JournalVolumeSerializer, record_type: :journal_volume
-      typed_has_many :journal_issues, serializer: ::V1::JournalIssueSerializer, record_type: :journal_issue
+      typed_has_many :journal_volumes, serializer: ::V1::JournalVolumeSerializer, record_type: "journalVolume"
+      typed_has_many :journal_issues, serializer: ::V1::JournalIssueSerializer, record_type: "journalIssue"
       typed_has_many :permitted_users, serializer: ::V1::UserSerializer
       typed_has_many :subjects
     end

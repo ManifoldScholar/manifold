@@ -10,7 +10,7 @@ module V1
     typed_attribute :subtitle, Types::String
     typed_attribute :created_at, Types::DateTime.meta(read_only: true)
     typed_attribute :updated_at, Types::DateTime.meta(read_only: true)
-    typed_has_many :journal_issues
+    typed_has_many :journal_issues, record_type: "journalIssue"
 
     when_full do
       typed_belongs_to :journal
