@@ -1,15 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { useSelectJournal, useDispatchJournal } from "hooks";
+import { journalsAPI } from "api";
+import { useLocation, useParams, useRouteMatch } from "react-router-dom";
+import { useFetch } from "hooks";
 import { RedirectToFirstMatch, childRoutes } from "helpers/router";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 
-export default function JournalWrapper({ location, match, route }) {
-  const { journal, journalResponse } = useSelectJournal(match);
-  const isHomePage = location.pathname === match.url;
-  useDispatchJournal(match);
+export default function JournalWrapper({ route }) {
+  const { id } = useParams();
+  const { data: journal, response } = useFetch({
+    request: [journalsAPI.show, id]
+  });
+  const { path } = useRouteMatch();
+  const location = useLocation();
+  const isHomePage = location.pathname === path;
+
+  console.log(response);
+  console.log(journal);
 
   return (
     <>
@@ -33,7 +42,7 @@ export default function JournalWrapper({ location, match, route }) {
       {childRoutes(route, {
         childProps: {
           journal,
-          journalResponse
+          response
         }
       })}
     </>
@@ -43,7 +52,5 @@ export default function JournalWrapper({ location, match, route }) {
 JournalWrapper.displayName = "Frontend.Containers.JournalWrapper";
 
 JournalWrapper.propTypes = {
-  route: PropTypes.object,
-  location: PropTypes.object,
-  match: PropTypes.object
+  route: PropTypes.object
 };
