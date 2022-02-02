@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import IconComposer from "global/components/utility/IconComposer";
-import { Menu, MenuButton } from "reakit/Menu";
+import { Menu, MenuButton, MenuItem } from "reakit/Menu";
 import {
   fluidScale,
   rgba,
@@ -53,26 +53,19 @@ export const MenuBody = styled(Menu)`
   margin-block: 0;
   background-color: var(--box-bg-color);
   box-shadow: 0 12px 22px -3px ${rgba("neutralBlack", 0.13)};
+  z-index: 1;
 
-  > .reakit-menu-item {
-    ${buttonUnstyled}
-    display: block;
-    text-decoration: none;
-    width: 100%;
-
-    &:focus-visible {
-      ${defaultHoverStyle}
-      ${defaultFocusStyle}
-      outline-offset: -3px;
-    }
-  }
-
-  > .reakit-menu-item + .reakit-menu-item:not(.reakit-menu-item--no-border) {
-    border-top: 2px solid var(--box-x-strong-bg-color);
+  &:focus-visible {
+    ${defaultFocusStyle}
+    outline-offset: -2px;
   }
 `;
 
-const itemStyles = `
+const BaseMenuItem = styled(MenuItem)`
+  ${buttonUnstyled}
+  display: block;
+  text-decoration: none;
+  width: 100%;
   font-family: var(--font-family-heading);
   padding: 16px ${fluidScale("26px", "20px")};
   font-size: ${fluidScale("22px", "18px")};
@@ -80,17 +73,25 @@ const itemStyles = `
   text-decoration: none;
   letter-spacing: 0.004em;
   border: none;
+
+  &:focus-visible {
+    ${defaultHoverStyle}
+    ${defaultFocusStyle}
+    outline-offset: -3px;
+  }
+
+  & + & {
+    border-top: 2px solid var(--box-x-strong-bg-color);
+  }
 `;
 
-export const Item = styled.div`
-  ${itemStyles}
-`;
+export const Link = styled(BaseMenuItem)``;
 
 const linkContentStyles = `
   transition: color ${defaultTransitionProps};
 
-  ${Item}:hover &,
-  ${Item}:focus-visible & {
+  ${Link}:hover &,
+  ${Link}:focus-visible & {
     ${defaultHoverStyle}
   }
 `;
@@ -118,9 +119,9 @@ export const EntityTitle = styled.span`
   text-decoration: underline;
 `;
 
-export const SignInButton = styled.div`
-  ${itemStyles}
+export const SignInButton = styled(BaseMenuItem)`
   padding-block-end: 0.38em;
+  border-top: 2px solid var(--box-x-strong-bg-color);
 `;
 
 export const LogoIcon = styled(IconComposer)`
@@ -137,19 +138,17 @@ export const AppTitle = styled.span`
   transition: color ${defaultTransitionProps};
 `;
 
-export const MoreLink = styled.span`
+export const MoreLink = styled(BaseMenuItem)`
   display: inline-block;
-  font-family: var(--font-family-heading);
   padding: 0.5em 0 1.75em ${fluidScale("32px", "24px")};
   font-size: 16px;
   line-height: 1.5;
   text-decoration: underline;
   transition: color ${defaultTransitionProps};
+  border-top: none;
 
   &:hover,
   &:focus-visible {
-    ${defaultHoverStyle}
-
     > ${AppTitle} {
       color: var(--hover-color);
     }
