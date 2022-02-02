@@ -38,9 +38,11 @@ export { default as useFilterState } from "./api/useFilterState";
 export { default as useCurrentUser } from "./useCurrentUser";
 
 export { default as useSelectSettings } from "./useSelectSettings";
-export { default as useSetUrlParamsFromState } from "./useSetUrlParamsFromState";
+export { default as useSetLocation } from "./useSetLocation";
 export { default as useFrontendModeContext } from "./useFrontendModeContext";
 export { default as useAuthentication } from "./useAuthentication";
+
+export { default as useFromStore } from "./useFromStore";
 
 export { default as useDispatchAllIssues } from "./useDispatchAllIssues";
 export { default as useSelectAllIssues } from "./useSelectAllIssues";
