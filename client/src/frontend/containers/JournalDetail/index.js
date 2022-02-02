@@ -8,11 +8,10 @@ import EntityHero from "frontend/components/composed/EntityHero";
 import Journal from "frontend/components/journal";
 import lh from "helpers/linkHandler";
 
-function JournalDetailContainer({ journal, journalResponse }) {
-  if (!journalResponse) return null;
+function JournalDetailContainer({ journal, response }) {
+  // if (!response) return null;
 
-  if (journalResponse.status === 401)
-    return <Redirect to={lh.link("frontend")} />;
+  if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
 
   if (!journal) return null;
 
@@ -43,7 +42,7 @@ JournalDetailContainer.displayName = "Frontend.Containers.JournalDetail";
 
 JournalDetailContainer.propTypes = {
   journal: PropTypes.object,
-  journalResponse: PropTypes.object
+  response: PropTypes.object
 };
 
 export default JournalDetailContainer;
