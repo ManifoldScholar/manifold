@@ -9,13 +9,9 @@ import Journal from "frontend/components/journal";
 import lh from "helpers/linkHandler";
 
 function JournalDetailContainer({ journal, response }) {
-  // if (!response) return null;
-
   if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
 
-  if (!journal) return null;
-
-  return (
+  return journal ? (
     <>
       <CheckFrontendMode debugLabel="JournalDetail" isProjectHomePage />
       <RegisterBreadcrumbs
@@ -35,7 +31,7 @@ function JournalDetailContainer({ journal, response }) {
       <Journal.IssueList journal={journal} />
       <Journal.Metadata journal={journal} />
     </>
-  );
+  ) : null;
 }
 
 JournalDetailContainer.displayName = "Frontend.Containers.JournalDetail";

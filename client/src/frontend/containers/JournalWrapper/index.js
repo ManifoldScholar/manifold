@@ -17,9 +17,6 @@ export default function JournalWrapper({ route }) {
   const location = useLocation();
   const isHomePage = location.pathname === path;
 
-  console.log(response);
-  console.log(journal);
-
   return (
     <>
       {journal && (

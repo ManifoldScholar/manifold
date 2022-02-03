@@ -11,7 +11,8 @@ export default function EntityMetadata({
 }) {
   const data = entity.attributes;
 
-  const showUpdated = !data.finished && !!data.updated;
+  const showUpdated =
+    (!data.finished && !!data.updated) || !data.publicationDate;
   const date = showUpdated ? data.updatedAt : data.publicationDate;
   const prefix = showUpdated ? "Updated" : "Published";
 
@@ -32,7 +33,7 @@ export default function EntityMetadata({
         <Styled.TitleText
           $stack={stack}
           dangerouslySetInnerHTML={{
-            __html: data.titleFormatted
+            __html: data.titleFormatted || `Issue ${data.number}`
           }}
         />
         {data.draft && <Styled.Tag $stack={stack}>{"Draft"}</Styled.Tag>}

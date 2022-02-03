@@ -8,14 +8,14 @@ import * as Styled from "./styles";
 export default function EntityGroup({ entities, title, to, children }) {
   return (
     <Styled.Box>
-      {!!title && (
+      {title && (
         <Styled.GroupHeader as={!!to && Link} to={to} $link={!!to}>
           <Styled.HeaderText>{title}</Styled.HeaderText>
           {!!to && <Styled.Icon icon="ArrowLongRight16" size={24} />}
         </Styled.GroupHeader>
       )}
       <Styled.Body>
-        {!!entities?.length && (
+        {entities?.length && (
           <ThumbnailGrid minColumns={4} minItemWidth="210px">
             {({ stack }) =>
               entities.map(entity => (
