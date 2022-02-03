@@ -46,11 +46,3 @@ export { default as useFromStore } from "./useFromStore";
 
 export { default as useDispatchAllIssues } from "./useDispatchAllIssues";
 export { default as useSelectAllIssues } from "./useSelectAllIssues";
-export { default as useDispatchAllJournals } from "./useDispatchAllJournals";
-export { default as useSelectAllJournals } from "./useSelectAllJournals";
-export { default as useDispatchVolume } from "./useDispatchVolume";
-export { default as useSelectVolume } from "./useSelectVolume";
-export { default as useDispatchJournal } from "./useDispatchJournal";
-export { default as useSelectJournal } from "./useSelectJournal";
-export { default as useDispatchIssue } from "./useDispatchIssue";
-export { default as useSelectIssue } from "./useSelectIssue";
