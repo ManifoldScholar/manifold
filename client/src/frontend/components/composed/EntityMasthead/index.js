@@ -44,7 +44,7 @@ export default function Masthead({ entity }) {
           alt=""
         />
       )}
-      {logo && (
+      {!image && logo && (
         <Styled.Logo
           srcSet={`
             ${logo.large} 2x,

@@ -18,7 +18,10 @@ export default function EntityThumbnail({
     <Styled.Wrapper>
       <Styled.ItemLink
         $stack={stack}
-        to={lh.link("frontendProjectDetail", entity.attributes.slug)}
+        to={lh.link(
+          "frontendProjectDetail",
+          entity.attributes.slug || entity.attributes.projectSlug
+        )}
       >
         <Styled.Cover $stack={stack}>
           <EntityAvatar entity={entity} />
