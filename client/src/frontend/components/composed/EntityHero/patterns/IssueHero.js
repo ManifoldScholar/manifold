@@ -8,6 +8,8 @@ import Authorization from "helpers/authorization";
 
 export default function IssueHero({ entity, mock }) {
   const authorization = useRef(new Authorization());
+  if (!entity) return null;
+
   const { showErrors, authorized } = getAuth(entity, authorization);
   const {
     callouts,
