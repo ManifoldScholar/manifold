@@ -6,19 +6,13 @@ import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import Issue from "frontend/components/issue";
-import { fixtures } from "helpers/storybook/exports";
 
-export default function IssueDetailContainer({ issue, issueResponse }) {
-  if (!issueResponse) return null;
-
-  if (issueResponse.status === 401)
-    return <Redirect to={lh.link("frontend")} />;
-
+export default function IssueDetailContainer({ issue, response }) {
+  if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
   if (!issue) return null;
 
-  // TODO: update once API is in place
-  const parentJournal =
-    issue.relationships?.journal || fixtures.factory("journal");
+  const parentJournal = issue.relationships?.journal || null;
+  const parentVolume = issue.relationships?.journalVolume || null;
 
   return (
     <>
@@ -29,19 +23,26 @@ export default function IssueDetailContainer({ issue, issueResponse }) {
             to: lh.link("frontendIssuesList"),
             label: "Back to All Issues"
           },
-          // TODO: can remove condition once API is in place?
-          !!parentJournal && {
+          // TODO: Update when api is ready
+          parentJournal && {
             to: lh.link("frontendJournalDetail", parentJournal.id),
-            label: parentJournal.attributes.titlePlaintext
+            label: "Journal Name Here"
+          },
+          parentVolume && {
+            to: lh.link("frontendVolumeDetail", parentVolume.id),
+            label: "Volume Number Here"
           },
           {
             to: lh.link("frontendIssueDetail", issue.id),
-            label: issue.attributes.titlePlaintext
+            label: issue.attributes.number
           }
         ].filter(Boolean)}
       />
-      <EntityHeadContent entity={issue} parentEntity={parentJournal} />
-      <Issue.Detail issue={issue} />
+      <EntityHeadContent
+        entity={issue.relationships.project}
+        parentEntity={parentJournal}
+      />
+      <Issue.Detail issue={issue.relationships.project} />
     </>
   );
 }

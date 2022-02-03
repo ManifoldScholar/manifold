@@ -3,11 +3,7 @@ import PropTypes from "prop-types";
 import HeadContent from "global/components/HeadContent";
 import { useFromStore } from "hooks";
 
-function EntityHeadContent({
-  entity,
-  type,
-  parentEntity = { attributes: {} }
-}) {
+function EntityHeadContent({ entity, type, parentEntity }) {
   const settings = useFromStore("settings", "select");
 
   const installationName = settings?.attributes.general.installationName || "";
@@ -26,7 +22,7 @@ function EntityHeadContent({
     titlePlaintext: parentTitle,
     descriptionPlaintext: parentDescription,
     heroStyles: parentHeroStyles
-  } = parentEntity?.attributes;
+  } = parentEntity?.attributes ?? {};
 
   const title = () => {
     if (socialTitle) return socialTitle;

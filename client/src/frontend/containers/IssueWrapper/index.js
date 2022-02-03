@@ -1,15 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { useSelectIssue, useDispatchIssue } from "hooks";
+import { journalIssuesAPI } from "api";
+import { useLocation, useParams, useRouteMatch } from "react-router-dom";
+import { useFetch } from "hooks";
 import { RedirectToFirstMatch, childRoutes } from "helpers/router";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 
-export default function IssueWrapper({ location, match, route }) {
-  const { issue, issueResponse } = useSelectIssue(match);
-  const isHomePage = location.pathname === match.url;
-  useDispatchIssue(match);
+export default function IssueWrapper({ route }) {
+  const { id } = useParams();
+  const { data: issue, response } = useFetch({
+    request: [journalIssuesAPI.show, id]
+  });
+  const { path } = useRouteMatch();
+  const location = useLocation();
+  const isHomePage = location.pathname === path;
 
   return (
     <>
@@ -31,7 +37,7 @@ export default function IssueWrapper({ location, match, route }) {
       {childRoutes(route, {
         childProps: {
           issue,
-          issueResponse
+          response
         }
       })}
     </>
