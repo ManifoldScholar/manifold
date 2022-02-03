@@ -1,24 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import lh from "helpers/linkHandler";
+import { journalVolumesAPI } from "api";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import EntityMasthead from "frontend/components/composed/EntityMasthead";
 import Journal from "frontend/components/journal";
-import { useSelectVolume, useDispatchVolume } from "hooks";
+import { useFetch } from "hooks";
 
 function VolumeDetailContainer({ match, journal }) {
-  const { volume, volumeResponse } = useSelectVolume(match, journal);
-  useDispatchVolume(match);
+  const { volumeSlug: slug } = useParams();
+  const { data: volume } = useFetch({
+    request: [journalVolumesAPI.show, slug]
+  });
 
-  if (!volumeResponse || !journal) return null;
-
-  const {
-    attributes: { title }
-  } = volume;
-
-  return (
+  return journal && volume ? (
     <>
       <CheckFrontendMode debugLabel="VolumeDetail" isProjectSubpage />
       <RegisterBreadcrumbs
@@ -37,16 +35,16 @@ function VolumeDetailContainer({ match, journal }) {
               journal.id,
               match.params.volumeSlug
             ),
-            label: title
+            label: `Volume ${volume.attributes.number}`
           }
         ]}
       />
-      <EntityHeadContent entity={volume} parentEntity={journal} />
-      <h1 className="screen-reader-text">{`${journal.attributes.title}: ${title}`}</h1>
+      <EntityHeadContent entity={volume} type="Volume" parentEntity={journal} />
+      <h1 className="screen-reader-text">{`${journal.attributes.title}: Volume ${volume.attributes.number}`}</h1>
       <EntityMasthead entity={journal} />
       <Journal.VolumeDetail journal={journal} volume={volume} />
     </>
-  );
+  ) : null;
 }
 
 VolumeDetailContainer.displayName = "Frontend.Containers.VolumeDetail";
