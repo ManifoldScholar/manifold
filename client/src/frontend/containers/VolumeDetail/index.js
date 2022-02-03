@@ -10,7 +10,7 @@ import EntityMasthead from "frontend/components/composed/EntityMasthead";
 import Journal from "frontend/components/journal";
 import { useFetch } from "hooks";
 
-function VolumeDetailContainer({ match, journal }) {
+function VolumeDetailContainer({ journal }) {
   const { volumeSlug: slug } = useParams();
   const { data: volume } = useFetch({
     request: [journalVolumesAPI.show, slug]
@@ -30,11 +30,7 @@ function VolumeDetailContainer({ match, journal }) {
             label: journal.attributes.titlePlaintext
           },
           {
-            to: lh.link(
-              "frontendVolumeDetail",
-              journal.id,
-              match.params.volumeSlug
-            ),
+            to: lh.link("frontendVolumeDetail", journal.id, slug),
             label: `Volume ${volume.attributes.number}`
           }
         ]}
@@ -50,7 +46,6 @@ function VolumeDetailContainer({ match, journal }) {
 VolumeDetailContainer.displayName = "Frontend.Containers.VolumeDetail";
 
 VolumeDetailContainer.propTypes = {
-  match: PropTypes.object.isRequired,
   journal: PropTypes.object
 };
 
