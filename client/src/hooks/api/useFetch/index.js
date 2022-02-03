@@ -117,7 +117,7 @@ export default function useFetch({ request, afterFetch, options = {} }) {
     entityUtils.loaded(requestKey, state.entityStore)
   );
 
-  const response = getState()?.entityStore?.responses?.requestKey;
+  const response = getState()?.entityStore.responses[requestKey];
 
   firstRun.current = false;
   return { data, meta, loaded, uid, response, refresh: triggerFetchData };
