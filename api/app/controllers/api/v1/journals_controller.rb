@@ -43,7 +43,7 @@ module API
       protected
 
       def includes
-        [:recent_journal_volumes, "journal_volumes.journal_issues", :recent_journal_issues, :permitted_users, :subjects]
+        [:action_callouts, :recent_journal_volumes, "journal_volumes.journal_issues", :recent_journal_issues, :permitted_users, :subjects]
       end
 
       def scope_for_journals

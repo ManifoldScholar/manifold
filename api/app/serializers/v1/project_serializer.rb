@@ -71,8 +71,8 @@ module V1
       typed_attribute :disable_engagement, Types::Bool
 
       typed_has_one :journal
-      typed_has_one :journal_volume
-      typed_has_one :journal_issue
+      typed_has_one :journal_volume, record_type: "journalVolume"
+      typed_has_one :journal_issue, record_type: "journalIssue"
 
       typed_has_many :texts,
                      object_method_name: :text_summaries,
