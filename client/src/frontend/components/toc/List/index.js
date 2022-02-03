@@ -78,7 +78,7 @@ export default class ContentBlockTocBlockList extends PureComponent {
   }
 
   renderContents() {
-    if (this.toc.length <= 0) return this.renderEmpty();
+    if (!this.toc.length) return this.renderEmpty();
 
     return (
       <Styled.List $depth={1}>

@@ -1,10 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import HeadContent from "global/components/HeadContent";
-import { useSelectSettings } from "hooks";
+import { useFromStore } from "hooks";
 
-function EntityHeadContent({ entity, parentEntity = { attributes: {} } }) {
-  const settings = useSelectSettings();
+function EntityHeadContent({
+  entity,
+  type,
+  parentEntity = { attributes: {} }
+}) {
+  const settings = useFromStore("settings", "select");
 
   const installationName = settings?.attributes.general.installationName || "";
   const {
@@ -13,7 +17,8 @@ function EntityHeadContent({ entity, parentEntity = { attributes: {} } }) {
     socialImageStyles,
     titlePlaintext,
     descriptionPlaintext,
-    heroStyles
+    heroStyles,
+    number
   } = entity.attributes;
   const {
     socialDescription: parentSocialDescription,
@@ -25,10 +30,14 @@ function EntityHeadContent({ entity, parentEntity = { attributes: {} } }) {
 
   const title = () => {
     if (socialTitle) return socialTitle;
-    const title = parentTitle
-      ? `${parentTitle}: ${titlePlaintext}`
-      : titlePlaintext;
-    return `\u201c${title}\u201d on ${installationName}`;
+    const titleOrNum = (() => {
+      if (parentTitle) {
+        if (number) return `${parentTitle}: ${type} ${number}`;
+        return `${parentTitle}: ${titlePlaintext}`;
+      }
+      return titlePlaintext;
+    })();
+    return `\u201c${titleOrNum}\u201d on ${installationName}`;
   };
 
   const description = () => {
@@ -57,6 +66,7 @@ function EntityHeadContent({ entity, parentEntity = { attributes: {} } }) {
 
 EntityHeadContent.propTypes = {
   entity: PropTypes.object.isRequired,
+  type: PropTypes.string,
   parentEntity: PropTypes.object
 };
 
