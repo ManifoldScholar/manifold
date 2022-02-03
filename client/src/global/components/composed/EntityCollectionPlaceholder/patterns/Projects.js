@@ -54,7 +54,7 @@ function ProjectsPlaceholder({
             children: (
               <Authorize entity="project" ability="create">
                 <Link
-                  to={lh.link("backendProjects")}
+                  to={lh.link("backendProjectsNew")}
                   className="button-tertiary"
                 >
                   Publish a Project Now
