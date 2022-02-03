@@ -28,7 +28,7 @@ module API
       protected
 
       def includes
-        [:project, :journal_volume]
+        [:project, :journal_volume, :project_content_blocks, :journal]
       end
 
       def scope_visibility
