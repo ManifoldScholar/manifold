@@ -6,11 +6,13 @@ import * as Styled from "./styles";
 export default function HeroMeta({ creators, contributors, description }) {
   const showAvatars =
     creators?.length <= 2 &&
-    creators.every(creator => creator.attributes.avatarStyles.smallSquare);
+    creators.every(creator => creator.attributes?.avatarStyles?.smallSquare);
+
+  console.log(creators);
 
   return (
     <Styled.Wrapper>
-      {!!creators?.length && (
+      {creators?.length && (
         <Styled.Creators>
           {!showAvatars && <span className="italic">by </span>}
           {creators.map(creator =>
@@ -18,7 +20,7 @@ export default function HeroMeta({ creators, contributors, description }) {
               <MakerAvatar key={creator.id} maker={creator} />
             ) : (
               <Styled.Name key={creator.id}>
-                {creator.attributes.fullName}
+                {creator.attributes?.fullName}
               </Styled.Name>
             )
           )}

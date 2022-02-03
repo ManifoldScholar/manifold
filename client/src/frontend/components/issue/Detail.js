@@ -5,13 +5,13 @@ import EntityCollection from "frontend/components/composed/EntityCollection/Enti
 import EntityHero from "frontend/components/composed/EntityHero";
 import ContentBlockList from "frontend/components/content-block-list/List";
 import { Warning } from "frontend/components/content-block/parts";
-import { useSelectSettings } from "hooks";
+import { useFromStore } from "hooks";
 import { useFrontendModeContext } from "hooks";
 import Authorize from "hoc/Authorize";
 
 function Detail({ issue }) {
   const { isStandalone } = useFrontendModeContext();
-  const settings = useSelectSettings();
+  const settings = useFromStore("settings", "select");
   const libraryDisabled = settings.attributes.general.libraryDisabled;
 
   return (
