@@ -1,9 +1,11 @@
 export default {
-  index(jId, page = {}) {
+  index(filter = {}, page = {}) {
     return {
-      endpoint: `/api/v1/journals/${jId}/relationships/journal_issues`,
+      endpoint: `/api/v1/journal_issues`,
       method: "GET",
-      options: { page }
+      options: {
+        params: { filter, page }
+      }
     };
   },
 
