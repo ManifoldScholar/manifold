@@ -14,6 +14,8 @@ export default function IssueDetailContainer({ issue, response }) {
   const parentJournal = issue.relationships?.journal;
   const parentVolume = issue.relationships?.journalVolume;
 
+  console.log(issue);
+
   return (
     <>
       <CheckFrontendMode debugLabel="ProjectDetail" isProjectHomePage />
