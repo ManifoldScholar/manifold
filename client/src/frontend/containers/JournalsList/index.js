@@ -1,44 +1,25 @@
 import React from "react";
-import queryString from "query-string";
+import { journalsAPI } from "api";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import GlobalUtility from "global/components/utility";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import lh from "helpers/linkHandler";
-import {
-  useSelectAllJournals,
-  useDispatchAllJournals,
-  usePaginationState
-} from "hooks";
+import { useFetch, useFilterState, usePaginationState } from "hooks";
 
-const DEFAULT_PAGE = 1;
-const DEFAULT_PER_PAGE = 20;
+export default function JournalsListContainer() {
+  const [filters] = useFilterState();
+  const [pagination, setPageNumber] = usePaginationState();
+  const { data: journals, meta } = useFetch({
+    request: [journalsAPI.index, filters, pagination]
+  });
 
-function getSearch(location) {
-  return queryString.parse(location.search);
-}
+  if (!journals || !meta) return null;
 
-function setInitialPaginationState(location) {
-  const { page } = getSearch(location);
-  return {
-    number: page || DEFAULT_PAGE,
-    size: DEFAULT_PER_PAGE
-  };
-}
+  const showPagination = meta.pagination?.totalPages > 1;
 
-export default function JournalsListContainer({ location }) {
-  const { journals, journalsMeta } = useSelectAllJournals();
-  const [pagination, setPageNumber] = usePaginationState(
-    setInitialPaginationState(location)
-  );
-
-  useDispatchAllJournals(pagination.number, "frontend");
-
-  const hasJournals = !!journals?.length;
-  const showPagination = journalsMeta?.pagination?.totalPages > 1;
-
-  return journals ? (
+  return (
     <>
       <CheckFrontendMode debugLabel="JournalsList" />
       <RegisterBreadcrumbs
@@ -47,7 +28,7 @@ export default function JournalsListContainer({ location }) {
         ]}
       />
       <h1 className="screen-reader-text">Journals</h1>
-      {hasJournals &&
+      {journals.length &&
         journals.map((journal, index) => (
           <EntityCollection.JournalIssues
             key={journal.id}
@@ -56,17 +37,17 @@ export default function JournalsListContainer({ location }) {
             bgColor={index % 2 === 1 ? "neutral05" : "white"}
           />
         ))}
-      {!hasJournals && <EntityCollectionPlaceholder.Journals />}
+      {!journals.length && <EntityCollectionPlaceholder.Journals />}
       {showPagination && (
         <section>
           <div className="container">
             <GlobalUtility.Pagination
-              paginationClickHandler={setPageNumber}
-              pagination={journalsMeta.pagination}
+              paginationClickHandler={page => () => setPageNumber(page)}
+              pagination={meta.pagination}
             />
           </div>
         </section>
       )}
     </>
-  ) : null;
+  );
 }
