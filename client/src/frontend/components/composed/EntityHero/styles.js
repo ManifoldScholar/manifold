@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { transientOptions } from "helpers/emotionHelpers";
 import { breakpoints } from "theme/styles/variables/media";
 import { respond, containerPrototype, fluidScale } from "theme/styles/mixins";
-import { standaloneHeaderLayout } from "theme/styles/variables/crossComponent";
 
 const BREAKPOINT = breakpoints[60];
 

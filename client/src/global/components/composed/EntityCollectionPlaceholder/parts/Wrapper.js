@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
 const PlaceholderWrapper = ({ bgColor, style = {}, children }) => {
-  const Container = ({ children }) =>
+  const Container = ({ children: containerChildren }) =>
     !bgColor ? (
-      <section>{children}</section>
+      <section>{containerChildren}</section>
     ) : (
       <section className={`bg-${bgColor}`} style={style}>
-        <div className="container">{children}</div>
+        <div className="container">{containerChildren}</div>
       </section>
     );
 

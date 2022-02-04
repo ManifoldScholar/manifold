@@ -15,7 +15,6 @@ export default function IssueHero({ entity, mock }) {
     callouts,
     orderedCallouts,
     copy,
-    bgImage,
     twitter,
     instagram,
     facebook,
