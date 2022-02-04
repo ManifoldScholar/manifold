@@ -26,7 +26,7 @@ module V1
     typed_belongs_to :journal_volume, record_type: "journalVolume"
     typed_belongs_to :journal
     typed_belongs_to :project
-    typed_has_many :project_content_blocks, serializer: ::V1::ContentBlockSerializer, record_type: "ContentBlock"
+    typed_has_many :project_content_blocks, serializer: ::V1::ContentBlockSerializer, record_type: "contentBlock"
     typed_has_many :project_texts, serializer: ::V1::TextSerializer, record_type: :text
     typed_has_many :creators, serializer: ::V1::MakerSerializer, record_type: :maker
 
