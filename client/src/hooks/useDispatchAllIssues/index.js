@@ -1,14 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import omitBy from "lodash/omitBy";
 import shuffle from "lodash/shuffle";
-import { requests } from "api";
-import { entityStoreActions } from "actions";
 import { fixtures } from "helpers/storybook/exports";
-
-const { request } = entityStoreActions;
-const defaultPage = 1;
-const perPage = 20;
 
 const sampleData = fixtures
   .collectionFactory("issue", 12)
@@ -21,26 +14,8 @@ const sampleData = fixtures
     };
   });
 
-export default function useDispatchAllIssues(
-  filters,
-  page,
-  context,
-  filtered,
-  fetchVersion
-) {
+export default function useDispatchAllIssues() {
   const dispatch = useDispatch();
-  const requestName = filtered ? "feIssuesListFiltered" : "feIssuesList";
-  const baseFilters = {
-    standaloneModeEnforced: false
-  };
-  const activeFilters = {
-    ...omitBy(filters, value => value === ""),
-    baseFilters
-  };
-  const pagination = {
-    number: page || defaultPage,
-    size: perPage
-  };
 
   // useEffect(() => {
   //   const issuesFetch = journalsAPI.issues(activeFilters, pagination);

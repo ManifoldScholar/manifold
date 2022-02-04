@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { requests } from "api";
 import { select, meta } from "utils/entityUtils";
 
 export default function useSelectAllIssues() {

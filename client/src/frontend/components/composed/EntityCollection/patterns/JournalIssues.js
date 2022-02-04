@@ -16,8 +16,7 @@ function JournalIssuesEntityCollection({
 }) {
   if (!journal) return null;
 
-  const { title, descriptionFormatted: description } =
-    journal.attributes ?? {};
+  const { title, descriptionFormatted: description } = journal.attributes ?? {};
   // TODO: uncomment once `recentJournalIssues` has necessary data
   // const issues = journal.relationships?.recentJournalIssues ?? [];
   const issues = [];

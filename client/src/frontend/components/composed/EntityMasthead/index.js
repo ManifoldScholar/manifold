@@ -14,6 +14,7 @@ function getImage(entity) {
 }
 
 // TODO: update once API is in place
+/* eslint-disable no-unreachable */
 function getLogo(entity) {
   return {
     large: "/static/images/aleph-logo.png",
@@ -23,6 +24,7 @@ function getLogo(entity) {
   if (!logoStyles?.large || !logoStyles?.medium) return null;
   return logoStyles;
 }
+/* eslint-enable no-unreachable */
 
 export default function Masthead({ entity }) {
   const image = getImage(entity);

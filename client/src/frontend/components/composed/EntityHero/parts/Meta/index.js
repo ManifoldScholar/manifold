@@ -8,8 +8,6 @@ export default function HeroMeta({ creators, contributors, description }) {
     creators?.length <= 2 &&
     creators.every(creator => creator.attributes?.avatarStyles?.smallSquare);
 
-  console.log(creators);
-
   return (
     <Styled.Wrapper>
       {creators?.length && (
