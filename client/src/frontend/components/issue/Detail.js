@@ -12,7 +12,7 @@ import Authorize from "hoc/Authorize";
 function Detail({ issue }) {
   const { isStandalone } = useFrontendModeContext();
   const settings = useFromStore("settings", "select");
-  const libraryDisabled = settings.attributes.general.libraryDisabled;
+  const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 
   return (
     <>

@@ -11,8 +11,8 @@ export default function IssueDetailContainer({ issue, response }) {
   if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
   if (!issue) return null;
 
-  const parentJournal = issue.relationships?.journal || null;
-  const parentVolume = issue.relationships?.journalVolume || null;
+  const parentJournal = issue.relationships?.journal;
+  const parentVolume = issue.relationships?.journalVolume;
 
   return (
     <>
@@ -28,7 +28,11 @@ export default function IssueDetailContainer({ issue, response }) {
             label: parentJournal.attributes.titlePlaintext
           },
           parentVolume && {
-            to: lh.link("frontendVolumeDetail", parentVolume.id),
+            to: lh.link(
+              "frontendVolumeDetail",
+              parentJournal.id,
+              parentVolume.id
+            ),
             label: `Volume ${parentVolume.attributes.number}`
           },
           {
