@@ -22,7 +22,8 @@ export default `
     --menu-button-hover-color: var(--menu-bg-color);
     --menu-dark-button-color: var(--color-base-neutral70);
     --menu-dark-button-bg-color: var(--menu-bg-color);
-    --menu-selected-button-interaction-color: var(--accent-primary-pale);
+    --menu-selected-button-interaction-color: var(--menu-button-bg-color);
+    --menu-selected-button-interaction-background-color: var(--color-accent-primary-pale);
     --menu-tail-color: var(--menu-bg-color);
     --menu-dark-tail-color: var(--color-base-neutral95);
     --group-button-hover-color: var(--menu-bg-color);
@@ -38,7 +39,8 @@ export default `
       --menu-button-hover-color: var(--menu-color);
       --menu-dark-button-color: var(--color-base-neutral85);
       --menu-dark-button-bg-color: var(--color-base-neutral70);
-      --menu-selected-button-interaction-color: var(--accent-interaction-extra-dark);
+      --menu-selected-button-interaction-color: var(--menu-bg-color);
+      --menu-selected-button-interaction-background-color: var(--color-interaction-extra-dark);
       --menu-dark-tail-color: var(--color-base-neutral10);
       --group-button-hover-color: var(--menu-button-hover-color);
       --group-button-private-icon-color: var(--color-neutral-ui-light);
@@ -159,8 +161,7 @@ export default `
       text-decoration: none;
       color: var(--menu-button-color);
       background-color: var(--menu-button-bg-color);
-      transition: color ${defaultTransitionProps},
-        background-color ${defaultTransitionProps};
+      transition: none;
 
       &--dark {
         --menu-button-color: var(--menu-dark-button-color);
@@ -205,7 +206,8 @@ export default `
 
       &--selected:hover,
       &--selected:focus {
-        background-color: var(--menu-selected-button-interaction-color);
+        color: var(--menu-selected-button-interaction-color);
+        background-color: var(--menu-selected-button-interaction-background-color);
       }
     }
 
@@ -249,7 +251,6 @@ export default `
       height: 0;
       margin-left: -${tailSize};
       border-style: solid;
-      transition: border-color ${defaultTransitionProps};
 
       &--down {
         top: 100%;
