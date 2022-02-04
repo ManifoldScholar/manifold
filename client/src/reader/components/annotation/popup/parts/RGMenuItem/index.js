@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import * as Styled from "./styles";
+import { MenuItemRadio } from "reakit/Menu";
+import IconComposer from "global/components/utility/IconComposer";
 
 function RGMenuItem({
   as,
@@ -12,7 +13,7 @@ function RGMenuItem({
   privateGroup
 }) {
   return (
-    <Styled.Item
+    <MenuItemRadio
       {...menu}
       as={as}
       onChange={onClick}
@@ -20,13 +21,26 @@ function RGMenuItem({
       value={value}
       checked={selected}
       name="readingGroupOption"
+      className="annotation-popup-menu-item"
     >
-      <Styled.Inner>
-        {selected && <Styled.SelectedIcon icon="checkmark16" size={22} />}
-        <Styled.Text>{label}</Styled.Text>
-        {privateGroup && <Styled.PrivateIcon icon="lock16" size={18} />}
-      </Styled.Inner>
-    </Styled.Item>
+      <div className="annotation-popup-menu-item__inner">
+        {selected && (
+          <IconComposer
+            icon="checkmark16"
+            size={22}
+            className="annotation-popup-menu-item__selected-icon"
+          />
+        )}
+        <span className="annotation-popup-menu-item__text">{label}</span>
+        {privateGroup && (
+          <IconComposer
+            icon="lock16"
+            size={18}
+            className="annotation-popup-menu-item__private-icon"
+          />
+        )}
+      </div>
+    </MenuItemRadio>
   );
 }
 

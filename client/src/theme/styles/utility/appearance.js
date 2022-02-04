@@ -1,10 +1,4 @@
-import {
-  screenReaderText,
-  show,
-  hide,
-  utilityPrimary,
-  defaultTransitionProps
-} from "../mixins";
+import { screenReaderText, show, hide, utilityPrimary } from "../mixins";
 
 export default `
   .screen-reader-text {
@@ -93,9 +87,7 @@ export default `
     text-decoration: none;
     border: 1px solid;
     border-radius: 4px;
-    transition: color ${defaultTransitionProps},
-      background-color ${defaultTransitionProps},
-      border-color ${defaultTransitionProps};
+    transition: none;
 
     &:hover,
     &:focus-visible {
