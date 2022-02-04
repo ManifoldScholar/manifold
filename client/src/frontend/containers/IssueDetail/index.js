@@ -23,18 +23,17 @@ export default function IssueDetailContainer({ issue, response }) {
             to: lh.link("frontendIssuesList"),
             label: "Back to All Issues"
           },
-          // TODO: Update when api is ready
           parentJournal && {
             to: lh.link("frontendJournalDetail", parentJournal.id),
-            label: "Journal Name Here"
+            label: parentJournal.attributes.titlePlaintext
           },
           parentVolume && {
             to: lh.link("frontendVolumeDetail", parentVolume.id),
-            label: "Volume Number Here"
+            label: `Volume ${parentVolume.attributes.number}`
           },
           {
             to: lh.link("frontendIssueDetail", issue.id),
-            label: issue.attributes.number
+            label: `Issue ${issue.attributes.number}`
           }
         ].filter(Boolean)}
       />
