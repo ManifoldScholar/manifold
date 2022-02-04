@@ -11,14 +11,16 @@ function JournalIssuesEntityCollection({
   journal,
   paginationProps,
   filterProps,
-  limit,
+  limit = 4,
   ...passThroughProps
 }) {
   if (!journal) return null;
 
   const { title, slug, descriptionFormatted: description } =
     journal.attributes ?? {};
-  const issues = journal.relationships?.recentJournalIssues?.slice(0, limit);
+  // TODO: uncomment once `recentJournalIssues` has necessary data
+  // const issues = journal.relationships?.recentJournalIssues ?? [];
+  const issues = [];
   const image = getHeroImage(journal);
   const headerLayout = getHeaderLayout(journal);
 
