@@ -26,6 +26,7 @@ module V1
     typed_attribute :social_description, Types::String.optional
     typed_attribute :social_title, Types::String.optional
     typed_attribute :social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
+    typed_attribute :hero_background_color, Types::String.optional
 
     typed_has_many :recent_journal_volumes, serializer: ::V1::JournalVolumeSerializer, record_type: "journalVolume"
     typed_has_many :recent_journal_issues, serializer: ::V1::JournalIssueSerializer, record_type: "journalIssue"
@@ -33,7 +34,7 @@ module V1
     when_full do
       metadata(metadata: true, properties: true, formatted: true)
       typed_attribute :hero_styles, Types::Serializer::Attachment.meta(read_only: true)
-      typed_attribute :cover_styles, Types::Serializer::Attachment.meta(read_only: true)
+      typed_attribute :logo_styles, Types::Serializer::Attachment.meta(read_only: true)
       typed_attribute :hashtag, Types::String.optional
       typed_attribute :description, Types::String.optional
       typed_attribute :twitter_id, Types::String.optional

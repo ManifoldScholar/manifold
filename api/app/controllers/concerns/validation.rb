@@ -82,11 +82,12 @@ module Validation
     params.require(:data)
     attributes = [:title, :subtitle, :hashtag, :description, :facebook_id, :twitter_id,
                   :instagram_id, :remove_avatar, attachment(:avatar),
-                  attachment(:hero), attachment(:cover), :remove_hero, :draft,
-                  :remove_cover, metadata(Journal), :avatar_color, :pending_slug,
+                  attachment(:hero), attachment(:logo), :remove_hero, :draft,
+                  :remove_logo, metadata(Journal), :avatar_color, :pending_slug,
                   { tag_list: [] }, :image_credits, :social_description,
                   attachment(:custom_icon), :hero_layout, :remove_custom_icon,
-                  :social_title, attachment(:social_image), :remove_social_image]
+                  :social_title, attachment(:social_image), :remove_social_image,
+                  :hero_background_color]
 
     relationships = [:collaborators, :creators, :contributors, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)

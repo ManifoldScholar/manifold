@@ -2,6 +2,11 @@ class AddSlugFieldsToJournalModels < ActiveRecord::Migration[6.0]
   def change
     add_column :journal_issues, :slug, :text
     add_column :journal_volumes, :slug, :text
+
+    add_column :journals, :logo_data, :jsonb
+    add_column :journals, :hero_background_color, :string
+    remove_column :journals, :cover_data, :jsonb
+
     add_index :journal_issues, :slug, unique: true
     add_index :journal_volumes, :slug, unique: true
 

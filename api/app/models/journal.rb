@@ -49,7 +49,7 @@ class Journal < ApplicationRecord
   validates :draft, inclusion: { in: [true, false] }
 
   # Attachments
-  manifold_has_attached_file :cover, :image
+  manifold_has_attached_file :logo, :image
   manifold_has_attached_file :social_image, :image
 
   scope :by_draft, ->(draft = nil) { where(draft: to_boolean(draft)) unless draft.nil? }

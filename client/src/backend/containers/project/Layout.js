@@ -110,6 +110,7 @@ export class ProjectLayoutContainer extends PureComponent {
         failureRedirect={lh.link("backendProject", project.id)}
       >
         <Hero.Builder
+          include={["projectDescription", "actionCallouts", "social"]}
           dispatch={dispatch}
           history={history}
           actionCallouts={actionCallouts}

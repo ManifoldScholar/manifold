@@ -35,7 +35,7 @@ function JournalIssueEdit({
       () => redirect(),
       () => redirect()
     );
-  }, [destroy, history, journal]);
+  }, [destroy, history, journal.id, journalIssue.id]);
 
   const onDelete = useCallback(() => {
     const heading = "Are you sure you want to delete this issue?";
