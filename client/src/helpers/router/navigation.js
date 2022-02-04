@@ -62,12 +62,12 @@ class Navigation {
           {
             label: "Project Collections",
             route: "backendProjectCollections"
-          },
-          {
-            label: "Journals",
-            route: "backendJournals"
           }
         ]
+      },
+      {
+        label: "Journals",
+        route: "backendJournals"
       },
       {
         label: "Records",
@@ -291,12 +291,6 @@ class Navigation {
         label: "Project Collections",
         route: "backendProjectCollections",
         entity: "projectCollection",
-        ability: "update"
-      },
-      {
-        label: "Journals",
-        route: "backendJournals",
-        entity: "journal",
         ability: "update"
       }
     ];
