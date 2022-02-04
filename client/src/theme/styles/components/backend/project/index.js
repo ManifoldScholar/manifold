@@ -1,4 +1,3 @@
-import actionCallouts from "./actionCallouts";
 import actionCalloutSlot from "./actionCalloutSlot";
 import avatarBuilder from "./avatarBuilder";
 import colorPicker from "./colorPicker";
@@ -16,6 +15,5 @@ export default `
   ${contentBlockList}
   ${heroBuilder}
   ${heroBuilderBlock}
-  ${actionCallouts}
   ${actionCalloutSlot}
 `;

@@ -4,6 +4,7 @@ import Slot from "./Slot";
 import { DragDropContext } from "react-beautiful-dnd";
 import { actionCalloutsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
+import * as Styled from "./styles";
 
 const { request } = entityStoreActions;
 
@@ -156,7 +157,7 @@ export default class ActionCallouts extends PureComponent {
 
   render() {
     return (
-      <div className="action-callouts">
+      <Styled.CalloutsContainer>
         <DragDropContext
           onDragStart={this.onDragStart}
           onDragEnd={this.onDragEnd}
@@ -177,7 +178,7 @@ export default class ActionCallouts extends PureComponent {
               );
             })}
         </DragDropContext>
-      </div>
+      </Styled.CalloutsContainer>
     );
   }
 }
