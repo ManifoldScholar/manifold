@@ -3,33 +3,22 @@ import PropTypes from "prop-types";
 import { breakpoints } from "theme/styles/variables/media";
 import * as Styled from "./styles";
 
-const SIZES = { retina: 2560, large: 1280, medium: 640 };
-const BREAKPOINT = breakpoints[60];
-
-// TODO: update once API is in place
 function getImage(entity) {
-  const { heroStyles } = entity.attributes;
-  if (!heroStyles?.largeLandscape || !heroStyles?.mediumLandscape) return null;
-  return heroStyles;
+  const { heroStyles } = entity.attributes ?? {};
+  const { heroStyles: journalHero } =
+    entity.relationships?.journal?.attributes ?? {};
+  if (heroStyles?.largeLandscape && heroStyles?.mediumLandscape)
+    return heroStyles;
+  if (journalHero?.largeLandscape && journalHero?.mediumLandscape)
+    return journalHero;
+  return null;
 }
-
-// TODO: update once API is in place
-/* eslint-disable no-unreachable */
-function getLogo(entity) {
-  return {
-    large: "/static/images/aleph-logo.png",
-    medium: "/static/images/aleph-logo.png"
-  };
-  const { logoStyles } = entity.attributes;
-  if (!logoStyles?.large || !logoStyles?.medium) return null;
-  return logoStyles;
-}
-/* eslint-enable no-unreachable */
 
 export default function Masthead({ entity }) {
+  if (!entity) return null;
   const image = getImage(entity);
-  const logo = getLogo(entity);
-  const color = entity.attributes.mastheadColor || "#B4A075";
+  const logo = entity.relationships?.journal?.attributes ?? null;
+  const color = entity.relationships?.journal?.attributes ?? "#B4A075";
 
   if (!image && !logo) return null;
 
@@ -38,15 +27,15 @@ export default function Masthead({ entity }) {
       {image && (
         <Styled.Image
           srcSet={`
-          ${image.largeLandscape} ${SIZES.large}w,
-          ${image.mediumLandscape} ${SIZES.medium}w
+          ${image.largeLandscape} 1280w,
+          ${image.mediumLandscape} 640w
         `}
-          sizes={`(max-width: ${BREAKPOINT}) ${SIZES.medium}px, (max-width: ${breakpoints[120]}) ${SIZES.large}px`}
+          sizes={`(max-width: ${breakpoints[60]}) 640px, (max-width: ${breakpoints[120]}) 1280px`}
           src={image.largeLandscape}
           alt=""
         />
       )}
-      {!image && logo && (
+      {logo && (
         <Styled.Logo
           srcSet={`
             ${logo.large} 2x,
