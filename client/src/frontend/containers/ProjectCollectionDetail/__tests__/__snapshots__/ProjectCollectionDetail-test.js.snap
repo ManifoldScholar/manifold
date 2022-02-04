@@ -1712,11 +1712,8 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
       }
     }
   />
-  <HigherOrder.WithCurrentUser('Layout.ButtonNavigation)
-    grayBg={false}
-    hideAtNarrow={true}
-    showProjectCollections={true}
-    showProjects={false}
+  <Frontend.Composed.CollectionNavigation
+    entityType="projectCollections"
   />
 </div>
 `;
