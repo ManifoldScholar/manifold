@@ -12,6 +12,14 @@ export default class Builder extends PureComponent {
   static displayName = "Hero.Builder";
 
   static propTypes = {
+    include: PropTypes.arrayOf(
+      PropTypes.oneOf([
+        "projectDescription",
+        "journalDescription",
+        "actionCallouts",
+        "social"
+      ])
+    ),
     model: PropTypes.object.isRequired,
     api: PropTypes.object,
     modelLabel: PropTypes.string,
@@ -27,6 +35,7 @@ export default class Builder extends PureComponent {
   };
 
   static defaultProps = {
+    include: [],
     modelLabel: "project",
     api: projectsAPI,
     actionCalloutSlots: [
@@ -69,8 +78,12 @@ export default class Builder extends PureComponent {
     return this.state.drawer;
   }
 
-  openDescriptionDrawer = () => {
-    this.setState({ drawer: Forms.Description });
+  openProjectDescriptionDrawer = () => {
+    this.setState({ drawer: Forms.ProjectDescription });
+  };
+
+  openJournalDescriptionDrawer = () => {
+    this.setState({ drawer: Forms.JournalDescription });
   };
 
   openSocialDrawer = () => {
@@ -82,6 +95,7 @@ export default class Builder extends PureComponent {
   };
 
   render() {
+    const { include, modelLabel } = this.props;
     const DrawerContents = this.drawerComponent;
 
     return (
@@ -97,41 +111,64 @@ export default class Builder extends PureComponent {
               >
                 <SectionLabel label="Hero Block" id={`${id}-header`} />
                 <span id={`${id}-instructions`} className="instructions">
-                  {`The Hero Block is the top of your ${this.props.modelLabel} page. Customize its
+                  {`The Hero Block is the top of your ${modelLabel} page. Customize its
                   content, layout, and settings here.`}
                 </span>
 
-                <Block
-                  title="Description + Images"
-                  description="Description Text, Cover Art, and Background Image"
-                  onEdit={this.openDescriptionDrawer}
-                  ariaControls={`${id}-drawer`}
-                  ariaExpanded={this.state.drawer === Forms.Description}
-                />
-                <Block
-                  title="Calls-to-Action"
-                  description="Buttons and links to related resources"
-                >
-                  {this.props.actionCallouts && (
-                    <ActionCallouts
-                      refresh={this.props.refreshActionCallouts}
-                      dispatch={this.props.dispatch}
-                      model={this.props.model}
-                      actionCalloutSlots={this.props.actionCalloutSlots}
-                      actionCallouts={this.props.actionCallouts}
-                      actionCalloutNewRoute={this.props.actionCalloutNewRoute}
-                      actionCalloutEditRoute={this.props.actionCalloutEditRoute}
-                      actionCalloutsResponse={this.props.actionCalloutsResponse}
-                    />
-                  )}
-                </Block>
-                <Block
-                  title="Social Links"
-                  description="Links to social platforms and hashtag"
-                  onEdit={this.openSocialDrawer}
-                  ariaControls={`${id}-drawer`}
-                  ariaExpanded={this.state.drawer === Forms.Social}
-                />
+                {include.includes("projectDescription") && (
+                  <Block
+                    title="Description + Images"
+                    description="Description Text, Cover Art, and Background Image"
+                    onEdit={this.openProjectDescriptionDrawer}
+                    ariaControls={`${id}-drawer`}
+                    ariaExpanded={
+                      this.state.drawer === Forms.ProjectDescription
+                    }
+                  />
+                )}
+                {include.includes("journalDescription") && (
+                  <Block
+                    title="Description + Images"
+                    description="Description Text, Logo, and Background Color or Image"
+                    onEdit={this.openJournalDescriptionDrawer}
+                    ariaControls={`${id}-drawer`}
+                    ariaExpanded={
+                      this.state.drawer === Forms.JournalDescription
+                    }
+                  />
+                )}
+                {include.includes("actionCallouts") && (
+                  <Block
+                    title="Calls-to-Action"
+                    description="Buttons and links to related resources"
+                  >
+                    {this.props.actionCallouts && (
+                      <ActionCallouts
+                        refresh={this.props.refreshActionCallouts}
+                        dispatch={this.props.dispatch}
+                        model={this.props.model}
+                        actionCalloutSlots={this.props.actionCalloutSlots}
+                        actionCallouts={this.props.actionCallouts}
+                        actionCalloutNewRoute={this.props.actionCalloutNewRoute}
+                        actionCalloutEditRoute={
+                          this.props.actionCalloutEditRoute
+                        }
+                        actionCalloutsResponse={
+                          this.props.actionCalloutsResponse
+                        }
+                      />
+                    )}
+                  </Block>
+                )}
+                {include.includes("social") && (
+                  <Block
+                    title="Social Links"
+                    description="Links to social platforms and hashtag"
+                    onEdit={this.openSocialDrawer}
+                    ariaControls={`${id}-drawer`}
+                    ariaExpanded={this.state.drawer === Forms.Social}
+                  />
+                )}
               </div>
             </section>
             <Drawer.Wrapper

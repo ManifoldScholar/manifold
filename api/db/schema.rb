@@ -520,7 +520,6 @@ ActiveRecord::Schema.define(version: 2022_02_04_185651) do
     t.boolean "draft", default: true, null: false
     t.citext "sort_title"
     t.integer "events_count", default: 0
-    t.jsonb "cover_data"
     t.jsonb "hero_data"
     t.integer "hero_layout"
     t.jsonb "custom_icon_data"
@@ -534,6 +533,8 @@ ActiveRecord::Schema.define(version: 2022_02_04_185651) do
     t.integer "journal_issues_count", default: 0, null: false
     t.integer "journal_volumes_count", default: 0, null: false
     t.jsonb "fa_cache", default: {}, null: false
+    t.jsonb "logo_data"
+    t.string "hero_background_color"
     t.index ["slug"], name: "index_journals_on_slug", unique: true
   end
 
