@@ -33,7 +33,6 @@ export default function JournalsListContainer() {
           <EntityCollection.JournalIssues
             key={journal.id}
             journal={journal}
-            limit={4}
             bgColor={index % 2 === 1 ? "neutral05" : "white"}
           />
         ))}
