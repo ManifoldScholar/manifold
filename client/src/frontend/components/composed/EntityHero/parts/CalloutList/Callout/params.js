@@ -6,21 +6,7 @@ export const getCalloutParams = (data, type, isLink) => {
   const tocSectionId =
     data.relationships?.text?.attributes.tocSectionId ?? null;
 
-  const finalType = (() => {
-    if (type !== "LINK") return type;
-    switch (data.attributes.title) {
-      case "Website":
-        return "WEBSITE";
-      case "EMAIL":
-        return "EMAIL";
-      case "SHARE":
-        return "SHARE";
-      default:
-        return "LINK";
-    }
-  })();
-
-  switch (finalType) {
+  switch (type) {
     case "READ":
       return {
         icon: isLink ? "arrowRight16" : "glasses64",
