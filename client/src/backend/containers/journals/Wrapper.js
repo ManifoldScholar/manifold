@@ -12,13 +12,15 @@ export default class JournalsWrapper extends PureComponent {
     return (
       <Authorize
         ability="update"
-        entity={["project"]}
+        entity={["journal"]}
         failureFatalError={{
-          body: "You are not allowed to manage projects."
+          body: "You are not allowed to manage journals."
         }}
       >
         <div>
-          <main id="skip-to-main">{childRoutes(this.props.route)}</main>
+          <main id="skip-to-main" className="backend-detail">
+            {childRoutes(this.props.route)}
+          </main>
         </div>
       </Authorize>
     );

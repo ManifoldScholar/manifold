@@ -10,16 +10,6 @@ class Navigation {
         route: "frontend",
         matchType: "link"
       },
-      // {
-      //   label: "Journals",
-      //   route: "frontendJournals",
-      //   children: [
-      //     {
-      //       label: "All Journals",
-      //       route: "frontendJournalsList"
-      //     }
-      //   ]
-      // },
       {
         label: "Projects",
         route: "frontendProjects",
@@ -62,12 +52,12 @@ class Navigation {
           {
             label: "Project Collections",
             route: "backendProjectCollections"
-          },
-          {
-            label: "Journals",
-            route: "backendJournals"
           }
         ]
+      },
+      {
+        label: "Journals",
+        route: "backendJournals"
       },
       {
         label: "Records",
@@ -291,12 +281,6 @@ class Navigation {
         label: "Project Collections",
         route: "backendProjectCollections",
         entity: "projectCollection",
-        ability: "update"
-      },
-      {
-        label: "Journals",
-        route: "backendJournals",
-        entity: "journal",
         ability: "update"
       }
     ];

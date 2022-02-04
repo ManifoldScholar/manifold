@@ -273,143 +273,6 @@ const routes = {
           ]
         },
         {
-          name: "backendJournals",
-          exact: false,
-          component: "JournalsWrapper",
-          path: "/backend/projects/journals/:id?",
-          helper: () => "/backend/projects/journals",
-          routes: [
-            {
-              name: "backendJournalsList",
-              exact: true,
-              component: "JournalsList",
-              path: "/backend/projects/journals",
-              helper: () => "/backend/projects/journals"
-            },
-            {
-              name: "backendJournalsNew",
-              exact: true,
-              component: "JournalsNew",
-              path: "/backend/projects/journals/new",
-              helper: () => "/backend/projects/journals/new"
-            },
-            {
-              name: "backendJournal",
-              exact: false,
-              component: "JournalWrapper",
-              path: "/backend/projects/journals/:id",
-              helper: j => `/backend/projects/journals/${j}`,
-              routes: [
-                {
-                  name: "backendJournalProperties",
-                  exact: true,
-                  component: "JournalProperties",
-                  path: "/backend/projects/journals/:id/properties",
-                  helper: j => `/backend/projects/journals/${j}/properties`
-                },
-                {
-                  name: "backendJournalLayout",
-                  exact: false,
-                  component: "JournalLayout",
-                  path: "/backend/projects/journals/:id/layout",
-                  helper: j => `/backend/projects/journals/${j}/layout`,
-                  routes: [
-                    {
-                      name: "backendJournalActionCalloutNew",
-                      exact: true,
-                      component: "ActionCalloutNew",
-                      path:
-                        "/backend/projects/journals/:id/layout/action-callout/new",
-                      helper: j =>
-                        `/backend/projects/journals/${j}/layout/action-callout/new`
-                    },
-                    {
-                      name: "backendJournalActionCalloutEdit",
-                      exact: true,
-                      component: "ActionCalloutEdit",
-                      path:
-                        "/backend/projects/journals/:jId/layout/action-callout/:id",
-                      helper: (j, id) =>
-                        `/backend/projects/journals/${j}/layout/action-callout/${id}`
-                    }
-                  ]
-                },
-                {
-                  name: "backendJournalVolumes",
-                  exact: false,
-                  component: "JournalVolumes",
-                  path: "/backend/projects/journals/:id/volumes/",
-                  helper: j => `/backend/projects/journals/${j}/volumes`,
-                  routes: [
-                    {
-                      exact: false,
-                      component: "JournalVolumeWrapper",
-                      path: "/backend/projects/journals/:id/volumes/:vId",
-                      routes: [
-                        {
-                          name: "backendJournalVolumeNew",
-                          exact: true,
-                          component: "JournalVolumeNew",
-                          path: "/backend/projects/journals/:id/volumes/new",
-                          helper: j =>
-                            `/backend/projects/journals/${j}/volumes/new`
-                        },
-                        {
-                          name: "backendJournalVolumeEdit",
-                          exact: true,
-                          component: "JournalVolumeEdit",
-                          path: "/backend/projects/journals/:id/volumes/:vId",
-                          helper: (j, v) =>
-                            `/backend/projects/journals/${j}/volumes/${v}`
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  name: "backendJournalIssues",
-                  exact: false,
-                  component: "JournalIssues",
-                  path: "/backend/projects/journals/:id/issues/",
-                  helper: j => `/backend/projects/journals/${j}/issues`,
-                  routes: [
-                    {
-                      exact: false,
-                      component: "JournalIssueWrapper",
-                      path: "/backend/projects/journals/:id/issues/:iId",
-                      routes: [
-                        {
-                          name: "backendJournalIssueNew",
-                          exact: true,
-                          component: "JournalIssueNew",
-                          path: "/backend/projects/journals/:id/issues/new",
-                          helper: j =>
-                            `/backend/projects/journals/${j}/issues/new`
-                        },
-                        {
-                          name: "backendJournalIssueEdit",
-                          exact: true,
-                          component: "JournalIssueEdit",
-                          path: "/backend/projects/journals/:id/issues/:iId",
-                          helper: (j, i) =>
-                            `/backend/projects/journals/${j}/issues/${i}`
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  name: "backendJournalMetadata",
-                  exact: true,
-                  component: "JournalMetadata",
-                  path: "/backend/projects/journals/:id/metadata",
-                  helper: p => `/backend/projects/journals/${p}/metadata`
-                }
-              ]
-            }
-          ]
-        },
-        {
           name: "backendProject",
           exact: false,
           component: "ProjectWrapper",
@@ -647,6 +510,137 @@ const routes = {
               component: "ProjectProperties",
               path: "/backend/projects/:id/properties",
               helper: p => `/backend/projects/${p}/properties`
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: "backendJournals",
+      exact: false,
+      component: "JournalsWrapper",
+      path: "/backend/journals/:id?",
+      helper: () => "/backend/journals",
+      routes: [
+        {
+          name: "backendJournalsList",
+          exact: true,
+          component: "JournalsList",
+          path: "/backend/journals",
+          helper: () => "/backend/journals"
+        },
+        {
+          name: "backendJournalsNew",
+          exact: true,
+          component: "JournalsNew",
+          path: "/backend/journals/new",
+          helper: () => "/backend/journals/new"
+        },
+        {
+          name: "backendJournal",
+          exact: false,
+          component: "JournalWrapper",
+          path: "/backend/journals/:id",
+          helper: j => `/backend/journals/${j}`,
+          routes: [
+            {
+              name: "backendJournalProperties",
+              exact: true,
+              component: "JournalProperties",
+              path: "/backend/journals/:id/properties",
+              helper: j => `/backend/journals/${j}/properties`
+            },
+            {
+              name: "backendJournalLayout",
+              exact: false,
+              component: "JournalLayout",
+              path: "/backend/journals/:id/layout",
+              helper: j => `/backend/journals/${j}/layout`,
+              routes: [
+                {
+                  name: "backendJournalActionCalloutNew",
+                  exact: true,
+                  component: "ActionCalloutNew",
+                  path: "/backend/journals/:id/layout/action-callout/new",
+                  helper: j =>
+                    `/backend/journals/${j}/layout/action-callout/new`
+                },
+                {
+                  name: "backendJournalActionCalloutEdit",
+                  exact: true,
+                  component: "ActionCalloutEdit",
+                  path: "/backend/journals/:jId/layout/action-callout/:id",
+                  helper: (j, id) =>
+                    `/backend/journals/${j}/layout/action-callout/${id}`
+                }
+              ]
+            },
+            {
+              name: "backendJournalVolumes",
+              exact: false,
+              component: "JournalVolumes",
+              path: "/backend/journals/:id/volumes/",
+              helper: j => `/backend/journals/${j}/volumes`,
+              routes: [
+                {
+                  exact: false,
+                  component: "JournalVolumeWrapper",
+                  path: "/backend/journals/:id/volumes/:vId",
+                  routes: [
+                    {
+                      name: "backendJournalVolumeNew",
+                      exact: true,
+                      component: "JournalVolumeNew",
+                      path: "/backend/journals/:id/volumes/new",
+                      helper: j => `/backend/journals/${j}/volumes/new`
+                    },
+                    {
+                      name: "backendJournalVolumeEdit",
+                      exact: true,
+                      component: "JournalVolumeEdit",
+                      path: "/backend/journals/:id/volumes/:vId",
+                      helper: (j, v) => `/backend/journals/${j}/volumes/${v}`
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              name: "backendJournalIssues",
+              exact: false,
+              component: "JournalIssues",
+              path: "/backend/journals/:id/issues/",
+              helper: j => `/backend/journals/${j}/issues`,
+              routes: [
+                {
+                  exact: false,
+                  component: "JournalIssueWrapper",
+                  path: "/backend/journals/:id/issues/:iId",
+                  routes: [
+                    {
+                      name: "backendJournalIssueNew",
+                      exact: true,
+                      component: "JournalIssueNew",
+                      path: "/backend/journals/:id/issues/new",
+                      helper: j => `/backend/journals/${j}/issues/new`
+                    },
+                    {
+                      name: "backendJournalIssueEdit",
+                      exact: true,
+                      component: "JournalIssueEdit",
+                      path: "/backend/journals/:id/issues/:iId",
+                      helper: (j, i) => `/backend/journals/${j}/issues/${i}`
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              name: "backendJournalMetadata",
+              exact: true,
+              component: "JournalMetadata",
+              path: "/backend/journals/:id/metadata",
+              helper: p => `/backend/journals/${p}/metadata`
             }
           ]
         }

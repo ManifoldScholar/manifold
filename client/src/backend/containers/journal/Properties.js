@@ -64,37 +64,9 @@ function JournalPropertiesContainer({ journal }) {
               name="attributes[draft]"
               instructions="A draft project is only visible to users who are able to modify it."
             />
-            <Form.Upload
-              wide
-              layout="portrait"
-              label="Hero Image"
-              accepts="images"
-              readFrom="attributes[heroStyles][small]"
-              name="attributes[hero]"
-              remove="attributes[removeHero]"
-            />
-            <Form.Select
-              name="attributes[heroLayout]"
-              label="Hero Layout:"
-              options={[
-                { label: "Square Inset", value: "square_inset" },
-                { label: "Wide Inset", value: "wide_inset" },
-                { label: "Full Bleed", value: "full_bleed" }
-              ]}
-            />
           </Form.FieldGroup>
           <Form.FieldGroup label="Social">
-            <Form.Upload
-              wide
-              layout="portrait"
-              label="Social Card Image"
-              accepts="images"
-              readFrom="attributes[socialImageStyles][small]"
-              name="attributes[socialImage]"
-              remove="attributes[removeSocialImage]"
-            />
             <Form.TextInput
-              wide
               label="Social Card Title"
               name="attributes[socialTitle]"
               placeholder="Optionally, Enter a Social Card Title"
@@ -104,6 +76,14 @@ function JournalPropertiesContainer({ journal }) {
               label="Social Card Description"
               name="attributes[socialDescription]"
               placeholder="Optionally, Enter a Social Card Description"
+            />
+            <Form.Upload
+              layout="portrait"
+              label="Social Card Image"
+              accepts="images"
+              readFrom="attributes[socialImageStyles][small]"
+              name="attributes[socialImage]"
+              remove="attributes[removeSocialImage]"
             />
           </Form.FieldGroup>
           <Form.FieldGroup label="Taxonomy">
