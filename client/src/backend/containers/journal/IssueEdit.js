@@ -3,10 +3,13 @@ import PropTypes from "prop-types";
 import Issue from "backend/components/issue";
 import Navigation from "backend/components/navigation";
 import { journalIssuesAPI } from "api";
-import { useFetch } from "hooks";
+import { useFetch, useApiCallback } from "hooks";
+import withConfirmation from "hoc/withConfirmation";
+import lh from "helpers/linkHandler";
 
 function JournalIssueEdit({
   refreshIssues,
+  confirm,
   closeUrl,
   match,
   journal,
@@ -16,14 +19,42 @@ function JournalIssueEdit({
     request: [journalIssuesAPI.show, match.params.iId]
   });
 
+  const destroy = useApiCallback(journalIssuesAPI.destroy, {
+    removes: journalIssue
+  });
+
   const refreshAndRedirect = useCallback(() => {
     refreshIssues();
     history.push(closeUrl, { keepNotifications: false });
   }, [history, closeUrl, refreshIssues]);
 
+  const destroyAndRedirect = useCallback(() => {
+    const redirect = () =>
+      history.push(lh.link("backendJournalIssues", journal.id));
+    destroy(journalIssue.id).then(
+      () => redirect(),
+      () => redirect()
+    );
+  }, [destroy, history, journal]);
+
+  const onDelete = useCallback(() => {
+    const heading = "Are you sure you want to delete this issue?";
+    const message = "This action cannot be undone.";
+    confirm(heading, message, destroyAndRedirect);
+  }, [destroyAndRedirect, confirm]);
+
+  const buttons = [
+    {
+      onClick: onDelete,
+      label: "delete",
+      icon: "delete32",
+      className: "utility-button__icon--notice"
+    }
+  ];
+
   return (
     <div>
-      <Navigation.DrawerHeader title="Edit Issue" />
+      <Navigation.DrawerHeader title="Edit Issue" buttons={buttons} />
       <Issue.Form
         model={journalIssue}
         journalId={journal.id}
@@ -40,4 +71,4 @@ JournalIssueEdit.propTypes = {
   refreshIssues: PropTypes.func.isRequired
 };
 
-export default JournalIssueEdit;
+export default withConfirmation(JournalIssueEdit);
