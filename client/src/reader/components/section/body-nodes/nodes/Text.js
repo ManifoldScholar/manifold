@@ -214,10 +214,11 @@ export default class TextNode extends Component {
 
   get commentsCount() {
     const annotations = Object.values(this.openAnnotations);
-    return annotations.reduce(
+    const count = annotations.reduce(
       (memo, a) => a.attributes.commentsCount + memo,
       0
     );
+    return Number.isInteger(count) ? count : null;
   }
 
   ariaLabelForHighlight(chunk) {
