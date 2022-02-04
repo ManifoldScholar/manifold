@@ -7,6 +7,10 @@ RSpec.describe "JournalIssues", type: :request do
     include_examples "an API destroy request", model: JournalIssue, authorized_user: :admin
   end
 
+  path "/journal_issues" do
+    include_examples "an API index request", model: JournalIssue
+  end
+
   describe "for a journal" do
     let(:parent) { FactoryBot.create(:journal) }
     let(:project) { FactoryBot.create(:project) }

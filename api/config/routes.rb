@@ -88,7 +88,7 @@ Rails.application.routes.draw do
       resources :search_results, only: [:index]
       resource :statistics, only: [:show]
       resource :settings, except: [:destroy, :create]
-      resources :journal_issues, except: [:create, :index]
+      resources :journal_issues, except: [:create]
       resources :journal_volumes, except: [:create, :index]
 
       resources :texts do
