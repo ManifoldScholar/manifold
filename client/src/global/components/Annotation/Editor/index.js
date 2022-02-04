@@ -228,14 +228,12 @@ class AnnotationEditor extends PureComponent {
         <div className="annotation-group-options__list">
           {this.canEngagePublicly && (
             <RGMenuItem
-              as="button"
               label={this.publicLabel}
               onClick={() => this.setReadingGroup("public")}
               selected={this.isSelected("public")}
             />
           )}
           <RGMenuItem
-            as="button"
             label={this.privateLabel}
             onClick={() => this.setReadingGroup("private")}
             privateGroup
@@ -245,7 +243,6 @@ class AnnotationEditor extends PureComponent {
             this.readingGroups.map(rg => (
               <RGMenuItem
                 key={rg.id}
-                as="button"
                 label={rg.attributes.name}
                 onClick={() => this.setReadingGroup(rg.id)}
                 privateGroup={this.isPrivateGroup(rg.attributes.privacy)}
