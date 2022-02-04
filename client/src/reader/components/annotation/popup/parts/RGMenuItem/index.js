@@ -16,7 +16,8 @@ function RGMenuItem({ menu, label, onClick, selected, value, privateGroup }) {
         name: "readingGroupOption"
       }
     : {
-        onClick
+        onClick,
+        type: "button"
       };
 
   return (
