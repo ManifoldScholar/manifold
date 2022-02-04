@@ -10,7 +10,7 @@ export default function HeroMeta({ creators, contributors, description }) {
 
   return (
     <Styled.Wrapper>
-      {creators?.length && (
+      {!!creators?.length && (
         <Styled.Creators>
           {!showAvatars && <span className="italic">by </span>}
           {creators.map(creator =>
