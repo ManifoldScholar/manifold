@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_12_202835) do
+ActiveRecord::Schema.define(version: 2022_02_04_185651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -473,10 +473,12 @@ ActiveRecord::Schema.define(version: 2022_01_12_202835) do
     t.uuid "creator_id"
     t.integer "number"
     t.text "subtitle"
+    t.text "slug"
     t.index ["creator_id"], name: "index_journal_issues_on_creator_id"
     t.index ["journal_id"], name: "index_journal_issues_on_journal_id"
     t.index ["journal_volume_id"], name: "index_journal_issues_on_journal_volume_id"
     t.index ["project_id"], name: "index_journal_issues_on_project_id", unique: true
+    t.index ["slug"], name: "index_journal_issues_on_slug", unique: true
   end
 
   create_table "journal_subjects", force: :cascade do |t|
@@ -496,8 +498,10 @@ ActiveRecord::Schema.define(version: 2022_01_12_202835) do
     t.integer "number"
     t.text "subtitle"
     t.integer "journal_issues_count", default: 0, null: false
+    t.text "slug"
     t.index ["creator_id"], name: "index_journal_volumes_on_creator_id"
     t.index ["journal_id"], name: "index_journal_volumes_on_journal_id"
+    t.index ["slug"], name: "index_journal_volumes_on_slug", unique: true
   end
 
   create_table "journals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

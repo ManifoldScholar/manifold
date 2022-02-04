@@ -1,3 +1,5 @@
+require "securerandom"
+
 # Volumes belong to Journals
 class JournalVolume < ApplicationRecord
 
@@ -5,6 +7,7 @@ class JournalVolume < ApplicationRecord
   include TrackedCreator
   include SerializedAbilitiesFor
   include Filterable
+  include Sluggable
 
   belongs_to :journal, counter_cache: true
   has_many :journal_issues, dependent: :nullify
@@ -14,5 +17,10 @@ class JournalVolume < ApplicationRecord
 
   scope :in_reverse_order, -> { order(number: :desc) }
   scope :in_order, -> { order(number: :asc) }
+
+  def slug_candidates
+    chunks = (persisted? ? id : SecureRandom.uuid).split("-")
+    chunks.map { |chunk| "#{number}-#{chunk}" }
+  end
 
 end
