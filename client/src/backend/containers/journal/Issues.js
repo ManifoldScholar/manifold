@@ -3,7 +3,7 @@ import Authorize from "hoc/Authorize";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import { journalIssuesAPI } from "api";
+import { journalsAPI } from "api";
 import { withRouter } from "react-router-dom";
 import { useFetch, usePaginationState } from "hooks";
 import EntitiesList, {
@@ -17,7 +17,7 @@ function JournalIssuesContainer({ refresh, journal, route }) {
   const [pagination, setPageNumber] = usePaginationState();
 
   const { data, refresh: refreshIssues, meta } = useFetch({
-    request: [journalIssuesAPI.index, journal.id, pagination]
+    request: [journalsAPI.journalIssues, journal.id, pagination]
   });
 
   if (!data) return null;

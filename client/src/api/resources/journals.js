@@ -50,5 +50,13 @@ export default {
       endpoint: `/api/v1/journals/${id}/relationships/action_callouts`,
       method: "GET"
     };
+  },
+
+  journalIssues(jId, page = {}) {
+    return {
+      endpoint: `/api/v1/journals/${jId}/relationships/journal_issues`,
+      method: "GET",
+      options: { page }
+    };
   }
 };
