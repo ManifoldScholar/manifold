@@ -10,16 +10,6 @@ class Navigation {
         route: "frontend",
         matchType: "link"
       },
-      // {
-      //   label: "Journals",
-      //   route: "frontendJournals",
-      //   children: [
-      //     {
-      //       label: "All Journals",
-      //       route: "frontendJournalsList"
-      //     }
-      //   ]
-      // },
       {
         label: "Projects",
         route: "frontendProjects",
@@ -36,7 +26,17 @@ class Navigation {
       },
       {
         label: "Journals",
-        route: "frontendJournalsList"
+        route: "frontendJournals",
+        children: [
+          {
+            label: "All Journals",
+            route: "frontendJournalsList"
+          },
+          {
+            label: "All Issues",
+            route: "frontendIssuesList"
+          }
+        ]
       },
       {
         label: "Reading Groups",
