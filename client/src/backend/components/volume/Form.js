@@ -16,6 +16,12 @@ function VolumeForm({ journalId, model, ...props }) {
       notificationScope="none"
     >
       <Form.NumberInput label="Number" focusOnMount name="attributes[number]" />
+      <Form.TextInput
+        wide
+        label="Slug"
+        name="attributes[pendingSlug]"
+        placeholder="Enter Journal Volume Slug"
+      />
       <Form.Save
         text={model ? "Update  Journal Volume" : "Create Journal Volume"}
       />

@@ -31,8 +31,8 @@ module API
         [:journal_issues, "journal_issues.project", "journal_issues.project_content_blocks", "journal_issues.project_texts"]
       end
 
-      def scope_visibility
-        JournalVolume.all
+      def scope_for_journal_volumes
+        JournalVolume.friendly
       end
 
     end

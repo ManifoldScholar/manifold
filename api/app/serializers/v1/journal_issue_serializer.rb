@@ -16,6 +16,8 @@ module V1
     typed_attribute :avatar_meta, Types::Hash.meta(read_only: true)
     typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
 
+    typed_attribute :slug, Types::String.meta(read_only: true)
+
     typed_attribute :hero_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :cover_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
@@ -31,6 +33,7 @@ module V1
     typed_has_many :creators, serializer: ::V1::MakerSerializer, record_type: :maker
 
     when_full do
+      typed_attribute :pending_slug, Types::String
     end
   end
 end
