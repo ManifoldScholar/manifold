@@ -4,7 +4,14 @@ module API
     class JournalIssuesController < ApplicationController
 
       resourceful! JournalIssue, authorize_options: { except: [:index, :show] } do
-        JournalIssue.all
+        JournalIssue.filtered(
+          with_pagination!({})
+        )
+      end
+
+      def index
+        @journal_issues = load_journal_issues
+        render_multiple_resources @journal_issues, include: []
       end
 
       def show
