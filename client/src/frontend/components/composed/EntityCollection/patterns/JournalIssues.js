@@ -16,7 +16,7 @@ function JournalIssuesEntityCollection({
 }) {
   if (!journal) return null;
 
-  const { title, slug, descriptionFormatted: description } =
+  const { title, descriptionFormatted: description } =
     journal.attributes ?? {};
   // TODO: uncomment once `recentJournalIssues` has necessary data
   // const issues = journal.relationships?.recentJournalIssues ?? [];
@@ -51,7 +51,7 @@ function JournalIssuesEntityCollection({
       }
       FooterComponent={() => (
         <FooterLink
-          to={lh.link("frontendJournals", slug)}
+          to={lh.link("frontendJournal", journal.id)}
           label={footerLinkText}
           tabIndex={-1}
         />
