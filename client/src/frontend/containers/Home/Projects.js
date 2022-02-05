@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
-import ProjectList from "frontend/components/project-list";
 import { projectsAPI } from "api";
 import EntityCollection from "frontend/components/composed/EntityCollection";
+import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import { useFetch, usePaginationState } from "hooks";
 
 export default function HomeProjectContainer() {
@@ -20,7 +20,8 @@ export default function HomeProjectContainer() {
   });
 
   if (!data) return null;
-  if (loaded && data.length === 0) return <ProjectList.Placeholder />;
+  if (loaded && data.length === 0)
+    return <EntityCollectionPlaceholder.Projects />;
   return (
     <EntityCollection.ProjectsSummary projects={data} bgColor="neutral05" />
   );
