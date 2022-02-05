@@ -30,7 +30,7 @@ function JournalVolumeEdit({
       () => redirect(),
       () => redirect()
     );
-  }, [destroy, history, journal.id, journalVolume.id]);
+  }, [destroy, history, journal?.id, journalVolume?.id]);
 
   const onDelete = useCallback(() => {
     const heading = "Are you sure you want to delete this volume?";

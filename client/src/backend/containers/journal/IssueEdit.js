@@ -30,12 +30,12 @@ function JournalIssueEdit({
 
   const destroyAndRedirect = useCallback(() => {
     const redirect = () =>
-      history.push(lh.link("backendJournalIssues", journal.id));
+      history.push(lh.link("backendJournalIssues", journal?.id));
     destroy(journalIssue.id).then(
       () => redirect(),
       () => redirect()
     );
-  }, [destroy, history, journal.id, journalIssue.id]);
+  }, [destroy, history, journal?.id, journalIssue?.id]);
 
   const onDelete = useCallback(() => {
     const heading = "Are you sure you want to delete this issue?";
