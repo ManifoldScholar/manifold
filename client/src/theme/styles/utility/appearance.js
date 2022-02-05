@@ -57,9 +57,12 @@ export default `
     position: relative;
   }
 
-  .no-focus-outline:focus-visible,
+  .no-focus-outline:focus-visible {
+    outline: none;
+  }
+
   .no-focus-outline:focus {
-    outline: 0;
+    outline: none;
   }
 
   /* Icon styles */
