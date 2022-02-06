@@ -9,7 +9,6 @@ function Menu({
   lastActiveMenu,
   onKeyDown,
   direction,
-  darkTail,
   children,
   ...menuProps
 }) {
@@ -31,8 +30,7 @@ function Menu({
   const tailClassName = classNames({
     "annotation-popup__tail": true,
     "annotation-popup__tail--down": direction === "up",
-    "annotation-popup__tail--up": direction === "down",
-    "annotation-popup__tail--dark": darkTail
+    "annotation-popup__tail--up": direction === "down"
   });
   return (
     <ReakitMenu
@@ -59,8 +57,7 @@ Menu.propTypes = {
     current: PropTypes.string
   }),
   visible: PropTypes.bool,
-  submenu: PropTypes.bool,
-  darkTail: PropTypes.bool
+  submenu: PropTypes.bool
 };
 
 export default Menu;

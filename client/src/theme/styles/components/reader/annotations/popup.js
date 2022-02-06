@@ -256,16 +256,12 @@ export default `
         top: 100%;
         border-color: var(--menu-tail-color) transparent transparent;
         border-width: ${tailSize} ${tailSize} 0;
-
-        .annotation-popup__button--secondary-dark + & {
-          --menu-tail-color: var(--color-base-neutral95);
-        }
       }
 
       &--up {
-        top: ${tailSize};
+        top: -${tailSize};
         border-color: transparent transparent var(--menu-tail-color);
-        border-width: 0 ${tailSize};
+        border-width: 0 ${tailSize} ${tailSize};
       }
 
       &--dark {
