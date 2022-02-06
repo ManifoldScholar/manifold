@@ -13,6 +13,8 @@ module Manifold
         Text
         TextSection
         User
+        Journal
+        JournalIssue
       )
     end
 
