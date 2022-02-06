@@ -64,6 +64,13 @@ function JournalPropertiesContainer({ journal }) {
               name="attributes[draft]"
               instructions="A draft project is only visible to users who are able to modify it."
             />
+            <Form.Switch
+              className="form-toggle-secondary"
+              wide
+              label="Show on Home Page"
+              name="attributes[showOnHomepage]"
+              instructions="If selected, this journal will be highlighted on the home page"
+            />
           </Form.FieldGroup>
           <Form.FieldGroup label="Social">
             <Form.TextInput
