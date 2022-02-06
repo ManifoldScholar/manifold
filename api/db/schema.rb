@@ -474,6 +474,7 @@ ActiveRecord::Schema.define(version: 2022_02_04_185651) do
     t.integer "number"
     t.text "subtitle"
     t.text "slug"
+    t.jsonb "fa_cache", default: {}, null: false
     t.index ["creator_id"], name: "index_journal_issues_on_creator_id"
     t.index ["journal_id"], name: "index_journal_issues_on_journal_id"
     t.index ["journal_volume_id"], name: "index_journal_issues_on_journal_volume_id"

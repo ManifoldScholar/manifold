@@ -8,6 +8,9 @@ class JournalIssue < ApplicationRecord
   include SerializedAbilitiesFor
   include Filterable
   include Sluggable
+  include HasFormattedAttributes
+
+  has_formatted_attributes :subtitle
 
   belongs_to :journal, counter_cache: true
   belongs_to :journal_volume, optional: true, counter_cache: true
@@ -44,5 +47,17 @@ class JournalIssue < ApplicationRecord
   delegate :creators, to: :project
   delegate :creator_names, to: :project
   delegate :creator_ids, to: :project
+  delegate :finished, to: :project
+  delegate :draft, to: :project
+
+  def updated?
+    return false unless updated_at
+
+    updated_at.strftime("%F") != created_at.strftime("%F")
+  end
+
+  def recently_updated?
+    updated? && updated_at >= Time.current - 1.week
+  end
 
 end
