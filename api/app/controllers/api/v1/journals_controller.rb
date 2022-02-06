@@ -13,7 +13,7 @@ module API
 
       def index
         @journals = load_journals
-        render_multiple_resources @journals, include: []
+        render_multiple_resources @journals, include: [:recent_journal_volumes, :recent_journal_issues]
       end
 
       def show
