@@ -19,7 +19,7 @@ module V1
     typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :recently_updated, Types::Bool.meta(read_only: true), &:recently_updated?
     typed_attribute :slug, Types::String.meta(read_only: true)
-    typed_attribute :finished, Types::String.meta(read_only: true)
+    typed_attribute :finished, Types::Bool.meta(read_only: true)
     typed_attribute :draft, Types::Bool.meta(read_only: true)
 
     typed_attribute :hero_styles, Types::Serializer::Attachment.meta(read_only: true)
