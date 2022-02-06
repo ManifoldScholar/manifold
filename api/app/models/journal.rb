@@ -52,8 +52,11 @@ class Journal < ApplicationRecord
   manifold_has_attached_file :logo, :image
   manifold_has_attached_file :social_image, :image
 
+  scope :drafts, -> { where(draft: true) }
+  scope :published, -> { where(draft: false) }
   scope :by_draft, ->(draft = nil) { where(draft: to_boolean(draft)) unless draft.nil? }
   scope :with_order, ->(by = nil) { by.present? ? order(by) : order(:sort_title, :title) }
+  scope :with_read_ability, ->(user = nil) { build_read_ability_scope_for user }
 
   # Search
   scope :search_import, -> {
@@ -105,4 +108,46 @@ class Journal < ApplicationRecord
     recent_journal_issues.pluck(:id)
   end
 
+  class << self
+    def build_read_ability_scope_for(user = nil)
+      return published unless user.present?
+
+      where(arel_build_read_case_statement_for(user))
+    end
+
+    private
+
+    # This creates a case statement to be supplied to `where`.
+    #
+    # * If the journal is a draft, only show for users with draft access roles
+    #   access to it
+    #
+    # @param [User, nil] user
+    def arel_build_read_case_statement_for(user)
+      arel_case.tap do |stmt|
+        stmt.when(arel_table[:draft]).then(arel_with_draft_roles_for(user))
+        stmt.else(true)
+      end
+    end
+
+    # @see .arel_with_roles_for
+    # @param [User] user
+    # @return [Arel::Nodes::Or]
+    def arel_with_draft_roles_for(user)
+      arel_with_roles_for(user, RoleName.for_draft_access)
+    end
+
+    # @see RoleName.for_access
+    # @param [User] user
+    # @param [<Symbol, String>] global role names
+    # @param [<Symbol, String>] scoped role names
+    # @return [Arel::Nodes::Or]
+    def arel_with_roles_for(user, global: [], scoped: [])
+      query = unscoped.with_role(scoped, user).unscope(:select).select(primary_key)
+
+      has_global_role = global.any? { |role| user.has_cached_role? role, :any }
+
+      arel_attr_in_query(primary_key, query).or(arel_quote(has_global_role))
+    end
+  end
 end

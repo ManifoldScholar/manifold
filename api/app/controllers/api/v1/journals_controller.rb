@@ -51,7 +51,7 @@ module API
       end
 
       def scope_visibility
-        Journal.all
+        return Journal.with_read_ability current_user unless project_filter_params&.dig(:with_update_ability)
       end
 
     end
