@@ -57,6 +57,7 @@ class Journal < ApplicationRecord
   scope :by_draft, ->(draft = nil) { where(draft: to_boolean(draft)) unless draft.nil? }
   scope :with_order, ->(by = nil) { by.present? ? order(by) : order(:sort_title, :title) }
   scope :with_read_ability, ->(user = nil) { build_read_ability_scope_for user }
+  scope :by_show_on_homepage, ->(show = true) { where(show_on_homepage: show) if show.present? }
 
   # Search
   scope :search_import, -> {

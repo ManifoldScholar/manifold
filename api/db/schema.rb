@@ -536,6 +536,7 @@ ActiveRecord::Schema.define(version: 2022_02_04_185651) do
     t.jsonb "fa_cache", default: {}, null: false
     t.jsonb "logo_data"
     t.string "hero_background_color"
+    t.boolean "show_on_homepage", default: false, null: false
     t.index ["slug"], name: "index_journals_on_slug", unique: true
   end
 

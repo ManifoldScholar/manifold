@@ -7,6 +7,8 @@ class AddSlugFieldsToJournalModels < ActiveRecord::Migration[6.0]
 
     add_column :journals, :logo_data, :jsonb
     add_column :journals, :hero_background_color, :string
+    add_column :journals, :show_on_homepage, :boolean, default: false, null: false
+
     remove_column :journals, :cover_data, :jsonb
 
     add_index :journal_issues, :slug, unique: true
