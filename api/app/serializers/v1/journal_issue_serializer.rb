@@ -21,6 +21,7 @@ module V1
     typed_attribute :slug, Types::String.meta(read_only: true)
     typed_attribute :finished, Types::Bool.meta(read_only: true)
     typed_attribute :draft, Types::Bool.meta(read_only: true)
+    typed_attribute :title, Types::String.meta(read_only: true)
 
     typed_attribute :hero_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :cover_styles, Types::Serializer::Attachment.meta(read_only: true)

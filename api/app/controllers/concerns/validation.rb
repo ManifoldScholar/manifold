@@ -619,6 +619,12 @@ module Validation
     )[:filter]
   end
 
+  def journal_issue_filter_params
+    params.permit(
+      filter: [:keyword, :order, :typeahead]
+    )[:filter]
+  end
+
   def journal_filter_params
     params.permit(
       filter: [:draft, :keyword, :order, :typeahead, :show_on_homepage, :with_update_ability]
