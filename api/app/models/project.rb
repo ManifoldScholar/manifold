@@ -102,9 +102,9 @@ class Project < ApplicationRecord
            dependent: :destroy,
            as: :calloutable
 
-  has_one :journal_issue, dependent: :destroy
+  has_one :journal_issue, dependent: :destroy, touch: true
   has_one :journal, through: :journal_issue
-  has_one :journal_volume, through: :journal_issue
+  has_one :journal_volume, through: :journal_issue, touch: true
 
   has_many :project_exports, inverse_of: :project, dependent: :destroy
   has_many :project_export_statuses, inverse_of: :project

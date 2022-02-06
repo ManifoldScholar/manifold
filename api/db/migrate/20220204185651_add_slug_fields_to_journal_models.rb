@@ -1,6 +1,8 @@
 class AddSlugFieldsToJournalModels < ActiveRecord::Migration[6.0]
   def change
     add_column :journal_issues, :slug, :text
+    add_column :journal_issues, :fa_cache, :jsonb, default: {}, null: false
+
     add_column :journal_volumes, :slug, :text
 
     add_column :journals, :logo_data, :jsonb
@@ -9,6 +11,7 @@ class AddSlugFieldsToJournalModels < ActiveRecord::Migration[6.0]
 
     add_index :journal_issues, :slug, unique: true
     add_index :journal_volumes, :slug, unique: true
+
 
     reversible do |change|
 
