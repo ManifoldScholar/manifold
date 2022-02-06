@@ -17,6 +17,7 @@ module V1
     typed_attribute :avatar_color, Types::String.enum("primary", "secondary", "tertiary", "quaternary", "quinary", "sentary")
     typed_attribute :avatar_meta, Types::Hash.meta(read_only: true)
     typed_attribute :draft, Types::Bool
+    typed_attribute :show_on_homepage, Types::Bool
     typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :tag_list, Types::Array.of(Types::String)
     typed_attribute :journal_issues_count, Types::Integer

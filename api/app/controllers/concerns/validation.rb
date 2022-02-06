@@ -87,7 +87,7 @@ module Validation
                   { tag_list: [] }, :image_credits, :social_description,
                   attachment(:custom_icon), :hero_layout, :remove_custom_icon,
                   :social_title, attachment(:social_image), :remove_social_image,
-                  :hero_background_color]
+                  :hero_background_color, :show_on_homepage]
 
     relationships = [:collaborators, :creators, :contributors, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
@@ -621,7 +621,7 @@ module Validation
 
   def journal_filter_params
     params.permit(
-      filter: [:draft, :keyword, :order, :typeahead, :with_update_ability]
+      filter: [:draft, :keyword, :order, :typeahead, :show_on_homepage, :with_update_ability]
     )[:filter]
   end
 
