@@ -35,7 +35,11 @@ module API
       protected
 
       def includes
-        [:project, :journal_volume, :project_content_blocks, :journal]
+        [:journal, :journal_volume, :project, "project.creators", "project.contributors",
+         "project.texts", "project.text_categories", "project.events",
+         "project.resource_collections", "project.resources", "project.subjects",
+         "project.twitter_queries", "project.permitted_users", "project.content_blocks",
+         "project.action_callouts"]
       end
 
       def scope_for_journal_issues
