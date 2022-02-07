@@ -18,8 +18,8 @@ function JournalIssuesEntityCollection({
 
   const { title, descriptionFormatted: description } = journal.attributes ?? {};
   // TODO: uncomment once `recentJournalIssues` has necessary data
-  // const issues = journal.relationships?.recentJournalIssues ?? [];
-  const issues = [];
+  const issues = journal.relationships?.recentJournalIssues ?? [];
+  // const issues = [];
   const image = getHeroImage(journal);
   const headerLayout = getHeaderLayout(journal);
 

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
 const PlaceholderAvatar = ({ entity }) => {
-  if (!entity.attributes.avatarColor) return null;
+  if (!entity.attributes?.avatarColor) return null;
   return (
     <Styled.Placeholder
       mode="responsive"
