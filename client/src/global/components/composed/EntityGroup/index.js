@@ -5,7 +5,13 @@ import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import { Link } from "react-router-dom";
 import * as Styled from "./styles";
 
-export default function EntityGroup({ entities, title, to, children }) {
+export default function EntityGroup({
+  entities,
+  title,
+  to,
+  children,
+  parentView
+}) {
   return (
     <Styled.Box>
       {title && (
@@ -23,6 +29,7 @@ export default function EntityGroup({ entities, title, to, children }) {
                   entity={entity}
                   stack={stack}
                   key={entity.id}
+                  parentView={parentView}
                 />
               ))
             }

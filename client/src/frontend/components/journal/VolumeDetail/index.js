@@ -18,7 +18,12 @@ function VolumeDetail({ journal, volume }) {
           <Styled.IssueWrapper key={issue.id}>
             <ThumbnailGrid minColumns={4} minItemWidth="210px">
               {({ stack }) => (
-                <EntityThumbnail entity={issue} stack={stack} key={issue.id} />
+                <EntityThumbnail
+                  entity={issue}
+                  stack={stack}
+                  key={issue.id}
+                  parentView
+                />
               )}
             </ThumbnailGrid>
             <ContentBlockList
