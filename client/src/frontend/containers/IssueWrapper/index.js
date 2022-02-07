@@ -47,7 +47,5 @@ export default function IssueWrapper({ route }) {
 IssueWrapper.displayName = "Frontend.Containers.IssueWrapper";
 
 IssueWrapper.propTypes = {
-  route: PropTypes.object,
-  location: PropTypes.object,
-  match: PropTypes.object
+  route: PropTypes.object
 };
