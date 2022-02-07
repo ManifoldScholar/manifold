@@ -1,9 +1,6 @@
-import isEmpty from "lodash/isEmpty";
-
-export function getHeroImage(collection) {
-  const { heroLayout, heroStyles } = collection.attributes;
-  if (isEmpty(heroStyles)) return null;
-  switch (heroLayout) {
+export function getHeroImage(layout, collection) {
+  const { heroStyles } = collection?.attributes ?? {};
+  switch (layout) {
     case "full_bleed":
     case "wide_inset":
       return heroStyles.largeLandscape;
@@ -15,12 +12,9 @@ export function getHeroImage(collection) {
 }
 
 export function getHeaderLayout(collection) {
-  const {
-    heroLayout,
-    heroStyles,
-    descriptionFormatted: description
-  } = collection.attributes;
-  if (isEmpty(heroStyles))
-    return description ? "title_description" : "title_only";
-  return heroLayout;
+  const { heroLayout, heroStyles, descriptionFormatted: description } =
+    collection?.attributes ?? {};
+  if (heroLayout && heroStyles) return heroLayout;
+  if (heroStyles?.largeLandscape) return "wide_inset";
+  return description ? "title_description" : "title_only";
 }
