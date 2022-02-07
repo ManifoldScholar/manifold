@@ -42,7 +42,7 @@ function Filters({
       </Styled.SelectGroup>
       {showResetButton && (
         <Styled.ResetButton type="reset" onClick={handleReset}>
-          {"Reset Search + Filters"}
+          {filters.length ? "Reset Search + Filters" : "Reset Search"}
         </Styled.ResetButton>
       )}
     </Styled.Wrapper>
