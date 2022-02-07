@@ -17,11 +17,9 @@ function JournalIssuesEntityCollection({
   if (!journal) return null;
 
   const { title, descriptionFormatted: description } = journal.attributes ?? {};
-  // TODO: uncomment once `recentJournalIssues` has necessary data
   const issues = journal.relationships?.recentJournalIssues ?? [];
-  // const issues = [];
-  const image = getHeroImage(journal);
   const headerLayout = getHeaderLayout(journal);
+  const image = getHeroImage(headerLayout, journal);
 
   const totalIssueCount = journal.attributes?.journalIssuesCount;
   const footerLinkText =

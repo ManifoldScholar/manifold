@@ -1,14 +1,20 @@
 import React from "react";
 import { journalsAPI } from "api";
-import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import GlobalUtility from "global/components/utility";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "frontend/components/composed/EntityCollection";
-import lh from "helpers/linkHandler";
-import { useFetch, useFilterState, usePaginationState } from "hooks";
+import {
+  useFetch,
+  useFilterState,
+  usePaginationState,
+  useFromStore
+} from "hooks";
+import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 
 export default function JournalsListContainer() {
+  const settings = useFromStore("settings", "select");
+
   const [filters] = useFilterState();
   const [pagination, setPageNumber] = usePaginationState();
   const { data: journals, meta } = useFetch({
@@ -18,15 +24,12 @@ export default function JournalsListContainer() {
   if (!journals || !meta) return null;
 
   const showPagination = meta.pagination?.totalPages > 1;
+  // TODO: Update with setting for journals?
+  const showNav = settings?.attributes?.calculated.hasVisibleProjects;
 
   return (
     <>
       <CheckFrontendMode debugLabel="JournalsList" />
-      <RegisterBreadcrumbs
-        breadcrumbs={[
-          { to: lh.link("frontendIssuesList"), label: "Back to issues list" }
-        ]}
-      />
       <h1 className="screen-reader-text">Journals</h1>
       {journals.length &&
         journals.map((journal, index) => (
@@ -34,6 +37,7 @@ export default function JournalsListContainer() {
             key={journal.id}
             journal={journal}
             bgColor={index % 2 === 1 ? "neutral05" : "white"}
+            limit={8}
           />
         ))}
       {!journals.length && <EntityCollectionPlaceholder.Journals />}
@@ -47,6 +51,7 @@ export default function JournalsListContainer() {
           </div>
         </section>
       )}
+      {showNav && <CollectionNavigation entityType="journalIssues" />}
     </>
   );
 }

@@ -8,6 +8,8 @@ function getRoute(type) {
   switch (type) {
     case "journals":
       return "frontendJournalsList";
+    case "journalIssues":
+      return "frontendIssuesList";
     case "projectCollections":
       return "frontendProjectCollections";
     default:
@@ -19,6 +21,8 @@ function getLabel(type) {
   switch (type) {
     case "journals":
       return "See all journals";
+    case "journalIssues":
+      return "See all issues";
     case "projectCollections":
       return "See project collections";
     default:
@@ -29,6 +33,8 @@ function getLabel(type) {
 function getIcon(type) {
   switch (type) {
     case "journals":
+      return "journals64";
+    case "journalIssues":
       return "journals64";
     case "projectCollections":
       return "projectCollections64";
@@ -63,7 +69,12 @@ function CollectionNavigation({ entityType = "projects", bgColor = "white" }) {
 CollectionNavigation.displayName = "Frontend.Composed.CollectionNavigation";
 
 CollectionNavigation.propTypes = {
-  entityType: PropTypes.oneOf(["journals", "projects", "projectCollections"]),
+  entityType: PropTypes.oneOf([
+    "journals",
+    "journalIssues",
+    "projects",
+    "projectCollections"
+  ]),
   bgColor: PropTypes.oneOf(["white", "neutral05"])
 };
 
