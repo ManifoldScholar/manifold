@@ -10,7 +10,9 @@ export default function EntityMetadata({
   hideDate,
   stack
 }) {
-  const data = entity.attributes;
+  const data = entity?.attributes;
+
+  if (!data) return null;
 
   const showUpdated =
     (!data.finished && !!data.updated) || !data.publicationDate;
