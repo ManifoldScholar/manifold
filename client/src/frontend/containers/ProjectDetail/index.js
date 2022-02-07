@@ -7,29 +7,37 @@ import Schema from "global/components/schema";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 
-function ProjectDetailContainer({ project, projectResponse }) {
-  if (!projectResponse) return null;
+function ProjectDetailContainer({ project, response }) {
+  if (
+    project?.attributes?.isJournalIssue &&
+    project?.relationships?.journalIssue?.id
+  )
+    return (
+      <Redirect
+        to={lh.link(
+          "frontendIssueDetail",
+          project?.relationships?.journalIssue?.id
+        )}
+      />
+    );
 
-  if (projectResponse.status === 401)
-    return <Redirect to={lh.link("frontend")} />;
+  if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
 
-  if (!project) return null;
-
-  return (
+  return project ? (
     <>
       <CheckFrontendMode debugLabel="ProjectDetail" isProjectHomePage />
       <EntityHeadContent entity={project} />
       <Project.Detail project={project} />
       <Schema.Project project={project} />
     </>
-  );
+  ) : null;
 }
 
 ProjectDetailContainer.displayName = "Frontend.Containers.ProjectDetail";
 
 ProjectDetailContainer.propTypes = {
   project: PropTypes.object,
-  projectResponse: PropTypes.object
+  response: PropTypes.object
 };
 
 export default ProjectDetailContainer;
