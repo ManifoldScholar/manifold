@@ -20,8 +20,8 @@ export default function IssueDetailContainer({ issue, response }) {
       <RegisterBreadcrumbs
         breadcrumbs={[
           {
-            to: lh.link("frontendIssuesList"),
-            label: "Back to All Issues"
+            to: lh.link("frontendJournals"),
+            label: "All Journals"
           },
           parentJournal && {
             to: lh.link("frontendJournalDetail", parentJournal.id),

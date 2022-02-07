@@ -30,7 +30,7 @@ export default class ContentBlockList extends PureComponent {
 
   get visibleContentBlocks() {
     return this.byAccess(
-      this.contentBlocks.filter(block => block.attributes.visible)
+      this.contentBlocks.filter(block => block.attributes?.visible)
     );
   }
 
