@@ -5,6 +5,7 @@ import * as Styled from "./styles";
 
 export default function EntityMetadata({
   entity,
+  parentView,
   hideDescription,
   hideDate,
   stack
@@ -27,13 +28,17 @@ export default function EntityMetadata({
       : null;
   /* eslint-enable no-nested-ternary */
 
+  const title = parentView
+    ? `Issue ${data.number}`
+    : data.titleFormatted ?? data.title ?? `Issue ${data.number}`;
+
   return (
     <Styled.MetadataWrapper $stack={stack}>
       <Styled.TitleWrapper $stack={stack}>
         <Styled.TitleText
           $stack={stack}
           dangerouslySetInnerHTML={{
-            __html: data.titleFormatted || `Issue ${data.number}`
+            __html: title
           }}
         />
         {data.draft && <Styled.Tag $stack={stack}>{"Draft"}</Styled.Tag>}

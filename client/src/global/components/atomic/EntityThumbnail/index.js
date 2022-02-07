@@ -12,7 +12,8 @@ export default function EntityThumbnail({
   hideMeta = false,
   hideDescription = true,
   hideDate = false,
-  stack = true
+  stack = true,
+  parentView = false
 }) {
   const detailRoute =
     entity.type === "journalIssues"
@@ -29,6 +30,7 @@ export default function EntityThumbnail({
         {!hideMeta && (
           <EntityMetadata
             entity={entity}
+            parentView={parentView}
             hideDescription={hideDescription}
             hideDate={hideDate}
             stack={stack}

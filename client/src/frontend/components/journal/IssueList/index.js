@@ -39,9 +39,12 @@ function JournalIssueList({ journal }) {
             title={`Volume ${volume.attributes.number}`}
             to={lh.link("frontendVolumeDetail", journal.id, volume.id)}
             entities={volume.relationships.journalIssues}
+            parentView
           />
         ))}
-        {noVolumeIssues.length && <EntityGroup entities={noVolumeIssues} />}
+        {noVolumeIssues.length && (
+          <EntityGroup entities={noVolumeIssues} parentView />
+        )}
       </Styled.List>
     </Styled.Wrapper>
   );
