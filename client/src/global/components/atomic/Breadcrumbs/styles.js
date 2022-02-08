@@ -21,6 +21,7 @@ export const Outer = styled.nav`
   font-size: 13px;
   letter-spacing: 0.1em;
   padding: 13px 0 15px;
+  overflow-x: auto;
 
   ${respond(
     `
@@ -120,4 +121,5 @@ export const Icon = styled(IconComposer)`
 
 export const Label = styled.span`
   margin-inline-start: var(--Breadcrumb-margin-inline);
+  white-space: nowrap;
 `;
