@@ -84,3 +84,13 @@ export const Body = styled.div`
     margin-block-start: ${fluidScale("40px", "20px")};
   }
 `;
+
+export const PlaceholderText = styled.p`
+  font-family: var(--font-family-heading);
+  font-size: ${fluidScale("20px", "16px")};
+  margin-inline-start: calc(-1 * ${fluidScale("15px", "0px")});
+  padding-block-start: ${fluidScale("20px", "10px")};
+  padding-block-end: ${fluidScale("30px", "20px")};
+  width: 100%;
+  text-align: center;
+`;

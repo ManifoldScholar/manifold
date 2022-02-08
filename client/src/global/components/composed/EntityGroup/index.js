@@ -12,6 +12,8 @@ export default function EntityGroup({
   children,
   parentView
 }) {
+  const showPlaceholder = !entities?.length && !children;
+
   return (
     <Styled.Box>
       {title && (
@@ -21,7 +23,7 @@ export default function EntityGroup({
         </Styled.GroupHeader>
       )}
       <Styled.Body>
-        {entities?.length && (
+        {!!entities?.length && (
           <ThumbnailGrid minColumns={4} minItemWidth="210px">
             {({ stack }) =>
               entities.map(entity => (
@@ -34,6 +36,11 @@ export default function EntityGroup({
               ))
             }
           </ThumbnailGrid>
+        )}
+        {showPlaceholder && (
+          <Styled.PlaceholderText>
+            {"This volume doesn't contain any issues yet."}
+          </Styled.PlaceholderText>
         )}
         {children}
       </Styled.Body>
