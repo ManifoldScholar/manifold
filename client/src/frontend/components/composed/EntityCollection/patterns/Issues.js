@@ -26,7 +26,9 @@ function IssuesEntityCollection({
       BodyComponent={props => (
         <ThumbnailGrid {...props}>
           {({ stack }) =>
-            issues.map(item => <EntityThumbnail entity={item} stack={stack} />)
+            issues.map(item => (
+              <EntityThumbnail entity={item} stack={stack} key={item.id} />
+            ))
           }
         </ThumbnailGrid>
       )}
