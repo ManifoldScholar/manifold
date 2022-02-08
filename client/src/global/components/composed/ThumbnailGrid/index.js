@@ -6,7 +6,8 @@ import useResizeObserver from "use-resize-observer";
 export default function ThumbnailGrid({
   minItemWidth = "250px",
   minColumns = 2,
-  children
+  children,
+  parentView = false
 }) {
   const [useGrid, setUseGrid] = useState(true);
   const breakpoint = parseInt(minItemWidth, 10) * minColumns;
@@ -23,6 +24,7 @@ export default function ThumbnailGrid({
       $grid={useGrid}
       $empty={!children}
       $minItemWidth={minItemWidth}
+      $parentView={parentView}
     >
       {typeof children === "function" ? children({ stack: useGrid }) : children}
     </Styled.Grid>
@@ -34,5 +36,6 @@ ThumbnailGrid.displayName = "Global.Composed.ThumbnailGrid";
 ThumbnailGrid.propTypes = {
   minItemWidth: PropTypes.string,
   minColumns: PropTypes.number,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  parentView: PropTypes.bool
 };

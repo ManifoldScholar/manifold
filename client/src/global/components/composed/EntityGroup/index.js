@@ -24,7 +24,11 @@ export default function EntityGroup({
       )}
       <Styled.Body>
         {!!entities?.length && (
-          <ThumbnailGrid minColumns={4} minItemWidth="210px">
+          <ThumbnailGrid
+            minColumns={4}
+            minItemWidth="210px"
+            parentView={parentView}
+          >
             {({ stack }) =>
               entities.map(entity => (
                 <EntityThumbnail
