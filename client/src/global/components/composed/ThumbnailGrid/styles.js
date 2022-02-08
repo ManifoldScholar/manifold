@@ -22,6 +22,7 @@ const emptyStyles = `
   text-align: left;
 `;
 
+// transientOptions is not needed here because Grid passes no props to the underlying component.
 export const Grid = styled.div`
   --list-item-padding: ${({ $grid }) => ($grid ? 0 : "14px")};
   --list-item-border: ${({ $grid }) =>
@@ -39,10 +40,18 @@ export const Grid = styled.div`
     if ($empty) return emptyStyles;
   }}
 
-  & > * {
-    border-bottom: var(--list-item-border);
+  > * {
     position: relative;
     padding-left: var(--list-item-padding);
     margin-bottom: var(--list-item-margin);
   }
+
+  ${({ $parentView }) =>
+    $parentView
+      ? `> *:not(:last-child) {
+      border-bottom: var(--list-item-border);
+    }`
+      : `> *:not(:only-child) {
+      border-bottom: var(--list-item-border);
+    }`}
 `;
