@@ -28,6 +28,7 @@ function JournalIssueList({ journal }) {
               count={count}
               unit={unit}
               categoryCount={journal.attributes.journalVolumesCount}
+              uncategorized={noVolumeIssues.length}
             />
           )}
         />
@@ -42,7 +43,7 @@ function JournalIssueList({ journal }) {
             parentView
           />
         ))}
-        {noVolumeIssues.length && (
+        {!!noVolumeIssues.length && (
           <EntityGroup entities={noVolumeIssues} parentView />
         )}
       </Styled.List>
