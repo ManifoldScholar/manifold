@@ -3,22 +3,39 @@ import PropTypes from "prop-types";
 import { breakpoints } from "theme/styles/variables/media";
 import * as Styled from "./styles";
 
-function getImage(entity) {
-  const { heroStyles } = entity.attributes ?? {};
-  const { heroStyles: journalHero } =
-    entity.relationships?.journal?.attributes ?? {};
-  if (heroStyles?.largeLandscape && heroStyles?.mediumLandscape)
-    return heroStyles;
-  if (journalHero?.largeLandscape && journalHero?.mediumLandscape)
-    return journalHero;
+const checkSizes = (image, parentImage, lg, med) => {
+  if (image && image[lg] && image[med]) return image;
+  if (parentImage && parentImage[lg] && parentImage[med]) return parentImage;
   return null;
-}
+};
+
+const getContent = (entity, parent) => {
+  const { heroBackgroundColor, heroStyles, logoStyles } =
+    entity.attributes ?? {};
+  const {
+    heroBackgroundColor: parentColor,
+    heroStyles: parentHero,
+    logoStyles: parentLogo
+  } = parent?.attributes ?? {};
+
+  const color = heroBackgroundColor ?? parentColor ?? "#52e3ac";
+  const logo = checkSizes(logoStyles, parentLogo, "original", "medium");
+  const image = checkSizes(
+    heroStyles,
+    parentHero,
+    "largeLandscape",
+    "mediumLandscape"
+  );
+
+  return { image, logo, color };
+};
 
 export default function Masthead({ entity }) {
   if (!entity) return null;
-  const image = getImage(entity);
-  const logo = entity.relationships?.journal?.attributes ?? null;
-  const color = entity.relationships?.journal?.attributes ?? "#B4A075";
+  const { image, logo, color } = getContent(
+    entity,
+    entity.relationships?.journal
+  );
 
   if (!image && !logo) return null;
 
@@ -36,14 +53,16 @@ export default function Masthead({ entity }) {
         />
       )}
       {logo && (
-        <Styled.Logo
-          srcSet={`
-            ${logo.large} 2x,
+        <Styled.LogoWrapper>
+          <Styled.Logo
+            srcSet={`
+            ${logo.original} 2x,
             ${logo.medium} 1x
           `}
-          src={logo.large}
-          alt=""
-        />
+            src={logo.original}
+            alt=""
+          />
+        </Styled.LogoWrapper>
       )}
     </Styled.Wrapper>
   );

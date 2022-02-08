@@ -3,20 +3,30 @@ import { fluidScale } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
 export const Wrapper = styled("div", transientOptions)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-height: 300px;
+  position: relative;
+  max-height: 310px;
   min-height: 180px;
   width: 100%;
   background-color: ${({ $color }) => $color && $color};
+  overflow: hidden;
 `;
 
 export const Image = styled.img`
   width: 100%;
-  height: auto;
+  max-height: 310px;
   object-fit: cover;
-  object-position: top;
+  object-position: bottom;
+`;
+
+export const LogoWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
 `;
 
 export const Logo = styled.img`
