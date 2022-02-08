@@ -56,11 +56,17 @@ export default function EntityHero({
           <div ref={titleRef}>{TitleComponent({ isStandalone })}</div>
           {TopLeftComponent}
         </Styled.TopLeft>
-        <Styled.BottomLeft>{BottomLeftComponent}</Styled.BottomLeft>
-        <Styled.TopRight ref={rightColRef}>{TopRightComponent}</Styled.TopRight>
-        <Styled.BottomRight>
-          {BottomRightComponent && BottomRightComponent}
-        </Styled.BottomRight>
+        {BottomLeftComponent && (
+          <Styled.BottomLeft>{BottomLeftComponent}</Styled.BottomLeft>
+        )}
+        {TopRightComponent && (
+          <Styled.TopRight ref={rightColRef}>
+            {TopRightComponent}
+          </Styled.TopRight>
+        )}
+        {BottomRightComponent && (
+          <Styled.BottomRight>{BottomRightComponent}</Styled.BottomRight>
+        )}
       </Styled.Inner>
       {ImageComponent && ImageComponent}
     </WrapperComponent>
@@ -73,7 +79,11 @@ EntityHero.propTypes = {
   TitleComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
     .isRequired,
   TopLeftComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  TopRightComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  TopRightComponent: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+    PropTypes.bool
+  ]),
   BottomLeftComponent: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.object,

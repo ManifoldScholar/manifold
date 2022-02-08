@@ -7,15 +7,15 @@ const BREAKPOINT = breakpoints[60];
 
 export const Wrapper = styled("section", transientOptions)`
   position: relative;
-  padding-top: 20px;
-  padding-bottom: 35px;
+  padding-block-start: 20px;
+  padding-block-end: 35px;
 
   color: var(--color-base-neutral-white);
   background-color: var(--color-base-neutral95);
 
   ${respond(
-    `padding-top: 70px;
-    padding-bottom: 80px;`,
+    `padding-block-start: 70px;
+    padding-block-end: 80px;`,
     BREAKPOINT
   )}
 
@@ -37,8 +37,8 @@ export const Wrapper = styled("section", transientOptions)`
 
   ${({ $isStandalone }) =>
     $isStandalone &&
-    `padding-top: calc(30px + var(--standalone-header-height));
-    ${respond(`padding-top: 30px;`, BREAKPOINT)}`}
+    `padding-block-start: calc(30px + var(--standalone-header-height));
+    ${respond(`padding-block-start: 30px;`, BREAKPOINT)}`}
 `;
 
 export const JournalWrapper = styled(Wrapper)`
@@ -53,6 +53,9 @@ export const JournalWrapper = styled(Wrapper)`
 
   color: var(--color-neutral-text-extra-dark);
   background-color: var(--color-base-neutral-white);
+  padding-block-end: 50px;
+
+  ${respond(`padding-block-end: 80px`)}
 `;
 
 export const IssueWrapper = styled(Wrapper)`
@@ -85,6 +88,10 @@ export const TopLeft = styled.div`
   grid-row: 2;
   grid-column: 1;
 
+  > * + * {
+    margin-block-start: 24px;
+  }
+
   ${respond(
     `grid-row: 1;
     grid-column: 1;`,
@@ -103,7 +110,7 @@ export const TopRight = styled.div`
     grid-column: 2;
 
     > *:first-child {
-      margin-top: 7px;
+      margin-block-start: 7px;
     }
     `,
     BREAKPOINT
