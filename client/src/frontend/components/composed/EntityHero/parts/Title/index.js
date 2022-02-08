@@ -4,8 +4,8 @@ import Collecting from "frontend/components/collecting";
 import * as Styled from "./styles";
 
 export default function HeroTitle({ entity, standalone = false }) {
-  const title = entity.attributes.titleFormatted;
-  const subtitle = entity.attributes.subtitleFormatted;
+  const title = entity?.attributes?.titleFormatted;
+  const subtitle = entity?.attributes?.subtitleFormatted;
   return (
     <Styled.Header $standalone={standalone}>
       {title && (

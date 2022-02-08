@@ -38,7 +38,7 @@ export default function JournalHero({ entity, mock }) {
                 description={description}
               />
             )}
-            {callouts && (
+            {!!callouts.length && (
               <CalloutList
                 authorized={authorized || mock}
                 callouts={orderedCallouts}
@@ -60,16 +60,14 @@ export default function JournalHero({ entity, mock }) {
           )
         }
         TopRightComponent={
-          <>
-            {callouts && (
-              <CalloutList
-                authorized={authorized || mock}
-                callouts={callouts}
-                showErrors={showErrors || mock}
-                buttonSize="sm"
-              />
-            )}
-          </>
+          !!callouts.length && (
+            <CalloutList
+              authorized={authorized || mock}
+              callouts={callouts}
+              showErrors={showErrors || mock}
+              buttonSize="sm"
+            />
+          )
         }
       />
     </>

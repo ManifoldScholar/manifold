@@ -8,7 +8,6 @@ const BREAKPOINT = breakpoints[60];
 export const Header = styled("header", transientOptions)`
   position: relative;
   z-index: 50;
-  margin-block-end: 24px;
   hyphens: none;
   line-height: 1.188;
 
