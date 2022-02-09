@@ -31,7 +31,7 @@ export default function JournalsListContainer() {
     <>
       <CheckFrontendMode debugLabel="JournalsList" />
       <h1 className="screen-reader-text">Journals</h1>
-      {journals.length &&
+      {!!journals.length &&
         journals.map((journal, index) => (
           <EntityCollection.JournalIssues
             key={journal.id}
