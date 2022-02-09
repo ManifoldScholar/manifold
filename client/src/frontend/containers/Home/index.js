@@ -67,7 +67,7 @@ export class HomeContainer extends Component {
             authentication={this.props.authentication}
           />
         ) : (
-          <Collections authentication={this.props.authentication} />
+          <Collections />
         )}
 
         {this.hasVisibleProjects && (
