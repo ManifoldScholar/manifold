@@ -38,6 +38,7 @@ import JournalDetail from "frontend/containers/JournalDetail";
 import VolumeDetail from "frontend/containers/VolumeDetail";
 import IssueWrapper from "frontend/containers/IssueWrapper";
 import IssueDetail from "frontend/containers/IssueDetail";
+import VolumesList from "frontend/containers/VolumesList";
 
 export default {
   NotFound,
@@ -47,6 +48,7 @@ export default {
   JournalsList,
   JournalWrapper,
   JournalDetail,
+  VolumesList,
   VolumeDetail,
   IssuesList,
   IssueWrapper,

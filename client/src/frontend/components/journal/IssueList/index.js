@@ -5,17 +5,22 @@ import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import CountTemplate from "./CountTemplate";
 import * as Styled from "./styles";
+import { FooterLink } from "frontend/components/composed/EntityCollection/parts";
 
 function JournalIssueList({ journal }) {
   if (
-    !journal?.relationships.recentJournalVolumes.length &&
-    !journal?.relationships.recentJournalIssues.length
+    !journal?.relationships?.recentJournalVolumes?.length &&
+    !journal?.relationships?.recentJournalIssues?.length
   )
     return null;
 
   const noVolumeIssues = journal.relationships.recentJournalIssues.filter(
     issue => !issue.attributes.journalVolumeNumber
   );
+
+  // const totalVolumes = journal.attributes?.journalVolumesCount;
+  // const showVolumesLink =
+  //   totalVolumes > journal.relationships.recentJournalVolumes.length;
 
   return (
     <Styled.Wrapper>
@@ -45,6 +50,15 @@ function JournalIssueList({ journal }) {
         ))}
         {!!noVolumeIssues.length && (
           <EntityGroup entities={noVolumeIssues} parentView />
+        )}
+        {/* Replace with showVolumesLink before merging */}
+        {true && (
+          <Styled.LinkWrapper>
+            <FooterLink
+              to={lh.link("frontendJournalAllVolumes", journal.id)}
+              label="See all volumes"
+            />
+          </Styled.LinkWrapper>
         )}
       </Styled.List>
     </Styled.Wrapper>
