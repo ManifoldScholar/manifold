@@ -32,7 +32,7 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
   }
 
   get categories() {
-    if (this.includedCategories.length > 0) return this.includedCategories;
+    if (this.includedCategories?.length > 0) return this.includedCategories;
     return this.textCategories;
   }
 
@@ -44,7 +44,7 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
 
   filteredOrderedTexts(filter) {
     const texts = this.texts.filter(filter).sort((textA, textB) => {
-      return textB.attributes.position > textA.attributes.position ? -1 : 1;
+      return textB.attributes?.position > textA.attributes?.position ? -1 : 1;
     });
     return texts;
   }

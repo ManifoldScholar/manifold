@@ -26,15 +26,15 @@ export default class ProjectContentBlockTableOfContentsBlock extends PureCompone
   }
 
   get depth() {
-    return this.blockAttributes.depth;
+    return this.blockAttributes?.depth;
   }
 
   get showAuthors() {
-    return this.blockAttributes.showAuthors;
+    return this.blockAttributes?.showAuthors;
   }
 
   get showTextTitle() {
-    return this.blockAttributes.showTextTitle;
+    return this.blockAttributes?.showTextTitle;
   }
 
   render() {

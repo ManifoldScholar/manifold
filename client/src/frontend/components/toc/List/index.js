@@ -23,15 +23,15 @@ export default class ContentBlockTocBlockList extends PureComponent {
   }
 
   get textTitle() {
-    return this.text.attributes.titleFormatted;
+    return this.text?.attributes?.titleFormatted;
   }
 
   get textSubtitle() {
-    return this.text.attributes.subtitle;
+    return this.text?.attributes?.subtitle;
   }
 
   get toc() {
-    return this.text.attributes.toc;
+    return this.text?.attributes?.toc ?? [];
   }
 
   showChildren = (node, depth) => {
@@ -63,7 +63,7 @@ export default class ContentBlockTocBlockList extends PureComponent {
           anchor={anchor}
           title={node.label}
           className={this.props.blockClass}
-          textSlug={this.text.attributes.slug}
+          textSlug={this.text.attributes?.slug}
         >
           {children}
         </Node>
