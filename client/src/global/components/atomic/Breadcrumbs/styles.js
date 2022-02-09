@@ -91,6 +91,7 @@ export const Breadcrumb = styled(Link)`
 
     &:last-child {
       color: var(--color-neutral-text-extra-dark);
+      padding-inline-end: 20px;
 
       &:hover {
         color: var(--hover-color);

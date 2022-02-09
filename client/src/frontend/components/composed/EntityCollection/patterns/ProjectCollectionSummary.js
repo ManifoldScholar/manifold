@@ -1,24 +1,11 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
-import memoize from "lodash/memoize";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
 import { FooterLink, ProjectCollectionIcon } from "../parts";
 import EntityCollection from "../EntityCollection";
 import { getHeroImage, getHeaderLayout } from "../helpers";
-
-const mapProjects = memoize(projectCollection =>
-  projectCollection.relationships.collectionProjects.map(
-    cp => cp.relationships.project
-  )
-);
-
-function getProjects(projectCollection, limit) {
-  const adjustedLimit = limit && limit > 0 ? limit : 100;
-  const projects = mapProjects(projectCollection);
-  return projects.slice(0, adjustedLimit);
-}
 
 function ProjectCollectionSummaryEntityCollection({
   projectCollection,
@@ -32,11 +19,25 @@ function ProjectCollectionSummaryEntityCollection({
     slug,
     descriptionFormatted: description
   } = projectCollection.attributes;
-  const projects = getProjects(projectCollection, limit);
+
+  const mapProjects = useCallback(collection => {
+    if (!Array.isArray(collection.relationships.collectionProjects)) return [];
+    return collection.relationships.collectionProjects.map(
+      cp => cp.relationships.project
+    );
+  }, []);
+
+  const getProjects = () => {
+    const adjustedLimit = limit && limit > 0 ? limit : 100;
+    const projects = mapProjects(projectCollection);
+    return projects.slice(0, adjustedLimit);
+  };
+
+  const projects = getProjects();
   const image = getHeroImage(projectCollection);
   const headerLayout = getHeaderLayout(projectCollection);
   const totalprojectCount =
-    projectCollection.relationships.collectionProjects.length;
+    projectCollection.relationships.collectionProjects?.length;
 
   return (
     <EntityCollection
