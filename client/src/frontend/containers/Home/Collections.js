@@ -21,12 +21,12 @@ export default function HomeCollectionsContainer() {
 
   const { data: collections } = useFetch({
     request: [projectCollectionsAPI.index, filters],
-    refetchOnAuthChange: true
+    withAuthDependency: true
   });
 
   const { data: journals } = useFetch({
     request: [journalsAPI.index, journalFilters],
-    refetchOnAuthChange: true
+    withAuthDependency: true
   });
 
   const journalCount = journals?.length;

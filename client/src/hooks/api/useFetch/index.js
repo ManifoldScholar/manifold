@@ -24,7 +24,8 @@ export default function useFetch({
   request,
   afterFetch,
   options = {},
-  refetchOnAuthChange = false
+  dependencies = [],
+  withAuthDependency = false
 }) {
   const firstRun = useRef(true);
   const uid = `fetch_${useUID()}`;
@@ -97,6 +98,16 @@ export default function useFetch({
     }
   }
 
+  const authentication = useSelector(state => state.authentication);
+
+  const refetchDependencies = withAuthDependency
+    ? [
+        ...dependencies,
+        authentication.authenticated,
+        authentication.currentUser?.id
+      ]
+    : dependencies;
+
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     triggerFetchData().then(
@@ -107,29 +118,7 @@ export default function useFetch({
         // do nothing
       }
     );
-  }, [triggerFetchData]);
-  /* eslint-enable react-hooks/exhaustive-deps */
-
-  const authentication = useSelector(state => state.authentication);
-  const prevAuth = useRef(authentication.authenticated);
-
-  /* eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => {
-    if (
-      refetchOnAuthChange &&
-      prevAuth.current !== authentication.authenticated
-    ) {
-      prevAuth.current = authentication.authenticated;
-      triggerFetchData().then(
-        () => {
-          if (isFunction(afterFetch)) afterFetch();
-        },
-        () => {
-          // do nothing
-        }
-      );
-    }
-  }, [authentication]);
+  }, [triggerFetchData, ...refetchDependencies]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
   const data = useSelector(state =>
