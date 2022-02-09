@@ -23,7 +23,7 @@ function VolumeDetailContainer({ journal }) {
         breadcrumbs={[
           {
             to: lh.link("frontendJournalsList"),
-            label: "Back to All Journals"
+            label: "All Journals"
           },
           {
             to: lh.link("frontendJournalDetail", journal.id),

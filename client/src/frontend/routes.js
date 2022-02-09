@@ -211,6 +211,13 @@ const routes = {
               helper: j => `/journals/${j}`
             },
             {
+              name: "frontendJournalAllVolumes",
+              exact: true,
+              component: "VolumesList",
+              path: "/journals/:id/volumes",
+              helper: j => `/journals/${j}/volumes`
+            },
+            {
               name: "frontendVolumeDetail",
               exact: true,
               component: "VolumeDetail",

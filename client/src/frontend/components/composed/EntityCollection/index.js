@@ -10,12 +10,14 @@ import ProjectCollectionDetail from "./patterns/ProjectCollectionDetail";
 import ProjectCollectionSummary from "./patterns/ProjectCollectionSummary";
 import ProjectResources from "./patterns/ProjectResources";
 import ProjectResourceCollections from "./patterns/ProjectResourceCollections";
+import JournalVolumes from "./patterns/JournalVolumes";
 
 export default {
   Events,
   Issues,
   GroupAnnotations,
   JournalIssues,
+  JournalVolumes,
   MyAnnotations,
   MyStarred,
   Projects,
