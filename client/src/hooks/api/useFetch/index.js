@@ -20,7 +20,12 @@ function log(type, key) {
   }
 }
 
-export default function useFetch({ request, afterFetch, options = {} }) {
+export default function useFetch({
+  request,
+  afterFetch,
+  options = {},
+  refetchOnAuthChange = false
+}) {
   const firstRun = useRef(true);
   const uid = `fetch_${useUID()}`;
   const [requestKey] = useState(`fetch_${useUID()}`);
@@ -103,6 +108,28 @@ export default function useFetch({ request, afterFetch, options = {} }) {
       }
     );
   }, [triggerFetchData]);
+  /* eslint-enable react-hooks/exhaustive-deps */
+
+  const authentication = useSelector(state => state.authentication);
+  const prevAuth = useRef(authentication.authenticated);
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    if (
+      refetchOnAuthChange &&
+      prevAuth.current !== authentication.authenticated
+    ) {
+      prevAuth.current = authentication.authenticated;
+      triggerFetchData().then(
+        () => {
+          if (isFunction(afterFetch)) afterFetch();
+        },
+        () => {
+          // do nothing
+        }
+      );
+    }
+  }, [authentication]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
   const data = useSelector(state =>
