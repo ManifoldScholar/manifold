@@ -20,6 +20,7 @@ const NamesList = styled.div`
   flex-wrap: wrap;
   align-items: center;
   line-height: 1.313em;
+  font-family: var(--font-family-copy);
 `;
 
 export const Contributors = styled(NamesList)`
