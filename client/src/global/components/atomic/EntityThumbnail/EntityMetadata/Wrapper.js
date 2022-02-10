@@ -14,7 +14,9 @@ export default function Wrapper({
     if (entity.type === "journalIssues") {
       const title =
         entity.relationships.journal?.attributes?.title ?? "Journal Title";
-      const subtitle = `Volume ${data.journalVolumeNumber}, Issue ${data.number}`;
+      const additionalData = data.journalVolumeNumber
+        ? `Volume ${data.journalVolumeNumber}, Issue ${data.number}`
+        : `Issue ${data.number}`;
       const date = data.publicationDate ?? data.updatedAt;
       const prefix = data.publicationDate ? "Published" : "Updated";
       const draft = data.draft;
@@ -23,7 +25,7 @@ export default function Wrapper({
         date,
         prefix,
         title,
-        subtitle,
+        additionalData,
         draft,
         recentlyUpdated
       };
@@ -33,7 +35,7 @@ export default function Wrapper({
     const description = !hideDescription && data.description;
 
     /* eslint-disable no-nested-ternary */
-    const names =
+    const additionalData =
       "creatorNames" in data
         ? data.creatorNames
         : entity.relationships?.creators?.length > 0
@@ -59,7 +61,7 @@ export default function Wrapper({
     return {
       date,
       prefix,
-      names,
+      additionalData,
       title,
       subtitle,
       draft,

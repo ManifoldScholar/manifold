@@ -5,14 +5,14 @@ import * as Styled from "./styles";
 
 export default function EntityMetadata(props) {
   const {
+    title,
+    draft,
+    subtitle,
+    additionalData,
     date,
     prefix,
-    names,
-    title,
-    subtitle,
-    draft,
-    description,
     recentlyUpdated,
+    description,
     stack
   } = props;
 
@@ -28,9 +28,9 @@ export default function EntityMetadata(props) {
         {draft && <Styled.Tag $stack={stack}>{"Draft"}</Styled.Tag>}
       </Styled.TitleWrapper>
       {subtitle && <Styled.Subtitle>{subtitle}</Styled.Subtitle>}
-      {names && (
+      {additionalData && (
         <Styled.Creators>
-          <span>{names}</span>
+          <span>{additionalData}</span>
         </Styled.Creators>
       )}
       {date && (
