@@ -35,9 +35,7 @@ export default class ContentBlockTocBlockList extends PureComponent {
   }
 
   showChildren = (node, depth) => {
-    return (
-      depth < this.props.depth && node.children && node.children.length > 0
-    );
+    return depth < this.props.depth && node.children && node.children?.length;
   };
 
   renderNode = (node, depth = 1) => {
@@ -78,7 +76,7 @@ export default class ContentBlockTocBlockList extends PureComponent {
   }
 
   renderContents() {
-    if (!this.toc.length) return this.renderEmpty();
+    if (!this.toc || !this.toc.length) return this.renderEmpty();
 
     return (
       <Styled.List $depth={1}>
