@@ -1,6 +1,7 @@
 import Events from "./patterns/Events";
 import Issues from "./patterns/Issues";
 import GroupAnnotations from "./patterns/GroupAnnotations";
+import JournalIssues from "./patterns/JournalIssues";
 import JournalSummary from "./patterns/JournalSummary";
 import JournalVolumes from "./patterns/JournalVolumes";
 import MyAnnotations from "./patterns/MyAnnotations";
@@ -16,6 +17,7 @@ export default {
   Events,
   Issues,
   GroupAnnotations,
+  JournalIssues,
   JournalSummary,
   JournalVolumes,
   MyAnnotations,
