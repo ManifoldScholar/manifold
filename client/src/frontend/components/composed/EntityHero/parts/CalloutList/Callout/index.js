@@ -26,7 +26,7 @@ export default function Callout({
   showErrors = false,
   isLink = false,
   buttonSize,
-  lightMode = true
+  darkMode = false
 }) {
   const type =
     (callout.attributes.kind === "read" || callout.attributes.kind === "toc") &&
@@ -72,7 +72,7 @@ export default function Callout({
       as={as === "UserLink" ? UserLink : as}
       {...navProps(as, url, type)}
       size={buttonSize}
-      dark={!lightMode}
+      dark={darkMode}
       secondary={!primary}
       icon={icon}
       iconSize={iconSize}
@@ -88,6 +88,6 @@ Callout.propTypes = {
   callout: PropTypes.object.isRequired,
   showErrors: PropTypes.bool,
   isLink: PropTypes.bool,
-  lightMode: PropTypes.bool,
+  darkMode: PropTypes.bool,
   buttonSize: PropTypes.oneOf(["sm", "lg"])
 };

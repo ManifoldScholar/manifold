@@ -33,11 +33,11 @@ export default function ProjectHero({ entity, mock }) {
     contributors
   } = getPartsData(entity);
 
-  const lightMode = !bgImage && !entity.attributes.darkMode;
+  const darkMode = bgImage || entity.attributes.darkMode;
 
   return (
     <EntityHero
-      lightMode={lightMode}
+      darkMode={darkMode}
       TitleComponent={({ isStandalone }) => (
         <Title entity={entity} isStandalone={isStandalone} />
       )}
@@ -55,7 +55,7 @@ export default function ProjectHero({ entity, mock }) {
               authorized={authorized || mock}
               callouts={leftCallouts}
               showErrors={showErrors || mock}
-              lightMode={lightMode}
+              darkMode={darkMode}
               inline
             />
           )}
@@ -64,7 +64,7 @@ export default function ProjectHero({ entity, mock }) {
               authorized={authorized || mock}
               callouts={orderedCallouts}
               showErrors={showErrors || mock}
-              lightMode={lightMode}
+              darkMode={darkMode}
               mobileVisible
             />
           )}
@@ -88,7 +88,7 @@ export default function ProjectHero({ entity, mock }) {
               authorized={authorized || mock}
               callouts={rightCallouts}
               showErrors={showErrors ?? mock}
-              lightMode={lightMode}
+              darkMode={darkMode}
             />
           )}
         </>

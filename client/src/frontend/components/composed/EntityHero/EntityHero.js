@@ -10,7 +10,7 @@ export default function EntityHero({
   BottomLeftComponent,
   BottomRightComponent,
   ImageComponent,
-  lightMode = false,
+  darkMode = false,
   theme = "project"
 }) {
   const resizeId = useRef(null);
@@ -50,7 +50,7 @@ export default function EntityHero({
   /* eslint-enable no-nested-ternary */
 
   return (
-    <WrapperComponent $lightMode={lightMode} $standalone={isStandalone}>
+    <WrapperComponent $darkMode={darkMode} $standalone={isStandalone}>
       <Styled.Inner>
         <Styled.TopLeft>
           <div ref={titleRef}>{TitleComponent({ isStandalone })}</div>
@@ -100,6 +100,6 @@ EntityHero.propTypes = {
     PropTypes.object,
     PropTypes.bool
   ]),
-  lightMode: PropTypes.bool,
+  darkMode: PropTypes.bool,
   theme: PropTypes.oneOf(["project", "journal"])
 };
