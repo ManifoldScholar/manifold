@@ -26,7 +26,7 @@ function JournalDetailContainer({ journal }) {
   );
 
   const { data: issues } = useFetch({
-    request: [journalIssuesAPI.index, issuesPagination, issuesFilter]
+    request: [journalIssuesAPI.index, issuesFilter, issuesPagination]
   });
 
   return journal ? (
