@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { fluidScale } from "theme/styles/mixins";
-import Box from "global/components/atomic/Box";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -13,11 +12,4 @@ export const List = styled.div`
   display: flex;
   flex-direction: column;
   gap: 60px;
-`;
-
-export const LinkWrapper = styled(Box)`
-  > div {
-    background-color: var(--color-base-neutral-white);
-    padding: 0;
-  }
 `;

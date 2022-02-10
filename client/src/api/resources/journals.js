@@ -52,11 +52,13 @@ export default {
     };
   },
 
-  journalIssues(jId, page = {}) {
+  journalIssues(jId, page = {}, filter = {}) {
     return {
       endpoint: `/api/v1/journals/${jId}/relationships/journal_issues`,
       method: "GET",
-      options: { page }
+      options: {
+        params: { page, filter }
+      }
     };
   }
 };

@@ -28,6 +28,7 @@ module V1
     typed_attribute :social_title, Types::String.optional
     typed_attribute :social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :hero_background_color, Types::String.optional
+    typed_attribute :journal_issues_without_volume_count, Types::Integer.meta(read_only: true)
 
     typed_has_many :recent_journal_volumes, serializer: ::V1::JournalVolumeSerializer, record_type: "journalVolume"
     typed_has_many :recent_journal_issues, serializer: ::V1::JournalIssueSerializer, record_type: "journalIssue"

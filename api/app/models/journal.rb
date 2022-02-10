@@ -102,11 +102,15 @@ class Journal < ApplicationRecord
   end
 
   def recent_journal_issues
-    journal_issues.in_reverse_order.limit(8)
+    journal_issues.in_reverse_order.published.limit(8)
   end
 
   def recent_journal_issue_ids
     recent_journal_issues.pluck(:id)
+  end
+
+  def journal_issues_without_volume_count
+    journal_issues.where(journal_volume: nil).count
   end
 
   class << self
