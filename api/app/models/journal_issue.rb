@@ -34,7 +34,16 @@ class JournalIssue < ApplicationRecord
 
     where(journal_id: journal_id)
   }
-  scope :by_volume_is_nil, -> { where(journal_volume_id: nil) }
+  scope :with_volume_is_nil, lambda { |is_nil|
+    next all unless is_nil
+
+    where(journal_volume_id: nil)
+  }
+  scope :by_journal_volume_id, lambda { |journal_volume_id|
+    next all unless journal_volume_id.present?
+
+    where(journal_volume_id: journal_volume_id)
+  }
 
   def slug_candidates
     chunks = (persisted? ? id : SecureRandom.uuid).split("-")
