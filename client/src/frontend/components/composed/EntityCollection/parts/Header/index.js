@@ -26,8 +26,10 @@ function Header({
 }) {
   if (!title) return null;
 
+  const layout = !image ? "title_description" : headerLayout;
+
   return (
-    <Styled.Header $layout={headerLayout}>
+    <Styled.Header $layout={layout}>
       <Styled.TitleAndIcon>
         {IconComponent && <Styled.IconComponent as={IconComponent} />}
         {!IconComponent && icon && <Styled.Icon size={60} icon={icon} />}
