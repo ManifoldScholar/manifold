@@ -10,7 +10,7 @@ export default function HeroCalloutList({
   showErrors = false,
   inline = false,
   mobileVisible = false,
-  lightMode = true,
+  darkMode = false,
   buttonSize = "lg"
 }) {
   const visible = authorized
@@ -31,7 +31,7 @@ export default function HeroCalloutList({
               showErrors={showErrors}
               key={callout.id}
               callout={callout}
-              lightMode={lightMode}
+              darkMode={darkMode}
               buttonSize={buttonSize}
             />
           ))}
@@ -44,7 +44,7 @@ export default function HeroCalloutList({
               showErrors={showErrors}
               key={callout.id}
               callout={callout}
-              lightMode={lightMode}
+              darkMode={darkMode}
               isLink
             />
           ))}
@@ -62,6 +62,6 @@ HeroCalloutList.propTypes = {
   showErrors: PropTypes.bool,
   inline: PropTypes.bool,
   mobileVisible: PropTypes.bool,
-  lightMode: PropTypes.bool,
+  darkMode: PropTypes.bool,
   buttonSize: PropTypes.oneOf(["sm", "lg"])
 };

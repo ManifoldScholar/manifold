@@ -19,21 +19,19 @@ export const Wrapper = styled("section", transientOptions)`
     BREAKPOINT
   )}
 
-  ${({ $lightMode }) => {
-    if ($lightMode) {
-      return `
-      --link-color: var(--color-neutral-text-dark);
-      color: var(--color-neutral-text-extra-dark);
-      background-color: var(--color-base-neutral05);
-      `;
-    }
-    return `
-    --focus-color: var(--color-interaction-light);
-    --hover-color: var(--color-interaction-light);
-    --text-color: var(--color-neutral-text-light);
-    --strong-color: currentColor;
-    `;
-  }}
+  ${({ $darkMode }) =>
+    $darkMode
+      ? `
+        --focus-color: var(--color-interaction-light);
+        --hover-color: var(--color-interaction-light);
+        --text-color: var(--color-neutral-text-light);
+        --strong-color: currentColor;
+      `
+      : `
+        --link-color: var(--color-neutral-text-dark);
+        color: var(--color-neutral-text-extra-dark);
+        background-color: var(--color-base-neutral05);
+      `}
 
   ${({ $isStandalone }) =>
     $isStandalone &&
@@ -50,7 +48,6 @@ export const JournalWrapper = styled(Wrapper)`
   --link-color: var(--color-neutral-text-dark);
   --CalloutList-gutter: 16px;
   --CalloutList-margin: 22px;
-  --hover-color: var(--color-interaction-dark);
 
   color: var(--color-neutral-text-extra-dark);
   background-color: var(--color-base-neutral-white);
@@ -62,7 +59,6 @@ export const JournalWrapper = styled(Wrapper)`
 export const IssueWrapper = styled(Wrapper)`
   --Social-icons-color: var(--color-base-neutral80);
   --link-color: var(--color-neutral-text-dark);
-  --hover-color: var(--color-interaction-dark);
 
   color: var(--color-neutral-text-extra-dark);
   background-color: var(--color-base-neutral-white);
