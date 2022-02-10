@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import pluralize from "pluralize";
 
-function CountTemplate({ count, unit, categoryCount, uncategorized = 0 }) {
+function Index({ count, unit, categoryCount, uncategorized = 0 }) {
   if (categoryCount) {
     const categorized = count - uncategorized;
     if (!categorized) {
@@ -44,13 +44,13 @@ function CountTemplate({ count, unit, categoryCount, uncategorized = 0 }) {
   );
 }
 
-CountTemplate.displayName = "Journal.IssueList.CountTemplate";
+Index.displayName = "Journal.IssueList.CountTemplate";
 
-CountTemplate.propTypes = {
+Index.propTypes = {
   count: PropTypes.number.isRequired,
   unit: PropTypes.string.isRequired,
   categoryCount: PropTypes.number,
   uncategorized: PropTypes.number
 };
 
-export default CountTemplate;
+export default Index;

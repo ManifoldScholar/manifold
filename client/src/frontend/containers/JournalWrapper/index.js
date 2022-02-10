@@ -2,7 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { journalsAPI } from "api";
-import { useLocation, useParams, useRouteMatch } from "react-router-dom";
+import {
+  Redirect,
+  useLocation,
+  useParams,
+  useRouteMatch
+} from "react-router-dom";
 import { useFetch } from "hooks";
 import { RedirectToFirstMatch, childRoutes } from "helpers/router";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
@@ -17,11 +22,13 @@ export default function JournalWrapper({ route }) {
   const location = useLocation();
   const isHomePage = location.pathname === path;
 
+  if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
+
+  if (!journal) return null;
+
   return (
     <>
-      {journal && (
-        <EventTracker event={EVENTS.VIEW_RESOURCE} resource={journal} />
-      )}
+      <EventTracker event={EVENTS.VIEW_RESOURCE} resource={journal} />
       <CheckFrontendMode
         debugLabel="JournalWrapper"
         project={journal}

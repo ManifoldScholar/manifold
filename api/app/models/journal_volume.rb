@@ -23,4 +23,8 @@ class JournalVolume < ApplicationRecord
     chunks.map { |chunk| "#{number}-#{chunk}" }
   end
 
+  def published_issues
+    journal_issues.published
+  end
+
 end

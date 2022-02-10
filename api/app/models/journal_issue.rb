@@ -28,6 +28,13 @@ class JournalIssue < ApplicationRecord
 
   scope :in_reverse_order, -> { order(number: :desc) }
   scope :in_order, -> { order(number: :asc) }
+  scope :published, -> { joins(:project).where("projects.draft": false) }
+  scope :by_journal_id, lambda { |journal_id|
+    next all unless journal_id.present?
+
+    where(journal_id: journal_id)
+  }
+  scope :by_volume_is_nil, -> { where(journal_volume_id: nil) }
 
   def slug_candidates
     chunks = (persisted? ? id : SecureRandom.uuid).split("-")

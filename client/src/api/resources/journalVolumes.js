@@ -3,7 +3,9 @@ export default {
     return {
       endpoint: `/api/v1/journals/${jId}/relationships/journal_volumes`,
       method: "GET",
-      options: { page }
+      options: {
+        params: { page }
+      }
     };
   },
 

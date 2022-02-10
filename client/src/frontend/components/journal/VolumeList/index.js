@@ -5,6 +5,8 @@ import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
 function JournalVolumeList({ volumes, journal }) {
+  if (!volumes || !journal) return null;
+
   return (
     <Styled.Wrapper>
       <Styled.List>
