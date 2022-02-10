@@ -3,21 +3,29 @@ import PropTypes from "prop-types";
 import EntityCollection from "../EntityCollection";
 import Journal from "frontend/components/journal";
 
-function JournalVolumesEntityCollection({
+function JournalIssuesEntityCollection({
   journal,
-  volumes,
+  issues,
   meta,
   paginationProps,
   ...passThroughProps
 }) {
-  if (!journal || !volumes?.length) return null;
+  if (!journal || !issues?.length) return null;
 
   return (
     <EntityCollection
       headerLayout="title_only"
       BodyComponent={() => (
-        <Journal.VolumeList journal={journal} volumes={volumes} />
+        <Journal.IssueList journal={journal} issues={issues} />
       )}
+      countProps={
+        !meta
+          ? {}
+          : {
+              pagination: meta.pagination,
+              unit: "issue"
+            }
+      }
       paginationProps={
         !meta || !paginationProps
           ? {}
@@ -31,12 +39,12 @@ function JournalVolumesEntityCollection({
   );
 }
 
-JournalVolumesEntityCollection.displayName =
-  "Frontend.Composed.EntityCollection.JournalVolumes";
+JournalIssuesEntityCollection.displayName =
+  "Frontend.Composed.EntityCollection.JournalIssues";
 
-JournalVolumesEntityCollection.propTypes = {
+JournalIssuesEntityCollection.propTypes = {
   journal: PropTypes.object,
-  volumes: PropTypes.array,
+  issues: PropTypes.array,
   meta: PropTypes.object,
   paginationProps: PropTypes.object,
   countProps: PropTypes.object,
@@ -44,4 +52,4 @@ JournalVolumesEntityCollection.propTypes = {
   FooterComponent: PropTypes.func
 };
 
-export default JournalVolumesEntityCollection;
+export default JournalIssuesEntityCollection;
