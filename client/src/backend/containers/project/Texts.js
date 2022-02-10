@@ -67,10 +67,7 @@ export class ProjectTextsContainer extends Component {
   }
 
   get buttonClasses() {
-    return classNames(
-      "buttons-icon-horizontal__button",
-      "button-icon-secondary"
-    );
+    return classNames("entity-list__button", "button-lozenge-secondary");
   }
 
   handleCategoryDestroy = category => {
@@ -184,14 +181,14 @@ export class ProjectTextsContainer extends Component {
         <>
           {this.childRoutes()}
 
-          <div className="buttons-icon-horizontal maintain">
+          <div className="entity-list__button-set-flex">
             <Link
               to={lh.link("backendProjectTextsIngestionsNew", this.project.id)}
               className={this.buttonClasses}
             >
               <span className="screen-reader-text">Add a new text</span>
               <IconComposer
-                icon="plus16"
+                icon="circlePlus32"
                 size={18}
                 className={classNames(
                   "button-icon-secondary__icon",
@@ -212,7 +209,7 @@ export class ProjectTextsContainer extends Component {
             >
               <span className="screen-reader-text">Add a new category</span>
               <IconComposer
-                icon="plus16"
+                icon="circlePlus32"
                 size={18}
                 className={classNames(
                   "button-icon-secondary__icon",

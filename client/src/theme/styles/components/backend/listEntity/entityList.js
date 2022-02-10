@@ -191,11 +191,27 @@ export default `.entity-list {
 
         & + & {
           margin-top: 0;
-          margin-left: 12px;
         }
       `,
       60
     )}
+  }
+
+  &__button-set-flex {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    .full {
+      display: none;
+
+      ${respond(`display: inline;`, 85)}
+    }
+
+    .abbreviated {
+      ${respond(`display: none;`, 85)}
+    }
+
   }
 
   .entity-list__button-set {
