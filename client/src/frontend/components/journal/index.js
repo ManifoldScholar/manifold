@@ -4,7 +4,6 @@ import VolumeDetail from "./VolumeDetail";
 import VolumeList from "./VolumeList";
 import IssueCount from "./IssueCount";
 import JournalIssueCount from "./JournalIssueCount";
-import VolumesForJournalLink from "./VolumesForJournalLink";
 
 export default {
   IssueList,
@@ -12,6 +11,5 @@ export default {
   VolumeDetail,
   VolumeList,
   IssueCount,
-  JournalIssueCount,
-  VolumesForJournalLink
+  JournalIssueCount
 };

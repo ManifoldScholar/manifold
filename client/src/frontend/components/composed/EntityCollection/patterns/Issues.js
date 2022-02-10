@@ -12,12 +12,12 @@ function IssuesEntityCollection({
   issuesMeta,
   filterProps,
   paginationProps,
+  icon = "journals64",
   ...passThroughProps
 }) {
   return (
     <EntityCollection
-      title="All Journal Issues"
-      icon="journals64"
+      icon={icon}
       UtilityComponent={
         !issuesMeta || !filterProps
           ? () => <></>
@@ -60,7 +60,8 @@ IssuesEntityCollection.propTypes = {
   issues: PropTypes.arrayOf(PropTypes.object).isRequired,
   issuesMeta: PropTypes.object.isRequired,
   filterProps: shapes.filters,
-  paginationProps: shapes.pagination
+  paginationProps: shapes.pagination,
+  icon: PropTypes.string
 };
 
 export default IssuesEntityCollection;

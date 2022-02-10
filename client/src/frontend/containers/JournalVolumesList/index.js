@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { useFetch, usePaginationState } from "hooks";
 import { journalVolumesAPI } from "api";
@@ -10,7 +9,7 @@ import EntityCollection from "frontend/components/composed/EntityCollection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import lh from "helpers/linkHandler";
 
-export default function VolumesList({ journal }) {
+export default function JournalVolumesList({ journal }) {
   const { id } = useParams();
   const [pagination, setPageNumber] = usePaginationState();
   const { data: volumes, meta } = useFetch({
