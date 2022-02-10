@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import { CalloutList, Meta, Social, Title } from "../parts";
+import { CalloutList, Meta, Social, Title, Credits } from "../parts";
 import EntityMasthead from "frontend/components/composed/EntityMasthead";
 import EntityHero from "../EntityHero";
 import { getAuth, getPartsData } from "../helpers";
@@ -19,7 +19,8 @@ export default function JournalHero({ entity, mock }) {
     social,
     description,
     creators,
-    contributors
+    contributors,
+    copy
   } = getPartsData(entity);
   return (
     <>
@@ -69,6 +70,7 @@ export default function JournalHero({ entity, mock }) {
             />
           )
         }
+        BottomRightComponent={copy && <Credits copy={copy} />}
       />
     </>
   );
