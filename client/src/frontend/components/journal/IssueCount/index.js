@@ -39,7 +39,8 @@ function Index({ count, unit, categoryCount, uncategorized = 0 }) {
   }
   return (
     <>
-      There are <strong>{count}</strong> {pluralize(unit, count)}
+      There {pluralize("is", count)} <strong>{count}</strong>{" "}
+      {pluralize(unit, count)}
     </>
   );
 }
