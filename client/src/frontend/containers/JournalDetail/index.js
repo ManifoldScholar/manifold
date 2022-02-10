@@ -12,11 +12,8 @@ import { useFetch, usePaginationState } from "hooks";
 import lh from "helpers/linkHandler";
 
 function JournalDetailContainer({ journal }) {
-  // TODO: Wire up pagination to the issue list!
-  /* eslint-disable no-unused-vars */
-  const [issuesPagination, setIssuesPageNumber] = usePaginationState();
-  const [volumesPagination, setVolumesPageNumber] = usePaginationState();
-  /* eslint-enable no-unused-vars */
+  const [issuesPagination] = usePaginationState(1, 8);
+  const [volumesPagination] = usePaginationState(1, 5);
 
   const { data: volumes } = useFetch({
     request: [journalVolumesAPI.index, journal.id, volumesPagination]
