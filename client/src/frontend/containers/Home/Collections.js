@@ -37,7 +37,7 @@ export default function HomeCollectionsContainer() {
     <>
       {journals &&
         journals.map((journal, i) => (
-          <EntityCollection.JournalIssues
+          <EntityCollection.JournalSummary
             key={journal.id}
             journal={journal}
             bgColor={i % 2 === 0 ? "neutral05" : "white"}

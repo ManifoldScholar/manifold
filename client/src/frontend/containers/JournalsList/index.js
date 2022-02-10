@@ -33,7 +33,7 @@ export default function JournalsListContainer() {
       <h1 className="screen-reader-text">Journals</h1>
       {!!journals.length &&
         journals.map((journal, index) => (
-          <EntityCollection.JournalIssues
+          <EntityCollection.JournalSummary
             key={journal.id}
             journal={journal}
             bgColor={index % 2 === 1 ? "neutral05" : "white"}

@@ -7,7 +7,7 @@ import { FooterLink, ProjectCollectionIcon } from "../parts";
 import EntityCollection from "../EntityCollection";
 import { getHeroImage, getHeaderLayout } from "../helpers";
 
-function JournalIssuesEntityCollection({
+function JournalSummaryEntityCollection({
   journal,
   paginationProps,
   filterProps,
@@ -58,14 +58,14 @@ function JournalIssuesEntityCollection({
   );
 }
 
-JournalIssuesEntityCollection.displayName =
-  "Frontend.Composed.EntityCollection.JournalIssues";
+JournalSummaryEntityCollection.displayName =
+  "Frontend.Composed.EntityCollection.JournalSummary";
 
-JournalIssuesEntityCollection.propTypes = {
+JournalSummaryEntityCollection.propTypes = {
   journal: PropTypes.object.isRequired,
   projects: PropTypes.arrayOf(PropTypes.object),
   projectsMeta: PropTypes.object,
   limit: PropTypes.number
 };
 
-export default JournalIssuesEntityCollection;
+export default JournalSummaryEntityCollection;
