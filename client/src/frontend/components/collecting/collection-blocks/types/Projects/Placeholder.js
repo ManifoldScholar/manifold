@@ -1,7 +1,7 @@
 import React from "react";
 import Skeleton from "frontend/components/collecting/ContentSkeleton";
 import * as Styled from "global/components/atomic/EntityThumbnail/styles";
-import * as StyledMetadata from "global/components/atomic/EntityThumbnail/EntityMetadata/styles";
+import * as StyledMetadata from "global/components/atomic/EntityThumbnail/EntityMetadata/Content/styles";
 
 function Placeholder({ stack }) {
   return (
