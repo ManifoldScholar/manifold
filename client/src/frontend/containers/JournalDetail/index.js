@@ -21,7 +21,7 @@ function JournalDetailContainer({ journal }) {
   });
 
   const issuesFilter = useMemo(
-    () => ({ journal_id: journal.id, by_volume_is_nil: true }),
+    () => ({ journal_id: journal.id, volume_is_nil: true }),
     [journal.id]
   );
 
