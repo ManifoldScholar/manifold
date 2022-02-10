@@ -16,7 +16,7 @@ export default function IssuesListContainer() {
   const settings = useFromStore("settings", "select");
   const subjects = useFromStore("feSubjects", "select");
 
-  const [pagination, setPageNumber] = usePaginationState();
+  const [pagination, setPageNumber] = usePaginationState(1, 2);
   const baseFilters = { standaloneModeEnforced: false };
   const [filters, setFilters] = useFilterState(baseFilters);
 
@@ -24,7 +24,7 @@ export default function IssuesListContainer() {
     request: [journalIssuesAPI.index, filters, pagination]
   });
 
-  useSetLocation(filters, pagination.number);
+  useSetLocation({ filters, page: pagination.number });
 
   // TODO: Update with setting for journals?
   const showNav = settings?.attributes?.calculated.hasVisibleProjects;
@@ -35,6 +35,7 @@ export default function IssuesListContainer() {
     <>
       <h1 className="screen-reader-text">All Journal Issues</h1>
       <EntityCollection.Issues
+        title="All Journal Issues"
         issues={issues}
         issuesMeta={meta}
         filterProps={{
@@ -45,7 +46,7 @@ export default function IssuesListContainer() {
         }}
         paginationProps={{
           paginationClickHandler: page => () => setPageNumber(page),
-          paginationTarget: ""
+          paginationTarget: "#"
         }}
         bgColor="neutral05"
       />

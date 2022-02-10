@@ -24,7 +24,7 @@ export default function ProjectsContainer() {
     request: [projectsAPI.index, filters, pagination]
   });
 
-  useSetLocation(filters, pagination.number);
+  useSetLocation({ filters, page: pagination.number });
   const location = useLocation();
 
   const showPlaceholder = location.search
@@ -49,7 +49,7 @@ export default function ProjectsContainer() {
           }}
           paginationProps={{
             paginationClickHandler: page => () => setPageNumber(page),
-            paginationTarget: ""
+            paginationTarget: "#"
           }}
           bgColor="neutral05"
         />
