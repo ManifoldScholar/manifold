@@ -5,6 +5,7 @@ module V1
 
     INCLUDE_TOC = proc do |object, params|
       next true if full?(params)
+      next true if params[:include_all_tocs]
 
       params[:include_toc] && object.id.in?(params[:include_toc])
     end

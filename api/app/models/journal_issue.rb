@@ -64,10 +64,10 @@ class JournalIssue < ApplicationRecord
   delegate :description_plaintext, to: :project
   delegate :slug, to: :project, prefix: true
   delegate :number, to: :journal_volume, prefix: true, allow_nil: true
-  delegate :content_blocks, to: :project, prefix: true
-  delegate :content_block_ids, to: :project, prefix: true
-  delegate :texts, to: :project, prefix: true
-  delegate :text_ids, to: :project, prefix: true
+  delegate :texts, to: :project
+  delegate :text_ids, to: :project
+  delegate :text_categories, to: :project
+  delegate :text_category_ids, to: :project
   delegate :creators, to: :project
   delegate :creator_names, to: :project
   delegate :creator_ids, to: :project
@@ -126,6 +126,14 @@ class JournalIssue < ApplicationRecord
 
   def recently_updated?
     updated? && updated_at >= Time.current - 1.week
+  end
+
+  def content_blocks
+    project.content_blocks.where(type: ["Content::TableOfContentsBlock", "Content::TextsBlock"])
+  end
+
+  def content_block_ids
+    content_blocks.pluck[:id]
   end
 
 end
