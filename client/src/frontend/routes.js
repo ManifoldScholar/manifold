@@ -78,7 +78,7 @@ const routes = {
             {
               name: "frontendProjectResources",
               exact: true,
-              component: "ProjectResources",
+              component: "EntityResources",
               path: "/projects/:id/resources",
               helper: (p, params = {}) => {
                 const query = queryString.stringify(params);
@@ -185,15 +185,71 @@ const routes = {
           exact: false,
           component: "IssueWrapper",
           path: "/journals/issues/:id",
-          helper: p => `/journals/issues/${p}`,
+          helper: i => `/journals/issues/${i}`,
           routes: [
             {
               name: "frontendIssueDetail",
               exact: true,
               component: "IssueDetail",
               path: "/journals/issues/:id",
-              helper: p => `/journals/issues/${p}`
+              helper: i => `/journals/issues/${i}`
+            },
+            {
+              name: "frontendIssueResources",
+              exact: true,
+              component: "EntityResources",
+              path: "/journals/issues/:id/resources",
+              helper: (i, params = {}) => {
+                const query = queryString.stringify(params);
+                if (!query) return `/journals/issues/${i}/resources`;
+                return `/journals/issues/${i}/resources/?${query}`;
+              }
             }
+            // {
+            //   name: "frontendIssueResourceCollections",
+            //   exact: true,
+            //   component: "IssueResourceCollections",
+            //   path: "/journals/issues/:id/resource-collections",
+            //   helper: i => {
+            //     return `/journals/issues/${i}/resource-collections`;
+            //   }
+            // },
+            // {
+            //   name: "frontendIssueCollectionResource",
+            //   exact: true,
+            //   component: "ResourceDetail",
+            //   path:
+            //     "journals/issues/:id/resource-collection/:resourceCollectionId/resource/:resourceId",
+            //   helper: (i, c, r) =>
+            //     `/projects/${i}/resource-collection/${c}/resource/${r}`
+            // },
+            // {
+            //   name: "frontendIssueResource",
+            //   exact: true,
+            //   component: "ResourceDetail",
+            //   path: "/journals/issues/:id/resource/:resourceId",
+            //   helpers: {
+            //     frontendIssueResource: (i, r) =>
+            //       `/journals/issues/${i}/resource/${r}`,
+            //     frontendIssueResourceRelative: r => `resource/${r}`
+            //   }
+            // },
+            // {
+            //   name: "frontendIssueResourceCollection",
+            //   exact: true,
+            //   component: "ResourceCollectionDetail",
+            //   path:
+            //     "/journals/issues/:id/resource-collection/:resourceCollectionId",
+            //   helpers: {
+            //     frontendIssueResourceCollection: (i, c, params = {}) => {
+            //       const query = queryString.stringify(params);
+            //       if (!query) return `/projects/${i}/resource-collection/${c}`;
+            //       return `/projects/${i}/resource-collection/${c}?${query}`;
+            //     },
+            //     frontendIssueResourceCollectionRelative: c =>
+            //       `resource-collection/${c}`
+            //   }
+            // }
           ]
         },
         {

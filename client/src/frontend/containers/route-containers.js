@@ -40,6 +40,7 @@ import IssueWrapper from "frontend/containers/IssueWrapper";
 import IssueDetail from "frontend/containers/IssueDetail";
 import JournalVolumesList from "frontend/containers/JournalVolumesList";
 import JournalIssuesList from "frontend/containers/JournalIssuesList";
+import EntityResources from "frontend/containers/EntityResources";
 
 export default {
   NotFound,
@@ -91,5 +92,6 @@ export default {
   Login,
   SignUp,
   MyStarred,
-  MyAnnotations
+  MyAnnotations,
+  EntityResources
 };
