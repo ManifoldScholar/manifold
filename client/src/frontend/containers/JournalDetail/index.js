@@ -10,6 +10,7 @@ import Journal from "frontend/components/journal";
 import { journalVolumesAPI, journalIssuesAPI } from "api";
 import { useFetch, usePaginationState } from "hooks";
 import lh from "helpers/linkHandler";
+import Authorize from "hoc/Authorize";
 
 function JournalDetailContainer({ journal }) {
   const [issuesPagination] = usePaginationState(1, 8);
@@ -54,6 +55,11 @@ function JournalDetailContainer({ journal }) {
       />
       <EntityHeadContent entity={journal} />
       <EntityHero.Journal entity={journal} />
+      {!volumes?.length && !issues?.length && (
+        <Authorize entity={journal} ability="update">
+          <EntityCollection.JournalSummaryEmpty journalId={journal.id} />
+        </Authorize>
+      )}
       <EntityCollection.JournalVolumes
         volumes={volumes}
         journal={journal}

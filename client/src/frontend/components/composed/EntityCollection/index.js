@@ -3,6 +3,7 @@ import Issues from "./patterns/Issues";
 import GroupAnnotations from "./patterns/GroupAnnotations";
 import JournalIssues from "./patterns/JournalIssues";
 import JournalSummary from "./patterns/JournalSummary";
+import JournalSummaryEmpty from "./patterns/JournalSummaryEmpty";
 import JournalVolumes from "./patterns/JournalVolumes";
 import MyAnnotations from "./patterns/MyAnnotations";
 import MyStarred from "./patterns/MyStarred";
@@ -19,6 +20,7 @@ export default {
   GroupAnnotations,
   JournalIssues,
   JournalSummary,
+  JournalSummaryEmpty,
   JournalVolumes,
   MyAnnotations,
   MyStarred,
