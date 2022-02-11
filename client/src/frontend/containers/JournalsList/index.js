@@ -4,17 +4,10 @@ import GlobalUtility from "global/components/utility";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "frontend/components/composed/EntityCollection";
-import {
-  useFetch,
-  useFilterState,
-  usePaginationState,
-  useFromStore
-} from "hooks";
+import { useFetch, useFilterState, usePaginationState } from "hooks";
 import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 
 export default function JournalsListContainer() {
-  const settings = useFromStore("settings", "select");
-
   const [filters] = useFilterState();
   const [pagination, setPageNumber] = usePaginationState();
   const { data: journals, meta } = useFetch({
@@ -24,8 +17,6 @@ export default function JournalsListContainer() {
   if (!journals || !meta) return null;
 
   const showPagination = meta.pagination?.totalPages > 1;
-  // TODO: Update with setting for journals?
-  const showNav = settings?.attributes?.calculated.hasVisibleProjects;
 
   return (
     <>
@@ -51,7 +42,7 @@ export default function JournalsListContainer() {
           </div>
         </section>
       )}
-      {showNav && <CollectionNavigation entityType="journalIssues" />}
+      <CollectionNavigation entityType="journalIssues" />
     </>
   );
 }

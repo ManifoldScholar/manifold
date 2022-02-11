@@ -13,6 +13,7 @@ import queryString from "query-string";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 
 const { request } = entityStoreActions;
 const perPage = 8;
@@ -163,6 +164,7 @@ export class ProjectsCollectionsContainer extends Component {
             </div>
           </section>
         )}
+        <CollectionNavigation entityType="projects" />
       </>
     );
   }

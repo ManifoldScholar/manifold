@@ -174,5 +174,8 @@ exports[`frontend/containers/ProjectCollections/ProjectCollections matches the s
       }
     }
   />
+  <Frontend.Composed.CollectionNavigation
+    entityType="projects"
+  />
 </Fragment>
 `;
