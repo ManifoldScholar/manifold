@@ -13,6 +13,7 @@ function IssuesEntityCollection({
   filterProps,
   paginationProps,
   icon = "journals64",
+  parentView,
   ...passThroughProps
 }) {
   return (
@@ -27,7 +28,12 @@ function IssuesEntityCollection({
         <ThumbnailGrid {...props}>
           {({ stack }) =>
             issues.map(item => (
-              <EntityThumbnail entity={item} stack={stack} key={item.id} />
+              <EntityThumbnail
+                entity={item}
+                stack={stack}
+                key={item.id}
+                parentView={parentView}
+              />
             ))
           }
         </ThumbnailGrid>

@@ -32,9 +32,6 @@ export default function Wrapper({
       // Catch thumbnails rendered in context on a Journal or Volume Detail
       else if (parentView) {
         title = `Issue ${entity.attributes.number}` ?? "Issue";
-        additionalData = entity.attributes.journalVolumeNumber
-          ? `Volume ${entity.attributes.journalVolumeNumber}`
-          : null;
       }
       // Issues rendered on the Homepage or Journals/Issues List
       else {

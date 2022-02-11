@@ -53,6 +53,7 @@ export default function JournalIssuesList({ journal }) {
           paginationClickHandler: page => () => setPageNumber(page),
           paginationTarget: "#"
         }}
+        parentView
       />
     </>
   );
