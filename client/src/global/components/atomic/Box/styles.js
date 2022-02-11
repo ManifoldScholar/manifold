@@ -1,9 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  panelRounded,
-  containerPrototype,
-  fluidScale
-} from "theme/styles/mixins";
+import { containerPrototype, fluidScale } from "theme/styles/mixins";
 import { containerPaddingInline } from "theme/styles/variables/layout";
 
 export const Container = styled.section`
@@ -18,15 +14,17 @@ export const Container = styled.section`
 `;
 
 export const Background = styled.div`
-  ${panelRounded}
-  padding-block-start: var(--Box-Background-padding-block-start, ${fluidScale(
-    "45px",
-    "20px"
-  )});
-  padding-block-end: var(--Box-Background-padding-block-end, ${fluidScale(
-    "45px",
-    "20px"
-  )});
+  color: var(--box-color);
+  background-color: var(--box-bg-color);
+  border-radius: var(--Box-border-radius, var(--box-border-radius));
+  padding-block-start: var(
+    --Box-Background-padding-block-start,
+    ${fluidScale("45px", "20px")}
+  );
+  padding-block-end: var(
+    --Box-Background-padding-block-end,
+    ${fluidScale("45px", "20px")}
+  );
   padding-inline: var(
     --Box-Background-padding-inline,
     ${fluidScale("72px", "20px")}

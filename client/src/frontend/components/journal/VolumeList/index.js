@@ -9,17 +9,15 @@ function JournalVolumeList({ volumes, journal }) {
 
   return (
     <Styled.Wrapper>
-      <Styled.List>
-        {volumes.map(volume => (
-          <EntityGroup
-            key={volume.id}
-            title={`Volume ${volume.attributes.number}`}
-            to={lh.link("frontendVolumeDetail", journal.id, volume.id)}
-            entities={volume.relationships.journalIssues}
-            parentView
-          />
-        ))}
-      </Styled.List>
+      {volumes.map(volume => (
+        <EntityGroup
+          key={volume.id}
+          title={`Volume ${volume.attributes.number}`}
+          to={lh.link("frontendVolumeDetail", journal.id, volume.id)}
+          entities={volume.relationships.journalIssues}
+          parentView
+        />
+      ))}
     </Styled.Wrapper>
   );
 }
