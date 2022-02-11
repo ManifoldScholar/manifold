@@ -101,5 +101,5 @@ EntityHero.propTypes = {
     PropTypes.bool
   ]),
   darkMode: PropTypes.bool,
-  theme: PropTypes.oneOf(["project", "journal"])
+  theme: PropTypes.oneOf(["project", "journal", "issue"])
 };
