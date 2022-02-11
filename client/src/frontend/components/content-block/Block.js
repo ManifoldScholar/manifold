@@ -37,7 +37,8 @@ function getTitle(block, typeComponent) {
   return title || typeComponent.title;
 }
 
-function getIcon(block, typeComponent) {
+function getIcon(block, typeComponent, isJournalIssue) {
+  if (block.type === "textsBlocks" && isJournalIssue) return "journals64";
   return block?.attributes?.icon ?? typeComponent.icon;
 }
 
@@ -60,7 +61,7 @@ function ContentBlock({ block, entity, hideHeader, ...passThroughProps }) {
     ? {}
     : {
         title: getTitle(block, typeComponent),
-        icon: getIcon(block, typeComponent),
+        icon: getIcon(block, typeComponent, entity.attributes.isJournalIssue),
         description: descriptionFormatted
       };
 
