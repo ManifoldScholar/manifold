@@ -14,7 +14,6 @@ import CollectionNavigation from "frontend/components/composed/CollectionNavigat
 import { journalIssuesAPI } from "api";
 
 export default function IssuesListContainer() {
-  const settings = useFromStore("settings", "select");
   const subjects = useFromStore("feSubjects", "select");
 
   const [pagination, setPageNumber] = usePaginationState(1, 2);
@@ -26,9 +25,6 @@ export default function IssuesListContainer() {
   });
 
   useSetLocation({ filters, page: pagination.number });
-
-  // TODO: Update with setting for journals?
-  const showNav = settings?.attributes?.calculated.hasVisibleProjects;
 
   if (!issues || !meta) return null;
 
@@ -54,7 +50,7 @@ export default function IssuesListContainer() {
         />
       )}
       {!issues.length && <EntityCollectionPlaceholder.Issues />}
-      {showNav && <CollectionNavigation entityType="journals" />}
+      <CollectionNavigation entityType="journals" />
     </>
   );
 }

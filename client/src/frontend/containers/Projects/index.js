@@ -13,7 +13,6 @@ import {
 } from "hooks";
 
 export default function ProjectsContainer() {
-  const settings = useFromStore("settings", "select");
   const subjects = useFromStore("feSubjects", "select");
 
   const [pagination, setPageNumber] = usePaginationState();
@@ -30,7 +29,6 @@ export default function ProjectsContainer() {
   const showPlaceholder = location.search
     ? false
     : !projects || !projects.length;
-  const showNav = settings?.attributes?.calculated.hasVisibleProjects;
 
   return meta ? (
     <>
@@ -54,7 +52,7 @@ export default function ProjectsContainer() {
           bgColor="neutral05"
         />
       )}
-      {showNav && <CollectionNavigation entityType="projectCollections" />}
+      <CollectionNavigation entityType="projectCollections" />
     </>
   ) : null;
 }
