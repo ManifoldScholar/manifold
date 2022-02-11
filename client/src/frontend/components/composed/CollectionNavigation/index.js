@@ -1,81 +1,61 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import IconComposer from "global/components/utility/IconComposer";
+import { useCurrentUser } from "hooks";
+import Link from "./Link";
+import * as Styled from "./styles";
 
-function getRoute(type) {
-  switch (type) {
-    case "journals":
-      return "frontendJournalsList";
-    case "journalIssues":
-      return "frontendIssuesList";
-    case "projectCollections":
-      return "frontendProjectCollections";
-    default:
-      return "frontendProjectsAll";
+const LINKS = [
+  {
+    to: lh.link("frontendProjectsAll"),
+    label: "Projects",
+    icon: "projects64",
+    requiresAuthorization: false
+  },
+  {
+    to: lh.link("frontendJournalsList"),
+    label: "Journals",
+    icon: "journals64",
+    requiresAuthorization: false
+  },
+  {
+    to: lh.link("frontendProjectCollections"),
+    label: "Project Collections",
+    icon: "projectCollections64",
+    requiresAuthorization: false
+  },
+  {
+    to: lh.link("frontendStarred"),
+    label: "My Starred",
+    icon: "star24",
+    requiresAuthorization: true
+  },
+  {
+    to: lh.link("frontendAnnotations"),
+    label: "My Notes",
+    icon: "notes24",
+    requiresAuthorization: true
   }
-}
+];
 
-function getLabel(type) {
-  switch (type) {
-    case "journals":
-      return "See all journals";
-    case "journalIssues":
-      return "See all issues";
-    case "projectCollections":
-      return "See project collections";
-    default:
-      return "See all projects";
-  }
-}
-
-function getIcon(type) {
-  switch (type) {
-    case "journals":
-      return "journals64";
-    case "journalIssues":
-      return "journals64";
-    case "projectCollections":
-      return "projectCollections64";
-    default:
-      return "projects64";
-  }
-}
-
-function CollectionNavigation({ entityType = "projects", bgColor = "white" }) {
-  const url = getRoute(entityType);
-  const label = getLabel(entityType);
-  const icon = getIcon(entityType);
+function CollectionNavigation() {
+  const currentUser = useCurrentUser();
+  const filteredLinks = LINKS.filter(link =>
+    currentUser ? true : !link.requiresAuthorization
+  );
 
   return (
-    <section className={`bg-${bgColor}`}>
-      <div className="container">
-        <div className="button-nav button-nav--default">
-          <Link to={lh.link(url)} className="button-icon-primary">
-            <IconComposer
-              icon={icon}
-              size={48}
-              className="button-icon-primary__icon"
-            />
-            <span className="button-icon-primary__text">{label}</span>
-          </Link>
-        </div>
-      </div>
-    </section>
+    <nav aria-label="Library Links" className="container">
+      <Styled.List $count={filteredLinks.length}>
+        {filteredLinks.map(link => (
+          <li key={link.to}>
+            <Link {...link} />
+          </li>
+        ))}
+      </Styled.List>
+    </nav>
   );
 }
 
 CollectionNavigation.displayName = "Frontend.Composed.CollectionNavigation";
-
-CollectionNavigation.propTypes = {
-  entityType: PropTypes.oneOf([
-    "journals",
-    "journalIssues",
-    "projects",
-    "projectCollections"
-  ]),
-  bgColor: PropTypes.oneOf(["white", "neutral05"])
-};
 
 export default CollectionNavigation;

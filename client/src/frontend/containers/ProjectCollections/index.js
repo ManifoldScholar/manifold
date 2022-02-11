@@ -164,7 +164,7 @@ export class ProjectsCollectionsContainer extends Component {
             </div>
           </section>
         )}
-        <CollectionNavigation entityType="projects" />
+        <CollectionNavigation />
       </>
     );
   }

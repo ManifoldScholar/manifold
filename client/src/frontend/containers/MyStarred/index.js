@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/composed/EntityCollection";
+import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 
 import {
@@ -60,6 +61,7 @@ function MyStarredContainer() {
         responses={responses}
         onUncollect={onUncollect}
       />
+      <CollectionNavigation />
     </Authorize>
   );
 }

@@ -1712,8 +1712,6 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
       }
     }
   />
-  <Frontend.Composed.CollectionNavigation
-    entityType="projectCollections"
-  />
+  <Frontend.Composed.CollectionNavigation />
 </div>
 `;

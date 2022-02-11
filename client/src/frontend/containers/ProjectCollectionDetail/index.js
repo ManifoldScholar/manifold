@@ -251,7 +251,7 @@ export class ProjectCollectionDetailContainer extends Component {
           }}
           bgColor="neutral05"
         />
-        <CollectionNavigation entityType="projectCollections" />
+        <CollectionNavigation />
       </div>
     );
   }

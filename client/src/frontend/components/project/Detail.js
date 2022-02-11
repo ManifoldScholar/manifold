@@ -22,9 +22,7 @@ function Detail({ project }) {
         />
       </Authorize>
       <ContentBlockList entity={project} />
-      {!isStandalone && !libraryDisabled && (
-        <CollectionNavigation entityType="projects" bgColor="neutral05" />
-      )}
+      {!isStandalone && !libraryDisabled && <CollectionNavigation />}
     </>
   );
 }

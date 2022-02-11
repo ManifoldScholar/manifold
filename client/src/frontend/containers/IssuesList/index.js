@@ -50,7 +50,7 @@ export default function IssuesListContainer() {
         />
       )}
       {!issues.length && <EntityCollectionPlaceholder.Issues />}
-      <CollectionNavigation entityType="journals" />
+      <CollectionNavigation />
     </>
   );
 }

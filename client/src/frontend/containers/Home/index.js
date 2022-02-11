@@ -70,9 +70,7 @@ export class HomeContainer extends Component {
           <Collections />
         )}
 
-        {this.hasVisibleProjects && (
-          <CollectionNavigation entityType="projects" />
-        )}
+        {this.hasVisibleProjects && <CollectionNavigation />}
       </div>
     );
   }
