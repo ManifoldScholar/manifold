@@ -180,6 +180,7 @@ export default `.entity-list {
 
   &__button {
     ${fillOnFocus("var(--color-accent-primary-pale)")}
+    color: var(--highlight-color);
 
     & + & {
       margin-top: 24px;
