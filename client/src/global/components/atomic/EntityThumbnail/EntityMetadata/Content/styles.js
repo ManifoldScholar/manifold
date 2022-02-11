@@ -73,6 +73,7 @@ export const Subtitle = styled.h4`
 
 export const Tag = styled("div", transientOptions)`
   ${blockLabelRound}
+  width: max-content;
 
   padding-right: 5px;
   padding-left: 5px;

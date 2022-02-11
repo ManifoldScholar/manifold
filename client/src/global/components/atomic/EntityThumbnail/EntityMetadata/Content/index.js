@@ -7,6 +7,7 @@ export default function EntityMetadata(props) {
   const {
     title,
     draft,
+    bumpDraftDown,
     subtitle,
     additionalData,
     date,
@@ -25,13 +26,18 @@ export default function EntityMetadata(props) {
             __html: title
           }}
         />
-        {draft && <Styled.Tag $stack={stack}>{"Draft"}</Styled.Tag>}
+        {draft && !bumpDraftDown && (
+          <Styled.Tag $stack={stack}>{"Draft"}</Styled.Tag>
+        )}
       </Styled.TitleWrapper>
       {subtitle && <Styled.Subtitle>{subtitle}</Styled.Subtitle>}
       {additionalData && (
         <Styled.Creators>
           <span>{additionalData}</span>
         </Styled.Creators>
+      )}
+      {draft && bumpDraftDown && (
+        <Styled.Tag $stack={stack}>{"Draft"}</Styled.Tag>
       )}
       {date && (
         <Styled.Date $recentlyUpdated={recentlyUpdated}>
