@@ -15,7 +15,13 @@ export const containerPaddingInline = {
   responsive: "4.5%",
   narrow: "20px",
   responsiveGlobal: "4.5vw",
-  min: "15px"
+  min: "15px",
+  get fluid() {
+    return `clamp(${this.narrow}, calc(${this.narrow} + ${parseInt(
+      this.full,
+      10
+    ) - parseInt(this.narrow, 10)} * (100vw - 620px) / 404), ${this.full})`;
+  }
 };
 
 export const containerPaddingBlock = {

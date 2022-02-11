@@ -8,9 +8,7 @@ function JournalIssueList({ issues = [] }) {
 
   return (
     <Styled.Wrapper>
-      <Styled.List>
-        <EntityGroup title="Issues" entities={issues} parentView />
-      </Styled.List>
+      <EntityGroup title="Issues" entities={issues} parentView />
     </Styled.Wrapper>
   );
 }
