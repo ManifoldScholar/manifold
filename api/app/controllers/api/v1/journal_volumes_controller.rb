@@ -10,7 +10,7 @@ module API
       def show
         @journal_volume = JournalVolume.find(params[:id])
         authorize_action_for @journal_volume
-        render_single_resource @journal_volume, include: includes
+        render_single_resource @journal_volume, include: includes, params: { include_all_tocs: true }
       end
 
       def update
@@ -28,7 +28,8 @@ module API
       protected
 
       def includes
-        [:journal_issues, "journal_issues.project", "journal_issues.project_content_blocks", "journal_issues.project_texts"]
+        [:journal_issues, "journal_issues.project", "journal_issues.texts",
+         "journal_issues.text_categories", "journal_issues.content_blocks"]
       end
 
       def scope_for_journal_volumes

@@ -29,11 +29,7 @@ function VolumeDetail({ journal, volume }) {
                   />
                 )}
               </ThumbnailGrid>
-              <ContentBlockList
-                entity={issue.relationships?.project}
-                nested
-                hideHeader
-              />
+              <ContentBlockList entity={issue} nested hideHeader />
             </Styled.IssueWrapper>
           ))}
       </EntityGroup>

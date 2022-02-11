@@ -27,7 +27,7 @@ class Text < ApplicationRecord
   }
 
   # Default Scope
-  default_scope { order(position: :asc).includes(:titles, :text_subjects, :category) }
+  default_scope { order(position: :asc).preload(:titles, :text_subjects, :category) }
 
   # Magic
   has_formatted_attributes :description
