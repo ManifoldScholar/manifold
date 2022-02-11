@@ -4,6 +4,7 @@ import queryString from "query-string";
 import isEmpty from "lodash/isEmpty";
 import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/composed/EntityCollection";
+import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 import {
   useDispatchAnnotations,
   useSelectAnnotations,
@@ -92,6 +93,7 @@ function MyAnnotationsContainer({ location, history }) {
           paginationClickHandler: pageChangeHandlerCreator(handlePageChange)
         }}
       />
+      <CollectionNavigation />
     </>
   );
 }

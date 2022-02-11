@@ -52,7 +52,7 @@ export default function ProjectsContainer() {
           bgColor="neutral05"
         />
       )}
-      <CollectionNavigation entityType="projectCollections" />
+      <CollectionNavigation />
     </>
   ) : null;
 }

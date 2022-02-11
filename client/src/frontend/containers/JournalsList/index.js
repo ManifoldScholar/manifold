@@ -42,7 +42,7 @@ export default function JournalsListContainer() {
           </div>
         </section>
       )}
-      <CollectionNavigation entityType="journalIssues" />
+      <CollectionNavigation />
     </>
   );
 }
