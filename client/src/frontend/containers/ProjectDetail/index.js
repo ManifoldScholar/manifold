@@ -6,31 +6,24 @@ import lh from "helpers/linkHandler";
 import Schema from "global/components/schema";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
+import IssueDetail from "frontend/containers/IssueDetail";
 
 function ProjectDetailContainer({ project, response }) {
-  if (
-    project?.attributes?.isJournalIssue &&
-    project?.relationships?.journalIssue?.id
-  )
-    return (
-      <Redirect
-        to={lh.link(
-          "frontendIssueDetail",
-          project?.relationships?.journalIssue?.id
-        )}
-      />
-    );
-
   if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
 
-  return project ? (
+  if (!project) return null;
+
+  if (project.attributes?.isJournalIssue)
+    return <IssueDetail project={project} />;
+
+  return (
     <>
       <CheckFrontendMode debugLabel="ProjectDetail" isProjectHomePage />
       <EntityHeadContent entity={project} />
       <Project.Detail project={project} />
       <Schema.Project project={project} />
     </>
-  ) : null;
+  );
 }
 
 ProjectDetailContainer.displayName = "Frontend.Containers.ProjectDetail";

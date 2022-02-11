@@ -1,22 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import Issue from "frontend/components/issue";
 
-export default function IssueDetailContainer({ issue, response }) {
-  if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
-  if (!issue) return null;
+export default function IssueDetailContainer({ project }) {
+  if (!project) return null;
 
+  const issue = project.relationships?.journalIssue;
   const parentJournal = issue.relationships?.journal;
   const parentVolume = issue.relationships?.journalVolume;
 
   return (
     <>
-      <CheckFrontendMode debugLabel="ProjectDetail" isProjectHomePage />
+      <CheckFrontendMode debugLabel="IssueDetail" isProjectHomePage />
       <RegisterBreadcrumbs
         breadcrumbs={[
           {
@@ -36,16 +35,13 @@ export default function IssueDetailContainer({ issue, response }) {
             label: `Volume ${parentVolume.attributes.number}`
           },
           {
-            to: lh.link("frontendIssueDetail", issue.id),
+            to: lh.link("frontendProjectDetail", project.slug),
             label: `Issue ${issue.attributes.number}`
           }
         ].filter(Boolean)}
       />
-      <EntityHeadContent
-        entity={issue.relationships.project}
-        parentEntity={parentJournal}
-      />
-      <Issue.Detail issue={issue.relationships.project} />
+      <EntityHeadContent entity={project} parentEntity={parentJournal} />
+      <Issue.Detail issue={project} />
     </>
   );
 }
