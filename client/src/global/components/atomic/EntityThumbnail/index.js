@@ -12,7 +12,8 @@ export default function EntityThumbnail({
   hideMeta = false,
   hideDescription = true,
   hideDate = false,
-  stack = true
+  stack = true,
+  parentView = false
 }) {
   const detailRoute =
     entity.type === "journalIssues"
@@ -32,6 +33,7 @@ export default function EntityThumbnail({
             hideDescription={hideDescription}
             hideDate={hideDate}
             stack={stack}
+            parentView={parentView}
           />
         )}
       </Styled.ItemLink>
