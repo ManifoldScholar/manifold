@@ -1,28 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
-const HELP_LINK =
-  "https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/project_collections";
+const HELP_LINK = "https://manifoldscholar.github.io/manifold-docusaurus/docs";
 
 function JournalsPlaceholder({ bgColor = "neutral05" }) {
   return (
     <Wrapper bgColor={bgColor}>
-      <Title>
-        <Authorize entity="projectCollection" ability="create">
+      <Title icon="journals64">
+        <Authorize entity="journal" ability="create">
           Oh no. There are no journals in this Manifold library.
         </Authorize>
-        <Authorize entity="project" ability="create" successBehavior="hide">
+        <Authorize entity="journal" ability="create" successBehavior="hide">
           There are no journals in this Manifold library.
         </Authorize>
       </Title>
       <Body>
         <>
-          <Authorize entity="project" ability="create">
+          <Authorize entity="journal" ability="create">
             <p>
               {
                 "But it’s easy to create new journals with Manifold. If you have backend access, "
@@ -39,17 +37,16 @@ function JournalsPlaceholder({ bgColor = "neutral05" }) {
               .
             </p>
           </Authorize>
-          <Authorize entity="project" ability="create" successBehavior="hide">
+          <Authorize entity="journal" ability="create" successBehavior="hide">
             <p>Please check back soon!</p>
           </Authorize>
-          <Utility.IconComposer icon="BooksOnShelfColorUnique" size={205} />
         </>
       </Body>
       <Actions
         actions={[
           {
             children: (
-              <Authorize entity="project" ability="create">
+              <Authorize entity="journal" ability="create">
                 <Link
                   to={lh.link("backendJournalsNew")}
                   className="button-tertiary"
