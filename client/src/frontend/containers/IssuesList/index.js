@@ -7,6 +7,7 @@ import {
   useSetLocation,
   useFromStore
 } from "hooks";
+import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 
@@ -29,30 +30,33 @@ export default function IssuesListContainer() {
   // TODO: Update with setting for journals?
   const showNav = settings?.attributes?.calculated.hasVisibleProjects;
 
-  // TODO: Add placeholder if there are no issues
+  if (!issues || !meta) return null;
 
-  return issues ? (
+  return (
     <>
       <h1 className="screen-reader-text">All Journal Issues</h1>
-      <EntityCollection.Issues
-        title="All Journal Issues"
-        issues={issues}
-        issuesMeta={meta}
-        filterProps={{
-          filterChangeHandler: param => setFilters({ newState: param }),
-          initialFilterState: filters,
-          resetFilterState: baseFilters,
-          subjects
-        }}
-        paginationProps={{
-          paginationClickHandler: page => () => setPageNumber(page),
-          paginationTarget: "#"
-        }}
-        bgColor="neutral05"
-      />
+      {!!issues.length && (
+        <EntityCollection.Issues
+          title="All Journal Issues"
+          issues={issues}
+          issuesMeta={meta}
+          filterProps={{
+            filterChangeHandler: param => setFilters({ newState: param }),
+            initialFilterState: filters,
+            resetFilterState: baseFilters,
+            subjects
+          }}
+          paginationProps={{
+            paginationClickHandler: page => () => setPageNumber(page),
+            paginationTarget: "#"
+          }}
+          bgColor="neutral05"
+        />
+      )}
+      {!issues.length && <EntityCollectionPlaceholder.Issues />}
       {showNav && <CollectionNavigation entityType="journals" />}
     </>
-  ) : null;
+  );
 }
 
 IssuesListContainer.propTypes = {
