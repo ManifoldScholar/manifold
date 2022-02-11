@@ -15,15 +15,16 @@ export default function EntityThumbnail({
   stack = true,
   parentView = false
 }) {
-  const detailRoute =
-    entity.type === "journalIssues"
-      ? "frontendIssueDetail"
-      : "frontendProjectDetail";
   const urlParam =
-    entity.type === "journalIssues" ? entity.id : entity.attributes.slug;
+    entity.type === "journalIssues"
+      ? entity.attributes.projectSlug
+      : entity.attributes.slug;
   return (
     <Styled.Wrapper>
-      <Styled.ItemLink $stack={stack} to={lh.link(detailRoute, urlParam)}>
+      <Styled.ItemLink
+        $stack={stack}
+        to={lh.link("frontendProjectDetail", urlParam)}
+      >
         <Styled.Cover $stack={stack}>
           <EntityAvatar entity={entity} />
         </Styled.Cover>

@@ -181,22 +181,6 @@ const routes = {
           }
         },
         {
-          name: "frontendIssue",
-          exact: false,
-          component: "IssueWrapper",
-          path: "/journals/issues/:id",
-          helper: p => `/journals/issues/${p}`,
-          routes: [
-            {
-              name: "frontendIssueDetail",
-              exact: true,
-              component: "IssueDetail",
-              path: "/journals/issues/:id",
-              helper: p => `/journals/issues/${p}`
-            }
-          ]
-        },
-        {
           name: "frontendJournal",
           exact: false,
           component: "JournalWrapper",
