@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import isEmpty from "lodash/isEmpty";
 import lh from "helpers/linkHandler";
+import { useCurrentUser } from "hooks";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
-function ReadingGroupsPlaceholder({ currentUser, isPublic }) {
-  const loggedIn = !isEmpty(currentUser);
+function ReadingGroupsPlaceholder({ isPublic }) {
+  const currentUser = useCurrentUser();
 
   function getContent() {
-    if (!loggedIn) {
+    if (!currentUser) {
       return {
         title: "This Manifold doesn’t have any reading groups yet.",
         body:
@@ -67,7 +67,7 @@ function ReadingGroupsPlaceholder({ currentUser, isPublic }) {
   const { title, body, actions } = getContent();
 
   return (
-    <Wrapper context="frontend">
+    <Wrapper>
       <Title icon="readingGroup24">{title}</Title>
       <Body>
         <p>{body}</p>
@@ -81,7 +81,6 @@ ReadingGroupsPlaceholder.displayName =
   "Global.Composed.EntityCollectionPlaceholder.ReadingGroups";
 
 ReadingGroupsPlaceholder.propTypes = {
-  currentUser: PropTypes.object,
   isPublic: PropTypes.bool
 };
 
