@@ -117,6 +117,7 @@ export class ProjectLayoutContainer extends PureComponent {
           refresh={refresh}
           refreshActionCallouts={this.fetchActionCallouts}
           model={project}
+          withDarkMode={!project.attributes.isJournalIssue}
         />
         <ContentBlock.Builder
           dispatch={dispatch}
