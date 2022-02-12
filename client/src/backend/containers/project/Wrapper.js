@@ -124,6 +124,13 @@ export class ProjectWrapperContainer extends PureComponent {
     const { project } = this.props;
     const secondaryLinks = navigation.project(project);
 
+    const backUrl = project.attributes.isJournalIssue
+      ? lh.link("backendJournalIssues", project.relationships.journal.id)
+      : null;
+    const backLabel = project.attributes.isJournalIssue
+      ? project.relationships.journal.attributes.title
+      : null;
+
     return (
       <div>
         <Authorize
@@ -143,6 +150,8 @@ export class ProjectWrapperContainer extends PureComponent {
             subtitle={project.attributes.subtitle}
             utility={this.renderUtility(project)}
             secondaryLinks={secondaryLinks}
+            backUrl={backUrl}
+            backLabel={backLabel}
           />
           <Layout.BackendPanel
             sidebar={
