@@ -64,6 +64,15 @@ function JournalDescription({
               "Images will be resized to 1280x800 and cropped along the bottom edge."
             }
           />
+          <Form.Select
+            name="attributes[heroLayout]"
+            label="Hero Layout:"
+            options={[
+              { label: "Square Inset", value: "square_inset" },
+              { label: "Wide Inset", value: "wide_inset" },
+              { label: "Full Bleed", value: "full_bleed" }
+            ]}
+          />
           <Form.Upload
             layout="portrait"
             label="Logo"
