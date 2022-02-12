@@ -10,7 +10,7 @@ export default function IssueDetailContainer({ project }) {
   if (!project) return null;
 
   const issue = project.relationships?.journalIssue;
-  const parentJournal = issue.relationships?.journal;
+  const parentJournal = project.relationships?.journal;
   const parentVolume = issue.relationships?.journalVolume;
 
   return (
