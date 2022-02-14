@@ -26,8 +26,8 @@ export default function journalFilters({ snapshotState = false } = {}) {
         options: [
           { label: "Most recently updated", value: "updated_at ASC" },
           { label: "Alphabetical by title", value: "sort_title ASC" },
-          { label: "Newest projects first", value: "created_at DESC" },
-          { label: "Oldest projects first", value: "created_at ASC" }
+          { label: "Newest journals first", value: "created_at DESC" },
+          { label: "Oldest journals first", value: "created_at ASC" }
         ]
       }
     ]
