@@ -50,6 +50,7 @@ export default function ProjectsContainer() {
             paginationTarget: "#"
           }}
           bgColor="neutral05"
+          className="flex-grow"
         />
       )}
       <CollectionNavigation />

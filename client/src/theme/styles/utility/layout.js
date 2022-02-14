@@ -81,6 +81,10 @@ export default `
     ${flexViewport(false)}
   }
 
+  .flex-grow {
+    flex-grow: 1;
+  }
+
   .row-1-p {
     ${clearfix()}
 
