@@ -16,7 +16,7 @@ export default class ListEntitiesListButtonSet extends PureComponent {
   /* these buttons never change after render */
   render() {
     return (
-      <div className="entity-list__button-set">
+      <div className="entity-list__button-set entity-list__button-set-flex">
         {this.buttons.map((button, i) =>
           React.cloneElement(button, { key: i })
         )}
