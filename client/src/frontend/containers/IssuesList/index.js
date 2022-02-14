@@ -16,7 +16,7 @@ import { journalIssuesAPI } from "api";
 export default function IssuesListContainer() {
   const subjects = useFromStore("feSubjects", "select");
 
-  const [pagination, setPageNumber] = usePaginationState(1, 2);
+  const [pagination, setPageNumber] = usePaginationState();
   const baseFilters = { standaloneModeEnforced: false };
   const [filters, setFilters] = useFilterState(baseFilters);
 
