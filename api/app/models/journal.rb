@@ -41,8 +41,8 @@ class Journal < ApplicationRecord
            -> { order(:position) },
            dependent: :destroy,
            as: :calloutable
-  has_many :journal_volumes, dependent: :destroy
-  has_many :journal_issues, dependent: :destroy
+  has_many :journal_volumes, -> { in_reverse_order }, dependent: :destroy
+  has_many :journal_issues, -> { in_reverse_order },  dependent: :destroy
 
   # Validation
   validates :title, presence: true

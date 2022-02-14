@@ -45,7 +45,7 @@ module API
       end
 
       def scope_visibility
-        JournalIssue.all
+        JournalIssue.in_reverse_order
       end
 
       def scope_for_journal_issues

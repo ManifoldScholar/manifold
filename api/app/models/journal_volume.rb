@@ -10,7 +10,7 @@ class JournalVolume < ApplicationRecord
   include Sluggable
 
   belongs_to :journal, counter_cache: true
-  has_many :journal_issues, dependent: :nullify
+  has_many :journal_issues, -> { in_reverse_order }, dependent: :nullify
 
   validates :journal_id, presence: true
   validates :number, presence: true
