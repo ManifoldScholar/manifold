@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 import {
   useFetch,
   usePaginationState,
@@ -25,13 +26,16 @@ export default function IssuesListContainer() {
   });
 
   useSetLocation({ filters, page: pagination.number });
+  const location = useLocation();
 
   if (!issues || !meta) return null;
+
+  const showPlaceholder = location.search ? false : !issues.length;
 
   return (
     <>
       <h1 className="screen-reader-text">All Journal Issues</h1>
-      {!!issues.length && (
+      {!showPlaceholder && (
         <EntityCollection.Issues
           title="All Journal Issues"
           issues={issues}
@@ -47,9 +51,10 @@ export default function IssuesListContainer() {
             paginationTarget: "#"
           }}
           bgColor="neutral05"
+          className="flex-grow"
         />
       )}
-      {!issues.length && <EntityCollectionPlaceholder.Issues />}
+      {showPlaceholder && <EntityCollectionPlaceholder.Issues />}
       <CollectionNavigation />
     </>
   );
