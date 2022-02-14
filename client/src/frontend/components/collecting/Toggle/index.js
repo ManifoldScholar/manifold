@@ -12,6 +12,8 @@ import Icons from "./Icons";
 import { inCollections } from "../helpers";
 import { useCurrentUser } from "hooks";
 
+const COLLECTABLE_TYPE_RESTRICTED_LIST = ["journals", "journalIssues"];
+
 const { request } = entityStoreActions;
 
 function determineView(collected, hovered, confirmed, isCollecting) {
@@ -152,7 +154,11 @@ function CollectingToggle({
     if (onDialogClose) onDialogClose();
   }
 
-  if (!currentUser) return null;
+  if (
+    !currentUser ||
+    COLLECTABLE_TYPE_RESTRICTED_LIST.includes(collectable.type)
+  )
+    return null;
 
   return (
     <>
