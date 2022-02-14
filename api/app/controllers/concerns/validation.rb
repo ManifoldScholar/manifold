@@ -615,7 +615,7 @@ module Validation
     params.permit(
       filter: [:draft, :featured, :subject, :keyword, :order, :typeahead,
                :with_update_ability, :collection_order, :with_creator_role,
-               :standalone_mode_enforced]
+               :standalone_mode_enforced, :no_issues]
     )[:filter]
   end
 
