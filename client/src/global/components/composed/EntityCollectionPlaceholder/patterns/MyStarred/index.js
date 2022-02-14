@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import Animation from "./Animation";
@@ -37,9 +36,5 @@ function MyStarredPlaceholder() {
 
 MyStarredPlaceholder.displayName =
   "Global.Composed.EntityCollectionPlaceholder.MyStarred";
-
-MyStarredPlaceholder.propTypes = {
-  onClick: PropTypes.func.isRequired
-};
 
 export default MyStarredPlaceholder;
