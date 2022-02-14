@@ -13,7 +13,7 @@ module API
 
       def index
         @journal_issues = load_journal_issues
-        render_multiple_resources @journal_issues, include: []
+        render_multiple_resources @journal_issues, include: ["journal"]
       end
 
       def show
