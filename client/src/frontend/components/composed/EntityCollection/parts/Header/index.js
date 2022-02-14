@@ -26,7 +26,14 @@ function Header({
 }) {
   if (!title) return null;
 
-  const layout = !image ? "title_description" : headerLayout;
+  /* eslint-disable no-nested-ternary */
+  const layout =
+    !image && !description
+      ? "title_only"
+      : !image
+      ? "title_description"
+      : headerLayout;
+  /* eslint-disable no-nested-ternary */
 
   return (
     <Styled.Header $layout={layout}>

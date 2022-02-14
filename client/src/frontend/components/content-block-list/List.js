@@ -6,7 +6,8 @@ export default class ContentBlockList extends PureComponent {
   static displayName = "ContentBlockList";
 
   static propTypes = {
-    entity: PropTypes.object
+    entity: PropTypes.object,
+    hideHeader: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
   };
 
   get entity() {
@@ -34,9 +35,24 @@ export default class ContentBlockList extends PureComponent {
     );
   }
 
+  getHeader(block) {
+    if (typeof this.props.hideHeader === "boolean")
+      return this.props.hideHeader;
+    if (Array.isArray(this.props.hideHeader))
+      return this.props.hideHeader.includes(block.type);
+    return false;
+  }
+
   render() {
     return this.visibleContentBlocks.map(block => {
-      return <ContentBlock key={block.id} block={block} {...this.props} />;
+      return (
+        <ContentBlock
+          key={block.id}
+          block={block}
+          {...this.props}
+          hideHeader={this.getHeader(block)}
+        />
+      );
     });
   }
 }
