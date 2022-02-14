@@ -17,12 +17,11 @@ function IssueForm({ journalId, model, ...props }) {
   return (
     <FormContainer.Form
       {...props}
-      name="create-journal-issue"
+      name={model ? "update-journal-issue" : "create-journal-issue"}
       update={journalIssuesAPI.update}
       create={toCreate => journalIssuesAPI.create(journalId, toCreate)}
       className="form-secondary"
       model={model}
-      notificationScope="none"
     >
       <Form.NumberInput label="Number" focusOnMount name="attributes[number]" />
       <Form.TextInput label="Subtitle" name="attributes[subtitle]" />

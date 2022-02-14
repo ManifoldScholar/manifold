@@ -51,3 +51,5 @@ export { default as useEventTracker } from "./useEventTracker";
 
 export { default as useAnalyticsContext } from "./useAnalyticsContext";
 export { default as useReaderContext } from "./useReaderContext";
+
+export { default as useNotification } from "./useNotification";
