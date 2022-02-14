@@ -8,12 +8,11 @@ function VolumeForm({ journalId, model, ...props }) {
   return (
     <FormContainer.Form
       {...props}
-      name="create-journal-volume"
+      name={model ? "update-journal-volume" : "create-journal-volume"}
       update={journalVolumesAPI.update}
       create={toCreate => journalVolumesAPI.create(journalId, toCreate)}
       className="form-secondary"
       model={model}
-      notificationScope="none"
     >
       <Form.NumberInput label="Number" focusOnMount name="attributes[number]" />
       <Form.TextInput

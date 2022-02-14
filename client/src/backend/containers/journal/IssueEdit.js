@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Issue from "backend/components/issue";
 import Navigation from "backend/components/navigation";
 import { journalIssuesAPI } from "api";
-import { useFetch, useApiCallback } from "hooks";
+import { useFetch, useApiCallback, useNotification } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 import lh from "helpers/linkHandler";
 
@@ -23,6 +23,14 @@ function JournalIssueEdit({
     removes: journalIssue
   });
 
+  const notifyDestroy = useNotification(i => ({
+    level: 0,
+    id: `JOURNAL_ISSUE_DESTROYED_${i.id}`,
+    heading: "The issue has been destroyed.",
+    body: `Issue #${i?.attributes?.number} has passed into the endless night.`,
+    expiration: 5000
+  }));
+
   const refreshAndRedirect = useCallback(() => {
     refreshIssues();
     history.push(closeUrl, { keepNotifications: false });
@@ -32,10 +40,13 @@ function JournalIssueEdit({
     const redirect = () =>
       history.push(lh.link("backendJournalIssues", journal?.id));
     destroy(journalIssue.id).then(
-      () => redirect(),
+      () => {
+        notifyDestroy(journalIssue);
+        redirect();
+      },
       () => redirect()
     );
-  }, [destroy, history, journal?.id, journalIssue?.id]);
+  }, [destroy, history, journal?.id, journalIssue, notifyDestroy]);
 
   const onDelete = useCallback(() => {
     const heading = "Are you sure you want to delete this issue?";

@@ -9,7 +9,7 @@ import navigation from "helpers/router/navigation";
 import Authorize from "hoc/Authorize";
 import IconComposer from "global/components/utility/IconComposer";
 import { Link } from "react-router-dom";
-import { useFetch, useApiCallback } from "hooks";
+import { useFetch, useApiCallback, useNotification } from "hooks";
 
 function JournalWrapper({ match, route, history, confirm }) {
   const { data: journal, refresh } = useFetch({
@@ -17,13 +17,24 @@ function JournalWrapper({ match, route, history, confirm }) {
   });
   const destroy = useApiCallback(journalsAPI.destroy, { removes: journal });
 
+  const notifyDestroy = useNotification(j => ({
+    level: 0,
+    id: `JOURNAL_DESTROYED_${j.id}`,
+    heading: "The journal has been destroyed.",
+    body: `${j?.attributes?.title} has passed into the endless night.`,
+    expiration: 5000
+  }));
+
   const destroyAndRedirect = useCallback(() => {
     const redirect = () => history.push(lh.link("backendJournals"));
     destroy(journal.id).then(
-      () => redirect(),
+      () => {
+        notifyDestroy(journal);
+        redirect();
+      },
       () => redirect()
     );
-  }, [destroy, history, journal]);
+  }, [destroy, history, journal, notifyDestroy]);
 
   const handleJournalDestroy = useCallback(() => {
     const heading = "Are you sure you want to delete this journal?";

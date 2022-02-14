@@ -331,5 +331,53 @@ export default {
       body: `Content Block has been updated.`,
       expiration: defaultExpiration
     };
+  },
+  "backend-create-journal": payload => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `${payload.data.attributes.title} has been created.`,
+      expiration: defaultExpiration
+    };
+  },
+  "backend-journal-update": payload => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `${payload.data.attributes.title} has been updated.`,
+      expiration: defaultExpiration
+    };
+  },
+  "create-journal-issue": payload => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `Issue #${payload.data.attributes.number} has been created.`,
+      expiration: defaultExpiration
+    };
+  },
+  "update-journal-issue": payload => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `Issue #${payload.data.attributes.number} has been updated.`,
+      expiration: defaultExpiration
+    };
+  },
+  "create-journal-volume": payload => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `Volume #${payload.data.attributes.number} has been created.`,
+      expiration: defaultExpiration
+    };
+  },
+  "update-journal-volume": payload => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `Volume #${payload.data.attributes.number} has been updated.`,
+      expiration: defaultExpiration
+    };
   }
 };
