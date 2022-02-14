@@ -102,7 +102,7 @@ class Project < ApplicationRecord
            dependent: :destroy,
            as: :calloutable
 
-  has_one :journal_issue, dependent: :destroy, touch: true
+  belongs_to :journal_issue, optional: true, dependent: :destroy, touch: true
   has_one :journal, through: :journal_issue
   has_one :journal_volume, through: :journal_issue, touch: true
 
@@ -191,7 +191,6 @@ class Project < ApplicationRecord
   scope :by_standalone_mode_enforced, ->(enforced) { to_boolean(enforced) ? standalone_enforced : standalone_unforced }
 
   scope :with_creator_role, ->(user = nil) { where(creator: user) if user.present? }
-
   scope :with_read_ability, ->(user = nil) { build_read_ability_scope_for user }
   scope :with_full_read_ability, ->(user = nil) { build_full_read_ability_scope_for user }
 
@@ -212,6 +211,14 @@ class Project < ApplicationRecord
       .ranked_by_collection
       .merge(CollectionProjectRanking.by_collection(collection))
   end
+
+  scope :with_no_issues, ->(enabled = true) {
+    next all unless to_boolean(enabled)
+
+    where(journal_issue_id: nil)
+  }
+
+  scope :by_draft, ->(draft = nil) { where(draft: to_boolean(draft)) unless draft.nil? }
 
   # Search
   scope :search_import, -> {

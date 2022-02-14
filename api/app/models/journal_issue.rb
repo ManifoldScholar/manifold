@@ -17,10 +17,9 @@ class JournalIssue < ApplicationRecord
 
   belongs_to :journal, counter_cache: true
   belongs_to :journal_volume, optional: true, counter_cache: true
-  belongs_to :project
 
-  validates :project_id, presence: true
-  validates :project_id, uniqueness: true
+  has_one :project, { required: true, inverse_of: :journal_issue }
+
   validates :journal_id, presence: true
   validates :number, presence: true
 
