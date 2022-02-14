@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
+import classNames from "classnames";
 import Box from "global/components/atomic/Box";
 import Utility from "global/components/utility";
 import Header, { headerProps } from "./parts/Header";
@@ -22,14 +23,18 @@ function EntityCollection({
   paginationProps,
   bgColor = "white",
   nested,
-  boxed
+  boxed,
+  className
 }) {
   return (
     <Styled.Wrapper
       $nested={nested}
       $boxed={boxed}
       as={!!boxed && Box}
-      className={!nested && !boxed ? `bg-${bgColor}` : null}
+      className={classNames({
+        [`bg-${bgColor}`]: !nested && !boxed,
+        [className]: !!className
+      })}
     >
       <Styled.Inner className={!nested && !boxed ? "container" : null}>
         <Header
@@ -77,6 +82,7 @@ EntityCollection.propTypes = {
   bgColor: PropTypes.oneOf(["white", "neutral05"]),
   nested: PropTypes.bool,
   boxed: PropTypes.bool,
+  className: PropTypes.string,
   ...headerProps
 };
 
