@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { uiReadingGroupActions } from "actions";
 import { ReaderContext } from "helpers/contexts";
 import get from "lodash/get";
+import isEqual from "lodash/isEqual";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -56,25 +57,33 @@ export default function withReadingGroups(WrappedComponent) {
         currentAnnotatingReadingGroup,
         dispatch
       } = this.props;
+
       const { readingGroups: previousReadingGroups } = prevProps;
-      if (
-        readingGroupsLoaded &&
-        previousReadingGroups !== readingGroups &&
-        currentAnnotatingReadingGroup
-      ) {
-        const currentAnnotatingGroup = this.adjustedReadingGroups.find(
-          group => group.id === currentAnnotatingReadingGroup
-        );
-        if (
-          !currentAnnotatingGroup &&
-          currentAnnotatingReadingGroup !== this.defaultAnnotatingReadingGroup
+
+      if (!readingGroupsLoaded) return;
+      if (readingGroups === previousReadingGroups) return;
+      if (!currentAnnotatingReadingGroup) return;
+
+      const readingGroupIds = (readingGroups || []).map(rg => rg.id);
+      const previousReadingGroupIds = (previousReadingGroups || []).map(
+        rg => rg.id
+      );
+      if (isEqual(readingGroupIds, previousReadingGroupIds)) return;
+
+      const currentAnnotatingGroup = this.adjustedReadingGroups.find(
+        group => group.id === currentAnnotatingReadingGroup
+      );
+
+      if (currentAnnotatingGroup) return;
+      if (currentAnnotatingReadingGroup === this.defaultAnnotatingReadingGroup)
+        return;
+
+      // The selected reading group is no longer valid. Select the default group instead.
+      dispatch(
+        uiReadingGroupActions.setAnnotatingReadingGroup(
+          this.defaultAnnotatingReadingGroup
         )
-          dispatch(
-            uiReadingGroupActions.setAnnotatingReadingGroup(
-              this.defaultAnnotatingReadingGroup
-            )
-          );
-      }
+      );
     }
 
     get defaultAnnotatingReadingGroup() {
