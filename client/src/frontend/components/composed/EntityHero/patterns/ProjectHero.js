@@ -33,7 +33,7 @@ export default function ProjectHero({ entity, mock }) {
     contributors
   } = getPartsData(entity);
 
-  const darkMode = bgImage || entity.attributes.darkMode;
+  const darkMode = !!(bgImage || entity.attributes.darkMode);
 
   return (
     <EntityHero
