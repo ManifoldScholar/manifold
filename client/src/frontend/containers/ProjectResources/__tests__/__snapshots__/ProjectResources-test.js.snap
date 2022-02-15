@@ -13,6 +13,10 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
           "label": "Rowan Test",
           "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
         },
+        Object {
+          "label": "Resources",
+          "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resources",
+        },
       ]
     }
   />

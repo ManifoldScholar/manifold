@@ -584,7 +584,7 @@ exports[`frontend/containers/EventList/EventList matches the snapshot 1`] = `
     breadcrumbs={
       Array [
         Object {
-          "label": "Back to Project: Rowan Test",
+          "label": "Rowan Test",
           "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
         },
       ]

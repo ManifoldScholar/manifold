@@ -149,7 +149,7 @@ export class ProjectsCollectionsContainer extends Component {
         <CheckFrontendMode debugLabel="ProjectCollections" isProjectSubpage />
         <RegisterBreadcrumbs
           breadcrumbs={[
-            { to: lh.link("frontendProjectsAll"), label: "Back to projects" }
+            { to: lh.link("frontendProjectsAll"), label: "All Projects" }
           ]}
         />
         <h1 className="screen-reader-text">Project Collections</h1>

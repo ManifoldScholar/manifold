@@ -7,6 +7,7 @@ import { RedirectToFirstMatch, childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
+import { getJournalBreadcrumbs } from "./helpers";
 
 export default function ProjectWrapper({ route }) {
   const { id } = useParams();
@@ -17,6 +18,10 @@ export default function ProjectWrapper({ route }) {
   const location = useLocation();
   const isHomePage = location.pathname === path;
   const settings = useFromStore("settings", "select");
+
+  const journalBreadcrumbs = project?.attributes?.isJournalIssue
+    ? getJournalBreadcrumbs(project)
+    : null;
 
   return (
     <>
@@ -41,7 +46,8 @@ export default function ProjectWrapper({ route }) {
         childProps: {
           project,
           response,
-          settings
+          settings,
+          journalBreadcrumbs
         }
       })}
     </>

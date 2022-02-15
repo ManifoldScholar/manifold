@@ -225,7 +225,7 @@ export class ProjectCollectionDetailContainer extends Component {
           breadcrumbs={[
             {
               to: lh.link("frontendProjectCollections"),
-              label: "Back to Project Collections"
+              label: "All Project Collections"
             }
           ]}
         />

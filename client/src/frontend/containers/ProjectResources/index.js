@@ -133,6 +133,21 @@ export class ProjectResourcesContainer extends Component {
     };
   };
 
+  breadcrumbs() {
+    const { journalBreadcrumbs, project } = this.props;
+    const projectCrumb = {
+      to: lh.link("frontendProject", project.attributes.slug),
+      label: project.attributes.titlePlaintext
+    };
+    const resourcesCrumb = {
+      to: lh.link("frontendProjectResources", project.attributes.slug),
+      label: "Resources"
+    };
+    return journalBreadcrumbs
+      ? [...journalBreadcrumbs, resourcesCrumb].filter(Boolean)
+      : [projectCrumb, resourcesCrumb].filter(Boolean);
+  }
+
   render() {
     const { project, settings, resources, resourcesMeta } = this.props;
     if (!project) return <LoadingBlock />;
@@ -144,14 +159,7 @@ export class ProjectResourcesContainer extends Component {
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />
-        <RegisterBreadcrumbs
-          breadcrumbs={[
-            {
-              to: lh.link("frontendProjectDetail", project.attributes.slug),
-              label: project.attributes.titlePlaintext
-            }
-          ]}
-        />
+        <RegisterBreadcrumbs breadcrumbs={this.breadcrumbs()} />
         <EntityCollection.ProjectResources
           project={project}
           resources={resources}

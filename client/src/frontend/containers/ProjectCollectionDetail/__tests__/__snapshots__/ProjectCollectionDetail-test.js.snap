@@ -59,7 +59,7 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
     breadcrumbs={
       Array [
         Object {
-          "label": "Back to Project Collections",
+          "label": "All Project Collections",
           "to": "/projects/project-collections",
         },
       ]

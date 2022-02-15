@@ -142,8 +142,16 @@ exports[`frontend/containers/ResourceDetail/ResourceDetail matches the snapshot 
     breadcrumbs={
       Array [
         Object {
-          "label": "Back to Project Resources: Rowan Test",
+          "label": "Rowan Test",
+          "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+        },
+        Object {
+          "label": "Resources",
           "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resources",
+        },
+        Object {
+          "label": undefined,
+          "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resource/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
         },
       ]
     }

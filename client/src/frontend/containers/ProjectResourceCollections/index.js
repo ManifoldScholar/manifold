@@ -49,7 +49,8 @@ class ProjectResourceCollectionsContainer extends Component {
     resourceCollections: PropTypes.array,
     resourceCollectionsMeta: PropTypes.object,
     settings: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    journalBreadcrumbs: PropTypes.array
   };
 
   componentWillUnmount() {
@@ -83,6 +84,24 @@ class ProjectResourceCollectionsContainer extends Component {
     return <EntityCollectionPlaceholder.ResourceCollections id={id} />;
   }
 
+  breadcrumbs() {
+    const { journalBreadcrumbs, project } = this.props;
+    const projectCrumb = {
+      to: lh.link("frontendProject", project.attributes.slug),
+      label: project.attributes.titlePlaintext
+    };
+    const collectionsCrumb = {
+      to: lh.link(
+        "frontendProjectResourceCollections",
+        project.attributes.slug
+      ),
+      label: "Resource Collections"
+    };
+    return journalBreadcrumbs
+      ? [...journalBreadcrumbs, collectionsCrumb].filter(Boolean)
+      : [projectCrumb, collectionsCrumb].filter(Boolean);
+  }
+
   render() {
     const { project, settings } = this.props;
     if (!project) return <LoadingBlock />;
@@ -101,14 +120,7 @@ class ProjectResourceCollectionsContainer extends Component {
         <h1 className="screen-reader-text">
           {`${project.attributes.titlePlaintext} Resource Collections`}
         </h1>
-        <RegisterBreadcrumbs
-          breadcrumbs={[
-            {
-              to: lh.link("frontendProjectDetail", project.attributes.slug),
-              label: project.attributes.titlePlaintext
-            }
-          ]}
-        />
+        <RegisterBreadcrumbs breadcrumbs={this.breadcrumbs()} />
         {!this.hasCollections ? (
           this.renderPlaceholder(project.id)
         ) : (
