@@ -51,9 +51,9 @@ export const JournalWrapper = styled(Wrapper)`
 
   color: var(--color-neutral-text-extra-dark);
   background-color: var(--color-base-neutral-white);
-  padding-block-end: 50px;
+  padding-block-end: 20px;
 
-  ${respond(`padding-block-end: 80px`)}
+  ${respond(`padding-block-end: 20px`)}
 `;
 
 export const IssueWrapper = styled(Wrapper)`
