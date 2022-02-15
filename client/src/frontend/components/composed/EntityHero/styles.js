@@ -41,7 +41,7 @@ export const Wrapper = styled("section", transientOptions)`
 
 export const JournalWrapper = styled(Wrapper)`
   --right-column-width: 200px;
-  --left-column-width: 50%;
+  --left-column-width: 51.5%;
   --column-gap: ${fluidScale("180px", "60px")};
   --Meta-font-family: var(--font-family-heading);
   --Social-icons-color: var(--color-base-neutral80);
