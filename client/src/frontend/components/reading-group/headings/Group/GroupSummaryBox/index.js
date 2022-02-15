@@ -6,11 +6,38 @@ import { getEntityCollection } from "frontend/components/collecting/helpers";
 import Section from "./Section";
 import Item from "./Item";
 
+function getUniqueTypes(mappingValues) {
+  const allTypes = mappingValues.reduce((previous, current) => [
+    ...Object.keys(previous),
+    ...Object.keys(current)
+  ]);
+  return [...new Set(allTypes)];
+}
+
+function aggregateMappingsByType(type, mappingValues) {
+  return mappingValues
+    .reduce((previous, current) => {
+      const prevValues = previous[type] || [];
+      const currentValues = current[type] || [];
+      return prevValues.concat(currentValues);
+    })
+    .filter(Boolean);
+}
+
 function collectedIdsForCollectionByType(readingGroup) {
   const collection = getEntityCollection(readingGroup);
+
   if (!collection?.attributes) return [];
-  const mappings = collection.attributes.categoryMappings;
-  return Object.assign({}, ...Object.values(mappings));
+
+  const mappingValues = Object.values(collection.attributes.categoryMappings);
+  const uniqueTypes = getUniqueTypes(mappingValues);
+
+  return Object.assign(
+    {},
+    ...uniqueTypes.map(type => ({
+      [type]: aggregateMappingsByType(type, mappingValues)
+    }))
+  );
 }
 
 function GroupSummaryBox({ readingGroup }) {
@@ -21,8 +48,7 @@ function GroupSummaryBox({ readingGroup }) {
     annotationsCount,
     membershipsCount,
     currentUserRole,
-    currentUserAnnotationsCount = 12,
-    currentUserHighlightsCount = 9
+    currentUserCounts
   } = readingGroup.attributes;
   const collected = collectedIdsForCollectionByType(readingGroup);
 
@@ -64,10 +90,10 @@ function GroupSummaryBox({ readingGroup }) {
         </Section>
         <Section label="Yours">
           <Item labelText="Annotations" icon="interactAnnotate32">
-            {currentUserAnnotationsCount}
+            {currentUserCounts.annotationsCount}
           </Item>
           <Item labelText="Highlights" icon="interactHighlight32">
-            {currentUserHighlightsCount}
+            {currentUserCounts.highlightsCount}
           </Item>
         </Section>
         <Section label="Content" columns={2}>
