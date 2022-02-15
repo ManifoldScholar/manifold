@@ -9,7 +9,7 @@ import CollectionNavigation from "frontend/components/composed/CollectionNavigat
 
 export default function JournalsListContainer() {
   const [filters] = useFilterState();
-  const [pagination, setPageNumber] = usePaginationState();
+  const [pagination, setPageNumber] = usePaginationState(1, 8);
   const { data: journals, meta } = useFetch({
     request: [journalsAPI.index, filters, pagination]
   });
