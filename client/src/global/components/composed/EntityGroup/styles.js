@@ -92,5 +92,4 @@ export const PlaceholderText = styled.p`
   padding-block-start: ${fluidScale("20px", "10px")};
   padding-block-end: ${fluidScale("30px", "20px")};
   width: 100%;
-  text-align: center;
 `;
