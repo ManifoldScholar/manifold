@@ -19,7 +19,9 @@ const getContent = (entity, parent) => {
   } = parent?.attributes ?? {};
 
   const color = heroBackgroundColor ?? parentColor ?? "#52e3ac";
-  const logo = checkSizes(logoStyles, parentLogo, "original", "medium");
+  const logo =
+    (!parent || (parent && !heroStyles.largeLandscape)) &&
+    checkSizes(logoStyles, parentLogo, "original", "medium");
   const image = checkSizes(
     heroStyles,
     parentHero,
