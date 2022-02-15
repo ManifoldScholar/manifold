@@ -12,11 +12,6 @@ export const Label = styled.label`
   line-height: 1.25;
   cursor: pointer;
 
-  &:focus-within {
-    ${defaultFocusStyle}
-    outline-offset: -2px;
-  }
-
   & + & {
     margin-block-start: 18px;
   }
@@ -28,16 +23,21 @@ export const Label = styled.label`
   }
 `;
 
-export const Input = styled.input`
-  position: absolute;
-  z-index: -1;
-  opacity: 0;
-`;
-
 export const Item = styled.span`
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
+`;
+
+export const Input = styled.input`
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+
+  &:focus-visible ~ ${Item} {
+    ${defaultFocusStyle}
+    outline-offset: -2px;
+  }
 `;
 
 export const IconWrapper = styled.span`
