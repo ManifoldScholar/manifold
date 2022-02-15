@@ -53,7 +53,8 @@ export class ResourceDetailContainer extends PureComponent {
     settings: PropTypes.object.isRequired,
     resource: PropTypes.object,
     dispatch: PropTypes.func,
-    visibility: PropTypes.object
+    visibility: PropTypes.object,
+    journalBreadcrumbs: PropTypes.array
   };
 
   UNSAFE_componentWillMount() {
@@ -102,8 +103,45 @@ export class ResourceDetailContainer extends PureComponent {
     );
   }
 
+  breadcrumbs() {
+    const {
+      journalBreadcrumbs,
+      resourceCollection,
+      project,
+      resource
+    } = this.props;
+    const projectCrumb = {
+      to: lh.link("frontendProject", project.attributes.slug),
+      label: project.attributes.titlePlaintext
+    };
+    const resourcesCrumb = {
+      to: lh.link("frontendProjectResources", project.attributes.slug),
+      label: "Resources"
+    };
+    const collectionCrumb = resourceCollection
+      ? {
+          to: this.collectionUrl(),
+          label: resourceCollection.attributes.title
+        }
+      : null;
+    const currentCrumb = {
+      to: this.resourceUrl(),
+      label: resource.attributes.titlePlaintext
+    };
+    return journalBreadcrumbs
+      ? [
+          ...journalBreadcrumbs,
+          resourcesCrumb,
+          collectionCrumb,
+          currentCrumb
+        ].filter(Boolean)
+      : [projectCrumb, resourcesCrumb, collectionCrumb, currentCrumb].filter(
+          Boolean
+        );
+  }
+
   render() {
-    const { project, resource, resourceCollection, settings } = this.props;
+    const { project, resource, settings } = this.props;
 
     if (!project || !resource) {
       return <LoadingBlock />;
@@ -124,25 +162,7 @@ export class ResourceDetailContainer extends PureComponent {
             resource.attributes.variantThumbnailStyles.mediumSquare
           }
         />
-        {resourceCollection ? (
-          <RegisterBreadcrumbs
-            breadcrumbs={[
-              {
-                to: this.collectionUrl(),
-                label: `Back to Collection: ${resourceCollection.attributes.title}`
-              }
-            ]}
-          />
-        ) : (
-          <RegisterBreadcrumbs
-            breadcrumbs={[
-              {
-                to: this.projectUrl(),
-                label: `Back to Project Resources: ${project.attributes.titlePlaintext}`
-              }
-            ]}
-          />
-        )}
+        <RegisterBreadcrumbs breadcrumbs={this.breadcrumbs()} />
         {resource ? (
           <Resource.Detail
             projectId={project.id}

@@ -363,6 +363,14 @@ exports[`frontend/containers/ResourceCollectionDetail matches the snapshot 1`] =
           "label": "Rowan Test",
           "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
         },
+        Object {
+          "label": "Resources",
+          "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resources",
+        },
+        Object {
+          "label": "Rowan",
+          "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resource-collection/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+        },
       ]
     }
   />

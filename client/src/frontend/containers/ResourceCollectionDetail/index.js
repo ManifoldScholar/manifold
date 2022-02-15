@@ -112,7 +112,8 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     settings: PropTypes.object.isRequired,
     resources: PropTypes.array,
     resourcesMeta: PropTypes.object,
-    history: PropTypes.object
+    history: PropTypes.object,
+    journalBreadcrumbs: PropTypes.array
   };
 
   constructor(props) {
@@ -198,6 +199,31 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     };
   };
 
+  breadcrumbs() {
+    const { journalBreadcrumbs, resourceCollection, project } = this.props;
+    const projectCrumb = {
+      to: lh.link("frontendProject", project.attributes.slug),
+      label: project.attributes.titlePlaintext
+    };
+    const resourcesCrumb = {
+      to: lh.link("frontendProjectResources", project.attributes.slug),
+      label: "Resources"
+    };
+    const collectionCrumb = resourceCollection
+      ? {
+          to: lh.link(
+            "frontendProjectResourceCollection",
+            this.props.project.attributes.slug,
+            this.props.resourceCollection.attributes.slug
+          ),
+          label: resourceCollection.attributes.title
+        }
+      : null;
+    return journalBreadcrumbs
+      ? [...journalBreadcrumbs, resourcesCrumb, collectionCrumb].filter(Boolean)
+      : [projectCrumb, resourcesCrumb, collectionCrumb].filter(Boolean);
+  }
+
   render() {
     const { project, resourceCollection, settings } = this.props;
     const filter = this.state.filter;
@@ -225,14 +251,7 @@ export class ResourceCollectionDetailContainer extends PureComponent {
           description={resourceCollection.attributes.description}
           image={resourceCollection.attributes.thumbnailStyles.medium}
         />
-        <RegisterBreadcrumbs
-          breadcrumbs={[
-            {
-              to: lh.link("frontendProjectDetail", project.attributes.slug),
-              label: project.attributes.titlePlaintext
-            }
-          ]}
-        />
+        <RegisterBreadcrumbs breadcrumbs={this.breadcrumbs()} />
         {this.props.slideshowResources && this.props.resources ? (
           <ResourceCollection.Detail
             dispatch={this.props.dispatch}

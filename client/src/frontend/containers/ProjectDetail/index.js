@@ -8,13 +8,13 @@ import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import IssueDetail from "frontend/containers/IssueDetail";
 
-function ProjectDetailContainer({ project, response }) {
+function ProjectDetailContainer({ project, response, journalBreadcrumbs }) {
   if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
 
   if (!project) return null;
 
   if (project.attributes?.isJournalIssue)
-    return <IssueDetail project={project} />;
+    return <IssueDetail project={project} breadcrumbs={journalBreadcrumbs} />;
 
   return (
     <>
@@ -30,7 +30,8 @@ ProjectDetailContainer.displayName = "Frontend.Containers.ProjectDetail";
 
 ProjectDetailContainer.propTypes = {
   project: PropTypes.object,
-  response: PropTypes.object
+  response: PropTypes.object,
+  journalBreadcrumbs: PropTypes.array
 };
 
 export default ProjectDetailContainer;

@@ -10,7 +10,7 @@ exports[`frontend/containers/ProjectCollections/ProjectCollections matches the s
     breadcrumbs={
       Array [
         Object {
-          "label": "Back to projects",
+          "label": "All Projects",
           "to": "/projects/all",
         },
       ]
