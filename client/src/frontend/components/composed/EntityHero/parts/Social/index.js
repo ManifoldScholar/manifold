@@ -36,15 +36,17 @@ export default function HeroSocial({ hashtag, twitter, facebook, instagram }) {
       {twitter && socialLink("twitter", twitter)}
       {facebook && socialLink("facebook", facebook)}
       {instagram && socialLink("instagram", instagram)}
-      {hashtag && (
-        <Styled.Hashtag
-          target="_blank"
-          rel="noopener noreferrer"
-          href={`https://twitter.com/hashtag/${hashtag}`}
-        >
-          {`#${hashtag}`}
-        </Styled.Hashtag>
-      )}
+      <div>
+        {hashtag && (
+          <Styled.Hashtag
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://twitter.com/hashtag/${hashtag}`}
+          >
+            {`#${hashtag}`}
+          </Styled.Hashtag>
+        )}
+      </div>
     </Styled.SocialLinks>
   );
 }
