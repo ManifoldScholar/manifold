@@ -95,7 +95,7 @@ class JournalIssue < ApplicationRecord
       search_result_type: search_result_type,
       title: title,
       full_text: description_plaintext,
-      keywords: (tag_list + project_texts.map(&:title) + hashtag).reject(&:blank?),
+      keywords: (tag_list + texts.map(&:title) + hashtag).reject(&:blank?),
       creator: creator&.full_name,
       makers: makers.map(&:full_name),
       metadata: metadata.values.reject(&:blank?)
