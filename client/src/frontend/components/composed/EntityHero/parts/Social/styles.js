@@ -13,7 +13,7 @@ export const Hashtag = styled.a`
   color: inherit;
   text-decoration: none;
   font-family: var(--font-family-heading);
-  display: block;
+  display: inline-block;
   font-size: 16px;
   font-weight: var(--font-weight-semibold);
 
@@ -31,7 +31,7 @@ export const Link = styled.a`
     margin-left: -5px;
   }
 
-  + ${Hashtag} {
+  + div > ${Hashtag} {
     margin-block-start: 15px;
   }
 `;
