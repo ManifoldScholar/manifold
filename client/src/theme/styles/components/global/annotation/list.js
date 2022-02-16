@@ -10,7 +10,6 @@ export default `
   .selection-group-heading {
     ${panelRounded}
     padding: 0.833em min(3.75vw, 30px);
-    margin-bottom: 26px;
     font-size: ${fluidScale("18px", "21px")};
     font-family: var(--font-family-sans);
     font-weight: var(--font-weight-medium);

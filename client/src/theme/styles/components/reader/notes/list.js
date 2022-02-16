@@ -8,5 +8,9 @@ export default `
     & > li + li {
       padding-top: 43px;
     }
+
+    &--pad-top {
+      padding-block-start: 40px;
+    }
   }
 `;
