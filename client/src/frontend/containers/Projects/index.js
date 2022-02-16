@@ -40,6 +40,7 @@ export default function ProjectsContainer() {
           projects={projects}
           meta={meta}
           filterProps={{
+            active: ["sortFilter", "featuredAndSubjectFilter"],
             filterChangeHandler: param => setFilters({ newState: param }),
             initialFilterState: filters,
             resetFilterState: baseFilters,

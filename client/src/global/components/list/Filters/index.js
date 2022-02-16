@@ -24,6 +24,15 @@ function Filters({
     if (searchInput.current) searchInput.current.focus();
   }
 
+  /* eslint-disable no-nested-ternary */
+  const resetLabel =
+    filters.length && searchProps
+      ? "Reset Search + Filters"
+      : filters.length
+      ? "Reset Filters"
+      : "Reset Search";
+  /* eslint-disable no-nested-ternary */
+
   return (
     <Styled.Wrapper
       as={onSubmit ? "form" : "div"}
@@ -42,7 +51,7 @@ function Filters({
       </Styled.SelectGroup>
       {showResetButton && (
         <Styled.ResetButton type="reset" onClick={handleReset}>
-          {filters.length ? "Reset Search + Filters" : "Reset Search"}
+          {resetLabel}
         </Styled.ResetButton>
       )}
     </Styled.Wrapper>

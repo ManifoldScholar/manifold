@@ -90,7 +90,8 @@ function ReaderFullNotesContainer({
 
   function getMemberships() {
     if (readingGroup === "me") return [];
-    return readingGroup.relationships.readingGroupMemberships;
+    const rgms = readingGroup.relationships.readingGroupMemberships;
+    return rgms?.length ? rgms : [];
   }
 
   function getOverlayPropsForGroup() {
@@ -105,6 +106,9 @@ function ReaderFullNotesContainer({
 
   const sortedAnnotations = mapAnnotationsToSections();
   const memberships = getMemberships();
+  const sections = text.attributes.sectionsMap?.length
+    ? text.attributes.sectionsMap
+    : [];
 
   return (
     <Overlay
