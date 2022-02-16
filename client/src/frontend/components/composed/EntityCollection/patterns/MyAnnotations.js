@@ -18,14 +18,13 @@ function MyAnnotationsEntityCollection({
   if (!annotations || !annotationsMeta) return null;
 
   const hasAnnotations = annotations.length > 0;
-  const hasAnnotatedTexts = hasAnnotations && annotatedTexts?.length > 0;
 
   return (
     <EntityCollection
       title="My Notes + Comments"
       icon="NotesUnique"
       UtilityComponent={props =>
-        hasAnnotatedTexts && (
+        hasAnnotations && (
           <Annotation.NoteFilter
             {...props}
             {...annotationsMeta}
