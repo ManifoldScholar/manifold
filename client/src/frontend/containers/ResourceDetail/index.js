@@ -110,6 +110,9 @@ export class ResourceDetailContainer extends PureComponent {
       project,
       resource
     } = this.props;
+    const isCollectionMember = !!resourceCollection?.relationships?.resources?.find(
+      r => r.id === resource.id
+    );
     const projectCrumb = {
       to: lh.link("frontendProject", project.attributes.slug),
       label: project.attributes.titlePlaintext
@@ -118,7 +121,7 @@ export class ResourceDetailContainer extends PureComponent {
       to: lh.link("frontendProjectResources", project.attributes.slug),
       label: "Resources"
     };
-    const collectionCrumb = resourceCollection
+    const collectionCrumb = isCollectionMember
       ? {
           to: this.collectionUrl(),
           label: resourceCollection.attributes.title
