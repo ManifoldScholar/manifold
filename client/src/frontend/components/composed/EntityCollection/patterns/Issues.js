@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import get from "lodash/get";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
-import IssueList from "frontend/components/issue-list";
+import { ListFiltersWrapper } from "global/components/list";
 import EntityCollection from "../EntityCollection";
 import * as shapes from "../shapes";
 
@@ -22,7 +22,7 @@ function IssuesEntityCollection({
       UtilityComponent={
         !issuesMeta || !filterProps
           ? () => <></>
-          : props => <IssueList.Filters {...props} {...filterProps} />
+          : props => <ListFiltersWrapper {...props} {...filterProps} />
       }
       BodyComponent={props => (
         <ThumbnailGrid {...props}>

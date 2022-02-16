@@ -4,7 +4,7 @@ import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
-import ProjectList from "frontend/components/project-list";
+import { ListFiltersWrapper } from "global/components/list";
 import EntityCollection from "../EntityCollection";
 import * as shapes from "../shapes";
 
@@ -22,7 +22,7 @@ function ProjectsEntityCollection({
       title="All Projects"
       icon="projects64"
       UtilityComponent={props =>
-        showFilters && <ProjectList.Filters {...props} {...filterProps} />
+        showFilters && <ListFiltersWrapper {...props} {...filterProps} />
       }
       BodyComponent={props => (
         <ThumbnailGrid {...props}>

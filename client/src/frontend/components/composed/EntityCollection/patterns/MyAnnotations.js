@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import Annotation from "global/components/Annotation";
+import { ListFiltersWrapper } from "global/components/list";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "../EntityCollection";
 
