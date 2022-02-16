@@ -15,7 +15,10 @@ export default class GroupedBySection extends PureComponent {
   };
 
   get notesListClassNames() {
-    return "notes-list";
+    return classNames({
+      "notes-list": true,
+      "notes-list--pad-top": true
+    });
   }
 
   get selectionListClassNames() {
