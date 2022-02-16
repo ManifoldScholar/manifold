@@ -133,7 +133,7 @@ class ReadingGroup extends Component {
         breadcrumbs: [
           {
             to: lh.link("frontendPublicReadingGroups"),
-            label: "Back to: Public Reading Groups"
+            label: "Public Reading Groups"
           }
         ]
       };
@@ -141,7 +141,7 @@ class ReadingGroup extends Component {
       breadcrumbs: [
         {
           to: lh.link("frontendMyReadingGroups"),
-          label: "Back to: My Reading Groups"
+          label: "My Reading Groups"
         }
       ]
     };
