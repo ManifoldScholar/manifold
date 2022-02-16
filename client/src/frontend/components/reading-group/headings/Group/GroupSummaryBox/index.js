@@ -6,32 +6,36 @@ import { getEntityCollection } from "frontend/components/collecting/helpers";
 import Section from "./Section";
 import Item from "./Item";
 
-function getUniqueTypes(mappingValues) {
-  const allTypes = mappingValues.reduce((previous, current) => [
-    ...Object.keys(previous),
-    ...Object.keys(current)
-  ]);
+function getUniqueTypes(mappings) {
+  const allTypes = mappings.flatMap(category => Object.keys(category));
   return [...new Set(allTypes)];
 }
 
 function aggregateMappingsByType(type, mappingValues) {
-  return mappingValues
-    .reduce((previous, current) => {
-      const prevValues = previous[type] || [];
-      const currentValues = current[type] || [];
-      return prevValues.concat(currentValues);
-    })
-    .filter(Boolean);
+  // get arrays of collected IDs by type from each category
+  const valuesByType = mappingValues.map(category => category[type] || []);
+  // reduce to a single array
+  return valuesByType.reduce(
+    (previous, current) => previous.concat(current),
+    []
+  );
 }
 
 function collectedIdsForCollectionByType(readingGroup) {
   const collection = getEntityCollection(readingGroup);
 
-  if (!collection?.attributes) return [];
+  if (!collection?.attributes) return {};
 
+  // get an array of objects containing collected IDs by type
   const mappingValues = Object.values(collection.attributes.categoryMappings);
+
+  // if nothing's been collected, just return an empty object
+  if (!mappingValues.length) return {};
+
+  // get an array of unique types for all collected items
   const uniqueTypes = getUniqueTypes(mappingValues);
 
+  // return an object with counts by type
   return Object.assign(
     {},
     ...uniqueTypes.map(type => ({
