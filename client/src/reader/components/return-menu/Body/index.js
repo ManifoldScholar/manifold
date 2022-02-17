@@ -8,6 +8,7 @@ import * as Styled from "./styles";
 
 function ReturnMenuBody({
   returnUrl,
+  isJournalArticle,
   projectTitle: entityTitle,
   toggleSignInUpOverlay,
   moreLink,
@@ -22,15 +23,28 @@ function ReturnMenuBody({
         <Styled.Item>
           <Styled.ItemLink to={returnUrl}>
             <Styled.LinkIcon icon="circleArrowLeft64" size={36.923} />
-            <Styled.LinkText>{"Project Home"}</Styled.LinkText>
+            <Styled.LinkText>
+              {isJournalArticle ? "Issue Home" : "Project Home"}
+            </Styled.LinkText>
             <Styled.EntityTitle>{entityTitle}</Styled.EntityTitle>
           </Styled.ItemLink>
         </Styled.Item>
         {context.isLibrary && !isLibraryDisabled && (
           <Styled.Item>
-            <Styled.ItemLink to={lh.link("frontend")}>
-              <Styled.LinkIcon icon="projects64" size={36.923} />
-              <Styled.LinkText>{"Projects"}</Styled.LinkText>
+            <Styled.ItemLink
+              to={lh.link(
+                isJournalArticle
+                  ? "frontendJournalsList"
+                  : "frontendProjectsAll"
+              )}
+            >
+              <Styled.LinkIcon
+                icon={isJournalArticle ? "journals64" : "projects64"}
+                size={36.923}
+              />
+              <Styled.LinkText>
+                {isJournalArticle ? "Journals" : "Projects"}
+              </Styled.LinkText>
             </Styled.ItemLink>
           </Styled.Item>
         )}
