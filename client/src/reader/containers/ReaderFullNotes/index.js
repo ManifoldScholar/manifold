@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import groupBy from "lodash/groupBy";
+import isEqual from "lodash/isEqual";
+import { meAPI, readingGroupsAPI } from "api";
 import { commonActions as commonActionsHelper } from "actions/helpers";
 import lh from "helpers/linkHandler";
-import Annotation from "global/components/Annotation";
 import Overlay from "global/components/Overlay";
-import EmptyMessage from "reader/components/notes/EmptyMessage";
-import { useDispatchAnnotations, useSelectAnnotations } from "hooks";
+import { useFetch, useFilterState, usePaginationState } from "hooks";
 import withReadingGroups from "hoc/withReadingGroups";
+import EntityCollection from "frontend/components/composed/EntityCollection";
 
 const INITIAL_FORMATS = ["highlight", "annotation", "bookmark"];
 const INITIAL_VISIBLE_FILTER_STATE = {
@@ -15,24 +16,6 @@ const INITIAL_VISIBLE_FILTER_STATE = {
   textSection: "",
   readingGroupMembership: ""
 };
-const DEFAULT_PAGE = 1;
-const PER_PAGE = 20;
-
-function setInitialFilterState(text) {
-  return {
-    orphaned: false,
-    text: text?.id,
-    formats: [...INITIAL_FORMATS],
-    ...INITIAL_VISIBLE_FILTER_STATE
-  };
-}
-
-function setInitialPaginationState() {
-  return {
-    number: DEFAULT_PAGE,
-    size: PER_PAGE
-  };
-}
 
 function getSectionName(text, sectionId) {
   const { sectionsMap } = text.attributes;
@@ -50,23 +33,26 @@ function ReaderFullNotesContainer({
   dispatch,
   closeCallback
 }) {
-  const [filterState, setFilterState] = useState(setInitialFilterState(text));
-  const [paginationState, setPaginationState] = useState(
-    setInitialPaginationState(location)
-  );
+  const initialFilters = useMemo(() => {
+    return {
+      orphaned: false,
+      text: text?.id,
+      formats: [...INITIAL_FORMATS],
+      ...INITIAL_VISIBLE_FILTER_STATE
+    };
+  }, [text]);
 
-  useDispatchAnnotations(
-    filterState,
-    paginationState,
-    currentGroupId,
-    "reader",
-    true
-  );
-  const {
-    annotations,
-    annotationsMeta,
-    annotationsLoaded
-  } = useSelectAnnotations(currentGroupId, "reader", true);
+  const [pagination, setPageNumber] = usePaginationState();
+  const [filters, setFilters] = useFilterState(initialFilters);
+
+  const me = currentGroupId === "me";
+  const endpoint = me ? meAPI.annotations : readingGroupsAPI.annotations;
+  const args = me
+    ? [filters, pagination]
+    : [currentGroupId, filters, pagination];
+  const { data: annotations, meta } = useFetch({
+    request: [endpoint, ...args]
+  });
 
   const commonActions = commonActionsHelper(dispatch);
   const readingGroup =
@@ -102,23 +88,6 @@ function ReaderFullNotesContainer({
     history.push(url);
   }
 
-  function handleFilterChange(filterParam) {
-    setFilterState(prevState => ({ ...prevState, ...filterParam }));
-  }
-
-  function handlePageChange(pageParam) {
-    setPaginationState(prevState => {
-      return { ...prevState, number: pageParam };
-    });
-  }
-
-  const pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      handlePageChange(pageParam);
-    };
-  };
-
   function getMemberships() {
     if (readingGroup === "me") return [];
     return readingGroup.relationships.readingGroupMemberships;
@@ -132,23 +101,9 @@ function ReaderFullNotesContainer({
     };
   }
 
-  function filtersHaveChanged() {
-    const initialState = JSON.stringify(setInitialFilterState(text));
-    const currentState = JSON.stringify(filterState);
-    return initialState !== currentState;
-  }
-
-  function renderEmptyMessage() {
-    const filtersChanged = filtersHaveChanged();
-    if (filtersChanged) return <EmptyMessage.NoResults />;
-    if (readingGroup === "me") return <EmptyMessage.TextNotAnnotatedByMe />;
-    return <EmptyMessage.TextNotAnnotatedByGroup readingGroup={readingGroup} />;
-  }
-
-  if (!annotationsLoaded || !annotations || !annotationsMeta) return null;
+  if (!annotations || !meta) return null;
 
   const sortedAnnotations = mapAnnotationsToSections();
-  const hasSortedAnnotations = !!sortedAnnotations.length;
   const memberships = getMemberships();
 
   return (
@@ -157,23 +112,27 @@ function ReaderFullNotesContainer({
       contentWidth={950}
       {...getOverlayPropsForGroup()}
     >
-      <Annotation.NoteFilter
-        filterChangeHandler={handleFilterChange}
-        pagination={annotationsMeta.pagination}
-        initialFilterState={INITIAL_VISIBLE_FILTER_STATE}
-        memberships={memberships}
-        sections={text.attributes.sectionsMap}
-        showSearch
+      <EntityCollection.ReaderFullNotes
+        handleVisitAnnotation={handleVisitAnnotation}
+        annotationsMeta={meta}
+        groupedAnnotations={sortedAnnotations}
+        filtersChanged={!isEqual(filters, initialFilters)}
+        readingGroup={readingGroup}
+        filterProps={{
+          memberships,
+          sections: text.attributes.sectionsMap,
+          filterChangeHandler: param => setFilters({ newState: param }),
+          initialFilterState: filters,
+          resetFilterState: initialFilters,
+          showSearch: true,
+          pagination: meta.pagination
+        }}
+        paginationProps={{
+          paginationClickHandler: page => () => setPageNumber(page),
+          paginationTarget: "#"
+        }}
+        nested
       />
-      {!hasSortedAnnotations && renderEmptyMessage()}
-      {hasSortedAnnotations && (
-        <Annotation.List.GroupedBySection
-          handleVisitAnnotation={handleVisitAnnotation}
-          groupedAnnotations={sortedAnnotations}
-          pagination={annotationsMeta.pagination}
-          paginationClickHandler={pageChangeHandlerCreator}
-        />
-      )}
     </Overlay>
   );
 }
