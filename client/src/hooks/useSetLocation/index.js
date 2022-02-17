@@ -16,7 +16,7 @@ export default function useSetLocation({ filters = {}, page }) {
       pathname,
       search
     });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [filters, history, pathname, page]);
 
-  useEffect(() => updateUrlFromState(), [JSON.stringify(filters), page]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => updateUrlFromState(), [updateUrlFromState]);
 }
