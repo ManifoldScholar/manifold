@@ -192,7 +192,8 @@ export default `
       }
 
       .button-secondary {
-        color: var(--color-neutral-text-dark);
+        color: var(--color-neutral-text-extra-dark);
+        border-radius: var(--box-border-radius);
 
         &:disabled {
           color: inherit;
