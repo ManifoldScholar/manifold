@@ -2,21 +2,24 @@ import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 import Search from "./Search";
-import Filter, { filterShape } from "./Filter";
+import Filter from "./Filter";
+import { useListFilters } from "hooks";
 import * as Styled from "./styles";
 
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
-function Filters({
-  searchProps,
-  filters,
-  onSubmit,
-  onReset,
-  showResetButton,
-  setScreenReaderStatus,
-  className
-}) {
+function Filters({ setScreenReaderStatus, className, ...props }) {
   const searchInput = useRef(null);
+
+  const {
+    searchProps,
+    activeFilters,
+    onSubmit,
+    onReset,
+    showReset
+  } = useListFilters({
+    ...props
+  });
 
   function handleReset() {
     onReset();
@@ -26,9 +29,9 @@ function Filters({
 
   /* eslint-disable no-nested-ternary */
   const resetLabel =
-    filters.length && searchProps
+    activeFilters?.length && searchProps
       ? "Reset Search + Filters"
-      : filters.length
+      : activeFilters?.length
       ? "Reset Filters"
       : "Reset Search";
   /* eslint-disable no-nested-ternary */
@@ -37,19 +40,20 @@ function Filters({
     <Styled.Wrapper
       as={onSubmit ? "form" : "div"}
       onSubmit={onSubmit}
-      $count={filters.length}
+      $count={activeFilters?.length || 0}
       $searchCount={!isEmpty(searchProps) ? 1 : 0}
       className={className}
     >
       {!isEmpty(searchProps) && (
         <Search inputRef={searchInput} {...searchProps} />
       )}
-      <Styled.SelectGroup $count={filters.length}>
-        {filters.map(filter => (
-          <Filter key={filter.label} {...filter} />
-        ))}
+      <Styled.SelectGroup $count={activeFilters?.length || 0}>
+        {activeFilters &&
+          activeFilters.map(filter => (
+            <Filter key={filter.label} {...filter} />
+          ))}
       </Styled.SelectGroup>
-      {showResetButton && (
+      {showReset && (
         <Styled.ResetButton type="reset" onClick={handleReset}>
           {resetLabel}
         </Styled.ResetButton>
@@ -61,18 +65,10 @@ function Filters({
 Filters.displayName = "Global.List.Filters";
 
 Filters.propTypes = {
-  searchProps: PropTypes.shape({
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
-  }),
-  filters: PropTypes.arrayOf(
-    PropTypes.shape({
-      ...filterShape
-    }).isRequired
-  ),
-  onSubmit: PropTypes.func,
-  onReset: PropTypes.func,
-  showResetButton: PropTypes.bool,
+  filterChangeHandler: PropTypes.func.isRequired,
+  initialFilterState: PropTypes.object,
+  resetFilterState: PropTypes.object,
+  active: PropTypes.arrayOf(PropTypes.string),
   setScreenReaderStatus: PropTypes.func.isRequired,
   className: PropTypes.string
 };
