@@ -260,6 +260,9 @@ export default class Header extends Component {
               projectTitle={
                 this.props.text.relationships.project.attributes.titlePlaintext
               }
+              isJournalArticle={
+                this.props.text.relationships.project.attributes.isJournalIssue
+              }
               toggleSignInUpOverlay={
                 this.props.commonActions.toggleSignInUpOverlay
               }
