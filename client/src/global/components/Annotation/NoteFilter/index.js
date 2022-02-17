@@ -35,7 +35,7 @@ export default class AnnotationNoteFilter extends React.PureComponent {
   }
 
   get showResetButton() {
-    if (!this.props.showSearch) return false;
+    if (!this.props.showSearch || !this.props.filtersChanged) return false;
 
     const filterValues = Object.values(this.state.filters);
     const appliedFilters = filterValues.filter(Boolean);
@@ -160,7 +160,7 @@ export default class AnnotationNoteFilter extends React.PureComponent {
   };
 
   resetFilters = () => {
-    const newState = this.initialState(this.props.initialFilterState);
+    const newState = this.initialState(this.props.resetFilterState);
 
     this.setState(newState, () =>
       this.props.filterChangeHandler(this.state.filters)
