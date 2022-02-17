@@ -39,6 +39,8 @@ class AnnotationEditor extends PureComponent {
   }
 
   UNSAFE_componentWillMount() {
+    if (!this.shouldShowReadingGroups) return;
+
     const { annotation } = this.props;
     if (annotation.id) {
       this.setReadingGroupFromAnnotationEdit();
@@ -51,7 +53,6 @@ class AnnotationEditor extends PureComponent {
   }
 
   componentWillUnmount() {
-    clearTimeout(this.focusTimeout);
     document.removeEventListener("mouseup", this.handleClick, false);
   }
 
@@ -167,6 +168,7 @@ class AnnotationEditor extends PureComponent {
 
   handleClick = event => {
     if (
+      !this.picker ||
       this.picker.contains(event.target) ||
       this.pickerToggle.contains(event.target) ||
       !this.state.pickerOpen
