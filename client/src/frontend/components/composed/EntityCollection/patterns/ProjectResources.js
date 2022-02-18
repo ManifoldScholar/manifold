@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import ResourceList from "frontend/components/resource-list";
-import { ListFilters } from "global/components/list";
 import EntityCollection from "../EntityCollection";
 import * as shapes from "../shapes";
 
@@ -22,7 +21,7 @@ function ProjectResourcesEntityCollection({
     <EntityCollection
       title="All Project Resources"
       icon="resources64"
-      UtilityComponent={() => showFilters && <ListFilters {...filterProps} />}
+      filterProps={showFilters ? filterProps : null}
       BodyComponent={props => (
         <ResourceList.Cards
           project={project}

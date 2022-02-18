@@ -4,7 +4,6 @@ import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
-import { ListFilters } from "global/components/list";
 import EntityCollection from "../EntityCollection";
 import * as shapes from "../shapes";
 
@@ -21,7 +20,7 @@ function ProjectsEntityCollection({
     <EntityCollection
       title="All Projects"
       icon="projects64"
-      UtilityComponent={() => showFilters && <ListFilters {...filterProps} />}
+      filterProps={showFilters ? filterProps : null}
       BodyComponent={props => (
         <ThumbnailGrid {...props}>
           {({ stack }) =>

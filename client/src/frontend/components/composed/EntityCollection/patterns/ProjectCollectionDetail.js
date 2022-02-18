@@ -4,7 +4,6 @@ import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
-import { ListFilters } from "global/components/list";
 import EntityCollection from "../EntityCollection";
 import { ProjectCollectionIcon } from "../parts";
 import { getHeroImage, getHeaderLayout } from "../helpers";
@@ -36,7 +35,7 @@ function ProjectCollectionDetailEntityCollection({
       )}
       image={image}
       headerLayout={headerLayout}
-      UtilityComponent={() => showFilters && <ListFilters {...filterProps} />}
+      filterProps={showFilters ? filterProps : null}
       BodyComponent={props =>
         !!projects?.length && (
           <ThumbnailGrid {...props}>

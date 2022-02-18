@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import Annotation from "global/components/Annotation";
-import { ListFilters } from "global/components/list";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "../EntityCollection";
 
@@ -24,9 +23,7 @@ function MyAnnotationsEntityCollection({
     <EntityCollection
       title="My Notes + Comments"
       icon="NotesUnique"
-      UtilityComponent={() =>
-        hasAnnotations && <ListFilters {...filterProps} />
-      }
+      filterProps={hasAnnotations ? filterProps : null}
       countProps={
         isEmpty(annotationsMeta)
           ? {}

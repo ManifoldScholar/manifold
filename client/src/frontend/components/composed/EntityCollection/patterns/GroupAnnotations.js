@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import Annotation from "global/components/Annotation";
-import { ListFilters } from "global/components/list";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "../EntityCollection";
 
@@ -22,10 +21,8 @@ function GroupAnnotationsEntityCollection({
 
   return (
     <EntityCollection
-      UtilityComponent={
-        isEmpty(annotationsMeta) || isEmpty(filterProps)
-          ? () => <></>
-          : () => <ListFilters {...filterProps} />
+      filterProps={
+        isEmpty(annotationsMeta) || isEmpty(filterProps) ? null : filterProps
       }
       countProps={
         isEmpty(annotationsMeta)
