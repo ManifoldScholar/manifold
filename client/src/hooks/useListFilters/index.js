@@ -82,6 +82,7 @@ export default function useListFilters({
   const onReset = useCallback(() => {
     const newState = reset || init;
     setFilters(newState);
+    setSearch("");
   }, [reset, init]);
 
   const searchProps = options?.hideSearch
