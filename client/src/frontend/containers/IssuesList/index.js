@@ -5,8 +5,8 @@ import {
   useFetch,
   usePaginationState,
   useFilterState,
-  useSetLocation,
-  useFromStore
+  useSetLocation
+  // useFromStore
 } from "hooks";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "frontend/components/composed/EntityCollection";
@@ -15,7 +15,8 @@ import CollectionNavigation from "frontend/components/composed/CollectionNavigat
 import { journalIssuesAPI } from "api";
 
 export default function IssuesListContainer() {
-  const subjects = useFromStore("feSubjects", "select");
+  // Add back in when api supports filters
+  // const subjects = useFromStore("feSubjects", "select");
 
   const [pagination, setPageNumber] = usePaginationState();
   const baseFilters = { standaloneModeEnforced: false };
@@ -41,10 +42,9 @@ export default function IssuesListContainer() {
           issues={issues}
           issuesMeta={meta}
           filterProps={{
-            filterChangeHandler: param => setFilters({ newState: param }),
-            initialFilterState: filters,
-            resetFilterState: baseFilters,
-            subjects
+            onFilterChange: param => setFilters({ newState: param }),
+            init: filters,
+            reset: baseFilters
           }}
           paginationProps={{
             paginationClickHandler: page => () => setPageNumber(page),
@@ -59,7 +59,3 @@ export default function IssuesListContainer() {
     </>
   );
 }
-
-IssuesListContainer.propTypes = {
-  location: PropTypes.object.isRequired
-};

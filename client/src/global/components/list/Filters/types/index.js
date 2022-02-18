@@ -1,13 +1,19 @@
-import { sortFilter } from "./sort";
-import { featuredAndSubjectFilter } from "./featuredAndSubject";
-import { membershipFilter } from "./membership";
-import { sectionFilter } from "./section";
-import { textFilter } from "./text";
+import { sortFilter as sort } from "./sort";
+import { featuredAndSubjectFilter as subjects } from "./featuredAndSubject";
+import { membershipFilter as memberships } from "./membership";
+import { sectionFilter as sections } from "./section";
+import { textFilter as texts } from "./text";
+import { kindFilter as kinds } from "./kind";
+import { tagFilter as tags } from "./tag";
+import { orderCollectionFilter as orderCollection } from "./orderCollection";
 
 export default {
-  sortFilter,
-  featuredAndSubjectFilter,
-  membershipFilter,
-  sectionFilter,
-  textFilter
+  sort,
+  subjects,
+  memberships,
+  sections,
+  texts,
+  kinds,
+  tags,
+  orderCollection
 };

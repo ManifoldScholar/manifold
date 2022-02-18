@@ -5,6 +5,7 @@ import get from "lodash/get";
 import Annotation from "global/components/Annotation";
 import EntityCollection from "../EntityCollection";
 import EmptyMessage from "reader/components/notes/EmptyMessage";
+import { ListFilters } from "global/components/list";
 
 function ReaderFullNotesEntityCollection({
   groupedAnnotations,
@@ -26,13 +27,7 @@ function ReaderFullNotesEntityCollection({
 
   return (
     <EntityCollection
-      UtilityComponent={props => (
-        <Annotation.NoteFilter
-          {...props}
-          {...filterProps}
-          filtersChanged={filtersChanged}
-        />
-      )}
+      UtilityComponent={() => <ListFilters {...filterProps} />}
       countProps={
         isEmpty(annotationsMeta)
           ? {}

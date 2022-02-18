@@ -4,26 +4,27 @@ import filterTypes from "global/components/list/Filters/types";
 import isEqual from "lodash/isEqual";
 
 export default function useListFilters({
-  filterChangeHandler,
+  onFilterChange,
   init,
   reset,
-  active = [],
-  ...params
+  options
 }) {
   const [filters, setFilters] = useState(init || {});
   const prevFilters = useRef(init || {});
   const [search, setSearch] = useState("");
 
-  const showReset = !isEqual(reset, filters);
-
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (!isEqual(filters, prevFilters.current)) {
       prevFilters.current = filters;
-      filterChangeHandler(filters);
+      onFilterChange(filters);
     }
   }, [filters]);
   /* eslint-disable react-hooks/exhaustive-deps */
+
+  useEffect(() => {
+    setFilters(init);
+  }, [init]);
 
   const updateFilterState = (e, label) => {
     e.preventDefault();
@@ -49,21 +50,41 @@ export default function useListFilters({
     ? "Featured Issues"
     : "Featured";
 
-  const activeFilters = active.length
-    ? active.map(type =>
+  const activeTypes = options
+    ? Object.keys(options)
+        .filter(option => Object.keys(filterTypes).includes(option))
+        .filter(option =>
+          Array.isArray(options[option])
+            ? options[option].length
+            : options[option]
+        )
+    : [];
+  const finalTypes = options?.featured
+    ? [...activeTypes, "subjects"]
+    : activeTypes;
+  const activeFilters = finalTypes.length
+    ? finalTypes.map(type =>
         filterTypes[type](filters, updateFilterState, {
-          ...params,
+          ...options,
           featuredLabel
         })
       )
     : [];
+
+  /* eslint-disable no-nested-ternary */
+  const showReset = !reset
+    ? false
+    : !activeTypes.length
+    ? !!filters?.keyword
+    : !isEqual(reset, filters);
+  /* eslint-disable no-nested-ternary */
 
   const onReset = useCallback(() => {
     const newState = reset || init;
     setFilters(newState);
   }, [reset, init]);
 
-  const searchProps = params.hideSearch
+  const searchProps = options?.hideSearch
     ? null
     : {
         value: search,

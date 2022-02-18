@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import ResourceList from "frontend/components/resource-list";
+import { ListFilters } from "global/components/list";
 import Utility from "frontend/components/utility";
 import lh from "helpers/linkHandler";
 import Title from "../Title";
@@ -67,11 +68,15 @@ export default class ResourceCollectionDetail extends PureComponent {
             entityName="Resource"
             count={count}
           />
-          <ResourceList.Filters
-            kinds={resourceCollection.attributes.resourceKinds}
-            tags={resourceCollection.attributes.resourceTags}
-            initialFilterState={this.props.initialFilterState}
-            filterChangeHandler={this.props.filterChange}
+          <ListFilters
+            onFilterChange={this.props.filterChange}
+            init={this.props.initialFilterState}
+            reset={this.props.initialFilterState}
+            options={{
+              sort: true,
+              kinds: resourceCollection.attributes.resourceKinds,
+              tags: resourceCollection.attributes.resourceTag
+            }}
           />
           <ResourceList.Cards
             resourceCollection={this.props.resourceCollection}

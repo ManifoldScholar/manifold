@@ -165,10 +165,14 @@ export class ProjectResourcesContainer extends Component {
           resources={resources}
           resourcesMeta={resourcesMeta}
           filterProps={{
-            filterChangeHandler: this.filterChangeHandler,
-            initialFilterState: this.state.filter,
-            resetFilterState: this.initialFilterState(),
-            project
+            onFilterChange: this.filterChangeHandler,
+            init: this.state.filter,
+            reset: this.initialFilterState(),
+            options: {
+              sort: true,
+              kinds: project.attributes.resourceKinds,
+              tags: project.attributes.resourceTags
+            }
           }}
           paginationProps={{
             paginationClickHandler: this.pageChangeHandlerCreator

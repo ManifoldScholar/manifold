@@ -27,46 +27,10 @@ export default class ProjectCollectionSortBy extends PureComponent {
     return this.projectCollection.attributes.sortOrder;
   }
 
-  get filters() {
-    return [
-      {
-        label: "Order Collection By:",
-        value: this.sortOrder,
-        onChange: this.handleChange,
-        options: [
-          { label: "Date Created (Newest First)", value: "created_at_desc" },
-          { label: "Date Created (Oldest First)", value: "created_at_asc" },
-          { label: "Last Updated (Newest First)", value: "updated_at_desc" },
-          { label: "Last Updated (Oldest First)", value: "updated_at_asc" },
-          { label: "Title A to Z", value: "title_asc" },
-          { label: "Title Z to A", value: "title_desc" },
-          {
-            label: "Publication Date (Newest First)",
-            value: "publication_date_desc"
-          },
-          {
-            label: "Publication Date (Oldest First)",
-            value: "publication_date_asc"
-          }
-        ]
-      }
-    ];
-  }
-
   handleClick = event => {
     event.preventDefault();
     const order = this.isManualSort ? "created_at_asc" : "manual";
     return this.props.sortChangeHandler(order);
-  };
-
-  handleChange = event => {
-    event.preventDefault();
-    const order = event.target.value;
-    return this.props.sortChangeHandler(order);
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
   };
 
   renderToggle() {
@@ -115,8 +79,9 @@ export default class ProjectCollectionSortBy extends PureComponent {
         {this.isManualSort && this.renderManualInstructions()}
         {!this.isManualSort && (
           <Styled.ListFilters
-            filters={this.filters}
-            onSubmit={this.handleSubmit}
+            onFilterChange={this.props.sortChangeHandler}
+            init={{ sortBy: this.sortOrder }}
+            options={{ orderCollection: true, hideSearch: true }}
           />
         )}
         {this.renderToggle()}
