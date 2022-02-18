@@ -5,6 +5,7 @@ import classNames from "classnames";
 import Box from "global/components/atomic/Box";
 import Utility from "global/components/utility";
 import Header, { headerProps } from "./parts/Header";
+import { ListFilters } from "global/components/list";
 import * as Styled from "./styles";
 import * as shapes from "./shapes";
 
@@ -16,7 +17,6 @@ function EntityCollection({
   image,
   headerLayout,
   headerLink,
-  UtilityComponent,
   BodyComponent,
   FooterComponent,
   countProps,
@@ -24,7 +24,8 @@ function EntityCollection({
   bgColor = "white",
   nested,
   boxed,
-  className
+  className,
+  filterProps
 }) {
   return (
     <Styled.Wrapper
@@ -46,7 +47,7 @@ function EntityCollection({
           headerLayout={headerLayout}
           headerLink={headerLink}
         />
-        {UtilityComponent && <UtilityComponent />}
+        {filterProps && <ListFilters {...filterProps} />}
         {!isEmpty(countProps) && (
           <Styled.CountWrapper $hasHeader={!!title}>
             <Utility.EntityCount {...countProps} />
@@ -75,10 +76,10 @@ EntityCollection.displayName = "Frontend.Composed.EntityCollection";
 EntityCollection.propTypes = {
   BodyComponent: PropTypes.func.isRequired,
   IconComponent: PropTypes.node,
-  UtilityComponent: PropTypes.func,
   FooterComponent: PropTypes.func,
   countProps: shapes.count,
   paginationProps: shapes.pagination,
+  filterProps: PropTypes.object,
   bgColor: PropTypes.oneOf(["white", "neutral05"]),
   nested: PropTypes.bool,
   boxed: PropTypes.bool,
