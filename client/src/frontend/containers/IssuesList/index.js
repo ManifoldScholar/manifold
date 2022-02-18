@@ -33,7 +33,8 @@ export default function IssuesListContainer() {
   const filterProps = useListFilters({
     onFilterChange: param => setFilters({ newState: param }),
     init: filters,
-    reset: baseFilters
+    reset: baseFilters,
+    options: { featured: true }
   });
 
   if (!issues || !meta) return null;

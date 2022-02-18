@@ -36,7 +36,7 @@ export default function ProjectsContainer() {
     onFilterChange: param => setFilters({ newState: param }),
     init: filters,
     reset: baseFilters,
-    options: { sort: true, subjects }
+    options: { sort: true, subjects, featured: true }
   });
 
   return meta ? (
