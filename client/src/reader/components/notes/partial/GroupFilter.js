@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ReaderContext } from "helpers/contexts";
 
-import FiltersGroup from "global/components/list/Filters/Group";
+import { ListFilters } from "global/components/list";
 
 class GroupFilter extends Component {
   static displayName = "Notes.Partial.GroupFilter";
@@ -58,7 +58,11 @@ class GroupFilter extends Component {
   render() {
     return (
       <div className="notes-group-filter">
-        <FiltersGroup filters={this.filters} />
+        <ListFilters
+          filters={this.filters}
+          updateFilterState={this.handleFilterChange}
+          hideSearch
+        />
       </div>
     );
   }

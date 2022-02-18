@@ -18,7 +18,7 @@ export const featuredAndSubjectFilter = (filters, updateFilters, params) => {
 
   return {
     label: "Filter results",
-    value: !!filters.featured || filters.subject || "",
+    value: filters.featured ? "featured" : filters.subject || "",
     onChange: e => updateFilters(e, "subject"),
     options: [{ label: "Show all", value: "" }, ...options]
   };

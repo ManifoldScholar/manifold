@@ -174,7 +174,12 @@ class GroupsTable extends PureComponent {
         unit="group"
         linkCreator={group => lh.link("frontendReadingGroupDetail", group.id)}
         filters={
-          <ListFilters onFilterChange={this.props.filterChangeHandler} />
+          <ListFilters
+            filters={this.filters}
+            updateFilterState={this.setFilters}
+            onReset={this.resetFilters}
+            showReset={this.state.filters.sort_order}
+          />
         }
       >
         <Column header="Name" textStyle="valueLarge" columnPosition="all">

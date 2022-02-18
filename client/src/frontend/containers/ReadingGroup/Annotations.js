@@ -4,7 +4,11 @@ import queryString from "query-string";
 import isEmpty from "lodash/isEmpty";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
-import { useDispatchAnnotations, useSelectAnnotations } from "hooks";
+import {
+  useDispatchAnnotations,
+  useSelectAnnotations,
+  useListFilters
+} from "hooks";
 
 const DEFAULT_PAGE = 1;
 const PER_PAGE = 20;
@@ -79,18 +83,20 @@ function ReadingGroupAnnotationsContainer({
   const isFiltered =
     "text" in filterState || "readingGroupMembership" in filterState;
 
+  const filterProps = useListFilters({
+    onFilterChange: handleFilterChange,
+    init: filterState,
+    reset: {},
+    options: { memberships, texts }
+  });
+
   return (
     <div className="group-page-body">
       <EntityCollection.GroupAnnotations
         readingGroup={readingGroup}
         annotations={annotations}
         annotationsMeta={annotationsMeta}
-        filterProps={{
-          onFilterChange: handleFilterChange,
-          init: filterState,
-          reset: {},
-          options: { memberships, texts, hideSearch: true }
-        }}
+        filterProps={{ ...filterProps, hideSearch: true }}
         isFiltered={isFiltered}
         paginationProps={{
           paginationClickHandler: pageChangeHandlerCreator(handlePageChange)
