@@ -26,8 +26,10 @@ export class ProjectCollectionDetail extends PureComponent {
     this.props.updateCollectionProject(id, changes, options);
   };
 
-  handleSortOrderChange = sortOrder => {
-    this.props.updateProjectCollection({ attributes: { sortOrder } });
+  handleSortOrderChange = order => {
+    this.props.updateProjectCollection({
+      attributes: { sortOrder: order.sortBy }
+    });
   };
 
   drawerProps(props) {

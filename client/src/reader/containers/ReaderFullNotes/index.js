@@ -123,13 +123,10 @@ function ReaderFullNotesContainer({
         filtersChanged={!isEqual(filters, initialFilters)}
         readingGroup={readingGroup}
         filterProps={{
-          memberships,
-          sections: text.attributes.sectionsMap,
-          filterChangeHandler: param => setFilters({ newState: param }),
-          initialFilterState: filters,
-          resetFilterState: initialFilters,
-          showSearch: true,
-          pagination: meta.pagination
+          onFilterChange: param => setFilters({ newState: param }),
+          init: filters,
+          reset: initialFilters,
+          options: { memberships, sections }
         }}
         paginationProps={{
           paginationClickHandler: page => () => setPageNumber(page),

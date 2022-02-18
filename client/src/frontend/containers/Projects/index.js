@@ -16,7 +16,8 @@ export default function ProjectsContainer() {
   const subjects = useFromStore("feSubjects", "select");
 
   const [pagination, setPageNumber] = usePaginationState();
-  const baseFilters = { standaloneModeEnforced: false };
+  // Requires a string value for comparison to filter values in useListFilters
+  const baseFilters = { standaloneModeEnforced: "false" };
   const [filters, setFilters] = useFilterState(baseFilters);
 
   const { data: projects, meta } = useFetch({
@@ -40,11 +41,10 @@ export default function ProjectsContainer() {
           projects={projects}
           meta={meta}
           filterProps={{
-            active: ["sortFilter", "featuredAndSubjectFilter"],
-            filterChangeHandler: param => setFilters({ newState: param }),
-            initialFilterState: filters,
-            resetFilterState: baseFilters,
-            subjects
+            onFilterChange: param => setFilters({ newState: param }),
+            init: filters,
+            reset: baseFilters,
+            options: { sort: true, subjects }
           }}
           paginationProps={{
             paginationClickHandler: page => () => setPageNumber(page),

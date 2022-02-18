@@ -86,12 +86,10 @@ function ReadingGroupAnnotationsContainer({
         annotations={annotations}
         annotationsMeta={annotationsMeta}
         filterProps={{
-          active: ["textFilter", "membershipFilter"],
-          memberships,
-          texts,
-          filterChangeHandler: handleFilterChange,
-          initialFilterState: filterState,
-          showSearch: false
+          onFilterChange: handleFilterChange,
+          init: filterState,
+          reset: {},
+          options: { memberships, texts, hideSearch: true }
         }}
         isFiltered={isFiltered}
         paginationProps={{

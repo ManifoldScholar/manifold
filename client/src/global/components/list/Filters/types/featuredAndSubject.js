@@ -7,7 +7,9 @@ const getSubjectOptions = subjects =>
   });
 
 export const featuredAndSubjectFilter = (filters, updateFilters, params) => {
-  const subjectOptions = getSubjectOptions(params.subjects);
+  const subjectOptions = params.subjects
+    ? getSubjectOptions(params.subjects)
+    : [];
   const options = params.hideFeatured
     ? [subjectOptions]
     : [{ label: params.featuredLabel, value: "featured" }, ...subjectOptions];

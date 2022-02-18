@@ -84,11 +84,10 @@ function MyAnnotationsContainer({ location, history }) {
         annotationsMeta={annotationsMeta}
         annotatedTexts={annotatedTexts}
         filterProps={{
-          active: ["textFilter"],
-          texts: annotatedTexts,
-          filterChangeHandler: handleFilterChange,
-          initialFilterState: filterState,
-          showSearch: false
+          onFilterChange: handleFilterChange,
+          init: filterState,
+          reset: INIT_FILTER_STATE,
+          options: { showSearch: false, texts: annotatedTexts }
         }}
         isFiltered={"text" in filterState}
         paginationProps={{

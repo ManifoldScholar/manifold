@@ -65,10 +65,10 @@ function Filters({ setScreenReaderStatus, className, ...props }) {
 Filters.displayName = "Global.List.Filters";
 
 Filters.propTypes = {
-  filterChangeHandler: PropTypes.func.isRequired,
-  initialFilterState: PropTypes.object,
-  resetFilterState: PropTypes.object,
-  active: PropTypes.arrayOf(PropTypes.string),
+  onFilterChange: PropTypes.func.isRequired,
+  init: PropTypes.object,
+  reset: PropTypes.object,
+  options: PropTypes.object,
   setScreenReaderStatus: PropTypes.func.isRequired,
   className: PropTypes.string
 };
