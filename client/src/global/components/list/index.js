@@ -1,1 +1,1 @@
-export { default as ListFilters } from "./Filters/index";
+export { ListFilters } from "./Filters/index";

@@ -9,7 +9,8 @@ import {
   usePaginationState,
   useFilterState,
   useFromStore,
-  useSetLocation
+  useSetLocation,
+  useListFilters
 } from "hooks";
 
 export default function ProjectsContainer() {
@@ -31,6 +32,13 @@ export default function ProjectsContainer() {
     ? false
     : !projects || !projects.length;
 
+  const filterProps = useListFilters({
+    onFilterChange: param => setFilters({ newState: param }),
+    init: filters,
+    reset: baseFilters,
+    options: { sort: true, subjects }
+  });
+
   return meta ? (
     <>
       <h1 className="screen-reader-text">All Projects</h1>
@@ -40,12 +48,7 @@ export default function ProjectsContainer() {
         <EntityCollection.Projects
           projects={projects}
           meta={meta}
-          filterProps={{
-            onFilterChange: param => setFilters({ newState: param }),
-            init: filters,
-            reset: baseFilters,
-            options: { sort: true, subjects }
-          }}
+          filterProps={filterProps}
           paginationProps={{
             paginationClickHandler: page => () => setPageNumber(page),
             paginationTarget: "#"

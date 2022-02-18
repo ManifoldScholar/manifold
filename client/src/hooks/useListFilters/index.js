@@ -11,36 +11,41 @@ export default function useListFilters({
 }) {
   const [filters, setFilters] = useState(init || {});
   const prevFilters = useRef(init || {});
-  const [search, setSearch] = useState("");
+  const prevInit = useRef(init || {});
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
+    if (!isEqual(init, prevInit.current)) {
+      prevInit.current = init;
+      prevFilters.current = init;
+      setFilters(init);
+      return;
+    }
     if (!isEqual(filters, prevFilters.current)) {
       prevFilters.current = filters;
       onFilterChange(filters);
     }
-  }, [filters]);
+  }, [filters, init]);
   /* eslint-disable react-hooks/exhaustive-deps */
 
-  useEffect(() => {
-    setFilters(init);
-  }, [init]);
+  const updateFilterState = useCallback(
+    (e, label, search) => {
+      e.preventDefault();
 
-  const updateFilterState = (e, label) => {
-    e.preventDefault();
-
-    switch (label) {
-      case "keyword":
-        return setFilters({ ...filters, [label]: search });
-      case "subject":
-        if (e.target.value === "featured") {
-          return setFilters({ featured: true });
-        }
-        return setFilters({ subject: e.target.value });
-      default:
-        return setFilters({ ...filters, [label]: e.target.value });
-    }
-  };
+      switch (label) {
+        case "keyword":
+          return setFilters({ ...filters, keyword: search });
+        case "subject":
+          if (e.target.value === "featured") {
+            return setFilters({ featured: true });
+          }
+          return setFilters({ subject: e.target.value });
+        default:
+          return setFilters({ ...filters, [label]: e.target.value });
+      }
+    },
+    [setFilters]
+  );
 
   const { pathname } = useLocation();
   /* eslint-disable-next-line no-nested-ternary */
@@ -82,17 +87,7 @@ export default function useListFilters({
   const onReset = useCallback(() => {
     const newState = reset || init;
     setFilters(newState);
-    setSearch("");
   }, [reset, init]);
 
-  const searchProps = options?.hideSearch
-    ? null
-    : {
-        value: search,
-        onChange: e => setSearch(e.target.value)
-      };
-
-  const onSubmit = e => updateFilterState(e, "keyword");
-
-  return { searchProps, activeFilters, onSubmit, onReset, showReset };
+  return { filters: activeFilters, updateFilterState, onReset, showReset };
 }

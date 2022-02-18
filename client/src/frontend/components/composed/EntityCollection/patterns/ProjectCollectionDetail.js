@@ -7,6 +7,7 @@ import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
 import EntityCollection from "../EntityCollection";
 import { ProjectCollectionIcon } from "../parts";
 import { getHeroImage, getHeaderLayout } from "../helpers";
+import { useListFilters } from "hooks";
 
 function ProjectCollectionDetailEntityCollection({
   projectCollection,
@@ -26,6 +27,8 @@ function ProjectCollectionDetailEntityCollection({
   const showPagination = !isEmpty(projectsMeta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(projectsMeta) && !isEmpty(filterProps);
 
+  const listFilterProps = useListFilters({ ...filterProps });
+
   return (
     <EntityCollection
       title={title}
@@ -35,7 +38,7 @@ function ProjectCollectionDetailEntityCollection({
       )}
       image={image}
       headerLayout={headerLayout}
-      filterProps={showFilters ? filterProps : null}
+      filterProps={showFilters ? listFilterProps : null}
       BodyComponent={props =>
         !!projects?.length && (
           <ThumbnailGrid {...props}>

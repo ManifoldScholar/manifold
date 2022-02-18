@@ -4,7 +4,7 @@ import { useUID } from "react-uid";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
-function Search({ inputRef, value, onChange }) {
+function Search({ inputRef }) {
   const uid = useUID();
 
   return (
@@ -16,14 +16,7 @@ function Search({ inputRef, value, onChange }) {
       <label htmlFor={uid} className="screen-reader-text">
         Enter Search Criteria
       </label>
-      <Styled.Input
-        ref={inputRef}
-        value={value}
-        type="text"
-        id={uid}
-        onChange={onChange}
-        placeholder="Search…"
-      />
+      <Styled.Input ref={inputRef} type="text" id={uid} placeholder="Search…" />
     </Styled.Wrapper>
   );
 }
@@ -31,9 +24,7 @@ function Search({ inputRef, value, onChange }) {
 Search.displayName = "Global.List.Filters.Search";
 
 Search.propTypes = {
-  inputRef: PropTypes.object.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  inputRef: PropTypes.object.isRequired
 };
 
 export default Search;

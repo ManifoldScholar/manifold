@@ -1,44 +1,35 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import { useListFilters } from "hooks";
 import * as Styled from "./styles";
 
-export default class ProjectCollectionSortBy extends PureComponent {
-  static displayName = "ProjectCollection.SortBy";
+export default function ProjectCollectionSortBy({
+  projectCollection,
+  sortChangeHandler
+}) {
+  const isManualSort = projectCollection.attributes.manuallySorted;
 
-  static propTypes = {
-    projectCollection: PropTypes.object,
-    sortChangeHandler: PropTypes.func.isRequired
-  };
+  const sortOrder = projectCollection.attributes.sortOrder;
 
-  get idPrefix() {
-    return "collection-sort";
-  }
-
-  get projectCollection() {
-    return this.props.projectCollection;
-  }
-
-  get isManualSort() {
-    return this.projectCollection.attributes.manuallySorted;
-  }
-
-  get sortOrder() {
-    return this.projectCollection.attributes.sortOrder;
-  }
-
-  handleClick = event => {
+  const handleClick = event => {
     event.preventDefault();
-    const order = this.isManualSort ? "created_at_asc" : "manual";
-    return this.props.sortChangeHandler(order);
+    const order = isManualSort ? "created_at_asc" : "manual";
+    return sortChangeHandler(order);
   };
 
-  renderToggle() {
-    if (this.projectCollection.attributes.smart) return null;
+  const filterProps = useListFilters({
+    onFilterChange: sortChangeHandler,
+    init: { sortBy: sortOrder },
+    options: { orderCollection: true }
+  });
+
+  const renderToggle = () => {
+    if (projectCollection.attributes.smart) return null;
 
     const classes = classnames({
       "boolean-primary": true,
-      checked: this.isManualSort
+      checked: isManualSort
     });
 
     return (
@@ -47,11 +38,11 @@ export default class ProjectCollectionSortBy extends PureComponent {
           <div className="form-input-heading">Order Manually</div>
           <div className="toggle-indicator">
             <div
-              onClick={this.handleClick}
+              onClick={handleClick}
               className={classes}
               role="button"
               tabIndex="0"
-              aria-pressed={this.isManualSort}
+              aria-pressed={isManualSort}
             >
               <span className="screen-reader-text">
                 Order collection manually
@@ -61,31 +52,26 @@ export default class ProjectCollectionSortBy extends PureComponent {
         </div>
       </div>
     );
-  }
+  };
 
-  renderManualInstructions() {
-    return (
-      <Styled.Instructions>
-        Click and drag projects to rearrange them.
-      </Styled.Instructions>
-    );
-  }
+  const renderManualInstructions = (
+    <Styled.Instructions>
+      Click and drag projects to rearrange them.
+    </Styled.Instructions>
+  );
 
-  render() {
-    if (!this.props.projectCollection) return null;
-
-    return (
-      <Styled.Wrapper>
-        {this.isManualSort && this.renderManualInstructions()}
-        {!this.isManualSort && (
-          <Styled.ListFilters
-            onFilterChange={this.props.sortChangeHandler}
-            init={{ sortBy: this.sortOrder }}
-            options={{ orderCollection: true, hideSearch: true }}
-          />
-        )}
-        {this.renderToggle()}
-      </Styled.Wrapper>
-    );
-  }
+  return projectCollection ? (
+    <Styled.Wrapper>
+      {isManualSort && renderManualInstructions}
+      {!isManualSort && <Styled.ListFilters {...filterProps} hideSearch />}
+      {renderToggle()}
+    </Styled.Wrapper>
+  ) : null;
 }
+
+ProjectCollectionSortBy.displayName = "ProjectCollection.SortBy";
+
+ProjectCollectionSortBy.propTypes = {
+  projectCollection: PropTypes.object,
+  sortChangeHandler: PropTypes.func.isRequired
+};

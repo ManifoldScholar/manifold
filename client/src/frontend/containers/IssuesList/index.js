@@ -5,7 +5,8 @@ import {
   useFetch,
   usePaginationState,
   useFilterState,
-  useSetLocation
+  useSetLocation,
+  useListFilters
   // useFromStore
 } from "hooks";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
@@ -29,6 +30,12 @@ export default function IssuesListContainer() {
   useSetLocation({ filters, page: pagination.number });
   const location = useLocation();
 
+  const filterProps = useListFilters({
+    onFilterChange: param => setFilters({ newState: param }),
+    init: filters,
+    reset: baseFilters
+  });
+
   if (!issues || !meta) return null;
 
   const showPlaceholder = location.search ? false : !issues.length;
@@ -41,11 +48,7 @@ export default function IssuesListContainer() {
           title="All Journal Issues"
           issues={issues}
           issuesMeta={meta}
-          filterProps={{
-            onFilterChange: param => setFilters({ newState: param }),
-            init: filters,
-            reset: baseFilters
-          }}
+          filterProps={filterProps}
           paginationProps={{
             paginationClickHandler: page => () => setPageNumber(page),
             paginationTarget: "#"

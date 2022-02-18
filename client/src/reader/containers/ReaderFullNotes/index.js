@@ -6,7 +6,12 @@ import { meAPI, readingGroupsAPI } from "api";
 import { commonActions as commonActionsHelper } from "actions/helpers";
 import lh from "helpers/linkHandler";
 import Overlay from "global/components/Overlay";
-import { useFetch, useFilterState, usePaginationState } from "hooks";
+import {
+  useFetch,
+  useFilterState,
+  usePaginationState,
+  useListFilters
+} from "hooks";
 import withReadingGroups from "hoc/withReadingGroups";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 
@@ -102,13 +107,21 @@ function ReaderFullNotesContainer({
     };
   }
 
-  if (!annotations || !meta) return null;
-
-  const sortedAnnotations = mapAnnotationsToSections();
   const memberships = getMemberships();
   const sections = text.attributes.sectionsMap?.length
     ? text.attributes.sectionsMap
     : [];
+
+  const filterProps = useListFilters({
+    onFilterChange: param => setFilters({ newState: param }),
+    init: filters,
+    reset: initialFilters,
+    options: { memberships, sections }
+  });
+
+  if (!annotations || !meta) return null;
+
+  const sortedAnnotations = mapAnnotationsToSections();
 
   return (
     <Overlay
@@ -122,12 +135,7 @@ function ReaderFullNotesContainer({
         groupedAnnotations={sortedAnnotations}
         filtersChanged={!isEqual(filters, initialFilters)}
         readingGroup={readingGroup}
-        filterProps={{
-          onFilterChange: param => setFilters({ newState: param }),
-          init: filters,
-          reset: initialFilters,
-          options: { memberships, sections }
-        }}
+        filterProps={filterProps}
         paginationProps={{
           paginationClickHandler: page => () => setPageNumber(page),
           paginationTarget: "#"

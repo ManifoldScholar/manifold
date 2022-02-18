@@ -9,7 +9,8 @@ import {
   useDispatchAnnotations,
   useSelectAnnotations,
   useDispatchMyAnnotatedTexts,
-  useSelectMyAnnotatedTexts
+  useSelectMyAnnotatedTexts,
+  useListFilters
 } from "hooks";
 import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 
@@ -76,6 +77,13 @@ function MyAnnotationsContainer({ location, history }) {
     });
   }
 
+  const filterProps = useListFilters({
+    onFilterChange: handleFilterChange,
+    init: filterState,
+    reset: INIT_FILTER_STATE,
+    options: { texts: annotatedTexts }
+  });
+
   return (
     <>
       <HeadContent title="My Notes + Comments" appendTitle />
@@ -83,12 +91,7 @@ function MyAnnotationsContainer({ location, history }) {
         annotations={annotations}
         annotationsMeta={annotationsMeta}
         annotatedTexts={annotatedTexts}
-        filterProps={{
-          onFilterChange: handleFilterChange,
-          init: filterState,
-          reset: INIT_FILTER_STATE,
-          options: { showSearch: false, texts: annotatedTexts }
-        }}
+        filterProps={{ ...filterProps, hideSearch: true }}
         isFiltered={"text" in filterState}
         paginationProps={{
           paginationClickHandler: pageChangeHandlerCreator(handlePageChange)

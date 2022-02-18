@@ -4,6 +4,7 @@ import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import ResourceList from "frontend/components/resource-list";
 import EntityCollection from "../EntityCollection";
+import { useListFilters } from "hooks";
 import * as shapes from "../shapes";
 
 function ProjectResourcesEntityCollection({
@@ -17,11 +18,14 @@ function ProjectResourcesEntityCollection({
 }) {
   const showPagination = !isEmpty(resourcesMeta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(resourcesMeta) && !isEmpty(filterProps);
+
+  const listFiltersProps = useListFilters({ ...filterProps });
+
   return resources && project ? (
     <EntityCollection
       title="All Project Resources"
       icon="resources64"
-      filterProps={showFilters ? filterProps : null}
+      filterProps={showFilters ? listFiltersProps : null}
       BodyComponent={props => (
         <ResourceList.Cards
           project={project}
