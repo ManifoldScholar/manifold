@@ -26,7 +26,7 @@ function ReaderFullNotesEntityCollection({
 
   return (
     <EntityCollection
-      filterProps
+      filterProps={filterProps}
       countProps={
         isEmpty(annotationsMeta)
           ? {}
