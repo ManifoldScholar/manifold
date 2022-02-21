@@ -2,7 +2,7 @@ export const groupSortFilter = (filters, updateFilters) => {
   return {
     label: "Sort results",
     value: filters.sort_order || "",
-    onChange: e => updateFilters(event, "sort_order"),
+    onChange: e => updateFilters(e, "sort_order"),
     options: [
       {
         label: "Sort by:",
