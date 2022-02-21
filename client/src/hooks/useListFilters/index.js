@@ -1,32 +1,29 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import filterTypes from "global/components/list/Filters/types";
 import isEqual from "lodash/isEqual";
 
 export default function useListFilters({
   onFilterChange,
-  init,
-  reset,
+  initialState,
+  resetState,
   options
 }) {
-  const [filters, setFilters] = useState(init || {});
-  const prevFilters = useRef(init || {});
-  const prevInit = useRef(init || {});
+  const [filters, setFilters] = useState(initialState || {});
+  const prevFilters = useRef(initialState || {});
+  const previnitialState = useRef(initialState || {});
 
-  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    if (!isEqual(init, prevInit.current)) {
-      prevInit.current = init;
-      prevFilters.current = init;
-      setFilters(init);
+    if (!isEqual(initialState, previnitialState.current)) {
+      previnitialState.current = initialState;
+      prevFilters.current = initialState;
+      setFilters(initialState);
       return;
     }
     if (!isEqual(filters, prevFilters.current)) {
       prevFilters.current = filters;
       onFilterChange(filters);
     }
-  }, [filters, init]);
-  /* eslint-disable react-hooks/exhaustive-deps */
+  }, [filters, initialState, onFilterChange]);
 
   const updateFilterState = useCallback(
     (e, label, search) => {
@@ -44,16 +41,10 @@ export default function useListFilters({
           return setFilters({ ...filters, [label]: e.target.value });
       }
     },
-    [setFilters]
+    [filters, setFilters]
   );
 
-  const { pathname } = useLocation();
-  /* eslint-disable-next-line no-nested-ternary */
-  const featuredLabel = pathname.includes("projects")
-    ? "Featured Projects"
-    : pathname.includes("issues")
-    ? "Featured Issues"
-    : "Featured";
+  const featuredLabel = options.featuredLabel ?? "Featured";
 
   const activeTypes = options
     ? Object.keys(options)
@@ -77,17 +68,17 @@ export default function useListFilters({
     : [];
 
   /* eslint-disable no-nested-ternary */
-  const showReset = !reset
+  const showReset = !resetState
     ? false
     : !activeTypes.length
     ? !!filters?.keyword
-    : !isEqual(reset, filters);
+    : !isEqual(resetState, filters);
   /* eslint-disable no-nested-ternary */
 
   const onReset = useCallback(() => {
-    const newState = reset || init;
+    const newState = resetState || initialState;
     setFilters(newState);
-  }, [reset, init]);
+  }, [resetState, initialState]);
 
   return { filters: activeFilters, updateFilterState, onReset, showReset };
 }

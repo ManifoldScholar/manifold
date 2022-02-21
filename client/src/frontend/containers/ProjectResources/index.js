@@ -166,8 +166,8 @@ export class ProjectResourcesContainer extends Component {
           resourcesMeta={resourcesMeta}
           filterProps={{
             onFilterChange: this.filterChangeHandler,
-            init: this.state.filter,
-            reset: this.initialFilterState(),
+            initialState: this.state.filter,
+            resetState: this.initialFilterState(),
             options: {
               sort: true,
               kinds: project.attributes.resourceKinds,

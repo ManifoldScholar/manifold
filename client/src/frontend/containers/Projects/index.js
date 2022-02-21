@@ -34,9 +34,14 @@ export default function ProjectsContainer() {
 
   const filterProps = useListFilters({
     onFilterChange: param => setFilters({ newState: param }),
-    init: filters,
-    reset: baseFilters,
-    options: { sort: true, subjects, featured: true }
+    initialState: filters,
+    resetState: baseFilters,
+    options: {
+      sort: true,
+      subjects,
+      featured: true,
+      featuredLabel: "FeaturedProjects"
+    }
   });
 
   return meta ? (
