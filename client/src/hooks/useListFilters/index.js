@@ -6,7 +6,7 @@ export default function useListFilters({
   onFilterChange,
   initialState,
   resetState,
-  options
+  options = {}
 }) {
   const [filters, setFilters] = useState(initialState || {});
   const prevFilters = useRef(initialState || {});
