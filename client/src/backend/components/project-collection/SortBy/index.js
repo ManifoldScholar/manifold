@@ -14,13 +14,15 @@ export default function ProjectCollectionSortBy({
 
   const handleClick = event => {
     event.preventDefault();
-    const order = isManualSort ? "created_at_asc" : "manual";
+    const order = isManualSort
+      ? { sortBy: "created_at_asc" }
+      : { sortBy: "manual" };
     return sortChangeHandler(order);
   };
 
   const filterProps = useListFilters({
     onFilterChange: sortChangeHandler,
-    init: { sortBy: sortOrder },
+    initialState: { sortBy: sortOrder },
     options: { orderCollection: true }
   });
 
