@@ -246,9 +246,8 @@ export class ProjectCollectionDetailContainer extends Component {
             initialState: this.state.filter || {},
             resetState: this.initialFilterState(),
             options: {
-              sort: true,
               featured: true,
-              featuredLabel: "FeaturedProjects"
+              featuredLabel: "Featured Projects"
             }
           }}
           paginationProps={{
