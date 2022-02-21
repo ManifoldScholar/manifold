@@ -5,7 +5,7 @@ import * as Styled from "./styles";
 const PlaceholderWrapper = ({ bgColor, style = {}, children }) => {
   const Container = ({ children: containerChildren }) =>
     !bgColor ? (
-      <section>{containerChildren}</section>
+      <section style={style}>{containerChildren}</section>
     ) : (
       <section className={`bg-${bgColor}`} style={style}>
         <div className="container">{containerChildren}</div>

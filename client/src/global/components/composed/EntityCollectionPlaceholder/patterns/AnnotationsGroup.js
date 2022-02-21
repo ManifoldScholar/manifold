@@ -7,7 +7,7 @@ import { JoinGroup } from "frontend/components/reading-group/tables/Groups/actio
 import { useCurrentUser } from "hooks";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
-function GroupAnnotationsPlaceholder({ readingGroup }) {
+function GroupAnnotationsPlaceholder({ readingGroup, style }) {
   // since RG data isn't refreshed when a user joins,
   // we store join status in component state (set initially by RG data)
   const [userIsMember, setUserIsMember] = useState(
@@ -65,7 +65,7 @@ function GroupAnnotationsPlaceholder({ readingGroup }) {
   const { title, body, actions } = getContent();
 
   return (
-    <Wrapper context="frontend">
+    <Wrapper context="frontend" style={style}>
       <Title icon="readingGroup24">{title}</Title>
       <Body>
         <p>{body}</p>

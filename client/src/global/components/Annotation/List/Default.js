@@ -8,7 +8,7 @@ function AnnotationListDefault({
   showCommentsToggleAsBlock
 }) {
   return (
-    <ul className="notes-list">
+    <ul className="notes-list notes-list--pad-top">
       {annotations.map(annotation => {
         return (
           <li key={annotation.id} className="notes-list__item-outer">
