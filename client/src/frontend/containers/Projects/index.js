@@ -40,7 +40,7 @@ export default function ProjectsContainer() {
       sort: true,
       subjects,
       featured: true,
-      featuredLabel: "FeaturedProjects"
+      featuredLabel: "Featured Projects"
     }
   });
 
