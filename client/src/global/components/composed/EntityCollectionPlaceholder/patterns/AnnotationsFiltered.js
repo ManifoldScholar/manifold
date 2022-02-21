@@ -1,9 +1,9 @@
 import React from "react";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
-function FilteredAnnotationsPlaceholder() {
+function FilteredAnnotationsPlaceholder({ style }) {
   return (
-    <Wrapper context="frontend">
+    <Wrapper context="frontend" style={style}>
       <Title icon="readingGroup24">
         No annotations matched your search criteria.
       </Title>

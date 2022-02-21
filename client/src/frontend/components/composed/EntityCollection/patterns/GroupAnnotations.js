@@ -41,11 +41,14 @@ function GroupAnnotationsEntityCollection({
             />
           )}
           {!hasAnnotations && isFiltered && (
-            <EntityCollectionPlaceholder.FilteredAnnotations />
+            <EntityCollectionPlaceholder.FilteredAnnotations
+              style={{ paddingBlockStart: "40px" }}
+            />
           )}
           {!hasAnnotations && !isFiltered && (
             <EntityCollectionPlaceholder.GroupAnnotations
               readingGroup={readingGroup}
+              style={{ paddingBlockStart: "40px" }}
             />
           )}
         </>
