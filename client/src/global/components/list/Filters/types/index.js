@@ -6,6 +6,7 @@ import { textFilter as texts } from "./text";
 import { kindFilter as kinds } from "./kind";
 import { tagFilter as tags } from "./tag";
 import { orderCollectionFilter as orderCollection } from "./orderCollection";
+import { groupSortFilter as groupSort } from "./groupSort";
 
 export default {
   sort,
@@ -15,5 +16,6 @@ export default {
   texts,
   kinds,
   tags,
-  orderCollection
+  orderCollection,
+  groupSort
 };
