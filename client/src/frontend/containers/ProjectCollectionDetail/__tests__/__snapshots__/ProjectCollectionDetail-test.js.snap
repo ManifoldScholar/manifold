@@ -79,13 +79,13 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
     bgColor="neutral05"
     filterProps={
       Object {
-        "init": Object {},
+        "initialState": Object {},
         "onFilterChange": [Function],
         "options": Object {
           "featured": true,
-          "sort": true,
+          "featuredLabel": "Featured Projects",
         },
-        "reset": Object {},
+        "resetState": Object {},
       }
     }
     paginationProps={

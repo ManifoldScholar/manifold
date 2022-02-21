@@ -23,14 +23,14 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
   <Frontend.Composed.EntityCollection.ProjectsResources
     filterProps={
       Object {
-        "init": Object {},
+        "initialState": Object {},
         "onFilterChange": [Function],
         "options": Object {
           "kinds": undefined,
           "sort": true,
           "tags": undefined,
         },
-        "reset": Object {},
+        "resetState": Object {},
       }
     }
     itemHeadingLevel={3}
