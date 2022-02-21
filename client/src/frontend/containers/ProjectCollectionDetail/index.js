@@ -243,9 +243,13 @@ export class ProjectCollectionDetailContainer extends Component {
           projectsMeta={this.projectsMeta}
           filterProps={{
             onFilterChange: this.filterChangeHandler,
-            init: this.state.filter || {},
-            reset: this.initialFilterState(),
-            options: { sort: true, featured: true }
+            initialState: this.state.filter || {},
+            resetState: this.initialFilterState(),
+            options: {
+              sort: true,
+              featured: true,
+              featuredLabel: "FeaturedProjects"
+            }
           }}
           paginationProps={{
             paginationClickHandler: this.pageChangeHandlerCreator

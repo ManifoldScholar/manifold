@@ -85,8 +85,8 @@ function ReadingGroupAnnotationsContainer({
 
   const filterProps = useListFilters({
     onFilterChange: handleFilterChange,
-    init: filterState,
-    reset: {},
+    initialState: filterState,
+    resetState: {},
     options: { memberships, texts }
   });
 

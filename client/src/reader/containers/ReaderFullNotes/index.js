@@ -114,8 +114,8 @@ function ReaderFullNotesContainer({
 
   const filterProps = useListFilters({
     onFilterChange: param => setFilters({ newState: param }),
-    init: filters,
-    reset: initialFilters,
+    initialState: filters,
+    resetState: initialFilters,
     options: { memberships, sections }
   });
 

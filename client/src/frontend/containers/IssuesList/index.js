@@ -32,9 +32,9 @@ export default function IssuesListContainer() {
 
   const filterProps = useListFilters({
     onFilterChange: param => setFilters({ newState: param }),
-    init: filters,
-    reset: baseFilters,
-    options: { featured: true }
+    initialState: filters,
+    resetState: baseFilters,
+    options: { featured: true, featuredLabel: "Featured Issues" }
   });
 
   if (!issues || !meta) return null;

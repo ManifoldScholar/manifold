@@ -79,8 +79,8 @@ function MyAnnotationsContainer({ location, history }) {
 
   const filterProps = useListFilters({
     onFilterChange: handleFilterChange,
-    init: filterState,
-    reset: INIT_FILTER_STATE,
+    initialState: filterState,
+    resetState: INIT_FILTER_STATE,
     options: { texts: annotatedTexts }
   });
 
