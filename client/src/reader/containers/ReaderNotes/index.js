@@ -1,28 +1,16 @@
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { readingGroupsAPI, meAPI } from "api";
 import groupBy from "lodash/groupBy";
 import isString from "lodash/isString";
 import { commonActions as commonActionsHelper } from "actions/helpers";
 import lh from "helpers/linkHandler";
-import {
-  useDispatchAnnotations,
-  useSelectAnnotations,
-  useGrabCurrentText,
-  useGrabCurrentTextSection
-} from "hooks";
+import { useFetch, useFilterState, useFromStore } from "hooks";
 import withReadingGroups from "hoc/withReadingGroups";
 
 const DEFAULT_FORMATS = ["highlight", "annotation", "bookmark"];
-
-function setInitialFilterState(text, currentGroup) {
-  return {
-    orphaned: false,
-    text: text?.id,
-    formats: [...DEFAULT_FORMATS],
-    readingGroup: currentGroup
-  };
-}
 
 function getSectionName(text, sectionId) {
   const { sectionsMap } = text.attributes;
@@ -32,58 +20,70 @@ function getSectionName(text, sectionId) {
 }
 
 function ReaderNotesContainer({
-  match,
-  history,
   readingGroups,
   currentAnnotationOverlayReadingGroup: currentGroup,
   setAnnotationOverlayReadingGroup,
   children
 }) {
-  const dispatch = useDispatch();
-  const text = useGrabCurrentText(match);
-  const section = useGrabCurrentTextSection(match);
-  const [filterState, setFilterState] = useState(
-    setInitialFilterState(text, currentGroup)
+  const { textId, sectionId } = useParams();
+  const history = useHistory();
+  const text = useFromStore("texts", "grab", textId);
+  const section = useFromStore("textSections", "grab", sectionId);
+
+  const baseFilters = useMemo(
+    () => ({
+      orphaned: false,
+      text: text?.id,
+      formats: [...DEFAULT_FORMATS],
+      readingGroup: currentGroup
+    }),
+    [text, currentGroup]
   );
+  const [filters, setFilters] = useFilterState(baseFilters);
+  const fetchFilters = useMemo(() => {
+    const { readingGroup, ...rest } = filters;
+    return rest;
+  }, [filters]);
+  const groupId = useMemo(() => {
+    return filters.readingGroup;
+  }, [filters]);
+  const showMyAnnotations = groupId === "me";
 
-  const { readingGroup, ...fetchFilters } = filterState;
+  const { data: myAnnotations, meta: myMeta } = useFetch({
+    request: [meAPI.annotations, fetchFilters],
+    condition: showMyAnnotations
+  });
+  const { data: rgAnnotations, meta: rgMeta } = useFetch({
+    request: [readingGroupsAPI.annotations, groupId, fetchFilters],
+    condition: !showMyAnnotations
+  });
 
-  useDispatchAnnotations(fetchFilters, {}, readingGroup, "reader", true);
-  const {
-    annotations,
-    annotationsMeta,
-    annotationsLoaded
-  } = useSelectAnnotations(readingGroup, "reader", true);
-
-  const commonActions = commonActionsHelper(dispatch);
+  const annotations = showMyAnnotations ? myAnnotations : rgAnnotations;
+  const meta = showMyAnnotations ? myMeta : rgMeta;
 
   function mapAnnotationsToSections() {
     const annotationGroups = groupBy(annotations, "attributes.textSectionId");
-    const out = [];
 
-    text.attributes.spine.map(sectionId => {
-      if (!annotationGroups[sectionId]) return null;
-      return out.push({
-        sectionId,
-        name: getSectionName(text, sectionId),
-        annotations: annotationGroups[sectionId]
-      });
-    });
-
-    return out;
+    return text.attributes.spine
+      .map(id => {
+        if (!annotationGroups[id]) return null;
+        return {
+          id,
+          name: getSectionName(text, id),
+          annotations: annotationGroups[id]
+        };
+      })
+      .filter(Boolean);
   }
 
-  function handleFilterChange(label, value) {
-    const filters = { ...filterState };
-    filters[label] = value;
-    setFilterState(filters);
-  }
+  const dispatch = useDispatch();
+  const commonActions = commonActionsHelper(dispatch);
 
   function handleVisitAnnotation(annotation) {
     const { textSectionId } = annotation.attributes;
     const url = lh.link(
       "readerSection",
-      match.params.textId,
+      textId,
       textSectionId,
       `#annotation-${annotation.id}`
     );
@@ -96,14 +96,14 @@ function ReaderNotesContainer({
     event.preventDefault();
     const url = lh.link(
       "readerSection",
-      match.params.textId,
-      match.params.sectionId,
+      textId,
+      sectionId,
       "#group-annotations"
     );
     history.push(url);
   }
 
-  if (!annotationsLoaded || !annotations || !annotationsMeta) return null;
+  if (!annotations || !meta) return null;
 
   const sortedAnnotations = mapAnnotationsToSections();
 
@@ -111,11 +111,13 @@ function ReaderNotesContainer({
     sortedAnnotations,
     section,
     handleVisitAnnotation,
-    handleFilterChange,
+    handleFilterChange: (label, value) => {
+      setFilters({ newState: { ...filters, [label]: value } });
+    },
     handleSeeAllClick,
     setAnnotationOverlayReadingGroup,
-    annotated: annotationsMeta.annotated,
-    filters: filterState,
+    annotated: meta.annotated,
+    filters,
     defaultFormats: DEFAULT_FORMATS,
     readingGroups
   };
@@ -126,8 +128,6 @@ function ReaderNotesContainer({
 }
 
 ReaderNotesContainer.propTypes = {
-  match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   readingGroups: PropTypes.array,
   setAnnotationOverlayReadingGroup: PropTypes.func.isRequired,
