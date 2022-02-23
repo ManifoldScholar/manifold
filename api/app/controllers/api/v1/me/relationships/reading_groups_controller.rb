@@ -5,7 +5,7 @@ module API
         # Reading groups controller
         class ReadingGroupsController < ApplicationController
 
-          SERIALIZED_INCLUDES = %i[collection annotated_texts reading_group_memberships.user].freeze
+          SERIALIZED_INCLUDES = %i[collection annotated_texts current_user_reading_group_membership reading_group_memberships.user].freeze
 
           resourceful! ReadingGroup do
             base = current_user.nil? ? ReadingGroup.none : current_user.reading_groups

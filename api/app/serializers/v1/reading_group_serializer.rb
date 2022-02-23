@@ -59,7 +59,8 @@ module V1
       end
     end
 
-    typed_has_one :current_user_reading_group_membership, serializer: V1::ReadingGroupMembershipSerializer do |object, params|
+    typed_has_one :current_user_reading_group_membership, serializer: V1::ReadingGroupMembershipSerializer,
+                  record_type: "readingGroupMemberships" do |object, params|
       object.reading_group_membership_for_user params[:current_user]
     end
 
