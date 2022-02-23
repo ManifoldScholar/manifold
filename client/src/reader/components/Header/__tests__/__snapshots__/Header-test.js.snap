@@ -126,16 +126,7 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
       className="reader-header__panels reader-header__panels--left"
     >
       <UIPanel
-        bodyComponent={
-          Object {
-            "$$typeof": Symbol(react.memo),
-            "WrappedComponent": [Function],
-            "compare": null,
-            "displayName": "Connect(WithSettings('ReturnMenuBody))",
-            "mapStateToProps": [Function],
-            "type": [Function],
-          }
-        }
+        bodyComponent={[Function]}
         hidePanel={[Function]}
         id="readerReturn"
         moreLink="http://manifold.umn.edu/about/"
