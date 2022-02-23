@@ -4,7 +4,6 @@ export { default as useSelectAnnotations } from "./useSelectAnnotations";
 export { default as useDispatchMyCollected } from "./useDispatchMyCollected";
 export { default as useSelectMyCollected } from "./useSelectMyCollected";
 export { default as useDispatchMyAnnotatedTexts } from "./useDispatchMyAnnotatedTexts";
-export { default as useSelectMyAnnotatedTexts } from "./useSelectMyAnnotatedTexts";
 export { default as useDispatchMyReadingGroups } from "./useDispatchMyReadingGroups";
 export { default as useSelectMyReadingGroups } from "./useSelectMyReadingGroups";
 
