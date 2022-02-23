@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import trim from "lodash/trim";
 import qs from "query-string";
 import lh from "helpers/linkHandler";
-import { useSettings } from "hooks";
+import { useFromStore } from "hooks";
 
 const DEFAULT_WINDOW_OPTIONS = ["", "", "width=600,height=300"];
 
@@ -16,7 +16,7 @@ export default function useShareAnnotation({
   selectionState,
   windowOptions = DEFAULT_WINDOW_OPTIONS
 }) {
-  const settings = useSettings();
+  const settings = useFromStore("settings", "select");
   const facebookAppId = settings.attributes.integrations.facebookAppId;
 
   function getNodeUrl() {
