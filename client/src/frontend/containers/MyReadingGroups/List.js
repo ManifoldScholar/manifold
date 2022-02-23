@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import queryString from "query-string";
-import isEmpty from "lodash/isEmpty";
-import get from "lodash/get";
+import { meAPI } from "api";
+import { useHistory } from "react-router-dom";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
@@ -11,84 +10,35 @@ import EntityCollectionPlaceholder from "global/components/composed/EntityCollec
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";
 import {
-  useDispatchMyReadingGroups,
-  useSelectMyReadingGroups,
+  useFetch,
+  usePaginationState,
+  useFilterState,
+  useSetLocation,
   useCurrentUser
 } from "hooks";
-import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 
 const DEFAULT_SORT_ORDER = "";
-const DEFAULT_PAGE = 1;
-const PER_PAGE = 20;
 
-function getSearch(location) {
-  return queryString.parse(location.search);
-}
-
-function setInitialFilterState(location) {
-  const { page, ...filters } = getSearch(location);
-  if (isEmpty(filters))
-    return {
-      sort_order: DEFAULT_SORT_ORDER
-    };
-  return filters;
-}
-
-function setInitialPaginationState(location) {
-  const { page } = getSearch(location);
-  return {
-    number: page || DEFAULT_PAGE,
-    size: PER_PAGE
+function MyReadingGroupsListContainer({ route }) {
+  const [pagination, setPageNumber] = usePaginationState();
+  const baseFilters = {
+    sort_order: DEFAULT_SORT_ORDER
   };
-}
+  const [filters, setFilters] = useFilterState(baseFilters);
+  useSetLocation({ filters, page: pagination.number });
 
-function MyReadingGroupsListContainer({ location, history, route }) {
-  const [filterState, setFilterState] = useState(
-    setInitialFilterState(location)
-  );
-  const [paginationState, setPaginationState] = useState(
-    setInitialPaginationState(location)
-  );
-
-  function updateUrlFromState() {
-    const { pathname } = location;
-    const params = { ...filterState, page: paginationState.number };
-    const search = queryString.stringify(params);
-    history.push({ pathname, search });
-  }
-
-  useEffect(
-    () => updateUrlFromState(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [filterState, paginationState]
-  );
-
-  const [fetchVersion, setFetchVersion] = useState(1);
-
-  useDispatchMyReadingGroups(filterState, paginationState, fetchVersion);
-  const {
-    readingGroups,
-    readingGroupsMeta,
-    readingGroupsLoaded
-  } = useSelectMyReadingGroups();
+  const [rgJoins, setRGJoins] = useState(0);
+  const { data: readingGroups, meta } = useFetch({
+    request: [meAPI.readingGroups, filters, pagination],
+    dependencies: [rgJoins]
+  });
 
   const currentUser = useCurrentUser();
-
-  function handleFilterChange(filterParam) {
-    setFilterState(filterParam);
-  }
-
-  function handleFilterReset() {
-    setInitialFilterState(location);
-  }
-
-  function handlePageChange(pageParam) {
-    setPaginationState(prevState => ({ ...prevState, number: pageParam }));
-  }
+  const history = useHistory();
 
   function handleNewGroupSuccess() {
     history.push(lh.link("frontendMyReadingGroups"));
-    setFetchVersion(current => current + 1);
+    setRGJoins(prev => prev + 1);
   }
 
   const childRouteProps = {
@@ -105,45 +55,39 @@ function MyReadingGroupsListContainer({ location, history, route }) {
     }
   };
 
-  const showTable = readingGroupsLoaded && !!readingGroups?.length;
-  const showPlaceholder = readingGroupsLoaded && !readingGroups?.length;
-
-  return (
+  return readingGroups ? (
     <>
       <HeadContent title="My Reading Groups" appendTitle />
       <section>
         <div className="container groups-page-container">
           <GroupsHeading currentUser={currentUser} />
-          {showTable && (
+          {!!readingGroups?.length && (
             <GroupsTable
               readingGroups={readingGroups}
-              pagination={get(readingGroupsMeta, "pagination")}
-              onPageClick={pageChangeHandlerCreator(handlePageChange)}
-              initialFilterState={filterState}
-              resetFilterState={handleFilterReset}
-              filterChangeHandler={handleFilterChange}
+              pagination={meta?.pagination}
+              onPageClick={page => () => setPageNumber(page)}
+              filterProps={{
+                onFilterChange: param => setFilters({ newState: param }),
+                initialState: filters,
+                resetState: baseFilters
+              }}
             />
           )}
-          {showPlaceholder && (
+          {!readingGroups?.length && (
             <EntityCollectionPlaceholder.ReadingGroups
               currentUser={currentUser}
             />
           )}
-          <JoinBox onJoin={() => setFetchVersion(current => current + 1)} />
+          <JoinBox onJoin={() => setRGJoins(prev => prev + 1)} />
         </div>
       </section>
       {childRoutes(route, childRouteProps)}
     </>
-  );
+  ) : null;
 }
 
 MyReadingGroupsListContainer.propTypes = {
-  match: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired,
-  settings: PropTypes.object,
-  projectBackLink: PropTypes.node
+  route: PropTypes.object.isRequired
 };
 
 export default MyReadingGroupsListContainer;

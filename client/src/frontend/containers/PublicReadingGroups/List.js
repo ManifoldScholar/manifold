@@ -119,9 +119,13 @@ function PublicReadingGroupsListContainer({ location, history, route }) {
               currentUser={currentUser}
               pagination={get(readingGroupsMeta, "pagination")}
               onPageClick={pageChangeHandlerCreator(handlePageChange)}
-              initialFilterState={filterState}
-              resetFilterState={handleFilterReset}
-              filterChangeHandler={handleFilterChange}
+              filterProps={{
+                onFilterChange: handleFilterChange,
+                initialState: filterState,
+                resetState: {
+                  sort_order: DEFAULT_SORT_ORDER
+                }
+              }}
               history={history}
               hideActions
               hideTags

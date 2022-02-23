@@ -18,11 +18,11 @@ export const groupSortFilter = (filters, updateFilters) => {
       },
       {
         label: "Newest groups first",
-        value: "created_at_asc"
+        value: "created_at_desc"
       },
       {
         label: "Oldest groups first",
-        value: "created_at_desc"
+        value: "created_at_asc"
       },
       {
         label: "Earliest course start date",
