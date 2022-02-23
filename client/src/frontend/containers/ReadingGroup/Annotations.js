@@ -1,117 +1,58 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import queryString from "query-string";
-import isEmpty from "lodash/isEmpty";
+import { readingGroupsAPI } from "api";
+import { useParams } from "react-router-dom";
 import EntityCollection from "frontend/components/composed/EntityCollection";
-import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 import {
-  useDispatchAnnotations,
-  useSelectAnnotations,
+  useFetch,
+  usePaginationState,
+  useFilterState,
+  useSetLocation,
   useListFilters
 } from "hooks";
 
-const DEFAULT_PAGE = 1;
-const PER_PAGE = 20;
+function ReadingGroupAnnotationsContainer({ readingGroup }) {
+  const [pagination, setPageNumber] = usePaginationState();
+  const baseFilters = {};
+  const [filters, setFilters] = useFilterState(baseFilters);
+  useSetLocation({ filters, page: pagination.number });
 
-function getSearch(location) {
-  return queryString.parse(location.search);
-}
+  const { id } = useParams();
 
-function setInitialFilterState(location) {
-  const { page, ...filters } = getSearch(location);
-  if (isEmpty(filters)) return {};
-  return filters;
-}
+  const { data: annotations, meta } = useFetch({
+    request: [readingGroupsAPI.annotations, id, filters, pagination]
+  });
 
-function setInitialPaginationState(location) {
-  const { page } = getSearch(location);
-  return {
-    number: page || DEFAULT_PAGE,
-    size: PER_PAGE
-  };
-}
-
-function ReadingGroupAnnotationsContainer({
-  readingGroup,
-  match,
-  location,
-  history
-}) {
-  const [filterState, setFilterState] = useState(
-    setInitialFilterState(location)
-  );
-  const [paginationState, setPaginationState] = useState(
-    setInitialPaginationState(location)
-  );
-
-  useEffect(
-    () => {
-      const { pathname } = location;
-      const params = { ...filterState, page: paginationState.number };
-      const search = queryString.stringify(params);
-      history.push({ pathname, search });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [filterState, paginationState]
-  );
-
-  useDispatchAnnotations(
-    filterState,
-    paginationState,
-    match.params.id,
-    "frontend"
-  );
-  const { annotations, annotationsMeta } = useSelectAnnotations(
-    "group",
-    "frontend"
-  );
-
-  function handleFilterChange(filterParam) {
-    setFilterState(filterParam);
-  }
-
-  function handlePageChange(pageParam) {
-    setPaginationState(prevState => {
-      return { ...prevState, number: pageParam };
-    });
-  }
-
-  const {
-    annotatedTexts: texts,
-    readingGroupMemberships: memberships
-  } = readingGroup.relationships;
-  const isFiltered =
-    "text" in filterState || "readingGroupMembership" in filterState;
+  const { annotatedTexts: texts, readingGroupMemberships: memberships } =
+    readingGroup?.relationships ?? {};
 
   const filterProps = useListFilters({
-    onFilterChange: handleFilterChange,
-    initialState: filterState,
-    resetState: {},
+    onFilterChange: param => setFilters({ newState: param }),
+    initialState: filters,
+    resetState: baseFilters,
     options: { memberships, texts }
   });
 
-  return (
+  return readingGroup ? (
     <div className="group-page-body">
       <EntityCollection.GroupAnnotations
         readingGroup={readingGroup}
         annotations={annotations}
-        annotationsMeta={annotationsMeta}
+        annotationsMeta={meta}
         filterProps={{ ...filterProps, hideSearch: true }}
-        isFiltered={isFiltered}
+        isFiltered={!!Object.keys(filters).length}
         paginationProps={{
-          paginationClickHandler: pageChangeHandlerCreator(handlePageChange)
+          paginationClickHandler: page => () => setPageNumber(page),
+          paginationTarget: "#"
         }}
         nested
       />
     </div>
-  );
+  ) : null;
 }
 
 ReadingGroupAnnotationsContainer.propTypes = {
-  readingGroup: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  readingGroup: PropTypes.object.isRequired
 };
 
 export default ReadingGroupAnnotationsContainer;
