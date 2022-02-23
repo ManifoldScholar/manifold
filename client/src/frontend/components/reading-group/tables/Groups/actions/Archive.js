@@ -1,15 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { readingGroupMembershipsAPI, requests } from "api";
 import { useDispatch } from "react-redux";
 import config from "config";
-import { requests } from "api";
 import Action from "global/components/table/Action";
 import { entityStoreActions } from "actions";
 import withConfirmation from "hoc/withConfirmation";
-import {
-  useDispatchReadingGroupMembership,
-  useSelectReadingGroupMembership
-} from "hooks";
+import { useFetch } from "hooks";
 
 const { request } = entityStoreActions;
 
@@ -19,10 +16,9 @@ function ArchiveGroup({ readingGroup, confirm }) {
   const currentUserMembershipId =
     readingGroup.relationships.currentUserReadingGroupMembership.id;
 
-  useDispatchReadingGroupMembership(currentUserMembershipId);
-  const {
-    readingGroupMembership: currentUserMembership
-  } = useSelectReadingGroupMembership();
+  const { data: currentUserMembership } = useFetch({
+    request: [readingGroupMembershipsAPI.show, currentUserMembershipId]
+  });
 
   const archive = currentUserMembership?.links?.archive;
   const activate = currentUserMembership?.links?.activate;
