@@ -1,110 +1,57 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import queryString from "query-string";
-import isEmpty from "lodash/isEmpty";
+import { meAPI } from "api";
 import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 import {
-  useDispatchAnnotations,
-  useSelectAnnotations,
-  useDispatchMyAnnotatedTexts,
-  useSelectMyAnnotatedTexts,
-  useListFilters
+  useFetch,
+  usePaginationState,
+  useFilterState,
+  useListFilters,
+  useSetLocation
 } from "hooks";
-import { pageChangeHandlerCreator } from "helpers/pageChangeHandlerCreator";
 
-const DEFAULT_PAGE = 1;
-const PER_PAGE = 10;
 const INIT_FILTER_STATE = {
   formats: ["highlight", "annotation", "bookmark"]
 };
 
-function getSearch(location) {
-  return queryString.parse(location.search);
-}
+export default function MyAnnotationsContainer() {
+  const [pagination, setPageNumber] = usePaginationState(1, 10);
+  const [filters, setFilters] = useFilterState(INIT_FILTER_STATE);
+  useSetLocation({ filters, page: pagination.number });
 
-function setInitialFilterState(location) {
-  const { page, ...filters } = getSearch(location);
-  if (isEmpty(filters)) return INIT_FILTER_STATE;
-  return filters;
-}
-
-function setInitialPaginationState(location) {
-  const { page } = getSearch(location);
-  return {
-    number: page || DEFAULT_PAGE,
-    size: PER_PAGE
-  };
-}
-
-function MyAnnotationsContainer({ location, history }) {
-  const [filterState, setFilterState] = useState(
-    setInitialFilterState(location)
-  );
-  const [paginationState, setPaginationState] = useState(
-    setInitialPaginationState(location)
-  );
-
-  function updateUrlFromState() {
-    const { pathname } = location;
-    const params = { ...filterState, page: paginationState.number };
-    const search = queryString.stringify(params);
-    history.push({ pathname, search });
-  }
-
-  useEffect(
-    () => updateUrlFromState(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [JSON.stringify(filterState), JSON.stringify(paginationState)]
-  );
-
-  useDispatchAnnotations(filterState, paginationState, "me", "frontend");
-  useDispatchMyAnnotatedTexts();
-  const { annotations, annotationsMeta } = useSelectAnnotations(
-    "me",
-    "frontend"
-  );
-  const annotatedTexts = useSelectMyAnnotatedTexts();
-
-  function handleFilterChange(filterParam) {
-    setFilterState(filterParam);
-  }
-
-  function handlePageChange(pageParam) {
-    setPaginationState(prevState => {
-      return { ...prevState, number: pageParam };
-    });
-  }
+  const { data: annotations, meta } = useFetch({
+    request: [meAPI.annotations, filters, pagination]
+  });
+  const { data: annotatedTexts } = useFetch({
+    request: [meAPI.annotatedTexts]
+  });
 
   const filterProps = useListFilters({
-    onFilterChange: handleFilterChange,
-    initialState: filterState,
+    onFilterChange: param => setFilters({ newState: param }),
+    initialState: filters,
     resetState: INIT_FILTER_STATE,
     options: { texts: annotatedTexts }
   });
 
-  return (
+  return annotations ? (
     <>
       <HeadContent title="My Notes + Comments" appendTitle />
       <EntityCollection.MyAnnotations
         annotations={annotations}
-        annotationsMeta={annotationsMeta}
+        annotationsMeta={meta}
         annotatedTexts={annotatedTexts}
         filterProps={{ ...filterProps, hideSearch: true }}
-        isFiltered={"text" in filterState}
+        isFiltered={"text" in filters}
         paginationProps={{
-          paginationClickHandler: pageChangeHandlerCreator(handlePageChange)
+          paginationClickHandler: page => () => setPageNumber(page),
+          paginationTarget: "#"
         }}
       />
       <CollectionNavigation />
     </>
-  );
+  ) : null;
 }
 
-MyAnnotationsContainer.propTypes = {
-  location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
-};
-
-export default MyAnnotationsContainer;
+MyAnnotationsContainer.displayName = "Frontend.MyAnnotations";
