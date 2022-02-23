@@ -41,16 +41,19 @@ module Validation
   # rubocop:enable Metrics/MethodLength
 
   def reading_group_membership_params
-    attributes = [:label, :annotation_style]
+    params.require(:data)
+    attributes = []
+    relationships = []
 
     reading_group = @reading_group || @reading_group_membership&.reading_group
 
     if reading_group.present? && current_user&.can_update?(reading_group)
       attributes << :role
       attributes << :label
+      relationships << :reading_group
+      relationships << :user
     end
 
-    relationships = [:reading_group, :user]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
