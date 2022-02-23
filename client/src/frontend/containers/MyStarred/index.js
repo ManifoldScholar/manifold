@@ -1,15 +1,12 @@
 import React, { useState, useCallback } from "react";
+import { meAPI } from "api";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
+import { useFetch, useCurrentUser } from "hooks";
 
-import {
-  useDispatchMyCollected,
-  useSelectMyCollected,
-  useCurrentUser
-} from "hooks";
 import Authorize from "hoc/Authorize";
 
 function MyStarredContainer() {
@@ -21,22 +18,35 @@ function MyStarredContainer() {
     resources: 1
   });
 
-  useDispatchMyCollected("projects", fetchVersion.projects);
-  useDispatchMyCollected("texts", fetchVersion.texts);
-  useDispatchMyCollected("text_sections", fetchVersion.text_sections);
-  useDispatchMyCollected(
-    "resource_collections",
-    fetchVersion.resource_collections
-  );
-  useDispatchMyCollected("resources", fetchVersion.resources);
+  const { data: projects } = useFetch({
+    request: [meAPI.myCollected, "projects"],
+    dependencies: [fetchVersion.projects]
+  });
+  const { data: texts } = useFetch({
+    request: [meAPI.myCollected, "texts"],
+    dependencies: [fetchVersion.texts]
+  });
+  const { data: textSections } = useFetch({
+    request: [meAPI.myCollected, "text_sections"],
+    dependencies: [fetchVersion.text_sections]
+  });
+  const { data: resourceCollections } = useFetch({
+    request: [meAPI.myCollected, "resource_collections"],
+    dependencies: [fetchVersion.resource_collections]
+  });
+  const { data: resources } = useFetch({
+    request: [meAPI.myCollected, "resources"],
+    dependencies: [fetchVersion.resources]
+  });
 
   const responses = {
-    projects: useSelectMyCollected("projects"),
-    texts: useSelectMyCollected("texts"),
-    textSections: useSelectMyCollected("text_sections"),
-    resourceCollections: useSelectMyCollected("resource_collections"),
-    resources: useSelectMyCollected("resources")
+    projects,
+    texts,
+    textSections,
+    resourceCollections,
+    resources
   };
+
   const currentUser = useCurrentUser();
   const collection = getEntityCollection(currentUser);
 
