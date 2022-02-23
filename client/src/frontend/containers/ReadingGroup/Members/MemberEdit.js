@@ -1,39 +1,32 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { requests } from "api";
+import { useParams } from "react-router-dom";
+import { readingGroupMembershipsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import Navigation from "backend/components/navigation";
 import { MemberSettingsForm } from "frontend/components/reading-group/forms";
-import {
-  useDispatchReadingGroupMembership,
-  useGrabReadingGroupMembership
-} from "hooks";
+import { useFetch } from "hooks";
 
 const { flush } = entityStoreActions;
 
 function ReadingGroupMemberEditContainer({
-  match,
   readingGroup,
   confirm,
   dispatch,
   onRemoveClick,
   onEditSuccess
 }) {
-  const membershipId = match.params.membershipId;
+  const { membershipId } = useParams();
 
-  useDispatchReadingGroupMembership(membershipId);
-  const {
-    readingGroupMembership: membership,
-    readingGroupMembershipResponse: membershipResponse
-  } = useGrabReadingGroupMembership(membershipId);
+  const { data: membership } = useFetch({
+    request: [readingGroupMembershipsAPI.show, membershipId]
+  });
 
   useEffect(() => {
     return () => dispatch(flush([requests.feReadingGroupMembershipShow]));
   }, [dispatch]);
 
-  if (!membershipResponse) return null;
-
-  return (
+  return membership ? (
     <section>
       <Navigation.DrawerHeader
         title="Edit Group Member"
@@ -55,11 +48,10 @@ function ReadingGroupMemberEditContainer({
         onSuccess={onEditSuccess}
       />
     </section>
-  );
+  ) : null;
 }
 
 ReadingGroupMemberEditContainer.propTypes = {
-  match: PropTypes.object.isRequired,
   readingGroup: PropTypes.object.isRequired,
   confirm: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
