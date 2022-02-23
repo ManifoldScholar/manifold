@@ -31,7 +31,7 @@ function MyStarredEntityCollection({
 
   function getResponsesByType(type) {
     if (!responses || !responses[type]) return [];
-    return responses[type].collection || [];
+    return responses[type] || [];
   }
 
   function getCollectedProps(type) {
