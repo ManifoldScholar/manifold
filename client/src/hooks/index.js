@@ -3,9 +3,6 @@ export { default as useSelectAnnotations } from "./useSelectAnnotations";
 
 export { default as useDispatchMyCollected } from "./useDispatchMyCollected";
 export { default as useSelectMyCollected } from "./useSelectMyCollected";
-export { default as useDispatchMyAnnotatedTexts } from "./useDispatchMyAnnotatedTexts";
-export { default as useDispatchMyReadingGroups } from "./useDispatchMyReadingGroups";
-export { default as useSelectMyReadingGroups } from "./useSelectMyReadingGroups";
 
 export { default as useDispatchReadingGroupMembers } from "./useDispatchReadingGroupMembers";
 export { default as useSelectReadingGroupMembers } from "./useSelectReadingGroupMembers";
@@ -13,8 +10,6 @@ export { default as useDispatchReadingGroupMembership } from "./useDispatchReadi
 export { default as useGrabReadingGroupMembership } from "./useGrabReadingGroupMembership";
 export { default as useSelectReadingGroupMembership } from "./useSelectReadingGroupMembership";
 
-export { default as useDispatchPublicReadingGroups } from "./useDispatchPublicReadingGroups";
-export { default as useSelectPublicReadingGroups } from "./useSelectPublicReadingGroups";
 export { default as useDispatchReadingGroup } from "./useDispatchReadingGroup";
 export { default as useSelectReadingGroup } from "./useSelectReadingGroup";
 export { default as useDispatchReadingGroupCategories } from "./useDispatchReadingGroupCategories";
@@ -39,8 +34,6 @@ export { default as useFrontendModeContext } from "./useFrontendModeContext";
 export { default as useAuthentication } from "./useAuthentication";
 
 export { default as useFromStore } from "./useFromStore";
-export { default as useDispatchAllIssues } from "./useDispatchAllIssues";
-export { default as useSelectAllIssues } from "./useSelectAllIssues";
 export { default as useSettings } from "./useSettings";
 
 export { default as useEventTracker } from "./useEventTracker";

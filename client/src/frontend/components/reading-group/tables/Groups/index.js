@@ -11,6 +11,7 @@ import { ArchiveGroup, EditGroup, JoinGroup } from "./actions";
 import { ListFilters } from "global/components/list";
 import lh from "helpers/linkHandler";
 import { useListFilters } from "hooks";
+import { useHistory } from "react-router-dom";
 
 export default function GroupsTable(props) {
   const {
@@ -19,7 +20,6 @@ export default function GroupsTable(props) {
     onPageClick,
     filterProps,
     currentUser,
-    history,
     hideActions,
     hideTags
   } = props;
@@ -28,6 +28,8 @@ export default function GroupsTable(props) {
     ...filterProps,
     options: { groupSort: true }
   });
+
+  const history = useHistory();
 
   const userCanJoin = group => {
     if (group.attributes.currentUserRole !== "none") return false;
@@ -138,11 +140,8 @@ GroupsTable.propTypes = {
   readingGroups: PropTypes.array.isRequired,
   pagination: PropTypes.object.isRequired,
   onPageClick: PropTypes.func.isRequired,
-  initialFilterState: PropTypes.object.isRequired,
-  resetFilterState: PropTypes.func.isRequired,
-  filterChangeHandler: PropTypes.func.isRequired,
+  filterProps: PropTypes.object,
   currentUser: PropTypes.object,
-  history: PropTypes.object,
   hideActions: PropTypes.bool,
   hideTags: PropTypes.bool
 };
