@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
-import { useSelectSettings } from "hooks";
+import { useFromStore } from "hooks";
 import Authorize from "hoc/Authorize";
 import * as Styled from "./styles";
 
@@ -16,7 +16,7 @@ export default function SiteNav({
 }) {
   const context = useContext(FrontendModeContext);
   const menu = useMenuState();
-  const settings = useSelectSettings();
+  const settings = useFromStore("settings", "select");
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
 
   return (

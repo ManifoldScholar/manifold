@@ -3,18 +3,18 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
 import Authorize from "hoc/Authorize";
-import withSettings from "hoc/withSettings";
+import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
-function ReturnMenuBody({
+export default function ReturnMenuBody({
   returnUrl,
   isJournalArticle,
   projectTitle: entityTitle,
   toggleSignInUpOverlay,
-  moreLink,
-  settings
+  moreLink
 }) {
   const context = useContext(FrontendModeContext);
+  const settings = useFromStore("settings", "select");
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
 
   return (
@@ -83,6 +83,3 @@ ReturnMenuBody.propTypes = {
   moreLink: PropTypes.string,
   settings: PropTypes.object
 };
-
-// Can replace with useSelectSettings after merging feature/journals
-export default withSettings(ReturnMenuBody);
