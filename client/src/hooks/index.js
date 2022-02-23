@@ -1,6 +1,3 @@
-export { default as useDispatchAnnotations } from "./useDispatchAnnotations";
-export { default as useSelectAnnotations } from "./useSelectAnnotations";
-
 export { default as useDispatchReadingGroupMembers } from "./useDispatchReadingGroupMembers";
 export { default as useSelectReadingGroupMembers } from "./useSelectReadingGroupMembers";
 export { default as useDispatchReadingGroupMembership } from "./useDispatchReadingGroupMembership";
@@ -13,9 +10,6 @@ export { default as useDispatchReadingGroupCategories } from "./useDispatchReadi
 export { default as useSelectReadingGroupCategories } from "./useSelectReadingGroupCategories";
 export { default as useDispatchReadingGroupCollected } from "./useDispatchReadingGroupCollected";
 export { default as useSelectReadingGroupCollected } from "./useSelectReadingGroupCollected";
-
-export { default as useGrabCurrentText } from "./useGrabCurrentText";
-export { default as useGrabCurrentTextSection } from "./useGrabCurrentTextSection";
 
 export { default as useDeprecatedFetchData } from "./api/useDeprecatedFetchData";
 export { default as useApiCallback } from "./api/useApiCallback";

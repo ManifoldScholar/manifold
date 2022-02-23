@@ -13,7 +13,7 @@ function Filter({ label, value, options, onChange }) {
       </label>
       <Styled.Select id={uid} onChange={onChange} value={value}>
         {options.map(({ value: optValue, label: optLabel }) => (
-          <option key={optLabel} value={optValue}>
+          <option key={optValue} value={optValue}>
             {optLabel}
           </option>
         ))}
