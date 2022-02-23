@@ -25,7 +25,8 @@ export default function useFetch({
   afterFetch,
   options = {},
   dependencies = [],
-  withAuthDependency = false
+  withAuthDependency = false,
+  condition = true
 }) {
   const firstRun = useRef(true);
   const uid = `fetch_${useUID()}`;
@@ -55,13 +56,14 @@ export default function useFetch({
 
   /* eslint-disable react-hooks/exhaustive-deps */
   const triggerFetchData = useCallback(() => {
+    if (!condition) return Promise.resolve();
     log("useFetch", requestKey);
     setCount(count + 1);
     const apiFetch = apiCall(...apiCallArgs);
     const action = entityStoreActions.request(apiFetch, requestKey, options);
     const { promise } = dispatch(action);
     return promise;
-  }, [apiCall, ...apiCallArgs, dispatch, requestKey]);
+  }, [apiCall, ...apiCallArgs, dispatch, requestKey, condition]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
   // Fetch on the server

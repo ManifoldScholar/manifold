@@ -23,9 +23,6 @@ export { default as useSelectReadingGroupCategories } from "./useSelectReadingGr
 export { default as useDispatchReadingGroupCollected } from "./useDispatchReadingGroupCollected";
 export { default as useSelectReadingGroupCollected } from "./useSelectReadingGroupCollected";
 
-export { default as useDispatchSearchResults } from "./useDispatchSearchResults";
-export { default as useSelectSearchResults } from "./useSelectSearchResults";
-
 export { default as useGrabCurrentText } from "./useGrabCurrentText";
 export { default as useGrabCurrentTextSection } from "./useGrabCurrentTextSection";
 

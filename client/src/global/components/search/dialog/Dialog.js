@@ -1,30 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import Dialog from "global/components/dialog";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
-import { useDispatchSearchResults, useSelectSearchResults } from "hooks";
-
-const DEFAULT_PAGE = 1;
-const PER_PAGE = 5;
-const INIT_PAGINATION_STATE = {
-  number: DEFAULT_PAGE,
-  size: PER_PAGE
-};
+import { useFetch, usePaginationState } from "hooks";
+import { searchResultsAPI } from "api";
 
 function SearchDialog({ onClose, header, labelledBy, describedBy }) {
   const [query, setQuery] = useState(null);
-  const [pagination, setPagination] = useState(INIT_PAGINATION_STATE);
+  const [pagination, setPageNumber] = usePaginationState(1, 5);
 
-  useDispatchSearchResults(query, pagination);
+  const queryAndPagination = useMemo(() => {
+    return { ...query, page: pagination };
+  }, [query, pagination]);
 
-  const { results, resultsMeta } = useSelectSearchResults();
-
-  function setPageNumber(number) {
-    setPagination(prevState => {
-      return { ...prevState, number };
-    });
-  }
+  const { data: results, meta: resultsMeta } = useFetch({
+    request: [searchResultsAPI.index, queryAndPagination],
+    condition: query
+  });
 
   function handleCloseClick(event) {
     event.stopPropagation();
@@ -63,7 +56,7 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
           <h2 className="screen-reader-text">Search Results</h2>
           <SearchResults.List
             pagination={resultsMeta.pagination}
-            paginationClickHandler={setPageNumber}
+            paginationClickHandler={page => () => setPageNumber(page)}
             results={results}
             context="frontend"
           />
