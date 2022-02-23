@@ -17,18 +17,15 @@ export default function GroupsTable(props) {
     readingGroups: groups,
     pagination,
     onPageClick,
-    initialFilterState,
-    filterChangeHandler,
+    filterProps,
     currentUser,
     history,
     hideActions,
     hideTags
   } = props;
 
-  const filterProps = useListFilters({
-    onFilterChange: filterChangeHandler,
-    initialState: initialFilterState,
-    resetState: { sort_order: "" },
+  const listFilterProps = useListFilters({
+    ...filterProps,
     options: { groupSort: true }
   });
 
@@ -48,7 +45,7 @@ export default function GroupsTable(props) {
       onPageClick={onPageClick}
       unit="group"
       linkCreator={group => lh.link("frontendReadingGroupDetail", group.id)}
-      filters={<ListFilters {...filterProps} />}
+      filters={<ListFilters {...listFilterProps} />}
     >
       <Column header="Name" textStyle="valueLarge" columnPosition="all">
         {({ model, hovering }) => {
