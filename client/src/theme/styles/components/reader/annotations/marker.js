@@ -1,15 +1,35 @@
+import { styledUnderline } from "../../../mixins/typography";
+import { annotationHighlightColors } from "../../../variables/colors";
+
+const underlineStyleKeys = ["solid", "dashes", "dots", "wavy"];
+
+const underlineStyles = color => {
+  return underlineStyleKeys
+    .map(
+      style => `
+        &.annotation-${style} {
+          ${styledUnderline(style, color)}
+        }
+     `
+    )
+    .join("");
+};
+
 export default `
   .annotation-underline {
     cursor: pointer;
     background-repeat: repeat-x;
-    background-position: 0 100%;
-    background-size: 2px 2px;
 
     &.primary {
+
       background-image: linear-gradient(
         var(--color-annotation-primary-light),
         var(--color-annotation-primary-light)
       );
+      background-position: 0 100%;
+      background-size: 2px 2px;
+
+      ${underlineStyles(annotationHighlightColors.primaryLight)}
 
       .scheme-dark & {
         background-image: linear-gradient(
@@ -42,6 +62,10 @@ export default `
         var(--color-annotation-secondary-light),
         var(--color-annotation-secondary-light)
       );
+      background-position: 0 100%;
+      background-size: 2px 2px;
+
+      ${underlineStyles(annotationHighlightColors.secondaryLight)}
 
       .scheme-dark & {
         background-image: linear-gradient(
@@ -66,6 +90,10 @@ export default `
         var(--color-annotation-tertiary-light),
         var(--color-annotation-tertiary-light)
       );
+      background-position: 0 100%;
+      background-size: 2px 2px;
+
+      ${underlineStyles(annotationHighlightColors.tertiaryLight)}
 
       .scheme-dark & {
         background-image: linear-gradient(

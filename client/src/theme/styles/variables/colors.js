@@ -141,7 +141,7 @@ export const inputColors = {
 
 const highlightPrimaryBase = "#2bd1fa";
 
-const annotationHighlightColors = {
+export const annotationHighlightColors = {
   primaryBase: highlightPrimaryBase,
   primaryPale: colorHelper(highlightPrimaryBase)
     .spin(-1)
