@@ -184,15 +184,6 @@ class ReadingGroupForm extends React.PureComponent {
                 }
               ]}
             />
-            <Form.Select
-              label="Type"
-              options={[
-                { label: "Select a type", value: "" },
-                { label: "Course", value: "course" }
-              ]}
-              name="relationships[kind]"
-              rounded
-            />
             <Form.Radios
               label="Course"
               name="attributes[course][enabled]"
