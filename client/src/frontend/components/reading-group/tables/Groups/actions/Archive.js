@@ -1,27 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { readingGroupMembershipsAPI, requests } from "api";
+import { requests } from "api";
 import { useDispatch } from "react-redux";
 import config from "config";
 import Action from "global/components/table/Action";
 import { entityStoreActions } from "actions";
 import withConfirmation from "hoc/withConfirmation";
-import { useFetch } from "hooks";
 
 const { request } = entityStoreActions;
 
-function ArchiveGroup({ readingGroup, confirm }) {
+function ArchiveGroup({ membership, confirm }) {
   const dispatch = useDispatch();
 
-  const currentUserMembershipId =
-    readingGroup.relationships.currentUserReadingGroupMembership.id;
+  if (!membership) return null;
 
-  const { data: currentUserMembership } = useFetch({
-    request: [readingGroupMembershipsAPI.show, currentUserMembershipId]
-  });
-
-  const archive = currentUserMembership?.links?.archive;
-  const activate = currentUserMembership?.links?.activate;
+  const archive = membership?.links?.archive;
+  const activate = membership?.links?.activate;
 
   function doArchive() {
     const call = {
@@ -59,8 +53,6 @@ function ArchiveGroup({ readingGroup, confirm }) {
     confirm(heading, message, () => doArchive());
   }
 
-  if (!archive && !activate) return null;
-
   return (
     <Action onClick={handleClick}>{archive ? "Archive" : "Activate"}</Action>
   );
@@ -69,7 +61,7 @@ function ArchiveGroup({ readingGroup, confirm }) {
 ArchiveGroup.displayName = "GroupsTable.Group.Archive";
 
 ArchiveGroup.propTypes = {
-  readingGroup: PropTypes.object.isRequired,
+  membership: PropTypes.object.isRequired,
   confirm: PropTypes.func.isRequired
 };
 
