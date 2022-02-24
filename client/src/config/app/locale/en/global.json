@@ -8,6 +8,46 @@
     "project_one": "project",
     "project_other": "projects",
     "project_collection_one": "project collection",
-    "project_collection_other": "project collections"
-  }
+    "project_collection_other": "project collections",
+    "text_one": "text",
+    "text_other": "texts",
+    "journal_one": "journal",
+    "journal_other": "journals",
+    "volume_one": "volume",
+    "volume_other": "volumes",
+    "issue_one": "issue",
+    "issue_other": "issues",
+    "article_one": "article",
+    "article_other": "articles",
+    "resource_one": "resource",
+    "resource_other": "resources",
+    "resource_collection_one": "resource collection",
+    "resource_collection_other": "resource collections"
+  },
+  "actions": {
+    "edit": "Edit",
+    "open": "Open",
+    "close": "Close",
+    "delete": "Delete",
+    "save": "Save",
+    "hide": "Hide",
+    "show": "Reset",
+    "view": "View",
+    "view_all": "View all",
+    "see_all": "See all"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "go_to_page": "Go to page {{number}}"
+  },
+  "navigation": {
+    "user": {
+      "sign_in": "Sign In",
+      "sign_out": "Sign Out",
+      "my_starred": "My Starred",
+      "my_notes_comments": "My Notes + Comments"
+    }
+  },
+  "search": {}
 }
