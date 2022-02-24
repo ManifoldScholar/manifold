@@ -197,7 +197,7 @@ class ReadingGroupForm extends React.PureComponent {
               label="Course"
               name="attributes[course][enabled]"
               defaultValue={false}
-              instructions={`Is this reading group a course? Some text about courses, and how start/end dates will be used.`}
+              instructions={`Course information is used for internal tracking and reporting purposes.`}
               options={[
                 { label: "Yes", value: true },
                 { label: "No", value: false }

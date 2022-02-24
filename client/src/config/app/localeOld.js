@@ -61,9 +61,9 @@ export default {
         roleChange: {
           heading: "Confirm Role Change.",
           memberToModerator:
-            "Some text about what happens if the member’s role is changed from Member to Moderator",
+            "Moderators can manage members and change group settings. Are you sure you want to do this?",
           moderatorToMember:
-            "Some text about what happens if the member’s role is changed from Moderator to Member"
+            "After this change, the user will no longer be able to manage members and group settings. Are you sure you want to do this?"
         }
       }
     },

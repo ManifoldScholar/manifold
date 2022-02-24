@@ -57,7 +57,7 @@ function ReadingGroupMemberForm({
           label="Role"
           name="attributes[role]"
           beforeOnChange={warnOnRoleChange}
-          instructions="Set a role for this group member. Explanation of the differences between the available roles. Explanation of the differences between the available roles. Explanation of the differences between the available roles."
+          instructions="Members can see group annotations and annotate within the group. Moderators can manage members and update group settings."
           options={[
             { label: "Member", value: "member" },
             { label: "Moderator", value: "moderator" }
@@ -72,14 +72,14 @@ function ReadingGroupMemberForm({
         label="Label"
         name="attributes[label]"
         placeholder="Enter a label"
-        instructions="Give this group member a label. Explanation of the creation and use of labels. Explanation of the creation and use of labels. Explanation of the creation and use of labels."
+        instructions="Labels are used to describe specific members within the group and appear next to the name in the membership list."
         focusOnMount={userIsGroupCreator}
       />
       <Form.Select
         label="Annotation Style"
         name="attributes[annotationStyle]"
         beforeOnChange={handleStyleSelectChange}
-        instructions="Set an annotation style for this group member. Explanation of annotation styles goes here. Explanation of annotation styles goes here."
+        instructions="Annotation styles will appear in the Manifold reading interface and can be used to call differentiate a user's annotations from other annotations in the reading group."
         options={[
           { label: "Dashed", value: "dashes" },
           { label: "Dotted", value: "dots" },
