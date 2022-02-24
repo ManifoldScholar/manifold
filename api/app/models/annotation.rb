@@ -119,7 +119,10 @@ class Annotation < ApplicationRecord
   }
 
   scope :sans_archived_reading_group_memberships, -> {
-    all # left_outer_joins(:reading_group_membership).where.not(reading_group_memberships: { aasm_state: :archived })
+    no_rgm = ReadingGroupMembership.arel_table[:id].eq(nil)
+    not_archived = ReadingGroupMembership.arel_table[:aasm_state].not_eq(:archived)
+
+    left_outer_joins(:reading_group_membership).where(no_rgm.or(not_archived))
   }
 
   scope :with_read_ability_when_reading_groups_disabled, lambda { |user, exclude_public = false|
