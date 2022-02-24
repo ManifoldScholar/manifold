@@ -20,10 +20,12 @@ export default function ReadingGroup({ route }) {
 
   const settings = useFromStore("settings", "select");
 
-  const { data: readingGroup } = useFetch({
-    request: [readingGroupsAPI.show, id]
-  });
   const [fetchVersion, setFetchVersion] = useState(1);
+
+  const { data: readingGroup } = useFetch({
+    request: [readingGroupsAPI.show, id],
+    dependencies: [fetchVersion]
+  });
 
   if (!readingGroup) return null;
 
