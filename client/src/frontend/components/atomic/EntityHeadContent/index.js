@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
 import { useFromStore } from "hooks";
 
 function EntityHeadContent({ entity, type, parentEntity }) {
   const settings = useFromStore("settings", "select");
+  const { t } = useTranslation(["frontend"]);
 
   const installationName = settings?.attributes.general.installationName || "";
   const {
@@ -33,7 +35,7 @@ function EntityHeadContent({ entity, type, parentEntity }) {
       }
       return titlePlaintext;
     })();
-    return `\u201c${titleOrNum}\u201d on ${installationName}`;
+    return `\u201c${titleOrNum}\u201d ${t("common.on")} ${installationName}`;
   };
 
   const description = () => {
