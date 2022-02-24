@@ -125,7 +125,11 @@ export default function GroupsTable(props) {
           {({ model }) => (
             <div className="table__actions">
               <EditGroup readingGroup={model} />
-              <ArchiveGroup readingGroup={model} />
+              <ArchiveGroup
+                membership={
+                  model.relationships.currentUserReadingGroupMembership
+                }
+              />
             </div>
           )}
         </Column>
