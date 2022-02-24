@@ -63,6 +63,11 @@ export default function ReadingGroup({ route }) {
     closeCallback: () => handleClose()
   };
 
+  const onCloseSearch = () => {
+    setFetchVersion(prev => prev + 1);
+    handleClose();
+  };
+
   const breadcrumbProps = () => {
     if (currentUserRole === "none")
       return {
@@ -99,7 +104,7 @@ export default function ReadingGroup({ route }) {
           />
           {childRoutes(route, { childProps })}
           {showSearchDialog && (
-            <SearchDialog heading={groupName} onClose={() => handleClose()} />
+            <SearchDialog heading={groupName} onClose={onCloseSearch} />
           )}
         </div>
       </section>
