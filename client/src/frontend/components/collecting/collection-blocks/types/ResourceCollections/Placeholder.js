@@ -1,9 +1,12 @@
 import React from "react";
 import IconComposer from "global/components/utility/IconComposer";
 import Skeleton from "frontend/components/collecting/ContentSkeleton";
+import { useTranslation } from "react-i18next";
+import { capitalize } from "utils/string";
 import * as Styled from "frontend/components/resource-collection/Cover/styles";
 
 function Placeholder() {
+  const { t } = useTranslation(["common"]);
   return (
     <>
       <Styled.Cover as="div" $isPlaceholder aria-hidden>
@@ -13,11 +16,13 @@ function Placeholder() {
           </Styled.Title>
           <Styled.IconWrapper>
             <IconComposer size={48} icon="resourceCollection64" />
-            <Styled.IconText>{"Collection"}</Styled.IconText>
+            <Styled.IconText>
+              {capitalize(t("glossary.collection"))}
+            </Styled.IconText>
           </Styled.IconWrapper>
         </Styled.TitleOverlay>
       </Styled.Cover>
-      <span className="screen-reader-text">Loading</span>
+      <span className="screen-reader-text">{t("loading")}</span>
     </>
   );
 }

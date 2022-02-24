@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
 import Skeleton from "frontend/components/collecting/ContentSkeleton";
 import * as StyledThumbnail from "frontend/components/resourceish/Thumbnail/styles";
@@ -6,6 +7,7 @@ import * as StyledIcon from "frontend/components/resourceish/Thumbnail/Icon/styl
 import * as Styled from "./styles";
 
 function Placeholder() {
+  const { t } = useTranslation(["common"]);
   return (
     <>
       <Styled.Wrapper $showTitle aria-hidden>
@@ -23,7 +25,7 @@ function Placeholder() {
           </StyledThumbnail.Title>
         </Styled.Inner>
       </Styled.Wrapper>
-      <span className="screen-reader-text">Loading</span>
+      <span className="screen-reader-text">{t("loading")}</span>
     </>
   );
 }

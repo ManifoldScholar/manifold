@@ -1,10 +1,13 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
 import Skeleton from "frontend/components/collecting/ContentSkeleton";
 import * as Styled from "frontend/components/text/styles";
 import * as StyledCover from "global/components/text/Cover/styles";
 
 function Placeholder() {
+  const { t } = useTranslation(["common"]);
+
   return (
     <Styled.Block $loading>
       <Styled.Content aria-hidden>
@@ -35,7 +38,7 @@ function Placeholder() {
           </Styled.Interaction>
         </Styled.InteractionList>
       </Styled.Meta>
-      <span className="screen-reader-text">Loading</span>
+      <span className="screen-reader-text">{t("loading")}</span>
     </Styled.Block>
   );
 }
