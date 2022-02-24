@@ -5,7 +5,7 @@ import isEmpty from "lodash/isEmpty";
 import values from "lodash/values";
 import union from "lodash/union";
 import Notation from "reader/components/notation";
-import smoothScroll from "../../../../../utils/smoothScroll";
+import smoothScroll from "utils/smoothScroll";
 
 export default class TextNode extends Component {
   static propTypes = {
@@ -73,11 +73,13 @@ export default class TextNode extends Component {
         resourceId,
         resourceCollectionId,
         authorCreated,
-        abilities
+        abilities,
+        annotationStyle
       } = a.attributes;
       return {
         id,
         type,
+        annotationStyle,
         isCreator,
         start,
         end,
@@ -144,6 +146,10 @@ export default class TextNode extends Component {
     return chunks.map((chunk, index) => {
       const highlighted = map[index].find(a => a.type === "highlight");
       const underlined = map[index].find(a => a.type === "annotation");
+      const wavy = map[index].find(a => a.annotationStyle === "wavy");
+      const dots = map[index].find(a => a.annotationStyle === "dots");
+      const dashes = map[index].find(a => a.annotationStyle === "dashes");
+      const solid = map[index].find(a => a.annotationStyle === "solid");
       const isCreator = map[index].find(a => a.isCreator);
       const authorCreated = map[index].find(a => a.authorCreated);
       const lockedSelection = map[index].find(a => a.id === "selection");
@@ -167,6 +173,10 @@ export default class TextNode extends Component {
         "annotation-locked-selected primary": lockedSelection,
         "annotation-underline": underlined,
         "annotation-highlight": highlighted,
+        "annotation-wavy": wavy,
+        "annotation-dashes": dashes,
+        "annotation-dots": dots,
+        "annotation-solid": solid,
         "annotation-resource": notations.length > 0,
         "annotation-resource-start": notations && startingResources.length > 0,
         "annotation-resource-end": notations && endingResources.length > 0
