@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_14_190623) do
+ActiveRecord::Schema.define(version: 2022_02_24_204310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -782,15 +782,31 @@ ActiveRecord::Schema.define(version: 2022_02_14_190623) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "reading_group_text_section_id"
+    t.uuid "reading_group_journal_issue_id"
     t.index ["collectable_type", "collectable_id"], name: "index_rgce_collectable_reference"
     t.index ["reading_group_category_id"], name: "index_rgce_category_reference"
     t.index ["reading_group_id", "collectable_type", "collectable_id"], name: "index_rgce_uniqueness", unique: true
     t.index ["reading_group_id"], name: "index_rgce_reading_group_reference"
+    t.index ["reading_group_journal_issue_id"], name: "index_rgce_journal_issue_reference"
     t.index ["reading_group_project_id"], name: "index_rgce_project_reference"
     t.index ["reading_group_resource_collection_id"], name: "index_rgce_resource_collection_reference"
     t.index ["reading_group_resource_id"], name: "index_rgce_resource_reference"
     t.index ["reading_group_text_id"], name: "index_rgce_text_reference"
     t.index ["reading_group_text_section_id"], name: "index_rgce_text_section_reference"
+  end
+
+  create_table "reading_group_journal_issues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "reading_group_id", null: false
+    t.uuid "journal_issue_id", null: false
+    t.uuid "reading_group_category_id"
+    t.integer "position"
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["journal_issue_id"], name: "index_rg_journal_issue_reference"
+    t.index ["reading_group_category_id"], name: "index_reading_group_journal_issues_on_reading_group_category_id"
+    t.index ["reading_group_id", "journal_issue_id"], name: "index_rg_journal_issues_uniqueness", unique: true
+    t.index ["reading_group_id", "reading_group_category_id", "position"], name: "index_rg_journal_issues_ordering"
+    t.index ["reading_group_id"], name: "index_reading_group_journal_issues_on_reading_group_id"
   end
 
   create_table "reading_group_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1292,8 +1308,10 @@ ActiveRecord::Schema.define(version: 2022_02_14_190623) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "user_collected_text_section_id"
+    t.uuid "user_collected_journal_issue_id"
     t.index ["collectable_type", "collectable_id"], name: "index_ucce_collectable_reference"
     t.index ["project_id"], name: "index_ucce_inferred_project_reference"
+    t.index ["user_collected_journal_issue_id"], name: "index_ucce_journal_issue_reference"
     t.index ["user_collected_project_id"], name: "index_ucce_project_reference"
     t.index ["user_collected_resource_collection_id"], name: "index_ucce_resource_collection_reference"
     t.index ["user_collected_resource_id"], name: "index_ucce_resource_reference"
@@ -1301,6 +1319,16 @@ ActiveRecord::Schema.define(version: 2022_02_14_190623) do
     t.index ["user_collected_text_section_id"], name: "index_ucce_text_section_reference"
     t.index ["user_id", "collectable_type", "collectable_id"], name: "index_ucce_uniqueness", unique: true
     t.index ["user_id"], name: "index_ucce_user_reference"
+  end
+
+  create_table "user_collected_journal_issues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "journal_issue_id", null: false
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["journal_issue_id"], name: "index_uc_journal_issue_reference"
+    t.index ["user_id", "journal_issue_id"], name: "index_uc_journal_issue_uniqueness", unique: true
+    t.index ["user_id"], name: "index_user_collected_journal_issues_on_user_id"
   end
 
   create_table "user_collected_projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1441,12 +1469,16 @@ ActiveRecord::Schema.define(version: 2022_02_14_190623) do
   add_foreign_key "project_exports", "projects", on_delete: :restrict
   add_foreign_key "reading_group_categories", "reading_groups", on_delete: :cascade
   add_foreign_key "reading_group_composite_entries", "reading_group_categories", on_delete: :nullify
+  add_foreign_key "reading_group_composite_entries", "reading_group_journal_issues", on_delete: :cascade
   add_foreign_key "reading_group_composite_entries", "reading_group_projects", on_delete: :cascade
   add_foreign_key "reading_group_composite_entries", "reading_group_resource_collections", on_delete: :cascade
   add_foreign_key "reading_group_composite_entries", "reading_group_resources", on_delete: :cascade
   add_foreign_key "reading_group_composite_entries", "reading_group_text_sections", on_delete: :cascade
   add_foreign_key "reading_group_composite_entries", "reading_group_texts", on_delete: :cascade
   add_foreign_key "reading_group_composite_entries", "reading_groups", on_delete: :cascade
+  add_foreign_key "reading_group_journal_issues", "journal_issues", on_delete: :cascade
+  add_foreign_key "reading_group_journal_issues", "reading_group_categories", on_delete: :nullify
+  add_foreign_key "reading_group_journal_issues", "reading_groups", on_delete: :cascade
   add_foreign_key "reading_group_memberships", "reading_groups", on_delete: :cascade
   add_foreign_key "reading_group_memberships", "users", on_delete: :cascade
   add_foreign_key "reading_group_projects", "projects", on_delete: :cascade
@@ -1473,12 +1505,15 @@ ActiveRecord::Schema.define(version: 2022_02_14_190623) do
   add_foreign_key "resource_imports", "users", column: "creator_id"
   add_foreign_key "text_exports", "texts", on_delete: :restrict
   add_foreign_key "user_collected_composite_entries", "projects", on_delete: :cascade
+  add_foreign_key "user_collected_composite_entries", "user_collected_journal_issues", on_delete: :cascade
   add_foreign_key "user_collected_composite_entries", "user_collected_projects", on_delete: :cascade
   add_foreign_key "user_collected_composite_entries", "user_collected_resource_collections", on_delete: :cascade
   add_foreign_key "user_collected_composite_entries", "user_collected_resources", on_delete: :cascade
   add_foreign_key "user_collected_composite_entries", "user_collected_text_sections", on_delete: :cascade
   add_foreign_key "user_collected_composite_entries", "user_collected_texts", on_delete: :cascade
   add_foreign_key "user_collected_composite_entries", "users", on_delete: :cascade
+  add_foreign_key "user_collected_journal_issues", "journal_issues", on_delete: :cascade
+  add_foreign_key "user_collected_journal_issues", "users", on_delete: :cascade
   add_foreign_key "user_collected_projects", "projects", on_delete: :cascade
   add_foreign_key "user_collected_projects", "users", on_delete: :cascade
   add_foreign_key "user_collected_resource_collections", "resource_collections", on_delete: :cascade
@@ -1823,6 +1858,58 @@ UNION ALL
              JOIN makers m ON ((m.id = c.maker_id)))
           WHERE (((c.collaboratable_type)::text = 'Project'::text) AND (c.collaboratable_id = p.id))) pm ON (true));
   SQL
+  create_view "text_summaries", sql_definition: <<-SQL
+    SELECT t.project_id,
+    t.id,
+    t.id AS text_id,
+    t.created_at,
+    t.updated_at,
+    t.published,
+    t.slug,
+    t.category_id,
+    t."position",
+    t.description,
+    (t.fa_cache #>> '{description,formatted}'::text[]) AS description_formatted,
+    (t.fa_cache #>> '{description,plaintext}'::text[]) AS description_plaintext,
+    t.start_text_section_id,
+    t.publication_date,
+    t.cover_data,
+    t.toc,
+    t.ignore_access_restrictions,
+    tb.id AS toc_section,
+    (tts.titles #>> '{subtitle,raw}'::text[]) AS subtitle,
+    (tts.titles #>> '{subtitle,formatted}'::text[]) AS subtitle_formatted,
+    (tts.titles #>> '{subtitle,plaintext}'::text[]) AS subtitle_plaintext,
+    (tts.titles #>> '{main,raw}'::text[]) AS title,
+    (tts.titles #>> '{main,formatted}'::text[]) AS title_formatted,
+    (tts.titles #>> '{main,plaintext}'::text[]) AS title_plaintext,
+    tts.titles,
+    tm.creator_names,
+    tm.collaborator_names,
+    COALESCE(tac.annotations_count, (0)::bigint) AS annotations_count,
+    COALESCE(tac.highlights_count, (0)::bigint) AS highlights_count,
+    COALESCE(tac.orphaned_annotations_count, (0)::bigint) AS orphaned_annotations_count,
+    COALESCE(tac.orphaned_highlights_count, (0)::bigint) AS orphaned_highlights_count
+   FROM ((((texts t
+     LEFT JOIN LATERAL ( SELECT count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+            count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
+            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count
+           FROM (annotations a
+             JOIN text_sections ts ON ((ts.id = a.text_section_id)))
+          WHERE (ts.text_id = t.id)) tac ON (true))
+     LEFT JOIN text_title_summaries tts ON ((t.id = tts.text_id)))
+     LEFT JOIN LATERAL ( SELECT ts.id
+           FROM text_sections ts
+          WHERE ((ts.text_id = t.id) AND ((ts.kind)::text = 'navigation'::text))
+          ORDER BY ts.created_at
+         LIMIT 1) tb ON (true))
+     LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
+            string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
+           FROM (collaborators c
+             JOIN makers m ON ((m.id = c.maker_id)))
+          WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
+  SQL
   create_view "reading_group_composite_entry_rankings", sql_definition: <<-SQL
     SELECT rgce.id AS reading_group_composite_entry_id,
     rgce.reading_group_id,
@@ -1932,58 +2019,6 @@ UNION ALL
    FROM ((reading_groups rg
      LEFT JOIN category_lists cl ON ((cl.reading_group_id = rg.id)))
      LEFT JOIN collection_mappings cm ON ((cm.reading_group_id = rg.id)));
-  SQL
-  create_view "text_summaries", sql_definition: <<-SQL
-    SELECT t.project_id,
-    t.id,
-    t.id AS text_id,
-    t.created_at,
-    t.updated_at,
-    t.published,
-    t.slug,
-    t.category_id,
-    t."position",
-    t.description,
-    (t.fa_cache #>> '{description,formatted}'::text[]) AS description_formatted,
-    (t.fa_cache #>> '{description,plaintext}'::text[]) AS description_plaintext,
-    t.start_text_section_id,
-    t.publication_date,
-    t.cover_data,
-    t.toc,
-    t.ignore_access_restrictions,
-    tb.id AS toc_section,
-    (tts.titles #>> '{subtitle,raw}'::text[]) AS subtitle,
-    (tts.titles #>> '{subtitle,formatted}'::text[]) AS subtitle_formatted,
-    (tts.titles #>> '{subtitle,plaintext}'::text[]) AS subtitle_plaintext,
-    (tts.titles #>> '{main,raw}'::text[]) AS title,
-    (tts.titles #>> '{main,formatted}'::text[]) AS title_formatted,
-    (tts.titles #>> '{main,plaintext}'::text[]) AS title_plaintext,
-    tts.titles,
-    tm.creator_names,
-    tm.collaborator_names,
-    COALESCE(tac.annotations_count, (0)::bigint) AS annotations_count,
-    COALESCE(tac.highlights_count, (0)::bigint) AS highlights_count,
-    COALESCE(tac.orphaned_annotations_count, (0)::bigint) AS orphaned_annotations_count,
-    COALESCE(tac.orphaned_highlights_count, (0)::bigint) AS orphaned_highlights_count
-   FROM ((((texts t
-     LEFT JOIN LATERAL ( SELECT count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
-            count(*) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
-            count(*) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count
-           FROM (annotations a
-             JOIN text_sections ts ON ((ts.id = a.text_section_id)))
-          WHERE (ts.text_id = t.id)) tac ON (true))
-     LEFT JOIN text_title_summaries tts ON ((t.id = tts.text_id)))
-     LEFT JOIN LATERAL ( SELECT ts.id
-           FROM text_sections ts
-          WHERE ((ts.text_id = t.id) AND ((ts.kind)::text = 'navigation'::text))
-          ORDER BY ts.created_at
-         LIMIT 1) tb ON (true))
-     LEFT JOIN LATERAL ( SELECT string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'creator'::text)) AS creator_names,
-            string_agg((m.cached_full_name)::text, ', '::text ORDER BY c."position") FILTER (WHERE ((c.role)::text = 'collaborator'::text)) AS collaborator_names
-           FROM (collaborators c
-             JOIN makers m ON ((m.id = c.maker_id)))
-          WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
   SQL
   create_view "reading_group_membership_counts", sql_definition: <<-SQL
     SELECT rgm.id AS reading_group_membership_id,

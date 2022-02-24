@@ -10,6 +10,7 @@ class JournalIssue < ApplicationRecord
   include SerializedAbilitiesFor
   include Filterable
   include Sluggable
+  include Collectable
   include HasFormattedAttributes
   include SearchIndexable
 
