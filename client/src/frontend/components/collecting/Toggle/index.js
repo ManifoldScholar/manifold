@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { collectingAPI, requests } from "api";
@@ -51,6 +51,11 @@ function CollectingToggle({
   const [isCollecting, setIsCollecting] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
 
+  const myCollectableReadingGroups = useMemo(() => {
+    if (!Array.isArray(myReadingGroups)) return [];
+    return myReadingGroups.filter(rg => rg?.attributes?.abilities?.update);
+  }, [myReadingGroups]);
+
   useEffect(() => {
     if (!dialogVisible || (!onDialogOpen && !onDialogClose)) return;
     onDialogOpen();
@@ -67,7 +72,7 @@ function CollectingToggle({
   }, [collected]);
 
   const view = determineView(collected, hovered, confirmed, isCollecting);
-  const hasReadingGroups = myReadingGroups?.length > 0;
+  const hasReadingGroups = myCollectableReadingGroups?.length > 0;
   const collectableTitle = normalizeTitle(collectable);
   const useOutlinedStarIcon = outlined && view === "add";
 
@@ -199,7 +204,7 @@ function CollectingToggle({
         <Dialog
           collectable={collectable}
           title={collectableTitle}
-          readingGroups={myReadingGroups}
+          readingGroups={myCollectableReadingGroups}
           currentUser={currentUser}
           onChange={handleDialogChange}
           onClose={handleDialogClose}
