@@ -4,26 +4,6 @@
     "es": "Spanish",
     "nl": "Dutch"
   },
-  "glossary": {
-    "project_one": "project",
-    "project_other": "projects",
-    "project_collection_one": "project collection",
-    "project_collection_other": "project collections",
-    "text_one": "text",
-    "text_other": "texts",
-    "journal_one": "journal",
-    "journal_other": "journals",
-    "volume_one": "volume",
-    "volume_other": "volumes",
-    "issue_one": "issue",
-    "issue_other": "issues",
-    "article_one": "article",
-    "article_other": "articles",
-    "resource_one": "resource",
-    "resource_other": "resources",
-    "resource_collection_one": "resource collection",
-    "resource_collection_other": "resource collections"
-  },
   "actions": {
     "edit": "Edit",
     "open": "Open",
