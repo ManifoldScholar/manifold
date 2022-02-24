@@ -10,8 +10,7 @@ function ReadingGroupHomepageEditContainer({
   readingGroup,
   categories,
   responses,
-  refresh,
-  dispatch
+  refresh
 }) {
   return (
     <Authorize
@@ -50,7 +49,6 @@ function ReadingGroupHomepageEditContainer({
             categories={categories}
             responses={responses}
             refresh={refresh}
-            dispatch={dispatch}
           />
         </div>
       </div>
@@ -65,8 +63,7 @@ ReadingGroupHomepageEditContainer.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   categories: PropTypes.array.isRequired,
   responses: PropTypes.object.isRequired,
-  refresh: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired
+  refresh: PropTypes.func.isRequired
 };
 
 export default ReadingGroupHomepageEditContainer;

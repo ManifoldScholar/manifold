@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import findKey from "lodash/findKey";
 import { readingGroupsAPI, collectingAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -18,9 +19,10 @@ function CollectionEditor({
   categories,
   responses,
   refresh,
-  dispatch,
   setScreenReaderStatus: announce
 }) {
+  const dispatch = useDispatch();
+
   const collection = getEntityCollection(readingGroup);
 
   function createCategory(attributes) {
