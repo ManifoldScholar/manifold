@@ -16,7 +16,7 @@ function CollectingDialog({
   onClose
 }) {
   const uidSeed = useUIDSeed();
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
 
   function inMyCollection() {
     return inCollection(currentUser, collectable);

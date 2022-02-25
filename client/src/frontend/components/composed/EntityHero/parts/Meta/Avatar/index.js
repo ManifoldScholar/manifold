@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
 export default function MakerAvatar({ maker }) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   return (
     <Styled.Avatar>
       {maker.attributes.avatarStyles.smallSquare ? (

@@ -7,7 +7,7 @@ import * as StyledIcon from "frontend/components/resourceish/Thumbnail/Icon/styl
 import * as Styled from "./styles";
 
 function Placeholder() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   return (
     <>
       <Styled.Wrapper $showTitle aria-hidden>

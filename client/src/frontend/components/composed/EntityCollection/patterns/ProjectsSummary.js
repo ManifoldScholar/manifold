@@ -8,11 +8,11 @@ import FooterLink from "../parts/FooterLink";
 import EntityCollection from "../EntityCollection";
 
 function ProjectsSummaryEntityCollection({ projects, ...passThroughProps }) {
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
 
   return (
     <EntityCollection
-      title={t("pages.projects_all")}
+      title={t("pages.frontend.projects_all")}
       icon="projects64"
       BodyComponent={props => (
         <ThumbnailGrid {...props}>

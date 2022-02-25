@@ -16,7 +16,7 @@ function MyAnnotationsEntityCollection({
   paginationProps,
   ...passThroughProps
 }) {
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
 
   if (!annotations || !annotationsMeta) return null;
 
@@ -24,7 +24,7 @@ function MyAnnotationsEntityCollection({
 
   return (
     <EntityCollection
-      title={t("pages.my_notes")}
+      title={t("pages.frontend.my_notes")}
       icon="NotesUnique"
       filterProps={hasAnnotations ? filterProps : null}
       countProps={

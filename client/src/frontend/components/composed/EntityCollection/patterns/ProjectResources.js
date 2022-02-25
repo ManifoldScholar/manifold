@@ -17,7 +17,7 @@ function ProjectResourcesEntityCollection({
   itemHeadingLevel,
   ...passThroughProps
 }) {
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
 
   const showPagination = !isEmpty(resourcesMeta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(resourcesMeta) && !isEmpty(filterProps);
@@ -26,7 +26,7 @@ function ProjectResourcesEntityCollection({
 
   return resources && project ? (
     <EntityCollection
-      title={t("pages.resources_all")}
+      title={t("pages.frontend.resources_all")}
       icon="resources64"
       filterProps={showFilters ? listFiltersProps : null}
       BodyComponent={props => (

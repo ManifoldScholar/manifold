@@ -6,7 +6,7 @@ import * as Styled from "frontend/components/text/styles";
 import * as StyledCover from "global/components/text/Cover/styles";
 
 function Placeholder() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
 
   return (
     <Styled.Block $loading>

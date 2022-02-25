@@ -5,7 +5,7 @@ import IconComputed from "global/components/icon-computed";
 import * as Styled from "./styles";
 
 export default function HeroSocial({ hashtag, twitter, facebook, instagram }) {
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
 
   const url = (service, id) => {
     switch (service) {

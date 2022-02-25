@@ -6,7 +6,7 @@ import { capitalize } from "utils/string";
 import * as Styled from "frontend/components/resource-collection/Cover/styles";
 
 function Placeholder() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   return (
     <>
       <Styled.Cover as="div" $isPlaceholder aria-hidden>

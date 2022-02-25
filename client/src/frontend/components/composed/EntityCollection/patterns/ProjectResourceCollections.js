@@ -15,13 +15,13 @@ function ProjectResourceCollectionsEntityCollection({
   itemHeadingLevel,
   ...passThroughProps
 }) {
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
 
   const showPagination =
     !isEmpty(resourceCollectionsMeta) && !isEmpty(paginationProps);
   return (
     <EntityCollection
-      title={t("pages.resource_collections_all")}
+      title={t("pages.frontend.resource_collections_all")}
       icon="resourceCollection64"
       BodyComponent={props => (
         <ResourceCollectionList.Grid
