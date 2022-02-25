@@ -23,7 +23,14 @@
     "annotation_one": "annotation",
     "annotations_other": "annotations",
     "collection_one": "collection",
-    "collection_other": "collections"
+    "collection_other": "collections",
+    "contributor_one": "contributor",
+    "contributor_other": "contributors",
+    "item_one": "item",
+    "item_other": "items"
   },
-  "loading": "Loading"
+  "loading": "Loading",
+  "img_alts": {
+    "user_avatar": "User Avatar"
+  }
 }

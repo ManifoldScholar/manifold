@@ -7,11 +7,7 @@ import * as Styled from "./styles";
 
 function EntityCount({ pagination, count, unit, customTemplate }) {
   if (isFunction(customTemplate))
-    return (
-      <Styled.Total>
-        {customTemplate(count, pluralize(unit, count))}
-      </Styled.Total>
-    );
+    return <Styled.Total>{customTemplate(count, unit)}</Styled.Total>;
 
   if (pagination) return <Range pagination={pagination} unit={unit} />;
 

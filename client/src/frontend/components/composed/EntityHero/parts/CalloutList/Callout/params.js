@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
-export const getCalloutParams = (data, type, isLink) => {
+export const getCalloutParams = (data, type, isLink, t) => {
   const slug = data.relationships?.text?.attributes?.slug ?? null;
   const tocSectionId =
     data.relationships?.text?.attributes.tocSectionId ?? null;
@@ -12,7 +12,7 @@ export const getCalloutParams = (data, type, isLink) => {
         icon: isLink ? "arrowRight16" : "glasses64",
         iconSize: isLink ? 17.333 : 46,
         url: lh.link("reader", slug),
-        title: data.attributes.title || "Start Reading",
+        title: data.attributes.title || t("actions.read"),
         as: Link,
         primary: true
       };
@@ -21,7 +21,7 @@ export const getCalloutParams = (data, type, isLink) => {
         icon: "arrowDown16",
         iconSize: isLink ? 17.333 : 22.662,
         url: data.attributes.attachmentStyles.original,
-        title: data.attributes.title || "Download",
+        title: data.attributes.title || t("actions.download"),
         as: "a"
       };
     case "LINK":
@@ -29,7 +29,7 @@ export const getCalloutParams = (data, type, isLink) => {
         icon: isLink ? "arrowRight16" : null,
         iconSize: isLink ? 17.333 : 46,
         url: data.attributes.url,
-        title: data.attributes.title || "Link",
+        title: data.attributes.title || t("placeholders.link"),
         as: "UserLink"
       };
     case "TOC":
@@ -39,9 +39,10 @@ export const getCalloutParams = (data, type, isLink) => {
         url: tocSectionId
           ? lh.link("readerSection", slug, tocSectionId)
           : lh.link("reader", slug),
-        title: data.attributes.title || "View Contents",
+        title: data.attributes.title || t("actions.view_contents"),
         as: Link
       };
+    // LD: Not translating placeholders for these cases because we aren't using them. Would only be added if we implement the new icons for journal callouts.
     case "WEBSITE":
       return {
         icon: "link24",

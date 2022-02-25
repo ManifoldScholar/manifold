@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import ResourceList from "frontend/components/resource-list";
@@ -16,6 +17,8 @@ function ProjectResourcesEntityCollection({
   itemHeadingLevel,
   ...passThroughProps
 }) {
+  const { t } = useTranslation(["frontend"]);
+
   const showPagination = !isEmpty(resourcesMeta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(resourcesMeta) && !isEmpty(filterProps);
 
@@ -23,7 +26,7 @@ function ProjectResourcesEntityCollection({
 
   return resources && project ? (
     <EntityCollection
-      title="All Project Resources"
+      title={t("pages.resources_all")}
       icon="resources64"
       filterProps={showFilters ? listFiltersProps : null}
       BodyComponent={props => (

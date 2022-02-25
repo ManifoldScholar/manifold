@@ -1,14 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
 export default function MakerAvatar({ maker }) {
+  const { t } = useTranslation(["common"]);
   return (
     <Styled.Avatar>
       {maker.attributes.avatarStyles.smallSquare ? (
         <Styled.Image
           src={maker.attributes.avatarStyles.smallSquare}
-          alt="User Avatar"
+          alt={t("img_alts.user_avatar")}
         />
       ) : (
         <Styled.Icon icon="avatar64" size="42" />

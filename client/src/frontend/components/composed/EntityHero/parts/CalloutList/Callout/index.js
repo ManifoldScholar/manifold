@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { getCalloutParams } from "./params";
 import Button from "global/components/atomic/Button";
 import UserLink from "global/components/helper/UserLink";
@@ -28,6 +29,7 @@ export default function Callout({
   buttonSize,
   darkMode = false
 }) {
+  const { t } = useTranslation(["frontend"]);
   const type =
     (callout.attributes.kind === "read" || callout.attributes.kind === "toc") &&
     !callout.relationships.text
@@ -39,10 +41,10 @@ export default function Callout({
       return null;
     }
     return isLink ? (
-      <Styled.ErrorLink as="span">Text Missing</Styled.ErrorLink>
+      <Styled.ErrorLink as="span">{t("errors.text_missing")}</Styled.ErrorLink>
     ) : (
       <Styled.ErrorButton as="span" size={buttonSize}>
-        Text Missing
+        {t("errors.text_missing")}
       </Styled.ErrorButton>
     );
   }
@@ -55,7 +57,7 @@ export default function Callout({
     as,
     primary,
     mismatch
-  } = getCalloutParams(callout, type, isLink);
+  } = getCalloutParams(callout, type, isLink, t);
 
   if (mismatch) return null;
 

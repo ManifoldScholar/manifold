@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import get from "lodash/get";
+import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
@@ -14,11 +15,13 @@ function ProjectsEntityCollection({
   paginationProps,
   ...passThroughProps
 }) {
+  const { t } = useTranslation(["frontend"]);
+
   const showPagination = !isEmpty(meta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(meta) && !isEmpty(filterProps);
   return (
     <EntityCollection
-      title="All Projects"
+      title={t("pages.projects_all")}
       icon="projects64"
       filterProps={showFilters ? filterProps : null}
       BodyComponent={props => (

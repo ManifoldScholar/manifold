@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
+import { useTranslation, Trans } from "react-i18next";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import IconComposer from "global/components/utility/IconComposer";
 import {
@@ -19,6 +20,8 @@ function MyStarredEntityCollection({
   onUncollect,
   ...passThroughProps
 }) {
+  const { t } = useTranslation(["common", "frontend"]);
+
   const mapping = collection.attributes?.categoryMappings.$uncategorized$;
   const hasCollecteds = !isEmpty(mapping);
   const collectedIds = collectedIdsForCollection(collection);
@@ -45,7 +48,7 @@ function MyStarredEntityCollection({
 
   return (
     <EntityCollection
-      title="My Starred"
+      title={t("pages.my_starred", { ns: "frontend" })}
       IconComponent={() => (
         <IconComposer
           size={48}
@@ -55,10 +58,17 @@ function MyStarredEntityCollection({
       )}
       countProps={{
         count: totalCount,
-        unit: "item",
+        unit: t("glossary.item", { count: totalCount }),
         customTemplate: (count, unit) => (
           <span>
-            You have starred <strong>{count}</strong> {unit}
+            <Trans
+              t={t}
+              ns="frontend"
+              key="messages.starred_count"
+              count={count}
+            >
+              You have starred <strong>{{ count }}</strong> {unit}
+            </Trans>
           </span>
         )
       }}

@@ -1,5 +1,43 @@
 {
   "common": {
-    "on": "on"
+    "on": "on",
+    "by": "by"
+  },
+  "actions": {
+    "read": "Start Reading",
+    "download": "Download",
+    "view_contents": "View Contents"
+  },
+  "navigation": {
+    "library_links": "Library Links",
+    "see_full_collection": "See the full collection",
+    "see_all_projects": "See all projects"
+  },
+  "external_links": {
+    "view_on_social": "View this project on {{service}}"
+  },
+  "errors": {
+    "text_missing": "Text Missing"
+  },
+  "placeholders": {
+    "link": "Link"
+  },
+  "pages": {
+    "events_all": "All Activity",
+    "issues_all": "All Journal Issues",
+    "my_notes": "My Notes + Comments",
+    "my_starred": "My Starred",
+    "resource_collections_all": "All Project Resource Collections",
+    "resources_all": "All Project Resources",
+    "projects_all": "All Projects"
+  },
+  "messages": {
+    "empty_journal_heading": "This journal is currently empty.",
+    "empty_journal_body": "Add <1>volumes</1> or <3>issues</3> to see this page.",
+    "starred_count": "You have starred <1>{{count}}</1> {{ unit }}"
+  },
+  "forms": {
+    "add_to": "Add this to",
+    "my_collection_label": "My Collection"
   }
 }

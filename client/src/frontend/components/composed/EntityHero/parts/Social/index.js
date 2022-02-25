@@ -1,9 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import IconComputed from "global/components/icon-computed";
 import * as Styled from "./styles";
 
 export default function HeroSocial({ hashtag, twitter, facebook, instagram }) {
+  const { t } = useTranslation(["frontend"]);
+
   const url = (service, id) => {
     switch (service) {
       case "twitter":
@@ -26,7 +29,7 @@ export default function HeroSocial({ hashtag, twitter, facebook, instagram }) {
     >
       <IconComputed.Social icon={service} size={32} />
       <span className="screen-reader-text">
-        {`View this project on ${service}`}
+        {t("external_links.view_on_social", { service })}
       </span>
     </Styled.Link>
   );

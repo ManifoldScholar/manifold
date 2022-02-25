@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
+import { useTranslation } from "react-i18next";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
 import { FooterLink, ProjectCollectionIcon } from "../parts";
@@ -14,6 +15,8 @@ function ProjectCollectionSummaryEntityCollection({
   limit,
   ...passThroughProps
 }) {
+  const { t } = useTranslation(["frontend"]);
+
   const {
     title,
     slug,
@@ -64,7 +67,7 @@ function ProjectCollectionSummaryEntityCollection({
         totalprojectCount > limit && (
           <FooterLink
             to={lh.link("frontendProjectCollection", slug)}
-            label="See the full collection"
+            label={t("navigation.see_full_collection")}
           />
         )
       }

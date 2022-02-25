@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import ResourceCollectionList from "frontend/components/resource-collection-list";
@@ -14,11 +15,13 @@ function ProjectResourceCollectionsEntityCollection({
   itemHeadingLevel,
   ...passThroughProps
 }) {
+  const { t } = useTranslation(["frontend"]);
+
   const showPagination =
     !isEmpty(resourceCollectionsMeta) && !isEmpty(paginationProps);
   return (
     <EntityCollection
-      title="All Project Resource Collections"
+      title={t("pages.resource_collections_all")}
       icon="resourceCollection64"
       BodyComponent={props => (
         <ResourceCollectionList.Grid
