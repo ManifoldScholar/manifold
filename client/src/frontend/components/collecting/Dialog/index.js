@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useUIDSeed } from "react-uid";
+import { useTranslation } from "react-i18next";
 import SectionLabel from "global/components/form/SectionLabel";
 import Checkbox from "./Checkbox";
 import { inCollection } from "../helpers";
@@ -15,6 +16,7 @@ function CollectingDialog({
   onClose
 }) {
   const uidSeed = useUIDSeed();
+  const { t } = useTranslation(["frontend"]);
 
   function inMyCollection() {
     return inCollection(currentUser, collectable);
@@ -60,10 +62,10 @@ function CollectingDialog({
           <Styled.Icon icon="TextsLoosePages64" size={48} />
         </Styled.Header>
         <Styled.Fields>
-          <SectionLabel as="legend" label="Add this to:" />
+          <SectionLabel as="legend" label={`${t("forms.add_to")}:`} />
           <Styled.Group>
             <Checkbox
-              label="My Collection"
+              label={t("forms.my_collection_label")}
               value="me"
               onChange={onCheckboxChange}
               checked={inMyCollection()}
