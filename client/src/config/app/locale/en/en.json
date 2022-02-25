@@ -1,106 +1,108 @@
 {
-  "locales": {
-    "en": "English",
-    "es": "Spanish",
-    "nl": "Dutch"
-  },
-  "actions": {
-    "edit": "Edit",
-    "open": "Open",
-    "close": "Close",
-    "delete": "Delete",
-    "save": "Save",
-    "hide": "Hide",
-    "show": "Reset",
-    "view": "View",
-    "view_all": "View all",
-    "see_all": "See all",
-    "read": "Start Reading",
-    "download": "Download",
-    "view_contents": "View Contents"
-  },
-  "pagination": {
-    "previous": "Previous",
-    "next": "Next",
-    "go_to_page": "Go to page {{number}}"
-  },
-  "navigation": {
-    "user": {
-      "sign_in": "Sign In",
-      "sign_out": "Sign Out",
-      "my_starred": "My Starred",
-      "my_notes_comments": "My Notes + Comments"
+  "translation": {
+    "locales": {
+      "en": "English",
+      "es": "Spanish",
+      "nl": "Dutch"
     },
-    "library_links": "Library Links",
-    "see_full_collection": "See the full collection",
-    "see_all_projects": "See all projects"
-  },
-  "search": {},
-  "glossary": {
-    "project_one": "project",
-    "project_other": "projects",
-    "project_collection_one": "project collection",
-    "project_collection_other": "project collections",
-    "text_one": "text",
-    "text_other": "texts",
-    "journal_one": "journal",
-    "journal_other": "journals",
-    "volume_one": "volume",
-    "volume_other": "volumes",
-    "issue_one": "issue",
-    "issue_other": "issues",
-    "article_one": "article",
-    "article_other": "articles",
-    "resource_one": "resource",
-    "resource_other": "resources",
-    "resource_collection_one": "resource collection",
-    "resource_collection_other": "resource collections",
-    "reading_group_one": "reading group",
-    "reading_group_other": "reading groups",
-    "annotation_one": "annotation",
-    "annotations_other": "annotations",
-    "collection_one": "collection",
-    "collection_other": "collections",
-    "contributor_one": "contributor",
-    "contributor_other": "contributors",
-    "item_one": "item",
-    "item_other": "items"
-  },
-  "common": {
-    "on": "on",
-    "by": "by"
-  },
-  "external_links": {
-    "view_on_social": "View this project on {{service}}"
-  },
-  "errors": {
-    "text_missing": "Text Missing"
-  },
-  "placeholders": {
-    "link": "Link"
-  },
-  "pages": {
-    "frontend": {
-      "events_all": "All Activity",
-      "issues_all": "All Journal Issues",
-      "my_notes": "My Notes + Comments",
-      "my_starred": "My Starred",
-      "resource_collections_all": "All Project Resource Collections",
-      "resources_all": "All Project Resources",
-      "projects_all": "All Projects"
+    "actions": {
+      "edit": "Edit",
+      "open": "Open",
+      "close": "Close",
+      "delete": "Delete",
+      "save": "Save",
+      "hide": "Hide",
+      "show": "Reset",
+      "view": "View",
+      "view_all": "View all",
+      "see_all": "See all",
+      "read": "Start Reading",
+      "download": "Download",
+      "view_contents": "View Contents"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "go_to_page": "Go to page {{number}}"
+    },
+    "navigation": {
+      "user": {
+        "sign_in": "Sign In",
+        "sign_out": "Sign Out",
+        "my_starred": "My Starred",
+        "my_notes_comments": "My Notes + Comments"
+      },
+      "library_links": "Library Links",
+      "see_full_collection": "See the full collection",
+      "see_all_projects": "See all projects"
+    },
+    "search": {},
+    "glossary": {
+      "project_one": "project",
+      "project_other": "projects",
+      "project_collection_one": "project collection",
+      "project_collection_other": "project collections",
+      "text_one": "text",
+      "text_other": "texts",
+      "journal_one": "journal",
+      "journal_other": "journals",
+      "volume_one": "volume",
+      "volume_other": "volumes",
+      "issue_one": "issue",
+      "issue_other": "issues",
+      "article_one": "article",
+      "article_other": "articles",
+      "resource_one": "resource",
+      "resource_other": "resources",
+      "resource_collection_one": "resource collection",
+      "resource_collection_other": "resource collections",
+      "reading_group_one": "reading group",
+      "reading_group_other": "reading groups",
+      "annotation_one": "annotation",
+      "annotations_other": "annotations",
+      "collection_one": "collection",
+      "collection_other": "collections",
+      "contributor_one": "contributor",
+      "contributor_other": "contributors",
+      "item_one": "item",
+      "item_other": "items"
+    },
+    "common": {
+      "on": "on",
+      "by": "by"
+    },
+    "external_links": {
+      "view_on_social": "View this project on {{service}}"
+    },
+    "errors": {
+      "text_missing": "Text Missing"
+    },
+    "placeholders": {
+      "link": "Link"
+    },
+    "pages": {
+      "frontend": {
+        "events_all": "All Activity",
+        "issues_all": "All Journal Issues",
+        "my_notes": "My Notes + Comments",
+        "my_starred": "My Starred",
+        "resource_collections_all": "All Project Resource Collections",
+        "resources_all": "All Project Resources",
+        "projects_all": "All Projects"
+      }
+    },
+    "messages": {
+      "empty_journal_heading": "This journal is currently empty.",
+      "empty_journal_body": "Add <1>volumes</1> or <3>issues</3> to see this page.",
+      "starred_count": "You have starred <1>{{count}}</1> {{ unit }}"
+    },
+    "forms": {
+      "add_to": "Add this to",
+      "my_collection_label": "My Collection"
+    },
+    "loading": "Loading",
+    "img_alts": {
+      "user_avatar": "User Avatar"
     }
-  },
-  "messages": {
-    "empty_journal_heading": "This journal is currently empty.",
-    "empty_journal_body": "Add <1>volumes</1> or <3>issues</3> to see this page.",
-    "starred_count": "You have starred <1>{{count}}</1> {{ unit }}"
-  },
-  "forms": {
-    "add_to": "Add this to",
-    "my_collection_label": "My Collection"
-  },
-  "loading": "Loading",
-  "img_alts": {
-    "user_avatar": "User Avatar"
   }
 }
