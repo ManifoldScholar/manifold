@@ -4,7 +4,8 @@ import { respond, listUnstyled, fluidScale } from "theme/styles/mixins";
 
 const firstLevelPadding = "1em";
 const nestedLevelPadding = "1.611em";
-const borderStyle = "1px solid var(--color-base-neutral40)";
+const borderColor = "var(--color-base-neutral40)";
+const borderStyle = `1px solid ${borderColor}`;
 
 export const Block = styled.div`
   --link-indent: ${firstLevelPadding};
@@ -19,7 +20,7 @@ export const Heading = styled.h3`
   padding-bottom: 22px;
   margin-top: 0;
   margin-bottom: 0;
-  border-top: 1px solid var(--color-base-neutral40);
+  border-top: 1px solid ${borderColor};
 `;
 
 export const TextTitle = styled.span`
@@ -53,6 +54,7 @@ export const List = styled("ul", transientOptions)`
       padding-bottom: 20px;
       border-top: ${borderStyle};
       border-bottom: ${borderStyle};
+      border-bottom-color: var(--List-last-child-border-color, ${borderColor});
     `}
   `}
 
