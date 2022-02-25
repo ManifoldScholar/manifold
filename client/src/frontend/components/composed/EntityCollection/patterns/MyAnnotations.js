@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import Annotation from "global/components/Annotation";
@@ -15,13 +16,15 @@ function MyAnnotationsEntityCollection({
   paginationProps,
   ...passThroughProps
 }) {
+  const { t } = useTranslation(["frontend"]);
+
   if (!annotations || !annotationsMeta) return null;
 
   const hasAnnotations = annotations.length > 0;
 
   return (
     <EntityCollection
-      title="My Notes + Comments"
+      title={t("pages.my_notes")}
       icon="NotesUnique"
       filterProps={hasAnnotations ? filterProps : null}
       countProps={

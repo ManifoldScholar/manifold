@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
@@ -7,9 +8,11 @@ import FooterLink from "../parts/FooterLink";
 import EntityCollection from "../EntityCollection";
 
 function ProjectsSummaryEntityCollection({ projects, ...passThroughProps }) {
+  const { t } = useTranslation(["frontend"]);
+
   return (
     <EntityCollection
-      title="All Projects"
+      title={t("pages.projects_all")}
       icon="projects64"
       BodyComponent={props => (
         <ThumbnailGrid {...props}>
@@ -23,7 +26,7 @@ function ProjectsSummaryEntityCollection({ projects, ...passThroughProps }) {
       FooterComponent={() => (
         <FooterLink
           to={lh.link("frontendProjectsAll")}
-          label="See all projects"
+          label={t("navigation.see_all_projects")}
         />
       )}
       {...passThroughProps}

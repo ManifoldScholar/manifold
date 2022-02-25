@@ -1,5 +1,6 @@
 import React from "react";
 import lh from "helpers/linkHandler";
+import { useTranslation } from "react-i18next";
 import { useCurrentUser } from "hooks";
 import Link from "./Link";
 import * as Styled from "./styles";
@@ -38,13 +39,14 @@ const LINKS = [
 ];
 
 function CollectionNavigation() {
+  const { t } = useTranslation(["frontend"]);
   const currentUser = useCurrentUser();
   const filteredLinks = LINKS.filter(link =>
     currentUser ? true : !link.requiresAuthorization
   );
 
   return (
-    <nav aria-label="Library Links" className="container">
+    <nav aria-label={t("navigation.library_links")} className="container">
       <Styled.List $count={filteredLinks.length}>
         {filteredLinks.map(link => (
           <li key={link.to}>
