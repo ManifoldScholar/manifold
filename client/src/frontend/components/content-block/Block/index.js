@@ -4,8 +4,9 @@ import EntityCollection from "frontend/components/composed/EntityCollection/Enti
 import AllLink from "frontend/components/event/AllLink";
 import Authorization from "helpers/authorization";
 import contentBlockHelpers from "helpers/contentBlockHelpers";
-import types from "./types";
-import { Warning } from "./parts";
+import types from "../types";
+import { Warning } from "../parts";
+import * as Styled from "./styles";
 
 function typeToBlockComponent(type) {
   return contentBlockHelpers.typeToComponent(type, types);
@@ -47,7 +48,13 @@ function UtilityComponent({ block, entity }) {
   return <AllLink entity={entity} threshold={6} />;
 }
 
-function ContentBlock({ block, entity, hideHeader, ...passThroughProps }) {
+function ContentBlock({
+  block,
+  entity,
+  hideHeader,
+  hideBottomBorder,
+  ...passThroughProps
+}) {
   const authorization = new Authorization();
   const typeComponent = typeToBlockComponent(block.attributes.type);
 
@@ -73,13 +80,15 @@ function ContentBlock({ block, entity, hideHeader, ...passThroughProps }) {
       UtilityComponent={() => (
         <UtilityComponent block={block} entity={entity} />
       )}
-      BodyComponent={() =>
-        block.attributes.renderable ? (
-          <TypeComponent block={block} entity={entity} />
-        ) : (
-          <Warning.Incomplete block={block} />
-        )
-      }
+      BodyComponent={() => (
+        <Styled.BodyWrapper $hideBottomBorder={hideBottomBorder}>
+          {block.attributes.renderable ? (
+            <TypeComponent block={block} entity={entity} />
+          ) : (
+            <Warning.Incomplete block={block} />
+          )}
+        </Styled.BodyWrapper>
+      )}
       bgColor={style === "shaded" ? "neutral05" : "white"}
       {...passThroughProps}
     />

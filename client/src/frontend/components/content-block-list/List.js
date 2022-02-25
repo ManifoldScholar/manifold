@@ -7,7 +7,8 @@ export default class ContentBlockList extends PureComponent {
 
   static propTypes = {
     entity: PropTypes.object,
-    hideHeader: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
+    hideHeader: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+    hideLastBottomBorder: PropTypes.bool
   };
 
   get entity() {
@@ -44,13 +45,19 @@ export default class ContentBlockList extends PureComponent {
   }
 
   render() {
-    return this.visibleContentBlocks.map(block => {
+    const { hideHeader, hideLastBottomBorder, ...restProps } = this.props;
+
+    return this.visibleContentBlocks.map((block, index) => {
       return (
         <ContentBlock
           key={block.id}
           block={block}
-          {...this.props}
+          {...restProps}
           hideHeader={this.getHeader(block)}
+          hideBottomBorder={
+            this.props.hideLastBottomBorder &&
+            index === this.visibleContentBlocks.length - 1
+          }
         />
       );
     });

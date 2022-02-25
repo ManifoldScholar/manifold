@@ -33,6 +33,7 @@ function VolumeDetail({ journal, volume }) {
                 entity={issue}
                 nested
                 hideHeader={["textsBlocks"]}
+                hideLastBottomBorder
               />
             </Styled.IssueWrapper>
           ))}

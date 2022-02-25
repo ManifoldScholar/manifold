@@ -16,7 +16,9 @@ export const IssueWrapper = styled.div`
   }
 
   & + & {
-    margin-block-start: var(--container-padding-block-end);
+    margin-block-start: calc(var(--container-padding-block-end) * 0.5);
+    padding-block-start: calc(var(--container-padding-block-end) * 0.5);
+    border-top: 1px solid var(--color-base-neutral40);
   }
 
   &:last-child {
