@@ -29,7 +29,7 @@ export default function Callout({
   buttonSize,
   darkMode = false
 }) {
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
   const type =
     (callout.attributes.kind === "read" || callout.attributes.kind === "toc") &&
     !callout.relationships.text

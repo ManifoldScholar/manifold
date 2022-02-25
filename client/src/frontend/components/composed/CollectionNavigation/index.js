@@ -39,7 +39,7 @@ const LINKS = [
 ];
 
 function CollectionNavigation() {
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
   const currentUser = useCurrentUser();
   const filteredLinks = LINKS.filter(link =>
     currentUser ? true : !link.requiresAuthorization

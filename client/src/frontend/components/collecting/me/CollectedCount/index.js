@@ -4,7 +4,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { collectedIdsForCollection } from "frontend/components/collecting/helpers";
 
 function CollectedCount({ collection }) {
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
 
   const collectedIds = collectedIdsForCollection(collection);
   const totalCount = collectedIds.length;

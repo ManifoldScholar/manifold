@@ -15,13 +15,13 @@ function ProjectsEntityCollection({
   paginationProps,
   ...passThroughProps
 }) {
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
 
   const showPagination = !isEmpty(meta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(meta) && !isEmpty(filterProps);
   return (
     <EntityCollection
-      title={t("pages.projects_all")}
+      title={t("pages.frontend.projects_all")}
       icon="projects64"
       filterProps={showFilters ? filterProps : null}
       BodyComponent={props => (

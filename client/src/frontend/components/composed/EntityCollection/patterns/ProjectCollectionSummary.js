@@ -15,7 +15,7 @@ function ProjectCollectionSummaryEntityCollection({
   limit,
   ...passThroughProps
 }) {
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
 
   const {
     title,

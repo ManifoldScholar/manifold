@@ -7,7 +7,7 @@ import Warning from "frontend/components/content-block/parts/Warning/Warning";
 import EntityCollection from "../EntityCollection";
 
 export default function JournalSummaryEmpty({ journalId }) {
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
   const body = (
     <Trans t={t} key="messages.empty_journal_body">
       Add <Link to={lh.link("backendJournalVolumes", journalId)}>volumes</Link>{" "}

@@ -5,7 +5,7 @@ import * as Styled from "global/components/atomic/EntityThumbnail/styles";
 import * as StyledMetadata from "global/components/atomic/EntityThumbnail/EntityMetadata/Content/styles";
 
 function Placeholder({ stack }) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   return (
     <Styled.ItemLink as="div" $stack={stack}>
       <Styled.Cover $stack={stack} aria-hidden>

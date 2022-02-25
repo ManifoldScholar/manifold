@@ -13,11 +13,11 @@ function EventsEntityCollection({
   paginationProps,
   ...passThroughProps
 }) {
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
   const showPagination = !isEmpty(eventsMeta) && !isEmpty(paginationProps);
   return (
     <EntityCollection
-      title={t("pages.events_all")}
+      title={t("pages.frontend.events_all")}
       icon="recentActivity64"
       BodyComponent={props => <Event.List events={events} {...props} />}
       paginationProps={

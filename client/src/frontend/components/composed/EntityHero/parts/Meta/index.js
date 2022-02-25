@@ -6,7 +6,7 @@ import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 export default function HeroMeta({ creators, contributors, description }) {
-  const { t } = useTranslation(["common", "frontend"]);
+  const { t } = useTranslation();
   const showAvatars =
     creators?.length <= 2 &&
     creators.every(creator => creator.attributes?.avatarStyles?.smallSquare);
@@ -15,11 +15,7 @@ export default function HeroMeta({ creators, contributors, description }) {
     <Styled.Wrapper>
       {!!creators?.length && (
         <Styled.Creators>
-          {!showAvatars && (
-            <span className="italic">
-              {t("common.by", { ns: "frontend" })}{" "}
-            </span>
-          )}
+          {!showAvatars && <span className="italic">{t("common.by")} </span>}
           {creators.map(creator =>
             showAvatars ? (
               <MakerAvatar key={creator.id} maker={creator} />
@@ -34,7 +30,10 @@ export default function HeroMeta({ creators, contributors, description }) {
       {!!contributors?.length && (
         <Styled.Contributors>
           <span className="italic">
-            {capitalize(t("glossary.contributor_other"))}:{" "}
+            {capitalize(
+              t("glossary.contributor", { count: contributors.length })
+            )}
+            :{" "}
           </span>
           {contributors.map(contributor => (
             <Styled.Name key={contributor.id}>

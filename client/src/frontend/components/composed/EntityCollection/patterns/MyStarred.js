@@ -20,7 +20,7 @@ function MyStarredEntityCollection({
   onUncollect,
   ...passThroughProps
 }) {
-  const { t } = useTranslation(["common", "frontend"]);
+  const { t } = useTranslation();
 
   const mapping = collection.attributes?.categoryMappings.$uncategorized$;
   const hasCollecteds = !isEmpty(mapping);
@@ -48,7 +48,7 @@ function MyStarredEntityCollection({
 
   return (
     <EntityCollection
-      title={t("pages.my_starred", { ns: "frontend" })}
+      title={t("pages.frontend.my_starred")}
       IconComponent={() => (
         <IconComposer
           size={48}
@@ -61,12 +61,7 @@ function MyStarredEntityCollection({
         unit: t("glossary.item", { count: totalCount }),
         customTemplate: (count, unit) => (
           <span>
-            <Trans
-              t={t}
-              ns="frontend"
-              key="messages.starred_count"
-              count={count}
-            >
+            <Trans t={t} key="messages.starred_count" count={count}>
               You have starred <strong>{{ count }}</strong> {unit}
             </Trans>
           </span>

@@ -6,7 +6,7 @@ import { useFromStore } from "hooks";
 
 function EntityHeadContent({ entity, type, parentEntity }) {
   const settings = useFromStore("settings", "select");
-  const { t } = useTranslation(["frontend"]);
+  const { t } = useTranslation();
 
   const installationName = settings?.attributes.general.installationName || "";
   const {
