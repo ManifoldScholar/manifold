@@ -22,7 +22,6 @@ export default `
       ${listUnstyled}
       position: relative;
       display: flex;
-      align-items: baseline;
       height: 100%;
     }
 
@@ -33,10 +32,21 @@ export default `
 
       ${respond(`position: relative;`, 80)}
 
-    & + & {
+      &--align-center {
+        align-self: center;
+      }
+
+      & + & {
         margin-left: 1.875vw;
 
         ${respond(`margin-left: 24px;`, containerWidth.full)}
+      }
+    }
+
+    &__button {
+      &--search {
+        width: 22px;
+        height: 22px;
       }
     }
 

@@ -12,6 +12,7 @@ export default `
   /* Search Menu button and panel global styles (see header styles for context specific styles) */
   .button-search {
     height: 100%;
+    padding: 0;
     color: var(--header-foreground-color);
     vertical-align: middle;
     background: transparent;
@@ -28,8 +29,7 @@ export default `
       --tail-height: 17px;
       transition: color ${defaultTransitionProps};
 
-      &.button-active,
-      &:focus-visible {
+      &.button-active {
         ${defaultHoverStyle}
         outline: 0;
       }
@@ -47,6 +47,7 @@ export default `
         transition: transform ${defaultTransitionProps},
           opacity ${defaultTransitionProps};
         transform: translateY(-1 * ${headerLayout.menuSlideDistance});
+        pointer-events: none;
       }
 
       &.button-active::after {

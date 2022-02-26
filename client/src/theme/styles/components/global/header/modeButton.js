@@ -4,8 +4,8 @@ export default `
   .mode-button {
     ${utilityPrimary}
     display: inline-block;
-    padding: 0.76em 1.7em;
-    font-size: 11.18px;
+    padding: 5px 8.5px 7px;
+    font-size: 12px;
     color: var(--header-foreground-color);
     text-decoration: none;
     letter-spacing: 0.134em;
@@ -16,8 +16,7 @@ export default `
       background-color ${defaultTransitionProps},
       border-color ${defaultTransitionProps};
 
-    &:hover,
-    &:focus-visible {
+    &:hover {
       color: var(--color-neutral-text-extra-dark);
       background-color: var(--color-interaction-light);
       border-color: var(--color-interaction-light);
@@ -27,8 +26,7 @@ export default `
     .bg-neutral90 &,
     .user-links--dark &,
     .user-nav--dark & {
-      &:hover,
-      &:focus-visible {
+      &:hover {
         color: var(--color-base-neutral90);
       }
     }

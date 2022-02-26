@@ -52,7 +52,7 @@ export default class UserMenuButton extends Component {
             this.props.authentication,
             "currentUser.attributes.avatarStyles.smallSquare"
           )}
-          iconSize={24}
+          iconSize={this.props.context === "reader" ? 24 : 64}
           ariaHidden
         />
       </button>

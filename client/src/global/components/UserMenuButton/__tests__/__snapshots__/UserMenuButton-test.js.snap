@@ -13,7 +13,7 @@ exports[`global/components/UserMenuButton/UserMenuButton matches the snapshot 1`
   </span>
   <Avatar
     ariaHidden={true}
-    iconSize={24}
+    iconSize={64}
   />
 </button>
 `;

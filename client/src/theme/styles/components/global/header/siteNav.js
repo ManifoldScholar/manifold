@@ -41,11 +41,11 @@ export default `
 
         &::before {
           position: absolute;
-          bottom: -4px;
+          bottom: -3px;
           left: 0;
           display: block;
           width: 100%;
-          height: 2px;
+          height: 1.5px;
           content: "";
           background-color: var(--color-base-neutral90);
 
