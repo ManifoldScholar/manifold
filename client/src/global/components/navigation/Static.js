@@ -147,7 +147,9 @@ export class NavigationStatic extends PureComponent {
           className="user-nav__list"
         >
           {this.props.backendButton && (
-            <li className="user-nav__item">{this.props.backendButton}</li>
+            <li className="user-nav__item user-nav__item--align-center">
+              {this.props.backendButton}
+            </li>
           )}
           {this.renderSearch(props)}
           <li className="user-nav__item">

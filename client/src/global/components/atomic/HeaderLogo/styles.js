@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { respond } from "theme/styles/mixins";
+import { headerLayout } from "theme/styles/variables/crossComponent";
 
 export const Link = styled.a`
   grid-area: logo;
@@ -9,8 +10,9 @@ export const Link = styled.a`
   text-decoration: none;
 
   .library-header & {
-    margin-bottom: 9px;
-    ${respond(`margin-bottom: 20px`, 40)}
+    margin-bottom: ${headerLayout.paddingVerticalMobile};
+
+    ${respond(`margin-bottom: ${headerLayout.paddingVerticalDesktop};`, 40)}
   }
 
   .library-header--dark & {

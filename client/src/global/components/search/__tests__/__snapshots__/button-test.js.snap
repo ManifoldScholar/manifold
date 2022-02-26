@@ -11,8 +11,8 @@ exports[`global/components/search/button when it is active matches the snapshot 
   <IconComposer
     className="search-icon"
     fill="currentColor"
-    icon="search24"
-    size={32}
+    icon="search16"
+    size={22}
     svgProps={
       Object {
         "aria-hidden": true,
@@ -38,8 +38,8 @@ exports[`global/components/search/button when it isn't active matches the snapsh
   <IconComposer
     className="search-icon"
     fill="currentColor"
-    icon="search24"
-    size={32}
+    icon="search16"
+    size={22}
     svgProps={
       Object {
         "aria-hidden": true,

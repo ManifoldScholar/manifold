@@ -232,6 +232,7 @@ export default class Header extends Component {
                     toggleSearchMenu={this.panelToggleHandler("search")}
                     active={this.props.visibility.uiPanels.search}
                     className="reader-header__button reader-header__button--pad-narrow"
+                    iconSize={32}
                   />
                 </li>
                 <li className="reader-header__nav-item">

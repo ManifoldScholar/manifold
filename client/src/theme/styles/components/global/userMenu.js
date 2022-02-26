@@ -16,14 +16,11 @@ export default `
     vertical-align: middle;
 
     .avatar {
-      ${buttonAvatar(32, "var(--header-foreground-color)")}
+      ${buttonAvatar(42, "var(--header-foreground-color)")}
     }
 
     &--frontend,
     &--backend {
-      padding-top: 5px;
-      padding-bottom: 5px;
-
       .avatar {
         transition: color ${defaultTransitionProps};
       }
@@ -36,18 +33,10 @@ export default `
       }
     }
 
-    &--frontend {
-      &:focus-visible {
-        outline: 0;
-
-        .avatar {
-          ${defaultHoverStyle}
-        }
-      }
-    }
-
     &--reader {
       .avatar {
+        width: 32px;
+        height: 32px;
         color: inherit;
       }
     }

@@ -7,8 +7,17 @@ export default class SearchMenuButton extends PureComponent {
   static propTypes = {
     toggleSearchMenu: PropTypes.func,
     active: PropTypes.bool,
-    className: PropTypes.string
+    className: PropTypes.string,
+    iconSize: PropTypes.oneOf([22, 32])
   };
+
+  get iconSize() {
+    return this.props.iconSize || 22;
+  }
+
+  get icon() {
+    return this.iconSize === 32 ? "search24" : "search16";
+  }
 
   clickHandler = event => {
     event.stopPropagation();
@@ -30,8 +39,8 @@ export default class SearchMenuButton extends PureComponent {
       >
         <Utility.IconComposer
           className="search-icon"
-          icon="search24"
-          size={32}
+          icon={this.icon}
+          size={this.iconSize}
         />
         <span className="screen-reader-text">{"Search"}</span>
       </button>

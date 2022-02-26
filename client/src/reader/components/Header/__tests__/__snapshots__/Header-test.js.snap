@@ -105,6 +105,7 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
             <SearchMenuButton
               active={false}
               className="reader-header__button reader-header__button--pad-narrow"
+              iconSize={32}
               toggleSearchMenu={[Function]}
             />
           </li>
