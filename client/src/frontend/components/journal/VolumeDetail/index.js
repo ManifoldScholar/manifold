@@ -1,16 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import EntityGroup from "global/components/composed/EntityGroup";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ContentBlockList from "frontend/components/content-block-list/List";
+import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 function VolumeDetail({ journal, volume }) {
+  const { t } = useTranslation();
+
   if (!journal || !volume) return null;
 
   const journalTitle = journal.attributes?.title;
-  const volumeTitle = `Volume ${volume.attributes?.number}`;
+  const volumeTitle = `${capitalize(t("glossary.volume_one"))} ${
+    volume.attributes?.number
+  }`;
   const issues = volume.relationships?.journalIssues ?? [];
 
   return (

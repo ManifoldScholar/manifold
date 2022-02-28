@@ -24,7 +24,8 @@
       "add": "Add",
       "collect": "Collect {{title}}",
       "uncollect": "Uncollect {{title}}",
-      "toggle_collecting": "Toggle collecting dialog"
+      "toggle_collecting": "Toggle collecting dialog",
+      "delete_event": "$t(actions.delete) event"
     },
     "pagination": {
       "previous": "Previous",
@@ -41,8 +42,9 @@
       "library_links": "Library Links",
       "browse_library": "Browse library",
       "see_full_collection": "See the full collection",
-      "see_all_projects": "See all projects",
-      "search_by_keyword": "Search by keyword"
+      "see_all_projects": "$t(actions.see_all) $t(glossary.project_other)",
+      "search_by_keyword": "Search by keyword",
+      "see_all_activity": "$t(actions.see_all) activity"
     },
     "search": {},
     "glossary": {
@@ -86,7 +88,16 @@
       "view_on_social": "View this project on {{service}}"
     },
     "errors": {
-      "text_missing": "Text Missing"
+      "text_missing": "Text Missing",
+      "content_block": {
+        "no_contents": "Specify a text to <1>fix this block</1>.",
+        "no_activity": "No activity has been recorded for this project. This warning will disappear once there is project activity.",
+        "no_markdown": "Add Markdown content to <1>fix this block</1>.",
+        "no_texts": "<0>Add texts to the project</0> or <2>adjust the block configuration</2> to fix this block.",
+        "no_resources": "Add <1>resources</1> or <3>resource collections</3>to the project to fix this block.",
+        "no_metadata": "<0>Add project metadata</0> to fix this block.",
+        "default": "<0>Fix this content block.</0>"
+      }
     },
     "placeholders": {
       "link": "Link",
@@ -106,16 +117,20 @@
         "projects_all": "All Projects"
       }
     },
+    "sections": {
+      "journal_info": "$t(glossary.journal_one) info"
+    },
     "messages": {
       "empty_journal_heading": "This journal is currently empty.",
       "empty_journal_body": "Add <1>volumes</1> or <3>issues</3> to see this page.",
-      "starred_count": "You have starred <1>{{count}}</1> {{ unit }}",
       "cannot_move_up": "Cannot move up. Item is already in the first category.",
       "cannot_move_down": "Cannot move down. Item is already in the last category.",
       "item_moved_category": "Item moved to category {{category}}",
       "collected": "You collected {{title}}",
       "uncollected": "You uncollected {{title}}",
-      "confirm": "Are you sure?"
+      "confirm": "Are you sure?",
+      "content_block_warning_heading": "This content block needs your attention before it can be displayed.",
+      "content_block_warning_note": "Note: This message is only visible to project editors."
     },
     "forms": {
       "add_to": "Add this to",
@@ -140,6 +155,17 @@
     "loading": "Loading",
     "img_alts": {
       "user_avatar": "User Avatar"
+    },
+    "counts": {
+      "my_starred": "You have starred <1>{{count}}</1> {{ unit }}",
+      "categorized_issues_one": "There is <1>{{count}}</1> issue in <4>{{categoryCount}}</4> {{volume}}",
+      "categorized_issues_other": "There are <1>{{count}}</1> issues in <4>{{categoryCount}}</4> {{volume}}",
+      "uncategorized_issues_one": " and <1>{{count}}</1> additional issue",
+      "uncategorized_issues_other": " and <1>{{count}}</1> additional issues",
+      "empty_volume_one": "There is <1>{{count}}</1> empty volume.",
+      "empty_volume_other": "There are <1>{{count}}</1> empty volumes.",
+      "default_issues_one": "There is <1>{{count}}</1> {{unit}}",
+      "default_issues_other": "There are <1>{{count}}</1> {{unit}}"
     }
   }
 }

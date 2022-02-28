@@ -1,47 +1,46 @@
 import React from "react";
 import PropTypes from "prop-types";
-import pluralize from "pluralize";
+import { Trans, useTranslation } from "react-i18next";
 
 function Index({ count, unit, categoryCount, uncategorized = 0 }) {
+  const { t } = useTranslation();
+
   if (categoryCount) {
     const categorized = count - uncategorized;
     if (!categorized) {
       return (
         <>
-          There {pluralize("is", categoryCount)}{" "}
-          <strong>{categoryCount}</strong> empty{" "}
-          {pluralize("volume", categoryCount)}
+          <Trans i18nKey="counts.empty_volume" count={categoryCount}>
+            There are <strong>{{ count: categoryCount }}</strong> empty volumes
+          </Trans>
           {!!uncategorized && (
-            <>
+            <Trans i18nKey="counts.uncategorized_issues" count={uncategorized}>
               {" "}
-              and <strong>{uncategorized}</strong> additional{" "}
-              {pluralize("issue", uncategorized)}
-            </>
+              and <strong> {{ count: uncategorized }}</strong> additional issue
+            </Trans>
           )}
         </>
       );
     }
     return (
       <>
-        There {pluralize("is", categorized)} <strong>{categorized}</strong>{" "}
-        {pluralize(unit, categorized)}
-        {" in "}
-        <strong>{categoryCount}</strong> {pluralize("volume", categoryCount)}
+        <Trans i18nKey="counts.categorized_issues" count={categorized}>
+          There is <strong>{{ count: categorized }}</strong> issue in{" "}
+          <strong>{{ categoryCount }}</strong>
+          {{ volume: t("glossary.volume", { count: categoryCount }) }}
+        </Trans>
         {!!uncategorized && (
-          <>
-            {" "}
-            and <strong>{uncategorized}</strong> additional{" "}
-            {pluralize("issue", uncategorized)}
-          </>
+          <Trans i18nKey="counts.uncategorized_issues" count={uncategorized}>
+            and <strong>{{ count: uncategorized }}</strong> additional issue
+          </Trans>
         )}
       </>
     );
   }
   return (
-    <>
-      There {pluralize("is", count)} <strong>{count}</strong>{" "}
-      {pluralize(unit, count)}
-    </>
+    <Trans i18nKey="counts.default_issues" count={count}>
+      There is <strong>{{ count }}</strong> {{ unit }}
+    </Trans>
   );
 }
 

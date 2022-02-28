@@ -11,6 +11,7 @@ import { journalVolumesAPI, journalIssuesAPI } from "api";
 import { useFetch, usePaginationState } from "hooks";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
+import { useTranslation } from "react-i18next";
 
 function JournalDetailContainer({ journal }) {
   const [issuesPagination] = usePaginationState(1, 8);
@@ -28,6 +29,8 @@ function JournalDetailContainer({ journal }) {
   const { data: issues } = useFetch({
     request: [journalIssuesAPI.index, issuesFilter, issuesPagination]
   });
+
+  const { t } = useTranslation();
 
   if (!journal) return null;
 
@@ -65,7 +68,7 @@ function JournalDetailContainer({ journal }) {
         journal={journal}
         countProps={{
           count: journalIssuesCount,
-          unit: "issue",
+          unit: t("glossary.issue", { count: journalIssuesCount }),
           customTemplate: (count, unit) => (
             <Journal.IssueCount
               count={count}
@@ -85,6 +88,18 @@ function JournalDetailContainer({ journal }) {
       <EntityCollection.JournalIssues
         issues={issues}
         journal={journal}
+        countProps={{
+          count: journalIssuesCount,
+          unit: t("glossary.issue", { count: journalIssuesCount }),
+          customTemplate: (count, unit) => (
+            <Journal.IssueCount
+              count={count}
+              unit={unit}
+              categoryCount={journalVolumesCount}
+              uncategorized={journalIssuesWithoutVolumeCount}
+            />
+          )
+        }}
         FooterComponent={() => (
           <FooterLink
             to={lh.link("frontendJournalAllIssues", journal.id)}
