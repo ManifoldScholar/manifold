@@ -9,7 +9,7 @@ exports[`frontend/components/event/AllLink matches the snapshot 1`] = `
     <span
       className="button-primary__text"
     >
-      See all Activity
+      navigation.see_all_activity
     </span>
   </Link>
 </Wrapper>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import FormattedDate from "global/components/FormattedDate";
 import Utility from "global/components/utility";
 import { withRouter } from "react-router-dom";
@@ -27,7 +28,8 @@ export class EventTile extends Component {
     linkHref: PropTypes.string,
     linkTarget: PropTypes.string,
     history: PropTypes.object,
-    italicizeContent: PropTypes.bool
+    italicizeContent: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -69,7 +71,8 @@ export class EventTile extends Component {
       postAttribution,
       date,
       dateFormat,
-      italicizeContent
+      italicizeContent,
+      t
     } = this.props;
 
     return (
@@ -116,7 +119,9 @@ export class EventTile extends Component {
               size={26}
               className={"utility-button__icon utility-button__icon--notice"}
             />
-            <span className="screen-reader-text">Delete Event</span>
+            <span className="screen-reader-text">
+              {t("actions.delete_event")}
+            </span>
           </div>
         )}
       </this.tileTag>
@@ -124,4 +129,4 @@ export class EventTile extends Component {
   }
 }
 
-export default withRouter(EventTile);
+export default withRouter(withTranslation()(EventTile));
