@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Warning from "../../Warning";
 import { generateError, getDefaultError } from "./errors";
 
@@ -19,14 +20,16 @@ function getErrorMessages(block) {
 }
 
 function Incomplete({ block }) {
+  const { t } = useTranslation();
+
   const errorMessages = getErrorMessages(block);
 
   return (
     <Warning
       icon="warningSign64"
-      heading="This content block needs your attention before it can be displayed."
+      heading={t("messages.content_block_warning_heading")}
       body={errorMessages}
-      note="Note: This message is only visible to project editors."
+      note={t("messages.content_block_warning_note")}
     />
   );
 }
