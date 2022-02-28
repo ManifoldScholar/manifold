@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Collapse from "global/components/Collapse";
 import IconComposer from "global/components/utility/IconComposer";
 import CategoryEdit from "./CategoryEdit";
@@ -13,9 +14,7 @@ function CategoryHeader({
   onCategoryEdit,
   onCategoryRemove
 }) {
-  function handleRemove() {
-    onCategoryRemove(category);
-  }
+  const { t } = useTranslation();
 
   return (
     <>
@@ -24,10 +23,12 @@ function CategoryHeader({
           <Styled.Title>{category?.attributes.title}</Styled.Title>
           {dragProps && (
             <Styled.Actions>
-              <CategoryRemove onRemove={handleRemove} />
+              <CategoryRemove onRemove={() => onCategoryRemove(category)} />
               <Styled.Action as={Collapse.Toggle}>
                 <IconComposer icon="annotate32" size="default" />
-                <span className="screen-reader-text">Edit category</span>
+                <span className="screen-reader-text">
+                  {t("forms.category.edit")}
+                </span>
               </Styled.Action>
               <Styled.Action {...dragProps.provided.dragHandleProps}>
                 <IconComposer icon="grabber32" size="default" />

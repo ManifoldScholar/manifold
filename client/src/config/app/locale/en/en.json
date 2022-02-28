@@ -7,9 +7,11 @@
     },
     "actions": {
       "edit": "Edit",
+      "edit_reading_group": "$t(actions.edit) group info",
       "open": "Open",
       "close": "Close",
       "delete": "Delete",
+      "remove": "Remove",
       "save": "Save",
       "hide": "Hide",
       "show": "Reset",
@@ -18,7 +20,11 @@
       "see_all": "See all",
       "read": "Start Reading",
       "download": "Download",
-      "view_contents": "View Contents"
+      "view_contents": "View Contents",
+      "add": "Add",
+      "collect": "Collect {{title}}",
+      "uncollect": "Uncollect {{title}}",
+      "toggle_collecting": "Toggle collecting dialog"
     },
     "pagination": {
       "previous": "Previous",
@@ -33,8 +39,10 @@
         "my_notes_comments": "My Notes + Comments"
       },
       "library_links": "Library Links",
+      "browse_library": "Browse library",
       "see_full_collection": "See the full collection",
-      "see_all_projects": "See all projects"
+      "see_all_projects": "See all projects",
+      "search_by_keyword": "Search by keyword"
     },
     "search": {},
     "glossary": {
@@ -44,6 +52,8 @@
       "project_collection_other": "project collections",
       "text_one": "text",
       "text_other": "texts",
+      "text_section_one": "text section",
+      "text_section_other": "text sections",
       "journal_one": "journal",
       "journal_other": "journals",
       "volume_one": "volume",
@@ -69,7 +79,8 @@
     },
     "common": {
       "on": "on",
-      "by": "by"
+      "by": "by",
+      "uncategorized": "uncategorized"
     },
     "external_links": {
       "view_on_social": "View this project on {{service}}"
@@ -78,7 +89,11 @@
       "text_missing": "Text Missing"
     },
     "placeholders": {
-      "link": "Link"
+      "link": "Link",
+      "reading_group": {
+        "customize": "<0>Ready to customize your group?</0><1>Congratulations, you’ve created a Reading Group. Now you can begin adding content, editing the order, grouping, and descriptions on your home page, and sending out invitations for new members.</1><2>Start adding content:</2><3>Reading Groups can contain a variety of content: Projects, Texts, Text Sections, Resource Collections, and individual Resources can all be added to your group. To find and add content, you can either browse the library or use keyword search. Once you’ve found an item you wish to add, simply select the star icon and assign it to this group (or any other Reading Group you are managing).</3>",
+        "settings": "<0>Edit settings and invite members:</0><1>You can edit the settings for your group at any time. Change your group’s name, privacy settings, or email notifications. You can also see your group’s invitation code, or use an invitation URL, which makes inviting members as easy as sharing its invitation web page address.</1>"
+      }
     },
     "pages": {
       "frontend": {
@@ -94,11 +109,33 @@
     "messages": {
       "empty_journal_heading": "This journal is currently empty.",
       "empty_journal_body": "Add <1>volumes</1> or <3>issues</3> to see this page.",
-      "starred_count": "You have starred <1>{{count}}</1> {{ unit }}"
+      "starred_count": "You have starred <1>{{count}}</1> {{ unit }}",
+      "cannot_move_up": "Cannot move up. Item is already in the first category.",
+      "cannot_move_down": "Cannot move down. Item is already in the last category.",
+      "item_moved_category": "Item moved to category {{category}}",
+      "collected": "You collected {{title}}",
+      "uncollected": "You uncollected {{title}}",
+      "confirm": "Are you sure?"
     },
     "forms": {
       "add_to": "Add this to",
-      "my_collection_label": "My Collection"
+      "my_collection_label": "My Collection",
+      "category": {
+        "create": "Create a new category",
+        "edit": "Edit category",
+        "name": "Category name",
+        "delete": "Delete category",
+        "name_placeholder": "Enter category name",
+        "description": "Category Description",
+        "description_placeholder": "Enter category description",
+        "description_instructions": "Enter a brief description of the category. This field accepts basic Markdown.",
+        "empty_placeholder": "Drag here to add"
+      }
+    },
+    "modals": {
+      "remove_category_heading": "Are you sure you want to remove this category from your collection?",
+      "remove_category_body": "Any items in this category will also be deleted.",
+      "collecting_search": "<0>Add content</0><1>{{heading}}</1><2>To add content to your Reading Group, search for it by keyword and type, when you have found content you wish to add, select the star icon for that item to add it to your group.</p>"
     },
     "loading": "Loading",
     "img_alts": {

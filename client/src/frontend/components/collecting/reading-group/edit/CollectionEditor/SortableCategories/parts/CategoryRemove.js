@@ -1,21 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
 import withConfirmation from "hoc/withConfirmation";
 import * as Styled from "./styles";
 
 function CategoryRemove({ onRemove, confirm }) {
+  const { t } = useTranslation();
+
   function handleClick() {
-    const heading =
-      "Are you sure you want to remove this category from your collection?";
-    const message = "Any items in this category will also be deleted.";
+    const heading = t("modals.remove_category_heading");
+    const message = t("modals.remove_category_body");
     confirm(heading, message, () => onRemove());
   }
 
   return (
     <Styled.Button onClick={handleClick}>
       <IconComposer icon="delete32" size="default" />
-      <span className="screen-reader-text">Delete category</span>
+      <span className="screen-reader-text">{t("forms.category.delete")}</span>
     </Styled.Button>
   );
 }
