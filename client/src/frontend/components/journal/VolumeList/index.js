@@ -1,10 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import EntityGroup from "global/components/composed/EntityGroup";
 import lh from "helpers/linkHandler";
+import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 function JournalVolumeList({ volumes, journal }) {
+  const { t } = useTranslation();
+
   if (!volumes || !journal) return null;
 
   return (
@@ -12,7 +16,9 @@ function JournalVolumeList({ volumes, journal }) {
       {volumes.map(volume => (
         <EntityGroup
           key={volume.id}
-          title={`Volume ${volume.attributes.number}`}
+          title={`${capitalize(t("glossary.volume_one"))} ${
+            volume.attributes.number
+          }`}
           to={lh.link("frontendVolumeDetail", journal.id, volume.id)}
           entities={volume.relationships.journalIssues}
           parentView

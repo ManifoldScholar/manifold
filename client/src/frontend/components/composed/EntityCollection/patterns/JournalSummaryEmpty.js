@@ -9,8 +9,8 @@ import EntityCollection from "../EntityCollection";
 export default function JournalSummaryEmpty({ journalId }) {
   const { t } = useTranslation();
   const body = (
-    <Trans t={t} key="messages.empty_journal_body">
-      Add <Link to={lh.link("backendJournalVolumes", journalId)}>volumes</Link>{" "}
+    <Trans t={t} i18nKey="messages.empty_journal_body">
+      Add <Link to={lh.link("backendJournalVolumes", journalId)}>volumes</Link>
       or <Link to={lh.link("backendJournalIssues", journalId)}>issues</Link> to
       see this page.
     </Trans>
