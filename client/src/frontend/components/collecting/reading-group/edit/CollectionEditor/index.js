@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import findKey from "lodash/findKey";
 import { readingGroupsAPI, collectingAPI, requests } from "api";
@@ -21,6 +22,7 @@ function CollectionEditor({
   refresh,
   setScreenReaderStatus: announce
 }) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const collection = getEntityCollection(readingGroup);
@@ -86,11 +88,11 @@ function CollectionEditor({
     const sourceIndex = sortedCategories.indexOf(sourceId);
 
     if (sourceIndex === sortedCategories.length - 1 && direction === "down") {
-      announce("Cannot move down. Item is already in the last category.");
+      announce(t("messages.cannot_move_down"));
       return;
     }
     if (sourceIndex === 0 && direction === "up") {
-      announce("Cannot move up. Item is already in the first category.");
+      announce(t("messages.cannot_move_up"));
       return;
     }
 
@@ -111,8 +113,9 @@ function CollectionEditor({
     };
     updateCollectable(updatedCollectable);
     announce(
-      `Item moved to category “${destination?.title.plaintext ||
-        "Uncategorized"}”`
+      t("messages.item_moved_category", {
+        category: destination?.title.plaintext || t("common.uncategorized")
+      })
     );
   }
 

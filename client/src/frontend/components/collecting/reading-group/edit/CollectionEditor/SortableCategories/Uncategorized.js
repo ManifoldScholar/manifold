@@ -1,11 +1,17 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Category from "./Category";
+import { capitalize } from "utils/string";
 
 const CATEGORY_ID = "$uncategorized$";
 
 function Uncategorized(props) {
-  const category = { id: CATEGORY_ID, attributes: { title: "Uncategorized" } };
+  const { t } = useTranslation();
+  const category = {
+    id: CATEGORY_ID,
+    attributes: { title: capitalize(t("common.uncategorized")) }
+  };
 
   return <Category category={category} {...props} />;
 }

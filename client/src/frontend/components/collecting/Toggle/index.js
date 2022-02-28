@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { collectingAPI, requests } from "api";
 import { useDispatch } from "react-redux";
@@ -51,6 +52,8 @@ function CollectingToggle({
   const [isCollecting, setIsCollecting] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
 
+  const { t } = useTranslation();
+
   const myCollectableReadingGroups = useMemo(() => {
     if (!Array.isArray(myReadingGroups)) return [];
     return myReadingGroups.filter(rg => rg?.attributes?.abilities?.update);
@@ -77,14 +80,14 @@ function CollectingToggle({
   const useOutlinedStarIcon = outlined && view === "add";
 
   const screenReaderButtonText = () => {
-    if (hasReadingGroups) return "Toggle collecting dialog";
+    if (hasReadingGroups) return t("actions.toggle_collecting");
     switch (view) {
       case "add":
       case "add-active":
-        return `Collect ${collectableTitle}`;
+        return t("actions.collect", { title: collectableTitle });
       case "remove":
       case "remove-active":
-        return `Uncollect ${collectableTitle}`;
+        return t("actions.uncollect", { title: collectableTitle });
       default:
         return "";
     }
@@ -104,7 +107,7 @@ function CollectingToggle({
     dispatch(collectRequest);
     setHovered(false);
     setIsCollecting(true);
-    setScreenReaderStatus(`You collected ${collectableTitle}`);
+    setScreenReaderStatus(t("messages.collected", { title: collectableTitle }));
   }
 
   function doRemove(collection = currentUser) {
@@ -115,7 +118,9 @@ function CollectingToggle({
     });
     setConfirmed(false);
     setHovered(false);
-    setScreenReaderStatus(`You uncollected ${collectableTitle}`);
+    setScreenReaderStatus(
+      t("messages.uncollected", { title: collectableTitle })
+    );
   }
 
   function onSRClick(event) {

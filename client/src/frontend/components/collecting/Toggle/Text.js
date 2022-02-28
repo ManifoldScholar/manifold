@@ -1,27 +1,28 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import {
   TransitionGroup as ReactTransitionGroup,
   CSSTransition
 } from "react-transition-group";
 
-function determineText(view) {
+function determineText(view, t) {
   switch (view) {
     case "remove-active":
       return {
         key: "remove",
-        text: "Remove"
+        text: t("actions.remove")
       };
     case "remove-confirm":
     case "remove-confirm-active":
       return {
         key: "remove-confirm",
-        text: "Are you sure?"
+        text: t("messages.confirm")
       };
     case "add-active":
       return {
         key: "add",
-        text: "Add"
+        text: t("actions.add")
       };
     default:
       return {
@@ -32,13 +33,15 @@ function determineText(view) {
 }
 
 function ToggleText({ view }) {
+  const { t } = useTranslation();
+
   const transitionProps = {
     mountOnEnter: true,
     classNames: "collecting-toggle__text",
     timeout: { enter: 0, exit: 200 }
   };
 
-  const { key, text } = determineText(view);
+  const { key, text } = determineText(view, t);
 
   return (
     <ReactTransitionGroup>

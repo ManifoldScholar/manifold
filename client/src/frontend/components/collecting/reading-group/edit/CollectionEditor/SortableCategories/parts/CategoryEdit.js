@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { readingGroupsAPI, requests } from "api";
 
 function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
+  const { t } = useTranslation();
+
   function doUpdate(categoryId, data) {
     return readingGroupsAPI.updateCategory(groupId, categoryId, data);
   }
@@ -19,17 +22,17 @@ function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
     >
       <Form.TextInput
         wide
-        label="Category Name"
+        label={t("forms.category.name")}
         name="attributes[title]"
-        placeholder="Enter Category Name"
+        placeholder={t("forms.category.name_placeholder")}
       />
       <Form.TextArea
         wide
         height={122}
-        label="Category Description"
+        label={t("forms.category.description")}
         name="attributes[description]"
-        placeholder="Enter Category Description"
-        instructions="Enter a brief description of the category. This field accepts basic Markdown."
+        placeholder={t("forms.category.description_placeholder")}
+        instructions={t("forms.category.description_instructions")}
       />
       <Form.Save text="Save" theme="frontend" cancelCallback={onCancel} />
     </FormContainer.Form>
