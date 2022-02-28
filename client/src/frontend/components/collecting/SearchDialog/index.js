@@ -14,11 +14,11 @@ function CollectingSearchDialog({ heading, onClose }) {
       describedBy={uidSeed("description")}
       header={
         <div className="search-dialog__header">
-          <Trans key="modals.collecting_search">
+          <Trans i18nKey="modals.collecting_search">
             <h2 id={uidSeed("label")} className="search-dialog__heading">
               Add content
             </h2>
-            <p className="search-dialog__subheading">{heading}</p>
+            <p className="search-dialog__subheading">{{ heading }}</p>
             <p
               id={uidSeed("description")}
               className="search-dialog__instructions"

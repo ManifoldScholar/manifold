@@ -9,7 +9,7 @@ function CollectionPlaceholder() {
   return (
     <section className="collection-placeholder">
       <div className="collection-placeholder__inner">
-        <Trans key="placeholders.reading_group.customize">
+        <Trans i18nKey="placeholders.reading_group.customize">
           <h3 className="collection-placeholder__heading">
             Ready to customize your group?
           </h3>
@@ -38,7 +38,7 @@ function CollectionPlaceholder() {
             {t("navigation.search_by_keyword")}
           </a>
         </div>
-        <Trans key="placeholders.reading_group.settings">
+        <Trans i18nKey="placeholders.reading_group.settings">
           <h3 className="collection-placeholder__heading">
             Edit settings and invite members:
           </h3>
