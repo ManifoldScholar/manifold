@@ -4,7 +4,7 @@ exports[`frontend/components/resource-preview/Video matches the snapshot 1`] = `
 <div
   className="resource-preview resource-preview-video"
 >
-  <Connect(HigherOrder.WithDispatch('Resource.Player.Video))
+  <Connect(HigherOrder.WithDispatch('withI18nextTranslation(Resource.Player.Video)))
     resource={
       Object {
         "attributes": Object {

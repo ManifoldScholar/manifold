@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/resource-slide/SlideVideo matches the snapshot 1`] = `
-<Connect(HigherOrder.WithDispatch('Resource.Player.Video))
+<Connect(HigherOrder.WithDispatch('withI18nextTranslation(Resource.Player.Video)))
   resource={
     Object {
       "attributes": Object {

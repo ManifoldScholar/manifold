@@ -3,7 +3,6 @@
 exports[`frontend/components/resource-slide/SlideImage matches the snapshot 1`] = `
 <Fragment>
   <ResourceList.Slide.Zoom
-    label="Zoom"
     resource={
       Object {
         "attributes": Object {
