@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Utility from "global/components/utility";
+import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
-export default class ResourceCollectionCover extends Component {
+class ResourceCollectionCover extends Component {
   static displayName = "ResourceCollection.Cover";
 
   static propTypes = {
     resourceCollection: PropTypes.object.isRequired,
     urlCreator: PropTypes.func.isRequired,
-    itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
+    itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6]),
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -37,10 +40,14 @@ export default class ResourceCollectionCover extends Component {
           <Styled.Title as={this.titleTag}>{attr.title}</Styled.Title>
           <Styled.IconWrapper>
             <Utility.IconComposer size={48} icon="resourceCollection64" />
-            <Styled.IconText>{"Collection"}</Styled.IconText>
+            <Styled.IconText>
+              {capitalize(this.props.t("glossary.collection_one"))}
+            </Styled.IconText>
           </Styled.IconWrapper>
         </Styled.TitleOverlay>
       </Styled.Cover>
     );
   }
 }
+
+export default withTranslation()(ResourceCollectionCover);
