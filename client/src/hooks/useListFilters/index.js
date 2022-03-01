@@ -55,9 +55,10 @@ export default function useListFilters({
             : options[option]
         )
     : [];
-  const finalTypes = options?.featured
-    ? [...activeTypes, "subjects"]
-    : activeTypes;
+  const finalTypes =
+    options?.featured && !options.subjects
+      ? [...activeTypes, "subjects"]
+      : activeTypes;
   const activeFilters = finalTypes.length
     ? finalTypes.map(type =>
         filterTypes[type](filters, updateFilterState, {
