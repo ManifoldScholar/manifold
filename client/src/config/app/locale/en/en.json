@@ -25,7 +25,8 @@
       "collect": "Collect {{title}}",
       "uncollect": "Uncollect {{title}}",
       "toggle_collecting": "Toggle collecting dialog",
-      "delete_event": "$t(actions.delete) event"
+      "delete_event": "$t(actions.delete) event",
+      "add_comment": "$t(actions.add) comment"
     },
     "pagination": {
       "previous": "Previous",
@@ -44,7 +45,9 @@
       "see_full_collection": "See the full collection",
       "see_all_projects": "$t(actions.see_all) $t(glossary.project_other)",
       "search_by_keyword": "Search by keyword",
-      "see_all_activity": "$t(actions.see_all) activity"
+      "see_all_activity": "$t(actions.see_all) activity",
+      "return_home": "Return to home",
+      "visit_page": "Visit page"
     },
     "search": {},
     "glossary": {
@@ -97,7 +100,8 @@
         "no_resources": "Add <1>resources</1> or <3>resource collections</3>to the project to fix this block.",
         "no_metadata": "<0>Add project metadata</0> to fix this block.",
         "default": "<0>Fix this content block.</0>"
-      }
+      },
+      "no_content": "No content provided."
     },
     "placeholders": {
       "link": "Link",
@@ -118,7 +122,8 @@
       }
     },
     "sections": {
-      "journal_info": "$t(glossary.journal_one) info"
+      "journal_info": "$t(glossary.journal_one) info",
+      "full_description": "Full description"
     },
     "messages": {
       "empty_journal_heading": "This journal is currently empty.",

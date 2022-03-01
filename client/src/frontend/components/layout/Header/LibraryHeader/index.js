@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Navigation from "global/components/navigation";
 import PressLogo from "global/components/PressLogo";
 import lh from "helpers/linkHandler";
@@ -17,6 +18,7 @@ export default function LibraryHeader({
   visibility,
   commonActions
 }) {
+  const { t } = useTranslation();
   const { breadcrumbs } = useContext(BreadcrumbsContext);
 
   const pageToLinkAttrs = page => ({
@@ -64,7 +66,9 @@ export default function LibraryHeader({
           <div className="library-header__inner">
             <HeaderLogo {...logoProps}>
               <>
-                <span className="screen-reader-text">Return to home</span>
+                <span className="screen-reader-text">
+                  {t("navigation.return_home")}
+                </span>
                 <PressLogo
                   url={logoUrl}
                   mobileUrl={mobileLogoUrl}
