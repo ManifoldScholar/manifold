@@ -19,8 +19,9 @@
       "view_all": "View all",
       "see_all": "See all",
       "read": "Start Reading",
+      "read_more": "Read More",
       "download": "Download",
-      "view_contents": "View Contents",
+      "view_contents": "$t(actions.view) Contents",
       "add": "Add",
       "collect": "Collect {{title}}",
       "uncollect": "Uncollect {{title}}",
@@ -31,7 +32,10 @@
       "pause_playback": "Pause Playback",
       "mute": "Mute",
       "unmute": "UnMute",
-      "adjust_volume": "Adjust Volume"
+      "adjust_volume": "Adjust Volume",
+      "hide_description": "$t(actions.hide) Description",
+      "view_resource": "$t(actions.view) $t(glossary.resource_one)",
+      "zoom": "Zoom"
     },
     "pagination": {
       "previous": "Previous",
@@ -55,7 +59,8 @@
       "search_by_keyword": "Search by keyword",
       "see_all_activity": "$t(actions.see_all) activity",
       "return_home": "Return to home",
-      "visit_page": "Visit page"
+      "visit_page": "Visit page",
+      "view_interactive_resource": "$t(actions.view) Interactive Resource"
     },
     "search": {},
     "glossary": {
@@ -123,7 +128,8 @@
       "reading_group": {
         "customize": "<0>Ready to customize your group?</0><1>Congratulations, you’ve created a Reading Group. Now you can begin adding content, editing the order, grouping, and descriptions on your home page, and sending out invitations for new members.</1><2>Start adding content:</2><3>Reading Groups can contain a variety of content: Projects, Texts, Text Sections, Resource Collections, and individual Resources can all be added to your group. To find and add content, you can either browse the library or use keyword search. Once you’ve found an item you wish to add, simply select the star icon and assign it to this group (or any other Reading Group you are managing).</3>",
         "settings": "<0>Edit settings and invite members:</0><1>You can edit the settings for your group at any time. Change your group’s name, privacy settings, or email notifications. You can also see your group’s invitation code, or use an invitation URL, which makes inviting members as easy as sharing its invitation web page address.</1>"
-      }
+      },
+      "resource_collection": "This collection has no resources"
     },
     "pages": {
       "frontend": {
@@ -154,7 +160,8 @@
       "uncollected": "You uncollected {{title}}",
       "confirm": "Are you sure?",
       "content_block_warning_heading": "This content block needs your attention before it can be displayed.",
-      "content_block_warning_note": "Note: This message is only visible to project editors."
+      "content_block_warning_note": "Note: This message is only visible to project editors.",
+      "showing_resource": "Showing {{ type }} resource: {{ title }}"
     },
     "forms": {
       "add_to": "Add this to",
@@ -192,7 +199,8 @@
       "default_issues_other": "There are <1>{{count}}</1> {{unit}}"
     },
     "dates": {
-      "resource_added": "Resource added",
+      "added": "added",
+      "resource_added": "Resource $t(dates.added)",
       "collection_created": "Collection created"
     },
     "metadata": {

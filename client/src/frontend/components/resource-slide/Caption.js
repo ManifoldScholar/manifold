@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { Trans, withTranslation } from "react-i18next";
 import classNames from "classnames";
 import get from "lodash/get";
 import debounce from "lodash/debounce";
@@ -9,14 +10,15 @@ import isEmpty from "lodash/isEmpty";
 import { Collapse } from "react-collapse";
 import IconComposer from "global/components/utility/IconComposer";
 
-export default class ResourceListSlideCaption extends Component {
+class ResourceListSlideCaption extends Component {
   static visibleCaptionHeight = 48;
 
   static propTypes = {
     resource: PropTypes.object,
     resourceCollection: PropTypes.object,
     hideDetailUrl: PropTypes.bool,
-    hideDownload: PropTypes.bool
+    hideDownload: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -159,6 +161,7 @@ export default class ResourceListSlideCaption extends Component {
     });
 
     const detailUrl = this.detailUrl();
+    const t = this.props.t;
 
     return (
       <div className="resource-slideshow__caption">
@@ -168,7 +171,9 @@ export default class ResourceListSlideCaption extends Component {
             dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
           />
           <span className="screen-reader-text" role="alert">
-            Showing {attr.type} resource: {attr.title}
+            <Trans i18nKey="messages.showing_resource">
+              Showing {{ type: attr.type }} resource: {{ title: attr.title }}
+            </Trans>
           </span>
         </header>
         {this.renderDescription(resource)}
@@ -181,10 +186,10 @@ export default class ResourceListSlideCaption extends Component {
           <div className="resource-slideshow__utility-inner">
             <button className={moreLinkClass} onClick={this.handleReadMore}>
               <span className="resource-slideshow__open-text">
-                {"Read More"}
+                {t("actions.read_more")}
               </span>
               <span className="resource-slideshow__close-text">
-                {"Hide Description"}
+                {t("actions.hide_description")}
               </span>
             </button>
             {this.canDownload(resource) ? (
@@ -194,7 +199,7 @@ export default class ResourceListSlideCaption extends Component {
                 className="resource-slideshow__download-link"
                 rel="noopener noreferrer"
               >
-                <span>{"Download"}</span>
+                <span>{t("actions.download")}</span>
                 <IconComposer
                   icon="arrowDown16"
                   size="default"
@@ -204,7 +209,7 @@ export default class ResourceListSlideCaption extends Component {
             ) : null}
             {detailUrl && !this.props.hideDetailUrl ? (
               <Link className="resource-slideshow__detail-link" to={detailUrl}>
-                {"View Resource"}
+                {t("actions.view_resource")}
               </Link>
             ) : null}
           </div>
@@ -213,3 +218,5 @@ export default class ResourceListSlideCaption extends Component {
     );
   }
 }
+
+export default withTranslation()(ResourceListSlideCaption);

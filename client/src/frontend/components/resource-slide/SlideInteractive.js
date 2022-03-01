@@ -4,14 +4,16 @@ import ResourcePlayer from "frontend/components/resource-player";
 import throttle from "lodash/throttle";
 import SlideDefault from "frontend/components/resource-slide/SlideDefault";
 import Zoom from "./Zoom";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceListSlideInteractive extends PureComponent {
+class ResourceListSlideInteractive extends PureComponent {
   static displayName = "ResourceList.Slide.Interactive";
 
   static propTypes = {
     resource: PropTypes.object.isRequired,
     flexibleHeight: PropTypes.bool,
-    enableZoom: PropTypes.bool
+    enableZoom: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -125,10 +127,15 @@ export default class ResourceListSlideInteractive extends PureComponent {
     return (
       <div ref={this.setContainer} style={{ width: "100%", height: "100%" }}>
         {enableZoom && (
-          <Zoom label={"View interactive resource"} resource={resource} />
+          <Zoom
+            label={this.props.t("navigation.view_interactive_resource")}
+            resource={resource}
+          />
         )}
         {this.renderSlideContents()}
       </div>
     );
   }
 }
+
+export default withTranslation()(ResourceListSlideInteractive);
