@@ -8,7 +8,7 @@ exports[`reader/components/notation/resource-collection/Detail matches the snaps
     <div
       className="container"
     >
-      <ResourceCollection.Title
+      <withI18nextTranslation(ResourceCollection.Title)
         resourceCollection={
           Object {
             "attributes": Object {
@@ -353,7 +353,6 @@ exports[`reader/components/notation/resource-collection/Detail matches the snaps
             "type": "resourceCollections",
           }
         }
-        showCreatedAt={true}
       />
     </div>
   </div>

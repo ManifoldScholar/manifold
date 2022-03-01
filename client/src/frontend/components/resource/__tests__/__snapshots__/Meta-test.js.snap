@@ -97,8 +97,7 @@ exports[`frontend/components/resource/Meta matches the snapshot 1`] = `
     }
     sortByLength={false}
   />
-  <Resource.TagList
-    disabledLinks={false}
+  <withI18nextTranslation(Resource.TagList)
     resource={
       Object {
         "attributes": Object {

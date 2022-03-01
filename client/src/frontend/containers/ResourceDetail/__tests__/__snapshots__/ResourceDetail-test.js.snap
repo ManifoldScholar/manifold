@@ -156,7 +156,7 @@ exports[`frontend/containers/ResourceDetail/ResourceDetail matches the snapshot 
       ]
     }
   />
-  <Resource.Detail
+  <withI18nextTranslation(Resource.Detail)
     dispatch={[Function]}
     projectId="AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
     projectUrl="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resources"
