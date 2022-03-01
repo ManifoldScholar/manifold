@@ -26,12 +26,20 @@
       "uncollect": "Uncollect {{title}}",
       "toggle_collecting": "Toggle collecting dialog",
       "delete_event": "$t(actions.delete) event",
-      "add_comment": "$t(actions.add) comment"
+      "add_comment": "$t(actions.add) comment",
+      "start_playback": "Start Playback",
+      "pause_playback": "Pause Playback",
+      "mute": "Mute",
+      "unmute": "UnMute",
+      "adjust_volume": "Adjust Volume"
     },
     "pagination": {
       "previous": "Previous",
+      "previous_short": "Prev",
       "next": "Next",
-      "go_to_page": "Go to page {{number}}"
+      "go_to_page": "Go to page {{number}}",
+      "next_slide": "Go to next slide",
+      "previous_slide": "Go to previous slide"
     },
     "navigation": {
       "user": {
@@ -80,7 +88,8 @@
       "contributor_one": "contributor",
       "contributor_other": "contributors",
       "item_one": "item",
-      "item_other": "items"
+      "item_other": "items",
+      "progress_bar": "progress bar"
     },
     "common": {
       "on": "on",
@@ -101,7 +110,13 @@
         "no_metadata": "<0>Add project metadata</0> to fix this block.",
         "default": "<0>Fix this content block.</0>"
       },
-      "no_content": "No content provided."
+      "no_content": "No content provided.",
+      "video_playback": {
+        "heading": "Unable to play video.",
+        "body": "Your browser is not able to play this video.",
+        "download": "You may download it and play it locally using the download button below."
+      },
+      "audio_playback": "{{ error }}<1/>This audio file is not playable in your browser.<3/><4/>Click the download button to listen to the file on your device."
     },
     "placeholders": {
       "link": "Link",

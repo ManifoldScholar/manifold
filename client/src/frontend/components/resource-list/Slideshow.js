@@ -11,10 +11,11 @@ import { resourceCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import DirectionalButton from "./SlideShow/DirectionalButton";
 import capitalize from "lodash/capitalize";
+import { withTranslation } from "react-i18next";
 
 const { request } = entityStoreActions;
 
-export default class ResourceSlideshow extends PureComponent {
+class ResourceSlideshow extends PureComponent {
   static displayName = "ResourceSlideshow";
 
   static propTypes = {
@@ -24,7 +25,8 @@ export default class ResourceSlideshow extends PureComponent {
     resourceCollection: PropTypes.object.isRequired,
     hideDetailUrl: PropTypes.bool,
     hideDownload: PropTypes.bool,
-    slideOptions: PropTypes.object
+    slideOptions: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -218,6 +220,7 @@ export default class ResourceSlideshow extends PureComponent {
     const totalCount = this.state.totalCount;
     const collectionResource = this.state.map[position];
     const collectionResourcesCount = this.props.collectionResources.length;
+    const t = this.props.t;
 
     return (
       <div className="resource-slideshow">
@@ -259,15 +262,15 @@ export default class ResourceSlideshow extends PureComponent {
                     onClick={this.handleSlidePrev}
                     direction="left"
                     disabled={position === 1}
-                    paginationText="Prev"
-                    screenReaderText="Go to previous slide"
+                    paginationText={t("pagination.previous_short")}
+                    screenReaderText={t("pagination.previous_slide")}
                   />
                   <DirectionalButton
                     onClick={this.handleSlideNext}
                     direction="right"
                     disabled={position === totalCount}
-                    paginationText="Next"
-                    screenReaderText="Go to next slide"
+                    paginationText={t("pagination.next")}
+                    screenReaderText={t("pagination.next_slide")}
                   />
                 </div>
               </div>
@@ -278,3 +281,5 @@ export default class ResourceSlideshow extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ResourceSlideshow);
