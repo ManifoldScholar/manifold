@@ -123,7 +123,9 @@
     },
     "sections": {
       "journal_info": "$t(glossary.journal_one) info",
-      "full_description": "Full description"
+      "full_description": "Full description",
+      "tags_list": "Tags list",
+      "variants": "Downloadable Variants"
     },
     "messages": {
       "empty_journal_heading": "This journal is currently empty.",
@@ -171,6 +173,54 @@
       "empty_volume_other": "There are <1>{{count}}</1> empty volumes.",
       "default_issues_one": "There is <1>{{count}}</1> {{unit}}",
       "default_issues_other": "There are <1>{{count}}</1> {{unit}}"
+    },
+    "dates": {
+      "resource_added": "Resource added"
+    },
+    "metadata": {
+      "abstract": "abstract",
+      "archive": "archive",
+      "archive_location": "archive location",
+      "archive_place": "archive place",
+      "authority": "authority",
+      "call_number": "call number",
+      "collection_title": "collection title",
+      "container_title": "container title",
+      "dimensions": "dimensions",
+      "event": "event",
+      "event_place": "event place",
+      "isbn": "isbn",
+      "issn": "issn",
+      "doi": "doi",
+      "jurisdiction": "jurisdiction",
+      "rights_territory": "rights territory",
+      "medium": "medium",
+      "original_publisher": "original publisher",
+      "original_publisher_place": "original publisher place",
+      "original_title": "original title",
+      "pmcid": "pmcid",
+      "pmid": "pmid",
+      "publisher": "publisher",
+      "publisher_place": "publisher place",
+      "reviewed_title": "reviewed title",
+      "section": "section",
+      "version": "version",
+      "year_suffix": "year suffix",
+      "chapter_number": "chapter number",
+      "collection_number": "collection number",
+      "edition": "edition",
+      "issue": "$t(glossary.issue_one)",
+      "number": "number",
+      "number_of_pages": "number of pages",
+      "number_of_volumes": "number of volumes",
+      "volume": "$t(glossary.volume_one)",
+      "file_size": "file size",
+      "file_format": "file format",
+      "created_on": "created on",
+      "create_at": "created at",
+      "updated_at": "updated at",
+      "updated_on": "updated on",
+      "type": "type"
     }
   }
 }
