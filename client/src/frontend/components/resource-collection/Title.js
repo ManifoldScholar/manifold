@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import FormattedDate from "global/components/FormattedDate";
 import Utility from "global/components/utility";
 import Collecting from "frontend/components/collecting";
 
-export default class ResourceCollectionTitle extends Component {
+class ResourceCollectionTitle extends Component {
   static displayName = "ResourceCollection.Title";
 
   static propTypes = {
     resourceCollection: PropTypes.object,
-    showCreatedAt: PropTypes.bool
+    showCreatedAt: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -62,7 +64,7 @@ export default class ResourceCollectionTitle extends Component {
             {this.showCreatedAt && (
               <span className="date">
                 <FormattedDate
-                  prefix="Collection created"
+                  prefix={this.props.t("dates.collection_created")}
                   format="MMMM, yyyy"
                   date={this.createdAt}
                 />
@@ -74,3 +76,5 @@ export default class ResourceCollectionTitle extends Component {
     );
   }
 }
+
+export default withTranslation()(ResourceCollectionTitle);

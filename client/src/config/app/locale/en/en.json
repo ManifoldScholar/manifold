@@ -125,7 +125,9 @@
       "journal_info": "$t(glossary.journal_one) info",
       "full_description": "Full description",
       "tags_list": "Tags list",
-      "variants": "Downloadable Variants"
+      "variants": "Downloadable Variants",
+      "resource_slideshow": "Resource slideshow",
+      "resource_list": "Resource list"
     },
     "messages": {
       "empty_journal_heading": "This journal is currently empty.",
@@ -175,7 +177,8 @@
       "default_issues_other": "There are <1>{{count}}</1> {{unit}}"
     },
     "dates": {
-      "resource_added": "Resource added"
+      "resource_added": "Resource added",
+      "collection_created": "Collection created"
     },
     "metadata": {
       "abstract": "abstract",
