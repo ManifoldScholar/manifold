@@ -77,6 +77,8 @@ exports[`frontend/components/resource-collection/Cover matches the snapshot 1`] 
                 "mute": "Mute",
                 "open": "Open",
                 "pause_playback": "Pause Playback",
+                "play": "Play",
+                "preview": "Preview",
                 "read": "Start Reading",
                 "read_more": "Read More",
                 "remove": "Remove",
@@ -91,6 +93,7 @@ exports[`frontend/components/resource-collection/Cover matches the snapshot 1`] 
                 "view_all": "View all",
                 "view_contents": "$t(actions.view) Contents",
                 "view_resource": "$t(actions.view) $t(glossary.resource_one)",
+                "visit": "Visit",
                 "zoom": "Zoom",
               },
               "common": Object {
@@ -347,6 +350,8 @@ exports[`frontend/components/resource-collection/Cover matches the snapshot 1`] 
               "mute": "Mute",
               "open": "Open",
               "pause_playback": "Pause Playback",
+              "play": "Play",
+              "preview": "Preview",
               "read": "Start Reading",
               "read_more": "Read More",
               "remove": "Remove",
@@ -361,6 +366,7 @@ exports[`frontend/components/resource-collection/Cover matches the snapshot 1`] 
               "view_all": "View all",
               "view_contents": "$t(actions.view) Contents",
               "view_resource": "$t(actions.view) $t(glossary.resource_one)",
+              "visit": "Visit",
               "zoom": "Zoom",
             },
             "common": Object {

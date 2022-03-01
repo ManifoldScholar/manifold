@@ -1,21 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
 
-function getContentForKind(resource) {
+function getContentForKind(resource, t) {
   const { kind, downloadable } = resource.attributes;
 
   if (!downloadable) {
     switch (kind.toLowerCase()) {
       case "link":
         return {
-          text: "Visit",
+          text: t("actions.visit"),
           icon: "arrowRight16",
           iconSize: "default"
         };
       default:
         return {
-          text: "View",
+          text: t("actions.view"),
           icon: "arrowRight16",
           iconSize: "default"
         };
@@ -26,19 +27,19 @@ function getContentForKind(resource) {
     case "image":
     case "interactive":
       return {
-        text: "Preview",
+        text: t("actions.preview"),
         icon: "eyeOpen16",
         iconSize: 21.333
       };
     case "video":
       return {
-        text: "Play",
+        text: t("actions.play"),
         icon: "play16",
         iconSize: 19.2
       };
     default:
       return {
-        text: "Download",
+        text: t("actions.download"),
         icon: "arrowDown16",
         iconSize: "default"
       };
@@ -46,7 +47,8 @@ function getContentForKind(resource) {
 }
 
 function Text({ resource }) {
-  const { text, icon, iconSize } = getContentForKind(resource);
+  const { t } = useTranslation();
+  const { text, icon, iconSize } = getContentForKind(resource, t);
   const { title, kind } = resource.attributes;
 
   return (

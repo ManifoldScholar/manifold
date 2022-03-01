@@ -28,6 +28,7 @@
       "toggle_collecting": "Toggle collecting dialog",
       "delete_event": "$t(actions.delete) event",
       "add_comment": "$t(actions.add) comment",
+      "play": "Play",
       "start_playback": "Start Playback",
       "pause_playback": "Pause Playback",
       "mute": "Mute",
@@ -35,7 +36,9 @@
       "adjust_volume": "Adjust Volume",
       "hide_description": "$t(actions.hide) Description",
       "view_resource": "$t(actions.view) $t(glossary.resource_one)",
-      "zoom": "Zoom"
+      "zoom": "Zoom",
+      "visit": "Visit",
+      "preview": "Preview"
     },
     "pagination": {
       "previous": "Previous",
