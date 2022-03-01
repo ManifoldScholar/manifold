@@ -4,6 +4,7 @@ import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
 import { useShareAnnotation } from "../hooks";
 import { useEventTracker } from "hooks";
+import { t } from "i18next";
 
 function ShareMenu({
   menu,
@@ -38,7 +39,7 @@ function ShareMenu({
     <Menu
       menu={menu}
       visible={visible}
-      aria-label="Share"
+      aria-label={t("actions.share")}
       direction={direction}
       onKeyDown={onKeyDown}
     >
@@ -47,8 +48,8 @@ function ShareMenu({
           menu={{ ...menu, visible }}
           onClick={handleCiteClick}
           kind="any"
-          label="Cite"
-          srLabel="Cite selection"
+          label={t("reader.cite")}
+          srLabel={t("reader.cite_selection")}
           icon="socialCite32"
         />
       )}
@@ -61,7 +62,7 @@ function ShareMenu({
         kind="any"
         icon="socialTwitter32"
         label="Twitter"
-        srLabel="Share on Twitter"
+        srLabel={t("external_links.share_on_social", {service: "Twitter"})}
       />
       {facebookAppId && (
         <MenuItem
@@ -73,14 +74,14 @@ function ShareMenu({
           kind="any"
           icon="socialFacebook32"
           label="Facebook"
-          srLabel="Share on Facebook"
+          srLabel={t("external_links.share_on_social", {service: "Facebook"})}
         />
       )}
       <MenuItem
         menu={{ ...menu, visible }}
         onClick={onBackClick}
         kind="any"
-        label="Back"
+        label={t("actions.back")}
         icon="arrowLeft32"
         className="annotation-popup__button--secondary-dark"
       />

@@ -1,9 +1,12 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import MenuItem from "reader/components/annotation/popup/parts/MenuItem";
 
 function Highlight({ menu, actions, activeAnnotation }) {
+  const { t } = useTranslation();
+
   function hasActiveAnnotation() {
     if (!activeAnnotation) return false;
     return (
@@ -26,15 +29,15 @@ function Highlight({ menu, actions, activeAnnotation }) {
           "annotation-popup__button--selected": highlighted
         })}
         kind="any"
-        label="Highlight"
-        srLabel="Highlight selection"
+        label={t("reader.highlight")}
+        srLabel={t("reader.highlight_selection")}
         icon="annotate24"
       />
       {highlighted && (
         <div className="annotation-popup__note">
           {activeAnnotation.attributes.currentUserIsCreator
-            ? "You Highlighted"
-            : "A Reader Highlighted"}
+            ? t("reader.you_highlighted")
+            : t("reader.reader_highlighted")}
         </div>
       )}
     </>

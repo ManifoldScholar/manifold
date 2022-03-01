@@ -1,21 +1,24 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
 
 function Login({ menu, visible, direction, actions }) {
+  const { t } = useTranslation();
+
   return (
     <Menu
       menu={menu}
       visible={visible}
-      aria-label="Log in to annotate"
+      aria-label={t("reader.log_in_annotate")}
       direction={direction}
     >
       <MenuItem
         menu={menu}
         onClick={actions.showLogin}
         kind="unauthenticated"
-        label="Log in to Annotate"
+        label={t("reader.log_in_annotate")}
         icon="editProfile24"
       />
     </Menu>

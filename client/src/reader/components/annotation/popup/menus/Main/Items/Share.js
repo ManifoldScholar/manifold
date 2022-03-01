@@ -1,8 +1,11 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import MenuItem from "reader/components/annotation/popup/parts/MenuItem";
 
 function Share({ menu, onClick, activeMenu }) {
+  const { t } = useTranslation();
+
   return (
     <MenuItem
       menu={menu}
@@ -11,8 +14,8 @@ function Share({ menu, onClick, activeMenu }) {
       aria-expanded={activeMenu === "share"}
       data-name="share"
       kind="any"
-      label="Share"
-      srLabel="Share selection"
+      label={t("actions.share")}
+      srLabel={t("reader.share_selection")}
       icon="share24"
     />
   );
