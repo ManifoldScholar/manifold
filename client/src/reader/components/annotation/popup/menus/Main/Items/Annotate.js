@@ -1,15 +1,18 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import MenuItem from "reader/components/annotation/popup/parts/MenuItem";
 
 function Annotate({ menu, actions }) {
+  const { t } = useTranslation();
+
   return (
     <MenuItem
       menu={menu}
       onClick={actions.openNewAnnotationDrawer}
       kind="any"
-      label="Annotate"
-      srLabel="Annotate selection"
+      label={t("reader.annotate")}
+      srLabel={t("reader.annotate_selection")}
       icon="comment24"
     />
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
@@ -11,12 +12,13 @@ function FollowLink({ menu, visible, direction, activeEvent, actions }) {
     if (!openViewAnnotationsDrawer || !annotationIds) return;
     return openViewAnnotationsDrawer(annotationIds);
   }
+  const { t } = useTranslation();
 
   return (
     <Menu
       menu={menu}
       visible={visible}
-      aria-label="Follow link"
+      aria-label={t("reader.follow_link")}
       direction={direction}
     >
       <MenuItem
@@ -26,14 +28,14 @@ function FollowLink({ menu, visible, direction, activeEvent, actions }) {
         target="_blank"
         rel="noopener noreferrer"
         kind="none"
-        label="Follow link"
+        label={t("reader.follow_link")}
         icon="arrowRight32"
       />
       <MenuItem
         menu={{ ...menu, visible }}
         onClick={handleAnnotateClick}
         kind="any"
-        label="Annotate"
+        label={t("reader.annotate")}
         icon="comment24"
       />
     </Menu>

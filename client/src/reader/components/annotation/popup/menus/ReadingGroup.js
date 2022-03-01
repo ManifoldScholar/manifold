@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { MenuItem as ReakitMenuItem } from "reakit/Menu";
@@ -29,26 +30,27 @@ function ReadingGroupMenu({
   function isPrivateGroup(privacy) {
     return privacy === "private" || privacy === "anonymous";
   }
+  const { t } = useTranslation();
 
   return (
     <Menu
       menu={menu}
       visible={visible}
-      aria-label="ReadingGroup"
+      aria-label={t("glossary.reading_group_one")}
       direction={direction}
       onKeyDown={onKeyDown}
     >
       <div className="annotation-popup__header">
         <IconComposer icon="readingGroup24" size="default" />
         <span className="annotation-popup__heading">
-          {canAccessReadingGroups ? "Reading Groups:" : "Visibility"}
+          {canAccessReadingGroups ? t("glossary.reading_group_other") + ":" : "Visibility"}
         </span>
       </div>
       <div className="annotation-popup__button-group">
         {canEngagePublicly && (
           <RGMenuItem
             menu={{ ...menu, visible }}
-            label="My Public Annotations"
+            label={t("reader.my_public_annotations")}
             value="public"
             onClick={() => onSelect("public")}
             selected={currentReadingGroup === "public"}
@@ -56,7 +58,7 @@ function ReadingGroupMenu({
         )}
         <RGMenuItem
           menu={{ ...menu, visible }}
-          label="My Private Annotations"
+          label={t("reader.my_private_annotations")}
           value="private"
           onClick={() => onSelect("private")}
           privateGroup
@@ -83,7 +85,7 @@ function ReadingGroupMenu({
               to={lh.link("frontendMyReadingGroups")}
               className="annotation-manage-groups-link"
             >
-              <span>Manage Groups</span>
+              <span>{t("reader.manage_groups")}</span>
               <IconComposer icon="link24" size="default" />
             </ReakitMenuItem>
           </div>
@@ -93,7 +95,7 @@ function ReadingGroupMenu({
         menu={{ ...menu, visible }}
         onClick={onBackClick}
         kind="any"
-        label="Back"
+        label={t("actions.back")}
         icon="arrowLeft32"
         className="annotation-popup__button--secondary-dark"
       />

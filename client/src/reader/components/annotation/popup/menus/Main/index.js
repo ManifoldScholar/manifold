@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Menu from "../../parts/Menu";
 import MenuItems from "./Items";
@@ -19,11 +20,12 @@ function MainMenu({
     activeMenu,
     ...restProps
   };
+  const { t } = useTranslation();
 
   return (
     <Menu
       menu={menu}
-      aria-label="Annotate"
+      aria-label={t("reader.annotate")}
       visible={visible}
       activeMenu={activeMenu}
       lastActiveMenu={lastActiveMenu}

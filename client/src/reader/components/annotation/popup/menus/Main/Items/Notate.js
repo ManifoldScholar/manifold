@@ -1,16 +1,19 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import MenuItem from "reader/components/annotation/popup/parts/MenuItem";
 
 function Notate({ menu, actions, text }) {
+  const { t } = useTranslation();
+  
   return (
     <MenuItem
       menu={menu}
       onClick={actions.openNewNotationDrawer}
       ability="notate"
       entity={text}
-      label="Resource"
-      srLabel="Attach resource to selection"
+      label={t("reader.resource")}
+      srLabel={t("reader.attach_resource")}
       icon="resource24"
     />
   );

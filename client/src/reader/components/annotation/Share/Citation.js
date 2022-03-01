@@ -2,13 +2,15 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
+import { withTranslation } from "react-i18next";
 
-export default class AnnotationShareEditor extends PureComponent {
+export class AnnotationShareEditor extends PureComponent {
   static displayName = "Annotation.Share.Citation";
 
   static propTypes = {
     section: PropTypes.object,
-    cancel: PropTypes.func.isRequired
+    cancel: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -59,7 +61,7 @@ export default class AnnotationShareEditor extends PureComponent {
 
     return (
       <fieldset className="citation__radios">
-        <legend className="citation__legend">Citation style:</legend>
+        <legend className="citation__legend">{this.props.t("reader.citation_style") + ":"}</legend>
         {styles.map((style, index) => (
           <label
             key={style}
@@ -85,7 +87,7 @@ export default class AnnotationShareEditor extends PureComponent {
   }
 
   render() {
-    const copiedText = this.state.copied ? "Copied!" : null;
+    const copiedText = this.state.copied ? this.props.t("reader.copied") + "!" : null;
     const citations = this.props.section.attributes.citations;
 
     return (
@@ -107,7 +109,7 @@ export default class AnnotationShareEditor extends PureComponent {
                 onClick={this.handleCancel}
                 className="button-primary button-primary--dull"
               >
-                <span className="button-primary__text">Cancel</span>
+                <span className="button-primary__text">{this.props.t("actions.cancel")}</span>
               </button>
               <button
                 className="button-secondary"
@@ -118,7 +120,7 @@ export default class AnnotationShareEditor extends PureComponent {
                   size="default"
                   className="button-secondary__icon"
                 />
-                <span className="button-secondary__text">Copy</span>
+                <span className="button-secondary__text">{this.props.t("reader.copy")}</span>
               </button>
             </div>
           </div>
@@ -127,3 +129,5 @@ export default class AnnotationShareEditor extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(AnnotationShareEditor);
