@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import has from "lodash/has";
 import Icon from "./Icon";
+import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
-export default class ResourceishThumbnail extends Component {
+class ResourceishThumbnail extends Component {
   static displayName = "Resourceish.Thumbnail";
 
   static hasImage(resourceish, variant) {
@@ -31,7 +33,8 @@ export default class ResourceishThumbnail extends Component {
     showTitle: PropTypes.bool,
     variant: PropTypes.string,
     noCrop: PropTypes.bool,
-    isPreview: PropTypes.bool
+    isPreview: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -84,18 +87,15 @@ export default class ResourceishThumbnail extends Component {
   }
 
   get caption() {
-    let out = "File";
+    const t = this.props.t;
+    let out = capitalize(t("glossary.file_one"));
     switch (this.resourceishType) {
       case "resources":
         if (!this.resourceishKind) break;
-        out =
-          this.resourceishKind
-            .toLowerCase()
-            .charAt(0)
-            .toUpperCase() + this.resourceishKind.slice(1);
+        out = capitalize(this.resourceishKind);
         break;
       case "resourceCollections":
-        out = "Resource Collection";
+        out = capitalize(t("glossary.resource_collection_one"));
         break;
       default:
         break;
@@ -153,3 +153,5 @@ export default class ResourceishThumbnail extends Component {
     );
   }
 }
+
+export default withTranslation()(ResourceishThumbnail);

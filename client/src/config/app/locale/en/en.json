@@ -94,7 +94,9 @@
       "contributor_other": "contributors",
       "item_one": "item",
       "item_other": "items",
-      "progress_bar": "progress bar"
+      "progress_bar": "progress bar",
+      "file_one": "file",
+      "file_other": "files"
     },
     "common": {
       "on": "on",
