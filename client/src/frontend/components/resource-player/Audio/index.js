@@ -3,14 +3,16 @@ import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
 import throttle from "lodash/throttle";
 import { UIDConsumer } from "react-uid";
+import { withTranslation, Trans } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
-export default class ResourcePlayerAudio extends Component {
+class ResourcePlayerAudio extends Component {
   static displayName = "Resource.Player.Audio";
 
   static propTypes = {
-    resource: PropTypes.object
+    resource: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor() {
@@ -149,7 +151,16 @@ export default class ResourcePlayerAudio extends Component {
   };
 
   handleError = error => {
-    const message = `${error}.<br/>This audio file is not playable in your browser.<br/><br/>Click the download button to listen to the file on your device.`;
+    const message = (
+      <Trans i18nKey="errors.audio_playback">
+        {{ error }}
+        <br />
+        This audio file is not playable in your browser.
+        <br />
+        <br />
+        Click the download button to listen to the file on your device.
+      </Trans>
+    );
     this.setState({ error: message });
   };
 
@@ -194,7 +205,9 @@ export default class ResourcePlayerAudio extends Component {
 
     return (
       <Styled.Cover onClick={this.startPlayback} role="button" tabIndex="0">
-        <span className="screen-reader-text">Start Playback</span>
+        <span className="screen-reader-text">
+          {this.props.t("actions.start_playback")}
+        </span>
         <Styled.Indicator $absoluteCenter>
           <IconComposer icon="playSolid24" size={42.667} />
         </Styled.Indicator>
@@ -208,6 +221,8 @@ export default class ResourcePlayerAudio extends Component {
 
     const volume = this.state.muted ? 0 : this.state.volume;
 
+    const t = this.props.t;
+
     if (this.state.error) return this.renderError();
 
     return (
@@ -217,7 +232,9 @@ export default class ResourcePlayerAudio extends Component {
         <Styled.ControlBar>
           <button onClick={this.togglePlayback}>
             <span className="screen-reader-text">
-              {this.state.playing ? "Pause Playback" : "Start Playback"}
+              {this.state.playing
+                ? t("actions.pause_playback")
+                : t("actions.start_playback")}
             </span>
             <Styled.PlayPauseIcon icon={playPauseIcon} size={19.2} />
           </button>
@@ -233,7 +250,7 @@ export default class ResourcePlayerAudio extends Component {
                 {id => (
                   <>
                     <label htmlFor={id} className="screen-reader-text">
-                      Progress Bar
+                      {t("glossary.progress_bar")}
                     </label>
                     <Styled.RangeInput
                       id={id}
@@ -252,7 +269,7 @@ export default class ResourcePlayerAudio extends Component {
           <Styled.Volume>
             <Styled.Mute onClick={this.toggleMute}>
               <span className="screen-reader-text">
-                {this.state.muted ? "Unmute" : "Mute"}
+                {this.state.muted ? t("actions.unmute") : t("actions.mute")}
               </span>
               <Styled.MuteIcon icon={muteIcon} size={21.333} />
             </Styled.Mute>
@@ -266,7 +283,7 @@ export default class ResourcePlayerAudio extends Component {
                 {id => (
                   <>
                     <label htmlFor={id} className="screen-reader-text">
-                      Adjust Volume
+                      {t("actions.adjust_volume")}
                     </label>
                     <Styled.RangeInput
                       id={id}
@@ -286,3 +303,5 @@ export default class ResourcePlayerAudio extends Component {
     );
   }
 }
+
+export default withTranslation()(ResourcePlayerAudio);

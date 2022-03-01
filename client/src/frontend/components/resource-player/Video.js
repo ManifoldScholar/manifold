@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import { DefaultPlayer as Video } from "react-html5video";
 import withDispatch from "hoc/withDispatch";
 import { notificationActions } from "actions";
+import { withTranslation } from "react-i18next";
 
 class ResourcePlayerVideo extends Component {
   static displayName = "Resource.Player.Video";
 
   static propTypes = {
     resource: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    t: PropTypes.func
   };
 
   constructor() {
@@ -55,12 +57,13 @@ class ResourcePlayerVideo extends Component {
 
   handleError = eventIgnored => {
     const hasDownload = this.props.resource.attributes.allowDownload;
+    const t = this.props.t;
     const notification = {
       level: 1,
       id: `VIDEO_PLAYBACK_ERROR`,
-      heading: "Unable to play video.",
-      body: `Your browser is not able to play this video. ${hasDownload &&
-        "You may download it and play it locally using the download button below."}`,
+      heading: t("errors.video_playback.heading"),
+      body: `${t("errors.video_playback.body")} ${hasDownload &&
+        t("errors.video_playback.download")}`,
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
@@ -102,4 +105,4 @@ class ResourcePlayerVideo extends Component {
   }
 }
 
-export default withDispatch(ResourcePlayerVideo);
+export default withDispatch(withTranslation()(ResourcePlayerVideo));
