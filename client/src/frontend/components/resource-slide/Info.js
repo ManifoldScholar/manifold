@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import FormattedDate from "global/components/FormattedDate";
 import classnames from "classnames";
 import IconComputed from "global/components/icon-computed";
 
-export default class Info extends Component {
+class Info extends Component {
   static displayName = "ResourceList.Info";
 
   static propTypes = {
     resource: PropTypes.object.isRequired,
-    withBackground: PropTypes.bool
+    withBackground: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -34,9 +36,15 @@ export default class Info extends Component {
         />
         <span className="resource-type">{kind}</span>
         <span className="resource-date">
-          <FormattedDate prefix="Added" format="MMMM, yyyy" date={createdAt} />
+          <FormattedDate
+            prefix={this.props.t("dates.added")}
+            format="MMMM, yyyy"
+            date={createdAt}
+          />
         </span>
       </div>
     );
   }
 }
+
+export default withTranslation()(Info);
