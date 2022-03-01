@@ -5,7 +5,7 @@ module API
 
       resourceful! Project, authorize_options: { except: [:index, :show] } do
         Project.filtered(
-          with_pagination!({ "no_issues" => true }.merge(project_filter_params || {})),
+          with_pagination!(project_filter_params&.with_defaults(no_issues: true)),
           scope: scope_visibility.includes(:creators),
           user: current_user
         )
