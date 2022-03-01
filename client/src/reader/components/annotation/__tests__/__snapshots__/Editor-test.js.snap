@@ -62,15 +62,17 @@ exports[`reader/components/annotation/Editor matches the snapshot 1`] = `
             }
           }
         >
-          <Connect(HigherOrder.WithReadingGroups(HigherOrder.WithCurrentUser('Annotation.Editor)))
-            cancel={[MockFunction]}
-            endChar={13}
-            endNode="another-node"
-            saveAnnotation={[MockFunction]}
-            startChar={4}
-            startNode="some-node"
-            subject="Gods, Earths, and 85ers"
-          />
+          <I18nextProvider>
+            <Connect(HigherOrder.WithReadingGroups(HigherOrder.WithCurrentUser('Annotation.Editor)))
+              cancel={[MockFunction]}
+              endChar={13}
+              endNode="another-node"
+              saveAnnotation={[MockFunction]}
+              startChar={4}
+              startNode="some-node"
+              subject="Gods, Earths, and 85ers"
+            />
+          </I18nextProvider>
         </ContextProvider>
       </ContextProvider>
     </Provider>

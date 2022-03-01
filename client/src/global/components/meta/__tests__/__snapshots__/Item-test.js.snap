@@ -3,7 +3,7 @@
 exports[`global/components/meta/Item matches the snapshot 1`] = `
 <Fragment>
   <Label>
-    a metadata property
+    metadata.a_metadata_property
   </Label>
   <Value
     dangerouslySetInnerHTML={
@@ -18,7 +18,7 @@ exports[`global/components/meta/Item matches the snapshot 1`] = `
 exports[`global/components/meta/Item when passed a child component matches the snapshot 1`] = `
 <Fragment>
   <Label>
-    a metadata property
+    metadata.a_metadata_property
   </Label>
   <Value>
     <div>

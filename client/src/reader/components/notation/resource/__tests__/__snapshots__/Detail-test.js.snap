@@ -19,7 +19,7 @@ exports[`reader/components/notation/resource/Detail matches the snapshot 1`] = `
         />
       </figure>
     </div>
-    <Resource.Title
+    <withI18nextTranslation(Resource.Title)
       resource={
         Object {
           "attributes": Object {
@@ -145,8 +145,6 @@ exports[`reader/components/notation/resource/Detail matches the snapshot 1`] = `
           "type": "resources",
         }
       }
-      showDate={true}
-      showIcon={true}
     />
     <div
       className="resource-content"
@@ -435,7 +433,7 @@ exports[`reader/components/notation/resource/Detail matches the snapshot 1`] = `
     <nav
       className="button-nav button-nav--stack"
     >
-      <Resource.Link
+      <withI18nextTranslation(Resource.Link)
         attributes={
           Object {
             "abilities": Object {

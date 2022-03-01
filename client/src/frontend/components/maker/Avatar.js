@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-18next";
+import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default function MakerAvatar({ maker }) {
