@@ -10,7 +10,7 @@ exports[`frontend/components/resource-slide/SlideDefault matches the snapshot 1`
       }
     }
   >
-    <ResourceList.Info
+    <withI18nextTranslation(ResourceList.Info)
       resource={
         Object {
           "attributes": Object {
@@ -136,7 +136,6 @@ exports[`frontend/components/resource-slide/SlideDefault matches the snapshot 1`
           "type": "resources",
         }
       }
-      withBackground={false}
     />
   </div>
 </Fragment>

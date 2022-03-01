@@ -356,7 +356,7 @@ exports[`reader/components/notation/resource-collection/Detail matches the snaps
       />
     </div>
   </div>
-  <ResourceSlideshow
+  <withI18nextTranslation(ResourceSlideshow)
     collectionResources={
       Array [
         Object {
@@ -730,8 +730,6 @@ exports[`reader/components/notation/resource-collection/Detail matches the snaps
         },
       ]
     }
-    hideDetailUrl={false}
-    hideDownload={false}
     pagination={
       Object {
         "currentPage": 1,
