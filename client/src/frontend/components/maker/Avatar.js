@@ -1,25 +1,30 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-18next";
 import IconComposer from "global/components/utility/IconComposer";
 
-export default class MakerAvatar extends Component {
-  static displayName = "Maker.Avatar";
+export default function MakerAvatar({ maker }) {
+  const { t } = useTranslation();
 
-  static propTypes = {
-    maker: PropTypes.object
-  };
+  const attr = maker.attributes;
 
-  render() {
-    const attr = this.props.maker.attributes;
-    return (
-      <figure className="maker-avatar" key={this.props.maker.id}>
-        {attr.avatarStyles.smallSquare ? (
-          <img src={attr.avatarStyles.smallSquare} alt="User Avatar" />
-        ) : (
-          <IconComposer icon="avatar64" size="42" />
-        )}
-        <figcaption>{attr.fullName}</figcaption>
-      </figure>
-    );
-  }
+  return (
+    <figure className="maker-avatar" key={maker.id}>
+      {attr.avatarStyles.smallSquare ? (
+        <img
+          src={attr.avatarStyles.smallSquare}
+          alt={t("img_alts.user_avatar")}
+        />
+      ) : (
+        <IconComposer icon="avatar64" size="42" />
+      )}
+      <figcaption>{attr.fullName}</figcaption>
+    </figure>
+  );
 }
+
+MakerAvatar.displayName = "Maker.Avatar";
+
+MakerAvatar.propTypes = {
+  maker: PropTypes.object
+};
