@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import FormattedDate from "global/components/FormattedDate";
 import IconComputed from "global/components/icon-computed";
 import Collecting from "frontend/components/collecting";
 
-export default class ResourceTitle extends Component {
+class ResourceTitle extends Component {
   static displayName = "Resource.Title";
 
   static propTypes = {
     resource: PropTypes.object,
     showIcon: PropTypes.bool,
-    showDate: PropTypes.bool
+    showDate: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -40,7 +42,7 @@ export default class ResourceTitle extends Component {
           </div>
           {this.props.showDate ? (
             <span className="resource-date">
-              {"Resource added "}
+              {this.props.t("dates.resource_added")}{" "}
               <FormattedDate format="MMMM, yyyy" date={attr.createdAt} />
             </span>
           ) : null}
@@ -49,3 +51,5 @@ export default class ResourceTitle extends Component {
     );
   }
 }
+
+export default withTranslation()(ResourceTitle);

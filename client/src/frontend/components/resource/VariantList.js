@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
 
-export default class ResourceVariantList extends Component {
+class ResourceVariantList extends Component {
   static displayName = "Resource.VariantList";
 
   static propTypes = {
@@ -49,10 +50,12 @@ export default class ResourceVariantList extends Component {
     return (
       <section className="resource-variant-list">
         <div className="resource-variant-list__section-title">
-          Downloadable Variants:
+          {`${this.props.t("sections.variants")}:`}
         </div>
         <ul className="resource-variant-list__list">{children}</ul>
       </section>
     );
   }
 }
+
+export default withTranslation()(ResourceVariantList);

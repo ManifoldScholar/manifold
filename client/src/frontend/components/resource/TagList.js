@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { withTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 
-export default class ResourceTagList extends Component {
+class ResourceTagList extends Component {
   static displayName = "Resource.TagList";
 
   static propTypes = {
     resource: PropTypes.object,
-    disabledLinks: PropTypes.bool
+    disabledLinks: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -63,9 +65,13 @@ export default class ResourceTagList extends Component {
         onClick={this.stopPropagation}
         role="presentation"
       >
-        <span className="screen-reader-text">Tags list</span>
+        <span className="screen-reader-text">
+          {this.props.t("sections.tags_list")}
+        </span>
         <ul>{this.mapTagsToLinks(this.props.resource)}</ul>
       </nav>
     );
   }
 }
+
+export default withTranslation()(ResourceTagList);

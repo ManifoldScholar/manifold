@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import CommentContainer from "global/containers/comment";
 import Utility from "frontend/components/utility";
 import Hero from "./Hero";
@@ -8,17 +9,18 @@ import Meta from "./Meta";
 import Title from "./Title";
 import VariantList from "./VariantList";
 
-export default class ResourceDetail extends Component {
+class ResourceDetail extends Component {
   static displayName = "Resource.Detail";
 
   static propTypes = {
     projectUrl: PropTypes.string,
     resourceUrl: PropTypes.string.isRequired,
-    resource: PropTypes.object
+    resource: PropTypes.object,
+    t: PropTypes.func
   };
 
   createDescription(description) {
-    if (!description) return { __html: "No content provided." };
+    if (!description) return { __html: this.props.t("errors.no_content") };
     return {
       __html: description
     };
@@ -42,6 +44,7 @@ export default class ResourceDetail extends Component {
     const { resource, resourceUrl } = this.props;
     if (!resource) return null;
     const attr = resource.attributes;
+    const t = this.props.t;
 
     /* eslint-disable jsx-a11y/anchor-is-valid                                          */
     /* jsx-a11y sees the link in this component as missing a href attribute, but it's a */
@@ -71,7 +74,9 @@ export default class ResourceDetail extends Component {
           <div className="resource-content left">
             <div dangerouslySetInnerHTML={{ __html: attr.captionFormatted }} />
 
-            <h2 className="attribute-header">Full Description</h2>
+            <h2 className="attribute-header">
+              {t("sections.full_description")}
+            </h2>
             <div
               dangerouslySetInnerHTML={this.createDescription(
                 attr.descriptionFormatted
@@ -83,7 +88,7 @@ export default class ResourceDetail extends Component {
                   <CommentContainer.Thread subject={resource} />
                   <CommentContainer.Editor
                     focus={false}
-                    label={"Add Comment"}
+                    label={t("actions.add_comment")}
                     subject={resource}
                     cancel={event => this.cancelComment(event)}
                   />
@@ -97,3 +102,5 @@ export default class ResourceDetail extends Component {
     /* eslint-enable jsx-a11y/anchor-is-valid */
   }
 }
+
+export default withTranslation()(ResourceDetail);

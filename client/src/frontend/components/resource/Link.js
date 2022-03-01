@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
+import { capitalize } from "utils/string";
 import IconComposer from "global/components/utility/IconComposer";
 
-export default class ResourceLink extends Component {
+class ResourceLink extends Component {
   static displayName = "Resource.Link";
 
   static propTypes = {
     attributes: PropTypes.object,
-    buttonClass: PropTypes.string
+    buttonClass: PropTypes.string,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -15,6 +18,7 @@ export default class ResourceLink extends Component {
   };
 
   renderButton(attr) {
+    const t = this.props.t;
     let button;
     switch (attr.kind.toLowerCase()) {
       case "link":
@@ -26,10 +30,10 @@ export default class ResourceLink extends Component {
             rel="noopener noreferrer"
           >
             <span className="button-primary__text" aria-hidden>
-              Visit Page
+              {t("navigation.visit_page")}
             </span>
             <span className="screen-reader-text">
-              {`Visit link “${attr.title}”`}
+              {`${t("navigation.visit_page")} “${attr.title}”`}
             </span>
             <IconComposer
               icon="arrowRight16"
@@ -47,9 +51,13 @@ export default class ResourceLink extends Component {
             download={attr.slug}
           >
             <span className="button-primary__text" aria-hidden>
-              Download
+              {capitalize(t("actions.download"))}
             </span>
-            <span className="screen-reader-text">{`Download ${attr.kind} “${attr.title}”`}</span>
+            <span className="screen-reader-text">
+              {`${capitalize(t("actions.download"))} ${attr.kind} “${
+                attr.title
+              }”`}
+            </span>
             <IconComposer
               icon="arrowDown16"
               size="default"
@@ -67,3 +75,5 @@ export default class ResourceLink extends Component {
     return this.renderButton(this.props.attributes);
   }
 }
+
+export default withTranslation()(ResourceLink);
