@@ -10,7 +10,7 @@ exports[`backend/components/project-collection/form/KindPicker matches the snaps
     >
       Select a collection kind between smart or manual.
     </span>
-    <Utility.Toggle
+    <withI18nextTranslation(Utility.Toggle)
       handleToggle={[Function]}
       label="kind"
       optionOne={

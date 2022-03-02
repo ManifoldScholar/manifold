@@ -1255,7 +1255,7 @@ exports[`frontend/components/resource-collection/Detail matches the snapshot 1`]
     <div
       className="collection-detail__utility"
     >
-      <Connect(WithSettings('Utility.ShareBar))
+      <Connect(WithSettings('withI18nextTranslation(Utility.ShareBar)))
         url="/browse/project/AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/collection/AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
       />
     </div>
