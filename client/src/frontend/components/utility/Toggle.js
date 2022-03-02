@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 
-export default class Toggle extends Component {
+class Toggle extends Component {
   static displayName = "Utility.Toggle";
 
   static propTypes = {
@@ -18,7 +19,8 @@ export default class Toggle extends Component {
       icon: PropTypes.string,
       label: PropTypes.string
     }).isRequired,
-    selected: PropTypes.string
+    selected: PropTypes.string,
+    t: PropTypes.func
   };
 
   get selected() {
@@ -97,7 +99,10 @@ export default class Toggle extends Component {
               this.renderOption(option, id, index)
             )}
             <span id={id} className="screen-reader-text">
-              {`Toggle ${this.props.label} to ${this.unselected}`}
+              {this.props.t("actions.toggle_to_state", {
+                label: this.props.label,
+                state: this.unselected
+              })}
             </span>
           </div>
         )}
@@ -105,3 +110,5 @@ export default class Toggle extends Component {
     );
   }
 }
+
+export default withTranslation()(Toggle);

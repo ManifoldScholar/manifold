@@ -38,7 +38,13 @@
       "view_resource": "$t(actions.view) $t(glossary.resource_one)",
       "zoom": "Zoom",
       "visit": "Visit",
-      "preview": "Preview"
+      "preview": "Preview",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "confirm_delete": "$t(actions.confirm) $t(actions.delete)",
+      "cancel_delete": "$t(actions.cancel) $t(actions.delete)",
+      "share": "Share",
+      "toggle_to_state": "Toggle {{label}} to {{state}}"
     },
     "pagination": {
       "previous": "Previous",
@@ -108,7 +114,8 @@
       "uncategorized": "uncategorized"
     },
     "external_links": {
-      "view_on_social": "View this project on {{service}}"
+      "view_on_social": "View this project on {{service}}",
+      "share_on_social": "Share on {{service}}"
     },
     "errors": {
       "text_missing": "Text Missing",
