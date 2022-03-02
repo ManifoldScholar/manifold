@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
-export default class TextCounts extends Component {
+class TextCounts extends Component {
   static displayName = "Text.Counts";
 
   static propTypes = {
-    text: PropTypes.object.isRequired
+    text: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   get annotationsCount() {
@@ -19,6 +21,8 @@ export default class TextCounts extends Component {
   }
 
   render() {
+    const t = this.props.t;
+
     return (
       <Styled.InteractionList>
         <Styled.Interaction>
@@ -30,7 +34,7 @@ export default class TextCounts extends Component {
             {this.annotationsCount}
           </Styled.InteractionLabel>
           <span className="screen-reader-text">
-            This text has {this.annotationsCount} annotations
+            {t("counts.text_annotations", { count: this.annotationsCount })}
           </span>
         </Styled.Interaction>
         <Styled.Interaction>
@@ -42,10 +46,12 @@ export default class TextCounts extends Component {
             {this.highlightsCount}
           </Styled.InteractionLabel>
           <span className="screen-reader-text">
-            This text has {this.highlightsCount} highlights
+            {t("counts.text_highlights", { count: this.highlightsCount })}
           </span>
         </Styled.Interaction>
       </Styled.InteractionList>
     );
   }
 }
+
+export default withTranslation()(TextCounts);

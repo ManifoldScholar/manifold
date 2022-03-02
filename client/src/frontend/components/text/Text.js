@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Content from "./Content";
 import Meta from "./Meta";
 import lh from "helpers/linkHandler";
+import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 class Text extends Component {
@@ -16,7 +18,8 @@ class Text extends Component {
     showDescriptions: PropTypes.bool,
     showSubtitles: PropTypes.bool,
     utilityPosition: PropTypes.oneOf(["meta", "content"]),
-    onUncollect: PropTypes.func
+    onUncollect: PropTypes.func,
+    t: PropTypes.func
   };
 
   get isPublished() {
@@ -42,8 +45,11 @@ class Text extends Component {
   get datePrefix() {
     // check if latest update occurred > 24hrs after text was created
     const hasUpdate = Math.abs(this.updatedDate - this.createdDate) / 36e5 > 24;
+    const t = this.props.t;
 
-    return hasUpdate ? "Updated" : "Added";
+    return hasUpdate
+      ? capitalize(t("dates.updated"))
+      : capitalize(t("dates.added"));
   }
 
   get readUrl() {
@@ -80,4 +86,4 @@ class Text extends Component {
   }
 }
 
-export default Text;
+export default withTranslation()(Text);
