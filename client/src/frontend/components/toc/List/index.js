@@ -1,16 +1,18 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Node from "../Node";
 import * as Styled from "./styles";
 
-export default class ContentBlockTocBlockList extends PureComponent {
+class ContentBlockTocBlockList extends PureComponent {
   static displayName = "ContentBlock.Types.TOC.List";
 
   static propTypes = {
     showTextTitle: PropTypes.bool,
     showAuthors: PropTypes.bool,
     text: PropTypes.object.isRequired,
-    depth: PropTypes.number
+    depth: PropTypes.number,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -71,7 +73,9 @@ export default class ContentBlockTocBlockList extends PureComponent {
 
   renderEmpty() {
     return (
-      <Styled.List>This text does not have a table of contents.</Styled.List>
+      <Styled.List>
+        {this.props.t("placeholders.table_of_contents")}
+      </Styled.List>
     );
   }
 
@@ -109,3 +113,5 @@ export default class ContentBlockTocBlockList extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ContentBlockTocBlockList);

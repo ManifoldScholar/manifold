@@ -1,9 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
 function TOCListNode({ id, anchor, title, textSlug, textTitle, children }) {
+  const { t } = useTranslation();
+
   const to = lh.link("readerSection", textSlug, id, anchor ? `#${anchor}` : "");
 
   return (
@@ -12,7 +15,7 @@ function TOCListNode({ id, anchor, title, textSlug, textTitle, children }) {
         <span>{title}</span>
         {textTitle && (
           <Styled.TextTitle>
-            in <i>{textTitle}</i>
+            {t("common.in")} <i>{textTitle}</i>
           </Styled.TextTitle>
         )}
       </Styled.Link>
