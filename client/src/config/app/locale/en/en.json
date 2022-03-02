@@ -105,7 +105,8 @@
       "item_other": "items",
       "progress_bar": "progress bar",
       "file_one": "file",
-      "file_other": "files"
+      "file_other": "files",
+      "table_of_contents": "table of contents"
     },
     "common": {
       "on": "on",
