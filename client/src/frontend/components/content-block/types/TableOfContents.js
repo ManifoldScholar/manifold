@@ -1,16 +1,19 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
+import { capitalize } from "utils/string";
 import TOC from "frontend/components/toc";
 
-export default class ProjectContentBlockTableOfContentsBlock extends PureComponent {
+class ProjectContentBlockTableOfContentsBlock extends PureComponent {
   static displayName = "Project.Content.Block.TableOfContents";
 
   static propTypes = {
-    block: PropTypes.object.isRequired
+    block: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   static get title() {
-    return "Table of Contents";
+    return capitalize(this.props.t("glossary.table_of_contents"));
   }
 
   static get icon() {
@@ -39,7 +42,7 @@ export default class ProjectContentBlockTableOfContentsBlock extends PureCompone
 
   render() {
     return (
-      <nav aria-label="Table of Contents">
+      <nav aria-label={capitalize(this.props.t("glossary.table_of_contents"))}>
         <TOC.List
           showTextTitle={this.showTextTitle}
           showAuthors={this.showAuthors}
@@ -50,3 +53,5 @@ export default class ProjectContentBlockTableOfContentsBlock extends PureCompone
     );
   }
 }
+
+export default withTranslation()(ProjectContentBlockTableOfContentsBlock);
