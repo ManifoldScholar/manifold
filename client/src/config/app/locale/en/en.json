@@ -5,6 +5,49 @@
       "es": "Spanish",
       "nl": "Dutch"
     },
+    "glossary": {
+      "project_one": "project",
+      "project_other": "projects",
+      "project_collection_one": "project collection",
+      "project_collection_other": "project collections",
+      "text_one": "text",
+      "text_other": "texts",
+      "text_section_one": "text section",
+      "text_section_other": "text sections",
+      "journal_one": "journal",
+      "journal_other": "journals",
+      "volume_one": "volume",
+      "volume_other": "volumes",
+      "issue_one": "issue",
+      "issue_other": "issues",
+      "article_one": "article",
+      "article_other": "articles",
+      "resource_one": "resource",
+      "resource_other": "resources",
+      "resource_collection_one": "resource collection",
+      "resource_collection_other": "resource collections",
+      "reading_group_one": "reading group",
+      "reading_group_other": "reading groups",
+      "annotation_one": "annotation",
+      "annotations_other": "annotations",
+      "collection_one": "collection",
+      "collection_other": "collections",
+      "contributor_one": "contributor",
+      "contributor_other": "contributors",
+      "item_one": "item",
+      "item_other": "items",
+      "progress_bar": "progress bar",
+      "file_one": "file",
+      "file_other": "files",
+      "table_of_contents": "table of contents"
+    },
+    "common": {
+      "on": "on",
+      "by": "by",
+      "in": "in",
+      "uncategorized": "uncategorized",
+      "loading": "Loading"
+    },
     "actions": {
       "edit": "Edit",
       "edit_reading_group": "$t(actions.edit) group info",
@@ -46,6 +89,7 @@
       "share": "Share",
       "toggle_to_state": "Toggle {{label}} to {{state}}"
     },
+    "search": {},
     "pagination": {
       "previous": "Previous",
       "previous_short": "Prev",
@@ -70,49 +114,6 @@
       "return_home": "Return to home",
       "visit_page": "Visit page",
       "view_interactive_resource": "$t(actions.view) Interactive Resource"
-    },
-    "search": {},
-    "glossary": {
-      "project_one": "project",
-      "project_other": "projects",
-      "project_collection_one": "project collection",
-      "project_collection_other": "project collections",
-      "text_one": "text",
-      "text_other": "texts",
-      "text_section_one": "text section",
-      "text_section_other": "text sections",
-      "journal_one": "journal",
-      "journal_other": "journals",
-      "volume_one": "volume",
-      "volume_other": "volumes",
-      "issue_one": "issue",
-      "issue_other": "issues",
-      "article_one": "article",
-      "article_other": "articles",
-      "resource_one": "resource",
-      "resource_other": "resources",
-      "resource_collection_one": "resource collection",
-      "resource_collection_other": "resource collections",
-      "reading_group_one": "reading group",
-      "reading_group_other": "reading groups",
-      "annotation_one": "annotation",
-      "annotations_other": "annotations",
-      "collection_one": "collection",
-      "collection_other": "collections",
-      "contributor_one": "contributor",
-      "contributor_other": "contributors",
-      "item_one": "item",
-      "item_other": "items",
-      "progress_bar": "progress bar",
-      "file_one": "file",
-      "file_other": "files",
-      "table_of_contents": "table of contents"
-    },
-    "common": {
-      "on": "on",
-      "by": "by",
-      "in": "in",
-      "uncategorized": "uncategorized"
     },
     "external_links": {
       "view_on_social": "View this project on {{service}}",
@@ -146,25 +147,6 @@
       "resource_collection": "This collection has no resources.",
       "table_of_contents": "This text does not have a table of contents."
     },
-    "pages": {
-      "frontend": {
-        "events_all": "All Activity",
-        "issues_all": "All Journal Issues",
-        "my_notes": "My Notes + Comments",
-        "my_starred": "My Starred",
-        "resource_collections_all": "All Project Resource Collections",
-        "resources_all": "All Project Resources",
-        "projects_all": "All Projects"
-      }
-    },
-    "sections": {
-      "journal_info": "$t(glossary.journal_one) info",
-      "full_description": "Full description",
-      "tags_list": "Tags list",
-      "variants": "Downloadable Variants",
-      "resource_slideshow": "Resource slideshow",
-      "resource_list": "Resource list"
-    },
     "messages": {
       "empty_journal_heading": "This journal is currently empty.",
       "empty_journal_body": "Add <1>volumes</1> or <3>issues</3> to see this page.",
@@ -191,14 +173,34 @@
         "description_placeholder": "Enter category description",
         "description_instructions": "Enter a brief description of the category. This field accepts basic Markdown.",
         "empty_placeholder": "Drag here to add"
-      }
+      },
+      "reading_group": {},
+      "reading_group_member": {}
     },
     "modals": {
       "remove_category_heading": "Are you sure you want to remove this category from your collection?",
       "remove_category_body": "Any items in this category will also be deleted.",
       "collecting_search": "<0>Add content</0><1>{{heading}}</1><2>To add content to your Reading Group, search for it by keyword and type, when you have found content you wish to add, select the star icon for that item to add it to your group.</p>"
     },
-    "loading": "Loading",
+    "pages": {
+      "frontend": {
+        "events_all": "All Activity",
+        "issues_all": "All Journal Issues",
+        "my_notes": "My Notes + Comments",
+        "my_starred": "My Starred",
+        "resource_collections_all": "All Project Resource Collections",
+        "resources_all": "All Project Resources",
+        "projects_all": "All Projects"
+      },
+      "subheaders": {
+        "journal_info": "Journal info",
+        "full_description": "Full description",
+        "tags_list": "Tags list",
+        "variants": "Downloadable variants",
+        "resource_slideshow": "Resource slideshow",
+        "resource_list": "Resource list"
+      }
+    },
     "img_alts": {
       "user_avatar": "User Avatar"
     },

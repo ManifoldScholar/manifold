@@ -25,7 +25,7 @@ function Placeholder() {
           </StyledThumbnail.Title>
         </Styled.Inner>
       </Styled.Wrapper>
-      <span className="screen-reader-text">{t("loading")}</span>
+      <span className="screen-reader-text">{t("common.loading")}</span>
     </>
   );
 }

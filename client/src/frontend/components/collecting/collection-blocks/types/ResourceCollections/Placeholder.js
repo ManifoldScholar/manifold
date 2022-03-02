@@ -22,7 +22,7 @@ function Placeholder() {
           </Styled.IconWrapper>
         </Styled.TitleOverlay>
       </Styled.Cover>
-      <span className="screen-reader-text">{t("loading")}</span>
+      <span className="screen-reader-text">{t("common.loading")}</span>
     </>
   );
 }

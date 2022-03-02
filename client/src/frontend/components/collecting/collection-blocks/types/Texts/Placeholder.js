@@ -38,7 +38,7 @@ function Placeholder() {
           </Styled.Interaction>
         </Styled.InteractionList>
       </Styled.Meta>
-      <span className="screen-reader-text">{t("loading")}</span>
+      <span className="screen-reader-text">{t("common.loading")}</span>
     </Styled.Block>
   );
 }

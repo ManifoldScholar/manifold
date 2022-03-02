@@ -75,7 +75,7 @@ class ResourceDetail extends Component {
             <div dangerouslySetInnerHTML={{ __html: attr.captionFormatted }} />
 
             <h2 className="attribute-header">
-              {t("sections.full_description")}
+              {t("pages.subheaders.full_description")}
             </h2>
             <div
               dangerouslySetInnerHTML={this.createDescription(
