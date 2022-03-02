@@ -201,12 +201,18 @@
       "empty_volume_one": "There is <1>{{count}}</1> empty volume.",
       "empty_volume_other": "There are <1>{{count}}</1> empty volumes.",
       "default_issues_one": "There is <1>{{count}}</1> {{unit}}",
-      "default_issues_other": "There are <1>{{count}}</1> {{unit}}"
+      "default_issues_other": "There are <1>{{count}}</1> {{unit}}",
+      "text_annotations_one": "This text has {{count}} annotation",
+      "text_annotations_other": "This text has {{count}} annotations",
+      "text_highlights_one": "This text has {{count}} highlight",
+      "text_highlights_other": "This text has {{count}} highlights"
     },
     "dates": {
       "added": "added",
       "resource_added": "Resource $t(dates.added)",
-      "collection_created": "Collection created"
+      "collection_created": "Collection created",
+      "published": "published",
+      "updated": "updated"
     },
     "metadata": {
       "abstract": "abstract",

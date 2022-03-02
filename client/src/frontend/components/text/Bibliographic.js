@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Date from "./Date";
 import Collecting from "frontend/components/collecting";
+import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
-export default class TextBibliographic extends Component {
+class TextBibliographic extends Component {
   static displayName = "Text.Bibliographic";
 
   static propTypes = {
@@ -17,7 +19,8 @@ export default class TextBibliographic extends Component {
     showDescriptions: PropTypes.bool,
     showSubtitles: PropTypes.bool,
     showCovers: PropTypes.bool,
-    onUncollect: PropTypes.func
+    onUncollect: PropTypes.func,
+    t: PropTypes.func
   };
 
   get text() {
@@ -77,6 +80,8 @@ export default class TextBibliographic extends Component {
   }
 
   render() {
+    const t = this.props.t;
+
     return (
       <Styled.Bibliographic>
         <Styled.Name>
@@ -95,7 +100,7 @@ export default class TextBibliographic extends Component {
         </Styled.Name>
         {this.creatorNames && (
           <Styled.Creators>
-            <span style={{ fontStyle: "italic" }}>by </span>
+            <span style={{ fontStyle: "italic" }}>{t("common.by")} </span>
             {this.creatorNames}
           </Styled.Creators>
         )}
@@ -115,7 +120,9 @@ export default class TextBibliographic extends Component {
               />
             )}
             {this.publishedVisible && (
-              <Styled.Published>Published</Styled.Published>
+              <Styled.Published>
+                {capitalize(t("dates.published"))}
+              </Styled.Published>
             )}
           </Styled.Status>
         )}
@@ -123,3 +130,5 @@ export default class TextBibliographic extends Component {
     );
   }
 }
+
+export default withTranslation()(TextBibliographic);
