@@ -399,7 +399,7 @@ exports[`frontend/components/text/Content matches the snapshot 1`] = `
         }
       }
     />
-    <Text.Bibliographic
+    <withI18nextTranslation(Text.Bibliographic)
       readUrl="/foo"
       showAuthors={true}
       showDescriptions={true}
