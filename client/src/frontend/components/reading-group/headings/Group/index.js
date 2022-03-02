@@ -1,5 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Collapse from "global/components/Collapse";
 import classNames from "classnames";
 import { Title } from "../parts";
@@ -8,6 +9,8 @@ import ManageGroup from "./ManageGroup";
 import GroupSummaryBox from "./GroupSummaryBox";
 
 function GroupHeading({ readingGroup, history, location }) {
+  const { t } = useTranslation();
+
   const groupName = readingGroup.attributes.name;
   const canUpdateGroup = readingGroup.attributes.abilities.update;
 
@@ -30,7 +33,7 @@ function GroupHeading({ readingGroup, history, location }) {
                 })}
                 activeClassName="button-tertiary--active"
               >
-                Details
+                {t("navigation.reading_group.details")}
               </Collapse.Toggle>
             </div>
           </div>
@@ -40,7 +43,7 @@ function GroupHeading({ readingGroup, history, location }) {
         </div>
         <Collapse.Content focusOnVisible>
           <div
-            aria-label="Group details"
+            aria-label={t("pages.subheaders.group_details")}
             className="group-page-heading__container group-page-heading__summary-container"
           >
             <GroupSummaryBox readingGroup={readingGroup} />

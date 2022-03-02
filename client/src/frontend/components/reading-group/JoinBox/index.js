@@ -3,6 +3,7 @@ import { UIDConsumer } from "react-uid";
 import withDispatch from "hoc/withDispatch";
 import withConfirmation from "hoc/withConfirmation";
 import withCurrentUser from "hoc/withCurrentUser";
+import { withTranslation } from "react-i18next";
 import config from "config";
 import { readingGroupsAPI, readingGroupMembershipsAPI, requests } from "api";
 import { withRouter } from "react-router-dom";
@@ -95,7 +96,9 @@ class JoinBox extends PureComponent {
       heading,
       message
     } = config.app.locale.dialogs.readingGroup.joinNotFound;
-    this.props.confirm(heading, message, null, { rejectLabel: "OK" });
+    this.props.confirm(heading, message, null, {
+      rejectLabel: this.props.t("forms.join_group.confirm_button_label")
+    });
   }
 
   fetchGroup() {
@@ -109,21 +112,25 @@ class JoinBox extends PureComponent {
   }
 
   render() {
+    const t = this.props.t;
+
     return (
       <ActionBox
-        title="Join a group:"
-        instructions="To join a group, enter the code and select Join."
+        title={t("forms.join_group.title")}
+        instructions={t("forms.join_group.instructions")}
         actions={
           <form onSubmit={this.handleSubmit} className="group-join-form">
             <UIDConsumer name={id => `join-box-${id}`}>
               {id => (
                 <label htmlFor={id} className="group-join-form__label">
-                  <span className="screen-reader-text">Code to join</span>
+                  <span className="screen-reader-text">
+                    {t("forms.join_group.join_code")}
+                  </span>
                   <input
                     id={id}
                     value={this.state.code}
                     onChange={this.updateCode}
-                    placeholder="Enter Code"
+                    placeholder={t("forms.join_group.code_placeholder")}
                     className="group-join-form__input"
                     required
                   />
@@ -131,7 +138,7 @@ class JoinBox extends PureComponent {
               )}
             </UIDConsumer>
             <button type="submit" className="group-join-form__button">
-              Join
+              {t("forms.join_group.button_label")}
             </button>
           </form>
         }
@@ -141,5 +148,5 @@ class JoinBox extends PureComponent {
 }
 
 export default withDispatch(
-  withCurrentUser(withConfirmation(withRouter(JoinBox)))
+  withCurrentUser(withConfirmation(withRouter(withTranslation()(JoinBox))))
 );

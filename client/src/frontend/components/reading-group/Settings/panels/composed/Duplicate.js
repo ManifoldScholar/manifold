@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useUIDSeed } from "react-uid";
+import { useTranslation } from "react-i18next";
 import Panel from "../parts/Panel";
 import Checkbox from "../parts/Checkbox";
 
 function DuplicatePanel({ readingGroup, onProceed, onCancel }) {
   const uidSeed = useUIDSeed();
+  const { t } = useTranslation();
   const [name, setName] = useState(readingGroup.attributes.name);
   const [copyAnnotations, setCopyAnnotations] = useState(false);
   const [archive, setArchive] = useState(false);
@@ -18,15 +20,19 @@ function DuplicatePanel({ readingGroup, onProceed, onCancel }) {
 
   return (
     <Panel
-      label="Duplicate"
-      heading={`Create a copy of “${readingGroup.attributes.name}”`}
-      instructions="This will create a copy of your reading group. Once copied, you will need to add users to the group."
+      label={t("forms.edit_group.duplicate.label")}
+      heading={t("forms.edit_group.duplicate.heading", {
+        group: readingGroup.attributes.name
+      })}
+      instructions={t("forms.edit_group.duplicate.instructions")}
       onProceed={handleProceed}
       onCancel={onCancel}
     >
       <div className="group-action-panel__inputs form-secondary">
         <div className="form-input">
-          <label htmlFor={uidSeed("name")}>Reading Group Name</label>
+          <label htmlFor={uidSeed("name")}>
+            {t("forms.edit_group.duplicate.group_name")}
+          </label>
           <input
             id={uidSeed("name")}
             type="text"
@@ -37,19 +43,19 @@ function DuplicatePanel({ readingGroup, onProceed, onCancel }) {
         <div className="form-input">
           <Checkbox
             id={uidSeed("copyAnnotations")}
-            label="Copy my anotations"
+            label={t("forms.edit_group.duplicate.copy_annotations")}
             checked={copyAnnotations}
             onChange={event => setCopyAnnotations(event.target.checked)}
           />
           <Checkbox
             id={uidSeed("archive")}
-            label="Archive copied group"
+            label={t("forms.edit_group.duplicate.archive")}
             checked={archive}
             onChange={event => setArchive(event.target.checked)}
           />
           <Checkbox
             id={uidSeed("openOnProceed")}
-            label="Open new group after duplication"
+            label={t("forms.edit_group.duplicate.open_after")}
             checked={openOnProceed}
             onChange={event => setOpenOnProceed(event.target.checked)}
           />

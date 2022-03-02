@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 import Table from "global/components/table";
 import Column from "global/components/table/Column";
 import NestedLink from "global/components/table/NestedLink";
@@ -24,6 +25,8 @@ export default function GroupsTable(props) {
     hideTags
   } = props;
 
+  const { t } = useTranslation();
+
   const listFilterProps = useListFilters({
     ...filterProps,
     options: { groupSort: true }
@@ -45,11 +48,15 @@ export default function GroupsTable(props) {
       models={groups}
       pagination={pagination}
       onPageClick={onPageClick}
-      unit="group"
+      unit={t("glossary.group", { count: groups.length })}
       linkCreator={group => lh.link("frontendReadingGroupDetail", group.id)}
       filters={<ListFilters {...listFilterProps} />}
     >
-      <Column header="Name" textStyle="valueLarge" columnPosition="all">
+      <Column
+        header={t("tables.reading_groups.headers.name")}
+        textStyle="valueLarge"
+        columnPosition="all"
+      >
         {({ model, hovering }) => {
           return (
             <>
@@ -71,7 +78,11 @@ export default function GroupsTable(props) {
         }}
       </Column>
       {currentUser && (
-        <Column header="Role" columnPosition="left" cellSize="cellFitContent">
+        <Column
+          header={t("tables.reading_groups.headers.role")}
+          columnPosition="left"
+          cellSize="cellFitContent"
+        >
           {({ model }) => {
             const showJoin = userCanJoin(model);
             return showJoin ? (
@@ -86,7 +97,10 @@ export default function GroupsTable(props) {
           }}
         </Column>
       )}
-      <Column header="Members" cellSize="cellFitContent">
+      <Column
+        header={t("tables.reading_groups.headers.members")}
+        cellSize="cellFitContent"
+      >
         {({ model }) => {
           const wrapInLink = !userCanJoin(model);
           const count = model.attributes.membershipsCount;
@@ -99,29 +113,50 @@ export default function GroupsTable(props) {
           );
         }}
       </Column>
-      <Column header="Activity" cellSize={"cellFitContent"}>
+      <Column
+        header={t("tables.reading_groups.headers.activity")}
+        cellSize={"cellFitContent"}
+      >
         {({ model }) => (
           <>
             <InlineValue
               label={model.attributes.annotationsCount}
               icon="interactAnnotate24"
-              srLabel={`${model.attributes.annotationsCount} annotations.`}
+              srLabel={`${model.attributes.annotationsCount} ${t(
+                "glossary.annotation",
+                {
+                  count: model.attributes.annotationsCount
+                }
+              )}.`}
             />
             <InlineValue
               label={model.attributes.highlightsCount}
               icon="interactHighlight24"
-              srLabel={`${model.attributes.highlightsCount} highlights.`}
+              srLabel={`${model.attributes.highlightsCount} ${t(
+                "glossary.highlight",
+                {
+                  count: model.attributes.highlightsCount
+                }
+              )}.`}
             />
             <InlineValue
               label={model.attributes.commentsCount}
               icon="interactComment24"
-              srLabel={`${model.attributes.commentsCount} comments.`}
+              srLabel={`${model.attributes.commentsCount} ${t(
+                "glossary.comment",
+                {
+                  count: model.attributes.commentsCount
+                }
+              )}.`}
             />
           </>
         )}
       </Column>
       {!hideActions && (
-        <Column header="Actions" cellSize={"cellFitContent"}>
+        <Column
+          header={t("tables.reading_groups.headers.actions")}
+          cellSize={"cellFitContent"}
+        >
           {({ model }) => (
             <div className="table__actions">
               <EditGroup readingGroup={model} />

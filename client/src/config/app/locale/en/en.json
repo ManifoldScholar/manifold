@@ -29,7 +29,11 @@
       "reading_group_one": "reading group",
       "reading_group_other": "reading groups",
       "annotation_one": "annotation",
-      "annotations_other": "annotations",
+      "annotation_other": "annotations",
+      "comment_one": "comment",
+      "comment_other": "comments",
+      "highlight_one": "highlight",
+      "highlight_other": "highlights",
       "collection_one": "collection",
       "collection_other": "collections",
       "contributor_one": "contributor",
@@ -39,14 +43,25 @@
       "progress_bar": "progress bar",
       "file_one": "file",
       "file_other": "files",
-      "table_of_contents": "table of contents"
+      "table_of_contents": "table of contents",
+      "member_one": "member",
+      "member_other": "members",
+      "group_one": "group",
+      "group_other": "groups",
+      "creator_one": "creator",
+      "creators_other": "creators"
     },
     "common": {
       "on": "on",
       "by": "by",
       "in": "in",
+      "yours": "yours",
+      "about": "about",
+      "type": "type",
+      "role": "role",
       "uncategorized": "uncategorized",
-      "loading": "Loading"
+      "loading": "loading",
+      "content": "content"
     },
     "actions": {
       "edit": "Edit",
@@ -87,7 +102,11 @@
       "confirm_delete": "$t(actions.confirm) $t(actions.delete)",
       "cancel_delete": "$t(actions.cancel) $t(actions.delete)",
       "share": "Share",
-      "toggle_to_state": "Toggle {{label}} to {{state}}"
+      "toggle_to_state": "Toggle {{label}} to {{state}}",
+      "duplicate": "Duplicate",
+      "archive": "Archive",
+      "activate": "Activate",
+      "join": "Join"
     },
     "search": {},
     "pagination": {
@@ -104,6 +123,16 @@
         "sign_out": "Sign Out",
         "my_starred": "My Starred",
         "my_notes_comments": "My Notes + Comments"
+      },
+      "reading_group": {
+        "label": "Reading group subpages",
+        "annotations": "Notes + Comments",
+        "home": "Home",
+        "members": "Members",
+        "details": "Details",
+        "my_groups": "My Reading Groups",
+        "public_groups": "Public Reading Groups",
+        "create": "Create New Group"
       },
       "library_links": "Library Links",
       "browse_library": "Browse library",
@@ -162,7 +191,7 @@
     },
     "forms": {
       "add_to": "Add this to",
-      "my_collection_label": "My Collection",
+      "my_starred_label": "My Starred",
       "category": {
         "create": "Create a new category",
         "edit": "Edit category",
@@ -174,8 +203,105 @@
         "description_instructions": "Enter a brief description of the category. This field accepts basic Markdown.",
         "empty_placeholder": "Drag here to add"
       },
-      "reading_group": {},
-      "reading_group_member": {}
+      "reading_group": {
+        "name": "Group Name",
+        "name_placeholder": "Pick a group name",
+        "privacy": "Privacy",
+        "privacy_instructions": "Annotations in public groups can be viewed by everyone. Annotations in private groups can only be viewed by group members. In anonymous groups, comments are private and only the group creator can see the identity of each annotation's author.",
+        "privacy_options": {
+          "public": "Public",
+          "private": "Private",
+          "anonymous": "Anonymous"
+        },
+        "invitation_code": "Invitation Code",
+        "invitation_code_buttons": {
+          "regenerate": "regenerate",
+          "copy": "copy"
+        },
+        "invitation_code_instructions": "Users can enter the invitation code on the \"Manage Reading Groups\" page to join this group. You may change this code at any time, but previous codes will no longer work",
+        "invitation_url": "Invitation URL",
+        "invitation_url_instructions": "The URL above is based on the invitation code. Readers can also join the group by visiting this URL.",
+        "invitation_url_button_label": "copy",
+        "course": "Course",
+        "course_instructions": "Course information is used for internal tracking and reporting purposes.",
+        "course_options": {
+          "yes": "Yes",
+          "no": "No"
+        },
+        "course_start_date": "Course Start Date:",
+        "course_end_date": "Course End Date:",
+        "notifications": "Notifications",
+        "notifications_instructions": "Email me when anyone joins this group"
+      },
+      "reading_group_member": {
+        "name": "Member Name",
+        "role": "Role",
+        "role_instructions": "Members can see group annotations and annotate within the group. Moderators can manage members and update group settings.",
+        "role_options": {
+          "member": "Member",
+          "moderator": "Moderator"
+        },
+        "label": "Label",
+        "label_placeholder": "Enter a label",
+        "label_instructions": "Labels are used to describe specific members within the group and appear next to the name in the membership list.",
+        "annotation_style": "Annotation Style",
+        "annotation_style_instructions": "Annotation styles will appear in the Manifold reading interface and can be used to call differentiate a user's annotations from other annotations in the reading group.",
+        "annotation_style_options": {
+          "dashed": "Dashed",
+          "dotted": "Dotted",
+          "solid": "Solid",
+          "wavy": "Wavy"
+        },
+        "style_preview": "This is what your selected annotation style will look like when viewed in the reader. Font styling and sizing may be different depending on the settings in your visibility control panel."
+      },
+      "manage_group": {
+        "title": "Manage Group:",
+        "instructions": "Edit the Home Page or the settings for your Reading Group.",
+        "edit_homepage": "Edit Home Page:",
+        "edit_homepage_sr": "Edit group homepage",
+        "view_homepage": "View group homepage",
+        "edit_settings": "Edit settings"
+      },
+      "join_group": {
+        "title": "Join a group:",
+        "instructions": "To join a group, enter the code and select Join.",
+        "join_code": "Code to join",
+        "code_placeholder": "Enter code",
+        "button_label": "Join",
+        "confirm_button_label": "OK"
+      },
+      "edit_group": {
+        "title": "Edit Reading Group",
+        "duplicate": {
+          "label": "Duplicate",
+          "heading": "Create a copy of {{group}}",
+          "instructions": "This will create a copy of your reading group. Once copied, you will need to add users to the group.",
+          "group_name": "Reading Group Name",
+          "copy_annotations": "Copy my annotations",
+          "archive": "Archive copied group",
+          "open_after": "Open new group after duplication"
+        }
+      }
+    },
+    "tables": {
+      "reading_groups": {
+        "headers": {
+          "name": "Name",
+          "role": "Role",
+          "members": "Members",
+          "activity": "Activity",
+          "actions": "Actions"
+        }
+      },
+      "reading_group_members": {
+        "headers": {
+          "name": "Member Name",
+          "role": "Role",
+          "activity": "Activity",
+          "note_style": "Note Style",
+          "actions": "Actions"
+        }
+      }
     },
     "modals": {
       "remove_category_heading": "Are you sure you want to remove this category from your collection?",
@@ -198,7 +324,9 @@
         "tags_list": "Tags list",
         "variants": "Downloadable variants",
         "resource_slideshow": "Resource slideshow",
-        "resource_list": "Resource list"
+        "resource_list": "Resource list",
+        "group_details": "Group details",
+        "group_summary": "Group summary"
       }
     },
     "img_alts": {

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 function Panel({
   label,
@@ -9,6 +10,8 @@ function Panel({
   onProceed,
   onCancel
 }) {
+  const { t } = useTranslation();
+
   return (
     <form onSubmit={onProceed} className="group-action-panel">
       <h3 className="group-action-panel__label">{label}</h3>
@@ -24,7 +27,7 @@ function Panel({
           onClick={onCancel}
           className="button-secondary button-secondary--dull"
         >
-          Cancel
+          {t("actions.cancel")}
         </button>
       </div>
     </form>

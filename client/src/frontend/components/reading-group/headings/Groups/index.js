@@ -1,19 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { Navigation, Title } from "../parts";
 
 function GroupsHeading({ currentUser }) {
+  const { t } = useTranslation();
+
   const links = [
     {
       to: lh.link("frontendMyReadingGroups"),
-      text: "My Reading Groups",
+      text: t("navigation.reading_group.my_groups"),
       exact: false
     },
     {
       to: lh.link("frontendPublicReadingGroups"),
-      text: "Public Reading Groups",
+      text: t("navigation.reading_group.public_groups"),
       exact: true
     }
   ];
@@ -23,12 +26,15 @@ function GroupsHeading({ currentUser }) {
       <div className="group-page-heading__container">
         <div className="group-page-heading__flex-container">
           {!currentUser && (
-            <Title title="Public Reading Groups" icon="annotationGroup24" />
+            <Title
+              title={t("navigation.reading_group.public_groups")}
+              icon="annotationGroup24"
+            />
           )}
           {currentUser && (
             <>
               <Navigation
-                ariaLabel="Reading Groups subpages"
+                ariaLabel={t("navigation.reading_group.label")}
                 links={links}
                 layout="flex"
                 padLinks
@@ -39,7 +45,7 @@ function GroupsHeading({ currentUser }) {
                   className="group-page-heading__nav-button button-tertiary"
                   activeClassName="button-tertiary--active"
                 >
-                  Create New Group
+                  {t("navigation.reading_group.create")}
                 </NavLink>
               </div>
             </>

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Table from "global/components/table/index";
 import Column from "global/components/table/Column";
 import Avatar from "global/components/avatar";
@@ -13,7 +14,7 @@ import classNames from "classnames";
 import lh from "helpers/linkHandler";
 import Authorization from "helpers/authorization";
 
-export default class MembersTable extends PureComponent {
+class MembersTable extends PureComponent {
   static displayName = "ReadingGroup.Table.Members";
 
   static propTypes = {
@@ -21,7 +22,8 @@ export default class MembersTable extends PureComponent {
     readingGroup: PropTypes.object.isRequired,
     pagination: PropTypes.object.isRequired,
     onPageClick: PropTypes.func.isRequired,
-    onRemoveMember: PropTypes.func.isRequired
+    onRemoveMember: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -58,9 +60,10 @@ export default class MembersTable extends PureComponent {
 
   roleFor(membership) {
     const { role } = membership.attributes;
-    if (!membership.relationships.user) return "member";
+    const t = this.props.t;
+    if (!membership.relationships.user) return t("glossary.member_one");
     const isCreator = this.userIsGroupCreator(membership);
-    return isCreator ? "creator" : role;
+    return isCreator ? t("glossary.creator_one") : role;
   }
 
   userIsGroupCreator(membership) {
@@ -79,14 +82,14 @@ export default class MembersTable extends PureComponent {
   }
 
   render() {
-    const { readingGroup, onRemoveMember } = this.props;
+    const { readingGroup, onRemoveMember, t } = this.props;
 
     return (
       <Table
         models={this.members}
         pagination={this.pagination}
         onPageClick={this.onPageClick}
-        unit={"member"}
+        unit={t("glossary.member", { count: this.members.length })}
         linkCreator={model =>
           lh.link("frontendReadingGroupAnnotations", readingGroup.id, {
             page: 1,
@@ -95,7 +98,7 @@ export default class MembersTable extends PureComponent {
         }
       >
         <Column
-          header={"Member Name"}
+          header={t("tables.reading_group_members.headers.name")}
           textStyle={"valueLarge"}
           columnPosition={"all"}
         >
@@ -137,41 +140,65 @@ export default class MembersTable extends PureComponent {
           }}
         </Column>
         <Column
-          header="Role"
+          header={t("tables.reading_group_members.headers.role")}
           columnPosition={"left"}
           cellSize={"cellFitContent"}
         >
           {({ model }) => this.roleFor(model)}
         </Column>
-        <Column header="Activity" cellSize={"cellFitContent"}>
+        <Column
+          header={t("tables.reading_group_members.headers.activity")}
+          cellSize={"cellFitContent"}
+        >
           {({ model }) => (
             <>
               <InlineValue
                 label={model.attributes.annotationsCount}
                 icon="interactAnnotate24"
-                srLabel={`${model.attributes.annotationsCount} annotations.`}
+                srLabel={`${model.attributes.annotationsCount} ${t(
+                  "glossary.annotation",
+                  {
+                    count: model.attributes.annotationsCount
+                  }
+                )}.`}
               />
               <InlineValue
                 label={model.attributes.highlightsCount}
                 icon="interactHighlight24"
-                srLabel={`${model.attributes.highlightsCount} highlights.`}
+                srLabel={`${model.attributes.highlightsCount} ${t(
+                  "glossary.highlight",
+                  {
+                    count: model.attributes.highlightsCount
+                  }
+                )}.`}
               />
               <InlineValue
                 label={model.attributes.commentsCount}
                 icon="interactComment24"
-                srLabel={`${model.attributes.commentsCount} comments.`}
+                srLabel={`${model.attributes.commentsCount} ${t(
+                  "glossary.comment",
+                  {
+                    count: model.attributes.commentsCount
+                  }
+                )}.`}
               />
             </>
           )}
         </Column>
-        <Column header="Note Style" cellSize={"cellFitContent"}>
+        <Column
+          header={t("tables.reading_group_members.headers.note_style")}
+          cellSize={"cellFitContent"}
+        >
           {({ model }) => <NoteStyle membership={model} />}
         </Column>
         {this.getUpdateAuthorizationStatus({
           entity: this.props.readingGroup,
           ability: "update"
         }) && (
-          <Column header="Actions" cellSize={"cellFitContent"}>
+          <Column
+            header={t("tables.reading_group_members.headers.actions")}
+            cellSize={"cellFitContent"}
+          >
             {({ model }) => {
               const isCreator = this.userIsGroupCreator(model);
               return (
@@ -192,3 +219,5 @@ export default class MembersTable extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(MembersTable);

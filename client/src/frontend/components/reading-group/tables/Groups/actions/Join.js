@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import template from "lodash/template";
 import classNames from "classnames";
 import config from "config";
@@ -12,6 +13,7 @@ const { request } = entityStoreActions;
 
 function JoinGroup({ confirm, readingGroup, onSuccess, buttonText, outlined }) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   function doJoin() {
     const {
@@ -47,7 +49,7 @@ function JoinGroup({ confirm, readingGroup, onSuccess, buttonText, outlined }) {
         "button-tertiary--outlined": outlined
       })}
     >
-      {buttonText || "Join"}
+      {buttonText || t("actions.join")}
     </button>
   );
 }

@@ -27,12 +27,12 @@ exports[`frontend/components/resource-slide/Loading matches the snapshot 1`] = `
       <span
         className="resource-type"
       >
-        Loading
+        loading
       </span>
       <span
         className="resource-date"
       >
-        Loading
+        loading
       </span>
     </div>
   </div>
