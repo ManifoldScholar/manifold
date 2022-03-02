@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { TwitterButton, FacebookButton } from "react-sociable";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -12,7 +13,8 @@ class ShareBar extends Component {
     label: PropTypes.string,
     url: PropTypes.string,
     message: PropTypes.string,
-    settings: PropTypes.object
+    settings: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -61,8 +63,10 @@ class ShareBar extends Component {
 
     const twitterWindowOptions = ["", "", "width=600,height=300"];
 
+    const t = this.props.t;
+
     return (
-      <nav className="share-nav-primary" aria-label="Share">
+      <nav className="share-nav-primary" aria-label={t("actions.share")}>
         {this.props.label && (
           <span className="share-nav-primary__label">{this.props.label}</span>
         )}
@@ -75,7 +79,9 @@ class ShareBar extends Component {
               className="share-nav-primary__link"
             >
               <IconComposer icon="socialTwitter32" size={20} />
-              <span className="screen-reader-text">Share on Twitter</span>
+              <span className="screen-reader-text">
+                {t("external_links.share_on_social", { service: "Twitter" })}
+              </span>
             </TwitterButton>
           </li>
           {/* Facebook App Id is required for this component to load */}
@@ -89,7 +95,9 @@ class ShareBar extends Component {
                 className="share-nav-primary__link"
               >
                 <IconComposer icon="socialFacebook32" size={20} />
-                <span className="screen-reader-text">Share on Facebook</span>
+                <span className="screen-reader-text">
+                  {t("external_links.share_on_social", { service: "Facebook" })}
+                </span>
               </FacebookButton>
             </li>
           ) : null}
@@ -99,4 +107,4 @@ class ShareBar extends Component {
   }
 }
 
-export default withSettings(ShareBar);
+export default withSettings(withTranslation()(ShareBar));

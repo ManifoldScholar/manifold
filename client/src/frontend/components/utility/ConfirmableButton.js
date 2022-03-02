@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 
-export default class ConfirmableButton extends Component {
+class ConfirmableButton extends Component {
   static displayName = "Utility.ConfirmableButton";
 
   static propTypes = {
     label: PropTypes.string.isRequired,
-    confirmHandler: PropTypes.func.isRequired
+    confirmHandler: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {};
@@ -43,6 +45,8 @@ export default class ConfirmableButton extends Component {
   };
 
   render() {
+    const t = this.props.t;
+
     return (
       <div className="confirmable-button">
         <button
@@ -54,15 +58,20 @@ export default class ConfirmableButton extends Component {
           {this.props.label}
         </button>
         {this.state.confirmation && (
-          <ul aria-label="Delete" className="confirmable-button__confirm-list">
+          <ul
+            aria-label={t("actions.delete")}
+            className="confirmable-button__confirm-list"
+          >
             <li className="confirmable-button__confirm-item">
               <button
                 className="confirmable-button__button confirmable-button__button--confirm"
                 onClick={this.handleConfirm}
                 ref={this.confirmButton}
               >
-                <span className="screen-reader-text">Confirm delete</span>
-                <span aria-hidden>Confirm</span>
+                <span className="screen-reader-text">
+                  {t("actions.confirm_delete")}
+                </span>
+                <span aria-hidden>{t("actions.confirm")}</span>
               </button>
             </li>
             <li className="confirmable-button__confirm-item">
@@ -70,8 +79,10 @@ export default class ConfirmableButton extends Component {
                 className="confirmable-button__button confirmable-button__button--deny"
                 onClick={this.toggleConfirmation}
               >
-                <span className="screen-reader-text">Cancel delete</span>
-                <span aria-hidden>Cancel</span>
+                <span className="screen-reader-text">
+                  {t("actions.cancel_delete")}
+                </span>
+                <span aria-hidden>{t("actions.cancel")}</span>
               </button>
             </li>
           </ul>
@@ -80,3 +91,5 @@ export default class ConfirmableButton extends Component {
     );
   }
 }
+
+export default withTranslation()(ConfirmableButton);
