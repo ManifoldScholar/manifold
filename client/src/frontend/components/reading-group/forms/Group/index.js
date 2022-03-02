@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { UnmountClosed as Collapse } from "react-collapse";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
@@ -14,7 +15,8 @@ class ReadingGroupForm extends React.PureComponent {
   static propTypes = {
     mode: PropTypes.oneOf(["new", "edit"]),
     group: PropTypes.object,
-    onSuccess: PropTypes.func.isRequired
+    onSuccess: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -115,7 +117,7 @@ class ReadingGroupForm extends React.PureComponent {
   };
 
   render() {
-    const { group, onSuccess } = this.props;
+    const { group, onSuccess, t } = this.props;
     return (
       <FormContainer.Form
         model={this.isNew ? this.memoizedNewGroup() : group}
@@ -131,67 +133,85 @@ class ReadingGroupForm extends React.PureComponent {
           <>
             <Form.TextInput
               wide
-              label="Group Name"
+              label={t("forms.reading_group.name")}
               name="attributes[name]"
-              placeholder="Pick a group name"
+              placeholder={t("forms.reading_group.name_placeholder")}
               focusOnMount
             />
             <Form.Radios
-              label="Privacy"
+              label={t("forms.reading_group.privacy")}
               name="attributes[privacy]"
               defaultValue={"private"}
               beforeOnChange={this.warnOnPrivacyChange}
-              instructions={`Annotations in public groups can be viewed by everyone.
-              Annotations in private groups can only be viewed by group members. In
-              anonymous groups, comments are private and only the group creator can see
-              the identity of each annotation's author.`}
+              instructions={t("forms.reading_group.privacy_instructions")}
               options={[
-                { label: "Public", value: "public" },
-                { label: "Private", value: "private" },
-                { label: "Anonymous", value: "anonymous" }
+                {
+                  label: t("forms.reading_group.privacy_options.public"),
+                  value: "public"
+                },
+                {
+                  label: t("forms.reading_group.privacy_options.private"),
+                  value: "private"
+                },
+                {
+                  label: t("forms.reading_group.privacy_options.anonymous"),
+                  value: "anonymous"
+                }
               ]}
               inline
               wide
             />
             <Form.TextInput
               wide
-              label="Invitation Code"
+              label={t("forms.reading_group.invitation_code")}
               name="attributes[invitationCode]"
               buttons={[
                 {
-                  label: "regenerate",
+                  label: t(
+                    "forms.reading_group.invitation_code_buttons.regenerate"
+                  ),
                   onClick: this.handleRegenerate
                 },
                 {
-                  label: "copy",
+                  label: t("forms.reading_group.invitation_code_buttons.copy"),
                   onClick: this.handleCopy
                 }
               ]}
-              instructions={`Users can enter the invitation code on the "Manage Reading Groups" page to join this group. You may change this code at any time, but previous codes will no longer work.`}
+              instructions={t(
+                "forms.reading_group.invitation_code_instructions"
+              )}
             />
             <Form.TextInput
               wide
               isDisabled
-              label="Invitation URL"
+              label={t("forms.reading_group.invitation_url")}
               value={this.urlForToken(
                 getModelValue("attributes[invitationCode]")
               )}
-              instructions="The URL above is based on the invitation code. Readers can also join the group by visiting this URL."
+              instructions={t(
+                "forms.reading_group.invitation_url_instructions"
+              )}
               buttons={[
                 {
-                  label: "copy",
+                  label: t("forms.reading_group.invitation_url_button_label"),
                   onClick: this.handleCopy
                 }
               ]}
             />
             <Form.Radios
-              label="Course"
+              label={t("forms.reading_group.course")}
               name="attributes[course][enabled]"
               defaultValue={false}
-              instructions={`Course information is used for internal tracking and reporting purposes.`}
+              instructions={t("forms.reading_group.course_instructions")}
               options={[
-                { label: "Yes", value: true },
-                { label: "No", value: false }
+                {
+                  label: t("forms.reading_group.course_options.yes"),
+                  value: true
+                },
+                {
+                  label: t("forms.reading_group.course_options.no"),
+                  value: false
+                }
               ]}
               beforeOnChange={this.handleCourseChange}
               inputClasses="group-settings-form__course-radios"
@@ -202,11 +222,11 @@ class ReadingGroupForm extends React.PureComponent {
               <Collapse isOpened={this.state.courseEnabled}>
                 <div className="group-settings-form__date-picker-group">
                   <Form.DatePicker
-                    label="Course Start Date:"
+                    label={t("forms.reading_group.course_start_date")}
                     name="attributes[course][startsOn]"
                   />
                   <Form.DatePicker
-                    label="Course End Date:"
+                    label={t("forms.reading_group.course_end_date")}
                     name="attributes[course][endsOn]"
                   />
                 </div>
@@ -214,12 +234,12 @@ class ReadingGroupForm extends React.PureComponent {
             </div>
             <Form.Switch
               wide
-              label="Notifications"
+              label={t("forms.reading_group.notifications")}
               name="attributes[notifyOnJoin]"
-              instructions="Email me when anyone joins this group"
+              instructions={t("forms.reading_group.notifications_instructions")}
               theme="checkbox"
             />
-            <Form.Save text="Save" theme="frontend" />
+            <Form.Save text={t("actions.save")} theme="frontend" />
           </>
         )}
       </FormContainer.Form>
@@ -227,4 +247,4 @@ class ReadingGroupForm extends React.PureComponent {
   }
 }
 
-export default withConfirmation(ReadingGroupForm);
+export default withConfirmation(withTranslation()(ReadingGroupForm));

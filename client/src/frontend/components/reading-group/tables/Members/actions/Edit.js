@@ -1,14 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Action from "global/components/table/Action";
 import lh from "helpers/linkHandler";
 
 function EditMember({ membership, readingGroup }) {
+  const { t } = useTranslation();
+
   return (
     <Action
       to={lh.link("frontendReadingGroupMember", readingGroup.id, membership.id)}
     >
-      Edit
+      {t("actions.edit")}
     </Action>
   );
 }

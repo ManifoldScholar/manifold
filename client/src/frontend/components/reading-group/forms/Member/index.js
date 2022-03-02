@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { readingGroupMembershipsAPI, requests } from "api";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
@@ -12,6 +13,8 @@ function ReadingGroupMemberForm({
   confirm,
   onSuccess
 }) {
+  const { t } = useTranslation();
+
   const [selectedStyle, setSelectedStyle] = useState(
     membership.attributes.annotationStyle
   );
@@ -49,18 +52,24 @@ function ReadingGroupMemberForm({
       <Form.TextInput
         wide
         isDisabled
-        label="Member Name"
+        label={t("forms.reading_group_member.name")}
         name="attributes[name]"
       />
       {!userIsGroupCreator && (
         <Form.Radios
-          label="Role"
+          label={t("forms.reading_group_member.role")}
           name="attributes[role]"
           beforeOnChange={warnOnRoleChange}
-          instructions="Members can see group annotations and annotate within the group. Moderators can manage members and update group settings."
+          instructions={t("forms.reading_group_member.role_instructions")}
           options={[
-            { label: "Member", value: "member" },
-            { label: "Moderator", value: "moderator" }
+            {
+              label: t("forms.reading_group_member.role_options.member"),
+              value: "member"
+            },
+            {
+              label: t("forms.reading_group_member.role_options.moderator"),
+              value: "moderator"
+            }
           ]}
           inline
           wide
@@ -69,27 +78,49 @@ function ReadingGroupMemberForm({
       )}
       <Form.TextInput
         wide
-        label="Label"
+        label={t("forms.reading_group_member.label")}
         name="attributes[label]"
-        placeholder="Enter a label"
-        instructions="Labels are used to describe specific members within the group and appear next to the name in the membership list."
+        placeholder={t("forms.reading_group_member.label_placeholder")}
+        instructions={t("forms.reading_group_member.label_instructions")}
         focusOnMount={userIsGroupCreator}
       />
       <Form.Select
-        label="Annotation Style"
+        label={t("forms.reading_group_member.annotation_style")}
         name="attributes[annotationStyle]"
         beforeOnChange={handleStyleSelectChange}
-        instructions="Annotation styles will appear in the Manifold reading interface and can be used to call differentiate a user's annotations from other annotations in the reading group."
+        instructions={t(
+          "forms.reading_group_member.annotation_style_instructions"
+        )}
         options={[
-          { label: "Dashed", value: "dashes" },
-          { label: "Dotted", value: "dots" },
-          { label: "Solid", value: "solid" },
-          { label: "Wavy", value: "wavy" }
+          {
+            label: t(
+              "forms.reading_group_member.annotation_style_options.dashed"
+            ),
+            value: "dashes"
+          },
+          {
+            label: t(
+              "forms.reading_group_member.annotation_style_options.dotted"
+            ),
+            value: "dots"
+          },
+          {
+            label: t(
+              "forms.reading_group_member.annotation_style_options.solid"
+            ),
+            value: "solid"
+          },
+          {
+            label: t(
+              "forms.reading_group_member.annotation_style_options.wavy"
+            ),
+            value: "wavy"
+          }
         ]}
         rounded
       />
       <StylePreview style={selectedStyle} />
-      <Form.Save text="Save" theme="frontend" />
+      <Form.Save text={t("actions.save")} theme="frontend" />
     </FormContainer.Form>
   );
 }

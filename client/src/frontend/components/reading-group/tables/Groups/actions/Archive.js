@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { requests } from "api";
 import { useDispatch } from "react-redux";
 import config from "config";
@@ -11,6 +12,7 @@ const { request } = entityStoreActions;
 
 function ArchiveGroup({ membership, confirm }) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   if (!membership) return null;
 
@@ -54,7 +56,9 @@ function ArchiveGroup({ membership, confirm }) {
   }
 
   return (
-    <Action onClick={handleClick}>{archive ? "Archive" : "Activate"}</Action>
+    <Action onClick={handleClick}>
+      {archive ? t("actions.archive") : t("actions.activate")}
+    </Action>
   );
 }
 

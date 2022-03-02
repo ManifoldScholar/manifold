@@ -65,7 +65,7 @@ function CollectingDialog({
           <SectionLabel as="legend" label={`${t("forms.add_to")}:`} />
           <Styled.Group>
             <Checkbox
-              label={t("forms.my_collection_label")}
+              label={t("forms.my_starred_label")}
               value="me"
               onChange={onCheckboxChange}
               checked={inMyCollection()}

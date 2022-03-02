@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { GroupSettingsForm } from "frontend/components/reading-group/forms";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { UnmountClosed as Collapse } from "react-collapse";
 import Navigation from "backend/components/navigation";
 import { readingGroupsAPI, requests } from "api";
@@ -20,7 +21,8 @@ class ReadingGroupSettings extends PureComponent {
     readingGroup: PropTypes.object.isRequired,
     closeDrawer: PropTypes.func.isRequired,
     confirm: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -49,11 +51,12 @@ class ReadingGroupSettings extends PureComponent {
 
   get buttons() {
     const className = "utility-button__icon";
+    const t = this.props.t;
     const buttons = [
       {
         onClick: this.handleDelete,
         icon: "delete24",
-        label: "Delete",
+        label: t("actions.delete"),
         className: `${className} ${className}--notice`
       }
     ];
@@ -62,7 +65,7 @@ class ReadingGroupSettings extends PureComponent {
       buttons.unshift({
         onClick: () => this.handleDrawerToggle("duplicate"),
         icon: "duplicate24",
-        label: "Duplicate",
+        label: t("actions.duplicate"),
         className,
         ariaProps: {
           "aria-expanded": this.state.showActionPanel === "duplicate",
@@ -134,10 +137,11 @@ class ReadingGroupSettings extends PureComponent {
   };
 
   render() {
+    const t = this.props.t;
     return (
       <section>
         <Navigation.DrawerHeader
-          title="Edit Reading Group"
+          title={t("forms.edit_group.title")}
           buttons={this.buttons}
           buttonLayout="inline"
           className="drawer-header--pad-bottom-small"
@@ -161,4 +165,4 @@ class ReadingGroupSettings extends PureComponent {
   }
 }
 
-export default withConfirmation(ReadingGroupSettings);
+export default withConfirmation(withTranslation()(ReadingGroupSettings));

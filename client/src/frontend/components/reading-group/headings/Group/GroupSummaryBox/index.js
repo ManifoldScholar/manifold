@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
+import { useTranslation } from "react-i18next";
 import Utility from "global/components/utility";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 import Section from "./Section";
@@ -46,6 +47,7 @@ function collectedIdsForCollectionByType(readingGroup) {
 
 function GroupSummaryBox({ readingGroup }) {
   const uid = useUID();
+  const { t } = useTranslation();
   const {
     privacy,
     highlightsCount,
@@ -63,11 +65,11 @@ function GroupSummaryBox({ readingGroup }) {
   return (
     <div className="group-summary">
       <h2 id={uid} className="screen-reader-text">
-        Group Summary
+        {t("pages.subheaders.group_summary")}
       </h2>
       <dl aria-labelledby={uid} className="group-summary__list">
-        <Section label="About">
-          <Item labelText="Type">
+        <Section label={t("common.about")}>
+          <Item labelText={t("common.type")}>
             {privacy}
             {privacy === "private" && (
               <Utility.IconComposer
@@ -77,43 +79,58 @@ function GroupSummaryBox({ readingGroup }) {
               />
             )}
           </Item>
-          <Item labelText="Members" icon="readingGroup24">
+          <Item labelText={t("glossary.member_other")} icon="readingGroup24">
             {membershipsCount}
           </Item>
-          <Item labelText="Role" icon="avatar24">
+          <Item labelText={t("common.role")} icon="avatar24">
             {currentUserRole}
           </Item>
         </Section>
-        <Section label="Group">
-          <Item labelText="Annotations" icon="interactAnnotate32">
+        <Section label={t("glossary.group_one")}>
+          <Item
+            labelText={t("glossary.annotation_other")}
+            icon="interactAnnotate32"
+          >
             {annotationsCount}
           </Item>
-          <Item labelText="Highlights" icon="interactHighlight32">
+          <Item
+            labelText={t("glossary.highlight_other")}
+            icon="interactHighlight32"
+          >
             {highlightsCount}
           </Item>
         </Section>
-        <Section label="Yours">
-          <Item labelText="Annotations" icon="interactAnnotate32">
+        <Section label={t("common.yours")}>
+          <Item
+            labelText={t("glossary.annotation_other")}
+            icon="interactAnnotate32"
+          >
             {currentUserCounts.annotationsCount}
           </Item>
-          <Item labelText="Highlights" icon="interactHighlight32">
+          <Item
+            labelText={t("glossary.highlight_other")}
+            icon="interactHighlight32"
+          >
             {currentUserCounts.highlightsCount}
           </Item>
         </Section>
-        <Section label="Content" columns={2}>
-          <Item labelText="Projects" icon="BELibrary64">
+        <Section label={t("common.content")} columns={2}>
+          <Item labelText={t("glossary.project_other")} icon="BELibrary64">
             {getCollectedCount("projects")}
           </Item>
-          <Item labelText="Texts" icon="textsLoosePages64">
+          <Item labelText={t("glossary.text_other")} icon="textsLoosePages64">
             {getCollectedCount("texts")}
           </Item>
-          <Item labelText="Text Sections" icon="toc64">
+          <Item labelText={t("glossary.text_section_other")} icon="toc64">
             {getCollectedCount("textSections")}
           </Item>
-          <Item labelText="Collections" icon="resourceCollection64">
+          <Item
+            labelText={t("glossary.collection_other")}
+            icon="resourceCollection64"
+          >
             {getCollectedCount("resourceCollections")}
           </Item>
-          <Item labelText="Resources" icon="resources64">
+          <Item labelText={t("glossary.resource_other")} icon="resources64">
             {getCollectedCount("resources")}
           </Item>
         </Section>
