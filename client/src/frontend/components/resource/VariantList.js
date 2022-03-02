@@ -50,7 +50,7 @@ class ResourceVariantList extends Component {
     return (
       <section className="resource-variant-list">
         <div className="resource-variant-list__section-title">
-          {`${this.props.t("sections.variants")}:`}
+          {`${this.props.t("pages.subheaders.variants")}:`}
         </div>
         <ul className="resource-variant-list__list">{children}</ul>
       </section>

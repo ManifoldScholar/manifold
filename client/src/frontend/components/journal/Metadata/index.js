@@ -17,7 +17,7 @@ function Metadata({ journal }) {
         attributes: {
           renderable: true,
           type: "Content::MetadataBlock",
-          title: t("sections.journal_info"),
+          title: t("pages.subheaders.journal_info"),
           icon: "journals64"
         }
       }}

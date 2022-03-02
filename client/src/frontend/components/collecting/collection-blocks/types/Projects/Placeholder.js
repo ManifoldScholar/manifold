@@ -24,7 +24,7 @@ function Placeholder({ stack }) {
           <Skeleton style={{ maxWidth: 75 }} />
         </StyledMetadata.Date>
       </StyledMetadata.MetadataWrapper>
-      <span className="screen-reader-text">{t("loading")}</span>
+      <span className="screen-reader-text">{t("common.loading")}</span>
     </Styled.ItemLink>
   );
 }

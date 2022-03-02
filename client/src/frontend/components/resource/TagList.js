@@ -66,7 +66,7 @@ class ResourceTagList extends Component {
         role="presentation"
       >
         <span className="screen-reader-text">
-          {this.props.t("sections.tags_list")}
+          {this.props.t("pages.subheaders.tags_list")}
         </span>
         <ul>{this.mapTagsToLinks(this.props.resource)}</ul>
       </nav>

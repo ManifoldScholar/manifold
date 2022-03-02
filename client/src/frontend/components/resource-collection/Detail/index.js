@@ -61,7 +61,9 @@ export default function ResourceCollectionDetail(props) {
           <Utility.ShareBar url={resourceCollectionUrl} />
         </div>
       </div>
-      <h2 className="screen-reader-text">{t("sections.resource_slideshow")}</h2>
+      <h2 className="screen-reader-text">
+        {t("pages.subheaders.resource_slideshow")}
+      </h2>
       <ResourceList.Slideshow
         resourceCollection={resourceCollection}
         collectionResources={slideshowResources}
@@ -70,7 +72,9 @@ export default function ResourceCollectionDetail(props) {
         dispatch={dispatch}
       />
       <div className="container flush-top collection-detail__resources">
-        <h2 className="screen-reader-text">{t("sections.resource_list")}</h2>
+        <h2 className="screen-reader-text">
+          {t("pages.subheaders.resource_list")}
+        </h2>
         <Styled.EntityListTotal
           linkTo={lh.link("frontendProjectResources", project.attributes.slug)}
           entityName={t("glossary.resource", { count })}

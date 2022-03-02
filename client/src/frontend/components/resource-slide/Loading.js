@@ -16,8 +16,8 @@ export default function ResourceListSlideFigureLoading() {
             icon="resourceFile64"
             className="resource-slide-figure__resource-icon"
           />
-          <span className="resource-type">{t("loading")}</span>
-          <span className="resource-date">{t("loading")}</span>
+          <span className="resource-type">{t("common.loading")}</span>
+          <span className="resource-date">{t("common.loading")}</span>
         </div>
       </div>
     </figure>
