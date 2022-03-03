@@ -35,7 +35,8 @@ class SearchResultsTypeProject extends PureComponent {
 
     return {
       type: searchableType,
-      id: searchableId
+      id: searchableId,
+      attributes: { title: this.result.attributes.title }
     };
   }
 
