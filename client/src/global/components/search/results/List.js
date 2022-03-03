@@ -74,6 +74,7 @@ export default class SearchResultsList extends PureComponent {
           pagination={this.props.pagination}
           padding={3}
           paginationClickHandler={this.props.paginationClickHandler}
+          paginationTarget="#search"
         />
       </div>
     );
