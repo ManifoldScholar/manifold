@@ -48,7 +48,7 @@ function JournalDetailContainer({ journal }) {
         breadcrumbs={[
           {
             to: lh.link("frontendJournalsList"),
-            label: "All Journals"
+            label: t("navigation.breadcrumbs.all_journals")
           },
           {
             to: lh.link("frontendJournalDetail", journal.id),
@@ -81,7 +81,7 @@ function JournalDetailContainer({ journal }) {
         FooterComponent={() => (
           <FooterLink
             to={lh.link("frontendJournalAllVolumes", journal.id)}
-            label="See all volumes"
+            label={t("navigation.see_all_volumes")}
           />
         )}
       />
@@ -103,7 +103,7 @@ function JournalDetailContainer({ journal }) {
         FooterComponent={() => (
           <FooterLink
             to={lh.link("frontendJournalAllIssues", journal.id)}
-            label="See all issues"
+            label={t("navigation.see_all_issues")}
           />
         )}
       />

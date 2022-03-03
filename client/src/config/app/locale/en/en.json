@@ -134,6 +134,9 @@
         "public_groups": "Public Reading Groups",
         "create": "Create New Group"
       },
+      "breadcrumbs": {
+        "all_journals": "All $t(glossary.journal_other)"
+      },
       "library_links": "Library Links",
       "browse_library": "Browse library",
       "see_full_collection": "See the full collection",
@@ -142,7 +145,9 @@
       "see_all_activity": "$t(actions.see_all) activity",
       "return_home": "Return to home",
       "visit_page": "Visit page",
-      "view_interactive_resource": "$t(actions.view) Interactive Resource"
+      "view_interactive_resource": "$t(actions.view) Interactive Resource",
+      "see_all_issues": "$t(actions.see_all) $t(glossary.issue_other)",
+      "see_all_volumes": "$t(actions.see_all) $t(glossary.volume_other)"
     },
     "external_links": {
       "view_on_social": "View this project on {{service}}",
