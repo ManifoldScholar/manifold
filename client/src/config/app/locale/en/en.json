@@ -210,6 +210,7 @@
         "empty_placeholder": "Drag here to add"
       },
       "reading_group": {
+        "drawer_title": "New Reading Group",
         "name": "Group Name",
         "name_placeholder": "Pick a group name",
         "privacy": "Privacy",
@@ -333,7 +334,8 @@
         "my_starred": "My Starred",
         "resource_collections_all": "All Project Resource Collections",
         "resources_all": "All Project Resources",
-        "projects_all": "All Projects"
+        "projects_all": "All Projects",
+        "my_groups": "My Reading Groups"
       },
       "subheaders": {
         "journal_info": "Journal info",

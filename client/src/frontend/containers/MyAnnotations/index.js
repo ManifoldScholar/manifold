@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { meAPI } from "api";
 import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/composed/EntityCollection";
@@ -35,9 +36,11 @@ export default function MyAnnotationsContainer() {
     options: { texts: annotatedTexts }
   });
 
+  const { t } = useTranslation();
+
   return annotations ? (
     <>
-      <HeadContent title="My Notes + Comments" appendTitle />
+      <HeadContent title={t("pages.frontend.my_notes")} appendTitle />
       <EntityCollection.MyAnnotations
         annotations={annotations}
         annotationsMeta={meta}

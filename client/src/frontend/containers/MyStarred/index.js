@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { meAPI } from "api";
 import lh from "helpers/linkHandler";
+import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
@@ -59,13 +60,15 @@ function MyStarredContainer() {
     });
   }, []);
 
+  const { t } = useTranslation();
+
   return (
     <Authorize
       kind="any"
       failureRedirect={lh.link("frontendLogin")}
       failureNotification
     >
-      <HeadContent title="My Starred" appendTitle />
+      <HeadContent title={t("pages.frontend.my_starred")} appendTitle />
       <EntityCollection.MyStarred
         collection={collection}
         responses={responses}
