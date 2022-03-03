@@ -176,6 +176,16 @@ exports[`frontend/components/resource-collection/Cover matches the snapshot 1`] 
                   "name": "Category name",
                   "name_placeholder": "Enter category name",
                 },
+                "contact": Object {
+                  "button_label": "Send a Message",
+                  "email": "Email",
+                  "email_placeholder": "Email",
+                  "message": "Message",
+                  "message_placeholder": "Message",
+                  "name": "Name",
+                  "name_placeholder": "Name",
+                  "title": "Send a Message",
+                },
                 "edit_group": Object {
                   "duplicate": Object {
                     "archive": "Archive copied group",
@@ -384,6 +394,10 @@ exports[`frontend/components/resource-collection/Cover matches the snapshot 1`] 
                 "remove_category_heading": "Are you sure you want to remove this category from your collection?",
               },
               "navigation": Object {
+                "breadcrumbs": Object {
+                  "all_journals": "All $t(glossary.journal_other)",
+                  "issues": "$t(glossary.issue_other)",
+                },
                 "browse_library": "Browse library",
                 "library_links": "Library Links",
                 "reading_group": Object {
@@ -399,7 +413,9 @@ exports[`frontend/components/resource-collection/Cover matches the snapshot 1`] 
                 "return_home": "Return to home",
                 "search_by_keyword": "Search by keyword",
                 "see_all_activity": "$t(actions.see_all) activity",
+                "see_all_issues": "$t(actions.see_all) $t(glossary.issue_other)",
                 "see_all_projects": "$t(actions.see_all) $t(glossary.project_other)",
+                "see_all_volumes": "$t(actions.see_all) $t(glossary.volume_other)",
                 "see_full_collection": "See the full collection",
                 "user": Object {
                   "my_notes_comments": "My Notes + Comments",
@@ -412,6 +428,7 @@ exports[`frontend/components/resource-collection/Cover matches the snapshot 1`] 
               },
               "pages": Object {
                 "frontend": Object {
+                  "events": "Events",
                   "events_all": "All Activity",
                   "issues_all": "All Journal Issues",
                   "my_notes": "My Notes + Comments",
@@ -603,6 +620,16 @@ exports[`frontend/components/resource-collection/Cover matches the snapshot 1`] 
                 "empty_placeholder": "Drag here to add",
                 "name": "Category name",
                 "name_placeholder": "Enter category name",
+              },
+              "contact": Object {
+                "button_label": "Send a Message",
+                "email": "Email",
+                "email_placeholder": "Email",
+                "message": "Message",
+                "message_placeholder": "Message",
+                "name": "Name",
+                "name_placeholder": "Name",
+                "title": "Send a Message",
               },
               "edit_group": Object {
                 "duplicate": Object {
@@ -812,6 +839,10 @@ exports[`frontend/components/resource-collection/Cover matches the snapshot 1`] 
               "remove_category_heading": "Are you sure you want to remove this category from your collection?",
             },
             "navigation": Object {
+              "breadcrumbs": Object {
+                "all_journals": "All $t(glossary.journal_other)",
+                "issues": "$t(glossary.issue_other)",
+              },
               "browse_library": "Browse library",
               "library_links": "Library Links",
               "reading_group": Object {
@@ -827,7 +858,9 @@ exports[`frontend/components/resource-collection/Cover matches the snapshot 1`] 
               "return_home": "Return to home",
               "search_by_keyword": "Search by keyword",
               "see_all_activity": "$t(actions.see_all) activity",
+              "see_all_issues": "$t(actions.see_all) $t(glossary.issue_other)",
               "see_all_projects": "$t(actions.see_all) $t(glossary.project_other)",
+              "see_all_volumes": "$t(actions.see_all) $t(glossary.volume_other)",
               "see_full_collection": "See the full collection",
               "user": Object {
                 "my_notes_comments": "My Notes + Comments",
@@ -840,6 +873,7 @@ exports[`frontend/components/resource-collection/Cover matches the snapshot 1`] 
             },
             "pages": Object {
               "frontend": Object {
+                "events": "Events",
                 "events_all": "All Activity",
                 "issues_all": "All Journal Issues",
                 "my_notes": "My Notes + Comments",

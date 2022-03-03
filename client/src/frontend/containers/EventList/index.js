@@ -72,10 +72,11 @@ export class EventList extends Component {
     if (!this.project) return null;
     if (this.project.attributes.hideActivity) return this.renderRedirect();
     if (!this.events) return null;
+    const t = this.props.t;
     return (
       <>
         <HeadContent
-          title={`${this.project.attributes.titlePlaintext} | ${this.props.t(
+          title={`${this.project.attributes.titlePlaintext} | ${t(
             "pages.frontend.events"
           )}`}
           description={this.project.attributes.description}
@@ -107,4 +108,4 @@ export class EventList extends Component {
   }
 }
 
-export default connectAndFetch(withTranslation()(EventList));
+export default withTranslation()(connectAndFetch(EventList));

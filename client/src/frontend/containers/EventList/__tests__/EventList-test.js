@@ -11,6 +11,7 @@ describe("frontend/containers/EventList/EventList", () => {
       project={$project}
       events={$events}
       eventsMeta={{ pagination: fixtures.pagination() }}
+      t={key => key}
     />
   ));
 
