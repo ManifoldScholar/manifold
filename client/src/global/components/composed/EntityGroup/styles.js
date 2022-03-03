@@ -73,7 +73,7 @@ export const GroupHeader = styled("div", transientOptions)`
 
 export const HeaderText = styled.h2`
   ${headingPrimary}
-  margin-inline-start: calc(-1 * ${fluidScale("15px", "0px")});
+  margin-inline-start: var(--list-item-padding);
   margin-bottom: 0;
 `;
 
