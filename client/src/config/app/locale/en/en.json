@@ -135,7 +135,8 @@
         "create": "Create New Group"
       },
       "breadcrumbs": {
-        "all_journals": "All $t(glossary.journal_other)"
+        "all_journals": "All $t(glossary.journal_other)",
+        "issues": "$t(glossary.issue_other)"
       },
       "library_links": "Library Links",
       "browse_library": "Browse library",
