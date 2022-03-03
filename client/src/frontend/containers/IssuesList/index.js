@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   useFetch,
   usePaginationState,
@@ -36,16 +37,18 @@ export default function IssuesListContainer() {
     resetState: baseFilters
   });
 
+  const { t } = useTranslation();
+
   if (!issues || !meta) return null;
 
   const showPlaceholder = location.search ? false : !issues.length;
 
   return (
     <>
-      <h1 className="screen-reader-text">All Journal Issues</h1>
+      <h1 className="screen-reader-text">{t("pages.frontend.issues_all")}</h1>
       {!showPlaceholder && (
         <EntityCollection.Issues
-          title="All Journal Issues"
+          title={t("pages.frontend.issues_all")}
           issues={issues}
           issuesMeta={meta}
           filterProps={filterProps}
