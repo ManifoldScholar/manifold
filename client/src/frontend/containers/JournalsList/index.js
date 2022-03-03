@@ -1,6 +1,7 @@
 import React from "react";
 import { journalsAPI } from "api";
 import GlobalUtility from "global/components/utility";
+import { useTranslation } from "react-i18next";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "frontend/components/composed/EntityCollection";
@@ -14,6 +15,8 @@ export default function JournalsListContainer() {
     request: [journalsAPI.index, filters, pagination]
   });
 
+  const { t } = useTranslation();
+
   if (!journals || !meta) return null;
 
   const showPagination = meta.pagination?.totalPages > 1;
@@ -21,7 +24,7 @@ export default function JournalsListContainer() {
   return (
     <>
       <CheckFrontendMode debugLabel="JournalsList" />
-      <h1 className="screen-reader-text">Journals</h1>
+      <h1 className="screen-reader-text">{t("glossary.journal_other")}</h1>
       {!!journals.length &&
         journals.map((journal, index) => (
           <EntityCollection.JournalSummary
