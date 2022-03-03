@@ -23,31 +23,33 @@ export default function JournalIssuesList({ journal }) {
 
   const { t } = useTranslation();
 
-  if (!journal || !issues || !meta) return null;
+  const { titlePlaintext } = journal?.attributes || {};
+  const breadcrumbs = useMemo(
+    () => [
+      {
+        to: lh.link("frontendJournalsList"),
+        label: t("navigation.breadcrumbs.all_journals")
+      },
+      {
+        to: lh.link("frontendJournalDetail", journal.id),
+        label: titlePlaintext
+      },
+      {
+        to: lh.link("frontendJournalAllIssues", journal.id),
+        label: t("navigation.breadcrumbs.issues")
+      }
+    ],
+    [journal.id, t, titlePlaintext]
+  );
 
-  const { titlePlaintext } = journal.attributes;
+  if (!journal || !issues || !meta) return null;
 
   return (
     <>
       <h1 className="screen-reader-text">
         {`${titlePlaintext}: ${capitalize(t("glossary.issue_other"))}`}
       </h1>
-      <RegisterBreadcrumbs
-        breadcrumbs={[
-          {
-            to: lh.link("frontendJournalsList"),
-            label: t("navigation.breadcrumbs.all_journals")
-          },
-          {
-            to: lh.link("frontendJournalDetail", journal.id),
-            label: titlePlaintext
-          },
-          {
-            to: lh.link("frontendJournalAllIssues", journal.id),
-            label: t("navigation.breadcrumbs.issues")
-          }
-        ]}
-      />
+      <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <EntityHeadContent entity={journal} />
       <EntityMasthead entity={journal} />
       <EntityCollection.Issues

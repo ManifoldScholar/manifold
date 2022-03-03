@@ -32,10 +32,24 @@ function JournalDetailContainer({ journal }) {
 
   const { t } = useTranslation();
 
+  const { titlePlaintext } = journal?.attributes || {};
+  const breadcrumbs = useMemo(
+    () => [
+      {
+        to: lh.link("frontendJournalsList"),
+        label: t("navigation.breadcrumbs.all_journals")
+      },
+      {
+        to: lh.link("frontendJournalDetail", journal.id),
+        label: titlePlaintext
+      }
+    ],
+    [journal.id, titlePlaintext, t]
+  );
+
   if (!journal) return null;
 
   const {
-    titlePlaintext,
     journalIssuesCount,
     journalVolumesCount,
     journalIssuesWithoutVolumeCount
@@ -44,18 +58,7 @@ function JournalDetailContainer({ journal }) {
   return journal ? (
     <>
       <CheckFrontendMode debugLabel="JournalDetail" isProjectHomePage />
-      <RegisterBreadcrumbs
-        breadcrumbs={[
-          {
-            to: lh.link("frontendJournalsList"),
-            label: t("navigation.breadcrumbs.all_journals")
-          },
-          {
-            to: lh.link("frontendJournalDetail", journal.id),
-            label: titlePlaintext
-          }
-        ]}
-      />
+      <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <EntityHeadContent entity={journal} />
       <EntityHero.Journal entity={journal} />
       {!volumes?.length && !issues?.length && (
