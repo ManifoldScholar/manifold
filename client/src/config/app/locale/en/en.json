@@ -320,6 +320,7 @@
     },
     "pages": {
       "frontend": {
+        "events": "Events",
         "events_all": "All Activity",
         "issues_all": "All Journal Issues",
         "my_notes": "My Notes + Comments",
