@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import get from "lodash/get";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { contactsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import Form from "global/components/form";
@@ -18,7 +19,8 @@ export class ContactContainer extends Component {
   static propTypes = {
     history: PropTypes.object,
     dispatch: PropTypes.func,
-    response: PropTypes.object
+    response: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor() {
@@ -64,12 +66,13 @@ export class ContactContainer extends Component {
 
   render() {
     const errors = get(this.props.response, "errors") || [];
+    const t = this.props.t;
 
     return (
       <section>
         <div className="container">
           <form method="post" onSubmit={this.sendMessage}>
-            <h1 className="form-heading">Send a Message</h1>
+            <h1 className="form-heading">{t("forms.contact.title")}</h1>
             <div className="row-1-p">
               <Form.Errorable
                 className="form-input"
@@ -77,7 +80,7 @@ export class ContactContainer extends Component {
                 errors={errors}
                 idForError="create-email-error"
               >
-                <label htmlFor="create-email">Email</label>
+                <label htmlFor="create-email">{t("forms.contact.email")}</label>
                 <input
                   value={this.state.contact.email}
                   type="text"
@@ -85,7 +88,7 @@ export class ContactContainer extends Component {
                   id="create-email"
                   aria-describedby="create-email-error"
                   onChange={this.handleInputChange}
-                  placeholder="Email"
+                  placeholder={t("forms.contact.email_placeholder")}
                 />
               </Form.Errorable>
             </div>
@@ -96,7 +99,7 @@ export class ContactContainer extends Component {
                 errors={errors}
                 idForError="create-name-error"
               >
-                <label htmlFor="create-name">Name</label>
+                <label htmlFor="create-name">{t("forms.contact.name")}</label>
                 <input
                   value={this.state.contact.fullName}
                   type="text"
@@ -104,7 +107,7 @@ export class ContactContainer extends Component {
                   aria-describedby="create-name-error"
                   name="fullName"
                   onChange={this.handleInputChange}
-                  placeholder="Name"
+                  placeholder={t("forms.contact.name_placeholder")}
                 />
               </Form.Errorable>
             </div>
@@ -115,14 +118,16 @@ export class ContactContainer extends Component {
                 errors={errors}
                 idForError="create-message-error"
               >
-                <label htmlFor="create-message">Message</label>
+                <label htmlFor="create-message">
+                  {t("forms.contact.message")}
+                </label>
                 <textarea
                   value={this.state.contact.message}
                   type="message"
                   name="message"
                   id="create-message"
                   onChange={this.handleInputChange}
-                  placeholder="Message"
+                  placeholder={t("forms.contact.message_placeholder")}
                   className="dark-placeholder wide large"
                   aria-describedby="create-message-error"
                 />
@@ -133,7 +138,7 @@ export class ContactContainer extends Component {
                 <input
                   className="button-secondary button-secondary--with-room"
                   type="submit"
-                  value="Send a Message"
+                  value={t("forms.contact.button_label")}
                 />
               </div>
             </div>
@@ -144,4 +149,6 @@ export class ContactContainer extends Component {
   }
 }
 
-export default connect(ContactContainer.mapStateToProps)(ContactContainer);
+export default connect(ContactContainer.mapStateToProps)(
+  withTranslation()(ContactContainer)
+);

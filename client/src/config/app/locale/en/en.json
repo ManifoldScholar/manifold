@@ -281,6 +281,16 @@
           "archive": "Archive copied group",
           "open_after": "Open new group after duplication"
         }
+      },
+      "contact": {
+        "title": "Send a Message",
+        "email": "Email",
+        "email_placeholder": "Email",
+        "name": "Name",
+        "name_placeholder": "Name",
+        "message": "Message",
+        "message_placeholder": "Message",
+        "button_label": "Send a Message"
       }
     },
     "tables": {
