@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
+import { withTranslation } from "react-i18next";
 import { Redirect } from "react-router-dom";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { entityStoreActions } from "actions";
@@ -35,7 +36,8 @@ export class EventList extends Component {
   static propTypes = {
     project: PropTypes.object,
     events: PropTypes.array,
-    eventsMeta: PropTypes.object
+    eventsMeta: PropTypes.object,
+    t: PropTypes.func
   };
 
   get project() {
@@ -73,7 +75,9 @@ export class EventList extends Component {
     return (
       <>
         <HeadContent
-          title={`${this.project.attributes.titlePlaintext} | Events`}
+          title={`${this.project.attributes.titlePlaintext} | ${this.props.t(
+            "pages.frontend.events"
+          )}`}
           description={this.project.attributes.description}
           image={this.project.attributes.avatarStyles.mediumSquare}
           appendTitle
@@ -103,4 +107,4 @@ export class EventList extends Component {
   }
 }
 
-export default connectAndFetch(EventList);
+export default connectAndFetch(withTranslation()(EventList));
