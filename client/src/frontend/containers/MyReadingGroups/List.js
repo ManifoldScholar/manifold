@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { meAPI } from "api";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
@@ -35,6 +36,7 @@ function MyReadingGroupsListContainer({ route }) {
 
   const currentUser = useCurrentUser();
   const history = useHistory();
+  const { t } = useTranslation();
 
   function handleNewGroupSuccess() {
     history.push(lh.link("frontendMyReadingGroups"));
@@ -57,7 +59,7 @@ function MyReadingGroupsListContainer({ route }) {
 
   return readingGroups ? (
     <>
-      <HeadContent title="My Reading Groups" appendTitle />
+      <HeadContent title={t("pages.frontend.my_groups")} appendTitle />
       <section>
         <div className="container groups-page-container">
           <GroupsHeading currentUser={currentUser} />
