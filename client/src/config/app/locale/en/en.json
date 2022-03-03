@@ -298,6 +298,14 @@
         "message": "Message",
         "message_placeholder": "Message",
         "button_label": "Send a Message"
+      },
+      "password_reset": {
+        "title": "Reset Password",
+        "new": "New Password",
+        "new_placeholder": "Password",
+        "confirm": "Confirm Password",
+        "confirm_placeholder": "Confirm Password",
+        "submit_reset": "Reset Password"
       }
     },
     "tables": {

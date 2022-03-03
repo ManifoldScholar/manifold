@@ -7,6 +7,7 @@ describe("frontend/containers/PasswordReset/PasswordReset", () => {
         params: {}
       }}
       history={fixtures.history()}
+      t={key => key}
     />
   ));
 

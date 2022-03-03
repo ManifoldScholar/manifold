@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { passwordsAPI, requests } from "api";
 import Form from "global/components/form";
@@ -23,7 +24,8 @@ export class PasswordResetContainer extends Component {
       })
     }).isRequired,
     history: PropTypes.object.isRequired,
-    response: PropTypes.object
+    response: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor() {
@@ -75,11 +77,12 @@ export class PasswordResetContainer extends Component {
 
   render() {
     const errors = get(this.props.response, "errors") || [];
+    const t = this.props.t;
     return (
       <section>
         <div className="container">
           <form method="post" onSubmit={event => this.handleSubmit(event)}>
-            <h4 className="form-heading">Reset Password</h4>
+            <h4 className="form-heading">{t("forms.password_reset.title")}</h4>
             <div className="row-1-p" />
             <div className="row-1-p">
               <Form.Errorable
@@ -88,14 +91,16 @@ export class PasswordResetContainer extends Component {
                 errors={errors}
                 idForError="reset-password-error"
               >
-                <label htmlFor="reset-password">New Password</label>
+                <label htmlFor="reset-password">
+                  {t("forms.password_reset.new")}
+                </label>
                 <input
                   value={this.state.password}
                   type="password"
                   name="password"
                   id="reset-password"
                   onChange={this.handleInputChange}
-                  placeholder="Password"
+                  placeholder={t("forms.password_reset.new_placeholder")}
                   aria-describedby="reset-password-error"
                 />
               </Form.Errorable>
@@ -108,7 +113,7 @@ export class PasswordResetContainer extends Component {
                 idForError="reset-password-confirmation-error"
               >
                 <label htmlFor="reset-password-confirmation">
-                  Confirm Password
+                  {t("forms.password_reset.confirm")}
                 </label>
                 <input
                   value={this.state.passwordConfirmation}
@@ -116,7 +121,7 @@ export class PasswordResetContainer extends Component {
                   name="passwordConfirmation"
                   id="reset-password-confirmation"
                   onChange={this.handleInputChange}
-                  placeholder="Confirm Password"
+                  placeholder={t("forms.password_reset.confirm_placeholder")}
                   aria-describedby="reset-password-confirmation-error"
                 />
               </Form.Errorable>
@@ -130,7 +135,7 @@ export class PasswordResetContainer extends Component {
                 <input
                   className="button-secondary button-secondary--with-room"
                   type="submit"
-                  value="Reset Password"
+                  value={t("forms.password_reset.submit_reset")}
                 />
               </Form.Errorable>
             </div>
@@ -141,4 +146,4 @@ export class PasswordResetContainer extends Component {
   }
 }
 
-export default connectAndFetch(PasswordResetContainer);
+export default withTranslation()(connectAndFetch(PasswordResetContainer));
