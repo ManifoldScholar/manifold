@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
+import { withTranslation } from "react-i18next";
 import ResourceCollection from "frontend/components/resource-collection";
 import { entityStoreActions } from "actions";
 import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
@@ -113,7 +114,8 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     resources: PropTypes.array,
     resourcesMeta: PropTypes.object,
     history: PropTypes.object,
-    journalBreadcrumbs: PropTypes.array
+    journalBreadcrumbs: PropTypes.array,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -207,7 +209,7 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     };
     const resourcesCrumb = {
       to: lh.link("frontendProjectResources", project.attributes.slug),
-      label: "Resources"
+      label: this.props.t("glossary.resource_other")
     };
     const collectionCrumb = resourceCollection
       ? {
@@ -247,7 +249,11 @@ export class ResourceCollectionDetailContainer extends PureComponent {
         />
 
         <HeadContent
-          title={`\u201c${resourceCollection.attributes.title}\u201d on ${settings.attributes.general.installationName}`}
+          title={`\u201c${
+            resourceCollection.attributes.title
+          }\u201d ${this.props.t("common.on")} ${
+            settings.attributes.general.installationName
+          }`}
           description={resourceCollection.attributes.description}
           image={resourceCollection.attributes.thumbnailStyles.medium}
         />
@@ -272,4 +278,6 @@ export class ResourceCollectionDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(withSettings(ResourceCollectionDetailContainer));
+export default withTranslation()(
+  connectAndFetch(withSettings(ResourceCollectionDetailContainer))
+);

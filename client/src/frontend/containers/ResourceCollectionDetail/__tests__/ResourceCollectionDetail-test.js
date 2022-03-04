@@ -25,6 +25,7 @@ describe("frontend/containers/ResourceCollectionDetail", () => {
       filterChange={$mock}
       resourceCollectionUrl={`/browse/project/${$project.id}/collection/${$resourceCollection.id}`}
       location={{ query: null }}
+      t={key => key}
     />
   ));
 
