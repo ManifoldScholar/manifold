@@ -77,7 +77,9 @@
       "draft_other": "drafts",
       "avatar": "avatar",
       "selection_one": "selection",
-      "selection_other": "selections"
+      "selection_other": "selections",
+      "result_one": "result",
+      "result_other": "results"
     },
     "common": {
       "on": "on",
@@ -178,7 +180,8 @@
     "search": {
       "title": "Search",
       "form": "Search Form",
-      "results": "Search Results"
+      "results": "Search Results",
+      "no_results": "No results were found."
     },
     "filters": {
       "featured_projects": "Featured $t(glossary.project_other)"

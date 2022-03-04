@@ -1,25 +1,17 @@
-import React, { PureComponent } from "react";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import * as Styled from "./styles";
 
-export default class SearchResultsEmpty extends PureComponent {
-  static displayName = "Search.Results.Empty";
-
-  static propTypes = {};
-
-  render() {
-    return (
-      <div className="search-results">
-        <span className="label-count">
-          <span
-            className="list-total"
-            role="status"
-            aria-live="polite"
-            aria-atomic
-          >
-            No results were found.
-          </span>
-        </span>
-      </div>
-    );
-  }
+export default function SearchResultsEmpty() {
+  const { t } = useTranslation();
+  return (
+    <Styled.Wrapper>
+      <Styled.NoResults role="status" aria-live="polite" aria-atomic>
+        {t("search.no_results")}
+      </Styled.NoResults>
+    </Styled.Wrapper>
+  );
 }
+
+SearchResultsEmpty.displayName = "Search.Results.Empty";
