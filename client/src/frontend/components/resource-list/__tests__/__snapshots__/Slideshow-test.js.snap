@@ -189,6 +189,10 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                 },
                 "no_content": "No content provided.",
                 "text_missing": "Text Missing",
+                "unauthorized": Object {
+                  "body": "You must be logged in to manage notification preferences.",
+                  "heading": "Access Denied",
+                },
                 "video_playback": Object {
                   "body": "Your browser is not able to play this video.",
                   "download": "You may download it and play it locally using the download button below.",
@@ -254,6 +258,11 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                   "view_homepage": "View group homepage",
                 },
                 "my_starred_label": "My Starred",
+                "notifications": Object {
+                  "instructions": "Edit your email notifications and subscriptions.",
+                  "submit_label": "Save Changes",
+                  "title": "Notification Settings",
+                },
                 "password_reset": Object {
                   "confirm": "Confirm Password",
                   "confirm_placeholder": "Confirm Password",
@@ -313,6 +322,7 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                     "moderator": "Moderator",
                   },
                   "style_preview": "This is what your selected annotation style will look like when viewed in the reader. Font styling and sizing may be different depending on the settings in your visibility control panel.",
+                  "title": "Edit Group Member",
                 },
               },
               "glossary": Object {
@@ -487,6 +497,14 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                   "my_notes": "My Notes + Comments",
                   "my_starred": "My Starred",
                   "projects_all": "All Projects",
+                  "public_groups": "Public Reading Groups",
+                  "reading_group": Object {
+                    "homepage_edit_header": "Edit Home Page",
+                    "homepage_edit_instructions": "Organize and edit the contents of your Reading Group’s home page. Search for new content to add. Create your own Categories and add or edit category descriptions. Move content between categories and within content types by dragging with the handle.",
+                    "search_button_label": "$t(actions.add) $t(common.content)",
+                    "search_instructions": "Search for and star the content you want to add to the home page.",
+                    "search_title": "Search + add content:",
+                  },
                   "resource_collections_all": "All Project Resource Collections",
                   "resources_all": "All Project Resources",
                 },
@@ -655,6 +673,10 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
               },
               "no_content": "No content provided.",
               "text_missing": "Text Missing",
+              "unauthorized": Object {
+                "body": "You must be logged in to manage notification preferences.",
+                "heading": "Access Denied",
+              },
               "video_playback": Object {
                 "body": "Your browser is not able to play this video.",
                 "download": "You may download it and play it locally using the download button below.",
@@ -720,6 +742,11 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                 "view_homepage": "View group homepage",
               },
               "my_starred_label": "My Starred",
+              "notifications": Object {
+                "instructions": "Edit your email notifications and subscriptions.",
+                "submit_label": "Save Changes",
+                "title": "Notification Settings",
+              },
               "password_reset": Object {
                 "confirm": "Confirm Password",
                 "confirm_placeholder": "Confirm Password",
@@ -779,6 +806,7 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                   "moderator": "Moderator",
                 },
                 "style_preview": "This is what your selected annotation style will look like when viewed in the reader. Font styling and sizing may be different depending on the settings in your visibility control panel.",
+                "title": "Edit Group Member",
               },
             },
             "glossary": Object {
@@ -953,6 +981,14 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                 "my_notes": "My Notes + Comments",
                 "my_starred": "My Starred",
                 "projects_all": "All Projects",
+                "public_groups": "Public Reading Groups",
+                "reading_group": Object {
+                  "homepage_edit_header": "Edit Home Page",
+                  "homepage_edit_instructions": "Organize and edit the contents of your Reading Group’s home page. Search for new content to add. Create your own Categories and add or edit category descriptions. Move content between categories and within content types by dragging with the handle.",
+                  "search_button_label": "$t(actions.add) $t(common.content)",
+                  "search_instructions": "Search for and star the content you want to add to the home page.",
+                  "search_title": "Search + add content:",
+                },
                 "resource_collections_all": "All Project Resource Collections",
                 "resources_all": "All Project Resources",
               },
