@@ -1,6 +1,6 @@
 import lh from "helpers/linkHandler";
 
-export const getJournalBreadcrumbs = project => {
+export const getJournalBreadcrumbs = (project, t) => {
   const issue = project.relationships?.journalIssue;
   const parentJournal = project.relationships?.journal;
   const parentVolume = issue.relationships?.journalVolume;
@@ -8,7 +8,7 @@ export const getJournalBreadcrumbs = project => {
   return [
     {
       to: lh.link("frontendJournals"),
-      label: "All Journals"
+      label: t("navigation.breadcrumbs.all_journals")
     },
     parentJournal && {
       to: lh.link("frontendJournalDetail", parentJournal.id),
@@ -16,11 +16,11 @@ export const getJournalBreadcrumbs = project => {
     },
     parentVolume && {
       to: lh.link("frontendVolumeDetail", parentJournal.id, parentVolume.id),
-      label: `Volume ${parentVolume.attributes.number}`
+      label: `${t("glossary.volume_one")} ${parentVolume.attributes.number}`
     },
     {
       to: lh.link("frontendProjectDetail", project.attributes.slug),
-      label: `Issue ${issue.attributes.number}`
+      label: `${t("glossary.issue_one")} ${issue.attributes.number}`
     }
   ].filter(Boolean);
 };
