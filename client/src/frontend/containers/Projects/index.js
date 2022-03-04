@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 import { projectsAPI } from "api";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
@@ -32,6 +33,8 @@ export default function ProjectsContainer() {
     ? false
     : !projects || !projects.length;
 
+  const { t } = useTranslation();
+
   const filterProps = useListFilters({
     onFilterChange: param => setFilters({ newState: param }),
     initialState: filters,
@@ -40,13 +43,13 @@ export default function ProjectsContainer() {
       sort: true,
       subjects,
       featured: true,
-      featuredLabel: "Featured Projects"
+      featuredLabel: t("filters.featured_projects")
     }
   });
 
   return meta ? (
     <>
-      <h1 className="screen-reader-text">All Projects</h1>
+      <h1 className="screen-reader-text">{t("pages.frontend.projects_all")}</h1>
       {showPlaceholder ? (
         <EntityCollectionPlaceholder.Projects />
       ) : (
