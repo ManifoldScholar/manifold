@@ -11,6 +11,7 @@ describe("frontend/containers/ResourceDetail/ResourceDetail", () => {
       dispatch={$dispatch}
       project={$project}
       resource={$resource}
+      t={key => key}
     />
   ));
 
