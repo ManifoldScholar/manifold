@@ -14,6 +14,7 @@ describe("frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail", 
       authentication={{}}
       match={{ params: {} }}
       location={{}}
+      t={key =>  key}
     />
   ));
   it("matches the snapshot", () => {

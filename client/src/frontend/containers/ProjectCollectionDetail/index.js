@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
+import { withTranslation } from "react-i18next";
 import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollection from "frontend/components/composed/EntityCollection";
@@ -82,7 +83,8 @@ export class ProjectCollectionDetailContainer extends Component {
     settings: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     location: PropTypes.object,
-    match: PropTypes.object
+    match: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -192,7 +194,9 @@ export class ProjectCollectionDetailContainer extends Component {
     const { socialTitle, title } = projectCollection.attributes;
     return (
       socialTitle ||
-      `\u201c${title}\u201d on ${settings.attributes.general.installationName}`
+      `\u201c${title}\u201d ${this.props.t("common.on")} ${
+        settings.attributes.general.installationName
+      }`
     );
   }
 
@@ -208,6 +212,8 @@ export class ProjectCollectionDetailContainer extends Component {
 
   render() {
     if (!this.projectCollection) return null;
+
+    const t = this.props.t;
 
     return (
       <div>
@@ -225,7 +231,7 @@ export class ProjectCollectionDetailContainer extends Component {
           breadcrumbs={[
             {
               to: lh.link("frontendProjectCollections"),
-              label: "All Project Collections"
+              label: t("navigation.breadcrumbs.all_project_collections")
             }
           ]}
         />
@@ -247,7 +253,7 @@ export class ProjectCollectionDetailContainer extends Component {
             resetState: this.initialFilterState(),
             options: {
               featured: true,
-              featuredLabel: "Featured Projects"
+              featuredLabel: t("filters.featured_projects")
             }
           }}
           paginationProps={{
@@ -261,4 +267,6 @@ export class ProjectCollectionDetailContainer extends Component {
   }
 }
 
-export default connectAndFetch(withSettings(ProjectCollectionDetailContainer));
+export default withTranslation()(
+  connectAndFetch(withSettings(ProjectCollectionDetailContainer))
+);
