@@ -59,7 +59,7 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
     breadcrumbs={
       Array [
         Object {
-          "label": "All Project Collections",
+          "label": "navigation.breadcrumbs.all_project_collections",
           "to": "/projects/project-collections",
         },
       ]
@@ -83,7 +83,7 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
         "onFilterChange": [Function],
         "options": Object {
           "featured": true,
-          "featuredLabel": "Featured Projects",
+          "featuredLabel": "filters.featured_projects",
         },
         "resetState": Object {},
       }

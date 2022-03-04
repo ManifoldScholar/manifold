@@ -199,6 +199,9 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                 "share_on_social": "Share on {{service}}",
                 "view_on_social": "View this project on {{service}}",
               },
+              "filters": Object {
+                "featured_projects": "Featured $t(glossary.project_other)",
+              },
               "forms": Object {
                 "add_to": "Add this to",
                 "category": Object {
@@ -251,6 +254,14 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                   "view_homepage": "View group homepage",
                 },
                 "my_starred_label": "My Starred",
+                "password_reset": Object {
+                  "confirm": "Confirm Password",
+                  "confirm_placeholder": "Confirm Password",
+                  "new": "New Password",
+                  "new_placeholder": "Password",
+                  "submit_reset": "Reset Password",
+                  "title": "Reset Password",
+                },
                 "reading_group": Object {
                   "course": "Course",
                   "course_end_date": "Course End Date:",
@@ -260,6 +271,7 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                     "yes": "Yes",
                   },
                   "course_start_date": "Course Start Date:",
+                  "drawer_title": "New Reading Group",
                   "invitation_code": "Invitation Code",
                   "invitation_code_buttons": Object {
                     "copy": "copy",
@@ -318,6 +330,8 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                 "creators_other": "creators",
                 "file_one": "file",
                 "file_other": "files",
+                "full_text_one": "full text",
+                "full_text_other": "full texts",
                 "group_one": "group",
                 "group_other": "groups",
                 "highlight_one": "highlight",
@@ -432,6 +446,8 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
               "navigation": Object {
                 "breadcrumbs": Object {
                   "all_journals": "All $t(glossary.journal_other)",
+                  "all_project_collections": "All $t(glossary.project_collection_other)",
+                  "all_projects": "All $t(glossary.project_other)",
                   "issues": "$t(glossary.issue_other)",
                 },
                 "browse_library": "Browse library",
@@ -467,6 +483,7 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                   "events": "Events",
                   "events_all": "All Activity",
                   "issues_all": "All Journal Issues",
+                  "my_groups": "My Reading Groups",
                   "my_notes": "My Notes + Comments",
                   "my_starred": "My Starred",
                   "projects_all": "All Projects",
@@ -501,7 +518,11 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                 "resource_collection": "This collection has no resources.",
                 "table_of_contents": "This text does not have a table of contents.",
               },
-              "search": Object {},
+              "search": Object {
+                "form": "Search Form",
+                "results": "Search Results",
+                "title": "Search",
+              },
               "tables": Object {
                 "reading_group_members": Object {
                   "headers": Object {
@@ -644,6 +665,9 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
               "share_on_social": "Share on {{service}}",
               "view_on_social": "View this project on {{service}}",
             },
+            "filters": Object {
+              "featured_projects": "Featured $t(glossary.project_other)",
+            },
             "forms": Object {
               "add_to": "Add this to",
               "category": Object {
@@ -696,6 +720,14 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                 "view_homepage": "View group homepage",
               },
               "my_starred_label": "My Starred",
+              "password_reset": Object {
+                "confirm": "Confirm Password",
+                "confirm_placeholder": "Confirm Password",
+                "new": "New Password",
+                "new_placeholder": "Password",
+                "submit_reset": "Reset Password",
+                "title": "Reset Password",
+              },
               "reading_group": Object {
                 "course": "Course",
                 "course_end_date": "Course End Date:",
@@ -705,6 +737,7 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                   "yes": "Yes",
                 },
                 "course_start_date": "Course Start Date:",
+                "drawer_title": "New Reading Group",
                 "invitation_code": "Invitation Code",
                 "invitation_code_buttons": Object {
                   "copy": "copy",
@@ -763,6 +796,8 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
               "creators_other": "creators",
               "file_one": "file",
               "file_other": "files",
+              "full_text_one": "full text",
+              "full_text_other": "full texts",
               "group_one": "group",
               "group_other": "groups",
               "highlight_one": "highlight",
@@ -877,6 +912,8 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
             "navigation": Object {
               "breadcrumbs": Object {
                 "all_journals": "All $t(glossary.journal_other)",
+                "all_project_collections": "All $t(glossary.project_collection_other)",
+                "all_projects": "All $t(glossary.project_other)",
                 "issues": "$t(glossary.issue_other)",
               },
               "browse_library": "Browse library",
@@ -912,6 +949,7 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                 "events": "Events",
                 "events_all": "All Activity",
                 "issues_all": "All Journal Issues",
+                "my_groups": "My Reading Groups",
                 "my_notes": "My Notes + Comments",
                 "my_starred": "My Starred",
                 "projects_all": "All Projects",
@@ -946,7 +984,11 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
               "resource_collection": "This collection has no resources.",
               "table_of_contents": "This text does not have a table of contents.",
             },
-            "search": Object {},
+            "search": Object {
+              "form": "Search Form",
+              "results": "Search Results",
+              "title": "Search",
+            },
             "tables": Object {
               "reading_group_members": Object {
                 "headers": Object {

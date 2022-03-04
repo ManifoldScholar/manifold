@@ -4,7 +4,7 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
 <div>
   <Connect(WithSettings('HeadContentComponent))
     description="The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew."
-    title="View “Rowan Test” Resources on Manifold"
+    title="“Rowan Test” glossary.resource_other common.on Manifold"
   />
   <RegisterBreadcrumbs
     breadcrumbs={
@@ -14,7 +14,7 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
           "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
         },
         Object {
-          "label": "Resources",
+          "label": "glossary.resource_other",
           "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resources",
         },
       ]
