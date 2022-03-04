@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
+import { withTranslation } from "react-i18next";
 import LoadingBlock from "global/components/loading-block";
 import { entityStoreActions, uiFrontendModeActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -134,14 +135,14 @@ export class ProjectResourcesContainer extends Component {
   };
 
   breadcrumbs() {
-    const { journalBreadcrumbs, project } = this.props;
+    const { journalBreadcrumbs, project, t } = this.props;
     const projectCrumb = {
       to: lh.link("frontendProject", project.attributes.slug),
       label: project.attributes.titlePlaintext
     };
     const resourcesCrumb = {
       to: lh.link("frontendProjectResources", project.attributes.slug),
-      label: "Resources"
+      label: t("glossary.resource_other")
     };
     return journalBreadcrumbs
       ? [...journalBreadcrumbs, resourcesCrumb].filter(Boolean)
@@ -149,13 +150,15 @@ export class ProjectResourcesContainer extends Component {
   }
 
   render() {
-    const { project, settings, resources, resourcesMeta } = this.props;
+    const { project, settings, resources, resourcesMeta, t } = this.props;
     if (!project) return <LoadingBlock />;
 
     return (
       <div>
         <HeadContent
-          title={`View \u201c${project.attributes.titlePlaintext}\u201d Resources on ${settings.attributes.general.installationName}`}
+          title={`\u201c${project.attributes.titlePlaintext}\u201d ${t(
+            "glossary.resource_other"
+          )} ${t("common.on")} ${settings.attributes.general.installationName}`}
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />
@@ -184,4 +187,6 @@ export class ProjectResourcesContainer extends Component {
   }
 }
 
-export default connectAndFetch(withSettings(ProjectResourcesContainer));
+export default withTranslation()(
+  connectAndFetch(withSettings(ProjectResourcesContainer))
+);
