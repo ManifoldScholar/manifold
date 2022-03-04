@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import {
   CollectionCategory,
   CollectionPlaceholder
@@ -12,6 +13,8 @@ function ReadingGroupHomepageStaticContainer({
   responses,
   refresh
 }) {
+  const { t } = useTranslation();
+
   function handleUncollect(collection) {
     if (collection.id === readingGroup.id) refresh();
   }
@@ -29,7 +32,7 @@ function ReadingGroupHomepageStaticContainer({
   const uncategorized = {
     id: "$uncategorized$",
     attributes: {
-      title: "Uncategorized"
+      title: t("common.uncategorized")
     }
   };
 

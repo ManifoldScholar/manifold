@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import ActionBox from "frontend/components/reading-group/ActionBox";
 import { CollectionEditor } from "frontend/components/collecting/reading-group";
@@ -12,6 +13,8 @@ function ReadingGroupHomepageEditContainer({
   responses,
   refresh
 }) {
+  const { t } = useTranslation();
+
   return (
     <Authorize
       entity={readingGroup}
@@ -22,23 +25,22 @@ function ReadingGroupHomepageEditContainer({
       )}
     >
       <div className="group-homepage-editor">
-        <h2 className="group-homepage-editor__heading">Edit Home Page</h2>
+        <h2 className="group-homepage-editor__heading">
+          {t("pages.frontend.reading_group.homepage_edit_header")}
+        </h2>
         <p className="group-homepage-editor__instructions">
-          Organize and edit the contents of your Reading Group’s home page.
-          Search for new content to add. Create your own Categories and add or
-          edit category descriptions. Move content between categories and within
-          content types by dragging with the handle.
+          {t("pages.frontend.reading_group.homepage_edit_instructions")}
         </p>
         <div className="group-homepage-editor__actions">
           <ActionBox
-            title="Search + add content:"
-            instructions="Search for and star the content you want to add to the home page:"
+            title={t("pages.frontend.reading_group.search_title")}
+            instructions={t("pages.frontend.reading_group.search_instructions")}
             actions={
               <a
                 href="#search"
                 className="group-page-heading__nav-button button-tertiary"
               >
-                Add content
+                {t("pages.frontend.reading_group.search_button_label")}
               </a>
             }
           />
