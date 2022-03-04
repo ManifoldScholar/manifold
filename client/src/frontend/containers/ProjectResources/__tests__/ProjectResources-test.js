@@ -19,6 +19,7 @@ describe("frontend/containers/ProjectResources/ProjectResources", () => {
       location={{ query: null }}
       settings={$settings}
       dispatch={$dispatch}
+      t={key => key}
     />
   ));
   it("matches the snapshot", () => {
