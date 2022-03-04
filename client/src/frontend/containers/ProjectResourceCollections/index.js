@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
+import { withTranslation } from "react-i18next";
 import { entityStoreActions } from "actions";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { projectsAPI, requests } from "api";
@@ -50,7 +51,8 @@ class ProjectResourceCollectionsContainer extends Component {
     resourceCollectionsMeta: PropTypes.object,
     settings: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    journalBreadcrumbs: PropTypes.array
+    journalBreadcrumbs: PropTypes.array,
+    t: PropTypes.func
   };
 
   componentWillUnmount() {
@@ -85,7 +87,7 @@ class ProjectResourceCollectionsContainer extends Component {
   }
 
   breadcrumbs() {
-    const { journalBreadcrumbs, project } = this.props;
+    const { journalBreadcrumbs, project, t } = this.props;
     const projectCrumb = {
       to: lh.link("frontendProject", project.attributes.slug),
       label: project.attributes.titlePlaintext
@@ -95,7 +97,7 @@ class ProjectResourceCollectionsContainer extends Component {
         "frontendProjectResourceCollections",
         project.attributes.slug
       ),
-      label: "Resource Collections"
+      label: t("glossary.resource_collection_other")
     };
     return journalBreadcrumbs
       ? [...journalBreadcrumbs, collectionsCrumb].filter(Boolean)
@@ -103,7 +105,7 @@ class ProjectResourceCollectionsContainer extends Component {
   }
 
   render() {
-    const { project, settings } = this.props;
+    const { project, settings, t } = this.props;
     if (!project) return <LoadingBlock />;
 
     return (
@@ -113,12 +115,16 @@ class ProjectResourceCollectionsContainer extends Component {
           isProjectSubpage
         />
         <HeadContent
-          title={`View \u201c${project.attributes.titlePlaintext}\u201d Resource Collections on ${settings.attributes.general.installationName}`}
+          title={`\u201c${project.attributes.titlePlaintext}\u201d ${t(
+            "glossary.resource_collection_other"
+          )} ${t("common.on")} ${settings.attributes.general.installationName}`}
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />
         <h1 className="screen-reader-text">
-          {`${project.attributes.titlePlaintext} Resource Collections`}
+          {`${project.attributes.titlePlaintext} ${t(
+            "glossary.resource_collection_other"
+          )}`}
         </h1>
         <RegisterBreadcrumbs breadcrumbs={this.breadcrumbs()} />
         {!this.hasCollections ? (
@@ -138,6 +144,6 @@ class ProjectResourceCollectionsContainer extends Component {
   }
 }
 
-export default connectAndFetch(
-  withSettings(ProjectResourceCollectionsContainer)
+export default withTranslation()(
+  connectAndFetch(withSettings(ProjectResourceCollectionsContainer))
 );
