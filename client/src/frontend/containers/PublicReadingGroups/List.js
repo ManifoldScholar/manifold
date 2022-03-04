@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { readingGroupsAPI } from "api";
 import { childRoutes } from "helpers/router";
 import HeadContent from "global/components/HeadContent";
@@ -32,6 +33,7 @@ function PublicReadingGroupsListContainer({ route }) {
   });
 
   const currentUser = useCurrentUser();
+  const { t } = useTranslation();
 
   const childRouteProps = {
     drawer: true,
@@ -48,7 +50,7 @@ function PublicReadingGroupsListContainer({ route }) {
 
   return readingGroups ? (
     <>
-      <HeadContent title="Public Reading Groups" appendTitle />
+      <HeadContent title={t("pages.frontend.public_groups")} appendTitle />
       <section>
         <div className="container groups-page-container">
           <GroupsHeading currentUser={currentUser} />

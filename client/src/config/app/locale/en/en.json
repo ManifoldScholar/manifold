@@ -354,7 +354,8 @@
         "resource_collections_all": "All Project Resource Collections",
         "resources_all": "All Project Resources",
         "projects_all": "All Projects",
-        "my_groups": "My Reading Groups"
+        "my_groups": "My Reading Groups",
+        "public_groups": "Public Reading Groups"
       },
       "subheaders": {
         "journal_info": "Journal info",
