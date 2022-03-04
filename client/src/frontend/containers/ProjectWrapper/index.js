@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useLocation, useParams, useRouteMatch } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useFetch, useFromStore } from "hooks";
 import { projectsAPI } from "api";
 import { RedirectToFirstMatch, childRoutes } from "helpers/router";
@@ -19,8 +20,15 @@ export default function ProjectWrapper({ route }) {
   const isHomePage = location.pathname === path;
   const settings = useFromStore("settings", "select");
 
+  const { t } = useTranslation();
+
+  const breadcrumbsCallback = useCallback(
+    () => getJournalBreadcrumbs(project, t),
+    [project, t]
+  );
+
   const journalBreadcrumbs = project?.attributes?.isJournalIssue
-    ? getJournalBreadcrumbs(project)
+    ? breadcrumbsCallback()
     : null;
 
   return (
