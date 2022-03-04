@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import mapValues from "lodash/mapValues";
 import withProjectContext from "hoc/withProjectContext";
 import Authorize from "hoc/Authorize";
+import { withTranslation } from "react-i18next";
 
 const { request } = entityStoreActions;
 
@@ -18,7 +19,8 @@ export class SubscriptionsContainer extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
-    authentication: PropTypes.object
+    authentication: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -74,13 +76,14 @@ export class SubscriptionsContainer extends Component {
   };
 
   render() {
+    const t = this.props.t;
     return (
       <Authorize
         kind="any"
         failureRedirect={lh.link("frontendLogin")}
         failureNotification={{
-          heading: "Access Denied.",
-          body: "You must be logged in to manage notification preferences.",
+          heading: t("errors.unauthorized.heading"),
+          body: t("errors.unauthorized.body"),
           level: 2
         }}
       >
@@ -94,9 +97,9 @@ export class SubscriptionsContainer extends Component {
               onSubmit={this.updateUser}
             >
               <h1 className="form-heading">
-                Notification Settings
+                {t("forms.notifications.title")}
                 <span className="instructions">
-                  Edit your email notifications and subscriptions.
+                  {t("forms.notifications.instructions")}
                 </span>
               </h1>
               <Preferences.NotificationsForm
@@ -112,7 +115,7 @@ export class SubscriptionsContainer extends Component {
                   <input
                     className="button-secondary button-secondary--with-room"
                     type="submit"
-                    value="Save Changes"
+                    value={t("forms.notifications.submit_label")}
                   />
                 </div>
               </div>
@@ -124,6 +127,8 @@ export class SubscriptionsContainer extends Component {
   }
 }
 
-export default connect(SubscriptionsContainer.mapStateToProps)(
-  withProjectContext(SubscriptionsContainer)
+export default withTranslation()(
+  connect(SubscriptionsContainer.mapStateToProps)(
+    withProjectContext(SubscriptionsContainer)
+  )
 );

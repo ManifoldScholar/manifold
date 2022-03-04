@@ -182,7 +182,11 @@
         "body": "Your browser is not able to play this video.",
         "download": "You may download it and play it locally using the download button below."
       },
-      "audio_playback": "{{ error }}<1/>This audio file is not playable in your browser.<3/><4/>Click the download button to listen to the file on your device."
+      "audio_playback": "{{ error }}<1/>This audio file is not playable in your browser.<3/><4/>Click the download button to listen to the file on your device.",
+      "unauthorized": {
+        "heading": "Access Denied",
+        "body": "You must be logged in to manage notification preferences."
+      }
     },
     "placeholders": {
       "link": "Link",
@@ -318,6 +322,11 @@
         "confirm": "Confirm Password",
         "confirm_placeholder": "Confirm Password",
         "submit_reset": "Reset Password"
+      },
+      "notifications": {
+        "title": "Notification Settings",
+        "instructions": "Edit your email notifications and subscriptions.",
+        "submit_label": "Save Changes"
       }
     },
     "tables": {

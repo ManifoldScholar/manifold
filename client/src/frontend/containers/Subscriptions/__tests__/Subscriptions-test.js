@@ -19,6 +19,7 @@ describe("frontend/containers/Subscriptions", () => {
     <SubscriptionsContainer
       authentication={$authentication}
       dispatch={$dispatch}
+      t={key => key}
     />
   ));
 
