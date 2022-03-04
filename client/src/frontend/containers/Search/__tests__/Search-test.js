@@ -13,6 +13,7 @@ describe("frontend/containers/Search/Search", () => {
       history={fixtures.history()}
       location={{}}
       match={{}}
+      t={key => key}
     />
   ));
 
