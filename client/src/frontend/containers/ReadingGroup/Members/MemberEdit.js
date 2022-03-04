@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { readingGroupMembershipsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import Navigation from "backend/components/navigation";
@@ -17,6 +18,7 @@ function ReadingGroupMemberEditContainer({
   onEditSuccess
 }) {
   const { membershipId } = useParams();
+  const { t } = useTranslation();
 
   const { data: membership } = useFetch({
     request: [readingGroupMembershipsAPI.show, membershipId]
@@ -29,12 +31,12 @@ function ReadingGroupMemberEditContainer({
   return membership ? (
     <section>
       <Navigation.DrawerHeader
-        title="Edit Group Member"
+        title={t("forms.reading_group_member.title")}
         buttons={[
           {
             onClick: () => onRemoveClick(membership),
             icon: "delete24",
-            label: "Delete",
+            label: t("actions.delete"),
             className: "utility-button__icon utility-button__icon--notice"
           }
         ]}

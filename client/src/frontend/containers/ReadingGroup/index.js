@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { readingGroupsAPI } from "api";
 import { useParams, useHistory, useLocation } from "react-router-dom";
 import { childRoutes } from "helpers/router";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import Drawer from "global/containers/drawer";
@@ -16,6 +17,7 @@ export default function ReadingGroup({ route }) {
   const { id } = useParams();
   const history = useHistory();
   const location = useLocation();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const settings = useFromStore("settings", "select");
@@ -27,9 +29,29 @@ export default function ReadingGroup({ route }) {
     dependencies: [fetchVersion]
   });
 
+  const breadcrumbProps = useMemo(() => {
+    if (readingGroup?.attributes?.currentUserRole === "none")
+      return {
+        breadcrumbs: [
+          {
+            to: lh.link("frontendPublicReadingGroups"),
+            label: t("pages.frontend.public_groups")
+          }
+        ]
+      };
+    return {
+      breadcrumbs: [
+        {
+          to: lh.link("frontendMyReadingGroups"),
+          label: t("pages.frontend.my_groups")
+        }
+      ]
+    };
+  }, [readingGroup?.attributes?.currentUserRole, t]);
+
   if (!readingGroup) return null;
 
-  const { name: groupName, currentUserRole } = readingGroup.attributes ?? {};
+  const { name: groupName } = readingGroup.attributes ?? {};
 
   const showSettingsDrawer = location.hash === "#settings";
   const showSearchDialog = location.hash === "#search";
@@ -68,26 +90,6 @@ export default function ReadingGroup({ route }) {
   const onCloseSearch = () => {
     setFetchVersion(prev => prev + 1);
     handleClose();
-  };
-
-  const breadcrumbProps = () => {
-    if (currentUserRole === "none")
-      return {
-        breadcrumbs: [
-          {
-            to: lh.link("frontendPublicReadingGroups"),
-            label: "Public Reading Groups"
-          }
-        ]
-      };
-    return {
-      breadcrumbs: [
-        {
-          to: lh.link("frontendMyReadingGroups"),
-          label: "My Reading Groups"
-        }
-      ]
-    };
   };
 
   return (
