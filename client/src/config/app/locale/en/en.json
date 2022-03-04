@@ -49,7 +49,9 @@
       "group_one": "group",
       "group_other": "groups",
       "creator_one": "creator",
-      "creators_other": "creators"
+      "creators_other": "creators",
+      "full_text_one": "full text",
+      "full_text_other": "full texts"
     },
     "common": {
       "on": "on",
@@ -108,7 +110,11 @@
       "activate": "Activate",
       "join": "Join"
     },
-    "search": {},
+    "search": {
+      "title": "Search",
+      "form": "Search Form",
+      "results": "Search Results"
+    },
     "filters": {
       "featured_projects": "Featured $t(glossary.project_other)"
     },
