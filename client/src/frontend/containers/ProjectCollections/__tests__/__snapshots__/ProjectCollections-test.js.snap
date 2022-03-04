@@ -10,7 +10,7 @@ exports[`frontend/containers/ProjectCollections/ProjectCollections matches the s
     breadcrumbs={
       Array [
         Object {
-          "label": "All Projects",
+          "label": "navigation.breadcrumbs.all_projects",
           "to": "/projects/all",
         },
       ]
@@ -19,7 +19,7 @@ exports[`frontend/containers/ProjectCollections/ProjectCollections matches the s
   <h1
     className="screen-reader-text"
   >
-    Project Collections
+    glossary.project_collection_other
   </h1>
   <Frontend.Composed.EntityCollection.ProjectCollectionSummary
     bgColor="white"
