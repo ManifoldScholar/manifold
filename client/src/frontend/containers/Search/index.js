@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { withTranslation } from "react-i18next";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
 import PropTypes from "prop-types";
@@ -18,7 +19,8 @@ class SearchContainer extends PureComponent {
     setQueryState: PropTypes.func.isRequired,
     setPage: PropTypes.func.isRequired,
     text: PropTypes.object,
-    section: PropTypes.object
+    section: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -27,24 +29,25 @@ class SearchContainer extends PureComponent {
   }
 
   get facets() {
+    const t = this.props.t;
     return [
-      { label: "Projects", value: "Project" },
-      { label: "Resources", value: "Resource" },
-      { label: "Texts", value: "Text" },
-      { label: "Annotations", value: "Annotation" },
-      { label: "Full Text", value: "TextSection" }
+      { label: t("glossary.project_other"), value: "Project" },
+      { label: t("glossary.resource_other"), value: "Resource" },
+      { label: t("glossary.text_other"), value: "Text" },
+      { label: t("glossary.annotation_other"), value: "Annotation" },
+      { label: t("glossary.full_text_other"), value: "TextSection" }
     ];
   }
 
   render() {
-    const results = this.props.results;
+    const { results, t } = this.props;
 
     return (
       <div>
-        <h1 className="screen-reader-text">Search</h1>
+        <h1 className="screen-reader-text">{t("search.title")}</h1>
         <div className="search-form-frontend">
           <div className="container">
-            <h2 className="screen-reader-text">Search Form</h2>
+            <h2 className="screen-reader-text">{t("search.form")}</h2>
             <SearchQuery.Form
               initialState={{
                 keyword: ""
@@ -58,7 +61,7 @@ class SearchContainer extends PureComponent {
         {results && (
           <div className="search-results-frontend">
             <div className="container">
-              <h2 className="screen-reader-text">Search Results</h2>
+              <h2 className="screen-reader-text">{t("search.results")}</h2>
               <SearchResults.List
                 pagination={this.props.resultsMeta.pagination}
                 paginationClickHandler={this.props.setPage}
@@ -73,4 +76,4 @@ class SearchContainer extends PureComponent {
   }
 }
 
-export default withSearch(SearchContainer);
+export default withTranslation()(withSearch(SearchContainer));
