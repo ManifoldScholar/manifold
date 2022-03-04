@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
+import { withTranslation } from "react-i18next";
 import Resource from "frontend/components/resource";
 import { entityStoreActions, fatalErrorActions } from "actions";
 import { select } from "utils/entityUtils";
@@ -108,7 +109,8 @@ export class ResourceDetailContainer extends PureComponent {
       journalBreadcrumbs,
       resourceCollection,
       project,
-      resource
+      resource,
+      t
     } = this.props;
     const isCollectionMember = !!resourceCollection?.relationships?.resources?.find(
       r => r.id === resource.id
@@ -119,7 +121,7 @@ export class ResourceDetailContainer extends PureComponent {
     };
     const resourcesCrumb = {
       to: lh.link("frontendProjectResources", project.attributes.slug),
-      label: "Resources"
+      label: t("glossary.resource_other")
     };
     const collectionCrumb = isCollectionMember
       ? {
@@ -144,7 +146,7 @@ export class ResourceDetailContainer extends PureComponent {
   }
 
   render() {
-    const { project, resource, settings } = this.props;
+    const { project, resource, settings, t } = this.props;
 
     if (!project || !resource) {
       return <LoadingBlock />;
@@ -158,7 +160,9 @@ export class ResourceDetailContainer extends PureComponent {
         />
         <CheckFrontendMode debugLabel="ResourceDetail" isProjectSubpage />
         <HeadContent
-          title={`\u201c${resource.attributes.titlePlaintext}\u201d Resource on ${settings.attributes.general.installationName}`}
+          title={`\u201c${resource.attributes.titlePlaintext}\u201d ${t(
+            "glossary.resource_one"
+          )} ${t("common.on")} ${settings.attributes.general.installationName}`}
           description={resource.attributes.captionPlaintext}
           image={
             resource.attributes.attachmentStyles.mediumSquare ||
@@ -182,4 +186,6 @@ export class ResourceDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(withSettings(ResourceDetailContainer));
+export default withTranslation()(
+  connectAndFetch(withSettings(ResourceDetailContainer))
+);
