@@ -11,6 +11,7 @@ describe("frontend/containers/ProjectCollections/ProjectCollections", () => {
       match={{ params: {} }}
       fetchData={jest.fn}
       location={{}}
+      t={key => key}
     />
   ));
   it("matches the snapshot", () => {

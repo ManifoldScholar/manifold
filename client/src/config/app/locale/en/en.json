@@ -140,7 +140,8 @@
       "breadcrumbs": {
         "all_journals": "All $t(glossary.journal_other)",
         "issues": "$t(glossary.issue_other)",
-        "all_project_collections": "All $t(glossary.project_collection_other)"
+        "all_project_collections": "All $t(glossary.project_collection_other)",
+        "all_projects": "All $t(glossary.project_other)"
       },
       "library_links": "Library Links",
       "browse_library": "Browse library",

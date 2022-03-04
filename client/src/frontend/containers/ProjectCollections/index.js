@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import connectAndFetch from "utils/connectAndFetch";
 import { commonActions } from "actions/helpers";
@@ -64,7 +65,8 @@ export class ProjectsCollectionsContainer extends Component {
     history: PropTypes.object,
     dispatch: PropTypes.func,
     fetchData: PropTypes.func.isRequired,
-    projectCollectionsMeta: PropTypes.object
+    projectCollectionsMeta: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -144,15 +146,21 @@ export class ProjectsCollectionsContainer extends Component {
   }
 
   render() {
+    const t = this.props.t;
     return (
       <>
         <CheckFrontendMode debugLabel="ProjectCollections" isProjectSubpage />
         <RegisterBreadcrumbs
           breadcrumbs={[
-            { to: lh.link("frontendProjectsAll"), label: "All Projects" }
+            {
+              to: lh.link("frontendProjectsAll"),
+              label: t("navigation.breadcrumbs.all_projects")
+            }
           ]}
         />
-        <h1 className="screen-reader-text">Project Collections</h1>
+        <h1 className="screen-reader-text">
+          {t("glossary.project_collection_other")}
+        </h1>
         {this.renderProjectCollections()}
         {this.showPagination && (
           <section>
@@ -170,4 +178,4 @@ export class ProjectsCollectionsContainer extends Component {
   }
 }
 
-export default connectAndFetch(ProjectsCollectionsContainer);
+export default withTranslation()(connectAndFetch(ProjectsCollectionsContainer));
