@@ -4,8 +4,8 @@ exports[`frontend/containers/Subscriptions matches the snapshot 1`] = `
 <Connect(withRouter(AuthorizeComponent))
   failureNotification={
     Object {
-      "body": "You must be logged in to manage notification preferences.",
-      "heading": "Access Denied.",
+      "body": "errors.unauthorized.body",
+      "heading": "errors.unauthorized.heading",
       "level": 2,
     }
   }
@@ -27,11 +27,11 @@ exports[`frontend/containers/Subscriptions matches the snapshot 1`] = `
         <h1
           className="form-heading"
         >
-          Notification Settings
+          forms.notifications.title
           <span
             className="instructions"
           >
-            Edit your email notifications and subscriptions.
+            forms.notifications.instructions
           </span>
         </h1>
         <NotificationsForm
@@ -48,7 +48,7 @@ exports[`frontend/containers/Subscriptions matches the snapshot 1`] = `
             <input
               className="button-secondary button-secondary--with-room"
               type="submit"
-              value="Save Changes"
+              value="forms.notifications.submit_label"
             />
           </div>
         </div>
