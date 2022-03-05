@@ -181,7 +181,9 @@
       "title": "Search",
       "form": "Search Form",
       "results": "Search Results",
-      "no_results": "No results were found."
+      "no_results": "No results were found.",
+      "show_all_excerpts": "Show all excerpts",
+      "show_only_relevant": "Only show most relevant excerpts"
     },
     "filters": {
       "featured_projects": "Featured $t(glossary.project_other)"

@@ -6,7 +6,6 @@ import page from "./page";
 import project from "./project";
 import resource from "./resource";
 import resourceCollection from "./resourceCollection";
-import search from "./search";
 import subscriptions from "./subscriptions";
 import text from "./text";
 
@@ -17,7 +16,6 @@ export default `
   ${page}
   ${project}
   ${resourceCollection}
-  ${search}
   ${text}
   ${subscriptions}
   ${resource}
