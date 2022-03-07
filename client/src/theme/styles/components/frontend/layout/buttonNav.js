@@ -15,6 +15,7 @@ export default `
 
     &--stack {
       flex-direction: column;
+      gap: 1.125rem;
     }
 
     .button-icon-primary {

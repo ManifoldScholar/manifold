@@ -5,7 +5,7 @@ import { resourceCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, meta, loaded } from "utils/entityUtils";
 import Overlay from "global/components/Overlay";
-import Notation from "reader/components/notation";
+import EntityCollection from "frontend/components/composed/EntityCollection";
 import lh from "helpers/linkHandler";
 
 const { request, flush } = entityStoreActions;
@@ -77,19 +77,26 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
   };
 
   render() {
-    if (!this.props.resourceCollection || !this.props.slideshowResources)
-      return null;
+    const {
+      resourceCollection,
+      slideshowResources,
+      slideshowResourcesMeta,
+      dispatch
+    } = this.props;
+
+    if (!resourceCollection || !slideshowResources) return null;
+
     return (
       <Overlay
         closeCallback={this.handleClose}
         appearance="overlay-full bg-neutral90"
       >
         <div className="notation-detail">
-          <Notation.ResourceCollection.Detail
-            dispatch={this.props.dispatch}
-            resourceCollection={this.props.resourceCollection}
-            slideshowResources={this.props.slideshowResources}
-            slideshowPagination={this.props.slideshowResourcesMeta.pagination}
+          <EntityCollection.ProjectResourceCollectionSlideshow
+            resourceCollection={resourceCollection}
+            slideshowResources={slideshowResources}
+            slideshowResourcesMeta={slideshowResourcesMeta}
+            dispatch={dispatch}
             handleClose={this.handleClose}
           />
         </div>

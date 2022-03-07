@@ -2,11 +2,9 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { withTranslation } from "react-i18next";
-import ResourceCollection from "frontend/components/resource-collection";
 import { entityStoreActions } from "actions";
 import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
 import { resourceCollectionsAPI, requests } from "api";
-import HeadContent from "global/components/HeadContent";
 import queryString from "query-string";
 import debounce from "lodash/debounce";
 import omitBy from "lodash/omitBy";
@@ -15,11 +13,14 @@ import lh from "helpers/linkHandler";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import withSettings from "hoc/withSettings";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
+import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
+import EntityCollection from "frontend/components/composed/EntityCollection";
 
 const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
+const PAGINATION_TARGET = "collection-list-header";
 
 export class ResourceCollectionDetailContainer extends PureComponent {
   static fetchCollection(id, dispatch) {
@@ -110,7 +111,6 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     slideshowResourcesMeta: PropTypes.object,
     project: PropTypes.object,
     resourceCollection: PropTypes.object,
-    settings: PropTypes.object.isRequired,
     resources: PropTypes.array,
     resourcesMeta: PropTypes.object,
     history: PropTypes.object,
@@ -136,7 +136,7 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     this.flushStoreRequests();
   }
 
-  initialState(init) {
+  initialState(init = {}) {
     const filter = omitBy(init, (vIgnored, k) => k === "page");
 
     return {
@@ -181,7 +181,11 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     if (pageParam !== 1) params.page = pageParam;
 
     const search = queryString.stringify(params);
-    this.props.history.push({ pathname, search });
+    this.props.history.push({
+      pathname,
+      search,
+      hash: `#${PAGINATION_TARGET}`
+    });
   }
 
   filterChange = filter => {
@@ -227,18 +231,26 @@ export class ResourceCollectionDetailContainer extends PureComponent {
   }
 
   render() {
-    const { project, resourceCollection, settings } = this.props;
-    const filter = this.state.filter;
-    const initialFilter = filter || null;
+    const {
+      project,
+      resourceCollection,
+      resources,
+      resourcesMeta,
+      slideshowResources,
+      slideshowResourcesMeta,
+      dispatch
+    } = this.props;
+
+    const filterState = Object.fromEntries(
+      Object.entries(this.state.filter).filter(
+        ([key]) => !key.includes("collection_order")
+      )
+    );
+
     if (!project || !resourceCollection) return null;
 
-    const resourceCollectionUrl = lh.link(
-      "frontendProjectResourceCollection",
-      project.attributes.slug,
-      resourceCollection.attributes.slug
-    );
     return (
-      <div>
+      <>
         <EventTracker
           event={EVENTS.VIEW_RESOURCE}
           resource={this.props.resourceCollection}
@@ -247,33 +259,28 @@ export class ResourceCollectionDetailContainer extends PureComponent {
           debugLabel="ResourceCollectionDetail"
           isProjectSubpage
         />
-
-        <HeadContent
-          title={`\u201c${
-            resourceCollection.attributes.title
-          }\u201d ${this.props.t("common.on")} ${
-            settings.attributes.general.installationName
-          }`}
-          description={resourceCollection.attributes.description}
-          image={resourceCollection.attributes.thumbnailStyles.medium}
-        />
+        <EntityHeadContent entity={resourceCollection} parentEntity={project} />
         <RegisterBreadcrumbs breadcrumbs={this.breadcrumbs()} />
-        {this.props.slideshowResources && this.props.resources ? (
-          <ResourceCollection.Detail
-            dispatch={this.props.dispatch}
-            project={this.props.project}
-            slideshowResources={this.props.slideshowResources}
-            slideshowPagination={this.props.slideshowResourcesMeta.pagination}
-            collectionResources={this.props.resources}
-            resourceCollectionPagination={this.props.resourcesMeta.pagination}
-            resourceCollectionPaginationHandler={this.pageChangeHandlerCreator}
-            resourceCollection={this.props.resourceCollection}
-            resourceCollectionUrl={resourceCollectionUrl}
-            filterChange={this.filterChange}
-            initialFilterState={initialFilter}
-          />
-        ) : null}
-      </div>
+        <EntityCollection.ProjectResourceCollectionDetail
+          resourceCollection={resourceCollection}
+          resources={resources}
+          project={project}
+          meta={resourcesMeta}
+          slideshowResources={slideshowResources}
+          slideshowResourcesMeta={slideshowResourcesMeta}
+          dispatch={dispatch}
+          paginationProps={{
+            paginationClickHandler: this.pageChangeHandlerCreator,
+            paginationTarget: `#${PAGINATION_TARGET}`
+          }}
+          filterProps={{
+            onFilterChange: this.filterChange,
+            initialState: filterState,
+            resetState: {}
+          }}
+          listHeaderId={PAGINATION_TARGET}
+        />
+      </>
     );
   }
 }

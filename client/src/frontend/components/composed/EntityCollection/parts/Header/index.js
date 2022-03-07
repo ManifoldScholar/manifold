@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Collecting from "frontend/components/collecting";
 import { containerWidth } from "theme/styles/variables/layout";
 import * as Styled from "./styles";
 
@@ -20,42 +21,55 @@ function Header({
   icon,
   IconComponent,
   description,
+  DescriptionComponent,
   image,
+  ImageComponent,
   headerLayout,
-  headerLink
+  headerWidth = "auto",
+  headerLink,
+  collectingProps
 }) {
   if (!title) return null;
 
-  /* eslint-disable no-nested-ternary */
-  const layout =
-    !image && !description
-      ? "title_only"
-      : !image
-      ? "title_description"
-      : headerLayout;
-  /* eslint-disable no-nested-ternary */
+  const hasImage = image || ImageComponent;
+  const hasDescription = description || DescriptionComponent;
+
+  function getValidatedLayout() {
+    if (!hasImage && !hasDescription) return "title_only";
+    if (!hasImage && hasDescription) return "title_description";
+    return headerLayout || "title_image";
+  }
+
+  const layout = getValidatedLayout();
 
   return (
-    <Styled.Header $layout={layout}>
+    <Styled.Header $layout={layout} $width={headerWidth}>
       <Styled.TitleAndIcon>
         {IconComponent && <Styled.IconComponent as={IconComponent} />}
         {!IconComponent && icon && <Styled.Icon size={60} icon={icon} />}
         <Styled.TitleLink to={headerLink}>
           <Styled.Title>{title}</Styled.Title>
         </Styled.TitleLink>
+        {!!collectingProps && (
+          <Styled.ToggleWrapper>
+            <Collecting.Toggle {...collectingProps} />
+          </Styled.ToggleWrapper>
+        )}
       </Styled.TitleAndIcon>
       {description && (
         <Styled.Description dangerouslySetInnerHTML={{ __html: description }} />
       )}
+      {DescriptionComponent && <Styled.Description as={DescriptionComponent} />}
       {image && (
         <Styled.Image
           src={image}
           alt=""
-          width={getImageWidthAttr(headerLayout)}
+          width={getImageWidthAttr(layout)}
           height={imageSize}
-          $layout={headerLayout}
+          $layout={layout}
         />
       )}
+      {ImageComponent && <Styled.ImageComponent as={ImageComponent} />}
     </Styled.Header>
   );
 }
@@ -67,9 +81,13 @@ export const headerProps = {
   icon: PropTypes.string,
   IconComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   description: PropTypes.string,
+  DescriptionComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   image: PropTypes.string,
+  ImageComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   headerLayout: PropTypes.string,
-  headerLink: PropTypes.string
+  headerLink: PropTypes.string,
+  headerWidth: PropTypes.string,
+  collectingProps: PropTypes.object
 };
 
 Header.propTypes = headerProps;
