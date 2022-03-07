@@ -15,6 +15,6 @@ export function getHeaderLayout(collection) {
   const { heroLayout, heroStyles, descriptionFormatted: description } =
     collection?.attributes ?? {};
   if (heroLayout && heroStyles) return heroLayout;
-  if (heroStyles?.largeLandscape) return "wide_inset";
+  if (heroStyles?.largeLandscape) return "square_inset";
   return description ? "title_description" : "title_only";
 }

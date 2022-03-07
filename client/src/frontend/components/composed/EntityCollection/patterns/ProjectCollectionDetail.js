@@ -22,8 +22,8 @@ function ProjectCollectionDetailEntityCollection({
     title,
     descriptionFormatted: description
   } = projectCollection.attributes;
-  const image = getHeroImage(projectCollection);
   const headerLayout = getHeaderLayout(projectCollection);
+  const image = getHeroImage(headerLayout, projectCollection);
   const showPagination = !isEmpty(projectsMeta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(projectsMeta) && !isEmpty(filterProps);
 
