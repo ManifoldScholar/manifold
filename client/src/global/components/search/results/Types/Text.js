@@ -50,7 +50,7 @@ function SearchResultsTypeText({ result, highlightedAttribute }) {
           entity={model}
           width="100%"
           height={null}
-          $isSvg={!!attributes?.coverStyles?.smallPortrait}
+          $isSvg={!attributes?.coverStyles?.smallPortrait}
         />
       }
       meta={

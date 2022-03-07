@@ -29,24 +29,6 @@ export const Result = styled.li`
   & + & {
     border-top: 1px solid var(--color-neutral-ui-dull-dark);
   }
-
-  img.search-result__avatar {
-    border: 2px solid var(--color-base-neutral50);
-    border-radius: 50%;
-  }
-
-  .search-result__avatar svg {
-    position: relative;
-    left: -6px;
-    width: 68px;
-    max-width: 68px;
-    height: 68px;
-  }
-
-  svg.search-result--figure-narrow-svg {
-    max-width: 76px;
-    margin-left: -10px;
-  }
 `;
 
 export const Inner = styled.article`

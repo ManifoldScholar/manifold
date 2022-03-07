@@ -24,7 +24,9 @@ export const AnnotationTitle = styled.span`
 export const IconThumbnail = styled(EntityThumbnail.Text, transientOptions)`
   ${({ $isSvg }) =>
     $isSvg &&
-    `max-width: 76px;
-    margin-inline-start: -10px;
+    `&& {
+      max-width: 76px;
+      margin-inline-start: -10px;
+    }
   `}
 `;

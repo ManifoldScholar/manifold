@@ -61,7 +61,7 @@ function SearchResultsTypeTextSection({ result, highlightedAttribute }) {
           entity={model}
           width="100%"
           height={null}
-          $isSvg={!!model.attributes?.coverStyles?.smallPortrait}
+          $isSvg={!model.attributes?.coverStyles?.smallPortrait}
         />
       }
     />
