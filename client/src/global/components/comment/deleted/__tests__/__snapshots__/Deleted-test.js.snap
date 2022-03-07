@@ -22,7 +22,7 @@ exports[`global/components/comment/deleted matches the snapshot 1`] = `
       </h4>
     </div>
   </section>
-  <Connect(CommentThread)
+  <withI18nextTranslation(Connect(CommentThread))
     parentId="AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
     subject={
       Object {

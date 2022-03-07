@@ -13,7 +13,7 @@ exports[`global/containers/comment/Editor matches the snapshot 1`] = `
       <button
         onClick={[Function]}
       >
-        Login to post a comment
+        placeholders.comments.unauthenticated
       </button>
     </div>
   </Connect(withRouter(AuthorizeComponent))>

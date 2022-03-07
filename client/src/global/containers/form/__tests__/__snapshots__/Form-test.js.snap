@@ -3,7 +3,7 @@
 exports[`global/containers/form/Form matches the snapshot 1`] = `
 <div>
   <Prompt
-    message="You may have unsaved changes. Do you want to leave without saving your changes?"
+    message="messages.unsaved_changes"
     when={false}
   />
   <form

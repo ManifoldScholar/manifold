@@ -19,6 +19,7 @@ describe("global/containers/form/Form", () => {
       create={$createMock}
       update={$updateMock}
       name="test"
+      t={key => key}
     />
   ));
   it("matches the snapshot", () => {
