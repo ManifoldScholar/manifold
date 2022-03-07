@@ -12,6 +12,8 @@ import ProjectsSummary from "./patterns/ProjectsSummary";
 import ProjectCollectionDetail from "./patterns/ProjectCollectionDetail";
 import ProjectCollectionSummary from "./patterns/ProjectCollectionSummary";
 import ProjectResources from "./patterns/ProjectResources";
+import ProjectResourceCollectionDetail from "./patterns/ProjectResourceCollectionDetail";
+import ProjectResourceCollectionSlideshow from "./patterns/ProjectResourceCollectionSlideshow";
 import ProjectResourceCollections from "./patterns/ProjectResourceCollections";
 import ReaderFullNotes from "./patterns/ReaderFullNotes";
 
@@ -30,6 +32,8 @@ export default {
   ProjectCollectionDetail,
   ProjectCollectionSummary,
   ProjectResources,
+  ProjectResourceCollectionDetail,
+  ProjectResourceCollectionSlideshow,
   ProjectResourceCollections,
   ReaderFullNotes
 };

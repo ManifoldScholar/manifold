@@ -1,6 +1,5 @@
 import {
   respond,
-  containerPrototype,
   utilityPrimary,
   buttonUnstyled,
   transparentize
@@ -13,10 +12,6 @@ export default `
   .resource-slideshow {
     --focus-color: var(--color-interaction-light);
     --hover-color: var(--color-interaction-light);
-
-    padding-bottom: 38px;
-
-    ${respond(`${containerPrototype}`, 60)}
 
     &__figure {
       figure {

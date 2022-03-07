@@ -14,9 +14,13 @@ function EntityCollection({
   IconComponent,
   title,
   description,
+  DescriptionComponent,
   image,
+  ImageComponent,
   headerLayout,
+  headerWidth,
   headerLink,
+  collectingProps,
   BodyComponent,
   FooterComponent,
   countProps,
@@ -43,9 +47,13 @@ function EntityCollection({
           icon={icon}
           IconComponent={IconComponent}
           description={description}
+          DescriptionComponent={DescriptionComponent}
           image={image}
+          ImageComponent={ImageComponent}
           headerLayout={headerLayout}
+          headerWidth={headerWidth}
           headerLink={headerLink}
+          collectingProps={collectingProps}
         />
         {filterProps && <ListFilters {...filterProps} />}
         {!isEmpty(countProps) && (
@@ -75,7 +83,6 @@ EntityCollection.displayName = "Frontend.Composed.EntityCollection";
 
 EntityCollection.propTypes = {
   BodyComponent: PropTypes.func.isRequired,
-  IconComponent: PropTypes.node,
   FooterComponent: PropTypes.func,
   countProps: shapes.count,
   paginationProps: shapes.pagination,

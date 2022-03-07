@@ -1,9 +1,5 @@
-import Cover from "./Cover/index";
-import Detail from "./Detail/index";
-import Title from "./Title";
+import Cover from "./Cover";
 
 export default {
-  Cover,
-  Detail,
-  Title
+  Cover
 };

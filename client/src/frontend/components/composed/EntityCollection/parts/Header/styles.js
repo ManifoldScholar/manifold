@@ -33,6 +33,17 @@ function getGridTemplateAreas({ $layout }) {
         "title"
         "description"
       `;
+    case "title_description_image":
+      return `
+        "title"
+        "description"
+        "image"
+      `;
+    case "title_image":
+      return `
+        "title"
+        "image"
+      `;
     default:
       return `
         "title"
@@ -73,6 +84,7 @@ function getImageStyles({ $layout }) {
 
 export const Header = styled("header", transientOptions)`
   flex-grow: 999;
+  flex-basis: ${({ $width }) => $width};
   display: grid;
   grid-template-areas: ${getGridTemplateAreas};
   grid-template-columns: 100%;
@@ -142,6 +154,15 @@ export const Title = styled.h2`
   }
 `;
 
+export const ToggleWrapper = styled.span`
+  ${Icon} ~ &,
+  ${IconComponent} ~ & {
+    transform: translateY(10px);
+
+    ${respond(`transform: translateY(14px)`, 80)}
+  }
+`;
+
 export const Description = styled.div`
   max-width: 560px;
   grid-area: description;
@@ -158,4 +179,8 @@ export const Image = styled.img`
   object-fit: cover;
   object-position: center;
   ${getImageStyles}
+`;
+
+export const ImageComponent = styled.div`
+  grid-area: image;
 `;

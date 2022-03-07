@@ -14,7 +14,9 @@ function EntityHeadContent({ entity, type, parentEntity }) {
     socialDescription,
     socialImageStyles,
     titlePlaintext,
+    title,
     descriptionPlaintext,
+    description,
     heroStyles,
     number
   } = entity.attributes;
@@ -26,27 +28,28 @@ function EntityHeadContent({ entity, type, parentEntity }) {
     heroStyles: parentHeroStyles
   } = parentEntity?.attributes ?? {};
 
-  const title = () => {
+  const getTitle = () => {
     if (socialTitle) return socialTitle;
     const titleOrNum = (() => {
       if (parentTitle) {
         if (number) return `${parentTitle}: ${type} ${number}`;
-        return `${parentTitle}: ${titlePlaintext}`;
+        return `${parentTitle}: ${titlePlaintext || title}`;
       }
-      return titlePlaintext;
+      return titlePlaintext || title;
     })();
     return `\u201c${titleOrNum}\u201d ${t("common.on")} ${installationName}`;
   };
 
-  const description = () => {
+  const getDescription = () => {
     if (socialDescription) return socialDescription;
     if (descriptionPlaintext) return descriptionPlaintext;
+    if (description) return description;
     if (parentSocialDescription) return parentSocialDescription;
     if (parentDescription) return parentDescription;
     return null;
   };
 
-  const image = () => {
+  const getImage = () => {
     if (socialImageStyles?.mediumLandscape)
       return socialImageStyles.mediumLandscape;
     if (heroStyles?.mediumLandscape) return heroStyles.mediumLandscape;
@@ -58,7 +61,11 @@ function EntityHeadContent({ entity, type, parentEntity }) {
   };
 
   return (
-    <HeadContent title={title()} description={description()} image={image()} />
+    <HeadContent
+      title={getTitle()}
+      description={getDescription()}
+      image={getImage()}
+    />
   );
 }
 
