@@ -575,7 +575,7 @@ exports[`global/components/comment/detail/Detail matches the snapshot 1`] = `
       </ul>
     </nav>
   </Connect(withRouter(AuthorizeComponent))>
-  <Connect(CommentThread)
+  <withI18nextTranslation(Connect(CommentThread))
     parent={
       Object {
         "attributes": Object {

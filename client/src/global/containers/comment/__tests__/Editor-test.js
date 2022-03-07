@@ -11,6 +11,7 @@ describe("global/containers/comment/Editor", () => {
       comment={$comment}
       subject={$resource}
       cancel={$cancelMock}
+      t={key => key}
     />
   ));
   it("matches the snapshot", () => {
