@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import { connect } from "react-redux";
 import { requests } from "api";
@@ -33,7 +34,8 @@ export class CommentEditor extends PureComponent {
     onSuccess: PropTypes.func,
     subject: PropTypes.object.isRequired,
     parentId: PropTypes.string,
-    focus: PropTypes.bool
+    focus: PropTypes.bool,
+    t: PropTypes.bool
   };
 
   static defaultProps = {
@@ -149,17 +151,21 @@ export class CommentEditor extends PureComponent {
   }
 
   placeholder(props) {
+    const t = this.props.t;
     if (props.placeholder) return props.placeholder;
-    if (this.isEdit(props)) return "Edit this comment...";
-    if (this.isReply(props)) return "Reply to this comment...";
+    if (this.isEdit(props)) return t("placeholders.comments.edit");
+    if (this.isReply(props)) return t("placeholders.comments.reply");
     if (this.isComment(props)) {
-      return `Discuss this ${singularEntityName(props.subject)}...`;
+      return t("placeholders.comments.discuss_entity", {
+        entity: singularEntityName(props.subject)
+      });
     }
   }
 
   buttonLabel(props) {
-    if (this.isEdit(props)) return "Update";
-    return "Post";
+    const t = this.props.t;
+    if (this.isEdit(props)) return t("actions.update");
+    return t("actions.post");
   }
 
   render() {
@@ -171,6 +177,8 @@ export class CommentEditor extends PureComponent {
       () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
       this.props.dispatch
     );
+
+    const t = this.props.t;
 
     return (
       <div className="annotation-editor">
@@ -188,7 +196,9 @@ export class CommentEditor extends PureComponent {
         ) : null}
         <Authorize kind="unauthenticated">
           <div className="placeholder">
-            <button onClick={showLogin}>Login to post a comment</button>
+            <button onClick={showLogin}>
+              {t("placeholders.comments.unauthenticated")}
+            </button>
           </div>
         </Authorize>
         <Authorize kind="any">
@@ -225,7 +235,7 @@ export class CommentEditor extends PureComponent {
                         onClick={this.props.cancel}
                         className="button-primary button-primary--gray"
                       >
-                        Cancel
+                        {t("actions.cancel")}
                       </button>
                       <button
                         className="button-secondary"
@@ -245,4 +255,6 @@ export class CommentEditor extends PureComponent {
   }
 }
 
-export default connect(CommentEditor.mapStateToProps)(CommentEditor);
+export default withTranslation()(
+  connect(CommentEditor.mapStateToProps)(CommentEditor)
+);

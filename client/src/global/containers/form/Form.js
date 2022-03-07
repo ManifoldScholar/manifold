@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityEditorActions, entityStoreActions } from "actions";
 import GlobalForm from "global/components/form";
@@ -54,7 +55,8 @@ export class FormContainer extends PureComponent {
     className: PropTypes.string,
     options: PropTypes.object,
     flushOnUnmount: PropTypes.bool,
-    notificationScope: PropTypes.string
+    notificationScope: PropTypes.string,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -293,7 +295,7 @@ export class FormContainer extends PureComponent {
 
         <Prompt
           when={this.isBlocking()}
-          message="You may have unsaved changes. Do you want to leave without saving your changes?"
+          message={this.props.t("messages.unsaved_changes")}
         />
 
         {this.renderGroupedErrors(this.props)}
@@ -315,4 +317,4 @@ export class FormContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(FormContainer);
+export default withTranslation()(connectAndFetch(FormContainer));

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { BrowserRouter, StaticRouter } from "react-router-dom";
 import Dialog from "global/components/dialog";
 import { Provider } from "react-redux";
@@ -17,7 +18,8 @@ class App extends Component {
     store: PropTypes.object,
     staticContext: PropTypes.object,
     staticRequest: PropTypes.object,
-    helmetContext: PropTypes.object
+    helmetContext: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -86,7 +88,7 @@ class App extends Component {
     return (
       <Dialog.Confirm
         message={this.state.routerConfirmMessage}
-        heading="Are you sure?"
+        heading={this.props.t("messages.confirm")}
         resolve={() => this.resolveRouterConfirm(true)}
         reject={() => this.resolveRouterConfirm(false)}
       />
@@ -115,4 +117,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withTranslation()(App);
