@@ -1,106 +1,77 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import Generic from "./Generic";
 import withSearchResultHelper from "./searchResultHelper";
+import { capitalize } from "utils/string";
 
-class SearchResultsTypeResource extends PureComponent {
-  static displayName = "Search.Results.Type.Resource";
+function SearchResultsTypeResource({
+  result,
+  highlightedAttribute,
+  hideParent = false
+}) {
+  const { t } = useTranslation();
 
-  static propTypes = {
-    result: PropTypes.object,
-    typeLabel: PropTypes.string,
-    highlightedAttribute: PropTypes.func.isRequired
+  if (!result) return null;
+
+  const model = result.relationships?.model;
+  const { attributes } = model ?? {};
+
+  const {
+    searchableId,
+    searchableType,
+    title,
+    parents: { project }
+  } = result.attributes ?? {};
+
+  const collectable = {
+    type: searchableType,
+    id: searchableId,
+    attributes: { title }
   };
 
-  get kind() {
-    const { attributes } = this.model;
-    return attributes.kind;
-  }
+  const creators = model?.relationships?.creators ?? [];
 
-  get result() {
-    return this.props.result;
-  }
+  const resultProps = {
+    url: lh.link("frontendProjectResource", project?.slug, attributes?.slug),
+    title: highlightedAttribute("title"),
+    parent: project?.title,
+    parentUrl: lh.link("frontendProjectDetail", project?.slug),
+    hideParent,
+    attribution: creators.map(c => c.attributes.fullName).join(", "),
+    description: highlightedAttribute("fullText"),
+    label: t("glossary.resource_one"),
+    collectable
+  };
 
-  get collectable() {
-    const { searchableType, searchableId } = this.result.attributes;
-
-    return {
-      type: searchableType,
-      id: searchableId,
-      attributes: { title: this.result.attributes.title }
-    };
-  }
-
-  get model() {
-    return this.props.result.relationships.model;
-  }
-
-  get project() {
-    return this.result.attributes.parents.project;
-  }
-
-  get title() {
-    return this.props.highlightedAttribute("title");
-  }
-
-  get description() {
-    return this.props.highlightedAttribute("fullText");
-  }
-
-  get url() {
-    const { attributes } = this.model;
-    return lh.link(
-      "frontendProjectResource",
-      this.project.slug,
-      attributes.slug
-    );
-  }
-
-  get createdAt() {
-    const { attributes } = this.model;
-    return attributes.createdAt;
-  }
-
-  get parent() {
-    const { title } = this.project;
-    return title;
-  }
-
-  capitalize(s) {
-    return s && s[0].toUpperCase() + s.slice(1);
-  }
-
-  render() {
-    return (
-      <Generic
-        url={this.url}
-        title={this.title}
-        parent={this.parent}
-        hideParent={this.props.hideParent}
-        attribution={this.creatorsString}
-        description={this.description}
-        label="resource"
-        collectable={this.collectable}
-        figure={
-          <EntityThumbnail.Resource
-            entity={this.model}
-            width="100%"
-            height={null}
-          />
-        }
-        meta={
-          <FormattedDate
-            prefix={`${this.capitalize(this.kind)} added`}
-            format="MMMM, yyyy"
-            date={this.createdAt}
-          />
-        }
-      />
-    );
-  }
+  return (
+    <Generic
+      {...resultProps}
+      figure={
+        <EntityThumbnail.Resource entity={model} width="100%" height={null} />
+      }
+      meta={
+        <FormattedDate
+          prefix={capitalize(
+            t("dates.type_of_resource_added", { kind: attributes?.kind })
+          )}
+          format="MMMM, yyyy"
+          date={attributes?.createdAt}
+        />
+      }
+    />
+  );
 }
+
+SearchResultsTypeResource.displayName = "Search.Results.Type.Resource";
+
+SearchResultsTypeResource.propTypes = {
+  result: PropTypes.object,
+  highlightedAttribute: PropTypes.func.isRequired,
+  hideParent: PropTypes.bool
+};
 
 export default withSearchResultHelper(SearchResultsTypeResource);

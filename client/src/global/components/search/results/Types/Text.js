@@ -1,100 +1,74 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
-import EntityThumbnail from "global/components/entity-thumbnail";
 import Generic from "./Generic";
 import withSearchResultHelper from "./searchResultHelper";
+import { capitalize } from "utils/string";
+import * as Styled from "./styles";
 
-class SearchResultsTypeText extends PureComponent {
-  static displayName = "Search.Results.Type.Text";
+function SearchResultsTypeText({ result, highlightedAttribute }) {
+  const { t } = useTranslation();
 
-  static propTypes = {
-    result: PropTypes.object,
-    typeLabel: PropTypes.string,
-    highlightedAttribute: PropTypes.func.isRequired
+  if (!result) return null;
+
+  const model = result.relationships?.model;
+
+  if (!model) return null;
+
+  const { attributes } = model ?? {};
+
+  const {
+    searchableId,
+    searchableType,
+    title,
+    parents: { project }
+  } = result.attributes ?? {};
+
+  const collectable = {
+    type: searchableType,
+    id: searchableId,
+    attributes: { title }
   };
 
-  get title() {
-    return this.props.highlightedAttribute("title");
-  }
+  const resultProps = {
+    url: lh.link("reader", attributes?.slug),
+    title: highlightedAttribute("title"),
+    parent: project?.title,
+    parentUrl: lh.link("frontendProjectDetail", project?.slug),
+    description: highlightedAttribute("fullText"),
+    label: t("glossary.text_one"),
+    collectable
+  };
 
-  get description() {
-    return this.props.highlightedAttribute("fullText");
-  }
-
-  get model() {
-    return this.props.result.relationships.model;
-  }
-
-  get project() {
-    return this.result.attributes.parents.project;
-  }
-
-  get result() {
-    return this.props.result;
-  }
-
-  get collectable() {
-    const { searchableType, searchableId } = this.result.attributes;
-
-    return {
-      type: searchableType,
-      id: searchableId,
-      attributes: { title: this.result.attributes.title }
-    };
-  }
-
-  get url() {
-    const { attributes } = this.model;
-    return lh.link("reader", attributes.slug);
-  }
-
-  get parentUrl() {
-    const { slug } = this.project;
-    return lh.link("frontendProjectDetail", slug);
-  }
-
-  get createdAt() {
-    const { attributes } = this.model;
-    return attributes.createdAt;
-  }
-
-  get parent() {
-    const { title } = this.project;
-    return title;
-  }
-
-  render() {
-    if (!this.model) return null;
-
-    return (
-      <Generic
-        url={this.url}
-        title={this.title}
-        parent={this.parent}
-        parentUrl={this.parentUrl}
-        description={this.description}
-        label="text"
-        collectable={this.collectable}
-        figure={
-          <EntityThumbnail.Text
-            entity={this.model}
-            width="100%"
-            height={null}
-            className="search-result--figure-narrow-svg"
-          />
-        }
-        meta={
-          <FormattedDate
-            prefix="Published"
-            format="MMMM, yyyy"
-            date={this.createdAt}
-          />
-        }
-      />
-    );
-  }
+  return (
+    <Generic
+      {...resultProps}
+      figure={
+        <Styled.IconThumbnail
+          entity={model}
+          width="100%"
+          height={null}
+          $isSvg={!!attributes?.coverStyles?.smallPortrait}
+        />
+      }
+      meta={
+        <FormattedDate
+          prefix={capitalize(t("dates.published"))}
+          format="MMMM, yyyy"
+          date={attributes?.createdAt}
+        />
+      }
+    />
+  );
 }
+
+SearchResultsTypeText.displayName = "Search.Results.Type.Text";
+
+SearchResultsTypeText.propTypes = {
+  result: PropTypes.object,
+  highlightedAttribute: PropTypes.func.isRequired
+};
 
 export default withSearchResultHelper(SearchResultsTypeText);
