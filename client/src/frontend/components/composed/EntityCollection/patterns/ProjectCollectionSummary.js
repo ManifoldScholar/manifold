@@ -37,8 +37,8 @@ function ProjectCollectionSummaryEntityCollection({
   };
 
   const projects = getProjects();
-  const image = getHeroImage(projectCollection);
   const headerLayout = getHeaderLayout(projectCollection);
+  const image = getHeroImage(headerLayout, projectCollection);
   const totalprojectCount =
     projectCollection.relationships.collectionProjects?.length;
 
