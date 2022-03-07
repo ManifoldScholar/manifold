@@ -183,7 +183,8 @@
       "results": "Search Results",
       "no_results": "No results were found.",
       "show_all_excerpts": "Show all excerpts",
-      "show_only_relevant": "Only show most relevant excerpts"
+      "show_only_relevant": "Only show most relevant excerpts",
+      "annotation_title": "{{name}} <2>annotated</2> {{entity}}"
     },
     "filters": {
       "featured_projects": "Featured $t(glossary.project_other)"
@@ -635,7 +636,8 @@
       }
     },
     "img_alts": {
-      "user_avatar": "User Avatar"
+      "user_avatar": "User Avatar",
+      "avatar_for_name": "{{name}}'s avatar"
     },
     "counts": {
       "my_starred": "You have starred <1>{{count}}</1> {{ unit }}",
@@ -659,6 +661,7 @@
     "dates": {
       "added": "added",
       "resource_added": "Resource $t(dates.added)",
+      "type_of_resource_added": "{{kind}} $t(dates.added)",
       "collection_created": "Collection created",
       "published": "published",
       "published_title_case": "Published",

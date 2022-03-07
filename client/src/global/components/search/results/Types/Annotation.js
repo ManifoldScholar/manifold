@@ -1,97 +1,81 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation, Trans } from "react-i18next";
 import lh from "helpers/linkHandler";
 import withSearchResultHelper from "./searchResultHelper";
 import Utility from "global/components/utility";
 import Generic from "./Generic";
 import FormattedDate from "global/components/FormattedDate";
+import * as Styled from "./styles";
 
-class SearchResultsTypeAnnotation extends PureComponent {
-  static displayName = "Search.Results.Type.Annotation";
+function SearchResultsTypeAnnotation({ result, highlightedAttribute }) {
+  const { t } = useTranslation();
 
-  static propTypes = {
-    result: PropTypes.object,
-    highlightedAttribute: PropTypes.func.isRequired
+  if (!result) return null;
+
+  const model = result.relationships?.model;
+
+  const {
+    searchableId,
+    parents: { text, text_section: textSection }
+  } = result.attributes ?? {};
+
+  const parent = text?.title;
+  const creator = model?.relationships?.creator?.attributes ?? {};
+
+  const title = (
+    <Trans i18nKey="search.annotation_title">
+      {{ name: creator.fullName }}{" "}
+      <Styled.AnnotationTitle>annotated</Styled.AnnotationTitle>{" "}
+      {{ entity: parent }}
+    </Trans>
+  );
+
+  const parentUrl = lh.link("readerSection", text.slug, textSection.id);
+  const url = `${parentUrl}#annotation-${searchableId}`;
+
+  const resultProps = {
+    url,
+    title,
+    description: highlightedAttribute("fullText"),
+    label: t("glossary.annotation_one")
   };
 
-  get result() {
-    return this.props.result;
-  }
-
-  get model() {
-    return this.props.result.relationships.model;
-  }
-
-  get text() {
-    return this.result.attributes.parents.text;
-  }
-
-  get parent() {
-    return this.text.title;
-  }
-
-  get textSection() {
-    return this.result.attributes.parents.text_section;
-  }
-
-  get creatorAttributes() {
-    return this.model.relationships.creator.attributes;
-  }
-
-  get description() {
-    return this.props.highlightedAttribute("fullText");
-  }
-
-  get title() {
-    const name = this.creatorAttributes.fullName;
-    return (
-      <>
-        {name} <span className="search-result__subtitle">annotated</span>{" "}
-        {this.parent}
-      </>
-    );
-  }
-
-  get url() {
-    const base = lh.link("readerSection", this.text.slug, this.textSection.id);
-    return `${base}#annotation-${this.result.attributes.searchableId}`;
-  }
-
-  render() {
-    return (
-      <Generic
-        url={this.url}
-        title={this.title}
-        parentUrl={this.parentUrl}
-        description={this.description}
-        label="Annotation"
-        figure={
-          <>
-            {this.creatorAttributes.avatarStyles.smallSquare ? (
-              <img
-                className="search-result__avatar"
-                alt={`The avatar for ${this.creatorAttributes.fullName}`}
-                src={this.creatorAttributes.avatarStyles.smallSquare}
-              />
-            ) : (
-              <div className="search-result__avatar">
-                <Utility.IconComposer icon="avatar64" />
-              </div>
-            )}
-          </>
-        }
-        meta={
-          <>
-            <FormattedDate
-              format="distanceInWords"
-              date={this.model.attributes.createdAt}
-            />{" "}
-            ago
-          </>
-        }
-      />
-    );
-  }
+  return (
+    <Generic
+      {...resultProps}
+      figure={
+        <>
+          {creator?.avatarStyles?.smallSquare ? (
+            <Styled.Avatar
+              alt={t("img_alts.avatar_for_name", { name: creator.fullName })}
+              src={creator.avatarStyles.smallSquare}
+            />
+          ) : (
+            <Styled.IconAvatar>
+              <Utility.IconComposer icon="avatar64" />
+            </Styled.IconAvatar>
+          )}
+        </>
+      }
+      meta={
+        <>
+          <FormattedDate
+            format="distanceInWords"
+            date={model.attributes.createdAt}
+          />{" "}
+          {t("dates.ago")}
+        </>
+      }
+    />
+  );
 }
+
+SearchResultsTypeAnnotation.displayName = "Search.Results.Type.Annotation";
+
+SearchResultsTypeAnnotation.propTypes = {
+  result: PropTypes.object,
+  highlightedAttribute: PropTypes.func.isRequired
+};
 
 export default withSearchResultHelper(SearchResultsTypeAnnotation);

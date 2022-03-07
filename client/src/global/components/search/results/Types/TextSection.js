@@ -1,99 +1,78 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import Generic from "./Generic";
 import withSearchResultHelper from "./searchResultHelper";
 import EntityThumbnail from "global/components/entity-thumbnail";
+import * as Styled from "./styles";
 
-class SearchResultsTypeTextSection extends PureComponent {
-  static displayName = "Search.Results.Type.TextSection";
+function SearchResultsTypeTextSection({ result, highlightedAttribute }) {
+  const { t } = useTranslation();
 
-  static propTypes = {
-    result: PropTypes.object,
-    highlightedAttribute: PropTypes.func.isRequired
+  if (!result) return null;
+
+  const model = result.relationships?.model;
+
+  if (!model) return null;
+
+  const {
+    searchableId,
+    searchableType,
+    title,
+    parents: { text }
+  } = result.attributes ?? {};
+
+  const collectable = {
+    type: searchableType,
+    id: searchableId,
+    attributes: { title }
   };
 
-  get result() {
-    return this.props.result;
-  }
-
-  get collectable() {
-    const { searchableType, searchableId } = this.result.attributes;
-
-    return {
-      type: searchableType,
-      id: searchableId,
-      attributes: { title: this.result.attributes.title }
-    };
-  }
-
-  get model() {
-    return this.props.result.relationships.model;
-  }
-
-  get text() {
-    return this.result.attributes.parents.text;
-  }
-
-  get parent() {
-    const { title } = this.text;
-    return title;
-  }
-
-  get title() {
-    return this.props.highlightedAttribute("title");
-  }
-
-  get description() {
-    return this.props.highlightedAttribute("fullText");
-  }
-
-  get textNodes() {
-    const {
-      attributes: { textNodes }
-    } = this.result;
-    return textNodes;
-  }
-
-  get hasExcerpts() {
-    const textNodes = this.textNodes;
-    return textNodes && textNodes.total.value > 0;
-  }
-
-  get excerpts() {
-    const text = this.text;
-    const model = this.model;
-    if (!this.hasExcerpts) return [];
-    const { hits } = this.textNodes;
+  const {
+    attributes: { textNodes }
+  } = result;
+  const excerpts = (() => {
+    if (!textNodes.total.value) return [];
+    const { hits } = textNodes;
     return hits.map(h => ({
       ...h,
       url: lh.link("readerSection", text.slug, model.id, `#node-${h.nodeUuid}`)
     }));
-  }
+  })();
 
-  render() {
-    if (!this.model) return null;
+  const resultProps = {
+    url: lh.link("readerSection", text?.slug, model.id),
+    title: highlightedAttribute("title"),
+    parent: text?.title,
+    parentUrl: lh.link("reader", text?.slug),
+    description: highlightedAttribute("fullText"),
+    label: t("glossary.full_text_one"),
+    collectable,
+    excerpts
+  };
 
-    return (
-      <Generic
-        title={this.title}
-        parent={this.parent}
-        parentUrl={lh.link("reader", this.text.slug)}
-        url={lh.link("readerSection", this.text.slug, this.model.id)}
-        label="full text"
-        collectable={this.collectable}
-        figure={
-          <EntityThumbnail.TextSection
-            entity={this.model}
-            width="100%"
-            height={null}
-            className="search-result--figure-narrow-svg"
-          />
-        }
-        excerpts={this.excerpts}
-      />
-    );
-  }
+  return (
+    <Generic
+      {...resultProps}
+      figure={
+        <Styled.IconThumbnail
+          as={EntityThumbnail.TextSection}
+          entity={model}
+          width="100%"
+          height={null}
+          $isSvg={!!model.attributes?.coverStyles?.smallPortrait}
+        />
+      }
+    />
+  );
 }
+
+SearchResultsTypeTextSection.displayName = "Search.Results.Type.TextSection";
+
+SearchResultsTypeTextSection.propTypes = {
+  result: PropTypes.object,
+  highlightedAttribute: PropTypes.func.isRequired
+};
 
 export default withSearchResultHelper(SearchResultsTypeTextSection);

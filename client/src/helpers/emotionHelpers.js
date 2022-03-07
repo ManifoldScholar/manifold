@@ -1,7 +1,7 @@
 import isPropValid from "@emotion/is-prop-valid";
 
 // props that should always be forwarded
-const ALLOWED_PROPS = ["url"];
+const ALLOWED_PROPS = ["url", "entity"];
 
 // styled-components-style transient prop support (`$someProp`)
 export const transientOptions = {
