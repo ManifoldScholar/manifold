@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { requests } from "api";
 import { entityStoreActions, uiVisibilityActions } from "actions";
@@ -33,7 +34,8 @@ export class CommentThread extends PureComponent {
     parent: PropTypes.object,
     comments: PropTypes.array,
     commentsMeta: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -104,7 +106,7 @@ export class CommentThread extends PureComponent {
         className="comment-more"
         onClick={() => this.handleNextClick(commentsPagination)}
       >
-        {`See next ${nextCount} comments`}
+        {this.props.t("actions.see_next_comment", { count: nextCount })}
         <Utility.IconComposer
           icon="disclosureDown16"
           size={16}
@@ -159,4 +161,6 @@ export class CommentThread extends PureComponent {
   }
 }
 
-export default connect(CommentThread.mapStateToProps)(CommentThread);
+export default withTranslation()(
+  connect(CommentThread.mapStateToProps)(CommentThread)
+);
