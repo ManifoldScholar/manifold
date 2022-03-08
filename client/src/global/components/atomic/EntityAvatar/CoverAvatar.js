@@ -4,12 +4,19 @@ import * as Styled from "./styles";
 
 const CoverAvatar = ({ entity }) => {
   const meta = entity.attributes.avatarMeta.original;
-  const avatarSrc =
-    meta.width >= meta.height
-      ? entity.attributes.avatarStyles.smallSquare
-      : entity.attributes.avatarStyles.small;
+  const avatarKey = meta.width >= meta.height ? "smallSquare" : "small";
+  const src = entity.attributes.avatarStyles[avatarKey];
+  const { width, height } = entity.attributes.avatarMeta[avatarKey];
 
-  return <Styled.Avatar src={avatarSrc} alt="" />;
+  return (
+    <Styled.Avatar
+      src={src}
+      alt=""
+      width={width}
+      height={height}
+      loading="lazy"
+    />
+  );
 };
 
 CoverAvatar.displayName = "Global.Atomic.EntityAvatar.Cover";
