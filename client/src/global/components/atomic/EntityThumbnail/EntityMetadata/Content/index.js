@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import FormattedDate from "global/components/FormattedDate";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 export default function EntityMetadata(props) {
@@ -31,9 +30,7 @@ export default function EntityMetadata(props) {
           }}
         />
         {draft && !bumpDraftDown && (
-          <Styled.Tag $stack={stack}>
-            {capitalize(t("glossary.draft_one"))}
-          </Styled.Tag>
+          <Styled.Tag $stack={stack}>{t("glossary.draft_one")}</Styled.Tag>
         )}
       </Styled.TitleWrapper>
       {subtitle && <Styled.Subtitle>{subtitle}</Styled.Subtitle>}
@@ -43,9 +40,7 @@ export default function EntityMetadata(props) {
         </Styled.Creators>
       )}
       {draft && bumpDraftDown && (
-        <Styled.Tag $stack={stack}>
-          {capitalize(t("glossary.draft_one"))}
-        </Styled.Tag>
+        <Styled.Tag $stack={stack}>{t("glossary.draft_one")}</Styled.Tag>
       )}
       {date && (
         <Styled.Date $recentlyUpdated={recentlyUpdated}>

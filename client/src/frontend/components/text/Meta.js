@@ -29,7 +29,7 @@ export default function TextMeta({
           )}
           {publishedVisible && (
             <Styled.Published>
-              {capitalize(t("dates.published"))}
+              {t("dates.published_title_case")}
             </Styled.Published>
           )}
         </Styled.Status>

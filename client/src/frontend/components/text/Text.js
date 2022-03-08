@@ -48,7 +48,7 @@ class Text extends Component {
     const t = this.props.t;
 
     return hasUpdate
-      ? capitalize(t("dates.updated"))
+      ? t("dates.updated_title_case")
       : capitalize(t("dates.added"));
   }
 

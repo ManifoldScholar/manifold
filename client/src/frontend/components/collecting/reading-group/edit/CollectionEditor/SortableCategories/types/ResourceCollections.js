@@ -12,7 +12,7 @@ function CollectedResourceCollections({ showDropzone, ...restProps }) {
   return (
     <Styled.Type $active={showDropzone}>
       <TypeHeader
-        heading={`${capitalize(t("glossary.resource_collection_other"))}:`}
+        heading={`${t("glossary.resource_collection_title_case_other")}:`}
       />
       <SortableCollectables type="resourceCollections" {...restProps} />
     </Styled.Type>
