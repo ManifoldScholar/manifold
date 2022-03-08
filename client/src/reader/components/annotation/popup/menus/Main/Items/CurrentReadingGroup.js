@@ -5,7 +5,6 @@ import { MenuItem as ReakitMenuItem } from "reakit/Menu";
 import IconComposer from "global/components/utility/IconComposer";
 import Authorize from "hoc/Authorize";
 import withCurrentUser from "hoc/withCurrentUser";
-import { t } from "i18next";
 
 function CurrentReadingGroup({
   menu,
@@ -17,12 +16,13 @@ function CurrentReadingGroup({
 }) {
   const canAccessReadingGroups =
     currentUser?.attributes.classAbilities.readingGroup.read;
+  const { t } = useTranslation();
 
   function getCurrentGroupName() {
-    const { t } = useTranslation();
-
-    if (currentReadingGroup === "public") return t("reader.my_public_annotations");
-    if (currentReadingGroup === "private") return t("reader.my_private_annotations");
+    if (currentReadingGroup === "public")
+      return t("reader.my_public_annotations");
+    if (currentReadingGroup === "private")
+      return t("reader.my_private_annotations");
 
     const currentGroup = readingGroups.find(
       group => group.id === currentReadingGroup
@@ -41,9 +41,14 @@ function CurrentReadingGroup({
         data-name="readingGroup"
         className="annotation-popup__button annotation-popup__button--stacked annotation-popup__button--secondary-dark"
       >
-        <span className="screen-reader-text">{t("actions.select_item", {item: t("glossary.reading_group_one")})}</span>
+        <span className="screen-reader-text">
+          {t("actions.select_item", { item: t("glossary.reading_group_one") })}
+        </span>
         <span className="annotation-popup__button-text">
-          {canAccessReadingGroups ? t("reader.current_group") : t("reader.current_visibility")}:
+          {canAccessReadingGroups
+            ? t("reader.current_group")
+            : t("reader.current_visibility")}
+          :
         </span>
         <div className="annotation-popup__button-inner-row">
           <span className="annotation-popup__button-text annotation-popup__button-text--small">

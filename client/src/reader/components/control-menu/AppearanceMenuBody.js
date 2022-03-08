@@ -30,7 +30,10 @@ class AppearanceMenuBody extends Component {
   handleColorSchemeControl = event => {
     this.props.setColorScheme(event.target.value);
     this.props.setScreenReaderStatus(
-      this.resetOptionMessage(this.props.t("reader.color_scheme"), event.target.value)
+      this.resetOptionMessage(
+        this.props.t("reader.color_scheme"),
+        event.target.value
+      )
     );
   };
 
@@ -70,32 +73,43 @@ class AppearanceMenuBody extends Component {
   };
 
   resetOptionMessage(appearanceType, option) {
-    return this.props.t("reader.reset_option_message", {appearanceType: appearanceType, option: option});
+    return this.props.t("reader.reset_option_message", {
+      appearanceType,
+      option
+    });
   }
 
   get incrementMarginsMessage() {
     const baseMessage = this.props.t("reader.margin_increased");
-    const appendedMessage = this.marginIncreaseable ? "." : " " + this.props.t("reader.to_max");
+    const appendedMessage = this.marginIncreaseable
+      ? "."
+      : " " + this.props.t("reader.to_max");
     return baseMessage + appendedMessage;
   }
 
   get decrementMarginsMessage() {
     const baseMessage = this.props.t("reader.margin_decreased");
-    const appendedMessage = this.marginDecreasable ? "." : " " + this.props.t("reader.to_min");
+    const appendedMessage = this.marginDecreasable
+      ? "."
+      : " " + this.props.t("reader.to_min");
     return baseMessage + appendedMessage;
   }
 
   get incrementFontMessage() {
     const baseMessage = this.props.t("reader.font_increased");
     const appendedMessage =
-      this.fontSize.current < this.fontSize.max ? "." : " " + this.props.t("reader.to_max");
+      this.fontSize.current < this.fontSize.max
+        ? "."
+        : " " + this.props.t("reader.to_max");
     return baseMessage + appendedMessage;
   }
 
   get decrementFontMessage() {
     const baseMessage = this.props.t("reader.font_decreased");
     const appendedMessage =
-      this.fontSize.current > this.fontSize.min ? "." : " " + this.props.t("reader.to_min");
+      this.fontSize.current > this.fontSize.min
+        ? "."
+        : " " + this.props.t("reader.to_min");
     return baseMessage + appendedMessage;
   }
 
@@ -404,7 +418,9 @@ class AppearanceMenuBody extends Component {
     return (
       <div className="appearance-menu control-menu">
         <div className="control-menu__header">
-          <div className="control-menu__heading">{this.props.t("reader.adjust_appearance") + ":"}</div>
+          <div className="control-menu__heading">
+            {this.props.t("reader.adjust_appearance") + ":"}
+          </div>
         </div>
         <ul className="appearance-menu__list">
           {this.renderFontControls()}

@@ -5,7 +5,7 @@ import MenuItem from "reader/components/annotation/popup/parts/MenuItem";
 
 function Notate({ menu, actions, text }) {
   const { t } = useTranslation();
-  
+
   return (
     <MenuItem
       menu={menu}

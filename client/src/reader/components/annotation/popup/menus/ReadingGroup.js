@@ -43,7 +43,9 @@ function ReadingGroupMenu({
       <div className="annotation-popup__header">
         <IconComposer icon="readingGroup24" size="default" />
         <span className="annotation-popup__heading">
-          {canAccessReadingGroups ? t("glossary.reading_group_other") + ":" : "Visibility"}
+          {canAccessReadingGroups
+            ? t("glossary.reading_group_other") + ":"
+            : "Visibility"}
         </span>
       </div>
       <div className="annotation-popup__button-group">

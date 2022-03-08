@@ -61,7 +61,9 @@ export class AnnotationShareEditor extends PureComponent {
 
     return (
       <fieldset className="citation__radios">
-        <legend className="citation__legend">{this.props.t("reader.citation_style") + ":"}</legend>
+        <legend className="citation__legend">
+          {this.props.t("reader.citation_style") + ":"}
+        </legend>
         {styles.map((style, index) => (
           <label
             key={style}
@@ -87,7 +89,9 @@ export class AnnotationShareEditor extends PureComponent {
   }
 
   render() {
-    const copiedText = this.state.copied ? this.props.t("reader.copied") + "!" : null;
+    const copiedText = this.state.copied
+      ? this.props.t("reader.copied") + "!"
+      : null;
     const citations = this.props.section.attributes.citations;
 
     return (
@@ -109,7 +113,9 @@ export class AnnotationShareEditor extends PureComponent {
                 onClick={this.handleCancel}
                 className="button-primary button-primary--dull"
               >
-                <span className="button-primary__text">{this.props.t("actions.cancel")}</span>
+                <span className="button-primary__text">
+                  {this.props.t("actions.cancel")}
+                </span>
               </button>
               <button
                 className="button-secondary"
@@ -120,7 +126,9 @@ export class AnnotationShareEditor extends PureComponent {
                   size="default"
                   className="button-secondary__icon"
                 />
-                <span className="button-secondary__text">{this.props.t("reader.copy")}</span>
+                <span className="button-secondary__text">
+                  {this.props.t("reader.copy")}
+                </span>
               </button>
             </div>
           </div>
