@@ -216,7 +216,7 @@ export class ProjectCollectionDetailContainer extends Component {
     const t = this.props.t;
 
     return (
-      <div>
+      <>
         <CheckFrontendMode
           debugLabel="ProjectCollectionDetail"
           isProjectSubpage
@@ -260,9 +260,10 @@ export class ProjectCollectionDetailContainer extends Component {
             paginationClickHandler: this.pageChangeHandlerCreator
           }}
           bgColor="neutral05"
+          className="flex-grow"
         />
         <CollectionNavigation />
-      </div>
+      </>
     );
   }
 }
