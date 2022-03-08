@@ -6,16 +6,6 @@ exports[`frontend/containers/ProjectCollections/ProjectCollections matches the s
     debugLabel="ProjectCollections"
     isProjectSubpage={true}
   />
-  <RegisterBreadcrumbs
-    breadcrumbs={
-      Array [
-        Object {
-          "label": "navigation.breadcrumbs.all_projects",
-          "to": "/projects/all",
-        },
-      ]
-    }
-  />
   <h1
     className="screen-reader-text"
   >

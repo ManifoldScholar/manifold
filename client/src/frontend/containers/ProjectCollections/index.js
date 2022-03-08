@@ -13,7 +13,6 @@ import lh from "helpers/linkHandler";
 import queryString from "query-string";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
 import EntityCollection from "frontend/components/composed/EntityCollection";
-import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 
 const { request } = entityStoreActions;
@@ -150,14 +149,6 @@ export class ProjectsCollectionsContainer extends Component {
     return (
       <>
         <CheckFrontendMode debugLabel="ProjectCollections" isProjectSubpage />
-        <RegisterBreadcrumbs
-          breadcrumbs={[
-            {
-              to: lh.link("frontendProjectsAll"),
-              label: t("navigation.breadcrumbs.all_projects")
-            }
-          ]}
-        />
         <h1 className="screen-reader-text">
           {t("glossary.project_collection_other")}
         </h1>
