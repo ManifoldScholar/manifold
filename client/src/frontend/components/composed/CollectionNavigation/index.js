@@ -1,49 +1,64 @@
 import React from "react";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
+import { useRouteMatch } from "react-router-dom";
 import { useCurrentUser } from "hooks";
 import Link from "./Link";
 import * as Styled from "./styles";
 
-const LINKS = [
-  {
-    to: lh.link("frontendProjectsAll"),
-    label: "Projects",
-    icon: "projects64",
-    requiresAuthorization: false
-  },
-  {
-    to: lh.link("frontendJournalsList"),
-    label: "Journals",
-    icon: "journals64",
-    requiresAuthorization: false
-  },
-  {
-    to: lh.link("frontendProjectCollections"),
-    label: "Project Collections",
-    icon: "projectCollections64",
-    requiresAuthorization: false
-  },
-  {
-    to: lh.link("frontendStarred"),
-    label: "My Starred",
-    icon: "star24",
-    requiresAuthorization: true
-  },
-  {
-    to: lh.link("frontendAnnotations"),
-    label: "My Notes",
-    icon: "notes24",
-    requiresAuthorization: true
-  }
-];
-
 function CollectionNavigation() {
   const { t } = useTranslation();
   const currentUser = useCurrentUser();
-  const filteredLinks = LINKS.filter(link =>
-    currentUser ? true : !link.requiresAuthorization
-  );
+  const { path } = useRouteMatch();
+
+  const links = [
+    {
+      to: lh.link("frontendProjectsAll"),
+      label: t("pages.frontend.projects"),
+      icon: "projects64",
+      requiresAuthorization: false,
+      show: true
+    },
+    {
+      to: lh.link("frontendJournalsList"),
+      label: t("pages.frontend.journals"),
+      icon: "journals64",
+      requiresAuthorization: false,
+      show: path !== lh.link("frontendJournalsList")
+    },
+    {
+      to: lh.link("frontendIssuesList"),
+      label: t("pages.frontend.issues"),
+      icon: "journals64",
+      requiresAuthorization: false,
+      show: path === lh.link("frontendJournalsList")
+    },
+    {
+      to: lh.link("frontendProjectCollections"),
+      label: t("pages.frontend.project_collections"),
+      icon: "projectCollections64",
+      requiresAuthorization: false,
+      show: true
+    },
+    {
+      to: lh.link("frontendStarred"),
+      label: t("pages.frontend.my_starred"),
+      icon: "star24",
+      requiresAuthorization: true,
+      show: true
+    },
+    {
+      to: lh.link("frontendAnnotations"),
+      label: t("pages.frontend.my_notes_truncated"),
+      icon: "notes24",
+      requiresAuthorization: true,
+      show: true
+    }
+  ];
+
+  const filteredLinks = links
+    .filter(link => (currentUser ? true : !link.requiresAuthorization))
+    .filter(link => link.show);
 
   return (
     <nav aria-label={t("navigation.library_links")} className="container">
