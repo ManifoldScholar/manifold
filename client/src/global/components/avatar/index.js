@@ -1,68 +1,44 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import Utility from "global/components/utility";
+import * as Styled from "./styles";
 
-export default class Avatar extends Component {
-  static propTypes = {
-    url: PropTypes.string,
-    style: PropTypes.object,
-    ariaHidden: PropTypes.bool,
-    className: PropTypes.string,
-    iconSize: PropTypes.oneOf([16, 24, 64])
-  };
+export default function Avatar(props) {
+  const { url, style, ariaHidden, className, iconSize = 64 } = props;
 
-  static defaultProps = {
-    iconSize: 64
-  };
+  const { t } = useTranslation();
 
-  get icon() {
-    return `Avatar${this.props.iconSize}`;
-  }
-
-  get baseClass() {
-    return "avatar";
-  }
-
-  get className() {
-    return classNames(this.baseClass, this.props.className);
-  }
-
-  render() {
-    if (this.props.url) {
-      const style = {
-        backgroundSize: "cover",
-        backgroundPosition: "50% 50%",
-        backgroundImage: `url(${this.props.url})`,
-        width: "100%",
-        height: 0,
-        paddingTop: "100%",
-        borderRadius: "100%"
-      };
-      return (
-        <figure
-          style={this.props.style}
-          className={this.className}
-          aria-hidden={this.props.ariaHidden}
-        >
-          <span className="screen-reader-text">Avatar</span>
-          <div style={style} />
-        </figure>
-      );
-    }
-    return (
-      <figure
-        style={this.props.style}
-        className={this.className}
-        aria-hidden={this.props.ariaHidden}
-      >
-        <Utility.IconComposer
-          className={`${this.baseClass}__icon`}
-          icon={this.icon}
-          size={this.props.iconSize}
-        />
-        <span className="screen-reader-text">Avatar</span>
-      </figure>
-    );
-  }
+  return url ? (
+    <figure
+      style={style}
+      className={classNames("avatar", className)}
+      aria-hidden={ariaHidden}
+    >
+      <span className="screen-reader-text">{t("glossary.avatar")}</span>
+      <Styled.ImageAvatar $url={url} />
+    </figure>
+  ) : (
+    <figure
+      style={style}
+      className={classNames("avatar", className)}
+      aria-hidden={ariaHidden}
+    >
+      <Utility.IconComposer
+        className={`avatar__icon`}
+        icon={`Avatar${iconSize}`}
+        size={iconSize}
+      />
+      <span className="screen-reader-text">{t("glossary.avatar")}</span>
+    </figure>
+  );
 }
+
+Avatar.propTypes = {
+  url: PropTypes.string,
+  style: PropTypes.object,
+  ariaHidden: PropTypes.bool,
+  className: PropTypes.string,
+  iconSize: PropTypes.oneOf([16, 24, 64])
+};

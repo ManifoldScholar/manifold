@@ -56,7 +56,8 @@
       "author_one": "author",
       "author_other": "authors",
       "draft_one": "draft",
-      "draft_other": "drafts"
+      "draft_other": "drafts",
+      "avatar": "avatar"
     },
     "common": {
       "on": "on",
