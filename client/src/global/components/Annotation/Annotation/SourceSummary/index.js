@@ -1,15 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { withTranslation, Trans } from "react-i18next";
 import Utility from "global/components/utility";
 import FormattedDate from "global/components/FormattedDate";
+import { capitalize } from "utils/string";
 
-export default class SourceSummary extends React.PureComponent {
+class SourceSummary extends React.PureComponent {
   static propTypes = {
     annotation: PropTypes.object,
     includeDate: PropTypes.bool,
     includeCreator: PropTypes.bool,
     viewable: PropTypes.bool,
-    viewInText: PropTypes.func
+    viewInText: PropTypes.func,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -25,11 +28,10 @@ export default class SourceSummary extends React.PureComponent {
   get source() {
     const { textTitle, textSectionTitle } = this.props.annotation.attributes;
     return (
-      <>
-        {" "}
-        &quot;{textSectionTitle}&quot; in{" "}
+      <Trans i18nKey="messages.annotation_summary.source">
+        &quot{{ section: textSectionTitle }}&quot in{" "}
         <i dangerouslySetInnerHTML={{ __html: textTitle }} />
-      </>
+      </Trans>
     );
   }
 
@@ -41,13 +43,18 @@ export default class SourceSummary extends React.PureComponent {
     return this.props.includeDate;
   }
 
+  get shortened() {
+    return !this.includeCreator || !this.includeDate;
+  }
+
   get creator() {
     const {
+      t,
       annotation: {
         attributes: { currentUserIsCreator, creatorName }
       }
     } = this.props;
-    if (currentUserIsCreator) return "You";
+    if (currentUserIsCreator) return capitalize(t("common.you"));
     return creatorName;
   }
 
@@ -57,13 +64,16 @@ export default class SourceSummary extends React.PureComponent {
         attributes: { format }
       }
     } = this.props;
-    return format === "highlight" ? "highlighted" : "annotated";
+    return format === "highlight"
+      ? "messages.annotation_summary.highlight"
+      : "messages.annotation_summary.annotation";
   }
 
   render() {
     const { onClick, onHover, annotation } = this.props;
-
     if (!annotation) return null;
+
+    const { textTitle, textSectionTitle } = annotation.attributes;
 
     /* eslint-disable jsx-a11y/anchor-is-valid */
     return (
@@ -76,14 +86,15 @@ export default class SourceSummary extends React.PureComponent {
           className="annotation-selection__source-summary-link"
         >
           <span className="annotation-selection__source-summary-text">
-            {this.includeCreator && `${this.creator} ${this.action} `}
-            {this.source}
-            {this.includeDate && (
-              <>
-                {" "}
-                on <FormattedDate date={annotation.attributes.createdAt} />
-              </>
+            {!this.shortened && (
+              <Trans i18nKey={this.action}>
+                {{ creator: this.creator }} annotated &quot
+                {{ section: textSectionTitle }}&quot in{" "}
+                <i dangerouslySetInnerHTML={{ __html: textTitle }} /> on{" "}
+                <FormattedDate date={annotation.attributes.createdAt} />
+              </Trans>
             )}
+            {this.shortened && this.source}
           </span>
           {onClick && (
             <Utility.IconComposer
@@ -98,3 +109,5 @@ export default class SourceSummary extends React.PureComponent {
     /* eslint-enable jsx-a11y/anchor-is-valid */
   }
 }
+
+export default withTranslation()(SourceSummary);
