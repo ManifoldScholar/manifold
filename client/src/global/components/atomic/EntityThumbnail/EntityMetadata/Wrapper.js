@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import MetadataContent from "./Content";
-import { capitalize } from "utils/string";
 
 export default function Wrapper({
   entity,
@@ -59,8 +58,8 @@ export default function Wrapper({
         : entity?.attributes;
       const date = data.publicationDate ?? data.updatedAt;
       const prefix = data.publicationDate
-        ? capitalize(t("dates.published"))
-        : capitalize(t("dates.updated"));
+        ? t("dates.published_title_case")
+        : t("dates.updated_title_case");
       const draft = data.draft;
       const recentlyUpdated = data.recentlyUpdated;
       return {
@@ -100,8 +99,8 @@ export default function Wrapper({
         : data.publicationDate;
     /* eslint-disable no-nested-ternary */
     const prefix = showUpdated
-      ? capitalize(t("dates.updated"))
-      : capitalize(t("dates.published"));
+      ? t("dates.updated_title_case")
+      : t("dates.published_title_case");
     const recentlyUpdated = data.recentlyUpdated;
 
     return {

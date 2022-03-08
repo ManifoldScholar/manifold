@@ -2,34 +2,33 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 function getContent(type, t) {
   switch (type) {
     case "projects":
       return {
-        title: capitalize(t("glossary.project_other")),
+        title: t("glossary.project_title_case_other"),
         icon: "projects64"
       };
     case "texts":
       return {
-        title: capitalize(t("glossary.text_other")),
+        title: t("glossary.text_title_case_other"),
         icon: "textsStacked64"
       };
     case "textSections":
       return {
-        title: capitalize(t("glossary.text_section_other"), true),
+        title: t("glossary.text_section_title_case_other"),
         icon: "toc64"
       };
     case "resourceCollections":
       return {
-        title: capitalize(t("glossary.resource_collection_other"), true),
+        title: t("glossary.resource_collection_title_case_other"),
         icon: "resourceCollection64"
       };
     case "resources":
       return {
-        title: capitalize(t("glossary.resource_other")),
+        title: t("glossary.resource_title_case_other"),
         icon: "resources64"
       };
     default:

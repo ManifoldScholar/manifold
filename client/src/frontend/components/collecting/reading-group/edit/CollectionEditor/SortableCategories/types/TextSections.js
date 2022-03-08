@@ -12,7 +12,7 @@ function CollectedTextSections({ showDropzone, ...restProps }) {
   return (
     <Styled.Type $active={showDropzone}>
       <TypeHeader
-        heading={`${capitalize(t("glossary.text_section_other"))}:`}
+        heading={`${t("glossary.text_section_title_case_other")}:`}
       />
       <SortableCollectables type="textSections" {...restProps} />
     </Styled.Type>

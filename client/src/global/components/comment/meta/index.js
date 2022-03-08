@@ -5,7 +5,6 @@ import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import Authorize from "hoc/Authorize";
 import Avatar from "global/components/avatar/index";
-import { capitalize } from "utils/string";
 
 class CommentMeta extends PureComponent {
   static propTypes = {
@@ -35,7 +34,7 @@ class CommentMeta extends PureComponent {
         attributes: { isCurrentUser, fullName }
       }
     } = this.props;
-    if (isCurrentUser) return capitalize(this.props.t("common.me"));
+    if (isCurrentUser) return this.props.t("common.me_title_case");
     return fullName;
   }
 
@@ -60,12 +59,12 @@ class CommentMeta extends PureComponent {
         <div className="markers">
           {comment.attributes.authorCreated ? (
             <div className="marker marker--tertiary">
-              {capitalize(t("glossary.author_one"))}
+              {t("glossary.author_title_case_one")}
             </div>
           ) : null}
           {comment.attributes.deleted ? (
             <div className="marker marker--secondary">
-              {capitalize(t("common.deleted"))}
+              {t("common.deleted_title_case")}
             </div>
           ) : null}
           <Authorize kind="admin">

@@ -11,7 +11,7 @@ function CollectedProjects({ showDropzone, ...restProps }) {
 
   return (
     <Styled.Type $active={showDropzone}>
-      <TypeHeader heading={`${capitalize(t("glossary.project_other"))}:`} />
+      <TypeHeader heading={`${t("glossary.project_title_case_other")}:`} />
       <SortableCollectables type="projects" {...restProps} />
     </Styled.Type>
   );
