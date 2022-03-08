@@ -1,15 +1,18 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import Authorize from "hoc/Authorize";
 import Avatar from "global/components/avatar/index";
+import { capitalize } from "utils/string";
 
-export default class CommentMeta extends PureComponent {
+class CommentMeta extends PureComponent {
   static propTypes = {
     creator: PropTypes.object.isRequired,
     comment: PropTypes.object.isRequired,
-    parent: PropTypes.object
+    parent: PropTypes.object,
+    t: PropTypes.func
   };
 
   get avatarUrl() {
@@ -32,12 +35,12 @@ export default class CommentMeta extends PureComponent {
         attributes: { isCurrentUser, fullName }
       }
     } = this.props;
-    if (isCurrentUser) return "Me";
+    if (isCurrentUser) return capitalize(this.props.t("common.me"));
     return fullName;
   }
 
   render() {
-    const { comment } = this.props;
+    const { comment, t } = this.props;
 
     return (
       <section className="annotation-meta">
@@ -51,21 +54,24 @@ export default class CommentMeta extends PureComponent {
               format="distanceInWords"
               date={comment.attributes.createdAt}
             />{" "}
-            ago
+            {t("dates.ago")}
           </span>
         </div>
         <div className="markers">
           {comment.attributes.authorCreated ? (
-            <div className="marker marker--tertiary">{"Author"}</div>
+            <div className="marker marker--tertiary">
+              {capitalize(t("glossary.author_one"))}
+            </div>
           ) : null}
           {comment.attributes.deleted ? (
-            <div className="marker marker--secondary">Deleted</div>
+            <div className="marker marker--secondary">
+              {capitalize(t("common.deleted"))}
+            </div>
           ) : null}
           <Authorize kind="admin">
             {comment.attributes.flagsCount > 0 ? (
               <div className="marker marker--secondary">
-                {comment.attributes.flagsCount}
-                {comment.attributes.flagsCount === 1 ? " flag" : " flags"}
+                {t("counts.flag", { count: comment.attributes.flagsCount })}
               </div>
             ) : null}
           </Authorize>
@@ -74,3 +80,5 @@ export default class CommentMeta extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(CommentMeta);
