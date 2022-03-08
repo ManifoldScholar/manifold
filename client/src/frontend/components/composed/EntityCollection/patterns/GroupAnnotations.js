@@ -13,6 +13,7 @@ function GroupAnnotationsEntityCollection({
   filterProps,
   isFiltered,
   paginationProps,
+  refresh,
   ...passThroughProps
 }) {
   if (!readingGroup || !annotations || !annotationsMeta) return null;
@@ -48,6 +49,7 @@ function GroupAnnotationsEntityCollection({
           {!hasAnnotations && !isFiltered && (
             <EntityCollectionPlaceholder.GroupAnnotations
               readingGroup={readingGroup}
+              refresh={refresh}
               style={{ paddingBlockStart: "40px" }}
             />
           )}
