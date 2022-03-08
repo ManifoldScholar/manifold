@@ -74,7 +74,8 @@
       "content": "content",
       "private": "private",
       "public": "public",
-      "visibility": "visibility"
+      "visibility": "visibility",
+      "deleted": "deleted"
     },
     "actions": {
       "edit": "Edit",
@@ -135,7 +136,9 @@
       "annotate": "Annotate",
       "annotate_passage": "$t(actions.annotate) this passage",
       "manage": "Manage",
-      "manage_groups": "$t(actions.manage) groups"
+      "manage_groups": "$t(actions.manage) groups",
+      "destroy": "Destroy",
+      "restore": "Restore"
     },
     "journals": {
       "volume_number": "Volume {{volNum}}",
@@ -284,7 +287,8 @@
         "edit": "Edit this comment...",
         "reply": "Reply to this commment...",
         "discuss_entity": "Discuss this {{entity}}...",
-        "unauthenticated": "Login to post a comment"
+        "unauthenticated": "Login to post a comment",
+        "deleted": "This comment was deleted."
       }
     },
     "sections": {
@@ -568,7 +572,8 @@
       "resource_added": "Resource $t(dates.added)",
       "collection_created": "Collection created",
       "published": "published",
-      "updated": "updated"
+      "updated": "updated",
+      "ago": "ago"
     },
     "metadata": {
       "abstract": "abstract",

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import CommentContainer from "global/containers/comment";
 import Meta from "global/components/comment/meta";
 import Deleted from "global/components/comment/deleted";
@@ -8,7 +9,7 @@ import classNames from "classnames";
 
 import Authorize from "hoc/Authorize";
 
-export default class CommentDetail extends PureComponent {
+class CommentDetail extends PureComponent {
   static displayName = "Comment.Detail";
 
   static propTypes = {
@@ -20,7 +21,8 @@ export default class CommentDetail extends PureComponent {
     comment: PropTypes.object.isRequired,
     showLogin: PropTypes.func,
     handleUnflag: PropTypes.func,
-    parent: PropTypes.object
+    parent: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -129,7 +131,7 @@ export default class CommentDetail extends PureComponent {
   }
 
   renderComment() {
-    const { comment, parent } = this.props;
+    const { comment, parent, t } = this.props;
     const { creator } = comment.relationships;
 
     return (
@@ -146,7 +148,7 @@ export default class CommentDetail extends PureComponent {
                   className={this.replyButtonClassNames}
                   onClick={this.startReply}
                 >
-                  {"Reply"}
+                  {t("actions.reply")}
                 </button>
               </li>
               <Authorize entity={comment} ability={"update"}>
@@ -155,7 +157,7 @@ export default class CommentDetail extends PureComponent {
                     onClick={this.startEdit}
                     className={this.listButtonBaseClassNames}
                   >
-                    {"Edit"}
+                    {t("actions.edit")}
                   </button>
                 </li>
               </Authorize>
@@ -166,7 +168,7 @@ export default class CommentDetail extends PureComponent {
                       onClick={this.handleDelete}
                       className={this.listButtonBaseClassNames}
                     >
-                      {"Delete"}
+                      {t("actions.delete")}
                     </button>
                   </li>
                 ) : null}
@@ -177,7 +179,7 @@ export default class CommentDetail extends PureComponent {
                     onClick={this.handleRestore}
                     className={this.listButtonBaseClassNames}
                   >
-                    {"Restore"}
+                    {t("actions.restore")}
                   </button>
                 </li>
               ) : null}
@@ -187,7 +189,7 @@ export default class CommentDetail extends PureComponent {
                     onClick={this.handleDestroy}
                     className={this.listButtonBaseClassNames}
                   >
-                    {"Destroy"}
+                    {t("actions.destroy")}
                   </button>
                 </li>
               ) : null}
@@ -197,7 +199,7 @@ export default class CommentDetail extends PureComponent {
                     className={this.secondaryButtonClassNames}
                     onClick={this.handleUnflag}
                   >
-                    {"Unflag"}
+                    {t("actions.unflag")}
                   </button>
                 </li>
               ) : (
@@ -206,7 +208,7 @@ export default class CommentDetail extends PureComponent {
                     onClick={this.handleFlag}
                     className={this.listButtonBaseClassNames}
                   >
-                    {"Flag"}
+                    {t("actions.flag")}
                   </button>
                 </li>
               )}
@@ -222,7 +224,7 @@ export default class CommentDetail extends PureComponent {
                   onClick={this.props.showLogin}
                   className={this.listButtonBaseClassNames}
                 >
-                  {"Login to reply"}
+                  {t("actions.login_to_reply")}
                 </button>
               </li>
             </ul>
@@ -246,3 +248,5 @@ export default class CommentDetail extends PureComponent {
     return this.renderComment();
   }
 }
+
+export default withTranslation()(CommentDetail);

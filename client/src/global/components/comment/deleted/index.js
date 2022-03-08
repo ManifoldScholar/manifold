@@ -1,16 +1,18 @@
 import React, { PureComponent } from "react";
+import { withTranslation } from "react-i18next";
 import CommentContainer from "global/containers/comment";
 import PropTypes from "prop-types";
 import Avatar from "global/components/avatar/index";
 
-export default class CommentDeleted extends PureComponent {
+class CommentDeleted extends PureComponent {
   static propTypes = {
     comment: PropTypes.object.isRequired,
-    subject: PropTypes.object.isRequired
+    subject: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   render() {
-    const { comment } = this.props;
+    const { comment, t } = this.props;
     return (
       <li className="annotation-reply">
         <section className="annotation-meta">
@@ -19,7 +21,7 @@ export default class CommentDeleted extends PureComponent {
               <Avatar />
             </div>
             <h4 className="annotation-meta__deleted-message">
-              This comment was deleted.
+              {t("placeholders.comments.deleted")}
             </h4>
           </div>
         </section>
@@ -31,3 +33,5 @@ export default class CommentDeleted extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(CommentDeleted);
