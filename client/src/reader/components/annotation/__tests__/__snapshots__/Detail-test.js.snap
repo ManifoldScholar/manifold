@@ -63,7 +63,7 @@ exports[`reader/components/annotation/Detail matches the snapshot 1`] = `
           }
         >
           <I18nextProvider>
-            <Connect(Annotation.Annotation.UserContent)
+            <withI18nextTranslation(Connect(Annotation.Annotation.UserContent))
               annotation={
                 Object {
                   "attributes": Object {
