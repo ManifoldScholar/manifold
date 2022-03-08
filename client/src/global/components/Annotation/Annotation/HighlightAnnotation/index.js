@@ -1,18 +1,20 @@
 import React, { PureComponent } from "react";
 import Utility from "frontend/components/utility";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 import SourceSummary from "../SourceSummary/index";
 import Authorize from "hoc/Authorize";
 
-export default class HighlightDetail extends PureComponent {
+class HighlightDetail extends PureComponent {
   static displayName = "Annotation.HighlightAnnotation";
 
   static propTypes = {
     annotation: PropTypes.object.isRequired,
     visitHandler: PropTypes.func.isRequired,
-    deleteHandler: PropTypes.func.isRequired
+    deleteHandler: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -61,7 +63,7 @@ export default class HighlightDetail extends PureComponent {
           <Authorize entity={annotation} ability={"delete"}>
             <div className="annotation-selection__action-buttons">
               <Utility.ConfirmableButton
-                label="Delete"
+                label={this.props.t("actions.delete")}
                 confirmHandler={deleteHandler}
               />
             </div>
@@ -71,3 +73,5 @@ export default class HighlightDetail extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(HighlightDetail);

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Truncated from "./Truncated";
 import nl2br from "nl2br";
 import classNames from "classnames";
@@ -7,7 +8,7 @@ import Authorize from "hoc/Authorize";
 import IconComposer from "global/components/utility/IconComposer";
 import SourceSummary from "../SourceSummary";
 
-export default class AnnotationSelectionWrapper extends PureComponent {
+class AnnotationSelectionWrapper extends PureComponent {
   static displayName = "Annotation.Annotation.TextContent";
 
   static propTypes = {
@@ -17,7 +18,8 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     truncate: PropTypes.number,
     visitHandler: PropTypes.func,
     onAnnotate: PropTypes.func,
-    onLogin: PropTypes.func
+    onLogin: PropTypes.func,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -59,7 +61,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
   }
 
   render() {
-    const { annotation } = this.props;
+    const { annotation, t } = this.props;
     const wrapperClasses = classNames({
       "annotation-selection__text-container": true,
       "annotation-selection__text-container--dark": this.fullPageFormat,
@@ -89,7 +91,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
                 className="annotation-selection__button"
                 onClick={this.props.onAnnotate}
               >
-                {"Annotate"}
+                {t("actions.annotate")}
               </button>
             </Authorize>
             {this.canLogin && (
@@ -98,7 +100,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
                   className="annotation-selection__button"
                   onClick={this.props.onLogin}
                 >
-                  {"Login to annotate"}
+                  {t("actions.login_to_annotate")}
                 </button>
               </Authorize>
             )}
@@ -108,3 +110,5 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(AnnotationSelectionWrapper);

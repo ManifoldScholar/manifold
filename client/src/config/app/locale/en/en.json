@@ -51,19 +51,27 @@
       "creator_one": "creator",
       "creators_other": "creators",
       "full_text_one": "full text",
-      "full_text_other": "full texts"
+      "full_text_other": "full texts",
+      "comments__thread": "comments thread",
+      "author_one": "author",
+      "author_other": "authors"
     },
     "common": {
       "on": "on",
       "by": "by",
       "in": "in",
       "yours": "yours",
+      "you": "you",
+      "me": "me",
       "about": "about",
       "type": "type",
       "role": "role",
       "uncategorized": "uncategorized",
       "loading": "loading",
-      "content": "content"
+      "content": "content",
+      "private": "private",
+      "public": "public",
+      "visibility": "visibility"
     },
     "actions": {
       "edit": "Edit",
@@ -80,6 +88,7 @@
       "see_all": "See all",
       "read": "Start Reading",
       "read_more": "Read More",
+      "read_full": "Read the full passage",
       "download": "Download",
       "view_contents": "$t(actions.view) Contents",
       "add": "Add",
@@ -112,7 +121,17 @@
       "update": "Update",
       "post": "Post",
       "see_next_comment_one": "See next {{count}} comment",
-      "see_next_comment_other": "See next {{count}} comments"
+      "see_next_comment_other": "See next {{count}} comments",
+      "annotate": "Annotate",
+      "login_to_annotate": "Login to annotate",
+      "login_to_reply": "Login to reply",
+      "flag": "Flag",
+      "unflag": "Unflag",
+      "reply": "Reply",
+      "annotate": "Annotate",
+      "annotate_passage": "$t(actions.annotate) this passage",
+      "manage": "Manage",
+      "manage_groups": "$t(actions.manage) groups"
     },
     "search": {
       "title": "Search",
@@ -145,7 +164,9 @@
         "details": "Details",
         "my_groups": "My Reading Groups",
         "public_groups": "Public Reading Groups",
-        "create": "Create New Group"
+        "create": "Create New Group",
+        "my_private_annotations": "My Private Annotations",
+        "my_public_annotations": "My Public Annotations"
       },
       "breadcrumbs": {
         "all_journals": "All $t(glossary.journal_other)",
@@ -219,7 +240,12 @@
       "content_block_warning_heading": "This content block needs your attention before it can be displayed.",
       "content_block_warning_note": "Note: This message is only visible to project editors.",
       "showing_resource": "Showing {{ type }} resource: {{ title }}",
-      "unsaved_changes": "You may have unsaved changes. Do you want to leave without saving your changes?"
+      "unsaved_changes": "You may have unsaved changes. Do you want to leave without saving your changes?",
+      "annotation_summary": {
+        "highlight": "{{creator}} highlighted \"{{section}}\" in <5></5> on <8></8>.",
+        "annotation": "{{creator}} annotated \"{{section}}\" in <5></5> on <8></8>.",
+        "source": "\"{{section}}\" in <4></4>"
+      }
     },
     "forms": {
       "add_to": "Add this to",
@@ -412,7 +438,11 @@
       "text_annotations_one": "This text has {{count}} annotation",
       "text_annotations_other": "This text has {{count}} annotations",
       "text_highlights_one": "This text has {{count}} highlight",
-      "text_highlights_other": "This text has {{count}} highlights"
+      "text_highlights_other": "This text has {{count}} highlights",
+      "comment_one": "{{count}} comment",
+      "comment_other": "{{count}} comments",
+      "flag_one": "{{count}} flag",
+      "flag_other": "{{count}} flags"
     },
     "dates": {
       "added": "added",

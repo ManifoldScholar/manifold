@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Helper from "global/components/helper";
 import Utility from "frontend/components/utility";
@@ -23,7 +24,8 @@ class AnnotationDetail extends PureComponent {
     annotation: PropTypes.object.isRequired,
     showLogin: PropTypes.func,
     includeComments: PropTypes.bool.isRequired,
-    showCommentsToggleAsBlock: PropTypes.bool
+    showCommentsToggleAsBlock: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -171,7 +173,7 @@ class AnnotationDetail extends PureComponent {
           className={this.editButtonClassNames}
           onClick={this.loadComments}
         >
-          {`${this.commentsCount} ${this.commentsCountLabel}`}
+          {this.props.t("counts.comment", { count: this.commentsCount })}
         </button>
       </li>
     );
@@ -186,7 +188,9 @@ class AnnotationDetail extends PureComponent {
           <span className="annotation-footer-button__icon-container">
             <IconComposer icon="interactComment32" size="default" />
           </span>
-          <span className="annotation-footer-button__text">{`${this.commentsCount} ${this.commentsCountLabel}`}</span>
+          <span className="annotation-footer-button__text">
+            {this.props.t("counts.comment", { count: this.commentsCount })}
+          </span>
           <IconComposer
             icon="arrowLongRight16"
             size={24}
@@ -198,7 +202,7 @@ class AnnotationDetail extends PureComponent {
   }
 
   render() {
-    const { annotation } = this.props;
+    const { annotation, t } = this.props;
     if (!annotation) return null;
 
     const creator = this.props.annotation.relationships.creator;
@@ -231,7 +235,7 @@ class AnnotationDetail extends PureComponent {
                           className={this.replyButtonClassNames}
                           onClick={this.startReply}
                         >
-                          {"Reply"}
+                          {t("actions.reply")}
                         </button>
                       </li>
                     ) : null}
@@ -241,14 +245,14 @@ class AnnotationDetail extends PureComponent {
                           className={this.editButtonClassNames}
                           onClick={this.startEdit}
                         >
-                          {"Edit"}
+                          {t("actions.edit")}
                         </button>
                       </li>
                     </Authorize>
                     <Authorize entity={annotation} ability={"delete"}>
                       <li>
                         <Utility.ConfirmableButton
-                          label="Delete"
+                          label={t("actions.delete")}
                           confirmHandler={this.deleteAnnotation}
                         />
                       </li>
@@ -259,7 +263,7 @@ class AnnotationDetail extends PureComponent {
                           className={this.secondaryButtonClassNames}
                           onClick={this.handleUnflag}
                         >
-                          {"Unflag"}
+                          {t("actions.unflag")}
                         </button>
                       </li>
                     ) : (
@@ -268,7 +272,7 @@ class AnnotationDetail extends PureComponent {
                           onClick={this.handleFlag}
                           className={this.listButtonBaseClassNames}
                         >
-                          {"Flag"}
+                          {t("actions.flag")}
                         </button>
                       </li>
                     )}
@@ -291,7 +295,7 @@ class AnnotationDetail extends PureComponent {
                           onClick={this.props.showLogin}
                           className={this.listButtonBaseClassNames}
                         >
-                          {"Login to reply"}
+                          {t("actions.login_to_reply")}
                         </button>
                       </li>
                     </ul>
@@ -303,7 +307,7 @@ class AnnotationDetail extends PureComponent {
           <div
             ref={this.threadRef}
             tabIndex={-1}
-            aria-label="Comments thread"
+            aria-label={t("glossary.comments__thread")}
             className="annotation-comments__thread-container"
           >
             {this.includeComments && (
@@ -317,4 +321,4 @@ class AnnotationDetail extends PureComponent {
   }
 }
 
-export default connect()(AnnotationDetail);
+export default withTranslation()(connect()(AnnotationDetail));

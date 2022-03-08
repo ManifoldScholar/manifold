@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import Authorize from "hoc/Authorize";
@@ -7,13 +8,14 @@ import Avatar from "global/components/avatar/index";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 
-export default class AnnotationMeta extends PureComponent {
+class AnnotationMeta extends PureComponent {
   static displayName = "Annotation.Meta";
 
   static propTypes = {
     annotation: PropTypes.object.isRequired,
     subject: PropTypes.string,
-    includeMarkers: PropTypes.bool
+    includeMarkers: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -27,11 +29,12 @@ export default class AnnotationMeta extends PureComponent {
 
   get name() {
     const {
+      t,
       annotation: {
         attributes: { currentUserIsCreator, creatorName }
       }
     } = this.props;
-    if (currentUserIsCreator) return "Me";
+    if (currentUserIsCreator) return t("common.me");
     return creatorName;
   }
 
@@ -45,14 +48,14 @@ export default class AnnotationMeta extends PureComponent {
   }
 
   get dateSubtitle() {
-    const { annotation } = this.props;
+    const { annotation, t } = this.props;
     return (
       <span className="annotation-meta__datetime">
         <FormattedDate
           format="distanceInWords"
           date={annotation.attributes.createdAt}
         />{" "}
-        ago
+        {t("dates.ago")}
       </span>
     );
   }
@@ -76,21 +79,23 @@ export default class AnnotationMeta extends PureComponent {
   }
 
   renderMarkers(annotation) {
+    const t = this.props.t;
     return (
       <div className="annotation-tag annotation-tag--group">
         {annotation.attributes.authorCreated && (
-          <div className="annotation-tag__inner">Author</div>
+          <div className="annotation-tag__inner">
+            {t("glossary.author_one")}
+          </div>
         )}
         {annotation.attributes.private && (
           <div className="annotation-tag__inner annotation-tag--secondary">
-            {"Private"}
+            {t("common.private")}
           </div>
         )}
         {annotation.attributes.flagsCount > 0 && (
           <Authorize kind="admin">
             <div className="annotation-tag__inner annotation-tag--secondary">
-              {annotation.attributes.flagsCount}
-              {annotation.attributes.flagsCount === 1 ? " flag" : " flags"}
+              {t("counts.flag", { count: annotation.attributes.flagsCount })}
             </div>
           </Authorize>
         )}
@@ -132,3 +137,5 @@ export default class AnnotationMeta extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(AnnotationMeta);

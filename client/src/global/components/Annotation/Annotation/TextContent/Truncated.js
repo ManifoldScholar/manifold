@@ -1,14 +1,16 @@
 import React, { PureComponent } from "react";
+import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import nl2br from "nl2br";
 
-export default class AnnotationSelectionTruncated extends PureComponent {
+class AnnotationSelectionTruncated extends PureComponent {
   static displayName = "Annotation.Annotation.TextContentTruncated";
 
   static propTypes = {
     selection: PropTypes.string,
-    truncate: PropTypes.number.isRequired
+    truncate: PropTypes.number.isRequired,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -86,9 +88,11 @@ export default class AnnotationSelectionTruncated extends PureComponent {
           className={this.showFullButtonClassNames}
           onClick={this.handleShowFull}
         >
-          {"Read Full Passage"}
+          {this.props.t("actions.read_full")}
         </button>
       </>
     );
   }
 }
+
+export default withTranslation()(AnnotationSelectionTruncated);

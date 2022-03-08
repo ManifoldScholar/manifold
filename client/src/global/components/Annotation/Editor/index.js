@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import GlobalForm from "global/components/form";
 import IconComposer from "global/components/utility/IconComposer";
 import { Link } from "react-router-dom";
@@ -18,7 +19,8 @@ class AnnotationEditor extends PureComponent {
     saveAnnotation: PropTypes.func.isRequired,
     annotation: PropTypes.object,
     cancel: PropTypes.func,
-    closeOnSave: PropTypes.bool
+    closeOnSave: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -88,11 +90,11 @@ class AnnotationEditor extends PureComponent {
   }
 
   get publicLabel() {
-    return "My Public Annotations";
+    return this.props.t("navigation.reading_group.my_public_annotations");
   }
 
   get privateLabel() {
-    return "My Private Annotations";
+    return this.props.t("navigation.reading_group.my_private_annotations");
   }
 
   get currentGroupName() {
@@ -258,7 +260,7 @@ class AnnotationEditor extends PureComponent {
               to={lh.link("frontendMyReadingGroups")}
               className="annotation-manage-groups-link"
             >
-              <span>Manage Groups</span>
+              <span>{this.props.t("actions.manage_groups")}</span>
               <IconComposer icon="link24" size="default" />
             </Link>
           </div>
@@ -288,6 +290,7 @@ class AnnotationEditor extends PureComponent {
   }
 
   render() {
+    const t = this.props.t;
     return (
       <div className="annotation-editor">
         <form onSubmit={this.handleSubmit}>
@@ -297,7 +300,7 @@ class AnnotationEditor extends PureComponent {
             idForError="annotation-textarea-error"
           >
             <label htmlFor="annotation-textarea" className="screen-reader-text">
-              Annotate this passage
+              {t("actions.annotate_passage")}
             </label>
             <textarea
               ref={ci => {
@@ -306,7 +309,7 @@ class AnnotationEditor extends PureComponent {
               id="annotation-textarea"
               aria-describedby="annotation-textarea-error"
               style={{ width: "100%" }}
-              placeholder={"Annotate this passage..."}
+              placeholder={`${t("actions.annotate_passage")}...`}
               onChange={this.handleBodyChange}
               value={this.state.body}
               className="annotation-editor__textarea"
@@ -326,8 +329,8 @@ class AnnotationEditor extends PureComponent {
                       />
                       <span id={`${id}-label`}>
                         {this.canAccessReadingGroups
-                          ? "Reading Group:"
-                          : "Visibility:"}
+                          ? `${t("glossary.reading_group_one")}:`
+                          : `${t("common.visibility")}`}
                       </span>
                     </div>
 
@@ -342,10 +345,12 @@ class AnnotationEditor extends PureComponent {
                 onClick={this.handleCancel}
                 className="button-primary button-primary--gray"
               >
-                <span className="button-primary__text">Cancel</span>
+                <span className="button-primary__text">
+                  {t("actions.cancel")}
+                </span>
               </button>
               <button className="button-secondary" disabled={!this.state.body}>
-                Save
+                {t("actions.save")}
               </button>
             </div>
           </div>
@@ -355,4 +360,6 @@ class AnnotationEditor extends PureComponent {
   }
 }
 
-export default withReadingGroups(withCurrentUser(AnnotationEditor));
+export default withTranslation()(
+  withReadingGroups(withCurrentUser(AnnotationEditor))
+);
