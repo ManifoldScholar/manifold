@@ -44,13 +44,13 @@ function CurrentReadingGroup({
         <span className="screen-reader-text">
           {t("reader.actions.select_reading_group")}
         </span>
-        <span className="annotation-popup__button-text">
+        <span className="annotation-popup__button-text" aria-hidden>
           {canAccessReadingGroups
             ? t("reader.menus.popup.current_group")
             : t("reader.menus.popup.current_visibility")}
           :
         </span>
-        <div className="annotation-popup__button-inner-row">
+        <div className="annotation-popup__button-inner-row" aria-hidden>
           <span className="annotation-popup__button-text annotation-popup__button-text--small">
             {getCurrentGroupName()}
           </span>

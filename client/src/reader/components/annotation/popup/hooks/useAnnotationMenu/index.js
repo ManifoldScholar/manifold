@@ -15,11 +15,23 @@ export default function useAnnotationMenu({ menuArray, defaultMenu, visible }) {
    */
   /* eslint-disable react-hooks/rules-of-hooks */
   const menus = Object.fromEntries(
-    menuArray.map(menu => [menu, useMenuState(MENU_OPTIONS)])
+    menuArray.map(menu => [
+      menu,
+      {
+        ...useMenuState(MENU_OPTIONS),
+        // Prevent reakit from moving focus based on mouse events,
+        // which causes selection highlighting to disappear in FF and Safari
+        // see https://github.com/ManifoldScholar/manifold/pull/3086#issuecomment-1030141362
+        onMouseEnter: event => event.preventDefault(),
+        onMouseMove: event => event.preventDefault(),
+        onMouseLeave: event => event.preventDefault(),
+        onMouseDown: event => event.preventDefault()
+      }
+    ])
   );
   /* eslint-enable react-hooks/rules-of-hooks */
 
-  const [activeMenu, setActiveMenu] = useState(null);
+  const [activeMenu, setMenu] = useState(null);
 
   // track the previous state so that we can detect movement between two menus (see `handleKeyDown`)
   useEffect(() => {
@@ -29,12 +41,12 @@ export default function useAnnotationMenu({ menuArray, defaultMenu, visible }) {
   useEffect(() => {
     if (visible) {
       lastFocus.current = document.activeElement;
-      setActiveMenu(defaultMenu);
+      setMenu(defaultMenu);
     } else {
       if (lastFocus.current) {
         lastFocus.current.focus();
       }
-      setActiveMenu(null);
+      setMenu(null);
     }
   }, [visible, defaultMenu]);
 
@@ -49,16 +61,26 @@ export default function useAnnotationMenu({ menuArray, defaultMenu, visible }) {
         target: { dataset }
       } = event;
 
-      if (key === "ArrowRight" && sourceMenu === defaultMenu && dataset.name) {
-        setActiveMenu(dataset.name);
+      if (key === "ArrowRight") {
+        if (sourceMenu === defaultMenu && dataset.name) {
+          setMenu(dataset.name);
+        } else {
+          event.preventDefault(); // prevent arrowing out of menu altogether in caret browsing mode
+        }
       }
 
-      if (key === "ArrowLeft" && sourceMenu !== defaultMenu) {
-        setActiveMenu("main");
+      if (key === "ArrowLeft") {
+        if (sourceMenu !== defaultMenu) {
+          setMenu("main");
+        } else {
+          event.preventDefault(); // prevent arrowing out of menu altogether in caret browsing mode
+        }
       }
     },
     [defaultMenu]
   );
+
+  const setActiveMenu = useCallback(name => setMenu(name), []);
 
   return {
     menus,

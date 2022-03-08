@@ -4,7 +4,14 @@ import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
 
-function FollowLink({ menu, visible, direction, activeEvent, actions }) {
+function FollowLink({
+  menu,
+  visible,
+  direction,
+  activeEvent,
+  actions,
+  isKeyboardSelection
+}) {
   const { link, annotationIds } = activeEvent;
   const { openViewAnnotationsDrawer } = actions;
 
@@ -20,6 +27,7 @@ function FollowLink({ menu, visible, direction, activeEvent, actions }) {
       visible={visible}
       aria-label={t("reader.menus.popup.follow_link")}
       direction={direction}
+      isKeyboardSelection={isKeyboardSelection}
     >
       <MenuItem
         menu={{ ...menu, visible }}

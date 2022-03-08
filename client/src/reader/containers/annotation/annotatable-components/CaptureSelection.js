@@ -112,7 +112,11 @@ export default class AnnotatableCaptureSelection extends Component {
     return event.type !== "selectionchange";
   }
 
-  updateSelectionState(event = null, selectionComplete = false) {
+  updateSelectionState(
+    event = null,
+    selectionComplete = false,
+    isKeyboardSelection = false
+  ) {
     try {
       const { selectionState } = this.props;
       const selection = this.mapNativeSelection(this.nativeSelection);
@@ -128,7 +132,8 @@ export default class AnnotatableCaptureSelection extends Component {
         ),
         selectionComplete: complete,
         popupTriggerX: selection && x ? x : selectionState.popupTriggerX,
-        popupTriggerY: selection && y ? y : selectionState.popupTriggerY
+        popupTriggerY: selection && y ? y : selectionState.popupTriggerY,
+        isKeyboardSelection
       });
       this.props.updateSelection(newState);
     } catch (error) {
@@ -248,7 +253,7 @@ export default class AnnotatableCaptureSelection extends Component {
   handleKeyUp = event => {
     const { key, shiftKey } = event;
     if (key === "Shift" && shiftKey === false)
-      this.updateSelectionState(event, true);
+      this.updateSelectionState(event, true, true);
   };
 
   get focusInPopup() {

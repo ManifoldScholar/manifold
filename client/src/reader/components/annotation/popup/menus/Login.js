@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
 
-function Login({ menu, visible, direction, actions }) {
+function Login({ menu, visible, direction, actions, isKeyboardSelection }) {
   const { t } = useTranslation();
 
   return (
@@ -13,6 +13,7 @@ function Login({ menu, visible, direction, actions }) {
       visible={visible}
       aria-label={t("reader.menus.popup.log_in_annotate")}
       direction={direction}
+      isKeyboardSelection={isKeyboardSelection}
     >
       <MenuItem
         menu={menu}
@@ -31,7 +32,8 @@ Login.propTypes = {
   menu: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   direction: PropTypes.oneOf(["up", "down"]),
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
+  isKeyboardSelection: PropTypes.bool
 };
 
 export default Login;
