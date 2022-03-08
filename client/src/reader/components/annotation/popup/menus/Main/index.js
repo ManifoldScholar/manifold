@@ -25,7 +25,7 @@ function MainMenu({
   return (
     <Menu
       menu={menu}
-      aria-label={t("reader.annotate")}
+      aria-label={t("action.annotate")}
       visible={visible}
       activeMenu={activeMenu}
       lastActiveMenu={lastActiveMenu}

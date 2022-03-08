@@ -23,7 +23,10 @@ class AppearanceMenuBody extends Component {
   handleFontStyleControl = event => {
     this.props.selectFont(event.target.value);
     this.props.setScreenReaderStatus(
-      this.resetOptionMessage(this.props.t("reader.font"), event.target.value)
+      this.resetOptionMessage(
+        this.props.t("reader.appearance.font"),
+        event.target.value
+      )
     );
   };
 
@@ -31,7 +34,7 @@ class AppearanceMenuBody extends Component {
     this.props.setColorScheme(event.target.value);
     this.props.setScreenReaderStatus(
       this.resetOptionMessage(
-        this.props.t("reader.color_scheme"),
+        this.props.t("reader.appearance.color_scheme"),
         event.target.value
       )
     );
@@ -73,48 +76,38 @@ class AppearanceMenuBody extends Component {
   };
 
   resetOptionMessage(appearanceType, option) {
-    return this.props.t("reader.reset_option_message", {
+    return this.props.t("reader.appearance.reset_option_message", {
       appearanceType,
       option
     });
   }
 
   get incrementMarginsMessage() {
-    const baseMessage = this.props.t("reader.margin_increased");
-    const appendedMessage = this.marginIncreaseable
-      ? "."
-      : " " + this.props.t("reader.to_max");
-    return baseMessage + appendedMessage;
+    return this.marginIncreaseable
+      ? this.props.t("reader.appearance.margin_size_increased")
+      : this.props.t("reader.appearance.margin_size_increased_max");
   }
 
   get decrementMarginsMessage() {
-    const baseMessage = this.props.t("reader.margin_decreased");
-    const appendedMessage = this.marginDecreasable
-      ? "."
-      : " " + this.props.t("reader.to_min");
-    return baseMessage + appendedMessage;
+    return this.marginDecreasable
+      ? this.props.t("reader.appearance.margin_size_decreased")
+      : this.props.t("reader.appearance.margin_size_decreased_min");
   }
 
   get incrementFontMessage() {
-    const baseMessage = this.props.t("reader.font_increased");
-    const appendedMessage =
-      this.fontSize.current < this.fontSize.max
-        ? "."
-        : " " + this.props.t("reader.to_max");
-    return baseMessage + appendedMessage;
+    return this.fontSize.current < this.fontSize.max
+      ? this.props.t("reader.appearance.font_size_increased")
+      : this.props.t("reader.appearance.font_size_increased_max");
   }
 
   get decrementFontMessage() {
-    const baseMessage = this.props.t("reader.font_decreased");
-    const appendedMessage =
-      this.fontSize.current > this.fontSize.min
-        ? "."
-        : " " + this.props.t("reader.to_min");
-    return baseMessage + appendedMessage;
+    return this.fontSize.current > this.fontSize.min
+      ? this.props.t("reader.appearance.font_size_decreased")
+      : this.props.t("reader.appearance.font_size_decreased_min");
   }
 
   get resetMessage() {
-    return this.props.t("reader.appearance_reset");
+    return this.props.t("reader.appearance.appearance_reset");
   }
 
   get typography() {
@@ -219,7 +212,7 @@ class AppearanceMenuBody extends Component {
     return (
       <fieldset className="appearance-menu__radio-group">
         <legend className="screen-reader-text">
-          {this.props.t("reader.select_font")}
+          {this.props.t("reader.appearance.select_font")}
         </legend>
         <div className="appearance-menu__radio-stack">
           {this.fontStyleOptions.map((option, index) => (
@@ -256,7 +249,7 @@ class AppearanceMenuBody extends Component {
     return (
       <fieldset className="appearance-menu__radio-group">
         <legend className="screen-reader-text">
-          {this.props.t("reader.select_color")}
+          {this.props.t("reader.appearance.select_color")}
         </legend>
         {this.colorSchemeOptions.map((option, index) => (
           <label key={option.value} className={labelClassName(option)}>
@@ -295,7 +288,10 @@ class AppearanceMenuBody extends Component {
             {this.renderFontStyleControl()}
           </div>
           <div className="appearance-menu__font-size-control appearance-menu__font-size-control--serif">
-            <div role="group" aria-label={this.props.t("reader.adjust_font")}>
+            <div
+              role="group"
+              aria-label={this.props.t("reader.appearance.adjust_font")}
+            >
               <button
                 className={fontSizeButtonClass}
                 disabled={this.serifDisabled}
@@ -306,7 +302,7 @@ class AppearanceMenuBody extends Component {
               >
                 <Utility.IconComposer icon="MinusUnique" size={30} />
                 <span className="screen-reader-text">
-                  {this.props.t("reader.decrease_font")}
+                  {this.props.t("reader.appearance.decrease_font")}
                 </span>
               </button>
               <button
@@ -319,7 +315,7 @@ class AppearanceMenuBody extends Component {
               >
                 <Utility.IconComposer icon="PlusUnique" size={30} />
                 <span className="screen-reader-text">
-                  {this.props.t("reader.increase_font")}
+                  {this.props.t("reader.appearance.increase_font")}
                 </span>
               </button>
             </div>
@@ -336,7 +332,7 @@ class AppearanceMenuBody extends Component {
               >
                 <Utility.IconComposer icon="MinusUnique" size={30} />
                 <span className="screen-reader-text">
-                  {this.props.t("reader.decrease_font")}
+                  {this.props.t("reader.appearance.decrease_font")}
                 </span>
               </button>
               <button
@@ -349,7 +345,7 @@ class AppearanceMenuBody extends Component {
               >
                 <Utility.IconComposer icon="PlusUnique" size={30} />
                 <span className="screen-reader-text">
-                  {this.props.t("reader.increase_font")}
+                  {this.props.t("reader.appearance.increase_font")}
                 </span>
               </button>
             </div>
@@ -380,7 +376,7 @@ class AppearanceMenuBody extends Component {
       <li className="appearance-menu__section control-menu__section">
         <div
           role="group"
-          aria-label={this.props.t("reader.adjust_margin")}
+          aria-label={this.props.t("reader.appearance.adjust_margin")}
           className="appearance-menu__control-margins"
         >
           <button
@@ -393,7 +389,7 @@ class AppearanceMenuBody extends Component {
               className="appearance-menu__menu-icon"
             />
             <span className="screen-reader-text">
-              {this.props.t("reader.increase_margin")}
+              {this.props.t("reader.appearance.increase_margin")}
             </span>
           </button>
           <button
@@ -406,7 +402,7 @@ class AppearanceMenuBody extends Component {
               className="appearance-menu__menu-icon"
             />
             <span className="screen-reader-text">
-              {this.props.t("reader.decrease_margin")}
+              {this.props.t("reader.appearance.decrease_margin")}
             </span>
           </button>
         </div>
@@ -419,7 +415,7 @@ class AppearanceMenuBody extends Component {
       <div className="appearance-menu control-menu">
         <div className="control-menu__header">
           <div className="control-menu__heading">
-            {this.props.t("reader.adjust_appearance") + ":"}
+            {this.props.t("reader.appearance.adjust_appearance") + ":"}
           </div>
         </div>
         <ul className="appearance-menu__list">
@@ -438,7 +434,7 @@ class AppearanceMenuBody extends Component {
               size={32}
               className="appearance-menu__reload-icon"
             />
-            <span>{this.props.t("reader.reset_to_defaults")}</span>
+            <span>{this.props.t("reader.appearance.reset_to_defaults")}</span>
           </button>
         </div>
       </div>

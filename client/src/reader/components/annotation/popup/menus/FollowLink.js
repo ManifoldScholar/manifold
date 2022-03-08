@@ -35,7 +35,7 @@ function FollowLink({ menu, visible, direction, activeEvent, actions }) {
         menu={{ ...menu, visible }}
         onClick={handleAnnotateClick}
         kind="any"
-        label={t("reader.annotate")}
+        label={t("action.annotate")}
         icon="comment24"
       />
     </Menu>
