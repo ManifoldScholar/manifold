@@ -268,7 +268,9 @@
       "unauthorized": {
         "heading": "Access Denied",
         "body": "You must be logged in to manage notification preferences."
-      }
+      },
+      "no_collapse_context": "Collapse components cannot be rendered outside the Collapse wrapper component.",
+      "color_scheme": "Manifold color scheme error!"
     },
     "placeholders": {
       "link": "Link",
