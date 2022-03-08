@@ -1,16 +1,16 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
 function FilteredAnnotationsPlaceholder({ style }) {
+  const { t } = useTranslation();
   return (
     <Wrapper context="frontend" style={style}>
       <Title icon="readingGroup24">
-        No annotations matched your search criteria.
+        {t("placeholders.annotations_filtered.title")}
       </Title>
       <Body>
-        <p>
-          Try removing the text or member filter above to see more annotations.
-        </p>
+        <p>{t("placeholders.annotations_filtered.body")}</p>
       </Body>
       <Actions />
     </Wrapper>

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
@@ -8,6 +9,7 @@ import { useCurrentUser } from "hooks";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
 function GroupAnnotationsPlaceholder({ readingGroup, refresh, style }) {
+  const { t } = useTranslation();
   const currentUser = useCurrentUser();
   const loggedIn = !isEmpty(currentUser);
   const userIsMember = readingGroup.attributes.currentUserRole === "none";
@@ -15,14 +17,13 @@ function GroupAnnotationsPlaceholder({ readingGroup, refresh, style }) {
   function getContent() {
     if (!loggedIn) {
       return {
-        title: "This group doesn‘t have any annotations yet.",
-        body:
-          "Sign up or log in, then join this group and be the first member to create an annotation!",
+        title: t("placeholders.annotations_group.no_user.title"),
+        body: t("placeholders.annotations_group.no_user.body"),
         actions: [
           {
             children: (
               <Link to={lh.link("frontendLogin")} className="button-tertiary">
-                Log in
+                {t("navigation.user.log_in")}
               </Link>
             )
           }
@@ -32,16 +33,15 @@ function GroupAnnotationsPlaceholder({ readingGroup, refresh, style }) {
 
     if (!userIsMember) {
       return {
-        title: "This group doesn‘t have any annotations yet.",
-        body:
-          "Join and be the first member to create an annotation! While reading, you can associate a new or existing annotation with this group.",
+        title: t("placeholders.annotations_group.user_not_member.title"),
+        body: t("placeholders.annotations_group.user_not_member.body"),
         actions: [
           {
             children: (
               <JoinGroup
                 readingGroup={readingGroup}
                 onSuccess={refresh}
-                buttonText="Join this group"
+                buttonText={t("actions.join_group")}
               />
             )
           }
@@ -50,9 +50,8 @@ function GroupAnnotationsPlaceholder({ readingGroup, refresh, style }) {
     }
 
     return {
-      title: "Be the first reader to annotate in this group!",
-      body:
-        "While reading, you can associate a new or existing annotation with this group.",
+      title: t("placeholders.annotations_group.user_is_member.title"),
+      body: t("placeholders.annotations_group.user_is_member.body"),
       actions: []
     };
   }

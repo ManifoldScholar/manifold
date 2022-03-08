@@ -1,19 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import Animation from "./Animation";
 import { Actions, Body, Title, Wrapper } from "../../parts";
 
 function MyStarredPlaceholder() {
+  const { t } = useTranslation();
   return (
     <Wrapper>
-      <Title>You haven’t starred any items … yet.</Title>
+      <Title>{t("placeholders.my_starred.title")}</Title>
       <Body>
-        <p>
-          But don’t fret, we’ve made it easy. Anywhere you see an empty star
-          icon, just select it to add that item to your collection. You can star
-          all kinds of items, so start browsing projects and get starring!
-        </p>
+        <p>{t("placeholders.my_starred.body")}</p>
         <Animation />
       </Body>
       <Actions
@@ -24,7 +22,7 @@ function MyStarredPlaceholder() {
                 to={lh.link("frontendProjects")}
                 className="button-tertiary"
               >
-                Browse Projects
+                {t("navigation.browse_projects")}
               </Link>
             )
           }

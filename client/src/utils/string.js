@@ -34,7 +34,13 @@ export function hash(str) {
   return out >>> 0;
 }
 
-export function capitalize(s) {
+export function capitalize(s, all = false) {
+  if (all) {
+    return s
+      .split(" ")
+      .map(capitalize)
+      .join(" ");
+  }
   return s && s[0].toUpperCase() + s.slice(1);
 }
 
