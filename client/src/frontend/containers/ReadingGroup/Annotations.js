@@ -11,7 +11,11 @@ import {
   useListFilters
 } from "hooks";
 
-function ReadingGroupAnnotationsContainer({ readingGroup }) {
+function ReadingGroupAnnotationsContainer({
+  readingGroup,
+  refresh,
+  fetchVersion
+}) {
   const [pagination, setPageNumber] = usePaginationState();
   const baseFilters = {};
   const [filters, setFilters] = useFilterState(baseFilters);
@@ -20,7 +24,8 @@ function ReadingGroupAnnotationsContainer({ readingGroup }) {
   const { id } = useParams();
 
   const { data: annotations, meta } = useFetch({
-    request: [readingGroupsAPI.annotations, id, filters, pagination]
+    request: [readingGroupsAPI.annotations, id, filters, pagination],
+    dependencies: [fetchVersion]
   });
 
   const { annotatedTexts: texts, readingGroupMemberships: memberships } =
@@ -45,6 +50,7 @@ function ReadingGroupAnnotationsContainer({ readingGroup }) {
           paginationClickHandler: page => () => setPageNumber(page),
           paginationTarget: "#"
         }}
+        refresh={refresh}
         nested
       />
     </div>
@@ -52,7 +58,9 @@ function ReadingGroupAnnotationsContainer({ readingGroup }) {
 }
 
 ReadingGroupAnnotationsContainer.propTypes = {
-  readingGroup: PropTypes.object.isRequired
+  readingGroup: PropTypes.object.isRequired,
+  refresh: PropTypes.func.isRequired,
+  fetchVersion: PropTypes.number.isRequired
 };
 
 export default ReadingGroupAnnotationsContainer;

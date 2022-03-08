@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 import { Link } from "react-router-dom";
@@ -7,15 +7,10 @@ import { JoinGroup } from "frontend/components/reading-group/tables/Groups/actio
 import { useCurrentUser } from "hooks";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
-function GroupAnnotationsPlaceholder({ readingGroup, style }) {
-  // since RG data isn't refreshed when a user joins,
-  // we store join status in component state (set initially by RG data)
-  const [userIsMember, setUserIsMember] = useState(
-    readingGroup.attributes.currentUserRole !== "none"
-  );
-
+function GroupAnnotationsPlaceholder({ readingGroup, refresh, style }) {
   const currentUser = useCurrentUser();
   const loggedIn = !isEmpty(currentUser);
+  const userIsMember = readingGroup.attributes.currentUserRole === "none";
 
   function getContent() {
     if (!loggedIn) {
@@ -45,7 +40,7 @@ function GroupAnnotationsPlaceholder({ readingGroup, style }) {
             children: (
               <JoinGroup
                 readingGroup={readingGroup}
-                onSuccess={() => setUserIsMember(true)}
+                onSuccess={refresh}
                 buttonText="Join this group"
               />
             )
