@@ -62,7 +62,7 @@ function ShareMenu({
         kind="any"
         icon="socialTwitter32"
         label="Twitter"
-        srLabel={t("external_links.share_on_social", {service: "Twitter"})}
+        srLabel={t("external_links.share_on_social", { service: "Twitter" })}
       />
       {facebookAppId && (
         <MenuItem
@@ -74,7 +74,7 @@ function ShareMenu({
           kind="any"
           icon="socialFacebook32"
           label="Facebook"
-          srLabel={t("external_links.share_on_social", {service: "Facebook"})}
+          srLabel={t("external_links.share_on_social", { service: "Facebook" })}
         />
       )}
       <MenuItem
