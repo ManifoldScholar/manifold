@@ -12,6 +12,7 @@ function MainMenu({
   direction,
   onKeyDown,
   openSubmenu,
+  isKeyboardSelection,
   ...restProps
 }) {
   const itemProps = {
@@ -31,6 +32,7 @@ function MainMenu({
       lastActiveMenu={lastActiveMenu}
       direction={direction}
       onKeyDown={onKeyDown}
+      isKeyboardSelection={isKeyboardSelection}
     >
       <MenuItems.Share {...itemProps} onClick={() => openSubmenu("share")} />
       <MenuItems.Notate {...itemProps} />
@@ -55,7 +57,8 @@ MainMenu.propTypes = {
   lastActiveMenu: PropTypes.shape({
     current: PropTypes.string
   }),
-  direction: PropTypes.oneOf(["up", "down"])
+  direction: PropTypes.oneOf(["up", "down"]),
+  isKeyboardSelection: PropTypes.bool
 };
 
 export default MainMenu;

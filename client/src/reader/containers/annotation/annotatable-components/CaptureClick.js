@@ -42,21 +42,21 @@ export default class AnnotatableCaptureClick extends Component {
     }
   };
 
-  handleKeyDown = event => {
+  handleKeyUp = event => {
     if (!event || !event.target || (event.key !== "Enter" && event.key !== " "))
       return;
-    this.handleClick(event);
+    this.handleClick(event, true);
   };
 
-  handleClick = event => {
+  handleClick = (event, isKeyEvent = false) => {
     if (!event || !event.target) return;
     const el = event.target;
     if (this.doesElementContainAnnotationAndHighlight(el))
       this.handleDisambiguationClick(event, el);
     if (this.doesElementContainRemovableHighlight(el))
-      return this.handleRemovableHighlightClick(event, el);
+      return this.handleRemovableHighlightClick(event, el, isKeyEvent);
     if (this.doesElementContainAnnotation(el))
-      return this.handleAnnotationClick(event, el);
+      return this.handleAnnotationClick(event, el, isKeyEvent);
   };
 
   handleDisambiguationClick(eventIgnored, el) {
@@ -68,26 +68,28 @@ export default class AnnotatableCaptureClick extends Component {
     });
   }
 
-  handleRemovableHighlightClick(event, el) {
+  handleRemovableHighlightClick(event, el, isKeyEvent) {
     event.preventDefault();
     event.stopPropagation();
     const id = el.dataset.removableHighlightId;
-    this.props.updateActiveAnnotation(id, event);
+    this.props.updateActiveAnnotation(id, event, { isKeyEvent });
   }
 
-  handleAnnotationClick(event, el) {
+  handleAnnotationClick(event, el, isKeyEvent) {
     event.preventDefault();
     const link = selectionHelpers.closest(el, "a");
     const annotationIds = this.elementAnnotationIds(el);
-    if (link) return this.showLinkMenu(event, el, annotationIds, link);
+    if (link)
+      return this.showLinkMenu(event, el, annotationIds, link, isKeyEvent);
     this.props.actions.openViewAnnotationsDrawer(annotationIds);
   }
 
-  showLinkMenu(event, el, annotationIds, link) {
+  showLinkMenu(event, el, annotationIds, link, isKeyEvent) {
     event.stopPropagation();
     const eventInfo = {
       annotationIds,
-      link
+      link,
+      isKeyEvent
     };
     this.props.updateActiveAnnotation(annotationIds[0], event, eventInfo);
   }
@@ -105,7 +107,7 @@ export default class AnnotatableCaptureClick extends Component {
       <div
         className="no-focus-outline"
         onClick={this.handleClick}
-        onKeyDown={this.handleKeyDown}
+        onKeyUp={this.handleKeyUp}
         onMouseUp={this.handleMouseUp}
         tabIndex={-1}
       >

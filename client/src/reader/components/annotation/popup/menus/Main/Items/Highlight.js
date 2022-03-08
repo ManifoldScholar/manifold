@@ -30,7 +30,11 @@ function Highlight({ menu, actions, activeAnnotation }) {
         })}
         kind="any"
         label={t("reader.menus.popup.highlight")}
-        srLabel={t("reader.menus.popup.highlight_selection")}
+        srLabel={
+          highlighted
+            ? t("reader.menus.popup.unhighlight_selection")
+            : t("reader.menus.popup.highlight_selection")
+        }
         icon="annotate24"
       />
       {highlighted && (

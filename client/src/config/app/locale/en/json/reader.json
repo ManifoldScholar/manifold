@@ -2,6 +2,7 @@
   "reader": {
     "actions": {
       "copy": "Copy",
+      "cite": "Cite",
       "select_reading_group": "Select $t(glossary.reading_group_one)",
       "annotate_passage": "$t(actions.annotate) this passage",
       "visit_resource_page": "$t(actions.visit) $t(glossary.resource_title_case_one) $t(common.page_title_case_one)",
@@ -48,6 +49,7 @@
         "log_in_annotate": "Log in to $t(actions.annotate)",
         "highlight": "Highlight",
         "highlight_selection": "$t(reader.menus.popup.highlight) $t(glossary.selection_one)",
+        "unhighlight_selection": "Remove highlight",
         "you_highlighted": "You Highlighted",
         "reader_highlighted": "A Reader Highlighted",
         "attach_resource": "Attach resource to $t(glossary.selection_one)",

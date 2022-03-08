@@ -9,13 +9,14 @@ function Menu({
   lastActiveMenu,
   onKeyDown,
   direction,
+  isKeyboardSelection = false,
   children,
   ...menuProps
 }) {
   // Focus on first interactive el when menu becomes visible.
   // Or on last interactive el if moving from RG menu to main menu.
   useEffect(() => {
-    if (!menuProps.visible) return;
+    if (!menuProps.visible || !isKeyboardSelection) return;
     const fromRGtoMain =
       activeMenu === "main" && lastActiveMenu?.current === "readingGroup";
     fromRGtoMain ? menu.last() : menu.first();
@@ -36,7 +37,7 @@ function Menu({
     <ReakitMenu
       {...menu}
       {...menuProps}
-      unstable_finalFocusRef={undefined} // we handle this on our own since there's no disclosure component
+      unstable_autoFocusOnHide={false} // we handle this on our own since there's no disclosure component
       className={menuClassName}
       onKeyDown={onKeyDown}
     >
