@@ -52,6 +52,7 @@ export default function Masthead({ entity }) {
           sizes={`(max-width: ${breakpoints[60]}) 640px, (max-width: ${breakpoints[120]}) 1280px`}
           src={image.largeLandscape}
           alt=""
+          loading="lazy"
         />
       )}
       {logo && (
@@ -63,6 +64,7 @@ export default function Masthead({ entity }) {
           `}
             src={logo.original}
             alt=""
+            loading="lazy"
           />
         </Styled.LogoWrapper>
       )}

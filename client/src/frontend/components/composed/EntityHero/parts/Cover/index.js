@@ -8,7 +8,11 @@ export default function HeroCover({ entity }) {
 
   return (
     <Styled.Cover>
-      {cover ? <img src={cover} alt="" /> : <EntityAvatar entity={entity} />}
+      {cover ? (
+        <img src={cover} alt="" loading="lazy" />
+      ) : (
+        <EntityAvatar entity={entity} />
+      )}
     </Styled.Cover>
   );
 }

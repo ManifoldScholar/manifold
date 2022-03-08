@@ -66,6 +66,7 @@ function Header({
           alt=""
           width={getImageWidthAttr(layout)}
           height={imageSize}
+          loading="lazy"
           $layout={layout}
         />
       )}
