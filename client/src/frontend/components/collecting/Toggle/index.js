@@ -13,7 +13,7 @@ import Icons from "./Icons";
 import { inCollections } from "../helpers";
 import { useCurrentUser } from "hooks";
 
-const COLLECTABLE_TYPE_RESTRICTED_LIST = ["journals", "journalIssues"];
+const COLLECTABLE_TYPE_RESTRICTED_LIST = ["journals"];
 
 const { request } = entityStoreActions;
 

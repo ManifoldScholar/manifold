@@ -15,9 +15,14 @@ function collectionRef(collection) {
   };
 }
 
+function getCollectableType(collectable) {
+  if (collectable.attributes?.isJournalIssue) return "journalIssues";
+  return collectable.type;
+}
+
 function mapCollectables(collectables) {
   return collectables.map(collectable => ({
-    collectableType: collectable.type,
+    collectableType: getCollectableType(collectable),
     collectableId: collectable.id,
     groupingId:
       collectable.groupingId === "$uncategorized$"
