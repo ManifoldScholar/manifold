@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { withTranslation } from "react-i18next";
 import colorHelper from "tinycolor2";
 import ColorSchemeGenerator from "helpers/colorSchemeGenerator";
 import { Helmet } from "react-helmet-async";
 
-export default class ColorScheme extends Component {
+class ColorScheme extends Component {
   constructor(props) {
     super(props);
     this.colorSchemeGenerator = new ColorSchemeGenerator(this.accentColor());
@@ -49,7 +50,7 @@ export default class ColorScheme extends Component {
       this.colorSchemeGenerator.setColorScheme();
     } catch (error) {
       /* eslint-disable no-console */
-      console.log(error, "Manifold color scheme error!");
+      console.log(error, this.props.t("errors.color_scheme"));
       /* eslint-enable no-console */
     }
   }
@@ -61,7 +62,7 @@ export default class ColorScheme extends Component {
       rules = this.colorSchemeGenerator.generatedRules;
     } catch (error) {
       /* eslint-disable no-console */
-      console.log(error, "Manifold color scheme error!");
+      console.log(error, this.props.t("errors.color_scheme"));
       /* eslint-enable no-console */
       return null;
     }
@@ -112,3 +113,5 @@ export default class ColorScheme extends Component {
     return <Helmet style={[{ cssText }]} />;
   }
 }
+
+export default withTranslation()(ColorScheme);
