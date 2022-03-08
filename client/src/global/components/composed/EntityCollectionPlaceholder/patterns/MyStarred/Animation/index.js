@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Block from "./Block";
 import * as Styled from "./styles";
 
 function CollectingAnimation() {
   const [init, setInit] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setTimeout(() => {
@@ -21,7 +23,7 @@ function CollectingAnimation() {
   return (
     <Styled.Animation
       role="img"
-      aria-label="A grid of tiles with star icons that fade in."
+      aria-label={t("placeholders.my_starred.animation_label")}
       $init={init}
     >
       {types.map(type => (
