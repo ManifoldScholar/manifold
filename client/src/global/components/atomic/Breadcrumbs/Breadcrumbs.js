@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
@@ -8,12 +9,17 @@ export default function Breadcrumbs({
   backend = false,
   hideOnDesktop = false
 }) {
+  const { t } = useTranslation();
+
   const Wrapper = backend ? Styled.BackendOuter : Styled.Outer;
   const Inner = backend ? Styled.BackendInner : Styled.Inner;
   const Icon = backend ? Styled.Icon : IconComposer;
 
   return (
-    <Wrapper aria-label="Breadcrumb" $hideOnDesktop={hideOnDesktop}>
+    <Wrapper
+      aria-label={t("navigation.breadcrumbs.aria_label")}
+      $hideOnDesktop={hideOnDesktop}
+    >
       <Inner>
         {breadcrumbs.map((crumb, i) => (
           <Styled.Breadcrumb

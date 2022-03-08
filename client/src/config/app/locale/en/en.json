@@ -54,7 +54,9 @@
       "full_text_other": "full texts",
       "comments__thread": "comments thread",
       "author_one": "author",
-      "author_other": "authors"
+      "author_other": "authors",
+      "draft_one": "draft",
+      "draft_other": "drafts"
     },
     "common": {
       "on": "on",
@@ -134,6 +136,11 @@
       "manage": "Manage",
       "manage_groups": "$t(actions.manage) groups"
     },
+    "journals": {
+      "volume_number": "Volume {{volNum}}",
+      "issue_number": "Issue {{issNum}}",
+      "volume_issue_number": "$t(journals.volume_number, {{volNum}}), $t(journals.issue_number, {{issNum}})"
+    },
     "search": {
       "title": "Search",
       "form": "Search Form",
@@ -171,6 +178,7 @@
         "my_public_annotations": "My Public Annotations"
       },
       "breadcrumbs": {
+        "aria_label": "Breadcrumb",
         "all_journals": "All $t(glossary.journal_other)",
         "issues": "$t(glossary.issue_other)",
         "all_project_collections": "All $t(glossary.project_collection_other)",
