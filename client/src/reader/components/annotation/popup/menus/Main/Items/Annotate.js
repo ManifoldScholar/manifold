@@ -11,7 +11,7 @@ function Annotate({ menu, actions }) {
       menu={menu}
       onClick={actions.openNewAnnotationDrawer}
       kind="any"
-      label={t("reader.annotate")}
+      label={t("action.annotate")}
       srLabel={t("reader.annotate_selection")}
       icon="comment24"
     />

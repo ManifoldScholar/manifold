@@ -62,7 +62,7 @@ export class AnnotationShareEditor extends PureComponent {
     return (
       <fieldset className="citation__radios">
         <legend className="citation__legend">
-          {this.props.t("reader.citation_style") + ":"}
+          {this.props.t("reader.citation_style")}
         </legend>
         {styles.map((style, index) => (
           <label
@@ -89,9 +89,7 @@ export class AnnotationShareEditor extends PureComponent {
   }
 
   render() {
-    const copiedText = this.state.copied
-      ? this.props.t("reader.copied") + "!"
-      : null;
+    const copiedText = this.state.copied ? this.props.t("reader.copied") : null;
     const citations = this.props.section.attributes.citations;
 
     return (

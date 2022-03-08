@@ -81,7 +81,7 @@ function ShareMenu({
         menu={{ ...menu, visible }}
         onClick={onBackClick}
         kind="any"
-        label={t("actions.back")}
+        label={t("navigation.back")}
         icon="arrowLeft32"
         className="annotation-popup__button--secondary-dark"
       />
