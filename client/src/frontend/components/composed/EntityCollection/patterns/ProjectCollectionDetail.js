@@ -38,6 +38,7 @@ function ProjectCollectionDetailEntityCollection({
       )}
       image={image}
       headerLayout={headerLayout}
+      headerWidth="100%"
       filterProps={showFilters ? listFilterProps : null}
       BodyComponent={props =>
         !!projects?.length && (

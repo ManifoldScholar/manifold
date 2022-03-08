@@ -51,6 +51,7 @@ function ProjectCollectionSummaryEntityCollection({
       )}
       image={image}
       headerLayout={headerLayout}
+      headerWidth="100%"
       headerLink={lh.link("frontendProjectCollection", slug)}
       BodyComponent={props =>
         !!projects?.length && (
