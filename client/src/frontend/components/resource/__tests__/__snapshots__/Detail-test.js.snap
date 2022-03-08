@@ -490,10 +490,15 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
                 "frontend": Object {
                   "events": "Events",
                   "events_all": "All Activity",
+                  "issues": "Journal Issues",
                   "issues_all": "All Journal Issues",
+                  "journals": "Journals",
                   "my_groups": "My Reading Groups",
                   "my_notes": "My Notes + Comments",
+                  "my_notes_truncated": "My Notes",
                   "my_starred": "My Starred",
+                  "project_collections": "Project Collections",
+                  "projects": "Projects",
                   "projects_all": "All Projects",
                   "public_groups": "Public Reading Groups",
                   "reading_group": Object {
@@ -1014,10 +1019,15 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
               "frontend": Object {
                 "events": "Events",
                 "events_all": "All Activity",
+                "issues": "Journal Issues",
                 "issues_all": "All Journal Issues",
+                "journals": "Journals",
                 "my_groups": "My Reading Groups",
                 "my_notes": "My Notes + Comments",
+                "my_notes_truncated": "My Notes",
                 "my_starred": "My Starred",
+                "project_collections": "Project Collections",
+                "projects": "Projects",
                 "projects_all": "All Projects",
                 "public_groups": "Public Reading Groups",
                 "reading_group": Object {

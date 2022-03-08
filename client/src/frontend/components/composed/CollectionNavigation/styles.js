@@ -3,7 +3,7 @@ import { transientOptions } from "helpers/emotionHelpers";
 import { respond } from "theme/styles/mixins";
 
 export const List = styled("ul", transientOptions)`
-  --gap: 20px;
+  --gap: 18px;
 
   display: flex;
   flex-wrap: wrap;
@@ -19,7 +19,13 @@ export const List = styled("ul", transientOptions)`
       ${
         $count > 3 ? respond(`flex-basis: calc(50% - var(--gap) / 2);`, 60) : ``
       }
-      ${respond(`flex-basis: auto;`, $count > 3 ? 120 : 75)}
+      ${respond(
+        `
+          flex-basis: auto;
+          flex-grow: 1;
+        `,
+        $count > 3 ? 120 : 75
+      )}
     `}
   }
 `;

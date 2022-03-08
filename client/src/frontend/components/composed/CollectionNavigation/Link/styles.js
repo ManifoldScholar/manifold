@@ -10,8 +10,9 @@ export const Link = styled(ReactRouterLink)`
   ${utilityPrimary}
   display: flex;
   align-items: center;
-  gap: 0.75em;
-  padding: ${fluidScale("8px", "5px")} 1em ${fluidScale("8px", "5px")} 0.75em;
+  gap: 0.625em;
+  padding: ${fluidScale("8px", "5px")} 0.875em ${fluidScale("8px", "5px")}
+    0.625em;
   text-decoration: none;
   font-size: 14px;
   background-color: var(--box-medium-bg-color);
