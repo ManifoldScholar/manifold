@@ -15,7 +15,7 @@ function Share({ menu, onClick, activeMenu }) {
       data-name="share"
       kind="any"
       label={t("actions.share")}
-      srLabel={t("reader.share_selection")}
+      srLabel={t("reader.menus.popup.share_selection")}
       icon="share24"
     />
   );

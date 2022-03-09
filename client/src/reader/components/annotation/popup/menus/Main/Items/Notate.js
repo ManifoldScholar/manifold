@@ -12,8 +12,8 @@ function Notate({ menu, actions, text }) {
       onClick={actions.openNewNotationDrawer}
       ability="notate"
       entity={text}
-      label={t("reader.resource")}
-      srLabel={t("reader.attach_resource")}
+      label={t("glossary.resource_one")}
+      srLabel={t("reader.menus.popup.attach_resource")}
       icon="resource24"
     />
   );

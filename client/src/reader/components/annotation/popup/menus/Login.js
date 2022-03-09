@@ -11,14 +11,14 @@ function Login({ menu, visible, direction, actions }) {
     <Menu
       menu={menu}
       visible={visible}
-      aria-label={t("reader.log_in_annotate")}
+      aria-label={t("reader.menus.popup.log_in_annotate")}
       direction={direction}
     >
       <MenuItem
         menu={menu}
         onClick={actions.showLogin}
         kind="unauthenticated"
-        label={t("reader.log_in_annotate")}
+        label={t("reader.menus.popup.log_in_annotate")}
         icon="editProfile24"
       />
     </Menu>

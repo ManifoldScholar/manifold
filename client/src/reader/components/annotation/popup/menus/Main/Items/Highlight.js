@@ -29,15 +29,15 @@ function Highlight({ menu, actions, activeAnnotation }) {
           "annotation-popup__button--selected": highlighted
         })}
         kind="any"
-        label={t("reader.highlight")}
-        srLabel={t("reader.highlight_selection")}
+        label={t("reader.menus.popup.highlight")}
+        srLabel={t("reader.menus.popup.highlight_selection")}
         icon="annotate24"
       />
       {highlighted && (
         <div className="annotation-popup__note">
           {activeAnnotation.attributes.currentUserIsCreator
-            ? t("reader.you_highlighted")
-            : t("reader.reader_highlighted")}
+            ? t("reader.menus.popup.you_highlighted")
+            : t("reader.menus.popup.reader_highlighted")}
         </div>
       )}
     </>
