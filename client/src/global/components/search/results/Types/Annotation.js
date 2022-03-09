@@ -15,6 +15,8 @@ function SearchResultsTypeAnnotation({ result, highlightedAttribute }) {
 
   const model = result.relationships?.model;
 
+  if (!model) return null;
+
   const {
     searchableId,
     parents: { text, text_section: textSection }

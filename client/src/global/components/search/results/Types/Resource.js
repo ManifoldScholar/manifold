@@ -19,6 +19,8 @@ function SearchResultsTypeResource({
   if (!result) return null;
 
   const model = result.relationships?.model;
+  if (!model) return null;
+
   const { attributes } = model ?? {};
 
   const {
