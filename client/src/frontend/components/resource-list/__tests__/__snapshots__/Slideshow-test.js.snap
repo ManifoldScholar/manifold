@@ -213,6 +213,7 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                 "published": "published",
                 "published_title_case": "Published",
                 "resource_added": "Resource $t(dates.added)",
+                "type_of_resource_added": "{{kind}} $t(dates.added)",
                 "updated": "updated",
                 "updated_title_case": "Updated",
               },
@@ -427,6 +428,8 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                 "resource_other": "resources",
                 "resource_title_case_one": "Resource",
                 "resource_title_case_other": "Resources",
+                "result_one": "result",
+                "result_other": "results",
                 "selection_one": "selection",
                 "selection_other": "selections",
                 "table_of_contents": "table of contents",
@@ -442,6 +445,7 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                 "volume_other": "volumes",
               },
               "img_alts": Object {
+                "avatar_for_name": "{{name}}'s avatar",
                 "user_avatar": "User Avatar",
               },
               "journals": Object {
@@ -787,8 +791,12 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
                 },
               },
               "search": Object {
+                "annotation_title": "{{name}} <2>annotated</2> {{entity}}",
                 "form": "Search Form",
+                "no_results": "No results were found.",
                 "results": "Search Results",
+                "show_all_excerpts": "Show all excerpts",
+                "show_only_relevant": "Only show most relevant excerpts",
                 "title": "Search",
               },
               "tables": Object {
@@ -947,6 +955,7 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
               "published": "published",
               "published_title_case": "Published",
               "resource_added": "Resource $t(dates.added)",
+              "type_of_resource_added": "{{kind}} $t(dates.added)",
               "updated": "updated",
               "updated_title_case": "Updated",
             },
@@ -1161,6 +1170,8 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
               "resource_other": "resources",
               "resource_title_case_one": "Resource",
               "resource_title_case_other": "Resources",
+              "result_one": "result",
+              "result_other": "results",
               "selection_one": "selection",
               "selection_other": "selections",
               "table_of_contents": "table of contents",
@@ -1176,6 +1187,7 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
               "volume_other": "volumes",
             },
             "img_alts": Object {
+              "avatar_for_name": "{{name}}'s avatar",
               "user_avatar": "User Avatar",
             },
             "journals": Object {
@@ -1521,8 +1533,12 @@ exports[`frontend/components/resource-list/Slideshow matches the snapshot 1`] = 
               },
             },
             "search": Object {
+              "annotation_title": "{{name}} <2>annotated</2> {{entity}}",
               "form": "Search Form",
+              "no_results": "No results were found.",
               "results": "Search Results",
+              "show_all_excerpts": "Show all excerpts",
+              "show_only_relevant": "Only show most relevant excerpts",
               "title": "Search",
             },
             "tables": Object {
