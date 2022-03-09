@@ -110,7 +110,9 @@
       "new_placeholder": "Password",
       "confirm": "Confirm Password",
       "confirm_placeholder": "Confirm Password",
-      "submit_reset": "Reset Password"
+      "submit_reset": "Reset Password",
+      "generate_password": "Generate new password",
+      "set_password": "Set new password"
     },
     "notifications": {
       "title": "Notification Settings",

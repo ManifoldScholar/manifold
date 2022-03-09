@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import pluralize from "pluralize";
+import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
 function EntityListTotal({
@@ -11,11 +11,17 @@ function EntityListTotal({
   tight,
   className
 }) {
+  const { t } = useTranslation();
+
   return (
     <Styled.Wrapper $alignLeft={alignLeft} $tight={tight} className={className}>
       <Styled.Link to={linkTo}>
-        <Styled.Value>{count.toLocaleString()}</Styled.Value>
-        {` Total ${pluralize(entityName, count)}`}
+        <Styled.Value>{count.toLocaleString()}</Styled.Value>{" "}
+        {t("counts.entity_total", {
+          entity: t(`glossary.${entityName.toLowerCase()}_title_case`, {
+            count
+          })
+        })}
         <Styled.Icon size={30} icon="arrowLongRight16" />
       </Styled.Link>
     </Styled.Wrapper>
