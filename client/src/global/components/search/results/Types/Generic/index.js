@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import Collecting from "frontend/components/collecting";
 import withSearchResultHelper from "../searchResultHelper";
 import Excerpts from "./Excerpts";
+import Collapse from "global/components/Collapse";
 import * as Styled from "./styles";
 
 function SearchResultsTypeGeneric(props) {
@@ -106,7 +107,11 @@ function SearchResultsTypeGeneric(props) {
               {maybeReactNode(description)}
             </Styled.Description>
           )}
-          {excerpts && <Excerpts excerpts={excerpts} />}
+          {excerpts && (
+            <Collapse>
+              <Excerpts excerpts={excerpts} />
+            </Collapse>
+          )}
           {meta && (
             <Styled.Meta {...maybeHtml(meta)}>
               {maybeReactNode(meta)}

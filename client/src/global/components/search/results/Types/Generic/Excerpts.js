@@ -1,23 +1,24 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import withSearchResultHelper from "../searchResultHelper";
 import Collapse from "global/components/Collapse";
+import { CollapseContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
 function GenericExcerpts({ excerpts, joinHighlightedFragments }) {
   const scrollTarget = useRef();
   const { t } = useTranslation();
+  const { visible } = useContext(CollapseContext);
 
   const visibleExcerpts = excerpts.slice(0, 3);
   const expandedExcerpts = excerpts.slice(3);
 
-  // TODO: Figure out if this was working.
-  // const holdScroll = ({ contentHeight }) => {
-  //   if (contentHeight !== 0) return;
-  //   scrollTarget.current.scrollIntoView({ block: "center" });
-  // };
+  useEffect(() => {
+    if (!visible && scrollTarget.current)
+      scrollTarget.current.scrollIntoView({ block: "center" });
+  }, [visible]);
 
   return excerpts.length ? (
     <>
@@ -34,35 +35,31 @@ function GenericExcerpts({ excerpts, joinHighlightedFragments }) {
         ))}
       </div>
       {!!expandedExcerpts?.length && (
-        <Collapse>
+        <>
           <Collapse.Content>
-            {visible => (
-              <>
-                <Styled.Shim />
-                {expandedExcerpts.map(excerpt => (
-                  <Styled.Excerpt key={excerpt.nodeUuid}>
-                    <Link
-                      to={excerpt.url}
-                      dangerouslySetInnerHTML={{
-                        __html: joinHighlightedFragments(
-                          excerpt.contentHighlighted
-                        )
-                      }}
-                      tabIndex={visible ? 0 : -1}
-                    />
-                  </Styled.Excerpt>
-                ))}
-              </>
-            )}
+            <>
+              <Styled.Shim />
+              {expandedExcerpts.map(excerpt => (
+                <Styled.Excerpt key={excerpt.nodeUuid}>
+                  <Link
+                    to={excerpt.url}
+                    dangerouslySetInnerHTML={{
+                      __html: joinHighlightedFragments(
+                        excerpt.contentHighlighted
+                      )
+                    }}
+                    tabIndex={visible ? 0 : -1}
+                  />
+                </Styled.Excerpt>
+              ))}
+            </>
           </Collapse.Content>
           <Styled.ExcerptToggle>
-            {visible =>
-              !visible
-                ? t("search.show_all_excerpts")
-                : t("search.show_only_relevant")
-            }
+            {!visible
+              ? t("search.show_all_excerpts")
+              : t("search.show_only_relevant")}
           </Styled.ExcerptToggle>
-        </Collapse>
+        </>
       )}
     </>
   ) : null;
