@@ -127,7 +127,9 @@ class Header extends Component {
         tabIndex={-1}
         className="reader-header__button reader-header__button--pad-default reader-header__options-button"
       >
-        {mobileOptionsExpanded ? this.props.t("actions.close") : this.props.t("common.option_title_case_other")}
+        {mobileOptionsExpanded
+          ? this.props.t("actions.close")
+          : this.props.t("common.option_title_case_other")}
         {mobileOptionsExpanded && (
           <Utility.IconComposer
             icon="close32"
@@ -158,7 +160,9 @@ class Header extends Component {
         aria-haspopup
         aria-expanded={this.props.visibility.uiPanels.tocDrawer}
       >
-        <span className="reader-header__button-text">{this.props.t("reader.header.contents")}</span>
+        <span className="reader-header__button-text">
+          {this.props.t("reader.header.contents")}
+        </span>
         <Utility.IconComposer
           icon="disclosureDown24"
           size="default"
@@ -200,7 +204,9 @@ class Header extends Component {
             )}
             <div className="reader-header__menu-group reader-header__menu-group--right">
               <ul
-                aria-label={this.props.t("reader.header.reader_settings_search")}
+                aria-label={this.props.t(
+                  "reader.header.reader_settings_search"
+                )}
                 className="reader-header__nav-list"
               >
                 <Authorize kind={"any"}>
