@@ -60,6 +60,10 @@ function SearchResultsTypeJournalIssue({ result, highlightedAttribute }) {
           entity={result.relationships.project}
           width="100%"
           height={null}
+          $isImg={
+            attributes.avatarStyles?.small ||
+            attributes.avatarStyles?.smallSquare
+          }
         />
       }
       meta={

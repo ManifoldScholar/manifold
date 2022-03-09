@@ -41,9 +41,13 @@ export default class EntityThumbnailResource extends PureComponent {
   }
 
   get icon() {
-    const { width, height } = this.props;
+    const { width, height, className } = this.props;
     return (
-      <IconComputed.Resource svgProps={{ width, height }} icon={this.kind} />
+      <IconComputed.Resource
+        svgProps={{ width, height }}
+        icon={this.kind}
+        className={className}
+      />
     );
   }
 

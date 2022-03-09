@@ -43,6 +43,10 @@ function SearchResultsTypeProject({ result, highlightedAttribute }) {
           entity={model}
           width="100%"
           height={null}
+          $isImg={
+            attributes.avatarStyles?.small ||
+            attributes.avatarStyles?.smallSquare
+          }
         />
       }
       meta={
