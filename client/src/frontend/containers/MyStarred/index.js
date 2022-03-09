@@ -39,13 +39,18 @@ function MyStarredContainer() {
     request: [meAPI.myCollected, "resources"],
     dependencies: [fetchVersion.resources]
   });
+  const { data: journalIssues } = useFetch({
+    request: [meAPI.myCollected, "journal_issues"],
+    dependencies: [fetchVersion.resources]
+  });
 
   const responses = {
     projects,
     texts,
     textSections,
     resourceCollections,
-    resources
+    resources,
+    journalIssues
   };
 
   const currentUser = useCurrentUser();

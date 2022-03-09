@@ -18,7 +18,8 @@ const placeholderMap = {
   resourceCollections: ResourceCollectionPlaceholder,
   resources: ResourcePlaceholder,
   texts: TextPlaceholder,
-  textSections: TextSectionPlaceholder
+  textSections: TextSectionPlaceholder,
+  journalIssues: ProjectPlaceholder
 };
 
 function getPlaceholder(type) {

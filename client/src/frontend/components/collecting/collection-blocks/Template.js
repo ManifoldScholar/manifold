@@ -15,6 +15,8 @@ function getTitleForType(type) {
       return "Texts";
     case "textSections":
       return "Text Sections";
+    case "journalIssues":
+      return "Journal Issues";
     default:
       return null;
   }
@@ -32,6 +34,8 @@ function getIconForType(type) {
       return "textsStacked64";
     case "textSections":
       return "toc64";
+    case "journalIssues":
+      return "journals64";
     default:
       return null;
   }
