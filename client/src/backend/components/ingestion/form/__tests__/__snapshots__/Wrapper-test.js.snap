@@ -826,6 +826,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "published": "published",
                               "published_title_case": "Published",
                               "resource_added": "Resource $t(dates.added)",
+                              "type_of_resource_added": "{{kind}} $t(dates.added)",
                               "updated": "updated",
                               "updated_title_case": "Updated",
                             },
@@ -1040,6 +1041,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "resource_other": "resources",
                               "resource_title_case_one": "Resource",
                               "resource_title_case_other": "Resources",
+                              "result_one": "result",
+                              "result_other": "results",
                               "selection_one": "selection",
                               "selection_other": "selections",
                               "table_of_contents": "table of contents",
@@ -1055,6 +1058,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "volume_other": "volumes",
                             },
                             "img_alts": Object {
+                              "avatar_for_name": "{{name}}'s avatar",
                               "user_avatar": "User Avatar",
                             },
                             "journals": Object {
@@ -1400,8 +1404,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               },
                             },
                             "search": Object {
+                              "annotation_title": "{{name}} <2>annotated</2> {{entity}}",
                               "form": "Search Form",
+                              "no_results": "No results were found.",
                               "results": "Search Results",
+                              "show_all_excerpts": "Show all excerpts",
+                              "show_only_relevant": "Only show most relevant excerpts",
                               "title": "Search",
                             },
                             "tables": Object {
@@ -1560,6 +1568,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             "published": "published",
                             "published_title_case": "Published",
                             "resource_added": "Resource $t(dates.added)",
+                            "type_of_resource_added": "{{kind}} $t(dates.added)",
                             "updated": "updated",
                             "updated_title_case": "Updated",
                           },
@@ -1774,6 +1783,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             "resource_other": "resources",
                             "resource_title_case_one": "Resource",
                             "resource_title_case_other": "Resources",
+                            "result_one": "result",
+                            "result_other": "results",
                             "selection_one": "selection",
                             "selection_other": "selections",
                             "table_of_contents": "table of contents",
@@ -1789,6 +1800,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             "volume_other": "volumes",
                           },
                           "img_alts": Object {
+                            "avatar_for_name": "{{name}}'s avatar",
                             "user_avatar": "User Avatar",
                           },
                           "journals": Object {
@@ -2134,8 +2146,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             },
                           },
                           "search": Object {
+                            "annotation_title": "{{name}} <2>annotated</2> {{entity}}",
                             "form": "Search Form",
+                            "no_results": "No results were found.",
                             "results": "Search Results",
+                            "show_all_excerpts": "Show all excerpts",
+                            "show_only_relevant": "Only show most relevant excerpts",
                             "title": "Search",
                           },
                           "tables": Object {
@@ -2381,6 +2397,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "published": "published",
                                 "published_title_case": "Published",
                                 "resource_added": "Resource $t(dates.added)",
+                                "type_of_resource_added": "{{kind}} $t(dates.added)",
                                 "updated": "updated",
                                 "updated_title_case": "Updated",
                               },
@@ -2595,6 +2612,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "resource_other": "resources",
                                 "resource_title_case_one": "Resource",
                                 "resource_title_case_other": "Resources",
+                                "result_one": "result",
+                                "result_other": "results",
                                 "selection_one": "selection",
                                 "selection_other": "selections",
                                 "table_of_contents": "table of contents",
@@ -2610,6 +2629,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "volume_other": "volumes",
                               },
                               "img_alts": Object {
+                                "avatar_for_name": "{{name}}'s avatar",
                                 "user_avatar": "User Avatar",
                               },
                               "journals": Object {
@@ -2955,8 +2975,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 },
                               },
                               "search": Object {
+                                "annotation_title": "{{name}} <2>annotated</2> {{entity}}",
                                 "form": "Search Form",
+                                "no_results": "No results were found.",
                                 "results": "Search Results",
+                                "show_all_excerpts": "Show all excerpts",
+                                "show_only_relevant": "Only show most relevant excerpts",
                                 "title": "Search",
                               },
                               "tables": Object {
@@ -3115,6 +3139,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "published": "published",
                               "published_title_case": "Published",
                               "resource_added": "Resource $t(dates.added)",
+                              "type_of_resource_added": "{{kind}} $t(dates.added)",
                               "updated": "updated",
                               "updated_title_case": "Updated",
                             },
@@ -3329,6 +3354,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "resource_other": "resources",
                               "resource_title_case_one": "Resource",
                               "resource_title_case_other": "Resources",
+                              "result_one": "result",
+                              "result_other": "results",
                               "selection_one": "selection",
                               "selection_other": "selections",
                               "table_of_contents": "table of contents",
@@ -3344,6 +3371,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "volume_other": "volumes",
                             },
                             "img_alts": Object {
+                              "avatar_for_name": "{{name}}'s avatar",
                               "user_avatar": "User Avatar",
                             },
                             "journals": Object {
@@ -3689,8 +3717,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               },
                             },
                             "search": Object {
+                              "annotation_title": "{{name}} <2>annotated</2> {{entity}}",
                               "form": "Search Form",
+                              "no_results": "No results were found.",
                               "results": "Search Results",
+                              "show_all_excerpts": "Show all excerpts",
+                              "show_only_relevant": "Only show most relevant excerpts",
                               "title": "Search",
                             },
                             "tables": Object {
@@ -3953,6 +3985,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "published": "published",
                                   "published_title_case": "Published",
                                   "resource_added": "Resource $t(dates.added)",
+                                  "type_of_resource_added": "{{kind}} $t(dates.added)",
                                   "updated": "updated",
                                   "updated_title_case": "Updated",
                                 },
@@ -4167,6 +4200,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "resource_other": "resources",
                                   "resource_title_case_one": "Resource",
                                   "resource_title_case_other": "Resources",
+                                  "result_one": "result",
+                                  "result_other": "results",
                                   "selection_one": "selection",
                                   "selection_other": "selections",
                                   "table_of_contents": "table of contents",
@@ -4182,6 +4217,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "volume_other": "volumes",
                                 },
                                 "img_alts": Object {
+                                  "avatar_for_name": "{{name}}'s avatar",
                                   "user_avatar": "User Avatar",
                                 },
                                 "journals": Object {
@@ -4527,8 +4563,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   },
                                 },
                                 "search": Object {
+                                  "annotation_title": "{{name}} <2>annotated</2> {{entity}}",
                                   "form": "Search Form",
+                                  "no_results": "No results were found.",
                                   "results": "Search Results",
+                                  "show_all_excerpts": "Show all excerpts",
+                                  "show_only_relevant": "Only show most relevant excerpts",
                                   "title": "Search",
                                 },
                                 "tables": Object {
@@ -4687,6 +4727,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "published": "published",
                                 "published_title_case": "Published",
                                 "resource_added": "Resource $t(dates.added)",
+                                "type_of_resource_added": "{{kind}} $t(dates.added)",
                                 "updated": "updated",
                                 "updated_title_case": "Updated",
                               },
@@ -4901,6 +4942,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "resource_other": "resources",
                                 "resource_title_case_one": "Resource",
                                 "resource_title_case_other": "Resources",
+                                "result_one": "result",
+                                "result_other": "results",
                                 "selection_one": "selection",
                                 "selection_other": "selections",
                                 "table_of_contents": "table of contents",
@@ -4916,6 +4959,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "volume_other": "volumes",
                               },
                               "img_alts": Object {
+                                "avatar_for_name": "{{name}}'s avatar",
                                 "user_avatar": "User Avatar",
                               },
                               "journals": Object {
@@ -5261,8 +5305,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 },
                               },
                               "search": Object {
+                                "annotation_title": "{{name}} <2>annotated</2> {{entity}}",
                                 "form": "Search Form",
+                                "no_results": "No results were found.",
                                 "results": "Search Results",
+                                "show_all_excerpts": "Show all excerpts",
+                                "show_only_relevant": "Only show most relevant excerpts",
                                 "title": "Search",
                               },
                               "tables": Object {
@@ -5538,6 +5586,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "published": "published",
                                     "published_title_case": "Published",
                                     "resource_added": "Resource $t(dates.added)",
+                                    "type_of_resource_added": "{{kind}} $t(dates.added)",
                                     "updated": "updated",
                                     "updated_title_case": "Updated",
                                   },
@@ -5752,6 +5801,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "resource_other": "resources",
                                     "resource_title_case_one": "Resource",
                                     "resource_title_case_other": "Resources",
+                                    "result_one": "result",
+                                    "result_other": "results",
                                     "selection_one": "selection",
                                     "selection_other": "selections",
                                     "table_of_contents": "table of contents",
@@ -5767,6 +5818,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "volume_other": "volumes",
                                   },
                                   "img_alts": Object {
+                                    "avatar_for_name": "{{name}}'s avatar",
                                     "user_avatar": "User Avatar",
                                   },
                                   "journals": Object {
@@ -6112,8 +6164,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     },
                                   },
                                   "search": Object {
+                                    "annotation_title": "{{name}} <2>annotated</2> {{entity}}",
                                     "form": "Search Form",
+                                    "no_results": "No results were found.",
                                     "results": "Search Results",
+                                    "show_all_excerpts": "Show all excerpts",
+                                    "show_only_relevant": "Only show most relevant excerpts",
                                     "title": "Search",
                                   },
                                   "tables": Object {
@@ -6272,6 +6328,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "published": "published",
                                   "published_title_case": "Published",
                                   "resource_added": "Resource $t(dates.added)",
+                                  "type_of_resource_added": "{{kind}} $t(dates.added)",
                                   "updated": "updated",
                                   "updated_title_case": "Updated",
                                 },
@@ -6486,6 +6543,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "resource_other": "resources",
                                   "resource_title_case_one": "Resource",
                                   "resource_title_case_other": "Resources",
+                                  "result_one": "result",
+                                  "result_other": "results",
                                   "selection_one": "selection",
                                   "selection_other": "selections",
                                   "table_of_contents": "table of contents",
@@ -6501,6 +6560,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "volume_other": "volumes",
                                 },
                                 "img_alts": Object {
+                                  "avatar_for_name": "{{name}}'s avatar",
                                   "user_avatar": "User Avatar",
                                 },
                                 "journals": Object {
@@ -6846,8 +6906,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   },
                                 },
                                 "search": Object {
+                                  "annotation_title": "{{name}} <2>annotated</2> {{entity}}",
                                   "form": "Search Form",
+                                  "no_results": "No results were found.",
                                   "results": "Search Results",
+                                  "show_all_excerpts": "Show all excerpts",
+                                  "show_only_relevant": "Only show most relevant excerpts",
                                   "title": "Search",
                                 },
                                 "tables": Object {
