@@ -7,7 +7,6 @@ import EntityMasthead from "frontend/components/composed/EntityMasthead";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import lh from "helpers/linkHandler";
-import { capitalize } from "utils/string";
 
 export default function JournalIssuesList({ journal }) {
   const [pagination, setPageNumber] = usePaginationState();
@@ -24,6 +23,9 @@ export default function JournalIssuesList({ journal }) {
   const { t } = useTranslation();
 
   const { titlePlaintext } = journal?.attributes || {};
+  const containerTitle = `${titlePlaintext}: ${t(
+    "glossary.issue_truncated_title_case_other"
+  )}`;
   const breadcrumbs = useMemo(
     () => [
       {
@@ -46,14 +48,12 @@ export default function JournalIssuesList({ journal }) {
 
   return (
     <>
-      <h1 className="screen-reader-text">
-        {`${titlePlaintext}: ${capitalize(t("glossary.issue_other"))}`}
-      </h1>
+      <h1 className="screen-reader-text">{containerTitle}</h1>
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <EntityHeadContent entity={journal} />
       <EntityMasthead entity={journal} />
       <EntityCollection.Issues
-        title={`${titlePlaintext}: ${capitalize(t("glossary.issue_other"))}`}
+        title={containerTitle}
         icon={null}
         issues={issues}
         issuesMeta={meta}

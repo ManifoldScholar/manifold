@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import EntityGroup from "global/components/composed/EntityGroup";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 function JournalIssueList({ issues = [] }) {
@@ -13,7 +12,7 @@ function JournalIssueList({ issues = [] }) {
   return (
     <Styled.Wrapper>
       <EntityGroup
-        title={capitalize(t("glossary.issue_other"))}
+        title={t("glossary.issue_truncated_title_case_other")}
         entities={issues}
         parentView
       />
