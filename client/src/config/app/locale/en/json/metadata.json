@@ -33,7 +33,7 @@
     "chapter_number": "chapter number",
     "collection_number": "collection number",
     "edition": "edition",
-    "issue": "$t(glossary.issue_one)",
+    "issue": "$t(glossary.issue_truncated_one)",
     "number": "number",
     "number_of_pages": "number of pages",
     "number_of_volumes": "number of volumes",
