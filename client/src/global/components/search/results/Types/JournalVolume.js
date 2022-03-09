@@ -5,7 +5,9 @@ import Generic from "./Generic";
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
 import withSearchResultHelper from "./searchResultHelper";
+import EntityThumbnail from "global/components/entity-thumbnail";
 import { capitalize } from "utils/string";
+import * as Styled from "./styles";
 
 function SearchResultsTypeJournalVolume({ result, highlightedAttribute }) {
   const { t } = useTranslation();
@@ -30,7 +32,7 @@ function SearchResultsTypeJournalVolume({ result, highlightedAttribute }) {
   const creators = model?.relationships?.creators ?? [];
 
   const resultProps = {
-    url: lh.link("frontendProjectDetail", attributes.slug),
+    url: lh.link("frontendVolumeDetail", attributes.slug),
     title,
     parent: parentJournal?.attributes?.titlePlaintext || null,
     parentUrl: parentJournal
@@ -44,6 +46,15 @@ function SearchResultsTypeJournalVolume({ result, highlightedAttribute }) {
   return (
     <Generic
       {...resultProps}
+      figure={
+        <Styled.Thumbnail
+          as={EntityThumbnail.JournalVolume}
+          placeholderAttributes={{ mode: "small" }}
+          entity={model}
+          width="100%"
+          height={null}
+        />
+      }
       meta={
         <FormattedDate
           prefix={capitalize(t("dates.published"))}

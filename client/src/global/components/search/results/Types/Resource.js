@@ -7,6 +7,7 @@ import EntityThumbnail from "global/components/entity-thumbnail";
 import Generic from "./Generic";
 import withSearchResultHelper from "./searchResultHelper";
 import { capitalize } from "utils/string";
+import * as Styled from "./styles";
 
 function SearchResultsTypeResource({
   result,
@@ -51,7 +52,12 @@ function SearchResultsTypeResource({
     <Generic
       {...resultProps}
       figure={
-        <EntityThumbnail.Resource entity={model} width="100%" height={null} />
+        <Styled.Thumbnail
+          as={EntityThumbnail.Resource}
+          entity={model}
+          width="100%"
+          height={null}
+        />
       }
       meta={
         <FormattedDate

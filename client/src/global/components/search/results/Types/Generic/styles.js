@@ -51,16 +51,6 @@ export const ImageCol = styled.div`
 export const Image = styled.figure`
   position: relative;
   width: 76px;
-
-  img {
-    margin-block-start: 6px;
-  }
-
-  img,
-  svg {
-    max-width: 56px;
-    color: var(--color-neutral-ui-dark);
-  }
 `;
 
 export const TextCol = styled.div`

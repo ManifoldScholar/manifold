@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import Generic from "./Generic";
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
-import EntityThumbnail from "global/components/entity-thumbnail";
 import withSearchResultHelper from "./searchResultHelper";
 import { capitalize } from "utils/string";
+import * as Styled from "./styles";
 
 function SearchResultsTypeJournal({ result, highlightedAttribute }) {
   const { t } = useTranslation();
@@ -26,7 +26,7 @@ function SearchResultsTypeJournal({ result, highlightedAttribute }) {
   const creators = model?.relationships?.creators ?? [];
 
   const resultProps = {
-    url: lh.link("frontendProjectDetail", attributes.slug),
+    url: lh.link("frontendJournalDetail", attributes.slug),
     title: highlightedAttribute("title"),
     attribution: creators.map(c => c.attributes.fullName).join(", "),
     description: highlightedAttribute("description"),
@@ -38,7 +38,7 @@ function SearchResultsTypeJournal({ result, highlightedAttribute }) {
     <Generic
       {...resultProps}
       figure={
-        <EntityThumbnail.Project
+        <Styled.Thumbnail
           placeholderAttributes={{ mode: "small" }}
           entity={model}
           width="100%"
