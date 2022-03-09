@@ -6,7 +6,6 @@ import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
 import withSearchResultHelper from "./searchResultHelper";
 import EntityThumbnail from "global/components/entity-thumbnail";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 function SearchResultsTypeJournalVolume({ result, highlightedAttribute }) {
@@ -21,9 +20,9 @@ function SearchResultsTypeJournalVolume({ result, highlightedAttribute }) {
 
   const parentJournal = result.relationships?.journal;
 
-  const title = `${capitalize(t("glossary.volume_one"))}${highlightedAttribute(
-    "number"
-  )}`;
+  const title = t("journals.volume_number", {
+    volNum: highlightedAttribute("number")
+  });
 
   const { searchableType, searchableId } = result.attributes ?? {};
   const collectable = {
@@ -59,7 +58,7 @@ function SearchResultsTypeJournalVolume({ result, highlightedAttribute }) {
       }
       meta={
         <FormattedDate
-          prefix={capitalize(t("dates.published"))}
+          prefix={t("dates.published_title_case")}
           format="MMMM, yyyy"
           date={attributes.createdAt}
         />

@@ -6,7 +6,6 @@ import FormattedDate from "global/components/FormattedDate";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import Generic from "./Generic";
 import withSearchResultHelper from "./searchResultHelper";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 function SearchResultsTypeResource({
@@ -63,9 +62,7 @@ function SearchResultsTypeResource({
       }
       meta={
         <FormattedDate
-          prefix={capitalize(
-            t("dates.type_of_resource_added", { kind: attributes?.kind })
-          )}
+          prefix={t("dates.type_of_resource_added", { kind: attributes?.kind })}
           format="MMMM, yyyy"
           date={attributes?.createdAt}
         />
