@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import Date from "./Date";
 import Collecting from "frontend/components/collecting";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 class TextBibliographic extends Component {

@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { TypeHeader } from "../parts";
 import SortableCollectables from "../../SortableCollectables";
 import { collectedShape } from "./helpers";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 function CollectedTextSections({ showDropzone, ...restProps }) {
@@ -11,9 +10,7 @@ function CollectedTextSections({ showDropzone, ...restProps }) {
 
   return (
     <Styled.Type $active={showDropzone}>
-      <TypeHeader
-        heading={`${t("glossary.text_section_title_case_other")}:`}
-      />
+      <TypeHeader heading={`${t("glossary.text_section_title_case_other")}:`} />
       <SortableCollectables type="textSections" {...restProps} />
     </Styled.Type>
   );
