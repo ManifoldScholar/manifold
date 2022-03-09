@@ -5,7 +5,8 @@ import {
   CollectedTexts,
   CollectedTextSections,
   CollectedResourceCollections,
-  CollectedResources
+  CollectedResources,
+  CollectedJournalIssues
 } from "frontend/components/collecting/collection-blocks";
 import * as Styled from "./styles";
 
@@ -47,6 +48,7 @@ function Category({ category, mappings, responses, onUncollect }) {
       </Styled.Header>
       <div>
         <CollectedProjects {...getCollectedProps("projects")} />
+        <CollectedJournalIssues {...getCollectedProps("journalIssues")} />
         <CollectedTexts {...getCollectedProps("texts")} />
         <CollectedTextSections {...getCollectedProps("textSections")} />
         <CollectedResourceCollections

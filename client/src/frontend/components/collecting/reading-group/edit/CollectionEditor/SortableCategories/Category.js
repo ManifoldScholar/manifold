@@ -6,7 +6,8 @@ import {
   CollectedTexts,
   CollectedTextSections,
   CollectedResourceCollections,
-  CollectedResources
+  CollectedResources,
+  CollectedJournalIssues
 } from "./types";
 import * as Styled from "./styles";
 
@@ -64,6 +65,7 @@ function Category({
         />
         <Styled.Inner>
           <CollectedProjects {...getCollectedProps("projects")} />
+          <CollectedJournalIssues {...getCollectedProps("journalIssues")} />
           <CollectedTexts {...getCollectedProps("texts")} />
           <CollectedTextSections {...getCollectedProps("textSections")} />
           <CollectedResourceCollections
