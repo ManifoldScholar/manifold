@@ -33,7 +33,11 @@
     "chapter_number": "chapter number",
     "collection_number": "collection number",
     "edition": "edition",
+<<<<<<< HEAD
     "issue": "$t(glossary.issue_truncated_one)",
+=======
+    "issue": "$t(glossary.issue_one)",
+>>>>>>> 7c1fc3e56 ([C] Split translation files)
     "number": "number",
     "number_of_pages": "number of pages",
     "number_of_volumes": "number of volumes",
