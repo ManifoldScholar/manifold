@@ -1,0 +1,28 @@
+{
+  "search": {
+    "title": "Search",
+    "form": "Search Form",
+    "results": "Search Results"
+  },
+  "filters": {
+    "featured_projects": "Featured $t(glossary.project_other)"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "previous_short": "Prev",
+    "next": "Next",
+    "go_to_page": "Go to page {{number}}",
+    "next_slide": "Go to next slide",
+    "previous_slide": "Go to previous slide"
+  },
+  "dates": {
+    "added": "added",
+    "resource_added": "Resource $t(dates.added)",
+    "collection_created": "Collection created",
+    "published": "published",
+    "published_title_case": "Published",
+    "updated": "updated",
+    "updated_title_case": "Updated",
+    "ago": "ago"
+  }
+}

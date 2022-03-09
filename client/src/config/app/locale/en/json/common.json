@@ -1,0 +1,23 @@
+{
+  "common": {
+    "on": "on",
+    "by": "by",
+    "in": "in",
+    "yours": "yours",
+    "you": "you",
+    "me": "me",
+    "me_title_case": "Me",
+    "about": "about",
+    "type": "type",
+    "role": "role",
+    "uncategorized": "uncategorized",
+    "uncategorized_title_case": "uncategorized",
+    "loading": "loading",
+    "content": "content",
+    "private": "private",
+    "public": "public",
+    "visibility": "visibility",
+    "deleted": "deleted",
+    "deleted_title_case": "Deleted"
+  }
+}

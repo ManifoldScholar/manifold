@@ -1,0 +1,57 @@
+{
+  "reader": {
+    "actions": {
+      "copy": "Copy",
+      "select_reading_group": "Select $t(glossary.reading_group_one)",
+      "annotate_passage": "$t(actions.annotate) this passage"
+    },
+    "menus": {
+      "appearance": {
+        "reset_to_defaults": "Reset to Defaults",
+        "adjust_appearance": "Adjust appearance",
+        "decrease_margin": "Decrease text margins",
+        "increase_margin": "Increase text margins",
+        "adjust_margin": "Adjust text margins",
+        "increase_font": "Increase font size",
+        "decrease_font": "Decrease font size",
+        "adjust_font": "Adjust font size",
+        "select_color": "Select color scheme for reader",
+        "select_font": "Select font for reader",
+        "appearance_reset": "Reader color scheme and typography reset to default settings.",
+        "font_size_decreased": "Reader font size decreased.",
+        "font_size_increased": "Reader font size increased.",
+        "font_size_decreased_min": "Reader font size decreased to minimum size.",
+        "font_size_increased_max": "Reader font size increased to maximum size.",
+        "margin_size_decreased": "Reader margins decreased.",
+        "margin_size_increased": "Reader margins increased.",
+        "margin_size_decreased_min": "Reader margins decreased to minimum size.",
+        "margin_size_increased_max": "Reader margins increased to maximum size.",
+        "reset_option_message": "Reader {{appearanceType}} is set to {{option}}.",
+        "color_scheme": "color scheme",
+        "font": "font"
+      },
+      "citation": {
+        "citation_style": "Citation style:",
+        "copied": "Copied!"
+      },
+      "popup": {
+        "cite": "Cite",
+        "cite_selection": "$t(reader.actions.cite) $t(glossary.selection_one)",
+        "current_group": "Current Group",
+        "manage_groups": "Manage Groups",
+        "current_visibility": "Current $t(common.visibility)",
+        "annotate_selection": "Annotate $t(glossary.selection_one)",
+        "log_in_annotate": "Log in to $t(actions.annotate)",
+        "highlight": "Highlight",
+        "highlight_selection": "$t(reader.menus.popup.highlight) $t(glossary.selection_one)",
+        "you_highlighted": "You Highlighted",
+        "reader_highlighted": "A Reader Highlighted",
+        "attach_resource": "Attach resource to $t(glossary.selection_one)",
+        "share_selection": "$t(actions.share) $t(glossary.selection_one)",
+        "follow_link": "Follow link",
+        "my_private_annotations": "My private $t(glossary.annotation_other)",
+        "my_public_annotations": "My public $t(glossary.annotation_other)"
+      }
+    }
+  }
+}
