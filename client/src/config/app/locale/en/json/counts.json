@@ -1,0 +1,21 @@
+{
+  "counts": {
+    "my_starred": "You have starred <1>{{count}}</1> {{ unit }}",
+    "categorized_issues_one": "There is <1>{{count}}</1> issue in <4>{{categoryCount}}</4> {{volume}}",
+    "categorized_issues_other": "There are <1>{{count}}</1> issues in <4>{{categoryCount}}</4> {{volume}}",
+    "uncategorized_issues_one": " and <1>{{count}}</1> additional issue",
+    "uncategorized_issues_other": " and <1>{{count}}</1> additional issues",
+    "empty_volume_one": "There is <1>{{count}}</1> empty volume.",
+    "empty_volume_other": "There are <1>{{count}}</1> empty volumes.",
+    "default_issues_one": "There is <1>{{count}}</1> {{unit}}",
+    "default_issues_other": "There are <1>{{count}}</1> {{unit}}",
+    "text_annotations_one": "This text has {{count}} annotation",
+    "text_annotations_other": "This text has {{count}} annotations",
+    "text_highlights_one": "This text has {{count}} highlight",
+    "text_highlights_other": "This text has {{count}} highlights",
+    "comment_one": "{{count}} comment",
+    "comment_other": "{{count}} comments",
+    "flag_one": "{{count}} flag",
+    "flag_other": "{{count}} flags"
+  }
+}

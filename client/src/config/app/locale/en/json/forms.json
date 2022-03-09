@@ -1,0 +1,121 @@
+{
+  "forms": {
+    "add_to": "Add this to",
+    "my_starred_label": "My Starred",
+    "category": {
+      "create": "Create a new category",
+      "edit": "Edit category",
+      "name": "Category name",
+      "delete": "Delete category",
+      "name_placeholder": "Enter category name",
+      "description": "Category Description",
+      "description_placeholder": "Enter category description",
+      "description_instructions": "Enter a brief description of the category. This field accepts basic Markdown.",
+      "empty_placeholder": "Drag here to add"
+    },
+    "reading_group": {
+      "drawer_title": "New Reading Group",
+      "name": "Group Name",
+      "name_placeholder": "Pick a group name",
+      "privacy": "Privacy",
+      "privacy_instructions": "Annotations in public groups can be viewed by everyone. Annotations in private groups can only be viewed by group members. In anonymous groups, comments are private and only the group creator can see the identity of each annotation's author.",
+      "privacy_options": {
+        "public": "Public",
+        "private": "Private",
+        "anonymous": "Anonymous"
+      },
+      "invitation_code": "Invitation Code",
+      "invitation_code_buttons": {
+        "regenerate": "regenerate",
+        "copy": "copy"
+      },
+      "invitation_code_instructions": "Users can enter the invitation code on the \"Manage Reading Groups\" page to join this group. You may change this code at any time, but previous codes will no longer work",
+      "invitation_url": "Invitation URL",
+      "invitation_url_instructions": "The URL above is based on the invitation code. Readers can also join the group by visiting this URL.",
+      "invitation_url_button_label": "copy",
+      "course": "Course",
+      "course_instructions": "Course information is used for internal tracking and reporting purposes.",
+      "course_options": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "course_start_date": "Course Start Date:",
+      "course_end_date": "Course End Date:",
+      "notifications": "Notifications",
+      "notifications_instructions": "Email me when anyone joins this group"
+    },
+    "reading_group_member": {
+      "title": "Edit Group Member",
+      "name": "Member Name",
+      "role": "Role",
+      "role_instructions": "Members can see group annotations and annotate within the group. Moderators can manage members and update group settings.",
+      "role_options": {
+        "member": "Member",
+        "moderator": "Moderator"
+      },
+      "label": "Label",
+      "label_placeholder": "Enter a label",
+      "label_instructions": "Labels are used to describe specific members within the group and appear next to the name in the membership list.",
+      "annotation_style": "Annotation Style",
+      "annotation_style_instructions": "Annotation styles will appear in the Manifold reading interface and can be used to call differentiate a user's annotations from other annotations in the reading group.",
+      "annotation_style_options": {
+        "dashed": "Dashed",
+        "dotted": "Dotted",
+        "solid": "Solid",
+        "wavy": "Wavy"
+      },
+      "style_preview": "This is what your selected annotation style will look like when viewed in the reader. Font styling and sizing may be different depending on the settings in your visibility control panel."
+    },
+    "manage_group": {
+      "title": "Manage Group:",
+      "instructions": "Edit the Home Page or the settings for your Reading Group.",
+      "edit_homepage": "Edit Home Page:",
+      "edit_homepage_sr": "Edit group homepage",
+      "view_homepage": "View group homepage",
+      "edit_settings": "Edit settings"
+    },
+    "join_group": {
+      "title": "Join a group:",
+      "instructions": "To join a group, enter the code and select Join.",
+      "join_code": "Code to join",
+      "code_placeholder": "Enter code",
+      "button_label": "Join",
+      "confirm_button_label": "OK"
+    },
+    "edit_group": {
+      "title": "Edit Reading Group",
+      "duplicate": {
+        "label": "Duplicate",
+        "heading": "Create a copy of {{group}}",
+        "instructions": "This will create a copy of your reading group. Once copied, you will need to add users to the group.",
+        "group_name": "Reading Group Name",
+        "copy_annotations": "Copy my annotations",
+        "archive": "Archive copied group",
+        "open_after": "Open new group after duplication"
+      }
+    },
+    "contact": {
+      "title": "Send a Message",
+      "email": "Email",
+      "email_placeholder": "Email",
+      "name": "Name",
+      "name_placeholder": "Name",
+      "message": "Message",
+      "message_placeholder": "Message",
+      "button_label": "Send a Message"
+    },
+    "password_reset": {
+      "title": "Reset Password",
+      "new": "New Password",
+      "new_placeholder": "Password",
+      "confirm": "Confirm Password",
+      "confirm_placeholder": "Confirm Password",
+      "submit_reset": "Reset Password"
+    },
+    "notifications": {
+      "title": "Notification Settings",
+      "instructions": "Edit your email notifications and subscriptions.",
+      "submit_label": "Save Changes"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "messages": {
+    "empty_journal_heading": "This journal is currently empty.",
+    "empty_journal_body": "Add <1>volumes</1> or <3>issues</3> to see this page.",
+    "cannot_move_up": "Cannot move up. Item is already in the first category.",
+    "cannot_move_down": "Cannot move down. Item is already in the last category.",
+    "item_moved_category": "Item moved to category {{category}}",
+    "collected": "You collected {{title}}",
+    "uncollected": "You uncollected {{title}}",
+    "confirm": "Are you sure?",
+    "content_block_warning_heading": "This content block needs your attention before it can be displayed.",
+    "content_block_warning_note": "Note: This message is only visible to project editors.",
+    "showing_resource": "Showing {{ type }} resource: {{ title }}",
+    "unsaved_changes": "You may have unsaved changes. Do you want to leave without saving your changes?",
+    "annotation_summary": {
+      "highlight": "{{creator}} highlighted \"{{section}}\" in <5></5> on <8></8>.",
+      "annotation": "{{creator}} annotated \"{{section}}\" in <5></5> on <8></8>.",
+      "source": "\"{{section}}\" in <4></4>"
+    }
+  }
+}

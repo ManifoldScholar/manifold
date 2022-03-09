@@ -1,2 +1,1 @@
-/* eslint-disable import/extensions */
-export default from "./en.json";
+export default from "./en";
