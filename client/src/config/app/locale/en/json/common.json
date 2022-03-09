@@ -17,7 +17,12 @@
     "private": "private",
     "public": "public",
     "visibility": "visibility",
+    "visibility_title_case": "Visibility",
     "deleted": "deleted",
-    "deleted_title_case": "Deleted"
+    "deleted_title_case": "Deleted",
+    "option_one": "option",
+    "option_other": "options",
+    "option_title_case_one": "Option",
+    "option_title_case_other": "Options"
   }
 }

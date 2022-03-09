@@ -48,10 +48,19 @@
         "reader_highlighted": "A Reader Highlighted",
         "attach_resource": "Attach resource to $t(glossary.selection_one)",
         "share_selection": "$t(actions.share) $t(glossary.selection_one)",
-        "follow_link": "Follow link",
-        "my_private_annotations": "My private $t(glossary.annotation_other)",
-        "my_public_annotations": "My public $t(glossary.annotation_other)"
+        "follow_link": "Follow link"
+      },
+      "visibility": {
+        "all_reading_groups": "All $t(glossary.reading_group_title_case_other)",
+        "show_the_following": "Show the following:"
       }
-    }
+    },
+    "header": {
+      "contents": "Contents",
+      "reader_settings_search": "Reader Settings and Search",
+      "reader_appearance": "Reader Appearance"
+    },
+    "my_private_annotations": "My Private $t(glossary.annotation_title_case_other)",
+    "my_public_annotations": "My Public $t(glossary.annotation_title_case_other)"
   }
 }
