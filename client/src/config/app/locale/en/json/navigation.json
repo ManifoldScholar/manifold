@@ -40,7 +40,6 @@
     "view_interactive_resource": "$t(actions.view) Interactive Resource",
     "see_all_issues": "$t(actions.see_all) $t(glossary.issue_truncated_other)",
     "see_all_volumes": "$t(actions.see_all) $t(glossary.volume_other)",
-    "view_interactive_resource": "$t(actions.view) Interactive Resource",
     "back": "Back"
   },
   "external_links": {

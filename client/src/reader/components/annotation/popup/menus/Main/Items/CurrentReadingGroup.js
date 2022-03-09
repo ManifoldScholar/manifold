@@ -20,9 +20,9 @@ function CurrentReadingGroup({
 
   function getCurrentGroupName() {
     if (currentReadingGroup === "public")
-      return t("reader.menus.popup.my_public_annotations");
+      return t("reader.my_public_annotations");
     if (currentReadingGroup === "private")
-      return t("reader.menus.popup.my_private_annotations");
+      return t("reader.my_private_annotations");
 
     const currentGroup = readingGroups.find(
       group => group.id === currentReadingGroup
