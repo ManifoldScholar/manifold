@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { useCurrentUser } from "hooks";
@@ -7,18 +8,18 @@ import { Actions, Body, Title, Wrapper } from "../parts";
 
 function ReadingGroupsPlaceholder({ isPublic }) {
   const currentUser = useCurrentUser();
+  const { t } = useTranslation();
 
   function getContent() {
     if (!currentUser) {
       return {
-        title: "This Manifold doesn’t have any reading groups yet.",
-        body:
-          "Sign up or log in to create the first group, or learn more about reading groups in our documentation.",
+        title: t("placeholders.reading_groups.no_user.title"),
+        body: t("placeholders.reading_groups.no_user.body"),
         actions: [
           {
             children: (
               <Link to={lh.link("frontendLogin")} className="button-tertiary">
-                Log in
+                {t("navigation.user.log_in")}
               </Link>
             )
           }
@@ -28,9 +29,8 @@ function ReadingGroupsPlaceholder({ isPublic }) {
 
     if (isPublic)
       return {
-        title: "This Manifold doesn’t have any reading groups yet.",
-        body:
-          "Be the first person to create one, or learn more about reading groups in our documentation.",
+        title: t("placeholders.reading_groups.public.title"),
+        body: t("placeholders.reading_groups.public.body"),
         actions: [
           {
             children: (
@@ -38,7 +38,7 @@ function ReadingGroupsPlaceholder({ isPublic }) {
                 to={lh.link("frontendMyReadingGroupsNew")}
                 className="button-tertiary"
               >
-                Create New Group
+                {t("navigation.reading_group.create")}
               </Link>
             )
           }
@@ -46,9 +46,8 @@ function ReadingGroupsPlaceholder({ isPublic }) {
       };
 
     return {
-      title: "Join a group, or create a new one.",
-      body:
-        "To join a group, enter your group invitation code below. You can also create your own group, or learn more about reading groups in our documentation.",
+      title: t("placeholders.reading_groups.user.title"),
+      body: t("placeholders.reading_groups.user.body"),
       actions: [
         {
           children: (
@@ -56,7 +55,7 @@ function ReadingGroupsPlaceholder({ isPublic }) {
               to={lh.link("frontendMyReadingGroupsNew")}
               className="button-tertiary"
             >
-              Create New Group
+              {t("navigation.reading_group.create")}
             </Link>
           )
         }

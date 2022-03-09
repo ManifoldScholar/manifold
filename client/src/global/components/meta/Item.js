@@ -18,6 +18,7 @@ export default function Item({ label, value, children }) {
     return <Styled.Value>{childEl}</Styled.Value>;
   };
 
+  // TODO: Add documentation re: how l10n works here.
   const renderLabel = () => {
     if (!label) return null;
     const i18nKey = humps.decamelize(label, { separator: "_" }).toLowerCase();

@@ -1,24 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
 function ProjectCollectionsBackendPlaceholder({ onClick }) {
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <Title icon="booksOnShelfStrokeUnique">
-        Ready to create a Project Collection?
+        {t("placeholders.project_collections_admin.title")}
       </Title>
-      <Body>
-        With Project Collections, you can take control of what appears on your
-        Manifold Library homepage. Create custom groupings of Projects and
-        change their order and visibility. You can handpick your collections and
-        order them manually, or you can create Smart Collections that
-        automatically update based on your filtering criteria.
-      </Body>
+      <Body>{t("placeholders.project_collections_admin.body")}</Body>
       <Actions
         actions={[
           {
-            title: "Create a collection",
+            title: t("actions.create_collection"),
             buttonProps: {
               onClick
             }
