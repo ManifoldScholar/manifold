@@ -15,6 +15,8 @@ function SearchResultsTypeJournalVolume({ result, highlightedAttribute }) {
   if (!result) return null;
 
   const model = result.relationships?.model;
+  if (!model) return null;
+
   const { attributes } = model ?? {};
 
   const parentJournal = result.relationships?.journal;
