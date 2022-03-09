@@ -7,6 +7,7 @@ import withReadingGroups from "hoc/withReadingGroups";
 import has from "lodash/has";
 import { ReaderContext } from "helpers/contexts";
 import withCurrentUser from "hoc/withCurrentUser";
+import { withTranslation } from "react-i18next";
 
 // This class is in need of refactoring. I did not have bandwidth to give it the refactor
 // it deserves during reading group development --ZD
@@ -16,7 +17,8 @@ class VisibilityMenuBody extends PureComponent {
 
   static propTypes = {
     filter: PropTypes.object,
-    filterChangeHandler: PropTypes.func
+    filterChangeHandler: PropTypes.func,
+    t: PropTypes.func
   };
 
   static contextType = ReaderContext;
@@ -162,7 +164,7 @@ class VisibilityMenuBody extends PureComponent {
       children.unshift(
         this.renderCheckbox(
           "public",
-          "My Public Annotations",
+          this.props.t("reader.my_public_annotations"),
           options,
           "readingGroups",
           2,
@@ -172,7 +174,7 @@ class VisibilityMenuBody extends PureComponent {
     children.unshift(
       this.renderCheckbox(
         "private",
-        "My Private Annotations",
+        this.props.t("reader.my_private_annotations"),
         options,
         "readingGroups",
         1,
@@ -182,7 +184,7 @@ class VisibilityMenuBody extends PureComponent {
     children.unshift(
       this.renderCheckbox(
         "all",
-        "All Reading Groups",
+        this.props.t("reader.menus.visibility.all_reading_groups"),
         options,
         "readingGroups",
         0,
@@ -190,12 +192,27 @@ class VisibilityMenuBody extends PureComponent {
       )
     );
 
-    const label = this.canAccessReadingGroups ? "Reading Groups" : "Visibility";
+    const label = this.canAccessReadingGroups
+      ? this.props.t("glossary.reading_group_title_case_other")
+      : this.props.t("common.visibility_title_case");
     return this.renderFilter("reading group", label, children);
   }
 
   renderCheckboxGroup(format, filterState = {}, flex) {
-    const label = `${capitalize(format)}s`;
+    let label;
+    switch (format) {
+      case "annotation":
+        label = this.props.t("glossary.annotation_title_case_other");
+        break;
+      case "highlight":
+        label = this.props.t("glossary.highlight_title_case_other");
+        break;
+      case "resource":
+        label = this.props.t("glossary.resource_title_case_other");
+        break;
+      default:
+        label = "";
+    }
     return this.renderFilter(
       format,
       label,
@@ -214,7 +231,8 @@ class VisibilityMenuBody extends PureComponent {
 
   renderCheckbox(key, label, filterState, format, index, flex) {
     const checkboxId = format + "-checkbox-" + index;
-    const adjustedLabel = key === "all" ? "Show All" : label;
+    const adjustedLabel =
+      key === "all" ? this.props.t("actions.show_all") : label;
     const checkboxClasses = classNames({
       "checkbox checkbox--white": true,
       "visibility-menu__checkbox": true,
@@ -248,10 +266,10 @@ class VisibilityMenuBody extends PureComponent {
     return (
       <li className="visibility-menu__footer">
         <button onClick={this.showAll} className="control-menu__button">
-          Show All
+          {this.props.t("actions.show_all")}
         </button>
         <button onClick={this.hideAll} className="control-menu__button">
-          Hide All
+          {this.props.t("actions.hide_all")}
         </button>
       </li>
     );
@@ -262,7 +280,9 @@ class VisibilityMenuBody extends PureComponent {
     return (
       <div className="visibility-menu control-menu">
         <div className="control-menu__header">
-          <div className="control-menu__heading">{"Show the following:"}</div>
+          <div className="control-menu__heading">
+            {this.props.t("reader.menus.visibility.show_the_following")}
+          </div>
         </div>
         <ul className="visibility-menu__section-list">
           {this.renderCheckboxGroup("highlight", filter.highlight)}
@@ -277,4 +297,6 @@ class VisibilityMenuBody extends PureComponent {
   }
 }
 
-export default withReadingGroups(withCurrentUser(VisibilityMenuBody));
+export default withTranslation()(
+  withReadingGroups(withCurrentUser(VisibilityMenuBody))
+);
