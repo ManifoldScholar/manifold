@@ -43,6 +43,7 @@ export default class EntityThumbnailProject extends PureComponent {
         mode={this.props.mode}
         color={this.attr.avatarColor}
         {...this.props.placeholderAttributes}
+        className={this.props.className}
       />
     );
   }

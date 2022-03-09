@@ -27,20 +27,21 @@ export const AnnotationTitle = styled.span`
 export const ThumbnailNarrow = styled(EntityThumbnail.Text, transientOptions)`
   ${({ $isSvg }) =>
     $isSvg &&
-    `&& {
+    `
       max-width: 76px;
       margin-inline-start: -10px;
       color: var(--color-neutral-ui-dark);
-    }
   `}
 `;
 
 export const Thumbnail = styled(EntityThumbnail.Project, transientOptions)`
   max-width: 56px;
+  max-height: 56px;
   color: var(--color-neutral-ui-dark);
 
   ${({ $isImg }) =>
     $isImg &&
     `margin-block-start: 6px;
+    max-height: 100%;
     `}
 `;
