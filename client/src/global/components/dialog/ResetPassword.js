@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Wrapper from "./Wrapper";
 import Confirm from "./Confirm";
@@ -29,7 +30,8 @@ export class ResetPasswordBase extends PureComponent {
     }).isRequired,
     dispatch: PropTypes.func,
     user: PropTypes.object,
-    response: PropTypes.object
+    response: PropTypes.object,
+    t: PropTypes.func
   };
 
   static contextTypes = {
@@ -114,6 +116,7 @@ export class ResetPasswordBase extends PureComponent {
     const errors = get(this.props.response, "errors") || [];
     const id = "reset-password";
     const errorId = id + "-error";
+    const t = this.props.t;
 
     return (
       <form
@@ -128,14 +131,14 @@ export class ResetPasswordBase extends PureComponent {
             errors={errors}
             idForError={errorId}
           >
-            <label htmlFor={id}>New Password</label>
+            <label htmlFor={id}>{t("forms.password_reset.new")}</label>
             <input
               value={this.state.password}
               onChange={event => this.handleInputChange(event)}
               name="password"
               type="password"
               id={id}
-              placeholder="New Password"
+              placeholder={t("forms.password_reset.new")}
               aria-describedby={errorId}
             />
           </Form.Errorable>
@@ -149,7 +152,7 @@ export class ResetPasswordBase extends PureComponent {
               "button-secondary--with-room"
             )}
             type="submit"
-            value="Reset Password"
+            value={t("forms.password_reset.submit_reset")}
           />
           <button
             className={classNames(
@@ -160,7 +163,7 @@ export class ResetPasswordBase extends PureComponent {
             )}
             onClick={event => this.handleStateChange(event, "editing", false)}
           >
-            Cancel
+            {t("actions.cancel")}
           </button>
         </div>
       </form>
@@ -168,6 +171,7 @@ export class ResetPasswordBase extends PureComponent {
   }
 
   renderInitial() {
+    const t = this.props.t;
     return (
       <div>
         <header className="dialog__header">
@@ -185,13 +189,13 @@ export class ResetPasswordBase extends PureComponent {
               onClick={event => this.handleStateChange(event, "confirm", true)}
               className="button-secondary button-secondary--outlined"
             >
-              Generate new password
+              {t("forms.password_reset.generate_password")}
             </button>
             <button
               onClick={event => this.handleStateChange(event, "editing", true)}
               className="button-secondary button-secondary--outlined"
             >
-              Set new password
+              {t("forms.password_reset.set_password")}
             </button>
             <button
               className={classNames(
@@ -208,7 +212,7 @@ export class ResetPasswordBase extends PureComponent {
                   "button-secondary__text--hover-dark"
                 )}
               >
-                Cancel
+                {t("actions.cancel")}
               </span>
             </button>
           </div>
@@ -218,10 +222,11 @@ export class ResetPasswordBase extends PureComponent {
   }
 
   renderConfirmation() {
+    const t = this.props.t;
     return (
       <Confirm
-        heading="Are you sure you want to reset this password?"
-        message="This action cannot be undone."
+        heading={t("modals.reset_password.heading")}
+        message={t("modals.reset_password.body")}
         resolve={event => this.handleResetEmailClick(event, this.props.user)}
         reject={event => this.handleStateChange(event, "confirm", false)}
       />
@@ -242,4 +247,6 @@ export class ResetPasswordBase extends PureComponent {
   }
 }
 
-export default connect(ResetPasswordBase.mapStateToProps)(ResetPasswordBase);
+export default withTranslation()(
+  connect(ResetPasswordBase.mapStateToProps)(ResetPasswordBase)
+);

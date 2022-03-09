@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import Wrapper from "./Wrapper";
 import isString from "lodash/isString";
@@ -7,7 +8,7 @@ import isFunction from "lodash/isFunction";
 import IconComposer from "global/components/utility/IconComposer";
 import { UIDConsumer } from "react-uid";
 
-export default class DialogConfirm extends PureComponent {
+class DialogConfirm extends PureComponent {
   static displayName = "Dialog.Confirm";
 
   static propTypes = {
@@ -15,7 +16,8 @@ export default class DialogConfirm extends PureComponent {
     reject: PropTypes.func.isRequired,
     heading: PropTypes.string,
     options: PropTypes.object,
-    message: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+    message: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    t: PropTypes.func
   };
 
   static contextTypes = {
@@ -23,13 +25,16 @@ export default class DialogConfirm extends PureComponent {
     unpauseKeyboardEvents: PropTypes.func
   };
 
-  static defaultProps = {
-    heading: "Are you sure?",
-    options: {
-      resolveLabel: "Yes",
-      rejectLabel: "No"
-    }
-  };
+  get defaultProps() {
+    const t = this.props.t;
+    return {
+      heading: t("messages.confirm"),
+      options: {
+        resolveLabel: t("common.yes_title_case"),
+        rejectLabel: t("common.no_title_case")
+      }
+    };
+  }
 
   componentDidMount() {
     if (this.context.pauseKeyboardEvents) this.context.pauseKeyboardEvents();
@@ -57,13 +62,15 @@ export default class DialogConfirm extends PureComponent {
   get resolveLabel() {
     if (this.props.options && this.props.options.resolveLabel)
       return this.props.options.resolveLabel;
-    return "Yes";
+    return this.props.t("common.yes_title_case");
   }
 
   get rejectLabel() {
     if (this.props.options && this.props.options.rejectLabel)
       return this.props.options.rejectLabel;
-    return this.canHandleResolve ? "No" : "OK";
+    return this.canHandleResolve
+      ? this.props.t("common.no_title_case")
+      : this.props.t("common.okay");
   }
 
   handleKeyPress = event => {
@@ -94,7 +101,9 @@ export default class DialogConfirm extends PureComponent {
             describedBy={`${id}-description`}
           >
             <header className="dialog__header">
-              <h2 id={`${id}-label`}>{this.props.heading}</h2>
+              <h2 id={`${id}-label`}>
+                {this.props.heading ?? this.defaultProps.heading}
+              </h2>
             </header>
 
             {isString(this.props.message) ? (
@@ -142,3 +151,5 @@ export default class DialogConfirm extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(DialogConfirm);

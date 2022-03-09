@@ -1,5 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import { Link } from "react-router-dom";
@@ -12,6 +13,8 @@ export default function EntityGroup({
   children,
   parentView
 }) {
+  const { t } = useTranslation();
+
   const showPlaceholder = !entities?.length && !children;
 
   return (
@@ -43,7 +46,7 @@ export default function EntityGroup({
         )}
         {showPlaceholder && (
           <Styled.PlaceholderText>
-            {"This volume doesn't contain any issues yet."}
+            {t("placeholders.volume")}
           </Styled.PlaceholderText>
         )}
         {children}

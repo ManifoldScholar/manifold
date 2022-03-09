@@ -16,6 +16,7 @@
     "comment_one": "{{count}} comment",
     "comment_other": "{{count}} comments",
     "flag_one": "{{count}} flag",
-    "flag_other": "{{count}} flags"
+    "flag_other": "{{count}} flags",
+    "entity_total": "Total {{entity}}"
   }
 }

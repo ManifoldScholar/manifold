@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { CSSTransition } from "react-transition-group";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
@@ -23,7 +24,8 @@ class DialogWrapper extends PureComponent {
     closeHandler: PropTypes.func,
     children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     labelledBy: PropTypes.string,
-    describedBy: PropTypes.string
+    describedBy: PropTypes.string,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -154,7 +156,9 @@ class DialogWrapper extends PureComponent {
                   tabIndex="0"
                 >
                   <IconComposer icon="close16" size={24} />
-                  <span className="screen-reader-text">Close Dialog</span>
+                  <span className="screen-reader-text">
+                    {this.props.t("modals.close")}
+                  </span>
                 </div>
               ) : null}
               {this.renderChildren()}
@@ -176,4 +180,4 @@ class DialogWrapper extends PureComponent {
   }
 }
 
-export default withRouter(DialogWrapper);
+export default withTranslation()(withRouter(DialogWrapper));

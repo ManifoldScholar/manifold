@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { CSSTransition } from "react-transition-group";
 import FocusTrap from "focus-trap-react";
 import tabbable from "tabbable";
@@ -13,7 +14,7 @@ import Notifications from "global/containers/Notifications";
 import { notificationActions } from "actions";
 import { DrawerContext } from "helpers/contexts";
 
-export default class DrawerWrapper extends PureComponent {
+class DrawerWrapper extends PureComponent {
   static mapStateToProps() {
     return {
       connected: true
@@ -44,7 +45,8 @@ export default class DrawerWrapper extends PureComponent {
     returnFocusOnDeactivate: PropTypes.bool,
     focusTrap: PropTypes.bool,
     includeSRCloseButton: PropTypes.bool,
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    t: PropTypes.func
   };
 
   static childContextTypes = {
@@ -232,6 +234,7 @@ export default class DrawerWrapper extends PureComponent {
   renderDrawerFrontMatter(props, headerId) {
     const hasTitle = props.title || props.icon;
     const hasClose = props.closeCallback || props.closeUrl;
+    const t = this.props.t;
 
     return (
       <>
@@ -259,7 +262,9 @@ export default class DrawerWrapper extends PureComponent {
                 tabIndex="0"
                 className={this.closeButtonClasses}
               >
-                <span className="drawer-bar__close-text">Close</span>
+                <span className="drawer-bar__close-text">
+                  {t("actions.close")}
+                </span>
                 <Utility.IconComposer
                   icon="close24"
                   size={24}
@@ -275,7 +280,7 @@ export default class DrawerWrapper extends PureComponent {
             tabIndex="0"
             className="screen-reader-text"
           >
-            Close
+            {t("actions.close")}
           </button>
         )}
       </>
@@ -363,3 +368,5 @@ export default class DrawerWrapper extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(DrawerWrapper);

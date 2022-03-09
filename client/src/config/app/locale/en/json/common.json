@@ -23,6 +23,11 @@
     "option_one": "option",
     "option_other": "options",
     "option_title_case_one": "Option",
-    "option_title_case_other": "Options"
+    "option_title_case_other": "Options",
+    "yes": "yes",
+    "yes_title_case": "Yes",
+    "no": "no",
+    "no_title_case": "No",
+    "okay": "OK"
   }
 }
