@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { withTranslation } from "react-i18next";
 import { Global as GlobalStyles } from "@emotion/react";
 import has from "lodash/has";
 import config from "config";
@@ -12,7 +13,7 @@ import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
 import * as Styled from "./styles";
 
-export default class FatalError extends PureComponent {
+class FatalError extends PureComponent {
   static propTypes = {
     fatalError: PropTypes.shape({
       error: PropTypes.object,
@@ -21,13 +22,17 @@ export default class FatalError extends PureComponent {
     headerLineOne: PropTypes.string.isRequired,
     headerLineTwo: PropTypes.string.isRequired,
     dismiss: PropTypes.func,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    t: PropTypes.func
   };
 
-  static defaultProps = {
-    headerLineOne: "We're at a bit of a loose end.",
-    headerLineTwo: "Frightfully sorry."
-  };
+  get defaultProps() {
+    const t = this.props.t;
+    return {
+      headerLineOne: t("errors.fatal.heading_line_one"),
+      headerLineTwo: t("errors.fatal.heading_line_two")
+    };
+  }
 
   get error() {
     const { error } = this.props.fatalError;
@@ -104,7 +109,8 @@ export default class FatalError extends PureComponent {
                 <Styled.Header>
                   <Styled.Icon icon="stopSign64" size={60} />
                   <Styled.Message>
-                    {this.props.headerLineOne}
+                    {this.props.headerLineOne ??
+                      this.defaultProps.headerLineOne}
                     {this.props.headerLineTwo ? (
                       <span>
                         <br />
@@ -130,7 +136,7 @@ export default class FatalError extends PureComponent {
                             onClick={this.props.dismiss}
                             className="dismiss"
                           >
-                            Try again.
+                            {this.props.t("errors.fatal.dismiss_link")}
                           </Styled.Link>
                         </span>
                       ) : null}
@@ -156,3 +162,5 @@ export default class FatalError extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(FatalError);
