@@ -46,7 +46,7 @@ function SearchResultsTypeText({ result, highlightedAttribute }) {
     <Generic
       {...resultProps}
       figure={
-        <Styled.IconThumbnail
+        <Styled.ThumbnailNarrow
           entity={model}
           width="100%"
           height={null}

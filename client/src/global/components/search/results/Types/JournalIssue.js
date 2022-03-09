@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import Generic from "./Generic";
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
-import EntityThumbnail from "global/components/entity-thumbnail";
 import withSearchResultHelper from "./searchResultHelper";
 import { capitalize } from "utils/string";
+import * as Styled from "./styles";
 
 function SearchResultsTypeJournalIssue({ result, highlightedAttribute }) {
   const { t } = useTranslation();
@@ -53,7 +53,7 @@ function SearchResultsTypeJournalIssue({ result, highlightedAttribute }) {
     <Generic
       {...resultProps}
       figure={
-        <EntityThumbnail.Project
+        <Styled.Thumbnail
           placeholderAttributes={{ mode: "small" }}
           entity={result.relationships.project}
           width="100%"

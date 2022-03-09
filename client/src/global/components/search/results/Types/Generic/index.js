@@ -34,9 +34,9 @@ function SearchResultsTypeGeneric(props) {
     return isReactNode ? item : null;
   };
 
-  const maybeWithLink = ({ to, children, tabIndex = 0 }) => {
+  const maybeWithLink = ({ to, children, tabIndex = 0, ariaHidden = null }) => {
     return url ? (
-      <Styled.Link to={to} tabIndex={tabIndex}>
+      <Styled.Link to={to} tabIndex={tabIndex} aria-hidden={ariaHidden}>
         {children}
       </Styled.Link>
     ) : (
@@ -56,7 +56,8 @@ function SearchResultsTypeGeneric(props) {
                   {maybeReactNode(figure)}
                 </Styled.Image>
               ),
-              tabIndex: -1
+              tabIndex: -1,
+              ariaHidden: true
             })}
         </Styled.ImageCol>
         <Styled.TextCol>

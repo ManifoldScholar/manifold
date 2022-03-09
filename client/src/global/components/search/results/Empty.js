@@ -7,7 +7,7 @@ export default function SearchResultsEmpty() {
   const { t } = useTranslation();
   return (
     <Styled.Wrapper>
-      <Styled.NoResults role="status" aria-live="polite" aria-atomic>
+      <Styled.NoResults role="status">
         {t("search.no_results")}
       </Styled.NoResults>
     </Styled.Wrapper>

@@ -56,7 +56,7 @@ function SearchResultsTypeTextSection({ result, highlightedAttribute }) {
     <Generic
       {...resultProps}
       figure={
-        <Styled.IconThumbnail
+        <Styled.ThumbnailNarrow
           as={EntityThumbnail.TextSection}
           entity={model}
           width="100%"
