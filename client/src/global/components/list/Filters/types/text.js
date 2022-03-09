@@ -6,9 +6,12 @@ const getTextOptions = texts =>
     };
   });
 
-export const textFilter = (filters, updateFilters, params) => ({
-  label: "Filter by text",
+export const textFilter = (filters, updateFilters, params, t) => ({
+  label: t("filters.labels.by_text"),
   value: filters?.text || "",
   onChange: e => updateFilters(e, "text"),
-  options: [{ label: "All texts", value: "" }, ...getTextOptions(params.texts)]
+  options: [
+    { label: t("filters.default_options.text"), value: "" },
+    ...getTextOptions(params.texts)
+  ]
 });

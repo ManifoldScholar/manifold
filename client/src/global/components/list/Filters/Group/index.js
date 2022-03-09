@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Search from "../Search";
 import Filter from "../Filter";
 import * as Styled from "./styles";
@@ -19,9 +20,11 @@ function FiltersGroup(props) {
 
   const searchInput = useRef(null);
 
+  const { t } = useTranslation();
+
   const handleReset = () => {
     onReset();
-    setScreenReaderStatus("Search and filters reset.");
+    setScreenReaderStatus(t("filters.reset_announcement"));
     if (searchInput.current) {
       searchInput.current.focus();
       searchInput.current.value = "";
@@ -34,10 +37,10 @@ function FiltersGroup(props) {
   /* eslint-disable no-nested-ternary */
   const resetLabel =
     filters?.length && !hideSearch
-      ? "Reset Search + Filters"
+      ? t("filters.reset_search_and_filters")
       : filters?.length
-      ? "Reset Filters"
-      : "Reset Search";
+      ? t("filters.reset_filters")
+      : t("filters.reset_search");
   /* eslint-disable no-nested-ternary */
 
   return (

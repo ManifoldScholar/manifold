@@ -69,6 +69,7 @@
     "create_collection": "$t(actions.create) a $t(glossary.collection_one)",
     "create_journal": "$t(actions.create) a $t(glossary.journal_one)",
     "publish": "Publish",
-    "publish_project": "$t(actions.publish) a project"
+    "publish_project": "$t(actions.publish) a project",
+    "reset": "Reset"
   }
 }

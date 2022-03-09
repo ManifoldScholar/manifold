@@ -6,12 +6,12 @@ const getSectionOptions = sections =>
     };
   });
 
-export const sectionFilter = (filters, updateFilters, params) => ({
-  label: "Filter by text section",
+export const sectionFilter = (filters, updateFilters, params, t) => ({
+  label: t("filters.labels.by_section"),
   value: filters?.textSection || "",
   onChange: e => updateFilters(e, "textSection"),
   options: [
-    { label: "All sections", value: "" },
+    { label: t("filters.default_options.sections"), value: "" },
     ...getSectionOptions(params.sections)
   ]
 });

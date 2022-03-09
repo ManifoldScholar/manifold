@@ -8,11 +8,14 @@ const getTagOptions = tags =>
     };
   });
 
-export const tagFilter = (filters, updateFilters, params) => {
+export const tagFilter = (filters, updateFilters, params, t) => {
   return {
-    label: "Tag",
+    label: t("filters.labels.tag"),
     value: filters?.tag || "",
     onChange: e => updateFilters(e, "tag"),
-    options: [{ label: "Tag:", value: "" }, ...getTagOptions(params.tags)]
+    options: [
+      { label: t("filters.default_options.tag"), value: "" },
+      ...getTagOptions(params.tags)
+    ]
   };
 };
