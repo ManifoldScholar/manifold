@@ -718,14 +718,19 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "annotate": "Annotate",
                               "annotate_passage": "$t(actions.annotate) this passage",
                               "archive": "Archive",
+                              "browse": "Browse",
                               "cancel": "Cancel",
                               "cancel_delete": "$t(actions.cancel) $t(actions.delete)",
                               "close": "Close",
                               "collect": "Collect {{title}}",
                               "confirm": "Confirm",
                               "confirm_delete": "$t(actions.confirm) $t(actions.delete)",
+                              "create": "Create",
+                              "create_collection": "$t(actions.create) a $t(glossary.collection_one)",
+                              "create_journal": "$t(actions.create) a $t(glossary.journal_one)",
                               "delete": "Delete",
                               "delete_event": "$t(actions.delete) event",
+                              "destroy": "Destroy",
                               "download": "Download",
                               "duplicate": "Duplicate",
                               "edit": "Edit",
@@ -734,6 +739,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "hide": "Hide",
                               "hide_description": "$t(actions.hide) Description",
                               "join": "Join",
+                              "join_group": "$t(actions.join) this group",
                               "login_to_annotate": "Login to annotate",
                               "login_to_reply": "Login to reply",
                               "manage": "Manage",
@@ -744,11 +750,14 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "play": "Play",
                               "post": "Post",
                               "preview": "Preview",
+                              "publish": "Publish",
+                              "publish_project": "$t(actions.publish) a project",
                               "read": "Start Reading",
                               "read_full": "Read the full passage",
                               "read_more": "Read More",
                               "remove": "Remove",
                               "reply": "Reply",
+                              "restore": "Restore",
                               "save": "Save",
                               "see_all": "See all",
                               "see_next_comment_one": "See next {{count}} comment",
@@ -797,13 +806,17 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             },
                             "dates": Object {
                               "added": "added",
+                              "ago": "ago",
                               "collection_created": "Collection created",
                               "published": "published",
+                              "published_title_case": "Published",
                               "resource_added": "Resource $t(dates.added)",
                               "updated": "updated",
+                              "updated_title_case": "Updated",
                             },
                             "errors": Object {
                               "audio_playback": "{{ error }}<1/>This audio file is not playable in your browser.<3/><4/>Click the download button to listen to the file on your device.",
+                              "color_scheme": "Manifold color scheme error!",
                               "content_block": Object {
                                 "default": "<0>Fix this content block.</0>",
                                 "no_activity": "No activity has been recorded for this project. This warning will disappear once there is project activity.",
@@ -813,6 +826,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "no_resources": "Add <1>resources</1> or <3>resource collections</3>to the project to fix this block.",
                                 "no_texts": "<0>Add texts to the project</0> or <2>adjust the block configuration</2> to fix this block.",
                               },
+                              "no_collapse_context": "Collapse components cannot be rendered outside the Collapse wrapper component.",
                               "no_content": "No content provided.",
                               "text_missing": "Text Missing",
                               "unauthorized": Object {
@@ -992,6 +1006,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             "img_alts": Object {
                               "user_avatar": "User Avatar",
                             },
+                            "journals": Object {
+                              "issue_number": "Issue {{issNum}}",
+                              "volume_issue_number": "$t(journals.volume_number, {{volNum}}), $t(journals.issue_number, {{issNum}})",
+                              "volume_number": "Volume {{volNum}}",
+                            },
                             "locales": Object {
                               "en": "English",
                               "es": "Spanish",
@@ -1080,9 +1099,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "all_journals": "All $t(glossary.journal_other)",
                                 "all_project_collections": "All $t(glossary.project_collection_other)",
                                 "all_projects": "All $t(glossary.project_other)",
+                                "aria_label": "Breadcrumb",
                                 "issues": "$t(glossary.issue_other)",
                               },
-                              "browse_library": "Browse library",
+                              "browse_library": "$t(actions.browse) library",
+                              "browse_projects": "$t(actions.browse) projects",
                               "library_links": "Library Links",
                               "reading_group": Object {
                                 "annotations": "Notes + Comments",
@@ -1105,6 +1126,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "see_full_collection": "See the full collection",
                               "user": Object {
                                 "back": "Back",
+                                "log_in": "Log In",
+                                "log_out": "Log Out",
                                 "my_notes_comments": "My Notes + Comments",
                                 "my_starred": "My Starred",
                                 "sign_in": "Sign In",
@@ -1158,18 +1181,115 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "previous_slide": "Go to previous slide",
                             },
                             "placeholders": Object {
+                              "annotations_filtered": Object {
+                                "body": "Try removing the text or member filter above to see more annotations.",
+                                "title": "No annotations matched your search criteria.",
+                              },
+                              "annotations_group": Object {
+                                "no_user": Object {
+                                  "body": "Sign up or log in, then join this group and be the first member to create an annotation!",
+                                  "title": "This group doesn‘t have any annotations yet.",
+                                },
+                                "user_is_member": Object {
+                                  "body": "While reading, you can associate a new or existing annotation with this group.",
+                                  "title": "Be the first reader to annotate in this group!",
+                                },
+                                "user_not_member": Object {
+                                  "body": "Join and be the first member to create an annotation! While reading, you can associate a new or existing annotation with this group.",
+                                  "title": "This group doesn‘t have any annotations yet.",
+                                },
+                              },
+                              "annotations_my": Object {
+                                "body": "While reading, add your notes and annotations to the text. Save them privately, or associate them with a reading group.",
+                                "title": "Create your first annotation!",
+                              },
                               "comments": Object {
+                                "deleted": "This comment was deleted.",
                                 "discuss_entity": "Discuss this {{entity}}...",
                                 "edit": "Edit this comment...",
                                 "reply": "Reply to this commment...",
                                 "unauthenticated": "Login to post a comment",
                               },
+                              "documentation_button_label": "Visit our documentation",
+                              "journal_issues": Object {
+                                "authorized": Object {
+                                  "body": "But it’s easy to create new issues with Manifold. If you have backend access, <2>head to the backend</2> and first select <4>Add a New Journal</4>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <6>our documentation</6>.",
+                                  "title": "Oh no. There are no journal issues in this Manifold library.",
+                                },
+                                "unauthorized": Object {
+                                  "body": "Please check back soon!",
+                                  "title": "There are no journal issues in this Manifold library.",
+                                },
+                              },
+                              "journals": Object {
+                                "authorized": Object {
+                                  "body": "But it’s easy to create new journals with Manifold. If you have backend access, <2>head to the backend</2> and select <4>Add a New Journal</4>. For more help, you can learn about creating and publishing Manifold Issues in <7>our documentation</7>.",
+                                  "title": "Oh no. There are no journals in this Manifold library.",
+                                },
+                                "unauthorized": Object {
+                                  "body": "Please check back soon!",
+                                  "title": "There are no journals in this Manifold library.",
+                                },
+                              },
                               "link": "Link",
+                              "my_starred": Object {
+                                "animation_label": "A grid of tiles with star icons that fade in.",
+                                "body": "But don’t fret, we’ve made it easy. Anywhere you see an empty star icon, just select it to add that item to your collection. You can star all kinds of items, so start browsing projects and get starring!",
+                                "title": "You haven’t starred any items … yet.",
+                              },
+                              "project_collections": Object {
+                                "authorized": Object {
+                                  "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <3>head to the backend</3> and select <6>Add a New Project Collection</6>. For more help, you can learn about creating and publishing Manifold Project Collections <9>here</9>.",
+                                  "title": "Oh no. There are no project collections in this Manifold library.",
+                                },
+                                "unauthorized": Object {
+                                  "body": "Please check back soon!",
+                                  "title": "There are no project collections in this Manifold library.",
+                                },
+                              },
+                              "project_collections_admin": Object {
+                                "body": "With Project Collections, you can take control of what appears on your Manifold Library homepage. Create custom groupings of Projects and change their order and visibility. You can handpick your collections and order them manually, or you can create Smart Collections that automatically update based on your filtering criteria.",
+                                "title": "Ready to create a Project Collection?",
+                              },
+                              "projects": Object {
+                                "authorized": Object {
+                                  "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <1>head to the backend</1> and select <3>Add a New Project</3>. For more help, you can learn about creating and publishing Manifold Projects <5>here</5>.",
+                                  "title": "On no. This Manifold library is empty.",
+                                },
+                                "unauthorized": Object {
+                                  "body": "Please check back soon!",
+                                  "title": "This Manifold library is empty.",
+                                },
+                              },
                               "reading_group": Object {
                                 "customize": "<0>Ready to customize your group?</0><1>Congratulations, you’ve created a Reading Group. Now you can begin adding content, editing the order, grouping, and descriptions on your home page, and sending out invitations for new members.</1><2>Start adding content:</2><3>Reading Groups can contain a variety of content: Projects, Texts, Text Sections, Resource Collections, and individual Resources can all be added to your group. To find and add content, you can either browse the library or use keyword search. Once you’ve found an item you wish to add, simply select the star icon and assign it to this group (or any other Reading Group you are managing).</3>",
                                 "settings": "<0>Edit settings and invite members:</0><1>You can edit the settings for your group at any time. Change your group’s name, privacy settings, or email notifications. You can also see your group’s invitation code, or use an invitation URL, which makes inviting members as easy as sharing its invitation web page address.</1>",
                               },
+                              "reading_groups": Object {
+                                "no_user": Object {
+                                  "body": "Sign up or log in to create the first group, or learn more about reading groups in our documentation.",
+                                  "title": "This Manifold doesn’t have any reading groups yet.",
+                                },
+                                "public": Object {
+                                  "body": "Be the first person to create one, or learn more about reading groups in our documentation.",
+                                  "title": "This Manifold doesn’t have any reading groups yet.",
+                                },
+                                "user": Object {
+                                  "body": "To join a group, enter your group invitation code below. You can also create your own group, or learn more about reading groups in our documentation.",
+                                  "title": "Join a group, or create a new one.",
+                                },
+                              },
                               "resource_collection": "This collection has no resources.",
+                              "resource_collections": Object {
+                                "authorized": Object {
+                                  "body": "Resource collections are groupings of resources that can be used to orient a reader around certain themes or as a means to place a series of resources onto a text with one insertion.",
+                                  "title": "Oh no. This project doesn’t have any collections yet.",
+                                },
+                                "unauthorized": Object {
+                                  "body": "Please check back soon!",
+                                  "title": "This project doesn’t have any collections yet.",
+                                },
+                              },
                               "table_of_contents": "This text does not have a table of contents.",
                             },
                             "reader": Object {
@@ -1276,14 +1396,19 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             "annotate": "Annotate",
                             "annotate_passage": "$t(actions.annotate) this passage",
                             "archive": "Archive",
+                            "browse": "Browse",
                             "cancel": "Cancel",
                             "cancel_delete": "$t(actions.cancel) $t(actions.delete)",
                             "close": "Close",
                             "collect": "Collect {{title}}",
                             "confirm": "Confirm",
                             "confirm_delete": "$t(actions.confirm) $t(actions.delete)",
+                            "create": "Create",
+                            "create_collection": "$t(actions.create) a $t(glossary.collection_one)",
+                            "create_journal": "$t(actions.create) a $t(glossary.journal_one)",
                             "delete": "Delete",
                             "delete_event": "$t(actions.delete) event",
+                            "destroy": "Destroy",
                             "download": "Download",
                             "duplicate": "Duplicate",
                             "edit": "Edit",
@@ -1292,6 +1417,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             "hide": "Hide",
                             "hide_description": "$t(actions.hide) Description",
                             "join": "Join",
+                            "join_group": "$t(actions.join) this group",
                             "login_to_annotate": "Login to annotate",
                             "login_to_reply": "Login to reply",
                             "manage": "Manage",
@@ -1302,11 +1428,14 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             "play": "Play",
                             "post": "Post",
                             "preview": "Preview",
+                            "publish": "Publish",
+                            "publish_project": "$t(actions.publish) a project",
                             "read": "Start Reading",
                             "read_full": "Read the full passage",
                             "read_more": "Read More",
                             "remove": "Remove",
                             "reply": "Reply",
+                            "restore": "Restore",
                             "save": "Save",
                             "see_all": "See all",
                             "see_next_comment_one": "See next {{count}} comment",
@@ -1355,13 +1484,17 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                           },
                           "dates": Object {
                             "added": "added",
+                            "ago": "ago",
                             "collection_created": "Collection created",
                             "published": "published",
+                            "published_title_case": "Published",
                             "resource_added": "Resource $t(dates.added)",
                             "updated": "updated",
+                            "updated_title_case": "Updated",
                           },
                           "errors": Object {
                             "audio_playback": "{{ error }}<1/>This audio file is not playable in your browser.<3/><4/>Click the download button to listen to the file on your device.",
+                            "color_scheme": "Manifold color scheme error!",
                             "content_block": Object {
                               "default": "<0>Fix this content block.</0>",
                               "no_activity": "No activity has been recorded for this project. This warning will disappear once there is project activity.",
@@ -1371,6 +1504,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "no_resources": "Add <1>resources</1> or <3>resource collections</3>to the project to fix this block.",
                               "no_texts": "<0>Add texts to the project</0> or <2>adjust the block configuration</2> to fix this block.",
                             },
+                            "no_collapse_context": "Collapse components cannot be rendered outside the Collapse wrapper component.",
                             "no_content": "No content provided.",
                             "text_missing": "Text Missing",
                             "unauthorized": Object {
@@ -1550,6 +1684,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                           "img_alts": Object {
                             "user_avatar": "User Avatar",
                           },
+                          "journals": Object {
+                            "issue_number": "Issue {{issNum}}",
+                            "volume_issue_number": "$t(journals.volume_number, {{volNum}}), $t(journals.issue_number, {{issNum}})",
+                            "volume_number": "Volume {{volNum}}",
+                          },
                           "locales": Object {
                             "en": "English",
                             "es": "Spanish",
@@ -1638,9 +1777,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "all_journals": "All $t(glossary.journal_other)",
                               "all_project_collections": "All $t(glossary.project_collection_other)",
                               "all_projects": "All $t(glossary.project_other)",
+                              "aria_label": "Breadcrumb",
                               "issues": "$t(glossary.issue_other)",
                             },
-                            "browse_library": "Browse library",
+                            "browse_library": "$t(actions.browse) library",
+                            "browse_projects": "$t(actions.browse) projects",
                             "library_links": "Library Links",
                             "reading_group": Object {
                               "annotations": "Notes + Comments",
@@ -1663,6 +1804,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             "see_full_collection": "See the full collection",
                             "user": Object {
                               "back": "Back",
+                              "log_in": "Log In",
+                              "log_out": "Log Out",
                               "my_notes_comments": "My Notes + Comments",
                               "my_starred": "My Starred",
                               "sign_in": "Sign In",
@@ -1716,18 +1859,115 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             "previous_slide": "Go to previous slide",
                           },
                           "placeholders": Object {
+                            "annotations_filtered": Object {
+                              "body": "Try removing the text or member filter above to see more annotations.",
+                              "title": "No annotations matched your search criteria.",
+                            },
+                            "annotations_group": Object {
+                              "no_user": Object {
+                                "body": "Sign up or log in, then join this group and be the first member to create an annotation!",
+                                "title": "This group doesn‘t have any annotations yet.",
+                              },
+                              "user_is_member": Object {
+                                "body": "While reading, you can associate a new or existing annotation with this group.",
+                                "title": "Be the first reader to annotate in this group!",
+                              },
+                              "user_not_member": Object {
+                                "body": "Join and be the first member to create an annotation! While reading, you can associate a new or existing annotation with this group.",
+                                "title": "This group doesn‘t have any annotations yet.",
+                              },
+                            },
+                            "annotations_my": Object {
+                              "body": "While reading, add your notes and annotations to the text. Save them privately, or associate them with a reading group.",
+                              "title": "Create your first annotation!",
+                            },
                             "comments": Object {
+                              "deleted": "This comment was deleted.",
                               "discuss_entity": "Discuss this {{entity}}...",
                               "edit": "Edit this comment...",
                               "reply": "Reply to this commment...",
                               "unauthenticated": "Login to post a comment",
                             },
+                            "documentation_button_label": "Visit our documentation",
+                            "journal_issues": Object {
+                              "authorized": Object {
+                                "body": "But it’s easy to create new issues with Manifold. If you have backend access, <2>head to the backend</2> and first select <4>Add a New Journal</4>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <6>our documentation</6>.",
+                                "title": "Oh no. There are no journal issues in this Manifold library.",
+                              },
+                              "unauthorized": Object {
+                                "body": "Please check back soon!",
+                                "title": "There are no journal issues in this Manifold library.",
+                              },
+                            },
+                            "journals": Object {
+                              "authorized": Object {
+                                "body": "But it’s easy to create new journals with Manifold. If you have backend access, <2>head to the backend</2> and select <4>Add a New Journal</4>. For more help, you can learn about creating and publishing Manifold Issues in <7>our documentation</7>.",
+                                "title": "Oh no. There are no journals in this Manifold library.",
+                              },
+                              "unauthorized": Object {
+                                "body": "Please check back soon!",
+                                "title": "There are no journals in this Manifold library.",
+                              },
+                            },
                             "link": "Link",
+                            "my_starred": Object {
+                              "animation_label": "A grid of tiles with star icons that fade in.",
+                              "body": "But don’t fret, we’ve made it easy. Anywhere you see an empty star icon, just select it to add that item to your collection. You can star all kinds of items, so start browsing projects and get starring!",
+                              "title": "You haven’t starred any items … yet.",
+                            },
+                            "project_collections": Object {
+                              "authorized": Object {
+                                "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <3>head to the backend</3> and select <6>Add a New Project Collection</6>. For more help, you can learn about creating and publishing Manifold Project Collections <9>here</9>.",
+                                "title": "Oh no. There are no project collections in this Manifold library.",
+                              },
+                              "unauthorized": Object {
+                                "body": "Please check back soon!",
+                                "title": "There are no project collections in this Manifold library.",
+                              },
+                            },
+                            "project_collections_admin": Object {
+                              "body": "With Project Collections, you can take control of what appears on your Manifold Library homepage. Create custom groupings of Projects and change their order and visibility. You can handpick your collections and order them manually, or you can create Smart Collections that automatically update based on your filtering criteria.",
+                              "title": "Ready to create a Project Collection?",
+                            },
+                            "projects": Object {
+                              "authorized": Object {
+                                "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <1>head to the backend</1> and select <3>Add a New Project</3>. For more help, you can learn about creating and publishing Manifold Projects <5>here</5>.",
+                                "title": "On no. This Manifold library is empty.",
+                              },
+                              "unauthorized": Object {
+                                "body": "Please check back soon!",
+                                "title": "This Manifold library is empty.",
+                              },
+                            },
                             "reading_group": Object {
                               "customize": "<0>Ready to customize your group?</0><1>Congratulations, you’ve created a Reading Group. Now you can begin adding content, editing the order, grouping, and descriptions on your home page, and sending out invitations for new members.</1><2>Start adding content:</2><3>Reading Groups can contain a variety of content: Projects, Texts, Text Sections, Resource Collections, and individual Resources can all be added to your group. To find and add content, you can either browse the library or use keyword search. Once you’ve found an item you wish to add, simply select the star icon and assign it to this group (or any other Reading Group you are managing).</3>",
                               "settings": "<0>Edit settings and invite members:</0><1>You can edit the settings for your group at any time. Change your group’s name, privacy settings, or email notifications. You can also see your group’s invitation code, or use an invitation URL, which makes inviting members as easy as sharing its invitation web page address.</1>",
                             },
+                            "reading_groups": Object {
+                              "no_user": Object {
+                                "body": "Sign up or log in to create the first group, or learn more about reading groups in our documentation.",
+                                "title": "This Manifold doesn’t have any reading groups yet.",
+                              },
+                              "public": Object {
+                                "body": "Be the first person to create one, or learn more about reading groups in our documentation.",
+                                "title": "This Manifold doesn’t have any reading groups yet.",
+                              },
+                              "user": Object {
+                                "body": "To join a group, enter your group invitation code below. You can also create your own group, or learn more about reading groups in our documentation.",
+                                "title": "Join a group, or create a new one.",
+                              },
+                            },
                             "resource_collection": "This collection has no resources.",
+                            "resource_collections": Object {
+                              "authorized": Object {
+                                "body": "Resource collections are groupings of resources that can be used to orient a reader around certain themes or as a means to place a series of resources onto a text with one insertion.",
+                                "title": "Oh no. This project doesn’t have any collections yet.",
+                              },
+                              "unauthorized": Object {
+                                "body": "Please check back soon!",
+                                "title": "This project doesn’t have any collections yet.",
+                              },
+                            },
                             "table_of_contents": "This text does not have a table of contents.",
                           },
                           "reader": Object {
@@ -1921,14 +2161,19 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "annotate": "Annotate",
                                 "annotate_passage": "$t(actions.annotate) this passage",
                                 "archive": "Archive",
+                                "browse": "Browse",
                                 "cancel": "Cancel",
                                 "cancel_delete": "$t(actions.cancel) $t(actions.delete)",
                                 "close": "Close",
                                 "collect": "Collect {{title}}",
                                 "confirm": "Confirm",
                                 "confirm_delete": "$t(actions.confirm) $t(actions.delete)",
+                                "create": "Create",
+                                "create_collection": "$t(actions.create) a $t(glossary.collection_one)",
+                                "create_journal": "$t(actions.create) a $t(glossary.journal_one)",
                                 "delete": "Delete",
                                 "delete_event": "$t(actions.delete) event",
+                                "destroy": "Destroy",
                                 "download": "Download",
                                 "duplicate": "Duplicate",
                                 "edit": "Edit",
@@ -1937,6 +2182,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "hide": "Hide",
                                 "hide_description": "$t(actions.hide) Description",
                                 "join": "Join",
+                                "join_group": "$t(actions.join) this group",
                                 "login_to_annotate": "Login to annotate",
                                 "login_to_reply": "Login to reply",
                                 "manage": "Manage",
@@ -1947,11 +2193,14 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "play": "Play",
                                 "post": "Post",
                                 "preview": "Preview",
+                                "publish": "Publish",
+                                "publish_project": "$t(actions.publish) a project",
                                 "read": "Start Reading",
                                 "read_full": "Read the full passage",
                                 "read_more": "Read More",
                                 "remove": "Remove",
                                 "reply": "Reply",
+                                "restore": "Restore",
                                 "save": "Save",
                                 "see_all": "See all",
                                 "see_next_comment_one": "See next {{count}} comment",
@@ -2000,13 +2249,17 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               },
                               "dates": Object {
                                 "added": "added",
+                                "ago": "ago",
                                 "collection_created": "Collection created",
                                 "published": "published",
+                                "published_title_case": "Published",
                                 "resource_added": "Resource $t(dates.added)",
                                 "updated": "updated",
+                                "updated_title_case": "Updated",
                               },
                               "errors": Object {
                                 "audio_playback": "{{ error }}<1/>This audio file is not playable in your browser.<3/><4/>Click the download button to listen to the file on your device.",
+                                "color_scheme": "Manifold color scheme error!",
                                 "content_block": Object {
                                   "default": "<0>Fix this content block.</0>",
                                   "no_activity": "No activity has been recorded for this project. This warning will disappear once there is project activity.",
@@ -2016,6 +2269,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "no_resources": "Add <1>resources</1> or <3>resource collections</3>to the project to fix this block.",
                                   "no_texts": "<0>Add texts to the project</0> or <2>adjust the block configuration</2> to fix this block.",
                                 },
+                                "no_collapse_context": "Collapse components cannot be rendered outside the Collapse wrapper component.",
                                 "no_content": "No content provided.",
                                 "text_missing": "Text Missing",
                                 "unauthorized": Object {
@@ -2195,6 +2449,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "img_alts": Object {
                                 "user_avatar": "User Avatar",
                               },
+                              "journals": Object {
+                                "issue_number": "Issue {{issNum}}",
+                                "volume_issue_number": "$t(journals.volume_number, {{volNum}}), $t(journals.issue_number, {{issNum}})",
+                                "volume_number": "Volume {{volNum}}",
+                              },
                               "locales": Object {
                                 "en": "English",
                                 "es": "Spanish",
@@ -2283,9 +2542,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "all_journals": "All $t(glossary.journal_other)",
                                   "all_project_collections": "All $t(glossary.project_collection_other)",
                                   "all_projects": "All $t(glossary.project_other)",
+                                  "aria_label": "Breadcrumb",
                                   "issues": "$t(glossary.issue_other)",
                                 },
-                                "browse_library": "Browse library",
+                                "browse_library": "$t(actions.browse) library",
+                                "browse_projects": "$t(actions.browse) projects",
                                 "library_links": "Library Links",
                                 "reading_group": Object {
                                   "annotations": "Notes + Comments",
@@ -2308,6 +2569,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "see_full_collection": "See the full collection",
                                 "user": Object {
                                   "back": "Back",
+                                  "log_in": "Log In",
+                                  "log_out": "Log Out",
                                   "my_notes_comments": "My Notes + Comments",
                                   "my_starred": "My Starred",
                                   "sign_in": "Sign In",
@@ -2361,18 +2624,115 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "previous_slide": "Go to previous slide",
                               },
                               "placeholders": Object {
+                                "annotations_filtered": Object {
+                                  "body": "Try removing the text or member filter above to see more annotations.",
+                                  "title": "No annotations matched your search criteria.",
+                                },
+                                "annotations_group": Object {
+                                  "no_user": Object {
+                                    "body": "Sign up or log in, then join this group and be the first member to create an annotation!",
+                                    "title": "This group doesn‘t have any annotations yet.",
+                                  },
+                                  "user_is_member": Object {
+                                    "body": "While reading, you can associate a new or existing annotation with this group.",
+                                    "title": "Be the first reader to annotate in this group!",
+                                  },
+                                  "user_not_member": Object {
+                                    "body": "Join and be the first member to create an annotation! While reading, you can associate a new or existing annotation with this group.",
+                                    "title": "This group doesn‘t have any annotations yet.",
+                                  },
+                                },
+                                "annotations_my": Object {
+                                  "body": "While reading, add your notes and annotations to the text. Save them privately, or associate them with a reading group.",
+                                  "title": "Create your first annotation!",
+                                },
                                 "comments": Object {
+                                  "deleted": "This comment was deleted.",
                                   "discuss_entity": "Discuss this {{entity}}...",
                                   "edit": "Edit this comment...",
                                   "reply": "Reply to this commment...",
                                   "unauthenticated": "Login to post a comment",
                                 },
+                                "documentation_button_label": "Visit our documentation",
+                                "journal_issues": Object {
+                                  "authorized": Object {
+                                    "body": "But it’s easy to create new issues with Manifold. If you have backend access, <2>head to the backend</2> and first select <4>Add a New Journal</4>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <6>our documentation</6>.",
+                                    "title": "Oh no. There are no journal issues in this Manifold library.",
+                                  },
+                                  "unauthorized": Object {
+                                    "body": "Please check back soon!",
+                                    "title": "There are no journal issues in this Manifold library.",
+                                  },
+                                },
+                                "journals": Object {
+                                  "authorized": Object {
+                                    "body": "But it’s easy to create new journals with Manifold. If you have backend access, <2>head to the backend</2> and select <4>Add a New Journal</4>. For more help, you can learn about creating and publishing Manifold Issues in <7>our documentation</7>.",
+                                    "title": "Oh no. There are no journals in this Manifold library.",
+                                  },
+                                  "unauthorized": Object {
+                                    "body": "Please check back soon!",
+                                    "title": "There are no journals in this Manifold library.",
+                                  },
+                                },
                                 "link": "Link",
+                                "my_starred": Object {
+                                  "animation_label": "A grid of tiles with star icons that fade in.",
+                                  "body": "But don’t fret, we’ve made it easy. Anywhere you see an empty star icon, just select it to add that item to your collection. You can star all kinds of items, so start browsing projects and get starring!",
+                                  "title": "You haven’t starred any items … yet.",
+                                },
+                                "project_collections": Object {
+                                  "authorized": Object {
+                                    "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <3>head to the backend</3> and select <6>Add a New Project Collection</6>. For more help, you can learn about creating and publishing Manifold Project Collections <9>here</9>.",
+                                    "title": "Oh no. There are no project collections in this Manifold library.",
+                                  },
+                                  "unauthorized": Object {
+                                    "body": "Please check back soon!",
+                                    "title": "There are no project collections in this Manifold library.",
+                                  },
+                                },
+                                "project_collections_admin": Object {
+                                  "body": "With Project Collections, you can take control of what appears on your Manifold Library homepage. Create custom groupings of Projects and change their order and visibility. You can handpick your collections and order them manually, or you can create Smart Collections that automatically update based on your filtering criteria.",
+                                  "title": "Ready to create a Project Collection?",
+                                },
+                                "projects": Object {
+                                  "authorized": Object {
+                                    "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <1>head to the backend</1> and select <3>Add a New Project</3>. For more help, you can learn about creating and publishing Manifold Projects <5>here</5>.",
+                                    "title": "On no. This Manifold library is empty.",
+                                  },
+                                  "unauthorized": Object {
+                                    "body": "Please check back soon!",
+                                    "title": "This Manifold library is empty.",
+                                  },
+                                },
                                 "reading_group": Object {
                                   "customize": "<0>Ready to customize your group?</0><1>Congratulations, you’ve created a Reading Group. Now you can begin adding content, editing the order, grouping, and descriptions on your home page, and sending out invitations for new members.</1><2>Start adding content:</2><3>Reading Groups can contain a variety of content: Projects, Texts, Text Sections, Resource Collections, and individual Resources can all be added to your group. To find and add content, you can either browse the library or use keyword search. Once you’ve found an item you wish to add, simply select the star icon and assign it to this group (or any other Reading Group you are managing).</3>",
                                   "settings": "<0>Edit settings and invite members:</0><1>You can edit the settings for your group at any time. Change your group’s name, privacy settings, or email notifications. You can also see your group’s invitation code, or use an invitation URL, which makes inviting members as easy as sharing its invitation web page address.</1>",
                                 },
+                                "reading_groups": Object {
+                                  "no_user": Object {
+                                    "body": "Sign up or log in to create the first group, or learn more about reading groups in our documentation.",
+                                    "title": "This Manifold doesn’t have any reading groups yet.",
+                                  },
+                                  "public": Object {
+                                    "body": "Be the first person to create one, or learn more about reading groups in our documentation.",
+                                    "title": "This Manifold doesn’t have any reading groups yet.",
+                                  },
+                                  "user": Object {
+                                    "body": "To join a group, enter your group invitation code below. You can also create your own group, or learn more about reading groups in our documentation.",
+                                    "title": "Join a group, or create a new one.",
+                                  },
+                                },
                                 "resource_collection": "This collection has no resources.",
+                                "resource_collections": Object {
+                                  "authorized": Object {
+                                    "body": "Resource collections are groupings of resources that can be used to orient a reader around certain themes or as a means to place a series of resources onto a text with one insertion.",
+                                    "title": "Oh no. This project doesn’t have any collections yet.",
+                                  },
+                                  "unauthorized": Object {
+                                    "body": "Please check back soon!",
+                                    "title": "This project doesn’t have any collections yet.",
+                                  },
+                                },
                                 "table_of_contents": "This text does not have a table of contents.",
                               },
                               "reader": Object {
@@ -2479,14 +2839,19 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "annotate": "Annotate",
                               "annotate_passage": "$t(actions.annotate) this passage",
                               "archive": "Archive",
+                              "browse": "Browse",
                               "cancel": "Cancel",
                               "cancel_delete": "$t(actions.cancel) $t(actions.delete)",
                               "close": "Close",
                               "collect": "Collect {{title}}",
                               "confirm": "Confirm",
                               "confirm_delete": "$t(actions.confirm) $t(actions.delete)",
+                              "create": "Create",
+                              "create_collection": "$t(actions.create) a $t(glossary.collection_one)",
+                              "create_journal": "$t(actions.create) a $t(glossary.journal_one)",
                               "delete": "Delete",
                               "delete_event": "$t(actions.delete) event",
+                              "destroy": "Destroy",
                               "download": "Download",
                               "duplicate": "Duplicate",
                               "edit": "Edit",
@@ -2495,6 +2860,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "hide": "Hide",
                               "hide_description": "$t(actions.hide) Description",
                               "join": "Join",
+                              "join_group": "$t(actions.join) this group",
                               "login_to_annotate": "Login to annotate",
                               "login_to_reply": "Login to reply",
                               "manage": "Manage",
@@ -2505,11 +2871,14 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "play": "Play",
                               "post": "Post",
                               "preview": "Preview",
+                              "publish": "Publish",
+                              "publish_project": "$t(actions.publish) a project",
                               "read": "Start Reading",
                               "read_full": "Read the full passage",
                               "read_more": "Read More",
                               "remove": "Remove",
                               "reply": "Reply",
+                              "restore": "Restore",
                               "save": "Save",
                               "see_all": "See all",
                               "see_next_comment_one": "See next {{count}} comment",
@@ -2558,13 +2927,17 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             },
                             "dates": Object {
                               "added": "added",
+                              "ago": "ago",
                               "collection_created": "Collection created",
                               "published": "published",
+                              "published_title_case": "Published",
                               "resource_added": "Resource $t(dates.added)",
                               "updated": "updated",
+                              "updated_title_case": "Updated",
                             },
                             "errors": Object {
                               "audio_playback": "{{ error }}<1/>This audio file is not playable in your browser.<3/><4/>Click the download button to listen to the file on your device.",
+                              "color_scheme": "Manifold color scheme error!",
                               "content_block": Object {
                                 "default": "<0>Fix this content block.</0>",
                                 "no_activity": "No activity has been recorded for this project. This warning will disappear once there is project activity.",
@@ -2574,6 +2947,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "no_resources": "Add <1>resources</1> or <3>resource collections</3>to the project to fix this block.",
                                 "no_texts": "<0>Add texts to the project</0> or <2>adjust the block configuration</2> to fix this block.",
                               },
+                              "no_collapse_context": "Collapse components cannot be rendered outside the Collapse wrapper component.",
                               "no_content": "No content provided.",
                               "text_missing": "Text Missing",
                               "unauthorized": Object {
@@ -2753,6 +3127,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             "img_alts": Object {
                               "user_avatar": "User Avatar",
                             },
+                            "journals": Object {
+                              "issue_number": "Issue {{issNum}}",
+                              "volume_issue_number": "$t(journals.volume_number, {{volNum}}), $t(journals.issue_number, {{issNum}})",
+                              "volume_number": "Volume {{volNum}}",
+                            },
                             "locales": Object {
                               "en": "English",
                               "es": "Spanish",
@@ -2841,9 +3220,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "all_journals": "All $t(glossary.journal_other)",
                                 "all_project_collections": "All $t(glossary.project_collection_other)",
                                 "all_projects": "All $t(glossary.project_other)",
+                                "aria_label": "Breadcrumb",
                                 "issues": "$t(glossary.issue_other)",
                               },
-                              "browse_library": "Browse library",
+                              "browse_library": "$t(actions.browse) library",
+                              "browse_projects": "$t(actions.browse) projects",
                               "library_links": "Library Links",
                               "reading_group": Object {
                                 "annotations": "Notes + Comments",
@@ -2866,6 +3247,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "see_full_collection": "See the full collection",
                               "user": Object {
                                 "back": "Back",
+                                "log_in": "Log In",
+                                "log_out": "Log Out",
                                 "my_notes_comments": "My Notes + Comments",
                                 "my_starred": "My Starred",
                                 "sign_in": "Sign In",
@@ -2919,18 +3302,115 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "previous_slide": "Go to previous slide",
                             },
                             "placeholders": Object {
+                              "annotations_filtered": Object {
+                                "body": "Try removing the text or member filter above to see more annotations.",
+                                "title": "No annotations matched your search criteria.",
+                              },
+                              "annotations_group": Object {
+                                "no_user": Object {
+                                  "body": "Sign up or log in, then join this group and be the first member to create an annotation!",
+                                  "title": "This group doesn‘t have any annotations yet.",
+                                },
+                                "user_is_member": Object {
+                                  "body": "While reading, you can associate a new or existing annotation with this group.",
+                                  "title": "Be the first reader to annotate in this group!",
+                                },
+                                "user_not_member": Object {
+                                  "body": "Join and be the first member to create an annotation! While reading, you can associate a new or existing annotation with this group.",
+                                  "title": "This group doesn‘t have any annotations yet.",
+                                },
+                              },
+                              "annotations_my": Object {
+                                "body": "While reading, add your notes and annotations to the text. Save them privately, or associate them with a reading group.",
+                                "title": "Create your first annotation!",
+                              },
                               "comments": Object {
+                                "deleted": "This comment was deleted.",
                                 "discuss_entity": "Discuss this {{entity}}...",
                                 "edit": "Edit this comment...",
                                 "reply": "Reply to this commment...",
                                 "unauthenticated": "Login to post a comment",
                               },
+                              "documentation_button_label": "Visit our documentation",
+                              "journal_issues": Object {
+                                "authorized": Object {
+                                  "body": "But it’s easy to create new issues with Manifold. If you have backend access, <2>head to the backend</2> and first select <4>Add a New Journal</4>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <6>our documentation</6>.",
+                                  "title": "Oh no. There are no journal issues in this Manifold library.",
+                                },
+                                "unauthorized": Object {
+                                  "body": "Please check back soon!",
+                                  "title": "There are no journal issues in this Manifold library.",
+                                },
+                              },
+                              "journals": Object {
+                                "authorized": Object {
+                                  "body": "But it’s easy to create new journals with Manifold. If you have backend access, <2>head to the backend</2> and select <4>Add a New Journal</4>. For more help, you can learn about creating and publishing Manifold Issues in <7>our documentation</7>.",
+                                  "title": "Oh no. There are no journals in this Manifold library.",
+                                },
+                                "unauthorized": Object {
+                                  "body": "Please check back soon!",
+                                  "title": "There are no journals in this Manifold library.",
+                                },
+                              },
                               "link": "Link",
+                              "my_starred": Object {
+                                "animation_label": "A grid of tiles with star icons that fade in.",
+                                "body": "But don’t fret, we’ve made it easy. Anywhere you see an empty star icon, just select it to add that item to your collection. You can star all kinds of items, so start browsing projects and get starring!",
+                                "title": "You haven’t starred any items … yet.",
+                              },
+                              "project_collections": Object {
+                                "authorized": Object {
+                                  "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <3>head to the backend</3> and select <6>Add a New Project Collection</6>. For more help, you can learn about creating and publishing Manifold Project Collections <9>here</9>.",
+                                  "title": "Oh no. There are no project collections in this Manifold library.",
+                                },
+                                "unauthorized": Object {
+                                  "body": "Please check back soon!",
+                                  "title": "There are no project collections in this Manifold library.",
+                                },
+                              },
+                              "project_collections_admin": Object {
+                                "body": "With Project Collections, you can take control of what appears on your Manifold Library homepage. Create custom groupings of Projects and change their order and visibility. You can handpick your collections and order them manually, or you can create Smart Collections that automatically update based on your filtering criteria.",
+                                "title": "Ready to create a Project Collection?",
+                              },
+                              "projects": Object {
+                                "authorized": Object {
+                                  "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <1>head to the backend</1> and select <3>Add a New Project</3>. For more help, you can learn about creating and publishing Manifold Projects <5>here</5>.",
+                                  "title": "On no. This Manifold library is empty.",
+                                },
+                                "unauthorized": Object {
+                                  "body": "Please check back soon!",
+                                  "title": "This Manifold library is empty.",
+                                },
+                              },
                               "reading_group": Object {
                                 "customize": "<0>Ready to customize your group?</0><1>Congratulations, you’ve created a Reading Group. Now you can begin adding content, editing the order, grouping, and descriptions on your home page, and sending out invitations for new members.</1><2>Start adding content:</2><3>Reading Groups can contain a variety of content: Projects, Texts, Text Sections, Resource Collections, and individual Resources can all be added to your group. To find and add content, you can either browse the library or use keyword search. Once you’ve found an item you wish to add, simply select the star icon and assign it to this group (or any other Reading Group you are managing).</3>",
                                 "settings": "<0>Edit settings and invite members:</0><1>You can edit the settings for your group at any time. Change your group’s name, privacy settings, or email notifications. You can also see your group’s invitation code, or use an invitation URL, which makes inviting members as easy as sharing its invitation web page address.</1>",
                               },
+                              "reading_groups": Object {
+                                "no_user": Object {
+                                  "body": "Sign up or log in to create the first group, or learn more about reading groups in our documentation.",
+                                  "title": "This Manifold doesn’t have any reading groups yet.",
+                                },
+                                "public": Object {
+                                  "body": "Be the first person to create one, or learn more about reading groups in our documentation.",
+                                  "title": "This Manifold doesn’t have any reading groups yet.",
+                                },
+                                "user": Object {
+                                  "body": "To join a group, enter your group invitation code below. You can also create your own group, or learn more about reading groups in our documentation.",
+                                  "title": "Join a group, or create a new one.",
+                                },
+                              },
                               "resource_collection": "This collection has no resources.",
+                              "resource_collections": Object {
+                                "authorized": Object {
+                                  "body": "Resource collections are groupings of resources that can be used to orient a reader around certain themes or as a means to place a series of resources onto a text with one insertion.",
+                                  "title": "Oh no. This project doesn’t have any collections yet.",
+                                },
+                                "unauthorized": Object {
+                                  "body": "Please check back soon!",
+                                  "title": "This project doesn’t have any collections yet.",
+                                },
+                              },
                               "table_of_contents": "This text does not have a table of contents.",
                             },
                             "reader": Object {
@@ -3141,14 +3621,19 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "annotate": "Annotate",
                                   "annotate_passage": "$t(actions.annotate) this passage",
                                   "archive": "Archive",
+                                  "browse": "Browse",
                                   "cancel": "Cancel",
                                   "cancel_delete": "$t(actions.cancel) $t(actions.delete)",
                                   "close": "Close",
                                   "collect": "Collect {{title}}",
                                   "confirm": "Confirm",
                                   "confirm_delete": "$t(actions.confirm) $t(actions.delete)",
+                                  "create": "Create",
+                                  "create_collection": "$t(actions.create) a $t(glossary.collection_one)",
+                                  "create_journal": "$t(actions.create) a $t(glossary.journal_one)",
                                   "delete": "Delete",
                                   "delete_event": "$t(actions.delete) event",
+                                  "destroy": "Destroy",
                                   "download": "Download",
                                   "duplicate": "Duplicate",
                                   "edit": "Edit",
@@ -3157,6 +3642,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "hide": "Hide",
                                   "hide_description": "$t(actions.hide) Description",
                                   "join": "Join",
+                                  "join_group": "$t(actions.join) this group",
                                   "login_to_annotate": "Login to annotate",
                                   "login_to_reply": "Login to reply",
                                   "manage": "Manage",
@@ -3167,11 +3653,14 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "play": "Play",
                                   "post": "Post",
                                   "preview": "Preview",
+                                  "publish": "Publish",
+                                  "publish_project": "$t(actions.publish) a project",
                                   "read": "Start Reading",
                                   "read_full": "Read the full passage",
                                   "read_more": "Read More",
                                   "remove": "Remove",
                                   "reply": "Reply",
+                                  "restore": "Restore",
                                   "save": "Save",
                                   "see_all": "See all",
                                   "see_next_comment_one": "See next {{count}} comment",
@@ -3220,13 +3709,17 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 },
                                 "dates": Object {
                                   "added": "added",
+                                  "ago": "ago",
                                   "collection_created": "Collection created",
                                   "published": "published",
+                                  "published_title_case": "Published",
                                   "resource_added": "Resource $t(dates.added)",
                                   "updated": "updated",
+                                  "updated_title_case": "Updated",
                                 },
                                 "errors": Object {
                                   "audio_playback": "{{ error }}<1/>This audio file is not playable in your browser.<3/><4/>Click the download button to listen to the file on your device.",
+                                  "color_scheme": "Manifold color scheme error!",
                                   "content_block": Object {
                                     "default": "<0>Fix this content block.</0>",
                                     "no_activity": "No activity has been recorded for this project. This warning will disappear once there is project activity.",
@@ -3236,6 +3729,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "no_resources": "Add <1>resources</1> or <3>resource collections</3>to the project to fix this block.",
                                     "no_texts": "<0>Add texts to the project</0> or <2>adjust the block configuration</2> to fix this block.",
                                   },
+                                  "no_collapse_context": "Collapse components cannot be rendered outside the Collapse wrapper component.",
                                   "no_content": "No content provided.",
                                   "text_missing": "Text Missing",
                                   "unauthorized": Object {
@@ -3415,6 +3909,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "img_alts": Object {
                                   "user_avatar": "User Avatar",
                                 },
+                                "journals": Object {
+                                  "issue_number": "Issue {{issNum}}",
+                                  "volume_issue_number": "$t(journals.volume_number, {{volNum}}), $t(journals.issue_number, {{issNum}})",
+                                  "volume_number": "Volume {{volNum}}",
+                                },
                                 "locales": Object {
                                   "en": "English",
                                   "es": "Spanish",
@@ -3503,9 +4002,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "all_journals": "All $t(glossary.journal_other)",
                                     "all_project_collections": "All $t(glossary.project_collection_other)",
                                     "all_projects": "All $t(glossary.project_other)",
+                                    "aria_label": "Breadcrumb",
                                     "issues": "$t(glossary.issue_other)",
                                   },
-                                  "browse_library": "Browse library",
+                                  "browse_library": "$t(actions.browse) library",
+                                  "browse_projects": "$t(actions.browse) projects",
                                   "library_links": "Library Links",
                                   "reading_group": Object {
                                     "annotations": "Notes + Comments",
@@ -3528,6 +4029,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "see_full_collection": "See the full collection",
                                   "user": Object {
                                     "back": "Back",
+                                    "log_in": "Log In",
+                                    "log_out": "Log Out",
                                     "my_notes_comments": "My Notes + Comments",
                                     "my_starred": "My Starred",
                                     "sign_in": "Sign In",
@@ -3581,18 +4084,115 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "previous_slide": "Go to previous slide",
                                 },
                                 "placeholders": Object {
+                                  "annotations_filtered": Object {
+                                    "body": "Try removing the text or member filter above to see more annotations.",
+                                    "title": "No annotations matched your search criteria.",
+                                  },
+                                  "annotations_group": Object {
+                                    "no_user": Object {
+                                      "body": "Sign up or log in, then join this group and be the first member to create an annotation!",
+                                      "title": "This group doesn‘t have any annotations yet.",
+                                    },
+                                    "user_is_member": Object {
+                                      "body": "While reading, you can associate a new or existing annotation with this group.",
+                                      "title": "Be the first reader to annotate in this group!",
+                                    },
+                                    "user_not_member": Object {
+                                      "body": "Join and be the first member to create an annotation! While reading, you can associate a new or existing annotation with this group.",
+                                      "title": "This group doesn‘t have any annotations yet.",
+                                    },
+                                  },
+                                  "annotations_my": Object {
+                                    "body": "While reading, add your notes and annotations to the text. Save them privately, or associate them with a reading group.",
+                                    "title": "Create your first annotation!",
+                                  },
                                   "comments": Object {
+                                    "deleted": "This comment was deleted.",
                                     "discuss_entity": "Discuss this {{entity}}...",
                                     "edit": "Edit this comment...",
                                     "reply": "Reply to this commment...",
                                     "unauthenticated": "Login to post a comment",
                                   },
+                                  "documentation_button_label": "Visit our documentation",
+                                  "journal_issues": Object {
+                                    "authorized": Object {
+                                      "body": "But it’s easy to create new issues with Manifold. If you have backend access, <2>head to the backend</2> and first select <4>Add a New Journal</4>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <6>our documentation</6>.",
+                                      "title": "Oh no. There are no journal issues in this Manifold library.",
+                                    },
+                                    "unauthorized": Object {
+                                      "body": "Please check back soon!",
+                                      "title": "There are no journal issues in this Manifold library.",
+                                    },
+                                  },
+                                  "journals": Object {
+                                    "authorized": Object {
+                                      "body": "But it’s easy to create new journals with Manifold. If you have backend access, <2>head to the backend</2> and select <4>Add a New Journal</4>. For more help, you can learn about creating and publishing Manifold Issues in <7>our documentation</7>.",
+                                      "title": "Oh no. There are no journals in this Manifold library.",
+                                    },
+                                    "unauthorized": Object {
+                                      "body": "Please check back soon!",
+                                      "title": "There are no journals in this Manifold library.",
+                                    },
+                                  },
                                   "link": "Link",
+                                  "my_starred": Object {
+                                    "animation_label": "A grid of tiles with star icons that fade in.",
+                                    "body": "But don’t fret, we’ve made it easy. Anywhere you see an empty star icon, just select it to add that item to your collection. You can star all kinds of items, so start browsing projects and get starring!",
+                                    "title": "You haven’t starred any items … yet.",
+                                  },
+                                  "project_collections": Object {
+                                    "authorized": Object {
+                                      "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <3>head to the backend</3> and select <6>Add a New Project Collection</6>. For more help, you can learn about creating and publishing Manifold Project Collections <9>here</9>.",
+                                      "title": "Oh no. There are no project collections in this Manifold library.",
+                                    },
+                                    "unauthorized": Object {
+                                      "body": "Please check back soon!",
+                                      "title": "There are no project collections in this Manifold library.",
+                                    },
+                                  },
+                                  "project_collections_admin": Object {
+                                    "body": "With Project Collections, you can take control of what appears on your Manifold Library homepage. Create custom groupings of Projects and change their order and visibility. You can handpick your collections and order them manually, or you can create Smart Collections that automatically update based on your filtering criteria.",
+                                    "title": "Ready to create a Project Collection?",
+                                  },
+                                  "projects": Object {
+                                    "authorized": Object {
+                                      "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <1>head to the backend</1> and select <3>Add a New Project</3>. For more help, you can learn about creating and publishing Manifold Projects <5>here</5>.",
+                                      "title": "On no. This Manifold library is empty.",
+                                    },
+                                    "unauthorized": Object {
+                                      "body": "Please check back soon!",
+                                      "title": "This Manifold library is empty.",
+                                    },
+                                  },
                                   "reading_group": Object {
                                     "customize": "<0>Ready to customize your group?</0><1>Congratulations, you’ve created a Reading Group. Now you can begin adding content, editing the order, grouping, and descriptions on your home page, and sending out invitations for new members.</1><2>Start adding content:</2><3>Reading Groups can contain a variety of content: Projects, Texts, Text Sections, Resource Collections, and individual Resources can all be added to your group. To find and add content, you can either browse the library or use keyword search. Once you’ve found an item you wish to add, simply select the star icon and assign it to this group (or any other Reading Group you are managing).</3>",
                                     "settings": "<0>Edit settings and invite members:</0><1>You can edit the settings for your group at any time. Change your group’s name, privacy settings, or email notifications. You can also see your group’s invitation code, or use an invitation URL, which makes inviting members as easy as sharing its invitation web page address.</1>",
                                   },
+                                  "reading_groups": Object {
+                                    "no_user": Object {
+                                      "body": "Sign up or log in to create the first group, or learn more about reading groups in our documentation.",
+                                      "title": "This Manifold doesn’t have any reading groups yet.",
+                                    },
+                                    "public": Object {
+                                      "body": "Be the first person to create one, or learn more about reading groups in our documentation.",
+                                      "title": "This Manifold doesn’t have any reading groups yet.",
+                                    },
+                                    "user": Object {
+                                      "body": "To join a group, enter your group invitation code below. You can also create your own group, or learn more about reading groups in our documentation.",
+                                      "title": "Join a group, or create a new one.",
+                                    },
+                                  },
                                   "resource_collection": "This collection has no resources.",
+                                  "resource_collections": Object {
+                                    "authorized": Object {
+                                      "body": "Resource collections are groupings of resources that can be used to orient a reader around certain themes or as a means to place a series of resources onto a text with one insertion.",
+                                      "title": "Oh no. This project doesn’t have any collections yet.",
+                                    },
+                                    "unauthorized": Object {
+                                      "body": "Please check back soon!",
+                                      "title": "This project doesn’t have any collections yet.",
+                                    },
+                                  },
                                   "table_of_contents": "This text does not have a table of contents.",
                                 },
                                 "reader": Object {
@@ -3699,14 +4299,19 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "annotate": "Annotate",
                                 "annotate_passage": "$t(actions.annotate) this passage",
                                 "archive": "Archive",
+                                "browse": "Browse",
                                 "cancel": "Cancel",
                                 "cancel_delete": "$t(actions.cancel) $t(actions.delete)",
                                 "close": "Close",
                                 "collect": "Collect {{title}}",
                                 "confirm": "Confirm",
                                 "confirm_delete": "$t(actions.confirm) $t(actions.delete)",
+                                "create": "Create",
+                                "create_collection": "$t(actions.create) a $t(glossary.collection_one)",
+                                "create_journal": "$t(actions.create) a $t(glossary.journal_one)",
                                 "delete": "Delete",
                                 "delete_event": "$t(actions.delete) event",
+                                "destroy": "Destroy",
                                 "download": "Download",
                                 "duplicate": "Duplicate",
                                 "edit": "Edit",
@@ -3715,6 +4320,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "hide": "Hide",
                                 "hide_description": "$t(actions.hide) Description",
                                 "join": "Join",
+                                "join_group": "$t(actions.join) this group",
                                 "login_to_annotate": "Login to annotate",
                                 "login_to_reply": "Login to reply",
                                 "manage": "Manage",
@@ -3725,11 +4331,14 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "play": "Play",
                                 "post": "Post",
                                 "preview": "Preview",
+                                "publish": "Publish",
+                                "publish_project": "$t(actions.publish) a project",
                                 "read": "Start Reading",
                                 "read_full": "Read the full passage",
                                 "read_more": "Read More",
                                 "remove": "Remove",
                                 "reply": "Reply",
+                                "restore": "Restore",
                                 "save": "Save",
                                 "see_all": "See all",
                                 "see_next_comment_one": "See next {{count}} comment",
@@ -3778,13 +4387,17 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               },
                               "dates": Object {
                                 "added": "added",
+                                "ago": "ago",
                                 "collection_created": "Collection created",
                                 "published": "published",
+                                "published_title_case": "Published",
                                 "resource_added": "Resource $t(dates.added)",
                                 "updated": "updated",
+                                "updated_title_case": "Updated",
                               },
                               "errors": Object {
                                 "audio_playback": "{{ error }}<1/>This audio file is not playable in your browser.<3/><4/>Click the download button to listen to the file on your device.",
+                                "color_scheme": "Manifold color scheme error!",
                                 "content_block": Object {
                                   "default": "<0>Fix this content block.</0>",
                                   "no_activity": "No activity has been recorded for this project. This warning will disappear once there is project activity.",
@@ -3794,6 +4407,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "no_resources": "Add <1>resources</1> or <3>resource collections</3>to the project to fix this block.",
                                   "no_texts": "<0>Add texts to the project</0> or <2>adjust the block configuration</2> to fix this block.",
                                 },
+                                "no_collapse_context": "Collapse components cannot be rendered outside the Collapse wrapper component.",
                                 "no_content": "No content provided.",
                                 "text_missing": "Text Missing",
                                 "unauthorized": Object {
@@ -3973,6 +4587,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                               "img_alts": Object {
                                 "user_avatar": "User Avatar",
                               },
+                              "journals": Object {
+                                "issue_number": "Issue {{issNum}}",
+                                "volume_issue_number": "$t(journals.volume_number, {{volNum}}), $t(journals.issue_number, {{issNum}})",
+                                "volume_number": "Volume {{volNum}}",
+                              },
                               "locales": Object {
                                 "en": "English",
                                 "es": "Spanish",
@@ -4061,9 +4680,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "all_journals": "All $t(glossary.journal_other)",
                                   "all_project_collections": "All $t(glossary.project_collection_other)",
                                   "all_projects": "All $t(glossary.project_other)",
+                                  "aria_label": "Breadcrumb",
                                   "issues": "$t(glossary.issue_other)",
                                 },
-                                "browse_library": "Browse library",
+                                "browse_library": "$t(actions.browse) library",
+                                "browse_projects": "$t(actions.browse) projects",
                                 "library_links": "Library Links",
                                 "reading_group": Object {
                                   "annotations": "Notes + Comments",
@@ -4086,6 +4707,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "see_full_collection": "See the full collection",
                                 "user": Object {
                                   "back": "Back",
+                                  "log_in": "Log In",
+                                  "log_out": "Log Out",
                                   "my_notes_comments": "My Notes + Comments",
                                   "my_starred": "My Starred",
                                   "sign_in": "Sign In",
@@ -4139,18 +4762,115 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "previous_slide": "Go to previous slide",
                               },
                               "placeholders": Object {
+                                "annotations_filtered": Object {
+                                  "body": "Try removing the text or member filter above to see more annotations.",
+                                  "title": "No annotations matched your search criteria.",
+                                },
+                                "annotations_group": Object {
+                                  "no_user": Object {
+                                    "body": "Sign up or log in, then join this group and be the first member to create an annotation!",
+                                    "title": "This group doesn‘t have any annotations yet.",
+                                  },
+                                  "user_is_member": Object {
+                                    "body": "While reading, you can associate a new or existing annotation with this group.",
+                                    "title": "Be the first reader to annotate in this group!",
+                                  },
+                                  "user_not_member": Object {
+                                    "body": "Join and be the first member to create an annotation! While reading, you can associate a new or existing annotation with this group.",
+                                    "title": "This group doesn‘t have any annotations yet.",
+                                  },
+                                },
+                                "annotations_my": Object {
+                                  "body": "While reading, add your notes and annotations to the text. Save them privately, or associate them with a reading group.",
+                                  "title": "Create your first annotation!",
+                                },
                                 "comments": Object {
+                                  "deleted": "This comment was deleted.",
                                   "discuss_entity": "Discuss this {{entity}}...",
                                   "edit": "Edit this comment...",
                                   "reply": "Reply to this commment...",
                                   "unauthenticated": "Login to post a comment",
                                 },
+                                "documentation_button_label": "Visit our documentation",
+                                "journal_issues": Object {
+                                  "authorized": Object {
+                                    "body": "But it’s easy to create new issues with Manifold. If you have backend access, <2>head to the backend</2> and first select <4>Add a New Journal</4>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <6>our documentation</6>.",
+                                    "title": "Oh no. There are no journal issues in this Manifold library.",
+                                  },
+                                  "unauthorized": Object {
+                                    "body": "Please check back soon!",
+                                    "title": "There are no journal issues in this Manifold library.",
+                                  },
+                                },
+                                "journals": Object {
+                                  "authorized": Object {
+                                    "body": "But it’s easy to create new journals with Manifold. If you have backend access, <2>head to the backend</2> and select <4>Add a New Journal</4>. For more help, you can learn about creating and publishing Manifold Issues in <7>our documentation</7>.",
+                                    "title": "Oh no. There are no journals in this Manifold library.",
+                                  },
+                                  "unauthorized": Object {
+                                    "body": "Please check back soon!",
+                                    "title": "There are no journals in this Manifold library.",
+                                  },
+                                },
                                 "link": "Link",
+                                "my_starred": Object {
+                                  "animation_label": "A grid of tiles with star icons that fade in.",
+                                  "body": "But don’t fret, we’ve made it easy. Anywhere you see an empty star icon, just select it to add that item to your collection. You can star all kinds of items, so start browsing projects and get starring!",
+                                  "title": "You haven’t starred any items … yet.",
+                                },
+                                "project_collections": Object {
+                                  "authorized": Object {
+                                    "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <3>head to the backend</3> and select <6>Add a New Project Collection</6>. For more help, you can learn about creating and publishing Manifold Project Collections <9>here</9>.",
+                                    "title": "Oh no. There are no project collections in this Manifold library.",
+                                  },
+                                  "unauthorized": Object {
+                                    "body": "Please check back soon!",
+                                    "title": "There are no project collections in this Manifold library.",
+                                  },
+                                },
+                                "project_collections_admin": Object {
+                                  "body": "With Project Collections, you can take control of what appears on your Manifold Library homepage. Create custom groupings of Projects and change their order and visibility. You can handpick your collections and order them manually, or you can create Smart Collections that automatically update based on your filtering criteria.",
+                                  "title": "Ready to create a Project Collection?",
+                                },
+                                "projects": Object {
+                                  "authorized": Object {
+                                    "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <1>head to the backend</1> and select <3>Add a New Project</3>. For more help, you can learn about creating and publishing Manifold Projects <5>here</5>.",
+                                    "title": "On no. This Manifold library is empty.",
+                                  },
+                                  "unauthorized": Object {
+                                    "body": "Please check back soon!",
+                                    "title": "This Manifold library is empty.",
+                                  },
+                                },
                                 "reading_group": Object {
                                   "customize": "<0>Ready to customize your group?</0><1>Congratulations, you’ve created a Reading Group. Now you can begin adding content, editing the order, grouping, and descriptions on your home page, and sending out invitations for new members.</1><2>Start adding content:</2><3>Reading Groups can contain a variety of content: Projects, Texts, Text Sections, Resource Collections, and individual Resources can all be added to your group. To find and add content, you can either browse the library or use keyword search. Once you’ve found an item you wish to add, simply select the star icon and assign it to this group (or any other Reading Group you are managing).</3>",
                                   "settings": "<0>Edit settings and invite members:</0><1>You can edit the settings for your group at any time. Change your group’s name, privacy settings, or email notifications. You can also see your group’s invitation code, or use an invitation URL, which makes inviting members as easy as sharing its invitation web page address.</1>",
                                 },
+                                "reading_groups": Object {
+                                  "no_user": Object {
+                                    "body": "Sign up or log in to create the first group, or learn more about reading groups in our documentation.",
+                                    "title": "This Manifold doesn’t have any reading groups yet.",
+                                  },
+                                  "public": Object {
+                                    "body": "Be the first person to create one, or learn more about reading groups in our documentation.",
+                                    "title": "This Manifold doesn’t have any reading groups yet.",
+                                  },
+                                  "user": Object {
+                                    "body": "To join a group, enter your group invitation code below. You can also create your own group, or learn more about reading groups in our documentation.",
+                                    "title": "Join a group, or create a new one.",
+                                  },
+                                },
                                 "resource_collection": "This collection has no resources.",
+                                "resource_collections": Object {
+                                  "authorized": Object {
+                                    "body": "Resource collections are groupings of resources that can be used to orient a reader around certain themes or as a means to place a series of resources onto a text with one insertion.",
+                                    "title": "Oh no. This project doesn’t have any collections yet.",
+                                  },
+                                  "unauthorized": Object {
+                                    "body": "Please check back soon!",
+                                    "title": "This project doesn’t have any collections yet.",
+                                  },
+                                },
                                 "table_of_contents": "This text does not have a table of contents.",
                               },
                               "reader": Object {
@@ -4374,14 +5094,19 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "annotate": "Annotate",
                                     "annotate_passage": "$t(actions.annotate) this passage",
                                     "archive": "Archive",
+                                    "browse": "Browse",
                                     "cancel": "Cancel",
                                     "cancel_delete": "$t(actions.cancel) $t(actions.delete)",
                                     "close": "Close",
                                     "collect": "Collect {{title}}",
                                     "confirm": "Confirm",
                                     "confirm_delete": "$t(actions.confirm) $t(actions.delete)",
+                                    "create": "Create",
+                                    "create_collection": "$t(actions.create) a $t(glossary.collection_one)",
+                                    "create_journal": "$t(actions.create) a $t(glossary.journal_one)",
                                     "delete": "Delete",
                                     "delete_event": "$t(actions.delete) event",
+                                    "destroy": "Destroy",
                                     "download": "Download",
                                     "duplicate": "Duplicate",
                                     "edit": "Edit",
@@ -4390,6 +5115,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "hide": "Hide",
                                     "hide_description": "$t(actions.hide) Description",
                                     "join": "Join",
+                                    "join_group": "$t(actions.join) this group",
                                     "login_to_annotate": "Login to annotate",
                                     "login_to_reply": "Login to reply",
                                     "manage": "Manage",
@@ -4400,11 +5126,14 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "play": "Play",
                                     "post": "Post",
                                     "preview": "Preview",
+                                    "publish": "Publish",
+                                    "publish_project": "$t(actions.publish) a project",
                                     "read": "Start Reading",
                                     "read_full": "Read the full passage",
                                     "read_more": "Read More",
                                     "remove": "Remove",
                                     "reply": "Reply",
+                                    "restore": "Restore",
                                     "save": "Save",
                                     "see_all": "See all",
                                     "see_next_comment_one": "See next {{count}} comment",
@@ -4453,13 +5182,17 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   },
                                   "dates": Object {
                                     "added": "added",
+                                    "ago": "ago",
                                     "collection_created": "Collection created",
                                     "published": "published",
+                                    "published_title_case": "Published",
                                     "resource_added": "Resource $t(dates.added)",
                                     "updated": "updated",
+                                    "updated_title_case": "Updated",
                                   },
                                   "errors": Object {
                                     "audio_playback": "{{ error }}<1/>This audio file is not playable in your browser.<3/><4/>Click the download button to listen to the file on your device.",
+                                    "color_scheme": "Manifold color scheme error!",
                                     "content_block": Object {
                                       "default": "<0>Fix this content block.</0>",
                                       "no_activity": "No activity has been recorded for this project. This warning will disappear once there is project activity.",
@@ -4469,6 +5202,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                       "no_resources": "Add <1>resources</1> or <3>resource collections</3>to the project to fix this block.",
                                       "no_texts": "<0>Add texts to the project</0> or <2>adjust the block configuration</2> to fix this block.",
                                     },
+                                    "no_collapse_context": "Collapse components cannot be rendered outside the Collapse wrapper component.",
                                     "no_content": "No content provided.",
                                     "text_missing": "Text Missing",
                                     "unauthorized": Object {
@@ -4648,6 +5382,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "img_alts": Object {
                                     "user_avatar": "User Avatar",
                                   },
+                                  "journals": Object {
+                                    "issue_number": "Issue {{issNum}}",
+                                    "volume_issue_number": "$t(journals.volume_number, {{volNum}}), $t(journals.issue_number, {{issNum}})",
+                                    "volume_number": "Volume {{volNum}}",
+                                  },
                                   "locales": Object {
                                     "en": "English",
                                     "es": "Spanish",
@@ -4736,9 +5475,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                       "all_journals": "All $t(glossary.journal_other)",
                                       "all_project_collections": "All $t(glossary.project_collection_other)",
                                       "all_projects": "All $t(glossary.project_other)",
+                                      "aria_label": "Breadcrumb",
                                       "issues": "$t(glossary.issue_other)",
                                     },
-                                    "browse_library": "Browse library",
+                                    "browse_library": "$t(actions.browse) library",
+                                    "browse_projects": "$t(actions.browse) projects",
                                     "library_links": "Library Links",
                                     "reading_group": Object {
                                       "annotations": "Notes + Comments",
@@ -4761,6 +5502,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "see_full_collection": "See the full collection",
                                     "user": Object {
                                       "back": "Back",
+                                      "log_in": "Log In",
+                                      "log_out": "Log Out",
                                       "my_notes_comments": "My Notes + Comments",
                                       "my_starred": "My Starred",
                                       "sign_in": "Sign In",
@@ -4814,18 +5557,115 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "previous_slide": "Go to previous slide",
                                   },
                                   "placeholders": Object {
+                                    "annotations_filtered": Object {
+                                      "body": "Try removing the text or member filter above to see more annotations.",
+                                      "title": "No annotations matched your search criteria.",
+                                    },
+                                    "annotations_group": Object {
+                                      "no_user": Object {
+                                        "body": "Sign up or log in, then join this group and be the first member to create an annotation!",
+                                        "title": "This group doesn‘t have any annotations yet.",
+                                      },
+                                      "user_is_member": Object {
+                                        "body": "While reading, you can associate a new or existing annotation with this group.",
+                                        "title": "Be the first reader to annotate in this group!",
+                                      },
+                                      "user_not_member": Object {
+                                        "body": "Join and be the first member to create an annotation! While reading, you can associate a new or existing annotation with this group.",
+                                        "title": "This group doesn‘t have any annotations yet.",
+                                      },
+                                    },
+                                    "annotations_my": Object {
+                                      "body": "While reading, add your notes and annotations to the text. Save them privately, or associate them with a reading group.",
+                                      "title": "Create your first annotation!",
+                                    },
                                     "comments": Object {
+                                      "deleted": "This comment was deleted.",
                                       "discuss_entity": "Discuss this {{entity}}...",
                                       "edit": "Edit this comment...",
                                       "reply": "Reply to this commment...",
                                       "unauthenticated": "Login to post a comment",
                                     },
+                                    "documentation_button_label": "Visit our documentation",
+                                    "journal_issues": Object {
+                                      "authorized": Object {
+                                        "body": "But it’s easy to create new issues with Manifold. If you have backend access, <2>head to the backend</2> and first select <4>Add a New Journal</4>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <6>our documentation</6>.",
+                                        "title": "Oh no. There are no journal issues in this Manifold library.",
+                                      },
+                                      "unauthorized": Object {
+                                        "body": "Please check back soon!",
+                                        "title": "There are no journal issues in this Manifold library.",
+                                      },
+                                    },
+                                    "journals": Object {
+                                      "authorized": Object {
+                                        "body": "But it’s easy to create new journals with Manifold. If you have backend access, <2>head to the backend</2> and select <4>Add a New Journal</4>. For more help, you can learn about creating and publishing Manifold Issues in <7>our documentation</7>.",
+                                        "title": "Oh no. There are no journals in this Manifold library.",
+                                      },
+                                      "unauthorized": Object {
+                                        "body": "Please check back soon!",
+                                        "title": "There are no journals in this Manifold library.",
+                                      },
+                                    },
                                     "link": "Link",
+                                    "my_starred": Object {
+                                      "animation_label": "A grid of tiles with star icons that fade in.",
+                                      "body": "But don’t fret, we’ve made it easy. Anywhere you see an empty star icon, just select it to add that item to your collection. You can star all kinds of items, so start browsing projects and get starring!",
+                                      "title": "You haven’t starred any items … yet.",
+                                    },
+                                    "project_collections": Object {
+                                      "authorized": Object {
+                                        "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <3>head to the backend</3> and select <6>Add a New Project Collection</6>. For more help, you can learn about creating and publishing Manifold Project Collections <9>here</9>.",
+                                        "title": "Oh no. There are no project collections in this Manifold library.",
+                                      },
+                                      "unauthorized": Object {
+                                        "body": "Please check back soon!",
+                                        "title": "There are no project collections in this Manifold library.",
+                                      },
+                                    },
+                                    "project_collections_admin": Object {
+                                      "body": "With Project Collections, you can take control of what appears on your Manifold Library homepage. Create custom groupings of Projects and change their order and visibility. You can handpick your collections and order them manually, or you can create Smart Collections that automatically update based on your filtering criteria.",
+                                      "title": "Ready to create a Project Collection?",
+                                    },
+                                    "projects": Object {
+                                      "authorized": Object {
+                                        "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <1>head to the backend</1> and select <3>Add a New Project</3>. For more help, you can learn about creating and publishing Manifold Projects <5>here</5>.",
+                                        "title": "On no. This Manifold library is empty.",
+                                      },
+                                      "unauthorized": Object {
+                                        "body": "Please check back soon!",
+                                        "title": "This Manifold library is empty.",
+                                      },
+                                    },
                                     "reading_group": Object {
                                       "customize": "<0>Ready to customize your group?</0><1>Congratulations, you’ve created a Reading Group. Now you can begin adding content, editing the order, grouping, and descriptions on your home page, and sending out invitations for new members.</1><2>Start adding content:</2><3>Reading Groups can contain a variety of content: Projects, Texts, Text Sections, Resource Collections, and individual Resources can all be added to your group. To find and add content, you can either browse the library or use keyword search. Once you’ve found an item you wish to add, simply select the star icon and assign it to this group (or any other Reading Group you are managing).</3>",
                                       "settings": "<0>Edit settings and invite members:</0><1>You can edit the settings for your group at any time. Change your group’s name, privacy settings, or email notifications. You can also see your group’s invitation code, or use an invitation URL, which makes inviting members as easy as sharing its invitation web page address.</1>",
                                     },
+                                    "reading_groups": Object {
+                                      "no_user": Object {
+                                        "body": "Sign up or log in to create the first group, or learn more about reading groups in our documentation.",
+                                        "title": "This Manifold doesn’t have any reading groups yet.",
+                                      },
+                                      "public": Object {
+                                        "body": "Be the first person to create one, or learn more about reading groups in our documentation.",
+                                        "title": "This Manifold doesn’t have any reading groups yet.",
+                                      },
+                                      "user": Object {
+                                        "body": "To join a group, enter your group invitation code below. You can also create your own group, or learn more about reading groups in our documentation.",
+                                        "title": "Join a group, or create a new one.",
+                                      },
+                                    },
                                     "resource_collection": "This collection has no resources.",
+                                    "resource_collections": Object {
+                                      "authorized": Object {
+                                        "body": "Resource collections are groupings of resources that can be used to orient a reader around certain themes or as a means to place a series of resources onto a text with one insertion.",
+                                        "title": "Oh no. This project doesn’t have any collections yet.",
+                                      },
+                                      "unauthorized": Object {
+                                        "body": "Please check back soon!",
+                                        "title": "This project doesn’t have any collections yet.",
+                                      },
+                                    },
                                     "table_of_contents": "This text does not have a table of contents.",
                                   },
                                   "reader": Object {
@@ -4932,14 +5772,19 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "annotate": "Annotate",
                                   "annotate_passage": "$t(actions.annotate) this passage",
                                   "archive": "Archive",
+                                  "browse": "Browse",
                                   "cancel": "Cancel",
                                   "cancel_delete": "$t(actions.cancel) $t(actions.delete)",
                                   "close": "Close",
                                   "collect": "Collect {{title}}",
                                   "confirm": "Confirm",
                                   "confirm_delete": "$t(actions.confirm) $t(actions.delete)",
+                                  "create": "Create",
+                                  "create_collection": "$t(actions.create) a $t(glossary.collection_one)",
+                                  "create_journal": "$t(actions.create) a $t(glossary.journal_one)",
                                   "delete": "Delete",
                                   "delete_event": "$t(actions.delete) event",
+                                  "destroy": "Destroy",
                                   "download": "Download",
                                   "duplicate": "Duplicate",
                                   "edit": "Edit",
@@ -4948,6 +5793,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "hide": "Hide",
                                   "hide_description": "$t(actions.hide) Description",
                                   "join": "Join",
+                                  "join_group": "$t(actions.join) this group",
                                   "login_to_annotate": "Login to annotate",
                                   "login_to_reply": "Login to reply",
                                   "manage": "Manage",
@@ -4958,11 +5804,14 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "play": "Play",
                                   "post": "Post",
                                   "preview": "Preview",
+                                  "publish": "Publish",
+                                  "publish_project": "$t(actions.publish) a project",
                                   "read": "Start Reading",
                                   "read_full": "Read the full passage",
                                   "read_more": "Read More",
                                   "remove": "Remove",
                                   "reply": "Reply",
+                                  "restore": "Restore",
                                   "save": "Save",
                                   "see_all": "See all",
                                   "see_next_comment_one": "See next {{count}} comment",
@@ -5011,13 +5860,17 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 },
                                 "dates": Object {
                                   "added": "added",
+                                  "ago": "ago",
                                   "collection_created": "Collection created",
                                   "published": "published",
+                                  "published_title_case": "Published",
                                   "resource_added": "Resource $t(dates.added)",
                                   "updated": "updated",
+                                  "updated_title_case": "Updated",
                                 },
                                 "errors": Object {
                                   "audio_playback": "{{ error }}<1/>This audio file is not playable in your browser.<3/><4/>Click the download button to listen to the file on your device.",
+                                  "color_scheme": "Manifold color scheme error!",
                                   "content_block": Object {
                                     "default": "<0>Fix this content block.</0>",
                                     "no_activity": "No activity has been recorded for this project. This warning will disappear once there is project activity.",
@@ -5027,6 +5880,7 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "no_resources": "Add <1>resources</1> or <3>resource collections</3>to the project to fix this block.",
                                     "no_texts": "<0>Add texts to the project</0> or <2>adjust the block configuration</2> to fix this block.",
                                   },
+                                  "no_collapse_context": "Collapse components cannot be rendered outside the Collapse wrapper component.",
                                   "no_content": "No content provided.",
                                   "text_missing": "Text Missing",
                                   "unauthorized": Object {
@@ -5206,6 +6060,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                 "img_alts": Object {
                                   "user_avatar": "User Avatar",
                                 },
+                                "journals": Object {
+                                  "issue_number": "Issue {{issNum}}",
+                                  "volume_issue_number": "$t(journals.volume_number, {{volNum}}), $t(journals.issue_number, {{issNum}})",
+                                  "volume_number": "Volume {{volNum}}",
+                                },
                                 "locales": Object {
                                   "en": "English",
                                   "es": "Spanish",
@@ -5294,9 +6153,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "all_journals": "All $t(glossary.journal_other)",
                                     "all_project_collections": "All $t(glossary.project_collection_other)",
                                     "all_projects": "All $t(glossary.project_other)",
+                                    "aria_label": "Breadcrumb",
                                     "issues": "$t(glossary.issue_other)",
                                   },
-                                  "browse_library": "Browse library",
+                                  "browse_library": "$t(actions.browse) library",
+                                  "browse_projects": "$t(actions.browse) projects",
                                   "library_links": "Library Links",
                                   "reading_group": Object {
                                     "annotations": "Notes + Comments",
@@ -5319,6 +6180,8 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "see_full_collection": "See the full collection",
                                   "user": Object {
                                     "back": "Back",
+                                    "log_in": "Log In",
+                                    "log_out": "Log Out",
                                     "my_notes_comments": "My Notes + Comments",
                                     "my_starred": "My Starred",
                                     "sign_in": "Sign In",
@@ -5372,18 +6235,115 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "previous_slide": "Go to previous slide",
                                 },
                                 "placeholders": Object {
+                                  "annotations_filtered": Object {
+                                    "body": "Try removing the text or member filter above to see more annotations.",
+                                    "title": "No annotations matched your search criteria.",
+                                  },
+                                  "annotations_group": Object {
+                                    "no_user": Object {
+                                      "body": "Sign up or log in, then join this group and be the first member to create an annotation!",
+                                      "title": "This group doesn‘t have any annotations yet.",
+                                    },
+                                    "user_is_member": Object {
+                                      "body": "While reading, you can associate a new or existing annotation with this group.",
+                                      "title": "Be the first reader to annotate in this group!",
+                                    },
+                                    "user_not_member": Object {
+                                      "body": "Join and be the first member to create an annotation! While reading, you can associate a new or existing annotation with this group.",
+                                      "title": "This group doesn‘t have any annotations yet.",
+                                    },
+                                  },
+                                  "annotations_my": Object {
+                                    "body": "While reading, add your notes and annotations to the text. Save them privately, or associate them with a reading group.",
+                                    "title": "Create your first annotation!",
+                                  },
                                   "comments": Object {
+                                    "deleted": "This comment was deleted.",
                                     "discuss_entity": "Discuss this {{entity}}...",
                                     "edit": "Edit this comment...",
                                     "reply": "Reply to this commment...",
                                     "unauthenticated": "Login to post a comment",
                                   },
+                                  "documentation_button_label": "Visit our documentation",
+                                  "journal_issues": Object {
+                                    "authorized": Object {
+                                      "body": "But it’s easy to create new issues with Manifold. If you have backend access, <2>head to the backend</2> and first select <4>Add a New Journal</4>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <6>our documentation</6>.",
+                                      "title": "Oh no. There are no journal issues in this Manifold library.",
+                                    },
+                                    "unauthorized": Object {
+                                      "body": "Please check back soon!",
+                                      "title": "There are no journal issues in this Manifold library.",
+                                    },
+                                  },
+                                  "journals": Object {
+                                    "authorized": Object {
+                                      "body": "But it’s easy to create new journals with Manifold. If you have backend access, <2>head to the backend</2> and select <4>Add a New Journal</4>. For more help, you can learn about creating and publishing Manifold Issues in <7>our documentation</7>.",
+                                      "title": "Oh no. There are no journals in this Manifold library.",
+                                    },
+                                    "unauthorized": Object {
+                                      "body": "Please check back soon!",
+                                      "title": "There are no journals in this Manifold library.",
+                                    },
+                                  },
                                   "link": "Link",
+                                  "my_starred": Object {
+                                    "animation_label": "A grid of tiles with star icons that fade in.",
+                                    "body": "But don’t fret, we’ve made it easy. Anywhere you see an empty star icon, just select it to add that item to your collection. You can star all kinds of items, so start browsing projects and get starring!",
+                                    "title": "You haven’t starred any items … yet.",
+                                  },
+                                  "project_collections": Object {
+                                    "authorized": Object {
+                                      "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <3>head to the backend</3> and select <6>Add a New Project Collection</6>. For more help, you can learn about creating and publishing Manifold Project Collections <9>here</9>.",
+                                      "title": "Oh no. There are no project collections in this Manifold library.",
+                                    },
+                                    "unauthorized": Object {
+                                      "body": "Please check back soon!",
+                                      "title": "There are no project collections in this Manifold library.",
+                                    },
+                                  },
+                                  "project_collections_admin": Object {
+                                    "body": "With Project Collections, you can take control of what appears on your Manifold Library homepage. Create custom groupings of Projects and change their order and visibility. You can handpick your collections and order them manually, or you can create Smart Collections that automatically update based on your filtering criteria.",
+                                    "title": "Ready to create a Project Collection?",
+                                  },
+                                  "projects": Object {
+                                    "authorized": Object {
+                                      "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <1>head to the backend</1> and select <3>Add a New Project</3>. For more help, you can learn about creating and publishing Manifold Projects <5>here</5>.",
+                                      "title": "On no. This Manifold library is empty.",
+                                    },
+                                    "unauthorized": Object {
+                                      "body": "Please check back soon!",
+                                      "title": "This Manifold library is empty.",
+                                    },
+                                  },
                                   "reading_group": Object {
                                     "customize": "<0>Ready to customize your group?</0><1>Congratulations, you’ve created a Reading Group. Now you can begin adding content, editing the order, grouping, and descriptions on your home page, and sending out invitations for new members.</1><2>Start adding content:</2><3>Reading Groups can contain a variety of content: Projects, Texts, Text Sections, Resource Collections, and individual Resources can all be added to your group. To find and add content, you can either browse the library or use keyword search. Once you’ve found an item you wish to add, simply select the star icon and assign it to this group (or any other Reading Group you are managing).</3>",
                                     "settings": "<0>Edit settings and invite members:</0><1>You can edit the settings for your group at any time. Change your group’s name, privacy settings, or email notifications. You can also see your group’s invitation code, or use an invitation URL, which makes inviting members as easy as sharing its invitation web page address.</1>",
                                   },
+                                  "reading_groups": Object {
+                                    "no_user": Object {
+                                      "body": "Sign up or log in to create the first group, or learn more about reading groups in our documentation.",
+                                      "title": "This Manifold doesn’t have any reading groups yet.",
+                                    },
+                                    "public": Object {
+                                      "body": "Be the first person to create one, or learn more about reading groups in our documentation.",
+                                      "title": "This Manifold doesn’t have any reading groups yet.",
+                                    },
+                                    "user": Object {
+                                      "body": "To join a group, enter your group invitation code below. You can also create your own group, or learn more about reading groups in our documentation.",
+                                      "title": "Join a group, or create a new one.",
+                                    },
+                                  },
                                   "resource_collection": "This collection has no resources.",
+                                  "resource_collections": Object {
+                                    "authorized": Object {
+                                      "body": "Resource collections are groupings of resources that can be used to orient a reader around certain themes or as a means to place a series of resources onto a text with one insertion.",
+                                      "title": "Oh no. This project doesn’t have any collections yet.",
+                                    },
+                                    "unauthorized": Object {
+                                      "body": "Please check back soon!",
+                                      "title": "This project doesn’t have any collections yet.",
+                                    },
+                                  },
                                   "table_of_contents": "This text does not have a table of contents.",
                                 },
                                 "reader": Object {
