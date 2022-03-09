@@ -5,7 +5,6 @@ import Generic from "./Generic";
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
 import withSearchResultHelper from "./searchResultHelper";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 function SearchResultsTypeJournal({ result, highlightedAttribute }) {
@@ -49,7 +48,7 @@ function SearchResultsTypeJournal({ result, highlightedAttribute }) {
       }
       meta={
         <FormattedDate
-          prefix={capitalize(t("dates.published"))}
+          prefix={t("dates.published_title_case")}
           format="MMMM, yyyy"
           date={attributes.createdAt}
         />

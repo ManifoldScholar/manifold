@@ -5,7 +5,6 @@ import Generic from "./Generic";
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
 import withSearchResultHelper from "./searchResultHelper";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 function SearchResultsTypeJournalIssue({ result, highlightedAttribute }) {
@@ -23,12 +22,13 @@ function SearchResultsTypeJournalIssue({ result, highlightedAttribute }) {
     result.relationships?.journalIssue?.relationships?.journalVolume;
 
   const title = parentVolume
-    ? `${capitalize(t("glossary.volume_one"))} ${
-        parentVolume.number
-      }, ${capitalize(t("glossary.issue_one"))}${highlightedAttribute(
-        "number"
-      )}`
-    : `${capitalize(t("glossary.issue_one"))}${highlightedAttribute("number")}`;
+    ? t("journals.volume_issue_number", {
+        volNum: parentVolume.number,
+        issNum: highlightedAttribute("number")
+      })
+    : t("journals.issue_number", {
+        issNum: highlightedAttribute("number")
+      });
 
   const { searchableType, searchableId } = result.attributes ?? {};
   const collectable = {
@@ -64,7 +64,7 @@ function SearchResultsTypeJournalIssue({ result, highlightedAttribute }) {
       }
       meta={
         <FormattedDate
-          prefix={capitalize(t("dates.published"))}
+          prefix={t("dates.published_title_case")}
           format="MMMM, yyyy"
           date={attributes.createdAt}
         />
