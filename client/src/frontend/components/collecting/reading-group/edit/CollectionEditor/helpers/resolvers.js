@@ -10,6 +10,8 @@ export function getCollectableIcon(type) {
       return "resourceCollection64";
     case "resources":
       return "resources64";
+    case "journalIssues":
+      return "journals64";
     default:
       return "resources64";
   }

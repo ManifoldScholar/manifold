@@ -38,13 +38,18 @@ function ReadingGroupHomepageFetchContainer({
     request: [readingGroupsAPI.collected, readingGroup.id, "resources"],
     dependencies: [fetchVersion]
   });
+  const { data: journalIssues } = useFetch({
+    request: [readingGroupsAPI.collected, readingGroup.id, "journal_issues"],
+    dependencies: [fetchVersion]
+  });
 
   const responses = {
     projects,
     texts,
     textSections,
     resourceCollections,
-    resources
+    resources,
+    journalIssues
   };
 
   const categories = useFromStore("feReadingGroupCategories", "select") || [];
