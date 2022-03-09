@@ -15,11 +15,12 @@ import memoize from "lodash/memoize";
 import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
 import Utility from "global/components/utility";
+import { withTranslation } from "react-i18next";
 
 import Authorize from "hoc/Authorize";
 import BlurOnLocationChange from "hoc/BlurOnLocationChange";
 
-export default class Header extends Component {
+class Header extends Component {
   static propTypes = {
     text: PropTypes.object,
     section: PropTypes.object,
@@ -38,7 +39,8 @@ export default class Header extends Component {
     scrollAware: PropTypes.object,
     commonActions: PropTypes.object,
     history: PropTypes.object,
-    match: PropTypes.object
+    match: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -125,7 +127,7 @@ export default class Header extends Component {
         tabIndex={-1}
         className="reader-header__button reader-header__button--pad-default reader-header__options-button"
       >
-        {mobileOptionsExpanded ? "Close" : "Options"}
+        {mobileOptionsExpanded ? this.props.t("actions.close") : this.props.t("common.option_title_case_other")}
         {mobileOptionsExpanded && (
           <Utility.IconComposer
             icon="close32"
@@ -156,7 +158,7 @@ export default class Header extends Component {
         aria-haspopup
         aria-expanded={this.props.visibility.uiPanels.tocDrawer}
       >
-        <span className="reader-header__button-text">Contents</span>
+        <span className="reader-header__button-text">{this.props.t("reader.header.contents")}</span>
         <Utility.IconComposer
           icon="disclosureDown24"
           size="default"
@@ -198,7 +200,7 @@ export default class Header extends Component {
             )}
             <div className="reader-header__menu-group reader-header__menu-group--right">
               <ul
-                aria-label="Reader Settings and Search"
+                aria-label={this.props.t("reader.header.reader_settings_search")}
                 className="reader-header__nav-list"
               >
                 <Authorize kind={"any"}>
@@ -206,7 +208,7 @@ export default class Header extends Component {
                     <ControlMenu.Button
                       onClick={this.panelToggleHandler("notes")}
                       icon="notes24"
-                      label="Notes"
+                      label={this.props.t("glossary.notes_title_case")}
                       active={this.props.visibility.uiPanels.notes}
                     />
                   </li>
@@ -215,7 +217,7 @@ export default class Header extends Component {
                   <ControlMenu.Button
                     onClick={this.panelToggleHandler("visibility")}
                     icon="eyeball24"
-                    label="Visibility"
+                    label={this.props.t("common.visibility_title_case")}
                     active={this.props.visibility.uiPanels.visibility}
                   />
                 </li>
@@ -223,7 +225,7 @@ export default class Header extends Component {
                   <ControlMenu.Button
                     onClick={this.panelToggleHandler("appearance")}
                     icon="text24"
-                    label="Reader appearance"
+                    label={this.props.t("reader.header.reader_appearance")}
                     active={this.props.visibility.uiPanels.appearance}
                   />
                 </li>
@@ -340,3 +342,5 @@ export default class Header extends Component {
     );
   }
 }
+
+export default withTranslation()(Header);
