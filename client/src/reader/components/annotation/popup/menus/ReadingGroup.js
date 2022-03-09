@@ -52,7 +52,7 @@ function ReadingGroupMenu({
         {canEngagePublicly && (
           <RGMenuItem
             menu={{ ...menu, visible }}
-            label={t("reader.my_public_annotations")}
+            label={t("reader.menus.popup.my_public_annotations")}
             value="public"
             onClick={() => onSelect("public")}
             selected={currentReadingGroup === "public"}
@@ -60,7 +60,7 @@ function ReadingGroupMenu({
         )}
         <RGMenuItem
           menu={{ ...menu, visible }}
-          label={t("reader.my_private_annotations")}
+          label={t("reader.menus.popup.my_private_annotations")}
           value="private"
           onClick={() => onSelect("private")}
           privateGroup
@@ -87,7 +87,7 @@ function ReadingGroupMenu({
               to={lh.link("frontendMyReadingGroups")}
               className="annotation-manage-groups-link"
             >
-              <span>{t("reader.manage_groups")}</span>
+              <span>{t("reader.menus.popup.manage_groups")}</span>
               <IconComposer icon="link24" size="default" />
             </ReakitMenuItem>
           </div>

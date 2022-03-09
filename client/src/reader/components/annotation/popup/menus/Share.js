@@ -48,8 +48,8 @@ function ShareMenu({
           menu={{ ...menu, visible }}
           onClick={handleCiteClick}
           kind="any"
-          label={t("reader.cite")}
-          srLabel={t("reader.cite_selection")}
+          label={t("reader.menus.popup.cite")}
+          srLabel={t("reader.menus.popup.cite_selection")}
           icon="socialCite32"
         />
       )}

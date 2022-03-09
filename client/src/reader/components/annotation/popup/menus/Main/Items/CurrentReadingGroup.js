@@ -20,9 +20,9 @@ function CurrentReadingGroup({
 
   function getCurrentGroupName() {
     if (currentReadingGroup === "public")
-      return t("reader.my_public_annotations");
+      return t("reader.menus.popup.my_public_annotations");
     if (currentReadingGroup === "private")
-      return t("reader.my_private_annotations");
+      return t("reader.menus.popup.my_private_annotations");
 
     const currentGroup = readingGroups.find(
       group => group.id === currentReadingGroup
@@ -42,12 +42,12 @@ function CurrentReadingGroup({
         className="annotation-popup__button annotation-popup__button--stacked annotation-popup__button--secondary-dark"
       >
         <span className="screen-reader-text">
-          {t("actions.select_item", { item: t("glossary.reading_group_one") })}
+          {t("reader.actions.select_reading_group")}
         </span>
         <span className="annotation-popup__button-text">
           {canAccessReadingGroups
-            ? t("reader.current_group")
-            : t("reader.current_visibility")}
+            ? t("reader.menus.popup.current_group")
+            : t("reader.menus.popup.current_visibility")}
           :
         </span>
         <div className="annotation-popup__button-inner-row">

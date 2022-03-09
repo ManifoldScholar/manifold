@@ -18,7 +18,7 @@ function FollowLink({ menu, visible, direction, activeEvent, actions }) {
     <Menu
       menu={menu}
       visible={visible}
-      aria-label={t("reader.follow_link")}
+      aria-label={t("reader.menus.popup.follow_link")}
       direction={direction}
     >
       <MenuItem
@@ -28,14 +28,14 @@ function FollowLink({ menu, visible, direction, activeEvent, actions }) {
         target="_blank"
         rel="noopener noreferrer"
         kind="none"
-        label={t("reader.follow_link")}
+        label={t("reader.menus.popup.follow_link")}
         icon="arrowRight32"
       />
       <MenuItem
         menu={{ ...menu, visible }}
         onClick={handleAnnotateClick}
         kind="any"
-        label={t("action.annotate")}
+        label={t("actions.annotate")}
         icon="comment24"
       />
     </Menu>
