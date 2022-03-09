@@ -6,12 +6,12 @@ const getMembershipOptions = rgms =>
     };
   });
 
-export const membershipFilter = (filters, updateFilters, params) => ({
-  label: "Filter by member",
+export const membershipFilter = (filters, updateFilters, params, t) => ({
+  label: t("filters.labels.by_member"),
   value: filters?.readingGroupMembership || "",
   onChange: e => updateFilters(e, "readingGroupMembership"),
   options: [
-    { label: "All members", value: "" },
+    { label: t("filters.default_options.members"), value: "" },
     ...getMembershipOptions(params.memberships)
   ]
 });

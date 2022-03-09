@@ -8,11 +8,14 @@ const getKindOptions = kinds =>
     };
   });
 
-export const kindFilter = (filters, updateFilters, params) => {
+export const kindFilter = (filters, updateFilters, params, t) => {
   return {
-    label: "Kind",
+    label: t("filters.labels.by_kind"),
     value: filters?.kind || "",
     onChange: e => updateFilters(e, "kind"),
-    options: [{ label: "Type:", value: "" }, ...getKindOptions(params.kinds)]
+    options: [
+      { label: t("filters.default_options.type"), value: "" },
+      ...getKindOptions(params.kinds)
+    ]
   };
 };

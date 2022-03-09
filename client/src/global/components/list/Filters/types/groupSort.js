@@ -1,43 +1,43 @@
-export const groupSortFilter = (filters, updateFilters) => {
+export const groupSortFilter = (filters, updateFilters, params, t) => {
   return {
-    label: "Sort results",
+    label: t("filters.labels.sort_results"),
     value: filters.sort_order || "",
     onChange: e => updateFilters(e, "sort_order"),
     options: [
       {
-        label: "Sort by:",
+        label: t("filters.sort_options.none_selected"),
         value: ""
       },
       {
-        label: "A–Z",
+        label: t("filters.sort_options.alphabetical"),
         value: "name_asc"
       },
       {
-        label: "Z–A",
+        label: t("filters.sort_options.reverse_alpha"),
         value: "name_desc"
       },
       {
-        label: "Newest groups first",
+        label: t("filters.group_sort_options.newest_first"),
         value: "created_at_desc"
       },
       {
-        label: "Oldest groups first",
+        label: t("filters.group_sort_options.oldest_first"),
         value: "created_at_asc"
       },
       {
-        label: "Earliest course start date",
+        label: t("filters.group_sort_options.earliest_start_date"),
         value: "course_starts_on_asc"
       },
       {
-        label: "Latest course start date",
+        label: t("filters.group_sort_options.latest_start_date"),
         value: "course_starts_on_desc"
       },
       {
-        label: "Earliest course end date",
+        label: t("filters.group_sort_options.earliest_end_date"),
         value: "course_ends_on_asc"
       },
       {
-        label: "Latest course end date",
+        label: t("filters.group_sort_options.latest_end_date"),
         value: "course_ends_on_desc"
       }
     ]

@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import filterTypes from "global/components/list/Filters/types";
 import isEqual from "lodash/isEqual";
+import { useTranslation } from "react-i18next";
 
 export default function useListFilters({
   onFilterChange,
@@ -11,6 +12,7 @@ export default function useListFilters({
   const [filters, setFilters] = useState(initialState || {});
   const prevFilters = useRef(initialState || {});
   const previnitialState = useRef(initialState || {});
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!isEqual(initialState, previnitialState.current)) {
@@ -61,10 +63,15 @@ export default function useListFilters({
       : activeTypes;
   const activeFilters = finalTypes.length
     ? finalTypes.map(type =>
-        filterTypes[type](filters, updateFilterState, {
-          ...options,
-          featuredLabel
-        })
+        filterTypes[type](
+          filters,
+          updateFilterState,
+          {
+            ...options,
+            featuredLabel
+          },
+          t
+        )
       )
     : [];
 

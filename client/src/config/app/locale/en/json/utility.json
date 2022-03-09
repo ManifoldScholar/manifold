@@ -2,10 +2,57 @@
   "search": {
     "title": "Search",
     "form": "Search Form",
-    "results": "Search Results"
+    "results": "Search Results",
+    "instructions": "Enter search terms",
+    "placeholder": "Search..."
   },
   "filters": {
-    "featured_projects": "Featured $t(glossary.project_other)"
+    "featured_projects": "Featured $t(glossary.project_other)",
+    "reset_announcement": "Search and filters reset.",
+    "reset_search": "$t(actions.reset) Search",
+    "reset_filters": "$t(actions.reset) Filters",
+    "reset_search_and_filters": "$t(actions.reset) Search + Filters",
+    "show_all": "$t(actions.show) all",
+    "labels": {
+      "filter_results": "Filter results",
+      "sort_results": "Sort results",
+      "by_kind": "Filter by kind",
+      "by_member": "Filter by member",
+      "order_collection": "Order collection by:",
+      "by_section": "Filter by text section",
+      "tag": "Tag",
+      "by_text": "Filter by text"
+    },
+    "default_options": {
+      "type": "Type:",
+      "members": "All members",
+      "sections": "All sections",
+      "tag": "Tag:",
+      "text": "All texts"
+    },
+    "sort_options": {
+      "none_selected": "Sort",
+      "alphabetical": "A-Z",
+      "reverse_alpha": "Z-A"
+    },
+    "group_sort_options": {
+      "newest_first": "Newest groups first",
+      "oldest_first": "Oldest groups first",
+      "earliest_start_date": "Earliest course start date",
+      "latest_start_date": "Latest course start date",
+      "earliest_end_date": "Earliest course end date",
+      "latest_end_date": "Latest course end date"
+    },
+    "collection_sort_options": {
+      "created_at_desc": "Date Created (Newest First)",
+      "created_at_asc": "Date Created (Oldest First)",
+      "updated_at_desc": "Last Updated (Newest First)",
+      "updated_at_asc": "Last Updated (Oldest First)",
+      "title_asc": "Title A to Z",
+      "title_desc": "Title Z to A",
+      "publication_date_desc": "Publication Date (Newest First)",
+      "publication_date_asc": "Publication Date (Oldest First)"
+    }
   },
   "pagination": {
     "previous": "Previous",

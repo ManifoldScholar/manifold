@@ -1,18 +1,18 @@
-export const sortFilter = (filters, updateFilters) => ({
-  label: "Sort results",
+export const sortFilter = (filters, updateFilters, params, t) => ({
+  label: t("filters.labels.sort_results"),
   value: filters.order || "",
   onChange: e => updateFilters(e, "order"),
   options: [
     {
-      label: "Sort",
+      label: t("filters.sort_options.none_selected"),
       value: ""
     },
     {
-      label: "A–Z",
+      label: t("filters.sort_options.alphabetical"),
       value: "sort_title ASC"
     },
     {
-      label: "Z–A",
+      label: t("filters.sort_options.reverse_alpha"),
       value: "sort_title DESC"
     }
   ]
