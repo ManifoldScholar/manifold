@@ -20,7 +20,7 @@ export const getJournalBreadcrumbs = (project, t) => {
     },
     {
       to: lh.link("frontendProjectDetail", project.attributes.slug),
-      label: `${t("glossary.issue_one")} ${issue.attributes.number}`
+      label: `${t("glossary.issue_truncated_one")} ${issue.attributes.number}`
     }
   ].filter(Boolean);
 };
