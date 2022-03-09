@@ -9,7 +9,8 @@ import {
   CollectedTexts,
   CollectedTextSections,
   CollectedResourceCollections,
-  CollectedResources
+  CollectedResources,
+  CollectedJournalIssues
 } from "frontend/components/collecting/collection-blocks";
 import { collectedIdsForCollection } from "frontend/components/collecting/helpers";
 import EntityCollection from "../EntityCollection";
@@ -73,6 +74,7 @@ function MyStarredEntityCollection({
         hasCollecteds ? (
           <>
             <CollectedProjects {...getCollectedProps("projects")} />
+            <CollectedJournalIssues {...getCollectedProps("journalIssues")} />
             <CollectedTexts {...getCollectedProps("texts")} />
             <CollectedTextSections {...getCollectedProps("textSections")} />
             <CollectedResourceCollections
