@@ -30,16 +30,12 @@
     }
   },
   "modals": {
-    "close": "Close dialog",
     "remove_category_heading": "Are you sure you want to remove this category from your collection?",
     "remove_category_body": "Any items in this category will also be deleted.",
-    "collecting_search": "<0>Add content</0><1>{{heading}}</1><2>To add content to your Reading Group, search for it by keyword and type, when you have found content you wish to add, select the star icon for that item to add it to your group.</p>",
-    "reset_password": {
-      "heading": "Are you sure you want to reset this password?",
-      "body": "This action cannot be undone."
-    }
+    "collecting_search": "<0>Add content</0><1>{{heading}}</1><2>To add content to your Reading Group, search for it by keyword and type, when you have found content you wish to add, select the star icon for that item to add it to your group.</p>"
   },
   "img_alts": {
-    "user_avatar": "User Avatar"
+    "user_avatar": "User Avatar",
+    "avatar_for_name": "{{name}}'s avatar"
   }
 }
