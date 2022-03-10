@@ -62,8 +62,6 @@
     "highlight_title_case_other": "Highlights",
     "collection_one": "collection",
     "collection_other": "collections",
-    "collection_title_case_one": "Collection",
-    "collection_title_case_other": "Collections",
     "contributor_one": "contributor",
     "contributor_other": "contributors",
     "contributor_title_case_one": "Contributor",
@@ -94,6 +92,8 @@
     "avatar": "avatar",
     "selection_one": "selection",
     "selection_other": "selections",
-    "notes_title_case": "Notes"
+    "notes_title_case": "Notes",
+    "result_one": "result",
+    "result_other": "results"
   }
 }

@@ -4,7 +4,11 @@
     "form": "Search Form",
     "results": "Search Results",
     "instructions": "Enter search terms",
-    "placeholder": "Search..."
+    "placeholder": "Search...",
+    "no_results": "No results were found.",
+    "show_all_excerpts": "Show all excerpts",
+    "show_only_relevant": "Only show most relevant excerpts",
+    "annotation_title": "{{name}} <2>annotated</2> {{entity}}"
   },
   "filters": {
     "featured_projects": "Featured $t(glossary.project_other)",
@@ -65,6 +69,7 @@
   "dates": {
     "added": "added",
     "resource_added": "Resource $t(dates.added)",
+    "type_of_resource_added": "{{kind}} $t(dates.added)",
     "collection_created": "Collection created",
     "published": "published",
     "published_title_case": "Published",
