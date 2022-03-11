@@ -1,56 +1,66 @@
-import React, { Component } from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import format from "date-fns/format";
-import parseISO from "date-fns/parseISO";
-import formatDistance from "date-fns/formatDistance";
+import { useSelector } from "react-redux";
+import { format as formatDate, parseISO, formatDistance } from "date-fns";
+import es from "date-fns/locale/es";
+import nl from "date-fns/locale/nl";
 import isDate from "lodash/isDate";
 
-export default class FormattedDate extends Component {
-  static displayName = "FormattedDate";
+export default function FormattedDate({
+  date,
+  format = "PPP",
+  prefix,
+  suffix = false
+}) {
+  const lng = useSelector(state => state.ui.persistent.locale.language);
+  const locale = useMemo(() => {
+    switch (lng) {
+      case "es":
+        return es;
+      case "nl":
+        return nl;
+      default:
+        return null;
+    }
+  }, [lng]);
 
-  static propTypes = {
-    prefix: PropTypes.string,
-    format: PropTypes.string,
-    date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+  if (!date) return null;
+
+  const parsedDate = isDate(date) ? date : parseISO(date);
+
+  const dateTime = () => {
+    try {
+      return formatDate(parsedDate, format, { locale });
+    } catch {
+      return "";
+    }
   };
 
-  get date() {
-    const { date } = this.props;
-    if (isDate(date)) return date;
-    return parseISO(date);
-  }
-
-  get value() {
-    return this.formatString(this.formatDate(this.date));
-  }
-
-  get dateTime() {
+  const formatDateString = () => {
     try {
-      return format(this.date, "yyyy-MM-dd");
+      if (format === "distanceInWords")
+        return formatDistance(parsedDate, Date.now(), {
+          addSuffix: suffix,
+          locale
+        });
+      return formatDate(parsedDate, format);
     } catch {
       return "";
     }
-  }
+  };
 
-  formatDate(date) {
-    if (!date) return;
-    try {
-      if (this.props.format === "distanceInWords")
-        return formatDistance(this.date, Date.now());
-      const outFormat = this.props.format ? this.props.format : "MMMM dd, yyyy";
-      return format(this.date, outFormat);
-    } catch {
-      return "";
-    }
-  }
+  const addPrefix = dateStr => {
+    return prefix ? `${prefix} ${dateStr}` : dateStr;
+  };
 
-  formatString(date) {
-    if (!this.props.prefix || this.props.prefix.length === 0) return date;
-    return `${this.props.prefix} ${date}`;
-  }
-
-  render() {
-    if (!this.props.date) return null;
-    return <time dateTime={this.dateTime}>{this.value}</time>;
-  }
+  if (!date) return null;
+  return <time dateTime={dateTime()}>{addPrefix(formatDateString())}</time>;
 }
+
+FormattedDate.displayName = "FormattedDate";
+
+FormattedDate.propTypes = {
+  prefix: PropTypes.string,
+  format: PropTypes.string,
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+};
