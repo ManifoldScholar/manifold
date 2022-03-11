@@ -63,7 +63,7 @@ exports[`reader/components/notes/partial/GroupItem matches the snapshot 1`] = `
           }
         >
           <I18nextProvider>
-            <Connect(HigherOrder.WithReadingGroups(Notes.Partial.GroupItem))
+            <withI18nextTranslation(Connect(HigherOrder.WithReadingGroups(Notes.Partial.GroupItem)))
               annotation={
                 Object {
                   "attributes": Object {
