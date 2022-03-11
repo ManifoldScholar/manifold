@@ -33,15 +33,16 @@ function ProjectsPlaceholder({
         <>
           <Authorize entity="project" ability="create">
             <p>
-              <Trans i18nKey="placeholders.projects.authorized.body">
-                But it’s easy to create and publish projects with Manifold. If
-                you have backend access,
-                <Link to={lh.link("backend")}>head to the backend</Link>
-                and select
-                <em>Add a New Project</em>. For more help, you can learn about
-                creating and publishing Manifold Projects
-                <a href={HELP_LINK}>here</a>.
-              </Trans>
+              <Trans
+                i18nKey="placeholders.projects.authorized.body"
+                components={[
+                  <Link to={lh.link("backend")} />,
+                  <em />,
+                  <a href={HELP_LINK} target="_blank" rel="noopener noreferrer">
+                    #
+                  </a>
+                ]}
+              />
             </p>
           </Authorize>
           <Authorize entity="project" ability="create" successBehavior="hide">

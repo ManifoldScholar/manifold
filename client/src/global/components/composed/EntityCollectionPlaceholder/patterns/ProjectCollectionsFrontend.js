@@ -31,21 +31,16 @@ function ProjectCollectionsFrontendPlaceholder({ bgColor = "neutral05" }) {
         <>
           <Authorize entity="project" ability="create">
             <p>
-              <Trans i18nKey="placeholders.project_collections.authorized.body">
-                {" "}
-                But it’s easy to create new project collections with Manifold.
-                If you have backend access,{" "}
-                <Link to={lh.link("backendProjectCollections")}>
-                  head to the backend
-                </Link>{" "}
-                and select <em>Add a New Project Collection</em>. For more help,
-                you can learn about creating and publishing Manifold Project
-                Collections{" "}
-                <a href={HELP_LINK} target="_blank" rel="noopener noreferrer">
-                  here
-                </a>
-                .
-              </Trans>
+              <Trans
+                i18nKey="placeholders.project_collections.authorized.body"
+                components={[
+                  <Link to={lh.link("backendProjectCollections")} />,
+                  <em />,
+                  <a href={HELP_LINK} target="_blank" rel="noopener noreferrer">
+                    #
+                  </a>
+                ]}
+              />
             </p>
           </Authorize>
           <Authorize entity="project" ability="create" successBehavior="hide">

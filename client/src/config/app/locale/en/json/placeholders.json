@@ -45,7 +45,7 @@
     "journal_issues": {
       "authorized": {
         "title": "Oh no. There are no journal issues in this Manifold library.",
-        "body": "But it’s easy to create new issues with Manifold. If you have backend access, <2>head to the backend</2> and first select <4>Add a New Journal</4>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <6>our documentation</6>."
+        "body": "But it’s easy to create new issues with Manifold. If you have backend access, <0>head to the backend</0> and first select <1>Add a New Journal</1>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <2>our documentation</2>."
       },
       "unauthorized": {
         "title": "There are no journal issues in this Manifold library.",
@@ -55,7 +55,7 @@
     "journals": {
       "authorized": {
         "title": "Oh no. There are no journals in this Manifold library.",
-        "body": "But it’s easy to create new journals with Manifold. If you have backend access, <2>head to the backend</2> and select <4>Add a New Journal</4>. For more help, you can learn about creating and publishing Manifold Issues in <7>our documentation</7>."
+        "body": "But it’s easy to create new journals with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Journal</1>. For more help, you can learn about creating and publishing Manifold Issues in <2>our documentation</2>."
       },
       "unauthorized": {
         "title": "There are no journals in this Manifold library.",
@@ -69,7 +69,7 @@
     "projects": {
       "authorized": {
         "title": "On no. This Manifold library is empty.",
-        "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <1>head to the backend</1> and select <3>Add a New Project</3>. For more help, you can learn about creating and publishing Manifold Projects <5>here</5>."
+        "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Project</1>. For more help, you can learn about creating and publishing Manifold Projects <2>here</2>."
       },
       "unauthorized": {
         "title": "This Manifold library is empty.",
@@ -79,7 +79,7 @@
     "project_collections": {
       "authorized": {
         "title": "Oh no. There are no project collections in this Manifold library.",
-        "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <3>head to the backend</3> and select <6>Add a New Project Collection</6>. For more help, you can learn about creating and publishing Manifold Project Collections <9>here</9>."
+        "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Project Collection</1>. For more help, you can learn about creating and publishing Manifold Project Collections <2>here</2>."
       },
       "unauthorized": {
         "title": "There are no project collections in this Manifold library.",
