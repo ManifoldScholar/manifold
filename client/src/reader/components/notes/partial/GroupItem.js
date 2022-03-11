@@ -7,6 +7,7 @@ import Tag from "global/components/Annotation/Tag";
 import Avatar from "global/components/avatar";
 
 import withReadingGroups from "hoc/withReadingGroups";
+import { withTranslation } from "react-i18next";
 
 class GroupItem extends Component {
   static displayName = "Notes.Partial.GroupItem";
@@ -14,7 +15,8 @@ class GroupItem extends Component {
   static propTypes = {
     annotation: PropTypes.object,
     visitHandler: PropTypes.func,
-    showAnnotationCreator: PropTypes.bool
+    showAnnotationCreator: PropTypes.bool,
+    t: PropTypes.func
   };
 
   get currentGroupName() {
@@ -41,11 +43,11 @@ class GroupItem extends Component {
   }
 
   get publicLabel() {
-    return "My Public Annotations";
+    return this.props.t("reader.my_public_annotations");
   }
 
   get privateLabel() {
-    return "My Private Annotations";
+    return this.props.t("reader.my_private_annotations");
   }
 
   get annotationAttributes() {
@@ -135,7 +137,9 @@ class GroupItem extends Component {
           onClick={this.handleVisitAnnotation}
           className="notes-filtered-list__item-button"
         >
-          <span className="screen-reader-text">{`${format}.`}</span>
+          <span className="screen-reader-text">
+            {this.props.t(`glossary.${format}_title_case_one`)}
+          </span>
           <div className="notes-filtered-list__item-button-inner">
             {icon && (
               <IconComposer
@@ -159,4 +163,4 @@ class GroupItem extends Component {
   }
 }
 
-export default withReadingGroups(GroupItem);
+export default withTranslation()(withReadingGroups(GroupItem));

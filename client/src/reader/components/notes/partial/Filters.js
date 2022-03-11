@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
 
-export default class Filters extends Component {
+import { withTranslation } from "react-i18next";
+
+class Filters extends Component {
   static displayName = "Notes.Partial.Filters";
 
   static propTypes = {
     filterChangeHandler: PropTypes.func,
-    filters: PropTypes.object
+    filters: PropTypes.object,
+    t: PropTypes.func
   };
 
   filteredBy(filter, format) {
@@ -57,13 +60,23 @@ export default class Filters extends Component {
     return (
       <fieldset className="notes-filters">
         <div className="notes-filters__inner">
-          <legend className="notes-filters__label">Show:</legend>
+          <legend className="notes-filters__label">
+            {this.props.t("actions.show") + ":"}
+          </legend>
           <div className="notes-filters__checkbox-group">
-            {this.renderCheckBox("Highlights", "highlight")}
-            {this.renderCheckBox("Annotations", "annotation")}
+            {this.renderCheckBox(
+              this.props.t("glossary.highlight_title_case_other"),
+              "highlight"
+            )}
+            {this.renderCheckBox(
+              this.props.t("glossary.annotation_title_case_other"),
+              "annotation"
+            )}
           </div>
         </div>
       </fieldset>
     );
   }
 }
+
+export default withTranslation()(Filters);

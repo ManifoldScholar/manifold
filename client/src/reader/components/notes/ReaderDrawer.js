@@ -3,14 +3,16 @@ import PropTypes from "prop-types";
 import FilteredList from "./FilteredList";
 import ReaderNotes from "reader/containers/ReaderNotes";
 import GlobalDrawer from "global/containers/drawer";
+import { withTranslation } from "react-i18next";
 
-export default class ReaderDrawer extends PureComponent {
+class ReaderDrawer extends PureComponent {
   static displayName = "Notes.ReaderDrawer";
 
   static propTypes = {
     match: PropTypes.object,
     history: PropTypes.object,
-    visible: PropTypes.bool
+    visible: PropTypes.bool,
+    t: PropTypes.func
   };
 
   renderNotesDrawerContents() {
@@ -32,7 +34,7 @@ export default class ReaderDrawer extends PureComponent {
       lockScroll: "always",
       includeDrawerFrontMatter: true,
       focusTrap: false,
-      title: "Notes",
+      title: this.props.t("glossary.notes_title_case"),
       closeCallback: this.props.closeCallback
     };
 
@@ -43,3 +45,5 @@ export default class ReaderDrawer extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ReaderDrawer);

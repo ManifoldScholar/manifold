@@ -5,12 +5,13 @@ import Link from "./Link";
 import Notation from "./Notation";
 import IconComposer from "global/components/utility/IconComposer";
 
+import { withTranslation } from "react-i18next";
 import Authorize from "hoc/Authorize";
 
 // This class represents a single notation in the margin. It's used to show the active
 // notation when notations are grouped, and it's used to show a single notation in the
 // reader margin.
-export default class NotationViewerSingle extends PureComponent {
+class NotationViewerSingle extends PureComponent {
   static displayName = "NotationViewer.Single";
 
   static propTypes = {
@@ -24,7 +25,8 @@ export default class NotationViewerSingle extends PureComponent {
       sectionId: PropTypes.string,
       textId: PropTypes.string
     }),
-    showTitle: PropTypes.bool
+    showTitle: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -51,7 +53,9 @@ export default class NotationViewerSingle extends PureComponent {
             onClick={() => actions.startDestroy(entry)}
             className="notation-delete"
           >
-            <span className="screen-reader-text">Delete Notation</span>
+            <span className="screen-reader-text">
+              {this.props.t("reader.menus.notes.delete_notation")}
+            </span>
             <IconComposer
               icon="close16"
               size="default"
@@ -83,3 +87,5 @@ export default class NotationViewerSingle extends PureComponent {
     /* eslint-enable jsx-a11y/anchor-is-valid */
   }
 }
+
+export default withTranslation()(NotationViewerSingle);

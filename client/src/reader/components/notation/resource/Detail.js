@@ -7,11 +7,13 @@ import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceDetail extends PureComponent {
+class ResourceDetail extends PureComponent {
   static propTypes = {
     resource: PropTypes.object,
-    handleClose: PropTypes.func
+    handleClose: PropTypes.func,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -89,7 +91,7 @@ export default class ResourceDetail extends PureComponent {
               className="button-secondary button-secondary--outlined"
             >
               <span className="button-secondary__text">
-                Visit Resource Page
+                {this.props.t("reader.actions.visit_resource_page")}
               </span>
               <IconComposer
                 icon="arrowRight16"
@@ -112,7 +114,9 @@ export default class ResourceDetail extends PureComponent {
                 size="default"
                 className="button-secondary__icon"
               />
-              <span className="button-secondary__text">Return to Reader</span>
+              <span className="button-secondary__text">
+                {this.props.t("reader.actions.return_to_reader")}
+              </span>
             </button>
           </nav>
         </div>
@@ -120,3 +124,5 @@ export default class ResourceDetail extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ResourceDetail);

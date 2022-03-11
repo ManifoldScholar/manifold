@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Template from "./Template";
+import { useTranslation } from "react-i18next";
 
 const TextNotAnnotatedByGroup = ({ readingGroup }) => {
-  const name = readingGroup?.attributes.name || "This group";
+  const { t } = useTranslation();
+  const name =
+    readingGroup?.attributes.name || t("reader.menus.notes.this_group");
   return (
     <Template
-      title={`${name} hasn't annotated this text yet`}
-      body="Once someone in the group has highlighted or annotated a passage in this text, it will
-          appear here. To annotate or highlight, select a passage from the text
-          and click the appropriate button on the pop-up menu."
+      title={t("reader.menus.notes.no_group_annotations", { name })}
+      body={t("reader.menus.notes.no_group_annotations_message")}
     />
   );
 };

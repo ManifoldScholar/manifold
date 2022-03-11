@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { ReaderContext } from "helpers/contexts";
 
 import { ListFilters } from "global/components/list";
+import { withTranslation } from "react-i18next";
 
 class GroupFilter extends Component {
   static displayName = "Notes.Partial.GroupFilter";
@@ -11,7 +12,8 @@ class GroupFilter extends Component {
     readingGroups: PropTypes.array.isRequired,
     filterChangeHandler: PropTypes.func,
     setAnnotationOverlayReadingGroup: PropTypes.func,
-    selectedGroup: PropTypes.string
+    selectedGroup: PropTypes.string,
+    t: PropTypes.func
   };
 
   static contextType = ReaderContext;
@@ -38,11 +40,11 @@ class GroupFilter extends Component {
 
   get groupFilter() {
     return {
-      label: "Reading Group",
+      label: this.props.t("glossary.reading_group_title_case_one"),
       value: this.selectedGroup,
       options: [
         {
-          label: "My Notes",
+          label: this.props.t("reader.menus.notes.my_notes"),
           value: "me"
         },
         ...this.groupOptions
@@ -68,4 +70,4 @@ class GroupFilter extends Component {
   }
 }
 
-export default GroupFilter;
+export default withTranslation()(GroupFilter);

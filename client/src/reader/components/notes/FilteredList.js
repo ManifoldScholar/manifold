@@ -4,6 +4,7 @@ import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 import Partial from "./partial";
 import EmptyMessage from "./EmptyMessage";
+import { withTranslation } from "react-i18next";
 
 class FilteredList extends PureComponent {
   static displayName = "Notes.FilteredList";
@@ -20,7 +21,8 @@ class FilteredList extends PureComponent {
     annotated: PropTypes.bool,
     loaded: PropTypes.bool,
     readingGroups: PropTypes.array,
-    setAnnotationOverlayReadingGroup: PropTypes.func
+    setAnnotationOverlayReadingGroup: PropTypes.func,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -95,7 +97,9 @@ class FilteredList extends PureComponent {
             onClick={handleSeeAllClick}
             className="notes-filtered-list__see-all button-primary button-primary--dull button-primary--rounded"
           >
-            <span className="button-primary__text">See all</span>
+            <span className="button-primary__text">
+              {this.props.t("actions.see_all")}
+            </span>
             <IconComposer
               icon="link24"
               size="default"
@@ -145,4 +149,4 @@ class FilteredList extends PureComponent {
   }
 }
 
-export default FilteredList;
+export default withTranslation()(FilteredList);

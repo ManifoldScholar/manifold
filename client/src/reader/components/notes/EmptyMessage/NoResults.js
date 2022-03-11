@@ -1,12 +1,15 @@
 import React from "react";
 import Template from "./Template";
+import { useTranslation } from "react-i18next";
 
-const NoResults = () => (
-  <Template
-    title="No annotations found"
-    body="No annotations match the filters set above. Adjust the filters
-    to show more results."
-  />
-);
+function NoResults() {
+  const { t } = useTranslation();
+  return (
+    <Template
+      title={t("reader.menus.notes.no_annotations")}
+      body={t("reader.menus.notes.no_matches_with_filters")}
+    />
+  );
+}
 
 export default NoResults;
