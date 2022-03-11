@@ -19,14 +19,14 @@ class FatalError extends PureComponent {
       error: PropTypes.object,
       type: PropTypes.string
     }).isRequired,
-    headerLineOne: PropTypes.string.isRequired,
-    headerLineTwo: PropTypes.string.isRequired,
+    headerLineOne: PropTypes.string,
+    headerLineTwo: PropTypes.string,
     dismiss: PropTypes.func,
     dispatch: PropTypes.func,
     t: PropTypes.func
   };
 
-  get defaultProps() {
+  get defaultHeaders() {
     const t = this.props.t;
     return {
       headerLineOne: t("errors.fatal.heading_line_one"),
@@ -110,13 +110,14 @@ class FatalError extends PureComponent {
                   <Styled.Icon icon="stopSign64" size={60} />
                   <Styled.Message>
                     {this.props.headerLineOne ??
-                      this.defaultProps.headerLineOne}
-                    {this.props.headerLineTwo ? (
+                      this.defaultHeaders.headerLineOne}
+                    {this.props.headerLineTwo !== null && (
                       <span>
                         <br />
-                        {this.props.headerLineTwo}
+                        {this.props.headerLineTwo ??
+                          this.defaultHeaders.headerLineTwo}
                       </span>
-                    ) : null}
+                    )}
                   </Styled.Message>
                 </Styled.Header>
                 <div role="alert" aria-live="assertive" aria-atomic="true">
