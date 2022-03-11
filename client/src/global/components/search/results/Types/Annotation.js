@@ -65,8 +65,8 @@ function SearchResultsTypeAnnotation({ result, highlightedAttribute }) {
           <FormattedDate
             format="distanceInWords"
             date={model.attributes.createdAt}
-          />{" "}
-          {t("dates.ago")}
+            suffix
+          />
         </>
       }
     />
