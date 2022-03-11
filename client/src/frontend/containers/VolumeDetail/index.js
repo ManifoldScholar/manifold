@@ -20,6 +20,7 @@ function VolumeDetailContainer({ journal }) {
 
   const { t } = useTranslation();
 
+  const { titlePlaintext, slug: journalSlug } = journal?.attributes ?? {};
   const breadcrumbs = useMemo(
     () => [
       {
@@ -27,21 +28,15 @@ function VolumeDetailContainer({ journal }) {
         label: t("navigation.breadcrumbs.all_journals")
       },
       {
-        to: lh.link("frontendJournalDetail", journal.id),
-        label: journal?.attributes?.titlePlaintext
+        to: lh.link("frontendJournalDetail", journalSlug),
+        label: titlePlaintext
       },
       {
-        to: lh.link("frontendVolumeDetail", journal.id, slug),
+        to: lh.link("frontendVolumeDetail", journalSlug, slug),
         label: `${t("glossary.volume_one")} ${volume?.attributes?.number}`
       }
     ],
-    [
-      t,
-      journal.id,
-      journal?.attributes?.titlePlaintext,
-      volume?.attributes?.number,
-      slug
-    ]
+    [t, journalSlug, titlePlaintext, volume?.attributes?.number, slug]
   );
 
   return journal && volume ? (

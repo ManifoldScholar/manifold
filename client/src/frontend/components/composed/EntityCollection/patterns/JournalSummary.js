@@ -16,7 +16,8 @@ function JournalSummaryEntityCollection({
 }) {
   if (!journal) return null;
 
-  const { title, descriptionFormatted: description } = journal.attributes ?? {};
+  const { title, descriptionFormatted: description, slug } =
+    journal.attributes ?? {};
   const issues = journal.relationships?.recentJournalIssues ?? [];
   const headerLayout = getHeaderLayout(journal);
   const image = getHeroImage(headerLayout, journal);
@@ -34,7 +35,7 @@ function JournalSummaryEntityCollection({
       )}
       image={image}
       headerLayout={headerLayout}
-      headerLink={lh.link("frontendJournal", journal.id)}
+      headerLink={lh.link("frontendJournal", slug)}
       BodyComponent={props =>
         !!issues?.length && (
           <ThumbnailGrid {...props}>
@@ -48,7 +49,7 @@ function JournalSummaryEntityCollection({
       }
       FooterComponent={() => (
         <FooterLink
-          to={lh.link("frontendJournal", journal.id)}
+          to={lh.link("frontendJournal", slug)}
           label={footerLinkText}
           tabIndex={-1}
         />

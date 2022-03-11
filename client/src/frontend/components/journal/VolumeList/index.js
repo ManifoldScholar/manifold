@@ -19,7 +19,11 @@ function JournalVolumeList({ volumes, journal }) {
           title={`${capitalize(t("glossary.volume_one"))} ${
             volume.attributes.number
           }`}
-          to={lh.link("frontendVolumeDetail", journal.id, volume.id)}
+          to={lh.link(
+            "frontendVolumeDetail",
+            journal.attributes.slug,
+            volume.attributes.slug
+          )}
           entities={volume.relationships.journalIssues}
           parentView
         />

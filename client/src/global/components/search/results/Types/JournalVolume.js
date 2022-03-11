@@ -37,7 +37,7 @@ function SearchResultsTypeJournalVolume({ result, highlightedAttribute }) {
     title,
     parent: parentJournal?.attributes?.titlePlaintext || null,
     parentUrl: parentJournal
-      ? lh.link("frontendJournalDetail", parentJournal.id)
+      ? lh.link("frontendJournalDetail", parentJournal.attributes?.slug)
       : null,
     attribution: creators.map(c => c.attributes.fullName).join(", "),
     label: t("glossary.volume_one"),

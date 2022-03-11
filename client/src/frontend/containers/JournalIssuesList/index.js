@@ -22,7 +22,7 @@ export default function JournalIssuesList({ journal }) {
 
   const { t } = useTranslation();
 
-  const { titlePlaintext } = journal?.attributes || {};
+  const { titlePlaintext, slug } = journal?.attributes || {};
   const containerTitle = `${titlePlaintext}: ${t(
     "glossary.issue_truncated_title_case_other"
   )}`;
@@ -33,15 +33,15 @@ export default function JournalIssuesList({ journal }) {
         label: t("navigation.breadcrumbs.all_journals")
       },
       {
-        to: lh.link("frontendJournalDetail", journal.id),
+        to: lh.link("frontendJournalDetail", slug),
         label: titlePlaintext
       },
       {
-        to: lh.link("frontendJournalAllIssues", journal.id),
+        to: lh.link("frontendJournalAllIssues", slug),
         label: t("navigation.breadcrumbs.issues")
       }
     ],
-    [journal.id, t, titlePlaintext]
+    [slug, t, titlePlaintext]
   );
 
   if (!journal || !issues || !meta) return null;
