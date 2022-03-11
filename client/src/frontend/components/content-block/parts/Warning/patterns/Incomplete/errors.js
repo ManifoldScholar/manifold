@@ -21,61 +21,55 @@ export function generateError(key, block) {
   const availableErrors = {
     "Content::TableOfContentsBlock": {
       text: (
-        <Trans i18nKey="errors.content_block.no_contents">
-          Specify a text to <Link to={blockEditLink}>fix this block</Link>.
-        </Trans>
+        <Trans
+          i18nKey="errors.content_block.no_contents"
+          components={[<Link to={blockEditLink} />]}
+        />
       )
     },
     "Content::RecentActivityBlock": {
-      has_activity: (
-        <Trans i18nKey="errors.content_block.no_activity">
-          No activity has been recorded for this project. This warning will
-          disappear once there is project activity.
-        </Trans>
-      )
+      has_activity: <Trans i18nKey="errors.content_block.no_activity" />
     },
     "Content::MarkdownBlock": {
       body: (
-        <Trans i18nKey="errors.content_block.no_markdown">
-          Add Markdown content to <Link to={blockEditLink}>fix this block</Link>
-          .
-        </Trans>
+        <Trans
+          i18nKey="errors.content_block.no_markdown"
+          components={[<Link to={blockEditLink} />]}
+        />
       )
     },
     "Content::TextsBlock": {
       texts: (
-        <Trans i18nKey="errors.content_block.no_texts">
-          <Link to={getProjectEditLink("backendProjectTexts")}>
-            Add texts to the project
-          </Link>{" "}
-          or <Link to={blockEditLink}>adjust the block configuration</Link> to
-          fix this block.
-        </Trans>
+        <Trans
+          i18nKey="errors.content_block.no_texts"
+          components={[
+            <Link to={getProjectEditLink("backendProjectTexts")} />,
+            <Link to={blockEditLink} />
+          ]}
+        />
       )
     },
     "Content::ResourcesBlock": {
       resources_or_collections: (
-        <Trans i18nKey="errors.content_block.no_resources">
-          Add{" "}
-          <Link to={getProjectEditLink("backendProjectResources")}>
-            resources
-          </Link>{" "}
-          or{" "}
-          <Link to={getProjectEditLink("backendProjectResourceCollections")}>
-            resource collections
-          </Link>{" "}
-          to the project to fix this block.
-        </Trans>
+        <Trans
+          i18nKey="errors.content_block.no_resources"
+          components={[
+            <Link to={getProjectEditLink("backendProjectResources")} />,
+            <Link
+              to={getProjectEditLink("backendProjectResourceCollections")}
+            />
+          ]}
+        />
       )
     },
     "Content::MetadataBlock": {
       has_metadata: (
-        <Trans i18nKey="errors.content_block.no_metadata">
-          <Link to={getProjectEditLink("backendProjectMetadata")}>
-            Add project metadata
-          </Link>{" "}
-          to fix this block.
-        </Trans>
+        <Trans
+          i18nKey="errors.content_block.no_metadata"
+          components={[
+            <Link to={getProjectEditLink("backendProjectMetadata")} />
+          ]}
+        />
       )
     }
   };
@@ -92,9 +86,10 @@ export function getDefaultError(block) {
   );
   return (
     <span key="default-error">
-      <Trans i18nKey="errors.content_block.default">
-        <Link to={blockEditLink}>Fix this content block.</Link>
-      </Trans>
+      <Trans
+        i18nKey="errors.content_block.default"
+        components={[<Link to={blockEditLink} />]}
+      />
     </span>
   );
 }
