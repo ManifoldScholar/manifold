@@ -1,13 +1,16 @@
 import React from "react";
 import Template from "./Template";
+import { useTranslation } from "react-i18next";
 
-const TextNotAnnotatedByMe = () => (
-  <Template
-    title="You haven't annotated this text yet"
-    body="Once you’ve highlighted or annotated a passage in this text, it will
-          appear here. To annotate or highlight, select a passage from the text
-          and click the appropriate button on the pop-up menu."
-  />
-);
+const TextNotAnnotatedByMe = () => {
+  const { t } = useTranslation();
+
+  return (
+    <Template
+      title={t("reader.menus.notes.no_annotations_by_me")}
+      body={t("reader.menus.notes.no_annotations_by_me_message")}
+    />
+  );
+};
 
 export default TextNotAnnotatedByMe;

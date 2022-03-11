@@ -3,7 +3,9 @@
     "actions": {
       "copy": "Copy",
       "select_reading_group": "Select $t(glossary.reading_group_one)",
-      "annotate_passage": "$t(actions.annotate) this passage"
+      "annotate_passage": "$t(actions.annotate) this passage",
+      "visit_resource_page": "$t(actions.visit) $t(glossary.resource_title_case_one) $t(common.page_title_case_one)",
+      "return_to_reader": "Return to Reader"
     },
     "menus": {
       "appearance": {
@@ -53,6 +55,17 @@
       "visibility": {
         "all_reading_groups": "All $t(glossary.reading_group_title_case_other)",
         "show_the_following": "Show the following:"
+      },
+      "notes": {
+        "delete_notation": "$t(actions.delete) $t(glossary.notation_title_case_other)",
+        "no_annotations": "No $t(glossary.annotation_other) found",
+        "no_matches_with_filters": "No annotations match the filters set above. Adjust the filters to show more results.",
+        "this_group": "This group",
+        "no_group_annotations_message": "Once someone in the group has highlighted or annotated a passage in this text, it will appear here. To annotate or highlight, select a passage from the text and click the appropriate button on the pop-up menu.",
+        "no_group_annotations": "{{name}} hasn't annotated this text yet",
+        "no_annotations_by_me": "You haven't annotated this text yet",
+        "no_annotations_by_me_message": "Once you’ve highlighted or annotated a passage in this text, it will appear here. To annotate or highlight, select a passage from the text and click the appropriate button on the pop-up menu.",
+        "my_notes": "My $t(glossary.notes_title_case)"
       }
     },
     "header": {

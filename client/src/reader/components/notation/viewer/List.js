@@ -15,6 +15,7 @@ import throttle from "lodash/throttle";
 import isNil from "lodash/isNil";
 import { scrollOptions } from "utils/domUtils";
 import withConfirmation from "hoc/withConfirmation";
+import { withTranslation } from "react-i18next";
 
 const { request } = entityStoreActions;
 
@@ -41,7 +42,8 @@ class NotationViewerList extends PureComponent {
     containerSize: PropTypes.number,
     sectionId: PropTypes.string,
     textId: PropTypes.string,
-    confirm: PropTypes.func.isRequired
+    confirm: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -312,7 +314,10 @@ class NotationViewerList extends PureComponent {
     const { textId, sectionId } = this.props;
     const viewerClass = `notation-viewer container-width-${this.props.containerSize}`;
     return (
-      <nav className={viewerClass} aria-label="Notations">
+      <nav
+        className={viewerClass}
+        aria-label={this.props.t("glossary.notation_title_case_other")}
+      >
         <ul className="viewer-list" ref={el => (this.listEl = el)}>
           {this.state.entries.map(entry => {
             return (
@@ -341,6 +346,8 @@ class NotationViewerList extends PureComponent {
   }
 }
 
-export default withConfirmation(
-  connect(NotationViewerList.mapStateToProps)(NotationViewerList)
+export default withTranslation()(
+  withConfirmation(
+    connect(NotationViewerList.mapStateToProps)(NotationViewerList)
+  )
 );

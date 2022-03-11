@@ -28,6 +28,10 @@
     "yes_title_case": "Yes",
     "no": "no",
     "no_title_case": "No",
-    "okay": "OK"
+    "okay": "OK",
+    "page_one": "page",
+    "page other": "pages",
+    "page_title_case_one": "Page",
+    "page_title_case_other": "Pages"
   }
 }
