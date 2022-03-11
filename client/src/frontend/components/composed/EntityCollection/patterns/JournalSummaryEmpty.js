@@ -6,15 +6,19 @@ import lh from "helpers/linkHandler";
 import Warning from "frontend/components/content-block/parts/Warning/Warning";
 import EntityCollection from "../EntityCollection";
 
-export default function JournalSummaryEmpty({ journalId }) {
+export default function JournalSummaryEmpty({ journalSlug }) {
   const { t } = useTranslation();
+  /* eslint-disable react/self-closing-comp */
   const body = (
-    <Trans t={t} i18nKey="messages.empty_journal_body">
-      Add <Link to={lh.link("backendJournalVolumes", journalId)}>volumes</Link>
-      or <Link to={lh.link("backendJournalIssues", journalId)}>issues</Link> to
-      see this page.
-    </Trans>
+    <Trans
+      i18nKey="messages.empty_journal_body"
+      components={[
+        <Link to={lh.link("backendJournalVolumes", journalSlug)}></Link>,
+        <Link to={lh.link("backendJournalIssues", journalSlug)}></Link>
+      ]}
+    />
   );
+  /* eslint-disable react/self-closing-comp */
   return (
     <EntityCollection
       BodyComponent={() => (

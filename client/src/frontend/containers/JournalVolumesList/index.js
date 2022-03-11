@@ -18,6 +18,9 @@ export default function JournalVolumesList({ journal }) {
   });
 
   const { t } = useTranslation();
+
+  const { titlePlaintext, slug } = journal?.attributes ?? {};
+
   const breadcrumbs = useMemo(
     () => [
       {
@@ -25,20 +28,18 @@ export default function JournalVolumesList({ journal }) {
         label: t("navigation.breadcrumbs.all_journals")
       },
       {
-        to: lh.link("frontendJournalDetail", journal.id),
-        label: journal.attributes.titlePlaintext
+        to: lh.link("frontendJournalDetail", slug),
+        label: titlePlaintext
       },
       {
-        to: lh.link("frontendJournalAllVolumes", journal.id),
+        to: lh.link("frontendJournalAllVolumes", slug),
         label: t("glossary.volume_other")
       }
     ],
-    [journal.id, journal.attributes.titlePlaintext, t]
+    [slug, titlePlaintext, t]
   );
 
   if (!journal || !volumes || !meta) return null;
-
-  const { titlePlaintext } = journal.attributes;
 
   return (
     <>

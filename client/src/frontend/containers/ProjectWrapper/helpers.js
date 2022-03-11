@@ -11,11 +11,15 @@ export const getJournalBreadcrumbs = (project, t) => {
       label: t("navigation.breadcrumbs.all_journals")
     },
     parentJournal && {
-      to: lh.link("frontendJournalDetail", parentJournal.id),
+      to: lh.link("frontendJournalDetail", parentJournal.attributes.slug),
       label: parentJournal.attributes.titlePlaintext
     },
     parentVolume && {
-      to: lh.link("frontendVolumeDetail", parentJournal.id, parentVolume.id),
+      to: lh.link(
+        "frontendVolumeDetail",
+        parentJournal.attributes.slug,
+        parentVolume.attributes.slug
+      ),
       label: `${t("glossary.volume_one")} ${parentVolume.attributes.number}`
     },
     {

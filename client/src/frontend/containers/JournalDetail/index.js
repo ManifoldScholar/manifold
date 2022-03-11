@@ -32,7 +32,7 @@ function JournalDetailContainer({ journal }) {
 
   const { t } = useTranslation();
 
-  const { titlePlaintext } = journal?.attributes || {};
+  const { titlePlaintext, slug } = journal?.attributes || {};
   const breadcrumbs = useMemo(
     () => [
       {
@@ -40,11 +40,11 @@ function JournalDetailContainer({ journal }) {
         label: t("navigation.breadcrumbs.all_journals")
       },
       {
-        to: lh.link("frontendJournalDetail", journal.id),
+        to: lh.link("frontendJournalDetail", slug),
         label: titlePlaintext
       }
     ],
-    [journal.id, titlePlaintext, t]
+    [slug, titlePlaintext, t]
   );
 
   if (!journal) return null;
@@ -63,7 +63,7 @@ function JournalDetailContainer({ journal }) {
       <EntityHero.Journal entity={journal} />
       {!volumes?.length && !issues?.length && (
         <Authorize entity={journal} ability="update">
-          <EntityCollection.JournalSummaryEmpty journalId={journal.id} />
+          <EntityCollection.JournalSummaryEmpty journalSlug={slug} />
         </Authorize>
       )}
       <EntityCollection.JournalVolumes
@@ -83,7 +83,7 @@ function JournalDetailContainer({ journal }) {
         }}
         FooterComponent={() => (
           <FooterLink
-            to={lh.link("frontendJournalAllVolumes", journal.id)}
+            to={lh.link("frontendJournalAllVolumes", slug)}
             label={t("navigation.see_all_volumes")}
           />
         )}
@@ -105,7 +105,7 @@ function JournalDetailContainer({ journal }) {
         }}
         FooterComponent={() => (
           <FooterLink
-            to={lh.link("frontendJournalAllIssues", journal.id)}
+            to={lh.link("frontendJournalAllIssues", slug)}
             label={t("navigation.see_all_issues")}
           />
         )}
