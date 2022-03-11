@@ -25,15 +25,9 @@ class DialogConfirm extends PureComponent {
     unpauseKeyboardEvents: PropTypes.func
   };
 
-  get defaultProps() {
+  get defaultHeading() {
     const t = this.props.t;
-    return {
-      heading: t("messages.confirm"),
-      options: {
-        resolveLabel: t("common.yes_title_case"),
-        rejectLabel: t("common.no_title_case")
-      }
-    };
+    return t("messages.confirm");
   }
 
   componentDidMount() {
@@ -102,7 +96,7 @@ class DialogConfirm extends PureComponent {
           >
             <header className="dialog__header">
               <h2 id={`${id}-label`}>
-                {this.props.heading ?? this.defaultProps.heading}
+                {this.props.heading ?? this.defaultHeading}
               </h2>
             </header>
 
