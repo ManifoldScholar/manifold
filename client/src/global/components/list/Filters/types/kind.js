@@ -1,9 +1,7 @@
-import capitalize from "lodash/capitalize";
-
 const getKindOptions = kinds =>
   kinds.map(kind => {
     return {
-      label: capitalize(kind),
+      label: kind,
       value: kind
     };
   });

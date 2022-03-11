@@ -28,7 +28,7 @@ export const orderCollectionFilter = (filters, updateFilters, params, t) => ({
       value: "title_desc"
     },
     {
-      label: t("filters.collection_sort_options.created_publication_date_desc"),
+      label: t("filters.collection_sort_options.publication_date_desc"),
       value: "publication_date_desc"
     },
     {
