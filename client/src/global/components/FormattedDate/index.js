@@ -30,7 +30,7 @@ export default function FormattedDate({
 
   const dateTime = () => {
     try {
-      return formatDate(parsedDate, format, { locale });
+      return formatDate(parsedDate, "P", { locale });
     } catch {
       return "";
     }
