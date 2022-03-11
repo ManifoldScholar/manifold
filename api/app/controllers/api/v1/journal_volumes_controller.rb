@@ -8,7 +8,7 @@ module API
       end
 
       def show
-        @journal_volume = JournalVolume.find(params[:id])
+        @journal_volume = scope_for_journal_volumes.find(params[:id])
         authorize_action_for @journal_volume
         render_single_resource @journal_volume, include: includes, params: { include_all_tocs: true }
       end
