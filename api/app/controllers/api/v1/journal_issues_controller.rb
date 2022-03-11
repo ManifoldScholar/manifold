@@ -17,7 +17,7 @@ module API
       end
 
       def show
-        @journal_issue = JournalIssue.find(params[:id])
+        @journal_issue = scope_for_journal_issues.find(params[:id])
         authorize_action_for @journal_issue
         render_single_resource @journal_issue, include: includes
       end
