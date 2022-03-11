@@ -16,7 +16,7 @@ exports[`reader/components/notation/viewer/Group matches the snapshot 1`] = `
         }
       }
     >
-      <NotationViewer.Single
+      <withI18nextTranslation(NotationViewer.Single)
         actions={
           Object {
             "makeActive": [MockFunction],
