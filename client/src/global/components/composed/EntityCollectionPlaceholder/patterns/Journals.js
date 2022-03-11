@@ -25,18 +25,16 @@ function JournalsPlaceholder({ bgColor = "neutral05" }) {
         <>
           <Authorize entity="journal" ability="create">
             <p>
-              <Trans i18nKey="placeholders.journals.authorized.body">
-                But it’s easy to create new journals with Manifold. If you have
-                backend access,{" "}
-                <Link to={lh.link("backend")}>head to the backend</Link>
-                and select
-                <em>Add a New Journal</em>. For more help, you can learn about
-                creating and publishing Manifold Journals{" "}
-                <a href={HELP_LINK} target="_blank" rel="noopener noreferrer">
-                  here
-                </a>
-                .
-              </Trans>
+              <Trans
+                i18nKey="placeholders.journals.authorized.body"
+                components={[
+                  <Link to={lh.link("backend")} />,
+                  <em />,
+                  <a href={HELP_LINK} target="_blank" rel="noopener noreferrer">
+                    #
+                  </a>
+                ]}
+              />
             </p>
           </Authorize>
           <Authorize entity="journal" ability="create" successBehavior="hide">
