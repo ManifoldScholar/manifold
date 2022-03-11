@@ -48,14 +48,14 @@ class AnnotationMeta extends PureComponent {
   }
 
   get dateSubtitle() {
-    const { annotation, t } = this.props;
+    const { annotation } = this.props;
     return (
       <span className="annotation-meta__datetime">
         <FormattedDate
           format="distanceInWords"
           date={annotation.attributes.createdAt}
-        />{" "}
-        {t("dates.ago")}
+          suffix
+        />
       </span>
     );
   }

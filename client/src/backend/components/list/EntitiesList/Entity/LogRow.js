@@ -125,7 +125,7 @@ export default class LogRow extends PureComponent {
         {` ${this.action} the ${this.itemType.toLowerCase()} \u201C`}
         {this.itemLink}
         {`\u201D `}
-        <FormattedDate format="distanceInWords" date={this.createdAt} /> ago.
+        <FormattedDate format="distanceInWords" date={this.createdAt} suffix />.
       </span>
     );
   }

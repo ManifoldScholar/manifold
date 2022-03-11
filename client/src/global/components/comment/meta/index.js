@@ -52,8 +52,8 @@ class CommentMeta extends PureComponent {
             <FormattedDate
               format="distanceInWords"
               date={comment.attributes.createdAt}
-            />{" "}
-            {t("dates.ago")}
+              suffix
+            />
           </span>
         </div>
         <div className="markers">
