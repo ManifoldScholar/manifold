@@ -152,14 +152,7 @@ class ResourcePlayerAudio extends Component {
 
   handleError = error => {
     const message = (
-      <Trans i18nKey="errors.audio_playback">
-        {{ error }}
-        <br />
-        This audio file is not playable in your browser.
-        <br />
-        <br />
-        Click the download button to listen to the file on your device.
-      </Trans>
+      <Trans i18nKey="errors.audio_playback" values={{ error }} />
     );
     this.setState({ error: message });
   };
