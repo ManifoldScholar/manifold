@@ -28,7 +28,7 @@
       "by_text": "Filter by text"
     },
     "default_options": {
-      "type": "Type:",
+      "type": "Type",
       "members": "All members",
       "sections": "All sections",
       "tag": "Tag:",

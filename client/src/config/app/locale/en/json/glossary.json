@@ -94,6 +94,10 @@
     "selection_other": "selections",
     "notes_title_case": "Notes",
     "result_one": "result",
-    "result_other": "results"
+    "result_other": "results",
+    "collection_one": "collection",
+    "collection_other": "collections",
+    "collection_title_case_one": "Collection",
+    "collection_title_case_other": "Collections"
   }
 }
