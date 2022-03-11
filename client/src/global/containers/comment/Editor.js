@@ -35,7 +35,7 @@ export class CommentEditor extends PureComponent {
     subject: PropTypes.object.isRequired,
     parentId: PropTypes.string,
     focus: PropTypes.bool,
-    t: PropTypes.bool
+    t: PropTypes.func
   };
 
   static defaultProps = {
