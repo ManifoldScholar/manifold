@@ -66,6 +66,11 @@
         "no_annotations_by_me": "You haven't annotated this text yet",
         "no_annotations_by_me_message": "Once you’ve highlighted or annotated a passage in this text, it will appear here. To annotate or highlight, select a passage from the text and click the appropriate button on the pop-up menu.",
         "my_notes": "My $t(glossary.notes_title_case)"
+      },
+      "return": {
+        "project_home": "$t(glossary.project_title_case_one) Home",
+        "issue_home": "$t(glossary.issue_truncated_title_case_one) Home",
+        "learn_more_about_manifold": "Learn more about <0>$t(app.manifold)</0>"
       }
     },
     "header": {
