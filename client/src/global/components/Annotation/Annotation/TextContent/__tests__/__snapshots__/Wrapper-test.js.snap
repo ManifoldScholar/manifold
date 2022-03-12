@@ -175,6 +175,9 @@ exports[`global/components/Annotation/Annotation/TextContent/Wrapper matches the
                 "visit": "Visit",
                 "zoom": "Zoom",
               },
+              "app": Object {
+                "manifold": "Manifold",
+              },
               "common": Object {
                 "about": "about",
                 "by": "by",
@@ -651,6 +654,7 @@ exports[`global/components/Annotation/Annotation/TextContent/Wrapper matches the
                 "browse_library": "$t(actions.browse) library",
                 "browse_projects": "$t(actions.browse) projects",
                 "library_links": "Library Links",
+                "menu": "Menu",
                 "reading_group": Object {
                   "annotations": "Notes + Comments",
                   "create": "Create New Group",
@@ -908,6 +912,11 @@ exports[`global/components/Annotation/Annotation/TextContent/Wrapper matches the
                     "share_selection": "$t(actions.share) $t(glossary.selection_one)",
                     "you_highlighted": "You Highlighted",
                   },
+                  "return": Object {
+                    "issue_home": "$t(glossary.issue_truncated_title_case_one) Home",
+                    "learn_more_about_manifold": "Learn more about <0>$t(app.manifold)</0>",
+                    "project_home": "$t(glossary.project_title_case_one) Home",
+                  },
                   "visibility": Object {
                     "all_reading_groups": "All $t(glossary.reading_group_title_case_other)",
                     "show_the_following": "Show the following:",
@@ -1038,6 +1047,9 @@ exports[`global/components/Annotation/Annotation/TextContent/Wrapper matches the
               "view_resource": "$t(actions.view) $t(glossary.resource_one)",
               "visit": "Visit",
               "zoom": "Zoom",
+            },
+            "app": Object {
+              "manifold": "Manifold",
             },
             "common": Object {
               "about": "about",
@@ -1515,6 +1527,7 @@ exports[`global/components/Annotation/Annotation/TextContent/Wrapper matches the
               "browse_library": "$t(actions.browse) library",
               "browse_projects": "$t(actions.browse) projects",
               "library_links": "Library Links",
+              "menu": "Menu",
               "reading_group": Object {
                 "annotations": "Notes + Comments",
                 "create": "Create New Group",
@@ -1771,6 +1784,11 @@ exports[`global/components/Annotation/Annotation/TextContent/Wrapper matches the
                   "reader_highlighted": "A Reader Highlighted",
                   "share_selection": "$t(actions.share) $t(glossary.selection_one)",
                   "you_highlighted": "You Highlighted",
+                },
+                "return": Object {
+                  "issue_home": "$t(glossary.issue_truncated_title_case_one) Home",
+                  "learn_more_about_manifold": "Learn more about <0>$t(app.manifold)</0>",
+                  "project_home": "$t(glossary.project_title_case_one) Home",
                 },
                 "visibility": Object {
                   "all_reading_groups": "All $t(glossary.reading_group_title_case_other)",
