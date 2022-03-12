@@ -28,10 +28,13 @@ class SourceSummary extends React.PureComponent {
   get source() {
     const { textTitle, textSectionTitle } = this.props.annotation.attributes;
     return (
-      <Trans i18nKey="messages.annotation_summary.source">
-        &quot{{ section: textSectionTitle }}&quot in{" "}
-        <i dangerouslySetInnerHTML={{ __html: textTitle }} />
-      </Trans>
+      <Trans
+        i18nKey="messages.annotation_summary.source"
+        components={{
+          text: <i dangerouslySetInnerHTML={{ __html: textTitle }} />
+        }}
+        values={{ section: textSectionTitle }}
+      />
     );
   }
 
@@ -87,12 +90,14 @@ class SourceSummary extends React.PureComponent {
         >
           <span className="annotation-selection__source-summary-text">
             {!this.shortened && (
-              <Trans i18nKey={this.action}>
-                {{ creator: this.creator }} annotated &quot
-                {{ section: textSectionTitle }}&quot in{" "}
-                <i dangerouslySetInnerHTML={{ __html: textTitle }} /> on{" "}
-                <FormattedDate date={annotation.attributes.createdAt} />
-              </Trans>
+              <Trans
+                i18nKey={this.action}
+                components={{
+                  text: <i dangerouslySetInnerHTML={{ __html: textTitle }} />,
+                  date: <FormattedDate date={annotation.attributes.createdAt} />
+                }}
+                values={{ creator: this.creator, section: textSectionTitle }}
+              />
             )}
             {this.shortened && this.source}
           </span>

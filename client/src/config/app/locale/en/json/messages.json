@@ -13,9 +13,9 @@
     "showing_resource": "Showing {{ type }} resource: {{ title }}",
     "unsaved_changes": "You may have unsaved changes. Do you want to leave without saving your changes?",
     "annotation_summary": {
-      "highlight": "{{creator}} highlighted \"{{section}}\" in <5></5> on <8></8>.",
-      "annotation": "{{creator}} annotated \"{{section}}\" in <5></5> on <8></8>.",
-      "source": "\"{{section}}\" in <4></4>"
+      "highlight": "{{creator}} highlighted \"{{section}}\" in <text></text> on <date></date>.",
+      "annotation": "{{creator}} annotated \"{{section}}\" in <text></text> on <date></date>.",
+      "source": "\"{{section}}\" in <0></0>"
     }
   }
 }
