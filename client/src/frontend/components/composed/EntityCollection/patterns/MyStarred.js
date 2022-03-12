@@ -61,9 +61,11 @@ function MyStarredEntityCollection({
         unit: t("glossary.item", { count: totalCount }),
         customTemplate: (count, unit) => (
           <span>
-            <Trans t={t} i18nKey="counts.my_starred" count={count}>
-              You have starred <strong>{{ count }}</strong> {{ unit }}
-            </Trans>
+            <Trans
+              i18nKey="counts.my_starred"
+              values={{ count, unit }}
+              components={[<strong />]}
+            />
           </span>
         )
       }}

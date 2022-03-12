@@ -8,39 +8,56 @@ function Index({ count, unit, categoryCount, uncategorized = 0 }) {
   if (categoryCount) {
     const categorized = count - uncategorized;
     if (!categorized) {
-      return (
-        <>
-          <Trans i18nKey="counts.empty_volume" count={categoryCount}>
-            There are <strong>{{ count: categoryCount }}</strong> empty volumes
-          </Trans>
-          {!!uncategorized && (
-            <Trans i18nKey="counts.uncategorized_issues" count={uncategorized}>
-              {" "}
-              and <strong> {{ count: uncategorized }}</strong> additional issue
-            </Trans>
-          )}
-        </>
+      return uncategorized ? (
+        <Trans
+          i18nKey="counts.empty_volume_and_issues"
+          values={{
+            count: categoryCount,
+            uncategorized: t("counts.uncategorized_issues", {
+              count: uncategorized
+            })
+          }}
+          components={[<strong />]}
+        />
+      ) : (
+        <Trans
+          i18nKey="counts.empty_volume"
+          values={{ count: categoryCount }}
+          components={[<strong />]}
+        />
       );
     }
-    return (
-      <>
-        <Trans i18nKey="counts.categorized_issues" count={categorized}>
-          There is <strong>{{ count: categorized }}</strong> issue in{" "}
-          <strong>{{ categoryCount }}</strong>
-          {{ volume: t("glossary.volume", { count: categoryCount }) }}
-        </Trans>
-        {!!uncategorized && (
-          <Trans i18nKey="counts.uncategorized_issues" count={uncategorized}>
-            and <strong>{{ count: uncategorized }}</strong> additional issue
-          </Trans>
-        )}
-      </>
+    return uncategorized ? (
+      <Trans
+        i18nKey="counts.categorized_and_uncategorized_issues"
+        values={{
+          count: categorized,
+          categoryCount,
+          volume: t("glossary.volume", { count: categoryCount }),
+          uncategorized: t("counts.uncategorized_issues", {
+            count: uncategorized
+          })
+        }}
+        components={{ strong: <strong /> }}
+      />
+    ) : (
+      <Trans
+        i18nKey="counts.categorized_issues"
+        values={{
+          count: categorized,
+          categoryCount,
+          volume: t("glossary.volume", { count: categoryCount })
+        }}
+        components={{ strong: <strong /> }}
+      />
     );
   }
   return (
-    <Trans i18nKey="counts.default_issues" count={count}>
-      There is <strong>{{ count }}</strong> {{ unit }}
-    </Trans>
+    <Trans
+      i18nKey="counts.default_issues"
+      values={{ count, unit }}
+      components={[<strong />]}
+    />
   );
 }
 
