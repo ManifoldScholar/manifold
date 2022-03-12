@@ -4,6 +4,9 @@
     "es": "Spanish",
     "nl": "Dutch"
   },
+  "app": {
+    "manifold": "Manifold"
+  },
   "journals": {
     "volume_number": "Volume {{volNum}}",
     "issue_number": "Issue {{issNum}}",

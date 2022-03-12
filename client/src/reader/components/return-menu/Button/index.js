@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
+import { useTranslation } from "react-i18next";
 
 export default function ReturnMenuButton({ toggleReaderMenu, expanded }) {
   const onClick = e => {
     e.stopPropagation();
     toggleReaderMenu();
   };
+  const { t } = useTranslation();
 
   return (
     <Styled.Button
@@ -16,7 +18,7 @@ export default function ReturnMenuButton({ toggleReaderMenu, expanded }) {
       aria-expanded={expanded}
       $expanded={expanded}
     >
-      Menu
+      {t("navigation.menu")}
     </Styled.Button>
   );
 }

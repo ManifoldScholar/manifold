@@ -40,7 +40,8 @@
     "view_interactive_resource": "$t(actions.view) Interactive Resource",
     "see_all_issues": "$t(actions.see_all) $t(glossary.issue_truncated_other)",
     "see_all_volumes": "$t(actions.see_all) $t(glossary.volume_other)",
-    "back": "Back"
+    "back": "Back",
+    "menu": "Menu"
   },
   "external_links": {
     "view_on_social": "View this project on {{service}}",

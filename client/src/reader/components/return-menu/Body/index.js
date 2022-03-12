@@ -5,6 +5,7 @@ import { FrontendModeContext } from "helpers/contexts";
 import Authorize from "hoc/Authorize";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function ReturnMenuBody({
   returnUrl,
@@ -16,6 +17,7 @@ export default function ReturnMenuBody({
   const context = useContext(FrontendModeContext);
   const settings = useFromStore("settings", "select");
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
+  const { t } = useTranslation();
 
   return (
     <Styled.Menu aria-label="Site Navigation">
@@ -24,7 +26,9 @@ export default function ReturnMenuBody({
           <Styled.ItemLink to={returnUrl}>
             <Styled.LinkIcon icon="circleArrowLeft64" size={36.923} />
             <Styled.LinkText>
-              {isJournalArticle ? "Issue Home" : "Project Home"}
+              {isJournalArticle
+                ? t("reader.menus.return.issue_home")
+                : t("reader.menus.return.project_home")}
             </Styled.LinkText>
             <Styled.EntityTitle>{entityTitle}</Styled.EntityTitle>
           </Styled.ItemLink>
@@ -43,7 +47,9 @@ export default function ReturnMenuBody({
                 size={36.923}
               />
               <Styled.LinkText>
-                {isJournalArticle ? "Journals" : "Projects"}
+                {isJournalArticle
+                  ? t("glossary.journal_title_case_other")
+                  : t("glossary.project_title_case_other")}
               </Styled.LinkText>
             </Styled.ItemLink>
           </Styled.Item>
@@ -56,7 +62,7 @@ export default function ReturnMenuBody({
               data-id="toggle-overlay"
             >
               <Styled.LogoIcon icon="manifoldLogo32" size={28} />
-              <Styled.LinkText>Sign-in</Styled.LinkText>
+              <Styled.LinkText>{t("navigation.user.sign_in")}</Styled.LinkText>
             </Styled.SignInButton>
             {moreLink ? (
               <Styled.MoreLink
@@ -64,7 +70,10 @@ export default function ReturnMenuBody({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Learn More About <Styled.AppTitle>Manifold</Styled.AppTitle>
+                <Trans
+                  i18nKey="reader.menus.return.learn_more_about_manifold"
+                  components={[<Styled.AppTitle />]}
+                />
               </Styled.MoreLink>
             ) : null}
           </Styled.Item>
