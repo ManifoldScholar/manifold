@@ -616,6 +616,7 @@ exports[`frontend/components/resource-slide/Caption matches the snapshot 1`] = `
                 "browse_projects": "$t(actions.browse) projects",
                 "library_links": "Library Links",
                 "menu": "Menu",
+                "next_entity": "Next {{entity}}",
                 "reading_group": Object {
                   "annotations": "Notes + Comments",
                   "create": "Create New Group",
@@ -687,6 +688,7 @@ exports[`frontend/components/resource-slide/Caption matches the snapshot 1`] = `
                 "go_to_page": "Go to page {{number}}",
                 "next": "Next",
                 "next_slide": "Go to next slide",
+                "pagination": "Pagination",
                 "previous": "Previous",
                 "previous_short": "Prev",
                 "previous_slide": "Go to previous slide",
@@ -808,8 +810,10 @@ exports[`frontend/components/resource-slide/Caption matches the snapshot 1`] = `
                 "actions": Object {
                   "annotate_passage": "$t(actions.annotate) this passage",
                   "copy": "Copy",
+                  "manage_highlight": "Manage highlight or annotate text node \\"{{chunk}}\\".",
                   "return_to_reader": "Return to Reader",
                   "select_reading_group": "Select $t(glossary.reading_group_one)",
+                  "view_annotations": "View annotations for text node \\"{{chunk}}\\".",
                   "visit_resource_page": "$t(actions.visit) $t(glossary.resource_title_case_one) $t(common.page_title_case_one)",
                 },
                 "header": Object {
@@ -1489,6 +1493,7 @@ exports[`frontend/components/resource-slide/Caption matches the snapshot 1`] = `
               "browse_projects": "$t(actions.browse) projects",
               "library_links": "Library Links",
               "menu": "Menu",
+              "next_entity": "Next {{entity}}",
               "reading_group": Object {
                 "annotations": "Notes + Comments",
                 "create": "Create New Group",
@@ -1560,6 +1565,7 @@ exports[`frontend/components/resource-slide/Caption matches the snapshot 1`] = `
               "go_to_page": "Go to page {{number}}",
               "next": "Next",
               "next_slide": "Go to next slide",
+              "pagination": "Pagination",
               "previous": "Previous",
               "previous_short": "Prev",
               "previous_slide": "Go to previous slide",
@@ -1681,8 +1687,10 @@ exports[`frontend/components/resource-slide/Caption matches the snapshot 1`] = `
               "actions": Object {
                 "annotate_passage": "$t(actions.annotate) this passage",
                 "copy": "Copy",
+                "manage_highlight": "Manage highlight or annotate text node \\"{{chunk}}\\".",
                 "return_to_reader": "Return to Reader",
                 "select_reading_group": "Select $t(glossary.reading_group_one)",
+                "view_annotations": "View annotations for text node \\"{{chunk}}\\".",
                 "visit_resource_page": "$t(actions.visit) $t(glossary.resource_title_case_one) $t(common.page_title_case_one)",
               },
               "header": Object {
