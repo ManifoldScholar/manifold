@@ -64,7 +64,8 @@
     "next": "Next",
     "go_to_page": "Go to page {{number}}",
     "next_slide": "Go to next slide",
-    "previous_slide": "Go to previous slide"
+    "previous_slide": "Go to previous slide",
+    "pagination": "Pagination"
   },
   "dates": {
     "added": "added",
