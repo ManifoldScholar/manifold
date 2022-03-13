@@ -5,7 +5,9 @@
       "select_reading_group": "Select $t(glossary.reading_group_one)",
       "annotate_passage": "$t(actions.annotate) this passage",
       "visit_resource_page": "$t(actions.visit) $t(glossary.resource_title_case_one) $t(common.page_title_case_one)",
-      "return_to_reader": "Return to Reader"
+      "return_to_reader": "Return to Reader",
+      "manage_highlight": "Manage highlight or annotate text node \"{{chunk}}\".",
+      "view_annotations": "View annotations for text node \"{{chunk}}\"."
     },
     "menus": {
       "appearance": {

@@ -3,12 +3,14 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
+import { withTranslation } from "react-i18next";
 
-export default class Pagination extends Component {
+class Pagination extends Component {
   static propTypes = {
     text: PropTypes.object.isRequired,
     sectionId: PropTypes.string,
-    spine: PropTypes.array
+    spine: PropTypes.array,
+    t: PropTypes.func
   };
 
   getSiblingSection(id, shift) {
@@ -41,7 +43,9 @@ export default class Pagination extends Component {
             size={48}
             className="section-pagination__icon section-pagination__icon--previous"
           />
-          <span className="section-pagination__text">Previous</span>
+          <span className="section-pagination__text">
+            {this.props.t("pagination.previous")}
+          </span>
         </Link>
       );
     }
@@ -58,7 +62,9 @@ export default class Pagination extends Component {
           to={nextPath}
           className="section-pagination__link section-pagination__link--next"
         >
-          <span className="section-pagination__text">Next</span>
+          <span className="section-pagination__text">
+            {this.props.t("pagination.next")}
+          </span>
           <IconComposer
             icon="circleArrowRight64"
             size={48}
@@ -75,7 +81,10 @@ export default class Pagination extends Component {
     if (!text) return null;
 
     return (
-      <nav className="section-pagination" aria-label="Pagination">
+      <nav
+        className="section-pagination"
+        aria-label={this.props.t("pagination.pagination")}
+      >
         <div className="section-pagination__inner container flush">
           {this.getPreviousLink(text)}
           {this.getNextLink(text)}
@@ -84,3 +93,5 @@ export default class Pagination extends Component {
     );
   }
 }
+
+export default withTranslation()(Pagination);

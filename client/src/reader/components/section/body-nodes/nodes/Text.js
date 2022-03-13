@@ -6,8 +6,9 @@ import values from "lodash/values";
 import union from "lodash/union";
 import Notation from "reader/components/notation";
 import smoothScroll from "utils/smoothScroll";
+import { withTranslation } from "react-i18next";
 
-export default class TextNode extends Component {
+class TextNode extends Component {
   static propTypes = {
     content: PropTypes.string,
     openAnnotations: PropTypes.object,
@@ -15,7 +16,8 @@ export default class TextNode extends Component {
     textDigest: PropTypes.string,
     scrollToView: PropTypes.bool,
     scrollKey: PropTypes.string,
-    scrollAnnotation: PropTypes.string
+    scrollAnnotation: PropTypes.string,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -232,11 +234,11 @@ export default class TextNode extends Component {
   }
 
   ariaLabelForHighlight(chunk) {
-    return `Manage highlight or annotate text node “${chunk}”. `;
+    return this.props.t("reader.actions.manage_highlight", { chunk });
   }
 
   ariaLabelForAnnotation(chunk) {
-    return `View annotations for text node “${chunk}”.`;
+    return this.props.t("reader.actions.view_annotations", { chunk });
   }
 
   doScroll(withTimeout = false) {
@@ -274,3 +276,5 @@ export default class TextNode extends Component {
     );
   }
 }
+
+export default withTranslation()(TextNode);

@@ -2,13 +2,15 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
+import { withTranslation } from "react-i18next";
 
-export default class NextSection extends PureComponent {
+class NextSection extends PureComponent {
   static propTypes = {
     sectionsMap: PropTypes.array.isRequired,
     text: PropTypes.object.isRequired,
     sectionId: PropTypes.string.isRequired,
-    typography: PropTypes.object
+    typography: PropTypes.object,
+    t: PropTypes.func
   };
 
   getNextSectionName(map, sectionId) {
@@ -34,9 +36,11 @@ export default class NextSection extends PureComponent {
         className="section-next-section__link"
       >
         <header className="section-next-section__header">
-          {text.attributes.sectionKind
-            ? `Next ${text.attributes.sectionKind}`
-            : "Next Chapter"}
+          {this.props.t("navigation.next_entity", {
+            entity: text.attributes.sectionKind
+              ? text.attributes.sectionKind
+              : "Chapter"
+          })}
         </header>
         <div className="section-next-section__title">{nextSection.name}</div>
       </Link>
@@ -58,3 +62,5 @@ export default class NextSection extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(NextSection);
