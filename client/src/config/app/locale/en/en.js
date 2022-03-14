@@ -13,6 +13,7 @@ import pages from "./json/pages.json";
 import reader from "./json/reader.json";
 import utility from "./json/utility.json";
 import other from "./json/en.json";
+import { enUS } from "date-fns/locale";
 
 export default {
   translation: {
@@ -29,6 +30,7 @@ export default {
     ...navigation,
     ...pages,
     ...reader,
-    ...utility
+    ...utility,
+    date_fns: { ...enUS }
   }
 };

@@ -1,9 +1,8 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { format as formatDate, parseISO, formatDistance } from "date-fns";
-import es from "date-fns/locale/es";
-import nl from "date-fns/locale/nl";
 import isDate from "lodash/isDate";
 
 export default function FormattedDate({
@@ -13,16 +12,11 @@ export default function FormattedDate({
   suffix = false
 }) {
   const lng = useSelector(state => state.ui.persistent.locale.language);
-  const locale = useMemo(() => {
-    switch (lng) {
-      case "es":
-        return es;
-      case "nl":
-        return nl;
-      default:
-        return null;
-    }
-  }, [lng]);
+  const { i18n } = useTranslation();
+  const locale = useMemo(() => i18n.store.data[lng].translation.date_fns, [
+    lng,
+    i18n.store.data
+  ]);
 
   if (!date) return null;
 
@@ -43,7 +37,7 @@ export default function FormattedDate({
           addSuffix: suffix,
           locale
         });
-      return formatDate(parsedDate, format);
+      return formatDate(parsedDate, format, { locale });
     } catch {
       return "";
     }
