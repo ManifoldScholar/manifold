@@ -1,7 +1,6 @@
-import React, { useMemo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { format as formatDate, parseISO, formatDistance } from "date-fns";
 import isDate from "lodash/isDate";
 
@@ -11,12 +10,7 @@ export default function FormattedDate({
   prefix,
   suffix = false
 }) {
-  const lng = useSelector(state => state.ui.persistent.locale.language);
-  const { i18n } = useTranslation();
-  const locale = useMemo(() => i18n.store.data[lng].translation.date_fns, [
-    lng,
-    i18n.store.data
-  ]);
+  const { t } = useTranslation();
 
   if (!date) return null;
 
@@ -24,7 +18,9 @@ export default function FormattedDate({
 
   const dateTime = () => {
     try {
-      return formatDate(parsedDate, "P", { locale });
+      return formatDate(parsedDate, "P", {
+        locale: t("date_fns", { returnObjects: true })
+      });
     } catch {
       return "";
     }
@@ -35,9 +31,11 @@ export default function FormattedDate({
       if (format === "distanceInWords")
         return formatDistance(parsedDate, Date.now(), {
           addSuffix: suffix,
-          locale
+          locale: t("date_fns", { returnObjects: true })
         });
-      return formatDate(parsedDate, format, { locale });
+      return formatDate(parsedDate, format, {
+        locale: t("date_fns", { returnObjects: true })
+      });
     } catch {
       return "";
     }
