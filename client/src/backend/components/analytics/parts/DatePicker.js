@@ -61,7 +61,7 @@ function DatePicker({ parentId, inputId, value, onChange, label }) {
         onCalendarClose={() => setPickerOpen(false)}
         customInput={<CustomInput />}
         dropdownMode="scroll"
-        dateFormat="MM/dd/yyyy"
+        dateformat="P"
         popperContainer={({ children, className }) => (
           <div aria-hidden className={className}>
             {children}

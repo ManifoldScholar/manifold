@@ -110,7 +110,7 @@ export default class ResourceRow extends PureComponent {
         meta={
           <FormattedDate
             prefix="Created"
-            format="MMMM dd, yyyy"
+            format="PPP"
             date={this.createdAt}
           />
         }
