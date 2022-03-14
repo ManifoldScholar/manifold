@@ -177,24 +177,26 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
                 "yours": "yours",
               },
               "counts": Object {
-                "categorized_issues_one": "There is <1>{{count}}</1> issue in <4>{{categoryCount}}</4> {{volume}}",
-                "categorized_issues_other": "There are <1>{{count}}</1> issues in <4>{{categoryCount}}</4> {{volume}}",
+                "categorized_and_uncategorized_issues": "$t(counts.categorized_issues, {{count}}) {{uncategorized}}",
+                "categorized_issues_one": "There is <strong>{{count}}</strong> issue in <strong>{{categoryCount}}</strong> {{volume}}",
+                "categorized_issues_other": "There are <strong>{{count}}</strong> issues in <strong>{{categoryCount}}</strong> {{volume}}",
                 "comment_one": "{{count}} comment",
                 "comment_other": "{{count}} comments",
-                "default_issues_one": "There is <1>{{count}}</1> {{unit}}",
-                "default_issues_other": "There are <1>{{count}}</1> {{unit}}",
-                "empty_volume_one": "There is <1>{{count}}</1> empty volume.",
-                "empty_volume_other": "There are <1>{{count}}</1> empty volumes.",
+                "default_issues_one": "There is <0>{{count}}</0> {{unit}}",
+                "default_issues_other": "There are <0>{{count}}</0> {{unit}}",
+                "empty_volume_and_issues": "$t(counts.empty_volume, {{count}}) {{uncategorized}}",
+                "empty_volume_one": "There is <0>{{count}}</0> empty volume",
+                "empty_volume_other": "There are <1>{{count}}</1> empty volumes",
                 "entity_total": "Total {{entity}}",
                 "flag_one": "{{count}} flag",
                 "flag_other": "{{count}} flags",
-                "my_starred": "You have starred <1>{{count}}</1> {{ unit }}",
+                "my_starred": "You have starred <0>{{count}}</0> {{ unit }}",
                 "text_annotations_one": "This text has {{count}} annotation",
                 "text_annotations_other": "This text has {{count}} annotations",
                 "text_highlights_one": "This text has {{count}} highlight",
                 "text_highlights_other": "This text has {{count}} highlights",
-                "uncategorized_issues_one": " and <1>{{count}}</1> additional issue",
-                "uncategorized_issues_other": " and <1>{{count}}</1> additional issues",
+                "uncategorized_issues_one": " and <strong>{{count}}</strong> additional issue",
+                "uncategorized_issues_other": " and <strong>{{count}}</strong> additional issues",
               },
               "dates": Object {
                 "added": "added",
@@ -208,16 +210,16 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
                 "updated_title_case": "Updated",
               },
               "errors": Object {
-                "audio_playback": "{{ error }}<1/>This audio file is not playable in your browser.<3/><4/>Click the download button to listen to the file on your device.",
+                "audio_playback": "{{ error }}<br/>This audio file is not playable in your browser.<br/><br/>Click the download button to listen to the file on your device.",
                 "color_scheme": "Manifold color scheme error!",
                 "content_block": Object {
                   "default": "<0>Fix this content block.</0>",
                   "no_activity": "No activity has been recorded for this project. This warning will disappear once there is project activity.",
-                  "no_contents": "Specify a text to <1>fix this block</1>.",
-                  "no_markdown": "Add Markdown content to <1>fix this block</1>.",
+                  "no_contents": "Specify a text to <0>fix this block</0>.",
+                  "no_markdown": "Add Markdown content to <0>fix this block</0>.",
                   "no_metadata": "<0>Add project metadata</0> to fix this block.",
-                  "no_resources": "Add <1>resources</1> or <3>resource collections</3>to the project to fix this block.",
-                  "no_texts": "<0>Add texts to the project</0> or <2>adjust the block configuration</2> to fix this block.",
+                  "no_resources": "Add <0>resources</0> or <1>resource collections</1> to the project to fix this block.",
+                  "no_texts": "<0>Add texts to the project</0> or <1>adjust the block configuration</1> to fix this block.",
                 },
                 "fatal": Object {
                   "dismiss_link": "Try again.",
@@ -529,9 +531,9 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
               },
               "messages": Object {
                 "annotation_summary": Object {
-                  "annotation": "{{creator}} annotated \\"{{section}}\\" in <5></5> on <8></8>.",
-                  "highlight": "{{creator}} highlighted \\"{{section}}\\" in <5></5> on <8></8>.",
-                  "source": "\\"{{section}}\\" in <4></4>",
+                  "annotation": "{{creator}} annotated \\"{{section}}\\" in <text></text> on <date></date>.",
+                  "highlight": "{{creator}} highlighted \\"{{section}}\\" in <text></text> on <date></date>.",
+                  "source": "\\"{{section}}\\" in <0></0>",
                 },
                 "cannot_move_down": "Cannot move down. Item is already in the last category.",
                 "cannot_move_up": "Cannot move up. Item is already in the first category.",
@@ -601,7 +603,7 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
                 "year_suffix": "year suffix",
               },
               "modals": Object {
-                "collecting_search": "<0>Add content</0><1>{{heading}}</1><2>To add content to your Reading Group, search for it by keyword and type, when you have found content you wish to add, select the star icon for that item to add it to your group.</p>",
+                "collecting_search": "<0>Add content</0><1>{{heading}}</1><2>To add content to your Reading Group, search for it by keyword and type, when you have found content you wish to add, select the star icon for that item to add it to your group.</2>",
                 "remove_category_body": "Any items in this category will also be deleted.",
                 "remove_category_heading": "Are you sure you want to remove this category from your collection?",
               },
@@ -728,7 +730,7 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
                 "documentation_button_label": "Visit our documentation",
                 "journal_issues": Object {
                   "authorized": Object {
-                    "body": "But it’s easy to create new issues with Manifold. If you have backend access, <2>head to the backend</2> and first select <4>Add a New Journal</4>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <6>our documentation</6>.",
+                    "body": "But it’s easy to create new issues with Manifold. If you have backend access, <0>head to the backend</0> and first select <1>Add a New Journal</1>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <2>our documentation</2>.",
                     "title": "Oh no. There are no journal issues in this Manifold library.",
                   },
                   "unauthorized": Object {
@@ -738,7 +740,7 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
                 },
                 "journals": Object {
                   "authorized": Object {
-                    "body": "But it’s easy to create new journals with Manifold. If you have backend access, <2>head to the backend</2> and select <4>Add a New Journal</4>. For more help, you can learn about creating and publishing Manifold Issues in <7>our documentation</7>.",
+                    "body": "But it’s easy to create new journals with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Journal</1>. For more help, you can learn about creating and publishing Manifold Issues in <2>our documentation</2>.",
                     "title": "Oh no. There are no journals in this Manifold library.",
                   },
                   "unauthorized": Object {
@@ -754,7 +756,7 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
                 },
                 "project_collections": Object {
                   "authorized": Object {
-                    "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <3>head to the backend</3> and select <6>Add a New Project Collection</6>. For more help, you can learn about creating and publishing Manifold Project Collections <9>here</9>.",
+                    "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Project Collection</1>. For more help, you can learn about creating and publishing Manifold Project Collections <2>here</2>.",
                     "title": "Oh no. There are no project collections in this Manifold library.",
                   },
                   "unauthorized": Object {
@@ -768,7 +770,7 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
                 },
                 "projects": Object {
                   "authorized": Object {
-                    "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <1>head to the backend</1> and select <3>Add a New Project</3>. For more help, you can learn about creating and publishing Manifold Projects <5>here</5>.",
+                    "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Project</1>. For more help, you can learn about creating and publishing Manifold Projects <2>here</2>.",
                     "title": "On no. This Manifold library is empty.",
                   },
                   "unauthorized": Object {
@@ -1054,24 +1056,26 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
               "yours": "yours",
             },
             "counts": Object {
-              "categorized_issues_one": "There is <1>{{count}}</1> issue in <4>{{categoryCount}}</4> {{volume}}",
-              "categorized_issues_other": "There are <1>{{count}}</1> issues in <4>{{categoryCount}}</4> {{volume}}",
+              "categorized_and_uncategorized_issues": "$t(counts.categorized_issues, {{count}}) {{uncategorized}}",
+              "categorized_issues_one": "There is <strong>{{count}}</strong> issue in <strong>{{categoryCount}}</strong> {{volume}}",
+              "categorized_issues_other": "There are <strong>{{count}}</strong> issues in <strong>{{categoryCount}}</strong> {{volume}}",
               "comment_one": "{{count}} comment",
               "comment_other": "{{count}} comments",
-              "default_issues_one": "There is <1>{{count}}</1> {{unit}}",
-              "default_issues_other": "There are <1>{{count}}</1> {{unit}}",
-              "empty_volume_one": "There is <1>{{count}}</1> empty volume.",
-              "empty_volume_other": "There are <1>{{count}}</1> empty volumes.",
+              "default_issues_one": "There is <0>{{count}}</0> {{unit}}",
+              "default_issues_other": "There are <0>{{count}}</0> {{unit}}",
+              "empty_volume_and_issues": "$t(counts.empty_volume, {{count}}) {{uncategorized}}",
+              "empty_volume_one": "There is <0>{{count}}</0> empty volume",
+              "empty_volume_other": "There are <1>{{count}}</1> empty volumes",
               "entity_total": "Total {{entity}}",
               "flag_one": "{{count}} flag",
               "flag_other": "{{count}} flags",
-              "my_starred": "You have starred <1>{{count}}</1> {{ unit }}",
+              "my_starred": "You have starred <0>{{count}}</0> {{ unit }}",
               "text_annotations_one": "This text has {{count}} annotation",
               "text_annotations_other": "This text has {{count}} annotations",
               "text_highlights_one": "This text has {{count}} highlight",
               "text_highlights_other": "This text has {{count}} highlights",
-              "uncategorized_issues_one": " and <1>{{count}}</1> additional issue",
-              "uncategorized_issues_other": " and <1>{{count}}</1> additional issues",
+              "uncategorized_issues_one": " and <strong>{{count}}</strong> additional issue",
+              "uncategorized_issues_other": " and <strong>{{count}}</strong> additional issues",
             },
             "dates": Object {
               "added": "added",
@@ -1085,16 +1089,16 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
               "updated_title_case": "Updated",
             },
             "errors": Object {
-              "audio_playback": "{{ error }}<1/>This audio file is not playable in your browser.<3/><4/>Click the download button to listen to the file on your device.",
+              "audio_playback": "{{ error }}<br/>This audio file is not playable in your browser.<br/><br/>Click the download button to listen to the file on your device.",
               "color_scheme": "Manifold color scheme error!",
               "content_block": Object {
                 "default": "<0>Fix this content block.</0>",
                 "no_activity": "No activity has been recorded for this project. This warning will disappear once there is project activity.",
-                "no_contents": "Specify a text to <1>fix this block</1>.",
-                "no_markdown": "Add Markdown content to <1>fix this block</1>.",
+                "no_contents": "Specify a text to <0>fix this block</0>.",
+                "no_markdown": "Add Markdown content to <0>fix this block</0>.",
                 "no_metadata": "<0>Add project metadata</0> to fix this block.",
-                "no_resources": "Add <1>resources</1> or <3>resource collections</3>to the project to fix this block.",
-                "no_texts": "<0>Add texts to the project</0> or <2>adjust the block configuration</2> to fix this block.",
+                "no_resources": "Add <0>resources</0> or <1>resource collections</1> to the project to fix this block.",
+                "no_texts": "<0>Add texts to the project</0> or <1>adjust the block configuration</1> to fix this block.",
               },
               "fatal": Object {
                 "dismiss_link": "Try again.",
@@ -1406,9 +1410,9 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
             },
             "messages": Object {
               "annotation_summary": Object {
-                "annotation": "{{creator}} annotated \\"{{section}}\\" in <5></5> on <8></8>.",
-                "highlight": "{{creator}} highlighted \\"{{section}}\\" in <5></5> on <8></8>.",
-                "source": "\\"{{section}}\\" in <4></4>",
+                "annotation": "{{creator}} annotated \\"{{section}}\\" in <text></text> on <date></date>.",
+                "highlight": "{{creator}} highlighted \\"{{section}}\\" in <text></text> on <date></date>.",
+                "source": "\\"{{section}}\\" in <0></0>",
               },
               "cannot_move_down": "Cannot move down. Item is already in the last category.",
               "cannot_move_up": "Cannot move up. Item is already in the first category.",
@@ -1478,7 +1482,7 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
               "year_suffix": "year suffix",
             },
             "modals": Object {
-              "collecting_search": "<0>Add content</0><1>{{heading}}</1><2>To add content to your Reading Group, search for it by keyword and type, when you have found content you wish to add, select the star icon for that item to add it to your group.</p>",
+              "collecting_search": "<0>Add content</0><1>{{heading}}</1><2>To add content to your Reading Group, search for it by keyword and type, when you have found content you wish to add, select the star icon for that item to add it to your group.</2>",
               "remove_category_body": "Any items in this category will also be deleted.",
               "remove_category_heading": "Are you sure you want to remove this category from your collection?",
             },
@@ -1605,7 +1609,7 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
               "documentation_button_label": "Visit our documentation",
               "journal_issues": Object {
                 "authorized": Object {
-                  "body": "But it’s easy to create new issues with Manifold. If you have backend access, <2>head to the backend</2> and first select <4>Add a New Journal</4>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <6>our documentation</6>.",
+                  "body": "But it’s easy to create new issues with Manifold. If you have backend access, <0>head to the backend</0> and first select <1>Add a New Journal</1>. Once you’ve created a journal, you can add new issues to it, or turn existing projects into journal issues. For more help, you can learn about creating and publishing Manifold Issues in <2>our documentation</2>.",
                   "title": "Oh no. There are no journal issues in this Manifold library.",
                 },
                 "unauthorized": Object {
@@ -1615,7 +1619,7 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
               },
               "journals": Object {
                 "authorized": Object {
-                  "body": "But it’s easy to create new journals with Manifold. If you have backend access, <2>head to the backend</2> and select <4>Add a New Journal</4>. For more help, you can learn about creating and publishing Manifold Issues in <7>our documentation</7>.",
+                  "body": "But it’s easy to create new journals with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Journal</1>. For more help, you can learn about creating and publishing Manifold Issues in <2>our documentation</2>.",
                   "title": "Oh no. There are no journals in this Manifold library.",
                 },
                 "unauthorized": Object {
@@ -1631,7 +1635,7 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
               },
               "project_collections": Object {
                 "authorized": Object {
-                  "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <3>head to the backend</3> and select <6>Add a New Project Collection</6>. For more help, you can learn about creating and publishing Manifold Project Collections <9>here</9>.",
+                  "body": "But it’s easy to create new project collections with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Project Collection</1>. For more help, you can learn about creating and publishing Manifold Project Collections <2>here</2>.",
                   "title": "Oh no. There are no project collections in this Manifold library.",
                 },
                 "unauthorized": Object {
@@ -1645,7 +1649,7 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
               },
               "projects": Object {
                 "authorized": Object {
-                  "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <1>head to the backend</1> and select <3>Add a New Project</3>. For more help, you can learn about creating and publishing Manifold Projects <5>here</5>.",
+                  "body": "But it’s easy to create and publish projects with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Project</1>. For more help, you can learn about creating and publishing Manifold Projects <2>here</2>.",
                   "title": "On no. This Manifold library is empty.",
                 },
                 "unauthorized": Object {
