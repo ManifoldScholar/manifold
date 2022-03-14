@@ -91,18 +91,22 @@ function JournalDetailContainer({ journal }) {
       <EntityCollection.JournalIssues
         issues={issues}
         journal={journal}
-        countProps={{
-          count: journalIssuesCount,
-          unit: t("glossary.issue", { count: journalIssuesCount }),
-          customTemplate: (count, unit) => (
-            <Journal.IssueCount
-              count={count}
-              unit={unit}
-              categoryCount={journalVolumesCount}
-              uncategorized={journalIssuesWithoutVolumeCount}
-            />
-          )
-        }}
+        countProps={
+          !journalVolumesCount
+            ? {
+                count: journalIssuesCount,
+                unit: t("glossary.issue", { count: journalIssuesCount }),
+                customTemplate: (count, unit) => (
+                  <Journal.IssueCount
+                    count={count}
+                    unit={unit}
+                    categoryCount={journalVolumesCount}
+                    uncategorized={journalIssuesWithoutVolumeCount}
+                  />
+                )
+              }
+            : null
+        }
         FooterComponent={() => (
           <FooterLink
             to={lh.link("frontendJournalAllIssues", slug)}
