@@ -198,6 +198,36 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
                 "uncategorized_issues_one": " and <strong>{{count}}</strong> additional issue",
                 "uncategorized_issues_other": " and <strong>{{count}}</strong> additional issues",
               },
+              "date_fns": Object {
+                "code": "en-US",
+                "formatDistance": [Function],
+                "formatLong": Object {
+                  "date": [Function],
+                  "dateTime": [Function],
+                  "time": [Function],
+                },
+                "formatRelative": [Function],
+                "localize": Object {
+                  "day": [Function],
+                  "dayPeriod": [Function],
+                  "era": [Function],
+                  "month": [Function],
+                  "ordinalNumber": [Function],
+                  "quarter": [Function],
+                },
+                "match": Object {
+                  "day": [Function],
+                  "dayPeriod": [Function],
+                  "era": [Function],
+                  "month": [Function],
+                  "ordinalNumber": [Function],
+                  "quarter": [Function],
+                },
+                "options": Object {
+                  "firstWeekContainsDate": 1,
+                  "weekStartsOn": 0,
+                },
+              },
               "dates": Object {
                 "added": "added",
                 "ago": "ago",
@@ -1076,6 +1106,36 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
               "text_highlights_other": "This text has {{count}} highlights",
               "uncategorized_issues_one": " and <strong>{{count}}</strong> additional issue",
               "uncategorized_issues_other": " and <strong>{{count}}</strong> additional issues",
+            },
+            "date_fns": Object {
+              "code": "en-US",
+              "formatDistance": [Function],
+              "formatLong": Object {
+                "date": [Function],
+                "dateTime": [Function],
+                "time": [Function],
+              },
+              "formatRelative": [Function],
+              "localize": Object {
+                "day": [Function],
+                "dayPeriod": [Function],
+                "era": [Function],
+                "month": [Function],
+                "ordinalNumber": [Function],
+                "quarter": [Function],
+              },
+              "match": Object {
+                "day": [Function],
+                "dayPeriod": [Function],
+                "era": [Function],
+                "month": [Function],
+                "ordinalNumber": [Function],
+                "quarter": [Function],
+              },
+              "options": Object {
+                "firstWeekContainsDate": 1,
+                "weekStartsOn": 0,
+              },
             },
             "dates": Object {
               "added": "added",
