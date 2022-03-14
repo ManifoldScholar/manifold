@@ -11,6 +11,7 @@ import EntitiesList, {
   ResourceCollectionRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { keywordFilter } from "hoc/withFilteredLists";
+import { Translation } from "react-i18next";
 
 const { request } = entityStoreActions;
 const perPage = 5;
@@ -143,38 +144,46 @@ export class NotationPickerContainerImplementation extends PureComponent {
     } = this.composeProps(this.state.context, this.props);
 
     return (
-      <section role="search">
-        <div onMouseDown={this.handleMouseDown} role="presentation">
-          <Utility.Toggle
-            handleToggle={this.handleContextClick}
-            selected={this.state.context}
-            label="options"
-            optionOne={{
-              label: "resources",
-              icon: "resource24"
-            }}
-            optionTwo={{
-              label: "collections",
-              icon: "resourceCollection64"
-            }}
-          />
-          <EntitiesList
-            entityComponent={entityComponent}
-            entities={entities}
-            unit={singularUnit}
-            pagination={pagination}
-            callbacks={{
-              onPageClick: this.pageChangeHandlerCreator
-            }}
-            entityComponentProps={{
-              onRowClick: this.props.selectionHandler
-            }}
-            search={
-              <Search {...this.props.entitiesListSearchProps("notations")} />
-            }
-          />
-        </div>
-      </section>
+      <Translation>
+        {t => (
+          <section role="search">
+            <div onMouseDown={this.handleMouseDown} role="presentation">
+              <Utility.Toggle
+                handleToggle={this.handleContextClick}
+                selected={this.state.context}
+                label="options"
+                optionOne={{
+                  translatedLabel: t("glossary.resource_other"),
+                  label: "resources",
+                  icon: "resource24"
+                }}
+                optionTwo={{
+                  translatedLabel: t("glossary.collection_other"),
+                  label: "collections",
+                  icon: "resourceCollection64"
+                }}
+              />
+              <EntitiesList
+                entityComponent={entityComponent}
+                entities={entities}
+                unit={singularUnit}
+                pagination={pagination}
+                callbacks={{
+                  onPageClick: this.pageChangeHandlerCreator
+                }}
+                entityComponentProps={{
+                  onRowClick: this.props.selectionHandler
+                }}
+                search={
+                  <Search
+                    {...this.props.entitiesListSearchProps("notations")}
+                  />
+                }
+              />
+            </div>
+          </section>
+        )}
+      </Translation>
     );
   }
 }

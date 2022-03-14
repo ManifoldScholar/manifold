@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import groupBy from "lodash/groupBy";
 import isEqual from "lodash/isEqual";
@@ -99,10 +100,16 @@ function ReaderFullNotesContainer({
     return rgms?.length ? rgms : [];
   }
 
+  const { t } = useTranslation();
+
   function getOverlayPropsForGroup() {
     return {
-      title: readingGroup === "me" ? "My Notes" : readingGroup.attributes.name,
-      subtitle: readingGroup === "me" ? null : "All notes for group:",
+      title:
+        readingGroup === "me"
+          ? t("reader.menus.notes.my_notes")
+          : readingGroup.attributes.name,
+      subtitle:
+        readingGroup === "me" ? null : t("reader.menus.notes.all_notes"),
       icon: readingGroup === "me" ? "notes24" : "readingGroup24"
     };
   }

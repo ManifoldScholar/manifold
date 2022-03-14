@@ -68,7 +68,9 @@ class Toggle extends Component {
             className="button-switch-primary__icon"
           />
         )}
-        <span className="button-switch-primary__label">{option.label}</span>
+        <span className="button-switch-primary__label">
+          {option.translatedLabel ? option.translatedLabel : option.label}
+        </span>
         <input
           type="radio"
           id={`${id}-${option.label}`}

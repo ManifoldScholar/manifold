@@ -5,6 +5,7 @@ import Overlay from "global/components/Overlay";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import withSearch from "hoc/withSearch";
+import { withTranslation } from "react-i18next";
 
 class SearchContainer extends PureComponent {
   static displayName = "Reader.SearchContainer";
@@ -20,7 +21,8 @@ class SearchContainer extends PureComponent {
     setQueryState: PropTypes.func.isRequired,
     setPage: PropTypes.func.isRequired,
     text: PropTypes.object,
-    section: PropTypes.object
+    section: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -30,8 +32,11 @@ class SearchContainer extends PureComponent {
 
   get facets() {
     return [
-      { label: "Full Text", value: "TextSection" },
-      { label: "Annotations", value: "Annotation" }
+      { label: this.props.t("reader.full_text"), value: "TextSection" },
+      {
+        label: this.props.t("glossary.annotation_title_case_other"),
+        value: "Annotation"
+      }
     ];
   }
 
@@ -66,7 +71,7 @@ class SearchContainer extends PureComponent {
       <Overlay
         triggerScrollToTop={this.searchNum}
         closeCallback={this.close}
-        title={"Search Results"}
+        title={this.props.t("search.results")}
         icon={"search24"}
         contentWidth={850}
         appearance="overlay-full bg-white"
@@ -98,4 +103,4 @@ class SearchContainer extends PureComponent {
   }
 }
 
-export default withSearch(SearchContainer);
+export default withTranslation()(withSearch(SearchContainer));

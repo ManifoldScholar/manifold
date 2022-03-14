@@ -28,7 +28,7 @@ class DrawerWrapper extends PureComponent {
     connected: PropTypes.bool.isRequired,
     open: PropTypes.bool,
     children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-    title: PropTypes.string,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     icon: PropTypes.string,
     identifier: PropTypes.string,
     closeUrl: PropTypes.string,
@@ -251,7 +251,9 @@ class DrawerWrapper extends PureComponent {
                 )}
                 {props.title && (
                   <span id={headerId} className="drawer-bar__title-text">
-                    {props.title}
+                    {typeof props.title === "object"
+                      ? t(props.title.key)
+                      : props.title}
                   </span>
                 )}
               </div>
