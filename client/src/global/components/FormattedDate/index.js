@@ -47,7 +47,6 @@ export default function FormattedDate({
     return prefix ? `${prefix} ${dateStr}` : dateStr;
   };
 
-  if (!date) return null;
   return <time dateTime={dateTime()}>{addPrefix(formatDateString())}</time>;
 }
 
