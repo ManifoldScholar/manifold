@@ -23,6 +23,7 @@ import HeadContent from "global/components/HeadContent";
 import values from "lodash/values";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import withSettings from "hoc/withSettings";
+import { withTranslation } from "react-i18next";
 
 const { request, flush } = entityStoreActions;
 
@@ -66,7 +67,8 @@ export class SectionContainer extends Component {
     dispatch: PropTypes.func.isRequired,
     text: PropTypes.object.isRequired,
     appearance: PropTypes.object.isRequired,
-    authentication: PropTypes.object
+    authentication: PropTypes.object,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -210,7 +212,9 @@ export class SectionContainer extends Component {
       metaTitle = `\u201c${parts[0]}\u201d in \u201c${parts[1]}\u201d on ${append}`;
     let sectionDescription = text.attributes.description;
     if (!sectionDescription)
-      sectionDescription = `Start reading this text on ${append}.`;
+      sectionDescription = this.props.t("reader.section_description", {
+        appName: append
+      });
 
     return (
       <>
@@ -249,4 +253,6 @@ export class SectionContainer extends Component {
   }
 }
 
-export default connectAndFetch(withSettings(SectionContainer));
+export default withTranslation()(
+  connectAndFetch(withSettings(SectionContainer))
+);

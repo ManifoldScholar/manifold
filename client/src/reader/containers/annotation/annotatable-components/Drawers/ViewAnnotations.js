@@ -6,7 +6,7 @@ export default class ViewAnnotations extends PureComponent {
   static drawerProps = () => {
     return {
       icon: "comment32",
-      title: "Annotations"
+      title: { key: "glossary.annotation_title_case_other" } // Passing the translation key to the drawer wrapper (client/src/global/components/drawer/Wrapper.js), temporary fix until this component can undergo a refacter
     };
   };
 

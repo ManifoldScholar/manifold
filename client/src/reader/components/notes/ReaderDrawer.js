@@ -34,7 +34,7 @@ class ReaderDrawer extends PureComponent {
       lockScroll: "always",
       includeDrawerFrontMatter: true,
       focusTrap: false,
-      title: this.props.t("glossary.notes_title_case"),
+      title: this.props.t("glossary.note_title_case_other"),
       closeCallback: this.props.closeCallback
     };
 

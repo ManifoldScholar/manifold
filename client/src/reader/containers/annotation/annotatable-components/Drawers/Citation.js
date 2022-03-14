@@ -6,7 +6,7 @@ export default class Citation extends PureComponent {
   static drawerProps = () => {
     return {
       icon: "share24",
-      title: "Share"
+      title: { key: "actions.share" } // Passing the translation key to the drawer wrapper (client/src/global/components/drawer/Wrapper.js), temporary fix until this component can undergo a refacter
     };
   };
 

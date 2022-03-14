@@ -214,7 +214,7 @@ class Header extends Component {
                     <ControlMenu.Button
                       onClick={this.panelToggleHandler("notes")}
                       icon="notes24"
-                      label={this.props.t("glossary.notes_title_case")}
+                      label={this.props.t("glossary.note_title_case_other")}
                       active={this.props.visibility.uiPanels.notes}
                     />
                   </li>
