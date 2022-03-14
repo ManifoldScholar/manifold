@@ -58,7 +58,7 @@ export default class List extends Component {
       return (
         <Styled.ListItem key={key}>
           <Item label={key}>
-            <FormattedDate format="MMMM dd, yyyy" date={value} />
+            <FormattedDate format="PPP" date={value} />
           </Item>
         </Styled.ListItem>
       );

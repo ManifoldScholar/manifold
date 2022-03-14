@@ -78,7 +78,7 @@ export default class ResourceCollectionRow extends PureComponent {
           !this.isInWell && (
             <FormattedDate
               prefix="Created"
-              format="MMMM dd, yyyy"
+              format="PPP"
               date={this.createdAt}
             />
           )
