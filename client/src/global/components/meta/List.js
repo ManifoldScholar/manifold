@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import DOI from "global/components/meta/DOI";
 import Item from "global/components/meta/Item";
@@ -7,14 +8,15 @@ import endsWith from "lodash/endsWith";
 import FormattedDate from "global/components/FormattedDate";
 import * as Styled from "./styles";
 
-export default class List extends Component {
+class List extends Component {
   static displayName = "Meta.List";
 
   static propTypes = {
     metadata: PropTypes.object,
     level: PropTypes.string,
     map: PropTypes.array,
-    sortByLength: PropTypes.bool
+    sortByLength: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -76,7 +78,7 @@ export default class List extends Component {
 
     return (
       <Styled.ListItem key={doi}>
-        <DOI label={"doi"} doi={doi} />
+        <DOI label={this.props.t("metadata.doi")} doi={doi} />
       </Styled.ListItem>
     );
   }
@@ -133,3 +135,5 @@ export default class List extends Component {
     return this.renderSortedByLength();
   }
 }
+
+export default withTranslation()(List);

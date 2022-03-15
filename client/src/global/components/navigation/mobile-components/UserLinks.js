@@ -1,17 +1,19 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import Avatar from "global/components/avatar";
 import Link from "./Link";
 
-export default class UserLinks extends PureComponent {
+class UserLinks extends PureComponent {
   static propTypes = {
     authentication: PropTypes.object,
     commonActions: PropTypes.object.isRequired,
     backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     history: PropTypes.object.isRequired,
-    closeNavigation: PropTypes.func.isRequired
+    closeNavigation: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   get canAccessReadingGroups() {
@@ -41,6 +43,8 @@ export default class UserLinks extends PureComponent {
 
   /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
+    const t = this.props.t;
+
     if (!this.props.authentication.authenticated)
       return (
         <ul className="nested-nav__list nested-nav__list--user-links">
@@ -52,11 +56,13 @@ export default class UserLinks extends PureComponent {
             >
               <div className="nested-nav__grid-item">
                 <Avatar />
-                <span className="nested-nav__button-text">Login</span>
+                <span className="nested-nav__button-text">
+                  {t("navigation.user.login")}
+                </span>
               </div>
             </button>
             <span id="user-menu-login-mobile" className="screen-reader-text">
-              Login to Manifold
+              {t("navigation.user.login_to_manifold")}
             </span>
           </li>
         </ul>
@@ -66,7 +72,7 @@ export default class UserLinks extends PureComponent {
 
     return (
       <ul
-        aria-label="User Links"
+        aria-label={t("navigation.user_links")}
         className="nested-nav__list nested-nav__list--user-links"
       >
         <li className="nested-nav__item">
@@ -88,7 +94,7 @@ export default class UserLinks extends PureComponent {
         {!!currentUser && (
           <Link
             to={lh.link("frontendStarred")}
-            title="My Starred"
+            title={t("pages.frontend.my_starred")}
             icon="star24"
             onClick={() => this.props.closeNavigation()}
           />
@@ -97,13 +103,13 @@ export default class UserLinks extends PureComponent {
           <>
             <Link
               to={lh.link("frontendAnnotations")}
-              title="My Notes + Comments"
+              title={t("pages.frontend.my_notes")}
               icon="notes24"
               onClick={() => this.props.closeNavigation()}
             />
             <Link
               to={lh.link("frontendMyReadingGroups")}
-              title="My Reading Groups"
+              title={t("pages.frontend.my_groups")}
               icon="annotationGroup24"
               onClick={() => this.props.closeNavigation()}
             />
@@ -111,21 +117,21 @@ export default class UserLinks extends PureComponent {
         )}
         <Link
           to={lh.link("subscriptions")}
-          title="Notifications"
-          srTitle="Edit my notification settings"
+          title={t("navigation.user.notifications")}
+          srTitle={t("navigation.user.notifications_sr_title")}
           icon="notifications24"
           onClick={() => this.props.closeNavigation()}
         />
         <Link
           as="button"
-          title="Edit Profile"
-          srTitle="Edit my profile"
+          title={t("navigation.user.edit_profile")}
+          srTitle={t("navigation.user.edit_profile_sr_title")}
           icon="editProfile24"
           onClick={this.handleProfileClick}
         />
         <Link
           as="button"
-          title="Logout"
+          title={t("navigation.user.logout")}
           icon="logout24"
           onClick={this.handleLogOutClick}
         />
@@ -135,3 +141,5 @@ export default class UserLinks extends PureComponent {
   }
   /* eslint-enable jsx-a11y/anchor-is-valid */
 }
+
+export default withTranslation()(UserLinks);

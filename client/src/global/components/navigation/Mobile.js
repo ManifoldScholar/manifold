@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { NavLink, withRouter, matchPath } from "react-router-dom";
 import classnames from "classnames";
+import { withTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import memoize from "lodash/memoize";
 import UserLinks from "./mobile-components/UserLinks";
@@ -24,7 +25,8 @@ export class NavigationMobile extends Component {
     commonActions: PropTypes.object.isRequired,
     backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
-    style: PropTypes.object
+    style: PropTypes.object,
+    t: PropTypes.func
   };
 
   static contextType = FrontendModeContext;
@@ -211,6 +213,7 @@ export class NavigationMobile extends Component {
       "nested-nav__item--nested": hasChildren,
       "nested-nav__item--open": expanded
     });
+    const t = this.props.t;
 
     return (
       <li key={`${link.label}-${index}`} className={wrapperClasses}>
@@ -225,7 +228,9 @@ export class NavigationMobile extends Component {
             aria-expanded={expanded}
           >
             <span className="screen-reader-text">
-              {`${expanded ? "Close" : "Open"} submenu`}
+              {expanded
+                ? t("navigation.mobile.close_submenu")
+                : t("navigation.mobile.open_submenu")}
             </span>
             <IconComposer
               icon="disclosureDown16"
@@ -291,6 +296,7 @@ export class NavigationMobile extends Component {
       "nested-nav--open": this.state.open,
       "nested-nav--dark": this.props.mode === "backend"
     });
+    const { t } = this.props;
 
     return (
       <>
@@ -300,7 +306,10 @@ export class NavigationMobile extends Component {
             location={this.props.location}
           />
         )}
-        <nav className={navClasses} aria-label="Mobile Navigation">
+        <nav
+          className={navClasses}
+          aria-label={t("navigation.mobile.aria_label")}
+        >
           {this.state.open && this.renderNavigationMenu()}
         </nav>
         <button
@@ -310,7 +319,9 @@ export class NavigationMobile extends Component {
           aria-expanded={this.state.open}
         >
           <span className="screen-reader-text">
-            {`${this.state.open ? "Close" : "Open"} mobile navigation menu`}
+            {this.state.open
+              ? t("navigation.mobile.toggle_closed")
+              : t("navigation.mobile.toggle_open")}
           </span>
           <IconComposer
             icon={this.triggerIcon}
@@ -323,4 +334,4 @@ export class NavigationMobile extends Component {
   }
 }
 
-export default withRouter(NavigationMobile);
+export default withTranslation()(withRouter(NavigationMobile));

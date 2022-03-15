@@ -4,10 +4,17 @@
       "sign_in": "Sign In",
       "sign_out": "Sign Out",
       "log_in": "Log In",
+      "login": "Login",
+      "login_to_manifold": "$(t.user.navigation.login) to Manifold",
       "log_out": "Log Out",
+      "logout": "Logout",
       "my_starred": "My Starred",
       "my_notes_comments": "My Notes + Comments",
-      "back": "Back"
+      "back": "Back",
+      "notifications": "Notifications",
+      "notifications_sr_title": "Edit my notification settings",
+      "edit_profile": "Edit Profile",
+      "edit_profile_sr_title": "Edit my profile"
     },
     "reading_group": {
       "label": "Reading group subpages",
@@ -28,6 +35,20 @@
       "all_project_collections": "All $t(glossary.project_collection_other)",
       "all_projects": "All $t(glossary.project_other)"
     },
+    "mobile": {
+      "aria_label": "Mobile Navigation",
+      "toggle_open": "$t(actions.open) mobile navigation menu",
+      "toggle_closed": "$t(actions.close) mobile navigation menu",
+      "open_submenu": "$t(actions.open) submenu",
+      "close_submenu": "$t(actions.close) submenu"
+    },
+    "backend": {
+      "enter_admin": "Enter Admin Mode",
+      "exit_admin": "Exit Admin Mode",
+      "enter_editor": "Enter Editor Mode",
+      "exit_editor": "Exit Editor Mode",
+      "exit_author": "Exit Author Mode"
+    },
     "library_links": "Library Links",
     "browse_library": "$t(actions.browse) library",
     "browse_projects": "$t(actions.browse) projects",
@@ -42,7 +63,10 @@
     "see_all_volumes": "$t(actions.see_all) $t(glossary.volume_other)",
     "back": "Back",
     "menu": "Menu",
-    "next_entity": "Next {{entity}}"
+    "next_entity": "Next {{entity}}",
+    "primary": "Primary Navigation",
+    "page_links": "Page Links",
+    "user_links": "User Links"
   },
   "external_links": {
     "view_on_social": "View this project on {{service}}",

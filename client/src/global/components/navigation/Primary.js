@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Static from "global/components/navigation/Static";
 import Mobile from "global/components/navigation/Mobile";
 import { Link, withRouter } from "react-router-dom";
@@ -17,7 +18,8 @@ export class NavigationPrimary extends PureComponent {
     mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
     exact: PropTypes.bool,
     desktopStyle: PropTypes.object,
-    mobileStyle: PropTypes.object
+    mobileStyle: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -26,16 +28,17 @@ export class NavigationPrimary extends PureComponent {
 
   backendButtonLabel(currentUser, mode) {
     if (!currentUser) return null;
+    const t = this.props.t;
 
     if (mode === "backend") {
       switch (currentUser.attributes.kind) {
         case "project_editor":
         case "project_resource_editor":
-          return "Exit Editor Mode";
+          return t("navigation.backend.exit_editor");
         case "project_author":
-          return "Exit Author Mode";
+          return t("navigation.backend.exit_author");
         default:
-          return "Exit Admin Mode";
+          return t("navigation.backend.exit_admin");
       }
     } else {
       switch (currentUser.attributes.kind) {
@@ -43,10 +46,10 @@ export class NavigationPrimary extends PureComponent {
         case "editor":
         case "project_creator":
         case "marketeer":
-          return "Enter Admin Mode";
+          return t("navigation.backend.enter_admin");
         case "project_editor":
         case "project_resource_editor":
-          return "Enter Editor Mode";
+          return t("navigation.backend.enter_editor");
         case "project_author": // For now authors will not have access to the backend
         default:
           return null;
@@ -87,4 +90,4 @@ export class NavigationPrimary extends PureComponent {
   }
 }
 
-export default withRouter(NavigationPrimary);
+export default withTranslation()(withRouter(NavigationPrimary));
