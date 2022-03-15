@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import SearchMenu from "global/components/search/menu";
 import UserMenuButton from "global/components/UserMenuButton";
@@ -25,7 +26,8 @@ export class NavigationStatic extends PureComponent {
     mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
     exact: PropTypes.bool,
     style: PropTypes.object,
-    darkTheme: PropTypes.bool
+    darkTheme: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static contextType = FrontendModeContext;
@@ -104,14 +106,15 @@ export class NavigationStatic extends PureComponent {
 
   renderSearch(props) {
     if (props.mode === "backend") return null;
+    const t = this.props.t;
 
     const scopeToProject =
       this.context.isStandalone ||
       Boolean(this.isLibraryDisabled && this.context.project);
 
     const description = scopeToProject
-      ? "Search across all project content"
-      : "Search across all content and projects";
+      ? t("utility.search.description_project_scope")
+      : t("utility.search.description_full_scope");
     const projectId = scopeToProject ? this.context.project.id : null;
 
     return (
@@ -139,10 +142,11 @@ export class NavigationStatic extends PureComponent {
   }
 
   renderUserMenu(props) {
+    const t = this.props.t;
     return (
       <nav className={this.userMenuClasses}>
         <ul
-          aria-label="User Links"
+          aria-label={t("navigation.user_links")}
           style={this.props.style}
           className="user-nav__list"
         >
@@ -176,10 +180,11 @@ export class NavigationStatic extends PureComponent {
   }
 
   renderSiteNav() {
+    const t = this.props.t;
     return (
-      <nav className={this.siteNavClasses} aria-label="Primary Navigation">
+      <nav className={this.siteNavClasses} aria-label={t("navigation.primary")}>
         <ul
-          aria-label="Page Links"
+          aria-label={t("navigation.page_links")}
           style={this.props.style}
           className="site-nav__list"
         >
@@ -211,4 +216,4 @@ export class NavigationStatic extends PureComponent {
   }
 }
 
-export default withRouter(withSettings(NavigationStatic));
+export default withTranslation()(withRouter(withSettings(NavigationStatic)));

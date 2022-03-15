@@ -8,7 +8,9 @@
     "no_results": "No results were found.",
     "show_all_excerpts": "Show all excerpts",
     "show_only_relevant": "Only show most relevant excerpts",
-    "annotation_title": "{{name}} <2>annotated</2> {{entity}}"
+    "annotation_title": "{{name}} <2>annotated</2> {{entity}}",
+    "description_project_scope": "Search across all project content",
+    "description_full_scope": "Search across all content and projects"
   },
   "filters": {
     "featured_projects": "Featured $t(glossary.project_other)",
