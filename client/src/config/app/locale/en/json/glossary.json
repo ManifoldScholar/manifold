@@ -132,6 +132,10 @@
     "export_one": "export",
     "export_other": "exports",
     "change_one": "change",
-    "change_other": "changes"
+    "change_other": "changes",
+    "citation_one": "citation",
+    "citation_other": "citations",
+    "citation_title_case_one": "Citation",
+    "citation_title_case_other": "Citations"
   }
 }

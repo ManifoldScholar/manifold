@@ -4,15 +4,17 @@ import Block from "../Block";
 import Table from "../parts/Table";
 import ProjectRow from "../parts/ProjectRow";
 import lh from "helpers/linkHandler";
+import { withTranslation } from "react-i18next";
 
-export default class TopProjects extends Component {
+class TopProjects extends Component {
   static displayName = "Analytics.Composed.TopProjects";
 
   static propTypes = {
     withSort: PropTypes.bool,
     withAllLink: PropTypes.bool,
     data: PropTypes.array,
-    pagination: PropTypes.object
+    pagination: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -31,12 +33,12 @@ export default class TopProjects extends Component {
       {
         key: "most_visited_desc",
         value: "most_visited_desc",
-        label: "Most visited at the top"
+        label: this.props.t("backend.analytics.most_visited_top")
       },
       {
         key: "most_visited_asc",
         value: "most_visited_asc",
-        label: "Most visited at the bottom"
+        label: this.props.t("backend.analytics.most_visited_bottom")
       }
     ];
   }
@@ -52,11 +54,14 @@ export default class TopProjects extends Component {
       <Block
         width={this.blockWidth}
         icon="eyeOpen32"
-        title="Most Viewed Projects"
+        title={this.props.t("backend.analytics.most_viewed_projects")}
       >
         <Table
           rowComponent={ProjectRow}
-          headers={["Project", "Visits"]}
+          headers={[
+            this.props.t("glossary.project_title_case_one"),
+            this.props.t("backend.analytics.visits")
+          ]}
           rows={this.data}
           paginationClickHandler={paginationClickHandler}
           pagination={pagination}
@@ -67,3 +72,5 @@ export default class TopProjects extends Component {
     );
   }
 }
+
+export default withTranslation()(TopProjects);

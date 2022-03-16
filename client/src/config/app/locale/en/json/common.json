@@ -17,7 +17,9 @@
     "loading": "loading",
     "content": "content",
     "private": "private",
+    "private_title_case": "Private",
     "public": "public",
+    "public_title_case": "Public",
     "archived": "archived",
     "visibility": "visibility",
     "visibility_title_case": "Visibility",
@@ -35,6 +37,10 @@
     "page_one": "page",
     "page other": "pages",
     "page_title_case_one": "Page",
-    "page_title_case_other": "Pages"
+    "page_title_case_other": "Pages",
+    "user_one": "user",
+    "user_other": "users",
+    "user_title_case_one": "User",
+    "user_title_case_other": "Users"
   }
 }

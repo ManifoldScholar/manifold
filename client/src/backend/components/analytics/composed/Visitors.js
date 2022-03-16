@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Block from "../Block";
 import Chart from "../parts/Chart";
-import pluralize from "pluralize";
+import { withTranslation } from "react-i18next";
 
-export default class Visitors extends Component {
+class Visitors extends Component {
   static displayName = "Analytics.Composed.Visitors";
 
-  static propTypes = {};
+  static propTypes = {
+    t: PropTypes.func
+  };
 
   get total() {
     const { additionalData } = this.props;
@@ -23,19 +25,20 @@ export default class Visitors extends Component {
     return this.props.width || 100;
   }
 
-  get labelRoot() {
-    return "visitor";
-  }
-
   get description() {
     const { rangeInWords } = this.props;
-    const label = this.total === 1 ? this.labelRoot : pluralize(this.labelRoot);
+    const uniqueVisitorCount = this.props.t(
+      "backend.analytics.unique_visitor_with_count",
+      { count: this.total }
+    );
     return this.total !== null ? (
       <p className="analytics-block__description">
-        <span style={{ color: "var(--analytics-highlight-color" }}>
-          {this.total}
-        </span>{" "}
-        {rangeInWords && `unique ${label} in ${rangeInWords}.`}
+        {rangeInWords
+          ? this.props.t("backend.analytics.visitors_in_date_range", {
+              uniqueVisitorCount,
+              dateRange: rangeInWords
+            })
+          : uniqueVisitorCount}
       </p>
     ) : null;
   }
@@ -45,11 +48,13 @@ export default class Visitors extends Component {
       <Block
         width={this.blockWidth}
         icon="featureExplore32"
-        title="Visitors"
+        title={this.props.t("backend.analytics.visitor_title_case_other")}
         description={this.description}
       >
-        <Chart data={this.data} tooltipLabel={this.labelRoot} />
+        <Chart data={this.data} tooltipLabel="visitor" />
       </Block>
     );
   }
 }
+
+export default withTranslation()(Visitors);

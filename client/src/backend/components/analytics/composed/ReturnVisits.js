@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Block from "../Block";
 import Figure from "../parts/Figure";
-import pluralize from "pluralize";
+import { withTranslation } from "react-i18next";
 
-export default class ReturnVisits extends Component {
+class ReturnVisits extends Component {
   static displayName = "Analytics.Composed.ReturnVisits";
 
-  static propTypes = {};
+  static propTypes = {
+    t: PropTypes.func
+  };
 
   get data() {
     return this.props.data;
@@ -30,16 +32,27 @@ export default class ReturnVisits extends Component {
   }
 
   get caption() {
-    const root = "visitor";
-    const label = this.allVisits === 1 ? root : pluralize(root);
-    return `${this.returnVisits} of ${this.allVisits} ${label} were making a return visit.`;
+    const totalVisitorCount = this.props.t(
+      "backend.analytics.visitor_with_count",
+      { count: this.allVisits }
+    );
+    return this.props.t("backend.analytics.return_visit_count", {
+      totalVisitorCount,
+      returnVisitorCount: this.returnVisits
+    });
   }
 
   render() {
     return (
-      <Block width={this.blockWidth} icon="reload32" title="Return Visits">
+      <Block
+        width={this.blockWidth}
+        icon="reload32"
+        title={this.props.t("backend.analytics.return_visits")}
+      >
         <Figure stat={this.percentage} caption={this.caption} />
       </Block>
     );
   }
 }
+
+export default withTranslation()(ReturnVisits);
