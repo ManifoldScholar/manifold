@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Block from "../Block";
 import Figure from "../parts/Figure";
-import pluralize from "pluralize";
+import { withTranslation } from "react-i18next";
 
-export default class Engagement extends Component {
+class Engagement extends Component {
   static displayName = "Analytics.Composed.Engagement";
 
-  static propTypes = {};
+  static propTypes = {
+    t: PropTypes.func
+  };
 
   get data() {
     return this.props.data;
@@ -30,9 +32,12 @@ export default class Engagement extends Component {
   }
 
   get caption() {
-    const root = "visitor";
-    const label = this.activeVisitorCount === 1 ? root : pluralize(root);
-    return `${this.activeVisitorCount} ${label} created annotations or comments.`;
+    const visitorCount = this.props.t("backend.analytics.visitor_with_count", {
+      count: this.activeVisitorCount
+    });
+    return this.props.t("backend.analytics.visitor_engagement", {
+      visitorCount
+    });
   }
 
   render() {
@@ -40,10 +45,12 @@ export default class Engagement extends Component {
       <Block
         width={this.blockWidth}
         icon="resourceInteractive64"
-        title="Engagement"
+        title={this.props.t("backend.analytics.engagement")}
       >
         <Figure stat={this.percentage} caption={this.caption} />
       </Block>
     );
   }
 }
+
+export default withTranslation()(Engagement);

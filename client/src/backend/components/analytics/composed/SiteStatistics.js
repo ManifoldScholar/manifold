@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Block from "../Block";
 import List from "../parts/List";
+import { withTranslation } from "react-i18next";
 
-export default class SiteStatistics extends Component {
+class SiteStatistics extends Component {
   static displayName = "Analytics.Composed.SiteStatistics";
 
-  static propTypes = {};
+  static propTypes = {
+    t: PropTypes.func
+  };
 
   get stats() {
     const { data } = this.props;
@@ -18,32 +21,32 @@ export default class SiteStatistics extends Component {
     return [
       {
         icon: "projects64",
-        label: "Projects",
+        label: this.props.t("glossary.project_title_case_other"),
         value: this.stats.totalProjectCount
       },
       {
         icon: "textsBook64",
-        label: "Texts",
+        label: this.props.t("glossary.text_title_case_other"),
         value: this.stats.totalTextCount
       },
       {
         icon: "BEResourcesBoxes64",
-        label: "Resources",
+        label: this.props.t("glossary.resource_title_case_other"),
         value: this.stats.totalResourceCount
       },
       {
         icon: "users32",
-        label: "Users",
+        label: this.props.t("common.user_title_case_other"),
         value: this.stats.totalUserCount
       },
       {
         icon: "interactAnnotate32",
-        label: "Annotations",
+        label: this.props.t("glossary.annotation_title_case_other"),
         value: this.stats.totalAnnotationCount
       },
       {
         icon: "interactComment32",
-        label: "Comments",
+        label: this.props.t("glossary.comment_title_case_other"),
         value: this.stats.totalCommentCount
       }
     ];
@@ -58,11 +61,13 @@ export default class SiteStatistics extends Component {
       <Block
         width={this.blockWidth}
         icon="featureMeasure32"
-        title="Site Statistics"
-        description="Your Manifold installation’s content and user activity."
+        title={this.props.t("backend.analytics.site_statistics")}
+        description={this.props.t("backend.analytics.installation_activity")}
       >
         <List items={this.items} />
       </Block>
     );
   }
 }
+
+export default withTranslation()(SiteStatistics);

@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Block from "../Block";
 import TextNodeTable from "../parts/TextNodeTable";
+import { withTranslation } from "react-i18next";
 
-export default class TextSectionViews extends Component {
+class TextSectionViews extends Component {
   static displayName = "Analytics.Composed.TextSectionViews";
 
   static propTypes = {
     withSort: PropTypes.bool,
-    data: PropTypes.array
+    data: PropTypes.array,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -56,10 +58,13 @@ export default class TextSectionViews extends Component {
       <Block
         width={this.blockWidth}
         icon="eyeOpen32"
-        title="Text Section Views"
+        title={this.props.t("backend.analytics.text_section_views")}
       >
         <TextNodeTable
-          headers={["Section Title", "View Count"]}
+          headers={[
+            this.props.t("backend.analytics.section_title"),
+            this.props.t("backend.analytics.view_count")
+          ]}
           rows={this.rows}
           slug={this.slug}
         />
@@ -67,3 +72,5 @@ export default class TextSectionViews extends Component {
     );
   }
 }
+
+export default withTranslation()(TextSectionViews);

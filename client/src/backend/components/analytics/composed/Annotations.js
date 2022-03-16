@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Block from "../Block";
 import FigureList from "../parts/FigureList";
+import { withTranslation } from "react-i18next";
 
-export default class Annotations extends Component {
+class Annotations extends Component {
   static displayName = "Analytics.Composed.Annotations";
 
-  static propTypes = {};
+  static propTypes = {
+    t: PropTypes.func
+  };
 
   get data() {
     return this.props.data ? this.props.data[0] : {};
@@ -25,8 +28,10 @@ export default class Annotations extends Component {
     return {
       stat,
       caption: rangeInWords
-        ? `Annotations created in ${rangeInWords}.`
-        : "Annotations created"
+        ? this.props.t("backend.analytics.annotations_in_date_range", {
+            dateRange: rangeInWords
+          })
+        : this.props.t("backend.analytics.annotations_created")
     };
   }
 
@@ -34,7 +39,7 @@ export default class Annotations extends Component {
     const stat = this.data.publicAnnotations;
     return {
       stat,
-      caption: "Public"
+      caption: this.props.t("common.public_title_case")
     };
   }
 
@@ -42,7 +47,7 @@ export default class Annotations extends Component {
     const stat = this.data.privateAnnotations;
     return {
       stat,
-      caption: "Private"
+      caption: this.props.t("common.private_title_case")
     };
   }
 
@@ -50,7 +55,7 @@ export default class Annotations extends Component {
     const stat = this.data.readingGroupAnnotations;
     return {
       stat,
-      caption: "in Reading Groups"
+      caption: this.props.t("backend.analytics.in_reading_groups")
     };
   }
 
@@ -65,9 +70,15 @@ export default class Annotations extends Component {
 
   render() {
     return (
-      <Block width={this.blockWidth} icon="annotate32" title="Annotations">
+      <Block
+        width={this.blockWidth}
+        icon="annotate32"
+        title={this.props.t("glossary.annotation_title_case_other")}
+      >
         <FigureList figures={this.figures} />
       </Block>
     );
   }
 }
+
+export default withTranslation()(Annotations);

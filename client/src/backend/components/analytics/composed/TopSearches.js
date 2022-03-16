@@ -4,15 +4,17 @@ import Block from "../Block";
 import Table from "../parts/Table";
 import SearchRow from "../parts/SearchRow";
 import lh from "helpers/linkHandler";
+import { withTranslation } from "react-i18next";
 
-export default class TopSearches extends Component {
+class TopSearches extends Component {
   static displayName = "Analytics.Composed.TopSearches";
 
   static propTypes = {
     withSort: PropTypes.bool,
     withAllLink: PropTypes.bool,
     data: PropTypes.array,
-    pagination: PropTypes.object
+    pagination: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -32,10 +34,17 @@ export default class TopSearches extends Component {
     const { pagination, paginationClickHandler, withAllLink } = this.props;
 
     return (
-      <Block width={this.blockWidth} icon="search32" title="Top Searches">
+      <Block
+        width={this.blockWidth}
+        icon="search32"
+        title={this.props.t("backend.analytics.top_searches")}
+      >
         <Table
           rowComponent={SearchRow}
-          headers={["Search Term", "Search Count"]}
+          headers={[
+            this.props.t("backend.analytics.search_term"),
+            this.props.t("backend.analytics.search_count")
+          ]}
           rows={this.data}
           paginationClickHandler={paginationClickHandler}
           pagination={pagination}
@@ -45,3 +54,5 @@ export default class TopSearches extends Component {
     );
   }
 }
+
+export default withTranslation()(TopSearches);
