@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
+import { withTranslation } from "react-i18next";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { subjectsAPI, requests } from "api";
@@ -31,7 +32,8 @@ export class SettingsSubjectsListContainer extends PureComponent {
     subjectsMeta: PropTypes.object,
     match: PropTypes.object,
     route: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    t: PropTypes.func
   };
 
   constructor() {
@@ -87,7 +89,7 @@ export class SettingsSubjectsListContainer extends PureComponent {
   };
 
   render() {
-    const { match } = this.props;
+    const { match, t } = this.props;
 
     if (!this.props.subjects) return null;
     const { subjects, subjectsMeta } = this.props;
@@ -104,10 +106,12 @@ export class SettingsSubjectsListContainer extends PureComponent {
           <EntitiesList
             entityComponent={SubjectRow}
             entityComponentProps={{ active }}
-            title={"Project Subjects"}
+            title={t("actions.manage_subjects")}
             titleStyle="bar"
             entities={subjects}
-            unit="subject"
+            unit={t("glossary.subject", {
+              count: subjectsMeta.pagination.totalCount
+            })}
             pagination={subjectsMeta.pagination}
             showCountInHeader
             callbacks={{
@@ -128,4 +132,6 @@ export class SettingsSubjectsListContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(SettingsSubjectsListContainer);
+export default withTranslation()(
+  connectAndFetch(SettingsSubjectsListContainer)
+);
