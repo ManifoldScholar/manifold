@@ -27,11 +27,11 @@ export function DashboardsAdminContainer({
   const {
     number: projectPageNumber,
     size: projectPageSize
-  } = savedSearchPaginationState("projects") || { number: 1, size: 10 };
+  } = savedSearchPaginationState("projects") || { number: 1, size: 5 };
   const {
     number: journalPageNumber,
     size: journalPageSize
-  } = savedSearchPaginationState("journals") || { number: 1, size: 10 };
+  } = savedSearchPaginationState("journals") || { number: 1, size: 5 };
 
   const [projectsPagination, setProjectsPageNumber] = usePaginationState(
     projectPageNumber,
