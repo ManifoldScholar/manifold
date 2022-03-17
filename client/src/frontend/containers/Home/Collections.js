@@ -29,28 +29,28 @@ export default function HomeCollectionsContainer() {
     withAuthDependency: true
   });
 
-  const journalCount = journals?.length;
+  const collectionCount = collections?.length;
 
   if (!collections && !journals) return null;
 
   return (
     <>
-      {journals &&
-        journals.map((journal, i) => (
-          <EntityCollection.JournalSummary
-            key={journal.id}
-            journal={journal}
-            bgColor={i % 2 === 0 ? "neutral05" : "white"}
-            limit={8}
-          />
-        ))}
       {collections &&
         collections.map((projectCollection, i) => (
           <EntityCollection.ProjectCollectionSummary
             key={projectCollection.id}
             projectCollection={projectCollection}
             limit={projectCollection.attributes.homepageCount}
-            bgColor={(journalCount + i) % 2 === 0 ? "neutral05" : "white"}
+            bgColor={i % 2 === 0 ? "neutral05" : "white"}
+          />
+        ))}
+      {journals &&
+        journals.map((journal, i) => (
+          <EntityCollection.JournalSummary
+            key={journal.id}
+            journal={journal}
+            bgColor={(collectionCount + i) % 2 === 0 ? "neutral05" : "white"}
+            limit={8}
           />
         ))}
     </>
