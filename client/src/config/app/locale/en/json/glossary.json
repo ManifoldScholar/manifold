@@ -103,6 +103,10 @@
     "collection_one": "collection",
     "collection_other": "collections",
     "collection_title_case_one": "Collection",
-    "collection_title_case_other": "Collections"
+    "collection_title_case_other": "Collections",
+    "subject_one": "subject",
+    "subject_other": "subjects",
+    "subject_title_case_one": "Subject",
+    "subject_title_case_other": "Subjects"
   }
 }

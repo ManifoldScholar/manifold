@@ -62,6 +62,7 @@
     "annotate_passage": "$t(actions.annotate) this passage",
     "manage": "Manage",
     "manage_groups": "$t(actions.manage) groups",
+    "manage_subjects": "$t(actions.manage) $t(glossary.subject_title_case_other)",
     "destroy": "Destroy",
     "restore": "Restore",
     "browse": "Browse",
