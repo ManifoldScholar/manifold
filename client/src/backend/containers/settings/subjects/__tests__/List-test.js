@@ -8,6 +8,7 @@ describe("backend/containers/settings/subjects/List", () => {
       subjectsMeta={{ pagination: fixtures.pagination() }}
       match={{ params: {} }}
       route={fixtures.route()}
+      t={key => key}
     />
   ));
 
