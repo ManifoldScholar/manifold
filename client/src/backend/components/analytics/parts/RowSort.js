@@ -2,8 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
+import { useTranslation } from "react-i18next";
 
 function RowSort({ options, active, onChange }) {
+  const { t } = useTranslation();
+
   return (
     <div className="analytics-block__sort">
       <form
@@ -14,7 +17,7 @@ function RowSort({ options, active, onChange }) {
           {id => (
             <div className="select">
               <label htmlFor={id} className="select__label">
-                Sort By:
+                {t("backend.analytics.sort_by")}
               </label>
               <div className="select__wrapper">
                 <select

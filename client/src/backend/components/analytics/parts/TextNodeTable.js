@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextNodeRow from "./TextNodeRow";
 import EmptyRow from "./EmptyRow";
+import { useTranslation } from "react-i18next";
 
 function flatten(node, depth) {
   /* eslint-disable no-param-reassign, func-names */
@@ -20,10 +21,11 @@ function TextNodeTable({
   headers,
   rows,
   slug,
-  emptyMessage = "This text doesn’t contain any sections."
+  emptyMessageKey = "messages.no_sections"
 }) {
   const hasRows = !!rows?.length;
   const flattenedRows = hasRows ? flatten(rows, 0) : [];
+  const { t } = useTranslation();
 
   return (
     <table className="analytics-table">
@@ -39,7 +41,7 @@ function TextNodeTable({
         </tr>
       </thead>
       <tbody>
-        {!hasRows && <EmptyRow message={emptyMessage} />}
+        {!hasRows && <EmptyRow message={t(emptyMessageKey)} />}
         {flattenedRows.map(row => (
           <TextNodeRow
             key={`${row.id}#${row.anchor}`}
@@ -56,7 +58,7 @@ TextNodeTable.propTypes = {
   headers: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   rows: PropTypes.arrayOf(PropTypes.object.isRequired),
   slug: PropTypes.string,
-  emptyMessage: PropTypes.string
+  emptyMessageKey: PropTypes.string
 };
 
 TextNodeTable.displayName = "Analytics.Block.TextNodeTable";

@@ -12,6 +12,8 @@
     "content_block_warning_note": "Note: This message is only visible to project editors.",
     "showing_resource": "Showing {{type}} resource: {{title}}",
     "unsaved_changes": "You may have unsaved changes. Do you want to leave without saving your changes?",
+    "no_results": "Sorry, no results were found.",
+    "no_sections": "This text doesn’t contain any sections.",
     "annotation_summary": {
       "highlight": "{{creator}} highlighted \"{{section}}\" in <text></text> on <date></date>.",
       "annotation": "{{creator}} annotated \"{{section}}\" in <text></text> on <date></date>.",

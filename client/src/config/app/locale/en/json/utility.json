@@ -94,6 +94,14 @@
     "updated": "updated",
     "updated_title_case": "Updated",
     "ago": "ago",
-    "local": "{{date, datetime}}"
+    "date": "{{val, datetime}}",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "hours": "hours",
+    "hours_truncated": "hour",
+    "minutes": "minutes",
+    "minutes_truncated": "min",
+    "seconds": "seconds",
+    "seconds_truncated": "sec"
   }
 }
