@@ -558,7 +558,7 @@ exports[`frontend/components/resource/Title matches the snapshot 1`] = `
                 "annotation_summary": Object {
                   "annotation": "{{creator}} annotated \\"{{section}}\\" in <text></text> on <date></date>.",
                   "highlight": "{{creator}} highlighted \\"{{section}}\\" in <text></text> on <date></date>.",
-                  "source": "\\"{{section}}\\" in <0></0>",
+                  "source": "\\"{{section}}\\" in <text></text>",
                 },
                 "cannot_move_down": "Cannot move down. Item is already in the last category.",
                 "cannot_move_up": "Cannot move up. Item is already in the first category.",
@@ -1467,7 +1467,7 @@ exports[`frontend/components/resource/Title matches the snapshot 1`] = `
               "annotation_summary": Object {
                 "annotation": "{{creator}} annotated \\"{{section}}\\" in <text></text> on <date></date>.",
                 "highlight": "{{creator}} highlighted \\"{{section}}\\" in <text></text> on <date></date>.",
-                "source": "\\"{{section}}\\" in <0></0>",
+                "source": "\\"{{section}}\\" in <text></text>",
               },
               "cannot_move_down": "Cannot move down. Item is already in the last category.",
               "cannot_move_up": "Cannot move up. Item is already in the first category.",
