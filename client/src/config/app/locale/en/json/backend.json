@@ -235,7 +235,15 @@
       "top_searches": "Top Searches",
       "search_term": "Search Term",
       "search_count": "Search Count",
-      "visitors_in_date_range": "{{uniqueVisitorCount}} in {{dateRange}}."
+      "visitors_in_date_range": "{{uniqueVisitorCount}} in {{dateRange}}.",
+      "choose_date_preset": "Choose a range preset",
+      "last_week": "Last week",
+      "last_month": "Last month",
+      "last_count_days": "Last {{count}} days",
+      "invalid_start_date": "The start date must come before the selected end date. Updating the start date to {{date}}.",
+      "invalid_end_date": "The end date must come after the selected start date. Updating the end date to {{date}}.",
+      "you_entered_date": "You entered {{date}}.",
+      "sort_by": "Sort By:"
     },
     "dashboard": {
       "global_header": "Dashboard",

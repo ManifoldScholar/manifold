@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 function Time({ time }) {
+  const { t } = useTranslation();
   const localeParams = {
     minimumIntegerDigits: 2,
     useGrouping: false
@@ -20,8 +22,22 @@ function Time({ time }) {
 
   const values =
     hours > 0
-      ? [hours, minutes, "hour", "min", "hours", "minutes"]
-      : [minutes, seconds, "min", "sec", "minutes", "seconds"];
+      ? [
+          hours,
+          minutes,
+          t("dates.hours_truncated"),
+          t("dates.minutes_truncated"),
+          t("dates.hours"),
+          t("dates.minutes")
+        ]
+      : [
+          minutes,
+          seconds,
+          t("dates.minutes_truncated"),
+          t("dates.seconds_truncated"),
+          t("dates.minutes"),
+          t("dates.seconds")
+        ];
 
   return (
     <figure>

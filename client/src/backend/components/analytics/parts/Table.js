@@ -5,6 +5,7 @@ import Utility from "global/components/utility";
 import Row from "./Row";
 import RowSort from "./RowSort";
 import EmptyRow from "./EmptyRow";
+import { useTranslation } from "react-i18next";
 
 function Table({
   headers,
@@ -14,7 +15,7 @@ function Table({
   pagination,
   paginationClickHandler,
   sortOptions,
-  emptyMessage = "Sorry, no results were found."
+  emptyMessageKey = "messages.no_results"
 }) {
   const hasRows = !!rows?.length;
   const useSorting = hasRows && !!sortOptions?.length;
@@ -22,6 +23,7 @@ function Table({
   const RowComponent = rowComponent || Row;
   const defaultActiveState = useSorting ? sortOptions[0] : [];
   const [activeSortParam, setActiveSortParam] = useState(defaultActiveState);
+  const { t } = useTranslation();
 
   function handleSortChange(value) {
     const selectedSort = sortOptions.find(option => option.value === value);
@@ -50,7 +52,7 @@ function Table({
           </tr>
         </thead>
         <tbody>
-          {!hasRows && <EmptyRow message={emptyMessage} />}
+          {!hasRows && <EmptyRow message={t(emptyMessageKey)} />}
           {hasRows &&
             rows.map(row => (
               <RowComponent key={RowComponent.generateId(row)} {...row} />
@@ -68,7 +70,7 @@ function Table({
       {hasRows && allLink && (
         <div className="analytics-block__footer">
           <Link to={allLink} className="analytics-block__link">
-            <span>See All</span>
+            <span>{t("actions.see_all")}</span>
             <Utility.IconComposer icon="arrowLongRight16" size="default" />
           </Link>
         </div>
@@ -85,7 +87,7 @@ Table.propTypes = {
   pagination: PropTypes.object,
   paginationClickHandler: PropTypes.func,
   sortOptions: PropTypes.arrayOf(PropTypes.object.isRequired),
-  emptyMessage: PropTypes.string
+  emptyMessageKey: PropTypes.string
 };
 
 Table.displayName = "Analytics.Block.Table";
