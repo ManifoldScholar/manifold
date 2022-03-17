@@ -31,6 +31,6 @@ export default {
     ...pages,
     ...reader,
     ...utility,
-    date_fns: { ...enUS }
+    date_fns: enUS
   }
 };
