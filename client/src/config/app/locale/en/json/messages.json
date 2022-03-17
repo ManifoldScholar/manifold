@@ -15,7 +15,7 @@
     "annotation_summary": {
       "highlight": "{{creator}} highlighted \"{{section}}\" in <text></text> on <date></date>.",
       "annotation": "{{creator}} annotated \"{{section}}\" in <text></text> on <date></date>.",
-      "source": "\"{{section}}\" in <0></0>"
+      "source": "\"{{section}}\" in <text></text>"
     }
   }
 }

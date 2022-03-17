@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withTranslation, Trans } from "react-i18next";
 import Utility from "global/components/utility";
 import FormattedDate from "global/components/FormattedDate";
+import TextTitle from "./TextTitle";
 import { capitalize } from "utils/string";
 
 class SourceSummary extends React.PureComponent {
@@ -31,7 +32,7 @@ class SourceSummary extends React.PureComponent {
       <Trans
         i18nKey="messages.annotation_summary.source"
         components={{
-          text: <i dangerouslySetInnerHTML={{ __html: textTitle }} />
+          text: <TextTitle title={textTitle} />
         }}
         values={{ section: textSectionTitle }}
       />
@@ -93,7 +94,7 @@ class SourceSummary extends React.PureComponent {
               <Trans
                 i18nKey={this.action}
                 components={{
-                  text: <i dangerouslySetInnerHTML={{ __html: textTitle }} />,
+                  text: <TextTitle title={textTitle} />,
                   date: <FormattedDate date={annotation.attributes.createdAt} />
                 }}
                 values={{ creator: this.creator, section: textSectionTitle }}
