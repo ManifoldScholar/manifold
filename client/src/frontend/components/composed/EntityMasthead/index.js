@@ -18,7 +18,7 @@ const getContent = (entity, parent) => {
     logoStyles: parentLogo
   } = parent?.attributes ?? {};
 
-  const color = heroBackgroundColor ?? parentColor ?? "#52e3ac";
+  const color = heroBackgroundColor ?? parentColor ?? null;
   const logo =
     (!parent || (parent && !heroStyles.largeLandscape)) &&
     checkSizes(logoStyles, parentLogo, "original", "medium");
@@ -39,7 +39,7 @@ export default function Masthead({ entity }) {
     entity.relationships?.journal
   );
 
-  if (!image && !logo) return null;
+  if (!image && !logo && !color) return null;
 
   return (
     <Styled.Wrapper $color={color}>
