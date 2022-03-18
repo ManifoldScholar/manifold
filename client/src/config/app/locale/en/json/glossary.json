@@ -144,6 +144,10 @@
     "title_one": "title",
     "title_other": "titles",
     "title_title_case_one": "Title",
-    "title_title_case_other": "Titles"
+    "title_title_case_other": "Titles",
+    "content_block_one": "content block",
+    "content_block_other": "content blocks",
+    "content_block_title_case_one": "Content Block",
+    "content_block_title_case_other": "Content Blocks"
   }
 }

@@ -5,14 +5,16 @@ import resolver from "../../helpers/resolver";
 import Block from "../Block";
 import { Droppable } from "react-beautiful-dnd";
 import classNames from "classnames";
+import { withTranslation } from "react-i18next";
 
-export default class ProjectContentSectionsCurrent extends PureComponent {
+class ProjectContentSectionsCurrent extends PureComponent {
   static displayName = "Project.Content.Sections.Current";
 
   static propTypes = {
     currentBlocks: PropTypes.array.isRequired,
     entityCallbacks: PropTypes.object.isRequired,
-    activeDraggableType: PropTypes.string
+    activeDraggableType: PropTypes.string,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -56,7 +58,7 @@ export default class ProjectContentSectionsCurrent extends PureComponent {
   render() {
     return (
       <div className="form-section form-section--primary">
-        <Header subtitle="Layout:" />
+        <Header subtitle={this.props.t("backend.layout.layout")} />
         {Object.keys(this.zones).map(zone => (
           <Droppable
             key={zone}
@@ -90,3 +92,5 @@ export default class ProjectContentSectionsCurrent extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ProjectContentSectionsCurrent);

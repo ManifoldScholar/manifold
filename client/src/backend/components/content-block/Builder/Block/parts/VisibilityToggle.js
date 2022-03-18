@@ -1,15 +1,17 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
+import { withTranslation } from "react-i18next";
 
-export default class ProjectContentBlockVisibilityToggle extends PureComponent {
+class ProjectContentBlockVisibilityToggle extends PureComponent {
   static displayName = "Project.Content.Block.Parts.VisibilityToggle";
 
   static propTypes = {
     visible: PropTypes.bool.isRequired,
     entity: PropTypes.object.isRequired,
     entityCallbacks: PropTypes.object.isRequired,
-    blockTitle: PropTypes.string
+    blockTitle: PropTypes.string,
+    t: PropTypes.func
   };
 
   get entity() {
@@ -28,7 +30,7 @@ export default class ProjectContentBlockVisibilityToggle extends PureComponent {
       return (
         <button
           className={`${baseClass}__button`}
-          aria-label={`Hide content block “${this.props.blockTitle}”`}
+          aria-label={this.props.t("backend.layout.hide_block")}
           onClick={this.props.entityCallbacks.hideBlock}
         >
           <Utility.IconComposer
@@ -42,7 +44,7 @@ export default class ProjectContentBlockVisibilityToggle extends PureComponent {
     return (
       <button
         className={`${baseClass}__button`}
-        aria-label={`Show content block “${this.props.blockTitle}”`}
+        aria-label={this.props.t("backend.layout.show_block")}
         onClick={this.props.entityCallbacks.showBlock}
       >
         <Utility.IconComposer
@@ -54,3 +56,5 @@ export default class ProjectContentBlockVisibilityToggle extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ProjectContentBlockVisibilityToggle);

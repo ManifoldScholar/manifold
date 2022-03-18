@@ -1,12 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
+import { withTranslation } from "react-i18next";
 
-export default class ProjectContentTypeFormTexts extends PureComponent {
+class ProjectContentTypeFormTexts extends PureComponent {
   static displayName = "Project.Content.TypeForm.Types.Texts";
 
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultAttributes = {
@@ -28,41 +30,53 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
   render() {
     return (
       <>
-        <Form.TextInput label="Title" name="attributes[title]" focusOnMount />
-        <Form.TextArea label="Description" name="attributes[description]" />
+        <Form.TextInput
+          label={this.props.t("backend.forms.title")}
+          name="attributes[title]"
+          focusOnMount
+        />
+        <Form.TextArea
+          label={this.props.t("backend.forms.description")}
+          name="attributes[description]"
+        />
         <div className="form-section form-section--primary">
           <div className="form-input-group form-input-group--primary">
             <Form.Switch
-              label="Show Author Names?"
+              label={this.props.t("backend.forms.text.show_author_names")}
               name="attributes[showAuthors]"
             />
             <Form.Switch
-              label="Show Descriptions?"
+              label={this.props.t("backend.forms.text.show_descriptions")}
               name="attributes[showDescriptions]"
             />
             <Form.Switch
-              label="Show Subtitles?"
+              label={this.props.t("backend.forms.text.show_subtitles")}
               name="attributes[showSubtitles]"
             />
             <Form.Switch
-              label="Show Cover Images?"
+              label={this.props.t("backend.forms.text.show_cover_images")}
               name="attributes[showCovers]"
             />
-            <Form.Switch label="Show Dates?" name="attributes[showDates]" />
             <Form.Switch
-              label="Show Category Labels?"
+              label={this.props.t("backend.forms.text.show_dates")}
+              name="attributes[showDates]"
+            />
+            <Form.Switch
+              label={this.props.t("backend.forms.text.show_category_labels")}
               name="attributes[showCategoryLabels]"
             />
             <Form.Switch
-              label="Show Uncategorized Texts?"
+              label={this.props.t(
+                "backend.forms.text.show_uncategorized_texts"
+              )}
               name="attributes[showUncategorized]"
             />
           </div>
         </div>
         {this.hasCategories && (
           <Form.Picker
-            placeholder="Add a Text Category"
-            label="Include Texts in these Categories"
+            placeholder={this.props.t("backend.forms.text.add_text_category")}
+            label={this.props.t("backend.forms.text.include_texts_in_category")}
             optionToLabel={rc => rc.attributes.title}
             name="relationships[includedCategories]"
             options={this.categories}
@@ -76,3 +90,5 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ProjectContentTypeFormTexts);

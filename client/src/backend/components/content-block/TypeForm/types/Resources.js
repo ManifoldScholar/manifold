@@ -1,13 +1,15 @@
 import React, { PureComponent } from "react";
 import Form from "global/components/form";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 
-export default class ProjectContentTypeFormResources extends PureComponent {
+class ProjectContentTypeFormResources extends PureComponent {
   static displayName = "Project.Content.TypeForm.Types.Resources";
 
   static propTypes = {
     project: PropTypes.object.isRequired,
-    getModelValue: PropTypes.func.isRequired
+    getModelValue: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   get showAllCollections() {
@@ -22,23 +24,32 @@ export default class ProjectContentTypeFormResources extends PureComponent {
     return (
       <>
         <Form.TextInput
-          label="Title"
+          label={this.props.t("backend.forms.title")}
           name="attributes[title]"
-          instructions={`If blank, the block title will default to "Resources"`}
+          instructions={this.props.t(
+            "backend.forms.resource.default_title_message"
+          )}
           focusOnMount
         />
-        <Form.TextArea label="Description" name="attributes[description]" />
+        <Form.TextArea
+          label={this.props.t("backend.forms.description")}
+          name="attributes[description]"
+        />
         <Form.Switch
-          label="Show All Collections?"
-          instructions="If set, all resource collections will be included in the block. Otherwise, only featured selections will be shown."
+          label={this.props.t("backend.forms.resource.collections_switch")}
+          instructions={this.props.t(
+            "backend.forms.resource.collections_switch_info"
+          )}
           name="attributes[showAllCollections]"
           wide
         />
         {!this.showAllCollections ? (
           <>
             <Form.Picker
-              placeholder="Add a Resource Collection"
-              label="Show Specific Collections"
+              placeholder={this.props.t(
+                "backend.forms.resource.select_collection_placeholder"
+              )}
+              label={this.props.t("backend.forms.resource.select_collection")}
               optionToLabel={rc => rc.attributes.title}
               name="relationships[featuredCollections]"
               options={this.collections}
@@ -53,3 +64,5 @@ export default class ProjectContentTypeFormResources extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ProjectContentTypeFormResources);

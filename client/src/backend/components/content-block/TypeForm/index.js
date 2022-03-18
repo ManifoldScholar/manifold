@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import typeResolver from "../helpers/resolver";
 import setter from "global/components/form/setter";
 import Form from "../../../../global/components/form";
+import { withTranslation } from "react-i18next";
 
 export class ProjectContentTypeForm extends PureComponent {
   static displayName = "Project.Content.TypeForm";
 
   static propTypes = {
     contentBlock: PropTypes.object,
-    project: PropTypes.object
+    project: PropTypes.object,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -48,9 +50,18 @@ export class ProjectContentTypeForm extends PureComponent {
         <Form.Select
           label="Access"
           options={[
-            { label: "Always Visible", value: "always" },
-            { label: "Visible Only When Authorized", value: "authorized" },
-            { label: "Visible Only When Unauthorized ", value: "unauthorized" }
+            {
+              label: this.props.t("backend.forms.always_visible"),
+              value: "always"
+            },
+            {
+              label: this.props.t("backend.forms.authorized_visible"),
+              value: "authorized"
+            },
+            {
+              label: this.props.t("backend.forms.unauthorized_visible"),
+              value: "unauthorized"
+            }
           ]}
           name="attributes[access]"
         />
@@ -60,4 +71,4 @@ export class ProjectContentTypeForm extends PureComponent {
   }
 }
 
-export default setter(ProjectContentTypeForm);
+export default withTranslation()(setter(ProjectContentTypeForm));

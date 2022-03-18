@@ -1,13 +1,15 @@
 import React, { PureComponent } from "react";
 import Form from "global/components/form";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 
-export default class ProjectContentTypeFormTableOfContents extends PureComponent {
+class ProjectContentTypeFormTableOfContents extends PureComponent {
   static displayName = "Project.Content.TypeForm.Types.TableOfContents";
 
   static propTypes = {
     project: PropTypes.object.isRequired,
-    setOther: PropTypes.func.isRequired
+    setOther: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultAttributes = {
@@ -21,18 +23,26 @@ export default class ProjectContentTypeFormTableOfContents extends PureComponent
   render() {
     return (
       <>
-        <Form.TextInput label="Title" name="attributes[title]" focusOnMount />
+        <Form.TextInput
+          label={this.props.t("backend.forms.title")}
+          name="attributes[title]"
+          focusOnMount
+        />
         <Form.Picker
-          label="Text"
+          label={this.props.t("glossary.text_title_case_one")}
           options={this.project.relationships.texts}
           optionToLabel={t => t.attributes.title}
-          placeholder="Select a text"
+          placeholder={this.props.t("backend.forms.select_text")}
           name="relationships[text]"
           wide
         />
-        <Form.NumberInput label="Depth" name="attributes[depth]" wide />
+        <Form.NumberInput
+          label={this.props.t("backend.forms.depth")}
+          name="attributes[depth]"
+          wide
+        />
         <Form.Switch
-          label="Show Text Title?"
+          label={this.props.t("backend.forms.show_text_title")}
           name="attributes[showTextTitle]"
           wide
         />
@@ -40,3 +50,5 @@ export default class ProjectContentTypeFormTableOfContents extends PureComponent
     );
   }
 }
+
+export default withTranslation()(ProjectContentTypeFormTableOfContents);

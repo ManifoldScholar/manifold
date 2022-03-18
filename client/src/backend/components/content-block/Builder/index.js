@@ -11,6 +11,7 @@ import { entityStoreActions } from "actions";
 import configHelper from "../helpers/configurations";
 import cloneDeep from "lodash/cloneDeep";
 import { UIDConsumer } from "react-uid";
+import { withTranslation } from "react-i18next";
 
 const { request } = entityStoreActions;
 
@@ -25,7 +26,8 @@ export class ProjectContent extends PureComponent {
     refresh: PropTypes.func.isRequired,
     history: PropTypes.object,
     children: PropTypes.func,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static cloneBlocks(props) {
@@ -171,8 +173,8 @@ export class ProjectContent extends PureComponent {
   };
 
   handleDeleteBlock = block => {
-    const heading = "Are you sure you want to delete this content block?";
-    const message = "This action cannot be undone.";
+    const heading = this.props.t("backend.layout.confirm_delete_block");
+    const message = this.props.t("backend.layout.cannot_be_undone");
     this.props.confirm(heading, message, () => this.deleteBlock(block));
   };
 
@@ -212,4 +214,4 @@ export class ProjectContent extends PureComponent {
   }
 }
 
-export default withConfirmation(ProjectContent);
+export default withTranslation()(withConfirmation(ProjectContent));

@@ -2,15 +2,17 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Navigation from "backend/components/navigation";
 import resolver from "./helpers/resolver";
+import { withTranslation } from "react-i18next";
 
-export default class ContentBlockDrawerHeader extends PureComponent {
+class ContentBlockDrawerHeader extends PureComponent {
   static displayName = "ContentBlock.DrawerHeader";
 
   static propTypes = {
     contentBlock: PropTypes.object.isRequired,
     onDelete: PropTypes.func,
     onVisibilityToggle: PropTypes.func,
-    icon: PropTypes.string
+    icon: PropTypes.string,
+    t: PropTypes.func
   };
 
   get contentBlock() {
@@ -27,7 +29,7 @@ export default class ContentBlockDrawerHeader extends PureComponent {
       BlockComponent.defaultProps.title
     )
       return BlockComponent.defaultProps.title;
-    return "Content Block";
+    return this.props.t("glossary.content_block_title_case_one");
   }
 
   get icon() {
@@ -60,14 +62,16 @@ export default class ContentBlockDrawerHeader extends PureComponent {
     if (this.onVisibilityToggle)
       buttons.push({
         onClick: this.onVisibilityToggle,
-        label: this.hidden ? "show" : "hide",
+        label: this.hidden
+          ? this.props.t("actions.show")
+          : this.props.t("actions.hide"),
         icon: this.hidden ? "eyeOpen32" : "eyeClosed32",
         className: "utility-button__icon--highlight"
       });
     if (this.onDelete)
       buttons.push({
         onClick: this.onDelete,
-        label: "delete",
+        label: this.props.t("actions.delete"),
         icon: "delete32",
         className: "utility-button__icon--notice"
       });
@@ -78,9 +82,11 @@ export default class ContentBlockDrawerHeader extends PureComponent {
     return (
       <Navigation.DrawerHeader
         icon={this.icon}
-        title={this.title}
+        title={this.props.t(this.title)}
         buttons={this.buttons}
       />
     );
   }
 }
+
+export default withTranslation()(ContentBlockDrawerHeader);
