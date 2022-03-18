@@ -189,7 +189,28 @@
         "password_modal_message": "Automatically send the user a new password or set one yourself.",
         "unsubscribe": "Unsubscribe",
         "reset_password": "Reset Password"
+      },
+      "category": {
+        "update": "Update Category",
+        "create": "Create Category",
+        "title_placeholder": "What would you like to call this category?"
       }
+    },
+    "actions": {
+      "delete_category": "$t(actions.delete) $t(glossary.category_title_case_one)",
+      "edit_category": "$t(actions.edit) $t(glossary.category_title_case_one)",
+      "drag_category": "Drag $t(glossary.category_title_case_one)",
+      "edit_text": "$t(actions.edit) $t(glossary.text_title_case_one)",
+      "delete_text": "$t(actions.delete) $t(glossary.text_title_case_one)",
+      "move_up": "Move text up one category",
+      "move_down": "Move text down one category"
+    },
+    "messages": {
+      "cannot_move_up": "Cannot move up. Text is already in the first category.",
+      "cannot_move_down": "Cannot move down. Text is already in the last category.",
+      "text_moved": "Text moved to {{destination}}",
+      "empty_category": "No texts have been added to this category",
+      "all_texts_categorized": "All texts belong to categories"
     },
     "analytics": {
       "global_header": "Analytics",
@@ -317,6 +338,7 @@
     "users": {
       "header": "Manage Users",
       "button_label": "Add a new user"
-    }
+    },
+    "uncategorized": "Uncategorized"
   }
 }

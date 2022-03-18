@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Texts from "./Texts";
+import { withTranslation } from "react-i18next";
 
-export default class CategoryListUncategorized extends PureComponent {
+class CategoryListUncategorized extends PureComponent {
   static displayName = "Category.List.Uncategorized";
 
   static propTypes = {
@@ -11,7 +12,8 @@ export default class CategoryListUncategorized extends PureComponent {
     category: PropTypes.object,
     texts: PropTypes.array.isRequired,
     callbacks: PropTypes.object.isRequired,
-    onTextKeyboardMove: PropTypes.func.isRequired
+    onTextKeyboardMove: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -40,7 +42,7 @@ export default class CategoryListUncategorized extends PureComponent {
         <header className="text-categories__header">
           <h2 className="text-categories__label">
             <span className="text-categories__label--notice">
-              Uncategorized
+              {this.props.t("backend.uncategorized")}
             </span>
           </h2>
         </header>
@@ -54,3 +56,5 @@ export default class CategoryListUncategorized extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(CategoryListUncategorized);
