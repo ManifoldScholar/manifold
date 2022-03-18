@@ -2,8 +2,9 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import classnames from "classnames";
+import { withTranslation } from "react-i18next";
 
-export default class ProjectContentBlockIdentity extends PureComponent {
+class ProjectContentBlockIdentity extends PureComponent {
   static displayName = "Project.Content.Block.Parts.Identity";
 
   static propTypes = {
@@ -11,7 +12,8 @@ export default class ProjectContentBlockIdentity extends PureComponent {
     title: PropTypes.string.isRequired,
     requiresAttention: PropTypes.bool,
     size: PropTypes.oneOf(["small", "large"]),
-    entity: PropTypes.object
+    entity: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -35,9 +37,9 @@ export default class ProjectContentBlockIdentity extends PureComponent {
     if (!this.props.entity) return;
     switch (this.props.entity.attributes.access) {
       case "unauthorized":
-        return "Unauthorized";
+        return this.props.t("backend.layout.unauthorized");
       case "authorized":
-        return "Authorized";
+        return this.props.t("backend.layout.authorized");
       default:
         return null;
     }
@@ -57,6 +59,7 @@ export default class ProjectContentBlockIdentity extends PureComponent {
       `${baseClass}__icon ${baseClass}__icon--dark ${baseClass}__icon--${size}`,
       { [`${baseClass}__icon--incomplete`]: this.requiresAttention }
     );
+    const translatedTitle = this.props.t(this.props.title);
 
     return (
       <header className="backend-content-block__heading">
@@ -66,9 +69,11 @@ export default class ProjectContentBlockIdentity extends PureComponent {
           size={iconSize}
         />
         <span className={titleClasses}>
-          {this.props.title}
+          {translatedTitle}
           {this.showVisibility && !this.visible && (
-            <span className="backend-content-block__label">Hidden</span>
+            <span className="backend-content-block__label">
+              {this.props.t("backend.layout.hidden")}
+            </span>
           )}
           {this.access && (
             <span className="backend-content-block__label">{this.access}</span>
@@ -78,3 +83,5 @@ export default class ProjectContentBlockIdentity extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ProjectContentBlockIdentity);

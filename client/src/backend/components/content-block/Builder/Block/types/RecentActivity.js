@@ -9,7 +9,7 @@ export default class ProjectContentBlocksRecentActivity extends PureComponent {
   };
 
   static defaultProps = {
-    title: "Recent Activity",
+    title: "backend.layout.recent_activity_block_title", // Static props can't be translated in their own class, pass the key to be translated where it's implemented
     icon: "recentActivity64"
   };
 

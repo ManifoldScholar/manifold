@@ -2,14 +2,16 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Identity from "../parts/Identity";
 import Utility from "global/components/utility";
+import { withTranslation } from "react-i18next";
 
-export default class ProjectContentBlockInListAvailable extends PureComponent {
+class ProjectContentBlockInListAvailable extends PureComponent {
   static displayName = "Project.Content.Block.InList.Available";
 
   static propTypes = {
     typeComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     onClickAdd: PropTypes.func,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    t: PropTypes.func
   };
 
   render() {
@@ -25,7 +27,9 @@ export default class ProjectContentBlockInListAvailable extends PureComponent {
             <Identity icon={block.icon} title={block.title} />
             <button
               className="backend-content-block__button"
-              aria-label={`Add content block “${block.title}”`}
+              aria-label={this.props.t("backend.layout.add_block", {
+                blockTitle: this.props.t(block.title)
+              })}
               onClick={this.props.onClickAdd}
               disabled={this.props.disabled}
             >
@@ -41,3 +45,5 @@ export default class ProjectContentBlockInListAvailable extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ProjectContentBlockInListAvailable);

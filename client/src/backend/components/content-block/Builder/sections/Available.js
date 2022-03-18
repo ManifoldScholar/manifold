@@ -4,15 +4,17 @@ import Header from "./parts/Header";
 import Block from "../Block";
 import { Droppable } from "react-beautiful-dnd";
 import resolver from "../../helpers/resolver";
+import { withTranslation } from "react-i18next";
 
-export default class ProjectContentSectionsAvailable extends PureComponent {
+class ProjectContentSectionsAvailable extends PureComponent {
   static displayName = "Project.Content.Sections.Available";
 
   static propTypes = {
     currentBlocks: PropTypes.array.isRequired,
     onClickAdd: PropTypes.func,
     headerId: PropTypes.string,
-    instructionsId: PropTypes.string
+    instructionsId: PropTypes.string,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -27,13 +29,12 @@ export default class ProjectContentSectionsAvailable extends PureComponent {
     return (
       <div className="form-section form-section--primary">
         <Header
-          title="Content Blocks"
-          subtitle="Blocks:"
+          title={this.props.t("glossary.content_block_title_case_other")}
+          subtitle={this.props.t("backend.layout.blocks")}
           headerId={this.props.headerId}
           instructionsId={this.props.instructionsId}
         >
-          Customize the rest of the content on your project page. Add, delete,
-          and reorder content blocks, edit settings, and toggle visibility.
+          {this.props.t("backend.layout.customize_blocks_message")}
         </Header>
         <div className="block-grid full-width">
           {this.types.map((type, index) => (
@@ -65,3 +66,5 @@ export default class ProjectContentSectionsAvailable extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ProjectContentSectionsAvailable);
