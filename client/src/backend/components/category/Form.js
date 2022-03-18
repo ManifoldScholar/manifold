@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { textCategoriesAPI, requests } from "api";
+import { withTranslation } from "react-i18next";
 
-export default class CategoryForm extends PureComponent {
+class CategoryForm extends PureComponent {
   static displayName = "Category.Form";
 
   static propTypes = {
     projectId: PropTypes.string,
-    model: PropTypes.object
+    model: PropTypes.object,
+    t: PropTypes.func
   };
 
   render() {
@@ -27,15 +29,21 @@ export default class CategoryForm extends PureComponent {
         notificationScope="none"
       >
         <Form.TextInput
-          label="Title"
+          label={this.props.t("glossary.title_title_case_one")}
           focusOnMount
           name="attributes[title]"
-          placeholder="What would you like to call this category?"
+          placeholder={this.props.t("backend.forms.category.title_placeholder")}
         />
         <Form.Save
-          text={this.props.model ? "Update Category" : "Create Category"}
+          text={
+            this.props.model
+              ? this.props.t("backend.forms.category.update")
+              : this.props.t("backend.forms.category.create")
+          }
         />
       </FormContainer.Form>
     );
   }
 }
+
+export default withTranslation()(CategoryForm);

@@ -6,6 +6,7 @@ import Categories from "./Categories";
 import Uncategorized from "./Uncategorized";
 
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import { withTranslation } from "react-i18next";
 
 class CategoryList extends PureComponent {
   static displayName = "Category.List";
@@ -14,7 +15,8 @@ class CategoryList extends PureComponent {
     project: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
     texts: PropTypes.array.isRequired,
-    callbacks: PropTypes.object.isRequired
+    callbacks: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -66,11 +68,11 @@ class CategoryList extends PureComponent {
     const sourceIndex = this.categories.findIndex(c => c.id === sourceId);
 
     if (sourceId === "uncategorized" && direction === "down") {
-      this.announce("Cannot move down. Text is already in the last category.");
+      this.announce(this.props.t("backend.messages.cannot_move_down"));
       return;
     }
     if (sourceIndex === 0 && direction === "up") {
-      this.announce("Cannot move up. Text is already in the first category.");
+      this.announce(this.props.t("backend.messages.cannot_move_up"));
       return;
     }
 
@@ -83,8 +85,9 @@ class CategoryList extends PureComponent {
       position
     );
     this.announce(
-      `Text moved to category “${destination?.attributes.title ||
-        "Uncategorized"}”`
+      this.props.t("backend.messages.text_moved", {
+        destination: `${destination?.attributes.title || "Uncategorized"}`
+      })
     );
   };
 
@@ -184,4 +187,4 @@ class CategoryList extends PureComponent {
   }
 }
 
-export default withScreenReaderStatus(CategoryList);
+export default withTranslation()(withScreenReaderStatus(CategoryList));

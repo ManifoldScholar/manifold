@@ -6,8 +6,9 @@ import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
 import Text from "global/components/text";
 import Utility from "global/components/utility";
+import { withTranslation } from "react-i18next";
 
-export default class TextInner extends Component {
+class TextInner extends Component {
   static displayName = "Category.List.Texts.Text";
 
   static propTypes = {
@@ -15,7 +16,8 @@ export default class TextInner extends Component {
     dragHandleProps: PropTypes.object.isRequired,
     callbacks: PropTypes.object.isRequired,
     onTextKeyboardMove: PropTypes.func.isRequired,
-    category: PropTypes.object
+    category: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -94,7 +96,7 @@ export default class TextInner extends Component {
               )}
             </h3>
             <span className="texts-list__date">
-              <FormattedDate
+              <FormattedDate // Ask Lauren: Is this all set to translate? Any changes I need to make?
                 prefix="Added"
                 format="MMMM, yyyy"
                 date={this.text.attributes.createdAt}
@@ -116,14 +118,18 @@ export default class TextInner extends Component {
             }}
           >
             <Utility.IconComposer icon="delete32" size={26} />
-            <span className="screen-reader-text">Delete Text</span>
+            <span className="screen-reader-text">
+              {this.props.t("backend.actions.delete_text")}
+            </span>
           </button>
           <Link
             to={lh.link("backendText", this.text.id)}
             className="texts-list__button"
           >
             <Utility.IconComposer icon="annotate32" size={26} />
-            <span className="screen-reader-text">Edit Text</span>
+            <span className="screen-reader-text">
+              {this.props.t("backend.actions.edit_text")}
+            </span>
           </Link>
 
           <div
@@ -133,7 +139,9 @@ export default class TextInner extends Component {
             {...this.dragHandleProps}
           >
             <Utility.IconComposer icon="grabber32" size={26} />
-            <span className="screen-reader-text">Drag Category</span>
+            <span className="screen-reader-text">
+              {this.props.t("backend.actions.drag_category")}
+            </span>
           </div>
           <div className="texts-list__keyboard-buttons">
             <button
@@ -144,7 +152,7 @@ export default class TextInner extends Component {
             >
               <Utility.IconComposer icon="arrowUp32" size={26} />
               <span className="screen-reader-text">
-                Move text up one category
+                {this.props.t("backend.messages.move_up")}
               </span>
             </button>
             <button
@@ -155,7 +163,7 @@ export default class TextInner extends Component {
             >
               <Utility.IconComposer icon="arrowDown32" size={26} />
               <span className="screen-reader-text">
-                Move text down one category
+                {this.props.t("backend.messages.move_down")}
               </span>
             </button>
           </div>
@@ -164,3 +172,5 @@ export default class TextInner extends Component {
     );
   }
 }
+
+export default withTranslation()(TextInner);

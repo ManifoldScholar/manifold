@@ -6,8 +6,9 @@ import Texts from "./Texts";
 import { Draggable } from "react-beautiful-dnd";
 import Utility from "global/components/utility";
 import classNames from "classnames";
+import { withTranslation } from "react-i18next";
 
-export default class CategoryListCategory extends PureComponent {
+class CategoryListCategory extends PureComponent {
   static displayName = "Category.List.Category";
 
   static propTypes = {
@@ -17,7 +18,8 @@ export default class CategoryListCategory extends PureComponent {
     texts: PropTypes.array.isRequired,
     callbacks: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
-    onTextKeyboardMove: PropTypes.func.isRequired
+    onTextKeyboardMove: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -73,7 +75,7 @@ export default class CategoryListCategory extends PureComponent {
               <header className="text-categories__header">
                 <h2 className="text-categories__label">
                   <span className="text-categories__label-type--light">
-                    Category:{" "}
+                    {this.props.t("glossary.category_title_case_one") + ": "}
                   </span>
                   {this.title}
                 </h2>
@@ -83,7 +85,9 @@ export default class CategoryListCategory extends PureComponent {
                     onClick={this.onDelete}
                   >
                     <Utility.IconComposer icon="delete32" size={26} />
-                    <span className="screen-reader-text">Delete Category</span>
+                    <span className="screen-reader-text">
+                      {this.props.t("backend.actions.delete_category")}
+                    </span>
                   </button>
 
                   <Link
@@ -95,7 +99,9 @@ export default class CategoryListCategory extends PureComponent {
                     )}
                   >
                     <Utility.IconComposer icon="annotate32" size={26} />
-                    <span className="screen-reader-text">Edit Category</span>
+                    <span className="screen-reader-text">
+                      {this.props.t("backend.actions.edit_category")}
+                    </span>
                   </Link>
 
                   <div
@@ -103,7 +109,9 @@ export default class CategoryListCategory extends PureComponent {
                     {...provided.dragHandleProps}
                   >
                     <Utility.IconComposer icon="grabber32" size={26} />
-                    <span className="screen-reader-text">Drag Category</span>
+                    <span className="screen-reader-text">
+                      {this.props.t("backend.actions.drag_category")}
+                    </span>
                   </div>
                 </div>
               </header>
@@ -122,3 +130,5 @@ export default class CategoryListCategory extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(CategoryListCategory);

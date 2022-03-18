@@ -3,14 +3,16 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Draggable } from "react-beautiful-dnd";
 import TextInner from "./TextInner";
+import { withTranslation } from "react-i18next";
 
-export default class CategoryListTexts extends PureComponent {
+class CategoryListTexts extends PureComponent {
   static displayName = "Category.List.Texts";
 
   static propTypes = {
     texts: PropTypes.array.isRequired,
     callbacks: PropTypes.object.isRequired,
-    onTextKeyboardMove: PropTypes.func.isRequired
+    onTextKeyboardMove: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -47,8 +49,8 @@ export default class CategoryListTexts extends PureComponent {
       <div className="texts-list__text texts-list__text--placeholder">
         <p>
           {this.hasCategory
-            ? "No texts have been added to this category"
-            : "All texts belong to categories"}
+            ? this.props.t("backend.messages.empty_category")
+            : this.props.t("backend.messages.all_texts_categorized")}
         </p>
       </div>
     );
@@ -87,3 +89,5 @@ export default class CategoryListTexts extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(CategoryListTexts);

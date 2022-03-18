@@ -136,6 +136,14 @@
     "citation_one": "citation",
     "citation_other": "citations",
     "citation_title_case_one": "Citation",
-    "citation_title_case_other": "Citations"
+    "citation_title_case_other": "Citations",
+    "category_one": "category",
+    "category_other": "categories",
+    "category_title_case_one": "Category",
+    "category_title_case_other": "Categories",
+    "title_one": "title",
+    "title_other": "titles",
+    "title_title_case_one": "Title",
+    "title_title_case_other": "Titles"
   }
 }
