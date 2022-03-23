@@ -36,7 +36,6 @@ import JournalsList from "frontend/containers/JournalsList";
 import JournalWrapper from "frontend/containers/JournalWrapper";
 import JournalDetail from "frontend/containers/JournalDetail";
 import VolumeDetail from "frontend/containers/VolumeDetail";
-import IssueDetail from "frontend/containers/IssueDetail";
 import JournalVolumesList from "frontend/containers/JournalVolumesList";
 import JournalIssuesList from "frontend/containers/JournalIssuesList";
 
@@ -52,7 +51,6 @@ export default {
   JournalIssuesList,
   VolumeDetail,
   IssuesList,
-  IssueDetail,
   ProjectsWrapper,
   Projects,
   ProjectCollections,

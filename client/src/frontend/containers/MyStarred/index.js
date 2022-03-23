@@ -68,7 +68,7 @@ function MyStarredContainer() {
       failureRedirect={lh.link("frontendLogin")}
       failureNotification
     >
-      <HeadContent title={t("pages.frontend.my_starred")} appendTitle />
+      <HeadContent title={t("pages.frontend.my_starred")} appendDefaultTitle />
       <EntityCollection.MyStarred
         collection={collection}
         responses={responses}

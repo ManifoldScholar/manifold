@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
-import HeadContent from "global/components/HeadContent";
 import { useFromStore } from "hooks";
+import HeadContent from "global/components/HeadContent";
 
-function EntityHeadContent({ entity, type, parentEntity }) {
-  const settings = useFromStore("settings", "select");
-  const { t } = useTranslation();
-
-  const installationName = settings?.attributes.general.installationName || "";
+function EntityHeadContent({
+  entity,
+  type,
+  parentEntity,
+  showParentTitle = true,
+  titleOverride
+}) {
   const {
     socialTitle,
     socialDescription,
@@ -18,6 +19,8 @@ function EntityHeadContent({ entity, type, parentEntity }) {
     descriptionPlaintext,
     description,
     heroStyles,
+    attachmentStyles,
+    variantThumbnailStyles,
     number
   } = entity.attributes;
   const {
@@ -27,17 +30,25 @@ function EntityHeadContent({ entity, type, parentEntity }) {
     descriptionPlaintext: parentDescription,
     heroStyles: parentHeroStyles
   } = parentEntity?.attributes ?? {};
+  const settings = useFromStore("settings", "select");
+  const headTitle = settings?.attributes.general.headTitle;
+
+  const appendHeadTitle = entityTitle => {
+    if (!headTitle) return entityTitle;
+    return `${entityTitle} | ${headTitle}`;
+  };
 
   const getTitle = () => {
-    if (socialTitle) return socialTitle;
-    const titleOrNum = (() => {
-      if (parentTitle) {
-        if (number) return `${parentTitle}: ${type} ${number}`;
-        return `${parentTitle}: ${titlePlaintext || title}`;
-      }
-      return titlePlaintext || title;
-    })();
-    return `\u201c${titleOrNum}\u201d ${t("common.on")} ${installationName}`;
+    if (titleOverride) return titleOverride;
+    if (parentTitle && showParentTitle) {
+      if (number) return `${type} ${number} | ${parentTitle}`;
+      return `${titlePlaintext || title} | ${parentTitle}`;
+    }
+    return titlePlaintext || title;
+  };
+
+  const getSocialTitle = () => {
+    return socialTitle || appendHeadTitle(getTitle());
   };
 
   const getDescription = () => {
@@ -53,6 +64,9 @@ function EntityHeadContent({ entity, type, parentEntity }) {
     if (socialImageStyles?.mediumLandscape)
       return socialImageStyles.mediumLandscape;
     if (heroStyles?.mediumLandscape) return heroStyles.mediumLandscape;
+    if (attachmentStyles?.mediumSquare) return attachmentStyles.mediumSquare;
+    if (variantThumbnailStyles?.mediumSquare)
+      return variantThumbnailStyles.mediumSquare;
     if (parentSocialImageStyles?.mediumLandscape)
       return parentSocialImageStyles.mediumLandscape;
     if (parentHeroStyles?.mediumLandscape)
@@ -62,7 +76,8 @@ function EntityHeadContent({ entity, type, parentEntity }) {
 
   return (
     <HeadContent
-      title={getTitle()}
+      title={appendHeadTitle(getTitle())}
+      socialTitle={getSocialTitle()}
       description={getDescription()}
       image={getImage()}
     />
@@ -72,7 +87,9 @@ function EntityHeadContent({ entity, type, parentEntity }) {
 EntityHeadContent.propTypes = {
   entity: PropTypes.object.isRequired,
   type: PropTypes.string,
-  parentEntity: PropTypes.object
+  parentEntity: PropTypes.object,
+  showParentTitle: PropTypes.bool,
+  titleOverride: PropTypes.string
 };
 
 export default EntityHeadContent;

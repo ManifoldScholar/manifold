@@ -14,7 +14,11 @@ export default function IssueDetailContainer({ project, breadcrumbs }) {
     <>
       <CheckFrontendMode debugLabel="IssueDetail" isProjectHomePage />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
-      <EntityHeadContent entity={project} parentEntity={parentJournal} />
+      <EntityHeadContent
+        entity={project}
+        parentEntity={parentJournal}
+        showParentTitle={false}
+      />
       <Issue.Detail issue={project} />
     </>
   );

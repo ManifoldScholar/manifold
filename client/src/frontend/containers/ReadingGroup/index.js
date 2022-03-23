@@ -97,7 +97,7 @@ export default function ReadingGroup({ route }) {
       <Drawer.Wrapper {...drawerProps}>
         <Settings {...settingsProps} />
       </Drawer.Wrapper>
-      <HeadContent title={groupName} appendTitle />
+      <HeadContent title={groupName} appendDefaultTitle />
       <section>
         <div className="container">
           <RegisterBreadcrumbs {...breadcrumbProps} />

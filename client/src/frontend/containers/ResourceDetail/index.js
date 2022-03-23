@@ -9,9 +9,8 @@ import { resourcesAPI, resourceCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import LoadingBlock from "global/components/loading-block";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import HeadContent from "global/components/HeadContent";
+import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import some from "lodash/some";
-import withSettings from "hoc/withSettings";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 
@@ -51,7 +50,6 @@ export class ResourceDetailContainer extends PureComponent {
   static propTypes = {
     project: PropTypes.object,
     resourceCollection: PropTypes.object,
-    settings: PropTypes.object.isRequired,
     resource: PropTypes.object,
     dispatch: PropTypes.func,
     visibility: PropTypes.object,
@@ -146,7 +144,7 @@ export class ResourceDetailContainer extends PureComponent {
   }
 
   render() {
-    const { project, resource, settings, t } = this.props;
+    const { project, resource } = this.props;
 
     if (!project || !resource) {
       return <LoadingBlock />;
@@ -159,16 +157,7 @@ export class ResourceDetailContainer extends PureComponent {
           resource={this.props.resource}
         />
         <CheckFrontendMode debugLabel="ResourceDetail" isProjectSubpage />
-        <HeadContent
-          title={`\u201c${resource.attributes.titlePlaintext}\u201d ${t(
-            "glossary.resource_one"
-          )} ${t("common.on")} ${settings.attributes.general.installationName}`}
-          description={resource.attributes.captionPlaintext}
-          image={
-            resource.attributes.attachmentStyles.mediumSquare ||
-            resource.attributes.variantThumbnailStyles.mediumSquare
-          }
-        />
+        <EntityHeadContent entity={resource} parentEntity={project} />
         <RegisterBreadcrumbs breadcrumbs={this.breadcrumbs()} />
         {resource ? (
           <Resource.Detail
@@ -186,6 +175,4 @@ export class ResourceDetailContainer extends PureComponent {
   }
 }
 
-export default withTranslation()(
-  connectAndFetch(withSettings(ResourceDetailContainer))
-);
+export default withTranslation()(connectAndFetch(ResourceDetailContainer));
