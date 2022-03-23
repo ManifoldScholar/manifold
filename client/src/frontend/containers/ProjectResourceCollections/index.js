@@ -8,11 +8,10 @@ import { projectsAPI, requests } from "api";
 import { select, meta } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 import LoadingBlock from "global/components/loading-block";
-import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
+import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import EntityCollection from "frontend/components/composed/EntityCollection";
-import withSettings from "hoc/withSettings";
 
 const { request, flush } = entityStoreActions;
 const defaultPage = 1;
@@ -49,7 +48,6 @@ class ProjectResourceCollectionsContainer extends Component {
     project: PropTypes.object,
     resourceCollections: PropTypes.array,
     resourceCollectionsMeta: PropTypes.object,
-    settings: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     journalBreadcrumbs: PropTypes.array,
     t: PropTypes.func
@@ -105,7 +103,7 @@ class ProjectResourceCollectionsContainer extends Component {
   }
 
   render() {
-    const { project, settings, t } = this.props;
+    const { project, t } = this.props;
     if (!project) return <LoadingBlock />;
 
     return (
@@ -114,12 +112,11 @@ class ProjectResourceCollectionsContainer extends Component {
           debugLabel="ProjectResourceCollections"
           isProjectSubpage
         />
-        <HeadContent
-          title={`\u201c${project.attributes.titlePlaintext}\u201d ${t(
-            "glossary.resource_collection_other"
-          )} ${t("common.on")} ${settings.attributes.general.installationName}`}
-          description={project.attributes.description}
-          image={project.attributes.heroStyles.medium}
+        <EntityHeadContent
+          entity={project}
+          titleOverride={`${t(
+            "glossary.resource_collection_title_case_other"
+          )} | ${project.attributes.titlePlaintext}`}
         />
         <h1 className="screen-reader-text">
           {`${project.attributes.titlePlaintext} ${t(
@@ -145,5 +142,5 @@ class ProjectResourceCollectionsContainer extends Component {
 }
 
 export default withTranslation()(
-  connectAndFetch(withSettings(ProjectResourceCollectionsContainer))
+  connectAndFetch(ProjectResourceCollectionsContainer)
 );

@@ -50,7 +50,10 @@ function PublicReadingGroupsListContainer({ route }) {
 
   return readingGroups ? (
     <>
-      <HeadContent title={t("pages.frontend.public_groups")} appendTitle />
+      <HeadContent
+        title={t("pages.frontend.public_groups")}
+        appendDefaultTitle
+      />
       <section>
         <div className="container groups-page-container">
           <GroupsHeading currentUser={currentUser} />

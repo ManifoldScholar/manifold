@@ -11,10 +11,9 @@ import debounce from "lodash/debounce";
 import omitBy from "lodash/omitBy";
 import isNull from "lodash/isNull";
 import lh from "helpers/linkHandler";
-import HeadContent from "global/components/HeadContent";
+import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollection from "frontend/components/composed/EntityCollection";
-import withSettings from "hoc/withSettings";
 
 const { request, flush } = entityStoreActions;
 const defaultPage = 1;
@@ -46,7 +45,6 @@ export class ProjectResourcesContainer extends Component {
 
   static propTypes = {
     project: PropTypes.object,
-    settings: PropTypes.object.isRequired,
     resources: PropTypes.array,
     resourcesMeta: PropTypes.object,
     dispatch: PropTypes.func,
@@ -150,17 +148,16 @@ export class ProjectResourcesContainer extends Component {
   }
 
   render() {
-    const { project, settings, resources, resourcesMeta, t } = this.props;
+    const { project, resources, resourcesMeta, t } = this.props;
     if (!project) return <LoadingBlock />;
 
     return (
-      <div>
-        <HeadContent
-          title={`\u201c${project.attributes.titlePlaintext}\u201d ${t(
-            "glossary.resource_other"
-          )} ${t("common.on")} ${settings.attributes.general.installationName}`}
-          description={project.attributes.description}
-          image={project.attributes.heroStyles.medium}
+      <>
+        <EntityHeadContent
+          entity={project}
+          titleOverride={`${t("glossary.resource_title_case_other")} | ${
+            project.attributes.titlePlaintext
+          }`}
         />
         <RegisterBreadcrumbs breadcrumbs={this.breadcrumbs()} />
         <EntityCollection.ProjectResources
@@ -182,11 +179,9 @@ export class ProjectResourcesContainer extends Component {
           }}
           itemHeadingLevel={3}
         />
-      </div>
+      </>
     );
   }
 }
 
-export default withTranslation()(
-  connectAndFetch(withSettings(ProjectResourcesContainer))
-);
+export default withTranslation()(connectAndFetch(ProjectResourcesContainer));

@@ -40,7 +40,7 @@ export default function MyAnnotationsContainer() {
 
   return annotations ? (
     <>
-      <HeadContent title={t("pages.frontend.my_notes")} appendTitle />
+      <HeadContent title={t("pages.frontend.my_notes")} appendDefaultTitle />
       <EntityCollection.MyAnnotations
         annotations={annotations}
         annotationsMeta={meta}

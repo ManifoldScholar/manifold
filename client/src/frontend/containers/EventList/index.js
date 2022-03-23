@@ -81,7 +81,7 @@ export class EventList extends Component {
           )}`}
           description={this.project.attributes.description}
           image={this.project.attributes.avatarStyles.mediumSquare}
-          appendTitle
+          appendDefaultTitle
         />
         <CheckFrontendMode
           debugLabel="EventList"

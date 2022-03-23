@@ -10,6 +10,7 @@ import withSettings from "hoc/withSettings";
 export class HeadContentComponent extends Component {
   static propTypes = {
     title: PropTypes.string,
+    socialTitle: PropTypes.string,
     image: PropTypes.string,
     siteName: PropTypes.string,
     imageWidth: PropTypes.string,
@@ -19,7 +20,7 @@ export class HeadContentComponent extends Component {
     twitterCard: PropTypes.string,
     twitterSite: PropTypes.string,
     description: PropTypes.string,
-    appendTitle: PropTypes.bool,
+    appendDefaultTitle: PropTypes.bool,
     settings: PropTypes.object
   };
 
@@ -30,11 +31,17 @@ export class HeadContentComponent extends Component {
   }
 
   get title() {
-    let title = this.props.title;
-    if (!title) return null;
-    if (this.props.appendTitle) title = `${this.defaultTitle} | ${title}`;
+    return this.props.title;
+  }
 
-    return title;
+  get appendedTitle() {
+    if (this.props.appendDefaultTitle)
+      return `${this.title} | ${this.defaultTitle}`;
+    return this.title;
+  }
+
+  get socialTitle() {
+    return this.props.socialTitle || this.appendedTitle;
   }
 
   get twitterSite() {
@@ -81,7 +88,7 @@ export class HeadContentComponent extends Component {
     this.addOpenGraph(meta, "siteName", "site_name", this.defaultTitle);
     this.addOpenGraph(meta, "locale");
     this.addOpenGraph(meta, "image", null, this.image);
-    this.addOpenGraph(meta, "title", null, this.title);
+    this.addOpenGraph(meta, "title", null, this.socialTitle);
     this.addOpenGraph(meta, "description", null, this.description);
     this.addOpenGraph(meta, "imageWidth", "image:width");
     this.addOpenGraph(meta, "imageHeight", "image:height");
@@ -91,16 +98,16 @@ export class HeadContentComponent extends Component {
   }
 
   titleTemplate(props) {
-    if (!props.appendTitle) return null;
+    if (!props.appendDefaultTitle) return null;
 
-    return `${this.defaultTitle} | %s`;
+    return `%s | ${this.defaultTitle}`;
   }
 
   render() {
     const meta = this.buildMetaContent();
     const props = {
       meta,
-      title: this.props.title
+      title: this.title
     };
     props.titleTemplate = this.titleTemplate(this.props);
     props.defaultTitle = this.defaultTitle;
