@@ -130,6 +130,7 @@ const render = async (req, res, store) => {
         store,
         stats,
         styleTags,
+        helmetContext,
         body: renderString
       });
       if (isError) {
