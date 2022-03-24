@@ -127,7 +127,7 @@
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.21",
     "mammoth": "^1.4.16",
-    "minimist": "^1.2.3",
+    "minimist": "^1.2.6",
     "mkdirp": "^0.5.1",
     "morgan": "^1.6.1",
     "nl2br": "^0.0.3",
