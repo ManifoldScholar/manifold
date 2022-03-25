@@ -1,5 +1,5 @@
 <div align="right">
-    <a href="https://travis-ci.org/ManifoldScholar/manifold"><img src="https://travis-ci.org/ManifoldScholar/manifold.svg?branch=master" /></a> 
+    <a href="https://travis-ci.org/ManifoldScholar/manifold"><img src="https://travis-ci.org/ManifoldScholar/manifold.svg?branch=master" /></a>
     <a href="https://houndci.com"><img src="https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg" alt="Reviewed by Hound" /></a>
 </div>
 <div align="center">
@@ -10,7 +10,7 @@
 </div>
 
 <p align="center">
-    Manifold is an intuitive, collaborative platform for scholarly publishing. With iterative texts, powerful annotation tools, rich media support, and robust community dialogue, Manifold transforms scholarly publications into living digital works. 
+    Manifold is an intuitive, collaborative platform for scholarly publishing. With iterative texts, powerful annotation tools, rich media support, and robust community dialogue, Manifold transforms scholarly publications into living digital works.
 </p>
 
 <p align="center">
@@ -23,7 +23,7 @@
 
 ## Watch the Video
 
-[![What is Manifold](https://i.vimeocdn.com/video/674811296.webp?mw=960&mh=540)](https://vimeo.com/249096229)
+[![What is Manifold](https://i.vimeocdn.com/video/674811296-13b72ba1dc098c7ebcd7a2303e10501e798e2803190cc8daea923cfee30d3581-d?mw=960&mh=540&q=70)](https://vimeo.com/249096229)
 
 ## Overview
 
@@ -43,7 +43,7 @@ Manifold is released under the Gnu Public License, version 3. See the [LICENSE.m
 
 #### Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/ManifoldScholar/manifold/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/ManifoldScholar/manifold/tags).
 
 #### Documentation
 
