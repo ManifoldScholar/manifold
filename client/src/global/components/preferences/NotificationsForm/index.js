@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import config from "config";
 import { UIDConsumer } from "react-uid";
 import Collapse from "global/components/Collapse";
 import RadioGroup from "./RadioGroup";
 import ProjectPreferences from "./ProjectPreferences";
 
-export default class NotificationsForm extends Component {
+class NotificationsForm extends Component {
   static propTypes = {
     preferences: PropTypes.object,
     changeHandler: PropTypes.func.isRequired,
     digestProjectsChangeHandler: PropTypes.func.isRequired,
-    unsubscribeAllHandler: PropTypes.func.isRequired
+    unsubscribeAllHandler: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   get preferences() {
@@ -41,6 +43,8 @@ export default class NotificationsForm extends Component {
   render() {
     if (!this.preferences) return null;
 
+    const t = this.props.t;
+
     return (
       <div className="subscriptions">
         <UIDConsumer name={id => `project-activity-${id}`}>
@@ -51,13 +55,12 @@ export default class NotificationsForm extends Component {
               aria-describedby={`${id}-instructions`}
             >
               <h2 id={`${id}-header`} className="section-heading-secondary">
-                Project Activity
+                {t("forms.notifications.project_activity")}
               </h2>
               <div className="form-group">
                 <div className="form-input">
                   <span id={`${id}-instructions`} className="instructions">
-                    {`Manifold can send you a daily or weekly email with information about texts,
-                  resources, and resource collections that have been added to projects.`}
+                    {t("forms.notifications.project_activity_instructions")}
                   </span>
                 </div>
                 <Collapse initialVisible={this.digestOpen}>
@@ -77,7 +80,7 @@ export default class NotificationsForm extends Component {
           {id => (
             <div role="group" aria-labelledby={`${id}-header`}>
               <h2 id={`${id}-header`} className="section-heading-secondary">
-                Other Activity
+                {t("forms.notifications.other_activity")}
               </h2>
               <div className="form-group">
                 {this.renderNotificationContent()}
@@ -90,10 +93,12 @@ export default class NotificationsForm extends Component {
           onClick={this.props.unsubscribeAllHandler}
         >
           <span className="utility-button__text utility-button__text--underlined">
-            {"Unsubscribe From All"}
+            {t("forms.notifications.unsubscribe")}
           </span>
         </button>
       </div>
     );
   }
 }
+
+export default withTranslation()(NotificationsForm);

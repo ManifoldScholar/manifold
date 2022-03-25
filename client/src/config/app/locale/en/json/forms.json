@@ -117,7 +117,20 @@
     "notifications": {
       "title": "Notification Settings",
       "instructions": "Edit your email notifications and subscriptions.",
-      "submit_label": "Save Changes"
+      "submit_label": "Save Changes",
+      "project_activity": "Project Activity",
+      "project_activity_instructions": "Manifold can send you a daily or weekly email with information about texts, resources, and resource collections that have been added to projects.",
+      "other_activity": "Other Activity",
+      "unsubscribe": "Unsubscribe from all",
+      "project_preferences": {
+        "frequency_label": "How often would you like to be notified?",
+        "never": "Never",
+        "daily": "Daily",
+        "weekly": "Weekly",
+        "types_label": "Which projects should be included?",
+        "all_projects": "All $t(glossary.project_title_case_other)",
+        "only_following": "Only Projects I'm Following"
+      }
     }
   }
 }

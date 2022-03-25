@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import config from "config";
 import Collapse from "global/components/Collapse";
 import useCollapseContext from "global/components/Collapse/useCollapseContext";
@@ -7,10 +8,16 @@ import RadioGroup from "./RadioGroup";
 
 function ProjectPreferences({ preferences, onChange, onDigestChange }) {
   const { toggleProps } = useCollapseContext();
+  const { t } = useTranslation();
+
   const items = config.app.locale.notificationPreferences.digest;
   const options = {
-    ...(preferences.projects && { projects: "All Projects" }),
-    followedProjects: "Only Projects I'm Following"
+    ...(preferences.projects && {
+      projects: t("forms.notifications.project_preferences.all_projects")
+    }),
+    followedProjects: t(
+      "forms.notifications.project_preferences.only_following"
+    )
   };
 
   return (
@@ -18,13 +25,13 @@ function ProjectPreferences({ preferences, onChange, onDigestChange }) {
       <RadioGroup
         preference={{
           key: "digest",
-          label: "How often would you like to be notified?"
+          label: t("forms.notifications.project_preferences.frequency_label")
         }}
         value={preferences.digest}
         options={{
-          never: "Never",
-          daily: "Daily",
-          weekly: "Weekly"
+          never: t("forms.notifications.project_preferences.never"),
+          daily: t("forms.notifications.project_preferences.daily"),
+          weekly: t("forms.notifications.project_preferences.weekly")
         }}
         onChange={onChange}
         inputProps={{
@@ -40,7 +47,7 @@ function ProjectPreferences({ preferences, onChange, onDigestChange }) {
           <RadioGroup
             preference={{
               key: "digest-projects",
-              label: "Which projects should be included?"
+              label: t("forms.notifications.project_preferences.types_label")
             }}
             value={Object.keys(preferences).find(
               prefKey => prefKey in options && preferences[prefKey] === "always"
