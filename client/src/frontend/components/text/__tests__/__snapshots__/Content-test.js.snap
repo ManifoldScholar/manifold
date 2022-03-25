@@ -3,7 +3,7 @@
 exports[`frontend/components/text/Content matches the snapshot 1`] = `
 <Content>
   <Inner>
-    <Text.Cover
+    <withI18nextTranslation(Text.Cover)
       iconOnly={true}
       text={
         Object {

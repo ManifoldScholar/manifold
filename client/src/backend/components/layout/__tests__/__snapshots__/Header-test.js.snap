@@ -10,11 +10,7 @@ exports[`Backend.Layout.Header component matches the snapshot 1`] = `
     measurement="height"
     propertyName="--library-header-height"
   >
-    <SkipLink
-      skipId="skip-to-main"
-      skipLinkText="Skip to main content"
-      skipMessage="Skipped to Main Content"
-    />
+    <withI18nextTranslation(SkipLink) />
     <div
       className="library-header library-header--dark"
     >
@@ -30,11 +26,11 @@ exports[`Backend.Layout.Header component matches the snapshot 1`] = `
           >
             Return to home
           </span>
-          <PressLogo
+          <withI18nextTranslation(PressLogo)
             aria-hidden="true"
           />
         </HeaderLogo>
-        <withRouter(Navigation.Primary)
+        <withI18nextTranslation(withRouter(Navigation.Primary))
           authentication={
             Object {
               "authenticated": true,
