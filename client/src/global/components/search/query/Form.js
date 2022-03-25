@@ -1,12 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import Option from "global/components/form/Radio/Option";
 import CheckboxMixed from "./CheckboxMixed";
 
-export default class SearchQueryForm extends PureComponent {
+class SearchQueryForm extends PureComponent {
   static displayName = "Search.Query.Form";
 
   static propTypes = {
@@ -20,7 +21,8 @@ export default class SearchQueryForm extends PureComponent {
     searchOnScopeChange: PropTypes.bool,
     projectId: PropTypes.string,
     textId: PropTypes.string,
-    sectionId: PropTypes.string
+    sectionId: PropTypes.string,
+    t: PropTypes.func
   };
 
   /* eslint-disable no-console */
@@ -103,19 +105,24 @@ export default class SearchQueryForm extends PureComponent {
   }
 
   get availableScopes() {
+    const t = this.props.t;
     const scopes = [];
     const { projectId, textId, sectionId } = this.props;
     if (sectionId)
       scopes.push({
-        label: "Chapter",
+        label: t("glossary.chapter_one"),
         value: "section",
         originalValue: "section"
       });
     if (textId)
-      scopes.push({ label: "Text", value: "text", originalValue: "text" });
+      scopes.push({
+        label: t("glossary.text_one"),
+        value: "text",
+        originalValue: "text"
+      });
     if (projectId)
       scopes.push({
-        label: "Project",
+        label: t("glossary.project_one"),
         value: "project",
         originalValue: "project"
       });
@@ -180,7 +187,7 @@ export default class SearchQueryForm extends PureComponent {
         })}
       >
         <div className="search-query__group-label">
-          <legend>Search within:</legend>
+          <legend>{this.props.t("search.scopes_label")}</legend>
         </div>
         <div className="search-query__filter-group-list">
           {this.availableScopes.map(option => (
@@ -201,7 +208,7 @@ export default class SearchQueryForm extends PureComponent {
   renderFacetOptions() {
     return (
       <CheckboxMixed
-        label="Show results for:"
+        label={this.props.t("search.result_types_label")}
         checkboxes={this.props.facets}
         onChange={value => this.setFacets(value)}
       />
@@ -224,7 +231,9 @@ export default class SearchQueryForm extends PureComponent {
             type="submit"
             className="search-query__button-primary button-primary"
           >
-            <span className="button-primary__text">Search</span>
+            <span className="button-primary__text">
+              {this.props.t("search.title")}
+            </span>
           </button>
         ) : null}
       </div>
@@ -232,6 +241,7 @@ export default class SearchQueryForm extends PureComponent {
   }
 
   render() {
+    const t = this.props.t;
     return (
       <form className="search-query" onSubmit={this.doSearch}>
         <div className="search-query__input-magnify">
@@ -239,7 +249,7 @@ export default class SearchQueryForm extends PureComponent {
             {id => (
               <>
                 <label htmlFor={id} className="screen-reader-text">
-                  Enter Search Criteria
+                  {t("search.instructions")}
                 </label>
                 <input
                   type="text"
@@ -247,7 +257,7 @@ export default class SearchQueryForm extends PureComponent {
                   autoFocus
                   onChange={this.setKeyword}
                   value={this.state.keyword}
-                  placeholder={"Search…"}
+                  placeholder={t("search.placeholder")}
                   className="search-query__input"
                 />
               </>
@@ -259,7 +269,7 @@ export default class SearchQueryForm extends PureComponent {
               icon="search16"
               size={22}
             />
-            <span className="screen-reader-text">Execute Search</span>
+            <span className="screen-reader-text">{t("search.execute")}</span>
           </button>
         </div>
         {this.availableScopes.length > 1 && this.renderScopeOptions()}
@@ -269,3 +279,5 @@ export default class SearchQueryForm extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(SearchQueryForm);

@@ -26,11 +26,11 @@ function SearchResultsTypeAnnotation({ result, highlightedAttribute }) {
   const creator = model?.relationships?.creator?.attributes ?? {};
 
   const title = (
-    <Trans i18nKey="search.annotation_title">
-      {{ name: creator.fullName }}{" "}
-      <Styled.AnnotationTitle>annotated</Styled.AnnotationTitle>{" "}
-      {{ entity: parent }}
-    </Trans>
+    <Trans
+      i18nKey="search.annotation_title"
+      values={{ name: creator.fullName, entity: parent }}
+      components={[<Styled.AnnotationTitle />]}
+    />
   );
 
   const parentUrl = lh.link("readerSection", text.slug, textSection.id);

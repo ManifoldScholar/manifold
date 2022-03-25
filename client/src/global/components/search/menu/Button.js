@@ -1,14 +1,16 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 
-export default class SearchMenuButton extends PureComponent {
+class SearchMenuButton extends PureComponent {
   static propTypes = {
     toggleSearchMenu: PropTypes.func,
     active: PropTypes.bool,
     className: PropTypes.string,
-    iconSize: PropTypes.oneOf([22, 32])
+    iconSize: PropTypes.oneOf([22, 32]),
+    t: PropTypes.func
   };
 
   get iconSize() {
@@ -42,8 +44,12 @@ export default class SearchMenuButton extends PureComponent {
           icon={this.icon}
           size={this.iconSize}
         />
-        <span className="screen-reader-text">{"Search"}</span>
+        <span className="screen-reader-text">
+          {this.props.t("search.title")}
+        </span>
       </button>
     );
   }
 }
+
+export default withTranslation()(SearchMenuButton);

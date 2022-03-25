@@ -113,8 +113,8 @@ export class NavigationStatic extends PureComponent {
       Boolean(this.isLibraryDisabled && this.context.project);
 
     const description = scopeToProject
-      ? t("utility.search.description_project_scope")
-      : t("utility.search.description_full_scope");
+      ? t("search.description_project_scope")
+      : t("search.description_full_scope");
     const projectId = scopeToProject ? this.context.project.id : null;
 
     return (

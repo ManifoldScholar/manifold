@@ -107,6 +107,8 @@
     "subject_one": "subject",
     "subject_other": "subjects",
     "subject_title_case_one": "Subject",
-    "subject_title_case_other": "Subjects"
+    "subject_title_case_other": "Subjects",
+    "chapter_one": "chapter",
+    "chapter_other": "chapters"
   }
 }
