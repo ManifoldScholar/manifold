@@ -1,12 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import range from "lodash/range";
 import isString from "lodash/isString";
 import IconComposer from "../IconComposer";
 import * as Styled from "./styles";
 
-export default class UtilityPagination extends PureComponent {
+class UtilityPagination extends PureComponent {
   static displayName = "Utility.Pagination";
 
   static propTypes = {
@@ -14,7 +15,8 @@ export default class UtilityPagination extends PureComponent {
     paginationTarget: PropTypes.string,
     padding: PropTypes.number,
     paginationClickHandler: PropTypes.func,
-    compact: PropTypes.bool
+    compact: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -57,6 +59,7 @@ export default class UtilityPagination extends PureComponent {
   previous(pagination) {
     const handler = this.props.paginationClickHandler(pagination.prevPage);
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
+    const t = this.props.t;
 
     return (
       <Styled.Link
@@ -64,8 +67,11 @@ export default class UtilityPagination extends PureComponent {
         aria-disabled={!pagination.prevPage}
         {...pageProps}
       >
-        <IconComposer icon="arrowLongLeft16" screenReaderText="previous page" />
-        <span>Prev</span>
+        <IconComposer
+          icon="arrowLongLeft16"
+          screenReaderText={t("pagination.previous_page")}
+        />
+        <span>{t("pagination.previous_short")}</span>
       </Styled.Link>
     );
   }
@@ -73,6 +79,7 @@ export default class UtilityPagination extends PureComponent {
   next(pagination) {
     const handler = this.props.paginationClickHandler(pagination.nextPage);
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
+    const t = this.props.t;
 
     return (
       <Styled.Link
@@ -80,25 +87,32 @@ export default class UtilityPagination extends PureComponent {
         aria-disabled={!pagination.nextPage}
         {...pageProps}
       >
-        <span>Next</span>
-        <IconComposer icon="arrowLongRight16" screenReaderText="next page" />
+        <span>{t("pagination.next")}</span>
+        <IconComposer
+          icon="arrowLongRight16"
+          screenReaderText={t("pagination.next_page")}
+        />
       </Styled.Link>
     );
   }
 
   number(page, handler) {
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
+    const t = this.props.t;
 
     return (
       <Styled.Link key={page.number} as={PageComponent} {...pageProps}>
         <span aria-hidden="true">{page.number}</span>
-        <span className="screen-reader-text">Go to page: {page.number}</span>
+        <span className="screen-reader-text">
+          {t("pagination.go_to_page", { number: page.number })}
+        </span>
       </Styled.Link>
     );
   }
 
   current(page, handler) {
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
+    const t = this.props.t;
 
     return (
       <Styled.Link
@@ -108,7 +122,9 @@ export default class UtilityPagination extends PureComponent {
         {...pageProps}
       >
         <span aria-hidden="true">{page.number}</span>
-        <span className="screen-reader-text">Go to page: {page.number}</span>
+        <span className="screen-reader-text">
+          {t("pagination.go_to_page", { number: page.number })}
+        </span>
       </Styled.Link>
     );
   }
@@ -126,9 +142,10 @@ export default class UtilityPagination extends PureComponent {
   renderCompact(pagination) {
     return (
       <span>
-        Page {pagination.currentPage}
-        {` `}/{` `}
-        {pagination.totalPages}
+        {this.props.t("pagination.compact", {
+          current: pagination.currentPage,
+          total: pagination.totalPages
+        })}
       </span>
     );
   }
@@ -140,8 +157,10 @@ export default class UtilityPagination extends PureComponent {
     const pagination = this.props.pagination;
     if (pagination.totalPages === 1 || pagination.totalPages === 0) return null;
 
+    const t = this.props.t;
+
     return (
-      <Styled.Nav aria-label="Pagination">
+      <Styled.Nav aria-label={t("pagination.aria_label")}>
         <Styled.Columns>
           <Styled.Column>{this.previous(pagination)}</Styled.Column>
           <Styled.Column>
@@ -157,3 +176,5 @@ export default class UtilityPagination extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(UtilityPagination);
