@@ -15,7 +15,7 @@ export const Image = styled.img`
   width: 100%;
   max-height: 310px;
   object-fit: cover;
-  object-position: bottom;
+  object-position: center;
 `;
 
 export const LogoWrapper = styled.div`
