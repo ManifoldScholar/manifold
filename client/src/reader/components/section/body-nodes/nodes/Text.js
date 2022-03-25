@@ -184,6 +184,8 @@ class TextNode extends Component {
         "annotation-resource-end": notations && endingResources.length > 0
       });
 
+      const announcedStyle = this.announcedStyle({ wavy, dots, dashes });
+
       const textAnnotationIds = map[index]
         .filter(a => a.type === "annotation")
         .map(a => a.id);
@@ -202,7 +204,7 @@ class TextNode extends Component {
               "aria-haspopup": removableHighlight ? "menu" : "dialog",
               "aria-label": removableHighlight
                 ? this.ariaLabelForHighlight(chunk)
-                : this.ariaLabelForAnnotation(chunk)
+                : this.ariaLabelForAnnotation(chunk, announcedStyle)
             }
           : {};
 
@@ -233,12 +235,19 @@ class TextNode extends Component {
     return Number.isInteger(count) ? count : null;
   }
 
+  announcedStyle({ wavy, dots, dashes }) {
+    if (wavy) return "wavy";
+    if (dots) return "dots";
+    if (dashes) return "dashes";
+    return "solid";
+  }
+
   ariaLabelForHighlight(chunk) {
     return this.props.t("reader.actions.manage_highlight", { chunk });
   }
 
-  ariaLabelForAnnotation(chunk) {
-    return this.props.t("reader.actions.view_annotations", { chunk });
+  ariaLabelForAnnotation(chunk, style) {
+    return this.props.t("reader.actions.view_annotations", { chunk, style });
   }
 
   doScroll(withTimeout = false) {
