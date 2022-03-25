@@ -1,20 +1,24 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 
-export default class PressLogo extends Component {
+class PressLogo extends Component {
   static propTypes = {
     url: PropTypes.string,
     mobileUrl: PropTypes.string,
-    styles: PropTypes.string
+    styles: PropTypes.string,
+    t: PropTypes.func
   };
 
   getDefaultIcon() {
     return (
       <>
         <Utility.IconComposer size={26} icon="manifoldLogo32" />
-        <span className="screen-reader-text">{"Manifold Logo"}</span>
+        <span className="screen-reader-text">
+          {this.props.t("app.manifold_logo")}
+        </span>
       </>
     );
   }
@@ -29,7 +33,7 @@ export default class PressLogo extends Component {
         style = JSON.parse(this.props.styles);
       } catch (e) {
         /* eslint-disable no-console */
-        console.log("Error: Invalid press logo styles");
+        console.log(this.props.t("errors.logo_styles"));
         /* eslint-enable no-console */
       }
     }
@@ -37,7 +41,7 @@ export default class PressLogo extends Component {
     return (
       <img
         src={this.props.url}
-        alt="Publisher Logo: Click to return to the browse page"
+        alt={this.props.t("img_alts.publisher_logo")}
         className={className}
         style={style}
       />
@@ -51,7 +55,7 @@ export default class PressLogo extends Component {
     return (
       <img
         src={this.props.mobileUrl}
-        alt="Publisher Logo: Click to return to the browse page"
+        alt={this.props.t("img_alts.publisher_logo")}
         className={className}
       />
     );
@@ -73,3 +77,5 @@ export default class PressLogo extends Component {
     );
   }
 }
+
+export default withTranslation()(PressLogo);

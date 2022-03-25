@@ -5,7 +5,8 @@
     "nl": "Dutch"
   },
   "app": {
-    "manifold": "Manifold"
+    "manifold": "Manifold",
+    "manifold_logo": "$t(app.manifold) Logo"
   },
   "journals": {
     "volume_number": "Volume {{volNum}}",
@@ -39,6 +40,7 @@
   },
   "img_alts": {
     "user_avatar": "User Avatar",
-    "avatar_for_name": "{{name}}'s avatar"
+    "avatar_for_name": "{{name}}'s avatar",
+    "publisher_logo": "Publisher Logo: Click to return to the browse page"
   }
 }

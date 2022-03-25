@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 
-export default class Notification extends Component {
+class Notification extends Component {
   static propTypes = {
     id: PropTypes.string,
     heading: PropTypes.string,
     body: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     level: PropTypes.number,
     removeNotification: PropTypes.func,
-    style: PropTypes.string
+    style: PropTypes.string,
+    t: PropTypes.func
   };
 
   // Close notification in handler in case event access is required
@@ -57,10 +59,14 @@ export default class Notification extends Component {
               size={36}
               className="notification__button-icon"
             />
-            <span className="screen-reader-text">{"Dismiss"}</span>
+            <span className="screen-reader-text">
+              {this.props.t("actions.dismiss")}
+            </span>
           </button>
         </div>
       </div>
     );
   }
 }
+
+export default withTranslation()(Notification);
