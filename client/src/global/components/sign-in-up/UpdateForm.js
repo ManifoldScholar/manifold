@@ -41,7 +41,7 @@ export class UpdateFormContainer extends Component {
   }
 
   componentDidMount() {
-    if (this.formRef) this.formRef.focus();
+    if (this.formRef?.focus) this.formRef.focus();
   }
 
   componentDidUpdate(prevProps) {
