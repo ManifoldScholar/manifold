@@ -34,7 +34,7 @@ exports[`frontend/containers/Subscriptions matches the snapshot 1`] = `
             forms.notifications.instructions
           </span>
         </h1>
-        <NotificationsForm
+        <withI18nextTranslation(NotificationsForm)
           changeHandler={[Function]}
           digestProjectsChangeHandler={[Function]}
           unsubscribeAllHandler={[Function]}

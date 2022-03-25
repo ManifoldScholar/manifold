@@ -13,8 +13,7 @@ exports[`frontend/components/resource/Meta matches the snapshot 1`] = `
       size={48}
     />
   </figure>
-  <Meta.List
-    level="primary"
+  <withI18nextTranslation(Meta.List)
     map={
       Array [
         "type",
