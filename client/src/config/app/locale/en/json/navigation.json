@@ -67,7 +67,11 @@
     "next_entity": "Next {{entity}}",
     "primary": "Primary Navigation",
     "page_links": "Page Links",
-    "user_links": "User Links"
+    "user_links": "User Links",
+    "skip_to_main": {
+      "link": "Skip to main content",
+      "message": "Skipped to main content"
+    }
   },
   "external_links": {
     "view_on_social": "View this project on {{service}}",
