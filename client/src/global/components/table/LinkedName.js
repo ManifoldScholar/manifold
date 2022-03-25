@@ -1,35 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-export default class LinkedName extends React.PureComponent {
-  static propTypes = {
-    to: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    tag: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  };
+export default function LinkedName({ name, tag, to }) {
+  const { t } = useTranslation();
 
-  static displayName = "GenericTable.LinkedName";
-
-  get name() {
-    return this.props.name;
-  }
-
-  get tag() {
-    return this.props.tag;
-  }
-
-  render() {
-    return (
-      <span className="table__name">
-        {this.props.to && (
-          <Link to={this.props.to} className="table__sr-link">
-            View Details
-          </Link>
-        )}
-        <span className="table__name-container">{this.name}</span>
-        {this.tag && <span className="table__tag">{this.tag}</span>}
-      </span>
-    );
-  }
+  return (
+    <span className="table__name">
+      {to && (
+        <Link to={to} className="table__sr-link">
+          {t("tables.generic.view_details")}
+        </Link>
+      )}
+      <span className="table__name-container">{name}</span>
+      {tag && <span className="table__tag">{tag}</span>}
+    </span>
+  );
 }
+
+LinkedName.propTypes = {
+  to: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
+
+LinkedName.displayName = "GenericTable.LinkedName";

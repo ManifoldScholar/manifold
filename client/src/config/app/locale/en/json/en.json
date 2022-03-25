@@ -14,6 +14,11 @@
     "volume_issue_number": "$t(journals.volume_number, {{volNum}}), $t(journals.issue_number, {{issNum}})"
   },
   "tables": {
+    "generic": {
+      "title": "{{label}} Table",
+      "list": "{{label}} List",
+      "view_details": "$t(actions.view) Details"
+    },
     "reading_groups": {
       "headers": {
         "name": "Name",
@@ -41,6 +46,7 @@
   "img_alts": {
     "user_avatar": "User Avatar",
     "avatar_for_name": "{{name}}'s avatar",
-    "publisher_logo": "Publisher Logo: Click to return to the browse page"
+    "publisher_logo": "Publisher Logo: Click to return to the browse page",
+    "entity_cover": "Cover of {{entity}}"
   }
 }
