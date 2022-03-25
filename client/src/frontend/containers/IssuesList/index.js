@@ -1,6 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   useFetch,
@@ -29,7 +27,6 @@ export default function IssuesListContainer() {
   });
 
   useSetLocation({ filters, page: pagination.number });
-  const location = useLocation();
 
   const filterProps = useListFilters({
     onFilterChange: param => setFilters({ newState: param }),
@@ -39,9 +36,9 @@ export default function IssuesListContainer() {
 
   const { t } = useTranslation();
 
-  if (!issues || !meta) return null;
+  const showPlaceholder = "keyword" in filters ? false : !issues?.length;
 
-  const showPlaceholder = location.search ? false : !issues.length;
+  if (!issues || !meta) return null;
 
   return (
     <>

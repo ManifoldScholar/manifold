@@ -1,5 +1,4 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 import { projectsAPI } from "api";
@@ -27,11 +26,8 @@ export default function ProjectsContainer() {
   });
 
   useSetLocation({ filters, page: pagination.number });
-  const location = useLocation();
 
-  const showPlaceholder = location.search
-    ? false
-    : !projects || !projects.length;
+  const showPlaceholder = "keyword" in filters ? false : !projects?.length;
 
   const { t } = useTranslation();
 
