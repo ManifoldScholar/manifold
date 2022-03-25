@@ -1,15 +1,17 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import get from "lodash/get";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
-export default class TextCover extends PureComponent {
+class TextCover extends PureComponent {
   static displayName = "Text.Cover";
 
   static propTypes = {
     text: PropTypes.object.isRequired,
-    iconOnly: PropTypes.bool
+    iconOnly: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -31,7 +33,9 @@ export default class TextCover extends PureComponent {
         {this.hasCover ? (
           <Styled.Image
             src={this.text.attributes.coverStyles.small}
-            alt={"Cover of " + this.text.attributes.titlePlaintext}
+            alt={this.props.t("img_alts.entity_cover", {
+              entity: this.text.attributes.titlePlaintext
+            })}
           />
         ) : (
           <Utility.IconComposer size={78} icon="textsLoosePages64" />
@@ -40,3 +44,5 @@ export default class TextCover extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(TextCover);

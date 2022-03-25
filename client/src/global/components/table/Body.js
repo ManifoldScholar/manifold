@@ -1,20 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import TableHeaders from "./Headers";
 import Row from "./Row";
 import { TableHeaderContext } from "helpers/contexts";
 
-export default class TableBody extends React.PureComponent {
+class TableBody extends React.PureComponent {
   static displayName = "GenericTable.Body";
 
   static propTypes = {
     rows: PropTypes.array,
-    linkCreator: PropTypes.func
+    linkCreator: PropTypes.func,
+    t: PropTypes.func
   };
 
   get ariaLabel() {
     if (!this.props.label) return null;
-    return `${this.props.label} Table.`;
+    return this.props.t("tables.generic.title", { label: this.props.label });
   }
 
   render() {
@@ -55,7 +57,10 @@ export default class TableBody extends React.PureComponent {
           </div>
         )}
         {this.props.markup === "dl" && (
-          <ol className="table__ordered-list" aria-label={`${label} List.`}>
+          <ol
+            className="table__ordered-list"
+            aria-label={label && this.props.t("tables.generic.list", { label })}
+          >
             {rows}
           </ol>
         )}
@@ -63,3 +68,5 @@ export default class TableBody extends React.PureComponent {
     );
   }
 }
+
+export default withTranslation()(TableBody);

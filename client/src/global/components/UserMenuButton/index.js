@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import get from "lodash/get";
 import Avatar from "global/components/avatar";
 
-export default class UserMenuButton extends Component {
+class UserMenuButton extends Component {
   static propTypes = {
     authentication: PropTypes.object,
     active: PropTypes.bool,
     toggleUserMenu: PropTypes.func,
     showLoginOverlay: PropTypes.func,
     className: PropTypes.string,
-    context: PropTypes.oneOf(["frontend", "backend", "reader"])
+    context: PropTypes.oneOf(["frontend", "backend", "reader"]),
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -28,8 +30,8 @@ export default class UserMenuButton extends Component {
   };
 
   screenReaderText = this.props.authentication?.authenticated
-    ? "User settings"
-    : "Sign in";
+    ? this.props.t("navigation.user.settings")
+    : this.props.t("navigation.user.sign_in");
 
   ariaHasPopup = this.props.authentication?.authenticated ? true : "dialog";
 
@@ -59,3 +61,5 @@ export default class UserMenuButton extends Component {
     );
   }
 }
+
+export default withTranslation()(UserMenuButton);

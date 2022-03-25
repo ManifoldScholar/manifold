@@ -14,7 +14,8 @@
       "notifications": "Notifications",
       "notifications_sr_title": "Edit my notification settings",
       "edit_profile": "Edit Profile",
-      "edit_profile_sr_title": "Edit my profile"
+      "edit_profile_sr_title": "Edit my profile",
+      "settings": "User settings"
     },
     "reading_group": {
       "label": "Reading group subpages",
