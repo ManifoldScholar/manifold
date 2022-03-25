@@ -26,13 +26,16 @@ function MyReadingGroupsListContainer({ route }) {
     sort_order: DEFAULT_SORT_ORDER
   };
   const [filters, setFilters] = useFilterState(baseFilters);
-  useSetLocation({ filters, page: pagination.number });
 
   const [rgJoins, setRGJoins] = useState(0);
   const { data: readingGroups, meta } = useFetch({
     request: [meAPI.readingGroups, filters, pagination],
     dependencies: [rgJoins]
   });
+
+  useSetLocation({ filters, page: pagination.number });
+
+  const showPlaceholder = "keyword" in filters ? false : !readingGroups?.length;
 
   const currentUser = useCurrentUser();
   const history = useHistory();
@@ -63,7 +66,7 @@ function MyReadingGroupsListContainer({ route }) {
       <section>
         <div className="container groups-page-container">
           <GroupsHeading currentUser={currentUser} />
-          {!!readingGroups?.length && (
+          {!showPlaceholder && (
             <GroupsTable
               readingGroups={readingGroups}
               pagination={meta?.pagination}
@@ -75,11 +78,7 @@ function MyReadingGroupsListContainer({ route }) {
               }}
             />
           )}
-          {!readingGroups?.length && (
-            <EntityCollectionPlaceholder.ReadingGroups
-              currentUser={currentUser}
-            />
-          )}
+          {showPlaceholder && <EntityCollectionPlaceholder.ReadingGroups />}
           <JoinBox onJoin={() => setRGJoins(prev => prev + 1)} />
         </div>
       </section>

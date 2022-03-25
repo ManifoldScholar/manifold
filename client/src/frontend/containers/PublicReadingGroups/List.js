@@ -24,13 +24,16 @@ function PublicReadingGroupsListContainer({ route }) {
     sort_order: DEFAULT_SORT_ORDER
   };
   const [filters, setFilters] = useFilterState(baseFilters);
-  useSetLocation({ filters, page: pagination.number });
 
   const [rgJoins, setRGJoins] = useState(0);
   const { data: readingGroups, meta } = useFetch({
     request: [readingGroupsAPI.publicIndex, filters, pagination],
     dependencies: [rgJoins]
   });
+
+  useSetLocation({ filters, page: pagination.number });
+
+  const showPlaceholder = "keyword" in filters ? false : !readingGroups?.length;
 
   const currentUser = useCurrentUser();
   const { t } = useTranslation();
@@ -57,7 +60,7 @@ function PublicReadingGroupsListContainer({ route }) {
       <section>
         <div className="container groups-page-container">
           <GroupsHeading currentUser={currentUser} />
-          {!!readingGroups?.length && (
+          {!showPlaceholder && (
             <GroupsTable
               readingGroups={readingGroups}
               currentUser={currentUser}
@@ -72,11 +75,8 @@ function PublicReadingGroupsListContainer({ route }) {
               hideTags
             />
           )}
-          {!readingGroups?.length && (
-            <EntityCollectionPlaceholder.ReadingGroups
-              currentUser={currentUser}
-              isPublic
-            />
+          {showPlaceholder && (
+            <EntityCollectionPlaceholder.ReadingGroups isPublic />
           )}
           {currentUser && (
             <JoinBox onJoin={() => setRGJoins(prev => prev + 1)} />

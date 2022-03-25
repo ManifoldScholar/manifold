@@ -94,18 +94,18 @@ export class ProjectsCollectionsContainer extends Component {
     return this.props.location;
   }
 
+  get pagination() {
+    return this.projectCollectionsMeta?.pagination;
+  }
+
   get showPlaceholder() {
-    if (this.location.search) return false; // There are search filters applied, skip the check
-    if (!this.projectCollections?.length) return true;
+    if (this.pagination?.currentPage > 1) return false;
+    return !this.projectCollections?.length;
   }
 
   get showPagination() {
-    if (
-      isEmpty(this.projectCollectionsMeta) ||
-      !this.projectCollectionsMeta.pagination
-    )
-      return false;
-    if (this.projectCollectionsMeta.pagination.totalPages === 1) return false;
+    if (isEmpty(this.pagination)) return false;
+    if (this.pagination.totalPages === 1) return false;
     return true;
   }
 
