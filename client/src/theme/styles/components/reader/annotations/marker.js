@@ -15,101 +15,45 @@ const underlineStyles = color => {
     .join("");
 };
 
+const defaultUnderline = (color = annotationHighlightColors.primaryBase) => `
+  ${styledUnderline("solid", color)}
+`;
+
 export default `
   .annotation-underline {
     cursor: pointer;
-    background-repeat: repeat-x;
+
+    &:hover {
+      color: inherit;
+    }
 
     &.primary {
-
-      background-image: linear-gradient(
-        var(--color-annotation-primary-light),
-        var(--color-annotation-primary-light)
-      );
-      background-position: 0 100%;
-      background-size: 2px 2px;
-
-      ${underlineStyles(annotationHighlightColors.primaryLight)}
+      ${defaultUnderline()}
+      ${underlineStyles(annotationHighlightColors.primaryBase)}
 
       .scheme-dark & {
-        background-image: linear-gradient(
-          var(--color-annotation-primary-pale-low-contrast),
-          var(--color-annotation-primary-pale-low-contrast)
-        );
-      }
-
-      .multiple {
-        /* Adds an additional background image */
-        background-image: linear-gradient(
-          var(--color-annotation-primary),
-          var(--color-annotation-primary)
-        );
-        background-repeat: repeat-x;
-        background-position: 0 100%;
-        background-size: 2px 2px;
-
-        .scheme-dark & {
-          background-image: linear-gradient(
-            var(--color-annotation-primary-pale-low-contrast),
-            var(--color-annotation-primary-pale-low-contrast)
-          );
-        }
+        ${defaultUnderline(annotationHighlightColors.primaryLight)}
+        ${underlineStyles(annotationHighlightColors.primaryLight)}
       }
     }
 
     &.secondary {
-      background-image: linear-gradient(
-        var(--color-annotation-secondary-light),
-        var(--color-annotation-secondary-light)
-      );
-      background-position: 0 100%;
-      background-size: 2px 2px;
-
-      ${underlineStyles(annotationHighlightColors.secondaryLight)}
+      ${defaultUnderline(annotationHighlightColors.secondaryBase)}
+      ${underlineStyles(annotationHighlightColors.secondaryBase)}
 
       .scheme-dark & {
-        background-image: linear-gradient(
-          var(--color-annotation-secondary-pale-low-contrast),
-          var(--color-annotation-secondary-pale-low-contrast)
-        );
-      }
-
-      .multiple {
-        background-image: linear-gradient(
-          var(--color-annotation-secondary),
-          var(--color-annotation-secondary)
-        );
-        background-repeat: repeat-x;
-        background-position: 0% 100%;
-        background-size: 2px 2px;
+        ${defaultUnderline(annotationHighlightColors.secondaryLight)}
+        ${underlineStyles(annotationHighlightColors.secondaryLight)}
       }
     }
 
     &.tertiary {
-      background-image: linear-gradient(
-        var(--color-annotation-tertiary-light),
-        var(--color-annotation-tertiary-light)
-      );
-      background-position: 0 100%;
-      background-size: 2px 2px;
-
-      ${underlineStyles(annotationHighlightColors.tertiaryLight)}
+      ${defaultUnderline(annotationHighlightColors.tertiaryBase)}
+      ${underlineStyles(annotationHighlightColors.tertiaryBase)}
 
       .scheme-dark & {
-        background-image: linear-gradient(
-          var(--color-annotation-tertiary-pale-low-contrast),
-          var(--color-annotation-tertiary-pale-low-contrast)
-        );
-      }
-
-      .multiple {
-        background-image: linear-gradient(
-          var(--color-annotation-tertiary),
-          var(--color-annotation-tertiary)
-        );
-        background-repeat: repeat-x;
-        background-position: 0% 100%;
-        background-size: 2px 2px;
+        ${defaultUnderline(annotationHighlightColors.tertiaryLight)}
+        ${underlineStyles(annotationHighlightColors.tertiaryLight)}
       }
     }
   }
@@ -121,10 +65,6 @@ export default `
       .scheme-dark & {
         background-color: var(--color-annotation-primary-pale-low-contrast);
       }
-
-      .multiple {
-        background-color: var(--color-annotation-primary-light);
-      }
     }
 
     &.secondary {
@@ -133,10 +73,6 @@ export default `
       .scheme-dark & {
         background-color: var(--color-annotation-secondary-pale-low-contrast);
       }
-
-      .multiple {
-        background-color: var(--color-annotation-secondary-light);
-      }
     }
 
     &.tertiary {
@@ -144,10 +80,6 @@ export default `
 
       .scheme-dark & {
         background-color: var(--color-annotation-tertiary-pale-low-contrast);
-      }
-
-      .multiple {
-        background-color: var(--color-annotation-secondary-light);
       }
     }
 
