@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
 
@@ -7,6 +8,8 @@ function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
   const initialState = checkboxes.map(checkbox => checkbox.value);
   const [checked, setChecked] = useState(initialState);
   const allChecked = checked.length === checkboxes.length;
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     onChange(checked);
@@ -50,7 +53,7 @@ function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
                     className="checkbox__icon"
                   />
                 </div>
-                Everything
+                {t("search.everything")}
               </label>
             </div>
             <ul className="search-query__filter-group-list">

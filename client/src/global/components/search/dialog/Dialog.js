@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Dialog from "global/components/dialog";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
@@ -19,16 +20,18 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
     condition: query
   });
 
+  const { t } = useTranslation();
+
   function handleCloseClick(event) {
     event.stopPropagation();
     onClose();
   }
 
   const facets = [
-    { label: "Projects", value: "Project" },
-    { label: "Resources", value: "Resource" },
-    { label: "Texts", value: "Text" },
-    { label: "Full Text", value: "TextSection" }
+    { label: t("glossary.project_other"), value: "Project" },
+    { label: t("glossary.resource_other"), value: "Resource" },
+    { label: t("glossary.text_other"), value: "Text" },
+    { label: t("glossary.full_text_other"), value: "TextSection" }
   ];
 
   return (
@@ -41,7 +44,7 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
     >
       {header}
       <div className="search-dialog__form">
-        <h2 className="screen-reader-text">Search Form</h2>
+        <h2 className="screen-reader-text">{t("search.form")}</h2>
         <SearchQuery.Form
           initialState={{
             keyword: ""
@@ -53,7 +56,7 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
       </div>
       {results && (
         <div className="search-dialog__results">
-          <h2 className="screen-reader-text">Search Results</h2>
+          <h2 className="screen-reader-text">{t("search.results")}</h2>
           <SearchResults.List
             pagination={resultsMeta.pagination}
             paginationClickHandler={page => () => setPageNumber(page)}
@@ -67,7 +70,7 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
           onClick={handleCloseClick}
           className="search-dialog__close-button button-secondary"
         >
-          Close
+          {t("actions.close")}
         </button>
       </div>
     </Dialog.Wrapper>

@@ -3,14 +3,18 @@
     "title": "Search",
     "form": "Search Form",
     "results": "Search Results",
-    "instructions": "Enter search terms",
+    "instructions": "Enter search criteria",
     "placeholder": "Search...",
     "no_results": "No results were found.",
     "show_all_excerpts": "Show all excerpts",
     "show_only_relevant": "Only show most relevant excerpts",
-    "annotation_title": "{{name}} <2>annotated</2> {{entity}}",
+    "annotation_title": "{{name}} <0>annotated</0> {{entity}}",
     "description_project_scope": "Search across all project content",
-    "description_full_scope": "Search across all content and projects"
+    "description_full_scope": "Search across all content and projects",
+    "everything": "Everything",
+    "scopes_label": "Search within:",
+    "result_types_label": "Show results for:",
+    "execute": "Execute search"
   },
   "filters": {
     "featured_projects": "Featured $t(glossary.project_other)",
