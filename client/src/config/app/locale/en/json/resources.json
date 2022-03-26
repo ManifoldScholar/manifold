@@ -1,0 +1,14 @@
+{
+  "resource_kinds": {
+    "image": "Image",
+    "video": "Video",
+    "audio": "Audio",
+    "file": "File",
+    "link": "Link",
+    "pdf": "PDF",
+    "document": "Document",
+    "spreadsheet": "Spreadsheet",
+    "presentation": "Presentation",
+    "interactive": "Interactive"
+  }
+}
