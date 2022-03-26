@@ -1,7 +1,10 @@
-const getKindOptions = kinds =>
+import humps from "humps";
+
+const getKindOptions = (kinds, t) =>
   kinds.map(kind => {
+    const i18nKey = humps.decamelize(kind, { separator: "_" }).toLowerCase();
     return {
-      label: kind,
+      label: t(`resource_kinds.${i18nKey}`),
       value: kind
     };
   });
@@ -13,7 +16,7 @@ export const kindFilter = (filters, updateFilters, params, t) => {
     onChange: e => updateFilters(e, "kind"),
     options: [
       { label: t("filters.default_options.type"), value: "" },
-      ...getKindOptions(params.kinds)
+      ...getKindOptions(params.kinds, t)
     ]
   };
 };
