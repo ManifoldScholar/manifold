@@ -32,7 +32,7 @@ function ReadingGroupHomepageStaticContainer({
   const uncategorized = {
     id: "$uncategorized$",
     attributes: {
-      title: t("common.uncategorized")
+      title: t("common.uncategorized_title_case")
     }
   };
 
