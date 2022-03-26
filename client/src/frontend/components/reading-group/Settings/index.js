@@ -1,93 +1,54 @@
-import React, { PureComponent } from "react";
-import { GroupSettingsForm } from "frontend/components/reading-group/forms";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { UnmountClosed as Collapse } from "react-collapse";
 import Navigation from "backend/components/navigation";
+import { GroupSettingsForm } from "frontend/components/reading-group/forms";
+import { useArchiveOrActivateGroup } from "frontend/components/reading-group/hooks";
+import withConfirmation from "hoc/withConfirmation";
 import { readingGroupsAPI, requests } from "api";
-import lh from "helpers/linkHandler";
 import { entityStoreActions } from "actions";
+import config from "config";
+import lh from "helpers/linkHandler";
 import { DuplicatePanel } from "./panels";
 
 const { request } = entityStoreActions;
-import withConfirmation from "hoc/withConfirmation";
-import config from "config";
 
-class ReadingGroupSettings extends PureComponent {
-  static displayName = "ReadingGroup.Settings";
+function ReadingGroupSettings({
+  readingGroup,
+  closeDrawer,
+  confirm,
+  onArchive
+}) {
+  const { t } = useTranslation();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-    readingGroup: PropTypes.object.isRequired,
-    closeDrawer: PropTypes.func.isRequired,
-    confirm: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    t: PropTypes.func
-  };
+  const membership =
+    readingGroup.relationships.currentUserReadingGroupMembership;
+  const {
+    onClick: onArchiveClick,
+    label: archiveLabel
+  } = useArchiveOrActivateGroup({
+    membership,
+    confirm,
+    callback: onArchive
+  });
+  const [showActionPanel, setShowActionPanel] = useState(null);
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      showActionPanel: null
-    };
+  function handleDrawerToggle(action) {
+    showActionPanel === action
+      ? setShowActionPanel(null)
+      : setShowActionPanel(action);
   }
 
-  get readingGroup() {
-    return this.props.readingGroup;
+  function cancelAction() {
+    setShowActionPanel(null);
   }
 
-  get links() {
-    return this.readingGroup.links;
-  }
-
-  get duplicateLink() {
-    return this.links.clone;
-  }
-
-  get canDuplicate() {
-    return Object.keys(this.links).includes("clone");
-  }
-
-  get buttons() {
-    const className = "utility-button__icon";
-    const t = this.props.t;
-    const buttons = [
-      {
-        onClick: this.handleDelete,
-        icon: "delete24",
-        label: t("actions.delete"),
-        className: `${className} ${className}--notice`
-      }
-    ];
-
-    if (this.canDuplicate) {
-      buttons.unshift({
-        onClick: () => this.handleDrawerToggle("duplicate"),
-        icon: "duplicate24",
-        label: t("actions.duplicate"),
-        className,
-        ariaProps: {
-          "aria-expanded": this.state.showActionPanel === "duplicate",
-          "aria-controls": "group-settings-duplicate-region"
-        }
-      });
-    }
-
-    return buttons;
-  }
-
-  handleDrawerToggle = action => {
-    if (this.state.showActionPanel === action)
-      return this.setState({ showActionPanel: null });
-    this.setState({ showActionPanel: action });
-  };
-
-  cancelAction = () => {
-    this.setState({ showActionPanel: null });
-  };
-
-  doDuplicate = ({ name, copyAnnotations, archive, openOnProceed }) => {
+  function doDuplicate({ name, copyAnnotations, archive, openOnProceed }) {
     const options = {
       body: JSON.stringify({
         type: "readingGroups",
@@ -103,66 +64,104 @@ class ReadingGroupSettings extends PureComponent {
     const {
       href: endpoint,
       meta: { method }
-    } = this.duplicateLink;
+    } = readingGroup.links.clone;
     const call = {
       endpoint,
       method,
       options
     };
     const duplicateRequest = request(call, requests.feReadingGroupClone, {});
-    this.props.dispatch(duplicateRequest).promise.then(({ data: { id } }) => {
+    dispatch(duplicateRequest).promise.then(({ data: { id } }) => {
       if (openOnProceed) {
-        this.props.history.push(lh.link("frontendReadingGroupDetail", id));
+        history.push(lh.link("frontendReadingGroupDetail", id));
       } else {
-        this.setState({ showActionPanel: null });
+        closeDrawer();
       }
     });
-  };
+  }
 
-  handleDelete = () => {
+  function handleDelete() {
     const { heading, message } = config.app.locale.dialogs.readingGroup.destroy;
-    this.props.confirm(heading, message, () => {
-      const { readingGroup } = this.props;
+    confirm(heading, message, () => {
       const call = readingGroupsAPI.destroy(readingGroup.id);
-      const options = { removes: this.readingGroup };
+      const options = { removes: readingGroup };
       const readingGroupRequest = request(
         call,
         requests.feReadingGroupDestroy,
         options
       );
-      this.props.dispatch(readingGroupRequest).promise.then(() => {
-        this.props.history.push(lh.link("frontendMyReadingGroups"));
+      dispatch(readingGroupRequest).promise.then(() => {
+        history.push(lh.link("frontendMyReadingGroups"));
       });
     });
-  };
-
-  render() {
-    const t = this.props.t;
-    return (
-      <section>
-        <Navigation.DrawerHeader
-          title={t("forms.edit_group.title")}
-          buttons={this.buttons}
-          buttonLayout="inline"
-          className="drawer-header--pad-bottom-small"
-        />
-        <div role="region" id="group-settings-duplicate-region">
-          <Collapse isOpened={this.state.showActionPanel === "duplicate"}>
-            <DuplicatePanel
-              readingGroup={this.readingGroup}
-              onProceed={this.doDuplicate}
-              onCancel={this.cancelAction}
-            />
-          </Collapse>
-        </div>
-        <GroupSettingsForm
-          mode="edit"
-          group={this.props.readingGroup}
-          onSuccess={this.props.closeDrawer}
-        />
-      </section>
-    );
   }
+
+  const buttons = [
+    ...(readingGroup.links?.clone
+      ? [
+          {
+            onClick: () => handleDrawerToggle("duplicate"),
+            icon: "duplicate24",
+            label: t("actions.duplicate"),
+            className: "utility-button__icon",
+            ariaProps: {
+              "aria-expanded": showActionPanel === "duplicate",
+              "aria-controls": "group-settings-duplicate-region"
+            }
+          }
+        ]
+      : []),
+    ...(membership
+      ? [
+          {
+            onClick: onArchiveClick,
+            icon: "archive24",
+            label: archiveLabel,
+            className: "utility-button__icon"
+          }
+        ]
+      : []),
+    {
+      onClick: handleDelete,
+      icon: "delete24",
+      label: t("actions.delete"),
+      className: "utility-button__icon utility-button__icon--notice"
+    }
+  ];
+
+  return (
+    <section>
+      <Navigation.DrawerHeader
+        title={t("forms.edit_group.title")}
+        buttons={buttons}
+        buttonLayout="inline"
+        className="drawer-header--pad-bottom-small"
+      />
+      <div role="region" id="group-settings-duplicate-region">
+        <Collapse isOpened={showActionPanel === "duplicate"}>
+          <DuplicatePanel
+            readingGroup={readingGroup}
+            onProceed={doDuplicate}
+            onCancel={cancelAction}
+          />
+        </Collapse>
+      </div>
+      <GroupSettingsForm
+        mode="edit"
+        group={readingGroup}
+        onSuccess={closeDrawer}
+      />
+    </section>
+  );
 }
 
-export default withConfirmation(withTranslation()(ReadingGroupSettings));
+ReadingGroupSettings.displayName = "ReadingGroup.Settings";
+
+ReadingGroupSettings.propTypes = {
+  readingGroup: PropTypes.object.isRequired,
+  closeDrawer: PropTypes.func.isRequired,
+  confirm: PropTypes.func.isRequired,
+  onArchive: PropTypes.func
+};
+
+export default withConfirmation(ReadingGroupSettings);

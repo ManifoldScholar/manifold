@@ -29,10 +29,10 @@ function MyReadingGroupsListContainer({ route }) {
   };
   const [filters, setFilters] = useFilterState(baseFilters);
 
-  const [rgJoins, setRGJoins] = useState(0);
+  const [rgCountChanges, setRgCountChanges] = useState(0);
   const { data: readingGroups, meta } = useFetch({
     request: [meAPI.readingGroups, filters, pagination],
-    dependencies: [rgJoins]
+    dependencies: [rgCountChanges]
   });
 
   useSetLocation({ filters, page: pagination.number });
@@ -45,7 +45,7 @@ function MyReadingGroupsListContainer({ route }) {
 
   function handleNewGroupSuccess() {
     history.push(lh.link("frontendMyReadingGroups"));
-    setRGJoins(prev => prev + 1);
+    setRgCountChanges(prev => prev + 1);
   }
 
   const childRouteProps = {
@@ -79,10 +79,11 @@ function MyReadingGroupsListContainer({ route }) {
                 resetState: baseFilters
               }}
               showStatusFilter
+              onArchive={() => setRgCountChanges(prev => prev + 1)}
             />
           )}
           {showPlaceholder && <EntityCollectionPlaceholder.ReadingGroups />}
-          <JoinBox onJoin={() => setRGJoins(prev => prev + 1)} />
+          <JoinBox onJoin={() => setRgCountChanges(prev => prev + 1)} />
         </Styled.Container>
       </section>
       {childRoutes(route, childRouteProps)}

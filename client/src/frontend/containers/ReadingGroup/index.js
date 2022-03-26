@@ -66,16 +66,19 @@ export default function ReadingGroup({ route }) {
     dispatch
   };
 
-  const settingsProps = {
-    history,
-    readingGroup,
-    dispatch
-  };
-
   const handleClose = () => {
     const { pathname, search = "" } = location;
     const url = `${pathname}${search}`;
     history.push(url);
+  };
+
+  const settingsProps = {
+    readingGroup,
+    closeDrawer: handleClose,
+    onArchive: () => {
+      setFetchVersion(prev => prev + 1);
+      handleClose();
+    }
   };
 
   const drawerProps = {

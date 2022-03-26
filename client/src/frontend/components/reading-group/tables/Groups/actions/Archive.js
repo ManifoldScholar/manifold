@@ -1,72 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
-import { requests } from "api";
-import { useDispatch } from "react-redux";
-import config from "config";
 import Action from "global/components/table/Action";
-import { entityStoreActions } from "actions";
 import withConfirmation from "hoc/withConfirmation";
+import { useArchiveOrActivateGroup } from "frontend/components/reading-group/hooks";
 
-const { request } = entityStoreActions;
-
-function ArchiveGroup({ membership, confirm }) {
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
+function ArchiveGroup({ membership, confirm, onArchive }) {
+  const { onClick, label } = useArchiveOrActivateGroup({
+    membership,
+    confirm,
+    callback: onArchive
+  });
 
   if (!membership) return null;
 
-  const archive = membership?.links?.archive;
-  const activate = membership?.links?.activate;
-
-  function doArchive() {
-    const call = {
-      endpoint: archive,
-      method: "POST",
-      options: {}
-    };
-    const archiveRequest = request(
-      call,
-      requests.feReadingGroupMembershipArchive,
-      {}
-    );
-    dispatch(archiveRequest);
-  }
-
-  function doActivate() {
-    const call = {
-      endpoint: activate,
-      method: "POST",
-      options: {}
-    };
-    const activateRequest = request(
-      call,
-      requests.feReadingGroupMembershipActivate,
-      {}
-    );
-    dispatch(activateRequest);
-  }
-
-  function handleClick() {
-    if (activate) return doActivate();
-
-    const { heading, message } = config.app.locale.dialogs.readingGroup.archive;
-
-    confirm(heading, message, () => doArchive());
-  }
-
-  return (
-    <Action onClick={handleClick}>
-      {archive ? t("actions.archive") : t("actions.activate")}
-    </Action>
-  );
+  return <Action onClick={onClick}>{label}</Action>;
 }
 
 ArchiveGroup.displayName = "GroupsTable.Group.Archive";
 
 ArchiveGroup.propTypes = {
   membership: PropTypes.object.isRequired,
-  confirm: PropTypes.func.isRequired
+  confirm: PropTypes.func.isRequired,
+  onArchive: PropTypes.func
 };
 
 export default withConfirmation(ArchiveGroup);

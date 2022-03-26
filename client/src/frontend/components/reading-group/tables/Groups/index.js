@@ -23,7 +23,8 @@ export default function GroupsTable(props) {
     showStatusFilter = false,
     currentUser,
     hideActions,
-    hideTags
+    hideTags,
+    onArchive
   } = props;
 
   const { t } = useTranslation();
@@ -166,6 +167,7 @@ export default function GroupsTable(props) {
                 membership={
                   model.relationships.currentUserReadingGroupMembership
                 }
+                onArchive={onArchive}
               />
             </div>
           )}
