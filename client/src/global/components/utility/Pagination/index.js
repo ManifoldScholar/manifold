@@ -65,12 +65,10 @@ class UtilityPagination extends PureComponent {
       <Styled.Link
         as={PageComponent}
         aria-disabled={!pagination.prevPage}
+        aria-label={t("pagination.previous_page")}
         {...pageProps}
       >
-        <IconComposer
-          icon="arrowLongLeft16"
-          screenReaderText={t("pagination.previous_page")}
-        />
+        <IconComposer icon="arrowLongLeft16" />
         <span>{t("pagination.previous_short")}</span>
       </Styled.Link>
     );
@@ -85,13 +83,11 @@ class UtilityPagination extends PureComponent {
       <Styled.Link
         as={PageComponent}
         aria-disabled={!pagination.nextPage}
+        aria-label={t("pagination.next_page")}
         {...pageProps}
       >
         <span>{t("pagination.next")}</span>
-        <IconComposer
-          icon="arrowLongRight16"
-          screenReaderText={t("pagination.next_page")}
-        />
+        <IconComposer icon="arrowLongRight16" />
       </Styled.Link>
     );
   }
@@ -101,11 +97,13 @@ class UtilityPagination extends PureComponent {
     const t = this.props.t;
 
     return (
-      <Styled.Link key={page.number} as={PageComponent} {...pageProps}>
+      <Styled.Link
+        key={page.number}
+        as={PageComponent}
+        aria-label={t("pagination.page_number", { number: page.number })}
+        {...pageProps}
+      >
         <span aria-hidden="true">{page.number}</span>
-        <span className="screen-reader-text">
-          {t("pagination.go_to_page", { number: page.number })}
-        </span>
       </Styled.Link>
     );
   }
@@ -119,12 +117,10 @@ class UtilityPagination extends PureComponent {
         key={page.number}
         as={PageComponent}
         aria-current="page"
+        aria-label={t("pagination.page_number", { number: page.number })}
         {...pageProps}
       >
         <span aria-hidden="true">{page.number}</span>
-        <span className="screen-reader-text">
-          {t("pagination.go_to_page", { number: page.number })}
-        </span>
       </Styled.Link>
     );
   }
