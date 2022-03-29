@@ -263,7 +263,7 @@ export class ResourceCollectionDetailContainer extends PureComponent {
         <RegisterBreadcrumbs breadcrumbs={this.breadcrumbs()} />
         <EntityCollection.ProjectResourceCollectionDetail
           resourceCollection={resourceCollection}
-          resources={resources}
+          resources={resources ?? []}
           project={project}
           meta={resourcesMeta}
           slideshowResources={slideshowResources}
