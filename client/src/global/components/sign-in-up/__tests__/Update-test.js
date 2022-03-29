@@ -5,7 +5,7 @@ describe("global/components/sign-in-up/Update", () => {
   def("authentication", () =>
     fixtures.authentication({ user: $user })
   );
-  def("root", () => <Update authentication={$authentication} />);
+  def("root", () => <Update authentication={$authentication} t={key => key} />);
 
   it("matches the snapshot", () => {
     expect(shallow($root)).toMatchSnapshot();

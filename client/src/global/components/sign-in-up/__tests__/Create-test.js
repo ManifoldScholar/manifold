@@ -12,6 +12,7 @@ describe("global/components/sign-in-up/Create", () => {
       settings={$settings}
       pages={$pages}
       user={$user}
+      t={key => key}
     />
   ));
 

@@ -206,6 +206,7 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
             dispatch={[Function]}
             hideSignInUpOverlay={[Function]}
             mode="new"
+            t={[Function]}
           >
             <section
               className="sign-in-up-update"
@@ -222,25 +223,49 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
                     className="screen-reader-text"
                     id={1}
                   >
-                    Account Update
+                    forms.signin_overlay.update_sr_title
                   </h2>
                   <div>
-                    <h4
-                      className="form-heading"
+                    <Trans
+                      components={
+                        Array [
+                          <h4
+                            className="form-heading"
+                          />,
+                          <p
+                            className="overlay-copy"
+                          />,
+                          <h4
+                            className="nickname"
+                          />,
+                        ]
+                      }
+                      i18nKey="forms.signin_overlay.create_success_message"
+                      values={
+                        Object {
+                          "name": "Rowan",
+                        }
+                      }
                     >
-                      Congratulations!
-                    </h4>
-                    <p
-                      className="overlay-copy"
-                    >
-                      Your account has been successfully created and you are now
-                logged in to Manifold. From now on, I'm going to call you
-                    </p>
-                    <h4
-                      className="nickname"
-                    >
-                      Rowan
-                    </h4>
+                      <h4
+                        className="form-heading"
+                        key="0"
+                      >
+                        Congratulations! 
+                      </h4>
+                      <p
+                        className="overlay-copy"
+                        key="1"
+                      >
+                        Your account has been successfully created and you are now logged in to Manifold. From now on, I'm going to call you 
+                      </p>
+                      <h4
+                        className="nickname"
+                        key="2"
+                      >
+                        Rowan
+                      </h4>
+                    </Trans>
                   </div>
                   <div
                     className="row-1-p"
@@ -249,7 +274,7 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
                       <p
                         className="overlay-copy"
                       >
-                        Would you like me to call you something else?
+                        forms.signin_overlay.familiar_name
                       </p>
                     </div>
                     <div
@@ -272,7 +297,7 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
                             id="update-nickname"
                             name="nickname"
                             onChange={[Function]}
-                            placeholder="Nickname"
+                            placeholder="forms.signin_overlay.nickname"
                             type="text"
                             value=""
                           />
@@ -285,7 +310,7 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
                       <p
                         className="overlay-copy"
                       >
-                        Do you want to edit your account information?
+                        forms.signin_overlay.edit_account
                       </p>
                       <Errorable
                         className="form-input"
@@ -301,14 +326,14 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
                           <label
                             htmlFor="update-firstName"
                           >
-                            First Name
+                            forms.signin_overlay.first_name
                           </label>
                           <input
                             aria-describedby="update-firstName-error"
                             id="update-firstName"
                             name="firstName"
                             onChange={[Function]}
-                            placeholder="First name"
+                            placeholder="forms.signin_overlay.first_name"
                             type="text"
                             value="Rowan"
                           />
@@ -328,14 +353,14 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
                           <label
                             htmlFor="update-lastName"
                           >
-                            Last Name
+                            forms.signin_overlay.last_name
                           </label>
                           <input
                             aria-describedby="update-lastName-error"
                             id="update-lastName"
                             name="lastName"
                             onChange={[Function]}
-                            placeholder="Last name"
+                            placeholder="forms.signin_overlay.last_name"
                             type="text"
                             value="Ida"
                           />
@@ -355,14 +380,14 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
                           <label
                             htmlFor="update-email"
                           >
-                            Email
+                            forms.signin_overlay.email
                           </label>
                           <input
                             aria-describedby="update-email-error"
                             id="update-email"
                             name="email"
                             onChange={[Function]}
-                            placeholder="Email"
+                            placeholder="forms.signin_overlay.email"
                             type="text"
                             value="test@cic-fake.gotcha"
                           />
@@ -382,14 +407,14 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
                           <label
                             htmlFor="update-password"
                           >
-                            Password
+                            forms.signin_overlay.password
                           </label>
                           <input
                             aria-describedby="update-password-error"
                             id="update-password"
                             name="password"
                             onChange={[Function]}
-                            placeholder="New password"
+                            placeholder="forms.signin_overlay.new_password"
                             type="password"
                             value=""
                           />
@@ -409,14 +434,14 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
                           <label
                             htmlFor="update-passwordConfirmation"
                           >
-                            Confirm Password
+                            forms.signin_overlay.confirm_password
                           </label>
                           <input
                             aria-describedby="update-passwordConfirmation-error"
                             id="update-passwordConfirmation"
                             name="passwordConfirmation"
                             onChange={[Function]}
-                            placeholder="Confirm new password"
+                            placeholder="forms.signin_overlay.confirm_new_password"
                             type="password"
                             value=""
                           />
@@ -433,7 +458,7 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
                       <input
                         className="button-secondary button-secondary--with-room"
                         type="submit"
-                        value="Save Changes"
+                        value="forms.signin_overlay.submit_update_label"
                       />
                     </div>
                   </div>
@@ -445,7 +470,7 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
                 <span
                   className="subscriptions__label"
                 >
-                  Adjust your settings for email notifications:
+                  forms.signin_overlay.subscriptions__label
                 </span>
                 <button
                   className="button-secondary button-secondary--outlined button-secondary--color-white"
@@ -454,7 +479,7 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
                   <span
                     className="button-secondary__text"
                   >
-                    Notification Settings
+                    forms.signin_overlay.notification_settings
                   </span>
                   <IconComposer
                     className="button-secondary__icon"
