@@ -15,6 +15,7 @@ function JournalIssueList({ issues = [] }) {
         title={t("glossary.issue_truncated_title_case_other")}
         entities={issues}
         parentView
+        placeholderText={t("placeholders.journal_no_issues")}
       />
     </Styled.Wrapper>
   );
