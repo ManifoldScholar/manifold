@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { currentUserActions } from "actions";
 import classNames from "classnames";
 
-export default class Login extends Component {
+class Logout extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     authentication: PropTypes.shape({
       currentUser: PropTypes.object
-    })
+    }),
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -29,19 +31,22 @@ export default class Login extends Component {
       "form-input": true
     });
 
+    const t = this.props.t;
+
     return (
       <div style={{ minHeight: 250 }}>
         <form method="post" onSubmit={this.handleLogout}>
           <div className="row-1-p">
-            You are logged in as{" "}
-            {this.props.authentication.currentUser.attributes.fullName}.
+            {t("forms.signin_overlay.current_user", {
+              name: this.props.authentication.currentUser.attributes.fullName
+            })}
           </div>
           <div className="row-1-p">
             <div className={submitClass}>
               <input
                 className="button-secondary button-secondary--with-room"
                 type="submit"
-                value="Log out"
+                value={t("forms.signin_overlay.log_out")}
               />
             </div>
           </div>
@@ -50,3 +55,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default withTranslation()(Logout);

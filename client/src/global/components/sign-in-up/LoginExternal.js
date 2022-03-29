@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { get, values } from "lodash";
 import Oauth from "./oauth";
 
-export default class LoginExternal extends Component {
+class LoginExternal extends Component {
   static propTypes = {
     settings: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   get customOAuthProviders() {
@@ -22,7 +24,9 @@ export default class LoginExternal extends Component {
         provider={provider.name}
         hasIcon={false}
       >
-        Log in with {provider.descriptiveName}
+        {this.props.t("forms.signin_overlay.log_in_with_provider", {
+          provider: provider.descriptiveName
+        })}
       </Oauth.Button>
     ));
   }
@@ -32,20 +36,34 @@ export default class LoginExternal extends Component {
       <section className="login-external">
         <Oauth.Monitor dispatch={this.props.dispatch} />
         <Oauth.Button dispatch={this.props.dispatch} provider="facebook">
-          <span className="button-secondary__text">Log in with Facebook</span>
+          <span className="button-secondary__text">
+            {this.props.t("forms.signin_overlay.log_in_with_provider", {
+              provider: "Facebook"
+            })}
+          </span>
         </Oauth.Button>
         <Oauth.Button
           dispatch={this.props.dispatch}
           provider="google"
           iconName="socialEmail32"
         >
-          <span className="button-secondary__text">Log in with Google</span>
+          <span className="button-secondary__text">
+            {this.props.t("forms.signin_overlay.log_in_with_provider", {
+              provider: "Google"
+            })}
+          </span>
         </Oauth.Button>
         <Oauth.Button dispatch={this.props.dispatch} provider="twitter">
-          <span className="button-secondary__text">Log in with Twitter</span>
+          <span className="button-secondary__text">
+            {this.props.t("forms.signin_overlay.log_in_with_provider", {
+              provider: "Twitter"
+            })}
+          </span>
         </Oauth.Button>
         {this.customOAuthButtons}
       </section>
     );
   }
 }
+
+export default withTranslation()(LoginExternal);

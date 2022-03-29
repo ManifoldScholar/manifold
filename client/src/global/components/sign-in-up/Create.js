@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation, Trans } from "react-i18next";
 import { usersAPI, requests } from "api";
 import { entityStoreActions, currentUserActions } from "actions";
 import { select } from "utils/entityUtils";
@@ -32,7 +33,8 @@ export class CreateContainer extends Component {
     user: PropTypes.object,
     settings: PropTypes.object.isRequired,
     authentication: PropTypes.object,
-    handleViewChange: PropTypes.func.isRequired
+    handleViewChange: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   constructor() {
@@ -64,6 +66,7 @@ export class CreateContainer extends Component {
   }
 
   get OAuthProviderNames() {
+    const t = this.props.t;
     const providers = values(
       get(this.props, "settings.attributes.oauth")
     ).filter(provider => provider.enabled);
@@ -75,10 +78,10 @@ export class CreateContainer extends Component {
       case 1:
         return names;
       case 2:
-        return names.join(" or ");
+        return names.join(` ${t("common.or")} `);
       default: {
         const last = names.splice(names.length - 1, 1)[0];
-        return `${names.join(", ")}, or ${last}`;
+        return `${names.join(", ")}, ${t("common.or")} ${last}`;
       }
     }
   }
@@ -143,9 +146,11 @@ export class CreateContainer extends Component {
 
     return (
       <p className="login-links">
-        {`By creating this account, you agree to ${possessivize(name)} `}
-        <a {...linkProps}>terms and conditions</a>
-        {`.`}
+        <Trans
+          i18nKey="forms.signin_overlay.terms_and_conditions"
+          components={[<a {...linkProps}>#</a>]}
+          values={{ appName: possessivize(name) }}
+        />
       </p>
     );
   }
@@ -154,6 +159,7 @@ export class CreateContainer extends Component {
     const errors = get(this.props.response, "errors") || [];
     const installationName = this.props.settings.attributes.general
       .installationName;
+    const t = this.props.t;
 
     return (
       <div>
@@ -168,7 +174,7 @@ export class CreateContainer extends Component {
               className="focusable-form"
             >
               <h2 id={id} className="form-heading">
-                Create Account
+                {t("forms.signin_overlay.create_account")}
               </h2>
               <div className="row-1-p">
                 <Form.Errorable
@@ -177,7 +183,9 @@ export class CreateContainer extends Component {
                   errors={errors}
                   idForError="create-email-error"
                 >
-                  <label htmlFor="create-email">Email</label>
+                  <label htmlFor="create-email">
+                    {t("forms.signin_overlay.email")}
+                  </label>
                   <input
                     value={this.state.user.email}
                     type="text"
@@ -185,7 +193,7 @@ export class CreateContainer extends Component {
                     id="create-email"
                     aria-describedby="create-email-error"
                     onChange={this.handleInputChange}
-                    placeholder="Email"
+                    placeholder={t("forms.signin_overlay.email")}
                   />
                 </Form.Errorable>
               </div>
@@ -196,7 +204,9 @@ export class CreateContainer extends Component {
                   name={["attributes[firstName]", "attributes[lastName]"]}
                   errors={errors}
                 >
-                  <label htmlFor="create-name">Name</label>
+                  <label htmlFor="create-name">
+                    {t("forms.signin_overlay.name")}
+                  </label>
                   <input
                     value={this.state.user.name}
                     type="text"
@@ -204,7 +214,7 @@ export class CreateContainer extends Component {
                     aria-describedby="create-name-error"
                     name="name"
                     onChange={this.handleInputChange}
-                    placeholder="Name"
+                    placeholder={t("forms.signin_overlay.name")}
                   />
                 </Form.Errorable>
               </div>
@@ -215,7 +225,9 @@ export class CreateContainer extends Component {
                   name="attributes[password]"
                   errors={errors}
                 >
-                  <label htmlFor="create-password">Password</label>
+                  <label htmlFor="create-password">
+                    {t("forms.signin_overlay.password")}
+                  </label>
                   <input
                     value={this.state.user.password}
                     type="password"
@@ -223,7 +235,7 @@ export class CreateContainer extends Component {
                     id="create-password"
                     aria-describedby="create-password-error"
                     onChange={this.handleInputChange}
-                    placeholder="Password"
+                    placeholder={t("forms.signin_overlay.password")}
                   />
                 </Form.Errorable>
               </div>
@@ -235,7 +247,7 @@ export class CreateContainer extends Component {
                   errors={errors}
                 >
                   <label htmlFor="create-password-confirmation">
-                    Confirm Password
+                    {t("forms.signin_overlay.confirm_password")}
                   </label>
                   <input
                     value={this.state.user.passwordConfirmation}
@@ -244,7 +256,7 @@ export class CreateContainer extends Component {
                     id="create-password-confirmation"
                     aria-describedby="create-password-confirmation-error"
                     onChange={this.handleInputChange}
-                    placeholder="Confirm Password"
+                    placeholder={t("forms.signin_overlay.confirm_password")}
                   />
                 </Form.Errorable>
               </div>
@@ -253,7 +265,7 @@ export class CreateContainer extends Component {
                   <input
                     className="button-secondary button-secondary--with-room"
                     type="submit"
-                    value="Create Account"
+                    value={t("forms.signin_overlay.create_account")}
                   />
                 </div>
               </div>
@@ -263,7 +275,10 @@ export class CreateContainer extends Component {
         {this.OAuthProviderNames && (
           <>
             <p className="login-links">
-              {`You can also create a ${installationName} account using your ${this.OAuthProviderNames} credentials.`}
+              {t("forms.signin_overlay.oauth_instructions", {
+                appName: installationName,
+                providers: this.OAuthProviderNames
+              })}
             </p>
             <LoginExternal
               settings={this.props.settings}
@@ -279,7 +294,7 @@ export class CreateContainer extends Component {
             }
             data-id="show-login"
           >
-            {"Already have an account?"}
+            {t("forms.signin_overlay.have_account")}
           </button>
         </p>
       </div>
@@ -287,4 +302,4 @@ export class CreateContainer extends Component {
   }
 }
 
-export default connectAndFetch(CreateContainer);
+export default withTranslation()(connectAndFetch(CreateContainer));

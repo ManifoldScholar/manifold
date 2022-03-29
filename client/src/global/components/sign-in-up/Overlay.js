@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import FocusTrap from "focus-trap-react";
 import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
@@ -14,10 +15,12 @@ class Overlay extends Component {
     hideSignInUpOverlay: PropTypes.func,
     authentication: PropTypes.object,
     settings: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    t: PropTypes.func
   };
 
   render() {
+    const t = this.props.t;
     return (
       <BodyClass className={"no-scroll"}>
         <UIDConsumer>
@@ -39,7 +42,7 @@ class Overlay extends Component {
                       <Utility.IconComposer size={26} icon="manifoldLogo32" />
                     </figure>
                     <h1 id={id} className="screen-reader-text">
-                      Create/Manage Account
+                      {t("forms.signin_overlay.sr_title")}
                     </h1>
                     <CloseButton onClick={this.props.hideSignInUpOverlay} />
                   </div>
@@ -60,4 +63,4 @@ class Overlay extends Component {
   }
 }
 
-export default withRouter(Overlay);
+export default withTranslation()(withRouter(Overlay));
