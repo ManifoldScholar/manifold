@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { passwordsAPI, requests } from "api";
 import { entityStoreActions, notificationActions } from "actions";
@@ -22,7 +23,8 @@ export class PasswordForgotContainer extends Component {
     handleViewChange: PropTypes.func.isRequired,
     hideSignInUpOverlay: PropTypes.func,
     dispatch: PropTypes.func,
-    response: PropTypes.object
+    response: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -73,7 +75,9 @@ export class PasswordForgotContainer extends Component {
     const notification = {
       level: 0,
       id: "PASSWORD_RESET_SENT",
-      heading: `Email sent to ${this.state.email} with instructions to reset your password.`
+      heading: this.props.t("forms.signin_overlay.send_reset_success", {
+        email: this.state.email
+      })
     };
     this.props.dispatch(notificationActions.addNotification(notification));
     setTimeout(() => {
@@ -92,6 +96,7 @@ export class PasswordForgotContainer extends Component {
   };
 
   render() {
+    const t = this.props.t;
     return (
       <div>
         <UIDConsumer>
@@ -105,11 +110,13 @@ export class PasswordForgotContainer extends Component {
               className="focusable-form"
             >
               <h2 id={id} className="form-heading">
-                Reset Password
+                {t("forms.signin_overlay.reset_password")}
               </h2>
               <div className="row-1-p">
                 <div className="form-input form-error">
-                  <label htmlFor="password-forgot-email">Email</label>
+                  <label htmlFor="password-forgot-email">
+                    {t("forms.signin_overlay.email")}
+                  </label>
                   <GlobalForm.Errorable name="email" errors={this.state.errors}>
                     <input
                       value={this.state.email}
@@ -117,7 +124,7 @@ export class PasswordForgotContainer extends Component {
                       name="email"
                       type="text"
                       id="password-forgot-email"
-                      placeholder="Email"
+                      placeholder={t("forms.signin_overlay.email")}
                       aria-describedby="password-forgot-email-error"
                     />
                   </GlobalForm.Errorable>
@@ -128,7 +135,7 @@ export class PasswordForgotContainer extends Component {
                   <input
                     className="button-secondary button-secondary--with-room"
                     type="submit"
-                    value="Send Password Reset Email"
+                    value={t("forms.signin_overlay.send_password_reset")}
                   />
                 </div>
               </div>
@@ -142,7 +149,7 @@ export class PasswordForgotContainer extends Component {
             }
             data-id="show-login"
           >
-            {"Remember your password?"}
+            {t("forms.signin_overlay.remember_password")}
           </button>
           <button
             onClick={event =>
@@ -150,7 +157,7 @@ export class PasswordForgotContainer extends Component {
             }
             data-id="show-create"
           >
-            {"Need to sign up?"}
+            {t("forms.signin_overlay.need_account")}
           </button>
         </p>
       </div>
@@ -158,4 +165,4 @@ export class PasswordForgotContainer extends Component {
   }
 }
 
-export default connectAndFetch(PasswordForgotContainer);
+export default withTranslation()(connectAndFetch(PasswordForgotContainer));

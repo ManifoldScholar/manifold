@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { currentUserActions } from "actions";
 import { get } from "lodash";
 import classNames from "classnames";
@@ -7,7 +8,7 @@ import LoginExternal from "./LoginExternal";
 import Notifications from "global/containers/Notifications";
 import { UIDConsumer } from "react-uid";
 
-export default class Login extends Component {
+class Login extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     handleViewChange: PropTypes.func.isRequired,
@@ -15,7 +16,8 @@ export default class Login extends Component {
     authentication: PropTypes.shape({
       currentUser: PropTypes.object
     }),
-    hideSignInUpOverlay: PropTypes.func
+    hideSignInUpOverlay: PropTypes.func,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -67,6 +69,8 @@ export default class Login extends Component {
       "form-error": this.authenticationError()
     });
 
+    const t = this.props.t;
+
     return (
       <div>
         {this.props.willRedirect && (
@@ -89,32 +93,36 @@ export default class Login extends Component {
               className="focusable-form"
             >
               <h2 id={id} className="form-heading">
-                Log In
+                {t("forms.signin_overlay.log_in")}
               </h2>
               <div className="row-1-p">
                 <div className="form-input form-error">
-                  <label htmlFor="login-email">Email</label>
+                  <label htmlFor="login-email">
+                    {t("forms.signin_overlay.email")}
+                  </label>
                   <input
                     type="email"
                     name="email"
                     value={this.state.email}
                     onChange={this.updateInput}
                     id="login-email"
-                    placeholder="Email"
+                    placeholder={t("forms.signin_overlay.email")}
                     inputMode="email"
                   />
                 </div>
               </div>
               <div className="row-1-p">
                 <div className="form-input">
-                  <label htmlFor="login-password">Password</label>
+                  <label htmlFor="login-password">
+                    {t("forms.signin_overlay.password")}
+                  </label>
                   <input
                     type="password"
                     name="password"
                     value={this.state.password}
                     onChange={this.updateInput}
                     id="login-password"
-                    placeholder="Password"
+                    placeholder={t("forms.signin_overlay.password")}
                   />
                 </div>
               </div>
@@ -132,7 +140,7 @@ export default class Login extends Component {
                   <input
                     className="button-secondary button-secondary--with-room"
                     type="submit"
-                    value="Log in"
+                    value={t("forms.signin_overlay.log_in")}
                   />
                 </div>
               </div>
@@ -146,7 +154,7 @@ export default class Login extends Component {
             }
             data-id="show-forgot"
           >
-            {"Forgot your password?"}
+            {t("forms.signin_overlay.forgot_password")}
           </button>
           <button
             onClick={event =>
@@ -154,7 +162,7 @@ export default class Login extends Component {
             }
             data-id="show-create"
           >
-            {"Need to sign up?"}
+            {t("forms.signin_overlay.need_account")}
           </button>
         </p>
         <LoginExternal
@@ -165,3 +173,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default withTranslation()(Login);

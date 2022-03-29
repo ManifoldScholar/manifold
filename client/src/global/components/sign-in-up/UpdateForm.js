@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation, Trans } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { meAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -27,7 +28,8 @@ export class UpdateFormContainer extends Component {
     authentication: PropTypes.object,
     hideSignInUpOverlay: PropTypes.func,
     history: PropTypes.object,
-    mode: PropTypes.string
+    mode: PropTypes.string,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -167,18 +169,19 @@ export class UpdateFormContainer extends Component {
   };
 
   renderProfileForm(errors) {
+    const t = this.props.t;
     return (
       <div className="row-1-p">
         {this.props.mode === "new" ? (
           <div>
             <p className="overlay-copy">
-              Would you like me to call you something else?
+              {t("forms.signin_overlay.familiar_name")}
             </p>
           </div>
         ) : (
           <div>
             <p className="overlay-copy" id="update-nickname-label">
-              Would you like to update your Nickname?
+              {t("forms.signin_overlay.update_nickname")}
             </p>
           </div>
         )}
@@ -197,7 +200,7 @@ export class UpdateFormContainer extends Component {
               aria-labelledby="update-nickname-label"
               aria-describedby="update-nickname-error"
               onChange={this.handleInputChange}
-              placeholder="Nickname"
+              placeholder={t("forms.signin_overlay.nickname")}
             />
           </Form.Errorable>
         </div>
@@ -205,7 +208,7 @@ export class UpdateFormContainer extends Component {
           <div className="row-1-p">
             {this.displayAvatar() ? null : (
               <p className="overlay-copy">
-                {"While you're here, why not upload a profile image?"}
+                {t("forms.signin_overlay.profile_img_instructions")}
               </p>
             )}
             <Form.Errorable
@@ -215,7 +218,7 @@ export class UpdateFormContainer extends Component {
               errors={errors}
             >
               <label htmlFor="avatar-update" className="screen-reader-text">
-                Profile image
+                {t("forms.signin_overlay.profile_img")}
               </label>
               <Dropzone onDrop={this.handleFileDrop}>
                 {({ getRootProps, getInputProps }) => (
@@ -255,7 +258,7 @@ export class UpdateFormContainer extends Component {
                           >
                             <IconComposer icon="close16" size="default" />
                             <span className="screen-reader-text">
-                              Remove current avatar
+                              {t("forms.signin_overlay.remove_avatar")}
                             </span>
                           </button>
                         )}
@@ -265,12 +268,12 @@ export class UpdateFormContainer extends Component {
                         />
                       </div>
                       <span className="dropzone-button__text">
-                        <span className="form-dropzone__upload-prompt">
-                          Upload a file
-                        </span>{" "}
-                        or
-                        <br />
-                        drag and drop
+                        <Trans
+                          i18nKey="forms.signin_overlay.upload_avatar_instructions"
+                          components={[
+                            <span className="form-dropzone__upload-prompt" />
+                          ]}
+                        />
                       </span>
                     </div>
                   </div>
@@ -281,7 +284,7 @@ export class UpdateFormContainer extends Component {
         ) : null}
         <div className="row-1-p">
           <p className="overlay-copy">
-            Do you want to edit your account information?
+            {t("forms.signin_overlay.edit_account")}
           </p>
           <Form.Errorable
             className="form-input"
@@ -289,7 +292,9 @@ export class UpdateFormContainer extends Component {
             errors={errors}
             idForError="update-firstName-error"
           >
-            <label htmlFor="update-firstName">First Name</label>
+            <label htmlFor="update-firstName">
+              {t("forms.signin_overlay.first_name")}
+            </label>
             <input
               value={this.state.firstName}
               type="text"
@@ -297,7 +302,7 @@ export class UpdateFormContainer extends Component {
               id="update-firstName"
               aria-describedby="update-firstName-error"
               onChange={this.handleInputChange}
-              placeholder="First name"
+              placeholder={t("forms.signin_overlay.first_name")}
             />
           </Form.Errorable>
           <Form.Errorable
@@ -306,7 +311,9 @@ export class UpdateFormContainer extends Component {
             errors={errors}
             idForError="update-lastName-error"
           >
-            <label htmlFor="update-lastName">Last Name</label>
+            <label htmlFor="update-lastName">
+              {t("forms.signin_overlay.last_name")}
+            </label>
             <input
               value={this.state.lastName}
               type="text"
@@ -314,7 +321,7 @@ export class UpdateFormContainer extends Component {
               id="update-lastName"
               aria-describedby="update-lastName-error"
               onChange={this.handleInputChange}
-              placeholder="Last name"
+              placeholder={t("forms.signin_overlay.last_name")}
             />
           </Form.Errorable>
           <Form.Errorable
@@ -323,7 +330,9 @@ export class UpdateFormContainer extends Component {
             errors={errors}
             idForError="update-email-error"
           >
-            <label htmlFor="update-email">Email</label>
+            <label htmlFor="update-email">
+              {t("forms.signin_overlay.email")}
+            </label>
             <input
               value={this.state.email}
               type="text"
@@ -331,7 +340,7 @@ export class UpdateFormContainer extends Component {
               id="update-email"
               aria-describedby="update-email-error"
               onChange={this.handleInputChange}
-              placeholder="Email"
+              placeholder={t("forms.signin_overlay.email")}
             />
           </Form.Errorable>
           <Form.Errorable
@@ -340,7 +349,9 @@ export class UpdateFormContainer extends Component {
             errors={errors}
             idForError="update-password-error"
           >
-            <label htmlFor="update-password">Password</label>
+            <label htmlFor="update-password">
+              {t("forms.signin_overlay.password")}
+            </label>
             <input
               value={this.state.password}
               type="password"
@@ -348,7 +359,7 @@ export class UpdateFormContainer extends Component {
               id="update-password"
               aria-describedby="update-password-error"
               onChange={this.handleInputChange}
-              placeholder="New password"
+              placeholder={t("forms.signin_overlay.new_password")}
             />
           </Form.Errorable>
           <Form.Errorable
@@ -358,7 +369,7 @@ export class UpdateFormContainer extends Component {
             idForError="update-passwordConfirmation-error"
           >
             <label htmlFor="update-passwordConfirmation">
-              Confirm Password
+              {t("forms.signin_overlay.confirm_password")}
             </label>
             <input
               value={this.state.passwordConfirmation}
@@ -367,7 +378,7 @@ export class UpdateFormContainer extends Component {
               id="update-passwordConfirmation"
               aria-describedby="update-passwordConfirmation-error"
               onChange={this.handleInputChange}
-              placeholder="Confirm new password"
+              placeholder={t("forms.signin_overlay.confirm_new_password")}
             />
           </Form.Errorable>
         </div>
@@ -379,6 +390,7 @@ export class UpdateFormContainer extends Component {
     const errors = get(this.props.response, "errors") || [];
     const currentUser = this.props.authentication.currentUser;
     if (!currentUser) return null;
+    const t = this.props.t;
     return (
       <section className="sign-in-up-update">
         <UIDConsumer>
@@ -392,22 +404,28 @@ export class UpdateFormContainer extends Component {
               aria-labelledby={id}
             >
               <h2 id={id} className="screen-reader-text">
-                Account Update
+                {t("forms.signin_overlay.update_sr_title")}
               </h2>
               {this.props.mode === "new" ? (
                 <div>
-                  <h4 className="form-heading">Congratulations!</h4>
-                  <p className="overlay-copy">
-                    {`Your account has been successfully created and you are now
-                logged in to Manifold. From now on, I'm going to call you`}
-                  </p>
-                  <h4 className="nickname">{this.displayNickname()}</h4>
+                  <Trans
+                    i18nKey="forms.signin_overlay.create_success_message"
+                    components={[
+                      <h4 className="form-heading" />,
+                      <p className="overlay-copy" />,
+                      <h4 className="nickname" />
+                    ]}
+                    values={{ name: this.displayNickname() }}
+                  />
                 </div>
               ) : (
                 <div>
                   <h4 className="form-heading">
-                    Hello,{" "}
-                    <span className="nickname">{this.displayNickname()}</span>.
+                    <Trans
+                      i18nKey="forms.signin_overlay.greeting"
+                      components={[<span className="nickname" />]}
+                      values={{ name: this.displayNickname() }}
+                    />
                   </h4>
                 </div>
               )}
@@ -417,7 +435,7 @@ export class UpdateFormContainer extends Component {
                   <input
                     className="button-secondary button-secondary--with-room"
                     type="submit"
-                    value="Save Changes"
+                    value={t("forms.signin_overlay.submit_update_label")}
                   />
                 </div>
               </div>
@@ -427,14 +445,14 @@ export class UpdateFormContainer extends Component {
 
         <div className="subscriptions">
           <span className="subscriptions__label">
-            Adjust your settings for email notifications:
+            {t("forms.signin_overlay.subscriptions__label")}
           </span>
           <button
             className="button-secondary button-secondary--outlined button-secondary--color-white"
             onClick={this.redirectToSubscriptions}
           >
             <span className="button-secondary__text">
-              Notification Settings
+              {t("forms.signin_overlay.notification_settings")}
             </span>
             <IconComposer
               icon="arrowLongRight16"
@@ -448,4 +466,4 @@ export class UpdateFormContainer extends Component {
   }
 }
 
-export default connectAndFetch(UpdateFormContainer);
+export default withTranslation()(connectAndFetch(UpdateFormContainer));
