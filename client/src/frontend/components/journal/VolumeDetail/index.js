@@ -43,6 +43,7 @@ function VolumeDetail({ journal, volume }) {
               />
             </Styled.IssueWrapper>
           ))}
+        placeholderText={t("placeholders.volume_no_issues")}
       </EntityGroup>
     </Styled.Wrapper>
   );

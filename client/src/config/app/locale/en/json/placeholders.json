@@ -110,6 +110,7 @@
         "body": "Please check back soon!"
       }
     },
-    "volume": "This volume doesn't contain any issues yet."
+    "volume_no_issues": "This volume doesn't contain any issues yet.",
+    "journal_no_issues": "This journal doesn't contain any issues yet."
   }
 }

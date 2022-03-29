@@ -26,6 +26,7 @@ function JournalVolumeList({ volumes, journal }) {
           )}
           entities={volume.relationships.journalIssues}
           parentView
+          placeholderText={t("placeholders.volume_no_issues")}
         />
       ))}
     </Styled.Wrapper>
