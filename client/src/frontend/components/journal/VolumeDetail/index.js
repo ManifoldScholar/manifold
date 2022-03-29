@@ -21,7 +21,10 @@ function VolumeDetail({ journal, volume }) {
 
   return (
     <Styled.Wrapper>
-      <EntityGroup title={`${journalTitle}: ${volumeTitle}`}>
+      <EntityGroup
+        title={`${journalTitle}: ${volumeTitle}`}
+        placeholderText={t("placeholders.volume_no_issues")}
+      >
         {!!issues.length &&
           issues.map(issue => (
             <Styled.IssueWrapper key={issue.id}>
@@ -43,7 +46,6 @@ function VolumeDetail({ journal, volume }) {
               />
             </Styled.IssueWrapper>
           ))}
-        placeholderText={t("placeholders.volume_no_issues")}
       </EntityGroup>
     </Styled.Wrapper>
   );
