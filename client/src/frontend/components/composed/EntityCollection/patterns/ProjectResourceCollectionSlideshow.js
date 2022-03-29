@@ -77,7 +77,7 @@ function ProjectResourceCollectionSlideshow({
             className="button-secondary button-secondary--outlined"
           >
             <span className="button-secondary__text">
-              Visit Collection Page
+              {t("navigation.visit_collection")}
             </span>
             <IconComposer
               icon="arrowRight16"
@@ -95,7 +95,9 @@ function ProjectResourceCollectionSlideshow({
               size="default"
               className="button-secondary__icon"
             />
-            <span className="button-secondary__text">Return to Reader</span>
+            <span className="button-secondary__text">
+              {t("navigation.return_to_reader")}
+            </span>
           </button>
         </nav>
       )}

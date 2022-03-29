@@ -72,7 +72,7 @@ function ProjectResourceCollectionDetail({
                 "frontendProjectResources",
                 project.attributes.slug
               )}
-              entityName={t("glossary.resource", { count: totalCount })}
+              entityName={t("glossary.resource_one", { count: totalCount })}
               count={totalCount}
             />
           </div>
