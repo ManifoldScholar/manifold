@@ -827,6 +827,7 @@ exports[`global/components/utility/Pagination matches the snapshot 1`] = `
                     "title": "There are no journal issues in this Manifold library.",
                   },
                 },
+                "journal_no_issues": "This journal doesn't contain any issues yet.",
                 "journals": Object {
                   "authorized": Object {
                     "body": "But it’s easy to create new journals with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Journal</1>. For more help, you can learn about creating and publishing Manifold Issues in <2>our documentation</2>.",
@@ -897,7 +898,7 @@ exports[`global/components/utility/Pagination matches the snapshot 1`] = `
                   },
                 },
                 "table_of_contents": "This text does not have a table of contents.",
-                "volume": "This volume doesn't contain any issues yet.",
+                "volume_no_issues": "This volume doesn't contain any issues yet.",
               },
               "reader": Object {
                 "actions": Object {
@@ -1826,6 +1827,7 @@ exports[`global/components/utility/Pagination matches the snapshot 1`] = `
                   "title": "There are no journal issues in this Manifold library.",
                 },
               },
+              "journal_no_issues": "This journal doesn't contain any issues yet.",
               "journals": Object {
                 "authorized": Object {
                   "body": "But it’s easy to create new journals with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Journal</1>. For more help, you can learn about creating and publishing Manifold Issues in <2>our documentation</2>.",
@@ -1896,7 +1898,7 @@ exports[`global/components/utility/Pagination matches the snapshot 1`] = `
                 },
               },
               "table_of_contents": "This text does not have a table of contents.",
-              "volume": "This volume doesn't contain any issues yet.",
+              "volume_no_issues": "This volume doesn't contain any issues yet.",
             },
             "reader": Object {
               "actions": Object {
@@ -2892,6 +2894,7 @@ exports[`global/components/utility/Pagination when it is compact matches the sna
                     "title": "There are no journal issues in this Manifold library.",
                   },
                 },
+                "journal_no_issues": "This journal doesn't contain any issues yet.",
                 "journals": Object {
                   "authorized": Object {
                     "body": "But it’s easy to create new journals with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Journal</1>. For more help, you can learn about creating and publishing Manifold Issues in <2>our documentation</2>.",
@@ -2962,7 +2965,7 @@ exports[`global/components/utility/Pagination when it is compact matches the sna
                   },
                 },
                 "table_of_contents": "This text does not have a table of contents.",
-                "volume": "This volume doesn't contain any issues yet.",
+                "volume_no_issues": "This volume doesn't contain any issues yet.",
               },
               "reader": Object {
                 "actions": Object {
@@ -3891,6 +3894,7 @@ exports[`global/components/utility/Pagination when it is compact matches the sna
                   "title": "There are no journal issues in this Manifold library.",
                 },
               },
+              "journal_no_issues": "This journal doesn't contain any issues yet.",
               "journals": Object {
                 "authorized": Object {
                   "body": "But it’s easy to create new journals with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Journal</1>. For more help, you can learn about creating and publishing Manifold Issues in <2>our documentation</2>.",
@@ -3961,7 +3965,7 @@ exports[`global/components/utility/Pagination when it is compact matches the sna
                 },
               },
               "table_of_contents": "This text does not have a table of contents.",
-              "volume": "This volume doesn't contain any issues yet.",
+              "volume_no_issues": "This volume doesn't contain any issues yet.",
             },
             "reader": Object {
               "actions": Object {
@@ -4956,6 +4960,7 @@ exports[`global/components/utility/Pagination when there are no pagination props
                     "title": "There are no journal issues in this Manifold library.",
                   },
                 },
+                "journal_no_issues": "This journal doesn't contain any issues yet.",
                 "journals": Object {
                   "authorized": Object {
                     "body": "But it’s easy to create new journals with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Journal</1>. For more help, you can learn about creating and publishing Manifold Issues in <2>our documentation</2>.",
@@ -5026,7 +5031,7 @@ exports[`global/components/utility/Pagination when there are no pagination props
                   },
                 },
                 "table_of_contents": "This text does not have a table of contents.",
-                "volume": "This volume doesn't contain any issues yet.",
+                "volume_no_issues": "This volume doesn't contain any issues yet.",
               },
               "reader": Object {
                 "actions": Object {
@@ -5955,6 +5960,7 @@ exports[`global/components/utility/Pagination when there are no pagination props
                   "title": "There are no journal issues in this Manifold library.",
                 },
               },
+              "journal_no_issues": "This journal doesn't contain any issues yet.",
               "journals": Object {
                 "authorized": Object {
                   "body": "But it’s easy to create new journals with Manifold. If you have backend access, <0>head to the backend</0> and select <1>Add a New Journal</1>. For more help, you can learn about creating and publishing Manifold Issues in <2>our documentation</2>.",
@@ -6025,7 +6031,7 @@ exports[`global/components/utility/Pagination when there are no pagination props
                 },
               },
               "table_of_contents": "This text does not have a table of contents.",
-              "volume": "This volume doesn't contain any issues yet.",
+              "volume_no_issues": "This volume doesn't contain any issues yet.",
             },
             "reader": Object {
               "actions": Object {
