@@ -7,6 +7,7 @@ describe("global/components/sign-in-up/PasswordForgot", () => {
     <PasswordForgotContainer
       dispatch={$dispatch}
       handleViewChange={$handleViewChange}
+      t={key => key}
     />
   ));
   def("wrapper", () => mount($withApp($root)));

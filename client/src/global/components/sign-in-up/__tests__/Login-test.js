@@ -13,6 +13,7 @@ describe("global/components/sign-in-up/Login", () => {
       user={$user}
       authentication={$authentication}
       settings={$settings}
+      t={key => key}
     />
   ));
   def("wrapper", () => mount($withApp($root)));

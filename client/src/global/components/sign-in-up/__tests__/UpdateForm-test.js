@@ -8,6 +8,7 @@ describe("global/components/sign-in-up/UpdateForm", () => {
       dispatch={$dispatch}
       authentication={$authentication}
       mode="new"
+      t={key => key}
     />
   ));
 

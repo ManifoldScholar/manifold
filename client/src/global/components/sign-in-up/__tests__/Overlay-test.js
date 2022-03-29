@@ -17,6 +17,7 @@ describe("global/components/sign-in-up/Overlay", () => {
       settings={{}}
       hideSignInUpOverlay={$hideOverlayMock}
       authentication={$authentication}
+      t={key => key}
     />
   ));
   def("wrapper", () => mount($withApp($root)));
