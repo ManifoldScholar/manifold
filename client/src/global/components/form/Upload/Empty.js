@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { Trans } from "react-i18next";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -31,20 +32,19 @@ export default class FormUploadEmpty extends PureComponent {
           <p className="primary">
             {this.props.progress ? (
               <span>
-                {"Uploading file to Manifold."}
-                <br />
-                {this.props.progress}
-                {"% Complete."}
+                <Trans
+                  i18nKey="forms.upload.progress"
+                  values={{ percent: this.props.progress }}
+                />
               </span>
             ) : (
               <>
-                <span className="form-dropzone__upload-prompt">
-                  {"Upload a file"}
-                </span>
-                {" or "}
-                <br />
-                {"drag and drop here"}
-                <br />
+                <Trans
+                  i18nKey="forms.upload.instructions"
+                  components={[
+                    <span className="form-dropzone__upload-prompt" />
+                  ]}
+                />
                 {this.props.uploadError ? (
                   <span className="error">{this.props.uploadError}</span>
                 ) : null}

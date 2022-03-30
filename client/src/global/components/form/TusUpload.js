@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
 import setter from "./setter";
 import Base from "./Upload/Base";
@@ -26,7 +27,8 @@ export class FormTusUpload extends Component {
     remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
     value: PropTypes.any, // the current value of the field in the connected model
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
-    errors: PropTypes.array
+    errors: PropTypes.array,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -61,7 +63,7 @@ export class FormTusUpload extends Component {
   handleUploadError = error => {
     // eslint-disable-next-line no-console
     console.log(error, "TUS Upload Error");
-    this.setState({ error: "Upload failed. Please try again" });
+    this.setState({ error: this.props.t("errors.upload_failed") });
   };
 
   handleUploadProgress = (bytesUploaded, bytesTotal) => {
@@ -133,4 +135,4 @@ export class FormTusUpload extends Component {
   }
 }
 
-export default setter(FormTusUpload);
+export default withTranslation()(setter(FormTusUpload));

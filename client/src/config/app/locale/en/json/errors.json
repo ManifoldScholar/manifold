@@ -28,6 +28,7 @@
       "heading_line_two": "Frightfully sorry.",
       "dismiss_link": "Try again."
     },
-    "logo_styles": "Error: Invalid press logo styles"
+    "logo_styles": "Error: Invalid press logo styles",
+    "upload_failed": "Upload failed. Please try again."
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
 import setter from "./setter";
 import Errorable from "global/components/form/Errorable";
@@ -15,7 +16,8 @@ class FormGeneratedPasswordInput extends Component {
     value: PropTypes.any,
     focusOnMount: PropTypes.bool,
     errors: PropTypes.array,
-    set: PropTypes.func
+    set: PropTypes.func,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -80,7 +82,7 @@ class FormGeneratedPasswordInput extends Component {
         id={`${this.idPrefix}-${id}`}
         aria-describedby={this.props.idForError}
         type={type}
-        placeholder={"Enter a password"}
+        placeholder={this.props.t("forms.password_reset.enter_password")}
         onChange={event => this.handlePasswordChange(event)}
         value={this.state.password}
       />
@@ -89,6 +91,7 @@ class FormGeneratedPasswordInput extends Component {
 
   render() {
     const icon = !this.state.showPassword ? "eyeClosed32" : "eyeOpen32";
+    const t = this.props.t;
 
     return (
       <UIDConsumer>
@@ -97,10 +100,12 @@ class FormGeneratedPasswordInput extends Component {
             className="form-input password-input"
             name={this.props.name}
             errors={this.props.errors}
-            label="Password"
+            label={t("forms.password_reset.password")}
             idForError={`${this.idForErrorPrefix}-${id}`}
           >
-            <label htmlFor={`${this.idPrefix}-${id}`}>Password</label>
+            <label htmlFor={`${this.idPrefix}-${id}`}>
+              {t("forms.password_reset.password")}
+            </label>
             <span
               className="password-input__visibility-toggle"
               onClick={event => this.togglePassword(event)}
@@ -113,7 +118,9 @@ class FormGeneratedPasswordInput extends Component {
                 className="password-input__visibility-icon"
               />
               <span className="screen-reader-text">
-                {this.state.showPassword ? "hide password" : "show password"}
+                {this.state.showPassword
+                  ? t("forms.password_reset.hide_password")
+                  : t("forms.password_reset.show_password")}
               </span>
             </span>
             {this.renderInput(id)}
@@ -124,4 +131,4 @@ class FormGeneratedPasswordInput extends Component {
   }
 }
 
-export default setter(FormGeneratedPasswordInput);
+export default withTranslation()(setter(FormGeneratedPasswordInput));

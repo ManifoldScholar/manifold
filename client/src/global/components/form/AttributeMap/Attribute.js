@@ -1,16 +1,18 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { Draggable } from "react-beautiful-dnd";
 import IconComposer from "global/components/utility/IconComposer";
 
-export default class FormColumnMapAttribute extends PureComponent {
+class FormColumnMapAttribute extends PureComponent {
   static displayName = "Form.ColumnMap.Attribute";
 
   static propTypes = {
     name: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
     mapping: PropTypes.string,
-    unLink: PropTypes.func
+    unLink: PropTypes.func,
+    t: PropTypes.func
   };
 
   handleCancel = event => {
@@ -35,8 +37,10 @@ export default class FormColumnMapAttribute extends PureComponent {
               {this.props.mapping && (
                 <button className="cancel" onClick={this.handleCancel}>
                   <span className="screen-reader-text">
-                    {"Cancel mapping of "}
-                    {`${this.props.name} to ${this.props.mapping}`}
+                    {this.props.t("forms.attribute_map.cancel", {
+                      name: this.props.name,
+                      mapping: this.props.mapping
+                    })}
                   </span>
                   <IconComposer
                     icon="close16"
@@ -52,3 +56,5 @@ export default class FormColumnMapAttribute extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(FormColumnMapAttribute);
