@@ -1,7 +1,7 @@
 import React, { useState, forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import ReactDatePicker from "react-datepicker";
+import ReactDatePicker, { registerLocale } from "react-datepicker";
 import MaskedInput from "react-text-mask";
 import Header from "./Header";
 import Utility from "global/components/utility";
@@ -11,8 +11,10 @@ function DatePickerComponent({ parentId, inputId, value, onChange, label }) {
 
   const { t } = useTranslation();
   const locale = t("date_fns", { returnObjects: true });
-  const placeholder = locale.formatLong.date({ width: "short" });
-  console.log(placeholder);
+  const datePlaceholder = locale.formatLong
+    .date({ width: "short" })
+    .toLowerCase();
+  registerLocale("locale", locale);
 
   const placeholderChar = "\u005F";
   const mask = [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/];
@@ -36,11 +38,11 @@ function DatePickerComponent({ parentId, inputId, value, onChange, label }) {
           />
           <MaskedInput
             id={inputId}
-            value={inputValue}
+            value={inputValue ? t("dates.local", { date: inputValue }) : ""}
             type="text"
             guide
             mask={mask}
-            placeholder="mm/dd/yyyy"
+            placeholder={datePlaceholder}
             placeholderChar={placeholderChar}
             autoComplete="off"
             className="range-picker__input"
@@ -74,6 +76,7 @@ function DatePickerComponent({ parentId, inputId, value, onChange, label }) {
         customInput={<CustomInput />}
         dropdownMode="scroll"
         dateformat="P"
+        locale="locale"
         popperContainer={({ children, className }) => (
           <div aria-hidden className={className}>
             {children}

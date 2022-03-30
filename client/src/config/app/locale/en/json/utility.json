@@ -87,6 +87,7 @@
     "published_title_case": "Published",
     "updated": "updated",
     "updated_title_case": "Updated",
-    "ago": "ago"
+    "ago": "ago",
+    "local": "{{date, datetime}}"
   }
 }
