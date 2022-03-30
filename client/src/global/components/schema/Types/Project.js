@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
+import { renderOffer, renderSeries, renderNamesList } from "../helpers";
+import BaseSchema from "../BaseSchema";
 
 export default class Project extends PureComponent {
   static displayName = "Schema.Project";
@@ -59,48 +61,7 @@ export default class Project extends PureComponent {
     return this.project.relationships;
   }
 
-  get showOffer() {
-    const {
-      purchasePrice,
-      purchasePriceCurrency,
-      purchaseUrl
-    } = this.attributes;
-    return purchasePrice && purchasePriceCurrency && purchaseUrl;
-  }
-
-  personArray(persons) {
-    if (!persons || persons.length < 1) return null;
-
-    return persons.map(p => ({
-      "@type": "Person",
-      name: p.attributes.fullName
-    }));
-  }
-
-  renderSeries() {
-    const { seriesTitle } = this.attributes.metadata;
-
-    return {
-      "@type": "CreativeWorkSeries",
-      name: seriesTitle
-    };
-  }
-
-  renderOffer() {
-    const {
-      purchasePrice,
-      purchasePriceCurrency,
-      purchaseUrl
-    } = this.attributes;
-    return {
-      "@type": "Offer",
-      price: purchasePrice,
-      priceCurrency: purchasePriceCurrency,
-      url: purchaseUrl
-    };
-  }
-
-  renderMainEntity() {
+  projectData() {
     const {
       slug,
       title,
@@ -118,8 +79,8 @@ export default class Project extends PureComponent {
       name: title,
       url: lh.link("frontendProjectDetail", slug),
       isbn: metadata.isbn,
-      author: this.personArray(creators),
-      contributor: this.personArray(contributors),
+      author: renderNamesList(creators),
+      contributor: renderNamesList(contributors),
       copyrightHolder: metadata.rightsHolder,
       dateCreated: createdAt,
       dateModified: updatedAt,
@@ -127,26 +88,13 @@ export default class Project extends PureComponent {
       publisher: metadata.publisher,
       bookEdition: metadata.edition,
       bookFormat: "EBook",
-      isPartOf: metadata.seriesTitle && this.renderSeries(),
+      isPartOf: renderSeries(metadata),
       image: avatarStyles && avatarStyles.small,
-      offers: this.showOffer && this.renderOffer()
+      offers: renderOffer(this.attributes)
     };
   }
 
   render() {
-    const data = {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      mainEntity: this.renderMainEntity()
-    };
-
-    return (
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(data)
-        }}
-      />
-    );
+    return <BaseSchema entity={this.projectData()} />;
   }
 }
