@@ -12,6 +12,7 @@ import { useFetch, usePaginationState } from "hooks";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
+import Schema from "global/components/schema";
 
 function JournalDetailContainer({ journal }) {
   const [issuesPagination] = usePaginationState(1, 8);
@@ -115,6 +116,7 @@ function JournalDetailContainer({ journal }) {
         )}
       />
       <Journal.Metadata journal={journal} />
+      <Schema.Journal journal={journal} />
     </>
   ) : null;
 }
