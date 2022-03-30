@@ -4,6 +4,7 @@ import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import Issue from "frontend/components/issue";
+import Schema from "global/components/schema";
 
 export default function IssueDetailContainer({ project, breadcrumbs }) {
   if (!project) return null;
@@ -20,6 +21,7 @@ export default function IssueDetailContainer({ project, breadcrumbs }) {
         showParentTitle={false}
       />
       <Issue.Detail issue={project} />
+      <Schema.Issue issue={project} />
     </>
   );
 }
