@@ -1,5 +1,6 @@
 import React, { useState, forwardRef } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import ReactDatePicker from "react-datepicker";
 import MaskedInput from "react-text-mask";
 import Header from "./Header";
@@ -7,6 +8,11 @@ import Utility from "global/components/utility";
 
 function DatePickerComponent({ parentId, inputId, value, onChange, label }) {
   const [pickerOpen, setPickerOpen] = useState(false);
+
+  const { t } = useTranslation();
+  const locale = t("date_fns", { returnObjects: true });
+  const placeholder = locale.formatLong.date({ width: "short" });
+  console.log(placeholder);
 
   const placeholderChar = "\u005F";
   const mask = [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/];

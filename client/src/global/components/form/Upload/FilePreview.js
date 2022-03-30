@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { Trans } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class FormUploadFilePreview extends PureComponent {
@@ -21,18 +22,17 @@ export default class FormUploadFilePreview extends PureComponent {
           />
           <p className="primary">{this.props.fileName}</p>
           <p className="secondary">
-            <button
-              type="button"
-              className="form-dropzone__inline-button"
-              onClick={this.props.handleRemove}
-            >
-              Remove this file
-            </button>
-            <br />
-            or{" "}
-            <span className="form-dropzone__upload-prompt">
-              Upload a new file
-            </span>
+            <Trans
+              i18nKey="forms.upload.instructions_with_existing"
+              components={[
+                <button
+                  type="button"
+                  className="form-dropzone__inline-button"
+                  onClick={this.props.handleRemove}
+                />,
+                <span className="form-dropzone__upload-prompt" />
+              ]}
+            />
           </p>
         </div>
       </div>

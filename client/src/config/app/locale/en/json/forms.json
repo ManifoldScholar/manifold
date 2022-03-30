@@ -105,14 +105,18 @@
       "button_label": "Send a Message"
     },
     "password_reset": {
+      "password": "Password",
       "title": "Reset Password",
       "new": "New Password",
-      "new_placeholder": "Password",
+      "new_placeholder": "$t(forms.password_reset.password)",
       "confirm": "Confirm Password",
       "confirm_placeholder": "Confirm Password",
       "submit_reset": "Reset Password",
       "generate_password": "Generate new password",
-      "set_password": "Set new password"
+      "set_password": "Set new password",
+      "show": "Show password",
+      "hide": "Hide password",
+      "enter_password": "Enter a password"
     },
     "notifications": {
       "title": "Notification Settings",
@@ -133,7 +137,7 @@
       }
     },
     "signin_overlay": {
-      "terms_and_conditions": "By creating this account, you agree to {{appName}} <0>terms and conditions</0>.",
+      "terms_and_conditions": "By creating this account, you agree to the <0>terms and conditions</0> of {{appName}}.",
       "create_account": "$t(actions.create) Account",
       "email": "Email",
       "name": "Name",
@@ -170,6 +174,27 @@
       "subscriptions__label": "Adjust your settings for email notifications:",
       "create_success_message": "<0>Congratulations! </0><1>Your account has been successfully created and you are now logged in to Manifold. From now on, I'm going to call you </1><2>{{name}}</h4>",
       "greeting": "Hello, <0>{{name}}</0>."
+    },
+    "attribute_map": {
+      "cancel": "Cancel mapping of {{name}} to {{mapping}}",
+      "placeholder": "Drag column..."
+    },
+    "picker": {
+      "remove_all": "Remove All",
+      "add_all": "Add All",
+      "no_options": "No Options",
+      "clear_selection": "Clear selection",
+      "reset": "Reset"
+    },
+    "upload": {
+      "instructions": "<0>Upload a file</0> or <br/> drag and drop here <br/>",
+      "instructions_with_existing": "<0>Remove this file</0><br/>or <1>Upload a new file</1>",
+      "progress": "Uploading file to Manifold. <br/>{{percent}}% Complete.",
+      "image_preview": "<0>Remove this image</0><br/>or <1>Upload a new file</1>",
+      "image_preview_alt": "Upload preview"
+    },
+    "date_picker": {
+      "date_change_sr_status": "You entered {{date}}."
     }
   }
 }

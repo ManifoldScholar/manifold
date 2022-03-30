@@ -5,7 +5,6 @@ import { usersAPI, requests } from "api";
 import { entityStoreActions, currentUserActions } from "actions";
 import { select } from "utils/entityUtils";
 import Form from "global/components/form";
-import { possessivize } from "utils/string";
 import connectAndFetch from "utils/connectAndFetch";
 import get from "lodash/get";
 import find from "lodash/find";
@@ -149,7 +148,7 @@ export class CreateContainer extends Component {
         <Trans
           i18nKey="forms.signin_overlay.terms_and_conditions"
           components={[<a {...linkProps}>#</a>]}
-          values={{ appName: possessivize(name) }}
+          values={{ appName: name }}
         />
       </p>
     );

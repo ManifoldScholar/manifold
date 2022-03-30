@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import { Droppable } from "react-beautiful-dnd";
 import Attribute from "./Attribute";
 import isNil from "lodash/isNil";
 
-export default class FormColumnMapMapping extends PureComponent {
+class FormColumnMapMapping extends PureComponent {
   static displayName = "Form.ColumnMap.Mapping";
 
   static propTypes = {
@@ -13,7 +14,8 @@ export default class FormColumnMapMapping extends PureComponent {
     id: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
     match: PropTypes.string,
-    unLink: PropTypes.func
+    unLink: PropTypes.func,
+    t: PropTypes.func
   };
 
   render() {
@@ -46,7 +48,9 @@ export default class FormColumnMapMapping extends PureComponent {
                     mapping={this.props.name}
                   />
                 ) : null}
-                <span className="placeholder">{"Drag column ..."}</span>
+                <span className="placeholder">
+                  {this.props.t("forms.atattribute_map.placeholder")}
+                </span>
                 {provided.placeholder}
               </div>
             );
@@ -56,3 +60,5 @@ export default class FormColumnMapMapping extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(FormColumnMapMapping);

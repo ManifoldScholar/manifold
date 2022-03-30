@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
 import Errorable from "../Errorable";
 import classNames from "classnames";
@@ -139,7 +140,8 @@ export class PickerComponent extends PureComponent {
     /* Set to true to show the add and remove all buttons                       */
     showAddRemoveAll: PropTypes.bool,
     /* Instructions display underneath the picker                               */
-    instructions: PropTypes.string
+    instructions: PropTypes.string,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -535,7 +537,8 @@ export class PickerComponent extends PureComponent {
       listRowProps,
       debug,
       value,
-      renderLiveRegion
+      renderLiveRegion,
+      t
     } = this.props;
 
     const inputClasses = classNames({
@@ -614,7 +617,7 @@ export class PickerComponent extends PureComponent {
                   <div className="picker-input__button-group">
                     {this.isResetButtonVisible && (
                       <button
-                        aria-label="Reset"
+                        aria-label={t("forms.picker.reset")}
                         tabIndex="-1"
                         type="button"
                         onClick={this.callbacks.unselectAll}
@@ -626,7 +629,7 @@ export class PickerComponent extends PureComponent {
                           className="picker-input__icon picker-input__icon--reset"
                         />
                         <span className="screen-reader-text">
-                          Clear selection
+                          {t("forms.picker.clear_selection")}
                         </span>
                       </button>
                     )}
@@ -652,7 +655,7 @@ export class PickerComponent extends PureComponent {
                       id="no-options"
                       className="picker-input__result picker-input__result--empty"
                     >
-                      No Options
+                      {t("forms.picker.no_options")}
                     </li>
                   )}
 
@@ -695,7 +698,9 @@ export class PickerComponent extends PureComponent {
                           size="default"
                           className="utility-button__icon utility-button__icon--highlight"
                         />
-                        <span className="utility-button__text">Add All</span>
+                        <span className="utility-button__text">
+                          {t("forms.picker.add_all")}
+                        </span>
                       </button>
                       <button
                         className="utility-button"
@@ -707,7 +712,9 @@ export class PickerComponent extends PureComponent {
                           size="default"
                           className="utility-button__icon utility-button__icon--notice"
                         />
-                        <span className="utility-button__text">Remove All</span>
+                        <span className="utility-button__text">
+                          {t("forms.picker.remove_all")}
+                        </span>
                       </button>
                     </div>
                   )}
@@ -738,6 +745,6 @@ export class PickerComponent extends PureComponent {
   }
 }
 
-export default setter(
-  withScreenReaderStatus(withFormOptions(PickerComponent), false)
+export default withTranslation()(
+  setter(withScreenReaderStatus(withFormOptions(PickerComponent), false))
 );

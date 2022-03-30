@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
 import setter from "./setter";
 import Errorable from "global/components/form/Errorable";
@@ -16,7 +17,8 @@ class DatePicker extends PureComponent {
     setFormat: PropTypes.string,
     set: PropTypes.func.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -41,14 +43,12 @@ class DatePicker extends PureComponent {
     return new Date(adjusted);
   }
 
-  humanReadableDate(date) {
-    return format(date, "MMMM d, yyyy");
-  }
-
   handleChange = date => {
     this.props.set(format(date, this.props.setFormat));
     this.props.setScreenReaderStatus(
-      `You entered ${this.humanReadableDate(date)}.`
+      this.props.t("forms.date_picker.date_change_sr_status", {
+        date: format(date, "PPP")
+      })
     );
   };
 
@@ -84,4 +84,4 @@ class DatePicker extends PureComponent {
   }
 }
 
-export default setter(withScreenReaderStatus(DatePicker));
+export default withTranslation()(setter(withScreenReaderStatus(DatePicker)));
