@@ -1,111 +1,66 @@
-import React, { Component } from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import connectAndFetch from "utils/connectAndFetch";
-import { withTranslation } from "react-i18next";
-import { Redirect } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { Redirect, useParams } from "react-router-dom";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
-import { entityStoreActions } from "actions";
-import { select, meta } from "utils/entityUtils";
-import { projectsAPI, requests } from "api";
+import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollection from "frontend/components/entity/Collection";
 import HeadContent from "global/components/HeadContent";
+import { useFetch, usePaginationState } from "hooks";
 
-const { request } = entityStoreActions;
+export default function EventList({ project }) {
+  const { id } = useParams();
+  const [pagination, setPageNumber] = usePaginationState();
+  const { data: events, meta } = useFetch({
+    request: [projectsAPI.events, id, null, pagination]
+  });
+  const { t } = useTranslation();
 
-export class EventList extends Component {
-  static fetchData = (getState, dispatch, location, match) => {
-    const { params } = match;
-    const page = params.page ? params.page : 1;
-    const eventRequest = request(
-      projectsAPI.events(params.id, {}, { number: page }),
-      requests.feEvents
-    );
-    const { promise: one } = dispatch(eventRequest);
-    return Promise.all([one]);
-  };
+  const { titlePlaintext, slug, hideActivity, description, avatarStyles } =
+    project?.attributes || {};
+  const breadcrumbs = useMemo(
+    () => [
+      {
+        to: lh.link("frontendProjectDetail", slug),
+        label: titlePlaintext
+      }
+    ],
+    [slug, titlePlaintext]
+  );
 
-  static mapStateToProps = state => {
-    return {
-      events: select(requests.feEvents, state.entityStore),
-      eventsMeta: meta(requests.feEvents, state.entityStore)
-    };
-  };
+  if (!project || !events) return null;
+  if (hideActivity) return <Redirect to={"/"} />;
 
-  static propTypes = {
-    project: PropTypes.object,
-    events: PropTypes.array,
-    eventsMeta: PropTypes.object,
-    t: PropTypes.func
-  };
-
-  get project() {
-    return this.props.project;
-  }
-
-  get projectUrl() {
-    return lh.link("frontendProjectDetail", this.project.attributes.slug);
-  }
-
-  get events() {
-    return this.props.events;
-  }
-
-  get eventsMeta() {
-    return this.props.eventsMeta;
-  }
-
-  paginationClickHandler = page => {
-    return lh.link(
-      "frontendProjectEventsPage",
-      this.props.project.attributes.slug,
-      page
-    );
-  };
-
-  renderRedirect() {
-    return <Redirect to={"/"} />;
-  }
-
-  render() {
-    if (!this.project) return null;
-    if (this.project.attributes.hideActivity) return this.renderRedirect();
-    if (!this.events) return null;
-    const t = this.props.t;
-    return (
-      <>
-        <HeadContent
-          title={`${this.project.attributes.titlePlaintext} | ${t(
-            "pages.frontend.events"
-          )}`}
-          description={this.project.attributes.description}
-          image={this.project.attributes.avatarStyles.mediumSquare}
-          appendDefaultTitle
-        />
-        <CheckFrontendMode
-          debugLabel="EventList"
-          project={this.project}
-          isProjectSubpage
-        />
-        <RegisterBreadcrumbs
-          breadcrumbs={[
-            {
-              to: this.projectUrl,
-              label: this.project.attributes.title
-            }
-          ]}
-        />
-        <EntityCollection.Events
-          events={this.events}
-          eventsMeta={this.eventsMeta}
-          paginationProps={{
-            paginationClickHandler: this.paginationClickHandler
-          }}
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      <HeadContent
+        title={`${titlePlaintext} | ${t("pages.frontend.events")}`}
+        description={description}
+        image={avatarStyles.mediumSquare}
+        appendDefaultTitle
+      />
+      <CheckFrontendMode
+        debugLabel="EventList"
+        project={project}
+        isProjectSubpage
+      />
+      <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
+      <EntityCollection.Events
+        events={events}
+        eventsMeta={meta}
+        paginationProps={{
+          paginationClickHandler: page => () => setPageNumber(page),
+          paginationTarget: "#"
+        }}
+      />
+    </>
+  );
 }
 
-export default withTranslation()(connectAndFetch(EventList));
+EventList.displayName = "Frontend.Containers.EventList";
+
+EventList.propTypes = {
+  project: PropTypes.object
+};
