@@ -1,140 +1,52 @@
-import React, { Component } from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import isEmpty from "lodash/isEmpty";
-import connectAndFetch from "utils/connectAndFetch";
-import { commonActions } from "actions/helpers";
-import { entityStoreActions } from "actions";
+import { useTranslation } from "react-i18next";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import GlobalUtility from "global/components/utility";
-import { select, meta } from "utils/entityUtils";
-import { projectCollectionsAPI, requests } from "api";
-import lh from "helpers/linkHandler";
-import queryString from "query-string";
+import { projectCollectionsAPI } from "api";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
+import {
+  useFetch,
+  usePaginationState,
+  useFilterState,
+  useSetLocation
+} from "hooks";
 
-const { request } = entityStoreActions;
-const perPage = 8;
+export default function ProjectCollectionsContainer() {
+  const baseFilters = { visible: true, order: "position ASC" };
+  const [filters] = useFilterState(baseFilters);
+  const projectsPagination = useMemo(
+    () => ({
+      size: 4,
+      number: 1
+    }),
+    []
+  );
+  const [pagination, setPageNumber] = usePaginationState(
+    1,
+    8,
+    projectsPagination
+  );
+  const { data: projectCollections, meta } = useFetch({
+    request: [projectCollectionsAPI.index, filters, pagination]
+  });
+  const { t } = useTranslation();
 
-export class ProjectsCollectionsContainer extends Component {
-  static fetchData = (getState, dispatch, location) => {
-    const query = queryString.parse(location.search);
-    const pagination = {
-      number: query.page || 1,
-      size: perPage,
-      collectionProjects: {
-        number: 1,
-        size: 4
-      }
-    };
-
-    const collectionsFetch = projectCollectionsAPI.index(
-      { visible: true, order: "position ASC" },
-      pagination
-    );
-    const collectionsAction = request(
-      collectionsFetch,
-      requests.feProjectCollections
-    );
-    const { promise: one } = dispatch(collectionsAction);
-    const promises = [one];
-    return Promise.all(promises);
-  };
-
-  static mapStateToProps = state => {
-    return {
-      projectCollections: select(
-        requests.feProjectCollections,
-        state.entityStore
-      ),
-      projectCollectionsMeta: meta(
-        requests.feProjectCollections,
-        state.entityStore
-      ),
-      authentication: state.authentication
-    };
-  };
-
-  static propTypes = {
-    authentication: PropTypes.object,
-    projectCollections: PropTypes.array,
-    location: PropTypes.object,
-    history: PropTypes.object,
-    dispatch: PropTypes.func,
-    fetchData: PropTypes.func.isRequired,
-    projectCollectionsMeta: PropTypes.object,
-    t: PropTypes.func
-  };
-
-  static defaultProps = {
-    location: {}
-  };
-
-  constructor(props) {
-    super(props);
-    this.commonActions = commonActions(props.dispatch);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.location === this.props.location) return null;
-    this.props.fetchData(this.props);
-  }
-
-  get projectCollections() {
-    return this.props.projectCollections;
-  }
-
-  get projectCollectionsMeta() {
-    return this.props.projectCollectionsMeta;
-  }
-
-  get location() {
-    return this.props.location;
-  }
-
-  get pagination() {
-    return this.projectCollectionsMeta?.pagination;
-  }
-
-  get showPlaceholder() {
-    if (this.pagination?.currentPage > 1) return false;
-    return !this.projectCollections?.length;
-  }
-
-  get showPagination() {
-    if (isEmpty(this.pagination)) return false;
-    if (this.pagination.totalPages === 1) return false;
+  const showPagination = () => {
+    const totalPages = meta?.pagination ?? {};
+    if (!totalPages || totalPages === 1) return false;
     return true;
-  }
-
-  currentQuery() {
-    return queryString.parse(this.props.location.search);
-  }
-
-  handlePageChange = (event, page) => {
-    event.preventDefault();
-    const query = { ...this.currentQuery(), page };
-    this.doQuery(query);
   };
 
-  doQuery(query) {
-    const url = lh.link("frontendProjectCollections", query);
-    this.props.history.push(url);
-  }
+  useSetLocation({ page: pagination.number });
 
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handlePageChange(event, page);
-    };
-  };
-
-  renderProjectCollections() {
-    if (this.showPlaceholder)
+  const renderProjectCollections = () => {
+    if (!projectCollections.length)
       return <EntityCollectionPlaceholder.ProjectCollectionsFrontend />;
 
-    return this.projectCollections.map((projectCollection, index) => (
+    return projectCollections.map((projectCollection, index) => (
       <EntityCollection.ProjectCollectionSummary
         key={projectCollection.id}
         projectCollection={projectCollection}
@@ -142,31 +54,29 @@ export class ProjectsCollectionsContainer extends Component {
         bgColor={index % 2 === 1 ? "neutral05" : "white"}
       />
     ));
-  }
+  };
 
-  render() {
-    const t = this.props.t;
-    return (
-      <>
-        <CheckFrontendMode debugLabel="ProjectCollections" isProjectSubpage />
-        <h1 className="screen-reader-text">
-          {t("glossary.project_collection_other")}
-        </h1>
-        {this.renderProjectCollections()}
-        {this.showPagination && (
-          <section>
-            <div className="container">
-              <GlobalUtility.Pagination
-                paginationClickHandler={this.pageChangeHandlerCreator}
-                pagination={this.projectCollectionsMeta.pagination}
-              />
-            </div>
-          </section>
-        )}
-        <CollectionNavigation />
-      </>
-    );
-  }
+  return projectCollections ? (
+    <>
+      <CheckFrontendMode debugLabel="ProjectCollections" isProjectSubpage />
+      <h1 className="screen-reader-text">
+        {t("glossary.project_collection_other")}
+      </h1>
+      {renderProjectCollections()}
+      {showPagination && (
+        <section>
+          <div className="container">
+            <GlobalUtility.Pagination
+              paginationClickHandler={page => () => setPageNumber(page)}
+              pagination={meta.pagination}
+            />
+          </div>
+        </section>
+      )}
+      <CollectionNavigation />
+    </>
+  ) : null;
 }
 
-export default withTranslation()(connectAndFetch(ProjectsCollectionsContainer));
+ProjectCollectionsContainer.displayName =
+  "Frontend.Containers.ProjectCollections";
