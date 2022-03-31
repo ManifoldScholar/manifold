@@ -150,7 +150,7 @@
       "remember_password": "Remember your password?",
       "send_password_reset": "Send Password Reset Email",
       "send_reset_success": "Email sent to {{email}} with instructions to reset your password.",
-      "oauth_instructions": "You can also create a {{appName}} account using your {{providers}} credentials.",
+      "oauth_instructions": "You can also create a {{appName}} account using your {{providers, list(style: long; type: conjunction;)}} credentials.",
       "have_account": "Already have an account?",
       "need_account": "Need to sign up?",
       "log_in": "Log In",
