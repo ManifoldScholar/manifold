@@ -10,6 +10,7 @@ import { withRouter } from "react-router-dom";
 import template from "lodash/template";
 import { entityStoreActions } from "actions";
 import ActionBox from "frontend/components/reading-group/ActionBox";
+import * as Styled from "./styles";
 
 const { request } = entityStoreActions;
 import queryString from "query-string";
@@ -119,28 +120,27 @@ class JoinBox extends PureComponent {
         title={t("forms.join_group.title")}
         instructions={t("forms.join_group.instructions")}
         actions={
-          <form onSubmit={this.handleSubmit} className="group-join-form">
+          <Styled.Form onSubmit={this.handleSubmit}>
             <UIDConsumer name={id => `join-box-${id}`}>
               {id => (
-                <label htmlFor={id} className="group-join-form__label">
+                <Styled.Label htmlFor={id}>
                   <span className="screen-reader-text">
                     {t("forms.join_group.join_code")}
                   </span>
-                  <input
+                  <Styled.Input
                     id={id}
                     value={this.state.code}
                     onChange={this.updateCode}
                     placeholder={t("forms.join_group.code_placeholder")}
-                    className="group-join-form__input"
                     required
                   />
-                </label>
+                </Styled.Label>
               )}
             </UIDConsumer>
-            <button type="submit" className="group-join-form__button">
+            <Styled.Button type="submit">
               {t("forms.join_group.button_label")}
-            </button>
-          </form>
+            </Styled.Button>
+          </Styled.Form>
         }
       />
     );

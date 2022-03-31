@@ -5,7 +5,6 @@ import removeMember from "./removeMember";
 import summary from "./summary";
 import notesFilter from "./notesFilter";
 import childRouteNav from "./childRouteNav";
-import joinForm from "./joinForm";
 import homepageModeToggle from "./homepageModeToggle";
 import settingsFormGroup from "./settingsFormGroup";
 import settingsFormMember from "./settingsFormMember";
@@ -27,7 +26,6 @@ ${settingsFormGroup}
 ${settingsFormMember}
 ${notesFilter}
 ${childRouteNav}
-${joinForm}
 ${pageHeading}
 ${summary}
 `;
