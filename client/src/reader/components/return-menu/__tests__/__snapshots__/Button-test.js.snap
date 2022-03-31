@@ -8,6 +8,6 @@ exports[`reader/components/return-menu/Button matches the snapshot 1`] = `
   data-id="toggle-menu"
   onClick={[Function]}
 >
-  Menu
+  navigation.menu
 </Button>
 `;

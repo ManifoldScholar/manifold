@@ -1,6 +1,6 @@
 import FormattedDate from "../";
 import { zonedTimeToUtc } from "date-fns-tz";
-import withApp from "test/setup/withApp"
+import withApp from "test/setup/withApp";
 
 describe("global/components/FormattedDate", () => {
   def("root", () => (

@@ -7,7 +7,7 @@ exports[`global/components/avatar/Avatar matches the snapshot 1`] = `
   <span
     className="screen-reader-text"
   >
-    avatar
+    glossary.avatar
   </span>
   <ImageAvatar
     $url="some/url"
