@@ -1,4 +1,3 @@
-import actionBox from "./actionBox";
 import actionPanel from "./actionPanel";
 import pageHeading from "./pageHeading";
 import pageBody from "./pageBody";
@@ -16,7 +15,6 @@ import homepageEditor from "./homepageEditor";
 import groupsPageContainer from "./groupsPageContainer";
 
 export default `
-${actionBox}
 ${actionPanel}
 ${collectablePlaceholderContent}
 ${collectionCategory}

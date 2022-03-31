@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import * as Styled from "./styles";
 
 function ActionBox({ title, instructions, actions }) {
   return (
-    <div className="group-action-box">
-      <div className="group-action-box__heading">
-        <span className="group-action-box__heading-text">{title}</span>
-        <span className="group-action-box__instructions">{instructions}</span>
-      </div>
-      <div className="group-action-box__actions">{actions}</div>
-    </div>
+    <Styled.ActionBox>
+      <Styled.Heading>
+        <Styled.Title>{title}</Styled.Title>
+        <Styled.Instructions>{instructions}</Styled.Instructions>
+      </Styled.Heading>
+      <div>{actions}</div>
+    </Styled.ActionBox>
   );
 }
 
