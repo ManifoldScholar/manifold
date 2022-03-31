@@ -7,6 +7,7 @@ import {
   CollectedResourceCollections,
   CollectedResources
 } from "frontend/components/collecting/collection-blocks";
+import * as Styled from "./styles";
 
 function Category({ category, mappings, responses, onUncollect }) {
   const categoryMapping = mappings[category.id] || null;
@@ -35,17 +36,16 @@ function Category({ category, mappings, responses, onUncollect }) {
   } = category;
 
   return (
-    <article className="container group-collection-category">
-      <header className="group-collection-category__header">
-        <h2 className="group-collection-category__heading">{title}</h2>
+    <Styled.Category>
+      <Styled.Header>
+        <Styled.Title>{title}</Styled.Title>
         {descriptionFormatted && (
-          <div
+          <Styled.Description
             dangerouslySetInnerHTML={{ __html: descriptionFormatted }}
-            className="group-collection-category__description markdown"
           />
         )}
-      </header>
-      <div className="group-collection-category__body">
+      </Styled.Header>
+      <div>
         <CollectedProjects {...getCollectedProps("projects")} />
         <CollectedTexts {...getCollectedProps("texts")} />
         <CollectedTextSections {...getCollectedProps("textSections")} />
@@ -54,7 +54,7 @@ function Category({ category, mappings, responses, onUncollect }) {
         />
         <CollectedResources {...getCollectedProps("resources")} />
       </div>
-    </article>
+    </Styled.Category>
   );
 }
 

@@ -2,44 +2,37 @@ import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
+import * as Styled from "./styles";
 
 function CollectionPlaceholder() {
   const { t } = useTranslation();
 
   return (
-    <section className="collection-placeholder">
-      <div className="collection-placeholder__inner">
+    <Styled.Placeholder>
+      <Styled.Inner>
         <Trans
           i18nKey="placeholders.reading_group.customize"
-          components={[
-            <h3 className="collection-placeholder__heading" />,
-            <p />,
-            <h3 className="collection-placeholder__heading" />,
-            <p />
-          ]}
+          components={[<Styled.Heading />, <p />, <Styled.Heading />, <p />]}
         />
-        <div className="collection-placeholder__actions">
+        <Styled.Actions>
           <Link to={lh.link("frontendProjects")} className="button-tertiary">
             {t("navigation.browse_library")}
           </Link>
           <a href="#search" className="button-tertiary">
             {t("navigation.search_by_keyword")}
           </a>
-        </div>
+        </Styled.Actions>
         <Trans
           i18nKey="placeholders.reading_group.settings"
-          components={[
-            <h3 className="collection-placeholder__heading" />,
-            <p />
-          ]}
+          components={[<Styled.Heading />, <p />]}
         />
-        <div className="collection-placeholder__actions">
+        <Styled.Actions>
           <a href="#settings" className="button-tertiary">
             {t("actions.edit_reading_group")}
           </a>
-        </div>
-      </div>
-    </section>
+        </Styled.Actions>
+      </Styled.Inner>
+    </Styled.Placeholder>
   );
 }
 
