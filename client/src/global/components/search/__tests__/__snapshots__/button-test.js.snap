@@ -55,7 +55,11 @@ exports[`global/components/search/button when it is active matches the snapshot 
         "postProcessPassResolved": false,
         "preload": false,
         "resources": Object {
-          "en": Object {},
+          "en": Object {
+            "translation": Object {
+              "date_fns": null,
+            },
+          },
         },
         "returnEmptyString": true,
         "returnNull": true,
@@ -68,9 +72,13 @@ exports[`global/components/search/button when it is active matches the snapshot 
         "supportedLngs": false,
         "updateMissing": false,
       },
-      "resolvedLanguage": undefined,
+      "resolvedLanguage": "en",
       "store": Object {
-        "en": Object {},
+        "en": Object {
+          "translation": Object {
+            "date_fns": null,
+          },
+        },
       },
     }
   }
@@ -135,7 +143,11 @@ exports[`global/components/search/button when it isn't active matches the snapsh
         "postProcessPassResolved": false,
         "preload": false,
         "resources": Object {
-          "en": Object {},
+          "en": Object {
+            "translation": Object {
+              "date_fns": null,
+            },
+          },
         },
         "returnEmptyString": true,
         "returnNull": true,
@@ -148,9 +160,13 @@ exports[`global/components/search/button when it isn't active matches the snapsh
         "supportedLngs": false,
         "updateMissing": false,
       },
-      "resolvedLanguage": undefined,
+      "resolvedLanguage": "en",
       "store": Object {
-        "en": Object {},
+        "en": Object {
+          "translation": Object {
+            "date_fns": null,
+          },
+        },
       },
     }
   }

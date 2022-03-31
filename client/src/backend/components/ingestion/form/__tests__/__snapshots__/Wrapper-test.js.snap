@@ -703,7 +703,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                       "postProcessPassResolved": false,
                       "preload": false,
                       "resources": Object {
-                        "en": Object {},
+                        "en": Object {
+                          "translation": Object {
+                            "date_fns": null,
+                          },
+                        },
                       },
                       "returnEmptyString": true,
                       "returnNull": true,
@@ -716,9 +720,13 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                       "supportedLngs": false,
                       "updateMissing": false,
                     },
-                    "resolvedLanguage": undefined,
+                    "resolvedLanguage": "en",
                     "store": Object {
-                      "en": Object {},
+                      "en": Object {
+                        "translation": Object {
+                          "date_fns": null,
+                        },
+                      },
                     },
                   }
                 }
@@ -815,7 +823,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                         "postProcessPassResolved": false,
                         "preload": false,
                         "resources": Object {
-                          "en": Object {},
+                          "en": Object {
+                            "translation": Object {
+                              "date_fns": null,
+                            },
+                          },
                         },
                         "returnEmptyString": true,
                         "returnNull": true,
@@ -828,9 +840,13 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                         "supportedLngs": false,
                         "updateMissing": false,
                       },
-                      "resolvedLanguage": undefined,
+                      "resolvedLanguage": "en",
                       "store": Object {
-                        "en": Object {},
+                        "en": Object {
+                          "translation": Object {
+                            "date_fns": null,
+                          },
+                        },
                       },
                     }
                   }
@@ -944,7 +960,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                           "postProcessPassResolved": false,
                           "preload": false,
                           "resources": Object {
-                            "en": Object {},
+                            "en": Object {
+                              "translation": Object {
+                                "date_fns": null,
+                              },
+                            },
                           },
                           "returnEmptyString": true,
                           "returnNull": true,
@@ -957,9 +977,13 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                           "supportedLngs": false,
                           "updateMissing": false,
                         },
-                        "resolvedLanguage": undefined,
+                        "resolvedLanguage": "en",
                         "store": Object {
-                          "en": Object {},
+                          "en": Object {
+                            "translation": Object {
+                              "date_fns": null,
+                            },
+                          },
                         },
                       }
                     }
@@ -1086,7 +1110,11 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             "postProcessPassResolved": false,
                             "preload": false,
                             "resources": Object {
-                              "en": Object {},
+                              "en": Object {
+                                "translation": Object {
+                                  "date_fns": null,
+                                },
+                              },
                             },
                             "returnEmptyString": true,
                             "returnNull": true,
@@ -1099,9 +1127,13 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             "supportedLngs": false,
                             "updateMissing": false,
                           },
-                          "resolvedLanguage": undefined,
+                          "resolvedLanguage": "en",
                           "store": Object {
-                            "en": Object {},
+                            "en": Object {
+                              "translation": Object {
+                                "date_fns": null,
+                              },
+                            },
                           },
                         }
                       }
