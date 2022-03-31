@@ -65,24 +65,12 @@ export class CreateContainer extends Component {
   }
 
   get OAuthProviderNames() {
-    const t = this.props.t;
     const providers = values(
       get(this.props, "settings.attributes.oauth")
     ).filter(provider => provider.enabled);
-    if (!providers) return null;
+    if (!providers || !providers.length) return null;
     const names = providers.map(provider => capitalize(provider.name));
-    if (names.length === 0) return null;
-
-    switch (names.length) {
-      case 1:
-        return names;
-      case 2:
-        return names.join(` ${t("common.or")} `);
-      default: {
-        const last = names.splice(names.length - 1, 1)[0];
-        return `${names.join(", ")}, ${t("common.or")} ${last}`;
-      }
-    }
+    return names;
   }
 
   authenticateUser = () => {
