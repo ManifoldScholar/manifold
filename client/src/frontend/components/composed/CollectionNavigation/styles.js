@@ -20,10 +20,12 @@ export const List = styled("ul", transientOptions)`
         $count > 3 ? respond(`flex-basis: calc(50% - var(--gap) / 2);`, 60) : ``
       }
       ${respond(
-        `
+        $count >= 5
+          ? `
           flex-basis: auto;
           flex-grow: 1;
-        `,
+        `
+          : `flex-basis: auto`,
         $count > 3 ? 120 : 75
       )}
     `}
