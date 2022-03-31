@@ -5,8 +5,9 @@ import FormContainer from "global/containers/form";
 import Authorize from "hoc/Authorize";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
+import { withTranslation } from "react-i18next";
 
-export default class Social extends PureComponent {
+class Social extends PureComponent {
   static displayName = "Hero.Builder.Forms.Social";
 
   static propTypes = {
@@ -15,7 +16,8 @@ export default class Social extends PureComponent {
     api: PropTypes.object.isRequired,
     closeDrawer: PropTypes.func,
     failureRedirectRoute: PropTypes.string.isRequired,
-    headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    t: PropTypes.func
   };
 
   get model() {
@@ -29,6 +31,7 @@ export default class Social extends PureComponent {
 
   render() {
     const { failureRedirectRoute, headerId, api, modelLabel } = this.props;
+    const t = this.props.t;
 
     return (
       <Authorize
@@ -40,7 +43,7 @@ export default class Social extends PureComponent {
         <section>
           <Navigation.DrawerHeader
             icon="projects64"
-            title="Social Links"
+            title={t("backend.layout.social_links")}
             headerId={headerId}
           />
           <FormContainer.Form
@@ -52,29 +55,42 @@ export default class Social extends PureComponent {
             className="form-secondary"
           >
             <Form.TextInput
-              label="Hashtag"
+              label={t("backend.forms.hashtag")}
               name="attributes[hashtag]"
-              placeholder={`Enter ${modelLabel} Hashtag`}
+              placeholder={t("backend.forms.hashtag_placeholder", {
+                entity: modelLabel
+              })}
             />
             <Form.TextInput
-              label="Facebook ID"
+              label={t("backend.forms.social_id", { social: "Facebook" })}
               name="attributes[facebookId]"
-              placeholder={`Enter ${modelLabel} Facebook ID`}
+              placeholder={t("backend.forms.social_placeholder", {
+                entity: modelLabel,
+                social: "Facebook"
+              })}
             />
             <Form.TextInput
-              label="Twitter ID"
+              label={t("backend.forms.social_id", { social: "Twitter" })}
               name="attributes[twitterId]"
-              placeholder={`Enter ${modelLabel} Twitter ID`}
+              placeholder={t("backend.forms.social_placeholder", {
+                entity: modelLabel,
+                social: "Twitter"
+              })}
             />
             <Form.TextInput
-              label="Instagram ID"
+              label={t("backend.forms.social_id", { social: "Instagram" })}
               name="attributes[instagramId]"
-              placeholder={`Enter ${modelLabel} Instagram ID`}
+              placeholder={t("backend.forms.social_placeholder", {
+                entity: modelLabel,
+                social: "Instagram"
+              })}
             />
-            <Form.Save text="Save" />
+            <Form.Save text={t("actions.save")} />
           </FormContainer.Form>
         </section>
       </Authorize>
     );
   }
 }
+
+export default withTranslation()(Social);

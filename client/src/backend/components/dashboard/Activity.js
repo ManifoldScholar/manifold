@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 
-export default class Activity extends Component {
+class Activity extends Component {
   static displayName = "Dashboard.Activity";
 
   static propTypes = {
@@ -16,7 +17,8 @@ export default class Activity extends Component {
         newHighlightsCount: PropTypes.number,
         newAnnotationsCount: PropTypes.number
       })
-    })
+    }),
+    t: PropTypes.func
   };
 
   formatReaderIncrease(stats) {
@@ -36,7 +38,7 @@ export default class Activity extends Component {
         <ul className="backend-activity-stats__list">
           <li className="backend-activity-stats__list-item">
             <span className="backend-activity-stats__list-text">
-              Texts added this week
+              {this.props.t("backend.dashboard.text_stats")}
             </span>
             <span className="backend-activity-stats__list-text--highlighted">
               {stats.newTextsCount}
@@ -45,7 +47,7 @@ export default class Activity extends Component {
           {stats.readersThisWeek !== null ? (
             <li className="backend-activity-stats__list-item">
               <span className="backend-activity-stats__list-text">
-                Readers this week
+                {this.props.t("backend.dashboard.reader_stats")}
               </span>
               <span className="backend-activity-stats__list-text--highlighted">
                 {stats.readersThisWeek}
@@ -55,7 +57,7 @@ export default class Activity extends Component {
           {stats.readerIncrease != null ? (
             <li className="backend-activity-stats__list-item">
               <span className="backend-activity-stats__list-text">
-                Change from last week
+                {this.props.t("backend.dashboard.stats_change")}
               </span>
               <span className="backend-activity-stats__list-text--highlighted">
                 {this.formatReaderIncrease(stats)}
@@ -64,7 +66,7 @@ export default class Activity extends Component {
           ) : null}
           <li className="backend-activity-stats__list-item">
             <span className="backend-activity-stats__list-text">
-              Highlights in the past week
+              {this.props.t("backend.dashboard.highlight_stats")}
             </span>
             <span className="backend-activity-stats__list-text--highlighted">
               {stats.newHighlightsCount}
@@ -72,7 +74,7 @@ export default class Activity extends Component {
           </li>
           <li className="backend-activity-stats__list-item">
             <span className="backend-activity-stats__list-text">
-              Annotations in the past week
+              {this.props.t("backend.dashboard.annotation_stats")}
             </span>
             <span className="backend-activity-stats__list-text--highlighted">
               {stats.newAnnotationsCount}
@@ -83,3 +85,5 @@ export default class Activity extends Component {
     );
   }
 }
+
+export default withTranslation()(Activity);

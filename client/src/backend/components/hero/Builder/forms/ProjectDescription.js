@@ -5,6 +5,7 @@ import FormContainer from "global/containers/form";
 import Authorize from "hoc/Authorize";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
+import { useTranslation } from "react-i18next";
 
 function ProjectDescription({
   modelLabel,
@@ -19,6 +20,7 @@ function ProjectDescription({
     if (!closeDrawer) return;
     closeDrawer();
   }, [closeDrawer]);
+  const { t } = useTranslation();
 
   return (
     <Authorize
@@ -30,7 +32,7 @@ function ProjectDescription({
       <section>
         <Navigation.DrawerHeader
           icon="projects64"
-          title="Description + Images"
+          title={t("backend.layout.description_and_images")}
           headerId={headerId}
         />
         <FormContainer.Form
@@ -42,46 +44,53 @@ function ProjectDescription({
           onSuccess={maybeCloseDrawer}
         >
           {withDarkMode && (
-            <Form.Switch label="Dark Mode" name="attributes[darkMode]" />
+            <Form.Switch
+              label={t("backend.forms.dark_mode")}
+              name="attributes[darkMode]"
+            />
           )}
           <Form.TextArea
             wide
             focusOnMount
             height={250}
-            label="Description"
+            label={t("backend.forms.description")}
             name="attributes[description]"
-            placeholder={`Describe the ${modelLabel}`}
-            instructions={`Enter a brief description of your ${modelLabel}. This field accepts basic Markdown.`}
+            placeholder={t("backend.forms.description_placeholder", {
+              entity: modelLabel
+            })}
+            instructions={t("backend.forms.description_instructions", {
+              entity: modelLabel
+            })}
           />
           <Form.Upload
             layout="landscape"
             accepts="images"
-            label="Background Image"
+            label={t("backend.forms.image_label")}
             readFrom="attributes[heroStyles][small]"
             name="attributes[hero]"
             remove="attributes[removeHero]"
-            instructions={
-              "Images will be resized to 1280x800 and cropped along the bottom edge."
-            }
+            instructions={t("backend.forms.image_instructions")}
           />
           <Form.Upload
             layout="portrait"
-            label="Cover Image"
+            label={t("backend.forms.cover_image")}
             accepts="images"
             readFrom="attributes[coverStyles][small]"
             name="attributes[cover]"
             remove="attributes[removeCover]"
-            instructions={`If a cover is set for the ${modelLabel}, it will appear over the hero, to the right of the description.`}
+            instructions={t("backend.forms.cover_image_instructions", {
+              entity: modelLabel
+            })}
           />
           <Form.TextArea
-            label="Image Credits"
+            label={t("backend.forms.image_credits")}
             name="attributes[imageCredits]"
-            placeholder="Add image credits"
-            instructions="Enter image credits for hero and cover. This field accepts basic Markdown."
+            placeholder={t("backend.forms.image_credits_placeholder")}
+            instructions={t("backend.forms.image_credits_instructions")}
             height={250}
             wide
           />
-          <Form.Save text="Save" />
+          <Form.Save text={t("actions.save")} />
         </FormContainer.Form>
       </section>
     </Authorize>

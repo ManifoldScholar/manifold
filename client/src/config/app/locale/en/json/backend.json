@@ -223,7 +223,29 @@
       "unauthorized_visible": "Visible Only When Unauthorized",
       "depth": "Depth",
       "select_text": "Select a $t(glossary.text_one)",
-      "show_text_title": "Show $t(glossary.text_one) title?"
+      "show_text_title": "Show $t(glossary.text_one) title?",
+      "dark_mode": "Dark Mode",
+      "description_placeholder": "Describe the {{entity}}",
+      "description_instructions": "Enter a brief description of your {{entity}}. This field accepts basic Markdown.",
+      "image_label": "Background Image",
+      "image_instructions": "Images will be resized to 1280x800 and cropped along the bottom edge.",
+      "hero_layout": "Hero Layout:",
+      "square_inset": "Square Inset",
+      "wide_inset": "Wide Inset",
+      "full_bleed": "Full Bleed",
+      "logo": "Logo",
+      "logo_instructions": "If a logo is set for the {{entity}}, it will appear vertically and horizontally centered over the hero.",
+      "background_color": "Background Color",
+      "background_color_instructions": "Enter a color in one of the following formats: CSS color keyword, hexadecimal, rgb, rgba, hsl, hsla, or hwb. Leave blank to restore default background color.",
+      "image_credits": "Image Credits",
+      "image_credits_placeholder": "Add image credits",
+      "image_credits_instructions": "Enter image credits for hero and cover. This field accepts basic Markdown.",
+      "cover_image": "Cover Image",
+      "cover_image_instructions": "If a cover is set for the {{entity}}, it will appear over the hero, to the right of the description.",
+      "social_id": "{{social}} ID",
+      "social_placeholder": "Enter the {{entity}} {{social}} ID",
+      "hashtag": "Hashtag",
+      "hashtag_placeholder": "Enter {{entity}} Hashtag"
     },
     "actions": {
       "delete_category": "$t(actions.delete) $t(glossary.category_title_case_one)",
@@ -240,6 +262,13 @@
       "text_moved": "Text moved to {{destination}}",
       "empty_category": "No texts have been added to this category",
       "all_texts_categorized": "All texts belong to categories"
+    },
+    "dashboard": {
+      "text_stats": "Texts added this week",
+      "reader_stats": "Readers this week",
+      "stats_change": "Change from last week",
+      "highlight_stats": "Highlights in the past week",
+      "annotation_stats": "Annotations in the past week"
     },
     "analytics": {
       "global_header": "Analytics",
@@ -345,7 +374,8 @@
         "sleeping": "Sleeping",
         "processing": "Processing",
         "finished": "Finished"
-      },
+      }
+    },
     "layout": {
       "add_block": "Add content block \"{{blockTitle}}\"",
       "delete_block": "Delete content block \"{{blockTitle}}\"",
@@ -367,10 +397,21 @@
       "shaded": "Shaded",
       "confirm_delete_block": "Are you sure you want to delete this content block?",
       "cannot_be_undone": "This action cannot be undone.",
-      "customize_blocks_message": "Customize the rest of the content on your project page. Add, delete, and reorder content blocks, edit settings, and toggle visibility."
+      "customize_blocks_message": "Customize the rest of the content on your project page. Add, delete, and reorder content blocks, edit settings, and toggle visibility.",
+      "left_side": "Left side",
+      "right_side": "Right side",
+      "buttons": "buttons",
+      "links": "links",
+      "description_and_images": "Description + Images",
+      "description_and_images_description": "Description Text, Cover Art, and Background Image",
+      "hero_block": "Hero Block",
+      "hero_block_instructions": "The Hero Block is the top of your {{entity}} page. Customize its content, layout, and settings here.",
+      "calls_to_action": "Calls-to-Action",
+      "calls_to_action_description": "Buttons and links to related resources",
+      "social_links": "Social Links",
+      "social_links_description": "Links to social platforms and hashtag"
     },
-    "menus": {
-    },
+    "menus": {},
     "makers": {
       "header": "Manage Makers",
       "button_label": "Add a new maker"
