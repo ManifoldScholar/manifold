@@ -6,6 +6,7 @@ import classNames from "classnames";
 import { withRouter } from "react-router-dom";
 import { Droppable } from "react-beautiful-dnd";
 import Chip from "./Chip";
+import { withTranslation } from "react-i18next";
 
 class Slot extends PureComponent {
   static displayName = "Hero.Builder.ActionCallouts.Slot";
@@ -18,7 +19,8 @@ class Slot extends PureComponent {
     id: PropTypes.string.isRequired,
     model: PropTypes.object.isRequired,
     actionCalloutEditRoute: PropTypes.string.isRequired,
-    actionCalloutNewRoute: PropTypes.string.isRequired
+    actionCalloutNewRoute: PropTypes.string.isRequired,
+    t: PropTypes.func
   };
 
   get title() {
@@ -52,6 +54,7 @@ class Slot extends PureComponent {
   };
 
   render() {
+    const t = this.props.t;
     return (
       <Droppable droppableId={this.props.id} type="actionCallout">
         {(provided, snapshot) => (
@@ -68,9 +71,11 @@ class Slot extends PureComponent {
               >
                 <Utility.IconComposer icon="circlePlus32" size={32} />
                 <span>
-                  {this.title}
+                  {t(this.title)}
                   <br />
-                  {this.attributes.button ? "buttons" : "links"}
+                  {this.attributes.button
+                    ? t("backend.layout.buttons")
+                    : t("backend.layout.links")}
                 </span>
               </button>
               <div
@@ -97,4 +102,4 @@ class Slot extends PureComponent {
   }
 }
 
-export default withRouter(Slot);
+export default withTranslation()(withRouter(Slot));

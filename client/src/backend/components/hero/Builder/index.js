@@ -7,8 +7,9 @@ import { projectsAPI } from "api";
 import Drawer from "global/containers/drawer";
 import ActionCallouts from "./ActionCallouts";
 import SectionLabel from "global/components/form/SectionLabel";
+import { withTranslation } from "react-i18next";
 
-export default class Builder extends PureComponent {
+class Builder extends PureComponent {
   static displayName = "Hero.Builder";
 
   static propTypes = {
@@ -31,12 +32,12 @@ export default class Builder extends PureComponent {
     actionCalloutSlots: PropTypes.array,
     refreshActionCallouts: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
-    withDarkMode: PropTypes.bool
+    withDarkMode: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
     include: [],
-    modelLabel: "project",
     api: projectsAPI,
     actionCalloutSlots: [
       "left-button",
@@ -97,6 +98,7 @@ export default class Builder extends PureComponent {
   render() {
     const { include, modelLabel } = this.props;
     const DrawerContents = this.drawerComponent;
+    const t = this.props.t;
 
     return (
       <UIDConsumer name={id => `hero-builder-${id}`}>
@@ -109,16 +111,15 @@ export default class Builder extends PureComponent {
                 aria-labelledby={`${id}-header`}
                 aria-describedby={`${id}-instructions`}
               >
-                <SectionLabel label="Hero Block" id={`${id}-header`} />
+                <SectionLabel label={t("backend.layout.hero_block")} id={`${id}-header`} />
                 <span id={`${id}-instructions`} className="instructions">
-                  {`The Hero Block is the top of your ${modelLabel} page. Customize its
-                  content, layout, and settings here.`}
+                  {t("backend.layout.hero_block_instructions", {entity: modelLabel})}
                 </span>
 
                 {include.includes("projectDescription") && (
                   <Block
-                    title="Description + Images"
-                    description="Description Text, Cover Art, and Background Image"
+                    title={t("backend.layout.description_and_images")}
+                    description={t("backend.layout.description_and_images_description")}
                     onEdit={this.openProjectDescriptionDrawer}
                     ariaControls={`${id}-drawer`}
                     ariaExpanded={
@@ -128,8 +129,8 @@ export default class Builder extends PureComponent {
                 )}
                 {include.includes("journalDescription") && (
                   <Block
-                    title="Description + Images"
-                    description="Description Text, Logo, and Background Color or Image"
+                    title={t("backend.layout.description_and_images")}
+                    description={t("backend.layout.description_and_images_description")}
                     onEdit={this.openJournalDescriptionDrawer}
                     ariaControls={`${id}-drawer`}
                     ariaExpanded={
@@ -139,8 +140,8 @@ export default class Builder extends PureComponent {
                 )}
                 {include.includes("actionCallouts") && (
                   <Block
-                    title="Calls-to-Action"
-                    description="Buttons and links to related resources"
+                    title={t("backend.layout.calls_to_action")}
+                    description={t("backend.layout.calls_to_action_description")}
                   >
                     {this.props.actionCallouts && (
                       <ActionCallouts
@@ -162,8 +163,8 @@ export default class Builder extends PureComponent {
                 )}
                 {include.includes("social") && (
                   <Block
-                    title="Social Links"
-                    description="Links to social platforms and hashtag"
+                    title={t("backend.layout.social_links")}
+                    description={t("backend.layout.social_links_description")}
                     onEdit={this.openSocialDrawer}
                     ariaControls={`${id}-drawer`}
                     ariaExpanded={this.state.drawer === Forms.Social}
@@ -196,3 +197,5 @@ export default class Builder extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(Builder);
