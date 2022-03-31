@@ -9,7 +9,7 @@ exports[`frontend/components/text/Meta matches the snapshot 1`] = `
       inline={true}
     />
     <Published>
-      Published
+      dates.published_title_case
     </Published>
   </Status>
   <withI18nextTranslation(Text.Counts)

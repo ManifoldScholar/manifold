@@ -27,7 +27,7 @@ exports[`frontend/components/resource-slide/SlidePlaceholder matches the snapsho
       <span
         className="resource-type"
       >
-        This collection has no resources.
+        placeholders.resource_collection
       </span>
     </div>
   </div>
