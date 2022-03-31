@@ -1,273 +1,140 @@
-import React, { Component } from "react";
+import React, { useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
-import connectAndFetch from "utils/connectAndFetch";
-import { withTranslation } from "react-i18next";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollection from "frontend/components/entity/Collection";
-import { entityStoreActions } from "actions";
-import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
-import { projectCollectionsAPI, projectsAPI, requests } from "api";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { entityStoreActions as store } from "actions";
+import { projectCollectionsAPI, projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
-import omitBy from "lodash/omitBy";
-import queryString from "query-string";
-import debounce from "lodash/debounce";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import has from "lodash/has";
-import withSettings from "hoc/withSettings";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import {
+  useFetch,
+  usePaginationState,
+  useFilterState,
+  useFromStore,
+  useSetLocation,
+  useListFilters
+} from "hooks";
 
-const { request, flush } = entityStoreActions;
-const defaultPage = 1;
-const perPage = 20;
+export default function ProjectCollectionDetailContainer() {
+  const { id } = useParams();
+  const { data: projectCollection, uid } = useFetch({
+    request: [projectCollectionsAPI.show, id]
+  });
 
-export class ProjectCollectionDetailContainer extends Component {
-  static fetchData = (getState, dispatch, location, match) => {
-    const state = getState();
-    const promises = [];
-    const projectCollectionId = match.params.id;
+  const baseFilters = {
+    collectionOrder: id
+  };
+  const [filters, setFilters] = useFilterState(baseFilters);
+  const [pagination, setPageNumber] = usePaginationState();
+  const { data: projects, meta } = useFetch({
+    request: [projectsAPI.index, filters, pagination]
+  });
 
-    if (!isEntityLoaded("projectCollections", projectCollectionId, state)) {
-      const projectCollectionRequest = request(
-        projectCollectionsAPI.show(match.params.id),
-        requests.feProjectCollection
-      );
-      const { promise } = dispatch(projectCollectionRequest);
+  useSetLocation({ filters, page: pagination.number });
 
-      promises.push(promise);
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const settings = useFromStore("settings", "select");
+
+  useEffect(() => {
+    return () => dispatch(store.flush(uid));
+  }, [dispatch, uid]);
+
+  const filterProps = useListFilters({
+    onFilterChange: param => setFilters({ newState: param }),
+    initialState: filters,
+    resetState: baseFilters,
+    options: {
+      featured: true,
+      featuredLabel: t("filters.featured_projects")
     }
+  });
 
-    const search = queryString.parse(location.search);
-
-    const baseFilters = {
-      collectionOrder: projectCollectionId
-    };
-
-    const { page, ...filters } = search;
-    const pagination = {
-      number: page || defaultPage,
-      size: perPage
-    };
-
-    const projectsFetch = projectsAPI.index(
-      Object.assign(baseFilters, filters),
-      pagination
-    );
-
-    const projectsAction = request(
-      projectsFetch,
-      requests.feCollectionProjects
-    );
-    const { promise: one } = dispatch(projectsAction);
-    promises.push(one);
-    return Promise.all(promises);
-  };
-
-  static mapStateToProps = (state, ownProps) => {
-    return {
-      projectCollection: grab(
-        "projectCollections",
-        ownProps.match.params.id,
-        state.entityStore
-      ),
-      projects: select(requests.feCollectionProjects, state.entityStore),
-      projectsMeta: meta(requests.feCollectionProjects, state.entityStore),
-      authentication: state.authentication
-    };
-  };
-
-  static propTypes = {
-    projectCollection: PropTypes.object,
-    authentication: PropTypes.object,
-    settings: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    location: PropTypes.object,
-    match: PropTypes.object,
-    t: PropTypes.func
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = this.initialState(queryString.parse(props.location.search));
-    this.updateResults = debounce(this.updateResults.bind(this), 250);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.location.search === this.props.location.search) return null;
-    this.setState(
-      this.initialState(queryString.parse(this.props.location.search)),
-      this.updateResults
-    );
-  }
-
-  componentWillUnmount() {
-    this.props.dispatch(flush(requests.feProjectCollection));
-  }
-
-  initialFilterState(init = {}) {
-    const filter = omitBy(init, (vIgnored, k) => k === "page");
-    // filter.collectionOrder = projectCollectionId;
-    return filter;
-  }
-
-  initialState(init = {}) {
-    return {
-      filter: { ...this.initialFilterState(init) },
-      pagination: {
-        number: init.page || defaultPage,
-        size: perPage
+  const breadcrumbs = useMemo(
+    () => [
+      {
+        to: lh.link("frontendProjectCollections"),
+        label: t("navigation.breadcrumbs.all_project_collections")
       }
-    };
-  }
+    ],
+    [t]
+  );
 
-  updateUrl() {
-    const pathname = this.props.location.pathname;
-    const filters = this.state.filter;
-    const pageParam = this.state.pagination.number;
-    const params = { ...filters };
-    if (pageParam !== 1) params.page = pageParam;
+  if (!projectCollection) return null;
 
-    const search = queryString.stringify(params);
-    this.props.history.push({ pathname, search });
-  }
-
-  updateResults(filter = this.state.filter) {
-    const updatedFilter = {
-      ...filter,
-      collectionOrder: this.props.projectCollection.id
-    };
-
-    const action = request(
-      projectsAPI.index(updatedFilter, this.state.pagination),
-      requests.feCollectionProjects
-    );
-    this.props.dispatch(action);
-  }
-
-  doUpdate() {
-    this.updateResults();
-    this.updateUrl();
-  }
-
-  filterChangeHandler = filter => {
-    this.setState({ filter }, this.doUpdate);
-  };
-
-  handlePageChange = pageParam => {
-    const pagination = { ...this.state.pagination, number: pageParam };
-    this.setState({ pagination }, this.doUpdate);
-  };
-
-  pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      this.handlePageChange(pageParam);
-    };
-  };
-
-  get projectCollection() {
-    return this.props.projectCollection;
-  }
-
-  get projects() {
-    return this.props.projects;
-  }
-
-  get projectsMeta() {
-    return this.props.projectsMeta;
-  }
-
-  get ogDescription() {
-    const { projectCollection } = this.props;
+  const ogDescription = () => {
     if (!projectCollection) return null;
     const {
       descriptionPlaintext,
       socialDescription
     } = projectCollection.attributes;
     return socialDescription || descriptionPlaintext;
-  }
+  };
 
-  get ogTitle() {
-    const { projectCollection, settings } = this.props;
+  const ogTitle = () => {
     if (!projectCollection || !settings) return null;
     const { socialTitle, title } = projectCollection.attributes;
     return (
       socialTitle ||
-      `\u201c${title}\u201d ${this.props.t("common.on")} ${
+      `\u201c${title}\u201d ${t("common.on")} ${
         settings.attributes.general.installationName
       }`
     );
-  }
+  };
 
-  get ogImage() {
-    const { projectCollection } = this.props;
+  const ogImage = () => {
     if (!projectCollection) return null;
     const { socialImageStyles, heroStyles } = projectCollection.attributes;
     if (has(socialImageStyles, "mediumLandscape"))
       return socialImageStyles.mediumLandscape;
     if (has(heroStyles, "mediumLandscape")) return heroStyles.mediumLandscape;
     return null;
-  }
+  };
 
-  render() {
-    if (!this.projectCollection) return null;
-
-    const t = this.props.t;
-
-    return (
-      <>
-        <CheckFrontendMode
-          debugLabel="ProjectCollectionDetail"
-          isProjectSubpage
+  return (
+    <>
+      <CheckFrontendMode
+        debugLabel="ProjectCollectionDetail"
+        isProjectSubpage
+      />
+      {projectCollection && (
+        <EventTracker
+          event={EVENTS.VIEW_RESOURCE}
+          resource={projectCollection}
         />
-        {this.projectCollection && (
-          <EventTracker
-            event={EVENTS.VIEW_RESOURCE}
-            resource={this.props.projectCollection}
-          />
-        )}
-        <RegisterBreadcrumbs
-          breadcrumbs={[
-            {
-              to: lh.link("frontendProjectCollections"),
-              label: t("navigation.breadcrumbs.all_project_collections")
-            }
-          ]}
-        />
-        <HeadContent
-          title={this.ogTitle}
-          description={this.ogDescription}
-          image={this.ogImage}
-        />
-        <h1 className="screen-reader-text">
-          {this.projectCollection.attributes.title}
-        </h1>
-        <EntityCollection.ProjectCollectionDetail
-          projectCollection={this.projectCollection}
-          projects={this.projects}
-          projectsMeta={this.projectsMeta}
-          filterProps={{
-            onFilterChange: this.filterChangeHandler,
-            initialState: this.state.filter || {},
-            resetState: this.initialFilterState(),
-            options: {
-              featured: true,
-              featuredLabel: t("filters.featured_projects")
-            }
-          }}
-          paginationProps={{
-            paginationClickHandler: this.pageChangeHandlerCreator
-          }}
-          bgColor="neutral05"
-          className="flex-grow"
-        />
-        <CollectionNavigation />
-      </>
-    );
-  }
+      )}
+      <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
+      <HeadContent
+        title={ogTitle()}
+        description={ogDescription()}
+        image={ogImage()}
+      />
+      <h1 className="screen-reader-text">
+        {projectCollection.attributes.title}
+      </h1>
+      <EntityCollection.ProjectCollectionDetail
+        projectCollection={projectCollection}
+        projects={projects}
+        projectsMeta={meta}
+        filterProps={filterProps}
+        paginationProps={{
+          paginationClickHandler: page => () => setPageNumber(page),
+          paginationTarget: "#"
+        }}
+        bgColor="neutral05"
+        className="flex-grow"
+      />
+      <CollectionNavigation />
+    </>
+  );
 }
 
-export default withTranslation()(
-  connectAndFetch(withSettings(ProjectCollectionDetailContainer))
-);
+ProjectCollectionDetailContainer.displayName =
+  "Frontend.Containers.ProjectCollectionDetail";

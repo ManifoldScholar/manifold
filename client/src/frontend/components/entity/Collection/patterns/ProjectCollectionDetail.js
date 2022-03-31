@@ -8,7 +8,6 @@ import ThumbnailGrid from "global/components/entity/ThumbnailGrid";
 import EntityCollection from "../EntityCollection";
 import { ProjectCollectionIcon } from "../parts";
 import { getHeroImage, getHeaderLayout } from "../helpers";
-import { useListFilters } from "hooks";
 
 function ProjectCollectionDetailEntityCollection({
   projectCollection,
@@ -28,7 +27,6 @@ function ProjectCollectionDetailEntityCollection({
   const showPagination = !isEmpty(projectsMeta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(projectsMeta) && !isEmpty(filterProps);
 
-  const listFilterProps = useListFilters({ ...filterProps });
   const { t } = useTranslation();
 
   return (
@@ -40,7 +38,7 @@ function ProjectCollectionDetailEntityCollection({
       image={image}
       headerLayout={headerLayout}
       headerWidth="100%"
-      filterProps={showFilters ? listFilterProps : null}
+      filterProps={showFilters ? filterProps : null}
       BodyComponent={props =>
         !!projects?.length && (
           <ThumbnailGrid {...props}>
