@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       concern :collected_models do
         resources :projects, only: [:index]
+        resources :journal_issues, only: [:index]
         resources :resources, only: [:index]
         resources :resource_collections, only: [:index]
         resources :texts, only: [:index]

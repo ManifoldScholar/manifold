@@ -36,6 +36,7 @@ class ReadingGroup < ApplicationRecord
   collects_reading_group_entry! "ReadingGroupResourceCollection", categorized: true
   collects_reading_group_entry! "ReadingGroupText", categorized: true
   collects_reading_group_entry! "ReadingGroupTextSection", categorized: true
+  collects_reading_group_entry! "ReadingGroupJournalIssue", categorized: true
 
   delegate :annotations_count, :highlights_count, :comments_count, :memberships_count, to: :reading_group_count
 
