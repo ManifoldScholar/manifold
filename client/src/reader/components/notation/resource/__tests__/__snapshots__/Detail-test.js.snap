@@ -55,7 +55,11 @@ exports[`reader/components/notation/resource/Detail matches the snapshot 1`] = `
         "postProcessPassResolved": false,
         "preload": false,
         "resources": Object {
-          "en": Object {},
+          "en": Object {
+            "translation": Object {
+              "date_fns": null,
+            },
+          },
         },
         "returnEmptyString": true,
         "returnNull": true,
@@ -68,9 +72,13 @@ exports[`reader/components/notation/resource/Detail matches the snapshot 1`] = `
         "supportedLngs": false,
         "updateMissing": false,
       },
-      "resolvedLanguage": undefined,
+      "resolvedLanguage": "en",
       "store": Object {
-        "en": Object {},
+        "en": Object {
+          "translation": Object {
+            "date_fns": null,
+          },
+        },
       },
     }
   }

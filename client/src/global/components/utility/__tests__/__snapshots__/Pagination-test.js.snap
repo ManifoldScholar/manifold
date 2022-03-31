@@ -54,7 +54,11 @@ exports[`global/components/utility/Pagination matches the snapshot 1`] = `
         "postProcessPassResolved": false,
         "preload": false,
         "resources": Object {
-          "en": Object {},
+          "en": Object {
+            "translation": Object {
+              "date_fns": null,
+            },
+          },
         },
         "returnEmptyString": true,
         "returnNull": true,
@@ -67,9 +71,13 @@ exports[`global/components/utility/Pagination matches the snapshot 1`] = `
         "supportedLngs": false,
         "updateMissing": false,
       },
-      "resolvedLanguage": undefined,
+      "resolvedLanguage": "en",
       "store": Object {
-        "en": Object {},
+        "en": Object {
+          "translation": Object {
+            "date_fns": null,
+          },
+        },
       },
     }
   }
@@ -146,7 +154,11 @@ exports[`global/components/utility/Pagination when it is compact matches the sna
         "postProcessPassResolved": false,
         "preload": false,
         "resources": Object {
-          "en": Object {},
+          "en": Object {
+            "translation": Object {
+              "date_fns": null,
+            },
+          },
         },
         "returnEmptyString": true,
         "returnNull": true,
@@ -159,9 +171,13 @@ exports[`global/components/utility/Pagination when it is compact matches the sna
         "supportedLngs": false,
         "updateMissing": false,
       },
-      "resolvedLanguage": undefined,
+      "resolvedLanguage": "en",
       "store": Object {
-        "en": Object {},
+        "en": Object {
+          "translation": Object {
+            "date_fns": null,
+          },
+        },
       },
     }
   }
@@ -237,7 +253,11 @@ exports[`global/components/utility/Pagination when there are no pagination props
         "postProcessPassResolved": false,
         "preload": false,
         "resources": Object {
-          "en": Object {},
+          "en": Object {
+            "translation": Object {
+              "date_fns": null,
+            },
+          },
         },
         "returnEmptyString": true,
         "returnNull": true,
@@ -250,9 +270,13 @@ exports[`global/components/utility/Pagination when there are no pagination props
         "supportedLngs": false,
         "updateMissing": false,
       },
-      "resolvedLanguage": undefined,
+      "resolvedLanguage": "en",
       "store": Object {
-        "en": Object {},
+        "en": Object {
+          "translation": Object {
+            "date_fns": null,
+          },
+        },
       },
     }
   }

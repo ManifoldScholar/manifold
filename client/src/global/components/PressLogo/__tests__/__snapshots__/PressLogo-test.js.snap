@@ -54,7 +54,11 @@ exports[`global/components/PressLogo/PressLogo when it does not have a URL match
         "postProcessPassResolved": false,
         "preload": false,
         "resources": Object {
-          "en": Object {},
+          "en": Object {
+            "translation": Object {
+              "date_fns": null,
+            },
+          },
         },
         "returnEmptyString": true,
         "returnNull": true,
@@ -67,9 +71,13 @@ exports[`global/components/PressLogo/PressLogo when it does not have a URL match
         "supportedLngs": false,
         "updateMissing": false,
       },
-      "resolvedLanguage": undefined,
+      "resolvedLanguage": "en",
       "store": Object {
-        "en": Object {},
+        "en": Object {
+          "translation": Object {
+            "date_fns": null,
+          },
+        },
       },
     }
   }
@@ -132,7 +140,11 @@ exports[`global/components/PressLogo/PressLogo when it has a URL matches the sna
         "postProcessPassResolved": false,
         "preload": false,
         "resources": Object {
-          "en": Object {},
+          "en": Object {
+            "translation": Object {
+              "date_fns": null,
+            },
+          },
         },
         "returnEmptyString": true,
         "returnNull": true,
@@ -145,9 +157,13 @@ exports[`global/components/PressLogo/PressLogo when it has a URL matches the sna
         "supportedLngs": false,
         "updateMissing": false,
       },
-      "resolvedLanguage": undefined,
+      "resolvedLanguage": "en",
       "store": Object {
-        "en": Object {},
+        "en": Object {
+          "translation": Object {
+            "date_fns": null,
+          },
+        },
       },
     }
   }
