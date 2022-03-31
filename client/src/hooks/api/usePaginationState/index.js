@@ -4,7 +4,8 @@ import queryString from "query-string";
 
 export default function usePaginationState(
   initialNumber = 1,
-  initialSize = 20
+  initialSize = 20,
+  collectionProjects = null
 ) {
   const location = useLocation();
   const { page } = queryString.parse(location.search);
@@ -27,7 +28,11 @@ export default function usePaginationState(
     [size, setSize]
   );
 
-  const pagination = useMemo(() => ({ number, size }), [number, size]);
+  const pagination = useMemo(() => ({ number, size, collectionProjects }), [
+    number,
+    size,
+    collectionProjects
+  ]);
 
   return [pagination, setPageNumber, setPageSize];
 }
