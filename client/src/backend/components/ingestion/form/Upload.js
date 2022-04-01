@@ -5,6 +5,8 @@ import Form from "global/components/form";
 import setter from "global/components/form/setter";
 import IconComposer from "global/components/utility/IconComposer";
 import { DrawerContext } from "helpers/contexts";
+import { Trans, withTranslation } from "react-i18next";
+import { t } from "i18next";
 
 class IngestionFormUpload extends PureComponent {
   static displayName = "ProjectDetail.Text.Ingestion.Form.Upload";
@@ -15,7 +17,8 @@ class IngestionFormUpload extends PureComponent {
     history: PropTypes.object.isRequired,
     cancelUrl: PropTypes.string,
     setOther: PropTypes.func,
-    header: PropTypes.string
+    header: PropTypes.string,
+    t: PropTypes.func
   };
 
   onSourceChange = source => {
@@ -63,17 +66,17 @@ class IngestionFormUpload extends PureComponent {
 
     const fileInstructions = (
       <span className="instructions">
-        Manifold can ingest texts from single files or a .zip collection.
-        <br />
-        See the{" "}
-        <a
-          href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/texts#adding-texts"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          documentation
-        </a>{" "}
-        for supported file types and directory structure.
+        <Trans
+          i18nKey="backend.forms.ingestion.instructions"
+          components={[ <br />,
+          <a
+            href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/texts#adding-texts"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            #
+          </a>]}
+        />
       </span>
     );
 
@@ -87,7 +90,7 @@ class IngestionFormUpload extends PureComponent {
               inlineStyle={{ width: "100%" }}
               layout="landscape"
               instructions={fileInstructions}
-              label="Upload a file"
+              label={t("backend.forms.ingestion.upload_file")}
               value={this.props.getModelValue("attributes[source]")}
               initialValue={this.props.getModelValue(
                 "attributes[sourceFileName]"
@@ -95,11 +98,11 @@ class IngestionFormUpload extends PureComponent {
               set={this.onSourceChange}
               accepts="any"
             />
-            <div className="form-divider">or</div>
+            <div className="form-divider">{t("common.or")}</div>
             <Form.TextInput
-              label="URL"
+              label={t("backend.forms.ingestion.url")}
               focusOnMount
-              instructions="Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
+              instructions={t("backend.forms.ingestion.url_instructions")}
               value={this.props.getModelValue("attributes[externalSourceUrl]")}
               onChange={event => this.onUrlChange(event)}
             />
@@ -117,7 +120,7 @@ class IngestionFormUpload extends PureComponent {
                     size="default"
                     className="button-icon-secondary__icon"
                   />
-                  <span>Cancel</span>
+                  <span>{t("actions.cancel")}</span>
                 </button>
               ) : null}
               <button
@@ -130,7 +133,7 @@ class IngestionFormUpload extends PureComponent {
                   size="default"
                   className="button-icon-secondary__icon"
                 />
-                <span>Continue</span>
+                <span>{t("actions.continue")}</span>
               </button>
             </div>
           </div>
@@ -140,4 +143,4 @@ class IngestionFormUpload extends PureComponent {
   }
 }
 
-export default setter(IngestionFormUpload);
+export default withTranslation()(setter(IngestionFormUpload));

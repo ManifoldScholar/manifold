@@ -213,6 +213,12 @@
         "add_text_category": "Add a Text Category",
         "include_texts_in_category": "Include Texts in these Categories"
       },
+      "ingestion": {
+        "instructions": "Manifold can ingest texts from single files or a .zip collection.<0/>See the <1>documentation</1> for supported file types and directory structure.",
+        "upload_file": "Upload a file",
+        "url": "URL",
+        "url_instructions": "Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
+      },
       "title": "Title",
       "body": "Body",
       "description": "Description",
