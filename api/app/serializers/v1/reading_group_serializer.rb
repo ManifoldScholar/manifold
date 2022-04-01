@@ -64,7 +64,7 @@ module V1
       object.reading_group_membership_for_user params[:current_user]
     end
 
-    typed_has_one :collection, serializer: V1::ReadingGroupCollectionSerializer, record_type: "readingGroupCollections" do |object, _|
+    typed_has_one :collection, serializer: V1::ReadingGroupCollectionSerializer, record_type: "readingGroupCollection" do |object, _|
       object.composed_collection
     end
 

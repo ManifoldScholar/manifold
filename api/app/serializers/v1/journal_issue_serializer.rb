@@ -32,10 +32,10 @@ module V1
 
     typed_belongs_to :journal_volume, record_type: "journalVolume"
     typed_belongs_to :journal
-    typed_belongs_to :project, serializer: ::V1::FullProjectSerializer, record_type: "project"
+    typed_belongs_to :project, serializer: ::V1::FullProjectSerializer, record_type: :project
     typed_has_many :content_blocks, serializer: ::V1::ContentBlockSerializer, polymorphic: true
     typed_has_many :texts, serializer: ::V1::TextSerializer
-    typed_has_many :text_categories, serializer: ::V1::TextCategorySerializer
+    typed_has_many :text_categories, serializer: ::V1::CategorySerializer, record_type: :category
     typed_has_many :creators, serializer: ::V1::MakerSerializer, record_type: :maker
 
     when_full do
