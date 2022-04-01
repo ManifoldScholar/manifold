@@ -13,7 +13,7 @@ module V1
       typed_attribute :description, NilClass
       typed_attribute :description_formatted, NilClass
 
-      typed_has_many :included_categories, record_type: "category"
+      typed_has_many :included_categories, record_type: :category
       typed_has_many :texts
     end
   end

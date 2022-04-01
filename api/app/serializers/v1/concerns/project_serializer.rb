@@ -82,7 +82,7 @@ module V1
           typed_has_many :published_texts, record_type: :text
           typed_has_many :text_categories,
                          serializer: ::V1::CategorySerializer,
-                         record_type: "category"
+                         record_type: :category
           typed_has_many :events,
                          id_method_name: :events_for_project_detail_ids,
                          object_method_name: :events_for_project_detail
