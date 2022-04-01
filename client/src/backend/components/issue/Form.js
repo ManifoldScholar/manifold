@@ -4,6 +4,7 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { journalIssuesAPI, journalVolumesAPI, projectsAPI } from "api";
 import EntitiesList, { ProjectRow } from "backend/components/list/EntitiesList";
+import { useTranslation } from "react-i18next";
 
 function IssueForm({ journalId, model, ...props }) {
   const fetchWritableProjects = useCallback(() => {
@@ -14,6 +15,8 @@ function IssueForm({ journalId, model, ...props }) {
     return journalVolumesAPI.index(journalId);
   }, [journalId]);
 
+  const { t } = useTranslation();
+
   return (
     <FormContainer.Form
       {...props}
@@ -23,19 +26,31 @@ function IssueForm({ journalId, model, ...props }) {
       className="form-secondary"
       model={model}
     >
-      <Form.TextInput label="Number" focusOnMount name="attributes[number]" />
+      <Form.NumberInput
+        label={t("backend.forms.issue.number")}
+        focusOnMount
+        name="attributes[number]"
+      />
       <Form.Picker
-        instructions="Optionally, select a volume."
-        label="Volume"
+        instructions={t("backend.forms.issue.volume_instructions")}
+        label={t("glossary.volume_title_case_one")}
         name="relationships[journalVolume]"
         optionToLabel={volume => volume.attributes.number}
         predictive
         listStyle={"rows"}
         options={fetchJournalVolumes}
       />
+      <Form.TextInput
+        wide
+        label={t("backend.forms.issue.slug")}
+        name="attributes[pendingSlug]"
+        placeholder={t("backend.forms.issue.slug_placeholder")}
+      />
       {model?.id ? (
         <div className="form-input">
-          <span className="form-input-heading">Associated Project</span>
+          <span className="form-input-heading">
+            {t("backend.forms.issue.associated_project")}
+          </span>
           <EntitiesList
             entities={[model.relationships.project]}
             entityComponent={ProjectRow}
@@ -45,8 +60,8 @@ function IssueForm({ journalId, model, ...props }) {
       ) : (
         <Form.Picker
           disabled
-          instructions="Issue content is stored in projects. Select an existing content or leave blank to create a new project."
-          label="Project"
+          instructions={t("backend.forms.issue.project_instructions")}
+          label={t("glossary.project_title_case_one")}
           name="relationships[project]"
           optionToLabel={project => project.attributes.title}
           predictive
@@ -55,7 +70,11 @@ function IssueForm({ journalId, model, ...props }) {
         />
       )}
       <Form.Save
-        text={model ? "Update  Journal Issue" : "Create Journal Issue"}
+        text={
+          model
+            ? t("backend.forms.issue.update_issue")
+            : t("backend.forms.issue.create_issue")
+        }
       />
     </FormContainer.Form>
   );
