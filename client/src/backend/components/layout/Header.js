@@ -9,8 +9,9 @@ import Utility from "global/components/utility";
 import HeaderLogo from "global/components/atomic/HeaderLogo";
 
 import BlurOnLocationChange from "hoc/BlurOnLocationChange";
+import { withTranslation } from "react-i18next";
 
-export default class LayoutHeader extends Component {
+class LayoutHeader extends Component {
   static displayName = "Layout.Header";
 
   static propTypes = {
@@ -18,7 +19,8 @@ export default class LayoutHeader extends Component {
     location: PropTypes.object,
     match: PropTypes.object,
     authentication: PropTypes.object,
-    commonActions: PropTypes.object
+    commonActions: PropTypes.object,
+    t: PropTypes.func
   };
 
   render() {
@@ -38,7 +40,7 @@ export default class LayoutHeader extends Component {
           <div className="library-header library-header--dark">
             <div className="library-header__inner">
               <HeaderLogo as="Link" to={lh.link("backend")}>
-                <span className="screen-reader-text">Return to home</span>
+                <span className="screen-reader-text">{this.props.t("navigation.return_home")}</span>
                 <PressLogo aria-hidden="true" />
               </HeaderLogo>
               <Navigation.Primary
@@ -58,3 +60,5 @@ export default class LayoutHeader extends Component {
     );
   }
 }
+
+export default withTranslation()(LayoutHeader);
