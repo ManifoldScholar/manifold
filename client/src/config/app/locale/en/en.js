@@ -14,7 +14,7 @@ import reader from "./json/reader.json";
 import utility from "./json/utility.json";
 import resources from "./json/resources.json";
 import other from "./json/en.json";
-import { enUS } from "date-fns/locale";
+import enUS from "date-fns/locale/en-US";
 
 export default {
   translation: {
