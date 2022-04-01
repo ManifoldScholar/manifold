@@ -72,6 +72,7 @@
     "create_journal": "$t(actions.create) a $t(glossary.journal_one)",
     "publish": "Publish",
     "publish_project": "$t(actions.publish) a project",
-    "dismiss": "Dismiss"
+    "dismiss": "Dismiss",
+    "continue": "Continue"
   }
 }
