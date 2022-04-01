@@ -1,18 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
+import * as Styled from "./styles";
 
 function GroupSummaryItem({ labelText, icon, children }) {
   return (
-    <div className="group-summary__item">
-      <dt className="group-summary__term">
+    <div>
+      <Styled.Term>
         <Utility.LabelWithIcon
           label={labelText}
           icon={icon}
           textStyle={"large"}
         />
-      </dt>
-      <dd className="group-summary__value">{children}</dd>
+      </Styled.Term>
+      <Styled.Value>{children}</Styled.Value>
     </div>
   );
 }

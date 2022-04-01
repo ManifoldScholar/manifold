@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
 import { useTranslation } from "react-i18next";
-import Utility from "global/components/utility";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 import Section from "./Section";
 import Item from "./Item";
+import * as Styled from "./styles";
 
 function getUniqueTypes(mappings) {
   const allTypes = mappings.flatMap(category => Object.keys(category));
@@ -63,21 +63,15 @@ function GroupSummaryBox({ readingGroup }) {
   }
 
   return (
-    <div className="group-summary">
+    <Styled.Summary>
       <h2 id={uid} className="screen-reader-text">
         {t("pages.subheaders.group_summary")}
       </h2>
-      <dl aria-labelledby={uid} className="group-summary__list">
+      <Styled.List aria-labelledby={uid}>
         <Section label={t("common.about")}>
           <Item labelText={t("common.type")}>
             {privacy}
-            {privacy === "private" && (
-              <Utility.IconComposer
-                icon="lock16"
-                size={16}
-                className="group-summary__private-icon"
-              />
-            )}
+            {privacy === "private" && <Styled.Icon icon="lock16" size={16} />}
           </Item>
           <Item labelText={t("glossary.member_other")} icon="readingGroup24">
             {membershipsCount}
@@ -134,8 +128,8 @@ function GroupSummaryBox({ readingGroup }) {
             {getCollectedCount("resources")}
           </Item>
         </Section>
-      </dl>
-    </div>
+      </Styled.List>
+    </Styled.Summary>
   );
 }
 

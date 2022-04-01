@@ -1,15 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import * as Styled from "./styles";
 
 function GroupSummarySection({ label, columns = 1, children }) {
   return (
-    <div className="group-summary__section">
-      <h3 className="group-summary__section-label">{label}</h3>
-      <div
-        className={`group-summary__section-list group-summary__section-list--col-${columns}`}
-      >
-        {children}
-      </div>
+    <div>
+      <Styled.SectionLabel>{label}</Styled.SectionLabel>
+      <Styled.SectionList $columns={columns}>{children}</Styled.SectionList>
     </div>
   );
 }
