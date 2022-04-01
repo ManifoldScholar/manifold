@@ -2,8 +2,6 @@ import actionPanel from "./actionPanel";
 import pageHeading from "./pageHeading";
 import pageBody from "./pageBody";
 import removeMember from "./removeMember";
-import summary from "./summary";
-import notesFilter from "./notesFilter";
 import childRouteNav from "./childRouteNav";
 import homepageModeToggle from "./homepageModeToggle";
 import settingsFormGroup from "./settingsFormGroup";
@@ -24,8 +22,6 @@ ${pageBody}
 ${removeMember}
 ${settingsFormGroup}
 ${settingsFormMember}
-${notesFilter}
 ${childRouteNav}
 ${pageHeading}
-${summary}
 `;
