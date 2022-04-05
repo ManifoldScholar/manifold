@@ -7,9 +7,6 @@ module V1
 
     typed_attribute :number, Types::Integer
     typed_attribute :journal_volume_number, Types::Integer.optional.meta(read_only: true)
-    typed_attribute :subtitle, Types::String.optional
-    typed_attribute :subtitle_formatted, Types::String.meta(read_only: true)
-    typed_attribute :subtitle_plaintext, Types::String.meta(read_only: true)
     typed_attribute :project_id, Types::String
     typed_attribute :created_at, Types::DateTime.meta(read_only: true)
     typed_attribute :updated_at, Types::DateTime.meta(read_only: true)

@@ -24,7 +24,6 @@ function IssueForm({ journalId, model, ...props }) {
       model={model}
     >
       <Form.NumberInput label="Number" focusOnMount name="attributes[number]" />
-      <Form.TextInput label="Subtitle" name="attributes[subtitle]" />
       <Form.Picker
         instructions="Optionally, select a volume."
         label="Volume"

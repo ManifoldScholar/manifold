@@ -14,8 +14,6 @@ class JournalIssue < ApplicationRecord
   include HasFormattedAttributes
   include SearchIndexable
 
-  has_formatted_attributes :subtitle
-
   belongs_to :journal, counter_cache: true
   belongs_to :journal_volume, optional: true, counter_cache: true
 
