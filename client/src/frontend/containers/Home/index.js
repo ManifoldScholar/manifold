@@ -69,7 +69,6 @@ export class HomeContainer extends Component {
         ) : (
           <Collections />
         )}
-
         {this.hasVisibleProjects && <CollectionNavigation />}
       </div>
     );

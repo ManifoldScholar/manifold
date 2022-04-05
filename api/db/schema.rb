@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_24_204310) do
+ActiveRecord::Schema.define(version: 2022_04_05_224056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -535,6 +535,7 @@ ActiveRecord::Schema.define(version: 2022_02_24_204310) do
     t.jsonb "logo_data"
     t.string "hero_background_color"
     t.boolean "show_on_homepage", default: false, null: false
+    t.integer "home_page_priority", default: 0, null: false
     t.index ["slug"], name: "index_journals_on_slug", unique: true
   end
 

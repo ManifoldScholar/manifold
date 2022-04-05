@@ -105,6 +105,7 @@ export default `
     color: var(--color);
 
     input[type="text"],
+    input[type="number"],
     input[type="email"],
     input[type="password"],
     select,
