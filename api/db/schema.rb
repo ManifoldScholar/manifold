@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_05_224056) do
+ActiveRecord::Schema.define(version: 2022_04_05_230839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -471,7 +471,6 @@ ActiveRecord::Schema.define(version: 2022_04_05_224056) do
     t.uuid "journal_volume_id"
     t.uuid "creator_id"
     t.integer "number"
-    t.text "subtitle"
     t.text "slug"
     t.jsonb "fa_cache", default: {}, null: false
     t.index ["creator_id"], name: "index_journal_issues_on_creator_id"
@@ -520,7 +519,7 @@ ActiveRecord::Schema.define(version: 2022_04_05_224056) do
     t.citext "sort_title"
     t.integer "events_count", default: 0
     t.jsonb "hero_data"
-    t.integer "hero_layout"
+    t.integer "hero_layout", default: 0
     t.jsonb "custom_icon_data"
     t.jsonb "social_image_data"
     t.text "social_description"

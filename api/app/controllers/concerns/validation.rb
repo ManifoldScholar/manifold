@@ -109,7 +109,7 @@ module Validation
 
   def journal_issue_params
     params.require(:data)
-    attributes = [:number, :subtitle, :pending_slug]
+    attributes = [:number, :pending_slug]
     relationships = [:journal, :project, :journal_volume]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
