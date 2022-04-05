@@ -38,11 +38,11 @@ class Navigation {
           }
         ]
       },
-      {
+      !settings.attributes.general.disableReadingGroups && {
         label: "Reading Groups",
         route: "frontendPublicReadingGroups"
       }
-    ];
+    ].filter(x => x);
   });
 
   static backend = memoize(() => {
