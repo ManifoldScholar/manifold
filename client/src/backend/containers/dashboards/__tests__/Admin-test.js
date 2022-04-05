@@ -12,6 +12,7 @@ describe("backend/containers/dashboards/Admin", () => {
 
   def("root", () => (
     <DashboardsAdminContainer
+      entitiesListSearchParams={{ projects: {} }}
       projects={$projects}
       projectsMeta={$meta}
       recentProjects={$recentProjects}

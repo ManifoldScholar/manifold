@@ -46,6 +46,10 @@ class RoleName < ClassyEnum::Base
     config.can_update_projects.present?
   end
 
+  def can_update_journals?
+    config.can_update_journals.present?
+  end
+
   def provides_draft_access?
     config.provides_draft_access.present?
   end
@@ -75,6 +79,10 @@ class RoleName < ClassyEnum::Base
 
     def can_update_projects
       select(&:can_update_projects?)
+    end
+
+    def can_update_journals
+      select(&:can_update_journals?)
     end
 
     def draft_access
@@ -148,6 +156,12 @@ class RoleName < ClassyEnum::Base
       @for_project_update ||= for_access can_update_projects
     end
 
+    # @!attribute [r] @for_journal_update
+    # @return [{ Symbol => <Symbol> }]
+    def for_journal_update
+      @for_journal_update ||= for_access can_update_journals
+    end
+
     private
 
     def any_editor!
@@ -156,6 +170,10 @@ class RoleName < ClassyEnum::Base
 
     def can_update_projects!
       config.can_update_projects = true
+    end
+
+    def can_update_journals!
+      config.can_update_journals = true
     end
 
     def for_access(selection)
@@ -202,6 +220,7 @@ class RoleName::Admin < RoleName
   global!
 
   can_update_projects!
+  can_update_journals!
   provides_draft_access!
   provides_full_read_access!
 end
@@ -212,6 +231,7 @@ class RoleName::Editor < RoleName
   global!
 
   can_update_projects!
+  can_update_journals!
   provides_draft_access!
   provides_full_read_access!
 end
@@ -224,6 +244,7 @@ class RoleName::Marketeer < RoleName
   global!
 
   can_update_projects!
+  can_update_journals!
   provides_draft_access!
   provides_full_read_access!
 end
@@ -234,6 +255,7 @@ class RoleName::ProjectEditor < RoleName
   scoped!
 
   can_update_projects!
+  can_update_journals!
   provides_draft_access!
   provides_full_read_access!
 end
@@ -242,6 +264,7 @@ class RoleName::ProjectResourceEditor < RoleName
   scoped!
 
   can_update_projects!
+  can_update_journals!
   provides_draft_access!
   provides_full_read_access!
 end
