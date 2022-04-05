@@ -1,7 +1,7 @@
 module Search
   # Helper class to build an `options` object for Searchkick.
   class Options < Types::FlexibleStruct
-    FACET = Types::Coercible::String.enum("Project", "Resource", "Text", "TextSection", "Annotation")
+    FACET = Types::Coercible::String.enum("Project", "Journal", "Resource", "Text", "TextSection", "Annotation")
     DEFAULT_FACETS = FACET.options[:mapping].keys.freeze
     FACETS = Types::Array.of(FACET)
     FACETS_OPTION = FACETS.default { DEFAULT_FACETS.dup }.constructor do |value|
@@ -10,6 +10,7 @@ module Search
 
     INDICES_BOOST = {
       Project => 50,
+      Journal => 50,
       Text => 40,
       Resource => 30,
       Annotation => 20,
@@ -57,6 +58,7 @@ module Search
     attribute? :facets, FACETS_OPTION.default { DEFAULT_FACETS.dup }
 
     attribute? :project, Types.Instance(Project).optional
+    attribute? :journal, Types.Instance(Journal).optional
     attribute? :text, Types.Instance(Text).optional
     attribute? :text_section, Types.Instance(TextSection).optional
 

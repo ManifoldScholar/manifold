@@ -19,6 +19,7 @@ const SearchContainer = forwardRef((props, ref) => {
 
   const facets = [
     { label: t("glossary.project_other"), value: "Project" },
+    { label: t("glossary.journal_other"), value: "Journal" },
     { label: t("glossary.resource_other"), value: "Resource" },
     { label: t("glossary.text_other"), value: "Text" },
     { label: t("glossary.annotation_other"), value: "Annotation" },
