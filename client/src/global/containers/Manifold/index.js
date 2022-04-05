@@ -16,8 +16,8 @@ import {
   routingActions,
   notificationActions
 } from "actions";
-import { requests } from "api";
-import { select } from "utils/entityUtils";
+import { meAPI, requests } from "api";
+import { select, loaded } from "utils/entityUtils";
 import { closest } from "utils/domUtils";
 import ReactGA from "react-ga";
 import Typekit from "react-typekit";
@@ -25,7 +25,9 @@ import { renderRoutes } from "react-router-config";
 import getRoutes from "routes";
 import FatalErrorBoundary from "global/components/FatalError/Boundary";
 import { FrontendModeContext } from "helpers/contexts";
+import { entityStoreActions } from "actions";
 
+const { request } = entityStoreActions;
 const routes = getRoutes();
 const { visibilityHide } = uiVisibilityActions;
 
@@ -39,7 +41,9 @@ class ManifoldContainer extends PureComponent {
       loading: state.ui.transitory.loading.active,
       fatalError: state.fatalError,
       routing: state.routing,
-      settings: select(requests.settings, state.entityStore)
+      settings: select(requests.settings, state.entityStore),
+      readingGroups: select(requests.feMyReadingGroups, state.entityStore),
+      readingGroupsLoaded: loaded(requests.feMyReadingGroups, state.entityStore)
     };
   };
 
@@ -91,6 +95,10 @@ class ManifoldContainer extends PureComponent {
       this.doPostLogin();
   }
 
+  componentDidMount() {
+    this.maybeFetchReadingGroups();
+  }
+
   get routeStateRequestsLogin() {
     if (this.props.location.state)
       return Boolean(this.props.location.state.showLogin);
@@ -103,6 +111,22 @@ class ManifoldContainer extends PureComponent {
 
   maybeShowLogin() {
     this.props.dispatch(uiVisibilityActions.visibilityShow("signInUpOverlay"));
+  }
+
+  maybeFetchReadingGroups() {
+    const {
+      authentication,
+      readingGroupsLoaded,
+      settings,
+      dispatch
+    } = this.props;
+    const { authenticated } = authentication;
+    if (!authenticated) return;
+    if (!settings) return;
+    if (readingGroupsLoaded) return;
+    if (settings?.attributes?.general?.disableReadingGroups !== false) return;
+
+    dispatch(request(meAPI.readingGroups(), requests.feMyReadingGroups));
   }
 
   dispatchRouteUpdate() {
@@ -131,6 +155,7 @@ class ManifoldContainer extends PureComponent {
   }
 
   doPostLogin() {
+    this.maybeFetchReadingGroups();
     if (this.routeStateRequestsPostLoginRedirect) {
       this.props.dispatch(notificationActions.removeAllNotifications());
       this.props.history.push(this.props.location.state.postLoginRedirect);
