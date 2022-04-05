@@ -92,7 +92,7 @@ module Validation
                   { tag_list: [] }, :image_credits, :social_description,
                   attachment(:custom_icon), :hero_layout, :remove_custom_icon,
                   :social_title, attachment(:social_image), :remove_social_image,
-                  :hero_background_color, :show_on_homepage]
+                  :hero_background_color, :show_on_homepage, :home_page_priority]
 
     relationships = [:collaborators, :creators, :contributors, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
