@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useFetch, usePaginationState } from "hooks";
 import { journalsAPI } from "api";
 import withFilteredLists, { journalFilters } from "hoc/withFilteredLists";
@@ -12,8 +12,16 @@ import EntitiesList, {
 function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
   const [pagination, setPageNumber] = usePaginationState();
 
+  const journalFiltersWithDefaults = useMemo(
+    () => ({
+      withUpdateAbility: true,
+      ...entitiesListSearchParams.journals
+    }),
+    [entitiesListSearchParams?.journals]
+  );
+
   const { data, meta } = useFetch({
-    request: [journalsAPI.index, entitiesListSearchParams.journals, pagination]
+    request: [journalsAPI.index, journalFiltersWithDefaults, pagination]
   });
 
   if (!data) return null;

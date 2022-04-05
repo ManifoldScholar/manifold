@@ -58,6 +58,7 @@ class Journal < ApplicationRecord
   scope :with_order, ->(by = nil) { by.present? ? order(by) : order(:sort_title, :title) }
   scope :with_read_ability, ->(user = nil) { build_read_ability_scope_for user }
   scope :by_show_on_homepage, ->(show = true) { where(show_on_homepage: show) if show.present? }
+  scope :with_update_ability, ->(user = nil) { build_update_ability_scope_for user }
 
   # Search
   scope :search_import, -> {
@@ -118,6 +119,14 @@ class Journal < ApplicationRecord
       return published unless user.present?
 
       where(arel_build_read_case_statement_for(user))
+    end
+
+    # @param [User, nil] user
+    # @return [ActiveRecord::Relation<Project>]
+    def build_update_ability_scope_for(user = nil)
+      return none if user.blank?
+
+      where arel_with_roles_for(user, RoleName.for_journal_update)
     end
 
     private
