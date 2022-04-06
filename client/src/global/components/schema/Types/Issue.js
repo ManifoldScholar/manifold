@@ -1,25 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { renderOffer, renderNamesList } from "../helpers";
+import {
+  renderOffer,
+  renderNamesList,
+  renderVolumes,
+  renderJournal
+} from "../helpers";
 import BaseSchema from "../BaseSchema";
 import config from "config";
 
 export default function Issue({ issue }) {
   const { attributes, relationships } = issue;
+  const { journalVolumes, journal } = relationships ?? {};
 
   const hostname = config.services.client.url;
-
-  const renderJournal = () => {
-    const { journal } = relationships;
-
-    return journal
-      ? {
-          "@type": "Periodical",
-          name: journal.attributes.title
-        }
-      : null;
-  };
 
   const {
     slug,
@@ -48,7 +43,9 @@ export default function Issue({ issue }) {
     dateModified: updatedAt,
     datePublished: publicationDate,
     publisher: metadata.publisher,
-    isPartOf: renderJournal(),
+    isPartOf: journalVolumes?.length
+      ? renderVolumes(journalVolumes, journal)
+      : renderJournal(journal),
     image: avatarStyles && avatarStyles.small,
     offers: renderOffer(attributes)
   };
