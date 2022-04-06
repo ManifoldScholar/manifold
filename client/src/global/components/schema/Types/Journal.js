@@ -1,18 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { renderOffer, renderSeries } from "../helpers";
+import { renderOffer, renderSeries, renderVolumes } from "../helpers";
 import BaseSchema from "../BaseSchema";
 import config from "config";
 
 export default function Journal({ journal }) {
   const { attributes, relationships } = journal;
+  const { journalVolumes, journalIssues } = relationships ?? {};
+  const { journalIssuesWithoutVolumeCount: uncategorized } = attributes ?? {};
 
   const hostname = config.services.client.url;
 
   const renderIssues = () => {
-    const { journalIssues } = relationships;
-
     if (!journalIssues.length) return {};
 
     return journalIssues.map(issue => ({
@@ -22,16 +22,11 @@ export default function Journal({ journal }) {
     }));
   };
 
-  const renderVolumes = () => {
-    const { journalVolumes } = relationships;
-
-    if (!journalVolumes.length) return {};
-
-    return journalVolumes.map(volume => ({
-      "@type": "PublicationVolume",
-      volumeNumber: volume.attributes.number,
-      datePublished: volume.attributes.publicationDate
-    }));
+  const renderVolumesAndIssues = () => {
+    if (!journalVolumes.length && !uncategorized) return null;
+    return uncategorized
+      ? [...renderIssues(), ...renderVolumes(journalVolumes)]
+      : [...renderVolumes(journalVolumes)];
   };
 
   const {
@@ -56,7 +51,7 @@ export default function Journal({ journal }) {
     dateModified: updatedAt,
     datePublished: publicationDate,
     publisher: metadata.publisher,
-    hasPart: [...renderIssues(), ...renderVolumes()],
+    hasPart: renderVolumesAndIssues(),
     isPartOf: renderSeries(metadata),
     image: avatarStyles && avatarStyles.small,
     offers: renderOffer(attributes)

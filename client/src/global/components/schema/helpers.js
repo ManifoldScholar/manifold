@@ -31,3 +31,23 @@ export const renderNamesList = persons => {
       }))
     : null;
 };
+
+export const renderJournal = journal => {
+  return journal
+    ? {
+        "@type": "Periodical",
+        name: journal.attributes.title
+      }
+    : null;
+};
+
+export const renderVolumes = (volumes, journal) => {
+  if (!volumes.length) return {};
+
+  return volumes.map(volume => ({
+    "@type": "PublicationVolume",
+    volumeNumber: volume.attributes.number,
+    datePublished: volume.attributes.publicationDate,
+    isPartOf: journal ? renderJournal(journal) : null
+  }));
+};
