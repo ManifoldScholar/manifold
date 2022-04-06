@@ -2,11 +2,11 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Collapse from "global/components/Collapse";
-import classNames from "classnames";
 import { Title } from "../parts";
 import ChildNav from "./ChildNav";
 import ManageGroup from "./ManageGroup";
 import GroupSummaryBox from "./GroupSummaryBox";
+import * as Styled from "./styles";
 
 function GroupHeading({ readingGroup, history, location }) {
   const { t } = useTranslation();
@@ -15,51 +15,39 @@ function GroupHeading({ readingGroup, history, location }) {
   const canUpdateGroup = readingGroup.attributes.abilities.update;
 
   return (
-    <header
-      className={classNames({
-        "group-page-heading": true,
-        "group-page-heading--can-update": canUpdateGroup
-      })}
-    >
+    <Styled.GroupHeader $canUpdate={canUpdateGroup}>
       <Collapse>
-        <div className="group-page-heading__container">
-          <div className="group-page-heading__flex-container">
+        <Styled.Container>
+          <Styled.Flex>
             <Title title={groupName} />
-            <div className="group-page-heading__button-container">
-              <Collapse.Toggle
-                className={classNames({
-                  "group-page-heading__nav-button": true,
-                  "button-tertiary": true
-                })}
-                activeClassName="button-tertiary--active"
-              >
-                {t("navigation.reading_group.details")}
-              </Collapse.Toggle>
-            </div>
-          </div>
-        </div>
-        <div className="group-page-heading__container group-page-heading__nav-container">
+            <Collapse.Toggle
+              as={Styled.Toggle}
+              className={`button-tertiary`}
+              activeClassName="button-tertiary--active"
+            >
+              {t("navigation.reading_group.details")}
+            </Collapse.Toggle>
+          </Styled.Flex>
+        </Styled.Container>
+        <Styled.NavContainer>
           <ChildNav readingGroup={readingGroup} />
-        </div>
+        </Styled.NavContainer>
         <Collapse.Content focusOnVisible>
-          <div
-            aria-label={t("pages.subheaders.group_details")}
-            className="group-page-heading__container group-page-heading__summary-container"
-          >
+          <Styled.Summary aria-label={t("pages.subheaders.group_details")}>
             <GroupSummaryBox readingGroup={readingGroup} />
-          </div>
+          </Styled.Summary>
         </Collapse.Content>
       </Collapse>
       {canUpdateGroup && (
-        <div className="group-page-heading__container">
+        <Styled.Container>
           <ManageGroup
             readingGroup={readingGroup}
             history={history}
             location={location}
           />
-        </div>
+        </Styled.Container>
       )}
-    </header>
+    </Styled.GroupHeader>
   );
 }
 

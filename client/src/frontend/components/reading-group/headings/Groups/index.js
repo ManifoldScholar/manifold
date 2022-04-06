@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { Navigation, Title } from "../parts";
+import * as Styled from "./styles";
 
 function GroupsHeading({ currentUser }) {
   const { t } = useTranslation();
@@ -22,9 +22,9 @@ function GroupsHeading({ currentUser }) {
   ];
 
   return (
-    <header className="group-page-heading">
-      <div className="group-page-heading__container">
-        <div className="group-page-heading__flex-container">
+    <header>
+      <Styled.Container>
+        <Styled.Flex>
           {!currentUser && (
             <Title
               title={t("navigation.reading_group.public_groups")}
@@ -39,19 +39,17 @@ function GroupsHeading({ currentUser }) {
                 layout="flex"
                 padLinks
               />
-              <div className="group-page-heading__button-container">
-                <NavLink
-                  to={lh.link("frontendMyReadingGroupsNew")}
-                  className="group-page-heading__nav-button button-tertiary"
-                  activeClassName="button-tertiary--active"
-                >
-                  {t("navigation.reading_group.create")}
-                </NavLink>
-              </div>
+              <Styled.NavButton
+                to={lh.link("frontendMyReadingGroupsNew")}
+                className="button-tertiary"
+                activeClassName="button-tertiary--active"
+              >
+                {t("navigation.reading_group.create")}
+              </Styled.NavButton>
             </>
           )}
-        </div>
-      </div>
+        </Styled.Flex>
+      </Styled.Container>
     </header>
   );
 }

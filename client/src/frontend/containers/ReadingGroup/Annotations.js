@@ -10,6 +10,7 @@ import {
   useSetLocation,
   useListFilters
 } from "hooks";
+import * as Styled from "./styles";
 
 function ReadingGroupAnnotationsContainer({
   readingGroup,
@@ -39,7 +40,7 @@ function ReadingGroupAnnotationsContainer({
   });
 
   return readingGroup ? (
-    <div className="group-page-body">
+    <Styled.Body>
       <EntityCollection.GroupAnnotations
         readingGroup={readingGroup}
         annotations={annotations}
@@ -53,7 +54,7 @@ function ReadingGroupAnnotationsContainer({
         refresh={refresh}
         nested
       />
-    </div>
+    </Styled.Body>
   ) : null;
 }
 

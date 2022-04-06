@@ -9,6 +9,7 @@ import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import MembersTable from "frontend/components/reading-group/tables/Members";
+import * as Styled from "../styles";
 
 import withConfirmation from "hoc/withConfirmation";
 
@@ -174,7 +175,7 @@ class ReadingGroupsMembersListContainer extends Component {
 
     return (
       <>
-        <div className="group-page-body">
+        <Styled.Body>
           <MembersTable
             readingGroup={readingGroup}
             members={readingGroupMembers}
@@ -182,7 +183,7 @@ class ReadingGroupsMembersListContainer extends Component {
             onPageClick={this.pageChangeHandlerCreator}
             onRemoveMember={this.removeMember}
           />
-        </div>
+        </Styled.Body>
         {this.renderRoutes()}
       </>
     );
