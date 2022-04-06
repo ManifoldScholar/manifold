@@ -57,6 +57,11 @@ exports[`global/components/PressLogo/PressLogo when it does not have a URL match
           "en": Object {
             "translation": Object {
               "date_fns": null,
+              "forms": Object {
+                "upload": Object {
+                  "image_preview": "<0></0><br/><1></1>",
+                },
+              },
             },
           },
         },
@@ -76,6 +81,11 @@ exports[`global/components/PressLogo/PressLogo when it does not have a URL match
         "en": Object {
           "translation": Object {
             "date_fns": null,
+            "forms": Object {
+              "upload": Object {
+                "image_preview": "<0></0><br/><1></1>",
+              },
+            },
           },
         },
       },
@@ -143,6 +153,11 @@ exports[`global/components/PressLogo/PressLogo when it has a URL matches the sna
           "en": Object {
             "translation": Object {
               "date_fns": null,
+              "forms": Object {
+                "upload": Object {
+                  "image_preview": "<0></0><br/><1></1>",
+                },
+              },
             },
           },
         },
@@ -162,6 +177,11 @@ exports[`global/components/PressLogo/PressLogo when it has a URL matches the sna
         "en": Object {
           "translation": Object {
             "date_fns": null,
+            "forms": Object {
+              "upload": Object {
+                "image_preview": "<0></0><br/><1></1>",
+              },
+            },
           },
         },
       },

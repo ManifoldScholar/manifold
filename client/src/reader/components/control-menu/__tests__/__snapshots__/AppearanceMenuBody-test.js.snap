@@ -66,6 +66,11 @@ exports[`reader/components/control-menu/AppearanceMenuBody matches the snapshot 
           "en": Object {
             "translation": Object {
               "date_fns": null,
+              "forms": Object {
+                "upload": Object {
+                  "image_preview": "<0></0><br/><1></1>",
+                },
+              },
             },
           },
         },
@@ -85,6 +90,11 @@ exports[`reader/components/control-menu/AppearanceMenuBody matches the snapshot 
         "en": Object {
           "translation": Object {
             "date_fns": null,
+            "forms": Object {
+              "upload": Object {
+                "image_preview": "<0></0><br/><1></1>",
+              },
+            },
           },
         },
       },

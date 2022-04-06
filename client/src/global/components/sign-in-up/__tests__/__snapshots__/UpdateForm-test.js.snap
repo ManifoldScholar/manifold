@@ -247,24 +247,7 @@ exports[`global/components/sign-in-up/UpdateForm matches the snapshot 1`] = `
                         }
                       }
                     >
-                      <h4
-                        className="form-heading"
-                        key="0"
-                      >
-                        Congratulations! 
-                      </h4>
-                      <p
-                        className="overlay-copy"
-                        key="1"
-                      >
-                        Your account has been successfully created and you are now logged in to Manifold. From now on, I'm going to call you 
-                      </p>
-                      <h4
-                        className="nickname"
-                        key="2"
-                      >
-                        Rowan
-                      </h4>
+                      forms.signin_overlay.create_success_message
                     </Trans>
                   </div>
                   <div

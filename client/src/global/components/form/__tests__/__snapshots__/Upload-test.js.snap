@@ -89,45 +89,156 @@ exports[`global/components/form/Upload When there is no remove prop matches the 
                       handleRemove={[Function]}
                       preview="/some/image.jpg"
                     >
-                      <FormUploadImagePreview
+                      <withI18nextTranslation(FormUploadImagePreview)
                         handleRemove={[Function]}
                         image="/some/image.jpg"
                       >
-                        <div
-                          className="contents-image-preview"
-                          data-id="preview"
+                        <FormUploadImagePreview
+                          handleRemove={[Function]}
+                          i18n={
+                            Object {
+                              "language": "en",
+                              "languages": Array [
+                                "en",
+                              ],
+                              "options": Object {
+                                "appendNamespaceToCIMode": false,
+                                "appendNamespaceToMissingKey": false,
+                                "contextSeparator": "_",
+                                "debug": false,
+                                "defaultNS": Array [
+                                  "translation",
+                                ],
+                                "fallbackLng": Array [
+                                  "en",
+                                ],
+                                "fallbackNS": false,
+                                "ignoreJSONStructure": true,
+                                "initImmediate": true,
+                                "interpolation": Object {
+                                  "escapeValue": true,
+                                  "format": [Function],
+                                  "formatSeparator": ",",
+                                  "maxReplaces": 1000,
+                                  "nestingOptionsSeparator": ",",
+                                  "nestingPrefix": "$t(",
+                                  "nestingSuffix": ")",
+                                  "prefix": "{{",
+                                  "skipOnVariables": true,
+                                  "suffix": "}}",
+                                  "unescapePrefix": "-",
+                                },
+                                "joinArrays": false,
+                                "keySeparator": ".",
+                                "lng": "en",
+                                "load": "all",
+                                "missingInterpolationHandler": false,
+                                "missingKeyHandler": false,
+                                "nonExplicitSupportedLngs": false,
+                                "ns": Array [
+                                  "translation",
+                                ],
+                                "nsSeparator": ":",
+                                "overloadTranslationOptionHandler": [Function],
+                                "parseMissingKeyHandler": false,
+                                "partialBundledLanguages": false,
+                                "pluralSeparator": "_",
+                                "postProcess": false,
+                                "postProcessPassResolved": false,
+                                "preload": false,
+                                "resources": Object {
+                                  "en": Object {
+                                    "translation": Object {
+                                      "date_fns": null,
+                                      "forms": Object {
+                                        "upload": Object {
+                                          "image_preview": "<0></0><br/><1></1>",
+                                        },
+                                      },
+                                    },
+                                  },
+                                },
+                                "returnEmptyString": true,
+                                "returnNull": true,
+                                "returnObjects": false,
+                                "returnedObjectHandler": false,
+                                "saveMissing": false,
+                                "saveMissingPlurals": true,
+                                "saveMissingTo": "fallback",
+                                "simplifyPluralSuffix": true,
+                                "supportedLngs": false,
+                                "updateMissing": false,
+                              },
+                              "resolvedLanguage": "en",
+                              "store": Object {
+                                "en": Object {
+                                  "translation": Object {
+                                    "date_fns": null,
+                                    "forms": Object {
+                                      "upload": Object {
+                                        "image_preview": "<0></0><br/><1></1>",
+                                      },
+                                    },
+                                  },
+                                },
+                              },
+                            }
+                          }
+                          image="/some/image.jpg"
+                          t={[Function]}
+                          tReady={true}
                         >
                           <div
-                            className="message"
+                            className="contents-image-preview"
+                            data-id="preview"
                           >
-                            <p
-                              className="secondary"
+                            <div
+                              className="message"
                             >
-                              <button
-                                className="form-dropzone__inline-button"
-                                data-id="remove"
-                                onClick={[Function]}
-                                type="button"
+                              <p
+                                className="secondary"
                               >
-                                Remove this image
-                              </button>
-                              <br />
-                              or
-                               
-                              <span
-                                className="form-dropzone__upload-prompt"
-                              >
-                                Upload an image
-                              </span>
-                            </p>
+                                <Trans
+                                  components={
+                                    Array [
+                                      <button
+                                        className="form-dropzone__inline-button"
+                                        data-id="remove"
+                                        onClick={[Function]}
+                                        type="button"
+                                      />,
+                                      <span
+                                        className="form-dropzone__upload-prompt"
+                                      />,
+                                    ]
+                                  }
+                                  i18nKey="forms.upload.image_preview"
+                                >
+                                  <button
+                                    className="form-dropzone__inline-button"
+                                    data-id="remove"
+                                    key="0"
+                                    onClick={[Function]}
+                                    type="button"
+                                  />
+                                  <br
+                                    key="br-1"
+                                  />
+                                  <span
+                                    className="form-dropzone__upload-prompt"
+                                    key="2"
+                                  />
+                                </Trans>
+                              </p>
+                            </div>
+                            <img
+                              alt="image_preview_alt"
+                              className="preview"
+                              src="/some/image.jpg"
+                            />
                           </div>
-                          <img
-                            alt="Upload preview"
-                            className="preview"
-                            src="/some/image.jpg"
-                          />
-                        </div>
-                      </FormUploadImagePreview>
+                        </FormUploadImagePreview>
+                      </withI18nextTranslation(FormUploadImagePreview)>
                     </FormUploadPreview>
                   </div>
                 </Component>
@@ -238,45 +349,156 @@ exports[`global/components/form/Upload matches the snapshot 1`] = `
                       handleRemove={[Function]}
                       preview="/some/image.jpg"
                     >
-                      <FormUploadImagePreview
+                      <withI18nextTranslation(FormUploadImagePreview)
                         handleRemove={[Function]}
                         image="/some/image.jpg"
                       >
-                        <div
-                          className="contents-image-preview"
-                          data-id="preview"
+                        <FormUploadImagePreview
+                          handleRemove={[Function]}
+                          i18n={
+                            Object {
+                              "language": "en",
+                              "languages": Array [
+                                "en",
+                              ],
+                              "options": Object {
+                                "appendNamespaceToCIMode": false,
+                                "appendNamespaceToMissingKey": false,
+                                "contextSeparator": "_",
+                                "debug": false,
+                                "defaultNS": Array [
+                                  "translation",
+                                ],
+                                "fallbackLng": Array [
+                                  "en",
+                                ],
+                                "fallbackNS": false,
+                                "ignoreJSONStructure": true,
+                                "initImmediate": true,
+                                "interpolation": Object {
+                                  "escapeValue": true,
+                                  "format": [Function],
+                                  "formatSeparator": ",",
+                                  "maxReplaces": 1000,
+                                  "nestingOptionsSeparator": ",",
+                                  "nestingPrefix": "$t(",
+                                  "nestingSuffix": ")",
+                                  "prefix": "{{",
+                                  "skipOnVariables": true,
+                                  "suffix": "}}",
+                                  "unescapePrefix": "-",
+                                },
+                                "joinArrays": false,
+                                "keySeparator": ".",
+                                "lng": "en",
+                                "load": "all",
+                                "missingInterpolationHandler": false,
+                                "missingKeyHandler": false,
+                                "nonExplicitSupportedLngs": false,
+                                "ns": Array [
+                                  "translation",
+                                ],
+                                "nsSeparator": ":",
+                                "overloadTranslationOptionHandler": [Function],
+                                "parseMissingKeyHandler": false,
+                                "partialBundledLanguages": false,
+                                "pluralSeparator": "_",
+                                "postProcess": false,
+                                "postProcessPassResolved": false,
+                                "preload": false,
+                                "resources": Object {
+                                  "en": Object {
+                                    "translation": Object {
+                                      "date_fns": null,
+                                      "forms": Object {
+                                        "upload": Object {
+                                          "image_preview": "<0></0><br/><1></1>",
+                                        },
+                                      },
+                                    },
+                                  },
+                                },
+                                "returnEmptyString": true,
+                                "returnNull": true,
+                                "returnObjects": false,
+                                "returnedObjectHandler": false,
+                                "saveMissing": false,
+                                "saveMissingPlurals": true,
+                                "saveMissingTo": "fallback",
+                                "simplifyPluralSuffix": true,
+                                "supportedLngs": false,
+                                "updateMissing": false,
+                              },
+                              "resolvedLanguage": "en",
+                              "store": Object {
+                                "en": Object {
+                                  "translation": Object {
+                                    "date_fns": null,
+                                    "forms": Object {
+                                      "upload": Object {
+                                        "image_preview": "<0></0><br/><1></1>",
+                                      },
+                                    },
+                                  },
+                                },
+                              },
+                            }
+                          }
+                          image="/some/image.jpg"
+                          t={[Function]}
+                          tReady={true}
                         >
                           <div
-                            className="message"
+                            className="contents-image-preview"
+                            data-id="preview"
                           >
-                            <p
-                              className="secondary"
+                            <div
+                              className="message"
                             >
-                              <button
-                                className="form-dropzone__inline-button"
-                                data-id="remove"
-                                onClick={[Function]}
-                                type="button"
+                              <p
+                                className="secondary"
                               >
-                                Remove this image
-                              </button>
-                              <br />
-                              or
-                               
-                              <span
-                                className="form-dropzone__upload-prompt"
-                              >
-                                Upload an image
-                              </span>
-                            </p>
+                                <Trans
+                                  components={
+                                    Array [
+                                      <button
+                                        className="form-dropzone__inline-button"
+                                        data-id="remove"
+                                        onClick={[Function]}
+                                        type="button"
+                                      />,
+                                      <span
+                                        className="form-dropzone__upload-prompt"
+                                      />,
+                                    ]
+                                  }
+                                  i18nKey="forms.upload.image_preview"
+                                >
+                                  <button
+                                    className="form-dropzone__inline-button"
+                                    data-id="remove"
+                                    key="0"
+                                    onClick={[Function]}
+                                    type="button"
+                                  />
+                                  <br
+                                    key="br-1"
+                                  />
+                                  <span
+                                    className="form-dropzone__upload-prompt"
+                                    key="2"
+                                  />
+                                </Trans>
+                              </p>
+                            </div>
+                            <img
+                              alt="image_preview_alt"
+                              className="preview"
+                              src="/some/image.jpg"
+                            />
                           </div>
-                          <img
-                            alt="Upload preview"
-                            className="preview"
-                            src="/some/image.jpg"
-                          />
-                        </div>
-                      </FormUploadImagePreview>
+                        </FormUploadImagePreview>
+                      </withI18nextTranslation(FormUploadImagePreview)>
                     </FormUploadPreview>
                   </div>
                 </Component>

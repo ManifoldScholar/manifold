@@ -284,6 +284,11 @@ exports[`global/components/comment/meta matches the snapshot 1`] = `
           "en": Object {
             "translation": Object {
               "date_fns": null,
+              "forms": Object {
+                "upload": Object {
+                  "image_preview": "<0></0><br/><1></1>",
+                },
+              },
             },
           },
         },
@@ -303,6 +308,11 @@ exports[`global/components/comment/meta matches the snapshot 1`] = `
         "en": Object {
           "translation": Object {
             "date_fns": null,
+            "forms": Object {
+              "upload": Object {
+                "image_preview": "<0></0><br/><1></1>",
+              },
+            },
           },
         },
       },

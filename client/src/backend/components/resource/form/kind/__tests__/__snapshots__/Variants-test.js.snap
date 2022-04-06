@@ -52,15 +52,7 @@ exports[`backend/components/resource/form/kind/Variants matches the snapshot whe
               <p
                 class="primary"
               >
-                <span
-                  class="form-dropzone__upload-prompt"
-                >
-                  Upload a file
-                </span>
-                 or 
-                <br />
-                drag and drop here
-                <br />
+                forms.upload.instructions
               </p>
             </div>
           </div>
@@ -109,15 +101,7 @@ exports[`backend/components/resource/form/kind/Variants matches the snapshot whe
               <p
                 class="primary"
               >
-                <span
-                  class="form-dropzone__upload-prompt"
-                >
-                  Upload a file
-                </span>
-                 or 
-                <br />
-                drag and drop here
-                <br />
+                forms.upload.instructions
               </p>
             </div>
           </div>
@@ -174,15 +158,7 @@ exports[`backend/components/resource/form/kind/Variants when kind is image match
             <p
               class="primary"
             >
-              <span
-                class="form-dropzone__upload-prompt"
-              >
-                Upload a file
-              </span>
-               or 
-              <br />
-              drag and drop here
-              <br />
+              forms.upload.instructions
             </p>
             <p
               class="secondary"
@@ -236,15 +212,7 @@ exports[`backend/components/resource/form/kind/Variants when kind is image match
             <p
               class="primary"
             >
-              <span
-                class="form-dropzone__upload-prompt"
-              >
-                Upload a file
-              </span>
-               or 
-              <br />
-              drag and drop here
-              <br />
+              forms.upload.instructions
             </p>
             <p
               class="secondary"
@@ -305,15 +273,7 @@ exports[`backend/components/resource/form/kind/Variants when kind is pdf matches
             <p
               class="primary"
             >
-              <span
-                class="form-dropzone__upload-prompt"
-              >
-                Upload a file
-              </span>
-               or 
-              <br />
-              drag and drop here
-              <br />
+              forms.upload.instructions
             </p>
             <p
               class="secondary"
