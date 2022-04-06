@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { UnmountClosed as Collapse } from "react-collapse";
 import Form from "global/components/form";
-import FormContainer from "global/containers/form";
 import { readingGroupsAPI, requests } from "api";
 import config from "config";
 import memoize from "lodash/memoize";
 import withConfirmation from "hoc/withConfirmation";
+import { ClassNames } from "@emotion/react";
+import * as Styled from "./styles";
 
 class ReadingGroupForm extends React.PureComponent {
   static displayName = "ReadingGroup.Forms.GroupSettings";
@@ -119,14 +120,14 @@ class ReadingGroupForm extends React.PureComponent {
   render() {
     const { group, onSuccess, t } = this.props;
     return (
-      <FormContainer.Form
+      <Styled.Form
         model={this.isNew ? this.memoizedNewGroup() : group}
         name={requests.feNewReadingGroup}
         update={readingGroupsAPI.update}
         create={readingGroupsAPI.create}
         options={{ adds: requests.feMyReadingGroups }}
         onSuccess={onSuccess}
-        className="form-secondary group-settings-form"
+        className="form-secondary"
         notificationScope="drawer"
       >
         {getModelValue => (
@@ -138,6 +139,7 @@ class ReadingGroupForm extends React.PureComponent {
               placeholder={t("forms.reading_group.name_placeholder")}
               focusOnMount
             />
+
             <Form.Radios
               label={t("forms.reading_group.privacy")}
               name="attributes[privacy]"
@@ -198,29 +200,33 @@ class ReadingGroupForm extends React.PureComponent {
                 }
               ]}
             />
-            <Form.Radios
-              label={t("forms.reading_group.course")}
-              name="attributes[course][enabled]"
-              defaultValue={false}
-              instructions={t("forms.reading_group.course_instructions")}
-              options={[
-                {
-                  label: t("forms.reading_group.course_options.yes"),
-                  value: true
-                },
-                {
-                  label: t("forms.reading_group.course_options.no"),
-                  value: false
-                }
-              ]}
-              beforeOnChange={this.handleCourseChange}
-              inputClasses="group-settings-form__course-radios"
-              inline
-              wide
-            />
-            <div className="group-settings-form__date-picker-section">
+            <ClassNames>
+              {({ css }) => (
+                <Form.Radios
+                  label={t("forms.reading_group.course")}
+                  name="attributes[course][enabled]"
+                  defaultValue={false}
+                  instructions={t("forms.reading_group.course_instructions")}
+                  options={[
+                    {
+                      label: t("forms.reading_group.course_options.yes"),
+                      value: true
+                    },
+                    {
+                      label: t("forms.reading_group.course_options.no"),
+                      value: false
+                    }
+                  ]}
+                  beforeOnChange={this.handleCourseChange}
+                  inputClasses={css(`padding-block-end: 20px;`)}
+                  inline
+                  wide
+                />
+              )}
+            </ClassNames>
+            <Styled.DatesOuter>
               <Collapse isOpened={this.state.courseEnabled}>
-                <div className="group-settings-form__date-picker-group">
+                <Styled.DatesInner>
                   <Form.DatePicker
                     label={t("forms.reading_group.course_start_date")}
                     name="attributes[course][startsOn]"
@@ -229,9 +235,9 @@ class ReadingGroupForm extends React.PureComponent {
                     label={t("forms.reading_group.course_end_date")}
                     name="attributes[course][endsOn]"
                   />
-                </div>
+                </Styled.DatesInner>
               </Collapse>
-            </div>
+            </Styled.DatesOuter>
             <Form.Switch
               wide
               label={t("forms.reading_group.notifications")}
@@ -242,7 +248,7 @@ class ReadingGroupForm extends React.PureComponent {
             <Form.Save text={t("actions.save")} theme="frontend" />
           </>
         )}
-      </FormContainer.Form>
+      </Styled.Form>
     );
   }
 }
