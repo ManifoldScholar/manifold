@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import { ClassNames } from "@emotion/react";
 import useCollapseContext from "./useCollapseContext";
 
-function Toggle({ children, className, activeClassName }) {
+function Toggle({ children, className, activeClassName, as }) {
   const { visible, toggleProps, labelProps } = useCollapseContext();
   const applyLabelPropsToToggle =
     !React.isValidElement(children) || typeof children === "string";
@@ -11,17 +11,25 @@ function Toggle({ children, className, activeClassName }) {
     ...toggleProps,
     ...(applyLabelPropsToToggle ? labelProps : {})
   };
-  const finalClassName = classNames({
-    [className]: !!className,
-    [activeClassName]: activeClassName ? visible : false
-  });
+
+  const ToggleComponent = as ?? "button";
 
   return (
-    <button className={finalClassName} {...mergedToggleProps}>
-      {typeof children === "function"
-        ? children(visible, labelProps)
-        : children}
-    </button>
+    <ClassNames>
+      {({ cx }) => (
+        <ToggleComponent
+          className={cx({
+            [className]: !!className,
+            [activeClassName]: activeClassName ? visible : false
+          })}
+          {...mergedToggleProps}
+        >
+          {typeof children === "function"
+            ? children(visible, labelProps)
+            : children}
+        </ToggleComponent>
+      )}
+    </ClassNames>
   );
 }
 
