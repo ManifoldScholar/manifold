@@ -77,10 +77,11 @@ export default class Project extends PureComponent {
 
     return {
       "@type": "Book",
-      "@id": metadata.isbn,
+      "@id": metadata.isbn ?? metadata.doi,
       name: title,
       url: `${hostname}${lh.link("frontendProjectDetail", slug)}`,
       isbn: metadata.isbn,
+      doi: metadata.doi,
       author: renderNamesList(creators),
       contributor: renderNamesList(contributors),
       copyrightHolder: metadata.rightsHolder,

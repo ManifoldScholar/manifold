@@ -1,32 +1,36 @@
 import React from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { renderOffer, renderSeries, renderVolumes } from "../helpers";
+import {
+  renderOffer,
+  renderSeries,
+  renderVolumes,
+  renderIssues
+} from "../helpers";
 import BaseSchema from "../BaseSchema";
 import config from "config";
 
 export default function Journal({ journal }) {
   const { attributes, relationships } = journal;
   const { journalVolumes, journalIssues } = relationships ?? {};
-  const { journalIssuesWithoutVolumeCount: uncategorized } = attributes ?? {};
+  const { journalIssuesWithoutVolumeCount: uncategorizedCount } =
+    attributes ?? {};
 
   const hostname = config.services.client.url;
 
-  const renderIssues = () => {
-    if (!journalIssues.length) return {};
-
-    return journalIssues.map(issue => ({
-      "@type": "PublicationIssue",
-      issueNumber: issue.attributes.number,
-      datePublished: issue.attributes.publicationDate
-    }));
-  };
-
   const renderVolumesAndIssues = () => {
-    if (!journalVolumes.length && !uncategorized) return null;
-    return uncategorized
-      ? [...renderIssues(), ...renderVolumes(journalVolumes)]
-      : [...renderVolumes(journalVolumes)];
+    if (!journalVolumes.length && !uncategorizedCount) return null;
+
+    const uncategorized =
+      journalIssues.filter(issue => !issue.attributes.journalVolumeNumber) ??
+      [];
+
+    return uncategorized.length
+      ? [
+          ...renderIssues(uncategorized),
+          ...renderVolumes(journalVolumes, null, true)
+        ]
+      : [...renderVolumes(journalVolumes, null, true)];
   };
 
   const {
@@ -41,10 +45,11 @@ export default function Journal({ journal }) {
 
   const journalData = {
     "@type": "Periodical",
-    "@id": metadata.issn,
+    "@id": metadata.issn ?? metadata.doi,
     name: title,
     url: `${hostname}${lh.link("frontendJournalDetail", slug)}`,
     issn: metadata.issn,
+    doi: metadata.doi,
     copyrightHolder: metadata.rightsHolder,
     copyrightNotice: metadata.rights,
     dateCreated: createdAt,

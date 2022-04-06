@@ -41,13 +41,28 @@ export const renderJournal = journal => {
     : null;
 };
 
-export const renderVolumes = (volumes, journal) => {
+export const renderIssues = issues => {
+  if (!issues.length) return {};
+
+  return issues.map(issue => ({
+    "@type": "PublicationIssue",
+    issueNumber: issue.attributes.number,
+    datePublished: issue.attributes.publicationDate
+  }));
+};
+
+export const renderVolumes = (volumes, journal, includeIssues = false) => {
   if (!volumes.length) return {};
 
-  return volumes.map(volume => ({
-    "@type": "PublicationVolume",
-    volumeNumber: volume.attributes.number,
-    datePublished: volume.attributes.publicationDate,
-    isPartOf: journal ? renderJournal(journal) : null
-  }));
+  return volumes.map(volume => {
+    const issues = volume.relationships?.journalIssues ?? {};
+
+    return {
+      "@type": "PublicationVolume",
+      volumeNumber: volume.attributes.number,
+      datePublished: volume.attributes.publicationDate,
+      isPartOf: journal ? renderJournal(journal) : null,
+      hasPart: includeIssues && issues?.length ? renderIssues(issues) : null
+    };
+  });
 };

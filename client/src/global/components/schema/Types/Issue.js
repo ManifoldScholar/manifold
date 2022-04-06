@@ -12,7 +12,7 @@ import config from "config";
 
 export default function Issue({ issue }) {
   const { attributes, relationships } = issue;
-  const { journalVolumes, journal } = relationships ?? {};
+  const { journalVolume, journal } = relationships ?? {};
 
   const hostname = config.services.client.url;
 
@@ -30,11 +30,18 @@ export default function Issue({ issue }) {
 
   const issueData = {
     "@type": "PublicationIssue",
-    "@id": metadata.doi,
+    "@id": metadata.issn ?? metadata.doi,
     name: title,
     issueNumber: number,
     url: `${hostname}${lh.link("frontendProjectDetail", slug)}`,
     issn: metadata.issn,
+    identifier: metadata.doi
+      ? {
+          "@type": "PropertyValue",
+          propertyID: "DOI",
+          value: metadata.doi
+        }
+      : null,
     author: renderNamesList(creators),
     contributor: renderNamesList(contributors),
     copyrightHolder: metadata.rightsHolder,
@@ -43,8 +50,8 @@ export default function Issue({ issue }) {
     dateModified: updatedAt,
     datePublished: publicationDate,
     publisher: metadata.publisher,
-    isPartOf: journalVolumes?.length
-      ? renderVolumes(journalVolumes, journal)
+    isPartOf: journalVolume
+      ? renderVolumes([journalVolume], journal)
       : renderJournal(journal),
     image: avatarStyles && avatarStyles.small,
     offers: renderOffer(attributes)
