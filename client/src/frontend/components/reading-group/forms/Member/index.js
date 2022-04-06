@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { readingGroupMembershipsAPI, requests } from "api";
 import Form from "global/components/form";
-import FormContainer from "global/containers/form";
 import config from "config";
 import StylePreview from "./StylePreview";
+import * as Styled from "./styles";
 
 function ReadingGroupMemberForm({
   membership,
@@ -41,12 +41,12 @@ function ReadingGroupMemberForm({
     membership.relationships.user.id === readingGroup.attributes.creatorId;
 
   return (
-    <FormContainer.Form
+    <Styled.Form
       model={membership}
       name={requests.feReadingGroupMembershipEdit}
       update={readingGroupMembershipsAPI.update}
       onSuccess={onSuccess}
-      className="form-secondary member-settings-form"
+      className="form-secondary"
       notificationScope="drawer"
     >
       <Form.TextInput
@@ -121,7 +121,7 @@ function ReadingGroupMemberForm({
       />
       <StylePreview style={selectedStyle} />
       <Form.Save text={t("actions.save")} theme="frontend" />
-    </FormContainer.Form>
+    </Styled.Form>
   );
 }
 

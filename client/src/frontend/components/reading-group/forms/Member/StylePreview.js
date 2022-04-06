@@ -1,18 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 function StylePreview({ style }) {
   const { t } = useTranslation();
 
   return (
-    <div className="member-settings-form__style-preview">
+    <Styled.Preview>
       <p>
-        <span className={`underline-${style}`}>
+        <Styled.Underline $style={style}>
           {t("forms.reading_group_member.style_preview")}
-        </span>
+        </Styled.Underline>
       </p>
-    </div>
+    </Styled.Preview>
   );
 }
 
