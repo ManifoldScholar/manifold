@@ -51,15 +51,7 @@ exports[`backend/components/ingestion/form/Upload matches the snapshot 1`] = `
             <p
               class="primary"
             >
-              <span
-                class="form-dropzone__upload-prompt"
-              >
-                Upload a file
-              </span>
-               or 
-              <br />
-              drag and drop here
-              <br />
+              forms.upload.instructions
             </p>
           </div>
         </div>

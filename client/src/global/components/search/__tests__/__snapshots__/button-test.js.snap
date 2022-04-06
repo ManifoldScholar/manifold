@@ -58,6 +58,11 @@ exports[`global/components/search/button when it is active matches the snapshot 
           "en": Object {
             "translation": Object {
               "date_fns": null,
+              "forms": Object {
+                "upload": Object {
+                  "image_preview": "<0></0><br/><1></1>",
+                },
+              },
             },
           },
         },
@@ -77,6 +82,11 @@ exports[`global/components/search/button when it is active matches the snapshot 
         "en": Object {
           "translation": Object {
             "date_fns": null,
+            "forms": Object {
+              "upload": Object {
+                "image_preview": "<0></0><br/><1></1>",
+              },
+            },
           },
         },
       },
@@ -146,6 +156,11 @@ exports[`global/components/search/button when it isn't active matches the snapsh
           "en": Object {
             "translation": Object {
               "date_fns": null,
+              "forms": Object {
+                "upload": Object {
+                  "image_preview": "<0></0><br/><1></1>",
+                },
+              },
             },
           },
         },
@@ -165,6 +180,11 @@ exports[`global/components/search/button when it isn't active matches the snapsh
         "en": Object {
           "translation": Object {
             "date_fns": null,
+            "forms": Object {
+              "upload": Object {
+                "image_preview": "<0></0><br/><1></1>",
+              },
+            },
           },
         },
       },
