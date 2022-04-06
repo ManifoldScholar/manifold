@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
+import * as Styled from "./styles";
 
 function Checkbox({ checked, label, id, onChange }) {
   return (
-    <label
-      htmlFor={id}
-      className="checkbox checkbox--gray group-action-panel__checkbox"
-    >
+    <Styled.Checkbox htmlFor={id} className="checkbox checkbox--gray">
       <input id={id} type="checkbox" checked={checked} onChange={onChange} />
       <span className="checkbox__indicator" aria-hidden="true">
         <IconComposer
@@ -16,8 +14,8 @@ function Checkbox({ checked, label, id, onChange }) {
           className="checkbox__icon"
         />
       </span>
-      <span className="group-action-panel__checkbox-text">{label}</span>
-    </label>
+      <Styled.CheckboxText>{label}</Styled.CheckboxText>
+    </Styled.Checkbox>
   );
 }
 
