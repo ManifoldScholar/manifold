@@ -1,6 +1,4 @@
 import actionPanel from "./actionPanel";
-import pageHeading from "./pageHeading";
-import pageBody from "./pageBody";
 import removeMember from "./removeMember";
 import childRouteNav from "./childRouteNav";
 import homepageModeToggle from "./homepageModeToggle";
@@ -18,10 +16,8 @@ ${collectionCategory}
 ${groupsPageContainer}
 ${homepageEditor}
 ${homepageModeToggle}
-${pageBody}
 ${removeMember}
 ${settingsFormGroup}
 ${settingsFormMember}
 ${childRouteNav}
-${pageHeading}
 `;

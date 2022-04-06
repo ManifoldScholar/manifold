@@ -1,17 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import IconComposer from "global/components/utility/IconComposer";
+import * as Styled from "./styles";
 
 function HeadingTitle({ title, icon = "readingGroup24" }) {
   return (
-    <div className="group-page-heading__text-container">
-      <IconComposer
-        icon={icon}
-        size={32}
-        className={"group-page-heading__icon"}
-      />
-      <h1 className={"heading-primary group-page-heading__text"}>{title}</h1>
-    </div>
+    <Styled.TextContainer>
+      <Styled.Icon icon={icon} size={32} />
+      <Styled.Title className="heading-primary ">{title}</Styled.Title>
+    </Styled.TextContainer>
   );
 }
 

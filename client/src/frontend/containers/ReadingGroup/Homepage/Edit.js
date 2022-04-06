@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import ActionBox from "frontend/components/reading-group/ActionBox";
 import { CollectionEditor } from "frontend/components/collecting/reading-group";
+import * as Styled from "./styles";
 
 import Authorize from "hoc/Authorize";
 
@@ -36,12 +37,9 @@ function ReadingGroupHomepageEditContainer({
             title={t("pages.frontend.reading_group.search_title")}
             instructions={t("pages.frontend.reading_group.search_instructions")}
             actions={
-              <a
-                href="#search"
-                className="group-page-heading__nav-button button-tertiary"
-              >
+              <Styled.SearchButton href="#search" className="button-tertiary">
                 {t("pages.frontend.reading_group.search_button_label")}
-              </a>
+              </Styled.SearchButton>
             }
           />
         </div>

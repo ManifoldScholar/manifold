@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import Switch from "global/components/form/Switch";
 import ActionBox from "frontend/components/reading-group/ActionBox";
+import * as Styled from "./styles";
 
 function HeadingManageGroup({ readingGroup, history, location }) {
   const { t } = useTranslation();
@@ -29,7 +30,7 @@ function HeadingManageGroup({ readingGroup, history, location }) {
       title={t("forms.manage_group.title")}
       instructions={t("forms.manage_group.instructions")}
       actions={
-        <div className="group-page-heading__flex-container group-page-heading__flex-container--justify-start">
+        <Styled.ManageGroupContainer>
           <div aria-hidden>
             <Switch
               label={t("forms.manage_group.edit_homepage")}
@@ -58,7 +59,7 @@ function HeadingManageGroup({ readingGroup, history, location }) {
           >
             {t("forms.manage_group.edit_settings")}
           </a>
-        </div>
+        </Styled.ManageGroupContainer>
       }
     />
   );

@@ -4,6 +4,7 @@ import { readingGroupsAPI } from "api";
 import { useHistory } from "react-router-dom";
 import { childRoutes } from "helpers/router";
 import { useFetch, useFromStore } from "hooks";
+import * as Styled from "../styles";
 
 function ReadingGroupHomepageFetchContainer({
   readingGroup,
@@ -49,7 +50,7 @@ function ReadingGroupHomepageFetchContainer({
   const categories = useFromStore("feReadingGroupCategories", "select") || [];
 
   return (
-    <div className="group-page-body">
+    <Styled.Body>
       {childRoutes(route, {
         childProps: {
           readingGroup,
@@ -59,7 +60,7 @@ function ReadingGroupHomepageFetchContainer({
           refresh
         }
       })}
-    </div>
+    </Styled.Body>
   );
 }
 
