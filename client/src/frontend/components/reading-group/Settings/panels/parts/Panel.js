@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 function Panel({
   label,
@@ -13,12 +14,12 @@ function Panel({
   const { t } = useTranslation();
 
   return (
-    <form onSubmit={onProceed} className="group-action-panel">
-      <h3 className="group-action-panel__label">{label}</h3>
-      <p className="group-action-panel__heading">{heading}</p>
-      <p className="group-action-panel__instructions">{instructions}</p>
+    <Styled.Form onSubmit={onProceed}>
+      <Styled.Label>{label}</Styled.Label>
+      <Styled.Heading>{heading}</Styled.Heading>
+      <Styled.Instructions>{instructions}</Styled.Instructions>
       {children}
-      <div className="group-action-panel__actions">
+      <Styled.Actions>
         <button type="submit" className="button-secondary">
           {label}
         </button>
@@ -29,8 +30,8 @@ function Panel({
         >
           {t("actions.cancel")}
         </button>
-      </div>
-    </form>
+      </Styled.Actions>
+    </Styled.Form>
   );
 }
 
