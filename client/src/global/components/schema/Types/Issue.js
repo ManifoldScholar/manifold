@@ -3,9 +3,12 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { renderOffer, renderNamesList } from "../helpers";
 import BaseSchema from "../BaseSchema";
+import config from "config";
 
 export default function Issue({ issue }) {
   const { attributes, relationships } = issue;
+
+  const hostname = config.services.client.url;
 
   const renderJournal = () => {
     const { journal } = relationships;
@@ -35,7 +38,7 @@ export default function Issue({ issue }) {
     "@id": metadata.doi,
     name: title,
     issueNumber: number,
-    url: lh.link("frontendProjectDetail", slug),
+    url: `${hostname}${lh.link("frontendProjectDetail", slug)}`,
     issn: metadata.issn,
     author: renderNamesList(creators),
     contributor: renderNamesList(contributors),

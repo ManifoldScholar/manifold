@@ -3,9 +3,12 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { renderOffer, renderSeries } from "../helpers";
 import BaseSchema from "../BaseSchema";
+import config from "config";
 
 export default function Journal({ journal }) {
   const { attributes, relationships } = journal;
+
+  const hostname = config.services.client.url;
 
   const renderIssues = () => {
     const { journalIssues } = relationships;
@@ -45,7 +48,7 @@ export default function Journal({ journal }) {
     "@type": "Periodical",
     "@id": metadata.issn,
     name: title,
-    url: lh.link("frontendJournalDetail", slug),
+    url: `${hostname}${lh.link("frontendJournalDetail", slug)}`,
     issn: metadata.issn,
     copyrightHolder: metadata.rightsHolder,
     copyrightNotice: metadata.rights,

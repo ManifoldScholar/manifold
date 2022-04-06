@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { renderOffer, renderSeries, renderNamesList } from "../helpers";
 import BaseSchema from "../BaseSchema";
+import config from "config";
 
 export default class Project extends PureComponent {
   static displayName = "Schema.Project";
@@ -72,12 +73,13 @@ export default class Project extends PureComponent {
       avatarStyles
     } = this.attributes;
     const { creators, contributors } = this.relationships;
+    const hostname = config.services.client.url;
 
     return {
       "@type": "Book",
-      "@id": metadata.doi,
+      "@id": metadata.isbn,
       name: title,
-      url: lh.link("frontendProjectDetail", slug),
+      url: `${hostname}${lh.link("frontendProjectDetail", slug)}`,
       isbn: metadata.isbn,
       author: renderNamesList(creators),
       contributor: renderNamesList(contributors),
