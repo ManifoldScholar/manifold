@@ -24,8 +24,7 @@ export const Flex = styled.div`
   }
 `;
 
-export const NavButton = styled(NavLink)`
-  &:not(:first-child) {
-    margin-inline-start: 10px;
-  }
+export const CreateButton = styled(NavLink)`
+  margin-block-start: ${textGap};
+  margin-inline-start: ${textGap};
 `;
