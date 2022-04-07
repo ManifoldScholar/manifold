@@ -1,78 +1,34 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import connectAndFetch from "utils/connectAndFetch";
-import { commonActions } from "actions/helpers";
-import get from "lodash/get";
 import Collections from "./Collections";
 import Projects from "./Projects";
 import Feature from "./Feature";
-import withSettings from "hoc/withSettings";
 import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
+import { useFromStore } from "hooks";
+import { useLocation } from "react-router-dom";
 
-export class HomeContainer extends Component {
-  static showProjects(settings) {
-    return !get(
-      settings,
-      "attributes.calculated.hasVisibleHomeProjectCollections"
-    );
-  }
+export default function HomeContainer() {
+  const settings = useFromStore("settings", "select");
+  const { showProjects, hasVisibleProjects } =
+    settings?.attributes?.calculated ?? {};
+  const authentication = useFromStore("authentication");
+  const location = useLocation();
 
-  static mapStateToProps = state => {
-    return {
-      authentication: state.authentication
-    };
-  };
-
-  static propTypes = {
-    fetchData: PropTypes.func,
-    authentication: PropTypes.object,
-    settings: PropTypes.object,
-    location: PropTypes.object,
-    dispatch: PropTypes.func
-  };
-
-  static defaultProps = {
-    location: {}
-  };
-
-  constructor(props) {
-    super(props);
-    this.commonActions = commonActions(props.dispatch);
-  }
-
-  get showProjects() {
-    return this.constructor.showProjects(this.props.settings);
-  }
-
-  get hasVisibleProjects() {
-    return get(this.props.settings, "attributes.calculated.hasVisibleProjects");
-  }
-
-  render() {
-    return (
-      <div
-        style={{
-          overflowX: "hidden"
-        }}
-      >
-        <EventTracker event={EVENTS.VIEW_LIBRARY} />
-        <Feature
-          authentication={this.props.authentication}
-          commonActions={this.commonActions}
-        />
-        {this.showProjects ? (
-          <Projects
-            location={this.props.location}
-            authentication={this.props.authentication}
-          />
-        ) : (
-          <Collections />
-        )}
-        {this.hasVisibleProjects && <CollectionNavigation />}
-      </div>
-    );
-  }
+  return (
+    <div
+      style={{
+        overflowX: "hidden"
+      }}
+    >
+      <EventTracker event={EVENTS.VIEW_LIBRARY} />
+      <Feature authentication={authentication} />
+      {showProjects ? (
+        <Projects location={location} authentication={authentication} />
+      ) : (
+        <Collections />
+      )}
+      {hasVisibleProjects && <CollectionNavigation />}
+    </div>
+  );
 }
-
-export default connectAndFetch(withSettings(HomeContainer));
