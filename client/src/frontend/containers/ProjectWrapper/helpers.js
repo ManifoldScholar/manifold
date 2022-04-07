@@ -1,12 +1,12 @@
 import lh from "helpers/linkHandler";
 
-export const getJournalBreadcrumbs = (project, t) => {
+export const getJournalBreadcrumbs = (project, t, libraryDisabled) => {
   const issue = project.relationships?.journalIssue;
   const parentJournal = project.relationships?.journal;
   const parentVolume = issue.relationships?.journalVolume;
 
   return [
-    {
+    !libraryDisabled && {
       to: lh.link("frontendJournals"),
       label: t("navigation.breadcrumbs.all_journals")
     },

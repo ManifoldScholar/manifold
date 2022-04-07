@@ -1,6 +1,11 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useFetch, usePaginationState, useSetLocation } from "hooks";
+import {
+  useFetch,
+  usePaginationState,
+  useSetLocation,
+  useFromStore
+} from "hooks";
 import { journalIssuesAPI } from "api";
 import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import EntityMasthead from "frontend/components/composed/EntityMasthead";
@@ -21,17 +26,16 @@ export default function JournalIssuesList({ journal }) {
   useSetLocation({ page: pagination.number });
 
   const { t } = useTranslation();
+  const settings = useFromStore("settings", "select");
+  const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 
   const { titlePlaintext, slug } = journal?.attributes || {};
   const containerTitle = `${titlePlaintext}: ${t(
     "glossary.issue_truncated_title_case_other"
   )}`;
-  const breadcrumbs = useMemo(
-    () => [
-      {
-        to: lh.link("frontendJournalsList"),
-        label: t("navigation.breadcrumbs.all_journals")
-      },
+
+  const breadcrumbs = useMemo(() => {
+    const nestedCrumbs = [
       {
         to: lh.link("frontendJournalDetail", slug),
         label: titlePlaintext
@@ -40,9 +44,17 @@ export default function JournalIssuesList({ journal }) {
         to: lh.link("frontendJournalAllIssues", slug),
         label: t("navigation.breadcrumbs.issues")
       }
-    ],
-    [slug, t, titlePlaintext]
-  );
+    ];
+    return libraryDisabled
+      ? nestedCrumbs
+      : [
+          {
+            to: lh.link("frontendJournalsList"),
+            label: t("navigation.breadcrumbs.all_journals")
+          },
+          ...nestedCrumbs
+        ];
+  }, [slug, t, titlePlaintext, libraryDisabled]);
 
   if (!journal || !issues || !meta) return null;
 

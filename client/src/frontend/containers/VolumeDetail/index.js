@@ -9,7 +9,7 @@ import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import EntityMasthead from "frontend/components/composed/EntityMasthead";
 import Journal from "frontend/components/journal";
-import { useFetch } from "hooks";
+import { useFetch, useFromStore } from "hooks";
 import { capitalize } from "utils/string";
 
 function VolumeDetailContainer({ journal }) {
@@ -19,14 +19,12 @@ function VolumeDetailContainer({ journal }) {
   });
 
   const { t } = useTranslation();
+  const settings = useFromStore("settings", "select");
+  const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 
   const { titlePlaintext, slug: journalSlug } = journal?.attributes ?? {};
-  const breadcrumbs = useMemo(
-    () => [
-      {
-        to: lh.link("frontendJournalsList"),
-        label: t("navigation.breadcrumbs.all_journals")
-      },
+  const breadcrumbs = useMemo(() => {
+    const nestedCrumbs = [
       {
         to: lh.link("frontendJournalDetail", journalSlug),
         label: titlePlaintext
@@ -35,9 +33,24 @@ function VolumeDetailContainer({ journal }) {
         to: lh.link("frontendVolumeDetail", journalSlug, slug),
         label: `${t("glossary.volume_one")} ${volume?.attributes?.number}`
       }
-    ],
-    [t, journalSlug, titlePlaintext, volume?.attributes?.number, slug]
-  );
+    ];
+    return libraryDisabled
+      ? nestedCrumbs
+      : [
+          {
+            to: lh.link("frontendJournalsList"),
+            label: t("navigation.breadcrumbs.all_journals")
+          },
+          ...nestedCrumbs
+        ];
+  }, [
+    t,
+    journalSlug,
+    titlePlaintext,
+    volume?.attributes?.number,
+    slug,
+    libraryDisabled
+  ]);
 
   return journal && volume ? (
     <>

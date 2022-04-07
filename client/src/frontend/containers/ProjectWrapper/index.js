@@ -19,12 +19,13 @@ export default function ProjectWrapper({ route }) {
   const location = useLocation();
   const isHomePage = location.pathname === path;
   const settings = useFromStore("settings", "select");
+  const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 
   const { t } = useTranslation();
 
   const breadcrumbsCallback = useCallback(
-    () => getJournalBreadcrumbs(project, t),
-    [project, t]
+    () => getJournalBreadcrumbs(project, t, libraryDisabled),
+    [project, t, libraryDisabled]
   );
 
   const journalBreadcrumbs = project?.attributes?.isJournalIssue
