@@ -1,11 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  respond,
-  marker,
-  buttonUnstyled,
-  utilityPrimary,
-  blockLabelRound
-} from "theme/styles/mixins";
+import { respond, buttonUnstyled, utilityPrimary } from "theme/styles/mixins";
 import { Link as LinkComponent } from "react-router-dom";
 import Collapse from "global/components/Collapse";
 
@@ -56,6 +50,7 @@ export const Image = styled.figure`
 
 export const TextCol = styled.div`
   width: 100%;
+  color: var(--color-neutral-text-extra-dark);
 `;
 
 export const TextTop = styled.div`
@@ -69,7 +64,6 @@ export const TextTop = styled.div`
 export const TextTopLeft = styled.div`
   flex-grow: 1;
   padding-inline-end: 20px;
-  margin-block-end: 16px;
 `;
 
 export const TextTopRight = styled.div`
@@ -86,7 +80,7 @@ export const Parent = styled.div`
   font-size: 18px;
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-neutral-text-dark);
+  color: var(--color-neutral-ui-light);
 
   a,
   a:visited {
@@ -137,13 +131,17 @@ export const ToggleWrapper = styled.div`
 `;
 
 export const Description = styled.p`
-  margin-bottom: 16px;
+  margin-block-end: 16px;
   line-height: 23px;
   font-family: var(--font-family-copy);
 `;
 
 export const Meta = styled.p`
   font-style: italic;
+`;
+
+export const ExcerptsWrapper = styled.div`
+  padding-block-start: 10px;
 `;
 
 export const Excerpt = styled.blockquote`
