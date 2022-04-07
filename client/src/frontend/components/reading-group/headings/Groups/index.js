@@ -39,13 +39,13 @@ function GroupsHeading({ currentUser }) {
                 layout="flex"
                 padLinks
               />
-              <Styled.NavButton
+              <Styled.CreateButton
                 to={lh.link("frontendMyReadingGroupsNew")}
                 className="button-tertiary"
                 activeClassName="button-tertiary--active"
               >
                 {t("navigation.reading_group.create")}
-              </Styled.NavButton>
+              </Styled.CreateButton>
             </>
           )}
         </Styled.Flex>
