@@ -17,7 +17,8 @@ class TextNode extends Component {
     scrollToView: PropTypes.bool,
     scrollKey: PropTypes.string,
     scrollAnnotation: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
+    hasInteractiveAncestor: PropTypes.bool
   };
 
   componentDidMount() {
@@ -196,8 +197,9 @@ class TextNode extends Component {
       const removableHighlightId = removableHighlight
         ? removableHighlight.id
         : "";
+      const isInteractive = !!textAnnotationIds.length || removableHighlight;
       const interactiveAttributes =
-        !!textAnnotationIds.length || removableHighlight
+        isInteractive && !this.props.hasInteractiveAncestor
           ? {
               tabIndex: 0,
               role: "button",
