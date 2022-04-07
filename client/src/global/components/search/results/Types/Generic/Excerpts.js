@@ -22,7 +22,7 @@ function GenericExcerpts({ excerpts, joinHighlightedFragments }) {
 
   return excerpts.length ? (
     <>
-      <div ref={scrollTarget}>
+      <Styled.ExcerptsWrapper ref={scrollTarget}>
         {visibleExcerpts.map(excerpt => (
           <Styled.Excerpt key={excerpt.nodeUuid}>
             <Link
@@ -33,7 +33,7 @@ function GenericExcerpts({ excerpts, joinHighlightedFragments }) {
             />
           </Styled.Excerpt>
         ))}
-      </div>
+      </Styled.ExcerptsWrapper>
       {!!expandedExcerpts?.length && (
         <>
           <Collapse.Content>
