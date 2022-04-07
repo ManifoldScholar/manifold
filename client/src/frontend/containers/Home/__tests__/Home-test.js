@@ -1,4 +1,4 @@
-import { HomeContainer } from "../";
+import HomeContainer from "../";
 
 describe("frontend/containers/Home/Home", () => {
   def("projects", () => collectionFactory("project"));
@@ -9,13 +9,11 @@ describe("frontend/containers/Home/Home", () => {
   );
   def("root", () => (
     <HomeContainer
-      authentication={$authentication}
       projects={$projects}
-      fetchData={jest.fn()}
     />
   ));
 
   it("matches the snapshot", () => {
-    expect(shallow($root)).toMatchSnapshot();
+    expect(render($withApp($root))).toMatchSnapshot();
   });
 });
