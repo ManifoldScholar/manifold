@@ -89,7 +89,7 @@ export default class AnnotatableCaptureClick extends Component {
       annotationIds,
       link
     };
-    this.props.updateActiveAnnotation(annotationIds, event, eventInfo);
+    this.props.updateActiveAnnotation(annotationIds[0], event, eventInfo);
   }
 
   elementAnnotationIds(el, type = "textAnnotationIds") {
