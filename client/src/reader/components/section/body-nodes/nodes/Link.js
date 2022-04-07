@@ -39,19 +39,31 @@ class LinkNode extends Component {
     return adjustedAttributes;
   }
 
+  renderChildren() {
+    return React.Children.map(this.props.children, child => {
+      if (React.isValidElement(child)) {
+        return React.cloneElement(child, {
+          hasInteractiveAncestor: true
+        });
+      }
+    });
+  }
+
   render() {
     if (!this.hasUri() || this.isAbsoluteUri()) {
-      return React.createElement(
-        this.props.tag,
-        { ...this.props.attributes, target: "_blank" },
-        this.props.children
+      const Tag = this.props.tag;
+      return (
+        <Tag
+          {...this.props.attributes}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {this.renderChildren()}
+        </Tag>
       );
     }
-    return React.createElement(
-      Link,
-      this.adjustedAttributes(),
-      this.props.children
-    );
+
+    return <Link {...this.adjustedAttributes()}>{this.renderChildren()}</Link>;
   }
 }
 
