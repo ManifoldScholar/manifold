@@ -3,7 +3,8 @@ import {
   respond,
   marker,
   buttonUnstyled,
-  utilityPrimary
+  utilityPrimary,
+  blockLabelRound
 } from "theme/styles/mixins";
 import { Link as LinkComponent } from "react-router-dom";
 import Collapse from "global/components/Collapse";
@@ -77,6 +78,7 @@ export const TextTopRight = styled.div`
   align-self: flex-start;
   margin-block-start: 2px;
   text-align: right;
+  gap: 12px;
 `;
 
 export const Parent = styled.div`
@@ -114,11 +116,23 @@ export const Attribution = styled.div`
 `;
 
 export const Label = styled.div`
-  ${marker}
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  hyphens: none;
+  color: var(--color-neutral-text-extra-dark);
+  background-color: var(--color-base-neutral10);
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 3px;
 `;
 
 export const ToggleWrapper = styled.div`
-  margin-inline-start: 10px;
   transform: translateY(-1px);
 `;
 
