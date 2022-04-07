@@ -1,13 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import * as Styled from "./styles";
 
 function ContentSkeleton({ nested, style }) {
-  const className = classNames({
-    "collectable-placeholder-content": true,
-    "collectable-placeholder-content--nested": nested
-  });
-  return <div className={className} style={style} />;
+  return <Styled.Skeleton $nested={nested} style={style} />;
 }
 
 ContentSkeleton.displayName = "ReadingGroup.Collecting.ContentSkeleton";
