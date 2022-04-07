@@ -12,7 +12,7 @@ export default function SiteNav({
   returnUrl,
   entityTitle,
   toggleSignInUpOverlay,
-  moreLink = "http://manifold.umn.edu/about/"
+  moreLink = "https://manifoldapp.org/"
 }) {
   const context = useContext(FrontendModeContext);
   const menu = useMenuState();

@@ -277,7 +277,7 @@ class Header extends Component {
               }
               hidePanel={this.props.commonActions.hideReaderReturnPanel}
               // TODO: More link (and eventually, the link text) should be pulled from settings
-              moreLink="http://manifold.umn.edu/about/"
+              moreLink="https://manifoldapp.org/"
             />
           </div>
 
