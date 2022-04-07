@@ -26,6 +26,5 @@ export default function HomeFeatureContainer({ authentication }) {
 }
 
 HomeFeatureContainer.propTypes = {
-  authentication: PropTypes.object,
-  commonActions: PropTypes.object
+  authentication: PropTypes.object
 };
