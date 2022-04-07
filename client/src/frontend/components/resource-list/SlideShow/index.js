@@ -9,9 +9,10 @@ import includes from "lodash/includes";
 import ResourceSlide from "frontend/components/resource-slide";
 import { resourceCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import DirectionalButton from "./SlideShow/DirectionalButton";
+import DirectionalButton from "./DirectionalButton";
 import capitalize from "lodash/capitalize";
 import { withTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 const { request } = entityStoreActions;
 
@@ -223,7 +224,7 @@ class ResourceSlideshow extends PureComponent {
     const t = this.props.t;
 
     return (
-      <div className="resource-slideshow">
+      <Styled.SlideShow>
         {/*
           Note that .slide may be abstracted to a
           listed format to support multiple, sliding images
@@ -241,7 +242,7 @@ class ResourceSlideshow extends PureComponent {
               </ReactTransitionGroup>
             </div>
           </Swipeable>
-          <div className="resource-slideshow__footer">
+          <Styled.Footer>
             {this.isLoaded(position) ? (
               <ResourceSlide.Caption
                 resource={collectionResource}
@@ -253,10 +254,10 @@ class ResourceSlideshow extends PureComponent {
               <ResourceSlide.LoadingCaption />
             )}
             {collectionResourcesCount > 0 && (
-              <div className="resource-slideshow__pagination">
-                <span className="resource-slideshow__ordinal">
+              <Styled.Pagination>
+                <Styled.Ordinal>
                   {position} / {totalCount}
-                </span>
+                </Styled.Ordinal>
                 <div>
                   <DirectionalButton
                     onClick={this.handleSlidePrev}
@@ -273,11 +274,11 @@ class ResourceSlideshow extends PureComponent {
                     screenReaderText={t("pagination.next_slide")}
                   />
                 </div>
-              </div>
+              </Styled.Pagination>
             )}
-          </div>
+          </Styled.Footer>
         </div>
-      </div>
+      </Styled.SlideShow>
     );
   }
 }
