@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
-import Switch from "global/components/form/Switch";
 import ActionBox from "frontend/components/reading-group/ActionBox";
 import * as Styled from "./styles";
 
@@ -32,11 +31,10 @@ function HeadingManageGroup({ readingGroup, history, location }) {
       actions={
         <Styled.ManageGroupContainer>
           <div aria-hidden>
-            <Switch
+            <Styled.EditToggle
               label={t("forms.manage_group.edit_homepage")}
               set={handleSwitchChange}
               value={inEditMode}
-              className="group-homepage-mode-toggle"
             />
           </div>
           <Link

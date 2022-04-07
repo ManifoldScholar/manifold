@@ -21,7 +21,7 @@ function GroupHeading({ readingGroup, history, location }) {
           <Styled.Flex>
             <Title title={groupName} />
             <Collapse.Toggle
-              as={Styled.Toggle}
+              as={Styled.DetailsToggle}
               className={`button-tertiary`}
               activeClassName="button-tertiary--active"
             >

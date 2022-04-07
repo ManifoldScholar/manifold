@@ -25,14 +25,14 @@ function ReadingGroupHomepageEditContainer({
         readingGroup.id
       )}
     >
-      <div className="group-homepage-editor">
-        <h2 className="group-homepage-editor__heading">
+      <Styled.EditContainer>
+        <Styled.Heading>
           {t("pages.frontend.reading_group.homepage_edit_header")}
-        </h2>
-        <p className="group-homepage-editor__instructions">
+        </Styled.Heading>
+        <Styled.Instructions>
           {t("pages.frontend.reading_group.homepage_edit_instructions")}
-        </p>
-        <div className="group-homepage-editor__actions">
+        </Styled.Instructions>
+        <Styled.Actions>
           <ActionBox
             title={t("pages.frontend.reading_group.search_title")}
             instructions={t("pages.frontend.reading_group.search_instructions")}
@@ -42,16 +42,16 @@ function ReadingGroupHomepageEditContainer({
               </Styled.SearchButton>
             }
           />
-        </div>
-        <div className="group-homepage-editor__body">
+        </Styled.Actions>
+        <Styled.Body>
           <CollectionEditor
             readingGroup={readingGroup}
             categories={categories}
             responses={responses}
             refresh={refresh}
           />
-        </div>
-      </div>
+        </Styled.Body>
+      </Styled.EditContainer>
     </Authorize>
   );
 }

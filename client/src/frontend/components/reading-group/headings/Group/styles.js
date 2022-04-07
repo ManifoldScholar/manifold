@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
+import { utilityPrimary } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
+import Switch from "global/components/form/Switch";
 
 const textGap = "20px";
 const containerGap = "30px";
@@ -38,7 +40,20 @@ export const ManageGroupContainer = styled(Flex)`
   justify-content: flex-start;
 `;
 
-export const Toggle = styled.button`
+export const EditToggle = styled(Switch)`
+  label {
+    ${utilityPrimary};
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+
+    .toggle-indicator {
+      margin-inline-start: 1em;
+    }
+  }
+`;
+
+export const DetailsToggle = styled.button`
   &:not(:first-child) {
     margin-inline-start: 10px;
   }

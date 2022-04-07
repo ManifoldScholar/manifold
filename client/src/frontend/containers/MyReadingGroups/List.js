@@ -17,6 +17,7 @@ import {
   useSetLocation,
   useCurrentUser
 } from "hooks";
+import * as Styled from "./styles";
 
 const DEFAULT_SORT_ORDER = "";
 
@@ -64,7 +65,7 @@ function MyReadingGroupsListContainer({ route }) {
     <>
       <HeadContent title={t("pages.frontend.my_groups")} appendDefaultTitle />
       <section>
-        <div className="container groups-page-container">
+        <Styled.Container>
           <GroupsHeading currentUser={currentUser} />
           {!showPlaceholder && (
             <GroupsTable
@@ -80,7 +81,7 @@ function MyReadingGroupsListContainer({ route }) {
           )}
           {showPlaceholder && <EntityCollectionPlaceholder.ReadingGroups />}
           <JoinBox onJoin={() => setRGJoins(prev => prev + 1)} />
-        </div>
+        </Styled.Container>
       </section>
       {childRoutes(route, childRouteProps)}
     </>
