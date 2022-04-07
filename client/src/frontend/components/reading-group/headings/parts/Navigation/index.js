@@ -1,36 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
-import { NavLink } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
+import { ClassNames } from "@emotion/react";
+import * as Styled from "./styles";
 
 function ChildNavigation({ ariaLabel, links, layout = "grid", padLinks }) {
   return (
-    <nav
+    <Styled.ChildNav
       aria-label={ariaLabel}
-      className={classNames({
-        "group-child-nav": true,
-        [`group-child-nav--count-${links.length}`]: true,
-        [`group-child-nav--layout-${layout}`]: true
-      })}
+      $layout={layout}
+      $count={links.length}
     >
       {links.map(({ to, exact, isActive, text, icon }) => (
-        <NavLink
-          key={text}
-          to={to}
-          exact={exact}
-          isActive={isActive}
-          className={classNames({
-            "group-child-nav__link": true,
-            "group-child-nav__link--padded": padLinks
-          })}
-          activeClassName="group-child-nav__link--active"
-        >
-          {icon && <IconComposer icon={icon} size="default" />}
-          <span className="group-child-nav__link-text">{text}</span>
-        </NavLink>
+        <ClassNames key={text}>
+          {({ css }) => (
+            <Styled.Link
+              to={to}
+              exact={exact}
+              isActive={isActive}
+              $padded={padLinks}
+              activeClassName={css(
+                `--box-bg-color: var(--color-base-neutral10); color: var(--strong-color);`
+              )}
+            >
+              {icon && <IconComposer icon={icon} size="default" />}
+              <Styled.LinkText>{text}</Styled.LinkText>
+            </Styled.Link>
+          )}
+        </ClassNames>
       ))}
-    </nav>
+    </Styled.ChildNav>
   );
 }
 

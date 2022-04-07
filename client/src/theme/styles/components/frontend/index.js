@@ -1,5 +1,4 @@
 import collecting from "./collecting";
-import groups from "./groups";
 import layout from "./layout";
 import loginPage from "./loginPage";
 import page from "./page";
@@ -11,7 +10,6 @@ import text from "./text";
 
 export default `
   ${collecting}
-  ${groups}
   ${layout}
   ${page}
   ${project}
