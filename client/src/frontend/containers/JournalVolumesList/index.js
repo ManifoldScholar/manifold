@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useFetch, usePaginationState } from "hooks";
+import { useFetch, usePaginationState, useFromStore } from "hooks";
 import { journalVolumesAPI } from "api";
 import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import EntityMasthead from "frontend/components/composed/EntityMasthead";
@@ -18,15 +18,13 @@ export default function JournalVolumesList({ journal }) {
   });
 
   const { t } = useTranslation();
+  const settings = useFromStore("settings", "select");
+  const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 
   const { titlePlaintext, slug } = journal?.attributes ?? {};
 
-  const breadcrumbs = useMemo(
-    () => [
-      {
-        to: lh.link("frontendJournalsList"),
-        label: t("navigation.breadcrumbs.all_journals")
-      },
+  const breadcrumbs = useMemo(() => {
+    const nestedCrumbs = [
       {
         to: lh.link("frontendJournalDetail", slug),
         label: titlePlaintext
@@ -35,9 +33,17 @@ export default function JournalVolumesList({ journal }) {
         to: lh.link("frontendJournalAllVolumes", slug),
         label: t("glossary.volume_other")
       }
-    ],
-    [slug, titlePlaintext, t]
-  );
+    ];
+    return libraryDisabled
+      ? nestedCrumbs
+      : [
+          {
+            to: lh.link("frontendJournalsList"),
+            label: t("navigation.breadcrumbs.all_journals")
+          },
+          ...nestedCrumbs
+        ];
+  }, [slug, titlePlaintext, t, libraryDisabled]);
 
   if (!journal || !volumes || !meta) return null;
 

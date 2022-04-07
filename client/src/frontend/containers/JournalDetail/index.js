@@ -8,7 +8,7 @@ import EntityCollection from "frontend/components/composed/EntityCollection";
 import { FooterLink } from "frontend/components/composed/EntityCollection/parts";
 import Journal from "frontend/components/journal";
 import { journalVolumesAPI, journalIssuesAPI } from "api";
-import { useFetch, usePaginationState } from "hooks";
+import { useFetch, usePaginationState, useFromStore } from "hooks";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
@@ -32,21 +32,24 @@ function JournalDetailContainer({ journal }) {
   });
 
   const { t } = useTranslation();
+  const settings = useFromStore("settings", "select");
+  const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 
   const { titlePlaintext, slug } = journal?.attributes || {};
-  const breadcrumbs = useMemo(
-    () => [
-      {
-        to: lh.link("frontendJournalsList"),
-        label: t("navigation.breadcrumbs.all_journals")
-      },
-      {
-        to: lh.link("frontendJournalDetail", slug),
-        label: titlePlaintext
-      }
-    ],
-    [slug, titlePlaintext, t]
-  );
+  const breadcrumbs = useMemo(() => {
+    return libraryDisabled
+      ? null
+      : [
+          {
+            to: lh.link("frontendJournalsList"),
+            label: t("navigation.breadcrumbs.all_journals")
+          },
+          {
+            to: lh.link("frontendJournalDetail", slug),
+            label: titlePlaintext
+          }
+        ];
+  }, [slug, titlePlaintext, t, libraryDisabled]);
 
   if (!journal) return null;
 
