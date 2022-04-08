@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import TagList from "./TagList";
+import TagList from "../TagList";
 import filesize from "filesize";
 import pickBy from "lodash/pickBy";
 import isNull from "lodash/isNull";
 import IconComputed from "global/components/icon-computed";
 import Meta from "global/components/meta";
+import * as Styled from "./styles";
 
 export default class ResourceMeta extends Component {
   static displayName = "Resource.Meta";
@@ -14,7 +15,8 @@ export default class ResourceMeta extends Component {
     resource: PropTypes.object,
     layout: PropTypes.string,
     showIcon: PropTypes.bool,
-    showTags: PropTypes.bool
+    showTags: PropTypes.bool,
+    isMobile: PropTypes.bool
   };
 
   static defaultProps = {
@@ -60,11 +62,11 @@ export default class ResourceMeta extends Component {
     );
 
     return (
-      <section className="resource-meta">
+      <Styled.Meta $isMobile={this.props.isMobile}>
         {this.props.showIcon ? (
-          <figure className="resource-type" aria-hidden="true">
+          <Styled.ResourceIcon aria-hidden="true">
             <IconComputed.Resource icon={attr.kind} size={48} />
-          </figure>
+          </Styled.ResourceIcon>
         ) : null}
 
         <Meta.List
@@ -77,7 +79,7 @@ export default class ResourceMeta extends Component {
         {this.props.showTags ? (
           <TagList resource={this.props.resource} />
         ) : null}
-      </section>
+      </Styled.Meta>
     );
   }
 }
