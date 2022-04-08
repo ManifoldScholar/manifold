@@ -6,13 +6,15 @@ import truncate from "lodash/truncate";
 import EntityRow from "./Row";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import Utility from "global/components/utility";
+import { withTranslation } from "react-i18next";
 
-export default class FeatureRow extends PureComponent {
+class FeatureRow extends PureComponent {
   static displayName = "EntitiesList.Entity.FeatureRow";
 
   static propTypes = {
     entity: PropTypes.object,
-    onTogglePublish: PropTypes.func.isRequired
+    onTogglePublish: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   onTogglePublish = event => {
@@ -50,13 +52,13 @@ export default class FeatureRow extends PureComponent {
   }
 
   get name() {
-    return truncate(this.header || `Untitled #${this.position}`, {
+    return truncate(this.header || this.props.t("backend.untitled_record", {number: this.position}), {
       length: 60
     });
   }
 
   get label() {
-    if (this.live) return "published";
+    if (this.live) return this.props.t("dates.published");
     return null;
   }
 
@@ -66,7 +68,7 @@ export default class FeatureRow extends PureComponent {
         <button
           className="entity-row__utility-button"
           onClick={this.onTogglePublish}
-          title="Unpublish feature"
+          title={this.props.t("backend.actions.unpublish_feature")}
         >
           <Utility.IconComposer icon="eyeClosed32" size={26} />
         </button>
@@ -76,7 +78,7 @@ export default class FeatureRow extends PureComponent {
       <button
         className="entity-row__utility-button"
         onClick={this.onTogglePublish}
-        title="Publish feature"
+        title={this.props.t("backend.actions.publish_feature")}
       >
         <Utility.IconComposer icon="eyeOpen32" size={26} />
       </button>
@@ -92,7 +94,7 @@ export default class FeatureRow extends PureComponent {
         title={this.name}
         meta={
           <FormattedDate
-            prefix="Added"
+            prefix={this.props.t("utility.dates.added_title_case")}
             format="MMMM, yyyy"
             date={this.createdAt}
           />
@@ -104,3 +106,5 @@ export default class FeatureRow extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(FeatureRow);

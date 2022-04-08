@@ -3,14 +3,16 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
+import { withTranslation } from "react-i18next";
 
-export default class PermissionRow extends PureComponent {
+class PermissionRow extends PureComponent {
   static displayName = "EntitiesList.Entity.PermissionRow";
 
   static propTypes = {
     entity: PropTypes.object,
     active: PropTypes.string,
-    linkName: PropTypes.string.isRequired
+    linkName: PropTypes.string.isRequired,
+    t: PropTypes.func
   };
 
   get permission() {
@@ -43,13 +45,14 @@ export default class PermissionRow extends PureComponent {
   }
 
   roleName(name) {
+    const t = this.props.t;
     switch (name) {
       case "project_editor":
-        return "Project Editor";
+        return t("backend.roles.project_editor");
       case "project_resource_editor":
-        return "Metadata Editor";
+        return t("backend.roles.metadata_editor");
       case "project_author":
-        return "Author";
+        return t("backend.roles.author");
       default:
         return null;
     }
@@ -77,3 +80,5 @@ export default class PermissionRow extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(PermissionRow);

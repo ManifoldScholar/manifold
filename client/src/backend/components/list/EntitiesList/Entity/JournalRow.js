@@ -4,6 +4,7 @@ import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import FormattedDate from "global/components/FormattedDate";
+import { useTranslation } from "react-i18next";
 
 function JournalRow({
   renderWithoutLink,
@@ -25,25 +26,23 @@ function JournalRow({
     subtitleFormatted
   } = attributes;
 
+  const { t } = useTranslation();
+
   const renderFigure = compact
     ? null
     : figure || (
         <EntityThumbnail.Project mode={placeholderMode} entity={journal} />
       );
   const url = renderWithoutLink ? null : lh.link("backendJournal", id);
-  const labels = draft ? ["Draft"] : [];
-  const meta = <FormattedDate prefix="Updated" date={updatedAt} />;
+  const labels = draft ? [t("glossary.draft_title_case_one")] : [];
+  const meta = <FormattedDate prefix={t("utility.dates.updated_title_case")} date={updatedAt} />;
   const subtitle = compact ? null : (
     <span dangerouslySetInnerHTML={{ __html: subtitleFormatted }} />
   );
 
-  const issuesCount = `${journalIssuesCount} ${
-    journalIssuesCount === 1 ? "Issue" : "Issues"
-  }`;
+  const issuesCount = t("glossary.issue_with_count", {count: journalIssuesCount});
 
-  const volumesCount = `${journalVolumesCount} ${
-    journalVolumesCount === 1 ? "Volume" : "Volumes"
-  }`;
+  const volumesCount = t("glossary.volume_with_count", {count: journalVolumesCount});
 
   return (
     <EntityRow

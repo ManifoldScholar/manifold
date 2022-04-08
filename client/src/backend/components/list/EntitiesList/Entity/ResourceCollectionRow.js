@@ -4,8 +4,9 @@ import FormattedDate from "global/components/FormattedDate";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceCollectionRow extends PureComponent {
+class ResourceCollectionRow extends PureComponent {
   static displayName = "EntitiesList.Entity.ResourceCollectionRow";
 
   static propTypes = {
@@ -13,7 +14,8 @@ export default class ResourceCollectionRow extends PureComponent {
     clickable: PropTypes.bool,
     projectId: PropTypes.string,
     active: PropTypes.string,
-    onRowClick: PropTypes.func
+    onRowClick: PropTypes.func,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -54,7 +56,7 @@ export default class ResourceCollectionRow extends PureComponent {
     const {
       collectionResourcesCount: count
     } = this.resourceCollection.attributes;
-    return `${count} ${count === 1 ? "resource" : "resources"}`;
+    return this.props.t("glossary.resource_with_count", {count});
   }
 
   get createdAt() {
@@ -77,7 +79,7 @@ export default class ResourceCollectionRow extends PureComponent {
         meta={
           !this.isInWell && (
             <FormattedDate
-              prefix="Created"
+              prefix={this.props.t("utility.dates.created_title_case")}
               format="PPP"
               date={this.createdAt}
             />
@@ -95,3 +97,5 @@ export default class ResourceCollectionRow extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ResourceCollectionRow);

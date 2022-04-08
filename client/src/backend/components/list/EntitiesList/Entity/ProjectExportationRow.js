@@ -4,10 +4,12 @@ import FormattedDate from "global/components/FormattedDate";
 import EntityRow from "./Row";
 import Utility from "global/components/utility";
 import filesize from "filesize";
+import { withTranslation } from "react-i18next";
 
-export default class ProjectExportationRow extends PureComponent {
+class ProjectExportationRow extends PureComponent {
   static propTypes = {
-    entity: PropTypes.object.isRequired
+    entity: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   onDelete = event => {
@@ -49,13 +51,27 @@ export default class ProjectExportationRow extends PureComponent {
     return this.matchState("failure");
   }
 
+  get translateState() {
+    const t = this.props.t;
+    switch (this.currentState) {
+      case "success":
+        return t("backend.success");
+      case "pending":
+        return t("backend.pending");
+      case "failure":
+        return t("backend.failure");
+      default:
+        return null;
+    }
+  }
+
   get successMessage() {
     let size = "";
     if (this.attributes.packageSize) {
-      size = `Package size: ${filesize(this.attributes.packageSize)}`;
+      size = this.props.t("backend.exporter.project_size", {size: filesize(this.attributes.packageSize)});
     }
 
-    return `Exported project to ${this.exportTargetName}. ${size}`;
+    return this.props.t("backend.exporter.success_message", {target: this.exportTargetName, size: size});
   }
 
   get utility() {
@@ -63,13 +79,13 @@ export default class ProjectExportationRow extends PureComponent {
     if (!url) return null;
     return (
       <>
-        <a className="entity-row__utility-button" href={url} title="Download">
+        <a className="entity-row__utility-button" href={url} title={this.props.t("actions.download")}>
           <Utility.IconComposer icon="arrowDown32" size={26} />
         </a>
         <button
           className="entity-row__utility-button"
           onClick={this.onDelete}
-          title="Delete Project Exportation"
+          title={this.props.t("backend.exporter.delete_export")}
         >
           <Utility.IconComposer icon="delete32" size={26} />
         </button>
@@ -83,11 +99,11 @@ export default class ProjectExportationRow extends PureComponent {
   }
 
   get failureMessage() {
-    return `Failed to export project to ${this.exportTargetName}: ${this.metadataReason}. `;
+    return this.props.t("backend.exporter.failure_message", {target: this.exportTargetName, reason: this.metadataReason});
   }
 
   get pendingMessage() {
-    return `Exporting project to ${this.exportTargetName}. `;
+    return this.props.t("backend.exporter.pending_message", {target: this.exportTargetName, reason: this.metadataReason});
   }
 
   get labelLevel() {
@@ -98,7 +114,7 @@ export default class ProjectExportationRow extends PureComponent {
 
   get label() {
     return {
-      text: this.currentState,
+      text: this.translateState,
       level: this.labelLevel
     };
   }
@@ -131,3 +147,5 @@ export default class ProjectExportationRow extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ProjectExportationRow);

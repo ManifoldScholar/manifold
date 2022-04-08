@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import EntityRow from "./Row";
 import EntityThumbnail from "global/components/entity-thumbnail";
+import { useTranslation } from "react-i18next";
 
 function JournalVolumeRow({
   journal,
@@ -13,13 +14,13 @@ function JournalVolumeRow({
 }) {
   const { id, attributes } = entity;
   const { number, subtitle, journalIssuesCount } = attributes;
-  const issuesLabel = journalIssuesCount === 1 ? "Issue" : "Issues";
+  const { t } = useTranslation();
 
   const additionalProps = {
-    title: `Volume ${number}`,
+    title: t("journals.volume_number", {volNum: number}),
     subtitle,
     active: active === id,
-    count: `${journalIssuesCount} ${issuesLabel}`,
+    count: t("glossary.issue_with_count", {count: journalIssuesCount}),
     figure: <EntityThumbnail.JournalVolume />
   };
 

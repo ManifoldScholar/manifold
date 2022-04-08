@@ -5,8 +5,9 @@ import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import classNames from "classnames";
 import EntityRow from "./Row";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceRow extends PureComponent {
+class ResourceRow extends PureComponent {
   static displayName = "EntitiesList.Entity.ResourceRow";
 
   static propTypes = {
@@ -15,7 +16,8 @@ export default class ResourceRow extends PureComponent {
     showSwitch: PropTypes.bool,
     onSwitchChange: PropTypes.func,
     switchValue: PropTypes.func,
-    onRowClick: PropTypes.func
+    onRowClick: PropTypes.func,
+    t: PropTypes.func
   };
 
   get onRowClick() {
@@ -86,11 +88,11 @@ export default class ResourceRow extends PureComponent {
           >
             {this.switchValue(this.resource) ? (
               <span className="screen-reader-text">
-                {`Remove Resource from Collection`}
+                {this.props.t("backend.actions.remove_resource")}
               </span>
             ) : (
               <span className="screen-reader-text">
-                {`Add Resource to Collection`}
+                {this.props.t("backend.actions.add_resource")}
               </span>
             )}
           </div>
@@ -108,7 +110,7 @@ export default class ResourceRow extends PureComponent {
         title={this.title}
         label={this.kind}
         meta={
-          <FormattedDate prefix="Created" format="PPP" date={this.createdAt} />
+          <FormattedDate prefix={this.props.t("utility.dates.created_title_case")} format="PPP" date={this.createdAt} />
         }
         figure={<EntityThumbnail.Resource entity={this.resource} />}
         utility={this.utility}
@@ -116,3 +118,5 @@ export default class ResourceRow extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ResourceRow);
