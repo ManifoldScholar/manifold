@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
+import * as Styled from "./styles";
 
 class ResourceTagList extends Component {
   static displayName = "Resource.TagList";
@@ -10,7 +10,8 @@ class ResourceTagList extends Component {
   static propTypes = {
     resource: PropTypes.object,
     disabledLinks: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
+    isCard: PropTypes.bool
   };
 
   static defaultProps = {
@@ -43,15 +44,15 @@ class ResourceTagList extends Component {
       tag: tag.toLowerCase()
     });
     return (
-      <li key={`${tag}-${index}`}>
-        <Link
+      <Styled.Tag key={`${tag}-${index}`}>
+        <Styled.Link
           onClick={this.stopPropagation}
           className={this.props.disabledLinks ? "disabled" : null}
           to={url}
         >
           {tag}
-        </Link>
-      </li>
+        </Styled.Link>
+      </Styled.Tag>
     );
   }
 
@@ -59,17 +60,17 @@ class ResourceTagList extends Component {
     if (!this.props.resource) return null;
     if (!this.hasTags(this.props.resource)) return null;
     return (
-      <nav
-        className="resource-tag-list"
+      <Styled.Container
         onMouseOver={this.stopPropagation}
         onClick={this.stopPropagation}
         role="presentation"
+        $isCard={this.props.isCard}
       >
         <span className="screen-reader-text">
           {this.props.t("pages.subheaders.tags_list")}
         </span>
-        <ul>{this.mapTagsToLinks(this.props.resource)}</ul>
-      </nav>
+        <Styled.List>{this.mapTagsToLinks(this.props.resource)}</Styled.List>
+      </Styled.Container>
     );
   }
 }

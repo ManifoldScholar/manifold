@@ -10,12 +10,6 @@ export const Card = styled.article`
   --Thumbnail-Icon-background-color: transparent;
 
   display: flex;
-
-  .resource-tag-list {
-    padding-top: 18px;
-
-    ${respond(`padding-top: 11px;`, 75)}
-  }
 `;
 
 export const Preview = styled.div`

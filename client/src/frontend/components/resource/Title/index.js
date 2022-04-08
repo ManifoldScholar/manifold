@@ -4,6 +4,7 @@ import { withTranslation } from "react-i18next";
 import FormattedDate from "global/components/FormattedDate";
 import IconComputed from "global/components/icon-computed";
 import Collecting from "frontend/components/collecting";
+import * as Styled from "./styles";
 
 class ResourceTitle extends Component {
   static displayName = "Resource.Title";
@@ -24,30 +25,29 @@ class ResourceTitle extends Component {
     const attr = this.props.resource.attributes;
 
     return (
-      <div className="resource-title">
+      <Styled.Container>
         {this.props.showIcon ? (
-          <figure className={`resource-title__icon ${attr.kind}`}>
+          <Styled.Icon className={attr.kind}>
             <IconComputed.Resource icon={attr.kind} size={60} />
-          </figure>
+          </Styled.Icon>
         ) : null}
         <div>
-          <div className="resource-title__title-and-toggle">
-            <h1
-              className="resource-title__title"
+          <Styled.TitleAndToggle>
+            <Styled.Title
               dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
             />
-            <span className="resource-title__collecting-toggle">
+            <Styled.ToggleWrapper>
               <Collecting.Toggle collectable={this.props.resource} />
-            </span>
-          </div>
+            </Styled.ToggleWrapper>
+          </Styled.TitleAndToggle>
           {this.props.showDate ? (
-            <span className="resource-date">
+            <Styled.DateWrapper>
               {this.props.t("dates.resource_added")}{" "}
               <FormattedDate format="MMMM, yyyy" date={attr.createdAt} />
-            </span>
+            </Styled.DateWrapper>
           ) : null}
         </div>
-      </div>
+      </Styled.Container>
     );
   }
 }
