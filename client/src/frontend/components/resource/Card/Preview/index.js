@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Resourceish from "frontend/components/resourceish";
 import ResourcePreview from "frontend/components/resource-preview";
 import Text from "./Text";
+import * as Styled from "./styles";
 
 function Preview({ resource, detailUrl }) {
   const attr = resource.attributes;
@@ -11,12 +12,12 @@ function Preview({ resource, detailUrl }) {
   const downloadable = attr.downloadable;
 
   const PreviewInner = () => (
-    <div className="resource-card__preview-inner">
+    <Styled.Inner>
       <Resourceish.Thumbnail resourceish={resource} />
-      <div className="resource-card__preview-text">
+      <Styled.TextWrapper>
         <Text resource={resource} />
-      </div>
-    </div>
+      </Styled.TextWrapper>
+    </Styled.Inner>
   );
 
   if (previewable)
@@ -28,31 +29,26 @@ function Preview({ resource, detailUrl }) {
 
   if (linkable)
     return (
-      <a
+      <Styled.Link
         href={attr.externalUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="resource-card__preview-link"
       >
         <PreviewInner />
-      </a>
+      </Styled.Link>
     );
 
   if (downloadable)
     return (
-      <a
-        href={attr.attachmentStyles.original}
-        download={attr.slug}
-        className="resource-card__preview-link"
-      >
+      <Styled.Link href={attr.attachmentStyles.original} download={attr.slug}>
         <PreviewInner />
-      </a>
+      </Styled.Link>
     );
 
   return (
-    <a href={detailUrl} tabIndex={-1} className="resource-card__preview-link">
+    <Styled.Link href={detailUrl} tabIndex={-1}>
       <PreviewInner />
-    </a>
+    </Styled.Link>
   );
 }
 

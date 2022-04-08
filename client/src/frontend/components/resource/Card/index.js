@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import Info from "./Info";
 import Preview from "./Preview";
+import * as Styled from "./styles";
 
 function ResourceCard({
   resource,
@@ -29,16 +30,16 @@ function ResourceCard({
   }
 
   return (
-    <article className="resource-card">
-      <div className="resource-card__preview">
+    <Styled.Card>
+      <Styled.Preview>
         <Preview resource={resource} detailUrl={getDetailUrl()} />
-      </div>
+      </Styled.Preview>
       <Info
         resource={resource}
         detailUrl={getDetailUrl()}
         itemHeadingLevel={itemHeadingLevel}
       />
-    </article>
+    </Styled.Card>
   );
 }
 

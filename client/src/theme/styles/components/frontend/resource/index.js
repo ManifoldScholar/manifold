@@ -1,4 +1,3 @@
-import card from "./card";
 import detail from "./detail";
 import hero from "./hero";
 import meta from "./meta";
@@ -19,5 +18,4 @@ ${meta}
 ${preview}
 ${hero}
 ${detail}
-${card}
 `;

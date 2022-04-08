@@ -1,35 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
-import IconComposer from "global/components/utility/IconComposer";
 import TagList from "../TagList";
+import * as Styled from "./styles";
 
 function Info({ resource, detailUrl, itemHeadingLevel = 4 }) {
   const attr = resource.attributes;
-  const TitleTag = `h${itemHeadingLevel}`;
+  const titleTag = `h${itemHeadingLevel}`;
 
   return (
-    <a href={detailUrl} className="resource-card__info">
+    <Styled.InfoLink href={detailUrl}>
       <div>
         <header>
-          <TitleTag
+          <Styled.Title
+            as={titleTag}
             dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
-            className="resource-card__title"
           />
         </header>
-        <span className="resource-card__date">
+        <Styled.Date>
           Uploaded <FormattedDate format="MMMM, yyyy" date={attr.createdAt} />
-        </span>
-        <div className="resource-card__arrow-link">
-          <IconComposer
-            icon="arrowRight16"
-            size={20}
-            className="resource-card__arrow-link-icon"
-          />
-        </div>
+        </Styled.Date>
+        <Styled.ArrowWrapper>
+          <Styled.ArrowIcon icon="arrowRight16" size={20} />
+        </Styled.ArrowWrapper>
       </div>
       <TagList resource={resource} />
-    </a>
+    </Styled.InfoLink>
   );
 }
 
