@@ -10,8 +10,9 @@ import LabelSet from "./LabelSet";
 import { Link } from "react-router-dom";
 import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
+import { withTranslation } from "react-i18next";
 
-export default class EntitiesListRow extends PureComponent {
+class EntitiesListRow extends PureComponent {
   static displayName = "List.EntitiesList.Entity.Row";
 
   static propTypes = {
@@ -38,7 +39,8 @@ export default class EntitiesListRow extends PureComponent {
     dragHandleProps: PropTypes.object,
     draggableProps: PropTypes.object,
     isDragging: PropTypes.bool,
-    innerRef: PropTypes.func
+    innerRef: PropTypes.func,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -333,7 +335,7 @@ export default class EntitiesListRow extends PureComponent {
                         id={`${id}-describedby`}
                         className="screen-reader-text"
                       >
-                        {`View ${this.titlePlainText}`}
+                        {this.props.t("backend.view_item", {item: this.titlePlainText})}
                       </span>
                     </h3>
                   )}
@@ -367,3 +369,5 @@ export default class EntitiesListRow extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(EntitiesListRow);

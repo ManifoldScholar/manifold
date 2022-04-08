@@ -26,7 +26,7 @@ export default class UserRow extends PureComponent {
       <>
         {this.isCurrentUser(this.id)}
         {this.attributes.role ? this.attributes.role.replace(/_/g, " ") : null}
-      </>
+      </> // TODO: Translate roles
     );
   }
 

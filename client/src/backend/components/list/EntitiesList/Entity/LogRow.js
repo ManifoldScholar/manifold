@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import humps from "humps";
 import EntityRow from "./Row";
+import { Trans, withTranslation } from "react-i18next";
 
-export default class LogRow extends PureComponent {
+class LogRow extends PureComponent {
   static displayName = "EntitiesList.Entity.LogRow";
 
   static propTypes = {
-    entity: PropTypes.object
+    entity: PropTypes.object,
+    t: PropTypes.func
   };
 
   get deleted() {
@@ -99,11 +101,16 @@ export default class LogRow extends PureComponent {
 
   get projectLogSubtitle() {
     return (
-      <span>
-        {this.userLink}
-        {` updated this project `}
+      <Trans
+      i18nKey="backend.log.subtitle_project"
+      components={[
+        <Link
+        className="entity-row__link--inverted"
+        to={lh.link("backendRecordsUser", this.actorId)}
+        />,
         <FormattedDate prefix="on" date={this.createdAt} />
-      </span>
+      ]}
+      values={{user: this.actorName }} />
     );
   }
 
@@ -150,3 +157,5 @@ export default class LogRow extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(LogRow);

@@ -5,8 +5,9 @@ import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import FormattedDate from "global/components/FormattedDate";
 import has from "lodash/has";
+import { withTranslation } from "react-i18next";
 
-export default class ProjectRow extends PureComponent {
+class ProjectRow extends PureComponent {
   static displayName = "EntitiesList.Entity.ProjectRow";
 
   static propTypes = {
@@ -17,7 +18,8 @@ export default class ProjectRow extends PureComponent {
     compact: PropTypes.bool,
     renderWithoutLink: PropTypes.bool,
     dragHandleProps: PropTypes.object,
-    draggableProps: PropTypes.object
+    draggableProps: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -73,16 +75,17 @@ export default class ProjectRow extends PureComponent {
   }
 
   get label() {
+    const t = this.props.t;
     const labels = [];
-    if (this.attr.isJournalIssue) labels.push("Issue");
-    if (this.attr.draft) labels.push("Draft");
-    if (this.attr.featured) labels.push("Featured");
+    if (this.attr.isJournalIssue) labels.push(t("glossary.issue_truncated_title_case_one"));
+    if (this.attr.draft) labels.push(t("glossary.draft_title_case_one"));
+    if (this.attr.featured) labels.push(t("glossary.featured_title_case"));
     return labels;
   }
 
   get meta() {
     if (!this.compact) return this.creatorNames;
-    return <FormattedDate prefix="Updated" date={this.attr.updatedAt} />;
+    return <FormattedDate prefix={this.props.t("utility.dates.updated_title_case")} date={this.attr.updatedAt} />;
   }
 
   get subtitle() {
@@ -115,3 +118,5 @@ export default class ProjectRow extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ProjectRow);

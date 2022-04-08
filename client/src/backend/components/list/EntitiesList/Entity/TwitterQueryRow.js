@@ -2,13 +2,15 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import EntityRow from "./Row";
+import { withTranslation } from "react-i18next";
 
-export default class TwitterQueryRow extends PureComponent {
+class TwitterQueryRow extends PureComponent {
   static displayName = "EntitiesList.Entity.TwitterQueryRow";
 
   static propTypes = {
     entity: PropTypes.object,
-    active: PropTypes.string
+    active: PropTypes.string,
+    t: PropTypes.func
   };
 
   get projectId() {
@@ -28,13 +30,13 @@ export default class TwitterQueryRow extends PureComponent {
   }
 
   get label() {
-    return this.entity.attributes.active ? "Active" : "Inactive";
+    return this.entity.attributes.active ? this.props.t("backend.active") : this.props.t("backend.inactive");
   }
 
   get count() {
     const { eventsCount } = this.entity.attributes;
-    if (eventsCount === 0) return "No tweets have been fetched yet.";
-    return `${this.entity.attributes.eventsCount} Tweets fetched`;
+    if (eventsCount === 0) return this.props.t("backend.messages.no_tweets");
+    return this.props.t("backend.messages.tweets_fetched", {count: this.entity.attributes.eventsCount});
   }
 
   get active() {
@@ -60,3 +62,5 @@ export default class TwitterQueryRow extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(TwitterQueryRow);

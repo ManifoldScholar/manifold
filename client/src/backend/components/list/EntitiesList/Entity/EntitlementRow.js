@@ -4,14 +4,16 @@ import { get } from "lodash";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import Utility from "global/components/utility";
 import EntityRow from "./Row";
+import { withTranslation } from "react-i18next";
 
-export default class EntitlementRow extends PureComponent {
+class EntitlementRow extends PureComponent {
   static displayName = "EntitiesList.Entity.EntitlementRow";
 
   static propTypes = {
     entity: PropTypes.object,
     active: PropTypes.string,
-    linkName: PropTypes.string.isRequired
+    linkName: PropTypes.string.isRequired,
+    t: PropTypes.func
   };
 
   get entitlement() {
@@ -53,7 +55,13 @@ export default class EntitlementRow extends PureComponent {
 
   get subtitle() {
     if (this.entitlement.attributes.expiration) {
-      return `Expires ${this.entitlement.attributes.expiration}`;
+      const date = new Date(this.entitlement.attributes.expiration)
+      return this.props.t("backend.entitlements.expires", {
+        val: date,
+        formatParams: {
+          val: { month: "long", day: "numeric", year: "numeric" }
+        }
+      })
     }
     return null;
   }
@@ -63,7 +71,7 @@ export default class EntitlementRow extends PureComponent {
       <button
         className="entity-row__utility-button"
         onClick={this.onDelete}
-        title="Publish feature"
+        title={this.props.t("backend.actions.publish_feature")}
       >
         <Utility.IconComposer icon="delete32" size={26} />
       </button>
@@ -99,3 +107,5 @@ export default class EntitlementRow extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(EntitlementRow);

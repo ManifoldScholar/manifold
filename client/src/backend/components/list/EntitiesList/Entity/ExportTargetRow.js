@@ -2,17 +2,19 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import EntityRow from "./Row";
+import { withTranslation } from "react-i18next";
 
-export default class ExportTargetRow extends PureComponent {
+class ExportTargetRow extends PureComponent {
   static propTypes = {
     entity: PropTypes.object.isRequired,
-    active: PropTypes.string.isRequired
+    active: PropTypes.string.isRequired,
+    t: PropTypes.func
   };
 
   render() {
     const { entity: exportTarget, active } = this.props;
     const { name, strategy } = exportTarget.attributes;
-    const label = strategy.replace("_", " ");
+    const label = this.props.t(`backend.${strategy}`);
 
     return (
       <EntityRow
@@ -25,3 +27,5 @@ export default class ExportTargetRow extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ExportTargetRow);
