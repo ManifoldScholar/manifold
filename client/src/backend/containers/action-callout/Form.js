@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { actionCalloutsAPI, requests } from "api";
 import FormContainer from "global/containers/form";
@@ -21,12 +22,14 @@ export class ActionCalloutForm extends Component {
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     actionCallout: PropTypes.object.isRequired,
-    refreshActionCallouts: PropTypes.func
+    refreshActionCallouts: PropTypes.func,
+    t: PropTypes.func
   };
 
   onDelete = () => {
-    const heading = "Are you sure you want to delete this call-to-action?";
-    const message = "This action cannot be undone.";
+    const t = this.props.t;
+    const heading = t("backend.forms.call-to-action.delete_modal_heading");
+    const message = t("backend.forms.call-to-action.delete_modal_message");
     this.props.confirm(heading, message, () => this.onConfirmedDelete());
   };
 
@@ -60,15 +63,17 @@ export class ActionCalloutForm extends Component {
   }
 
   get drawerTitle() {
-    if (this.actionCallout.id) return "Edit Call-to-Action";
-    return "New Call-to-Action";
+    const t = this.props.t;
+    if (this.actionCallout.id)
+      return t("backend.forms.call-to-action.edit_drawer_title");
+    return t("backend.forms.call-to-action.create_drawer_title");
   }
 
   get buttons() {
     return [
       {
         onClick: this.onDelete,
-        label: "delete",
+        label: this.props.t("actions.delete"),
         icon: "delete32",
         className: "utility-button__icon--notice"
       }
@@ -76,24 +81,44 @@ export class ActionCalloutForm extends Component {
   }
 
   get kindOptions() {
+    const t = this.props.t;
     return [
-      { label: "Link", value: "link" },
-      { label: "Start Reading", value: "read" },
-      { label: "Table of Contents", value: "toc" },
-      { label: "Download", value: "download" }
+      { label: t("glossary.link_title_case_one"), value: "link" },
+      { label: t("actions.read"), value: "read" },
+      { label: t("glossary.table_of_contents_title_case"), value: "toc" },
+      { label: t("actions.download"), value: "download" }
     ];
   }
 
   get visibilityOptions() {
+    const t = this.props.t;
     return [
-      { label: "Always Visible", value: "always" },
-      { label: "Visible Only When Authorized", value: "authorized" },
-      { label: "Visible Only When Unauthorized ", value: "unauthorized" }
+      {
+        label: t("backend.forms.call-to-action.visibility_options.always"),
+        value: "always"
+      },
+      {
+        label: t("backend.forms.call-to-action.visibility_options.authorized"),
+        value: "authorized"
+      },
+      {
+        label: t(
+          "backend.forms.call-to-action.visibility_options.unauthorized"
+        ),
+        value: "unauthorized"
+      }
     ];
   }
 
   get textOptions() {
-    const options = [{ label: "Select Text", value: "" }];
+    const options = [
+      {
+        label: this.props.t(
+          "backend.forms.call-to-action.text_select_placeholder"
+        ),
+        value: ""
+      }
+    ];
     if (!this.calloutable.relationships.texts) return [];
     const texts = this.calloutable.relationships.texts.map(text => {
       return { label: text.attributes.title, value: text };
@@ -135,6 +160,7 @@ export class ActionCalloutForm extends Component {
   };
 
   render() {
+    const t = this.props.t;
     return (
       <>
         <Navigation.DrawerHeader
@@ -154,12 +180,12 @@ export class ActionCalloutForm extends Component {
           {getModelValue => (
             <>
               <Form.TextInput
-                label="Title"
+                label={t("backend.forms.call-to-action.input_labels.title")}
                 name="attributes[title]"
                 focusOnMount
               />
               <Form.Select
-                label="Type"
+                label={t("backend.forms.call-to-action.input_labels.type")}
                 options={this.kindOptions}
                 name="attributes[kind]"
               />
@@ -167,7 +193,9 @@ export class ActionCalloutForm extends Component {
                 getModelValue("attributes[kind]")
               ) && (
                 <Form.Select
-                  label="Visibility"
+                  label={t(
+                    "backend.forms.call-to-action.input_labels.visibility"
+                  )}
                   options={this.visibilityOptions}
                   name="attributes[visibility]"
                 />
@@ -176,29 +204,38 @@ export class ActionCalloutForm extends Component {
                 getModelValue("attributes[kind]")
               ) && (
                 <Form.Select
-                  label="Link to Text"
-                  placeholder="Select Text"
+                  label={t("backend.forms.call-to-action.input_labels.text")}
+                  placeholder={t(
+                    "backend.forms.call-to-action.text_select_placeholder"
+                  )}
                   name="relationships[text]"
                   options={this.textOptions}
                   entityLabelAttribute={"title"}
                 />
               )}
               {this.shouldShowUrlForKind(getModelValue("attributes[kind]")) && (
-                <Form.TextInput label="URL" name="attributes[url]" />
+                <Form.TextInput
+                  label={t("backend.forms.call-to-action.input_labels.url")}
+                  name="attributes[url]"
+                />
               )}
               {this.shouldShowAttachmentForKind(
                 getModelValue("attributes[kind]")
               ) && (
                 <Form.Upload
                   layout="portrait"
-                  label="Download File"
+                  label={t(
+                    "backend.forms.call-to-action.input_labels.download"
+                  )}
                   accepts="files"
                   readFrom="attributes[attachmentStyles][original]"
                   name="attributes[attachment]"
                   remove="attributes[removeAttachment]"
                 />
               )}
-              <Form.Save text="Save" />
+              <Form.Save
+                text={t("backend.forms.call-to-action.input_labels.save")}
+              />
             </>
           )}
         </FormContainer.Form>
@@ -207,4 +244,6 @@ export class ActionCalloutForm extends Component {
   }
 }
 
-export default withConfirmation(connectAndFetch(ActionCalloutForm));
+export default withTranslation()(
+  withConfirmation(connectAndFetch(ActionCalloutForm))
+);
