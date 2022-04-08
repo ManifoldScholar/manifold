@@ -4,7 +4,7 @@ import { Link as LinkComponent } from "react-router-dom";
 import Collapse from "global/components/Collapse";
 
 export const Result = styled.li`
-  padding: 29px 20px 23px;
+  padding: 29px 20px 32px;
   font-family: var(--font-family-copy);
 
   mark {
@@ -55,7 +55,6 @@ export const TextCol = styled.div`
 
 export const TextTop = styled.div`
   display: flex;
-  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
   margin-block-end: 16px;
@@ -80,11 +79,11 @@ export const Parent = styled.div`
   font-size: 18px;
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-neutral-ui-light);
+  color: var(--color-neutral-text-dark);
 
   a,
   a:visited {
-    color: inherit;
+    color: var(--color-netural-text-dark);
   }
 `;
 
@@ -107,6 +106,7 @@ export const Link = styled(LinkComponent)`
 export const Attribution = styled.div`
   font-family: var(--font-family-copy);
   font-style: normal;
+  font-size: 18px;
 `;
 
 export const Label = styled.div`
