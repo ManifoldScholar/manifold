@@ -30,13 +30,17 @@ class TwitterQueryRow extends PureComponent {
   }
 
   get label() {
-    return this.entity.attributes.active ? this.props.t("backend.active") : this.props.t("backend.inactive");
+    return this.entity.attributes.active
+      ? this.props.t("backend.active")
+      : this.props.t("backend.inactive");
   }
 
   get count() {
     const { eventsCount } = this.entity.attributes;
     if (eventsCount === 0) return this.props.t("backend.messages.no_tweets");
-    return this.props.t("backend.messages.tweets_fetched", {count: this.entity.attributes.eventsCount});
+    return this.props.t("backend.messages.tweets_fetched", {
+      count: this.entity.attributes.eventsCount
+    });
   }
 
   get active() {

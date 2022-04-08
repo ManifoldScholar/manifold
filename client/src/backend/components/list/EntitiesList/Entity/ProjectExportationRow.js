@@ -68,10 +68,15 @@ class ProjectExportationRow extends PureComponent {
   get successMessage() {
     let size = "";
     if (this.attributes.packageSize) {
-      size = this.props.t("backend.exporter.project_size", {size: filesize(this.attributes.packageSize)});
+      size = this.props.t("backend.exporter.project_size", {
+        size: filesize(this.attributes.packageSize)
+      });
     }
 
-    return this.props.t("backend.exporter.success_message", {target: this.exportTargetName, size: size});
+    return this.props.t("backend.exporter.success_message", {
+      target: this.exportTargetName,
+      size
+    });
   }
 
   get utility() {
@@ -79,7 +84,11 @@ class ProjectExportationRow extends PureComponent {
     if (!url) return null;
     return (
       <>
-        <a className="entity-row__utility-button" href={url} title={this.props.t("actions.download")}>
+        <a
+          className="entity-row__utility-button"
+          href={url}
+          title={this.props.t("actions.download")}
+        >
           <Utility.IconComposer icon="arrowDown32" size={26} />
         </a>
         <button
@@ -99,11 +108,17 @@ class ProjectExportationRow extends PureComponent {
   }
 
   get failureMessage() {
-    return this.props.t("backend.exporter.failure_message", {target: this.exportTargetName, reason: this.metadataReason});
+    return this.props.t("backend.exporter.failure_message", {
+      target: this.exportTargetName,
+      reason: this.metadataReason
+    });
   }
 
   get pendingMessage() {
-    return this.props.t("backend.exporter.pending_message", {target: this.exportTargetName, reason: this.metadataReason});
+    return this.props.t("backend.exporter.pending_message", {
+      target: this.exportTargetName,
+      reason: this.metadataReason
+    });
   }
 
   get labelLevel() {

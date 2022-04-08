@@ -111,15 +111,22 @@ class Builder extends PureComponent {
                 aria-labelledby={`${id}-header`}
                 aria-describedby={`${id}-instructions`}
               >
-                <SectionLabel label={t("backend.layout.hero_block")} id={`${id}-header`} />
+                <SectionLabel
+                  label={t("backend.layout.hero_block")}
+                  id={`${id}-header`}
+                />
                 <span id={`${id}-instructions`} className="instructions">
-                  {t("backend.layout.hero_block_instructions", {entity: modelLabel})}
+                  {t("backend.layout.hero_block_instructions", {
+                    entity: modelLabel
+                  })}
                 </span>
 
                 {include.includes("projectDescription") && (
                   <Block
                     title={t("backend.layout.description_and_images")}
-                    description={t("backend.layout.description_and_images_description")}
+                    description={t(
+                      "backend.layout.description_and_images_description"
+                    )}
                     onEdit={this.openProjectDescriptionDrawer}
                     ariaControls={`${id}-drawer`}
                     ariaExpanded={
@@ -130,7 +137,9 @@ class Builder extends PureComponent {
                 {include.includes("journalDescription") && (
                   <Block
                     title={t("backend.layout.description_and_images")}
-                    description={t("backend.layout.description_and_images_description")}
+                    description={t(
+                      "backend.layout.description_and_images_description"
+                    )}
                     onEdit={this.openJournalDescriptionDrawer}
                     ariaControls={`${id}-drawer`}
                     ariaExpanded={
@@ -141,7 +150,9 @@ class Builder extends PureComponent {
                 {include.includes("actionCallouts") && (
                   <Block
                     title={t("backend.layout.calls_to_action")}
-                    description={t("backend.layout.calls_to_action_description")}
+                    description={t(
+                      "backend.layout.calls_to_action_description"
+                    )}
                   >
                     {this.props.actionCallouts && (
                       <ActionCallouts

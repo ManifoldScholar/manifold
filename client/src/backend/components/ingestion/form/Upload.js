@@ -68,14 +68,16 @@ class IngestionFormUpload extends PureComponent {
       <span className="instructions">
         <Trans
           i18nKey="backend.forms.ingestion.instructions"
-          components={[ <br />,
-          <a
-            href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/texts#adding-texts"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            #
-          </a>]}
+          components={[
+            <br />,
+            <a
+              href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/texts#adding-texts"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              #
+            </a>
+          ]}
         />
       </span>
     );

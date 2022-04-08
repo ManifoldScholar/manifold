@@ -56,7 +56,7 @@ class ResourceCollectionRow extends PureComponent {
     const {
       collectionResourcesCount: count
     } = this.resourceCollection.attributes;
-    return this.props.t("glossary.resource_with_count", {count});
+    return this.props.t("glossary.resource_with_count", { count });
   }
 
   get createdAt() {

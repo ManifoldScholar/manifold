@@ -2,7 +2,7 @@
 
 exports[`backend/components/category/List/Categories matches the snapshot 1`] = `
 Array [
-  <Category.List.Category
+  <withI18nextTranslation(Category.List.Category)
     callbacks={Object {}}
     category={
       Object {
@@ -2371,7 +2371,7 @@ Array [
       ]
     }
   />,
-  <Category.List.Category
+  <withI18nextTranslation(Category.List.Category)
     callbacks={Object {}}
     category={
       Object {

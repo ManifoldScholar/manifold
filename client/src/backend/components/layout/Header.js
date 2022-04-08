@@ -40,7 +40,9 @@ class LayoutHeader extends Component {
           <div className="library-header library-header--dark">
             <div className="library-header__inner">
               <HeaderLogo as="Link" to={lh.link("backend")}>
-                <span className="screen-reader-text">{this.props.t("navigation.return_home")}</span>
+                <span className="screen-reader-text">
+                  {this.props.t("navigation.return_home")}
+                </span>
                 <PressLogo aria-hidden="true" />
               </HeaderLogo>
               <Navigation.Primary
