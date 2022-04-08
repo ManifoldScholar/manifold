@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
 
 export const List = styled.ul`
   ${listUnstyled}
-  margin: 14px 0;
+  margin: 14px 0 32px;
   border-top: 1px solid var(--color-base-neutral40);
   border-bottom: 1px solid var(--color-base-neutral40);
 `;
