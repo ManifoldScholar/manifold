@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ResourceSlide from "frontend/components/resource-slide";
 import ResourcePlayer from "frontend/components/resource-player";
+import * as Styled from "./styles";
 
 export default class ResourceHero extends Component {
   static displayName = "Resource.Hero";
@@ -69,11 +70,9 @@ export default class ResourceHero extends Component {
 
   render() {
     return (
-      <section className="resource-hero-container">
-        <div className="resource-hero">
-          {this.getFigureByType(this.props.resource)}
-        </div>
-      </section>
+      <Styled.Container>
+        <Styled.Hero>{this.getFigureByType(this.props.resource)}</Styled.Hero>
+      </Styled.Container>
     );
   }
 }

@@ -1,5 +1,4 @@
 import detail from "./detail";
-import hero from "./hero";
 import meta from "./meta";
 import preview from "./preview";
 import slide from "./slide";
@@ -16,6 +15,5 @@ ${tagList}
 ${slide}
 ${meta}
 ${preview}
-${hero}
 ${detail}
 `;
