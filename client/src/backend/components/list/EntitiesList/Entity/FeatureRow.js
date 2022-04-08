@@ -52,9 +52,13 @@ class FeatureRow extends PureComponent {
   }
 
   get name() {
-    return truncate(this.header || this.props.t("backend.untitled_record", {number: this.position}), {
-      length: 60
-    });
+    return truncate(
+      this.header ||
+        this.props.t("backend.untitled_record", { number: this.position }),
+      {
+        length: 60
+      }
+    );
   }
 
   get label() {

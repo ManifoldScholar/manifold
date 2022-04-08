@@ -13,7 +13,7 @@ exports[`backend/components/dashboard/Activity when all stats are present matche
       <span
         class="backend-activity-stats__list-text"
       >
-        Texts added this week
+        backend.dashboard.text_stats
       </span>
       <span
         class="backend-activity-stats__list-text--highlighted"
@@ -27,7 +27,7 @@ exports[`backend/components/dashboard/Activity when all stats are present matche
       <span
         class="backend-activity-stats__list-text"
       >
-        Readers this week
+        backend.dashboard.reader_stats
       </span>
       <span
         class="backend-activity-stats__list-text--highlighted"
@@ -41,7 +41,7 @@ exports[`backend/components/dashboard/Activity when all stats are present matche
       <span
         class="backend-activity-stats__list-text"
       >
-        Change from last week
+        backend.dashboard.stats_change
       </span>
       <span
         class="backend-activity-stats__list-text--highlighted"
@@ -55,7 +55,7 @@ exports[`backend/components/dashboard/Activity when all stats are present matche
       <span
         class="backend-activity-stats__list-text"
       >
-        Highlights in the past week
+        backend.dashboard.highlight_stats
       </span>
       <span
         class="backend-activity-stats__list-text--highlighted"
@@ -69,7 +69,7 @@ exports[`backend/components/dashboard/Activity when all stats are present matche
       <span
         class="backend-activity-stats__list-text"
       >
-        Annotations in the past week
+        backend.dashboard.annotation_stats
       </span>
       <span
         class="backend-activity-stats__list-text--highlighted"

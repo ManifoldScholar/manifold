@@ -17,10 +17,10 @@ function JournalVolumeRow({
   const { t } = useTranslation();
 
   const additionalProps = {
-    title: t("journals.volume_number", {volNum: number}),
+    title: t("journals.volume_number", { volNum: number }),
     subtitle,
     active: active === id,
-    count: t("glossary.issue_with_count", {count: journalIssuesCount}),
+    count: t("glossary.issue_with_count", { count: journalIssuesCount }),
     figure: <EntityThumbnail.JournalVolume />
   };
 

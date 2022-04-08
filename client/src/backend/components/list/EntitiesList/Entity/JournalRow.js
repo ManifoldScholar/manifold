@@ -35,14 +35,23 @@ function JournalRow({
       );
   const url = renderWithoutLink ? null : lh.link("backendJournal", id);
   const labels = draft ? [t("glossary.draft_title_case_one")] : [];
-  const meta = <FormattedDate prefix={t("utility.dates.updated_title_case")} date={updatedAt} />;
+  const meta = (
+    <FormattedDate
+      prefix={t("utility.dates.updated_title_case")}
+      date={updatedAt}
+    />
+  );
   const subtitle = compact ? null : (
     <span dangerouslySetInnerHTML={{ __html: subtitleFormatted }} />
   );
 
-  const issuesCount = t("glossary.issue_with_count", {count: journalIssuesCount});
+  const issuesCount = t("glossary.issue_with_count", {
+    count: journalIssuesCount
+  });
 
-  const volumesCount = t("glossary.volume_with_count", {count: journalVolumesCount});
+  const volumesCount = t("glossary.volume_with_count", {
+    count: journalVolumesCount
+  });
 
   return (
     <EntityRow

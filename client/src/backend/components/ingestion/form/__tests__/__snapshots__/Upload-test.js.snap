@@ -19,7 +19,7 @@ exports[`backend/components/ingestion/form/Upload matches the snapshot 1`] = `
         class=""
         for="upload-1"
       >
-        Upload a file
+        backend.forms.ingestion.upload_file
       </label>
       <div>
         <input />
@@ -59,24 +59,14 @@ exports[`backend/components/ingestion/form/Upload matches the snapshot 1`] = `
       <span
         class="instructions"
       >
-        Manifold can ingest texts from single files or a .zip collection.
-        <br />
-        See the 
-        <a
-          href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/texts#adding-texts"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          documentation
-        </a>
-         for supported file types and directory structure.
+        backend.forms.ingestion.instructions
       </span>
     </div>
   </div>
   <div
     class="form-divider"
   >
-    or
+    common.or
   </div>
   <div
     class="form-input"
@@ -85,7 +75,7 @@ exports[`backend/components/ingestion/form/Upload matches the snapshot 1`] = `
       class="has-instructions"
       for="text-input-1"
     >
-      URL
+      backend.forms.ingestion.url
     </label>
     <input
       aria-describedby="text-input-error-1 text-input-instructions-1"
@@ -97,7 +87,7 @@ exports[`backend/components/ingestion/form/Upload matches the snapshot 1`] = `
       class="instructions"
       id="text-input-instructions-1"
     >
-      Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file.
+      backend.forms.ingestion.url_instructions
     </span>
   </div>
   <div
@@ -124,7 +114,7 @@ exports[`backend/components/ingestion/form/Upload matches the snapshot 1`] = `
         />
       </svg>
       <span>
-        Continue
+        actions.continue
       </span>
     </button>
   </div>

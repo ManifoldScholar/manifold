@@ -7,7 +7,7 @@ exports[`backend/containers/project/category/New matches the snapshot 1`] = `
     buttons={Array []}
     title="backend_entities.texts.category_new_header"
   />
-  <Category.Form
+  <withI18nextTranslation(Category.Form)
     onSuccess={[Function]}
     projectId="AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
   />

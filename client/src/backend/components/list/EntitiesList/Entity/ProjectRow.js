@@ -77,7 +77,8 @@ class ProjectRow extends PureComponent {
   get label() {
     const t = this.props.t;
     const labels = [];
-    if (this.attr.isJournalIssue) labels.push(t("glossary.issue_truncated_title_case_one"));
+    if (this.attr.isJournalIssue)
+      labels.push(t("glossary.issue_truncated_title_case_one"));
     if (this.attr.draft) labels.push(t("glossary.draft_title_case_one"));
     if (this.attr.featured) labels.push(t("glossary.featured_title_case"));
     return labels;
@@ -85,7 +86,12 @@ class ProjectRow extends PureComponent {
 
   get meta() {
     if (!this.compact) return this.creatorNames;
-    return <FormattedDate prefix={this.props.t("utility.dates.updated_title_case")} date={this.attr.updatedAt} />;
+    return (
+      <FormattedDate
+        prefix={this.props.t("utility.dates.updated_title_case")}
+        date={this.attr.updatedAt}
+      />
+    );
   }
 
   get subtitle() {

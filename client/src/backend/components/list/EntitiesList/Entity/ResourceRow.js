@@ -110,7 +110,11 @@ class ResourceRow extends PureComponent {
         title={this.title}
         label={this.kind}
         meta={
-          <FormattedDate prefix={this.props.t("utility.dates.created_title_case")} format="PPP" date={this.createdAt} />
+          <FormattedDate
+            prefix={this.props.t("utility.dates.created_title_case")}
+            format="PPP"
+            date={this.createdAt}
+          />
         }
         figure={<EntityThumbnail.Resource entity={this.resource} />}
         utility={this.utility}

@@ -55,13 +55,13 @@ class EntitlementRow extends PureComponent {
 
   get subtitle() {
     if (this.entitlement.attributes.expiration) {
-      const date = new Date(this.entitlement.attributes.expiration)
+      const date = new Date(this.entitlement.attributes.expiration);
       return this.props.t("backend.entitlements.expires", {
         val: date,
         formatParams: {
           val: { month: "long", day: "numeric", year: "numeric" }
         }
-      })
+      });
     }
     return null;
   }
