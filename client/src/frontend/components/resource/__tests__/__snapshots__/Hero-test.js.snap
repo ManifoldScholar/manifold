@@ -1,12 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/resource/Hero matches the snapshot 1`] = `
-<section
-  className="resource-hero-container"
->
-  <div
-    className="resource-hero"
-  >
+<Container>
+  <Hero>
     <div
       className="resource-slide-figure"
     >
@@ -139,6 +135,6 @@ exports[`frontend/components/resource/Hero matches the snapshot 1`] = `
         }
       />
     </div>
-  </div>
-</section>
+  </Hero>
+</Container>
 `;
