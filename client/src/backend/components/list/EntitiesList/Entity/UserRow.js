@@ -1,16 +1,18 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 
-export default class UserRow extends PureComponent {
+class UserRow extends PureComponent {
   static displayName = "EntitiesList.Entity.UserRow";
 
   static propTypes = {
     entity: PropTypes.object,
     currentUserId: PropTypes.string,
-    active: PropTypes.string
+    active: PropTypes.string,
+    t: PropTypes.func
   };
 
   get entity() {
@@ -25,8 +27,10 @@ export default class UserRow extends PureComponent {
     return (
       <>
         {this.isCurrentUser(this.id)}
-        {this.attributes.role ? this.attributes.role.replace(/_/g, " ") : null}
-      </> // TODO: Translate roles
+        {this.attributes.role
+          ? this.props.t(`user_roles.${this.attributes.role}`)
+          : null}
+      </>
     );
   }
 
@@ -46,7 +50,7 @@ export default class UserRow extends PureComponent {
   isCurrentUser(id) {
     let output = "";
     if (this.props.currentUserId === id) {
-      output = <span className="specifier">{"You"}</span>;
+      output = <span className="specifier">{this.props.t("common.you")}</span>;
     }
     return output;
   }
@@ -67,3 +71,5 @@ export default class UserRow extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(UserRow);

@@ -18,6 +18,7 @@ import enUS from "date-fns/locale/en-US";
 import backend from "./json/backend.json";
 import backendEntities from "./json/backend-entities";
 import settings from "./json/settings";
+import userRoles from "./json/userRoles.json";
 
 export default {
   translation: {
@@ -39,6 +40,7 @@ export default {
     ...backend,
     backend_entities: backendEntities,
     ...settings,
+    ...userRoles,
     date_fns: enUS
   }
 };
