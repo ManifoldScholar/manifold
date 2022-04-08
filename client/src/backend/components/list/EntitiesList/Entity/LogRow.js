@@ -67,7 +67,7 @@ class LogRow extends PureComponent {
         className="entity-row__link--inverted"
         to={lh.link("backendRecordsUser", this.actorId)}
       >
-        {`${this.actorName}`}
+        {this.actorName}
       </Link>
     );
   }
@@ -101,54 +101,66 @@ class LogRow extends PureComponent {
 
   get projectLogSubtitle() {
     return (
-      <Trans
-      i18nKey="backend.log.subtitle_project"
-      components={[
-        <Link
-        className="entity-row__link--inverted"
-        to={lh.link("backendRecordsUser", this.actorId)}
-        />,
-        <FormattedDate prefix="on" date={this.createdAt} />
-      ]}
-      values={{user: this.actorName }} />
+      <span>
+        <Trans
+          i18nKey="backend.log.entry_project"
+          components={{
+            userLink: this.userLink,
+            date: <FormattedDate date={this.createdAt} />
+          }}
+          values={{ user: this.actorName }}
+        />
+      </span>
     );
   }
 
   get action() {
-    const actions = {
-      create: "created",
-      update: "updated",
-      destroy: "deleted",
-      default: "changed"
-    };
-    return actions[this.event] || actions.default;
+    const useDefault =
+      this.event !== "create" &&
+      this.event !== "update" &&
+      this.event !== "destroy";
+    return useDefault ? "default" : this.event;
   }
 
   get title() {
+    const t = this.props.t;
+
     if (this.isProjectLog) return this.projectLogSubtitle;
+
     return (
       <span>
-        {this.userLink}
-        {` ${this.action} the ${this.itemType.toLowerCase()} \u201C`}
-        {this.itemLink}
-        {`\u201D `}
-        <FormattedDate format="distanceInWords" date={this.createdAt} suffix />.
+        <Trans
+          i18nKey="backend.log.entry"
+          components={{
+            userLink: this.userLink,
+            titleWithLink: this.itemLink,
+            daysAgo: (
+              <FormattedDate
+                format="distanceInWords"
+                date={this.createdAt}
+                suffix
+              />
+            )
+          }}
+          values={{
+            user: this.actorName,
+            entityType: t(`glossary.${this.itemType.toLowerCase()}_one`),
+            action: t(`backend.log.actions.${this.action}`)
+          }}
+        />
       </span>
     );
   }
 
   get changeList() {
     if (!this.showObjectChanges) return null;
-    return (
-      <span>
-        {`Modified: `}
-        <em>
-          {Object.keys(this.objectChanges)
-            .map(change => humps.decamelize(change, { separator: " " }))
-            .join(", ")}
-        </em>
-      </span>
-    );
+
+    /* This should be localized following the pattern used in src/global/components/meta/Item.js, but we need the full list of objects that can be changed to do so. -LD */
+    const changes = Object.keys(this.objectChanges)
+      .map(change => humps.decamelize(change, { separator: " " }))
+      .join(", ");
+
+    return <span>{this.props.t("backend.log.change_list", { changes })}</span>;
   }
 
   render() {

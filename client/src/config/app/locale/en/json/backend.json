@@ -461,8 +461,15 @@
       "expires": "Expires {{val, datetime}}"
     },
     "log": {
-      "subtitle_project": "<0>{{user}}</0> updated this project <1/>",
-      "subtitle_other": "<0>{{user}}</0> {{action}} the {{itemType}} \"<1>{{title}}</1>\" <2/>"
+      "entry": "<userLink>{{user}}</userLink> {{action}} the {{entityType}} \"<titleWithLink />\" <daysAgo />",
+      "entry_project": "<userLink>{{user}}</userLink> updated this project on <date/>",
+      "actions": {
+        "create": "created",
+        "update": "updated",
+        "destroy": "deleted",
+        "default": "changed"
+      },
+      "change_list": "Modified: {{changes}}"
     },
     "roles": {
       "project_editor": "Project Editor",
