@@ -1,0 +1,27 @@
+{
+  "backend": {
+    "forms": {
+      "call-to-action": {
+        "delete_modal_heading": "Are you sure you want to delete this call-to-action?",
+        "delete_modal_message": "This action cannot be undone.",
+        "edit_drawer_title": "Edit Call-to-Action",
+        "create_drawer_title": "New Call-to-Action",
+        "visibility_options": {
+          "always": "Always Visible",
+          "authorized": "Visible Only When Authorized",
+          "unauthorized": "Visible Only When Unauthorized"
+        },
+        "text_select_placeholder": "Select Text",
+        "input_labels": {
+          "title": "Title",
+          "type": "Type",
+          "visibility": "Visibility",
+          "text": "Link to Text",
+          "url": "URL",
+          "download": "Download File",
+          "save": "Save"
+        }
+      }
+    }
+  }
+}

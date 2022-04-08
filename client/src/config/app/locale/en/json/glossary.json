@@ -76,6 +76,7 @@
     "file_one": "file",
     "file_other": "files",
     "table_of_contents": "table of contents",
+    "table_of_contents_title_case": "Table of Contents",
     "member_one": "member",
     "member_other": "members",
     "group_one": "group",
@@ -109,6 +110,10 @@
     "subject_title_case_one": "Subject",
     "subject_title_case_other": "Subjects",
     "chapter_one": "chapter",
-    "chapter_other": "chapters"
+    "chapter_other": "chapters",
+    "link_one": "link",
+    "link_title_case_one": "Link",
+    "link_other": "links",
+    "link_title_case_other": "Links"
   }
 }
