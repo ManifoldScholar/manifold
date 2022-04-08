@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import CommentContainer from "global/containers/comment";
 import Utility from "frontend/components/utility";
-import Hero from "./Hero";
-import Link from "./Link";
-import Meta from "./Meta";
-import Title from "./Title";
-import VariantList from "./VariantList";
+import Hero from "../Hero";
+import Link from "../Link";
+import Meta from "../Meta";
+import Title from "../Title";
+import VariantList from "../VariantList";
+import * as Styled from "./styles";
 
 class ResourceDetail extends Component {
   static displayName = "Resource.Detail";
@@ -51,38 +52,38 @@ class ResourceDetail extends Component {
     /* false positive, as the child Link component does in fact render an a tag with a  */
     /* href.                                                                            */
     return (
-      <section className="resource-detail main-content">
-        <div className="container flush-top flush-bottom">
+      <Styled.Container>
+        <Styled.TitleWrapper>
           <Title resource={resource} showIcon={false} />
-        </div>
+        </Styled.TitleWrapper>
 
         <Hero resource={resource} />
 
-        <div className="container flush-top">
-          <aside>
+        <Styled.DetailsContainer>
+          <Styled.RightCol>
             <Link attributes={attr} />
             <Utility.ShareBar url={resourceUrl} />
             <Meta resource={resource} layout={"secondary"} />
             <VariantList resource={resource} />
-          </aside>
-          <div className="resource-meta-mobile">
-            <Meta resource={resource} layout={"secondary"} />
-          </div>
-          <div className="resource-variants-mobile">
+          </Styled.RightCol>
+          <Styled.MetaMobile>
+            <Meta resource={resource} layout={"secondary"} isMobile />
+          </Styled.MetaMobile>
+          <Styled.VariantsMobile>
             <VariantList resource={resource} />
-          </div>
-          <div className="resource-content left">
+          </Styled.VariantsMobile>
+          <Styled.Content>
             <div dangerouslySetInnerHTML={{ __html: attr.captionFormatted }} />
 
-            <h2 className="attribute-header">
+            <Styled.DescriptionHeader>
               {t("pages.subheaders.full_description")}
-            </h2>
+            </Styled.DescriptionHeader>
             <div
               dangerouslySetInnerHTML={this.createDescription(
                 attr.descriptionFormatted
               )}
             />
-            <div className="resource-comments">
+            <Styled.Comments>
               {this.canEngagePublicly && (
                 <>
                   <CommentContainer.Thread subject={resource} />
@@ -94,10 +95,10 @@ class ResourceDetail extends Component {
                   />
                 </>
               )}
-            </div>
-          </div>
-        </div>
-      </section>
+            </Styled.Comments>
+          </Styled.Content>
+        </Styled.DetailsContainer>
+      </Styled.Container>
     );
     /* eslint-enable jsx-a11y/anchor-is-valid */
   }
