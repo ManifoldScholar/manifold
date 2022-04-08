@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import IconComposer from "global/components/utility/IconComposer";
+import * as Styled from "./styles";
 
 function getContentForKind(resource, t) {
   const { kind, downloadable } = resource.attributes;
@@ -53,15 +53,9 @@ function Text({ resource }) {
 
   return (
     <>
-      <span className="resource-card__view-text" aria-hidden>
-        {text}
-      </span>
+      <Styled.Text aria-hidden>{text}</Styled.Text>
       <span className="screen-reader-text">{`${text} ${kind} “${title}”`}</span>
-      <IconComposer
-        icon={icon}
-        size={iconSize}
-        className="resource-card__view-icon"
-      />
+      <Styled.Icon icon={icon} size={iconSize} />
     </>
   );
 }
