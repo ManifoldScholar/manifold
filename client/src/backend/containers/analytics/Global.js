@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import {
   AnalyticsFactory,
   Grid,
@@ -17,7 +18,8 @@ class AnalyticsGlobalContainer extends PureComponent {
     fetchAnalytics: PropTypes.func.isRequired,
     updateAnalyticsRange: PropTypes.func.isRequired,
     analyticsStartDate: PropTypes.instanceOf(Date),
-    analyticsEndDate: PropTypes.instanceOf(Date)
+    analyticsEndDate: PropTypes.instanceOf(Date),
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -37,7 +39,7 @@ class AnalyticsGlobalContainer extends PureComponent {
     return (
       <>
         <Layout.ViewHeader spaceBottom icon="BEAnalytics64" iconAltAccented>
-          Analytics
+          {this.props.t("backend.analytics.global_header")}
         </Layout.ViewHeader>
         <Grid columns={4}>
           {analytics && (
@@ -94,4 +96,4 @@ class AnalyticsGlobalContainer extends PureComponent {
   }
 }
 
-export default withAnalyticsReport(AnalyticsGlobalContainer);
+export default withTranslation()(withAnalyticsReport(AnalyticsGlobalContainer));

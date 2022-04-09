@@ -22,6 +22,12 @@
           "save": "Save"
         }
       }
+    },
+    "analytics": {
+      "global_header": "Analytics",
+      "top_projects_header": "<0>Analytics</0> / Most Viewed Projects",
+      "top_searches_header": "<0>Analytics</0> / Top Searches",
+      "dashboard": "Dashboard"
     }
   }
 }

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { Trans } from "react-i18next";
 import {
   AnalyticsFactory,
   Grid,
@@ -26,8 +27,10 @@ class AnalyticsProjectsContainer extends PureComponent {
       <>
         <Layout.ViewHeader spaceBottom icon="BEAnalytics64" iconAltAccented>
           <h1 className="backend-header__title">
-            <Link to={lh.link("backendAnalyticsGlobal")}>Analytics</Link> / Most
-            Viewed Projects
+            <Trans
+              i18nKey="backend.analytics.top_projects_header"
+              components={[<Link to={lh.link("backendAnalyticsGlobal")} />]}
+            />
           </h1>
         </Layout.ViewHeader>
         <Grid columns={4}>
