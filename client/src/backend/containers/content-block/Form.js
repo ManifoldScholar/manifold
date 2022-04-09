@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { projectsAPI, contentBlocksAPI, requests } from "api";
 import FormContainer from "global/containers/form";
@@ -18,7 +19,8 @@ export class ProjectContentFormContainer extends Component {
     project: PropTypes.object,
     history: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    match: PropTypes.object
+    match: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -92,10 +94,10 @@ export class ProjectContentFormContainer extends Component {
           contentBlock={this.props.contentBlock}
           project={this.project}
         />
-        <Form.Save text="Save" />
+        <Form.Save text={this.props.t("actions.save")} />
       </FormContainer.Form>
     );
   }
 }
 
-export default connectAndFetch(ProjectContentFormContainer);
+export default withTranslation()(connectAndFetch(ProjectContentFormContainer));
