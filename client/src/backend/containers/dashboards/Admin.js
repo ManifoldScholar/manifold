@@ -17,6 +17,7 @@ import DashboardComponents from "backend/components/dashboard";
 import Layout from "backend/components/layout";
 import Authorization from "helpers/authorization";
 import isEqual from "lodash/isEqual";
+import { useTranslation } from "react-i18next";
 
 export function DashboardsAdminContainer({
   entitiesListSearchProps,
@@ -93,13 +94,15 @@ export function DashboardsAdminContainer({
     ability: "create"
   });
 
+  const { t } = useTranslation();
+
   const noProjects =
     isEqual(
       entitiesListSearchParams?.projects,
       entitiesListSearchParams?.initialProjects
     ) && canCreateProjects
-      ? "This Manifold Library is empty. Click the button above to create your first project."
-      : "Sorry, no results were found.";
+      ? t("backend.dashboard.empty_message_creator")
+      : t("backend.dashboard.empty_message");
 
   if (!projects) return null;
 
@@ -113,18 +116,18 @@ export function DashboardsAdminContainer({
             entityComponentProps={{
               placeholderMode: "small"
             }}
-            title={
-              projectsMeta?.pagination?.totalCount !== 1
-                ? "Projects"
-                : "Project"
-            }
+            title={t("glossary.project_title_case", {
+              count: projectsMeta?.pagination?.totalCount
+            })}
             titleLink={lh.link("backendProjects")}
             titleIcon="BEProject64"
             titleStyle="bar"
             titleTag="h2"
             showCount
             showCountInTitle
-            unit="project"
+            unit={t("glossary.project", {
+              count: projectsMeta?.pagination?.totalCount
+            })}
             pagination={projectsMeta.pagination}
             callbacks={{
               onPageClick: page => () => setProjectsPageNumber(page)
@@ -139,7 +142,7 @@ export function DashboardsAdminContainer({
             buttons={[
               <Button
                 path={lh.link("backendProjectsNew")}
-                text="Add a new project"
+                text={t("backend.dashboard.add_project_button")}
                 authorizedFor="project"
                 authorizedTo="create"
                 type="add"
@@ -160,18 +163,18 @@ export function DashboardsAdminContainer({
             entityComponentProps={{
               placeholderMode: "small"
             }}
-            title={
-              journalsMeta?.pagination?.totalCount !== 1
-                ? "Journals"
-                : "Journal"
-            }
+            title={t("glossary.journal_title_case", {
+              count: journalsMeta?.pagination?.totalCount
+            })}
             titleLink={lh.link("backendJournals")}
             titleIcon="Journals64"
             titleStyle="bar"
             titleTag="h2"
             showCount
             showCountInTitle
-            unit="journal"
+            unit={t("glossary.journal", {
+              count: journalsMeta?.pagination?.totalCount
+            })}
             pagination={journalsMeta.pagination}
             callbacks={{
               onPageClick: page => () => setJournalsPageNumber(page)
@@ -185,7 +188,7 @@ export function DashboardsAdminContainer({
             buttons={[
               <Button
                 path={lh.link("backendJournalsNew")}
-                text="Add a new journal"
+                text={t("backend.dashboard.add_journal_button")}
                 authorizedFor="journal"
                 authorizedTo="create"
                 type="add"
@@ -204,11 +207,11 @@ export function DashboardsAdminContainer({
         iconAltAccented
         link={{
           path: lh.link("backendAnalytics"),
-          label: "see all"
+          label: t("actions.see_all")
         }}
         titleTag="h2"
       >
-        Analytics
+        {t("backend.analytics.global_header")}
       </Layout.ViewHeader>
       <DashboardComponents.Analytics />
     </Authorize>
@@ -237,7 +240,9 @@ export function DashboardsAdminContainer({
 
   return (
     <main id="skip-to-main">
-      <h1 className="screen-reader-text">Dashboard</h1>
+      <h1 className="screen-reader-text">
+        {t("backend.dashboard.global_header")}
+      </h1>
       <section>
         <div className="container">
           <section className="backend-dashboard">{guts}</section>

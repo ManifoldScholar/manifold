@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -36,7 +37,8 @@ export class DashboardsAuthorContainer extends PureComponent {
     projects: PropTypes.array,
     dispatch: PropTypes.func,
     projectsMeta: PropTypes.object,
-    currentUser: PropTypes.object
+    currentUser: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -77,7 +79,7 @@ export class DashboardsAuthorContainer extends PureComponent {
           <div className="container">
             <section>
               <header className="section-heading-secondary">
-                <h3>{"Projects"} </h3>
+                <h3>{this.props.t("glossary.project_title_case_other")} </h3>
               </header>
               {/* put a list of projects here at some point. */}
             </section>
@@ -88,4 +90,4 @@ export class DashboardsAuthorContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(DashboardsAuthorContainer);
+export default withTranslation()(connectAndFetch(DashboardsAuthorContainer));
