@@ -11,7 +11,7 @@ exports[`backend/containers/dashboards/Author matches the snapshot when rendered
           class="section-heading-secondary"
         >
           <h3>
-            Projects 
+            glossary.project_title_case_other 
           </h3>
         </header>
       </section>

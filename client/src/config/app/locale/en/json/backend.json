@@ -30,8 +30,14 @@
     "analytics": {
       "global_header": "Analytics",
       "top_projects_header": "<0>Analytics</0> / Most Viewed Projects",
-      "top_searches_header": "<0>Analytics</0> / Top Searches",
-      "dashboard": "Dashboard"
+      "top_searches_header": "<0>Analytics</0> / Top Searches"
+    },
+    "dashboard": {
+      "global_header": "Dashboard",
+      "empty_message_creator": "This Manifold Library is empty. Click the button above to create your first project.",
+      "empty_message": "Sorry, no results were found.",
+      "add_project_button": "Add a new project",
+      "add_journal_button": "Add a new journal"
     }
   }
 }

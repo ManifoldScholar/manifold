@@ -16,6 +16,7 @@ describe("backend/containers/dashboards/Author", () => {
       recentProjects={$recentProjects}
       dispatch={$dispatch}
       currentUser={$user}
+      t={key => key}
     />
   ));
 
