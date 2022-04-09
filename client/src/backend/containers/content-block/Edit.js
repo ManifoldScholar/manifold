@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { contentBlocksAPI, requests } from "api";
 import { select } from "utils/entityUtils";
@@ -26,7 +27,8 @@ export class ContentBlockEditContainer extends Component {
     dispatch: PropTypes.func.isRequired,
     project: PropTypes.object,
     contentBlock: PropTypes.object,
-    confirm: PropTypes.func.isRequired
+    confirm: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -44,8 +46,9 @@ export class ContentBlockEditContainer extends Component {
   }
 
   onDelete = () => {
-    const heading = "Are you sure you want to delete this content block?";
-    const message = "This action cannot be undone.";
+    const t = this.props.t;
+    const heading = t("backend.forms.content-block.delete_modal_heading");
+    const message = t("backend.forms.content-block.delete_modal_message");
     this.props.confirm(heading, message, this.doDelete);
   };
 
@@ -105,4 +108,6 @@ export class ContentBlockEditContainer extends Component {
   }
 }
 
-export default withConfirmation(connectAndFetch(ContentBlockEditContainer));
+export default withTranslation()(
+  withConfirmation(connectAndFetch(ContentBlockEditContainer))
+);

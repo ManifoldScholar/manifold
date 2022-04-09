@@ -21,6 +21,10 @@
           "download": "Download File",
           "save": "Save"
         }
+      },
+      "content-block": {
+        "delete_modal_heading": "Are you sure you want to delete this content block?",
+        "delete_modal_message": "This action cannot be undone."
       }
     },
     "analytics": {
