@@ -6,8 +6,9 @@ import Collapse from "global/components/Collapse";
 import classNames from "classnames";
 import has from "lodash/has";
 import isPlainObject from "lodash/isPlainObject";
+import { withTranslation } from "react-i18next";
 
-export default class ListEntitiesListSearch extends PureComponent {
+class ListEntitiesListSearch extends PureComponent {
   static displayName = "List.Entities.List.Search";
 
   static propTypes = {
@@ -15,7 +16,8 @@ export default class ListEntitiesListSearch extends PureComponent {
     values: PropTypes.object,
     setParam: PropTypes.func.isRequired,
     onReset: PropTypes.func.isRequired,
-    searchStyle: PropTypes.oneOf(["horizontal", "vertical"])
+    searchStyle: PropTypes.oneOf(["horizontal", "vertical"]),
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -170,6 +172,7 @@ export default class ListEntitiesListSearch extends PureComponent {
   /* these filters never change after render */
   render() {
     const baseClass = "entity-list-search";
+    const t = this.props.t;
 
     return (
       <div className={`entity-list__search ${baseClass}`}>
@@ -179,14 +182,16 @@ export default class ListEntitiesListSearch extends PureComponent {
               <div className={`${baseClass}__keyword-row`}>
                 <button className={`${baseClass}__search-button`}>
                   <Utility.IconComposer icon="search16" size={20} />
-                  <span className="screen-reader-text">Search</span>
+                  <span className="screen-reader-text">
+                    {t("search.title")}
+                  </span>
                 </button>
                 <div className={`${baseClass}__keyword-input-wrapper`}>
                   <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
                     {id => (
                       <>
                         <label htmlFor={id} className="screen-reader-text">
-                          Enter Search Criteria
+                          {t("search.instructions")}
                         </label>
                         <input
                           ref={this.searchInput}
@@ -205,13 +210,13 @@ export default class ListEntitiesListSearch extends PureComponent {
                   onClick={this.resetSearch}
                   className={`${baseClass}__text-button`}
                 >
-                  Reset
+                  {t("actions.reset")}
                 </button>
                 {this.hasOptions && (
                   <Collapse.Toggle
                     className={`${baseClass}__text-button ${baseClass}__text-button--foregrounded`}
                   >
-                    Options
+                    {t("common.option_title_case_other")}
                   </Collapse.Toggle>
                 )}
               </div>
@@ -240,14 +245,19 @@ export default class ListEntitiesListSearch extends PureComponent {
                                 i > 0 ? `select__label--empty` : ""
                               }`}
                             >
-                              {i === 0 ? "Filter Results:" : "\u00A0"}
+                              {i === 0
+                                ? t("filters.labels.filter_results")
+                                : "\u00A0"}
                             </span>
                             <div className={`select__wrapper`}>
                               <label
                                 htmlFor={`${id}-filter-${i}`}
                                 className="screen-reader-text"
                               >
-                                {`Filter results by ${param.label}`}
+                                {param.label === "Draft" &&
+                                  t("filters.labels.by_draft")}
+                                {param.label === "Role" &&
+                                  t("filters.labels.by_role")}
                               </label>
                               <select
                                 id={`${id}-filter-${i}`}
@@ -278,14 +288,14 @@ export default class ListEntitiesListSearch extends PureComponent {
                         >
                           <div className={`select`}>
                             <span className={`select__label`}>
-                              Order Results:
+                              {t("filters.labels.order_results")}
                             </span>
                             <div className={`select__wrapper`}>
                               <label
                                 htmlFor={`${id}-order`}
                                 className="screen-reader-text"
                               >
-                                {`Order results`}
+                                {t("filters.labels.order_results")}
                               </label>
                               <select
                                 id={`${id}-order`}
@@ -321,3 +331,5 @@ export default class ListEntitiesListSearch extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ListEntitiesListSearch);

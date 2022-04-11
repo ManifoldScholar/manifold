@@ -4,8 +4,9 @@ import Dropdown from "./Dropdown";
 import UniqueIcons from "global/components/icon/unique";
 import Layout from "backend/components/layout";
 import Breadcrumbs from "global/components/atomic/Breadcrumbs";
+import { withTranslation } from "react-i18next";
 
-export default class DetailHeader extends PureComponent {
+class DetailHeader extends PureComponent {
   static displayName = "Navigation.DetailHeader";
 
   static propTypes = {
@@ -17,7 +18,8 @@ export default class DetailHeader extends PureComponent {
     note: PropTypes.string,
     secondaryLinks: PropTypes.array,
     backUrl: PropTypes.string,
-    backLabel: PropTypes.string
+    backLabel: PropTypes.string,
+    t: PropTypes.func
   };
 
   get type() {
@@ -49,7 +51,7 @@ export default class DetailHeader extends PureComponent {
   }
 
   get backLabel() {
-    return this.props.backLabel || "Back";
+    return this.props.backLabel || this.props.t("navigation.back");
   }
 
   get backUrl() {
@@ -150,3 +152,5 @@ export default class DetailHeader extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(DetailHeader);

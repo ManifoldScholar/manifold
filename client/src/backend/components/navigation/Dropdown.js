@@ -8,6 +8,7 @@ import IconComposer from "global/components/utility/IconComposer";
 
 import BlurOnLocationChange from "hoc/BlurOnLocationChange";
 import Authorize from "hoc/Authorize";
+import { withTranslation } from "react-i18next";
 
 export class NavigationDropdown extends Component {
   static displayName = "Navigation.Dropdown";
@@ -15,7 +16,8 @@ export class NavigationDropdown extends Component {
   static propTypes = {
     links: PropTypes.array,
     classNames: PropTypes.string,
-    location: PropTypes.object
+    location: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -75,7 +77,7 @@ export class NavigationDropdown extends Component {
 
   renderStatic(props) {
     const selected = this.getSelected(props);
-    const label = selected ? selected.label : "menu";
+    const label = selected ? selected.label : this.props.t("navigation.menu");
 
     return (
       <nav className={`dropdown-nav dropdown-nav--static ${props.classNames}`}>
@@ -132,4 +134,4 @@ export class NavigationDropdown extends Component {
   }
 }
 
-export default withRouter(NavigationDropdown);
+export default withTranslation()(withRouter(NavigationDropdown));

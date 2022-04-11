@@ -32,7 +32,10 @@
       "by_section": "Filter by text section",
       "tag": "Tag",
       "by_text": "Filter by text",
-      "by_status": "Filter by status"
+      "by_status": "Filter by status",
+      "by_role": "Filter by role",
+      "by_draft": "Filter by draft",
+      "order_results": "Order results:"
     },
     "default_options": {
       "type": "Type",
