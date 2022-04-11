@@ -66,6 +66,7 @@
     "menu": "Menu",
     "next_entity": "Next {{entity}}",
     "primary": "Primary Navigation",
+    "secondary": "Secondary Navigation",
     "page_links": "Page Links",
     "user_links": "User Links",
     "skip_to_main": {

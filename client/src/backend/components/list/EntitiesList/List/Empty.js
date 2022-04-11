@@ -1,21 +1,24 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { withTranslation } from "react-i18next";
 
-export default class ListEntitiesListEmpty extends PureComponent {
+class ListEntitiesListEmpty extends PureComponent {
   static displayName = "List.Entities.List.Empty";
 
   static propTypes = {
     message: PropTypes.node,
-    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"])
-  };
-
-  static defaultProps = {
-    message: "Sorry, no results were found."
+    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
+    t: PropTypes.func
   };
 
   get message() {
-    return this.props.message;
+    const t = this.props.t;
+    if (this.props.message) {
+      return this.props.message;
+    } else {
+      return t("messages.no_results");
+    }
   }
 
   render() {
@@ -29,3 +32,5 @@ export default class ListEntitiesListEmpty extends PureComponent {
     return <div className={wrapperClasses}>{this.message}</div>;
   }
 }
+
+export default withTranslation()(ListEntitiesListEmpty);

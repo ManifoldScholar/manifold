@@ -7,6 +7,7 @@ import lh from "helpers/linkHandler";
 
 import BlurOnLocationChange from "hoc/BlurOnLocationChange";
 import Authorize from "hoc/Authorize";
+import { withTranslation } from "react-i18next";
 
 export class NavigationSecondary extends Component {
   static displayName = "Navigation.Secondary";
@@ -15,11 +16,8 @@ export class NavigationSecondary extends Component {
     links: PropTypes.array,
     location: PropTypes.object,
     panel: PropTypes.bool,
-    ariaLabel: PropTypes.string
-  };
-
-  static defaultProps = {
-    ariaLabel: "Secondary Navigation"
+    ariaLabel: PropTypes.string,
+    t: PropTypes.func
   };
 
   pathForLink(link) {
@@ -37,6 +35,14 @@ export class NavigationSecondary extends Component {
     );
   }
 
+  ariaLabel() {
+    if (this.props.ariaLabel) {
+      return this.props.ariaLabel;
+    } else {
+      return this.props.t("navigation.secondary");
+    }
+  }
+
   renderContents(props) {
     const navClasses = classnames({
       "secondary-nav": true,
@@ -44,7 +50,7 @@ export class NavigationSecondary extends Component {
     });
 
     return (
-      <nav className={navClasses} aria-label={this.props.ariaLabel}>
+      <nav className={navClasses} aria-label={this.ariaLabel()}>
         <ul>
           {this.props.links.map(link => {
             if (link.ability)
@@ -82,4 +88,4 @@ export class NavigationSecondary extends Component {
   }
 }
 
-export default withRouter(NavigationSecondary);
+export default withTranslation()(withRouter(NavigationSecondary));
