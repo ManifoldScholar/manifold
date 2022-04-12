@@ -525,7 +525,7 @@ module Validation
   end
 
   def reading_group_filter_params
-    params.permit(filter: [:keyword, :sort_order])[:filter] || {}
+    params.permit(filter: [:keyword, :sort_order, :archived])[:filter] || {}
   end
 
   def reading_group_membership_filter_params
