@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useFetch, usePaginationState } from "hooks";
 import { journalsAPI } from "api";
 import withFilteredLists, { journalFilters } from "hoc/withFilteredLists";
@@ -24,17 +25,19 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
     request: [journalsAPI.index, journalFiltersWithDefaults, pagination]
   });
 
+  const { t } = useTranslation();
+
   if (!data) return null;
 
   return (
     <>
       <EntitiesList
         entityComponent={JournalRow}
-        title={"Manage Journals"}
+        title={t("backend_entities.journals.header")}
         titleIcon="Journals64"
         titleStyle="bar"
         entities={data}
-        unit="journal"
+        unit={t("glossary.journal", { count: meta.pagination.totalCount })}
         search={<Search {...entitiesListSearchProps("journals")} />}
         pagination={meta.pagination}
         showCount
@@ -44,7 +47,7 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
         buttons={[
           <Button
             path={lh.link("backendJournalsNew")}
-            text="Add a new journal"
+            text={t("backend_entities.journals.add_button_label")}
             authorizedFor="journal"
             type="add"
           />

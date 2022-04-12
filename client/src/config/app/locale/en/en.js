@@ -16,6 +16,7 @@ import resources from "./json/resources.json";
 import other from "./json/en.json";
 import enUS from "date-fns/locale/en-US";
 import backend from "./json/backend.json";
+import backendEntities from "./json/backend-entities";
 
 export default {
   translation: {
@@ -35,6 +36,7 @@ export default {
     ...utility,
     ...resources,
     ...backend,
+    backend_entities: backendEntities,
     date_fns: enUS
   }
 };

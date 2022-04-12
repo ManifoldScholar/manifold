@@ -1,0 +1,18 @@
+{
+  "journals": {
+    "header": "Manage Journals",
+    "add_button_label": "Add a new journal",
+    "unauthorized": "You are not allowed to manage journals.",
+    "forms": {
+      "new_header": "New Journal",
+      "new_instructions": "Enter the name of your journal, and a brief description. Press save to continue.",
+      "title_descript_label": "Title and Description",
+      "title_label": "Title",
+      "title_placeholder": "Enter Journal Title",
+      "subtitle_label": "Subtitle",
+      "subtitle_placeholder": "Enter Journal Subtitle",
+      "descript_label": "Brief Description",
+      "submit_label": "Save and Continue"
+    }
+  }
+}

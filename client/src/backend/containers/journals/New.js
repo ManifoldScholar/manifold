@@ -2,13 +2,14 @@ import React, { PureComponent } from "react";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Authorize from "hoc/Authorize";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
 import { journalsAPI } from "api";
 import lh from "helpers/linkHandler";
 
-export default class JournalsNew extends PureComponent {
+class JournalsNew extends PureComponent {
   static displayName = "Journals.New";
 
   static propTypes = {
@@ -25,6 +26,7 @@ export default class JournalsNew extends PureComponent {
   };
 
   render() {
+    const t = this.props.t;
     return (
       <Authorize
         entity={"journal"}
@@ -35,11 +37,9 @@ export default class JournalsNew extends PureComponent {
         <div>
           <Navigation.DetailHeader
             type="journal"
-            title={"New journal"}
+            title={t("backend_entities.journals.forms.new_header")}
             showUtility={false}
-            note={
-              "Enter the name of your journal, and a brief description. Press save to continue."
-            }
+            note={t("backend_entities.journals.forms.new_instructions")}
           />
           <Layout.BackendPanel>
             <FormContainer.Form
@@ -49,28 +49,36 @@ export default class JournalsNew extends PureComponent {
               onSuccess={this.handleSuccess}
               className="form-secondary"
             >
-              <Form.FieldGroup label="Title and Description">
+              <Form.FieldGroup
+                label={t(
+                  "backend_entities.journals.forms.title_descript_label"
+                )}
+              >
                 <Form.TextInput
                   validation={["required"]}
                   focusOnMount
-                  label="Title"
+                  label={t("backend_entities.journals.forms.title_label")}
                   name="attributes[title]"
-                  placeholder="Enter Journal Title"
+                  placeholder={t(
+                    "backend_entities.journals.forms.title_placeholder"
+                  )}
                 />
                 <Form.TextInput
-                  label="Subtitle"
+                  label={t("backend_entities.journals.forms.subtitle_label")}
                   name="attributes[subtitle]"
-                  placeholder="Enter Journal Subtitle"
+                  placeholder={t(
+                    "backend_entities.journals.forms.subtitle_placeholder"
+                  )}
                 />
                 <Form.TextArea
-                  label="Brief Description"
+                  label={t("backend_entities.journals.forms.descript_label")}
                   name="attributes[description]"
                   height={100}
                   wide
                 />
               </Form.FieldGroup>
               <Form.Save
-                text="Save and Continue"
+                text={t("backend_entities.journals.forms.submit_label")}
                 cancelRoute={lh.link("backendJournals")}
               />
             </FormContainer.Form>
@@ -80,3 +88,5 @@ export default class JournalsNew extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(JournalsNew);
