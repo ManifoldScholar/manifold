@@ -23,7 +23,7 @@ function IssueForm({ journalId, model, ...props }) {
       className="form-secondary"
       model={model}
     >
-      <Form.NumberInput label="Number" focusOnMount name="attributes[number]" />
+      <Form.TextInput label="Number" focusOnMount name="attributes[number]" />
       <Form.Picker
         instructions="Optionally, select a volume."
         label="Volume"
@@ -32,12 +32,6 @@ function IssueForm({ journalId, model, ...props }) {
         predictive
         listStyle={"rows"}
         options={fetchJournalVolumes}
-      />
-      <Form.TextInput
-        wide
-        label="Slug"
-        name="attributes[pendingSlug]"
-        placeholder="Enter Journal Issue Slug"
       />
       {model?.id ? (
         <div className="form-input">
