@@ -96,12 +96,16 @@ module Updaters
     nil
   end
 
+  def adjusted_relationships
+    relationships
+  end
+
   # rubocop:disable Metrics/CyclomaticComplexity
   def update_relationships!(model)
-    return unless relationships
+    return unless adjusted_relationships
 
     run_callbacks "update_relationships" do
-      relationships.to_h.each do |name, relationship|
+      adjusted_relationships.to_h.each do |name, relationship|
         models = relationship[:data]
         update_belongs_to(model, name, models) && next if models.respond_to?(:has_key?) || models.nil?
         update_has_many(model, name, models) && next if models.respond_to?(:each)

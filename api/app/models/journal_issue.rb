@@ -1,6 +1,6 @@
 require "securerandom"
 
-# Volumes belong to Journals
+# Issues belong to Journals
 class JournalIssue < ApplicationRecord
 
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
@@ -9,10 +9,10 @@ class JournalIssue < ApplicationRecord
   include TrackedCreator
   include SerializedAbilitiesFor
   include Filterable
-  include Sluggable
   include Collectable
   include HasFormattedAttributes
   include SearchIndexable
+  include HasSortTitle
 
   belongs_to :journal, counter_cache: true
   belongs_to :journal_volume, optional: true, counter_cache: true
@@ -24,8 +24,10 @@ class JournalIssue < ApplicationRecord
 
   include TrackedCreator
 
-  scope :in_reverse_order, -> { order(number: :desc) }
-  scope :in_order, -> { order(number: :asc) }
+  has_sort_title :sort_title_candidate
+
+  scope :in_reverse_order, -> { order(sort_title: :desc) }
+  scope :in_order, -> { order(sort_title: :asc) }
   scope :published, -> { joins(:project).where("projects.draft": false) }
   scope :by_journal_id, lambda { |journal_id|
     next all unless journal_id.present?
@@ -42,11 +44,6 @@ class JournalIssue < ApplicationRecord
 
     where(journal_volume_id: journal_volume_id)
   }
-
-  def slug_candidates
-    chunks = (persisted? ? id : SecureRandom.uuid).split("-")
-    chunks.map { |chunk| "#{number}-#{chunk}" }
-  end
 
   delegate :avatar, to: :project
   delegate :avatar_color, to: :project
@@ -87,6 +84,10 @@ class JournalIssue < ApplicationRecord
              callbacks: :async,
              batch_size: 500,
              highlight: [:title, :body])
+
+  def sort_title_candidate
+    pending_sort_title.blank? ? number.to_i : pending_sort_title.to_i
+  end
 
   # rubocop:disable Metrics/AbcSize
   def search_data

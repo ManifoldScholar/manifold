@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import EntityRow from "./Row";
 import EntityThumbnail from "global/components/entity-thumbnail";
-import Utility from "global/components/utility";
-import { Link } from "react-router-dom";
 
 function JournalIssueRow({
   journal,
@@ -25,24 +23,11 @@ function JournalIssueRow({
     subtitle,
     meta,
     active: active === id,
-    figure: <EntityThumbnail.Project mode="responsive" entity={entity} />,
-    utility: (
-      <Link
-        to={lh.link("backendProject", projectId)}
-        className="entity-row__utility-button"
-        title="Edit Project"
-      >
-        <Utility.IconComposer icon="annotate24" size={26} />
-      </Link>
-    )
+    figure: <EntityThumbnail.Project mode="responsive" entity={entity} />
   };
 
   if (clickable) {
-    additionalProps.onRowClick = lh.link(
-      "backendJournalIssueEdit",
-      journal.id,
-      id
-    );
+    additionalProps.onRowClick = lh.link("backendProject", projectId);
     additionalProps.rowClickMode = "block";
   }
 

@@ -49,7 +49,7 @@ module API
       end
 
       def scope_for_journal_issues
-        JournalIssue.friendly
+        JournalIssue.all
       end
 
     end

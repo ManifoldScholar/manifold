@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_05_233127) do
+ActiveRecord::Schema.define(version: 2022_04_12_160459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -470,13 +470,13 @@ ActiveRecord::Schema.define(version: 2022_04_05_233127) do
     t.uuid "journal_id", null: false
     t.uuid "journal_volume_id"
     t.uuid "creator_id"
-    t.integer "number"
-    t.text "slug"
     t.jsonb "fa_cache", default: {}, null: false
+    t.string "number", default: "", null: false
+    t.integer "sort_title", default: 0, null: false
+    t.integer "pending_sort_title"
     t.index ["creator_id"], name: "index_journal_issues_on_creator_id"
     t.index ["journal_id"], name: "index_journal_issues_on_journal_id"
     t.index ["journal_volume_id"], name: "index_journal_issues_on_journal_volume_id"
-    t.index ["slug"], name: "index_journal_issues_on_slug", unique: true
   end
 
   create_table "journal_subjects", force: :cascade do |t|
