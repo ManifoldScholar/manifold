@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -33,7 +34,8 @@ export class ExportTargetsContainerImplementation extends PureComponent {
     /* eslint-enable react/require-default-props */
     match: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -58,7 +60,7 @@ export class ExportTargetsContainerImplementation extends PureComponent {
   }
 
   render() {
-    const { exportTargets, match, route } = this.props;
+    const { exportTargets, match, route, t } = this.props;
     if (!exportTargets) return null;
     const active = match.params.id || "";
     const drawerProps = {
@@ -71,14 +73,14 @@ export class ExportTargetsContainerImplementation extends PureComponent {
         <EntitiesList
           entityComponent={ExportTargetRow}
           entityComponentProps={{ active }}
-          title="Manage Export Targets"
+          title={t("backend.export_targets.header")}
           titleStyle="bar"
           entities={exportTargets}
-          unit="export target"
+          unit={t("glossary.export_target", { count: exportTargets?.length })}
           buttons={[
             <Button
               path={lh.link("backendSettingsExportTargetsNew")}
-              text="Add a new export target"
+              text={t("backend.export_targets.button_label")}
               authorizedFor="exportTarget"
               type="add"
             />
@@ -89,6 +91,8 @@ export class ExportTargetsContainerImplementation extends PureComponent {
   }
 }
 
-export default connect(ExportTargetsContainerImplementation.mapStateToProps)(
-  ExportTargetsContainerImplementation
+export default withTranslation()(
+  connect(ExportTargetsContainerImplementation.mapStateToProps)(
+    ExportTargetsContainerImplementation
+  )
 );

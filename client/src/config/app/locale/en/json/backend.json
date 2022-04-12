@@ -33,6 +33,27 @@
         "expiration_label": "Expiration",
         "expiration_instructions": "Enter YYYY/MM/DD or a human-readable string, e.g. 'in one year'",
         "submit_label": "Save Entitlement"
+      },
+      "export_target": {
+        "header": "New Export Target",
+        "name_label": "name",
+        "name_placeholder": "Name",
+        "format_label": "Target Name Format",
+        "type_label": "Type",
+        "type_options": {
+          "sftp_key": "SFTP with Key Authentication",
+          "sftp_password": "SFTP with Password Authentication"
+        },
+        "host_label": "SFTP Host",
+        "host_placeholder": "Host",
+        "port_label": "SfTP Port",
+        "username_label": "SFTP Username",
+        "username_placeholder": "Username",
+        "private_key_label": "SFTP Private Key",
+        "password_label": "SFTP Password",
+        "submit_label": "Save Export Target",
+        "delete_modal_heading": "Are you sure you want to delete this export target?",
+        "delete_modal_message": "This action cannot be undone."
       }
     },
     "analytics": {
@@ -51,6 +72,10 @@
       "header": "Project Entitlements",
       "instructions": "Entitlements give users and/or reading groups access to this project. In Manifold, all projects are open by default. Configure access restrictions, below, and enable restrictions to limit access to your project.",
       "button_label": "Create entitlement"
+    },
+    "export_targets": {
+      "header": "Manage Export Targets",
+      "button_label": "Add a new export target"
     }
   }
 }

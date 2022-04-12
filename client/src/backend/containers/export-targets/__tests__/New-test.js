@@ -2,7 +2,7 @@ import { ExportTargetsNewContainer } from "../New";
 
 describe("backend/containers/Records/export-targets/New", () => {
   def("root", () => (
-    <ExportTargetsNewContainer history={fixtures.history()} />
+    <ExportTargetsNewContainer history={fixtures.history()} t={key => key} />
   ));
 
   it("matches the snapshot when rendered", () => {

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { requests } from "api";
 import lh from "helpers/linkHandler";
@@ -10,7 +11,8 @@ export class ExportTargetsNewContainer extends PureComponent {
   static displayName = "ExportTargets.New";
 
   static propTypes = {
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -33,7 +35,9 @@ export class ExportTargetsNewContainer extends PureComponent {
   render() {
     return (
       <section>
-        <Navigation.DrawerHeader title="New Export Target" />
+        <Navigation.DrawerHeader
+          title={this.props.t("backend.forms.export_target.header")}
+        />
         <Form
           model={this.defaultExportTarget}
           onSuccess={exportTarget => this.redirectToExportTarget(exportTarget)}
@@ -44,4 +48,4 @@ export class ExportTargetsNewContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(ExportTargetsNewContainer);
+export default withTranslation()(connectAndFetch(ExportTargetsNewContainer));

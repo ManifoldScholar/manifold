@@ -1,17 +1,19 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { exportTargetsAPI, requests } from "api";
 import { camelCase } from "lodash";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 
-export default class ExportTargetsContainerForm extends PureComponent {
+class ExportTargetsContainerForm extends PureComponent {
   static displayName = "ExportTargets.Form";
 
   static propTypes = {
     model: PropTypes.object,
     onSuccess: PropTypes.func, // eslint-disable-line react/require-default-props
-    options: PropTypes.object
+    options: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -30,64 +32,67 @@ export default class ExportTargetsContainerForm extends PureComponent {
 
   renderFormContents(getModelValue) {
     const strategy = camelCase(getModelValue("attributes[strategy]"));
+    const t = this.props.t;
     return (
       <>
         <Form.Errors names={["attributes[configuration]"]} />
 
         <Form.TextInput
           focusOnMount
-          label="name"
+          label={t("backend.forms.export_target.name_label")}
           name="attributes[name]"
-          placeholder="Name"
+          placeholder={t("backend.forms.export_target.name_placeholder")}
         />
         <Form.TextInput
-          label="Target Name Format"
+          label={t("backend.forms.export_target.format_label")}
           name="attributes[configuration][targetNameFormat]"
           placeholder="%s.%e"
         />
         <Form.Select
-          label="Type"
+          label={t("backend.forms.export_target.type_label")}
           name="attributes[strategy]"
           options={[
             {
-              label: "SFTP with Key Authentication",
+              label: t("backend.forms.export_target.type_options.sftp_key"),
               value: "sftp_key"
             },
             {
-              label: "SFTP with Password Authentication",
+              label: t(
+                "backend.forms.export_target.type_options.sftp_password"
+              ),
               value: "sftp_password"
             }
           ]}
         />
         <Form.TextInput
-          label="SFTP Host"
+          label={t("backend.forms.export_target.host_label")}
           name={`attributes[configuration][${strategy}][host]`}
-          placeholder="Host"
+          placeholder={t("backend.forms.export_target.host_placeholder")}
         />
         <Form.TextInput
-          label="SFTP Port"
+          label={t("backend.forms.export_target.port_label")}
           name={`attributes[configuration][${strategy}][port]`}
           placeholder="22"
         />
         <Form.TextInput
-          label="SFTP Username"
+          label={t("backend.forms.export_target.username_label")}
           name={`attributes[configuration][${strategy}][username]`}
-          placeholder="Username"
+          placeholder={t("backend.forms.export_target.username_placeholder")}
         />
         {strategy === "sftpKey" && (
           <Form.TextArea
-            label="SFTP Private Key"
+            label={t("backend.forms.export_target.private_key_label")}
             name={`attributes[configuration][${strategy}][privateKey]`}
           />
         )}
         {strategy === "sftpPassword" && (
           <Form.TextInput
             password
-            label="SFTP password"
+            label={t("backend.forms.export_target.password_label")}
             name={`attributes[configuration][${strategy}][password]`}
           />
         )}
-        <Form.Save text="Save Export Target" />
+        <Form.Save text={t("backend.forms.export_target.submit_label")} />
       </>
     );
   }
@@ -110,3 +115,5 @@ export default class ExportTargetsContainerForm extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ExportTargetsContainerForm);
