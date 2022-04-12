@@ -166,6 +166,29 @@
         "submit_label": "Save Permissions",
         "delete_modal_heading": "Are you sure you want to remove all permissions from this user?",
         "delete_modal_message": "This action cannot be undone."
+      },
+      "user": {
+        "new_header": "New User",
+        "email": "Email",
+        "role_label": "Role",
+        "role_options": {
+          "admin": "Admin",
+          "editor": "Editor",
+          "creator": "Project Creator",
+          "marketeer": "Marketeer",
+          "reader": "Reader"
+        },
+        "first_name": "$t(backend.forms.maker.first_name)",
+        "last_name": "$t(backend.forms.maker.last_name)",
+        "submit_label": "Save User",
+        "delete_modal_heading": "Are you sure you want delete this user?",
+        "delete_modal_message": "This action cannot be undone.",
+        "unsubscribe_modal_heading": "Are you sure?",
+        "unsubscribe_modal_message": "This user will be unsubscribed from all Manifold email notifications.",
+        "password_modal_heading": "How would you like to reset the user's password?",
+        "password_modal_message": "Automatically send the user a new password or set one yourself.",
+        "unsubscribe": "Unsubscribe",
+        "reset_password": "Reset Password"
       }
     },
     "analytics": {
@@ -241,6 +264,10 @@
     },
     "records": {
       "unauthorized": "You are not allowed to manage records."
+    },
+    "users": {
+      "header": "Manage Users",
+      "button_label": "Add a new user"
     }
   }
 }

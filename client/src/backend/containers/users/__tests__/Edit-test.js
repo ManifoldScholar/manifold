@@ -7,6 +7,7 @@ describe("backend/containers/users/Edit", () => {
       user={$user}
       dispatch={$dispatch}
       match={{ params: {} }}
+      t={key => key}
     />
   ));
 
