@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import withConfirmation from "hoc/withConfirmation";
 import { entityStoreActions } from "actions";
@@ -28,7 +29,8 @@ export class MakersEditContainer extends PureComponent {
     match: PropTypes.object,
     history: PropTypes.object,
     afterDestroy: PropTypes.func,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -56,8 +58,8 @@ export class MakersEditContainer extends PureComponent {
   }
 
   handleMakerDestroy = () => {
-    const heading = "Are you sure you want to delete this maker?";
-    const message = "This action cannot be undone.";
+    const heading = this.props.t("backend.forms.maker.delete_modal_heading");
+    const message = this.props.t("backend.forms.maker.delete_modal_message");
     this.props.confirm(heading, message, this.destroyMaker);
   };
 
@@ -89,7 +91,7 @@ export class MakersEditContainer extends PureComponent {
             {
               onClick: this.handleMakerDestroy,
               icon: "delete32",
-              label: "Delete",
+              label: this.props.t("actions.delete"),
               entity: maker,
               ability: "delete",
               className: "utility-button__icon--notice"
@@ -102,4 +104,6 @@ export class MakersEditContainer extends PureComponent {
   }
 }
 
-export default withConfirmation(connectAndFetch(MakersEditContainer));
+export default withTranslation()(
+  withConfirmation(connectAndFetch(MakersEditContainer))
+);

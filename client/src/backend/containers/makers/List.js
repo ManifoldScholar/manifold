@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -93,7 +94,7 @@ class MakersListContainerImplementation extends PureComponent {
   };
 
   render() {
-    const { makers, makersMeta, match } = this.props;
+    const { makers, makersMeta, match, t } = this.props;
     if (!makers) return null;
     const active = match.params.id;
 
@@ -106,12 +107,12 @@ class MakersListContainerImplementation extends PureComponent {
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
         {makers && (
           <EntitiesList
-            title="Manage Makers"
+            title={t("backend.makers.header")}
             titleStyle="bar"
             buttons={[
               <Button
                 path={lh.link("backendRecordsMakersNew")}
-                text="Add a New Maker"
+                text={t("backend.makers.button_label")}
                 type="add"
                 authorizedFor="maker"
               />
@@ -124,7 +125,9 @@ class MakersListContainerImplementation extends PureComponent {
             entityComponentProps={{ active }}
             pagination={makersMeta.pagination}
             showCount
-            unit="maker"
+            unit={t("glossary.maker", {
+              count: makersMeta.pagination.totalCount
+            })}
             callbacks={{
               onPageClick: this.pageChangeHandlerCreator
             }}
@@ -141,6 +144,6 @@ export const MakersListContainer = withFilteredLists(
     makers: makerFilters()
   }
 );
-export default connect(MakersListContainer.mapStateToProps)(
-  MakersListContainer
+export default withTranslation()(
+  connect(MakersListContainer.mapStateToProps)(MakersListContainer)
 );
