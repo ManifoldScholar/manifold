@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { pagesAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -28,23 +29,24 @@ class PagesDashboardContainer extends PureComponent {
   static displayName = "Pages.List";
 
   static propTypes = {
-    pages: PropTypes.array
+    pages: PropTypes.array,
+    t: PropTypes.func
   };
 
   render() {
-    const { pages } = this.props;
+    const { pages, t } = this.props;
     if (!pages) return null;
     return (
       <EntitiesList
         entityComponent={PageRow}
-        title="Manage Pages"
+        title={t("backend.pages.header")}
         titleStyle="bar"
         entities={pages}
         buttons={[
           <Button
             path={lh.link("backendRecordsPageNew")}
             type="add"
-            text="Create a new page"
+            text={t("backend.pages.button_label")}
             authorizedFor="page"
           />
         ]}
@@ -53,4 +55,4 @@ class PagesDashboardContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(PagesDashboardContainer);
+export default withTranslation()(connectAndFetch(PagesDashboardContainer));

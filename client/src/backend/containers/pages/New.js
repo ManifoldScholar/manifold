@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { pagesAPI } from "api";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
@@ -14,7 +15,8 @@ class PagesNewContainer extends PureComponent {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    form: PropTypes.object
+    form: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor() {
@@ -34,6 +36,7 @@ class PagesNewContainer extends PureComponent {
   };
 
   renderPath() {
+    const t = this.props.t;
     const isExternal = this.props.form.getModelValue(
       "attributes[isExternalLink]"
     );
@@ -41,24 +44,25 @@ class PagesNewContainer extends PureComponent {
       return (
         <Form.TextInput
           validation={["required"]}
-          label="External URL"
+          label={t("backend.forms.page.external_label")}
           name="attributes[externalLink]"
-          placeholder="Enter External URL"
-          instructions="The absolute URL for the page."
+          placeholder={t("backend.forms.page.external_placeholder")}
+          instructions={t("backend.forms.page.external_instructions")}
         />
       );
     return (
       <Form.TextInput
         validation={["required"]}
-        label="Slug"
+        label={t("backend.forms.page.slug_label")}
         name="attributes[slug]"
-        placeholder="Enter URL Slug"
-        instructions="The page URL is based on the slug."
+        placeholder={t("backend.forms.page.slug_placeholder")}
+        instructions={t("backend.forms.page.slug_instructions")}
       />
     );
   }
 
   render() {
+    const t = this.props.t;
     return (
       <section>
         <section>
@@ -72,16 +76,16 @@ class PagesNewContainer extends PureComponent {
           >
             <Form.TextInput
               focusOnMount
-              label="Page Title"
+              label={t("backend.forms.page.title_label")}
               name="attributes[title]"
-              placeholder="Enter Page Title"
+              placeholder={t("backend.forms.page.title_placeholder")}
             />
             <Form.Switch
-              label="External Page?"
+              label={t("backend.forms.page.switch_label")}
               name="attributes[isExternalLink]"
             />
             {this.renderPath()}
-            <Form.Save text="Save Page" />
+            <Form.Save text={t("backend.forms.page.submit_label")} />
           </FormContainer.Form>
         </section>
       </section>
@@ -90,6 +94,6 @@ class PagesNewContainer extends PureComponent {
 }
 
 export default withFormSession(
-  connectAndFetch(PagesNewContainer),
+  withTranslation()(connectAndFetch(PagesNewContainer)),
   "backend-page-create"
 );

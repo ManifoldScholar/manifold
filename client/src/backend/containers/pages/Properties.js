@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { pagesAPI } from "api";
@@ -20,31 +21,33 @@ class PagesPropertiesContainer extends PureComponent {
   static propTypes = {
     page: PropTypes.object.isRequired,
     onSuccess: PropTypes.func,
-    form: PropTypes.object
+    form: PropTypes.object,
+    t: PropTypes.func
   };
 
   renderPath() {
     const isExternal = this.props.form.getModelValue(
       "attributes[isExternalLink]"
     );
+    const t = this.props.t;
     if (isExternal)
       return (
         <Form.TextInput
           validation={["required"]}
-          label="External URL"
+          label={t("backend.forms.page.external_label")}
           name="attributes[externalLink]"
-          placeholder="Enter External URL"
-          instructions="The absolute URL for the page."
+          placeholder={t("backend.forms.page.external_placeholder")}
+          instructions={t("backend.forms.page.external_instructions")}
         />
       );
     return (
       <Form.TextInput
         wide
         validation={["required"]}
-        label="Slug"
+        label={t("backend.forms.page.slug_label")}
         name="attributes[pendingSlug]"
-        placeholder="Enter URL Slug"
-        instructions="The page URL is based on the slug."
+        placeholder={t("backend.forms.page.slug_placeholder")}
+        instructions={t("backend.forms.page.slug_instructions")}
       />
     );
   }
@@ -54,14 +57,15 @@ class PagesPropertiesContainer extends PureComponent {
       "attributes[isExternalLink]"
     );
     if (isExternal) return null;
+    const t = this.props.t;
     return (
       <Form.TextArea
         wide
-        label="Body"
+        label={t("backend.forms.page.body_label")}
         height={300}
         name="attributes[body]"
-        placeholder="Enter Body Content"
-        instructions="You may use basic markdown in this field to format your content."
+        placeholder={t("backend.forms.page.body_placeholder")}
+        instructions={t("backend.forms.page.body_instructions")}
       />
     );
   }
@@ -69,11 +73,12 @@ class PagesPropertiesContainer extends PureComponent {
   renderNewTab() {
     const purpose = this.props.form.getModelValue("attributes[purpose]");
     if (purpose === "terms_and_conditions") return null;
+    const t = this.props.t;
 
     return (
       <Form.Switch
         wide
-        label="Open page in new tab?"
+        label={t("backend.forms.page.new_tab_label")}
         name="attributes[openInNewTab]"
       />
     );
@@ -81,7 +86,7 @@ class PagesPropertiesContainer extends PureComponent {
 
   render() {
     if (!this.props.page) return null;
-    const { page } = this.props;
+    const { page, t } = this.props;
 
     return (
       <section>
@@ -93,37 +98,43 @@ class PagesPropertiesContainer extends PureComponent {
           create={pagesAPI.create}
           className="form-secondary"
         >
-          <Form.FieldGroup label="Properties">
+          <Form.FieldGroup label={t("backend.forms.page.properties_label")}>
             <Form.TextInput
               wide
               validation={["required"]}
               focusOnMount
-              label="Page Title"
+              label={t("backend.forms.page.title_label")}
               name="attributes[title]"
-              placeholder="Enter Page Title"
+              placeholder={t("backend.forms.page.title_placeholder")}
             />
             <Form.TextInput
               wide
-              label="Navigation Title"
+              label={t("backend.forms.page.navigation_label")}
               name="attributes[navTitle]"
-              placeholder="Alternate Navigation Title"
-              instructions="If set, this title will be used in header and footer navigation"
+              placeholder={t("backend.forms.page.navigation_placeholder")}
+              instructions={t("backend.forms.page.navigation_instructions")}
             />
             <Form.Select
-              label="Purpose"
+              label={t("backend.forms.page.purpose_label")}
               name="attributes[purpose]"
               options={[
                 {
-                  label: "Supplemental Content",
+                  label: t("backend.forms.page.purpose_options.supplemental"),
                   value: "supplemental_content"
                 },
-                { label: "Privacy Policy", value: "privacy_policy" },
-                { label: "Terms and Conditions", value: "terms_and_conditions" }
+                {
+                  label: t("backend.forms.page.purpose_options.privacy_policy"),
+                  value: "privacy_policy"
+                },
+                {
+                  label: t("backend.forms.page.purpose_options.terms"),
+                  value: "terms_and_conditions"
+                }
               ]}
             />
             <Form.Switch
               wide
-              label="External Page?"
+              label={t("backend.forms.page.switch_label")}
               name="attributes[isExternalLink]"
             />
             {this.renderNewTab()}
@@ -131,32 +142,32 @@ class PagesPropertiesContainer extends PureComponent {
             {this.renderBody()}
           </Form.FieldGroup>
           <Form.FieldGroup
-            label="Page States"
-            instructions="Manage visibility and whether or not the page appears in navigation"
+            label={t("backend.forms.page.states_label")}
+            instructions={t("backend.forms.page.states_instructions")}
           >
             <Form.Switch
               className="form-input-fourth"
-              label="Hide Page"
+              label={t("backend.forms.page.states_options.hide")}
               labelClass="secondary"
               labelPos="below"
               name="attributes[hidden]"
             />
             <Form.Switch
               className="form-input-fourth"
-              label="Show in Footer"
+              label={t("backend.forms.page.states_options.footer")}
               labelClass="secondary"
               labelPos="below"
               name="attributes[showInFooter]"
             />
             <Form.Switch
               className="form-input-fourth"
-              label="Show in Header"
+              label={t("backend.forms.page.states_options.header")}
               labelClass="secondary"
               labelPos="below"
               name="attributes[showInHeader]"
             />
           </Form.FieldGroup>
-          <Form.Save text="Save Page" />
+          <Form.Save text={t("backend.forms.page.submit_label")} />
         </FormContainer.Form>
       </section>
     );
@@ -164,6 +175,6 @@ class PagesPropertiesContainer extends PureComponent {
 }
 
 export default withFormSession(
-  connectAndFetch(PagesPropertiesContainer),
+  withTranslation()(connectAndFetch(PagesPropertiesContainer)),
   "backend-page-update"
 );
