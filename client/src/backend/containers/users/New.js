@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
@@ -11,7 +12,8 @@ export class UsersNewContainer extends PureComponent {
   static displayName = "Users.New";
 
   static propTypes = {
-    history: PropTypes.object
+    history: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -34,9 +36,10 @@ export class UsersNewContainer extends PureComponent {
   };
 
   render() {
+    const t = this.props.t;
     return (
       <section>
-        <Navigation.DrawerHeader title="New User" />
+        <Navigation.DrawerHeader title={t("backend.forms.user.new_header")} />
         <FormContainer.Form
           model={this.defaultUser}
           name={requests.beUserCreate}
@@ -49,37 +52,52 @@ export class UsersNewContainer extends PureComponent {
         >
           <Form.TextInput
             focusOnMount
-            label="Email"
+            label={t("backend.forms.user.email")}
             name="attributes[email]"
-            placeholder="Email"
+            placeholder={t("backend.forms.user.email")}
           />
           <Form.Select
-            label="Role"
+            label={t("backend.forms.user.role_label")}
             name="attributes[role]"
             options={[
-              { label: "Admin", value: "admin" },
-              { label: "Editor", value: "editor" },
-              { label: "Project Creator", value: "project_creator" },
-              { label: "Marketeer", value: "marketeer" },
-              { label: "Reader", value: "reader" }
+              {
+                label: t("backend.forms.user.role_options.admin"),
+                value: "admin"
+              },
+              {
+                label: t("backend.forms.user.role_options.editor"),
+                value: "editor"
+              },
+              {
+                label: t("backend.forms.user.role_options.creator"),
+                value: "project_creator"
+              },
+              {
+                label: t("backend.forms.user.role_options.marketeer"),
+                value: "marketeer"
+              },
+              {
+                label: t("backend.forms.user.role_options.reader"),
+                value: "reader"
+              }
             ]}
           />
           <Form.TextInput
-            label="First Name"
+            label={t("backend.forms.user.first_name")}
             name="attributes[firstName]"
-            placeholder="First Name"
+            placeholder={t("backend.forms.user.first_name")}
           />
           <Form.TextInput
-            label="Last Name"
+            label={t("backend.forms.user.last_name")}
             name="attributes[lastName]"
-            placeholder="Last Name"
+            placeholder={t("backend.forms.user.last_name")}
           />
           <Form.GeneratedPasswordInput name="attributes[password]" />
-          <Form.Save text="Save User" />
+          <Form.Save text={t("backend.forms.user.submit_label")} />
         </FormContainer.Form>
       </section>
     );
   }
 }
 
-export default connectAndFetch(UsersNewContainer);
+export default withTranslation()(connectAndFetch(UsersNewContainer));

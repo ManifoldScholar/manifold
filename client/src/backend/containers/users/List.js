@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -34,7 +35,8 @@ class UsersListContainerImplementation extends PureComponent {
     match: PropTypes.object,
     route: PropTypes.object,
     dispatch: PropTypes.func,
-    currentUserId: PropTypes.string
+    currentUserId: PropTypes.string,
+    t: PropTypes.func
   };
 
   constructor() {
@@ -87,7 +89,7 @@ class UsersListContainerImplementation extends PureComponent {
   };
 
   render() {
-    const { match, entitiesListSearchProps } = this.props;
+    const { match, entitiesListSearchProps, t } = this.props;
     if (!this.props.users) return null;
     const { users, usersMeta } = this.props;
     const active = match.params.id;
@@ -102,10 +104,10 @@ class UsersListContainerImplementation extends PureComponent {
         <EntitiesList
           entityComponent={UserRow}
           entityComponentProps={{ active }}
-          title={"Manage Users"}
+          title={t("backend.users.header")}
           titleStyle="bar"
           entities={users}
-          unit="user"
+          unit={t("glossary.user", { count: usersMeta.pagination.totalCount })}
           pagination={usersMeta.pagination}
           showCount
           callbacks={{
@@ -115,7 +117,7 @@ class UsersListContainerImplementation extends PureComponent {
           buttons={[
             <Button
               path={lh.link("backendRecordsUsersNew")}
-              text="Add a new user"
+              text={t("backend.users.button_label")}
               authorizedFor="user"
               type="add"
             />
@@ -132,4 +134,4 @@ export const UsersListContainer = withFilteredLists(
     users: userFilters()
   }
 );
-export default connectAndFetch(UsersListContainer);
+export default withTranslation()(connectAndFetch(UsersListContainer));

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Dialog from "global/components/dialog";
 import withConfirmation from "hoc/withConfirmation";
@@ -32,7 +33,8 @@ export class UsersEditContainer extends PureComponent {
     confirm: PropTypes.func.isRequired,
     dispatch: PropTypes.func,
     user: PropTypes.object,
-    history: PropTypes.object
+    history: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -71,8 +73,9 @@ export class UsersEditContainer extends PureComponent {
   }
 
   handleUserDestroy = () => {
-    const heading = "Are you sure you want to delete this user?";
-    const message = "This action cannot be undone.";
+    const t = this.props.t;
+    const heading = t("backend.forms.user.delete_modal_heading");
+    const message = t("backend.forms.user.delete_modal_message");
     this.props.confirm(heading, message, this.destroyUser);
   };
 
@@ -87,9 +90,9 @@ export class UsersEditContainer extends PureComponent {
   };
 
   unsubscribeUser = () => {
-    const heading = "Are you sure?";
-    const message =
-      "This user will be unsubscribed from all Manifold email notifications.";
+    const t = this.props.t;
+    const heading = t("backend.forms.user.unsubscribe_modal_heading");
+    const message = t("backend.forms.user.unsubscribe_modal_message");
     this.props.confirm(heading, message, () => {
       const adjustedUser = { ...this.user };
       adjustedUser.attributes.unsubscribe = true;
@@ -106,9 +109,9 @@ export class UsersEditContainer extends PureComponent {
   }
 
   handleResetPasswordClick = () => {
-    const heading = "How would you like to reset the user's password?";
-    const message =
-      "Automatically send the user a new password or set one yourself.";
+    const t = this.props.t;
+    const heading = t("backend.forms.user.password_modal_heading");
+    const message = t("backend.forms.user.password_modal_message");
     new Promise((resolve, reject) => {
       this.setState({
         resetPassword: { resolve, reject, heading, message }
@@ -127,6 +130,7 @@ export class UsersEditContainer extends PureComponent {
     if (!this.user) return null;
     const attr = this.user.attributes;
     const user = this.user;
+    const t = this.props.t;
 
     return (
       <div>
@@ -143,17 +147,17 @@ export class UsersEditContainer extends PureComponent {
             {
               onClick: this.handleResetPasswordClick,
               icon: "key32",
-              label: "Reset Password"
+              label: t("backend.forms.user.reset_password")
             },
             {
               onClick: this.unsubscribeUser,
               icon: "mail32",
-              label: "Unsubscribe"
+              label: t("backend.forms.user.unsubscribe")
             },
             {
               onClick: this.handleUserDestroy,
               icon: "delete32",
-              label: "Delete",
+              label: t("actions.delete"),
               className: "utility-button__icon--notice"
             }
           ]}
@@ -170,30 +174,45 @@ export class UsersEditContainer extends PureComponent {
           >
             <Form.TextInput
               focusOnMount
-              label="Email"
+              label={t("backend.forms.user.email")}
               name="attributes[email]"
-              placeholder="Email"
+              placeholder={t("backend.forms.user.email")}
             />
             <Form.TextInput
-              label="First Name"
+              label={t("backend.forms.user.first_name")}
               name="attributes[firstName]"
-              placeholder="First Name"
+              placeholder={t("backend.forms.user.first_name")}
             />
             <Form.TextInput
-              label="Last Name"
+              label={t("backend.forms.user.last_name")}
               name="attributes[lastName]"
-              placeholder="Last Name"
+              placeholder={t("backend.forms.user.last_name")}
             />
             <Form.Select
-              label="Role"
+              label={t("backend.forms.user.role_label")}
               name="attributes[role]"
               selected={user.attributes.role}
               options={[
-                { label: "Admin", value: "admin" },
-                { label: "Editor", value: "editor" },
-                { label: "Project Creator", value: "project_creator" },
-                { label: "Marketeer", value: "marketeer" },
-                { label: "Reader", value: "reader" }
+                {
+                  label: t("backend.forms.user.role_options.admin"),
+                  value: "admin"
+                },
+                {
+                  label: t("backend.forms.user.role_options.editor"),
+                  value: "editor"
+                },
+                {
+                  label: t("backend.forms.user.role_options.creator"),
+                  value: "project_creator"
+                },
+                {
+                  label: t("backend.forms.user.role_options.marketeer"),
+                  value: "marketeer"
+                },
+                {
+                  label: t("backend.forms.user.role_options.reader"),
+                  value: "reader"
+                }
               ]}
             />
             <Form.Save text="Save User" />
@@ -204,4 +223,6 @@ export class UsersEditContainer extends PureComponent {
   }
 }
 
-export default withConfirmation(connectAndFetch(UsersEditContainer));
+export default withTranslation()(
+  withConfirmation(connectAndFetch(UsersEditContainer))
+);

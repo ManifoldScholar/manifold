@@ -9,6 +9,7 @@ describe("backend/containers/users/List", () => {
       usersMeta={{ pagination: fixtures.pagination() }}
       match={{ params: {} }}
       route={fixtures.route()}
+      t={key => key}
     />
   ));
 

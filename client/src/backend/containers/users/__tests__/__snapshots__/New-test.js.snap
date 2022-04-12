@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`backend/containers/users/New matches the snapshot when rendered 1`] = `"<header class=\\"drawer-header\\"><h2 class=\\"drawer-header__title\\"><span class=\\"drawer-header__title-text\\">New User</span></h2></header>"`;
+exports[`backend/containers/users/New matches the snapshot when rendered 1`] = `"<header class=\\"drawer-header\\"><h2 class=\\"drawer-header__title\\"><span class=\\"drawer-header__title-text\\">backend.forms.user.new_header</span></h2></header>"`;
