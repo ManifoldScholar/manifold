@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { featuresAPI } from "api";
@@ -11,11 +12,12 @@ class FeaturesPropertiesContainer extends PureComponent {
   static propTypes = {
     feature: PropTypes.object,
     onSuccess: PropTypes.func,
-    sessionName: PropTypes.string
+    sessionName: PropTypes.string,
+    t: PropTypes.func
   };
 
   render() {
-    const { feature } = this.props;
+    const { feature, t } = this.props;
     return (
       <section>
         <FormContainer.Form
@@ -26,111 +28,133 @@ class FeaturesPropertiesContainer extends PureComponent {
           create={featuresAPI.create}
           className="form-secondary"
         >
-          <Form.FieldGroup label="Properties">
+          <Form.FieldGroup label={t("backend.forms.feature.properties_label")}>
             <Form.Switch
               wide
-              label="Published"
+              label={t("backend.forms.feature.published_label")}
               name="attributes[live]"
-              instructions="Only published features will appear on the home page."
+              instructions={t("backend.forms.feature.published_instructions")}
             />
             <Form.TextInput
               wide
               validation={["required"]}
-              label="Header"
+              label={t("backend.forms.feature.header_label")}
               name="attributes[header]"
-              placeholder="Enter the feature header"
+              placeholder={t("backend.forms.feature.header_placeholder")}
             />
             <Form.TextInput
               wide
-              label="Subheader"
+              label={t("backend.forms.feature.subheader_label")}
               name="attributes[subheader]"
-              placeholder="Optionally, enter a subheader"
+              placeholder={t("backend.forms.feature.subheader_placeholder")}
             />
             <Form.TextArea
               wide
-              label="Body"
+              label={t("backend.forms.feature.body_label")}
               rows={200}
               name="attributes[body]"
-              placeholder="A couple sentences about the feature"
+              placeholder={t("backend.forms.feature.body_placeholder")}
             />
             <Form.TextInput
-              label="Link Text"
+              label={t("backend.forms.feature.link_label")}
               name="attributes[linkText]"
-              placeholder="Enter Link Text"
+              placeholder={t("backend.forms.feature.link_placeholder")}
             />
             <Form.TextInput
-              label="Link URL"
+              label={t("backend.forms.feature.url_label")}
               name="attributes[linkUrl]"
-              placeholder="Enter Link URL"
+              placeholder={t("backend.forms.feature.url_placeholder")}
             />
             <Form.Switch
               wide
-              label="Include Sign Up Button"
+              label={t("backend.forms.feature.sign_up_label")}
               name="attributes[includeSignUp]"
-              instructions="If enabled, a sign up button will be displayed over the feature for unauthenticated users."
+              instructions={t("backend.forms.feature.sign_up_instructions")}
             />
             <Form.Select
-              label="Style"
+              label={t("backend.forms.feature.style_label")}
               name="attributes[style]"
               options={[
                 { label: "", value: "" },
-                { label: "Dark Background (default)", value: "dark" },
-                { label: "Light Background", value: "light" }
+                {
+                  label: t("backend.forms.feature.style_options.dark"),
+                  value: "dark"
+                },
+                {
+                  label: t("backend.forms.feature.style_options.light"),
+                  value: "light"
+                }
               ]}
             />
             <Form.TextInput
-              label="Background Color"
+              label={t("backend.forms.feature.background_label")}
               name="attributes[backgroundColor]"
               placeholder="#000000"
             />
             <Form.TextInput
-              label="Foreground Color"
+              label={t("backend.forms.feature.foreground_label")}
               name="attributes[foregroundColor]"
               placeholder="#000000"
             />
             <Form.TextInput
-              label="Header Color"
+              label={t("backend.forms.feature.header_color_label")}
               name="attributes[headerColor]"
               placeholder="#000000"
             />
             <Form.Upload
               layout="landscape"
               accepts="images"
-              label="Background Image"
+              label={t("backend.forms.feature.background_image_label")}
               readFrom="attributes[backgroundStyles][small]"
               name="attributes[background]"
               remove="attributes[removeBackground]"
-              instructions="The background of the feature."
+              instructions={t(
+                "backend.forms.feature.background_image_instructions"
+              )}
             />
             <Form.Upload
               layout="portrait"
               accepts="images"
-              label="Foreground Image"
+              label={t("backend.forms.feature.foreground_image_label")}
               readFrom="attributes[foregroundStyles][small]"
               name="attributes[foreground]"
               remove="attributes[removeForeground]"
-              instructions="An image to display in the foreground"
+              instructions={t(
+                "backend.forms.feature.foreground_image_instructions"
+              )}
             />
             <Form.TextInput
-              label="Foreground Image Top Position"
+              label={t("backend.forms.feature.foreground_image_position.top")}
               name="attributes[foregroundTop]"
               placeholder="0em"
             />
             <Form.TextInput
-              label="Foreground Image Left Position"
+              label={t("backend.forms.feature.foreground_image_position.left")}
               name="attributes[foregroundLeft]"
               placeholder="0em"
             />
             <Form.Select
-              label="Foreground Position Mode"
+              label={t(
+                "backend.forms.feature.foreground_image_position.mode.label"
+              )}
               name="attributes[foregroundPosition]"
               options={[
                 { label: "", value: "" },
-                { label: "Relative (default)", value: "relative" },
-                { label: "Absolute", value: "absolute" }
+                {
+                  label: t(
+                    "backend.forms.feature.foreground_image_position.mode.rrelative"
+                  ),
+                  value: "relative"
+                },
+                {
+                  label: t(
+                    "backend.forms.feature.foreground_image_position.mode.absolute"
+                  ),
+                  value: "absolute"
+                }
               ]}
             />
-            <Form.Save text="Save Feature" />
+            <Form.Save text={t("backend.forms.feature.submit_label")} />
           </Form.FieldGroup>
         </FormContainer.Form>
       </section>
@@ -138,4 +162,4 @@ class FeaturesPropertiesContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(FeaturesPropertiesContainer);
+export default withTranslation()(connectAndFetch(FeaturesPropertiesContainer));

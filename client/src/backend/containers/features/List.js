@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { featuresAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -24,7 +25,8 @@ class ContentFeaturesList extends PureComponent {
 
   static propTypes = {
     features: PropTypes.array,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -48,11 +50,11 @@ class ContentFeaturesList extends PureComponent {
   };
 
   render() {
-    const { features } = this.props;
+    const { features, t } = this.props;
     if (!features) return null;
     return (
       <EntitiesList
-        title="Manage Features"
+        title={t("backend.features.header")}
         titleStyle="bar"
         entityComponent={FeatureRow}
         entityComponentProps={{
@@ -63,7 +65,7 @@ class ContentFeaturesList extends PureComponent {
           <Button
             path={lh.link("backendRecordsFeatureNew")}
             type="add"
-            text="Create a new feature"
+            text={t("backend.features.button_label")}
             authorizedFor="feature"
           />
         ]}
@@ -72,4 +74,4 @@ class ContentFeaturesList extends PureComponent {
   }
 }
 
-export default connectAndFetch(ContentFeaturesList);
+export default withTranslation()(connectAndFetch(ContentFeaturesList));
