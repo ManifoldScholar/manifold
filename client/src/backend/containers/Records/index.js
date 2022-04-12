@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Navigation from "backend/components/navigation";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
@@ -7,11 +8,12 @@ import navigation from "helpers/router/navigation";
 
 import Authorize from "hoc/Authorize";
 
-export default class RecordsContainer extends PureComponent {
+class RecordsContainer extends PureComponent {
   static displayName = "RecordsContainer";
 
   static propTypes = {
-    route: PropTypes.object
+    route: PropTypes.object,
+    t: PropTypes.func
   };
 
   render() {
@@ -22,7 +24,7 @@ export default class RecordsContainer extends PureComponent {
         ability="update"
         entity={["user", "maker", "page", "feature", "exportTarget"]}
         failureFatalError={{
-          body: "You are not allowed to manage records."
+          body: this.props.t("backend.records.unauthorized")
         }}
       >
         <RedirectToFirstMatch
@@ -39,3 +41,5 @@ export default class RecordsContainer extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(RecordsContainer);

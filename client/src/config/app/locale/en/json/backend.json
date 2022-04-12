@@ -238,6 +238,9 @@
       "header": "Editor Permissions",
       "instructions": "Use permissions to specify which users may modify this project in the backend, and the extent to which they can modify it.",
       "button_label": "Grant editor permissions"
+    },
+    "records": {
+      "unauthorized": "You are not allowed to manage records."
     }
   }
 }
