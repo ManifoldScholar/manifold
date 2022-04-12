@@ -77,8 +77,8 @@ module Validation
                   :avatar_color, :pending_slug, { tag_list: [] }, :dark_mode, :image_credits,
                   :standalone_mode, :standalone_mode_press_bar_text, :restricted_access,
                   :standalone_mode_press_bar_url, :finished, :restricted_access_heading,
-                  :restricted_access_body, :open_access, :disable_engagement]
-    relationships = [:collaborators, :creators, :contributors, :subjects]
+                  :restricted_access_body, :open_access, :disable_engagement, :journal_issue_number]
+    relationships = [:collaborators, :creators, :contributors, :subjects, :journal_volume]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end

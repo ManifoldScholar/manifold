@@ -70,6 +70,8 @@ module V1
           typed_attribute :event_types, Types::Array.of(Types::String).meta(read_only: true), &:uniq_event_types
           typed_attribute :resource_tags, Types::Array.of(Types::String).meta(read_only: true), &:sorted_resource_tags
           typed_attribute :disable_engagement, Types::Bool
+          typed_attribute :journal_issue_number, Types: String
+          typed_attribute :journal_volume_number, Types: String
 
           typed_has_one :journal
           typed_has_one :journal_volume, record_type: "journalVolume"

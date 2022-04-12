@@ -13,7 +13,25 @@ module Updaters
       return {} unless attributes
 
       clone = attributes.clone
+      clone.delete(:journal_issue_number)
       hashtag!(clone)
+      clone
+    end
+
+    def post_update(model)
+      @model = model
+      model.journal_issue.number = attributes["journal_issue_number"] if attributes.key? "journal_issue_number"
+      model.journal_issue.journal_volume = nil if unset_journal_volume?
+      model.journal_issue.save
+    end
+
+    def unset_journal_volume?
+      relationships.key?(:journal_volume) && relationships.dig(:journal_volume, :data, :id).nil?
+    end
+
+    def adjusted_relationships
+      clone = relationships.clone
+      clone.delete(:journal_volume) if unset_journal_volume?
       clone
     end
 

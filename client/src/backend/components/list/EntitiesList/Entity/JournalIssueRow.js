@@ -38,11 +38,7 @@ function JournalIssueRow({
   };
 
   if (clickable) {
-    additionalProps.onRowClick = lh.link(
-      "backendJournalIssueEdit",
-      journal.id,
-      id
-    );
+    additionalProps.onRowClick = lh.link("backendProject", projectId);
     additionalProps.rowClickMode = "block";
   }
 

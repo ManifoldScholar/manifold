@@ -33,12 +33,6 @@ function IssueForm({ journalId, model, ...props }) {
         listStyle={"rows"}
         options={fetchJournalVolumes}
       />
-      <Form.TextInput
-        wide
-        label="Slug"
-        name="attributes[pendingSlug]"
-        placeholder="Enter Journal Issue Slug"
-      />
       {model?.id ? (
         <div className="form-input">
           <span className="form-input-heading">Associated Project</span>

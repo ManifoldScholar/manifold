@@ -116,6 +116,9 @@ class Project < ApplicationRecord
   }, class_name: "Resource"
   # rubocop:enable
 
+  delegate :number, to: :journal_issue, allow_nil: true, prefix: true
+  delegate :number, to: :journal_volume, allow_nil: true, prefix: true
+
   # Callbacks
   before_update :prepare_to_reindex_children, if: :draft_changed?
   before_create :assign_publisher_defaults!
