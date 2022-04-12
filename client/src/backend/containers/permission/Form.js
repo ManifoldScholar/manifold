@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { usersAPI, permissionsAPI, requests } from "api";
@@ -15,7 +16,8 @@ export class PermissionForm extends PureComponent {
     entity: PropTypes.object.isRequired,
     permission: PropTypes.object,
     showUserInput: PropTypes.bool,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    t: PropTypes.func
   };
 
   handleSuccess = newPermission => {
@@ -65,14 +67,16 @@ export class PermissionForm extends PureComponent {
       return this.renderSelectedUser(props.permission.relationships.user);
     }
 
+    const t = this.props.t;
+
     return (
       <Form.Picker
-        label="User"
+        label={t("backend.forms.permissions.user_label")}
         listStyle={"well"}
         name="relationships[user]"
         options={this.fetchUsers}
         optionToLabel={u => u.attributes.fullName}
-        placeholder="Select a User"
+        placeholder={t("backend.forms.permissions.user_placeholder")}
         predictive
         listRowComponent="UserRow"
       />
@@ -80,7 +84,7 @@ export class PermissionForm extends PureComponent {
   }
 
   render() {
-    const { permission } = this.props;
+    const { permission, t } = this.props;
     const name = permission
       ? requests.bePermissionUpdate
       : requests.bePermissionCreate;
@@ -102,20 +106,26 @@ export class PermissionForm extends PureComponent {
           <Form.SwitchArray
             name="attributes[roleNames]"
             options={[
-              { label: "Can modify project?", value: "project_editor" },
               {
-                label: "Can modify resource metadata?",
+                label: t("backend.forms.permissions.modify_project"),
+                value: "project_editor"
+              },
+              {
+                label: t("backend.forms.permissions.modify_resource"),
                 value: "project_resource_editor"
               },
-              { label: "Is a project author?", value: "project_author" }
+              {
+                label: t("backend.forms.permissions.author"),
+                value: "project_author"
+              }
             ]}
             focusOnMount={this.props.showUserInput}
           />
-          <Form.Save text="Save Permissions" />
+          <Form.Save text={t("backend.forms.permissions.submit_label")} />
         </FormContainer.Form>
       </section>
     );
   }
 }
 
-export default connectAndFetch(PermissionForm);
+export default withTranslation()(connectAndFetch(PermissionForm));

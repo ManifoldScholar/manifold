@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Form from "./Form";
 import { permissionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -26,7 +27,8 @@ export class PermissionEdit extends PureComponent {
     dispatch: PropTypes.func,
     closeUrl: PropTypes.string.isRequired,
     history: PropTypes.object,
-    confirm: PropTypes.func.isRequired
+    confirm: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -57,9 +59,9 @@ export class PermissionEdit extends PureComponent {
   }
 
   handleRemoveAll = () => {
-    const heading =
-      "Are you sure you want to remove all permissions from this user?";
-    const message = "This action cannot be undone.";
+    const t = this.props.t;
+    const heading = t("backend.forms.permissions.delete_modal_heading");
+    const message = t("backend.forms.permissions.delete_modal_message");
     this.props.confirm(heading, message, this.removeAllPermissions);
   };
 
@@ -79,17 +81,17 @@ export class PermissionEdit extends PureComponent {
   };
 
   render() {
-    const permission = this.props.permission;
+    const { permission, t } = this.props;
     if (!permission) return null;
     return (
       <section>
         <Navigation.DrawerHeader
-          title="Edit Permission"
+          title={t("backend.forms.permissions.edit_header")}
           buttons={[
             {
               onClick: this.handleRemoveAll,
               icon: "delete32",
-              label: "Delete User Permissions",
+              label: t("actions.delete"),
               className: "utility-button__icon--notice"
             }
           ]}
@@ -105,4 +107,6 @@ export class PermissionEdit extends PureComponent {
   }
 }
 
-export default withConfirmation(connectAndFetch(PermissionEdit));
+export default withTranslation()(
+  withConfirmation(connectAndFetch(PermissionEdit))
+);

@@ -154,6 +154,18 @@
           "footer": "Show in Footer",
           "header": "Show in Header"
         }
+      },
+      "permissions": {
+        "header": "Grant Permissions",
+        "edit_header": "Edit Permission",
+        "user_label": "User",
+        "user_placeholder": "Select a User",
+        "modify_project": "Can modify project?",
+        "modify_resource": "Can modify resource metadata?",
+        "author": "Is a project author?",
+        "submit_label": "Save Permissions",
+        "delete_modal_heading": "Are you sure you want to remove all permissions from this user?",
+        "delete_modal_message": "This action cannot be undone."
       }
     },
     "analytics": {
@@ -221,6 +233,11 @@
       "header": "Manage Pages",
       "button_label": "Create a new page",
       "back_label": "All Pages"
+    },
+    "permissions": {
+      "header": "Editor Permissions",
+      "instructions": "Use permissions to specify which users may modify this project in the backend, and the extent to which they can modify it.",
+      "button_label": "Grant editor permissions"
     }
   }
 }

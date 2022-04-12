@@ -1,22 +1,22 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Form from "./Form";
 import Navigation from "backend/components/navigation";
 
-export default class PermissionNew extends PureComponent {
-  static displayName = "Permission.New";
-
-  static propTypes = {
-    entity: PropTypes.object,
-    history: PropTypes.object
-  };
-
-  render() {
-    return (
-      <section>
-        <Navigation.DrawerHeader title="Grant Permissions" />
-        <Form entity={this.props.entity} history={this.props.history} />
-      </section>
-    );
-  }
+export default function PermissionNew({ entity, history }) {
+  const { t } = useTranslation();
+  return (
+    <section>
+      <Navigation.DrawerHeader title={t("backend.forms.permissions.header")} />
+      <Form entity={entity} history={history} />
+    </section>
+  );
 }
+
+PermissionNew.displayName = "Permission.New";
+
+PermissionNew.propTypes = {
+  entity: PropTypes.object,
+  history: PropTypes.object
+};

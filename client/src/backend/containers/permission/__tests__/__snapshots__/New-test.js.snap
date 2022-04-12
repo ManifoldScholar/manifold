@@ -5,9 +5,9 @@ exports[`backend/containers/permission/New matches the snapshot 1`] = `
   <Drawer.EntityHeader
     buttonlayout="stack"
     buttons={Array []}
-    title="Grant Permissions"
+    title="backend.forms.permissions.header"
   />
-  <withRouter(Connect(HigherOrder.FetchData('Permission.Form)))
+  <withI18nextTranslation(withRouter(Connect(HigherOrder.FetchData('Permission.Form))))
     entity={
       Object {
         "attributes": Object {
