@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { entitlementTargetsAPI, entitlementsAPI, requests } from "api";
@@ -12,7 +13,8 @@ export class EntitlementForm extends PureComponent {
     entity: PropTypes.object.isRequired,
     history: PropTypes.object,
     redirectAfterSuccess: PropTypes.string,
-    entitlement: PropTypes.object
+    entitlement: PropTypes.object,
+    t: PropTypes.func
   };
 
   handleSuccess = () => {
@@ -29,6 +31,7 @@ export class EntitlementForm extends PureComponent {
   };
 
   render() {
+    const t = this.props.t;
     return (
       <section>
         <FormContainer.Form
@@ -42,27 +45,30 @@ export class EntitlementForm extends PureComponent {
           notificationScope="drawer"
         >
           <Form.Picker
-            label="Who is the Entitlement For?"
+            label={t("backend.forms.entitlement.user_select_label")}
             listStyle={"well"}
             name="attributes[targetUrl]"
             options={entitlementTargetsAPI.index}
             optionToValue={et => et.id}
             optionToLabel={et => et.attributes.name}
-            placeholder="Select a User or Reading Group"
+            placeholder={t("backend.forms.entitlement.user_select_placeholder")}
             predictive
           />
+          {/* Date placholder is not localized in first pass, since the api needs this format to parse the date. -LD */}
           <Form.TextInput
             wide
-            label="Expiration"
+            label={t("backend.forms.entitlement.expiration_label")}
             name="attributes[expiration]"
             placeholder="YYYY/MM/DD"
-            instructions="Enter YYYY/MM/DD or a human-readable string, e.g. 'in one year'"
+            instructions={t(
+              "backend.forms.entitlement.expiration_instructions"
+            )}
           />
-          <Form.Save text="Save Entitlement" />
+          <Form.Save text={t("backend.forms.entitlement.submit_label")} />
         </FormContainer.Form>
       </section>
     );
   }
 }
 
-export default withRouter(EntitlementForm);
+export default withTranslation()(withRouter(EntitlementForm));
