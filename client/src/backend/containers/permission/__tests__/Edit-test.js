@@ -15,6 +15,7 @@ describe("backend/containers/permission/Edit", () => {
         entity={$project}
         permission={$permission}
         closeUrl={"http://www.dailyrowan.com"}
+        t={key => key}
       />
     );
   });

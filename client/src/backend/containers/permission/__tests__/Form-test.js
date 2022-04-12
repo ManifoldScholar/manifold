@@ -8,6 +8,7 @@ describe("backend/containers/permission/Form", () => {
       entity={$project}
       history={$history}
       successUrl="http://www.dailyrowan.com"
+      t={key => key}
     />
   ));
 

@@ -22,6 +22,7 @@ describe("backend/containers/permission/List", () => {
       permissions={$permissions}
       project={$project}
       match={$match}
+      t={key => key}
     />
   ));
 

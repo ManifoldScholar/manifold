@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { permissionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -27,7 +28,8 @@ export class PermissionContainer extends PureComponent {
     permissions: PropTypes.array,
     linkName: PropTypes.string,
     dispatch: PropTypes.func,
-    match: PropTypes.object
+    match: PropTypes.object,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -40,7 +42,7 @@ export class PermissionContainer extends PureComponent {
   }
 
   render() {
-    const { match, entity, permissions } = this.props;
+    const { match, entity, permissions, t } = this.props;
     const active = match.params.id;
     const listUrl = lh.nameFromType("backend", "Permission", entity);
     const newUrl = lh.nameFromType("backend", "PermissionsNew", entity);
@@ -49,8 +51,8 @@ export class PermissionContainer extends PureComponent {
       <section>
         {permissions && (
           <EntitiesList
-            title="Editor Permissions"
-            instructions="Use permissions to specify which users may modify this project in the backend, and the extent to which they can modify it."
+            title={t("backend.permissions.header")}
+            instructions={t("backend.permissions.instructions")}
             titleStyle="section"
             entities={permissions}
             entityComponent={PermissionRow}
@@ -61,7 +63,7 @@ export class PermissionContainer extends PureComponent {
             buttons={[
               <Button
                 path={lh.link(newUrl, entity.id)}
-                text="Grant editor permissions"
+                text={t("backend.permissions.button_label")}
                 type="add"
                 authorizedTo="createPermissions"
                 authorizedFor={entity}
@@ -74,4 +76,4 @@ export class PermissionContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(PermissionContainer);
+export default withTranslation()(connectAndFetch(PermissionContainer));
