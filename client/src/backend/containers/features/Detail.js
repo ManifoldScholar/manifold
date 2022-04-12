@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { featuresAPI, requests } from "api";
 import connectAndFetch from "utils/connectAndFetch";
 import entityUtils from "utils/entityUtils";
@@ -35,7 +36,8 @@ class FeatureDetailContainer extends PureComponent {
     history: PropTypes.object.isRequired,
     confirm: PropTypes.func.isRequired,
     feature: PropTypes.object,
-    route: PropTypes.object
+    route: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -75,10 +77,10 @@ class FeatureDetailContainer extends PureComponent {
   };
 
   handleDestroy = () => {
-    const { feature } = this.props;
+    const { feature, t } = this.props;
     if (!feature) return;
-    const heading = "Are you sure you want to delete this feature?";
-    const message = "This action cannot be undone.";
+    const heading = t("backend.forms.feature.delete_modal_heading");
+    const message = t("backend.forms.feature.delete_modal_message");
     this.props.confirm(heading, message, () => this.doDestroy(feature));
   };
 
@@ -98,11 +100,12 @@ class FeatureDetailContainer extends PureComponent {
   }
 
   notifyDestroy(feature) {
+    const t = this.props.t;
     const notification = {
       level: 0,
       id: `FEATURE_DESTROYED_${feature.id}`,
-      heading: "The feature has been deleted.",
-      body: `And we're sorry to see it go.`,
+      heading: t("backend.forms.feature.delete_confirm_heading"),
+      body: t("backend.forms.feature.delete_confim_body"),
       expiration: 3000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
@@ -133,30 +136,32 @@ class FeatureDetailContainer extends PureComponent {
   }
 
   newHeader() {
+    const t = this.props.t;
     return (
       <Navigation.DetailHeader
         type="feature"
         backUrl={lh.link("backendRecordsFeatures")}
-        backLabel={"All Features"}
-        title="New Feature"
+        backLabel={t("backend.features.back_label")}
+        title={t("backend.forms.feature.new_header")}
         showUtility={false}
-        note={
-          "Complete the form below to make a new feature. Press save to continue."
-        }
+        note={t("backend.forms.feature.new_instructions")}
       />
     );
   }
 
   featureHeader(feature) {
     if (!feature) return null;
+    const t = this.props.t;
     return (
       <Navigation.DetailHeader
         type="feature"
         backUrl={lh.link("backendRecordsFeatures")}
-        backLabel={"All Features"}
+        backLabel={t("backend.features.back_label")}
         title={
           feature.attributes.header ||
-          `Untitled #${feature.attributes.position}`
+          t("backend.feaures.preview.no_title", {
+            position: feature.attributes.position
+          })
         }
         utility={this.renderUtility()}
       />
@@ -172,7 +177,9 @@ class FeatureDetailContainer extends PureComponent {
             size={26}
             className="utility-button__icon utility-button__icon--notice"
           />
-          <span className="utility-button__text">Delete</span>
+          <span className="utility-button__text">
+            {this.props.t("actions.delete")}
+          </span>
         </button>
       </div>
     );
@@ -186,6 +193,7 @@ class FeatureDetailContainer extends PureComponent {
   }
 
   render() {
+    const t = this.props.t;
     const feature = this.feature(this.props);
     const isNew = this.isNew(this.props);
     const authProps = isNew
@@ -198,7 +206,7 @@ class FeatureDetailContainer extends PureComponent {
     return (
       <Authorize
         failureFatalError={{
-          body: `You are not allowed to ${authProps.ability} features.`
+          body: t(`backend.features.preview.unauthorized_${authProps.ability}`)
         }}
         {...authProps}
       >
@@ -209,7 +217,9 @@ class FeatureDetailContainer extends PureComponent {
               <section>
                 {previewFeature ? (
                   <div className="form-secondary form-section form-section--primary">
-                    <SectionLabel label="Feature Preview" />
+                    <SectionLabel
+                      label={t("backend.features.preview.section_title")}
+                    />
                     <div className="form-input-group form-input-group--primary">
                       <div className="form-input wide">
                         <FrontendLayout.Splash
@@ -217,9 +227,7 @@ class FeatureDetailContainer extends PureComponent {
                           preview
                         />
                         <span className="instructions">
-                          This is an approximate preview of your feature.
-                          Foreground, background, and markdown will not be
-                          displayed until the feature is saved.
+                          {t("backend.features.preview.instructions")}
                         </span>
                       </div>
                     </div>
@@ -235,4 +243,6 @@ class FeatureDetailContainer extends PureComponent {
   }
 }
 
-export default withConfirmation(connectAndFetch(FeatureDetailContainer));
+export default withTranslation()(
+  withConfirmation(connectAndFetch(FeatureDetailContainer))
+);
