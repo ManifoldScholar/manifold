@@ -99,6 +99,18 @@
           }
         },
         "submit_label": "Save Feature"
+      },
+      "maker": {
+        "delete_modal_heading": "Are you sure you want to delete this maker?",
+        "delete_modal_message": "This action cannot be undone.",
+        "title": "Title",
+        "first_name": "First Name",
+        "middle_name": "Middle Name",
+        "last_name": "Last Name",
+        "suffix": "Suffix",
+        "avatar": "Avatar Image",
+        "submit_label": "Save Maker",
+        "new_header": "New Maker"
       }
     },
     "analytics": {
@@ -157,6 +169,10 @@
         "processing": "Processing",
         "finished": "Finished"
       }
+    },
+    "makers": {
+      "header": "Manage Makers",
+      "button_label": "Add a new maker"
     }
   }
 }

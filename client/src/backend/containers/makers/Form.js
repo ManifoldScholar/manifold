@@ -1,16 +1,18 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { makersAPI, requests } from "api";
 
-export default class MakersFormContainer extends PureComponent {
+class MakersFormContainer extends PureComponent {
   static displayName = "Makers.Form";
 
   static propTypes = {
     maker: PropTypes.object,
     successHandler: PropTypes.func,
-    options: PropTypes.object
+    options: PropTypes.object,
+    t: PropTypes.func
   };
 
   handleSuccess = maker => {
@@ -19,7 +21,7 @@ export default class MakersFormContainer extends PureComponent {
   };
 
   render() {
-    const maker = this.props.maker;
+    const { maker, t } = this.props;
     const requestName = maker ? requests.beMakerUpdate : requests.beMakerCreate;
 
     return (
@@ -36,42 +38,44 @@ export default class MakersFormContainer extends PureComponent {
           notificationScope="drawer"
         >
           <Form.TextInput
-            label="Title"
+            label={t("backend.forms.maker.title")}
             name="attributes[prefix]"
-            placeholder="Title"
+            placeholder={t("backend.forms.maker.title")}
             focusOnMount
           />
           <Form.TextInput
-            label="First Name"
+            label={t("backend.forms.maker.first_name")}
             name="attributes[firstName]"
-            placeholder="First Name"
+            placeholder={t("backend.forms.maker.first_name")}
           />
           <Form.TextInput
-            label="Middle Name"
+            label={t("backend.forms.maker.middle_name")}
             name="attributes[middleName]"
-            placeholder="Middle Name"
+            placeholder={t("backend.forms.maker.middle_name")}
           />
           <Form.TextInput
-            label="Last Name"
+            label={t("backend.forms.maker.last_name")}
             name="attributes[lastName]"
-            placeholder="Last Name"
+            placeholder={t("backend.forms.maker.last_name")}
           />
           <Form.TextInput
-            label="Suffix"
+            label={t("backend.forms.maker.suffix")}
             name="attributes[suffix]"
-            placeholder="Suffix"
+            placeholder={t("backend.forms.maker.suffix")}
           />
           <Form.Upload
             layout="square"
             accepts="images"
-            label="Avatar Image"
+            label={t("backend.forms.maker.avatar")}
             readFrom="attributes[avatarStyles][small]"
             name="attributes[avatar]"
             remove="attributes[removeAvatar]"
           />
-          <Form.Save text="Save Maker" />
+          <Form.Save text={t("backend.forms.maker.submit_label")} />
         </FormContainer.Form>
       </section>
     );
   }
 }
+
+export default withTranslation()(MakersFormContainer);

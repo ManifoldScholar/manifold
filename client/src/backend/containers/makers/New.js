@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Form from "./Form";
 import { requests } from "api";
@@ -10,7 +11,8 @@ export class MakersNewContainer extends PureComponent {
   static displayName = "Makers.New";
 
   static propTypes = {
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   redirectToMaker(maker) {
@@ -25,7 +27,9 @@ export class MakersNewContainer extends PureComponent {
   render() {
     return (
       <section>
-        <Navigation.DrawerHeader title="New Maker" />
+        <Navigation.DrawerHeader
+          title={this.props.t("backend.forms.maker.new_header")}
+        />
         <Form
           successHandler={this.handleSuccess}
           options={{ adds: requests.beMakers }}
@@ -35,4 +39,4 @@ export class MakersNewContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(MakersNewContainer);
+export default withTranslation()(connectAndFetch(MakersNewContainer));

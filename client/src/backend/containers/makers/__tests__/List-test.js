@@ -12,6 +12,7 @@ describe("backend/containers/makers/List", () => {
         params: {}
       }}
       route={{}}
+      t={key => key}
     />
   ));
 

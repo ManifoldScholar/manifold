@@ -118,6 +118,8 @@
     "entitlement_one": "entitlement",
     "entitlement_other": "entitlement",
     "export_target_one": "export target",
-    "export_target_other": "export targets"
+    "export_target_other": "export targets",
+    "maker_one": "maker",
+    "maker_other": "makers"
   }
 }
