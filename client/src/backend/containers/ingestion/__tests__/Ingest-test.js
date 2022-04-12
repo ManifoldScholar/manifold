@@ -15,6 +15,7 @@ describe("backend/containers/ingestion/Ingest", () => {
       dispatch={$dispatch}
       history={$history}
       route={{ modal: false }}
+      t={key => key}
     />
   ));
 

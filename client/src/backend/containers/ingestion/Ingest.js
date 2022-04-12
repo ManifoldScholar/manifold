@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation, Trans } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { ingestionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -47,7 +48,8 @@ export class IngestionIngest extends Component {
     match: PropTypes.object,
     setDialogClassName: PropTypes.func,
     webSocketConnected: PropTypes.bool,
-    webSocketFailure: PropTypes.bool
+    webSocketFailure: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -56,6 +58,8 @@ export class IngestionIngest extends Component {
 
   constructor(props) {
     super(props);
+
+    // textLog is not localized in the v7 first pass. -LD
 
     this.state = {
       textLog: "Connecting to Manifold websocket...",
@@ -214,36 +218,29 @@ export class IngestionIngest extends Component {
   }
 
   displayError() {
+    const t = this.props.t;
     const body = (
       <>
         {config.services.cable ? (
           <span>
-            {"The client application is unable to connect to the server's websocket. " +
-              'Please ensure that Manifold\'s "cable" service is available at the ' +
-              "following location:"}
-            <br />
-            <br />
-            <em>{config.services.cable}</em>
+            <Trans
+              i18nKey="backend.ingestion.error.body_cable"
+              values={{ cable: config.services.cable }}
+            />
           </span>
         ) : (
-          <span>
-            {"The CABLE_URL environment variable has not been set correctly. Please " +
-              "contact the administrator of this Manifold instance to correct this."}
-          </span>
+          <span>{t("backend.ingestion.error.body_no_cable")}</span>
         )}
         <br />
         <br />
-        <span>
-          {"After the problem has been corrected, this ingestion can be resumed at the " +
-            "current URL."}
-        </span>
+        <span>{t("backend.ingestion.error.body_closing")}</span>
       </>
     );
 
     const notification = {
       level: 2,
       id: `WEBSOCKET_ERROR`,
-      heading: "Fatal Ingestion Error",
+      heading: t("backend.ingestion.error.heading"),
       body,
       scope: this.isReingestion ? "global" : "drawer",
       expiration: 0,
@@ -274,7 +271,9 @@ export class IngestionIngest extends Component {
             complete={this.complete}
           />
           <div className="ingestion-output__log">
-            <p className="ingestion-output__label">Log</p>
+            <p className="ingestion-output__label">
+              {this.props.t("backend.ingestion.log_label")}
+            </p>
             <div
               className="ingestion-output__log-value"
               ref={el => {
@@ -295,7 +294,9 @@ export class IngestionIngest extends Component {
                 size={24}
                 className="utility-button__icon utility-button__icon--highlight"
               />
-              <span className="utility-button__text">Restart Ingestion</span>
+              <span className="utility-button__text">
+                {this.props.t("backend.ingestion.restart_button_label")}
+              </span>
             </button>
           </div>
         </div>
@@ -304,4 +305,4 @@ export class IngestionIngest extends Component {
   }
 }
 
-export default connectAndFetch(IngestionIngest);
+export default withTranslation()(connectAndFetch(IngestionIngest));

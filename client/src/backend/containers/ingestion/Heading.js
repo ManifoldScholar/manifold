@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import truncate from "lodash/truncate";
-import capitalize from "lodash/capitalize";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 
-export default class IngestionHeader extends Component {
+class IngestionHeader extends Component {
   static displayName = "Ingestion.Header";
 
   static propTypes = {
     ingestion: PropTypes.object,
-    reingestion: PropTypes.bool
+    reingestion: PropTypes.bool,
+    t: PropTypes.func
   };
 
   get ingestion() {
@@ -26,17 +27,22 @@ export default class IngestionHeader extends Component {
   }
 
   get currentState() {
-    return capitalize(this.ingestion.attributes.state);
+    return this.props.t(
+      `backend.ingestion.states.${this.ingestion.attributes.state}`
+    );
   }
 
   get strategy() {
-    return this.ingestion.attributes.strategyLabel || "None";
+    return (
+      this.ingestion.attributes.strategyLabel ||
+      this.props.t("backend.ingestion.no_strategy")
+    );
   }
 
   get textId() {
     if (this.props.reingestion) return this.ingestion.attributes.textId;
 
-    return "This ingestion will create a new text";
+    return this.props.t("backend.ingestion.id_placeholder");
   }
 
   titleBlock() {
@@ -94,12 +100,23 @@ export default class IngestionHeader extends Component {
             aria-atomic
             className="backend-header__body ingestion-output__properties"
           >
-            <Property label="Current state" value={this.currentState} />
-            <Property label="Strategy" value={this.strategy} />
-            <Property label="Text ID" value={this.textId} />
+            <Property
+              label={this.props.t("backend.ingestion.current_state_label")}
+              value={this.currentState}
+            />
+            <Property
+              label={this.props.t("backend.ingestion.strategy_label")}
+              value={this.strategy}
+            />
+            <Property
+              label={this.props.t("backend.ingestion.id_label")}
+              value={this.textId}
+            />
           </div>
         </div>
       </div>
     );
   }
 }
+
+export default withTranslation()(IngestionHeader);
