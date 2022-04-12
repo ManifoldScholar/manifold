@@ -111,6 +111,49 @@
         "avatar": "Avatar Image",
         "submit_label": "Save Maker",
         "new_header": "New Maker"
+      },
+      "page": {
+        "title_label": "Page Title",
+        "title_placeholder": "Enter Page Title",
+        "switch_label": "External Page?",
+        "external_label": "External URL",
+        "external_placeholder": "Enter External URL",
+        "external_instructions": "The absolute URL for the page",
+        "slug_label": "Slug",
+        "slug_placeholder": "Enter URL Slug",
+        "slug_instructions": "The page URL is based on the slug.",
+        "submit_label": "Save Page",
+        "delete_modal_heading": "Are you sure you want to delete this page?",
+        "delete_modal_message": "This action cannot be undone.",
+        "delete_confirm_heading": "The page has been deleted.",
+        "delete_confim_body": "And we're sorry to see it go.",
+        "new_header": "New Page",
+        "new_instructions": "Enter the name of your page and, optionally, a slug. Press save to continue.",
+        "settings": "Page Settings",
+        "unauthorized_create": "You are not allowed to create pages.",
+        "unauthorized_update": "You are not allowed to update pages.",
+        "body_label": "Body",
+        "body_placeholder": "Enter Body Content",
+        "body_instructions": "You may use basic markdown in this field to format your content.",
+        "submit_label": "Save Page",
+        "new_tab_label": "Open page in new tab?",
+        "properties_label": "Properties",
+        "navigation_label": "Navigation Title",
+        "navigation_placeholder": "Alternate Navigation Title",
+        "navigation_instructions": "If set, this title will be used in header and footer navigation.",
+        "purpose_label": "Purpose",
+        "purpose_options": {
+          "supplemental": "Supplemental Content",
+          "privacy_policy": "Privacy Policy",
+          "terms": "Terms and Conditions"
+        },
+        "states_label": "Page States",
+        "states_instructions": "Manage visibility and whether or not the page appears in navigation",
+        "states_options": {
+          "hide": "Hide Page",
+          "footer": "Show in Footer",
+          "header": "Show in Header"
+        }
       }
     },
     "analytics": {
@@ -173,6 +216,11 @@
     "makers": {
       "header": "Manage Makers",
       "button_label": "Add a new maker"
+    },
+    "pages": {
+      "header": "Manage Pages",
+      "button_label": "Create a new page",
+      "back_label": "All Pages"
     }
   }
 }

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { pagesAPI, requests } from "api";
 import connectAndFetch from "utils/connectAndFetch";
 import entityUtils from "utils/entityUtils";
@@ -33,7 +34,8 @@ class PageDetailContainer extends PureComponent {
     history: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
     page: PropTypes.object,
-    confirm: PropTypes.func.isRequired
+    confirm: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -73,11 +75,12 @@ class PageDetailContainer extends PureComponent {
   }
 
   notifyDestroy(feature) {
+    const t = this.props.t;
     const notification = {
       level: 0,
       id: `PAGE_DESTROYED_${feature.id}`,
-      heading: "The page has been deleted.",
-      body: `And we're sorry to see it go.`,
+      heading: t("backend.forms.page.delete_confirm_heading"),
+      body: t("backend.forms.page.delete_confim_body"),
       expiration: 3000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
@@ -88,8 +91,9 @@ class PageDetailContainer extends PureComponent {
   };
 
   handleDestroy = () => {
-    const heading = "Are you sure you want to delete this page?";
-    const message = "This action cannot be undone.";
+    const t = this.props.t;
+    const heading = t("backend.forms.page.delete_modal_heading");
+    const message = t("backend.forms.page.delete_modal_message");
     this.props.confirm(heading, message, this.doDestroy);
   };
 
@@ -117,22 +121,22 @@ class PageDetailContainer extends PureComponent {
   }
 
   renderNewHeader() {
+    const t = this.props.t;
     return (
       <Navigation.DetailHeader
         type="page"
         backUrl={lh.link("backendRecordsPages")}
-        backLabel={"All Pages"}
-        title="New Page"
+        backLabel={t("backend.pages.back_label")}
+        title={t("backend.forms.page.new_header")}
         showUtility={false}
-        note={
-          "Enter the name of your page and, optionally, a slug. Press save to continue."
-        }
+        note={t("backend.forms.page.new_instructions")}
       />
     );
   }
 
   renderExistingHeader(page) {
     if (!page) return null;
+    const t = this.props.t;
     const subtitle = page.attributes.isExternalLink
       ? page.attributes.externalLink
       : `/page/${page.attributes.slug}`;
@@ -141,7 +145,7 @@ class PageDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="page"
         backUrl={lh.link("backendRecordsPages")}
-        backLabel={"All Pages"}
+        backLabel={t("backend.pages.back_label")}
         title={page.attributes.title}
         subtitle={subtitle}
         utility={this.renderUtility()}
@@ -150,6 +154,7 @@ class PageDetailContainer extends PureComponent {
   }
 
   renderUtility() {
+    const t = this.props.t;
     return (
       <div className="utility-button-group utility-button-group--inline">
         <Link
@@ -161,7 +166,7 @@ class PageDetailContainer extends PureComponent {
             size={26}
             className="utility-button__icon utility-button__icon--highlight"
           />
-          <span className="utility-button__text">View</span>
+          <span className="utility-button__text">{t("actions.view")}</span>
         </Link>
         <Authorize entity={this.props.page} ability="update">
           <button onClick={this.handleDestroy} className="utility-button">
@@ -170,7 +175,7 @@ class PageDetailContainer extends PureComponent {
               size={26}
               className="utility-button__icon utility-button__icon--notice"
             />
-            <span className="utility-button__text">Delete</span>
+            <span className="utility-button__text">{t("actions.delete")}</span>
           </button>
         </Authorize>
       </div>
@@ -191,6 +196,7 @@ class PageDetailContainer extends PureComponent {
   renderExisting(page) {
     if (!page) return null;
     const secondaryLinks = navigation.page(page);
+    const t = this.props.t;
 
     return (
       <div>
@@ -204,7 +210,7 @@ class PageDetailContainer extends PureComponent {
             <Navigation.Secondary
               links={secondaryLinks}
               panel
-              ariaLabel="Page Settings"
+              ariaLabel={t("backend.forms.page.settings")}
             />
           }
         >
@@ -228,10 +234,12 @@ class PageDetailContainer extends PureComponent {
 
     if (!authProps.entity) return null;
 
+    const t = this.props.t;
+
     return (
       <Authorize
         failureFatalError={{
-          body: `You are not allowed to ${authProps.ability} pages.`
+          body: t(`backend.forms.page.unauthorized_${authProps.abiltiy}`)
         }}
         {...authProps}
       >
@@ -241,4 +249,6 @@ class PageDetailContainer extends PureComponent {
   }
 }
 
-export default withConfirmation(connectAndFetch(PageDetailContainer));
+export default withTranslation()(
+  withConfirmation(connectAndFetch(PageDetailContainer))
+);

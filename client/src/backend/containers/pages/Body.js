@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { pagesAPI } from "api";
@@ -10,12 +11,13 @@ class PagesEditContainer extends PureComponent {
 
   static propTypes = {
     page: PropTypes.object.isRequired,
-    onSuccess: PropTypes.func
+    onSuccess: PropTypes.func,
+    t: PropTypes.func
   };
 
   render() {
     if (!this.props.page) return null;
-    const { page } = this.props;
+    const { page, t } = this.props;
 
     return (
       <section>
@@ -28,17 +30,17 @@ class PagesEditContainer extends PureComponent {
           className="form-secondary"
         >
           <Form.TextArea
-            label="Body"
+            label={t("backend.forms.page.body_label")}
             height={300}
             name="attributes[body]"
-            placeholder="Enter Body Content"
-            instructions="You may use basic markdown in this field to format your content."
+            placeholder={t("backend.forms.page.body_placeholder")}
+            instructions={t("backend.forms.page.body_instructions")}
           />
-          <Form.Save text="Save Page" />
+          <Form.Save text={t("backend.forms.page.submit_label")} />
         </FormContainer.Form>
       </section>
     );
   }
 }
 
-export default connectAndFetch(PagesEditContainer);
+export default withTranslation()(connectAndFetch(PagesEditContainer));
