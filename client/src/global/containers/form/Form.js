@@ -149,8 +149,8 @@ export class FormContainer extends PureComponent {
         adjusted[key] = null;
       } else {
         const adjustedValue = isArray(value)
-          ? value.map(relation => pick(relation, ["id", "type"]))
-          : pick(value, ["id", "type"]);
+          ? value.map(relation => pick(relation, ["id", "type", "_remove"]))
+          : pick(value, ["id", "type", "_remove"]);
         adjusted[key] = {
           data: adjustedValue
         };

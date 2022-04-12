@@ -65,7 +65,8 @@ function withFormOptions(WrappedComponent) {
       beforeOnChange: PropTypes.func,
       beforeSetValue: PropTypes.func,
       beforeGetValue: PropTypes.func,
-      optionFilter: PropTypes.func
+      optionFilter: PropTypes.func,
+      belongsTo: PropTypes.bool
     };
 
     static defaultProps = {
@@ -80,7 +81,8 @@ function withFormOptions(WrappedComponent) {
       beforeSetValue: WithFormOptions.passthrough,
       beforeGetValue: WithFormOptions.passthrough,
       predictive: false,
-      allowNew: false
+      allowNew: false,
+      belongsTo: false
     };
 
     static passthrough(value) {
@@ -236,6 +238,10 @@ function withFormOptions(WrappedComponent) {
       return this.props.predictive === true;
     }
 
+    get isBelongsTo() {
+      return this.props.belongsTo === true;
+    }
+
     get optionsMeta() {
       const activeOption = this.activeOption;
       const selectedOptions = this.selectedOptions;
@@ -266,7 +272,9 @@ function withFormOptions(WrappedComponent) {
       const values = this.isMultiple
         ? this.currentValue
         : [this.currentValue].filter(i => i);
-      return values.map(v => this.findOption(this.props.optionToString(v)));
+      return values
+        .map(v => this.findOption(this.props.optionToString(v)))
+        .filter(i => i);
     }
 
     get filterOptionsInternally() {
@@ -438,7 +446,8 @@ function withFormOptions(WrappedComponent) {
     };
 
     unselectAll = () => {
-      this.replaceSelection(this.isMultiple ? [] : null);
+      const nullValue = this.isBelongsTo ? { _remove: true } : null;
+      this.replaceSelection(this.isMultiple ? [] : nullValue);
     };
 
     announceDeselection(value) {

@@ -141,6 +141,10 @@ export class PickerComponent extends PureComponent {
     showAddRemoveAll: PropTypes.bool,
     /* Instructions display underneath the picker                               */
     instructions: PropTypes.string,
+    /* When true, the picker will set the empty value to { _remove: true }      */
+    /* rather than null. This allows the API to see that a belongs_to           */
+    /* association is being removed.                                            */
+    belongsTo: PropTypes.bool,
     t: PropTypes.func
   };
 
@@ -148,11 +152,11 @@ export class PickerComponent extends PureComponent {
     debug: false,
     wide: false,
     labelStyle: "label",
-    multiple: false,
     reorderable: false,
     value: "",
     listRowComponent: "FormOptionRow",
     listRowProps: { namePath: "attributes.name" },
+    belongsTo: false,
     renderLiveRegion: () => {
       /* noop */
     }
