@@ -9,6 +9,7 @@ describe("backend/containers/Records/export-targets/Edit", () => {
       match={{ params: {} }}
       confirm={() => null}
       history={$history}
+      t={key => key}
     />
   ));
 

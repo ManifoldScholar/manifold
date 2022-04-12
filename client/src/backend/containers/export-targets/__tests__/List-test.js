@@ -9,6 +9,7 @@ describe("backend/containers/Records/export-targets/List", () => {
       match={{ params: {} }}
       route={fixtures.route()}
       dispatch={$dispatch}
+      t={key => key}
     />
   ));
 

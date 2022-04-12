@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import withConfirmation from "hoc/withConfirmation";
 import { entityStoreActions } from "actions";
@@ -25,7 +26,8 @@ export class ExportTargetsEditContainer extends PureComponent {
     match: PropTypes.object.isRequired,
     confirm: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -66,8 +68,12 @@ export class ExportTargetsEditContainer extends PureComponent {
   };
 
   handleExportTargetDestroy = () => {
-    const heading = "Are you sure you want to delete this export target?";
-    const message = "This action cannot be undone.";
+    const heading = this.props.t(
+      "backend.forms.export_target.delete_modal_heading"
+    );
+    const message = this.props.t(
+      "backend.forms.export_target.delete_modal_message"
+    );
 
     this.props.confirm(heading, message, this.destroyExportTarget);
   };
@@ -91,7 +97,7 @@ export class ExportTargetsEditContainer extends PureComponent {
             {
               onClick: this.handleExportTargetDestroy,
               icon: "delete32",
-              label: "Delete",
+              label: this.props.t("actions.delete"),
               className: "utility-button__icon--notice"
             }
           ]}
@@ -104,4 +110,6 @@ export class ExportTargetsEditContainer extends PureComponent {
   }
 }
 
-export default withConfirmation(connectAndFetch(ExportTargetsEditContainer));
+export default withTranslation()(
+  withConfirmation(connectAndFetch(ExportTargetsEditContainer))
+);
