@@ -204,10 +204,7 @@ common: &1
           - htm
           - html
           - docx
-          - yaml
           - yml
-          - tex
-          - latex
       :image:
         :allowed_mime:
           - image/jpeg
