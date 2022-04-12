@@ -1,9 +1,10 @@
 module Utilities
   class Truthy
     def self.truthy?(value)
-      return false if [false, "", nil].include? value
-      return true if [true, 1, "1"].include? value
-      return true if value.casecmp("true").zero?
+      compare = value.respond_to?(:strip) ? value.strip : value
+      return false if [false, "", nil].include? compare
+      return true if [true, 1, "1"].include? compare
+      return true if value.respond_to?(:casecmp) && value.casecmp("true").zero?
 
       false
     end
