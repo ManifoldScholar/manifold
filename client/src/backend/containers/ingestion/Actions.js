@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 
-export default class IngestionActions extends Component {
+class IngestionActions extends Component {
   static displayName = "Ingestion.Actions";
 
   static propTypes = {
@@ -11,7 +12,8 @@ export default class IngestionActions extends Component {
     connected: PropTypes.bool,
     start: PropTypes.func.isRequired,
     cancel: PropTypes.func.isRequired,
-    complete: PropTypes.func.isRequired
+    complete: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -47,7 +49,10 @@ export default class IngestionActions extends Component {
 
   get startButton() {
     if (this.finished) return null;
-    const label = this.inProgress ? "Ingesting" : "Start Ingestion";
+    const t = this.props.t;
+    const label = this.inProgress
+      ? t("backend.ingestion.ingesting_button_label")
+      : t("backend.ingestion.start_button_label");
 
     return (
       <button
@@ -85,7 +90,7 @@ export default class IngestionActions extends Component {
           size="default"
           className="button-icon-secondary__icon"
         />
-        <span>Change Source</span>
+        <span>{this.props.t("backend.ingestion.change_button_label")}</span>
       </button>
     );
   }
@@ -100,7 +105,7 @@ export default class IngestionActions extends Component {
           size="default"
           className="button-icon-secondary__icon"
         />
-        <span>Complete</span>
+        <span>{this.props.t("backend.ingestion.complete_button_label")}</span>
       </button>
     );
   }
@@ -117,3 +122,5 @@ export default class IngestionActions extends Component {
     );
   }
 }
+
+export default withTranslation()(IngestionActions);
