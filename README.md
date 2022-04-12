@@ -33,7 +33,7 @@ The [University of Minnesota Press](https://www.upress.umn.edu) in partnership w
 
 #### Manifold is Open Source
 
-Our ultimate goal is to build an open source tool that other university presses will use. To that end, we want to hear from our prospective users throughout the design and development process. To participate in the discussion, join us on our [Building Manifold Development Blog](http://blog.manifoldapp.org). Early adopters of Manifold are encouraged to download the source code, experiment, and submit fixes and features in the form of pull requests.
+Our ultimate goal is to build an open source tool that other university presses will use. To that end, we want to hear from our prospective users throughout the design and development process. To participate in the discussion, join us on our [Building Manifold Development Blog](https://manifoldscholar.github.io/manifold-docusaurus/blog). Early adopters of Manifold are encouraged to download the source code, experiment, and submit fixes and features in the form of pull requests.
 
 ## About Manifold
 
@@ -47,7 +47,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 #### Documentation
 
-Visit [our website](https://manifoldapp.org/docs/) for current documentation. Be sure to check out the [installation instructions](https://manifoldapp.org/docs/installing/index).
+Visit [our website](https://manifoldscholar.github.io/manifold-docusaurus/docs) for current documentation. Be sure to check out the [installation instructions](https://manifoldscholar.github.io/manifold-docusaurus/docs/administering/installation).
 
 #### News
 
