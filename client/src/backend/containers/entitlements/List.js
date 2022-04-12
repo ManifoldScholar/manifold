@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { entitlementsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -25,7 +26,8 @@ export class EntitlementsList extends PureComponent {
     entitlements: PropTypes.array,
     linkName: PropTypes.string,
     dispatch: PropTypes.func,
-    match: PropTypes.object
+    match: PropTypes.object,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -80,7 +82,8 @@ export class EntitlementsList extends PureComponent {
       entity,
       entitlements,
       entitlementsMeta,
-      preList
+      preList,
+      t
     } = this.props;
     const active = match.params.id;
     const listUrl = lh.nameFromType("backend", "Entitlement", entity);
@@ -89,11 +92,8 @@ export class EntitlementsList extends PureComponent {
       <section>
         {entitlements && (
           <EntitiesList
-            title="Project Entitlements"
-            instructions="Entitlements give users and/or reading groups access to this
-                project. In Manifold, all projects are open by default. Configure access
-                restrictions, below, and enable restrictions to limit access to your
-                project."
+            title={t("backend.entitlements.header")}
+            instructions={t("backend.entitlements.instructions")}
             preList={preList}
             titleStyle="section"
             entities={entitlements}
@@ -106,12 +106,14 @@ export class EntitlementsList extends PureComponent {
             showCount
             paginationStyle="normal"
             pagination={entitlementsMeta.pagination}
-            unit="entitlement"
+            unit={t("glossary.entitlement", {
+              count: entitlementsMeta.pagination.totalCount
+            })}
             callbacks={{ onPageClick: this.updateHandlerCreator }}
             buttons={[
               <Button
                 path={lh.link(newUrl, entity.id)}
-                text="Create entitlement"
+                text={t("backend.entitlements.button_label")}
                 type="add"
                 authorizedTo="createEntitlements"
                 authorizedFor={entity}
@@ -134,8 +136,10 @@ export class EntitlementsList extends PureComponent {
   }
 }
 
-export default connectAndFetch(
-  withFilteredLists(EntitlementsList, {
-    entitlements: keywordFilter()
-  })
+export default withTranslation()(
+  connectAndFetch(
+    withFilteredLists(EntitlementsList, {
+      entitlements: keywordFilter()
+    })
+  )
 );

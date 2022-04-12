@@ -1,25 +1,23 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Form from "./Form";
 import Navigation from "backend/components/navigation";
 
-export default class EntitlementNew extends PureComponent {
-  static displayName = "Entitlements.New";
+export default function EntitlementNew({ entity, closeUrl }) {
+  const { t } = useTranslation();
 
-  static propTypes = {
-    entity: PropTypes.object,
-    history: PropTypes.object
-  };
-
-  render() {
-    return (
-      <section>
-        <Navigation.DrawerHeader title="Grant Entitlements" />
-        <Form
-          entity={this.props.entity}
-          redirectAfterSuccess={this.props.closeUrl}
-        />
-      </section>
-    );
-  }
+  return (
+    <section>
+      <Navigation.DrawerHeader title={t("backend.forms.entitlement.header")} />
+      <Form entity={entity} redirectAfterSuccess={closeUrl} />
+    </section>
+  );
 }
+
+EntitlementNew.displayName = "Entitlements.New";
+
+EntitlementNew.propTypes = {
+  entity: PropTypes.object,
+  closeUrl: PropTypes.string
+};
