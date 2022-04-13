@@ -31,7 +31,8 @@
       "order_collection": "Order collection by:",
       "by_section": "Filter by text section",
       "tag": "Tag",
-      "by_text": "Filter by text"
+      "by_text": "Filter by text",
+      "by_status": "Filter by status"
     },
     "default_options": {
       "type": "Type",
@@ -52,6 +53,10 @@
       "latest_start_date": "Latest course start date",
       "earliest_end_date": "Earliest course end date",
       "latest_end_date": "Latest course end date"
+    },
+    "group_status_options": {
+      "active": "Active",
+      "archived": "Archived"
     },
     "collection_sort_options": {
       "created_at_desc": "Date Created (Newest First)",

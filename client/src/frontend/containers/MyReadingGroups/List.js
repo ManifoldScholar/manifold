@@ -24,7 +24,8 @@ const DEFAULT_SORT_ORDER = "";
 function MyReadingGroupsListContainer({ route }) {
   const [pagination, setPageNumber] = usePaginationState();
   const baseFilters = {
-    sort_order: DEFAULT_SORT_ORDER
+    sort_order: DEFAULT_SORT_ORDER,
+    archived: "false"
   };
   const [filters, setFilters] = useFilterState(baseFilters);
 
@@ -77,6 +78,7 @@ function MyReadingGroupsListContainer({ route }) {
                 initialState: filters,
                 resetState: baseFilters
               }}
+              showStatusFilter
             />
           )}
           {showPlaceholder && <EntityCollectionPlaceholder.ReadingGroups />}

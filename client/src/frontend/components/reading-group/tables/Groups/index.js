@@ -20,6 +20,7 @@ export default function GroupsTable(props) {
     pagination,
     onPageClick,
     filterProps,
+    showStatusFilter = false,
     currentUser,
     hideActions,
     hideTags
@@ -29,7 +30,7 @@ export default function GroupsTable(props) {
 
   const listFilterProps = useListFilters({
     ...filterProps,
-    options: { groupSort: true }
+    options: { groupSort: true, groupStatus: showStatusFilter }
   });
 
   const history = useHistory();
@@ -51,6 +52,7 @@ export default function GroupsTable(props) {
       unit={t("glossary.group", { count: groups.length })}
       linkCreator={group => lh.link("frontendReadingGroupDetail", group.id)}
       filters={<ListFilters {...listFilterProps} />}
+      filterCount={listFilterProps.filters?.length}
     >
       <Column
         header={t("tables.reading_groups.headers.name")}
