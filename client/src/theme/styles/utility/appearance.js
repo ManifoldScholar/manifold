@@ -95,8 +95,8 @@ export default `
     &:hover,
     &:focus-visible {
       color: var(--color-base-neutral85);
-      background-color: var(--color-accent-interaction-light);
-      border-color: var(--color-accent-interaction-light);
+      background-color: var(--color-interaction-light);
+      border-color: var(--color-interaction-light);
       outline: 0;
     }
   }

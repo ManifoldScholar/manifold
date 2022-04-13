@@ -11,8 +11,8 @@ const transitionDuration = "0.3s";
 
 export default `
   .annotation-popup {
-    --focus-color: var(--color-accent-interaction-light);
-    --hover-color: var(--color-accent-interaction-light);
+    --focus-color: var(--color-interaction-light);
+    --hover-color: var(--color-interaction-light);
     --menu-color: var(--color-base-neutral-white);
     --menu-bg-color: var(--color-base-neutral85);
     --menu-secondary-color: var(--color-neutral-text-light);

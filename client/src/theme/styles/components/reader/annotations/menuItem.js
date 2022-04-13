@@ -15,7 +15,7 @@ export default `
       color: var(--group-button-hover-color);
       background-color: var(
         --group-button-hover-bg-color,
-        var(--color-accent-interaction-dark)
+        var(--color-interaction-dark)
       );
       outline: 0;
     }
