@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { entityStoreActions } from "actions";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import isArray from "lodash/isArray";
 import { select, meta } from "utils/entityUtils";
 import {
@@ -46,7 +47,8 @@ export class ProjecExportations extends PureComponent {
     exportTargets: PropTypes.array,
     project: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    projectExportationsPerPage: PropTypes.number
+    projectExportationsPerPage: PropTypes.number,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -60,7 +62,13 @@ export class ProjecExportations extends PureComponent {
 
   get exportTargetSelectOptions() {
     const targets = [
-      { label: "Choose an Export Location", value: "", internalValue: "" }
+      {
+        label: this.props.t(
+          "backend_entities.projects.forms.exports.location_placeholder"
+        ),
+        value: "",
+        internalValue: ""
+      }
     ];
     const { exportTargets } = this.props;
 
@@ -122,7 +130,8 @@ export class ProjecExportations extends PureComponent {
     const {
       projectExportations,
       project,
-      projectExportationsMeta
+      projectExportationsMeta,
+      t
     } = this.props;
 
     if (!projectExportations || !projectExportationsMeta) return null;
@@ -154,24 +163,20 @@ export class ProjecExportations extends PureComponent {
           <Form.FieldGroup label="Project Exports" wide horizontal>
             {this.hasExportTargets && (
               <div className="instructional-copy">
-                Manifold makes it possible to export a preservation copy of your
-                project to an external export target. To start an export, select
-                one of the configured targets below and press the button. The
-                export will happen in the background and can take a few minutes
-                to complete.
+                {t("backend_entities.projects.forms.exports.instructions")}
               </div>
             )}
             {!this.hasExportTargets && (
               <>
                 <Authorize entity="exportTarget" ability="create">
                   <div className="instructional-copy">
-                    No export targets have been created on this instance. Export
-                    targets can be managed in the backend under records &gt;
-                    export targets.
+                    {t("backend_entities.projects.forms.exports.no_targets")}
                   </div>
                   <Button
                     path={lh.link("backendSettingsExportTargetsNew")}
-                    text="Create a new export target"
+                    text={t(
+                      "backend_entities.projects.forms.exports.add_target_label"
+                    )}
                     type="add"
                   />
                 </Authorize>
@@ -181,10 +186,9 @@ export class ProjecExportations extends PureComponent {
                   successBehavior="hide"
                 >
                   <span>
-                    No export targets have been created on this instance. Only
-                    administrators may create export targets. To setup export
-                    targets, please contact the administrator of this Manifold
-                    instance.
+                    {t(
+                      "backend_entities.projects.forms.exports.no_targets_unauthorized"
+                    )}
                   </span>
                 </Authorize>
               </>
@@ -195,11 +199,16 @@ export class ProjecExportations extends PureComponent {
                   rounded
                   wide
                   name="attributes[export_target_id]"
-                  label="New Project Export:"
+                  label={t(
+                    "backend_entities.projects.forms.exports.new_export_label"
+                  )}
                   options={this.exportTargetSelectOptions}
                 />
                 <Form.Errors wide names={["attributes[base]"]} />
-                <Form.Save text="Export Project" wide={false} />
+                <Form.Save
+                  text={t("backend_entities.projects.forms.exports.save")}
+                  wide={false}
+                />
               </>
             )}
           </Form.FieldGroup>
@@ -225,4 +234,6 @@ export class ProjecExportations extends PureComponent {
   }
 }
 
-export default connect(ProjecExportations.mapStateToProps)(ProjecExportations);
+export default withTranslation()(
+  connect(ProjecExportations.mapStateToProps)(ProjecExportations)
+);

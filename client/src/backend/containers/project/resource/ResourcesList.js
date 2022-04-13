@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { projectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -29,7 +30,8 @@ class ProjectResourcesListContainerImplementation extends PureComponent {
     project: PropTypes.object,
     resources: PropTypes.array,
     resourcesMeta: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -73,16 +75,18 @@ class ProjectResourcesListContainerImplementation extends PureComponent {
 
   render() {
     if (!this.props.resources) return null;
-    const project = this.props.project;
+    const { project, t, resourcesMeta } = this.props;
 
     return (
       <EntitiesList
         entityComponent={ResourceRow}
-        title={"Resources"}
+        title={t("glossary.resource_title_case_other")}
         titleIcon="resourceCollection64"
         entities={this.props.resources}
-        unit="resource"
-        pagination={this.props.resourcesMeta.pagination}
+        unit={t("glossary.resource", {
+          count: resourcesMeta?.pagination?.totalCount
+        })}
+        pagination={resourcesMeta.pagination}
         showCount
         callbacks={{
           onPageClick: this.pageChangeHandlerCreator
@@ -98,14 +102,14 @@ class ProjectResourcesListContainerImplementation extends PureComponent {
         buttons={[
           <Button
             path={lh.link("backendProjectResourcesNew", project.id)}
-            text="Add a new resource"
+            text={t("backend_entities.resources.add_button_label")}
             authorizedFor={project}
             authorizedTo="createResources"
             type="add"
           />,
           <Button
             path={lh.link("backendResourceImport", project.id)}
-            text="Bulk add resources"
+            text={t("backend_entities.resources.bulk_add_label")}
             authorizedFor={project}
             authorizedTo="createResources"
             icon="BEResourcesBoxes64"
@@ -122,4 +126,6 @@ export const ProjectResourcesListContainer = withFilteredLists(
     resources: resourceFilters.defaultParams()
   }
 );
-export default connectAndFetch(ProjectResourcesListContainer);
+export default withTranslation()(
+  connectAndFetch(ProjectResourcesListContainer)
+);

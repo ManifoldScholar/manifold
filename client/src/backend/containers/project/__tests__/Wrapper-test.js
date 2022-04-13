@@ -20,6 +20,7 @@ describe("backend/containers/project/Wrapper", () => {
       location={{ pathname: "/projects/1" }}
       route={$route}
       match={$match}
+      t={key => key}
     />
   ));
 

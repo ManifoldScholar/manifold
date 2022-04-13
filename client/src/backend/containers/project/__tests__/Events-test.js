@@ -18,6 +18,7 @@ describe("backend/containers/project/Events", () => {
       eventsMeta={{
         pagination: $pagination
       }}
+      t={key => key}
     />
   ));
 

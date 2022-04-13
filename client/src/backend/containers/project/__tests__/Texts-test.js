@@ -11,7 +11,7 @@ describe("backend/containers/project/Texts", () => {
   def("project", () => project($abilities));
   def("route", () => route());
   def("root", () => (
-    <ProjectTextsContainer project={$project} route={$route} />
+    <ProjectTextsContainer project={$project} route={$route} t={key => key} />
   ));
 
   it("matches the snapshot when rendered", () => {

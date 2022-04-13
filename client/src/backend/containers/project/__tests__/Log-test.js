@@ -18,6 +18,7 @@ describe("backend/containers/project/Log", () => {
       dispatch={$dispatch}
       versions={$versions}
       versionsMeta={{ pagination: $pagination }}
+      t={key => key}
     />
   ));
 

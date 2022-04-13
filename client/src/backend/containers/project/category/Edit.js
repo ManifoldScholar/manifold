@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Category from "backend/components/category";
 import { entityStoreActions } from "actions";
@@ -23,7 +24,8 @@ export class ProjectCategoryEditContainer extends Component {
     dispatch: PropTypes.func.isRequired,
     refresh: PropTypes.func.isRequired,
     category: PropTypes.object,
-    triggerClose: PropTypes.func
+    triggerClose: PropTypes.func,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -45,11 +47,13 @@ export class ProjectCategoryEditContainer extends Component {
 
     return (
       <div>
-        <Navigation.DrawerHeader title="Edit Category" />
+        <Navigation.DrawerHeader
+          title={this.props.t("backend_entities.texts.category_edit_header")}
+        />
         <Category.Form model={this.props.category} onSuccess={this.onSuccess} />
       </div>
     );
   }
 }
 
-export default connectAndFetch(ProjectCategoryEditContainer);
+export default withTranslation()(connectAndFetch(ProjectCategoryEditContainer));

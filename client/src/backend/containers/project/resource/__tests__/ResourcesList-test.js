@@ -21,6 +21,7 @@ describe("backend/containers/project/resource/ResourcesList", () => {
         pagination: $pagination
       }}
       dispatch={$dispatch}
+      t={key => key}
     />
   ));
 

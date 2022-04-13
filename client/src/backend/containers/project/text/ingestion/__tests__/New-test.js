@@ -12,6 +12,7 @@ describe("backend/containers/project/text/ingestion/New", () => {
       project={$project}
       history={$history}
       location={$location}
+      t={key => key}
     />
   ));
   it("matches the snapshot when rendered", () => {

@@ -10,6 +10,7 @@ describe("backend/containers/project/category/Edit", () => {
       dispatch={$dispatch}
       match={$match}
       refresh={$refresh}
+      t={key => key}
     />
   ));
 

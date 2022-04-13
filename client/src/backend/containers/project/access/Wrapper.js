@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import PermissionsContainer from "backend/containers/permission";
@@ -8,7 +9,6 @@ import Authorize from "hoc/Authorize";
 import Layout from "backend/components/layout";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
-import config from "config";
 import Hero from "backend/components/hero";
 import withSettings from "hoc/withSettings";
 
@@ -19,7 +19,8 @@ class ProjectAccessWrapper extends Component {
     project: PropTypes.object,
     route: PropTypes.object,
     history: PropTypes.object,
-    match: PropTypes.object
+    match: PropTypes.object,
+    t: PropTypes.func
   };
 
   get defaultIsRestricted() {
@@ -32,7 +33,7 @@ class ProjectAccessWrapper extends Component {
   }
 
   render() {
-    const { project, updateProject } = this.props;
+    const { project, updateProject, t } = this.props;
     if (!project) return null;
 
     const closeUrl = lh.link("backendProjectAccess", project.id);
@@ -53,8 +54,10 @@ class ProjectAccessWrapper extends Component {
               preList={
                 <div style={{ marginBottom: 44, marginTop: 22 }}>
                   <Hero.Block
-                    title="Configure Access Restrictions"
-                    description="Enable access restrictions and adjust messaging"
+                    title={t("backend_entities.projects.forms.access.title")}
+                    description={t(
+                      "backend_entities.projects.forms.access.description"
+                    )}
                   >
                     <FormContainer.Form
                       style={{ paddingTop: 24, paddingBottom: 24 }}
@@ -66,36 +69,44 @@ class ProjectAccessWrapper extends Component {
                       {this.defaultIsOpen && (
                         <Form.Switch
                           className="form-toggle-secondary"
-                          label="Project Access is Restricted"
+                          label={t(
+                            "backend_entities.projects.forms.access.restricted_label"
+                          )}
                           name="attributes[restrictedAccess]"
                         />
                       )}
                       {this.defaultIsRestricted && (
                         <Form.Switch
                           className="form-toggle-secondary"
-                          label="Project is Open Access"
+                          label={t(
+                            "backend_entities.projects.forms.access.open_access_label"
+                          )}
                           name="attributes[openAccess]"
                         />
                       )}
                       <Form.TextInput
                         className="form-toggle-secondary"
-                        label="Restricted Access Notice Header"
+                        label={t(
+                          "backend_entities.projects.forms.access.notice_header_label"
+                        )}
                         name="attributes[restrictedAccessHeading]"
-                        placeholder={
-                          config.app.locale.notifications
-                            .projectAuthorizationNotice.heading
-                        }
+                        placeholder={t(
+                          "backend_entities.projects.forms.access.notice_header_placeholder"
+                        )}
                       />
                       <Form.TextArea
                         className="form-toggle-secondary"
-                        label="Restricted Access Notice Body"
+                        label={t(
+                          "backend_entities.projects.forms.access.notice_body_label"
+                        )}
                         name="attributes[restrictedAccessBody]"
-                        placeholder={
-                          config.app.locale.notifications
-                            .projectAuthorizationNotice.body
-                        }
+                        placeholder={t(
+                          "backend_entities.projects.forms.access.notice_body_placeholder"
+                        )}
                       />
-                      <Form.Save text="Update Access Settings" />
+                      <Form.Save
+                        text={t("backend_entities.projects.forms.access.save")}
+                      />
                     </FormContainer.Form>
                   </Hero.Block>
                 </div>
@@ -117,4 +128,4 @@ class ProjectAccessWrapper extends Component {
   }
 }
 
-export default withSettings(ProjectAccessWrapper);
+export default withTranslation()(withSettings(ProjectAccessWrapper));

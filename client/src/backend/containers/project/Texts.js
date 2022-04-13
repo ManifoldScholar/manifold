@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import withConfirmation from "hoc/withConfirmation";
 import { entityStoreActions } from "actions";
@@ -25,7 +26,8 @@ export class ProjectTextsContainer extends Component {
     refresh: PropTypes.func,
     confirm: PropTypes.func.isRequired,
     route: PropTypes.object,
-    match: PropTypes.object
+    match: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -71,17 +73,16 @@ export class ProjectTextsContainer extends Component {
   }
 
   handleCategoryDestroy = category => {
-    const heading = "Are you sure you want to delete this category?";
-    const message =
-      "Any texts belonging to this category will become uncategorized.";
+    const t = this.props.t;
+    const heading = t("backend_entities.texts.modals.delete_category_heading");
+    const message = t("backend_entities.texts.modals.delete_category_message");
     this.props.confirm(heading, message, () => this.destroyCategory(category));
   };
 
   handleTextDestroy = text => {
-    const heading = "Are you sure you want to delete this text?";
-    const message =
-      "All annotations and highlights of this text will also be deleted. " +
-      "This action cannot be undone.";
+    const t = this.props.t;
+    const heading = t("backend_entities.texts.modals.delete_text_heading");
+    const message = t("backend_entities.texts.modals.delete_text_message");
     this.props.confirm(heading, message, () => this.destroyText(text));
   };
 
@@ -171,6 +172,8 @@ export class ProjectTextsContainer extends Component {
 
   render() {
     if (!this.project) return null;
+    const t = this.props.t;
+
     return (
       <Authorize
         entity={this.project}
@@ -186,7 +189,9 @@ export class ProjectTextsContainer extends Component {
               to={lh.link("backendProjectTextsIngestionsNew", this.project.id)}
               className={this.buttonClasses}
             >
-              <span className="screen-reader-text">Add a new text</span>
+              <span className="screen-reader-text">
+                {t("backend_entities.texts.add_text_label")}
+              </span>
               <IconComposer
                 icon="circlePlus32"
                 size={18}
@@ -196,10 +201,10 @@ export class ProjectTextsContainer extends Component {
                 )}
               />
               <span className="full" aria-hidden="true">
-                Add a new text
+                {t("backend_entities.texts.add_text_label")}
               </span>
               <span className="abbreviated" aria-hidden="true">
-                Text
+                {t("glossary.text_title_case_one")}
               </span>
             </Link>
 
@@ -207,7 +212,9 @@ export class ProjectTextsContainer extends Component {
               to={lh.link("backendProjectCategoriesNew", this.project.id)}
               className={this.buttonClasses}
             >
-              <span className="screen-reader-text">Add a new category</span>
+              <span className="screen-reader-text">
+                {t("backend_entities.texts.add_category_label")}
+              </span>
               <IconComposer
                 icon="circlePlus32"
                 size={18}
@@ -217,10 +224,10 @@ export class ProjectTextsContainer extends Component {
                 )}
               />
               <span className="full" aria-hidden="true">
-                Create a new category
+                {t("backend_entities.texts.add_category_label")}
               </span>
               <span className="abbreviated" aria-hidden="true">
-                Category
+                {t("glossary.category_title_case_one")}
               </span>
             </Link>
           </div>
@@ -237,4 +244,6 @@ export class ProjectTextsContainer extends Component {
   }
 }
 
-export default withConfirmation(connectAndFetch(ProjectTextsContainer));
+export default withTranslation()(
+  withConfirmation(connectAndFetch(ProjectTextsContainer))
+);

@@ -10,7 +10,7 @@ describe("backend/containers/project/Resources", () => {
   def("user", () => factory("user"));
   def("project", () => project($abilities));
   def("root", () => (
-    <ProjectResourcesContainer project={$project} dispatch={$dispatch} />
+    <ProjectResourcesContainer project={$project} dispatch={$dispatch} t={key => key} />
   ));
 
   it("matches the snapshot when rendered", () => {

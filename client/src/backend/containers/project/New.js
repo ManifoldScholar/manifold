@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation, Trans } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
@@ -15,7 +16,8 @@ export class ProjectNewContainer extends PureComponent {
 
   static propTypes = {
     history: PropTypes.object,
-    project: PropTypes.object
+    project: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -35,18 +37,18 @@ export class ProjectNewContainer extends PureComponent {
   get layoutInstructions() {
     return (
       <span className="instructions">
-        {`Your project's appearance is modular and highly customizable. The
-        following prompts are to help you get started. If you're unsure of your
-        answers, don't worry, everything can be changed later. Learn more about
-        these Layout options `}
-        <a
-          href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/projects#creating-projects"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          here
-        </a>
-        {`.`}
+        <Trans
+          i18nKey="backend_entities.projects.forms.new.layout_instructions"
+          components={[
+            <a
+              href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/projects#creating-projects"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              #
+            </a>
+          ]}
+        />
       </span>
     );
   }
@@ -61,6 +63,7 @@ export class ProjectNewContainer extends PureComponent {
   };
 
   render() {
+    const t = this.props.t;
     return (
       <Authorize
         entity={"project"}
@@ -71,11 +74,9 @@ export class ProjectNewContainer extends PureComponent {
         <div>
           <Navigation.DetailHeader
             type="project"
-            title={"New Project"}
+            title={t("backend_entities.projects.forms.new.title")}
             showUtility={false}
-            note={
-              "Enter the name of your project, and a brief description. Press save to continue."
-            }
+            note={t("backend_entities.projects.forms.new.instructions")}
           />
           <Layout.BackendPanel>
             <FormContainer.Form
@@ -86,89 +87,107 @@ export class ProjectNewContainer extends PureComponent {
               onSuccess={this.handleSuccess}
               className="form-secondary"
             >
-              <Form.FieldGroup label="Title and Description">
+              <Form.FieldGroup
+                label={t(
+                  "backend_entities.projects.forms.new.title_descript_header"
+                )}
+              >
                 <Form.TextInput
                   validation={["required"]}
                   focusOnMount
-                  label="Title"
+                  label={t("backend_entities.projects.forms.title_label")}
                   name="attributes[title]"
-                  placeholder="Enter Project Title"
+                  placeholder={t(
+                    "backend_entities.projects.forms.title_placeholder"
+                  )}
                 />
                 <Form.TextInput
-                  label="Subtitle"
+                  label={t("backend_entities.projects.forms.subtitle_label")}
                   name="attributes[subtitle]"
-                  placeholder="Enter Project Subtitle"
+                  placeholder={t(
+                    "backend_entities.projects.forms.subtitle_placeholder"
+                  )}
                 />
                 <Form.TextArea
-                  label="Brief Description"
+                  label={t(
+                    "backend_entities.projects.forms.new.descript_label"
+                  )}
                   name="attributes[description]"
                   height={100}
                   wide
                 />
               </Form.FieldGroup>
               <Form.FieldGroup
-                label="Layout"
+                label={t("backend_entities.projects.forms.new.layout_header")}
                 instructions={this.layoutInstructions}
               >
                 <Form.Radios
-                  label="Texts"
-                  prompt="Will your project include more than one text?"
+                  label={t("glossary.text_title_case_other")}
+                  prompt={t("backend_entities.projects.forms.new.texts_prompt")}
                   name="attributes[configuration][multipleTexts]"
-                  instructions={
-                    "Manifold projects can include a single text or multiple texts."
-                  }
+                  instructions={t(
+                    "backend_entities.projects.forms.new.texts_instructions"
+                  )}
                   options={[
-                    { label: "Yes", value: true },
-                    { label: "No", value: false }
+                    { label: t("common.yes"), value: true },
+                    { label: t("common.no"), value: false }
                   ]}
                   inline
                   wide
                 />
                 <Form.Radios
-                  label="Resources"
-                  prompt="Do you have resources you want to add in addition to any texts you are loading?"
+                  label={t("glossary.resource_title_case_other")}
+                  prompt={t(
+                    "backend_entities.projects.forms.new.resources_prompt"
+                  )}
                   name="attributes[configuration][resources]"
-                  instructions={
-                    "Enhance your texts with media or create a project composed only of media resources."
-                  }
+                  instructions={t(
+                    "backend_entities.projects.forms.new.resources_instructions"
+                  )}
                   options={[
-                    { label: "Yes", value: true },
-                    { label: "No", value: false }
+                    { label: t("common.yes"), value: true },
+                    { label: t("common.no"), value: false }
                   ]}
                   inline
                   wide
                 />
                 <Form.Radios
-                  label="Extended Description"
-                  prompt="Do you need additional space to describe your project?"
+                  label={t(
+                    "backend_entities.projects.forms.new.extended_descript_label"
+                  )}
+                  prompt={t(
+                    "backend_entities.projects.forms.new.extended_descript_prompt"
+                  )}
                   name="attributes[configuration][markdown]"
-                  instructions={
-                    "A freeform content block can be used to add text contextualizing your project."
-                  }
+                  instructions={t(
+                    "backend_entities.projects.forms.new.extended_descript_instructions"
+                  )}
                   options={[
-                    { label: "Yes", value: true },
-                    { label: "No", value: false }
+                    { label: t("common.yes"), value: true },
+                    { label: t("common.no"), value: false }
                   ]}
                   inline
                   wide
                 />
                 <Form.Radios
-                  label="Activity"
-                  prompt="Will your project change frequently?"
+                  label={t("backend_entities.projects.activity")}
+                  prompt={t(
+                    "backend_entities.projects.forms.new.activity_prompt"
+                  )}
                   name="attributes[configuration][recentActivity]"
-                  instructions={
-                    "Manifold can showcase the evolution of your project on the platform and in the Twitterverse."
-                  }
+                  instructions={t(
+                    "backend_entities.projects.forms.new.activity_instructions"
+                  )}
                   options={[
-                    { label: "Yes", value: true },
-                    { label: "No", value: false }
+                    { label: t("common.yes"), value: true },
+                    { label: t("common.no"), value: false }
                   ]}
                   inline
                   wide
                 />
               </Form.FieldGroup>
               <Form.Save
-                text="Save and Continue"
+                text={t("backend_entities.projects.forms.new.save")}
                 cancelRoute={lh.link("backendProjects")}
               />
             </FormContainer.Form>
@@ -179,4 +198,4 @@ export class ProjectNewContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(ProjectNewContainer);
+export default withTranslation()(connectAndFetch(ProjectNewContainer));
