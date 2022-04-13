@@ -107,7 +107,7 @@ class TextBibliographic extends Component {
         {this.description && (
           <Styled.Description
             className="markdown"
-            dangerouslySetInnerHTML={{ __html: this.props.description }}
+            dangerouslySetInnerHTML={{ __html: this.description }}
           />
         )}
         {this.showStatus && (
