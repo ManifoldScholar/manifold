@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { collectionProjectsAPI, projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -44,7 +45,8 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     dispatch: PropTypes.func,
     history: PropTypes.object,
     match: PropTypes.object,
-    route: PropTypes.object
+    route: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -251,7 +253,9 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
         ability="update"
         entity={["projectCollection"]}
         failureFatalError={{
-          detail: "You are not allowed to manage project collections."
+          detail: this.props.t(
+            "backend_entities.project_collections.unauthorized"
+          )
         }}
       >
         <section className={wrapperClasses}>
@@ -302,4 +306,6 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(ProjectCollectionWrapperContainer);
+export default withTranslation()(
+  connectAndFetch(ProjectCollectionWrapperContainer)
+);

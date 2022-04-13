@@ -21,6 +21,7 @@ describe("backend/containers/project-collection/Wrapper", () => {
       history={$history}
       match={{ params: {} }}
       route={$route}
+      t={key => key}
     />
   ));
 

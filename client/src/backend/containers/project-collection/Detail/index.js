@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import ProjectCollection from "backend/components/project-collection";
 import { childRoutes } from "helpers/router";
@@ -16,7 +17,8 @@ export class ProjectCollectionDetail extends PureComponent {
     dispatch: PropTypes.func,
     match: PropTypes.object,
     history: PropTypes.object,
-    route: PropTypes.object
+    route: PropTypes.object,
+    t: PropTypes.func
   };
 
   handleProjectOrderChange = result => {
@@ -42,7 +44,7 @@ export class ProjectCollectionDetail extends PureComponent {
   }
 
   render() {
-    const { collectionProjects, projectCollection } = this.props;
+    const { collectionProjects, projectCollection, t } = this.props;
     if (!projectCollection || !collectionProjects) return null;
     const projects = collectionProjects.map(cp => cp.relationships.project);
 
@@ -50,12 +52,14 @@ export class ProjectCollectionDetail extends PureComponent {
       <Authorize
         entity={projectCollection}
         failureFatalError={{
-          detail: "You are not allowed to edit this project collection."
+          detail: t("backend_entities.project_collections.unauthorized_edit")
         }}
         ability="update"
       >
         <div>
-          <h2 className="screen-reader-text">Project List</h2>
+          <h2 className="screen-reader-text">
+            {t("backend_entities.project_collections.sr_list_title")}
+          </h2>
           <ProjectCollection.SortBy
             sortChangeHandler={this.handleSortOrderChange}
             projectCollection={this.props.projectCollection}
@@ -80,4 +84,4 @@ export class ProjectCollectionDetail extends PureComponent {
   }
 }
 
-export default connectAndFetch(ProjectCollectionDetail);
+export default withTranslation()(connectAndFetch(ProjectCollectionDetail));

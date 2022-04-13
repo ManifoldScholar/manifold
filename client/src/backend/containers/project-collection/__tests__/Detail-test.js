@@ -13,6 +13,7 @@ describe("backend/containers/project-collection/Detail", () => {
       dispatch={$dispatch}
       route={$route}
       match={$match}
+      t={key => key}
     />
   ));
 

@@ -22,6 +22,7 @@ describe("backend/containers/project-collection/New", () => {
       buildUpdateProjectCollection={jest.fn}
       buildCreateProjectCollection={jest.fn}
       successHandler={jest.fn}
+      t={key => key}
     />
   ));
 
