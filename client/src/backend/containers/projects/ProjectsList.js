@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -33,7 +34,8 @@ class ProjectsListContainerImplementation extends PureComponent {
     projectsMeta: PropTypes.object,
     authentication: PropTypes.object,
     savedSearchPaginationState: PropTypes.func.isRequired,
-    entitiesListSearchParams: PropTypes.object
+    entitiesListSearchParams: PropTypes.object,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -87,17 +89,17 @@ class ProjectsListContainerImplementation extends PureComponent {
   render() {
     if (!this.props.projectsMeta || !this.props.projects) return null;
     const { totalCount } = this.props.projectsMeta.pagination;
-    const label = totalCount > 1 || totalCount === 0 ? " Projects" : " Project";
+    const t = this.props.t;
 
     return (
       <EntitiesList
         entityComponent={ProjectRow}
         listStyle="grid"
-        title={label}
+        title={t("glossary.project_title_case", { count: totalCount })}
         titleStyle="bar"
         titleIcon="BEProject64"
         entities={this.props.projects}
-        unit="project"
+        unit={t("glossary.project", { count: totalCount })}
         pagination={this.props.projectsMeta.pagination}
         showCountInTitle
         showCount
@@ -110,7 +112,7 @@ class ProjectsListContainerImplementation extends PureComponent {
         buttons={[
           <Button
             path={lh.link("backendProjectsNew")}
-            text="Add a new project"
+            text={t("backend_entities.projects.add_button_label")}
             authorizedFor="project"
             type="add"
           />
@@ -126,4 +128,4 @@ export const ProjectsListContainer = withFilteredLists(
     projectsList: projectFilters({ snapshotState: true })
   }
 );
-export default connectAndFetch(ProjectsListContainer);
+export default withTranslation()(connectAndFetch(ProjectsListContainer));

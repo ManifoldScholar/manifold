@@ -78,5 +78,9 @@
       "confirm_heading": "Are you sure you want to delete this project collection?",
       "confirm_body": "This action cannot be undone."
     }
+  },
+  "projects": {
+    "unauthorized": "You are not allowed to manage projects.",
+    "add_button_label": "Add a new project"
   }
 }
