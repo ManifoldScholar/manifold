@@ -9,6 +9,7 @@ export default function TextMeta({
   text,
   datesVisible,
   datePrefix,
+  date,
   publishedVisible
 }) {
   const { t } = useTranslation();
@@ -19,13 +20,7 @@ export default function TextMeta({
     <Styled.Meta>
       {showStatus && (
         <Styled.Status>
-          {datesVisible && (
-            <Date
-              date={text.attributes.createdAt}
-              datePrefix={datePrefix}
-              inline
-            />
-          )}
+          {datesVisible && <Date date={date} datePrefix={datePrefix} inline />}
           {publishedVisible && (
             <Styled.Published>
               {t("dates.published_title_case")}
@@ -44,5 +39,6 @@ TextMeta.propTypes = {
   text: PropTypes.object.isRequired,
   datesVisible: PropTypes.bool,
   datePrefix: PropTypes.string,
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
   publishedVisible: PropTypes.bool
 };

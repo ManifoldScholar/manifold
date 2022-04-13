@@ -2,6 +2,7 @@
 
 exports[`frontend/components/text/Bibliographic matches the snapshot 1`] = `
 <Text.Bibliographic
+  date="2020-02-20"
   datePrefix="Added"
   i18n={
     Object {

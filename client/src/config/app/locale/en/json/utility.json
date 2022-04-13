@@ -85,6 +85,7 @@
   },
   "dates": {
     "added": "added",
+    "added_title_case": "Added",
     "resource_added": "Resource $t(dates.added)",
     "type_of_resource_added": "{{kind}} $t(dates.added)",
     "collection_created": "Collection created",

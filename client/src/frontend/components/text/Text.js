@@ -4,7 +4,6 @@ import { withTranslation } from "react-i18next";
 import Content from "./Content";
 import Meta from "./Meta";
 import lh from "helpers/linkHandler";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 class Text extends Component {
@@ -22,8 +21,16 @@ class Text extends Component {
     t: PropTypes.func
   };
 
+  get text() {
+    return this.props.text;
+  }
+
+  get textAttributes() {
+    return this.text.attributes;
+  }
+
   get isPublished() {
-    return this.props.text.attributes.published;
+    return this.textAttributes.published;
   }
 
   get utilityInMeta() {
@@ -34,37 +41,56 @@ class Text extends Component {
     return this.props.utilityPosition === "content";
   }
 
+  get createdAt() {
+    return this.textAttributes.createdAt;
+  }
+
+  get updatedAt() {
+    return this.textAttributes.updatedAt;
+  }
+
   get createdDate() {
-    return new Date(this.props.text.attributes.createdAt);
+    return new Date(this.createdAt);
   }
 
   get updatedDate() {
-    return new Date(this.props.text.attributes.updatedAt);
+    return new Date(this.updatedAt);
+  }
+
+  get publishedAt() {
+    return this.textAttributes.publicationDate;
+  }
+
+  get hasUpdate() {
+    // check if latest update occurred > 24hrs after text was created
+    return Math.abs(this.updatedDate - this.createdDate) / 36e5 > 24;
+  }
+
+  get date() {
+    if (this.publishedAt) return this.publishedAt;
+    return this.hasUpdate ? this.updatedAt : this.createdAt;
   }
 
   get datePrefix() {
-    // check if latest update occurred > 24hrs after text was created
-    const hasUpdate = Math.abs(this.updatedDate - this.createdDate) / 36e5 > 24;
     const t = this.props.t;
 
-    return hasUpdate
+    if (this.isPublished && this.publishedAt) return null;
+    if (this.publishedAt) return t("dates.published_title_case");
+    return this.hasUpdate
       ? t("dates.updated_title_case")
-      : capitalize(t("dates.added"));
+      : t("dates.added_title_case");
   }
 
   get readUrl() {
-    const text = this.props.text;
-    const { slug } = text.attributes;
+    const { slug } = this.textAttributes;
     return lh.link("reader", slug);
   }
 
   render() {
-    const text = this.props.text;
-
     return (
       <Styled.Block>
         <Content
-          text={text}
+          text={this.text}
           readUrl={this.readUrl}
           showAuthors={this.props.showAuthors}
           showSubtitles={this.props.showSubtitles}
@@ -72,13 +98,15 @@ class Text extends Component {
           showCovers={this.props.showCovers}
           datesVisible={this.utilityInContent && this.props.showDates}
           datePrefix={this.datePrefix}
+          date={this.date}
           publishedVisible={this.utilityInContent && this.isPublished}
           onUncollect={this.props.onUncollect}
         />
         <Meta
-          text={text}
+          text={this.text}
           datesVisible={this.utilityInMeta && this.props.showDates}
           datePrefix={this.datePrefix}
+          date={this.date}
           publishedVisible={this.utilityInMeta && this.isPublished}
         />
       </Styled.Block>

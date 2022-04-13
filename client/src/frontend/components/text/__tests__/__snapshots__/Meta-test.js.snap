@@ -4,7 +4,7 @@ exports[`frontend/components/text/Meta matches the snapshot 1`] = `
 <Meta>
   <Status>
     <Text.Date
-      date="2017-04-24T23:25:50.161Z"
+      date="2020-02-20"
       datePrefix="Added"
       inline={true}
     />

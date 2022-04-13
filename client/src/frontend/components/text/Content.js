@@ -15,6 +15,7 @@ export default class TextContent extends Component {
     showCovers: PropTypes.bool,
     datesVisible: PropTypes.bool,
     datePrefix: PropTypes.string,
+    date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
     publishedVisible: PropTypes.bool,
     readUrl: PropTypes.string.isRequired,
     onUncollect: PropTypes.func
@@ -28,6 +29,7 @@ export default class TextContent extends Component {
       showDescriptions,
       showAuthors,
       datesVisible,
+      date,
       readUrl,
       datePrefix,
       publishedVisible,
@@ -42,6 +44,7 @@ export default class TextContent extends Component {
             text={text}
             readUrl={readUrl}
             datePrefix={datePrefix}
+            date={date}
             publishedVisible={publishedVisible}
             showSubtitles={showSubtitles}
             showDescriptions={showDescriptions}
