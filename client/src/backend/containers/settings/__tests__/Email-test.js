@@ -9,6 +9,7 @@ describe("backend/containers/settings/Email", () => {
       dispatch={() => {}}
       settings={$settings}
       form={$formMock}
+      t={key => key}
     />
   ));
 

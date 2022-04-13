@@ -9,6 +9,7 @@ describe("backend/containers/settings/subjects/Edit", () => {
       match={{
         params: {}
       }}
+      t={key => key}
     />
   ));
 

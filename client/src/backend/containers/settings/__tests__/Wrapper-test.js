@@ -10,7 +10,7 @@ describe("backend/containers/settings/Wrapper", () => {
     })
   );
   def("root", () => (
-    <SettingsWrapperContainer route={fixtures.route()} />
+    <SettingsWrapperContainer route={fixtures.route()} t={key => key} />
   ));
 
   it("matches the snapshot when rendered", () => {

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Layout from "backend/components/layout";
 import Form from "global/components/form";
@@ -22,9 +23,10 @@ export class SettingsThemeContainer extends PureComponent {
 
   render() {
     if (!this.props.settings) return null;
+    const t = this.props.t;
     return (
       <div>
-        <Layout.ViewHeader>Theme Settings</Layout.ViewHeader>
+        <Layout.ViewHeader>{t("settings.theme.header")}</Layout.ViewHeader>
         <Layout.BackendPanel>
           <FormContainer.Form
             model={this.props.settings}
@@ -33,122 +35,133 @@ export class SettingsThemeContainer extends PureComponent {
             create={settingsAPI.update}
             className="form-secondary"
           >
-            <Form.FieldGroup label={"Branding"}>
+            <Form.FieldGroup label={t("settings.theme.branding_header")}>
               <Form.TextInput
-                label="Website URL"
+                label={t("settings.theme.url_label")}
                 name="attributes[general][pressSite]"
-                placeholder="Enter URL"
+                placeholder={t("settings.theme.url_placeholder")}
                 wide
-                instructions="If present, the footer logo will link to this URL."
+                instructions={t("settings.theme.url_instructions")}
               />
               <Form.Upload
                 accepts="images"
-                label="Header Logo"
+                label={t("settings.theme.header_logo_label")}
                 readFrom="attributes[pressLogoStyles][small]"
                 name="attributes[pressLogo]"
                 remove="attributes[removePressLogo]"
-                instructions="The header logo appears in the top left of the frontend header. The logo will be resized to a max height of 60px."
+                instructions={t("settings.theme.header_logo_instructions")}
               />
               <Form.Upload
                 accepts="images"
-                label="Mobile Header Logo"
+                label={t("settings.theme.mobile_logo_label")}
                 readFrom="attributes[pressLogoMobileStyles][small]"
                 name="attributes[pressLogoMobile]"
                 remove="attributes[removePressLogoMobile]"
-                instructions="This header logo will be used on mobile devices. We strongly recommend using a square logo here."
+                instructions={t("settings.theme.mobile_logo_instructions")}
               />
               <Form.Upload
                 accepts="images"
-                label="Footer Logo"
+                label={t("settings.theme.footer_logo_label")}
                 readFrom="attributes[pressLogoFooterStyles][small]"
                 name="attributes[pressLogoFooter]"
                 remove="attributes[removePressLogoFooter]"
-                instructions="The footer logo appears in the footer. The logo dimensions will be capped at 325px width and 200px height."
+                instructions={t("settings.theme.footer_logo_instructions")}
               />
               <Form.Upload
                 accepts="images"
-                label="Favicon"
+                label={t("settings.theme.favicon_label")}
                 readFrom="attributes[faviconStyles][original]"
                 name="attributes[favicon]"
                 remove="attributes[removeFavicon]"
-                instructions="The favicon will appear in the browser tab next to the page title.  The favicon will be cropped to a square, thus we strongly recommend using a square image here."
+                instructions={t("settings.theme.favicon_instructions")}
               />
               <Form.TextInput
-                label="Logo Styles"
+                label={t("settings.theme.logo_styles_label")}
                 name="attributes[theme][logoStyles]"
-                placeholder="Additional Logo CSS"
-                instructions={`Enter a JSON style object, which will be applied to the logo image. For example: {"left": -1}`}
+                placeholder={t("settings.theme.logo_styles_placeholder")}
+                instructions={t("settings.theme.logo_styles_instructions")}
               />
               <Form.TextInput
-                label="Header Navigation Offset"
+                label={t("settings.theme.offset_label")}
                 name="attributes[theme][headerOffset]"
                 placeholder="0"
-                instructions={`Use this field to adjust the vertical position of header navigation. For example, enter "5" to move the header down 5 pixels. Enter "-5" to move it up 5 pixels.`}
+                instructions={t("settings.theme.offset_instructions")}
               />
               <Form.TextInput
-                label="Accent Color"
+                label={t("settings.theme.accent_color_label")}
                 name="attributes[theme][accentColor]"
                 placeholder="#52e3ac"
-                instructions="Enter a color in one of the following formats: CSS color keyword, hexadecimal, rgb, rgba, hsl, hsla, or hwb. Leave blank to restore default accent color."
+                instructions={t("settings.theme.accent_color_instructions")}
                 wide
               />
               <Form.TextInput
-                label="Header Foreground Color"
+                label={t("settings.theme.foreground_color_label")}
                 name="attributes[theme][headerForegroundColor]"
                 placeholder="#ffffff"
-                instructions="Override the header foreground color in one of the allowed formats (see above)."
+                instructions={t("settings.theme.foreground_color_instructions")}
                 wide
               />
               <Form.TextInput
-                label="Header Foreground Active Color"
+                label={t("settings.theme.active_foreground_color_label")}
                 name="attributes[theme][headerForegroundActiveColor]"
                 placeholder="#363636"
-                instructions={`Override the header foreground active state color in one of the allowed formats (see above). A link in the primary navigation is "active" when the user is currently on that page.`}
+                instructions={t(
+                  "settings.theme.active_foreground_color_instructions"
+                )}
                 wide
               />
               <Form.TextInput
-                label="Header Background Color"
+                label={t("settings.theme.background_color_label")}
                 name="attributes[theme][headerBackgroundColor]"
                 placeholder="#696969"
-                instructions="Override the header background color in one of the allowed formats (see above)."
+                instructions={t("settings.theme.background_color_instructions")}
                 wide
               />
             </Form.FieldGroup>
-            <Form.FieldGroup label={"Typography"}>
+            <Form.FieldGroup label={t("settings.theme.typography_header")}>
               <Form.TextInput
-                label="Typekit ID"
+                label={t("settings.theme.typekit_label")}
                 name="attributes[theme][typekitId]"
-                placeholder="Enter Typekit ID"
+                placeholder={t("settings.theme.typekit_placeholder")}
               />
             </Form.FieldGroup>
-            <Form.FieldGroup label={"Top Bar"}>
+            <Form.FieldGroup label={t("settings.theme.top_bar_header")}>
               <Form.TextInput
-                label="Text"
+                label={t("settings.theme.text_label")}
                 name="attributes[theme][topBarText]"
-                placeholder="Enter Top Bar Text"
+                placeholder={t("settings.theme.text_placeholder")}
               />
               <Form.TextInput
-                label="Color"
+                label={t("settings.theme.color_label")}
                 name="attributes[theme][topBarColor]"
-                placeholder="Enter Top Bar Color"
-                instructions="Enter a color in one of the following formats: CSS color keyword, hexadecimal, rgb, rgba, hsl, hsla, or hwb. Leave blank to restore default accent color."
+                placeholder={t("settings.theme.color_placeholder")}
+                instructions={t("settings.theme.color_instructions")}
               />
               <Form.TextInput
-                label="URL"
+                label={t("settings.theme.top_bar_url_label")}
                 name="attributes[theme][topBarUrl]"
-                placeholder="Enter Top Bar Link URL"
+                placeholder={t("settings.theme.top_bar_url_placeholder")}
               />
               <Form.Select
-                label="Top Bar Display Mode"
+                label={t("settings.theme.mode_label")}
                 name="attributes[theme][topBarMode]"
                 options={[
-                  { label: "Disabled", value: "disabled" },
-                  { label: "Always Visible", value: "enforced" },
-                  { label: "Only Visible in Standalone Mode", value: "enabled" }
+                  {
+                    label: t("settings.theme.mode_options.disabled"),
+                    value: "disabled"
+                  },
+                  {
+                    label: t("settings.theme.mode_options.always"),
+                    value: "enforced"
+                  },
+                  {
+                    label: t("settings.theme.mode_options.standalone"),
+                    value: "enabled"
+                  }
                 ]}
               />
             </Form.FieldGroup>
-            <Form.Save text="Save Settings" />
+            <Form.Save text={t("settings.save")} />
           </FormContainer.Form>
         </Layout.BackendPanel>
       </div>
@@ -156,6 +169,6 @@ export class SettingsThemeContainer extends PureComponent {
   }
 }
 
-export default connect(SettingsThemeContainer.mapStateToProps)(
-  SettingsThemeContainer
+export default withTranslation()(
+  connect(SettingsThemeContainer.mapStateToProps)(SettingsThemeContainer)
 );

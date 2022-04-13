@@ -110,7 +110,7 @@ export class SettingsSubjectsListContainer extends PureComponent {
             titleStyle="bar"
             entities={subjects}
             unit={t("glossary.subject", {
-              count: subjectsMeta.pagination.totalCount
+              count: subjectsMeta?.pagination?.totalCount
             })}
             pagination={subjectsMeta.pagination}
             showCountInHeader
@@ -120,7 +120,7 @@ export class SettingsSubjectsListContainer extends PureComponent {
             buttons={[
               <Button
                 path={lh.link("backendSettingsSubjectsNew")}
-                text="Add a new subject"
+                text={t("settings.subjects.add_button_label")}
                 authorizedFor="subject"
                 type="add"
               />

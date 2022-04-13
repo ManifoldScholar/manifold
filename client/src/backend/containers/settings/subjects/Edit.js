@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { subjectsAPI, requests } from "api";
 import Form from "global/components/form";
@@ -26,7 +27,8 @@ export class SettingsSubjectsEditContainer extends PureComponent {
     dispatch: PropTypes.func,
     subject: PropTypes.object,
     history: PropTypes.object,
-    confirm: PropTypes.func.isRequired
+    confirm: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -54,8 +56,9 @@ export class SettingsSubjectsEditContainer extends PureComponent {
   };
 
   handleSubjectDestroy = () => {
-    const heading = "Are you sure you want to delete this subject?";
-    const message = "This action cannot be undone.";
+    const t = this.props.t;
+    const heading = t("settings.subjects.confirm_heading");
+    const message = t("settings.subjects.confirm_body");
     this.props.confirm(heading, message, this.destroySubject);
   };
 
@@ -70,7 +73,7 @@ export class SettingsSubjectsEditContainer extends PureComponent {
   };
 
   render() {
-    const subject = this.props.subject;
+    const { subject, t } = this.props;
     if (!subject) return null;
     const attr = subject.attributes;
     return (
@@ -81,7 +84,7 @@ export class SettingsSubjectsEditContainer extends PureComponent {
             {
               onClick: this.handleSubjectDestroy,
               icon: "delete32",
-              label: "Delete",
+              label: t("actions.delete"),
               className: "utility-button__icon--notice"
             }
           ]}
@@ -95,11 +98,11 @@ export class SettingsSubjectsEditContainer extends PureComponent {
             className="form-secondary"
           >
             <Form.TextInput
-              label="Name"
+              label={t("settings.subjects.name_label")}
               name="attributes[name]"
-              placeholder="Name"
+              placeholder={t("settings.subjects.name_label")}
             />
-            <Form.Save text="Save Subject" />
+            <Form.Save text={t("settings.subjects.save")} />
           </FormContainer.Form>
         </section>
       </div>
@@ -107,4 +110,6 @@ export class SettingsSubjectsEditContainer extends PureComponent {
   }
 }
 
-export default withConfirmation(connectAndFetch(SettingsSubjectsEditContainer));
+export default withTranslation()(
+  withConfirmation(connectAndFetch(SettingsSubjectsEditContainer))
+);

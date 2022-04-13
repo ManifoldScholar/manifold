@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation, Trans } from "react-i18next";
 import { connect } from "react-redux";
 import Layout from "backend/components/layout";
 import Form from "global/components/form";
@@ -19,14 +20,16 @@ export class SettingsIngestionContainer extends PureComponent {
   static propTypes = {
     form: PropTypes.object,
     settings: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   render() {
     if (!this.props.settings) return null;
+    const t = this.props.t;
     return (
       <section>
-        <Layout.ViewHeader>Ingestion Settings</Layout.ViewHeader>
+        <Layout.ViewHeader>{t("settings.ingestion.header")}</Layout.ViewHeader>
         <Layout.BackendPanel>
           <FormContainer.Form
             model={this.props.settings}
@@ -37,29 +40,30 @@ export class SettingsIngestionContainer extends PureComponent {
           >
             <Form.CodeArea
               focusOnMount
-              label="Global Ingestion Styles"
+              label={t("settings.ingestion.global_styles_label")}
               mode="css"
               name="attributes[ingestion][globalStyles]"
-              instructions="Styles entered here will be applied to all Texts as they are ingested."
+              instructions={t("settings.ingestion.global_styles_instructions")}
             />
             <Form.CodeArea
-              label="Mammoth Style Map"
+              label={t("settings.ingestion.mammoth_style_label")}
               name="attributes[ingestion][mammothStyleMap]"
               instructions={
-                <>
-                  Enter your{" "}
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    href="https://www.npmjs.com/package/mammoth#writing-style-maps"
-                  >
-                    Mammoth style map
-                  </a>{" "}
-                  to convert your custom Word styles to HTML attributes.
-                </>
+                <Trans
+                  i18nKey="settings.ingestion.mammoth_style_instructions"
+                  components={[
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href="https://www.npmjs.com/package/mammoth#writing-style-maps"
+                    >
+                      #
+                    </a>
+                  ]}
+                />
               }
             />
-            <Form.Save text="Save Settings" />
+            <Form.Save text={t("settings.save")} />
           </FormContainer.Form>
         </Layout.BackendPanel>
       </section>
@@ -68,8 +72,10 @@ export class SettingsIngestionContainer extends PureComponent {
 }
 
 export default withFormSession(
-  connect(SettingsIngestionContainer.mapStateToProps)(
-    SettingsIngestionContainer
+  withTranslation()(
+    connect(SettingsIngestionContainer.mapStateToProps)(
+      SettingsIngestionContainer
+    )
   ),
   "backend-settings"
 );
