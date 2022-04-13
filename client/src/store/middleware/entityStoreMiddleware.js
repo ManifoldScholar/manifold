@@ -19,6 +19,7 @@ function buildResponseAction(requestAction, payload, meta, error) {
   /* eslint-disable no-param-reassign */
   if (payload) {
     payload.appends = get(requestAction, "payload.appends") || null;
+    payload.request = requestAction?.payload?.request;
     payload.notificationScope =
       get(requestAction, "payload.notificationScope") || "global";
     payload.suppressErrors =
