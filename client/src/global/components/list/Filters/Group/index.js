@@ -52,10 +52,13 @@ function FiltersGroup(props) {
       className={className}
     >
       {!hideSearch && <Search inputRef={searchInput} />}
-      <Styled.SelectGroup $count={filters?.length || 0}>
-        {filters &&
-          filters.map(filter => <Filter key={filter.label} {...filter} />)}
-      </Styled.SelectGroup>
+      {!!filters?.length && (
+        <Styled.SelectGroup $count={filters?.length}>
+          {filters.map(filter => (
+            <Filter key={filter.label} {...filter} />
+          ))}
+        </Styled.SelectGroup>
+      )}
       {showReset && (
         <Styled.ResetButton type="reset" onClick={handleReset}>
           {resetLabel}
