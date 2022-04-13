@@ -17,6 +17,7 @@
     "content": "content",
     "private": "private",
     "public": "public",
+    "archived": "archived",
     "visibility": "visibility",
     "visibility_title_case": "Visibility",
     "deleted": "deleted",

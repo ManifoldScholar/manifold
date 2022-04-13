@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import * as Styled from "./styles";
 
 export default function LinkedName({ name, tag, to }) {
   const { t } = useTranslation();
@@ -14,7 +15,7 @@ export default function LinkedName({ name, tag, to }) {
         </Link>
       )}
       <span className="table__name-container">{name}</span>
-      {tag && <span className="table__tag">{tag}</span>}
+      <Styled.Tag>{tag}</Styled.Tag>
     </span>
   );
 }
