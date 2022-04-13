@@ -17,6 +17,7 @@ describe("backend/containers/project/Collaborators", () => {
       route={$route}
       history={{}}
       refresh={$refresh}
+      t={key => key}
     />
   ));
 

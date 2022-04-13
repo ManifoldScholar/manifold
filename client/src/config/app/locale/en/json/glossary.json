@@ -122,6 +122,14 @@
     "maker_one": "maker",
     "maker_other": "makers",
     "user_one": "user",
-    "user_other": "users"
+    "user_other": "users",
+    "category_title_case_one": "Category",
+    "category_title_case_other": "Categories",
+    "event_one": "event",
+    "event_other": "events",
+    "export_one": "export",
+    "export_other": "exports",
+    "change_one": "change",
+    "change_other": "changes"
   }
 }

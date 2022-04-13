@@ -5,6 +5,8 @@ import FormContainer from "global/containers/form";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 
+// Not localized for v7. Not currently used in route-containers. -LD
+
 import Authorize from "hoc/Authorize";
 
 export default class ProjectProjectPageContainer extends PureComponent {

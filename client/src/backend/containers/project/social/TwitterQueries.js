@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { entityStoreActions } from "actions";
 import { projectsAPI, requests } from "api";
 import { select, meta } from "utils/entityUtils";
@@ -31,7 +32,8 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
     twitterQueries: PropTypes.array,
     twitterQueriesMeta: PropTypes.object,
     match: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -58,7 +60,7 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
   };
 
   render() {
-    const { twitterQueries, twitterQueriesMeta, project } = this.props;
+    const { twitterQueries, twitterQueriesMeta, project, t } = this.props;
     if (!twitterQueriesMeta || !twitterQueries) return null;
 
     const active = get(this.props.match, "params.qId");
@@ -69,16 +71,15 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
           entityComponent={TwitterQueryRow}
           entities={twitterQueries}
           entityComponentProps={{ active }}
-          title="Twitter Queries"
+          title={t("backend_entities.projects.twitter_queries")}
           titleStyle="section"
-          instructions={`
-            Manifold will periodically fetch tweets according to the queries specified
-            below.
-          `}
+          instructions={t(
+            "backend_entities.projects.twitter_queries_instructions"
+          )}
           buttons={[
             <Button
               path={lh.link("backendProjectSocialTwitterQueryNew", project.id)}
-              text="Add a new twitter query"
+              text={t("backend_entities.projects.add_twitter_label")}
               type="add"
               authorizedFor={project}
               authorizedTo="createTwitterQueries"
@@ -90,6 +91,8 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
   }
 }
 
-export default connect(ProjectSocialTwitterQueriesContainer.mapStateToProps)(
-  ProjectSocialTwitterQueriesContainer
+export default withTranslation()(
+  connect(ProjectSocialTwitterQueriesContainer.mapStateToProps)(
+    ProjectSocialTwitterQueriesContainer
+  )
 );

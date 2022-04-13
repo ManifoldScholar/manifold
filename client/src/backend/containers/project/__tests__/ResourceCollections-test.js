@@ -6,7 +6,7 @@ describe("backend/containers/project/ResourceCollections", () => {
     manageResourceCollections: true
   }));
   def("project", () => project($abilities));
-  def("root", () => <ResourceCollections project={$project} />);
+  def("root", () => <ResourceCollections project={$project} t={key => key} />);
   def("user", () => factory("user"));
 
   beforeEach(() => {

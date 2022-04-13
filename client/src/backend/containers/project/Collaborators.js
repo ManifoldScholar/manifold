@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { projectsAPI, makersAPI } from "api";
 import { connect } from "react-redux";
 import { childRoutes } from "helpers/router";
@@ -18,7 +19,8 @@ export class ProjectCollaboratorsContainer extends Component {
     project: PropTypes.object,
     history: PropTypes.object.isRequired,
     refresh: PropTypes.func.isRequired,
-    route: PropTypes.object
+    route: PropTypes.object,
+    t: PropTypes.func
   };
 
   closeUrl(props) {
@@ -44,7 +46,7 @@ export class ProjectCollaboratorsContainer extends Component {
   };
 
   render() {
-    const project = this.props.project;
+    const { project, t } = this.props;
     const closeUrl = this.closeUrl(this.props);
 
     return (
@@ -63,7 +65,7 @@ export class ProjectCollaboratorsContainer extends Component {
             className="form-secondary"
           >
             <Form.Picker
-              label="Authors"
+              label={t("glossary.author_title_case_other")}
               name="relationships[creators]"
               optionToLabel={maker => maker.attributes.fullName}
               reorderable
@@ -76,7 +78,7 @@ export class ProjectCollaboratorsContainer extends Component {
               allowNew
             />
             <Form.Picker
-              label="Contributors"
+              label={t("glossary.contributor_title_case_other")}
               name="relationships[contributors]"
               optionToLabel={maker => maker.attributes.fullName}
               callbacks={{}}
@@ -102,6 +104,8 @@ export class ProjectCollaboratorsContainer extends Component {
   }
 }
 
-export default connect(ProjectCollaboratorsContainer.mapStateToProps)(
-  ProjectCollaboratorsContainer
+export default withTranslation()(
+  connect(ProjectCollaboratorsContainer.mapStateToProps)(
+    ProjectCollaboratorsContainer
+  )
 );

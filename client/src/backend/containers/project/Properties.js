@@ -6,6 +6,7 @@ import { subjectsAPI, journalVolumesAPI, projectsAPI, tagsAPI } from "api";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { useApiCallback } from "hooks";
+import { useTranslation } from "react-i18next";
 
 function ProjectPropertiesContainer({ project }) {
   const createSubject = useApiCallback(subjectsAPI.create);
@@ -24,6 +25,8 @@ function ProjectPropertiesContainer({ project }) {
     return journalVolumesAPI.index(journal.id);
   }, [journal]);
 
+  const { t } = useTranslation();
+
   return (
     <Authorize
       entity={project}
@@ -39,40 +42,52 @@ function ProjectPropertiesContainer({ project }) {
           create={projectsAPI.create}
           className="form-secondary"
         >
-          <Form.FieldGroup label="Properties">
+          <Form.FieldGroup
+            label={t("backend_entities.projects.forms.properties.header")}
+          >
             <Form.TextInput
               wide
               validation={["required"]}
               focusOnMount
-              label="Title"
+              label={t("backend_entities.projects.forms.title_label")}
               name="attributes[title]"
-              placeholder="Enter Project Title"
+              placeholder={t(
+                "backend_entities.projects.forms.title_placeholder"
+              )}
             />
             <Form.TextInput
               wide
-              label="Subtitle"
+              label={t("backend_entities.projects.forms.subtitle_label")}
               name="attributes[subtitle]"
-              placeholder="Enter Project Subtitle"
+              placeholder={t(
+                "backend_entities.projects.forms.subtitle_placeholder"
+              )}
             />
             {journalIssue && (
               <>
                 <Form.TextInput
-                  label="Issue Number"
+                  label={t("backend_entities.issues.forms.number_label")}
                   wide
                   name="attributes[journalIssueNumber]"
                 />
                 <Form.NumberInput
-                  label="Issue Sort Number"
+                  label={t("backend_entities.issues.forms.sort_number_label")}
                   wide
                   name="attributes[journalIssuePendingSortTitle]"
-                  placeholder="Enter sorting number"
-                  instructions="This field is only used to numerically sort issues in lists. If blank, Manifold will attempt to derive a number from the issue number."
+                  placeholder={t(
+                    "backend_entities.issues.forms.sort_number_placeholder"
+                  )}
+                  instructions={t(
+                    "backend_entities.issues.forms.sort_number_instructions"
+                  )}
                 />
                 <Form.Picker
-                  instructions="Optionally, select a volume."
+                  instructions={t(
+                    "backend_entities.issues.forms.volume_instructions"
+                  )}
                   wide
                   belongsTo
-                  label="Volume Number"
+                  label={t("backend_entities.issues.forms.volume_label")}
                   name="relationships[journalVolume]"
                   optionToLabel={volume => volume.attributes.number}
                   predictive
@@ -82,97 +97,162 @@ function ProjectPropertiesContainer({ project }) {
               </>
             )}
             <Form.DatePicker
-              label="Publication Date"
+              label={t(
+                "backend_entities.projects.forms.properties.pub_date_label"
+              )}
               name="attributes[publicationDate]"
             />
             <Form.TextInput
               wide
-              label="Slug"
+              label={t("backend_entities.projects.forms.properties.slug_label")}
               name="attributes[pendingSlug]"
-              placeholder="Enter Project Slug"
+              placeholder={t(
+                "backend_entities.projects.forms.properties.slug_placeholder"
+              )}
             />
             <Project.Form.AvatarBuilder wide project={project} />
           </Form.FieldGroup>
-          <Form.FieldGroup label="Taxonomy">
+          <Form.FieldGroup
+            label={t(
+              "backend_entities.projects.forms.properties.taxonomy_header"
+            )}
+          >
             <Form.Picker
-              label="Subjects"
+              label={t(
+                "backend_entities.projects.forms.properties.subjects_label"
+              )}
               listStyle={"well"}
               name="relationships[subjects]"
               options={subjectsAPI.index}
               optionToLabel={subject => subject.attributes.name}
               newToValue={createSubjectFromValue}
-              placeholder="Select a Subject"
+              placeholder={t(
+                "backend_entities.projects.forms.properties.subjects_placeholder"
+              )}
               listRowComponent="SubjectRow"
             />
 
             <Form.Picker
-              label="Tags"
+              label={t("backend_entities.projects.forms.properties.tags_label")}
               listStyle="well"
               listRowComponent="StringRow"
               name="attributes[tagList]"
-              placeholder="Enter Tags"
+              placeholder={t(
+                "backend_entities.projects.forms.properties.tags_placeholder"
+              )}
               options={tagsAPI.index}
               optionToLabel={tag => tag.attributes.name}
               optionToValue={tag => tag.attributes.name}
               allowNew
             />
           </Form.FieldGroup>
-          <Form.FieldGroup label="Presentation">
+          <Form.FieldGroup
+            label={t(
+              "backend_entities.projects.forms.properties.presentation_header"
+            )}
+          >
             <Form.Switch
               className="form-toggle-secondary"
               wide
-              label="Draft Mode"
+              label={t(
+                "backend_entities.projects.forms.properties.draft_mode_label"
+              )}
               name="attributes[draft]"
-              instructions="A draft project is only visible to users who are able to modify it."
+              instructions={t(
+                "backend_entities.projects.forms.properties.draft_mode_instructions"
+              )}
             />
             <Form.Switch
               className="form-toggle-secondary"
               wide
-              label="Featured"
+              label={t(
+                "backend_entities.projects.forms.properties.featured_label"
+              )}
               name="attributes[featured]"
-              instructions="Featured projects can be automatically included in smart project collections."
+              instructions={t(
+                "backend_entities.projects.forms.properties.featured_instructions"
+              )}
             />
             <Form.Switch
               className="form-toggle-secondary"
               wide
-              label="Finished"
+              label={t(
+                "backend_entities.projects.forms.properties.finished_label"
+              )}
               name="attributes[finished]"
-              instructions="In lists, Manifold will show the publication date for finished projects."
+              instructions={t(
+                "backend_entities.projects.forms.properties.finished_instructions"
+              )}
             />
             <Form.Select
-              label="Standalone Mode"
+              label={t(
+                "backend_entities.projects.forms.properties.standalone_label"
+              )}
               wide
               name="attributes[standaloneMode]"
               options={[
-                { value: "disabled", label: "Standalone Mode Disabled" },
-                { value: "enabled", label: "Standalone Mode Enabled" },
-                { value: "enforced", label: "Standalone Mode Enforced" }
+                {
+                  value: "disabled",
+                  label: t(
+                    "backend_entities.projects.forms.properties.standalone_options.disabled"
+                  )
+                },
+                {
+                  value: "enabled",
+                  label: t(
+                    "backend_entities.projects.forms.properties.standalone_options.enabled"
+                  )
+                },
+                {
+                  value: "enforced",
+                  label: t(
+                    "backend_entities.projects.forms.properties.standalone_options.enforced"
+                  )
+                }
               ]}
-              instructions={`If enabled, this project will always render in standalone
-                mode when "?mode=standalone" is appended to the URL. If standalone mode
-                is enforced, this project will always render in standalone mode`}
+              instructions={t(
+                "backend_entities.projects.forms.properties.standalone_instructions"
+              )}
             />
             <Form.TextInput
-              label="Top Bar Text"
+              label={t(
+                "backend_entities.projects.forms.properties.top_bar_text_label"
+              )}
               name="attributes[standaloneModePressBarText]"
-              instructions="If set, the top bar will display and this text will override the installation's top bar text"
+              instructions={t(
+                "backend_entities.projects.forms.properties.top_bar_text_instructions"
+              )}
             />
             <Form.TextInput
-              label="Top Bar URL"
+              label={t(
+                "backend_entities.projects.forms.properties.top_bar_url_label"
+              )}
               name="attributes[standaloneModePressBarUrl]"
-              instructions="If the top bar is visible, this text will link to this URL"
+              instructions={t(
+                "backend_entities.projects.forms.properties.top_bar_url_instructions"
+              )}
             />
           </Form.FieldGroup>
-          <Form.FieldGroup label="Restrictions">
+          <Form.FieldGroup
+            label={t(
+              "backend_entities.projects.forms.properties.restrictions_header"
+            )}
+          >
             <Form.Switch
               className="form-toggle-secondary"
               wide
-              label="Disable Public Annotations and Comments"
+              label={t(
+                "backend_entities.projects.forms.properties.disable_public_label"
+              )}
               name="attributes[disableEngagement]"
-              instructions="When on, this setting will prevent users from commenting or annotating publicly on this project. Reading group annotations will only appear for group members."
+              instructions={t(
+                "backend_entities.projects.forms.properties.disable_public_instructions"
+              )}
             />
           </Form.FieldGroup>
-          <Form.Save text="Save Project" />
+          <Form.Save
+            text={t("backend_entities.projects.forms.properties.save")}
+          />
         </FormContainer.Form>
       </section>
     </Authorize>

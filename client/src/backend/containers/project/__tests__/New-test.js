@@ -17,7 +17,7 @@ describe("backend/containers/project/New", () => {
       }
     })
   );
-  def("root", () => <ProjectNewContainer />);
+  def("root", () => <ProjectNewContainer t={key => key}/>);
 
   it("matches the snapshot when rendered", () => {
     expect(render($withApp($root)).html()).toMatchSnapshot();

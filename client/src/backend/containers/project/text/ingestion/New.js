@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Ingestion from "backend/components/ingestion";
 import { requests } from "api";
@@ -20,7 +21,8 @@ export class IngestionNewContainer extends PureComponent {
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     ingestion: PropTypes.object,
-    triggerClose: PropTypes.func
+    triggerClose: PropTypes.func,
+    t: PropTypes.func
   };
 
   componentDidUpdate(prevProps) {
@@ -52,11 +54,11 @@ export class IngestionNewContainer extends PureComponent {
           name={requests.beIngestionCreate}
           project={this.props.project}
           triggerClose={this.props.triggerClose}
-          header={"Add a new text"}
+          header={this.props.t("backend_entities.texts.add_text_label")}
         />
       </div>
     );
   }
 }
 
-export default connectAndFetch(IngestionNewContainer);
+export default withTranslation()(connectAndFetch(IngestionNewContainer));

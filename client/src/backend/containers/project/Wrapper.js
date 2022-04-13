@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
@@ -35,7 +36,8 @@ export class ProjectWrapperContainer extends PureComponent {
     history: PropTypes.object,
     confirm: PropTypes.func.isRequired,
     route: PropTypes.object,
-    location: PropTypes.object
+    location: PropTypes.object,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -71,12 +73,14 @@ export class ProjectWrapperContainer extends PureComponent {
   }
 
   handleProjectDestroy = () => {
-    const heading = "Are you sure you want to delete this project?";
-    const message = "This action cannot be undone.";
+    const t = this.props.t;
+    const heading = t("backend_entities.projects.modals.confirm_heading");
+    const message = t("backend_entities.projects.modals.confirm_body");
     this.props.confirm(heading, message, this.doDestroy);
   };
 
   renderUtility(project) {
+    const t = this.props.t;
     return (
       <div className="utility-button-group utility-button-group--inline">
         <Link
@@ -91,7 +95,7 @@ export class ProjectWrapperContainer extends PureComponent {
             size={26}
             className="utility-button__icon utility-button__icon--highlight"
           />
-          <span className="utility-button__text">View</span>
+          <span className="utility-button__text">{t("actions.view")}</span>
         </Link>
         <Authorize entity={project} ability={"delete"}>
           <button
@@ -103,7 +107,7 @@ export class ProjectWrapperContainer extends PureComponent {
               size={26}
               className="utility-button__icon utility-button__icon--notice"
             />
-            <span className="utility-button__text">Delete</span>
+            <span className="utility-button__text">{t("actions.delete")}</span>
           </button>
         </Authorize>
       </div>
@@ -121,7 +125,7 @@ export class ProjectWrapperContainer extends PureComponent {
 
   render() {
     if (!this.props.project) return null;
-    const { project } = this.props;
+    const { project, t } = this.props;
     const secondaryLinks = navigation.project(project);
 
     const backUrl = project.attributes.isJournalIssue
@@ -136,7 +140,7 @@ export class ProjectWrapperContainer extends PureComponent {
         <Authorize
           entity={project}
           failureFatalError={{
-            detail: "You are not allowed to edit this project."
+            detail: t("backend_entities.projects.unauthorized_edit")
           }}
           ability={["update", "manageResources"]}
         >
@@ -158,7 +162,7 @@ export class ProjectWrapperContainer extends PureComponent {
               <Navigation.Secondary
                 links={secondaryLinks}
                 panel
-                ariaLabel="Project Settings"
+                ariaLabel={t("backend_entities.projects.settings")}
               />
             }
           >
@@ -170,4 +174,6 @@ export class ProjectWrapperContainer extends PureComponent {
   }
 }
 
-export default withConfirmation(connectAndFetch(ProjectWrapperContainer));
+export default withTranslation()(
+  withConfirmation(connectAndFetch(ProjectWrapperContainer))
+);

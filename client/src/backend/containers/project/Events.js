@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import withConfirmation from "hoc/withConfirmation";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -36,7 +37,8 @@ class ProjectEventsContainerImplementation extends PureComponent {
     refresh: PropTypes.func,
     dispatch: PropTypes.func,
     entitiesListSearchProps: PropTypes.func.isRequired,
-    entitiesListSearchParams: PropTypes.object.isRequired
+    entitiesListSearchParams: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -83,8 +85,9 @@ class ProjectEventsContainerImplementation extends PureComponent {
   }
 
   handleEventDestroy = event => {
-    const heading = "Are you sure you want to delete this event?";
-    const message = "This action cannot be undone.";
+    const t = this.props.t;
+    const heading = t("backend_entities.projects.modals.confirm_event");
+    const message = t("backend_entities.projects.modals.confirm_body");
     this.props.confirm(heading, message, () => this.destroyEvent(event));
   };
 
@@ -109,7 +112,7 @@ class ProjectEventsContainerImplementation extends PureComponent {
 
   render() {
     if (!this.props.events) return null;
-    const project = this.props.project;
+    const { project, t, eventsMeta } = this.props;
     if (!project) return null;
 
     return (
@@ -128,10 +131,12 @@ class ProjectEventsContainerImplementation extends PureComponent {
             entities={this.props.events}
             listStyle="tiles"
             showCount
-            title="Activity"
+            title={t("backend_entities.projects.activity")}
             titleIcon="BENews64"
-            unit="event"
-            pagination={this.props.eventsMeta.pagination}
+            unit={t("glossary.event", {
+              count: eventsMeta?.pagination?.totalCount
+            })}
+            pagination={eventsMeta.pagination}
             callbacks={{
               onPageClick: this.pageChangeHandlerCreator
             }}
@@ -152,6 +157,8 @@ export const ProjectEventsContainer = withFilteredLists(
   }
 );
 
-export default withConfirmation(
-  connect(ProjectEventsContainer.mapStateToProps)(ProjectEventsContainer)
+export default withTranslation()(
+  withConfirmation(
+    connect(ProjectEventsContainer.mapStateToProps)(ProjectEventsContainer)
+  )
 );

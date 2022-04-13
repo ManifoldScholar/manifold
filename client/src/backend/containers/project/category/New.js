@@ -1,33 +1,37 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Category from "backend/components/category";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
 
-export default class ProjectCategoryNewContainer extends Component {
-  static displayName = "Project.Category.New";
+export default function ProjectCategoryNewContainer({
+  project,
+  refresh,
+  history
+}) {
+  const { t } = useTranslation();
 
-  static propTypes = {
-    project: PropTypes.object.isRequired,
-    refresh: PropTypes.func,
-    history: PropTypes.object
+  const onSuccess = categoryIgnored => {
+    refresh();
+    const url = lh.link("backendProjectTexts", project.id);
+    history.push(url, { keepNotifications: false });
   };
 
-  onSuccess = categoryIgnored => {
-    this.props.refresh();
-    const url = lh.link("backendProjectTexts", this.props.project.id);
-    this.props.history.push(url, { keepNotifications: false });
-  };
-
-  render() {
-    return (
-      <div>
-        <Navigation.DrawerHeader title="Create Category" />
-        <Category.Form
-          projectId={this.props.project.id}
-          onSuccess={this.onSuccess}
-        />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Navigation.DrawerHeader
+        title={t("backend_entities.texts.category_new_header")}
+      />
+      <Category.Form projectId={project.id} onSuccess={onSuccess} />
+    </div>
+  );
 }
+
+ProjectCategoryNewContainer.displayName = "Project.Category.New";
+
+ProjectCategoryNewContainer.propTypes = {
+  project: PropTypes.object.isRequired,
+  refresh: PropTypes.func,
+  history: PropTypes.object
+};

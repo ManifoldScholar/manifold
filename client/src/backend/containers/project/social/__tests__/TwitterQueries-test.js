@@ -15,6 +15,7 @@ describe("backend/containers/project/social/TwitterQueries", () => {
         pagination: $pagination
       }}
       match={$match}
+      t={key => key}
     />
   ));
 

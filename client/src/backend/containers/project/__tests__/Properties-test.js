@@ -10,7 +10,7 @@ describe("backend/containers/project/Properties", () => {
   def("abilities", () => ({ update: true }));
   def("user", () => factory("user"));
   def("project", () => project($abilities));
-  def("root", () => <ProjectPropertiesContainer project={$project} />);
+  def("root", () => <ProjectPropertiesContainer project={$project} t={key => key} />);
 
   it("matches the snapshot when rendered", () => {
     expect(mount($withApp($root)).html()).toMatchSnapshot();

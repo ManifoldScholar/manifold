@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
@@ -26,7 +27,8 @@ export class LogContainer extends PureComponent {
     versions: PropTypes.array,
     versionsMeta: PropTypes.object,
     project: PropTypes.object.isRequired,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    t: PropTypes.func
   };
 
   constructor() {
@@ -64,7 +66,7 @@ export class LogContainer extends PureComponent {
   };
 
   render() {
-    const project = this.props.project;
+    const { project, t, versionsMeta } = this.props;
 
     return (
       <Authorize
@@ -75,13 +77,15 @@ export class LogContainer extends PureComponent {
       >
         {this.props.versions && (
           <EntitiesList
-            title="Project Changes"
+            title={t("backend_entities.projects.changes")}
             titleIcon="BEActivity64"
             entities={this.props.versions}
             entityComponent={LogRow}
-            pagination={this.props.versionsMeta.pagination}
+            pagination={versionsMeta.pagination}
             showCount
-            unit="change"
+            unit={t("glossary.change", {
+              count: versionsMeta?.pagination?.totalCount
+            })}
             callbacks={{
               onPageClick: this.pageChangeHandlerCreator
             }}
@@ -91,4 +95,6 @@ export class LogContainer extends PureComponent {
     );
   }
 }
-export default connect(LogContainer.mapStateToProps)(LogContainer);
+export default withTranslation()(
+  connect(LogContainer.mapStateToProps)(LogContainer)
+);

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { projectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -39,7 +40,8 @@ export class ProjectResourceCollectionsListContainerImplementation extends PureC
     resourceCollectionsMeta: PropTypes.object,
     dispatch: PropTypes.func,
     entitiesListSearchProps: PropTypes.func.isRequired,
-    entitiesListSearchParams: PropTypes.object.isRequired
+    entitiesListSearchParams: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -81,15 +83,17 @@ export class ProjectResourceCollectionsListContainerImplementation extends PureC
 
   render() {
     if (!this.props.resourceCollections) return null;
-    const project = this.props.project;
+    const { project, t } = this.props;
 
     return (
       <EntitiesList
         entityComponent={ResourceCollectionRow}
-        title={"Resource Collections"}
+        title={t("glossary.resource_collection_title_case_other")}
         titleIcon="resourceCollection64"
         entities={this.props.resourceCollections}
-        unit="resource collection"
+        unit={t("glossary.resource_collection", {
+          count: this.props.resourceCollectionsMeta?.pagination?.totalCount
+        })}
         pagination={this.props.resourceCollectionsMeta.pagination}
         showCount
         callbacks={{
@@ -103,7 +107,7 @@ export class ProjectResourceCollectionsListContainerImplementation extends PureC
         buttons={[
           <Button
             path={lh.link("backendProjectResourceCollectionsNew", project.id)}
-            text="Add a new resource collection"
+            text={t("backend_entities.resource_collections.add_button_label")}
             authorizedFor={project}
             authorizedTo="createResourceCollections"
             type="add"
@@ -120,4 +124,6 @@ export const ProjectResourceCollectionsListContainer = withFilteredLists(
     resourceCollections: resourceCollectionFilters()
   }
 );
-export default connectAndFetch(ProjectResourceCollectionsListContainer);
+export default withTranslation()(
+  connectAndFetch(ProjectResourceCollectionsListContainer)
+);
