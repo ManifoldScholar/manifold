@@ -1,93 +1,113 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { textsAPI } from "api";
 
-export default class TextPropertiesContainer extends PureComponent {
-  static displayName = "Text.Properties";
-
-  static propTypes = {
-    text: PropTypes.object
-  };
-
-  render() {
-    return (
-      <section>
-        <FormContainer.Form
-          model={this.props.text}
-          name="backend-text-properties"
-          update={textsAPI.update}
-          create={textsAPI.create}
-          className="form-secondary"
+export default function TextPropertiesContainer({ text }) {
+  const { t } = useTranslation();
+  return (
+    <section>
+      <FormContainer.Form
+        model={text}
+        name="backend-text-properties"
+        update={textsAPI.update}
+        create={textsAPI.create}
+        className="form-secondary"
+      >
+        <Form.FieldGroup label={t("backend_entities.texts.properties.header")}>
+          <Form.TextInput
+            wide
+            label={t("backend_entities.texts.properties.title_label")}
+            name="attributes[title]"
+            placeholder={t(
+              "backend_entities.texts.properties.title_placeholder"
+            )}
+          />
+          <Form.TextInput
+            wide
+            label={t("backend_entities.texts.properties.subtitle_label")}
+            name="attributes[subtitle]"
+            placeholder={t(
+              "backend_entities.texts.properties.subtitle_placeholder"
+            )}
+          />
+          <Form.DatePicker
+            label={t("backend_entities.texts.properties.pub_date_label")}
+            name="attributes[publicationDate]"
+          />
+          <Form.TextInput
+            wide
+            label={t("backend_entities.texts.properties.slug_label")}
+            name="attributes[pendingSlug]"
+            placeholder={t(
+              "backend_entities.texts.properties.slug_placeholder"
+            )}
+          />
+          <Form.TextArea
+            wide
+            label={t("backend_entities.texts.properties.descript_label")}
+            name="attributes[description]"
+            placeholder={t(
+              "backend_entities.texts.properties.descript_placeholder"
+            )}
+          />
+          <Form.Upload
+            wide
+            layout="portrait"
+            label={t("backend_entities.texts.properties.cover_label")}
+            accepts="images"
+            readFrom="attributes[coverStyles][small]"
+            name="attributes[cover]"
+            remove="attributes[removeCover]"
+          />
+        </Form.FieldGroup>
+        <Form.FieldGroup
+          label={t("backend_entities.texts.properties.presentation_header")}
         >
-          <Form.FieldGroup label="Properties">
-            <Form.TextInput
-              wide
-              label="Title"
-              name="attributes[title]"
-              placeholder="Enter Text Title"
-            />
-            <Form.TextInput
-              wide
-              label="Subtitle"
-              name="attributes[subtitle]"
-              placeholder="Enter Subtitle"
-            />
-            <Form.DatePicker
-              label="Publication Date"
-              name="attributes[publicationDate]"
-            />
-            <Form.TextInput
-              wide
-              label="Slug"
-              name="attributes[pendingSlug]"
-              placeholder="Enter Text Slug"
-            />
-            <Form.TextArea
-              wide
-              label="Description"
-              name="attributes[description]"
-              placeholder="Enter a Brief Description"
-            />
-            <Form.Upload
-              wide
-              layout="portrait"
-              label="Cover"
-              accepts="images"
-              readFrom="attributes[coverStyles][small]"
-              name="attributes[cover]"
-              remove="attributes[removeCover]"
-            />
-          </Form.FieldGroup>
-          <Form.FieldGroup label="Presentation">
-            <Form.Switch
-              wide
-              className="form-toggle-secondary"
-              instructions={`When on, a "published" badge will appear next to the text in lists of texts.`}
-              label="Published?"
-              name="attributes[published]"
-            />
-            <Form.TextInput
-              wide
-              label="Section Label"
-              name="attributes[sectionKind]"
-              placeholder="Section"
-              instructions="For example, “chapter” for books or “article” for journals"
-            />
-          </Form.FieldGroup>
-          <Form.FieldGroup label="Access">
-            <Form.Switch
-              wide
-              className="form-toggle-secondary"
-              label="Ignore Access Restrictions?"
-              instructions={`When on, this text will be available to all readers regardless of project access settings.`}
-              name="attributes[ignoreAccessRestrictions]"
-            />
-          </Form.FieldGroup>
-          <Form.Save text="Save Text" />
-        </FormContainer.Form>
-      </section>
-    );
-  }
+          <Form.Switch
+            wide
+            className="form-toggle-secondary"
+            instructions={t(
+              "backend_entities.texts.properties.published_instructions"
+            )}
+            label={t("backend_entities.texts.properties.published_label")}
+            name="attributes[published]"
+          />
+          <Form.TextInput
+            wide
+            label={t("backend_entities.texts.properties.section_label")}
+            name="attributes[sectionKind]"
+            placeholder={t(
+              "backend_entities.texts.properties.section_placeholder"
+            )}
+            instructions={t(
+              "backend_entities.texts.properties.section_instructions"
+            )}
+          />
+        </Form.FieldGroup>
+        <Form.FieldGroup
+          label={t("backend_entities.texts.properties.access_header")}
+        >
+          <Form.Switch
+            wide
+            className="form-toggle-secondary"
+            label={t("backend_entities.texts.properties.ignore_label")}
+            instructions={t(
+              "backend_entities.texts.properties.ignore_instructions"
+            )}
+            name="attributes[ignoreAccessRestrictions]"
+          />
+        </Form.FieldGroup>
+        <Form.Save text={t("backend_entities.texts.properties.save")} />
+      </FormContainer.Form>
+    </section>
+  );
 }
+
+TextPropertiesContainer.displayName = "Text.Properties";
+
+TextPropertiesContainer.propTypes = {
+  text: PropTypes.object
+};

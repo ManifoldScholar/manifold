@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Ingestion from "backend/components/ingestion";
 import { requests } from "api";
@@ -21,7 +22,8 @@ export class IngestionNewContainer extends PureComponent {
     history: PropTypes.object,
     ingestion: PropTypes.object,
     match: PropTypes.object,
-    location: PropTypes.object
+    location: PropTypes.object,
+    t: PropTypes.func
   };
 
   componentDidUpdate(prevProps) {
@@ -52,11 +54,11 @@ export class IngestionNewContainer extends PureComponent {
           name={requests.beIngestionCreate}
           project={this.props.text.relationships.project}
           text={this.props.text}
-          header={"Reingest"}
+          header={this.props.t("backend_entities.texts.reingest")}
         />
       </div>
     );
   }
 }
 
-export default connectAndFetch(IngestionNewContainer);
+export default withTranslation()(connectAndFetch(IngestionNewContainer));

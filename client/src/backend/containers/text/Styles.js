@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 import lh from "helpers/linkHandler";
@@ -19,7 +20,8 @@ export class TextStylesContainer extends PureComponent {
     text: PropTypes.object,
     dispatch: PropTypes.func,
     refresh: PropTypes.func,
-    confirm: PropTypes.func.isRequired
+    confirm: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -49,8 +51,9 @@ export class TextStylesContainer extends PureComponent {
   }
 
   confirmDestroy = stylesheet => {
-    const heading = "Are you sure you want to delete this stylesheet?";
-    const message = "This action cannot be undone.";
+    const t = this.props.t;
+    const heading = t("backend_entities.stylesheets.modals.confirm_heading");
+    const message = t("backend_entities.stylesheets.modals.confirm_body");
     this.props.confirm(heading, message, () => this.destroy(stylesheet));
   };
 
@@ -84,19 +87,12 @@ export class TextStylesContainer extends PureComponent {
   };
 
   render() {
+    const t = this.props.t;
     return (
       <div>
         <section className="text-category-list-secondary">
           <div className="instructional-copy">
-            <p>
-              {`Stylesheets are applied to texts in the order listed below.
-              "Ingested" stylesheets are part of the source document and are
-              copied into Manifold (with some modification) during text
-              ingestion. "User" stylesheets are those that have been created
-              after the initial ingestion. To override styles in the source
-              document, create a new stylesheet and move it to the bottom of the
-              list.`}
-            </p>
+            <p>{t("backend_entities.stylesheets.instructions")}</p>
           </div>
 
           <div className="buttons-icon-horizontal maintain">
@@ -112,7 +108,7 @@ export class TextStylesContainer extends PureComponent {
                   "button-icon-secondary__icon--large"
                 )}
               />
-              <span>Add a New Stylesheet</span>
+              <span>{t("backend_entities.stylesheets.add_button_label")}</span>
             </Link>
           </div>
 
@@ -127,4 +123,4 @@ export class TextStylesContainer extends PureComponent {
   }
 }
 
-export default withConfirmation(TextStylesContainer);
+export default withTranslation()(withConfirmation(TextStylesContainer));

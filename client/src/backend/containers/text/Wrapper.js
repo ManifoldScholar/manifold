@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
@@ -34,7 +35,8 @@ export class TextWrapperContainer extends PureComponent {
     history: PropTypes.object,
     location: PropTypes.object,
     route: PropTypes.object,
-    confirm: PropTypes.func.isRequired
+    confirm: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -72,11 +74,14 @@ export class TextWrapperContainer extends PureComponent {
   };
 
   notifyDestroy() {
+    const t = this.props.t;
     const notification = {
       level: 0,
       id: `TEXT_DESTROYED_${this.props.text.id}`,
-      heading: "The text has been destroyed.",
-      body: `${this.props.text.attributes.titlePlaintext} has passed into the endless night.`,
+      heading: t("backend_entities.texts.modals.destroyed_heading"),
+      body: t("backend_entities.texts.modals.destroyed_body", {
+        title: this.props.text.attributes.titlePlaintext
+      }),
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
@@ -89,8 +94,9 @@ export class TextWrapperContainer extends PureComponent {
   }
 
   handleTextDestroy = () => {
-    const heading = "Are you sure you want to delete this text?";
-    const message = "This action cannot be undone.";
+    const t = this.props.t;
+    const heading = t("backend_entities.texts.modals.delete_text_heading");
+    const message = t("backend_entities.texts.modals.delete_text_body");
     this.props.confirm(heading, message, this.doDestroy);
   };
 
@@ -99,7 +105,7 @@ export class TextWrapperContainer extends PureComponent {
   }
 
   renderUtility() {
-    const { text } = this.props;
+    const { text, t } = this.props;
     const {
       attributes: { exportsAsEpubV3, epubV3ExportUrl }
     } = text;
@@ -112,7 +118,7 @@ export class TextWrapperContainer extends PureComponent {
             size={26}
             className="utility-button__icon utility-button__icon--highlight"
           />
-          <span className="utility-button__text">View</span>
+          <span className="utility-button__text">{t("actions.view")}</span>
         </Link>
         <button onClick={this.handleTextDestroy} className="utility-button">
           <IconComposer
@@ -120,7 +126,7 @@ export class TextWrapperContainer extends PureComponent {
             size={26}
             className="utility-button__icon utility-button__icon--notice"
           />
-          <span className="utility-button__text">Delete</span>
+          <span className="utility-button__text">{t("actions.delete")}</span>
         </button>
         <button onClick={this.toggleExportsAsEpubV3} className="utility-button">
           <IconComposer
@@ -129,7 +135,9 @@ export class TextWrapperContainer extends PureComponent {
             className="utility-button__icon utility-button__icon--download"
           />
           <span className="utility-button__text">
-            {exportsAsEpubV3 ? "Disable EPUB" : "Enable EPUB"}
+            {exportsAsEpubV3
+              ? t("backend_entities.texts.disable_epub")
+              : t("backend_entities.texts.enable_epub")}
           </span>
         </button>
         {epubV3ExportUrl && (
@@ -139,7 +147,9 @@ export class TextWrapperContainer extends PureComponent {
               size={26}
               className="utility-button__icon utility-button__icon--download"
             />
-            <span className="utility-button__text">Download Epub</span>
+            <span className="utility-button__text">
+              {t("backend_entities.texts.download_epub")}
+            </span>
           </a>
         )}
         {text.attributes.ingestionSourceDownloadUrl && (
@@ -153,7 +163,9 @@ export class TextWrapperContainer extends PureComponent {
               size={26}
               className="utility-button__icon utility-button__icon--download"
             />
-            <span className="utility-button__text">Download Source</span>
+            <span className="utility-button__text">
+              {t("backend_entities.texts.download_source")}
+            </span>
           </a>
         )}
         {text.attributes.ingestionExternalSourceUrl && (
@@ -168,7 +180,9 @@ export class TextWrapperContainer extends PureComponent {
               size={26}
               className="utility-button__icon utility-button__icon--download"
             />
-            <span className="utility-button__text">Visit Source</span>
+            <span className="utility-button__text">
+              {t("backend_entities.texts.visit_source")}
+            </span>
           </a>
         )}
       </div>
@@ -184,7 +198,7 @@ export class TextWrapperContainer extends PureComponent {
   }
 
   render() {
-    const { text } = this.props;
+    const { text, t } = this.props;
     if (!text) return null;
     const secondaryLinks = navigation.text(text);
 
@@ -193,7 +207,7 @@ export class TextWrapperContainer extends PureComponent {
         <Authorize
           entity={text}
           failureFatalError={{
-            body: "You are not allowed to update this text."
+            body: t("backend_entities.texts.unauthorized")
           }}
           ability={["update"]}
         >
@@ -218,7 +232,7 @@ export class TextWrapperContainer extends PureComponent {
               <Navigation.Secondary
                 links={secondaryLinks}
                 panel
-                ariaLabel="Text Settings"
+                ariaLabel={t("backend_entities.texts.settings")}
               />
             }
           >
@@ -230,4 +244,6 @@ export class TextWrapperContainer extends PureComponent {
   }
 }
 
-export default withConfirmation(connectAndFetch(TextWrapperContainer));
+export default withTranslation()(
+  withConfirmation(connectAndFetch(TextWrapperContainer))
+);

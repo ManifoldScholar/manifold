@@ -14,6 +14,7 @@ describe("backend/containers/text/Collaborators", () => {
       route={fixtures.route()}
       history={fixtures.history()}
       refresh={jest.fn()}
+      t={key => key}
     />
   ));
 

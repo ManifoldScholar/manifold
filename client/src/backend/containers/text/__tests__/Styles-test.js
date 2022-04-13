@@ -5,7 +5,7 @@ describe("backend/containers/text/Styles", () => {
   def("text", () =>
     factory("text", { relationships: { stylesheets: $stylesheets } })
   );
-  def("root", () => <TextStylesContainer text={$text} />);
+  def("root", () => <TextStylesContainer text={$text} t={key => key} />);
 
   it("matches the snapshot when rendered", () => {
     expect(render($withApp($root)).html()).toMatchSnapshot();
