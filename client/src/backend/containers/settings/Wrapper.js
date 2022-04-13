@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Navigation from "backend/components/navigation";
 import lh from "helpers/linkHandler";
@@ -10,7 +11,8 @@ import Authorize from "hoc/Authorize";
 
 export class SettingsWrapperContainer extends PureComponent {
   static propTypes = {
-    route: PropTypes.object
+    route: PropTypes.object,
+    t: PropTypes.func
   };
 
   render() {
@@ -20,7 +22,7 @@ export class SettingsWrapperContainer extends PureComponent {
       <Authorize
         entity="settings"
         failureFatalError={{
-          body: "You are not allowed to update settings."
+          body: this.props.t("settings.unauthorized")
         }}
         ability="update"
       >
@@ -40,6 +42,6 @@ export class SettingsWrapperContainer extends PureComponent {
   }
 }
 
-export default connect(SettingsWrapperContainer.mapStateToProps)(
-  SettingsWrapperContainer
+export default withTranslation()(
+  connect(SettingsWrapperContainer.mapStateToProps)(SettingsWrapperContainer)
 );

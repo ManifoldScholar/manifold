@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Layout from "backend/components/layout";
 import Form from "global/components/form";
@@ -22,7 +23,8 @@ export class SettingsEmailContainer extends PureComponent {
   static propTypes = {
     form: PropTypes.object,
     settings: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   sendTestEmail = event => {
@@ -35,11 +37,24 @@ export class SettingsEmailContainer extends PureComponent {
   };
 
   notifyEmailSuccess = responseIgnored => {
+    const t = this.props.t;
     const notification = {
       level: 0,
       id: `TEST_EMAIL_SENT`,
-      heading: "The test email appears to have been sent.",
-      body: "Expect to receive it shortly.",
+      heading: t("settings.email.success_heading"),
+      body: t("settings.email.success_body"),
+      expiration: 5000
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
+  };
+
+  notifyEmailFail = responseIgnored => {
+    const t = this.props.t;
+    const notification = {
+      level: 0,
+      id: `TEST_EMAIL_NOT_SENT`,
+      heading: t("settings.email.failure_heading"),
+      body: t("settings.email.failure_body"),
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
@@ -47,9 +62,11 @@ export class SettingsEmailContainer extends PureComponent {
 
   render() {
     if (!this.props.settings) return null;
+    const t = this.props.t;
+
     return (
       <section>
-        <Layout.ViewHeader>Email Settings</Layout.ViewHeader>
+        <Layout.ViewHeader>{t("settings.email.header")}</Layout.ViewHeader>
         <Layout.BackendPanel>
           <FormContainer.Form
             model={this.props.settings}
@@ -58,42 +75,43 @@ export class SettingsEmailContainer extends PureComponent {
             create={settingsAPI.update}
             className="form-secondary"
           >
-            <Form.FieldGroup label="Message Settings">
+            <Form.FieldGroup label={t("settings.email.message_header")}>
               <Form.TextInput
                 focusOnMount
-                label="Email from address"
+                label={t("settings.email.from_label")}
                 name="attributes[email][fromAddress]"
-                placeholder="do-not-reply@manifoldapp.org"
-                instructions="All emails sent by manifold will be from this address."
+                placeholder={t("settings.email.from_placeholder")}
+                instructions={t("settings.email.from_instructions")}
               />
               <Form.TextInput
-                label="Email from name"
+                label={t("settings.email.name_label")}
                 name="attributes[email][fromName]"
-                placeholder="Manifold Scholarship"
-                instructions="All emails sent by manifold will appear to be sent by this name."
+                placeholder={t("settings.email.name_placeholder")}
+                instructions={t("settings.email.name_instructions")}
               />
               <Form.TextInput
-                label="Email reply-to address"
+                label={t("settings.email.reply_label")}
                 name="attributes[email][replyToAddress]"
-                placeholder="do-not-reply@manifoldapp.org"
-                instructions="Replies to emails sent by Manifold will go to this address."
+                placeholder={t("settings.email.from_placeholder")}
+                instructions={t("settings.email.reply_instructions")}
               />
               <Form.TextInput
-                label="Email reply-to name"
+                label={t("settings.email.reply_name_label")}
                 name="attributes[email][replyToName]"
-                instructions="Replies to emails sent by Manifold will appear to be sent by this name."
+                instructions={t("settings.email.reply_name_instructions")}
               />
               <Form.TextArea
-                label="Email closing"
+                label={t("settings.email.closing_label")}
                 name="attributes[email][closing]"
-                placeholder={"Sincerely,\nThe Manifold Team"}
-                instructions="How do you want to close emails sent by Manifold?"
+                placeholder={t("settings.email.closing_placeholder")}
+                instructions={t("settings.email.closing_instructions")}
               />
             </Form.FieldGroup>
-            <Form.FieldGroup label="Email Delivery Method">
+            <Form.FieldGroup label={t("settings.email.delivery_header")}>
               <Form.Select
-                label="Email Delivery Method"
+                label={t("settings.email.delivery_header")}
                 name="attributes[email][deliveryMethod]"
+                // Leaving these options as I don't think they are localized. -LD
                 options={[
                   { label: "", value: "" },
                   { label: "SMTP", value: "smtp" },
@@ -104,53 +122,61 @@ export class SettingsEmailContainer extends PureComponent {
             {this.props.form.getModelValue(
               "attributes[email][deliveryMethod]"
             ) === "smtp" ? (
-              <Form.FieldGroup label={"SMTP Configuration"}>
+              <Form.FieldGroup
+                label={t("settings.email.config_header", {
+                  method: "SMTP"
+                })}
+              >
                 <Form.TextInput
-                  label="SMTP Address"
+                  label={t("settings.email.smtp_address_label")}
                   name="attributes[email][smtpSettingsAddress]"
-                  instructions="Allows you to use a remote mail server."
+                  instructions={t("settings.email.smtp_address_instructions")}
                 />
                 <Form.TextInput
-                  label="SMTP Port"
+                  label={t("settings.email.smtp_port_label")}
                   name="attributes[email][smtpSettingsPort]"
-                  instructions="On the off chance that your mail server doesn't run on port 25, you can change it."
+                  instructions={t("settings.email.smtp_port_instructions")}
                 />
                 <Form.TextInput
-                  label="SMTP Username"
+                  label={t("settings.email.smtp_user_label")}
                   name="attributes[email][smtpSettingsUserName]"
-                  instructions="If your mail server requires authentication, set the username in this setting."
+                  instructions={t("settings.email.smtp_user_instructions")}
                 />
                 <Form.TextInput
                   password
-                  label="SMTP Password"
+                  label={t("settings.email.smtp_password_label")}
                   name="attributes[secrets][smtpSettingsPassword]"
-                  instructions="If your mail server requires authentication, set the password in this setting."
+                  instructions={t("settings.email.smtp_password_instructions")}
                 />
               </Form.FieldGroup>
             ) : null}
             {this.props.form.getModelValue(
               "attributes[email][deliveryMethod]"
             ) === "sendmail" ? (
-              <Form.FieldGroup label="Sendmail Configuration">
+              <Form.FieldGroup
+                label={t("settings.email.config_header", {
+                  method: "Sendmail"
+                })}
+              >
                 <Form.TextInput
-                  label="Sendmail Location"
+                  label={t("settings.email.sendmail_loc_label")}
                   name="attributes[email][sendmailSettingsLocation]"
-                  instructions="The location of the sendmail executable. Defaults to /usr/sbin/sendmail."
+                  instructions={t("settings.email.sendmail_loc_instructions")}
                 />
                 <Form.TextInput
-                  label="Sendmail Arguments"
+                  label={t("settings.email.sendmail_args_label")}
                   name="attributes[email][sendmailSettingsArguments]"
-                  instructions="The command line arguments. Defaults to -i with -f sender@address added automatically before the message is sent."
+                  instructions={t("settings.email.sendmail_args_instructions")}
                 />
               </Form.FieldGroup>
             ) : null}
-            <Form.Save text="Save Settings" />
+            <Form.Save text={t("settings.save")} />
             <div>
               <button
                 className="button-secondary button-secondary--dark button-secondary--with-room"
                 onClick={this.sendTestEmail}
               >
-                Send test email
+                {t("settings.email.send_test")}
               </button>
             </div>
           </FormContainer.Form>
@@ -161,6 +187,8 @@ export class SettingsEmailContainer extends PureComponent {
 }
 
 export default withFormSession(
-  connect(SettingsEmailContainer.mapStateToProps)(SettingsEmailContainer),
+  withTranslation()(
+    connect(SettingsEmailContainer.mapStateToProps)(SettingsEmailContainer)
+  ),
   "backend-settings"
 );

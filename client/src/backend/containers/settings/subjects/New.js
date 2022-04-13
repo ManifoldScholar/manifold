@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
@@ -12,7 +13,8 @@ export class SettingsSubjectsNewContainer extends PureComponent {
 
   static propTypes = {
     history: PropTypes.object,
-    subject: PropTypes.object
+    subject: PropTypes.object,
+    t: PropTypes.func
   };
 
   handleSuccess = () => {
@@ -21,9 +23,10 @@ export class SettingsSubjectsNewContainer extends PureComponent {
   };
 
   render() {
+    const t = this.props.t;
     return (
       <section>
-        <Navigation.DrawerHeader title="New Subject" />
+        <Navigation.DrawerHeader title={t("settings.subjects.new_header")} />
         <FormContainer.Form
           model={this.props.subject}
           name="backend-create-subject"
@@ -36,12 +39,12 @@ export class SettingsSubjectsNewContainer extends PureComponent {
           <Form.TextInput
             validation={["required"]}
             focusOnMount
-            label="Name"
+            label={t("settings.subjects.name_label")}
             name="attributes[name]"
-            placeholder="Enter Subject Name"
+            placeholder={t("settings.subjects.name_placeholder")}
           />
           <Form.Save
-            text="Save and Continue"
+            text={t("settings.subjects.new_save")}
             cancelRoute={lh.link("backendSettingsSubjects")}
           />
         </FormContainer.Form>
@@ -50,4 +53,4 @@ export class SettingsSubjectsNewContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(SettingsSubjectsNewContainer);
+export default withTranslation()(connectAndFetch(SettingsSubjectsNewContainer));

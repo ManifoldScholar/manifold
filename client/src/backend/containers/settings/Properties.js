@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Layout from "backend/components/layout";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { settingsAPI, requests } from "api";
 import { select } from "utils/entityUtils";
-import config from "../../../config";
 
 export class SettingsPropertiesContainer extends PureComponent {
   static mapStateToProps = state => {
@@ -16,11 +16,13 @@ export class SettingsPropertiesContainer extends PureComponent {
   };
 
   static propTypes = {
-    settings: PropTypes.object
+    settings: PropTypes.object,
+    t: PropTypes.func
   };
 
   render() {
     if (!this.props.settings) return null;
+    const t = this.props.t;
     return (
       <div>
         <Layout.ViewHeader>Settings</Layout.ViewHeader>
@@ -34,91 +36,104 @@ export class SettingsPropertiesContainer extends PureComponent {
           >
             {getModelValue => (
               <>
-                <Form.FieldGroup label="About">
+                <Form.FieldGroup label={t("settings.properties.about_header")}>
                   <Form.TextInput
                     focusOnMount
-                    label="How do you refer to your Manifold installation?"
+                    label={t("settings.properties.installation_label")}
                     name="attributes[general][installationName]"
                     placeholder="Manifold"
-                    instructions={
-                      'There are various places throughout the application where \
-                  Manifold refers to itself. If you set a value here, Manifold will use it where \
-                  appropriate. For example, you could call it "Manifold at the University of \
-                  Minnesota Press" or just "University of Minnesota Digital Books." Or, if you\
-                  prefer, you can leave this blank, and Manifold will just refer to itself as \
-                  "Manifold."'
-                    }
+                    instructions={t(
+                      "settings.properties.installation_instructions"
+                    )}
                   />
                   <Form.TextInput
-                    label="Default Page Title"
+                    label={t("settings.properties.default_title_label")}
                     name="attributes[general][headTitle]"
-                    placeholder="Enter page title"
-                    instructions="This field will be used as the page title on the home page, and will be appended to the page title on core Manifold pages. Defaults to 'Manifold Scholarship'."
+                    placeholder={t(
+                      "settings.properties.default_title_placeholder"
+                    )}
+                    instructions={t(
+                      "settings.properties.default_title_instructions"
+                    )}
                   />
                   <Form.TextArea
                     wide
-                    label="Default Page Description"
+                    label={t("settings.properties.default_descript_label")}
                     name="attributes[general][headDescription]"
-                    placeholder="Enter page description"
-                    instructions="This field will be used as the page description on the home page. Defaults to 'Transforming scholarly publications into living digital works'."
+                    placeholder={t(
+                      "settings.properties.default_descript_placeholder"
+                    )}
+                    instructions={t(
+                      "settings.properties.default_descript_instructions"
+                    )}
                   />
                   <Form.TextInput
-                    label="Default Publisher"
+                    label={t("settings.properties.default_publisher_label")}
                     name="attributes[general][defaultPublisher]"
-                    placeholder="Enter Default Publisher"
+                    placeholder={t(
+                      "settings.properties.default_publisher_placeholder"
+                    )}
                   />
                   <Form.TextInput
-                    label="Default Place of Publication"
+                    label={t("settings.properties.default_pub_place_label")}
                     name="attributes[general][defaultPublisherPlace]"
-                    placeholder="Enter Default Place of Publication"
+                    placeholder={t(
+                      "settings.properties.default_pub_place_placeholder"
+                    )}
                   />
                 </Form.FieldGroup>
-                <Form.FieldGroup label="Footer">
+                <Form.FieldGroup label={t("settings.properties.footer_header")}>
                   <Form.TextInput
-                    label="Copyright"
+                    label={t("settings.properties.copyright_label")}
                     name="attributes[general][copyright]"
-                    placeholder="Enter Copyright Information"
-                    instructions="Enter the installation copyright information to be displayed in the footer."
+                    placeholder={t("settings.properties.copyright_placeholder")}
+                    instructions={t(
+                      "settings.properties.copyright_instructions"
+                    )}
                   />
                   <Form.TextInput
-                    label="Social Sharing Message"
+                    label={t("settings.properties.share_label")}
                     name="attributes[general][socialShareMessage]"
-                    instructions="Enter the text you would like to appear when a page is shared."
+                    instructions={t("settings.properties.share_instructions")}
                   />
                   <Form.TextInput
-                    label="Twitter Account"
+                    label={t("settings.properties.twitter_label")}
                     name="attributes[general][twitter]"
-                    placeholder="Enter Twitter account"
-                    instructions="Enter the twitter account associated with this installation."
+                    placeholder={t("settings.properties.twitter_placeholder")}
+                    instructions={t("settings.properties.twitter_instructions")}
                   />
                   <Form.TextInput
-                    label="Facebook Page ID"
+                    label={t("settings.properties.facebook_label")}
                     name="attributes[general][facebook]"
-                    placeholder="Enter Facebook ID"
-                    instructions="Enter an ID for this installation/organization's Facebook page."
+                    placeholder={t("settings.properties.facebook_placeholder")}
+                    instructions={t(
+                      "settings.properties.facebook_instructions"
+                    )}
                   />
                   <Form.TextInput
-                    label="Contact Email"
+                    label={t("settings.properties.email_label")}
                     name="attributes[general][contactEmail]"
-                    placeholder="Enter an email address"
-                    instructions="If present, the footer will contain a link to a contact form that will be delivered to this address."
+                    placeholder={t("settings.properties.email_placeholder")}
+                    instructions={t("settings.properties.email_instructions")}
                   />
                 </Form.FieldGroup>
-                <Form.FieldGroup label="Behaviors">
+                <Form.FieldGroup
+                  label={t("settings.properties.behaviors_header")}
+                >
                   <Form.Switch
                     className="form-toggle-secondary"
                     wide
-                    label="Disable Internal Analytics"
-                    instructions="By default, Manifold tracks anonymous usage data including visits and views.
-                    This tracking requires that a cookie be set on the user's machine. If tracking is disabled
-                    no data will be collected, and analytics views will not be visible in the backend."
+                    label={t("settings.properties.analytics_label")}
+                    instructions={t(
+                      "settings.properties.analytics_instructions"
+                    )}
                     name="attributes[general][disableInternalAnalytics]"
                   />
                   <Form.Switch
                     wide
                     className="form-toggle-secondary"
-                    label="Restrict Access to All Projects"
-                    instructions="When on, users must have entitlements to access project content"
+                    label={t("settings.properties.access_label")}
+                    instructions={t("settings.properties.access_instructions")}
                     name="attributes[general][restrictedAccess]"
                   />
                   {getModelValue("attributes[general][restrictedAccess]") ===
@@ -127,30 +142,34 @@ export class SettingsPropertiesContainer extends PureComponent {
                       <Form.TextInput
                         wide
                         className="form-toggle-secondary"
-                        label="Restricted Access Notice Header"
+                        label={t(
+                          "settings.properties.access_notice_header_label"
+                        )}
                         name="attributes[general][restrictedAccessHeading]"
-                        placeholder={
-                          config.app.locale.notifications
-                            .projectAuthorizationNotice.heading
-                        }
+                        placeholder={t(
+                          "settings.properties.access_notice_header_placeholder"
+                        )}
                       />
                       <Form.TextArea
                         wide
                         className="form-toggle-secondary"
-                        label="Restricted Access Notice Body"
+                        label={t(
+                          "settings.properties.access_notice_body_label"
+                        )}
                         name="attributes[general][restrictedAccessBody]"
-                        placeholder={
-                          config.app.locale.notifications
-                            .projectAuthorizationNotice.body
-                        }
+                        placeholder={t(
+                          "settings.properties.access_notice_body_placeholder"
+                        )}
                       />
                     </>
                   )}
                   <Form.Switch
                     className="form-toggle-secondary"
                     wide
-                    label="Disable Library Views"
-                    instructions="When on, this setting will disable the library views on the frontend."
+                    label={t("settings.properties.library_views_label")}
+                    instructions={t(
+                      "settings.properties.library_views_instructions"
+                    )}
                     name="attributes[general][libraryDisabled]"
                   />
                   {getModelValue("attributes[general][libraryDisabled]") ===
@@ -159,40 +178,54 @@ export class SettingsPropertiesContainer extends PureComponent {
                       <Form.Switch
                         wide
                         className="form-toggle-secondary"
-                        label="Enforce Standalone Mode for All Projects"
+                        label={t("settings.properties.standalone_label")}
                         name="attributes[general][allStandalone]"
-                        instructions="When on, all projects will render in standalone mode."
+                        instructions={t(
+                          "settings.properties.standalone_instructions"
+                        )}
                       />
                       <Form.TextInput
-                        label="Library Page Redirect URL"
+                        label={t("settings.properties.library_redirect_label")}
                         name="attributes[general][libraryRedirectUrl]"
-                        placeholder="http://your-website.com"
-                        instructions="When library views are disabled, Manifold will redirect request for non-project, non-transactional pages to this URL. If left blank, these requests will return a 404 page not found error."
+                        placeholder={t(
+                          "settings.properties.library_redirect_placeholder"
+                        )}
+                        instructions={t(
+                          "settings.properties.library_redirect_instructions"
+                        )}
                       />
                       <Form.TextInput
-                        label="Home Page Redirect URL"
+                        label={t("settings.properties.home_redirect_label")}
                         name="attributes[general][homeRedirectUrl]"
-                        placeholder="http://your-website.com"
-                        instructions="If set, this URL will be used instead of the Library Page Redirect URL for requests to the Manifold home page."
+                        placeholder={t(
+                          "settings.properties.home_redirect_placeholder"
+                        )}
+                        instructions={t(
+                          "settings.properties.home_redirect_instructions"
+                        )}
                       />
                     </>
                   )}
                   <Form.Switch
                     className="form-toggle-secondary"
                     wide
-                    label="Disable Public Annotations and Comments"
-                    instructions="When on, this setting will prevent users from commenting or annotating publicly. All reading groups will behave as private reading groups."
+                    label={t("settings.properties.public_comments_label")}
+                    instructions={t(
+                      "settings.properties.public_comments_instructions"
+                    )}
                     name="attributes[general][disableEngagement]"
                   />
                   <Form.Switch
                     className="form-toggle-secondary"
                     wide
-                    label="Disable Reading Groups"
-                    instructions="When on, this setting will prevent users from creating or joining reading groups."
+                    label={t("settings.properties.reading_groups_label")}
+                    instructions={t(
+                      "settings.properties.reading_groups_instructions"
+                    )}
                     name="attributes[general][disableReadingGroups]"
                   />
                 </Form.FieldGroup>
-                <Form.Save text="Save Settings" />
+                <Form.Save text={t("settings.save")} />
               </>
             )}
           </FormContainer.Form>
@@ -202,6 +235,8 @@ export class SettingsPropertiesContainer extends PureComponent {
   }
 }
 
-export default connect(SettingsPropertiesContainer.mapStateToProps)(
-  SettingsPropertiesContainer
+export default withTranslation()(
+  connect(SettingsPropertiesContainer.mapStateToProps)(
+    SettingsPropertiesContainer
+  )
 );

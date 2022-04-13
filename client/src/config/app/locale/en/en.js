@@ -17,6 +17,7 @@ import other from "./json/en.json";
 import enUS from "date-fns/locale/en-US";
 import backend from "./json/backend.json";
 import backendEntities from "./json/backend-entities";
+import settings from "./json/settings";
 
 export default {
   translation: {
@@ -37,6 +38,7 @@ export default {
     ...resources,
     ...backend,
     backend_entities: backendEntities,
+    ...settings,
     date_fns: enUS
   }
 };
