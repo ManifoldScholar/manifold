@@ -14,14 +14,21 @@ function GroupHeading({ readingGroup, history, location }) {
   const groupName = readingGroup.attributes.name;
   const canUpdateGroup = readingGroup.attributes.abilities.update;
 
+  function getTag() {
+    const membership =
+      readingGroup.relationships.currentUserReadingGroupMembership;
+
+    if (!membership || membership.attributes.state !== "archived") return null;
+    return t("common.archived");
+  }
+
   return (
     <Styled.GroupHeader $canUpdate={canUpdateGroup}>
       <Collapse>
         <Styled.Container>
           <Styled.Flex>
-            <Title title={groupName} />
+            <Title title={groupName} tag={getTag()} />
             <Collapse.Toggle
-              as={Styled.DetailsToggle}
               className={`button-tertiary`}
               activeClassName="button-tertiary--active"
             >

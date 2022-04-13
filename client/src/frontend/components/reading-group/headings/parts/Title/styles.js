@@ -1,16 +1,17 @@
 import styled from "@emotion/styled";
 import IconComposer from "global/components/utility/IconComposer";
+import AtomicTag from "global/components/atomic/Tag";
 import { respond } from "theme/styles/mixins";
 
 export const TextContainer = styled.div`
   display: flex;
+  gap: 15px;
 
   ${respond(`transform: translateY(-2px);`, 80)}
 `;
 
 export const Title = styled.h1`
   margin-block-end: 0;
-  margin-inline-start: 15px;
   font-size: 23px;
   color: var(--strong-color);
   word-wrap: break-word;
@@ -24,4 +25,9 @@ export const Icon = styled(IconComposer)`
   transform: translateY(2px);
 
   ${respond(`transform: translateY(4px);`, 80)}
+`;
+
+export const Tag = styled(AtomicTag)`
+  align-self: baseline;
+  transform: translateY(8px);
 `;

@@ -3,7 +3,6 @@ import { utilityPrimary } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 import Switch from "global/components/form/Switch";
 
-const textGap = "20px";
 const containerGap = "30px";
 
 export const GroupHeader = styled("header", transientOptions)`
@@ -27,13 +26,7 @@ export const Flex = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  margin-block-start: -${textGap};
-  margin-inline-start: -${textGap};
-
-  > * {
-    margin-block-start: ${textGap};
-    margin-inline-start: ${textGap};
-  }
+  gap: 20px;
 `;
 
 export const ManageGroupContainer = styled(Flex)`
@@ -50,12 +43,6 @@ export const EditToggle = styled(Switch)`
     .toggle-indicator {
       margin-inline-start: 1em;
     }
-  }
-`;
-
-export const DetailsToggle = styled.button`
-  &:not(:first-child) {
-    margin-inline-start: 10px;
   }
 `;
 
