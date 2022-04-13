@@ -26,8 +26,8 @@ export default class ColorSchemeGenerator {
         .spin(5),
     "--color-accent-primary-extra-pale": color =>
       color.lighten(27.65).saturate(1.19),
-    "--color-accent-interaction-light": color => color,
-    "--color-accent-interaction-dark": color =>
+    "--color-interaction-light": color => color,
+    "--color-interaction-dark": color =>
       color
         .darken(35.29)
         .saturate(17.01)
