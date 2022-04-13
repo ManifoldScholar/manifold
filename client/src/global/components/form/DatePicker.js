@@ -44,11 +44,13 @@ class DatePicker extends PureComponent {
   }
 
   handleChange = date => {
-    this.props.set(format(date, this.props.setFormat));
+    this.props.set(date ? format(date, this.props.setFormat) : null);
     this.props.setScreenReaderStatus(
-      this.props.t("forms.date_picker.date_change_sr_status", {
-        date: format(date, "PPP")
-      })
+      date
+        ? this.props.t("forms.date_picker.date_change_sr_status", {
+            date: format(date, "PPP")
+          })
+        : this.props.t("forms.date_picker.date_clear_sr_status")
     );
   };
 
