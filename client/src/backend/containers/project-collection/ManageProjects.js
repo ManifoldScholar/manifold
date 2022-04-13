@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import connectAndFetch from "utils/connectAndFetch";
 import ProjectCollection from "backend/components/project-collection";
@@ -40,7 +41,8 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.object,
     entitiesListSearchProps: PropTypes.func.isRequired,
-    entitiesListSearchParams: PropTypes.object.isRequired
+    entitiesListSearchParams: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   componentDidMount() {
@@ -75,12 +77,16 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
 
   projectAddMessage(project) {
     const title = project.attributes.title;
-    return `You have added ${title} to the collection.`;
+    return this.props.t("backend_entities.project_collections.add_message", {
+      title
+    });
   }
 
   projectRemoveMessage(project) {
     const title = project.attributes.title;
-    return `You have removed ${title} from the collection.`;
+    return this.props.t("backend_entities.project_collections.remove_message", {
+      title
+    });
   }
 
   filtersChanged(prevProps) {
@@ -195,14 +201,17 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
   };
 
   renderProjectCount(collectionProjects, projectsMeta) {
-    const added = collectionProjects.length || 0;
+    const count = collectionProjects.length || 0;
     const total = projectsMeta.pagination.totalCount || 0;
+    const t = this.props.t;
 
     return (
       <>
         <p className="list-total" aria-hidden>
-          You have added <span>{added}</span> of <span>{total}</span> available
-          projects
+          {t("backend_entities.project_collections.added_count", {
+            total,
+            count
+          })}
         </p>
         {/* Better readout for screen readers */}
         <div
@@ -211,7 +220,10 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
           aria-atomic
           className="screen-reader-text"
         >
-          {`You have added ${added} of ${total} available projects.`}
+          {t("backend_entities.project_collections.added_count", {
+            total,
+            count
+          })}
         </div>
       </>
     );
@@ -223,6 +235,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
 
   render() {
     if (!this.props.projectsMeta) return null;
+    const t = this.props.t;
 
     return (
       <>
@@ -231,9 +244,9 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
           title={this.props.projectCollection.attributes.title}
         >
           <p className="instructions drawer-header__instructions">
-            Select which projects should be included in this collection. Click
-            the plus sign to add a project to the collection. Click the
-            checkmark to remove a project.
+            {t(
+              "backend_entities.project_collections.manage_projects_instructions"
+            )}
           </p>
         </Navigation.DrawerHeader>
 
@@ -260,7 +273,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
 
         <div className="actions">
           <button className={this.buttonClasses} onClick={this.handleClose}>
-            <span>Close</span>
+            <span>{t("actions.close")}</span>
             <IconComposer
               icon="close16"
               size="default"
@@ -279,4 +292,6 @@ export const ProjectCollectionManageProjects = withFilteredLists(
     projects: projectFilters()
   }
 );
-export default connectAndFetch(ProjectCollectionManageProjects);
+export default withTranslation()(
+  connectAndFetch(ProjectCollectionManageProjects)
+);

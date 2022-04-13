@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import withConfirmation from "hoc/withConfirmation";
 import ProjectCollection from "backend/components/project-collection";
 import Form from "global/components/form";
@@ -24,13 +25,18 @@ export class ProjectCollectionSettings extends PureComponent {
   };
 
   handleDestroy = () => {
-    const heading = "Are you sure you want to delete this project collection?";
-    const message = "This action cannot be undone.";
+    const t = this.props.t;
+    const heading = t(
+      "backend_entities.project_collections.modals.confirm_heading"
+    );
+    const message = t(
+      "backend_entities.project_collections.modals.confirm_body"
+    );
     this.props.confirm(heading, message, this.props.destroyProjectCollection);
   };
 
   render() {
-    const { projectCollection } = this.props;
+    const { projectCollection, t } = this.props;
     if (!projectCollection) return null;
 
     return (
@@ -57,7 +63,9 @@ export class ProjectCollectionSettings extends PureComponent {
               handleDestroy={this.handleDestroy}
               {...this.props}
             />
-            <Form.Save text="Save Project Collection" />
+            <Form.Save
+              text={t("backend_entities.project_collections.forms.save")}
+            />
           </FormContainer.Form>
         </section>
       </Authorize>
@@ -65,4 +73,4 @@ export class ProjectCollectionSettings extends PureComponent {
   }
 }
 
-export default withConfirmation(ProjectCollectionSettings);
+export default withTranslation()(withConfirmation(ProjectCollectionSettings));

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import ProjectCollection from "backend/components/project-collection";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
@@ -7,13 +8,14 @@ import lh from "helpers/linkHandler";
 
 import Authorize from "hoc/Authorize";
 
-export default class ProjectCollectionNew extends PureComponent {
+class ProjectCollectionNew extends PureComponent {
   static displayName = "ProjectCollection.New";
 
   static propTypes = {
     buildUpdateProjectCollection: PropTypes.func.isRequired,
     buildCreateProjectCollection: PropTypes.func.isRequired,
-    successHandler: PropTypes.func.isRequired
+    successHandler: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -50,10 +52,16 @@ export default class ProjectCollectionNew extends PureComponent {
             className="form-secondary project-collection-form"
           >
             <ProjectCollection.Form.Fields {...this.props} />
-            <Form.Save text="Save Project Collection" />
+            <Form.Save
+              text={this.props.t(
+                "backend_entities.project_collections.forms.save"
+              )}
+            />
           </FormContainer.Form>
         </section>
       </Authorize>
     );
   }
 }
+
+export default withTranslation()(ProjectCollectionNew);

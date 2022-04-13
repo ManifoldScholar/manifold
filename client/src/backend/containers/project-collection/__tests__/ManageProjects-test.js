@@ -13,6 +13,7 @@ describe("backend/containers/project-collection/ManageProjects", () => {
       collectionProjects={$collectionProjects}
       projects={$projects}
       projectsMeta={{ pagination: $pagination }}
+      t={key => key}
     />
   ));
 

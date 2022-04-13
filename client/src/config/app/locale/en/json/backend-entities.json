@@ -62,5 +62,21 @@
     "delete_body": "Volume #{{number}} has passed into the endless night.",
     "confirm_heading": "Are you sure you want to delete this volume?",
     "confirm_body": "This action cannot be undone."
+  },
+  "project_collections": {
+    "unauthorized": "You are not allowed to manage project collections.",
+    "unauthorized_edit": "You are not allowed to edit this project collection.",
+    "sr_list_title": "Project List",
+    "add_message": "You have added {{title}} to the collection.",
+    "remove_message": "You have removed {{title}} from the collection.",
+    "added_count": "You have added {{count}} of {{total}} available projects",
+    "manage_projects_instructions": "Select which projects should be included in this collection. Click the plus sign to add a project to the collection. Click the checkmark to remove a project.",
+    "forms": {
+      "save": "Save Project Collection"
+    },
+    "modals": {
+      "confirm_heading": "Are you sure you want to delete this project collection?",
+      "confirm_body": "This action cannot be undone."
+    }
   }
 }
