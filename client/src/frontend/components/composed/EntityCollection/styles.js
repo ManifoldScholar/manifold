@@ -44,6 +44,10 @@ export const Wrapper = styled("section", transientOptions)`
     .icon-star-fill__background {
       fill: var(--color-base-blue45);
     }
+
+    + h2 {
+      transform: translateY(${fluidScale("7px", "10px")});
+    }
   }
 `;
 
