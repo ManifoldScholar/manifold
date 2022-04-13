@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import FormContainer from "global/containers/form";
 import Layout from "backend/components/layout";
@@ -36,7 +37,8 @@ export class ResourceNewContainer extends PureComponent {
   static propTypes = {
     project: PropTypes.object,
     history: PropTypes.object,
-    match: PropTypes.object
+    match: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -54,7 +56,7 @@ export class ResourceNewContainer extends PureComponent {
   };
 
   render() {
-    const { project } = this.props;
+    const { project, t } = this.props;
     if (!project) return null;
 
     return (
@@ -69,12 +71,9 @@ export class ResourceNewContainer extends PureComponent {
             type="resource"
             backUrl={lh.link("backendProjectResources", project.id)}
             backLabel={project.attributes.titlePlaintext}
-            title={"New Resource"}
+            title={t("backend_entities.resources.forms.new.title")}
             showUtility={false}
-            note={
-              "Select your resource type, then enter a name and a brief description." +
-              " Press save to continue."
-            }
+            note={t("backend_entities.resources.forms.new.instructions")}
           />
           <Layout.BackendPanel>
             <FormContainer.Form
@@ -90,14 +89,18 @@ export class ResourceNewContainer extends PureComponent {
                 includeButtons
               />
               <Form.TextInput
-                label="Title"
+                label={t("backend_entities.resources.forms.title_label")}
                 name="attributes[title]"
-                placeholder="Enter a resource title"
+                placeholder={t(
+                  "backend_entities.resources.forms.title_placeholder"
+                )}
               />
               <Form.TextArea
-                label="Description"
+                label={t("backend_entities.resources.forms.descript_label")}
                 name="attributes[description]"
-                placeholder="Enter a description"
+                placeholder={t(
+                  "backend_entities.resources.forms.descript_placeholder"
+                )}
               />
               <Resource.Form.KindAttributes />
               <GlobalForm.Errorable
@@ -105,7 +108,7 @@ export class ResourceNewContainer extends PureComponent {
                 name="attributes[fingerprint]"
               />
               <Form.Save
-                text="Save and continue"
+                text={t("backend_entities.resources.forms.new.save")}
                 cancelRoute={lh.link("backendProjectResources", project.id)}
               />
             </FormContainer.Form>
@@ -116,4 +119,4 @@ export class ResourceNewContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(ResourceNewContainer);
+export default withTranslation()(connectAndFetch(ResourceNewContainer));
