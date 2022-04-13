@@ -177,6 +177,12 @@
         "activity_prompt": "Will your project change frequently?",
         "activity_instructions": "Manifold can showcase the evolution of your project on the platform and in the Twitterverse.",
         "save": "Save and Continue"
+      },
+      "twitter": {
+        "title": "New Twitter Query",
+        "fetch_label": "Fetch Tweets",
+        "confirm_heading": "Are you sure you want to delete this twitter query?",
+        "confirm_message": "<p>This action will delete the query along with all events associated with it.</p> <p>This action cannot be undone.</p> <p>Set the query to inactive to prevent fetching while preserving existing tweet events.</p>"
       }
     }
   },

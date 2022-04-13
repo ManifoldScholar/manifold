@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import TwitterQuery from "backend/components/twitter-query";
 import { requests } from "api";
@@ -12,7 +13,8 @@ export class TwitterQueryNewContainer extends Component {
   static propTypes = {
     match: PropTypes.object,
     history: PropTypes.object,
-    twitterQuery: PropTypes.object
+    twitterQuery: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor() {
@@ -32,7 +34,7 @@ export class TwitterQueryNewContainer extends Component {
     return (
       <section>
         <Navigation.DrawerHeader
-          title="New Twitter Query"
+          title={this.props.t("backend_entities.projects.forms.twitter.title")}
           icon="activityTweet64"
         />
         <TwitterQuery.Form
@@ -47,4 +49,4 @@ export class TwitterQueryNewContainer extends Component {
   }
 }
 
-export default connectAndFetch(TwitterQueryNewContainer);
+export default withTranslation()(connectAndFetch(TwitterQueryNewContainer));
