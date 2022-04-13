@@ -7,6 +7,7 @@ import { kindFilter as kinds } from "./kind";
 import { tagFilter as tags } from "./tag";
 import { orderCollectionFilter as orderCollection } from "./orderCollection";
 import { groupSortFilter as groupSort } from "./groupSort";
+import { groupStatusFilter as groupStatus } from "./groupStatus";
 
 export default {
   sort,
@@ -17,5 +18,6 @@ export default {
   kinds,
   tags,
   orderCollection,
-  groupSort
+  groupSort,
+  groupStatus
 };

@@ -14,6 +14,7 @@ export default class Table extends PureComponent {
     onPageClick: PropTypes.func.isRequired,
     unit: PropTypes.string.isRequired,
     filters: PropTypes.node,
+    filterCount: PropTypes.number,
     children: props => {
       React.Children.toArray(props.children).every(
         child => child.type === Column
@@ -40,10 +41,20 @@ export default class Table extends PureComponent {
   }
 
   render() {
-    const { pagination, onPageClick, countLabel, filters } = this.props;
+    const {
+      pagination,
+      onPageClick,
+      countLabel,
+      filters,
+      filterCount
+    } = this.props;
     return (
       <div className={this.containerClassNames}>
-        <Filters filters={filters} entityCountProps={this.entityCountProps} />
+        <Filters
+          filters={filters}
+          filterCount={filterCount}
+          entityCountProps={this.entityCountProps}
+        />
         <Body {...this.props} markup="table" label={countLabel} />
         <Body {...this.props} markup="dl" label={countLabel} />
         <Pagination
