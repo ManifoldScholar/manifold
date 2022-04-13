@@ -11,6 +11,7 @@ describe("backend/containers/resource-collection/Wrapper", () => {
       route={fixtures.route()}
       match={{ params: {} }}
       dispatch={$dispatch}
+      t={key => key}
     />
   ));
 

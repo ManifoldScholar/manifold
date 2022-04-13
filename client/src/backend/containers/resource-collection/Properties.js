@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { resourceCollectionsAPI } from "api";
@@ -10,11 +11,12 @@ export class ResourceCollectionPropertiesContainer extends PureComponent {
 
   static propTypes = {
     resourceCollection: PropTypes.object,
-    params: PropTypes.object
+    params: PropTypes.object,
+    t: PropTypes.func
   };
 
   render() {
-    const resourceCollection = this.props.resourceCollection;
+    const { resourceCollection, t } = this.props;
     if (!resourceCollection) return null;
 
     return (
@@ -29,38 +31,50 @@ export class ResourceCollectionPropertiesContainer extends PureComponent {
           className="form-secondary"
         >
           <Form.TextInput
-            label="Title"
+            label={t("backend_entities.resource_collections.forms.title_label")}
             name="attributes[title]"
-            placeholder="Enter a title"
+            placeholder={t(
+              "backend_entities.resource_collections.forms.title_placeholder"
+            )}
             {...this.props}
           />
           <Form.TextArea
-            label="Description"
+            label={t(
+              "backend_entities.resource_collections.forms.descript_label"
+            )}
             name="attributes[description]"
-            placeholder="Enter a description"
+            placeholder={t(
+              "backend_entities.resource_collections.forms.descript_placeholder"
+            )}
             {...this.props}
           />
           <Form.TextInput
             wide
-            label="Slug"
+            label={t("backend_entities.resource_collections.forms.slug_label")}
             name="attributes[pendingSlug]"
-            placeholder="Enter URL Slug"
+            placeholder={t(
+              "backend_entities.resource_collections.forms.sluslug_placeholder"
+            )}
           />
           <Form.Upload
             layout="landscape"
             accepts="images"
-            label="Cover Image"
+            label={t("backend_entities.resource_collections.forms.image_label")}
             readFrom="attributes[thumbnailStyles][small]"
             name="attributes[thumbnail]"
             remove="attributes[removeThumbnail]"
           />
-          <Form.Save text="Save Collection" />
+          <Form.Save
+            text={t("backend_entities.resource_collections.forms.save")}
+          />
         </FormContainer.Form>
       </section>
     );
   }
 }
 
-export default connect(ResourceCollectionPropertiesContainer.mapStateToProps)(
-  ResourceCollectionPropertiesContainer
+export default withTranslation()(
+  connect(ResourceCollectionPropertiesContainer.mapStateToProps)(
+    ResourceCollectionPropertiesContainer
+  )
 );
