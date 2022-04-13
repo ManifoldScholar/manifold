@@ -9,6 +9,7 @@ describe("backend/containers/text/ingestion/New", () => {
       text={$text}
       location={{}}
       history={fixtures.history()}
+      t={key => key}
     />
   ));
 
