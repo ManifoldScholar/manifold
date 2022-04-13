@@ -303,6 +303,17 @@
     "modals": {
       "confirm_heading": "Are you sure you want to delete this stylesheet?",
       "confirm_body": "This action cannot be undone."
+    },
+    "edit": {
+      "instructions": "This stylesheet was ingested as part of the source document. You may make changes to it. However, if the source document is reingested, those changes will be lost. If you'd like to add styles to this text consider creating a new, supplemental stylesheet rather than modifying this one.",
+      "name_label": "Name",
+      "source_styles_label": "Source Styles",
+      "source_styles_instructions": "These are the raw source styles, which can be edited.",
+      "validated_styles_label": "Validated Styles",
+      "validated_styles_instructions": "The following input is read-only. It contains the validated styles that are included in the reader for this text.",
+      "sections_label": "Apply to these text sections",
+      "sections_placeholder": "Add a text section",
+      "save": "Save Stylesheet"
     }
   }
 }
