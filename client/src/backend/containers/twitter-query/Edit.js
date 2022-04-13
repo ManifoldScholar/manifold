@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation, Trans } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import TwitterQuery from "backend/components/twitter-query";
 import { entityStoreActions } from "actions";
@@ -27,7 +28,8 @@ export class TwitterQueryEditContainer extends PureComponent {
     history: PropTypes.object,
     dispatch: PropTypes.func,
     settings: PropTypes.object,
-    confirm: PropTypes.func.isRequired
+    confirm: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -66,18 +68,12 @@ export class TwitterQueryEditContainer extends PureComponent {
   }
 
   handleQueryDestroy = () => {
-    const heading = "Are you sure you want to delete this twitter query?";
+    const heading = this.props.t(
+      "backend_entities.projects.forms.twitter.confirm_heading"
+    );
     const message = (
       <div>
-        <p>
-          This action will delete the query along with all events associated
-          with it.
-        </p>
-        <p>This action cannot be undone.</p>
-        <p>
-          Set the query to inactive to prevent fetching while preserving
-          existing tweet events.
-        </p>
+        <Trans i18nKey="backend_entities.projects.forms.twitter.confirm_message" />
       </div>
     );
     this.props.confirm(heading, message, this.destroyQuery);
@@ -107,14 +103,14 @@ export class TwitterQueryEditContainer extends PureComponent {
 
   render() {
     if (!this.props.twitterQuery) return null;
-    const { twitterQuery } = this.props;
+    const { twitterQuery, t } = this.props;
     const projectId = this.props.match.params.pId;
 
     const buttons = [
       {
         onClick: this.handleQueryDestroy,
         icon: "delete32",
-        label: "Delete",
+        label: t("actions.delete"),
         className: "utility-button__icon--notice"
       }
     ];
@@ -122,7 +118,7 @@ export class TwitterQueryEditContainer extends PureComponent {
       buttons.push({
         onClick: this.handleQueryFetch,
         icon: "reload32",
-        label: "Fetch Tweets",
+        label: t("backend_entities.projects.forms.twitter.fetch_label"),
         className: "utility-button__icon--highlight"
       });
 
@@ -146,4 +142,6 @@ export class TwitterQueryEditContainer extends PureComponent {
   }
 }
 
-export default withConfirmation(connectAndFetch(TwitterQueryEditContainer));
+export default withTranslation()(
+  withConfirmation(connectAndFetch(TwitterQueryEditContainer))
+);

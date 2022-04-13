@@ -7,6 +7,7 @@ describe("backend/containers/twitter-query/Edit", () => {
       twitterQuery={$twitterQuery}
       dispatch={$dispatch}
       match={{ params: {} }}
+      t={key => key}
     />
   ));
 
