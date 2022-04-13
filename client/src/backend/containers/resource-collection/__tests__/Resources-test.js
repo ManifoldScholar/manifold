@@ -14,6 +14,7 @@ describe("backend/containers/resource-collection/Resources", () => {
         pagination: fixtures.pagination()
       }}
       dispatch={$dispatch}
+      t={key => key}
     />
   ));
 

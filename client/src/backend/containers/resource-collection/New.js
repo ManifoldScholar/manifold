@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import FormContainer from "global/containers/form";
 import Layout from "backend/components/layout";
@@ -35,7 +36,8 @@ export class ResourceCollectionNewContainer extends PureComponent {
     project: PropTypes.object,
     history: PropTypes.object,
     match: PropTypes.object,
-    resourceCollection: PropTypes.object
+    resourceCollection: PropTypes.object,
+    t: PropTypes.func
   };
 
   redirectToCollection(resourceCollection) {
@@ -48,7 +50,7 @@ export class ResourceCollectionNewContainer extends PureComponent {
   };
 
   render() {
-    const { project } = this.props;
+    const { project, t } = this.props;
     if (!project) return null;
 
     return (
@@ -63,11 +65,11 @@ export class ResourceCollectionNewContainer extends PureComponent {
             type="resourceCollection"
             backUrl={lh.link("backendProjectResourceCollections", project.id)}
             backLabel={project.attributes.titlePlaintext}
-            title={"New Collection"}
+            title={t("backend_entities.resource_collections.forms.new_title")}
             showUtility={false}
-            note={
-              "Enter a name and a brief description. Press save to continue."
-            }
+            note={t(
+              "backend_entities.resource_collections.forms.new_instructions"
+            )}
           />
           <Layout.BackendPanel>
             <FormContainer.Form
@@ -79,28 +81,38 @@ export class ResourceCollectionNewContainer extends PureComponent {
               className="form-secondary"
             >
               <Form.TextInput
-                label="Title"
+                label={t(
+                  "backend_entities.resource_collections.forms.title_label"
+                )}
                 name="attributes[title]"
                 focusOnMount
-                placeholder="Enter a title"
+                placeholder={t(
+                  "backend_entities.resource_collections.forms.title_placeholder"
+                )}
                 {...this.props}
               />
               <Form.TextArea
-                label="Description"
+                label={t(
+                  "backend_entities.resource_collections.forms.descript_label"
+                )}
                 name="attributes[description]"
-                placeholder="Enter a description"
+                placeholder={t(
+                  "backend_entities.resource_collections.forms.descript_placeholder"
+                )}
                 {...this.props}
               />
               <Form.Upload
                 layout="landscape"
                 accepts="images"
-                label="Cover Image"
+                label={t(
+                  "backend_entities.resource_collections.forms.image_label"
+                )}
                 readFrom="attributes[thumbnailStyles][small]"
                 name="attributes[thumbnail]"
                 remove="attributes[removeThumbnail]"
               />
               <Form.Save
-                text="Save and continue"
+                text={t("backend_entities.resource_collections.forms.new_save")}
                 cancelRoute={lh.link("backendProjectResources", project.id)}
               />
             </FormContainer.Form>
@@ -111,4 +123,6 @@ export class ResourceCollectionNewContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(ResourceCollectionNewContainer);
+export default withTranslation()(
+  connectAndFetch(ResourceCollectionNewContainer)
+);

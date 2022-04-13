@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
@@ -36,7 +37,8 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     match: PropTypes.object,
     route: PropTypes.object,
     history: PropTypes.object,
-    confirm: PropTypes.func.isRequired
+    confirm: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -104,23 +106,32 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
   }
 
   notifyDestroy() {
+    const t = this.props.t;
     const notification = {
       level: 0,
       id: `RESOURCE_COLLECTION_DESTROYED_${this.props.resourceCollection.id}`,
-      heading: "The resource collection has been destroyed.",
-      body: `${this.props.resourceCollection.attributes.title} has passed into the endless night.`,
+      heading: t("backend_entities.resource_collections.modals.delete_heading"),
+      body: t("backend_entities.resource_collections.modals.delete_body", {
+        title: this.props.resourceCollection.attributes.title
+      }),
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
   }
 
   handleCollectionDestroy = () => {
-    const heading = "Are you sure you want to delete this resource collection?";
-    const message = "This action cannot be undone.";
+    const t = this.props.t;
+    const heading = t(
+      "backend_entities.resource_collections.modals.confirm_heading"
+    );
+    const message = t(
+      "backend_entities.resource_collections.modals.confirm_body"
+    );
     this.props.confirm(heading, message, this.doDestroy);
   };
 
   renderUtility() {
+    const t = this.props.t;
     return (
       <div className="utility-button-group utility-button-group--inline">
         <Link to={this.previewUrl()} className="utility-button">
@@ -129,7 +140,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
             size={26}
             className="utility-button__icon utility-button__icon--highlight"
           />
-          <span className="utility-button__text">View</span>
+          <span className="utility-button__text">{t("actions.view")}</span>
         </Link>
         <button
           onClick={this.handleCollectionDestroy}
@@ -140,7 +151,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
             size={26}
             className="utility-button__icon utility-button__icon--notice"
           />
-          <span className="utility-button__text">Delete</span>
+          <span className="utility-button__text">{t("actions.delete")}</span>
         </button>
       </div>
     );
@@ -155,7 +166,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
 
   render() {
     /* eslint-disable no-unused-vars */
-    const { resourceCollection, match } = this.props;
+    const { resourceCollection, match, t } = this.props;
     /* eslint-enable no-unused-vars */
     if (!resourceCollection) return null;
     const secondaryLinks = navigation.resourceCollection(resourceCollection);
@@ -165,7 +176,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
         <Authorize
           entity={resourceCollection}
           failureFatalError={{
-            body: "You are not allowed to edit this resource collection."
+            body: t("backend_entities.resource_collections.unauthorized")
           }}
           ability="update"
         >
@@ -191,7 +202,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
               <Navigation.Secondary
                 links={secondaryLinks}
                 panel
-                ariaLabel="Resource Collection Settings"
+                ariaLabel={t("backend_entities.resource_collections.settings")}
               />
             }
           >
@@ -203,6 +214,6 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
   }
 }
 
-export default withConfirmation(
-  connectAndFetch(ResourceCollectionWrapperContainer)
+export default withTranslation()(
+  withConfirmation(connectAndFetch(ResourceCollectionWrapperContainer))
 );

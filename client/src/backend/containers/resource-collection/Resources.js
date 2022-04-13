@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import { resourceCollectionsAPI, projectsAPI, requests } from "api";
 import { connect } from "react-redux";
 import { entityStoreActions } from "actions";
@@ -29,7 +30,8 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
     dispatch: PropTypes.func,
     resourceCollection: PropTypes.object,
     resources: PropTypes.array,
-    resourcesMeta: PropTypes.object
+    resourcesMeta: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -163,10 +165,11 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
     if (!this.props.resources) return null;
     const params = this.props.entitiesListSearchParams.resources;
     const collectionFilterEnabled = !isNil(params.resourceCollection);
+    const t = this.props.t;
 
     const toggleLabel = collectionFilterEnabled
-      ? "Show all"
-      : "Show collection only";
+      ? t("backend_entities.resource_collections.show_all_projects")
+      : t("backend_entities.resource_collections.show_collection_projects");
 
     return (
       <EntitiesList
@@ -178,9 +181,9 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
         }}
         title={
           <>
-            Resources
+            {t("glossary.resource_title_case_other")}
             <button
-              style={{ marginLeft: 3 }}
+              style={{ marginLeft: "14px" }}
               onClick={this.toggleCollectionOnly}
               className="utility-button"
             >
@@ -190,7 +193,9 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
         }
         titleIcon="resourceCollection64"
         entities={this.props.resources}
-        unit="resource"
+        unit={t("glossary.resource", {
+          count: this.props.resourcesMeta?.pagination?.totalCount
+        })}
         pagination={this.props.resourcesMeta.pagination}
         showCount
         callbacks={{
@@ -216,6 +221,8 @@ export const ResourceCollectionResourcesContainer = withFilteredLists(
   }
 );
 
-export default connect(ResourceCollectionResourcesContainer.mapStateToProps)(
-  ResourceCollectionResourcesContainer
+export default withTranslation()(
+  connect(ResourceCollectionResourcesContainer.mapStateToProps)(
+    ResourceCollectionResourcesContainer
+  )
 );
