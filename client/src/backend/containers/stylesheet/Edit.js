@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { stylesheetsAPI, requests, sectionsAPI } from "api";
 import { select } from "utils/entityUtils";
@@ -28,7 +29,8 @@ export class StylesheetEditContainer extends PureComponent {
   static propTypes = {
     match: PropTypes.object,
     refresh: PropTypes.func,
-    stylesheet: PropTypes.object
+    stylesheet: PropTypes.object,
+    t: PropTypes.func
   };
 
   get isNew() {
@@ -75,6 +77,8 @@ export class StylesheetEditContainer extends PureComponent {
       ? requests.beStylesheetCreate
       : requests.beStylesheetUpdate;
 
+    const t = this.props.t;
+
     return (
       <div>
         <section>
@@ -90,41 +94,44 @@ export class StylesheetEditContainer extends PureComponent {
               <div className="form-input">
                 <p className="instructions">
                   {this.stylesheet.attributes.ingested
-                    ? "This stylesheet was ingested as part of the source document. You may " +
-                      "make changes to it. However, if the source document is reingested, " +
-                      "those changes will be lost. If you'd like to add styles to this " +
-                      "text consider creating a new, supplemental stylesheet rather than " +
-                      "modifying this one."
+                    ? t("backend_entities.stylesheets.edit.instructions")
                     : null}
                 </p>
               </div>
               <Form.TextInput
-                label="Name"
+                label={t("backend_entities.stylesheets.edit.name_label")}
                 name="attributes[name]"
-                placeholder="Name"
+                placeholder={t("backend_entities.stylesheets.edit.name_label")}
               />
               <Form.CodeArea
-                label="Source Styles"
+                label={t(
+                  "backend_entities.stylesheets.edit.source_styles_label"
+                )}
                 height="300px"
                 mode="css"
                 name="attributes[rawStyles]"
-                instructions="These are the raw source styles, which can be edited."
+                instructions={t(
+                  "backend_entities.stylesheets.edit.source_styles_instructions"
+                )}
               />
               <Form.CodeArea
-                label="Validated Styles"
+                label={t(
+                  "backend_entities.stylesheets.edit.validated_styles_label"
+                )}
                 name="attributes[styles]"
                 mode="css"
-                instructions={
-                  "The following input is read-only. It contains the validated " +
-                  "styles that are included in the reader for this text."
-                }
+                instructions={t(
+                  "backend_entities.stylesheets.edit.validated_styles_instructions"
+                )}
                 readOnly
               />
               <Form.Picker
-                label="Apply to these text sections"
-                placeholder={"Add a text section"}
+                label={t("backend_entities.stylesheets.edit.sections_label")}
+                placeholder={t(
+                  "backend_entities.stylesheets.edit.sections_placeholder"
+                )}
                 name="relationships[textSections]"
-                optionToLabel={t => t.attributes.name}
+                optionToLabel={text => text.attributes.name}
                 options={this.fetchTextSections}
                 rowProps={{ namePath: "attributes.title" }}
                 showAddRemoveAll
@@ -132,7 +139,7 @@ export class StylesheetEditContainer extends PureComponent {
 
               <Form.Save
                 cancelRoute={lh.link("backendTextStyles", params.id)}
-                text="Save Stylesheet"
+                text={t("backend_entities.stylesheets.edit.save")}
               />
             </FormContainer.Form>
           </section>
@@ -142,4 +149,4 @@ export class StylesheetEditContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(StylesheetEditContainer);
+export default withTranslation()(connectAndFetch(StylesheetEditContainer));
