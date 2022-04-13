@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Volume from "backend/components/volume";
 import Navigation from "backend/components/navigation";
 import { journalVolumesAPI } from "api";
@@ -23,11 +24,15 @@ function JournalVolumeEdit({
     removes: journalVolume
   });
 
+  const { t } = useTranslation();
+
   const notifyDestroy = useNotification(v => ({
     level: 0,
     id: `JOURNAL_VOLUME_DESTROYED_${v.id}`,
-    heading: "The volume has been destroyed.",
-    body: `Volume #${v?.attributes?.number} has passed into the endless night.`,
+    heading: t("backend_entities.volumes.delete_heading"),
+    body: t("backend_entities.volumes.delete_body", {
+      number: v?.attributes?.number
+    }),
     expiration: 5000
   }));
 
@@ -44,10 +49,10 @@ function JournalVolumeEdit({
   }, [destroy, history, journal?.id, journalVolume, notifyDestroy]);
 
   const onDelete = useCallback(() => {
-    const heading = "Are you sure you want to delete this volume?";
-    const message = "This action cannot be undone.";
+    const heading = t("backend_entities.volumes.confirm_heading");
+    const message = t("backend_entities.volumes.confirm_body");
     confirm(heading, message, destroyAndRedirect);
-  }, [destroyAndRedirect, confirm]);
+  }, [destroyAndRedirect, confirm, t]);
 
   const refreshAndRedirect = useCallback(() => {
     refreshVolumes();
@@ -57,7 +62,7 @@ function JournalVolumeEdit({
   const buttons = [
     {
       onClick: onDelete,
-      label: "delete",
+      label: t("actions.delete"),
       icon: "delete32",
       className: "utility-button__icon--notice"
     }
@@ -65,7 +70,10 @@ function JournalVolumeEdit({
 
   return (
     <div>
-      <Navigation.DrawerHeader title="Edit Volume" buttons={buttons} />
+      <Navigation.DrawerHeader
+        title={t("backend_entities.volumes.edit_header")}
+        buttons={buttons}
+      />
       <Volume.Form
         model={journalVolume}
         journalId={journal.id}

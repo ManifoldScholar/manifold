@@ -1,6 +1,7 @@
 import React from "react";
 import Authorize from "hoc/Authorize";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import { journalVolumesAPI } from "api";
@@ -20,6 +21,8 @@ function JournalVolumesContainer({ refresh, journal, route }) {
     request: [journalVolumesAPI.index, journal.id, pagination]
   });
 
+  const { t } = useTranslation();
+
   if (!data) return null;
 
   return (
@@ -32,11 +35,11 @@ function JournalVolumesContainer({ refresh, journal, route }) {
       <EntitiesList
         entityComponent={JournalVolumeRow}
         entityComponentProps={{ journal }}
-        title={"Manage Volumes"}
+        title={t("backend_entities.volumes.header")}
         titleIcon="Journals64"
         titleStyle="bar"
         entities={data}
-        unit="volume"
+        unit={t("glossary.volume", { count: meta?.pagination?.totalCount })}
         pagination={meta.pagination}
         showCount
         callbacks={{
@@ -46,7 +49,7 @@ function JournalVolumesContainer({ refresh, journal, route }) {
           <Button
             path={lh.link("backendJournalVolumeNew", journal.id)}
             type="add"
-            text="Create a new volume"
+            text={t("backend_entities.volumes.add_button_label")}
             authorizedFor="journalVolume"
           />
         ]}

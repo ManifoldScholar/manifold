@@ -7,6 +7,8 @@ import { useFetch, useApiCallback, useNotification } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 import lh from "helpers/linkHandler";
 
+// Not localized for v7, since we are no longer using. -LD
+
 function JournalIssueEdit({
   refreshIssues,
   confirm,

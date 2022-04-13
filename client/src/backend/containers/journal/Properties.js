@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Project from "backend/components/project";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
@@ -9,6 +10,7 @@ import Authorize from "hoc/Authorize";
 import { useApiCallback } from "hooks";
 
 function JournalPropertiesContainer({ journal }) {
+  const { t } = useTranslation();
   const createSubject = useApiCallback(subjectsAPI.create);
 
   const createSubjectFromValue = useCallback(
@@ -35,99 +37,153 @@ function JournalPropertiesContainer({ journal }) {
         >
           {getModelValue => (
             <>
-              <Form.FieldGroup label="Properties">
+              <Form.FieldGroup
+                label={t("backend_entities.journals.forms.properties.header")}
+              >
                 <Form.TextInput
                   wide
                   validation={["required"]}
                   focusOnMount
-                  label="Title"
+                  label={t("backend_entities.journals.forms.title_label")}
                   name="attributes[title]"
-                  placeholder="Enter Journal Title"
+                  placeholder={t(
+                    "backend_entities.journals.forms.title_ptitle_placeholder"
+                  )}
                 />
                 <Form.TextInput
                   wide
-                  label="Subtitle"
+                  label={t("backend_entities.journals.forms.subtitle_label")}
                   name="attributes[subtitle]"
-                  placeholder="Enter Journal Subtitle"
+                  placeholder={t(
+                    "backend_entities.journals.forms.sutitle_placeholder"
+                  )}
                 />
                 <Form.TextInput
                   wide
-                  label="Slug"
+                  label={t(
+                    "backend_entities.journals.forms.properties.slug_label"
+                  )}
                   name="attributes[pendingSlug]"
-                  placeholder="Enter Journal Slug"
+                  placeholder={t(
+                    "backend_entities.journals.forms.properties.slug_placeholder"
+                  )}
                 />
                 <Project.Form.AvatarBuilder wide />
               </Form.FieldGroup>
-              <Form.FieldGroup label="Presentation">
+              <Form.FieldGroup
+                label={t(
+                  "backend_entities.journals.forms.properties.presentation_header"
+                )}
+              >
                 <Form.Switch
                   className="form-toggle-secondary"
                   wide
-                  label="Draft Mode"
+                  label={t(
+                    "backend_entities.journals.forms.properties.draft_mode_label"
+                  )}
                   name="attributes[draft]"
-                  instructions="A draft project is only visible to users who are able to modify it."
+                  instructions={t(
+                    "backend_entities.journals.forms.properties.draft_mode_instructions"
+                  )}
                 />
                 <Form.Switch
                   className="form-toggle-secondary"
                   wide
-                  label="Show on Home Page"
+                  label={t(
+                    "backend_entities.journals.forms.properties.show_home_label"
+                  )}
                   name="attributes[showOnHomepage]"
-                  instructions="If selected, this journal will be highlighted on the home page"
+                  instructions={t(
+                    "backend_entities.journals.forms.properties.show_home_instructions"
+                  )}
                 />
                 {getModelValue("attributes[showOnHomepage]") && (
                   <Form.NumberInput
                     wide
-                    label="Home Page Priority"
+                    label={t(
+                      "backend_entities.journals.forms.properties.homepage_priority_label"
+                    )}
                     name="attributes[homePagePriority]"
                     placeholder="0"
-                    instructions="Journals will a higher number will display first on the home page"
+                    instructions={t(
+                      "backend_entities.journals.forms.properties.homepage_priority_instructions"
+                    )}
                   />
                 )}
               </Form.FieldGroup>
-              <Form.FieldGroup label="Social">
+              <Form.FieldGroup
+                label={t(
+                  "backend_entities.journals.forms.properties.social_header"
+                )}
+              >
                 <Form.TextInput
-                  label="Social Card Title"
+                  label={t(
+                    "backend_entities.journals.forms.properties.social_card_label"
+                  )}
                   name="attributes[socialTitle]"
-                  placeholder="Optionally, Enter a Social Card Title"
+                  placeholder={t(
+                    "backend_entities.journals.forms.properties.social_card_placeholder"
+                  )}
                 />
                 <Form.TextArea
                   wide
-                  label="Social Card Description"
+                  label={t(
+                    "backend_entities.journals.forms.properties.social_descript_label"
+                  )}
                   name="attributes[socialDescription]"
-                  placeholder="Optionally, Enter a Social Card Description"
+                  placeholder={t(
+                    "backend_entities.journals.forms.properties.social_descript_placeholder"
+                  )}
                 />
                 <Form.Upload
                   layout="portrait"
-                  label="Social Card Image"
+                  label={t(
+                    "backend_entities.journals.forms.properties.social_image_label"
+                  )}
                   accepts="images"
                   readFrom="attributes[socialImageStyles][small]"
                   name="attributes[socialImage]"
                   remove="attributes[removeSocialImage]"
                 />
               </Form.FieldGroup>
-              <Form.FieldGroup label="Taxonomy">
+              <Form.FieldGroup
+                label={t(
+                  "backend_entities.journals.forms.properties.taxonomy_header"
+                )}
+              >
                 <Form.Picker
-                  label="Subjects"
+                  label={t(
+                    "backend_entities.journals.forms.properties.subjects_label"
+                  )}
                   listStyle={"well"}
                   name="relationships[subjects]"
                   options={subjectsAPI.index}
                   optionToLabel={subject => subject.attributes.name}
                   newToValue={createSubjectFromValue}
-                  placeholder="Select a Subject"
+                  placeholder={t(
+                    "backend_entities.journals.forms.properties.subjects_placeholder"
+                  )}
                   listRowComponent="SubjectRow"
                 />
                 <Form.Picker
-                  label="Tags"
+                  label={t(
+                    "backend_entities.journals.forms.properties.tags_label"
+                  )}
                   listStyle="well"
                   listRowComponent="StringRow"
                   name="attributes[tagList]"
-                  placeholder="Enter Tags"
+                  placeholder={t(
+                    "backend_entities.journals.forms.properties.tags_placeholder"
+                  )}
                   options={tagsAPI.index}
                   optionToLabel={tag => tag.attributes.name}
                   optionToValue={tag => tag.attributes.name}
                   allowNew
                 />
               </Form.FieldGroup>
-              <Form.Save text="Save Journal" />
+              <Form.Save
+                text={t("backend_entities.journals.forms.properties.save")}
+              />
             </>
           )}
         </FormContainer.Form>

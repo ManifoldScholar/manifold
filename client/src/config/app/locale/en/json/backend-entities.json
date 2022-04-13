@@ -3,6 +3,8 @@
     "header": "Manage Journals",
     "add_button_label": "Add a new journal",
     "unauthorized": "You are not allowed to manage journals.",
+    "unauthorized_edit": "You are not allowed to edit this journal.",
+    "settings": "Journal Settings",
     "forms": {
       "new_header": "New Journal",
       "new_instructions": "Enter the name of your journal, and a brief description. Press save to continue.",
@@ -12,7 +14,53 @@
       "subtitle_label": "Subtitle",
       "subtitle_placeholder": "Enter Journal Subtitle",
       "descript_label": "Brief Description",
-      "submit_label": "Save and Continue"
+      "submit_label": "Save and Continue",
+      "properties": {
+        "header": "Properties",
+        "slug_label": "Slug",
+        "slug_placeholder": "Enter Journal Slug",
+        "presentation_header": "Presentation",
+        "draft_mode_label": "Draft Mode",
+        "draft_mode_instructions": "A draft project is only visible to users who are able to modify it.",
+        "show_home_label": "Show on Home Page",
+        "show_home_instructions": "If selected, this journal will be highlighted on the home page.",
+        "homepage_priority_label": "Home Page Priority",
+        "homepage_priority_instructions": "Journals with a higher number will display first on the home page.",
+        "social_header": "Social",
+        "social_card_label": "Social Card Title",
+        "social_card_placeholder": "Optionally, Enter a Social Card Title",
+        "social_descript_label": "Social Card Description",
+        "social_descript_placeholder": "Optionally, Enter a Social Card Description",
+        "social_image_label": "Social Card Image",
+        "taxonomy_header": "Taxonomy",
+        "subjects_label": "Subjects",
+        "subjects_placeholder": "Select a Subject",
+        "tags_label": "Tags",
+        "tags_placeholder": "Enter Tags",
+        "save": "Save Journal"
+      }
+    },
+    "modals": {
+      "delete_heading": "The journal has been destroyed.",
+      "delete_body": "{{title}} has passed into the endless night.",
+      "confirm_heading": "Are you sure you want to delete this journal?",
+      "confirm_body": "This action cannot be undone."
     }
+  },
+  "issues": {
+    "header": "Manage Issues",
+    "add_button_label": "Create a new issue",
+    "instructions": "Manage the journal's issues from this screen. Each issue references a Manifold project, which is the container for the issue's content.",
+    "create_header": "Create Issue"
+  },
+  "volumes": {
+    "header": "Manage Volumes",
+    "add_button_label": "Create a new volume",
+    "create_header": "Create Volume",
+    "edit_header": "Edit Volume",
+    "delete_heading": "The volume has been destroyed.",
+    "delete_body": "Volume #{{number}} has passed into the endless night.",
+    "confirm_heading": "Are you sure you want to delete this volume?",
+    "confirm_body": "This action cannot be undone."
   }
 }
