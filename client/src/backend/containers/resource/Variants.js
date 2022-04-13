@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import Resource from "backend/components/resource";
@@ -11,7 +12,8 @@ export class ResourceVariantsContainer extends PureComponent {
 
   static propTypes = {
     resource: PropTypes.object,
-    params: PropTypes.object
+    params: PropTypes.object,
+    t: PropTypes.func
   };
 
   render() {
@@ -30,13 +32,17 @@ export class ResourceVariantsContainer extends PureComponent {
             kind={this.props.resource.attributes.kind}
             {...this.props}
           />
-          <Form.Save text="Save Resource" />
+          <Form.Save
+            text={this.props.t(
+              "backend_entities.resources.forms.properties.save"
+            )}
+          />
         </FormContainer.Form>
       </section>
     );
   }
 }
 
-export default connect(ResourceVariantsContainer.mapStateToProps)(
-  ResourceVariantsContainer
+export default withTranslation()(
+  connect(ResourceVariantsContainer.mapStateToProps)(ResourceVariantsContainer)
 );

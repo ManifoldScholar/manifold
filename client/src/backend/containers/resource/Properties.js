@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import Form from "global/components/form";
 import Resource from "backend/components/resource";
 import FormContainer from "global/containers/form";
@@ -11,7 +12,8 @@ export class ResourcePropertiesContainer extends PureComponent {
 
   static propTypes = {
     resource: PropTypes.object,
-    params: PropTypes.object
+    params: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -33,6 +35,7 @@ export class ResourcePropertiesContainer extends PureComponent {
 
   render() {
     const resource = this.props.resource.attributes;
+    const t = this.props.t;
     return (
       <section>
         <FormContainer.Form
@@ -47,65 +50,97 @@ export class ResourcePropertiesContainer extends PureComponent {
         >
           <Resource.Form.KindPicker name="attributes[kind]" />
           <Form.TextInput
-            label="Title"
+            label={t("backend_entities.resources.forms.title_label")}
             name="attributes[title]"
-            placeholder="Enter a title"
-            instructions="This field accepts Markdown"
+            placeholder={t(
+              "backend_entities.resources.forms.title_placeholder"
+            )}
+            instructions={t(
+              "backend_entities.resources.forms.properties.title_instructions"
+            )}
           />
           <Form.TextInput
-            label="Sort Title"
+            label={t(
+              "backend_entities.resources.forms.properties.sort_title_label"
+            )}
             name="attributes[pendingSortTitle]"
-            placeholder="Enter sort title"
-            instructions="This field is only used to sort resources alphabetically in lists. If blank, sorting is based on resource title."
+            placeholder={t(
+              "backend_entities.resources.forms.properties.sort_title_placeholder"
+            )}
+            instructions={t(
+              "backend_entities.resources.forms.properties.sort_title_instructions"
+            )}
             disabled
           />
           <Form.TextInput
-            label="Fingerprint"
+            label={t(
+              "backend_entities.resources.forms.properties.fingerprint_label"
+            )}
             name="attributes[fingerprint]"
-            placeholder="Enter fingerprint"
-            instructions="The fingerprint is used to indentify resources during bulk resource imports."
+            placeholder={t(
+              "backend_entities.resources.forms.properties.fingerprint_placeholder"
+            )}
+            instructions={t(
+              "backend_entities.resources.forms.properties.fingerprint_instructions"
+            )}
             disabled
           />
           <Form.TextInput
-            label="Slug"
+            label={t("backend_entities.resources.forms.properties.slug_label")}
             name="attributes[pendingSlug]"
-            placeholder="Enter URL Slug"
+            placeholder={t(
+              "backend_entities.resources.forms.properties.slug_placeholder"
+            )}
           />
           <Form.Picker
-            label="Tags"
+            label={t("backend_entities.resources.forms.properties.tags_label")}
             listStyle="well"
             listRowComponent="StringRow"
             name="attributes[tagList]"
-            placeholder="Enter Tags"
+            placeholder={t(
+              "backend_entities.resources.forms.properties.tags_placeholder"
+            )}
             options={tagsAPI.index}
             optionToLabel={tag => tag.attributes.name}
             optionToValue={tag => tag.attributes.name}
             allowNew
           />
           <Form.TextArea
-            label="Description"
+            label={t("backend_entities.resources.forms.descript_label")}
             name="attributes[description]"
-            placeholder="Enter a description"
+            placeholder={t(
+              "backend_entities.resources.forms.descript_placeholder"
+            )}
           />
           <Form.TextArea
-            label="Caption"
+            label={t(
+              "backend_entities.resources.forms.properties.caption_label"
+            )}
             name="attributes[caption]"
-            placeholder="Enter a short description"
+            placeholder={t(
+              "backend_entities.resources.forms.properties.caption_placeholder"
+            )}
           />
           {resource.downloadableKind ? (
             <Form.Switch
-              label="Allow download?"
+              label={t(
+                "backend_entities.resources.forms.properties.download_label"
+              )}
               name="attributes[allowDownload]"
             />
           ) : null}
           <Resource.Form.KindAttributes />
-          <Form.Save text="Save Resource" />
+          <Form.Save
+            text={t("backend_entities.resources.forms.properties.save")}
+          />
         </FormContainer.Form>
       </section>
     );
   }
 }
 
-export default connect(ResourcePropertiesContainer.mapStateToProps)(
-  ResourcePropertiesContainer
+export default withTranslation()(
+  connect(ResourcePropertiesContainer.mapStateToProps)(
+    ResourcePropertiesContainer
+  )
 );
