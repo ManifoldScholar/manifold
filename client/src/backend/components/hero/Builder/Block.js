@@ -11,7 +11,8 @@ const Block = props => {
     onEdit,
     ariaControls,
     ariaExpanded,
-    children
+    children,
+    initialVisible
   } = props;
 
   const onDrawerOpen = event => {
@@ -36,13 +37,9 @@ const Block = props => {
         </button>
       )}
       {!onEdit && (
-        <Collapse>
+        <Collapse initialVisible={initialVisible}>
           <Collapse.Toggle className="hero-builder-block__header">
-            <HeaderDetail
-              title={title}
-              titleId={titleId}
-              description={description}
-            />
+            <HeaderDetail title={title} description={description} />
           </Collapse.Toggle>
           <Collapse.Content>
             <div className="hero-builder-block__body">{children}</div>

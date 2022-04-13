@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { UIDConsumer } from "react-uid";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import PermissionsContainer from "backend/containers/permission";
@@ -23,24 +22,14 @@ class ProjectAccessWrapper extends Component {
     match: PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      accessSettingsOpen: false
-    };
-  }
-
   get defaultIsRestricted() {
     return this.props.settings.attributes.general.restrictedAccess === true;
   }
 
+  // This didn't seem to be in use, but can add                 initialVisible={this.defaultIsOpen} as a prop on `Hero.Block` if this is the expected behavior. -LD
   get defaultIsOpen() {
     return !this.defaultIsRestricted;
   }
-
-  toggleAccessSettings = () => {
-    this.setState({ accessSettingsOpen: !this.state.accessSettingsOpen });
-  };
 
   render() {
     const { project, updateProject } = this.props;
@@ -59,68 +48,59 @@ class ProjectAccessWrapper extends Component {
             <PermissionsContainer.List entity={project} />
           </Layout.BackendPanel>
           <Layout.BackendPanel>
-            <UIDConsumer name={id => `entitlement-block-${id}`}>
-              {id => (
-                <EntitlementsContainer.List
-                  entity={project}
-                  preList={
-                    <div style={{ marginBottom: 44, marginTop: 22 }}>
-                      <Hero.Block
-                        title="Configure Access Restrictions"
-                        titleId={`${id}-title`}
-                        description="Enable access restrictions and adjust messaging"
-                        onEdit={this.toggleAccessSettings}
-                        open={this.state.accessSettingsOpen}
-                        ariaExpanded={this.state.accessSettingsOpen}
-                        ariaControls={`${id}-disclosure`}
-                      >
-                        <FormContainer.Form
-                          style={{ paddingTop: 24, paddingBottom: 24 }}
-                          model={project}
-                          name="backend-project-update"
-                          update={updateProject}
-                          className="form-secondary"
-                        >
-                          {this.defaultIsOpen && (
-                            <Form.Switch
-                              className="form-toggle-secondary"
-                              label="Project Access is Restricted"
-                              name="attributes[restrictedAccess]"
-                            />
-                          )}
-                          {this.defaultIsRestricted && (
-                            <Form.Switch
-                              className="form-toggle-secondary"
-                              label="Project is Open Access"
-                              name="attributes[openAccess]"
-                            />
-                          )}
-                          <Form.TextInput
-                            className="form-toggle-secondary"
-                            label="Restricted Access Notice Header"
-                            name="attributes[restrictedAccessHeading]"
-                            placeholder={
-                              config.app.locale.notifications
-                                .projectAuthorizationNotice.heading
-                            }
-                          />
-                          <Form.TextArea
-                            className="form-toggle-secondary"
-                            label="Restricted Access Notice Body"
-                            name="attributes[restrictedAccessBody]"
-                            placeholder={
-                              config.app.locale.notifications
-                                .projectAuthorizationNotice.body
-                            }
-                          />
-                          <Form.Save text="Update Access Settings" />
-                        </FormContainer.Form>
-                      </Hero.Block>
-                    </div>
-                  }
-                />
-              )}
-            </UIDConsumer>
+            <EntitlementsContainer.List
+              entity={project}
+              preList={
+                <div style={{ marginBottom: 44, marginTop: 22 }}>
+                  <Hero.Block
+                    title="Configure Access Restrictions"
+                    description="Enable access restrictions and adjust messaging"
+                  >
+                    <FormContainer.Form
+                      style={{ paddingTop: 24, paddingBottom: 24 }}
+                      model={project}
+                      name="backend-project-update"
+                      update={updateProject}
+                      className="form-secondary"
+                    >
+                      {this.defaultIsOpen && (
+                        <Form.Switch
+                          className="form-toggle-secondary"
+                          label="Project Access is Restricted"
+                          name="attributes[restrictedAccess]"
+                        />
+                      )}
+                      {this.defaultIsRestricted && (
+                        <Form.Switch
+                          className="form-toggle-secondary"
+                          label="Project is Open Access"
+                          name="attributes[openAccess]"
+                        />
+                      )}
+                      <Form.TextInput
+                        className="form-toggle-secondary"
+                        label="Restricted Access Notice Header"
+                        name="attributes[restrictedAccessHeading]"
+                        placeholder={
+                          config.app.locale.notifications
+                            .projectAuthorizationNotice.heading
+                        }
+                      />
+                      <Form.TextArea
+                        className="form-toggle-secondary"
+                        label="Restricted Access Notice Body"
+                        name="attributes[restrictedAccessBody]"
+                        placeholder={
+                          config.app.locale.notifications
+                            .projectAuthorizationNotice.body
+                        }
+                      />
+                      <Form.Save text="Update Access Settings" />
+                    </FormContainer.Form>
+                  </Hero.Block>
+                </div>
+              }
+            />
           </Layout.BackendPanel>
         </Authorize>
         {childRoutes(this.props.route, {
