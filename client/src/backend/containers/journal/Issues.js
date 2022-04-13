@@ -1,6 +1,7 @@
 import React from "react";
 import Authorize from "hoc/Authorize";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import { journalsAPI } from "api";
@@ -20,6 +21,8 @@ function JournalIssuesContainer({ refresh, journal, route }) {
     request: [journalsAPI.journalIssues, journal.id, pagination]
   });
 
+  const { t } = useTranslation();
+
   if (!data) return null;
 
   return (
@@ -30,14 +33,16 @@ function JournalIssuesContainer({ refresh, journal, route }) {
       failureRedirect={lh.link("backendJournal", journal.id)}
     >
       <EntitiesList
-        instructions="Manage the journal's issues from this screen. Each issue references a Manifold project, which is the container for the issue's content."
+        instructions={t("backend_entities.issues.instructions")}
         entityComponent={JournalIssueRow}
         entityComponentProps={{ journal }}
-        title={"Manage Issues"}
+        title={t("backend_entities.issues.header")}
         titleIcon="Journals64"
         titleStyle="bar"
         entities={data}
-        unit="issue"
+        unit={t("glossary.issue_truncated", {
+          count: meta?.pagination?.totalCount
+        })}
         pagination={meta.pagination}
         showCount
         callbacks={{
@@ -47,7 +52,7 @@ function JournalIssuesContainer({ refresh, journal, route }) {
           <Button
             path={lh.link("backendJournalIssueNew", journal.id)}
             type="add"
-            text="Create a new issue"
+            text={t("backend_entities.issues.add_button_label")}
             authorizedFor="journalIssue"
           />
         ]}

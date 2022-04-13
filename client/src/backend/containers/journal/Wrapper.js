@@ -10,8 +10,10 @@ import Authorize from "hoc/Authorize";
 import IconComposer from "global/components/utility/IconComposer";
 import { Link } from "react-router-dom";
 import { useFetch, useApiCallback, useNotification } from "hooks";
+import { useTranslation } from "react-i18next";
 
 function JournalWrapper({ match, route, history, confirm }) {
+  const { t } = useTranslation();
   const { data: journal, refresh } = useFetch({
     request: [journalsAPI.show, match.params.id]
   });
@@ -20,8 +22,10 @@ function JournalWrapper({ match, route, history, confirm }) {
   const notifyDestroy = useNotification(j => ({
     level: 0,
     id: `JOURNAL_DESTROYED_${j.id}`,
-    heading: "The journal has been destroyed.",
-    body: `${j?.attributes?.title} has passed into the endless night.`,
+    heading: t("backend_entities.journals.modals.delete_heading"),
+    body: t("backend_entities.journals.modals.delete_body", {
+      title: j?.attributes?.title
+    }),
     expiration: 5000
   }));
 
@@ -37,10 +41,10 @@ function JournalWrapper({ match, route, history, confirm }) {
   }, [destroy, history, journal, notifyDestroy]);
 
   const handleJournalDestroy = useCallback(() => {
-    const heading = "Are you sure you want to delete this journal?";
-    const message = "This action cannot be undone.";
+    const heading = t("backend_entities.journals.modals.confirm_heading");
+    const message = t("backend_entities.journals.modals.confirm_body");
     confirm(heading, message, destroyAndRedirect);
-  }, [destroyAndRedirect, confirm]);
+  }, [destroyAndRedirect, confirm, t]);
 
   const renderUtility = () => {
     return (
@@ -54,7 +58,7 @@ function JournalWrapper({ match, route, history, confirm }) {
             size={26}
             className="utility-button__icon utility-button__icon--highlight"
           />
-          <span className="utility-button__text">View</span>
+          <span className="utility-button__text">{t("actions.view")}</span>
         </Link>
         <Authorize entity={journal} ability={"delete"}>
           <button onClick={handleJournalDestroy} className="utility-button">
@@ -63,7 +67,7 @@ function JournalWrapper({ match, route, history, confirm }) {
               size={26}
               className="utility-button__icon utility-button__icon--notice"
             />
-            <span className="utility-button__text">Delete</span>
+            <span className="utility-button__text">{t("actions.delete")}</span>
           </button>
         </Authorize>
       </div>
@@ -83,7 +87,7 @@ function JournalWrapper({ match, route, history, confirm }) {
       <Authorize
         entity={journal}
         failureFatalError={{
-          detail: "You are not allowed to edit this journal."
+          detail: t("backend_entities.journals.unauthorized_edit")
         }}
         ability={["update"]}
       >
@@ -103,7 +107,7 @@ function JournalWrapper({ match, route, history, confirm }) {
             <Navigation.Secondary
               links={navigation.journal(journal)}
               panel
-              ariaLabel="Journal Settings"
+              ariaLabel={t("backend_entities.journals.settings")}
             />
           }
         >
