@@ -12,6 +12,7 @@ class TextBibliographic extends Component {
     text: PropTypes.object.isRequired,
     datePrefix: PropTypes.string,
     datesVisible: PropTypes.bool,
+    date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
     publishedVisible: PropTypes.bool,
     readUrl: PropTypes.string.isRequired,
     showAuthors: PropTypes.bool,
@@ -55,7 +56,7 @@ class TextBibliographic extends Component {
 
   get date() {
     if (!this.datesVisible) return null;
-    return this.attributes.updatedAt;
+    return this.props.date;
   }
 
   get datePrefix() {

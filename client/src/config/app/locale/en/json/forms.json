@@ -194,7 +194,8 @@
       "image_preview_alt": "Upload preview"
     },
     "date_picker": {
-      "date_change_sr_status": "You entered {{date}}."
+      "date_change_sr_status": "You entered {{date}}.",
+      "date_clear_sr_status": "You cleared the date."
     }
   }
 }
