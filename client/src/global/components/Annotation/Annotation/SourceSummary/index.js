@@ -58,7 +58,7 @@ class SourceSummary extends React.PureComponent {
         attributes: { currentUserIsCreator, creatorName }
       }
     } = this.props;
-    if (currentUserIsCreator) return capitalize(t("common.you"));
+    if (currentUserIsCreator) return t("common.you_title_case");
     return creatorName;
   }
 

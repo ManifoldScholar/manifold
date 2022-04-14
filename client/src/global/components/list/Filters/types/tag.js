@@ -1,9 +1,7 @@
-import capitalize from "lodash/capitalize";
-
 const getTagOptions = tags =>
   tags.map(tag => {
     return {
-      label: capitalize(tag),
+      label: tag,
       value: tag
     };
   });

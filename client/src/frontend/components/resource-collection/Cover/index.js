@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import Utility from "global/components/utility";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 class ResourceCollectionCover extends Component {
@@ -41,7 +40,7 @@ class ResourceCollectionCover extends Component {
           <Styled.IconWrapper>
             <Utility.IconComposer size={48} icon="resourceCollection64" />
             <Styled.IconText>
-              {capitalize(this.props.t("glossary.collection_one"))}
+              {this.props.t("glossary.collection_title_case_one")}
             </Styled.IconText>
           </Styled.IconWrapper>
         </Styled.TitleOverlay>

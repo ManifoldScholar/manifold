@@ -75,6 +75,8 @@
     "progress_bar": "progress bar",
     "file_one": "file",
     "file_other": "files",
+    "file_title_cases": "File",
+    "file_title_case_other": "Files",
     "table_of_contents": "table of contents",
     "table_of_contents_title_case": "Table of Contents",
     "member_one": "member",

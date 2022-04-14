@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import MakerAvatar from "./Avatar";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 export default function HeroMeta({ creators, contributors, description }) {
@@ -30,9 +29,9 @@ export default function HeroMeta({ creators, contributors, description }) {
       {!!contributors?.length && (
         <Styled.Contributors>
           <span className="italic">
-            {capitalize(
-              t("glossary.contributor", { count: contributors.length })
-            )}
+            {t("glossary.contributor_title_case", {
+              count: contributors.length
+            })}
             :{" "}
           </span>
           {contributors.map(contributor => (

@@ -8,7 +8,6 @@ import EntityMasthead from "frontend/components/composed/EntityMasthead";
 import EntityCollection from "frontend/components/composed/EntityCollection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import lh from "helpers/linkHandler";
-import { capitalize } from "utils/string";
 
 export default function JournalVolumesList({ journal }) {
   const { id } = useParams();
@@ -50,13 +49,13 @@ export default function JournalVolumesList({ journal }) {
   return (
     <>
       <h1 className="screen-reader-text">
-        {`${titlePlaintext}: ${capitalize(t("glossary.volume_other"))}`}
+        {`${titlePlaintext}: ${t("glossary.volume_title_case_other")}`}
       </h1>
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <EntityHeadContent entity={journal} />
       <EntityMasthead entity={journal} />
       <EntityCollection.JournalVolumes
-        title={`${titlePlaintext}: ${capitalize(t("glossary.volume_other"))}`}
+        title={`${titlePlaintext}: ${t("glossary.volume_title_case_other")}`}
         journal={journal}
         volumes={volumes}
         meta={meta}
