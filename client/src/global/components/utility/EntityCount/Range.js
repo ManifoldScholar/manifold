@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import pluralize from "pluralize";
 import * as Styled from "./styles";
 
 function getRangeValues(pagination) {
@@ -15,6 +14,7 @@ function getRangeValues(pagination) {
 
 function Range({ pagination, unit }) {
   const { start, end, totalCount } = getRangeValues(pagination);
+  console.log(unit);
   return (
     <Styled.Total role="status">
       <span aria-hidden>
@@ -22,13 +22,10 @@ function Range({ pagination, unit }) {
         <Styled.Highlighted>{`${start}-${end}`}</Styled.Highlighted>
         {" of "}
         <Styled.Highlighted>{totalCount}</Styled.Highlighted>
-        {` ${pluralize(unit, totalCount)}:`}
+        {` ${unit}:`}
       </span>
       <span className="screen-reader-text">
-        {`${totalCount} ${pluralize(
-          unit,
-          totalCount
-        )}. Showing results ${start} through ${end}.`}
+        {`${totalCount} ${unit}. Showing results ${start} through ${end}.`}
       </span>
     </Styled.Total>
   );

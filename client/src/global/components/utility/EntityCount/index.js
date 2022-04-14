@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import pluralize from "pluralize";
 import isFunction from "lodash/isFunction";
 import Range from "./Range";
 import * as Styled from "./styles";
@@ -14,7 +13,7 @@ function EntityCount({ pagination, count, unit, customTemplate }) {
   return (
     <Styled.Total>
       <Styled.Highlighted>{count}</Styled.Highlighted>
-      {` ${pluralize(unit, count)}`}
+      {unit}
     </Styled.Total>
   );
 }
