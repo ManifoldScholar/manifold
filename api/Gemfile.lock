@@ -821,7 +821,7 @@ DEPENDENCIES
   friendly_id (~> 5.0)
   fuzzy_match (~> 2.1.0)
   gepub (~> 1.0.4)
-  google-api-client (~> 0.13)
+  google-api-client (~> 0.53.0)
   google_drive (~> 3.0)
   has_scope (~> 0.7.0)
   hashie (~> 3.0)
