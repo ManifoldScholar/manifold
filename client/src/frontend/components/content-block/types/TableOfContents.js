@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import { capitalize } from "utils/string";
 import TOC from "frontend/components/toc";
 
 class ProjectContentBlockTableOfContentsBlock extends PureComponent {
@@ -11,10 +10,6 @@ class ProjectContentBlockTableOfContentsBlock extends PureComponent {
     block: PropTypes.object.isRequired,
     t: PropTypes.func
   };
-
-  static get title() {
-    return capitalize(this.props.t("glossary.table_of_contents"));
-  }
 
   static get icon() {
     return "toc64";
@@ -42,7 +37,7 @@ class ProjectContentBlockTableOfContentsBlock extends PureComponent {
 
   render() {
     return (
-      <nav aria-label={capitalize(this.props.t("glossary.table_of_contents"))}>
+      <nav aria-label={this.props.t("glossary.table_of_contents_title_case")}>
         <TOC.List
           showTextTitle={this.showTextTitle}
           showAuthors={this.showAuthors}

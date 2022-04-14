@@ -4,7 +4,6 @@ import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import has from "lodash/has";
 import Icon from "./Icon";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 class ResourceishThumbnail extends Component {
@@ -52,7 +51,8 @@ class ResourceishThumbnail extends Component {
   }
 
   get resourceishKind() {
-    return this.resourceish.attributes.kind;
+    const kind = this.resourceish.attributes.kind;
+    return this.props.t(`resource_kinds.${kind}`);
   }
 
   get variant() {
@@ -88,14 +88,14 @@ class ResourceishThumbnail extends Component {
 
   get caption() {
     const t = this.props.t;
-    let out = capitalize(t("glossary.file_one"));
+    let out = t("glossary.file_title_case_one");
     switch (this.resourceishType) {
       case "resources":
         if (!this.resourceishKind) break;
-        out = capitalize(this.resourceishKind);
+        out = this.resourceishKind;
         break;
       case "resourceCollections":
-        out = capitalize(t("glossary.resource_collection_one"));
+        out = t("glossary.resource_collection_title_case_one");
         break;
       default:
         break;

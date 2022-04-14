@@ -2,7 +2,6 @@ import React from "react";
 import IconComposer from "global/components/utility/IconComposer";
 import Skeleton from "frontend/components/collecting/ContentSkeleton";
 import { useTranslation } from "react-i18next";
-import { capitalize } from "utils/string";
 import * as Styled from "frontend/components/resource-collection/Cover/styles";
 
 function Placeholder() {
@@ -17,7 +16,7 @@ function Placeholder() {
           <Styled.IconWrapper>
             <IconComposer size={48} icon="resourceCollection64" />
             <Styled.IconText>
-              {capitalize(t("glossary.collection"))}
+              {t("glossary.collection_title_case_one")}
             </Styled.IconText>
           </Styled.IconWrapper>
         </Styled.TitleOverlay>

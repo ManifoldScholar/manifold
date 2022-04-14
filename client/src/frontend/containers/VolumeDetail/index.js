@@ -10,7 +10,6 @@ import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
 import EntityMasthead from "frontend/components/composed/EntityMasthead";
 import Journal from "frontend/components/journal";
 import { useFetch, useFromStore } from "hooks";
-import { capitalize } from "utils/string";
 
 function VolumeDetailContainer({ journal }) {
   const { volumeSlug: slug } = useParams();
@@ -58,13 +57,13 @@ function VolumeDetailContainer({ journal }) {
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <EntityHeadContent
         entity={volume}
-        type={capitalize(t("glossary.volume_one"))}
+        type={t("glossary.volume_title_case_one")}
         parentEntity={journal}
       />
       <h1 className="screen-reader-text">
-        {`${journal.attributes.title}: ${capitalize(
-          t("glossary.volume_one")
-        )} ${volume.attributes.number}`}
+        {`${journal.attributes.title}: ${t("glossary.volume_title_case_one")} ${
+          volume.attributes.number
+        }`}
       </h1>
       <EntityMasthead entity={journal} />
       <Journal.VolumeDetail journal={journal} volume={volume} />

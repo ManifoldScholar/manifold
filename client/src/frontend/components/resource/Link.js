@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import { capitalize } from "utils/string";
 import IconComposer from "global/components/utility/IconComposer";
 
 class ResourceLink extends Component {
@@ -51,12 +50,10 @@ class ResourceLink extends Component {
             download={attr.slug}
           >
             <span className="button-primary__text" aria-hidden>
-              {capitalize(t("actions.download"))}
+              {t("actions.download")}
             </span>
             <span className="screen-reader-text">
-              {`${capitalize(t("actions.download"))} ${attr.kind} “${
-                attr.title
-              }”`}
+              {`${t("actions.download")} ${attr.kind} “${attr.title}”`}
             </span>
             <IconComposer
               icon="arrowDown16"

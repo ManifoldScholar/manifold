@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import EntityGroup from "global/components/composed/EntityGroup";
 import lh from "helpers/linkHandler";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 function JournalVolumeList({ volumes, journal }) {
@@ -16,7 +15,7 @@ function JournalVolumeList({ volumes, journal }) {
       {volumes.map(volume => (
         <EntityGroup
           key={volume.id}
-          title={`${capitalize(t("glossary.volume_one"))} ${
+          title={`${t("glossary.volume_title_case_one")} ${
             volume.attributes.number
           }`}
           to={lh.link(

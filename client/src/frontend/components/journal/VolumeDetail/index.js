@@ -5,7 +5,6 @@ import EntityGroup from "global/components/composed/EntityGroup";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ContentBlockList from "frontend/components/content-block-list/List";
-import { capitalize } from "utils/string";
 import * as Styled from "./styles";
 
 function VolumeDetail({ journal, volume }) {
@@ -14,7 +13,7 @@ function VolumeDetail({ journal, volume }) {
   if (!journal || !volume) return null;
 
   const journalTitle = journal.attributes?.title;
-  const volumeTitle = `${capitalize(t("glossary.volume_one"))} ${
+  const volumeTitle = `${t("glossary.volume_title_case_one")} ${
     volume.attributes?.number
   }`;
   const issues = volume.relationships?.journalIssues ?? [];
