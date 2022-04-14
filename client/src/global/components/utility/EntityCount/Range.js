@@ -14,7 +14,6 @@ function getRangeValues(pagination) {
 
 function Range({ pagination, unit }) {
   const { start, end, totalCount } = getRangeValues(pagination);
-  console.log(unit);
   return (
     <Styled.Total role="status">
       <span aria-hidden>

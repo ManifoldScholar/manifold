@@ -4,7 +4,6 @@ import { withTranslation, Trans } from "react-i18next";
 import Utility from "global/components/utility";
 import FormattedDate from "global/components/FormattedDate";
 import TextTitle from "./TextTitle";
-import { capitalize } from "utils/string";
 
 class SourceSummary extends React.PureComponent {
   static propTypes = {
