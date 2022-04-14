@@ -38,7 +38,9 @@ function ProjectsEntityCollection({
           ? {}
           : {
               pagination: get(meta, "pagination"),
-              unit: "project"
+              unit: t("glossary.project", {
+                count: meta?.pagination?.totalCount
+              })
             }
       }
       paginationProps={
