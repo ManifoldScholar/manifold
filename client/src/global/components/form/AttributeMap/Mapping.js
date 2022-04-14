@@ -49,7 +49,7 @@ class FormColumnMapMapping extends PureComponent {
                   />
                 ) : null}
                 <span className="placeholder">
-                  {this.props.t("forms.atattribute_map.placeholder")}
+                  {this.props.t("forms.attribute_map.placeholder")}
                 </span>
                 {provided.placeholder}
               </div>
