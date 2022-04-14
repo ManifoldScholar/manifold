@@ -47,7 +47,7 @@ function JournalPropertiesContainer({ journal }) {
                   label={t("backend_entities.journals.forms.title_label")}
                   name="attributes[title]"
                   placeholder={t(
-                    "backend_entities.journals.forms.title_ptitle_placeholder"
+                    "backend_entities.journals.forms.title_placeholder"
                   )}
                 />
                 <Form.TextInput
@@ -55,7 +55,7 @@ function JournalPropertiesContainer({ journal }) {
                   label={t("backend_entities.journals.forms.subtitle_label")}
                   name="attributes[subtitle]"
                   placeholder={t(
-                    "backend_entities.journals.forms.sutitle_placeholder"
+                    "backend_entities.journals.forms.subtitle_placeholder"
                   )}
                 />
                 <Form.TextInput
