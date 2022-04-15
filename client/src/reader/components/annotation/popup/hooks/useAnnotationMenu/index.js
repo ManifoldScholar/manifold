@@ -25,7 +25,8 @@ export default function useAnnotationMenu({ menuArray, defaultMenu, visible }) {
         onMouseEnter: event => event.preventDefault(),
         onMouseMove: event => event.preventDefault(),
         onMouseLeave: event => event.preventDefault(),
-        onMouseDown: event => event.preventDefault()
+        onMouseDown: event => event.preventDefault(),
+        onTouchEnd: event => event.preventDefault()
       }
     ])
   );

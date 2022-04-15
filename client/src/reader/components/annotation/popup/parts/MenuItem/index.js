@@ -26,6 +26,7 @@ function MenuItem({
           {...menu}
           {...menuProps}
           onClick={onClick}
+          onTouchEnd={onClick}
           tabIndex={menu.visible ? undefined : -1}
           className={classNames("annotation-popup__button", className)}
         >
