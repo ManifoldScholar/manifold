@@ -35,6 +35,7 @@ function CurrentReadingGroup({
       <ReakitMenuItem
         {...menu}
         onClick={onClick}
+        onTouchEnd={onClick}
         tabIndex={menu?.visible ? undefined : -1}
         aria-haspopup="menu"
         aria-expanded={activeMenu === "readingGroup"}
