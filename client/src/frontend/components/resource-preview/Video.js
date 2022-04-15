@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Player from "frontend/components/resource-player";
 import PropTypes from "prop-types";
-import classnames from "classnames";
+import * as Styled from "./styles";
 
 export default class ResourcePreviewVideo extends Component {
   static displayName = "Resource.Preview.Video";
@@ -12,16 +12,13 @@ export default class ResourcePreviewVideo extends Component {
 
   render() {
     const resource = this.props.resource;
-    const videoClasses = classnames({
-      "resource-preview": true,
-      "resource-preview-video": true,
-      "external-video": resource.attributes.subKind === "external_video"
-    });
 
     return (
-      <div className={videoClasses}>
+      <Styled.VideoWrapper
+        $external={resource.attributes.subKind === "external_video"}
+      >
         <Player.Video resource={resource} />
-      </div>
+      </Styled.VideoWrapper>
     );
   }
 }
