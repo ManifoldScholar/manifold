@@ -72,7 +72,7 @@ class ProjectContentBlockIdentity extends PureComponent {
           {translatedTitle}
           {this.showVisibility && !this.visible && (
             <span className="backend-content-block__label">
-              {this.props.t("backend.layout.hidden")}
+              {this.props.t("backend.hidden")}
             </span>
           )}
           {this.access && (

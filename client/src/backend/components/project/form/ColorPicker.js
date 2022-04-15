@@ -3,55 +3,59 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { UIDConsumer } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
+import { withTranslation } from "react-i18next";
 
-export default class ColorPicker extends Component {
+class ColorPicker extends Component {
   static displayName = "Project.Form.ColorPicker";
 
   static propTypes = {
     onChange: PropTypes.func,
     wrapperClass: PropTypes.string,
     getModelValue: PropTypes.func,
-    label: PropTypes.string
+    label: PropTypes.string,
+    t: PropTypes.func
   };
 
-  static defaultProps = {
-    label: "Background Color Picker"
-  };
+  label() {
+    if (this.props.label) return this.props.label;
+    return this.props.t("backend.forms.project.color_picker");
+  }
 
   get idForPrefix() {
     return "color-picker";
   }
 
   renderColorPalette() {
+    const t = this.props.t;
     const avatarColors = [
       {
         value: "primary",
-        label: "Green",
+        label: t("backend.forms.project.green"),
         className: "color-picker__item--primary"
       },
       {
         value: "secondary",
-        label: "Gray",
+        label: t("backend.forms.project.gray"),
         className: "color-picker__item--secondary"
       },
       {
         value: "tertiary",
-        label: "Blue",
+        label: t("backend.forms.project.blue"),
         className: "color-picker__item--tertiary"
       },
       {
         value: "quaternary",
-        label: "Orange",
+        label: t("backend.forms.poject.orange"),
         className: "color-picker__item--quaternary"
       },
       {
         value: "quinary",
-        label: "Violet",
+        label: t("backend.forms.project.violet"),
         className: "color-picker__item--quinary"
       },
       {
         value: "sentary",
-        label: "White",
+        label: t("backend.forms.project.white"),
         className: "color-picker__item--sentary"
       }
     ];
@@ -62,7 +66,7 @@ export default class ColorPicker extends Component {
           <div
             className="color-picker__list"
             role="group"
-            aria-label={this.props.label}
+            aria-label={this.label()}
           >
             {avatarColors.map(color => {
               const checked =
@@ -114,9 +118,11 @@ export default class ColorPicker extends Component {
       <div className="color-picker">
         <div className="color-picker__inner">{this.renderColorPalette()}</div>
         <div className="color-picker__description" aria-hidden="true">
-          Select A Different Background Color
+          {this.props.t("backend.forms.project.color_instructions")}
         </div>
       </div>
     );
   }
 }
+
+export default withTranslation()(ColorPicker);

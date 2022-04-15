@@ -2,8 +2,9 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Utility from "global/components/utility";
+import { withTranslation } from "react-i18next";
 
-export default class ProjectCollectionListItem extends PureComponent {
+class ProjectCollectionListItem extends PureComponent {
   static propTypes = {
     entity: PropTypes.object,
     clickHandler: PropTypes.func.isRequired,
@@ -12,7 +13,8 @@ export default class ProjectCollectionListItem extends PureComponent {
     dragHandleProps: PropTypes.object,
     draggableProps: PropTypes.object,
     isDragging: PropTypes.bool,
-    innerRef: PropTypes.func
+    innerRef: PropTypes.func,
+    t: PropTypes.func
   };
 
   get icon() {
@@ -35,9 +37,15 @@ export default class ProjectCollectionListItem extends PureComponent {
   }
 
   get ariaLabel() {
+    const t = this.props.t;
     const { entity } = this.props;
-    const target = entity.attributes.visible ? "hidden" : "visible";
-    return `Change visibility of ${entity.attributes.title} to ${target}.`;
+    const visibility = entity.attributes.visible
+      ? t("backend.hidden")
+      : t("backend.visible");
+    return t("backend.project_collection.change_visibility", {
+      entity: entity.attributes.title,
+      visibility
+    });
   }
 
   toggleVisibility = event => {
@@ -57,6 +65,7 @@ export default class ProjectCollectionListItem extends PureComponent {
 
   render() {
     const { active, entity, innerRef, draggableProps, isDragging } = this.props;
+    const t = this.props.t;
 
     if (!entity) return null;
 
@@ -101,9 +110,9 @@ export default class ProjectCollectionListItem extends PureComponent {
             >
               {this.icon}
               <span className="screen-reader-text">
-                {`Collection is ${
-                  entity.attributes.visible ? "visible" : "not visible"
-                }`}
+                {entity.attributes.visible
+                  ? t("backend.project_collection.collection_is_visible")
+                  : t("backend.project_collection.collection_is_not_visible")}
               </span>
             </button>
             <div
@@ -126,3 +135,5 @@ export default class ProjectCollectionListItem extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ProjectCollectionListItem);

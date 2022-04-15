@@ -4,8 +4,9 @@ import GlobalForm from "global/components/form";
 import classNames from "classnames";
 import IconComputed from "global/components/icon-computed";
 import { UIDConsumer } from "react-uid";
+import { withTranslation } from "react-i18next";
 
-export default class IconPicker extends Component {
+class IconPicker extends Component {
   static displayName = "ProjectCollection.Form.IconPicker";
 
   static propTypes = {
@@ -15,7 +16,8 @@ export default class IconPicker extends Component {
     label: PropTypes.string,
     getModelValue: PropTypes.func,
     setOther: PropTypes.func,
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -37,6 +39,28 @@ export default class IconPicker extends Component {
       "mug"
     ];
   }
+
+  screenreader = icon => {
+    const t = this.props.t;
+    switch (icon) {
+      case "book-stack-vertical":
+        return t("backend.forms.project_collection.book_stack_icon");
+      case "lamp":
+        return t("backend.forms.project_collection.lamp_icon");
+      case "new-round":
+        return t("backend.forms.project_collection.new_icon");
+      case "books-on-shelf":
+        return t("backend.forms.project_collection.book_shelf_icon");
+      case "globe":
+        return t("backend.forms.project_collection.globe_icon");
+      case "touch":
+        return t("backend.forms.project_collection.touch_icon");
+      case "mug":
+        return t("backend.forms.project_collection.mug_icon");
+      default:
+        return null;
+    }
+  };
 
   get idPrefix() {
     return "icon-picker";
@@ -65,7 +89,7 @@ export default class IconPicker extends Component {
     });
     return (
       <label key={icon} className={labelClasses}>
-        <span className="screen-reader-text">{icon}</span>
+        <span className="screen-reader-text">{this.screenreader(icon)}</span>
         <input
           type="radio"
           value={icon}
@@ -115,11 +139,15 @@ export default class IconPicker extends Component {
                 className="form-input-heading"
                 htmlFor={`${this.idPrefix}-${id}`}
               >
-                Collection Icon:
+                {this.props.t(
+                  "backend.forms.project_collection.collection_icon"
+                )}
               </label>
               <div>
                 <span className="screen-reader-text">
-                  Select an icon for the project collection.
+                  {this.props.t(
+                    "backend.forms.project_collection.collection_icon_instructions"
+                  )}
                 </span>
                 {this.renderIconList(id)}
               </div>
@@ -130,3 +158,5 @@ export default class IconPicker extends Component {
     );
   }
 }
+
+export default withTranslation()(IconPicker);

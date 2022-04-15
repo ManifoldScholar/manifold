@@ -7,6 +7,7 @@ import GlobalForm from "global/components/form";
 import ColorPicker from "./ColorPicker";
 import UniqueIcons from "global/components/icon/unique";
 import classNames from "classnames";
+import { withTranslation } from "react-i18next";
 
 class AvatarBuilder extends Component {
   static displayName = "Project.Form.AvatarBuilder";
@@ -17,12 +18,12 @@ class AvatarBuilder extends Component {
     errors: PropTypes.array,
     getModelValue: PropTypes.func,
     setOther: PropTypes.func,
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback(),
-    label: "project"
+    confirm: (heading, message, callback) => callback()
   };
 
   onColorChange = color => {
@@ -51,9 +52,17 @@ class AvatarBuilder extends Component {
     this.props.setOther(color.value, "attributes[avatarColor]");
   }
 
+  label() {
+    if (this.props.label) return this.props.label;
+    return this.props.t("glossary.project_one");
+  }
+
   handleColorChange = color => {
-    const heading = `Changing this will remove the ${this.props.label}'s current avatar image`;
-    const message = "Do you wish to proceed?";
+    const t = this.props.t;
+    const heading = t("backend.forms.project.color_change_message", {
+      label: this.label()
+    });
+    const message = t("backend.forms.project.confirm");
     this.props.confirm(heading, message, () => {
       this.removeAvatar();
       this.setAvatarColor(color);
@@ -72,7 +81,9 @@ class AvatarBuilder extends Component {
     return (
       <div
         role="img"
-        aria-label={`Thumbnail for ${title}`}
+        aria-label={this.props.t("backend.forms.project.thumbnail_label", {
+          title
+        })}
         className="preview"
         style={{ backgroundImage: `url(${image})` }}
       />
@@ -108,6 +119,7 @@ class AvatarBuilder extends Component {
       color: true,
       active: !image
     });
+    const t = this.props.t;
 
     return (
       <GlobalForm.Errorable
@@ -117,14 +129,16 @@ class AvatarBuilder extends Component {
         label="Avatar"
       >
         <div className={inputClasses}>
-          <div className="form-input-heading">Thumbnail</div>
+          <div className="form-input-heading">
+            {t("backend.forms.project.thumbnail")}
+          </div>
           <div className="grid">
             <div className="section current">
               <span className="label" aria-hidden="true">
-                Current
+                {t("common.current")}
               </span>
               <span className="label screen-reader-text">
-                Current Project Thumbnail
+                {t("backend.forms.project.current_thumbnail")}
               </span>
               {image
                 ? this.renderCoverImage(image)
@@ -132,18 +146,18 @@ class AvatarBuilder extends Component {
             </div>
             <div className={pickerClasses}>
               <span className="label" aria-hidden="true">
-                Default
+                {t("common.default")}
               </span>
               <ColorPicker
                 onChange={this.onColorChange}
                 value={this.props.getModelValue("attributes[avatarColor]")}
-                label="Default Thumbnail Background Color"
+                label={t("backend.forms.project.default_thumbnail")}
                 {...this.props}
               />
             </div>
             <div className={uploadClasses}>
               <span className="label" aria-hidden="true">
-                Custom
+                {t("common.custom")}
               </span>
               <Form.Upload
                 set={this.onUploadChange}
@@ -153,7 +167,7 @@ class AvatarBuilder extends Component {
                 value={this.props.getModelValue("attributes[avatar]")}
                 placeholder="cover"
                 accepts="images"
-                label="Custom Thumbnail Image"
+                label={t("backend.forms.project.custom_thumbnail")}
                 labelClass="screen-reader-text"
               />
             </div>
@@ -164,4 +178,4 @@ class AvatarBuilder extends Component {
   }
 }
 
-export default withConfirmation(setter(AvatarBuilder));
+export default withTranslation()(withConfirmation(setter(AvatarBuilder)));

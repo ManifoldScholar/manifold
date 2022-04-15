@@ -6,13 +6,15 @@ import KindPicker from "./KindPicker";
 import IconPicker from "./IconPicker";
 import SmartAttributes from "./SmartAttributes";
 import Navigation from "backend/components/navigation";
+import { withTranslation } from "react-i18next";
 
 class Fields extends Component {
   static displayName = "ProjectCollection.Form.Fields";
 
   static propTypes = {
     handleDestroy: PropTypes.func,
-    getModelValue: PropTypes.func.isRequired
+    getModelValue: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   get homepageVisible() {
@@ -24,12 +26,13 @@ class Fields extends Component {
   }
 
   render() {
+    const t = this.props.t;
     const buttons = this.id
       ? [
           {
             onClick: this.props.handleDestroy,
             icon: "delete32",
-            label: "delete",
+            label: t("actions.delete"),
             className: "utility-button__icon--notice"
           }
         ]
@@ -38,36 +41,40 @@ class Fields extends Component {
     return (
       <>
         <Navigation.DrawerHeader
-          title="Manage project collection"
+          title={t("backend.forms.manage_entity", {
+            entity: t("glossary.project_collection_other")
+          })}
           hideTitle
           buttons={buttons}
         >
           <Form.TextInput
             wide
             focusOnMount
-            label="Collection Title"
+            label={t("backend.forms.project_collection.collection_title")}
             name="attributes[title]"
-            placeholder="Enter collection name"
+            placeholder={t(
+              "backend.forms.project_collection.collection_title_placeholder"
+            )}
           />
         </Navigation.DrawerHeader>
 
         <KindPicker {...this.props} />
         <Form.TextInput
           wide
-          label="Slug"
+          label={t("backend.forms.project_collection.slug")}
           name="attributes[pendingSlug]"
-          placeholder="Enter URL slug"
+          placeholder={t("backend.forms.project_collection.slug_placeholder")}
         />
         <Form.TextArea
           wide
-          label="Description"
+          label={t("backend.forms.description")}
           name="attributes[description]"
           placeholder="Enter description"
         />
         <Form.Upload
           wide
           layout="portrait"
-          label="Hero Image"
+          label={t("backend.forms.project_collection.hero_image")}
           accepts="images"
           readFrom="attributes[heroStyles][small]"
           name="attributes[hero]"
@@ -75,7 +82,7 @@ class Fields extends Component {
         />
         <Form.Select
           name="attributes[heroLayout]"
-          label="Hero Layout:"
+          label={t("backend.forms.hero_layout")}
           options={[
             { label: "Square Inset", value: "square_inset" },
             { label: "Wide Inset", value: "wide_inset" },
@@ -84,30 +91,38 @@ class Fields extends Component {
         />
         <Form.Switch
           className="form-toggle-secondary"
-          label="Visible:"
+          label={t("backend.forms.visible")}
           name="attributes[visible]"
         />
         <Form.Switch
           className="form-toggle-secondary"
-          label="Show on homepage:"
+          label={t("backend.forms.project_collection.homepage_visible")}
           name="attributes[homepage]"
         />
         {this.homepageVisible && (
-          <Form.FieldGroup instructions="If dates set, project collection will automatically appear on homepage during specified time period.">
+          <Form.FieldGroup
+            instructions={t(
+              "backend.forms.project_collection.homepage_visible_instructions"
+            )}
+          >
             <Form.DatePicker
-              label="Homepage Visibility Start"
+              label={t(
+                "backend.forms.project_collection.homepage_visible_start"
+              )}
               name="attributes[homepageStartDate]"
               wide
             />
             <Form.DatePicker
-              label="Homepage Visibility End"
+              label={t("backend.forms.project_collection.homepage_visible_end")}
               name="attributes[homepageEndDate]"
               wide
             />
             <Form.NumberInput
-              label="Projects Shown:"
+              label={t("backend.forms.project_collection.projects_shown")}
               name="attributes[homepageCount]"
-              instructions="Number of projects shown in homepage blade (0 - 40).  Will show all if none is set."
+              instructions={t(
+                "backend.forms.project_collection.projects_shown_instructions"
+              )}
               wide
             />
           </Form.FieldGroup>
@@ -116,7 +131,7 @@ class Fields extends Component {
         <Form.Upload
           wide
           layout="portrait"
-          label="Custom Icon"
+          label={t("backend.forms.project_collection.custom_icon")}
           accepts="images"
           readFrom="attributes[customIconStyles][small]"
           name="attributes[customIcon]"
@@ -125,7 +140,7 @@ class Fields extends Component {
         <Form.Upload
           wide
           layout="portrait"
-          label="Social Card Image"
+          label={t("backend.forms.project_collection.social_image")}
           accepts="images"
           readFrom="attributes[socialImageStyles][small]"
           name="attributes[socialImage]"
@@ -133,15 +148,19 @@ class Fields extends Component {
         />
         <Form.TextInput
           wide
-          label="Social Card Title"
+          label={t("backend.forms.project_collection.social_title")}
           name="attributes[socialTitle]"
-          placeholder="Optionally, Enter a Social Card Title"
+          placeholder={t(
+            "backend.forms.project_collection.social_title_placeholder"
+          )}
         />
         <Form.TextArea
           wide
-          label="Social Card Description"
+          label={t("backend.forms.project_collection.social_description")}
           name="attributes[socialDescription]"
-          placeholder="Optionally, Enter a Social Card Description"
+          placeholder={t(
+            "backend.forms.project_collection.social_description_placeholder"
+          )}
         />
         <SmartAttributes {...this.props} />
       </>
@@ -149,4 +168,4 @@ class Fields extends Component {
   }
 }
 
-export default setter(Fields);
+export default withTranslation()(setter(Fields));
