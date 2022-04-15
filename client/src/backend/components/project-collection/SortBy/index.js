@@ -3,11 +3,14 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import { useListFilters } from "hooks";
 import * as Styled from "./styles";
+import { useTranslation } from "react-i18next";
 
 export default function ProjectCollectionSortBy({
   projectCollection,
   sortChangeHandler
 }) {
+  const { t } = useTranslation();
+
   const isManualSort = projectCollection.attributes.manuallySorted;
 
   const sortOrder = projectCollection.attributes.sortOrder;
@@ -37,7 +40,9 @@ export default function ProjectCollectionSortBy({
     return (
       <div className="form-secondary">
         <div className="form-input">
-          <div className="form-input-heading">Order Manually</div>
+          <div className="form-input-heading">
+            {t("backend.forms.project_collection.order_manually")}
+          </div>
           <div className="toggle-indicator">
             <div
               onClick={handleClick}
@@ -47,7 +52,9 @@ export default function ProjectCollectionSortBy({
               aria-pressed={isManualSort}
             >
               <span className="screen-reader-text">
-                Order collection manually
+                {t(
+                  "backend.forms.project_collection.order_collection_manually"
+                )}
               </span>
             </div>
           </div>
@@ -58,7 +65,7 @@ export default function ProjectCollectionSortBy({
 
   const renderManualInstructions = (
     <Styled.Instructions>
-      Click and drag projects to rearrange them.
+      {t("backend.forms.project_collection.order_manually_instructions")}
     </Styled.Instructions>
   );
 

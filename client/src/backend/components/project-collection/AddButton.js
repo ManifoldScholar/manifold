@@ -7,8 +7,9 @@ import {
   CSSTransition
 } from "react-transition-group";
 import IconComposer from "global/components/utility/IconComposer";
+import { withTranslation } from "react-i18next";
 
-export default class ProjectCollectionAddButton extends Component {
+class ProjectCollectionAddButton extends Component {
   static displayName = "ProjectCollection.AddButton";
 
   static propTypes = {
@@ -17,7 +18,8 @@ export default class ProjectCollectionAddButton extends Component {
     handleAdd: PropTypes.func.isRequired,
     handleRemove: PropTypes.func.isRequired,
     selected: PropTypes.bool,
-    project: PropTypes.object.isRequired
+    project: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -84,13 +86,18 @@ export default class ProjectCollectionAddButton extends Component {
 
   screenReaderButtonText() {
     const { project } = this.props;
+    const t = this.props.t;
     switch (this.state.view) {
       case "add":
       case "add-active":
-        return `Include ${project.attributes.titlePlaintext}`;
+        return t("backend.project_collection.include_title", {
+          title: project.attributes.titlePlaintext
+        });
       case "remove":
       case "remove-active":
-        return `Exclude ${project.attributes.titlePlaintext}`;
+        return t("backend.project_collection.exclude_title", {
+          title: project.attributes.titlePlaintext
+        });
       default:
         return null;
     }
@@ -113,16 +120,17 @@ export default class ProjectCollectionAddButton extends Component {
   };
 
   determineText() {
+    const t = this.props.t;
     switch (this.state.view) {
       case "remove-active":
         return {
           key: "add",
-          text: "Exclude"
+          text: t("backend.project_collection.exclude")
         };
       case "add-active":
         return {
           key: "remove",
-          text: "Include"
+          text: t("backend.project_collection.include")
         };
       default:
         return {
@@ -195,3 +203,5 @@ export default class ProjectCollectionAddButton extends Component {
     );
   }
 }
+
+export default withTranslation()(ProjectCollectionAddButton);

@@ -41,6 +41,10 @@
     "user_one": "user",
     "user_other": "users",
     "user_title_case_one": "User",
-    "user_title_case_other": "Users"
+    "user_title_case_other": "Users",
+    "default": "Default",
+    "custom": "Custom",
+    "current": "Current",
+    "settings": "Settings"
   }
 }

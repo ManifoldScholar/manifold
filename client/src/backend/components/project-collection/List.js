@@ -4,8 +4,9 @@ import classNames from "classnames";
 import ListItem from "./ListItem";
 import EntitiesList from "backend/components/list/EntitiesList";
 import IconComposer from "global/components/utility/IconComposer";
+import { withTranslation } from "react-i18next";
 
-export default class ProjectCollectionList extends PureComponent {
+class ProjectCollectionList extends PureComponent {
   static displayName = "ProjectCollection.List";
 
   static propTypes = {
@@ -15,12 +16,14 @@ export default class ProjectCollectionList extends PureComponent {
     onCollectionSelect: PropTypes.func.isRequired,
     onToggleVisibility: PropTypes.func.isRequired,
     onCollectionOrderChange: PropTypes.func.isRequired,
-    match: PropTypes.object
+    match: PropTypes.object,
+    t: PropTypes.func
   };
 
   render() {
     const { projectCollection } = this.props;
     const active = projectCollection ? projectCollection.id : null;
+    const t = this.props.t;
 
     return (
       <aside className="aside-wide project-collection-list">
@@ -51,13 +54,15 @@ export default class ProjectCollectionList extends PureComponent {
                 "button-icon-secondary__icon--large"
               )}
             />
-            <span>Create New Collection</span>
+            <span>{t("backend.project_collection.create_collection")}</span>
           </button>
         </div>
         <p className="instructional-copy">
-          Select a Collection to edit its settings, visibility, and contents.
+          {t("backend.project_collection.create_collection_instructions")}
         </p>
       </aside>
     );
   }
 }
+
+export default withTranslation()(ProjectCollectionList);
