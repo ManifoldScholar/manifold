@@ -87,6 +87,19 @@
     "creator_placeholder": "Enter the creator name",
     "credit_placeholder": "Enter a credit for attribution purposes",
     "alt_text_placeholder": "Enter alternative text as necessary",
-    "original_publication_date_placeholder": "Enter original publication date"
+    "original_publication_date_placeholder": "Enter original publication date",
+    "categories": {
+      "copyright": "Copyright",
+      "identity": "Identity",
+      "publisher": "Publisher",
+      "bibliographic": "Bibliographic",
+      "accessibility": "Accessibility",
+      "other": "Other"
+    },
+    "save": "Save Metadata",
+    "creator": "creator",
+    "credit": "credit",
+    "alt_text": "alt text",
+    "copyright_status": "copyright status"
   }
 }
