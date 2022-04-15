@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ResourcePlayer from "frontend/components/resource-player";
+import * as Styled from "./styled";
 
 export default class ResourcePreviewInteractive extends Component {
   static displayName = "Resource.Preview.Interactive";
@@ -26,9 +27,9 @@ export default class ResourcePreviewInteractive extends Component {
 
   render() {
     return (
-      <div className="resource-preview resource-preview-interactive">
+      <Styled.InteractiveWrapper>
         <ResourcePlayer.Iframe {...this.props} styleProps={this.styleProps} />
-      </div>
+      </Styled.InteractiveWrapper>
     );
   }
 }

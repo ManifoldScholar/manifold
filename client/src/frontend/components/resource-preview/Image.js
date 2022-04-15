@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import * as Styled from "./styles";
 
 export default class ResourcePreviewImage extends Component {
   static displayName = "Resource.Preview.Image";
@@ -24,9 +25,9 @@ export default class ResourcePreviewImage extends Component {
     if (!this.image || !this.src) return null;
 
     return (
-      <div className="resource-preview resource-preview-image">
-        <img src={this.src} alt={this.altText} />
-      </div>
+      <Styled.Preview>
+        <Styled.Image src={this.src} alt={this.altText} />
+      </Styled.Preview>
     );
   }
 }
