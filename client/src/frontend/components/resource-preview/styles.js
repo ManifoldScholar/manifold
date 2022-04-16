@@ -1,27 +1,41 @@
 import styled from "@emotion/styled";
-import { respond } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
-export const Preview = styled.div`
-  .overlay-full & {
-    padding-top: 70px;
+const getStylesForType = type => {
+  switch (type) {
+    case "card":
+      return `
+      display: flex;
+      width: 100%;
+      padding: 0;
+      border: none;
 
-    ${respond(`padding-top: 120px;`, 70)}
+      &:hover,
+      &:focus-visible {
+        outline: 0;
+
+        .icon-thumbnail-primary {
+          --Thumbnail-color: var(--hover-color);
+        }
+      }
+      `;
+    case "slide":
+      return `
+      &:focus-visible {
+        border: 0;
+        outline: 0;
+
+        > * {
+          color: var(--color-base-neutral95);
+          background-color: var(--focus-color, var(--color-accent-primary));
+        }
+      }
+      `;
+    default:
+      return ``;
   }
-`;
+};
 
-export const Image = styled.img`
-  width: 100%;
-  height: auto;
-`;
-
-export const InteractiveWrapper = styled(Preview)`
-  position: relative;
-`;
-
-export const VideoWrapper = styled(Preview, transientOptions)`
-  position: relative;
-  height: 500px;
-
-  ${({ $external }) => $external && `height: 620px;`}
+export const PreviewToggle = styled("button", transientOptions)`
+  ${({ $toggleType }) => getStylesForType($toggleType)}
 `;

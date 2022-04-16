@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ResourcePlayer from "frontend/components/resource-player";
-import * as Styled from "./styled";
+import * as Styled from "./styles";
 
 export default class ResourcePreviewInteractive extends Component {
   static displayName = "Resource.Preview.Interactive";
