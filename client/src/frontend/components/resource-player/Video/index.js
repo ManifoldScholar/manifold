@@ -4,6 +4,7 @@ import { DefaultPlayer as Video } from "react-html5video";
 import withDispatch from "hoc/withDispatch";
 import { notificationActions } from "actions";
 import { withTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 class ResourcePlayerVideo extends Component {
   static displayName = "Resource.Player.Video";
@@ -83,9 +84,11 @@ class ResourcePlayerVideo extends Component {
     if (!this.iframeSrc) return null;
 
     return (
-      <div className="figure-video">
-        <iframe title={this.iframeTitle} {...this.iframeProps} />
-      </div>
+      <Styled.VideoWrapper>
+        <Styled.Video>
+          <iframe title={this.iframeTitle} {...this.iframeProps} />
+        </Styled.Video>
+      </Styled.VideoWrapper>
     );
   }
 
@@ -112,7 +115,7 @@ class ResourcePlayerVideo extends Component {
     } = this.props.resource.attributes;
 
     return (
-      <div className="figure-video">
+      <Styled.VideoWrapper>
         <Video
           ref={this.playerRef}
           controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}
@@ -121,7 +124,7 @@ class ResourcePlayerVideo extends Component {
         >
           <source src={attachmentStyles.original} type="video/mp4" />
         </Video>
-      </div>
+      </Styled.VideoWrapper>
     );
   }
 
