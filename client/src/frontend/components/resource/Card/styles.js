@@ -21,23 +21,6 @@ export const Preview = styled.div`
   ${respond(`width: 135px;`, 75)}
 
   ${respond(`width: 155px;`, 85)}
-
-  & > .resource-preview-wrapper {
-    display: flex;
-    width: 100%;
-    padding: 0;
-    border: none;
-
-    &:hover,
-    &:focus-visible {
-      outline: 0;
-
-      .icon-thumbnail-primary {
-        --Thumbnail-color: var(--hover-color);
-      }
-    }
-  }
-
 `;
 
 export const InfoLink = styled.a`

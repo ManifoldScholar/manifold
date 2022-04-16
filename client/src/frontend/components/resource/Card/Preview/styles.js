@@ -59,10 +59,8 @@ export const TextWrapper = styled.div`
 
   ${respond(`font-size: 14px;`, 85)}
 
-  ${Link}:hover &,
-  ${Link}:focus-visible &,
-  .resource-preview-wrapper:hover &,
-  .resource-preview-wrapper:focus-visible & {
+  ${Inner}:hover &,
+  ${Inner}:focus-visible & {
     color: var(--color-base-neutral-white);
     background-color: var(--hover-color);
   }

@@ -70,7 +70,7 @@ class ResourceDetail extends Component {
             <Meta resource={resource} layout={"secondary"} isMobile />
           </Styled.MetaMobile>
           <Styled.VariantsMobile>
-            <VariantList resource={resource} />
+            <VariantList resource={resource} isMobile />
           </Styled.VariantsMobile>
           <Styled.Content>
             <div dangerouslySetInnerHTML={{ __html: attr.captionFormatted }} />

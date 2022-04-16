@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import IconComposer from "global/components/utility/IconComposer";
 import { listUnstyled, utilityPrimary, respond } from "theme/styles/mixins";
+import { transientOptions } from "helpers/emotionHelpers";
 
-export const Container = styled.section`
+export const Container = styled("section", transientOptions)`
   ${listUnstyled}
   ${utilityPrimary}
   display: none;
@@ -10,12 +11,12 @@ export const Container = styled.section`
 
   ${respond(`display: block;`, 65)}
 
-  .resource-variants-mobile & {
+  ${({ $isMobile }) =>
+    $isMobile &&
+    `
     display: block;
     margin-bottom: 25px;
-
-    ${respond(`display: none;`, 65)}
-  }
+    `}
 `;
 
 export const Title = styled.div`

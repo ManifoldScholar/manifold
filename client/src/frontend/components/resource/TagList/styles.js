@@ -26,7 +26,6 @@ export const Tag = styled.li`
   ${utilityPrimary}
   display: inline;
   font-size: 13px;
-  color: var(--color-base-neutral40);
 
   + li::before {
     content: ", ";
@@ -34,7 +33,6 @@ export const Tag = styled.li`
 `;
 
 export const Link = styled(LinkComponent)`
-  color: var(--color-base-neutral40);
   text-decoration: none;
   transition: color ${defaultTransitionProps};
 

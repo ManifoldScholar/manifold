@@ -8,14 +8,6 @@ export const Container = styled.div`
   padding-top: 23px;
   padding-bottom: 26px;
   text-decoration: none;
-
-  + .resource-content {
-    margin-top: -8px;
-  }
-
-  .resource-kind + & {
-    padding-block-start: 7px;
-  }
 `;
 
 export const Icon = styled.figure`

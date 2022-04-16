@@ -22,7 +22,7 @@ function Preview({ resource, detailUrl }) {
 
   if (previewable)
     return (
-      <ResourcePreview resource={resource}>
+      <ResourcePreview resource={resource} toggleType="card">
         <PreviewInner />
       </ResourcePreview>
     );
