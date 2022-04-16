@@ -6,6 +6,7 @@ import { CSSTransition } from "react-transition-group";
 import GlobalOverlay from "global/components/Overlay";
 import has from "lodash/has";
 import capitalize from "lodash/capitalize";
+import * as Styled from "./styles";
 
 export default class ResourcePreview extends Component {
   static canPreview = resource => {
@@ -16,7 +17,8 @@ export default class ResourcePreview extends Component {
 
   static propTypes = {
     resource: PropTypes.object.isRequired,
-    children: PropTypes.object.isRequired
+    children: PropTypes.object.isRequired,
+    toggleType: PropTypes.string
   };
 
   constructor() {
@@ -96,14 +98,14 @@ export default class ResourcePreview extends Component {
                 <PreviewComponent resource={this.props.resource} />
               </GlobalOverlay>
             </CSSTransition>
-            <button
-              className="resource-preview-wrapper"
+            <Styled.PreviewToggle
               onClick={this.handleOpenPreviewClick}
               aria-controls={id}
               aria-expanded={this.state.overlayOpen}
+              $toggleType={this.props.toggleType}
             >
               {this.renderChildren()}
-            </button>
+            </Styled.PreviewToggle>
           </>
         )}
       </UIDConsumer>
