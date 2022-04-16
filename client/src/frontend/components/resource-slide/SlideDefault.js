@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Info from "./Info";
+import * as Styled from "./styles";
 
 export default class DefaultSlide extends Component {
   static displayName = "ResourceList.Slide.Default";
@@ -21,12 +22,9 @@ export default class DefaultSlide extends Component {
 
     return (
       <>
-        <div
-          className="figure-default"
-          style={{ backgroundImage: `url(${backgroundUrl})` }}
-        >
+        <Styled.Default style={{ backgroundImage: `url(${backgroundUrl})` }}>
           {info && <Info resource={resource} />}
-        </div>
+        </Styled.Default>
       </>
     );
   }

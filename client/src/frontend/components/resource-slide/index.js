@@ -1,6 +1,6 @@
 import Caption from "./Caption";
 import Info from "./Info";
-import LoadingCaption from "./LoadingCaption";
+import LoadingCaption from "./Caption/LoadingCaption";
 import SlideDefault from "./SlideDefault";
 import SlidePlaceholder from "./SlidePlaceholder";
 import SlideAudio from "./SlideAudio";
