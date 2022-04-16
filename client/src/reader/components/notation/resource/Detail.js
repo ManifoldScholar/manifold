@@ -8,6 +8,7 @@ import isEmpty from "lodash/isEmpty";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 import { withTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 class ResourceDetail extends PureComponent {
   static propTypes = {
@@ -45,15 +46,15 @@ class ResourceDetail extends PureComponent {
     const resourceUrl = this.buildRedirectUrl(resource);
 
     return (
-      <div className="resource-detail">
-        <div className="container">
-          <div className="resource-kind">
-            <figure className={`resource-icon ${attr.kind}`}>
+      <Styled.Wrapper>
+        <Styled.Container>
+          <Styled.Resource>
+            <Styled.Icon>
               <IconComputed.Resource icon={attr.kind} size={50} />
-            </figure>
-          </div>
+            </Styled.Icon>
+          </Styled.Resource>
           <Resource.Title resource={resource} />
-          <div className="resource-content">
+          <Styled.Content>
             {!isEmpty(attr.captionFormatted) ? (
               <div
                 dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
@@ -66,18 +67,19 @@ class ResourceDetail extends PureComponent {
                 }}
               />
             ) : null}
-          </div>
-        </div>
+          </Styled.Content>
+        </Styled.Container>
         <Resource.Hero
           resource={resource}
           slideOptions={{ enableZoom: false }}
         />
-        <div className="container">
+        <Styled.Container>
           <Resource.Meta
             resource={resource}
             layout={"secondary columnar"}
             showIcon={false}
             showTags={false}
+            isMobile
           />
 
           <nav className="button-nav button-nav--stack">
@@ -119,8 +121,8 @@ class ResourceDetail extends PureComponent {
               </span>
             </button>
           </nav>
-        </div>
-      </div>
+        </Styled.Container>
+      </Styled.Wrapper>
     );
   }
 }
