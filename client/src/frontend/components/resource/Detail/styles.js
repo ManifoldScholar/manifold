@@ -3,7 +3,6 @@ import {
   clearfix,
   respond,
   utilityPrimary,
-  subtitlePrimary,
   drawerIndent,
   containerPrototype
 } from "theme/styles/mixins";
@@ -11,50 +10,6 @@ import {
 export const Container = styled.section`
   ${clearfix()}
   padding-top: 22px;
-
-  .resource-slide-audio {
-    height: auto;
-  }
-
-  .resource-kind {
-    display: flex;
-    align-items: center;
-
-    ${respond(`width: 100%;`, 60)}
-
-    + .resource-title {
-      padding-top: 7px;
-    }
-
-    h3 {
-      ${utilityPrimary}
-      margin: -8px 0 0;
-      font-size: 13px;
-      color: var(--color-base-neutral50);
-
-      ${respond(`margin: 0;`, 60)}
-    }
-
-    .resource-icon {
-      padding-right: 14px;
-
-      ${respond(`display: none;`, 60)}
-
-      svg {
-        fill: var(--color-base-neutral50);
-      }
-    }
-  }
-
-  .resource-date {
-    ${subtitlePrimary}
-    width: 100%;
-    font-size: 16px;
-
-    .bg-neutral90 & {
-      color: var(--color-base-neutral40);
-    }
-  }
 `;
 
 export const TitleWrapper = styled.div`
@@ -125,7 +80,9 @@ export const MetaMobile = styled.div`
   ${respond(`display: none;`, 65)}
 `;
 
-export const VariantsMobile = styled.div``;
+export const VariantsMobile = styled.div`
+  ${respond(`display: none;`, 65)}
+`;
 
 export const Content = styled.div`
   font-family: var(--font-family-copy);

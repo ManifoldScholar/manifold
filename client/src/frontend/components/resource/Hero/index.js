@@ -21,45 +21,45 @@ export default class ResourceHero extends Component {
     switch (resource.attributes.kind) {
       case "image":
         output = (
-          <div className="resource-slide-figure">
+          <Styled.Resource>
             <ResourceSlide.SlideImage
               resource={resource}
               {...this.props.slideOptions}
             />
-          </div>
+          </Styled.Resource>
         );
         break;
       case "video":
         output = (
-          <div className="resource-slide-figure">
+          <Styled.Resource>
             <ResourceSlide.SlideVideo
               resource={resource}
               {...this.props.slideOptions}
             />
-          </div>
+          </Styled.Resource>
         );
         break;
       case "interactive":
         output = (
-          <div
+          <Styled.Resource
             style={{ minHeight: resource.attributes.minimumHeight }}
-            className="resource-slide-figure resource-slide-interactive"
+            className="resource-slide-interactive"
           >
             <ResourcePlayer.Iframe
               resource={resource}
               styleProps={{ minHeight: "100%" }}
             />
-          </div>
+          </Styled.Resource>
         );
         break;
       case "audio":
         output = (
-          <div className="resource-slide-figure resource-slide-audio">
+          <Styled.ResourceAudio>
             <ResourceSlide.SlideAudio
               resource={resource}
               {...this.props.slideOptions}
             />
-          </div>
+          </Styled.ResourceAudio>
         );
         break;
       default:

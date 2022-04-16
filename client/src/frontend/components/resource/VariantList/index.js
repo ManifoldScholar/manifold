@@ -7,7 +7,8 @@ class ResourceVariantList extends Component {
   static displayName = "Resource.VariantList";
 
   static propTypes = {
-    resource: PropTypes.object
+    resource: PropTypes.object,
+    isMobile: PropTypes.bool
   };
 
   renderVariant(variant) {
@@ -39,7 +40,7 @@ class ResourceVariantList extends Component {
     if (children.length === 0) return null;
 
     return (
-      <Styled.Container>
+      <Styled.Container $isMobile={this.props.isMobile}>
         <Styled.Title>
           {`${this.props.t("pages.subheaders.variants")}:`}
         </Styled.Title>
