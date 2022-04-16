@@ -194,11 +194,13 @@ class ResourceSlideshow extends PureComponent {
         timeout={{ enter: 500, exit: 500 }}
       >
         <div>
-          {this.isLoaded(position) ? (
-            <figure>{this.getFigureByType(collectionResource)}</figure>
-          ) : (
-            <ResourceSlide.SlideLoading />
-          )}
+          <Styled.Slide>
+            {this.isLoaded(position) ? (
+              this.getFigureByType(collectionResource)
+            ) : (
+              <ResourceSlide.SlideLoading />
+            )}
+          </Styled.Slide>
         </div>
       </CSSTransition>
     );
@@ -208,10 +210,14 @@ class ResourceSlideshow extends PureComponent {
     return (
       <CSSTransition
         key="placeholder"
-        classNames={`slide-${this.state.slideDirection}`}
+        classNames={this.state.slideDirection}
         timeout={{ enter: 500, exit: 500 }}
       >
-        <ResourceSlide.SlidePlaceholder />
+        <div>
+          <Styled.Slide>
+            <ResourceSlide.SlidePlaceholder />
+          </Styled.Slide>
+        </div>
       </CSSTransition>
     );
   }
@@ -225,59 +231,53 @@ class ResourceSlideshow extends PureComponent {
 
     return (
       <Styled.SlideShow>
-        {/*
-          Note that .slide may be abstracted to a
-          listed format to support multiple, sliding images
-        */}
-        <div className="slide">
-          <Swipeable
-            onSwipedLeft={this.handleSlideNext}
-            onSwipedRight={this.handleSlidePrev}
-          >
-            <div className="resource-slide-figure">
-              <ReactTransitionGroup>
-                {collectionResourcesCount > 0
-                  ? this.renderSlideShow()
-                  : this.renderPlaceholder()}
-              </ReactTransitionGroup>
-            </div>
-          </Swipeable>
-          <Styled.Footer>
-            {this.isLoaded(position) ? (
-              <ResourceSlide.Caption
-                resource={collectionResource}
-                resourceCollection={this.props.resourceCollection}
-                hideDetailUrl={this.props.hideDetailUrl}
-                hideDownload={this.props.hideDownload}
-              />
-            ) : (
-              <ResourceSlide.LoadingCaption />
-            )}
-            {collectionResourcesCount > 0 && (
-              <Styled.Pagination>
-                <Styled.Ordinal>
-                  {position} / {totalCount}
-                </Styled.Ordinal>
-                <div>
-                  <DirectionalButton
-                    onClick={this.handleSlidePrev}
-                    direction="left"
-                    disabled={position === 1}
-                    paginationText={t("pagination.previous_short")}
-                    screenReaderText={t("pagination.previous_slide")}
-                  />
-                  <DirectionalButton
-                    onClick={this.handleSlideNext}
-                    direction="right"
-                    disabled={position === totalCount}
-                    paginationText={t("pagination.next")}
-                    screenReaderText={t("pagination.next_slide")}
-                  />
-                </div>
-              </Styled.Pagination>
-            )}
-          </Styled.Footer>
-        </div>
+        <Swipeable
+          onSwipedLeft={this.handleSlideNext}
+          onSwipedRight={this.handleSlidePrev}
+        >
+          <Styled.SlidesWrapper>
+            <ReactTransitionGroup>
+              {collectionResourcesCount > 0
+                ? this.renderSlideShow()
+                : this.renderPlaceholder()}
+            </ReactTransitionGroup>
+          </Styled.SlidesWrapper>
+        </Swipeable>
+        <Styled.Footer>
+          {this.isLoaded(position) ? (
+            <ResourceSlide.Caption
+              resource={collectionResource}
+              resourceCollection={this.props.resourceCollection}
+              hideDetailUrl={this.props.hideDetailUrl}
+              hideDownload={this.props.hideDownload}
+            />
+          ) : (
+            <ResourceSlide.LoadingCaption />
+          )}
+          {collectionResourcesCount > 0 && (
+            <Styled.Pagination>
+              <Styled.Ordinal>
+                {position} / {totalCount}
+              </Styled.Ordinal>
+              <div>
+                <DirectionalButton
+                  onClick={this.handleSlidePrev}
+                  direction="left"
+                  disabled={position === 1}
+                  paginationText={t("pagination.previous_short")}
+                  screenReaderText={t("pagination.previous_slide")}
+                />
+                <DirectionalButton
+                  onClick={this.handleSlideNext}
+                  direction="right"
+                  disabled={position === totalCount}
+                  paginationText={t("pagination.next")}
+                  screenReaderText={t("pagination.next_slide")}
+                />
+              </div>
+            </Styled.Pagination>
+          )}
+        </Styled.Footer>
       </Styled.SlideShow>
     );
   }
