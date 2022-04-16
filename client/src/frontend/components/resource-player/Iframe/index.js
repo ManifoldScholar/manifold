@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import * as Styled from "./styles";
 
 export default class ResourcePlayerIframe extends Component {
   static displayName = "Resource.Player.Iframe";
@@ -19,8 +20,8 @@ export default class ResourcePlayerIframe extends Component {
     } = resource.attributes;
 
     return (
-      <div className="figure-interactive">
-        <iframe
+      <Styled.InteractiveWrapper>
+        <Styled.Interactive
           src={externalUrl}
           title={titlePlaintext}
           style={{
@@ -29,7 +30,7 @@ export default class ResourcePlayerIframe extends Component {
             ...styleProps
           }}
         />
-      </div>
+      </Styled.InteractiveWrapper>
     );
   }
 }
