@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { Trans, withTranslation } from "react-i18next";
-import classNames from "classnames";
 import get from "lodash/get";
 import debounce from "lodash/debounce";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
 import { Collapse } from "react-collapse";
-import IconComposer from "global/components/utility/IconComposer";
+import * as Styled from "./styles";
 
 class ResourceListSlideCaption extends Component {
   static visibleCaptionHeight = 48;
@@ -74,38 +72,16 @@ class ResourceListSlideCaption extends Component {
 
   canExpand() {
     if (!this._utility) return false;
-    if (!this._descriptionContents) return false;
+    if (!this._description) return false;
     return (
-      this._descriptionContents.offsetHeight >
+      this._description.offsetHeight >
       ResourceListSlideCaption.visibleCaptionHeight
     );
   }
 
   checkExpandable = () => {
-    if (!this._utility) return;
-    if (this.canExpand()) return this.showExpandable();
-    this.hideExpandable();
-  };
-
-  hideExpandable() {
-    this._utility.classList.remove("resource-slideshow__utility--expandable");
-  }
-
-  showExpandable() {
-    this._utility.classList.add("resource-slideshow__utility--expandable");
-  }
-
-  checkCollapsed = () => {
-    if (!this._description) return null;
-    if (this.state.expanded) {
-      this._description.classList.remove(
-        "resource-slideshow__description--collapsed"
-      );
-    } else {
-      this._description.classList.add(
-        "resource-slideshow__description--collapsed"
-      );
-    }
+    if (this.canExpand()) return true;
+    return false;
   };
 
   detailUrl() {
@@ -128,22 +104,15 @@ class ResourceListSlideCaption extends Component {
   renderDescription(resource) {
     if (!this.hasCaption(resource)) return null;
     const attr = resource.attributes;
-    const descriptionClasses = classNames({
-      "resource-slideshow__description": true,
-      "resource-slideshow__description--expanded": this.state.expanded
-    });
     const contents = this.createDescription(attr.captionFormatted);
 
     return (
-      <Collapse isOpened onRest={this.checkCollapsed}>
-        <div className={descriptionClasses} ref={e => (this._description = e)}>
-          <div
-            ref={e => {
-              this._descriptionContents = e;
-            }}
-            dangerouslySetInnerHTML={contents}
-          />
-        </div>
+      <Collapse isOpened onRest={this.checkExpandable}>
+        <Styled.Description
+          ref={e => (this._description = e)}
+          $expanded={this.state.expanded}
+          dangerouslySetInnerHTML={contents}
+        />
       </Collapse>
     );
   }
@@ -151,23 +120,13 @@ class ResourceListSlideCaption extends Component {
   render() {
     const resource = this.props.resource;
     const attr = resource.attributes;
-    const moreLinkClass = classNames("resource-slideshow__more-link", {
-      "resource-slideshow__more-link--open": this.state.expanded
-    });
-
-    const utilityClass = classNames("resource-slideshow__utility", {
-      "resource-slideshow__utility--with-shadow": this.hasCaption(resource),
-      "resource-slideshow__utility--expanded": this.state.expanded
-    });
-
     const detailUrl = this.detailUrl();
     const t = this.props.t;
 
     return (
-      <div className="resource-slideshow__caption">
+      <Styled.Caption>
         <header>
-          <h3
-            className="resource-slideshow__title"
+          <Styled.Title
             dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
           />
           <span className="screen-reader-text" role="alert">
@@ -177,44 +136,42 @@ class ResourceListSlideCaption extends Component {
           </span>
         </header>
         {this.renderDescription(resource)}
-        <div
-          className={utilityClass}
+        <Styled.Utility
+          $expandable={this.checkExpandable()}
           ref={e => {
             this._utility = e;
           }}
         >
-          <div className="resource-slideshow__utility-inner">
-            <button className={moreLinkClass} onClick={this.handleReadMore}>
-              <span className="resource-slideshow__open-text">
+          <Styled.UtilityInner $expanded={this.state.expanded}>
+            <Styled.MoreLink
+              onClick={this.handleReadMore}
+              $expandable={this.checkExpandable()}
+            >
+              <Styled.OpenText $expanded={this.state.expanded}>
                 {t("actions.read_more")}
-              </span>
-              <span className="resource-slideshow__close-text">
+              </Styled.OpenText>
+              <Styled.CloseText $expanded={this.state.expanded}>
                 {t("actions.hide_description")}
-              </span>
-            </button>
+              </Styled.CloseText>
+            </Styled.MoreLink>
             {this.canDownload(resource) ? (
-              <a
+              <Styled.DownloadLink
                 href={attr.attachmentStyles.original}
                 target="_blank"
-                className="resource-slideshow__download-link"
                 rel="noopener noreferrer"
               >
                 <span>{t("actions.download")}</span>
-                <IconComposer
-                  icon="arrowDown16"
-                  size="default"
-                  className="resource-slideshow__download-icon"
-                />
-              </a>
+                <Styled.DownloadIcon icon="arrowDown16" size="default" />
+              </Styled.DownloadLink>
             ) : null}
             {detailUrl && !this.props.hideDetailUrl ? (
-              <Link className="resource-slideshow__detail-link" to={detailUrl}>
+              <Styled.DetailLink to={detailUrl}>
                 {t("actions.view_resource")}
-              </Link>
+              </Styled.DetailLink>
             ) : null}
-          </div>
-        </div>
-      </div>
+          </Styled.UtilityInner>
+        </Styled.Utility>
+      </Styled.Caption>
     );
   }
 }

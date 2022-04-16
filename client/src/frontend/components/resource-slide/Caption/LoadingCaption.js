@@ -1,17 +1,18 @@
 import React, { Component } from "react";
+import * as Styled from "./styles";
 
 export default class ResourceListLoadingCaption extends Component {
   render() {
     return (
-      <div className="resource-slideshow__caption">
+      <Styled.Caption>
         <header>
-          <p className="resource-slideshow__title" />
+          <Styled.Title as="p" />
         </header>
-        <div className="resource-slideshow__description">
+        <Styled.Description>
           <p />
-        </div>
-        <div className="resource-slideshow__utility" />
-      </div>
+        </Styled.Description>
+        <Styled.Utility />
+      </Styled.Caption>
     );
   }
 }
