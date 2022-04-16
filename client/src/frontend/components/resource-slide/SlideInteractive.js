@@ -5,6 +5,7 @@ import throttle from "lodash/throttle";
 import SlideDefault from "frontend/components/resource-slide/SlideDefault";
 import Zoom from "./Zoom";
 import { withTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 class ResourceListSlideInteractive extends PureComponent {
   static displayName = "ResourceList.Slide.Interactive";
@@ -125,7 +126,7 @@ class ResourceListSlideInteractive extends PureComponent {
   render() {
     const { resource, enableZoom } = this.props;
     return (
-      <div ref={this.setContainer} style={{ width: "100%", height: "100%" }}>
+      <Styled.InteractiveWrapper ref={this.setContainer}>
         {enableZoom && (
           <Zoom
             label={this.props.t("navigation.view_interactive_resource")}
@@ -133,7 +134,7 @@ class ResourceListSlideInteractive extends PureComponent {
           />
         )}
         {this.renderSlideContents()}
-      </div>
+      </Styled.InteractiveWrapper>
     );
   }
 }

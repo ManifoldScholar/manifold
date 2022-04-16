@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Zoom from "./Zoom";
+import * as Styled from "./styles";
 
 export default class ResourceListSlideImage extends Component {
   static displayName = "ResourceList.Slide.Image";
@@ -30,7 +31,7 @@ export default class ResourceListSlideImage extends Component {
     return (
       <>
         {this.props.enableZoom && <Zoom resource={this.props.resource} />}
-        <img src={this.src} alt={this.altText} className="figure-image" />
+        <Styled.Image src={this.src} alt={this.altText} />
       </>
     );
   }

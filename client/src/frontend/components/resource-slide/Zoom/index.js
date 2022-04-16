@@ -8,8 +8,8 @@ export default function ResourceListSlideZoom({ resource, label }) {
   const { t } = useTranslation();
 
   return (
-    <ResourcePreview resource={resource}>
-      <Styled.ZoomIndicator className="zoom-indicator">
+    <ResourcePreview resource={resource} toggleType="slide">
+      <Styled.ZoomIndicator>
         <span>{label ?? t("actions.zoom")}</span>
         <Styled.Icon icon="zoomIn16" size={21.333} />
       </Styled.ZoomIndicator>
