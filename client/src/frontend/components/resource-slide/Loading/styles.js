@@ -38,3 +38,14 @@ export const Date = styled.span`
   ${utilityPrimary}
   font-size: 12px;
 `;
+
+export const Default = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-position: 50% 50%;
+  background-size: cover;
+`;
