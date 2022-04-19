@@ -11,7 +11,7 @@ import EntitiesList, {
   ResourceCollectionRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { keywordFilter } from "hoc/withFilteredLists";
-import { Translation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 const { request } = entityStoreActions;
 const perPage = 5;
@@ -115,9 +115,12 @@ export class NotationPickerContainerImplementation extends PureComponent {
   }
 
   composeProps(context, props) {
+    const t = props.t;
     let out = {
       entities: props.resources,
-      singularUnit: "resource",
+      unit: t("glossary.resource", {
+        count: props.resourcesMeta?.pagination?.totalCount
+      }),
       entityComponent: ResourceRow,
       pagination: props.resourcesMeta.pagination
     };
@@ -125,7 +128,9 @@ export class NotationPickerContainerImplementation extends PureComponent {
     if (context === "collections") {
       out = {
         entities: props.resourceCollections,
-        singularUnit: "resource collection",
+        unit: t("glossary.resource_collection", {
+          count: props.resourceCollectionsMeta?.pagination?.totalCount
+        }),
         entityComponent: ResourceCollectionRow,
         pagination: props.resourceCollectionsMeta.pagination
       };
@@ -136,54 +141,47 @@ export class NotationPickerContainerImplementation extends PureComponent {
 
   render() {
     if (!this.props.resources || !this.props.resourceCollections) return null;
-    const {
-      entities,
-      singularUnit,
-      entityComponent,
-      pagination
-    } = this.composeProps(this.state.context, this.props);
+    const { entities, unit, entityComponent, pagination } = this.composeProps(
+      this.state.context,
+      this.props
+    );
+    const t = this.props.t;
 
     return (
-      <Translation>
-        {t => (
-          <section role="search">
-            <div onMouseDown={this.handleMouseDown} role="presentation">
-              <Utility.Toggle
-                handleToggle={this.handleContextClick}
-                selected={this.state.context}
-                label="options"
-                optionOne={{
-                  translatedLabel: t("glossary.resource_other"),
-                  label: "resources",
-                  icon: "resource24"
-                }}
-                optionTwo={{
-                  translatedLabel: t("glossary.collection_other"),
-                  label: "collections",
-                  icon: "resourceCollection64"
-                }}
-              />
-              <EntitiesList
-                entityComponent={entityComponent}
-                entities={entities}
-                unit={singularUnit}
-                pagination={pagination}
-                callbacks={{
-                  onPageClick: this.pageChangeHandlerCreator
-                }}
-                entityComponentProps={{
-                  onRowClick: this.props.selectionHandler
-                }}
-                search={
-                  <Search
-                    {...this.props.entitiesListSearchProps("notations")}
-                  />
-                }
-              />
-            </div>
-          </section>
-        )}
-      </Translation>
+      <section role="search">
+        <div onMouseDown={this.handleMouseDown} role="presentation">
+          <Utility.Toggle
+            handleToggle={this.handleContextClick}
+            selected={this.state.context}
+            label="options"
+            optionOne={{
+              translatedLabel: t("glossary.resource_other"),
+              label: "resources",
+              icon: "resource24"
+            }}
+            optionTwo={{
+              translatedLabel: t("glossary.collection_other"),
+              label: "collections",
+              icon: "resourceCollection64"
+            }}
+          />
+          <EntitiesList
+            entityComponent={entityComponent}
+            entities={entities}
+            unit={unit}
+            pagination={pagination}
+            callbacks={{
+              onPageClick: this.pageChangeHandlerCreator
+            }}
+            entityComponentProps={{
+              onRowClick: this.props.selectionHandler
+            }}
+            search={
+              <Search {...this.props.entitiesListSearchProps("notations")} />
+            }
+          />
+        </div>
+      </section>
     );
   }
 }
@@ -195,6 +193,6 @@ export const NotationPickerContainer = withFilteredLists(
   }
 );
 
-export default connect(NotationPickerContainer.mapStateToProps)(
-  NotationPickerContainer
+export default withTranslation()(
+  connect(NotationPickerContainer.mapStateToProps)(NotationPickerContainer)
 );
