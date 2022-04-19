@@ -32,7 +32,9 @@ function MyAnnotationsEntityCollection({
           ? {}
           : {
               pagination: get(annotationsMeta, "pagination"),
-              unit: "note"
+              unit: t("glossary.note", {
+                count: annotationsMeta?.pagination?.totalCount
+              })
             }
       }
       BodyComponent={() => (

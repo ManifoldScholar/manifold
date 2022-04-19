@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import get from "lodash/get";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
@@ -15,6 +16,8 @@ function IssuesEntityCollection({
   parentView,
   ...passThroughProps
 }) {
+  const { t } = useTranslation();
+
   return (
     <EntityCollection
       icon={icon}
@@ -38,7 +41,9 @@ function IssuesEntityCollection({
           ? {}
           : {
               pagination: get(issuesMeta, "pagination"),
-              unit: "issue"
+              unit: t("glossary.issue_truncated", {
+                count: issuesMeta?.pagination?.totalCount
+              })
             }
       }
       paginationProps={

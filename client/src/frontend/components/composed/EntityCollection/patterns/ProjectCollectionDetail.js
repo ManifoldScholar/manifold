@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
@@ -28,6 +29,7 @@ function ProjectCollectionDetailEntityCollection({
   const showFilters = !isEmpty(projectsMeta) && !isEmpty(filterProps);
 
   const listFilterProps = useListFilters({ ...filterProps });
+  const { t } = useTranslation();
 
   return (
     <EntityCollection
@@ -56,7 +58,9 @@ function ProjectCollectionDetailEntityCollection({
           ? {}
           : {
               pagination: get(projectsMeta, "pagination"),
-              unit: "project"
+              unit: t("glossary.project", {
+                count: projectsMeta?.pagination?.totalCount
+              })
             }
       }
       paginationProps={

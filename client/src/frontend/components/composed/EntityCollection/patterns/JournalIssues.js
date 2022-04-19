@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import EntityCollection from "../EntityCollection";
 import Journal from "frontend/components/journal";
 
@@ -10,6 +11,8 @@ function JournalIssuesEntityCollection({
   paginationProps,
   ...passThroughProps
 }) {
+  const { t } = useTranslation();
+
   if (!journal || !issues?.length) return null;
 
   return (
@@ -23,7 +26,9 @@ function JournalIssuesEntityCollection({
           ? {}
           : {
               pagination: meta.pagination,
-              unit: "issue"
+              unit: t("glossary.issue_truncated", {
+                count: meta?.pagination?.totalCount
+              })
             }
       }
       paginationProps={
