@@ -13,6 +13,7 @@ describe("reader/containers/notation/Picker", () => {
       history={fixtures.history()}
       match={{ params: { textId: "2", sectionId: "3" } }}
       dispatch={$dispatch}
+      t={key => key}
     />
   ));
 
