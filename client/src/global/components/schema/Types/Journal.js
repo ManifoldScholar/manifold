@@ -93,7 +93,7 @@ Journal.propTypes = {
       journalIssues: PropTypes.arrayOf(
         PropTypes.shape({
           attributes: PropTypes.shape({
-            number: PropTypes.number,
+            number: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
             publicationDate: PropTypes.string
           })
         })
