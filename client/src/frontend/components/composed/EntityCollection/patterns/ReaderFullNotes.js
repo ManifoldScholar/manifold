@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import Annotation from "global/components/Annotation";
@@ -16,6 +17,8 @@ function ReaderFullNotesEntityCollection({
   paginationProps,
   ...passThroughProps
 }) {
+  const { t } = useTranslation();
+
   const hasSortedAnnotations = !!groupedAnnotations.length;
 
   function renderEmptyMessage() {
@@ -32,7 +35,9 @@ function ReaderFullNotesEntityCollection({
           ? {}
           : {
               pagination: get(annotationsMeta, "pagination"),
-              unit: "note"
+              unit: t("glossary.note", {
+                count: annotationsMeta?.pagination?.totalCount
+              })
             }
       }
       BodyComponent={() => (

@@ -35,7 +35,9 @@ function ProjectResourceCollectionsEntityCollection({
           ? {}
           : {
               pagination: get(resourceCollectionsMeta, "pagination"),
-              unit: "resource collection"
+              unit: t("glossary.resource_collection", {
+                count: resourceCollectionsMeta?.pagination?.totalCount
+              })
             }
       }
       paginationProps={

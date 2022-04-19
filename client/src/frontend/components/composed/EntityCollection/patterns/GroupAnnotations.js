@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import Annotation from "global/components/Annotation";
@@ -16,6 +17,8 @@ function GroupAnnotationsEntityCollection({
   refresh,
   ...passThroughProps
 }) {
+  const { t } = useTranslation();
+
   if (!readingGroup || !annotations || !annotationsMeta) return null;
 
   const hasAnnotations = annotations.length > 0;
@@ -30,7 +33,9 @@ function GroupAnnotationsEntityCollection({
           ? {}
           : {
               pagination: get(annotationsMeta, "pagination"),
-              unit: "note"
+              unit: t("glossary.note", {
+                count: annotationsMeta?.pagination?.totalCount
+              })
             }
       }
       BodyComponent={() => (

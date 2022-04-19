@@ -19,6 +19,8 @@
     "comment_other": "{{count}} comments",
     "flag_one": "{{count}} flag",
     "flag_other": "{{count}} flags",
-    "entity_total": "Total {{entity}}"
+    "entity_total": "Total {{entity}}",
+    "range": "Showing <0>{{start}}-{{end}}</0> of <0>{{total}}</0> {{unit}}:",
+    "range_sr": "{{total}} {{unit}}. Showing results {{start}} through {{end}}."
   }
 }

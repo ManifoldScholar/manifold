@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation, Trans } from "react-i18next";
 import * as Styled from "./styles";
 
 function getRangeValues(pagination) {
@@ -14,17 +15,18 @@ function getRangeValues(pagination) {
 
 function Range({ pagination, unit }) {
   const { start, end, totalCount } = getRangeValues(pagination);
+  const { t } = useTranslation();
   return (
     <Styled.Total role="status">
       <span aria-hidden>
-        {"Showing "}
-        <Styled.Highlighted>{`${start}-${end}`}</Styled.Highlighted>
-        {" of "}
-        <Styled.Highlighted>{totalCount}</Styled.Highlighted>
-        {` ${unit}:`}
+        <Trans
+          i18nKey={"counts.range"}
+          values={{ start, end, total: totalCount, unit }}
+          components={[<Styled.Highlighted />]}
+        />
       </span>
       <span className="screen-reader-text">
-        {`${totalCount} ${unit}. Showing results ${start} through ${end}.`}
+        {t("counts.range_sr", { total: totalCount, unit, start, end })}
       </span>
     </Styled.Total>
   );
