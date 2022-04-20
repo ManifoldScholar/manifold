@@ -112,6 +112,12 @@ export const Content = styled.div`
   }
 `;
 
+export const Caption = styled.div`
+  margin-block-start: 24px;
+
+  ${respond(`margin-block-start: 0;`, 65)}
+`;
+
 export const DescriptionHeader = styled.h2`
   ${utilityPrimary}
   margin-top: 2em;
