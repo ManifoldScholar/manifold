@@ -3,12 +3,14 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
+import { Trans, withTranslation } from "react-i18next";
 
-export default class ResourceImportResultsPending extends PureComponent {
+class ResourceImportResultsPending extends PureComponent {
   static displayName = "ResourceImport.Results.Pending";
 
   static propTypes = {
-    resourceImportRow: PropTypes.object.isRequired
+    resourceImportRow: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   get icon() {
@@ -16,26 +18,41 @@ export default class ResourceImportResultsPending extends PureComponent {
   }
 
   renderMessage(resourceImportRow) {
+    const t = this.props.t;
+
     if (resourceImportRow.isUpdate) {
       return (
         <span>
-          {`Row #${resourceImportRow.lineNumber} will update `}
-          <Link to={lh.link("backendResource", resourceImportRow.resourceId)}>
-            {resourceImportRow.resourceTitle}
-          </Link>
-          .
+          <Trans
+            i18nKey="backend.forms.resource_import.row_pending"
+            components={{
+              resourceLink: (
+                <Link
+                  to={lh.link("backendResource", resourceImportRow.resourceId)}
+                />
+              )
+            }}
+            values={{
+              resourceTitle: resourceImportRow.resourceTitle,
+              number: resourceImportRow.lineNumber
+            }}
+          />
         </span>
       );
     } else if (resourceImportRow.isSkip) {
       return (
         <span>
-          {`Row #${resourceImportRow.lineNumber} will be skipped as marked.`}
+          {t("backend.forms.resource_import.row_will_skip", {
+            number: resourceImportRow.lineNumber
+          })}
         </span>
       );
     }
     return (
       <span>
-        {`Row #${resourceImportRow.lineNumber} will create a new resource.`}
+        {t("backend.forms.resource_import.row_will_create", {
+          number: resourceImportRow.lineNumber
+        })}
       </span>
     );
   }
@@ -56,3 +73,5 @@ export default class ResourceImportResultsPending extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ResourceImportResultsPending);

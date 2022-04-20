@@ -1,17 +1,20 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceImportResultsImporting extends PureComponent {
+class ResourceImportResultsImporting extends PureComponent {
   static displayName = "ResourceImport.Results.Importing";
 
   static propTypes = {
-    resourceImportRow: PropTypes.object.isRequired
+    resourceImportRow: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   render() {
     const resourceImportRow = this.props.resourceImportRow;
     if (!resourceImportRow) return null;
+    const t = this.props.t;
 
     return (
       <>
@@ -20,8 +23,14 @@ export default class ResourceImportResultsImporting extends PureComponent {
           size={18}
           className="results-header__icon"
         />
-        <span>{`Row #${resourceImportRow.lineNumber} is being imported.`}</span>
+        <span>
+          {t("backend.forms.resource_import.row_importing", {
+            number: resourceImportRow.lineNumber
+          })}
+        </span>
       </>
     );
   }
 }
+
+export default withTranslation()(ResourceImportResultsImporting);

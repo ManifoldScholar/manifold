@@ -4,14 +4,16 @@ import classNames from "classnames";
 import { Link } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
 import SectionLabel from "global/components/form/SectionLabel";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceImportControlsParsed extends PureComponent {
+class ResourceImportControlsParsed extends PureComponent {
   static displayName = "ResourceImport.Controls.Parsed";
 
   static propTypes = {
     resourceImport: PropTypes.object,
     backLinkUrl: PropTypes.string,
-    startImport: PropTypes.func
+    startImport: PropTypes.func,
+    t: PropTypes.func
   };
 
   get buttonClasses() {
@@ -24,13 +26,13 @@ export default class ResourceImportControlsParsed extends PureComponent {
   render() {
     const resourceImport = this.props.resourceImport;
     if (!resourceImport) return null;
+    const t = this.props.t;
 
     return (
       <>
-        <SectionLabel label="Step 4. Import Resources" />
+        <SectionLabel label={t("backend.forms.resource_import.step_four")} />
         <p className="instructional-copy">
-          {`The import is ready to begin. The list below is a preview of what will
-          happen. Press the \u0022start import\u0022 button below to begin.`}
+          {t("backend.forms.resource_import.import_ready")}
         </p>
 
         <div
@@ -49,7 +51,7 @@ export default class ResourceImportControlsParsed extends PureComponent {
               size="default"
               className="button-icon-secondary__icon"
             />
-            <span>Start Import</span>
+            <span>{t("backend.forms.resource_import.start_import")}</span>
           </button>
           <Link
             to={this.props.backLinkUrl}
@@ -63,10 +65,12 @@ export default class ResourceImportControlsParsed extends PureComponent {
               size="default"
               className="button-icon-secondary__icon"
             />
-            <span>Back</span>
+            <span>{t("navigation.back")}</span>
           </Link>
         </div>
       </>
     );
   }
 }
+
+export default withTranslation()(ResourceImportControlsParsed);

@@ -1,16 +1,19 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceImportResultsFailed extends PureComponent {
+class ResourceImportResultsFailed extends PureComponent {
   static displayName = "ResourceImport.Results.Failed";
 
   static propTypes = {
-    resourceImportRow: PropTypes.object.isRequired
+    resourceImportRow: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   render() {
     const resourceImportRow = this.props.resourceImportRow;
+    const t = this.props.t;
 
     return (
       <>
@@ -20,9 +23,13 @@ export default class ResourceImportResultsFailed extends PureComponent {
           className="results-header__icon"
         />
         <span>
-          {`Row #${resourceImportRow.lineNumber} failed with errors.`}
+          {t("backend.forms.resource_import.row_failed", {
+            number: resourceImportRow.lineNumber
+          })}
         </span>
       </>
     );
   }
 }
+
+export default withTranslation()(ResourceImportResultsFailed);

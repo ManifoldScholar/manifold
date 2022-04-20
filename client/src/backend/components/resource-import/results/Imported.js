@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
+import { Trans } from "react-i18next";
 
 export default class ResourceImportResultsImported extends PureComponent {
   static displayName = "ResourceImport.Results.Imported";
@@ -15,8 +16,6 @@ export default class ResourceImportResultsImported extends PureComponent {
     const resourceImportRow = this.props.resourceImportRow;
     if (!resourceImportRow) return null;
 
-    const verb = resourceImportRow.isUpdate ? "updated" : "created";
-
     return (
       <>
         <IconComposer
@@ -25,11 +24,43 @@ export default class ResourceImportResultsImported extends PureComponent {
           className="results-header__icon"
         />
         <span>
-          {`Row #${resourceImportRow.lineNumber} ${verb} `}
-          <Link to={lh.link("backendResource", resourceImportRow.resourceId)}>
-            {resourceImportRow.resourceTitle}
-          </Link>
-          .
+          {resourceImportRow.isUpdate ? (
+            <Trans
+              i18nKey="backend.forms.resource_import.row_updated"
+              components={{
+                resourceLink: (
+                  <Link
+                    to={lh.link(
+                      "backendResource",
+                      resourceImportRow.resourceId
+                    )}
+                  />
+                )
+              }}
+              values={{
+                resourceTitle: resourceImportRow.resourceTitle,
+                number: resourceImportRow.lineNumber
+              }}
+            />
+          ) : (
+            <Trans
+              i18nKey="backend.forms.resource_import.row_created"
+              components={{
+                resourceLink: (
+                  <Link
+                    to={lh.link(
+                      "backendResource",
+                      resourceImportRow.resourceId
+                    )}
+                  />
+                )
+              }}
+              values={{
+                resourceTitle: resourceImportRow.resourceTitle,
+                number: resourceImportRow.lineNumber
+              }}
+            />
+          )}
         </span>
       </>
     );

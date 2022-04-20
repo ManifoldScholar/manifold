@@ -1,16 +1,19 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceImportResultsSkipped extends PureComponent {
+class ResourceImportResultsSkipped extends PureComponent {
   static displayName = "ResourceImport.Results.Skipped";
 
   static propTypes = {
-    resourceImportRow: PropTypes.object.isRequired
+    resourceImportRow: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   render() {
     const resourceImportRow = this.props.resourceImportRow;
+    const t = this.props.t;
     if (!resourceImportRow) return null;
 
     return (
@@ -21,9 +24,13 @@ export default class ResourceImportResultsSkipped extends PureComponent {
           className="results-header__icon"
         />
         <span>
-          {`Row #${resourceImportRow.lineNumber} was skipped as marked.`}
+          {t("backend.forms.resource_import.row_skipped", {
+            number: resourceImportRow.lineNumber
+          })}
         </span>
       </>
     );
   }
 }
+
+export default withTranslation()(ResourceImportResultsSkipped);

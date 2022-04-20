@@ -2,26 +2,27 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
 import SectionLabel from "global/components/form/SectionLabel";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceImportControlsImporting extends PureComponent {
+class ResourceImportControlsImporting extends PureComponent {
   static displayName = "ResourceImport.Controls.Importing";
 
   static propTypes = {
     resourceImport: PropTypes.object.isRequired,
-    refreshResults: PropTypes.func
+    refreshResults: PropTypes.func,
+    t: PropTypes.func
   };
 
   render() {
     const resourceImport = this.props.resourceImport;
     if (!resourceImport) return null;
+    const t = this.props.t;
 
     return (
       <>
-        <SectionLabel label="Step 4. Import Resources" />
+        <SectionLabel label={t("backend.forms.resource_import.step_four")} />
         <p className="instructional-copy">
-          The import is in progress. Each resource is updated in the background.
-          This list below will refresh every 5 seconds, or you can press the
-          refresh button to manually update the results.
+          {t("backend.forms.resource_import.import_in_progress")}
         </p>
 
         <div
@@ -40,10 +41,12 @@ export default class ResourceImportControlsImporting extends PureComponent {
               size="default"
               className="button-icon-secondary__icon"
             />
-            <span>Refresh Results</span>
+            <span>{t("backend.forms.resource_import.refresh_results")}</span>
           </button>
         </div>
       </>
     );
   }
 }
+
+export default withTranslation()(ResourceImportControlsImporting);
