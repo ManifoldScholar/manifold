@@ -24,7 +24,7 @@ function Info({ resource, detailUrl, itemHeadingLevel = 4 }) {
           <Styled.ArrowIcon icon="arrowRight16" size={20} />
         </Styled.ArrowWrapper>
       </div>
-      <TagList resource={resource} isCard />
+      <TagList resource={resource} isCard disabledLinks />
     </Styled.InfoLink>
   );
 }
