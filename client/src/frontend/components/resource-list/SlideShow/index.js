@@ -190,18 +190,16 @@ class ResourceSlideshow extends PureComponent {
     return (
       <CSSTransition
         key={position}
-        classNames={`slide-${this.state.slideDirection}`}
+        classNames={this.state.slideDirection}
         timeout={{ enter: 500, exit: 500 }}
       >
-        <div>
-          <Styled.Slide>
-            {this.isLoaded(position) ? (
-              this.getFigureByType(collectionResource)
-            ) : (
-              <ResourceSlide.SlideLoading />
-            )}
-          </Styled.Slide>
-        </div>
+        <Styled.Slide>
+          {this.isLoaded(position) ? (
+            this.getFigureByType(collectionResource)
+          ) : (
+            <ResourceSlide.SlideLoading />
+          )}
+        </Styled.Slide>
       </CSSTransition>
     );
   }

@@ -4,7 +4,6 @@ import loginPage from "./loginPage";
 import page from "./page";
 import project from "./project";
 import resource from "./resource";
-import resourceCollection from "./resourceCollection";
 import subscriptions from "./subscriptions";
 import text from "./text";
 
@@ -13,7 +12,6 @@ export default `
   ${layout}
   ${page}
   ${project}
-  ${resourceCollection}
   ${text}
   ${subscriptions}
   ${resource}

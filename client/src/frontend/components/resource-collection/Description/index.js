@@ -6,20 +6,26 @@ import * as Styled from "./styles";
 export default function Description({ date, description }) {
   const { t } = useTranslation();
 
+  if (!date && !description) return null;
+
   return (
     <Styled.Wrapper>
-      <Styled.DateWrapper>
-        <FormattedDate
-          prefix={t("dates.collection_created")}
-          format="MMMM yyyy"
-          date={date}
+      {date && (
+        <Styled.DateWrapper>
+          <FormattedDate
+            prefix={t("dates.collection_created")}
+            format="MMMM yyyy"
+            date={date}
+          />
+        </Styled.DateWrapper>
+      )}
+      {description && (
+        <Styled.Description
+          dangerouslySetInnerHTML={{
+            __html: description
+          }}
         />
-      </Styled.DateWrapper>
-      <Styled.Description
-        dangerouslySetInnerHTML={{
-          __html: description
-        }}
-      />
+      )}
     </Styled.Wrapper>
   );
 }

@@ -74,7 +74,7 @@ export const Text = styled.span`
 export const Icon = styled(IconComposer)`
   position: relative;
   top: -1px;
-  margin-left: 7px;
+  margin-inline-start: 7px;
 
-  ${respond(`margin-left: 8px;`, 40)}
+  ${respond(`margin-inline-start: 8px;`, 40)}
 `;
