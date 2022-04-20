@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import FormattedDate from "global/components/FormattedDate";
 import ResourceList from "frontend/components/resource-list";
+import ResourceCollection from "frontend/components/resource-collection";
 import { useListFilters } from "hooks";
 import EntityCollection from "../../EntityCollection";
 import SlideshowSection from "./SlideshowSection";
@@ -42,10 +43,9 @@ function ProjectResourceCollectionDetail({
       icon="resourceCollection64"
       collectingProps={{ collectable: resourceCollection }}
       DescriptionComponent={props => (
-        <FormattedDate
-          prefix={t("dates.collection_created")}
-          format="MMMM yyyy"
+        <ResourceCollection.Description
           date={resourceCollection.attributes.createdAt}
+          description={resourceCollection.attributes.descriptionFormatted}
           {...props}
         />
       )}
