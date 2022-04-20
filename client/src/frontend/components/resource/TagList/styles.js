@@ -35,6 +35,7 @@ export const Tag = styled.li`
 export const Link = styled(LinkComponent)`
   text-decoration: none;
   transition: color ${defaultTransitionProps};
+  color: var(--color);
 
   &.disabled {
     pointer-events: none;
