@@ -1,33 +1,40 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceFormKindVideo extends PureComponent {
+class ResourceFormKindVideo extends PureComponent {
   static displayName = "Resource.Form.Kind.Video";
 
   static propTypes = {
     sourceModel: PropTypes.object,
-    getModelValue: PropTypes.func
+    getModelValue: PropTypes.func,
+    t: PropTypes.func
   };
 
   renderExternalVideoForm() {
     return (
       <div className="form-section form-section--primary">
         <Form.TextInput
-          label="Video ID"
+          label={this.props.t("backend.forms.resource.video_id")}
           name="attributes[externalId]"
-          placeholder="Video ID"
-          instructions={
-            'The video\'s ID is located after "?v=" in YouTube URLs, and after "vimeo.com/" in Vimeo URLs.'
-          }
+          placeholder={this.props.t(
+            "backend.forms.resource.video_id_placeholder"
+          )}
+          instructions={this.props.t(
+            "backend.forms.resource.video_id_instructions"
+          )}
           {...this.props}
         />
         <Form.Select
-          label="External Video Type"
+          label={this.props.t("backend.forms.resource.external_video_type")}
           name="attributes[externalType]"
           selected={this.props.sourceModel.attributes.externalType}
           options={[
-            { label: "Select a video source...", value: "" },
+            {
+              label: this.props.t("backend.forms.resource.select_source"),
+              value: ""
+            },
             { label: "Youtube", value: "youtube" },
             { label: "Vimeo", value: "vimeo" }
           ]}
@@ -41,7 +48,7 @@ export default class ResourceFormKindVideo extends PureComponent {
     return (
       <Form.Upload
         layout="square"
-        label="Video File"
+        label={this.props.t("backend.forms.resource.video_file")}
         accepts="video"
         readFrom="attributes[attachmentFileName]"
         name="attributes[attachment]"
@@ -55,7 +62,7 @@ export default class ResourceFormKindVideo extends PureComponent {
     return (
       <div className="form-section form-section--primary">
         <Form.Switch
-          label="Is this an externally linked video?"
+          label={this.props.t("backend.forms.resource.video_source")}
           name="attributes[subKind]"
           customValues={{
             true: "external_video",
@@ -70,3 +77,5 @@ export default class ResourceFormKindVideo extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ResourceFormKindVideo);

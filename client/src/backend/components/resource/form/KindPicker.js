@@ -5,6 +5,7 @@ import classNames from "classnames";
 import IconComputed from "global/components/icon-computed";
 import setter from "global/components/form/setter";
 import IconComposer from "global/components/utility/IconComposer";
+import { withTranslation } from "react-i18next";
 
 class KindPicker extends PureComponent {
   static displayName = "Resource.KindPicker";
@@ -12,7 +13,8 @@ class KindPicker extends PureComponent {
   static propTypes = {
     getModelValue: PropTypes.func,
     includeButtons: PropTypes.bool,
-    set: PropTypes.func
+    set: PropTypes.func,
+    t: PropTypes.func
   };
 
   get selectClasses() {
@@ -29,7 +31,9 @@ class KindPicker extends PureComponent {
   renderSelect(kindList, id) {
     return (
       <>
-        <label htmlFor={id}>Kind</label>
+        <label htmlFor={id}>
+          {this.props.t("backend.forms.resource.kind")}
+        </label>
         <div className={this.selectClasses}>
           <div className="form-select">
             <IconComposer
@@ -46,10 +50,13 @@ class KindPicker extends PureComponent {
             >
               {kindList.map(kind => {
                 const safeKind = kind.toLowerCase();
+                const translatedKind = this.props.t(
+                  `backend.forms.resource.${safeKind}`
+                );
 
                 return (
                   <option key={safeKind} value={safeKind} id={safeKind}>
-                    {kind}
+                    {translatedKind}
                   </option>
                 );
               })}
@@ -65,11 +72,14 @@ class KindPicker extends PureComponent {
     return (
       <div
         role="group"
-        aria-label="Resource Kind"
+        aria-label={this.props.t("backend.forms.resource.resource_kind")}
         className="resource-kind-picker__list"
       >
         {kindList.map(kind => {
           const safeKind = kind.toLowerCase();
+          const translatedKind = this.props.t(
+            `backend.forms.resource.${safeKind}`
+          );
           const kindValue = this.props.getModelValue("attributes[kind]");
           const isActive = safeKind === kindValue;
           const itemClass = classNames({
@@ -92,7 +102,9 @@ class KindPicker extends PureComponent {
                 onChange={() => this.props.set(safeKind)}
                 className="resource-kind-picker__input"
               />
-              <span className="resource-kind-picker__label">{kind}</span>
+              <span className="resource-kind-picker__label">
+                {translatedKind}
+              </span>
               <IconComputed.Resource
                 size="default"
                 icon={safeKind}
@@ -136,4 +148,4 @@ class KindPicker extends PureComponent {
   }
 }
 
-export default setter(KindPicker);
+export default withTranslation()(setter(KindPicker));

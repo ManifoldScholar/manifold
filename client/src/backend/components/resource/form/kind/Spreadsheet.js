@@ -1,17 +1,20 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceFormKindSpreadsheet extends PureComponent {
+class ResourceFormKindSpreadsheet extends PureComponent {
   static displayName = "Resource.Form.Kind.Spreadsheet";
 
-  static propTypes = {};
+  static propTypes = {
+    t: PropTypes.func
+  };
 
   render() {
     return (
       <Form.Upload
         layout="square"
-        label="Spreadsheet File"
+        label={this.props.t("backend.forms.resource.spreadsheet_file")}
         accepts="spreadsheet"
         readFrom="attributes[attachmentFileName]"
         name="attributes[attachment]"
@@ -21,3 +24,5 @@ export default class ResourceFormKindSpreadsheet extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ResourceFormKindSpreadsheet);
