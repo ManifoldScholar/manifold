@@ -1,12 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/resource/Card matches the snapshot 1`] = `
-<article
-  className="resource-card"
->
-  <div
-    className="resource-card__preview"
-  >
+<Card>
+  <Preview>
     <ResourceCard.Preview
       detailUrl="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resource/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
       resource={
@@ -135,7 +131,7 @@ exports[`frontend/components/resource/Card matches the snapshot 1`] = `
         }
       }
     />
-  </div>
+  </Preview>
   <ResourceCard.Info
     detailUrl="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resource/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
     itemHeadingLevel={4}
@@ -265,5 +261,5 @@ exports[`frontend/components/resource/Card matches the snapshot 1`] = `
       }
     }
   />
-</article>
+</Card>
 `;

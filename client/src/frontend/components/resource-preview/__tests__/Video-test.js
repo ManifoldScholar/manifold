@@ -1,4 +1,4 @@
-import Video from "../Video";
+import Video from "../Types/Video";
 
 describe("frontend/components/resource-preview/Video", () => {
   def("resource", () => factory("resource"));

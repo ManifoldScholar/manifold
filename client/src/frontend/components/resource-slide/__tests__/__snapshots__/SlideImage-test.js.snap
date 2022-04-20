@@ -129,8 +129,7 @@ exports[`frontend/components/resource-slide/SlideImage matches the snapshot 1`] 
       }
     }
   />
-  <img
-    className="figure-image"
+  <Image
     src={null}
   />
 </Fragment>

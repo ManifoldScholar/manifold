@@ -3,9 +3,7 @@
 exports[`frontend/components/resource/Hero matches the snapshot 1`] = `
 <Container>
   <Hero>
-    <div
-      className="resource-slide-figure"
-    >
+    <Resource>
       <ResourceList.Slide.Image
         enableZoom={true}
         resource={
@@ -134,7 +132,7 @@ exports[`frontend/components/resource/Hero matches the snapshot 1`] = `
           }
         }
       />
-    </div>
+    </Resource>
   </Hero>
 </Container>
 `;
