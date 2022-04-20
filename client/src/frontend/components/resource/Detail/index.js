@@ -73,7 +73,9 @@ class ResourceDetail extends Component {
             <VariantList resource={resource} isMobile />
           </Styled.VariantsMobile>
           <Styled.Content>
-            <div dangerouslySetInnerHTML={{ __html: attr.captionFormatted }} />
+            <Styled.Caption
+              dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
+            />
 
             <Styled.DescriptionHeader>
               {t("pages.subheaders.full_description")}
