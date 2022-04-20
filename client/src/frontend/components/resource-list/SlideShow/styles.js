@@ -35,7 +35,7 @@ export const Pagination = styled.div`
   ${respond(
     `  position: static;
     width: 160px;
-    padding-top: 2px;
+    padding-block-start: 2px;
     text-align: right;
     background: transparent;`,
     60
@@ -57,9 +57,6 @@ export const Ordinal = styled.span`
 `;
 
 export const SlidesWrapper = styled.div`
-  --focus-color: var(--color-interaction-light);
-  --hover-color: var(--color-interaction-light);
-
   position: relative;
   display: flex;
   width: 100%;
@@ -69,38 +66,6 @@ export const SlidesWrapper = styled.div`
   overflow: hidden;
   color: var(--color-neutral-text-extra-light);
   background-color: var(--color-base-neutral-black);
-
-  /* Transition classes */
-  .slide-left-enter figure {
-    transform: translate3d(100%, 0, 0);
-  }
-
-  .slide-left-enter-active figure {
-    transition: transform 0.4s var(--transition-timing-function);
-    transform: translate3d(0, 0, 0);
-  }
-
-  .slide-left-exit figure {
-    transform: translate3d(0, 0, 0);
-  }
-
-  .slide-left-exit-active figure {
-    transition: transform 0.4s var(--transition-timing-function);
-    transform: translate3d(-100%, 0, 0);
-  }
-
-  .slide-right-enter figure {
-    transform: translate3d(-100%, 0, 0);
-  }
-
-  .slide-right-enter-active figure {
-    transition: transform 0.4s var(--transition-timing-function);
-    transform: translate3d(0, 0, 0);
-  }
-
-  .slide-right-exit figure {
-    transform: translate3d(0, 0, 0);
-  }
 `;
 
 export const Slide = styled.figure`
@@ -111,4 +76,40 @@ export const Slide = styled.figure`
   height: 100%;
   overflow: hidden;
   opacity: 1;
+
+  &.left-enter {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  &.left-enter-active {
+    transition: transform 0.4s var(--transition-timing-function);
+    transform: translate3d(0, 0, 0);
+  }
+
+  &.left-exit {
+    transform: translate3d(0, 0, 0);
+  }
+
+  &.left-exit-active {
+    transition: transform 0.4s var(--transition-timing-function);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  &.right-enter {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  &.right-enter-active {
+    transition: transform 0.4s var(--transition-timing-function);
+    transform: translate3d(0, 0, 0);
+  }
+
+  &.right-exit {
+    transform: translate3d(0, 0, 0);
+  }
+
+  &.right-exit-active {
+    transition: transform 0.4s var(--transition-timing-function);
+    transform: translate3d(100%, 0, 0);
+  }
 `;

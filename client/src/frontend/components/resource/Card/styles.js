@@ -35,9 +35,9 @@ export const InfoLink = styled.a`
 
   ${respond(`width: calc(100% - 155px);`, 40)}
 
-  ${respond(`width: calc(100% - 135px);`, 40)}
+  ${respond(`width: calc(100% - 135px);`, 75)}
 
-  ${respond(`width: calc(100% - 155px);`, 40)}
+  ${respond(`width: calc(100% - 155px);`, 85)}
 
   &--hover,
   &:focus-visible {
@@ -49,7 +49,7 @@ export const InfoLink = styled.a`
 export const Title = styled.h4`
   font-family: var(--font-family-heading);
   margin: 0;
-  margin-bottom: 6px;
+  margin-block-end: 6px;
   font-size: 16px;
   font-weight: var(--font-weight-regular);
   hyphens: none;
@@ -71,7 +71,7 @@ export const ArrowWrapper = styled.div`
   display: block;
   width: 26px;
   height: 26px;
-  margin-top: -13px;
+  margin-block-start: -13px;
   font-size: 12px;
   text-align: center;
   text-decoration: none;
@@ -84,7 +84,7 @@ export const ArrowWrapper = styled.div`
     `right: -17.5px;
     width: 35px;
     height: 35px;
-    margin-top: -17.5px;
+    margin-block-start: -17.5px;
     font-size: 15px;`,
     40
   )}

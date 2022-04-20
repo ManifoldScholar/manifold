@@ -9,14 +9,14 @@ const Button = styled.button`
   top: 50%;
   display: inline-flex;
   align-items: center;
-  margin-top: -9px;
+  margin-block-start: -9px;
   font-size: 13px;
   letter-spacing: 0.05em;
 
   ${respond(
     `
     position: static;
-    margin-top: 13px;`,
+    margin-block-start: 13px;`,
     60
   )}
 
@@ -37,12 +37,11 @@ export const Next = styled(Button)`
   display: flex;
   flex-direction: row-reverse;
   right: 20px;
-  float: right;
 
   ${respond(
     `
-    margin-right: -4px;
-    margin-left: 11px;`,
+    margin-inline-end: -4px;
+    margin-inline-start: 11px;`,
     60
   )}
 `;
@@ -58,11 +57,11 @@ const IconSm = styled(IconComposer)`
 `;
 
 export const NextIconSm = styled(IconSm)`
-  margin-left: 8px;
+  margin-inline-start: 8px;
 `;
 
 export const PrevIconSm = styled(IconSm)`
-  margin-right: 8px;
+  margin-inline-end: 8px;
 `;
 
 export const Text = styled.span`

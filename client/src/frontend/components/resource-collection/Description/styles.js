@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { respond, subtitlePrimary } from "theme/styles/mixins";
+import { subtitlePrimary } from "theme/styles/mixins";
 
 export const DateWrapper = styled.span`
   time {
@@ -15,7 +15,7 @@ export const DateWrapper = styled.span`
 `;
 
 export const Wrapper = styled.div`
-  margin-block-start: -25px;
+  margin-block-start: -30px;
 `;
 
 export const Description = styled.div`

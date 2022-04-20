@@ -83,7 +83,7 @@ export const IconWrapper = styled.div`
   align-items: center;
   justify-content: center;
   max-width: 100px;
-  padding-right: 16px;
+  padding-inline-end: 16px;
   margin: 0;
   font-size: 12px;
   font-family: var(--font-family-heading);
