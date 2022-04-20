@@ -1,11 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/resource-preview/Image matches the snapshot 1`] = `
-<div
-  className="resource-preview resource-preview-image"
->
-  <img
+<Preview>
+  <Image
     src="original-image.mock"
   />
-</div>
+</Preview>
 `;

@@ -1,10 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/resource-slide/Caption matches the snapshot 1`] = `
-<ResourceListSlideCaption
+<Components.Frontend.ResourceSlideCaption
   collectionId={1}
-  hideDetailUrl={false}
-  hideDownload={false}
   i18n={
     Object {
       "language": "en",

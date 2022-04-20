@@ -1,21 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/resource-slide/LoadingCaption matches the snapshot 1`] = `
-<div
-  className="resource-slideshow__caption"
->
+<Caption>
   <header>
-    <p
-      className="resource-slideshow__title"
+    <Title
+      as="p"
     />
   </header>
-  <div
-    className="resource-slideshow__description"
-  >
+  <Description>
     <p />
-  </div>
-  <div
-    className="resource-slideshow__utility"
-  />
-</div>
+  </Description>
+  <Utility />
+</Caption>
 `;

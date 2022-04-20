@@ -1,18 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/resource/Meta matches the snapshot 1`] = `
-<section
-  className="resource-meta"
->
-  <figure
+<Meta>
+  <ResourceIcon
     aria-hidden="true"
-    className="resource-type"
   >
     <IconComputed.Resource
       icon="image"
       size={48}
     />
-  </figure>
+  </ResourceIcon>
   <withI18nextTranslation(Meta.List)
     map={
       Array [
@@ -223,5 +220,5 @@ exports[`frontend/components/resource/Meta matches the snapshot 1`] = `
       }
     }
   />
-</section>
+</Meta>
 `;

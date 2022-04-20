@@ -1,4 +1,4 @@
-import LoadingCaption from "../LoadingCaption";
+import LoadingCaption from "../Caption/LoadingCaption";
 
 describe("frontend/components/resource-slide/LoadingCaption", () => {
   def("root", () => <LoadingCaption />);

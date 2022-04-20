@@ -1,40 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontend/components/resource-slide/Loading matches the snapshot 1`] = `
-<figure>
-  <div
-    className="figure-default"
-    style={
-      Object {
-        "backgroundImage": "url(/static/images/resource-splash.png)",
-      }
+<Default
+  style={
+    Object {
+      "backgroundImage": "url(/static/images/resource-splash.png)",
     }
-  >
-    <div
-      className="resource-info"
-    >
-      <IconComposer
-        className="resource-slide-figure__resource-icon"
-        fill="currentColor"
-        icon="resourceFile64"
-        size={120}
-        svgProps={
-          Object {
-            "aria-hidden": true,
-          }
+  }
+>
+  <Info>
+    <Icon
+      fill="currentColor"
+      icon="resourceFile64"
+      size={120}
+      svgProps={
+        Object {
+          "aria-hidden": true,
         }
-      />
-      <span
-        className="resource-type"
-      >
-        common.loading
-      </span>
-      <span
-        className="resource-date"
-      >
-        common.loading
-      </span>
-    </div>
-  </div>
-</figure>
+      }
+    />
+    <Kind>
+      common.loading
+    </Kind>
+    <Date>
+      common.loading
+    </Date>
+  </Info>
+</Default>
 `;

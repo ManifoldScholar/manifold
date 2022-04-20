@@ -2,8 +2,7 @@
 
 exports[`frontend/components/resource-slide/SlideDefault matches the snapshot 1`] = `
 <Fragment>
-  <div
-    className="figure-default"
+  <Default
     style={
       Object {
         "backgroundImage": "url(/static/images/resource-splash.png)",
@@ -137,6 +136,6 @@ exports[`frontend/components/resource-slide/SlideDefault matches the snapshot 1`
         }
       }
     />
-  </div>
+  </Default>
 </Fragment>
 `;

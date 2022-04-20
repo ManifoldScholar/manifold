@@ -1,4 +1,4 @@
-import Image from "../Image";
+import Image from "../Types/Image";
 
 describe("frontend/components/resource-preview/Image", () => {
   def("resource", () => factory("resource"));
