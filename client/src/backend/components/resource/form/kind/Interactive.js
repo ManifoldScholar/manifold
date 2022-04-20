@@ -1,36 +1,46 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceFormKindInteractive extends PureComponent {
+class ResourceFormKindInteractive extends PureComponent {
   static displayName = "Resource.Form.Kind.Interactive";
 
   static propTypes = {
-    getModelValue: PropTypes.func
+    getModelValue: PropTypes.func,
+    t: PropTypes.func
   };
 
   render() {
     return (
       <div className="form-section form-section--primary">
         <Form.TextInput
-          label="Minimum Width"
-          placeholder="The minimum display width"
+          label={this.props.t("backend.forms.resource.min_width")}
+          placeholder={this.props.t(
+            "backend.forms.resource.min_width_placeholder"
+          )}
           name="attributes[minimumWidth]"
           {...this.props}
         />
         <Form.TextInput
-          label="Minimum Height"
-          placeholder="The minimum display height"
+          label={this.props.t("backend.forms.resource.min_height")}
+          placeholder={this.props.t(
+            "backend.forms.resource.min_height_placeholder"
+          )}
           name="attributes[minimumHeight]"
           {...this.props}
         />
         <Form.TextInput
-          label="iFrame URL"
+          label={this.props.t("backend.forms.resource.iframe_url")}
           name="attributes[externalUrl]"
-          placeholder="Enter iFrame URL"
+          placeholder={this.props.t(
+            "backend.forms.resource.iframe_url_placeholder"
+          )}
           {...this.props}
         />
       </div>
     );
   }
 }
+
+export default withTranslation()(ResourceFormKindInteractive);

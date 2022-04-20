@@ -1,17 +1,20 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceFormKindDocument extends PureComponent {
+class ResourceFormKindDocument extends PureComponent {
   static displayName = "Resource.Form.Kind.Document";
 
-  static propTypes = {};
+  static propTypes = {
+    t: PropTypes.func
+  };
 
   render() {
     return (
       <Form.Upload
         layout="square"
-        label="Document File"
+        label={this.props.t("backend.forms.resource.document_file")}
         accepts="document"
         readFrom="attributes[attachmentFileName]"
         name="attributes[attachment]"
@@ -21,3 +24,5 @@ export default class ResourceFormKindDocument extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ResourceFormKindDocument);
