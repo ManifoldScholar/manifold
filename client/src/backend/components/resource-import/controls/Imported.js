@@ -4,14 +4,16 @@ import classNames from "classnames";
 import { Link } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
 import SectionLabel from "global/components/form/SectionLabel";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceImportControlsImported extends PureComponent {
+class ResourceImportControlsImported extends PureComponent {
   static displayName = "ResourceImport.Controls.Imported";
 
   static propTypes = {
     resourceImport: PropTypes.object,
     resetImport: PropTypes.func,
-    finishUrl: PropTypes.string
+    finishUrl: PropTypes.string,
+    t: PropTypes.func
   };
 
   get buttonClasses() {
@@ -24,15 +26,13 @@ export default class ResourceImportControlsImported extends PureComponent {
   render() {
     const resourceImport = this.props.resourceImport;
     if (!resourceImport) return null;
+    const t = this.props.t;
 
     return (
       <>
-        <SectionLabel label="Step 4. Import Resources" />
+        <SectionLabel label={t("backend.forms.resource_import.step_four")} />
         <p className="instructional-copy">
-          This import is complete. You may go back, edit the mapping, and rerun
-          the import. Or, if the source is a google sheet, you can reset the
-          import, which will allow you to make changes to mapping or source
-          data, and then rerun the import.
+          {t("backend.forms.resource_import.import_complete")}
         </p>
 
         <div
@@ -48,7 +48,7 @@ export default class ResourceImportControlsImported extends PureComponent {
               size="default"
               className="button-icon-secondary__icon"
             />
-            <span>Back to Resources</span>
+            <span>{t("backend.forms.resource_import.back_to_resources")}</span>
           </Link>
           <button
             onClick={this.props.resetImport}
@@ -62,10 +62,12 @@ export default class ResourceImportControlsImported extends PureComponent {
               size="default"
               className="button-icon-secondary__icon"
             />
-            <span>Reset Import</span>
+            <span>{t("backend.forms.resource_import.reset_import")}</span>
           </button>
         </div>
       </>
     );
   }
 }
+
+export default withTranslation()(ResourceImportControlsImported);
