@@ -3,6 +3,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import { Link } from "react-router-dom";
 import { respond, utilityPrimary, buttonUnstyled } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
+import Collapse from "global/components/Collapse";
 
 const slideCopyFocus = "570px";
 
@@ -13,8 +14,8 @@ export const Caption = styled.div`
 
 export const Title = styled.h3`
   font-family: var(--font-family-heading);
-  margin-top: 0;
-  margin-bottom: 0.2em;
+  margin-block-start: 0;
+  margin-block-end: 0.2em;
   font-size: 20px;
   font-weight: var(--font-weight-regular);
   hyphens: none;
@@ -22,7 +23,7 @@ export const Title = styled.h3`
 
   ${respond(
     `
-    margin-bottom: 0.364em;
+    margin-block-end: 0.364em;
     font-size: 22px;
     color: var(--color-base-neutral05);`,
     60
@@ -33,25 +34,37 @@ export const Title = styled.h3`
   }
 `;
 
+export const DescriptionWrapper = styled.div`
+  position: relative;
+  min-height: 48px;
+`;
+
 export const Description = styled("div", transientOptions)`
   font-family: var(--font-family-copy);
   max-width: ${slideCopyFocus};
-  height: 48px;
-  padding-bottom: 5em;
+  padding-block-end: 5em;
   overflow: hidden;
   font-size: 15px;
 
-  ${respond(`padding-bottom: 3.5em;`, 40)}
+  ${respond(`padding-block-end: 3.5em;`, 40)}
 
   p + p {
-    margin-top: 1em;
+    margin-block-start: 1em;
   }
 
   a {
     text-decoration: underline;
   }
+`;
 
-  ${({ $expanded }) => $expanded && `height: auto;`}
+export const DescriptionStatic = styled(Description, transientOptions)`
+  height: 48px;
+  position: absolute;
+  top: 0;
+  opacity: 100%;
+  transition: opacity 250ms linear;
+
+  ${({ $expanded }) => $expanded && `opacity: 0`}
 `;
 
 export const Utility = styled("div", transientOptions)`
@@ -100,40 +113,24 @@ const linkStyles = `
   ${utilityPrimary}
   ${buttonUnstyled}
   display: block;
-  margin-top: 7px;
+  margin-block-start: 7px;
   font-size: 13px;
   text-decoration: none;
 
   ${respond(
-    `display: inline;
-  margin-top: 0;
-  margin-right: 22px;`,
+    `
+    display: inline;
+    margin-block-start: 0;
+    margin-inline-end: 22px;`,
     40
   )}
 `;
 
-export const MoreLink = styled("button", transientOptions)`
+export const MoreLink = styled(Collapse.Toggle, transientOptions)`
   ${linkStyles}
+  display: block;
 
-  display: none;
-
-  ${({ $expandable }) =>
-    $expandable &&
-    `
-    display: block;
-
-    ${respond(`display: inline;`, 40)}
-    `}
-`;
-
-export const OpenText = styled("span", transientOptions)`
-  ${({ $expanded }) => $expanded && `display: none;`}
-`;
-
-export const CloseText = styled("span", transientOptions)`
-  display: none;
-
-  ${({ $expanded }) => $expanded && `display: inline;`}
+  ${respond(`display: inline;`, 40)}
 `;
 
 export const DownloadLink = styled.a`
