@@ -3,7 +3,7 @@
 exports[`backend/components/project-collection/SortBy matches the snapshot 1`] = `
 <Wrapper>
   <Instructions>
-    Click and drag projects to rearrange them.
+    backend.forms.project_collection.order_manually_instructions
   </Instructions>
   <div
     className="form-secondary"
@@ -14,7 +14,7 @@ exports[`backend/components/project-collection/SortBy matches the snapshot 1`] =
       <div
         className="form-input-heading"
       >
-        Order Manually
+        backend.forms.project_collection.order_manually
       </div>
       <div
         className="toggle-indicator"
@@ -29,7 +29,7 @@ exports[`backend/components/project-collection/SortBy matches the snapshot 1`] =
           <span
             className="screen-reader-text"
           >
-            Order collection manually
+            backend.forms.project_collection.order_collection_manually
           </span>
         </div>
       </div>

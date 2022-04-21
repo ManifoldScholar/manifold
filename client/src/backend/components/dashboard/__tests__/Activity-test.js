@@ -16,7 +16,7 @@ describe("backend/components/dashboard/Activity", () => {
 
     it("renders google stats", () => {
       expect(
-        shallow($root).containsAnyMatchingElements($googleStatNodes)
+        mount($withApp($root)).containsAnyMatchingElements($googleStatNodes)
       ).toEqual(true);
     });
   });
@@ -40,8 +40,8 @@ describe("backend/components/dashboard/Activity", () => {
 
   describe("when no stats are present", () => {
     def("stats", () => null);
-    it("returns null", () => {
-      expect(shallow($root).html()).toBe(null);
+    it("returns nothing", () => {
+      expect(shallow($root).html()).toBe("");
     });
   });
 });

@@ -7,7 +7,13 @@ i18n.use(initReactI18next).init({
     en: {
       translation: {
         date_fns: null,
-        forms: { upload: { image_preview: "<0></0><br/><1></1>" } }
+        forms: { upload: { image_preview: "<0></0><br/><1></1>" } },
+        backend: {
+          dashboard: {
+            reader_stats: "Readers this week",
+            stats_change: "Change from last week"
+          }
+        }
       }
     }
   }

@@ -11,13 +11,13 @@ exports[`backend/components/project-collection/form/IconPicker matches the snaps
       class="form-input-heading"
       for="icon-picker-1"
     >
-      Collection Icon:
+      backend.forms.project_collection.collection_icon
     </label>
     <div>
       <span
         class="screen-reader-text"
       >
-        Select an icon for the project collection.
+        backend.forms.project_collection.collection_icon_instructions
       </span>
       <div
         class="icon-picker__list"
@@ -30,7 +30,7 @@ exports[`backend/components/project-collection/form/IconPicker matches the snaps
           <span
             class="screen-reader-text"
           >
-            book-stack-vertical
+            backend.forms.project_collection.book_stack_icon
           </span>
           <input
             class="icon-picker__input"
@@ -59,7 +59,7 @@ exports[`backend/components/project-collection/form/IconPicker matches the snaps
           <span
             class="screen-reader-text"
           >
-            lamp
+            backend.forms.project_collection.lamp_icon
           </span>
           <input
             checked=""
@@ -88,7 +88,7 @@ exports[`backend/components/project-collection/form/IconPicker matches the snaps
           <span
             class="screen-reader-text"
           >
-            new-round
+            backend.forms.project_collection.new_icon
           </span>
           <input
             class="icon-picker__input"
@@ -116,7 +116,7 @@ exports[`backend/components/project-collection/form/IconPicker matches the snaps
           <span
             class="screen-reader-text"
           >
-            books-on-shelf
+            backend.forms.project_collection.book_shelf_icon
           </span>
           <input
             class="icon-picker__input"
@@ -145,7 +145,7 @@ exports[`backend/components/project-collection/form/IconPicker matches the snaps
           <span
             class="screen-reader-text"
           >
-            globe
+            backend.forms.project_collection.globe_icon
           </span>
           <input
             class="icon-picker__input"
@@ -173,7 +173,7 @@ exports[`backend/components/project-collection/form/IconPicker matches the snaps
           <span
             class="screen-reader-text"
           >
-            touch
+            backend.forms.project_collection.touch_icon
           </span>
           <input
             class="icon-picker__input"
@@ -201,7 +201,7 @@ exports[`backend/components/project-collection/form/IconPicker matches the snaps
           <span
             class="screen-reader-text"
           >
-            mug
+            backend.forms.project_collection.mug_icon
           </span>
           <input
             class="icon-picker__input"

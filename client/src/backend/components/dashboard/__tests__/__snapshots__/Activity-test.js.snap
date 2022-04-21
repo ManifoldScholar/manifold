@@ -27,7 +27,7 @@ exports[`backend/components/dashboard/Activity when all stats are present matche
       <span
         class="backend-activity-stats__list-text"
       >
-        backend.dashboard.reader_stats
+        Readers this week
       </span>
       <span
         class="backend-activity-stats__list-text--highlighted"
@@ -41,7 +41,7 @@ exports[`backend/components/dashboard/Activity when all stats are present matche
       <span
         class="backend-activity-stats__list-text"
       >
-        backend.dashboard.stats_change
+        Change from last week
       </span>
       <span
         class="backend-activity-stats__list-text--highlighted"

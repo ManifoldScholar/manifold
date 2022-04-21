@@ -9,7 +9,7 @@ Array [
       class="has-instructions"
       for="number-input-1"
     >
-      Number of Projects:
+      backend.forms.project_collection.number_projects
     </label>
     <input
       aria-describedby="number-input-error-1 number-input-instructions-1"
@@ -21,7 +21,7 @@ Array [
       class="instructions"
       id="number-input-instructions-1"
     >
-      Number of projects included in this Collection.
+      backend.forms.project_collection.number_projects_instructions
     </span>
   </div>,
   <div
@@ -34,7 +34,7 @@ Array [
       <span
         class="form-input-heading toggle above"
       >
-        Featured Projects:
+        backend.forms.project_collection.featured_projects
       </span>
       <input
         id="switch-input-1"
@@ -51,7 +51,7 @@ Array [
       <span
         class="instructions"
       >
-        Include only featured projects in this Collection.
+        backend.forms.project_collection.featured_projects_instructions
       </span>
     </label>
   </div>,
@@ -71,7 +71,7 @@ Array [
         for="1-picker-textbox"
         id="1-picker-label"
       >
-        Show projects with these subjects
+        backend.forms.project_collection.subjects
       </label>
       <div
         class="picker-input__input-wrapper"
@@ -89,7 +89,7 @@ Array [
             aria-labelledby="1-picker-label"
             class="text-input picker-input__text-input picker-input__text-input--padded-1x"
             id="1-picker-textbox"
-            placeholder="Select a Subject"
+            placeholder="backend.forms.project_collection.subjects_placeholder"
             type="text"
             value=""
           />
@@ -148,7 +148,7 @@ Array [
         for="1-picker-textbox"
         id="1-picker-label"
       >
-        Show projects with these tags
+        backend.forms.project_collection.tags
       </label>
       <div
         class="picker-input__input-wrapper"
@@ -166,7 +166,7 @@ Array [
             aria-labelledby="1-picker-label"
             class="text-input picker-input__text-input picker-input__text-input--padded-1x"
             id="1-picker-textbox"
-            placeholder="Enter Tags"
+            placeholder="backend.forms.project_collection.tags_placeholder"
             type="text"
             value=""
           />
