@@ -106,6 +106,12 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
         "resources": Object {
           "en": Object {
             "translation": Object {
+              "backend": Object {
+                "dashboard": Object {
+                  "reader_stats": "Readers this week",
+                  "stats_change": "Change from last week",
+                },
+              },
               "date_fns": null,
               "forms": Object {
                 "upload": Object {
@@ -130,6 +136,12 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
       "store": Object {
         "en": Object {
           "translation": Object {
+            "backend": Object {
+              "dashboard": Object {
+                "reader_stats": "Readers this week",
+                "stats_change": "Change from last week",
+              },
+            },
             "date_fns": null,
             "forms": Object {
               "upload": Object {

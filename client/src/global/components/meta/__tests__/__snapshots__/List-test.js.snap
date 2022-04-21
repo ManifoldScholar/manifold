@@ -56,6 +56,12 @@ exports[`Global.Meta.List component renders correctly when sorted by a map prop 
         "resources": Object {
           "en": Object {
             "translation": Object {
+              "backend": Object {
+                "dashboard": Object {
+                  "reader_stats": "Readers this week",
+                  "stats_change": "Change from last week",
+                },
+              },
               "date_fns": null,
               "forms": Object {
                 "upload": Object {
@@ -80,6 +86,12 @@ exports[`Global.Meta.List component renders correctly when sorted by a map prop 
       "store": Object {
         "en": Object {
           "translation": Object {
+            "backend": Object {
+              "dashboard": Object {
+                "reader_stats": "Readers this week",
+                "stats_change": "Change from last week",
+              },
+            },
             "date_fns": null,
             "forms": Object {
               "upload": Object {
@@ -168,6 +180,12 @@ exports[`Global.Meta.List component renders correctly when sorted by length 1`] 
         "resources": Object {
           "en": Object {
             "translation": Object {
+              "backend": Object {
+                "dashboard": Object {
+                  "reader_stats": "Readers this week",
+                  "stats_change": "Change from last week",
+                },
+              },
               "date_fns": null,
               "forms": Object {
                 "upload": Object {
@@ -192,6 +210,12 @@ exports[`Global.Meta.List component renders correctly when sorted by length 1`] 
       "store": Object {
         "en": Object {
           "translation": Object {
+            "backend": Object {
+              "dashboard": Object {
+                "reader_stats": "Readers this week",
+                "stats_change": "Change from last week",
+              },
+            },
             "date_fns": null,
             "forms": Object {
               "upload": Object {

@@ -705,6 +705,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                       "resources": Object {
                         "en": Object {
                           "translation": Object {
+                            "backend": Object {
+                              "dashboard": Object {
+                                "reader_stats": "Readers this week",
+                                "stats_change": "Change from last week",
+                              },
+                            },
                             "date_fns": null,
                             "forms": Object {
                               "upload": Object {
@@ -729,6 +735,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                     "store": Object {
                       "en": Object {
                         "translation": Object {
+                          "backend": Object {
+                            "dashboard": Object {
+                              "reader_stats": "Readers this week",
+                              "stats_change": "Change from last week",
+                            },
+                          },
                           "date_fns": null,
                           "forms": Object {
                             "upload": Object {
@@ -835,6 +847,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                         "resources": Object {
                           "en": Object {
                             "translation": Object {
+                              "backend": Object {
+                                "dashboard": Object {
+                                  "reader_stats": "Readers this week",
+                                  "stats_change": "Change from last week",
+                                },
+                              },
                               "date_fns": null,
                               "forms": Object {
                                 "upload": Object {
@@ -859,6 +877,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                       "store": Object {
                         "en": Object {
                           "translation": Object {
+                            "backend": Object {
+                              "dashboard": Object {
+                                "reader_stats": "Readers this week",
+                                "stats_change": "Change from last week",
+                              },
+                            },
                             "date_fns": null,
                             "forms": Object {
                               "upload": Object {
@@ -982,6 +1006,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                           "resources": Object {
                             "en": Object {
                               "translation": Object {
+                                "backend": Object {
+                                  "dashboard": Object {
+                                    "reader_stats": "Readers this week",
+                                    "stats_change": "Change from last week",
+                                  },
+                                },
                                 "date_fns": null,
                                 "forms": Object {
                                   "upload": Object {
@@ -1006,6 +1036,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                         "store": Object {
                           "en": Object {
                             "translation": Object {
+                              "backend": Object {
+                                "dashboard": Object {
+                                  "reader_stats": "Readers this week",
+                                  "stats_change": "Change from last week",
+                                },
+                              },
                               "date_fns": null,
                               "forms": Object {
                                 "upload": Object {
@@ -1142,6 +1178,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                             "resources": Object {
                               "en": Object {
                                 "translation": Object {
+                                  "backend": Object {
+                                    "dashboard": Object {
+                                      "reader_stats": "Readers this week",
+                                      "stats_change": "Change from last week",
+                                    },
+                                  },
                                   "date_fns": null,
                                   "forms": Object {
                                     "upload": Object {
@@ -1166,6 +1208,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                           "store": Object {
                             "en": Object {
                               "translation": Object {
+                                "backend": Object {
+                                  "dashboard": Object {
+                                    "reader_stats": "Readers this week",
+                                    "stats_change": "Change from last week",
+                                  },
+                                },
                                 "date_fns": null,
                                 "forms": Object {
                                   "upload": Object {
@@ -1295,6 +1343,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "resources": Object {
                                       "en": Object {
                                         "translation": Object {
+                                          "backend": Object {
+                                            "dashboard": Object {
+                                              "reader_stats": "Readers this week",
+                                              "stats_change": "Change from last week",
+                                            },
+                                          },
                                           "date_fns": null,
                                           "forms": Object {
                                             "upload": Object {
@@ -1319,6 +1373,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                   "store": Object {
                                     "en": Object {
                                       "translation": Object {
+                                        "backend": Object {
+                                          "dashboard": Object {
+                                            "reader_stats": "Readers this week",
+                                            "stats_change": "Change from last week",
+                                          },
+                                        },
                                         "date_fns": null,
                                         "forms": Object {
                                           "upload": Object {
@@ -1407,6 +1467,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                       "resources": Object {
                                         "en": Object {
                                           "translation": Object {
+                                            "backend": Object {
+                                              "dashboard": Object {
+                                                "reader_stats": "Readers this week",
+                                                "stats_change": "Change from last week",
+                                              },
+                                            },
                                             "date_fns": null,
                                             "forms": Object {
                                               "upload": Object {
@@ -1431,6 +1497,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                     "store": Object {
                                       "en": Object {
                                         "translation": Object {
+                                          "backend": Object {
+                                            "dashboard": Object {
+                                              "reader_stats": "Readers this week",
+                                              "stats_change": "Change from last week",
+                                            },
+                                          },
                                           "date_fns": null,
                                           "forms": Object {
                                             "upload": Object {
@@ -1512,6 +1584,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                         "resources": Object {
                                           "en": Object {
                                             "translation": Object {
+                                              "backend": Object {
+                                                "dashboard": Object {
+                                                  "reader_stats": "Readers this week",
+                                                  "stats_change": "Change from last week",
+                                                },
+                                              },
                                               "date_fns": null,
                                               "forms": Object {
                                                 "upload": Object {
@@ -1536,6 +1614,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                       "store": Object {
                                         "en": Object {
                                           "translation": Object {
+                                            "backend": Object {
+                                              "dashboard": Object {
+                                                "reader_stats": "Readers this week",
+                                                "stats_change": "Change from last week",
+                                              },
+                                            },
                                             "date_fns": null,
                                             "forms": Object {
                                               "upload": Object {
@@ -1657,6 +1741,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                               "resources": Object {
                                                 "en": Object {
                                                   "translation": Object {
+                                                    "backend": Object {
+                                                      "dashboard": Object {
+                                                        "reader_stats": "Readers this week",
+                                                        "stats_change": "Change from last week",
+                                                      },
+                                                    },
                                                     "date_fns": null,
                                                     "forms": Object {
                                                       "upload": Object {
@@ -1681,6 +1771,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                             "store": Object {
                                               "en": Object {
                                                 "translation": Object {
+                                                  "backend": Object {
+                                                    "dashboard": Object {
+                                                      "reader_stats": "Readers this week",
+                                                      "stats_change": "Change from last week",
+                                                    },
+                                                  },
                                                   "date_fns": null,
                                                   "forms": Object {
                                                     "upload": Object {
@@ -1794,6 +1890,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                                 "resources": Object {
                                                   "en": Object {
                                                     "translation": Object {
+                                                      "backend": Object {
+                                                        "dashboard": Object {
+                                                          "reader_stats": "Readers this week",
+                                                          "stats_change": "Change from last week",
+                                                        },
+                                                      },
                                                       "date_fns": null,
                                                       "forms": Object {
                                                         "upload": Object {
@@ -1818,6 +1920,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                               "store": Object {
                                                 "en": Object {
                                                   "translation": Object {
+                                                    "backend": Object {
+                                                      "dashboard": Object {
+                                                        "reader_stats": "Readers this week",
+                                                        "stats_change": "Change from last week",
+                                                      },
+                                                    },
                                                     "date_fns": null,
                                                     "forms": Object {
                                                       "upload": Object {
@@ -1924,6 +2032,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                                   "resources": Object {
                                                     "en": Object {
                                                       "translation": Object {
+                                                        "backend": Object {
+                                                          "dashboard": Object {
+                                                            "reader_stats": "Readers this week",
+                                                            "stats_change": "Change from last week",
+                                                          },
+                                                        },
                                                         "date_fns": null,
                                                         "forms": Object {
                                                           "upload": Object {
@@ -1948,6 +2062,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                                 "store": Object {
                                                   "en": Object {
                                                     "translation": Object {
+                                                      "backend": Object {
+                                                        "dashboard": Object {
+                                                          "reader_stats": "Readers this week",
+                                                          "stats_change": "Change from last week",
+                                                        },
+                                                      },
                                                       "date_fns": null,
                                                       "forms": Object {
                                                         "upload": Object {
@@ -2060,6 +2180,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                                       "resources": Object {
                                                         "en": Object {
                                                           "translation": Object {
+                                                            "backend": Object {
+                                                              "dashboard": Object {
+                                                                "reader_stats": "Readers this week",
+                                                                "stats_change": "Change from last week",
+                                                              },
+                                                            },
                                                             "date_fns": null,
                                                             "forms": Object {
                                                               "upload": Object {
@@ -2084,6 +2210,12 @@ exports[`backend/components/ingestion/form/Wrapper matches the snapshot after mo
                                                     "store": Object {
                                                       "en": Object {
                                                         "translation": Object {
+                                                          "backend": Object {
+                                                            "dashboard": Object {
+                                                              "reader_stats": "Readers this week",
+                                                              "stats_change": "Change from last week",
+                                                            },
+                                                          },
                                                           "date_fns": null,
                                                           "forms": Object {
                                                             "upload": Object {

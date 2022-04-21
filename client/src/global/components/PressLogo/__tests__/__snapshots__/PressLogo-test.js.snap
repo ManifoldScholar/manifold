@@ -56,6 +56,12 @@ exports[`global/components/PressLogo/PressLogo when it does not have a URL match
         "resources": Object {
           "en": Object {
             "translation": Object {
+              "backend": Object {
+                "dashboard": Object {
+                  "reader_stats": "Readers this week",
+                  "stats_change": "Change from last week",
+                },
+              },
               "date_fns": null,
               "forms": Object {
                 "upload": Object {
@@ -80,6 +86,12 @@ exports[`global/components/PressLogo/PressLogo when it does not have a URL match
       "store": Object {
         "en": Object {
           "translation": Object {
+            "backend": Object {
+              "dashboard": Object {
+                "reader_stats": "Readers this week",
+                "stats_change": "Change from last week",
+              },
+            },
             "date_fns": null,
             "forms": Object {
               "upload": Object {
@@ -152,6 +164,12 @@ exports[`global/components/PressLogo/PressLogo when it has a URL matches the sna
         "resources": Object {
           "en": Object {
             "translation": Object {
+              "backend": Object {
+                "dashboard": Object {
+                  "reader_stats": "Readers this week",
+                  "stats_change": "Change from last week",
+                },
+              },
               "date_fns": null,
               "forms": Object {
                 "upload": Object {
@@ -176,6 +194,12 @@ exports[`global/components/PressLogo/PressLogo when it has a URL matches the sna
       "store": Object {
         "en": Object {
           "translation": Object {
+            "backend": Object {
+              "dashboard": Object {
+                "reader_stats": "Readers this week",
+                "stats_change": "Change from last week",
+              },
+            },
             "date_fns": null,
             "forms": Object {
               "upload": Object {
