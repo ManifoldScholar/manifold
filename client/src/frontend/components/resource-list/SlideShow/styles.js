@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { respond, utilityPrimary, transparentize } from "theme/styles/mixins";
 import { containerPaddingInline } from "theme/styles/variables/layout";
+import { transientOptions } from "helpers/emotionHelpers";
 
 export const SlideShow = styled.div`
   --focus-color: var(--color-interaction-light);
@@ -31,18 +32,26 @@ export const Pagination = styled.div`
   color: var(--color-neutral-text-light);
   text-align: center;
   background-color: ${transparentize("neutral90", 0.1)};
+  padding-inline-start: 20px;
+  padding-inline-end: 20px;
+  display: flex;
 
   ${respond(
-    `  position: static;
+    `
+    position: static;
     width: 160px;
     padding-block-start: 2px;
     text-align: right;
-    background: transparent;`,
+    background: transparent;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+    flex-direction: column;
+    `,
     60
   )}
 `;
 
-export const Ordinal = styled.span`
+export const Ordinal = styled("span", transientOptions)`
   ${utilityPrimary}
   display: inline-block;
   padding: 11px 0 13px;
@@ -54,6 +63,20 @@ export const Ordinal = styled.span`
     font-size: 16px;`,
     60
   )}
+
+  ${({ $isMobile }) =>
+    $isMobile
+      ? respond(`display: none`, 60)
+      : `display: none; ${respond(`display: inline-block`, 60)}`}
+`;
+
+export const ArrowsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  ${respond(`justify-content: flex-end; margin-block-start: 13px;`, 60)}
 `;
 
 export const SlidesWrapper = styled.div`

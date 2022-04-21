@@ -257,7 +257,7 @@ class ResourceSlideshow extends PureComponent {
               <Styled.Ordinal>
                 {position} / {totalCount}
               </Styled.Ordinal>
-              <div>
+              <Styled.ArrowsWrapper>
                 <DirectionalButton
                   onClick={this.handleSlidePrev}
                   direction="left"
@@ -265,6 +265,9 @@ class ResourceSlideshow extends PureComponent {
                   paginationText={t("pagination.previous_short")}
                   screenReaderText={t("pagination.previous_slide")}
                 />
+                <Styled.Ordinal $isMobile>
+                  {position} / {totalCount}
+                </Styled.Ordinal>
                 <DirectionalButton
                   onClick={this.handleSlideNext}
                   direction="right"
@@ -272,7 +275,7 @@ class ResourceSlideshow extends PureComponent {
                   paginationText={t("pagination.next")}
                   screenReaderText={t("pagination.next_slide")}
                 />
-              </div>
+              </Styled.ArrowsWrapper>
             </Styled.Pagination>
           )}
         </Styled.Footer>
