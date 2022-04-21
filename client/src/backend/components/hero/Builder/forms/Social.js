@@ -30,8 +30,7 @@ class Social extends PureComponent {
   };
 
   render() {
-    const { failureRedirectRoute, headerId, api, modelLabel } = this.props;
-    const t = this.props.t;
+    const { failureRedirectRoute, headerId, api, modelLabel, t } = this.props;
 
     return (
       <Authorize

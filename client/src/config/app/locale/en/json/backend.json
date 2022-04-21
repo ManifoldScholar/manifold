@@ -353,8 +353,9 @@
       "style": "Style",
       "access": "Access",
       "always_visible": "Always Visible",
-      "authorized_visibile": "Visible Only When Authorized",
+      "authorized_visible": "Visible Only When Authorized",
       "unauthorized_visible": "Visible Only When Unauthorized",
+      "visible": "Visible:",
       "depth": "Depth",
       "select_text": "Select a $t(glossary.text_one)",
       "show_text_title": "Show $t(glossary.text_one) title?",
@@ -473,11 +474,6 @@
       "add_project_button": "Add a new project",
       "add_journal_button": "Add a new journal"
     },
-    "entitlements": {
-      "header": "Project Entitlements",
-      "instructions": "Entitlements give users and/or reading groups access to this project. In Manifold, all projects are open by default. Configure access restrictions, below, and enable restrictions to limit access to your project.",
-      "button_label": "Create entitlement"
-    },
     "export_targets": {
       "header": "Manage Export Targets",
       "button_label": "Add a new export target"
@@ -552,7 +548,6 @@
       "social_links": "Social Links",
       "social_links_description": "Links to social platforms and hashtag"
     },
-    "menus": {},
     "makers": {
       "header": "Manage Makers",
       "button_label": "Add a new maker"
@@ -575,7 +570,10 @@
       "button_label": "Add a new user"
     },
     "entitlements": {
-      "expires": "Expires {{val, datetime}}"
+      "expires": "Expires {{val, datetime}}",
+      "header": "Project Entitlements",
+      "instructions": "Entitlements give users and/or reading groups access to this project. In Manifold, all projects are open by default. Configure access restrictions, below, and enable restrictions to limit access to your project.",
+      "button_label": "Create entitlement"
     },
     "log": {
       "entry": "<userLink>{{user}}</userLink> {{action}} the {{entityType}} \"<titleWithLink />\" <daysAgo />",
@@ -612,7 +610,6 @@
       "collection_is_visible": "Collection is visible",
       "collection_is_not_visible": "Collection is not visible"
     },
-    "uncategorized": "Uncategorized",
     "untitled_record": "Untitled #{{number}}",
     "sftp_key": "SFTP Key",
     "sftp_password": "SFTP Password",
@@ -639,7 +636,7 @@
     "slug": "Slug",
     "slug_placeholder": "Enter Journal Volume Slug",
     "update_volume": "Update Journal Volume",
-    "create_volume": "Create Journal Colume",
+    "create_volume": "Create Journal Volume",
     "number": "Number"
   }
 }

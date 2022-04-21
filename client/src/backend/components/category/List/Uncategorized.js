@@ -42,7 +42,7 @@ class CategoryListUncategorized extends PureComponent {
         <header className="text-categories__header">
           <h2 className="text-categories__label">
             <span className="text-categories__label--notice">
-              {this.props.t("backend.uncategorized")}
+              {this.props.t("common.uncategorized_title_case")}
             </span>
           </h2>
         </header>

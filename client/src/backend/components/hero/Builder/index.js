@@ -50,6 +50,10 @@ class Builder extends PureComponent {
     actionCalloutNewRoute: "backendProjectActionCalloutNew"
   };
 
+  get defaultModelLabel() {
+    return this.props.t("glossary.project_one");
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -96,9 +100,8 @@ class Builder extends PureComponent {
   };
 
   render() {
-    const { include, modelLabel } = this.props;
+    const { include, modelLabel, t } = this.props;
     const DrawerContents = this.drawerComponent;
-    const t = this.props.t;
 
     return (
       <UIDConsumer name={id => `hero-builder-${id}`}>
@@ -117,7 +120,7 @@ class Builder extends PureComponent {
                 />
                 <span id={`${id}-instructions`} className="instructions">
                   {t("backend.layout.hero_block_instructions", {
-                    entity: modelLabel
+                    entity: modelLabel ?? this.defaultModelLabel
                   })}
                 </span>
 
@@ -198,7 +201,7 @@ class Builder extends PureComponent {
                   actionCalloutEditRoute={this.props.actionCalloutEditRoute}
                   model={this.model}
                   withDarkMode={this.props.withDarkMode}
-                  modelLabel={this.props.modelLabel}
+                  modelLabel={modelLabel ?? this.defaultModelLabel}
                 />
               ) : null}
             </Drawer.Wrapper>
