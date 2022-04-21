@@ -5,20 +5,10 @@ import IconComposer from "global/components/utility/IconComposer";
 const Button = styled.button`
   ${buttonUnstyled}
   ${utilityPrimary}
-  position: absolute;
-  top: 50%;
   display: inline-flex;
   align-items: center;
-  margin-block-start: -9px;
   font-size: 13px;
   letter-spacing: 0.05em;
-
-  ${respond(
-    `
-    position: static;
-    margin-block-start: 13px;`,
-    60
-  )}
 
   &:disabled {
     opacity: 0.4;
@@ -29,14 +19,11 @@ const Button = styled.button`
   }
 `;
 
-export const Prev = styled(Button)`
-  left: 20px;
-`;
+export const Prev = styled(Button)``;
 
 export const Next = styled(Button)`
   display: flex;
   flex-direction: row-reverse;
-  right: 20px;
 
   ${respond(
     `
