@@ -57,6 +57,12 @@ exports[`global/components/search/button when it is active matches the snapshot 
         "resources": Object {
           "en": Object {
             "translation": Object {
+              "backend": Object {
+                "dashboard": Object {
+                  "reader_stats": "Readers this week",
+                  "stats_change": "Change from last week",
+                },
+              },
               "date_fns": null,
               "forms": Object {
                 "upload": Object {
@@ -81,6 +87,12 @@ exports[`global/components/search/button when it is active matches the snapshot 
       "store": Object {
         "en": Object {
           "translation": Object {
+            "backend": Object {
+              "dashboard": Object {
+                "reader_stats": "Readers this week",
+                "stats_change": "Change from last week",
+              },
+            },
             "date_fns": null,
             "forms": Object {
               "upload": Object {
@@ -155,6 +167,12 @@ exports[`global/components/search/button when it isn't active matches the snapsh
         "resources": Object {
           "en": Object {
             "translation": Object {
+              "backend": Object {
+                "dashboard": Object {
+                  "reader_stats": "Readers this week",
+                  "stats_change": "Change from last week",
+                },
+              },
               "date_fns": null,
               "forms": Object {
                 "upload": Object {
@@ -179,6 +197,12 @@ exports[`global/components/search/button when it isn't active matches the snapsh
       "store": Object {
         "en": Object {
           "translation": Object {
+            "backend": Object {
+              "dashboard": Object {
+                "reader_stats": "Readers this week",
+                "stats_change": "Change from last week",
+              },
+            },
             "date_fns": null,
             "forms": Object {
               "upload": Object {
