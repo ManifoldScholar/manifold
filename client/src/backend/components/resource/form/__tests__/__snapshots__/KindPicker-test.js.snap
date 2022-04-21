@@ -10,7 +10,7 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
     <label
       for="1"
     >
-      Kind
+      backend.forms.resource.kind
     </label>
     <div
       class="resource-kind-picker__select"
@@ -39,67 +39,67 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
             selected=""
             value="image"
           >
-            Image
+            backend.forms.resource.image
           </option>
           <option
             id="video"
             value="video"
           >
-            Video
+            backend.forms.resource.video
           </option>
           <option
             id="audio"
             value="audio"
           >
-            Audio
+            backend.forms.resource.audio
           </option>
           <option
             id="file"
             value="file"
           >
-            File
+            backend.forms.resource.file
           </option>
           <option
             id="link"
             value="link"
           >
-            Link
+            backend.forms.resource.link
           </option>
           <option
             id="pdf"
             value="pdf"
           >
-            PDF
+            backend.forms.resource.pdf
           </option>
           <option
             id="document"
             value="document"
           >
-            Document
+            backend.forms.resource.document
           </option>
           <option
             id="spreadsheet"
             value="spreadsheet"
           >
-            Spreadsheet
+            backend.forms.resource.spreadsheet
           </option>
           <option
             id="presentation"
             value="presentation"
           >
-            Presentation
+            backend.forms.resource.presentation
           </option>
           <option
             id="interactive"
             value="interactive"
           >
-            Interactive
+            backend.forms.resource.interactive
           </option>
         </select>
       </div>
     </div>
     <div
-      aria-label="Resource Kind"
+      aria-label="backend.forms.resource.resource_kind"
       class="resource-kind-picker__list"
       role="group"
     >
@@ -118,7 +118,7 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
         <span
           class="resource-kind-picker__label"
         >
-          Image
+          backend.forms.resource.image
         </span>
         <svg
           aria-hidden="true"
@@ -148,7 +148,7 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
         <span
           class="resource-kind-picker__label"
         >
-          Video
+          backend.forms.resource.video
         </span>
         <svg
           aria-hidden="true"
@@ -179,7 +179,7 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
         <span
           class="resource-kind-picker__label"
         >
-          Audio
+          backend.forms.resource.audio
         </span>
         <svg
           aria-hidden="true"
@@ -209,7 +209,7 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
         <span
           class="resource-kind-picker__label"
         >
-          File
+          backend.forms.resource.file
         </span>
         <svg
           aria-hidden="true"
@@ -239,7 +239,7 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
         <span
           class="resource-kind-picker__label"
         >
-          Link
+          backend.forms.resource.link
         </span>
         <svg
           aria-hidden="true"
@@ -269,7 +269,7 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
         <span
           class="resource-kind-picker__label"
         >
-          PDF
+          backend.forms.resource.pdf
         </span>
         <svg
           aria-hidden="true"
@@ -299,7 +299,7 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
         <span
           class="resource-kind-picker__label"
         >
-          Document
+          backend.forms.resource.document
         </span>
         <svg
           aria-hidden="true"
@@ -329,7 +329,7 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
         <span
           class="resource-kind-picker__label"
         >
-          Spreadsheet
+          backend.forms.resource.spreadsheet
         </span>
         <svg
           aria-hidden="true"
@@ -359,7 +359,7 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
         <span
           class="resource-kind-picker__label"
         >
-          Presentation
+          backend.forms.resource.presentation
         </span>
         <svg
           aria-hidden="true"
@@ -389,7 +389,7 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
         <span
           class="resource-kind-picker__label"
         >
-          Interactive
+          backend.forms.resource.interactive
         </span>
         <svg
           aria-hidden="true"
