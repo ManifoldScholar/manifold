@@ -111,7 +111,7 @@ class ResourceRow extends PureComponent {
         label={this.kind}
         meta={
           <FormattedDate
-            prefix={this.props.t("utility.dates.created_title_case")}
+            prefix={this.props.t("dates.created_title_case")}
             format="PPP"
             date={this.createdAt}
           />
