@@ -1,6 +1,6 @@
 import Thumbnails from "./Thumbnails/index";
 import Cards from "./Cards/index";
-import Slideshow from "./Slideshow";
+import Slideshow from "./SlideShow";
 
 export default {
   Thumbnails,
