@@ -1,10 +1,10 @@
-import Slideshow from "../Slideshow";
+import SlideShow from "../SlideShow";
 
 describe("frontend/components/resource-list/Slideshow", () => {
   def("resourceCollection", () => factory("resourceCollection"));
   def("collectionResources", () => collectionFactory("collectionResource"));
   def("root", () => (
-    <Slideshow
+    <SlideShow
       collectionResources={$collectionResources}
       resourceCollection={$resourceCollection}
       pagination={fixtures.pagination()}
