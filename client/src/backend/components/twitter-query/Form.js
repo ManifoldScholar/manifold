@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { twitterQueriesAPI, requests } from "api";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
+import { withTranslation, Trans } from "react-i18next";
 
-export default class TwitterQueryForm extends PureComponent {
+class TwitterQueryForm extends PureComponent {
   static displayName = "TwitterQuery.Form";
 
   static propTypes = {
@@ -12,7 +13,8 @@ export default class TwitterQueryForm extends PureComponent {
     twitterQuery: PropTypes.object,
     successHandler: PropTypes.func,
     notificationScope: PropTypes.string,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -25,16 +27,20 @@ export default class TwitterQueryForm extends PureComponent {
   };
 
   render() {
+    const t = this.props.t;
     const pId = this.props.projectId;
     const twitterHelpUrl =
       "https://developer.twitter.com/en/docs/tweets/search/guides/standard-operators";
     const instructions = (
       <p className="instructions">
-        Learn more about Twitter{" "}
-        <a target="_blank" rel="noopener noreferrer" href={twitterHelpUrl}>
-          search operators
-        </a>
-        .
+        <Trans
+          i18nKey="backend.twitter_learn_more"
+          components={[
+            <a target="_blank" rel="noopener noreferrer" href={twitterHelpUrl}>
+              #
+            </a>
+          ]}
+        />
       </p>
     );
 
@@ -52,22 +58,24 @@ export default class TwitterQueryForm extends PureComponent {
         <Form.TextInput
           validation={["required"]}
           focusOnMount
-          label="Query"
+          label={t("backend.query")}
           name="attributes[query]"
-          placeholder="Enter query"
+          placeholder={t("backend.query_placeholder")}
           instructions={instructions}
         />
         <Form.Select
           name="attributes[resultType]"
-          label="Fetch tweets by:"
+          label={t("backend.fetch_tweets_by")}
           options={[
-            { label: "Most Recent", value: "most_recent" },
-            { label: "Most Popular", value: "popular" }
+            { label: t("backend.most_recent"), value: "most_recent" },
+            { label: t("backend.most_popular"), value: "popular" }
           ]}
         />
-        <Form.Switch label="Active" name="attributes[active]" />
-        <Form.Save text="Save Twitter Query" />
+        <Form.Switch label={t("backend.active")} name="attributes[active]" />
+        <Form.Save text={t("backend.save_query")} />
       </FormContainer.Form>
     );
   }
 }
+
+export default withTranslation()(TwitterQueryForm);

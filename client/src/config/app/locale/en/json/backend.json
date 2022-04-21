@@ -233,7 +233,6 @@
       "project_collection": {
         "collection_title": "Collection Title",
         "collection_title_placeholder": "Enter collection name",
-        "slug": "Slug",
         "slug_placeholder": "Enter URL slug",
         "hero_image": "Hero Image",
         "homepage_visible": "Show on homepage:",
@@ -625,6 +624,22 @@
     "active": "Active",
     "inactive": "Inactive",
     "hidden": "Hidden",
-    "vissible": "Visible"
+    "visible": "Visible",
+    "ingested": "(Ingested)",
+    "user_created": "User Created",
+    "edit_stylesheet": "$t(actions.edit) Stylesheet",
+    "delete_stylesheet": "$t(actions.delete) Stylesheet",
+    "twitter_learn_more": "Learn more about Twitter <0>search operators</0>.",
+    "query": "Query",
+    "query_placeholder": "Enter query",
+    "fetch_tweets_by": "Fetch tweets by:",
+    "most_recent": "Most Recent",
+    "most_popular": "Most Popular",
+    "save_query": "Save Twitter Query",
+    "slug": "Slug",
+    "slug_placeholder": "Enter Journal Volume Slug",
+    "update_volume": "Update Journal Volume",
+    "create_volume": "Create Journal Colume",
+    "number": "Number"
   }
 }

@@ -89,6 +89,7 @@
   "dates": {
     "added": "added",
     "added_title_case": "Added",
+    "added_on": "Added on",
     "created_title_case": "Created",
     "resource_added": "Resource $t(dates.added)",
     "type_of_resource_added": "{{kind}} $t(dates.added)",

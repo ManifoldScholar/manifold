@@ -3,8 +3,11 @@ import PropTypes from "prop-types";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { journalVolumesAPI } from "api";
+import { useTranslation } from "react-i18next";
 
 function VolumeForm({ journalId, model, ...props }) {
+  const { t } = useTranslation();
+
   return (
     <FormContainer.Form
       {...props}
@@ -14,15 +17,19 @@ function VolumeForm({ journalId, model, ...props }) {
       className="form-secondary"
       model={model}
     >
-      <Form.NumberInput label="Number" focusOnMount name="attributes[number]" />
+      <Form.NumberInput
+        label={t("backend.number")}
+        focusOnMount
+        name="attributes[number]"
+      />
       <Form.TextInput
         wide
-        label="Slug"
+        label={t("backend.slug")}
         name="attributes[pendingSlug]"
-        placeholder="Enter Journal Volume Slug"
+        placeholder={t("backend.slug_placeholder")}
       />
       <Form.Save
-        text={model ? "Update  Journal Volume" : "Create Journal Volume"}
+        text={model ? t("backend.update_volume") : t("backend.create_volume")}
       />
     </FormContainer.Form>
   );

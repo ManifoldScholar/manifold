@@ -6,14 +6,16 @@ import Utility from "global/components/utility";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
+import { withTranslation } from "react-i18next";
 
-export default class CategoryList extends PureComponent {
+class CategoryList extends PureComponent {
   static displayName = "Stylesheet.List.Stylesheet";
 
   static propTypes = {
     stylesheet: PropTypes.object.isRequired,
     text: PropTypes.object.isRequired,
-    callbacks: PropTypes.object.isRequired
+    callbacks: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   get callbacks() {
@@ -29,7 +31,10 @@ export default class CategoryList extends PureComponent {
   }
 
   get type() {
-    return this.stylesheet.attributes.ingested ? "(Ingested)" : "User Created";
+    const t = this.props.t;
+    return this.stylesheet.attributes.ingested
+      ? t("backend.ingested")
+      : t("backend.user_created");
   }
 
   get editUrl() {
@@ -51,6 +56,7 @@ export default class CategoryList extends PureComponent {
 
   render() {
     const baseClass = "ordered-records-item";
+    const t = this.props.t;
 
     return (
       <Draggable
@@ -81,7 +87,7 @@ export default class CategoryList extends PureComponent {
                   </h3>
                   <span className={`${baseClass}__date`}>
                     <FormattedDate
-                      prefix="Added on"
+                      prefix={t("dates.added_on")}
                       format="MMMM, yyyy"
                       date={this.stylesheet.attributes.createdAt}
                     />
@@ -94,11 +100,15 @@ export default class CategoryList extends PureComponent {
                   onClick={this.confirmDestroy}
                 >
                   <Utility.IconComposer icon="delete32" size={26} />
-                  <span className="screen-reader-text">Delete Stylesheet</span>
+                  <span className="screen-reader-text">
+                    {t("backend.delete_stylesheet")}
+                  </span>
                 </button>
                 <Link className={`${baseClass}__button`} to={this.editUrl}>
                   <Utility.IconComposer icon="annotate32" size={26} />
-                  <span className="screen-reader-text">Edit Stylesheet</span>
+                  <span className="screen-reader-text">
+                    {t("backend.edit_stylesheet")}
+                  </span>
                 </Link>
                 <div
                   {...provided.dragHandleProps}
@@ -114,3 +124,5 @@ export default class CategoryList extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(CategoryList);

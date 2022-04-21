@@ -61,7 +61,7 @@ class Fields extends Component {
         <KindPicker {...this.props} />
         <Form.TextInput
           wide
-          label={t("backend.forms.project_collection.slug")}
+          label={t("backend.slug")}
           name="attributes[pendingSlug]"
           placeholder={t("backend.forms.project_collection.slug_placeholder")}
         />
