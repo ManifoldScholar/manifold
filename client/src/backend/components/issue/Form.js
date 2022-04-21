@@ -27,7 +27,7 @@ function IssueForm({ journalId, model, ...props }) {
       model={model}
     >
       <Form.NumberInput
-        label={t("backend.forms.issue.number")}
+        label={t("backend.number")}
         focusOnMount
         name="attributes[number]"
       />
@@ -42,7 +42,7 @@ function IssueForm({ journalId, model, ...props }) {
       />
       <Form.TextInput
         wide
-        label={t("backend.forms.issue.slug")}
+        label={t("backend.slug")}
         name="attributes[pendingSlug]"
         placeholder={t("backend.forms.issue.slug_placeholder")}
       />
