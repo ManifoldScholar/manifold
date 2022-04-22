@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import classNames from "classnames";
 import { connect } from "react-redux";
 import { requests } from "api";
 import { entityStoreActions, uiVisibilityActions } from "actions";
@@ -9,7 +8,7 @@ import { singularEntityName } from "utils/entityUtils";
 import { bindActionCreators } from "redux";
 import { commentsAPI } from "api";
 import { UIDConsumer } from "react-uid";
-import IconComposer from "global/components/utility/IconComposer";
+import * as Styled from "./styles";
 
 const { request } = entityStoreActions;
 import GlobalForm from "global/components/form";
@@ -30,7 +29,7 @@ export class CommentEditor extends PureComponent {
     comment: PropTypes.object,
     placeholder: PropTypes.string,
     body: PropTypes.string,
-    cancel: PropTypes.func.isRequired,
+    cancel: PropTypes.func,
     onSuccess: PropTypes.func,
     subject: PropTypes.object.isRequired,
     parentId: PropTypes.string,
@@ -58,7 +57,8 @@ export class CommentEditor extends PureComponent {
     const body = this.isEdit(props) ? props.comment.attributes.body : "";
     return {
       body,
-      errors: []
+      errors: [],
+      open: false
     };
   }
 
@@ -121,11 +121,17 @@ export class CommentEditor extends PureComponent {
 
   handleSuccess() {
     this.setState(this.initialState(this.props));
-    this.props.cancel();
+    if (this.props.cancel) this.props.cancel();
   }
 
   handleErrors(errors) {
     this.setState({ errors });
+  }
+
+  toggleOpen() {
+    this.setState(state => {
+      return { open: !state.open };
+    });
   }
 
   handleBodyChange = event => {
@@ -168,11 +174,12 @@ export class CommentEditor extends PureComponent {
     return t("actions.post");
   }
 
-  render() {
-    const textareaClass = classNames({
-      "annotation-editor__textarea": true,
-      "annotation-editor__textarea--expanded": this.state.body
+  toggleOpen = () =>
+    this.setState(state => {
+      return { open: !state.open };
     });
+
+  render() {
     const showLogin = bindActionCreators(
       () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
       this.props.dispatch
@@ -181,76 +188,75 @@ export class CommentEditor extends PureComponent {
     const t = this.props.t;
 
     return (
-      <div className="annotation-editor">
+      <Styled.Editor>
         {this.props.label ? (
-          <h2 className="annotation-editor__editor-label">
-            <IconComposer
-              icon="commentPencil32"
-              size={42}
-              className="annotation-editor__label-icon"
-            />
+          <Styled.Label onClick={this.toggleOpen}>
+            <Styled.Icon icon="interactComment24" size={24} />
             <span className="annotation-editor__label-text">
               {this.props.label}
             </span>
-          </h2>
+          </Styled.Label>
         ) : null}
-        <Authorize kind="unauthenticated">
-          <div className="placeholder">
-            <button onClick={showLogin}>
-              {t("placeholders.comments.unauthenticated")}
-            </button>
-          </div>
-        </Authorize>
-        <Authorize kind="any">
-          <form onSubmit={this.handleSubmit}>
-            <UIDConsumer>
-              {id => (
-                <GlobalForm.Errorable
-                  name="attributes[body]"
-                  errors={this.state.errors}
-                  idForError={`${this.idForErrorPrefix}-${id}`}
-                >
-                  <label
-                    htmlFor={`${this.idPrefix}-${id}`}
-                    className="screen-reader-text"
-                  >
-                    {this.placeholder(this.props)}
-                  </label>
-                  <textarea
-                    ref={ci => {
-                      this.ci = ci;
-                    }}
-                    id={`${this.idPrefix}-${id}`}
-                    onKeyDown={this.submitOnReturnKey}
-                    className={textareaClass}
-                    placeholder={this.placeholder(this.props)}
-                    onChange={this.handleBodyChange}
-                    value={this.state.body}
-                    aria-describedby={`${this.idForErrorPrefix}-${id}`}
-                  />
-                  <div className="annotation-editor__actions">
-                    <div className="annotation-editor__buttons">
-                      <button
-                        type="button"
-                        onClick={this.props.cancel}
-                        className="button-primary button-primary--gray"
+        {(this.state.open || !this.isComment(this.props)) && (
+          <>
+            <Authorize kind="unauthenticated">
+              <div className="placeholder">
+                <button onClick={showLogin}>
+                  {t("placeholders.comments.unauthenticated")}
+                </button>
+              </div>
+            </Authorize>
+            <Authorize kind="any">
+              <form onSubmit={this.handleSubmit}>
+                <UIDConsumer>
+                  {id => (
+                    <GlobalForm.Errorable
+                      name="attributes[body]"
+                      errors={this.state.errors}
+                      idForError={`${this.idForErrorPrefix}-${id}`}
+                    >
+                      <label
+                        htmlFor={`${this.idPrefix}-${id}`}
+                        className="screen-reader-text"
                       >
-                        {t("actions.cancel")}
-                      </button>
-                      <button
-                        className="button-secondary"
-                        disabled={!this.state.body}
-                      >
-                        {this.buttonLabel(this.props)}
-                      </button>
-                    </div>
-                  </div>
-                </GlobalForm.Errorable>
-              )}
-            </UIDConsumer>
-          </form>
-        </Authorize>
-      </div>
+                        {this.placeholder(this.props)}
+                      </label>
+                      <Styled.TextArea
+                        ref={ci => {
+                          this.ci = ci;
+                        }}
+                        id={`${this.idPrefix}-${id}`}
+                        onKeyDown={this.submitOnReturnKey}
+                        placeholder={this.placeholder(this.props)}
+                        onChange={this.handleBodyChange}
+                        value={this.state.body}
+                        aria-describedby={`${this.idForErrorPrefix}-${id}`}
+                      />
+                      <Styled.Actions>
+                        <Styled.Buttons>
+                          <button
+                            type="button"
+                            onClick={this.props.cancel ?? this.toggleOpen}
+                            className="button-primary button-primary--gray"
+                          >
+                            {t("actions.cancel")}
+                          </button>
+                          <button
+                            className="button-secondary"
+                            disabled={!this.state.body}
+                          >
+                            {this.buttonLabel(this.props)}
+                          </button>
+                        </Styled.Buttons>
+                      </Styled.Actions>
+                    </GlobalForm.Errorable>
+                  )}
+                </UIDConsumer>
+              </form>
+            </Authorize>
+          </>
+        )}
+      </Styled.Editor>
     );
   }
 }
