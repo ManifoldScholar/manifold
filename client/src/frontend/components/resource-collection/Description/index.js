@@ -10,7 +10,7 @@ export default function Description({ date, description }) {
 
   return (
     <Styled.Wrapper>
-      {date && (
+      {!!date && (
         <Styled.DateWrapper>
           <FormattedDate
             prefix={t("dates.collection_created")}
@@ -19,7 +19,7 @@ export default function Description({ date, description }) {
           />
         </Styled.DateWrapper>
       )}
-      {description && (
+      {!!description && (
         <Styled.Description
           dangerouslySetInnerHTML={{
             __html: description
