@@ -55,7 +55,7 @@ export const Right = styled.div`
 
 export const Content = styled.div`
   font-family: var(--font-family-copy);
-  font-size: ${fluidScale("16px", "14px")};
+  font-size: ${fluidScale("17px", "14px")};
   line-height: 1.4;
 
   /* These are here for styling html from captionFormatted and descriptionFormatted. -LD */
@@ -88,6 +88,7 @@ export const DescriptionHeader = styled.h2`
 export const Comments = styled.div`
   padding-block-start: 16px;
   margin-block-start: 54px;
+  padding-block-end: 25px;
   border-top: 1px solid var(--color-base-neutral45);
 
   .comment-list {
