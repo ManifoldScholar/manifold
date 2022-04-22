@@ -26,6 +26,7 @@
     "toggle_collecting": "Toggle collecting dialog",
     "delete_event": "$t(actions.delete) event",
     "add_comment": "$t(actions.add) comment",
+    "add_comment_title_case": "$t(actions.add) Comment",
     "play": "Play",
     "start_playback": "Start Playback",
     "pause_playback": "Pause Playback",
