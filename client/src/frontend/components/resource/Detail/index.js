@@ -8,10 +8,15 @@ import LinkComponent from "../Link";
 import Meta from "../Meta";
 import Title from "../Title";
 import VariantList from "../VariantList";
+import { useSelector } from "react-redux";
+import { meta } from "utils/entityUtils";
 import * as Styled from "./styles";
 
 export default function ResourceDetail({ resourceUrl, resource }) {
   const { t } = useTranslation();
+  const commentsMeta = useSelector(state =>
+    meta(`comments-for-${resource.id}`, state.entityStore)
+  );
 
   if (!resource) return null;
 
@@ -56,18 +61,20 @@ export default function ResourceDetail({ resourceUrl, resource }) {
           <VariantList resource={resource} />
         </Styled.Right>
       </Styled.ColumnWrapper>
-      <Styled.Comments>
-        {canEngagePublicly && (
-          <>
-            <CommentContainer.Thread subject={resource} />
-            <CommentContainer.Editor
-              focus={false}
-              label={t("actions.add_comment_title_case")}
-              subject={resource}
-            />
-          </>
-        )}
-      </Styled.Comments>
+      {canEngagePublicly && (
+        <>
+          {!!commentsMeta?.pagination?.totalCount && (
+            <Styled.Comments>
+              <CommentContainer.Thread subject={resource} />
+            </Styled.Comments>
+          )}
+          <CommentContainer.Editor
+            focus={false}
+            label={t("actions.add_comment_title_case")}
+            subject={resource}
+          />
+        </>
+      )}
     </Styled.Container>
   );
 }
