@@ -56,7 +56,9 @@ class ResourcePlayerAudio extends Component {
   }
 
   get progressColor() {
-    return getComputedStyle(document.body).getPropertyValue("--accent-primary");
+    return getComputedStyle(document.body).getPropertyValue(
+      "--color-accent-primary"
+    );
   }
 
   setVolume = event => {
