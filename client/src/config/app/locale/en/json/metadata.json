@@ -51,6 +51,7 @@
     "series_title": "series title",
     "series_number": "series number",
     "unique_identifier": "unique identifier",
-    "language": "language"
+    "language": "language",
+    "tags": "tags"
   }
 }

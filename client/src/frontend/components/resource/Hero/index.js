@@ -70,9 +70,7 @@ export default class ResourceHero extends Component {
 
   render() {
     return (
-      <Styled.Container>
-        <Styled.Hero>{this.getFigureByType(this.props.resource)}</Styled.Hero>
-      </Styled.Container>
+      <Styled.Hero>{this.getFigureByType(this.props.resource)}</Styled.Hero>
     );
   }
 }
