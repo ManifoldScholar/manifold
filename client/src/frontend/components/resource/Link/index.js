@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
+import * as Styled from "./styles";
 
 class ResourceLink extends Component {
   static displayName = "Resource.Link";
@@ -22,7 +23,7 @@ class ResourceLink extends Component {
     switch (attr.kind.toLowerCase()) {
       case "link":
         button = (
-          <a
+          <Styled.Link
             href={attr.externalUrl}
             className={this.props.buttonClass}
             target="_blank"
@@ -39,12 +40,12 @@ class ResourceLink extends Component {
               size="default"
               className="button-primary__icon"
             />
-          </a>
+          </Styled.Link>
         );
         break;
       default:
         button = attr.downloadable ? (
-          <a
+          <Styled.Link
             href={attr.attachmentStyles.original}
             className={this.props.buttonClass}
             download={attr.slug}
@@ -60,7 +61,7 @@ class ResourceLink extends Component {
               size="default"
               className="button-primary__icon"
             />
-          </a>
+          </Styled.Link>
         ) : null;
         break;
     }

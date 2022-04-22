@@ -69,6 +69,7 @@ class ResourceTagList extends Component {
         <span className="screen-reader-text">
           {this.props.t("pages.subheaders.tags_list")}
         </span>
+        <Styled.Label>{this.props.t("metadata.tags")}</Styled.Label>
         <Styled.List>{this.mapTagsToLinks(this.props.resource)}</Styled.List>
       </Styled.Container>
     );

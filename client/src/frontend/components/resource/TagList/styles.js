@@ -18,8 +18,20 @@ export const Container = styled("nav", transientOptions)`
   `}
 `;
 
+export const Label = styled.span`
+  ${utilityPrimary}
+  font-size: 13px;
+  color: var(--color);
+
+  &::after {
+    display: inline;
+    content: ": ";
+  }
+`;
+
 export const List = styled.ul`
   ${listUnstyled}
+  max-width: 100%;
 `;
 
 export const Tag = styled.li`
@@ -35,7 +47,7 @@ export const Tag = styled.li`
 export const Link = styled(LinkComponent)`
   text-decoration: none;
   transition: color ${defaultTransitionProps};
-  color: var(--color);
+  color: var(--color-neutral-text-extra-dark);
 
   &.disabled {
     pointer-events: none;

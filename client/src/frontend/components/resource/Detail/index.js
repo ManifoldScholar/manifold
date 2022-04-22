@@ -53,53 +53,45 @@ class ResourceDetail extends Component {
     /* href.                                                                            */
     return (
       <Styled.Container>
-        <Styled.TitleWrapper>
-          <Title resource={resource} showIcon={false} />
-        </Styled.TitleWrapper>
+        <Styled.ColumnWrapper>
+          <Styled.Left>
+            <Title resource={resource} showIcon={false} />
+            <Hero resource={resource} />
+            <Styled.Content>
+              <Styled.Caption
+                dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
+              />
 
-        <Hero resource={resource} />
-
-        <Styled.DetailsContainer>
-          <Styled.RightCol>
+              <Styled.DescriptionHeader>
+                {t("pages.subheaders.full_description")}
+              </Styled.DescriptionHeader>
+              <div
+                dangerouslySetInnerHTML={this.createDescription(
+                  attr.descriptionFormatted
+                )}
+              />
+            </Styled.Content>
+          </Styled.Left>
+          <Styled.Right>
             <Link attributes={attr} />
             <Utility.ShareBar url={resourceUrl} />
             <Meta resource={resource} layout={"secondary"} />
             <VariantList resource={resource} />
-          </Styled.RightCol>
-          <Styled.MetaMobile>
-            <Meta resource={resource} layout={"secondary"} isMobile />
-          </Styled.MetaMobile>
-          <Styled.VariantsMobile>
-            <VariantList resource={resource} isMobile />
-          </Styled.VariantsMobile>
-          <Styled.Content>
-            <Styled.Caption
-              dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
-            />
-
-            <Styled.DescriptionHeader>
-              {t("pages.subheaders.full_description")}
-            </Styled.DescriptionHeader>
-            <div
-              dangerouslySetInnerHTML={this.createDescription(
-                attr.descriptionFormatted
-              )}
-            />
-            <Styled.Comments>
-              {this.canEngagePublicly && (
-                <>
-                  <CommentContainer.Thread subject={resource} />
-                  <CommentContainer.Editor
-                    focus={false}
-                    label={t("actions.add_comment")}
-                    subject={resource}
-                    cancel={event => this.cancelComment(event)}
-                  />
-                </>
-              )}
-            </Styled.Comments>
-          </Styled.Content>
-        </Styled.DetailsContainer>
+          </Styled.Right>
+        </Styled.ColumnWrapper>
+        <Styled.Comments>
+          {this.canEngagePublicly && (
+            <>
+              <CommentContainer.Thread subject={resource} />
+              <CommentContainer.Editor
+                focus={false}
+                label={t("actions.add_comment")}
+                subject={resource}
+                cancel={event => this.cancelComment(event)}
+              />
+            </>
+          )}
+        </Styled.Comments>
       </Styled.Container>
     );
     /* eslint-enable jsx-a11y/anchor-is-valid */

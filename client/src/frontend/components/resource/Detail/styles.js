@@ -1,102 +1,62 @@
 import styled from "@emotion/styled";
 import {
-  clearfix,
   respond,
   utilityPrimary,
   drawerIndent,
-  containerPrototype
+  containerPrototype,
+  fluidScale
 } from "theme/styles/mixins";
 
 export const Container = styled.section`
-  ${clearfix()}
-  padding-top: 22px;
-`;
-
-export const TitleWrapper = styled.div`
   ${containerPrototype}
-  --container-padding-block-start: 0;
-  --container-padding-block-end: 0;
-
-  padding-block-start: var(--container-padding-block-start);
-  padding-block-end: var(--container-padding-block-end);
-
-  ${clearfix()}
+  padding-block-start: ${fluidScale("63px", "48px")};
+  padding-block-end: ${fluidScale("55px", "40px")};
 `;
 
-export const DetailsContainer = styled.div`
-  ${containerPrototype}
-  --container-padding-block-start: 0;
-
-  padding-block-start: var(--container-padding-block-start);
-  padding-block-end: var(--container-padding-block-end);
-
-  ${clearfix()}
+export const ColumnWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10%;
+  color: var(--color-neutral-text-extra-dark);
 `;
 
-export const RightCol = styled.aside`
+export const Left = styled.div`
+  width: 100%;
+
   ${respond(
-    `float: right;
-    width: 32%;`,
+    `
+    max-width: 65%;
+    `,
+    65
+  )}
+`;
+
+export const Right = styled.div`
+  width: 100%;
+  padding-block-start: 35px;
+
+  ${respond(
+    `
+    max-width: 25%;
+    padding-block-start: 10px;
+    `,
     65
   )}
 
-  .button-primary {
-    width: calc(50% - 7px);
-    padding: 0.813em 0.8em;
-    margin-bottom: 0.929em;
-    font-size: 12px;
-    line-height: 13px;
-    text-align: center;
+  .share-nav-primary {
+    margin: ${fluidScale("32px", "25px")} 0;
+    color: var(--color-neutral-text-dark);
 
-    ${respond(
-      `
-    width: 180px;
-    padding: 0.813em 1.438em;
-    font-size: 14px;
-  `,
-      50
-    )}
-
-    ${respond(
-      `display: flex;
-      max-width: 100%;`,
-      65
-    )}
-
-    + .button-primary {
-      margin-left: 14px;
-
-      ${respond(`margin-left: 0;`, 65)}
+    .share-nav-primary__label::after {
+      content: ":";
     }
   }
-
-  .share-nav-primary {
-    margin: 21px 0 35px; /* To place it below the fold on tablet landscape. */
-    ${respond(`margin: 21px 0 29px;`, 110)}
-  }
-`;
-
-export const MetaMobile = styled.div`
-  ${respond(`display: none;`, 65)}
-`;
-
-export const VariantsMobile = styled.div`
-  ${respond(`display: none;`, 65)}
 `;
 
 export const Content = styled.div`
   font-family: var(--font-family-copy);
-  font-size: 14px;
+  font-size: ${fluidScale("16px", "14px")};
   line-height: 1.4;
-
-  ${respond(`font-size: 16px;`, 60)}
-  ${respond(
-    `
-    float: right;
-    width: 68%;
-    padding-right: 8.45%;`,
-    65
-  )}
 
   /* These are here for styling html from captionFormatted and descriptionFormatted. -LD */
   p + p {
@@ -120,17 +80,18 @@ export const Caption = styled.div`
 
 export const DescriptionHeader = styled.h2`
   ${utilityPrimary}
-  margin-top: 2em;
-  font-size: 12px;
+  margin-block-start: 24px;
+  font-size: 13px;
+  color: var(--color-neutral-text-dark);
 `;
 
 export const Comments = styled.div`
-  padding-top: 16px;
-  margin-top: 54px;
+  padding-block-start: 16px;
+  margin-block-start: 54px;
   border-top: 1px solid var(--color-base-neutral45);
 
   .comment-list {
-    padding-left: 0;
+    padding-inline-start: 0;
 
     .comment-list {
       ${drawerIndent("padding-left")};
@@ -138,7 +99,7 @@ export const Comments = styled.div`
   }
 
   > .annotation-editor {
-    padding-top: 16px;
-    padding-left: 0;
+    padding-block-start: 16px;
+    padding-inline-start: 0;
   }
 `;

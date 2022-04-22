@@ -15,8 +15,7 @@ export default class ResourceMeta extends Component {
     resource: PropTypes.object,
     layout: PropTypes.string,
     showIcon: PropTypes.bool,
-    showTags: PropTypes.bool,
-    isMobile: PropTypes.bool
+    showTags: PropTypes.bool
   };
 
   static defaultProps = {
@@ -62,7 +61,7 @@ export default class ResourceMeta extends Component {
     );
 
     return (
-      <Styled.Meta $isMobile={this.props.isMobile}>
+      <Styled.Meta>
         {this.props.showIcon ? (
           <Styled.ResourceIcon aria-hidden="true">
             <IconComputed.Resource icon={attr.kind} size={48} />

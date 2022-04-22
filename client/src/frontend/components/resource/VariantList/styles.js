@@ -1,26 +1,18 @@
 import styled from "@emotion/styled";
 import IconComposer from "global/components/utility/IconComposer";
 import { listUnstyled, utilityPrimary, respond } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
-export const Container = styled("section", transientOptions)`
+export const Container = styled.section`
   ${listUnstyled}
   ${utilityPrimary}
-  display: none;
+  display: block;
   font-size: 13px;
 
-  ${respond(`display: block;`, 65)}
-
-  ${({ $isMobile }) =>
-    $isMobile &&
-    `
-    display: block;
-    margin-bottom: 25px;
-    `}
+  ${respond(`margin-block-end: 25px;`, 65)}
 `;
 
 export const Title = styled.div`
-  margin-bottom: 10px;
+  margin-block-end: 10px;
 `;
 
 export const List = styled.ul`
@@ -31,7 +23,7 @@ export const Item = styled.li`
   white-space: nowrap;
 
   & + & {
-    margin-top: 10px;
+    margin-block-start: 10px;
   }
 `;
 
@@ -45,8 +37,8 @@ export const Link = styled.a`
 export const LinkIcon = styled(IconComposer)`
   position: relative;
   top: 1px;
-  margin-right: 6px;
-  margin-left: -1px;
+  margin-inline-end: 6px;
+  margin-inline-start: -1px;
   color: var(--hover-color);
 `;
 
