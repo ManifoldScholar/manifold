@@ -36,17 +36,16 @@ export const Title = styled.h3`
 
 export const DescriptionWrapper = styled.div`
   position: relative;
-  min-height: 48px;
+  padding-block-end: 5em;
+
+  ${respond(`padding-block-end: 3.5em;`, 40)}
 `;
 
 export const Description = styled("div", transientOptions)`
   font-family: var(--font-family-copy);
   max-width: ${slideCopyFocus};
-  padding-block-end: 5em;
   overflow: hidden;
   font-size: 15px;
-
-  ${respond(`padding-block-end: 3.5em;`, 40)}
 
   p + p {
     margin-block-start: 1em;
@@ -58,8 +57,8 @@ export const Description = styled("div", transientOptions)`
 `;
 
 export const DescriptionStatic = styled(Description, transientOptions)`
-  height: 48px;
   position: absolute;
+  height: 48px;
   top: 0;
   opacity: 100%;
   transition: opacity 250ms linear;
