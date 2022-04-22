@@ -18,9 +18,23 @@ export default function FormattedDate({
 
   const dateTime = () => {
     try {
-      return formatDate(parsedDate, "P", {
+      let dateTimeFormat;
+      switch (format) {
+        case "MMMM, yyyy":
+        case "MMMM yyyy":
+          dateTimeFormat = "M yyy";
+          break;
+        case "PPpp":
+          return parsedDate.toISOString();
+        default:
+          dateTimeFormat = "P";
+          break;
+      }
+      return formatDate(parsedDate, dateTimeFormat, {
         locale: t("date_fns", { returnObjects: true })
-      });
+      })
+        .replaceAll("/", "-")
+        .replaceAll(" ", "-");
     } catch {
       return "";
     }
