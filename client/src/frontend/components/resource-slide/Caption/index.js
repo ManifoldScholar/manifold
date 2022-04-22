@@ -20,7 +20,7 @@ function ResourceListSlideCaption({
 
   const canExpand = () => {
     if (!descriptRef.current) return setExpandable(false);
-    return setExpandable(descriptRef.current.offsetHeight > 48);
+    return setExpandable(descriptRef.current.scrollHeight > 48);
   };
 
   useEffect(() => {
@@ -56,7 +56,13 @@ function ResourceListSlideCaption({
       __html: resource.attributes.captionFormatted
     };
 
-    return <Description content={content} ref={descriptRef} />;
+    return (
+      <Description
+        content={content}
+        ref={descriptRef}
+        isExpandable={isExpandable}
+      />
+    );
   };
 
   const attr = resource.attributes;
