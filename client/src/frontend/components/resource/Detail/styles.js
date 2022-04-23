@@ -6,6 +6,7 @@ import {
   containerPrototype,
   fluidScale
 } from "theme/styles/mixins";
+import { transientOptions } from "helpers/emotionHelpers";
 
 export const Container = styled.section`
   ${containerPrototype}
@@ -85,11 +86,14 @@ export const DescriptionHeader = styled.h2`
   color: var(--color-neutral-text-dark);
 `;
 
-export const Comments = styled.div`
+export const Comments = styled("div", transientOptions)`
+  display: none;
   padding-block-start: 16px;
   margin-block-start: 54px;
   padding-block-end: 25px;
   border-top: 1px solid var(--color-base-neutral45);
+
+  ${({ $show }) => $show && `display: block;`}
 
   .comment-list {
     padding-inline-start: 0;
