@@ -23,7 +23,7 @@ class ResourceTagList extends Component {
     const project = resource.relationships.project;
     const out = [];
     tags.map((tag, index) => {
-      return out.push(this.createTagLink(tag, project.attributes.slug, index));
+      return out.push(this.createTagLink(tag, project?.attributes.slug, index));
     });
     return out;
   }
