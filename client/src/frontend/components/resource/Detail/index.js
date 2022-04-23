@@ -17,6 +17,7 @@ export default function ResourceDetail({ resourceUrl, resource }) {
   const commentsMeta = useSelector(state =>
     meta(`comments-for-${resource.id}`, state.entityStore)
   );
+  const showComments = !!commentsMeta?.pagination?.totalCount;
 
   if (!resource) return null;
 
@@ -63,11 +64,10 @@ export default function ResourceDetail({ resourceUrl, resource }) {
       </Styled.ColumnWrapper>
       {canEngagePublicly && (
         <>
-          {!!commentsMeta?.pagination?.totalCount && (
-            <Styled.Comments>
-              <CommentContainer.Thread subject={resource} />
-            </Styled.Comments>
-          )}
+          {/* This can't be conditionally rendered because the comment fetch happens in CommentContainer. */}
+          <Styled.Comments $show={showComments}>
+            <CommentContainer.Thread subject={resource} />
+          </Styled.Comments>
           <CommentContainer.Editor
             focus={false}
             label={t("actions.add_comment_title_case")}
