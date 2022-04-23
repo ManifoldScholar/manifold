@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
-import { respond, fluidScale } from "theme/styles/mixins";
+import {
+  respond,
+  fluidScale,
+  buttonUnstyled,
+  utilityPrimary
+} from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 
 const ACTION_MARGIN_TOP = 18;
@@ -72,22 +77,22 @@ export const Actions = styled.div`
 export const Buttons = styled.div`
   display: flex;
   width: 100%;
-  margin-top: ${ACTION_MARGIN_TOP}px;
-  margin-left: -${BUTTON_MARGIN_LEFT}px;
+  margin-block-start: ${ACTION_MARGIN_TOP}px;
+  margin-inline-start: -${BUTTON_MARGIN_LEFT}px;
 
   ${respond(`width: auto;`, 120)}
 
   &:only-child {
     justify-content: flex-end;
     width: 100%;
-    margin-left: 0;
+    margin-inline-start: 0;
   }
 
   .button-primary,
   .button-secondary {
     min-width: 100px;
     padding: 9px 0 11px;
-    margin-left: ${BUTTON_MARGIN_LEFT}px;
+    margin-inline-start: ${BUTTON_MARGIN_LEFT}px;
     font-size: 14px;
   }
 
@@ -106,4 +111,12 @@ export const Buttons = styled.div`
       color: inherit;
     }
   }
+`;
+
+export const Placeholder = styled.button`
+  ${buttonUnstyled}
+  ${utilityPrimary}
+  font-size: 14px;
+  border: 0;
+  margin-block-start: 18px;
 `;

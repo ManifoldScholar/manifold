@@ -6741,14 +6741,14 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
                       <Editor>
                         <Noop />
                         <div
-                          className="css-493fqx-Editor e1vhjmiz5"
+                          className="css-493fqx-Editor e1vhjmiz6"
                         >
                           <Label
                             onClick={[Function]}
                           >
                             <Noop />
                             <button
-                              className="css-13etxoz-Label e1vhjmiz4"
+                              className="css-13etxoz-Label e1vhjmiz5"
                               onClick={[Function]}
                             >
                               <Icon
@@ -6763,7 +6763,7 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
                               >
                                 <Noop />
                                 <IconComposer
-                                  className="css-lp3xv3-Icon e1vhjmiz3"
+                                  className="css-lp3xv3-Icon e1vhjmiz4"
                                   fill="currentColor"
                                   icon="interactComment24"
                                   size={24}
@@ -6774,7 +6774,7 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
                                   }
                                 >
                                   <InteractComment
-                                    className="css-lp3xv3-Icon e1vhjmiz3 svg-icon--interactComment24"
+                                    className="css-lp3xv3-Icon e1vhjmiz4 svg-icon--interactComment24"
                                     fill="currentColor"
                                     icon="interactComment24"
                                     size={24}
@@ -6787,7 +6787,7 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="manicon-svg css-lp3xv3-Icon e1vhjmiz3 svg-icon--interactComment24"
+                                      className="manicon-svg css-lp3xv3-Icon e1vhjmiz4 svg-icon--interactComment24"
                                       fill="currentColor"
                                       height={24}
                                       viewBox="0 0 24 24"
@@ -6801,9 +6801,7 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
                                   </InteractComment>
                                 </IconComposer>
                               </Icon>
-                              <span
-                                className="annotation-editor__label-text"
-                              >
+                              <span>
                                 actions.add_comment_title_case
                               </span>
                             </button>

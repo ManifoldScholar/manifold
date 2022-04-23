@@ -5,15 +5,11 @@ exports[`global/containers/comment/Editor matches the snapshot 1`] = `
   <Connect(withRouter(AuthorizeComponent))
     kind="unauthenticated"
   >
-    <div
-      className="placeholder"
+    <Placeholder
+      onClick={[Function]}
     >
-      <button
-        onClick={[Function]}
-      >
-        placeholders.comments.unauthenticated
-      </button>
-    </div>
+      placeholders.comments.unauthenticated
+    </Placeholder>
   </Connect(withRouter(AuthorizeComponent))>
   <Connect(withRouter(AuthorizeComponent))
     kind="any"

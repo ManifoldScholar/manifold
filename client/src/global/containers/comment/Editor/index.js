@@ -192,19 +192,15 @@ export class CommentEditor extends PureComponent {
         {this.props.label ? (
           <Styled.Label onClick={this.toggleOpen}>
             <Styled.Icon icon="interactComment24" size={24} />
-            <span className="annotation-editor__label-text">
-              {this.props.label}
-            </span>
+            <span>{this.props.label}</span>
           </Styled.Label>
         ) : null}
         {(this.state.open || !this.isComment(this.props)) && (
           <>
             <Authorize kind="unauthenticated">
-              <div className="placeholder">
-                <button onClick={showLogin}>
-                  {t("placeholders.comments.unauthenticated")}
-                </button>
-              </div>
+              <Styled.Placeholder onClick={showLogin}>
+                {t("placeholders.comments.unauthenticated")}
+              </Styled.Placeholder>
             </Authorize>
             <Authorize kind="any">
               <form onSubmit={this.handleSubmit}>
