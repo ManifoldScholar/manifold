@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`global/containers/comment/Editor matches the snapshot 1`] = `
-<div
-  className="annotation-editor"
->
+<Editor>
   <Connect(withRouter(AuthorizeComponent))
     kind="unauthenticated"
   >
@@ -28,5 +26,5 @@ exports[`global/containers/comment/Editor matches the snapshot 1`] = `
       </mockConstructor>
     </form>
   </Connect(withRouter(AuthorizeComponent))>
-</div>
+</Editor>
 `;

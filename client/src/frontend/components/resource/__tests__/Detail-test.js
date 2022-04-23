@@ -6,11 +6,10 @@ describe("frontend/components/resource/Detail", () => {
     <Detail
       resource={$resource}
       resourceUrl="resource/url"
-      projectUrl="project/url"
     />
   ));
 
   it("matches the snapshot", () => {
-    expect(shallow($root)).toMatchSnapshot();
+    expect(mount($withApp($root))).toMatchSnapshot();
   });
 });
