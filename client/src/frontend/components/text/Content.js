@@ -39,7 +39,7 @@ export default class TextContent extends Component {
     return (
       <Styled.Content>
         <Styled.Inner>
-          <Text.Cover text={text} iconOnly={!showCovers} />
+          {showCovers && <Text.Cover text={text} />}
           <Bibliographic
             text={text}
             readUrl={readUrl}
