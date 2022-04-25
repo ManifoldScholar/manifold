@@ -216,7 +216,11 @@ export default `
 
       &__legend {
         + .instructions {
-          margin-top: 7px;
+          margin-block-start: 7px;
+        }
+
+        + .radio {
+          margin-block-start: 1em;
         }
       }
 
