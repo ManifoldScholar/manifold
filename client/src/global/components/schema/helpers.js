@@ -42,7 +42,7 @@ export const renderJournal = journal => {
 };
 
 export const renderIssues = issues => {
-  if (!issues.length) return {};
+  if (!issues.length) return [];
 
   return issues.map(issue => ({
     "@type": "PublicationIssue",
@@ -52,7 +52,7 @@ export const renderIssues = issues => {
 };
 
 export const renderVolumes = (volumes, journal, includeIssues = false) => {
-  if (!volumes.length) return {};
+  if (!volumes.length) return [];
 
   return volumes.map(volume => {
     const issues = volume.relationships?.journalIssues ?? {};
