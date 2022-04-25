@@ -28,31 +28,65 @@ class ResourcePlayerVideo extends Component {
   }
   /* eslint-enable react/no-did-mount-set-state */
 
-  renderVideoByService(service, id) {
-    let output = false;
-    if (service === "vimeo") {
-      output = (
-        <iframe
-          src={`//player.vimeo.com/video/${id}`}
-          frameBorder="0"
-          title={`vimeo-${id}`}
-          allowFullScreen
-        />
-      );
+  get subKind() {
+    return this.props.resource.attributes.subKind;
+  }
+
+  get externalType() {
+    return this.props.resource.attributes.externalType;
+  }
+
+  get externalId() {
+    return this.props.resource.attributes.externalId;
+  }
+
+  // strip out addtl params from ID (e.g. `Zo6UnKr6Bwg&t=21s`),
+  // which can be mistakenly included and cause embeds to fail
+  get parsedId() {
+    const url = new URL(`http://manifold.lvh/?id=${this.externalId}`);
+    const params = new URLSearchParams(url.search);
+    return params.get("id");
+  }
+
+  get iframeSrc() {
+    switch (this.externalType) {
+      case "vimeo":
+        return `//player.vimeo.com/video/${this.parsedId}`;
+      case "youtube":
+        return `https://www.youtube.com/embed/${this.parsedId}?rel=0`;
+      default:
+        return null;
     }
-    if (service === "youtube") {
-      output = (
-        <iframe
-          id="ytplayer"
-          type="text/html"
-          src={`https://www.youtube.com/embed/${id}?rel=0`}
-          frameBorder="0"
-          title={`yt-${id}`}
-          allowFullScreen
-        />
-      );
+  }
+
+  get iframeTitle() {
+    switch (this.externalType) {
+      case "vimeo":
+        return `vimeo-${this.externalId}`;
+      case "youtube":
+        return `yt-${this.externalId}`;
+      default:
+        return null;
     }
-    return <div className="figure-video">{output}</div>;
+  }
+
+  get iframeProps() {
+    return {
+      src: this.iframeSrc,
+      frameBorder: "0",
+      allowFullScreen: true,
+      type: this.externalType === "youtube" ? "text/html" : null
+    };
+  }
+
+  renderVideoByService() {
+    if (!this.iframeSrc) return null;
+
+    return (
+      <div className="figure-video">
+        <iframe title={this.iframeTitle} {...this.iframeProps} />
+      </div>
+    );
   }
 
   handleError = eventIgnored => {
@@ -69,39 +103,28 @@ class ResourcePlayerVideo extends Component {
     this.props.dispatch(notificationActions.addNotification(notification));
   };
 
-  renderFileVideo(resource) {
+  renderFileVideo() {
     if (!this.state.inBrowser) return null;
+
+    const { variantPosterStyles, attachmentStyles } = this.props.resource;
 
     return (
       <div className="figure-video">
         <Video
           ref={this.playerRef}
           controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}
-          poster={resource.attributes.variantPosterStyles.mediumLandscape}
+          poster={variantPosterStyles.mediumLandscape}
           onError={this.handleError}
         >
-          <source
-            src={resource.attributes.attachmentStyles.original}
-            type="video/mp4"
-          />
+          <source src={attachmentStyles.original} type="video/mp4" />
         </Video>
       </div>
     );
   }
 
-  renderVideo(resource) {
-    if (resource.attributes.subKind === "external_video") {
-      return this.renderVideoByService(
-        resource.attributes.externalType,
-        resource.attributes.externalId
-      );
-    }
-    return this.renderFileVideo(resource);
-  }
-
   render() {
-    const resource = this.props.resource;
-    return this.renderVideo(resource);
+    if (this.subKind === "external_video") return this.renderVideoByService();
+    return this.renderFileVideo();
   }
 }
 
