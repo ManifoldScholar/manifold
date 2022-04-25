@@ -1,4 +1,8 @@
-import { respond, loginFormPrimary } from "theme/styles/mixins";
+import {
+  respond,
+  loginFormPrimary,
+  defaultFocusStyle
+} from "theme/styles/mixins";
 
 export default `
   .login-page {
@@ -49,6 +53,17 @@ export default `
 
     .button-secondary {
       width: 100%;
+    }
+
+    .focusable-form {
+      &:focus:not(:focus-visible) {
+        outline: 0;
+      }
+
+      &:focus-visible {
+        ${defaultFocusStyle}
+        outline-offset: 5px;
+      }
     }
   }
 `;
