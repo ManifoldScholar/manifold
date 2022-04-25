@@ -69,6 +69,7 @@ export default `
       flex-wrap: wrap;
       justify-content: flex-start;
       margin: 0 -11px;
+      padding-block-end: 1px;
 
       &--vertical {
         display: block;
