@@ -10,7 +10,7 @@ import EntityCollection from "frontend/components/entity/Collection";
 import HeadContent from "global/components/HeadContent";
 import { useFetch, usePaginationState } from "hooks";
 
-export default function EventList({ project }) {
+export default function EventList({ project, journalBreadcrumbs }) {
   const { id } = useParams();
   const [pagination, setPageNumber] = usePaginationState();
   const { data: events, meta } = useFetch({
@@ -20,15 +20,20 @@ export default function EventList({ project }) {
 
   const { titlePlaintext, slug, hideActivity, description, avatarStyles } =
     project?.attributes || {};
-  const breadcrumbs = useMemo(
-    () => [
-      {
-        to: lh.link("frontendProjectDetail", slug),
-        label: titlePlaintext
-      }
-    ],
-    [slug, titlePlaintext]
-  );
+
+  const breadcrumbs = useMemo(() => {
+    const projectCrumb = {
+      to: lh.link("frontendProject", slug),
+      label: titlePlaintext
+    };
+    const eventsCrumb = {
+      to: lh.link("frontendProjectEvents", slug),
+      label: t("glossary.event_other")
+    };
+    return journalBreadcrumbs
+      ? [...journalBreadcrumbs, eventsCrumb].filter(Boolean)
+      : [projectCrumb, eventsCrumb].filter(Boolean);
+  }, [journalBreadcrumbs, slug, titlePlaintext, t]);
 
   if (!project || !events) return null;
   if (hideActivity) return <Redirect to={"/"} />;
@@ -62,5 +67,6 @@ export default function EventList({ project }) {
 EventList.displayName = "Frontend.Containers.EventList";
 
 EventList.propTypes = {
-  project: PropTypes.object
+  project: PropTypes.object,
+  journalBreadcrumbs: PropTypes.object
 };

@@ -1,4 +1,4 @@
-import { EventList } from "../";
+import EventList from "../";
 
 describe("frontend/containers/EventList/EventList", () => {
   def("events", () => collectionFactory("event"));
@@ -11,11 +11,10 @@ describe("frontend/containers/EventList/EventList", () => {
       project={$project}
       events={$events}
       eventsMeta={{ pagination: fixtures.pagination() }}
-      t={key => key}
     />
   ));
 
   it("matches the snapshot", () => {
-    expect(shallow($root)).toMatchSnapshot();
+    expect(mount($withApp($root))).toMatchSnapshot();
   });
 });
