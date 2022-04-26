@@ -16,30 +16,6 @@ export default function FormattedDate({
 
   const parsedDate = isDate(date) ? date : parseISO(date);
 
-  const dateTime = () => {
-    try {
-      let dateTimeFormat;
-      switch (format) {
-        case "MMMM, yyyy":
-        case "MMMM yyyy":
-          dateTimeFormat = "M yyy";
-          break;
-        case "PPpp":
-          return parsedDate.toISOString();
-        default:
-          dateTimeFormat = "P";
-          break;
-      }
-      return formatDate(parsedDate, dateTimeFormat, {
-        locale: t("date_fns", { returnObjects: true })
-      })
-        .replaceAll("/", "-")
-        .replaceAll(" ", "-");
-    } catch {
-      return "";
-    }
-  };
-
   const formatDateString = () => {
     try {
       if (format === "distanceInWords")
@@ -59,7 +35,11 @@ export default function FormattedDate({
     return prefix ? `${prefix} ${dateStr}` : dateStr;
   };
 
-  return <time dateTime={dateTime()}>{addPrefix(formatDateString())}</time>;
+  return (
+    <time dateTime={parsedDate.toISOString()}>
+      {addPrefix(formatDateString())}
+    </time>
+  );
 }
 
 FormattedDate.displayName = "FormattedDate";

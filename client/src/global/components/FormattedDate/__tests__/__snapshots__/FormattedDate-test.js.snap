@@ -109,7 +109,7 @@ exports[`global/components/FormattedDate matches the snapshot 1`] = `
             prefix="test"
           >
             <time
-              dateTime=""
+              dateTime="2017-01-01T08:00:00.000Z"
             >
               test January 1st, 2017
             </time>
@@ -230,7 +230,7 @@ exports[`global/components/FormattedDate when the date is a date object matches 
             prefix="test"
           >
             <time
-              dateTime=""
+              dateTime="2017-01-01T21:00:00.000Z"
             >
               test January, 2017
             </time>
