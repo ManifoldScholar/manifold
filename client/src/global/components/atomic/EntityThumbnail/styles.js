@@ -47,5 +47,4 @@ export const Cover = styled("figure", transientOptions)`
 
 export const Wrapper = styled.div`
   position: relative;
-  height: 100%;
 `;
