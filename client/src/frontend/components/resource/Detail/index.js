@@ -29,8 +29,8 @@ export default function ResourceDetail({ resourceUrl, resource }) {
 
   return (
     <Styled.Container>
-      <Styled.ColumnWrapper>
-        <Styled.Left>
+      <Styled.Grid>
+        <Styled.Main>
           <Title resource={resource} showIcon={false} />
           <Hero resource={resource} />
           <Styled.Content>
@@ -51,27 +51,27 @@ export default function ResourceDetail({ resourceUrl, resource }) {
               </>
             )}
           </Styled.Content>
-        </Styled.Left>
-        <Styled.Right>
+        </Styled.Main>
+        {canEngagePublicly && (
+          <Styled.CommentsWrapper>
+            {/* This can't be conditionally rendered because the comment fetch happens in CommentContainer. */}
+            <Styled.Comments $show={showComments}>
+              <CommentContainer.Thread subject={resource} />
+            </Styled.Comments>
+            <CommentContainer.Editor
+              focus={false}
+              label={t("actions.add_comment_title_case")}
+              subject={resource}
+            />
+          </Styled.CommentsWrapper>
+        )}
+        <Styled.MetadataWrapper>
           <LinkComponent attributes={attr} />
           <Utility.ShareBar url={resourceUrl} />
           <Meta resource={resource} layout={"secondary"} />
           <VariantList resource={resource} />
-        </Styled.Right>
-      </Styled.ColumnWrapper>
-      {canEngagePublicly && (
-        <>
-          {/* This can't be conditionally rendered because the comment fetch happens in CommentContainer. */}
-          <Styled.Comments $show={showComments}>
-            <CommentContainer.Thread subject={resource} />
-          </Styled.Comments>
-          <CommentContainer.Editor
-            focus={false}
-            label={t("actions.add_comment_title_case")}
-            subject={resource}
-          />
-        </>
-      )}
+        </Styled.MetadataWrapper>
+      </Styled.Grid>
     </Styled.Container>
   );
 }
