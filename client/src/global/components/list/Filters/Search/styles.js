@@ -33,7 +33,8 @@ export const Button = styled.button`
 
 export const Input = styled.input`
   width: 100%;
-  padding: 6px 40px 8px 44px;
+  height: ${entityFilterForm.filterHeight};
+  padding: 5px 40px 8px 44px;
   font-size: 17px;
   font-family: var(--font-family-sans);
   background-color: transparent;

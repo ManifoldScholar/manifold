@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { defaultTransitionProps, filterSelectBase } from "theme/styles/mixins";
+import { entityFilterForm } from "theme/styles/variables/crossComponent";
 import IconComposer from "global/components/utility/IconComposer";
 
 export const borderStyles = `
@@ -14,6 +15,7 @@ export const Wrapper = styled.div`
 export const Select = styled.select`
   ${filterSelectBase}
   width: 100%;
+  height: ${entityFilterForm.filterHeight};
   padding-top: 11px;
   padding-bottom: 12px;
   font-size: 13px;
