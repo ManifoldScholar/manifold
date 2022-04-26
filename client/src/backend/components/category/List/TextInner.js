@@ -96,8 +96,8 @@ class TextInner extends Component {
               )}
             </h3>
             <span className="texts-list__date">
-              <FormattedDate // Ask Lauren: Is this all set to translate? Any changes I need to make?
-                prefix="Added"
+              <FormattedDate
+                prefix={this.props.t("dates.added_title_case")}
                 format="MMMM, yyyy"
                 date={this.text.attributes.createdAt}
               />
