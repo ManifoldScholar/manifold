@@ -5,13 +5,12 @@ import cloneDeep from "lodash/cloneDeep";
 import merge from "lodash/merge";
 import isDate from "date-fns/isDate";
 import chartOptions from "./chartOptions";
-import { zonedTimeToUtc } from "date-fns-tz";
+import { useTranslation } from "react-i18next";
 
 function stringToDate(dateStr) {
   // TODO: Remove hardcoded time zone once it's removed from the API.
-  return isDate(dateStr)
-    ? dateStr
-    : zonedTimeToUtc(dateStr, "America/Los_Angeles");
+  // I replaced this with a vanilla js date constructor because we're only getting date, not timestamp, data. -LD
+  return isDate(dateStr) ? dateStr : new Date(dateStr);
 }
 
 function shapeData({ x, y }) {
@@ -58,13 +57,14 @@ const LoadableChart = Loadable({
 /* eslint-enable react/prop-types */
 
 function Chart({ options, data, tooltipLabel, height = 170 }) {
+  const { t } = useTranslation();
   const shapedData = data.map(point => shapeData(point));
   const start = shapedData[0]?.x.getTime() || "auto";
   const end = shapedData[shapedData.length - 1]?.x.getTime() || "auto";
   const xAxisDomain = [start, end];
   const mergedOptions = merge(
     {},
-    cloneDeep(chartOptions({ tooltipLabel })),
+    cloneDeep(chartOptions({ tooltipLabel, t })),
     options,
     {
       xAxisProps: {
