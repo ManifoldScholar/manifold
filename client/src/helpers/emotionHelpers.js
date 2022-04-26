@@ -6,7 +6,10 @@ const ALLOWED_PROPS = [
   "entity",
   "activeClassName",
   "isActive",
-  "placeholderAttributes"
+  "placeholderAttributes",
+  "aria-expanded",
+  "aria-controls",
+  "aria-labelledby"
 ];
 
 // styled-components-style transient prop support (`$someProp`)

@@ -15,6 +15,7 @@ exports[`global/containers/comment/Editor matches the snapshot 1`] = `
     kind="any"
   >
     <form
+      aria-labelledby="actions.edit"
       onSubmit={[Function]}
     >
       <mockConstructor>

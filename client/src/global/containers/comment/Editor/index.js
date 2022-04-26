@@ -172,7 +172,7 @@ export class CommentEditor extends PureComponent {
   }
 
   placeholder(props) {
-    const t = this.props.t;
+    const t = props.t;
     if (props.placeholder) return props.placeholder;
     if (this.isEdit(props)) return t("placeholders.comments.edit");
     if (this.isReply(props)) return t("placeholders.comments.reply");
@@ -187,6 +187,13 @@ export class CommentEditor extends PureComponent {
     const t = this.props.t;
     if (this.isEdit(props)) return t("actions.update");
     return t("actions.post");
+  }
+
+  formLabel(props) {
+    const t = props.t;
+    if (props.label) return props.label;
+    if (this.isEdit(props)) return t("actions.edit");
+    if (this.isReply(props)) return t("actions.reply");
   }
 
   toggleOpen = () =>
@@ -205,7 +212,10 @@ export class CommentEditor extends PureComponent {
     return (
       <Styled.Editor>
         {this.props.label ? (
-          <Styled.Label onClick={this.toggleOpen}>
+          <Styled.Label
+            onClick={this.toggleOpen}
+            aria-expanded={this.state.open}
+          >
             <Styled.Icon icon="interactComment24" size={24} />
             <span>{this.props.label}</span>
           </Styled.Label>
@@ -218,7 +228,10 @@ export class CommentEditor extends PureComponent {
               </Styled.Placeholder>
             </Authorize>
             <Authorize kind="any">
-              <form onSubmit={this.handleSubmit}>
+              <form
+                onSubmit={this.handleSubmit}
+                aria-labelledby={this.formLabel(this.props)}
+              >
                 <UIDConsumer>
                   {id => (
                     <GlobalForm.Errorable
