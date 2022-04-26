@@ -42,6 +42,7 @@ export const dialog = {
 
 export const entityFilterForm = {
   gap: 12,
+  filterHeight: "40px",
   selectMinWidth: 182,
   searchMinWidth: 200,
   flexBasis(inputCount = 1, searchCount = 0) {
