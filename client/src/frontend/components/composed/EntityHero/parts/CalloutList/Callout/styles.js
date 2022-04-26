@@ -16,7 +16,7 @@ export const ErrorButton = styled(Button)`
 `;
 
 export const LinkIcon = styled(IconComposer)`
-  margin-inline-end: 8px;
+  margin-inline-end: 12px;
   color: var(--text-color, --color-base-neutral50);
   transition: color ${defaultTransitionProps};
 `;
@@ -29,7 +29,8 @@ export const LinkCallout = styled(Link, transientOptions)`
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.104em;
-  display: block;
+  display: flex;
+  align-items: center;
   min-height: 17.33px;
 
   &:hover {

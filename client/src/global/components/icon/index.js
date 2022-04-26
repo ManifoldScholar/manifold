@@ -10,12 +10,14 @@ import AnnotationGroupAlt24 from "./24/AnnotationGroupAlt";
 import Archive24 from "./24/Archive";
 import Arrow24 from "./24/Arrow";
 import ArrowDown16 from "./16/ArrowDown";
+import ArrowDown24 from "./24/ArrowDown";
 import ArrowDown32 from "./32/ArrowDown";
 import ArrowLeft16 from "./16/ArrowLeft";
 import ArrowLeft32 from "./32/ArrowLeft";
 import ArrowLongLeft16 from "./16/ArrowLongLeft";
 import ArrowLongRight16 from "./16/ArrowLongRight";
 import ArrowRight16 from "./16/ArrowRight";
+import ArrowRight24 from "./24/ArrowRight";
 import ArrowRight32 from "./32/ArrowRight";
 import ArrowUp16 from "./16/ArrowUp";
 import ArrowUp32 from "./32/ArrowUp";
@@ -175,12 +177,14 @@ export default {
   Archive24,
   Arrow24,
   ArrowDown16,
+  ArrowDown24,
   ArrowDown32,
   ArrowLeft16,
   ArrowLeft32,
   ArrowLongLeft16,
   ArrowLongRight16,
   ArrowRight16,
+  ArrowRight24,
   ArrowRight32,
   ArrowUp16,
   ArrowUp32,
