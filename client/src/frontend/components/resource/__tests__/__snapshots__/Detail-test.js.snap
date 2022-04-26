@@ -3284,10 +3284,12 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
                                   className="css-493fqx-Editor e1vhjmiz6"
                                 >
                                   <Label
+                                    aria-expanded={false}
                                     onClick={[Function]}
                                   >
                                     <Noop />
                                     <button
+                                      aria-expanded={false}
                                       className="css-13etxoz-Label e1vhjmiz5"
                                       onClick={[Function]}
                                     >

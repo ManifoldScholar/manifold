@@ -147,6 +147,7 @@ class CommentDetail extends PureComponent {
                 <button
                   className={this.replyButtonClassNames}
                   onClick={this.startReply}
+                  aria-expanded={this.state.editor === "reply"}
                 >
                   {t("actions.reply")}
                 </button>
@@ -156,6 +157,7 @@ class CommentDetail extends PureComponent {
                   <button
                     onClick={this.startEdit}
                     className={this.listButtonBaseClassNames}
+                    aria-expanded={this.state.editor === "edit"}
                   >
                     {t("actions.edit")}
                   </button>
