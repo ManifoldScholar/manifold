@@ -145,7 +145,8 @@ export const Status = styled("div", transientOptions)`
               margin-top: 0;
               margin-left: 12px;
             }
-          `
+          `,
+          60
         )}
 `;
 
