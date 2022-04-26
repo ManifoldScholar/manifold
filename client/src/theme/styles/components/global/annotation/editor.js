@@ -72,7 +72,7 @@ export default `
         color: var(--color);
       }
 
-      &:focus-visible::placeholder {
+      &.focus-visible::placeholder {
         color: var(--strong-color);
       }
     }
@@ -146,7 +146,7 @@ export default `
         background-color: var(--box-strong-bg-color);
       }
 
-      &:focus-visible {
+      &.focus-visible {
         background-color: var(--box-strong-bg-color);
         outline: 0;
       }

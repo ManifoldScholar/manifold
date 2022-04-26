@@ -34,7 +34,7 @@ export const Input = styled.input`
   z-index: -1;
   opacity: 0;
 
-  &:focus-visible ~ ${Item} {
+  &.focus-visible ~ ${Item} {
     ${defaultFocusStyle}
     outline-offset: -2px;
   }

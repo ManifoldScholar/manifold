@@ -9,7 +9,7 @@ export const Form = styled.form`
     border-radius: 8px;
     font-family: var(--font-family-sans);
 
-    &:focus-visible {
+    &.focus-visible {
       &::placeholder {
         color: var(--focus-color);
       }

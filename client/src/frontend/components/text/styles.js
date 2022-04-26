@@ -26,7 +26,7 @@ export const Block = styled("div", transientOptions)`
   `}
 
   a {
-    &:focus-visible {
+    &.focus-visible {
       outline: 0;
     }
   }

@@ -104,7 +104,7 @@ export default `
         ${formInputSecondary}
         transition: border-color ${defaultTransitionProps};
 
-        &:focus-visible {
+        &.focus-visible {
           border-color: var(--focus-color);
         }
       }
@@ -133,7 +133,7 @@ export default `
           color: var(--color-neutral-ui-light);
         }
 
-        &:focus-visible {
+        &.focus-visible {
           border-color: var(--highlight-color);
         }
       }
@@ -272,7 +272,7 @@ export default `
         line-height: normal;
         text-transform: none;
 
-        &:focus-visible {
+        &.focus-visible {
           border-color: var(--highlight-color);
         }
       }
@@ -308,7 +308,7 @@ export default `
           border-radius: var(--box-border-radius);
           transition: border-color ${defaultTransitionProps};
 
-          &:focus-visible {
+          &.focus-visible {
             border-color: var(--highlight-color);
           }
         }
@@ -353,7 +353,7 @@ export default `
       a, .fake-link {
         ${setHoverStyle()}
 
-        &:focus-visible {
+        &.focus-visible {
           outline: 0;
         }
       }

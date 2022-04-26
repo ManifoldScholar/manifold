@@ -8,7 +8,7 @@ import {
 export default `
   .sign-in-up-update {
     form {
-      &:focus-visible {
+      &.focus-visible {
         ${defaultFocusStyle}
         outline-offset: 5px;
       }

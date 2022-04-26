@@ -47,8 +47,16 @@ export const GroupHeader = styled("div", transientOptions)`
       ? `
       text-decoration: none;
 
-      &:hover,
-      &:focus-visible {
+      &:hover {
+        background-color: var(--box-medium-bg-color);
+        color: var(--strong-color);
+
+        ${Icon} {
+          transform: translate(20%, 3px);
+        }
+      }
+
+      &.focus-visible {
         background-color: var(--box-medium-bg-color);
         color: var(--strong-color);
 

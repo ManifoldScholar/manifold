@@ -45,7 +45,7 @@ export default `
       border-radius: 8px;
       transition: border-color ${defaultTransitionProps};
 
-      &:focus-visible {
+      &.focus-visible {
         border-color: var(--highlight-color);
       }
     }

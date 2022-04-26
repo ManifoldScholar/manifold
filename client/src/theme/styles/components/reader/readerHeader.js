@@ -119,18 +119,18 @@ export default `
     &:active,
     &.button-active,
     &:hover,
-    &:focus-visible {
+    &.focus-visible {
       color: var(--color-neutral-text-extra-dark);
       outline: 0;
     }
 
-    &.button-active:not(:focus-visible),
+    &.button-active:not(.focus-visible),
     &:hover,
-    &:focus-visible {
+    &.focus-visible {
       background-color: var(--color-interaction-light);
     }
 
-    &.button-active:focus-visible {
+    &.button-active.focus-visible {
       background-color: var(--color-interaction-dark);
     }
 

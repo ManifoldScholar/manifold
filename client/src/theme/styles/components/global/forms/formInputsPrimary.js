@@ -161,7 +161,7 @@ export default `
       transition: border-color ${defaultTransitionProps};
       appearance: none;
 
-      &:focus-visible {
+      &.focus-visible {
         border-color: var(--hover-color);
       }
 
@@ -180,7 +180,7 @@ export default `
       outline: none;
       transition: border-color ${defaultTransitionProps};
 
-      &:focus-visible {
+      &.focus-visible {
         border-color: var(--hover-color);
       }
 
@@ -298,11 +298,11 @@ export default `
         background-color: var(--color-base-neutral-white);
       }
 
-      &:focus-visible {
+      &.focus-visible {
         border-color: var(--hover-color);
       }
 
-      &:focus-visible:-moz-focusring {
+      &.focus-visible:-moz-focusring {
         color: transparent;
         text-shadow: 0 0 0 var(--color-neutral-text-dark);
 
@@ -352,7 +352,7 @@ export default `
       z-index: -1;
       opacity: 0;
 
-      &:focus-visible ~ .toggle-indicator {
+      &.focus-visible ~ .toggle-indicator {
         background-color: var(--color-accent-primary-light);
       }
     }
@@ -385,7 +385,7 @@ export default `
       line-height: 1.25em;
 
       input[type="radio"] {
-        &:focus-visible ~ .toggle-label {
+        &.focus-visible ~ .toggle-label {
           ${defaultFocusStyle}
           outline-offset: 2px;
         }
@@ -476,7 +476,7 @@ export default `
       z-index: -1;
       opacity: 0;
 
-      &:focus-visible ~ .toggle-indicator .boolean-primary {
+      &.focus-visible ~ .toggle-indicator .boolean-primary {
         ${defaultFocusStyle}
         outline-offset: 2px;
       }
@@ -818,7 +818,7 @@ export default `
         color: var(--error-color);
       }
 
-      &:focus-visible {
+      &.focus-visible {
         outline-offset: -4px;
       }
     }
@@ -853,7 +853,7 @@ export default `
     }
 
     &:hover,
-    &:focus-visible {
+    &.focus-visible {
       .text {
         background-color: var(--color-accent-primary-pale);
       }

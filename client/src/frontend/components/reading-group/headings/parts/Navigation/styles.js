@@ -98,8 +98,8 @@ export const Link = styled(NavLink, transientOptions)`
     padding-left: min(5vw, 50px);
     `}
 
-  &:focus-visible,
-    &:hover {
+  &.focus-visible,
+  &:hover {
     --box-bg-color: var(--color-base-neutral20);
     color: var(--strong-color);
 

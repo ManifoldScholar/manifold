@@ -131,7 +131,7 @@ export default `
       height: 100%;
       text-decoration: none;
 
-      &:focus-visible {
+      &.focus-visible {
         background-color: ${lighten("neutral75", 2)};
         border-color: ${lighten("neutral75", 2)};
         outline: none;
@@ -144,7 +144,7 @@ export default `
           box-shadow var(--transition-duration-default) ease-out;
 
         &:hover,
-        &:focus-visible {
+        &.focus-visible {
           outline: 0;
 
           ${respond(
@@ -418,13 +418,13 @@ export default `
 
       .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active):hover
         &,
-      .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active):focus-visible
+      .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active).focus-visible
         & {
         text-decoration: underline;
       }
 
       .entity-row__row-link--in-grid:hover &,
-      .entity-row__row-link--in-grid:focus-visible & {
+      .entity-row__row-link--in-grid.focus-visible & {
         ${respond(`text-decoration: underline;`, breakpointLessOne(65), "max")}
       }
 

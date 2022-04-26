@@ -69,7 +69,7 @@ export default `
           outline: 0;
         }
 
-        &:focus-visible {
+        &.focus-visible {
           color: var(--focus-color);
         }
       }
