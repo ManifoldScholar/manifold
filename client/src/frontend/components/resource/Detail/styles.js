@@ -14,31 +14,41 @@ export const Container = styled.section`
   padding-block-end: ${fluidScale("55px", "40px")};
 `;
 
-export const ColumnWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10%;
+export const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "main"
+    "metadata"
+    "comments";
+  column-gap: 10%;
   color: var(--color-neutral-text-extra-dark);
-`;
-
-export const Left = styled.div`
-  width: 100%;
 
   ${respond(
     `
-    max-width: 65%;
+    grid-template-columns: 65% 25%;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "main metadata"
+      "comments metadata";
     `,
     65
   )}
 `;
 
-export const Right = styled.div`
+export const Main = styled.div`
+  width: 100%;
+  grid-area: main;
+`;
+
+export const MetadataWrapper = styled.div`
   width: 100%;
   padding-block-start: 35px;
+  grid-area: metadata;
 
   ${respond(
     `
-    max-width: 25%;
     padding-block-start: 10px;
     `,
     65
@@ -52,6 +62,12 @@ export const Right = styled.div`
       content: ":";
     }
   }
+`;
+
+export const CommentsWrapper = styled.div`
+  grid-area: comments;
+  width: 100%;
+  align-self: start;
 `;
 
 export const Content = styled.div`
