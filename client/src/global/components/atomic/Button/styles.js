@@ -38,10 +38,9 @@ const aSecondaryButtonDark = `
 `;
 
 const aButtonLg = `
-  --ButtonText-padding-block: 18px;
+  --ButtonText-padding-block: 12px;
   --ButtonIcon-margin: -6px;
 
-  height: 50px;
   justify-content: center;
   border-radius: 6px;
 
@@ -49,12 +48,11 @@ const aButtonLg = `
 `;
 
 export const Button = styled("button", transientOptions)`
-  --ButtonText-padding-block: 11px;
+  --ButtonText-padding-block: 9px;
 
   display: flex;
   gap: 12px;
   align-items: center;
-  height: 40px;
   min-width: min(200px, 100%);
   width: ${({ $width }) => $width && `${$width}px`};
   padding-inline: 12px;
