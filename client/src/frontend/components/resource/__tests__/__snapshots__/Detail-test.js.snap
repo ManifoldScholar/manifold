@@ -1180,7 +1180,7 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
                                         format="MMMM, yyyy"
                                       >
                                         <time
-                                          dateTime=""
+                                          dateTime="2017-04-24T23:25:50.161Z"
                                         >
                                           April, 2017
                                         </time>
@@ -3517,7 +3517,7 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
                                                   format="PPP"
                                                 >
                                                   <time
-                                                    dateTime=""
+                                                    dateTime="2017-04-24T23:25:50.161Z"
                                                   >
                                                     April 24th, 2017
                                                   </time>
