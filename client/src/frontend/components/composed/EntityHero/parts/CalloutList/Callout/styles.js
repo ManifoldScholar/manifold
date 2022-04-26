@@ -9,7 +9,7 @@ export const ErrorButton = styled(Button)`
   background-color: var(--color-notification-warning-light);
 
   &:hover,
-  &:focus-visible {
+  &.focus-visible {
     color: var(--color-neutral-text-extra-dark);
     background-color: var(--color-notification-warning-extra-light);
   }
@@ -43,7 +43,7 @@ export const ErrorLink = styled(LinkCallout)`
   color: var(--color-notification-warning-light);
 
   &:hover,
-  &:focus-visible {
+  &.focus-visible {
     color: var(--color-notification-warning-extra-light);
   }
 `;

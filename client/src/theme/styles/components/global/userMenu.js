@@ -96,7 +96,7 @@ export default `
         background-color ${defaultTransitionProps};
 
       &:hover,
-      &:focus-visible {
+      &.focus-visible {
         color: var(--color-base-neutral90);
 
         .user-menu--reader & {
@@ -104,7 +104,7 @@ export default `
         }
       }
 
-      &:focus-visible {
+      &.focus-visible {
         background-color: var(--color-base-neutral30);
         outline: 0;
       }
@@ -122,7 +122,7 @@ export default `
       }
 
       .user-menu__link:hover &,
-      .user-menu__link:focus-visible & {
+      .user-menu__link.focus-visible & {
         color: var(--color-base-neutral90);
       }
     }

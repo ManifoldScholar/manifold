@@ -55,7 +55,7 @@ export const TitleText = styled("span", transientOptions)`
   ${({ $stack }) =>
     !$stack &&
     `
-    &:hover{
+    &:hover {
       ${defaultHoverStyle}
     }`}
 `;

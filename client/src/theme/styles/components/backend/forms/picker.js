@@ -119,7 +119,7 @@ export default `
         padding: 8px 0 13px 17px;
         border: 0;
 
-        &:focus-visible {
+        &.focus-visible {
           border: 0;
         }
 

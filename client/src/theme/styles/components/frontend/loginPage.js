@@ -56,11 +56,11 @@ export default `
     }
 
     .focusable-form {
-      &:focus:not(:focus-visible) {
+      &:focus:not(.focus-visible) {
         outline: 0;
       }
 
-      &:focus-visible {
+      &.focus-visible {
         ${defaultFocusStyle}
         outline-offset: 5px;
       }

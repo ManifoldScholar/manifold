@@ -133,7 +133,7 @@ export default `
       border-color: var(--color-interaction-light);
     }
 
-    &:focus-visible {
+    &.focus-visible {
       background-color: var(--color-accent-primary-dull);
       outline: 0;
 
@@ -153,7 +153,7 @@ export default `
         border-color: var(--color-base-neutral20);
       }
 
-      &:focus-visible {
+      &.focus-visible {
         color: var(--color-base-neutral95);
         background-color: var(--color-base-neutral30);
         border-color: var(--color-base-neutral30);
@@ -169,7 +169,7 @@ export default `
         border-color: var(--color-base-neutral70);
       }
 
-      &:focus-visible {
+      &.focus-visible {
         background-color: var(--color-base-neutral20);
       }
 
@@ -291,7 +291,7 @@ export default `
       border: 1px solid;
     }
 
-    &:focus-visible:not([disabled]) {
+    &.focus-visible:not([disabled]) {
       color: var(--color-base-neutral90);
       background-color: var(--color-accent-primary-pale);
       outline: 0;
@@ -304,7 +304,7 @@ export default `
       border-color: var(--color-interaction-light);
     }
 
-    &:focus-visible:disabled {
+    &.focus-visible:disabled {
       outline-offset: 2px;
     }
 
@@ -319,7 +319,7 @@ export default `
         border-color: var(--hover-color);
       }
 
-      &:focus-visible:not([disabled]) {
+      &.focus-visible:not([disabled]) {
         color: var(--strong-color);
         background-color: rgba("neutral70", 0.3);
         outline: 0;
@@ -428,7 +428,7 @@ export default `
     ${respond(`font-size: 14px;`, 60)}
 
     &:hover,
-    &:focus-visible {
+    &.focus-visible {
       color: var(--strong-color);
       background-color: var(--color-accent-primary-dull);
       outline: 0;
@@ -446,7 +446,7 @@ export default `
       background-color: var(--button-dull-bg-color);
 
       &:hover,
-      &:focus-visible {
+      &.focus-visible {
         background-color: var(--color-base-neutral20);
       }
 
@@ -462,7 +462,7 @@ export default `
       border: 1px solid var(--hover-color);
 
       &:hover,
-      &:focus-visible {
+      &.focus-visible {
         color: var(--color-neutral-text-extra-dark);
         background-color: var(--hover-color);
         outline: 0;
@@ -474,7 +474,7 @@ export default `
         --highlight-color: var(--color-base-neutral-white);
 
         &:not(.button-secondary--dull):hover,
-        &:not(.button-secondary--dull):focus-visible {
+        &:not(.button-secondary--dull).focus-visible {
           color: var(--color-neutral-text-extra-dark);
           background-color: var(--hover-color);
         }
@@ -498,7 +498,7 @@ export default `
       background-color: var(--color-accent-primary-pale);
 
       &:hover,
-      &:focus-visible {
+      &.focus-visible {
         background-color: var(--color-accent-primary);
       }
 
@@ -506,7 +506,7 @@ export default `
         background-color: var(--color-base-neutral10);
 
         &:hover,
-        &:focus-visible {
+        &.focus-visible {
           background-color: var(--color-base-neutral20);
         }
       }
@@ -524,7 +524,7 @@ export default `
           color: var(--color-neutral-text-extra-dark);
         }
 
-        &:focus-visible {
+        &.focus-visible {
           background-color: var(--color-neutral-text-extra-dark);
         }
       }
@@ -552,7 +552,7 @@ export default `
         transition: color ${defaultTransitionProps};
 
         .button-secondary:hover &,
-        .button-secondary:focus-visible & {
+        .button-secondary.focus-visible & {
           color: var(--color-base-neutral90);
         }
       }
@@ -581,7 +581,7 @@ export default `
       border-color ${defaultTransitionProps};
 
     &:hover,
-    &:focus-visible,
+    &.focus-visible,
     &--active {
       color: var(--color-neutral-text-extra-dark);
       background-color: var(--button-tertiary-bg-hover-color);
@@ -629,14 +629,14 @@ export default `
       background-color ${defaultTransitionProps};
 
     &:hover,
-    &:focus-visible {
+    &.focus-visible {
       color: inherit;
       background-color: var(--color-accent-primary);
     }
 
     &--warn {
       &:hover,
-      &:focus-visible {
+      &.focus-visible {
         color: var(--color-base-neutral-white);
         background-color: var(--error-color);
       }
@@ -668,7 +668,7 @@ export default `
       border-color: var(--hover-color);
     }
 
-    &:focus-visible {
+    &.focus-visible {
       color: var(--color-neutral-text-extra-dark);
       border-color: var(--hover-color);
       outline: none;

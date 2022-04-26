@@ -79,7 +79,7 @@ export default `
     transition: background-color ${defaultTransitionProps};
 
     &:hover,
-    &:focus-visible {
+    &.focus-visible {
       color: inherit;
       background-color: var(--box-medium-bg-color);
       outline: 0;
@@ -142,7 +142,7 @@ export default `
     transition: background-color ${defaultTransitionProps};
 
     &:hover,
-    &:focus-visible {
+    &.focus-visible {
       --darker-tag-bg-color: var(--box-strong-bg-color);
 
       color: inherit;

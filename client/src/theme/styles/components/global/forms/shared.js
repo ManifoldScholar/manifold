@@ -42,7 +42,7 @@ export default `
         color: var(--color-base-neutral30);
       }
 
-      &:focus-visible {
+      &.focus-visible {
         color: var(--color-base-neutral-white);
         border-color: var(--focus-color);
       }
@@ -101,7 +101,7 @@ export default `
       ${screenReaderText}
       display: block !important;
 
-      &:focus-visible {
+      &.focus-visible {
         outline: 0;
 
         + [class^='contents-'] .form-dropzone__upload-prompt,
@@ -141,7 +141,7 @@ export default `
       color: var(--color-base-neutral70);
       cursor: pointer;
 
-      &:focus-visible {
+      &.focus-visible {
         outline: 0;
       }
     }

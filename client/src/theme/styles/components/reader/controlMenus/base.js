@@ -42,7 +42,7 @@ export default `
         background-color ${defaultTransitionProps};
 
       &:hover:not(:disabled):not([aria-disabled="true"]),
-      &:focus-visible {
+      &.focus-visible {
         color: var(--color-neutral-text-extra-dark);
         background-color: var(--color-interaction-light);
         outline: 0;

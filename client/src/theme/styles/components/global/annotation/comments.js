@@ -50,7 +50,7 @@ export default `
         color: var(--error-color);
 
         &--active,
-        &:focus-visible {
+        &.focus-visible {
           color: var(--error-color);
         }
       }

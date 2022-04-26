@@ -41,10 +41,6 @@ export const Input = styled.input`
     font-weight: var(--font-weight-regular);
     color: var(--label-color);
   }
-
-  &:focus-visible {
-    outline: none;
-  }
 `;
 
 export const Button = styled.button`
@@ -64,7 +60,7 @@ export const Button = styled.button`
     background-color ${defaultTransitionProps};
 
   &:hover,
-  &:focus-visible {
+  &.focus-visible {
     color: var(--strong-color);
     background-color: var(--color-accent-primary-light);
     outline: none;
