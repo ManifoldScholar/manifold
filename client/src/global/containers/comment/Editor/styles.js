@@ -3,7 +3,8 @@ import {
   respond,
   fluidScale,
   buttonUnstyled,
-  utilityPrimary
+  utilityPrimary,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -119,4 +120,10 @@ export const Placeholder = styled.button`
   font-size: 14px;
   border: 0;
   margin-block-start: 18px;
+
+  &:focus-visible,
+  &:focus {
+    color: var(--hover-color);
+    ${defaultFocusStyle}
+  }
 `;
