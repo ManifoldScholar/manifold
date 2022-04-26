@@ -44,12 +44,27 @@ export class CommentEditor extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.initialState(props);
+    this.textArea = React.createRef();
+    this.login = React.createRef();
   }
 
   componentDidMount() {
-    if (!this.ci) return null;
-    if (this.props.focus) {
-      this.ci.focus();
+    if (this.state.open || !this.isComment(this.props)) {
+      if (this.textArea.current) {
+        this.textArea.current.focus();
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.state.open || !this.isComment(this.props)) {
+      if (this.textArea.current) {
+        this.textArea.current.focus();
+        return;
+      }
+      if (this.login.current) {
+        this.login.current.focus();
+      }
     }
   }
 
@@ -198,7 +213,7 @@ export class CommentEditor extends PureComponent {
         {(this.state.open || !this.isComment(this.props)) && (
           <>
             <Authorize kind="unauthenticated">
-              <Styled.Placeholder onClick={showLogin}>
+              <Styled.Placeholder onClick={showLogin} ref={this.login}>
                 {t("placeholders.comments.unauthenticated")}
               </Styled.Placeholder>
             </Authorize>
@@ -218,9 +233,7 @@ export class CommentEditor extends PureComponent {
                         {this.placeholder(this.props)}
                       </label>
                       <Styled.TextArea
-                        ref={ci => {
-                          this.ci = ci;
-                        }}
+                        ref={this.textArea}
                         id={`${this.idPrefix}-${id}`}
                         onKeyDown={this.submitOnReturnKey}
                         placeholder={this.placeholder(this.props)}
