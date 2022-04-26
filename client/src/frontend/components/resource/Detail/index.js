@@ -21,13 +21,6 @@ export default function ResourceDetail({ resourceUrl, resource }) {
 
   if (!resource) return null;
 
-  const createDescription = description => {
-    if (!description) return { __html: t("errors.no_content") };
-    return {
-      __html: description
-    };
-  };
-
   const canEngagePublicly = () => {
     return resource.attributes?.abilities?.engagePublicly;
   };
@@ -45,14 +38,18 @@ export default function ResourceDetail({ resourceUrl, resource }) {
               dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
             />
 
-            <Styled.DescriptionHeader>
-              {t("pages.subheaders.full_description")}
-            </Styled.DescriptionHeader>
-            <div
-              dangerouslySetInnerHTML={createDescription(
-                attr.descriptionFormatted
-              )}
-            />
+            {!!attr.descriptionFormatted && (
+              <>
+                <Styled.DescriptionHeader>
+                  {t("pages.subheaders.full_description")}
+                </Styled.DescriptionHeader>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: attr.descriptionFormatted
+                  }}
+                />
+              </>
+            )}
           </Styled.Content>
         </Styled.Left>
         <Styled.Right>
