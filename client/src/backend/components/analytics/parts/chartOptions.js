@@ -1,45 +1,35 @@
 import React from "react";
 import format from "date-fns/format";
 import isDate from "date-fns/isDate";
-import { Translation } from "react-i18next";
 
 const HIGHLIGHT_COLOR = "#61CAFF";
 const AXIS_COLOR = "#9a9a9a";
 const GRID_COLOR = "#696969";
 
-function formatDate(dateStr, pattern = "MMMM d") {
-  const date = isDate(dateStr) ? dateStr : new Date(dateStr);
-  return format(date, pattern);
-}
-
-const CustomTooltip = ({ tooltipLabel }) => ({ active, payload, label }) => {
+const CustomTooltip = ({ tooltipLabel, t }) => ({ active, payload, label }) => {
   if (!active) return null;
   const count = payload ? payload[0].value : 0;
   let date = "";
   if (label) date = isDate(label) ? label : new Date(label);
 
   return (
-    <Translation>
-      {t => (
-        <div className="analytics-chart__tooltip">
-          <span className="analytics-chart__tooltip-label">
-            {t("dates.date", {
-              val: date,
-              formatParams: {
-                val: { month: "long", day: "numeric" }
-              }
-            })}
-          </span>
-          <span className="analytics-chart__tooltip-value">
-            {t(tooltipLabel, { count })}
-          </span>
-        </div>
-      )}
-    </Translation>
+    <div className="analytics-chart__tooltip">
+      <span className="analytics-chart__tooltip-label">
+        {t("dates.date", {
+          val: date,
+          formatParams: {
+            val: { month: "long", day: "numeric" }
+          }
+        })}
+      </span>
+      <span className="analytics-chart__tooltip-value">
+        {t(tooltipLabel, { count })}
+      </span>
+    </div>
   );
 };
 
-const rechartsOptions = ({ tooltipLabel }) => ({
+const rechartsOptions = ({ tooltipLabel, t }) => ({
   chartProps: {
     margin: {
       top: 15
@@ -54,7 +44,10 @@ const rechartsOptions = ({ tooltipLabel }) => ({
     type: "number",
     scale: "time",
     stroke: AXIS_COLOR,
-    tickFormatter: value => formatDate(value, "MM/dd"), // TODO: Localize date ticks, refactor required
+    tickFormatter: value =>
+      format(value, "MM/dd", {
+        locale: t("date_fns", { returnObjects: true })
+      }),
     interval: "preserveStartEnd",
     minTickGap: 0,
     tickSize: 10,
@@ -66,7 +59,7 @@ const rechartsOptions = ({ tooltipLabel }) => ({
   tooltipProps: {
     cursor: false,
     allowEscapeViewBox: false,
-    content: CustomTooltip({ tooltipLabel })
+    content: CustomTooltip({ tooltipLabel, t })
   },
   lineProps: {
     type: "monotone",
