@@ -27,7 +27,8 @@ export default function ProjectsContainer() {
 
   useSetLocation({ filters, page: pagination.number });
 
-  const showPlaceholder = "keyword" in filters ? false : !projects?.length;
+  const showPlaceholder =
+    "keyword" in filters || "featured" in filters ? false : !projects?.length;
 
   const { t } = useTranslation();
 
