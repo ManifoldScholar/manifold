@@ -225,7 +225,9 @@ export class ProjecExportations extends PureComponent {
                 onPageClick: this.pageChangeHandlerCreator
               }}
               entities={projectExportations}
-              unit="export"
+              unit={t("glossary.export", {
+                count: projectExportations?.length
+              })}
             />
           </div>
         )}
