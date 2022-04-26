@@ -54,7 +54,7 @@ function IssueForm({ journalId, model, ...props }) {
           <EntitiesList
             entities={[model.relationships.project]}
             entityComponent={ProjectRow}
-            unit="project"
+            unit={t("glossary.project_one")}
           />
         </div>
       ) : (
