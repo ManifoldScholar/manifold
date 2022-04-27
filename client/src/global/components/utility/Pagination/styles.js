@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { listUnstyled, utilityPrimary, fluidScale } from "theme/styles/mixins";
 
+const LINK_PADDING = 7;
+
 export const Nav = styled.nav`
   ${utilityPrimary}
   font-size: 14px;
@@ -9,6 +11,7 @@ export const Nav = styled.nav`
 
   ul {
     ${listUnstyled}
+    margin-block: -${LINK_PADDING}px;
   }
 
   li {
@@ -28,7 +31,7 @@ export const Columns = styled.ul`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: ${fluidScale("60px", "50px")};
+  gap: ${fluidScale(`${60 - LINK_PADDING}px`, `${50 - LINK_PADDING}px`)};
 `;
 
 export const Column = styled.li`
@@ -39,13 +42,13 @@ export const Pages = styled.div`
   ${listUnstyled}
   display: flex;
   justify-content: center;
-  gap: 14px;
 `;
 
 export const Link = styled.a`
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: ${LINK_PADDING}px;
   text-decoration: none;
 
   &[aria-disabled="true"] {
@@ -57,4 +60,8 @@ export const Link = styled.a`
     pointer-events: none;
     color: var(--color-interaction-light);
   }
+`;
+
+export const Ellipsis = styled.div`
+  padding: ${LINK_PADDING}px;
 `;
