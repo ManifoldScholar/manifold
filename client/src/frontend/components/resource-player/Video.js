@@ -116,10 +116,10 @@ class ResourcePlayerVideo extends Component {
         <Video
           ref={this.playerRef}
           controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}
-          poster={variantPosterStyles?.mediumLandscape}
+          poster={variantPosterStyles.mediumLandscape}
           onError={this.handleError}
         >
-          <source src={attachmentStyles?.original} type="video/mp4" />
+          <source src={attachmentStyles.original} type="video/mp4" />
         </Video>
       </div>
     );
