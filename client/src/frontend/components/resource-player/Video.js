@@ -106,7 +106,10 @@ class ResourcePlayerVideo extends Component {
   renderFileVideo() {
     if (!this.state.inBrowser) return null;
 
-    const { variantPosterStyles, attachmentStyles } = this.props.resource;
+    const {
+      variantPosterStyles,
+      attachmentStyles
+    } = this.props.resource.attributes;
 
     return (
       <div className="figure-video">
